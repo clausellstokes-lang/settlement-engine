@@ -1,0 +1,2387 @@
+== web:Summary/Overview ==
+Niederwaldehamlet· 90 pop.· crossroads· 101 years old
+Germanic-inspired. Ask about the place and you are told it is built in timber and stone, and run by its estates. Governed by Feudal Stewardship · Stable
+"This place is older than the Occupation, but people here date everything from it: before it, and after"
+Plains
+Open Tonight
+The place
+Washing hangs in the yards along the road into Niederwalde, and someone calls a greeting from behind it without looking to see who you are. Half-timbered upper floors project above the busier lanes. Drovers push their herds along the road, and the whole place smells of the pens. Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Moderate
+Safety
+Moderate day to day; crime is rising faster than those in charge can answer it.
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+None
+Monster DefenseCritical
+Economic ResilienceWeak
+Magical CapabilityCritical
+Food SecuritySecure
+No market or fair stands in Niederwalde: what trade the hamlet does is done house to house. Few in Niederwalde hold an office.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+Those who would take the law into their own handsthe criminal network
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+Settlement Origin▲
+Built where two busy roads cross, and laid out around the crossing.
+Every household here has its work, and there is little to spare.
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Defense readinessStrained
+Law & orderStrained
+Infrastructure conditionStrained
+Religious authorityStrained
+Healing capacityStrained
+Criminal opportunityElevated
+Economic capacityAdequate
+Housing pressureAdequate
+Labor capacityAdequate
+Public legitimacyTolerated
+Social trustAdequate
+Strength of the powersAdequate
+Magical stabilityAdequate
+Trade connectivityAdequate
+FoodSecure
+Ruling authoritySurplus
+Reliance on magic: None
+
+== web:Summary/Plot Hooks ==
+NPCs
+Hedwig Richter
+A job went wrong in a way that suggests information was leaked. They have three suspects.
+Jutta Hoffmann
+An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.
+Ludwig Wolf
+A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.
+Hinrik Braun
+The family that has always mended the common track says it is theirs to close, and has closed it.
+History
+Infiltration Fear Event
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed
+Occupation Legacy Event
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing
+What survives from that time says: a former occupier officer has returned under a false identity
+Magical Event
+What survives from that time says: something was sealed away using magic years ago and the seal is weakening
+Crime Wave
+An old woman's savings have gone from under her floor, and only her family knew where they were kept
+A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for
+A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+Smuggling waypointCriminal
+Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.
+Connection: Smuggler Hedwig Richter
+ServicesRoute handoff
+AlehouseEconomy
+Somebody's back room, a barrel of home brew, and a bench. It is where the hamlet hears its news, airs its grievances, and strikes its deals.
+Connection: Brewster Hinrik Braun
+BacksFeudal Stewardship
+ServicesLodgingMeals and drinkHiring hall
+Common grazing landEconomy
+Common ground where the settlement's beasts are pastured together.
+ServicesPasturage
+Dairy farmerEconomy
+Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.
+Connection: Dairyman Ludwig Wolf
+ServicesCheeseFresh milk
+Subsistence farmingEconomy
+Strip farming in open fields.
+Lord's stewardGovernment
+A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.
+Connection: Steward Jutta Hoffmann
+ServicesEstate management
+Burial groundReligious
+A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+ServicesBurial
+The fabric of the place
+Access to external millCrafts
+The hamlet's grain is carried elsewhere to be ground.
+ServicesGrain milling (a day away)
+DwellingsInfrastructure
+Frames of timber, roofed with thatch.
+ServicesHospitality
+Water sourceInfrastructure
+Water drawn from a well or a nearby spring.
+Access to a house of worshipReligious
+Services mean the walk to the village house of worship, usually a few miles off.
+ServicesRite of entryWeekly rite
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+Criminal services(1)▲
+Route handoff
+Receive and pass on goods along the smuggling chain.
+Smuggling waypoint
+Employment(1)▲
+Hiring hall
+Find workers, mercenaries
+Alehouse
+Food & drink(4)▲
+Cheese
+Aged or fresh cheese. Often a staple food for non-wealthy households.
+Dairy farmer
+Fresh milk
+Daily milk from cattle, goats, or sheep depending on region.
+Grain milling (a day away)
+Grain carted to a mill outside the settlement and brought back as flour.
+Access to external mill
+Meals and drink
+Food and ale
+Healing(3)▲
+Burial
+Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Burial ground
+Rite of entry
+The rite that admits a person to the faith. Required for most civil recognition.
+Access to a house of worship
+Weekly rite
+The weekly service. Attendance expected of all residents.
+Legal & financial(1)▲
+Estate management
+Oversee the lord's properties, staff, and revenues.
+Lord's steward
+Lodging(2)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+Lodging
+Rooms for travelers
+Transportation(1)▲
+Pasturage
+Grazing on the common for a traveller's beasts, for a small fee.
+Common grazing land
+
+== web:Systems/Economics ==
+Moderate
+Subsistence with surplus
+It gets nearly all of what its work could yield.
+Trade
+crossroads
+Niederwalde pays its way from year to year, and nobody here calls the hamlet poor.
+Income Sources▲
+69%
+Agricultural Rents Payments in kind or coin from tenant farmers; the primary revenue at this scale.
+22%
+Toll Revenue Tolls taken on the roads that meet here at the crossroads.
+9%
+Coal Sales
+Niederwalde does not spread its living across many trades: one carries the place, and the rest are small beside it. It keeps no house for its faith, so none of the hamlet's money passes through one. The country around Niederwalde does not give the hamlet enough timber for what the hamlet needs of it.
+Trade Profile▲
+Exports
+Raw woolLivestockCoalPreserved foodsContraband goods (transit)
+Blue = re-exported transit goods
+Imports
+Incense and votive candlesSalt
+Settlement necessity
+Needed, and not brought in: timber, stone, metals.
+Niederwalde sells on goods it never made: some of what leaves the hamlet entered it as imports the same season.
+Produced locally
+livestockdairyPreserved foods
+Food Security▲
+Production: 241 lbs/dayNeed: 180 lbs/day
+Niederwalde grows far more than it eats, with some to put by against a bad year.
+No granary; about a month and a half in household stores.
+What each holding grows goes to its own table; beyond that, what it puts on the table itself is meat and milk from the herds.
+The hamlet eats. It is not a subject anyone raises unprompted.
+Of the food Niederwalde raises for itself, its herds and what each family grows on its own holding come first, and a poor season in either means less to go round.
+Economic Flows (3 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (4)✓ Productive (1)Entrepôt (1)
+Livestock & DairyFood security✓ Running
+From
+Grazing land
+Via
+Common grazing land · Dairy farmer
+Outputs
+Preserved foods
+Smuggling & ContrabandCriminal economyEntrepôt
+Smuggling waypoint
+Contraband goodsImport/export bypassSafe houses
+Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.
+Taverns & Social LifeEntertainment & culture○ Operational
+Alehouse
+LodgingMeals and drink
+Faith & WorshipReligion & civic
+Access to a house of worship
+Ask where Niederwalde gets its salt and somebody will point you at the carts.
+
+== web:Systems/Resources ==
+Terrain
+Plains
+What the land offers
+✓ Central trade hub✓ Livestock✓ Wool and textiles
+Resource Exploitation▲
+PartialAnimal hideshigh value
+Animal hides
+Draws on: livestock, game
+PartialWoolhigh value
+Wool
+Draws on: sheep, grazing land
+✓ Fully exploitedLivestockmedium value
+Draws on: grazing land
+The people of Niederwalde know what their ground is worth to others, and know that is reason enough for someone to come for it. The hamlet takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
+Nearby Resources▲
+Abundant
+Coal or Peat DepositsStrategic CrossroadsOpen Grazing Land
+Commodities available
+Open Grazing Landlivestockwooldairyanimal hidesStrategic Crossroadstrade accessCoal or Peat Depositscoal
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerFeudal Stewardship (dominant)
+The seatJutta Hoffmann, the steward
+Public legitimacy
+50Tolerated
+Stability
+Stable
+Criminal capture
+Criminal: Tolerated
+The Feudal Stewardship governs Niederwalde. Its seat is held by Jutta Hoffmann, the steward. Niederwalde tolerates the Feudal Stewardship, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+The Seat▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerFeudal StewardshipGovernmentDominant▲
+## RulerFeudal StewardshipGovernmentDominant
+Institutions behind this power (10)
+Held under this authority
+Subsistence farming
+Common grazing land
+Dairy farmer
+Alehouse
+Access to external mill
+Burial ground
+Lord's steward
+Dwellings
+Water source
+Under the ruling power, with no power of its own kind here
+Access to a house of worship
+The Powers (1)▲
+100
+Feudal Stewardship
+↑ Holds powerGovernment100▲
+## Feudal Stewardship↑ Holds powerGovernment100
+↳3 members · first Jutta Hoffmann · second Ludwig Wolf · third Hinrik Braun
+A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+The shape of authority
+The Feudal Stewardship at Niederwalde watches the hamlet's temper closely: what it fears is the hamlet turning on it.
+Rule and succession
+If anyone at Niederwalde asked who might replace the Feudal Stewardship, the hamlet would have no contender to name.
+Crime and the hall
+Niederwalde has no strong opinion of the Feudal Stewardship either way.
+Who really runs this hamlet
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Feudal Stewardship
+Head · Jutta Hoffmann, the steward
+Second · Ludwig Wolf, the dairy farmer · answers to Smuggling waypoint through Hedwig Richter
+Third · Hinrik Braun, the brewster
+Who answers to whom
+Smuggling waypoint
+handled by Hedwig Richter, the smuggler (Smuggling waypoint)
+Ludwig Wolf, the dairy farmer (Dairy farmer) · brings information and small favours · a silent partnership
+The hall
+Living with the criminals. The second of the Feudal Stewardship answers to the Smuggling waypoint, but the head does not. The Smuggling waypoint has a voice in the Feudal Stewardship, not the last word.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
+People at Niederwalde do not count on the place's defences for much, and say so without alarm.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Invasion & War
+Weak▼
+The hamlet's plan for an army is to not be interesting to one, and everybody here can state the plan.
+Internal Security
+No court sits at Niederwalde to decide a quarrel, and the place gets along without one.
+Economic Survival
+Niederwalde pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
+Disasters & Famine
+Adequate▼
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Moderate day to day; crime is rising faster than those in charge can answer it.
+People here watch over one another's doors, and word of any trouble travels fast.
+Niederwalde pays nobody to keep the peace, and trouble here is settled among its own people.
+Criminal structure: Semi-organized networks
+Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.
+Everyone at Niederwalde knows someone takes a cut, but who it is changes by street and by season.
+Armed Forces & Fortifications▲
+## Armed Forces & Fortifications
+Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints.
+No wall marks where Niederwalde ends; the last houses simply give way to open country.
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+Niederwalde is unfortified. There is no perimeter, which means the hamlet cannot control entry and cannot make a chokepoint of anything. Nobody at Niederwalde is responsible for defending the hamlet; ask who is, and nobody can name anyone. The hamlet sends whoever it can against things they are not trained for, and pays for it each time. Whoever defends Niederwalde, none of them works with magic.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical ReadinessNone
+No healer is kept here; the sick are tended by their own families.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the hamlet's own:
+High
+Envelope
+Availabilitybroad
+Legalitytolerated
+Institutional controlunregulated
+Service costmoderate
+Riskelevated
+Religious acceptanceindifferent
+Roles
+Reliance on magic: None
+Economic role: occasional
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+The work that keeps Niederwalde fed and busy is done by ordinary labour, whatever magic is about the place.
+
+== web:Systems/Outlook ==
+✓ Viable
+Niederwalde feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+4 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Feudal Stewardship (3)▲
+## Feudal Stewardship
+Jutta Hoffmann
+▲
+## Feudal Stewardship › Jutta Hoffmann
+Lord's steward · first of Feudal Stewardship
+Steward
+Flaw: self-serving Temperament: scholarly
+Mutual LeverageHinrik Braun
+Hedwig Richter holds a tie to them: Professional Rivalry
+Holds the seat in a quiet season; there is time to act.
+Constraint: There is coin for the everyday work and little over; any new building or hire means asking the households for more.
+Wants Get the lord's steward's office through the season without borrowing.
+Standing first of Feudal Stewardship, the only power here
+Disposition scholarly
+How they deal Will arrange a meeting or a lease for a price.
+Secret: Has been keeping back part of the rents and dues and writing them down as unpaid
+## Feudal Stewardship
+Ludwig Wolf
+## Feudal Stewardship › Ludwig Wolf
+Dairy farmer · second of Feudal Stewardship
+Dairyman
+Flaw: vain
+Hidden allegiance answers to Smuggling waypoint, through Hedwig Richter
+Silent PartnershipHedwig Richter
+Hinrik Braun holds a tie to them: Unresolved History
+Wants Show the rest of the Feudal Stewardship that Jutta Hoffmann can be wrong, without ever saying so aloud.
+How they deal Polite enough; keeps you away from the byre.
+Secret: Was present when Jutta Hoffmann did something they've never accounted for publicly. Neither has acknowledged the other was there
+## Feudal Stewardship
+Hinrik Braun
+## Feudal Stewardship › Hinrik Braun
+Alehouse · third of Feudal Stewardship
+Brewster
+Flaw: suspicious Temperament: methodical
+Unresolved HistoryLudwig Wolf
+Jutta Hoffmann holds a tie to them: Mutual Leverage
+Wants Be the one Ludwig Wolf sends whenever something must be done for the Feudal Stewardship this season.
+Disposition methodical
+How they deal Answers questions without volunteering anything, and watches who you talk to next.
+Secret: Knows something about Jutta Hoffmann that Jutta Hoffmann believes no one else knows, and has been deciding for months whether to use it
+In no power (1)▲
+## In no power
+Hedwig Richter
+## In no power › Hedwig Richter
+Smuggling waypoint
+Smuggler
+Flaw: stubborn Temperament: brave
+Professional RivalryJutta Hoffmann
+Ludwig Wolf holds a tie to them: Silent Partnership
+Wants Find Ludwig Wolf a new piece of work for the smuggling waypoint that pays them both.
+Disposition brave
+How they deal Asks who sent you and what you want before saying anything.
+Secret: Keeps back a share of every load and tells the buyers it was lost
+
+== web:World/Relationships ==
+NPC Relationships (4)▲
+All (4)Rivals (1)Enemies (1)Patronage (1)
+Jutta HoffmannMutual LeverageHinrik Braun
+the steward · unbreakable · the brewster
+▲
+Hinrik Braun needs Jutta Hoffmann's seal on certain papers; she needs his silence about certain others. Neither has asked for more than the other could pay.
+Jutta Hoffmann's secret is about to come out by other means. Once it does, Hinrik Braun holds nothing over Jutta Hoffmann.
+Ludwig WolfSilent PartnershipHedwig Richter
+the dairy farmer · total dependence · the smuggler
+Hedwig Richter's silver bought the friends who raised Ludwig Wolf to where he stands today. Ludwig Wolf repays it in favours, quietly and on time.
+Ludwig Wolf hopes to rise again this season. Hedwig Richter expects the favours to grow with Ludwig Wolf's standing.
+Hinrik BraunUnresolved HistoryLudwig Wolf
+the brewster · mortal · the dairy farmer
+Something happened between Hinrik Braun and Ludwig Wolf years ago that neither has forgotten. They function professionally. They do not forgive.
+What first broke Hinrik Braun and Ludwig Wolf apart is happening again, and both of them know it.
+Hedwig RichterProfessional RivalryJutta Hoffmann
+the smuggler · personal · the steward
+Hedwig Richter wants Jutta Hoffmann's position, and the steward wants the smuggler's reputation. They are civil in public and unforgiving in private.
+Jutta Hoffmann has been telling clients that Hedwig Richter's work is slipping. Two of the clients have repeated it to Hedwig Richter.
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+Crossroads
+Culture
+Germanic
+Money at Niederwalde is neither comfortable nor tight, and that is what people here expect of it.
+Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.
+After the day in the fields, people gather at the alehouse to talk it over.
+Children are warned about going anywhere alone after dark.
+
+== web:World/Traditions ==
+The founding traditions of Niederwalde.
+❦
+The Quiet Offering
+## The Quiet Offering
+Harvest
+Kept in Harvest, the second week.
+A day of small offerings that gives thanks for the harvest. Farm rents bring Niederwalde more than anything else.
+
+== web:World/History ==
+Niederwalde101 years old↺ Reroll
+"This place is older than the Occupation, but people here date everything from it: before it, and after"
+Current Tensions (1)▲
+Crime Wave
+Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+Those who would take the law into their own handsthe criminal network
+Founding▲
+## Founding
+Origin:developed where herders gathered seasonally until the gathering became permanent
+Founded by:three or four families who agreed to try wintering together and never stopped
+Early trial:political pressure from surrounding lords
+How survived:through determination and cooperation
+Niederwalde has been added to so often that little of its first building is left standing.
+Major Historical Events (3)▲
+## Major Historical Events
+Founded
+Now
+75y
+65y
+33y
+Infiltration Fear
+Occupation Legacy
+Magical
+The Arcane IncidentMagicalminor
+Argument over the place of magic and its limits set neighbour against neighbour
+33y ago
+Last century
+▼
+The OccupationOccupation Legacycatastrophic
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+65y ago
+The PurgeInfiltration Fearmajor
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+75y ago
+The arcane incident left a legacy of trouble in Niederwalde that has never been fully put right, and that legacy is a generation old.
+
+== web:World/Rumors & News ==
+Available at launch
+What Niederwalde has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Niederwalde's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## NIEDERWALDE
+NIEDERWALDE
+Hamlet · Plains
+POPULATION
+## 90
+90
+Hamlet
+PROSPERITY
+## Moderate
+Moderate
+Top export: Raw wool
+SAFETY
+Moderate
+Defense: Vulnerable
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+GOVERNED BY
+Feudal Stewardship
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Niederwalde
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Niederwalde, a hamlet of 90, has no crisis on its hands this season.
+Population
+90
+Hamlet
+Age
+101 yrs
+Plains
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+4/100
+Economic
+37/100
+Magical
+0/100
+Disaster
+43/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+241
+Needed
+180
+Surplus: 61
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Crime Wave
+Those who would take the law into their own hands / the criminal network
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Built where two busy roads cross, and laid out around the crossing. Every household here has its work, and there is little to spare.
+INSTITUTIONS · 11 TOTAL
+Economy 4
+Religious 2
+Infrastructure 2
+Crafts 1
+Government 1
+Criminal 1
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+People to voice
+Jutta Hoffmann
+the steward · Holds the seat
+Wants to get the lord's steward's office through the season without borrowing.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Infiltration Fear Event
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent.
+Infiltration Fear Event
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed.
+Occupation Legacy Event
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+SESSION SCRATCH
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+12 hooks
+Twelve hooks to pull; most of them belong to its history and its tensions (8).
+NPCs
+4 hook s
+01
+A job went wrong in a way that suggests information was leaked. They have three suspects.
+Hedwig Richter
+Low
+02
+An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.
+Jutta Hoffmann
+Low
+03
+A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.
+Ludwig Wolf
+Low
+04
+The family that has always mended the common track says it is theirs to close, and has closed it.
+Hinrik Braun
+Low
+History
+8 hook s
+01
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent
+Infiltration Fear Event
+Medium
+02
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed
+Infiltration Fear Event
+Medium
+03
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing
+Occupation Legacy Event
+Medium
+04
+What survives from that time says: a former occupier officer has returned under a false identity
+Occupation Legacy Event
+Medium
+05
+What survives from that time says: something was sealed away using magic years ago and the seal is weakening
+Magical Event
+Medium
+06
+An old woman's savings have gone from under her floor, and only her family knew where they were kept
+Crime Wave
+Medium
+07
+A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for
+Crime Wave
+Medium
+08
+A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake
+Crime Wave
+Medium
+UNDERLYING TENSIONS
+•
+Crime Wave
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+13 buyable across 7 categories
+Lodging
+2 option s
+Hospitality
+Lodging
+Food & drink
+4 option s
+Cheese
+Fresh milk
+Grain milling (a day away)
+Meals and drink
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Transportation
+1 option
+Pasturage
+Legal & financial
+1 option
+Estate management
+Employment
+1 option
+Hiring hall
+Criminal services
+1 option
+Route handoff
+ACTIVE SUPPLY CHAINS · 4
+Livestock & Dairy
+Running
+NEED Food Security · EXPORT yes
+Grazing land » Common grazing land + Dairy farmer » Preserved foods
+Smuggling & Contraband
+Entrepôt
+NEED Criminal Economy
+Smuggling waypoint » Contraband goods, Import/export bypass, Safe houses
+Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.
+Taverns & Social Life
+Operational
+NEED Entertainment & Culture
+Alehouse » Lodging, Meals and drink
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+11 institutions
+Eleven institutions; the largest groups are trade and farming (4) and faith (2).
+Total
+11
+Categories
+6
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Lord's steward
+Civic
+A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.
+Backs
+Feudal Stewardship
+Services
+Estate management
+: Oversee the lord's properties, staff, and revenues.
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+Services mean the walk to the village house of worship, usually a few miles off.
+Backs
+Feudal Stewardship
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+Backs
+Feudal Stewardship
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+4 institutions
+Subsistence farming
+Essential
+Agriculture
+Strip farming in open fields.
+Backs
+Feudal Stewardship
+Common grazing land
+Essential
+Agriculture
+Common ground where the settlement's beasts are pastured together.
+Backs
+Feudal Stewardship
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Dairy farmer
+Food
+Trade
+Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.
+Backs
+Feudal Stewardship
+Services
+Cheese
+: Aged or fresh cheese. Often a staple food for non-wealthy households.
+Fresh milk
+: Daily milk from cattle, goats, or sheep depending on region.
+Alehouse
+Food
+Trade
+Somebody's back room, a barrel of home brew, and a bench. It is where the hamlet hears its news, airs its grievances, and strikes its deals.
+Backs
+Feudal Stewardship
+Services
+Lodging
+: Rooms for travelers
+Meals and drink
+: Food and ale
+Hiring hall
+: Find workers, mercenaries
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+The hamlet's grain is carried elsewhere to be ground.
+Backs
+Feudal Stewardship
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Frames of timber, roofed with thatch.
+Backs
+Feudal Stewardship
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Water drawn from a well or a nearby spring.
+Backs
+Feudal Stewardship
+Criminal
+1 institution
+Smuggling waypoint
+Criminal
+Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.
+Services
+Route handoff
+: Receive and pass on goods along the smuggling chain.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. What goes out of here is mostly raw wool; it grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Subsistence with surplus
+Trade
+Crossroads
+It gets nearly all of what its work could yield.
+INCOME SOURCES
+Agricultural Rents
+69%
+Payments in kind or coin from tenant farmers; the primary revenue at this scale.
+Toll Revenue
+22%
+Tolls taken on the roads that meet here at the crossroads.
+Coal Sales
+9%
+TRADE FLOWS
+EXPORTS
+•
+Raw wool
+•
+Livestock
+•
+Coal
+•
+Preserved foods
+•
+Contraband goods (transit)
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Livestock
+•
+Dairy
+•
+Preserved foods
+ENTREPÔT
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber
+Stone
+Metals
+FOOD SECURITY
+PRODUCED
+241
+NEEDED
+180
+Surplus
+61
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grazing land
+>
+Common grazing land
+>
+Dairy farmer
+>
+Preserved foods EXPORT
+Smuggling waypoint
+>
+Contraband goods
+Import/export bypass
+Safe houses
+Alehouse
+>
+Lodging
+Meals and drink
+Access to a house of worship
+SHADOW ECONOMY
+CRIMINAL SUPPLY CHAINS
+smuggling · entrepot
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+STRATEGIC VALUE
+Medium - agricultural heartland, but exposed to raids
+WHAT THE LAND OFFERS
+Livestock
+Wool and textiles
+Central trade hub
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Livestock
+»
+–
+»
+–
+full
+PARTIALLY EXPLOITED
+2
+Wool
+»
+–
+»
+–
+partial
+animal hides
+»
+–
+»
+–
+partial
+NEARBY RESOURCES
+Abundant
+Open Grazing Land
+Strategic Crossroads
+Coal or Peat Deposits
+Commodities available
+· processed/refined in this settlement
+Open Grazing Land
+Livestock
+Wool
+Dairy
+animal hides
+Strategic Crossroads
+Trade Access
+Coal or Peat Deposits
+Coal
+IMPORT DEPENDENCIES
+CRITICAL
+Timber
+Stone
+Metals
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Feudal Stewardship governs.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Feudal Stewardship
+Government
+GOVERNANCE
+The Feudal Stewardship governs Niederwalde. Its seat is held by Jutta Hoffmann, the steward. Niederwalde tolerates the Feudal Stewardship, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+POWER DISTRIBUTION
+Feudal Stewardship 100
+POWERS
+Feudal Stewardship
+Government
+Governing
+Power 100
+Dominant
+A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+FOR THE DM ONLY
+Who really runs this hamlet
+THE RULING THREE OF FEUDAL STEWARDSHIP
+Head · Jutta Hoffmann, the steward
+Second · Ludwig Wolf, the dairy farmer · answers to Smuggling waypoint through Hedwig Richter
+Third · Hinrik Braun, the brewster
+WHO ANSWERS TO WHOM
+Smuggling waypoint
+handled by Hedwig Richter, the smuggler (Smuggling waypoint)
+Ludwig Wolf, the dairy farmer (Dairy farmer) · brings information and small favours · a silent partnership
+THE HALL
+Living with the criminals. The second of the Feudal Stewardship answers to the Smuggling waypoint, but the head does not. The Smuggling waypoint has a voice in the Feudal Stewardship, not the last word.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+1
+Food resilience
+43
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+GUARD ASSESSMENT
+There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Weak
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+CRIMINAL ARCHITECTURE
+Criminal structure · Semi-organized networks
+Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Niederwalde feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++61
+Trade access
+crossroads
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+4 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Hedwig Richter
+the smuggler
+Female · mid-sixties
+3
+Jutta Hoffmann
+the steward
+Feudal Stewardship
+Female · mid-sixties
+2
+Ludwig Wolf
+the dairy farmer
+Feudal Stewardship
+Male · mid-forties
+2
+Hinrik Braun
+the brewster
+Feudal Stewardship
+Male · late sixties
+1
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+4 figures
+Four people worth knowing; Hedwig Richter, the smuggler, carries the most weight.
+MAJOR FIGURES
+Hedwig Richter
+the smuggler
+PWR 3
+Sex
+Female
+·
+Age
+mid-sixties
+Smuggling waypoint
+Personality
+brave · Flaw: stubborn
+Motivation
+Find Ludwig Wolf a new piece of work for the smuggling waypoint that pays them both. — Never again be told what to do.
+How they deal
+Asks who sent you and what you want before saying anything.
+SECRETS
+·
+Keeps back a share of every load and tells the buyers it was lost: One of the buyers has started weighing what arrives, and weighing it twice
+RELATIONSHIPS
+· Jutta Hoffmann - Professional Rivalry
+· Ludwig Wolf - called by · Silent Partnership
+Jutta Hoffmann
+the steward
+Feudal Stewardship
+PWR 2
+Sex
+Female
+·
+Age
+mid-sixties
+·
+Standing
+first of Feudal Stewardship, the only power here
+Lord's steward · first of Feudal Stewardship
+Personality
+scholarly · Flaw: self-serving
+Motivation
+Get the lord's steward's office through the season without borrowing. — Make the Feudal Stewardship so much their own that it could not run a week without them.
+How they deal
+Will arrange a meeting or a lease for a price.
+SECRETS
+·
+Has been keeping back part of the rents and dues and writing them down as unpaid: When the books are checked, the steward will be the one who explains
+RELATIONSHIPS
+· Hinrik Braun - Mutual Leverage
+· Hedwig Richter - called by · Professional Rivalry
+Ludwig Wolf
+the dairy farmer
+Feudal Stewardship
+PWR 2
+Sex
+Male
+·
+Age
+mid-forties
+Dairy farmer · second of Feudal Stewardship
+Personality
+Flaw: vain
+Motivation
+Show the rest of the Feudal Stewardship that Jutta Hoffmann can be wrong, without ever saying so aloud. — Carry the name of the dairy beyond this place, so people come from far off for the work done there.
+How they deal
+Polite enough; keeps you away from the byre.
+SECRETS
+·
+Was present when Jutta Hoffmann did something they've never accounted for publicly. Neither has acknowledged the other was there: The situation they're both ignoring is becoming relevant again
+RELATIONSHIPS
+· Hedwig Richter - Silent Partnership
+· Hinrik Braun - called by · Unresolved History
+NOTABLE FIGURES
+Hinrik Braun
+PWR 1
+the brewster
+Feudal Stewardship
+Motive:
+Be the one Ludwig Wolf sends whenever something must be done for the Feudal Stewardship this season. — Settle things with Jutta Hoffmann for good, one way or another.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+Internal relationships
+•
+Jutta Hoffmann and Hinrik Braun · Mutual Leverage
+Hinrik Braun needs Jutta Hoffmann's seal on certain papers; she needs his silence about certain others. Neither has asked for more than the other could pay.
+Jutta Hoffmann's secret is about to come out by other means. Once it does, Hinrik Braun holds nothing over Jutta Hoffmann.
+•
+Ludwig Wolf and Hedwig Richter · Silent Partnership
+Hedwig Richter's silver bought the friends who raised Ludwig Wolf to where he stands today. Ludwig Wolf repays it in favours, quietly and on time.
+Ludwig Wolf hopes to rise again this season. Hedwig Richter expects the favours to grow with Ludwig Wolf's standing.
+•
+Hinrik Braun and Ludwig Wolf · Unresolved History
+Something happened between Hinrik Braun and Ludwig Wolf years ago that neither has forgotten. They function professionally. They do not forgive.
+What first broke Hinrik Braun and Ludwig Wolf apart is happening again, and both of them know it.
+•
+Hedwig Richter and Jutta Hoffmann · Professional Rivalry
+Hedwig Richter wants Jutta Hoffmann's position, and the steward wants the smuggler's reputation. They are civil in public and unforgiving in private.
+Jutta Hoffmann has been telling clients that Hedwig Richter's work is slipping. Two of the clients have repeated it to Hedwig Richter.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Hamlet
+ANCHOR FACTS
+Complexity
+Subsistence with surplus
+Food
+Secure
+IDENTITY
+Name
+Niederwalde
+Tier
+Hamlet
+Population
+90
+Terrain
+Plains
+Layout
+Scattered farmsteads along a muddy track, a common at the centre
+Age
+101 years
+Trade access
+Crossroads
+Founded
+three or four families who agreed to try wintering together and never stopped
+CULTURAL IDENTITY
+Germanic-inspired
+Germanic-inspired. Ask about the place and you are told it is built in timber and stone, and run by its estates.
+Foodways
+What each holding grows goes to its own table; beyond that, what it puts on the table itself is meat and milk from the herds.
+Architecture
+half-timbered upper floors project above the busier lanes
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+101y old
+Founded 101 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 101
+101
+years
+Historical character
+This place is older than the Occupation, but people here date everything from it: before it, and after
+Founding
+Origin
+developed where herders gathered seasonally until the gathering became permanent
+Founded by
+three or four families who agreed to try wintering together and never stopped
+Initial challenge
+political pressure from surrounding lords
+Overcoming
+through determination and cooperation
+Historical events · 3
+Founding (- 101 y)
+Now
+0 y after founding
+51 y after founding
+101 y after founding
+33y AGO
+Still relevant today
+Minor
+The Arcane Incident
+· Magical
+Argument over the place of magic and its limits set neighbour against neighbour
+Lasting effects
+·
+The site of the disputed working remains cordoned and warded
+65y AGO
+Still relevant today
+Catastrophic
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+75y AGO
+Still relevant today
+Major
+The Purge
+· Occupation Infiltration
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 1
+Crime Wave
+Parties: Those who would take the law into their own hands vs the criminal network
+Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## NIEDERWALDE
+NIEDERWALDE
+Hamlet · Plains
+POPULATION
+## 90
+90
+Hamlet
+PROSPERITY
+## Moderate
+Moderate
+Top export: Raw wool
+SAFETY
+Moderate
+Defense: Vulnerable
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+GOVERNED BY
+Feudal Stewardship
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Niederwalde
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Niederwalde, a hamlet of 90, has no crisis on its hands this season.
+Population
+90
+Hamlet
+Age
+101 yrs
+Plains
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+4/100
+Economic
+37/100
+Magical
+0/100
+Disaster
+43/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+241
+Needed
+180
+Surplus: 61
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Crime Wave
+Those who would take the law into their own hands / the criminal network
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Built where two busy roads cross, and laid out around the crossing. Every household here has its work, and there is little to spare.
+INSTITUTIONS · 11 TOTAL
+Economy 4
+Religious 2
+Infrastructure 2
+Crafts 1
+Government 1
+Criminal 1
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+People to voice
+Jutta Hoffmann
+the steward · Holds the seat
+Wants to get the lord's steward's office through the season without borrowing.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Infiltration Fear Event
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent.
+Infiltration Fear Event
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed.
+Occupation Legacy Event
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+SESSION SCRATCH
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+12 hooks
+Twelve hooks to pull; most of them belong to its history and its tensions (8).
+NPCs
+4 hook s
+01
+A job went wrong in a way that suggests information was leaked. They have three suspects.
+Hedwig Richter
+Low
+02
+An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake.
+Jutta Hoffmann
+Low
+03
+A letter came for a neighbour who has been dead for years, and the seal on it is one nobody here knows.
+Ludwig Wolf
+Low
+04
+The family that has always mended the common track says it is theirs to close, and has closed it.
+Hinrik Braun
+Low
+History
+8 hook s
+01
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent
+Infiltration Fear Event
+Medium
+02
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed
+Infiltration Fear Event
+Medium
+03
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing
+Occupation Legacy Event
+Medium
+04
+What survives from that time says: a former occupier officer has returned under a false identity
+Occupation Legacy Event
+Medium
+05
+What survives from that time says: something was sealed away using magic years ago and the seal is weakening
+Magical Event
+Medium
+06
+An old woman's savings have gone from under her floor, and only her family knew where they were kept
+Crime Wave
+Medium
+07
+A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for
+Crime Wave
+Medium
+08
+A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake
+Crime Wave
+Medium
+UNDERLYING TENSIONS
+•
+Crime Wave
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+13 buyable across 7 categories
+Lodging
+2 option s
+Hospitality
+Lodging
+Food & drink
+4 option s
+Cheese
+Fresh milk
+Grain milling (a day away)
+Meals and drink
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Transportation
+1 option
+Pasturage
+Legal & financial
+1 option
+Estate management
+Employment
+1 option
+Hiring hall
+Criminal services
+1 option
+Route handoff
+ACTIVE SUPPLY CHAINS · 4
+Livestock & Dairy
+Running
+NEED Food Security · EXPORT yes
+Grazing land » Common grazing land + Dairy farmer » Preserved foods
+Smuggling & Contraband
+Entrepôt
+NEED Criminal Economy
+Smuggling waypoint » Contraband goods, Import/export bypass, Safe houses
+Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.
+Taverns & Social Life
+Operational
+NEED Entertainment & Culture
+Alehouse » Lodging, Meals and drink
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+11 institutions
+Eleven institutions; the largest groups are trade and farming (4) and faith (2).
+Total
+11
+Categories
+6
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Lord's steward
+Civic
+A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.
+Backs
+Feudal Stewardship
+Services
+Estate management
+: Oversee the lord's properties, staff, and revenues.
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+Services mean the walk to the village house of worship, usually a few miles off.
+Backs
+Feudal Stewardship
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+Backs
+Feudal Stewardship
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+4 institutions
+Subsistence farming
+Essential
+Agriculture
+Strip farming in open fields.
+Backs
+Feudal Stewardship
+Common grazing land
+Essential
+Agriculture
+Common ground where the settlement's beasts are pastured together.
+Backs
+Feudal Stewardship
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Dairy farmer
+Food
+Trade
+Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.
+Backs
+Feudal Stewardship
+Services
+Cheese
+: Aged or fresh cheese. Often a staple food for non-wealthy households.
+Fresh milk
+: Daily milk from cattle, goats, or sheep depending on region.
+Alehouse
+Food
+Trade
+Somebody's back room, a barrel of home brew, and a bench. It is where the hamlet hears its news, airs its grievances, and strikes its deals.
+Backs
+Feudal Stewardship
+Services
+Lodging
+: Rooms for travelers
+Meals and drink
+: Food and ale
+Hiring hall
+: Find workers, mercenaries
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+The hamlet's grain is carried elsewhere to be ground.
+Backs
+Feudal Stewardship
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Frames of timber, roofed with thatch.
+Backs
+Feudal Stewardship
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Water drawn from a well or a nearby spring.
+Backs
+Feudal Stewardship
+Criminal
+1 institution
+Smuggling waypoint
+Criminal
+Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods, not coin.
+Services
+Route handoff
+: Receive and pass on goods along the smuggling chain.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. What goes out of here is mostly raw wool; it grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Subsistence with surplus
+Trade
+Crossroads
+It gets nearly all of what its work could yield.
+INCOME SOURCES
+Agricultural Rents
+69%
+Payments in kind or coin from tenant farmers; the primary revenue at this scale.
+Toll Revenue
+22%
+Tolls taken on the roads that meet here at the crossroads.
+Coal Sales
+9%
+TRADE FLOWS
+EXPORTS
+•
+Raw wool
+•
+Livestock
+•
+Coal
+•
+Preserved foods
+•
+Contraband goods (transit)
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Livestock
+•
+Dairy
+•
+Preserved foods
+ENTREPÔT
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber
+Stone
+Metals
+FOOD SECURITY
+PRODUCED
+241
+NEEDED
+180
+Surplus
+61
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grazing land
+>
+Common grazing land
+>
+Dairy farmer
+>
+Preserved foods EXPORT
+Smuggling waypoint
+>
+Contraband goods
+Import/export bypass
+Safe houses
+Alehouse
+>
+Lodging
+Meals and drink
+Access to a house of worship
+SHADOW ECONOMY
+CRIMINAL SUPPLY CHAINS
+smuggling · entrepot
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+STRATEGIC VALUE
+Medium - agricultural heartland, but exposed to raids
+WHAT THE LAND OFFERS
+Livestock
+Wool and textiles
+Central trade hub
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Livestock
+»
+–
+»
+–
+full
+PARTIALLY EXPLOITED
+2
+Wool
+»
+–
+»
+–
+partial
+animal hides
+»
+–
+»
+–
+partial
+NEARBY RESOURCES
+Abundant
+Open Grazing Land
+Strategic Crossroads
+Coal or Peat Deposits
+Commodities available
+· processed/refined in this settlement
+Open Grazing Land
+Livestock
+Wool
+Dairy
+animal hides
+Strategic Crossroads
+Trade Access
+Coal or Peat Deposits
+Coal
+IMPORT DEPENDENCIES
+CRITICAL
+Timber
+Stone
+Metals
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Feudal Stewardship governs.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Feudal Stewardship
+Government
+GOVERNANCE
+The Feudal Stewardship governs Niederwalde. Its seat is held by Jutta Hoffmann, the steward. Niederwalde tolerates the Feudal Stewardship, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+POWER DISTRIBUTION
+Feudal Stewardship 100
+POWERS
+Feudal Stewardship
+Government
+Governing
+Power 100
+Dominant
+A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+FOR THE DM ONLY
+Who really runs this hamlet
+THE RULING THREE OF FEUDAL STEWARDSHIP
+Head · Jutta Hoffmann, the steward
+Second · Ludwig Wolf, the dairy farmer · answers to Smuggling waypoint through Hedwig Richter
+Third · Hinrik Braun, the brewster
+WHO ANSWERS TO WHOM
+Smuggling waypoint
+handled by Hedwig Richter, the smuggler (Smuggling waypoint)
+Ludwig Wolf, the dairy farmer (Dairy farmer) · brings information and small favours · a silent partnership
+THE HALL
+Living with the criminals. The second of the Feudal Stewardship answers to the Smuggling waypoint, but the head does not. The Smuggling waypoint has a voice in the Feudal Stewardship, not the last word.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+1
+Food resilience
+43
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+GUARD ASSESSMENT
+There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Weak
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+CRIMINAL ARCHITECTURE
+Criminal structure · Semi-organized networks
+Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. Several gangs may be competing. Less predictable than a guild, more structured than street crime.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Niederwalde feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++61
+Trade access
+crossroads
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+4 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Hedwig Richter
+the smuggler
+Female · mid-sixties
+3
+Jutta Hoffmann
+the steward
+Feudal Stewardship
+Female · mid-sixties
+2
+Ludwig Wolf
+the dairy farmer
+Feudal Stewardship
+Male · mid-forties
+2
+Hinrik Braun
+the brewster
+Feudal Stewardship
+Male · late sixties
+1
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+4 figures
+Four people worth knowing; Hedwig Richter, the smuggler, carries the most weight.
+MAJOR FIGURES
+Hedwig Richter
+the smuggler
+PWR 3
+Sex
+Female
+·
+Age
+mid-sixties
+Smuggling waypoint
+Personality
+brave · Flaw: stubborn
+Motivation
+Find Ludwig Wolf a new piece of work for the smuggling waypoint that pays them both. — Never again be told what to do.
+How they deal
+Asks who sent you and what you want before saying anything.
+SECRETS
+·
+Keeps back a share of every load and tells the buyers it was lost: One of the buyers has started weighing what arrives, and weighing it twice
+RELATIONSHIPS
+· Jutta Hoffmann - Professional Rivalry
+· Ludwig Wolf - called by · Silent Partnership
+Jutta Hoffmann
+the steward
+Feudal Stewardship
+PWR 2
+Sex
+Female
+·
+Age
+mid-sixties
+·
+Standing
+first of Feudal Stewardship, the only power here
+Lord's steward · first of Feudal Stewardship
+Personality
+scholarly · Flaw: self-serving
+Motivation
+Get the lord's steward's office through the season without borrowing. — Make the Feudal Stewardship so much their own that it could not run a week without them.
+How they deal
+Will arrange a meeting or a lease for a price.
+SECRETS
+·
+Has been keeping back part of the rents and dues and writing them down as unpaid: When the books are checked, the steward will be the one who explains
+RELATIONSHIPS
+· Hinrik Braun - Mutual Leverage
+· Hedwig Richter - called by · Professional Rivalry
+Ludwig Wolf
+the dairy farmer
+Feudal Stewardship
+PWR 2
+Sex
+Male
+·
+Age
+mid-forties
+Dairy farmer · second of Feudal Stewardship
+Personality
+Flaw: vain
+Motivation
+Show the rest of the Feudal Stewardship that Jutta Hoffmann can be wrong, without ever saying so aloud. — Carry the name of the dairy beyond this place, so people come from far off for the work done there.
+How they deal
+Polite enough; keeps you away from the byre.
+SECRETS
+·
+Was present when Jutta Hoffmann did something they've never accounted for publicly. Neither has acknowledged the other was there: The situation they're both ignoring is becoming relevant again
+RELATIONSHIPS
+· Hedwig Richter - Silent Partnership
+· Hinrik Braun - called by · Unresolved History
+NOTABLE FIGURES
+Hinrik Braun
+PWR 1
+the brewster
+Feudal Stewardship
+Motive:
+Be the one Ludwig Wolf sends whenever something must be done for the Feudal Stewardship this season. — Settle things with Jutta Hoffmann for good, one way or another.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+Internal relationships
+•
+Jutta Hoffmann and Hinrik Braun · Mutual Leverage
+Hinrik Braun needs Jutta Hoffmann's seal on certain papers; she needs his silence about certain others. Neither has asked for more than the other could pay.
+Jutta Hoffmann's secret is about to come out by other means. Once it does, Hinrik Braun holds nothing over Jutta Hoffmann.
+•
+Ludwig Wolf and Hedwig Richter · Silent Partnership
+Hedwig Richter's silver bought the friends who raised Ludwig Wolf to where he stands today. Ludwig Wolf repays it in favours, quietly and on time.
+Ludwig Wolf hopes to rise again this season. Hedwig Richter expects the favours to grow with Ludwig Wolf's standing.
+•
+Hinrik Braun and Ludwig Wolf · Unresolved History
+Something happened between Hinrik Braun and Ludwig Wolf years ago that neither has forgotten. They function professionally. They do not forgive.
+What first broke Hinrik Braun and Ludwig Wolf apart is happening again, and both of them know it.
+•
+Hedwig Richter and Jutta Hoffmann · Professional Rivalry
+Hedwig Richter wants Jutta Hoffmann's position, and the steward wants the smuggler's reputation. They are civil in public and unforgiving in private.
+Jutta Hoffmann has been telling clients that Hedwig Richter's work is slipping. Two of the clients have repeated it to Hedwig Richter.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Hamlet
+ANCHOR FACTS
+Complexity
+Subsistence with surplus
+Food
+Secure
+IDENTITY
+Name
+Niederwalde
+Tier
+Hamlet
+Population
+90
+Terrain
+Plains
+Layout
+Scattered farmsteads along a muddy track, a common at the centre
+Age
+101 years
+Trade access
+Crossroads
+Founded
+three or four families who agreed to try wintering together and never stopped
+CULTURAL IDENTITY
+Germanic-inspired
+Germanic-inspired. Ask about the place and you are told it is built in timber and stone, and run by its estates.
+Foodways
+What each holding grows goes to its own table; beyond that, what it puts on the table itself is meat and milk from the herds.
+Architecture
+half-timbered upper floors project above the busier lanes
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+101y old
+Founded 101 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 101
+101
+years
+Historical character
+This place is older than the Occupation, but people here date everything from it: before it, and after
+Founding
+Origin
+developed where herders gathered seasonally until the gathering became permanent
+Founded by
+three or four families who agreed to try wintering together and never stopped
+Initial challenge
+political pressure from surrounding lords
+Overcoming
+through determination and cooperation
+Historical events · 3
+Founding (- 101 y)
+Now
+0 y after founding
+51 y after founding
+101 y after founding
+33y AGO
+Still relevant today
+Minor
+The Arcane Incident
+· Magical
+Argument over the place of magic and its limits set neighbour against neighbour
+Lasting effects
+·
+The site of the disputed working remains cordoned and warded
+65y AGO
+Still relevant today
+Catastrophic
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+75y AGO
+Still relevant today
+Major
+The Purge
+· Occupation Infiltration
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 1
+Crime Wave
+Parties: Those who would take the law into their own hands vs the criminal network
+Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## NIEDERWALDE
+NIEDERWALDE
+Hamlet · Plains
+POPULATION
+## 90
+90
+Hamlet
+PROSPERITY
+## Moderate
+Moderate
+Top export: Raw wool
+SAFETY
+Moderate
+Defense: Vulnerable
+Safety: Moderate day to day; crime is rising faster than those in charge can answer it.
+GOVERNED BY
+Feudal Stewardship
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Niederwalde
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Niederwalde
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+## people[].name
+Jutta Hoffmann
+## people[].role
+the steward
+## people[].why
+seat
+## people[].line
+get the lord's steward's office through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. No granary; about a month and a half in household stores.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+No walls and no standing force.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent.
+## hooks[].source
+Infiltration Fear Event
+## hooks[].text
+What survives from that time says: an innocent person has been identified as a spy and is about to be executed.
+## hooks[].source
+Infiltration Fear Event
+## hooks[].text
+An old story from that time: a collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+## hooks[].source
+Occupation Legacy Event

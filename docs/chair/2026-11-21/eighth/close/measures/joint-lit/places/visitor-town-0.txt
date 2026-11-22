@@ -1,0 +1,4104 @@
+== web:Summary/Overview ==
+Hartgrundtown· 722 pop.· river· 189 years old
+Germanic-inspired, built in timber and stone. Governed by Arcane Council · Stable
+"The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards"
+Forest
+Open Tonight
+The place
+Trees lean over the river on the way into Hartgrund, and the first houses stand just above the line where the bank turns to mud. The gatehouse arch frames the main road. Magic is a trade in Hartgrund like any other: signs offer enchanting and identification by the hour. A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud. Doors and shutters here have been mended more often than they have been painted.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Poor
+Safety
+Moderate
+Viability
+Viable
+Defense
+Lightly defended
+Reliance on magic
+Relied upon
+The town leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+Monster DefenseWeak
+Economic ResilienceAdequate
+Magical CapabilityWeak
+Food SecuritySecure
+Market day is when Hartgrund fills: the roads bring buyers. An outside trader at Hartgrund either accepts its merchant guild's terms or sells to the guild's members at their price. The town pays wages for its defense as well as keeping its walls.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place
+Merchants who trade with the partnerThose who want new partnersAuthorities caught between them
+Corruption among officials has been exposed, but those in power are stifling the investigation
+Arcane CouncilReformersComplicit beneficiaries
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+Settlement Origin▲
+Sited at the water's edge, where the river was the only road worth having, and it has been the argument for staying ever since.
+Notable connection
+Hedwig Schulz and Wendelgard Köhler are teacher and heir. A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+Full relationship web →
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Economic capacityStrained
+Public legitimacyContested
+Law & orderStrained
+Defense readinessStrained
+Social trustStrained
+Religious authorityStrained
+Criminal opportunityContained
+Housing pressureAdequate
+Infrastructure conditionAdequate
+Labor capacityAdequate
+Healing capacityAdequate
+FoodSecure
+Strength of the powersAdequate
+Magical stabilityAdequate
+Ruling authorityAdequate
+Trade connectivitySurplus
+Reliance on magic: Relied upon
+
+== web:Summary/Plot Hooks ==
+NPCs
+Adelheid Rosenfeld
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+Renate Fuchs
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Wendelgard Köhler
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Salome Berger
+A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.
+Bertram Richter
+A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.
+Otto Wolf
+Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.
+Hedwig Schulz
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Viktor Schröder
+A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.
+Swanhild Wenzel
+Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.
+Gertrud Gärtner
+They overheard two people they know settle a bribe, and do not know whom to tell.
+Gunter Wolf
+They have promised the same order to two buyers, and both are due to collect on the same morning.
+Zacharias Lehmann
+Their spouse has been making payments to someone every month for years, and will not say who.
+Heinrich Richter
+Their best customer owes them a year's takings and has started avoiding their street.
+Wolfhard Wirth
+Their son has been seen at night with people who do not work, and comes home with coin.
+Andreas Hartmann
+A cousin has arrived to stay without warning, and spends every day watching one particular house.
+Werner Jung
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+History
+Disaster Event
+A letter found this year tells it this way: someone has been testing how quickly the place answers an alarm, and nobody ordered a drill
+An old story from that time: the threat has an agent already inside the settlement
+Magical Event
+An anti-magic agitator is secretly using magic themselves
+A recent magical accident was covered up and the victims silenced
+Trade Dispute
+The dispute is being kept alive by someone who profits from the uncertainty on both sides
+A contract clause that could end the dispute has been deliberately misfiled
+The partner settlement is applying pressure through a debt no one here wants to acknowledge
+Corruption Scandal
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+A key witness can be found, but won't speak without protection
+An official named in the evidence is selling property in a hurry
+Economic Event
+A letter found this year tells it this way: an alternative source exists but the information is being suppressed
+The scarcity was engineered. Someone destroyed the competing supply route
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+Adventurers' charter hallAdventuring
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+Connection: Chartermaster Gertrud Gärtner
+BacksArcane Council
+ServicesMonster bounties
+Alchemist shopCrafts
+A shop of alchemical wares and potions, where the simplest healing draught costs roughly a week of a labourer's pay.
+Connection: Archmage of the Council Adelheid Rosenfeld, the alchemist
+ServicesComponent identificationPotion brewing
+Apothecary (established)Crafts
+A proper shop kept by a trained herbalist, its shelves stocked and a back room set aside for consultations. It sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. A few of its keepers also work as chirurgeons.
+Connection: Master Apothecary Swanhild Wenzel
+ServicesHerbal remediesMedicines and compounds
+ChandlerCrafts
+Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting.
+Connection: Master Chandler Werner Jung
+ServicesBeeswax candlesSoapTallow candles
+CooperCrafts
+Makes barrels for storage and transport.
+Connection: Master Cooper Zacharias Lehmann
+ServicesBarrel makingCask repair
+Craft guildsCrafts
+They set the standard of work, the prices, and the terms of apprenticeship.
+Connection: Guildmaster Salome Berger
+ServicesQuality certification
+MillsCraftsVulnerable
+Grain ground at several sites.
+Connection: Master Miller Hedwig Schulz
+ServicesGrain grinding
+Town wallsDefense
+Stone fortifications with gates. Expensive to build and maintain.
+ServicesGate control
+Town watchDefenseVulnerable
+Watchmen serving part-time. Night patrols and gate duty.
+Connection: Captain Renate Fuchs
+ServicesGate dutyNight patrol
+Caravaneer's postEconomy
+Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here.
+Connection: Master of the Post Gunter Wolf
+ServicesRoute intelligenceCaravan assembly
+Carriers' guildEconomy
+Professional carters and teamsters, organised, moving cargo across country for hire. Every route, levy, and winter closure is known to them, and billed for.
+Connection: Carriers' Master Viktor Schröder
+ServicesFreight haulage
+InnsEconomy
+Lodging for the travelling trade.
+Connection: Host Wolfhard Wirth
+ServicesAccommodation
+Market squareEconomyVulnerable
+The central plaza where the weekly market and the fairs are held.
+ServicesWeekly market
+Merchant guildsEconomy
+Control trade in specific goods.
+Connection: Master of the Guild Wendelgard Köhler
+ServicesTrade brokerage
+TavernsEconomyVulnerable
+Houses for drink. And for company.
+Connection: Host Andreas Hartmann
+ServicesDrink service
+Town granaryEconomyVulnerable
+Shared grain stores that even out the harvests and hold off famine.
+Connection: Granary Reeve Otto Wolf
+ServicesGrain storage
+Weekly marketEconomyVulnerable
+Held by charter. The heart of the town's trade.
+ServicesGeneral trade
+Traveling performersEntertainment
+The festivals bring bards, jugglers, and acrobats through.
+Connection: Troupe Leader Heinrich Richter
+ServicesPublic performance
+Town councilGovernment
+The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.
+ServicesRecord of customBylaws and ordinancesDispute adjudication
+Town hallInfrastructure
+Meeting place and administrative center.
+ServicesDispute arbitrationPermit applicationsTax payment
+Burial groundsReligious
+Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.
+BacksReligious Authorities
+ServicesBurial
+Houses of worshipReligious
+Several houses of worship within town.
+Connection: Dean Bertram Richter
+ServicesLife ceremoniesReligious services
+The fabric of the place
+HousingInfrastructure
+Multi-story timber and stone buildings.
+ServicesLodging (rooms to let)
+Multiple water sourcesInfrastructure
+Wells and fountains, or water carried in by pipe.
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+Criminal services(2)▲
+Fencing stolen goods
+Ask around at the right tavern. Someone moves goods without questions.
+Hired muscle
+Informal, no contract. Violence available for coin to those who know where to ask.
+Entertainment(1)▲
+Public performance
+Street and square performances: juggling, music, comedy, acrobatics.
+Traveling performers
+Goods & crafts(7)▲
+Barrel making
+Watertight barrels for ale, wine, salted meat, and fish. Essential packaging for trade.
+Cooper
+Beeswax candles
+Premium candles. Cleaner burn, better light.
+Chandler
+Cask repair
+Re-coopering and repair of used barrels. Cheaper than new for small leaks.
+General trade Vulnerable
+Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Weekly market
+Soap
+Lye and tallow soap.
+Tallow candles
+Standard household candles.
+Weekly market Vulnerable
+Regular market days with produce, goods, and livestock.
+Market square
+Food & drink(2)▲
+Drink service Vulnerable
+Ale, wine, and spirits across multiple establishments.
+Taverns
+Grain grinding Vulnerable
+Grind grain into flour for bread and other foods.
+Mills
+Healing(5)▲
+Burial
+Interment in the congregation's ground, with the rite that congregation keeps.
+Burial grounds
+Herbal remedies
+Tinctures, poultices, and dried herbs for common ailments.
+Apothecary (established)
+Life ceremonies
+Births, marriages, and funerals across several congregations.
+Houses of worship
+Medicines and compounds
+Prepared medicines for fever, pain, infection, and chronic conditions.
+Religious services
+Several congregations covering different districts or communities.
+Information(3)▲
+Monster bounties
+Posted bounties for verified monster kills. Bring proof: claw, ear, or head.
+Adventurers' charter hall
+Record of custom
+Keeps the charter, rolls, and civic archive
+Town council
+Route intelligence
+Road conditions, bandit reports, toll schedules.
+Caravaneer's post
+Legal & financial(11)▲
+Bylaws and ordinances
+Enacts and enforces the town's own rules
+Dispute adjudication
+Hears the town's civil pleas at the council bench
+Dispute arbitration
+Bring commercial and civil disputes before a magistrate.
+Town hall
+Gate control
+Control who enters and exits. Levy tolls on goods.
+Town walls
+Gate duty Vulnerable
+Check travelers entering and leaving. Note unusual visitors.
+Town watch
+Grain storage Vulnerable
+Municipal grain reserves. Buffers the settlement against poor harvests.
+Town granary
+Night patrol Vulnerable
+Patrol the streets after dark. Deter crime and respond to incidents.
+Permit applications
+Apply for construction, business, and trade permits.
+Quality certification
+Guild mark indicating goods meet agreed standards.
+Craft guilds
+Tax payment
+Pay annual and quarterly taxes and levies.
+Trade brokerage
+Facilitate large commercial transactions between distant parties.
+Merchant guilds
+Lodging(2)▲
+Accommodation
+Beds from dormitory to private room. Quality varies by establishment.
+Inns
+Lodging (rooms to let)
+A room let in a private house, by the night or the week.
+Housing
+Magical services(2)▲
+Component identification
+Identify unknown substances, reagents, and monster byproducts.
+Alchemist shop
+Potion brewing
+Healing potions, antidotes, and alchemical compounds on request.
+Transportation(2)▲
+Caravan assembly
+Register to join an outgoing caravan.
+Freight haulage
+Organised road transport for goods between towns. Reliable, guild-backed.
+Carriers' guild
+
+== web:Systems/Economics ==
+Poor
+Specialized production and trade
+It gets more than its work alone could yield.
+Trade
+river
+Hartgrund sits on its river and stays poor all the same.
+Income Sources▲
+41%
+Market Taxes Market day stall fees and toll collection on goods entering the market.
+33%
+Guild Fees Annual licensing fees and fines levied by guild oversight.
+19%
+Property Rents Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+7%
+Apothecary & Alchemy Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.
+Ask what Hartgrund lives on and you will hear more than one trade named. Not enough of the grain that Hartgrund needs comes from the country here.
+Trade Profile▲
+Exports
+Medicinal herbsAlchemical reagentsWild honeyHealing waters (bottled)Pilgrim hospitalityReeds and thatchPeat fuelWaterfowlHerbal remediesPotions and elixirsCandles and waxRare spices and exotic dyes (transit)Alchemical trade (potions, reagents)
+Blue = re-exported transit goods
+Imports
+Cut stone and masonryGrainIronQuality weapons and armourRare herbs and rootsRitual wood and herbs (ancient grove damaged)Rune-worthy bone and antlerTimber
+Terrain cannot produce
+Needed, and not brought in: salt.
+A merchant who comes to Hartgrund for one thing usually leaves with two or three.
+Produced locally
+honeymedicinal herbspeatHerbal remediesPotions and elixirsMedical care (basic)Spellcasting (minor)Wild honeyCandles and waxReeds and thatchReligious servicesEducation (basic)Hospitality for travellers
+Food Security▲
+Production: 1,203 lbs/day+ 241 importedNeed: 1,444 lbs/day
+What is grown here and brought in covers each day's food.
+Stores: a granary, about five months of grain.
+Meals follow the season and what the household has put by.
+Food is not what keeps Hartgrund's people awake: whether the place grows it or buys it, the need is met.
+Economic Flows (18 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (18)Issues (3)✓ Productive (6)Entrepôt (4)Services (1)
+Standing WatchDefense & securityVulnerable
+Via
+Town watch
+Outputs
+Defence servicesWeapons training
+Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.
+Taverns & Social LifeEntertainment & cultureVulnerable
+Taverns
+LodgingMeals and drinkStabling
+Meals, ale and lodging here depend on grain brought in.
+FortificationsDefense & securityVulnerable
+From
+Stone quarry
+Town walls
+Herbalism & RemediesHealing & medicine✓ Running
+Wild foraging areas
+Apothecary (established)
+Herbal remediesPotions and elixirs
+Divine & Magical HealingHealing & medicine✓ Running
+Hot springs
+Houses of worship
+Medical care (basic)Spellcasting (minor)
+Beekeeping & WaxManufacturing & crafts✓ Running
+Chandler · Apothecary (established)
+Wild honeyCandles and waxMedicinal honey
+Reed & Marsh HarvestRaw materials & fuel✓ Running
+Marshlands
+Chandler · Merchant guilds
+Reeds and thatchPeat fuelWaterfowl
+Faith & WorshipReligion & civic✓ Running
+Religious servicesEducation (basic)Poor relief
+Pilgrimage & Holy SitesReligion & civic✓ Running
+Religious servicesHospitality for travellersPoor relief
+Spices & DyesTrade & entrepôtEntrepôt
+Merchant guilds
+Rare spices and exotic dyes
+Produced in distant lands. Crossroads and port settlements control distribution and take the markup.
+Storage & LogisticsTrade & entrepôtEntrepôt
+Caravaneer's post
+Cargo handlingGoods storage
+Ports and crossroads profit by charging for storage, loading, and onward transport, not by producing anything themselves.
+River TollTrade & entrepôtEntrepôt
+River traffic
+Transit trade profit
+Camel Caravan TradeTrade & entrepôtEntrepôt
+Overland freight revenue
+Adventuring & EscortDefense & security○ Operational
+Adventurers' charter hall
+Armed escortMonster hunting servicesDungeon clearance
+Performance & TheaterEntertainment & culture○ Operational
+Traveling performers
+PerformancesMusic and song
+Law & GovernanceReligion & civic○ Operational
+Town hall
+Legal services
+Caravan & Overland TradeTrade & entrepôt○ Operational
+Caravaneer's post · Carriers' guild
+Overland cargo transportEscorted caravanPack animal hire
+Service economy
+Alchemical TradeServiceExport○ Operational
+Via:alchemist shop
+Alchemical products & services
+No trade at Hartgrund makes what some of its work needs, so that much must come from elsewhere or be done without.
+
+== web:Systems/Resources ==
+Terrain
+Forest
+Resource Exploitation▲
+✓ Fully exploitedMedicinal herbsvery high value
+Draws on: herb gathering areas
+A newcomer to Hartgrund soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town. Nobody at Hartgrund needs to spend labour or money to bring the ancient grove back; left alone, it returns.
+Nearby Resources▲
+Depleted
+Ancient Grove
+Abundant
+Wild Foraging AreasHot Springs / Healing WatersMarshlandsStone quarry
+Commodities available
+Wild Foraging Areashoneymedicinal herbsHot Springs / Healing WatersStone quarrystoneMarshlandspeat
+Export Potential▲
+healing potions, antidotes
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerArcane Council (dominant)
+The seatAdelheid Rosenfeld, the alchemist and Archmage of the Council
+Public legitimacy
+40Contested
+Stability
+Stable
+Adelheid Rosenfeld, the alchemist and Archmage of the Council, holds the seat of the Arcane Council. The Arcane Council governs Hartgrund. Poverty has left the Arcane Council's right to rule contested in Hartgrund. The Arcane Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+The Seat and Its Contenders (2)▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerArcane CouncilArcaneDominant▲
+## RulerArcane CouncilArcaneDominant
+Institutions behind this power (22)
+Held under this authority
+Weekly market
+Market square
+Merchant guilds
+Inns
+Taverns
+Town granary
+Mills
+Town council
+Housing
+Multiple water sources
+Town hall
+Town watch
+Adventurers' charter hall
+Traveling performers
+Town walls
+Caravaneer's post
+Cooper
+Under this arcane power
+Alchemist shop
+Under the ruling power, with no power of its own kind here
+Carriers' guild
+Apothecary (established)
+Chandler
+Craft guilds
+ContenderReligious AuthoritiesReligiousMinor▼
+The Powers (2)▲
+81
+19
+Arcane Council
+↑ Holds powerArcane81▲
+## Arcane Council↑ Holds powerArcane81
+↳10 members · first Adelheid Rosenfeld · second Wendelgard Köhler · third Otto Wolf
+Mages govern, and their magic is their claim to rule.
+Religious Authorities
+Contests the seatReligious19▼
+## Religious AuthoritiesContests the seatReligious19
+↳1 member · first Bertram Richter
+Rule and succession
+A visitor at Hartgrund hears more than one name spoken about the hall, and the one with the most weight behind it is the Arcane Council.
+Who really runs this town
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Arcane Council
+Head · Adelheid Rosenfeld, the alchemist
+Second · Wendelgard Köhler, the senior guild master
+Third · Otto Wolf, the granary reeve
+The hall
+The seat is not in criminal hands. Nobody at the head of the Arcane Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+RulerArcane CouncilArcaneDominant▼
+ContenderReligious AuthoritiesReligiousMinor▲
+## ContenderReligious AuthoritiesReligiousMinor
+Institutions behind this power (2)
+A house of this faith
+Houses of worship
+Burial grounds
+↑ Holds powerArcane81▼
+Contests the seatReligious19▲
+## Religious AuthoritiesContests the seatReligious19
+Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+
+== web:Systems/Defense ==
+Defensive posture
+Lightly defended
+Guard assessment
+Some of the town watch take bribes from whoever has coin.
+A visitor sees little at Hartgrund that is kept for fighting; the place looks after its ordinary business and not much else.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Weak▼
+Invasion & War
+Adequate▼
+Internal Security
+The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+Economic Survival
+Hartgrund can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
+Disasters & Famine
+Food endurance: Under siege the outlying fields would be lost; the granary would carry the town for about five months at full rations, about eleven months on half, and what is still harvested would stretch it further.
+Criminal Architecture & Public Order▲
+Most trouble here keeps to the edges and the late hours. The watch holds the gates and walks the main streets; quieter spots after dark carry real risk. Residents keep to the places they know once night falls. Whoever comes in passes the gates; the trouble that remains is the place's own.
+Visitors to Hartgrund are told which few streets to avoid, and the advice turns out to be right.
+Criminal structure: Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+Crime at Hartgrund is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.
+Armed Forces & Fortifications1 wall 1 force 1 charter ▲
+## Armed Forces & Fortifications1 wall 1 force 1 charter
+Fortifications
+Town walls
+Stone fortifications with gates. Expensive to build and maintain.
+Hartgrund's accounts keep its town walls in repair and stretch no further, so the defences stand and too few people man them.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+Monster response (charter)
+Adventurers' charter hall
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+The town has a wall and arranges its day around the gates without noticing that it does. Whatever reaches Hartgrund by road reaches it at a gate, and the gates can be closed against it. It keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it. There is somewhere at Hartgrund to take the problems that are not soldiers' problems, and the town uses it more than it likes to say. Adventurers at Hartgrund take their contracts at the charter hall, and the town posts its worst problems there. The town keeps no defence against anything it cannot see.
+Supporting Capabilities▲
+Legal InfrastructureCouncil bench only
+Cases heard without detention. Fines and exile only.
+Medical ReadinessClergy care
+Clerical care. Basic wound and disease management.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the town's own:
+High
+Envelope
+Availabilitycommon
+Legalitycelebrated
+Institutional controlunregulated
+Service costmoderate
+Riskelevated
+Religious acceptancesyncretic
+Roles
+Reliance on magic: Relied upon · for Divine & Magical Healing · supplied by Houses of worship
+Economic role: common
+Military role: absent
+Medical role: common
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+Hartgrund leans on the people who give it help beyond ordinary work; a hard season for them (a feud, a sickness, a falling-out) is a hard season for the town.
+
+== web:Systems/Outlook ==
+✓ Viable
+Hartgrund can stand, but only while grain keeps arriving and the routes that bring it stay open.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+16 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Arcane Council (3)▲
+## Arcane Council
+Adelheid Rosenfeld
+▲
+## Arcane Council › Adelheid Rosenfeld
+Alchemist shop · Archmage of the Council, first of Arcane Council
+Alchemist
+Temperament: patient
+Outstanding DebtRenate Fuchs
+Wolfhard Wirth holds a tie to them: Outstanding Debt
+Salome Berger holds a tie to them: Genuine Respect
+Holds the seat while money is short, and every council meeting comes back to the same few coins. Still the alchemist as well.
+Constraint: Must still buy in iron, and that comes first, before any repair or relief.
+Wants Get the alchemist shop through the season without borrowing.
+Standing first of Arcane Council, the stronger power here
+Disposition patient
+How they deal Friendly, but takes their time; hears the whole question before answering it.
+Secret: Has been systematically bribing multiple officials for preferential treatment
+## Arcane Council
+Wendelgard Köhler
+## Arcane Council › Wendelgard Köhler
+Merchant guilds · second of Arcane Council
+Master of the Guild
+Flaw: deceitful Temperament: perceptive
+Outstanding DebtOtto Wolf
+Hedwig Schulz holds a tie to them: Mentor and Successor
+Gertrud Gärtner holds a tie to them: Mentor and Successor
+Swanhild Wenzel holds a tie to them: Outstanding Debt
+Werner Jung holds a tie to them: Outstanding Debt
+Heinrich Richter holds a tie to them: Outstanding Debt
+Wants Win the next big piece of work away from the chandler's shop.
+Disposition perceptive
+How they deal Agrees quickly, and the terms are never quite what you remember agreeing to.
+Secret: Has been protecting a sibling's crime for years (a serious one)
+## Arcane Council
+Otto Wolf
+## Arcane Council › Otto Wolf
+Town granary · third of Arcane Council
+Granary Reeve
+Pragmatic AllianceGertrud Gärtner
+Wendelgard Köhler holds a tie to them: Outstanding Debt
+Holds an office whose purse shrinks with everyone else's.
+Constraint: Every office is after the same few coins; making this one needed means taking from the others.
+Wants Fix a problem Wendelgard Köhler has left standing in the Arcane Council, and make sure everyone knows who fixed it.
+How they deal Happy to talk about the farms and who brought in what this year.
+Secret: Has been lending grain from the stores to friends in the lean months and writing it down as rot
+Religious Authorities (1)▲
+## Religious Authorities
+Bertram Richter
+## Religious Authorities › Bertram Richter
+Houses of worship · first of Religious Authorities
+Dean
+Flaw: lazy
+Outstanding DebtSalome Berger
+Renate Fuchs holds a tie to them: Outstanding Debt
+Leads the faith while money is short; its lands and alms are both a help and a target.
+Constraint: Can give only what it is given, and in lean years less is given.
+Wants Make sure no new rule from those who govern costs the houses of worship anything this season.
+Standing first of Religious Authorities, the weaker power here
+How they deal Helpful in the small practical ways that don't invite scrutiny.
+Secret: Knows that the decisive victory everyone celebrates was won through treachery, not skill
+Unranked members (7)▲
+## Unranked members
+Renate Fuchs
+## Unranked members › Renate Fuchs
+Town watch · member of Arcane Council
+Captain
+Flaw: petty Temperament: incorruptible
+Outstanding DebtBertram Richter
+Adelheid Rosenfeld holds a tie to them: Outstanding Debt
+Leads a squad that is short of pay, gear and hands.
+Constraint: If anyone sees how thin the squad has worn, they will test it.
+Wants Buy iron at the market in bulk this season, while the price is still fair.
+Disposition incorruptible
+How they deal Promises help easily, and is hard to find when the time comes to give it.
+Secret: Possesses a magical ability they've hidden for their entire career
+## Unranked members
+Hedwig Schulz
+## Unranked members › Hedwig Schulz
+Mills · member of Arcane Council
+Master Miller
+Temperament: resourceful
+Mentor and SuccessorWendelgard Köhler
+Wants Be in the room the next time the Arcane Council must decide something that matters.
+Disposition resourceful
+How they deal Answers what is asked and no more; turns the talk back to the weight of the grain.
+Secret: Mixes ground chalk and bean meal into the flour in the lean months to make it go further
+## Unranked members
+Gertrud Gärtner
+## Unranked members › Gertrud Gärtner
+Adventurers' charter hall · member of Arcane Council
+Chartermaster
+Otto Wolf holds a tie to them: Pragmatic Alliance
+Wants Bring Otto Wolf together with someone who can help them.
+How they deal Takes on companies the hall knows; strangers start with small jobs.
+Secret: Was present when Hedwig Schulz did something they've never accounted for publicly. Neither has acknowledged the other was there
+## Unranked members
+Gunter Wolf
+## Unranked members › Gunter Wolf
+Caravaneer's post · member of Arcane Council
+Master of the Post
+Flaw: corrupt
+Genuine RespectHeinrich Richter
+Wants Stand by Heinrich Richter in their next quarrel, whoever it is with.
+How they deal Names the next departure, the fee to join it and the cost of the escort.
+Secret: Sells the post's road news to one buyer a day before it is posted for everyone
+## Unranked members
+Zacharias Lehmann
+## Unranked members › Zacharias Lehmann
+Cooper · member of Arcane Council
+Master Cooper
+Flaw: stubborn
+Professional RivalryWolfhard Wirth
+Wants Do one thing for the Arcane Council this season that the people who lead it cannot ignore.
+How they deal Takes orders and gives dates; little time for anything else.
+Secret: Owes Hedwig Schulz a debt from before either of them held their current position: one that Hedwig Schulz has never formally called in
+## Unranked members
+Andreas Hartmann
+## Unranked members › Andreas Hartmann
+Taverns · member of Arcane Council
+Host
+Flaw: reckless Temperament: loyal
+Wants Find a patron among those who lead the Arcane Council, and make themselves useful to them.
+Disposition loyal
+How they deal Takes the deal, then does as little as the deal allows.
+Secret: Knows the location of a sealed magical site that others have been searching for
+## Unranked members
+Wolfhard Wirth
+## Unranked members › Wolfhard Wirth
+Inns · member of Arcane Council
+Flaw: bitter Temperament: fair-minded
+Outstanding DebtAdelheid Rosenfeld
+Andreas Hartmann holds a tie to them: Professional Rivalry
+Zacharias Lehmann holds a tie to them: Professional Rivalry
+Wants Be asked for an opinion by those who lead the Arcane Council, once, this season.
+Disposition fair-minded
+How they deal Friendly while the coin lasts; asks for payment up front from anyone they have not seen before.
+Secret: Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+In no power (5)▲
+## In no power
+Salome Berger
+## In no power › Salome Berger
+Craft guilds
+Guildmaster
+Genuine RespectAdelheid Rosenfeld
+Bertram Richter holds a tie to them: Outstanding Debt
+Viktor Schröder holds a tie to them: Outstanding Debt
+Wants Collect what is owed to the craft guilds before the season is out.
+How they deal Offers information freely, and asks questions that sound like interest, not prying.
+Secret: Knows something about Wendelgard Köhler that Wendelgard Köhler believes no one else knows, and has been deciding for months whether to use it
+## In no power
+Swanhild Wenzel
+## In no power › Swanhild Wenzel
+Apothecary (established)
+Master Apothecary
+Flaw: volatile Temperament: dependable
+Outstanding DebtWendelgard Köhler
+Wants Find the apothecary's shop one more source of money.
+Disposition dependable
+How they deal Listens to every symptom, names a remedy and a price, and remembers what you bought.
+Secret: Has been reading Adelheid Rosenfeld's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+## In no power
+Viktor Schröder
+## In no power › Viktor Schröder
+Carriers' guild
+Carriers' Master
+Flaw: vain Temperament: diligent
+Wants Win a title, a seat or an honour, however small.
+Disposition diligent
+How they deal Talks about the roads and who has been sending what.
+Secret: Hires out carriers to anyone who pays, including people moving goods that must not be seen
+## In no power
+Heinrich Richter
+## In no power › Heinrich Richter
+Traveling performers
+Troupe Leader
+Flaw: arrogant
+Gunter Wolf holds a tie to them: Genuine Respect
+Wants Have the last word in the next argument that matters.
+How they deal Plays for a fee and a meal; more for a wedding.
+Secret: Has been stealing from the houses the troupe performs in, while the others play
+## In no power
+Werner Jung
+## In no power › Werner Jung
+Chandler
+Master Chandler
+Flaw: reckless
+Wants Win the chandler's shop first call on any help those who govern can give this season.
+Secret: Sells candles made with cheap tallow as fine wax ones, and the smoke gives them away to anyone who knows
+
+== web:World/Relationships ==
+NPC Relationships (16)▲
+All (16)Allies (1)Rivals (2)Leverage (9)
+Adelheid RosenfeldOutstanding DebtRenate Fuchs
+Archmage of the Council · minor · the watch captain
+▲
+Renate Fuchs nursed Adelheid Rosenfeld through a winter fever when no one else would come. Adelheid Rosenfeld still owes the debt and still knows it.
+Adelheid Rosenfeld has refused Renate Fuchs a small favour for the first time in years.
+Bertram RichterOutstanding DebtSalome Berger
+the dean · crushing · the senior craft-guild master
+Bertram Richter borrowed Salome Berger's good name to win a post. Salome Berger has never asked for it back.
+Salome Berger has begun to count the debt Bertram Richter owes among her assets, and has had it written down before witnesses.
+Wendelgard KöhlerOutstanding DebtOtto Wolf
+the senior guild master · substantial · the granary reeve
+Wendelgard Köhler owes Otto Wolf a great deal, and neither has ever said so aloud.
+Otto Wolf is about to call it in.
+Otto WolfPragmatic AllianceGertrud Gärtner
+the granary reeve · weak · the charter master
+Otto Wolf and Gertrud Gärtner share a council bloc and a list of enemies. They do not share their plans.
+Gertrud Gärtner has been dining with Otto Wolf's rivals. Otto Wolf heard about it from a servant.
+Renate FuchsOutstanding DebtBertram Richter
+the watch captain · substantial · the dean
+Years ago Bertram Richter did Renate Fuchs a favour too large to repay, and she has been paying it back in small ways ever since.
+Renate Fuchs has begun to act like someone who considers the debt paid. Bertram Richter does not.
+Wolfhard WirthOutstanding DebtAdelheid Rosenfeld
+the innkeeper · crushing · Archmage of the Council
+Wolfhard Wirth owes Adelheid Rosenfeld for an old kindness. Neither mentions it, and both know exactly how much is still owed.
+Someone else has learned what favour Wolfhard Wirth owes Adelheid Rosenfeld, and now has a hold on him too.
+Andreas HartmannProfessional RivalryWolfhard Wirth
+the tavern keeper · bitter · the innkeeper
+Andreas Hartmann wants Wolfhard Wirth's position, and the innkeeper wants the tavern keeper's reputation. They are civil in public and unforgiving in private.
+Wolfhard Wirth has been telling clients that Andreas Hartmann's work is slipping. Two of the clients have repeated it to Andreas Hartmann.
+Hedwig SchulzMentor and SuccessorWendelgard Köhler
+the miller · lifelong · the senior guild master
+Hedwig Schulz taught Wendelgard Köhler everything, including how to get the better of the miller.
+A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+Gertrud GärtnerMentor and SuccessorWendelgard Köhler
+the charter master · formal · the senior guild master
+Gertrud Gärtner took Wendelgard Köhler under their wing early and taught them the customs, the clients, and the names worth knowing.
+Wendelgard Köhler has taken on a client Gertrud Gärtner turned away on principle.
+Gunter WolfGenuine RespectHeinrich Richter
+the post's master · genuine · the troupe leader
+Gunter Wolf trusts Heinrich Richter's word over any written contract. Heinrich Richter has never given a reason to regret it.
+Heinrich Richter has publicly backed a plan that Gunter Wolf thinks will fail. Gunter Wolf has said so once, in private.
+Zacharias LehmannProfessional RivalryWolfhard Wirth
+the cooper · personal · the innkeeper
+Every friend Zacharias Lehmann wins is one Wolfhard Wirth lost, and the reverse. The two keep a polite distance and an exact tally.
+Zacharias Lehmann and Wolfhard Wirth will both present proposals at the next council session. Only one will be accepted.
+Salome BergerGenuine RespectAdelheid Rosenfeld
+the senior craft-guild master · grudging · Archmage of the Council
+Salome Berger and Adelheid Rosenfeld have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.
+Salome Berger and Adelheid Rosenfeld are about to be on opposite sides of an important decision.
+Viktor SchröderOutstanding DebtSalome Berger
+the carriers' master · minor · the senior craft-guild master
+Salome Berger paid Viktor Schröder's bail eleven years ago and has never mentioned it. Viktor Schröder mentions it to no one.
+Salome Berger has asked Viktor Schröder for a favour against his own interests. It is the first payment Salome Berger has asked for.
+Swanhild WenzelOutstanding DebtWendelgard Köhler
+the apothecary · substantial · the senior guild master
+Swanhild Wenzel owes Wendelgard Köhler a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+Werner JungOutstanding DebtWendelgard Köhler
+the chandler · crushing · the senior guild master
+Wendelgard Köhler kept Werner Jung's name out of a scandal that ruined two others. Werner Jung has taken Wendelgard Köhler's side ever since.
+Wendelgard Köhler has mentioned the debt aloud, at a dinner, in front of Werner Jung's partners.
+Heinrich RichterOutstanding DebtWendelgard Köhler
+the troupe leader · substantial · the senior guild master
+Wendelgard Köhler once spoke up for Heinrich Richter when it cost her something to do it. Heinrich Richter has never been asked for anything in return.
+Wendelgard Köhler has asked Heinrich Richter to speak up for someone else, as she once spoke up for him.
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+River
+Culture
+Germanic
+The town gets by. Nobody is going without bread and nobody is building anything either.
+The night's guard comes down off the walls at first light, and the day's guard goes up.
+People gather in the market square at midday to talk, to trade a little, and to watch the day go by.
+Children are warned about going anywhere alone after dark.
+
+== web:World/Traditions ==
+The founding traditions of Hartgrund.
+⌂
+The Old Feast
+## The Old Feast
+Founding
+Kept in Seedtime, the sixth week.
+A feast shared among neighbours that remembers the founding days. It is overseen by the Arcane Council. It goes back 189 years, to the founding of Hartgrund by military veterans given land grants who brought their skills with them.
+✦
+The Bright Stars Contest
+## The Bright Stars Contest
+Stars
+Kept in Deepwinter, the fourth and fifth weeks.
+A day of games and contests that marks the courses of the stars. It is in the keeping of the houses of worship, with Bertram Richter, the dean, presiding.
+
+== web:World/History ==
+Hartgrund189 years old↺ Reroll
+"The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards"
+Current Tensions (2)▲
+Trade dispute
+A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place
+Merchants who trade with the partnerThose who want new partnersAuthorities caught between them
+Corruption scandalmajor
+Corruption among officials has been exposed, but those in power are stifling the investigation
+Arcane CouncilReformersComplicit beneficiaries
+Founding▲
+## Founding
+Founded by:military veterans given land grants who brought their skills with them
+Early trial:disputes over water rights
+How survived:though the founding was harder than anyone admitted at the time
+Generations of patching and rebuilding have nearly hidden the plan Hartgrund was laid out to.
+Major Historical Events (6)▲
+## Major Historical Events
+Founded
+Now
+158y
+136y
+126y
+63y
+35y
+9y
+Infiltration Fear
+Occupation Legacy
+Demographic
+Disaster
+Economic
+Magical
+The Arcane IncidentMagicalmajor
+Argument over the place of magic and its limits set neighbour against neighbour
+9y ago
+Recent
+▼
+The ShortageEconomicmajor
+A critical resource became scarce, causing hoarding and price gouging
+35y ago
+Last century
+The SiegeDisastercatastrophic
+Word of a gathering threat split the settlement over whether to fight, treat, or flee
+63y ago
+The MigrationDemographicmajor
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+126y ago
+Ancient
+The OccupationOccupation Legacymajor
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+136y ago
+The PurgeInfiltration Fearmajor
+Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations
+158y ago
+The siege left a legacy of trouble in Hartgrund that has never been fully put right, and that legacy is older than all but the oldest alive.
+
+== web:World/Rumors & News ==
+Available at launch
+What Hartgrund has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Hartgrund's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Folk attend on the great feast days and keep the lesser rites at home.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## HARTGRUND
+HARTGRUND
+Town · Forest
+POPULATION
+## 722
+722
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Medicinal herbs
+SAFETY
+## Moderate
+Moderate
+Defense: Lightly Defended
+GOVERNED BY
+Arcane Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Hartgrund
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Poor. Hartgrund, a town of 722, has no crisis on its hands this season.
+Population
+722
+Town
+Age
+189 yrs
+Forest
+Prosperity
+Poor
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+39/100
+Economic
+62/100
+Magical
+36/100
+Disaster
+32/100
+Enforcement ratio
+The criminals outmatch those who keep order.
+Food balance
+Produced
+1203
+Needed
+1444
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Trade Dispute
+Merchants who trade with the partner / Those who want new partners / Authorities caught between them
+Major
+Corruption Scandal
+Arcane Council / Reformers / Complicit beneficiaries
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Sited at the water's edge, where the river was the only road worth having, and it has been the argument for staying ever since.
+NOTABLE CONNECTION
+Hedwig Schulz & Wendelgard Köhler
+Mentor and Successor
+INSTITUTIONS · 24 TOTAL
+Economy 8
+Crafts 6
+Infrastructure 3
+Religious 2
+Defense 2
+Government 1
+Adventuring 1
+Entertainment 1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+People to voice
+Adelheid Rosenfeld
+Archmage of the Council · Holds the seat
+Wants to get the alchemist shop through the season without borrowing.
+Bertram Richter
+the dean · Senior cleric
+Wants to make sure no new rule from those who govern costs the houses of worship anything this season.
+What the players test first
+Food
+Secure. Stores: a granary, about five months of grain.
+Defence
+Town walls, Town watch, Adventurers' charter hall.
+Hooks
+Adelheid Rosenfeld
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+Renate Fuchs
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Wendelgard Köhler
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+SESSION SCRATCH
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+28 hooks
+28 hooks to pull; most of them belong to the people (16).
+NPCs
+16 hook s
+01
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+Adelheid Rosenfeld
+High
+02
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Renate Fuchs
+High
+03
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Wendelgard Köhler
+High
+04
+A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.
+Salome Berger
+High
+05
+A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.
+Bertram Richter
+Low
+06
+Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.
+Otto Wolf
+Low
+07
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Hedwig Schulz
+Low
+08
+A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.
+Viktor Schröder
+Low
+09
+Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.
+Swanhild Wenzel
+Low
+10
+They overheard two people they know settle a bribe, and do not know whom to tell.
+Gertrud Gärtner
+Low
+11
+They have promised the same order to two buyers, and both are due to collect on the same morning.
+Gunter Wolf
+Low
+12
+Their spouse has been making payments to someone every month for years, and will not say who.
+Zacharias Lehmann
+Low
+13
+Their best customer owes them a year's takings and has started avoiding their street.
+Heinrich Richter
+Low
+14
+Their son has been seen at night with people who do not work, and comes home with coin.
+Wolfhard Wirth
+Low
+15
+A cousin has arrived to stay without warning, and spends every day watching one particular house.
+Andreas Hartmann
+Low
+16
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+Werner Jung
+Low
+History
+12 hook s
+01
+A letter found this year tells it this way: someone has been testing how quickly the place answers an alarm, and nobody ordered a drill
+Disaster Event
+Medium
+02
+An old story from that time: the threat has an agent already inside the settlement
+Disaster Event
+Medium
+03
+An anti-magic agitator is secretly using magic themselves
+Magical Event
+Medium
+04
+A recent magical accident was covered up and the victims silenced
+Magical Event
+Medium
+05
+The dispute is being kept alive by someone who profits from the uncertainty on both sides
+Trade Dispute
+Medium
+06
+A contract clause that could end the dispute has been deliberately misfiled
+Trade Dispute
+Medium
+07
+The partner settlement is applying pressure through a debt no one here wants to acknowledge
+Trade Dispute
+Medium
+08
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+Corruption Scandal
+Medium
+09
+A key witness can be found, but won't speak without protection
+Corruption Scandal
+Medium
+10
+An official named in the evidence is selling property in a hurry
+Corruption Scandal
+Medium
+11
+A letter found this year tells it this way: an alternative source exists but the information is being suppressed
+Economic Event
+Low
+12
+The scarcity was engineered. Someone destroyed the competing supply route
+Economic Event
+Low
+UNDERLYING TENSIONS
+•
+Trade Dispute
+•
+Corruption Scandal
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+37 buyable across 10 categories
+Lodging
+2 option s
+Accommodation
+Lodging (rooms to let)
+Food & drink
+2 option s
+Drink service
+Grain grinding
+Goods & crafts
+7 option s
+Barrel making
+Beeswax candles
+Cask repair
+General trade
+Soap
+Tallow candles
+Weekly market
+Magical services
+2 option s
+Component identification
+Potion brewing
+Healing
+5 option s
+Burial
+Herbal remedies
+Life ceremonies
+Medicines and compounds
+Religious services
+Information
+3 option s
+Monster bounties
+Record of custom
+Route intelligence
+Transportation
+2 option s
+Caravan assembly
+Freight haulage
+Legal & financial
+11 option s
+Bylaws and ordinances
+Dispute adjudication
+Dispute arbitration
+Gate control
+Gate duty
+Grain storage
+Night patrol
+Permit applications
+Quality certification
+Tax payment
+Trade brokerage
+Entertainment
+1 option
+Public performance
+Criminal services
+2 option s
+Fencing stolen goods
+Hired muscle
+ACTIVE SUPPLY CHAINS · 17
+Standing Watch
+Vulnerable
+NEED Defense & Security
+Town watch » Defence services, Weapons training
+Taverns & Social Life
+Vulnerable
+NEED Entertainment & Culture
+Taverns » Lodging, Meals and drink, Stabling
+Fortifications
+Vulnerable
+NEED Defense & Security
+Stone quarry » Town walls
+Herbalism & Remedies
+Running
+NEED Healing & Medicine · EXPORT yes
+Wild foraging areas » Apothecary (established) » Herbal remedies, Potions and elixirs
+Divine & Magical Healing
+Running
+NEED Healing & Medicine
+Hot springs » Houses of worship » Medical care (basic), Spellcasting (minor)
+Beekeeping & Wax
+Running
+NEED Manufacturing & Crafts · EXPORT yes
+Wild foraging areas » Chandler + Apothecary (established) » Wild honey, Candles and wax, Medicinal honey
+Reed & Marsh Harvest
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Marshlands » Chandler + Merchant guilds » Reeds and thatch, Peat fuel, Waterfowl
+Faith & Worship
+Running
+NEED Religion & Civic
+Houses of worship » Religious services, Education (basic), Poor relief
+Pilgrimage & Holy Sites
+Running
+NEED Religion & Civic
+Hot springs » Houses of worship » Religious services, Hospitality for travellers, Poor relief
+Spices & Dyes
+Entrepôt
+NEED Trade & Entrepôt · EXPORT yes
+Merchant guilds » Rare spices and exotic dyes
+Produced in distant lands. Crossroads and port settlements control distribution and take the markup.
+Storage & Logistics
+Entrepôt
+NEED Trade & Entrepôt
+Caravaneer's post » Cargo handling, Goods storage
+Ports and crossroads profit by charging for storage, loading, and onward transport, not by producing anything themselves.
+River Toll
+Entrepôt
+NEED Trade & Entrepôt
+River traffic » Caravaneer's post » Transit trade profit
+Camel Caravan Trade
+Entrepôt
+NEED Trade & Entrepôt · EXPORT yes
+Caravaneer's post » Overland freight revenue
+Adventuring & Escort
+Operational
+NEED Defense & Security
+Adventurers' charter hall » Armed escort, Monster hunting services, Dungeon clearance
+Performance & Theater
+Operational
+NEED Entertainment & Culture
+Traveling performers » Performances, Music and song
+Law & Governance
+Operational
+NEED Religion & Civic
+Town hall » Legal services
+Caravan & Overland Trade
+Operational
+NEED Trade & Entrepôt
+Caravaneer's post + Carriers' guild » Overland cargo transport, Escorted caravan, Pack animal hire
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+24 institutions
+24 institutions; the largest groups are trade and farming (8) and crafts (6).
+Total
+24
+Categories
+8
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Town council
+Civic
+The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.
+Backs
+Arcane Council
+Services
+Record of custom
+: Keeps the charter, rolls, and civic archive
+Bylaws and ordinances
+: Enacts and enforces the town's own rules
+Dispute adjudication
+: Hears the town's civil pleas at the council bench
+Religious
+2 institutions
+Houses of worship
+Essential
+Religious
+Church
+Several houses of worship within town.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals across several congregations.
+Religious services
+: Several congregations covering different districts or communities.
+Burial grounds
+Essential
+Religious
+Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.
+Backs
+Religious Authorities
+Services
+Burial
+: Interment in the congregation's ground, with the rite that congregation keeps.
+Economy
+8 institutions
+Weekly market
+Essential
+Market
+Trade
+Held by charter. The heart of the town's trade.
+Backs
+Arcane Council
+Services
+General trade
+: Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Market square
+Essential
+Market
+The central plaza where the weekly market and the fairs are held.
+Backs
+Arcane Council
+Services
+Weekly market
+: Regular market days with produce, goods, and livestock.
+Merchant guilds
+Guild
+Trade
+Control trade in specific goods.
+Backs
+Arcane Council
+Services
+Trade brokerage
+: Facilitate large commercial transactions between distant parties.
+Inns
+Trade
+Lodging for the travelling trade.
+Backs
+Arcane Council
+Services
+Accommodation
+: Beds from dormitory to private room. Quality varies by establishment.
+Taverns
+Food
+Houses for drink. And for company.
+Backs
+Arcane Council
+Services
+Drink service
+: Ale, wine, and spirits across multiple establishments.
+Carriers' guild
+Transport
+Trade
+Guild
+Professional carters and teamsters, organised, moving cargo across country for hire. Every route, levy, and winter closure is known to them, and billed for.
+Backs
+Arcane Council
+Services
+Freight haulage
+: Organised road transport for goods between towns. Reliable, guild-backed.
+Town granary
+Essential
+Food
+Shared grain stores that even out the harvests and hold off famine.
+Backs
+Arcane Council
+Services
+Grain storage
+: Municipal grain reserves. Buffers the settlement against poor harvests.
+Caravaneer's post
+Transport
+Guild
+Trade
+Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here.
+Backs
+Arcane Council
+Services
+Route intelligence
+: Road conditions, bandit reports, toll schedules.
+Caravan assembly
+: Register to join an outgoing caravan.
+Crafts
+6 institutions
+Mills
+Essential
+Grain ground at several sites.
+Backs
+Arcane Council
+Services
+Grain grinding
+: Grind grain into flour for bread and other foods.
+Apothecary (established)
+Healing
+Trade
+A proper shop kept by a trained herbalist, its shelves stocked and a back room set aside for consultations. It sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. A few of its keepers also work as chirurgeons.
+Backs
+Arcane Council
+Services
+Herbal remedies
+: Tinctures, poultices, and dried herbs for common ailments.
+Medicines and compounds
+: Prepared medicines for fever, pain, infection, and chronic conditions.
+Chandler
+Trade
+Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting.
+Backs
+Arcane Council
+Services
+Beeswax candles
+: Premium candles. Cleaner burn, better light.
+Soap
+: Lye and tallow soap.
+Tallow candles
+: Standard household candles.
+Craft guilds
+Guild
+They set the standard of work, the prices, and the terms of apprenticeship.
+Backs
+Arcane Council
+Services
+Quality certification
+: Guild mark indicating goods meet agreed standards.
+Alchemist shop
+Alchemy
+A shop of alchemical wares and potions, where the simplest healing draught costs roughly a week of a labourer's pay.
+Backs
+Arcane Council
+Services
+Component identification
+: Identify unknown substances, reagents, and monster byproducts.
+Potion brewing
+: Healing potions, antidotes, and alchemical compounds on request.
+Cooper
+Makes barrels for storage and transport.
+Backs
+Arcane Council
+Services
+Barrel making
+: Watertight barrels for ale, wine, salted meat, and fish. Essential packaging for trade.
+Cask repair
+: Re-coopering and repair of used barrels. Cheaper than new for small leaks.
+Infrastructure
+3 institutions
+Housing
+Essential
+Housing
+Multi-story timber and stone buildings.
+Backs
+Arcane Council
+Services
+Lodging (rooms to let)
+: A room let in a private house, by the night or the week.
+Multiple water sources
+Essential
+Water
+Wells and fountains, or water carried in by pipe.
+Backs
+Arcane Council
+Town hall
+Civic
+Meeting place and administrative center.
+Backs
+Arcane Council
+Services
+Dispute arbitration
+: Bring commercial and civil disputes before a magistrate.
+Permit applications
+: Apply for construction, business, and trade permits.
+Tax payment
+: Pay annual and quarterly taxes and levies.
+Defense
+2 institutions
+Town watch
+Law Enforcement
+Defense
+Watchmen serving part-time. Night patrols and gate duty.
+Backs
+Arcane Council
+Services
+Gate duty
+: Check travelers entering and leaving. Note unusual visitors.
+Night patrol
+: Patrol the streets after dark. Deter crime and respond to incidents.
+Town walls
+Defense
+Fortification
+Stone fortifications with gates. Expensive to build and maintain.
+Backs
+Arcane Council
+Services
+Gate control
+: Control who enters and exits. Levy tolls on goods.
+Entertainment
+1 institution
+Traveling performers
+The festivals bring bards, jugglers, and acrobats through.
+Backs
+Arcane Council
+Services
+Public performance
+: Street and square performances: juggling, music, comedy, acrobatics.
+Adventuring
+1 institution
+Adventurers' charter hall
+Military
+Adventuring
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+Backs
+Arcane Council
+Services
+Monster bounties
+: Posted bounties for verified monster kills. Bring proof: claw, ear, or head.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Poor. Its people make their living from medicinal herbs.
+Prosperity
+Poor
+Complexity
+Specialized production and trade
+Trade
+River
+It gets more than its work alone could yield.
+INCOME SOURCES
+Market Taxes
+41%
+Market day stall fees and toll collection on goods entering the market.
+Guild Fees
+33%
+Annual licensing fees and fines levied by guild oversight.
+Property Rents
+19%
+Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+Apothecary & Alchemy
+7%
+Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.
+TRADE FLOWS
+EXPORTS
+•
+Medicinal herbs
+•
+Alchemical reagents
+•
+Wild honey
+•
+Healing waters (bottled)
+•
+Pilgrim hospitality
+•
+Reeds and thatch
+•
+Peat fuel
+•
+Waterfowl
+•
+Herbal remedies
+•
+Potions and elixirs
+•
+Candles and wax
+•
+Rare spices and exotic dyes (transit)
+•
+Alchemical trade (potions, reagents)
+IMPORTS
+•
+Iron
+•
+Grain
+•
+Cut stone and masonry
+•
+Ritual wood and herbs (ancient grove damaged)
+•
+Quality weapons and armour
+•
+Rune-worthy bone and antler
+•
+Rare herbs and roots
+•
+Timber
+LOCAL PRODUCTION
+•
+Honey
+•
+medicinal herbs
+•
+Peat
+•
+Herbal remedies
+•
+Potions and elixirs
+•
+Medical care (basic)
+•
+Spellcasting (minor)
+•
+Wild honey
+•
+Candles and wax
+•
+Reeds and thatch
+•
+Religious services
+•
+Education (basic)
+•
+Hospitality for travellers
+ENTREPÔT
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Grain
+Salt
+FOOD SECURITY
+PRODUCED
+1203
+NEEDED
+1444
+Thin farmland: the fields yield a little under the usual.
+ECONOMIC FLOWS · 17 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Defense & security
+3 chain s · 2 vulnerable
+Town watch
+>
+Defence services
+Weapons training
+Stone quarry
+>
+Town walls
+Adventurers' charter hall
+>
+Armed escort
+Monster hunting services
+Dungeon clearance
+Entertainment & culture
+2 chain s · 1 vulnerable
+Taverns
+>
+Lodging
+Meals and drink
+Stabling
+Traveling performers
+>
+Performances
+Music and song
+Healing & medicine
+2 chain s
+Wild foraging areas
+>
+Apothecary (established)
+>
+Herbal remedies EXPORT
+Potions and elixirs EXPORT
+Hot springs
+>
+Houses of worship
+>
+Medical care (basic)
+Spellcasting (minor)
+Manufacturing & crafts
+1 chain
+Wild foraging areas
+>
+Chandler
+>
+Apothecary (established)
+>
+Wild honey EXPORT
+Candles and wax EXPORT
+Medicinal honey
+Raw materials & fuel
+1 chain
+Marshlands
+>
+Chandler
+>
+Merchant guilds
+>
+Reeds and thatch EXPORT
+Peat fuel EXPORT
+Waterfowl EXPORT
+Religion & civic
+3 chain s
+Houses of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Hot springs
+>
+Houses of worship
+>
+Religious services
+Hospitality for travellers
+Poor relief
+Town hall
+>
+Legal services
+Trade & entrepôt
+5 chain s
+Merchant guilds
+>
+Rare spices and exotic dyes
+Caravaneer's post
+>
+Cargo handling
+Goods storage
+River traffic
+>
+Caravaneer's post
+>
+Transit trade profit
+Caravaneer's post
+>
+Overland freight revenue
+Caravaneer's post
+>
+Carriers' guild
+>
+Overland cargo transport
+Escorted caravan
+Pack animal hire
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Forest
+It sends out healing potions and antidotes. The nearby ancient grove is used up.
+STRATEGIC VALUE
+Low-Medium - difficult to besiege
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+medicinal herbs
+»
+–
+»
+–
+full
+NEARBY RESOURCES
+Depleted
+Ancient Grove
+Abundant
+Wild Foraging Areas
+Hot Springs / Healing Waters
+Stone quarry
+Marshlands
+Commodities available
+· processed/refined in this settlement
+Wild Foraging Areas
+Honey
+Medicinal Herbs
+Hot Springs / Healing Waters
+Stone quarry
+Stone
+Marshlands
+Peat
+IMPORT DEPENDENCIES
+CRITICAL
+Grain
+Salt
+EXPORT POTENTIAL
+healing potions, antidotes
+Very high
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Arcane Council governs.
+PUBLIC LEGITIMACY
+## 40
+40
+Contested
+STABILITY
+Stable
+GOVERNING
+Arcane Council
+Magic
+GOVERNANCE
+Adelheid Rosenfeld, the alchemist and Archmage of the Council, holds the seat of the Arcane Council. The Arcane Council governs Hartgrund. Poverty has left the Arcane Council's right to rule contested in Hartgrund. The Arcane Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+POWER DISTRIBUTION
+Arcane Council 81
+Religious Authorities 19
+POWERS
+Arcane Council
+Magic
+Governing
+Power 81
+Dominant
+Mages govern, and their magic is their claim to rule.
+Religious Authorities
+Religious
+Power 19
+Minor
+Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+FOR THE DM ONLY
+Who really runs this town
+THE RULING THREE OF ARCANE COUNCIL
+Head · Adelheid Rosenfeld, the alchemist
+Second · Wendelgard Köhler, the senior guild master
+Third · Otto Wolf, the granary reeve
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Arcane Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Lightly defended: town walls, held by the town watch. It leans on magic to hold.
+Readiness
+Lightly defended
+Safety
+Moderate
+Watch to population
+0.6
+Food resilience
+32
+GUARD ASSESSMENT
+Some of the town watch take bribes from whoever has coin.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Weak
+Active frontier, with walls and a watch to meet what comes.
+Invasion & War
+Adequate
+Walls, and a watch to keep them.
+Internal Security
+Weak
+Internal security: Moderate. Cases are heard here, but there is almost nowhere to hold anyone.
+Economic Survival
+Adequate
+Money enough for a short crisis; a long one would start eating the reserves within months.
+Disasters & Famine
+Weak
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+Under siege the outlying fields would be lost; the granary would carry the town for about five months at full rations, about eleven months on half, and what is still harvested would stretch it further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Town walls
+Stone fortifications with gates. Expensive to build and maintain.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+Monster response (charter)
+Adventurers' charter hall
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+CRIMINAL ARCHITECTURE
+Criminal structure · Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+SUPPORTING CAPABILITIES
+Legal Infrastructure
+Council bench only
+Cases heard without detention. Fines and exile only.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, as long as the one trade route it depends on stays open.
+VERDICT
+Viable
+Hartgrund can stand, but only while grain keeps arriving and the routes that bring it stay open.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+Divine & Magical Healing
+KEY METRICS
+Food balance
++0
+Trade access
+river
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+16 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Adelheid Rosenfeld
+the alchemist
+Arcane Council
+Female · early fifties
+10
+Renate Fuchs
+the watch captain
+Arcane Council
+Female · early forties
+9
+Wendelgard Köhler
+the senior guild master
+Arcane Council
+Female · late fifties
+8
+Salome Berger
+the senior craft-guild master
+Female · late thirties
+8
+Bertram Richter
+the dean
+Religious Authorities
+Male · early thirties
+5
+Otto Wolf
+the granary reeve
+Arcane Council
+Male · early sixties
+3
+Hedwig Schulz
+the miller
+Arcane Council
+Female · early forties
+3
+Viktor Schröder
+the carriers' master
+Male · late twenties
+3
+Swanhild Wenzel
+the apothecary
+Female · late sixties
+3
+Gertrud Gärtner
+the charter master
+Arcane Council
+Female · late thirties
+2
+Gunter Wolf
+the post's master
+Arcane Council
+Male · mid-twenties
+2
+Zacharias Lehmann
+the cooper
+Arcane Council
+Male · early thirties
+2
+Heinrich Richter
+the troupe leader
+Male · late twenties
+2
+Wolfhard Wirth
+the innkeeper
+Arcane Council
+Male · mid-sixties
+1
+Andreas Hartmann
+the tavern keeper
+Arcane Council
+Male · late sixties
+1
+Werner Jung
+the chandler
+Male · late fifties
+1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+16 figures
+Ask who matters here and you hear 16 names; Adelheid Rosenfeld, the alchemist, Archmage of the Council, first of Arcane Council, comes first.
+MAJOR FIGURES
+Adelheid Rosenfeld
+the alchemist
+Arcane Council
+PWR 10
+Sex
+Female
+·
+Age
+early fifties
+·
+Standing
+first of Arcane Council, the stronger power here
+Alchemist shop · Archmage of the Council, first of Arcane Council
+Personality
+patient
+Motivation
+Get the alchemist shop through the season without borrowing. — Become someone Renate Fuchs needs as much as they are needed.
+How they deal
+Friendly, but takes their time; hears the whole question before answering it.
+SECRETS
+·
+Has been systematically bribing multiple officials for preferential treatment: A cascade of confessions from any single one of the bribed parties
+RELATIONSHIPS
+· Renate Fuchs - Outstanding Debt
+· Wolfhard Wirth - called by · Outstanding Debt
+· Salome Berger - called by · Genuine Respect
+Renate Fuchs
+the watch captain
+Arcane Council
+PWR 9
+Sex
+Female
+·
+Age
+early forties
+Town watch · member of Arcane Council
+Personality
+incorruptible · Flaw: petty
+Motivation
+Buy iron at the market in bulk this season, while the price is still fair. — Forgive Adelheid Rosenfeld the debt in return for one great favour, when the time comes.
+How they deal
+Promises help easily, and is hard to find when the time comes to give it.
+SECRETS
+·
+Possesses a magical ability they've hidden for their entire career: In some jurisdictions, concealment is itself a crime; in all of them, it changes everything
+RELATIONSHIPS
+· Bertram Richter - Outstanding Debt
+· Adelheid Rosenfeld - called by · Outstanding Debt
+Wendelgard Köhler
+the senior guild master
+Arcane Council
+PWR 8
+Sex
+Female
+·
+Age
+late fifties
+Merchant guilds · second of Arcane Council
+Personality
+perceptive · Flaw: deceitful
+Motivation
+Win the next big piece of work away from the chandler's shop. — Grow the work at the merchant guilds until no one nearby can match it.
+How they deal
+Agrees quickly, and the terms are never quite what you remember agreeing to.
+SECRETS
+·
+Has been protecting a sibling's crime for years (a serious one): Discovery makes them an accessory; the sibling has reason to pre-empt exposure
+RELATIONSHIPS
+· Otto Wolf - Outstanding Debt
+· Hedwig Schulz - called by · Mentor and Successor
+· Gertrud Gärtner - called by · Mentor and Successor
+· Swanhild Wenzel - called by · Outstanding Debt
+· Werner Jung - called by · Outstanding Debt
+· Heinrich Richter - called by · Outstanding Debt
+Salome Berger
+the senior craft-guild master
+PWR 8
+Sex
+Female
+·
+Age
+late thirties
+Craft guilds
+Motivation
+Collect what is owed to the craft guilds before the season is out. — Collect everything Viktor Schröder owes, in full.
+How they deal
+Offers information freely, and asks questions that sound like interest, not prying.
+SECRETS
+·
+Knows something about Wendelgard Köhler that Wendelgard Köhler believes no one else knows, and has been deciding for months whether to use it: Wendelgard Köhler would move against them immediately if they suspected
+RELATIONSHIPS
+· Adelheid Rosenfeld - Genuine Respect
+· Bertram Richter - called by · Outstanding Debt
+· Viktor Schröder - called by · Outstanding Debt
+NOTABLE FIGURES
+Bertram Richter
+PWR 5
+the dean
+Religious Authorities
+Motive:
+Make sure no new rule from those who govern costs the houses of worship anything this season. — Make Renate Fuchs the first of many who owe them.
+Otto Wolf
+PWR 3
+the granary reeve
+Arcane Council
+Motive:
+Fix a problem Wendelgard Köhler has left standing in the Arcane Council, and make sure everyone knows who fixed it. — Build up enough savings at the town granary to ride out two bad years.
+Hedwig Schulz
+PWR 3
+the miller
+Arcane Council
+Motive:
+Be in the room the next time the Arcane Council must decide something that matters. — Build up a store of grain and water power at the mills large enough to last two bad years.
+Viktor Schröder
+PWR 3
+the carriers' master
+Motive:
+Win a title, a seat or an honour, however small. — Be free of what is owed to Salome Berger, completely.
+OTHER NAMES OF NOTE
+Swanhild Wenzel
+· the apothecary
+3
+Gertrud Gärtner
+· the charter master
+Arcane Council
+2
+Gunter Wolf
+· the post's master
+Arcane Council
+2
+Zacharias Lehmann
+· the cooper
+Arcane Council
+2
+Heinrich Richter
+· the troupe leader
+2
+Wolfhard Wirth
+· the innkeeper
+Arcane Council
+1
+Andreas Hartmann
+· the tavern keeper
+Arcane Council
+1
+Werner Jung
+· the chandler
+1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Hedwig Schulz & Wendelgard Köhler · Mentor and Successor
+Hedwig Schulz and Wendelgard Köhler are teacher and heir. A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+Internal relationships
+•
+Adelheid Rosenfeld and Renate Fuchs · Outstanding Debt
+Renate Fuchs nursed Adelheid Rosenfeld through a winter fever when no one else would come. Adelheid Rosenfeld still owes the debt and still knows it.
+Adelheid Rosenfeld has refused Renate Fuchs a small favour for the first time in years.
+•
+Bertram Richter and Salome Berger · Outstanding Debt
+Bertram Richter borrowed Salome Berger's good name to win a post. Salome Berger has never asked for it back.
+Salome Berger has begun to count the debt Bertram Richter owes among her assets, and has had it written down before witnesses.
+•
+Wendelgard Köhler and Otto Wolf · Outstanding Debt
+Wendelgard Köhler owes Otto Wolf a great deal, and neither has ever said so aloud.
+Otto Wolf is about to call it in.
+•
+Otto Wolf and Gertrud Gärtner · Pragmatic Alliance
+Otto Wolf and Gertrud Gärtner share a council bloc and a list of enemies. They do not share their plans.
+Gertrud Gärtner has been dining with Otto Wolf's rivals. Otto Wolf heard about it from a servant.
+•
+Renate Fuchs and Bertram Richter · Outstanding Debt
+Years ago Bertram Richter did Renate Fuchs a favour too large to repay, and she has been paying it back in small ways ever since.
+Renate Fuchs has begun to act like someone who considers the debt paid. Bertram Richter does not.
+•
+Wolfhard Wirth and Adelheid Rosenfeld · Outstanding Debt
+Wolfhard Wirth owes Adelheid Rosenfeld for an old kindness. Neither mentions it, and both know exactly how much is still owed.
+Someone else has learned what favour Wolfhard Wirth owes Adelheid Rosenfeld, and now has a hold on him too.
+•
+Andreas Hartmann and Wolfhard Wirth · Professional Rivalry
+Andreas Hartmann wants Wolfhard Wirth's position, and the innkeeper wants the tavern keeper's reputation. They are civil in public and unforgiving in private.
+Wolfhard Wirth has been telling clients that Andreas Hartmann's work is slipping. Two of the clients have repeated it to Andreas Hartmann.
+•
+Hedwig Schulz and Wendelgard Köhler · Mentor and Successor
+Hedwig Schulz taught Wendelgard Köhler everything, including how to get the better of the miller.
+A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+•
+Gertrud Gärtner and Wendelgard Köhler · Mentor and Successor
+Gertrud Gärtner took Wendelgard Köhler under their wing early and taught them the customs, the clients, and the names worth knowing.
+Wendelgard Köhler has taken on a client Gertrud Gärtner turned away on principle.
+•
+Gunter Wolf and Heinrich Richter · Genuine Respect
+Gunter Wolf trusts Heinrich Richter's word over any written contract. Heinrich Richter has never given a reason to regret it.
+Heinrich Richter has publicly backed a plan that Gunter Wolf thinks will fail. Gunter Wolf has said so once, in private.
+•
+Zacharias Lehmann and Wolfhard Wirth · Professional Rivalry
+Every friend Zacharias Lehmann wins is one Wolfhard Wirth lost, and the reverse. The two keep a polite distance and an exact tally.
+Zacharias Lehmann and Wolfhard Wirth will both present proposals at the next council session. Only one will be accepted.
+•
+Salome Berger and Adelheid Rosenfeld · Genuine Respect
+Salome Berger and Adelheid Rosenfeld have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.
+Salome Berger and Adelheid Rosenfeld are about to be on opposite sides of an important decision.
+•
+Viktor Schröder and Salome Berger · Outstanding Debt
+Salome Berger paid Viktor Schröder's bail eleven years ago and has never mentioned it. Viktor Schröder mentions it to no one.
+Salome Berger has asked Viktor Schröder for a favour against his own interests. It is the first payment Salome Berger has asked for.
+•
+Swanhild Wenzel and Wendelgard Köhler · Outstanding Debt
+Swanhild Wenzel owes Wendelgard Köhler a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+•
+Werner Jung and Wendelgard Köhler · Outstanding Debt
+Wendelgard Köhler kept Werner Jung's name out of a scandal that ruined two others. Werner Jung has taken Wendelgard Köhler's side ever since.
+Wendelgard Köhler has mentioned the debt aloud, at a dinner, in front of Werner Jung's partners.
+•
+Heinrich Richter and Wendelgard Köhler · Outstanding Debt
+Wendelgard Köhler once spoke up for Heinrich Richter when it cost her something to do it. Heinrich Richter has never been asked for anything in return.
+Wendelgard Köhler has asked Heinrich Richter to speak up for someone else, as she once spoke up for him.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Town
+ANCHOR FACTS
+Complexity
+Specialized production and trade
+Food
+Secure
+Magic-dependent
+CULTURAL NOTES
+Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty. Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+IDENTITY
+Name
+Hartgrund
+Tier
+Town
+Population
+722
+Terrain
+Forest
+Layout
+Tightly walled market town, timber yards and sawpits outside the north gate
+Age
+189 years
+Trade access
+River
+Founded
+military veterans given land grants who brought their skills with them
+CULTURAL IDENTITY
+Germanic-inspired
+Germanic-inspired, built in timber and stone.
+Built form
+Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+Exchange
+Estate dues, pedlars, and merchant associations connect farms to specialist workshops.
+Foodways
+Meals follow the season and what the household has put by.
+Sacred life
+Parish observance coexists with household customs, saints, oath sites, and seasonal rites.
+Defense
+Households are expected to turn out when called; a standing force comes only as a place grows.
+Social texture
+Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.
+Architecture
+one broad street leading up to the hall organizes the settlement center
+DAILY LIFE
+FOOD BALANCE
+Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+189y old
+Founded 189 years ago, with six events on record and two tensions still unresolved.
+Settlement age
+## 189
+189
+years
+Historical character
+The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards
+Founding
+Founded by
+military veterans given land grants who brought their skills with them
+Initial challenge
+disputes over water rights
+Overcoming
+though the founding was harder than anyone admitted at the time
+Historical events · 6
+Founding (- 189 y)
+Now
+0 y after founding
+95 y after founding
+189 y after founding
+9y AGO
+Still relevant today
+Major
+The Arcane Incident
+· Magical
+Argument over the place of magic and its limits set neighbour against neighbour
+Lasting effects
+·
+The site of the disputed working remains cordoned and warded
+35y AGO
+Still relevant today
+Major
+The Shortage
+· Economic
+A critical resource became scarce, causing hoarding and price gouging
+Lasting effects
+·
+Emergency grain reserves mandated by ordinance since the shortage
+63y AGO
+Still relevant today
+Catastrophic
+The Siege
+· Disaster
+Word of a gathering threat split the settlement over whether to fight, treat, or flee
+Lasting effects
+·
+A standing levy roster kept ready in the town archive
+126y AGO
+Major
+The Migration
+· Demographic
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+136y AGO
+Major
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+158y AGO
+Major
+The Purge
+· Occupation Infiltration
+Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations
+Lasting effects
+·
+Denunciation records from the panic remain sealed in the archive
+Live tensions · 2
+Trade Dispute
+Parties: Merchants who trade with the partner vs Those who want new partners vs Authorities caught between them
+A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place
+Corruption Scandal
+major
+Parties: Arcane Council vs Reformers vs Complicit beneficiaries
+Corruption among officials has been exposed, but those in power are stifling the investigation
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## HARTGRUND
+HARTGRUND
+Town · Forest
+POPULATION
+## 722
+722
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Medicinal herbs
+SAFETY
+## Moderate
+Moderate
+Defense: Lightly Defended
+GOVERNED BY
+Arcane Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Hartgrund
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Poor. Hartgrund, a town of 722, has no crisis on its hands this season.
+Population
+722
+Town
+Age
+189 yrs
+Forest
+Prosperity
+Poor
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+39/100
+Economic
+62/100
+Magical
+36/100
+Disaster
+32/100
+Enforcement ratio
+The criminals outmatch those who keep order.
+Food balance
+Produced
+1203
+Needed
+1444
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Trade Dispute
+Merchants who trade with the partner / Those who want new partners / Authorities caught between them
+Major
+Corruption Scandal
+Arcane Council / Reformers / Complicit beneficiaries
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Sited at the water's edge, where the river was the only road worth having, and it has been the argument for staying ever since.
+NOTABLE CONNECTION
+Hedwig Schulz & Wendelgard Köhler
+Mentor and Successor
+INSTITUTIONS · 24 TOTAL
+Economy 8
+Crafts 6
+Infrastructure 3
+Religious 2
+Defense 2
+Government 1
+Adventuring 1
+Entertainment 1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+People to voice
+Adelheid Rosenfeld
+Archmage of the Council · Holds the seat
+Wants to get the alchemist shop through the season without borrowing.
+Bertram Richter
+the dean · Senior cleric
+Wants to make sure no new rule from those who govern costs the houses of worship anything this season.
+What the players test first
+Food
+Secure. Stores: a granary, about five months of grain.
+Defence
+Town walls, Town watch, Adventurers' charter hall.
+Hooks
+Adelheid Rosenfeld
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+Renate Fuchs
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Wendelgard Köhler
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+SESSION SCRATCH
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+28 hooks
+28 hooks to pull; most of them belong to the people (16).
+NPCs
+16 hook s
+01
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+Adelheid Rosenfeld
+High
+02
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Renate Fuchs
+High
+03
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Wendelgard Köhler
+High
+04
+A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.
+Salome Berger
+High
+05
+A family has asked them to bury someone the faith forbids burying, and has offered a gift too large to refuse quietly.
+Bertram Richter
+Low
+06
+Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most.
+Otto Wolf
+Low
+07
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Hedwig Schulz
+Low
+08
+A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.
+Viktor Schröder
+Low
+09
+Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.
+Swanhild Wenzel
+Low
+10
+They overheard two people they know settle a bribe, and do not know whom to tell.
+Gertrud Gärtner
+Low
+11
+They have promised the same order to two buyers, and both are due to collect on the same morning.
+Gunter Wolf
+Low
+12
+Their spouse has been making payments to someone every month for years, and will not say who.
+Zacharias Lehmann
+Low
+13
+Their best customer owes them a year's takings and has started avoiding their street.
+Heinrich Richter
+Low
+14
+Their son has been seen at night with people who do not work, and comes home with coin.
+Wolfhard Wirth
+Low
+15
+A cousin has arrived to stay without warning, and spends every day watching one particular house.
+Andreas Hartmann
+Low
+16
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+Werner Jung
+Low
+History
+12 hook s
+01
+A letter found this year tells it this way: someone has been testing how quickly the place answers an alarm, and nobody ordered a drill
+Disaster Event
+Medium
+02
+An old story from that time: the threat has an agent already inside the settlement
+Disaster Event
+Medium
+03
+An anti-magic agitator is secretly using magic themselves
+Magical Event
+Medium
+04
+A recent magical accident was covered up and the victims silenced
+Magical Event
+Medium
+05
+The dispute is being kept alive by someone who profits from the uncertainty on both sides
+Trade Dispute
+Medium
+06
+A contract clause that could end the dispute has been deliberately misfiled
+Trade Dispute
+Medium
+07
+The partner settlement is applying pressure through a debt no one here wants to acknowledge
+Trade Dispute
+Medium
+08
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+Corruption Scandal
+Medium
+09
+A key witness can be found, but won't speak without protection
+Corruption Scandal
+Medium
+10
+An official named in the evidence is selling property in a hurry
+Corruption Scandal
+Medium
+11
+A letter found this year tells it this way: an alternative source exists but the information is being suppressed
+Economic Event
+Low
+12
+The scarcity was engineered. Someone destroyed the competing supply route
+Economic Event
+Low
+UNDERLYING TENSIONS
+•
+Trade Dispute
+•
+Corruption Scandal
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+37 buyable across 10 categories
+Lodging
+2 option s
+Accommodation
+Lodging (rooms to let)
+Food & drink
+2 option s
+Drink service
+Grain grinding
+Goods & crafts
+7 option s
+Barrel making
+Beeswax candles
+Cask repair
+General trade
+Soap
+Tallow candles
+Weekly market
+Magical services
+2 option s
+Component identification
+Potion brewing
+Healing
+5 option s
+Burial
+Herbal remedies
+Life ceremonies
+Medicines and compounds
+Religious services
+Information
+3 option s
+Monster bounties
+Record of custom
+Route intelligence
+Transportation
+2 option s
+Caravan assembly
+Freight haulage
+Legal & financial
+11 option s
+Bylaws and ordinances
+Dispute adjudication
+Dispute arbitration
+Gate control
+Gate duty
+Grain storage
+Night patrol
+Permit applications
+Quality certification
+Tax payment
+Trade brokerage
+Entertainment
+1 option
+Public performance
+Criminal services
+2 option s
+Fencing stolen goods
+Hired muscle
+ACTIVE SUPPLY CHAINS · 17
+Standing Watch
+Vulnerable
+NEED Defense & Security
+Town watch » Defence services, Weapons training
+Taverns & Social Life
+Vulnerable
+NEED Entertainment & Culture
+Taverns » Lodging, Meals and drink, Stabling
+Fortifications
+Vulnerable
+NEED Defense & Security
+Stone quarry » Town walls
+Herbalism & Remedies
+Running
+NEED Healing & Medicine · EXPORT yes
+Wild foraging areas » Apothecary (established) » Herbal remedies, Potions and elixirs
+Divine & Magical Healing
+Running
+NEED Healing & Medicine
+Hot springs » Houses of worship » Medical care (basic), Spellcasting (minor)
+Beekeeping & Wax
+Running
+NEED Manufacturing & Crafts · EXPORT yes
+Wild foraging areas » Chandler + Apothecary (established) » Wild honey, Candles and wax, Medicinal honey
+Reed & Marsh Harvest
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Marshlands » Chandler + Merchant guilds » Reeds and thatch, Peat fuel, Waterfowl
+Faith & Worship
+Running
+NEED Religion & Civic
+Houses of worship » Religious services, Education (basic), Poor relief
+Pilgrimage & Holy Sites
+Running
+NEED Religion & Civic
+Hot springs » Houses of worship » Religious services, Hospitality for travellers, Poor relief
+Spices & Dyes
+Entrepôt
+NEED Trade & Entrepôt · EXPORT yes
+Merchant guilds » Rare spices and exotic dyes
+Produced in distant lands. Crossroads and port settlements control distribution and take the markup.
+Storage & Logistics
+Entrepôt
+NEED Trade & Entrepôt
+Caravaneer's post » Cargo handling, Goods storage
+Ports and crossroads profit by charging for storage, loading, and onward transport, not by producing anything themselves.
+River Toll
+Entrepôt
+NEED Trade & Entrepôt
+River traffic » Caravaneer's post » Transit trade profit
+Camel Caravan Trade
+Entrepôt
+NEED Trade & Entrepôt · EXPORT yes
+Caravaneer's post » Overland freight revenue
+Adventuring & Escort
+Operational
+NEED Defense & Security
+Adventurers' charter hall » Armed escort, Monster hunting services, Dungeon clearance
+Performance & Theater
+Operational
+NEED Entertainment & Culture
+Traveling performers » Performances, Music and song
+Law & Governance
+Operational
+NEED Religion & Civic
+Town hall » Legal services
+Caravan & Overland Trade
+Operational
+NEED Trade & Entrepôt
+Caravaneer's post + Carriers' guild » Overland cargo transport, Escorted caravan, Pack animal hire
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+24 institutions
+24 institutions; the largest groups are trade and farming (8) and crafts (6).
+Total
+24
+Categories
+8
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Town council
+Civic
+The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.
+Backs
+Arcane Council
+Services
+Record of custom
+: Keeps the charter, rolls, and civic archive
+Bylaws and ordinances
+: Enacts and enforces the town's own rules
+Dispute adjudication
+: Hears the town's civil pleas at the council bench
+Religious
+2 institutions
+Houses of worship
+Essential
+Religious
+Church
+Several houses of worship within town.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals across several congregations.
+Religious services
+: Several congregations covering different districts or communities.
+Burial grounds
+Essential
+Religious
+Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade.
+Backs
+Religious Authorities
+Services
+Burial
+: Interment in the congregation's ground, with the rite that congregation keeps.
+Economy
+8 institutions
+Weekly market
+Essential
+Market
+Trade
+Held by charter. The heart of the town's trade.
+Backs
+Arcane Council
+Services
+General trade
+: Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Market square
+Essential
+Market
+The central plaza where the weekly market and the fairs are held.
+Backs
+Arcane Council
+Services
+Weekly market
+: Regular market days with produce, goods, and livestock.
+Merchant guilds
+Guild
+Trade
+Control trade in specific goods.
+Backs
+Arcane Council
+Services
+Trade brokerage
+: Facilitate large commercial transactions between distant parties.
+Inns
+Trade
+Lodging for the travelling trade.
+Backs
+Arcane Council
+Services
+Accommodation
+: Beds from dormitory to private room. Quality varies by establishment.
+Taverns
+Food
+Houses for drink. And for company.
+Backs
+Arcane Council
+Services
+Drink service
+: Ale, wine, and spirits across multiple establishments.
+Carriers' guild
+Transport
+Trade
+Guild
+Professional carters and teamsters, organised, moving cargo across country for hire. Every route, levy, and winter closure is known to them, and billed for.
+Backs
+Arcane Council
+Services
+Freight haulage
+: Organised road transport for goods between towns. Reliable, guild-backed.
+Town granary
+Essential
+Food
+Shared grain stores that even out the harvests and hold off famine.
+Backs
+Arcane Council
+Services
+Grain storage
+: Municipal grain reserves. Buffers the settlement against poor harvests.
+Caravaneer's post
+Transport
+Guild
+Trade
+Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here.
+Backs
+Arcane Council
+Services
+Route intelligence
+: Road conditions, bandit reports, toll schedules.
+Caravan assembly
+: Register to join an outgoing caravan.
+Crafts
+6 institutions
+Mills
+Essential
+Grain ground at several sites.
+Backs
+Arcane Council
+Services
+Grain grinding
+: Grind grain into flour for bread and other foods.
+Apothecary (established)
+Healing
+Trade
+A proper shop kept by a trained herbalist, its shelves stocked and a back room set aside for consultations. It sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. A few of its keepers also work as chirurgeons.
+Backs
+Arcane Council
+Services
+Herbal remedies
+: Tinctures, poultices, and dried herbs for common ailments.
+Medicines and compounds
+: Prepared medicines for fever, pain, infection, and chronic conditions.
+Chandler
+Trade
+Makes candles of tallow and beeswax, and turns like materials to soap and rope. The town depends on it for lighting.
+Backs
+Arcane Council
+Services
+Beeswax candles
+: Premium candles. Cleaner burn, better light.
+Soap
+: Lye and tallow soap.
+Tallow candles
+: Standard household candles.
+Craft guilds
+Guild
+They set the standard of work, the prices, and the terms of apprenticeship.
+Backs
+Arcane Council
+Services
+Quality certification
+: Guild mark indicating goods meet agreed standards.
+Alchemist shop
+Alchemy
+A shop of alchemical wares and potions, where the simplest healing draught costs roughly a week of a labourer's pay.
+Backs
+Arcane Council
+Services
+Component identification
+: Identify unknown substances, reagents, and monster byproducts.
+Potion brewing
+: Healing potions, antidotes, and alchemical compounds on request.
+Cooper
+Makes barrels for storage and transport.
+Backs
+Arcane Council
+Services
+Barrel making
+: Watertight barrels for ale, wine, salted meat, and fish. Essential packaging for trade.
+Cask repair
+: Re-coopering and repair of used barrels. Cheaper than new for small leaks.
+Infrastructure
+3 institutions
+Housing
+Essential
+Housing
+Multi-story timber and stone buildings.
+Backs
+Arcane Council
+Services
+Lodging (rooms to let)
+: A room let in a private house, by the night or the week.
+Multiple water sources
+Essential
+Water
+Wells and fountains, or water carried in by pipe.
+Backs
+Arcane Council
+Town hall
+Civic
+Meeting place and administrative center.
+Backs
+Arcane Council
+Services
+Dispute arbitration
+: Bring commercial and civil disputes before a magistrate.
+Permit applications
+: Apply for construction, business, and trade permits.
+Tax payment
+: Pay annual and quarterly taxes and levies.
+Defense
+2 institutions
+Town watch
+Law Enforcement
+Defense
+Watchmen serving part-time. Night patrols and gate duty.
+Backs
+Arcane Council
+Services
+Gate duty
+: Check travelers entering and leaving. Note unusual visitors.
+Night patrol
+: Patrol the streets after dark. Deter crime and respond to incidents.
+Town walls
+Defense
+Fortification
+Stone fortifications with gates. Expensive to build and maintain.
+Backs
+Arcane Council
+Services
+Gate control
+: Control who enters and exits. Levy tolls on goods.
+Entertainment
+1 institution
+Traveling performers
+The festivals bring bards, jugglers, and acrobats through.
+Backs
+Arcane Council
+Services
+Public performance
+: Street and square performances: juggling, music, comedy, acrobatics.
+Adventuring
+1 institution
+Adventurers' charter hall
+Military
+Adventuring
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+Backs
+Arcane Council
+Services
+Monster bounties
+: Posted bounties for verified monster kills. Bring proof: claw, ear, or head.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Poor. Its people make their living from medicinal herbs.
+Prosperity
+Poor
+Complexity
+Specialized production and trade
+Trade
+River
+It gets more than its work alone could yield.
+INCOME SOURCES
+Market Taxes
+41%
+Market day stall fees and toll collection on goods entering the market.
+Guild Fees
+33%
+Annual licensing fees and fines levied by guild oversight.
+Property Rents
+19%
+Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+Apothecary & Alchemy
+7%
+Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.
+TRADE FLOWS
+EXPORTS
+•
+Medicinal herbs
+•
+Alchemical reagents
+•
+Wild honey
+•
+Healing waters (bottled)
+•
+Pilgrim hospitality
+•
+Reeds and thatch
+•
+Peat fuel
+•
+Waterfowl
+•
+Herbal remedies
+•
+Potions and elixirs
+•
+Candles and wax
+•
+Rare spices and exotic dyes (transit)
+•
+Alchemical trade (potions, reagents)
+IMPORTS
+•
+Iron
+•
+Grain
+•
+Cut stone and masonry
+•
+Ritual wood and herbs (ancient grove damaged)
+•
+Quality weapons and armour
+•
+Rune-worthy bone and antler
+•
+Rare herbs and roots
+•
+Timber
+LOCAL PRODUCTION
+•
+Honey
+•
+medicinal herbs
+•
+Peat
+•
+Herbal remedies
+•
+Potions and elixirs
+•
+Medical care (basic)
+•
+Spellcasting (minor)
+•
+Wild honey
+•
+Candles and wax
+•
+Reeds and thatch
+•
+Religious services
+•
+Education (basic)
+•
+Hospitality for travellers
+ENTREPÔT
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Grain
+Salt
+FOOD SECURITY
+PRODUCED
+1203
+NEEDED
+1444
+Thin farmland: the fields yield a little under the usual.
+ECONOMIC FLOWS · 17 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Defense & security
+3 chain s · 2 vulnerable
+Town watch
+>
+Defence services
+Weapons training
+Stone quarry
+>
+Town walls
+Adventurers' charter hall
+>
+Armed escort
+Monster hunting services
+Dungeon clearance
+Entertainment & culture
+2 chain s · 1 vulnerable
+Taverns
+>
+Lodging
+Meals and drink
+Stabling
+Traveling performers
+>
+Performances
+Music and song
+Healing & medicine
+2 chain s
+Wild foraging areas
+>
+Apothecary (established)
+>
+Herbal remedies EXPORT
+Potions and elixirs EXPORT
+Hot springs
+>
+Houses of worship
+>
+Medical care (basic)
+Spellcasting (minor)
+Manufacturing & crafts
+1 chain
+Wild foraging areas
+>
+Chandler
+>
+Apothecary (established)
+>
+Wild honey EXPORT
+Candles and wax EXPORT
+Medicinal honey
+Raw materials & fuel
+1 chain
+Marshlands
+>
+Chandler
+>
+Merchant guilds
+>
+Reeds and thatch EXPORT
+Peat fuel EXPORT
+Waterfowl EXPORT
+Religion & civic
+3 chain s
+Houses of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Hot springs
+>
+Houses of worship
+>
+Religious services
+Hospitality for travellers
+Poor relief
+Town hall
+>
+Legal services
+Trade & entrepôt
+5 chain s
+Merchant guilds
+>
+Rare spices and exotic dyes
+Caravaneer's post
+>
+Cargo handling
+Goods storage
+River traffic
+>
+Caravaneer's post
+>
+Transit trade profit
+Caravaneer's post
+>
+Overland freight revenue
+Caravaneer's post
+>
+Carriers' guild
+>
+Overland cargo transport
+Escorted caravan
+Pack animal hire
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Forest
+It sends out healing potions and antidotes. The nearby ancient grove is used up.
+STRATEGIC VALUE
+Low-Medium - difficult to besiege
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+medicinal herbs
+»
+–
+»
+–
+full
+NEARBY RESOURCES
+Depleted
+Ancient Grove
+Abundant
+Wild Foraging Areas
+Hot Springs / Healing Waters
+Stone quarry
+Marshlands
+Commodities available
+· processed/refined in this settlement
+Wild Foraging Areas
+Honey
+Medicinal Herbs
+Hot Springs / Healing Waters
+Stone quarry
+Stone
+Marshlands
+Peat
+IMPORT DEPENDENCIES
+CRITICAL
+Grain
+Salt
+EXPORT POTENTIAL
+healing potions, antidotes
+Very high
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Arcane Council governs.
+PUBLIC LEGITIMACY
+## 40
+40
+Contested
+STABILITY
+Stable
+GOVERNING
+Arcane Council
+Magic
+GOVERNANCE
+Adelheid Rosenfeld, the alchemist and Archmage of the Council, holds the seat of the Arcane Council. The Arcane Council governs Hartgrund. Poverty has left the Arcane Council's right to rule contested in Hartgrund. The Arcane Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+POWER DISTRIBUTION
+Arcane Council 81
+Religious Authorities 19
+POWERS
+Arcane Council
+Magic
+Governing
+Power 81
+Dominant
+Mages govern, and their magic is their claim to rule.
+Religious Authorities
+Religious
+Power 19
+Minor
+Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+FOR THE DM ONLY
+Who really runs this town
+THE RULING THREE OF ARCANE COUNCIL
+Head · Adelheid Rosenfeld, the alchemist
+Second · Wendelgard Köhler, the senior guild master
+Third · Otto Wolf, the granary reeve
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Arcane Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Lightly defended: town walls, held by the town watch. It leans on magic to hold.
+Readiness
+Lightly defended
+Safety
+Moderate
+Watch to population
+0.6
+Food resilience
+32
+GUARD ASSESSMENT
+Some of the town watch take bribes from whoever has coin.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Weak
+Active frontier, with walls and a watch to meet what comes.
+Invasion & War
+Adequate
+Walls, and a watch to keep them.
+Internal Security
+Weak
+Internal security: Moderate. Cases are heard here, but there is almost nowhere to hold anyone.
+Economic Survival
+Adequate
+Money enough for a short crisis; a long one would start eating the reserves within months.
+Disasters & Famine
+Weak
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+Under siege the outlying fields would be lost; the granary would carry the town for about five months at full rations, about eleven months on half, and what is still harvested would stretch it further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Town walls
+Stone fortifications with gates. Expensive to build and maintain.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+Monster response (charter)
+Adventurers' charter hall
+A chartered hall that serves as the region's chief adventuring hub. It posts contracts, grades the monster threats, keeps gear in repair, and runs the large operations no militia could handle.
+CRIMINAL ARCHITECTURE
+Criminal structure · Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+SUPPORTING CAPABILITIES
+Legal Infrastructure
+Council bench only
+Cases heard without detention. Fines and exile only.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, as long as the one trade route it depends on stays open.
+VERDICT
+Viable
+Hartgrund can stand, but only while grain keeps arriving and the routes that bring it stay open.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+Divine & Magical Healing
+KEY METRICS
+Food balance
++0
+Trade access
+river
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+16 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Adelheid Rosenfeld
+the alchemist
+Arcane Council
+Female · early fifties
+10
+Renate Fuchs
+the watch captain
+Arcane Council
+Female · early forties
+9
+Wendelgard Köhler
+the senior guild master
+Arcane Council
+Female · late fifties
+8
+Salome Berger
+the senior craft-guild master
+Female · late thirties
+8
+Bertram Richter
+the dean
+Religious Authorities
+Male · early thirties
+5
+Otto Wolf
+the granary reeve
+Arcane Council
+Male · early sixties
+3
+Hedwig Schulz
+the miller
+Arcane Council
+Female · early forties
+3
+Viktor Schröder
+the carriers' master
+Male · late twenties
+3
+Swanhild Wenzel
+the apothecary
+Female · late sixties
+3
+Gertrud Gärtner
+the charter master
+Arcane Council
+Female · late thirties
+2
+Gunter Wolf
+the post's master
+Arcane Council
+Male · mid-twenties
+2
+Zacharias Lehmann
+the cooper
+Arcane Council
+Male · early thirties
+2
+Heinrich Richter
+the troupe leader
+Male · late twenties
+2
+Wolfhard Wirth
+the innkeeper
+Arcane Council
+Male · mid-sixties
+1
+Andreas Hartmann
+the tavern keeper
+Arcane Council
+Male · late sixties
+1
+Werner Jung
+the chandler
+Male · late fifties
+1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+16 figures
+Ask who matters here and you hear 16 names; Adelheid Rosenfeld, the alchemist, Archmage of the Council, first of Arcane Council, comes first.
+MAJOR FIGURES
+Adelheid Rosenfeld
+the alchemist
+Arcane Council
+PWR 10
+Sex
+Female
+·
+Age
+early fifties
+·
+Standing
+first of Arcane Council, the stronger power here
+Alchemist shop · Archmage of the Council, first of Arcane Council
+Personality
+patient
+Motivation
+Get the alchemist shop through the season without borrowing. — Become someone Renate Fuchs needs as much as they are needed.
+How they deal
+Friendly, but takes their time; hears the whole question before answering it.
+SECRETS
+·
+Has been systematically bribing multiple officials for preferential treatment: A cascade of confessions from any single one of the bribed parties
+RELATIONSHIPS
+· Renate Fuchs - Outstanding Debt
+· Wolfhard Wirth - called by · Outstanding Debt
+· Salome Berger - called by · Genuine Respect
+Renate Fuchs
+the watch captain
+Arcane Council
+PWR 9
+Sex
+Female
+·
+Age
+early forties
+Town watch · member of Arcane Council
+Personality
+incorruptible · Flaw: petty
+Motivation
+Buy iron at the market in bulk this season, while the price is still fair. — Forgive Adelheid Rosenfeld the debt in return for one great favour, when the time comes.
+How they deal
+Promises help easily, and is hard to find when the time comes to give it.
+SECRETS
+·
+Possesses a magical ability they've hidden for their entire career: In some jurisdictions, concealment is itself a crime; in all of them, it changes everything
+RELATIONSHIPS
+· Bertram Richter - Outstanding Debt
+· Adelheid Rosenfeld - called by · Outstanding Debt
+Wendelgard Köhler
+the senior guild master
+Arcane Council
+PWR 8
+Sex
+Female
+·
+Age
+late fifties
+Merchant guilds · second of Arcane Council
+Personality
+perceptive · Flaw: deceitful
+Motivation
+Win the next big piece of work away from the chandler's shop. — Grow the work at the merchant guilds until no one nearby can match it.
+How they deal
+Agrees quickly, and the terms are never quite what you remember agreeing to.
+SECRETS
+·
+Has been protecting a sibling's crime for years (a serious one): Discovery makes them an accessory; the sibling has reason to pre-empt exposure
+RELATIONSHIPS
+· Otto Wolf - Outstanding Debt
+· Hedwig Schulz - called by · Mentor and Successor
+· Gertrud Gärtner - called by · Mentor and Successor
+· Swanhild Wenzel - called by · Outstanding Debt
+· Werner Jung - called by · Outstanding Debt
+· Heinrich Richter - called by · Outstanding Debt
+Salome Berger
+the senior craft-guild master
+PWR 8
+Sex
+Female
+·
+Age
+late thirties
+Craft guilds
+Motivation
+Collect what is owed to the craft guilds before the season is out. — Collect everything Viktor Schröder owes, in full.
+How they deal
+Offers information freely, and asks questions that sound like interest, not prying.
+SECRETS
+·
+Knows something about Wendelgard Köhler that Wendelgard Köhler believes no one else knows, and has been deciding for months whether to use it: Wendelgard Köhler would move against them immediately if they suspected
+RELATIONSHIPS
+· Adelheid Rosenfeld - Genuine Respect
+· Bertram Richter - called by · Outstanding Debt
+· Viktor Schröder - called by · Outstanding Debt
+NOTABLE FIGURES
+Bertram Richter
+PWR 5
+the dean
+Religious Authorities
+Motive:
+Make sure no new rule from those who govern costs the houses of worship anything this season. — Make Renate Fuchs the first of many who owe them.
+Otto Wolf
+PWR 3
+the granary reeve
+Arcane Council
+Motive:
+Fix a problem Wendelgard Köhler has left standing in the Arcane Council, and make sure everyone knows who fixed it. — Build up enough savings at the town granary to ride out two bad years.
+Hedwig Schulz
+PWR 3
+the miller
+Arcane Council
+Motive:
+Be in the room the next time the Arcane Council must decide something that matters. — Build up a store of grain and water power at the mills large enough to last two bad years.
+Viktor Schröder
+PWR 3
+the carriers' master
+Motive:
+Win a title, a seat or an honour, however small. — Be free of what is owed to Salome Berger, completely.
+OTHER NAMES OF NOTE
+Swanhild Wenzel
+· the apothecary
+3
+Gertrud Gärtner
+· the charter master
+Arcane Council
+2
+Gunter Wolf
+· the post's master
+Arcane Council
+2
+Zacharias Lehmann
+· the cooper
+Arcane Council
+2
+Heinrich Richter
+· the troupe leader
+2
+Wolfhard Wirth
+· the innkeeper
+Arcane Council
+1
+Andreas Hartmann
+· the tavern keeper
+Arcane Council
+1
+Werner Jung
+· the chandler
+1
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Hedwig Schulz & Wendelgard Köhler · Mentor and Successor
+Hedwig Schulz and Wendelgard Köhler are teacher and heir. A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+Internal relationships
+•
+Adelheid Rosenfeld and Renate Fuchs · Outstanding Debt
+Renate Fuchs nursed Adelheid Rosenfeld through a winter fever when no one else would come. Adelheid Rosenfeld still owes the debt and still knows it.
+Adelheid Rosenfeld has refused Renate Fuchs a small favour for the first time in years.
+•
+Bertram Richter and Salome Berger · Outstanding Debt
+Bertram Richter borrowed Salome Berger's good name to win a post. Salome Berger has never asked for it back.
+Salome Berger has begun to count the debt Bertram Richter owes among her assets, and has had it written down before witnesses.
+•
+Wendelgard Köhler and Otto Wolf · Outstanding Debt
+Wendelgard Köhler owes Otto Wolf a great deal, and neither has ever said so aloud.
+Otto Wolf is about to call it in.
+•
+Otto Wolf and Gertrud Gärtner · Pragmatic Alliance
+Otto Wolf and Gertrud Gärtner share a council bloc and a list of enemies. They do not share their plans.
+Gertrud Gärtner has been dining with Otto Wolf's rivals. Otto Wolf heard about it from a servant.
+•
+Renate Fuchs and Bertram Richter · Outstanding Debt
+Years ago Bertram Richter did Renate Fuchs a favour too large to repay, and she has been paying it back in small ways ever since.
+Renate Fuchs has begun to act like someone who considers the debt paid. Bertram Richter does not.
+•
+Wolfhard Wirth and Adelheid Rosenfeld · Outstanding Debt
+Wolfhard Wirth owes Adelheid Rosenfeld for an old kindness. Neither mentions it, and both know exactly how much is still owed.
+Someone else has learned what favour Wolfhard Wirth owes Adelheid Rosenfeld, and now has a hold on him too.
+•
+Andreas Hartmann and Wolfhard Wirth · Professional Rivalry
+Andreas Hartmann wants Wolfhard Wirth's position, and the innkeeper wants the tavern keeper's reputation. They are civil in public and unforgiving in private.
+Wolfhard Wirth has been telling clients that Andreas Hartmann's work is slipping. Two of the clients have repeated it to Andreas Hartmann.
+•
+Hedwig Schulz and Wendelgard Köhler · Mentor and Successor
+Hedwig Schulz taught Wendelgard Köhler everything, including how to get the better of the miller.
+A third party has asked Hedwig Schulz, quietly, whether Wendelgard Köhler can be trusted. The answer took too long.
+•
+Gertrud Gärtner and Wendelgard Köhler · Mentor and Successor
+Gertrud Gärtner took Wendelgard Köhler under their wing early and taught them the customs, the clients, and the names worth knowing.
+Wendelgard Köhler has taken on a client Gertrud Gärtner turned away on principle.
+•
+Gunter Wolf and Heinrich Richter · Genuine Respect
+Gunter Wolf trusts Heinrich Richter's word over any written contract. Heinrich Richter has never given a reason to regret it.
+Heinrich Richter has publicly backed a plan that Gunter Wolf thinks will fail. Gunter Wolf has said so once, in private.
+•
+Zacharias Lehmann and Wolfhard Wirth · Professional Rivalry
+Every friend Zacharias Lehmann wins is one Wolfhard Wirth lost, and the reverse. The two keep a polite distance and an exact tally.
+Zacharias Lehmann and Wolfhard Wirth will both present proposals at the next council session. Only one will be accepted.
+•
+Salome Berger and Adelheid Rosenfeld · Genuine Respect
+Salome Berger and Adelheid Rosenfeld have each watched the other do good work. They argue, but each trusts the other's judgment in their own field.
+Salome Berger and Adelheid Rosenfeld are about to be on opposite sides of an important decision.
+•
+Viktor Schröder and Salome Berger · Outstanding Debt
+Salome Berger paid Viktor Schröder's bail eleven years ago and has never mentioned it. Viktor Schröder mentions it to no one.
+Salome Berger has asked Viktor Schröder for a favour against his own interests. It is the first payment Salome Berger has asked for.
+•
+Swanhild Wenzel and Wendelgard Köhler · Outstanding Debt
+Swanhild Wenzel owes Wendelgard Köhler a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+•
+Werner Jung and Wendelgard Köhler · Outstanding Debt
+Wendelgard Köhler kept Werner Jung's name out of a scandal that ruined two others. Werner Jung has taken Wendelgard Köhler's side ever since.
+Wendelgard Köhler has mentioned the debt aloud, at a dinner, in front of Werner Jung's partners.
+•
+Heinrich Richter and Wendelgard Köhler · Outstanding Debt
+Wendelgard Köhler once spoke up for Heinrich Richter when it cost her something to do it. Heinrich Richter has never been asked for anything in return.
+Wendelgard Köhler has asked Heinrich Richter to speak up for someone else, as she once spoke up for him.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Town
+ANCHOR FACTS
+Complexity
+Specialized production and trade
+Food
+Secure
+Magic-dependent
+CULTURAL NOTES
+Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty. Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+IDENTITY
+Name
+Hartgrund
+Tier
+Town
+Population
+722
+Terrain
+Forest
+Layout
+Tightly walled market town, timber yards and sawpits outside the north gate
+Age
+189 years
+Trade access
+River
+Founded
+military veterans given land grants who brought their skills with them
+CULTURAL IDENTITY
+Germanic-inspired
+Germanic-inspired, built in timber and stone.
+Built form
+Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.
+Exchange
+Estate dues, pedlars, and merchant associations connect farms to specialist workshops.
+Foodways
+Meals follow the season and what the household has put by.
+Sacred life
+Parish observance coexists with household customs, saints, oath sites, and seasonal rites.
+Defense
+Households are expected to turn out when called; a standing force comes only as a place grows.
+Social texture
+Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.
+Architecture
+one broad street leading up to the hall organizes the settlement center
+DAILY LIFE
+FOOD BALANCE
+Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+189y old
+Founded 189 years ago, with six events on record and two tensions still unresolved.
+Settlement age
+## 189
+189
+years
+Historical character
+The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards
+Founding
+Founded by
+military veterans given land grants who brought their skills with them
+Initial challenge
+disputes over water rights
+Overcoming
+though the founding was harder than anyone admitted at the time
+Historical events · 6
+Founding (- 189 y)
+Now
+0 y after founding
+95 y after founding
+189 y after founding
+9y AGO
+Still relevant today
+Major
+The Arcane Incident
+· Magical
+Argument over the place of magic and its limits set neighbour against neighbour
+Lasting effects
+·
+The site of the disputed working remains cordoned and warded
+35y AGO
+Still relevant today
+Major
+The Shortage
+· Economic
+A critical resource became scarce, causing hoarding and price gouging
+Lasting effects
+·
+Emergency grain reserves mandated by ordinance since the shortage
+63y AGO
+Still relevant today
+Catastrophic
+The Siege
+· Disaster
+Word of a gathering threat split the settlement over whether to fight, treat, or flee
+Lasting effects
+·
+A standing levy roster kept ready in the town archive
+126y AGO
+Major
+The Migration
+· Demographic
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+136y AGO
+Major
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+158y AGO
+Major
+The Purge
+· Occupation Infiltration
+Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations
+Lasting effects
+·
+Denunciation records from the panic remain sealed in the archive
+Live tensions · 2
+Trade Dispute
+Parties: Merchants who trade with the partner vs Those who want new partners vs Authorities caught between them
+A dispute over the terms of trade with a partner settlement is souring, and it touches every merchant and every purse in the place
+Corruption Scandal
+major
+Parties: Arcane Council vs Reformers vs Complicit beneficiaries
+Corruption among officials has been exposed, but those in power are stifling the investigation
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## HARTGRUND
+HARTGRUND
+Town · Forest
+POPULATION
+## 722
+722
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Medicinal herbs
+SAFETY
+## Moderate
+Moderate
+Defense: Lightly Defended
+GOVERNED BY
+Arcane Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Hartgrund
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Hartgrund
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+Swanhild Wenzel has offered to clear what is left of the debt in one payment. Wendelgard Köhler would rather be repaid in favours.
+## people[].name
+Adelheid Rosenfeld
+## people[].role
+Archmage of the Council
+## people[].why
+seat
+## people[].line
+get the alchemist shop through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## people[].name
+Bertram Richter
+## people[].role
+the dean
+## people[].why
+cleric
+## people[].line
+make sure no new rule from those who govern costs the houses of worship anything this season.
+## people[].says
+want
+## people[].sourcePath
+npcs[1]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. Stores: a granary, about five months of grain.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+Town walls, Town watch, Adventurers' charter hall.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.
+## hooks[].source
+Adelheid Rosenfeld
+## hooks[].text
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+## hooks[].source
+Renate Fuchs
+## hooks[].text
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+## hooks[].source
+Wendelgard Köhler

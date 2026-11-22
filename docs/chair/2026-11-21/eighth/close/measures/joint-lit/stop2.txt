@@ -1,0 +1,7 @@
+thorp {"births":150,"calm":102,"calmContested":0,"calmContestedNoCause":0,"textMissing":0}
+hamlet {"births":150,"calm":99,"calmContested":0,"calmContestedNoCause":0,"textMissing":0}
+village {"births":150,"calm":97,"calmContested":10,"calmContestedNoCause":0,"textMissing":0}
+town {"births":150,"calm":109,"calmContested":4,"calmContestedNoCause":0,"textMissing":0}
+city {"births":150,"calm":110,"calmContested":4,"calmContestedNoCause":0,"textMissing":0}
+metropolis {"births":150,"calm":105,"calmContested":5,"calmContestedNoCause":0,"textMissing":0}
+exit=0

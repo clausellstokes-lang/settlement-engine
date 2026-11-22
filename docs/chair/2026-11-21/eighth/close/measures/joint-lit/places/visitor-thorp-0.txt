@@ -1,0 +1,1868 @@
+== web:Summary/Overview ==
+Portacoloniathorp· 21 pop.· crossroads· 183 years old
+Latin-inspired. Ask about the place and you are told it is run by custom more than by law. Governed by Elder Council · Stable
+"The Occupation left the buildings standing and changed everything else; the place was rebuilt afterwards, down to what people believe about it"
+Desert/Arid
+Open Tonight
+The place
+Portacolonia has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house. Deep eaves shade the open ground between the houses. Someone has left fresh flowers at a small shrine set into a wall. A benefactor's name is carved fresh above a mended well, and people make sure you notice it. A few old signs still carry the occupiers' words, painted over but showing through.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Comfortable
+Safety
+Moderate
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+None
+Monster DefenseCritical
+Economic ResilienceAdequate
+Magical CapabilityCritical
+Food SecurityPressured
+Portacolonia has no market. The thorp keeps few institutions and needs few.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+Evidence of official corruption has surfaced but powerful figures resist investigation
+Elder CouncilReformersComplicit beneficiaries
+A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+Settlement Origin▲
+Built at a major crossroads, and trade comes in on every road.
+A newcomer is noticed by the second day here, and asked what work they mean to do.
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Law & orderStrained
+Defense readinessStrained
+Infrastructure conditionStrained
+Labor capacityStrained
+Religious authorityStrained
+Criminal opportunityElevated
+Healing capacityStrained
+Housing pressureAdequate
+Magical stabilityAdequate
+Social trustAdequate
+FoodPressured
+Public legitimacyTolerated
+Strength of the powersAdequate
+Economic capacityAdequate
+Trade connectivityAdequate
+Ruling authoritySurplus
+Reliance on magic: None
+
+== web:Summary/Plot Hooks ==
+NPCs
+Walpurga Brutus
+A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.
+History
+Occupation Legacy Event
+Resistance fighters kept records that would expose people still in power
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing
+Corruption Scandal
+The investigator who uncovered the corruption has received a death threat
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+An official named in the evidence is selling property in a hurry
+Economic Event
+The scarcity was engineered. Someone destroyed the competing supply route
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+Subsistence farmingEconomy
+Each household farms just enough land to feed itself.
+BacksElder Council
+Household elderGovernment
+One head of household is heard first on the settlement's common matters, out of habit and with no appointment. Nobody named them to it.
+Connection: Elder Walpurga Brutus
+ServicesDispute mediation
+Burial groundReligious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+ServicesBurial
+Wayside shrineReligious
+A modest prayer marker. No clergy in residence.
+ServicesWayside blessing
+The fabric of the place
+Access to external millCrafts
+Must travel to manor/village mill. Home grinding often illegal.
+ServicesGrain milling (a day away)
+DwellingsInfrastructure
+Wattle-and-daub or timber, one or two rooms to a household.
+ServicesHospitality
+Water sourceInfrastructure
+Well or spring. At least a bucketful a person each day.
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+Food & drink(1)▲
+Grain milling (a day away)
+Grain carted to a mill outside the settlement and brought back as flour.
+Access to external mill
+Healing(2)▲
+Burial
+Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Burial ground
+Wayside blessing
+A brief blessing for travelers on the road. Costs nothing; donations welcomed.
+Wayside shrine
+Legal & financial(1)▲
+Dispute mediation
+Settles quarrels between households by custom
+Household elder
+Lodging(1)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+
+== web:Systems/Economics ==
+Comfortable
+Subsistence economy
+It gets about two thirds of what its work could yield, held back by having no market.
+Trade
+crossroads
+Portacolonia pays its way from year to year, and nobody here calls the thorp poor.
+Income Sources▲
+76%
+Harvest What the households grow and raise on their holdings; the main living at this scale.
+24%
+Toll Revenue Tolls taken on the roads that meet here at the crossroads.
+In Portacolonia's reckoning one source stands far above the rest.
+Trade Profile▲
+Exports
+Water rightsOasis provisions
+Imports
+Salt
+Settlement necessity
+Needed, and not brought in: timber and building wood.
+Goods come and go through the thorp, and the thorp takes its part of both.
+Produced locally
+grain
+Food Security▲
+Production: 38 lbs/day+ 2 importedNeed: 42 lbs/dayShort: 2 lbs/day
+Portacolonia grows about nine parts in ten of what it needs, and carts bring in about half the rest. Between them, nearly every household is fed, and a bad season would leave some of them short.
+No granary; about a month and a half in household stores.
+What it puts on the table itself is the field grain.
+There is enough food in Portacolonia, mostly. Portions have got smaller, and people have noticed.
+Portacolonia leans first on its grain harvest for its food, so a bad season for the grain harvest is felt at every table.
+Economic Flows (1 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (2)
+Grain & BreadFood security
+From
+Grain fields
+Via
+Access to external mill
+Faith & WorshipReligion & civic○ Operational
+Wayside shrine
+Outputs
+Religious servicesEducation (basic)
+Ask where Portacolonia gets its salt and somebody will point you at the carts.
+
+== web:Systems/Resources ==
+Terrain
+Desert/Arid
+What the land offers
+✓ Exotic goods✓ Trade hub
+Resource Exploitation▲
+UnexploitedCamel herdsvery high value
+Camel herds→hides→wool→transport capacity→camel leather→caravan services
+Needs: Caravanserai, Leather tanner
+Draws on: desert pasture, water access
+✓ Fully exploitedOasis and water rightshigh value
+Draws on: oasis, water source
+A newcomer to Portacolonia soon hears what its ground is worth to the powers around it, and how little of that worth stays in the thorp.
+Nearby Resources▲
+Abundant
+Camel HerdsStrategic CrossroadsExtensive Grain FieldsIron Ore DepositsOasis and Water Rights
+Commodities available
+Oasis and Water RightswaterdatesCamel Herdslivestockdairywoolanimal hidesExtensive Grain FieldsgrainflourStrategic Crossroadstrade accessIron Ore Depositsironmetalwork
+Gaps & Opportunities▲
+No one here works the camel herds near Portacolonia.
+Export Potential▲
+dried dates, date wine, water rights
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerElder Council (dominant)
+The seatWalpurga Brutus, the household elder
+Public legitimacy
+58Tolerated
+Stability
+Stable
+Walpurga Brutus, the household elder, holds the seat of the Elder Council. The Elder Council governs Portacolonia. Portacolonia tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+The Seat▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerElder CouncilGovernmentDominant▲
+## RulerElder CouncilGovernmentDominant
+Institutions behind this power (7)
+Held under this authority
+Subsistence farming
+Access to external mill
+Burial ground
+Household elder
+Dwellings
+Water source
+Under the ruling power, with no power of its own kind here
+Wayside shrine
+The Powers (1)▲
+100
+Elder Council
+↑ Holds powerGovernment100▲
+## Elder Council↑ Holds powerGovernment100
+↳1 member · first Walpurga Brutus
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+The shape of authority
+The Elder Council at Portacolonia has left obvious decisions untaken, and nobody there can make it take them.
+Rule and succession
+Nobody at Portacolonia is in a position to take the Elder Council's place: whatever the thorp thinks of the Elder Council, no contender stands ready to try.
+Who really runs this thorp
+For the DM only. Nothing here appears on a player view or a shared page.
+Who leads Elder Council
+Head · Walpurga Brutus, the household elder
+The hall
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+Portacolonia is weakly defended, not undefended: there is something to meet trouble with, and not much more than something.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Invasion & War
+The thorp's plan for an army is to not be interesting to one, and everybody here can state the plan.
+Internal Security
+If you are wronged at Portacolonia, there is no court to take it to, and no local is surprised.
+Economic Survival
+Adequate▼
+Portacolonia can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
+Disasters & Famine
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Little here goes unnoticed for long; the neighbours see to that.
+With no gaol at Portacolonia, nobody who does wrong here can be locked away; most go on living beside the people they wronged.
+Portacolonia's books record no gang, guild or racket: what wrongdoing the thorp has, people do on their own account.
+Armed Forces & Fortifications▲
+## Armed Forces & Fortifications
+Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints.
+Portacolonia has no wall, and the beasts of the country around it come right up to the last houses.
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+The thorp has an edge rather than a boundary at Portacolonia, and the edge is wherever the last building happens to be. Nobody at Portacolonia is responsible for defending the thorp; ask who is, and nobody can name anyone. It retains no specialists. Whatever comes out of the country is met by whoever the thorp has, whether or not they are the right answer to it. The thorp has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical ReadinessNone
+No healer is kept here; the sick are tended by their own families.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the thorp's own:
+Medium
+Envelope
+Availabilitymoderate
+Legalityregulated
+Institutional controlunregulated
+Service costcostly
+Riskmoderate
+Religious acceptanceindifferent
+Roles
+Reliance on magic: None
+Economic role: occasional
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+The thorp would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+
+== web:Systems/Outlook ==
+✓ Viable
+Some of what Portacolonia eats is brought in along the roads that meet there; its own land does not produce enough.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+1 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Elder Council (1)▲
+## Elder Council
+Walpurga Brutus
+▲
+## Elder Council › Walpurga Brutus
+Household elder · first of Elder Council
+Elder
+Flaw: bitter
+Holds the seat in a quiet season; there is time to act.
+Constraint: Cannot please everyone at once; whatever the seat gives one side, another asks for next.
+Wants Get the household through the season without borrowing.
+Standing first of Elder Council, the only power here
+How they deal Answers questions. Asks nothing. Remembers more than they show.
+Secret: Knows a child of the household is not who everyone thinks, and has kept it quiet for years
+
+== web:World/Relationships ==
+No neighbours or ties between people are recorded for this settlement.
+
+== web:World/Daily Life ==
+Food
+Pressured
+Access
+Crossroads
+Culture
+Latin
+Portacolonia's purse closes every year ahead. The margin is not large but it is dependable, and there is money laid by behind it.
+Doors are opened late and with care, and the day's work starts a little after first light.
+People talk in the fields while they work, and gather by the wayside shrine when the work is done.
+Children are warned about going down for water alone after dark.
+
+== web:World/Traditions ==
+No traditions are recorded for Portacolonia yet.
+
+== web:World/History ==
+Portacolonia183 years old↺ Reroll
+"The Occupation left the buildings standing and changed everything else; the place was rebuilt afterwards, down to what people believe about it"
+Current Tensions (1)▲
+Corruption scandalmajor
+Evidence of official corruption has surfaced but powerful figures resist investigation
+Elder CouncilReformersComplicit beneficiaries
+Founding▲
+## Founding
+Origin:grew at the intersection of two major trade routes
+Founded by:a single extended family who came and never left
+Early trial:rival claimants to the toll rights
+How survived:through determination and cooperation
+Portacolonia still knows why it was first built, and the thorp has grown well past that since.
+Major Historical Events (4)▲
+## Major Historical Events
+Founded
+Now
+153y
+138y
+77y
+23y
+Infiltration Fear
+Economic
+Occupation Legacy
+The OccupationOccupation Legacycatastrophic
+When the occupiers left, they left behind a thorp of former collaborators and former resisters, none of it ever settled
+23y ago
+Living memory
+▼
+The ShortageEconomicminor
+A critical resource became scarce, causing hoarding and price gouging
+77y ago
+Last century
+The Iron DisputeEconomicmajor
+Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who holds those rights to this day.
+138y ago
+Ancient
+The PurgeInfiltration Fearmajor
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+153y ago
+The iron dispute left a mark on Portacolonia, a legacy that is older than anyone living, though much has changed since.
+
+== web:World/Rumors & News ==
+Available at launch
+What Portacolonia has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Portacolonia's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## PORTACOLONIA
+PORTACOLONIA
+Thorpe · Desert/Arid
+POPULATION
+## 21
+21
+Thorpe
+PROSPERITY
+## Comfortable
+Comfortable
+Top export: Water rights
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Portacolonia
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Comfortable. Portacolonia, a thorpe of 21, has no crisis on its hands this season.
+Population
+21
+Thorpe
+Age
+183 yrs
+Desert/Arid
+Prosperity
+Comfortable
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+4/100
+Economic
+40/100
+Magical
+0/100
+Disaster
+49/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+38
+Needed
+42
+Deficit: 2 · imports cover 50% of gap
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Major
+Corruption Scandal
+Elder Council / Reformers / Complicit beneficiaries
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Built at a major crossroads, and trade comes in on every road. A newcomer is noticed by the second day here, and asked what work they mean to do.
+INSTITUTIONS · 7 TOTAL
+Religious 2
+Infrastructure 2
+Economy 1
+Crafts 1
+Government 1
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+People to voice
+Walpurga Brutus
+the household elder · Holds the seat
+Wants to get the household through the season without borrowing.
+What the players test first
+Food
+Pressured. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Occupation Legacy Event
+Resistance fighters kept records that would expose people still in power.
+Occupation Legacy Event
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+Corruption Scandal
+The investigator who uncovered the corruption has received a death threat.
+SESSION SCRATCH
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (6).
+NPCs
+1 hook
+01
+A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.
+Walpurga Brutus
+Low
+History
+6 hook s
+01
+Resistance fighters kept records that would expose people still in power
+Occupation Legacy Event
+Medium
+02
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing
+Occupation Legacy Event
+Medium
+03
+The investigator who uncovered the corruption has received a death threat
+Corruption Scandal
+Medium
+04
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+Corruption Scandal
+Medium
+05
+An official named in the evidence is selling property in a hurry
+Corruption Scandal
+Medium
+06
+The scarcity was engineered. Someone destroyed the competing supply route
+Economic Event
+Low
+UNDERLYING TENSIONS
+•
+Corruption Scandal
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+5 buyable across 4 categories
+Lodging
+1 option
+Hospitality
+Food & drink
+1 option
+Grain milling (a day away)
+Healing
+2 option s
+Burial
+Wayside blessing
+Legal & financial
+1 option
+Dispute mediation
+ACTIVE SUPPLY CHAINS · 2
+Grain & Bread
+NEED Food Security
+Grain fields » Access to external mill
+Grain is carried out of the settlement to be ground, and the toll taken there leaves no surplus flour to sell on.
+Faith & Worship
+Operational
+NEED Religion & Civic
+Wayside shrine » Religious services, Education (basic)
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+7 institutions
+Seven institutions: subsistence farming, access to external mill, wayside shrine, burial ground, household elder, dwellings and water source.
+Total
+7
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Household elder
+Civic
+One head of household is heard first on the settlement's common matters, out of habit and with no appointment. Nobody named them to it.
+Backs
+Elder Council
+Services
+Dispute mediation
+: Settles quarrels between households by custom
+Religious
+2 institutions
+Wayside shrine
+Religious
+A modest prayer marker. No clergy in residence.
+Backs
+Elder Council
+Services
+Wayside blessing
+: A brief blessing for travelers on the road. Costs nothing; donations welcomed.
+Burial ground
+Essential
+Religious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+1 institution
+Subsistence farming
+Essential
+Agriculture
+Each household farms just enough land to feed itself.
+Backs
+Elder Council
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+Must travel to manor/village mill. Home grinding often illegal.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Wattle-and-daub or timber, one or two rooms to a household.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Well or spring. At least a bucketful a person each day.
+Backs
+Elder Council
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Comfortable. What goes out of here is mostly water rights; it grows less food than it eats, and imports make up about half of the gap.
+Prosperity
+Comfortable
+Complexity
+Subsistence economy
+Trade
+Crossroads
+It gets about two thirds of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+76%
+What the households grow and raise on their holdings; the main living at this scale.
+Toll Revenue
+24%
+Tolls taken on the roads that meet here at the crossroads.
+TRADE FLOWS
+EXPORTS
+•
+Water rights
+•
+Oasis provisions
+IMPORTS
+•
+Salt
+LOCAL PRODUCTION
+•
+Grain
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber and building wood
+FOOD SECURITY
+PRODUCED
+38
+NEEDED
+42
+DEFICIT
+2
+5 % of need
+imports cover 50 % of gap
+Poor farmland: the fields yield well under the usual.
+ECONOMIC FLOWS · 2 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grain fields
+>
+Access to external mill
+Wayside shrine
+>
+Religious services
+Education (basic)
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Desert/Arid
+It sends out dried dates, date wine and water rights.
+STRATEGIC VALUE
+Medium - water sources are strategic, and command any caravan route that comes this way
+WHAT THE LAND OFFERS
+Trade hub
+Exotic goods
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Oasis Water
+»
+–
+»
+–
+full
+UNEXPLOITED
+1
+Camel Herds
+»
+Needs: Caravanserai, Leather tanner
+»
+camel leather, caravan services
+unexploited
+NEARBY RESOURCES
+Abundant
+Oasis and Water Rights
+Camel Herds
+Extensive Grain Fields
+Strategic Crossroads
+Iron Ore Deposits
+Commodities available
+· processed/refined in this settlement
+Oasis and Water Rights
+Water
+Dates
+Camel Herds
+Livestock
+Dairy
+Wool
+animal hides
+Extensive Grain Fields
+Grain
+Flour
+Strategic Crossroads
+Trade Access
+Iron Ore Deposits
+Iron
+Metalwork
+IMPORT DEPENDENCIES
+CRITICAL
+Timber and building wood
+EXPORT POTENTIAL
+dried dates, date wine, water rights
+High
+GAPS & OPPORTUNITIES
+Low
+No one here works the camel herds near Portacolonia.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 58
+58
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Walpurga Brutus, the household elder, holds the seat of the Elder Council. The Elder Council governs Portacolonia. Portacolonia tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+FOR THE DM ONLY
+Who really runs this thorp
+WHO LEADS ELDER COUNCIL
+Head · Walpurga Brutus, the household elder
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.3
+Food resilience
+49
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Critical
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Adequate
+Money enough for a short crisis; a long one would start eating the reserves within months.
+Disasters & Famine
+Adequate
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, but it cannot feed itself: about half of the food it lacks comes in by crossroads trade.
+VERDICT
+Viable
+Some of what Portacolonia eats is brought in along the roads that meet there; its own land does not produce enough.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
+−2
+Trade access
+crossroads
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+1 face
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Walpurga Brutus
+the household elder
+Elder Council
+Female · early forties
+2
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+1 figure
+One person worth knowing: Walpurga Brutus, the household elder, first of Elder Council.
+MAJOR FIGURES
+Walpurga Brutus
+the household elder
+Elder Council
+PWR 2
+Sex
+Female
+·
+Age
+early forties
+·
+Standing
+first of Elder Council, the only power here
+Household elder · first of Elder Council
+Personality
+Flaw: bitter
+Motivation
+Get the household through the season without borrowing. — Outlast every person who ever crossed them.
+How they deal
+Answers questions. Asks nothing. Remembers more than they show.
+SECRETS
+·
+Knows a child of the household is not who everyone thinks, and has kept it quiet for years: If it came out, the household's oldest quarrel would start again
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+This settlement is not yet linked to any neighbours, conflicts, or shared NPCs. Use the Settlements panel to build a network.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Thorpe
+ANCHOR FACTS
+Complexity
+Subsistence economy
+Food
+Pressured
+IDENTITY
+Name
+Portacolonia
+Tier
+Thorpe
+Population
+21
+Terrain
+Desert/Arid
+Layout
+Mud-brick homes clustered around a single shaded well
+Age
+183 years
+Trade access
+Crossroads
+Founded
+a single extended family who came and never left
+CULTURAL IDENTITY
+Latin-inspired
+Latin-inspired. Ask about the place and you are told it is run by custom more than by law.
+Foodways
+What it puts on the table itself is the field grain.
+Architecture
+deep eaves shade the open ground between the houses
+DAILY LIFE
+FOOD BALANCE
+What is grown here and brought in falls short of what people eat each day, so some households eat less than they need.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+183y old
+Founded 183 years ago, with four events on record and one tension still unresolved.
+Settlement age
+## 183
+183
+years
+Historical character
+The Occupation left the buildings standing and changed everything else; the place was rebuilt afterwards, down to what people believe about it
+Founding
+Origin
+grew at the intersection of two major trade routes
+Founded by
+a single extended family who came and never left
+Initial challenge
+rival claimants to the toll rights
+Overcoming
+through determination and cooperation
+Historical events · 4
+Founding (- 183 y)
+Now
+0 y after founding
+92 y after founding
+183 y after founding
+23y AGO
+Still relevant today
+Catastrophic
+The Occupation
+· Exile Return
+When the occupiers left, they left behind a thorp of former collaborators and former resisters, none of it ever settled
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+77y AGO
+Still relevant today
+Minor
+The Shortage
+· Economic
+A critical resource became scarce, causing hoarding and price gouging
+Lasting effects
+·
+In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most
+138y AGO
+Major
+The Iron Dispute
+· Economic
+Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who holds those rights to this day.
+Lasting effects
+·
+Iron production rights still legally contested in some records
+153y AGO
+Major
+The Purge
+· Occupation Infiltration
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 1
+Corruption Scandal
+major
+Parties: Elder Council vs Reformers vs Complicit beneficiaries
+Evidence of official corruption has surfaced but powerful figures resist investigation
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## PORTACOLONIA
+PORTACOLONIA
+Thorpe · Desert/Arid
+POPULATION
+## 21
+21
+Thorpe
+PROSPERITY
+## Comfortable
+Comfortable
+Top export: Water rights
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Portacolonia
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Comfortable. Portacolonia, a thorpe of 21, has no crisis on its hands this season.
+Population
+21
+Thorpe
+Age
+183 yrs
+Desert/Arid
+Prosperity
+Comfortable
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+4/100
+Economic
+40/100
+Magical
+0/100
+Disaster
+49/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+38
+Needed
+42
+Deficit: 2 · imports cover 50% of gap
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Major
+Corruption Scandal
+Elder Council / Reformers / Complicit beneficiaries
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Built at a major crossroads, and trade comes in on every road. A newcomer is noticed by the second day here, and asked what work they mean to do.
+INSTITUTIONS · 7 TOTAL
+Religious 2
+Infrastructure 2
+Economy 1
+Crafts 1
+Government 1
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+People to voice
+Walpurga Brutus
+the household elder · Holds the seat
+Wants to get the household through the season without borrowing.
+What the players test first
+Food
+Pressured. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Occupation Legacy Event
+Resistance fighters kept records that would expose people still in power.
+Occupation Legacy Event
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+Corruption Scandal
+The investigator who uncovered the corruption has received a death threat.
+SESSION SCRATCH
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (6).
+NPCs
+1 hook
+01
+A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.
+Walpurga Brutus
+Low
+History
+6 hook s
+01
+Resistance fighters kept records that would expose people still in power
+Occupation Legacy Event
+Medium
+02
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing
+Occupation Legacy Event
+Medium
+03
+The investigator who uncovered the corruption has received a death threat
+Corruption Scandal
+Medium
+04
+The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+Corruption Scandal
+Medium
+05
+An official named in the evidence is selling property in a hurry
+Corruption Scandal
+Medium
+06
+The scarcity was engineered. Someone destroyed the competing supply route
+Economic Event
+Low
+UNDERLYING TENSIONS
+•
+Corruption Scandal
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+5 buyable across 4 categories
+Lodging
+1 option
+Hospitality
+Food & drink
+1 option
+Grain milling (a day away)
+Healing
+2 option s
+Burial
+Wayside blessing
+Legal & financial
+1 option
+Dispute mediation
+ACTIVE SUPPLY CHAINS · 2
+Grain & Bread
+NEED Food Security
+Grain fields » Access to external mill
+Grain is carried out of the settlement to be ground, and the toll taken there leaves no surplus flour to sell on.
+Faith & Worship
+Operational
+NEED Religion & Civic
+Wayside shrine » Religious services, Education (basic)
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+7 institutions
+Seven institutions: subsistence farming, access to external mill, wayside shrine, burial ground, household elder, dwellings and water source.
+Total
+7
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Household elder
+Civic
+One head of household is heard first on the settlement's common matters, out of habit and with no appointment. Nobody named them to it.
+Backs
+Elder Council
+Services
+Dispute mediation
+: Settles quarrels between households by custom
+Religious
+2 institutions
+Wayside shrine
+Religious
+A modest prayer marker. No clergy in residence.
+Backs
+Elder Council
+Services
+Wayside blessing
+: A brief blessing for travelers on the road. Costs nothing; donations welcomed.
+Burial ground
+Essential
+Religious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+1 institution
+Subsistence farming
+Essential
+Agriculture
+Each household farms just enough land to feed itself.
+Backs
+Elder Council
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+Must travel to manor/village mill. Home grinding often illegal.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Wattle-and-daub or timber, one or two rooms to a household.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Well or spring. At least a bucketful a person each day.
+Backs
+Elder Council
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Comfortable. What goes out of here is mostly water rights; it grows less food than it eats, and imports make up about half of the gap.
+Prosperity
+Comfortable
+Complexity
+Subsistence economy
+Trade
+Crossroads
+It gets about two thirds of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+76%
+What the households grow and raise on their holdings; the main living at this scale.
+Toll Revenue
+24%
+Tolls taken on the roads that meet here at the crossroads.
+TRADE FLOWS
+EXPORTS
+•
+Water rights
+•
+Oasis provisions
+IMPORTS
+•
+Salt
+LOCAL PRODUCTION
+•
+Grain
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber and building wood
+FOOD SECURITY
+PRODUCED
+38
+NEEDED
+42
+DEFICIT
+2
+5 % of need
+imports cover 50 % of gap
+Poor farmland: the fields yield well under the usual.
+ECONOMIC FLOWS · 2 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grain fields
+>
+Access to external mill
+Wayside shrine
+>
+Religious services
+Education (basic)
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Desert/Arid
+It sends out dried dates, date wine and water rights.
+STRATEGIC VALUE
+Medium - water sources are strategic, and command any caravan route that comes this way
+WHAT THE LAND OFFERS
+Trade hub
+Exotic goods
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Oasis Water
+»
+–
+»
+–
+full
+UNEXPLOITED
+1
+Camel Herds
+»
+Needs: Caravanserai, Leather tanner
+»
+camel leather, caravan services
+unexploited
+NEARBY RESOURCES
+Abundant
+Oasis and Water Rights
+Camel Herds
+Extensive Grain Fields
+Strategic Crossroads
+Iron Ore Deposits
+Commodities available
+· processed/refined in this settlement
+Oasis and Water Rights
+Water
+Dates
+Camel Herds
+Livestock
+Dairy
+Wool
+animal hides
+Extensive Grain Fields
+Grain
+Flour
+Strategic Crossroads
+Trade Access
+Iron Ore Deposits
+Iron
+Metalwork
+IMPORT DEPENDENCIES
+CRITICAL
+Timber and building wood
+EXPORT POTENTIAL
+dried dates, date wine, water rights
+High
+GAPS & OPPORTUNITIES
+Low
+No one here works the camel herds near Portacolonia.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 58
+58
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Walpurga Brutus, the household elder, holds the seat of the Elder Council. The Elder Council governs Portacolonia. Portacolonia tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+FOR THE DM ONLY
+Who really runs this thorp
+WHO LEADS ELDER COUNCIL
+Head · Walpurga Brutus, the household elder
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.3
+Food resilience
+49
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Critical
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Adequate
+Money enough for a short crisis; a long one would start eating the reserves within months.
+Disasters & Famine
+Adequate
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, but it cannot feed itself: about half of the food it lacks comes in by crossroads trade.
+VERDICT
+Viable
+Some of what Portacolonia eats is brought in along the roads that meet there; its own land does not produce enough.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
+−2
+Trade access
+crossroads
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+1 face
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Walpurga Brutus
+the household elder
+Elder Council
+Female · early forties
+2
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+1 figure
+One person worth knowing: Walpurga Brutus, the household elder, first of Elder Council.
+MAJOR FIGURES
+Walpurga Brutus
+the household elder
+Elder Council
+PWR 2
+Sex
+Female
+·
+Age
+early forties
+·
+Standing
+first of Elder Council, the only power here
+Household elder · first of Elder Council
+Personality
+Flaw: bitter
+Motivation
+Get the household through the season without borrowing. — Outlast every person who ever crossed them.
+How they deal
+Answers questions. Asks nothing. Remembers more than they show.
+SECRETS
+·
+Knows a child of the household is not who everyone thinks, and has kept it quiet for years: If it came out, the household's oldest quarrel would start again
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+This settlement is not yet linked to any neighbours, conflicts, or shared NPCs. Use the Settlements panel to build a network.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Thorpe
+ANCHOR FACTS
+Complexity
+Subsistence economy
+Food
+Pressured
+IDENTITY
+Name
+Portacolonia
+Tier
+Thorpe
+Population
+21
+Terrain
+Desert/Arid
+Layout
+Mud-brick homes clustered around a single shaded well
+Age
+183 years
+Trade access
+Crossroads
+Founded
+a single extended family who came and never left
+CULTURAL IDENTITY
+Latin-inspired
+Latin-inspired. Ask about the place and you are told it is run by custom more than by law.
+Foodways
+What it puts on the table itself is the field grain.
+Architecture
+deep eaves shade the open ground between the houses
+DAILY LIFE
+FOOD BALANCE
+What is grown here and brought in falls short of what people eat each day, so some households eat less than they need.
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+183y old
+Founded 183 years ago, with four events on record and one tension still unresolved.
+Settlement age
+## 183
+183
+years
+Historical character
+The Occupation left the buildings standing and changed everything else; the place was rebuilt afterwards, down to what people believe about it
+Founding
+Origin
+grew at the intersection of two major trade routes
+Founded by
+a single extended family who came and never left
+Initial challenge
+rival claimants to the toll rights
+Overcoming
+through determination and cooperation
+Historical events · 4
+Founding (- 183 y)
+Now
+0 y after founding
+92 y after founding
+183 y after founding
+23y AGO
+Still relevant today
+Catastrophic
+The Occupation
+· Exile Return
+When the occupiers left, they left behind a thorp of former collaborators and former resisters, none of it ever settled
+Lasting effects
+·
+Collaborator and resistance families still keep apart
+77y AGO
+Still relevant today
+Minor
+The Shortage
+· Economic
+A critical resource became scarce, causing hoarding and price gouging
+Lasting effects
+·
+In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most
+138y AGO
+Major
+The Iron Dispute
+· Economic
+Rights to the iron in the local ground became the subject of a prolonged dispute between the settlement and a rival claimant. The outcome shaped who holds those rights to this day.
+Lasting effects
+·
+Iron production rights still legally contested in some records
+153y AGO
+Major
+The Purge
+· Occupation Infiltration
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 1
+Corruption Scandal
+major
+Parties: Elder Council vs Reformers vs Complicit beneficiaries
+Evidence of official corruption has surfaced but powerful figures resist investigation
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## PORTACOLONIA
+PORTACOLONIA
+Thorpe · Desert/Arid
+POPULATION
+## 21
+21
+Thorpe
+PROSPERITY
+## Comfortable
+Comfortable
+Top export: Water rights
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Portacolonia
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Portacolonia
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+## people[].name
+Walpurga Brutus
+## people[].role
+the household elder
+## people[].why
+seat
+## people[].line
+get the household through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Pressured. No granary; about a month and a half in household stores.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+No walls and no standing force.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+Resistance fighters kept records that would expose people still in power.
+## hooks[].source
+Occupation Legacy Event
+## hooks[].text
+A collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+## hooks[].source
+Occupation Legacy Event
+## hooks[].text
+The investigator who uncovered the corruption has received a death threat.
+## hooks[].source
+Corruption Scandal

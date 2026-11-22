@@ -21,6 +21,17 @@ the per-part `lit-<part>-match.tsv` and `-classed.tsv`, `pins-by-door.tsv`); the
 | `lane/close-1-2026-11-22-join-wip` | 8b935be05 (+ E101's unit in flight) | JOIN (unit 3) on c110dd85b: built by a builder, its diff READ WHOLE by CLOSE-1; NOT YET re-run by CLOSE-1 (red, dark green, lit green, rule 8: queued in `scratchpad/joinlaws/verify/verify.sh`, to be re-launched on the builder's E101 tip) |
 | `lane/close-1-2026-11-22-golden-wip` | builder's (worktree `/home/user/wt/golden`, from 217b628f3) | GOLDEN-LIT (E99): a builder is OUT on `briefs/GOLDEN-LIT.md` (the lit twin of the golden master, prepared, NEVER recorded; `close/OWNER-GOLDEN-LIT.md` the owner's draft). Lands only in the flip's own stack, step 4 |
 
+HANDED OVER (2026-11-22 16:30 UTC, at about 590,000 by this seat's own count; E101's mark 600,000). FOR CLOSE-2, IN THIS ORDER:
+(1) JOIN: its builder was resumed on E101 (the living-content duplicate's roster-key check into arm (a), red first, then the
+duplicate cut or kept with a header note): read its report (the builder is a subagent of CLOSE-1's session: if it cannot
+be reached, read `lane/close-1-2026-11-22-join-wip`'s log and diff); then CLOSE-1's own re-run, written and NOT yet
+run: `scratchpad/joinlaws/verify/verify.sh` (dark green over the six files, the seat-clamp plant red, the lit copy's
+green, one build, `tests/build` and `tests/lint` whole), re-launched on the builder's final tip; then "JOIN <commit>".
+(2) GOLDEN-LIT: its builder is OUT (subagent of CLOSE-1's session, worktree `/home/user/wt/golden`); read its diff whole
+and `close/OWNER-GOLDEN-LIT.md`; push `lane/close-1-2026-11-22-golden-wip`.
+(3) UNIT 6: `measures/joint-lit/JOINT-MEASURE-LIT.md` (stop condition 1 OWED: read the trouble cause slots by shareAll in
+its `SAME-CENSUS.md`; 2 PLAUSIBLY passed; 3 saturates; STORY at one position by size).
+(4) UNIT 7: `FOR-THE-OWNER-DRAFT.md`, re-cut from the final census.
 DONE AND ACCEPTED: unit 1 (the trial join), unit 2 (the lit ref), CLOSE-FIXTURE (a true fault found and cured; lands
 in the next stack), unit 4's REHEARSAL (the lit half only, by E90: 3,765 files, 43,183 tests, 204 red, 54 listed, 150
 new: 146 pins, 1 re-cut, 2 faults: U8 to fortune; the powers leaf ruled E91 a step of the flip, proven 15/15), the

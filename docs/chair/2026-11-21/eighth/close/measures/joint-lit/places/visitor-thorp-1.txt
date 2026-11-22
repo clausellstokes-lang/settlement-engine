@@ -1,0 +1,2085 @@
+== web:Summary/Overview ==
+Dionpetrathorp· 28 pop.· isolated· 295 years old
+Greek-inspired: built on mountain ground. Governed by Elder Council · Desperate — hunger is eroding order; monsters on the roads
+"Ask anyone here what year something happened and they will tell you whether it was before or after the Siege. Time is measured by it"
+Mountain
+Open Tonight
+The place
+The smoke from Dionpetra's chimneys is thin. People here look at your pack before they look at your face, and then look away, ashamed of having looked. Two citizens argue a point of law loudly enough for the neighbours to stop and listen.
+Active crisisFamineOpen the Crisis tab
+Each week more people in Dionpetra go hungry, and those in charge have not stopped it.
+Since the harvest failed, food is power in Dionpetra, and every household is watching what the others eat.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Struggling
+Poor before the famine; Struggling while it lasts.
+Safety
+Strained
+Viability
+Not viable
+Defense
+Vulnerable
+Reliance on magic
+Relied upon
+The thorp leans on magic for food (magical provision), but its arcane strength is very weak.
+Monster DefenseCritical
+Economic ResilienceCritical
+Magical CapabilityCritical
+Food SecurityDeficit — active famine
+Dionpetra keeps no market. The thorp keeps few institutions and needs few.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+Those hoarding what they canThose who cannot pay the pricesThose who would fix a fair price
+Settlement Origin▲
+Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with what it produces itself.
+A newcomer is noticed by the second day here, and asked what work they mean to do.
+
+== web:Summary/Crisis ==
+Famine.
+Dionpetra has gone short of food for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.
+Who it touches
+bears the brunt: Nikomedissa Attaleiates · the only one named here of a power that loses by the crisis
+holds the lever: Christophoros Attaleiates · nobody here could, so this one stepped in for the crisis
+takes the fall: Nikomedissa Attaleiates · holds the seat, and takes the blame while the right to it is in dispute
+exploits it: no power gains
+Stakes
+Elder Council loses · its own people feel the crisis first
+Levers
+No house here holds what this crisis turns on.
+What the players see first
+Food: Deficit — Active Famine. No granary; about three days in the larder.
+Defence: Palisade, Household levy.
+If nothing is done
+No one can earn a normal living while the famine lasts, and every coin goes on food.
+Hook
+Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+FoodDeficit — active famine
+Public legitimacyLegitimacy crisis
+Law & orderCollapsed
+Labor capacityCritical
+Infrastructure conditionCritical
+Economic capacityStrained
+Defense readinessStrained
+Social trustStrained
+Criminal opportunityElevated
+Trade connectivityStrained
+Religious authorityStrained
+Healing capacityStrained
+Ruling authorityStrained
+Housing pressureAdequate
+Magical stabilityAdequate
+Strength of the powersAdequate
+Reliance on magic: Relied upon
+This reading includes the current condition: famine.
+
+== web:Summary/Plot Hooks ==
+NPCs
+Nikomedissa Attaleiates
+They sold a batch they knew was bad, and the customer it sickened is now asking who supplied it.
+History
+Famine
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+Resource Scarcity
+A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out
+A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others
+Outlook
+Survival Crisis
+The settlement is starving, and its hungriest are turning to banditry.
+Scarce Food
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Household levyDefense
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+BacksElder Council
+ServicesDispute mediation
+PalisadeDefense
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Subsistence farmingEconomy
+Scarce in the famine. Every household works just enough land to stay alive, and no more.
+Informal elder consensusGovernment
+The oldest or best-regarded farmer steers the common decisions, and does it by agreement.
+Connection: Eldest Nikomedissa Attaleiates
+ServicesCommunity mediation
+Burial groundReligious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+ServicesBurial
+The fabric of the place
+Access to external millCrafts
+No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden.
+ServicesGrain milling (a day away) (scarce)
+DwellingsInfrastructure
+Wattle-and-daub or timber, one or two rooms to a household.
+ServicesHospitality
+Water sourceInfrastructure
+A well or a spring, yielding at least a bucketful a person each day.
+Access to a house of worshipReligious
+The nearest house of worship is the village's, a walk of a few miles away for services.
+ServicesRite of entryWeekly rite
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Food & drink(1)▲
+Grain milling (a day away)
+Scarce in the famine. Grain carted to a mill outside the settlement and brought back as flour.
+Access to external mill
+Healing(3)▲
+Burial
+Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Burial ground
+Rite of entry
+The rite that admits a person to the faith. Required for most civil recognition.
+Access to a house of worship
+Weekly rite
+The weekly service. Attendance expected of all residents.
+Legal & financial(2)▲
+Community mediation
+The elder hears disputes and suggests resolution. No enforcement, but social pressure is real.
+Informal elder consensus
+Dispute mediation
+Settles quarrels between households by custom
+Household levy
+Lodging(1)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+
+== web:Systems/Economics ==
+Struggling
+Poor before the famine; Struggling while it lasts.
+Subsistence — survival economy
+It gets about half of what its work could yield, held back by having no market.
+Trade
+isolated
+Dionpetra is poor, and the road to it is long and hard. What the road does not bring in, the people here go without.
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Income Sources▲
+100%
+Harvest Scarce in the famine. What the households grow and raise on their holdings; the main living at this scale.
+Dionpetra does not spread its living across many trades: one carries the place, and the rest are small beside it.
+Food Security▲
+Production: 19 lbs/day+ 15 by magical provisionNeed: 56 lbs/dayShort: 22 lbs/day
+No food comes into Dionpetra by trade. Magical provision makes up about a quarter of what it needs. Most households go short, and hunger is already here.
+No granary; about three days in the larder.
+Meals follow the season and what the household has put by.
+Not all of Dionpetra's food is grown or bought: some of what the thorp eats is provided by spell or by prayer, and the thorp would go shorter without it.
+Economic Flows▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (1)
+Faith & WorshipReligion & civic
+Via
+Access to a house of worship
+No house at Dionpetra makes a trade of the timber around it.
+
+== web:Systems/Resources ==
+Terrain
+Mountain
+What the land offers
+✓ Mining
+Resource Exploitation▲
+UnexploitedMineral hot springshigh value
+Mineral hot springs→mineral water→salts→therapeutic pools→medicines→restorative treatments
+Needs: Alchemist shop, Apothecary
+Draws on: hot spring source, knowledge of properties
+UnexploitedMountain timbermedium value
+Mountain timber→lumber→planks→charcoal→building timber→charcoal fuel
+Needs: Sawmill, Carpenters' guild, Charcoal burner
+Draws on: mountain forest, logging routes
+UnexploitedTimbermedium value
+Timber→lumber→planks→furniture→buildings
+Needs: Sawmill, Carpenters' guild
+Draws on: forest
+Anyone who looks at Dionpetra's position can see why someone would want to hold it.
+Nearby Resources▲
+Abundant
+Coal or Peat DepositsHot Springs / Healing WatersMineral Hot SpringsManaged WoodlandMountain Timber
+Commodities available
+Mountain TimbertimberMineral Hot SpringsManaged WoodlandHot Springs / Healing WatersCoal or Peat Depositscoal
+Gaps & Opportunities▲
+No one here works the timber near Dionpetra.
+No one here works the mineral hot springs near Dionpetra.
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerElder Council (dominant)
+The seatNikomedissa Attaleiates, the eldest
+Public legitimacy
+6Legitimacy Crisis
+Governance fractured.
+Stability
+Desperate — hunger is eroding order; monsters on the roads
+The Elder Council governs Dionpetra. Its seat is held by Nikomedissa Attaleiates, the eldest. Poverty and insecurity have cost the Elder Council its standing. Few in Dionpetra still accept its right to rule. The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+The Seat▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerElder CouncilGovernmentDominant▲
+## RulerElder CouncilGovernmentDominant
+Institutions behind this power (9)
+Held under this authority
+Subsistence farming
+Access to external mill
+Burial ground
+Informal elder consensus
+Dwellings
+Water source
+Palisade
+Household levy
+Under the ruling power, with no power of its own kind here
+Access to a house of worship
+The Powers (1)▲
+100
+⚠
+Elder Council
+↑ Holds powerGovernment100▲
+## ⚠Elder Council↑ Holds powerGovernment100
+↳1 member · first Nikomedissa Attaleiates
+Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.
+The shape of authority
+The Elder Council at Dionpetra has left obvious decisions untaken, and nobody there can make it take them.
+Rule and succession
+People at Dionpetra may grumble, but nobody in the thorp stands ready to lead them against the Elder Council.
+Crime and the hall
+Dionpetra is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.
+Who really runs this thorp
+For the DM only. Nothing here appears on a player view or a shared page.
+Who leads Elder Council
+Head · Nikomedissa Attaleiates, the eldest
+The hall
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.
+Dionpetra has people under arms, but too few and too badly placed to hold off a serious attack for long.
+Military status
+Internal pressure
+On the road into Dionpetra, hungry eyes follow anyone carrying a sack or driving a cart.
+No one can earn a normal living while the famine lasts, and every coin goes on food.
+The longer the hunger lasts at Dionpetra, the less its defenders can do, and nothing is filling the stores again yet. The thorp may not come through this crisis, and what it spends on defence now only buys time.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+The country around Dionpetra is thick with creatures, and the thorp keeps both a wall and people to hold it, and both are in use constantly.
+Invasion & War
+Weak▼
+Every household at Dionpetra would send someone to the walls, and everyone knows that townsfolk with spears are no trained army.
+Internal Security
+If you are wronged at Dionpetra, there is no court to take it to, and no local is surprised.
+Economic Survival
+Dionpetra has no money to meet trouble, so each misfortune goes unmended and leaves the thorp weaker for the next.
+Disasters & Famine
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about three days at full rations, about six days on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Strained — famine conditions
+People are hungry and stealing to eat. Whoever controls the food now has the say. Anyone known to have food hidden away is robbed, or worse.
+Hunger has made thieves of ordinary people at Dionpetra, and anyone known to have food is a target.
+Active crime patterns
+desperation theft
+Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.
+black market food
+What food there is goes to whoever can pay the holder's price.
+Armed Forces & Fortifications1 wall 1 force ▲
+## Armed Forces & Fortifications1 wall 1 force
+Fortifications
+Palisade
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Dionpetra keeps its palisade in repair, and the only people who would stand on the defences are the thorp's own.
+Standing forces
+Household levy
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+The wall around Dionpetra turns back a wandering beast and slows a raid; nobody counts who comes in, because there is no gate to count them at. The thorp's people take up arms when they must and go back to work after; they are not soldiers by trade. The thorp sends whoever it can against things they are not trained for, and pays for it each time. The thorp has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical ReadinessNone
+No healer is kept here; the sick are tended by their own families.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the thorp's own:
+Medium
+Envelope
+Availabilitylimited
+Legalityregulated
+Institutional controlunregulated
+Service costcostly
+Riskmoderate
+Religious acceptanceindifferent
+Roles
+Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship
+Economic role: common
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+A visitor to Dionpetra soon learns how much the thorp leans on help beyond ordinary work, and on the people who give it.
+
+== web:Systems/Outlook ==
+✗ Not viable
+Dionpetra cannot last as things stand.
+Judged at the first survey; not re-run since.
+Set side by side, the accounts of Dionpetra disagree on points that matter, and no one of them settles the rest.
+2 critical
+Critical Issues (2)▲
+Food supplyCrisis Cutting the Food Supply
+The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.
+The crisis is cutting into the food supply now.
+Food productionUncovered Local Food Deficit
+Settlement cannot cover ~22 lbs of food per day (39% of needs) and has no dependable trade route.
+Suggested fixes
+→Strengthen the local foodshed
+→Establish seasonal access, patronage, or a dependable trade route
+
+== web:World/NPCs ==
+2 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Elder Council (1)▲
+## Elder Council
+Nikomedissa Attaleiates
+▲
+## Elder Council › Nikomedissa Attaleiates
+Informal elder consensus · first of Elder Council
+Eldest
+Flaw: vindictive Temperament: generous
+Holds the seat in name; when it calls the neighbours out, fewer come than used to.
+Constraint: Has no paid hands to make its word stick; it must win people back one household at a time.
+Wants Pay someone back for a wrong done to them.
+Standing first of Elder Council, the only power here
+Disposition generous
+How they deal Says little and sends you to someone younger.
+Secret: Sold off the settlement's emergency stores three months ago and reported them destroyed in a flood
+In no power (1)▲
+## In no power
+Christophoros Attaleiates
+## In no power › Christophoros Attaleiates
+Rations the food
+
+== web:World/Relationships ==
+No neighbours or ties between people are recorded for this settlement.
+
+== web:World/Daily Life ==
+Food
+Deficit — Active Famine
+Access
+Isolated
+Culture
+Greek
+Active stress
+Famine
+The thorp never quite makes ends meet. Every month something it needs waits for money that does not come.
+Food is what holds Dionpetra back. However its trades do, the thorp cannot grow richer while it cannot feed itself.
+The first light goes to walking the edges of the fields; the ordinary work begins once that is done.
+People gather at one another's doors in the evening, and by day where the water is drawn.
+Children are warned about wasting anything that could still be mended or used again, and about going out to look for whatever is heard in the night.
+
+== web:World/Traditions ==
+The founding traditions of Dionpetra.
+⌂
+The Founding Procession
+## The Founding Procession
+Founding
+Kept in Seedtime, the ninth week.
+A walking procession that honours the founding. It is overseen by the Elder Council. Dionpetra has kept it since its founding 295 years ago by a discharged soldier who liked the view and had nowhere better to be.
+▲
+The Hearth Vigil
+## The Hearth Vigil
+Hearth
+Kept in Deepwinter, the seventh week.
+A vigil kept through the night that honours hearth and household.
+
+== web:World/History ==
+Dionpetra295 years old↺ Reroll
+"Ask anyone here what year something happened and they will tell you whether it was before or after the Siege. Time is measured by it"
+Current Tensions (1)▲
+Resource Scarcity
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+Those hoarding what they canThose who cannot pay the pricesThose who would fix a fair price
+Founding▲
+## Founding
+Origin:grew at a strategic mountain pass
+Founded by:a discharged soldier who liked the view and had nowhere better to be
+Early trial:disease and hardship in the early winters
+How survived:through determination and cooperation
+Whatever fed the settlement in other years has failed it this year, and its children are going hungry.
+The oldest houses in Dionpetra stand at its middle, and everything newer has been built outward from them.
+Major Historical Events (3)▲
+## Major Historical Events
+Founded
+Now
+238y
+167y
+96y
+Magical
+Disaster
+Occupation Legacy
+The OccupationOccupation Legacymajor
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+96y ago
+Ancient
+▼
+The SiegeDisastercatastrophic
+News of approaching danger divided the community on how to respond
+167y ago
+The Arcane IncidentMagicalmajor
+The question of how far magic should be permitted or controlled split the settlement
+238y ago
+Deep history
+
+== web:World/Rumors & News ==
+Available at launch
+What Dionpetra has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Dionpetra's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+The thorp has no church of its own; its people walk to the next village’s parish church for the rites. Most folk attend the rites through the year.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## DIONPETRA
+DIONPETRA
+Thorpe · Mountain
+POPULATION
+## 28
+28
+Thorpe
+PROSPERITY
+## Struggling
+Struggling
+SAFETY
+## Strained — Famine Conditions
+Strained — Famine Conditions
+Defense: Vulnerable
+Prosperity: Poor before the famine; Struggling while it lasts.
+GOVERNED BY
+Elder Council
+ACTIVE CRISES · 1
+Famine
+In Dionpetra whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Dionpetra
+SETTLEMENT DOSSIER
+## Strained — Famine Conditions › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Struggling. In Dionpetra, a thorpe of 28, the talk is all of the famine: people queue for what food is handed out, and every meal is smaller than the last. It may not survive as it stands.
+Population
+28
+Thorpe
+Age
+295 yrs
+Mountain
+Prosperity
+Struggling
+Safety
+Strained — famine conditions
+Stability
+Desperate — hunger is eroding order; monsters on the roads
+Prosperity: Poor before the famine; Struggling while it lasts.
+ACTIVE CRISES
+Famine
+Famine :
+Newcomers to Dionpetra find doors shut and no work going; nobody has food to spare for another mouth.
+»
+Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+5/100
+Economic
+1/100
+Magical
+0/100
+Disaster
+11/100
+Enforcement ratio
+Those who keep order clearly outmatch the criminals.
+Food balance
+Produced
+19
+Needed
+56
+Deficit: 22 · magical provision covers 15
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Resource Scarcity
+Those hoarding what they can / Those who cannot pay the prices / Those who would fix a fair price
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with what it produces itself. A newcomer is noticed by the second day here, and asked what work they mean to do.
+INSTITUTIONS · 9 TOTAL
+Religious 2
+Infrastructure 2
+Defense 2
+Economy 1
+Crafts 1
+Government 1
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+Active crisis
+Famine. In Dionpetra whoever holds grain decides who eats, and they know it. The worst of it falls on Nikomedissa Attaleiates.
+People to voice
+Nikomedissa Attaleiates
+the eldest · bears the brunt
+Wants to pay someone back for a wrong done to them.
+Christophoros Attaleiates
+Rations the food · holds the lever
+Wants to share out the food without being crushed between those who want it.
+What the players test first
+Food
+Deficit — Active Famine. No granary; about three days in the larder.
+Defence
+Palisade, Household levy.
+Hooks
+Famine
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+Survival Crisis
+The settlement is starving, and its hungriest are turning to banditry.
+Scarce Food
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+Famine.
+Dionpetra has gone short of food for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.
+Who it touches
+bears the brunt: Nikomedissa Attaleiates · the only one named here of a power that loses by the crisis
+holds the lever: Christophoros Attaleiates · nobody here could, so this one stepped in for the crisis
+takes the fall: Nikomedissa Attaleiates · holds the seat, and takes the blame while the right to it is in dispute
+Stakes
+Elder Council loses · its own people feel the crisis first
+Levers
+No house here holds what this crisis turns on.
+If nothing is done
+No one can earn a normal living while the famine lasts, and every coin goes on food.
+SESSION SCRATCH
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (4).
+NPCs
+1 hook
+01
+They sold a batch they knew was bad, and the customer it sickened is now asking who supplied it.
+Nikomedissa Attaleiates
+Low
+History
+4 hook s
+01
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+Famine
+High
+02
+A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out
+Resource Scarcity
+Medium
+03
+A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+Resource Scarcity
+Medium
+04
+A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others
+Resource Scarcity
+Medium
+Outlook
+2 hook s
+01
+The settlement is starving, and its hungriest are turning to banditry.
+Survival Crisis
+High
+02
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+Scarce Food
+Medium
+UNDERLYING TENSIONS
+•
+Resource Scarcity
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+7 buyable across 4 categories
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Lodging
+1 option
+Hospitality
+Food & drink
+1 option
+Grain milling (a day away) (scarce)
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Legal & financial
+2 option s
+Community mediation
+Dispute mediation
+ACTIVE SUPPLY CHAINS · 1
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+9 institutions
+Nine institutions; the largest groups are faith (2) and infrastructure (2).
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Total
+9
+Categories
+6
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Informal elder consensus
+Civic
+The oldest or best-regarded farmer steers the common decisions, and does it by agreement.
+Backs
+Elder Council
+Services
+Community mediation
+: The elder hears disputes and suggests resolution. No enforcement, but social pressure is real.
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+The nearest house of worship is the village's, a walk of a few miles away for services.
+Backs
+Elder Council
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+1 institution
+Subsistence farming
+Essential
+Agriculture
+Scarce in the famine. Every household works just enough land to stay alive, and no more.
+Backs
+Elder Council
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Scarce in the famine. Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Wattle-and-daub or timber, one or two rooms to a household.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+A well or a spring, yielding at least a bucketful a person each day.
+Backs
+Elder Council
+Defense
+2 institutions
+Palisade
+Defense
+Fortification
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Backs
+Elder Council
+Household levy
+Defense
+Military
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+Backs
+Elder Council
+Services
+Dispute mediation
+: Settles quarrels between households by custom
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Struggling. It grows less food than it eats, and nothing comes in to make up the gap.
+Prosperity
+Struggling
+Complexity
+Subsistence — survival economy
+Trade
+Isolated
+Prosperity: Poor before the famine; Struggling while it lasts.
+It gets about half of what its work could yield, held back by having no market.
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+INCOME SOURCES
+Harvest
+100%
+Scarce in the famine. What the households grow and raise on their holdings; the main living at this scale.
+NECESSITY IMPORTS
+FOOD SECURITY
+PRODUCED
+19
+NEEDED
+56
+DEFICIT
+22
+39 % of need
+magical provision covers 15
+Poor farmland: the fields yield well under the usual. The crisis has left about a third of the usual local food production.
+ECONOMIC FLOWS · 1 CHAIN
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Access to a house of worship
+SHADOW ECONOMY
+desperation theft
+black market food
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Mountain
+STRATEGIC VALUE
+High - defensible position, mineral wealth
+WHAT THE LAND OFFERS
+Mining
+RESOURCE CHAINS
+UNEXPLOITED
+3
+Timber
+»
+Needs: Sawmill, Carpenters' guild
+»
+furniture, buildings
+unexploited
+Mountain Timber
+»
+Needs: Sawmill, Carpenters' guild, Charcoal burner
+»
+building timber, charcoal fuel
+unexploited
+Hot Springs Mineral
+»
+Needs: Alchemist shop, Apothecary
+»
+medicines, restorative treatments
+unexploited
+NEARBY RESOURCES
+Abundant
+Mountain Timber
+Mineral Hot Springs
+Managed Woodland
+Hot Springs / Healing Waters
+Coal or Peat Deposits
+Commodities available
+· processed/refined in this settlement
+Mountain Timber
+Timber
+Mineral Hot Springs
+Managed Woodland
+Hot Springs / Healing Waters
+Coal or Peat Deposits
+Coal
+GAPS & OPPORTUNITIES
+Low
+No one here works the timber near Dionpetra.
+Low
+No one here works the mineral hot springs near Dionpetra.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 6
+6
+Legitimacy Crisis
+Governance fractured.
+STABILITY
+Desperate — hunger is eroding order; monsters on the roads
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+The Elder Council governs Dionpetra. Its seat is held by Nikomedissa Attaleiates, the eldest. Poverty and insecurity have cost the Elder Council its standing. Few in Dionpetra still accept its right to rule. The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.
+FOR THE DM ONLY
+Who really runs this thorp
+WHO LEADS ELDER COUNCIL
+Head · Nikomedissa Attaleiates, the eldest
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: a palisade, held by the household levy. It leans on magic to hold.
+ACTIVE MILITARY STATUS
+Famine
+On the road into Dionpetra, hungry eyes follow anyone carrying a sack or driving a cart.
+Readiness
+Vulnerable
+Safety
+Strained — famine conditions
+Watch to population
+4.3
+Food resilience
+11
+GUARD ASSESSMENT
+There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+An embattled region, and only a palisade and a citizen militia to hold it.
+Invasion & War
+Weak
+A palisade and armed townsfolk: enough to turn raiders away, not enough against an army that brings siege gear.
+Internal Security
+Critical
+Internal security: Strained — Famine Conditions. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Critical
+There is no money to meet a crisis; any lasting trouble would find nothing to spend.
+Disasters & Famine
+Critical
+In famine. Hunger is the disaster this row grades, and it has already come. Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about three days at full rations, about six days on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Palisade
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Standing forces
+Household levy
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+CRIMINAL ARCHITECTURE
+desperation theft
+black market food
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Not viable
+Not viable. Settlement cannot cover ~22 lbs of food per day (39% of needs) and has no dependable trade route. One more problem as grave stands behind it.
+VERDICT
+Not viable
+Dionpetra cannot last as things stand.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+ACTIVE ISSUES · 2
+Critical
+Uncovered Local Food Deficit
+SUGGESTED FIXES
+»
+Strengthen the local foodshed
+»
+Establish seasonal access, patronage, or a dependable trade route
+DM NOTE
+Critical
+Crisis Cutting the Food Supply
+The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.
+DM NOTE
+The crisis is cutting into the food supply now.
+KEY METRICS
+Food balance
+−22
+Trade access
+isolated
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+2 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Nikomedissa Attaleiates
+the eldest
+Elder Council
+Female · early forties
+1
+Christophoros Attaleiates
+Rations the food
+Male
+1
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+2 figures
+Ask who matters here and you hear two names; Nikomedissa Attaleiates, the eldest, first of Elder Council, comes first.
+MAJOR FIGURES
+Nikomedissa Attaleiates
+the eldest
+Elder Council
+PWR 1
+Sex
+Female
+·
+Age
+early forties
+·
+Standing
+first of Elder Council, the only power here
+Informal elder consensus · first of Elder Council
+Personality
+generous · Flaw: vindictive
+Motivation
+Pay someone back for a wrong done to them. — See the informal elder consensus out of debt for good, with money set aside for bad years.
+How they deal
+Says little and sends you to someone younger.
+SECRETS
+·
+Sold off the settlement's emergency stores three months ago and reported them destroyed in a flood: The flood was real. The reserves were already gone. The paperwork is missing one date
+Christophoros Attaleiates
+Rations the food
+PWR 1
+Sex
+Male
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+This settlement is not yet linked to any neighbours, conflicts, or shared NPCs. Use the Settlements panel to build a network.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Thorpe
+ANCHOR FACTS
+Complexity
+Subsistence — survival economy
+Food
+Deficit — Active Famine
+Magic-dependent
+Famine
+IDENTITY
+Name
+Dionpetra
+Tier
+Thorpe
+Population
+28
+Terrain
+Mountain
+Layout
+Sheltered below a ridge, paths carved through the rock
+Age
+295 years
+Trade access
+Isolated
+Founded
+a discharged soldier who liked the view and had nowhere better to be
+CULTURAL IDENTITY
+Greek-inspired
+Greek-inspired: built on mountain ground.
+Foodways
+Meals follow the season and what the household has put by.
+Architecture
+whitewashed courts and stone steps catch the light between the houses
+DAILY LIFE
+FOOD BALANCE
+What is grown here and brought in falls short of what people eat each day, so some households eat less than they need.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+295y old
+Founded 295 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 295
+295
+years
+Historical character
+Ask anyone here what year something happened and they will tell you whether it was before or after the Siege. Time is measured by it
+Founding
+Origin
+grew at a strategic mountain pass
+Founded by
+a discharged soldier who liked the view and had nowhere better to be
+Initial challenge
+disease and hardship in the early winters
+Overcoming
+through determination and cooperation
+Stress note
+Whatever fed the settlement in other years has failed it this year, and its children are going hungry.
+Historical events · 3
+Founding (- 295 y)
+Now
+0 y after founding
+148 y after founding
+295 y after founding
+96y AGO
+Major
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Wartime property seizures remain legally unresolved
+167y AGO
+Catastrophic
+The Siege
+· Disaster
+News of approaching danger divided the community on how to respond
+Lasting effects
+·
+The heads of the families still keep count of who could be called on to fight
+238y AGO
+Major
+The Arcane Incident
+· Magical
+The question of how far magic should be permitted or controlled split the settlement
+Lasting effects
+·
+Spellcasting now requires a licence from the local authority
+Live tensions · 1
+Resource Scarcity
+Parties: Those hoarding what they can vs Those who cannot pay the prices vs Those who would fix a fair price
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## DIONPETRA
+DIONPETRA
+Thorpe · Mountain
+POPULATION
+## 28
+28
+Thorpe
+PROSPERITY
+## Struggling
+Struggling
+SAFETY
+## Strained — Famine Conditions
+Strained — Famine Conditions
+Defense: Vulnerable
+Prosperity: Poor before the famine; Struggling while it lasts.
+GOVERNED BY
+Elder Council
+ACTIVE CRISES · 1
+Famine
+In Dionpetra whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Dionpetra
+SETTLEMENT DOSSIER
+## Strained — Famine Conditions › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Struggling. In Dionpetra, a thorpe of 28, the talk is all of the famine: people queue for what food is handed out, and every meal is smaller than the last. It may not survive as it stands.
+Population
+28
+Thorpe
+Age
+295 yrs
+Mountain
+Prosperity
+Struggling
+Safety
+Strained — famine conditions
+Stability
+Desperate — hunger is eroding order; monsters on the roads
+Prosperity: Poor before the famine; Struggling while it lasts.
+ACTIVE CRISES
+Famine
+Famine :
+Newcomers to Dionpetra find doors shut and no work going; nobody has food to spare for another mouth.
+»
+Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+5/100
+Economic
+1/100
+Magical
+0/100
+Disaster
+11/100
+Enforcement ratio
+Those who keep order clearly outmatch the criminals.
+Food balance
+Produced
+19
+Needed
+56
+Deficit: 22 · magical provision covers 15
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Resource Scarcity
+Those hoarding what they can / Those who cannot pay the prices / Those who would fix a fair price
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Off the trade routes and under-fed by its own land. Nothing is brought in, and every season it must make do with what it produces itself. A newcomer is noticed by the second day here, and asked what work they mean to do.
+INSTITUTIONS · 9 TOTAL
+Religious 2
+Infrastructure 2
+Defense 2
+Economy 1
+Crafts 1
+Government 1
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+Active crisis
+Famine. In Dionpetra whoever holds grain decides who eats, and they know it. The worst of it falls on Nikomedissa Attaleiates.
+People to voice
+Nikomedissa Attaleiates
+the eldest · bears the brunt
+Wants to pay someone back for a wrong done to them.
+Christophoros Attaleiates
+Rations the food · holds the lever
+Wants to share out the food without being crushed between those who want it.
+What the players test first
+Food
+Deficit — Active Famine. No granary; about three days in the larder.
+Defence
+Palisade, Household levy.
+Hooks
+Famine
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+Survival Crisis
+The settlement is starving, and its hungriest are turning to banditry.
+Scarce Food
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+Famine.
+Dionpetra has gone short of food for a second season. Rationing has begun, the wealthy are hoarding, and the children are visibly hungry.
+Who it touches
+bears the brunt: Nikomedissa Attaleiates · the only one named here of a power that loses by the crisis
+holds the lever: Christophoros Attaleiates · nobody here could, so this one stepped in for the crisis
+takes the fall: Nikomedissa Attaleiates · holds the seat, and takes the blame while the right to it is in dispute
+Stakes
+Elder Council loses · its own people feel the crisis first
+Levers
+No house here holds what this crisis turns on.
+If nothing is done
+No one can earn a normal living while the famine lasts, and every coin goes on food.
+SESSION SCRATCH
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (4).
+NPCs
+1 hook
+01
+They sold a batch they knew was bad, and the customer it sickened is now asking who supplied it.
+Nikomedissa Attaleiates
+Low
+History
+4 hook s
+01
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+Famine
+High
+02
+A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out
+Resource Scarcity
+Medium
+03
+A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+Resource Scarcity
+Medium
+04
+A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others
+Resource Scarcity
+Medium
+Outlook
+2 hook s
+01
+The settlement is starving, and its hungriest are turning to banditry.
+Survival Crisis
+High
+02
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+Scarce Food
+Medium
+UNDERLYING TENSIONS
+•
+Resource Scarcity
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+7 buyable across 4 categories
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Lodging
+1 option
+Hospitality
+Food & drink
+1 option
+Grain milling (a day away) (scarce)
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Legal & financial
+2 option s
+Community mediation
+Dispute mediation
+ACTIVE SUPPLY CHAINS · 1
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+9 institutions
+Nine institutions; the largest groups are faith (2) and infrastructure (2).
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+Total
+9
+Categories
+6
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Informal elder consensus
+Civic
+The oldest or best-regarded farmer steers the common decisions, and does it by agreement.
+Backs
+Elder Council
+Services
+Community mediation
+: The elder hears disputes and suggests resolution. No enforcement, but social pressure is real.
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+The nearest house of worship is the village's, a walk of a few miles away for services.
+Backs
+Elder Council
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+1 institution
+Subsistence farming
+Essential
+Agriculture
+Scarce in the famine. Every household works just enough land to stay alive, and no more.
+Backs
+Elder Council
+Crafts
+1 institution
+Access to external mill
+Essential
+Agriculture
+No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Scarce in the famine. Grain carted to a mill outside the settlement and brought back as flour.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Wattle-and-daub or timber, one or two rooms to a household.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+A well or a spring, yielding at least a bucketful a person each day.
+Backs
+Elder Council
+Defense
+2 institutions
+Palisade
+Defense
+Fortification
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Backs
+Elder Council
+Household levy
+Defense
+Military
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+Backs
+Elder Council
+Services
+Dispute mediation
+: Settles quarrels between households by custom
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Struggling. It grows less food than it eats, and nothing comes in to make up the gap.
+Prosperity
+Struggling
+Complexity
+Subsistence — survival economy
+Trade
+Isolated
+Prosperity: Poor before the famine; Struggling while it lasts.
+It gets about half of what its work could yield, held back by having no market.
+The descriptions here are of ordinary times. While the famine lasts, a row it touches is marked.
+INCOME SOURCES
+Harvest
+100%
+Scarce in the famine. What the households grow and raise on their holdings; the main living at this scale.
+NECESSITY IMPORTS
+FOOD SECURITY
+PRODUCED
+19
+NEEDED
+56
+DEFICIT
+22
+39 % of need
+magical provision covers 15
+Poor farmland: the fields yield well under the usual. The crisis has left about a third of the usual local food production.
+ECONOMIC FLOWS · 1 CHAIN
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Access to a house of worship
+SHADOW ECONOMY
+desperation theft
+black market food
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Mountain
+STRATEGIC VALUE
+High - defensible position, mineral wealth
+WHAT THE LAND OFFERS
+Mining
+RESOURCE CHAINS
+UNEXPLOITED
+3
+Timber
+»
+Needs: Sawmill, Carpenters' guild
+»
+furniture, buildings
+unexploited
+Mountain Timber
+»
+Needs: Sawmill, Carpenters' guild, Charcoal burner
+»
+building timber, charcoal fuel
+unexploited
+Hot Springs Mineral
+»
+Needs: Alchemist shop, Apothecary
+»
+medicines, restorative treatments
+unexploited
+NEARBY RESOURCES
+Abundant
+Mountain Timber
+Mineral Hot Springs
+Managed Woodland
+Hot Springs / Healing Waters
+Coal or Peat Deposits
+Commodities available
+· processed/refined in this settlement
+Mountain Timber
+Timber
+Mineral Hot Springs
+Managed Woodland
+Hot Springs / Healing Waters
+Coal or Peat Deposits
+Coal
+GAPS & OPPORTUNITIES
+Low
+No one here works the timber near Dionpetra.
+Low
+No one here works the mineral hot springs near Dionpetra.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 6
+6
+Legitimacy Crisis
+Governance fractured.
+STABILITY
+Desperate — hunger is eroding order; monsters on the roads
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+The Elder Council governs Dionpetra. Its seat is held by Nikomedissa Attaleiates, the eldest. Poverty and insecurity have cost the Elder Council its standing. Few in Dionpetra still accept its right to rule. The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.
+FOR THE DM ONLY
+Who really runs this thorp
+WHO LEADS ELDER COUNCIL
+Head · Nikomedissa Attaleiates, the eldest
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: a palisade, held by the household levy. It leans on magic to hold.
+ACTIVE MILITARY STATUS
+Famine
+On the road into Dionpetra, hungry eyes follow anyone carrying a sack or driving a cart.
+Readiness
+Vulnerable
+Safety
+Strained — famine conditions
+Watch to population
+4.3
+Food resilience
+11
+GUARD ASSESSMENT
+There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+An embattled region, and only a palisade and a citizen militia to hold it.
+Invasion & War
+Weak
+A palisade and armed townsfolk: enough to turn raiders away, not enough against an army that brings siege gear.
+Internal Security
+Critical
+Internal security: Strained — Famine Conditions. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Critical
+There is no money to meet a crisis; any lasting trouble would find nothing to spend.
+Disasters & Famine
+Critical
+In famine. Hunger is the disaster this row grades, and it has already come. Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the thorp for about three days at full rations, about six days on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Palisade
+Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.
+Standing forces
+Household levy
+One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.
+CRIMINAL ARCHITECTURE
+desperation theft
+black market food
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Not viable
+Not viable. Settlement cannot cover ~22 lbs of food per day (39% of needs) and has no dependable trade route. One more problem as grave stands behind it.
+VERDICT
+Not viable
+Dionpetra cannot last as things stand.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+ACTIVE ISSUES · 2
+Critical
+Uncovered Local Food Deficit
+SUGGESTED FIXES
+»
+Strengthen the local foodshed
+»
+Establish seasonal access, patronage, or a dependable trade route
+DM NOTE
+Critical
+Crisis Cutting the Food Supply
+The crops failed, and only about a third of the usual harvest will come in. The winter ahead will be hungry.
+DM NOTE
+The crisis is cutting into the food supply now.
+KEY METRICS
+Food balance
+−22
+Trade access
+isolated
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+2 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Nikomedissa Attaleiates
+the eldest
+Elder Council
+Female · early forties
+1
+Christophoros Attaleiates
+Rations the food
+Male
+1
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+2 figures
+Ask who matters here and you hear two names; Nikomedissa Attaleiates, the eldest, first of Elder Council, comes first.
+MAJOR FIGURES
+Nikomedissa Attaleiates
+the eldest
+Elder Council
+PWR 1
+Sex
+Female
+·
+Age
+early forties
+·
+Standing
+first of Elder Council, the only power here
+Informal elder consensus · first of Elder Council
+Personality
+generous · Flaw: vindictive
+Motivation
+Pay someone back for a wrong done to them. — See the informal elder consensus out of debt for good, with money set aside for bad years.
+How they deal
+Says little and sends you to someone younger.
+SECRETS
+·
+Sold off the settlement's emergency stores three months ago and reported them destroyed in a flood: The flood was real. The reserves were already gone. The paperwork is missing one date
+Christophoros Attaleiates
+Rations the food
+PWR 1
+Sex
+Male
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+This settlement is not yet linked to any neighbours, conflicts, or shared NPCs. Use the Settlements panel to build a network.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Thorpe
+ANCHOR FACTS
+Complexity
+Subsistence — survival economy
+Food
+Deficit — Active Famine
+Magic-dependent
+Famine
+IDENTITY
+Name
+Dionpetra
+Tier
+Thorpe
+Population
+28
+Terrain
+Mountain
+Layout
+Sheltered below a ridge, paths carved through the rock
+Age
+295 years
+Trade access
+Isolated
+Founded
+a discharged soldier who liked the view and had nowhere better to be
+CULTURAL IDENTITY
+Greek-inspired
+Greek-inspired: built on mountain ground.
+Foodways
+Meals follow the season and what the household has put by.
+Architecture
+whitewashed courts and stone steps catch the light between the houses
+DAILY LIFE
+FOOD BALANCE
+What is grown here and brought in falls short of what people eat each day, so some households eat less than they need.
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+295y old
+Founded 295 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 295
+295
+years
+Historical character
+Ask anyone here what year something happened and they will tell you whether it was before or after the Siege. Time is measured by it
+Founding
+Origin
+grew at a strategic mountain pass
+Founded by
+a discharged soldier who liked the view and had nowhere better to be
+Initial challenge
+disease and hardship in the early winters
+Overcoming
+through determination and cooperation
+Stress note
+Whatever fed the settlement in other years has failed it this year, and its children are going hungry.
+Historical events · 3
+Founding (- 295 y)
+Now
+0 y after founding
+148 y after founding
+295 y after founding
+96y AGO
+Major
+The Occupation
+· Exile Return
+An occupation had ended years before, yet those who collaborated and those who resisted still lived as neighbours, the reckoning never made
+Lasting effects
+·
+Wartime property seizures remain legally unresolved
+167y AGO
+Catastrophic
+The Siege
+· Disaster
+News of approaching danger divided the community on how to respond
+Lasting effects
+·
+The heads of the families still keep count of who could be called on to fight
+238y AGO
+Major
+The Arcane Incident
+· Magical
+The question of how far magic should be permitted or controlled split the settlement
+Lasting effects
+·
+Spellcasting now requires a licence from the local authority
+Live tensions · 1
+Resource Scarcity
+Parties: Those hoarding what they can vs Those who cannot pay the prices vs Those who would fix a fair price
+A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## DIONPETRA
+DIONPETRA
+Thorpe · Mountain
+POPULATION
+## 28
+28
+Thorpe
+PROSPERITY
+## Struggling
+Struggling
+SAFETY
+## Strained — Famine Conditions
+Strained — Famine Conditions
+Defense: Vulnerable
+Prosperity: Poor before the famine; Struggling while it lasts.
+GOVERNED BY
+Elder Council
+ACTIVE CRISES · 1
+Famine
+In Dionpetra whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Dionpetra
+SETTLEMENT DOSSIER
+## Strained — Famine Conditions › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Dionpetra
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## crisis.type
+Famine
+## crisis.place
+Dionpetra
+## crisis.person
+Nikomedissa Attaleiates
+## crisis.persons[].name
+Nikomedissa Attaleiates
+## crisis.persons[].role
+brunt
+## crisis.persons[].roleLabel
+bears the brunt
+## crisis.persons[].crisis
+Famine
+## crisis.persons[].kind
+famine
+## crisis.line
+Famine. In Dionpetra whoever holds grain decides who eats, and they know it. The worst of it falls on Nikomedissa Attaleiates.
+## opening
+Famine. In Dionpetra whoever holds grain decides who eats, and they know it. The worst of it falls on Nikomedissa Attaleiates.
+## people[].name
+Nikomedissa Attaleiates
+## people[].role
+the eldest
+## people[].why
+cast
+## people[].castLabel
+bears the brunt
+## people[].castId
+npc_informal_elder_consensus
+## people[].castKind
+famine
+## people[].line
+pay someone back for a wrong done to them.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## people[].name
+Christophoros Attaleiates
+## people[].role
+Rations the food
+## people[].why
+cast
+## people[].castLabel
+holds the lever
+## people[].castId
+npc_temp_grain
+## people[].castKind
+famine
+## people[].line
+share out the food without being crushed between those who want it.
+## people[].says
+want
+## people[].sourcePath
+npcs[1]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Deficit — Active Famine. No granary; about three days in the larder.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+Palisade, Household levy.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+In the famine, Nikomedissa Attaleiates of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+## hooks[].source
+Famine
+## hooks[].text
+The settlement is starving, and its hungriest are turning to banditry.
+## hooks[].source
+Survival Crisis
+## hooks[].text
+No food can be bought in from outside now, so the food already here is all there is, and its price climbs every week. The settlement must decide how to share it, and those who hold it are watching it decide.
+## hooks[].source
+Scarce Food

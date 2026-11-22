@@ -1,0 +1,2136 @@
+== web:Summary/Overview ==
+Suryaagamvillage· 145 pop.· road· 134 years old
+South-Asian-inspired, built around the tank, kin by kin. Governed by Elected Reeve · Stable
+"People here are careful not to show off their money. The Trade Collapse is long past, but flaunting wealth still looks like having learned nothing from it"
+Hills
+Open Tonight
+The place
+The first building you pass on the way into Suryaagam is somebody's house, and so is the second, and so, it turns out, is most of the rest. Households cluster around shared wells and water channels. Flour dust lies pale on the doorsteps, and the whole place smells of the ovens. Food is being handed out to anyone who asks, and the line is patient.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Moderate
+Safety
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+None
+Monster DefenseCritical
+Economic ResilienceWeak
+Magical CapabilityCritical
+Food SecuritySecure
+Suryaagam has no market. Few in Suryaagam hold an office.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both
+Households on the low groundLandowners on the high groundThose who say the water will never come
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+Settlement Origin▲
+Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+Notable connection
+Atharva Ghosh and Kumar Bhat are teacher and heir. Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+Full relationship web →
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Defense readinessCritical
+Law & orderStrained
+Infrastructure conditionStrained
+Criminal opportunityElevated
+Healing capacityStrained
+Economic capacityAdequate
+Housing pressureAdequate
+Labor capacityAdequate
+Public legitimacyTolerated
+Social trustAdequate
+Strength of the powersAdequate
+Trade connectivityAdequate
+Magical stabilityAdequate
+Religious authorityAdequate
+Ruling authorityAdequate
+FoodSecure
+Reliance on magic: None
+
+== web:Summary/Plot Hooks ==
+NPCs
+Atharva Ghosh
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+Kumar Bhat
+A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.
+History
+Political Event
+The ailing ruler wants a final errand completed before naming a successor
+Great Flood
+The ditches that carry off the water are choked, and the household bound to clear them refuses
+Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come
+Economic Event
+The route could be reopened, but someone with power prefers it stay closed
+Religious Event
+The pilgrim trade made one family rich enough to buy the office that authenticates relics
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+MillCrafts
+Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged.
+Connection: Reeve Atharva Ghosh, the miller
+BacksElected Reeve
+ServicesGrain milling
+Common grazing landEconomy
+Common grazing held by the village as a whole, next to the open fields, for every household's beasts.
+ServicesPasturage
+FarmlandEconomy
+Open-field agriculture with crop rotation.
+ServicesGrain at harvest
+Village reeveGovernment
+A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.
+ServicesAdministrative oversight
+GraveyardReligious
+Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it.
+BacksReligious Authorities
+ServicesBurial
+House of worshipReligious
+Stone-built and central to everything. Tithing is not optional.
+Connection: Purohit Kumar Bhat
+ServicesLife ceremoniesReligious services
+Priest (resident)Religious
+Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.
+The fabric of the place
+DwellingsInfrastructure
+Timber-framed, raised on stone foundations.
+ServicesHospitality
+Multiple water sourcesInfrastructure
+Wells and springs throughout village.
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+Not available for a village: Goods & Crafts.
+Suryaagam lacks one house a place its size usually has.
+Food & drink(2)▲
+Grain at harvest
+Grain sold by the sack to a household, straight from the field at harvest.
+Farmland
+Grain milling
+Process grain to flour
+Mill
+Healing(3)▲
+Burial
+Prepare and inter the dead. Religious rites included where applicable.
+Graveyard
+Life ceremonies
+Births, marriages, and funerals. Essential community functions.
+House of worship
+Religious services
+Rites, observances, and the seasonal calendar.
+Legal & financial(1)▲
+Administrative oversight
+Manage the village's affairs day to day. Allocate strips and common access.
+Village reeve
+Lodging(1)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+Transportation(1)▲
+Pasturage
+Grazing on the common for a traveller's beasts, for a small fee.
+Common grazing land
+
+== web:Systems/Economics ==
+Moderate
+Agricultural surplus with trade links
+It gets about four fifths of what its work could yield, held back by having no market.
+Trade
+road
+With a little left over each year, Suryaagam gets by on a surplus farm trade, and every year people argue over how to spend it.
+Income Sources▲
+81%
+Harvest What the households grow and raise on their holdings; the main living at this scale.
+19%
+Church Tithes Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+In Suryaagam's reckoning one source stands far above the rest. The religious houses at Suryaagam are heard in its dealings, and a quarrel with them is one the village's traders feel. Not enough of the luxury goods that Suryaagam needs comes from the country here.
+Trade Profile▲
+Exports
+Grain surplusMilled flourSacred woodRitual components
+Imports
+Incense and votive candlesSaltSandalwood and camphor
+Settlement necessity
+Needed, and not brought in: luxury goods, spices, fine textiles.
+There is always something going out, and not always the same thing.
+Produced locally
+grainflourReligious servicesEducation (basic)
+Food Security▲
+Production: 338 lbs/dayNeed: 290 lbs/day
+Suryaagam grows more than it eats, with some to put by against a bad year.
+No granary; about a month and a half in household stores.
+What it puts on the table itself is bread from the home fields. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.
+In an ordinary season Suryaagam has enough to eat, or near enough.
+Suryaagam's own food comes first of all from its grain harvest, so one bad year for the grain harvest is felt across the whole village.
+Economic Flows (2 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (2)✓ Productive (2)
+Grain & BreadFood security✓ Running
+From
+Grain fields
+Via
+Mill
+Outputs
+Baked goodsGrain surplusAgricultural surplus
+Faith & WorshipReligion & civic✓ Running
+House of worship
+Religious servicesEducation (basic)Poor relief
+Suryaagam brings in salt from outside.
+
+== web:Systems/Resources ==
+Terrain
+Hills
+What the land offers
+✓ Mining✓ Stone quarrying
+Resource Exploitation▲
+UnexploitedStonemedium value
+Stone→cut stone→stone blocks→buildings→monuments
+Needs: Stone quarry, Stonemasons' guild
+Draws on: quarry site
+✓ Fully exploitedGrainmedium value
+Draws on: farmland, water source
+The people of Suryaagam know what their ground is worth to others, and know that is reason enough for someone to come for it. It sells none of its stone beyond the village. It would fetch barely enough to pay for the work.
+Nearby Resources▲
+Open Grazing Land
+Abundant
+Ancient GroveExtensive Grain FieldsStone quarry
+Commodities available
+Extensive Grain FieldsgrainflourAncient Grovemedicinal herbshoneyStone quarrystone
+Gaps & Opportunities▲
+No one here works the stone near Suryaagam.
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerElected Reeve (dominant)
+The seatAtharva Ghosh, the miller and Reeve
+Public legitimacy
+50Tolerated
+Stability
+Stable
+The Elected Reeve governs Suryaagam. Its seat is held by Atharva Ghosh, the miller and Reeve. Suryaagam tolerates the Elected Reeve, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+The Seat and Its Contenders (2)▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerElected ReeveGovernmentDominant▲
+## RulerElected ReeveGovernmentDominant
+Institutions behind this power (6)
+Held under this authority
+Farmland
+Common grazing land
+Mill
+Village reeve
+Dwellings
+Multiple water sources
+ContenderReligious AuthoritiesReligiousStrong▼
+The Powers (2)▲
+57
+43
+Elected Reeve
+↑ Holds powerGovernment57▲
+## Elected Reeve↑ Holds powerGovernment57
+↳1 member · first Atharva Ghosh
+One of the peasantry, elected by the rest, manages labour and mediates disputes, and answers to the people who chose them.
+Religious Authorities
+Contests the seatReligious43▼
+## Religious AuthoritiesContests the seatReligious43
+↳1 member · first Kumar Bhat
+The Web (1)▲
+How the powers stand to one another, grouped by the kind of tie.
+↔Dependent(1)
+Elected Reeve↔Religious Authoritiesstable
+The Elected Reeve holds the seat and collects the taxes; the Religious Authorities tell people that the Elected Reeve's rule is right and ordained. Each props up the other.
+Rule and succession
+The Elected Reeve outweighs everyone at Suryaagam who wants its place, and the whole village knows who they are. The Elected Reeve holds on, but has to watch them.
+Crime and the hall
+Suryaagam has no settled view of the Elected Reeve yet; the first crisis will make one for it.
+Who really runs this village
+For the DM only. Nothing here appears on a player view or a shared page.
+Who leads Elected Reeve
+Head · Atharva Ghosh, the miller
+The hall
+The seat is not in criminal hands. Nobody at the head of the Elected Reeve answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+RulerElected ReeveGovernmentDominant▼
+ContenderReligious AuthoritiesReligiousStrong▲
+## ContenderReligious AuthoritiesReligiousStrong
+Institutions behind this power (3)
+A house of this faith
+House of worship
+Graveyard
+Priest (resident)
+↑ Holds powerGovernment57▼
+Contests the seatReligious43▲
+## Religious AuthoritiesContests the seatReligious43
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in the shadow of the Elected Reeve, close enough to matter and too far behind to lead.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.
+Suryaagam would struggle to hold against anything more than a handful of raiders, and the people who live there know it.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Invasion & War
+Weak▼
+Suryaagam has no line and no force. Organized aggression cannot be resisted here; what preserves the village is distance, diplomacy, or being beneath notice.
+Internal Security
+The village settles things itself, quickly, and does not always settle them well.
+Economic Survival
+Suryaagam pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
+Disasters & Famine
+Adequate▼
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the village for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Safety here depends on where you are, and when. Locals watch over the main paths; quieter spots after dark carry genuine risk. Most people here know where trouble is likely, and keep clear of it.
+Visitors to Suryaagam are told which few streets to avoid, and the advice turns out to be right.
+Suryaagam's books record no gang, guild or racket: what wrongdoing the village has, people do on their own account.
+Armed Forces & Fortifications▲
+## Armed Forces & Fortifications
+Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints.
+Suryaagam has no wall, and the beasts of the country around it come right up to the last houses.
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+You can walk into Suryaagam from any direction and pass nobody on the way in. The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response. The village sends whoever it can against things they are not trained for, and pays for it each time. Whoever defends Suryaagam, none of them works with magic.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical ReadinessClergy care
+Clerical care. Basic wound and disease management.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the village's own:
+High
+Envelope
+Availabilitybroad
+Legalityregulated
+Institutional controlunregulated
+Service costmoderate
+Riskelevated
+Religious acceptancehostile
+Roles
+Reliance on magic: None
+Economic role: occasional
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+Without any magic at all, Suryaagam would still keep its living.
+
+== web:Systems/Outlook ==
+✓ Viable
+Suryaagam feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+2 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Elected Reeve (1)▲
+## Elected Reeve
+Atharva Ghosh
+▲
+## Elected Reeve › Atharva Ghosh
+Mill · Reeve, first of Elected Reeve
+Master Miller
+Mentor and SuccessorKumar Bhat
+Kumar Bhat holds a tie to them: Mutual Leverage
+Holds the seat, and in a place this small everyone knows it; most quarrels end at its door. Still the miller as well.
+Constraint: There is coin for the everyday work and little over; any new building or hire means asking the households for more.
+Wants Get the mill through the season without borrowing.
+Standing first of Elected Reeve, the stronger power here
+How they deal Talks freely about the harvest and who brought what to the mill; it is a good place to hear who is short this year.
+Secret: Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+Religious Authorities (1)▲
+## Religious Authorities
+Kumar Bhat
+## Religious Authorities › Kumar Bhat
+House of worship · first of Religious Authorities
+Purohit
+Mutual LeverageAtharva Ghosh
+Atharva Ghosh holds a tie to them: Mentor and Successor
+Leads the faith from the house of worship; in quiet times the work is the services, the feast days and the burials.
+Constraint: Must see to the faith's own people as well as its flock, and both expect the same patience.
+Wants Ask Atharva Ghosh for advice on one hard decision this season.
+Standing first of Religious Authorities, the weaker power here
+How they deal Says little until it is clear what you can offer.
+Secret: One of their children is not theirs biologically, and they know it
+
+== web:World/Relationships ==
+NPC Relationships (2)▲
+All (2)
+Atharva GhoshMentor and SuccessorKumar Bhat
+Reeve · lifelong · the priest
+▲
+Atharva Ghosh once told a full room that Kumar Bhat was the best pupil they had taught. Atharva Ghosh has not said it since.
+Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+Kumar BhatMutual LeverageAtharva Ghosh
+the priest · unbreakable · Reeve
+Kumar Bhat and Atharva Ghosh each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.
+The balance between Kumar Bhat and Atharva Ghosh has recently shifted. Atharva Ghosh has noticed; Kumar Bhat has not, yet.
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+Road
+Culture
+South Asian
+Nothing about Suryaagam's condition asks to be remarked on. The village pays its own way and has a little in hand.
+Doors are opened late and with care, and the day's work starts a little after first light.
+Of an evening people sit out at their doors, and by day they meet by the house of worship.
+Children are warned about going anywhere alone after dark.
+
+== web:World/Traditions ==
+No traditions are recorded for Suryaagam yet.
+
+== web:World/History ==
+Suryaagam134 years old↺ Reroll
+"People here are careful not to show off their money. The Trade Collapse is long past, but flaunting wealth still looks like having learned nothing from it"
+Current Tensions (1)▲
+Great flood
+Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both
+Households on the low groundLandowners on the high groundThose who say the water will never come
+Founding▲
+## Founding
+Origin:was established as a waystation for travelers
+Founded by:refugees fleeing war or persecution who found the location defensible
+Early trial:poor early harvests
+How survived:through determination and cooperation
+The oldest houses in Suryaagam stand at its middle, and everything newer has been built outward from them.
+Major Historical Events (5)▲
+## Major Historical Events
+Founded
+Now
+116y
+81y
+69y
+48y
+16y
+Demographic
+Economic
+Political
+Religious
+The PilgrimageReligiousminor
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+16y ago
+Living memory
+The Succession CrisisPoliticalminor
+The ruler of the time was aging or ill, and potential heirs jockeyed for position
+48y ago
+Last century
+▼
+The Trade CollapseEconomicmajor
+The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years
+69y ago
+The Great Harvest CompactEconomicmajor
+After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.
+81y ago
+Ancient
+The MigrationDemographicmajor
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+116y ago
+Suryaagam still keeps the shape the village took after the great harvest compact, and that shape is older than all but the oldest alive, though the times have moved on.
+
+== web:World/Rumors & News ==
+Available at launch
+What Suryaagam has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Suryaagam's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## SURYAAGAM
+SURYAAGAM
+Village · Hills
+POPULATION
+## 145
+145
+Village
+PROSPERITY
+## Moderate
+Moderate
+Top export: Grain surplus
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elected Reeve
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Suryaagam
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Suryaagam, a village of 145, has no crisis on its hands this season.
+Population
+145
+Village
+Age
+134 yrs
+Hills
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+18/100
+Economic
+30/100
+Magical
+0/100
+Disaster
+43/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+338
+Needed
+290
+Surplus: 48
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Great Flood
+Households on the low ground / Landowners on the high ground / Those who say the water will never come
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+NOTABLE CONNECTION
+Atharva Ghosh & Kumar Bhat
+Mentor and Successor
+INSTITUTIONS · 9 TOTAL
+Religious 3
+Economy 2
+Infrastructure 2
+Crafts 1
+Government 1
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+People to voice
+Atharva Ghosh
+Reeve · Holds the seat
+Wants to get the mill through the season without borrowing.
+Kumar Bhat
+the priest · Senior cleric
+Wants to ask Atharva Ghosh for advice on one hard decision this season.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Atharva Ghosh
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+Political Event
+The ailing ruler wants a final errand completed before naming a successor.
+Great Flood
+The ditches that carry off the water are choked, and the household bound to clear them refuses.
+SESSION SCRATCH
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (5).
+NPCs
+2 hook s
+01
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+Atharva Ghosh
+High
+02
+A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.
+Kumar Bhat
+Low
+History
+5 hook s
+01
+The ailing ruler wants a final errand completed before naming a successor
+Political Event
+Medium
+02
+The ditches that carry off the water are choked, and the household bound to clear them refuses
+Great Flood
+Medium
+03
+Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come
+Great Flood
+Medium
+04
+The route could be reopened, but someone with power prefers it stay closed
+Economic Event
+Low
+05
+The pilgrim trade made one family rich enough to buy the office that authenticates relics
+Religious Event
+Low
+UNDERLYING TENSIONS
+•
+Great Flood
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+8 buyable across 5 categories
+Lodging
+1 option
+Hospitality
+Food & drink
+2 option s
+Grain at harvest
+Grain milling
+Healing
+3 option s
+Burial
+Life ceremonies
+Religious services
+Transportation
+1 option
+Pasturage
+Legal & financial
+1 option
+Administrative oversight
+NOTABLE ABSENCES
+Goods & crafts
+ACTIVE SUPPLY CHAINS · 2
+Grain & Bread
+Running
+NEED Food Security · EXPORT yes
+Grain fields » Mill » Baked goods, Grain surplus, Agricultural surplus
+Faith & Worship
+Running
+NEED Religion & Civic
+House of worship » Religious services, Education (basic), Poor relief
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+9 institutions
+Nine institutions; the largest groups are faith (3) and trade and farming (2).
+Total
+9
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Village reeve
+Civic
+A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.
+Backs
+Elected Reeve
+Services
+Administrative oversight
+: Manage the village's affairs day to day. Allocate strips and common access.
+Religious
+3 institutions
+House of worship
+Essential
+Religious
+Church
+Stone-built and central to everything. Tithing is not optional.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals. Essential community functions.
+Religious services
+: Rites, observances, and the seasonal calendar.
+Graveyard
+Essential
+Religious
+Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it.
+Backs
+Religious Authorities
+Services
+Burial
+: Prepare and inter the dead. Religious rites included where applicable.
+Priest (resident)
+Essential
+Religious
+Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.
+Backs
+Religious Authorities
+Economy
+2 institutions
+Farmland
+Essential
+Agriculture
+Open-field agriculture with crop rotation.
+Backs
+Elected Reeve
+Services
+Grain at harvest
+: Grain sold by the sack to a household, straight from the field at harvest.
+Common grazing land
+Essential
+Agriculture
+Common grazing held by the village as a whole, next to the open fields, for every household's beasts.
+Backs
+Elected Reeve
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Crafts
+1 institution
+Mill
+Essential
+Food
+Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged.
+Backs
+Elected Reeve
+Services
+Grain milling
+: Process grain to flour
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Timber-framed, raised on stone foundations.
+Backs
+Elected Reeve
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Multiple water sources
+Essential
+Water
+Wells and springs throughout village.
+Backs
+Elected Reeve
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. What goes out of here is mostly grain surplus; it grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Agricultural surplus with trade links
+Trade
+Road
+It gets about four fifths of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+81%
+What the households grow and raise on their holdings; the main living at this scale.
+Church Tithes
+19%
+Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+TRADE FLOWS
+EXPORTS
+•
+Grain surplus
+•
+Milled flour
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+•
+Sandalwood and camphor
+LOCAL PRODUCTION
+•
+Grain
+•
+Flour
+•
+Religious services
+•
+Education (basic)
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+luxury goods
+Spices
+fine textiles
+FOOD SECURITY
+PRODUCED
+338
+NEEDED
+290
+Surplus
+48
+Good farmland: the fields yield more than the usual.
+ECONOMIC FLOWS · 2 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grain fields
+>
+Mill
+>
+Baked goods
+Grain surplus EXPORT
+Agricultural surplus
+House of worship
+>
+Religious services
+Education (basic)
+Poor relief
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Hills
+STRATEGIC VALUE
+Medium-High - defensible terrain, good visibility
+WHAT THE LAND OFFERS
+Stone quarrying
+Mining
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Grain
+»
+–
+»
+–
+full
+UNEXPLOITED
+1
+Stone
+»
+Needs: Stone quarry, Stonemasons' guild
+»
+buildings, monuments
+unexploited
+NEARBY RESOURCES
+Open Grazing Land
+Abundant
+Extensive Grain Fields
+Ancient Grove
+Stone quarry
+Commodities available
+· processed/refined in this settlement
+Extensive Grain Fields
+Grain
+Flour
+Ancient Grove
+Medicinal Herbs
+Honey
+Stone quarry
+Stone
+IMPORT DEPENDENCIES
+CRITICAL
+luxury goods
+Spices
+fine textiles
+GAPS & OPPORTUNITIES
+Low
+No one here works the stone near Suryaagam.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elected Reeve governs, with Religious Authorities pressing close behind.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elected Reeve
+Other
+GOVERNANCE
+The Elected Reeve governs Suryaagam. Its seat is held by Atharva Ghosh, the miller and Reeve. Suryaagam tolerates the Elected Reeve, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+POWER DISTRIBUTION
+Elected Reeve 57
+Religious Authorities 43
+POWERS
+Elected Reeve
+Other
+Governing
+Power 57
+Dominant
+One of the peasantry, elected by the rest, manages labour and mediates disputes, and answers to the people who chose them.
+Religious Authorities
+Religious
+Power 43
+Strong
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in the shadow of the Elected Reeve, close enough to matter and too far behind to lead.
+FOR THE DM ONLY
+Who really runs this village
+WHO LEADS ELECTED REEVE
+Head · Atharva Ghosh, the miller
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elected Reeve answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.4
+Food resilience
+43
+GUARD ASSESSMENT
+There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the village for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Suryaagam feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++48
+Trade access
+road
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+2 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Atharva Ghosh
+the miller
+Elected Reeve
+Male · mid-forties
+8
+Kumar Bhat
+the priest
+Religious Authorities
+Male · mid-twenties
+5
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+2 figures
+Ask who matters here and you hear two names; Atharva Ghosh, the miller, Reeve, first of Elected Reeve, comes first.
+MAJOR FIGURES
+Atharva Ghosh
+the miller
+Elected Reeve
+PWR 8
+Sex
+Male
+·
+Age
+mid-forties
+·
+Standing
+first of Elected Reeve, the stronger power here
+Mill · Reeve, first of Elected Reeve
+Motivation
+Get the mill through the season without borrowing. — Settle things with Kumar Bhat for good, one way or another.
+How they deal
+Talks freely about the harvest and who brought what to the mill; it is a good place to hear who is short this year.
+SECRETS
+·
+Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest: The families who were overcharged would talk, and the mill's good name would go first
+RELATIONSHIPS
+· Kumar Bhat - Mentor and Successor
+· Kumar Bhat - called by · Mutual Leverage
+Kumar Bhat
+the priest
+Religious Authorities
+PWR 5
+Sex
+Male
+·
+Age
+mid-twenties
+·
+Standing
+first of Religious Authorities, the weaker power here
+House of worship · first of Religious Authorities
+Motivation
+Ask Atharva Ghosh for advice on one hard decision this season. — Win the house of worship a voice whenever those who govern decide something that touches the work.
+How they deal
+Says little until it is clear what you can offer.
+SECRETS
+·
+One of their children is not theirs biologically, and they know it: Every inheritance, every decision, made differently if this becomes known
+RELATIONSHIPS
+· Atharva Ghosh - Mutual Leverage
+· Atharva Ghosh - called by · Mentor and Successor
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Atharva Ghosh & Kumar Bhat · Mentor and Successor
+Atharva Ghosh and Kumar Bhat are teacher and heir. Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+Internal relationships
+•
+Atharva Ghosh and Kumar Bhat · Mentor and Successor
+Atharva Ghosh once told a full room that Kumar Bhat was the best pupil they had taught. Atharva Ghosh has not said it since.
+Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+•
+Kumar Bhat and Atharva Ghosh · Mutual Leverage
+Kumar Bhat and Atharva Ghosh each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.
+The balance between Kumar Bhat and Atharva Ghosh has recently shifted. Atharva Ghosh has noticed; Kumar Bhat has not, yet.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Village
+ANCHOR FACTS
+Complexity
+Agricultural surplus with trade links
+Food
+Secure
+IDENTITY
+Name
+Suryaagam
+Tier
+Village
+Population
+145
+Terrain
+Hills
+Layout
+Stone-built village on a south-facing slope, paths converging at the stone cross
+Age
+134 years
+Trade access
+Road
+Founded
+refugees fleeing war or persecution who found the location defensible
+CULTURAL IDENTITY
+South-Asian-inspired
+South-Asian-inspired, built around the tank, kin by kin.
+Foodways
+What it puts on the table itself is bread from the home fields. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.
+Architecture
+households cluster around shared wells and water channels
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+134y old
+Founded 134 years ago, with five events on record and one tension still unresolved.
+Settlement age
+## 134
+134
+years
+Historical character
+People here are careful not to show off their money. The Trade Collapse is long past, but flaunting wealth still looks like having learned nothing from it
+Founding
+Origin
+was established as a waystation for travelers
+Founded by
+refugees fleeing war or persecution who found the location defensible
+Initial challenge
+poor early harvests
+Overcoming
+through determination and cooperation
+Historical events · 5
+Founding (- 134 y)
+Now
+0 y after founding
+67 y after founding
+134 y after founding
+16y AGO
+Still relevant today
+Minor
+The Pilgrimage
+· Religious
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+48y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+The ruler of the time was aging or ill, and potential heirs jockeyed for position
+Lasting effects
+·
+Succession now governed by a charter drafted in the aftermath
+69y AGO
+Still relevant today
+Major
+The Trade Collapse
+· Economic
+The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years
+81y AGO
+Major
+The Great Harvest Compact
+· Economic
+After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.
+Lasting effects
+·
+Grain price regulation persists in modified form
+·
+Compact signatories' families still hold first call on the grain sales
+116y AGO
+Major
+The Migration
+· Demographic
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+Live tensions · 1
+Great Flood
+Parties: Households on the low ground vs Landowners on the high ground vs Those who say the water will never come
+Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## SURYAAGAM
+SURYAAGAM
+Village · Hills
+POPULATION
+## 145
+145
+Village
+PROSPERITY
+## Moderate
+Moderate
+Top export: Grain surplus
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elected Reeve
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Suryaagam
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Suryaagam, a village of 145, has no crisis on its hands this season.
+Population
+145
+Village
+Age
+134 yrs
+Hills
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+18/100
+Economic
+30/100
+Magical
+0/100
+Disaster
+43/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+338
+Needed
+290
+Surplus: 48
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Great Flood
+Households on the low ground / Landowners on the high ground / Those who say the water will never come
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+NOTABLE CONNECTION
+Atharva Ghosh & Kumar Bhat
+Mentor and Successor
+INSTITUTIONS · 9 TOTAL
+Religious 3
+Economy 2
+Infrastructure 2
+Crafts 1
+Government 1
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+People to voice
+Atharva Ghosh
+Reeve · Holds the seat
+Wants to get the mill through the season without borrowing.
+Kumar Bhat
+the priest · Senior cleric
+Wants to ask Atharva Ghosh for advice on one hard decision this season.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Atharva Ghosh
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+Political Event
+The ailing ruler wants a final errand completed before naming a successor.
+Great Flood
+The ditches that carry off the water are choked, and the household bound to clear them refuses.
+SESSION SCRATCH
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+7 hooks
+Seven hooks to pull; most of them belong to its history and its tensions (5).
+NPCs
+2 hook s
+01
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+Atharva Ghosh
+High
+02
+A preacher from outside has been drawing their congregation away, and saying things about them that are partly true.
+Kumar Bhat
+Low
+History
+5 hook s
+01
+The ailing ruler wants a final errand completed before naming a successor
+Political Event
+Medium
+02
+The ditches that carry off the water are choked, and the household bound to clear them refuses
+Great Flood
+Medium
+03
+Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come
+Great Flood
+Medium
+04
+The route could be reopened, but someone with power prefers it stay closed
+Economic Event
+Low
+05
+The pilgrim trade made one family rich enough to buy the office that authenticates relics
+Religious Event
+Low
+UNDERLYING TENSIONS
+•
+Great Flood
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+8 buyable across 5 categories
+Lodging
+1 option
+Hospitality
+Food & drink
+2 option s
+Grain at harvest
+Grain milling
+Healing
+3 option s
+Burial
+Life ceremonies
+Religious services
+Transportation
+1 option
+Pasturage
+Legal & financial
+1 option
+Administrative oversight
+NOTABLE ABSENCES
+Goods & crafts
+ACTIVE SUPPLY CHAINS · 2
+Grain & Bread
+Running
+NEED Food Security · EXPORT yes
+Grain fields » Mill » Baked goods, Grain surplus, Agricultural surplus
+Faith & Worship
+Running
+NEED Religion & Civic
+House of worship » Religious services, Education (basic), Poor relief
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+9 institutions
+Nine institutions; the largest groups are faith (3) and trade and farming (2).
+Total
+9
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Government
+1 institution
+Village reeve
+Civic
+A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.
+Backs
+Elected Reeve
+Services
+Administrative oversight
+: Manage the village's affairs day to day. Allocate strips and common access.
+Religious
+3 institutions
+House of worship
+Essential
+Religious
+Church
+Stone-built and central to everything. Tithing is not optional.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals. Essential community functions.
+Religious services
+: Rites, observances, and the seasonal calendar.
+Graveyard
+Essential
+Religious
+Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it.
+Backs
+Religious Authorities
+Services
+Burial
+: Prepare and inter the dead. Religious rites included where applicable.
+Priest (resident)
+Essential
+Religious
+Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.
+Backs
+Religious Authorities
+Economy
+2 institutions
+Farmland
+Essential
+Agriculture
+Open-field agriculture with crop rotation.
+Backs
+Elected Reeve
+Services
+Grain at harvest
+: Grain sold by the sack to a household, straight from the field at harvest.
+Common grazing land
+Essential
+Agriculture
+Common grazing held by the village as a whole, next to the open fields, for every household's beasts.
+Backs
+Elected Reeve
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Crafts
+1 institution
+Mill
+Essential
+Food
+Milling here is a monopoly, water or wind powered. Its keeper is usually the wealthiest villager and, for that reason, the most begrudged.
+Backs
+Elected Reeve
+Services
+Grain milling
+: Process grain to flour
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Timber-framed, raised on stone foundations.
+Backs
+Elected Reeve
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Multiple water sources
+Essential
+Water
+Wells and springs throughout village.
+Backs
+Elected Reeve
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. What goes out of here is mostly grain surplus; it grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Agricultural surplus with trade links
+Trade
+Road
+It gets about four fifths of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+81%
+What the households grow and raise on their holdings; the main living at this scale.
+Church Tithes
+19%
+Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+TRADE FLOWS
+EXPORTS
+•
+Grain surplus
+•
+Milled flour
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+•
+Sandalwood and camphor
+LOCAL PRODUCTION
+•
+Grain
+•
+Flour
+•
+Religious services
+•
+Education (basic)
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+luxury goods
+Spices
+fine textiles
+FOOD SECURITY
+PRODUCED
+338
+NEEDED
+290
+Surplus
+48
+Good farmland: the fields yield more than the usual.
+ECONOMIC FLOWS · 2 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Grain fields
+>
+Mill
+>
+Baked goods
+Grain surplus EXPORT
+Agricultural surplus
+House of worship
+>
+Religious services
+Education (basic)
+Poor relief
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Hills
+STRATEGIC VALUE
+Medium-High - defensible terrain, good visibility
+WHAT THE LAND OFFERS
+Stone quarrying
+Mining
+RESOURCE CHAINS
+FULLY EXPLOITED
+1
+Grain
+»
+–
+»
+–
+full
+UNEXPLOITED
+1
+Stone
+»
+Needs: Stone quarry, Stonemasons' guild
+»
+buildings, monuments
+unexploited
+NEARBY RESOURCES
+Open Grazing Land
+Abundant
+Extensive Grain Fields
+Ancient Grove
+Stone quarry
+Commodities available
+· processed/refined in this settlement
+Extensive Grain Fields
+Grain
+Flour
+Ancient Grove
+Medicinal Herbs
+Honey
+Stone quarry
+Stone
+IMPORT DEPENDENCIES
+CRITICAL
+luxury goods
+Spices
+fine textiles
+GAPS & OPPORTUNITIES
+Low
+No one here works the stone near Suryaagam.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elected Reeve governs, with Religious Authorities pressing close behind.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elected Reeve
+Other
+GOVERNANCE
+The Elected Reeve governs Suryaagam. Its seat is held by Atharva Ghosh, the miller and Reeve. Suryaagam tolerates the Elected Reeve, and no more. The most devout households want a say over who may trade and when, and not everyone here agrees.
+POWER DISTRIBUTION
+Elected Reeve 57
+Religious Authorities 43
+POWERS
+Elected Reeve
+Other
+Governing
+Power 57
+Dominant
+One of the peasantry, elected by the rest, manages labour and mediates disputes, and answers to the people who chose them.
+Religious Authorities
+Religious
+Power 43
+Strong
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in the shadow of the Elected Reeve, close enough to matter and too far behind to lead.
+FOR THE DM ONLY
+Who really runs this village
+WHO LEADS ELECTED REEVE
+Head · Atharva Ghosh, the miller
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elected Reeve answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.4
+Food resilience
+43
+GUARD ASSESSMENT
+There is no watch. When someone does wrong, the neighbours deal with it themselves, and the heads of households have the last word.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Wild country all round and nobody organised to meet it; any creature of real size would get in.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the village for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Suryaagam feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++48
+Trade access
+road
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+2 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Atharva Ghosh
+the miller
+Elected Reeve
+Male · mid-forties
+8
+Kumar Bhat
+the priest
+Religious Authorities
+Male · mid-twenties
+5
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+2 figures
+Ask who matters here and you hear two names; Atharva Ghosh, the miller, Reeve, first of Elected Reeve, comes first.
+MAJOR FIGURES
+Atharva Ghosh
+the miller
+Elected Reeve
+PWR 8
+Sex
+Male
+·
+Age
+mid-forties
+·
+Standing
+first of Elected Reeve, the stronger power here
+Mill · Reeve, first of Elected Reeve
+Motivation
+Get the mill through the season without borrowing. — Settle things with Kumar Bhat for good, one way or another.
+How they deal
+Talks freely about the harvest and who brought what to the mill; it is a good place to hear who is short this year.
+SECRETS
+·
+Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest: The families who were overcharged would talk, and the mill's good name would go first
+RELATIONSHIPS
+· Kumar Bhat - Mentor and Successor
+· Kumar Bhat - called by · Mutual Leverage
+Kumar Bhat
+the priest
+Religious Authorities
+PWR 5
+Sex
+Male
+·
+Age
+mid-twenties
+·
+Standing
+first of Religious Authorities, the weaker power here
+House of worship · first of Religious Authorities
+Motivation
+Ask Atharva Ghosh for advice on one hard decision this season. — Win the house of worship a voice whenever those who govern decide something that touches the work.
+How they deal
+Says little until it is clear what you can offer.
+SECRETS
+·
+One of their children is not theirs biologically, and they know it: Every inheritance, every decision, made differently if this becomes known
+RELATIONSHIPS
+· Atharva Ghosh - Mutual Leverage
+· Atharva Ghosh - called by · Mentor and Successor
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Atharva Ghosh & Kumar Bhat · Mentor and Successor
+Atharva Ghosh and Kumar Bhat are teacher and heir. Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+Internal relationships
+•
+Atharva Ghosh and Kumar Bhat · Mentor and Successor
+Atharva Ghosh once told a full room that Kumar Bhat was the best pupil they had taught. Atharva Ghosh has not said it since.
+Kumar Bhat has begun teaching Atharva Ghosh's methods as the priest's own.
+•
+Kumar Bhat and Atharva Ghosh · Mutual Leverage
+Kumar Bhat and Atharva Ghosh each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.
+The balance between Kumar Bhat and Atharva Ghosh has recently shifted. Atharva Ghosh has noticed; Kumar Bhat has not, yet.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Village
+ANCHOR FACTS
+Complexity
+Agricultural surplus with trade links
+Food
+Secure
+IDENTITY
+Name
+Suryaagam
+Tier
+Village
+Population
+145
+Terrain
+Hills
+Layout
+Stone-built village on a south-facing slope, paths converging at the stone cross
+Age
+134 years
+Trade access
+Road
+Founded
+refugees fleeing war or persecution who found the location defensible
+CULTURAL IDENTITY
+South-Asian-inspired
+South-Asian-inspired, built around the tank, kin by kin.
+Foodways
+What it puts on the table itself is bread from the home fields. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.
+Architecture
+households cluster around shared wells and water channels
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+134y old
+Founded 134 years ago, with five events on record and one tension still unresolved.
+Settlement age
+## 134
+134
+years
+Historical character
+People here are careful not to show off their money. The Trade Collapse is long past, but flaunting wealth still looks like having learned nothing from it
+Founding
+Origin
+was established as a waystation for travelers
+Founded by
+refugees fleeing war or persecution who found the location defensible
+Initial challenge
+poor early harvests
+Overcoming
+through determination and cooperation
+Historical events · 5
+Founding (- 134 y)
+Now
+0 y after founding
+67 y after founding
+134 y after founding
+16y AGO
+Still relevant today
+Minor
+The Pilgrimage
+· Religious
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+48y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+The ruler of the time was aging or ill, and potential heirs jockeyed for position
+Lasting effects
+·
+Succession now governed by a charter drafted in the aftermath
+69y AGO
+Still relevant today
+Major
+The Trade Collapse
+· Economic
+The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years
+81y AGO
+Major
+The Great Harvest Compact
+· Economic
+After years of disputed grain prices, the major farming families agreed a formal compact regulating grain sale and storage. It held for a generation.
+Lasting effects
+·
+Grain price regulation persists in modified form
+·
+Compact signatories' families still hold first call on the grain sales
+116y AGO
+Major
+The Migration
+· Demographic
+A newly arrived community and the old population fell into steady friction, rarely violent and never resolved
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+Live tensions · 1
+Great Flood
+Parties: Households on the low ground vs Landowners on the high ground vs Those who say the water will never come
+Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## SURYAAGAM
+SURYAAGAM
+Village · Hills
+POPULATION
+## 145
+145
+Village
+PROSPERITY
+## Moderate
+Moderate
+Top export: Grain surplus
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elected Reeve
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Suryaagam
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Suryaagam
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+The most devout households want a say over who may trade and when, and not everyone here agrees.
+## people[].name
+Atharva Ghosh
+## people[].role
+Reeve
+## people[].why
+seat
+## people[].line
+get the mill through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## people[].name
+Kumar Bhat
+## people[].role
+the priest
+## people[].why
+cleric
+## people[].line
+ask Atharva Ghosh for advice on one hard decision this season.
+## people[].says
+want
+## people[].sourcePath
+npcs[1]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. No granary; about a month and a half in household stores.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+No walls and no standing force.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+A family they look after has stopped answering the door, and the shutters have stayed closed for a week.
+## hooks[].source
+Atharva Ghosh
+## hooks[].text
+The ailing ruler wants a final errand completed before naming a successor.
+## hooks[].source
+Political Event
+## hooks[].text
+The ditches that carry off the water are choked, and the household bound to clear them refuses.
+## hooks[].source
+Great Flood

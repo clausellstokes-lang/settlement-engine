@@ -1,0 +1,24 @@
+thorp: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 16; ONE POSITION on a story path: 0
+   3x pdf:canon_dossier [] # and # · Genuine Respect
+   3x pdf:canon_dossier [] # and # · Mutual Leverage
+   3x pdf:canon_dossier [] : Curtailed by the outbreak.
+hamlet: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 93; ONE POSITION on a story path: 0
+   26x pdf:canon_dossier [] Access to a house of worship
+   26x pdf:draft_brief [] Access to a house of worship
+   20x pdf:canon_dossier [] # and # · Outstanding Debt
+village: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 150; ONE POSITION on a story path: 4
+   112x web [] Institutions behind this power (0)
+   91x pdf:canon_dossier [] # and # · Outstanding Debt
+   91x pdf:draft_brief [] # and # · Outstanding Debt
+town: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 150; ONE POSITION on a story path: 47
+   147x web [] Institutions behind this power (0)
+   146x pdf:canon_dossier [] # and # · Outstanding Debt
+   146x pdf:draft_brief [] # and # · Outstanding Debt
+city: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 150; ONE POSITION on a story path: 149
+   150x pdf:canon_dossier [] # and # · Mentor and Successor
+   150x pdf:draft_brief [] # and # · Mentor and Successor
+   150x web [] # holds a tie to them: Mentor and Successor
+metropolis: places 150; a sentence repeated inside one place (any positions): 150; ONE POSITION (any): 150; ONE POSITION on a story path: 150
+   150x pdf:canon_dossier [] # and # · Genuine Respect
+   150x pdf:canon_dossier [] # and # · Mentor and Successor
+   150x pdf:canon_dossier [] # and # · Mutual Leverage

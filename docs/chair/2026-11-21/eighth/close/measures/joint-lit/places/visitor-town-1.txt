@@ -1,0 +1,3180 @@
+== web:Summary/Overview ==
+Itzatitlantown· 358 pop.· road· 238 years old
+Mesoamerican-inspired: built around a civic-ritual plaza, tribute and market. Governed by Merchant Council · Tense (the creed is contested)
+"A family's standing here is its wealth, and no one pretends otherwise. The Trade Collapse decided who held the money, and those families have held everything else ever since"
+Plains
+Open Tonight
+The place
+The shrine at Itzatitlan's gate has been recently altered: one symbol chiselled away, another set in its place, the old outline still faintly visible beneath the new. Someone did this carefully. Someone else has been scratching at the replacement. Stallholders call their wares over the noise of the market. Festival banners hang above the doors, faded from one year and waiting for the next.
+Active crisisReligious ConversionOpen the Crisis tab
+The contest over Itzatitlan's faith is neither won nor lost; both rites are kept, and neither is gaining.
+The new faith in Itzatitlan has no building yet, only its congregation, and the Merchant Council cannot decide whether to treat it as a matter of faith or of politics; both sides read the delay as a sign.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Poor
+Moderate before the conversion; Poor since.
+Safety
+Suspicious
+Viability
+Viable
+Defense
+Lightly defended
+Reliance on magic
+None
+Monster DefenseAdequate
+Economic ResilienceAdequate
+Magical CapabilityCritical
+Food SecuritySecure
+Visitors find Itzatitlan's market without asking. A buyer at Itzatitlan deals with each craft's own guild, with no merchant guild hall above them. The town keeps people under arms for its defence.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim
+The sitting authorityThose who deny its mandatePragmatists who want any stable answer
+Religious Authorities vs Merchant CouncilModerate
+Members leaving one power for the other
+Settlement Origin▲
+A road settlement: other people's journeys pass its doors, and some of them stop for a meal on the way.
+Notable connection
+Chimalxochitl May and Luchtan Caan are rivals, and neither gives the other ground. Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+Full relationship web →
+
+== web:Summary/Crisis ==
+Religious Conversion.
+The religious community of Itzatitlan has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.
+Who it touches
+instigator: Ahulane Nah · speaks for the power that gains from the crisis, from a house that power backs
+target: Zac Batab · holds the seat, and the right to it is already in dispute
+takes the fall: Zac Batab · holds the seat, and takes the blame while the right to it is in dispute
+Stakes
+Merchant Guilds gains · already carries more weight than whoever holds the seat
+Religious Authorities split · gains and loses by it at once
+Merchant Council loses · its own people feel the crisis first
+Levers
+Houses of worship · held by Chimalxochitl May
+What the players see first
+Food: Secure. Stores: a granary, about six months of grain.
+Defence: Town walls, Town watch.
+If nothing is done
+The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.
+Hook
+The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Public legitimacyContested
+Law & orderStrained
+Social trustStrained
+Healing capacityStrained
+Ruling authorityStrained
+Defense readinessStrained
+Economic capacityStrained
+Criminal opportunityElevated
+Magical stabilityStrained
+Housing pressureAdequate
+Infrastructure conditionAdequate
+Strength of the powersAdequate
+Labor capacityAdequate
+Religious authorityAdequate
+Trade connectivityAdequate
+FoodSecure
+Reliance on magic: None
+This reading includes the current condition: religious conversion.
+
+== web:Summary/Plot Hooks ==
+NPCs
+Luchtan Caan
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+Zac Batab
+A regular customer has stopped coming. The reason they've been given doesn't make sense.
+Xaman Uc
+A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away.
+Chimalxochitl May
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Oc Xiu
+A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.
+Ahulane Nah
+Their spouse has been making payments to someone every month for years, and will not say who.
+Flint Kanil
+Someone has been asking the neighbours what time they leave in the morning and when they come home.
+Zipna Ek
+They told a lie to protect a friend, and the friend is now repeating it to people who matter.
+Relationships
+Religious Authorities vs Merchant Council
+Three members crossed over in a single week, and the side they left wants to know what they were offered.
+History
+Religious Conversion
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+Political Event
+A would-be heir approaches outsiders to investigate a rival's past
+Religious Event
+A relic claimed by both sides has resurfaced in a private collection
+The reformist leader is being blackmailed into silence
+Legitimacy Crisis
+One of those who deny the mandate has been offered a post by those in charge, and has not yet answered
+A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with
+Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found
+Outlook
+Strategic Resource
+The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits.
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+Craft guildsCrafts
+Quality, price, and apprenticeship all fall under their rule.
+Connection: Guildmaster Xaman Uc
+BacksMerchant Guilds
+ServicesQuality certification
+MillsCraftsVulnerable
+Grain ground at several sites.
+Connection: Master Miller Zipna Ek
+BacksMerchant Council
+ServicesGrain grinding
+SmelterCrafts
+Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever will buy them.
+Connection: Master Smelter Ahulane Nah
+ServicesIron refining
+Town wallsDefenseVulnerable
+Gated stone defences. Costly to raise and no cheaper to keep up.
+ServicesGate control
+Town watchDefenseVulnerable
+Watchmen serving part-time. Night patrols and gate duty.
+Connection: Captain Luchtan Caan
+ServicesGate dutyNight patrol
+InnsEconomy
+Lodging for traveling merchants.
+Connection: Burgomaster Zac Batab, the innkeeper
+ServicesAccommodationMeals and drinkStabling
+Market squareEconomyVulnerable
+Central plaza for weekly markets and fairs.
+ServicesWeekly market
+TavernsEconomyVulnerable
+Drinking establishments. Social hubs.
+Connection: Host Flint Kanil
+ServicesShort accommodationDrink service
+Town granaryEconomyVulnerable
+Grain kept in common, a hedge against lean harvests and hunger.
+Connection: Granary Reeve Oc Xiu
+ServicesGrain storage
+Weekly marketEconomyVulnerable
+Charter required. Major economic driver.
+ServicesGeneral trade
+Town hallInfrastructure
+The seat of assembly and administration.
+ServicesDispute arbitrationPermit applications
+Burial groundsReligious
+A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.
+BacksReligious Authorities
+ServicesBurial
+Houses of worshipReligious
+Several houses of worship within town.
+Connection: Dean Chimalxochitl May
+ServicesLife ceremoniesReligious services
+The fabric of the place
+HousingInfrastructure
+Multi-story timber and stone buildings.
+ServicesLodging (rooms to let)
+Multiple water sourcesInfrastructure
+Wells and fountains, or water carried in by pipe.
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+Not available for a town: Information.
+There is one thing a place of Itzatitlan's size ought to provide and does not, and the absence is the same one every year.
+Criminal services(2)▲
+Protection (informal)
+Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.
+Weak law, bring coin
+The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.
+Goods & crafts(3)▲
+General trade Vulnerable
+Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Weekly market
+Iron refining
+Smelt raw ore into pig iron and refined ingots ready for smithing.
+Smelter
+Weekly market Vulnerable
+Regular market days with produce, goods, and livestock.
+Market square
+Food & drink(3)▲
+Drink service Vulnerable
+Ale, wine, and spirits across multiple establishments.
+Taverns
+Grain grinding Vulnerable
+Grind grain into flour for bread and other foods.
+Mills
+Meals and drink
+Hot meals and a range of drinks at multiple venues.
+Inns
+Healing(3)▲
+Burial
+Interment in the congregation's ground, with the rite that congregation keeps.
+Burial grounds
+Life ceremonies
+Births, marriages, and funerals across several congregations.
+Houses of worship
+Religious services
+Several congregations covering different districts or communities.
+Legal & financial(7)▲
+Dispute arbitration
+Bring commercial and civil disputes before a magistrate.
+Town hall
+Gate control Vulnerable
+Control who enters and exits. Levy tolls on goods.
+Town walls
+Gate duty Vulnerable
+Check travelers entering and leaving. Note unusual visitors.
+Town watch
+Grain storage Vulnerable
+Municipal grain reserves. Buffers the settlement against poor harvests.
+Town granary
+Night patrol Vulnerable
+Patrol the streets after dark. Deter crime and respond to incidents.
+Permit applications
+Apply for construction, business, and trade permits.
+Quality certification
+Guild mark indicating goods meet agreed standards.
+Craft guilds
+Lodging(3)▲
+Accommodation
+Beds from dormitory to private room. Quality varies by establishment.
+Lodging (rooms to let)
+A room let in a private house, by the night or the week.
+Housing
+Short accommodation Vulnerable
+Beds or floor space available in most taverns.
+Transportation(1)▲
+Stabling
+Horse care, feed, and overnight stabling.
+
+== web:Systems/Economics ==
+Poor
+Moderate before the conversion; Poor since.
+Diversified market economy
+It gets about four fifths of what its work could yield.
+Trade
+road
+Little that comes past Itzatitlan stops there. The town is poor, and its people say so to anyone who asks.
+Income Sources▲
+26%
+Market Taxes Market day stall fees and toll collection on goods entering the market.
+20%
+Guild Fees Annual licensing fees and fines levied by guild oversight.
+19%
+Church Tithes Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+13%
+CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but none of it reaches the treasury.
+11%
+Gate Tolls Entry and exit tolls collected at the town gates from merchants and travellers.
+Property Rents Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+Itzatitlan's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Some of the money in Itzatitlan is made outside the law, and the people who earn theirs honestly do not know who is making it. The religious houses at Itzatitlan are heard in its dealings, and a quarrel with them is one the town's traders feel. No amount of work in the country around Itzatitlan brings up enough iron ore for what the place does with it: the shortfall is in the land, not in the hands.
+Trade Profile▲
+Exports
+Reeds and thatchWaterfowlSacred woodRitual components
+Imports
+Cacao in bulkCoal and fuel (local seams exhausted)Copal resin incenseGrain (a little, beside its own harvest)Incense, ritual oil, and vestment materialsIronReplacement arms and basic equipmentSaltTimber (local managed woodland cleared)
+Terrain cannot produce · Settlement necessity
+Needed, and not brought in: stone, luxury goods, copper ore, gold and silver ore.
+There is always something going out, and not always the same thing.
+Produced locally
+Religious servicesEducation (basic)
+Food Security▲
+Production: 664 lbs/day+ 52 importedNeed: 716 lbs/day
+What is grown here and brought in covers each day's food.
+Stores: a granary, about six months of grain.
+Meals follow the season and what the household has put by.
+Nothing on Itzatitlan's tables suggests to a visitor that food is a worry here.
+Economic Flows (4 active · 1 impaired)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (5)Issues (3)✓ Productive (1)
+Bowyer & fletcherManufacturing & craftsImpaired
+From
+Managed woodland (depleted)
+Via
+Craft guilds
+Standing WatchDefense & securityVulnerable
+Town watch
+Outputs
+Defence servicesWeapons training
+Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.
+Taverns & Social LifeEntertainment & cultureVulnerable
+Taverns
+LodgingMeals and drinkStabling
+Meals, ale and lodging here depend on grain brought in.
+Faith & WorshipReligion & civic✓ Running
+Houses of worship
+Religious servicesEducation (basic)Poor relief
+Law & GovernanceReligion & civic○ Operational
+Town hall
+Legal services
+Anyone looking for work at Itzatitlan finds it in carrying, weighing and selling as often as in making.
+Shadow Economy: 13% of trade unrecorded▲
+Off-book
+Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.
+Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.
+
+== web:Systems/Resources ==
+Terrain
+Plains
+The people of Itzatitlan know what their ground is worth to others, and know that is reason enough for someone to come for it. Nothing more can be taken from the coal or peat deposits at Itzatitlan. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.
+Nearby Resources▲
+Depleted
+Coal or Peat DepositsManaged Woodland
+Abundant
+Ancient GroveMarshlands
+Commodities available
+Marshlandspeathoneymedicinal herbsAncient Grove
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerMerchant Council (significant)merchant sway
+The seatZac Batab, the innkeeper and Burgomaster
+Public legitimacy
+32Contested
+Stability
+Tense (the creed is contested)
+Itzatitlan is governed by the Merchant Council. Zac Batab, the innkeeper and Burgomaster, holds its seat. In Itzatitlan, the Merchant Council's right to rule is contested. Poverty and insecurity are the reason. The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Merchant Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+The Seat and Its Contenders (2)▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerMerchant CouncilMerchantSignificant▲
+## RulerMerchant CouncilMerchantSignificant
+Institutions behind this power (7)
+Held under this authority
+Town granary
+Mills
+Housing
+Multiple water sources
+Town hall
+Town watch
+Town walls
+ContenderReligious AuthoritiesReligiousSignificant▼
+The Powers (3)▲
+37
+32
+31
+Merchant Guilds
+Merchant37▼
+## Merchant GuildsMerchant37
+↳3 members · first Ahulane Nah · second Xaman Uc · third Flint Kanil
+Religious Authorities
+Contests the seatReligious32▲
+## Religious AuthoritiesContests the seatReligious32
+↳1 member · first Chimalxochitl May
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested. The gap between them and the Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+Merchant Council
+↑ Holds powerMerchant31▼
+## Merchant Council↑ Holds powerMerchant31
+↳4 members · first Zac Batab · second Oc Xiu · third Luchtan Caan
+The Web (3)▲
+How the powers stand to one another, grouped by the kind of tie.
+~Tense(1)
+Merchant Guilds~Religious Authoritiesstable
+The Merchant Guilds and the Religious Authorities want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the church's rules on lending are a standing grievance with the merchants.
+↔Dependent(2)
+Merchant Council↔Merchant Guildsstable
+The Merchant Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Merchant Council to enforce their contracts and keep the law. Neither can afford to ruin the other.
+Merchant Council↔Religious Authoritiesescalating
+The Merchant Council holds the seat and collects the taxes; the Religious Authorities have long told people that the Merchant Council's rule is right and ordained, but the two are now at odds over members leaving one power for the other.
+The shape of authority
+The people who run Itzatitlan are also the people it owes money to, and they do not keep the two apart.
+Rule and succession
+The Religious Authorities could now take the hall from the Merchant Council at Itzatitlan; the Merchant Council keeps it only because the office is still its own.
+Crime and the hall
+Officials at Itzatitlan are paid little and watched less, and a purse offered in the right doorway would not be turned away.
+Who really runs this town
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Merchant Council
+Head · Zac Batab, the innkeeper
+Second · Oc Xiu, the granary reeve
+Third · Luchtan Caan, the watch captain
+The hall
+The seat is not in criminal hands. Nobody at the head of the Merchant Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+RulerMerchant CouncilMerchantSignificant▼
+ContenderReligious AuthoritiesReligiousSignificant▲
+## ContenderReligious AuthoritiesReligiousSignificant
+Institutions behind this power (2)
+A house of this faith
+Houses of worship
+Burial grounds
+Merchant37▲
+## Merchant GuildsMerchant37
+The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.
+Contests the seatReligious32▼
+↑ Holds powerMerchant31▲
+## Merchant Council↑ Holds powerMerchant31
+Merchant interests dominate the council; trade policy is the primary concern. Under pressure from both sides of the faith to make a formal declaration of support. Has so far avoided doing so. Close enough to the two above that their support is worth buying; they play the Religious Authorities and the Merchant Guilds against each other when they can.
+
+== web:Systems/Defense ==
+Defensive posture
+Lightly defended
+Guard assessment
+The town watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. Everyone comes and goes by the gates, so smugglers have to get past the town watch.
+Itzatitlan is weakly defended, not undefended: there is something to meet trouble with, and not much more than something.
+Military status
+Religious upheaval
+Those who answer for Itzatitlan are kept busy by quarrels between the faiths, and are trusted by neither.
+The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.
+Until the quarrel over faith is settled at Itzatitlan, its defenders will not act as one. The town is shaken by this trouble, but it is still standing and means to stay that way.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Adequate▼
+Invasion & War
+Weak▼
+Internal Security
+Itzatitlan's hearings can fine an offender and cannot hold one, so a fine binds only those who mean to stay.
+Economic Survival
+Itzatitlan can pay for its own emergencies for a while, but every hard season brings the end of the money closer.
+Disasters & Famine
+Food endurance: Under siege the outlying fields would be lost; the granary would carry the town for about six months at full rations, about a year on half, and what is still harvested would stretch it further.
+Criminal Architecture & Public Order▲
+Suspicious — religious upheaval
+The change of faith has split the people here. Each side suspects the other of informing, and the new rules are enforced one day and ignored the next.
+Each side at Itzatitlan keeps its own list of who has converted, and those lists, not the law, decide who is trusted.
+Criminal structure: Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+Active crime patterns
+underground worship
+Banned or contested religious practice continuing in private homes, cellars, and outbuildings. Informal networks providing space, materials, and warning of enforcement activity.
+religious fraud
+False conversion declarations sold or arranged for a fee. Forged certification of compliance. Priests accepting payment to record conversions that did not occur.
+contested property
+Religious buildings, land, and endowments whose ownership is legally ambiguous following the change in religious authority. Being occupied, transferred, or stripped by whoever moves fastest.
+informant networks
+Enforcement authorities paying for information about non-compliant households. Neighbour reporting on neighbour. Some reports are sincere. Many are settled scores.
+The danger at Itzatitlan comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.
+Armed Forces & Fortifications1 wall 1 force ▲
+## Armed Forces & Fortifications1 wall 1 force
+Fortifications
+Town walls
+Gated stone defences. Costly to raise and no cheaper to keep up.
+Itzatitlan's accounts keep its town walls in repair and stretch no further, so the defences stand and too few people man them.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+Coming up to Itzatitlan, a traveller sees the wall before anything behind it. The wall at Itzatitlan is entered by its gates, and the gate tolls are counted there; a gate left unwatched is a toll lost. There are people walking the town at Itzatitlan at night, and the town's sense of itself rests more on that than on anything at the gate. The town knows it needs specialists against the creatures, and has none of its own to send. The town keeps no defence against anything it cannot see.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureTown hall bench only
+Cases heard without detention. Fines and exile only.
+Medical ReadinessClergy care
+Clerical care. Basic wound and disease management.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the town's own:
+Low
+Envelope
+Availabilityrare
+Legalityrestricted
+Institutional controlunregulated
+Service costextortionate
+Riskmoderate
+Religious acceptancehostile
+Roles
+Reliance on magic: None
+Economic role: absent
+Military role: absent
+Medical role: absent
+Infrastructure role: absent
+Reliance on magic, as judged at the first survey
+Set Itzatitlan's trades against the help they draw on, and magic is not a thing any of them needs.
+
+== web:Systems/Outlook ==
+✓ Viable
+Itzatitlan's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+8 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Merchant Guilds (3)▲
+## Merchant Guilds
+Xaman Uc
+▲
+## Merchant Guilds › Xaman Uc
+Craft guilds · second of Merchant Guilds
+Guildmaster
+Temperament: courteous
+Mentor and SuccessorFlint Kanil
+Ahulane Nah holds a tie to them: Mentor and Successor
+Luchtan Caan holds a tie to them: Family Complication
+Zipna Ek holds a tie to them: Mentor and Successor
+Wants Learn the plans of the Religious Authorities against the Merchant Guilds before they can act on them.
+Disposition courteous
+How they deal Helpful within the limits of their role. Refers you to others for anything outside it.
+Secret: Has been funding a forbidden relationship with embezzled money
+## Merchant Guilds
+Ahulane Nah
+## Merchant Guilds › Ahulane Nah
+Smelter · first of Merchant Guilds
+Master Smelter
+Temperament: diligent
+Mentor and SuccessorXaman Uc
+Flint Kanil holds a tie to them: Mutual Leverage
+Wants Pay every hand at the smelter in full and on time this season.
+Standing first of Merchant Guilds, the strongest power here
+Disposition diligent
+How they deal Sells by weight and quality; wants payment in coin, not promises.
+Secret: Has been mixing cheap metal into the bars and selling them as pure
+## Merchant Guilds
+Flint Kanil
+## Merchant Guilds › Flint Kanil
+Taverns · third of Merchant Guilds
+Host
+Temperament: pious
+Mutual LeverageAhulane Nah
+Xaman Uc holds a tie to them: Mentor and Successor
+Wants Be the one Xaman Uc sends whenever something must be done for the Merchant Guilds this season.
+Disposition pious
+How they deal Deals fairly with you, but never against the people they serve.
+Secret: Has been reading Zac Batab's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+Religious Authorities (1)▲
+## Religious Authorities
+Chimalxochitl May
+## Religious Authorities › Chimalxochitl May
+Houses of worship · first of Religious Authorities
+Dean
+Flaw: greedy Temperament: scholarly
+Professional RivalryLuchtan Caan
+Leads the faith while money is short; its lands and alms are both a help and a target.
+Constraint: Anything it does to guard its own wealth while people go short is seen by all.
+Wants Learn what Luchtan Caan has been saying about them, and to whom.
+Standing first of Religious Authorities, the second strongest power here
+Disposition scholarly
+How they deal Free with talk and small favours, and remembers every one when they want something back.
+Secret: Engineered the 'miracle' that tipped the settlement toward the new faith, and knows exactly how it was done
+Merchant Council (3)▲
+## Merchant Council
+Luchtan Caan
+## Merchant Council › Luchtan Caan
+Town watch · third of Merchant Council
+Captain
+Temperament: unflappable
+Family ComplicationXaman Uc
+Chimalxochitl May holds a tie to them: Professional Rivalry
+Wants Help Xaman Uc with one thing this season, as family should.
+Disposition unflappable
+How they deal Answers slowly, checks what you say against what they know, and gives little at a first meeting.
+Secret: Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances
+## Merchant Council
+Zac Batab
+## Merchant Council › Zac Batab
+Inns · Burgomaster, first of Merchant Council
+Temperament: honest
+Outstanding DebtOc Xiu
+Oc Xiu holds a tie to them: Outstanding Debt
+Holds the seat while money is short, in a place that lives on what it gets for its reeds and thatch. Still the innkeeper as well.
+Constraint: Every coin spent on the walls is a coin not spent on relief, and both are wanted.
+Wants Get the inn through the season without borrowing.
+Standing first of Merchant Council, the third strongest power here
+Disposition honest
+How they deal Friendly while the coin lasts; asks for payment up front from anyone they have not seen before.
+Secret: Was present when Luchtan Caan did something they've never accounted for publicly. Neither has acknowledged the other was there
+## Merchant Council
+Oc Xiu
+## Merchant Council › Oc Xiu
+Town granary · second of Merchant Council
+Granary Reeve
+Flaw: cold-blooded
+Outstanding DebtZac Batab
+Zac Batab holds a tie to them: Outstanding Debt
+Wants Keep the accounts of the town granary balanced, and show them to anyone who asks.
+How they deal Sells from the stores at the agreed price; wants it written down and paid.
+Secret: Has been lending grain from the stores to friends in the lean months and writing it down as rot
+Unranked members (1)▲
+## Unranked members
+Zipna Ek
+## Unranked members › Zipna Ek
+Mills · member of Merchant Council
+Master Miller
+Flaw: self-serving
+Wants Do one thing for the Merchant Council this season that the people who lead it cannot ignore.
+How they deal Will grind for anyone who pays the toll; wants to know whose grain it is before naming the price.
+Secret: Has been keeping back a handful from every sack brought to the mill for grinding, and selling the extra flour on the side
+
+== web:World/Relationships ==
+NPC Relationships (8)▲
+All (8)Rivals (1)Leverage (2)
+Ahulane NahMentor and SuccessorXaman Uc
+the smelt master · devoted · the senior craft-guild master
+▲
+Ahulane Nah made Xaman Uc's career, and the senior craft-guild master rarely says so.
+Xaman Uc now operates in ways Ahulane Nah would not approve of. Neither discusses the divergence directly.
+Chimalxochitl MayProfessional RivalryLuchtan Caan
+the dean · personal · the watch captain
+Chimalxochitl May and Luchtan Caan are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.
+Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+Zac BatabOutstanding DebtOc Xiu
+Burgomaster · minor · the granary reeve
+Oc Xiu nursed Zac Batab through a winter fever when no one else would come. Zac Batab still owes the debt and still knows it.
+Zac Batab has refused Oc Xiu a small favour for the first time in years.
+Xaman UcMentor and SuccessorFlint Kanil
+the senior craft-guild master · lifelong · the tavern keeper
+Flint Kanil owes their place to Xaman Uc and has kept others from climbing the same way. The two of them remember it differently.
+Xaman Uc has one favour left to call in, and is saving it. Flint Kanil knows, and is watching for it.
+Luchtan CaanFamily ComplicationXaman Uc
+the watch captain · inseparable · the senior craft-guild master
+Luchtan Caan is godparent to Xaman Uc's eldest child. The tie was made before their careers set them against each other.
+The family has asked Luchtan Caan and Xaman Uc to end their quarrel before the next feast. Neither will apologise first.
+Flint KanilMutual LeverageAhulane Nah
+the tavern keeper · stable · the smelt master
+Flint Kanil and Ahulane Nah deal with each other slowly and politely, each knowing one slip could ruin them both.
+Ahulane Nah has recently secured something that makes Flint Kanil's hold obsolete. The politeness continues, for now.
+Oc XiuOutstanding DebtZac Batab
+the granary reeve · substantial · Burgomaster
+Zac Batab borrowed Oc Xiu's good name to win a post. Oc Xiu has never asked for it back.
+Oc Xiu has begun to count the debt Zac Batab owes among her assets, and has had it written down before witnesses.
+Zipna EkMentor and SuccessorXaman Uc
+the miller · devoted · the senior craft-guild master
+Zipna Ek taught Xaman Uc everything, including how to get the better of the miller.
+A third party has asked Zipna Ek, quietly, whether Xaman Uc can be trusted. The answer took too long.
+Active Conflicts (1)
+Moderate tension Religious Authorities vs Merchant Council · Members leaving one power for the other
+At stake: Loyalty and numbers
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+Road
+Culture
+Mesoamerican
+Active stress
+Religious Crisis
+Itzatitlan feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no line for anything else.
+Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.
+People meet at the mills and at the weekly market, and the talk at each is of prices and of one another.
+Children are warned about carrying tales from one household to another, and about the road past sundown.
+
+== web:World/Traditions ==
+The founding traditions of Itzatitlan.
+✒
+The Feathered Procession
+## The Feathered Procession
+Charter
+Kept in Seedtime, the sixth week.
+A procession that remembers the charter. It falls to the Merchant Council. It goes back 238 years, to the founding of Itzatitlan by a noble granted lands by the crown with the resources to develop them.
+✦
+The Vigil of the Stars
+## The Vigil of the Stars
+Stars
+Kept in Deepwinter, the third week.
+A night's vigil that marks the courses of the stars. Its keeping falls to the houses of worship; Chimalxochitl May, the dean, presides.
+◆
+The Great Fair
+## The Great Fair
+Stone
+Kept in Deepwinter, the sixth week.
+A fair kept as of old that stays true to the standing stones. It takes place at the weekly market; it falls to the Merchant Guilds. Market taxes bring Itzatitlan more than anything else.
+
+== web:World/History ==
+Itzatitlan238 years old↺ Reroll
+"A family's standing here is its wealth, and no one pretends otherwise. The Trade Collapse decided who held the money, and those families have held everything else ever since"
+Current Tensions (1)▲
+Legitimacy crisis
+The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim
+The sitting authorityThose who deny its mandatePragmatists who want any stable answer
+Founding▲
+## Founding
+Origin:grew as an agricultural market center
+Founded by:a noble granted lands by the crown with the resources to develop them
+Early trial:hostile local inhabitants
+How survived:by giving up more than the founders intended
+The first stones were laid with prayers the settlement no longer says, and the land and duties promised in them are now in dispute.
+Generations of patching and rebuilding have nearly hidden the plan Itzatitlan was laid out to.
+Major Historical Events (6)▲
+## Major Historical Events
+Founded
+Now
+224y
+183y
+137y
+116y
+37y
+18y
+Economic
+Demographic
+Political
+Religious
+The Religious ConflictReligiousmajor
+Rival faiths and doctrines contended for followers and standing in the community
+18y ago
+Living memory
+▼
+The Succession CrisisPoliticalminor
+As the ailing ruler declined, several would-be heirs positioned themselves to inherit
+37y ago
+Last century
+The Guild WarEconomicmajor
+Rival guilds fought over who may sell what, and over a say in how the place is run
+116y ago
+Ancient
+The MigrationDemographicmajor
+Newcomers and long-settled residents settled into a slow, grinding antagonism that never quite boiled over
+137y ago
+The Debt CrisisEconomicmajor
+The settlement had borrowed heavily from a foreign power now ready to call the debt in
+183y ago
+The Trade CollapseEconomicmajor
+When the overland trade the town depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for
+224y ago
+Deep history
+The succession crisis left a legacy of trouble in Itzatitlan that has never been fully put right, and that legacy is a generation old.
+
+== web:World/Rumors & News ==
+Available at launch
+What Itzatitlan has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Itzatitlan's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+Parish churches keep the faith in the town. A voice in the town’s affairs belongs to the Religious Authorities. Tithes are collected. Devotion runs deep, and the rites set the rhythm of the week.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## ITZATITLAN
+ITZATITLAN
+Town · Plains
+POPULATION
+## 358
+358
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Reeds and thatch
+SAFETY
+## Suspicious — Religious Upheaval
+Suspicious — Religious Upheaval
+Defense: Lightly Defended
+Prosperity: Moderate before the conversion; Poor since.
+GOVERNED BY
+Merchant Council
+ACTIVE CRISES · 1
+Religious Conversion
+Newcomers to Itzatitlan are asked, sooner or later, which faith they keep, and the answer decides who will deal with them.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Itzatitlan
+SETTLEMENT DOSSIER
+## Suspicious — Religious Upheaval › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Poor. In Itzatitlan, a town of 358, the talk is all of the change of faith: more people take up the new gods every week, and families argue over which to keep.
+Population
+358
+Town
+Age
+238 yrs
+Plains
+Prosperity
+Poor
+Safety
+Suspicious — religious upheaval
+Stability
+Tense (the creed is contested)
+Prosperity: Moderate before the conversion; Poor since.
+ACTIVE CRISES
+Religious Conversion
+Religious Conversion :
+The tithe in Itzatitlan is split two ways, and trade between the faithful of each grows harder.
+»
+The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+41/100
+Economic
+64/100
+Magical
+13/100
+Disaster
+39/100
+Enforcement ratio
+The criminals outmatch those who keep order.
+Food balance
+Produced
+664
+Needed
+716
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Legitimacy Crisis
+The sitting authority / Those who deny its mandate / Pragmatists who want any stable answer
+Moderate
+Religious Authorities vs Merchant Council
+Issue:
+Members leaving one power for the other
+Stakes: Loyalty and numbers
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+A road settlement: other people's journeys pass its doors, and some of them stop for a meal on the way.
+NOTABLE CONNECTION
+Chimalxochitl May & Luchtan Caan
+Professional Rivalry
+INSTITUTIONS · 15 TOTAL
+Economy 5
+Crafts 3
+Infrastructure 3
+Religious 2
+Defense 2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+Active crisis
+Religious Conversion. Each faith in Itzatitlan watches the other for an insult, and the next feast day could end in a fight. Ahulane Nah is stirring it.
+People to voice
+Ahulane Nah
+the smelt master · instigator
+Wants to pay every hand at the smelter in full and on time this season.
+Zac Batab
+Burgomaster · Holds the seat
+Wants to get the inn through the season without borrowing.
+Luchtan Caan
+the watch captain · Secret
+Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances.
+What the players test first
+Food
+Secure. Stores: a granary, about six months of grain.
+Defence
+Town walls, Town watch.
+Hooks
+Religious Conversion
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+Religious Conversion
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+Luchtan Caan
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+Religious Conversion.
+The religious community of Itzatitlan has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.
+Who it touches
+instigator: Ahulane Nah · speaks for the power that gains from the crisis, from a house that power backs
+target: Zac Batab · holds the seat, and the right to it is already in dispute
+takes the fall: Zac Batab · holds the seat, and takes the blame while the right to it is in dispute
+Stakes
+Merchant Guilds gains · already carries more weight than whoever holds the seat
+Religious Authorities split · gains and loses by it at once
+Merchant Council loses · its own people feel the crisis first
+Levers
+Houses of worship, held by Chimalxochitl May.
+If nothing is done
+The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.
+SESSION SCRATCH
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+18 hooks
+18 hooks to pull; the largest group belongs to its history and its tensions (8).
+NPCs
+8 hook s
+01
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+Luchtan Caan
+High
+02
+A regular customer has stopped coming. The reason they've been given doesn't make sense.
+Zac Batab
+High
+03
+A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away.
+Xaman Uc
+High
+04
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Chimalxochitl May
+Medium
+05
+A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.
+Oc Xiu
+Low
+06
+Their spouse has been making payments to someone every month for years, and will not say who.
+Ahulane Nah
+Low
+07
+Someone has been asking the neighbours what time they leave in the morning and when they come home.
+Flint Kanil
+Low
+08
+They told a lie to protect a friend, and the friend is now repeating it to people who matter.
+Zipna Ek
+Low
+Relationships
+1 hook
+01
+Three members crossed over in a single week, and the side they left wants to know what they were offered.
+Religious Authorities vs Merchant Council
+Medium
+History
+8 hook s
+01
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+Religious Conversion
+High
+02
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+Religious Conversion
+High
+03
+A would-be heir approaches outsiders to investigate a rival's past
+Political Event
+Medium
+04
+A relic claimed by both sides has resurfaced in a private collection
+Religious Event
+Medium
+05
+The reformist leader is being blackmailed into silence
+Religious Event
+Medium
+06
+One of those who deny the mandate has been offered a post by those in charge, and has not yet answered
+Legitimacy Crisis
+Medium
+07
+A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with
+Legitimacy Crisis
+Medium
+08
+Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found
+Legitimacy Crisis
+Medium
+Outlook
+1 hook
+01
+The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits.
+Strategic Resource
+Medium
+UNDERLYING TENSIONS
+•
+Legitimacy Crisis
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+22 buyable across 7 categories
+Lodging
+3 option s
+Accommodation
+Lodging (rooms to let)
+Short accommodation
+Food & drink
+3 option s
+Drink service
+Grain grinding
+Meals and drink
+Goods & crafts
+3 option s
+General trade
+Iron refining
+Weekly market
+Healing
+3 option s
+Burial
+Life ceremonies
+Religious services
+Transportation
+1 option
+Stabling
+Legal & financial
+7 option s
+Dispute arbitration
+Gate control
+Gate duty
+Grain storage
+Night patrol
+Permit applications
+Quality certification
+Criminal services
+2 option s
+Protection (informal)
+Weak law, bring coin
+NOTABLE ABSENCES
+Information
+ACTIVE SUPPLY CHAINS · 5
+Bowyer & fletcher
+Impaired
+NEED Manufacturing & Crafts · EXPORT yes
+Managed woodland (depleted) » Craft guilds
+Standing Watch
+Vulnerable
+NEED Defense & Security
+Town watch » Defence services, Weapons training
+Taverns & Social Life
+Vulnerable
+NEED Entertainment & Culture
+Taverns » Lodging, Meals and drink, Stabling
+Faith & Worship
+Running
+NEED Religion & Civic
+Houses of worship » Religious services, Education (basic), Poor relief
+Law & Governance
+Operational
+NEED Religion & Civic
+Town hall » Legal services
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+15 institutions
+15 institutions; the largest groups are trade and farming (5) and crafts (3).
+Total
+15
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+2 institutions
+Houses of worship
+Essential
+Religious
+Church
+Several houses of worship within town.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals across several congregations.
+Religious services
+: Several congregations covering different districts or communities.
+Burial grounds
+Essential
+Religious
+A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.
+Backs
+Religious Authorities
+Services
+Burial
+: Interment in the congregation's ground, with the rite that congregation keeps.
+Economy
+5 institutions
+Weekly market
+Essential
+Market
+Trade
+Charter required. Major economic driver.
+Backs
+Merchant Guilds
+Services
+General trade
+: Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Market square
+Essential
+Market
+Central plaza for weekly markets and fairs.
+Backs
+Merchant Guilds
+Services
+Weekly market
+: Regular market days with produce, goods, and livestock.
+Inns
+Trade
+Lodging for traveling merchants.
+Backs
+Merchant Guilds
+Services
+Accommodation
+: Beds from dormitory to private room. Quality varies by establishment.
+Meals and drink
+: Hot meals and a range of drinks at multiple venues.
+Stabling
+: Horse care, feed, and overnight stabling.
+Taverns
+Food
+Drinking establishments. Social hubs.
+Backs
+Merchant Guilds
+Services
+Short accommodation
+: Beds or floor space available in most taverns.
+Drink service
+: Ale, wine, and spirits across multiple establishments.
+Town granary
+Essential
+Food
+Grain kept in common, a hedge against lean harvests and hunger.
+Backs
+Merchant Council
+Services
+Grain storage
+: Municipal grain reserves. Buffers the settlement against poor harvests.
+Crafts
+3 institutions
+Mills
+Essential
+Grain ground at several sites.
+Backs
+Merchant Council
+Services
+Grain grinding
+: Grind grain into flour for bread and other foods.
+Smelter
+Trade
+Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever will buy them.
+Backs
+Merchant Guilds
+Services
+Iron refining
+: Smelt raw ore into pig iron and refined ingots ready for smithing.
+Craft guilds
+Guild
+Quality, price, and apprenticeship all fall under their rule.
+Backs
+Merchant Guilds
+Services
+Quality certification
+: Guild mark indicating goods meet agreed standards.
+Infrastructure
+3 institutions
+Housing
+Essential
+Housing
+Multi-story timber and stone buildings.
+Backs
+Merchant Council
+Services
+Lodging (rooms to let)
+: A room let in a private house, by the night or the week.
+Multiple water sources
+Essential
+Water
+Wells and fountains, or water carried in by pipe.
+Backs
+Merchant Council
+Town hall
+Civic
+The seat of assembly and administration.
+Backs
+Merchant Council
+Services
+Dispute arbitration
+: Bring commercial and civil disputes before a magistrate.
+Permit applications
+: Apply for construction, business, and trade permits.
+Defense
+2 institutions
+Town watch
+Law Enforcement
+Defense
+Watchmen serving part-time. Night patrols and gate duty.
+Backs
+Merchant Council
+Services
+Gate duty
+: Check travelers entering and leaving. Note unusual visitors.
+Night patrol
+: Patrol the streets after dark. Deter crime and respond to incidents.
+Town walls
+Defense
+Fortification
+Gated stone defences. Costly to raise and no cheaper to keep up.
+Backs
+Merchant Council
+Services
+Gate control
+: Control who enters and exits. Levy tolls on goods.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Poor. Its people make their living from reeds and thatch.
+Prosperity
+Poor
+Complexity
+Diversified market economy
+Trade
+Road
+Prosperity: Moderate before the conversion; Poor since.
+It gets about four fifths of what its work could yield.
+INCOME SOURCES
+Market Taxes
+26%
+Market day stall fees and toll collection on goods entering the market.
+Guild Fees
+20%
+Annual licensing fees and fines levied by guild oversight.
+Church Tithes
+19%
+Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+Black Market Revenue
+13%
+Untaxed trade, fencing and theft bring money in here, but none of it reaches the treasury.
+Gate Tolls
+11%
+Entry and exit tolls collected at the town gates from merchants and travellers.
+Property Rents
+11%
+Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+TRADE FLOWS
+EXPORTS
+•
+Reeds and thatch
+•
+Waterfowl
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Iron
+•
+Grain (a little, beside its own harvest)
+•
+Salt
+•
+Coal and fuel (local seams exhausted)
+•
+Timber (local managed woodland cleared)
+•
+Replacement arms and basic equipment
+•
+Incense, ritual oil, and vestment materials
+•
+Cacao in bulk
+•
+Copal resin incense
+LOCAL PRODUCTION
+•
+Religious services
+•
+Education (basic)
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber
+Stone
+luxury goods
+iron ore
+copper ore
+gold/silver ore
+FOOD SECURITY
+PRODUCED
+664
+NEEDED
+716
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 5 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Manufacturing & crafts
+1 chain · 1 impaired
+Managed woodland (depleted)
+>
+Craft guilds
+Defense & security
+1 chain · 1 vulnerable
+Town watch
+>
+Defence services
+Weapons training
+Entertainment & culture
+1 chain · 1 vulnerable
+Taverns
+>
+Lodging
+Meals and drink
+Stabling
+Religion & civic
+2 chain s
+Houses of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Town hall
+>
+Legal services
+SHADOW ECONOMY
+Black market capture:
+13 %
+of economy
+underground worship
+religious fraud
+contested property
+informant networks
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+The nearby coal deposits and managed forest are used up.
+STRATEGIC VALUE
+Medium - open country, but exposed to raids
+NEARBY RESOURCES
+Depleted
+Coal or Peat Deposits
+Managed Woodland
+Abundant
+Marshlands
+Ancient Grove
+Commodities available
+· processed/refined in this settlement
+Marshlands
+Peat
+Honey
+Medicinal Herbs
+Ancient Grove
+IMPORT DEPENDENCIES
+CRITICAL
+Timber
+Stone
+luxury goods
+iron ore
+copper ore
+gold/silver ore
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Merchant Council holds the seat, but more weight lies with Merchant Guilds.
+PUBLIC LEGITIMACY
+## 32
+32
+Contested
+STABILITY
+Tense (the creed is contested)
+GOVERNING
+Merchant Council
+Economy
+merchant sway
+GOVERNANCE
+Itzatitlan is governed by the Merchant Council. Zac Batab, the innkeeper and Burgomaster, holds its seat. In Itzatitlan, the Merchant Council's right to rule is contested. Poverty and insecurity are the reason. The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Merchant Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+POWER DISTRIBUTION
+Merchant Guilds 37
+Religious Authorities 32
+Merchant Council 31
+POWERS
+Merchant Guilds
+Economy
+Power 37
+Strong
+The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.
+Religious Authorities
+Religious
+Power 32
+Significant
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested. The gap between them and the Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+contested legitimacy
+Merchant Council
+Economy
+Governing
+Power 31
+Significant
+Merchant interests dominate the council; trade policy is the primary concern. Under pressure from both sides of the faith to make a formal declaration of support. Has so far avoided doing so. Close enough to the two above that their support is worth buying; they play the Religious Authorities and the Merchant Guilds against each other when they can.
+FOR THE DM ONLY
+Who really runs this town
+THE RULING THREE OF MERCHANT COUNCIL
+Head · Zac Batab, the innkeeper
+Second · Oc Xiu, the granary reeve
+Third · Luchtan Caan, the watch captain
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Merchant Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Lightly defended: town walls, held by the town watch.
+ACTIVE MILITARY STATUS
+Religious Conversion
+Those who answer for Itzatitlan are kept busy by quarrels between the faiths, and are trusted by neither.
+Readiness
+Lightly defended
+Safety
+Suspicious — religious upheaval
+Watch to population
+0.5
+Food resilience
+39
+GUARD ASSESSMENT
+The town watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. Everyone comes and goes by the gates, so smugglers have to get past the town watch.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Adequate
+Active frontier, with walls and a watch to meet what comes.
+Invasion & War
+Weak
+Walls, and a watch to keep them.
+Internal Security
+Weak
+Internal security: Suspicious — Religious Upheaval. Cases are heard here, but there is almost nowhere to hold anyone.
+Economic Survival
+Adequate
+Money enough for a short crisis, laid by before the conversion; a long one would start eating the reserves within months.
+Disasters & Famine
+Weak
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+Under siege the outlying fields would be lost; the granary would carry the town for about six months at full rations, about a year on half, and what is still harvested would stretch it further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Town walls
+Gated stone defences. Costly to raise and no cheaper to keep up.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+CRIMINAL ARCHITECTURE
+Criminal structure · Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+underground worship
+religious fraud
+contested property
+informant networks
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+Town hall bench only
+Cases heard without detention. Fines and exile only.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, as long as the one trade route it depends on stays open.
+VERDICT
+Viable
+Itzatitlan's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++0
+Trade access
+road
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+8 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Luchtan Caan
+the watch captain
+Merchant Council
+Male · early fifties
+10
+Zac Batab
+the innkeeper
+Merchant Council
+Male · early twenties
+9
+Xaman Uc
+the senior craft-guild master
+Merchant Guilds
+Female · late twenties
+9
+Chimalxochitl May
+the dean
+Religious Authorities
+Female · mid-thirties
+7
+Oc Xiu
+the granary reeve
+Merchant Council
+Female · early sixties
+3
+Ahulane Nah
+the smelt master
+Merchant Guilds
+Female · early twenties
+2
+Flint Kanil
+the tavern keeper
+Merchant Guilds
+Male · mid-twenties
+2
+Zipna Ek
+the miller
+Merchant Council
+Female · late forties
+2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+8 figures
+Ask who matters here and you hear eight names; Luchtan Caan, the watch captain, third of Merchant Council, comes first.
+MAJOR FIGURES
+Luchtan Caan
+the watch captain
+Merchant Council
+PWR 10
+Sex
+Male
+·
+Age
+early fifties
+Town watch · third of Merchant Council
+Personality
+unflappable
+Motivation
+Help Xaman Uc with one thing this season, as family should. — Own a share in the supply of iron, so the work at the town watch can never be held to ransom.
+How they deal
+Answers slowly, checks what you say against what they know, and gives little at a first meeting.
+SECRETS
+·
+Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances: One of the unmade legitimacies belongs to a family with the means to check the originals
+RELATIONSHIPS
+· Xaman Uc - Family Complication
+· Chimalxochitl May - called by · Professional Rivalry
+Zac Batab
+the innkeeper
+Merchant Council
+PWR 9
+Sex
+Male
+·
+Age
+early twenties
+·
+Standing
+first of Merchant Council, the third strongest power here
+Inns · Burgomaster, first of Merchant Council
+Personality
+honest
+Motivation
+Get the inn through the season without borrowing. — Be someone the people here can always count on.
+How they deal
+Friendly while the coin lasts; asks for payment up front from anyone they have not seen before.
+SECRETS
+·
+Was present when Luchtan Caan did something they've never accounted for publicly. Neither has acknowledged the other was there: The situation they're both ignoring is becoming relevant again
+RELATIONSHIPS
+· Oc Xiu - Outstanding Debt
+· Oc Xiu - called by · Outstanding Debt
+Xaman Uc
+the senior craft-guild master
+Merchant Guilds
+PWR 9
+Sex
+Female
+·
+Age
+late twenties
+Craft guilds · second of Merchant Guilds
+Personality
+courteous
+Motivation
+Learn the plans of the Religious Authorities against the Merchant Guilds before they can act on them. — Leave the work at the craft guilds sounder than it was before the trouble came.
+How they deal
+Helpful within the limits of their role. Refers you to others for anything outside it.
+SECRETS
+·
+Has been funding a forbidden relationship with embezzled money: Both the relationship and the embezzlement would become public simultaneously
+RELATIONSHIPS
+· Flint Kanil - Mentor and Successor
+· Ahulane Nah - called by · Mentor and Successor
+· Luchtan Caan - called by · Family Complication
+· Zipna Ek - called by · Mentor and Successor
+NOTABLE FIGURES
+Chimalxochitl May
+PWR 7
+the dean
+Religious Authorities
+Motive:
+Learn what Luchtan Caan has been saying about them, and to whom. — Secure rights for the houses of worship that will outlast whoever governs now.
+Oc Xiu
+PWR 3
+the granary reeve
+Merchant Council
+Motive:
+Keep the accounts of the town granary balanced, and show them to anyone who asks. — Make Zac Batab the first of many who owe them.
+Ahulane Nah
+PWR 2
+the smelt master
+Merchant Guilds
+Motive:
+Pay every hand at the smelter in full and on time this season. — Understand how this place really works, every part of it.
+Flint Kanil
+PWR 2
+the tavern keeper
+Merchant Guilds
+Motive:
+Be the one Xaman Uc sends whenever something must be done for the Merchant Guilds this season. — Outlast the Religious Authorities, and still be standing with the Merchant Guilds when they are gone.
+OTHER NAMES OF NOTE
+Zipna Ek
+· the miller
+Merchant Council
+2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Chimalxochitl May & Luchtan Caan · Professional Rivalry
+Chimalxochitl May and Luchtan Caan are rivals, and neither gives the other ground. Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+Internal relationships
+•
+Ahulane Nah and Xaman Uc · Mentor and Successor
+Ahulane Nah made Xaman Uc's career, and the senior craft-guild master rarely says so.
+Xaman Uc now operates in ways Ahulane Nah would not approve of. Neither discusses the divergence directly.
+•
+Chimalxochitl May and Luchtan Caan · Professional Rivalry
+Chimalxochitl May and Luchtan Caan are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.
+Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+•
+Zac Batab and Oc Xiu · Outstanding Debt
+Oc Xiu nursed Zac Batab through a winter fever when no one else would come. Zac Batab still owes the debt and still knows it.
+Zac Batab has refused Oc Xiu a small favour for the first time in years.
+•
+Xaman Uc and Flint Kanil · Mentor and Successor
+Flint Kanil owes their place to Xaman Uc and has kept others from climbing the same way. The two of them remember it differently.
+Xaman Uc has one favour left to call in, and is saving it. Flint Kanil knows, and is watching for it.
+•
+Luchtan Caan and Xaman Uc · Family Complication
+Luchtan Caan is godparent to Xaman Uc's eldest child. The tie was made before their careers set them against each other.
+The family has asked Luchtan Caan and Xaman Uc to end their quarrel before the next feast. Neither will apologise first.
+•
+Flint Kanil and Ahulane Nah · Mutual Leverage
+Flint Kanil and Ahulane Nah deal with each other slowly and politely, each knowing one slip could ruin them both.
+Ahulane Nah has recently secured something that makes Flint Kanil's hold obsolete. The politeness continues, for now.
+•
+Oc Xiu and Zac Batab · Outstanding Debt
+Zac Batab borrowed Oc Xiu's good name to win a post. Oc Xiu has never asked for it back.
+Oc Xiu has begun to count the debt Zac Batab owes among her assets, and has had it written down before witnesses.
+•
+Zipna Ek and Xaman Uc · Mentor and Successor
+Zipna Ek taught Xaman Uc everything, including how to get the better of the miller.
+A third party has asked Zipna Ek, quietly, whether Xaman Uc can be trusted. The answer took too long.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Town
+ANCHOR FACTS
+Complexity
+Diversified market economy
+Food
+Secure
+Religious Conversion
+CULTURAL NOTES
+Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life. Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.
+IDENTITY
+Name
+Itzatitlan
+Tier
+Town
+Population
+358
+Terrain
+Plains
+Layout
+Compact within walls, outlying farms and a weekly market field beyond the gates
+Age
+238 years
+Trade access
+Road
+Founded
+a noble granted lands by the crown with the resources to develop them
+CULTURAL IDENTITY
+Mesoamerican-inspired
+Mesoamerican-inspired: built around a civic-ritual plaza, tribute and market.
+Built form
+Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.
+Civic pattern
+Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.
+Exchange
+Professional merchants, tribute redistribution, and specialist craft production drive exchange.
+Foodways
+Meals follow the season and what the household has put by.
+Sacred life
+Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.
+Defense
+Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.
+Social texture
+Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life.
+Architecture
+terraces, plastered platforms, and residential compounds step with the terrain
+DAILY LIFE
+FOOD BALANCE
+Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+238y old
+Founded 238 years ago, with six events on record and one tension still unresolved.
+Settlement age
+## 238
+238
+years
+Historical character
+A family's standing here is its wealth, and no one pretends otherwise. The Trade Collapse decided who held the money, and those families have held everything else ever since
+Founding
+Origin
+grew as an agricultural market center
+Founded by
+a noble granted lands by the crown with the resources to develop them
+Initial challenge
+hostile local inhabitants
+Overcoming
+by giving up more than the founders intended
+Stress note
+The first stones were laid with prayers the settlement no longer says, and the land and duties promised in them are now in dispute.
+Historical events · 6
+Founding (- 238 y)
+Now
+0 y after founding
+119 y after founding
+238 y after founding
+18y AGO
+Still relevant today
+Major
+The Religious Conflict
+· Religious
+Rival faiths and doctrines contended for followers and standing in the community
+Lasting effects
+·
+Public preaching restricted to licensed grounds after the unrest
+37y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+As the ailing ruler declined, several would-be heirs positioned themselves to inherit
+Lasting effects
+·
+Succession now governed by a charter drafted in the aftermath
+116y AGO
+Major
+The Guild War
+· Economic
+Rival guilds fought over who may sell what, and over a say in how the place is run
+Lasting effects
+·
+Guild membership rolls now audited by an outside adjudicator
+137y AGO
+Major
+The Migration
+· Demographic
+Newcomers and long-settled residents settled into a slow, grinding antagonism that never quite boiled over
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+183y AGO
+Major
+The Debt Crisis
+· Economic
+The settlement had borrowed heavily from a foreign power now ready to call the debt in
+Lasting effects
+·
+Municipal borrowing now capped by a charter clause
+224y AGO
+Major
+The Trade Collapse
+· Economic
+When the overland trade the town depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for
+Live tensions · 1
+Legitimacy Crisis
+Parties: The sitting authority vs Those who deny its mandate vs Pragmatists who want any stable answer
+The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## ITZATITLAN
+ITZATITLAN
+Town · Plains
+POPULATION
+## 358
+358
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Reeds and thatch
+SAFETY
+## Suspicious — Religious Upheaval
+Suspicious — Religious Upheaval
+Defense: Lightly Defended
+Prosperity: Moderate before the conversion; Poor since.
+GOVERNED BY
+Merchant Council
+ACTIVE CRISES · 1
+Religious Conversion
+Newcomers to Itzatitlan are asked, sooner or later, which faith they keep, and the answer decides who will deal with them.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Itzatitlan
+SETTLEMENT DOSSIER
+## Suspicious — Religious Upheaval › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Poor. In Itzatitlan, a town of 358, the talk is all of the change of faith: more people take up the new gods every week, and families argue over which to keep.
+Population
+358
+Town
+Age
+238 yrs
+Plains
+Prosperity
+Poor
+Safety
+Suspicious — religious upheaval
+Stability
+Tense (the creed is contested)
+Prosperity: Moderate before the conversion; Poor since.
+ACTIVE CRISES
+Religious Conversion
+Religious Conversion :
+The tithe in Itzatitlan is split two ways, and trade between the faithful of each grows harder.
+»
+The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+41/100
+Economic
+64/100
+Magical
+13/100
+Disaster
+39/100
+Enforcement ratio
+The criminals outmatch those who keep order.
+Food balance
+Produced
+664
+Needed
+716
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Legitimacy Crisis
+The sitting authority / Those who deny its mandate / Pragmatists who want any stable answer
+Moderate
+Religious Authorities vs Merchant Council
+Issue:
+Members leaving one power for the other
+Stakes: Loyalty and numbers
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+A road settlement: other people's journeys pass its doors, and some of them stop for a meal on the way.
+NOTABLE CONNECTION
+Chimalxochitl May & Luchtan Caan
+Professional Rivalry
+INSTITUTIONS · 15 TOTAL
+Economy 5
+Crafts 3
+Infrastructure 3
+Religious 2
+Defense 2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+Active crisis
+Religious Conversion. Each faith in Itzatitlan watches the other for an insult, and the next feast day could end in a fight. Ahulane Nah is stirring it.
+People to voice
+Ahulane Nah
+the smelt master · instigator
+Wants to pay every hand at the smelter in full and on time this season.
+Zac Batab
+Burgomaster · Holds the seat
+Wants to get the inn through the season without borrowing.
+Luchtan Caan
+the watch captain · Secret
+Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances.
+What the players test first
+Food
+Secure. Stores: a granary, about six months of grain.
+Defence
+Town walls, Town watch.
+Hooks
+Religious Conversion
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+Religious Conversion
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+Luchtan Caan
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+Religious Conversion.
+The religious community of Itzatitlan has fractured. Both sides claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither.
+Who it touches
+instigator: Ahulane Nah · speaks for the power that gains from the crisis, from a house that power backs
+target: Zac Batab · holds the seat, and the right to it is already in dispute
+takes the fall: Zac Batab · holds the seat, and takes the blame while the right to it is in dispute
+Stakes
+Merchant Guilds gains · already carries more weight than whoever holds the seat
+Religious Authorities split · gains and loses by it at once
+Merchant Council loses · its own people feel the crisis first
+Levers
+Houses of worship, held by Chimalxochitl May.
+If nothing is done
+The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.
+SESSION SCRATCH
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+18 hooks
+18 hooks to pull; the largest group belongs to its history and its tensions (8).
+NPCs
+8 hook s
+01
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+Luchtan Caan
+High
+02
+A regular customer has stopped coming. The reason they've been given doesn't make sense.
+Zac Batab
+High
+03
+A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away.
+Xaman Uc
+High
+04
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Chimalxochitl May
+Medium
+05
+A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.
+Oc Xiu
+Low
+06
+Their spouse has been making payments to someone every month for years, and will not say who.
+Ahulane Nah
+Low
+07
+Someone has been asking the neighbours what time they leave in the morning and when they come home.
+Flint Kanil
+Low
+08
+They told a lie to protect a friend, and the friend is now repeating it to people who matter.
+Zipna Ek
+Low
+Relationships
+1 hook
+01
+Three members crossed over in a single week, and the side they left wants to know what they were offered.
+Religious Authorities vs Merchant Council
+Medium
+History
+8 hook s
+01
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+Religious Conversion
+High
+02
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+Religious Conversion
+High
+03
+A would-be heir approaches outsiders to investigate a rival's past
+Political Event
+Medium
+04
+A relic claimed by both sides has resurfaced in a private collection
+Religious Event
+Medium
+05
+The reformist leader is being blackmailed into silence
+Religious Event
+Medium
+06
+One of those who deny the mandate has been offered a post by those in charge, and has not yet answered
+Legitimacy Crisis
+Medium
+07
+A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with
+Legitimacy Crisis
+Medium
+08
+Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found
+Legitimacy Crisis
+Medium
+Outlook
+1 hook
+01
+The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits.
+Strategic Resource
+Medium
+UNDERLYING TENSIONS
+•
+Legitimacy Crisis
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+22 buyable across 7 categories
+Lodging
+3 option s
+Accommodation
+Lodging (rooms to let)
+Short accommodation
+Food & drink
+3 option s
+Drink service
+Grain grinding
+Meals and drink
+Goods & crafts
+3 option s
+General trade
+Iron refining
+Weekly market
+Healing
+3 option s
+Burial
+Life ceremonies
+Religious services
+Transportation
+1 option
+Stabling
+Legal & financial
+7 option s
+Dispute arbitration
+Gate control
+Gate duty
+Grain storage
+Night patrol
+Permit applications
+Quality certification
+Criminal services
+2 option s
+Protection (informal)
+Weak law, bring coin
+NOTABLE ABSENCES
+Information
+ACTIVE SUPPLY CHAINS · 5
+Bowyer & fletcher
+Impaired
+NEED Manufacturing & Crafts · EXPORT yes
+Managed woodland (depleted) » Craft guilds
+Standing Watch
+Vulnerable
+NEED Defense & Security
+Town watch » Defence services, Weapons training
+Taverns & Social Life
+Vulnerable
+NEED Entertainment & Culture
+Taverns » Lodging, Meals and drink, Stabling
+Faith & Worship
+Running
+NEED Religion & Civic
+Houses of worship » Religious services, Education (basic), Poor relief
+Law & Governance
+Operational
+NEED Religion & Civic
+Town hall » Legal services
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+15 institutions
+15 institutions; the largest groups are trade and farming (5) and crafts (3).
+Total
+15
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+2 institutions
+Houses of worship
+Essential
+Religious
+Church
+Several houses of worship within town.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals across several congregations.
+Religious services
+: Several congregations covering different districts or communities.
+Burial grounds
+Essential
+Religious
+A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.
+Backs
+Religious Authorities
+Services
+Burial
+: Interment in the congregation's ground, with the rite that congregation keeps.
+Economy
+5 institutions
+Weekly market
+Essential
+Market
+Trade
+Charter required. Major economic driver.
+Backs
+Merchant Guilds
+Services
+General trade
+: Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Market square
+Essential
+Market
+Central plaza for weekly markets and fairs.
+Backs
+Merchant Guilds
+Services
+Weekly market
+: Regular market days with produce, goods, and livestock.
+Inns
+Trade
+Lodging for traveling merchants.
+Backs
+Merchant Guilds
+Services
+Accommodation
+: Beds from dormitory to private room. Quality varies by establishment.
+Meals and drink
+: Hot meals and a range of drinks at multiple venues.
+Stabling
+: Horse care, feed, and overnight stabling.
+Taverns
+Food
+Drinking establishments. Social hubs.
+Backs
+Merchant Guilds
+Services
+Short accommodation
+: Beds or floor space available in most taverns.
+Drink service
+: Ale, wine, and spirits across multiple establishments.
+Town granary
+Essential
+Food
+Grain kept in common, a hedge against lean harvests and hunger.
+Backs
+Merchant Council
+Services
+Grain storage
+: Municipal grain reserves. Buffers the settlement against poor harvests.
+Crafts
+3 institutions
+Mills
+Essential
+Grain ground at several sites.
+Backs
+Merchant Council
+Services
+Grain grinding
+: Grind grain into flour for bread and other foods.
+Smelter
+Trade
+Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever will buy them.
+Backs
+Merchant Guilds
+Services
+Iron refining
+: Smelt raw ore into pig iron and refined ingots ready for smithing.
+Craft guilds
+Guild
+Quality, price, and apprenticeship all fall under their rule.
+Backs
+Merchant Guilds
+Services
+Quality certification
+: Guild mark indicating goods meet agreed standards.
+Infrastructure
+3 institutions
+Housing
+Essential
+Housing
+Multi-story timber and stone buildings.
+Backs
+Merchant Council
+Services
+Lodging (rooms to let)
+: A room let in a private house, by the night or the week.
+Multiple water sources
+Essential
+Water
+Wells and fountains, or water carried in by pipe.
+Backs
+Merchant Council
+Town hall
+Civic
+The seat of assembly and administration.
+Backs
+Merchant Council
+Services
+Dispute arbitration
+: Bring commercial and civil disputes before a magistrate.
+Permit applications
+: Apply for construction, business, and trade permits.
+Defense
+2 institutions
+Town watch
+Law Enforcement
+Defense
+Watchmen serving part-time. Night patrols and gate duty.
+Backs
+Merchant Council
+Services
+Gate duty
+: Check travelers entering and leaving. Note unusual visitors.
+Night patrol
+: Patrol the streets after dark. Deter crime and respond to incidents.
+Town walls
+Defense
+Fortification
+Gated stone defences. Costly to raise and no cheaper to keep up.
+Backs
+Merchant Council
+Services
+Gate control
+: Control who enters and exits. Levy tolls on goods.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Poor. Its people make their living from reeds and thatch.
+Prosperity
+Poor
+Complexity
+Diversified market economy
+Trade
+Road
+Prosperity: Moderate before the conversion; Poor since.
+It gets about four fifths of what its work could yield.
+INCOME SOURCES
+Market Taxes
+26%
+Market day stall fees and toll collection on goods entering the market.
+Guild Fees
+20%
+Annual licensing fees and fines levied by guild oversight.
+Church Tithes
+19%
+Tithes, offerings, and fees for burial and sacramental services collected by resident clergy.
+Black Market Revenue
+13%
+Untaxed trade, fencing and theft bring money in here, but none of it reaches the treasury.
+Gate Tolls
+11%
+Entry and exit tolls collected at the town gates from merchants and travellers.
+Property Rents
+11%
+Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+TRADE FLOWS
+EXPORTS
+•
+Reeds and thatch
+•
+Waterfowl
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Iron
+•
+Grain (a little, beside its own harvest)
+•
+Salt
+•
+Coal and fuel (local seams exhausted)
+•
+Timber (local managed woodland cleared)
+•
+Replacement arms and basic equipment
+•
+Incense, ritual oil, and vestment materials
+•
+Cacao in bulk
+•
+Copal resin incense
+LOCAL PRODUCTION
+•
+Religious services
+•
+Education (basic)
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Timber
+Stone
+luxury goods
+iron ore
+copper ore
+gold/silver ore
+FOOD SECURITY
+PRODUCED
+664
+NEEDED
+716
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 5 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Manufacturing & crafts
+1 chain · 1 impaired
+Managed woodland (depleted)
+>
+Craft guilds
+Defense & security
+1 chain · 1 vulnerable
+Town watch
+>
+Defence services
+Weapons training
+Entertainment & culture
+1 chain · 1 vulnerable
+Taverns
+>
+Lodging
+Meals and drink
+Stabling
+Religion & civic
+2 chain s
+Houses of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Town hall
+>
+Legal services
+SHADOW ECONOMY
+Black market capture:
+13 %
+of economy
+underground worship
+religious fraud
+contested property
+informant networks
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+The nearby coal deposits and managed forest are used up.
+STRATEGIC VALUE
+Medium - open country, but exposed to raids
+NEARBY RESOURCES
+Depleted
+Coal or Peat Deposits
+Managed Woodland
+Abundant
+Marshlands
+Ancient Grove
+Commodities available
+· processed/refined in this settlement
+Marshlands
+Peat
+Honey
+Medicinal Herbs
+Ancient Grove
+IMPORT DEPENDENCIES
+CRITICAL
+Timber
+Stone
+luxury goods
+iron ore
+copper ore
+gold/silver ore
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Merchant Council holds the seat, but more weight lies with Merchant Guilds.
+PUBLIC LEGITIMACY
+## 32
+32
+Contested
+STABILITY
+Tense (the creed is contested)
+GOVERNING
+Merchant Council
+Economy
+merchant sway
+GOVERNANCE
+Itzatitlan is governed by the Merchant Council. Zac Batab, the innkeeper and Burgomaster, holds its seat. In Itzatitlan, the Merchant Council's right to rule is contested. Poverty and insecurity are the reason. The split is now open: two priests, two congregations, two registers of births, deaths and marriages. The Merchant Council has not said which is lawful, so nobody knows whose wedding, will or deed would stand.
+POWER DISTRIBUTION
+Merchant Guilds 37
+Religious Authorities 32
+Merchant Council 31
+POWERS
+Merchant Guilds
+Economy
+Power 37
+Strong
+The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.
+Religious Authorities
+Religious
+Power 32
+Significant
+Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested. The gap between them and the Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+contested legitimacy
+Merchant Council
+Economy
+Governing
+Power 31
+Significant
+Merchant interests dominate the council; trade policy is the primary concern. Under pressure from both sides of the faith to make a formal declaration of support. Has so far avoided doing so. Close enough to the two above that their support is worth buying; they play the Religious Authorities and the Merchant Guilds against each other when they can.
+FOR THE DM ONLY
+Who really runs this town
+THE RULING THREE OF MERCHANT COUNCIL
+Head · Zac Batab, the innkeeper
+Second · Oc Xiu, the granary reeve
+Third · Luchtan Caan, the watch captain
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Merchant Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Lightly defended: town walls, held by the town watch.
+ACTIVE MILITARY STATUS
+Religious Conversion
+Those who answer for Itzatitlan are kept busy by quarrels between the faiths, and are trusted by neither.
+Readiness
+Lightly defended
+Safety
+Suspicious — religious upheaval
+Watch to population
+0.5
+Food resilience
+39
+GUARD ASSESSMENT
+The town watch walks the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them. Everyone comes and goes by the gates, so smugglers have to get past the town watch.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Adequate
+Active frontier, with walls and a watch to meet what comes.
+Invasion & War
+Weak
+Walls, and a watch to keep them.
+Internal Security
+Weak
+Internal security: Suspicious — Religious Upheaval. Cases are heard here, but there is almost nowhere to hold anyone.
+Economic Survival
+Adequate
+Money enough for a short crisis, laid by before the conversion; a long one would start eating the reserves within months.
+Disasters & Famine
+Weak
+Clergy provide basic wound care: better than nothing, worse than a hospital.
+Food endurance :
+Under siege the outlying fields would be lost; the granary would carry the town for about six months at full rations, about a year on half, and what is still harvested would stretch it further.
+ARMED FORCES & FORTIFICATIONS
+Fortifications
+Town walls
+Gated stone defences. Costly to raise and no cheaper to keep up.
+Standing forces
+Town watch
+Watchmen serving part-time. Night patrols and gate duty.
+CRIMINAL ARCHITECTURE
+Criminal structure · Diffuse criminal presence
+Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.
+underground worship
+religious fraud
+contested property
+informant networks
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+Town hall bench only
+Cases heard without detention. Fines and exile only.
+Medical Readiness
+Clergy care
+Clerical care. Basic wound and disease management.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable, as long as the one trade route it depends on stays open.
+VERDICT
+Viable
+Itzatitlan's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++0
+Trade access
+road
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+8 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Luchtan Caan
+the watch captain
+Merchant Council
+Male · early fifties
+10
+Zac Batab
+the innkeeper
+Merchant Council
+Male · early twenties
+9
+Xaman Uc
+the senior craft-guild master
+Merchant Guilds
+Female · late twenties
+9
+Chimalxochitl May
+the dean
+Religious Authorities
+Female · mid-thirties
+7
+Oc Xiu
+the granary reeve
+Merchant Council
+Female · early sixties
+3
+Ahulane Nah
+the smelt master
+Merchant Guilds
+Female · early twenties
+2
+Flint Kanil
+the tavern keeper
+Merchant Guilds
+Male · mid-twenties
+2
+Zipna Ek
+the miller
+Merchant Council
+Female · late forties
+2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+8 figures
+Ask who matters here and you hear eight names; Luchtan Caan, the watch captain, third of Merchant Council, comes first.
+MAJOR FIGURES
+Luchtan Caan
+the watch captain
+Merchant Council
+PWR 10
+Sex
+Male
+·
+Age
+early fifties
+Town watch · third of Merchant Council
+Personality
+unflappable
+Motivation
+Help Xaman Uc with one thing this season, as family should. — Own a share in the supply of iron, so the work at the town watch can never be held to ransom.
+How they deal
+Answers slowly, checks what you say against what they know, and gives little at a first meeting.
+SECRETS
+·
+Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances: One of the unmade legitimacies belongs to a family with the means to check the originals
+RELATIONSHIPS
+· Xaman Uc - Family Complication
+· Chimalxochitl May - called by · Professional Rivalry
+Zac Batab
+the innkeeper
+Merchant Council
+PWR 9
+Sex
+Male
+·
+Age
+early twenties
+·
+Standing
+first of Merchant Council, the third strongest power here
+Inns · Burgomaster, first of Merchant Council
+Personality
+honest
+Motivation
+Get the inn through the season without borrowing. — Be someone the people here can always count on.
+How they deal
+Friendly while the coin lasts; asks for payment up front from anyone they have not seen before.
+SECRETS
+·
+Was present when Luchtan Caan did something they've never accounted for publicly. Neither has acknowledged the other was there: The situation they're both ignoring is becoming relevant again
+RELATIONSHIPS
+· Oc Xiu - Outstanding Debt
+· Oc Xiu - called by · Outstanding Debt
+Xaman Uc
+the senior craft-guild master
+Merchant Guilds
+PWR 9
+Sex
+Female
+·
+Age
+late twenties
+Craft guilds · second of Merchant Guilds
+Personality
+courteous
+Motivation
+Learn the plans of the Religious Authorities against the Merchant Guilds before they can act on them. — Leave the work at the craft guilds sounder than it was before the trouble came.
+How they deal
+Helpful within the limits of their role. Refers you to others for anything outside it.
+SECRETS
+·
+Has been funding a forbidden relationship with embezzled money: Both the relationship and the embezzlement would become public simultaneously
+RELATIONSHIPS
+· Flint Kanil - Mentor and Successor
+· Ahulane Nah - called by · Mentor and Successor
+· Luchtan Caan - called by · Family Complication
+· Zipna Ek - called by · Mentor and Successor
+NOTABLE FIGURES
+Chimalxochitl May
+PWR 7
+the dean
+Religious Authorities
+Motive:
+Learn what Luchtan Caan has been saying about them, and to whom. — Secure rights for the houses of worship that will outlast whoever governs now.
+Oc Xiu
+PWR 3
+the granary reeve
+Merchant Council
+Motive:
+Keep the accounts of the town granary balanced, and show them to anyone who asks. — Make Zac Batab the first of many who owe them.
+Ahulane Nah
+PWR 2
+the smelt master
+Merchant Guilds
+Motive:
+Pay every hand at the smelter in full and on time this season. — Understand how this place really works, every part of it.
+Flint Kanil
+PWR 2
+the tavern keeper
+Merchant Guilds
+Motive:
+Be the one Xaman Uc sends whenever something must be done for the Merchant Guilds this season. — Outlast the Religious Authorities, and still be standing with the Merchant Guilds when they are gone.
+OTHER NAMES OF NOTE
+Zipna Ek
+· the miller
+Merchant Council
+2
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Chimalxochitl May & Luchtan Caan · Professional Rivalry
+Chimalxochitl May and Luchtan Caan are rivals, and neither gives the other ground. Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+Internal relationships
+•
+Ahulane Nah and Xaman Uc · Mentor and Successor
+Ahulane Nah made Xaman Uc's career, and the senior craft-guild master rarely says so.
+Xaman Uc now operates in ways Ahulane Nah would not approve of. Neither discusses the divergence directly.
+•
+Chimalxochitl May and Luchtan Caan · Professional Rivalry
+Chimalxochitl May and Luchtan Caan are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.
+Chimalxochitl May lost the last contract to Luchtan Caan by a single vote, and has learned who cast it.
+•
+Zac Batab and Oc Xiu · Outstanding Debt
+Oc Xiu nursed Zac Batab through a winter fever when no one else would come. Zac Batab still owes the debt and still knows it.
+Zac Batab has refused Oc Xiu a small favour for the first time in years.
+•
+Xaman Uc and Flint Kanil · Mentor and Successor
+Flint Kanil owes their place to Xaman Uc and has kept others from climbing the same way. The two of them remember it differently.
+Xaman Uc has one favour left to call in, and is saving it. Flint Kanil knows, and is watching for it.
+•
+Luchtan Caan and Xaman Uc · Family Complication
+Luchtan Caan is godparent to Xaman Uc's eldest child. The tie was made before their careers set them against each other.
+The family has asked Luchtan Caan and Xaman Uc to end their quarrel before the next feast. Neither will apologise first.
+•
+Flint Kanil and Ahulane Nah · Mutual Leverage
+Flint Kanil and Ahulane Nah deal with each other slowly and politely, each knowing one slip could ruin them both.
+Ahulane Nah has recently secured something that makes Flint Kanil's hold obsolete. The politeness continues, for now.
+•
+Oc Xiu and Zac Batab · Outstanding Debt
+Zac Batab borrowed Oc Xiu's good name to win a post. Oc Xiu has never asked for it back.
+Oc Xiu has begun to count the debt Zac Batab owes among her assets, and has had it written down before witnesses.
+•
+Zipna Ek and Xaman Uc · Mentor and Successor
+Zipna Ek taught Xaman Uc everything, including how to get the better of the miller.
+A third party has asked Zipna Ek, quietly, whether Xaman Uc can be trusted. The answer took too long.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Town
+ANCHOR FACTS
+Complexity
+Diversified market economy
+Food
+Secure
+Religious Conversion
+CULTURAL NOTES
+Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life. Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.
+IDENTITY
+Name
+Itzatitlan
+Tier
+Town
+Population
+358
+Terrain
+Plains
+Layout
+Compact within walls, outlying farms and a weekly market field beyond the gates
+Age
+238 years
+Trade access
+Road
+Founded
+a noble granted lands by the crown with the resources to develop them
+CULTURAL IDENTITY
+Mesoamerican-inspired
+Mesoamerican-inspired: built around a civic-ritual plaza, tribute and market.
+Built form
+Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.
+Civic pattern
+Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.
+Exchange
+Professional merchants, tribute redistribution, and specialist craft production drive exchange.
+Foodways
+Meals follow the season and what the household has put by.
+Sacred life
+Calendar rites, neighborhood temples, household offerings, pilgrimage, and civic ceremony are materially intertwined.
+Defense
+Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.
+Social texture
+Ward membership, craft specialization, craft standing, tribute duty, and ritual office structure public life.
+Architecture
+terraces, plastered platforms, and residential compounds step with the terrain
+DAILY LIFE
+FOOD BALANCE
+Production and need are in balance. The settlement feeds itself, with nothing spare against a bad year.
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+238y old
+Founded 238 years ago, with six events on record and one tension still unresolved.
+Settlement age
+## 238
+238
+years
+Historical character
+A family's standing here is its wealth, and no one pretends otherwise. The Trade Collapse decided who held the money, and those families have held everything else ever since
+Founding
+Origin
+grew as an agricultural market center
+Founded by
+a noble granted lands by the crown with the resources to develop them
+Initial challenge
+hostile local inhabitants
+Overcoming
+by giving up more than the founders intended
+Stress note
+The first stones were laid with prayers the settlement no longer says, and the land and duties promised in them are now in dispute.
+Historical events · 6
+Founding (- 238 y)
+Now
+0 y after founding
+119 y after founding
+238 y after founding
+18y AGO
+Still relevant today
+Major
+The Religious Conflict
+· Religious
+Rival faiths and doctrines contended for followers and standing in the community
+Lasting effects
+·
+Public preaching restricted to licensed grounds after the unrest
+37y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+As the ailing ruler declined, several would-be heirs positioned themselves to inherit
+Lasting effects
+·
+Succession now governed by a charter drafted in the aftermath
+116y AGO
+Major
+The Guild War
+· Economic
+Rival guilds fought over who may sell what, and over a say in how the place is run
+Lasting effects
+·
+Guild membership rolls now audited by an outside adjudicator
+137y AGO
+Major
+The Migration
+· Demographic
+Newcomers and long-settled residents settled into a slow, grinding antagonism that never quite boiled over
+Lasting effects
+·
+A resettlement compact governs where new arrivals may hold property
+183y AGO
+Major
+The Debt Crisis
+· Economic
+The settlement had borrowed heavily from a foreign power now ready to call the debt in
+Lasting effects
+·
+Municipal borrowing now capped by a charter clause
+224y AGO
+Major
+The Trade Collapse
+· Economic
+When the overland trade the town depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for
+Live tensions · 1
+Legitimacy Crisis
+Parties: The sitting authority vs Those who deny its mandate vs Pragmatists who want any stable answer
+The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## ITZATITLAN
+ITZATITLAN
+Town · Plains
+POPULATION
+## 358
+358
+Town
+PROSPERITY
+## Poor
+Poor
+Top export: Reeds and thatch
+SAFETY
+## Suspicious — Religious Upheaval
+Suspicious — Religious Upheaval
+Defense: Lightly Defended
+Prosperity: Moderate before the conversion; Poor since.
+GOVERNED BY
+Merchant Council
+ACTIVE CRISES · 1
+Religious Conversion
+Newcomers to Itzatitlan are asked, sooner or later, which faith they keep, and the answer decides who will deal with them.
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Itzatitlan
+SETTLEMENT DOSSIER
+## Suspicious — Religious Upheaval › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Itzatitlan
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## crisis.type
+Religious Conversion
+## crisis.place
+Itzatitlan
+## crisis.person
+Ahulane Nah
+## crisis.persons[].name
+Ahulane Nah
+## crisis.persons[].role
+instigator
+## crisis.persons[].roleLabel
+instigator
+## crisis.persons[].crisis
+Religious Conversion
+## crisis.persons[].kind
+religious_conversion
+## crisis.line
+Religious Conversion. Each faith in Itzatitlan watches the other for an insult, and the next feast day could end in a fight. Ahulane Nah is stirring it.
+## opening
+Religious Conversion. Each faith in Itzatitlan watches the other for an insult, and the next feast day could end in a fight. Ahulane Nah is stirring it.
+## people[].name
+Ahulane Nah
+## people[].role
+the smelt master
+## people[].why
+cast
+## people[].castLabel
+instigator
+## people[].castId
+npc_smelter
+## people[].castKind
+religious_conversion
+## people[].line
+pay every hand at the smelter in full and on time this season.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## people[].name
+Zac Batab
+## people[].role
+Burgomaster
+## people[].why
+seat
+## people[].line
+get the inn through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[2]
+## people[].name
+Luchtan Caan
+## people[].role
+the watch captain
+## people[].why
+secret
+## people[].line
+Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances.
+## people[].says
+secret
+## people[].sourcePath
+npcs[4]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. Stores: a granary, about six months of grain.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+Town walls, Town watch.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+In the conversion, Ahulane Nah of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+## hooks[].source
+Religious Conversion
+## hooks[].text
+The conversion turns on the houses of worship, run by Chimalxochitl May: if it gives way, Merchant Council loses most, because its own people feel the crisis first.
+## hooks[].source
+Religious Conversion
+## hooks[].text
+A deserter they let go quietly has been caught elsewhere and is telling everyone who let them walk.
+## hooks[].source
+Luchtan Caan

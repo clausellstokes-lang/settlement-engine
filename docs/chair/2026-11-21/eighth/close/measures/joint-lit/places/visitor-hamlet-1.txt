@@ -1,0 +1,2286 @@
+== web:Summary/Overview ==
+Prabhapuramhamlet· 76 pop.· road· 76 years old
+South-Asian-inspired, and it shows: built around the tank, kin by kin. Governed by Elder Council · Stable
+"It has come through the Flood and the Purge and simply continued, and that took more work than it looks"
+Plains
+Open Tonight
+The place
+The first person you meet on the road into Prabhapuram wants to know your business, and the second already knows it. Shaded doorways open onto the ground between the houses. A barrel thuds down from a cart, and somebody inside cheers its arrival. People draw water in an order nobody needs to explain. A merchant shows off a new cloak, and several neighbours make a point of noticing.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Prosperous
+Safety
+Moderate
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+None
+Monster DefenseCritical
+Economic ResilienceWeak
+Magical CapabilityCritical
+Food SecuritySecure
+Trade at Prabhapuram goes as far as neighbours can carry it between themselves. The hamlet keeps few institutions and needs few.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+Those who want timber and thatch forbiddenHouseholds who cannot afford to build in anything elseThose who say the danger is overblown
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+Settlement Origin▲
+The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart.
+A handful of houses; you could greet everyone in it before noon.
+Notable connection
+A patron they share has let it be known there is room for only Aditya Bajaj or Govind Banerjee at the next table.
+Full relationship web →
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Defense readinessStrained
+Law & orderStrained
+Infrastructure conditionStrained
+Labor capacityStrained
+Magical stabilityStrained
+Religious authorityStrained
+Criminal opportunityElevated
+Healing capacityStrained
+Housing pressureAdequate
+Social trustAdequate
+Strength of the powersAdequate
+Trade connectivityAdequate
+FoodSecure
+Public legitimacyApproved
+Economic capacityAdequate
+Ruling authoritySurplus
+Reliance on magic: None
+
+== web:Summary/Plot Hooks ==
+NPCs
+Swati Chatterjee
+They buried someone last season that they refer to only as 'the traveller'. They will not say more.
+Aditya Bajaj
+The oldest family has started keeping its children indoors after dark, and will not say what they saw.
+Govind Banerjee
+A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.
+Santosh Bajaj
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+History
+Political Event
+A would-be heir approaches outsiders to investigate a rival's past
+Infiltration Fear Event
+The agents' handler is someone the hamlet trusts, and the players have already met them
+An innocent person has been identified as a spy and is about to be executed
+Great Fire
+Small fires keep starting at the same few houses, and nobody believes it is chance
+Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made
+A rule against thatch is being pressed by one household, and it would ruin exactly its rivals
+Disaster Event
+The old property boundaries washed away, and the new map favours whoever drew it
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+A row marked short is what its house makes when supplied.
+Carpenter (part-time)Crafts
+Raises and repairs both structures and tools.
+Connection: Wright Santosh Bajaj
+BacksElder Council
+ServicesBasic repairs
+AlehouseEconomy
+Ale brewed at home and sold out of a back room. It doubles as the hamlet's common room. Every rumour, quarrel, and bargain passes through it.
+Connection: Brewster Govind Banerjee
+ServicesLodgingMeals and drinkMessage relayStablingHiring hall
+Common grazing landEconomy
+Open pasture the hamlet grazes in common.
+ServicesPasturage
+Peat cutterEconomy
+Short of peat. Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal. Sells winter warmth.
+Connection: Elder Swati Chatterjee, the peat-reeve
+ServicesPeat fuel supply (short)
+ShepherdEconomy
+Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.
+Connection: Master Shepherd Aditya Bajaj
+ServicesLivestock management
+Subsistence farmingEconomy
+Strips worked in the open fields.
+Burial groundReligious
+A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor.
+ServicesBurial
+The fabric of the place
+Access to external millCrafts
+The hamlet's grain is carried elsewhere to be ground.
+ServicesGrain milling (a day away)
+DwellingsInfrastructure
+Frames of timber, roofed with thatch.
+ServicesHospitality
+Water sourceInfrastructure
+Well or spring access.
+Access to a house of worshipReligious
+Services mean the walk to the village house of worship, usually a few miles off.
+ServicesRite of entryWeekly rite
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+A row marked short is what its house makes when supplied.
+Employment(2)▲
+Hiring hall
+Find workers, mercenaries
+Alehouse
+Livestock management
+Tend, protect, and move flocks between pastures.
+Shepherd
+Goods & crafts(2)▲
+Basic repairs
+Fix broken furniture, doors, wagons, and farm equipment.
+Carpenter (part-time)
+Peat fuel supply
+Short of peat. Cut and dried peat blocks for fuel. Important where wood is scarce.
+Peat cutter
+Food & drink(2)▲
+Grain milling (a day away)
+Grain carted to a mill outside the settlement and brought back as flour.
+Access to external mill
+Meals and drink
+Food and ale
+Healing(3)▲
+Burial
+Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Burial ground
+Rite of entry
+The rite that admits a person to the faith. Required for most civil recognition.
+Access to a house of worship
+Weekly rite
+The weekly service. Attendance expected of all residents.
+Information(1)▲
+Message relay
+Informal postal service
+Lodging(2)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+Lodging
+Rooms for travelers
+Transportation(2)▲
+Pasturage
+Grazing on the common for a traveller's beasts, for a small fee.
+Common grazing land
+Stabling
+Horse care
+
+== web:Systems/Economics ==
+Prosperous
+Subsistence with surplus
+It gets about two thirds of what its work could yield, held back by having no market.
+Trade
+road
+Prabhapuram lives on a farm surplus and ends each year with money to spare.
+Income Sources▲
+100%
+Harvest What the households grow and raise on their holdings; the main living at this scale.
+Prabhapuram does not spread its living across many trades: one carries the place, and the rest are small beside it. Whatever Prabhapuram's people give for their faith is given elsewhere, or not at all: the place keeps no house to take it. However the people of Prabhapuram work their land, it does not yield the stone the place needs in full.
+Trade Profile▲
+Exports
+Hardwood beamsSacred woodRitual components
+Imports
+Incense and votive candlesSalt
+Settlement necessity
+Needed, and not brought in: stone.
+A merchant who comes to Prabhapuram for one thing usually leaves with two or three.
+Produced locally
+timbermedicinal herbshoneyHoney and beeswaxForaged goods
+Food Security▲
+Production: 202 lbs/dayNeed: 152 lbs/day
+Prabhapuram grows far more than it eats, with some to put by against a bad year.
+No granary; about a month and a half in household stores.
+Meals follow the season and what the household has put by.
+In an ordinary season Prabhapuram has enough to eat, or near enough.
+Economic Flows (3 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (4)Issues (1)✓ Productive (1)
+Foraging & SmallholdingFood securityVulnerable
+From
+Ancient grove
+Via
+Subsistence farming
+Outputs
+Honey and beeswaxForaged goods
+Timber & LumberRaw materials & fuel✓ Running
+Managed woodland
+Carpenter (part-time)
+Barrels and containersMilled lumber
+Faith & WorshipReligion & civic
+Access to a house of worship
+Taverns & Social LifeEntertainment & culture○ Operational
+Alehouse
+LodgingMeals and drink
+Prabhapuram brings in salt from outside.
+
+== web:Systems/Resources ==
+Terrain
+Plains
+A newcomer to Prabhapuram soon hears what its ground is worth to the powers around it, and how little of that worth stays in the hamlet.
+Nearby Resources▲
+Open Grazing Land
+Depleted
+Marshlands
+Abundant
+Ancient GroveManaged WoodlandPrecious Metal Veins
+Commodities available
+Managed WoodlandtimberAncient Grovemedicinal herbshoneyPrecious Metal Veinsluxury
+Gaps & Opportunities▲
+The peat cutter is worked out: its own ground is depleted (Marshlands).
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerElder Council (dominant)
+The seatSwati Chatterjee, the peat-reeve and Elder
+Public legitimacy
+65Approved
+Stability
+Stable
+Prabhapuram is governed by the Elder Council. Swati Chatterjee, the peat-reeve and Elder, holds its seat. Prosperity has earned the Elder Council the approval of Prabhapuram. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+The Seat▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerElder CouncilGovernmentDominant▲
+## RulerElder CouncilGovernmentDominant
+Institutions behind this power (11)
+Held under this authority
+Subsistence farming
+Common grazing land
+Peat cutter
+Alehouse
+Access to external mill
+Carpenter (part-time)
+Burial ground
+Dwellings
+Water source
+Shepherd
+Under the ruling power, with no power of its own kind here
+Access to a house of worship
+The Powers (1)▲
+100
+Elder Council
+↑ Holds powerGovernment100▲
+## Elder Council↑ Holds powerGovernment100
+↳4 members · first Swati Chatterjee · second Govind Banerjee · third Santosh Bajaj
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+The shape of authority
+The Elder Council at Prabhapuram has left obvious decisions untaken because its members cannot agree on them.
+Rule and succession
+If anyone at Prabhapuram asked who might replace the Elder Council, the hamlet would have no contender to name.
+Who really runs this hamlet
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Elder Council
+Head · Swati Chatterjee, the peat-reeve
+Second · Govind Banerjee, the brewster
+Third · Santosh Bajaj, the carpenter
+The hall
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+Prabhapuram would struggle to hold against anything more than a handful of raiders, and the people who live there know it.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Whoever walks out of Prabhapuram, in any direction and at any hour, is unlikely to meet a beast.
+Invasion & War
+The hamlet's plan for an army is to not be interesting to one, and everybody here can state the plan.
+Internal Security
+No court sits at Prabhapuram to decide a quarrel, and the place gets along without one.
+Economic Survival
+Weak▼
+Prabhapuram is well off, but little of its wealth is set aside for its defence, and a long crisis would soon outrun what is.
+Disasters & Famine
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Order here rests with the neighbours: little happens that someone does not see.
+With no gaol at Prabhapuram, nobody who does wrong here can be locked away; most go on living beside the people they wronged.
+What goes wrong at Prabhapuram goes wrong one thing at a time and belongs to whoever did it.
+Armed Forces & Fortifications▲
+## Armed Forces & Fortifications
+Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints.
+Prabhapuram is too small to wall and knows it; the hamlet's safety is its neighbours, its distance, and its unimportance.
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+You can walk into Prabhapuram from any direction and pass nobody on the way in. Nobody at Prabhapuram is responsible for defending the hamlet; ask who is, and nobody can name anyone. Anything unseen that came at Prabhapuram would find nothing to meet it: the hamlet keeps no wards or seers to notice it.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical ReadinessNone
+No healer is kept here; the sick are tended by their own families.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the hamlet's own:
+Low
+Envelope
+Availabilitylimited
+Legalityrestricted
+Institutional controlunregulated
+Service costextortionate
+Riskmoderate
+Religious acceptanceindifferent
+Roles
+Reliance on magic: None
+Economic role: absent
+Military role: absent
+Medical role: absent
+Infrastructure role: absent
+Reliance on magic, as judged at the first survey
+Without any magic at all, Prabhapuram would still keep its living.
+
+== web:Systems/Outlook ==
+✓ Viable
+Prabhapuram feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+
+== web:World/NPCs ==
+4 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Elder Council (3)▲
+## Elder Council
+Swati Chatterjee
+▲
+## Elder Council › Swati Chatterjee
+Peat cutter · Elder, first of Elder Council
+Short of peat.
+Peat-Reeve
+Flaw: reckless Temperament: perceptive
+Professional RivalryAditya Bajaj
+Govind Banerjee holds a tie to them: Mutual Leverage
+Holds the seat in a quiet season; there is time to act. Still the peat-reeve as well.
+Constraint: Cannot please everyone at once; whatever the seat gives one side, another asks for next.
+Wants Get the peat cuttings through the season without borrowing.
+Standing first of Elder Council, the only power here
+Disposition perceptive
+How they deal Offers a warm seat and talk of the families and the weather.
+Secret: Has been giving the best cuttings to their own kin and the wet ones to everyone else
+## Elder Council
+Govind Banerjee
+## Elder Council › Govind Banerjee
+Alehouse · second of Elder Council
+Brewster
+Flaw: envious
+Mutual LeverageSwati Chatterjee
+Aditya Bajaj holds a tie to them: Professional Rivalry
+Wants Take on more hands at the alehouse, and keep them busy all season.
+How they deal Takes the deal, then does as little as the deal allows.
+Secret: Secretly receives what they believe are genuine divine visions, which terrifies them
+## Elder Council
+Santosh Bajaj
+## Elder Council › Santosh Bajaj
+Carpenter (part-time) · third of Elder Council
+Wright
+Temperament: charismatic
+Pragmatic AllianceAditya Bajaj
+Wants Take over one of Govind Banerjee's duties in the Elder Council this season, and be seen to do it well.
+Disposition charismatic
+How they deal Happy to talk about any job, and about who nearby has been building what.
+Secret: Took payment for a cart that was never finished, and the wheels are still on the bench
+Unranked members (1)▲
+## Unranked members
+Aditya Bajaj
+## Unranked members › Aditya Bajaj
+Shepherd · member of Elder Council
+Master Shepherd
+Flaw: vengeful
+Professional RivalryGovind Banerjee
+Swati Chatterjee holds a tie to them: Professional Rivalry
+Santosh Bajaj holds a tie to them: Pragmatic Alliance
+Wants Learn the secret of someone they envy.
+How they deal Talks about the weather, the hills and the flocks; offers milk and bread.
+Secret: Has written for years to someone in a far city they have never met, and is in love with the handwriting
+
+== web:World/Relationships ==
+NPC Relationships (4)▲
+All (4)Allies (1)Rivals (2)
+Swati ChatterjeeProfessional RivalryAditya Bajaj
+Elder · bitter · the head shepherd
+▲
+Swati Chatterjee and Aditya Bajaj want the same thing and compete hard for it, but neither has let it turn into hatred.
+A decision coming next season will favour Swati Chatterjee or Aditya Bajaj heavily, and both of them know it.
+Govind BanerjeeMutual LeverageSwati Chatterjee
+the brewster · convenience · Elder
+Govind Banerjee and Swati Chatterjee each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.
+The vote Swati Chatterjee needs from Govind Banerjee comes up next week, and he has named a new price.
+Santosh BajajPragmatic AllianceAditya Bajaj
+the carpenter · strong · the head shepherd
+Santosh Bajaj and Aditya Bajaj work together because fighting each other would cost them both more, and both of them know it.
+Someone else is working to pull Santosh Bajaj and Aditya Bajaj apart.
+Aditya BajajProfessional RivalryGovind Banerjee
+the head shepherd · professional · the brewster
+Only one of Aditya Bajaj and Govind Banerjee can come out ahead, and both know it. They stay polite and give no ground.
+A patron they share has let it be known there is room for only Aditya Bajaj or Govind Banerjee at the next table.
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+Road
+Culture
+South Asian
+Prabhapuram is well past getting by and short of the deepest wealth: it spends freely on itself, and keeps no great hoard.
+The day begins with the walk out to the fields, and the work there runs on until midday.
+After the day in the fields, people gather at the alehouse to talk it over.
+Children are warned about the usual things: trampling the young crops, and straying past the last of the fields.
+
+== web:World/Traditions ==
+The founding traditions of Prabhapuram.
+⌂
+The Procession of the Founding
+## The Procession of the Founding
+Founding
+Kept in Seedtime, the third and fourth weeks.
+A slow procession that honours the founding. It is overseen by the Elder Council. It has been kept since Prabhapuram was founded, 76 years ago, by a small religious community whose members drifted into secular life over two generations.
+✦
+The Contest of the Stars
+## The Contest of the Stars
+Stars
+Kept in Deepwinter, the fourth week.
+A friendly contest that is held under the stars.
+
+== web:World/History ==
+Prabhapuram76 years old↺ Reroll
+"It has come through the Flood and the Purge and simply continued, and that took more work than it looks"
+Current Tensions (1)▲
+Great fire
+Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+Those who want timber and thatch forbiddenHouseholds who cannot afford to build in anything elseThose who say the danger is overblown
+Founding▲
+## Founding
+Founded by:a small religious community whose members drifted into secular life over two generations
+Early trial:rival claimants to the land
+How survived:by attracting the right people at the right time
+Prabhapuram still knows why it was first built, and the hamlet has grown well past that since.
+Major Historical Events (3)▲
+## Major Historical Events
+Founded
+Now
+57y
+46y
+17y
+Disaster
+Political
+Infiltration Fear
+The PurgeInfiltration Fearmajor
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+17y ago
+Living memory
+▼
+The Succession CrisisPoliticalminor
+The one who led was failing in health, and rivals maneuvered quietly to take that place
+46y ago
+Last century
+The FloodDisastermajor
+A flood rose fast across the low ground, carrying off livelihoods and leaving the ownership of half the ground in doubt
+57y ago
+Prabhapuram came through the succession crisis without losing what it had built, a legacy that is two generations old.
+
+== web:World/Rumors & News ==
+Available at launch
+What Prabhapuram has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Prabhapuram's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. Devotion runs deep, and the rites set the rhythm of the week.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## PRABHAPURAM
+PRABHAPURAM
+Hamlet · Plains
+POPULATION
+## 76
+76
+Hamlet
+PROSPERITY
+## Prosperous
+Prosperous
+Top export: Hardwood beams
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Prabhapuram
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Prosperous. Prabhapuram, a hamlet of 76, has no crisis on its hands this season.
+Population
+76
+Hamlet
+Age
+76 yrs
+Plains
+Prosperity
+Prosperous
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+0/100
+Economic
+34/100
+Magical
+0/100
+Disaster
+39/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+202
+Needed
+152
+Surplus: 50
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Great Fire
+Those who want timber and thatch forbidden / Households who cannot afford to build in anything else / Those who say the danger is overblown
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart. A handful of houses; you could greet everyone in it before noon.
+NOTABLE CONNECTION
+Aditya Bajaj & Govind Banerjee
+Professional Rivalry
+INSTITUTIONS · 11 TOTAL
+Economy 5
+Crafts 2
+Religious 2
+Infrastructure 2
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+People to voice
+Swati Chatterjee
+Elder · Holds the seat
+Wants to get the peat cuttings through the season without borrowing.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Political Event
+A would-be heir approaches outsiders to investigate a rival's past.
+Infiltration Fear Event
+The agents' handler is someone the hamlet trusts, and the players have already met them.
+Infiltration Fear Event
+An innocent person has been identified as a spy and is about to be executed.
+SESSION SCRATCH
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+11 hooks
+Eleven hooks to pull; most of them belong to its history and its tensions (7).
+NPCs
+4 hook s
+01
+They buried someone last season that they refer to only as 'the traveller'. They will not say more.
+Swati Chatterjee
+Low
+02
+The oldest family has started keeping its children indoors after dark, and will not say what they saw.
+Aditya Bajaj
+Low
+03
+A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.
+Govind Banerjee
+Low
+04
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+Santosh Bajaj
+Low
+History
+7 hook s
+01
+A would-be heir approaches outsiders to investigate a rival's past
+Political Event
+Medium
+02
+The agents' handler is someone the hamlet trusts, and the players have already met them
+Infiltration Fear Event
+Medium
+03
+An innocent person has been identified as a spy and is about to be executed
+Infiltration Fear Event
+Medium
+04
+Small fires keep starting at the same few houses, and nobody believes it is chance
+Great Fire
+Medium
+05
+Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made
+Great Fire
+Medium
+06
+A rule against thatch is being pressed by one household, and it would ruin exactly its rivals
+Great Fire
+Medium
+07
+The old property boundaries washed away, and the new map favours whoever drew it
+Disaster Event
+Low
+UNDERLYING TENSIONS
+•
+Great Fire
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+14 buyable across 7 categories
+A row marked short is what its house makes when supplied.
+Lodging
+2 option s
+Hospitality
+Lodging
+Food & drink
+2 option s
+Grain milling (a day away)
+Meals and drink
+Goods & crafts
+2 option s
+Basic repairs
+Peat fuel supply (short)
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Information
+1 option
+Message relay
+Transportation
+2 option s
+Pasturage
+Stabling
+Employment
+2 option s
+Hiring hall
+Livestock management
+ACTIVE SUPPLY CHAINS · 4
+Foraging & Smallholding
+Vulnerable
+NEED Food Security
+Ancient grove » Subsistence farming » Honey and beeswax, Foraged goods
+Timber & Lumber
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Managed woodland » Carpenter (part-time) » Barrels and containers, Milled lumber
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+Taverns & Social Life
+Operational
+NEED Entertainment & Culture
+Alehouse » Lodging, Meals and drink
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+11 institutions
+Eleven institutions; the largest groups are trade and farming (5) and crafts (2).
+A row marked short is what its house makes when supplied.
+Total
+11
+Categories
+4
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+Services mean the walk to the village house of worship, usually a few miles off.
+Backs
+Elder Council
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+5 institutions
+Subsistence farming
+Essential
+Agriculture
+Strips worked in the open fields.
+Backs
+Elder Council
+Common grazing land
+Essential
+Agriculture
+Open pasture the hamlet grazes in common.
+Backs
+Elder Council
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Peat cutter
+Trade
+Short of peat. Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal. Sells winter warmth.
+Backs
+Elder Council
+Services
+Peat fuel supply
+: Short of peat. Cut and dried peat blocks for fuel. Important where wood is scarce.
+Alehouse
+Food
+Trade
+Ale brewed at home and sold out of a back room. It doubles as the hamlet's common room. Every rumour, quarrel, and bargain passes through it.
+Backs
+Elder Council
+Services
+Lodging
+: Rooms for travelers
+Meals and drink
+: Food and ale
+Message relay
+: Informal postal service
+Stabling
+: Horse care
+Hiring hall
+: Find workers, mercenaries
+Shepherd
+Trade
+Textile
+Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.
+Backs
+Elder Council
+Services
+Livestock management
+: Tend, protect, and move flocks between pastures.
+Crafts
+2 institutions
+Access to external mill
+Essential
+Agriculture
+The hamlet's grain is carried elsewhere to be ground.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Carpenter (part-time)
+Raises and repairs both structures and tools.
+Backs
+Elder Council
+Services
+Basic repairs
+: Fix broken furniture, doors, wagons, and farm equipment.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Frames of timber, roofed with thatch.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Well or spring access.
+Backs
+Elder Council
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Prosperous. What goes out of here is mostly hardwood beams; it grows more food than it eats.
+Prosperity
+Prosperous
+Complexity
+Subsistence with surplus
+Trade
+Road
+It gets about two thirds of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+100%
+What the households grow and raise on their holdings; the main living at this scale.
+TRADE FLOWS
+EXPORTS
+•
+Hardwood beams
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Timber
+•
+medicinal herbs
+•
+Honey
+•
+Honey and beeswax
+•
+Foraged goods
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Stone
+FOOD SECURITY
+PRODUCED
+202
+NEEDED
+152
+Surplus
+50
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Ancient grove
+>
+Subsistence farming
+>
+Honey and beeswax
+Foraged goods
+Managed woodland
+>
+Carpenter (part-time)
+>
+Barrels and containers
+Milled lumber
+Access to a house of worship
+Alehouse
+>
+Lodging
+Meals and drink
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+The nearby marshlands are used up.
+STRATEGIC VALUE
+Medium - open country, but exposed to raids
+NEARBY RESOURCES
+Open Grazing Land
+Depleted
+Marshlands
+Abundant
+Managed Woodland
+Ancient Grove
+Precious Metal Veins
+Commodities available
+· processed/refined in this settlement
+Managed Woodland
+Timber
+Ancient Grove
+Medicinal Herbs
+Honey
+Precious Metal Veins
+Luxury
+IMPORT DEPENDENCIES
+CRITICAL
+Stone
+GAPS & OPPORTUNITIES
+High
+The peat cutter is worked out: its own ground is depleted (Marshlands).
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 65
+65
+Approved
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Prabhapuram is governed by the Elder Council. Swati Chatterjee, the peat-reeve and Elder, holds its seat. Prosperity has earned the Elder Council the approval of Prabhapuram. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+FOR THE DM ONLY
+Who really runs this hamlet
+THE RULING THREE OF ELDER COUNCIL
+Head · Swati Chatterjee, the peat-reeve
+Second · Govind Banerjee, the brewster
+Third · Santosh Bajaj, the carpenter
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.1
+Food resilience
+39
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Quiet country, and nothing organised is kept against it.
+Invasion & War
+Critical
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Weak
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Prabhapuram feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++50
+Trade access
+road
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+4 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Swati Chatterjee
+the peat-reeve
+Elder Council
+Female · early sixties
+3
+Aditya Bajaj
+the head shepherd
+Elder Council
+Male · mid-twenties
+3
+Govind Banerjee
+the brewster
+Elder Council
+Male · early forties
+2
+Santosh Bajaj
+the carpenter
+Elder Council
+Male · early twenties
+2
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+4 figures
+Four people worth knowing; Swati Chatterjee, the peat-reeve, Elder, first of Elder Council, carries the most weight.
+MAJOR FIGURES
+Swati Chatterjee
+the peat-reeve
+Elder Council
+PWR 3
+Sex
+Female
+·
+Age
+early sixties
+·
+Standing
+first of Elder Council, the only power here
+Peat cutter · Elder, first of Elder Council
+Short of peat.
+Personality
+perceptive · Flaw: reckless
+Motivation
+Get the peat cuttings through the season without borrowing. — Hand the Elder Council on to an heir of their own choosing, and not to Govind Banerjee.
+How they deal
+Offers a warm seat and talk of the families and the weather.
+SECRETS
+·
+Has been giving the best cuttings to their own kin and the wet ones to everyone else: In a hard winter, the families with wet peat will be cold, and they will know why
+RELATIONSHIPS
+· Aditya Bajaj - Professional Rivalry
+· Govind Banerjee - called by · Mutual Leverage
+Aditya Bajaj
+the head shepherd
+Elder Council
+PWR 3
+Sex
+Male
+·
+Age
+mid-twenties
+Shepherd · member of Elder Council
+Personality
+Flaw: vengeful
+Motivation
+Learn the secret of someone they envy. — Make the sheepfold too sound for any creditor to threaten.
+How they deal
+Talks about the weather, the hills and the flocks; offers milk and bread.
+SECRETS
+·
+Has written for years to someone in a far city they have never met, and is in love with the handwriting: The letters have stopped
+RELATIONSHIPS
+· Govind Banerjee - Professional Rivalry
+· Swati Chatterjee - called by · Professional Rivalry
+· Santosh Bajaj - called by · Pragmatic Alliance
+Govind Banerjee
+the brewster
+Elder Council
+PWR 2
+Sex
+Male
+·
+Age
+early forties
+Alehouse · second of Elder Council
+Personality
+Flaw: envious
+Motivation
+Take on more hands at the alehouse, and keep them busy all season. — Outlast every person who ever crossed them.
+How they deal
+Takes the deal, then does as little as the deal allows.
+SECRETS
+·
+Secretly receives what they believe are genuine divine visions, which terrifies them: Acting on the visions would be seen as madness; ignoring them may be worse
+RELATIONSHIPS
+· Swati Chatterjee - Mutual Leverage
+· Aditya Bajaj - called by · Professional Rivalry
+NOTABLE FIGURES
+Santosh Bajaj
+PWR 2
+the carpenter
+Elder Council
+Motive:
+Take over one of Govind Banerjee's duties in the Elder Council this season, and be seen to do it well. — Secure rights for the carpenter's workshop that will outlast whoever governs now.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Aditya Bajaj & Govind Banerjee · Professional Rivalry
+Internal relationships
+•
+Swati Chatterjee and Aditya Bajaj · Professional Rivalry
+Swati Chatterjee and Aditya Bajaj want the same thing and compete hard for it, but neither has let it turn into hatred.
+A decision coming next season will favour Swati Chatterjee or Aditya Bajaj heavily, and both of them know it.
+•
+Govind Banerjee and Swati Chatterjee · Mutual Leverage
+Govind Banerjee and Swati Chatterjee each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.
+The vote Swati Chatterjee needs from Govind Banerjee comes up next week, and he has named a new price.
+•
+Santosh Bajaj and Aditya Bajaj · Pragmatic Alliance
+Santosh Bajaj and Aditya Bajaj work together because fighting each other would cost them both more, and both of them know it.
+Someone else is working to pull Santosh Bajaj and Aditya Bajaj apart.
+•
+Aditya Bajaj and Govind Banerjee · Professional Rivalry
+Only one of Aditya Bajaj and Govind Banerjee can come out ahead, and both know it. They stay polite and give no ground.
+A patron they share has let it be known there is room for only Aditya Bajaj or Govind Banerjee at the next table.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Hamlet
+ANCHOR FACTS
+Complexity
+Subsistence with surplus
+Food
+Secure
+IDENTITY
+Name
+Prabhapuram
+Tier
+Hamlet
+Population
+76
+Terrain
+Plains
+Layout
+Scattered farmsteads along a muddy track, a common at the centre
+Age
+76 years
+Trade access
+Road
+Founded
+a small religious community whose members drifted into secular life over two generations
+CULTURAL IDENTITY
+South-Asian-inspired
+South-Asian-inspired, and it shows: built around the tank, kin by kin.
+Foodways
+Meals follow the season and what the household has put by.
+Architecture
+shaded doorways open onto the ground between the houses
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+76y old
+Founded 76 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 76
+76
+years
+Historical character
+It has come through the Flood and the Purge and simply continued, and that took more work than it looks
+Founding
+Founded by
+a small religious community whose members drifted into secular life over two generations
+Initial challenge
+rival claimants to the land
+Overcoming
+by attracting the right people at the right time
+Historical events · 3
+Founding (- 76 y)
+Now
+0 y after founding
+38 y after founding
+76 y after founding
+17y AGO
+Still relevant today
+Major
+The Purge
+· Occupation Infiltration
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+Lasting effects
+·
+The names denounced in the panic are still remembered, and not forgiven
+46y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+The one who led was failing in health, and rivals maneuvered quietly to take that place
+Lasting effects
+·
+Rival claimant bloodlines still contest ceremonial precedence
+57y AGO
+Still relevant today
+Major
+The Flood
+· Disaster
+A flood rose fast across the low ground, carrying off livelihoods and leaving the ownership of half the ground in doubt
+Live tensions · 1
+Great Fire
+Parties: Those who want timber and thatch forbidden vs Households who cannot afford to build in anything else vs Those who say the danger is overblown
+Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## PRABHAPURAM
+PRABHAPURAM
+Hamlet · Plains
+POPULATION
+## 76
+76
+Hamlet
+PROSPERITY
+## Prosperous
+Prosperous
+Top export: Hardwood beams
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Prabhapuram
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Prosperous. Prabhapuram, a hamlet of 76, has no crisis on its hands this season.
+Population
+76
+Hamlet
+Age
+76 yrs
+Plains
+Prosperity
+Prosperous
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+0/100
+Economic
+34/100
+Magical
+0/100
+Disaster
+39/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+202
+Needed
+152
+Surplus: 50
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Great Fire
+Those who want timber and thatch forbidden / Households who cannot afford to build in anything else / Those who say the danger is overblown
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart. A handful of houses; you could greet everyone in it before noon.
+NOTABLE CONNECTION
+Aditya Bajaj & Govind Banerjee
+Professional Rivalry
+INSTITUTIONS · 11 TOTAL
+Economy 5
+Crafts 2
+Religious 2
+Infrastructure 2
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+People to voice
+Swati Chatterjee
+Elder · Holds the seat
+Wants to get the peat cuttings through the season without borrowing.
+What the players test first
+Food
+Secure. No granary; about a month and a half in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Political Event
+A would-be heir approaches outsiders to investigate a rival's past.
+Infiltration Fear Event
+The agents' handler is someone the hamlet trusts, and the players have already met them.
+Infiltration Fear Event
+An innocent person has been identified as a spy and is about to be executed.
+SESSION SCRATCH
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+11 hooks
+Eleven hooks to pull; most of them belong to its history and its tensions (7).
+NPCs
+4 hook s
+01
+They buried someone last season that they refer to only as 'the traveller'. They will not say more.
+Swati Chatterjee
+Low
+02
+The oldest family has started keeping its children indoors after dark, and will not say what they saw.
+Aditya Bajaj
+Low
+03
+A neighbour has accused them of moving a fence, and the neighbour has witnesses who were not there.
+Govind Banerjee
+Low
+04
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+Santosh Bajaj
+Low
+History
+7 hook s
+01
+A would-be heir approaches outsiders to investigate a rival's past
+Political Event
+Medium
+02
+The agents' handler is someone the hamlet trusts, and the players have already met them
+Infiltration Fear Event
+Medium
+03
+An innocent person has been identified as a spy and is about to be executed
+Infiltration Fear Event
+Medium
+04
+Small fires keep starting at the same few houses, and nobody believes it is chance
+Great Fire
+Medium
+05
+Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made
+Great Fire
+Medium
+06
+A rule against thatch is being pressed by one household, and it would ruin exactly its rivals
+Great Fire
+Medium
+07
+The old property boundaries washed away, and the new map favours whoever drew it
+Disaster Event
+Low
+UNDERLYING TENSIONS
+•
+Great Fire
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+14 buyable across 7 categories
+A row marked short is what its house makes when supplied.
+Lodging
+2 option s
+Hospitality
+Lodging
+Food & drink
+2 option s
+Grain milling (a day away)
+Meals and drink
+Goods & crafts
+2 option s
+Basic repairs
+Peat fuel supply (short)
+Healing
+3 option s
+Burial
+Rite of entry
+Weekly rite
+Information
+1 option
+Message relay
+Transportation
+2 option s
+Pasturage
+Stabling
+Employment
+2 option s
+Hiring hall
+Livestock management
+ACTIVE SUPPLY CHAINS · 4
+Foraging & Smallholding
+Vulnerable
+NEED Food Security
+Ancient grove » Subsistence farming » Honey and beeswax, Foraged goods
+Timber & Lumber
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Managed woodland » Carpenter (part-time) » Barrels and containers, Milled lumber
+Faith & Worship
+NEED Religion & Civic
+Access to a house of worship
+Taverns & Social Life
+Operational
+NEED Entertainment & Culture
+Alehouse » Lodging, Meals and drink
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+11 institutions
+Eleven institutions; the largest groups are trade and farming (5) and crafts (2).
+A row marked short is what its house makes when supplied.
+Total
+11
+Categories
+4
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+2 institutions
+Access to a house of worship
+Essential
+Religious
+Church
+Services mean the walk to the village house of worship, usually a few miles off.
+Backs
+Elder Council
+Services
+Rite of entry
+: The rite that admits a person to the faith. Required for most civil recognition.
+Weekly rite
+: The weekly service. Attendance expected of all residents.
+Burial ground
+Essential
+Religious
+A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor.
+Backs
+Elder Council
+Services
+Burial
+: Dig, inter and close the grave. Rites where there is someone at hand to say them.
+Economy
+5 institutions
+Subsistence farming
+Essential
+Agriculture
+Strips worked in the open fields.
+Backs
+Elder Council
+Common grazing land
+Essential
+Agriculture
+Open pasture the hamlet grazes in common.
+Backs
+Elder Council
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Peat cutter
+Trade
+Short of peat. Cuts and dries peat blocks from nearby marshland for domestic fuel. Seasonal. Sells winter warmth.
+Backs
+Elder Council
+Services
+Peat fuel supply
+: Short of peat. Cut and dried peat blocks for fuel. Important where wood is scarce.
+Alehouse
+Food
+Trade
+Ale brewed at home and sold out of a back room. It doubles as the hamlet's common room. Every rumour, quarrel, and bargain passes through it.
+Backs
+Elder Council
+Services
+Lodging
+: Rooms for travelers
+Meals and drink
+: Food and ale
+Message relay
+: Informal postal service
+Stabling
+: Horse care
+Hiring hall
+: Find workers, mercenaries
+Shepherd
+Trade
+Textile
+Manages sheep flocks for wool and meat. Seasonal transhumance. Moves flocks between lowland winter pasture and upland summer grazing. Key supplier to the textile trade.
+Backs
+Elder Council
+Services
+Livestock management
+: Tend, protect, and move flocks between pastures.
+Crafts
+2 institutions
+Access to external mill
+Essential
+Agriculture
+The hamlet's grain is carried elsewhere to be ground.
+Backs
+Elder Council
+Services
+Grain milling (a day away)
+: Grain carted to a mill outside the settlement and brought back as flour.
+Carpenter (part-time)
+Raises and repairs both structures and tools.
+Backs
+Elder Council
+Services
+Basic repairs
+: Fix broken furniture, doors, wagons, and farm equipment.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Frames of timber, roofed with thatch.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Water source
+Essential
+Water
+Well or spring access.
+Backs
+Elder Council
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Prosperous. What goes out of here is mostly hardwood beams; it grows more food than it eats.
+Prosperity
+Prosperous
+Complexity
+Subsistence with surplus
+Trade
+Road
+It gets about two thirds of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+100%
+What the households grow and raise on their holdings; the main living at this scale.
+TRADE FLOWS
+EXPORTS
+•
+Hardwood beams
+•
+Sacred wood
+•
+Ritual components
+IMPORTS
+•
+Salt
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Timber
+•
+medicinal herbs
+•
+Honey
+•
+Honey and beeswax
+•
+Foraged goods
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+Stone
+FOOD SECURITY
+PRODUCED
+202
+NEEDED
+152
+Surplus
+50
+Rich farmland: the fields yield well over the usual.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Ancient grove
+>
+Subsistence farming
+>
+Honey and beeswax
+Foraged goods
+Managed woodland
+>
+Carpenter (part-time)
+>
+Barrels and containers
+Milled lumber
+Access to a house of worship
+Alehouse
+>
+Lodging
+Meals and drink
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Plains
+The nearby marshlands are used up.
+STRATEGIC VALUE
+Medium - open country, but exposed to raids
+NEARBY RESOURCES
+Open Grazing Land
+Depleted
+Marshlands
+Abundant
+Managed Woodland
+Ancient Grove
+Precious Metal Veins
+Commodities available
+· processed/refined in this settlement
+Managed Woodland
+Timber
+Ancient Grove
+Medicinal Herbs
+Honey
+Precious Metal Veins
+Luxury
+IMPORT DEPENDENCIES
+CRITICAL
+Stone
+GAPS & OPPORTUNITIES
+High
+The peat cutter is worked out: its own ground is depleted (Marshlands).
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 65
+65
+Approved
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Prabhapuram is governed by the Elder Council. Swati Chatterjee, the peat-reeve and Elder, holds its seat. Prosperity has earned the Elder Council the approval of Prabhapuram. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 100
+POWERS
+Elder Council
+Government
+Governing
+Power 100
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+FOR THE DM ONLY
+Who really runs this hamlet
+THE RULING THREE OF ELDER COUNCIL
+Head · Swati Chatterjee, the peat-reeve
+Second · Govind Banerjee, the brewster
+Third · Santosh Bajaj, the carpenter
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.1
+Food resilience
+39
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Quiet country, and nothing organised is kept against it.
+Invasion & War
+Critical
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Weak
+Nobody here treats the sick, and a plague would run until it burned out.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the hamlet for about a month and a half at full rations, about three months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Arcane Support
+None
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+None
+No healer is kept here; the sick are tended by their own families.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Prabhapuram feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+KEY METRICS
+Food balance
++50
+Trade access
+road
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+4 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Swati Chatterjee
+the peat-reeve
+Elder Council
+Female · early sixties
+3
+Aditya Bajaj
+the head shepherd
+Elder Council
+Male · mid-twenties
+3
+Govind Banerjee
+the brewster
+Elder Council
+Male · early forties
+2
+Santosh Bajaj
+the carpenter
+Elder Council
+Male · early twenties
+2
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+4 figures
+Four people worth knowing; Swati Chatterjee, the peat-reeve, Elder, first of Elder Council, carries the most weight.
+MAJOR FIGURES
+Swati Chatterjee
+the peat-reeve
+Elder Council
+PWR 3
+Sex
+Female
+·
+Age
+early sixties
+·
+Standing
+first of Elder Council, the only power here
+Peat cutter · Elder, first of Elder Council
+Short of peat.
+Personality
+perceptive · Flaw: reckless
+Motivation
+Get the peat cuttings through the season without borrowing. — Hand the Elder Council on to an heir of their own choosing, and not to Govind Banerjee.
+How they deal
+Offers a warm seat and talk of the families and the weather.
+SECRETS
+·
+Has been giving the best cuttings to their own kin and the wet ones to everyone else: In a hard winter, the families with wet peat will be cold, and they will know why
+RELATIONSHIPS
+· Aditya Bajaj - Professional Rivalry
+· Govind Banerjee - called by · Mutual Leverage
+Aditya Bajaj
+the head shepherd
+Elder Council
+PWR 3
+Sex
+Male
+·
+Age
+mid-twenties
+Shepherd · member of Elder Council
+Personality
+Flaw: vengeful
+Motivation
+Learn the secret of someone they envy. — Make the sheepfold too sound for any creditor to threaten.
+How they deal
+Talks about the weather, the hills and the flocks; offers milk and bread.
+SECRETS
+·
+Has written for years to someone in a far city they have never met, and is in love with the handwriting: The letters have stopped
+RELATIONSHIPS
+· Govind Banerjee - Professional Rivalry
+· Swati Chatterjee - called by · Professional Rivalry
+· Santosh Bajaj - called by · Pragmatic Alliance
+Govind Banerjee
+the brewster
+Elder Council
+PWR 2
+Sex
+Male
+·
+Age
+early forties
+Alehouse · second of Elder Council
+Personality
+Flaw: envious
+Motivation
+Take on more hands at the alehouse, and keep them busy all season. — Outlast every person who ever crossed them.
+How they deal
+Takes the deal, then does as little as the deal allows.
+SECRETS
+·
+Secretly receives what they believe are genuine divine visions, which terrifies them: Acting on the visions would be seen as madness; ignoring them may be worse
+RELATIONSHIPS
+· Swati Chatterjee - Mutual Leverage
+· Aditya Bajaj - called by · Professional Rivalry
+NOTABLE FIGURES
+Santosh Bajaj
+PWR 2
+the carpenter
+Elder Council
+Motive:
+Take over one of Govind Banerjee's duties in the Elder Council this season, and be seen to do it well. — Secure rights for the carpenter's workshop that will outlast whoever governs now.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+PROMINENT RELATIONSHIP
+Aditya Bajaj & Govind Banerjee · Professional Rivalry
+Internal relationships
+•
+Swati Chatterjee and Aditya Bajaj · Professional Rivalry
+Swati Chatterjee and Aditya Bajaj want the same thing and compete hard for it, but neither has let it turn into hatred.
+A decision coming next season will favour Swati Chatterjee or Aditya Bajaj heavily, and both of them know it.
+•
+Govind Banerjee and Swati Chatterjee · Mutual Leverage
+Govind Banerjee and Swati Chatterjee each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.
+The vote Swati Chatterjee needs from Govind Banerjee comes up next week, and he has named a new price.
+•
+Santosh Bajaj and Aditya Bajaj · Pragmatic Alliance
+Santosh Bajaj and Aditya Bajaj work together because fighting each other would cost them both more, and both of them know it.
+Someone else is working to pull Santosh Bajaj and Aditya Bajaj apart.
+•
+Aditya Bajaj and Govind Banerjee · Professional Rivalry
+Only one of Aditya Bajaj and Govind Banerjee can come out ahead, and both know it. They stay polite and give no ground.
+A patron they share has let it be known there is room for only Aditya Bajaj or Govind Banerjee at the next table.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Hamlet
+ANCHOR FACTS
+Complexity
+Subsistence with surplus
+Food
+Secure
+IDENTITY
+Name
+Prabhapuram
+Tier
+Hamlet
+Population
+76
+Terrain
+Plains
+Layout
+Scattered farmsteads along a muddy track, a common at the centre
+Age
+76 years
+Trade access
+Road
+Founded
+a small religious community whose members drifted into secular life over two generations
+CULTURAL IDENTITY
+South-Asian-inspired
+South-Asian-inspired, and it shows: built around the tank, kin by kin.
+Foodways
+Meals follow the season and what the household has put by.
+Architecture
+shaded doorways open onto the ground between the houses
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+76y old
+Founded 76 years ago, with three events on record and one tension still unresolved.
+Settlement age
+## 76
+76
+years
+Historical character
+It has come through the Flood and the Purge and simply continued, and that took more work than it looks
+Founding
+Founded by
+a small religious community whose members drifted into secular life over two generations
+Initial challenge
+rival claimants to the land
+Overcoming
+by attracting the right people at the right time
+Historical events · 3
+Founding (- 76 y)
+Now
+0 y after founding
+38 y after founding
+76 y after founding
+17y AGO
+Still relevant today
+Major
+The Purge
+· Occupation Infiltration
+Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another
+Lasting effects
+·
+The names denounced in the panic are still remembered, and not forgiven
+46y AGO
+Still relevant today
+Minor
+The Succession Crisis
+· Political
+The one who led was failing in health, and rivals maneuvered quietly to take that place
+Lasting effects
+·
+Rival claimant bloodlines still contest ceremonial precedence
+57y AGO
+Still relevant today
+Major
+The Flood
+· Disaster
+A flood rose fast across the low ground, carrying off livelihoods and leaving the ownership of half the ground in doubt
+Live tensions · 1
+Great Fire
+Parties: Those who want timber and thatch forbidden vs Households who cannot afford to build in anything else vs Those who say the danger is overblown
+Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## PRABHAPURAM
+PRABHAPURAM
+Hamlet · Plains
+POPULATION
+## 76
+76
+Hamlet
+PROSPERITY
+## Prosperous
+Prosperous
+Top export: Hardwood beams
+SAFETY
+## Moderate
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Prabhapuram
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Prabhapuram
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+## people[].name
+Swati Chatterjee
+## people[].role
+Elder
+## people[].why
+seat
+## people[].line
+get the peat cuttings through the season without borrowing.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. No granary; about a month and a half in household stores.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+No walls and no standing force.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+A would-be heir approaches outsiders to investigate a rival's past.
+## hooks[].source
+Political Event
+## hooks[].text
+The agents' handler is someone the hamlet trusts, and the players have already met them.
+## hooks[].source
+Infiltration Fear Event
+## hooks[].text
+An innocent person has been identified as a spy and is about to be executed.
+## hooks[].source
+Infiltration Fear Event

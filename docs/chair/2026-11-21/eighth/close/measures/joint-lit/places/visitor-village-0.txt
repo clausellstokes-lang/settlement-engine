@@ -1,0 +1,2870 @@
+== web:Summary/Overview ==
+Rasmahalvillage· 229 pop.· isolated· 170 years old
+Arabic-inspired, and it shows: built around courtyards, on endowed institutions. Governed by Elder Council · Stable
+"This place is older than the Great Fire, but people here date everything from it: before it, and after"
+Hills
+Open Tonight
+The place
+Smoke on the skyline is all you see of Rasmahal for the last hour of the road, and then the roofs are suddenly there. Courtyard gates reveal planted interiors and carefully managed water. Lengths of dyed cloth hang drying in bright strips between the houses. Bread is set out at a doorway for whoever needs it, and the household that set it there does not wait to be thanked. A tree twisted into an impossible shape stands where the magic broke loose, fenced and left alone.
+Systems Health▲
+## Systems Health
+?
+Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Moderate
+Safety
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+Relied upon
+The village leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+Monster DefenseCritical
+Economic ResilienceWeak
+Magical CapabilityWeak
+Food SecuritySecure
+A visitor with goods to sell at Rasmahal finds no stall to take and no market day to wait for. Few in Rasmahal hold an office.
+Tensions & Conflicts▲
+## Tensions & Conflicts
+Who is at odds with whom, and how badly.
+▸
+A land claim from an old charter contradicts current occupation, with both sides legally plausible
+Original claimantsCurrent occupantsLegal class profiting from ambiguity
+An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded
+The changed and their descendantsThose who fear themScholars studying the residue
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+Settlement Origin▲
+Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.
+
+== web:Summary/Foundations ==
+Foundations
+?
+What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Law & orderStrained
+Defense readinessStrained
+Trade connectivityStrained
+Infrastructure conditionStrained
+Criminal opportunityElevated
+Economic capacityAdequate
+Housing pressureAdequate
+Labor capacityAdequate
+Magical stabilityAdequate
+Public legitimacyTolerated
+Social trustAdequate
+Healing capacityAdequate
+FoodSecure
+Strength of the powersAdequate
+Religious authorityAdequate
+Ruling authorityAdequate
+Reliance on magic: Relied upon
+
+== web:Summary/Plot Hooks ==
+NPCs
+Saad al-Masri
+A child they took in as a favour has family who want the child back, and want paying for the years.
+Halima al-Nuri
+They married a couple in secret at one family's request, and the other family has just found out.
+Jassim al-Mawsili
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Husayn al-Farabi
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+Tamim al-Isfahani
+Their landlord has doubled the rent and will lower it only if they report on the family next door.
+Ola al-Masri
+Their partner in a small venture has disappeared with the takings and left the debts in their name.
+Hana al-Misri
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Uzma al-Basri
+They agreed to hold a parcel for a traveller, and two different people have since come to collect it.
+Umar al-Aziz
+A traveller passed through asking which nights their door is left unbarred, and was gone by morning.
+Amina al-Isfahani
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+History
+Disputed Land
+The original charter is held in a private archive whose owner has gone missing
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed
+A forged document is about to be introduced as evidence; someone knows it's fake
+Wild Magic
+The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed
+A bloodline touched by the surge is now manifesting something the family cannot conceal
+Religious Event
+A letter found this year tells it this way: a rival shrine claims the relic is theirs, stolen, and has sent someone to recover it
+Disaster Event
+A confession was extracted from a scapegoat; the real arsonist still lives in town
+Rebuilding uncovered something in the ashes that predates the settlement
+
+== web:Systems/Institutions ==
+?
+Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+A row marked short is what its house makes when supplied.
+BlacksmithCrafts
+Short of iron. Works metal full-time. Tools and horseshoes depend on this work.
+Connection: Blacksmith Ola al-Masri
+BacksElder Council
+ServicesHorseshoeing (short)Tool repair (short)
+BrewerCrafts
+Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.
+Connection: Master Brewer Hana al-Misri
+ServicesAle (barrel)Ale (jug)
+DyerCrafts
+Applies colour to raw or woven cloth. Essential for producing anything beyond undyed grey wool.
+Connection: Master Dyer Amina al-Isfahani
+ServicesDyed cloth
+MidwifeCrafts
+Attends births, handles the hard labours, and gives what women's care there is. No medical service in a settlement is called upon more.
+Connection: Goodman Tamim al-Isfahani
+BacksReligious Authorities
+ServicesBirth assistanceHerbal remedies
+MillCrafts
+Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.
+Connection: Master Miller Umar al-Aziz
+ServicesGrain milling
+Ale houseEconomy
+Home-based. Ale brewed in the house and sold from it.
+Connection: Alewife Uzma al-Basri
+ServicesBasic foodDrink service
+Common grazing landEconomy
+Pasture the whole village grazes in common, lying beside the open fields.
+ServicesPasturage
+FarmlandEconomy
+Open-field agriculture with crop rotation.
+ServicesGrain at harvest
+Peat cutterEconomy
+Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.
+Connection: Elder Saad al-Masri, the peat-reeve
+ServicesPeat fuel supply
+HealerMagic
+Casts basic healing spells. Closing a wound costs more than most households earn in a month.
+Connection: Leech Husayn al-Farabi
+ServicesWound closing
+Druid CircleReligious
+Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance. A few keep city gardens or concealed urban groves.
+Connection: Archdruid Jassim al-Mawsili
+ServicesNature magic servicesWilderness guidance
+GraveyardReligious
+Hallowed ground about the church.
+ServicesBurial
+House of worshipReligious
+The hub of village life. Built in stone. Tithes are compulsory.
+Connection: Imam Halima al-Nuri
+ServicesLife ceremoniesReligious services
+Priest (resident)Religious
+Performs sacraments, collects tithes. Often only literate person.
+The fabric of the place
+DwellingsInfrastructure
+Built of timber on stone footings.
+ServicesHospitality
+Multiple water sourcesInfrastructure
+Several wells and springs, spread through the village.
+
+== web:Systems/Services ==
+?
+What can be bought or hired here, and what is short.
+A row marked short is what its house makes when supplied.
+Goods & crafts(4)▲
+Dyed cloth
+Coloured fabric. Madder red cheapest, indigo expensive.
+Dyer
+Horseshoeing
+Short of iron. Essential for carts, carriers, and working horses
+Blacksmith
+Peat fuel supply
+Cut and dried peat blocks for fuel. Important where wood is scarce.
+Peat cutter
+Tool repair
+Short of iron. Fix agricultural implements and household tools
+Food & drink(6)▲
+Ale (barrel)
+Bulk supply to alehouses. Priced by barrel.
+Brewer
+Ale (jug)
+Small batch ale sold by the jug.
+Basic food
+Pottage, bread, and whatever was leftover from the household pot.
+Ale house
+Drink service
+Ale, cider, and common spirits. Often home-brewed. Cheap.
+Grain at harvest
+Grain sold by the sack to a household, straight from the field at harvest.
+Farmland
+Grain milling
+Process grain to flour
+Mill
+Healing(6)▲
+Birth assistance
+Experienced midwifery. Available day and night.
+Midwife
+Burial
+Prepare and inter the dead. Religious rites included where applicable.
+Graveyard
+Herbal remedies
+Tinctures and poultices for common ailments.
+Life ceremonies
+Births, marriages, and funerals. Essential community functions.
+House of worship
+Religious services
+Rites, observances, and the seasonal calendar.
+Wound closing
+Basic divine healing. Closes cuts, reduces fever, eases pain.
+Healer
+Lodging(1)▲
+Hospitality
+A bed by the hearth and a place at a shared table, for a traveller who asks.
+Dwellings
+Magical services(2)▲
+Nature magic services
+Speaking with animals, poison sensed, food purified, passage that leaves no track.
+Druid Circle
+Wilderness guidance
+Route guidance through dangerous wilderness.
+Transportation(1)▲
+Pasturage
+Grazing on the common for a traveller's beasts, for a small fee.
+Common grazing land
+
+== web:Systems/Economics ==
+Moderate
+Subsistence with minor surplus
+It gets about three quarters of what its work could yield, held back by having no market.
+Trade
+isolated
+Rasmahal pays its way from year to year, and nobody here calls the village poor.
+Income Sources▲
+100%
+Harvest What the households grow and raise on their holdings; the main living at this scale.
+Rasmahal does not spread its living across many trades: one carries the place, and the rest are small beside it. The village is short of luxury goods by its own land alone; whether the place goes short in fact depends on what it brings in.
+Trade Profile▲
+Exports
+No significant exports.
+Imports
+Incense and votive candles
+Needed, and not brought in: luxury goods, spices, fine textiles.
+Nothing leaves Rasmahal for trade. A merchant who came to buy in quantity has come to the wrong place.
+Produced locally
+peathoneymedicinal herbsMedical care (basic)Spellcasting (minor)Reeds and thatchReligious servicesEducation (basic)Hospitality for travellers
+Food Security▲
+Production: 483 lbs/dayNeed: 458 lbs/day
+Rasmahal grows a little more than it eats, with some to put by against a bad year.
+No granary; about two months in household stores.
+Its own fields give it grain; beyond that, what it puts on the table itself is the hunters' game. Water access and preservation skill determine the balance between local produce and caravan-borne staples.
+Rasmahal is fed, but what it keeps put by would not outlast a run of poor harvests.
+Economic Flows (4 active)▲
+## Economic Flows
+?
+What is made here and what it depends on.
+All (4)✓ Productive (4)
+Divine & Magical HealingHealing & medicine✓ Running
+From
+Hot springs
+Via
+House of worship
+Outputs
+Medical care (basic)Spellcasting (minor)
+Reed & Marsh HarvestRaw materials & fuel✓ Running
+Marshlands
+Peat cutter
+Reeds and thatchPeat fuelWaterfowl
+Faith & WorshipReligion & civic✓ Running
+Religious servicesEducation (basic)Poor relief
+Pilgrimage & Holy SitesReligion & civic✓ Running
+Religious servicesHospitality for travellersPoor relief
+Rasmahal brings in incense and votive candles from outside.
+
+== web:Systems/Resources ==
+Terrain
+Hills
+The people of Rasmahal know what their ground is worth to others, and know that is reason enough for someone to come for it. The village has worked out its gemstone deposits, and it will not come back on its own: someone has to put labour and money into it before it yields again.
+Nearby Resources▲
+Open Grazing Land
+Depleted
+Gemstone DepositsIron Ore Deposits
+Abundant
+Ancient GroveHot Springs / Healing WatersHunting GroundsMarshlands
+Commodities available
+Marshlandspeathoneymedicinal herbsHot Springs / Healing WatersAncient GroveHunting Groundsgame meatanimal hidesfurs
+
+== web:Systems/Power ==
+Who runs this place?
+?
+Who holds power and how firmly.
+The powerElder Council (dominant)
+The seatSaad al-Masri, the peat-reeve and Elder
+Public legitimacy
+50Tolerated
+Stability
+Stable
+Saad al-Masri, the peat-reeve and Elder, holds the seat of the Elder Council. The Elder Council governs Rasmahal. Rasmahal tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+The Seat and Its Contenders (2)▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerElder CouncilGovernmentDominant▲
+## RulerElder CouncilGovernmentDominant
+Institutions behind this power (10)
+Held under this authority
+Farmland
+Common grazing land
+Peat cutter
+Ale house
+Mill
+Dwellings
+Multiple water sources
+Under the ruling power, with no power of its own kind here
+Blacksmith
+Dyer
+Brewer
+ContenderReligious AuthoritiesReligiousStrong▼
+The Powers (2)▲
+60
+40
+Elder Council
+↑ Holds powerGovernment60▲
+## Elder Council↑ Holds powerGovernment60
+↳3 members · first Saad al-Masri · second Uzma al-Basri · third Umar al-Aziz
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+Religious Authorities
+Contests the seatReligious40▼
+## Religious AuthoritiesContests the seatReligious40
+↳4 members · first Halima al-Nuri · second Jassim al-Mawsili · third Husayn al-Farabi
+The Web (1)▲
+How the powers stand to one another, grouped by the kind of tie.
+↔Dependent(1)
+Elder Council↔Religious Authoritiesstable
+The Elder Council holds the seat and collects the taxes; the Religious Authorities tell people that the Elder Council's rule is right and ordained. Each props up the other.
+The shape of authority
+At Rasmahal the village's business goes to the whole Elder Council, and everybody has learned how long the answer takes.
+Rule and succession
+A visitor at Rasmahal hears more than one name spoken about the hall, and the one with the most weight behind it is the Elder Council.
+Crime and the hall
+Rasmahal has no strong opinion of the Elder Council either way.
+Who really runs this village
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Elder Council
+Head · Saad al-Masri, the peat-reeve
+Second · Uzma al-Basri, the alewife
+Third · Umar al-Aziz, the miller
+The hall
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+RulerElder CouncilGovernmentDominant▼
+ContenderReligious AuthoritiesReligiousStrong▲
+## ContenderReligious AuthoritiesReligiousStrong
+Institutions behind this power (6)
+A house of this faith
+Midwife
+House of worship
+Graveyard
+Priest (resident)
+Druid Circle
+Healer
+↑ Holds powerGovernment60▼
+Contests the seatReligious40▲
+## Religious AuthoritiesContests the seatReligious40
+The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+
+== web:Systems/Defense ==
+Defensive posture
+Vulnerable
+Guard assessment
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+Counted up, the people Rasmahal could put under arms make a thin defence.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Whoever walks out of Rasmahal, in any direction and at any hour, is unlikely to meet a beast.
+Invasion & War
+Weak▼
+Rasmahal has no line and no force. Organized aggression cannot be resisted here; what preserves the village is distance, diplomacy, or being beneath notice.
+Internal Security
+If you are wronged at Rasmahal, there is no court to take it to, and no local is surprised.
+Economic Survival
+Rasmahal pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
+Disasters & Famine
+Adequate▼
+Food endurance: No granary: under siege the outlying fields would be lost; household stores would carry the village for about two months at full rations, about four months on half, and what is still harvested would stretch them further.
+Criminal Architecture & Public Order▲
+Order holds in most of the place, but not everywhere. Locals watch over the main ways themselves; after dark, the quieter spots carry genuine risk. Locals can tell a newcomer which places to steer clear of.
+Rasmahal pays nobody to keep the peace, and trouble here is settled among its own people.
+Rasmahal's books record no gang, guild or racket: what wrongdoing the village has, people do on their own account.
+Armed Forces & Fortifications▲
+## Armed Forces & Fortifications
+Unfortified. No perimeter walls. Defenders cannot control entry points or create chokepoints.
+Rasmahal is too small to wall and knows it; the village's safety is its neighbours, its distance, and its unimportance.
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+You can walk into Rasmahal from any direction and pass nobody on the way in. The village has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response. Whatever defence Rasmahal keeps, a visitor would find nothing arcane in it.
+Supporting Capabilities▲
+Legal InfrastructureNone
+No deterrence beyond force.
+Medical Readiness
+Healer (divine, 1st level). Wounds and fevers treated one at a time; no beds to contain an outbreak.
+
+== web:Systems/Magic ==
+Magic
+Magic in the world at large, not the village's own:
+Medium
+Envelope
+Availabilitycommon
+Legalityrestricted
+Institutional controlfragmented
+Service costcostly
+Riskmoderate
+Religious acceptanceHostile outside the faith's own houses
+Roles
+Reliance on magic: Relied upon · for Divine & Magical Healing · supplied by Healer and House of worship
+Economic role: common
+Military role: absent
+Medical role: common
+Infrastructure role: common
+Reliance on magic, as judged at the first survey
+Rasmahal leans on the people who give it help beyond ordinary work; a hard season for them (a feud, a sickness, a falling-out) is a hard season for the village.
+
+== web:Systems/Outlook ==
+✓ Viable
+Rasmahal feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+Supply in isolation
+Rasmahal grows more than it eats, but no dependable road, river or port takes the rest anywhere, and what the place cannot grow or make it mostly goes without.
+
+== web:World/NPCs ==
+10 Key Figures
+?
+The people worth knowing and what each one holds.
+↺ Reroll
+Elder Council (3)▲
+## Elder Council
+Saad al-Masri
+▲
+## Elder Council › Saad al-Masri
+Peat cutter · Elder, first of Elder Council
+Peat-Reeve
+Flaw: ruthless
+Outstanding DebtHana al-Misri
+Holds the seat, and in a place this small everyone knows it; most quarrels end at its door. Still the peat-reeve as well.
+Constraint: With nothing pressing, it is hard to win support for mending the weak spots before they break.
+Wants Win new business for the peat cuttings beyond the people who already come.
+Standing first of Elder Council, the stronger power here
+How they deal Cooperative. Unassuming. Easy to overlook.
+Secret: Knows where a body was buried in the bog years ago, and who put it there
+## Elder Council
+Umar al-Aziz
+## Elder Council › Umar al-Aziz
+Mill · third of Elder Council
+Master Miller
+Flaw: cruel Temperament: diligent
+Professional RivalryOla al-Masri
+Uzma al-Basri holds a tie to them: Outstanding Debt
+Wants Win the mill first call on any help those who govern can give this season.
+Disposition diligent
+How they deal Will grind for anyone who pays the toll; wants to know whose grain it is before naming the price.
+Secret: Mixes ground chalk and bean meal into the flour in the lean months to make it go further
+## Elder Council
+Uzma al-Basri
+## Elder Council › Uzma al-Basri
+Ale house · second of Elder Council
+Alewife
+Flaw: overbearing
+Outstanding DebtUmar al-Aziz
+Wants Pay Umar al-Aziz back one part of what is owed before the season ends.
+How they deal Keeps you at a distance, and makes you prove you are worth their time.
+Secret: Made a binding pact with an entity they now cannot name without consequence
+Religious Authorities (3)▲
+## Religious Authorities
+Halima al-Nuri
+## Religious Authorities › Halima al-Nuri
+House of worship · first of Religious Authorities
+Imam
+Flaw: paranoid Temperament: candid
+Professional RivalryTamim al-Isfahani
+Jassim al-Mawsili holds a tie to them: Pragmatic Alliance
+Ola al-Masri holds a tie to them: Outstanding Debt
+Amina al-Isfahani holds a tie to them: Mentor and Successor
+Hana al-Misri holds a tie to them: Outstanding Debt
+Leads the faith in a small place, where the priest knows every family by name.
+Constraint: Keeping the house of worship in repair takes alms, and alms come slowly when nothing troubles people.
+Wants Get the rights of the house of worship written down and sealed by those who govern, this season.
+Standing first of Religious Authorities, the weaker power here
+Disposition candid
+How they deal Answers questions without volunteering anything, and watches who you talk to next.
+Secret: Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+## Religious Authorities
+Husayn al-Farabi
+## Religious Authorities › Husayn al-Farabi
+Healer · third of Religious Authorities
+Leech
+Flaw: vain Temperament: protective
+Professional RivalryAmina al-Isfahani
+Wants Beat Amina al-Isfahani at something this season, in front of people who matter.
+Disposition protective
+How they deal Deals with you as a favour, and lets you know the terms are theirs to set.
+Secret: Has been studying a forbidden school of magic under a false research pretext
+## Religious Authorities
+Jassim al-Mawsili
+## Religious Authorities › Jassim al-Mawsili
+Druid Circle · second of Religious Authorities
+Archdruid
+Pragmatic AllianceHalima al-Nuri
+Tamim al-Isfahani holds a tie to them: Genuine Respect
+Wants Have those who govern confirm, in writing, who may give orders at the druid circle.
+How they deal Talks about the seasons and the rites; welcomes anyone who shows respect.
+Secret: Knows something about Tamim al-Isfahani that Tamim al-Isfahani believes no one else knows, and has been deciding for months whether to use it
+Unranked members (1)▲
+## Unranked members
+Tamim al-Isfahani
+## Unranked members › Tamim al-Isfahani
+Midwife · member of Religious Authorities
+Goodman
+Flaw: greedy Temperament: steadfast
+Genuine RespectJassim al-Mawsili
+Halima al-Nuri holds a tie to them: Professional Rivalry
+Wants Win over one of Halima al-Nuri's friends.
+Disposition steadfast
+How they deal Comes when called and takes what the family can give; remembers who never pays.
+Secret: Has been ending pregnancies for women who come to the back door at night, and has never told anyone their names
+In no power (3)▲
+## In no power
+Ola al-Masri
+## In no power › Ola al-Masri
+Blacksmith
+Short of iron.
+Flaw: overbearing Temperament: compassionate
+Outstanding DebtHalima al-Nuri
+Umar al-Aziz holds a tie to them: Professional Rivalry
+Wants Be the one others look to when something goes wrong.
+Disposition compassionate
+How they deal Talks while working; knows every farm and horse nearby.
+Secret: Shoes horses with poor nails to bring their owners back for repairs
+## In no power
+Hana al-Misri
+## In no power › Hana al-Misri
+Brewer
+Master Brewer
+Flaw: greedy
+Saad al-Masri holds a tie to them: Outstanding Debt
+Wants Make sure no one else learns how much is owed to Halima al-Nuri.
+How they deal Sells by the barrel to taverns and by the jug to anyone; talks prices plainly.
+Secret: Owes Jassim al-Mawsili a debt from before either of them held their current position: one that Jassim al-Mawsili has never formally called in
+## In no power
+Amina al-Isfahani
+## In no power › Amina al-Isfahani
+Dyer
+Master Dyer
+Mentor and SuccessorHalima al-Nuri
+Husayn al-Farabi holds a tie to them: Professional Rivalry
+Wants Ask Halima al-Nuri for advice on one hard decision this season.
+How they deal Polite about prices; says nothing about how a colour is mixed.
+Secret: Sells cheap colours as costly ones, and they wash out at the first rain
+
+== web:World/Relationships ==
+NPC Relationships (10)▲
+All (10)Allies (1)Rivals (3)Leverage (4)
+Saad al-MasriOutstanding DebtHana al-Misri
+Elder · substantial · the brewer
+▲
+Hana al-Misri paid Saad al-Masri's bail eleven years ago and has never mentioned it. Saad al-Masri mentions it to no one.
+Hana al-Misri has asked Saad al-Masri for a vote against his own interests. It is the first payment Hana al-Misri has asked for.
+Halima al-NuriProfessional RivalryTamim al-Isfahani
+the priest · professional · the midwife
+Halima al-Nuri and Tamim al-Isfahani trained together and have competed ever since. The settlement keeps score, and so do they.
+A post opens at midsummer, and only Halima al-Nuri or Tamim al-Isfahani can fill it.
+Uzma al-BasriOutstanding DebtUmar al-Aziz
+the alewife · crushing · the miller
+Uzma al-Basri owes Umar al-Aziz a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Uzma al-Basri has offered to clear what is left of the debt in one payment. Umar al-Aziz would rather be repaid in favours.
+Umar al-AzizProfessional RivalryOla al-Masri
+the miller · personal · the smith
+Umar al-Aziz wants Ola al-Masri's position, and she wants his reputation. They are civil in public and unforgiving in private.
+Ola al-Masri has been telling clients that Umar al-Aziz's work is slipping. Two of the clients have repeated it to Umar al-Aziz.
+Jassim al-MawsiliPragmatic AllianceHalima al-Nuri
+the archdruid · moderate · the priest
+Jassim al-Mawsili and Halima al-Nuri are allies with separate interests. They meet to coordinate and leave by different doors.
+Halima al-Nuri has asked Jassim al-Mawsili to back a candidate him distrusts. Refusing would cost the alliance its majority.
+Husayn al-FarabiProfessional RivalryAmina al-Isfahani
+the healer · professional · the dyer
+Every friend Husayn al-Farabi wins is one Amina al-Isfahani lost, and the reverse. The two keep a polite distance and an exact tally.
+Husayn al-Farabi and Amina al-Isfahani will both present proposals at the next council session. Only one will be accepted.
+Tamim al-IsfahaniGenuine RespectJassim al-Mawsili
+the midwife · grudging · the archdruid
+Tamim al-Isfahani trusts Jassim al-Mawsili's word over any written contract. Jassim al-Mawsili has never given a reason to regret it.
+Jassim al-Mawsili has publicly backed a plan that Tamim al-Isfahani thinks will fail. Tamim al-Isfahani has said so once, in private.
+Ola al-MasriOutstanding DebtHalima al-Nuri
+the smith · crushing · the priest
+Halima al-Nuri kept Ola al-Masri's name out of a scandal that ruined two others. Ola al-Masri has taken Halima al-Nuri's side ever since.
+Halima al-Nuri has mentioned the debt aloud, at a dinner, in front of Ola al-Masri's partners.
+Amina al-IsfahaniMentor and SuccessorHalima al-Nuri
+the dyer · lifelong · the priest
+Amina al-Isfahani vouched for Halima al-Nuri when nobody else would. Halima al-Nuri's first post came from that word.
+Halima al-Nuri corrected Amina al-Isfahani in public last month, and was right.
+Hana al-MisriOutstanding DebtHalima al-Nuri
+the brewer · crushing · the priest
+Halima al-Nuri nursed Hana al-Misri through a winter fever when no one else would come. Hana al-Misri still owes the debt and still knows it.
+Hana al-Misri has refused Halima al-Nuri a small favour for the first time in years.
+
+== web:World/Daily Life ==
+Food
+Secure
+Access
+Isolated
+Culture
+Arabic
+Rasmahal's treasury takes in a little more than it pays out each year. It is enough, and no more.
+The forge is lit early, and its hammering is the first sound of most mornings.
+Of an evening people sit out at their doors, and by day they meet by the house of worship.
+Children are warned about getting mixed up in the grown-ups' quarrels.
+
+== web:World/Traditions ==
+The founding traditions of Rasmahal.
+✒
+The Contest of the Charter
+## The Contest of the Charter
+Charter
+Kept in Seedtime, the second and third weeks.
+A contest that honours the charter. It is overseen by the Elder Council. It has been kept since Rasmahal was founded, 170 years ago, by a noble granted lands by the crown and obligated to populate them.
+◆
+The Old Standing Stone Contest
+## The Old Standing Stone Contest
+Stone
+Kept in Deepwinter, the fourth week.
+A day of games and contests that stays true to the standing stones.
+
+== web:World/History ==
+Rasmahal170 years old↺ Reroll
+"This place is older than the Great Fire, but people here date everything from it: before it, and after"
+Current Tensions (2)▲
+Disputed land
+A land claim from an old charter contradicts current occupation, with both sides legally plausible
+Original claimantsCurrent occupantsLegal class profiting from ambiguity
+Wild magic
+An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded
+The changed and their descendantsThose who fear themScholars studying the residue
+Founding▲
+## Founding
+Origin:grew around a valuable resource deposit
+Founded by:a noble granted lands by the crown and obligated to populate them
+Early trial:disease and hardship in the early winters
+How survived:by making enough right decisions to survive the wrong ones
+Families in Rasmahal still point out where the first houses stood, though few of them look as they first did.
+Major Historical Events (5)▲
+## Major Historical Events
+Founded
+Now
+140y
+106y
+77y
+56y
+18y
+Infiltration Fear
+Political
+Religious
+Disaster
+Magical
+The Wild MagicMagicalmajor
+Magic broke loose over the low ground and the people who lived there, and the traces it left have lingered ever since
+18y ago
+Living memory
+The Great FireDisastercatastrophic
+A fire out of the low ground spread from roof to roof before anyone could bring it under control
+56y ago
+Last century
+The PilgrimageReligiousmajor
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+77y ago
+The SchismPoliticalminor
+Established custom and new thinking pull the generations into open conflict
+106y ago
+Ancient
+▼
+The PurgeInfiltration Fearmajor
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+140y ago
+Rasmahal still keeps the shape the village took after the pilgrimage, and that shape is older than all but the oldest alive, though the times have moved on.
+
+== web:World/Rumors & News ==
+Available at launch
+What Rasmahal has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+== web:World/War ==
+Available at launch
+From here you raise Rasmahal's troops, send them out, call them home, and read what they report back.
+
+== web:World/Faith ==
+Faith
+A parish church keeps the faith in the village. A voice in the village’s affairs belongs to the Religious Authorities. Most folk attend the rites through the year.
+The faith’s god and the church’s name are yours to set.
+
+== web:Notes/DM Notes ==
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/AI Notes ==
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+== web:Notes/Chronicle ==
+No chronicle yet.
+
+== pdf:canon_dossier ==
+SETTLEMENT DOSSIER
+## RASMAHAL
+RASMAHAL
+Village · Hills
+POPULATION
+## 229
+229
+Village
+PROSPERITY
+## Moderate
+Moderate
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Rasmahal
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+19
+Timeline
+0 events
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Rasmahal, a village of 229, has no crisis on its hands this season.
+Population
+229
+Village
+Age
+170 yrs
+Hills
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+13/100
+Economic
+39/100
+Magical
+36/100
+Disaster
+44/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+483
+Needed
+458
+Surplus: 25
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Disputed Land
+Original claimants / Current occupants / Legal class profiting from ambiguity
+Wild Magic
+The changed and their descendants / Those who fear them / Scholars studying the residue
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.
+INSTITUTIONS · 16 TOTAL
+Crafts 5
+Economy 4
+Religious 4
+Infrastructure 2
+Magic 1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+People to voice
+Saad al-Masri
+Elder · Holds the seat
+Wants to win new business for the peat cuttings beyond the people who already come.
+Halima al-Nuri
+the priest · Senior cleric
+Wants to get the rights of the house of worship written down and sealed by those who govern, this season.
+What the players test first
+Food
+Secure. No granary; about two months in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Saad al-Masri
+A child they took in as a favour has family who want the child back, and want paying for the years.
+Disputed Land
+The original charter is held in a private archive whose owner has gone missing.
+Disputed Land
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed.
+SESSION SCRATCH
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+18 hooks
+18 hooks to pull; most of them belong to the people (10).
+NPCs
+10 hook s
+01
+A child they took in as a favour has family who want the child back, and want paying for the years.
+Saad al-Masri
+High
+02
+They married a couple in secret at one family's request, and the other family has just found out.
+Halima al-Nuri
+Low
+03
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Jassim al-Mawsili
+Low
+04
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+Husayn al-Farabi
+Low
+05
+Their landlord has doubled the rent and will lower it only if they report on the family next door.
+Tamim al-Isfahani
+Low
+06
+Their partner in a small venture has disappeared with the takings and left the debts in their name.
+Ola al-Masri
+Low
+07
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Hana al-Misri
+Low
+08
+They agreed to hold a parcel for a traveller, and two different people have since come to collect it.
+Uzma al-Basri
+Low
+09
+A traveller passed through asking which nights their door is left unbarred, and was gone by morning.
+Umar al-Aziz
+Low
+10
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+Amina al-Isfahani
+Low
+History
+8 hook s
+01
+The original charter is held in a private archive whose owner has gone missing
+Disputed Land
+Medium
+02
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed
+Disputed Land
+Medium
+03
+A forged document is about to be introduced as evidence; someone knows it's fake
+Disputed Land
+Medium
+04
+The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed
+Wild Magic
+Medium
+05
+A bloodline touched by the surge is now manifesting something the family cannot conceal
+Wild Magic
+Medium
+06
+A letter found this year tells it this way: a rival shrine claims the relic is theirs, stolen, and has sent someone to recover it
+Religious Event
+Low
+07
+A confession was extracted from a scapegoat; the real arsonist still lives in town
+Disaster Event
+Low
+08
+Rebuilding uncovered something in the ashes that predates the settlement
+Disaster Event
+Low
+UNDERLYING TENSIONS
+•
+Disputed Land
+•
+Wild Magic
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+20 buyable across 6 categories
+A row marked short is what its house makes when supplied.
+Lodging
+1 option
+Hospitality
+Food & drink
+6 option s
+Ale (barrel)
+Ale (jug)
+Basic food
+Drink service
+Grain at harvest
+Grain milling
+Goods & crafts
+4 option s
+Dyed cloth
+Horseshoeing (short)
+Peat fuel supply
+Tool repair (short)
+Magical services
+2 option s
+Nature magic services
+Wilderness guidance
+Healing
+6 option s
+Birth assistance
+Burial
+Herbal remedies
+Life ceremonies
+Religious services
+Wound closing
+Transportation
+1 option
+Pasturage
+ACTIVE SUPPLY CHAINS · 4
+Divine & Magical Healing
+Running
+NEED Healing & Medicine
+Hot springs » House of worship » Medical care (basic), Spellcasting (minor)
+Reed & Marsh Harvest
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Marshlands » Peat cutter » Reeds and thatch, Peat fuel, Waterfowl
+Faith & Worship
+Running
+NEED Religion & Civic
+House of worship » Religious services, Education (basic), Poor relief
+Pilgrimage & Holy Sites
+Running
+NEED Religion & Civic
+Hot springs » House of worship » Religious services, Hospitality for travellers, Poor relief
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+16 institutions
+16 institutions; the largest groups are crafts (5) and trade and farming (4).
+A row marked short is what its house makes when supplied.
+Total
+16
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+4 institutions
+House of worship
+Essential
+Religious
+Church
+The hub of village life. Built in stone. Tithes are compulsory.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals. Essential community functions.
+Religious services
+: Rites, observances, and the seasonal calendar.
+Graveyard
+Essential
+Religious
+Hallowed ground about the church.
+Backs
+Religious Authorities
+Services
+Burial
+: Prepare and inter the dead. Religious rites included where applicable.
+Priest (resident)
+Essential
+Religious
+Performs sacraments, collects tithes. Often only literate person.
+Backs
+Religious Authorities
+Druid Circle
+Religious
+Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance. A few keep city gardens or concealed urban groves.
+Backs
+Religious Authorities
+Services
+Nature magic services
+: Speaking with animals, poison sensed, food purified, passage that leaves no track.
+Wilderness guidance
+: Route guidance through dangerous wilderness.
+Economy
+4 institutions
+Farmland
+Essential
+Agriculture
+Open-field agriculture with crop rotation.
+Backs
+Elder Council
+Services
+Grain at harvest
+: Grain sold by the sack to a household, straight from the field at harvest.
+Common grazing land
+Essential
+Agriculture
+Pasture the whole village grazes in common, lying beside the open fields.
+Backs
+Elder Council
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Peat cutter
+Trade
+Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.
+Backs
+Elder Council
+Services
+Peat fuel supply
+: Cut and dried peat blocks for fuel. Important where wood is scarce.
+Ale house
+Food
+Home-based. Ale brewed in the house and sold from it.
+Backs
+Elder Council
+Services
+Basic food
+: Pottage, bread, and whatever was leftover from the household pot.
+Drink service
+: Ale, cider, and common spirits. Often home-brewed. Cheap.
+Magic
+1 institution
+Healer
+Divine
+Healing
+Casts basic healing spells. Closing a wound costs more than most households earn in a month.
+Backs
+Religious Authorities
+Services
+Wound closing
+: Basic divine healing. Closes cuts, reduces fever, eases pain.
+Crafts
+5 institutions
+Mill
+Essential
+Food
+Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.
+Backs
+Elder Council
+Services
+Grain milling
+: Process grain to flour
+Blacksmith
+Metalwork
+Short of iron. Works metal full-time. Tools and horseshoes depend on this work.
+Backs
+Elder Council
+Services
+Horseshoeing
+: Short of iron. Essential for carts, carriers, and working horses
+Tool repair
+: Short of iron. Fix agricultural implements and household tools
+Dyer
+Trade
+Applies colour to raw or woven cloth. Essential for producing anything beyond undyed grey wool.
+Backs
+Elder Council
+Services
+Dyed cloth
+: Coloured fabric. Madder red cheapest, indigo expensive.
+Midwife
+Healing
+Attends births, handles the hard labours, and gives what women's care there is. No medical service in a settlement is called upon more.
+Backs
+Religious Authorities
+Services
+Birth assistance
+: Experienced midwifery. Available day and night.
+Herbal remedies
+: Tinctures and poultices for common ailments.
+Brewer
+Trade
+Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.
+Backs
+Elder Council
+Services
+Ale (barrel)
+: Bulk supply to alehouses. Priced by barrel.
+Ale (jug)
+: Small batch ale sold by the jug.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Built of timber on stone footings.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Multiple water sources
+Essential
+Water
+Several wells and springs, spread through the village.
+Backs
+Elder Council
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. It grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Subsistence with minor surplus
+Trade
+Isolated
+It gets about three quarters of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+100%
+What the households grow and raise on their holdings; the main living at this scale.
+TRADE FLOWS
+EXPORTS
+None significant
+IMPORTS
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Peat
+•
+Honey
+•
+medicinal herbs
+•
+Medical care (basic)
+•
+Spellcasting (minor)
+•
+Reeds and thatch
+•
+Religious services
+•
+Education (basic)
+•
+Hospitality for travellers
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+luxury goods
+Spices
+fine textiles
+FOOD SECURITY
+PRODUCED
+483
+NEEDED
+458
+Surplus
+25
+Ordinary farmland.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Hot springs
+>
+House of worship
+>
+Medical care (basic)
+Spellcasting (minor)
+Marshlands
+>
+Peat cutter
+>
+Reeds and thatch
+Peat fuel
+Waterfowl
+House of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Hot springs
+>
+House of worship
+>
+Religious services
+Hospitality for travellers
+Poor relief
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Hills
+The nearby gemstone deposits and iron deposits are used up.
+STRATEGIC VALUE
+Medium-High - defensible terrain, good visibility
+NEARBY RESOURCES
+Open Grazing Land
+Depleted
+Gemstone Deposits
+Iron Ore Deposits
+Abundant
+Marshlands
+Hot Springs / Healing Waters
+Ancient Grove
+Hunting Grounds
+Commodities available
+· processed/refined in this settlement
+Marshlands
+Peat
+Honey
+Medicinal Herbs
+Hot Springs / Healing Waters
+Ancient Grove
+Hunting Grounds
+game meat
+animal hides
+Furs
+IMPORT DEPENDENCIES
+CRITICAL
+luxury goods
+Spices
+fine textiles
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Saad al-Masri, the peat-reeve and Elder, holds the seat of the Elder Council. The Elder Council governs Rasmahal. Rasmahal tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 60
+Religious Authorities 40
+POWERS
+Elder Council
+Government
+Governing
+Power 60
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+Religious Authorities
+Religious
+Power 40
+Strong
+The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+FOR THE DM ONLY
+Who really runs this village
+THE RULING THREE OF ELDER COUNCIL
+Head · Saad al-Masri, the peat-reeve
+Second · Uzma al-Basri, the alewife
+Third · Umar al-Aziz, the miller
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force. It leans on magic to hold.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.1
+Food resilience
+44
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Quiet country, and nothing organised is kept against it.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+A healer treats the sick one at a time; an outbreak would outrun it.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the village for about two months at full rations, about four months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+Healer
+Healer (divine, 1st level). Wounds and fevers treated one at a time; no beds to contain an outbreak.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Rasmahal feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+Divine & Magical Healing
+KEY METRICS
+Food balance
++25
+Trade access
+isolated
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+10 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Saad al-Masri
+the peat-reeve
+Elder Council
+Male · mid-thirties
+9
+Halima al-Nuri
+the priest
+Religious Authorities
+Female · mid-fifties
+5
+Jassim al-Mawsili
+the archdruid
+Religious Authorities
+Male · late twenties
+3
+Husayn al-Farabi
+the healer
+Religious Authorities
+Male · mid-sixties
+3
+Tamim al-Isfahani
+the midwife
+Religious Authorities
+Male · early fifties
+3
+Ola al-Masri
+the smith
+Female · mid-fifties
+3
+Hana al-Misri
+the brewer
+Female · late thirties
+2
+Uzma al-Basri
+the alewife
+Elder Council
+Female · mid-forties
+1
+Umar al-Aziz
+the miller
+Elder Council
+Male · late forties
+1
+Amina al-Isfahani
+the dyer
+Female · late twenties
+1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+10 figures
+Ten people worth knowing; Saad al-Masri, the peat-reeve, Elder, first of Elder Council, carries the most weight.
+MAJOR FIGURES
+Saad al-Masri
+the peat-reeve
+Elder Council
+PWR 9
+Sex
+Male
+·
+Age
+mid-thirties
+·
+Standing
+first of Elder Council, the stronger power here
+Peat cutter · Elder, first of Elder Council
+Personality
+Flaw: ruthless
+Motivation
+Win new business for the peat cuttings beyond the people who already come. — Never have to count coins again.
+How they deal
+Cooperative. Unassuming. Easy to overlook.
+SECRETS
+·
+Knows where a body was buried in the bog years ago, and who put it there: The bog is drying out, and the body may not stay hidden
+RELATIONSHIPS
+· Hana al-Misri - Outstanding Debt
+Halima al-Nuri
+the priest
+Religious Authorities
+PWR 5
+Sex
+Female
+·
+Age
+mid-fifties
+·
+Standing
+first of Religious Authorities, the weaker power here
+House of worship · first of Religious Authorities
+Personality
+candid · Flaw: paranoid
+Motivation
+Get the rights of the house of worship written down and sealed by those who govern, this season. — Have enough friends in high places that no one dares touch them.
+How they deal
+Answers questions without volunteering anything, and watches who you talk to next.
+SECRETS
+·
+Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail: Civil fraud liability and the permanent destruction of a reputation built over decades
+RELATIONSHIPS
+· Tamim al-Isfahani - Professional Rivalry
+· Jassim al-Mawsili - called by · Pragmatic Alliance
+· Ola al-Masri - called by · Outstanding Debt
+· Amina al-Isfahani - called by · Mentor and Successor
+· Hana al-Misri - called by · Outstanding Debt
+Jassim al-Mawsili
+the archdruid
+Religious Authorities
+PWR 3
+Sex
+Male
+·
+Age
+late twenties
+Druid Circle · second of Religious Authorities
+Motivation
+Have those who govern confirm, in writing, who may give orders at the druid circle. — See this place live by what they believe is right.
+How they deal
+Talks about the seasons and the rites; welcomes anyone who shows respect.
+SECRETS
+·
+Knows something about Tamim al-Isfahani that Tamim al-Isfahani believes no one else knows, and has been deciding for months whether to use it: Tamim al-Isfahani would move against them immediately if they suspected
+RELATIONSHIPS
+· Halima al-Nuri - Pragmatic Alliance
+· Tamim al-Isfahani - called by · Genuine Respect
+NOTABLE FIGURES
+Husayn al-Farabi
+PWR 3
+the healer
+Religious Authorities
+Motive:
+Beat Amina al-Isfahani at something this season, in front of people who matter. — Be the first person the Religious Authorities would turn to, before anyone thinks to ask Jassim al-Mawsili.
+Tamim al-Isfahani
+PWR 3
+the midwife
+Religious Authorities
+Motive:
+Win over one of Halima al-Nuri's friends. — Leave more money at the midwife's house than there was when they took charge.
+Ola al-Masri
+PWR 3
+the smith
+Motive:
+Be the one others look to when something goes wrong. — Clear the debt to Halima al-Nuri without anyone ever learning there was one.
+Hana al-Misri
+PWR 2
+the brewer
+Motive:
+Make sure no one else learns how much is owed to Halima al-Nuri. — Make the brewer's brewhouse too sound for any creditor to threaten.
+OTHER NAMES OF NOTE
+Uzma al-Basri
+· the alewife
+Elder Council
+1
+Umar al-Aziz
+· the miller
+Elder Council
+1
+Amina al-Isfahani
+· the dyer
+1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+Internal relationships
+•
+Saad al-Masri and Hana al-Misri · Outstanding Debt
+Hana al-Misri paid Saad al-Masri's bail eleven years ago and has never mentioned it. Saad al-Masri mentions it to no one.
+Hana al-Misri has asked Saad al-Masri for a vote against his own interests. It is the first payment Hana al-Misri has asked for.
+•
+Halima al-Nuri and Tamim al-Isfahani · Professional Rivalry
+Halima al-Nuri and Tamim al-Isfahani trained together and have competed ever since. The settlement keeps score, and so do they.
+A post opens at midsummer, and only Halima al-Nuri or Tamim al-Isfahani can fill it.
+•
+Uzma al-Basri and Umar al-Aziz · Outstanding Debt
+Uzma al-Basri owes Umar al-Aziz a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Uzma al-Basri has offered to clear what is left of the debt in one payment. Umar al-Aziz would rather be repaid in favours.
+•
+Umar al-Aziz and Ola al-Masri · Professional Rivalry
+Umar al-Aziz wants Ola al-Masri's position, and she wants his reputation. They are civil in public and unforgiving in private.
+Ola al-Masri has been telling clients that Umar al-Aziz's work is slipping. Two of the clients have repeated it to Umar al-Aziz.
+•
+Jassim al-Mawsili and Halima al-Nuri · Pragmatic Alliance
+Jassim al-Mawsili and Halima al-Nuri are allies with separate interests. They meet to coordinate and leave by different doors.
+Halima al-Nuri has asked Jassim al-Mawsili to back a candidate him distrusts. Refusing would cost the alliance its majority.
+•
+Husayn al-Farabi and Amina al-Isfahani · Professional Rivalry
+Every friend Husayn al-Farabi wins is one Amina al-Isfahani lost, and the reverse. The two keep a polite distance and an exact tally.
+Husayn al-Farabi and Amina al-Isfahani will both present proposals at the next council session. Only one will be accepted.
+•
+Tamim al-Isfahani and Jassim al-Mawsili · Genuine Respect
+Tamim al-Isfahani trusts Jassim al-Mawsili's word over any written contract. Jassim al-Mawsili has never given a reason to regret it.
+Jassim al-Mawsili has publicly backed a plan that Tamim al-Isfahani thinks will fail. Tamim al-Isfahani has said so once, in private.
+•
+Ola al-Masri and Halima al-Nuri · Outstanding Debt
+Halima al-Nuri kept Ola al-Masri's name out of a scandal that ruined two others. Ola al-Masri has taken Halima al-Nuri's side ever since.
+Halima al-Nuri has mentioned the debt aloud, at a dinner, in front of Ola al-Masri's partners.
+•
+Amina al-Isfahani and Halima al-Nuri · Mentor and Successor
+Amina al-Isfahani vouched for Halima al-Nuri when nobody else would. Halima al-Nuri's first post came from that word.
+Halima al-Nuri corrected Amina al-Isfahani in public last month, and was right.
+•
+Hana al-Misri and Halima al-Nuri · Outstanding Debt
+Halima al-Nuri nursed Hana al-Misri through a winter fever when no one else would come. Hana al-Misri still owes the debt and still knows it.
+Hana al-Misri has refused Halima al-Nuri a small favour for the first time in years.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Village
+ANCHOR FACTS
+Complexity
+Subsistence with minor surplus
+Food
+Secure
+Magic-dependent
+IDENTITY
+Name
+Rasmahal
+Tier
+Village
+Population
+229
+Terrain
+Hills
+Layout
+Stone-built village on a south-facing slope, paths converging at the stone cross
+Age
+170 years
+Trade access
+Isolated
+Founded
+a noble granted lands by the crown and obligated to populate them
+CULTURAL IDENTITY
+Arabic-inspired
+Arabic-inspired, and it shows: built around courtyards, on endowed institutions.
+Foodways
+Its own fields give it grain; beyond that, what it puts on the table itself is the hunters' game. Water access and preservation skill determine the balance between local produce and caravan-borne staples.
+Architecture
+courtyard gates reveal planted interiors and carefully managed water
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+170y old
+Founded 170 years ago, with five events on record and two tensions still unresolved.
+Settlement age
+## 170
+170
+years
+Historical character
+This place is older than the Great Fire, but people here date everything from it: before it, and after
+Founding
+Origin
+grew around a valuable resource deposit
+Founded by
+a noble granted lands by the crown and obligated to populate them
+Initial challenge
+disease and hardship in the early winters
+Overcoming
+by making enough right decisions to survive the wrong ones
+Historical events · 5
+Founding (- 170 y)
+Now
+0 y after founding
+85 y after founding
+170 y after founding
+18y AGO
+Still relevant today
+Major
+The Wild Magic
+· Magical
+Magic broke loose over the low ground and the people who lived there, and the traces it left have lingered ever since
+56y AGO
+Still relevant today
+Catastrophic
+The Great Fire
+· Disaster
+A fire out of the low ground spread from roof to roof before anyone could bring it under control
+77y AGO
+Still relevant today
+Major
+The Pilgrimage
+· Religious
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+106y AGO
+Minor
+The Schism
+· Political
+Established custom and new thinking pull the generations into open conflict
+Lasting effects
+·
+The old families and the young still quarrel over who speaks for the place
+140y AGO
+Major
+The Purge
+· Occupation Infiltration
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 2
+Disputed Land
+Parties: Original claimants vs Current occupants vs Legal class profiting from ambiguity
+A land claim from an old charter contradicts current occupation, with both sides legally plausible
+Wild Magic
+Parties: The changed and their descendants vs Those who fear them vs Scholars studying the residue
+An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== pdf:draft_brief ==
+SETTLEMENT DOSSIER
+## RASMAHAL
+RASMAHAL
+Village · Hills
+POPULATION
+## 229
+229
+Village
+PROSPERITY
+## Moderate
+Moderate
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Rasmahal
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+01
+Overview
+systems
+02
+Tonight
+quick prep
+04
+Plot Hooks & Quests
+05
+Services
+what players can buy
+06
+Institutions
+who runs what
+07
+Economics & Trade
+08
+Resources & Production
+09
+Power Structure
+10
+Defense & Security
+11
+Viability Assessment
+12
+NPC Quick Reference
+index
+13
+Notable NPCs
+detailed sheets
+14
+Relationships
+15
+Identity & Daily Life
+17
+History & Founding
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+01
+## Overview
+Overview
+Moderate. Rasmahal, a village of 229, has no crisis on its hands this season.
+Population
+229
+Village
+Age
+170 yrs
+Hills
+Prosperity
+Moderate
+Safety
+Moderate
+Stability
+Stable
+SYSTEMS HEALTH
+As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Monster
+13/100
+Economic
+39/100
+Magical
+36/100
+Disaster
+44/100
+Enforcement ratio
+There is no watch.
+Food balance
+Produced
+483
+Needed
+458
+Surplus: 25
+TENSIONS & CONFLICTS
+Each tension in full: History & Founding (17).
+Disputed Land
+Original claimants / Current occupants / Legal class profiting from ambiguity
+Wild Magic
+The changed and their descendants / Those who fear them / Scholars studying the residue
+CHARACTER & ORIGIN
+Historical character: History & Founding (17).
+Settlement Origin:
+Isolated from major trade routes. What the settlement needs, it makes; what it cannot make, it learns to do without.
+INSTITUTIONS · 16 TOTAL
+Crafts 5
+Economy 4
+Religious 4
+Infrastructure 2
+Magic 1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+02
+## Tonight
+Tonight
+What is urgent
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+People to voice
+Saad al-Masri
+Elder · Holds the seat
+Wants to win new business for the peat cuttings beyond the people who already come.
+Halima al-Nuri
+the priest · Senior cleric
+Wants to get the rights of the house of worship written down and sealed by those who govern, this season.
+What the players test first
+Food
+Secure. No granary; about two months in household stores.
+Defence
+No walls and no standing force.
+Hooks
+Saad al-Masri
+A child they took in as a favour has family who want the child back, and want paying for the years.
+Disputed Land
+The original charter is held in a private archive whose owner has gone missing.
+Disputed Land
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed.
+SESSION SCRATCH
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+04
+## Plot Hooks & Quests
+Plot Hooks & Quests
+18 hooks
+18 hooks to pull; most of them belong to the people (10).
+NPCs
+10 hook s
+01
+A child they took in as a favour has family who want the child back, and want paying for the years.
+Saad al-Masri
+High
+02
+They married a couple in secret at one family's request, and the other family has just found out.
+Halima al-Nuri
+Low
+03
+A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions are becoming relevant.
+Jassim al-Mawsili
+Low
+04
+They have seen the same unmarked cart pass their door three nights running, and have not wondered why.
+Husayn al-Farabi
+Low
+05
+Their landlord has doubled the rent and will lower it only if they report on the family next door.
+Tamim al-Isfahani
+Low
+06
+Their partner in a small venture has disappeared with the takings and left the debts in their name.
+Ola al-Masri
+Low
+07
+They found a name scratched into their door overnight, and it belongs to someone who died last winter.
+Hana al-Misri
+Low
+08
+They agreed to hold a parcel for a traveller, and two different people have since come to collect it.
+Uzma al-Basri
+Low
+09
+A traveller passed through asking which nights their door is left unbarred, and was gone by morning.
+Umar al-Aziz
+Low
+10
+Two neighbours have each asked them to stand witness in the same dispute, on opposite sides.
+Amina al-Isfahani
+Low
+History
+8 hook s
+01
+The original charter is held in a private archive whose owner has gone missing
+Disputed Land
+Medium
+02
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed
+Disputed Land
+Medium
+03
+A forged document is about to be introduced as evidence; someone knows it's fake
+Disputed Land
+Medium
+04
+The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed
+Wild Magic
+Medium
+05
+A bloodline touched by the surge is now manifesting something the family cannot conceal
+Wild Magic
+Medium
+06
+A letter found this year tells it this way: a rival shrine claims the relic is theirs, stolen, and has sent someone to recover it
+Religious Event
+Low
+07
+A confession was extracted from a scapegoat; the real arsonist still lives in town
+Disaster Event
+Low
+08
+Rebuilding uncovered something in the ashes that predates the settlement
+Disaster Event
+Low
+UNDERLYING TENSIONS
+•
+Disputed Land
+•
+Wild Magic
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+05
+## Services
+Services
+20 buyable across 6 categories
+A row marked short is what its house makes when supplied.
+Lodging
+1 option
+Hospitality
+Food & drink
+6 option s
+Ale (barrel)
+Ale (jug)
+Basic food
+Drink service
+Grain at harvest
+Grain milling
+Goods & crafts
+4 option s
+Dyed cloth
+Horseshoeing (short)
+Peat fuel supply
+Tool repair (short)
+Magical services
+2 option s
+Nature magic services
+Wilderness guidance
+Healing
+6 option s
+Birth assistance
+Burial
+Herbal remedies
+Life ceremonies
+Religious services
+Wound closing
+Transportation
+1 option
+Pasturage
+ACTIVE SUPPLY CHAINS · 4
+Divine & Magical Healing
+Running
+NEED Healing & Medicine
+Hot springs » House of worship » Medical care (basic), Spellcasting (minor)
+Reed & Marsh Harvest
+Running
+NEED Raw Materials & Fuel · EXPORT yes
+Marshlands » Peat cutter » Reeds and thatch, Peat fuel, Waterfowl
+Faith & Worship
+Running
+NEED Religion & Civic
+House of worship » Religious services, Education (basic), Poor relief
+Pilgrimage & Holy Sites
+Running
+NEED Religion & Civic
+Hot springs » House of worship » Religious services, Hospitality for travellers, Poor relief
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+06
+## Institutions
+Institutions
+16 institutions
+16 institutions; the largest groups are crafts (5) and trade and farming (4).
+A row marked short is what its house makes when supplied.
+Total
+16
+Categories
+5
+Impaired
+0
+Degraded
+0
+Vulnerable
+0
+Religious
+4 institutions
+House of worship
+Essential
+Religious
+Church
+The hub of village life. Built in stone. Tithes are compulsory.
+Backs
+Religious Authorities
+Services
+Life ceremonies
+: Births, marriages, and funerals. Essential community functions.
+Religious services
+: Rites, observances, and the seasonal calendar.
+Graveyard
+Essential
+Religious
+Hallowed ground about the church.
+Backs
+Religious Authorities
+Services
+Burial
+: Prepare and inter the dead. Religious rites included where applicable.
+Priest (resident)
+Essential
+Religious
+Performs sacraments, collects tithes. Often only literate person.
+Backs
+Religious Authorities
+Druid Circle
+Religious
+Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance. A few keep city gardens or concealed urban groves.
+Backs
+Religious Authorities
+Services
+Nature magic services
+: Speaking with animals, poison sensed, food purified, passage that leaves no track.
+Wilderness guidance
+: Route guidance through dangerous wilderness.
+Economy
+4 institutions
+Farmland
+Essential
+Agriculture
+Open-field agriculture with crop rotation.
+Backs
+Elder Council
+Services
+Grain at harvest
+: Grain sold by the sack to a household, straight from the field at harvest.
+Common grazing land
+Essential
+Agriculture
+Pasture the whole village grazes in common, lying beside the open fields.
+Backs
+Elder Council
+Services
+Pasturage
+: Grazing on the common for a traveller's beasts, for a small fee.
+Peat cutter
+Trade
+Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.
+Backs
+Elder Council
+Services
+Peat fuel supply
+: Cut and dried peat blocks for fuel. Important where wood is scarce.
+Ale house
+Food
+Home-based. Ale brewed in the house and sold from it.
+Backs
+Elder Council
+Services
+Basic food
+: Pottage, bread, and whatever was leftover from the household pot.
+Drink service
+: Ale, cider, and common spirits. Often home-brewed. Cheap.
+Magic
+1 institution
+Healer
+Divine
+Healing
+Casts basic healing spells. Closing a wound costs more than most households earn in a month.
+Backs
+Religious Authorities
+Services
+Wound closing
+: Basic divine healing. Closes cuts, reduces fever, eases pain.
+Crafts
+5 institutions
+Mill
+Essential
+Food
+Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.
+Backs
+Elder Council
+Services
+Grain milling
+: Process grain to flour
+Blacksmith
+Metalwork
+Short of iron. Works metal full-time. Tools and horseshoes depend on this work.
+Backs
+Elder Council
+Services
+Horseshoeing
+: Short of iron. Essential for carts, carriers, and working horses
+Tool repair
+: Short of iron. Fix agricultural implements and household tools
+Dyer
+Trade
+Applies colour to raw or woven cloth. Essential for producing anything beyond undyed grey wool.
+Backs
+Elder Council
+Services
+Dyed cloth
+: Coloured fabric. Madder red cheapest, indigo expensive.
+Midwife
+Healing
+Attends births, handles the hard labours, and gives what women's care there is. No medical service in a settlement is called upon more.
+Backs
+Religious Authorities
+Services
+Birth assistance
+: Experienced midwifery. Available day and night.
+Herbal remedies
+: Tinctures and poultices for common ailments.
+Brewer
+Trade
+Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.
+Backs
+Elder Council
+Services
+Ale (barrel)
+: Bulk supply to alehouses. Priced by barrel.
+Ale (jug)
+: Small batch ale sold by the jug.
+Infrastructure
+2 institutions
+Dwellings
+Essential
+Housing
+Built of timber on stone footings.
+Backs
+Elder Council
+Services
+Hospitality
+: A bed by the hearth and a place at a shared table, for a traveller who asks.
+Multiple water sources
+Essential
+Water
+Several wells and springs, spread through the village.
+Backs
+Elder Council
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+07
+## Economics & Trade
+Economics & Trade
+Moderate. It grows more food than it eats.
+Prosperity
+Moderate
+Complexity
+Subsistence with minor surplus
+Trade
+Isolated
+It gets about three quarters of what its work could yield, held back by having no market.
+INCOME SOURCES
+Harvest
+100%
+What the households grow and raise on their holdings; the main living at this scale.
+TRADE FLOWS
+EXPORTS
+None significant
+IMPORTS
+•
+Incense and votive candles
+LOCAL PRODUCTION
+•
+Peat
+•
+Honey
+•
+medicinal herbs
+•
+Medical care (basic)
+•
+Spellcasting (minor)
+•
+Reeds and thatch
+•
+Religious services
+•
+Education (basic)
+•
+Hospitality for travellers
+NECESSITY IMPORTS
+CRITICAL DEPENDENCIES
+luxury goods
+Spices
+fine textiles
+FOOD SECURITY
+PRODUCED
+483
+NEEDED
+458
+Surplus
+25
+Ordinary farmland.
+ECONOMIC FLOWS · 4 CHAIN S
+Running
+Vulnerable
+Impaired / institution missing
+EXPORT = exported for income
+Hot springs
+>
+House of worship
+>
+Medical care (basic)
+Spellcasting (minor)
+Marshlands
+>
+Peat cutter
+>
+Reeds and thatch
+Peat fuel
+Waterfowl
+House of worship
+>
+Religious services
+Education (basic)
+Poor relief
+Hot springs
+>
+House of worship
+>
+Religious services
+Hospitality for travellers
+Poor relief
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+08
+## Resources & Production
+Resources & Production
+Hills
+The nearby gemstone deposits and iron deposits are used up.
+STRATEGIC VALUE
+Medium-High - defensible terrain, good visibility
+NEARBY RESOURCES
+Open Grazing Land
+Depleted
+Gemstone Deposits
+Iron Ore Deposits
+Abundant
+Marshlands
+Hot Springs / Healing Waters
+Ancient Grove
+Hunting Grounds
+Commodities available
+· processed/refined in this settlement
+Marshlands
+Peat
+Honey
+Medicinal Herbs
+Hot Springs / Healing Waters
+Ancient Grove
+Hunting Grounds
+game meat
+animal hides
+Furs
+IMPORT DEPENDENCIES
+CRITICAL
+luxury goods
+Spices
+fine textiles
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+09
+## Power Structure
+Power Structure
+Elder Council governs.
+PUBLIC LEGITIMACY
+## 50
+50
+Tolerated
+STABILITY
+Stable
+GOVERNING
+Elder Council
+Government
+GOVERNANCE
+Saad al-Masri, the peat-reeve and Elder, holds the seat of the Elder Council. The Elder Council governs Rasmahal. Rasmahal tolerates the Elder Council, and no more. A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+POWER DISTRIBUTION
+Elder Council 60
+Religious Authorities 40
+POWERS
+Elder Council
+Government
+Governing
+Power 60
+Dominant
+The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+Religious Authorities
+Religious
+Power 40
+Strong
+The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale. Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead.
+FOR THE DM ONLY
+Who really runs this village
+THE RULING THREE OF ELDER COUNCIL
+Head · Saad al-Masri, the peat-reeve
+Second · Uzma al-Basri, the alewife
+Third · Umar al-Aziz, the miller
+THE HALL
+The seat is not in criminal hands. Nobody at the head of the Elder Council answers to a criminal house, and no criminal power here is strong enough to push it.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+10
+## Defense & Security
+Defense & Security
+Vulnerable: no walls and no organized force. It leans on magic to hold.
+Readiness
+Vulnerable
+Safety
+Moderate
+Watch to population
+0.1
+Food resilience
+44
+GUARD ASSESSMENT
+Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.
+THREAT ASSESSMENT
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical
+Quiet country, and nothing organised is kept against it.
+Invasion & War
+Weak
+No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.
+Internal Security
+Critical
+Internal security: Moderate. No court and no gaol; order rests on whoever is armed.
+Economic Survival
+Weak
+Money is already short; a long crisis would empty the reserves.
+Disasters & Famine
+Adequate
+A healer treats the sick one at a time; an outbreak would outrun it.
+Food endurance :
+No granary: under siege the outlying fields would be lost; household stores would carry the village for about two months at full rations, about four months on half, and what is still harvested would stretch them further.
+ARMED FORCES & FORTIFICATIONS
+No organized force. Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
+SUPPORTING CAPABILITIES
+Legal Infrastructure
+None
+No deterrence beyond force.
+Medical Readiness
+Healer
+Healer (divine, 1st level). Wounds and fevers treated one at a time; no beds to contain an outbreak.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+11
+## Viability Assessment
+Viability Assessment
+Viable
+Viable: it feeds itself and needs no outside trade to survive.
+VERDICT
+Viable
+Rasmahal feeds itself and pays its own way.
+Judged at the first survey; not re-run since.
+MAGIC DEPENDENCY
+This settlement leans on arcane infrastructure. If magic-supporting institutions are removed or their staff lost, the dependent chains below would fail.
+Divine & Magical Healing
+KEY METRICS
+Food balance
++25
+Trade access
+isolated
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+12
+## NPC Quick Reference
+NPC Quick Reference
+10 faces
+Everyone named in the dossier, on one page; the number beside each name is how much power they hold, and the warmer its colour, the more. Full sheets in chapter 13.
+NAME
+MEMBER OF · NOTES
+PWR
+Saad al-Masri
+the peat-reeve
+Elder Council
+Male · mid-thirties
+9
+Halima al-Nuri
+the priest
+Religious Authorities
+Female · mid-fifties
+5
+Jassim al-Mawsili
+the archdruid
+Religious Authorities
+Male · late twenties
+3
+Husayn al-Farabi
+the healer
+Religious Authorities
+Male · mid-sixties
+3
+Tamim al-Isfahani
+the midwife
+Religious Authorities
+Male · early fifties
+3
+Ola al-Masri
+the smith
+Female · mid-fifties
+3
+Hana al-Misri
+the brewer
+Female · late thirties
+2
+Uzma al-Basri
+the alewife
+Elder Council
+Female · mid-forties
+1
+Umar al-Aziz
+the miller
+Elder Council
+Male · late forties
+1
+Amina al-Isfahani
+the dyer
+Female · late twenties
+1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+13
+## Notable NPCs
+Notable NPCs
+10 figures
+Ten people worth knowing; Saad al-Masri, the peat-reeve, Elder, first of Elder Council, carries the most weight.
+MAJOR FIGURES
+Saad al-Masri
+the peat-reeve
+Elder Council
+PWR 9
+Sex
+Male
+·
+Age
+mid-thirties
+·
+Standing
+first of Elder Council, the stronger power here
+Peat cutter · Elder, first of Elder Council
+Personality
+Flaw: ruthless
+Motivation
+Win new business for the peat cuttings beyond the people who already come. — Never have to count coins again.
+How they deal
+Cooperative. Unassuming. Easy to overlook.
+SECRETS
+·
+Knows where a body was buried in the bog years ago, and who put it there: The bog is drying out, and the body may not stay hidden
+RELATIONSHIPS
+· Hana al-Misri - Outstanding Debt
+Halima al-Nuri
+the priest
+Religious Authorities
+PWR 5
+Sex
+Female
+·
+Age
+mid-fifties
+·
+Standing
+first of Religious Authorities, the weaker power here
+House of worship · first of Religious Authorities
+Personality
+candid · Flaw: paranoid
+Motivation
+Get the rights of the house of worship written down and sealed by those who govern, this season. — Have enough friends in high places that no one dares touch them.
+How they deal
+Answers questions without volunteering anything, and watches who you talk to next.
+SECRETS
+·
+Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail: Civil fraud liability and the permanent destruction of a reputation built over decades
+RELATIONSHIPS
+· Tamim al-Isfahani - Professional Rivalry
+· Jassim al-Mawsili - called by · Pragmatic Alliance
+· Ola al-Masri - called by · Outstanding Debt
+· Amina al-Isfahani - called by · Mentor and Successor
+· Hana al-Misri - called by · Outstanding Debt
+Jassim al-Mawsili
+the archdruid
+Religious Authorities
+PWR 3
+Sex
+Male
+·
+Age
+late twenties
+Druid Circle · second of Religious Authorities
+Motivation
+Have those who govern confirm, in writing, who may give orders at the druid circle. — See this place live by what they believe is right.
+How they deal
+Talks about the seasons and the rites; welcomes anyone who shows respect.
+SECRETS
+·
+Knows something about Tamim al-Isfahani that Tamim al-Isfahani believes no one else knows, and has been deciding for months whether to use it: Tamim al-Isfahani would move against them immediately if they suspected
+RELATIONSHIPS
+· Halima al-Nuri - Pragmatic Alliance
+· Tamim al-Isfahani - called by · Genuine Respect
+NOTABLE FIGURES
+Husayn al-Farabi
+PWR 3
+the healer
+Religious Authorities
+Motive:
+Beat Amina al-Isfahani at something this season, in front of people who matter. — Be the first person the Religious Authorities would turn to, before anyone thinks to ask Jassim al-Mawsili.
+Tamim al-Isfahani
+PWR 3
+the midwife
+Religious Authorities
+Motive:
+Win over one of Halima al-Nuri's friends. — Leave more money at the midwife's house than there was when they took charge.
+Ola al-Masri
+PWR 3
+the smith
+Motive:
+Be the one others look to when something goes wrong. — Clear the debt to Halima al-Nuri without anyone ever learning there was one.
+Hana al-Misri
+PWR 2
+the brewer
+Motive:
+Make sure no one else learns how much is owed to Halima al-Nuri. — Make the brewer's brewhouse too sound for any creditor to threaten.
+OTHER NAMES OF NOTE
+Uzma al-Basri
+· the alewife
+Elder Council
+1
+Umar al-Aziz
+· the miller
+Elder Council
+1
+Amina al-Isfahani
+· the dyer
+1
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+14
+## Relationships
+Relationships
+Internal relationships
+•
+Saad al-Masri and Hana al-Misri · Outstanding Debt
+Hana al-Misri paid Saad al-Masri's bail eleven years ago and has never mentioned it. Saad al-Masri mentions it to no one.
+Hana al-Misri has asked Saad al-Masri for a vote against his own interests. It is the first payment Hana al-Misri has asked for.
+•
+Halima al-Nuri and Tamim al-Isfahani · Professional Rivalry
+Halima al-Nuri and Tamim al-Isfahani trained together and have competed ever since. The settlement keeps score, and so do they.
+A post opens at midsummer, and only Halima al-Nuri or Tamim al-Isfahani can fill it.
+•
+Uzma al-Basri and Umar al-Aziz · Outstanding Debt
+Uzma al-Basri owes Umar al-Aziz a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Uzma al-Basri has offered to clear what is left of the debt in one payment. Umar al-Aziz would rather be repaid in favours.
+•
+Umar al-Aziz and Ola al-Masri · Professional Rivalry
+Umar al-Aziz wants Ola al-Masri's position, and she wants his reputation. They are civil in public and unforgiving in private.
+Ola al-Masri has been telling clients that Umar al-Aziz's work is slipping. Two of the clients have repeated it to Umar al-Aziz.
+•
+Jassim al-Mawsili and Halima al-Nuri · Pragmatic Alliance
+Jassim al-Mawsili and Halima al-Nuri are allies with separate interests. They meet to coordinate and leave by different doors.
+Halima al-Nuri has asked Jassim al-Mawsili to back a candidate him distrusts. Refusing would cost the alliance its majority.
+•
+Husayn al-Farabi and Amina al-Isfahani · Professional Rivalry
+Every friend Husayn al-Farabi wins is one Amina al-Isfahani lost, and the reverse. The two keep a polite distance and an exact tally.
+Husayn al-Farabi and Amina al-Isfahani will both present proposals at the next council session. Only one will be accepted.
+•
+Tamim al-Isfahani and Jassim al-Mawsili · Genuine Respect
+Tamim al-Isfahani trusts Jassim al-Mawsili's word over any written contract. Jassim al-Mawsili has never given a reason to regret it.
+Jassim al-Mawsili has publicly backed a plan that Tamim al-Isfahani thinks will fail. Tamim al-Isfahani has said so once, in private.
+•
+Ola al-Masri and Halima al-Nuri · Outstanding Debt
+Halima al-Nuri kept Ola al-Masri's name out of a scandal that ruined two others. Ola al-Masri has taken Halima al-Nuri's side ever since.
+Halima al-Nuri has mentioned the debt aloud, at a dinner, in front of Ola al-Masri's partners.
+•
+Amina al-Isfahani and Halima al-Nuri · Mentor and Successor
+Amina al-Isfahani vouched for Halima al-Nuri when nobody else would. Halima al-Nuri's first post came from that word.
+Halima al-Nuri corrected Amina al-Isfahani in public last month, and was right.
+•
+Hana al-Misri and Halima al-Nuri · Outstanding Debt
+Halima al-Nuri nursed Hana al-Misri through a winter fever when no one else would come. Hana al-Misri still owes the debt and still knows it.
+Hana al-Misri has refused Halima al-Nuri a small favour for the first time in years.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+15
+## Identity & Daily Life
+Identity & Daily Life
+Village
+ANCHOR FACTS
+Complexity
+Subsistence with minor surplus
+Food
+Secure
+Magic-dependent
+IDENTITY
+Name
+Rasmahal
+Tier
+Village
+Population
+229
+Terrain
+Hills
+Layout
+Stone-built village on a south-facing slope, paths converging at the stone cross
+Age
+170 years
+Trade access
+Isolated
+Founded
+a noble granted lands by the crown and obligated to populate them
+CULTURAL IDENTITY
+Arabic-inspired
+Arabic-inspired, and it shows: built around courtyards, on endowed institutions.
+Foodways
+Its own fields give it grain; beyond that, what it puts on the table itself is the hunters' game. Water access and preservation skill determine the balance between local produce and caravan-borne staples.
+Architecture
+courtyard gates reveal planted interiors and carefully managed water
+DAILY LIFE
+FOOD BALANCE
+More is grown and brought in than people eat each day. The local food supply is reliable.
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+17
+## History & Founding
+History & Founding
+170y old
+Founded 170 years ago, with five events on record and two tensions still unresolved.
+Settlement age
+## 170
+170
+years
+Historical character
+This place is older than the Great Fire, but people here date everything from it: before it, and after
+Founding
+Origin
+grew around a valuable resource deposit
+Founded by
+a noble granted lands by the crown and obligated to populate them
+Initial challenge
+disease and hardship in the early winters
+Overcoming
+by making enough right decisions to survive the wrong ones
+Historical events · 5
+Founding (- 170 y)
+Now
+0 y after founding
+85 y after founding
+170 y after founding
+18y AGO
+Still relevant today
+Major
+The Wild Magic
+· Magical
+Magic broke loose over the low ground and the people who lived there, and the traces it left have lingered ever since
+56y AGO
+Still relevant today
+Catastrophic
+The Great Fire
+· Disaster
+A fire out of the low ground spread from roof to roof before anyone could bring it under control
+77y AGO
+Still relevant today
+Major
+The Pilgrimage
+· Religious
+Word of a miracle brought pilgrims in numbers the settlement had never been meant to hold, and the coin and strangers that came with them left it permanently altered
+106y AGO
+Minor
+The Schism
+· Political
+Established custom and new thinking pull the generations into open conflict
+Lasting effects
+·
+The old families and the young still quarrel over who speaks for the place
+140y AGO
+Major
+The Purge
+· Occupation Infiltration
+Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust
+Lasting effects
+·
+Neighbours still watch one another, and the old informers are not forgotten
+Live tensions · 2
+Disputed Land
+Parties: Original claimants vs Current occupants vs Legal class profiting from ambiguity
+A land claim from an old charter contradicts current occupation, with both sides legally plausible
+Wild Magic
+Parties: The changed and their descendants vs Those who fear them vs Scholars studying the residue
+An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded
+SettlementForge
+
+== pdf:timeline_packet ==
+SETTLEMENT DOSSIER
+## RASMAHAL
+RASMAHAL
+Village · Hills
+POPULATION
+## 229
+229
+Village
+PROSPERITY
+## Moderate
+Moderate
+SAFETY
+Moderate
+Defense: Vulnerable
+GOVERNED BY
+Elder Council
+SETTLEMENTFORGE
+CAMPAIGN
+DATE
+November 22, 2026
+State, never fate
+Rasmahal
+SETTLEMENT DOSSIER
+## Moderate › Index
+Index
+## Contents
+Contents
+19
+Timeline
+0 events
+SettlementForge
+Rasmahal
+SETTLEMENT DOSSIER
+19
+## Timeline
+Timeline
+0 events
+What has happened here since your campaign began.
+No events recorded yet.
+SettlementForge
+
+== session ==
+## opening
+A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+## people[].name
+Saad al-Masri
+## people[].role
+Elder
+## people[].why
+seat
+## people[].line
+win new business for the peat cuttings beyond the people who already come.
+## people[].says
+want
+## people[].sourcePath
+npcs[0]
+## people[].name
+Halima al-Nuri
+## people[].role
+the priest
+## people[].why
+cleric
+## people[].line
+get the rights of the house of worship written down and sealed by those who govern, this season.
+## people[].says
+want
+## people[].sourcePath
+npcs[1]
+## facts[].id
+food
+## facts[].label
+Food
+## facts[].text
+Secure. No granary; about two months in household stores.
+## facts[].sourcePath
+economicState.foodSecurity.foodRecord
+## facts[].id
+defence
+## facts[].label
+Defence
+## facts[].text
+No walls and no standing force.
+## facts[].sourcePath
+defenseFactsOf
+## hooks[].text
+A child they took in as a favour has family who want the child back, and want paying for the years.
+## hooks[].source
+Saad al-Masri
+## hooks[].text
+The original charter is held in a private archive whose owner has gone missing.
+## hooks[].source
+Disputed Land
+## hooks[].text
+Something of value was found on the disputed land, which is why the claim is suddenly being pressed.
+## hooks[].source
+Disputed Land
