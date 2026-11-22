@@ -165,7 +165,7 @@ the owner's record, on `toPublicSafe(record)` (`display/publicSafe.js`) and unde
 **WHAT BIT ME** (each cost a stop and a ruling):
 1. A NEW IMPORT INTO AN EAGER MODULE IS A FIRST-PAINT RISE. `computeEngineSharedDomain` puts every domain module a
    generator imports into eager engine-core: U5a's merits did, and dragged the law and two data files with them
-   (+6,609). Build and read the closure (`scratchpad/fp-closure.mjs` and `sm-attr.mjs`, copies in section 5's method)
+   (+6,609). Build and read the closure (`measures/firstpaint/fp-closure.mjs`, `sm-attr.mjs`, `sm-file.mjs`: committed; build the line and your tip, `--sourcemap --outDir` for attribution)
    before you call any unit green.
 2. PIN A LAZY MODULE TO ITS OWN CHUNK, never into the law's: data imports give an import-free chunk a `data-lazy` edge,
    and the create boundary's closure triples.
