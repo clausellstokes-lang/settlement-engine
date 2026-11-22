@@ -24,6 +24,9 @@ recorded them." Every lane below was recorded and then stopped. Nothing is broke
   opens no pull request. EVERY PUSH OF THE CHAIR GOES THROUGH `landing/safepush.sh` (it pushes a LOCAL LANE BRANCH BY
   ITS OWN NAME, only when origin lacks its tip; a push that hands the hook no ref starts the whole check, whose
   fixture tests write into the real repository: kill it). Never commit on a branch while its push is in flight.
+- THE CHAIR's SMALL TOOLS are in `tools/` beside this file (`tools/README.md`): CI's failing rows read by name against
+  the red list; a seat's last steps from its record; one generated place printed whole for a reader. The old
+  machine's scratch folder is gone with the old account: nothing a successor needs lived only there.
 - What every seat obeys: `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` and
   `docs/chair/2026-11-21/eighth/prompts/COMMON-EIGHTH.txt` (items 13, 14, 15 are the newest: rule 8 narrowed where
   the dark proof is equal; a push names a local lane branch).

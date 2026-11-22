@@ -2617,6 +2617,11 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    FURTHER NET IS ARMED. THE OLD ACCOUNT's SESSIONS ARE IDLE, NOT ARCHIVED (archiving them is the owner's word).
    STILL THE OWNER'S HAND ALONE: the pull request's merge, the deploy, every migration, production credentials,
    the goldens and every signing.
+- 2026-11-22 22:58 UTC · AFTER NET 23: THE STOP IS COMPLETE. VEIL-33 ANSWERED (its record, 22:53): the live helper was V33-C1 (chain C's measure builder); it is stopped; no process, no database connection and no uncommitted work is left on its machine; chain C's tip is unchanged at 302976386. ALL SIX SEATS' SESSIONS ARE IDLE with
+   nothing running. THE RECORD's PUSH: f1a48d77b on origin's `lane/chair-2026-11-08` at 22:58 (local = origin).
+   ADDED AFTER IT, docs only: `tools/` (the chair's small tools, with a README), so that nothing a successor needs
+   lives only in the old machine's scratch folder. NOTHING ELSE IS OWED BY THIS CHAIR. The next account starts
+   from: git fetch origin lane/chair-2026-11-08 && git show FETCH_HEAD:docs/chair/2026-11-21/eighth/PICKUP-FOR-NEXT-ACCOUNT.md
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
