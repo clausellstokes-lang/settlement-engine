@@ -23,7 +23,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 /** The switches, read live by the mocks: the build (`lit`), the new paths forced off (`off`), a holder planted (`holder`). */
-const sw = vi.hoisted(() => ({ lit: false, off: false, holder: /** @type {null | ((s: any) => any)} */ (null), standingCalls: /** @type {any[]} */ ([]) }));
+const sw = vi.hoisted(() => ({ lit: false, off: false, passOff: false, holder: /** @type {null | ((s: any) => any)} */ (null), standingCalls: /** @type {any[]} */ ([]), passCalls: /** @type {any[]} */ ([]), bandCalls: /** @type {any[]} */ ([]) }));
 
 vi.mock('../../../src/domain/seat/seatLaw.js', async (importOriginal) => {
   const actual = /** @type {any} */ (await importOriginal());
@@ -64,6 +64,24 @@ vi.mock('../../../src/generators/power/factionStanding.js', async (importOrigina
       }
       return actual.annotateFactionStanding(factions, force, handed);
     },
+    // THE FINAL-RECORD PASS (E65): off with the new paths (arm 5) or alone (`passOff`, arm 6); each call records what it saw
+    settleSeatHolderToRecord: (/** @type {any} */ record) => {
+      if (sw.off || sw.passOff) return undefined;
+      sw.passCalls.push({ npcs: Array.isArray(record?.npcs) ? record.npcs.length : 0, conflicted: JSON.stringify(record?.powerStructure?.factionRelationships || []).includes(' Even so, ') });
+      return actual.settleSeatHolderToRecord(record);
+    },
+  };
+});
+// FAULT (b)'s guard (E65 (3)): every office band `people/castPowers.js :: raiseToOfficeBand` asks for, read again under the law's fold.
+vi.mock('../../../src/generators/npcGenerator.js', async (importOriginal) => {
+  const actual = /** @type {any} */ (await importOriginal());
+  return {
+    ...actual,
+    powerBandOfRole: (/** @type {any} */ role, /** @type {any} */ config) => {
+      const band = actual.powerBandOfRole(role, config);
+      if (String(new Error().stack).includes('castPowers.js')) sw.bandCalls.push({ role, band, lawBand: actual.powerBandOfRole(role, { _seatLawVersion: 2 }) });
+      return band;
+    },
   };
 });
 
@@ -72,6 +90,8 @@ import * as circ from '../../../src/domain/seat/seatCircumstances.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { computeFactionRelationships } from '../../../src/generators/factionDynamics.js';
+import { settleSeatHolderToRecord } from '../../../src/generators/power/factionStanding.js';
+import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { coupContenders, coupRiskLabel } from '../../../src/domain/rulingPowerCoup.js';
 import { SEAT_HOLDER_LINES } from '../../../src/data/seatHolderLines.js';
 import { expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
@@ -96,7 +116,7 @@ function contestedByOf(roster, seat) {
   return coupRiskLabel(reading) === 'Contested' ? (reading.challengers[0]?.name ?? null) : null;
 }
 
-afterEach(() => { sw.lit = false; sw.off = false; sw.holder = null; sw.standingCalls = []; });
+afterEach(() => { sw.lit = false; sw.off = false; sw.passOff = false; sw.holder = null; sw.standingCalls = []; sw.passCalls = []; sw.bandCalls = []; });
 
 describe('U6 (1): FAULT (c), the power step reads the coup under the born law', () => {
   it('the lit witness u6f-town-18: law 1 names Landed Gentry, the law names no one, and the step reads the law', () => {
@@ -124,10 +144,10 @@ describe('U6 (2): a lit holder apart is the office, never under it', () => {
     const row = (/** @type {any} */ s) => s.powerStructure.factionRelationships.find((/** @type {any} */ r) => r.pair.includes('Merchant oligarchy') && r.pair.includes('Merchant Guilds'));
     const holder = (/** @type {any} */ s) => s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Merchant Guilds');
     expect(after.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning).faction, 'the form').toBe('Merchant oligarchy');
-    expect(row(after).narrative, 'W1 on the form<->holder row').toBe('The Merchant oligarchy is how this place is ruled, and the Merchant Guilds rule through it.');
+    expect(row(after).narrative, 'W1 on the form<->holder row').toBe('Whoever comes before the Merchant oligarchy comes before the Merchant Guilds.');
     // anchored: the pre-U6 row said the holder works under the form's rules
     expectPresentThenAbsent(row(before).narrative, row(after).narrative, 'work under the rules', 'the form<->holder row');
-    expect(holder(after).desc, 'W3 on the holder row').toContain('They govern through the Merchant oligarchy, and what it orders is their order.');
+    expect(holder(after).desc, 'W3 on the holder row').toContain('They are the ones who sit in the Merchant oligarchy, and its word is theirs.');
     // anchored: the pre-U6 holder row stood in the form's shadow
     expectPresentThenAbsent(holder(before).desc, holder(after).desc, 'They operate in the shadow of', 'the holder row');
   });
@@ -140,7 +160,7 @@ describe('U6 (2): a lit holder apart is the office, never under it', () => {
     const after = born('town', 'u6t-town-22');
     const holder = (/** @type {any} */ s) => s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Merchant Guilds');
     expect(holder(after).desc.startsWith('Established merchant community; fund civic works. '), 'the claim keeps its first clause, closed').toBe(true);
-    expect(holder(after).desc, 'W3 on the holder row').toContain("They hold the Guild Council's seat, and answer for what it does.");
+    expect(holder(after).desc, 'W3 on the holder row').toContain('They hold the Guild Council, and nothing it decides is decided without them.');
     // anchored: the pre-U6 holder row asked for access to the seat it holds
     expectPresentThenAbsent(holder(before).desc, holder(after).desc, 'and expect council access in return.', 'the holder row\'s claim');
   });
@@ -190,5 +210,85 @@ describe('U6 (5): under law 1 not one byte moves', () => {
       const off = born(settType, seed);
       expect(JSON.stringify(on), `${seed}: the law-1 record is byte-identical with the new paths off`).toBe(JSON.stringify(off));
     }), 'the law-1 differential');
+  });
+});
+
+/** The leaf paths at which two records differ. @param {any} a @param {any} b @param {string} [at] @returns {string[]} */
+function diffPaths(a, b, at = '') {
+  if (a === b) return [];
+  if (!a || !b || typeof a !== 'object' || typeof b !== 'object' || Array.isArray(a) !== Array.isArray(b)) return [at];
+  const keys = [...new Set([...Object.keys(a), ...Object.keys(b)])];
+  return keys.flatMap((k) => diffPaths(a[k], b[k], at ? `${at}.${k}` : k));
+}
+
+describe('U6 (6): THE FINAL-RECORD PASS (E65): the holder known only on the final record (R2)', () => {
+  it('u6p-village-3 (a village): the Merchant Guilds hold the Elder Council by R2; W1 and W3 land, and the pass runs after the cast and before the conflicts read the row', () => {
+    build(true);
+    sw.off = true;
+    const before = born('village', 'u6p-village-3');
+    sw.off = false;
+    const after = born('village', 'u6p-village-3');
+    expect(holderOf(/** @type {any} */ (after), { audience: 'owner' }).rule, 'the holder is the person\'s first power (R2)').toBe('R2');
+    const row = (/** @type {any} */ s) => s.powerStructure.factionRelationships.find((/** @type {any} */ r) => r.pair.includes('Elder Council') && r.pair.includes('Merchant Guilds'));
+    const holder = (/** @type {any} */ s) => s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Merchant Guilds');
+    expect(row(after).narrative, 'W1, then the conflicts\' clause on the rewritten row')
+      .toBe("The Elder Council's seats are filled by the Merchant Guilds. Even so, the two are now at odds over blame for a costly failure last season.");
+    // anchored: the pre-U6 row had the seat need the holder's taxes and loans
+    expectPresentThenAbsent(row(before).narrative, row(after).narrative, 'needs the taxes and loans', 'the R2 form<->holder row');
+    expect(holder(after).desc, 'W3 on the R2 holder').toBe('Established merchant community; fund civic works. They sit in the Elder Council themselves, and its rulings are their own.');
+    // THE ORDERING PROOF (E65 (e)): the pass ran once, on a record whose people were cast, before `withConflictRelations` wrote its clause
+    expect(sw.passCalls.length, 'the pass ran once on the lit birth').toBe(1);
+    expect(sw.passCalls[0].npcs, 'the people were cast when the pass ran').toBeGreaterThan(0);
+    expect(sw.passCalls[0].conflicted, 'no conflict clause was on the rows when the pass ran').toBe(false);
+    expect(row(after).narrative.includes(' Even so, '), 'the conflicts read the rewritten row after it').toBe(true);
+  });
+
+  it('u6p-village-18 (a village): a RANK-2 holder (the Military Party) takes W3 in place of "always at the table"', () => {
+    build(true);
+    sw.off = true;
+    const before = born('village', 'u6p-village-18');
+    sw.off = false;
+    const after = born('village', 'u6p-village-18');
+    const holder = (/** @type {any} */ s) => s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Military Party');
+    expect(after.powerStructure.factions.indexOf(holder(after)), 'the holder stands at rank 2').toBe(2);
+    expect(holder(after).desc, 'W3 at rank 2').toContain("They are the ones who sit in the Headman's Authority, and its word is theirs.");
+    // anchored: the pre-U6 rank-2 holder was "always at the table"
+    expectPresentThenAbsent(holder(before).desc, holder(after).desc, 'They are always at the table, but cannot set their own terms.', 'the rank-2 holder');
+  });
+
+  it('"always at the table" stays on a rank-2 power that does NOT hold; one row a seat', () => {
+    plant('Merchant Guilds');
+    const record = { config: LIT, _seed: 'u6-plant', powerStructure: { factionRelationships: [], factions: [
+      { faction: 'Royal Authority', isGoverning: true, power: 40, category: 'government', desc: 'The crown.' },
+      { faction: 'Merchant Guilds', power: 30, category: 'economy', desc: 'Traders. They operate in the shadow of the Royal Authority, close enough to matter and too far behind to lead.' },
+      { faction: 'Craft Guilds', power: 20, category: 'economy', desc: 'Makers. They are always at the table, but cannot set their own terms.' },
+    ] } };
+    settleSeatHolderToRecord(record);
+    const [, merc, craft] = record.powerStructure.factions;
+    expect(craft.desc, 'the rank-2 power that does not hold keeps its line').toBe('Makers. They are always at the table, but cannot set their own terms.');
+    expect(merc.desc.startsWith('Traders. They '), 'the holder\'s W3 stands where its rank line stood').toBe(true);
+    expect(record.powerStructure.factions.filter((f) => /They (?:hold|sit in|govern through|are the ones who sit in) the Royal Authority/.test(f.desc)).length, 'one row a seat').toBe(1);
+    // anchored: the holder's rank line is gone
+    expectPresentThenAbsent('Traders. They operate in the shadow of the Royal Authority, close enough to matter and too far behind to lead.', merc.desc, 'They operate in the shadow of', 'the planted holder');
+  });
+
+  it('it draws nothing from the stream (E65 (a)): a lit birth with the pass off differs only in the rows it rewrites', () => {
+    build(true);
+    sw.passOff = true;
+    const off = born('village', 'u6p-village-3');
+    sw.passOff = false;
+    const on = born('village', 'u6p-village-3');
+    const moved = diffPaths(JSON.parse(JSON.stringify(off)), JSON.parse(JSON.stringify(on)));
+    expect(moved.length, 'the pass moved the record').toBeGreaterThan(0);
+    expect(moved.filter((p) => !/^powerStructure\.(factionRelationships\.\d+\.narrative|factions\.\d+\.desc)$/.test(p)), 'nothing else moved').toEqual([]);
+  });
+});
+
+describe('U6 (7): FAULT (b) GUARD (E65 (3)): the law\'s fold leaves raiseToOfficeBand unchanged', () => {
+  it('six lit births, one a size: every office band castPowers asks for reads the same under the fold', () => {
+    build(true);
+    for (const settType of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) born(settType, `u6b-${settType}-0`);
+    expect(sw.bandCalls.length, 'castPowers asked for office bands').toBeGreaterThan(0);
+    expect(sw.bandCalls.filter((c) => c.band !== c.lawBand), 'no office band moves under the law\'s fold (fault (b) unreachable)').toEqual([]);
   });
 });
