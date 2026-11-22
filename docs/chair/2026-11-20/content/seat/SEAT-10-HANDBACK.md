@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T14:13:35Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T15:04:34Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -66,11 +66,27 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **POINT 97 IS THE LINE (the chair, 10:49Z): `lane/join-2026-11-14` = `1ec3e81d1`, holding this lane's `46339e5c7`.** The word to merge is given.
   - **The line's merge:** `1ec3e81d1` merged into the lane as `4e9e58f8f` (11:04Z; clean, no conflict, pushed).
   - **The registers:** at the line's side; the seven walkers 285/285 and wiring `--dry` delta 0.
+- **THE TIP FOR "SEAT-B" IS `c61571627` (pushed): U6 + U7 (with E81's follow-up `2891e03f2`, tests only) + the line at POINT 98 (`c110dd85b`).**
+  - **The point-98 merge:** `8a40fdbd3`. Two register conflicts: the lighting census took the line's side and was then re-taken by its door (`0335f809a`); `HAND_CEILING` 76 = the line's 75 (fortune's row) + U6's row, both comments kept, the line's first (76 rows). Every other walker was green, and wiring `--dry` showed delta 0.
+  - **The lighting census after E81:** `c61571627` (titles +4).
+  - **THE DARK PROOF:** `confine-two.sh c110dd85b c61571627` is **EQUAL** (`all 07873739…`, 1245; 14:58:08Z).
+  - **E81 (the chair):** the hat rule is pinned both ways by name (moves: u7p-town-8, Judith Weber → Felix Naumann; keeps: a crown, Aldric Vane, synthetic; and a council's own Mayor, u7p-town-1, Konrad Berger). The tonight sheet prints no office word for the old person (u7p-metropolis-15: "Dietrich Engel" plus the hook's text). The leaf for U5-STALE is not possible in a few lines (the DM's road is static); its own first-paint cost is +661 raw, +219 gzip and −32 br.
+  - **RULE 8 (a), DONE (`rule8b/figures.txt`):** the build is clean; VERIFY_DIST 61/66, the five build rows red as on the line. First paint 1,184,741 / 376,992 / 316,535 against point 98's 1,184,071 / 376,756 / 316,424 (+670 / +236 / +111); the worker 2,708,894 (+4,577); the engine chunk 932,367 (+2,695).
+  - **RULE 8 (b), RUNNING:** 2,860 of 3,771 files (`rule8b/files.txt`): the touched directories with `tests/components` and `tests/pdf` whole (`PowerStrata.jsx`), `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, `tests/domain` flat whole, every file naming a changed module, `tests/lint` and `tests/build`. Four shards, ONE AT A TIME (`rule8b/run.sh <k> 4`, its JSON in the scratchpad's `r8b/`). Shard 1 started at about 15:06Z; then shards 2, 3 and 4. Read the failing rows BY NAME against a fresh `ci/RED-AT-LINE.tsv` (63 rows).
+  - **THEN THE FLIP'S CENSUS AT THIS TIP:** `recut/recut.sh prep c61571627 <flip> <out>`, `sets`, flipped shards 1 and 2, and the control (the unflipped shards, or the rule-8 JSON for the files both runs hold); then `lists`. Fold what U6 and U7 change against item 92's lists. U7's birth move (112 of 160 lit births: the ruler and the chain's faction are the holder) is INTENDED (E70).
+  - **THEN "SEAT-B c61571627" (or the tip with only docs after it)** to the chair, with:
+    - the conflicts (above);
+    - the five figures;
+    - `bar/BAR.md`'s two tables and its line for the owner's eye (the standing line is one of five in nearly every city);
+    - `briefs/U7-OWNER-VIEW.md`'s three places;
+    - the stored figures moved (the wiring stamp and writer-reach unchanged since point 97; the lighting census; the manifest row; the prose numerics; phoneChromeFloor; the hand list);
+    - the flip census delta;
+    - the count.
 - **U7 MERGED into the lane as `553b27368` (BU7 `8abd0eeb1`, read whole: E76's measure, E77's one fact and U5-STALE; the chair's E81 accepts both points).**
   - **The doors, each its own commit:** the prose numerics `ea9f5c449` (four rows re-addressed +8, no new debt); phoneChromeFloor `4be9bccd7` (floored +1 on /create, /gallery and /settlements, bare unmoved); the lighting census `a20eaddef` (3759 → 3760). Writer-reach, the size baseline, the manifest and wiring were unchanged, green.
   - **THE DARK PROOF:** `confine-two.sh 1ec3e81d1 a20eaddef` is **EQUAL** (`all 07873739…`, 1245; 14:08:27Z).
 - **THE BAR (E79):** it reads SENTENCES as printed. W1 and W3 pass (at most 10.0%); the templates are named, not barred (`bar/BAR.md`). No new wordings.
-- **OUT: BU7 on E81** (branch `u7b` from `a20eaddef`): both sides of the hat rule pinned by name; the tonight sheet prints no office word for the old person; first paint measured, with a leaf for U5-STALE if a few lines do it.
+- **DONE: BU7 on E81** (branch `u7b` from `a20eaddef`, merged): both sides of the hat rule pinned by name; the tonight sheet prints no office word for the old person; first paint measured, with a leaf for U5-STALE if a few lines do it.
 - **NEXT:** merge E81's follow-up; then rule 8 as widened (the build and its five figures; the directories, the governing suites, `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, `tests/domain` flat, `tests/lint`, `tests/build`); the flip's census at the final tip; then "SEAT-B".
 - **U6 MERGED into the lane as `674148b9c` (BU6 `e2a221ac6`, read whole; the chair's word of 10:49Z).**
   - **The one conflict:** the hand list's ceiling, resolved as the union (`HAND_CEILING` 75 = the line's 74 + U6's row; 75 rows).
