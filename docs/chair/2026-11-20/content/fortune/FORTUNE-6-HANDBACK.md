@@ -109,6 +109,11 @@ NEXT STEP: rule 8's build and directories at the tip with that unit merged, and 
   names (`fortune-merits`, `fortune-law`) in its preload map (`__vite__mapDeps`). 98 B are their index entries in the
   16 dynamic imports that preload them (93), plus renumbering (5). This is the real cost of two lazy chunks, FOR THE
   OWNER'S SIZE SIGNING.
-- THE WORKER, +5,529 over the line: the lane's generation code (the law and the merits run in the worker). Its
-  itemization is owed with the landing line.
+- THE WORKER, +5,529 over the line, itemized from sourcemaps (EXECUTED). By file:
+  - `fortuneMerits.js` +1,892 and `fortuneLaw.js` +1,669;
+  - the size-relative standing: `factionDynamics.js` +637, `power/rosterText.js` +616, `economy/prosperity.js` +510;
+  - `steps/assembleSettlement.js` +118 and `legacyUnresolvedWordings.js` +71;
+  - `legacyGenerator.js` -34, and +1 to +21 in five other generators.
+  The worker runs the birth, so all of it is the law's own code, truly needed there. FOR THE OWNER'S SIZE SIGNING.
+  The line's own worker figure is already red against its ceiling (2,579,708).
 - Earlier, now superseded: FORTUNE-4 section 3 ("after U6 about +58") predates U5a.
