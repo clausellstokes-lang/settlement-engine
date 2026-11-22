@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /home/user/wt/r3tell8b
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  08:17:47
+   Duration  342.31s (transform 3.96s, setup 42ms, import 115ms, tests 342.02s, environment 0ms)
+

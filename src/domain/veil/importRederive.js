@@ -32,6 +32,7 @@ import { promoteStressorsToConditions } from '../conditionPromotion.js';
 import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
 import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
 import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/economy/prosperity.js';
+import { rederiveCrimeTypes } from './pageRederive.js';
 
 /** @typedef {Record<string, unknown>} Doc */
 
@@ -221,5 +222,10 @@ export function rederiveInPlace(s) {
   //    ships), and the share withholds them on every read: the cast's roles, absences and stakes are not known on the
   //    importer's record, and are left out whole (a row with a name and no role would draw as a blank).
   castsNotKnown(s);
+
+  // 10. THE CRIME LIST (R3-TELL-8, ruling (b)): withheld on every read, re-derived by the page's ONE reader over the served
+  //     document (pageRederive.js :: rederiveCrimeTypes), only where the served data proves its grouping open; else left out.
+  //     AUTHORITATIVE: the saved list is the reader's whatever the document held (the share sends none; it is never asked).
+  rederiveCrimeTypes(s, { authoritative: true });
   return s;
 }

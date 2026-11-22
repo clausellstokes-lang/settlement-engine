@@ -13,7 +13,8 @@
  *
  * THE CURE (galleryVeil.js :: GROUPING_OPEN_EVIDENCE, read by isVeiled on a visitor's page): a grouping with a derived
  * block is drawn open only where the page model PROVES it open by the keys its remover deletes and the generator always
- * writes (Defense's: safetyProfile.criminalInstitutions and crimeTypes). The evidence IS the served data, so every copy
+ * writes (Defense's: safetyProfile.criminalInstitutions; R3-TELL-8: crimeTypes is withheld on EVERY read since the eighth
+ * chair's ruling (b), so its absence is no evidence and the operations list alone is). The evidence IS the served data, so every copy
  * keeps it by construction, the map member follows the DM's eyes, and no key is added to any payload or record.
  *
  * HOW, BY EXECUTION ONLY. An in-process pglite chain of every migration on disk; born towns (the generator, a browser's
@@ -28,8 +29,9 @@
  *   (A) S with G shut draws NONE of G's lines (the lines the gallery page draws with G open and not with G shut);
  *   (B) THE CONTROL: S with G open draws every line of G's DERIVED block (the lines the open page loses when only the
  *       signal names G), and Defense's derived block is non-empty on every town, at a desktop's and a phone's width;
- *   (C) where the registry withholds one evidence key for a hidden house (crimeTypes or criminalInstitutions), the
- *       derived block is not drawn though the grouping is open (intended: the page cannot prove it open);
+ *   (C) where the registry withholds the evidence key for a hidden house (criminalInstitutions), the derived block is not
+ *       drawn though the grouping is open (intended: the page cannot prove it open). R3-TELL-8: crimeTypes left (C): it is
+ *       withheld on every read and the page re-derives it (pageRederive.js :: rederiveCrimeTypes), so it proves nothing;
  *   (D) no shared page offers a print, PDF, journal, Foundry or download control: those surfaces run on the viewer's
  *       own saved record only (SettlementDetail), never on a page model.
  * Each surface is walked at a desktop's width and, for the page, the civility-masked page, the map member and a clone,
@@ -281,7 +283,7 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
               drawn[`signal ${g}`] = await drawPage({ ...page, settlement: marked });
             }
             // (C) the registry withholds one of the evidence keys for a hidden house (VR7): the block does not draw
-            for (const key of ['criminalInstitutions', 'crimeTypes']) {
+            for (const key of ['criminalInstitutions']) {
               const withheld = structuredClone(s);
               delete withheld.economicState.safetyProfile[key];
               drawn[`withheld ${key}`] = await drawPage({ ...page, settlement: withheld });
@@ -312,7 +314,7 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
           }
           // (C) the registry's withholding of an evidence key: the open grouping's derived block is not drawn
           if (g === 'block:defense.criminalStructure') {
-            for (const key of ['criminalInstitutions', 'crimeTypes']) {
+            for (const key of ['criminalInstitutions']) {
               for (const x of derived.filter((y) => drawn[`withheld ${key}`].has(y)).slice(0, 2)) faults.push(`${key} withheld, the page draws: ${x.slice(0, 160)}`);
             }
           }

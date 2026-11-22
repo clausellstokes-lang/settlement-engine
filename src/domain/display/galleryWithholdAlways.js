@@ -114,7 +114,9 @@ export function withholdAlways(s) {
   minusAt(s, ['economicState'], ['situationDesc']);
   // registry: safety.blackMarketCapture
   // registry: safety.safetyRatio
-  minusAt(s, ['economicState', 'safetyProfile'], ['blackMarketCapture', 'safetyRatio']);
+  // registry: safety.crimeTypes (R3-TELL-8, ruling (b): the key on no shared read; the page re-derives it, pageRederive.js ::
+  // rederiveCrimeTypes, where the served data proves its grouping open)
+  minusAt(s, ['economicState', 'safetyProfile'], ['blackMarketCapture', 'safetyRatio', 'crimeTypes']);
   // registry: safety.flags.anyActive
   // registry: safety.flags.arcaneBlackMarket
   // registry: safety.flags.merchantArmy

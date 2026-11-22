@@ -1,0 +1,387 @@
+
+ RUN  v4.1.8 /home/user/wt/r3tell8b
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ❯ tests/security/galleryVeilSignalCopies.pglite.test.js (5 tests | 4 failed) 963367ms
+     × server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 173645ms
+     × server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 156873ms
+     × server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 305230ms
+     × server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 315572ms
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (37 tests | 3 failed) 1249046ms
+     × VR39: no served crime type that no town of the hidden-free pool has; VR29: the key stays an array, absent only where its grouping is shut 19ms
+     × VR39 CONTROL: a town whose criminal houses the DM SHOWS keeps its crime types, as stored 1ms
+     × R3-CURE unit 3: a crime type no map holds FAILS CLOSED where a house is hidden whole (withheld), on every read, both shapes; a crisis type the engine writes stays 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > VR39: no served crime type that no town of the hidden-free pool has; VR29: the key stays an array, absent only where its grouping is shut
+AssertionError: expected [ …(119) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12 dm=false gallery: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=false map: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=false link: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=false import: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=true gallery: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=true map: crimeTypes undefined",
++   "town-infiltrated-0-12 dm=true import: crimeTypes undefined",
++   "city-insurgency-1-104 dm=false gallery: crimeTypes undefined",
++   "city-insurgency-1-104 dm=false map: crimeTypes undefined",
++   "city-insurgency-1-104 dm=false link: crimeTypes undefined",
++   "city-insurgency-1-104 dm=false import: crimeTypes undefined",
++   "city-insurgency-1-104 dm=true gallery: crimeTypes undefined",
++   "city-insurgency-1-104 dm=true map: crimeTypes undefined",
++   "city-insurgency-1-104 dm=true import: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=false gallery: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=false map: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=false link: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=false import: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=true gallery: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=true map: crimeTypes undefined",
++   "city-infiltrated-0-32 dm=true import: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=false gallery: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=false map: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=false link: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=false import: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=true gallery: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=true map: crimeTypes undefined",
++   "city-politically_fractured-0-40 dm=true import: crimeTypes undefined",
++   "city-none-1-113 dm=false gallery: crimeTypes undefined",
++   "city-none-1-113 dm=false map: crimeTypes undefined",
++   "city-none-1-113 dm=false link: crimeTypes undefined",
++   "city-none-1-113 dm=false import: crimeTypes undefined",
++   "city-none-1-113 dm=true gallery: crimeTypes undefined",
++   "city-none-1-113 dm=true map: crimeTypes undefined",
++   "city-none-1-113 dm=true import: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=false gallery: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=false map: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=false link: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=false import: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=true gallery: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=true map: crimeTypes undefined",
++   "metropolis-infiltrated-0-62 dm=true import: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=false gallery: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=false map: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=false link: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=false import: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=true gallery: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=true map: crimeTypes undefined",
++   "city-infiltrated-1-112 dm=true import: crimeTypes undefined",
++   "metropolis-none-0-61 dm=false gallery: crimeTypes undefined",
++   "metropolis-none-0-61 dm=false map: crimeTypes undefined",
++   "metropolis-none-0-61 dm=false link: crimeTypes undefined",
++   "metropolis-none-0-61 dm=false import: crimeTypes undefined",
++   "metropolis-none-0-61 dm=true gallery: crimeTypes undefined",
++   "metropolis-none-0-61 dm=true map: crimeTypes undefined",
++   "metropolis-none-0-61 dm=true import: crimeTypes undefined",
++   "city-insurgency-0-44 dm=false gallery: crimeTypes undefined",
++   "city-insurgency-0-44 dm=false map: crimeTypes undefined",
++   "city-insurgency-0-44 dm=false link: crimeTypes undefined",
++   "city-insurgency-0-44 dm=false import: crimeTypes undefined",
++   "city-insurgency-0-44 dm=true gallery: crimeTypes undefined",
++   "city-insurgency-0-44 dm=true map: crimeTypes undefined",
++   "city-insurgency-0-44 dm=true import: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=false gallery: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=false map: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=false link: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=false import: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=true gallery: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=true map: crimeTypes undefined",
++   "metropolis-indebted-0-56 dm=true import: crimeTypes undefined",
++   "town-indebted-0-16 dm=false gallery: crimeTypes undefined",
++   "town-indebted-0-16 dm=false map: crimeTypes undefined",
++   "town-indebted-0-16 dm=false link: crimeTypes undefined",
++   "town-indebted-0-16 dm=false import: crimeTypes undefined",
++   "town-indebted-0-16 dm=true gallery: crimeTypes undefined",
++   "town-indebted-0-16 dm=true map: crimeTypes undefined",
++   "town-indebted-0-16 dm=true import: crimeTypes undefined",
++   "city-under_siege-0-48 dm=false gallery: crimeTypes undefined",
++   "city-under_siege-0-48 dm=false map: crimeTypes undefined",
++   "city-under_siege-0-48 dm=false link: crimeTypes undefined",
++   "city-under_siege-0-48 dm=false import: crimeTypes undefined",
++   "city-under_siege-0-48 dm=true gallery: crimeTypes undefined",
++   "city-under_siege-0-48 dm=true map: crimeTypes undefined",
++   "city-under_siege-0-48 dm=true import: crimeTypes undefined",
++   "hand-raised dm=false gallery: crimeTypes undefined",
++   "hand-raised dm=false map: crimeTypes undefined",
++   "hand-raised dm=false link: crimeTypes undefined",
++   "hand-raised dm=false import: crimeTypes undefined",
++   "hand-raised dm=true gallery: crimeTypes undefined",
++   "hand-raised dm=true map: crimeTypes undefined",
++   "hand-raised dm=true import: crimeTypes undefined",
++   "hand-governs dm=false gallery: crimeTypes undefined",
++   "hand-governs dm=false map: crimeTypes undefined",
++   "hand-governs dm=false link: crimeTypes undefined",
++   "hand-governs dm=false import: crimeTypes undefined",
++   "hand-governs dm=true gallery: crimeTypes undefined",
++   "hand-governs dm=true map: crimeTypes undefined",
++   "hand-governs dm=true import: crimeTypes undefined",
++   "hand-fold dm=false gallery: crimeTypes undefined",
++   "hand-fold dm=false map: crimeTypes undefined",
++   "hand-fold dm=false link: crimeTypes undefined",
++   "hand-fold dm=false import: crimeTypes undefined",
++   "hand-fold dm=true gallery: crimeTypes undefined",
++   "hand-fold dm=true map: crimeTypes undefined",
++   "hand-fold dm=true import: crimeTypes undefined",
++   "hand-forms dm=false gallery: crimeTypes undefined",
++   "hand-forms dm=false map: crimeTypes undefined",
++   "hand-forms dm=false link: crimeTypes undefined",
++   "hand-forms dm=false import: crimeTypes undefined",
++   "hand-forms dm=true gallery: crimeTypes undefined",
++   "hand-forms dm=true map: crimeTypes undefined",
++   "hand-forms dm=true import: crimeTypes undefined",
++   "hand-ids dm=false gallery: crimeTypes undefined",
++   "hand-ids dm=false map: crimeTypes undefined",
++   "hand-ids dm=false link: crimeTypes undefined",
++   "hand-ids dm=false import: crimeTypes undefined",
++   "hand-ids dm=true gallery: crimeTypes undefined",
++   "hand-ids dm=true map: crimeTypes undefined",
++   "hand-ids dm=true import: crimeTypes undefined",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:490:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > VR39 CONTROL: a town whose criminal houses the DM SHOWS keeps its crime types, as stored
+AssertionError: expected [ …(13) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12: [] != [\"Survival crime\",\"Magical crime\"]",
++   "city-insurgency-1-104: [] != [\"Survival crime\",\"Smuggling\",\"political violence\",\"loyalty testing\",\"information trade\"]",
++   "city-infiltrated-0-32: [] != [\"Smuggling\"]",
++   "city-politically_fractured-0-40: [] != [\"Smuggling\"]",
++   "city-none-1-113: [] != [\"Smuggling\"]",
++   "metropolis-infiltrated-0-62: [] != [\"Street gang activity\"]",
++   "city-infiltrated-1-112: [] != [\"Street gang activity\"]",
++   "metropolis-none-0-61: [] != [\"Smuggling\"]",
++   "city-insurgency-0-44: [] != [\"Magical crime\",\"Smuggling\",\"political violence\",\"loyalty testing\",\"information trade\"]",
++   "metropolis-indebted-0-56: [] != [\"Arcane black market\",\"Smuggling\",\"debt evasion\"]",
++   "town-indebted-0-16: [] != [\"Survival crime\",\"debt evasion\"]",
++   "city-under_siege-0-48: [] != [\"Magical crime\",\"Smuggling\",\"desperation theft\",\"black market food\"]",
++   "hand-raised: [] != [\"Planted unknown crime\",\"debt evasion\"]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:500:17
+    498|       if (J(got) !== J(want)) bad.push(`${r.t.seed}: ${J(got)} != ${J(…
+    499|     }
+    500|     expect(bad).toEqual([]);
+       |                 ^
+    501|   });
+    502|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE unit 3: a crime type no map holds FAILS CLOSED where a house is hidden whole (withheld), on every read, both shapes; a crisis type the engine writes stays
+AssertionError: expected [ …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "open dm=false gallery: the crisis type lost",
++   "open dm=false map: the crisis type lost",
++   "open dm=false link: the crisis type lost",
++   "open dm=false import: the crisis type lost",
++   "open dm=true gallery: the crisis type lost",
++   "open dm=true map: the crisis type lost",
++   "open dm=true import: the crisis type lost",
++   "openM dm=false gallery: the crisis type lost",
++   "openM dm=false map: the crisis type lost",
++   "openM dm=false link: the crisis type lost",
++   "openM dm=false import: the crisis type lost",
++   "openM dm=true gallery: the crisis type lost",
++   "openM dm=true map: the crisis type lost",
++   "openM dm=true import: the crisis type lost",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:721:17
+    719|       if (!types.includes('debt evasion')) bad.push(`${r.kind} dm=${r.…
+    720|     }
+    721|     expect(bad).toEqual([]);
+       |                 ^
+    722|   });
+    723|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+AssertionError: crimeTypes withheld, the page draws: Systems/Defense :: Criminal structure: Organized syndicate
+crimeTypes withheld, the page draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence be: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "crimeTypes withheld, the page draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "crimeTypes withheld, the page draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down random violence be",
++ ]
+
+ ❯ tests/security/galleryVeilSignalCopies.pglite.test.js:323:56
+    321|         expect([...new Set(H.controls)], 'an export control on a non-o…
+    322|         expect(defenseDerived, 'Defense\'s criminal architecture has a…
+    323|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    324|       }, TOWN_TIMEOUT_MS);
+    325|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+AssertionError: block:services.criminal: shutting it removes something from the gallery page (the row is live): expected 0 to be greater than 0
+ ❯ tests/security/galleryVeilSignalCopies.pglite.test.js:303:111
+    301|           const derived = derivedAt('the gallery page');
+    302|           if (g === 'block:defense.criminalStructure') defenseDerived …
+    303|           expect(lines.length, `${g}: shutting it removes something fr…
+       |                                                                                                               ^
+    304|           if (g === 'block:defense.criminalStructure') expect(derivedA…
+    305|           for (const [surface, set] of Object.entries(drawn[g])) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed | 35 passed (42)
+   Start at  08:44:07
+   Duration  1249.45s (transform 13.89s, setup 58ms, import 290ms, tests 2212.41s, environment 619ms)
+

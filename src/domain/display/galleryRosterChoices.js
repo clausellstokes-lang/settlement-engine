@@ -30,7 +30,8 @@ function recAt(s, key) {
 }
 /** A share the re-derivation reads (a JSON number a double holds, from 0 to 10^12), or null: gallerySecondHomes.js's income rule. @param {unknown} v @returns {number|null} */
 const shareBasis = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1e12 ? v : null);
-/** Each crime type by the house flags that raise it (safetyProfile.js; priorityHelpers.js :: getStressFlags). R3-CURE (unit 3):
+/** Each crime type by the house flags that raise it (safetyProfile.js; priorityHelpers.js :: getStressFlags), read by the services
+ * rule over `pub`'s list (R3-TELL-8: the list itself is withheld always, galleryWithholdAlways.js). R3-CURE (unit 3):
  * EVERY type the engine writes is a key (tests/lint/rosterChoicePools.walker.test.js holds it equal to safetyProfile.js's own
  * set); a crisis's type is raised by no house; 'contested property' by a standing religious house. A type it does not hold:
  * unsure, withheld. */
@@ -55,9 +56,9 @@ export const SAFETY_HOOK_RAISERS = Object.freeze(/** @type {Record<string, strin
   "A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.": ['hasCriminalInst'],
   'A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.': ['hasCriminalInst'],
   'A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.': ['hasCriminalInst'],
-  "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": ['hasGangInfra'],
+  "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": ['merchantArmy'],
   // R3-CURE (unit 3): the two tellings safetyProfile.js :: said writes from SAFETY_LINE_SIBLINGS, each by its sibling's flags
-  "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.": ['hasGangInfra'],
+  "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.": ['merchantArmy'],
   "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theological.": [],
   'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.': ['hasSmuggling'],
   'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.': ['hasSmuggling'],
@@ -192,6 +193,11 @@ export function applyRosterChoices(s, pub, idOf) {
   // R3-CURE (unit 3): a religious house hidden whole, where no served one stands, raised 'contested property' (safetyProfile.js)
   raised.religiousHouse = gone.some(g => RELIGIOUS_HOUSE.test(g) && !ACCESS_TO.test(g))
     && !houses.some(h => RELIGIOUS_HOUSE.test(str(h.name)) && !ACCESS_TO.test(str(h.name)));
+  // R3-TELL-8 (TELL7 cause (f), TELL8 1f): the merchant-army hook's raiser is the engine's stress flag (getStressFlags: the
+  // priorities and fires(55) read the config alone, AND (hasMerchantGuild or hasBank) AND (hasMercenary or hasGangInfra)): a
+  // hidden house raised it where the record does not hold it false and the served flags no longer give the houses' half. SQL twin: 212
+  raised.merchantArmy = recAt(es0(pub) || {}, 'flags')?.merchantArmy !== false
+    && !((sfl.hasMerchantGuild === true || sfl.hasBank === true) && (sfl.hasMercenary === true || sfl.hasGangInfra === true));
   const beneath = houses.some(h => BENEATH_THE_WALLS.test(str(h.name)));
   const es = recAt(s, 'economicState');
 
@@ -295,12 +301,8 @@ export function applyRosterChoices(s, pub, idOf) {
         sp.safetyDesc = sd.split(FOOTHOLD).join('organized crime has found no foothold.');
       }
     }
-    // registry: safety.crimeTypes ((b) by attribution, VR39; no type, or a type the map does not hold (R3-CURE unit 3): unsure,
-    // withheld; VR29: still an array)
-    if (Array.isArray(sp.crimeTypes)) {
-      sp.crimeTypes = sp.crimeTypes.filter(c => isRec(c) && typeof c.type === 'string'
-        && Object.prototype.hasOwnProperty.call(CRIME_TYPE_RAISERS, c.type) && !CRIME_TYPE_RAISERS[c.type].some(f => raised[f]));
-    }
+    // (R3-TELL-8: the crime list's attribution rule LEFT; the list is withheld on every read by galleryWithholdAlways.js ::
+    // withholdAlways, and a rule here would only assure what no read sends: ruling 59)
     // registry: safety.plotHooks ((b): a hook of the pool no hidden house raised; a hook the pool does not hold: withheld)
     if (Array.isArray(sp.plotHooks)) {
       sp.plotHooks = sp.plotHooks.filter(h => typeof h === 'string' && Object.prototype.hasOwnProperty.call(SAFETY_HOOK_RAISERS, h)
