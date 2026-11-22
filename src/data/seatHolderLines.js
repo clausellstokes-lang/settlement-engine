@@ -25,6 +25,14 @@
  * Every verb on the holder in the two twins is past tense, so neither needs `{holder|one|many}`, and no possessive is
  * put on `{holder}`.
  *
+ * THE PATTERNS (`SEAT_HOLDER_PATTERNS`, CLOSE-3's cure one for VACANT): for each pool, one RegExp per line DERIVED FROM
+ * THIS TABLE, in the `generators/power/factionStanding.js :: RANK_STANDINGS` idiom: the fixed parts escaped, every slot
+ * read as `[^.]+?`, anchored at a sentence's start (a first "The" of either case, since the writer's `opening` raises it)
+ * and ending at the line's own full stop. A `{holder}` slot is a power's name, never the pronoun the standing lines
+ * open on, so it reads `(?!They )[^.]+?`: else W1v's "{holder} sat in the {form} until ..." would find W3v's "They sat
+ * in the {form} until ...". A reader below the generators (`domain/coherence/seatHolderFindings.js`)
+ * recognises a printed line by them without importing the writer; a reworded line is re-read with it.
+ *
  * The slots: `{form}` is the governing row's name after its article (the line writes its own "The"/"the"), `{form's}` its
  * possessive; `{holder}` is the holder's name with its article; `{holder|one|many}` is the verb in the holder's number
  * (`data/people/powerSentenceName.js :: fillAgreement`). Drawn ONLY through `kernel/proseHash.js :: pickVariantMixed`,
@@ -64,3 +72,22 @@ export const SEAT_HOLDER_LINES = Object.freeze({
     'The {form} was theirs, and no one sits in its seat today.',
   ]),
 });
+
+/** @param {string} t @returns {string} the text with every RegExp metacharacter escaped */
+const escapeText = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** Every slot a line may carry: `{form}`, `{form's}`, `{holder}`, `{holder|one|many}`. */
+const SLOT = /\{(?:form's|form|holder(?:\|[^|}]*\|[^|}]*)?)\}/g;
+/** @param {string} slot @returns {string} what a slot reads as: a name, and a holder's name is never "They" */
+const slotPattern = (slot) => (slot.startsWith('{holder}') ? '(?!They )[^.]+?' : '[^.]+?');
+/** @param {string} line @returns {RegExp} the line's pattern: its fixed parts, a name between each pair, from a sentence's start to its own full stop */
+const patternOf = (line) => {
+  const slots = line.match(SLOT) || [];
+  const parts = line.split(SLOT).map(escapeText);
+  const body = parts.map((part, i) => (i < slots.length ? part + slotPattern(slots[i]) : part)).join('');
+  return new RegExp(`(?:^|[.!?] )${body.replace(/^The /, '[Tt]he ')}`);
+};
+
+/** @type {Readonly<Record<keyof typeof SEAT_HOLDER_LINES, ReadonlyArray<RegExp>>>} */
+export const SEAT_HOLDER_PATTERNS = Object.freeze(/** @type {Record<keyof typeof SEAT_HOLDER_LINES, ReadonlyArray<RegExp>>} */ (Object.fromEntries(
+  Object.entries(SEAT_HOLDER_LINES).map(([pool, lines]) => [pool, Object.freeze(lines.map(patternOf))]),
+)));

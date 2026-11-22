@@ -27,6 +27,8 @@
  *        W1 or W3, no held seat W1v or W3v, and `seatHolderFindings` returns neither new code.
  *   (12) THE FINDINGS JUDGE: `seat_vacant_held_line` and `seat_held_vacant_line` on planted records, each gone with its line.
  *   (13) THE POOLS VERBATIM: the two twins are the chair's six lines.
+ *   (14) THE PATTERNS (cure one): each line's pattern (`SEAT_HOLDER_PATTERNS`, which the findings judge reads) finds its
+ *        own filled line and no filled line of another pool, so no pool can be mistaken for another.
  *
  * THE LIT BUILD is planted as `tests/domain/seat/seatLawSavedTown.test.js` plants it: the seat's dial and its mint
  * (`seatLaw.js`) and the contest's dial (`seatCircumstances.js :: SEAT_CONTEST_LIT`), each read live off one switch. Arms
@@ -120,7 +122,7 @@ import { seatHolderFindings } from '../../../src/domain/coherence/seatHolderFind
 import { LADDER, RANK_STANDINGS, annotateFactionStanding, settleSeatHolderToRecord } from '../../../src/generators/power/factionStanding.js';
 import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { coupContenders, coupRiskLabel } from '../../../src/domain/rulingPowerCoup.js';
-import { SEAT_HOLDER_LINES } from '../../../src/data/seatHolderLines.js';
+import { SEAT_HOLDER_LINES, SEAT_HOLDER_PATTERNS } from '../../../src/data/seatHolderLines.js';
 import { expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
@@ -514,5 +516,35 @@ describe('VACANT (13): THE POOLS VERBATIM', () => {
       '{holder} sat in the {form} until its seat fell empty.',
       "The {form's} seat was filled by {holder}, and no one fills it now.",
     ]);
+  });
+});
+
+describe('VACANT (14): THE PATTERNS: each pool\'s patterns find its own filled lines and no other pool\'s', () => {
+  it('on the plant\'s pair, a plural holder, and a form whose name opens "The": bare and after a sentence', () => {
+    const pairs = [
+      { form: { faction: 'Royal Authority' }, holder: { faction: 'Merchant Guilds' } },
+      { form: { faction: 'Royal Authority' }, holder: { faction: 'Noble Houses' } },
+      { form: { faction: 'The Trade Compact' }, holder: { faction: 'The Commercial Circle' } },
+    ];
+    const pools = /** @type {Array<keyof typeof SEAT_HOLDER_LINES>} */ (Object.keys(SEAT_HOLDER_LINES));
+    expect(Object.keys(SEAT_HOLDER_PATTERNS).sort(), 'a pattern list for each of the five pools').toEqual([...pools].sort());
+    /** @type {string[]} */
+    const faults = [];
+    for (const pair of pairs) {
+      /** @param {keyof typeof SEAT_HOLDER_LINES} pool @returns {string[]} */
+      const filled = (pool) => (pool === 'licensed' ? [...SEAT_HOLDER_LINES.licensed] : seatHolderLinesOf(pool, pair));
+      for (const pool of pools) {
+        expect(SEAT_HOLDER_PATTERNS[pool].length, `${pool}: one pattern a line`).toBe(SEAT_HOLDER_LINES[pool].length);
+        SEAT_HOLDER_PATTERNS[pool].forEach((re, i) => {
+          for (const text of [filled(pool)[i], `Traders. ${filled(pool)[i]}`]) if (!re.test(text)) faults.push(`${pool}[${i}] misses its own line: ${text}`);
+        });
+        for (const other of pools) {
+          if (other === pool) continue;
+          for (const line of filled(other)) if (SEAT_HOLDER_PATTERNS[pool].some((re) => re.test(line))) faults.push(`${pool} finds a ${other} line: ${line}`);
+        }
+      }
+    }
+    // anchored: each pattern's own line is required found in this same loop, so the list is live
+    expect(faults, 'a pattern that misses its own line or finds another pool\'s').toEqual([]);
   });
 });

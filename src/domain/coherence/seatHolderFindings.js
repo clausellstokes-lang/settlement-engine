@@ -30,9 +30,10 @@
  *                                  the seat and a power sits in it.
  *   seat_held_vacant_line          the seat is held (no `missing_seat`), and a W3v or W1v line prints.
  *
- * The holder's lines are judged FIRST, on every record under the seat law (`seatsByHolder`), by exact matching of
- * the filled lines (`generators/factionDynamics.js :: seatHolderLinesOf`, each non-form row as the holder, the form
- * the governing row); then the `missing_seat` return and every other check as before.
+ * The holder's lines are judged FIRST, on every record under the seat law (`seatsByHolder`), by the TABLE'S PATTERNS
+ * (`data/seatHolderLines.js :: SEAT_HOLDER_PATTERNS`, derived from the wordings), not the filled lines, so nothing
+ * here imports the generators: a pool's pattern on a non-form row's description or on a relation row naming the
+ * form; then the `missing_seat` return and every other check as before.
  */
 
 import { governingFactionOf, nameOf } from '../rulingPower.js';
@@ -41,7 +42,7 @@ import { seatTitleRankOf, isOfficeStandIn } from '../dossier/seatHolder.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
 import { rankIn } from '../people/membership.js';
 import { seatsByHolder } from '../seat/seatLaw.js';
-import { seatHolderLinesOf } from '../../generators/factionDynamics.js'; // VACANT: the holder's lines, filled as the writer fills them
+import { SEAT_HOLDER_PATTERNS } from '../../data/seatHolderLines.js'; // VACANT: the holder's lines, recognised by the table's own patterns
 
 /** @typedef {import('../dossier/seatHolder.js').SeatSettlement} SeatSettlement */
 /** @typedef {import('../dossier/seatHolder.js').SeatNpc} SeatNpc */
@@ -53,18 +54,24 @@ import { seatHolderLinesOf } from '../../generators/factionDynamics.js'; // VACA
  */
 
 /**
- * VACANT: the holder's lines that contradict the seat, each filled for its own row (a W3 or W3v on a non-form row's
- * description; a W1 or W1v on a relation row naming the form, the other power as the holder). The held pools fault an
- * empty seat; the vacant twins fault a held one.
+ * VACANT: the holder's lines that contradict the seat, read by the table's patterns (a W3 or W3v on a non-form row's
+ * description; a W1 or W1v on a relation row naming the form). The held pools fault an empty seat; the vacant twins
+ * fault a held one.
  * @param {ReadonlyArray<unknown>} factions @param {object} form the governing row
  * @param {unknown} relations the record's relation rows @param {boolean} empty the chain's `missing_seat`
  * @returns {SeatFinding[]}
  */
 function holderLineFindings(factions, form, relations, empty) {
-  /** @type {'standing' | 'standingVacant'} */
-  const standing = empty ? 'standing' : 'standingVacant';
-  /** @type {'relation' | 'relationVacant'} */
-  const relation = empty ? 'relation' : 'relationVacant';
+  const standing = SEAT_HOLDER_PATTERNS[empty ? 'standing' : 'standingVacant'];
+  const relation = SEAT_HOLDER_PATTERNS[empty ? 'relation' : 'relationVacant'];
+  /** @param {ReadonlyArray<RegExp>} patterns @param {string} text @returns {string | null} the first line a pattern finds, its sentence's opening cut */
+  const found = (patterns, text) => {
+    for (const re of patterns) {
+      const hit = re.exec(text);
+      if (hit) return hit[0].replace(/^[.!?] /, '');
+    }
+    return null;
+  };
   const code = empty ? 'seat_vacant_held_line' : 'seat_held_vacant_line';
   const formRow = /** @type {Record<string, unknown>} */ (form);
   const formName = String(formRow.faction || '');
@@ -74,7 +81,7 @@ function holderLineFindings(factions, form, relations, empty) {
     const f = entry && typeof entry === 'object' ? /** @type {Record<string, unknown>} */ (entry) : null;
     const desc = f && f !== formRow && typeof f.desc === 'string' ? f.desc : null;
     if (!f || desc === null) continue;
-    const line = seatHolderLinesOf(standing, { form: formRow, holder: f }).find((l) => desc.includes(l));
+    const line = found(standing, desc);
     if (line) out.push({ code, detail: `${String(f.faction || '')}: "${line}"` });
   }
   for (const entry of Array.isArray(relations) ? relations : []) {
@@ -83,7 +90,7 @@ function holderLineFindings(factions, form, relations, empty) {
     const other = pair.includes(formName) ? pair.find((n) => n !== formName) : undefined;
     const narrative = typeof row?.narrative === 'string' ? row.narrative : null;
     if (!other || narrative === null) continue;
-    const line = seatHolderLinesOf(relation, { form: formRow, holder: { faction: other } }).find((l) => narrative.includes(l));
+    const line = found(relation, narrative);
     if (line) out.push({ code, detail: `${formName}<->${other}: "${line}"` });
   }
   return out;
