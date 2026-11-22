@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T07:15:31Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T16:16:44Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -45,8 +45,76 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **(b)** 1,387 files, 13,913 tests, 61 failed, **every one on RED-AT-LINE by name** (fresh at `0ac15c2e0`). One title has drifted: `landingFixtureFreshness`, stale at the line itself, and unmoved by the lane (CONFIRMED).
   - **`tests/lint` whole:** 223 files, 3,362 tests, 3 red (the line's own three: `proseCorpusBytes` RAW and GZIP, `proseComposed` A0b).
   - **The line tip the run stood on:** `f5295e425`.
-- **NEXT:** wait for the chair to land "SEAT <commit>" and give its word; then U6 and on (SEAT-5 item 20's order, SEAT-7 §0 NEXT). No brief past U6 before then. U6's brief carries the sweep's (b) and (c) (item 91; the chair's word of 03:54Z).
-- **OUT:** none. BKP, BUL and BSR are finished.
+- **"SEAT 46339e5c7" ACCEPTED FOR LANDING (the chair, 07:20Z).** It is stacked after points 94 to 96 with the fortune lane. NO COMMIT under `src/` or `tests/` on this lane until the chair says it is landed.
+- **SINCE (docs only), each committed and pushed:**
+  - the worker's +15,961 itemized exactly (`rule8/WORKER-ITEMIZED.md`, accepted: `cultureOfficeTitles.js` +9,369 through `isSovereignSeat`; the five seat modules +8,126);
+  - U7's probe (`u7probe/U7-PROBE.md`: 6 of 11 kept-form transfers name the old house's person; U7 is ruled before the first deploy, after U6);
+  - U6's probe (`u6probe/`).
+- **THE FINISH LINE (the chair, 07:21Z):** before the first deploy, U6 then U7. U9 to U14 and CS21/22 are second-deploy work: no brief. U8, the flip, is the chair's.
+- **U6 THE PROSE (CS12): OUT to builder BU6.**
+  - **Brief:** `briefs/U6-PROSE.md` at `2786f0178`, carrying the chair's ruled wordings verbatim: W1 six, W2 one, W3 five, by `pickVariantMixed`. Plus the gate `!isVeiledRow(holder)`, the hand list, the council-access clause as a gate only, and faults (b) and (c) red first.
+  - **Where:** scratch clone `bu6`, branch `u6` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u6-wip`.
+  - **Merge:** into the lane ONLY on the chair's word after "SEAT" lands, once its diff is read whole and its red and green re-run.
+  - **Then the integrator:** the dark proof; the doors; `tests/lint` whole; the commonest W1 and W3 sentence by size on the 150 lit births (bar about 15%), one line to the chair; "SEAT-B <commit>".
+- **U6 RETURNED (BU6 `98d998287`), PUSHED as `lane/seat-10-2026-11-21-u6-wip` (09:13Z); its diff read whole.**
+  - **Done:** W1/W2/W3 by `pickVariantMixed`; the gate; the clause gate; fault (c) red first (`u6f-town-18`); hand list 74; the new test 9/9; flipped, only the census's list-1 pins red.
+  - **Asked of the chair (09:13Z):**
+    - (1) the R2 holders are not reached at the power step (28 of 63 rows): widen the manifest to a final-record pass in `generateSettlementPipeline.js`?
+    - (2) W3 at any rank?
+    - (3) fault (b): no witness in 600 births (0 of 526 calls differ); close it?
+  - **At the merge, the integrator owes:** the mutation-manifest row for `tests/generators/seat/seatHolderLines.test.js`, and the wiring and lighting doors.
+- **POINT 97 IS THE LINE (the chair, 10:49Z): `lane/join-2026-11-14` = `1ec3e81d1`, holding this lane's `46339e5c7`.** The word to merge is given.
+  - **The line's merge:** `1ec3e81d1` merged into the lane as `4e9e58f8f` (11:04Z; clean, no conflict, pushed).
+  - **The registers:** at the line's side; the seven walkers 285/285 and wiring `--dry` delta 0.
+- **THE TIP FOR "SEAT-B" IS `c61571627` (pushed): U6 + U7 (with E81's follow-up `2891e03f2`, tests only) + the line at POINT 98 (`c110dd85b`).**
+  - **The point-98 merge:** `8a40fdbd3`. Two register conflicts: the lighting census took the line's side and was then re-taken by its door (`0335f809a`); `HAND_CEILING` 76 = the line's 75 (fortune's row) + U6's row, both comments kept, the line's first (76 rows). Every other walker was green, and wiring `--dry` showed delta 0.
+  - **The lighting census after E81:** `c61571627` (titles +4).
+  - **THE DARK PROOF:** `confine-two.sh c110dd85b c61571627` is **EQUAL** (`all 07873739…`, 1245; 14:58:08Z).
+  - **E81 (the chair):** the hat rule is pinned both ways by name (moves: u7p-town-8, Judith Weber → Felix Naumann; keeps: a crown, Aldric Vane, synthetic; and a council's own Mayor, u7p-town-1, Konrad Berger). The tonight sheet prints no office word for the old person (u7p-metropolis-15: "Dietrich Engel" plus the hook's text). The leaf for U5-STALE is not possible in a few lines (the DM's road is static); its own first-paint cost is +661 raw, +219 gzip and −32 br.
+  - **RULE 8 (a), DONE (`rule8b/figures.txt`):** the build is clean; VERIFY_DIST 61/66, the five build rows red as on the line. First paint 1,184,741 / 376,992 / 316,535 against point 98's 1,184,071 / 376,756 / 316,424 (+670 / +236 / +111); the worker 2,708,894 (+4,577); the engine chunk 932,367 (+2,695).
+  - **RULE 8 (b), DONE by the chair's E90 as amended (`rule8c/RULE8.md`):** 699 files, 9,648 tests, 18 failed, ALL on RED-AT-LINE (63 rows); `tests/lint` whole 3,364 tests with the line's three red. The four- and three-shard runs were stopped by the chair's rulings before any result. The flip's census is the close's: `FLIP-LIST.md` is the seat's list on paper.
+  - **THEN "SEAT-B c61571627" (or the tip with only docs after it)** to the chair, with:
+    - the conflicts (above);
+    - the five figures;
+    - `bar/BAR.md`'s two tables and its line for the owner's eye (the standing line is one of five in nearly every city);
+    - `briefs/U7-OWNER-VIEW.md`'s three places;
+    - the stored figures moved (the wiring stamp and writer-reach unchanged since point 97; the lighting census; the manifest row; the prose numerics; phoneChromeFloor; the hand list);
+    - the flip census delta;
+    - the count.
+- **U7 MERGED into the lane as `553b27368` (BU7 `8abd0eeb1`, read whole: E76's measure, E77's one fact and U5-STALE; the chair's E81 accepts both points).**
+  - **The doors, each its own commit:** the prose numerics `ea9f5c449` (four rows re-addressed +8, no new debt); phoneChromeFloor `4be9bccd7` (floored +1 on /create, /gallery and /settlements, bare unmoved); the lighting census `a20eaddef` (3759 → 3760). Writer-reach, the size baseline, the manifest and wiring were unchanged, green.
+  - **THE DARK PROOF:** `confine-two.sh 1ec3e81d1 a20eaddef` is **EQUAL** (`all 07873739…`, 1245; 14:08:27Z).
+- **THE BAR (E79):** it reads SENTENCES as printed. W1 and W3 pass (at most 10.0%); the templates are named, not barred (`bar/BAR.md`). No new wordings.
+- **DONE: BU7 on E81** (branch `u7b` from `a20eaddef`, merged): both sides of the hat rule pinned by name; the tonight sheet prints no office word for the old person; first paint measured, with a leaf for U5-STALE if a few lines do it.
+- **NEXT:** merge E81's follow-up; then rule 8 as widened (the build and its five figures; the directories, the governing suites, `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, `tests/domain` flat, `tests/lint`, `tests/build`); the flip's census at the final tip; then "SEAT-B".
+- **U6 MERGED into the lane as `674148b9c` (BU6 `e2a221ac6`, read whole; the chair's word of 10:49Z).**
+  - **The one conflict:** the hand list's ceiling, resolved as the union (`HAND_CEILING` 75 = the line's 74 + U6's row; 75 rows).
+  - **The doors:** the mutation-manifest row `3113d621b` (TOTALITY red before, 10/10 after); the lighting census `21edae3ae` (3758 → 3759, 34/34 after). Wiring `--dry` and writer-reach were unchanged, green.
+  - **THE DARK PROOF:** `confine-two.sh 1ec3e81d1 21edae3ae` is **EQUAL** (`all 07873739…`, 1245 places; 12:10:50Z).
+- **E76's MEASURE (BU7):** all 24 R3 births are bucket (i). The office person belongs to no other house, so the chain keeps the record's person, and the four "nobody" cases go away. Sent to the chair 12:01Z, with the proposed build: one fact, the fall-back removed, and U5-STALE.
+- **E70 (the chair, 10:26Z):**
+  - **U7:** DONE at `lane/seat-10-2026-11-21-u7-wip` `fb0c732f9`, diff read whole. Covered: the person rule, `seatHolderFindings.js` widened (red first 6/6), the caption "Holds the seat of {form}.", `U7-OWNER-VIEW.md`. Two rulings asked at 11:2xZ:
+    - (A) 3 lit births now name nobody;
+    - (B) the old person survives on three surfaces after a kept-form transfer; a unit U5-STALE in `transferRulingPower` is proposed.
+  - **U7's doors at the merge:** lighting, `.prose-numerics-baseline.json`, and `phoneChromeFloor` ROUTE_BASELINE (floored +1 ×3; bare unmoved).
+  - **U6:** BU6 on ADDENDUM 2 (the totality test; the measure of `regenSection('npcs')`).
+- **U6 FINISHED (E65 applied): `lane/seat-10-2026-11-21-u6-wip` at `c1ffee696`, diff read whole.**
+  - **The pass:** `factionStanding.js :: settleSeatHolderToRecord` in `generateSettlementPipeline.js`.
+  - **Coverage:** W1 63/63, W3 78/78, W2 0 (no licensed pair born); the bar is at most 16%.
+  - **Fault (b):** closed, with a guard.
+  - **NAMED:** a regex copy of the standing ladder's lines; regen does not re-run the pass.
+  - **At the merge:** the lighting door and the mutation-manifest row; confine-two.
+- **U7 BUILT: `lane/seat-10-2026-11-21-u7-wip` at `0b3ed8802`, diff read whole (`powerStrata.js` only).** Four rulings asked of the chair at 10:25Z:
+  - (1) the faction and the ruler move to the holder in 112 of 160 lit births at birth;
+  - (2) the person reading;
+  - (3) `seatHolderFindings.js` raises a false finding on the six (outside the manifest);
+  - (4) two wording drafts.
+- **U7 (earlier):** OUT to builder BU7 beside U6. The chair's E45 of 07:46Z allows two builders when their files are disjoint.
+  - **Brief:** `briefs/U7-PAGE.md` at `daaaddb96`. Red first on U7-PROBE's six seeds; no wording without a ruling; the audience `reader` on served reads.
+  - **Where:** scratch clone `bu7`, branch `u7` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u7-wip`.
+- **THE PACE:** the owner's word (07:46Z) withdrew "spend little"; pushing at every unit and a current hand-back stay. "SEAT 46339e5c7" is being landed as point 97.
+- **NEXT:** the chair's rulings on U7. Then, on the chair's word after point 97 is the line: merge U6 and U7, run the dark proof and the doors, run `tests/lint` whole, and send "SEAT-B <commit>".
+- **OUT:** none (BU6 and BU7 returned; either may be resumed). BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK

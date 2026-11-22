@@ -15,7 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
-import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); // one line: the holder census keys this file by line
+import { LEGITIMACY_CUTS, READINESS_BANDS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); import { DEFAULT_FORTUNE_LAW_VERSION, FORTUNE_LAW_TUNING, SIZE_RELATIVE_FORTUNE_LAW_VERSION, readFortuneLawVersion } from '../domain/fortune/fortuneLaw.js'; // one line: the holder census keys this file by line (FORTUNE-1 U3: the fortune law's import rides it, and its helpers sit below computePublicLegitimacy)
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -125,7 +125,7 @@ export function legitimacyBandFor(score) {
  * @param {string} tier
  * @returns {{ score:number, label:string, color:string, bg:string, breakdown:Object, govMultiplier:number, crimMultiplier:number, isEndorsed:boolean, isApproved:boolean, isTolerated:boolean, isContested:boolean, isLegitimacyCrisis:boolean, governanceFractured:boolean }}
  */
-export function computePublicLegitimacy(economicState, defenseLabel, tier) {
+export function computePublicLegitimacy(economicState, defenseLabel, tier, fortuneLaw = DEFAULT_FORTUNE_LAW_VERSION) { // FORTUNE-1 U3 (FS2): the fortune law's version, see `sizeRelativeStanding` below
   const prosperity    = economicState?.prosperity      || 'Moderate';
   const safetyLabel   = economicState?.safetyProfile?.safetyLabel || 'Moderate';
   const foodLabel     = economicState?.foodSecurity?.label || 'Secure';
@@ -140,9 +140,9 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
                   : tier === 'town'    ? 0.85
                   : 1.0;
 
-  const pContrib = PROSPERITY_CONTRIB[prosperity] ?? 0;
-  const sContrib = safetyContrib(safetyLabel);
-  const dContrib = Math.round((DEFENSE_CONTRIB[defenseLabel] ?? 0) * defScale);
+  const pContrib = sizeRelativeStanding(fortuneLaw) ? fortuneProsperityContrib(prosperity) : PROSPERITY_CONTRIB[prosperity] ?? 0;
+  const sContrib = sizeRelativeStanding(fortuneLaw) ? sizeRelativeSafetyContrib(safetyLabel, tier) : safetyContrib(safetyLabel);
+  const dContrib = sizeRelativeStanding(fortuneLaw) ? sizeRelativeDefenceContrib(defenseLabel, tier, defScale) : Math.round((DEFENSE_CONTRIB[defenseLabel] ?? 0) * defScale);
   const fContrib = Math.round(foodContrib(foodLabel) * foodScale);
 
   const score = Math.max(0, Math.min(100, 50 + pContrib + sContrib + dContrib + fContrib));
@@ -169,6 +169,80 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
     // Governing authority fracture — internal cohesion breaks below 30
     governanceFractured: band.governanceFractured,
   };
+}
+
+// ── FORTUNE-1 U3 (FS2): standing judged against the place's own size — THE FORTUNE LAW ONLY ──
+// Placed BELOW computePublicLegitimacy, and its import riding line 18, so no line the holder
+// census cites above moves (the census keys this file by line).
+
+/**
+ * Was this standing born under the fortune law (version 2)? `computePublicLegitimacy`'s fourth
+ * argument is the law's version, handed by its one caller (`power/rulingStructure.js`, from
+ * `resolveFortuneLawVersion(config)`), and read here through the law's closed reader: absent or
+ * garbage is version 1, and under version 1 every line computes exactly as before the law. Under
+ * version 2 the prosperity term reads the law's table, and the defence term and a calm safety label
+ * are judged against the size's usual range (U5s); food, the base 50, the cuts and the bands are unchanged.
+ * @param {unknown} fortuneLaw @returns {boolean}
+ */
+function sizeRelativeStanding(fortuneLaw) {
+  return readFortuneLawVersion(fortuneLaw) === SIZE_RELATIVE_FORTUNE_LAW_VERSION;
+}
+
+/** The prosperity term under the fortune law: the law's DRAFT table (equal to `PROSPERITY_CONTRIB`
+ *  on purpose, so the owner's second-column figure changes in one place); an unknown label is 0.
+ *  @param {string} prosperity @returns {number} */
+function fortuneProsperityContrib(prosperity) {
+  return /** @type {Record<string, number>} */ (FORTUNE_LAW_TUNING.standing.prosperityPoints)[prosperity] ?? 0;
+}
+
+/** The readiness bands LOWEST FIRST, read off the one ladder (`READINESS_BANDS`, held highest
+ *  first), never re-spelled. */
+const READINESS_ORDER = READINESS_BANDS.map((band) => band.label).reverse();
+
+/**
+ * The defence term under the fortune law (the proposal's section 3 item 7): defence judged against
+ * what is USUAL for the size. So many points (`defencePointsPerBand`) a band the label stands
+ * above the size's usual range's top or below its bottom (0 inside it), within plus or minus
+ * `defenceBound`, weighed by the size's existing scale (`legitimacyDefScale`, unchanged). Every
+ * figure is the law's DRAFT table (`FORTUNE_LAW_TUNING.standing`). A label off the ladder
+ * contributes 0, as today; a size off the table reads the town's range (the prototype's fallback,
+ * `instruments/rule.mjs`, patch fs2-defence).
+ *
+ * @param {string|null|undefined} defenseLabel
+ * @param {string} tier
+ * @param {number} defScale  `legitimacyDefScale(tier)`
+ * @returns {number}
+ */
+function sizeRelativeDefenceContrib(defenseLabel, tier, defScale) {
+  const { defenceUsualRange, defencePointsPerBand, defenceBound } = FORTUNE_LAW_TUNING.standing;
+  const index = READINESS_ORDER.indexOf(String(defenseLabel));
+  if (index < 0) return 0;
+  const range = /** @type {Record<string, ReadonlyArray<string>>} */ (defenceUsualRange)[tier] ?? defenceUsualRange.town;
+  const [low, high] = range.map((band) => READINESS_ORDER.indexOf(band));
+  const offset = index > high ? index - high : index < low ? index - low : 0;
+  return Math.round(Math.max(-defenceBound, Math.min(defenceBound, defencePointsPerBand * offset)) * defScale);
+}
+
+/**
+ * The safety term under the fortune law (FORTUNE-3 U5s, the chair's ruling of 2026-11-20 15:58
+ * UTC): safety judged against what is USUAL for the size. A label on the calm ladder
+ * (`safetyCalmLadder`, lowest first) inside the size's usual range (`safetyUsualRange`) is worth 0;
+ * outside it, its own points (`safetyContrib`) LESS those of the range's nearest band. Every
+ * figure is today's `safetyContrib`; the ladder and the ranges are the law's DRAFT table
+ * (`FORTUNE_LAW_TUNING.standing`). A label off the ladder (a crisis strain, the two governance
+ * labels) keeps today's points; a size off the table reads the town's range, as defence does.
+ *
+ * @param {string} safetyLabel
+ * @param {string} tier
+ * @returns {number}
+ */
+function sizeRelativeSafetyContrib(safetyLabel, tier) {
+  const { safetyCalmLadder, safetyUsualRange } = FORTUNE_LAW_TUNING.standing;
+  const index = safetyCalmLadder.indexOf(safetyLabel);
+  if (index < 0) return safetyContrib(safetyLabel);
+  const range = /** @type {Record<string, ReadonlyArray<string>>} */ (safetyUsualRange)[tier] ?? safetyUsualRange.town;
+  const [low, high] = range.map((band) => safetyCalmLadder.indexOf(band));
+  return safetyContrib(safetyLabel) - safetyContrib(safetyCalmLadder[Math.max(low, Math.min(high, index))]);
 }
 
 
@@ -418,8 +492,71 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
  * HIGH twin (withConflictRelations). */
 const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
 
-export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line
+import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
+import { fillAgreement } from '../data/people/powerSentenceName.js';
+import { pickVariantMixed } from '../kernel/proseHash.js';
+import { getActiveRng } from '../kernel/rngContext.js';
+import { seatsByHolder } from '../domain/seat/seatLaw.js';
+import { holderOf } from '../domain/seat/holderOfSeat.js';
+import { isVeiledRow, pairLicense } from '../domain/seat/seatTable.js';
+
+/**
+ * THE HOLDER APART (SEAT-10 U6, CS12; the chair's rulings of 2026-11-22): the power that holds the seat, read off the
+ * roster as the seat law reads it (`holderOf`, the owner's audience), where the world was born under the seat law
+ * (`seatsByHolder`, off the born config), that power stands APART from the form (the governing row), and it is not
+ * veiled (`isVeiledRow`). Else null, and every line stays as it is: a hidden or criminal holder exposes nothing, and
+ * under law 1 this answers null before it reads anything else.
+ * @param {ReadonlyArray<Record<string, any>>} factions @param {unknown} config the born config
+ * @param {unknown} [record] the final record (the final-record pass, `power/factionStanding.js :: settleSeatHolderToRecord`), else the roster alone
+ * @returns {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean } | null}
+ */
+export function seatHolderApartOf(factions, config, record = null) {
+  if (!seatsByHolder(config) || !Array.isArray(factions)) return null;
+  const form = factions.find((f) => f?.isGoverning) || null;
+  if (!form) return null;
+  // the power step reads the roster alone (no one is cast yet); the final-record pass hands the record, so R2 (the person's first power) reads too
+  const held = holderOf(/** @type {any} */ (record || { powerStructure: { factions }, config }), { audience: 'owner' });
+  const holder = /** @type {Record<string, any> | null} */ (held.holder);
+  if (!holder || holder === form || holder.faction === form.faction || isVeiledRow(holder)) return null;
+  return { form, holder, licensed: pairLicense(String(held.kind || ''), form.faction).pair === 'licensed' };
+}
+
+/**
+ * One of the holder's lines (`data/seatHolderLines.js`), drawn through the kernel's mixed key from what every read
+ * serves (the record's seed and the two names), its slots filled: the form after its article, the holder with its
+ * article, the verb in the holder's number. A sentence that opens on the holder opens "The" (`opening`).
+ * @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart
+ * @param {unknown} [seed] the record's seed: the birth's stream seed at the power step, the record's `_seed` on the final record
+ * @returns {string}
+ */
+export function seatHolderLineOf(pool, apart, seed = getActiveRng()?.seed) {
+  const key = seed ? `${seed}::seatHolder:${pool}:${apart.form.faction}:${apart.holder.faction}` : null;
+  return seatHolderFill(String(pickVariantMixed(SEAT_HOLDER_LINES[pool], key) ?? SEAT_HOLDER_LINES[pool][0]), apart);
+}
+
+/** Every line of a pool, filled for this pair (no draw): what the final-record pass finds already written. @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string[]} */
+export function seatHolderLinesOf(pool, apart) {
+  return SEAT_HOLDER_LINES[pool].map((line) => seatHolderFill(line, apart));
+}
+
+/** @param {string} line @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string} */
+function seatHolderFill(line, apart) {
+  const form = powerNameAfterArticle(apart.form.faction);
+  return opening(fillAgreement(line, { holder: say(apart.holder) })
+    .replace(/\{form's\}/g, powerPossessive(form))
+    .replace(/\{form\}/g, form)
+    .replace(/\{holder\}/g, say(apart.holder)));
+}
+
+/** W1, and W2 after it on a licensed pair: the form<->holder row's line. @param {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean }} apart @param {unknown} [seed] @returns {string} */
+export function seatHolderRelationLineOf(apart, seed = getActiveRng()?.seed) {
+  return `${seatHolderLineOf('relation', apart, seed)}${apart.licensed ? ` ${SEAT_HOLDER_LINES.licensed[0]}` : ''}`;
+}
+
+export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null, seatConfig = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line; SEAT-10 U6: `seatConfig`, the born config (the seat law's), absent the old law
   const rels = [];
+  // SEAT-10 U6 (CS12, W1 and W2): the form<->holder row says the holder holds the office, never that it works under it
+  const apart = seatHolderApartOf(factions, seatConfig);
   const stressed = t => stressTypes.includes(t);
 
   // Helper: find faction by category or name keywords (EXCLUDING the governing faction
@@ -439,7 +576,9 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   // Guard: skip if pair would be self-referential
   const addRel = (obj) => {
     if (obj.pair?.[0] === obj.pair?.[1]) return; // skip self-relationships
-    rels.push({ ...obj, narrative: opening(obj.narrative) }); // NAMES-1 (CN1): a sentence that opens on a power opens "The …"
+    const held = apart && obj.pair?.includes(apart.form.faction) && obj.pair?.includes(apart.holder.faction);
+    const narrative = held ? seatHolderRelationLineOf(apart) : obj.narrative;
+    rels.push({ ...obj, narrative: opening(narrative) }); // NAMES-1 (CN1): a sentence that opens on a power opens "The …"
   };
 
   const gov  = factions.find(f => f.isGoverning);

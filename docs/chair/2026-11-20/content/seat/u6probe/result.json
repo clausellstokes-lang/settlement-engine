@@ -1,0 +1,236 @@
+{
+ "births": 150,
+ "holderApart": 78,
+ "relRows": 63,
+ "relTypes": [
+  [
+   "dependent/",
+   34
+  ],
+  [
+   "subordinate/",
+   27
+  ],
+  [
+   "competitive/",
+   2
+  ]
+ ],
+ "relLines": [
+  [
+   "<Name> needs the taxes and loans of the <Name>, and the <Name> need the <Name> to enforce their contracts and keep the law. <Name> can afford to ruin the other.",
+   26
+  ],
+  [
+   "<Name> work under the rules the <Name> sets, and pay for a hearing in the hall when it wants something.",
+   21
+  ],
+  [
+   "<Name> live under the rule of the <Name> but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.",
+   4
+  ],
+  [
+   "<Name> work under the rules the <Name> oligarchy sets, and pay for a hearing in the hall when it wants something.",
+   3
+  ],
+  [
+   "<Name>-to-day trade here is run by the <Name> more than by the <Name>, and taxes are bargained over, not ordered.",
+   2
+  ],
+  [
+   "<Name> oligarchy needs the taxes and loans of the <Name>, and the <Name> need the <Name> oligarchy to enforce their contracts and keep the law. <Name> can affor",
+   2
+  ],
+  [
+   "<Name>'s <Name> needs the taxes and loans of the <Name>, and the <Name> need the <Name>'s <Name> to enforce their contracts and keep the law. <Name> can afford ",
+   1
+  ],
+  [
+   "<Name> carries out what the <Name>'s <Name> decides.",
+   1
+  ],
+  [
+   "<Name> work under the rules the <Name> assembly sets, and pay for a hearing in the hall when it wants something.",
+   1
+  ],
+  [
+   "<Name> assembly needs the taxes and loans of the <Name>, and the <Name> need the <Name> assembly to enforce their contracts and keep the law. <Name> can afford ",
+   1
+  ],
+  [
+   "<Name> work under the rules the <Name>-<Name> sets, and pay for a hearing in the hall when it wants something.",
+   1
+  ]
+ ],
+ "holderStandings": [
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> operate in the shadow of the governing council, close enough to matter a",
+   17
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect access to the hall in return. <Name> operate in the shadow of the <Name>, close enough to matter and too ",
+   15
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return.",
+   7
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> gap between them and the governing council is narrow. A single shift in ",
+   4
+  ],
+  [
+   "<Name> landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them. <Name> operate in the shadow of ",
+   4
+  ],
+  [
+   "<Name> families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital. <Name> operate in the sh",
+   4
+  ],
+  [
+   "<Name> with local reach; a consistent civic presence without yet being the dominant commercial voice. <Name> operate in the shadow of the <Name> oligarchy, clos",
+   3
+  ],
+  [
+   "<Name> with local reach; a consistent civic presence without yet being the dominant commercial voice. <Name> operate in the shadow of the governing council, clo",
+   3
+  ],
+  [
+   "<Name> families with residual feudal claims; the formal obligations are real, but other powers set the practical agenda day to day. <Name> the <Name> by too muc",
+   2
+  ],
+  [
+   "<Name> landowners whose land rights and military obligations are structurally embedded in governance here; the hall works alongside them, not over them. <Name> ",
+   2
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> are always at the table, but cannot set their own terms. <Name> craft gu",
+   2
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect access to the hall in return. <Name> gap between them and the <Name>'s <Name> is narrow. A single shift i",
+   1
+  ],
+  [
+   "<Name> watch or patrol stands here; those who would take up arms if trouble came speak for the settlement's defence. <Name> are always at the table, but cannot ",
+   1
+  ],
+  [
+   "<Name> landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them. <Name> are always at the table, ",
+   1
+  ],
+  [
+   "<Name> ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> operate in the shadow of the <Name> assembly, close enough to matter and",
+   1
+  ],
+  [
+   "<Name> with local reach; a consistent civic presence without yet being the dominant commercial voice. <Name> the <Name> oligarchy by too much to challenge openl",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> enough to the two above that their support is worth buying; they play th",
+   1
+  ],
+  [
+   "<Name> with local reach; they trade here, but have little say in how the place is run. <Name> disruption and requisition are hurting the bottom line. <Name> pow",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> are always at the table, but cannot set their own terms.",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> the governing council by too much to challenge openly, so they get their",
+   1
+  ],
+  [
+   "<Name> landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them. <Name> gap between them and the ",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> gap between them and the <Name> assembly is narrow. A single shift in pa",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> arrival of skilled workers outside guild structures is an existential co",
+   1
+  ],
+  [
+   "<Name> merchant community; fund civic works and expect council access in return. <Name> are always at the table, but cannot set their own terms. <Name> tolerate",
+   1
+  ]
+ ],
+ "contestedOnHolder": 0,
+ "contestedNotInLitField": 0,
+ "contestedRows": 2,
+ "examples": [
+  {
+   "seed": "u6p-village-3",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "type": "dependent",
+   "line": "The Elder Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Elder Council to enforce their contracts and keep the law. Neither can afford to ruin the other. Even so, the two are n",
+   "holderStanding": "Established merchant community; fund civic works and expect council access in return."
+  },
+  {
+   "seed": "u6p-village-4",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "type": "competitive",
+   "line": "Day-to-day trade here is run by the Merchant Guilds more than by the Elder Council, and taxes are bargained over, not ordered.",
+   "holderStanding": "Established merchant community; fund civic works and expect council access in return."
+  },
+  {
+   "seed": "u6p-village-7",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "type": "dependent",
+   "line": "The Elder Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Elder Council to enforce their contracts and keep the law. Neither can afford to ruin the other. Even so, the two are n",
+   "holderStanding": "Established merchant community; fund civic works and expect council access in return. The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their posit"
+  },
+  {
+   "seed": "u6p-village-10",
+   "form": "Headman's Authority",
+   "holder": "Merchant Guilds",
+   "type": "dependent",
+   "line": "The Headman's Authority needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Headman's Authority to enforce their contracts and keep the law. Neither can afford to ruin the other.",
+   "holderStanding": "Established merchant community; fund civic works and expect access to the hall in return. The gap between them and the Headman's Authority is narrow. A single shift in patronage, scandal, or armed muscle could swap their"
+  },
+  {
+   "seed": "u6p-village-12",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "type": "dependent",
+   "line": "The Elder Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Elder Council to enforce their contracts and keep the law. Neither can afford to ruin the other. Even so, the two are n",
+   "holderStanding": "Established merchant community; fund civic works and expect council access in return."
+  },
+  {
+   "seed": "u6p-village-14",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "type": "competitive",
+   "line": "Day-to-day trade here is run by the Merchant Guilds more than by the Elected Reeve, and taxes are bargained over, not ordered.",
+   "holderStanding": "Established merchant community; fund civic works and expect access to the hall in return. They operate in the shadow of the Religious Authorities, close enough to matter and too far behind to lead."
+  },
+  {
+   "seed": "u6p-village-15",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "type": "dependent",
+   "line": "The Elder Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Elder Council to enforce their contracts and keep the law. Neither can afford to ruin the other.",
+   "holderStanding": "Established merchant community; fund civic works and expect council access in return."
+  },
+  {
+   "seed": "u6p-village-18",
+   "form": "Headman's Authority",
+   "holder": "Military Party",
+   "type": "subordinate",
+   "line": "The Military Party carries out what the Headman's Authority decides.",
+   "holderStanding": "No watch or patrol stands here; those who would take up arms if trouble came speak for the settlement's defence. They are always at the table, but cannot set their own terms."
+  }
+ ]
+}

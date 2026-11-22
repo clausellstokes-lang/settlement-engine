@@ -186,6 +186,11 @@ const ROSTER = Object.freeze([
   // `chooseOrPin(pins, 'powerStructure', …)` gate as conserveSeatPower, so a held roster is never re-written. MUTATORS.
   { symbol: 'settleStandingToRoster', file: 'src/generators/power/rosterText.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'settleNarrativesToRoster', file: 'src/generators/power/rosterText.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
+  // FORTUNE U5a (the chair's ruling (A) of 2026-11-20 18:38 UTC): the merits of rule, the assembly step's TAIL. Under the
+  // fortune law only it re-bands `powerStructure.publicLegitimacy` and re-runs the capture rows and the standing sentences
+  // (copy-on-write, no draw), gated in the assembly body on `chooseOrPin(pins, 'powerStructure', …)`, so a held roster
+  // is never re-merited. A MUTATOR.
+  { symbol: 'settleMeritsOfRule', file: 'src/domain/fortune/fortuneMerits.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -587,7 +592,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(22); // COHERENCE-POWERS-4 (2026-11-12): 20 -> 22, settleStandingToRoster and settleNarrativesToRoster (the third seat's F2, measured at the assembly body); ALLEGIANCE-CAR1 (2026-11-08): 17 -> 20, assignCastPowers -> landMemberships, rankPowers, dealAllegiances, assignHandlers (measured at the seam); 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
+    expect(ROSTER).toHaveLength(23); // FORTUNE U5a (2026-11-20): 22 -> 23, settleMeritsOfRule (the assembly step's tail, measured at the assembly body); COHERENCE-POWERS-4 (2026-11-12): 20 -> 22, settleStandingToRoster and settleNarrativesToRoster (the third seat's F2, measured at the assembly body); ALLEGIANCE-CAR1 (2026-11-08): 17 -> 20, assignCastPowers -> landMemberships, rankPowers, dealAllegiances, assignHandlers (measured at the seam); 18 + 15 -> 17 (MERGE-CAR): the union of both sides less fitFactionRoster (CENSUS-4 R12, retired by the chair's SC-1 ruling): the car's 15 plus the rung-2 landing's resolveFactionLabelsAtClose and fishTradeTwinned; 16 -> 15 (PEOPLE-LAND): relinkFactionMembers and generateFactions left (M-2), truePersonHooks joined (lane 3's); with the grouping; 15 -> 16 (PEOPLE-4 TIES): drawTies; 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower; 14 -> 15: storeTrueHooksOnly (lane RUNG1-TRUTH unit A; the union of both lanes' rows, composed on the window branch)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -685,7 +690,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
       'conserveSeatPower', 'ensureFactionStructuralNpcs', 'fishTradeTwinned', 'generateCoherence', 'generateSettlementName',
-      'reconcilePowerStructure', 'resizePoliticalRoster', 'resolveFactionLabelsAtClose', 'settleNarrativesToRoster', 'settleStandingToRoster',
+      'reconcilePowerStructure', 'resizePoliticalRoster', 'resolveFactionLabelsAtClose', 'settleMeritsOfRule', 'settleNarrativesToRoster', 'settleStandingToRoster',
       'storeTrueHooksOnly', 'truePersonHooks',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly

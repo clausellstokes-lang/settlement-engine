@@ -1,0 +1,600 @@
+[
+ {
+  "seed": "hxd-thorp-18",
+  "size": "thorp",
+  "name": "Altwiese",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.defensePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase."
+ },
+ {
+  "seed": "hxd-thorp-18",
+  "size": "thorp",
+  "name": "Altwiese",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stress.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-thorp-18",
+  "size": "thorp",
+  "name": "Altwiese",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stressors.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-2",
+  "size": "hamlet",
+  "name": "Mikrochorion",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.civicPattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Citizenship institutions coexist with oligarchic wealth, household patronage, and resident outsider communities."
+ },
+ {
+  "seed": "hxd-hamlet-2",
+  "size": "hamlet",
+  "name": "Mikrochorion",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.socialTexture",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "The market and assembly make disagreement public, while wealth and networks shape who is heard."
+ },
+ {
+  "seed": "hxd-hamlet-2",
+  "size": "hamlet",
+  "name": "Mikrochorion",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalNotes",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "The market and assembly make disagreement public, while wealth and networks shape who is heard."
+ },
+ {
+  "seed": "hxd-hamlet-2",
+  "size": "hamlet",
+  "name": "Mikrochorion",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stress.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-2",
+  "size": "hamlet",
+  "name": "Mikrochorion",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stressors.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-4",
+  "size": "hamlet",
+  "name": "Medinaqala",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stress.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-4",
+  "size": "hamlet",
+  "name": "Medinaqala",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stressors.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-12",
+  "size": "hamlet",
+  "name": "Magnapolis",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stress.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-12",
+  "size": "hamlet",
+  "name": "Magnapolis",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stressors.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Rationing has begun, the wealthy are hoarding, and the children are visibly hungry."
+ },
+ {
+  "seed": "hxd-hamlet-15",
+  "size": "hamlet",
+  "name": "Niederwiese",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.defensePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase."
+ },
+ {
+  "seed": "hxd-hamlet-16",
+  "size": "hamlet",
+  "name": "Warmbrunn",
+  "fortune": "Struggling",
+  "standing": "Contested",
+  "calm": true,
+  "path": "culturalIdentity.defensePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase."
+ },
+ {
+  "seed": "hxd-village-1",
+  "size": "village",
+  "name": "Yuan",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": true,
+  "path": "npcs.[].activeConstraint",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Anything it does to guard its own wealth while people go short is seen by all."
+ },
+ {
+  "seed": "hxd-village-4",
+  "size": "village",
+  "name": "Tihoko",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "The miller is often the wealthiest and most resented figure in the village."
+ },
+ {
+  "seed": "hxd-village-7",
+  "size": "village",
+  "name": "Ráðbrekka",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": true,
+  "path": "npcs.[].activeConstraint",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Anything it does to guard its own wealth while people go short is seen by all."
+ },
+ {
+  "seed": "hxd-village-7",
+  "size": "village",
+  "name": "Ráðbrekka",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": true,
+  "path": "culturalIdentity.exchangePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange."
+ },
+ {
+  "seed": "hxd-village-8",
+  "size": "village",
+  "name": "Hákonoy",
+  "fortune": "Struggling",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.exchangePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Maritime trade, seasonal voyaging, fishing, pastoral production, and portable wealth drive exchange."
+ },
+ {
+  "seed": "hxd-village-11",
+  "size": "village",
+  "name": "Warmbrunn",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "The miller is often the wealthiest and most resented figure in the village."
+ },
+ {
+  "seed": "hxd-village-13",
+  "size": "village",
+  "name": "Loughfield",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": true,
+  "path": "npcs.[].activeConstraint",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Anything it does to guard its own wealth while people go short is seen by all."
+ },
+ {
+  "seed": "hxd-village-13",
+  "size": "village",
+  "name": "Loughfield",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": true,
+  "path": "culturalIdentity.exchangePattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Pastoral wealth, seasonal fairs, metalwork, and gift exchange connect dispersed households."
+ },
+ {
+  "seed": "hxd-village-17",
+  "size": "village",
+  "name": "Bjornby",
+  "fortune": "Poor",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "economicState.safetyProfile.crimeTypes.[].desc",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Wealthy families paying poorer ones to send sons in their place."
+ },
+ {
+  "seed": "hxd-village-17",
+  "size": "village",
+  "name": "Bjornby",
+  "fortune": "Poor",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "culturalIdentity.civicPattern",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Authority depends on followings, ships, land, judgments, and the public distribution of wealth."
+ },
+ {
+  "seed": "hxd-village-17",
+  "size": "village",
+  "name": "Bjornby",
+  "fortune": "Poor",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stress.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts."
+ },
+ {
+  "seed": "hxd-village-17",
+  "size": "village",
+  "name": "Bjornby",
+  "fortune": "Poor",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "stressors.summary",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "The governing authority is demanding sacrifice while certain families are quietly thriving on contracts."
+ },
+ {
+  "seed": "hxd-town-16",
+  "size": "town",
+  "name": "Qal'atchowk",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Charitable house for the destitute poor, aged, and disabled who cannot work."
+ },
+ {
+  "seed": "hxd-town-16",
+  "size": "town",
+  "name": "Qal'atchowk",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "availableServices.healing.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Food, shelter, and basic care for the destitute poor and aged."
+ },
+ {
+  "seed": "hxd-city-1",
+  "size": "city",
+  "name": "Tikalhuitz",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": false,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "What it makes is sold in bulk, and by the bottle to wealthy clients."
+ },
+ {
+  "seed": "hxd-city-1",
+  "size": "city",
+  "name": "Tikalhuitz",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": false,
+  "path": "availableServices.equipment.[].desc",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "A sign of prosperity in any building."
+ },
+ {
+  "seed": "hxd-city-1",
+  "size": "city",
+  "name": "Tikalhuitz",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": false,
+  "path": "npcs.[].activeConstraint",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "Anything it does to guard its own wealth while people go short is seen by all."
+ },
+ {
+  "seed": "hxd-city-1",
+  "size": "city",
+  "name": "Tikalhuitz",
+  "fortune": "Poor",
+  "standing": "Contested",
+  "calm": false,
+  "path": "activeConditions.[].description",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "A superior settlement is drawing wealth, troops, or legal authority from this settlement."
+ },
+ {
+  "seed": "hxd-city-4",
+  "size": "city",
+  "name": "Pantelathra",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "A charity house sheltering the destitute poor, the aged, and the disabled who cannot work."
+ },
+ {
+  "seed": "hxd-city-4",
+  "size": "city",
+  "name": "Pantelathra",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "availableServices.healing.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Food, shelter, and basic care for the destitute poor and aged."
+ },
+ {
+  "seed": "hxd-city-8",
+  "size": "city",
+  "name": "Haimen",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "powerStructure.factions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "Their influence is advisory, transactional, and quietly resented."
+ },
+ {
+  "seed": "hxd-city-11",
+  "size": "city",
+  "name": "Bayanger",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "availableServices.healing.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Food, shelter, and basic care for the destitute poor and aged."
+ },
+ {
+  "seed": "hxd-city-13",
+  "size": "city",
+  "name": "Ononbuurt",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "powerStructure.factions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "Their influence is advisory, transactional, and quietly resented."
+ },
+ {
+  "seed": "hxd-city-17",
+  "size": "city",
+  "name": "Cerrovetum",
+  "fortune": "Poor",
+  "standing": "Legitimacy Crisis",
+  "calm": false,
+  "path": "availableServices.equipment.[].desc",
+  "kinds": [
+   "rich-word in a poor town"
+  ],
+  "sentence": "A sign of prosperity in any building."
+ },
+ {
+  "seed": "hxd-city-18",
+  "size": "city",
+  "name": "Cobacoba",
+  "fortune": "Comfortable",
+  "standing": "Contested",
+  "calm": false,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Charitable house for the destitute poor, aged, and disabled who cannot work."
+ },
+ {
+  "seed": "hxd-city-18",
+  "size": "city",
+  "name": "Cobacoba",
+  "fortune": "Comfortable",
+  "standing": "Contested",
+  "calm": false,
+  "path": "availableServices.healing.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Food, shelter, and basic care for the destitute poor and aged."
+ },
+ {
+  "seed": "hxd-city-18",
+  "size": "city",
+  "name": "Cobacoba",
+  "fortune": "Comfortable",
+  "standing": "Contested",
+  "calm": false,
+  "path": "history.historicalCharacter",
+  "kinds": [
+   "favour-word under a contested ruler"
+  ],
+  "sentence": "The Interregnum produced a governing arrangement that has never been fully endorsed by everyone it governs."
+ },
+ {
+  "seed": "hxd-metropolis-12",
+  "size": "metropolis",
+  "name": "Oxteche",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "powerStructure.factions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "Their influence is advisory, transactional, and quietly resented."
+ },
+ {
+  "seed": "hxd-metropolis-13",
+  "size": "metropolis",
+  "name": "Khutulunörtöö",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "powerStructure.factions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "Their influence is advisory, transactional, and quietly resented."
+ },
+ {
+  "seed": "hxd-metropolis-14",
+  "size": "metropolis",
+  "name": "Yukou",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "institutions.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Charitable house for the destitute poor, aged, and disabled who cannot work."
+ },
+ {
+  "seed": "hxd-metropolis-14",
+  "size": "metropolis",
+  "name": "Yukou",
+  "fortune": "Comfortable",
+  "standing": "Tolerated",
+  "calm": true,
+  "path": "availableServices.healing.[].desc",
+  "kinds": [
+   "poor-word in a comfortable town"
+  ],
+  "sentence": "Food, shelter, and basic care for the destitute poor and aged."
+ },
+ {
+  "seed": "hxd-metropolis-17",
+  "size": "metropolis",
+  "name": "Brahmabari",
+  "fortune": "Prosperous",
+  "standing": "Approved",
+  "calm": true,
+  "path": "powerStructure.factions.[].desc",
+  "kinds": [
+   "disfavour-word under an approved ruler"
+  ],
+  "sentence": "Their influence is advisory, transactional, and quietly resented."
+ }
+]

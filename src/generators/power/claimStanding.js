@@ -40,6 +40,12 @@ const SEAT_WORDS = Object.freeze([
   ['the council works alongside them, not over them.', 'the hall works alongside them, not over them.'],
   ['expect council access in return.', 'expect access to the hall in return.'],
 ]);
+/** SEAT-10 U6 (CS12, condition 4): the archetype's "...and expect council access in return." in both its seat words, which a
+ * row that HOLDS the form does not print; cut at its sentence's own boundary, so the claim before it closes ("Established
+ * merchant community; fund civic works."). A gate only: no word is authored. */
+const SEAT_ACCESS = SEAT_WORDS[SEAT_WORDS.length - 1].map((said) => ` and ${said}`);
+/** The holder's description with the clause cut (condition 4; the power step and the final-record pass). @param {string} desc @returns {string} */
+export const withoutSeatAccess = (desc) => SEAT_ACCESS.reduce((d, clause) => d.replace(clause, '.'), desc);
 /**
  * THE WAREHOUSE BY THE CATALOGUE'S OWN IDS (TAIL-POWERS-B-5; the chair's P33/P34, vetoable by the owner: no new atom, the
  * label written once): the catalog ids of every rung of the family the catalogue itself tags a warehouse (its "Warehouse
@@ -241,8 +247,10 @@ export function settleArcaneToPractitioners(factions, record) {
  * right to rule); it takes its twin, true in that state (SEAT_UNDER_CRISIS).
  * @param {Array<Record<string, any>>} factions @param {string} tier @param {string[]} [instNames] the roster's house names, lower-cased
  * @param {{ isLegitimacyCrisis?: boolean } | null} [legitimacy] the step's public legitimacy (computePublicLegitimacy)
+ * @param {string | null} [holderName] SEAT-10 U6: the power that holds the seat apart from the form, under the seat law
+ *   (`factionDynamics.js :: seatHolderApartOf`), whose row takes no "expect council access" clause; null, none
  */
-export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy = null) {
+export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy = null, holderName = null) {
   const governing = String(factions.find((x) => x?.isGoverning)?.faction || '');
   if (legitimacy?.isLegitimacyCrisis === true) {
     for (const f of factions) {
@@ -281,6 +289,7 @@ export function settleClaimsToLabel(factions, tier, instNames = [], legitimacy =
     if (!f.isGoverning && seatRank > (LABEL_RANK[String(f.powerLabel)] ?? 99) && f.desc.startsWith(UNDERWORLD_CLAIM)) {
       f.desc = UNDERWORLD_UNDER_STRONGER_SEAT + f.desc.slice(UNDERWORLD_CLAIM.length);
     }
+    if (holderName !== null && f.faction === holderName) f.desc = withoutSeatAccess(f.desc);
   }
 }
 

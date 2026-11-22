@@ -189,3 +189,48 @@ function hostByStanding(desc, before) {
   }
   return host;
 }
+
+/**
+ * FORTUNE U5a (the census's W2, the chair's ruling (3) of 2026-11-20 16:45 UTC): the descriptions' standing sentences
+ * settled to a MOVED LEGITIMACY, on the same roster. The merits of rule (domain/fortune/fortuneMerits.js) re-band the
+ * seat's standing after the sentences were written at the birth's band, and the rank-1 line's coup reading reads the
+ * band's multiplier; so each power's sentence is computed at the previous legitimacy and at the stored one, and where
+ * they differ the old sentence at a description's end gives way to the new, exactly as `settleStandingToRoster` swaps
+ * it. At the END of the file so no line the faction-reader register cites moves. Draw-free and pure (the input is
+ * never mutated); returns the same object where nothing moves, so a second run (the stored legitimacy on both sides)
+ * moves nothing.
+ * @template {{ factions?: Array<Record<string, any>>, publicLegitimacy?: unknown }} P
+ * @param {P} powerStructure the roster, carrying the stored legitimacy @param {unknown} previousLegitimacy the
+ * legitimacy the sentences were written at @param {{ institutions?: unknown } | null | undefined} record the record,
+ * for its houses (`standingForceOf`, as `steps/assembleSettlement.js` reads them for `settleStandingToRoster`)
+ * @returns {P}
+ */
+export function settleStandingToLegitimacy(powerStructure, previousLegitimacy, record) {
+  const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
+  if (!factions || previousLegitimacy === powerStructure?.publicLegitimacy) return powerStructure;
+  const roster = standingRosterOf(factions);
+  const force = standingForceOf(record?.institutions);
+  const before = standingsOf(roster, force, { publicLegitimacy: previousLegitimacy });
+  const after = standingsOf(roster, force, { publicLegitimacy: powerStructure?.publicLegitimacy });
+  let moved = false;
+  const next = factions.map((f) => {
+    const name = String(f?.faction || '');
+    const old = before.get(name);
+    const now = after.get(name);
+    if (!old || !now || old.standing === now.standing) return f;
+    const desc = String(f.desc || '');
+    /** @type {string | null} */
+    let base = null;
+    if (!old.standing) {
+      base = desc;
+    } else if (desc === old.standing) {
+      base = '';
+    } else if (desc.endsWith(` ${old.standing}`)) {
+      base = desc.slice(0, -old.standing.length - 1);
+    }
+    if (base === null) return f;
+    moved = true;
+    return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
+  });
+  return moved ? { ...powerStructure, factions: next } : powerStructure;
+}

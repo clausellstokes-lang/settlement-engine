@@ -2878,6 +2878,22 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/fortuneLawStanding.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawMerits.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawSafety.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawTradeLine.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by FORTUNE-1 U4 (FS7 finding F2, FORTUNE-3's builder) on lane/fortune-3-u4-2026-11-20. It pins src/generators/economy/prosperity.js :: deriveEconomicSituationDesc under the fortune law (src/domain/fortune/fortuneLaw.js :: isSizeRelativeFortune): (a) where law 1 prints the high band's guild line at a law-2 small birth holding no guild, law 2 prints a line naming no guild that TRADE_LINE_BANDS still reads as the high band, and a place with a guild house keeps the line; (b) the same records' line recomputed without the marker, or with 1, is today's. Its red-first IS on record: before prosperity.js changed, (a) failed on Lipoev (thorp, Prosperous) printing the guild line. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
+    },
     "tests/generators/randomConfigReroll.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
@@ -4015,6 +4031,10 @@
       "kind": "rationale",
       "rationale": "Introduced by COHERENCE-UPKEEP-5 R3 (the chair's R3, the standing label), commit 0c950f06. It pins src/generators/economy/prosperity.js :: deriveProsperityLabels and src/domain/facts/keep.js :: keepOfRecord: on fresh v3build-* births the printed label equals e1b2f9c1f's, economicState.prosperityStanding equals the probe's no-crisis reading, the stores are laid by at the standing share, an old save without the field reads its label, and the two labels take one Subsistence draw. Its pins were measured against a probe copy, but its red-first is not on record. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
     },
+    "tests/generators/fortuneLawFortune.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by FORTUNE-1 U2 (fortune judged against the place's own size: FS1, and FS4's calm floor), on lane/fortune-2-u2-2026-11-20. It pins src/generators/economy/prosperity.js :: computeBaseProsperity and deriveProsperityLabels under the fortune law (src/domain/fortune/fortuneLaw.js :: isSizeRelativeFortune, FORTUNE_LAW_TUNING): (a) with no marker every call equals law 1 and every garbage marker over a grid; (b) under 2 the size alone moves no base, the depth term reads each size's own expectation, the diversity count moves nothing; (c) the calm floor holds at Poor and only where it should; (d) twelve forced births read what the functions compute, and the same births with no marker are byte-identical to law 1. Its red-first IS on record: before prosperity.js changed, every lit title of (b), (c) and (d) failed for the law's absence, each lit arm carrying its own today-control computed on the same inputs, which is the attribution a planted mutant would give. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
+    },
     "tests/generators/defenceParts.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by COHERENCE-UPKEEP-5 V3 + R13 + R14 (defence is the sum of its parts), commit 82c639b4. It pins src/generators/defenseGenerator.js :: generateDefenseProfile and defencePartsOf with src/data/defenceWeights.js's DEFENCE_TUNING: on v3build-* births at six sizes, calm and four forced crises, the parts sum exactly to readiness.score, are not stored or exported, recompute equal from the record, the kind of wall counts, and priorityHelpers.js :: neighbourMilitaryFactorOf is militaryEffective's reading. Several test titles are labelled RED-FIRST, but neither the commit nor the header records the file red, so its red-first is not on record. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/defenseGenerator.js."
@@ -4766,6 +4786,10 @@
     "tests/generators/seatBandFold.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by UK (SEAT-6's lane, builder BUK2; brief docs/chair/2026-11-20/content/seat/briefs/UK-BAND.md), commits 323e512a2, a55622d63 and 0ef0f3c3a, merged with UK-CURE by SEAT-9 at 9624a7ac4. It pins npc/powerBand.js :: powerBandOfRole (re-exported by npcGenerator.js): the fold of '_' and ' ' (and the stem 'wealthiest merchant') applies ONLY where seat/seatLaw.js :: seatsByHolder reads the born config as law 2, so Guild Master and Thieves Guild Master read high and Council Member moderate under the law and low under every old-law config (absent, 1, the string '2', 3, none); a town and a city born under the law print the corrected band on their cards while the same seeds born dark do not; the one _rng() draw of generateNPCPowerLevel holds (every card pairs by id and name across the two births); arm 3 holds the old law by a differential in ONE tree with no stored digest (UK-FOLLOW, the chair's 22:01Z ruling, BUF 60bd8ef02, merged at e1557b41c): 199 role strings read the band of a local restatement of the old expression under every old-law config, and under law 2 exactly a declared set of 11 moves, both ways; two births with the key stripped deep-equal their law-1 twins, the key excepted; every dark birth forces law 1, so the flip cannot move the file; castPowers.js :: raiseToOfficeBand reads the office role unharmed. Its catching power was EXECUTED, not claimed, by running it red first (UK-REPORT.md): at the base 4 red / 7 green (arm 1: 1; arm 2: 3), at (a) 11 green, arm 4 red 2 at (a) and green at (b), 13 green; and again at UK-FOLLOW by plant-and-restore in npc/powerBand.js: the fold applied without the law gate, 7 red; the fold dropped under the law, 5 red; the flip's first dial set, 13 green; so a fold applied without the law gate, a fold dropped, a second draw, or an old-law birth that moves reds a member. A rationale rather than a sweep plant: a plant would mutate src/generators/npc/powerBand.js or seatLaw.js, generation substrate other suites read, through the sweep's `git checkout --` revert that the shared-tree protocol forbids build lanes to run. Vetoable: promote to kind:'mutation' by planting the ungated fold in npc/powerBand.js."
+    },
+    "tests/generators/seat/seatHolderLines.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by U6 THE PROSE (SEAT-10's lane, builder BU6; brief docs/chair/2026-11-20/content/seat/briefs/U6-PROSE.md with the chair's E65 and E70 addenda; report briefs/U6-PROSE-REPORT.md), commits 72db0b9f3 to e2a221ac6, merged by SEAT-10 at 674148b9c. It pins the holder's lines (data/seatHolderLines.js :: SEAT_HOLDER_LINES, the chair's wordings) under the seat law: where the holder (seat/holderOfSeat.js :: holderOf) stands apart from the form and is not veiled (seatTable.js :: isVeiledRow), the form-holder relation row prints a W1 line, the holder's row a W3 line at any rank, a licensed pair W2, drawn ONLY by kernel/proseHash.js :: pickVariantMixed; a veiled holder keeps today's lines; the archetype's 'expect council access' clause is cut on the holder's row; the final-record pass (power/factionStanding.js :: settleSeatHolderToRecord, in generateSettlementPipeline.js) reaches the R2 holders; law 1 is held by a differential in ONE tree with no stored digest (0 differences of any kind). Its catching power was EXECUTED, not claimed: fault (c) (the birth's contestedBy read under law 1) red first on its witness u6f-town-18 (3 failed) and green after the born config was handed; the ladder's totality arm reds on a planted rewording of one standing line (factionStanding.js :: LADDER read by RANK_STANDINGS); the regen arm pins regenSection('npcs') as a NAMED GAP that reds the day a regen moves the holder; the fault (b) guard reds the day the fold moves raiseToOfficeBand. Mutation testing is redundant: every arm was shown red against a planted fault."
     }
   },
   "meta": {

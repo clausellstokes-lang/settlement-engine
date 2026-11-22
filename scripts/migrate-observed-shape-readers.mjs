@@ -197,7 +197,14 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 44 -> 45 (LIVE)   THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close): one rung,
+ *   schema 45 -> 46 (LIVE)   THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE
+ *     U5a-CURE item 2, route B): one rung, ONE declaration of the conditional-generator-branch class, `merits on
+ *     breakdown` (writer fortune/fortuneMerits.js, which writes the key only under the fortune law, which the corpus's
+ *     CONFIGS never carry); the roster 16 -> 17, the bank 78/52 -> 79/53, and the one new row admitted TAGGED;
+ *     topology and tag law unchanged, nothing else moves. Its full rationale lives beside
+ *     `FORTUNE_MERITS_TARGET_SCHEMA`.
+ *
+ *   schema 44 -> 45 (RETIRED) THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close): one rung,
  *     eleven new reads since the register was last frozen (e56e112e2), each ADMITTED BY CAUSE with its class and
  *     landing; nothing declared, nothing gone; topology, tag law, roster and bank (78/52) unchanged. Its full
  *     rationale lives beside `LAST_CLOSE_TARGET_SCHEMA`.
@@ -403,6 +410,7 @@ import {
   validateSchema42Baseline,
   validateSchema43Baseline,
   validateSchema44Baseline,
+  validateSchema45Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1884,6 +1892,27 @@ export const FINAL_PASS_TARGET_SCHEMA = 44;
  *  walker-red, and its re-freeze lands next. */
 export const LAST_CLOSE_TARGET_SCHEMA = 45;
 
+/* ⭐⭐ THE SCHEMA 45 → 46 RUNG — THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane
+ *  (FORTUNE U5a-CURE item 2, route B; confirmed 22:21 UTC): "ONE schema rung for ONE explained-writer row, made by the instrument's own
+ *  migration door"; the bank's other declarations and the tag law unchanged). The schema-29 one-declaration rung's
+ *  form (`MIGRATION_DIRECTION_TARGET_SCHEMA`), the same fifth class.
+ *
+ *  THE CAUSE: the fortune lane's merits (src/domain/fortune/fortuneMerits.js) read `legitimacy.breakdown?.merits`
+ *  (baseScoreOf, the birth's own score less the merits it carries), and the walker's live scan reports exactly ONE NEW
+ *  row, `merits on breakdown` x1 in that file (reads 2214 -> 2215, identities 1552 -> 1553, files 444 -> 445), and
+ *  nothing else. Its one writer is the same file's `meritedLegitimacy` (`breakdown: { ...terms, merits: added }`),
+ *  called by `settleMeritsOfRule` at the tail of the assembly step (steps/assembleSettlement.js), which the corpus RUNS;
+ *  but the write is reached only under the fortune law (`_fortuneLawVersion: 2`, resolveFortuneLawVersion), and the
+ *  corpus builder's Producer 1 births CONFIGS that carry no marker, so every corpus world reads law 1, which writes no
+ *  byte (FS5). Route (A), a corpus writer, is impossible while the law is dark; route (B), ruled: ONE declaration of
+ *  the conditional-generator-branch class (a generator branch gated on conditions the corpus's seed × config matrix
+ *  does not satisfy), `merits on breakdown`, writer fortuneMerits.js; gate 0 reads the object-literal key
+ *  `merits: added`. The roster 16 -> 17; the one new row admitted TAGGED; the bank 78/52 -> 79/53 by that one row
+ *  alone (no other declaration moves). The delta is the THREE bookkeeping paths
+ *  (`FORTUNE_MERITS_SCANNER_DELTA_PATHS`); the review (docs/chair/2026-11-20/content/fortune/) records every row. The
+ *  commit pair holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
+export const FORTUNE_MERITS_TARGET_SCHEMA = 46;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1972,6 +2001,7 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [CLOSE_ROUND_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
   [FINAL_PASS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
   [LAST_CLOSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [FORTUNE_MERITS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 79, taggedRows: 53 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2651,6 +2681,14 @@ export const LAST_CLOSE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-45 → 46 delta: the THREE bookkeeping paths (the declaration is the checker's; no other detector
+ *  source moved). */
+export const FORTUNE_MERITS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2737,6 +2775,8 @@ const FINAL_PASS_SCANNER_TRANSITION_POLICY =
   'schema-43-to-44-final-pass-v1';
 const LAST_CLOSE_SCANNER_TRANSITION_POLICY =
   'schema-44-to-45-last-close-v1';
+const FORTUNE_MERITS_SCANNER_TRANSITION_POLICY =
+  'schema-45-to-46-fortune-merits-writer-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2800,6 +2840,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [CLOSE_ROUND_TARGET_SCHEMA]: AGREE_TIER_SEED_TARGET_SCHEMA,
   [FINAL_PASS_TARGET_SCHEMA]: CLOSE_ROUND_TARGET_SCHEMA,
   [LAST_CLOSE_TARGET_SCHEMA]: FINAL_PASS_TARGET_SCHEMA,
+  [FORTUNE_MERITS_TARGET_SCHEMA]: LAST_CLOSE_TARGET_SCHEMA,
 });
 
 /**
@@ -2920,6 +2961,8 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [CLOSE_ROUND_TARGET_SCHEMA]: validateSchema43Baseline,
   // The schema-45 rung's own predecessor (the close's final pass), validated as schema 44.
   [FINAL_PASS_TARGET_SCHEMA]: validateSchema44Baseline,
+  // The schema-46 rung's own predecessor (the last close), validated as schema 45.
+  [LAST_CLOSE_TARGET_SCHEMA]: validateSchema45Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3443,6 +3486,12 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [FORTUNE_MERITS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FORTUNE_MERITS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FORTUNE_MERITS_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [LAST_CLOSE_TARGET_SCHEMA, Object.freeze({
@@ -4670,7 +4719,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : LAST_CLOSE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : FORTUNE_MERITS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4688,8 +4737,9 @@ export function run(argv = process.argv.slice(2)) {
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
     TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
     AGREE_TIER_SEED_TARGET_SCHEMA, CLOSE_ROUND_TARGET_SCHEMA, FINAL_PASS_TARGET_SCHEMA,
-    LAST_CLOSE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${LAST_CLOSE_TARGET_SCHEMA} (live last-close leaf),`
+    LAST_CLOSE_TARGET_SCHEMA, FORTUNE_MERITS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${FORTUNE_MERITS_TARGET_SCHEMA} (live fortune-merits leaf),`
+      + ` ${LAST_CLOSE_TARGET_SCHEMA} (retired last-close leaf),`
       + ` ${FINAL_PASS_TARGET_SCHEMA} (retired final-pass leaf),`
       + ` ${CLOSE_ROUND_TARGET_SCHEMA} (retired close-of-round leaf),`
       + ` ${AGREE_TIER_SEED_TARGET_SCHEMA} (retired tier-seed leaf),`
