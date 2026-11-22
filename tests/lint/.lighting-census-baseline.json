@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "6e3577d19e9422d1e138e82dcc4e68c12933c085",
-  "measuredBy": "FORTUNE-7",
+  "measuredAtSha": "74d470620be048fd993498cccb4bd3411bfce537",
+  "measuredBy": "fortune-7 U8c builder",
   "date": "2026-11-22",
-  "note": "FORTUNE-B at the line point 98 (c110dd85b) merged: the lane U7 and U7b test files, tests/domain/fortuneLastingVeil.test.js and tests/domain/fortuneLastingSentence.test.js, and their titles",
+  "note": "U8c (E112): the dual-hat guard lit arm, one title in tests/generators/people/dualHatPoliticalMass.test.js",
   "files": 3771,
   "parked": 485,
   "credited": 3286,
-  "titles": 31839,
+  "titles": 31840,
   "suiteTitles": 8831
 }
