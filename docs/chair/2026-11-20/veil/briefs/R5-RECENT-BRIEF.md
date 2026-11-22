@@ -1,5 +1,37 @@
 # R5-RECENT — brief for THE LANE'S WRITER (VEIL-32, or VEIL-33 if it holds the lane at the hand-over): THE WRITER'S NEXT UNIT AFTER (viii), BEFORE (iv) (the chair's E78, 2026-11-22 12:21 UTC; vetoable by the owner)
 
+## THE CHAIR'S RULING E92 (15:16 UTC 2026-11-22), ON THE FIRST CURE BUILDER'S TWO STOPS: "THE OTHER WAY". IT GOVERNS EVERY SECTION BELOW
+(The first builder's hand-back `out/v33/r5recent/R5C-HANDBACK.md`: READ IT WHOLE: its open-form measure, its read of each engine's
+host, its probes under `out/v33/r5recent/`.)
+1. `powerStructure.recentConflict` IS WITHHELD ALWAYS, on EVERY shared read of EVERY place, both engines (212's
+   `_gallery_veil_withhold_always`, the twin's `galleryWithholdAlways.js :: withholdAlways`: the key itself, marked or not, both
+   stored shapes, every door, Reveal DM off and on): an absence every place shows is no tell. NEVER a per-place withheld form;
+   NEVER the hidden name in any host. (The "THE HOST" ruling of the CURE BUILDER section below is SUPERSEDED: R2's always-host, as
+   unit (viii) put `crimeTypes`.)
+2. ONE READER on the page re-derives the sentence from the SERVED document by the engine's own writer, wired at the doors where
+   `pageRederive.js :: rederiveCrimeTypes` is (`rederiveForPage`; `importRederive.js :: rederiveInPlace`), and NOWHERE else.
+3. MEASURE FIRST, SPLIT BY THE TWO WRITERS: on nothing-hidden pages, (i) the places whose stored sentence is the BASELINE writer's
+   (`governanceNarrative.js :: buildGovernanceLabels` / `deriveBaselineConflict`): reproduced N of N from the served document? (by
+   seed too, IF the draw needs only what is served); (ii) the places whose stored sentence is a TRANSFER's (`rulingPower.js ::
+   transferRulingPower`: born lit by the seat's law, or made at play): how many on the dark pool (PLAUSIBLY none born), and what
+   the served document carries from which a transfer's sentence could be composed.
+4. PRE-RULED: IF (i) IS REPRODUCED ON ALL: BUILD. A transfer's sentence that cannot be composed from served facts WITHOUT a
+   withheld name is NOT reconstructed: the page prints the BASELINE sentence over the served powers there (a loss confined to
+   transfer places, ACCEPTED, counted lit at the join by the probe's act K). IF (i) IS NOT REPRODUCED (the draw needs something the
+   read does not serve): STOP with the figures and what is missing ("none, everywhere" is the chair's last resort, weighed with numbers).
+5. THE RED FIRST: the plant (red 6 of 9 at f8d8ea6e3, teeth green) goes GREEN by the sentence being ABSENT from the served payload
+   (re-state its teeth where they assumed the stored sentence served: a tooth now holds that the PAGE's re-derived sentence equals
+   the stored one on a read that hides nothing); ADD THE DIFFERENTIAL, the unit's real proof: a hiding read's PAGE sentence equals the
+   PAGE sentence of the same place with the withheld power never there (born or planted), both engines' payloads through the one
+   reader; a walker in `crimeTypesReaders.walker`'s shape registering every reader of `recentConflict` in src/ (the key never ships;
+   the reader wired at every door); the composed-hosts walker's row `power.recentConflict` green (the row leaves the composed form:
+   withhold/always/page re-derive, as `safety.crimeTypes`), the other 26 red exactly.
+6. THE REGISTRY's row `power.recentConflict`: its WRITER corrected (`governanceNarrative.js :: buildGovernanceLabels`, and
+   `rulingPower.js :: transferRulingPower`), rule withhold, when always, page 're-derive', host R2's always-host, built.
+7. FIRST PAINT: the writer reaches a shared page only through the lazy page path (as `rederiveCrimeTypes`): not one byte up in first
+   paint; the build is the proof (`npm run build`, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and
+   `tests/build/generationWorkerLazy.test.js`, the figures beside the lane's).
+
 ## THE CURE BUILDER (added by VEIL-33, the lane's writer from 13:07 UTC; WHERE THIS DIFFERS FROM BELOW, THIS GOVERNS)
 - WHERE YOU WORK: worktree `/home/user/wt/r5c`, branch `v33-r5cure` (local): the lane's tip 2e0cfa1be (unit (viii) merged; 212
   `0352a5028544cce0…`) with the instruments merged (f8d8ea6e3, from `lane/veil-33-2026-11-22-r5recent-wip` at 69ccb5498: the plant
