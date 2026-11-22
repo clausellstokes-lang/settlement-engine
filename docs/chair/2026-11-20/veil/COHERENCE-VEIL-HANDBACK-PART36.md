@@ -34,7 +34,12 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   212 restates three of its four functions; the TRAD-4 pin's re-cut. RULED 36.3 (E124): doors-3's section is its base. Built after
   "R4-IDS MERGED", on 36.3's four conditions.
 - BRANCHES: `lane/veil-35-2026-11-22` (this file). No pull request.
-- NEXT STEP IN ONE LINE: at the chair's "TIP <commit>": 212's diff read, the -wip cut, part one merged in, part two re-stamped, R4I-SQL seated.
+- THE TIP (the chair 20:40): af708f2fd (`lane/veil-33-2026-11-22`; R5-RECENT MERGED at 0d9ec0113); 212 `ff20ed89…`: its DIFF read
+  (+14 lines, `_gallery_veil_withhold_always`: `recentConflict` and its `pressureSentence` copy; the registry's two rows): nothing
+  of it touches the re-key. `lane/veil-35-2026-11-22-r4ids-wip` cut there (worktree `/home/user/wt/r4i35`), part one merged
+  (08081ffdc, no conflict), pushed. Part two re-stamped (f1b3726e1: the chair's resolve arm; chain A's overlap kept to ruling 53's six
+  sites). BUILDER R4I-SQL SEATED after 20:43 (212, rollback, registry only; reads 212 and the registry whole first). R4I-PAGE after it.
+- NEXT STEP IN ONE LINE: R4I-SQL's diff read whole with 212 beside it; then R4I-PAGE; then the proofs and "TIP? R4-IDS <commit>".
 
 ## 2. RULINGS SINCE PART 35 (chain B's, numbered 36.n so they never collide with chain A's; the eighth chair's; each vetoable by the owner)
 36.1 THE CHAIR, 19:32 UTC: DO NOT CUT FROM 5e0a584b6: R5-RECENT's second half (806217e88) is being proved by VEIL-33; the chair sends
@@ -44,6 +49,11 @@ branch (never the reverse) and E116's five steps before the "TIP?".
 36.2 THE CHAIR, 19:34 and 20:09 UTC: part one in at 24a6f7ef5 (read both test files whole before building on them); the cure is
      proved on the lane by the plants and the re-key's arms; THE LIT WITNESS re-run where a lit tree exists (the brief says how);
      the brief says where the one salt comes from given the catalogue's rule.
+36.4 THE CHAIR, 20:40 UTC: TIP af708f2fd. The salt ACCEPTED as stated (one `gen_random_uuid()` a call in `_gallery_veil`, never
+     shipped; the twin's one draw a projection; the catalogue read as "a drawer and its callers' closure are VOLATILE"), ON ONE
+     CONDITION: an arm shows two reads of one place share NO served person id AND every reference inside ONE read still resolves
+     (cards, ties, relations, the import's clone rows), server and twin. Chain A (R5-DESC) builds from the same tip; whichever is
+     proved first asks "TIP?" first.
 36.3 THE CHAIR, 20:15 UTC (E124), on this seat's IMPORT-DOOR line, RULED AS RECOMMENDED: IMPORT-DOOR TAKES DOORS-3's VEIL-DOORS SECTION
      AS ITS BASE (the doors' merge pulled forward into it): each of `_gallery_public_tile_rows`, `get_gallery_map`, `get_unlisted_map`
      restated ONCE in 212's final text; `import_gallery_map` restated as the brief says; the two one-line `import_gallery_dossier`
