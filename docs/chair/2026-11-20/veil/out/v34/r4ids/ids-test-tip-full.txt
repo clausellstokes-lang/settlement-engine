@@ -1,0 +1,306 @@
+[gate-tail] start:  19:27:03 up  3:18,  0 user,  load average: 1.25, 2.00, 3.15 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4i
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js (9 tests | 3 failed) 52235ms
+     × (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read 102ms
+     × (2) RED BY DESIGN: VR46's five teeth over every served read, the served payload against its reference (the gallery's twin; the link's second read) modulo the read's bijection (personIdBijection.shared.mjs) 3392ms
+     × (3) RED BY DESIGN, STOP 1: every person reference inside a card's own ties follows the re-key (no stored id; the twin's person by the bijection) 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read
+AssertionError: expected [ …(72) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false gallery: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=false gallery: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=false gallery: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=false gallery: $marker{key} = npc_smugglers_den",
++   "plant new marked dm=false gallery: $marker{key} = npc_power_thieves_guild",
++   "plant new marked dm=false link: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=false link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=false link: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=false link: $marker{key} = npc_smugglers_den",
++   "plant new marked dm=false link: $marker{key} = npc_power_thieves_guild",
++   "plant new marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=true gallery: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=true gallery: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=true gallery: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=true gallery: $marker{key} = npc_smugglers_den",
++   "plant new marked dm=true gallery: $marker{key} = npc_power_thieves_guild",
++   "plant new marked dm=true link: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=true link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=true link: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=true link: $marker{key} = npc_smugglers_den",
++   "plant new marked dm=true link: $marker{key} = npc_power_thieves_guild",
++   "plant new marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++   "plant new unmarked dm=false link: npcs[0].id = npc_power_thieves_guild",
++   "plant new unmarked dm=false link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new unmarked dm=false link: relationships[0].from = npc_power_thieves_guild",
++   "plant new unmarked dm=false link: $marker{key} = npc_smugglers_den",
++   "plant new unmarked dm=false link: $marker{key} = npc_power_thieves_guild",
++   "plant new unmarked dm=true link: npcs[0].id = npc_power_thieves_guild",
++   "plant new unmarked dm=true link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new unmarked dm=true link: relationships[0].from = npc_power_thieves_guild",
++   "plant new unmarked dm=true link: $marker{key} = npc_smugglers_den",
++   "plant new unmarked dm=true link: $marker{key} = npc_power_thieves_guild",
++   "plant master marked dm=false gallery: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=false gallery: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=false gallery: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=false gallery: $marker{key} = npc_smugglers_den",
++   "plant master marked dm=false gallery: $marker{key} = npc_power_thieves_guild",
++   "plant master marked dm=false link: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=false link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=false link: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=false link: $marker{key} = npc_smugglers_den",
++   "plant master marked dm=false link: $marker{key} = npc_power_thieves_guild",
++   "plant master marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=true gallery: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=true gallery: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=true gallery: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=true gallery: $marker{key} = npc_smugglers_den",
++   "plant master marked dm=true gallery: $marker{key} = npc_power_thieves_guild",
++   "plant master marked dm=true link: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=true link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=true link: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=true link: $marker{key} = npc_smugglers_den",
++   "plant master marked dm=true link: $marker{key} = npc_power_thieves_guild",
++   "plant master marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master unmarked dm=false link: npcs[0].id = npc_power_thieves_guild",
++   "plant master unmarked dm=false link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master unmarked dm=false link: relationships[0].from = npc_power_thieves_guild",
++   "plant master unmarked dm=false link: $marker{key} = npc_smugglers_den",
++   "plant master unmarked dm=false link: $marker{key} = npc_power_thieves_guild",
++   "plant master unmarked dm=true link: npcs[0].id = npc_power_thieves_guild",
++   "plant master unmarked dm=true link: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master unmarked dm=true link: relationships[0].from = npc_power_thieves_guild",
++   "plant master unmarked dm=true link: $marker{key} = npc_smugglers_den",
++   "plant master unmarked dm=true link: $marker{key} = npc_power_thieves_guild",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:210:17
+    208|       }
+    209|     }
+    210|     expect(bad).toEqual([]);
+       |                 ^
+    211|   });
+    212|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (2) RED BY DESIGN: VR46's five teeth over every served read, the served payload against its reference (the gallery's twin; the link's second read) modulo the read's bijection (personIdBijection.shared.mjs)
+AssertionError: expected [ …(144) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new marked dm=false gallery: (v) two reads share 3 person ids",
++   "plant new marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new marked dm=false link: (v) two reads share 3 person ids",
++   "plant new marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 14: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new marked dm=true gallery: (v) two reads share 3 person ids",
++   "plant new marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new marked dm=true link: (v) two reads share 3 person ids",
++   "plant new unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new unmarked dm=false gallery: (v) two reads share 4 person ids",
++   "plant new unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new unmarked dm=false link: (v) two reads share 3 person ids",
++   "plant new unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 18: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new unmarked dm=true gallery: (v) two reads share 4 person ids",
++   "plant new unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant new unmarked dm=true link: (v) two reads share 3 person ids",
++   "plant new shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new shown dm=false gallery: (v) two reads share 4 person ids",
++   "plant new shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new shown dm=false link: (v) two reads share 4 person ids",
++   "plant new shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 18: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new shown dm=true gallery: (v) two reads share 4 person ids",
++   "plant new shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant new shown dm=true link: (v) two reads share 4 person ids",
++   "plant master marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master marked dm=false gallery: (v) two reads share 3 person ids",
++   "plant master marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master marked dm=false link: (v) two reads share 3 person ids",
++   "plant master marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 16: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master marked dm=true gallery: (v) two reads share 3 person ids",
++   "plant master marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master marked dm=true link: (v) two reads share 3 person ids",
++   "plant master unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master unmarked dm=false gallery: (v) two reads share 4 person ids",
++   "plant master unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master unmarked dm=false link: (v) two reads share 3 person ids",
++   "plant master unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 21: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master unmarked dm=true gallery: (v) two reads share 4 person ids",
++   "plant master unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, 90001, npc.bo || stored ids served 11: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = 90001",
++   "plant master unmarked dm=true link: (v) two reads share 3 person ids",
++   "plant master shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master shown dm=false gallery: (v) two reads share 4 person ids",
++   "plant master shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master shown dm=false link: (v) two reads share 4 person ids",
++   "plant master shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 20: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master shown dm=true gallery: (v) two reads share 4 person ids",
++   "plant master shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_power_thieves_guild, npc_smugglers_den, 90001 || stored ids served 15: [0].npcs[0].id = npc_power_thieves_guild; [0].npcs[1].id = npc_smugglers_den",
++   "plant master shown dm=true link: (v) two reads share 4 person ids",
++   "town-infiltrated-0-12 new marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new marked dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new marked dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 146: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new marked dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new marked dm=true link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new unmarked dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new unmarked dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 150: [0].npcs[0].id = npc_town_council; [0].npcs[0].goal.intent.long.target.id = npc_tanner_established",
++   "town-infiltrated-0-12 new unmarked dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new unmarked dm=true link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new shown dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new shown dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 150: [0].npcs[0].id = npc_town_council; [0].npcs[0].goal.intent.long.target.id = npc_tanner_established",
++   "town-infiltrated-0-12 new shown dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 new shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 new shown dm=true link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master marked dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master marked dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 155: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master marked dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master marked dm=true link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master unmarked dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master unmarked dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 180: [0].npcs[0].id = npc_town_council; [0].npcs[0].goal.intent.long.target.id = npc_tanner_established",
++   "town-infiltrated-0-12 master unmarked dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master unmarked dm=true link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master shown dm=false gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master shown dm=false link: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 159: [0].npcs[0].id = npc_town_council; [0].npcs[0].goal.intent.long.target.id = npc_tanner_established",
++   "town-infiltrated-0-12 master shown dm=true gallery: (v) two reads share 30 person ids",
++   "town-infiltrated-0-12 master shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_town_council, npc_barracks, npc_veiled_d84c18b8fd78c83a || stored ids served 128: [0].npcs[0].id = npc_town_council; [0].npcs[1].id = npc_barracks",
++   "town-infiltrated-0-12 master shown dm=true link: (v) two reads share 30 person ids",
++   "city-none-1-113 new marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new marked dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new marked dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 new marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 352: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 new marked dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new marked dm=true link: (v) two reads share 75 person ids",
++   "city-none-1-113 new unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new unmarked dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new unmarked dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 new unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 355: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 new unmarked dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new unmarked dm=true link: (v) two reads share 75 person ids",
++   "city-none-1-113 new shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new shown dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new shown dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 new shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 354: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 new shown dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 new shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 new shown dm=true link: (v) two reads share 75 person ids",
++   "city-none-1-113 master marked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master marked dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master marked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master marked dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 master marked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 440: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 master marked dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master marked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master marked dm=true link: (v) two reads share 75 person ids",
++   "city-none-1-113 master unmarked dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master unmarked dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master unmarked dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master unmarked dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 master unmarked dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 443: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 master unmarked dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master unmarked dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master unmarked dm=true link: (v) two reads share 75 person ids",
++   "city-none-1-113 master shown dm=false gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master shown dm=false gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master shown dm=false link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master shown dm=false link: (v) two reads share 75 person ids",
++   "city-none-1-113 master shown dm=true gallery: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 442: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[0].goal.intent.short.target.id = npc_mint_official",
++   "city-none-1-113 master shown dm=true gallery: (v) two reads share 75 person ids",
++   "city-none-1-113 master shown dm=true link: (the equality does not hold on the served payload itself) | (v) the second read does not hold modulo the bijection | (v) two reads share person ids: npc_merchant_guilds_15_40, npc_garrison, npc_craft_guilds_30_80 || stored ids served 297: [0].npcs[0].id = npc_merchant_guilds_15_40; [0].npcs[1].id = npc_garrison",
++   "city-none-1-113 master shown dm=true link: (v) two reads share 75 person ids",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:223:17
+    221|       if (x.again) { const shared = readsDiffer(x.doc, x.again); if (s…
+    222|     }
+    223|     expect(bad).toEqual([]);
+       |                 ^
+    224|   });
+    225|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (3) RED BY DESIGN, STOP 1: every person reference inside a card's own ties follows the re-key (no stored id; the twin's person by the bijection)
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=true gallery: npcs[2].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new marked dm=true gallery: npcs[2].relationships[0].to = 90001 (a stored id)",
++   "plant new unmarked dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new unmarked dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant new shown dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new shown dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant master marked dm=true gallery: npcs[2].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master marked dm=true gallery: npcs[2].relationships[0].to = 90001 (a stored id)",
++   "plant master unmarked dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master unmarked dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant master shown dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master shown dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:243:17
+    241|     }
+    242|     expect(judged, 'a card\'s own tie is served somewhere (else STOP 1…
+    243|     expect(bad).toEqual([]);
+       |                 ^
+    244|   });
+    245|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  19:27:04
+   Duration  52.51s (transform 3.70s, setup 35ms, import 116ms, tests 52.24s, environment 0ms)
+
+[gate-tail] end:  19:27:57 up  3:19,  0 user,  load average: 1.10, 1.83, 3.02

@@ -1,0 +1,44 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11014 after 50 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (3) RED BY DESIGN, STOP 1: every person reference inside a card's own ties follows the re-key (no stored id; the twin's person by the bijection)
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=true gallery: npcs[2].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new marked dm=true gallery: npcs[2].relationships[0].to = 90001 (a stored id)",
++   "plant new unmarked dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new unmarked dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant new shown dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant new shown dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant master marked dm=true gallery: npcs[2].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master marked dm=true gallery: npcs[2].relationships[0].to = 90001 (a stored id)",
++   "plant master unmarked dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master unmarked dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++   "plant master shown dm=true gallery: npcs[3].relationships[0].from = \"npc.bo\" (a stored id)",
++   "plant master shown dm=true gallery: npcs[3].relationships[0].to = 90001 (a stored id)",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:243:17
+    241|     }
+    242|     expect(judged, 'a card\'s own tie is served somewhere (else STOP 1…
+    243|     expect(bad).toEqual([]);
+       |                 ^
+    244|   });
+    245|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  19:27:04
+   Duration  52.51s (transform 3.70s, setup 35ms, import 116ms, tests 52.24s, environment 0ms)
+
+[gate-tail] end:  19:27:57 up  3:19,  0 user,  load average: 1.10, 1.83, 3.02
+[gate-tail] full log: /tmp/gate-tail.17416.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit=1
