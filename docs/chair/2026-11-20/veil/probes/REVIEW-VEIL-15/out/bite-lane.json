@@ -1,0 +1,244 @@
+{
+ "T": {
+  "A memberships equal pre/post (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "A no secret membership drawn (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "B capture drawn on an unmarked share (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "B capture equals the owner's (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.criminalEffective absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.militaryEffective absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.safetyRatio absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.blackMarketCapture absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.internal absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.military absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.economicGates absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.readiness.score absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served severity absent (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability is a band word alone (unmarked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability tile is a band word alone (unmarked dm=false)": {
+   "n": 24,
+   "bad": 21
+  },
+  "A memberships equal pre/post (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "B capture drawn on an unmarked share (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "B capture equals the owner's (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.criminalEffective absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.militaryEffective absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.safetyRatio absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.blackMarketCapture absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.internal absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.military absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.economicGates absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.readiness.score absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served severity absent (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability is a band word alone (unmarked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability tile is a band word alone (unmarked dm=true)": {
+   "n": 24,
+   "bad": 21
+  },
+  "A memberships equal pre/post (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "A no secret membership drawn (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "B capture absent on a marked share (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.criminalEffective absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.militaryEffective absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.safetyRatio absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.blackMarketCapture absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.internal absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.military absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.economicGates absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.readiness.score absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served severity absent (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability is a band word alone (marked dm=false)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability tile is a band word alone (marked dm=false)": {
+   "n": 24,
+   "bad": 21
+  },
+  "A memberships equal pre/post (marked dm=true)": {
+   "n": 24,
+   "bad": 6
+  },
+  "B capture absent on a marked share (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.criminalEffective absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.compound.militaryEffective absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.safetyRatio absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served economicState.safetyProfile.blackMarketCapture absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.internal absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.scores.military absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.economicGates absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served defenseProfile.readiness.score absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C served severity absent (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability is a band word alone (marked dm=true)": {
+   "n": 24,
+   "bad": 0
+  },
+  "C stability tile is a band word alone (marked dm=true)": {
+   "n": 24,
+   "bad": 21
+  }
+ },
+ "ex": [
+  "C stability tile is a band word alone (unmarked dm=false): rv11-r2-village-none-0-1: tile \"Shaken — nobody trusts those in charge\"",
+  "C stability tile is a band word alone (unmarked dm=true): rv11-r2-village-none-0-1: tile \"Shaken — nobody trusts those in charge\"",
+  "C stability tile is a band word alone (marked dm=false): rv11-r2-village-none-0-1: tile \"Shaken — nobody trusts those in charge\"",
+  "C stability tile is a band word alone (marked dm=true): rv11-r2-village-none-0-1: tile \"Shaken — nobody trusts those in charge\"",
+  "C stability tile is a band word alone (unmarked dm=false): rv11-r2-village-infiltrated-0-2: tile \"Vulnerable (decisions shaped from outside)\"",
+  "C stability tile is a band word alone (unmarked dm=true): rv11-r2-village-infiltrated-0-2: tile \"Vulnerable (decisions shaped from outside)\"",
+  "C stability tile is a band word alone (marked dm=false): rv11-r2-village-infiltrated-0-2: tile \"Vulnerable (decisions shaped from outside)\"",
+  "C stability tile is a band word alone (marked dm=true): rv11-r2-village-infiltrated-0-2: tile \"Vulnerable (decisions shaped from outside)\"",
+  "C stability tile is a band word alone (unmarked dm=false): rv11-r2-village-insurgency-0-3: tile \"Unstable (insurgency contests authority)\"",
+  "C stability tile is a band word alone (unmarked dm=true): rv11-r2-village-insurgency-0-3: tile \"Unstable (insurgency contests authority)\"",
+  "C stability tile is a band word alone (marked dm=false): rv11-r2-village-insurgency-0-3: tile \"Unstable (insurgency contests authority)\"",
+  "C stability tile is a band word alone (marked dm=true): rv11-r2-village-insurgency-0-3: tile \"Unstable (insurgency contests authority)\"",
+  "C stability tile is a band word alone (unmarked dm=false): rv11-r2-village-indebted-0-4: tile \"Strained — the creditors have a say in every decision\"",
+  "C stability tile is a band word alone (unmarked dm=true): rv11-r2-village-indebted-0-4: tile \"Strained — the creditors have a say in every decision\""
+ ]
+}
