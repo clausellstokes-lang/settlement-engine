@@ -9,6 +9,8 @@
  *      seed + the store's DEFAULT_CONFIG (settType capped at village/town — the
  *      anon tier ceiling, owner adjustment: the artifact must be exactly what an
  *      anonymous visitor could forge, so the seed tag doubles as a promise).
+ *      Every birth goes through the create boundary's `birthConfig`, exactly as
+ *      the store's lane does (see birthOnTheButtonsRoad).
  *   2. Generates neighbor settlements, wires a small regional graph, and
  *      advances K REAL one-week ticks through advanceCampaignWorld.
  *   3. Captures, all REAL:
@@ -62,8 +64,21 @@ import { deriveCausalState, compareCausalState } from '../src/domain/causalState
 import { chronicleTimeline } from '../src/domain/display/chronicleTimeline.js';
 import { tickCalendarLabel } from '../src/domain/display/humanizeEngineTokens.js';
 import { DEFAULT_CONFIG } from '../src/store/configSlice.js';
+import { birthConfig, loadGenerationLawPayloads } from '../src/domain/density/densityCreateBoundary.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// ⛔ THE CREATE BOUNDARY'S ASYNC EDGE, AWAITED ONCE, HERE, AT THE SCRIPT'S ENTRY (BRIEF
+// CLOSE-FIXTURE, the chair's ruling E55; written 2026-11-22 08:28 UTC, read from `date -u`).
+// Every birth below goes through `birthConfig`, and a lit living-content law THROWS out of the
+// pipeline when its roster payload was never loaded. `buildRegion` / `analyze` / `buildFixture`
+// are synchronous seams with importers this file does not own (the realm-capture e2e spec and
+// several tests), so the payload is loaded by this module's own evaluation: whoever imports the
+// seams, or runs the CLI, gets an armed seam before the first birth. This is the call the
+// store's lane makes (`settlementGenerateAction.js` awaits `loadGenerationLawPayloads()`, which
+// awaits `loadLivingContentRoster()`). The boundary's "never at module load" fence is about a
+// BUNDLED chunk's startup bytes; a node script is never bundled.
+await loadGenerationLawPayloads();
 
 export const MODULE_PATH = join(__dirname, '..', 'src', 'components', 'home', 'landingFixture.js');
 
@@ -98,6 +113,34 @@ export const storeConfigFor = (settType) => Object.freeze({ ...DEFAULT_CONFIG, s
  */
 export const forgeConfigFor = (settType) => Object.freeze({ ...storeConfigFor(settType), _randomizePriorities: true });
 
+/**
+ * ⭐ THE ONE BIRTH THIS SCRIPT MAKES, ON THE BUTTON'S ROAD (BRIEF CLOSE-FIXTURE, ruling E55).
+ *
+ * The landing's "Forge this exact town" button replays `{ seed, config }` through the store's
+ * generation lane (`src/store/settlementGenerateAction.js :: generateSettlementAction`), and that
+ * lane births THROUGH `birthConfig` with the four Deep-constraints bags beside the config (each
+ * EMPTY for a reader who forces nothing, which is the landing's audience). This script used to
+ * hand the pipeline the bare config: the same town while every law sat dark, and a DIFFERENT
+ * town (economy, power, NPCs, history, arrival, defence, trace) once the seat and fortune laws
+ * were lit (CLOSE-1, `close/measures/LANDING-FIXTURE-PROBE.md`). So every birth here (the town
+ * AND each neighbour) is the store's: the recorded inputs (`storeConfigFor` / `forgeConfigFor`)
+ * stay what the fixture records, and this wraps them. The transport's `engineVersion` stamp is
+ * NOT written: it is a record stamp the lane adds outside the pipeline, never part of the town.
+ * `tests/build/landingFixtureForgeRoad.test.js` holds the two births equal, whole, dark and lit.
+ * @param {Record<string, unknown>} config the recorded generation inputs
+ * @param {string} seed
+ */
+export function birthOnTheButtonsRoad(config, seed) {
+  const born = birthConfig({
+    ...config,
+    _institutionToggles: {},
+    _categoryToggles: {},
+    _goodsToggles: {},
+    _servicesToggles: {},
+  });
+  return generateSettlementPipeline(born, null, { seed, customContent: {} });
+}
+
 // Rival warlike major deities stamped on two neighbors (simulate-religion's
 // pattern) so the region has live faith + conflict pressure to move bands.
 export const DEITIES = Object.freeze([
@@ -125,11 +168,11 @@ export const REGION_EDGES = Object.freeze([
  * @param {{ settType?: string }} [opts]
  */
 export function buildRegion(seed, { settType = DEFAULT_SETT_TYPE } = {}) {
-  const town = generateSettlementPipeline(forgeConfigFor(settType), null, { seed, customContent: {} });
+  const town = birthOnTheButtonsRoad(forgeConfigFor(settType), seed);
   // Neighbors may exceed the cap (the cap binds the FIXTURE town only).
   const nTiers = ['town', 'city', 'town', 'village'];
   const neighbors = nTiers.map((tier, i) => {
-    const s = generateSettlementPipeline({ ...DEFAULT_CONFIG, settType: tier }, null, { seed: `${seed}-n${i}`, customContent: {} });
+    const s = birthOnTheButtonsRoad({ ...DEFAULT_CONFIG, settType: tier }, `${seed}-n${i}`);
     if (i < 2) {
       s.config = { ...s.config, primaryDeityRef: DEITIES[i]._deityRef, primaryDeitySnapshot: DEITIES[i] };
       s.powerStructure = { ...s.powerStructure, publicLegitimacy: { score: 28, label: 'Contested' } };

@@ -11,7 +11,10 @@
  *   (c) KEEP: above Collapsed each siege clause prints as drawn;
  *   (d) low.hook-party: in the towns of the 720 and the 150 whose guard line named "the old families" with no power,
  *       conflict, tension or crisis of the record naming them (the audit's own reading, `lowFamiliesI.mjs`), the printed
- *       guard line names no such party; where the record holds them the drawn line prints as drawn.
+ *       guard line names no such party; where the record holds them the drawn line prints as drawn;
+ *   (g) THE CHAIR'S E88 (2026-11-22): a hook is a LEAD, not the record's party. The differential pin: where the record's only
+ *       families word is inside a stored plot hook, the guard line prints as it prints with no such hook; where a tension's
+ *       sides name the old families, the families' line stands.
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -65,8 +68,22 @@ const FAMILIES_UNHELD_TOWNS = [
   // the 150 (rand-27..41)
   'bar0-hamlet-calm-rand-28', 'bar0-thorp-calm-rand-38', 'bar0-thorp-calm-rand-39', 'bar0-village-famine-rand-38', 'bar0-village-famine-rand-39',
 ];
-/** THE AUDIT'S READING, verbatim (`lowFamiliesI.mjs`: the party's key against the record's powers, conflicts, tensions, crisis). @param {any} rec */
-const familiesHeld = (rec) => /famil|noble|clan|elder/i.test(JSON.stringify([rec.powerStructure?.factions?.map((/** @type {any} */ f) => f?.faction), rec.conflicts, rec.history?.currentTensions, rec.stress, rec.powerStructure?.recentConflict]));
+/** THE AUDIT'S KEY, verbatim (`lowFamiliesI.mjs :: KEY['old families']`). */
+const FAMILIES_KEY = /famil|noble|clan|elder/i;
+/**
+ * A tension as the record's party reads it (THE CHAIR'S E88, 2026-11-22): its description, issue, sides and lasting effects;
+ * NOT its `plotHooks`. The audit's premise is "the record holds them as a party", and a hook is a lead, not the record's
+ * party: since point 96's mixed key (`troubleHooksOf.js`) a resource-scarcity hook "A family that cannot pay the prices
+ * asked …" (one household) is kept in five of the audit's towns and the planted Collapsed town, and the whole-tension reading
+ * counted it as the old families. The same fields as `guardLineUnderTheLaw.js :: familiesHeldOf`. @param {any} t
+ */
+const tensionAsParty = (t) => (t && typeof t === 'object' ? { description: t.description, specificIssue: t.specificIssue, factions: t.factions, lastingEffects: t.lastingEffects } : t);
+/** @param {any} rec @param {(t: any) => any} tension */
+const recordRead = (rec, tension) => JSON.stringify([rec.powerStructure?.factions?.map((/** @type {any} */ f) => f?.faction), rec.conflicts, Array.isArray(rec.history?.currentTensions) ? rec.history.currentTensions.map(tension) : rec.history?.currentTensions, rec.stress, rec.powerStructure?.recentConflict]);
+/** THE AUDIT'S READING (`lowFamiliesI.mjs`: the party's key against the record's powers, conflicts, tensions, crisis), each tension read as the record's party (E88). @param {any} rec */
+const familiesHeld = (rec) => FAMILIES_KEY.test(recordRead(rec, tensionAsParty));
+/** The audit's reading with each tension WHOLE, hooks and all (before E88): the families word anywhere in the record's slice. @param {any} rec */
+const familiesWordAnywhere = (rec) => FAMILIES_KEY.test(recordRead(rec, (t) => t));
 
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
@@ -164,5 +181,39 @@ describe('BAR7-ORDER: the siege\'s order clause reads the law band at print; the
     // whole words only: a welder or a clandestine house names no family
     const welder = { history: { currentTensions: ['A welder keeps a clandestine shop'] } };
     expectPresentThenAbsent(lines[0], guardLineUnderTheLaw(lines[0], welder), 'the oldest families', 'whole words only');
+  }, 600_000);
+
+  // THE CHAIR'S E88 (2026-11-22): CURE (B). The six towns whose ONLY families word on the record is the resource-scarcity hook
+  // kept by point 96's mixed key ("A family that cannot pay the prices asked …"), found by the search over the 720 and the
+  // 150 (the hook-only towns whose stored guard line names the old families; arm (d)'s five and arm (f)'s planted town);
+  // the TRUE holder r2r-village-58 (Collapsed), whose population-friction tension's sides are "Old families".
+  const HOOK_ONLY_TOWNS = ['r2r-hamlet-0', 'r2r-hamlet-24', 'r2s-famine-hamlet-3', 'bar0-village-famine-rand-38', 'bar0-village-famine-rand-39', 'bar0-hamlet-under_siege-rand-29'];
+  const PARTY_WORDS = /\bThe old families\b|\bthe oldest families\b/;
+  /** The record with every tension's stored plot hooks taken away, nothing else. @param {any} t */
+  const withoutHooks = (t) => {
+    const bare = structuredClone(t);
+    for (const x of bare.history.currentTensions) if (x && typeof x === 'object') x.plotHooks = [];
+    return bare;
+  };
+  test('(g) a hook is a lead, not the record\'s party: a families word only in a plot hook prints the no-hook line; a tension\'s sides naming the old families keep the families\' line', () => {
+    const failures = collectSeedFailures(HOOK_ONLY_TOWNS, (seed) => {
+      const t = town(seed);
+      const bare = withoutHooks(t);
+      expect(familiesWordAnywhere(t), `${seed}: a families word on the record, hooks and all`).toBe(true);
+      expect(familiesWordAnywhere(bare), `${seed}: the hook is the ONLY families word`).toBe(false);
+      const stored = String(t.economicState.safetyProfile.guardEffectivenessDesc);
+      const printed = String(deriveGuardAssessment(t) ?? '');
+      expect(printed, `${seed}: prints as the place with no such hook prints`).toBe(String(deriveGuardAssessment(bare) ?? ''));
+      expectPresentThenAbsent(stored, printed, /** @type {RegExpExecArray} */ (PARTY_WORDS.exec(stored))[0], `${seed}: stored, then printed`);
+      expect(printed, `${seed}: every place's words`).toMatch(/\bThe neighbours\b|\bthe heads of households\b/);
+    });
+    expectNoSeedFailures(failures);
+    // the other direction: the true holder's sides name the old families, so the families' line stands, with its hooks or without
+    const holder = town('r2r-village-58');
+    expect(lawBandOf(holder)).toBe('collapsed');
+    expect(holder.history.currentTensions.some((/** @type {any} */ x) => /\bold families\b/i.test(JSON.stringify([x?.description, x?.specificIssue, x?.factions]))), 'r2r-village-58: a tension\'s sides name the old families').toBe(true);
+    const printed = String(deriveGuardAssessment(holder) ?? '');
+    expect(printed, 'r2r-village-58: the families\' line').toMatch(PARTY_WORDS);
+    expect(String(deriveGuardAssessment(withoutHooks(holder)) ?? ''), 'r2r-village-58: the hooks do not hold it').toBe(printed);
   }, 600_000);
 });

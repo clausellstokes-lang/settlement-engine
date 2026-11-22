@@ -1,5 +1,6 @@
 import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
 import { settleArcaneToPractitioners, settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1); TAIL-CONTENT-CLOSE-1
+import { settleSeatHolderToRecord } from './power/factionStanding.js'; // SEAT-10 U6 (E65): the final-record pass
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -203,6 +204,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
   keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
   settleClergyToFinalRoster(finalCtx.settlement?.powerStructure?.factions); // TAIL-POWERS-B-4 (P31 (1)): the margins line reads the final roster
   settleArcaneToPractitioners(finalCtx.settlement?.powerStructure?.factions, finalCtx.settlement); // TAIL-CONTENT-CLOSE-1: practitioners named only where one works magic
+  settleSeatHolderToRecord(finalCtx.settlement); // SEAT-10 U6 (E65): the holder known only on the final record (R2) holds the office in its rows; before withConflictRelations reads them
   // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
   if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
   if (typeof options.onComplete === 'function') {

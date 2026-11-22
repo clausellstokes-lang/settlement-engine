@@ -21,6 +21,18 @@ THE CHAIR, 04:51 UTC (the chair's decision E32):
 - THE VEIL: `history.age` on every shared projection and under the widest veil is the unit's red-first, EXECUTED,
   before anything else is built.
 
+## FORTUNE-7'S NOTES BEFORE THE CUT (2026-11-22 08:1x UTC)
+
+- THE SIX AGES ARE RE-MEASURED AND UNCHANGED (`measures/lasting/AGES.md`, at f13f31820, dark and lit, 900 births each):
+  thorp 269, hamlet 108, village 225, town 276, city 441, metropolis 731. The law moves no age.
+- THE VEIL AS A MEASURE (`measures/lasting/VEIL.md`): `history.age` and `history.founding.age` are served unchanged on all
+  eleven shared projections, the widest veil included (156 of 156 births). Step 1's TEST is still the unit's red-first.
+  Model the widest veil on `measures/lasting/veil-probe.mjs :: widestOf`: groupings, class switches, every institution
+  card AND every card's fields, plus the stored-delta path (`projectShareVeil` over `writeShareVeil`).
+- A scratch plant of step 2 (`measures/lasting/draft-pages.mjs`, plant described in `measures/sentences/LASTING-DRAFT.md`)
+  credited 46 places of 900 (43 lasting only, 3 both), as BANDS.md state D. So `history.age` and `tier` are both on the
+  record at the assembly step's tail, where `settleMeritsOfRule` runs.
+
 ## THE ORDER OF WORK (red first at each step)
 
 1. THE VEIL PROOF, before any merit code. Write a test that births places at every size under law 2 and proves that

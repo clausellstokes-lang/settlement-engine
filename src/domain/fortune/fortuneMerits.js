@@ -7,7 +7,11 @@
  * today about its ruler earns standing on a merit that claims an OUTCOME, read from the born record:
  *   A CATASTROPHE WEATHERED WITHIN A GENERATION — a `historicalEvents[]` entry of the law's catastrophe grade, at most
  *   `weatheredWithinYears` ago, whose kind names no tension of today, and that no legacy annotation calls unresolved
- *   (condition 4: read by the legacy generator's own list, `src/data/legacyUnresolvedWordings.js`).
+ *   (condition 4: read by the legacy generator's own list, `src/data/legacyUnresolvedWordings.js`);
+ *   A PLACE THAT HAS LASTED (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC) — its `history.age` at or
+ *   above `lastingAgeBySize` of its own size, the size read from the record's `tier` alone (no tier, no lasting).
+ * Each merit is COMPUTED from the record, never rolled: no draw is added and no draw count moves. Two merits are two
+ * reasons at the Endorsed guard.
  * It adds `meritPoints`, only upward; Endorsed never stands on fewer than `endorsedMinReasons` reasons.
  *
  * ⛔ A MERIT READS ONLY WHAT EVERY SHARED READ SERVES (the chair's rulings of 19:33 and 19:38 UTC), so the score is the
@@ -16,7 +20,9 @@
  * (`display/galleryVeil.js :: CARD_KINDS` — event: `name`, `templateType`, `yearsAgo`, `severity`; tension: `type`;
  * `isHideable` refuses a floor field and every card address but a hideable house's), or a key no rule of
  * `display/publicSafe.js :: toPublicSafe` strips (`history.legacyAnnotations[]`: `eventName`, `yearsAgo`,
- * `annotation`; the standing's `score` and `breakdown`). NEVER the capture rung (DM-only: `publicVeilPass` drops it),
+ * `annotation`; the standing's `score` and `breakdown`), or the settlement's floor (`galleryVeil.js :: SETTLEMENT_FLOOR`:
+ * `tier`, `config`) and `history.age`, which every shared read serves unchanged (tests/domain/fortuneLastingVeil.test.js,
+ * the widest veil included). NEVER the capture rung (DM-only: `publicVeilPass` drops it),
  * never which power governs (its name, kind or house), never a card's traits or memberships (they ride per row by the
  * veil bit), never a fact about crime. The principled-ruler merit and the seat-match were REMOVED on those rulings.
  * Held by tests/generators/fortuneLawMerits.test.js (the owner's record and its shared projection: the same merits).
@@ -43,8 +49,10 @@ import { UNRESOLVED_LEGACY_WORDINGS } from '../../data/legacyUnresolvedWordings.
 
 const STANDING = FORTUNE_LAW_TUNING.standing;
 
-/** The merits, in the fixed order `meritsOf` names them (today one). @type {ReadonlyArray<'weathered'>} */
-export const MERIT_NAMES = Object.freeze(/** @type {const} */ (['weathered']));
+/** The merits, in the fixed order `meritsOf` names them. @type {readonly ['weathered', 'lasting']} */
+export const MERIT_NAMES = Object.freeze(/** @type {const} */ (['weathered', 'lasting']));
+
+/** @typedef {typeof MERIT_NAMES[number]} MeritName */
 
 /** @typedef {Record<string, unknown>} Bag */
 /**
@@ -58,9 +66,9 @@ export const MERIT_NAMES = Object.freeze(/** @type {const} */ (['weathered']));
  *   governanceFractured: boolean }} Band
  */
 /**
- * The record as the merits read it: its law (`config`), its history and its standing.
- * @typedef {{ config?: unknown, _config?: unknown, institutions?: unknown,
- *   history?: { historicalEvents?: unknown, currentTensions?: unknown, legacyAnnotations?: unknown } | null,
+ * The record as the merits read it: its law (`config`), its size, its history and its standing.
+ * @typedef {{ config?: unknown, _config?: unknown, institutions?: unknown, tier?: unknown,
+ *   history?: { historicalEvents?: unknown, currentTensions?: unknown, legacyAnnotations?: unknown, age?: unknown } | null,
  *   powerStructure?: ({ publicLegitimacy?: unknown, criminalCaptureState?: unknown } & Bag) | null }} MeritRecord
  */
 /**
@@ -112,6 +120,29 @@ export function weatheredCatastrophe(settlement) {
 }
 
 /**
+ * The size the record carries, as the lasting merit reads it: its `tier` ALONE (the chair's ruling E68 of 2026-11-22:
+ * no law-2 record needs a `config.settType` fallback). `tier` is on every shared read (`galleryVeil.js ::
+ * SETTLEMENT_FLOOR`). Null when it is not a string: FAIL CLOSED, a record with no `tier` credits no lasting.
+ * @param {MeritRecord|null|undefined} settlement @returns {string|null}
+ */
+export function lastingSizeOf(settlement) {
+  const size = settlement?.tier;
+  return typeof size === 'string' ? size : null;
+}
+
+/**
+ * Has the place lasted? Its `history.age` at or above the law's lasting age for its own size. A size the table does not
+ * name, or an age that is not a number, has not.
+ * @param {MeritRecord|null|undefined} settlement @returns {boolean}
+ */
+export function hasLasted(settlement) {
+  const age = settlement?.history?.age;
+  const size = lastingSizeOf(settlement);
+  const byAge = /** @type {Readonly<Record<string, number>>} */ (STANDING.lastingAgeBySize);
+  return typeof age === 'number' && size !== null && Object.hasOwn(byAge, size) && age >= byAge[size];
+}
+
+/**
  * The birth's own score under a stored legitimacy: the score less the merits it carries.
  * @param {Legitimacy} legitimacy @returns {number}
  */
@@ -120,14 +151,18 @@ const baseScoreOf = (legitimacy) => legitimacy.score - (legitimacy.breakdown?.me
 /**
  * The merits this record counts, by name, in the fixed order: none outside the fortune law, none below the Tolerated
  * cut (on the birth's own score), none with trouble of today about the ruler.
- * @param {MeritRecord|null|undefined} settlement @returns {Array<'weathered'>}
+ * @param {MeritRecord|null|undefined} settlement @returns {MeritName[]}
  */
 export function meritsOf(settlement) {
   if (!settlement || !isSizeRelativeFortune(settlement)) return [];
   const legitimacy = settlement.powerStructure?.publicLegitimacy;
   if (!isLegitimacy(legitimacy)) return [];
   if (baseScoreOf(legitimacy) < LEGITIMACY_CUTS.tolerated || rulerTroubled(settlement)) return [];
-  return weatheredCatastrophe(settlement) ? [MERIT_NAMES[0]] : [];
+  /** @type {MeritName[]} */
+  const names = [];
+  if (weatheredCatastrophe(settlement)) names.push(MERIT_NAMES[0]);
+  if (hasLasted(settlement)) names.push(MERIT_NAMES[1]);
+  return names;
 }
 
 /**

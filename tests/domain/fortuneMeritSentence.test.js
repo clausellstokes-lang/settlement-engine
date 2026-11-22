@@ -138,11 +138,12 @@ describe('U5b (a): the merit\'s sentence, directly after the standing', () => {
   it('every one of the six merited places prints the keyed pick, once, right after the standing; nothing else moved', () => {
     expect(POOL).toBeTruthy();
     const failures = collectSeedFailures(SIX, ({ seed, record }) => {
-      expect(meritsOf(record), seed).toEqual(['weathered']);
+      expect(meritsOf(record).includes('weathered'), seed).toBe(true);
       const ev = /** @type {any} */ (weatheredCatastrophe(record));
       const picked = pickVariantMixed(POOL, `${String(record.name).trim()}::${String(ev.name).trim()}::${ev.yearsAgo}`);
       const sentence = /** @type {string} */ (fillOf(POOL, TIMES, record, picked));
-      const merited = paragraphOf(record);
+      // the first merit's own paragraph: the second merit's input taken away (U7b prints LASTING's line after this one)
+      const merited = paragraphOf({ ...record, history: { ...record.history, age: undefined } });
       const law1 = paragraphOf(withLaw(record, 1));
       const bare = paragraphOf({ ...record, powerStructure: { ...record.powerStructure, publicLegitimacy: null } });
       expect(countOf(merited, sentence), `${seed}: ${merited}`).toBe(1);

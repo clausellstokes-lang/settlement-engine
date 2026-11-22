@@ -368,7 +368,7 @@ const ROUTE_BASELINE = Object.freeze({
   // `proseFontSize`, the error box's and the regenerate overlay's `chromeFontSize` (-3) and gains the engine lines'
   // `proseFontSize` (+1): `floored` -2 on /create, /settlements, /gallery, 620 -> 618, 863 -> 861, 665 -> 663; `bare`
   // unmoved; re-measured by this census at the lane's tree.
-  '/create':                { roots: 1, files: 162, floored: 618, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  '/create':                { roots: 1, files: 162, floored: 619, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -425,7 +425,7 @@ const ROUTE_BASELINE = Object.freeze({
   // unmoved; re-measured by this census at the build's tip.
   // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 864 -> 863, re-measured by this census at the merged tree.
   // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 863 -> 862, re-measured by this census at the merged tree.
-  '/settlements':           { roots: 1, files: 206, floored: 861, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 862, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -463,7 +463,7 @@ const ROUTE_BASELINE = Object.freeze({
   // unmoved; re-measured by this census at the build's tip.
   // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 666 -> 665, re-measured by this census at the merged tree.
   // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 665 -> 664, re-measured by this census at the merged tree.
-  '/gallery':               { roots: 1, files: 151, floored: 663, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 664, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
