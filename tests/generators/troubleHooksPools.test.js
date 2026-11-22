@@ -31,6 +31,11 @@
  * key>))` (`proseHash.js :: mix32`), here and in arms 3 and 3e (`rank` below). Red at 6bb213151 (the leaf unchanged; 1 failed):
  *   3e. on a fixed record (hxd-city-0) each tension of these kinds stores the top three of its admitted lines by the mixed
  *       key, computed from the composed pool and `factsOf`, and `troubleHooksOf` returns the same.
+ *
+ * HOOKS-POOL-2 (PAGE-12's brief; the chair's rulings of 06:00 and 06:07 UTC 2026-11-22): crime_wave and guild_conflict
+ * 16 -> 28, the twelve ruled lines of each appended to `TROUBLE_HOOKS[kind]` (arm 1's ruled counts; red at 1b1b0eb2d).
+ * Arm 1c reads the snapshot as the pool's HEAD: each composed pool's first rows equal its pool at 7903d6bb7 (so every
+ * line id the ledger notes is unmoved), and any rows after them are the last rows of `TROUBLE_HOOKS[kind]`, in order.
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -58,7 +63,7 @@ const POOLS = /** @type {Record<string, Array<{ text: string, needs?: string[], 
 /** Each kind's pool as it stood at 7903d6bb7, written by `tests/fixtures/troubleHooksPoolsSnapshot.mjs` (never typed). */
 const SNAPSHOT = JSON.parse(readFileSync(new URL('../fixtures/trouble-hooks-pools.snapshot.json', import.meta.url), 'utf8'));
 const RULED = Object.freeze({
-  crime_wave: 16, guild_conflict: 16, resource_scarcity: 9, external_threat: 9,
+  crime_wave: 28, guild_conflict: 28, resource_scarcity: 9, external_threat: 9, // HOOKS-POOL-2: crime_wave and guild_conflict 16 -> 28
   succession_crisis: 9, outside_debt: 9, legitimacy_crisis: 8, corruption_scandal: 9, // HOOKS-FINISH (iv): legitimacy 9 struck
 });
 const KINDS = Object.keys(RULED);
@@ -105,11 +110,15 @@ describe('HOOKS-BUILD arm 1: the pools are total', () => {
 });
 
 describe('HOOKS-CURES A: a line the timeline still draws has one home', () => {
-  test("arm 1c: each kind's composed pool equals its pool as it stood at 7903d6bb7, element for element and in order", () => {
+  test("arm 1c: each kind's composed pool BEGINS with its pool as it stood at 7903d6bb7, element for element and in order (no old line removed, none spliced among the old ids), and every row after that head is one of TROUBLE_HOOKS[kind]'s last rows, appended in order", () => {
     expect(SNAPSHOT.from).toBe('7903d6bb7');
     expect(Object.keys(TABLE)).toEqual(Object.keys(SNAPSHOT.pools));
     for (const kind of Object.keys(SNAPSHOT.pools)) {
-      expect(typeof troubleHookPool === 'function' ? troubleHookPool(kind) : null, kind).toStrictEqual(SNAPSHOT.pools[kind]);
+      const pool = typeof troubleHookPool === 'function' ? troubleHookPool(kind) : [];
+      const head = SNAPSHOT.pools[kind].length;
+      expect(pool.slice(0, head), kind).toStrictEqual(SNAPSHOT.pools[kind]);
+      // HOOKS-POOL-2: a line added after the snapshot is appended to TROUBLE_HOOKS[kind], never spliced among the old ids
+      expect(pool.slice(head), `${kind} appended`).toStrictEqual(TABLE[kind].slice(TABLE[kind].length - (pool.length - head)));
     }
   });
   test("arm 1d: no line of TROUBLE_HOOKS is a timeline template's plotHooks line (the chair's rule 2, a literal has one home)", () => {

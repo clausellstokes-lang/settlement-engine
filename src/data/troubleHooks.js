@@ -9,7 +9,8 @@
  *
  * The words are the chair's ruled lines, VETOABLE (the owner's): `docs/chair/2026-11-20/content/page/lines/TROUBLE-LINES-2.md`
  * (lines 1-12 of crime_wave and guild_conflict, all 9 of the other six) and `TROUBLE-LINES-3.md` (lines 13-16 of the two;
- * guild_conflict 15 as the chair reworded it at 17:00). Each row's `needs` / `excludes` is the atom its table row names
+ * guild_conflict 15 as the chair reworded it at 17:00), and HOOKS-POOL-2 (`briefs/HOOKS-POOL-2.md`: lines 17-28 of the two, the
+ * chair's 06:00 and 06:07 UTC 2026-11-22, five lines replaced by its ruling E51 of 08:02; crime_wave 16 -> 28, guild_conflict 16 -> 28). Each row's `needs` / `excludes` is the atom its table row names
  * (`!atom` there is `excludes` here), every one an atom `factVocabulary.js` already holds; `needs: []` needs nothing.
  * Lines 1-3 of each kind are today's three stored hooks (guild_conflict 3 in its "both sides" spelling; external_threat 1-2
  * reworded by the chair's rulings of 20:03 UTC, with crime_wave 7, guild_conflict 14, external_threat 6 and
@@ -44,6 +45,19 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: "An old woman's savings have gone from under her floor, and only her family knew where they were kept", needs: [] },
     { text: 'A pedlar is selling goods cheap that several households swear were taken from them', needs: [] },
     { text: 'Chalk marks have appeared on several doors overnight, and the households behind them are frightened', needs: [] },
+    // HOOKS-POOL-2 (the chair's 06:00 and 06:07 UTC 2026-11-22; E51, 08:02): lines 17-28
+    { text: "A household's strongbox was opened without being forced, and only three people held a key", needs: [] },
+    { text: 'Things taken without asking keep coming back a day later, and one household has started to wonder what they were used for', needs: [] },
+    { text: 'A child has been seen climbing in through windows at night, and a family wants him caught before anyone else does', needs: [] },
+    { text: 'A householder has set a trap for the thief, and wants someone to sit up with him tonight', needs: [] },
+    { text: "A stolen heirloom has turned up for sale a day's travel away, and its owner wants it back quietly", needs: [] },
+    { text: 'A woman swears she saw her own stolen cloak on a stranger leaving the place at dawn', needs: [] },
+    { text: 'A family has taken in a lodger since the thefts began, and the neighbours have noticed', needs: [] },
+    { text: "A family's coin box grows lighter a little at a time, and they suspect one of the three people who come and go from the house", needs: [] },
+    { text: 'A hound that barked every night has been poisoned, and the household expects the thieves tonight', needs: [] },
+    { text: 'Two neighbours accuse each other of the same theft, and one of them is lying', needs: [] },
+    { text: 'A cart thief left his own horse behind, and someone will come looking for it', needs: [] },
+    { text: 'A reward has been offered for the thief, and a stranger claims to know where the stolen goods are kept', needs: [] },
   ]),
   guild_conflict: Object.freeze([
     { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market', 'guild'] },
@@ -60,6 +74,19 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A craftsman has made goods for a trader who is not allowed to sell them, and wants paying regardless', needs: [] },
     { text: 'A trader at the market has been selling under the agreed price, and a crowd is expected at the stall tomorrow', needs: ['market'] },
     { text: 'A guild master has quietly bought from a trader outside the guild, and someone saw it happen', needs: ['guild'] },
+    // HOOKS-POOL-2 (the chair's 06:00 and 06:07 UTC 2026-11-22; E51, 08:02): lines 17-28
+    { text: 'Both sides of the quarrel have asked to borrow the same cart for the same morning, and its owner will not say whom he promised first', needs: [] },
+    { text: 'A load of raw goods meant for one side was bought out from under it, and the buyer is still in the place', needs: [] },
+    { text: 'A labourer out of work has offered himself to whichever side pays better, and both sides are bidding', needs: [] },
+    { text: 'A household that sided with neither has had its door marked in the night, and wants to know by whom', needs: [] },
+    { text: 'A meeting between the two sides is set for tomorrow, and both want someone neutral in the room', needs: [] },
+    { text: 'An old agreement that settles who may sell what is said to be written down somewhere, and nobody has seen it in years', needs: [] },
+    { text: "A craftsman's best work has been copied and sold more cheaply, and the craftsman can name who did it", needs: [] },
+    { text: "A widow carries on her husband's trade, and both sides want her custom, her tools and her silence", needs: [] },
+    { text: 'Goods from outside are selling well this season, and someone is quietly buying up the stock', needs: [] },
+    { text: 'A guild officer is collecting dues from people who swear they never joined', needs: ['guild'] },
+    { text: 'The guild has called a vote on the quarrel, and a few members have had visitors at night beforehand', needs: ['guild'] },
+    { text: "The weights at one side's market stalls have been found short, and that side swears they were tampered with", needs: ['market'] },
   ]),
   resource_scarcity: Object.freeze([
     { text: 'A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others', needs: [] },
