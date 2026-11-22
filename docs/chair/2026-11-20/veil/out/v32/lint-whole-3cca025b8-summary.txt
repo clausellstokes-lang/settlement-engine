@@ -1,0 +1,24 @@
+      1 tests/lint/chainPrintSites.walker.test.js
+      4 tests/lint/domainAnyCastBaseline.test.js
+      1 tests/lint/factLayers.walker.test.js
+      1 tests/lint/moduleScopeCwdRatchet.test.js
+      1 tests/lint/negativeAssertionAnchor.walker.test.js
+      2 tests/lint/noLegacyFactionReaders.walker.test.js
+      2 tests/lint/observedShapeReaders.walker.test.js
+      1 tests/lint/presumedThings.walker.test.js
+      1 tests/lint/presumptionClasses.walker.test.js
+      1 tests/lint/proseDrawnAnchors.walker.test.js
+      2 tests/lint/proseWiringCensus.walker.test.js
+      1 tests/lint/seedLoopTotality.walker.test.js
+      1 tests/lint/slugifyIdiomBaseline.test.js
+      1 tests/lint/sovereigntyLightingContract.walker.test.js
+      1 tests/lint/styleLaw.walker.test.js
+      1 tests/lint/writerReach.walker.test.js
+ Test Files  16 failed | 206 passed (222)
+      Tests  22 failed | 3242 passed (3264)
+   Start at  06:46:37
+   Duration  867.88s (transform 17.80s, setup 3.99s, import 803.93s, tests 904.29s, environment 24ms)
+
+[gate-tail] end:  07:01:06 up  1:46,  0 user,  load average: 1.10, 1.82, 2.21
+[gate-tail] full log: /tmp/gate-tail.14608.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

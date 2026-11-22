@@ -20,8 +20,11 @@ verified by ls-remote).
 - AT THE TIP 3cca025b8, REPRODUCED BY THIS SEAT (06:04 UTC, pool re-made here 05:22-05:56, every shard rc=0; verify 45 / 0
   differ): GATE-1 4 of 92 at every gated setting, both reads (7 LOWER BY RULE, the same seven); GATE-2 20 of 40 cells red;
   server = twin every cell; non-governing rows against the rule 0 (`out/v32/tell2-table-3cca025b8.txt`). Typecheck 0
-  (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Told to the chair 06:05. The rest of the chain
-  (sv, harnesses, the R3 gate, acceptance, `tests/lint` whole) running.
+  (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Told to the chair 06:05. THE GREEN CHAIN ENDED
+  07:01 (`out/v32/chain1-done.txt`): sv + hand rows + born 0; harnesses 0; the R3 gate 0; acceptance 40 PASS; `tests/lint`
+  WHOLE: 16 files / 22 tests failed of 3,264 = THE SIXTEEN STANDING ONLY (PART 32 2b's twelve + PART 30's four;
+  `out/v32/lint-whole-3cca025b8-summary.txt`). Bytes at the tip (`out/v32/sha256-3cca025b8.txt`): 212 8688ddb6, rollback
+  8cbd7d1c, 211 eface6d0 / ce8474ff: as PART 32 says.
 - THE POOL AND THE GREEN CHAIN (this container only): `/var/tmp/v18/out/v32/chain0.sh` (npm ci 0, ledger ref 0,
   make-instruments, pool.sh to `/var/tmp/v18/t2/pool-t2sig-2`) launched 05:22; `after0.sh` then runs `/var/tmp/v18/out/v32/chain1.sh`
   (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
@@ -31,8 +34,7 @@ verified by ls-remote).
   engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder
   R3-TELL-8, an Agent subagent of this seat, SEATED 05:27 (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` at 5f9f15b94); if this seat stops, its work goes up as
   `lane/veil-32-2026-11-22-r3tell8-wip` unread).
-- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the green chain's done.txt read and one line to the chair with GATE-1 /
-  GATE-2 at the tip; then unit (viii)'s builder from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
+- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): unit (viii)'s builder (in flight; its heavy runs from 07:01) from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
   then "R3 <commit>".
 
 ## 2. RULINGS SINCE PART 32 (numbered on from 85, PART 32's last; the eighth chair's; each vetoable by the owner)
@@ -67,9 +69,14 @@ verified by ls-remote).
     "R3 <commit>" at GATE-1 0 AND GATE-2 0, with IMPORT-DOOR and the LOWER towns; then the lint cure unit (PART 32 2b sorted);
     then PART 30 section 8's list.
 
+87. THE CHAIR, 06:33 UTC (COMMON-EIGHTH 11, every seat): AFTER ANY CHANGE TO A TEST FILE, however small or late (a cure, an
+    anchor, a comment, a re-pointed count), `tests/lint` IS RUN WHOLE before the commit is called green (walkers read the test
+    corpus: a `// anchored:` comment on the assertion's own line or the ONE line above it). Relayed to the (viii) builder 06:33.
+
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 06:33 ruling 87 read; relayed. 07:01 the green chain ended: tests/lint whole = the sixteen standing.
 - 05:23-05:25 212 and the registry read whole. 05:25 `briefs/R3-TELL-8-BRIEF.md` written; PART 33 opened.
