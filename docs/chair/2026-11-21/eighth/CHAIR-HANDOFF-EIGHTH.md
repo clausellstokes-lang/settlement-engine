@@ -102,6 +102,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the criminal houses are both hidden by default); the gap is an owner who opens the reveal switch AND un-hides the
   hooks while a criminal house stays hidden; it is pinned in a test, listed for the veil's seat and the security
   reader, does not hold the trouble lane's landing, and must be closed before the deploy (E27).
+- **THE OWNER'S WORD ON THE ALLOWANCE (2026-11-22; the chair's first command after it read 07:42 UTC), verbatim:** "Nope ignore that
+  you are only at 27% go wild until you run out." It answers the chair's 07:35 warning and its two asks (a fresh chair
+  session; what to do if the allowance runs out). READ AS: the weekly allowance stands at 27%; no slowing, no holding,
+  no fresh session on its account; the fastest pace the rules allow, until the allowance is spent. NOT READ AS a grant
+  of anything that stays his hand (the merge, the deploy, migrations, credentials, signings): E45.
+
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -623,6 +629,27 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   (about 15% of a size's places), one line to the chair. THE MERCHANT ARCHETYPE'S "expect council access in return" on
   a row that HOLDS the council: U6 takes it ONLY as a gate with no new wording; if it needs an authored line it is
   named for the second deploy. `SEAT_CONTESTED_STANDING` unchanged; faults (b) and (c) red first.
+- E45 · FULL PACE BY THE OWNER'S WORD: E43's HOLDS AND DIET END (2026-11-22 07:51 UTC; his word verbatim in section 1). WHAT THE CHAIR
+  DID THE SAME HOUR: (1) THE SIX SEATS TOLD; THE TWO HOLDS LIFTED (PAGE-12's second tranche starts; PAGE-13 reads in
+  and trial-merges on a scratch branch until the line's tip comes). (2) TWO BUILDERS AT ONCE in a seat where their
+  manifests do not touch (COMMON-EIGHTH 12); a waiting seat does not idle. (3) LANDINGS ON THEIR OWN MACHINES, STACKED
+  BEFORE THE ONE BELOW HAS PASSED (this container has 4 cores and one gate fills them). THE BASE FOR THEM: the stack
+  of points 94 to 96 with FOUR test-only cures of the chair's on top: cc2f43aee on b03a31560, pushed as
+  `lane/stack-96-wip-2026-11-22` (the three of E39, and A FOURTH THE CHAIR HAD MISCOUNTED AS RE-TAKEN: the wiring
+  census walker's own literals, THIN 612 to 613 and COVERED 249 to 248: point 94's reworded DS-ECO-11 variant left
+  its pool with ONE grammar; the census's door had said so at 9373b190d; OWED BACK at the state sentences' next unit;
+  the three walkers run on that tree: 117 green). STACK-97 (a child session; `prompts/STACK-97.txt` is the form)
+  merges "SEAT 46339e5c7" on it as POINT 97, runs the whole gate on its own machine and pushes
+  `lane/stack-97-wip-2026-11-22`; fortune follows as point 98 the same way. HOW THE LINE TAKES THEM: when the local
+  gate of points 94 to 96 reports, the line's worktree (b03a31560 and the helper's docs row) takes cc2f43aee by
+  cherry-pick, `tests/lint` whole there, then the push; each later stack's tip is merged `--no-ff` and
+  `git diff --stat <stack tip> <the merge>` MUST SHOW `docs/` ONLY: whatever else differs is gated again before the
+  push. THE RISK TAKEN: a red in a lower stack that needs a change under `src/` voids the gates above it (they are
+  run again). (4) THREE MORE SEATS NOW: FORTUNE-7 (the second merit; beside FORTUNE-6, not after it:
+  `prompts/FORTUNE-7.txt`), PLACE-3 and PEOPLE-3 (their prompts as amended at 04:05). E26's ceiling of six is lifted
+  by his word: NINE seats and the landing machines. THE CHAIR'S OWN CONTEXT IS NOW THE LIMIT: the handoff and the
+  pickup are kept current so that a compaction or a successor loses nothing. (5) UNCHANGED AND SAID AGAIN: the pull
+  request's merge, the deploy, every migration, production credentials and every signing are the owner's hand.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1013,7 +1040,7 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 04:50 UTC after E26 and E30.) SIX SEATS RUN (section 6); six is the ceiling until a landing frees one. THE
+(Rewritten 2026-11-22 04:50 UTC after E26 and E30.) (AMENDED 2026-11-22 07:51 UTC BY E45: the ceiling of six is lifted by the owner's word; PLACE, PEOPLE and FORTUNE-7 are seated at once; the lanes after PEOPLE are seated as their prompts are written.) THE
 FINISH LINE (E30) orders what comes next: AS A SEAT FREES: PLACE (the trade note's cure: `prompts/PLACE-3.txt` as
 amended; source and branch `lane/place-3-2026-11-21`) · PEOPLE (the second half, B3 then B2: `prompts/PEOPLE-3.txt`
 as amended; source and branch `lane/people-3-2026-11-21`) · then, by what an owner reads on a page: STATE SENTENCES
