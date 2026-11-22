@@ -23,6 +23,10 @@
  *   5. THE SELF-CHECK (the chair's E70, item 3): under the seat law `seatHolderFindings` checks the chain's person
  *      against the HOLDER. Red first on the six (a false `seat_outside_governing_faction`); the converse, a person truly
  *      outside the holder's house (the holder's top ladder rung named for the old house's person), still raises it.
+ *   8. THE TONIGHT SHEET (the chair's E81, item 2): on the four of the six whose hooks still list the old house's person,
+ *      the sheet prints NO office word for that person after the transfer; the office word sits on the holder's first.
+ *   9. BOTH SIDES OF U5-STALE BY NAME (the chair's E81, item 1): the hat MOVES (the old holder's dual-hat first loses it,
+ *      the winner's first takes it); a CROWN's sovereign KEEPS it; a council's OWN person (no other house's first) KEEPS it.
  *   6. THE RULER CARD'S CAPTION (the chair's E70, item 4, the chair's wording): "Holds the seat of {form}." on the
  *      holder's card, only where the holder stands apart, never for a veiled holder (then today's card).
  *
@@ -69,7 +73,7 @@ import * as circ from '../../../src/domain/seat/seatCircumstances.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlementChecked } from '../../../src/domain/events/mutate.js';
-import { governingFactionOf } from '../../../src/domain/rulingPower.js';
+import { governingFactionOf, transferRulingPower } from '../../../src/domain/rulingPower.js';
 import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { rankIn } from '../../../src/domain/people/membership.js';
 import { derivePowerStrata, deciderOf, outrankingRivalOf, rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
@@ -386,5 +390,102 @@ describe('6. the holder\'s ruler card says whose seat it holds, never for a veil
     expect(cardsOf(dark), 'law 1: today\'s card').toBe(today(() => cardsOf(dark)));
     // anchored: the same record under the seat law carries the caption (asserted above)
     expectPresentThenAbsent(lit, cardsOf(dark), 'Holds the seat of', 'law 1 names no seat');
+  }, 60_000);
+});
+
+/** Every string of a composed sheet, with its path. */
+const stringsOf = (v, path = 'sheet', out = []) => {
+  if (typeof v === 'string') out.push({ path, text: v });
+  else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) stringsOf(x, `${path}.${k}`, out);
+  return out;
+};
+
+describe('8. the tonight sheet names the old house\'s person by no office word after the transfer', () => {
+  it('the four whose hooks list the old person: the office word sits on the holder\'s first alone', () => {
+    build(true);
+    expectNoSeedFailures(collectSeedFailures([
+      { seed: 'u7p-metropolis-15', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf', word: 'Speaker of the Assembly' },
+      { seed: 'u7p-metropolis-21', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger', word: 'Lord Mayor' },
+      { seed: 'u7p-metropolis-26', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser', word: 'Lord Mayor' },
+      { seed: 'u7p-metropolis-28', oldPerson: 'Josef Frank', person: 'Notburga Weber', word: 'Lord Mayor' },
+    ], ({ seed, oldPerson, person, word }) => {
+      const born = bear('metropolis', seed);
+      const was = composeTonightSheet(born);
+      expect(was.people.find((p) => p.why === 'seat'), `${seed}: before, the seat row is the old house's person in the office`)
+        .toMatchObject({ name: oldPerson, role: word });
+      const sheet = composeTonightSheet(dmTransfer(born, seed, TAKER));
+      // the old person is still on the sheet, as a hook's source (the anchor: the read below is live)
+      expect(sheet.hooks.map((h) => h.source), `${seed}: the old house's person is a hook's source`).toContain(oldPerson);
+      expect(sheet.people.find((p) => p.why === 'seat'), `${seed}: the seat row is the holder's first in the office`)
+        .toMatchObject({ name: person, role: word });
+      // every string of the sheet that carries the office word is the holder's seat row's role, and nothing else
+      expect(stringsOf(sheet).filter((x) => x.text.includes(word)).map((x) => x.path), `${seed}: where the office word prints`)
+        .toEqual([`sheet.people.${sheet.people.findIndex((p) => p.why === 'seat')}.role`]);
+      // the old person's hook as printed: the source's name and the hook's text, no office word
+      const hook = sheet.hooks.find((h) => h.source === oldPerson);
+      expect(Object.keys(hook), `${seed}: a hook prints its text and its source`).toEqual(['text', 'source']);
+      // anchored: the born sheet printed the office word beside the old person (asserted above), so its lacking it now is the transfer's
+      expectPresentThenAbsent(`${was.people.find((p) => p.why === 'seat').name} ${was.people.find((p) => p.why === 'seat').role}`, `${hook.source} ${hook.text}`, word, `${seed}: the old person's line carries no office word`);
+    }), 'the four, the tonight sheet');
+  }, 300_000);
+});
+
+/** A crowned city (Royal Authority) under the seat law, its sovereign and a guild's first: the kept crown's fixture. */
+const crownCity = () => ({
+  name: 'Harrowgate', tier: 'city', config: { _seatLawVersion: 2 },
+  economicState: { prosperity: 'Wealthy', incomeSources: [{ source: 'Market Taxes', percentage: 45 }, { source: 'Guild Fees', percentage: 20 }] },
+  powerStructure: {
+    government: 'Royal Authority', governingName: 'Royal Authority',
+    factions: [
+      { faction: 'Royal Authority', category: 'noble', power: 30, isGoverning: true, modifiers: [] },
+      { faction: 'Merchant Guilds', category: 'economy', power: 28, modifiers: [] },
+      { faction: 'Noble Houses', category: 'noble', power: 22, modifiers: [] },
+    ],
+    factionRelationships: [], publicLegitimacy: { score: 40, label: 'Contested', govMultiplier: 0.8 }, stability: 'Holding', recentConflict: 'None of note.',
+  },
+  npcs: [
+    { id: 'npc_king', name: 'Aldric Vane', role: 'King', title: 'the sovereign', memberships: [{ power: 'Royal Authority', rank: 1, share: 0, veiled: false }, { power: 'Noble Houses', rank: 3, share: 0, veiled: false }] },
+    { id: 'npc_gm', name: 'Corin Marsh', role: 'the guildmaster', title: 'the guildmaster', memberships: [{ power: 'Merchant Guilds', rank: 1, share: 1, veiled: false }] },
+  ],
+});
+
+describe('9. U5-STALE, both sides by name: the hat moves off the old house\'s person, and stays on the office\'s own', () => {
+  it('MOVES: u7p-town-8, Judith Weber (the Craft Guilds\' first) loses the Mayor\'s hat, Felix Naumann (the Merchant Guilds\' first) takes it', () => {
+    build(true);
+    const born = bear('town', 'u7p-town-8');
+    const after = dmTransfer(born, 'u7p-town-8', TAKER);
+    const card = (s, name) => (s.npcs || []).find((n) => n?.name === name);
+    expect(rankIn(card(born, 'Judith Weber'), 'Craft Guilds'), 'the old holder\'s first').toBe(1);
+    expect(rankIn(card(born, 'Judith Weber'), 'Town Mayor'), 'before: she wears the hat').toBe(1);
+    expect(rankIn(card(after, 'Judith Weber'), 'Town Mayor'), 'after: she does not').toBeUndefined();
+    expect(cardHatsOf(card(after, 'Judith Weber')), 'after: her own title alone').toBe('the smelt master');
+    expect(rankIn(card(after, 'Felix Naumann'), 'Town Mayor'), 'after: the winner\'s first wears it').toBe(1);
+    expect(cardHatsOf(card(after, 'Felix Naumann')), 'after: both his hats').toBe('the senior guild master and Mayor');
+  }, 60_000);
+  it('KEEPS, THE CROWN: Royal Authority kept by the Merchant Guilds; Aldric Vane, the sovereign (no other house\'s first), keeps it; Corin Marsh does not take it', () => {
+    const r = transferRulingPower(crownCity(), 'Merchant Guilds', { cause: 'coup', seatCircumstances: ['trade_wealth'] });
+    expect(r.error, 'the transfer applied').toBeNull();
+    const after = r.settlement;
+    expect(after.powerStructure.government, 'the crown is kept').toBe('Royal Authority');
+    expect(holderOf(after, OWNER).holderName, 'the holder').toBe(TAKER);
+    const card = (name) => (after.npcs || []).find((n) => n?.name === name);
+    expect(rankIn(card('Aldric Vane'), 'Royal Authority'), 'the sovereign keeps the crown').toBe(1);
+    expect(card('Aldric Vane')?.role, 'his office word').toBe('King');
+    expect(rankIn(card('Corin Marsh'), 'Royal Authority'), 'the taker\'s keeper takes no crown').toBeUndefined();
+    expect(holderOf(after, OWNER).person?.name, 'the crown\'s person').toBe('Aldric Vane');
+  });
+  it('KEEPS, THE COUNCIL\'S OWN PERSON: u7p-town-1, Konrad Berger (the Town Council\'s own Mayor, no other house\'s first) keeps the hat', () => {
+    build(true);
+    const born = bear('town', 'u7p-town-1');
+    const card = (s, name) => (s.npcs || []).find((n) => n?.name === name);
+    expect(holderOf(born, OWNER).rule, 'before: the office holds itself').toBe('R4');
+    expect(rankIn(card(born, 'Konrad Berger'), 'Town Council'), 'before: he wears the hat').toBe(1);
+    expect(rankIn(card(born, 'Konrad Berger'), TAKER), 'a Merchant Guilds member, not its first').toBeNull();
+    const after = dmTransfer(born, 'u7p-town-1', TAKER);
+    expect(governingFactionOf(after)?.faction, 'the form is kept').toBe('Town Council');
+    expect(holderOf(after, OWNER).holderName, 'the holder').toBe(TAKER);
+    expect(rankIn(card(after, 'Konrad Berger'), 'Town Council'), 'after: he still wears it').toBe(1);
+    expect(cardHatsOf(card(after, 'Konrad Berger')), 'after: both his hats').toBe(cardHatsOf(card(born, 'Konrad Berger')));
+    expect(rulingChainOf(after).npc?.name, 'the chain names him').toBe('Konrad Berger');
   }, 60_000);
 });
