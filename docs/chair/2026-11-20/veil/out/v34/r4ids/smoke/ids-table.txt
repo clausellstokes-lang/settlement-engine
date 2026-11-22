@@ -1,0 +1,46 @@
+R4-IDS M (ids.probe.jsx): 2 births (2 hidden-house), 96 pages x 3 reads (gallery, link, twin); shards 0/4 2026-11-22T18:26:17.741Z..2026-11-22T18:27:30.552Z; 1/4 2026-11-22T18:26:17.916Z..2026-11-22T18:26:17.918Z; 2/4 2026-11-22T18:26:17.986Z..2026-11-22T18:26:17.990Z; 3/4 2026-11-22T18:26:18.087Z..2026-11-22T18:26:18.089Z
+the link's top-level keys: ["[\"author_name\",\"dossier\",\"gallery_member_overrides\",\"gallery_share_dm\",\"id\",\"is_owner\",\"name\",\"slug\",\"tier\",\"unlisted\"]"]
+stored card id forms (births): {"npc_":2,"npc_veiled_":2}
+
+ALL PAGES: 96 pages; pages with a withheld name: 84; closed searches 0
+  surface                                              served gallery/link/twin       spells (hits) gallery/link/twin   [lane search / words-fold, gallery]
+  relationships[].from/to/npc1Id/npc2Id                9120/8928/9120                 0/0/0                  [0 / 0]
+  npcs[].id                                            4656/4656/4656                 0/0/0                  [0 / 0]
+  relationships[].id (tie id)                          4560/4464/4560                 0/0/0                  [0 / 0]
+  npcs[].goal targets                                  1576/0/1576                    0/0/0                  [0 / 0]
+  stress/stressors casts                               768/768/768                    0/0/0                  [0 / 0]
+  simulationTrace targets                              32/0/32                        0/0/0                  [0 / 0]
+  npcs[].allegiance                                    16/0/16                        0/0/0                  [0 / 0]
+  other: generationCoherenceReceipt                    4/0/4                          0/0/0                  [0 / 0]
+  places with a hit (server): 0
+
+GATED PAGES, Reveal off (a hidden-house town at a setting that hides a house): 40 pages; pages with a withheld name: 40; closed searches 0
+  surface                                              served gallery/link/twin       spells (hits) gallery/link/twin   [lane search / words-fold, gallery]
+  relationships[].from/to/npc1Id/npc2Id                3720/3720/3720                 0/0/0                  [0 / 0]
+  npcs[].id                                            1940/1940/1940                 0/0/0                  [0 / 0]
+  relationships[].id (tie id)                          1860/1860/1860                 0/0/0                  [0 / 0]
+  stress/stressors casts                               320/320/320                    0/0/0                  [0 / 0]
+  places with a hit (server): 0
+
+GATED PAGES, DM: 40 pages; pages with a withheld name: 40; closed searches 0
+  surface                                              served gallery/link/twin       spells (hits) gallery/link/twin   [lane search / words-fold, gallery]
+  relationships[].from/to/npc1Id/npc2Id                3880/3720/3880                 0/0/0                  [0 / 0]
+  npcs[].id                                            1940/1940/1940                 0/0/0                  [0 / 0]
+  relationships[].id (tie id)                          1940/1860/1940                 0/0/0                  [0 / 0]
+  npcs[].goal targets                                  1300/0/1300                    0/0/0                  [0 / 0]
+  stress/stressors casts                               320/320/320                    0/0/0                  [0 / 0]
+  places with a hit (server): 0
+
+MASTER'S STORED SHAPE, gated, Reveal off: 20 pages; pages with a withheld name: 20; closed searches 0
+  surface                                              served gallery/link/twin       spells (hits) gallery/link/twin   [lane search / words-fold, gallery]
+  relationships[].from/to/npc1Id/npc2Id                1860/1860/1860                 0/0/0                  [0 / 0]
+  npcs[].id                                            970/970/970                    0/0/0                  [0 / 0]
+  relationships[].id (tie id)                          930/930/930                    0/0/0                  [0 / 0]
+  stress/stressors casts                               160/160/160                    0/0/0                  [0 / 0]
+  places with a hit (server): 0
+
+ENGINE PARITY on the hits (server gallery against the twin): 0 disagreements
+gallery against link on the hits: 0 differ
+THE RE-KEY'S BASELINE: served card ids stable across two gallery reads of one row: 1940 of 1940 (40 pages)
+served card ids that ARE the stored id (gallery): 4656 of 4656
+served marker person keys (gallery): 0 on 0 pages

@@ -1,0 +1,204 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 10337 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++ Received
+
+- []
++ [
++   "src/domain/display/galleryRosterChoices.js · plenty:none · Subsistence with minor surplus",
++   "src/domain/display/gallerySecondHomes.js · office:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++   "src/domain/display/gallerySecondHomes.js · size:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++ ]
+
+ ❯ tests/lint/presumptionClasses.walker.test.js:170:19
+    168|     const banked = bankedKeys(register);
+    169|     const fresh = hits.filter((h) => !banked.has(h.key)).map((h) => `$…
+    170|     expect(fresh).toEqual([]);
+       |                   ^
+    171|   });
+    172|   test('no stale row: a cured line leaves the register (the close runs…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/22]⎯
+
+ FAIL  tests/lint/proseDrawnAnchors.walker.test.js > proseDrawnAnchors — a literal state-prose sentence may not be a test anchor > no NEW file carries a literal state-prose anchor, and no frozen row grows
+AssertionError: A literal state-prose sentence is being used as a test anchor. Compute it instead — `drawnMember` / `variantByVid` / `poolMemberTexts` from tests/helpers/drawnProse.js — so a re-index, a rewrite or an appended wording moves the member and the anchor together. Regenerate the roster with UPDATE_DRAWN_ANCHOR_ALLOWLIST=1 to see every pin and the corpus row it aligns against.: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/galleryVeilHandRows.pglite.test.js: 2 (frozen none)",
++ ]
+
+ ❯ tests/lint/proseDrawnAnchors.walker.test.js:507:7
+    505|       + ` together. Regenerate the roster with UPDATE_DRAWN_ANCHOR_ALL…
+    506|       + ` pin and the corpus row it aligns against.`,
+    507|     ).toEqual([]);
+       |       ^
+    508|   });
+    509|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/22]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+AssertionError: the committed register is current at this tip: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2324:73
+    2322|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2323|     const current = censusDry(text, committed);
+    2324|     expect(current.ok, 'the committed register is current at this tip'…
+       |                                                                         ^
+    2325|     expect(current.rowsMoved, 'and no row would move').toBe(0);
+    2326|     expect(current.sections, 'and no section would move').toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/22]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-bytes' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ stale-bytes
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2404:61
+    2402|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2403|     const verdict = censusCheck(text, committed);
+    2404|     expect(verdict.reason, 'the committed file is current').toBe('');
+       |                                                             ^
+    2405|     expect(verdict.ok).toBe(true);
+    2406|     expect(text, 'and byte-identical to what the script would write').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/22]⎯
+
+ FAIL  tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/galleryVeilTell8.pglite.test.js: 1 bare seed loop(s) at line(s) 219 (frozen ceiling 0). A seed loop that asserts inline stops at the FIRST failing seed, so its failure count is a lower bound and every later seed goes unrun — the fix you verify against it may never have reached the seeds that still fail. Collect instead: const failures = collectSeedFailures(SEEDS, (seed) => { … }); expectNoSeedFailures(failures, '<what this proves>') (tests/helpers/seedFailures.js). Already truthful for another reason? Say why: // seed-loop: collected — <justification>.",
++   "tests/store/galleryImportServedBand.test.js: 1 bare seed loop(s) at line(s) 106 (frozen ceiling 0). A seed loop that asserts inline stops at the FIRST failing seed, so its failure count is a lower bound and every later seed goes unrun — the fix you verify against it may never have reached the seeds that still fail. Collect instead: const failures = collectSeedFailures(SEEDS, (seed) => { … }); expectNoSeedFailures(failures, '<what this proves>') (tests/helpers/seedFailures.js). Already truthful for another reason? Say why: // seed-loop: collected — <justification>.",
++ ]
+
+ ❯ tests/lint/seedLoopTotality.walker.test.js:358:24
+    356|       }
+    357|     }
+    358|     expect(violations).toEqual([]);
+       |                        ^
+    359|   });
+    360|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/22]⎯
+
+ FAIL  tests/lint/slugifyIdiomBaseline.test.js > slugify idiom baseline ratchet (code-quality-5) > baseline exactly matches the files that still inline a slug builder
+AssertionError: expected [ …(34) ] to deeply equal [ …(35) ]
+
+- Expected
++ Received
+
+@@ -2,11 +2,10 @@
+    "src/domain/activeConditions.js",
+    "src/domain/compendium/searchIndex.js",
+    "src/domain/contradictions.js",
+    "src/domain/counterfactual.js",
+    "src/domain/dailyLife.js",
+-   "src/domain/display/gallerySecondHomes.js",
+    "src/domain/display/publicSafe.js",
+    "src/domain/districtProfile.js",
+    "src/domain/explanation.js",
+    "src/domain/factionProfile.js",
+    "src/domain/factionRelationshipUpdate.js",
+
+ ❯ tests/lint/slugifyIdiomBaseline.test.js:70:22
+     68| describe('slugify idiom baseline ratchet (code-quality-5)', () => {
+     69|   test('baseline exactly matches the files that still inline a slug bu…
+     70|     expect(baseline).toEqual(currentIdiomFiles);
+       |                      ^
+     71|   });
+     72|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/22]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3725 to be 3705 // Object.is equality
+
+- Expected
++ Received
+
+- 3705
++ 3725
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7553:10
+    7551|     } else {
+    7552|       expect(TEST_FILES.length, 'the estate\'s file count moved — re-m…
+    7553|         .toBe(CENSUS.files);
+       |          ^
+    7554|       expect(parked.length, 'the parked-file count moved from SP-C\'s …
+    7555|         + ' a rule widened or narrowed, or a lane changed a file\'s sh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/22]⎯
+
+ FAIL  tests/lint/styleLaw.walker.test.js > the style walker — the ratchet at the tree > ⛔ no file's count of any struck phrase RISES above its baseline
+AssertionError: the style law: a struck phrase rose (rewrite the line; the retired word's word is "power"):
+  src/domain/display/galleryRosterChoices.js :: faction 0 -> 1
+      src/domain/display/galleryRosterChoices.js:82 "multiple criminal factions": expected [ { …(4) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "file": "src/domain/display/galleryRosterChoices.js",
++     "id": "faction",
++     "now": 1,
++     "was": 0,
++   },
++ ]
+
+ ❯ tests/lint/styleLaw.walker.test.js:52:7
+     50|       verdict.rises,
+     51|       `the style law: a struck phrase rose (rewrite the line; the reti…
+     52|     ).toEqual([]);
+       |       ^
+     53|   });
+     54|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/22]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/22]⎯
+
+
+ Test Files  16 failed | 207 passed (223)
+      Tests  22 failed | 3245 passed (3267)
+   Start at  19:13:34
+   Duration  808.70s (transform 27.63s, setup 3.47s, import 704.32s, tests 876.02s, environment 18ms)
+
+[gate-tail] end:  19:27:03 up  3:18,  0 user,  load average: 1.25, 2.00, 3.15
+[gate-tail] full log: /tmp/gate-tail.10709.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit=1
