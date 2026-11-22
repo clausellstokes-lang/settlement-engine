@@ -1,0 +1,10 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 22309 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  06:12:26 up  1:28,  0 user,  load average: 1.35, 1.36, 1.62 · cores: 4
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  06:13:06 up  1:28,  0 user,  load average: 1.38, 1.38, 1.62
+[gate-tail] full log: /tmp/gate-tail.22588.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

@@ -1,0 +1,18 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 16129 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  05:46:41 up  1:02,  0 user,  load average: 0.47, 1.08, 1.06 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/reader-diff
+
+stdout | tests/ui/safetyReaderBytes.test.jsx
+READER DIFF: 300 towns (300 with a Safety label), 11 reader surfaces x 2 renders compared, 0 moved, 0 holding the sentinel; owner arm: overview.owner 300/300, defense.owner 300/300, pdf.vm.dm 300/300, pdf.cover.dm 300/300, pdf.overview.dm 300/300, pdf.defense.dm 300/300; 266 s
+
+ ✓ tests/ui/safetyReaderBytes.test.jsx (4 tests) 266475ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  05:46:41
+   Duration  276.48s (transform 6.58s, setup 70ms, import 9.21s, tests 266.47s, environment 585ms)
+
+[gate-tail] end:  05:51:18 up  1:07,  0 user,  load average: 1.06, 1.10, 1.07
+[gate-tail] full log: /tmp/gate-tail.16405.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
