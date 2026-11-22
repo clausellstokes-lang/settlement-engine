@@ -125,6 +125,28 @@ export function seatsByHolder(configOrSettlement) {
 }
 
 /**
+ * The config a REGENERATE pass hands down: `config` with the seat key the RECORD's (UK-LEGACY, the chair's rule).
+ *
+ * A regenerate road is handed a config it did not choose (the store's `settlement.config || config` falls back to the
+ * FORM config for a save with no `config`, and the form holds whatever world was loaded last). Every reader of the law
+ * downstream reads it off that config (`npc/powerBand.js :: powerBandOfRole`), so the pass re-keys it here: the seat
+ * key becomes the record's own marker, read through the one resolver above, or none (a record with no marker is law 1).
+ * Every other key is the handed config's, untouched. Same reference when the two already agree, so a regen whose
+ * handed config IS the record's config is byte-identical. Never called at BIRTH: there the born config IS the record's.
+ *
+ * @template {Record<string, unknown>} T
+ * @param {T} config the handed config
+ * @param {unknown} record the settlement being regenerated
+ * @returns {T}
+ */
+export function withRecordSeatLaw(config, record) {
+  const version = resolveSeatLawVersion(record);
+  if (resolveSeatLawVersion(config) === version) return config;
+  const { [SEAT_LAW_CONFIG_KEY]: _handed, ...rest } = config;
+  return /** @type {T} */ (version === DEFAULT_SEAT_LAW_VERSION ? rest : { ...rest, [SEAT_LAW_CONFIG_KEY]: version });
+}
+
+/**
  * The config fragment a NEWLY-created world is minted with, spread into the fresh config by the
  * create boundary (`densityCreateBoundary.js :: birthConfig`), and nowhere else.
  *
