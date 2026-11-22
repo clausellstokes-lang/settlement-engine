@@ -45,13 +45,31 @@ The brief puts the writers at the power step, and there `holderOf` sees no peopl
 
 All runs used `TMPDIR=/tmp GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 …`, with output to a file that was read afterwards.
 
-- The new file `tests/generators/seat/seatHolderLines.test.js`: 9/9. CONFIRMED.
+- The new file `tests/generators/seat/seatHolderLines.test.js`: 9/9, and 9/9 again after its last change (08:43:27Z, beside `seedLoopTotality` and `sovereigntyLightingContract`). CONFIRMED.
 - The final GREEN set, run together at 08:18:40Z on `089bc7eea`: 12 files, 225 tests, 224 passed. It covered the new file, `tests/domain/seat` (the filter also takes `tests/domain/seatLawWiring.test.js`), `tests/generators/seatBandFold.test.js`, `tests/generators/people/seatKeeperContender.test.js` and `tests/generators/powerStructure.test.js`. The one red is RED-AT-LINE's own: `powerStructure.test.js` "no power/ module packs more statements…", with `relationshipArchetypes.js: 1 packed lines`, a file I did not touch. The module line ceiling arm is green. CONFIRMED.
 - `tests/lint/samenessHideable.walker.test.js`: 29/29 with the new row and HAND_CEILING at 74. The house readings were re-taken and needed no row: RULE 2 is green, and none of the six lines on THE WATCH is this table's. CONFIRMED.
 
 ## `tests/lint` WHOLE
 
-LINT_FIGURES
+The final run was 08:44:19Z to 09:07:17Z, on `e9c302208` (the last test change, below). Result: 223 files (6 failed), 3,352 tests, 3,346 passed, 6 failed. CONFIRMED. The reds by name:
+
+- **The line's own (RED-AT-LINE), unmoved, 3:**
+  - `proseCorpusBytes.test.js` "RAW is EXACT…".
+  - `proseCorpusBytes.test.js` "GZIP sits inside the 1 % band…".
+  - `proseComposed.walker.test.js` "⭐ THE SHIPPED CORPUS READING…".
+- **Register reds for the integrator's door, 2:**
+  - `proseWiringCensus.walker.test.js` "⭐⭐ EVERY MAPPING ROW IS CITED TO A PRODUCER THE TREE STILL CARRIES…". This is the wiring census, the holder census of factionDynamics.js lines. The new import lines moved what it cites.
+  - `sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION, NOT A SENTENCE…": "the estate's file count moved — re-measure, do not re-word: expected 3749 to be 3748". The +1 is the new test file. The figure lives in that walker, outside this manifest.
+- **Reported, outside the manifest, 1:**
+  - `mutationCoverageManifest.test.js` "TOTALITY: every enumerated invariant file has a manifest entry" names `tests/generators/seat/seatHolderLines.test.js`.
+  - `mutationCoverage.shared.mjs :: enumerateInvariants` enumerates EVERY file under `tests/generators` (ENFORCER_DIRS), whatever its basename. Keeping the basename clear of the name pattern therefore cannot clear it.
+  - The cure is one row in `scripts/mutation-coverage-manifest.json`, presumably under the admitted-tree rationale `generators-tree-admitted-subject-coupled-2026-08-30`. That file is not in the manifest.
+- **Environmental, 1 file with no test:** `ledgerCitationIntegrity.test.js` cannot load, with "fatal: Not a valid object name refs/heads/review-fixes-2026-07-08". The scratch clone has no such ref.
+- **Cured on the way, 2.** Each was CONFIRMED with a targeted rerun and by the final whole run.
+  - `sovereigntyLightingContract` "⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS". My first arm 5 used `it.each`, which made `foreignGuestHold` 107 > 106. Arm 5 is now one plain test.
+  - `seedLoopTotality` ×2 "no NEW bare seed loop…" and "…quarantine is EXACT". The arm's rows now run through `collectSeedFailures` / `expectNoSeedFailures`.
+
+An earlier whole run (07:55:52Z to 08:17Z, on `a5532af3e`) gave 3,352 tests and 7 failed: the six above plus the each-park red.
 
 ## THE FLIPPED COPY
 
@@ -64,7 +82,7 @@ src/domain/seat/seatLaw.js:77            - export const NEW_SETTLEMENT_SEAT_LAW_
                                          + export const NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION;
 ```
 
-The run at 08:19:20Z covered the new file and `tests/domain/seat`: 9 files, 204 tests, 198 passed.
+The run at 09:07:35Z, on the final test, covered the new file and `tests/domain/seat`: 9 files, 204 tests, 198 passed. The run at 08:19:20Z gave the same figures.
 
 - The new file is green (9/9). CONFIRMED.
 - Six reds are tests that pin the DARK dials, and the flip turns them by construction. PLAUSIBLE (read) that they are only that: they were not run against an unmodified flipped tree.
@@ -73,4 +91,4 @@ The run at 08:19:20Z covered the new file and `tests/domain/seat`: 9 files, 204 
 
 ## COMMITS
 
-The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then this report's commit (its sha is in the final message). Nothing was pushed.
+The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then `e9c302208` (arm 5 collected), then this report's commit, whose sha is in the final message. Nothing was pushed.
