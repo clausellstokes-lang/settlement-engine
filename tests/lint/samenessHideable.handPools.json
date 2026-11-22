@@ -7,6 +7,7 @@
   {"pool":"src/data/constants.js :: TIER_ORDER","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
   {"pool":"src/data/constants.js :: TOWN_PLUS_TIERS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
   {"pool":"src/data/dailyLife/childWarnings.js :: CHILD_WARNINGS","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},
+  {"pool":"src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM","seat":"DAILY-3","branch":"lane/daily-3-2026-11-22-e1-wip","commit":"f5295e425"},
   {"pool":"src/data/dailyLife/dawnWork.js :: DAWN_WORK","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},
   {"pool":"src/data/dailyLife/gatheringPlaces.js :: GATHERING_NAMED","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},
   {"pool":"src/data/dailyLife/gatheringPlaces.js :: GATHERING_PLAIN","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},

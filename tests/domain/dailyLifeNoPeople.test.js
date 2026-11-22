@@ -80,9 +80,13 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
       // on the other seven slots; the eighth is held by `tests/domain/dailyLifeGathering.test.js` and the owner-vs-public check below.
       // DAILY-2 B2 D1 and D2 moved `dawn_work` and `child_warnings` by design the same way (LINES-1 / LINES-1b as ruled; held
       // by `dailyLifeDawn.test.js` and `dailyLifeChild.test.js`).
-      const { gathering_places: _moved, dawn_work: _movedDawn, child_warnings: _movedChild, ...kept } = BEFORE[seed];
-      const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, ...nowKept } = now;
+      // DAILY-3 B3 E1 moved `commoner_resentments` by design on the places whose text carried a crime clause (ruling 6:
+      // the clauses are the owner-only `commoner_resentments_dm`'s, held by `dailyLifeOwnerSlot.test.js`); on every
+      // other place it keeps its pre-change text.
+      const { gathering_places: _moved, dawn_work: _movedDawn, child_warnings: _movedChild, commoner_resentments: resentBefore, ...kept } = BEFORE[seed];
+      const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, commoner_resentments: resentNow, ...nowKept } = now;
       expect(nowKept, `${seed}: before vs after`).toEqual(kept);
+      if (!/blind eye to the right pockets|the smugglers who pay no tax/.test(resentBefore)) expect(resentNow, `${seed}: commoner_resentments, no crime clause before`).toBe(resentBefore);
       expect(textsOf(toPublicSafe(rec)), `${seed}: owner vs toPublicSafe`).toEqual(now);
     });
     expectNoSeedFailures(failures, 'every born place keeps its pre-change texts and its toPublicSafe texts');

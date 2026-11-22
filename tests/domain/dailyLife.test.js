@@ -9,7 +9,8 @@
  *     * food_culture text varies by food_production capacity band.
  *     * child_warnings cites top threats.
  *     * outsider_impressions cites dominant faction.
- *     * commoner_resentments cites high criminal_opportunity.
+ *     * high criminal_opportunity is cited by the OWNER-ONLY commoner_resentments_dm (DAILY-3 B3 E1, ruling 6),
+ *       never by the public commoner_resentments.
  *     * recent_changes cites recent disruption history beat.
  *   - References point to canonical Phase 19 explainable entity ids.
  *   - No mutation of input settlement.
@@ -211,14 +212,20 @@ describe('child_warnings behavior', () => {
 });
 
 describe('commoner_resentments behavior', () => {
-  it('cites criminal_opportunity when high', () => {
-    const s = deriveDailyLifeSlot('commoner_resentments', {
+  // DAILY-3 B3 E1 (ruling 6), the pin re-read: high criminal opportunity is still cited, by the owner-only slot it moved
+  // to; the public slot no longer reads it (the meaning kept: the crime is said where it is said, to the owner).
+  it('cites criminal_opportunity when high, in the owner-only slot and not the public one', () => {
+    const record = {
       powerStructure: {
         publicLegitimacy: { score: 60, label: 'Approved' },
         factions: [{ faction: "Thieves' Guild", power: 80 }],
       },
-    });
-    expect(s.references.some(r => r.id === 'var.criminal_opportunity')).toBe(true);
+    };
+    const owner = deriveDailyLife(record, { audience: 'owner' }).slots.commoner_resentments_dm;
+    expect(owner.references.some(r => r.id === 'var.criminal_opportunity')).toBe(true);
+    expect(owner.text).not.toBe('');
+    const s = deriveDailyLifeSlot('commoner_resentments', record);
+    expect(s.references.some(r => r.id === 'var.criminal_opportunity')).toBe(false);
   });
 
   it('cites food_production when strained', () => {
