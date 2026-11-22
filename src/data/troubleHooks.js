@@ -5,7 +5,7 @@
  * every line (the sameness fault; the owner: "comprehensively fix the sameness fault as much as you can"). Each kind now
  * holds a pool, and `historyGenerator.js :: troubleHooksOf` stores THREE of it: a line is admitted where its declaration
  * holds through the declared door (`drawDeclared.js`), the admitted lines are ranked by
- * `fnv1a32(`${seed}::trouble::${kind}::hook::${text}`)` highest first, and the top three are kept. No draw is added.
+ * `mix32(fnv1a32(`${seed}::trouble::${kind}::hook::${text}`))` highest first (MIXED-KEY), and the top three are kept. No draw is added.
  *
  * The words are the chair's ruled lines, VETOABLE (the owner's): `docs/chair/2026-11-20/content/page/lines/TROUBLE-LINES-2.md`
  * (lines 1-12 of crime_wave and guild_conflict, all 9 of the other six) and `TROUBLE-LINES-3.md` (lines 13-16 of the two;
