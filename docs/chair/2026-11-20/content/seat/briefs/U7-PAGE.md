@@ -94,3 +94,17 @@ Label each claim CONFIRMED (run) or PLAUSIBLE (read). Final message: at most 200
    - It goes on the holder's card in `PowerStrata.jsx`, ONLY where the holder stands apart from the form, NEVER for a veiled holder (then today's card).
    - The form's name with its article by the paragraph's own helper.
    - The governance paragraph's new sentence is DROPPED (second deploy): write none.
+
+## ADDENDUM 2 (written 2026-11-22T11:41:15Z by SEAT-10, on the chair's E76 of 11:37Z)
+
+**THE PRINCIPLE:** under the lit law ONE person wears the office hat, and the page names THAT person. Where the hat is on the wrong head, the cure is at the source (U5-STALE), never on the page. E70 (2) was too wide and is amended.
+
+- **FIRST, A MEASURE (one line back to the chair, before any build of this addendum):** for the 24 R3 births whose chain person moved under E70 (2), which house does the record's OFFICE PERSON (the hat-wearer) belong to?
+  - (i) **NO house:** the chain then KEEPS the record's person. The 24 do not move, and the 3 "nobody" cases are gone.
+  - (ii) **A house OTHER than the holder:** how many? That is the law contradicting itself at birth. Propose where it is cured: where the hat is cast, or where the holder is read.
+- **U5-STALE (ruled YES, before the first deploy):**
+  - In `src/domain/rulingPower.js :: transferRulingPower`'s kept-form branch, the old house's person loses the office hat and the holder's first takes it. The tonight sheet's hook sources, the seat-house face on the Institutions tab and the card's hat then agree by construction.
+  - Red first on the six. The manifest widens to that function.
+  - A saved place of law 1 is not touched (the dark control).
+  - Where the holder's house has NO person to take the hat, the hat is worn by nobody and the page says the seat is unfilled: that case is true there. Say what the transfer does.
+- **THEN:** with U5-STALE in, is the page's fall-back ("else the holder house's first") needed at all? If the record's office person is always the right one, the page reads that one fact and the fall-back is REMOVED.
