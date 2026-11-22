@@ -512,12 +512,14 @@ const HOUSE_FAMILIES = (() => {
         ? `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); answered by \`institution: ${kind}\` (DAILY-2, the chair's ruling of 2026-11-20 19:41)`
         : `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
       // PAGE-7 (CAUSES-DATA addendum 4, item 1): `thieves' guild` and `smuggling` are answered by `causeHouses.js` (no kind of the two)
-      // DAILY-3 B3 L8 (the chair's leave E95 of 2026-11-22): `headman`, `reeve` and `lord's steward` are answered by the
+      // DAILY-3 B3 L8 (the chair's leave E95 of 2026-11-22): two rows, `headman` and `reeve`, are answered by the
       // OFFICE-HOLDER'S reading of the word: a person who holds the office the place is governed by (`facts/officeForms.js`,
       // the governing row's form), NOT a building. A line whose words presume the house itself (its door, its hall, its yard,
-      // a visit to it) still needs the house's own atom.
+      // a visit to it) still needs the house's own atom. The steward's row went with L12 (DAILY-4 unit (0a), the chair's
+      // E107): on four steward thorps the office held while another officer held the seat and no steward's house stood, so
+      // `lord's steward` waits for the house's own atom (L12's return: `house: lord's steward` beside the office and `sovereign`).
       words: re, atoms: kind ? [`institution: ${kind}`] : key === "thieves' guild" ? ['house: thieves_guild'] : key === 'smuggling' ? ['house: smuggling']
-        : key === 'headman' ? ['office: headman'] : key === 'reeve' ? ['office: reeve'] : key === "lord's steward" ? ["office: lord's steward"] : [],
+        : key === 'headman' ? ['office: headman'] : key === 'reeve' ? ['office: reeve'] : [],
       absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
       pageWithdrawn: PAGE_WITHDRAWN.house,
     };

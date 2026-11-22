@@ -1,7 +1,9 @@
 /**
- * tests/domain/dailyLifeOffice.test.js — DAILY-3 · B3 L8, THE FIVE `office:` ATOMS AND LEGITIMACY L8 TO L12 (the chair's
+ * tests/domain/dailyLifeOffice.test.js — DAILY-3 · B3 L8, THE FIVE `office:` ATOMS AND LEGITIMACY L8 TO L11 (the chair's
  * E72 and E82 of 2026-11-22; the brief `docs/chair/2026-11-20/content/daily/briefs/B3-L8-OFFICE-LINES.md`; the measure
- * `measures/OFFICE`, point 97's table of forms).
+ * `measures/OFFICE`, point 97's table of forms). L12 ("The lord's steward is obeyed, but not much liked.") is NOT BUILT
+ * (DAILY-4 unit (0a), the chair's E107, `briefs/D4-L12-CUT.md`): cut from this landing, for after the first deploy with
+ * the ruled shape `house: lord's steward` beside `office: lord's steward` and `sovereign`. Its atom stays, unused.
  *
  *   (a) THE TABLE: each office key's forms are KEYS of its row in `seat/seatTable.js :: SEAT_TABLE` (row `government`;
  *       row `noble` for the steward), read back through `formKindOf`; the steward is Feudal Stewardship, never Feudal
@@ -11,10 +13,11 @@
  *   (c) THE HOME: the governing ROW's form (`rulingPower.js :: nameOf(governingFactionOf(record))`) through `formKindOf`;
  *       never `powerStructure.government`, never a name test on a label. FAIL CLOSED: no governing row, or one stamped
  *       `hidden: true`, and every office is false; the shared read reads the same.
- *   (d) THE LINES: L8 to L12, verbatim from LINES-2 § 2 legitimacy, each with its one need (L12 also `sovereign`, the
- *       chair's E95), in the pool between L7 and
- *       L13; each admitted exactly where its office holds; on 30 born places (five a size, M1's births) none prints where
- *       its office does not hold.
+ *   (d) THE LINES: L8 to L11, verbatim from LINES-2 § 2 legitimacy, each with its one need, in the pool between L7 and
+ *       L13 (L11 then L13); L12 ABSENT from the pool (NOT BUILT, named in the pool file's NOT BUILT note), and the
+ *       steward's family `house: lord's steward` answered by no office atom (headman and reeve still are); each line
+ *       admitted exactly where its office holds, none where the steward's does; on 30 born places (five a size, M1's
+ *       births) none prints where its office does not hold, and L12 prints nowhere.
  *   (e) THE DOOR: the leaf rides lazy, beside `facts/factsOf.js` (vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -29,6 +32,7 @@ import { SEAT_BANDS, SEAT_TABLE, formKindOf } from '../../src/domain/seat/seatTa
 import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { COMMONER_RESENTMENTS } from '../../src/data/dailyLife/commonerResentments.js';
+import { NEW_WORDS } from '../../src/domain/facts/registeredWords.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -48,14 +52,15 @@ const RULED = Object.freeze({
 });
 const KEYS = Object.keys(RULED);
 
-/** THE LINES, verbatim from LINES-2 § 2 legitimacy #8 to #12, each with its one need. */
+/** THE LINES, verbatim from LINES-2 § 2 legitimacy #8 to #11, each with its one need (index = the office key's). */
 const LINES = Object.freeze([
   { id: 'L8', text: 'Common folk say the elders decide among themselves and tell everyone else afterwards.', needs: ['office: elders'] },
   { id: 'L9', text: 'People grumble that the headman listens to friends first and everyone else last.', needs: ['office: headman'] },
   { id: 'L10', text: 'The mayor is blamed for most of what goes wrong, fairly or not.', needs: ['office: mayor'] },
   { id: 'L11', text: 'People say the reeve they chose has forgotten who chose them.', needs: ['office: reeve'] },
-  { id: 'L12', text: 'The lord\'s steward is obeyed, but not much liked.', needs: ['sovereign', "office: lord's steward"] }, // the stricter need (the chair's E95), first: a class walker's list scan stops at the apostrophe
 ]);
+/** L12, NOT BUILT (the chair's E107): asserted ABSENT from the pool, by its id, its text and its office need. */
+const CUT = Object.freeze({ id: 'L12', text: 'The lord\'s steward is obeyed, but not much liked.', office: "office: lord's steward" });
 
 /** A planted record governed by a row of that name (the row the seat holds), with a decoy label. */
 const governedBy = (/** @type {string} */ name, /** @type {Record<string, unknown>} */ extra = {}) => ({
@@ -189,45 +194,59 @@ describe('(c) on 30 born places: the atom is the measure\'s reading, the shared 
   });
 });
 
-describe('(d) L8 to L12 in the legitimacy pool, each printed only where its office holds', () => {
+describe('(d) L8 to L11 in the legitimacy pool, each printed only where its office holds; L12 NOT BUILT', () => {
   const pool = COMMONER_RESENTMENTS.legitimacy;
-  it('L8..L12 stand verbatim with their one need, between L7 and L13', () => {
+  /** The pool's office lines: every line that declares an `office:` need. */
+  const officeLines = () => pool.filter((l) => l.needs.some((n) => n.startsWith('office: ')));
+  it('L8..L11 stand verbatim with their one need, between L7 and L13 (L11 then L13); L12 is ABSENT (NOT BUILT, the chair\'s E107)', () => {
     const ids = pool.map((l) => l.id);
     for (const line of LINES) {
       const got = pool.find((l) => l.id === line.id);
       expect(got && { id: got.id, text: got.text, needs: [...got.needs] }, line.id).toEqual(line);
     }
     expect(ids.indexOf('L8')).toBe(ids.indexOf('L7') + 1);
-    expect(ids.slice(ids.indexOf('L8'), ids.indexOf('L12') + 1)).toEqual(['L8', 'L9', 'L10', 'L11', 'L12']);
-    expect(ids.indexOf('L13')).toBe(ids.indexOf('L12') + 1);
+    expect(ids.slice(ids.indexOf('L8'), ids.indexOf('L11') + 1)).toEqual(['L8', 'L9', 'L10', 'L11']);
+    expect(ids.indexOf('L13')).toBe(ids.indexOf('L11') + 1);
+    expect(officeLines().map((l) => l.id)).toEqual(LINES.map((l) => l.id));
+    // L12 ABSENT: no line of its id, its text or its office need, in any branch; the ids are not renumbered (L13 stays L13)
+    expect(ids).toContain('L13');
+    // anchored: ids is proved the live pool's ids by its L13 asserted on the line above
+    expect(ids).not.toContain(CUT.id);
+    for (const [branch, lines] of Object.entries(COMMONER_RESENTMENTS)) {
+      expect(lines.filter((l) => l.text === CUT.text || l.needs.includes(CUT.office)).map((l) => l.id), branch).toEqual([]);
+    }
   });
-  it('the file header carries no NOT BUILT note for them', () => {
+  it('the file header\'s NOT BUILT note names L12 alone of the office lines; the steward\'s family is answered by no office atom (HOUSE_FAMILIES: two rows, headman and reeve)', () => {
+    expect([...(NEW_WORDS["house: lord's steward"]?.atoms ?? ['missing'])]).toEqual([]);
+    expect([...(NEW_WORDS['house: headman']?.atoms ?? [])]).toEqual(['office: headman']);
+    expect([...(NEW_WORDS['house: reeve']?.atoms ?? [])]).toEqual(['office: reeve']);
     const src = readFileSync(join(ROOT, 'src/data/dailyLife/commonerResentments.js'), 'utf8');
     const notBuilt = /\* NOT BUILT[\s\S]*?\n \*\n/.exec(src)?.[0] ?? '';
     expect(notBuilt).toMatch(/legitimacy #4/);
-    // anchored: notBuilt is proved non-empty by its legitimacy #4 row asserted on the line above
-    expect(notBuilt).not.toMatch(/#8|#12|elders|headman|mayor|reeve|steward/);
+    expect(notBuilt).toMatch(/legitimacy #12 "The lord's steward is obeyed, but not much liked\."/);
+    expect(notBuilt).toMatch(/`house: lord's steward`/);
+    // anchored: notBuilt is proved non-empty by its legitimacy #4 and #12 rows asserted on the lines above
+    expect(notBuilt).not.toMatch(/#8|#9|#10|#11|elders|headman|mayor|reeve/);
     // anchored: src is the pool's own source, which holds the NOT BUILT block read above
     expect(src).not.toMatch(/government-label\s+name test/);
   });
-  it('each line is admitted exactly where its office holds (planted, every form)', () => {
+  it('each office line of the pool is admitted exactly where its office holds, none where the steward\'s does (planted, every form)', () => {
     for (const k of KEYS) for (const f of RULED[k][1]) {
-      const admitted = filterDeclared(LINES, { facts: factsOf(governedBy(f)) }).map((l) => l.id);
-      expect(admitted, `${k}: ${f}`).toEqual([LINES[KEYS.indexOf(k)].id]);
+      const admitted = filterDeclared(officeLines(), { facts: factsOf(governedBy(f)) }).map((l) => l.id);
+      expect(admitted, `${k}: ${f}`).toEqual(k === "lord's steward" ? [] : [LINES[KEYS.indexOf(k)].id]);
     }
-    expect(filterDeclared(LINES, { facts: factsOf(governedBy('Elder Council', { hidden: true })) })).toEqual([]);
+    expect(filterDeclared(officeLines(), { facts: factsOf(governedBy('Elder Council', { hidden: true })) })).toEqual([]);
   });
-  it('false 0: on the born places no L8..L12 prints where its office does not hold (L12: nor where no sovereign is given)', () => {
+  it('false 0: on the born places no L8..L11 prints where its office does not hold, and L12 prints nowhere', () => {
     const failures = collectSeedFailures(seeds(), (seed) => {
       const { rec, resent } = at(seed);
       const office = officeAt(rec);
-      const sovereign = atomHolds('sovereign', factsOf(rec)) === true;
       for (const [i, line] of LINES.entries()) {
-        const holds = office[KEYS[i]] === true && (line.id !== 'L12' || sovereign);
-        expect(resent.includes(line.text) && !holds, `${seed} ${line.id}: "${resent}"`).toBe(false);
+        expect(resent.includes(line.text) && office[KEYS[i]] !== true, `${seed} ${line.id}: "${resent}"`).toBe(false);
       }
+      expect(resent.includes(CUT.text), `${seed} ${CUT.id}: "${resent}"`).toBe(false);
     });
-    expectNoSeedFailures(failures, 'L8..L12 print only where their office holds');
+    expectNoSeedFailures(failures, 'L8..L11 print only where their office holds; L12 nowhere');
   });
 });
 
