@@ -1,0 +1,10 @@
+eS.situationDesc                             thorp 67/100 | hamle 62/100 | villa 68/100 | town 89/100 | city 89/100 | metro 85/100
+eS.safetyProfile.safetyDesc                  thorp 6/100 | hamle 8/100 | villa 5/100 | town 5/100 | city 5/100 | metro 7/100
+eS.safetyProfile.economicDragDesc            thorp 6/6 | hamle 11/11 | villa 16/17 | town 27/53 | city 67/94 | metro 70/100
+eV.dependencies[].title                      thorp - | hamle - | villa 10/19 | town 10/19 | city 100/100 | metro 100/100
+eV.dependencies[].description                thorp - | hamle 3/7 | villa 35/60 | town 31/64 | city 100/100 | metro 100/100
+eV.dependencies[].impact                     thorp - | hamle 4/7 | villa 60/60 | town 63/64 | city 100/100 | metro 100/100
+eV.dependencies[].suggestedFixes[]           thorp - | hamle 4/7 | villa 35/60 | town 31/64 | city 100/100 | metro 100/100
+eV.warnings[].description                    thorp - | hamle - | villa - | town 62/87 | city 29/99 | metro 52/96
+eS.tradeDependencies[].impact                thorp - | hamle 31/38 | villa 13/13 | town 100/100 | city 99/100 | metro 96/100
+eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 | town 31/47 | city 81/89 | metro 76/86

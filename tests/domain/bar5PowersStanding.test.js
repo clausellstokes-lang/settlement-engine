@@ -15,6 +15,21 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { cardStandingLine } from '../../src/domain/display/cardStandingRead.js';
+import { POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
+
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
+
+/** @param {string} s */
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** The trade head's low-standing twin (`npcStructure.js :: LOW_STANDING_TWIN`). */
+const LOW_TWIN_TRADE = 'Heads the leading house in the trade in quiet times, though its word counts for little beyond the trade.';
+import { npcInteriority } from '../../src/domain/display/npcInteriorityRead.js';
 import { NO_PATROL_LINE, NO_FORCE_LINE, forceLineOf } from '../../src/generators/power/militaryForceLine.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -81,7 +96,10 @@ const CASTERS_LOW = Object.freeze(['r2r-city-5', 'r2r-city-15', 'r2r-city-20', '
 /** The read's rows: [row, town, the refused opening, what prints in its place] (each red at 600b7683a) */
 const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   ['C33631', 'bar0-town-calm-rand-25', 'Clergy and church institutions exercise meaningful civic influence', 'Clergy are present but operate at the margins of civic life'],
-  ['C35627', 'bar0-town-calm-rand-26', 'its hold is secure and its say is real', 'though its word counts for little beyond the trade'],
+  // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the trade's calm head row is pooled; what
+  // prints in the low-standing head's slot is its twin or a pooled wording that claims no secure hold ('@<pool>': the member the
+  // town prints, never index 0)
+  ['C35627', 'bar0-town-calm-rand-26', 'its hold is secure and its say is real', '@economy__stable__dominant'],
 ]);
 /* THE NAMED EXCLUSION `AWAITS_THE_LATE_KEY` ('1c-force/roster') IS LIFTED (BAR6-POWERS, 2026-11-16): the force line reads the
  * SETTLED roster only, handed by the late replay (`projection.forces`; R-Q / R-U, tests/generators/census5cMilitiaReword.test.js),
@@ -89,7 +107,11 @@ const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
 /** KEEP: a force line where its force stands, and a secure head of established standing, still print */
 const KEEP = /** @type {Array<[string, RegExp]>} */ ([
   ['bar0-village-calm-rand-22', /^Significant military force for this scale/],
-  ['bar0-metropolis-calm-rand-21', /^Heads the casters in quiet times; their place is secure/],
+  // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the casters' calm head row is pooled
+  // (`data/npcStructureVariants.js`); a head of established standing prints a member of it (its index 0 the secure line), never
+  // the low-standing twin, which is no member
+  // (B1c: the pool as the writer composes it, [the T row's own line, ...the data pool])
+  ['bar0-metropolis-calm-rand-21', new RegExp(`^(?:${[{ text: T.magic__stable__dominant.position }, ...POSITION_VARIANTS.magic__stable__dominant].map((r) => r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{house\\\}/g, '[^"]+')).join('|')})`)],
 ]);
 
 /** @type {Record<string, any>} */
@@ -162,9 +184,19 @@ describe('BAR5-POWERS · 1c and 1d (detector: law1c, law1d over the record\'s pr
 });
 
 describe('BAR5-POWERS · the read\'s rows (REVIEW-BAR-5), each red at 600b7683a', () => {
-  for (const [row, seed, refused, instead] of ROWS) {
+  /** PEOPLE-1 B1: '@<pool>' is the town's printed position that is the low-standing twin or a member of the pool past index 0. @param {string} seed @param {string} line */
+  const resolved = (seed, line) => {
+    if (!line.startsWith('@')) return line;
+    const pool = POSITION_VARIANTS[line.slice(1)];
+    // B1c: the data pool holds the members past index 0 only (index 0, the T row, is composed by the writer)
+    const res = [new RegExp(`^${esc(LOW_TWIN_TRADE)}$`), ...pool.map((r) => new RegExp(`^${esc(r.text).replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`))];
+    const printed = (towns[seed].npcs || []).map((/** @type {any} */ n) => String(n.structuralPosition || ''));
+    return printed.find((/** @type {string} */ p) => res.some((re) => re.test(p))) ?? `(no member of ${line.slice(1)} prints)`;
+  };
+  for (const [row, seed, refused, instead0] of ROWS) {
     it(`${row} ${seed}: not "${refused.slice(0, 44)}…"; what prints instead`, () => {
       const text = said(towns[seed]);
+      const instead = resolved(seed, instead0);
       expectAbsentWithAnchor(text, refused, instead, `${row}: the refused claim; the same slot's true text`);
       expect(text).toContain(instead);
     });

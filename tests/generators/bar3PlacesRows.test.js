@@ -24,6 +24,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
+import { troubleHookPool } from '../../src/generators/history/troubleHooksOf.js'; // HOOKS-CURES A: the kind's pool, composed at its call site
 import { ARRIVAL_PEOPLE, ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
 
@@ -255,13 +256,14 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   const GUILD_HOOKS = 'historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict';
+  const GUILD_POOL = 'troubleHooks:TROUBLE_HOOKS:guild_conflict'; // HOOKS-BUILD (2026-11-20): the live quarrel's hooks are its kind's pool
   /** The birth's own ledger and its self-check's findings on the final record, for the guild war's hooks. @param {string} seed */
   const guildHookCheck = (seed) => {
     /** @type {any[]} */
     const ledger = [];
     const { result } = withPresumptionLedger(() => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }), ledger);
-    const mine = ledger.filter((e) => e.pool === GUILD_HOOKS);
-    return { text: JSON.stringify(result), noted: mine, findings: presumptionFindings(result, mine) };
+    const mine = ledger.filter((e) => e.pool === GUILD_HOOKS || e.pool === GUILD_POOL);
+    return { record: result, text: JSON.stringify(result), noted: mine, findings: presumptionFindings(result, mine) };
   };
 
   /** [row, seed, must not print, what prints instead] */
@@ -294,10 +296,16 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
     }), 'the true siblings still print');
   });
 
-  it("C13868 KEEP: where two guilds stand the sabotage hook (the live quarrel's copy) still prints, and its guild holds", () => {
-    const { text, noted, findings } = guildHookCheck('r2r-town-0');
-    expect(text, "the live quarrel's copy prints").toMatch(/Someone is sabotaging both sides to destabilize the market for a third party/);
-    expect(noted.some((e) => (e.atoms || []).includes('guild')), 'the hook was drawn through the ledger with its guild').toBe(true);
+  // HOOKS-BUILD (PAGE-7, 2026-11-20): the live quarrel's hook copy went; its three hooks are the kind's pool's, and the
+  // sabotage line stands in that pool with its guild declared. Red at the pool's landing as written before (the copy no
+  // longer prints at r2r-town-0, by the pool's rank); the arm now reads the pool.
+  it("C13868 KEEP: where two guilds stand the live quarrel's hooks are its pool's, drawn through the ledger, the sabotage line declares its guild, and every guild atom holds", () => {
+    const { record, noted, findings } = guildHookCheck('r2r-town-0');
+    const hooks = record.history?.currentTensions?.find((t) => t.type === 'guild_conflict')?.plotHooks || [];
+    expect(hooks.length, "the live quarrel's three hooks").toBe(3);
+    expect(hooks.filter((h) => !(troubleHookPool('guild_conflict') ?? []).some((r) => r.text === h)), 'each a line of the pool').toEqual([]);
+    expect(noted.filter((e) => e.pool === GUILD_POOL).length, 'each drawn through the ledger').toBe(3);
+    expect((troubleHookPool('guild_conflict') ?? []).find((r) => r.text.startsWith('Someone is sabotaging both sides'))?.needs, 'the sabotage line declares its guild').toContain('guild');
     expect(findings.filter((f) => f.atom === 'guild'), 'every guild atom holds on the final record').toEqual([]);
   });
 });

@@ -178,7 +178,11 @@ describe('the stressor desk — ALIVENESS at BIRTH', () => {
     // A banner sentence prints INSIDE its ACTIVE CRISIS card. INFILTRATED's third wording used
     // to open "There is no visible crisis" there; owner order 2026-09-17 took the same shape as
     // the no-banner line, so the corpus line was re-worded (claim kept: the crisis is hidden).
-    const DENIAL = /\bno (visible |real |actual )?(crisis|emergency)\b|\bnothing (here )?is urgent\b|\bnot a crisis\b/i;
+    // WIDENED 2026-11-22 (point 89's own reds): BUILD-1 appended two members to the no-crisis pool, v4 "Nothing at X
+    // stands at the pitch of an emergency" and v5 "sees none of the signs of an emergency", which the pattern did not
+    // catch (3 of 5 convicted at 5fca4362d), so the detector is widened to both denial shapes (5 of 5), and the banner
+    // arm below proves no crisis card's wording matches the widened pattern.
+    const DENIAL = /\bno (visible |real |actual )?(crisis|emergency)\b|\bnothing (here )?is urgent\b|\bnot a crisis\b|\bnothing\b[^.;:]*\bat the pitch of an? (crisis|emergency)\b|\bnone of the signs of an? (crisis|emergency)\b/i;
     const bannerKeys = Object.keys(STRESS_TYPE_MAP).map((t) => crisisBannerPoolKey(t));
     expect(bannerKeys, 'the banner roster').toHaveLength(15);
     const denials = bannerKeys.flatMap((key) => STR1_POOLS[key]

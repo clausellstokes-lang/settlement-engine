@@ -1036,8 +1036,11 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     // C1 — a high rung on a working approach. THE ROW §0c-3 WAS OPENED FOR.
     const c1Dark = drawnKeys('Wealthy', 'road', '');
     const c1Lit = drawnKeys('Wealthy', 'road', deriveEconomicComplexity('city', 9, 0, false));
-    expect(c1Dark.size, 'C1 dark was measured at ONE distinct sentence').toBe(1);
-    expect(c1Lit.size, 'C1 filled must reach all three of its variants').toBe(3);
+    // RE-RECORDED 2026-11-22 (point 89, e7096fe96: BUILD-1 13c57d9f6 with its cure 588967385): C1 gains the appended
+    // members v5..v7, none of which names {complexity}, so all three light on the dark side too: dark 1 -> 4, lit 3 -> 6
+    // (measured at 5fca4362d through the shipped desk). The claim is unchanged: the fill adds, and the dark lines survive it.
+    expect(c1Dark.size, 'C1 dark was measured at ONE distinct sentence, FOUR since point 89').toBe(4);
+    expect(c1Lit.size, 'C1 filled must reach its six variants (three before point 89)').toBe(6);
     // The dark sentence SURVIVES the fill — lighting a dark door adds, it never displaces.
     for (const line of c1Dark) expect(c1Lit.has(line), `the dark C1 line vanished: ${line}`).toBe(true);
     // And no residual slot reached a reader on either side.

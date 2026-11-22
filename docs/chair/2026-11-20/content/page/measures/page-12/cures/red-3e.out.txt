@@ -1,0 +1,29 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/generators/troubleHooksPools.test.js > MIXED-KEY: the rank is the kernel's mixed key > arm 3e: on hxd-city-0, each tension of these kinds stores the top three of its admitted lines by mix32(fnv1a32(key)), and troubleHooksOf gives the same
+AssertionError: hxd-city-0 resource_scarcity stored: expected [ …(3) ] to deeply equal [ …(3) ]
+
+- Expected
++ Received
+
+  [
+-   "A family that cannot pay the prices asked is selling its last good tools to buy what it needs",
+    "A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others",
+-   "A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out",
++   "An alternative source exists but the information is being suppressed",
++   "The scarcity was engineered. Someone destroyed the competing supply route",
+  ]
+
+ ❯ tests/generators/troubleHooksPools.test.js:134:67
+    132|       const expected = pool.filter((r) => declarationAdmits(declaratio…
+    133|         .map((r) => ({ text: r.text, key: rank(seed, tension.type, r.t…
+    134|       expect(tension.plotHooks, `${seed} ${tension.type} stored`).toEq…
+       |                                                                   ^
+    135|       expect(troubleHooksOf(tension.type, facts, seed), `${seed} ${ten…
+    136|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 16 skipped (17)
