@@ -1051,6 +1051,22 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the town's own brief unchanged: the re-emit is the chair's at the close); FORTUNE-7's U7d (the both-merits line
   keys on the first merit's sentence having printed: three lines; red 1 of 10 on a planted empty-name event, then
   green): every unit of "FORTUNE-B" but the line's merge and rule 8 is done.
+- E82 · THE OFFICE ATOMS GRANTED AS DAILY-3 LAID THEM OUT (2026-11-22 14:08 UTC; E72's condition 5 met: its table read). Measured on 900 births dark
+  (1ec3e81d1) and 900 lit (5c4419815), shares thorp to metropolis: `office: elders` = Elder Council, Free Elder
+  Council, Elder Consensus, Household Council (90 / 68 / 71 / 0 / 0 / 0); `office: headman` = Headman's Authority
+  (0 / 19 / 8 / 0 / 0 / 0); `office: mayor` = Town Mayor (0 / 0 / 0 / 37 / 0 / 0); `office: reeve` = Elected Reeve
+  (0 / 0 / 14 / 0 / 0 / 0); `office: lord's steward` = Feudal Stewardship (10 / 13 / 7 / 0 / 0 / 0). Dark and lit
+  disagree on 0 of 900; the shared read on 0 of 1,800; five seeds keep their form while the holder changes and the
+  atom holds (it reads the OFFICE, not the holder). THE HOME: the governing ROW's form through
+  `seatTable.js :: formKindOf`, never `powerStructure.government`; a frozen key-to-forms map in a LAZY leaf of
+  `facts/` (0 first-paint bytes: the three figures shown unmoved; the leaf pinned lazy). FAIL CLOSED where the
+  row is hidden. NOT HIDEABLE by an owner (a faction card's floor keeps its name and `isGoverning`; the one
+  writer of `hidden: true` is the infiltrator in `stressFactions.js`): the lane's landing line says so for the
+  veil's reader. THE TWO QUESTIONS: (1) YES, the Household Council sits under `office: elders`; (2) NO, a Feudal
+  Appointee (14 towns) is not the lord's steward. L8 TO L12 BUILD NOW. AN INTAKE ITEM FROM ITS NOTE:
+  `rulerKindOf`'s label test files a reeve as a mayor (42 places) and a headman as an elder (82): the five lines
+  never read it; DAILY-3 is asked for ONE grep (who reads it, and does any reader PRINT the kind's noun); if a
+  reader prints a false office word on the line today, the chair routes the cure (it is not DAILY-3's).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
