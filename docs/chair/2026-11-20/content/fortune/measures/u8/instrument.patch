@@ -1,0 +1,46 @@
+diff -ru clean/src/generators/defenseGenerator.js inst/src/generators/defenseGenerator.js
+--- clean/src/generators/defenseGenerator.js	2026-11-22 14:34:42.000000000 +0000
++++ inst/src/generators/defenseGenerator.js	2026-11-22 14:55:32.942446268 +0000
+@@ -476,6 +476,7 @@
+       for (const d of Object.keys(will.dims)) {
+         const armedOn = armedParts.reduce((a, q) => a + Math.max(0, q.dims[d] || 0), 0);
+         const floor = Math.min(will.dims[d], Object.hasOwn(unheld, d) ? /** @type {any} */ (unheld)[d] : 0);
++        if (globalThis.__X4) globalThis.__X4.push({ d, will: will.dims[d], armedOn, unheld: Object.hasOwn(unheld, d) ? unheld[d] : 0, floor, after: Math.max(floor, Math.min(will.dims[d], armedOn)), n, instead: Boolean(instead) });
+         will.dims[d] = Math.max(floor, Math.min(will.dims[d], armedOn));
+       }
+       willHeld = (before - sumOf(will.dims)) / n;
+diff -ru clean/src/generators/density/applyDensityLaw.js inst/src/generators/density/applyDensityLaw.js
+--- clean/src/generators/density/applyDensityLaw.js	2026-11-22 14:34:42.000000000 +0000
++++ inst/src/generators/density/applyDensityLaw.js	2026-11-22 15:44:27.073824382 +0000
+@@ -120,7 +120,7 @@
+   const route = String(config.tradeRouteAccess || 'road').toLowerCase();
+   const ROUTE_CONNECTIVITY = { isolated: 0.1, road: 0.5, river: 0.65, coastal: 0.75, port: 0.9 };
+   return {
+-    prosperity01: prosperityRank01(prosperity),
++    prosperity01: globalThis.__PROSP01 ?? prosperityRank01(prosperity),
+     connectivity01: ROUTE_CONNECTIVITY[route] ?? 0.5,
+     war01: clamp01(0.5 + 0.5 * stresses.filter(s => WAR.has(s)).length),
+     corruption01: clamp01(0.5 + 0.5 * stresses.filter(s => CORRUPT.has(s)).length),
+diff -ru clean/src/generators/density/densityRoll.js inst/src/generators/density/densityRoll.js
+--- clean/src/generators/density/densityRoll.js	2026-11-22 14:34:42.000000000 +0000
++++ inst/src/generators/density/densityRoll.js	2026-11-22 14:54:32.438919851 +0000
+@@ -578,6 +578,7 @@
+     },
+   );
+   const rulingKey = (seated.find(p => p.isGoverning) || seated[0] || null)?.key || null;
++  if (globalThis.__DBG) globalThis.__DBG.push({ seam: input.massOverride == null ? (seatAll ? 'rederive' : 'population') : 'resize', seatAll, tier, pop: input.population, particulars, tilt, rolledFactionCount, rolledMass, massOverride, namedMass, ordered: ordered.map(p => [p.key, p.power, p.isGoverning ? 'gov' : '']), crisisSeat: crisisSeat && crisisSeat.key, factionCeiling, factionCount, rival: { ...rival }, seated: seated.map(p => p.key) });
+ 
+   // ── Stage 3: dispersal ─────────────────────────────────────────────────────
+   const counts = disperseMass(
+diff -ru clean/src/generators/factionDynamics.js inst/src/generators/factionDynamics.js
+--- clean/src/generators/factionDynamics.js	2026-11-22 14:34:42.000000000 +0000
++++ inst/src/generators/factionDynamics.js	2026-11-22 15:44:27.073320497 +0000
+@@ -784,7 +784,7 @@
+     let mult = 1.0;
+ 
+     if (isGov) {
+-      mult = publicLeg.govMultiplier;
++      mult = globalThis.__GOVMULT ?? publicLeg.govMultiplier;
+       // Tag legitimacy crisis on governing faction
+       if (publicLeg.governanceFractured) {
+         f.legitimacyCrisis = true;
