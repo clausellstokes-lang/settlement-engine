@@ -62,7 +62,10 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
   shortfall pages on metropolis-occupied-0-65; parity 0; ruling 88: 4 pages, all at g:010, village-under_siege-0-8;
   `out/v32/tell8b/arm-tip/`, `gunzip -k` the shards before `node measure/arm-an.mjs arm-tip`); (ii) the pglite test <this commit> (tip: 1 failed of 1 in
   311 s; HALF 1 272, HALF 2 184, hook 22; the anti-vacuity and teeth arms hold); (iv) the evidence red and its converse <this commit> (tip: 1 failed, the
-  converse 1 passed); cure not started.
+  converse 1 passed); tests/lint WHOLE after the reds (08:04:23; `lint-whole-reds.txt`): 18 files / 26 tests failed: the
+  sixteen standing (the seat's 3cca025b8 list, 22 tests), mine crimeTypesReaders (3, red by design) and
+  netCurrentExtractorAnchor (1: my walker's unanchored SQL lookup, cured <this commit>, both re-run: 7 passed, the 3
+  red by design); cure not started.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no

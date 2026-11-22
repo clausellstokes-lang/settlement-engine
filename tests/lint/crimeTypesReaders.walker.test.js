@@ -99,8 +99,9 @@ function declBody(text, name) {
 }
 /** The body of a 212 function, or null. */
 function sqlBody(sql, name) {
-  const i = sql.indexOf(`create or replace function public.${name}(`);
-  if (i < 0) return null;
+  const m = new RegExp(`^create or replace function public\\.${name}\\(`, 'm').exec(sql);
+  if (!m) return null;
+  const i = m.index;
   const j = sql.indexOf('end $$;', i);
   return j < 0 ? null : sql.slice(i, j);
 }
