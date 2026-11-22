@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 78,
-  addresses: 52,
+  reads: 79,
+  addresses: 53,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -77,5 +77,8 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     // ⭐ THE SCHEMA-41 RUNG'S ONE, THE FIRST PLAYED-WORLDS WRITER (STYLE-2-MERGE closing act 5, the chair's FINAL
     // RULING of 2026-11-09 21:2x): the one read in src/domain/display/newsBody.js :: itemSettlementIds.
     'outcome on outcome': Object.freeze({ reads: 1, addresses: 1 }),
+    // ⭐ THE SCHEMA-46 RUNG'S ONE (the fortune merits; FORTUNE U5a-CURE item 2, route B, the chair's ruling of
+    // 2026-11-20 22:18 UTC): the one read in src/domain/fortune/fortuneMerits.js :: baseScoreOf.
+    'merits on breakdown': Object.freeze({ reads: 1, addresses: 1 }),
   }),
 });

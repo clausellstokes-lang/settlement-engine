@@ -1,0 +1,124 @@
+== stale-late-hxd
+{
+ "tree": "<scratch>/late",
+ "order": [
+  "assembleSettlement",
+  "u5PlaceMerits",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxd",
+ "births": 600,
+ "moved": 64,
+ "moves": {
+  "Approved -> Endorsed": 15,
+  "Tolerated -> Tolerated": 3,
+  "Tolerated -> Approved": 45,
+  "Approved -> Approved": 1
+ },
+ "W1": 0,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 4,
+ "W4": 0,
+ "W5": 9,
+ "W4control": {
+  "towns": 180,
+  "differ": 0
+ },
+ "examples": []
+}
+== stale-late-hxr
+{
+ "tree": "<scratch>/late",
+ "order": [
+  "assembleSettlement",
+  "u5PlaceMerits",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxr",
+ "births": 600,
+ "moved": 45,
+ "moves": {
+  "Tolerated -> Approved": 17,
+  "Approved -> Endorsed": 15,
+  "Tolerated -> Tolerated": 4,
+  "Approved -> Approved": 1,
+  "Endorsed -> Endorsed": 8
+ },
+ "W1": 2,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 4,
+ "W4": 0,
+ "W5": 1,
+ "W4control": {
+  "towns": 200,
+  "differ": 0
+ },
+ "examples": [
+  "W1 hxr-town-34 adversarial Approved->Endorsed: stored stable",
+  "W1 hxr-city-13 adversarial Approved->Endorsed: stored stable"
+ ]
+}
+== stale-end-hxd
+{
+ "tree": "<scratch>/end",
+ "order": [
+  "generateNarratives",
+  "assembleSettlement",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxd",
+ "births": 600,
+ "moved": 64,
+ "moves": {
+  "Approved -> Endorsed": 15,
+  "Tolerated -> Tolerated": 3,
+  "Tolerated -> Approved": 45,
+  "Approved -> Approved": 1
+ },
+ "W1": 0,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 4,
+ "W4": 0,
+ "W5": 9,
+ "W4control": {
+  "towns": 180,
+  "differ": 0
+ },
+ "examples": []
+}
+== stale-end-hxr
+{
+ "tree": "<scratch>/end",
+ "order": [
+  "generateNarratives",
+  "assembleSettlement",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxr",
+ "births": 600,
+ "moved": 45,
+ "moves": {
+  "Tolerated -> Approved": 17,
+  "Approved -> Endorsed": 15,
+  "Tolerated -> Tolerated": 4,
+  "Approved -> Approved": 1,
+  "Endorsed -> Endorsed": 8
+ },
+ "W1": 2,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 4,
+ "W4": 0,
+ "W5": 1,
+ "W4control": {
+  "towns": 200,
+  "differ": 0
+ },
+ "examples": [
+  "W1 hxr-town-34 adversarial Approved->Endorsed: stored stable",
+  "W1 hxr-city-13 adversarial Approved->Endorsed: stored stable"
+ ]
+}
