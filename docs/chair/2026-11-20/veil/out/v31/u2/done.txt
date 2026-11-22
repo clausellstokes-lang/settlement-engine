@@ -1,0 +1,12 @@
+start 01:25:57 tip 964426a72
+red-t5 at d6d8644b2 rc=1 (expect 1)
+walker+manifest at the lane tip rc=1 (expect 1: ARM D, TOTALITY)
+walkers+manifest at tip rc=0
+arms 3+4+5 at tip rc=0
+registry-check rc=0
+tpl rc=0
+verify rc=0 verify: 45 cached births re-read, 0 differ
+gates rc=1 01:32:26
+sv+handrows+born rc=0
+harnesses rc=0
+END 02:06:25

@@ -6,9 +6,25 @@ Seat: VEIL-31, a seat of the EIGHTH chair (session_01ACmDYY29VRchM87v1yhL9Q; sen
 verified by ls-remote).
 
 ## 1. WHERE THE LANE STANDS (kept current at every push)
-- THE LANE: `lane/veil-31-2026-11-21` = 5818130c4 (VEIL-30's saved tip: 2437ffea0 + R3-TELL-3 merged cca6656a6 + R3-TELL-4
-  unit (i) merged 147eeb22f + brief R3-TELL-5 a3eec1e76 + PART 31) + this record. NOTHING MERGED BY VEIL-31.
-- BYTES at 5818130c4: 212 `1bfb961b165965f5b92cf7b55be844a12000d54ce954e08abbaf7c4f01b20d10`, rollback `8cbd7d1c…ded5b0`;
+- THE LANE: `lane/veil-31-2026-11-21` = 5818130c4 (VEIL-30's saved tip) + this seat's records + THE MERGE OF R3-TELL-5 UNITS 0,
+  0b AND (ii) (`--no-ff` of `v31-r3tell5` at 964426a72, pushed as `lane/veil-31-2026-11-21-r3tell5-wip`) as 66e43865d.
+- BYTES AFTER 66e43865d: 212 `64453e569c4b346360ef0b7228b94ff7de3ae718c15b6378c2ab70bc5903b4b9` (after unit 0 alone
+  `4e7e4a22…2da1c`; cause: unit 0 the marker comment, unit (ii) the criminal services rule `svctags` / `acc_types`); rollback
+  `8cbd7d1c…ded5b0` and 211 `eface6d0…0b01` / `ce8474ff…712f` UNCHANGED (`out/v31/u2/sha256.txt`).
+- UNIT (ii) MERGED (rulings 73, 74 (ii), 77, 79): (0) the people.allegiance marker db8cc08f4 (ARM D red 1/11 -> 11/11); (0b) the
+  manifest entries c0f8faf21 (TOTALITY red -> green; Tell5 entered too); (ii) red d6d8644b2, cure 369331d72: where a house is
+  hidden whole a CRIMINAL services row stays only BY POSITIVE ACCOUNT (its `institution` a listed house, or the tag of a crime
+  type a shown house or a crisis raises, VR39 over `pub`'s list), both engines. THE SEAT'S RE-RUNS (`out/v31/u2/done.txt`): red
+  1/1 at d6d8644b2; arms Tell3+4+5 5/5; walkers + manifest + pools 27/27 (21: 2 failed at 5818130c4); --check 0; sv + hand rows +
+  born 0; harnesses 0; verify 45/0; GATE-1 4/92 (7 LOWER BY RULE), GATE-2 26/40 red (from 34), twin = server every cell. The
+  diff read whole once with 212 and the registry: no fault (one raised map, one served-house list, one type table, both engines).
+  FAMILIES LEFT (by town): powers.capture 21, inst.criminal 6, chains.criminal 6, powers.criminal 3, sp.ops 2, powers.relations
+  2, sp.crimeTypes 1, imports.criminal 1, tensions.crime 1; svc.criminal 27 -> 0, income.criminal 1 -> 0.
+- TWO STOPS TO THE CHAIR (the builder's; `out/v31/tell5/TELL5-HANDBACK.md`): (1) sp.crimeTypes, r3m-city-under_siege-1-108: the
+  one type left, "black market food", is the siege's own: VR39 keeps it; (2) sp.ops, r3m-town-infiltrated-0-12 and
+  r3m-town-insurgency-0-14: "Gambling Den" is accounted for by a SERVED house carrying that label. NOT CLOSED as ruling 74
+  expected: inst.criminal and chains.criminal (6 towns each, "0->+": the nearest member HAS them).
+- BYTES at 5818130c4 (before unit (ii)): 212 `1bfb961b165965f5b92cf7b55be844a12000d54ce954e08abbaf7c4f01b20d10`, rollback `8cbd7d1c…ded5b0`;
   211 `eface6d0…0b01` / `ce8474ff…712f` unchanged.
 - A RED AT THE MERGED TIP (found 23:21 by make-instruments, `walker 1`): `tests/lint/rosterChoiceRegistry.walker.test.js` ARM D
   "a BUILT row's symbols exist and each rule names its row id": `people.allegiance` is not named by
@@ -37,7 +53,7 @@ verified by ls-remote).
   FOR THE JOIN, cured by no one on this lane unless the chair rules. ONE MORE THE MERGES CARRIED: `mutationCoverageManifest`
   TOTALITY names `galleryVeilTell3`/`galleryVeilTell4.pglite.test.js` (no manifest entry; green at 2437ffea0): given to the builder
   as UNIT 0b (its own commit; the lane's precedent entry `{kind: rationale, ref: pglite-executed}`); told the chair (vetoable).
-- IN FLIGHT: BUILDER R3-TELL-5 (an Agent subagent of this seat,
+- DONE: BUILDER R3-TELL-5 (an Agent subagent of this seat,
   the seat's own tier) seated ~00:11 on worktree `/home/user/wt/r3tell5`, branch `v31-r3tell5` (local, cut at f22bb8324): unit 0
   (ruling 77's marker) then unit (ii); it waits for the seat's chain before any heavy run. If this seat stops, its work goes up
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
@@ -98,3 +114,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 00:10 the chair: ruling 78 (merge accepted; mark 700,000). 00:10 the unit (ii) builder seated (section 1).
 - 00:40 the green chain ended; 00:53 tests/lint whole read; the 13 re-run at 2437ffea0 (12 red there). 00:56 unit 0b to the builder; the line to the chair.
 - 01:01 the chair's 00:57 message read: ruling 79. 01:01 PART 32 sections 2, 2b.
+- (before 01:25, not clocked) the builder returned (units 0, 0b, (ii); two STOPS); its branch pushed `-wip`; diff read whole once. 01:25 chain2 (the seat's re-runs); 02:06 END, every figure reproduced. 66e43865d merged. 02:17 tests/lint whole at the merge running.
