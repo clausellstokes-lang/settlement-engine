@@ -44,6 +44,9 @@ verified by ls-remote).
   IN FLIGHT (resumed 07:2x, mark 600,000; committing at every standing step): its work is pushed as
   `lane/veil-32-2026-11-22-r3tell8b-wip` (at 85a8c6562 at 07:36: its read-whole STOP note only; a successor fetches the
   worktree branch `v32-r3tell8b` from that name). If this seat stops, the latest commits go up there unread.
+- VEIL-33 (ruling 91) is seated beside this seat: the join probe and the preparation of (iv), (v), (vi) are its; 212, the twin
+  and the registry are written by THIS seat alone until "HAND-OVER <commit>". 212 LAST CHANGED at 8807cde93 (unit (iii), the
+  capture key where the served crime signal is false): `8688ddb6…5a3a`; no change by this seat yet.
 - NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): R3-TELL-8b seated on the amended brief (steps 2-3);
   at its return: diff read once with 212 and the registry, reds and greens re-run, the pool RE-MADE on the cured tree in a NEW
   directory (the old kept until the new counts are in), both gates, one line to the chair; then (iv), (v), (vi) per R3-TELL-5's
@@ -108,6 +111,13 @@ verified by ls-remote).
     `densityCreateBoundary.js :: birthConfig`), proven lit; the probe merges THAT ref with the lane on the scratch branch (ruling
     63 met by construction). ORDER: (viii)'s pool re-make first, the probe's pool after it, never beside it. THE PROBE ALSO
     MEASURES E35's HOOK GAP (DM door open, the hooks' eye opened, a criminal house left veiled: a trouble's hook is served).
+91. THE CHAIR, 08:01 UTC (E49, the owner's word on the pace): A SECOND SEAT, VEIL-33, beside this one on its own machine (branch
+    `lane/veil-33-2026-11-22`, cut from this lane at its seating). (1) THE JOIN PROBE IS VEIL-33's (both passes, its machine);
+    rulings 89-90's probe terms are its. (2) THIS SEAT STAYS THE ONE WRITER of 212, its twin and the registry until it hands
+    over; VEIL-33 PREPARES (iv), (v), (vi) (measure, committed brief, red-first instrument on a -wip branch). (3) THIS SEAT'S
+    SUCCESSOR IS VEIL-33, already read in: at the mark, "HAND-OVER <commit>" to the chair and stop. (4) SECTION 1 IS KEPT CURRENT
+    AT EVERY PUSH (the state, the gates' counts, what 212 last changed and why): VEIL-33 reads it today. No message to VEIL-33;
+    anything for it goes through the chair.
 
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
