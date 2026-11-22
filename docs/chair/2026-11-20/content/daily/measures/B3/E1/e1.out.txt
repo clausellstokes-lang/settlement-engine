@@ -1,5 +1,5 @@
 RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/E1/measure.e1.mjs > docs/chair/2026-11-20/content/daily/measures/B3/E1/e1.out.txt 2>&1
-births and slots: 900 (150 a size, M1's recipe) in 129s
+births and slots: 900 (150 a size, M1's recipe) in 147s
 the dm key on a no-audience read: 0 of 900
 dm texts not traced to a pool line: 0
 
@@ -10,7 +10,7 @@ dm texts not traced to a pool line: 0
 | top whole text % of 150 | 3 | 3 | 1 | 3 | 8 | 8 |
 | distinct texts | 3 | 3 | 2 | 4 | 3 | 3 |
 | EMPTY (no true line) | 140 | 139 | 147 | 138 | 125 | 125 |
-| reach % / min eligible: crime70 | 0 / — | 0 / — | 0 / — | 1 / 5 | 0 / — | 0 / — |
+| reach % / min eligible: crime70 | 0 / — | 0 / — | 0 / — | 1 / 6 | 0 / — | 0 / — |
 | reach % / min eligible: crime55 | 7 / 3 | 7 / 3 | 2 / 3 | 7 / 3 | 17 / 3 | 17 / 3 |
 | FALSE blind eye: no guard force: factsOf(r).guardPresence (M1 row 191, the clause now owner-only) | 0 | 0 | 0 | 0 | 0 | 0 |
 | FALSE \bthe watch\b: no watch: defenceOf(r).watch (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -30,37 +30,37 @@ dm texts not traced to a pool line: 0
 ════ commoner_resentments (public, no audience)
 | row | thorp | hamlet | village | town | city | metropolis |
 |---|---:|---:|---:|---:|---:|---:|
-| top single SENTENCE % of 150 | 65 | 71 | 84 | 37 | 48 | 60 |
-| top whole text % of 150 | 65 | 71 | 84 | 37 | 48 | 60 |
-| distinct texts | 3 | 3 | 4 | 4 | 4 | 4 |
-| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| top single SENTENCE % of 150 | 17 | 11 | 13 | 8 | 9 | 14 |
+| top whole text % of 150 | 11 | 9 | 12 | 4 | 7 | 10 |
+| distinct texts | 39 | 54 | 41 | 61 | 47 | 38 |
+| EMPTY (no true line) | 29 | 13 | 11 | 53 | 51 | 39 |
 | FALSE blind eye|smugglers who pay no tax: a crime clause on the public slot (ruling 6) | 0 | 0 | 0 | 0 | 0 | 0 |
-| FALSE merchants who claim: no market: marketOf(r) (M1 row 192) | 22 | 28 | 10 | 0 | 0 | 0 | e.g. hxd-thorp-7
-| FALSE the council's indifference: not a council: rulingBodyOf(r) !== true (M1 row 193) | 10 | 46 | 39 | 34 | 3 | 5 | e.g. hxd-thorp-52
+| FALSE merchants who claim: no market: marketOf(r) (M1 row 192) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's indifference: not a council: rulingBodyOf(r) !== true (M1 row 193) | 0 | 0 | 0 | 0 | 0 | 0 |
 | FALSE officials who keep their posts: no appointed post (M1 row 194) | 0 | 0 | 0 | 0 | 0 | 0 |
-| FALSE of any town: not a town: populationBand small (M1 row 195) | 30 | 13 | 7 | 4 | 0 | 0 | e.g. hxd-thorp-0
-| FALSE the gate fee: no gate (M1 row 196) | 30 | 13 | 12 | 19 | 0 | 0 | e.g. hxd-thorp-0
-| FALSE market day: no market (M1 row 197) | 30 | 11 | 4 | 0 | 0 | 0 | e.g. hxd-thorp-0
-| FALSE the council's favorite: not a council (M1 row 198) | 5 | 2 | 3 | 24 | 9 | 10 | e.g. hxd-thorp-78
-| FALSE favorite tavern: no tavern/inn (M1 row 199) | 30 | 3 | 6 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| FALSE of any town: not a town: populationBand small (M1 row 195) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the gate fee: no gate (M1 row 196) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE market day: no market (M1 row 197) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's favorite: not a council (M1 row 198) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE favorite tavern: no tavern/inn (M1 row 199) | 0 | 0 | 0 | 0 | 0 | 0 |
 | a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
 | a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
-| the word "town" at a place smaller than a town (rule 4) | 30 | 13 | 12 | 0 | 0 | 0 | e.g. hxd-thorp-0
-| the word "town" at any place | 30 | 13 | 12 | 55 | 55 | 41 | e.g. hxd-thorp-0
-  top sentence thorp (98/150): "Commoners resent the council's indifference to ordinary complaints."
-  top sentence hamlet (106/150): "Commoners resent the council's indifference to ordinary complaints."
-  top sentence village (126/150): "Commoners resent the council's indifference to ordinary complaints."
-  top sentence town (55/150): "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
-  top sentence city (72/150): "Commoners resent rising bread prices and merchants who claim they cannot help it."
-  top sentence metropolis (90/150): "Commoners resent rising bread prices and merchants who claim they cannot help it."
+| the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at any place | 0 | 0 | 0 | 41 | 0 | 0 | e.g. hxd-town-2
+  top sentence thorp (25/150): "Talk among neighbours turns, sooner or later, to what the Elder Council has got wrong lately."
+  top sentence hamlet (16/150): "People say the council is slow to listen and quick to decide without them."
+  top sentence village (20/150): "People do as the Elder Council says, but few of them think well of it."
+  top sentence town (12/150): "Many feel that those in charge should be doing more to see everyone fed."
+  top sentence city (13/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+  top sentence metropolis (21/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
 
-FALSE-LINE TOTAL (both slots, every row above): 462
-HOUSE-RULE HITS TOTAL (both slots, every row above): 261
+FALSE-LINE TOTAL (both slots, every row above): 0
+HOUSE-RULE HITS TOTAL (both slots, every row above): 41
 
 ── M1's named places ──
-hxd-thorp-0: dm "" | public "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
-hxd-hamlet-0: dm "" | public "Commoners resent the council's indifference to ordinary complaints."
-hxd-hamlet-7: dm "" | public "Commoners resent the council's indifference to ordinary complaints."
-hxd-metropolis-0: dm "" | public "Commoners resent rising bread prices and merchants who claim they cannot help it; and the council's indifference to ordinary complaints."
+hxd-thorp-0: dm "" | public ""
+hxd-hamlet-0: dm "" | public "Many here feel that the Headman's Authority no longer listens to people like them."
+hxd-hamlet-7: dm "" | public "People bring their complaints to the Free Elder Council and expect little to come of them."
+hxd-metropolis-0: dm "" | public "Few here would say that the Ducal Governorship speaks for them. Nobody likes to see the pot so thin, and everyone has someone to blame for it."
 
-done in 129s
+done in 147s

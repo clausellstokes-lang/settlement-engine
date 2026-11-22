@@ -19,11 +19,9 @@
  * market and a gambling den, and the criminal-income home (`facts/criminalIncome.js`) reads any criminal revenue. A line
  * with no true need is not eligible, so the branch keeps the chair's three.
  *
- * NOT BUILT (a walker's reading no need of the vocabulary answers truly): crime70 #4 of LINES-2 § 2b ("… the law here bends
- * for anyone with coin to spare."). The presumption-classes walker reads "to spare" as the `plenty` class
- * (`tests/lint/presumptionClasses.shared.mjs :: CLASSES.plenty`), which only a food or prosperity atom answers; the line
- * presumes no plenty, and declaring one would narrow it falsely. The branch keeps five; the class reading is the
- * lexicon's to make, left for the chair.
+ * THE CHAIR'S LINE OF B3 F1 (06:17 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 item 4): crime70 #4 of LINES-2 § 2b as the
+ * chair reworded it ("… the law here bends for anyone who can pay."; the presumption-classes walker read "to spare" as
+ * the `plenty` class), with no need.
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} ResentmentDmLine */
@@ -39,6 +37,7 @@ export const COMMONER_RESENTMENTS_DM = Object.freeze({
     { id: 'K70_1', text: 'Commoners grumble that the watch looks the other way when the right purse is opened.', needs: ['watch'] },
     { id: 'K70_2', text: 'People resent that those who keep order here seem to see only what suits them.', needs: ['guardPresence'] },
     { id: 'K70_3', text: 'Commoners say that wrongdoing goes unpunished here if the wrongdoer has the right friends.', needs: [] },
+    { id: 'K70_4', text: 'Ordinary folk resent that the law here bends for anyone who can pay.', needs: [] },
     { id: 'K70_5', text: 'People grumble that honest folk are pressed hard while lawbreakers with money walk free.', needs: [] },
   ]),
   /** criminal opportunity >= 55 and below 70: wrongdoing pays (the chair's three of 18:47). */

@@ -6,7 +6,10 @@
  * `src/domain/dailyLife.js :: deriveDailyLife(record, { audience })` derives `commoner_resentments_dm` ONLY when
  * `audience === 'owner'`; every other read (no options, no audience, any other value) carries NO such key (absent, not
  * ''). The crime clauses (criminal opportunity >= 55 / >= 70) leave the public `commoner_resentments` for it. Arms, over
- * M1's 900 births (`measures/M1/measure.m1.mjs`'s recipe, seeds `hxd-<size>-0..149`, 150 a size):
+ * 30 births, five a size (M1's recipe, `measures/M1/measure.m1.mjs`, seeds `hxd-<size>-0..4`; the chair's ruling 3 of
+ * 2026-11-22 06:17 cut the 900, every size and every arm kept). THE GATE WAS PROVED ON THE 900 BY THE MEASURE
+ * (`docs/chair/2026-11-20/content/daily/measures/B3/E1/measure.e1.mjs`, out file `e1.out.txt`, re-run on B3 F1's built
+ * code): the owner's read carries the key on 900 of 900 and a no-audience read on 0 of 900.
  *   (a) THE GATE: the owner's read carries the key on every place; a no-audience read, an `{ audience: 'reader' }` read
  *       (and any other value), the read of the place's `toPublicSafe` document and that document itself never do; the
  *       eight public slots are byte-equal whatever the audience.
@@ -20,6 +23,8 @@
  *   (d) THE COUNT: a getter trap on every person of each `toPublicSafe` document counts the reads of `secret`,
  *       `plotHooks` and `goal` during the public derivation of that document.
  *   (e) A "smugglers" line needs smuggling in the record: no fact home answers it, so no pool line says it.
+ *   (f) THE CHAIR'S crime70 K70_4 (B3 F1; `DAILY-3-HANDBACK.md` § 2 item 4): in the pool with no need, and at criminal
+ *       opportunity 100 the owner's crime70 pick takes it on a born place.
  */
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -56,9 +61,9 @@ const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
 
 const DM = 'commoner_resentments_dm';
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const N = 150;
+const N = 5;
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
-/** A per-test timeout for the arms that walk the 900 places (each takes seconds to a minute). */
+/** A per-test timeout for the arms that walk the born places. */
 const HEAVY = 600_000;
 
 /** @type {Array<{ seed: string, size: string, rec: any }>} */
@@ -87,8 +92,8 @@ function keysIn(v, out = new Set()) {
 const withCrime = (fn, crime) => { forced.crime = crime; try { fn(); } finally { forced.crime = null; } };
 
 describe('the owner-only slot commoner_resentments_dm: the gate (ruling 6; fails closed)', () => {
-  it('the born places number 900, 150 a size (M1\'s births)', () => {
-    expect(births).toHaveLength(900);
+  it('the born places number 30, five a size (M1\'s births; the 900 by the measure)', () => {
+    expect(births).toHaveLength(30);
     for (const size of SIZES) expect(births.filter((b) => b.size === size), size).toHaveLength(N);
   });
 
@@ -116,7 +121,7 @@ describe('the owner-only slot commoner_resentments_dm: the gate (ruling 6; fails
     expectNoSeedFailures(failures, 'no read but the owner\'s carries the dm key');
   }, HEAVY);
 
-  it('the key is ABSENT on every toPublicSafe document and on the read of it, on the 900 born places', () => {
+  it('the key is ABSENT on every toPublicSafe document and on the read of it, on the 900 born places (here the 30; the 900 by the measure)', () => {
     const failures = collectSeedFailures(seeds(), (seed) => {
       const { rec } = at(seed);
       const doc = toPublicSafe(rec);
@@ -172,7 +177,7 @@ describe('the call sites that never receive the owner-only slot', () => {
     for (const rel of ['src/domain/regenerationDelta.js', 'src/domain/aiGrounding.js']) expect(src(rel), rel).not.toMatch(/audience/);
   });
 
-  it('deriveRegenerationDelta and buildAiGroundingPayload never carry the key or the owner\'s text, on the 900 born places', () => {
+  it('deriveRegenerationDelta and buildAiGroundingPayload never carry the key or the owner\'s text, on the 30 born places', () => {
     const failures = collectSeedFailures(seeds(), (seed) => {
       const { rec, size } = at(seed);
       const i = Number(seed.split('-').pop());
@@ -208,7 +213,7 @@ describe('THE COUNT: the public derivation of a shared read\'s document reads no
     }
     return count;
   }
-  it('each toPublicSafe document carries none of the three, and the public derivation reads none beyond the substrate\'s own reads (the count over 900 documents)', () => {
+  it('each toPublicSafe document carries none of the three, and the public derivation reads none beyond the substrate\'s own reads (the count over 30 documents)', () => {
     const total = { documents: 0, people: 0, substrateReads: 0, dailyLifeReads: 0, valued: 0 };
     const failures = collectSeedFailures(seeds(), (seed) => {
       const { rec } = at(seed);
@@ -227,7 +232,7 @@ describe('THE COUNT: the public derivation of a shared read\'s document reads no
     process.stderr.write(`THE COUNT (dailyLifeOwnerSlot): ${total.documents} toPublicSafe documents, ${total.people} people trapped; `
       + `reads of secret/plotHooks/goal during deriveDailyLife: ${total.dailyLifeReads} (the seven substrate derivers alone: ${total.substrateReads}); reads that gave a value: ${total.valued}\n`);
     expectNoSeedFailures(failures, 'the public derivation reads no person\'s secret, plotHooks or goal of its own, and no value');
-    expect(total.documents).toBe(900);
+    expect(total.documents).toBe(30);
   }, HEAVY);
 });
 
@@ -239,5 +244,19 @@ describe('a "smugglers" line needs smuggling in the record', () => {
     expect(lines.filter((l) => /smuggl/i.test(l.text)).map((l) => l.id)).toEqual([]);
     const said = births.map((b) => deriveDailyLife(b.rec, { audience: 'owner' }).slots[DM]?.text ?? '').filter((t) => /smuggl/i.test(t));
     expect(said).toEqual([]);
+  }, HEAVY);
+});
+
+describe('the chair\'s crime70 line K70_4 (B3 F1)', () => {
+  const K70_4 = 'Ordinary folk resent that the law here bends for anyone who can pay.';
+  it('K70_4 is in the crime70 pool with no need, and at criminal opportunity 100 the owner\'s pick takes it on a born place', async () => {
+    const { COMMONER_RESENTMENTS_DM } = await import('../../src/data/dailyLife/commonerResentmentsDm.js');
+    const line = COMMONER_RESENTMENTS_DM.crime70.find((l) => l.id === 'K70_4');
+    expect(line, 'crime70 K70_4').toBeDefined();
+    expect(line?.text).toBe(K70_4);
+    expect(line?.needs).toEqual([]);
+    /** @type {string[]} */ const took = [];
+    withCrime(() => { for (const b of births) if (deriveDailyLife(b.rec, { audience: 'owner' }).slots[DM].text === K70_4) took.push(b.seed); }, 100);
+    expect(took.length, 'the born places whose crime70 pick is K70_4').toBeGreaterThan(0);
   }, HEAVY);
 });

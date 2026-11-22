@@ -469,6 +469,7 @@
   {"pool":"src/data/dailyLife/childWarnings.js :: CHILD_WARNINGS::unrest","sha":"b6190ba03f21","house":"market"},
   {"pool":"src/data/dailyLife/childWarnings.js :: CHILD_WARNINGS::unrest","sha":"bf96610b5ac2","house":"institution: tavern"},
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"03a2120157e9","house":"market"},
+  {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"20549ec75926","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"4fbba5294d2c","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentments.js :: COMMONER_RESENTMENTS::food","sha":"798b8a31bfdf","house":"market"},
   {"pool":"src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM::crime70","sha":"7458feba94ef","house":"watch"},

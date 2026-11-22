@@ -16,6 +16,9 @@
  *       atoms (`facts/drawDeclared.js :: filterDeclared`) and picked by `pickVariantMixed` keyed
  *       `<record.name>::dailyLife.<slot>::<branch>`; `{gov}` the government's label with its article.
  *   (d) No "town" at a place smaller than a town, no bracket.
+ *   (e) THE CHAIR'S LINES OF B3 F1 (`DAILY-3-HANDBACK.md` § 2 items 4 and 5; the dispatch `B3-F1-DAILY-3-DISPATCH.md`):
+ *       food A4, A12, T9, C5 and resentments F0 are in their pools with the ruled texts and needs, and none prints where
+ *       its record lacks grain, an import of grain or a market (the 900 live in `measures/B3/F1`).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -146,5 +149,51 @@ describe('food_culture and commoner_resentments: the route, from the slots\' own
       }
     });
     expectNoSeedFailures(failures, 'both slots say their own pools\' keyed picks on every born place');
+  });
+});
+
+/**
+ * THE CHAIR'S LINES (B3 F1; `DAILY-3-HANDBACK.md` § 2 items 4 and 5, 06:17 and E56 of 2026-11-22, verbatim): each in its
+ * branch with its needs; a line that names bread or grain prints only where the food record grows grain (`grain`), the
+ * grain bought in only where an import names grain (`grain imported`), and "merchants who claim" only where there is a
+ * market (M1's false line).
+ */
+const F1_LINES = /** @type {const} */ ([
+  ['food_culture', 'adequate', 'A4', 'Food is steady here, if not generous, and every household has enough with little left over.', []],
+  ['food_culture', 'adequate', 'A12', 'The grain is bought in, not grown here, so bread is never wasted.', ['grain imported']],
+  ['food_culture', 'strained', 'T9', 'Bread is eaten carefully, and not even the heel of the loaf is wasted.', ['grain']],
+  ['food_culture', 'critical', 'C5', 'The stew is thin and the bread is thinner.', ['grain']],
+  ['commoner_resentments', 'food', 'F0', 'Commoners resent rising bread prices and merchants who claim they cannot help it.', ['grain', 'market']],
+]);
+/** the record tests, read from the fact homes directly: grain grown, grain imported, a market */
+const GRAIN = {
+  grain: (/** @type {any} */ r) => (factsOf(r).foodSources ?? []).includes('grain'),
+  'grain imported': (/** @type {any} */ r) => (factsOf(r).imports ?? []).some((/** @type {unknown} */ g) => typeof g === 'string' && /\bgrain\b/i.test(g)),
+  market: (/** @type {any} */ r) => T.market(r) === true,
+};
+
+describe('the chair\'s lines of B3 F1: A4, A12, T9, C5 and F0', () => {
+  it('each line is in its branch of its slot\'s pool, with the chair\'s text and needs', async () => {
+    const { FOOD_CULTURE } = await import('../../src/data/dailyLife/foodCulture.js');
+    const { COMMONER_RESENTMENTS } = await import('../../src/data/dailyLife/commonerResentments.js');
+    for (const [slot, branch, id, text, needs] of F1_LINES) {
+      const pool = /** @type {Record<string, ReadonlyArray<{ id: string, text: string, needs: ReadonlyArray<string>, excludes?: ReadonlyArray<string> }>>} */ (slot === 'food_culture' ? FOOD_CULTURE : COMMONER_RESENTMENTS)[branch];
+      const line = pool.find((l) => l.id === id);
+      expect(line, `${slot}.${branch} ${id}`).toBeDefined();
+      expect(line?.text, `${slot}.${branch} ${id}`).toBe(text);
+      expect(line?.needs, `${slot}.${branch} ${id}`).toEqual(needs);
+      expect(line?.excludes, `${slot}.${branch} ${id}`).toBeUndefined();
+    }
+  });
+  it('no line prints where its record lacks what it needs (grain, grain imported, a market), on the 30 born places', () => {
+    const failures = collectSeedFailures(seeds(), (seed) => {
+      const x = at(seed);
+      for (const [slot, , id, text, needs] of F1_LINES) {
+        const said = slot === 'food_culture' ? x.food : x.resent;
+        if (!said.includes(text)) continue;
+        for (const need of needs) expect(GRAIN[need](x.rec), `${seed}: ${id} printed with no ${need}: "${said}"`).toBe(true);
+      }
+    });
+    expectNoSeedFailures(failures, 'A12, T9, C5 and F0 print only where the record holds what they say');
   });
 });
