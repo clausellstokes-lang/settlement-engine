@@ -20,7 +20,11 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   `8cbd7d1c…`, 211 `eface6d0…` / `ce8474ff…` unchanged (`/var/tmp/v18/out/v33/h/g/sha256.txt`). VEIL-32's figures on ITS new pool
   (pool-t2sig-3): GATE-1 4 of 92 (7 LOWER), GATE-2 20 of 40, server = twin. THIS SEAT'S RE-MAKE: `/var/tmp/v18/out/v33/h/chainH.sh`
   (template v33tplH; NEW pool `/var/tmp/v18/t2/pool-t2sig-3` in this container; both gates; typecheck; arms Tell8+3+4+5; `tests/lint`
-  whole) to `/var/tmp/v18/out/v33/h/g/done.txt`, queued on the mutex behind pass 2's chain from 13:09. Every database is local.
+  whole) to `/var/tmp/v18/out/v33/h/g/done.txt`, queued on the mutex behind pass 2's chain from 13:09. ITS RESULTS: typecheck 0 (167);
+  arms Tell8+3+4+5 green; `tests/lint` WHOLE 16 files / 22 tests of 3,267 = THE SIXTEEN STANDING ONLY (223 files). THE GATES FAILED TO
+  RUN, A SLIP OF THIS SEAT'S: the template named `v33tplH` (mixed case) and the probe's unquoted SQL reads `v33tplh`: part A's four
+  shards failed (`gates rc=2`). RE-RUN from 14:30 (`/var/tmp/v18/out/v33/h/chainH2.sh`: template `v33tplh`, fresh pool
+  `/var/tmp/v18/t2/pool-t2sig-4`, to `/var/tmp/v18/out/v33/h/g2/done.txt`). Every database is local.
 - READ (08:05-08:08 UTC): the prompt's list, each whole; PART 33 section 2 as well (rulings 89-90 are the probe's terms); 212
   (`8688ddb6…5a3a`) and the registry WHOLE, once.
 - (0) THE POOL AND THE GREEN CHAIN, this container: `/var/tmp/v18/out/v33/chain0.sh` (npm ci 0, ledger 0, make-instruments:
@@ -150,3 +154,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 12:12 pass 2 returned interim (33d6ad00b); its lit gates re-read; the probe branch pushed; the line to the chair.
 - 12:21 the chair's E78 (ruling 95) read. then act T's strings sorted; the R5-RECENT brief committed (abd68e653); its builder seated; the per-law trees cut and their run queued (12:25).
 - 13:07 the chair: VEIL-32 handed over (ruling 96). 13:08 the per-law run cancelled (no pool had started). 13:08 7027b89ea merged (929739889), no conflict; (viii)'s diff read whole; 13:09 chainH launched (queued on the mutex).
+- 14:30 the chair: the line at point 98 (c110dd85b; both laws dark on it; to know); the readers' list to check. 14:30 the gates' failure found (the template's case) and re-run. 14:31 the line to the chair (status, the three asked lines, the readers' list notes).
