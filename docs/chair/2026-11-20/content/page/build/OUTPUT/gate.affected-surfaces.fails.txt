@@ -1,0 +1,15 @@
+      Tests  11 failed | 1835 passed | 9 skipped (1855)
+ FAIL  tests/components/crisisTab.test.jsx > the Crisis tab is present only in a crisis > desktop: a crisis town carries the Crisis tab beside the Overview, in the crisis tone; a calm town carries none
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+ FAIL  tests/components/phoneChromeFloor.census.test.js > THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+ FAIL  tests/components/settlementWorkbenchMount.test.jsx > the entitled readOnly matrix > M1 — an entitled viewer on a readOnly dossier reviews staged work without regaining a staging lever
+ FAIL  tests/domain/outlookSaysThePages.test.js > step 5: the Outlook says what the pages say > the law, over births of every size
+ FAIL  tests/domain/outlookSaysThePages.test.js > step 6: the glance chip and the Economic Survival colour > C-L7: the Invasion & War and Internal Security bars are coloured by the band their rows print
+ FAIL  tests/generators/coherenceAgreeCures.test.js > F9: the market readers follow the market home, and no answer moves > the old name lists and the home agree on every roster
+ FAIL  tests/generators/coherenceAgreeCures.test.js > STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer moves > the old lists, the home and the printed lines agree on every roster
+ FAIL  tests/generators/resolveCrisisCast.test.js > a generated crisis adds the hooks its cast derives > a DM's cast edit renames the holder in the printed crisis hook: the Crisis page (tab, print chapter, journal) and the print view model
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+ FAIL  tests/ui/mountFirstPaint.test.jsx [ tests/ui/mountFirstPaint.test.jsx ]
+ Test Files  9 failed | 148 passed | 1 skipped (158)
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯

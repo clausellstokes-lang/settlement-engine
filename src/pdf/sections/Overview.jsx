@@ -36,7 +36,7 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { factsOf } from '../../domain/facts/factsOf.js';
-import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
   // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
   // descriptions and the historical character live there; without it (campaign_state), here in full.
@@ -105,7 +105,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
           ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
       {o.prosperityInCrisis && (
         <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(o.prosperityInCrisis)}</Text>
-      )}
+      )}{o.safety && vm.safetyQualifier && <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{safetyQualifierLed(vm.safetyQualifier)}</Text> /* PAGE-1 SAFETY: the Safety tile's owner's line, only in the DM's own document (vm.safetyQualifier); one line so the banked rows below keep their address */}
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="overview" />

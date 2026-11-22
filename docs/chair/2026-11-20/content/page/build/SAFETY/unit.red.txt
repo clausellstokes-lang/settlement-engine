@@ -1,0 +1,29 @@
+[gate-tail] start:  11:35:03 up 40 min,  0 user,  load average: 7.17, 4.19, 2.83 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a1dcf6cf52e96eb72
+
+ ❯ tests/domain/display/safetyShown.test.js (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/safetyShown.test.js [ tests/domain/display/safetyShown.test.js ]
+Error: Cannot find module '../../../src/domain/display/safetyShown.js' imported from /home/user/settlement-engine/.claude/worktrees/agent-a1dcf6cf52e96eb72/tests/domain/display/safetyShown.test.js
+ ❯ tests/domain/display/safetyShown.test.js:10:1
+      8|  */
+      9| import { describe, expect, test } from 'vitest';
+     10| import {
+       | ^
+     11|   SAFETY_AUDIENCES, SAFETY_RUNG, safetyAudienceOf, safetyQualifierOf, …
+     12| } from '../../../src/domain/display/safetyShown.js';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  11:35:04
+   Duration  299ms (transform 54ms, setup 73ms, import 0ms, tests 0ms, environment 0ms)
+
+[gate-tail] end:  11:35:05 up 40 min,  0 user,  load average: 7.17, 4.19, 2.83
+[gate-tail] full log: /tmp/gate-tail.12583.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

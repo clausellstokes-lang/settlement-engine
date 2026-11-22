@@ -1,0 +1,61 @@
+## BEFORE, every row the record holds (masked as the census masks; top places / holders · distinct) vs the chair's census100-before.json
+
+economicViability.dependencies[].title
+  thorp      0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  hamlet     0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  village    10/19 · d3 · census 10/19 d3 · AGREES · "Imports Bulk grain and flour"
+  town       10/19 · d4 · census 10/19 d4 · AGREES · "Imports Bulk grain and foodstuffs"
+  city       100/100 · d6 · census 100/100 d6 · AGREES · "Imports bulk materials and fuel"
+  metropolis 100/100 · d7 · census 100/100 d7 · AGREES · "Imports bulk materials and fuel"
+
+economicViability.dependencies[].description
+  thorp      0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  hamlet     3/7 · d4 · census 3/7 d4 · AGREES · "Settlement must import metals to support local industries."
+  village    35/60 · d7 · census 35/60 d7 · AGREES · "Settlement must import grain to support local industries."
+  town       31/64 · d8 · census 31/64 d8 · AGREES · "Settlement must import grain to support local industries."
+  city       100/100 · d9 · census 100/100 d9 · AGREES · "A city consumes building materials and fuel faster than any local hinterland can supply."
+  metropolis 100/100 · d10 · census 100/100 d10 · AGREES · "A metropolis consumes building materials and fuel faster than any local hinterland can sup"
+
+economicViability.dependencies[].impact
+  thorp      0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  hamlet     4/7 · d2 · census 4/7 d2 · AGREES · "Creates trade dependency but manageable."
+  village    60/60 · d2 · census 60/60 d2 · AGREES · "Creates trade dependency and vulnerability."
+  town       63/64 · d2 · census 63/64 d2 · AGREES · "Creates trade dependency and vulnerability."
+  city       100/100 · d3 · census 100/100 d3 · AGREES · "Construction and industry stall when material convoys are interrupted."
+  metropolis 100/100 · d4 · census 100/100 d4 · AGREES · "Construction and industry stall when material convoys are interrupted."
+
+economicViability.dependencies[].suggestedFixes[]
+  thorp      0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  hamlet     4/7 · d3 · census 4/7 d3 · AGREES · "Increase local food production"
+  village    35/60 · d8 · census 35/60 d8 · AGREES · "Establish stable trade relationship with grain supplier"
+  town       31/64 · d9 · census 31/64 d9 · AGREES · "Establish stable trade relationship with grain supplier"
+  city       100/100 · d9 · census 100/100 d9 · AGREES · "Diversify material supply routes and hold strategic reserves"
+  metropolis 100/100 · d11 · census 100/100 d11 · AGREES · "Diversify material supply routes and hold strategic reserves"
+
+economicViability.warnings[].description
+  thorp      0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  hamlet     1/1 · d1 · census - · AGREES (under the census's 5-holder floor) · "0 institutions depend on imported materials (Iron + fuel, Timber, Iron). Standard for this"
+  village    0/0 · d0 · census - · AGREES (under the census's 5-holder floor) · ""
+  town       62/87 · d14 · census 62/87 d14 · AGREES · "0 institutions depend on imported materials (Trade access + grain, Trade access, Grain). S"
+  city       29/99 · d27 · census 29/99 d27 · AGREES · "0 institutions depend on imported materials (Trade access + grain, Trade access + commodit"
+  metropolis 52/96 · d11 · census 52/96 d11 · AGREES · "0 institutions depend on imported materials (Trade access + commodities, Trade access + co"
+
+## THE SUMMARY (economicViability.summary): masked top vs raw distinct, by size
+  thorp      masked top 73/100 · raw distinct 15 · "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  hamlet     masked top 60/100 · raw distinct 20 · "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  village    masked top 48/100 · raw distinct 13 · "✓ VIABLE: Settlement can survive but has 0 operational dependency that require a"
+  town       masked top 52/100 · raw distinct 26 · "✓ VIABLE: Settlement can survive but has 0 operational dependency that require a"
+  city       masked top 99/100 · raw distinct 8 · "✓ VIABLE: Settlement can survive but has 0 operational dependencies that require"
+  metropolis masked top 96/100 · raw distinct 8 · "✓ VIABLE: Settlement can survive but has 0 operational dependencies that require"
+
+## WHAT A PAGE PRINTS: the same, over the rows isViabilityItem routes to the Outlook tab / PDF
+economicViability.dependencies[].title: thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/0 · city 0/0 · metropolis 0/0
+economicViability.dependencies[].description: thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/0 · city 0/0 · metropolis 0/0
+economicViability.dependencies[].impact: thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/0 · city 0/0 · metropolis 0/0
+economicViability.dependencies[].suggestedFixes[]: thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/0 · city 0/0 · metropolis 0/0
+economicViability.warnings[].description: thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/0 · city 0/0 · metropolis 0/0
+warning rows by title on the 600: 283× Trade Dependencies (severity note, printed false)
+dependency rows by title on the 600: 6× Food Import Requirement; 374× Imports <a mustImport resource>; 106× Imports staple food at urban scale; 200× Imports bulk materials and fuel; 100× Imports finished goods and luxuries
+
+## INSTRUMENT: 600/600 births identical (every dependency and warning row, the summary) with and without the writer wrapped
+writer calls a birth: 1 · config._seed at the writer: 0/600 · imports at the writer != final: 0/600 · exports != final: 0/600

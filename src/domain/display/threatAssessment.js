@@ -40,6 +40,7 @@ import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { clergyHouseStands } from './clergyHouse.js';
 import { crisisOf } from '../facts/crisisKind.js';
+import { safetyShownOf } from './safetyShown.js'; // PAGE-1 SAFETY: the label's one reader (a reader's read: the label alone)
 
 /**
  * A HOUSE WITH CLERGY STANDS (EXPORTS-B1, the chair's ruling C on EXPORTS-MEASURE-1 B1): its one home is
@@ -204,7 +205,6 @@ function heartlandUnderArms(c) {
 export function buildThreatAssessment(r) {
   const d = r?.defenseProfile || {};
   const scores = d.scores || {};
-  const sp = r?.economicState?.safetyProfile || {};
   // FR19 item 6: this assessment reads no stamped `compound.inst` flag (the internal line reads the live roster)
   const threat = r?.config?.monsterThreat || 'frontier';
   const facts = defenseFactsOf(r);
@@ -332,7 +332,7 @@ export function buildThreatAssessment(r) {
   });
 
   const intColor = bandBarColor(scoreBand(scores.internal || 0)); // C-L7 (UPKEEP-9): the band its row prints
-  const sl = sp.safetyLabel || 'Moderate';
+  const sl = safetyShownOf(r).label || 'Moderate';
   let intA = 'Internal security: ' + sl + '. ';
   // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 29824): a plain "Dangerous" is the crime ratio's own band and names its danger; a
   // label that names its cause after a dash ("Dangerous — Monster Threat", "— Plague Conditions") has named it, and

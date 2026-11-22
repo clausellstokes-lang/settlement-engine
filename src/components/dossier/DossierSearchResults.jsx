@@ -122,7 +122,16 @@ const RENDERERS = Object.freeze({
     props: (o, ctx, ui) => ({ evt: o.raw, h: ctx.history, isExp: ui.open, onToggle: ui.toggle }),
   },
   tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
-  tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
+  // TRAD-2 unit 2: the description (and, on a shared page, the drawn calendar line) the search indexed for this view's
+  // audience, printed under the row as the tab prints it (dossierSearch.js :: traditionsOf).
+  tradition: {
+    Component: TraditionRow,
+    props: (o) => ({
+      rec: o.raw, preview: !!o.meta.preview,
+      description: typeof o.meta.description === 'string' ? o.meta.description : '',
+      calendarLine: typeof o.meta.calendarLine === 'string' ? o.meta.calendarLine : null,
+    }),
+  },
   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
   resource: {
     Component: ResourceChainCard,

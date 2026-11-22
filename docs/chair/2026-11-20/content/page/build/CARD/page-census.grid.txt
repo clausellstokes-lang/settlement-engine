@@ -1,0 +1,3 @@
+page-census: rendering 12 dossiers (2 workers) into /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/card-pagecensus
+page-census --grid: 0 fall(s)
+exit 0

@@ -1,0 +1,70 @@
+== declarations: 78 rows in 12 pools; 78 declared atoms, every one declarable (factVocabulary.js :: assertDeclarable)
+== (1) canonical at zero: 902 writer calls on a target branch; a falsy seed composes today's line in 902, differs in 0
+
+== (2) top share by size, BEFORE → AFTER (100 places a size; masked as the census masks)
+size        whole line         first sentence     any sentence       changed
+thorp       48% → 11%          67% → 14%          67% → 14%          55
+hamlet      48% → 9%           64% → 9%           64% → 9%           59
+village     56% → 8%           69% → 13%          69% → 13%          69
+town        43% → 5%           73% → 10%          73% → 12%          73
+city        58% → 5%           58% → 9%           58% → 13%          76
+metropolis  66% → 7%           67% → 11%          67% → 14%          68
+
+== (2b) the top AFTER sentence (any position) by size, and the top AFTER whole line
+thorp       sentence  14 "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of."
+            whole     11 "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of."
+hamlet      sentence   9 "A place this size has few secrets, and what trouble there is soon comes out."
+            whole      9 "Strangers are noticed here, and so is anything that goes missing."
+village     sentence  13 "Locals watch over the main paths; quieter spots after dark carry genuine risk."
+            whole      8 "Most of the place is safe enough, though not all of it. Locals watch over the main paths; quieter sp"
+town        sentence  12 "Watchmen walk the main streets; away from them, after dark, the risk is real."
+            whole      5 "The market and the busy streets are safe enough; other parts less so. The watch covers the main path"
+city        sentence  13 "The walls see to what comes from outside; what trouble there is starts at home."
+            whole      5 "No stable governing authority. Enforcement is inconsistent; which power controls a district determin"
+metropolis  sentence  14 "The walls keep the trouble inside, off the roads beyond."
+            whole      7 "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising"
+
+== (3) the ten commonest AFTER sentences in the worst size (thorp: 14 of 100)
+   14  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+   11  A place this size has few secrets, and what trouble there is soon comes out.
+   10  Order here rests with the neighbours: little happens that someone does not see.
+    8  Strangers are noticed here, and so is anything that goes missing.
+    8  Everyone here knows everyone, so what trouble there is is hard to hide.
+    6  In a place this small, a wrong done is known to all by nightfall.
+    6  The palisade keeps out what comes from beyond; what trouble there is starts within.
+    6  People are hungry and stealing to eat.
+    6  Whoever controls the food now has the say.
+    6  Anyone known to have food hidden away is robbed, or worse.
+-- hamlet: the five commonest AFTER sentences
+    9  A place this size has few secrets, and what trouble there is soon comes out.
+    9  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+    9  Strangers are noticed here, and so is anything that goes missing.
+    8  In a place this small, a wrong done is known to all by nightfall.
+    8  People here watch over one another's doors, and word of any trouble travels fast.
+-- village: the five commonest AFTER sentences
+   13  Locals watch over the main paths; quieter spots after dark carry genuine risk.
+   13  Some parts of the place are safer than others.
+   12  A mix of safer and more exposed areas.
+   12  Order holds in most of the place, but not everywhere.
+   12  The people who live along the main paths watch them; quieter spots after dark are less safe.
+-- town: the five commonest AFTER sentences
+   12  Watchmen walk the main streets; away from them, after dark, the risk is real.
+   12  The walls see to the approaches; the risk that remains is within.
+   11  The watch keeps an eye on the market and the main streets; quieter spots after dark carry genuine risk.
+   10  Order holds in most of the place, but not everywhere.
+   10  People who live here know where not to go.
+-- city: the five commonest AFTER sentences
+   13  The walls see to what comes from outside; what trouble there is starts at home.
+   13  The walls see to the approaches; the risk that remains is within.
+   11  The garrison keeps the walls; within them, the risk is the place's own.
+    9  The busy ways are safe enough; the edges less so.
+    9  By day the garrison is seen on every main street; after dark, the quieter spots carry genuine risk.
+-- metropolis: the five commonest AFTER sentences
+   14  The walls keep the trouble inside, off the roads beyond.
+   13  The walls see to what comes from outside; what trouble there is starts at home.
+   11  The garrison keeps the walls; within them, the risk is the place's own.
+   11  Some parts of the place are safer than others.
+   11  The garrison patrols the main streets; the quiet ones after dark carry real risk.
+
+== (4) chosen rows the FINAL record refuses: 0; changed lines the coherence arms' words would flag: 0
+   changed lines in all: 400 of 600

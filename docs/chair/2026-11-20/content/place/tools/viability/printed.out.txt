@@ -1,0 +1,100 @@
+
+## r2r-city-0 (city): 2 dependencies, 1 warnings
+dependencies[].title            NOWHERE :: Imports staple food at urban scale
+dependencies[].description      NOWHERE :: A city cannot grow its staples within its walls; it depends on a steady grain supply from 
+dependencies[].impact           NOWHERE :: A disrupted supply line means hunger within days.
+dependencies[].suggestedFixes[] NOWHERE :: Secure and protect the regional grain-supply network
+dependencies[].title            NOWHERE :: Imports bulk materials and fuel
+dependencies[].description      NOWHERE :: A city consumes building materials and fuel faster than any local hinterland can supply.
+dependencies[].impact           NOWHERE :: Construction and industry stall when material convoys are interrupted.
+dependencies[].suggestedFixes[] NOWHERE :: Diversify material supply routes and hold strategic reserves
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 4 institutions depend on imported materials (Capital + trade access, Timber, Stone). Stand
+summary          NOWHERE :: ✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 0 plot hoo
+  (the Outlook tab's own verdict line: ✓ Viable | Goraka's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it. | Judged at the first survey; not re-run since.)
+
+## r2r-city-1 (city): 2 dependencies, 1 warnings
+dependencies[].title            NOWHERE :: Imports staple food at urban scale
+dependencies[].description      NOWHERE :: A city cannot grow its staples within its walls; it depends on a steady grain supply from 
+dependencies[].impact           NOWHERE :: A disrupted supply line means hunger within days.
+dependencies[].suggestedFixes[] NOWHERE :: Secure and protect the regional grain-supply network
+dependencies[].title            NOWHERE :: Imports bulk materials and fuel
+dependencies[].description      NOWHERE :: A city consumes building materials and fuel faster than any local hinterland can supply.
+dependencies[].impact           NOWHERE :: Construction and industry stall when material convoys are interrupted.
+dependencies[].suggestedFixes[] NOWHERE :: Diversify material supply routes and hold strategic reserves
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 9 institutions depend on imported materials (Precious metals, Capital + trade access, Iron
+summary          NOWHERE :: ✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 0 plot hoo
+  (the Outlook tab's own verdict line: ✓ Viable | Pengill can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open. | Judged at the first survey; not re-run since.)
+
+## r2r-town-0 (town): 0 dependencies, 1 warnings
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 7 institutions depend on imported materials (Trade access + grain, Trade access, Grain). S
+summary          NOWHERE :: ✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover 17% of daily food need.
+  (the Outlook tab's own verdict line: ✓ Viable | Farosaltus gets through the year, buying in what its own land and trades do not provide. | Judged at the first survey; not re-run since.)
+
+## r2r-town-1 (town): 2 dependencies, 1 warnings
+dependencies[].title            NOWHERE :: Imports grain
+dependencies[].description      NOWHERE :: Settlement must import grain to support local industries.
+dependencies[].impact           NOWHERE :: Creates trade dependency and vulnerability.
+dependencies[].suggestedFixes[] NOWHERE :: Establish stable trade relationship with grain supplier
+dependencies[].title            NOWHERE :: Imports metals
+dependencies[].description      NOWHERE :: Settlement must import metals to support local industries.
+dependencies[].impact           NOWHERE :: Creates trade dependency and vulnerability.
+dependencies[].suggestedFixes[] NOWHERE :: Establish stable trade relationship with metals supplier
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 9 institutions depend on imported materials (Trade access + grain, Trade access, Grain). S
+summary          NOWHERE :: ✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 1 plot hoo
+  (the Outlook tab's own verdict line: ✓ Viable | Some of what Karakabad eats is brought in by road; its own land does not produce enough. | Judged at the first survey; not re-run since.)
+
+## r2r-town-2 (town): 0 dependencies, 0 warnings
+summary          NOWHERE :: ✓ VIABLE: Settlement is economically self-sufficient and historically plausible.
+  (the Outlook tab's own verdict line: ✓ Viable | Olymptopia feeds itself and pays its own way. | Judged at the first survey; not re-run since.)
+
+## r2r-town-3 (town): 1 dependencies, 1 warnings
+dependencies[].title            NOWHERE :: Imports grain
+dependencies[].description      NOWHERE :: Settlement must import grain to support local industries.
+dependencies[].impact           NOWHERE :: Creates trade dependency and vulnerability.
+dependencies[].suggestedFixes[] NOWHERE :: Establish stable trade relationship with grain supplier
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 11 institutions depend on imported materials (Trade access + grain, Trade access, Grain). 
+summary          NOWHERE :: ✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 2 plot hooks
+  (the Outlook tab's own verdict line: ✓ Viable | Llanthwaite grows less than it eats, and part of the difference arrives by river. | Judged at the first survey; not re-run since.)
+
+## r2r-town-9 (town): 1 dependencies, 2 warnings
+dependencies[].title            NOWHERE :: Imports Bulk grain and foodstuffs
+dependencies[].description      NOWHERE :: Settlement must import Bulk grain and foodstuffs to support local industries.
+dependencies[].impact           NOWHERE :: Creates trade dependency and vulnerability.
+dependencies[].suggestedFixes[] NOWHERE :: Establish stable trade relationship with Bulk grain and foodstuffs supplier
+warnings[].title            Systems/Outlook :: Strong Magic Without Arcane Houses
+warnings[].description      Systems/Outlook :: Magic runs strong here, but no arcane house stands.
+warnings[].impact           Systems/Outlook :: Magical potential is unrealised. Adventurers will find no magical services.
+warnings[].suggestedFixes[] Systems/Outlook :: Add Hedge Wizard, Alchemist Shop, or Wizard's Tower
+warnings[].title            Systems/Outlook :: Locally Sustained Isolation
+warnings[].description      Systems/Outlook :: Town remains viable through local foodshed, reserves, seasonal access, patronage.
+warnings[].impact           Systems/Outlook :: The settlement is isolated, not inexplicably disconnected from the means of survival.
+warnings[].suggestedFixes[] Systems/Outlook :: Protect the support paths that make isolation viable
+summary          NOWHERE :: ✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 0 plot hooks
+  (the Outlook tab's own verdict line: ✓ Viable | Ravengarde grows less than it eats and has no dependable road to make up the rest; what it lacks comes in by caravan and by magic, and from its stores. | Judged at the first survey; not re-)
+
+## r2r-town-33 (town): 0 dependencies, 2 warnings
+warnings[].title            Systems/Outlook :: Set on Arms Without Defences
+warnings[].description      Systems/Outlook :: The town is set on arms, but it has no walls, garrison, or barracks.
+warnings[].impact           Systems/Outlook :: Military investment without physical infrastructure produces limited security.
+warnings[].suggestedFixes[] Systems/Outlook :: Add Town Walls or Garrison
+warnings[].title            NOWHERE :: Trade Dependencies
+warnings[].description      NOWHERE :: 6 institutions depend on imported materials (Trade access + grain, Trade access, Grain). S
+summary          NOWHERE :: ✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover 3% of daily food need.
+  (the Outlook tab's own verdict line: ✓ Viable | Kilby gets through the year, buying in what its own land and trades do not provide. | Judged at the first survey; not re-run since.)
+
+## TALLY: sub-field: strings / printed somewhere / where
+dependencies[].title             8 / 0 / {}
+dependencies[].description       8 / 0 / {}
+dependencies[].impact            8 / 0 / {}
+dependencies[].suggestedFixes[]  8 / 0 / {}
+warnings[].title                 9 / 3 / {"Systems/Outlook":3}
+warnings[].description           9 / 3 / {"Systems/Outlook":3}
+summary (whole)                  8 / 0 / {}
+summary (body, token stripped)   8 / 0 / {}
+warnings[].impact                3 / 3 / {"Systems/Outlook":3}
+warnings[].suggestedFixes[]      3 / 3 / {"Systems/Outlook":3}

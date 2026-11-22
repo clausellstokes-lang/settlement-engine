@@ -120,7 +120,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // `.institutions` reader the apply pass owned — verbatim out of applyWorldPulse.js into
   // this leaf. Same read, same exemption; only the address changed.
   'src/domain/worldPulse/applyWorldPulseFactionRoster.js': 'name-lookup + mutation — finds one named institution to impair',
-  'src/domain/dailyLife.js': 'name-lookup/display — first temple/market/inn for gathering-place flavour',
   'src/domain/npcProfile.js': 'name-lookup/display — NPC→institution links + category/power name lists',
   'src/domain/explanation.js': 'name-lookup/display — single-institution explain + entity catalog',
   'src/domain/dossier/entityLinks.js': 'name-lookup — name→id resolution + link-index build',
@@ -542,7 +541,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // (BAR7-CARDS, JOIN-17 points 20 and 25; EXEMPT above, ruled by the chair after the landing at a44495b59) and
     // src/domain/facts/sovereign.js :: liveNamesOf's roster read (BAR6-HOUSES, JOIN-17 point 2), COMPLIANT (a local
     // `_worldPulseInactive` standing guard). The arm "every reader is COMPLIANT or EXEMPT" is green on both.
-    expect(readers.length).toBe(115);
+    // DAILY-2 B1b C3 (2026-11-20, LINES-1 § gathering_places): 115 -> 114, src/domain/dailyLife.js no longer reads
+    // `.institutions` (its gathering lines name houses from `liveInstitutions`, the ruin filter); its EXEMPT row is deleted.
+    expect(readers.length).toBe(114);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
