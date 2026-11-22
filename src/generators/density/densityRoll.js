@@ -244,7 +244,7 @@ export function rollRival(rng, ordered) {
  * @param {DensityPower[]} ordered
  * @param {number} factionCount
  * @param {number} doubledNiches
- * @param {{rivalBonusSeat?: number, seatCeiling?: number, crisisSeatKey?: string|null}} [limits]
+ * @param {{rivalBonusSeat?: number, seatCeiling?: number, crisisSeatKey?: string|null, crisisPowerGroups?: string[][], bandSeatMax?: number}} [limits]
  * @returns {{seated: DensityPower[], doubled: string[], rival: ReturnType<typeof rollRival>, bonusSeatTaken: boolean}}
  */
 export function chooseSeats(rng, ordered, factionCount, doubledNiches, limits = {}) {
@@ -282,7 +282,7 @@ export function chooseSeats(rng, ordered, factionCount, doubledNiches, limits = 
   // COHERENCE-POWERS-3: the crisis's own power stands second (rollDensityPlan's `crisisSeatKeys`)
   if (limits.crisisSeatKey) seat(ordered.find(p => p.key === limits.crisisSeatKey));
   if (rival.taken) seat(ordered.find(p => p.key === rival.candidateKey));
-  for (const p of ordered) seat(p);
+  for (const p of ordered) seat(p); seatCrisisBodies(seated, taken, ordered, ruling, limits, Math.max(1 + (limits.crisisPowerGroups || []).length, Math.min(ceiling, Math.max(1, num(limits.bandSeatMax, cap))) - doubledBudget)); // U8 (E100): the room the ceiling and the band leave, never under the ruling power and one seat a crisis (at the file's end)
 
   // Doubled niches (R4). Only powers already seated can have their niche
   // contested — a doubled niche is TWO claimants on ONE seat, not a back door
@@ -490,7 +490,7 @@ export function rollRoster(rng, tier, size, vacancyMult, options = {}) {
  *   floorLift?: {lifted?: boolean, stressor?: string|null}|null,
  *   seatAll?: boolean,
  *   massOverride?: number|null,
- *   crisisSeatKeys?: string[],
+ *   crisisSeatKeys?: string[], crisisPowerGroups?: string[][],
  * }} input
  *
  * `crisisSeatKeys` (COHERENCE-POWERS-3, the chair's rulings (1) and (2) of 2026-11-12): the powers a crisis seats
@@ -574,7 +574,7 @@ export function rollDensityPlan(input) {
       // that the roster in front of us does not already hold.
       rivalBonusSeat: seatAll ? 0 : (bands.rivalBonusSeat || 0),
       seatCeiling: factionCeiling,
-      crisisSeatKey: crisisSeat ? crisisSeat.key : null,
+      crisisSeatKey: crisisSeat ? crisisSeat.key : null, crisisPowerGroups: seatAll ? [] : (input.crisisPowerGroups || []), bandSeatMax: Math.round(num(bands.factions?.max, 1)) + (seatAll ? 0 : Math.round(num(bands.rivalBonusSeat, 0))), // U8 (E100): handed only under the fortune law
     },
   );
   const rulingKey = (seated.find(p => p.isGoverning) || seated[0] || null)?.key || null;
@@ -641,4 +641,50 @@ export function rollDensityPlan(input) {
     }),
     factions: Object.freeze(factions),
   });
+}
+
+/**
+ * U8 "THE CRISIS HAS A BODY" (the fortune lane's chair, E100, 2026-11-22). Where a place's active crisis names powers of
+ * its own (`limits.crisisPowerGroups`, one group per crisis, passed ONLY under the fortune law: applyDensityLaw.js ::
+ * planFor) and the seats the roll chose hold none of them, the strongest of that crisis's powers is seated BY RULE, not
+ * by the draw: it takes the rival seat (after the ruling power and the crisis seat), whatever its rank beside the
+ * ruling power. It takes a seat of its own where the mass ceiling and the band (its rival bonus seat included) leave
+ * room (`room`, the distinct seats they allow, never under the ruling power and one seat a crisis: for one crisis the
+ * floor of two the crisis seat's own mark already takes, so a one-card thorp in crisis shows its two); otherwise it takes the seat of
+ * the weakest drawn power that is neither the ruling power, the crisis seat, nor any crisis's own. A crisis already
+ * holding a seat changes nothing.
+ * ⛔ NO DRAW: it reads only the seats chosen and the powers' order, so every stream stays where it was.
+ * Kept at the file's end so no cited line above it moves. Mutates `seated` and `taken`.
+ * @param {DensityPower[]} seated @param {Set<string>} taken @param {DensityPower[]} ordered
+ * @param {DensityPower|null} ruling
+ * @param {{crisisSeatKey?: string|null, crisisPowerGroups?: string[][]}} limits @param {number} room
+ */
+function seatCrisisBodies(seated, taken, ordered, ruling, limits, room) {
+  const groups = limits.crisisPowerGroups || [];
+  if (!groups.length) return;
+  const crisisKeys = new Set(groups.flat());
+  for (const group of groups) {
+    if (seated.some((p) => group.includes(p.key))) continue;
+    const own = ordered.find((p) => group.includes(p.key) && !p.isGoverning);
+    if (!own) continue;
+    const at = seated.findIndex((p) => p !== ruling && p.key !== limits.crisisSeatKey);
+    const insertAt = at < 0 ? seated.length : at;
+    if (seated.length < room) {
+      seated.splice(insertAt, 0, own);
+      taken.add(own.key);
+      continue;
+    }
+    let weakest = -1;
+    for (let i = seated.length - 1; i >= 0; i -= 1) {
+      const p = seated[i];
+      if (p === ruling || p.key === limits.crisisSeatKey || crisisKeys.has(p.key)) continue;
+      weakest = i;
+      break;
+    }
+    if (weakest < 0) continue;
+    taken.delete(seated[weakest].key);
+    seated.splice(weakest, 1);
+    seated.splice(Math.min(insertAt, seated.length), 0, own);
+    taken.add(own.key);
+  }
 }

@@ -52,7 +52,7 @@
 
 import { matchFactionArchetype } from '../factionRoles.js';
 import { seatKey } from '../../domain/density/seatKey.js';
-import { FACTION_DESCRIPTORS, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; import { REEVE_ANSWERS_TO_ELECTORS } from '../../data/powerSiblings.js'; // CENSUS-1f: one line; BAR8-K-POWERS (14d): the reeve's twin
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; import { REEVE_ANSWERS_TO_ELECTORS } from '../../data/powerSiblings.js'; // CENSUS-1f: one line; BAR8-K-POWERS (14d): the reeve's twin
 import {
   DOUBLED_NICHE_SHARE, FLOOR_LIFT_CHANCE, bandsForTier, tierKey,
 } from '../../domain/density/densityBands.js';
@@ -67,7 +67,7 @@ import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
 import { settleHouselessPowers } from '../power/rulerKin.js';
-import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
+import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js'; import { isSizeRelativeFortune } from '../../domain/fortune/fortuneLaw.js'; // U8 (E100): the crisis has a body, under the fortune law only
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -198,7 +198,7 @@ function planFor(input, mode = {}) {
     massOverride: mode.massOverride ?? null,
     // COHERENCE-POWERS-3 (the chair's rulings (1), (2)): the powers a crisis seats (data/stressPowerFaces.js's `seated`)
     crisisSeatKeys: (input.powerStructure?.factions || [])
-      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.seated === true).map(seatKey),
+      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.seated === true).map(seatKey), ...crisisBodiesOf(input, mode), // U8 (E100), at the file's end
   });
 }
 
@@ -620,3 +620,58 @@ function reeveToRoster(powerStructure, institutions) {
 }
 /** The Elected Reeve's opening line where it names a noble (`rulingStructure.js`'s own line, recognised). */
 const UNDER_NOBLE = /^A reeve elected from the peasantry manages labour and mediates disputes under noble oversight\./;
+
+// ── U8 "THE CRISIS HAS A BODY" (the fortune lane's chair, E100, 2026-11-22). Kept at the file's end so no cited line
+// above it moves. Under the fortune law ONLY (read through its one reader, `isSizeRelativeFortune`, from the config the
+// seam already receives), the seat plan is handed each active crisis's own powers on the roster, one group per crisis
+// (densityRoll.js :: chooseSeats seats the strongest of a group the draw left unseated). Never in re-derivation (the
+// roster is a fact there). Under law 1 nothing is handed, so a dark birth takes the plan it always took.
+
+/**
+ * The powers each crisis pushes onto the roster (stressFactions.js :: applyStressEventFactions, every arm and branch)
+ * that no row of data/stressPowerFaces.js names. A power that table names for the crisis is read through its one
+ * reader (`stressPowerRowOf`), the pool-drawn claimants' and blocs' archetype rows with it. The infiltrator is the one
+ * pool-named push no row names: an `other` power drawn from that role's pool and pushed hidden. Vocabulary, not tuning.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const CRISIS_POWERS_WITHOUT_A_FACE_ROW = Object.freeze({
+  indebted: Object.freeze(["Creditor's Representative"]),
+  recently_betrayed: Object.freeze(['The Inquiry']),
+  insurgency: Object.freeze(["Journeymen's League", 'Reform Movement']),
+  mass_migration: Object.freeze(["Newcomers' Settlement", 'Departure Committee']),
+  wartime: Object.freeze(['Peace Movement']),
+  slave_revolt: Object.freeze(['Revolt Leadership', 'Abolitionist Network']),
+});
+
+/**
+ * Is this roster row one of the crisis's own powers? Its face row for that crisis (`stressPowerRowOf`, read with the
+ * one crisis alone), a name `CRISIS_POWERS_WITHOUT_A_FACE_ROW` lists, or the infiltrator (an `other` pool name the
+ * stress step pushed hidden). The ruling power is never the crisis's own. Pure.
+ * @param {string} stress @param {Record<string, unknown> | null | undefined} seat @returns {boolean}
+ */
+export function isCrisisOwnPower(stress, seat) {
+  if (!seat || seat.isGoverning === true) return false;
+  if (stressPowerRowOf({ stress: [{ type: stress }] }, seat)) return true;
+  const name = seatKey(seat);
+  if ((CRISIS_POWERS_WITHOUT_A_FACE_ROW[stress] || []).includes(name)) return true;
+  return stress === 'infiltrated' && seat.hidden === true && seat.category === 'other'
+    && [...(FACTION_DESCRIPTORS.other || []), ...(FACTION_DESCRIPTORS_EXTRA.other || [])].includes(name);
+}
+
+/**
+ * The plan's crisis groups: one group of seat keys per active crisis (in the record's stress order) with a power of
+ * its own on the roster, under the fortune law and outside re-derivation; else nothing. Pure.
+ * @param {{ config?: Record<string, unknown>, stress?: unknown, powerStructure?: {factions?: Array<Record<string, unknown>>}|null }} input
+ * @param {{ seatAll?: boolean }} mode
+ * @returns {{ crisisPowerGroups?: string[][] }}
+ */
+function crisisBodiesOf(input, mode) {
+  const config = input.config || {};
+  if (!isSizeRelativeFortune(config) || mode.seatAll) return {};
+  const seats = input.powerStructure?.factions || [];
+  return {
+    crisisPowerGroups: stressTypesOf(config, input.stress)
+      .map((type) => seats.filter((seat) => isCrisisOwnPower(type, seat)).map(seatKey))
+      .filter((keys) => keys.length > 0),
+  };
+}
