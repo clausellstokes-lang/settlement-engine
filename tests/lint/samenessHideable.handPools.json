@@ -34,6 +34,8 @@
   {"pool":"src/data/npcData.js :: NPC_WANTS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
   {"pool":"src/data/npcData.js :: SPEECH_PATTERNS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
   {"pool":"src/data/npcData.js :: STRESS_ECONOMIC_EFFECTS","seat":"GOALS-3","branch":"lane/goals-3-2026-11-20","commit":"ad6e1a14d"},
+  {"pool":"src/data/npcStructureVariants.js :: CONSTRAINT_VARIANTS","seat":"PEOPLE-1","branch":"lane/people-3-2026-11-21","commit":"930413518"},
+  {"pool":"src/data/npcStructureVariants.js :: POSITION_VARIANTS","seat":"PEOPLE-1","branch":"lane/people-3-2026-11-21","commit":"930413518"},
   {"pool":"src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES","seat":"GOALS-3","branch":"lane/goals-3-2026-11-20","commit":"ad6e1a14d"},
   {"pool":"src/data/people/goalFamilies.js :: GOAL_RESERVE_LINES","seat":"GOALS-3","branch":"lane/goals-3-2026-11-20","commit":"ad6e1a14d"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_RARE_KEYS","seat":"GOALS (join point 84; a key list, not a sentence pool)","branch":"lane/join-2026-11-14","commit":"8196e5712"},
