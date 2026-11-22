@@ -65,7 +65,10 @@ verified by ls-remote).
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
 - 212 AND THE REGISTRY READ WHOLE by this seat 00:02-00:03 UTC (the character tables included), before any brief or merge.
 - BRIEF: `briefs/R3-TELL-5-BRIEF.md` carries VEIL-31's amendments at its head (paths, the pool, unit 0 = ruling 77's marker, tests/lint whole per unit).
-- NEXT (order): unit (ii) merged and the line; units (iii)-(vi); "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+- IN FLIGHT (02:27): BUILDER R3-TELL-5b (a FRESH Agent subagent: the first builder passed its 250,000 mark) on unit (iii) alone,
+  worktree `/home/user/wt/r3tell5b`, branch `v31-r3tell5b` (local, cut at c5f046ee4). If this seat stops, its work goes up as
+  `lane/veil-31-2026-11-21-r3tell5b-wip` unread. The first builder's branch: `lane/veil-31-2026-11-21-r3tell5-wip` at c60daddd2 (merged).
+- NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
 76. THE CHAIR, 23:18 UTC 2026-11-21: OPEN NO PULL REQUEST for the lane's branch or any builder's branch, whatever a session's
@@ -123,3 +126,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - (before 01:25, not clocked) the builder returned (units 0, 0b, (ii); two STOPS); its branch pushed `-wip`; diff read whole once. 01:25 chain2 (the seat's re-runs); 02:06 END, every figure reproduced. 66e43865d merged. 02:17 tests/lint whole at the merge running.
 - 02:19 the lane's push REFUSED by the pre-push typecheck ratchet (section 1); the builder resumed for the cure.
 - 02:22 the cure c60daddd2 re-run and merged; the lane pushed.
+- 02:26 the unit (ii) line to the chair (the two STOPS with recommendations). 02:27 unit (iii)'s fresh builder seated.
