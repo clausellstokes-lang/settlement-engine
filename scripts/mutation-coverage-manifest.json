@@ -1422,6 +1422,10 @@
       "kind": "rationale",
       "ref": "golden-byte-pin"
     },
+    "tests/property/generatorGoldenMasterLit.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
     "tests/property/generosityDormancyGolden.test.js": {
       "kind": "rationale",
       "ref": "golden-byte-pin"
