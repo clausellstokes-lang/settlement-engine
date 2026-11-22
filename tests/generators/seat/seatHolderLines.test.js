@@ -75,6 +75,7 @@ import { computeFactionRelationships } from '../../../src/generators/factionDyna
 import { coupContenders, coupRiskLabel } from '../../../src/domain/rulingPowerCoup.js';
 import { SEAT_HOLDER_LINES } from '../../../src/data/seatHolderLines.js';
 import { expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 await loadGenerationLawPayloads();
 
@@ -179,8 +180,8 @@ describe('U6 (4): the licensed pair takes W2', () => {
 
 describe('U6 (5): under law 1 not one byte moves', () => {
   it('four births (a town, a village, a city, and the lit witness seed born dark), law 1, against law 1 with the new paths off', () => {
-    // a plain loop over the rows, never an `each` (sovereigntyLightingContract's park debt only shrinks)
-    for (const [settType, seed] of [['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['city', 'u6t-city-4']]) {
+    // every row run and collected, never an `each` (sovereigntyLightingContract's park debt only shrinks)
+    expectNoSeedFailures(collectSeedFailures([['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['city', 'u6t-city-4']], ([settType, seed]) => {
       build(false);
       sw.off = false;
       const on = born(settType, seed);
@@ -188,6 +189,6 @@ describe('U6 (5): under law 1 not one byte moves', () => {
       sw.off = true;
       const off = born(settType, seed);
       expect(JSON.stringify(on), `${seed}: the law-1 record is byte-identical with the new paths off`).toBe(JSON.stringify(off));
-    }
+    }), 'the law-1 differential');
   });
 });
