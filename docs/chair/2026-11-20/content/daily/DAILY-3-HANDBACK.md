@@ -4,32 +4,35 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-3.txt` (bebdb15cb). Predecessor's record:
 `DAILY-2-HANDBACK.md` (its section 3, every ruling in force, binds; this file governs where it says more).
 
-## 1. WHERE THE LANE STANDS (written 2026-11-22 16:57 UTC)
-- `lane/daily-3-2026-11-22` (pushed, c28d5779c and on) = the line at 1ec3e81d1 (point 97) + E1, E2, F1, E3, F2, U4b (merge
-  fcf8a7aef: the chair's two cures + the dead local narrative's removal; lighting 0640cb9da) + docs. HAND_CEILING 80 (the
-  line's 74 at 97 + this lane's 6). GREEN at c28d5779c: `tests/lint`, `tests/copy`, `tests/store` + every file naming
-  dailyLife: 461 files, 8 red, all on the list (voiceMechanics and the dead-operation ratchet now GREEN: 4b's cures).
-- IN FLIGHT (two builders): L8 on `-l8-wip` (remote 79b18643e = a SNAPSHOT before the chair's E95 rows; worktree
-  `/home/user/wt-daily3-l8`; brief `briefs/B3-L8-OFFICE-LINES.md` + E95's three rows in `registeredWords.js ::
-  HOUSE_FAMILIES` (headman/reeve/lord's steward answered by their `office:` atoms, the office-holder's reading, not a
-  building) + L12 needs `sovereign`); 4c on `-4c-wip` (cut 0640cb9da; worktree `/home/user/wt-daily3-4c2`; brief
-  `briefs/U4C-BUILD-PDF-CHAPTER.md` with its dispatch ruling: the slot order's one home is `dailyLife.js ::
-  DAILY_LIFE_PAGE_SLOTS`).
-- AT EACH MERGE: read the diff once; re-run the red on its base (scratch worktree `/home/user/wt-daily3-red`); merge;
-  re-take the lighting census by its door on a clean tree; the observed-shape readers' door (`node scripts/check-observed-
-  shape-readers.mjs`, `--write` if stale; history is deep); `tests/lint` whole + the governing files.
-- A SUCCESSOR TAKES (the chair's plan at 620,000): (a) whatever of L8 and 4c is not merged; (b) THE LINE'S MERGE at the tip
-  the chair sends (point 102 expected), ONCE, before rule 8: registers at the line's side, then each by its door;
-  HAND_CEILING = the line's figure + this lane's 6 rows, every comment kept; (c) RULE 8 by COMMON-EIGHTH 14 as amended at
-  15:11 (fetch the chair's branch fresh): the dark proof first (births byte-identical vs the line: hash and count; the
-  slots are derived at read, never stored), then `tests/lint` whole, this lane's test files, every file naming a changed
-  module (the list saved, its count said), the Daily Life tab's and the PDF chapter's own tests whole + the three
-  tab-rendering walkers, `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, ONE build with the five
-  figures + VERIFY_DIST=1 `tests/build`; reds by name against the chair's fresh `ci/RED-AT-LINE.tsv`; (d) THE OWNER'S
-  FILE (six places, one a size, the Daily Life page before and after as it prints, plain words; every house a wording
-  needs; the class-table and vocabulary rows for the join; the stored figures moved; tuning tables: none); (e) "DAILY-B
-  <commit>" to the chair with the veil reader's line (the office atoms are NOT hideable: a faction card's floor keeps its
-  name and isGoverning; the one writer of `hidden: true` is the infiltrator in `generators/power/stressFactions.js`).
+## 1. WHERE THE LANE STANDS (written 2026-11-22 17:53 UTC) — DAILY-3 HANDS OVER at the lane tip pushed with this file
+- `lane/daily-3-2026-11-22` (pushed) = the line at 1ec3e81d1 (point 97) + E1, E2, F1, E3, F2, U4b, L8 (merge 783e25d00;
+  wiring stamp 235d559ce; lighting 44fbfba38) + docs. HAND_CEILING 80 (the line's 74 at 97 + this lane's 6). Green at
+  c28d5779c (before L8): 461 files, 8 red, all on the list; L8's builder ran `tests/lint` whole + 374 files at its tip
+  (9 red: 6 on the list, lighting + wiring stamp re-taken since by their doors). NOT YET RUN on the lane's tip after L8:
+  `tests/lint` whole — the successor's FIRST run.
+- MERGED: all five slots; the owner-only slot (gate, crime55 smugglers lines); F1's and E56's lines; U4b (the chair's
+  two cures: voiceMechanics em dash, requestDailyLife retired; the dead local narrative removed); L8 (five `office:`
+  atoms in the lazy leaf `facts/officeForms.js`; E95's three answering rows; L8..L12).
+- DAILY-4's UNITS, IN ORDER:
+  1. CUT L12 (the chair's E107, DAILY-3's choice by count): remove L12 from `commonerResentments.js` legitimacy, and the
+     `lord's steward` answering row from `registeredWords.js :: HOUSE_FAMILIES` (headman and reeve STAY); the `office:
+     lord's steward` atom may stay (unused) or go with its key: say which. Re-read `tests/domain/dailyLifeOffice.test.js`
+     arms for L12 (meaning kept: L12 named NOT BUILT, for after the first deploy, with E107's shape `house: lord's steward`
+     beside `office: lord's steward` and `sovereign`). Red first, `tests/lint` whole, the house readings by their reading,
+     the lighting census by its door. Why: on hxd-thorp-52/-59/-93/-140 the page says "the reeve" holds the Feudal
+     Stewardship's seat and no steward's house stands, so L12 asserted a second officer (E95 condition 2 failed).
+  2. 4c's MERGE on the chair's word: `lane/daily-3-2026-11-22-4c-wip` at 5c5ab5466 (pushed; built and red-first proved
+     by its builder: red 2/2, green; tests/pdf + tests/architecture 966 passed; goldenViewModel HOLDS). LEFT RED BY RULE:
+     `tests/lint/writerReach.walker` "the surfaceReach grammar round-trips…", `scripts/.writer-reach-baseline.json`
+     row `yearsAgo on legacyAnnotations` dossier-pdf N->R (dailyLife.js enters the PDF's import set, 629 -> 644 files):
+     ASKED OF THE CHAIR at 17:4x (re-freeze by its door, or another shape). Read its diff once (its commit title says
+     "chapter 15": check it is the Daily Life chapter the chair calls "chapter 02"); re-run its red; merge; lighting.
+  3. The line's merge, ONCE, at the tip the chair sends (point 102 expected), then RULE 8, the owner's file, "DAILY-B"
+     (below).
+- STALE REMOTE -wip REFS (leave them): `-e2-wip` 5151936b2 and `-l8-wip` 79b18643e are SNAPSHOTS superseded by the merges.
+  A PUSH NAMES THE LOCAL LANE BRANCH BY ITS OWN NAME (`git push -u origin lane/<name>`), never `<sha>:<ref>` or
+  `HEAD:<ref>` (the chair, 17:44: the hook judges the left side; DAILY-3's sha push ran the whole check once, killed,
+  no harm: config read clean at 17:5x: core.bare false, no local user.*).
 - FOR THE SUCCESSOR, THE LINE (the chair, 16:58): this lane holds the line at **1ec3e81d1 (point 97)**. The line is at
   c110dd85b (point 98) and goes to point 102 in a few hours (fortune's second merit, who rules' second half, the
   old-families cure, the close's fixture cure). Files both this lane and the line since 97 touch (planned, not met):
