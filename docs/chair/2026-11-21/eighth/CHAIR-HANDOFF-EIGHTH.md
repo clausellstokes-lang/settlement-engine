@@ -1556,6 +1556,89 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   and VEIL-34 (to know). STACK-100 (`prompts/STACK-100.txt`): point 103 "JOIN" a1319f388 and point 104
   "FORTUNE-C" by "ADD", both test only, "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2. "DAILY-B"
   goes to the stack after, with whatever stands ready.
+- E115 · R5-DESC GOES "THE OTHER WAY BY S": THE STANDING PART OF A POWER'S DESCRIPTION IS WITHHELD ALWAYS AND RE-DERIVED ON THE PAGE (recorded 2026-11-22 19:18 UTC; ruled to VEIL-34 in the hour before). VEIL-34's measure
+  (`lane/veil-34-2026-11-22-r5desc-wip` at 606381cb5; `out/v34/r5desc/R5DESC-MEASURE.md`; 6,528 pages, server =
+  twin on every page): (1) `power.desc`: 20 name and 155 kind hits a side, ALL in the STANDING part (rosterText's
+  sentence). READER B IS REFUTED for the card (56.2% of descs; it re-creates the withheld power on 930 of 1,410
+  hiding pages). "S" (the standing re-derived over the SERVED roster with the masked and hidden rows out, the base
+  sentence kept): 98.5% of descs (97.4% of standings; the 382 misses are the seat-contest line); on hiding pages S
+  prints 0 names, 0 masks, 0 withheld-kind words. (2) What S does not reach (lit): jp6-city-8, the hidden row's
+  own masked desc; jp6-city-2, a BASE sentence naming the hidden power's kind in lower case. (3) `dmNote`: DM only,
+  0 hits, B fails; `power.label`: 0 hits in 33,814. (4) E94 (c) HOLDS: every label writer draws from a kind table;
+  `densityAscension.js :: planSeatAscension` would name a seat after a power and has no caller. (5) The strata and
+  the contenders add nothing of their own: every hit is the served desc handed back. (6) A NEW ROW:
+  `history.currentTensions[].factions[]` serves the MASK on 22 pages of 1 town. RULED: (1) the standing part
+  WITHHELD ALWAYS, re-derived on the page by S; the base served; the fidelity arm pins the CLASS (a miss only where
+  the stored standing carries the seat-contest line); the differential and the plant by absence are the proof;
+  (2) a masked or hidden row's own desc leaves with the row; the builder measures first whether a base sentence is
+  chosen by another power's presence (if so it is composed: withheld where that power is not served; to the chair
+  if more than a handful of templates); (3) `dmNote` per entry, on condition that a card without one is common on
+  the DM door (a figure); `power.label` off the composed form, with its pin; (4) a pin on `planSeatAscension`;
+  (5) the reader's list row 18 is cured at the description; (6) the tension's masked party is WITHHELD, not masked,
+  both engines, a plant first: inside R5-DESC if it is one more line of the always-pass, else "R5-TENSION", the
+  next seat's first unit; `seatHolderLines.js` (not on the veil lane): a row to register at the join, lit only (the
+  reader's list row 20). VEIL-34's budget: the review of R5-RECENT and this unit, to 680,000 by the chair's read.
+- E116 · THE VEIL IN TWO CHAINS, ONE TIP (recorded 2026-11-22 19:18 UTC; ruled to VEIL-34 the same hour, on its answer). ASKED: may a second seat build R4-IDS while VEIL-34 builds R5-DESC? VEIL-34 (which holds
+  212 whole): YES: the FUNCTIONS are disjoint (R4-IDS: new `_gallery_veil_rekey*` helpers, one call in
+  `_gallery_veil`, the twin's `galleryVeil.js` / `galleryVeilPeople.js`, the registry's rekey rows; R5-DESC:
+  `_gallery_veil_withhold_always` and/or `_gallery_veil_roster_choices`' power block, the twin's
+  `galleryWithholdAlways.js` / `galleryRosterChoices.js` / `pageRederive.js`); the shared TEXT is 212's header
+  list, `registry.json`, the mutation manifest, the hashes, the rollback. (iv) NOT beside R5-DESC (one relations
+  block); (v) after (iv); IMPORT-DOOR may be built beside the others and NEVER merges before R4-IDS (its census
+  must see the re-keyed body). RULED: CHAIN A (VEIL-34, then its successor): R5-DESC, (iv), (v); (vi) is tests
+  only and rides with whichever merge is next. CHAIN B (VEIL-35, the first freed place): R4-IDS; IMPORT-DOOR after
+  it. "MIGRATION 212 HAS ONE WRITER" NOW MEANS ONE HAND ON THE LANE'S TIP AT A TIME, GRANTED BY THE CHAIR: a seat
+  whose unit is proved on its own branch says "TIP? <unit> <commit>"; the chair answers "TIP TO <seat>"; it merges
+  and says "<unit> MERGED <commit>"; the other chain then merges THAT TIP INTO ITS BRANCH (never the reverse) and
+  does VEIL-34's five steps before its own "TIP?": the union of the header list and the manifest; `registry.json`
+  by its door; the new shas of 212 and the rollback; 001..211 + 212 + down = 001..211 and the catalogue on the
+  merged 212; BOTH units' arms, the walkers, `tests/lint` whole and a NEW pool with both gates on the merged tree.
+  Whichever is proved first goes first. THE SERVER'S CUT OF THE STANDING (VEIL-34's flag: SQL must cut the
+  standing off the stored desc: a table of factionStanding's sentences in 212, or the whole desc withheld and the
+  base lost): RULED WITH THE BRIEF, which carries the count of standing forms and whether each is closed text,
+  whether the standing is always the desc's tail, whether it is stored elsewhere in the document, and what a
+  shared page loses without the base. THE CHAIR'S LEAN: the table ONLY IF IT FAILS CLOSED (a desc whose tail
+  matches no row is withheld whole), a walker deriving the table from the engine's source, the closed-branch count
+  said; else the whole desc withheld, the loss named for the owner, its return a unit after the first deploy.
+  FOR VEIL-35: `briefs/R4-IDS-BRIEF.md` part one at f3e5459e7 on `lane/veil-34-2026-11-22`; its measure and
+  red-first instrument in build by VEIL-34's builder (to be pushed as `lane/veil-34-2026-11-22-r4ids-wip`; report
+  `out/v34/r4ids/R4IDS-MEASURE.md`; plant `tests/security/galleryVeilIds.pglite.test.js`); part two (the cure) is
+  VEIL-35's. IMPORT-DOOR WAITS ON A RE-STAMP: VEIL-27's `briefs/IMPORT-DOOR-BRIEF.md` (8818da38a); its door census
+  (`out/v27/imp/fn-census.txt`, measured at decc8c9e7) re-run on today's 212; the doors-3 hunks
+  (`lane/veil-doors-3-2026-11-20` 3e1115c81) named; the TRAD-4 pin (`lane/trad-4-2026-11-20-u8-wip` 14f16760b)
+  re-cut on the tip.
+- E117 · A GRAMMAR FAULT NEW IN THIS RELEASE: "A CANDIDATE HER DISTRUSTS"; CURED BEFORE THE FIRST DEPLOY (recorded 2026-11-22 19:18 UTC). FOUND BY CLOSE-2 while it read the old golden master's diff for the owner; REPRODUCED BY THE CHAIR on the line
+  (`secondMentions("Haruto Chen has asked Akemi Yang to back a candidate Akemi Yang distrusts.")` prints "...a
+  candidate her distrusts."). THE CAUSE: point 77's second-mention rule (`src/data/people/personMention.js ::
+  opensClause`) gives the subject pronoun only at a sentence's head, after a stop mark or after a listed opener; a
+  later mention that is the subject of a clause with no opener takes the object. CLOSE-2's scan: 237 of the
+  golden's 525 rows carry "him/her" + a verb (tie tension 388, tie description 143, prominentRelationship 87); 0
+  at the old record. NOT ON MASTER (the leaf's last commit 9ddfcaa5a is no ancestor of origin/master): the live
+  site does not print it. RULED: cured before the first deploy and before any golden is recorded. CLOSE-2 cures it
+  in its wait (unit (3c) "PRONOUN"; ONE builder; `lane/close-2-2026-11-22-pronoun-wip` cut from c1144ba18):
+  measure first (every distinct template and later mention over both callers, `npcData.js`'s ties and
+  `goals.js`'s wants); the cure in the leaf BY THE FOLLOWER (the words after a person's slot are a closed,
+  hand-classed set: a finite verb is the subject; "saw her leave" stays the object); a walker that is RED on an
+  unclassed follower, so no new template can print the fault; red first. THE GATE NARROWED BY CAUSE (births move
+  in words only): `tests/lint` whole, `tests/generators/people` whole, every test naming the leaf, its callers'
+  tables or a changed sentence's old form, the three walkers, one build. "PRONOUN <commit>" to the next stack. The
+  final census has CLOSE-2's mutex first. CLOSE-2's FILE (A) FOR THE OWNER: the old golden master's record is
+  a7a25bd39 (2026-11-19): births there 525 of 525, today's line 0 of 525; ONLY WORDS MOVED (name, population,
+  prosperity, powers, governor, cast size and crisis identical in all 525; 10 of 40 top-level fields, all text);
+  the causes by a birth ladder: points 77, 82, 83 to 85, 89, 91, 93, 96
+  (`close/close-2/oldmaster/OLD-MASTER-DIFF.md` on `lane/close-2-2026-11-22` at 9677ceaf1).
+- E118 · THE CRISIS'S ABSENT POWER IS NAMED BY ONE OLD SENTENCE; NOT A BLOCKER (recorded 2026-11-22 19:18 UTC). FORTUNE-7's count (E112 asked for it): places with no power of their crisis: dark 509, lit 511 of 900; of these a
+  printed sentence names the crisis's power or its leader in 35 dark and 35 lit: EVERY HIT ONE SENTENCE, the
+  governance paragraph's "The creditor's agent has blocked the money for repairs." in an indebted place with no
+  creditor power (`governanceNarrative.js`: printed for every indebted place without crown and nobles). Surfaces
+  read: the governance account, every tab's print prose, the stability line, every string of every cast card, the
+  roster's descriptions, the relationships' strings. THE CHAIR'S READ OF THE SOURCES: master prints the same claim
+  today in older words ("The creditor's representative blocked the infrastructure repair budget.",
+  origin/master `governanceNarrative.js`; `prosperity.js` and `safetyProfile.js` name the same person there): it
+  is NOT new in this release, and it is not a contradiction (a debt has a creditor; the page nowhere says the
+  creditor is a power of the place): a person named in prose who has no card. RULED: not a blocker of the first
+  deploy; it joins E112's proposal for the owner ("the crisis has a body"). THE CHAIR'S EARLIER WORD TO THE OWNER
+  ("a false line if the count is above 0: fixed before the deploy") IS CORRECTED TO HIM BY NAME the same turn.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2151,3 +2234,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | STACK-99 | session_01ACmDYWhdEXf7vcmpySd5Yw | the working line `lane/join-2026-11-14` at c110dd85b (point 98) | `lane/stack-99-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E103): points 99 to 102 under one gate: the close's fixture cure, FORTUNE-B, PAGE-BAR7, SEAT-B; the chair alone moves the line |
 | CLOSE-2 | session_01ACmDYZKhD2ZTU9VKzNg4ZE | `lane/close-1-2026-11-22` at 935c3d633 (CLOSE-1's last commit; it is done) | `lane/close-2-2026-11-22` | the close's second seat (E104, E106): JOIN's re-runs and "JOIN <commit>"; GOLDEN-LIT read and proven; the final census on "THE LINE IS READY <tip>"; the flip's branch on "BUILD THE FLIP" |
 | DAILY-4 | session_01ACmDYaBKhNdEcUSm1G57q1 | `lane/daily-3-2026-11-22` at b1bcb067d (DAILY-3's hand-over; it is done) | `lane/daily-4-2026-11-22` | the Daily Life lane's last seat (E108): the L12 cut; the PDF chapter's merge; the line merged; the owner's file; rule 8; "DAILY-B" |
+| STACK-100 | session_01ACmDYZ2KgEXYCKokzKTjtk | the working line `lane/join-2026-11-14` at c1144ba18 (point 102) | `lane/stack-100-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E114): point 103 "JOIN" a1319f388 (merged at e21c4032e) and point 104 "FORTUNE-C" by "ADD", both test only; "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2 |
