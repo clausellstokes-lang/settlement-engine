@@ -41,7 +41,15 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   server = twin; 462 hooks served, 11 needing a house the read hides (all guild_conflict 12, "organised crime"), 0 naming one.
   Proposed for 212's writer: a served trouble hook whose declared need is a house the read hides leaves (both engines); the 16
   sites registered. Told the chair (sent just before 11:28, the clock's read after it). PASS 2 (lit, 5c4419815): a FRESH builder V33-JOINPROBE-2 seated (the brief's PASS 2
-  section, f05637681), pool `/var/tmp/v18/t2/pool-jp2`; it writes the product `out/v33/joinprobe/JOINPROBE.md`.
+  section, f05637681), pool `/var/tmp/v18/t2/pool-jp2`. IT STOPPED INTERIM at its mark (steps 1-3 done): merge a7e7932ee (5c4419815,
+  no conflict, the diff the three dials alone; proven lit: seat 2, fortune 2, both engines serve [2, 2]); report
+  `out/v33/joinprobe/lit/JOINPROBE-PASS2.md` at 33d6ad00b (pushed `-wip`). LIT GATES (re-read by the seat): GATE-1 6 of 92 (off 6,
+  dm 3), 7 LOWER BY RULE; GATE-2 20 of 40; 0 against the rule; twin = server. The three new (Reveal off, `powers.relations="1"`:
+  city-none-1-117, city-politically_fractured-1-120, city-under_siege-1-108) are byte-equal dark and lit: the CONTROLS moved (part B
+  city births showing the part fell 2 -> 1, under the membership threshold); town-insurgency-0-14 left (its imports moved). Which
+  law: not split (fortune suspected, PLAUSIBLE). Told the chair 12:12. STILL RUNNING (its `lit/measure/run-pass2.sh`, through the
+  mutex, from 12:09): birthdiff by law, the hook gap lit, the lit-surfaces probe, the chain, to `lit/run-pass2.log` (END). THEN THIS
+  SEAT reads them and writes the product `out/v33/joinprobe/JOINPROBE.md`, then (ix) and the worklist (ruling 94).
   CLOSE-1 IS PARKED (the chair, 09:14): its register commits a349917e7 (over the dark join) and e987c3e36 (over the lit) are NOT
   used: the probe takes the two commits the chair named.
 - (Q) UNITS (iv), (v), (vi) PREPARED: builder V33-Q (brief `briefs/V33-Q-BRIEF.md`), worktree `/home/user/wt/q`, branch `v33-q`
@@ -90,3 +98,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 09:47 chain1 END (the sixteen standing only). 11:15 the chair's notice of its branch's broken tip 11:04-11:14 read: this seat fetched it only at 08:05; this repository clean (core.bare false, no Fixture commit on any of its three trees).
 - (before 11:28, not clocked) pass 1 returned (44c2007ab); its gates and hook table re-read; the probe branch pushed `-wip`; the line to the chair; pass 2's builder seated.
 - 11:29 the chair's E75 (ruling 94) read; its pass-2 addition relayed to the builder. (ix) and the worklist (b)-(d): after pass 2, on the probe branch.
+- 12:12 pass 2 returned interim (33d6ad00b); its lit gates re-read; the probe branch pushed; the line to the chair.
