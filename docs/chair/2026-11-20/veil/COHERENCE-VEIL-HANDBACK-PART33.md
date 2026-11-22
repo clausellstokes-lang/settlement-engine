@@ -41,7 +41,9 @@ verified by ls-remote).
   content; recommended: the reader's list over the served page governs. BOTH RULED 07:19 (ruling 88).
 - THE BRIEF AMENDED for a FRESH builder R3-TELL-8b (steps 2 and 3; `briefs/R3-TELL-8-BRIEF.md` head; galleryVeil.js's
   GROUPING_OPEN_EVIDENCE and the shared PDF added to the manifest): worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`;
-  if this seat stops, its work goes up as `lane/veil-32-2026-11-22-r3tell8b-wip` unread.
+  IN FLIGHT (resumed 07:2x, mark 600,000; committing at every standing step): its work is pushed as
+  `lane/veil-32-2026-11-22-r3tell8b-wip` (at 85a8c6562 at 07:36: its read-whole STOP note only; a successor fetches the
+  worktree branch `v32-r3tell8b` from that name). If this seat stops, the latest commits go up there unread.
 - NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): R3-TELL-8b seated on the amended brief (steps 2-3);
   at its return: diff read once with 212 and the registry, reds and greens re-run, the pool RE-MADE on the cured tree in a NEW
   directory (the old kept until the new counts are in), both gates, one line to the chair; then (iv), (v), (vi) per R3-TELL-5's
