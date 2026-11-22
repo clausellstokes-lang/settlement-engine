@@ -719,7 +719,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 176, sub14: 174 },
   "World/Faith":         { measured: 2, sub14: 2 },
-  "World/Daily Life":    { measured: 1, sub14: 1 },
+  // RE-MEASURED 2026-11-22 (DAILY-PAGE-1, the owner's order: the button goes, the engine's lines print): World/Daily Life
+  // measured/sub14 1 -> 4, the three engine lines (dawn work, gathering places, child warnings) at the narrative's FS 13.5.
+  "World/Daily Life":    { measured: 4, sub14: 4 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 5, sub14: 5 },
@@ -899,7 +901,9 @@ const MOBILE_BASELINE = Object.freeze({
   "World/NPCs":          { prose: 292, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 140, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  // RE-MEASURED 2026-11-22 (DAILY-PAGE-1): World/Daily Life prose 1 -> 4, the three engine lines at proseFontSize (sub14 0,
+  // sub12 0: every new line clears the floor).
+  "World/Daily Life":    { prose: 4, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },
