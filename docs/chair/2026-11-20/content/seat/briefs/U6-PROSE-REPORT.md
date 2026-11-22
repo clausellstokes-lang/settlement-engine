@@ -121,6 +121,43 @@ CONFIRMED:
 - Every band that `castPowers.js` asks `powerBandOfRole` for reads the same under the law's fold. The test asserts that more than 0 bands were asked for and that 0 differ.
 - The whole file of 11 tests runs in about 6 seconds. CONFIRMED.
 
+## ADDENDUM 2 (the chair's E70; the brief's ADDENDUM 2 of 10:29:54Z)
+
+### (a) The regex copies: the pass now reads the ladder's own table
+- `src/generators/power/factionStanding.js :: LADDER` (NEW, exported).
+  - It holds the standing ladder's eleven rank lines (rank 1, rank 2, the last rank), lifted from `annotateFactionStanding` byte-identical. Each row is its sentence's fixed parts, with a name or the count word between each pair.
+  - The ladder now writes from `LADDER`. The final-record pass reads `RANK_STANDINGS`, which is derived from `LADDER`, so no wording is copied a second time.
+- **Byte proof**, a two-tree differential. `u6base` is this tree with `factionStanding.js` put back to `c1ffee696`; `bu6` is this tree. The 30 births are `u6p-<size>-0..4`, all six sizes. CONFIRMED, at 10:37 to 10:38Z and again on the final ladder (`5dd0e7b22`, 11:29Z):
+  - law 1, the law's key absent: sha256 equal (`c2c30c9a…`);
+  - lit (the flipped copy, before and after the lift): sha256 equal (`8ea3538a…`).
+- **Totality**, arm 8, executed. CONFIRMED.
+  - A grid of rosters drives every branch of the rank ladder: 48 named heads, plus 3 unnamed heads.
+  - Each rank line the ladder writes must be matched WHOLE by one of `RANK_STANDINGS`, and every `LADDER` row must be reached. The contested line needs a coup reading, so it is checked against the pass directly.
+  - A planted rewording of one inline line turned the arm red: "They are always at the table, and cannot set their own terms." gave 12 unrecognised. The file was restored from a backup (`cmp`-clean).
+  - `LADDER.level` keeps its literal whole, "Three powers stand almost level here, and no one leads; every ". That literal is the `presumedThings.widened.register.json` row (`powersCount`/`almostLevel`, `632f1a6fe6e2cb93`), so the shrink-only register is not moved. A first cut split "Three" off and turned `presumedThings.walker` red twice; it is CONFIRMED green on `5dd0e7b22`. The pass's pattern reads "Three" as the count word (`\\b\\w+`).
+
+### (b) `regenSection('npcs')`: MEASURED, it re-runs no final pass
+- `store/settlementRegenAction.js` (the `section === 'npcs'` branch) calls `generateSettlementPipeline.js :: regenNPCsPipeline`. That function calls none of `keepOneDominant`, `settleClergyToFinalRoster`, `settleArcaneToPractitioners` or `settleSeatHolderToRecord`. Its `powerStructure` is the record's, carried through `withHallCapture` (rederive) and `withConflictRelations` for the newly drawn quarrels. CONFIRMED (read and run). No file was widened.
+- **THE NAMED GAP**, pinned in arm 9: on `u6p-village-3` (lit, R2), regenerating the people with seed `u6r-0` CONFIRMED all of the following:
+  - no final-record pass ran;
+  - the holder stands (R2, the Merchant Guilds);
+  - the form↔holder row and the holder's row are the birth's, byte for byte.
+- **What a game master sees** after regenerating the people of a lit place whose holder is R2: the same W1 and W3 lines as at birth, and they are still true.
+  - Measured: 67 lit R2 places among the 125 births `u6p-<hamlet..metropolis>-0..24`, three regens each, 201 regens in all. The holder moved in 0 of them. CONFIRMED (10:35Z).
+  - In 48 of the 201 the rows changed, by the regen's own conflict clauses for the newly drawn quarrels, never by the holder lines.
+  - The day a regen can move the holder, arm 9 reds on its holder check. The lines would then name the old holder until the pass is joined to `regenNPCsPipeline`. That call site is the cure; it is not made.
+
+### (c) The bar at 150 a size
+Not run: the integrator's, under rule 8.
+
+### GREEN, `tests/lint` whole and the flipped copy, on the tree as delivered
+- **New file:** 13/13. CONFIRMED.
+- **GREEN set:** 12 files, 232 tests, 231 passed, at 11:29:37Z on `5dd0e7b22`. The one red is RED-AT-LINE's `relationshipArchetypes.js` packing. CONFIRMED.
+- **Flipped copy:** the new file is green (13/13), and `tests/domain/seat` passes 211 tests, 205 passed. The six reds are the same dark-dial pins named above (`seatContest` ×3, `seatLawWiring` ×3). CONFIRMED.
+- **`tests/lint` whole**, 11:30:36Z to 11:55:59Z, on `5dd0e7b22`, the tree as delivered: 223 files (5 failed), 3,352 tests, 3,347 passed, 5 failed. CONFIRMED.
+  - These are the same five as at `f16551bc4`: the line's three (`proseCorpusBytes` ×2, `proseComposed` SHIPPED CORPUS); `sovereigntyLightingContract`'s estate file count, 3748 to 3749; and `mutationCoverageManifest` TOTALITY, which needs the new file's row in `scripts/mutation-coverage-manifest.json`. `ledgerCitationIntegrity` also cannot load, because the clone lacks the ref.
+  - The run before it, at 10:40:13Z on `70c5e5d6e`, also had `presumedThings.walker` ×2. That was the split literal above, now cured.
+
 ## GREEN
 
 All runs used `TMPDIR=/tmp GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 …`, with output to a file that was read afterwards.
@@ -168,4 +205,4 @@ The run at 09:54:25Z, on the tree as delivered, covered the new file and `tests/
 
 ## COMMITS
 
-The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then `e9c302208` (arm 5 collected), `98d998287` (the first report). The addendum's commits: `b965259f4` (the final-record pass), `479ea3034` (arms 6 and 7), `a22a75dee` (arm 5 widened), `f16551bc4` (the imports below the census lines), then this report's commit, whose sha is in the final message. Nothing was pushed.
+The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then `e9c302208` (arm 5 collected), `98d998287` (the first report). The addendum's commits: `b965259f4` (the final-record pass), `479ea3034` (arms 6 and 7), `a22a75dee` (arm 5 widened), `f16551bc4` (the imports below the census lines), `c1ffee696` (the report). Addendum 2's commits: `a11234d4e` (LADDER), `70c5e5d6e` (arms 8 and 9), `5dd0e7b22` (LADDER.level whole), then this report's commit, whose sha is in the final message. Nothing was pushed.
