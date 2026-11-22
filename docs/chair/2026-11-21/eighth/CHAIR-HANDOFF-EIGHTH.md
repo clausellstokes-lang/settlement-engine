@@ -113,6 +113,13 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   things are FINISHED. Carried out the same minute (E64). Before it, the same hour, his question: "What is the trouble
   half?": answered in plain words (a trouble is one of a place's live problems; that part of the page work says why
   each is there and gives it hooks that fit the place); the chair's own shorthand had not been explained to him.
+- **THE OWNER'S WORD ON EMPTY SECTIONS OF A SHARED PAGE (written 2026-11-22 09:25 UTC; it came a few minutes before), verbatim:** "Last thing. I noted
+  how I made a rule saying don't cut pieces if the dossier if nothing is on that page tab or section. The exception is
+  the private share link for players maybe it should be a toggle. But those (post veil) can or should be cut empty
+  sections for players to skim more easily." READ AS: HIS RULE STANDS for his own page and everything of his (no page,
+  tab or section of a dossier is cut because it is empty). ONE EXCEPTION, NEW: on the private share link that players
+  read, AFTER the veil, a section with nothing in it is cut, so that players can skim; and it is, or may be, a switch
+  on the share. Answered the same turn in plain words; taken in as a unit (E66), not built in the middle of the six.
 
 
 ## 2. Decisions of this chair (each vetoable by the owner)
@@ -853,6 +860,30 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   line is sent and nothing of its lane is left for the first deploy, or when VEIL-32 hands over (the veil then holds
   one place until its successor is needed). TWO BUILDERS AT ONCE only inside one deliverable (COMMON-EIGHTH 13). THE
   CHAIR'S OWN HELPERS COUNT: no local helper runs beside the six except a short read of CI by name.
+- E65 · WHO RULES, U6 RETURNED: THREE RULINGS (2026-11-22 09:25 UTC; SEAT-10's builder at 98d998287: the chair's W1, W2, W3 verbatim, drawn by
+  the kernel's mixed pick keyed on seed, form and holder; the gate `seatHolderApartOf`; fault (c) cured, red first;
+  `HAND_CEILING` plus one). (1) COVERAGE: the cure ran at the power step, where no person is cast yet, so only 28 of
+  the 63 form-and-holder rows printed W1 and W2 could never print: THE MANIFEST IS WIDENED to
+  `generateSettlementPipeline.js` for ONE final-record pass beside `settleArcaneToPractitioners`: it draws nothing
+  from the stream (the dark control: two trees, the law's key absent, 0 differences); the count of rows that print
+  W1 and of places that print W2; the commonest W1 and W3 by size against the bar; every stored fingerprint it moves
+  named; an ordering proof. (2) W3 FOR A HOLDER OF ANY RANK (the law makes the holder, not the rank). (3) FAULT (b)
+  CLOSED AS UNREACHABLE AT BIRTH, named, not cured (600 lit births, 526 calls, 0 differ under the fold), with one
+  small guard test over a seeded sample.
+- E66 · THE SHARED PAGE CUTS ITS EMPTY SECTIONS: THE OWNER'S NEW RULE TAKEN IN AS A UNIT (2026-11-22 09:25 UTC; his word verbatim in section 1).
+  THE UNIT, "SHARE-EMPTY-CUT", THE DISPLAY LANE'S (PAGE-13, when it comes back), WITH THE VEIL'S PROOF: on the
+  players' share link, a page, tab or section that holds nothing AFTER THE VEIL is not rendered. FOUR CONDITIONS THE
+  CHAIR SETS: (1) THE CUT IS DECIDED FROM THE SERVED DOCUMENT ALONE (what the player is actually sent): a section
+  the owner hid and a section that is truly empty disappear THE SAME WAY, or the gap itself would tell a player that
+  something is hidden: so the unit's red-first is the veil's own question: a place with a hidden house against its
+  house-free twin, under every setting of the owner's switches, cut on and cut off: the two pages name the same
+  sections; (2) THE OWNER'S OWN PAGE, the PDF and every export are untouched: his rule stands there; (3) A SWITCH ON
+  THE SHARE, ON BY DEFAULT ("hide empty sections for players"): MEASURE FIRST whether it fits the share's stored
+  switches as they are or needs a stored field (a new field is a migration: the owner's hand, named to him before
+  anything is built); (4) IT IS ON THE SECURITY READER'S LIST (it changes what a shared page shows). WHEN: it is NOT
+  one of the six and does NOT hold the first deploy: it is built after the veil's R3; it ships with the first
+  deploy only if it is proven before the security reader starts; else with the second. The owner was told so and
+  may say otherwise.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1269,6 +1300,22 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    (each waits on one line from the chair); the rest working. THE ACCOUNT'S LIMIT STATUS still reads
    `allowed_warning` (the seven-day window): by rule 23 and the owner's word it changes nothing. THE CHAIR'S OWN
    RECORD still shows the figures of before its 07:37 compaction (it is one long turn since 07:41).
+- 2026-11-22 09:25 UTC · THE PARKING (E64): NINE OF ELEVEN CONFIRMED "PARKED": GOALS-5 59e9a350c (unit 1's run stopped at 393 of 813 files, its
+   partial log kept in its scratch) · TRAD-6 2b08b81b6 (its green cure ed171f4b8 lives ONLY in its container: its own
+   permission check refused the push of the wip branch and the patch-file road; not worked around: a few lines,
+   re-made from its brief if the box is lost) · PLACE-3 29ad9f844 (the trade note's cure merged on the lane; +279 raw
+   of first paint from the `carrier` atom's eager row to rule at GO; the safety line's share of the 292 bytes is 0) ·
+   DEPTH-5 5e88b7745 (cures 2 to 8 green by the builder on its wip; the themes' table read and accepted: E63) ·
+   PAGE-12 3216f8cd6 (the pool's 24 lines and proofs done on its wip, hook2 25.8% at most at every size; the
+   guard-line pin new, 4 passed) · PAGE-13 5affb8916 (unit 3's merge of the line done; the sides declaration green
+   on its wip; the causes' parity 290 of 294 traced, FAULT 0) · PROSE-5 d2d650eb8 (unit 1 done: the line merged,
+   lint whole 3 red; units 2 and 3 red on their wips) · PEOPLE-3 ce109531d (B3 and B2 on their wips; +588 raw =
+   `factVocabulary.js` alone) · CLOSE-1 75a6d7dd9 (THE FIXTURE CURE FINISHED inside the ten minutes: 72d412265 on its
+   wip, red 0 of 2 then green 2 of 2; its "ledger" reds were its own box: a concurrent fetch had put SEAT-10's tip
+   under the local ledger ref). NOT YET CONFIRMED: PAGE-14 and FRAME-9 (the order re-sent at 09:20 with the
+   priority that joins a running turn). OF THE SIX: VEIL-33 matched the lane's gates on its own pool (GATE-1 4 of 92,
+   GATE-2 20 of 40) and starts the probe's pass 1; SEAT-10's U6 returned (E65); STACK-97 had read its second lint
+   whole after the doors (3 red of 3,354) at 08:51 and has not yet sent its "DOORS" line.
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
