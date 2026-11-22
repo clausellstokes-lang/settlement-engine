@@ -142,7 +142,8 @@ it('R3-CURE-2 keys measure', async () => {
     if (ONLY.length) {   // VEIL-31's twin measure (the chair's 02:28 condition): the house-free twin B's own values, raw and read
       const tv = (d) => ({ crimeTypes: (d?.economicState?.safetyProfile?.crimeTypes || []).map((c) => c?.type ?? null), ops: ops(d),
         criminalHouses: (d?.institutions || []).filter((h) => isRec(h) && /crimin/i.test(String(h.category || ''))).map((h) => String(h.name)),
-        gamblingHouses: (d?.institutions || []).filter((h) => isRec(h) && /gambl/i.test(String(h.name || ''))).map((h) => String(h.name)) });
+        gamblingHouses: (d?.institutions || []).filter((h) => isRec(h) && /gambl/i.test(String(h.name || ''))).map((h) => String(h.name)),
+        ccs: d?.powerStructure && Object.prototype.hasOwnProperty.call(d.powerStructure, 'criminalCaptureState') ? d.powerStructure.criminalCaptureState : '#absent' });
       rec.A = tv(A); rec.B = tv(B); rec.Bserved = {}; rec.Aserved = {};
       for (const dm of [false, true]) { rec.Bserved[dm ? 'dm' : 'off'] = tv(twin(B, dm)); rec.Aserved[dm ? 'dm' : 'off'] = tv(twin(A, dm)); }
       out.push(rec); continue;

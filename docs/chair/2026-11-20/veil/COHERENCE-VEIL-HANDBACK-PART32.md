@@ -68,6 +68,13 @@ verified by ls-remote).
 - IN FLIGHT (02:27): BUILDER R3-TELL-5b (a FRESH Agent subagent: the first builder passed its 250,000 mark) on unit (iii) alone,
   worktree `/home/user/wt/r3tell5b`, branch `v31-r3tell5b` (local, cut at c5f046ee4). If this seat stops, its work goes up as
   `lane/veil-31-2026-11-21-r3tell5b-wip` unread. The first builder's branch: `lane/veil-31-2026-11-21-r3tell5-wip` at c60daddd2 (merged).
+- UNIT (iii) RETURNED (03:28; builder R3-TELL-5b, `lane/veil-31-2026-11-21-r3tell5b-wip` at f98c39ec4; red 090a2e905, cure a0d280580;
+  212 there `8688ddb6…5a3a`): where the SERVED crime signal is false no served power or relation carries `captureState`.
+  Builder's figures: GATE-1 4/92, GATE-2 20/40 red. Diff read once: no fault. The seat's re-runs (`/var/tmp/v18/out/v31/chain3.sh`)
+  running; NOT YET MERGED. ITS STOP, sent to the chair 03:27 with the twins (`out/v31/twins/twins-ccs.json`):
+  `criminalCaptureState` served 'adversarial'/'equilibrium'/'corrupted' on 25 towns (Reveal DM) where no criminal house or power is
+  served; open pages show 'none' (DM) or absent (off); the twins read 'none' on 21 of 25. Recommended: 'none' as a sent form in
+  unit (v); the four whose twin keeps a rung listed. AWAITING THE CHAIR.
 - NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
@@ -148,3 +155,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 02:26 the unit (ii) line to the chair (the two STOPS with recommendations). 02:27 unit (iii)'s fresh builder seated.
 - 02:31 the chair's 02:28 ruling (80) read; the seat's correction sent (unit (iii) is a FRESH builder). 02:32 the twins measured; sent. 02:32 recorded.
 - 02:36 the chair's 02:35 ruling (81) read; unit (vii) placed. 02:37 recorded.
+- (before 03:20, not clocked) unit (iii) returned; pushed -wip; diff read; chain3 launched 03:20; the capture twins measured 03:27 and sent. 03:28 recorded.
