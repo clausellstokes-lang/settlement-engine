@@ -713,6 +713,38 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   join probe's report as a lead. AFTER ITS CLEARANCE, by the standard's rule 1 (the amendment of 2026-11-10): ONE
   read-only review of migration 212's final text in a fresh context on the chair's own tier, before the owner is
   asked to apply it.
+- E53 · FORTUNE'S LANDING (POINT 98): THREE CONFLICTS CLASSED BEFORE THEY ARE MET (2026-11-22 08:17 UTC; CLOSE-1's trial join of fortune's
+  tip f13f31820 on who rules' merge 840020b9b found nine conflicts: five registers (the line's side, then the door:
+  the wiring census, the observed-shape readers' baseline, writer-reach, the lighting census, the tuning inventory),
+  the sameness door (`HAND_CEILING` 74 and fortune's ONE row = 75; `handPools.json` merged itself at 75 rows), and
+  THREE of the class "any other", RULED: `src/domain/density/densityCreateBoundary.js` (the import, the clamp's doc
+  paragraph, `birthConfig`'s clamp and mint, the `GENERATION_LAWS` row): both sides only add: THE UNION, the line's
+  (who rules) first; proven by 4 law rows, `birthConfig` clamping both markers, the density walker green ·
+  `tests/lint/densityCreateBoundary.walker.test.js :: MINT_SYMBOLS, MINT_HOMES`: the union, the line's first ·
+  `tests/lint/.tuning-register.json :: tables`: NOT a door's register (no door regenerates its rows; the line's side
+  would drop fortune's DRAFT row): a table where both sides only add rows: the union. SO THE LAWS' JOIN (the close
+  worklist's item (1)) IS MOSTLY MADE BY THE MERGE: what is left for CLOSE-1's one landing unit is the ONE saved-place
+  test over `GENERATION_LAWS` and the pin of the atom `seat contested` against the page's risk word under both laws.
+- E54 · SIX MORE LANES SEATED, AND THE EIGHT RULINGS THEIR PROMPTS NEEDED (2026-11-22 08:17 UTC; a helper drafted the six prompts from the
+  seventh pickup, the hand-backs and this file; the chair read each whole, ruled, and released them:
+  `prompts/PROSE-5.txt`, `GOALS-5.txt`, `PAGE-14.txt`, `DEPTH-5.txt`, `FRAME-9.txt`, `TRAD-6.txt`). (1) THE STATE
+  SENTENCES' SEAT IS PROSE-5 on `lane/prose-5-2026-11-22` (the 4 is the chair's builder's branch, point 94). (2)
+  EVERY HOLD THE SEVENTH CHAIR SET "FINISH BEFORE STARTING" FOR THE ALLOWANCE IS ENDED (rule 23; the owner's word):
+  the state sentences' BUILD-2 (after its unit 4, or beside where disjoint; "PROSE-B"), new drafting there gated on
+  BUILD-2's measure; people and place: SECRETS-30's re-cut as a draft for the chair's eye, PHYSICAL's measure only;
+  depth: hooks tranche 3 after "DEPTH", beside the ties ("DEPTH-HOOKS-3"). (3) TIES-HOLD LANDS AS BUILT, short of
+  its target (266 places still print a tie template twice: town 11, city 105, metropolis 150; every one a place
+  whose admitted lines are all printed), the figure named in "WANTS"; the depth lane's 157 tie pairs are the cure
+  ("DEPTH-TIES"). (4) ARM (u) OF `goalSentencesOnceInTown.test.js`, which two lanes move: THE ARM HOLDS THE FIXTURE
+  THE LINE HOLDS; the first of the two to land brings its change, the second re-states its named movers against it;
+  the goals lane's re-pointed fixture d8b174237 lands ONLY with its wide class "held-text knock-on" NARROWED (a
+  receipt predicate, or a count by size): proposed by GOALS-5, ruled by the chair before "WANTS". (5) THE TROUBLE
+  HOOKS' THEME ROWS are written by the depth seat at its merge of the line, every theme to the chair as one table
+  first; the later of DEPTH-5 and PAGE-12 to land writes the themes of the lines then without one. (6) THE
+  TRADITIONS LANE STILL MERGES NOTHING OF THE LINE: TRAD-6 names unit 13's failures, runs rule 8 on its own base,
+  and the landing helper merges its tip; TRAD-6 itemizes ALL 292 bytes of points 88 to 91. THE RECORD'S OWN
+  DISAGREEMENTS THE HELPER FOUND: section 4 said depth's two rulings and arm (u) were owed (E6 (b), (c) had ruled
+  them); the red list's row for `selfVouchReceipt` soak1k-8 is cured by point 94 (9513ba024).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
