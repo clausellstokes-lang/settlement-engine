@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "085046c7c601fc37082058c0363d729aed4e7d75",
-  "measuredBy": "FORTUNE-6 builder U5b",
+  "measuredAtSha": "eee2fe0ceee95a96a94db890bd7a6925df299f9a",
+  "measuredBy": "FORTUNE-6",
   "date": "2026-11-22",
-  "note": "re-taken by its own door at FORTUNE U5b (085046c7c; the chair's ruling of 01:48 UTC 2026-11-22): the recent cut-off left FORTUNE_LAW_TUNING for the data file, so the table's leaves and spanDigest return to a157bd930's; display/governanceAccount.js stays a dependent (it reads weatheredWithinYears)",
+  "note": "the working line's tip f5295e425 merged into lane/fortune-6-2026-11-21 (eee2fe0ce): GOAL_FAMILY_TUNING and LAW_PURSUIT_TUNING (people/goals.js) dependents moved, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8679,7 +8679,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },
@@ -8713,7 +8714,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },
