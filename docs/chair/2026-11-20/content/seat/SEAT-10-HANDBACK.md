@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T12:11:03Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T14:13:35Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -66,6 +66,12 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **POINT 97 IS THE LINE (the chair, 10:49Z): `lane/join-2026-11-14` = `1ec3e81d1`, holding this lane's `46339e5c7`.** The word to merge is given.
   - **The line's merge:** `1ec3e81d1` merged into the lane as `4e9e58f8f` (11:04Z; clean, no conflict, pushed).
   - **The registers:** at the line's side; the seven walkers 285/285 and wiring `--dry` delta 0.
+- **U7 MERGED into the lane as `553b27368` (BU7 `8abd0eeb1`, read whole: E76's measure, E77's one fact and U5-STALE; the chair's E81 accepts both points).**
+  - **The doors, each its own commit:** the prose numerics `ea9f5c449` (four rows re-addressed +8, no new debt); phoneChromeFloor `4be9bccd7` (floored +1 on /create, /gallery and /settlements, bare unmoved); the lighting census `a20eaddef` (3759 → 3760). Writer-reach, the size baseline, the manifest and wiring were unchanged, green.
+  - **THE DARK PROOF:** `confine-two.sh 1ec3e81d1 a20eaddef` is **EQUAL** (`all 07873739…`, 1245; 14:08:27Z).
+- **THE BAR (E79):** it reads SENTENCES as printed. W1 and W3 pass (at most 10.0%); the templates are named, not barred (`bar/BAR.md`). No new wordings.
+- **OUT: BU7 on E81** (branch `u7b` from `a20eaddef`): both sides of the hat rule pinned by name; the tonight sheet prints no office word for the old person; first paint measured, with a leaf for U5-STALE if a few lines do it.
+- **NEXT:** merge E81's follow-up; then rule 8 as widened (the build and its five figures; the directories, the governing suites, `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, `tests/domain` flat, `tests/lint`, `tests/build`); the flip's census at the final tip; then "SEAT-B".
 - **U6 MERGED into the lane as `674148b9c` (BU6 `e2a221ac6`, read whole; the chair's word of 10:49Z).**
   - **The one conflict:** the hand list's ceiling, resolved as the union (`HAND_CEILING` 75 = the line's 74 + U6's row; 75 rows).
   - **The doors:** the mutation-manifest row `3113d621b` (TOTALITY red before, 10/10 after); the lighting census `21edae3ae` (3758 → 3759, 34/34 after). Wiring `--dry` and writer-reach were unchanged, green.
