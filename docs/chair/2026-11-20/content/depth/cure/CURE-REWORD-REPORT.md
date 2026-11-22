@@ -1,15 +1,15 @@
-# CURE-REWORD-REPORT: STOPPED at item 4 (DEPTH-5 builder, 2026-11-22T08:28Z by `date -u`)
+# CURE-REWORD-REPORT: PARKED partway (DEPTH-5 builder, 2026-11-22; amends the stop of e467cd425 after ADDENDUM 1)
 
-No code was edited and no code commit was made. The brief's item 4 says to STOP if `hookThemeTotality.walker` needs a content change. It does.
+**Done.**
+- `38f525847`: the reword (chair's words, `other[61]`, theme unchanged), the steps fixture (`1i5ftjy` retired in pools, golden and hxd; legacy never held it; pools adds `1lereo9`), and the helper `tests/helpers/hookThemeAnswers.js`, read by both the answers test and the totality walker (the walker's ROOT line untouched).
+- `4b025c3ab`: the digest door; `--check` exits 0.
+- Base red: `styleLaw.walker … ⛔ no file's count of any struck phrase RISES above its baseline` (`a-stranger 1 -> 2`). At 4b025c3ab the four hook/style files are green (36/36).
 
-**The base red, quoted:** `tests/lint/styleLaw.walker.test.js > the style walker — the ratchet at the tree > ⛔ no file's count of any struck phrase RISES above its baseline`: `src/data/npcData.js :: a-stranger 1 -> 2` (lines 32 and 1404). At base, the same run had `hookThemeTotality` and `hookThemeAnswersHeld` green (Tests 1 failed | 32 passed).
+**Red by me, cure committed but UNVERIFIED.** `tests/lint` whole at 4b025c3ab: Test Files 6 failed | 215 passed (221); Tests 8 failed | 3268 passed (3276). Seven are the sibling's reds 2-8. The eighth is mine: `sovereigntyLightingContract … every stated figure is executed` (title count 31291 -> 31292, from my new `it`). `81682b121` folds the steps claims into the existing pools `it`, with no new title. Its re-run was stopped at the park.
 
-**Why I stopped:** the old line `other[61]` has the hash `1i5ftjy`, and `outsider_suspicion` tags it. The base fixture holds that hash as typed in **`golden` and `hxd`** as well as `pools`. `hookThemeTotality.walker` (lines 222-231) reads those parts from the base file directly. I computed the post-door digest in memory, with nothing written. After the door it will red with "golden/hxd: a text typed at the base answers another theme" `[1i5ftjy, outsider_suspicion]`. That red is not about digest freshness. The cure needs that walker to compose the steps (a content change to a file I may not edit) or an edit to the base file (forbidden).
+**Next step.** Run `hookThemeAnswersHeld`, `sovereigntyLightingContract`, `hookThemeTotality` and `negativeAssertionAnchor`, then `tests/lint` whole.
 
-There is a second gap. Before the door, `hookThemeAnswersHeld`'s `pools` part cannot be green at the tip: the new line answers `untyped` ("moved answers", "an untyped pool line").
-
-| item | value |
+| hash | value |
 |---|---|
-| old hash | `1i5ftjy` (pools, hxd, golden; not legacy) |
-| new hash | `1lereo9` (no collision among the 270) |
-| ruling needed | let the totality walker compose steps for golden/hxd, or edit the base |
+| old | `1i5ftjy` |
+| new | `1lereo9` |
