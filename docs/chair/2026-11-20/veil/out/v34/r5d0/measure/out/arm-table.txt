@@ -1,0 +1,275 @@
+R5-DESC-MEASURE THE ARM: 140 births (92 hidden-house, 48 controls), 6528 pages; shards 0/4 2026-11-22T19:28:51.004Z..2026-11-22T19:36:19.730Z; 1/4 2026-11-22T19:28:51.146Z..2026-11-22T19:35:59.066Z; 2/4 2026-11-22T19:28:51.139Z..2026-11-22T19:36:06.594Z; 3/4 2026-11-22T19:28:50.759Z..2026-11-22T19:36:04.869Z
+(c) word list: factionCategories.js FACTION_CATEGORY_KEYWORDS + MAGIC_CERTAIN_KEYWORDS (copied) by the withheld power's category, + its RULER_KINDS archetype word (["religious","military","merchant","arcane","noble","craft"])
+errors: 0
+ENGINE PARITY (server against twin: W, H, masked rows, the M1 and M5 tables): 0 differences
+
+M1 THE CENSUS. pages with a withheld power (W, unstamped): 1240 of 6528 (towns 31; names ["Thieves' Guild","The Black Circle","The Underground","The Hidden Hand","The Shadow Compact"]); pages whose record holds a stamped row (H): 420 (towns 9; the stamped row served on 210); pages serving a masked row: 0
+path | side | n served | a(W) | a(H) | b mask | bt "the an unseen interest" | c kind
+powerStructure.factions[].desc | off/sv | 8281 | 20 | 0 | 0 | 0 | 246
+powerStructure.factions[].desc | off/tw | 8281 | 20 | 0 | 0 | 0 | 246
+powerStructure.factions[].desc | dm/sv | 8410 | 20 | 0 | 0 | 0 | 246
+powerStructure.factions[].desc | dm/tw | 8410 | 20 | 0 | 0 | 0 | 246
+factions[].desc | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+factions[].desc | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+factions[].desc | dm/sv | 0 | 0 | 0 | 0 | 0 | 0
+factions[].desc | dm/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].dmNote | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].dmNote | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].dmNote | dm/sv | 170 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].dmNote | dm/tw | 170 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].powerLabel | off/sv | 8389 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].powerLabel | off/tw | 8389 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].powerLabel | dm/sv | 8518 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].powerLabel | dm/tw | 8518 | 0 | 0 | 0 | 0 | 0
+powerStructure.recentConflict | off/sv | 1632 | 0 | 0 | 0 | 0 | 10
+powerStructure.recentConflict | off/tw | 1632 | 0 | 0 | 0 | 0 | 10
+powerStructure.recentConflict | dm/sv | 1632 | 0 | 0 | 0 | 0 | 10
+powerStructure.recentConflict | dm/tw | 1632 | 0 | 0 | 0 | 0 | 10
+pressureSentence | off/sv | 1632 | 0 | 0 | 0 | 0 | 50
+pressureSentence | off/tw | 1632 | 0 | 0 | 0 | 0 | 50
+pressureSentence | dm/sv | 1632 | 0 | 0 | 0 | 0 | 50
+pressureSentence | dm/tw | 1632 | 0 | 0 | 0 | 0 | 50
+powerStructure.governingName | off/sv | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.governingName | off/tw | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.governingName | dm/sv | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.governingName | dm/tw | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.government | off/sv | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.government | off/tw | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.government | dm/sv | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.government | dm/tw | 1632 | 0 | 0 | 0 | 0 | 90
+powerStructure.governmentType | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.governmentType | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.governmentType | dm/sv | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.governmentType | dm/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.conflicts[].desc | off/sv | 2007 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].desc | off/tw | 2007 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].desc | dm/sv | 2007 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].desc | dm/tw | 2007 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].intensity | all | 8028 | 0 | 0 | 0 | 0 | 0
+powerStructure.conflicts[].issue | all | 8028 | 0 | 0 | 0 | 0 | 0
+powerStructure.conflicts[].parties[] | off/sv | 4014 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].parties[] | off/tw | 4014 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].parties[] | dm/sv | 4014 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].parties[] | dm/tw | 4014 | 0 | 0 | 0 | 0 | 50
+powerStructure.conflicts[].plotHooks[] | all | 390 | 0 | 0 | 0 | 0 | 0
+powerStructure.conflicts[].stakes | all | 8028 | 0 | 0 | 0 | 0 | 0
+powerStructure.criminalCaptureState | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.criminalCaptureState | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.criminalCaptureState | dm/sv | 932 | 0 | 0 | 0 | 0 | 60
+powerStructure.criminalCaptureState | dm/tw | 932 | 0 | 0 | 0 | 0 | 60
+powerStructure.factionRelationships[].captureState | all | 216 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].direction | all | 16740 | 0 | 0 | 0 | 0 | 0
+powerStructure.factionRelationships[].narrative | off/sv | 4131 | 0 | 0 | 0 | 0 | 130
+powerStructure.factionRelationships[].narrative | off/tw | 4131 | 0 | 0 | 0 | 0 | 130
+powerStructure.factionRelationships[].narrative | dm/sv | 4239 | 0 | 0 | 0 | 0 | 130
+powerStructure.factionRelationships[].narrative | dm/tw | 4239 | 0 | 0 | 0 | 0 | 130
+powerStructure.factionRelationships[].pair[] | off/sv | 8262 | 0 | 0 | 0 | 0 | 140
+powerStructure.factionRelationships[].pair[] | off/tw | 8262 | 0 | 0 | 0 | 0 | 140
+powerStructure.factionRelationships[].pair[] | dm/sv | 8478 | 0 | 0 | 0 | 0 | 140
+powerStructure.factionRelationships[].pair[] | dm/tw | 8478 | 0 | 0 | 0 | 0 | 140
+powerStructure.factionRelationships[].type | all | 16740 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].captureState | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].captureState | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].captureState | dm/sv | 115 | 0 | 0 | 0 | 0 | 45
+powerStructure.factions[].captureState | dm/tw | 115 | 0 | 0 | 0 | 0 | 45
+powerStructure.factions[].category | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].category | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].category | dm/sv | 8518 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].category | dm/tw | 8518 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].crisisNote | all | 1688 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].faction | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].faction | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+powerStructure.factions[].faction | dm/sv | 8518 | 0 | 129 | 0 | 0 | 90
+powerStructure.factions[].faction | dm/tw | 8518 | 0 | 129 | 0 | 0 | 90
+powerStructure.factions[].modifier | off/sv | 746 | 0 | 0 | 0 | 0 | 60
+powerStructure.factions[].modifier | off/tw | 746 | 0 | 0 | 0 | 0 | 60
+powerStructure.factions[].modifier | dm/sv | 746 | 0 | 0 | 0 | 0 | 60
+powerStructure.factions[].modifier | dm/tw | 746 | 0 | 0 | 0 | 0 | 60
+powerStructure.factions[].modifiers[] | all | 2092 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].name | off/sv | 1275 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].name | off/tw | 1275 | 0 | 0 | 0 | 0 | 0
+powerStructure.factions[].name | dm/sv | 1299 | 0 | 24 | 0 | 0 | 0
+powerStructure.factions[].name | dm/tw | 1299 | 0 | 24 | 0 | 0 | 0
+powerStructure.publicLegitimacy.bg | all | 6528 | 0 | 0 | 0 | 0 | 0
+powerStructure.publicLegitimacy.color | all | 6528 | 0 | 0 | 0 | 0 | 0
+powerStructure.publicLegitimacy.label | all | 6528 | 0 | 0 | 0 | 0 | 0
+powerStructure.stability | all | 6528 | 0 | 0 | 0 | 0 | 0
+M1 by setting (all paths summed; sv): setting | pages | n | aW | aH | b | bt | c
+own | 280 | 14089 | 4 | 13 | 0 | 0 | 239
+g:000 | 280 | 13937 | 4 | 13 | 0 | 0 | 218
+g:001 | 280 | 14089 | 4 | 13 | 0 | 0 | 239
+g:010 | 280 | 13937 | 4 | 13 | 0 | 0 | 218
+g:011 | 280 | 14089 | 4 | 13 | 0 | 0 | 239
+g:100 | 280 | 13937 | 4 | 13 | 0 | 0 | 218
+g:101 | 280 | 14089 | 4 | 13 | 0 | 0 | 239
+g:110 | 280 | 13937 | 4 | 13 | 0 | 0 | 218
+allOpen | 280 | 14119 | 4 | 13 | 0 | 0 | 251
+off | 280 | 13937 | 4 | 13 | 0 | 0 | 218
+unmarked | 280 | 15224 | 0 | 13 | 0 | 0 | 0
+allShown | 184 | 11550 | 0 | 10 | 0 | 0 | 0
+(c) by path and word (sv, both reads): {"powerStructure.factions[].faction":{"corrupt":160,"shadow":20},"powerStructure.factions[].category":{"criminal":180},"powerStructure.factions[].modifier":{"corrupt":120},"powerStructure.factions[].desc":{"criminal":290,"shadow":160,"corrupt":62,"thiev":40},"powerStructure.conflicts[].desc":{"corrupt":100},"powerStructure.conflicts[].parties[]":{"corrupt":100},"powerStructure.government":{"corrupt":160,"shadow":20},"powerStructure.governingName":{"corrupt":160,"shadow":20},"powerStructure.factionRelationships[].pair[]":{"corrupt":220,"shadow":60},"powerStructure.factionRelationships[].narrative":{"corrupt":220,"shadow":40},"powerStructure.factions[].captureState":{"corrupt":45},"powerStructure.criminalCaptureState":{"corrupt":60},"pressureSentence":{"corrupt":100},"powerStructure.recentConflict":{"corrupt":20}}
+(c) STRICT (a kind word no served power's own name carries, the idiom "in the shadow of" / "'s shadow" set aside), strings by path and side:
+  powerStructure.criminalCaptureState dm/sv: 20  e.g. ["corrupted"]
+  powerStructure.criminalCaptureState dm/tw: 20  e.g. ["corrupted"]
+  powerStructure.factions[].captureState dm/sv: 5  e.g. ["corrupted"]
+  powerStructure.factions[].captureState dm/tw: 5  e.g. ["corrupted"]
+  powerStructure.factions[].category dm/sv: 90  e.g. ["criminal"]
+  powerStructure.factions[].category dm/tw: 90  e.g. ["criminal"]
+  powerStructure.factions[].category off/sv: 90  e.g. ["criminal"]
+  powerStructure.factions[].category off/tw: 90  e.g. ["criminal"]
+  powerStructure.factions[].desc dm/sv: 155  e.g. ["Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.","Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. They are always at the table, but cannot set their own terms. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. The cri","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Arcane Orders have more say right now, and the clergy cannot accept it. The criminal network is stronger than they are. The clergy preach against it loudly, and few peo"]
+  powerStructure.factions[].desc dm/tw: 155  e.g. ["Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.","Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. They are always at the table, but cannot set their own terms. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. The cri","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Arcane Orders have more say right now, and the clergy cannot accept it. The criminal network is stronger than they are. The clergy preach against it loudly, and few peo"]
+  powerStructure.factions[].desc off/sv: 155  e.g. ["Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.","Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. They are always at the table, but cannot set their own terms. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. The cri","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Arcane Orders have more say right now, and the clergy cannot accept it. The criminal network is stronger than they are. The clergy preach against it loudly, and few peo"]
+  powerStructure.factions[].desc off/tw: 155  e.g. ["Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen.","Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. They are always at the table, but cannot set their own terms. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not. The cri","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. Arcane Orders have more say right now, and the clergy cannot accept it. The criminal network is stronger than they are. The clergy preach against it loudly, and few peo"]
+  powerStructure.factions[].modifier dm/sv: 20  e.g. ["corruption-riddled"]
+  powerStructure.factions[].modifier dm/tw: 20  e.g. ["corruption-riddled"]
+  powerStructure.factions[].modifier off/sv: 20  e.g. ["corruption-riddled"]
+  powerStructure.factions[].modifier off/tw: 20  e.g. ["corruption-riddled"]
+  e.g. a(W) (40 kept examples):
+    r3m-town-none-0-17 off|own|sv powerStructure.factions[1].desc [thiev,criminal] "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than t"
+    r3m-town-none-0-17 off|g:000|sv powerStructure.factions[1].desc [thiev,criminal] "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than t"
+    r3m-town-none-0-17 off|g:001|sv powerStructure.factions[1].desc [thiev,criminal] "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than t"
+    r3m-town-none-0-17 off|g:010|sv powerStructure.factions[1].desc [thiev,criminal] "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than t"
+    r3m-town-none-0-17 off|g:011|sv powerStructure.factions[1].desc [thiev,criminal] "Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than t"
+  e.g. a(H) (153 kept examples):
+    r3m-town-infiltrated-0-12 dm|own|sv powerStructure.factions[2].faction [] "The Independent Bloc"
+    r3m-town-infiltrated-0-12 dm|g:000|sv powerStructure.factions[2].faction [] "The Independent Bloc"
+    r3m-town-infiltrated-0-12 dm|g:001|sv powerStructure.factions[2].faction [] "The Independent Bloc"
+    r3m-town-infiltrated-0-12 dm|g:010|sv powerStructure.factions[2].faction [] "The Independent Bloc"
+    r3m-town-infiltrated-0-12 dm|g:011|sv powerStructure.factions[2].faction [] "The Independent Bloc"
+  e.g. b (0 kept examples):
+  e.g. bt (0 kept examples):
+  e.g. c (1365 kept examples):
+    r3m-town-infiltrated-0-12 off|own|sv powerStructure.factions[0].faction [corrupt] "Corrupt Council"
+    r3m-town-infiltrated-0-12 off|own|sv powerStructure.factions[0].category [criminal] "criminal"
+    r3m-town-infiltrated-0-12 off|own|sv powerStructure.factions[0].modifier [corrupt] "corruption-riddled"
+    r3m-town-infiltrated-0-12 off|own|sv powerStructure.factions[2].desc [criminal] "Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen."
+    r3m-town-infiltrated-0-12 off|own|sv powerStructure.conflicts[0].desc [corrupt] "Corrupt Council and The Guard are in high conflict over who commands when danger comes. The stakes are command."
+
+M2 (a) or (b) at a power-card path the M1 list does not name (both engines summed): {"powerStructure.factions[].faction":[0,258,0,0],"powerStructure.factions[].name":[0,48,0,0]}
+M2 wider (every other served string, both engines summed, [aW, aH, b, bt]): {"npcs[].institution.key":[0,258,0,0],"npcs[].memberships[].power":[0,258,0,0],"stress.cast.stakes[].factionId":[0,258,0,0],"stressors.cast.stakes[].factionId":[0,258,0,0],"simulationTrace[].targetId":[0,210,0,0],"history.currentTensions[].factions[]":[0,22,22,0]}
+  e.g. r3m-town-infiltrated-0-12 dm|own|sv: ["npcs[3].institution.key","0100","The Independent Bloc"]
+  e.g. r3m-town-infiltrated-0-12 dm|g:000|sv: ["npcs[3].institution.key","0100","The Independent Bloc"]
+  e.g. r3m-town-infiltrated-0-12 dm|g:001|sv: ["npcs[3].institution.key","0100","The Independent Bloc"]
+  e.g. r3m-town-infiltrated-0-12 dm|g:010|sv: ["npcs[3].institution.key","0100","The Independent Bloc"]
+  e.g. r3m-town-infiltrated-0-12 dm|g:011|sv: ["npcs[3].institution.key","0100","The Independent Bloc"]
+
+M3 THE OTHER WAY'S FIDELITY on the NOTHING-HIDDEN pages (no withheld power: no W, every stamped row served): {"pages":5118,"strings":25956,"B":14598,"S":25574,"Svac":11480,"pagesB":670,"pagesS":4736,"lbl":20484,"lblN":21924,"dm":302,"dmN":340,"codes":{"B1":14598,"S2":11480,"B0":7326,"S0":382,"S1":14094,"B-1":4140,"S-1":108}}
+  off/sv: {"pages":1237,"strings":6237,"B":3469,"S":6147,"Svac":2766,"pagesB":161,"pagesS":1147,"lbl":4915,"lblN":5254,"dm":0,"dmN":0,"codes":{"B1":3469,"S2":2766,"B0":1785,"S0":90,"S1":3381,"B-1":1010,"S-1":27}}
+  off/tw: {"pages":1237,"strings":6237,"B":3469,"S":6147,"Svac":2766,"pagesB":161,"pagesS":1147,"lbl":4915,"lblN":5254,"dm":0,"dmN":0,"codes":{"B1":3469,"S2":2766,"B0":1785,"S0":90,"S1":3381,"B-1":1010,"S-1":27}}
+  dm/sv: {"pages":1322,"strings":6741,"B":3830,"S":6640,"Svac":2974,"pagesB":174,"pagesS":1221,"lbl":5327,"lblN":5708,"dm":151,"dmN":170,"codes":{"B1":3830,"S2":2974,"B0":1878,"S0":101,"S1":3666,"B-1":1060,"S-1":27}}
+  dm/tw: {"pages":1322,"strings":6741,"B":3830,"S":6640,"Svac":2974,"pagesB":174,"pagesS":1221,"lbl":5327,"lblN":5708,"dm":151,"dmN":170,"codes":{"B1":3830,"S2":2974,"B0":1878,"S0":101,"S1":3666,"B-1":1060,"S-1":27}}
+  by setting (sv): {"own":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:000":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:001":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:010":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:011":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:100":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:101":"581/1037 B, 1022/1037 S, pages 29/196 of 211","g:110":"581/1037 B, 1022/1037 S, pages 29/196 of 211","allOpen":"587/1043 B, 1028/1043 S, pages 29/196 of 211","off":"581/1037 B, 1022/1037 S, pages 29/196 of 211","unmarked":"831/1456 B, 1433/1456 S, pages 34/248 of 271","allShown":"652/1146 B, 1128/1146 S, pages 11/160 of 178"}
+  B MISSES by cause (11358): [["a step after the power step rewrote it: assembleSettlement",5870],["not in the power step's roster (born after the power step; steps assembleSettlement)",4140],["the late replay's options not handed (defenseLabel / militaryGate / forces)",652],["the served page differs from the record (an input the share changes)",540],["a step after the power step rewrote it: #tail (generateSettlementPipeline.js:203-204, claimStanding.js :: settleClergyToFinalRoster / settleArcaneToPractitioners, after the last step)",140],["a step after the power step rewrote it: assembleSettlement > #tail (generateSettlementPipeline.js:203-204, claimStanding.js :: settleClergyToFinalRoster / settleArcaneToPractitioners, after the last step)",16]]
+  B MISSES (B holds the power, the desc differs) by cause and split (base equal 1/0, standing equal 1/0): [["a step after the power step rewrote it: assembleSettlement | base 1 standing 0",5374],["the served page differs from the record (an input the share changes) | base 1 standing 0",460],["a step after the power step rewrote it: assembleSettlement | base 0 standing 0",456],["the late replay's options not handed (defenseLabel / militaryGate / fo | base 1 standing 0",348],["the late replay's options not handed (defenseLabel / militaryGate / fo | base 0 standing 1",274],["a step after the power step rewrote it: #tail (generateSettlementPipel | base 0 standing 1",140],["a step after the power step rewrote it: assembleSettlement | base 0 standing 1",40],["the served page differs from the record (an input the share changes) | base 0 standing 0",40],["the served page differs from the record (an input the share changes) | base 0 standing 1",40],["the late replay's options not handed (defenseLabel / militaryGate / fo | base 0 standing 0",30],["a step after the power step rewrote it: assembleSettlement > #tail (ge | base 0 standing 0",16]]
+  B misses by power (top): [["Merchant Guilds",1524],["Religious Authorities",1266],["Military/Guard",1152],["The Merchant Bloc",444],["Arcane Orders",404],["The Garrison Bloc",396],["War Council",340],["The Independent Bloc",334],["The Order of the Watch",300],["The Devout Circle",292],["Craft Guilds",272],["The Peerage",240],["The Holy Compact",240],["Noble Families",220]]
+    e.g. [a step after the power step rewrote it: assembleSettlement] r3m-village-insurgency-0-4 off|own|tw Elder Council: served "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word." | B "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word. Close enough to the two above that their support is worth buying; they play People's Council and Religious Authorities against each other when they can"
+    e.g. [not in the power step's roster (born after the power step; s] r3m-city-infiltrated-0-32 off|own|tw The Guild Alliance: served "" | B ""
+    e.g. [the late replay's options not handed (defenseLabel / militar] r3m-metropolis-infiltrated-0-52 off|own|tw Craft Guilds: served "The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each d" | B "The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each de"
+    e.g. [the served page differs from the record (an input the share ] r3m-town-indebted-0-16 off|own|tw Creditor's Representative: served "Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions. They are always at the table, but cannot set their own terms." | B "Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions. Close enough to the two above that their support is worth buying; they play Church Council and Religious Authorities against each other when they can."
+    e.g. [a step after the power step rewrote it: #tail (generateSettl] r3m-metropolis-none-1-121 off|own|tw Arcane Orders: served "The arcane interest is consulted but not formally empowered. Its influence is advisory, transactional, and quietly resented. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly." | B "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly."
+    e.g. [a step after the power step rewrote it: assembleSettlement >] r3m-city-politically_fractured-0-40 off|allShown|tw Religious Authorities: served "The faith holds no office in the hall, but its moral authority is real and its word carries political weight here. The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions." | B "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. The gap between them and Merchant Guilds is narrow. A single shift in patronage, scandal, or armed muscle could swap their posit"
+  S' (the served rows whole, not name-only copies): reproduced 25574 of 25956; misses 382; S misses S' reproduces 0
+  S MISSES (the served desc does not end in the standing the served roster gives): 382; by power [["Military/Guard",112],["War Council",100],["The Enlightened",48],["The Shield Compact",48],["Religious Authorities",44],["The Independent Bloc",22],["The Underground",8]]
+    e.g. (52) r3m-village-under_siege-0-8 off|own|tw War Council: served tail "Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance. Close enough now to contest the seat, and they know it." | the served roster's standing "Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead."
+    e.g. (48) r3m-metropolis-under_siege-0-68 off|own|tw Military/Guard: served tail "wers for keeping order and is growing more sure of its own authority. Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern. Close enough now to contest the seat, and they know it." | the served roster's standing "They operate in the shadow of the governing council, close enough to matter and too far behind to lead."
+    e.g. (48) r3m-town-under_siege-1-88 off|own|tw War Council: served tail "Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance. Close enough now to contest the seat, and they know it." | the served roster's standing "Behind Town Mayor by too much to challenge openly, so they get their way through petitions and procedure instead."
+    e.g. (48) r3m-city-indebted-1-116 off|own|tw The Enlightened: served tail "Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional." | the served roster's standing "They have a say on only a few matters; on everything else they side with whoever will deal with them that week."
+    e.g. (48) r3m-metropolis-none-1-137 off|own|tw The Shield Compact: served tail "A second armed company that wants a share of keeping order here, and of the say that goes with it." | the served roster's standing "Close enough to the two above that their support is worth buying; they play Religious Authorities and The Guard against each other when they can."
+    e.g. (48) r3m-metropolis-under_siege-0-58 off|own|tw Military/Guard: served tail "City watch; law enforcement and external defence, stretched between multiple responsibilities. Close enough now to contest the seat, and they know it." | the served roster's standing "They operate in the shadow of Ducal Governorship, close enough to matter and too far behind to lead."
+    e.g. (44) r3m-town-indebted-1-86 off|own|tw Religious Authorities: served tail "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. Close enough now to contest the seat, and they know it." | the served roster's standing "They operate in the shadow of the governing council, close enough to matter and too far behind to lead."
+    e.g. (22) r3m-village-infiltrated-0-2 dm|own|tw The Independent Bloc: served tail "An external interest with its own people placed inside the settlement. Its presence is not known to the settlement. Close enough now to contest the seat, and they know it." | the served roster's standing "They operate in the shadow of the governing council, close enough to matter and too far behind to lead."
+  B over the record (once a birth, per stored power): {"rrec1/ba1/bao1/bas1":434,"rrec0/ba0/bao0/bas0":184,"rrec-1/ba-1/bao-1/bas-1":115,"rrec1/ba0/bao1/bas1":20,"rrec0/ba1/bao0/bas0":1}
+M3 THE HIDING PAGES (a W power, or a stamped row not served): 1410 pages, towns 38
+  B re-creates a withheld power in its roster: 930 pages (["Thieves' Guild","The Independent Bloc"]); B threw on 0
+  B's descs of the SERVED powers (withheld absent): {"aW":0,"aH":0,"b":0,"bt":0,"c":1160,"cStrict":440,"n":6658,"strictWords":{"criminal":440}}
+  S, withheld ABSENT (base kept + the served roster's standing): {"aW":0,"aH":0,"b":0,"bt":0,"c":1020,"cStrict":200,"n":7750,"strictWords":{"criminal":200}}; equal to the record's desc 5294; no base 0
+  S ABSENT's strict kind hits by where they sit (the base sentence kept, or the re-derived standing): {"base":200}; distinct: ["Corrupt City Council [base]: Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.","Shadow Senate [base]: Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms."]
+  S, a masked row KEPT (the withheld rows named 'an unseen interest'): {"aW":0,"aH":0,"b":40,"bt":0,"c":880,"cStrict":200,"n":7750,"strictWords":{"criminal":200}}
+    e.g. kept: r3m-city-insurgency-1-114 off|own|tw People's Council: "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play an unseen interest and Corrupt City Council against each "
+    e.g. kept: r3m-city-insurgency-1-114 off|own|sv People's Council: "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play an unseen interest and Corrupt City Council against each "
+    e.g. kept: r3m-city-insurgency-1-114 off|g:000|tw People's Council: "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play an unseen interest and Corrupt City Council against each "
+    e.g. kept: r3m-city-insurgency-1-114 off|g:000|sv People's Council: "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play an unseen interest and Corrupt City Council against each "
+    e.g. kept: r3m-city-insurgency-1-114 off|g:001|tw People's Council: "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible. Close enough to the two above that their support is worth buying; they play an unseen interest and Corrupt City Council against each "
+
+M5 THE STRATA AND CONTENDERS (derivePowerStrata, coupContenders over the page): path | side | n | aW | aH | b | bt | c (paths with a hit)
+coup.challengers[].name | off/sv | 4163 | 0 | 0 | 0 | 0 | 0
+coup.challengers[].name | off/tw | 4163 | 0 | 0 | 0 | 0 | 0
+coup.challengers[].name | dm/sv | 4209 | 0 | 46 | 0 | 0 | 0
+coup.challengers[].name | dm/tw | 4209 | 0 | 46 | 0 | 0 | 0
+coup.governing.captureState | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+coup.governing.captureState | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+coup.governing.captureState | dm/sv | 115 | 0 | 0 | 0 | 0 | 45
+coup.governing.captureState | dm/tw | 115 | 0 | 0 | 0 | 0 | 45
+coup.governing.category | off/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.category | off/tw | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.category | dm/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.category | dm/tw | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.desc | off/sv | 1524 | 0 | 0 | 0 | 0 | 16
+coup.governing.desc | off/tw | 1524 | 0 | 0 | 0 | 0 | 16
+coup.governing.desc | dm/sv | 1524 | 0 | 0 | 0 | 0 | 16
+coup.governing.desc | dm/tw | 1524 | 0 | 0 | 0 | 0 | 16
+coup.governing.faction | off/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.faction | off/tw | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.faction | dm/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.faction | dm/tw | 1632 | 0 | 0 | 0 | 0 | 90
+coup.governing.modifier | off/sv | 746 | 0 | 0 | 0 | 0 | 60
+coup.governing.modifier | off/tw | 746 | 0 | 0 | 0 | 0 | 60
+coup.governing.modifier | dm/sv | 746 | 0 | 0 | 0 | 0 | 60
+coup.governing.modifier | dm/tw | 746 | 0 | 0 | 0 | 0 | 60
+coup.incumbent.name | off/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.incumbent.name | off/tw | 1632 | 0 | 0 | 0 | 0 | 90
+coup.incumbent.name | dm/sv | 1632 | 0 | 0 | 0 | 0 | 90
+coup.incumbent.name | dm/tw | 1632 | 0 | 0 | 0 | 0 | 90
+strata.powers[].archetype | off/sv | 5795 | 0 | 0 | 0 | 0 | 90
+strata.powers[].archetype | off/tw | 5795 | 0 | 0 | 0 | 0 | 90
+strata.powers[].archetype | dm/sv | 5841 | 0 | 0 | 0 | 0 | 90
+strata.powers[].archetype | dm/tw | 5841 | 0 | 0 | 0 | 0 | 90
+strata.powers[].name | off/sv | 5795 | 0 | 0 | 0 | 0 | 90
+strata.powers[].name | off/tw | 5795 | 0 | 0 | 0 | 0 | 90
+strata.powers[].name | dm/sv | 5841 | 0 | 46 | 0 | 0 | 90
+strata.powers[].name | dm/tw | 5841 | 0 | 46 | 0 | 0 | 90
+strata.roster[].archetype | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].archetype | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].archetype | dm/sv | 8518 | 0 | 0 | 0 | 0 | 90
+strata.roster[].archetype | dm/tw | 8518 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.captureState | off/sv | 0 | 0 | 0 | 0 | 0 | 0
+strata.roster[].faction.captureState | off/tw | 0 | 0 | 0 | 0 | 0 | 0
+strata.roster[].faction.captureState | dm/sv | 115 | 0 | 0 | 0 | 0 | 45
+strata.roster[].faction.captureState | dm/tw | 115 | 0 | 0 | 0 | 0 | 45
+strata.roster[].faction.category | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.category | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.category | dm/sv | 8518 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.category | dm/tw | 8518 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.desc | off/sv | 8281 | 20 | 0 | 0 | 0 | 246
+strata.roster[].faction.desc | off/tw | 8281 | 20 | 0 | 0 | 0 | 246
+strata.roster[].faction.desc | dm/sv | 8410 | 20 | 0 | 0 | 0 | 246
+strata.roster[].faction.desc | dm/tw | 8410 | 20 | 0 | 0 | 0 | 246
+strata.roster[].faction.faction | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.faction | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].faction.faction | dm/sv | 8518 | 0 | 129 | 0 | 0 | 90
+strata.roster[].faction.faction | dm/tw | 8518 | 0 | 129 | 0 | 0 | 90
+strata.roster[].faction.modifier | off/sv | 746 | 0 | 0 | 0 | 0 | 60
+strata.roster[].faction.modifier | off/tw | 746 | 0 | 0 | 0 | 0 | 60
+strata.roster[].faction.modifier | dm/sv | 746 | 0 | 0 | 0 | 0 | 60
+strata.roster[].faction.modifier | dm/tw | 746 | 0 | 0 | 0 | 0 | 60
+strata.roster[].faction.name | off/sv | 1275 | 0 | 0 | 0 | 0 | 0
+strata.roster[].faction.name | off/tw | 1275 | 0 | 0 | 0 | 0 | 0
+strata.roster[].faction.name | dm/sv | 1299 | 0 | 24 | 0 | 0 | 0
+strata.roster[].faction.name | dm/tw | 1299 | 0 | 24 | 0 | 0 | 0
+strata.roster[].name | off/sv | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].name | off/tw | 8389 | 0 | 0 | 0 | 0 | 90
+strata.roster[].name | dm/sv | 8518 | 0 | 129 | 0 | 0 | 90
+strata.roster[].name | dm/tw | 8518 | 0 | 129 | 0 | 0 | 90
+M5 total over every path (both engines): 437458 | 80 | 748 | 0 | 0 | 4948
+M5 (c) STRICT by path and side: {"strata.powers[].archetype off/tw":90,"strata.roster[].faction.category off/tw":90,"strata.roster[].archetype off/tw":90,"strata.roster[].faction.desc off/tw":155,"coup.governing.category off/tw":90,"strata.powers[].archetype off/sv":90,"strata.roster[].faction.category off/sv":90,"strata.roster[].archetype off/sv":90,"strata.roster[].faction.desc off/sv":155,"coup.governing.category off/sv":90,"strata.powers[].archetype dm/tw":90,"strata.roster[].faction.category dm/tw":90,"strata.roster[].archetype dm/tw":90,"strata.roster[].faction.desc dm/tw":155,"coup.governing.category dm/tw":90,"strata.powers[].archetype dm/sv":90,"strata.roster[].faction.category dm/sv":90,"strata.roster[].archetype dm/sv":90,"strata.roster[].faction.desc dm/sv":155,"coup.governing.category dm/sv":90,"coup.governing.desc off/tw":15,"coup.governing.desc off/sv":15,"coup.governing.desc dm/tw":15,"coup.governing.desc dm/sv":15,"strata.roster[].faction.modifier off/tw":20,"coup.governing.modifier off/tw":20,"strata.roster[].faction.modifier off/sv":20,"coup.governing.modifier off/sv":20,"strata.roster[].faction.modifier dm/tw":20,"strata.roster[].faction.captureState dm/tw":5,"coup.governing.modifier dm/tw":20,"coup.governing.captureState dm/tw":5,"strata.roster[].faction.modifier dm/sv":20,"strata.roster[].faction.captureState dm/sv":5,"coup.governing.modifier dm/sv":20,"coup.governing.captureState dm/sv":5}
+M5 Reveal off only (both engines): 217250 | 40 | 0 | 0 | 0 | 2384
+  e.g. r3m-town-infiltrated-0-12 off|own|sv strata.powers[0].name 00001 [corrupt] "Corrupt Council"
+  e.g. r3m-town-infiltrated-0-12 off|own|sv strata.powers[0].archetype 00001 [criminal] "criminal"
+  e.g. r3m-town-infiltrated-0-12 off|own|sv strata.roster[0].faction.faction 00001 [corrupt] "Corrupt Council"
+  e.g. r3m-town-infiltrated-0-12 off|own|sv strata.roster[0].faction.category 00001 [criminal] "criminal"
+  e.g. r3m-town-infiltrated-0-12 off|own|sv strata.roster[0].faction.modifier 00001 [corrupt] "corruption-riddled"
+
+M4 the governing names born (34): ["Elder Council","Corrupt Council","Church Council","Feudal Appointee","Military Council","City Council","Arcane Council","Merchant Guild Council","Merchant oligarchy","Democratic assembly","Ducal Governorship","Grand Merchant Oligarchy","City-State Council","Grand Military Council","Household Council","Town Mayor","Guild Council","Corrupt City Council","Military City Council","Grand Merchant Senate","Shadow Senate","Elected Reeve","Town Council","Royal Authority","Grand Guild Consortium","Grand Council","Headman's Authority","High Theocratic Council","Priestly Guidance","Noble Governorship","Arcane Senate","Feudal Stewardship","Ecclesiastical Council","Merchant City Council"]
+M4 governingName/government spelling a house of its own record (the lane's fold): 22 of 140 births: [["r3m-city-insurgency-0-44","Merchant oligarchy"],["r3m-city-under_siege-0-48","Democratic assembly"],["r3m-metropolis-indebted-0-56","Grand Merchant Oligarchy"],["r3m-metropolis-under_siege-1-128","Grand Merchant Oligarchy"],["r3m-metropolis-politically_fractured-1-140","Grand Merchant Oligarchy"],["r3m-town-none-0-13","Town Council"],["r3m-city-none-0-37","Merchant oligarchy"],["r3m-city-occupied-0-45","Merchant oligarchy"],["r3m-metropolis-none-0-53","Grand Guild Consortium"],["r3m-metropolis-none-0-61","Grand Guild Consortium"],["r3m-town-none-1-81","Merchant oligarchy"],["r3m-town-none-1-97","Town Council"]]; governingName != government on 0; governmentType written on 0
+M4 a served governingName that is a withheld power: 0 pages

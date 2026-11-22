@@ -1,0 +1,199 @@
+towns 140; pages 6528
+THE WALKER: engine standings cut whole by the table 19489 / 19489; fails 0
+
+== Q1 dmNote (served relation rows carrying a dmNote) ==
+  dm|sv|all                                rows   4239  dmNote   170    4.0%  pages 1632
+  dm|sv|nothingHidden                      rows   3389  dmNote   170    5.0%  pages 1322
+  dm|sv|nothingHidden|size:city            rows    995  dmNote    14    1.4%  pages 376
+  dm|sv|nothingHidden|size:metropolis      rows   1449  dmNote    68    4.7%  pages 348
+  dm|sv|nothingHidden|size:town            rows    769  dmNote    55    7.2%  pages 377
+  dm|sv|nothingHidden|size:village         rows    176  dmNote    33   18.8%  pages 221
+  dm|sv|pagesAllNoted                      rows      0  dmNote     0       -  pages 47
+  dm|sv|pagesWithANote                     rows      0  dmNote     0       -  pages 170
+  dm|sv|pagesWithRows                      rows      0  dmNote     0       -  pages 1544
+  dm|sv|set:allOpen                        rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:allShown                       rows    324  dmNote    27    8.3%  pages 92
+  dm|sv|set:g:000                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:001                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:010                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:011                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:100                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:101                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:g:110                          rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:off                            rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:own                            rows    351  dmNote    11    3.1%  pages 140
+  dm|sv|set:unmarked                       rows    405  dmNote    33    8.1%  pages 140
+  dm|sv|size:city                          rows   1205  dmNote    14    1.2%  pages 476
+  dm|sv|size:metropolis                    rows   1939  dmNote    68    3.5%  pages 478
+  dm|sv|size:town                          rows    919  dmNote    55    6.0%  pages 457
+  dm|sv|size:village                       rows    176  dmNote    33   18.8%  pages 221
+  dm|tw|all                                rows   4239  dmNote   170    4.0%  pages 1632
+  dm|tw|nothingHidden                      rows   3389  dmNote   170    5.0%  pages 1322
+  dm|tw|nothingHidden|size:city            rows    995  dmNote    14    1.4%  pages 376
+  dm|tw|nothingHidden|size:metropolis      rows   1449  dmNote    68    4.7%  pages 348
+  dm|tw|nothingHidden|size:town            rows    769  dmNote    55    7.2%  pages 377
+  dm|tw|nothingHidden|size:village         rows    176  dmNote    33   18.8%  pages 221
+  dm|tw|pagesAllNoted                      rows      0  dmNote     0       -  pages 47
+  dm|tw|pagesWithANote                     rows      0  dmNote     0       -  pages 170
+  dm|tw|pagesWithRows                      rows      0  dmNote     0       -  pages 1544
+  dm|tw|set:allOpen                        rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:allShown                       rows    324  dmNote    27    8.3%  pages 92
+  dm|tw|set:g:000                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:001                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:010                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:011                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:100                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:101                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:g:110                          rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:off                            rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:own                            rows    351  dmNote    11    3.1%  pages 140
+  dm|tw|set:unmarked                       rows    405  dmNote    33    8.1%  pages 140
+  dm|tw|size:city                          rows   1205  dmNote    14    1.2%  pages 476
+  dm|tw|size:metropolis                    rows   1939  dmNote    68    3.5%  pages 478
+  dm|tw|size:town                          rows    919  dmNote    55    6.0%  pages 457
+  dm|tw|size:village                       rows    176  dmNote    33   18.8%  pages 221
+  off|sv|all                               rows   4131  dmNote     0    0.0%  pages 1632
+  off|sv|nothingHidden                     rows   3053  dmNote     0    0.0%  pages 1237
+  off|sv|nothingHidden|size:city           rows    887  dmNote     0    0.0%  pages 350
+  off|sv|nothingHidden|size:metropolis     rows   1291  dmNote     0    0.0%  pages 324
+  off|sv|nothingHidden|size:town           rows    710  dmNote     0    0.0%  pages 364
+  off|sv|nothingHidden|size:village        rows    165  dmNote     0    0.0%  pages 199
+  off|sv|pagesWithRows                     rows      0  dmNote     0       -  pages 1540
+  off|sv|set:allOpen                       rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:allShown                      rows    270  dmNote     0    0.0%  pages 92
+  off|sv|set:g:000                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:001                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:010                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:011                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:100                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:101                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:g:110                         rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:off                           rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:own                           rows    351  dmNote     0    0.0%  pages 140
+  off|sv|set:unmarked                      rows    351  dmNote     0    0.0%  pages 140
+  off|sv|size:city                         rows   1171  dmNote     0    0.0%  pages 476
+  off|sv|size:metropolis                   rows   1889  dmNote     0    0.0%  pages 478
+  off|sv|size:town                         rows    895  dmNote     0    0.0%  pages 457
+  off|sv|size:village                      rows    176  dmNote     0    0.0%  pages 221
+  off|tw|all                               rows   4131  dmNote     0    0.0%  pages 1632
+  off|tw|nothingHidden                     rows   3053  dmNote     0    0.0%  pages 1237
+  off|tw|nothingHidden|size:city           rows    887  dmNote     0    0.0%  pages 350
+  off|tw|nothingHidden|size:metropolis     rows   1291  dmNote     0    0.0%  pages 324
+  off|tw|nothingHidden|size:town           rows    710  dmNote     0    0.0%  pages 364
+  off|tw|nothingHidden|size:village        rows    165  dmNote     0    0.0%  pages 199
+  off|tw|pagesWithRows                     rows      0  dmNote     0       -  pages 1540
+  off|tw|set:allOpen                       rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:allShown                      rows    270  dmNote     0    0.0%  pages 92
+  off|tw|set:g:000                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:001                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:010                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:011                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:100                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:101                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:g:110                         rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:off                           rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:own                           rows    351  dmNote     0    0.0%  pages 140
+  off|tw|set:unmarked                      rows    351  dmNote     0    0.0%  pages 140
+  off|tw|size:city                         rows   1171  dmNote     0    0.0%  pages 476
+  off|tw|size:metropolis                   rows   1889  dmNote     0    0.0%  pages 478
+  off|tw|size:town                         rows    895  dmNote     0    0.0%  pages 457
+  off|tw|size:village                      rows    176  dmNote     0    0.0%  pages 221
+  RECORD (140 births): relation rows 405, with a dmNote 33 (8.1%); births holding any dmNote 33
+
+== Q3 the cut ==
+  table: 44 forms ({"name":7,"closed":33,"count":1,"force":3}); 4912 characters as templates (slots as {X} etc.)
+  RECORD descs 754: {"base-only(no tail row)":328,"base+standing":426}
+    base-only(no tail row): ["r3m-village-insurgency-0-4","Religious Authorities","The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected. Currently under pressure from both sides to publicly endorse the legitimate authority."]
+    base-only(no tail row): ["r3m-village-insurgency-0-4","Elder Council","Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word."]
+    base-only(no tail row): ["r3m-village-under_siege-0-8","Elder Council","The oldest heads of the community still decide things together, but fewer and fewer people accept their word."]
+    base-only(no tail row): ["r3m-town-infiltrated-0-12","Corrupt Council","The governing body is systematically compromised; offices are sold and justice is purchasable."]
+    base-only(no tail row): ["r3m-town-infiltrated-0-12","The Independent Bloc","An external interest with its own people placed inside the settlement. Its presence is not known to the settlement."]
+  the table's cut against the engine's own standing on the record roster: equal 751, differ 3, no engine reading 0
+    differ ["r3m-city-indebted-1-116","The Enlightened",[],"Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.","They have a say on only a few matters; on everything else they side with whoever will deal with them that week."]
+    differ ["r3m-metropolis-none-1-137","The Shield Compact",[],"A second armed company that wants a share of keeping order here, and of the say that goes with it.","Close enough to the two above that their support is worth buying; they play Religious Authorities and The Guard against each other when they can."]
+    differ ["r3m-city-insurgency-1-114","The Underground",[],"Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.","They are always at the table, but cannot set their own terms."]
+  (b) the engine's standing (record roster) is the desc's tail: 426 / 429
+    not tail ["r3m-city-indebted-1-116","The Enlightened","Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.","They have a say on only a few matters; on everything else they side with whoever will deal with them that week."]
+    not tail ["r3m-metropolis-none-1-137","The Shield Compact","A second armed company that wants a share of keeping order here, and of the say that goes with it.","Close enough to the two above that their support is worth buying; they play Religious Authorities and The Guard against "]
+    not tail ["r3m-city-insurgency-1-114","The Underground","Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.","They are always at the table, but cannot set their own terms."]
+  tail matches no row: 328 of 754 record descs; of these the engine writes a standing for 3
+    no row, engine has one ["r3m-city-indebted-1-116","The Enlightened","Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.","They have a say on only a few matters; on everything else they side with whoever will deal with them that week."]
+    no row, engine has one ["r3m-metropolis-none-1-137","The Shield Compact","A second armed company that wants a share of keeping order here, and of the say that goes with it.","Close enough to the two above that their support is worth buying; they play Religious Authorities and The Guard against "]
+    no row, engine has one ["r3m-city-insurgency-1-114","The Underground","Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.","They are always at the table, but cannot set their own terms."]
+  forms seen on the record descs: 33 of 44: {"R1-contest":9,"R2-buy":58,"R1-behind":46,"GR-line":33,"R2-table":56,"RT-stronger":7,"NM-ahead":13,"ST-why":2,"R1-shadow":28,"MC-outpaced":70,"CM-outvote":50,"R1-gap":28,"GT-slow":16,"TG-even":15,"RA-shadow":22,"AR-more":21,"NM-closing":8,"MT-tolerate":5,"MT-reach":7,"AR-ahead":13,"RA-more":9,"R2-level":3,"CM-ahead":2,"TG-pull":1,"GT-stronger":1,"RT-denounce":4,"MC-ahead":5,"GT-down":3,"TG-far":2,"OC-named":12,"NM-more":4,"RL-few":2,"ST-worked":1}
+  never seen: ["R1-nolead","R1-resist","R1-settled","MC-close","CM-running","ST-tangle","ST-dayto","ST-gives","ST-claim","ST-day","OC-none"]
+  record descs whose cut tail names a power: 137; naming a withheld (W) power 2; a stamped (H) one 0
+     ["r3m-town-none-0-17","Religious Authorities",["Thieves' Guild"],[]," worth buying; they play Thieves' Guild and Arcane Council against each other when they can. The criminal network is stronger than they are. The clergy preach against it loudly, and few people listen."]
+     ["r3m-city-none-1-117","Military/Guard",["Thieves' Guild"],[],"ence, stretched between multiple responsibilities. Close enough to the two above that their support is worth buying; they play Thieves' Guild and Corrupt City Council against each other when they can."]
+  SERVED descs (server): off {"n":8389,"base-only(no tail row)":3524,"nh:base-only(no tail row)":2792,"nh":6237,"base+standing":4757,"nh:base+standing":3445,"nodesc":108}
+                          dm  {"n":8518,"base-only(no tail row)":3619,"nh:base-only(no tail row)":3000,"nh":6741,"base+standing":4791,"nh:base+standing":3741,"nodesc":108}
+  (c) a served desc's standing literal held at ANOTHER path of the served document: pages 0; by path {}
+  (d) distinct bases with a standing after them: 116; samples:
+    "Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance."
+    "Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions."
+    "Criminal network operating in shadows; it keeps out of the law's sight and takes what it can from illicit trade. Shortage and requisition have pushed trade into the black market, where the guild takes its cut."
+
+== Q2 base templates a power's presence picks (served, server; record) ==
+  rulingStructure.js :: generatePowerStructure (govDescByLabel Elected Reeve)
+     picked by: a noble POWER seated (noblePower over the gate) or a noble house; kept by applyDensityLaw.js :: reeveToRoster where a noble power or house stands
+     record 0; served off 0, dm 0; on a page that withholds a power 0; e.g. null
+  rulingStructure.js :: generatePowerStructure (nobleDesc, nobleGoverns + military very_high)
+     picked by: the SEAT's name holds Feudal/Noble/Royal Authority/Household Council; the seat's NAME printed
+     record 3; served off 35, dm 35; on a page that withholds a power 0; e.g. ["r3m-town-politically_fractured-0-20","Landed Gentry","Hereditary landowners behind the Feudal Appointee; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their"]
+  rulingStructure.js :: generatePowerStructure (nobleDesc, nobleGoverns)
+     picked by: the seat noble-kind
+     record 9; served off 107, dm 107; on a page that withholds a power 20; e.g. ["r3m-city-wartime-0-49","Noble Families","Hereditary landowners with genuine but not dominant feudal claims; they shape decisions at the margins more than they command them."]
+  rulingStructure.js :: generatePowerStructure (nobleDesc, merchantAligned)
+     picked by: the seat Merchant oligarchy / Democratic assembly / Guild Council
+     record 3; served off 36, dm 36; on a page that withholds a power 20; e.g. ["r3m-city-none-1-113","Noble Families","Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance."]
+  rulingStructure.js :: generatePowerStructure (nobleDesc, Royal Authority)
+     picked by: the seat Royal Authority
+     record 0; served off 0, dm 0; on a page that withholds a power 0; e.g. null
+  rulingStructure.js :: generatePowerStructure (nobleDesc, council seat)
+     picked by: the seat Town/City/Grand Council ("the elected council") or not ("the seat")
+     record 0; served off 0, dm 0; on a page that withholds a power 0; e.g. null
+  rulingStructure.js :: generatePowerStructure (merchantDesc, merchantGoverns)
+     picked by: the seat a merchant oligarchy/council
+     record 12; served off 143, dm 143; on a page that withholds a power 80; e.g. ["r3m-city-politically_fractured-0-40","Merchant Guilds","The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased."]
+  rulingStructure.js :: generatePowerStructure (militaryDescFinal)
+     picked by: the seat a military council / martial
+     record 8; served off 94, dm 94; on a page that withholds a power 20; e.g. ["r3m-town-insurgency-0-24","Military/Guard","Town watch; it enforces ordinances, manages disorder, and reports to the council. Operationally distinct from the command council: these are the watchmen, not t"]
+  rulingStructure.js :: generatePowerStructure (religiousDesc)
+     picked by: the seat Theocratic / Church Council / ecclesiastical
+     record 4; served off 48, dm 48; on a page that withholds a power 0; e.g. ["r3m-town-indebted-0-16","Religious Authorities","Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction."]
+  stressFactions.js :: applyStressEventFactions (politically_fractured, indebted, succession_void)
+     picked by: the seat Royal Authority (P)
+     record 32; served off 375, dm 375; on a page that withholds a power 160; e.g. ["r3m-town-indebted-0-16","Creditor's Representative","Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions."]
+  stressFactions.js :: applyStressEventFactions (religious_conversion)
+     picked by: the seat's NAME length mod 3
+     record 0; served off 0, dm 0; on a page that withholds a power 0; e.g. null
+  applyDensityLaw.js :: rivalDescOf (RIVAL_DESC_OF_HOST)
+     picked by: the HOST power's opening line (the rival is minted from a present power)
+     record 24; served off 276, dm 276; on a page that withholds a power 120; e.g. ["r3m-city-indebted-0-36","The Order of the Watch","A second armed company that wants a share of keeping order here, and of the say that goes with it."]
+  claimStanding.js :: settleClaimsToLabel / settleClergyToFinalRoster
+     picked by: the seat: council or not (SEAT_WORDS), magic (ARCANE_ADVISORY_UNDER_ARCANE_SEAT), its label's rank (UNDERWORLD_UNDER_STRONGER_SEAT), its power (CLERGY_WITH_WEIGHT)
+     record 18; served off 215, dm 215; on a page that withholds a power 100; e.g. ["r3m-city-politically_fractured-0-40","Religious Authorities","The faith holds no office in the hall, but its moral authority is real and its word carries political weight here."]
+  applyDensityLaw.js :: resizePoliticalRoster (the mint's { ...host } copy, no RIVAL_DESC_OF_HOST row): record descs whose base equals another power's base in the same record: 178; e.g. [["r3m-city-infiltrated-0-32","Craft Guilds","The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."],["r3m-city-infiltrated-0-32","Religious Authorities","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage "],["r3m-city-infiltrated-0-32","The Guild Alliance","The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."]]
+  "A rival criminal network ... contests them with the established one" served (server, both reads) 4; on a page that withholds its criminal host 0
+  the seat withheld or stamped on any page: 0 (of 140 seats)
+  a noble power withheld on any page: 0 towns
+  GR-line ("They and the religious authorities both keep people in line", factionStanding.js) served where no religious power is served: 0
+  LIT (the lit probe's output, 60 births): desc strings it keeps (strataHits: hits only) 64
+    stressFactions.js :: applyStressEventFactions (politically_fractured, indebted, succession_void): 4
+    claimStanding.js :: settleClaimsToLabel / settleClergyToFinalRoster: 8
+    by act (seat acts' reads): 64 kept desc strings
+    stressFactions.js :: applyStressEventFactions (politically_fractured, indebted, succession_void): 4; hidden powers ["Religious Authorities"]; e.g. ["jp6-town-0","T","off","server","Claims legitimate authority through different means"]
+    claimStanding.js :: settleClaimsToLabel / settleClergyToFinalRoster: 8; hidden powers ["Religious Authorities","Merchant Guilds"]; e.g. ["jp6-town-2","T","off","server","expect access to the hall in return."]
+    GR-line (a STANDING, not a base) in them: 16; where the act hides "Religious Authorities": 12; places ["jp6-city-8","jp6-village-6","jp6-city-2","jp6-metropolis-0"]
+    the reeve's "under noble oversight" in them: 0
+
+== Q4 the tension's masked party ==
+  r3m-village-infiltrated-0-2: stamped ["The Independent Bloc"]; record tensions naming it [[0,"succession_crisis",["Elder Council","Popular candidate","The Independent Bloc"]]]
+  dm|sv|hiding               {"pages":310,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
+  dm|sv|nothingHidden        {"pages":1322,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
+  dm|tw|hiding               {"pages":310,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
+  dm|tw|nothingHidden        {"pages":1322,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
+  off|sv|hiding              {"pages":395,"tmPages":11,"tm":11,"maskPages":11,"paths":{"history.currentTensions[].factions[]":11}}
+  off|sv|nothingHidden       {"pages":1237,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
+  off|tw|hiding              {"pages":395,"tmPages":11,"tm":11,"maskPages":11,"paths":{"history.currentTensions[].factions[]":11}}
+  off|tw|nothingHidden       {"pages":1237,"tmPages":0,"tm":0,"maskPages":0,"paths":{}}
