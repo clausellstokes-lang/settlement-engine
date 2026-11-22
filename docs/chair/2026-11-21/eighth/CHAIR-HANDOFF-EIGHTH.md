@@ -588,6 +588,41 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the chair's word; its authored wordings come to the chair as a draft first; it lands as "SEAT-B <commit>". The
   seat's record stands at about 360,000 by its own estimate: U6 and U7 must end under the word, or a successor is
   seated between them.
+- E43 · THE WEEKLY LIMIT'S WARNING: WHAT THE CHAIR DID, AND WHAT IT HOLDS (2026-11-22 07:40 UTC; found at net 8, 07:33 to 07:36). Every
+  session's record reads `rate_limit_info.status: allowed_warning` (the seven-day window; its reset stamp is
+  1795906800; no overage in use). THE CHAIR'S OWN SESSION IS THE DEAREST THING RUNNING (865,094 of 1,000,000 at
+  07:34; it compacted again right after net 8). DONE: (1) THE OWNER TOLD AT ONCE, in plain words, and asked for two
+  things: to start a fresh chair session by the pickup command, and to say what happens if the allowance runs out. HE
+  HAS NOT ANSWERED; without his word the four finish-line seats keep working until the limit stops them. (2) NOTHING
+  CAN BE LOST AT A STOP: the stack's merges (points 94, 95, 96 and the registers) are on origin as
+  `lane/stack-96-wip-2026-11-22` at b03a31560 (a lane ref, not the line: the line moves only after the gate); the
+  chair's branch is on origin at 60170bdee. (3) THE FOUR FINISH-LINE SEATS (VEIL-32, SEAT-10, FORTUNE-6, DAILY-3) were
+  told to commit and push everything, keep their hand-backs current, and spend little. (4) HELD UNTIL THE OWNER
+  ANSWERS, because neither is on the finish line of E30: PAGE-12's second tranche (the 24 hook lines, E37) and
+  PAGE-13's unit 3. (5) THE CHAIR'S OWN DIET: one handoff commit an hour; a net reads counts and status only; no helper
+  that is not for the finish line; no long reasoning where a rule already decides.
+- E44 · WHO RULES, U6: THE WORDINGS ARE RULED (2026-11-22 07:40 UTC; SEAT-10's draft W1, W2, W3 came after net 8; the
+  content was right: a holder is not "under" the office it holds). THE DRAFT'S FAULT: ONE sentence for W1 and one for
+  W3 would print in 78 of the 150 lit places: a sameness fault; and W1 and W2 carried a colon afterthought (the
+  owner's style law). RULED: W1 AND W3 ARE POOLS, drawn through the one door by the kernel's mixed key on what every
+  read serves. THE LINES ARE THE CHAIR'S (the verb agrees in number):
+  W1, THE FORM-AND-HOLDER RELATION ROW, SIX: "The {Form} is the office here, and {Holder} {hold/holds} it." ·
+  "{Holder} {sit/sits} in the {Form} and {make/makes} its rulings." · "The {Form}'s seats are filled by
+  {Holder}." · "Whoever comes before the {Form} comes before {Holder}." · "The {Form} is how this place is
+  ruled, and {Holder} {rule/rules} through it." · "It is {Holder} who {sit/sits} in the {Form}."
+  W2, ON THE LICENSED PAIR ONLY (a merchant holder in Royal Authority or Ducal Governorship, circumstance
+  trade_wealth), ONE: "They came to it by trade, and the money that runs this place passes through their hands."
+  (the draft's "the town's trade" is wrong at five sizes of six.)
+  W3, THE HOLDER ROW'S STANDING, FIVE: "They hold the {Form}'s seat, and answer for what it does." · "They sit in the
+  {Form} themselves, and its rulings are their own." · "They govern through the {Form}, and what it orders is their
+  order." · "They hold the {Form}, and nothing it decides is decided without them." · "They are the ones who sit in
+  the {Form}, and its word is theirs."
+  CONDITIONS: every one gated on `!isVeiledRow(holder)` (a hidden or criminal holder keeps today's lines: nothing new
+  is exposed); a new `src/data` table goes on the sameness door's hand list (the line's `HAND_CEILING` plus exactly
+  the lane's rows); AFTER THE BUILD, on the 150 lit births, the commonest W1 and W3 sentence by size against the bar
+  (about 15% of a size's places), one line to the chair. THE MERCHANT ARCHETYPE'S "expect council access in return" on
+  a row that HOLDS the council: U6 takes it ONLY as a gate with no new wording; if it needs an authored line it is
+  named for the second deploy. `SEAT_CONTESTED_STANDING` unchanged; faults (b) and (c) red first.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -964,6 +999,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   PAGE-12 432,452 at net 7 (idle). WHAT THE CHAIR DOES ABOUT THE LIMIT (E43, next commit): tells the owner at once;
   asks him to start the fresh chair session (the standard's rule 19: the one step that cuts the most); pushes the
   stack's merges to a lane ref so that a stop loses nothing; holds the two lanes that are not on the finish line.
+- 2026-11-22 07:40 UTC · AFTER NET 8: THE TWO SAFETY PUSHES ARE ON ORIGIN (read by `git ls-remote` at 07:39: the chair's branch
+   60170bdee; `lane/stack-96-wip-2026-11-22` b03a31560; the line still f5295e425). E43 AND E44 WRITTEN. THE STACK'S
+   HELPER IS IN STEP f (run B being waited for at 07:36). FORTUNE-6'S REPORT OF 07:33, NO RULING NEEDED: U5c merged at
+   d29cb4084 with all five conditions met; what is left over in the entry chunk is +167 raw (69 B for two lazy chunk
+   names, 98 B for index entries in 16 dynamic imports): FOR THE OWNER'S SIZE LIST; the worker +5,529 itemized; the
+   engine chunk 928,612 (+2,004). RULE 8 AT 745bab4f3 (the line f5295e425 merged in): tests/build 15 red, all on the
+   list; lint 3 red, the line's; 868 files, 47 red: 46 on the list and ONE THE LANE'S OWN (`fortuneLawEconomyHeader`,
+   "(b) DARK": a test anchored on a draw that the line's content moved), being cured in the test only by the brief
+   `U5d-ECO-ANCHOR`; "FORTUNE <commit>" comes after it. THE CHAIR READS THAT CURE AT THE LANDING: a re-anchored test
+   must be shown red by plant. THE OWNER HAS NOT ANSWERED THE 07:35 MESSAGE. NET 9 ARMED FOR ABOUT AN HOUR ON.
+
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
