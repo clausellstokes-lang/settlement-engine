@@ -443,6 +443,7 @@ const DM_BY_CONSTRUCTION = Object.freeze({
   'src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM': {
     gatedBy: 'src/domain/dailyLife.js :: deriveDailyLife',
     provedBy: 'tests/domain/dailyLifeOwnerSlot.test.js :: the key is ABSENT on every toPublicSafe document and on the read of it, on the 900 born places',
+    notes: 'crime55 K55_0..K55_3 need house: smuggling (a hideable house): lawful because the table is derived for the owner alone; for the security reader',
   },
 });
 const DM_NAMED = /(?:_dm|Dm|_DM)$/;
