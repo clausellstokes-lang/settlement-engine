@@ -1876,6 +1876,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/lint/crimeTypesReaders.walker.test.js": {
+      "kind": "rationale",
+      "ref": "walker-totality-executed"
+    },
     "tests/security/shareRenderTwice.pglite.test.jsx": {
       "kind": "rationale",
       "ref": "pglite-executed"

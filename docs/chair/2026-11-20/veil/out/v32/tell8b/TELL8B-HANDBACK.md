@@ -56,10 +56,9 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
   `npm run build` and `VERIFY_DIST=1` before and after.
 
 ## PROGRESS
-- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds none, cure none (STOP 1: the mark, taken by
-  the read-whole law): GATE-1 and GATE-2 not re-read (no code changed; the seat re-makes the pool); arm today as TELL8's
-  (HALF 1 3,728/6,528 pages, HALF 2 25/92 by type, 32/92 by [type, desc]); families left: as at unit (vii), plus this unit's
-  whole build.
+- RESUMED by VEIL-32 (mark raised to 600,000; STOP 1 above is answered: sitting A then sitting B in this same session).
+- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds: (iii) walker <this commit>; (i), (ii) to
+  come; cure not started.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no
