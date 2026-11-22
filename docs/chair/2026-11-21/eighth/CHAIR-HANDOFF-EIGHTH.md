@@ -460,6 +460,33 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   entry on the static atom walker with its three listed rows named; `UNREAD_ON_THIS_LINE` with `unreadFaults` (an
   import specifier naming the module's basename, static or dynamic; own file excepted) and its plant; the "real
   pool" clause; nothing else moved (`EXISTING_CEILING`, the bank, `NOT_LINE_KEYS`, `SENTENCE_KEYED` untouched).
+- E36 · THE DAILY LIFE PAGE'S UNIT (E24) IS READ WHOLE AND ACCEPTED, WITH ONE CURE BY THE CHAIR'S HAND (2026-11-22 05:53 UTC). THE BUILDER'S
+  WORK on `lane/daily-page-1-2026-11-22`: 1ca7aac43 (the page) and 36724e9b3 (the lighting census by its door).
+  RED FIRST: the new `tests/components/dailyLifeAutomatic.test.jsx` 3 failed of 4 on the untouched tree, 4 of 4
+  after. THE PAGE: the offer line, the button, `generate`, the loading, cost and error state, `LOAD_MSGS` and the
+  overlay are gone; `dawn_work`, `gathering_places`, `child_warnings` are derived once a render pass from the
+  settlement the page is handed and printed as three paragraphs in the narrative's box (at the phone prose floor);
+  a saved AI account still prints below, read-only; `OutputContainer.jsx` no longer hands the page a save id or a
+  request callback and its `dailyLife` branch is gone (`DossierAiConfirms.jsx` held none). ITS GREEN: components,
+  ui and pdf 5,220 passed with 4 red; lint and twenty named files 3,623 passed with 10 red; after the doors every
+  red left is on the list (`safetyReaderBytes`, `proseCorpusBytes` twice, `proseComposed`); type ratchet 167, strict
+  1113, eslint 0. REGISTERS, EACH BY ITS DOOR: prose numerics 184 to 183 (the overlay's row left); two stale rows of
+  the presumed-things register shrunk; ten ledger citations re-addressed from line numbers to symbols; the phone
+  floor's baselines for the view 1 to 4 (mobile under-14: 0); the phone chrome floor 620, 863, 665 to 618, 861, 663;
+  the lighting census 3,741 to 3,742 files. FIRST PAINT 1,179,511 / 375,161 / 315,152: NOT ONE BYTE UP (the worker
+  and the engine chunk unmoved). ON SIX BORN PLACES the three lines derived from `toPublicSafe(record)` equal the
+  owner's. THE CHAIR'S ONE CURE (3947e3e6b): `EMPTY_VIEWS['World/Daily Life']` LEFT the phone floor walk: the view is
+  no longer empty, and the entry would have excused a Daily Life page that prints nothing; red by a plant (the slots
+  emptied: the view's two baselines red), green on the clean tree. NOT IN THIS UNIT (the builder stopped as briefed:
+  about fifteen files and eight registers): DAILY-PAGE-2: the dead local narrative (`buildLocalDailyLifeNarrative`,
+  one eslint warning), `dailyLifeLogic.js :: dailyLifeOfferLine`, their ledger rows and the sameness census's stale
+  row "Generate Daily Life: Narrative refinement": cut as its own unit after this landing. THE PDF (read only,
+  PLAUSIBLE): chapter 02 prints the AI passages where an account is saved, else only the food-balance callout;
+  printing the three lines touches `IdentityDailyLife.jsx` and `viewModel.js :: dailySlice`; the golden view model
+  holds no daily field and should NOT move; a smoke test moves only if the lines REPLACE the callout: SO THE CHAIR'S
+  WORD TO THE OWNER THAT THE PDF MOVES A SNAPSHOT OF HIS MAY BE WRONG: he is told when the unit measures it. AN OPEN
+  QUESTION, NOT THIS UNIT'S: the page reads the saved account from the store's `aiDailyLife` whatever settlement it
+  is handed (as before the change): whether a gallery page can show the viewer's own account is to be checked.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -776,6 +803,10 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   held). A GAP IT NAMES: `guardLineUnderTheLaw.js` still reads `payCut`; HK1's comment is stale. THE CHAIR'S READ OF
   THE WALKER'S DIFF: E35: one cure ordered (tests and words), then a new "PAGE-TROUBLE <commit>". IT LANDS AS POINT
   96, stacked with points 94 and 95 if the Daily Life page's builder has reported by then.
+- 2026-11-22 05:53 UTC · THE DAILY LIFE PAGE'S BUILDER REPORTED (05:5x) AND ITS DIFF IS READ: E36. The lane stands at 3947e3e6b and is being
+  pushed. THE NEXT STACK: point 94 (already merged in the line's worktree), point 95 (the Daily Life page) and, if
+  its re-worded commit comes within minutes, point 96 (the trouble lane): ONE gate. If it does not come, 94 and 95 go
+  alone and the trouble lane is stacked with "SEAT" and "FORTUNE".
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
