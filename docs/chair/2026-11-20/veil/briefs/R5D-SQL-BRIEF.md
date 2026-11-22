@@ -24,6 +24,14 @@ the standing.
    A desc that matches no row is served as it stands (it is a base: E121 (b)). Do NOT read `factionStanding.js`: the table is its
    frozen image, and R5D-PAGE's walker holds the two equal. Registry: `power.desc` (rule withhold, when always, page re-derive: S,
    `pageRederive.js :: rederiveStanding`, the name the page builder writes).
+   R5D-FORMS IS IN (4583ad3d4, hand-back b30a9cdce; re-run by the seat): 117 rows (tip 36, master 32, both 9, history 40; closed 94,
+   pattern 23); the literal 23,737 characters, sha256 794367e0e6ae71dc7b82b5ee95ca69e8c4dfb77a990e2b2e81aeed36de4e8cc8, NO
+   backslash (a metacharacter is a one-character bracket), so 212's `jsonb` literal only doubles the single quote. THE CUT (the seat's
+   call on the builder's two questions): REPEATED (the engine joins a rank line and rivalry notes with one space, so every tail form
+   is cut, as E121 (a) says "every tail that matches is cut"); a same-span tie is reported by the smaller id (the base is the same).
+   POSTGRES CACHES ONLY 32 COMPILED REGEXES: within one pass loop the ROWS outermost and the descs inside (R5D-FORMS's proof, item (c),
+   is the shape: a `~` test first, the capture only where it matches); TIME IT on the cost law (ruling 12: the Reveal-DM read of the
+   largest town within twice 211's read), the figure in your hand-back.
 2. A HIDDEN OR MASKED ROW'S OWN DESC (E115 (2): "a masked or hidden row's own desc leaves with the row"): a power row flagged
    `hidden: true` (the DM door serves it so), AND a row served under the mask (its `faction` or `name` equal to the projection's mask,
    `publicSafe.js :: HIDDEN_POWER_MASK`, 'an unseen interest': act T's owner-hidden taker), is served with no `desc`, both lists, both
