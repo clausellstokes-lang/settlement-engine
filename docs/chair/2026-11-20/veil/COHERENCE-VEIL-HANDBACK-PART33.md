@@ -17,8 +17,11 @@ verified by ls-remote).
 - THE LANE: `lane/veil-32-2026-11-22` = 385067da2 (VEIL-31's tip: units (i), (ii), (iii) merged; unit (vii)'s measure merged,
   docs only) + this seat's records. 212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback
   `8cbd7d1c…ded5b0`; 211 `eface6d0…0b01` / `ce8474ff…712f` (to be re-proved by the green chain's sha256 file).
-- AT THE TIP BY VEIL-31's WORD (proved again by this seat's green chain, below): GATE-1 4 of 92 (7 LOWER BY RULE); GATE-2 20
-  of 40 cells red; server = twin every cell; `tests/lint` whole = the sixteen standing reds.
+- AT THE TIP 3cca025b8, REPRODUCED BY THIS SEAT (06:04 UTC, pool re-made here 05:22-05:56, every shard rc=0; verify 45 / 0
+  differ): GATE-1 4 of 92 at every gated setting, both reads (7 LOWER BY RULE, the same seven); GATE-2 20 of 40 cells red;
+  server = twin every cell; non-governing rows against the rule 0 (`out/v32/tell2-table-3cca025b8.txt`). Typecheck 0
+  (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Told to the chair 06:05. The rest of the chain
+  (sv, harnesses, the R3 gate, acceptance, `tests/lint` whole) running.
 - THE POOL AND THE GREEN CHAIN (this container only): `/var/tmp/v18/out/v32/chain0.sh` (npm ci 0, ledger ref 0,
   make-instruments, pool.sh to `/var/tmp/v18/t2/pool-t2sig-2`) launched 05:22; `after0.sh` then runs `/var/tmp/v18/out/v32/chain1.sh`
   (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
@@ -26,7 +29,7 @@ verified by ls-remote).
 - 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
 - UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 86 (b), = PART 32's ruling 85: the measure of dependents first, then the row in both
   engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder: not yet
-  seated (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` when it is; if this seat stops, its work goes up as
+  SEATED 05:27 (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` when it is; if this seat stops, its work goes up as
   `lane/veil-32-2026-11-22-r3tell8-wip` unread).
 - NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the green chain's done.txt read and one line to the chair with GATE-1 /
   GATE-2 at the tip; then unit (viii)'s builder from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
@@ -67,4 +70,6 @@ verified by ls-remote).
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
+- 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
+- 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
 - 05:23-05:25 212 and the registry read whole. 05:25 `briefs/R3-TELL-8-BRIEF.md` written; PART 33 opened.
