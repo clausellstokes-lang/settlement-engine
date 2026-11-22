@@ -47,8 +47,22 @@ the seating). UNTIL THE HAND-OVER THIS SEAT WRITES NOTHING IN 212, ITS TWIN OR T
 - CURE BRIEFS (dce1c261a): `briefs/R5D-SQL-BRIEF.md`, `briefs/R5D-PAGE-BRIEF.md` (item 8 to be re-stated by E122 after R5D-1). MEASURE
   `briefs/R5D-1-BRIEF.md` (the 13 presence-picked templates: kinds, fidelity, the differential on hand hides): builder V34-R5D1.
 - THIS SEAT'S RECORD BY THE CHAIR: 559,887 at 19:42; HANDS OVER at R5-DESC's merge or 660,000, whichever first; VEIL-36 seated beside.
-- NEXT STEP IN ONE LINE: R5D-1's figures -> the chair -> R5D-SQL item 8 re-stated; at "VEIL-33 HAS HANDED OVER": the REVIEW of
-  R5-RECENT's whole diff (ACCEPTED or the fault by file and line), then R5D-SQL, then R5D-PAGE, then "TIP? R5-DESC".
+- (H) THE HAND-OVER (the chair, 20:40 UTC: "VEIL-33 HAS HANDED OVER 0d9ec0113"; its tip af708f2fd): MERGED into this branch as
+  d31846045 (`--no-ff`, NO CONFLICT). 212 `ff20ed89e3e67240…`, rollback `8cbd7d1c…` and 211 `eface6d0…` UNCHANGED by the merge. THIS
+  SEAT IS CHAIN A's WRITER from 20:40 (E116: the tip granted by the chair: "TIP? <unit> <commit>"). R5-RECENT WAS INTEGRATED BY A WRITER
+  WHOSE CONTEXT HAD BEEN SUMMARIZED (VEIL-33, from about 15:17 UTC) and RE-READ BY THIS SEAT against its whole read of 212 and the
+  registry: ACCEPTED for 212 and the twin. ONE GAP (PLAUSIBLE, a missing proof) went to the chair: `pageRederive.js ::
+  rederiveRecentConflict` (reader B) builds from the served houses and config, and the differential and its name check
+  (`galleryVeilRecent.pglite.test.js`, THE DIFFERENTIAL) cover house hides only. So a power the OWNER hid by hand (plant (b) r5-owner,
+  act T) is not judged on the page. Proposed cure: one commit on the tip extending the differential to (b) and jp6-city-8; if red, the
+  hidden rows are kept out of B or no sentence is drawn. Read whole: every code hunk and the fix 96c777381; the plant's arms by title,
+  the differential whole; the two walkers by their manifest rationale only.
+- R5D-SQL DISPATCHED (20:4x, not clocked) from af708f2fd: builder V34-R5DSQL, worktree `/home/user/wt/r5dsql`, branch
+  `lane/veil-34-2026-11-22-r5dsql-wip`, brief `briefs/R5D-SQL-BRIEF.md` (final, 2566872c5). R5D-PAGE (`briefs/R5D-PAGE-BRIEF.md`) waits on
+  its commit, which is read whole first. BY THE CHAIR'S ORDER: if this seat's record is past 640,000 when R5D-SQL returns, this seat
+  pushes the branch by its name and says "HANDS OVER"; VEIL-36 reads the diff whole and dispatches R5D-PAGE.
+- NEXT STEP IN ONE LINE (FOR VEIL-36 if this seat has handed over): R5D-SQL's diff read whole with 212 and the registry beside it, then
+  R5D-PAGE, then the gates on a new pool, then "TIP? R5-DESC <commit>" with (vi) riding; also answer the chair on the (H) gap's cure.
 
 ## 2. THE DIGEST OF PARTS 30 AND 32 (the chair's question of 18:02 UTC; written by VEIL-34 from its whole reads of both at 16:12-16:14). A SUCCESSOR READS THIS IN PLACE OF PART 30 s1 AND PART 32 s2, opening either only where a line sends it. One line per ruling: what still binds, and where. "SUPERSEDED" names what replaced it. Rulings 86-103 are NOT digested: read PART 33 s2 and PART 34 s2 themselves (short). PART 30 s4 (the pool's recipe), s5 (the owner's paragraph) and s8 (the list after R3) stay to be read where needed.
 - 1 The seat integrates, builders build (committed brief, own worktree; the seat reads each diff whole, re-runs red and green). ONE builder on 212 at a time.
