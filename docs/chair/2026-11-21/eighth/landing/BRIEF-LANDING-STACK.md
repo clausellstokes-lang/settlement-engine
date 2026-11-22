@@ -40,6 +40,17 @@ b. CONFLICTS, three classes you may resolve:
    - A TEST'S OWN DATED NOTES WHERE BOTH SIDES ONLY ADD COMMENT LINES at one spot (ruled by the chair on
      `tests/components/dossierPhoneFloorAllViews.test.jsx`, 2026-11-21): keep both notes, the line's first, then the
      lane's. This covers comment lines only: a conflict that touches a figure or a line of code is not this class.
+   - THE SAMENESS DOOR'S OWN FILES, where two lanes of one stack each registered a pool (ruled 2026-11-22 04:31 UTC):
+     `tests/lint/samenessHideable.handPools.json`: the union of the rows, in the file's own order (sorted by `pool`);
+     `tests/lint/samenessHideable.walker.test.js :: HAND_CEILING`: the line's figure BEFORE THE STACK plus exactly
+     the rows the stack's lanes add, one line, both lanes' comments kept, the line's first; `EXEMPT`,
+     `UNREAD_ON_THIS_LINE` and `SENTENCE_KEYED` entries: the union where both sides only add entries;
+     `tests/lint/samenessHideable.houseReadings.json`: the line's side, then RE-TAKEN IN STEP 2 as a register: its
+     door is the walker's own reading (a temporary, uncommitted test inside the walker's `describe` that writes
+     `houseReadings(pools)` and `handHouseReadings(await handPoolsOnLine(rows))` to your scratch; the committed
+     lists are that dump whole; the temporary test gone before the commit; the counts by table and by house in the
+     commit). `samenessHideable.existingReds.json` is NEVER widened: a conflict there, or any other line of the
+     walker's source in conflict, is "any other conflict".
    - ANY OTHER CONFLICT: record the file, the symbol and both sides (at most 12 lines a side) in your scratch
      directory, `git merge --abort`, mark that lane NOT LANDED, and GO ON to the next lane (the chair's message says
      whether the lanes are independent; if it does not say so, stop).

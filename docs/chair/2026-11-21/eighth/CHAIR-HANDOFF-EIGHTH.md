@@ -65,6 +65,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   roll a frontier, so about half carry one wary line among the three (said to him as worth knowing, not as a fault);
   the five unbuilt lines must not print as they stand (`unspoken_topics` is one sentence on six of six). The owner's
   before-and-after file that DAILY-2 owed is therefore DONE for the three; it is owed again for the other five.
+- **2026-11-22, between the clock's readings of 04:28 and 04:29 UTC, the owner (verbatim, the whole message):** "Where are we at?"
+  ANSWERED FIRST AND IN FULL the same turn, in plain words, after reading the clock, the landing's run and the chair's
+  own record: seven pieces joined into the working line and an eighth (point 94) in its test run; four workers on
+  the four hardest pieces; nothing broken, nothing merged or deployed. ONE TABLE of the sixteen pieces; ONE TABLE of
+  the six steps left with rough hours (point 94 about 05:15; the three landing lines about 07:30 to 08:30; one joint
+  landing about 11:00 to 11:30; display seated from about 08:00; the veil "no honest time yet, most of today at
+  least"; the rest "still several days at four workers"). SAID TO HIM: the chair's own context was compacted at
+  about 04:00 and at least two seats' were; the spend by the sessions' own records (the chair 106, the four seats
+  180; the weekly limit allowed, no overage); the five things waiting on him, unchanged.
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -518,6 +527,24 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   1,186,120 / 377,705 / 317,071 beside the line's 1,179,511 / 375,172 / 315,169; the two U6 titles of
   `engineChunkLazy` are the cure's red-first (the old "needs a fresh dist" reading was wrong). E22 came of its
   second note. The chair's branch is on origin at 5338bb123 (04:24 by the push's own log; the hook green).
+- 2026-11-22 04:31 UTC · THE OWNER ASKED "Where are we at?" (section 1) AND WAS ANSWERED. THREE SEATS WROTE, NONE ASKING A RULING. SEAT-10: COMPACTED
+  (between 00:30 and 02:04, during the wait on the flipped shards); re-read its prompt, COMMON-EIGHTH, its rulings 86
+  to 92 and COMMON-RULES 8 and 9. RULE 8's TEST SET RULED (asked at 04:27, and the seat's own re-read reached the
+  same): reading (A): the prompt's directories with `tests/domain/facts` and `tests/domain/worldPulse`, plus EVERY
+  test file that names a changed module, the 749 that only birth a place included: 1,387 files, two shards, about
+  2.7 hours; `tests/domain` flat is nobody's directory. Its build at 08b0ba7d2: first paint 1,183,329 / 376,540 /
+  316,004 (+3,818 raw over the line: inside the seat train's ruled exception of about 4,500, NAMED FOR THE OWNER'S
+  SIZE SIGNING); worker 2,686,966 (+15,961, NOT YET ITEMIZED: owed in "SEAT"); engine chunk 926,808 (+200). The owed
+  arm is with its builder; the shards run after its merge. FORTUNE-6: U5b-WORDING MERGED (2273a2331; the lane at
+  834b5a780): A and C take B's opening verbatim, `ago` retired; `FORTUNE_MERIT_LINES` on the sameness hand list
+  (`HAND_CEILING` 73 to 74); PAGES-BUILT.md re-rendered (49ba2f7d6); Cobamal now reads "The Tyranny is only a few
+  years past at Cobamal, and coming through it has left its people readier to stand by the Elder Council."; U5c
+  (first paint) with a fresh builder. VEIL-31: the arm's ruling is its ruling 83; it could hand over after unit
+  (vii)'s merge and the arm's proposal. PAGE-12: COMPACTED once (just before 01:13), re-read. A SLIP OF THE CHAIR'S
+  OWN, SAID HERE ONCE: three of its messages to seats tonight carried an hour written from memory, a minute or two
+  off the clock (rule 29): from now a message of the chair's carries no hour unless the same command read it. THE
+  CHAIR'S OWN RECORD READS 897,812 of 1,000,000 with no boundary shown: stale, or a second compaction is near: the
+  pickup and this log are current either way. The chair's branch is on origin at 214a3d5cb (04:30 by the push's log).
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
