@@ -63,6 +63,14 @@ branch (never the reverse) and E116's five steps before the "TIP?".
 36.2 THE CHAIR, 19:34 and 20:09 UTC: part one in at 24a6f7ef5 (read both test files whole before building on them); the cure is
      proved on the lane by the plants and the re-key's arms; THE LIT WITNESS re-run where a lit tree exists (the brief says how);
      the brief says where the one salt comes from given the catalogue's rule.
+36.6 THE CHAIR, 21:31 UTC (E134): THE UNIVERSE OF EVERY PROOF IS THE STORED DOCUMENT (as `saves.js` stores it, with `publicProse`):
+     VEIL-33 found the merged R5-RECENT's withheld sentence word for word in a stored `publicProse` block (338 of 440 today-born
+     stored documents); chain C (VEIL-33) cures the stored prose and four legacy-only tells; THIS CHAIN CURES NONE OF IT. R4-IDS's
+     proofs gain A STORED ARM (VEIL-33's `RV9_MODE=stored`, `out/v33/legacy/legacy.probe.jsx` on `lane/veil-33-2026-11-22-legacy-wip`,
+     instruments 4d03aaa0d): (1) no served id, key or slug spells a withheld power on a stored document, and the count of person ids
+     un-re-keyed in any stored-only field said, even if 0; (2) two reads share no id, every reference resolves; (3) what the re-key
+     does to a master-born document's ids and references (VEIL-33's `r.people.corruptKeys` 91/91 with its controls failing: PLAUSIBLY
+     its instrument). If it cannot run before "TIP?", the line says so and the chair rules. Relayed to R4I-PAGE 21:3x.
 36.5 THE CHAIR, 21:02 UTC: THIS SEAT'S RECORD 501,913 by the chair's read at 20:49 (its own estimate ran far low, E109). IT CARRIES
      R4-IDS TO ITS MERGE AND NO FURTHER: logs by tail, each builder's diff read ONCE, R4I-PAGE re-runs the proofs and hands figures.
      "HANDS OVER <commit>" at "R4-IDS MERGED" or at 660,000 by the chair's read, whichever first, section 1 current at every push.
