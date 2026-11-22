@@ -28,8 +28,8 @@ verified by ls-remote).
   gate, acceptance, `tests/lint` whole) to `/var/tmp/v18/out/v32/g/done.txt`. Copies of the scripts: `out/v32/`.
 - 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
 - UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 86 (b), = PART 32's ruling 85: the measure of dependents first, then the row in both
-  engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder: not yet
-  SEATED 05:27 (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` when it is; if this seat stops, its work goes up as
+  engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder
+  R3-TELL-8, an Agent subagent of this seat, SEATED 05:27 (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` at 5f9f15b94); if this seat stops, its work goes up as
   `lane/veil-32-2026-11-22-r3tell8-wip` unread).
 - NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the green chain's done.txt read and one line to the chair with GATE-1 /
   GATE-2 at the tip; then unit (viii)'s builder from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
