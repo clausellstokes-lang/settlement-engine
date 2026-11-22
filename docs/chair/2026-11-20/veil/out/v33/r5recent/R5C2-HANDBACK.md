@@ -177,3 +177,21 @@ Because the rule said "all", I stopped and built nothing. Nothing is live, so no
 accept the 1-in-287 difference and build, or drop the line from shared pages altogether.
 
 R5C2 STOP (this commit, over 42640f37d): measure (3)(i) reproduced 286 of 287, not all (the power step's own house roster is not served)
+
+## ADDENDUM (after E93, edf115e09): STOP, the session's mark
+The chair ruled R1 (E93): build reader B. I read E93 whole and **STOP before the first edit**. This session is near its
+token mark (about 250,000). The read-whole law still owes most of 212 (lines 1,060 to 3,180) and the registry's second
+half before any edit. Those reads alone would reach the mark, and leave nothing for the red, the cure, the pglite runs,
+`tests/lint` whole and the build. A half-built cure in a security lane is worse than none, so I did not start one.
+
+For the next builder:
+- The design under "THE RULE AS BUILT" above holds under E93. It is designed, not written.
+- **E93 (1), fidelity:** the arm's exception is "a house with `source: 'coherence_repair'` absent from the power step's
+  roster". The record cannot show the step by itself, so the arm needs a test-side witness, not the page's.
+  - The probe's sample 1 shows one such page: `r5c2-m3-hamlet-8`.
+  - The arm can find the cause by re-running reader B without the repaired houses, one at a time. If removing one gives
+    the stored sentence, the miss is that class. Any other miss reds.
+  - This witness is my suggestion; the chair has not ruled on it.
+- **E93 (3), transfers:** reader B prints the baseline sentence with no change. Nothing more is needed in this unit.
+
+R5C2 STOP (addendum): E93 received; the read-whole law and the build exceed this session's mark
