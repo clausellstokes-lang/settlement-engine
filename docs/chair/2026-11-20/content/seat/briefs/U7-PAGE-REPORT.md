@@ -384,3 +384,68 @@ The new commits are `45d4a2f1e` (the page, U5-STALE, the self-check, the tests),
 **A red I caused and cured on the way:** an earlier whole run (12:52:13Z–13:15:58Z, at `5329459ac`) also failed `domainAnyCastBaseline.test.js` (4 arms) on `rulingPower.js`'s 5 `any` casts. `0a5620d14` cured it, and it is green above.
 
 **Outside `tests/lint`, also the integrator's:** `tests/components/phoneChromeFloor.census.test.js`, +1 floored line on three routes (the caption).
+
+---
+
+## THE CHAIR'S E81, on branch `u7b` at the lane tip `a20eaddef` (U7 merged as `553b27368`)
+
+The new commit is `645d669db` (the test). The report commit follows it. No source file changed. Every claim below is CONFIRMED by run unless it is labelled.
+
+### (1) Both sides of U5-STALE, pinned by name (`seatChainHolder.test.js` arm 9)
+
+- **MOVES:** on `u7p-town-8`, Judith Weber, the Craft Guilds' first, loses the Mayor's hat ("the smelt master" alone). Felix Naumann, the Merchant Guilds' first, takes it ("the senior guild master and Mayor").
+- **KEEPS, THE CROWN:** a Royal Authority (synthetic city, as `seatTransfer.test.js` builds one, because no lit seed bears a kept crown) kept by the Merchant Guilds.
+  - Aldric Vane, the sovereign, rank 3 in Noble Houses and so no house's first, keeps it as "King".
+  - Corin Marsh, the guilds' first, takes none.
+  - `holderOf`'s person is Aldric Vane.
+- **KEEPS, THE COUNCIL'S OWN PERSON:** on `u7p-town-1`, Konrad Berger, the Town Council's own Mayor (a Merchant Guilds member without a rank), keeps it, and the chain names him.
+- **Red first, by plant in a scratch copy of the tip** (`rulingPower.js` restored after; the copy equals the clone again):
+  - **P1, the rule widened to every wearer** (14:16:33Z–14:16:56Z): the CROWN ("the sovereign keeps the crown: expected undefined to be 1") and the COUNCIL ("after: he still wears it: expected undefined to be 1") are red; the MOVE is green.
+  - **P2, nothing moves** (14:16:56Z–14:17:20Z): the MOVE is red ("after: she does not: expected 1 to be undefined"), with arms 1, 2, 5, 7 and 8; both KEEPS are green.
+- **Green:** 13 of 13 (14:15:55Z–14:16:19Z).
+
+### (2) The tonight sheet: no office word for the old house's person (arm 8)
+
+- **What the reader composed** (the real `summary/tonightSheet.js :: composeTonightSheet`), for `u7p-metropolis-15` after the DM's transfer:
+  - the seat row: `{ name: 'Josefine Wolf', role: 'Speaker of the Assembly', why: 'seat' }`;
+  - the first hook: `{ text: 'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.', source: 'Dietrich Engel' }`.
+- **The same on the other three:** `metropolis-21` (Dietmar Uhl), `metropolis-26` (Brunhild Steiner) and `metropolis-28` (Josef Frank).
+  - On all four the office word appears in exactly one string of the sheet: the holder's first's seat row's `role`.
+  - Before the transfer the same string sat on the old person's seat row.
+- **The renderers:** every renderer of the sheet (`components/TonightSheet.jsx`, `pdf/sections/TonightAtTheTable.jsx`, `foundry/journalPages.js`) prints a hook as its `source` name and `text` only (PLAUSIBLE: read). The list never labels the old person by the office. **No fault of U5-STALE; no STOP.**
+- **Arm 8 asserts it** on the four, by literals.
+
+### (3) First paint: NOT done in a few lines; nothing changed
+
+- **The road is static end to end:** `events/mutate.js` imports `events/mutateWorld.js`, which imports `rulingPower.js :: transferRulingPower` (a synchronous function). The world pulse's two importers are lazy, but the DM's road is not.
+- **So a leaf would stay eager:** imported by `rulingPower.js` or `mutateWorld.js`, it lands in the entry chunk.
+- **What it would take:** keeping the hat code out means an asynchronous transfer, or the hat moved by its callers behind a lazy import (`mutateWorld.js`, `applyWorldPulse*.js`). Both are outside the manifest and more than a few lines. Per the order, I changed nothing.
+- **What it costs, measured:** two builds, each `npm run build` then `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js`, through `TMPDIR=/tmp sh scripts/gate-mutex.sh --run`, one at a time. Logs are in `bu7work/buildA.log`, `verifyA.log`, `buildB.log` and `verifyB.log`; the figures were read with `vendorPdfLazy`'s own closure walk (`bu7work/closure.mjs`).
+  - **Build A** (the tip, with U5-STALE; 14:18:30Z–14:19:33Z):
+    - raw **1,184,574**, gzip **376,940**, Brotli **316,418**;
+    - 8 files, and `transferRulingPower` sits in `engine-core-*.js` inside the closure.
+  - **Build B** (the tip with only U5-STALE's block removed, in a scratch copy; 14:19:56Z–14:20:58Z): raw **1,183,913**, gzip **376,721**, Brotli **316,450**.
+  - **U5-STALE's cost:** **+661 raw, +219 gzip, −32 Brotli** (compression noise).
+- **Both trees are over all three budgets** (1,175,492 / 373,999 / 313,994). The four red arms in each run are exactly the line's four RED-AT-LINE rows for `vendorPdfLazy`, red without U5-STALE too.
+- The builds' `dist/` were removed afterwards, so the dist-reading contracts skip again as before.
+
+### The flipped copy (rebuilt from the tip: exactly the two dials) (14:21:20Z–14:21:47Z)
+
+- **`tests/domain/seat/`:** 176 passed, 3 failed.
+  - The new file: 13/13.
+  - The three reds are `seatContest`'s dark pins.
+
+### `tests/lint` WHOLE at `645d669db`'s files (shared tier, 14:21:47Z–14:45:11Z)
+
+**Totals:** 223 files, 3,354 tests (3,350 passed, 4 failed).
+
+**The line's own reds and the clone's environment, as before:**
+- `proseComposed.walker` (A0b);
+- `proseCorpusBytes` RAW and GZIP;
+- `ledgerCitationIntegrity` fails to load (no ledger ref in the clone).
+
+**Mine, the integrator's door:**
+- `sovereigntyLightingContract.walker` :: "THE CENSUS IS AN ASSERTION …": the test-title count moved 31,777 to 31,781, which is arm 8's one title and arm 9's three.
+- The cure is to re-freeze `tests/lint/.lighting-census-baseline.json`.
+- `proseNumerics`, `phoneChromeFloor` and `domainAnyCastBaseline` are green at the tip (re-recorded at the merge).
+
