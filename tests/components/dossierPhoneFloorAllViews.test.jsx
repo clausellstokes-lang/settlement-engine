@@ -131,7 +131,7 @@ const EMPTY_VIEWS = Object.freeze({
   // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
   'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
   // 'World/Daily Life' LEFT this list (DAILY-PAGE-1, 2026-11-22, the owner's order: the button goes, the engine's own lines
-  // print by themselves): the view now holds the three engine lines on every walk (its baselines read 4 below), so a Daily
+  // print by themselves): the view now holds the page's own lines on every walk (its baselines read 9 below), so a Daily
   // Life page that prints nothing is a silent view again and reds here. (It had stood here since the GREEN-BASE point of
   // 2026-11-08: WAVE-RULINGS #37 had made the offer the button's caption and the fixture city had no generated account.)
   // 'Systems/Magic' LEFT this list (lane MAGIC, 2026-11-03): the dependence block now draws on the
@@ -720,7 +720,10 @@ const DESKTOP_BASELINE = Object.freeze({
   "World/Faith":         { measured: 2, sub14: 2 },
   // RE-MEASURED 2026-11-22 (DAILY-PAGE-1, the owner's order: the button goes, the engine's lines print): World/Daily Life
   // measured/sub14 1 -> 4, the three engine lines (dawn work, gathering places, child warnings) at the narrative's FS 13.5.
-  "World/Daily Life":    { measured: 4, sub14: 4 },
+  // RE-MEASURED 2026-11-22 (DAILY-4 unit P, the chair's E110: the page prints all eight public slots): measured/sub14
+  // 4 -> 9, the five new lines (outsider impressions, food culture, commoner resentments, unspoken topics, recent changes)
+  // at the same FS 13.5; no token moved.
+  "World/Daily Life":    { measured: 9, sub14: 9 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 5, sub14: 5 },
@@ -902,7 +905,9 @@ const MOBILE_BASELINE = Object.freeze({
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
   // RE-MEASURED 2026-11-22 (DAILY-PAGE-1): World/Daily Life prose 1 -> 4, the three engine lines at proseFontSize (sub14 0,
   // sub12 0: every new line clears the floor).
-  "World/Daily Life":    { prose: 4, chrome: 0, sub14: 0, sub12: 0 },
+  // RE-MEASURED 2026-11-22 (DAILY-4 unit P, E110): prose 4 -> 9, the five new public lines at proseFontSize (sub14 0,
+  // sub12 0; the fixture's owner read carries no owner-only line, so its mark adds no chrome row).
+  "World/Daily Life":    { prose: 9, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },
