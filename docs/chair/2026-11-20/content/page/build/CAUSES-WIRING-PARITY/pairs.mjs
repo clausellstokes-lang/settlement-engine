@@ -1,4 +1,4 @@
-// RUN (repo root): node docs/chair/2026-11-20/content/page/build/CAUSES-WIRING-PARITY/pairs.mjs "$PWD" > .../pairs.<when>.txt 2>&1
+// RUN (repo root): node docs/chair/2026-11-20/content/page/build/CAUSES-WIRING-PARITY/pairs.mjs "$PWD" > .../pairs.txt 2>&1
 // Birth recipe copied from build/CAUSES-WIRING/parity.mjs (hxd-<size>-<i> and censusPlan('r2') + configOf). For the three
 // crime_wave DIFF towns: each cause's holds on owner vs toPublicSafe(owner), and the fields the differing predicates read.
 const L = process.argv[2];

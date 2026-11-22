@@ -20,6 +20,7 @@ import { atomHolds } from '../../../src/domain/facts/factVocabulary.js';
 import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
 import { tensionSidesShown } from '../../../src/domain/display/tensionShown.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const M = TENSION_SIDE_MEANINGS;
 const MARKET = { name: 'Market Square', tags: ['market'] };
@@ -82,25 +83,27 @@ describe('tensionSidesShown: rule 2 (EXACTLY ONE power of the kind meant)', () =
 // born towns of the census's 720 (`build/SIDES/craftCases.before.txt`) whose sole economy power was cast as the guild members.
 describe('tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark)', () => {
   const BORN = ['r2s-famine-town-2', 'r2s-famine-city-3', 'r2r-city-25'];
-  // One plain test looping over the three towns in its body (the lighting walker's each-family park debt only shrinks).
+  // One plain test over the three towns, failures collected (the lighting walker's each-family park debt only shrinks;
+  // the seed-loop walker wants every town run).
   it('the three born towns: their guild members keep their own words beside a sole economy power', async () => {
     const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
     const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
     const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
     const { censusPlan, configOf } = await import('../../components/pageCensusWalk.shared.mjs');
     await loadGenerationLawPayloads();
-    for (const seed of BORN) {
+    const failures = collectSeedFailures(BORN, (/** @type {string} */ seed) => {
       const row = censusPlan('r2').find((/** @type {{ seed: string }} */ r) => r.seed === seed);
-      expect(row, seed).toBeTruthy();
+      expect(row).toBeTruthy();
       const doc = generateSettlementPipeline(configOf(row, DEFAULT_CONFIG, birthConfig), null, { seed, customContent: {} });
       const crafts = (doc.history?.currentTensions || []).flatMap((/** @type {any} */ t) => (t.factions || [])
         .map((/** @type {string} */ s, /** @type {number} */ i) => ({ t, s, i }))
         .filter((/** @type {{ s: string }} */ x) => M[x.s]?.means === 'craft power'));
-      expect(crafts.length, seed).toBeGreaterThan(0);
+      expect(crafts.length).toBeGreaterThan(0);
       // the precondition the economy mark would have named: exactly one economy power on the roster
-      expect(solePowerNameOf(doc, 'economy', true), seed).toBeTruthy();
-      for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)[i], seed).toBe(s);
-    }
+      expect(solePowerNameOf(doc, 'economy', true)).toBeTruthy();
+      expect(crafts.map(({ t, i }) => tensionSidesShown(doc, t)[i])).toEqual(crafts.map(({ s }) => s));
+    });
+    expectNoSeedFailures(failures, 'each born town\'s craft sides keep their own words');
   }, 360000);
   it('a made-up roster whose one economy power is a craft guild: still the row\'s own words', () => {
     const rec = town([RULER, { faction: 'Craft Guilds', category: 'economy' }]);
