@@ -1,0 +1,42 @@
+
+ ❯ expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/generators/fortuneLawMerits.test.js:312:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/fortuneMeritSentence.test.js > U5b (b): no merit, no sentence > a law-1 birth (the dial dark), a law-2 birth without the merit and a record with no standing print none of it
+AssertionError: law 1: expected [ 'weathered' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "weathered",
++ ]
+
+ ❯ tests/domain/fortuneMeritSentence.test.js:196:33
+    194|     const noStanding = { ...record, powerStructure: { ...record.powerS…
+    195|     for (const [name, r] of /** @type {Array<[string, any]>} */ ([['la…
+    196|       expect(meritsOf(r), name).toEqual([]);
+       |                                 ^
+    197|       const text = paragraphOf(r);
+    198|       expect(text.length, name).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  2 failed | 38 passed (40)
+   Start at  13:23:05
+   Duration  23.22s (transform 4.20s, setup 109ms, import 7.06s, tests 15.68s, environment 0ms)
+
+[gate-tail] end:  13:23:28 up  5:26,  0 user,  load average: 1.59, 1.53, 1.67
+[gate-tail] full log: /tmp/gate-tail.3692.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

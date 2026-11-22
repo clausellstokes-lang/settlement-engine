@@ -1,0 +1,42 @@
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryRosterChoices.js :: BENEATH_THE_WALLS",
++   "src/domain/display/galleryRosterChoices.js :: GATES_BENEATH",
++   "src/domain/display/galleryRosterChoices.js :: applyRosterChoices",
++   "src/domain/display/galleryRosterChoices.js :: entryOut",
++   "src/domain/display/galleryVeil.js :: DEFAULT_VEIL_RULES",
++   "src/domain/display/galleryVeil.js :: applyVeil",
++   "src/domain/display/galleryVeil.js :: curateModelFor",
++   "src/domain/display/galleryVeil.js :: isHideable",
++   "src/domain/people/cardVeil.js :: isHideableHouse",
++   "src/domain/people/cardVeil.js :: veiledOfInstitution",
++   "src/domain/traditions/shownTraditions.js :: drawnSetOf",
++   "src/domain/traditions/traditionDescription.js :: houseFor",
++   "src/domain/traditions/traditionDescription.js :: ownerFor",
++   "src/domain/traditions/traditionDescription.js :: readerView",
++   "src/generators/npc/factionLeaderSecret.js :: GUILD_REWRITTEN_WORDS",
++   "src/generators/people/goals.js :: refusalRowsOf",
++ ]
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js:183:129
+    181|     const live = [...sites.keys()].sort();
+    182|     const registered = Object.keys(REGISTRY_SITES).sort();
+    183|     expect(live.filter((k) => !REGISTRY_SITES[k]), 'an UNREGISTERED ch…
+       |                                                                                                                                 ^
+    184|     expect(registered.filter((k) => !sites.has(k)), 'a registered site…
+    185|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 26 passed (27)
+   Start at  12:20:10
+   Duration  1.54s (transform 1.20s, setup 150ms, import 1.32s, tests 1.45s, environment 0ms)
+
+[gate-tail] end:  12:20:11 up  4:22,  0 user,  load average: 3.65, 5.02, 4.69
+[gate-tail] full log: /tmp/gate-tail.21703.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

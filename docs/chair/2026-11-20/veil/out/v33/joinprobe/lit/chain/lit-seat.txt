@@ -1,0 +1,42 @@
+  [
+    "Noble Houses",
+    "Temple of the Dawn",
+-   "Quiet Circle",
++   "Craft Guilds",
+  ]
+
+ ❯ tests/domain/seat/seatContest.test.js:298:27
+    296|     const before = coupContenders(withLaw(s, undefined));
+    297|     const lawful = coupContenders(withLaw(s, LAW));
+    298|     expect(names(lawful)).toEqual(['Noble Houses', 'Temple of the Dawn…
+       |                           ^
+    299|     for (const c of lawful.challengers) {
+    300|       const row = s.powerStructure.factions.find((f) => f.faction === …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/domain/seat/seatContest.test.js > (8) the craft variant: lit, a craft-led plot is the guild cabal it narrates today, never a palace coup > dark: today's read (a craft archetype has no row, so the plot reads palace_coup), with and without the law
+AssertionError: expected 'merchant_cabal' to be 'palace_coup' // Object.is equality
+
+Expected: "palace_coup"
+Received: "merchant_cabal"
+
+ ❯ tests/domain/seat/seatContest.test.js:459:54
+    457|     const mod = await import('../../../src/domain/worldPulse/stressorD…
+    458|     expect(variantOf(mod, withLaw(craftLed(), undefined))).toBe('palac…
+    459|     expect(variantOf(mod, withLaw(craftLed(), LAW))).toBe('palace_coup…
+       |                                                      ^
+    460|   });
+    461|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  2 failed | 10 passed (12)
+      Tests  6 failed | 258 passed (264)
+   Start at  13:20:44
+   Duration  139.41s (transform 11.93s, setup 340ms, import 26.12s, tests 110.87s, environment 558ms)
+
+[gate-tail] end:  13:23:04 up  5:25,  0 user,  load average: 1.36, 1.48, 1.66
+[gate-tail] full log: /tmp/gate-tail.3395.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,10 @@
+part A cached: /var/tmp/v18/t2/pool-jp2
+part B cached: /var/tmp/v18/t2/pool-jp2
+shard 2 rc=0
+shard 3 rc=0
+shard 1 rc=0
+shard 0 rc=0
+shard 1 rc=0
+shard 3 rc=0
+shard 2 rc=0
+shard 0 rc=0

@@ -1,0 +1,42 @@
+    164|     if (process.env.VR26_REPORT) writeFileSync(`${process.env.VR26_REP…
+    165|     expect([...unfaithful].sort()).toEqual([...KNOWN_UNFAITHFUL].sort(…
+       |                                    ^
+    166|   }, ARM_TIMEOUT_MS);
+    167|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it)
+AssertionError: expected [ 'economy.prosperity', …(2) ] to deeply equal [ 'economy.prosperity', …(5) ]
+
+- Expected
++ Received
+
+  [
+    "economy.prosperity",
+    "economy.prosperityStanding",
+-   "legitimacy.colours",
+-   "legitimacy.label",
+-   "legitimacy.score",
+    "safety.safetyLabel",
+  ]
+
+ ❯ tests/security/rosterChoiceInversion.pglite.test.js:191:23
+    189|     const inverting = [...where].filter(([, w]) => w.hidden.length && …
+    190|     const notRederivable = [...where].filter(([, w]) => w.open.length)…
+    191|     expect(inverting).toEqual([...KNOWN_INVERTING].sort());
+       |                       ^
+    192|     expect(notRederivable).toEqual([...KNOWN_NOT_REDERIVABLE].sort());
+    193|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 20 passed (22)
+   Start at  13:01:28
+   Duration  354.97s (transform 11.54s, setup 127ms, import 265ms, tests 353.67s, environment 513ms)
+
+[gate-tail] end:  13:07:24 up  5:09,  0 user,  load average: 1.22, 1.16, 1.42
+[gate-tail] full log: /tmp/gate-tail.27443.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
