@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "10afe3873b82870e9119fde376594bf300af2d67",
+  "measuredAtSha": "085046c7c601fc37082058c0363d729aed4e7d75",
   "measuredBy": "FORTUNE-6 builder U5b",
   "date": "2026-11-22",
-  "note": "re-taken by its own door at FORTUNE U5b (10afe3873; the seventh chair's ruling of 22:26 UTC 2026-11-20): FORTUNE_LAW_TUNING.standing gains one DRAFT leaf, weatheredRecentYears 10 (the merit sentence's time-word cut-off, no score reads it), and the dependent display/governanceAccount.js; no other value moved",
+  "note": "re-taken by its own door at FORTUNE U5b (085046c7c; the chair's ruling of 01:48 UTC 2026-11-22): the recent cut-off left FORTUNE_LAW_TUNING for the data file, so the table's leaves and spanDigest return to a157bd930's; display/governanceAccount.js stays a dependent (it reads weatheredWithinYears)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 125,
-      "spanDigest": "d4d60ee55885e341a0d74808130c57c937086ba44ce2b724cd446d42ce08fca1",
+      "line": 122,
+      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1515,7 +1515,6 @@
         "standing.safetyUsualRange.metropolis.1": "Moderate",
         "standing.meritPoints": 10,
         "standing.weatheredWithinYears": 40,
-        "standing.weatheredRecentYears": 10,
         "standing.endorsedMinReasons": 2,
         "standing.weatheredSeverity": "catastrophic",
         "standing.rulerTroubleKinds.0": "succession_crisis",
