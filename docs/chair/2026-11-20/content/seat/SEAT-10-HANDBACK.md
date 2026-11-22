@@ -16,14 +16,17 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **The working line:** `lane/join-2026-11-14` has moved to `89ab44e34` (point 87, the sameness door: no `src/`, two new `tests/lint` walkers). By the chair's word of 23:41Z the lane stays on `a64619510` for the census; the chair joins the newer line at the landing.
 - **UNIT 1 (the line): DONE except its proofs in flight.**
   - **The doors:** each re-taken by its own door, red before and green after: the wiring census, the lighting census, writer-reach (on the chair's three-way condition, item 89). The `npcGenerator.js` size baseline needed nothing: `sizeBaseline.test.js` is green at 930. The mutation manifest, the chair's union, is green.
-  - **IN FLIGHT:** `tests/lint` whole, started at `ef5abf4da` before the writer-reach door. It is expected to read writer-reach red, the door's prior state; that walker was re-run green at `70e4e1945`.
-  - **NEXT:** confine-two `3e8e2e37d` → tip, as asked; it is expected to DIFFER by the line's own causes. Then `a64619510` → tip, the lane's dark over the line, expected EQUAL.
+  - **`tests/lint` whole** at `ef5abf4da`: 219/220 files and 3,270/3,271 tests. The one red is writerReach's round-trip, taken before its door; that walker was re-run 52/52 green at `70e4e1945`.
+  - **THE LANE'S DARK PROOF OVER THE LINE:** `confine-two.sh a64619510 4ab09fd6a` is **EQUAL** (`all 49459c04…bc8ebc`, 1245 places; 00:22:53Z).
+  - `confine-two.sh 3e8e2e37d 4ab09fd6a` is DIFFER (00:28:12Z), as expected: it differs by the line's own births and proves nothing of the lane's (the chair, 00:10Z).
+  - Both ran in the exclusive slot: the shared tier refuses a command that declares no worker cap.
+  - The typechecks and eslint are the chair's, at the base, and green. The lane's commits since touch only docs and registers.
 - **UNIT 2: DONE.**
   - **At birth (item 87):** accepted by the chair at 23:42Z.
-  - **Over play time (item 90):** sent to the chair with this push.
-- **UNIT 3 (the flip's census, re-cut):**
+  - **Over play time (item 90):** accepted by the chair at 00:10Z (the pulse's own road not exercised; the coup road stands in for it).
+- **UNIT 3 (the flip's census, re-cut): RUNNING** (the set plus flipped shards 1 and 2, launched 00:28:26Z by the chain's own `date -u`; then the control's 1 and 2, then `lists`).
   - **The flipped clone:** made by `recut/recut.sh prep` at `ef5abf4da` in the scratchpad (`census-flip`, exactly the two dials). Its `src/` and `tests/` equal the tip's, because the doors since touched only registers under `scripts/`, `docs/` and `tests/lint/.lighting-census-baseline.json`.
-  - **NEXT:** `sets`, then flipped shards 1 and 2 of 2, then the control's 1 and 2, then `lists`. One run at a time.
+  - The re-cut runs one run at a time; the outputs go to the scratchpad's `census` directory, and the four lists are folded into this file.
 - **UNIT 4 (rule 8, "SEAT <commit>"):** not started.
 - **OUT:** none. BKP is finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
