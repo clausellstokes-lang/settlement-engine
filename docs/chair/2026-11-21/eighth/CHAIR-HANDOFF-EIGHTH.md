@@ -1254,6 +1254,26 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `seatCandidatesOf` for npcs and tier, to `seatCircumstancesOf` for stress, stressors and economicState) and the
   one row clean over all 90 leaves with no knock-on; VEIL-33's probe HAD judged the contenders (row 18): a hidden
   name in the strata's own output on four places: inside R5-DESC's scope (`prompts/VEIL-34.txt` says so).
+- E94 · A HIDDEN HOLDER OF THE SEAT: THE GOVERNMENT'S LABEL STANDS; THE VEIL PROTECTS THE HOUSE'S IDENTITY, NOT ITS EXISTENCE OR KIND (2026-11-22 15:35 UTC). VEIL-33's 15:31, CONFIRMED from
+  the probe's lit surfaces (act K, jp6-metropolis-0, Reveal off): `governingName` "Shadow Senate" is served on the
+  hiding read ("Lincheng is governed by the Shadow Senate. …" in `publicProse.blocks.power:governance.text`); it is
+  the criminal taker's own kind of government (`rulingPower.js` near 173, `rulingStructure.js` near 208 and 258; gloss
+  "Nominal governance masks a criminal oligarchy"): the label implies a criminal taker where the Thieves' Guild is
+  withheld. CLOSE-1's COUNT (900 lit births, 150 a size, `close/census/rc-count.mjs`): every stored
+  `recentConflict` is the baseline's; none a transfer's; `previousGovernments` empty on all; NO criminal taker at
+  birth: A TRANSFER EXISTS ONLY IN PLAY. THE LANE'S LAW AS THE CHAIR READ IT (the hand-backs; JOINPROBE.md section 4
+  on `lane/veil-33-2026-11-22-joinprobe-wip` at df7447e58): VR42: a criminal-worded GOVERNING body is the town's
+  public nature and the governing power's row is never removed; rulings 65 and 67: a hidden power that takes the
+  seat is served MASKED "an unseen interest", no edge, the reader's holder never the hidden power. RULED: THAT LAW
+  ALREADY ANSWERS IT, AND NOTHING NEW IS BUILT: a hidden holder's EXISTENCE (the mask) and KIND (the label) are
+  disclosed by design; ITS IDENTITY IS WHAT THE VEIL PROTECTS, on three conditions: (a) no sentence, description,
+  id, key or slug names or spells the house (R5-RECENT, R5-DESC, R4-IDS); (b) the mask's wording is clean (R5-DESC);
+  (c) a government's label is drawn from the kind's table and never composed from the house's own name: proven in
+  R5-DESC's measure by the writers and held by a pin. "R5-RECENT-T" (a transfer's sentence composed from served
+  parts) FOLLOWS R3. THE READER'S LIST ROW 19 puts the design and two open questions to the reader. THE CHAIR
+  CORRECTS ITSELF TO THE OWNER: it told him at 15:36 there were two ways to settle this (show the ruling house, or
+  build a public name); the lane's own earlier rulings are a third, already built, and it is the one taken.
+  ALSO: CI's run on point 98 (45033049183), read by name at 15:34: 63 failing rows, all listed, none new, none gone.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
