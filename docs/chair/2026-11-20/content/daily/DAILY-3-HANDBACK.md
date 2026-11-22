@@ -4,16 +4,20 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-3.txt` (bebdb15cb). Predecessor's record:
 `DAILY-2-HANDBACK.md` (its section 3, every ruling in force, binds; this file governs where it says more).
 
-## 1. WHERE THE LANE STANDS (written 2026-11-22 07:36 UTC, at the weekly-limit warning)
-- `lane/daily-3-2026-11-22` (pushed) = f5295e425 + E1 merged (4c1a72892) + cures 4a9ff22bf, 978968735 + docs.
-  `tests/lint` whole at 35a25ab11: 223 files / 3,362 tests, 3 red = the line's three (proseComposed A0b, proseCorpusBytes
-  RAW/GZIP). E1 build = the line's figures to the byte raw (1,179,511 / 375,169 / 315,106; worker 2,671,005; engine 926,608).
-- `lane/daily-3-2026-11-22-e2-wip` (pushed) = 5151936b2, A SNAPSHOT of the E2 builder's UNCOMMITTED tree (worktree
-  `/home/user/wt-daily3-e2`), UNPROVEN: built and measured (food top 9/9/9/7/9/8%, EMPTY 0; resentments top
-  17/11/13/7/10/14%, EMPTY 19/9/7/35/34/26% by the calm rule; false 0); red 11 of 14 on the old deriver
-  (`tests/domain/dailyLifeFoodResentments.test.js`); green had 2 reds out of its list, widened by DAILY-3 (the bar5WorldLines
-  pin re-read; the observed-shape-readers rows triaged then `--write`): IN FLIGHT at this writing.
-- NEXT: E2's commit read once, `tests/lint` whole, merge; E1b (the chair's 06:17 rulings 1 and 3); E3; unit 4 on the word.
+## 1. WHERE THE LANE STANDS (written 2026-11-22 08:03 UTC)
+- `lane/daily-3-2026-11-22` (pushed) = f5295e425 + E1 (merge 4c1a72892; cures 4a9ff22bf, 978968735) + E2 (merge of
+  `-e2-wip` fceee55ea; the observed-shape readers by their door 3b0e62e44; the lighting census 771f1865f, 3,743 files) +
+  docs. `tests/lint` whole at 35a25ab11 (before E2): 3 red = the line's three. At E2's merge: `tests/lint` whole + 24
+  governing files RUNNING at this writing.
+- E2 (red on its base 11 of 14): food top sentence 9/9/9/7/9/8%, EMPTY 0; resentments top 17/11/13/7/10/14%, EMPTY
+  19/9/7/35/34/26% (the calm rule); false 0; hand +2 (HAND_CEILING 76), house readings hand 378 -> 385; classes ceiling
+  1779 -> 1775. NOT BUILT: food S10/A13 (millSource), T9/C5 + resentments F0 (grainHeld), L4 (legitimacyGrave), L8-L12
+  (ruler labels); food A4/A12 struck by the style law ("rather than": the chair's rewording).
+- Builders: `-e1-wip` e0e5125c5 and `-e2-wip` fceee55ea MERGED (the remote `-e2-wip` holds the earlier snapshot
+  5151936b2, superseded); `-e3-wip` cut at 771f1865f, IN FLIGHT (`briefs/B3-E3-DAILY-3-DISPATCH.md`); U4c-M, the PDF
+  chapter's measure, IN FLIGHT read-only in `/home/user/wt-daily3-4c` at stack-96 b03a31560 (`briefs/U4C-MEASURE-PDF-CHAPTER.md`).
+- NEXT: E2's green read by name; E3's merge; E1b (rulings of 06:17: crime70 #4 reworded; E1's test to 5 a size); on
+  the line's tip: the merge, 4b, the smugglers lines, 4 and 4c.
 
 ## 2. RULINGS OF THIS SEAT (vetoable by the chair)
 1. B3's split: the dm pool file `commonerResentmentsDm.js` is E1's (the gate and its content land together); E2 builds
