@@ -1,0 +1,34 @@
+R3-TELL-8 STEP 1 (m1.probe.jsx): 140 births (92 hidden-house, 48 controls); shards 0/4 2026-11-22T07:02:55.825Z..2026-11-22T07:11:16.266Z; 1/4 2026-11-22T07:02:57.171Z..2026-11-22T07:11:05.039Z; 2/4 2026-11-22T07:02:57.982Z..2026-11-22T07:11:04.289Z; 3/4 2026-11-22T07:02:56.450Z..2026-11-22T07:11:08.161Z; rng active at probe: ; per birth: 
+pages: 6528 (tw 3264, sv 3264)
+ENGINE PARITY (server against twin, the same read): key differs 0, reader's list differs 0 of 3264
+
+THE ARM, HALF 1 TODAY (a shared read carries the key): 3728 of 6528 pages; hidden-house towns 92 of 92, controls 48 of 48; by setting: {"own":560,"g:000":0,"g:001":0,"g:010":560,"g:011":560,"g:100":0,"g:101":0,"g:110":560,"allOpen":560,"off":0,"unmarked":560,"allShown":368}
+THE ARM, HALF 2 TODAY (a served list != the record reference over the same page): by TYPE 504 pages, hidden-house towns 25 (gated reads), controls 1, nothing-hidden reads of hidden-house towns 0; by [type, desc] 644 pages, gated towns 32, controls 1, nothing-hidden reads 0
+  gated towns (by type): r3m-city-infiltrated-0-42, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-insurgency-1-114, r3m-city-none-0-31, r3m-city-none-1-103, r3m-city-none-1-117, r3m-city-politically_fractured-1-110, r3m-city-under_siege-0-48, r3m-city-under_siege-1-108, r3m-city-under_siege-1-118, r3m-city-wartime-1-109, r3m-metropolis-indebted-0-66, r3m-metropolis-indebted-1-136, r3m-metropolis-insurgency-1-124, r3m-metropolis-none-1-127, r3m-metropolis-none-1-137, r3m-metropolis-under_siege-0-58, r3m-metropolis-under_siege-0-68, r3m-metropolis-under_siege-1-128, r3m-metropolis-wartime-0-59, r3m-metropolis-wartime-1-139, r3m-town-insurgency-0-14, r3m-town-none-0-17, r3m-town-under_siege-0-28
+  desc-only differences (types equal): 140 pages, towns r3m-town-indebted-0-16, r3m-metropolis-indebted-0-56, r3m-city-indebted-1-116, r3m-city-insurgency-0-34, r3m-city-indebted-0-46, r3m-metropolis-indebted-1-126, r3m-metropolis-insurgency-1-134; e.g. r3m-town-indebted-0-16 off|own|tw: served [["debt evasion","Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection."]] ref [["debt evasion","Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."]] || r3m-town-indebted-0-16 off|own|sv: served [["debt evasion","Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection."]] ref [["debt evasion","Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."]] || r3m-town-indebted-0-16 off|g:010|tw: served [["debt evasion","Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection."]] ref [["debt evasion","Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."]]
+
+1b THE INPUTS (the writer over the STORED config, tier and houses restricted to the served ones, against the writer over the page): differ on 0 pages; towns 0
+  config keys the page lacks (-) or changes (~), pages each: {"~contentBoundaries":3264,"~_isolationSupport":3264}
+  tier differs: 0 pages
+  served houses that equal no stored house byte for byte: 3524 pages; names (pages): [["Mills (2-5)",2822],["Butchers (3-8)",2274],["Weavers/Textile workers",2222],["Bakers (5-15)",2138],["Potter",2060],["Carpenters (5-15)",2046],["Blacksmiths (3-10)",2038],["Fish market",2036],["Bowyers & fletchers (guild)",2032],["Multiple market squares",1908],["Inns and taverns (district)",1908],["Warehouse district",1908],["City hall",1908],["Professional city watch",1908],["Cobbler's guild",1878]]
+
+1c SEEDLESS, the stored inputs (config, tier, ALL houses, the stored seats/tensions/services), no seed active: differs from the stored list on 0 of 140 births by [type, desc] (by type 0)
+1c THE 184 NOTHING-HIDDEN READINGS (allShown, the 92, off and DM) x 2 engines = 368 pages: the reader over the page != the stored list on 0 (towns 0); served key != stored on 0
+1c THE CONTROLS' OPEN READS (key served): 960 pages; the reader != the stored list on 4: r3m-village-under_siege-0-8
+1c THE UNMARKED SHAPE (no veil): 560 pages; the reader != the stored list on 0; served key != stored on 0
+
+1e THE GROUPING: (shape:truth:evidence) pages; evidence = criminalInstitutions an array: {"marked:open:ops":3168,"marked:shut:no-ops":2800,"unmarked:open:ops":560}
+  today's GROUPING_OPEN_EVIDENCE (both arrays): {"marked:open:ev":3168,"marked:shut:no-ev":2800,"unmarked:open:ev":560}
+  the key today: {"marked:open:key":3168,"marked:shut:no-key":2800,"unmarked:open:key":560}
+
+1a THE DEPENDENTS (pages serving the key today: 3728): the dependent over the served list != over the reader's list on 140 pages
+  blc: 0 pages; gated towns 0, controls 0, nothing-hidden reads 0
+  cs: 0 pages; gated towns 0, controls 0, nothing-hidden reads 0
+  shadow: 0 pages; gated towns 0, controls 0, nothing-hidden reads 0
+  stand: 20 pages; gated towns 1, controls 0, nothing-hidden reads 0; e.g. r3m-town-none-0-17 off|own|tw: 0 -> 1 || r3m-town-none-0-17 off|own|sv: 0 -> 1 || r3m-town-none-0-17 off|g:010|tw: 0 -> 1
+  smug: 120 pages; gated towns 6, controls 0, nothing-hidden reads 0; e.g. r3m-city-under_siege-0-48 off|own|tw: [] -> ["black market food"] || r3m-city-under_siege-0-48 off|own|sv: [] -> ["black market food"] || r3m-city-under_siege-0-48 off|g:010|tw: [] -> ["black market food"]
+  publicProse 'defense:criminal' (composed at birth from the stored list) ships on 1888 pages: gated reads of hidden-house towns 0; controls 1152; nothing-hidden reads of hidden-house towns 736; of those where the stored list != the reader's on the same page: 4
+
+1f THE MERCHANT ARMY: births with the stored flag 2, with the stored hook 2
+  r3m-metropolis-occupied-0-65 (hidden 7) stored flag true hook 1 | served-derived flag: {"off":[1],"dm":[1]} | hook served on 4/48 | hook served where the served flag is false: 0 () | hook absent where the served flag is true and hooks served: 20 (dm|own dm|g:000 dm|g:001 dm|g:010 dm|g:011 dm|g:100 dm|g:101 dm|g:110 dm|allOpen dm|off)
+  r3m-metropolis-wartime-0-59 (hidden 7) stored flag true hook 1 | served-derived flag: {"off":[0,1],"dm":[0,1]} | hook served on 4/48 | hook served where the served flag is false: 0 () | hook absent where the served flag is true and hooks served: 0 ()
