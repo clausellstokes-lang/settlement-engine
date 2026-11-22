@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T11:36:12Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T12:11:03Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -66,6 +66,11 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **POINT 97 IS THE LINE (the chair, 10:49Z): `lane/join-2026-11-14` = `1ec3e81d1`, holding this lane's `46339e5c7`.** The word to merge is given.
   - **The line's merge:** `1ec3e81d1` merged into the lane as `4e9e58f8f` (11:04Z; clean, no conflict, pushed).
   - **The registers:** at the line's side; the seven walkers 285/285 and wiring `--dry` delta 0.
+- **U6 MERGED into the lane as `674148b9c` (BU6 `e2a221ac6`, read whole; the chair's word of 10:49Z).**
+  - **The one conflict:** the hand list's ceiling, resolved as the union (`HAND_CEILING` 75 = the line's 74 + U6's row; 75 rows).
+  - **The doors:** the mutation-manifest row `3113d621b` (TOTALITY red before, 10/10 after); the lighting census `21edae3ae` (3758 → 3759, 34/34 after). Wiring `--dry` and writer-reach were unchanged, green.
+  - **THE DARK PROOF:** `confine-two.sh 1ec3e81d1 21edae3ae` is **EQUAL** (`all 07873739…`, 1245 places; 12:10:50Z).
+- **E76's MEASURE (BU7):** all 24 R3 births are bucket (i). The office person belongs to no other house, so the chain keeps the record's person, and the four "nobody" cases go away. Sent to the chair 12:01Z, with the proposed build: one fact, the fall-back removed, and U5-STALE.
 - **E70 (the chair, 10:26Z):**
   - **U7:** DONE at `lane/seat-10-2026-11-21-u7-wip` `fb0c732f9`, diff read whole. Covered: the person rule, `seatHolderFindings.js` widened (red first 6/6), the caption "Holds the seat of {form}.", `U7-OWNER-VIEW.md`. Two rulings asked at 11:2xZ:
     - (A) 3 lit births now name nobody;
