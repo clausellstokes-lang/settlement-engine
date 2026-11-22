@@ -42,11 +42,13 @@ import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
-import { powerPossessive } from './display/powerSentenceName.js';
+import { fillAgreement, powerNameWithArticle, powerPossessive } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
 import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
 import { COMMONER_RESENTMENTS_DM } from '../data/dailyLife/commonerResentmentsDm.js';
+import { COMMONER_RESENTMENTS } from '../data/dailyLife/commonerResentments.js';
+import { FOOD_CULTURE } from '../data/dailyLife/foodCulture.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -168,52 +170,39 @@ function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
+// ── food_culture (DAILY-1 LINES-2 § 1 and LINES-2b § 7, as the chair ruled at 18:47 and 18:56; DAILY-3 B3 E2) ──
+//
+// THE BRANCH is the food band (`capacity.food_production`), as today; a surplus place under a famine or a siege threat
+// takes `surplus.wanting` (BAR5-WORLD, LAW 5: a town in want is told what it still has). Today's chain sub-branches are
+// folded into their band: they printed a chain's own output and name. The branch's pool
+// (`data/dailyLife/foodCulture.js :: FOOD_CULTURE`) goes by THE ROUTE (`pickNameable`), keyed
+// `<name>::dailyLife.food_culture::<branch>`; what people eat is said from the food record by each line's declared atoms.
+// No line true: the EMPTY string (ruling 3).
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveFoodCulture(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  const food = ctx.capacities.capacities.food_production;
-  const foodChains = ctx.chains.filter(c => c.needKey === 'food_security');
-  const stableFood = foodChains.find(c => c.status === 'stable');
-  const disruptedFood = foodChains.find(c => c.status !== 'stable');
-
-  // BAR5-WORLD (2026-11-16; LAW 5): a town under a famine or a siege is not told its bread is plentiful: the surplus band
-  // takes its twin, true while the stores hold (the measure's rule 3: a town in want is told what it still has).
+  const band = ctx.capacities.capacities.food_production.band;
   const wanting = ctx.threats.some((t) => t.type === 'famine' || t.type === 'siege');
-  let text;
-  switch (food.band) {
-    case 'surplus':
-      text = wanting
-        ? 'The stores still hold: bread and broth reach most tables, and the households count what is left.'
-        : stableFood
-        ? `Bread, broth, and ${stableFood.outputs?.[0] || 'staple grains'} are plentiful; markets close their stalls without empty crates.`
-        : 'Bread and broth are plentiful; few households go to bed hungry.';
-      break;
-    case 'adequate':
-      text = 'Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets.';
-      break;
-    case 'strained':
-      text = disruptedFood
-        ? `Loaves shrink each month; ${disruptedFood.name.toLowerCase()} is ${disruptedFood.status}, and householders stretch what arrives.`
-        : 'Loaves shrink each month; householders stretch what they can.';
-      break;
-    case 'critical':
-      text = disruptedFood
-        ? `Rations are tight: ${disruptedFood.name.toLowerCase()} is ${disruptedFood.status}, and the poor eat watered stew.`
-        : 'Rations are tight; the poor eat watered stew and the well-off hoard quietly.';
-      break;
-    default:  // collapsed
-      text = 'Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived.';
-      break;
-  }
+  /** @type {keyof typeof FOOD_CULTURE} */
+  const branch = band === 'surplus' ? (wanting ? 'surplus.wanting' : 'surplus')
+    : band === 'adequate' || band === 'strained' || band === 'critical' ? band
+    : 'collapsed';
 
+  const house = houseFinder(s);
+  const eligible = filterDeclared(FOOD_CULTURE[branch], { facts: factsFor(s), poolId: `dailyLife.food_culture.${branch}`, surface: 'dailyLife' });
+  const text = sayDeclared(pickNameable(s, eligible, 'food_culture', branch, house), house, refs);
   refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
+  // The slot still cites its food-security chains (references, not text: the slot keeps explaining itself).
+  const foodChains = ctx.chains.filter(c => c.needKey === 'food_security');
   for (const c of foodChains) refs.push({ id: c.id, label: c.name, type: 'chain' });
 
-  return slot('food_culture', text, 'capacity.food_production + supply chains', refs);
+  return slot('food_culture', text, 'capacity.food_production + the food record, by the lines\' declared atoms (LINES-2)', refs);
 }
 
 // Owner decision (W6#4): labor/craft/transport are noise lenses — this
@@ -460,44 +449,63 @@ function deriveChildWarnings(s, ctx) {
   return slot('child_warnings', text, 'top threats by severity', refs);
 }
 
+// ── commoner_resentments (PUBLIC; DAILY-1 LINES-2 § 2 and LINES-2b § 5, as the chair ruled at 18:26, 18:47 and 18:56;
+// DAILY-3 B3 E2) ──
+//
+// One sentence for each grievance the record holds, in this order: `legitimacy` (public legitimacy strained or worse),
+// `food` (the food band strained or worse), `uprising` (a live popular-uprising tension, the vocabulary's `uprising`).
+// Chosen by NO crime fact (ruling 6: the crime clauses are the owner-only slot's, below) and naming no veiled power
+// (ruling 7). THE CALM RULE (ruling 8): no grievance held, nothing said; this slot has no calm pool, so the EMPTY string
+// (ruling 3). Each branch's pool (`data/dailyLife/commonerResentments.js`) goes by THE ROUTE (`pickNameable`), keyed
+// `<name>::dailyLife.commoner_resentments::<branch>`; `{gov}` is the government's label with its article.
+
+/** The bands of a grievance held (today's: strained or worse). */
+const GRIEVANCE_BANDS = Object.freeze(['strained', 'critical', 'collapsed']);
+/** What each grievance branch cites when it is said (the uprising branch cites no variable). @type {Readonly<Record<string, SlotReference>>} */
+const GRIEVANCE_REFS = Object.freeze({
+  legitimacy: Object.freeze({ id: 'var.public_legitimacy', label: 'Public legitimacy', type: 'system_variable' }),
+  food: Object.freeze({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' }),
+});
+
+/**
+ * A line's `{gov}` said: the government's label with its article (`display/powerSentenceName.js ::
+ * powerNameWithArticle`), its `{gov|one|many}` in the name's number (`fillAgreement`). A line that says it declares
+ * `government named`, so the label stands wherever it is said.
+ * @template {{ text: string }} T
+ * @param {ReadonlyArray<T>} lines @param {DailyLifeSettlement} s @returns {T[]}
+ */
+function withGovernment(lines, s) {
+  const gov = String(/** @type {{ powerStructure?: { government?: unknown } | null }} */ (s)?.powerStructure?.government ?? '');
+  return lines.map((l) => ({ ...l, text: fillAgreement(l.text, { gov }).replace(/\{gov\}/g, powerNameWithArticle(gov)) }));
+}
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveCommonerResentments(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  const causalState = ctx.causal;
-  const resentments = [];
+  const facts = factsFor(s);
+  /** @type {Array<keyof typeof COMMONER_RESENTMENTS>} */
+  const branches = [];
+  if (GRIEVANCE_BANDS.includes(ctx.causal.bands.public_legitimacy)) branches.push('legitimacy');
+  if (GRIEVANCE_BANDS.includes(ctx.capacities.capacities.food_production.band)) branches.push('food');
+  if (atomHolds('uprising', facts) === true) branches.push('uprising');
 
-  // DAILY-3 B3 E1 (ruling 6): the criminal-opportunity clauses are not said here; they are the owner-only slot's
-  // (`deriveCommonerResentmentsDm`, below). A shared read's public slot is chosen by no crime fact.
-
-  // Strained merchant wealth + active food chain pressure → grain prices
-  const food = ctx.capacities.capacities.food_production;
-  if (food.band === 'strained' || food.band === 'critical' || food.band === 'collapsed') {
-    resentments.push('rising bread prices and merchants who claim they cannot help it');
-    refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
+  const house = houseFinder(s);
+  const parts = [];
+  for (const branch of branches) {
+    const eligible = withGovernment(filterDeclared(COMMONER_RESENTMENTS[branch], { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
+    const said = sayDeclared(pickNameable(s, eligible, 'commoner_resentments', branch, house), house, refs);
+    if (!said) continue;
+    const cited = GRIEVANCE_REFS[branch];
+    if (cited) refs.push({ ...cited });
+    parts.push(said);
   }
 
-  // Low legitimacy → resent the council/governing body
-  if (causalState.bands.public_legitimacy === 'strained' || causalState.bands.public_legitimacy === 'critical' || causalState.bands.public_legitimacy === 'collapsed') {
-    resentments.push('the council\'s indifference to ordinary complaints');
-    refs.push({ id: 'var.public_legitimacy', label: 'Public legitimacy', type: 'system_variable' });
-  }
-
-  // Corruption condition or threat
-  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
-  if (corruption) {
-    resentments.push('the officials who keep their posts while honest folk pay the fines');
-    refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
-  }
-
-  const text = resentments.length
-    ? `Commoners resent ${resentments.join('; and ')}.`
-    : 'Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council\'s favorite tavern.';
-
-  return slot('commoner_resentments', text, 'food_production + public_legitimacy + corruption', refs);
+  return slot('commoner_resentments', parts.join(' '), 'public_legitimacy + food_production + popular_uprising, by the lines\' declared atoms (LINES-2)', refs);
 }
 
 // ── commoner_resentments_dm (OWNER-ONLY; LINES-2 § 2b and LINES-2b § 6, as the chair ruled at 18:26, 18:47 and 18:56) ──
