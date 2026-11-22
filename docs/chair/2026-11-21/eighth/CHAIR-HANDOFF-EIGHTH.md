@@ -903,6 +903,40 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   add f2 before its report; STACK-98 gets it with its base. A seat's rule 8 also runs `tests/copy`, `tests/store`,
   `tests/architecture`, `tests/docs` and the files directly under `tests/domain/` whole (told to DAILY-3; to each
   other seat at its GO).
+- E68 · FORTUNE'S SECOND MERIT: `lastingSizeOf` READS `tier` ALONE (2026-11-22 10:51 UTC; FORTUNE-7's U7 merged at 3950570e8: state D byte for
+  byte, confinement 525 and 720, first paint raw +0, the worker +431 named for the owner). The builder's
+  `tier ?? config.settType` widened writer-reach's `settType on _config` to the Foundry export: RULED (B): the
+  fallback serves no law-2 record (900 of 900 carry `tier`): fail closed and pinned; state D re-read equal;
+  writer-reach's report must show no widening, else stop.
+- E69 · THE VEIL's UNIT (viii) BUILT; ITS FIRST PAINT RULED "NO RISE" (2026-11-22 10:51 UTC; VEIL-32's builder at e716c84d6: `crimeTypes` withheld
+  always in 212 and its twin; the ONE reader in `pageRederive.js`, wired at both gallery doors and the import's
+  save; the arm at the cure: half 1 0 of 6,528, half 2 0 of 92, controls 0, the hook 0; the seat read the diff whole
+  with 212 and the registry beside it: no fault). First paint's raw figure unchanged, seven of eight chunks
+  byte-equal, the entry chunk byte-equal once the lazy chunks' content hashes are normalised: that identity is the
+  proof; gzip's +20 beside Brotli's -105 is hash-name entropy. It merges after the seat's own re-runs, the new pool
+  and both gates.
+- E70 · WHO RULES: U6 DONE AND U7 BUILT; SIX RULINGS (2026-11-22 10:51 UTC). U6 (c1ffee696): the final-record pass
+  `settleSeatHolderToRecord` after `settleArcaneToPractitioners`; W1 on 63 of 63 rows, W3 on 78 of 78, W2 on no
+  birth in 150 (its planted pair proves it); 0 differences under law 1; fault (b) closed with a guard. LEFT IN U6: a
+  totality test for the pass's regex copies of the standing ladder (a reworded ladder line must red, not silently
+  append); the measure of `regenSection('npcs')` (does it re-run the settle passes?); the bar at 150 a size (4 of 25
+  is too small a sample). U7 (0b3ed8802, `powerStrata.js`): (1) WHERE THE HOLDER STANDS APART FROM THE FORM, THE
+  CHAIN'S FACTION AND THE POWER TAB'S RULER ARE THE HOLDER, AT BIRTH TOO: 112 OF 160 LIT BIRTHS: INTENDED, it is the
+  law lit; TOLD TO THE OWNER the same hour with an example, and three places dark beside lit come to his eye; (2) the
+  chain's person is always of the holder's house (the record's named person where of that house, else the house's
+  first); the stale record person after a kept-form transfer is the transfer's own fault: its readers named; (3) the
+  manifest widened to `coherence/seatHolderFindings.js` (it raised a false finding on the six); (4) the ruler
+  card's caption "Holds the seat of {form}." accepted; a new governance-paragraph sentence DROPPED for the first
+  deploy. THE WORD TO MERGE both was given at 10:49, after point 97 became the line.
+- E71 · THE LANDING GATE'S WHOLE-SUITE STEP IS CUT DOWN THE HOUR IT WAS MEASURED (it amends E67; 2026-11-22 10:51 UTC). STACK-97 measured: the suite
+  is 3,758 test files; what a landing's d, e and f leave unrun is about 2,264: about THREE HOURS MORE on a four-core
+  landing machine, while CI runs the same suite on the pushed tip in under an hour and tells the chair the same
+  thing sooner. SO: f2 IS THE FOUR DIRECTORIES OF WHOLE-TREE RATCHETS ONLY (`tests/copy`, `tests/store`,
+  `tests/architecture`, `tests/docs`: 224 files: the class that bit at point 95); THE WHOLE SUITE STAYS CI's, read
+  by name within the hour of every push, each new red owned and listed the same hour. The premise-move class (a
+  seeded town changing under a test nobody named: `bar7OrderUnderTheLaw`) is caught by CI, not by the gate: said
+  plainly. STACK-97 was stopped in its f2 and stood down; STACK-98 has the cut-down f2. THE CHAIR HAD TOLD THE OWNER
+  "a landing runs the entire test suite": CORRECTED TO HIM the same hour.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1342,6 +1376,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    added to 4b (E67); STACK-97 in step f (139 of about 1,190 files at 09:40), told to add f2. STACK-98 and
    REVIEW-VEIL-15 idle by design. No session failed. CI ON THE LINE read by name (E67). THE OWNER'S TWO WORDS OF THE
    HOUR are in section 1 (six children at a time; the shared page's empty sections: E64, E66). NET 11 armed for 10:55.
+- 2026-11-22 10:51 UTC · POINT 97 IS THE LINE: `lane/join-2026-11-14` = 1ec3e81d1 on origin (10:48:49 by the push log): STACK-97's tip b8b2629b2
+   joined by the merge ed7a43ab0 (`git diff --stat` against the gated tip: the landing rows alone), the row and the
+   gate's sentence 1ec3e81d1. STACK-97's report, read whole: two register conflicts (the line's side, re-taken);
+   lint whole 3 red of 3,354 after the doors; the checks clean; `tests/build` 15 red, all listed; step f 1,203 files,
+   26 red: 23 listed and the three already the line's own; sizes: first paint 1,183,904 / 376,718 / 316,242; the
+   worker 2,698,788; the engine chunk 927,681; `raised.py`: no ceiling or budget moved. LINE-NOW at point 97
+   (459ee0c0e). THE TIP SENT: STACK-98 ("BASE 1ec3e81d1": the landing place is its own now; fortune as point 98),
+   SEAT-10 (the word to merge U6 and U7; rule 8 widened; "SEAT-B"), DAILY-3 (L8 to L12 open), FORTUNE-7. E68 to E71.
+   CI's run on 1ec3e81d1 is to be read by name (net 11).
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
