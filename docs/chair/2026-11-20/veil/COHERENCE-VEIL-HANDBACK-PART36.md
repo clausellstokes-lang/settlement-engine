@@ -18,7 +18,11 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   verify 45 / 0 differ. AT 3712b2469 (src, supabase, tests = 632968087): GATE-1 4 of 92 at every gated setting, both reads, twin =
   server (4/4, raw 11/11), controls 0, 7 LOWER BY RULE (the same seven); GATE-2 20 of 40; against the rule 0: EQUAL to PART 35.
   Typecheck 167/167, eslint 0, walkers + manifest 0, arms Tell3+4+5+8 0, --check 0. Sent to the chair 20:09. (`gates rc=1` is the
-  gate's own RED exit: 4 of 92 remain by design until R3.) The chain's rest: PENDING.
+  gate's own RED exit: 4 of 92 remain by design until R3.) THE CHAIN'S REST (END 20:58): sv + hand rows + born 0, harnesses 0, the
+  R3 gate 0, acceptance 40 PASS; `tests/lint` WHOLE 16 files / 22 tests failed of 3,267 (the sixteen standing by name: chainPrintSites,
+  domainAnyCastBaseline, factLayers, moduleScopeCwdRatchet, negativeAssertionAnchor, noLegacyFactionReaders, observedShapeReaders,
+  presumedThings, presumptionClasses, proseDrawnAnchors, proseWiringCensus, seedLoopTotality, slugifyIdiomBaseline,
+  sovereigntyLightingContract, styleLaw, writerReach): EQUAL to PART 35's count. (0) IS DONE.
 - (1) R4-IDS: PART ONE IN (the chair 19:34): `lane/veil-34-2026-11-22-r4ids-wip` at 24a6f7ef5; `out/v34/r4ids/R4IDS-MEASURE.md`
   read once; `tests/security/galleryVeilIds.pglite.test.js` and `tests/security/personIdBijection.shared.mjs` READ WHOLE by this
   seat (20:2x). Finding: no BORN served id spells what a read hides (0 on 6,528 pages; withheld faces are born `npc_veiled_`); the
