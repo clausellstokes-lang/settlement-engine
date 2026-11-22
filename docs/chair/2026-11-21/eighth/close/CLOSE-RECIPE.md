@@ -36,7 +36,39 @@ Printed: 3 files changed, 3 insertions(+), 3 deletions(-). Proof: `birthConfig({
 | comments: `densityCreateBoundary.js` (the clamp's two paragraphs, "a build whose dial is dark"), `fortuneLaw.js` header property 3, `seatLaw.js` header | prose only | read once at the flip; the flipped run (unit 4) names every test that pins one |
 (The flipped run's class (a) list is the complete set: see `FLIP-CENSUS.md` when written.)
 
-## 2. THE FLIPPED RUN (item (3)) — see `FLIP-CENSUS.md` (unit 4)
+## 2. THE FLIP'S CENSUS (item (3); E90: THE CLOSE'S ALONE, run ONCE on the final tree): THE RECIPE THAT RE-RUNS IT
+REHEARSED on the lit scratch e987c3e36 (2026-11-22, 13:34 UTC onward); its classed tables are the reference
+(`census/lit-<part>-classed.tsv`); `FLIP-CENSUS.md` is its reading. THE FINAL RUN is on the line with SEAT-B, FORTUNE-B,
+JOIN and U8's cure landed, and step 1's three dials flipped (a scratch ref of the line, never the line itself).
+THE DARK LIST is `ci/RED-AT-LINE.tsv` on the chair's branch at that tip (CI's whole run on the line): no dark half is run.
+
+1. THE TREE: `git worktree add -b lane/<seat>-final-lit-scratch-<date> <dir> <the line's tip>`; `ln -s <main
+   checkout>/node_modules <dir>/node_modules`; step 1's three `sed` lines; `git diff --stat` shows exactly 3 files and
+   3 lines; commit; push the scratch ref (so other seats can read it).
+2. THE RED LIST: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv > <scratch>/RED-AT-LINE.now.tsv`.
+3. THE PARTS, ONE AT A TIME through the gate mutex, the JSON reporter on each: `sh census/run-parts.sh <dir> <tag>`
+   (edit its `O=` line to your scratch first). Its order: `gen` (tests/generators, tests/data, tests/property),
+   `domain` (tests/domain), one `npm run build`, `build` (tests/build with VERIFY_DIST=1), `lint` (tests/lint), `ui`
+   (tests/components, tests/ui, tests/pdf, tests/store, tests/lib), `rest` (every other directory under tests/ and the
+   root test files). `<scratch>/u4/<tag>/progress.txt` gets one line a part with its exit. REHEARSED TIMES on this box
+   (4 cores, `--maxWorkers=3`): gen 43 min, domain 34 min, build 4 min, lint about 20 min, ui and rest: see FLIP-CENSUS.md.
+4. BY NAME: for each part `node census/match.mjs <part>.json RED-AT-LINE.now.tsv > <part>-match.tsv` (ON = on the
+   list, NEW = not); `node census/dump.mjs <part>.json <part>-match.tsv > <part>-new.md` (each NEW red with its first
+   message lines).
+5. CLASS: one read-only helper (the Agent tool) per part's `-new.md`, briefed by `census/CLASSIFY-BRIEF.md` WHOLE (its
+   classes (a) to (d), its kinds, the lanes' own lists beside it: replace the trees' paths with the final tree and its
+   dark twin, the line's tip); its output `<part>-classed.tsv` with the header line. EVERY (d) and (d?) IS VERIFIED BY
+   THE SEAT BY RUN before it is called a fault: the shape used here (`census/dualhat-probe.mjs`,
+   `census/claimant-probe.mjs`): the same births on the dark twin, seat-alone, fortune-alone and both (two `git archive`
+   copies of the dark twin, each with one law's dial lines flipped, checked by `diff -r`), so the law that causes it is
+   named. A (d) goes to the chair AT ONCE.
+6. DIFF AGAINST THE REHEARSAL: `node census/diff-classed.mjs census/lit-<part>-classed.tsv <part>-classed.tsv`: NEW rows
+   (red now, not in the rehearsal), GONE rows (cured or no longer moved), CHANGED rows (class or kind differs). Then tick
+   each lane's PAPER FLIP LIST (E90 (3)): a move a list expected is ticked; a move NO list expected is a SURPRISE, read by
+   cause before anything is re-recorded.
+7. SIZES: from the `build` part's log (`static closure = … bytes`, the two `transfer = … B` lines, `worker-….js is … B`)
+   and `ls dist/assets/engine-*.js`; beside LINE-NOW's figures at the tip.
+
 ## 3. REGISTERS BY THEIR DOORS (item (4)) — not yet rehearsed lit
 ## 4. THE EDGE BUNDLES (item (5)) — not yet rehearsed
 ## 5. FOR THE OWNER'S HAND AND EYE (item (5)) — partly rehearsed

@@ -1,0 +1,16 @@
+# CLASSIFY THE FLIP'S REDS (the census's classifier, committed by CLOSE-1 for E90's re-runs; a read-only helper; READ ONLY: run no test, write only the one output file named below)
+
+The settlement-engine repo has two birth laws, WHO RULES (the seat law) and FORTUNE, built DARK. CLOSE-1 flipped their three dials on a scratch tree (`/home/user/wt/lit`, the lit tree; the dark twin is `/home/user/wt/join`, identical except the three dial lines in `src/domain/seat/seatLaw.js`, `src/domain/seat/seatCircumstances.js`, `src/domain/fortune/fortuneLaw.js`), and ran the tests. The input file lists every test that is RED on the lit tree and NOT on the working line's known-red list: file, full title, first lines of its failure message.
+
+For EACH red, read the failing test's own source (in `/home/user/wt/lit/tests/...`: the `it(...)` with that title and what it asserts) and decide ONE class:
+- (a) PIN: a stored value, a pinned sentence/anchor/rank/count on a born town, a census or a born-fixture row that the flip moves BY DESIGN (the test pins what a law-1 birth produced, or pins the dial's dark default). Its cure is a re-record at the flip ("its door": if the test or a script names a refreeze command or env var, quote it; else "re-pin in the test"). One line of cause.
+- (b) GOLDEN: a golden master / reference corpus / owner-signed digest. Name it and say in plain words what moved.
+- (c) SIZE: a byte, size or budget figure.
+- (d) TRUE FAULT CANDIDATE: a GUARD that the lit laws really break, i.e. the test asserts a truth or a safety property that should hold under ANY law (no contradiction on the page, no withheld power named on a shared read, no sentence that lies about the record, an invariant), and the lit birth violates it. Give the evidence: the assertion and the offending value from the message. Say which law most plausibly causes it (seat, fortune, or both).
+Also mark for each red whether it is ALREADY NAMED by a lane's own flip census: the seat lane's list (`CENSUS-LISTS.md` beside this brief) or the fortune lane's (`FORTUNE-LIGHTING-WORKLIST.md` beside this brief, section B1). A red named by neither list is "JOIN" (the interaction of the two laws, or a test neither lane ran).
+
+Rules: read the test source before you class (never from the title alone). If you cannot tell (a) from (d), write (d?) with your reason: CLOSE-1 verifies those. Keep your own context small: grep the test file for the title, read that test and its helpers only.
+
+KIND, for every row: STORED PIN (a stored fixture, hash or count; name its door if the test or a script names one), BORN ANCHOR (a value or a liveness/positive anchor pinned on a born town), PREMISE (a seed chosen to meet a case that no longer meets it: re-pick or re-key the seed), DIAL PIN (pins a dial's dark default, an absent law marker, or the darkness text of a GENERATION_LAWS row), GOLDEN (owner) (a golden master, reference corpus or owner-signed digest: the owner's signing, never re-recorded by a seat), GUARD (class (d) or (d?) only).
+
+OUTPUT: one TSV file at the path you are given, WITH a header line `file	title	class	kind	lane-list	cause`, one row a red: file, title (first 120 chars), class, kind, lane-list (SEAT, FORTUNE, JOIN), one-line cause or evidence. Your final message: at most 200 words: the counts by class and by lane-list, and every (d) or (d?) row in full.
