@@ -483,8 +483,13 @@ function keepsForm(winner, form, circumstances) {
  * would be two rows of one name); `recentConflict` says the seat changed hands without a reshaping, naming the taker and
  * the form. Elsewhere the form becomes the winner's own, exactly today's path. On both paths every edge on the seat whose
  * narrative is the "power behind" sentence for ANOTHER power is RETIRED to a competitive edge naming both powers (the
- * old holder lost the seat), so R1 reads one taker. No key is added; no edge is deleted or added beyond today's; no card
- * is touched (the person after a coup is named, not cured: RULINGS (9) 2). Absent or old law: byte-identical.
+ * old holder lost the seat), so R1 reads one taker. No key is added; no edge is deleted or added beyond today's.
+ * ⭐ U5-STALE (the chair's E77): on the KEPT form, and there alone, the office HAT moves. The hat is the form's rank-1
+ * membership and the office word on the wearer's `role`. Every card wearing it loses it (the membership goes; the role
+ * becomes the card's house title); the winner's first (its rank-1 card, not ousted) takes it (that membership, and the
+ * old wearer's office word where its role carried one). So the seat's candidates (`dossier/seatHolder.js`), the chain,
+ * the seat-house face and the card's two hats all read the holder's person. A winner with no first leaves the hat unworn:
+ * the seat then reads unfilled. No other card field moves (power, influence, the prose). Absent or old law: byte-identical.
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
@@ -669,9 +674,22 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     legitimacyAfter: { score: publicLegitimacy.score, label: publicLegitimacy.label },
   };
 
+  // U5-STALE: the kept form's hat moves to the winner's first (see the header)
+  const cards = kept && Array.isArray(settlement.npcs) ? settlement.npcs : null;
+  /** @type {(n: any, p: string) => boolean} */
+  const wears = (n, p) => Array.isArray(n?.memberships) && n.memberships.some((/** @type {any} */ m) => m?.power === p && m.rank === 1);
+  const heir = cards ? cards.find(n => wears(n, winnerName) && !n.ousted) : null;
+  const worn = cards ? cards.filter(n => n !== heir && wears(n, fromGovernment)) : [];
+  const hat = worn.length ? worn[0].memberships.find((/** @type {any} */ m) => m?.power === fromGovernment && m.rank === 1) : null;
+  const office = worn.length && worn[0].title && worn[0].role !== worn[0].title ? worn[0].role : null;
+  const npcs = cards && hat ? cards.map(n => (worn.includes(n)
+    ? { ...n, ...(n.title ? { role: n.title } : {}), memberships: n.memberships.filter((/** @type {any} */ m) => m?.power !== fromGovernment) }
+    : n === heir && !wears(n, fromGovernment) ? { ...n, ...(office ? { role: office } : {}), memberships: [...n.memberships, { ...hat }] } : n)) : null;
+
   return {
     settlement: {
       ...settlement,
+      ...(npcs ? { npcs } : {}),
       powerStructure: {
         ...ps,
         factions: rosterFactions,

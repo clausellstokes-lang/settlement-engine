@@ -76,7 +76,11 @@ import { derivePowerStrata, deciderOf, outrankingRivalOf, rulingChainOf } from '
 import { seatHolderFindings } from '../../../src/domain/coherence/seatHolderFindings.js';
 import { ThePowers } from '../../../src/components/new/tabs/power/PowerStrata.jsx';
 import { ladderFactionKeyOf } from '../../../src/domain/townMap/ladderRead.js';
-import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
+import { seatCandidatesOf, seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
+import { seatHouseName } from '../../../src/domain/dossier/powerSupport.js';
+import { cardHatsOf } from '../../../src/domain/people/cardPowers.js';
+import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
+import { expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 await loadGenerationLawPayloads();
@@ -157,71 +161,97 @@ const veiled = (s, holder, mark) => ({
   },
 });
 
-describe('1. RED FIRST: the probe\'s six kept-form transfers name the holder\'s person', () => {
+describe('1. RED FIRST: the six kept-form transfers, through U5-STALE: every surface names the holder\'s person', () => {
   // THE SIX (the probe's kept-form transfers whose chain named the old house's person), every word a literal. One plain
-  // test runs every row through collectSeedFailures (the lighting walker parks a row-parameter `each`; seedLoopTotality)
-  it('the six: each form kept, the seat passed to Merchant Guilds, the chain names the holder\'s first by name', () => {
+  // test runs every row through collectSeedFailures (the lighting walker parks a row-parameter `each`; seedLoopTotality).
+  // U5-STALE (the chair's E77): the transfer moves the office hat (the form's rank-1 membership and the office word) from
+  // the old house's person to the holder's first, so the record's ONE hat-wearer is the holder's, and every surface that
+  // reads the hat agrees: the chain, the seat's candidates (the Institutions seat-house face), the cards, the tonight sheet.
+  it('the six: each form kept, the seat passed to Merchant Guilds, the hat on the holder\'s first, named by every surface', () => {
     build(true);
     expectNoSeedFailures(collectSeedFailures([
-      { settType: 'town', seed: 'u7p-town-8', form: 'Town Mayor', oldHouse: 'Craft Guilds', oldPerson: 'Judith Weber', person: 'Felix Naumann' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-15', form: 'Democratic assembly', oldHouse: 'The Merchant Bloc', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-21', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-26', form: 'Grand Council', oldHouse: 'The Commercial Circle', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-27', form: 'Grand Council', oldHouse: 'The Guild Alliance', oldPerson: 'Conrad Brandt', person: 'Katharina Rosenfeld' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-28', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Josef Frank', person: 'Notburga Weber' },
-    ], ({ settType, seed, form, oldHouse, oldPerson, person }) => {
+      { settType: 'town', seed: 'u7p-town-8', form: 'Town Mayor', oldHouse: 'Craft Guilds', oldPerson: 'Judith Weber', oldTitle: 'the smelt master', person: 'Felix Naumann', hats: 'the senior guild master and Mayor' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-15', form: 'Democratic assembly', oldHouse: 'The Merchant Bloc', oldPerson: 'Dietrich Engel', oldTitle: 'the exchange master', person: 'Josefine Wolf', hats: 'the senior guild master and Speaker of the Assembly' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-21', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Dietmar Uhl', oldTitle: 'the exchange master', person: 'Christine Jäger', hats: 'the senior guild master and Lord Mayor' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-26', form: 'Grand Council', oldHouse: 'The Commercial Circle', oldPerson: 'Brunhild Steiner', oldTitle: 'the exchange master', person: 'Gertrude Moser', hats: 'the senior guild master and Lord Mayor' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-27', form: 'Grand Council', oldHouse: 'The Guild Alliance', oldPerson: 'Conrad Brandt', oldTitle: 'the exchange master', person: 'Katharina Rosenfeld', hats: 'the senior guild master and Lord Mayor' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-28', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Josef Frank', oldTitle: 'the exchange master', person: 'Notburga Weber', hats: 'the senior guild master and Lord Mayor' },
+    ], ({ settType, seed, form, oldHouse, oldPerson, oldTitle, person, hats }) => {
       const born = bear(settType, seed);
       expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born under the seat law`).toBe(2);
       expect(holderOf(born, OWNER).holderName, `${seed}: the holder before the transfer`).toBe(oldHouse);
+      expect(holderOf(born, OWNER).person?.name, `${seed}: the hat-wearer before the transfer`).toBe(oldPerson);
       const after = dmTransfer(born, seed, TAKER);
       // the kept form: the governing row stays, the holder moves
       expect(governingFactionOf(after)?.faction, `${seed}: the form is kept`).toBe(form);
       expect(holderOf(after, OWNER).holderName, `${seed}: the holder after the transfer (owner)`).toBe(TAKER);
       expect(holderOf(after, READER).holderName, `${seed}: the holder after the transfer (reader)`).toBe(TAKER);
-
-      // today's chain: the old house's person, of the old house and not of the holder's
-      const was = today(() => rulingChainOf(after));
-      expect(was.npc?.name, `${seed}: today's chain names the old house's person`).toBe(oldPerson);
-      expect(housesOf(after, oldPerson), `${seed}: today's person is of the old house`).toContain(oldHouse);
-      expectAbsentWithAnchor(housesOf(after, oldPerson), TAKER, oldHouse, `${seed}: today's person holds no place in the holder's house`);
-
-      // the cure: the form stays the power; the holder is the faction; its person is the holder's, by a literal
+      const card = (name) => (after.npcs || []).find((n) => n?.name === name);
+      // the record's one hat-wearer is the holder's first
+      expect(holderOf(after, OWNER).person?.name, `${seed}: the record's hat-wearer`).toBe(person);
+      expect(rankIn(card(person), TAKER), `${seed}: the hat-wearer is the holder's first`).toBe(1);
+      expect(rankIn(card(person), form), `${seed}: the hat-wearer holds the form's first place`).toBe(1);
+      expect(cardHatsOf(card(person)), `${seed}: the holder's first wears the office`).toBe(hats);
+      expect(cardHatsOf(card(oldPerson)), `${seed}: the old house's person wears the house title alone`).toBe(oldTitle);
+      // anchored: the born record holds the old person in the form's first place (asserted above), so the after list's lacking them is the transfer's
+      expectPresentThenAbsent(seatCandidatesOf(born).map((n) => n.name), seatCandidatesOf(after).map((n) => n.name), oldPerson, `${seed}: the old house's person leaves the seat`);
+      // the surfaces
       const chain = rulingChainOf(after);
       expect(chain.npc?.name, `${seed}: the chain names the holder's person`).toBe(person);
       expect(chain.power?.name, `${seed}: the chain's power is the form (the office)`).toBe(form);
       expect(chain.faction?.name, `${seed}: the chain's faction is the holder`).toBe(TAKER);
-      expect(housesOf(after, person), `${seed}: the person is of the holder's house`).toContain(TAKER);
-      expect(rankIn((after.npcs || []).find((n) => n?.name === person), TAKER), `${seed}: the person is the holder's first`).toBe(1);
-      // anchored: today's chain names the old person (asserted above), so the before list holds it
-      expectPresentThenAbsent([was.npc?.name], [chain.npc?.name], oldPerson, `${seed}: the old house's person leaves the chain`);
-      // the owner's own document reads the same holder here
       expect(rulingChainOf(after, OWNER).npc?.name, `${seed}: the owner's chain`).toBe(person);
-      // THE POWERS: the ruler entry is the holder
+      expect(seatHouseFaceOf(after, seatHouseName(after.institutions || []))?.name, `${seed}: the Institutions seat-house face`).toBe(person);
+      expect(composeTonightSheet(after).people.find((p) => p.why === 'seat')?.name, `${seed}: the tonight sheet's seat row`).toBe(person);
       expect(derivePowerStrata(after).powers.find((p) => p.role === 'ruler')?.name, `${seed}: the ruler entry is the holder`).toBe(TAKER);
     }), 'the six kept-form transfers');
   }, 300_000);
 });
 
-describe('1b. the person is ALWAYS of the holder\'s house, at birth too (the chair\'s E70, item 2)', () => {
-  it('u7p-town-2 born lit, the holder by kind (R3): the faction is the holder, the person the holder\'s first, Ulrike Goldstein', () => {
+describe('1b. the 24 lit births held by kind (R3) whose person moved under E70 do not move: the page reads the hat-wearer', () => {
+  // The chair's E76 measure: every one of the 24 is bucket (i), the hat-wearer in no house but the form. Under E77 the
+  // page reads that one fact. ONE differential: the chain's person on the lit record is the law-1 read of the same record.
+  it('the 24: the chain names the record\'s hat-wearer, as law 1 reads it; the four that named nobody name their office person', () => {
     build(true);
-    const born = bear('town', 'u7p-town-2');
-    const held = holderOf(born, READER);
-    expect(held.rule, 'the holder by kind').toBe('R3');
-    expect(held.holderName, 'the holder').toBe(TAKER);
-    const was = today(() => rulingChainOf(born));
-    expect(was.npc?.name, 'today\'s chain names the form\'s seat-holder').toBe('Beatrix Eisenberg');
-    const chain = rulingChainOf(born);
-    expect(chain.faction?.name, 'the chain\'s faction is the holder').toBe(TAKER);
-    expect(chain.npc?.name, 'the chain names the holder\'s first').toBe('Ulrike Goldstein');
-    expect(rankIn((born.npcs || []).find((n) => n?.name === 'Ulrike Goldstein'), TAKER), 'the person is the holder\'s first').toBe(1);
-    // anchored: today's chain names Beatrix Eisenberg (asserted above), so the before list holds her
-    expectPresentThenAbsent([was.npc?.name], [chain.npc?.name], 'Beatrix Eisenberg', 'the form\'s seat-holder leaves the chain');
-  }, 60_000);
+    expectNoSeedFailures(collectSeedFailures([
+      { settType: 'town', seed: 'u7p-town-2', office: 'Beatrix Eisenberg' },
+      { settType: 'town', seed: 'u7p-town-25', office: 'Oskar Moser' },
+      { settType: 'town', seed: 'u7p-town-26', office: 'Adalbero Schulz' },
+      { settType: 'town', seed: 'u7p-town-30', office: 'Richardis Braun' },
+      { settType: 'town', seed: 'u7p-town-39', office: 'Ottilia Vogel' },
+      { settType: 'city', seed: 'u7p-city-2', office: 'Luise Braun' },
+      { settType: 'city', seed: 'u7p-city-4', office: 'Gunter Vogel' },
+      { settType: 'city', seed: 'u7p-city-5', office: 'Oskar Forster' },
+      { settType: 'city', seed: 'u7p-city-7', office: 'Andreas Gärtner' },
+      { settType: 'city', seed: 'u7p-city-8', office: 'Oda Uhl' },
+      { settType: 'city', seed: 'u7p-city-9', office: 'Cunigund Schmitt' },
+      { settType: 'city', seed: 'u7p-city-10', office: 'Liutbirg Brandt' },
+      { settType: 'city', seed: 'u7p-city-11', office: 'Benedikt Fischer' },
+      { settType: 'city', seed: 'u7p-city-12', office: 'Cyriak Lange' },
+      { settType: 'city', seed: 'u7p-city-18', office: 'Xavier Wenzel' },
+      { settType: 'city', seed: 'u7p-city-21', office: 'Diemut Vogt' },
+      { settType: 'city', seed: 'u7p-city-25', office: 'Elfriede Forster' },
+      { settType: 'city', seed: 'u7p-city-29', office: 'Josef Kern' },
+      { settType: 'city', seed: 'u7p-city-32', office: 'Uto Lenz' },
+      { settType: 'city', seed: 'u7p-city-33', office: 'Simon Huber' },
+      { settType: 'city', seed: 'u7p-city-34', office: 'Fastrada Steinberg' },
+      { settType: 'city', seed: 'u7p-city-35', office: 'Diemut Krause' },
+      { settType: 'city', seed: 'u7p-city-38', office: 'Walburga Jäger' },
+      { settType: 'city', seed: 'u7p-city-39', office: 'Judith Keller' },
+    ], ({ settType, seed, office }) => {
+      const born = bear(settType, seed);
+      expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born lit`).toBe(2);
+      expect(holderOf(born, READER).rule, `${seed}: the holder by kind`).toBe('R3');
+      const chain = rulingChainOf(born);
+      expect(chain.faction?.name, `${seed}: the chain's faction is the holder`).toBe(TAKER);
+      expect(chain.npc?.name, `${seed}: the chain names the hat-wearer`).toBe(office);
+      expect(JSON.stringify(chain.npc), `${seed}: the person is the law-1 read`).toBe(JSON.stringify(rulingChainOf(withLaw(born, null)).npc));
+    }), 'the 24 R3 births');
+  }, 300_000);
 });
 
 describe('2. a veiled holder: the reads to a reader are today\'s', () => {
-  it('u7p-town-8, the Merchant Guilds hidden, then criminal: the reader reads today\'s chain, Judith Weber', () => {
+  it('u7p-town-8, the Merchant Guilds hidden, then criminal: the reader reads today\'s chain (the record\'s hat-wearer, Felix Naumann, under the form)', () => {
     build(true);
     const after = dmTransfer(bear('town', 'u7p-town-8'), 'u7p-town-8', TAKER);
     expectNoSeedFailures(collectSeedFailures([
@@ -233,7 +263,7 @@ describe('2. a veiled holder: the reads to a reader are today\'s', () => {
       expect(holderOf(town, READER).holderName, `${kind}: the reader is refused the holder`).toBeNull();
       expect(reads(town), `${kind}: the reader's four reads are today's`).toBe(today(() => reads(town)));
       expect(reads(town, READER), `${kind}: the reader's, named`).toBe(today(() => reads(town, READER)));
-      expect(rulingChainOf(town).npc?.name, `${kind}: the reader's chain`).toBe('Judith Weber');
+      expect(rulingChainOf(town).npc?.name, `${kind}: the reader's chain names the record's hat-wearer`).toBe('Felix Naumann');
       expect(rulingChainOf(town).faction?.name, `${kind}: the reader's faction`).toBe('Town Mayor');
       // anchored: the owner's chain names the holder (the before list), so the reader's lacking it is the veil's work
       expectPresentThenAbsent([rulingChainOf(town, OWNER).faction?.name], [rulingChainOf(town).faction?.name], TAKER, `${kind}: the reader is never told the veiled holder`);
@@ -286,28 +316,54 @@ describe('4. the holder is the form\'s own row: unchanged', () => {
   }, 60_000);
 });
 
-describe('5. the self-check reads the holder: no false finding on the six, and the converse still raises it', () => {
-  it('the six after the transfer: no finding; the holder\'s rung named for the old house\'s person: seat_outside_governing_faction', () => {
+describe('5. the self-check: no false finding on the six, and a person truly outside the seat\'s house still raises it', () => {
+  it('the six after the transfer: no finding; u7p-town-1 (R4), the seat\'s top rung named for a person outside it: seat_outside_governing_faction', () => {
     build(true);
     expectNoSeedFailures(collectSeedFailures([
-      { settType: 'town', seed: 'u7p-town-8', oldPerson: 'Judith Weber', person: 'Felix Naumann' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-15', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-21', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-26', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-27', oldPerson: 'Conrad Brandt', person: 'Katharina Rosenfeld' },
-      { settType: 'metropolis', seed: 'u7p-metropolis-28', oldPerson: 'Josef Frank', person: 'Notburga Weber' },
-    ], ({ settType, seed, oldPerson, person }) => {
+      { settType: 'town', seed: 'u7p-town-8', person: 'Felix Naumann' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-15', person: 'Josefine Wolf' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-21', person: 'Christine Jäger' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-26', person: 'Gertrude Moser' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-27', person: 'Katharina Rosenfeld' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-28', person: 'Notburga Weber' },
+    ], ({ settType, seed, person }) => {
       const after = dmTransfer(bear(settType, seed), seed, TAKER);
       expect(rulingChainOf(after).npc?.name, `${seed}: the chain's person`).toBe(person);
-      expect(seatHolderFindings(after).map((f) => f.code), `${seed}: the holder's own person raises no finding`).toEqual([]);
-      // the converse: the holder's top ladder rung names the old house's person, who is not of the holder's house
-      const holderRow = after.powerStructure.factions.find((f) => f?.faction === TAKER);
-      const laddered = { ...after, npcLadder: { factions: { [ladderFactionKeyOf(holderRow)]: { rungs: [{ npcId: 'u7.rung', name: oldPerson, standing: 1 }] } } } };
-      expect(rulingChainOf(laddered).npc?.name, `${seed}: the converse chain names the rung`).toBe(oldPerson);
-      expect(seatHolderFindings(laddered), `${seed}: a person outside the holder's house still raises it`)
-        .toEqual([{ code: 'seat_outside_governing_faction', detail: `${oldPerson} is not of Merchant Guilds` }]);
+      expect(seatHolderFindings(after).map((f) => f.code), `${seed}: the hat-wearer raises no finding`).toEqual([]);
     }), 'the six, the self-check');
+    // the converse: a lit place whose office holds itself (no holder apart), its top ladder rung named for a person of
+    // another house only, who is not of the seat's house
+    const town = bear('town', 'u7p-town-1');
+    expect(holderOf(town, OWNER).holder, 'the office holds itself').toBeNull();
+    expect(housesOf(town, 'Martin Schäfer'), 'the rung\'s person is of the Merchant Guilds alone').toEqual([TAKER]);
+    const laddered = { ...town, npcLadder: { factions: { [ladderFactionKeyOf(governingFactionOf(town))]: { rungs: [{ npcId: 'u7.rung', name: 'Martin Schäfer', standing: 1 }] } } } };
+    expect(rulingChainOf(laddered).npc?.name, 'the converse chain names the rung').toBe('Martin Schäfer');
+    expect(seatHolderFindings(laddered).filter((f) => f.code === 'seat_outside_governing_faction'), 'a person outside the seat\'s house still raises it')
+      .toEqual([{ code: 'seat_outside_governing_faction', detail: 'Martin Schäfer is not of Town Council' }]);
   }, 300_000);
+});
+
+describe('7. U5-STALE\'s controls: a law-1 place is untouched; a holder with no person leaves the hat unworn', () => {
+  it('u7p-town-8 born dark: the same transfer leaves every card as it was', () => {
+    build(false);
+    const born = bear('town', 'u7p-town-8');
+    expect(seatLaw.resolveSeatLawVersion(born), 'born dark').toBe(1);
+    const after = dmTransfer(born, 'u7p-town-8', TAKER);
+    expect(JSON.stringify(after.npcs), 'law 1: the cards are byte-identical').toBe(JSON.stringify(born.npcs));
+  }, 60_000);
+  it('u7p-town-8 born lit, the Merchant Guilds with no first: the old house\'s person loses the hat, nobody wears it, the seat reads unfilled', () => {
+    build(true);
+    const born = bear('town', 'u7p-town-8');
+    const headless = { ...born, npcs: (born.npcs || []).map((n) => (rankIn(n, TAKER) === 1
+      ? { ...n, memberships: n.memberships.map((m) => (m.power === TAKER ? { ...m, rank: 2 } : m)) } : n)) };
+    const after = dmTransfer(headless, 'u7p-town-8', TAKER);
+    expect(holderOf(after, OWNER).holderName, 'the holder').toBe(TAKER);
+    expect(cardHatsOf((after.npcs || []).find((n) => n?.name === 'Judith Weber')), 'the old house\'s person wears the house title alone').toBe('the smelt master');
+    expect(seatCandidatesOf(after).map((n) => n.name), 'nobody wears the hat').toEqual([]);
+    const chain = rulingChainOf(after);
+    expect(chain.npc, 'the chain names nobody').toBeNull();
+    expect(chain.absence?.line, 'the seat reads unfilled').toBe('No named seat-holder stands in the record. The chain ends, honestly, at the power.');
+  }, 60_000);
 });
 
 /** The Power tab's seat cards as printed (`PowerStrata.jsx :: ThePowers` over `derivePowerStrata`), as text. */

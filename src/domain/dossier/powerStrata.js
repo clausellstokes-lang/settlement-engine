@@ -302,9 +302,9 @@ export function groupRelationships(relationships) {
  * stand-ins, and the settlement-wide fallback is gone.
  */
 import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
-import { cardHatsOf, cardInstitutionVeilOf } from '../people/cardPowers.js';
+import { cardHatsOf } from '../people/cardPowers.js';
 import { seatKeeperLineOf } from '../people/seatKeeper.js';
-import { membersByRank, rankIn } from '../people/membership.js';
+import { membersByRank } from '../people/membership.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
 /**
@@ -316,34 +316,6 @@ import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderR
  */
 export function liveSeatCandidatesOf(settlement) {
   return seatCandidatesOf(settlement).filter((n) => !(/** @type {{ ousted?: unknown }} */ (n)).ousted);
-}
-
-/**
- * U7 (the chair's E70, item 2): THE CHAIN'S PERSON IS ALWAYS OF THE HOLDER'S HOUSE. `holderOf`'s person is the chain's
- * npc where the record files that person in the holder's house (a membership of any rank: R2's dual hat is its rank-1);
- * else null, and the chain reads the holder's row (after a kept-form transfer `holderOf`'s person is still the form's
- * seat candidate, of the old house; at a birth held by kind, R3, it is the form's own).
- * @param {{ holder: StrataFaction, person: import('./seatHolder.js').SeatNpc | null }} apart
- * @returns {{ name: string, role: string, via: 'roster' } | null}
- */
-function holderPersonOf(apart) {
-  const person = apart.person;
-  if (!person || rankIn(person, nameOf(apart.holder)) === undefined) return null;
-  return { name: String(person.name || ''), role: cardHatsOf(person), via: /** @type {'roster'} */ ('roster') };
-}
-
-/**
- * U7: the holder house's rank-1 face (the people car's seat rule, `seatHolder.js :: seatCandidatesOf`'s first, applied
- * to the holder's row), less the ousted and the office stand-ins, and for the reader less a veiled face.
- * @param {RulingChainSettlement | null | undefined} settlement @param {StrataFaction} holder @param {StrataOptions} [options]
- * @returns {import('./seatHolder.js').SeatNpc | null}
- */
-function holderFaceOf(settlement, holder, options) {
-  const reader = options?.audience !== 'owner';
-  const name = nameOf(holder);
-  const roster = /** @type {import('./seatHolder.js').SeatNpc[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
-  return roster.find((n) => !!n && typeof n === 'object' && rankIn(n, name) === 1 && !(/** @type {{ ousted?: unknown }} */ (n)).ousted
-    && !isOfficeStandIn(n) && !(reader && cardInstitutionVeilOf(n) === 'veiled')) || null;
 }
 
 /**
@@ -375,10 +347,11 @@ function holderFaceOf(settlement, holder, options) {
  *             TE-DENSITY-1 is censusing the gap).
  *
  * UNDER THE SEAT LAW (U7, CS13), where the holder stands apart from the form (`rulingHouseApartOf`): `power` stays
- * the FORM (the office); `faction` is the HOLDER; `npc` is ALWAYS of the holder's house: `holderOf`'s person where
- * the record files that person in the holder's house (`holderPersonOf`), else the holder house's first by the same
- * two rules, applied to the holder's row: (1) its top ladder rung; (2) its rank-1 face (the people car's seat rule), less the ousted and the
- * office stand-ins, and for the reader less a veiled face (`holderOf`'s own person rule). Elsewhere, not a byte moves.
+ * the FORM (the office); `faction` is the HOLDER; `npc` is ONE FACT, the record's hat-wearer (`holderOf`'s person: the
+ * one who wears the office, less the ousted, and for the reader less a veiled face), named by both hats. No fall-back
+ * (the chair's E77): where nobody wears the hat, the absence line stands. After a kept-form transfer the hat is on the
+ * holder's first because the transfer moved it (`rulingPower.js :: transferRulingPower`, U5-STALE), never because the
+ * page chose another person. Elsewhere, not a byte moves.
  *
  * @param {RulingChainSettlement | null | undefined} settlement
  * @param {StrataOptions} [options] the audience (the reader's, unless the caller is the owner's own document)
@@ -418,11 +391,12 @@ export function rulingChainOf(settlement, options) {
     ? { name: nameOf(house), power: num(house.power), powerLabel: house.powerLabel || '', vacant }
     : null;
 
-  // (0) U7: `holderOf`'s person, where it is of the holder's house (`holderPersonOf`).
-  let npc = apart ? holderPersonOf(apart) : null;
-  // (1) The ladder-backed ruler — the ruling house's top rung.
-  if (!npc && house && hasLadder(settlement)) {
-    const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(house));
+  // (0) U7 (the chair's E77): where the holder stands apart, the record's hat-wearer, and nothing else.
+  const wearer = apart ? apart.person : null;
+  let npc = wearer ? { name: String(wearer.name || ''), role: cardHatsOf(wearer), via: /** @type {'roster'} */ ('roster') } : null;
+  // (1) The ladder-backed ruler — the governing faction's top rung.
+  if (!apart && governing && hasLadder(settlement)) {
+    const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(governing));
     const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
     const top = rungs[0];
     const topRow = top ? roster.find((n) => !!n && typeof n === 'object' && /** @type {{ name?: unknown }} */ (n).name === top.name) : undefined;
@@ -431,9 +405,9 @@ export function rulingChainOf(settlement, options) {
       npc = { name: top.name, role: 'first of the governing house', via: /** @type {'ladder'} */ ('ladder') };
     }
   }
-  // (2) The seat-holder (generation-time; never merely-senior, never a stand-in); U7: the holder's rank-1 face.
-  if (!npc && governing && !vacant) {
-    const chosen = (apart ? holderFaceOf(settlement, apart.holder, options) : liveSeatCandidatesOf(settlement)[0]) || null;
+  // (2) The seat-holder (generation-time; never merely-senior, never a stand-in).
+  if (!apart && !npc && governing && !vacant) {
+    const chosen = liveSeatCandidatesOf(settlement)[0] || null;
     if (chosen) {
       // COHERENCE-POWERS: the dual-hat leader is named by both hats ("the miller and Mayor"); any other holder by its role
       npc = { name: String(chosen.name || ''), role: cardHatsOf(chosen), via: /** @type {'roster'} */ ('roster') };
