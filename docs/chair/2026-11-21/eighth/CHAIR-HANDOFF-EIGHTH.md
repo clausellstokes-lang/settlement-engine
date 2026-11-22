@@ -1919,6 +1919,29 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   MESSAGE IS WRITTEN (`prompts/GO-PROSE-5-DISAGREE.txt`) AND IS SENT WHEN A PLACE FREES, or at once if the owner
   allows the extra worker. `intake/AFTER-FIRST-DEPLOY.md` 15 keeps only what he did not ask for (the stiff
   sentence, the number slip, "the steward" beside an appointee, and the wider census's findings).
+- E133 · DAILY-C's THREE RULINGS ON ITS MEASURE; "DAILY-B 4e7fa5667" ACCEPTED (recorded 2026-11-22 21:29 UTC). "DAILY-B 4e7fa5667a531445d416cf14bf43746bb8be0279" (the page prints the eight in E110's order; the owner-only line; L12 cut; PDF
+  chapter 15): the chair's trial merge with the line's tip has one conflict, the lighting census; rule 8: 685
+  files, 8,740 tests, 6 red, all listed; the list's two rows of the Daily Life lane CURED; first paint DOWN 3,925 /
+  924 / 824; the worker +890; the PDF's render worker +91,847 (lazy): named for the owner. IT WAITS FOR A LANDING
+  (`prompts/STACK-106.txt`). DAILY-C's MEASURE (`lane/daily-4-2026-11-22-c-measure-wip` 78377130e; 900 births):
+  (1) "the same fact" by drawing key would empty the child warnings on 60% of pages (beasts in outsider + child
+  warnings 538 pages; food in food + resentments 314; outsider + recent 163, the owner's pair; outsider + food
+  95). RULED AS DAILY-4 PROPOSES: A REPEAT IS TWO PARTS THAT EACH STATE THE SAME CONDITION; a consequence (a
+  child's warning, dawn in company, a grievance) or a mere naming is not one: two pairs are cured (outsider/recent
+  on a threat; outsider/food); THE DIGEST YIELDS: `outsider_impressions` drops the part whose condition another
+  printed slot states and takes its next part; a home slot keeps its subject; each pool row DECLARES what it does
+  and a census arm reads the declaration. (The chair had told the owner "a later line will say something else":
+  the refinement, that the visitor's summary line is the one that gives way, is told to him.) (2) THE BAR IS THE
+  SAMENESS DOOR's (`LAW1_RED_SHARE` 0.1: 15 of 150 a size): 94 families and 34 filled sentences stand over it,
+  five families over 15%, the highest filled sentence 21 of 150. RULED: every FILLED sentence at or under 10% of
+  the places of every size and every FAMILY at or under 15%, by the fewest new lines, cap 120; reported before
+  and after with ONE READER'S FIGURE (the mean number of identical Daily Life sentences two places of a size
+  share); the families between 10% and 15% listed, not cured. (3) 99 sentences put "'s" on a power's name, all
+  from one row (`{power's} mark`), 4 of them double: the row becomes "Outsiders notice the mark of {power} on
+  every door that matters."; a walker holds it; five other doubles on the rest of the page ("network's head's",
+  "lord's steward's") are named with their rows, cured by nobody here. DAILY-4's record 396,532 at 21:26. THE
+  CHAIR'S OWN RECORD 743,455 at 21:23: the pickup note's first block is rewritten at this hour for a summary of
+  this session or a successor.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 

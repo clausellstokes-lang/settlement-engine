@@ -4,6 +4,57 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## READ THIS FIRST (2026-11-22 21:29 UTC; it supersedes every block below it)
+
+WHY THIS BLOCK: the chair's own record read 743,455 of 1,000,000 at 21:23 UTC (a helper's read of this session: E109 holds
+for the chair too): its context will be summarized soon. EVERYTHING BELOW IS IN THE FILES NAMED; trust them over memory.
+
+THE OWNER'S WORDS THAT GOVERN, newest first (all verbatim in the handoff's section 1): "Can you fix these:" (three pairs of
+sentences that disagree on one page: E131, E132); "Fix all:" (the Daily Life page's three flaws: E125, E133); SIX CHILDREN
+AT A TIME ("Hey limit work to 6 children at a time. The way you're going full force might make small progress on many
+without completing any"). ONE QUESTION IS PUT TO HIM AND NOT ANSWERED: whether two short-lived extra workers may start now
+(a landing; the fix of two sentence pairs). UNTIL HE SAYS YES, SIX.
+
+THE LINE: `lane/join-2026-11-14` = 244fa84ef6e3f8bf773b64b87d9def7c854d4f0a on origin (POINT 105; both laws whole and DARK;
+`ci/LINE-NOW.md` at point 105; the red list 61 rows, read by containment). CI on it is read by name at 21:55 (a trigger).
+The handoff's section 2 holds E1 to E133; section 6 every session id; `prompts/` every prompt as sent or drafted.
+
+THE SIX WHO WORK, AND WHAT EACH OWES:
+- VEIL-36 (chain A): "R5-DESC" (E115, E121, E126, E128): its builder drafts the STANDING_FORMS list first; then R5D-SQL and
+  R5D-PAGE; then "TIP? R5-DESC"; then (iv), (v). VEIL-34 is retired (E129).
+- VEIL-35 (chain B): R4I-SQL is built (212 at 7a85dec3… on its -wip); R4I-PAGE proves; then "TIP? R4-IDS <commit>": ANSWER
+  "TIP TO VEIL-35"; at "R4-IDS MERGED <commit>" tell VEIL-36 and VEIL-33 that tip. It hands over there (its record 501,913
+  at 20:49): its place then goes to what waits (below). IMPORT-DOOR's brief stands complete on its branch (c416b1a88; E124).
+- VEIL-33: "LEGACY-POOL" (E121: the veil measured on places born by master's engine; its read-stored mode works; when it
+  pushes `lane/veil-33-2026-11-22-legacy-wip`, SEND THAT COMMIT TO VEIL-36 for R5-DESC's legacy arm); then "JOIN-PREP" (E119).
+- DAILY-4: "DAILY-B 4e7fa5667" IS ACCEPTED AND WAITS FOR A LANDING; it builds "DAILY-C" (the owner's three, ruled in E133).
+- CLOSE-2: THE FINAL CENSUS (the whole suite lit, from 383e752d5; part 1: 104 red, 84 new, 5 beyond the rehearsal, no
+  timeout, no (d)) and its classing; then "PRONOUN" (E117). IT BUILDS NO FLIP (E131). Its report goes to CLOSE-3 through you.
+- CLOSE-3: "VACANT" (E131: the empty seat beside its holder; its count confirmed: 10 of 600), then THE FLIP on your word
+  "BUILD THE FLIP <tip>", after the census is classed and VACANT has landed.
+
+WHAT WAITS FOR A PLACE, IN THIS ORDER: (1) "GO PROSE-5" with `prompts/GO-PROSE-5-DISAGREE.txt` (the owner's two sentence
+pairs, measured: `measures/DISAGREE.md`; PROSE-5 is session_01ACmDYWkS9qLM9qFAQz8cZV, parked, record 255,123); (2) STACK-106
+from `prompts/STACK-106.txt` (point 106 "DAILY-B"; then by "ADD": "VACANT", "PRONOUN", "DAILY-C", "PROSE-D" as they come);
+(3) VEIL-37 for IMPORT-DOOR (a prompt in `prompts/VEIL-35.txt`'s form). A place frees at VEIL-35's hand-over, then at
+CLOSE-2's.
+
+HOW A LANDING IS DONE (E130 is the last one, step by step): the stack's final report; verify (origin's tip; ancestry; each
+merge's second parent; `git merge-tree --write-tree` trial merges); `git merge --no-ff` in `/home/user/wt/line` (tree ==
+the gated tip's); rows and the gate's sentence in LANDINGS-SIXTH.md as a second commit (docs only against the gated tip);
+`landing/safepush.sh`; LINE-NOW.md; the tips to the seats; CI by name within the hour.
+
+EVERY NET (hourly; the next is armed for 21:58): a cheap helper reads EVERY working seat's record AND THE CHAIR'S OWN; each
+seat is told its figure; a message to a seat that is mid-turn goes with priority "next"; notes folded into the handoff;
+one commit; `landing/safepush.sh`; never a commit on a branch while its push is in flight.
+
+FOR THE OWNER AT THE CLOSE (his hand alone): the size rises, the two DRAFT tuning tables, TWO golden records (E111), the
+sample town, the server's AI daily-life function and its price row, migrations 204 to 212 after the security reader and
+one top-tier read of 212's final text, the pull request's merge, the deploy. FOUR QUESTIONS ARE OPEN WITH HIM AND BLOCK
+NOTHING (E84, E94, E112 with E118, E113). `intake/AFTER-FIRST-DEPLOY.md` holds what waits for the second deploy (15 items).
+A STANDING STEP THE CHAIR ADVISED HIM: before every deploy, a few generated places are READ WHOLE as a reader would (the
+pronoun fault, his three, the empty seat and the two sentence pairs were all found by reading, none by a test).
+
 ## READ THIS FIRST (2026-11-22 19:24 UTC; it supersedes every block below it)
 
 THE OWNER'S NEWEST WORD GOVERNS: SIX CHILDREN AT A TIME (verbatim: "Hey limit work to 6 children at a time. The way
