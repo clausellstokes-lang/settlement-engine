@@ -186,9 +186,9 @@ const EXEMPT = Object.freeze({
   },
   'src/data/troubleHooks.js :: TROUBLE_HOOKS': {
     class: 'trouble',
-    reason: 'a trouble\'s hooks are dropped on a public page: (A) every shared projection but the owner\'s full reveal carries no hook of a trouble (`history.currentTensions[].plotHooks`; the deep denylist takes `plotHook|hook`), on born places and a planted one; (B) the full reveal, `toPublicSafe(record, { full: true })`, reachable only where the owner set `gallery_share_dm`, prints the hooks by the owner\'s choice and veils nothing: it holds a veiled card\'s house and a hidden power\'s name exactly as the owner\'s record does, so no read that hides a house shows a hook. No hook line names a person',
+    reason: 'a trouble\'s hooks are withheld by default on every shared read, the DM door (`gallery_share_dm`) included; shown only where the owner opens the DM door AND the hooks\' eye; in that state a hook whose need is a house still veiled is served. That state is LISTED for the security reader, eleven rows: WITHHELD 5 (crime_wave 2, 10, 12 and guild_conflict 12 by crime facts, crime_wave 11 by veiled powers); LISTED 6 (crime_wave 9, external_threat 8, succession_crisis 1, 2, 3, 8)',
     withheldBy: 'src/domain/display/publicSafe.js :: PRIVATE_KEY_RE',
-    provedBy: "tests/domain/display/troubleHooksShared.test.js :: (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does",
+    provedBy: "tests/domain/display/troubleHooksShared.test.js :: (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served",
   },
 });
 
