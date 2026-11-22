@@ -27,9 +27,13 @@
 import { rulingChainOf } from '../dossier/powerStrata.js';
 import { powerNameWithArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
-import { resolveDeclared } from '../facts/drawDeclared.js';
+import { drawDeclared, resolveDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
+import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
+import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
+import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
 
 /** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
  *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
@@ -359,6 +363,33 @@ export function governanceAccountOf(settlement, opts = {}) {
     const safetyLabel = s.economicState?.safetyProfile?.safetyLabel;
     const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel), place, ruler, pick);
     if (standing) sentences.push(standing);
+    // THE MERIT'S REASON (FORTUNE U5b; the seventh chair's ruling of 22:26 UTC 2026-11-20, vetoable by the owner): where
+    // the fortune law's merit credits the record (`fortuneMerits.js :: meritsOf`, the predicate the birth used), the
+    // event `weatheredCatastrophe` returns is named directly after the standing, opening on its stored name. The time
+    // words band its `yearsAgo` by the law's table (`weatheredRecentYears`, then `weatheredWithinYears`), never a figure.
+    // The wording is the kernel's mixed keyed pick through the one door, keyed on the place's name and the event's (what
+    // every shared read serves, so the owner's page and a shared one say the same line); no roll.
+    const meritRecord = /** @type {import('../fortune/fortuneMerits.js').MeritRecord} */ (/** @type {unknown} */ (s));
+    const weathered = standing && meritsOf(meritRecord).includes('weathered') ? weatheredCatastrophe(meritRecord) : null;
+    const event = weathered ? text(weathered.name) : '';
+    const yearsAgo = weathered && typeof weathered.yearsAgo === 'number' ? weathered.yearsAgo : null;
+    const band = yearsAgo === null ? null
+      : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredRecentYears ? FORTUNE_MERIT_TIME_WORDS.recent
+        : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
+    if (event && band) {
+      const identity = `${place}::${event}::${yearsAgo}`;
+      const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
+        draw: (pool) => pickVariantMixed(pool, identity),
+        key: `${identity}::fortuneMerit`,
+        facts,
+        poolId: 'fortuneMeritLines:FORTUNE_MERIT_LINES',
+        surface: 'power',
+        drawKind: 'H',
+      });
+      /** @type {Record<string, string>} */
+      const meritSlots = { event, place, seat: ruler, ...band };
+      if (line) sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? ''));
+    }
   }
 
   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.
