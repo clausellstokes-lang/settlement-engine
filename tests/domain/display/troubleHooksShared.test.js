@@ -17,6 +17,7 @@ import { HIDDEN_POWER_MASK, galleryMemberKey, toPublicSafe } from '../../../src/
 import { applyVeil, defaultVeilFor, galleryPayloadFor, projectShareVeil, resolveVeil, writeShareVeil } from '../../../src/domain/display/galleryVeil.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
 import { TROUBLE_HOOKS } from '../../../src/data/troubleHooks.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const PLANTED_HOOK = 'A fixer of the Hollow Hand wants a door left unbarred tonight, and pays in silver';
 
@@ -83,7 +84,7 @@ describe('a trouble\'s hooks on a shared read: absent from every shared projecti
   it("(A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does", () => {
     // (A) born places that hold troubles, and the planted one
     expect(troubled.length).toBeGreaterThan(0);
-    for (const [seed, record] of troubled) expect(servedHooks(SHARED, record), seed).toEqual([]);
+    expectNoSeedFailures(collectSeedFailures(troubled, ([seed, record]) => { expect(servedHooks(SHARED, record), seed).toEqual([]); }), 'no trouble hook on a shared projection of a born place');
     const record = planted();
     expect(servedHooks(SHARED, record)).toEqual([]);
     // the read discriminates: the owner's full reveal (gallery_share_dm) serves the planted hooks, and the tab collects them
