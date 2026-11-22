@@ -22,11 +22,19 @@
  *   (S) EVERY INPUT IS SERVED (the chair's ruling of 19:38 UTC): on every forced birth, the merits recomputed from the
  *       SHARED read (`toPublicSafe`, then the veil with every hideable grouping and every field class of every card
  *       kind hidden) equal the owner's, and so do the score and its terms the shared page carries.
+ *   (U7) LASTING, THE SECOND MERIT (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC): the law's table
+ *       holds one DRAFT lasting age for each size, inside that size's own age range; `meritsOf` credits `lasting` on
+ *       every forced birth exactly where `history.age` reaches its size's age through the same gates; two merits are two
+ *       reasons at the Endorsed guard; the edge is the table's own figure and the size is read as the record carries it;
+ *       law 1 and a legacy config move nothing; a lit place without it holds the first merit's legitimacy exactly; at
+ *       every capture rung and on the shared read under the widest veil, a lasting place carries the same merits.
  *
  * Every expectation is COMPUTED from `FORTUNE_LAW_TUNING`, `LEGITIMACY_CUTS`, the predicates and the writers
  * themselves; none is quoted. The seeds are towns the measure (`measures/u5-place-served-*.txt`) saw the tail move
  * (Tolerated to Approved, Approved to Endorsed, Endorsed held, stressed towns, seats at every capture rung born,
  * hxr-town-42 a criminal seat), and three it did not (hxd-thorp-2 among them: moved only by the retired principled merit).
+ * The three visitor places are LASTING's (`measures/sentences/LASTING-DRAFT.md`: a thorp and a captured hamlet lasting
+ * only, a village with both merits); the arms read their eligibility, never their draw.
  *
  * @enforced-by this test
  */
@@ -41,11 +49,11 @@ import { TRACE_STEP_ORDER, partitionTrace } from '../../src/domain/edit/tracePar
 import { runGenerationRequest } from '../../src/workers/generationRequest.js';
 import { GENERATION_PROTOCOL_VERSION, GENERATION_REQUEST_KIND } from '../../src/lib/generationProtocol.js';
 import { FORTUNE_LAW_CONFIG_KEY, FORTUNE_LAW_TUNING, SIZE_RELATIVE_FORTUNE_LAW_VERSION } from '../../src/domain/fortune/fortuneLaw.js';
-import { meritsOf } from '../../src/domain/fortune/fortuneMerits.js';
+import { MERIT_NAMES, meritedLegitimacy, meritsOf, rulerTroubled, settleMeritsOfRule } from '../../src/domain/fortune/fortuneMerits.js';
 import { LEGITIMACY_CUTS } from '../../src/data/bandLadders.js';
 import { govCriminalRelation, legitimacyBandFor, withCaptureRelations } from '../../src/generators/factionDynamics.js';
 import { settleStandingToLegitimacy } from '../../src/generators/power/rosterText.js';
-import { legitimacyHeldTensions } from '../../src/data/historyData.js';
+import { AGE_BY_TIER, legitimacyHeldTensions } from '../../src/data/historyData.js';
 import { deriveCrisisCast } from '../../src/domain/crisis/crisisCast.js';
 import { STRESS_SEVERITY_WEIGHT } from '../../src/generators/stressGenerator.js';
 import { lawBandOf } from '../../src/domain/facts/lawBand.js';
@@ -62,11 +70,13 @@ import { CARD_KINDS, GROUPING_REMOVERS, applyVeil, isHideable } from '../../src/
 const STANDING = /** @type {any} */ (FORTUNE_LAW_TUNING.standing);
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+const VISITOR = { _randomizePriorities: true };
 /** [seed, dials?]: towns the measure saw the tail move (incl. two merits, stressed towns, W1's two), and two it did not */
 const SEEDS = [
   ['hxd-hamlet-39'], ['hxd-village-20'], ['hxd-thorp-30'], ['hxd-hamlet-27'], ['hxd-town-33'], ['hxd-metropolis-91'],
   ['hxd-metropolis-73'], ['hxd-city-15'], ['hxd-thorp-2'], ['hxd-town-0'], ['hxd-city-2'],
   ['hxr-metropolis-30', DIALS], ['hxr-town-42', DIALS], ['hxr-village-3', DIALS], ['hxr-hamlet-22', DIALS], ['hxr-town-30', DIALS],
+  ['visitor-thorp-52', VISITOR], ['visitor-hamlet-139', VISITOR], ['visitor-village-8', VISITOR],
 ];
 const sizeOf = (/** @type {string} */ seed) => seed.split('-')[1];
 /** @param {string} seed @param {object|undefined} dials @param {unknown} [law] the marker forced AFTER birthConfig;
@@ -317,5 +327,124 @@ describe('U5a (S) — every input of the merit is served, unchanged, on every sh
       }
     }), 'every town of the arm');
     expect(moved().length).toBeGreaterThan(0);
+  });
+});
+
+describe('U7 — LASTING, the second merit: a place that has lasted, through the same gates and points', () => {
+  const seams = { bandFor: legitimacyBandFor, recapture: withCaptureRelations, restand: settleStandingToLegitimacy };
+  /** the lasting age of the size the record carries (`tier`, else `config.settType`), from the law's table */
+  const lastingAgeOf = (/** @type {any} */ town) => STANDING.lastingAgeBySize[town.tier ?? town.config?.settType];
+  /** does the record pass the merits' gates, on the birth's own score? */
+  const gated = (/** @type {any} */ town) => {
+    const pl = town.powerStructure.publicLegitimacy;
+    return pl.score - (pl.breakdown?.merits ?? 0) >= LEGITIMACY_CUTS.tolerated && !rulerTroubled(town);
+  };
+  const lasting = () => LAW2.filter(({ town }) => meritsOf(town).includes('lasting'));
+  /** a legitimacy of the birth's shape at a score, all four terms 0 */
+  const legitimacyAt = (/** @type {number} */ score) => ({ ...legitimacyBandFor(score), score, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 } });
+
+  it('the table: one lasting age for each of the six sizes, frozen, each inside that size\'s own age range', () => {
+    const byAge = STANDING.lastingAgeBySize;
+    expect(byAge && typeof byAge).toBe('object');
+    expect(Object.isFrozen(byAge)).toBe(true);
+    expect(Object.keys(byAge).sort()).toEqual(Object.keys(AGE_BY_TIER).sort());
+    for (const [size, range] of Object.entries(AGE_BY_TIER)) {
+      expect(byAge[size], size).toBeGreaterThanOrEqual(range.min);
+      expect(byAge[size], size).toBeLessThanOrEqual(range.max);
+    }
+    expect(MERIT_NAMES).toEqual(['weathered', 'lasting']);
+  });
+
+  it('every forced birth: `lasting` is credited exactly where history.age reaches its size\'s age and the gates pass', () => {
+    let credited = 0;
+    expectNoSeedFailures(collectSeedFailures(LAW2, ({ seed, town }) => {
+      const want = gated(town) && typeof town.history?.age === 'number' && town.history.age >= lastingAgeOf(town);
+      expect(typeof lastingAgeOf(town), seed).toBe('number');
+      expect(meritsOf(town).includes('lasting'), seed).toBe(want);
+      if (want) credited += 1;
+    }), 'every town of the arm');
+    expect(credited).toBeGreaterThanOrEqual(2);
+    expect(LAW2.some(({ town }) => meritsOf(town).length === 1 && meritsOf(town)[0] === 'lasting')).toBe(true);
+    expect(LAW2.some(({ town }) => meritsOf(town).length === MERIT_NAMES.length)).toBe(true);
+  });
+
+  it('two merits are two reasons at the Endorsed guard; one merit alone is not', () => {
+    const at = LEGITIMACY_CUTS.endorsed - STANDING.meritPoints * MERIT_NAMES.length;
+    expect(MERIT_NAMES.length).toBe(2);
+    const both = meritedLegitimacy(legitimacyAt(at), [...MERIT_NAMES], legitimacyBandFor);
+    expect(both.score).toBe(LEGITIMACY_CUTS.endorsed);
+    expect(both.isEndorsed).toBe(true);
+    const lone = meritedLegitimacy(legitimacyAt(LEGITIMACY_CUTS.endorsed - STANDING.meritPoints), ['lasting'], legitimacyBandFor);
+    expect(lone.isEndorsed).toBe(false);
+    expect(lone.score).toBe(LEGITIMACY_CUTS.endorsed - 1);
+  });
+
+  it('the edge is the table\'s own figure, and the size is read as the record carries it (tier, else config.settType)', () => {
+    const town = lasting()[0]?.town;
+    expect(town).toBeTruthy();
+    const edge = lastingAgeOf(town);
+    /** the born place re-settled at an age, its tier kept, dropped, or replaced */
+    const at = (/** @type {number} */ age, /** @type {'keep'|'drop'|'nowhere'} */ tier = 'keep') => {
+      const copy = structuredClone(town);
+      copy.history.age = age;
+      if (tier === 'drop') delete copy.tier;
+      if (tier === 'nowhere') copy.tier = 'nowhere';
+      return settleMeritsOfRule(copy, seams);
+    };
+    expect(meritsOf(at(edge)).includes('lasting')).toBe(true);
+    expect(meritsOf(at(edge - 1)).includes('lasting')).toBe(false);
+    expect(at(edge).powerStructure.publicLegitimacy.breakdown.merits).toBeGreaterThan(at(edge - 1).powerStructure.publicLegitimacy.breakdown.merits ?? 0);
+    expect(meritsOf(at(edge, 'drop')).includes('lasting')).toBe(true);
+    expect(meritsOf(at(edge - 1, 'drop')).includes('lasting')).toBe(false);
+    expect(meritsOf(at(Number.MAX_SAFE_INTEGER, 'nowhere')).includes('lasting')).toBe(false);
+  });
+
+  it('DARK: under law 1 and a legacy config a lasting place is born with no merits, and the tail returns it untouched', () => {
+    const seeds = SEEDS.filter(([seed]) => lasting().some((x) => x.seed === seed));
+    expect(seeds.length).toBeGreaterThanOrEqual(2);
+    expectNoSeedFailures(collectSeedFailures(seeds, ([seed, dials]) => {
+      for (const law of [undefined, 1]) {
+        const town = birth(seed, dials, law);
+        expect('merits' in (town.powerStructure.publicLegitimacy.breakdown || {}), `${seed} law ${law}`).toBe(false);
+        expect(meritsOf(town), `${seed} law ${law}`).toEqual([]);
+        const text = JSON.stringify(town);
+        expect(settleMeritsOfRule(town, seams), `${seed} law ${law}`).toBe(town);
+        expect(JSON.stringify(town), `${seed} law ${law}`).toBe(text);
+      }
+    }), 'every lasting town of the arm');
+  }, 120_000);
+
+  it('a lit place without the lasting merit holds exactly the legitimacy of the first merit alone (the base tree\'s rule)', () => {
+    const without = LAW2.filter(({ town }) => !meritsOf(town).includes('lasting'));
+    expect(without.length).toBeGreaterThan(0);
+    expectNoSeedFailures(collectSeedFailures(without, ({ seed, town }) => {
+      const pl = town.powerStructure.publicLegitimacy;
+      expect(meritedLegitimacy(preOf(pl), meritsOf(town).filter((name) => name === 'weathered'), legitimacyBandFor), seed).toEqual(pl);
+    }), 'every town of the arm without it');
+  });
+
+  it('every lasting place at every capture rung, and on the shared read under the widest veil: the same merits and score', () => {
+    const WIDEST = [
+      ...Object.keys(GROUPING_REMOVERS),
+      ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map((field) => `class:${kind}:${field}`)),
+    ].filter((address) => isHideable(address));
+    let compared = 0;
+    expectNoSeedFailures(collectSeedFailures(lasting(), ({ seed, town }) => {
+      for (const rung of CAPTURE_RUNGS) {
+        const copy = structuredClone(town);
+        copy.powerStructure.publicLegitimacy = preOf(town.powerStructure.publicLegitimacy);
+        copy.powerStructure.criminalCaptureState = rung;
+        copy.powerStructure.factions = copy.powerStructure.factions.map((/** @type {any} */ f) => (f.isGoverning ? { ...f, captureState: rung } : f));
+        const rec = settleMeritsOfRule(copy, seams);
+        expect(meritsOf(rec), `${seed} at ${rung}`).toEqual(meritsOf(town));
+        expect(rec.powerStructure.publicLegitimacy.score, `${seed} at ${rung}`).toBe(town.powerStructure.publicLegitimacy.score);
+        compared += 1;
+      }
+      const shared = applyVeil(toPublicSafe(town), WIDEST);
+      expect(meritsOf(shared), seed).toEqual(meritsOf(town));
+      expect(shared.powerStructure.publicLegitimacy.score, seed).toBe(town.powerStructure.publicLegitimacy.score);
+    }), 'every lasting town of the arm');
+    expect(compared).toBe(lasting().length * CAPTURE_RUNGS.length);
+    expect(compared).toBeGreaterThan(0);
   });
 });

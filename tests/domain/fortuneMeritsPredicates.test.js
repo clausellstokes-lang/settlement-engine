@@ -127,7 +127,10 @@ describe('U5a (c) — the predicates on built records', () => {
 
   it('meritsOf names the merits in the fixed order, only under the law, only at Tolerated or better, never with trouble', () => {
     const both = { events: [catastrophe(3)] };
-    expect(meritsOf(recordOf(both))).toEqual([...MERIT_NAMES]);
+    expect(meritsOf(recordOf(both))).toEqual([MERIT_NAMES[0]]);
+    // the second merit (U7 LASTING): the same record, of a size, at that size's lasting age, names both in the fixed order
+    const lasted = recordOf(both);
+    expect(meritsOf({ ...lasted, tier: 'town', history: { ...lasted.history, age: STANDING.lastingAgeBySize.town } })).toEqual([...MERIT_NAMES]);
     expect(meritsOf(recordOf())).toEqual([]);
     expect(meritsOf(recordOf({ ...both, law: null }))).toEqual([]);
     expect(meritsOf(recordOf({ ...both, law: 1 }))).toEqual([]);
@@ -147,7 +150,7 @@ describe('U5a (c) — the arithmetic: only upward, the Tolerated gate, the two-r
 
   it('every base from the gate to 100, with one merit and two, with and without a positive term', () => {
     for (let base = LEGITIMACY_CUTS.tolerated; base <= 100; base++) {
-      for (const names of [[], [...MERIT_NAMES]]) {
+      for (const names of [[], [MERIT_NAMES[0]], [...MERIT_NAMES]]) {
         for (const terms of [{ prosperity: 0, safety: 0, defense: 0, food: 0 }, { prosperity: 1, safety: 0, defense: 0, food: 0 }]) {
           const pl = legitimacyAt(base, terms);
           const next = meritedLegitimacy(pl, names, legitimacyBandFor);
@@ -168,10 +171,10 @@ describe('U5a (c) — the arithmetic: only upward, the Tolerated gate, the two-r
 
   it('one reason never reaches Endorsed; the merit and a positive term can', () => {
     const at = LEGITIMACY_CUTS.endorsed - STANDING.meritPoints;
-    const lone = meritedLegitimacy(legitimacyAt(at), [...MERIT_NAMES], legitimacyBandFor);
+    const lone = meritedLegitimacy(legitimacyAt(at), [MERIT_NAMES[0]], legitimacyBandFor);
     expect(lone.isEndorsed).toBe(false);
     expect(lone.score).toBe(LEGITIMACY_CUTS.endorsed - 1);
-    const twoReasons = meritedLegitimacy(legitimacyAt(at, { prosperity: 1, safety: 0, defense: 0, food: 0 }), [...MERIT_NAMES], legitimacyBandFor);
+    const twoReasons = meritedLegitimacy(legitimacyAt(at, { prosperity: 1, safety: 0, defense: 0, food: 0 }), [MERIT_NAMES[0]], legitimacyBandFor);
     expect(twoReasons.isEndorsed).toBe(true);
   });
 
@@ -187,7 +190,8 @@ describe('U5a (C) — the step starts from score - merits: run twice, the same',
     const before = rec.powerStructure.publicLegitimacy;
     const once = settleMeritsOfRule(rec, SEAMS);
     const first = JSON.stringify(once);
-    expect(once.powerStructure.publicLegitimacy.score).toBe(before.score + MERIT_NAMES.length * STANDING.meritPoints);
+    expect(once.powerStructure.publicLegitimacy.score).toBe(before.score + meritsOf(once).length * STANDING.meritPoints);
+    expect(meritsOf(once)).toEqual([MERIT_NAMES[0]]);
     const twice = settleMeritsOfRule(once, SEAMS);
     expect(JSON.stringify(twice)).toBe(first);
     expect(twice.powerStructure.publicLegitimacy).toBe(once.powerStructure.publicLegitimacy);
