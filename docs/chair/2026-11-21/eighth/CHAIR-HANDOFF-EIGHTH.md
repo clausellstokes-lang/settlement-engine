@@ -706,6 +706,14 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   whole ratchet is superseded by rule 8 as re-ruled. Told: the line moves to point 95 within about two hours; it
   merges the line only at its unit 4, on the chair's word. The chair's branch is on origin at e0f70a406 (04:54 by the
   push's log).
+- 2026-11-22 05:21 UTC · VEIL-31 HANDED OVER AT 385067da2 (`lane/veil-31-2026-11-21`, read back by it; nothing runs in its container; its builders'
+  branches all merged) AND VEIL-32 IS SEATED ON IT (session_01ACmDYa6UzQjDBufm3KqGHw, created 05:20; branch
+  `lane/veil-32-2026-11-22`; `prompts/VEIL-32.txt`). PART 32 WAS CLOSED BEFORE THE CHAIR'S LAST RULING REACHED VEIL-31:
+  its "NEXT STEP" line calls the cure only recommended and its section 1 carries the chair's own wrong line on "R3":
+  BOTH CORRECTIONS are in VEIL-32's starting message and in its prompt file, and it writes them into PART 33 at its
+  first push. Its reading-in will cost about what VEIL-31's did (about 400,000): its working room before the mark is
+  two or three units; THE VEIL NEEDS AT LEAST ONE MORE SUCCESSOR before "R3". SIX SEATS STILL (VEIL-32 took VEIL-31's
+  place). The chair's branch is on origin at 2aa6d2428 (05:20 by the push's log).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
@@ -735,6 +743,7 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | seat | session | source (the lane's saved tip) | its branch | what |
 |---|---|---|---|---|
 | VEIL-31 | session_01ACmDYaECLAjFkjqjE3sUPJ | `lane/veil-30-2026-11-20` 5818130c4 | `lane/veil-31-2026-11-21` | the share veil: prove the merge of the two cures, units (ii) to (vi), then "R3" |
+| VEIL-32 | session_01ACmDYa6UzQjDBufm3KqGHw | `lane/veil-31-2026-11-21` 385067da2 (VEIL-31 HANDED OVER there at 05:17; it is not messaged again) | `lane/veil-32-2026-11-22` | the share veil: unit (viii) (the crime lists: withhold always, the page re-derives), then (iv), (v), (vi), the join probe on the chair's word, "R3" |
 | SEAT-10 | session_01ACmDYZoxpJMkpMsJCjQacb | `lane/seat-9-2026-11-20` 3e8e2e37d | `lane/seat-10-2026-11-21` | who rules: the line merged in, the key question, the flip's census, rule 8, "SEAT" |
 | FORTUNE-6 | session_01ACmDYXeXjV24x7VbZV1x8a | `lane/fortune-5-2026-11-20` 321081ea9 | `lane/fortune-6-2026-11-21` | fortune: the detector row, the legacy-config helper, the merit's sentence, the lit re-measure, "FORTUNE" |
 | PAGE-12 | session_01ACmDYXpfBBiCkJJuRZps9f | `lane/page-10-2026-11-20` cbbe87154 | `lane/page-12-2026-11-21` | the trouble half: the tip proved, the causes' parity, the mixed key, the closing measure, "PAGE-TROUBLE" |
