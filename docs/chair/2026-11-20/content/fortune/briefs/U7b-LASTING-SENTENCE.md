@@ -13,6 +13,38 @@ A place merited ONLY by LASTING would show a lifted band with no reason given. S
 `powerStateProse.js :: legitimacyReadingPoolKey` counts `merits` as a pull, so the "no strong opinion" line does not
 print there either. The page must say why.
 
+FORTUNE-7'S NOTE (2026-11-22 08:1x UTC): STEP 1 IS DONE BY FORTUNE-7 (its unit 0(c)), as
+`measures/sentences/LASTING-DRAFT.md`. THE BUILDER STARTS AT STEP 2, on the chair's ruled words, which FORTUNE-7 copies
+into this brief VERBATIM before the cut.
+
+THE CHAIR'S WORDS (E57, 2026-11-22 08:21 UTC, VERBATIM; the draft's lines are struck: band-neutral, no "stand", no
+possessive of {seat}, no verb that must agree with {seat}):
+- A "{place} has lasted {span}, and its people count that in favour of {seat}."
+- B "{place} has been here {span}, and people there are loath to see {seat} unsettled."
+- C "{place} has endured {span}, and its people give {seat} some of the credit."
+THE TIME WORDS: `history.age` under 200 years "for generations", otherwise "for centuries"; the threshold (200) is a
+WORDING constant beside the words in the pool's own data file (as `FORTUNE_MERIT_RECENT_YEARS`), never in the law's table.
+THE PICK: `pickVariantMixed` keyed on `${place}::${age}` through `drawDeclared` (poolId
+`fortuneLastingLines:FORTUNE_LASTING_LINES`, surface 'power', drawKind 'H'), as the draft gives it. No need declared.
+THE HAND LIST: ONE row; `HAND_CEILING` is the LINE's figure at the merge plus exactly this row (75 after the first merit
+lands, so 76), its comment extended.
+E57 AMENDED (the chair, 08:27 UTC, VERBATIM in substance; on FORTUNE-7's 36 pairs):
+- (1) WHERE BOTH MERITS CREDIT, the lasting sentence is ONE FIXED LINE: "{place} has also lasted {span}, and that too
+  counts for {seat}." It uses the name, not "It", because the sentence before it has the event as its subject. A, B and
+  C print ONLY where LASTING credits alone. The pool's table has FOUR rows: three drawn and one fixed by case. The
+  sameness row counts all four, and the both-case line is in the file for the chair's eye (Albaminus).
+- (2) WHERE THE SENTENCE DIRECTLY BEFORE OPENS ON {place} (the three BARE standing lines: "{place} tolerates {seat}, and
+  no more." / "{place} approves of {seat}." / "{place} stands behind {seat}."), the lasting sentence opens on "It" in
+  place of {place} ("It has lasted for centuries, and its people count that in favour of the Elder Council."). Do this
+  ONLY IF the composer already knows the sentence before at no new draw and in a few lines. FORTUNE-7's reading:
+  `governanceAccountOf` holds both the `standing` string and the `causes` it passed to `standingSentence`, and the three
+  bare lines are exactly its no-cause, one-sentence lines that open on `${place} `. If it does not fit, leave it and say
+  so in one line.
+
+THE FILE FOR THE CHAIR'S EYE after the build: the three places of `measures/sentences/LASTING-RULED.md` (Radhawadi lasting
+only; Albaminus both; Kabahchihua the captured hall under Tolerated), nine paragraphs as built, owner's page and shared
+page; plus two places with both merits and two with LASTING alone (FORTUNE-7's prompt, unit 2).
+
 ## STEP 1: THE DRAFT (to the chair, NOTHING BUILT)
 
 A file of at most 60 lines, `measures/sentences/LASTING-DRAFT.md`, holding:

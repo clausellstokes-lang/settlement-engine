@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "b804659db1948d9378a5f7ca5fc3f4ba16903b3d",
-  "measuredBy": "STACK-98",
+  "measuredAtSha": "b6492abd34b7da6467cef47b09a1838071e3f621",
+  "measuredBy": "FORTUNE-7",
   "date": "2026-11-22",
-  "note": "point 98: lane/fortune-6-2026-11-21 at 8cc9212fd merged on the line at 1ec3e81d1; the merge took the line side of the inventory; the lane FORTUNE_LAW_TUNING row (draft) re-taken as the lane froze it, no value moved",
+  "note": "FORTUNE-B at the line point 98 (c110dd85b) merged: FORTUNE_LAW_TUNING gains the DRAFT leaves standing.lastingAgeBySize (six sizes, E32), the lane U7",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 122,
-      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
+      "line": 129,
+      "spanDigest": "880df847520e76c7de543596b5629b0be561182050c554c92652b9d7944ca5f9",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1516,6 +1516,12 @@
         "standing.meritPoints": 10,
         "standing.weatheredWithinYears": 40,
         "standing.endorsedMinReasons": 2,
+        "standing.lastingAgeBySize.thorp": 269,
+        "standing.lastingAgeBySize.hamlet": 108,
+        "standing.lastingAgeBySize.village": 225,
+        "standing.lastingAgeBySize.town": 276,
+        "standing.lastingAgeBySize.city": 441,
+        "standing.lastingAgeBySize.metropolis": 731,
         "standing.weatheredSeverity": "catastrophic",
         "standing.rulerTroubleKinds.0": "succession_crisis",
         "standing.rulerTroubleKinds.1": "corruption_scandal",

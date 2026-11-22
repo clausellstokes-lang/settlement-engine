@@ -11,6 +11,7 @@
   {"pool":"src/data/dailyLife/gatheringPlaces.js :: GATHERING_NAMED","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},
   {"pool":"src/data/dailyLife/gatheringPlaces.js :: GATHERING_PLAIN","seat":"DAILY-2","branch":"lane/daily-2-2026-11-20","commit":"5db0b6a84"},
   {"pool":"src/data/foodwaysPrintSiblings.js :: FOODWAYS_PRINT_SIBLINGS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
+  {"pool":"src/data/fortuneLastingLines.js :: FORTUNE_LASTING_LINES","seat":"FORTUNE-7","branch":"lane/fortune-7-2026-11-22-u7b","commit":"837e6d55b"},
   {"pool":"src/data/fortuneMeritLines.js :: FORTUNE_MERIT_LINES","seat":"FORTUNE-6","branch":"lane/fortune-6-2026-11-21-u5b","commit":"10afe3873"},
   {"pool":"src/data/historyData.js :: HISTORY_DESC_SIBLINGS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
   {"pool":"src/data/historyData.js :: HISTORY_QUARTER_WORDS","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
