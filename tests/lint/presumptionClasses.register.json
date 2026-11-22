@@ -1,7 +1,7 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 1775,
+ "ceiling": 1774,
  "rows": {
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
@@ -881,9 +881,6 @@
    ["office","none","Militia — muster of locals","6b352baf39ddfb3e"],
    ["office","none","Garrison — standing troops","ec9b1399f8aea49f"],
    ["office","none","Watch — patrol & policing","fa49e7ac00aaa444"]
-  ],
-  "src/domain/dailyLife.js": [
-   ["size","none","The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don\\'t yet know yours.","bb473133aec7bbbb"]
   ],
   "src/domain/display/armyStrength.js": [
    ["office","none","a capable militia, enough to defend its own and raid a neighbour","b736b4cdf8e43b27"]
