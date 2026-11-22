@@ -745,6 +745,49 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   and the landing helper merges its tip; TRAD-6 itemizes ALL 292 bytes of points 88 to 91. THE RECORD'S OWN
   DISAGREEMENTS THE HELPER FOUND: section 4 said depth's two rulings and arm (u) were owed (E6 (b), (c) had ruled
   them); the red list's row for `selfVouchReceipt` soak1k-8 is cured by point 94 (9513ba024).
+- E55 · A TRUE FAULT FOUND BY THE CLOSE'S REHEARSAL, AND WHO CURES IT (2026-11-22 08:22 UTC; CLOSE-1, confirmed by its run on the lit
+  scratch 5c4419815). THE HOME PAGE'S SAMPLE TOWN WOULD NOT BE THE TOWN ITS BUTTON FORGES ONCE THE LAWS ARE LIT:
+  `scripts/generate-landing-fixture.mjs :: forgeConfigFor` births by `generateSettlementPipeline` WITHOUT
+  `birthConfig`; the live "Forge this exact town" road (`settlementGenerateAction.js`) births THROUGH it. Dark, the two
+  roads give one town (only config markers differ); lit, they differ in the economy, the powers, the people, the
+  history, the arrival scene, the defences and the trace; and `landingFixtureFreshness` would stay GREEN, because it
+  re-runs the same script. RULED: CLOSE-1's own unit, which LANDS before the flip ("JOIN" or "CLOSE-FIXTURE"): the
+  script births through `birthConfig`, awaiting the living-content roster as the store does; a test, red first, pins
+  the script's town EQUAL to the action road's town for the fixture's seed, dark and lit. THE `--emit` STAYS THE
+  CHAIR'S STEP AT THE CLOSE and its stock narration the owner's eye.
+- E56 · THE DAILY LIFE LANE, E2's THREE QUESTIONS (2026-11-22 08:22 UTC). E2 is merged on the lane at 771f1865f: food's commonest sentence
+  11, 9, 9, 12, 9, 8% by size (the seat corrected its first figures); resentments 17, 11, 13, 7, 10, 14%, empty on
+  19, 9, 7, 35, 34, 26% of places by the calm rule (a place with no grievance prints none; an empty slot prints
+  nothing and the block closes up); false lines 0. RULED: THORP's 17% (one sentence, "Talk among neighbours turns,
+  sooner or later, to what the Elder Council has got wrong lately.", on 25 of 150: about 90% of thorps are ruled by
+  the Elder Council and six lines share that name) is ACCEPTED AS NAMED with its cure owed in the lane: the elders
+  line L8 on who rules' label atom (point 97), then re-measured to the bar. FOOD adequate #4, THE CHAIR'S (the
+  seat's kept a colon afterthought): "Food is steady here, if not generous, and every household has enough with
+  little left over." · #12 as proposed: "The grain is bought in, not grown here, so bread is never wasted."
+  NAMED FOR THE SECOND DEPLOY: millSource (the fact layer's READERS arm) and legitimacyGrave (no fact home for the
+  causal legitimacy band). grainHeld's three lines (T9, C5, F0) on the atom `grain` alone: YES if false lines 0, the
+  three verbatim to the chair.
+- E57 · FORTUNE'S SECOND MERIT: THE SENTENCE POOL RULED, AND AN INTAKE ITEM (2026-11-22 08:22 UTC; FORTUNE-7's unit 0: the six ages equal E32's
+  on 900 dark and 900 lit births; `history.age` unchanged on 11 of 11 shared projections, executed; the SQL twin by
+  read only). The seat's three drafts read against a low band ("tolerates ... and no more" then "the benefit of the
+  doubt") and echoed "stand". THE THREE LINES ARE THE CHAIR'S, band-neutral, no "stand", no possessive of the seat,
+  no verb agreeing with it: A "{place} has lasted {span}, and its people count that in favour of {seat}." ·
+  B "{place} has been here {span}, and people there are loath to see {seat} unsettled." · C "{place} has endured
+  {span}, and its people give {seat} some of the credit." `{span}`: under 200 years "for generations", otherwise
+  "for centuries" (a wording constant). One row on the hand list (76 after the first merit's 75). THE INTAKE ITEM,
+  OWED, NOT FORTUNE'S: `governanceAccount.js :: governanceAccountOf` keys its arrangement on
+  `s._seed ?? s.id ?? s.name`; a shared read has no `_seed`, so 36 of 46 shared paragraphs are arranged differently
+  from the owner's page (it still varies by place: not a sameness fault, not a leak): for who rules' page unit (U7)
+  if it touches that key, else the second deploy.
+- E58 · THE LINE TAKES THE FOUR CURES BY A MERGE, NOT A CHERRY-PICK (it amends E45); AND A MISREADING OF THE CHAIR'S (2026-11-22 08:22 UTC).
+  Every stacked landing and three seats now stand on cc2f43aee (STACK-97's merge 840020b9b; CLOSE-1's two scratch
+  refs; PAGE-13's trial merge): so cc2f43aee itself must be an ANCESTOR of the line: in the line's worktree, after
+  the local helper's docs row, `git merge --no-ff cc2f43aee`, `tests/lint` whole there, then the push. THE MISREADING:
+  at 08:15 the chair told the owner the local gate's last run had "finished clean": it had read the exit line of a
+  PUSH log; run B (`tests/generators`, `tests/data`, two domain directories and 120 governing files, started 07:16)
+  was still running at 08:18 with 649 files done. Corrected to the owner by name in the next message; nothing was
+  pushed on it. ITS CAUSE IN PART IS THE CHAIR'S OWN: six pushes of this branch in forty minutes, each a typecheck
+  and a lint on the same four cores. SO: this branch is committed and NOT pushed while a local gate runs.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1148,17 +1191,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 04:50 UTC after E26 and E30.) (AMENDED 2026-11-22 07:51 UTC BY E45: the ceiling of six is lifted by the owner's word; PLACE, PEOPLE and FORTUNE-7 are seated at once; the lanes after PEOPLE are seated as their prompts are written.) THE
-FINISH LINE (E30) orders what comes next: AS A SEAT FREES: PLACE (the trade note's cure: `prompts/PLACE-3.txt` as
-amended; source and branch `lane/place-3-2026-11-21`) · PEOPLE (the second half, B3 then B2: `prompts/PEOPLE-3.txt`
-as amended; source and branch `lane/people-3-2026-11-21`) · then, by what an owner reads on a page: STATE SENTENCES
-(the next units: SEAT-TOWN) · GOALS AND TIES (27 failures to name; TIES-HOLD) · PEOPLE AND PLACE (frames, landmarks,
-F5-NARROW; arm (u) owed a ruling) · DEPTH (two rulings owed by this chair; its tie pairs after TIES-HOLD) · SESSION
-SHEET (six lint failures left by SR1's merge) · TRADITIONS (unit 13). NOT SEATED: THE TROUBLES LAW (E28: not in this
-deploy). A SUCCESSOR FOR A RUNNING SEAT (VEIL-31 near 07:00; FORTUNE-6 if the second merit does not fit) takes that
-seat's own place, not a new one. The lanes after PEOPLE have no eighth-chair prompt yet: each is written from the
-pickup's paragraph for its lane, its hand-back's first section and the form of `PAGE-13.txt`. NONE OF THEM HOLDS THE
-FIRST DEPLOY: what has not landed when the veil, the two laws and the Daily Life page are done goes in the second.
+(Rewritten 2026-11-22 08:22 UTC.) EVERY LANE IS SEATED (E45, E48, E49, E52, E54): nothing waits for a seat. WHAT EACH WAITS ON FROM THE
+CHAIR: THE LINE'S NEW TIP (points 94 to 96 and the four cures: the moment the local gate reports): DAILY-3, PAGE-12,
+PAGE-13, PLACE-3, PEOPLE-3, PROSE-5, GOALS-5, PAGE-14, DEPTH-5, FRAME-9 (TRAD-6 merges nothing of the line) ·
+"FORTUNE <commit>" NAMED: FORTUNE-7 (then it builds) and STACK-98 (to be seated on STACK-97's tip with E53's conflict
+classes) · THE WORD TO MERGE U6 AND U7: SEAT-10, after "SEAT" is on the line · "R3 <commit>" WITH THE LOWER TOWNS AND
+THE READER'S LIST: REVIEW-VEIL-15 · THE HAND-OVER: VEIL-33, when VEIL-32 says "HAND-OVER <commit>" · "WANTS" LANDED,
+NAMED: DEPTH-5's ties. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who rules and
+fortune (both merits) landed and flipped; the Daily Life page whole. A lane that has not landed when those three are
+done ships in the second deploy; THE LINE IS FROZEN FOR EVERY OTHER LANE the hour CLOSE-1's second rehearsal starts.
 
 ## 5. Waiting on the owner
 
@@ -1186,3 +1227,10 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | STACK-97 | session_01ACmDYWhzK8coXeB7BokWRC | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/stack-97-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E45): who rules at 46339e5c7 as point 97: the merge and the whole gate; the chair alone moves the line |
 | CLOSE-1 | session_01ACmDYYk4tUS8QsZcpVWX3h | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/close-1-2026-11-22` (and two scratch refs it pushes for others to read) | THE CLOSE REHEARSED (E48): a trial join of the two laws; the lit scratch ref; the flipped run's census by name; the recipe; the joint measure; the signing list's draft; ONE unit that lands: the laws' join, "JOIN" |
 | VEIL-33 | session_01ACmDYYeP5WWiLi6bmykSME | `lane/veil-32-2026-11-22` as it stood at 08:01 (beside VEIL-32) | `lane/veil-33-2026-11-22` | the share veil's second seat (E49): the join probe on its own machine (dark, then lit on CLOSE-1's ref); (iv), (v), (vi) prepared; NOT a writer of 212 until VEIL-32 hands over |
+| REVIEW-VEIL-15 | session_01ACmDYZBXKt9caNgKd3aiEa | `lane/review-veil-13-2026-11-20` 8ad885c38 (for its instruments) | `lane/review-veil-15-2026-11-22` | THE FRESH SECURITY READER (E52): chain built, one probe proven to bite; WAITS UNSPENT for "R3 <commit>" |
+| PROSE-5 | session_01ACmDYWkS9qLM9qFAQz8cZV | `lane/prose-4-2026-11-22` 9ae014014 | `lane/prose-5-2026-11-22` | the state sentences: the line, DS-ECO-11's sixth variant (the pool out of THIN), SEAT-TOWN ("PROSE"), WORDING-CURE ("GEN-11"), BUILD-2 ("PROSE-B") |
+| GOALS-5 | session_01ACmDYabwnmw8KGz1vPoNgy | `lane/goals-4-2026-11-20` 825ed351f | `lane/goals-5-2026-11-22` | the wants and TIES-HOLD: the 27 failures named, the line, the measures, "WANTS"; arm (u)'s wide class narrowed first (E54) |
+| PAGE-14 | session_01ACmDYYzBhmBiV4Xf12U1T7 | `lane/page-8-2026-11-20` f9e0c553c | `lane/page-14-2026-11-22` | people and place: "F5-NARROW", the secret frames, the landmarks, L4 and the guard, "PAGE-PEOPLE"; SECRETS-30's re-cut as a draft; PHYSICAL's measure |
+| DEPTH-5 | session_01ACmDYZwy2ZW4uoujqPNZ44 | `lane/depth-4-2026-11-20` 96e193785 | `lane/depth-5-2026-11-22` | the depth lane: nine reds cured, the line (it writes the trouble hooks' theme rows: a table to the chair first), "DEPTH"; then "DEPTH-TIES" after "WANTS" lands, and "DEPTH-HOOKS-3" |
+| FRAME-9 | session_01ACmDYXnwjzw5YzWaEc1KqQ | `lane/frame-8-2026-11-20` b2dee95f5 | `lane/frame-9-2026-11-22` | the session sheet: SR1's merge finished (six lint failures by their doors), F3 and F4, P1, the line and the mixed pick, "FRAME", the six sheets for the owner |
+| TRAD-6 | session_01ACmDYYaZ8cU8ZYJb7BBw95 | `lane/trad-5-2026-11-20` b97fd16f7 | `lane/trad-6-2026-11-22` | the traditions lane: unit 13's failures named, the 292 bytes itemized, "TRAD"; it merges NOTHING of the line |
