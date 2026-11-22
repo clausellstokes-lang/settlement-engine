@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "870513c5d95e5fef3e537d9dbe6d55402f83c85a",
+  "measuredAtSha": "1aefdc52afe8d28361704860f09d11546fa0e816",
   "measuredBy": "fortune-7 U8 builder",
   "date": "2026-11-22",
-  "note": "U8 (E100): two lit-arm titles in tests/generators/people/dualHatPoliticalMass.test.js (the guard under the fortune law; the crisis-body pin)",
+  "note": "U8 (E100): the stated-order title in tests/generators/people/dualHatPoliticalMass.test.js (the crisis the stability line states, read from its source)",
   "files": 3771,
   "parked": 485,
   "credited": 3286,
-  "titles": 31841,
+  "titles": 31842,
   "suiteTitles": 8831
 }
