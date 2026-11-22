@@ -1,4 +1,4 @@
-# FORTUNE-6 hand-back (kept current at every push; last written 2026-11-22 05:1x UTC by `date -u`)
+# FORTUNE-6 hand-back (kept current at every push; last written 2026-11-22 07:3x UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-5-HANDBACK.md` (its section 0 is the rulings in force; its section 2 the join
 and the security reader), `FORTUNE-4-HANDBACK.md` sections 2, 3 and 5, `LIGHTING-WORKLIST.md`, and the open briefs
@@ -9,7 +9,8 @@ server). Branch `lane/fortune-6-2026-11-21`, seated 2026-11-21 23:19 UTC on 3210
 
 | branch | tip | state |
 |---|---|---|
-| `lane/fortune-6-2026-11-21` | merge d29cb4084 + this hand-back (pushed) | this lane |
+| `lane/fortune-6-2026-11-21` | 7e7420a60 + this hand-back (pushed) | this lane |
+| `lane/fortune-6-2026-11-21-u5d` | (the builder's; pushed as `-u5d-wip` if cut short) | U5d-ECO-ANCHOR's builder branch, from 7e7420a60 |
 | `lane/fortune-6-2026-11-21-u5bw` | 252047285 (local only, merged) | U5b-WORDING's builder branch |
 | `lane/fortune-6-2026-11-21-u5c` | f2f56c734 (local only, merged) | U5c-FIRSTPAINT's builder branch |
 | `lane/fortune-6-2026-11-21-cure2u2` | 7ff3feecc (local only, merged) | unit 2's builder branch |
@@ -25,7 +26,7 @@ server). Branch `lane/fortune-6-2026-11-21`, seated 2026-11-21 23:19 UTC on 3210
 | U5b-WORDING (rulings 5 and 7) | MERGED 2273a2331, the source diff read whole: A and C take B's opening VERBATIM, `ago` retired, `FORTUNE_MERIT_LINES` on the sameness hand list with `HAND_CEILING` 73 -> 74. RED at 2fe23c0f6: the two reworded-line titles, and TOTALITY 1 failed / 28 passed. GREEN, the builder's: new test 10/10; named files 39/39; `tests/lint` 3 failed / 3359 passed, the 3 on RED-AT-LINE; typecheck:ratchet 167/167; domain strict 1113/1113; lint 0 errors; the lighting census re-taken (titles 31632 -> 31634). RE-RUN BY ME at the merge: the new test and the sameness walker, 39/39. FIRST PAINT against 2fe23c0f6: raw 0, gzip -12, Brotli +66. The +66 is hash entropy: the entry chunk is byte-identical once the lazy chunks' hashes are normalized (EXECUTED). PAGES-BUILT.md re-rendered (252047285) | b7ee02d7f, 49ba2f7d6, 252047285; merge 2273a2331 |
 | U5c-FIRSTPAINT (rulings 6 and 8) | MERGED d29cb4084, the diff read whole. `fortuneMerits.js` gets the last `ENGINE_SHARED_DOMAIN_EXCISIONS` row and a pin to its OWN `fortune-merits` chunk. Pinning it into `fortune-law` (as first ruled) was MEASURED and refused: the law's chunk gained a data-lazy edge, and `densityCreateBoundary`'s closure went 701,978 -> 2,642,547. U6's comment has two words corrected. THE SIZE ACCOUNT: below, section 5 | f2f56c734; merge d29cb4084 |
 
-NEXT STEP: rule 8's build and directories at the tip with that unit merged, and "FORTUNE <commit>". A newer line tip may be pushed: read `ci/LINE-NOW.md` again before the landing line.
+NEXT STEP: merge U5d (`briefs/U5d-ECO-ANCHOR.md`, test-only: arm (b) of `tests/domain/fortuneLawEconomyHeader.test.js` anchored on eligibility, not on a draw), re-run `tests/lint` whole (COMMON-EIGHTH 11), then send "FORTUNE <commit>" with `measures/REGISTERS-AT-LINE.md`, section 5's size account and the reds by name. RULE 8 IS DONE at 745bab4f3 (the line f5295e425 merged): `tests/build` 15 failed / 600 passed, all on the list; `tests/lint` 3 failed / 3359 passed, the line's three; the directories plus 288 named test files, 47 failed / 7596 passed, 46 on the list and the one U5d cures. FOR FORTUNE-7 AFTER THAT: `briefs/U7-LASTING.md`, then `briefs/U7b-LASTING-SENTENCE.md` (ruling 10).
 
 ## 2. Rulings in force (FORTUNE-5's section 0 items 1 to 7 stand; added since)
 
