@@ -137,6 +137,14 @@ export function withholdAlways(s) {
   if (Array.isArray(s.npcs)) for (const n of s.npcs) if (isRec(n)) eachMinusAt(n, ['memberships'], ['veiled']);
   // registry: power.fingerprint
   minusAt(s, ['powerStructure'], ['economyInputFingerprint']);
+  // registry: power.recentConflict
+  // registry: power.recentConflict.pressureSentence
+  // (R5-RECENT, E92 (1), E93, E97 (1): the key on no shared read; the page re-derives it, pageRederive.js ::
+  // rederiveRecentConflict. Its copy, the top-level pressureSentence wherever it EQUALS the stored recentConflict, judged
+  // before the key leaves; the page does not re-fill it in this unit)
+  const pw = recAt(s, 'powerStructure');
+  if (pw && typeof pw.recentConflict === 'string' && typeof s.pressureSentence === 'string' && s.pressureSentence === pw.recentConflict) delete s.pressureSentence;
+  minusAt(s, ['powerStructure'], ['recentConflict']);
   // registry: power.contestsNiche
   // registry: power.rawPower
   // registry: power.factions.legitimacyCrisis

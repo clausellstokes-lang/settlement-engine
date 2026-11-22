@@ -1,0 +1,27 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 6147 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  15:44:52 up  7:47,  0 user,  load average: 1.43, 1.01, 1.38 · cores: 4
+{
+ "births": 480,
+ "a": 326,
+ "b": 90,
+ "bBranch": {
+  "stress": 60,
+  "succession (by elimination)": 30
+ },
+ "aBranch": {
+  "stress": 170,
+  "tie": 8,
+  "succession (by elimination)": 148
+ },
+ "c": 0,
+ "cReads": 0,
+ "cBranch": {},
+ "scanBirths": 480,
+ "scanPaths": {
+  "pressureSentence": 154
+ },
+ "thirdCopies": []
+}
+[gate-tail] end:  15:49:21 up  7:51,  0 user,  load average: 1.14, 1.32, 1.44
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/7c0d51b5-5ce2-5824-9d4a-67ecf2c2d258/scratchpad/gate-tail.6489.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

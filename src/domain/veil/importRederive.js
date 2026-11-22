@@ -32,7 +32,7 @@ import { promoteStressorsToConditions } from '../conditionPromotion.js';
 import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
 import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
 import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/economy/prosperity.js';
-import { rederiveCrimeTypes } from './pageRederive.js';
+import { rederiveCrimeTypes, rederiveRecentConflict } from './pageRederive.js';
 
 /** @typedef {Record<string, unknown>} Doc */
 
@@ -227,5 +227,11 @@ export function rederiveInPlace(s) {
   //     document (pageRederive.js :: rederiveCrimeTypes), only where the served data proves its grouping open; else left out.
   //     AUTHORITATIVE: the saved list is the reader's whatever the document held (the share sends none; it is never asked).
   rederiveCrimeTypes(s, { authoritative: true });
+
+  // 11. THE RECENT-CONFLICT SENTENCE (R5-RECENT; E92 (2), E93): withheld on every read, re-derived by the page's ONE reader
+  //     over the served document (pageRederive.js :: rederiveRecentConflict, the engine's own writer); else left out.
+  //     AUTHORITATIVE: the saved sentence is the reader's whatever the document held. Its pressureSentence copy, withheld
+  //     where it equalled the sentence, is not re-filled (E97 (1)).
+  rederiveRecentConflict(s, { authoritative: true });
   return s;
 }

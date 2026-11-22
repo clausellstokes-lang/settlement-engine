@@ -1,0 +1,27 @@
+[gate-tail] start:  15:38:04 up  7:40,  0 user,  load average: 1.93, 1.52, 1.73 · cores: 4
+{
+ "thorp births": 80,
+ "thorp stored pressureSentence === recentConflict": 47,
+ "ALL stored pressureSentence === recentConflict": 154,
+ "ALL served (twin, unmarked) dm=false pressureSentence === stored recentConflict": 111,
+ "ALL served (twin, unmarked) dm=true pressureSentence === stored recentConflict": 111,
+ "hamlet births": 80,
+ "hamlet stored pressureSentence === recentConflict": 27,
+ "ALL served (twin, unmarked) dm=false pressureSentence === stored recentConflict [a HIDING place]": 43,
+ "ALL served (twin, unmarked) dm=true pressureSentence === stored recentConflict [a HIDING place]": 43,
+ "village births": 80,
+ "village stored pressureSentence === recentConflict": 21,
+ "town births": 80,
+ "town stored pressureSentence === recentConflict": 23,
+ "city births": 80,
+ "city stored pressureSentence === recentConflict": 21,
+ "metropolis births": 80,
+ "metropolis stored pressureSentence === recentConflict": 15
+}
+  r5c2-m3-hamlet-35: "The most devout households want a say over who may trade and when, and not everyone here agrees."
+  r5c2-m3-town-8: "A noble family is contesting a merchant's right to operate in their traditional market territory. Guild Council is hearing the case and wishes it were not."
+  r5c2-m3-town-9: "The church is demanding veto power over council appointments. Feudal Appointee has not yet refused publicly."
+  r5c2-m3-town-15: "Two rival guilds are contesting control of the main trade route. Neither side will back down and Arcane Council is avoiding the question."
+  r5c2-m3-town-20: "Town Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has
+  r5c2-m3-town-32: "Two rival guilds are contesting control of the main trade route. Neither side will back down and Merchant oligarchy is avoiding the question."
+[gate-tail] end:  15:39:18 up  7:41,  0 user,  load average: 1.74, 1.60, 1.75

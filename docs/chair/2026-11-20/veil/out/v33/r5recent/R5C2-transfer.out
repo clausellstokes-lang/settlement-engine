@@ -1,0 +1,8 @@
+coup error null | stored sentence: Merchant Guilds overthrew the merchant oligarchy and reshaped the government as a grand merchant senate.
+  served powerStructure keys: factions,governingName,government,stability,recentConflict,publicLegitimacy,factionRelationships,powerProjectionVersion,conflicts,previousGovernments
+  served previousGovernments: [{"label":"Merchant oligarchy","cause":"coup","tick":null}] | governingName Grand Merchant Senate
+  served rows: [["Grand Merchant Senate",true,["seized_power"]],["Merchant Guilds",false,["ascendant"]],["Noble Families",false,null],["Religious Authorities",false,null],["Military/Guard",false,null],["The Guild Alliance",false,null],["The Devout Circle",false,null]]
+election error null | stored sentence: Power passed to Merchant Guilds by election; the government now sits as a grand merchant senate, and the merchant oligarchy keep their place among the powers.
+  served powerStructure keys: factions,governingName,government,stability,recentConflict,publicLegitimacy,factionRelationships,powerProjectionVersion,conflicts,previousGovernments
+  served previousGovernments: [{"label":"Merchant oligarchy","cause":"election","tick":null}] | governingName Grand Merchant Senate
+  served rows: [["Grand Merchant Senate",true,["election"]],["Merchant Guilds",false,["ascendant"]],["Noble Families",false,null],["Religious Authorities",false,null],["Military/Guard",false,null],["The Guild Alliance",false,null],["The Devout Circle",false,null],["Merchant oligarchy",false,["fell_from_power"]]]
