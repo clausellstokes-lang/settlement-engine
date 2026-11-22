@@ -1,4 +1,4 @@
-# THE FLIP'S CENSUS (CLOSE-1 unit 4; IN PROGRESS; last written 2026-11-22 14:28 UTC, read from `date -u`)
+# THE FLIP'S CENSUS (CLOSE-1 unit 4; IN PROGRESS; last written 2026-11-22 14:56 UTC, read from `date -u`)
 
 THE RUN (the chair's cut, 13:07 UTC): ONLY THE LIT HALF, on the lit scratch `lane/close-1-lit-scratch-2026-11-22` at
 e987c3e36 (the trial join of point 97 and fortune f13f31820, its doors, and the three dials). THE DARK LIST IS
@@ -40,3 +40,39 @@ the dark corpus only. FOR THE CHAIR: the guard re-cut with the X4 floor (the upk
 
 ### (a) the 77 pins: see `census/lit-gen-classed.tsv` (one row each, its cause). No test names a refreeze door
 except `tests/fixtures/goalHashes.mjs` (the goal sentences' hashes).
+
+### Related evidence for U8 (the fortune lane's CRISIS-POWER unit, E86): class (a), NOT a fault on its own
+`tests/generators/people/successionClaimants.test.js` (the review's two towns) and `tests/domain/people/seatKeeper.test.js`
+(the review's Grudino): rvf-succession_void-city-4 loses its "Noble Claimant (Reform Line)" UNDER FORTUNE ALONE
+(`census/claimant-probe.mjs` on four trees: dark and seat-alone keep both claimants; fortune-alone and both keep one),
+with prosperity Comfortable → Struggling and legitimacy 53 → 14 (a city read against cities). The page stays true of
+its record ("a claimant circles"), so it is a premise that moved; but it is the SAME EFFECT as true fault 1 (the fortune
+law changes which powers a crisis is born with), in a city and in the other direction (the place falls, not rises).
+
+## PART 2: tests/domain (lit, ended 14:51 UTC)
+1,353 files, 20,060 tests: 62 red; 5 on RED-AT-LINE; 57 NEW, ALL class (a) (`census/lit-domain-classed.tsv`):
+
+| kind | SEAT | FORTUNE | JOIN | all |
+|---|---|---|---|---|
+| PREMISE (a seed chosen to meet a case; ten corpus pool rows name their door: re-key the row) | 0 | 6 | 26 | 32 |
+| DIAL PIN (pins a dial's dark default or the absent marker: the three wiring files, seatContest, livingContentLawWiring, fortuneMeritSentence U5b (b)) | 10 | 3 | 1 | 14 |
+| BORN ANCHOR | 2 | 2 | 5 | 9 |
+| STORED PIN (`dailyLifeNoPeople`: door `tests/fixtures/daily-life-no-people-before.json`; `bar5SafetyLawBand`'s in-test count 22 vs 45) | 0 | 1 | 1 | 2 |
+| (b), (c), (d) | 0 | 0 | 0 | 0 |
+
+NOTES: `tests/domain/fortuneLawEconomyHeader.test.js` ("law 1 still fills the slot") is the red fortune's U5d cured
+(199a29f82, merged 5110c1e8d, on the line): the lit scratch lacks it; it clears when the lit ref takes c110dd85b.
+MASKED GUARDS, re-read after their re-pin: `tensionCause` and `dailyLifeNoPeople` stop at a failed premise, so their
+owner-versus-public parity arms are not read on the seeds that failed.
+
+## PART 3: tests/build whole, after one build (lit, ended 14:55 UTC)
+621 tests: 15 red, ALL 15 ON RED-AT-LINE; nothing new. THE LIT SIZE FIGURES (class (c), for the owner's size signing),
+beside the line at point 98 (dark):
+
+| figure | the line, point 98 (dark) | the lit scratch | difference |
+|---|---|---|---|
+| first paint raw | 1,184,071 | 1,184,071 | 0 |
+| first paint gzip | 376,756 | 376,747 | -9 |
+| first paint Brotli | 316,424 | 316,505 | +81 (PLAUSIBLY hash entropy) |
+| the generation worker | 2,704,317 | 2,706,652 | +2,335 (PLAUSIBLY the flip: the dark dials let the minifier drop dead lit branches; NOT YET PROVEN by a dark build of the same tree) |
+| the engine chunk | 929,672 | 929,672 | 0 |
