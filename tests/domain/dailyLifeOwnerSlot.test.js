@@ -22,9 +22,14 @@
  *       result carries the key or the owner's text.
  *   (d) THE COUNT: a getter trap on every person of each `toPublicSafe` document counts the reads of `secret`,
  *       `plotHooks` and `goal` during the public derivation of that document.
- *   (e) A "smugglers" line needs smuggling in the record: no fact home answers it, so no pool line says it.
+ *   (e) A "smugglers" line needs smuggling in the record (RE-READ at B3 F2, the chair's ruling 2 of 2026-11-22 06:17 and
+ *       its word of 08:54): a line that says smugglers is in the pool ONLY with `house: smuggling` among its needs (a
+ *       smuggling house on the live roster, `facts/causeHouses.js :: causeHouseStands`), and no owner's read prints one
+ *       where no smuggling house stands (the 30 births, criminal opportunity forced to 60: the crime55 branch).
  *   (f) THE CHAIR'S crime70 K70_4 (B3 F1; `DAILY-3-HANDBACK.md` § 2 item 4): in the pool with no need, and at criminal
  *       opportunity 100 the owner's crime70 pick takes it on a born place.
+ *   (g) THE CHAIR'S crime55 K55_0 to K55_3 (B3 F2): LINES-2b § 6's four smugglers lines, verbatim, in the crime55 pool,
+ *       each with `house: smuggling` beside its other needs in the vocabulary's own atoms (`gate`, `route open`, `market`).
  */
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -237,13 +242,24 @@ describe('THE COUNT: the public derivation of a shared read\'s document reads no
 });
 
 describe('a "smugglers" line needs smuggling in the record', () => {
-  it('no fact home answers smuggling, so no line of the owner-only pool says smugglers, and no owner\'s read prints one', async () => {
+  it('a line that says smugglers is in the owner-only pool only with house: smuggling among its needs, and no owner\'s read prints one where no smuggling house stands (the 30, criminal opportunity forced to 60)', async () => {
     const { COMMONER_RESENTMENTS_DM } = await import('../../src/data/dailyLife/commonerResentmentsDm.js');
+    const { causeHouseStands } = await import('../../src/domain/facts/causeHouses.js');
     const lines = Object.values(COMMONER_RESENTMENTS_DM).flat();
-    expect(lines.length).toBeGreaterThan(0);
-    expect(lines.filter((l) => /smuggl/i.test(l.text)).map((l) => l.id)).toEqual([]);
-    const said = births.map((b) => deriveDailyLife(b.rec, { audience: 'owner' }).slots[DM]?.text ?? '').filter((t) => /smuggl/i.test(t));
-    expect(said).toEqual([]);
+    const smugglers = lines.filter((l) => /smuggl/i.test(l.text));
+    expect(smugglers.length, 'the pool\'s lines that say smugglers').toBeGreaterThan(0);
+    for (const l of smugglers) expect(l.needs, `${l.id}: its needs`).toContain('house: smuggling');
+    /** @type {string[]} */ const unhoused = [];
+    let housed = 0;
+    withCrime(() => {
+      for (const b of births) {
+        const text = deriveDailyLife(b.rec, { audience: 'owner' }).slots[DM]?.text ?? '';
+        if (!/smuggl/i.test(text)) continue;
+        if (causeHouseStands(b.rec, 'smuggling')) housed++; else unhoused.push(`${b.seed}: "${text}"`);
+      }
+    }, 60);
+    process.stderr.write(`dailyLifeOwnerSlot (e): smugglers printed at 60 on ${housed} place(s) with a smuggling house, ${unhoused.length} without\n`);
+    expect(unhoused, 'an owner\'s read printing smugglers where no smuggling house stands').toEqual([]);
   }, HEAVY);
 });
 
@@ -259,4 +275,22 @@ describe('the chair\'s crime70 line K70_4 (B3 F1)', () => {
     withCrime(() => { for (const b of births) if (deriveDailyLife(b.rec, { audience: 'owner' }).slots[DM].text === K70_4) took.push(b.seed); }, 100);
     expect(took.length, 'the born places whose crime70 pick is K70_4').toBeGreaterThan(0);
   }, HEAVY);
+});
+
+describe('the chair\'s crime55 lines K55_0 to K55_3 (B3 F2)', () => {
+  const K55 = Object.freeze([
+    { id: 'K55_0', text: 'Commoners resent the smugglers who pay no tax while honest carts queue.', needs: ['house: smuggling', 'gate', 'route open'] },
+    { id: 'K55_1', text: 'Commoners resent the smugglers who slip goods past while honest traders pay their dues.', needs: ['house: smuggling', 'market'] },
+    { id: 'K55_2', text: 'People grumble that smuggled goods undercut honest sellers at the market.', needs: ['house: smuggling', 'market'] },
+    { id: 'K55_3', text: 'Honest carriers resent waiting their turn while smugglers come and go as they please.', needs: ['house: smuggling', 'route open'] },
+  ]);
+  it('K55_0 to K55_3 are in the crime55 pool with LINES-2b § 6\'s texts and needs, each beside house: smuggling', async () => {
+    const { COMMONER_RESENTMENTS_DM } = await import('../../src/data/dailyLife/commonerResentmentsDm.js');
+    for (const want of K55) {
+      const line = COMMONER_RESENTMENTS_DM.crime55.find((l) => l.id === want.id);
+      expect(line, `crime55 ${want.id}`).toBeDefined();
+      expect(line?.text, want.id).toBe(want.text);
+      expect(line?.needs, want.id).toEqual(want.needs);
+    }
+  });
 });

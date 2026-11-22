@@ -11,6 +11,10 @@
  *   (c) THE LANE'S HIDEABLE-AND-CRIME ARM (ruling 6, LINES-COMMON rule 6): every line of every pool under
  *       `src/data/dailyLife/` declares only declarable atoms, no crime atom, and no atom a hideable house
  *       (`people/cardVeil.js :: isHideableHouse`) of the catalogue can satisfy; the walker reds on planted bad lines.
+ *       THE ONE EXCEPTION (B3 F2; the chair's ruling 2 of 2026-11-22 06:17, "the hideable need is lawful" in the
+ *       owner-only table, derived for the owner alone): `commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM` may carry
+ *       the hideable need `house: smuggling`, ONLY on its crime55 lines and ONLY where the line's text says smugglers;
+ *       any other hideable need there, that need on any other line, and every public pool's line still red.
  */
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync } from 'node:fs';
@@ -75,6 +79,8 @@ const NEED_ATOMS = Object.freeze({
   fish: ['fish'], livestock: ['livestock'], game: ['game'], grainImport: ['grain imported', 'no grain'],
   prosperous: ['prosperity: ≥ comfortable'], notProsperous: ['prosperity: < comfortable'], notSmallTier: ['tier: ≥ village'],
   noGuard: ['no guardPresence'], watch: ['watch'], healer: ['sick house'], noHealer: ['no sick house'], magic: ['magic'],
+  // LINES-2b § 6 (B3 F2): the live-house half of `smuggling` (the income-row half is NOT built)
+  smuggling: ['house: smuggling'],
 });
 /** Need names with NO granted home (ruling 12 (2): not granted; reported, not built). */
 const NOT_GRANTED = Object.freeze({
@@ -88,7 +94,10 @@ const NOT_GRANTED = Object.freeze({
   elders: 'a government-label name test /elder/: no fact home', headman: 'a government-label name test /headman/: no fact home',
   mayor: 'a government-label name test /mayor/: no fact home', reeve: 'a government-label name test /reeve/: no fact home',
   steward: 'a government-label name test /steward/: no fact home',
-  smuggling: 'a live-house or income-row name test /smuggl/: no fact home, and a crime fact (owner-only slot)',
+  // `smuggling` RETIRED at B3 F2: the atom now exists on the line (`house: smuggling`, `facts/causeHouses.js ::
+  // causeHouseStands`, the trouble lane's point 96), so the need maps above; its income-row half (an
+  // `economicState.incomeSources[]` row /smuggl/) is NOT built, and the hideable need is lawful only in the owner-only
+  // table (arm (c)'s one exception).
   'power.merchant': 'the dominant power\'s archetype (factionProfile): no fact home',
   'power.religious': 'the dominant power\'s archetype (factionProfile): no fact home',
   'power.military': 'the dominant power\'s archetype (factionProfile): no fact home',
@@ -175,6 +184,29 @@ function hideableCrimeFaults(lines, hideable) {
   return faults;
 }
 
+/**
+ * THE OWNER-ONLY EXCEPTION (B3 F2). The one table: its path prefix as `linesOf` writes it. DM-named by the rule of
+ * `tests/lint/samenessHideable.walker.test.js :: isDmNamed` (`DM_NAMED`, restated: importing a test file would run its
+ * tests here).
+ */
+const DM_NAMED = /(?:_dm|Dm|_DM)$/;
+const OWNER_ONLY_TABLE = 'commonerResentmentsDm.js:COMMONER_RESENTMENTS_DM';
+const OWNER_ONLY_NEED = 'house: smuggling';
+/** A line the exception covers: the owner-only table's crime55 branch, its text saying smugglers. @param {{ path: string, line: Record<string, unknown> }} l */
+const ruledSmugglersLine = ({ path, line }) => path.startsWith(`${OWNER_ONLY_TABLE}.crime55[`) && /smuggl/i.test(String(line.text));
+/**
+ * The arm with its one exception: a ruled smugglers line has `house: smuggling` (and that need alone) lifted before the
+ * walker reads it; every other line is read whole.
+ * @param {Array<{ path: string, line: Record<string, unknown> }>} lines @param {Array<Record<string, unknown>>} hideable
+ */
+function hideableCrimeFaultsOwnerAware(lines, hideable) {
+  return lines.flatMap((l) => {
+    if (!ruledSmugglersLine(l)) return hideableCrimeFaults([l], hideable);
+    const needs = Array.isArray(l.line.needs) ? l.line.needs.filter((n) => n !== OWNER_ONLY_NEED) : l.line.needs;
+    return hideableCrimeFaults([{ path: l.path, line: { ...l.line, needs } }], hideable);
+  });
+}
+
 const POOL_DIR = fileURLToPath(new URL('../../src/data/dailyLife/', import.meta.url));
 /** Every pool file under `src/data/dailyLife/` and its lines. */
 async function dailyLifePoolLines() {
@@ -212,8 +244,34 @@ describe('(c) the hideable-and-crime arm: no daily-life pool line needs a hideab
     const lines = Object.keys(KIND_ROWS).map((k) => ({ path: `kind.${k}`, line: { text: 'x', needs: [`institution: ${k}`] } }));
     expect(hideableCrimeFaults(lines, hideable)).toEqual([]);
   });
-  it('every line of every pool under src/data/dailyLife/ is clean', async () => {
+  it('every line of every pool under src/data/dailyLife/ is clean, save the owner-only table\'s ruled smugglers lines\' house: smuggling (B3 F2)', async () => {
     const { lines } = await dailyLifePoolLines();
-    expect(hideableCrimeFaults(lines, hideable)).toEqual([]);
+    const [file, table] = OWNER_ONLY_TABLE.split(':');
+    expect(DM_NAMED.test(file.replace(/\.[cm]?jsx?$/, '')) && DM_NAMED.test(table), 'the exception\'s table is dm-named').toBe(true);
+    const publicLines = lines.filter((l) => !l.path.startsWith(`${OWNER_ONLY_TABLE}.`));
+    expect(publicLines.length).toBeGreaterThan(0);
+    expect(hideableCrimeFaults(publicLines, hideable), 'the public pools, read whole').toEqual([]);
+    expect(hideableCrimeFaultsOwnerAware(lines, hideable), 'every pool, the one exception lifted').toEqual([]);
+    // the exception is live, not a blanket: the ruled lines read whole fault on house: smuggling alone, once each
+    const ruled = lines.filter(ruledSmugglersLine);
+    expect(ruled.length, 'the ruled smugglers lines (K55_0 to K55_3)').toBe(4);
+    const whole = hideableCrimeFaults(ruled, hideable);
+    expect(whole).toHaveLength(ruled.length);
+    for (const f of whole) expect(f, f).toMatch(/: 'house: smuggling' is satisfied by the hideable house '/);
+  });
+  it('planted: the exception lifts house: smuggling only on a smugglers line of the owner-only table\'s crime55, and nothing else', () => {
+    const at = (/** @type {string} */ path, /** @type {string} */ text, /** @type {string[]} */ needs) => ({ path, line: { text, needs } });
+    const dm55 = `${OWNER_ONLY_TABLE}.crime55[9]`;
+    const lines = [
+      at(dm55, 'Commoners resent the smugglers.', ['house: smuggling', 'market']),
+      at('commonerResentments.js:COMMONER_RESENTMENTS.food[9]', 'Commoners resent the smugglers.', ['house: smuggling']),
+      at(dm55, 'Commoners resent the smugglers.', ['house: black_market']),
+      at(dm55, 'Commoners resent the idle.', ['house: smuggling']),
+      at(`${OWNER_ONLY_TABLE}.crime70[9]`, 'Commoners resent the smugglers.', ['house: smuggling']),
+      at(dm55, 'Commoners resent the smugglers.', ['house: smuggling', 'organised crime']),
+    ];
+    expect(hideableCrimeFaultsOwnerAware(lines, hideable).map((f) => f.split(': ')[0])).toEqual([
+      'commonerResentments.js:COMMONER_RESENTMENTS.food[9]', dm55, dm55, `${OWNER_ONLY_TABLE}.crime70[9]`, dm55,
+    ]);
   });
 });

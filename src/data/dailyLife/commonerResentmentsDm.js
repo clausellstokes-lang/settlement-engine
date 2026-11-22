@@ -10,14 +10,16 @@
  * (`domain/dailyLife.js :: deriveCommonerResentmentsDm`) runs only when `deriveDailyLife(record, { audience: 'owner' })`
  * is called; it hands the branch's lines to `facts/drawDeclared.js :: filterDeclared` and picks one by
  * `kernel/proseHash.js :: pickVariantMixed` keyed `<record.name>::dailyLife.commoner_resentments_dm::<branch>`.
- * No line needs a hideable house or a crime atom (`tests/domain/dailyLifeAtoms.test.js`, arm (c)); the branch itself is
- * the crime fact, and it is read on the owner's audience alone (`tests/domain/dailyLifeOwnerSlot.test.js`).
+ * No line needs a crime atom (`tests/domain/dailyLifeAtoms.test.js`, arm (c)); the branch itself is the crime fact, and it
+ * is read on the owner's audience alone (`tests/domain/dailyLifeOwnerSlot.test.js`).
  *
- * NOT BUILT (a need with no atom, ruling 11; `dailyLifeAtoms.test.js :: NOT_GRANTED` `smuggling`): crime55 #0 to #3 of
- * LINES-2b § 6, the four lines that say smugglers. Each needs smuggling in the record, and no fact home answers it: the
- * crime structure's key (`facts/criminalStructureKey.js`) folds a smuggling house into `semi-organized` with a black
- * market and a gambling den, and the criminal-income home (`facts/criminalIncome.js`) reads any criminal revenue. A line
- * with no true need is not eligible, so the branch keeps the chair's three.
+ * THE CHAIR'S RULING OF B3 F2 (ruling 2 of 06:17 of 2026-11-22 and its word of 08:54): crime55 #0 to #3 of LINES-2b § 6,
+ * the four lines that say smugglers, are built VERBATIM as `K55_0` to `K55_3`, each with `house: smuggling` (a smuggling
+ * house on the live roster, `facts/causeHouses.js :: causeHouseStands`) beside its other needs as LINES-2b writes them,
+ * in the vocabulary's own atoms (`gate`, `route open`, `market`); the income-row half of LINES-2b's "smuggling" is NOT
+ * built (the stricter reading: a line that says smugglers prints only where a smuggling house lives). The need is a
+ * hideable house, lawful here because this table is derived for the owner alone (`tests/lint/samenessHideable.walker.test.js
+ * :: DM_BY_CONSTRUCTION` names it, for the security reader).
  *
  * THE CHAIR'S LINE OF B3 F1 (06:17 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 item 4): crime70 #4 of LINES-2 § 2b as the
  * chair reworded it ("… the law here bends for anyone who can pay."; the presumption-classes walker read "to spare" as
@@ -40,8 +42,13 @@ export const COMMONER_RESENTMENTS_DM = Object.freeze({
     { id: 'K70_4', text: 'Ordinary folk resent that the law here bends for anyone who can pay.', needs: [] },
     { id: 'K70_5', text: 'People grumble that honest folk are pressed hard while lawbreakers with money walk free.', needs: [] },
   ]),
-  /** criminal opportunity >= 55 and below 70: wrongdoing pays (the chair's three of 18:47). */
+  /** criminal opportunity >= 55 and below 70: smugglers (only where a smuggling house stands; B3 F2) and wrongdoing pays
+   * (the chair's three of 18:47). */
   crime55: frozen([
+    { id: 'K55_0', text: 'Commoners resent the smugglers who pay no tax while honest carts queue.', needs: ['house: smuggling', 'gate', 'route open'] },
+    { id: 'K55_1', text: 'Commoners resent the smugglers who slip goods past while honest traders pay their dues.', needs: ['house: smuggling', 'market'] },
+    { id: 'K55_2', text: 'People grumble that smuggled goods undercut honest sellers at the market.', needs: ['house: smuggling', 'market'] },
+    { id: 'K55_3', text: 'Honest carriers resent waiting their turn while smugglers come and go as they please.', needs: ['house: smuggling', 'route open'] },
     { id: 'K55_4', text: 'People grumble that those who break the rules do better here than those who keep them.', needs: [] },
     { id: 'K55_5', text: 'Honest folk say that crime pays better here than work.', needs: [] },
     { id: 'K55_6', text: 'People resent how little is done about wrongdoing that everyone knows of.', needs: [] },
