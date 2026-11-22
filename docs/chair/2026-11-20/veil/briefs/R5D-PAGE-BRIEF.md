@@ -22,6 +22,12 @@ By VEIL-34 on E115, E116, E121 (vetoable by the owner). Dispatched only after R5
    engine (a scratch worktree at origin/master, the pool's seeds), stored, read through 212 and the twin: every legacy standing cut whole
    (count of count) and the differential on them. Say the closed-branch count (descs served as base because no row matched) and what the 3
    of 328 no-match descs that carry a tail are.
+5b. THE PRESENCE-PICKED BASES' ARM (E126): the 13 templates of `out/v34/r5d1/R5D1-MEASURE.md` (`lane/veil-34-2026-11-22-r5d1-wip`
+   ee2dbda33). PLANTS hide BY HAND every input a pick reads that an owner CAN hide: a power row (a density host, a noble power) AND a house
+   the pick reads (a house of the seat's own, a noble house), on born towns and on act T's lit pages: the STORED base served equals the
+   base picked over the SERVED document, both engines; a difference reds and NAMES its template (that template is then the chair's to
+   withhold always). A house no owner's choice can hide: said in the arm's header with the rule that makes it so. If the arm needs
+   `rivalDescOf` or `reeveToRoster`, an export is allowed ONLY if no birth and no first-paint byte moves: say which, with the proof.
 6. THE PINS: E94 (c) (every label writer draws from a kind table; `densityAscension.js :: planSeatAscension` gaining a caller reds); the
    composed-hosts walker: `power.desc`, `power.relation.dmNote` built in their hosts, `power.label` off the composed form (its census, 0
    hits); a readers' walker for `rederiveStanding` on `crimeTypesReaders.walker`'s pattern; manifest rows (`{rationale, pglite-executed}`).
