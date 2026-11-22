@@ -1,0 +1,7 @@
+## NEW: 2
+tests/domain/fortuneLastingSentence.test.js	U7b (c): no merit, no sentence a law-1 birth (the dial dark), a law-2 birth without the merit and a 	(a)	DIAL PIN
+tests/domain/seat/seatChainHolder.test.js	8. the tonight sheet names the old house's person by no office word after the transfer the four whos	(a)	BORN ANCHOR
+## GONE: 2
+tests/domain/fortuneLawEconomyHeader.test.js	FS7 F1: the high rung never credits its money to a subsistence living (law 2 only) (b) DARK: the sam	(a)	PREMISE
+tests/domain/livingContentLawWiring.test.js	the living-content law is WIRED, and THE PROMISE survives it ⭐ CREATE (LIT, the product path): birth	(a)	DIAL PIN
+## CHANGED: 0

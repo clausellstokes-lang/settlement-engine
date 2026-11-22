@@ -1,0 +1,248 @@
+## FAILURES BY KIND
+kind	file	title	ms
+WRONG RESULT	tests/data/catalogGuildTag.test.js	the three villages of CENSUS-4c unit 1 soak1k-236 and -320: the guild atom is false and no Guild Master is crewed	431
+WRONG RESULT	tests/data/colourMarks4h.test.js	CENSUS-4h: the colour marks follow the ledger, line for line the tie prose: every colour variant is `{ line, colour: true }`, every other ro	14
+WRONG RESULT	tests/generators/arcaneAdvisoryReadsTheSeat.test.js	TAIL-POWERS-B-2 batch 6a · the arcane advisory line reads the seat r2s-occupied-city-3: an Arcane Council governs; the practitioners are not	24
+WRONG RESULT	tests/generators/bar2PayAndGrain.test.js	BAR2-LABELS-2 batch 4: the defenders' pay reads the military gate (LB4); the need line reads the food record (LB6) NOT "irregular pay" where	1355
+WRONG RESULT	tests/generators/bar2PayAndGrain.test.js	BAR2-LABELS-2 batch 4: the defenders' pay reads the military gate (LB4); the need line reads the food record (LB6) NOT "chronically underfun	838
+WRONG RESULT	tests/generators/bar2PayAndGrain.test.js	BAR2-LABELS-2 batch 4: the defenders' pay reads the military gate (LB4); the need line reads the food record (LB6) THE LAW, on every birth a	1
+WRONG RESULT	tests/generators/bar2People2Trade.test.js	BAR2-PEOPLE-2 · a rivalry claims a shared trade only where the pair shares one (PP3, PP3a, PP3b) KEEP r2r-town-15: "Every client Juliana Kam	7
+WRONG RESULT	tests/generators/bar3PeoplePowers.test.js	BAR3-PEOPLE · the note names a decider only where no relation row of the pair speaks (P2) r2r-village-1: not "Holds the title; the decisions	7
+WRONG RESULT	tests/generators/bar3PeoplePowers.test.js	BAR3-PEOPLE · the note names a decider only where no relation row of the pair speaks (P2) r2r-village-9: not "Holds the title; the decisions	1
+WRONG RESULT	tests/generators/bar3PeoplePowers.test.js	BAR3-PEOPLE · the note names a decider only where no relation row of the pair speaks (P2) r2r-village-41: not "Holds the title; the decision	1
+WRONG RESULT	tests/generators/bar3PeoplePowers.test.js	BAR3-PEOPLE · the note names a decider only where no relation row of the pair speaks (P2) KEEP r2r-thorp-25: the note still names People's C	1
+WRONG RESULT	tests/generators/bar3PeopleTies.test.js	BAR3-PEOPLE · a vote from a seat, a trade taught shared, the tie's one state (P1, P5) KEEP r2r-town-14: "Hassan al-Basri took Badr ibn Khald	9
+WRONG RESULT	tests/generators/bar3PlacesRows.test.js	BAR3-PLACES: the rows read the town the flagged line no longer prints, and its slot says what the record bears (every row)	6161
+WRONG RESULT	tests/generators/bar3PlacesRows.test.js	BAR3-PLACES-2: the routed rows read the town the flagged line no longer prints, and its slot says what the record bears (every row)	2375
+WRONG RESULT	tests/generators/bar3PowersLines.test.js	BAR3-POWERS · a power line claims no more than the record bears (P3) C45570 r2r-village-46: "they are waiting for a chance to push back" ref	11
+WRONG RESULT	tests/generators/bar4HistoryOneTelling.test.js	BAR4-HISTORY T1: one past event, one telling (e) C26792: an accepted seat's legitimacy tension says most accept it (red at the base in each 	3225
+WRONG RESULT	tests/generators/bar4HistoryOneTelling.test.js	BAR4-HISTORY T1: one past event, one telling (e2) C26792: the twin prints only beside an accepted seat (r2s-infiltrated-hamlet-0: accepted a	70
+WRONG RESULT	tests/generators/bar4HistoryOneTelling.test.js	BAR4-HISTORY T1: one past event, one telling (f) C26792: the history section regeneration derives the same line (the chair's condition 3)	18
+WRONG RESULT	tests/generators/bar4HistoryOneTelling.test.js	BAR4-HISTORY T1: one past event, one telling (h) C14176: the rank-1 power that could take a Contested seat says so (red at the base in each)	533
+WRONG RESULT	tests/generators/bar7Lines.test.js	BAR7-LINES: seven single writers, each in its own words low.agree: a plural cause takes a plural verb	8
+WRONG RESULT	tests/generators/bar7Scenes.test.js	BAR7-SCENES item 3 (9g.margin, the chair's PM1): the war's requisition row denies no margin the purse holds C15153 · bar0-city-wartime-rand-	542
+WRONG RESULT	tests/generators/bar8People.test.js	BAR8 K-PEOPLE (13b) · a tie that holds someone inside stands where a prison does THE POSITIVE: a town with a prison keeps the held friend (r	410
+WRONG RESULT	tests/generators/bar8People.test.js	BAR8 K-PEOPLE (14b) · no house's network is handled only by another house whose own network it handles (BR13) THE POSITIVE: a network handle	1
+WRONG RESULT	tests/generators/bar8Powers.test.js	BAR8-K-POWERS: a power's own words are true of that power and of the place 13g: where the guild has bought the seat, no card calls the tie a	9
+WRONG RESULT	tests/generators/churchNoteReadsFlag.test.js	the church-economy note reads the flag a theocratic economy whose situation sentence is suppressed still carries its note	9
+WRONG RESULT	tests/generators/conflictRelationsTwin.test.js	TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable bargain r2s-religious_conversion-metropolis-1: Grand Merchant Oligarch	17
+WRONG RESULT	tests/generators/conflictRelationsTwin.test.js	TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable bargain KEEP: every other row of those towns is kept as drawn (no twin	7
+WRONG RESULT	tests/generators/defenceParts.test.js	defence is the sum of its parts the printed prosperity label is the label the tree printed before this lane (pinned at e1b2f9c1f)	12
+WRONG RESULT	tests/generators/defenceParts.test.js	the martial will (R13, R14) R13: where something is built or standing, the will counts no more than the armed bodies that carry it	15
+WRONG RESULT	tests/generators/defenceParts.test.js	the martial will is not paid on the hired branch either (W3) RED-FIRST: where only a hired body stands, the will at the standing pay equals 	25
+WRONG RESULT	tests/generators/faultsWatch.test.js	8 · the court's ties print only where a court sits (FR25) NEGATIVE: where a courthouse sits (bar0-city-wartime-rand-36) both lines still pri	9
+WRONG RESULT	tests/generators/faultsWatch.test.js	8 (c) · the standing names courts only where a court sits (FR25 (c)) NEGATIVE: beside a courthouse (bar0-metropolis-calm-rand-40) the standi	1
+WRONG RESULT	tests/generators/generationForkCensus.test.js	EM-P2 — generation census by execution: the instrument, the classification, both channels A1 — the instrument reaches the generator graph: m	443
+WRONG RESULT	tests/generators/headOfItsPowerRow.test.js	COHERENCE-POWERS-8 · the head of its power is not under its leaders rr2s-city-calm-rand-1: the first of Arcane Orders heads the casters; the	702
+WRONG RESULT	tests/generators/headOfItsPowerRow.test.js	COHERENCE-POWERS-8 · the head of its power is not under its leaders rr2s-metropolis-plague_onset-port-1: Bebinn MacIntyre, the guild archmag	515
+WRONG RESULT	tests/generators/institutionBudgetPromise.test.js	X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget every one of sixty seeds is byte-identical with the density factor 	13
+WRONG RESULT	tests/generators/nameHeldThroughAssembly.test.js	EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte whe	8204
+WRONG RESULT	tests/generators/narrativeQualityCorpus.test.js	relationship tie prose is drawn without replacement per settlement (GS-1) ties of one archetype never share a line until the pool is exhaust	102
+WRONG RESULT	tests/generators/narrativeQualityCorpus.test.js	relationship archetype pools hold eight variants each (GS-1) all 18 archetypes, both fields, eight distinct variants	9
+WRONG RESULT	tests/generators/pipelinePinnedChoosers.test.js	EM-B2a3 — the institution and power choosers consult the pin seam A1 — the null change: an unpinned run and pins {} leave the golden corpus 	7663
+WRONG RESULT	tests/generators/pipelinePinnedMode.test.js	EM-P0 — the pipeline seam: pins are consulted per chooser, on one stream A1 — the null change: no pins and pins {} leave the golden corpus b	7414
+WRONG RESULT	tests/generators/pipelinePinnedMode.test.js	EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives on the runner A2 — the lift moves nothing: the golden corpus, the draw 	5800
+WRONG RESULT	tests/generators/pipelinePinnedMode.test.js	EM-R1b — a recordPath-less chooser is not counted against a record-built bag A5 — EM-R1b: a supplied transient chooser is still handed back,	5099
+WRONG RESULT	tests/generators/powerEconomyFreshness.test.js	EM-R3 — the power structure is final under a held pin A4 — the golden is unmoved by construction, and a held bag does move it	15649
+WRONG RESULT	tests/generators/powerStructure.test.js	F31: powerGenerator split structure no power/ module packs more statements onto shared lines than its ceiling (shrink-only)	9
+WRONG RESULT	tests/generators/powersReadTheRosterP31.test.js	TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land r2r-town-34: not "The Merchant Guilds and the C	11
+WRONG RESULT	tests/generators/powersReadTheRosterP31.test.js	TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land r2r-metropolis-39: not "Three powers stand almo	2
+WRONG RESULT	tests/generators/powersReadTheRosterP31.test.js	TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land r2r-village-12: the Religious Authorities's car	5
+WRONG RESULT	tests/generators/powersReadTheRosterP31.test.js	TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land KEEP r2s-politically_fractured-metropolis-1: "C	1
+WRONG RESULT	tests/generators/powersReadTheRosterP31.test.js	TAIL-POWERS-B-4 batch 8 (P31) · the powers lines read the roster, the conflicts and the land KEEP r2s-succession_void-metropolis-3: "Three p	1
+WRONG RESULT	tests/generators/prosperityStanding.test.js	the standing label (R3): the label with no crisis in force, stored by prosperity's writer the printed label is the label the tree printed be	10
+WRONG RESULT	tests/generators/prosperityStanding.test.js	the standing label (R3): the label with no crisis in force, stored by prosperity's writer economicState.prosperityStanding is the probe's re	1
+WRONG RESULT	tests/generators/prosperityStanding.test.js	the standing label (R3): the label with no crisis in force, stored by prosperity's writer the stores are laid by at the standing label's sha	1
+WRONG RESULT	tests/generators/prosperityStanding.test.js	the standing label (R3): the label with no crisis in force, stored by prosperity's writer keepOfRecord reads the standing label, and an old 	1
+WRONG RESULT	tests/generators/relationLinesSayTheRecord.test.js	TAIL-POWERS-B batch 1 · the relation lines say what the record holds r2r-hamlet-5: not "the commander's agreement"	8
+WRONG RESULT	tests/generators/relationLinesSayTheRecord.test.js	TAIL-POWERS-B batch 1 · the relation lines say what the record holds r2r-metropolis-39: not "Noble Houses live under the rule of"	3
+WRONG RESULT	tests/generators/rosterDuplicateDraws.test.js	REVIEW-INTAKE-4 — no roster carries one secret or one goal twice the corpus is live: the 1,000 births carry rosters of two or more	10
+WRONG RESULT	tests/generators/rosterFinalUnderHeldRoster.test.js	EM-R2 — the roster is final inside enrichNpcCoherence under a held roster A1 — inert with no pins: the golden corpus and the coherence tail 	7665
+WRONG RESULT	tests/generators/standingReadsTheRivalItRead.test.js	TAIL-POWERS-B-3 batch 7 · a standing line reads the rival it read and the strength of its own card r2r-city-45 (Religious Authorities): "The	10
+WRONG RESULT	tests/generators/standingReadsTheRivalItRead.test.js	TAIL-POWERS-B-3 batch 7 · a standing line reads the rival it read and the strength of its own card r2r-city-19 (Thieves' Guild): "Criminal n	2
+WRONG RESULT	tests/generators/standingReadsTheRivalItRead.test.js	TAIL-POWERS-B-3 batch 7 · a standing line reads the rival it read and the strength of its own card r2r-metropolis-25 (Thieves' Guild): "Crim	3
+WRONG RESULT	tests/generators/standingReadsTheRivalItRead.test.js	TAIL-POWERS-B-3 batch 7 · a standing line reads the rival it read and the strength of its own card r2s-religious_conversion-metropolis-0 (Th	2
+WRONG RESULT	tests/generators/stressFactionsClaimWhatTheRecordHolds.test.js	TAIL-POWERS-B-3 batch 6b · the stress factions and the bread hook claim what the record holds r2s-religious_conversion-village-3: "claiming 	9
+WRONG RESULT	tests/generators/stressFactionsClaimWhatTheRecordHolds.test.js	TAIL-POWERS-B-3 batch 6b · the stress factions and the bread hook claim what the record holds r2r-city-10: "a baker says he was told to rais	3
+WRONG RESULT	tests/generators/stressLateReRead.test.js	the insurgency summary: the strong line needs a rival of standing ON THE SETTLED RECORD each RIVAL seed holds a rival of standing at the end	2065
+WRONG RESULT	tests/generators/tailNarrativeRows.test.js	B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1) the flagged sentence no longer prints, and its slot says what the town bea	2842
+WRONG RESULT	tests/generators/tailTies3Batch1.test.js	TAIL-TIES-3 batch 1 NOT (b): no rival claimant on a contested seat; each row says what the condition holds	676
+WRONG RESULT	tests/generators/tailTies3Batch1.test.js	TAIL-TIES-3 batch 1 INSTEAD (b): the contested seat-holder still holds the seat on the card, in the condition's words	50
+WRONG RESULT	tests/generators/tailTies4Batch2.test.js	TAIL-TIES-4 batch 2: a tie gives its military end no office its house does not hold (T19, decided (B)) NOT: the line that gave the card an o	4357
+WRONG RESULT	tests/generators/upkeepHired.test.js	the five upkeep gates read the prosperity label, not the output RED-FIRST agree-village-16 (Comfortable, output 16): every gate is the ident	104
+WRONG RESULT	tests/generators/upkeepHired.test.js	the five upkeep gates read the prosperity label, not the output RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at the 	93
+WRONG RESULT	tests/generators/upkeepHired.test.js	the guard assessment says what the place can pay for its hired force RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard)	62
+WRONG RESULT	tests/generators/upkeepHired.test.js	the charter hall says whether the town can pay its bounties (F7) agree-village-43 (Poor in ordinary years, a charter hall and no standing gu	58
+WRONG RESULT	tests/generators/warContractsSecretProsperity.test.js	the war-contracts secret needs a town the war made rich r2s-wartime-city-0: a comfortable town keeps it	520
+WRONG RESULT	tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people sixty seeds (ten a tier) genera	10848
+WRONG RESULT	tests/property/dmLayerGoldenIsolation.test.js	EM-B2a4 — the DM layer, its pin bag and the golden isolation property A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden o	130487
+WRONG RESULT	tests/property/dossierProseManifest.test.js	the composed-prose manifest — the DRIFT corpus, both audiences ⭐ THE DRIFT ARM: no row added, no row removed, no row moved	27
+WRONG RESULT	tests/property/editCorpusRatchet.test.js	the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A3 no merged object mixes a taken leaf with a settled leaf o	20
+WRONG RESULT	tests/property/editCorpusRatchet.test.js	the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A7 the honesty figures are re-measured and the ride-along ha	4
+WRONG RESULT	tests/property/espionageDormancyFence.test.js	FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to t	65395
+WRONG RESULT	tests/property/generatorGoldenMaster.test.js	generator golden master (cross-build output stability) every config produces byte-identical output to the golden master	69873
+WRONG RESULT	tests/generators/people/dualHatPoliticalMass.test.js	COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place's political mass a small place keeps the power the fold of the office's face in	524
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) thorp: every sentence printed twice is held by an 'exhausted' card, and	1995
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) hamlet: every sentence printed twice is held by an 'exhausted' card, an	2208
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) village: every sentence printed twice is held by an 'exhausted' card, a	2858
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) town: every sentence printed twice is held by an 'exhausted' card, and 	6335
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) city: every sentence printed twice is held by an 'exhausted' card, and 	15252
+WRONG RESULT	tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) metropolis: every sentence printed twice is held by an 'exhausted' card	22105
+WRONG RESULT	tests/generators/people/mintedFaceUnderworld.test.js	COHERENCE-POWERS-7 leftover 1 · the four minted faces of the census's 720 every minted face of the four towns reads "the local underworld", 	2358
+WRONG RESULT	tests/generators/people/mintedLordKeepsLines.test.js	COHERENCE-POWERS-6 item 3: a minted lord pushes no true line off a card the review's six true house lines are on their cards again	936
+WRONG RESULT	tests/generators/people/seatKeeperContender.test.js	COHERENCE-POWERS-6 item 2: the keeper of a vacant seat heads no contender the contender keeps its people: the keeper of rvf-succession_void-	132
+WRONG RESULT	tests/generators/people/successionClaimants.test.js	COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis's own cast the review's two towns: each claimant is a minted person, printed b	666
+WRONG RESULT	tests/generators/seat/seatHolderLines.test.js	U6 (2): a lit holder apart is the office, never under it u6t-city-4 (a city): the Merchant Guilds hold the Merchant oligarchy	807
+WRONG RESULT	tests/generators/power/bar2People3Funding.test.js	BAR2-PEOPLE-3 · "underfunded" only where the funding gate is under 1 (PP11) r2r-city-6: the gate reads 1; not "Tense (militarised, chronical	5
+WRONG RESULT	tests/generators/power/bar2People3Funding.test.js	BAR2-PEOPLE-3 · "underfunded" only where the funding gate is under 1 (PP11) r2s-monster_pressure-city-0: the gate reads 1; not "Tense (milit	1
+WRONG RESULT	tests/generators/power/bar2PeoplePowers.test.js	BAR2-PEOPLE batch A · the powers say what the record holds (PP1, PP2, PP9, PP10) r2r-hamlet-27: not "Holds the title; the decisions that mat	22
+WRONG RESULT	tests/generators/power/bar2PeoplePowers.test.js	BAR2-PEOPLE batch A · the powers say what the record holds (PP1, PP2, PP9, PP10) KEEP r2r-thorp-25: "Holds the title; the decisions that mat	3
+WRONG RESULT	tests/generators/power/seatNamedAsItSits.test.js	TAIL-POWERS-B batch 2 · a council is named only where one sits r2r-town-40: not "council access"	11
+WRONG RESULT	tests/generators/power/seatNamedAsItSits.test.js	TAIL-POWERS-B batch 2 · a council is named only where one sits r2s-famine-city-2: not "every council vote"	5
+WRONG RESULT	tests/generators/power/standingAgainstFigure.test.js	(b) a rival of the density law carries its own standing, never its host's rw3-metropolis-calm-9: The Commercial Circle (a rival of Merchant 	421
+WRONG RESULT	tests/generators/power/standingReadsTheNamedPower.test.js	TAIL-POWERS batch 2 · the towns read: what each prints instead (births) every false town prints its true line; every keep town keeps its lin	5629
+WRONG RESULT	tests/generators/power/tailPowers3Labels.test.js	TAIL-POWERS-3 · batch 1: the account names a power by its prose form; the stability word reads the record r2r-hamlet-10: the account prints 	313
+WRONG RESULT	tests/generators/power/tailPowers3Labels.test.js	TAIL-POWERS-3 · batch 1: the account names a power by its prose form; the stability word reads the record r2r-hamlet-18: the account prints 	130
+WRONG RESULT	tests/generators/power/tailPowers3Labels.test.js	TAIL-POWERS-3 · batch 1: the account names a power by its prose form; the stability word reads the record r2r-town-44: the stability reads "	171
+
+## OVER 8000 MS
+file	title	ms	budget
+tests/property/editCorpusRatchet.test.js	the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A5 a chain is deterministic, undo then re-edit reproduces th	622454	none
+tests/generators/defenceMonotoneMade.test.js	the defence rating is monotone in its houses, on made records (UPKEEP-15) every crisis beside every relief: adding the relief never lowers a	379281	own
+tests/generators/generationForkCensus.test.js	EM-P2 — generation census by execution: the instrument, the classification, both channels A3e — the classification re-executed: the declared	176796	own
+tests/generators/metropolisTailedRoll.test.js	the metropolis roll thins past 50,000 to 1,000,000, harder at every doubling 400 metropolis seeds: p90 above 60,000, max above 150,000 and n	171483	own
+tests/property/statecraftExposureBand.test.js	STATECRAFT-BAND U1 — the seeded run: the chain at the band dramatic_campaign fp-read-2, head on, twenty years: scandals inside the measured 	147255	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-B2a4 — the DM layer, its pin bag and the golden isolation property A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden o	130487	own
+tests/generators/bar4HousesPresumptions.test.js	BAR4-HOUSES H1: a house's description and the foodways line presume nothing their town denies (a) the detector reads no instance of the six 	118956	own
+tests/property/editCorpusRatchet.test.js	the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A2 an edit that reports applied carries the DM value at the 	101244	none
+tests/property/editCorpusRatchet.test.js	the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A1 the dormant re-derivation and the merge identity reproduc	83485	none
+tests/generators/people/representatives.test.js	the people car — the representative generator (step 2) one card per face house, zero duplicates, the seat always faced: the golden 525	71318	own
+tests/generators/people/castPowers.test.js	the people car — the powers' people (step 3) memberships, floors, the other mint and the shim on the golden 525; no sole power with a house 	71018	own
+tests/generators/safetyDescSpread.test.js	(a) the bar: no sentence of the safety line in more than 15% of 150 places a size metropolis: no sentence of safetyDesc in more than 22 of 1	69890	NEEDS-READ
+tests/property/generatorGoldenMaster.test.js	generator golden master (cross-build output stability) every config produces byte-identical output to the golden master	69873	own
+tests/generators/people/ties.test.js	the people car — one outgoing tie per card (R-P7) out-degree exactly 1 for every card with a peer, 0 for a lone face: the golden 525	68360	own
+tests/generators/foodModelSingleWriter.test.js	FIX-G1 — the viability summary counts the list the record publishes over the whole golden corpus, no row states a count its own list does no	66351	own
+tests/property/espionageDormancyFence.test.js	FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to t	65395	own
+tests/generators/foodModelSingleWriter.test.js	STOP-1 — the food writer and its view derive the per cent from the pounds they publish over the golden corpus, no card publishes a per cent 	63136	own
+tests/generators/pipelinePinnedChoosers.test.js	EM-B2a3 — the institution and power choosers consult the pin seam A5 — the survival, sealed only where §0 measured it TOTAL over the census 	61006	own
+tests/generators/timelineVariety.test.js	generators-domain-6 — timeline variety + budget budget — a metropolis timeline can exceed the old ~8 category cap	58639	own
+tests/generators/pipelinePinnedChoosers.test.js	EM-B2a3 — the institution and power choosers consult the pin seam A6 — the pin bag is never written through, and the uncloned control keeps 	57529	own
+tests/property/pipeline.property.test.js	pipeline (property-based) different seeds usually produce different fingerprints (seed sensitivity)	52926	own
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people metropolis: 120 lit worlds land	52312	NEEDS-READ
+tests/generators/people/ties.test.js	the people car — one outgoing tie per card (R-P7) out-degree exactly 1 for every card with a peer, 0 for a lone face: the soak 1,000's first	51180	own
+tests/generators/safetyDescSpread.test.js	(a) the bar: no sentence of the safety line in more than 15% of 150 places a size city: no sentence of safetyDesc in more than 22 of 150 pla	47288	NEEDS-READ
+tests/generators/settlementOriginProse.test.js	RR — the REAL pipeline, not only the pool module pin:coherent-through-the-auditor — no arm raises a settlementReason finding	43391	own
+tests/generators/servicesSeverityPlaceholder.test.js	services — SEVERITY placeholder is retired no generated service description contains the raw SEVERITY placeholder	40499	own
+tests/generators/servicesSeverityPlaceholder.test.js	services — SEVERITY placeholder is retired the lawless recourse service reads the corrected prose and fires somewhere in the sweep	40002	own
+tests/generators/institutionBudgetRarity.test.js	X-46 car 3 — rows with an authored rarity are exempt from the density factor 80 high-magic metropolises keep the dragon occasional: at most 	38570	own
+tests/generators/urbanBandInstitutions.test.js	G1 — the weighted exclusive group every city government form governs some city, and none governs most of them	38284	own
+tests/generators/timelineVariety.test.js	generators-domain-6 — timeline variety + budget no two events in one timeline ever share a chapter title (cross-type collision guard)	36389	own
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people city: 120 lit worlds land insid	35630	NEEDS-READ
+tests/generators/people/representatives.test.js	the people car — the representative generator (step 2) one card per face house, zero duplicates, the seat always faced, the envelope: the so	35442	own
+tests/generators/foodModelSingleWriter.test.js	generators-domain-4 — single-writer food model CONTRADICTION KILLER — viability foodBalance never disagrees with foodSecurity on deficit sig	32478	own
+tests/generators/governanceNarrative.test.js	an active crisis never reads as Stable (owner order 2026-09-17) THE PIPELINE: every registered stressor, forced at every tier, never yields 	32288	own
+tests/generators/urbanBandInstitutions.test.js	G6 — a druid is a priest where magic does not work (J30) in a magic-free world every druid institution is paired with the religious authorit	32204	own
+tests/generators/people/allegiance.test.js	the hidden allegiance — invariants over the soak slice (I-2, I-3, I-4) the slice deals allegiances (anti-vacuity): at least 40 agents across	31324	own
+tests/generators/people/hallCapture.test.js	I-1 — a captured or corrupted hall has a criminal in the ruling three I-1 on the soak slice (the raw record): no finding, and the soak kind 	31284	own
+tests/generators/terrainPoolsDragonLicence.test.js	Dragon resident and the magic gate a magic-off metropolis over 60 seeds holds no dragon	30462	own
+tests/generators/people/castPowers.test.js	the guild's push (car 2): I-5 the floors hold under a maximal push; I-13 keyed I-5: under a MAXIMAL push every floor holds on the soak slice	30383	own
+tests/generators/people/ties.test.js	I-12 — the handler tie is the agent's one outgoing tie (ALLEGIANCE-CAR1) over the soak 1,000's first 240 cities and metropolises: every agen	28613	NEEDS-READ
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1b — the power card stops being refused A7 — EM-R1b: every bag pinsFrom builds for a declared collection is one the runner accepts	28387	own
+tests/generators/urbanBandInstitutions.test.js	G3 — the cumulative laws at generation Beast trainers is rolled natively in towns, cities and metropolises	28378	own
+tests/generators/terrainPoolsDragonLicence.test.js	Dragon resident and the magic gate the row draws at 0.06, and a high-magic metropolis keeps the dragon occasional	28299	own
+tests/generators/institutionBudgetRarity.test.js	X-46 car 3 — rows with an authored rarity are exempt from the density factor the metropolis Sewage system keeps its authored rarity at 60,00	27665	own
+tests/generators/terrainPoolsDragonLicence.test.js	Dragon resident and the magic gate a magic-on metropolis still rolls dragons	27407	own
+tests/generators/w2FixData3TensionDedup.test.js	W2-FIX-DATA-3: a town prints no two current tensions of one template type no repeated tension type across a fresh grid (six sizes x 25)	27287	own
+tests/generators/historyNoUndefinedProse.test.js	history prose never leaks the literal "undefined" holds across a full-pipeline config × seed sweep (broad backstop)	27008	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1c — a chooser is read at its declared record path, and the DM's value lands at the named entity A4 — EM-R1c: all THREE institution ROOT	26319	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1c — a chooser is read at its declared record path, and the DM's value lands at the named entity A8 — EM-R1c: the npc and power-seat car	25254	own
+tests/property/pipeline.property.test.js	pipeline (property-based) same seed produces structurally identical output (determinism)	25046	own
+tests/property/pipeline.property.test.js	pipeline (property-based) same seed produces a DEEP-identical settlement (full-JSON determinism)	24927	own
+tests/generators/populationBandRoll.test.js	the owner's table, generated twenty settlements per tier: residents inside the owner's band, tier as chosen, no household count	23883	NEEDS-READ
+tests/generators/nameHeldThroughAssembly.test.js	EM-R4 — the settlement name is held through assembly A2 — EM-R4: the draws are CONSUMED: a held name leaves the step on its exact draw posit	23858	own
+tests/generators/regenDerivedState.test.js	FIX-SECTION-REGEN — an NPC section regen derives the hall-capture state the full generation derives the regenerated rows echo exactly the re	23820	NEEDS-READ
+tests/generators/stressSummaryName.test.js	F8 — stress summaries render with the real settlement name leaves NO summaryRoll token on any persisted stress entry	23420	own
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N1: at every size, random and under every crisis — every holder holds th	23342	own
+tests/generators/generationForkCensus.test.js	EM-P2 — generation census by execution: the instrument, the classification, both channels A8e — Tier 2 executed: every outputKey resolves on	23183	own
+tests/generators/resolveCrisisCast.test.js	resolveCrisisCast writes the cast onto every active crisis 120 generated towns: every crisis is cast; at most one temporary person a town, e	23165	own
+tests/generators/nameHeldThroughAssembly.test.js	EM-R4 — the settlement name is held through assembly A3 — EM-R4: the record REPRODUCES under its own name, on every census row	22856	own
+tests/generators/resolveCrisisCast.test.js	a generated crisis adds the hooks its cast derives 120 generated towns: crisis hooks lead; each is true on the record; the place's own hooks	22785	own
+tests/generators/powerEconomyFreshness.test.js	EM-R3 — the power structure is final under a held pin A6 — the receipt stays the record's and the trace refresher is a measured no-op	22763	own
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N2: at every size, random and under every crisis — no holder reads below	22372	own
+tests/generators/foodDiversity.test.js	FOOD-3 — food diversity every listed source traces to a firing pairing, and every firing pairing is listed, over 120 seeds	22234	own
+tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) metropolis: every sentence printed twice is held by an 'exhausted' card	22105	NEEDS-READ
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N3: at every size, random and under every crisis — no card but the holde	22009	own
+tests/generators/timelineVariety.test.js	generators-domain-6 — timeline variety + budget within-category variety — the economic category yields many distinct arcs (was 1 pre-fix)	21707	own
+tests/generators/people/personHooks.test.js	every card of the soak carries exactly one hook, from the pool map's pools the soak's first 120: one hook per card, every line authored, no 	21510	NEEDS-READ
+tests/generators/institutionBudgetRouteRequired.test.js	X-46 car 3 — the route-required rows are exempt from the density factor sixty cells that admit no marked row are byte-identical across the e	20638	own
+tests/generators/incomeLinesSayTheRecord.test.js	the grain line: none left to sell, only where none is sold and the harvest stands the law, over births of every crisis: the line never stand	20614	own
+tests/generators/powerEconomyFreshness.test.js	EM-R3 — the power structure is final under a held pin A1 — the replay does not run under a held structure: the DM roster survives a changed 	20240	own
+tests/generators/generationForkCensus.test.js	EM-P2 — generation census by execution: the instrument, the classification, both channels A7 — the corpus ceiling: each key the register cal	19950	own
+tests/generators/incomeLinesSayTheRecord.test.js	the law, over births of every crisis the lines print under no line names an absent house, trades by road under a siege, or calls an impaired	19914	own
+tests/generators/pipelinePinnedMode.test.js	EM-R1 — the pin bag is cloned on entry, at the runner A7 — the leak and the cure: a record-built bag moves 0 of 63, where the uncloned contr	18749	own
+tests/generators/safetyDescSpread.test.js	(a) the bar: no sentence of the safety line in more than 15% of 150 places a size town: no sentence of safetyDesc in more than 22 of 150 pla	18358	NEEDS-READ
+tests/generators/moneyChangersTownFloor.test.js	X-46 3a exception: Money changers is a live town row from 2,000 people over 120 town seeds it rolls at least once at 2,000+ and never below 	18268	own
+tests/generators/urbanBandInstitutions.test.js	G7 — Warden's Lodge defends in every world, and divine defence needs working magic (J31, J32) no divine magical defence opens where the worl	17903	own
+tests/generators/isolationSupport.test.js	isolation support model random low/no-magic town+ never resolves to isolated	17867	own
+tests/generators/urbanBandInstitutions.test.js	G6 — a druid is a priest where magic does not work (J30) in a magic world every druid institution keeps its authored pairing	17474	own
+tests/generators/power/arcanePractitioners.test.js	the arcane advisory lines read the town's practitioners a town where no one works magic hears the twin; a town with practitioners hears them	16696	own
+tests/generators/foodDiversity.test.js	FOOD-3 — food diversity the foodways line names only sources the place has, over 120 seeds	16497	own
+tests/generators/tensionTemplateDeclaration.test.js	URBAN-FIX D-1 — a tension's words follow its own event's age eight of the 61: the referee's reader:tension-memory finds nothing on the rende	16250	NEEDS-READ
+tests/generators/powerEconomyFreshness.test.js	EM-R3 — the power structure is final under a held pin A4 — the golden is unmoved by construction, and a held bag does move it	15649	own
+tests/generators/people/goalSentencesOnceInTown.test.js	the gate's count: no goal sentence printed twice in one town (p) (p) city: every sentence printed twice is held by an 'exhausted' card, and 	15252	NEEDS-READ
+tests/generators/nameHeldThroughAssembly.test.js	EM-R4 — the settlement name is held through assembly A4 — EM-R4: the pin is TAKEN and only what speaks the name moves	14897	own
+tests/generators/outlookIssuesSayTheWorld.test.js	THE LAW: births with the dial at its extreme, small to large, calm and in crisis no Outlook row names a slider, a priority, a capacity figur	14868	own
+tests/generators/structuralValidatorDeterminism.test.js	no-magic worlds suppress the magical_controversy tension (finding #12) magical_controversy never appears in currentTensions when magicExists	14726	own
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people town: 120 lit worlds land insid	14706	NEEDS-READ
+tests/generators/pipelinePinnedMode.test.js	EM-R1b — a recordPath-less chooser is not counted against a record-built bag A4 — EM-R1b: a record-built power bag runs unrefused on every c	14596	own
+tests/property/pipeline.property.test.js	pipeline (property-based) generation never throws across the config space	14515	own
+tests/generators/customContentReferencePack.matrix.test.js	canonical adversarial custom-content reference pack holds the representative town invariants across 100 deterministic seeds	14320	own
+tests/generators/customServiceProvenance.test.js	custom-service exact provenance retains the same custom service revision through every provider roll	14208	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1b — the power card stops being refused A6 — EM-R1b: a power-seat edit comes back APPLIED on every census row, with a bag of exactly the	14194	own
+tests/generators/foodExports.test.jsx	a place short of food sells no food surplus over 60 corpus settlements: no export row and no chain output names a food surplus the record do	14147	own
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) no isolated subsistence settlement carries famine economics without a famine ent	14077	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1c — a chooser is read at its declared record path, and the DM's value lands at the named entity A7 — EM-R1c: the faction SHARE lands at	13839	own
+tests/generators/npcWantsSite.test.js	NPC_WANTS's site enforces its declarations (CENSUS-1i unit 6) no declared want prints where the final record refuses it (soak1k-0..59)	13756	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1c — a chooser is read at its declared record path, and the DM's value lands at the named entity A5 — EM-R1c: a faction RENAME lands on 	13401	own
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1b — the power card stops being refused A8 — EM-R1b, CURED BY EM-R1c: the institution card applies on 63 of 63 rows, its nested blocker 	13387	own
+tests/generators/generationCertificationCorpus.test.js	seeded generation certification cohort certifies 55 deliberately different whole-settlement specimens	13265	own
+tests/generators/legitimacyBgConsistency.test.js	M5 — publicLegitimacy.bg stays consistent with its band after the defense patch every generated settlement has bg matching the canonical bg 	13209	own
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) famine channels are fully coupled — economics ⟺ entry ⟺ condition on every seed	13048	own
+tests/generators/people/nobleFaces.test.js	COHERENCE-POWERS-6 item 1: a noble power is faced by a noble on fresh births at every size, calm and in crisis: every noble body is faced by	13002	own
+tests/data/tensionSpareWordings.test.js	PAGE-2 T1 · a tension's spare wordings, used always (4) every field but the tensions' descriptions is unchanged against the base (60 towns, 	12994	NEEDS-READ
+tests/property/dmLayerGoldenIsolation.test.js	EM-R1c — a chooser is read at its declared record path, and the DM's value lands at the named entity A6 — EM-R1c: a faction CATEGORY edit la	12737	own
+tests/generators/bar4ScenePresumption.test.js	kind A1: no arrival or overview line shows what the town's present state denies REACHABLE (MU1): every twin of the trades at work prints whe	12719	own
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) exercises BOTH the famine-fires and famine-misses paths across the sweep	12674	own
+tests/property/roadsCharter.test.js	§19 THE 12-YEAR LIT WALKTHROUGH (war-shaped spatial world) roster conserved EVERY tick · cadence band · every available purpose · captives n	12329	own
+tests/property/pipeline.property.test.js	pipeline (property-based) output is structurally complete for any valid config	12321	own
+tests/generators/urbanBandInstitutions.test.js	G5 — a magic-free world certifies its own world-law magic check no magic-free settlement fails world_law_magic, at any tier, and the druid r	12156	own
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'magic' priority moves both the institution roster and faction power	11942	NEEDS-READ
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'economy' priority moves both the institution roster and faction power	11622	NEEDS-READ
+tests/generators/institutionBudgetRarity.test.js	X-46 car 3 — rows with an authored rarity are exempt from the density factor sixty cells where no marked row can roll are byte-identical wit	11520	own
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'criminal' priority moves both the institution roster and faction power	11267	NEEDS-READ
+tests/generators/people/npcPositionSpread.test.js	PEOPLE-1 B1 · the place in the order reads apart from city to city of 30 cities (hxd-city-0..29), no position sentence on more than 6	11261	own
+tests/generators/tensionTemplateDeclaration.test.js	URBAN-FIX D-1 — a tension's words follow its own event's age no draw moved: born with the memory table stripped, the twelve and the eight ar	10888	own
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people sixty seeds (ten a tier) genera	10848	own
+tests/generators/people/npcConstraintSpread.test.js	PEOPLE-1 B1b · the limit of a post reads apart from city to city of 30 cities (hxd-city-0..29), no constraint sentence on more than 6	10594	own
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'religion' priority moves both the institution roster and faction power	10499	NEEDS-READ
+tests/generators/urbanBandInstitutions.test.js	G2 — the row guards hold at generation no town has gates without walls, and gated towns exist	10497	none
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'military' priority moves both the institution roster and faction power	10309	NEEDS-READ
+tests/generators/projectionAgreement.test.js	F3: every member of the guard has a live subject in arm 2 each member's subject is live in at least one arm-2 birth	9913	NEEDS-READ
+tests/generators/coherenceRepairPass.test.js	deterministic generation coherence repair gives every plagued settlement a tier-plausible perimeter and defending force	9581	own
+tests/generators/wartimeForgesSmith.test.js	the wartime pressure line names the forges only where a smith stands no town without a smith hears of its forges; the twin tells the war the	9570	own
+tests/generators/powerEconomyFreshness.test.js	EM-R3 — the power structure is final under a held pin A2 — the seat change sticks instead of throwing, and the roster assert is unweakened	9465	own
+tests/generators/densityLaw.test.js	end to end — the law through the real pipeline the law moves COUNTS, not MEANINGS: a v1-vs-v2 differential on where the leader lives	9303	own
+tests/generators/projectionAgreement.test.js	the reviewer's seeds agree every reviewer seed: resource_truth and food_verdict hold no finding	9219	none
+tests/generators/safetyDescSpread.test.js	(a) the bar: no sentence of the safety line in more than 15% of 150 places a size village: no sentence of safetyDesc in more than 22 of 150 	8946	NEEDS-READ
+tests/generators/generationWorldLaw.test.js	full-pipeline world-law enforcement never gives a riverside port maritime-only institutions	8907	none
+tests/generators/settlementOriginProse.test.js	RR — the REAL pipeline, not only the pool module pin:corpus-diversity — 60 seeds on the DEFAULT config no longer print ONE body	8732	none
+tests/generators/generationWorldLaw.test.js	full-pipeline world-law enforcement holds across every tier and a deterministic seed corpus	8688	none
+tests/generators/people/mintedLordKeepsLines.test.js	COHERENCE-POWERS-6 item 3: a minted lord pushes no true line off a card on fresh births with minted lords: the cards beside them read the sa	8654	own
+tests/property/heraldKnowledgeDeskGolden.test.js	the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE 	8609	own
+tests/generators/categoryToggleRandomCustom.test.js	[generators-pipeline-4] category disables reach generation for random and custom settTypes random settType: all::Criminal=false suppresses c	8360	none
+tests/generators/people/seatKeeperContender.test.js	COHERENCE-POWERS-6 item 2: the keeper of a vacant seat heads no contender on fresh succession births at every size	8360	own
+tests/generators/foodwaysOneLine.test.jsx	the foodways line: one writer on the record, the same line on every surface 12 seeds, two per tier: the Economy tab, the PDF chapter and the	8343	own
+tests/generators/foodModelSingleWriter.test.js	generators-domain-4 — single-writer food model the carrier split is the WRITER'S split, and a route that imports is never credited with zero	8325	NEEDS-READ
+tests/generators/legitimacyDefenseReconcile.test.js	[generators-pipeline-6] faction powers agree with the patched legitimacy multipliers every settlement is self-consistent (powers == re-deriv	8276	none
+tests/generators/powerEconomyFreshness.test.js	bounded final economy -> power reconciliation the final fingerprint and legitimacy match final dossier inputs across a cohort	8210	none
+tests/generators/nameHeldThroughAssembly.test.js	EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte whe	8204	own

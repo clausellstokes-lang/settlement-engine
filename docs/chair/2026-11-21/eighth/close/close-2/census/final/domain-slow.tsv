@@ -1,0 +1,136 @@
+## FAILURES BY KIND
+kind	file	title	ms
+WRONG RESULT	tests/domain/bar3DefeconLines.test.js	BAR3-DEFECON batch 1: the safety and food lines read the town they print in the theocratic flag stands only where the tithes lead the income	607
+WRONG RESULT	tests/domain/bar4PeopleKinds.test.js	BAR4-PEOPLE · P1 the pair's ties (detector: pairTieClashes) (a) warm-cold: each named pair still carries its two ties, the second now in the	13
+WRONG RESULT	tests/domain/bar4PeopleKinds.test.js	BAR4-PEOPLE · the read's rows (REVIEW-BAR-4), each red at 8aef8e7d46 C41801 bar0-town-occupied-rand-22: not "Bing Shimizu named Wei Kimura a	23
+WRONG RESULT	tests/domain/bar5LawBandFloor.test.js	BAR5-BAND LB1: a quiet place without an office of the law prints its law at least strained the wide read four rows: the model reads its band	440
+WRONG RESULT	tests/domain/bar5SafetyLawBand.test.js	BAR5-SAFETY: a line that says how a wrong is answered reads the law band the page prints (b) ruling LB2: the row reads the one home, and no 	91644
+WRONG RESULT	tests/domain/bar6CrimeOneReading.test.js	BAR6-CRIME: crime and the force that keeps order have one reading (c) the positive controls: each real row's stored line fires; the printed 	49
+WRONG RESULT	tests/domain/bar6PowersCards.test.js	BAR6-POWERS · the chair's ruling IT1: the page reads the seat's backing from one print-only leaf the seat drops the ruler's high rival on th	11
+WRONG RESULT	tests/domain/bar6PowersCards.test.js	BAR6-POWERS · the chair's ruling IT1: the page reads the seat's backing from one print-only leaf (KEEP, the chair's narrowing of 2026-11-16)	8
+WRONG RESULT	tests/domain/bar7DesksLines.test.js	item 3 · the ledger line says money and keeps its words the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-ra	38
+WRONG RESULT	tests/domain/corpusCureGuards.test.js	a cured line is not eligible in the fixed town that made it false DS-DEF-11::WALLED-STRAINED v7 at w5-thorp-occupied-1: an occupation: "the 	15
+WRONG RESULT	tests/domain/corpusCureGuards.test.js	a cured line is not eligible in the fixed town that made it false DS-DEF-1::readiness CRITICAL v3 at w5-hamlet-famine-5: walls: the same lin	1
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a cured sentence is not drawn in the census town that made it false; what is drawn instead is named DS-ECO-8::COMFORTABLE at r2s-succession_	11
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a cured sentence is not drawn in the census town that made it false; what is drawn instead is named DS-ECO-1::COMBINATION C3: the middle run	1
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a cured sentence is not drawn in the census town that made it false; what is drawn instead is named DS-ECO-8::PROSPEROUS at r2s-indebted-cit	0
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a cured sentence is not drawn in the census town that made it false; what is drawn instead is named DS-ECO-1::COMBINATION C1: a high rung on	0
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a true sibling of each cured sentence still draws in its town DS-ECO-8::COMFORTABLE v3 at r2r-metropolis-0: its food secure	0
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a true sibling of each cured sentence still draws in its town DS-ECO-8::STRUGGLING v6 at r2r-town-19: a market stands	0
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a true sibling of each cured sentence still draws in its town DS-ECO-8::PROSPEROUS v1 at r2r-metropolis-38: the stem (re-keyed from r2r-metr	0
+WRONG RESULT	tests/domain/corpusEcoTailGuards.test.js	a true sibling of each cured sentence still draws in its town DS-ECO-8::WEALTHY v1 at r2r-metropolis-16: fifteen months of stores	0
+WRONG RESULT	tests/domain/dailyLifeNoPeople.test.js	daily life reads no person of its own (the dead call removed) every slot text equals the pre-change text and the text on the toPublicSafe do	798
+WRONG RESULT	tests/domain/defenseWordsFindings.test.js	the Defense tab says only what the place has the charter-hall hamlet no longer prints "garrison pay" beside "No walls or garrison"	9
+WRONG RESULT	tests/domain/defenseWordsFindings.test.js	the Defense tab says only what the place has a palisade never pays "garrison pay": the note names the palisade	37
+WRONG RESULT	tests/domain/editWorldFactResources.test.js	EM-B2b2 — the DM's nearby-resources word survives resolveResources A2 — THE NO-EDIT PATH IS UNMOVED: a dormant re-derivation is byte-identic	624
+WRONG RESULT	tests/domain/editWorldFactResources.test.js	EM-B2b2 — the DM's nearby-resources word survives resolveResources A6 — THE MARK IS NOT THE ECHO: the step's own resolved write-back, handed	482
+WRONG RESULT	tests/domain/famineStoresOneRounding.test.js	rung 2D · the held granary and the stores line read one rounding soak1k-1582, -1445, -2962: a famine granary printed as six months is held, 	12
+WRONG RESULT	tests/domain/famineStoresOneRounding.test.js	rung 2D · the held granary and the stores line read one rounding soak1k-1589 (the control): twelve months, held before and after	2
+WRONG RESULT	tests/domain/fortuneLastingSentence.test.js	U7b (c): no merit, no sentence a law-1 birth (the dial dark), a law-2 birth without the merit and a record with no standing print none of th	9
+WRONG RESULT	tests/domain/fortuneLawWiring.test.js	the fortune law (FS5) is WIRED and lands DARK the vocabulary: one key, two versions, the dial at the default	9
+WRONG RESULT	tests/domain/fortuneLawWiring.test.js	the fortune law (FS5) is WIRED and lands DARK 1. CREATE (dark): birthConfig carries no _fortuneLawVersion — its own key only, on a config, n	1
+WRONG RESULT	tests/domain/fortuneLawWiring.test.js	the fortune law (FS5) is WIRED and lands DARK 2. CREATE (THE CLAMP): an incoming _fortuneLawVersion: 2 is clamped away — an imported marker 	1
+WRONG RESULT	tests/domain/fortuneMeritSentence.test.js	U5b (b): no merit, no sentence a law-1 birth (the dial dark), a law-2 birth without the merit and a record with no standing print none of it	8
+WRONG RESULT	tests/domain/livingContentLawWiring.test.js	the living-content law is WIRED, and THE PROMISE survives it CREATE (dark, fired deliberately): at the dormant dial birthConfig still writes	28
+WRONG RESULT	tests/domain/livingContentLawWiring.test.js	the living-content law is WIRED, and THE PROMISE survives it ⭐⭐ CREATE (THE SAME-SEED CONTROL, LIT): a birth through the boundary is the sam	628
+WRONG RESULT	tests/domain/livingContentLawWiring.test.js	the living-content law is WIRED, and THE PROMISE survives it ⛔ CREATE (THE CLAMP): a LIT marker arriving through the wizard form cannot birt	192
+WRONG RESULT	tests/domain/outlookSaysThePages.test.js	step 6: the glance chip and the Economic Survival colour #608: the reader's town prints the word alone; a town whose figure agrees keeps the	301
+WRONG RESULT	tests/domain/r3c9ReaderLinesTrue.test.js	n15: a hunted underworld the hall is beating is not said to break its orders the account names no such rival and says no cost of it	15
+WRONG RESULT	tests/domain/seatLawWiring.test.js	the seat law (CS10) is WIRED and lands DARK the vocabulary: one key, two versions, the dial at the default	9
+WRONG RESULT	tests/domain/seatLawWiring.test.js	the seat law (CS10) is WIRED and lands DARK 1. CREATE (dark): birthConfig carries no _seatLawVersion — its own key only, on a config, null a	1
+WRONG RESULT	tests/domain/seatLawWiring.test.js	the seat law (CS10) is WIRED and lands DARK 2. CREATE (THE CLAMP): an incoming _seatLawVersion: 2 is clamped away — an imported marker never	1
+WRONG RESULT	tests/domain/tailCrisisBatch1.test.js	TAIL-CRISIS batch 1: no false crisis line where the town makes it false each FALSE pair does not print the false line, and prints its twin	793
+WRONG RESULT	tests/domain/tailCrisisBatch3.test.js	TAIL-CRISIS batch 3: the cast hook says its reason of the holder no FALSE words print, and the line the record bears prints in their place	1367
+WRONG RESULT	tests/domain/tailCrisisBatch7.test.js	the revolt's own leadership is never untouched by the revolt each KEEP seed KEEPS its earlier rule: the leadership outweighs the seat (gains	128
+WRONG RESULT	tests/domain/tailCrisisBatch8.test.js	a power the crisis itself raised is never stored as untouched by it r2s-plague_onset-metropolis-3 (plague_onset): Quarantine Council stores 	486
+WRONG RESULT	tests/domain/tailCrisisBatch8.test.js	a power the crisis itself raised is never stored as untouched by it r2s-slave_revolt-metropolis-2 (slave_revolt): Religious Authorities stor	366
+WRONG RESULT	tests/domain/tailCrisisBatch8.test.js	a power the crisis itself raised is never stored as untouched by it r2s-wartime-city-0 (wartime): Religious Authorities stores its own stake	298
+WRONG RESULT	tests/domain/tailCrisisBatch8.test.js	a power the crisis itself raised is never stored as untouched by it KEEPS a criminal power the crisis's merchant sentence was written onto b	219
+WRONG RESULT	tests/domain/tailCrisisBatch8.test.js	a power the crisis has not touched prints no stake row r2s-indebted-city-3 (indebted): Military/Guard prints no row (red at aa78d1ec9: "has 	244
+WRONG RESULT	tests/domain/tailDefeconDisplayLines.test.js	TAIL-DEFECON-D batch 1: the Defense tab's and the Outlook's lines say only what the record holds #09264 r2r-town-0 keeps "the granary would 	7
+WRONG RESULT	tests/domain/tailDisplayCivic3V1.test.js	V1: a power named in a sentence takes the one leaf's form CURED (every row) seed: the slashed sentence does not print; what prints instead d	10
+WRONG RESULT	tests/domain/tonightOwnGoal.test.js	ROUND THREE · the Tonight sheet voices a cast person with the card's own goal the three lines the reader read are gone, and the cards' own g	21
+WRONG RESULT	tests/domain/worldFactRederive.test.js	EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are 	2427
+WRONG RESULT	tests/domain/display/criminalSwayReadsHall.test.js	the "criminal sway" chip reads the hall's rung, never the crime structure alone r2r-city-3: the hall at "none" says nobody at the head answe	11
+WRONG RESULT	tests/domain/display/criminalSwayReadsHall.test.js	the "criminal sway" chip reads the hall's rung, never the crime structure alone r2r-metropolis-52: the hall at "adversarial" says nobody at 	1
+WRONG RESULT	tests/domain/display/tensionCause.test.js	force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B) the three plain-toPublicSafe faults (PAGE-9 caf3509e7, build/CAUSES-WIR	7
+WRONG RESULT	tests/domain/people/hallDecidesUnderOccupation.test.js	the hall's none rung claims the criminals' standing only, never that the hall decides for itself r2s-infiltrated-metropolis-3 (Vulnerable (d	8
+WRONG RESULT	tests/domain/people/seatKeeper.test.js	COHERENCE-POWERS-3 F7 — the empty seat's keeper the review's Grudino: a vacant crown is kept by its regent, in all three places	270
+WRONG RESULT	tests/domain/seat/seatChainHolder.test.js	8. the tonight sheet names the old house's person by no office word after the transfer the four whose hooks list the old person: the office 	1529
+WRONG RESULT	tests/domain/seat/seatContest.test.js	(5) the dial lands dark: every factor 1, the kind read today's, the weights the old law's the dial is dark and every factor of the registere	27
+WRONG RESULT	tests/domain/seat/seatContest.test.js	(5) the dial lands dark: every factor 1, the kind read today's, the weights the old law's under the law, dark: the kind read is today's (a h	3
+WRONG RESULT	tests/domain/seat/seatContest.test.js	(8) the craft variant: lit, a craft-led plot is the guild cabal it narrates today, never a palace coup dark: today's read (a craft archetype	126
+
+## OVER 8000 MS
+file	title	ms	budget
+tests/domain/mergeLadderHeldKeys.test.js	EM-R8 — the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record A7 · the chain: determinism and undo ho	232295	own
+tests/domain/livingContentPromiseBytes.test.js	THE PROMISE under the living-content law, by bytes ⭐⭐ the RATE 768 towns are byte-identical under law 1 and law 2	222455	own
+tests/domain/supplyStoryLaw.test.js	BIRTH-2: the seed picks the supply story; every part of the page tells it L1-L3 · every story told on every surface, over the census's 720 a	139385	NEEDS-READ
+tests/domain/bar6CultureLines.test.js	BAR6-CULTURE: the zero over the census's 720 no rule of the seat has an instance in any town	137976	own
+tests/domain/livingContentPromiseBytes.test.js	THE PROMISE under the living-content law, by bytes ⭐⭐ the golden 525 configurations are byte-identical under law 1 and law 2	129610	own
+tests/domain/bar6EconStateShown.test.js	BAR6-ECON: the Economics tab and the economy desk read the page's own state (a) THE ZERO over the census's 720: no rule of the seat finds an	121134	NEEDS-READ
+tests/domain/bar6MarksLaw8.test.js	LAW 8's mark rules (BAR6-MARKS): the mark leaf reads every worst state (a) THE ZERO over the census's 720: every instance is cured, or one o	118043	NEEDS-READ
+tests/domain/supplyStoryLaw.test.js	BIRTH-2: the seed picks the supply story; every part of the page tells it BR8 · no view reads the seed: the record, the record without its s	116286	own
+tests/domain/bar4MarkPromise.test.js	the mark's promise (kind S1): no row on offer bare while the record says its need is cut (a) THE ZERO over the census's 720: every instance 	113889	NEEDS-READ
+tests/domain/leftMarks.test.js	L25 · SEAM-ECON's houses: short where the page says their good is not had, and the reader's two mends no other house of the table is marked 	113298	own
+tests/domain/bar6DefDeskGuards.test.js	BAR6-DEFDESK: the defence desk's lines declare what they presume (e) rulings EG1, XA2: the crime wave's one reading and the beasts' band arm	112144	NEEDS-READ
+tests/domain/bar4SafetyKinds.test.js	BAR4-SAFETY: the three kinds read one settled fact each F1 F2 F3: zero instances over the sample	110726	own
+tests/domain/faultsBirth.test.js	FAULTS-BIRTH (a) · the second ring proves its ground as the first does FR21 (4b): over the census's 720, no chain's own ground is a ground a	110502	NEEDS-READ
+tests/domain/bar5ChainsLaw3.test.js	LAW 3, one state on every tab (BAR5-CHAINS): the chains, their gaps and their houses (a) THE ZERO over the census's 720: no rule stands in a	109243	NEEDS-READ
+tests/domain/bar5MarksLaw2.test.js	LAW 2's rows of a house or a service (BAR5-MARKS): what the crisis stops is not on offer unmarked (a) THE ZERO over the census's 720: every 	105307	NEEDS-READ
+tests/domain/bar5LawBandFloor.test.js	BAR5-BAND LB1: a quiet place without an office of the law prints its law at least strained the zero over the census's 720: no quiet page pri	105080	NEEDS-READ
+tests/domain/bar5SafetyLawBand.test.js	BAR5-SAFETY: a line that says how a wrong is answered reads the law band the page prints (b) ruling LB2: the row reads the one home, and no 	91644	own
+tests/domain/mergeLadderHeldKeys.test.js	EM-R8 — the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record A1 · the named-person law: no rung move	90238	none
+tests/domain/birthKindsLaw.test.js	BIRTH-1: a house that buys its material has it brought in; a source house is answered by its ground arm 1 · THE LAW over every calm town of 	65651	own
+tests/domain/intentAtlasSoakDistiller.test.js	intent atlas soak prior — the committed artifact is reproducible the documented default run reproduces the committed distillate byte for byt	56768	own
+tests/domain/magicBufferIntegration.test.js	K3 the disaster buffer at the calamity seam 6. CONJUNCTION REACHABILITY: the high-magic, high-economy cell occurs in real corpora	51610	own
+tests/domain/mergeLadderHistory.test.js	EM-R8b — a rung takes a reading from R1 and never the lived history under it H2 · the lived history is byte-identical in every trial, and th	32267	none
+tests/domain/worldFactRederive.test.js	EM-B2b — world facts by consequence: the route, the refusals and the stated radius A1 — THE DIFFERENCE BETWEEN TWO RE-DERIVATIONS: the DM's 	30578	NEEDS-READ
+tests/domain/people/patronage.test.js	ruling patronage (car 3) I-6 holds on the soak slice, and is not vacuous (boosted powers exist, the cap and the ceiling bind)	27091	own
+tests/domain/bar6DefDeskGuards.test.js	BAR6-DEFDESK: the defence desk's lines declare what they presume (a) zero: no admitted line of the desk makes its claim where the town's own	26994	own
+tests/domain/bar6CrimeOneReading.test.js	BAR6-CRIME: crime and the force that keeps order have one reading (a) zero instances over the wide read's 150, rule by rule	23038	NEEDS-READ
+tests/domain/crisisCast.test.js	120 generated towns: every active crisis is cast, totally every crisis gets a cast; no contradictory pair; no cap exceeded; no placeholder n	21014	own
+tests/domain/crisisCastFindings.test.js	the crisis cast's self-check 120 generated towns: no finding	20976	own
+tests/domain/tonightSheetCast.test.js	the Tonight sheet reads the crisis cast 120 towns: the Tonight line names a person for every crisis whose cast has one, and the people to vo	20542	own
+tests/domain/simulationSpine.test.js	over REAL generated settlements a coordinating export name is comma-split on REAL settlements, not fixtures	20411	own
+tests/domain/townCartographyCalibration.test.js	W2 the frozen measurement is re-measured live every sampled row reproduces its manifest record exactly	19427	own
+tests/domain/crisisCast.test.js	the defence stands: a closed house is never the defender (the ruin filter, CRISIS-3 unit 1b) 120 generated towns with every second defence h	18692	own
+tests/domain/editWorldFactResources.test.js	EM-B2b2 — the DM's nearby-resources word survives resolveResources A1 — THE DM'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three	18382	NEEDS-READ
+tests/domain/crisisCast.test.js	the levers stand: a closed house is never a lever (the ruin filter, CRISIS-3 unit 1) 120 generated towns with every second lever house close	17473	own
+tests/domain/stateProseKernel.test.js	the state-prose reader — law 6, the index-stable draw ⭐ UNIFORM ON EVERY POOL OF THREE OR MORE, BY n: each group at its own bound, p = 0.001	17129	own
+tests/domain/bar5SafetyLawBand.test.js	BAR5-SAFETY: a line that says how a wrong is answered reads the law band the page prints (a) zero instances over the sample, by the audit's 	17094	NEEDS-READ
+tests/domain/distribution.test.js	tier scaling — population grows with tier cities average a higher population than towns	16690	own
+tests/domain/powerSentenceName.test.js	on a real run, no power-move line prints a slashed label or a plural "'s" every power-move headline and body, on every seed	16563	own
+tests/domain/generationContentProfile.test.js	pipeline content boundaries grounded random city corpus does not generate excluded coercive themes	16365	own
+tests/domain/distribution.test.js	tier scaling — population grows with tier city institutions are not fewer than village institutions	15332	own
+tests/domain/display/noOneRingWhereRingsRival.test.js	no "one ring" where rings rival (#1172, #1202, #716, #750, #813) the reader's towns: one organisation in the 36 (and round three's governed 	15041	NEEDS-READ
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution cities average more supply chains than villages	13718	own
+tests/domain/distribution.test.js	faction prevalence and archetype coverage every city carries multiple factions	13692	none
+tests/domain/defenseStateProseDesk.test.js	DS-DEF-9 — magic dependency, and the slot filled from the right ROLE REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed	12887	none
+tests/domain/generalStateProseDesk.test.js	DS-GEN-7 — the record disagreeing with itself, and five pools the producer cannot reach ⛔ THE PRODUCER MEASUREMENT: two coherence notes are 	11607	own
+tests/domain/generalStateProseDesk.test.js	DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful DARK mount) ⛔ DORMANT AT BIRTH, AND DORMANT IS A TRUE STATEMENT — nothin	11591	none
+tests/domain/distribution.test.js	enforcement institution prevalence every city carries an enforcement institution	11286	none
+tests/domain/recordInvariants.test.js	EM-R0b — recordInvariants: the town's own invariants as a module EM-R0b A1 — the control over the declared stride: every plain generated rec	10390	none
+tests/domain/factionPowerSum.test.js	faction power sums to exactly 100 across all tiers metropolis: every non-empty faction roster sums to 100	10212	NEEDS-READ
+tests/domain/demographicsCure.test.js	THE CURE — a 300-year run on a seeded fixture realm PLATEAUS every settlement flattens inside its own bound band, and the second century is 	10191	own
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every NPC profile carries an archetype from the canonical set	10144	none
+tests/domain/birthKindsLaw.test.js	BIRTH-1: a house that buys its material has it brought in; a source house is answered by its ground arm 2 · no word under a siege or on an i	9993	own
+tests/domain/distribution.test.js	history beat prevalence at least 80% of cities have a definingCrisis beat	9865	none
+tests/domain/traditionDescription.test.js	describeTradition — THE CRISIS DIMENSION on born towns (TRAD-4 unit 5 item 3) born under famine, under_siege, occupied, wartime and plague_o	9840	own
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity cities average at least three distinct NPC archetypes	9714	none
+tests/domain/demographicsCure.test.js	THE NEGATIVE CONTROLS — reverting the cure re-creates the defect RESTORE: the unmocked kernel is green again in the same file, after both re	9637	own
+tests/domain/distribution.test.js	hook + escalation clock prevalence disrupted-food-chain settlements produce a Bread Riot Clock	9491	none
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every NPC holding a membership carries a factionLink	9393	none
+tests/domain/crimeDeniedBesideBackgroundCrime.test.js	R-E1: the denial prints beside a pattern that itself denies organisation soak1k-362 made with nothing criminal held (Background crime alone)	9363	own
+tests/domain/distribution.test.js	hook + escalation clock prevalence every clock has 6 stages and a non-empty trigger description	9360	none
+tests/domain/recordMerge.test.js	EM-R0c — the merge: the consequence of an edit is the difference of two re-derivations A1 · identity and the write base: merge(record, X, X)	9359	none
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution every supply-chain status is one of the canonical values	9293	none
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity cities accumulate enough dominant-NPC removal-impact lines to drive a forecast	9237	none
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every dominant-rank NPC produces a non-trivial removal consequence	9129	none
+tests/domain/fortuneLastingVeil.test.js	U7 step 1: history.age is served unchanged on every shared read, the widest veil included on all eleven shared projections, history.age, his	9082	none
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution on healthy generation, at least half of chains are stable	8933	none
+tests/domain/distribution.test.js	hook + escalation clock prevalence every city carries at least one structured hook	8852	none
+tests/domain/distribution.test.js	tier scaling — population grows with tier towns average more institutions than villages	8802	none
+tests/domain/stateProseKernel.test.js	the state-prose reader — law 6, the index-stable draw ⭐ APPEND-SAFE BY n: a new wording moves about 1/(n+1) of a pool's reads, and every mov	8537	own
+tests/domain/crimeDeniedBesideBackgroundCrime.test.js	R-E1: the denial prints beside a pattern that itself denies organisation soak1k-1801 (a conversion's patterns): still no denial	8191	NEEDS-READ
+tests/domain/mergeLadderHeldKeys.test.js	EM-R8 — the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record A3 · the mirror: the two counted rows e	8118	none
