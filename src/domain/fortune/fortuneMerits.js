@@ -9,7 +9,7 @@
  *   `weatheredWithinYears` ago, whose kind names no tension of today, and that no legacy annotation calls unresolved
  *   (condition 4: read by the legacy generator's own list, `src/data/legacyUnresolvedWordings.js`);
  *   A PLACE THAT HAS LASTED (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC) — its `history.age` at or
- *   above `lastingAgeBySize` of its own size, the size read as the record carries it (`tier`, else `config.settType`).
+ *   above `lastingAgeBySize` of its own size, the size read from the record's `tier` alone (no tier, no lasting).
  * Each merit is COMPUTED from the record, never rolled: no draw is added and no draw count moves. Two merits are two
  * reasons at the Endorsed guard.
  * It adds `meritPoints`, only upward; Endorsed never stands on fewer than `endorsedMinReasons` reasons.
@@ -120,13 +120,13 @@ export function weatheredCatastrophe(settlement) {
 }
 
 /**
- * The size the record carries, as the lasting merit reads it: `tier`, else its own `config.settType` (the reading of
- * BANDS.md's state D). Both are on every shared read (`galleryVeil.js :: SETTLEMENT_FLOOR`). Null when neither is a string.
+ * The size the record carries, as the lasting merit reads it: its `tier` ALONE (the chair's ruling E68 of 2026-11-22:
+ * no law-2 record needs a `config.settType` fallback). `tier` is on every shared read (`galleryVeil.js ::
+ * SETTLEMENT_FLOOR`). Null when it is not a string: FAIL CLOSED, a record with no `tier` credits no lasting.
  * @param {MeritRecord|null|undefined} settlement @returns {string|null}
  */
 export function lastingSizeOf(settlement) {
-  const config = settlement?.config;
-  const size = settlement?.tier ?? (config !== null && typeof config === 'object' ? (/** @type {Bag} */ (config)).settType : undefined);
+  const size = settlement?.tier;
   return typeof size === 'string' ? size : null;
 }
 
