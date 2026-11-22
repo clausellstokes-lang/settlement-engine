@@ -33,6 +33,25 @@ const CASES = Object.freeze([
   ['rvf-politically_fractured-hamlet-3', 'hamlet', 'politically_fractured', 'The Independent Bloc'],
 ]);
 
+/**
+ * THE LIT ARM'S EIGHT (U8, the fortune lane's chair, E112, 2026-11-22): the same eight places under the fortune law, on its
+ * explicit arm. Three of the eight do not meet the guard's premise lit: the lifted standing moves the density law's rival
+ * roll, so slave_revolt-thorp-5, wartime-thorp-2 and rvw-thorp-86 hold no crisis power in the plan before any fold
+ * (class (a), a premise move: docs/chair/2026-11-20/content/fortune/measures/u8/DIAGNOSIS.md). Each is replaced by the
+ * lowest seed of its own family that MEETS the premise lit, found by the premise's own predicate and never by the outcome
+ * (measures/u8/premise-search.mjs, an instrumented scratch copy, 200 seeds a family): the dual hat folded the office's
+ * face, the density plan with the office and the house counted as two seats the power, and the same plan with the cast's
+ * bare count would not (the fold would cut it). Candidates of 200: slave_revolt thorps 10 (8 the fold would cut), wartime
+ * thorps 8 (8), random-crisis thorps 1 (1). The other five meet the premise lit as they stand (folded, and seated by the
+ * plan; the occupation's and the fractured realm's three by their crisis's seated mark, which the bare count does not
+ * cut, as dark). Each expected power is the dark arm's own for its crisis.
+ */
+const LIT_CASES = Object.freeze(CASES.map(([seed, ...rest]) => [({
+  'rvf-slave_revolt-thorp-5': 'rvf-slave_revolt-thorp-53',
+  'rvf-wartime-thorp-2': 'rvf-wartime-thorp-52',
+  'rvw-thorp-86': 'rvw-thorp-148',
+})[seed] ?? seed, ...rest]));
+
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s political mass', () => {
@@ -41,6 +60,17 @@ describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s poli
     for (const [seed, settType, stress, power] of CASES) {
       const config = stress ? { ...DIALS, settType, selectedStresses: [stress], selectedStressesRandom: false } : { ...DIALS, settType };
       const s = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+      const roster = (s.powerStructure?.factions || []).map((f) => f.faction);
+      if (!roster.includes(power)) misses.push(`${seed}: ${power} is not on the page (${roster.join(', ')})`);
+    }
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('under the fortune law, a small place that meets the premise keeps the power the fold of the office\'s face cut (the lit arm)', () => {
+    const misses = [];
+    for (const [seed, settType, stress, power] of LIT_CASES) {
+      const config = stress ? { ...DIALS, settType, selectedStresses: [stress], selectedStressesRandom: false } : { ...DIALS, settType };
+      const s = generateSettlementPipeline({ ...birthConfig(config), _fortuneLawVersion: 2 }, null, { seed, customContent: {} });
       const roster = (s.powerStructure?.factions || []).map((f) => f.faction);
       if (!roster.includes(power)) misses.push(`${seed}: ${power} is not on the page (${roster.join(', ')})`);
     }
