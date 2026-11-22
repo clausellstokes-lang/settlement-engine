@@ -471,7 +471,7 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   ROWS OF THE LIST FAILED AGAIN, NOTHING NEW, NOTHING CURED (the extractor printed 87: one `corpusEcoTailGuards` row
   twice, its title cut short in the log's re-printed summary). A NOTE FOR THE NEXT READING: the proxy refuses the blob
   URL of a job log (403): the helper takes the log by `return_content`. The chair's branch is pushed at 3167a0320
-  (04:11; the hook green: 167, 1113, eslint 0 errors), at low priority beside the landing's run, not through the
+  (04:10 by the push's own log; the hook green: 167, 1113, eslint 0 errors), at low priority beside the landing's run, not through the
   mutex: the hook is three single-threaded checks and the run keeps its three workers. `PICKUP-NINTH.md`'s first block
   is rewritten to this hour. The task of handing the chair to a fresh session is closed as MET BY THE COMPACTION: the
   pickup stays current so that a new session can take over at any time.
@@ -499,7 +499,7 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   RULED AND NOT YET BUILT (the same builder, after the rewording of A and C); the lane before the cure reads
   1,186,120 / 377,705 / 317,071 beside the line's 1,179,511 / 375,172 / 315,169; the two U6 titles of
   `engineChunkLazy` are the cure's red-first (the old "needs a fresh dist" reading was wrong). E22 came of its
-  second note. The chair's branch is on origin at 5338bb123 (04:25; the hook green).
+  second note. The chair's branch is on origin at 5338bb123 (04:24 by the push's own log; the hook green).
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
