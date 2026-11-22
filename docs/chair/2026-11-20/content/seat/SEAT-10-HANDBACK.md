@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T04:21:50Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T04:35:21Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -38,9 +38,13 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
     - the tuning inventory `99011ef51`: the lane's `SEAT_CIRCUMSTANCE_TUNING` row, which the merge's line side had dropped, restored byte-equal to `bb4c3e874`'s; no value moved; the walker 75/76 before, 76/76 after;
     - the lighting census `1bd8a1148`: 3741 → 3748 files; the walker 33/34 before, 34/34 after.
   - **Unchanged and green:** the sameness door's hand list (the lane adds no pool table: `samenessHideable.walker` green), the size baseline and the mutation manifest (121/121 with the two walkers).
-- **THE OWED ARM (the chair's order of 04:06Z): OUT to builder BSR** (brief `briefs/SAVED-SEAT-REDERIVE.md`, `0494bac43`; scratch clone `bsr`). One arm in `seatLawSavedTown.test.js` that EXECUTES the re-derive road (`editSlice.js :: applyRosterDecreesAtTick` → `regenerateWithLayer` → `dmLayer.js :: rederive`) for a law-1 place under a lit form config. RED FIRST by a planted `storedConfigFor`.
-- **UNIT 4 (rule 8, "SEAT <commit>"):** not started.
-- **OUT:** BSR (the owed arm). BKP and BUL are finished.
+- **THE OWED ARM: MERGED at `b7a373480` (item 94; BSR `8328ba467`).** The lighting census was re-taken by its door at `a94f7d097` (titles 31664 → 31665).
+- **CONTEXT:** this seat's context was compacted once, between 00:30Z and 02:04Z. Before the next merge it re-read whole SEAT-10.txt, COMMON-EIGHTH, this file's §1 and COMMON-RULES 8 and 9 (told to the chair 04:28Z).
+- **UNIT 4 (rule 8): RUNNING.**
+  - **(a) DONE at `08b0ba7d2`** (the build at 04:27:23Z, clean; VERIFY_DIST 61/66; the five reds are the five build rows, red on the line itself). The five figures beside LINE-NOW's are in `LANDING-LISTS.md` §5: first paint +3,818 / +1,368 / +835, the worker +15,961, the engine chunk +200.
+  - **(b) the test run:** the chair's ruling (A) of 04:29Z: 1,387 files (the prompt's directories, `tests/domain/facts`, `tests/domain/worldPulse`, `tests/lint`, `tests/build`, plus every test file naming a changed module). Two shards at `a94f7d097`: shard 1 is RUNNING (launched 04:34Z), then shard 2. The failing rows will be read BY NAME against a fresh RED-AT-LINE.
+  - **The landing lists:** written in `LANDING-LISTS.md` (houses and class rows, the stored figures moved, the flip's pins and born fixtures by file, the DRAFT tuning, size).
+- **OUT:** none. BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
@@ -121,6 +125,15 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
    - **Neither way:** no flipped red falls outside the control's files, and the flip cures no red.
    - **Against SEAT-6-TO-LIGHT:** §2's worklist stands as written. Its "born fixtures" unknown is now 7 files. Its §3 legacy-edge PLAUSIBLE became a real lane red, now cured (item 91).
 
+93. **THE CHAIR'S SECOND BASE (04:06Z): the line `f5295e425` (points 87 to 93) merged into `bb4c3e874` as `e8bc160f8`.** Five register or table conflicts, no code conflict; nothing re-pinned. The lane fast-forwarded to it at 04:06:18Z. The four doors, each in its own commit with its proof: the wiring census `0ac91da7c`, writer-reach `1d551fd54` (three-way: 0 neither, 0 new), the tuning inventory `99011ef51` (the lane's row restored byte-equal, no value moved) and the lighting census `1bd8a1148`. The sameness hand list needed no row (the lane adds no pool).
+
+94. **SAVED-SEAT-REDERIVE: the re-derive road EXECUTED (the chair's order of 04:06Z; brief `briefs/SAVED-SEAT-REDERIVE.md`, report `briefs/SAVED-SEAT-REDERIVE-REPORT.md`; BSR `8328ba467`, merged `b7a373480`; CONFIRMED by run).**
+   - **The arm:** `seatLawSavedTown.test.js` arm 6 drives `editSlice.js :: applyRosterDecreesAtTick` on a dark-born saved row while the form config is lit (`state.config._seatLawVersion === 2`). It guards that the road ran (`rederived` true, one newcomer minted, present on the derived record).
+   - **What it shows:** (a) the law reads 1 on the live view and the library row, with no marker; (b) the people's `powerLevel` and band equal a second run of the same road with the marker stripped (one tree, no digest); (c) `coupContenders` reads as on the dark dial, and a control shows it is a live discriminator.
+   - **Red first:** under the plant (`storedConfigFor` returns `state.config`) the file goes 1 failed / 5 passed: "(a) the live view: the re-derived town reads the seat law LIT — a FINDING: expected 2 to be 1". With (a) cut out, (b) reds too.
+   - **Green:** clean 6/6, flipped 6/6. `rosterOpsAtTick` 6/6, the negative-assertion walker 9/9.
+   - **So the sweep's (d) is closed:** the road reads the record's own stored config, and a law-1 place stays law 1 on it.
+
 ## 2. THE UNITS
 
 | unit | branch | state |
@@ -129,7 +142,8 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 | 2 THE KEY QUESTION | BKP (subagent; `keyprobe/`) | DONE at birth (87) and over play time (90) |
 | 3 FLIP CENSUS (re-cut) | `recut/recut.sh`; scratch clone `census-flip` at `ef5abf4da` | DONE (item 92; `recut/CENSUS-LISTS.md`) |
 | UK-LEGACY (the chair's order) | BUL (subagent; scratch clone `bul`, `d9133148d`) | MERGED `a4b3fff4a` (item 91); confine-two EQUAL; accepted 03:54Z |
-| 4 RULE 8 | — | not started |
+| SAVED-SEAT-REDERIVE (the chair's order) | BSR (subagent; scratch clone `bsr`, `8328ba467`) | MERGED `b7a373480` (item 94) |
+| 4 RULE 8 | `r8/` in the scratchpad | (a) done; (b) running at `a94f7d097` |
 
 ## 3. STORED FIGURES THIS SEAT MOVED
 
