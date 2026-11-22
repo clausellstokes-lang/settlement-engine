@@ -10,7 +10,7 @@
  */
 import { seatsByHolder } from '../../domain/seat/seatLaw.js'; // UK (SEAT-6, a): the seat law's one reader, for powerBandOfRole's fold
 
-export const powerBandOfRole = (role, config) => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand (no config: the old law); UK (a): `config` is the born config (or a settlement carrying it)
+export const powerBandOfRole = (role, config) => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand (no config: the old law); UK (a): `config` is the born config (or a settlement carrying it); UK-LEGACY: on a regen road, the handed config re-keyed to the RECORD's seat law (`seatLaw.js :: withRecordSeatLaw`)
   const HIGH_POWER = [
     'mayor',
     'lord',
