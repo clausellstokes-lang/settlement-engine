@@ -1313,6 +1313,68 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   beyond `pressureSentence`. For the build: the composed-hosts walker walks `power.recentConflict` by name as a row
   that left the composed form; the registry's site map moves the row to `generatePowerStructure` (ARM E); the
   fallback registered as a COPY, so a third copy reds.
+- E98 · R5-RECENT IS BUILT BY TWO BUILDERS IN SEQUENCE; THE SQL HALF IS IN (2026-11-22 16:12 UTC). VEIL-33's fourth builder stopped before its first edit: reading 212 whole (3,180 lines, about
+  160,000 tokens) left no room for the build. Its split, accepted: R5C5-SQL reads 212 and the registry whole and
+  makes ONLY the always-pass lines, the ARM D marker, the registry row, `registry.json` and the twin's matching
+  lines; R5C6 builds the page reader, the plant, the walkers, the fidelity arm, the differential and the gates and
+  touches neither. R5C5-SQL IS IN at bbad923a5 on `lane/veil-33-2026-11-22-r5cure-wip`, its diff read whole by the
+  seat: `pressureSentence` leaves where it equals the stored `recentConflict`, then `recentConflict` leaves always
+  (`_gallery_veil_minus_at`; no new helper); the twin the same; the registry row withhold/always/re-derive (writer
+  `buildGovernanceLabels`, site `generatePowerStructure`, the copy as `copyOf`); 212's HASH 0352a502… TO ff20ed89…;
+  the rollback, 211 and 210 unchanged. IF VEIL-33's RECORD REACHES 620,000 BEFORE THE UNIT MERGES, IT HANDS OVER
+  THERE. A builder's brief says in its first line what it reads whole and that it reads nothing else whole.
+- E99 · THE LIT GOLDEN TWIN IS CLOSE-1's UNIT "GOLDEN-LIT"; THE FLIP IN FOUR STEPS (2026-11-22 16:12 UTC; CLOSE-RECIPE.md at 0beef1b42; `close/census/pins-by-door.tsv`). The golden master births its 525
+  configurations WITHOUT `birthConfig`: a law-1 corpus the flip does not move (so the drift corpus and the
+  confinement corpus); it stays as the saved towns' control. OWED BEFORE THE FLIP: a test-only twin,
+  `tests/property/generatorGoldenMasterLit.test.js` (the same configurations THROUGH `birthConfig`; its own
+  manifest written ONLY through `goldenRecordDoor.js :: recordGolden`, which refuses without the owner's signed
+  shift record). RULED: prepared on a -wip branch and proven on the lit ref; NO manifest recorded and NO shift
+  record written or signed by any seat; what the test does where the manifest is absent is said (never a silent
+  pass); `close/OWNER-GOLDEN-LIT.md` shows the owner the diff's shape and the one command after HIS signing; it
+  lands in the flip's own stack, last. THE 146 PINS: five doors for 10 rows; 136 hand anchors in 74 test files
+  (premise 64, born anchor 58, dial pin 14). THE FLIP's ORDER: (1) the dials and the `powersList` row, one commit;
+  (2) the doors, one commit each; (3) the hand anchors, one commit a lane's files, each read against the lanes'
+  paper flip lists, a surprise stops the commit; (4) the goldens, for the owner's signing.
+- E100 · U8's CAUSE, AND THE CURE's RULE: "THE CRISIS HAS A BODY" (2026-11-22 16:12 UTC; FORTUNE-7's diagnosis on `lane/fortune-7-2026-11-22-u8` at 9a0512c02, EXECUTED). SHAPE B: the crisis power is
+  always PUSHED onto the roster, but ITS SEAT IS A WEIGHTED DRAW in the density plan
+  (`densityRoll.js :: chooseSeats` to `rollRival`: the rival weight 0.22 + 0.55 × gap, the gap read after
+  `applyLegitimacyMultipliers`). slave_revolt-thorp-5: legitimacy 19 to 38 crosses the Contested cut (30), the
+  multiplier 0.60 to 0.80, the gap .412 to .049, the weight .446 to .247: the same draw declines;
+  wartime-thorp-2 and rvw-thorp-86: the governing council now sits above the crisis power: no candidate, no roll;
+  the city (succession_void-city-4): `rollInBand(factions 5-8, tilt)`: prosperity01 0.65 to 0.10 moves the tilt:
+  7 to 6 houses, 6 to 5 seats: the Reform Line cut. The leader cards ride it; the stability text does not (it
+  reads the stressor): the contradiction. SO IT IS NOT NEW WITH THE LAW: dark must have it wherever the same draw
+  declines. RULED: UNDER THE FORTUNE LAW ONLY (the explicit `_fortuneLawVersion: 2` arm: no dark birth moves, the
+  density law's signed tables untouched): where a place's active crisis names a power of its own and the seat
+  plan would leave the roster with NO power of that crisis, ONE is seated BY RULE (the strongest of the crisis's
+  own), inside the mass ceiling, whatever its rank, its leader in the cast; where one is already seated nothing
+  changes. Proof owed: the guard under the lit arm (three red then green, five unmoved); the count of crisis
+  places with no power of the crisis BEFORE and AFTER lit (after 0) and DARK for the record (owed to the owner:
+  an old fault new places lose at the flip); the contradiction's own pin; E32's figures re-measured; the dark
+  proof equal; `defenceParts` R13 re-cut with the X4 floor under the lit arm (confirmed no fault: will 6.86, floor
+  6.86). Then "FORTUNE-C <commit>". "FORTUNE-B effdb3480e3e9e72eaac29097be1fc52eb392dd8" IS ACCEPTED FOR LANDING
+  (the dark proof equal on 900 births, 191491a6…; every red listed; first paint +0 raw; the worker +369 and the
+  DRAFT `lastingAgeBySize` 269/108/225/276/441/731 for the owner; its flip list `measures/lasting/FLIP-LIST-B.md`).
+- E101 · THE LAWS' JOIN IS BUILT (TEST ONLY); A DUPLICATE GUARD's FATE (2026-11-22 16:12 UTC; CLOSE-1's 16:09: `lane/close-1-2026-11-22-join-wip` on c110dd85b: d04c5d7b5 the new
+  `tests/domain/generationLawsSavedPlace.test.js`, arms (a) to (g) and a register guard, the two trimmed
+  saved-town files, the three CREATE cuts; 8b935be05 the lighting census). No `src` file. RULED: the duplicate in
+  `livingContentLawWiring` keeps its one own check by carrying it into arm (a), red first by its own plant, THEN it
+  is cut; if that is not a few lines, the duplicate stays (a guard is never cut with a check that has no other
+  home); the darkness pins the builder found lit go into the recipe's step 1a by name. CLOSE-1's count about
+  530,000: its order: "JOIN <commit>"; the hand-back current; GOLDEN-LIT; units 6 and 7; AT 600,000 it hands over
+  and CLOSE-2 is seated IN ITS PLACE.
+- E102 · "PAGE-BAR7 b6aa8cb78" ACCEPTED; THE PLACE IT FREED IS VEIL-34's; THE SAME CLASS LEFT IN THE SAME FUNCTION IS "BAR7-2" (2026-11-22 16:12 UTC). `lane/page-12-2026-11-21-bar7`, cut from c110dd85b: cure (B) at
+  15d788794 (`familiesHeldOf` reads a tension's description, specificIssue, factions and lastingEffects, not its
+  hooks, type or severity); the pin (g); red 3 failed | 4 passed, green 7 of 7; the six towns print the
+  neighbours' and the households' lines again; the true holder r2r-village-58 keeps the families' line; the
+  audit's premise narrowed with no town moved (870 searched); every red of rule 8 listed; first paint raw equal,
+  Brotli +177 named. ITS GREP: `familiesHeldOf` STILL reads a place's conflicts whole (their plotHooks) and its
+  stress whole (crisisHook): "BAR7-2", PAGE-12's next unit at its next GO: the measure first (how many places
+  print a families' line whose only families-word sits in such a hook); if 0 at every size it is a latent hole
+  and lands with the second tranche. ALSO: `historyBeats.js :: deriveInstitutionalLegacy` tests a word on a whole
+  lasting effect: reported, read at that GO. PAGE-12 IS PARKED AGAIN. VEIL-34 SEATED AT 16:11 UTC
+  (session_01ACmDYZ5m4beq8gsAMyMoZd; `prompts/VEIL-34.txt` as sent). THE NEXT PLACE IS STACK-99's: point 99
+  CLOSE-FIXTURE, point 100 FORTUNE-B, point 101 PAGE-BAR7, point 102 SEAT-B when it comes.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1876,3 +1938,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | FRAME-9 | session_01ACmDYXnwjzw5YzWaEc1KqQ | `lane/frame-8-2026-11-20` b2dee95f5 | `lane/frame-9-2026-11-22` | the session sheet: SR1's merge finished (six lint failures by their doors), F3 and F4, P1, the line and the mixed pick, "FRAME", the six sheets for the owner |
 | TRAD-6 | session_01ACmDYYaZ8cU8ZYJb7BBw95 | `lane/trad-5-2026-11-20` b97fd16f7 | `lane/trad-6-2026-11-22` | the traditions lane: unit 13's failures named, the 292 bytes itemized, "TRAD"; it merges NOTHING of the line |
 | STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61. DONE (E85): tip 7c03296d8, joined to the line by 4799b293f; no further run |
+| VEIL-34 | session_01ACmDYZ5m4beq8gsAMyMoZd | `lane/veil-33-2026-11-22` as it stood at 16:11 UTC on 2026-11-22 (beside VEIL-33) | `lane/veil-34-2026-11-22` | the share veil's next writer (E89, E92, E102): reads in, re-makes the pool, prepares R5-DESC and R4-IDS; the one writer of 212 from VEIL-33's hand-over line: R5-DESC, R4-IDS, (iv), (v), (vi), IMPORT-DOOR, "R3" |
