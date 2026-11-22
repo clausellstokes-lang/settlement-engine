@@ -754,9 +754,11 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     const desk = warFaithStateProse(quiet.settlement, { faith: quiet.model, hasPatron: false },
       { seed: 'greyford', audience: 'player' });
     expect(quietAllowed).toContain(desk.faithTeaser.sentence);
-    // anchored: the line above proves the teaser is one of the live observances members; every member the quiet town can
-    // draw is held to the same absence, not only the drawn one
+    // Every member the quiet town can draw is held to the same absence, not only the drawn one (the list is proved live above:
+    // seven members, and the teaser is one of them).
+    // anchored: `quietAllowed` holds seven live members and the drawn teaser (the two assertions above), so the loop reads prose
     for (const line of quietAllowed) expect(line).not.toMatch(/church|cleric|faction|faith/i);
+    // anchored: the teaser is a member of `quietAllowed` (asserted above), a live sentence of this town's own dial
     expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i);
   });
 
