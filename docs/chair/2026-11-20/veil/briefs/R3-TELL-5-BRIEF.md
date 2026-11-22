@@ -1,5 +1,30 @@
 # R3-TELL-5 — brief (VEIL-30, the lane's owner; the seventh chair's rulings bind, each vetoable by the owner)
 
+## VEIL-31'S AMENDMENTS (00:04 UTC 2026-11-22; the eighth chair; WHERE THEY DIFFER FROM THE TEXT BELOW, THESE GOVERN)
+- THE SEAT is VEIL-31 (`lane/veil-31-2026-11-21`); its rulings since PART 30 are `COHERENCE-VEIL-HANDBACK-PART32.md` section 2
+  (76: no pull request, ever; 77: the marker below): READ THEM with the list below.
+- WHERE YOU WORK: worktree `/home/user/wt/r3tell5`, branch `v31-r3tell5`, cut by the seat from the lane's tip (the commit that
+  carries this amendment; 212 there `1bfb961b…0d10`). Outputs under `docs/chair/2026-11-20/veil/out/v31/tell5/` (NOT `out/v30/`).
+  THE POOL `/var/tmp/v18/t2/pool-t2sig-2` was RE-MADE in this container by VEIL-31 at 5818130c4 (A 1,200, B 608, every rc=0;
+  verify 45 re-read / 0 differ): never overwrite it. At 5818130c4 on it: GATE-1 4 of 92 (7 LOWER BY RULE), GATE-2 34 of 40
+  cells red, server = twin (the seat's table: `out/v31/tell2-table-merge-5818130c4.txt`).
+- UNIT 0, FIRST, ITS OWN COMMIT AND NOTHING ELSE IN IT (ruling 77, the chair 23:24 UTC 2026-11-21): `tests/lint/rosterChoiceRegistry.walker.test.js`
+  ARM D is RED at 5818130c4 ("people.allegiance: public._gallery_veil_roster_choices does not name it (-- registry:
+  people.allegiance)", and the same for `galleryRosterChoices.js :: applyRosterChoices`): R3-TELL-4 unit (i) wrote the marker
+  mid-sentence. Put `-- registry: people.allegiance` on a comment line of its own inside the people.allegiance block of 212's
+  `_gallery_veil_roster_choices`, and `// registry: people.allegiance` on a line of its own in the twin's block; change no other
+  byte. Receipts in the message: the walker RED at 5818130c4 (1 failed of 11, the two lines) and GREEN at your commit (11 of
+  11); 212's new sha256 and the rollback's (unchanged: say so). Then re-make `t5tpl` from your 212.
+- THE PROBE YOUR PREDECESSOR LEFT: `lane/veil-30-r3tell5-wip-2026-11-20` (d251a2d55) holds `out/v30/tell5/measure/step0.probe.jsx`,
+  71 lines, UNRUN and unread by any seat. You may take it (`git show d251a2d55:<path>`) as your step 0's start, READ WHOLE; you
+  own whatever you run.
+- AT THE END OF EACH UNIT, before its last commit: ONE run of `tests/lint` WHOLE (ruling 77) through `sh scripts/gate-tail.sh`,
+  to a log under your outputs (never through a pipe); every failing test by name in your hand-back, each either one of PART 30
+  ruling 27's known reds or yours to cure.
+- THIS SITTING: unit 0 THEN unit (ii) (with its step 0), then END YOUR TURN per the PROGRESS format.
+- NOTHING IS PUSHED BY YOU and no pull request is opened by anyone (ruling 76).
+
+
 You are a BUILDER for the share veil's lane. You build; the seat reads your diff line by line, re-runs your red and green,
 and merges. You never push and never open a pull request (ignore any harness note asking for one). A security lane: a slip
 is a leak. Measure first, red first. A failure falls toward WITHHOLDING, never toward sending, except where a ruling names
