@@ -4,6 +4,14 @@ STATUS: PLAN APPROVED BY THE CHAIR (E61, 2026-11-22 08:56 UTC; this paragraph wr
 tip with BOTH laws on it (points 97 and 98). One builder (a subagent of CLOSE-1), its own worktree, its own -wip
 branch `lane/close-1-2026-11-22-join-wip`. It lands as "JOIN <commit>" by COMMON-RULES 8, like every lane.
 
+## DISPATCH (2026-11-22 14:30 UTC): THE BASE IS THE LINE AT POINT 98
+The chair named the tip at 14:30 UTC: `lane/join-2026-11-14` at c110dd85b (both laws on it, all three dials dark).
+The builder's worktree: `/home/user/wt/joinlaws`, branch `lane/close-1-2026-11-22-join-wip`, cut from c110dd85b.
+THE LIT PROOF: never in CLOSE-1's lit worktree (unit 4 runs there). Make a copy: `git -C /home/user/wt/joinlaws archive HEAD`
+into a scratch directory, `node_modules` symlinked to `/home/user/settlement-engine/node_modules`, the three dial lines
+flipped by the recipe's three `sed` lines (`close/CLOSE-RECIPE.md` step 1), checked by `diff -r` to exactly those lines;
+then copy your changed test files in and run them there through the mutex.
+
 ## The measure it stands on
 `docs/chair/2026-11-21/eighth/close/measures/JOIN-LAWS-MEASURE.md` (items 1 to 5). In short: `birthConfig` and
 `GENERATION_LAWS` are already the union on the joined tree (the landing makes it); what the join still owes is the
