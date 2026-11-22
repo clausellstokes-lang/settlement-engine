@@ -6,7 +6,18 @@ EIGHTH chair, session_01ACmDYY29VRchM87v1yhL9Q (send_message, Claude Code Remote
 `docs/chair/2026-11-21/eighth/prompts/FORTUNE-7.txt` on `origin/lane/chair-2026-11-08`. Seated 2026-11-22 07:51 UTC
 BESIDE FORTUNE-6, which still finishes "FORTUNE <commit>" on `lane/fortune-6-2026-11-21`.
 
-## 1. WHERE THE LANE STANDS
+## 1. WHERE THE LANE STANDS (FINAL, 2026-11-22 19:4x UTC: the seat is DONE; its place goes to the veil's second chain)
+
+- LANDED on the working line `lane/join-2026-11-14`: POINT 98 (fortune's first merit, FORTUNE-6's 8cc9212fd), POINT 100
+  (FORTUNE-B effdb3480: LASTING, its sentence, U7c/U7d; STACK-99 merge 044427246, the line c1144ba18), POINT 104
+  (FORTUNE-C 9946de504: the dual-hat guard's lit arm on premise-meeting seeds, FLIP-LIST-B section 4, this hand-back;
+  STACK-100 merge 5f57b9cad). `lane/fortune-7-2026-11-22-c` (53996e954) is NOT USED (the chair, 19:38 UTC).
+- THE OWNER'S: (1) the DRAFT tuning row `FORTUNE_LAW_TUNING.standing.lastingAgeBySize` (269/108/225/276/441/731; the
+  hamlet's 108 under the thorp's 269 by `AGE_BY_TIER`), signed by none; (2) THE SIZES: the worker +369 bytes (LASTING's
+  code), first paint +0 raw; (3) U8's PROPOSAL, `lane/fortune-7-2026-11-22-u8-wip` = 0b7037727 (E112), with its questions
+  (rulings 12) and the false creditor's line beside it (rulings 13).
+- THE FLIP LIST ON PAPER: `measures/lasting/FLIP-LIST-B.md` (sections 1 to 4; R13 is a listed red lit row).
+- Nothing in flight; no builder running; every branch pushed.
 
 | branch | tip | state |
 |---|---|---|
@@ -46,6 +57,7 @@ FORTUNE-6's section 2, items 1 to 10, stand. Added since:
    It is not this lane's.
 4. (08:21 UTC) U7b's builder may be briefed now and is cut the moment the chair names the commit.
 5. (08:27 UTC) "FORTUNE 8cc9212fd" NAMED; that lane lands as point 98. THE LANE IS FORTUNE-7's WHOLE. U7 is cut.
+13. (E118, 19:24 UTC) The printed "The creditor's agent has blocked the money for repairs." in an indebted place with no creditor power (35 of 509 dark, 35 of 511 lit; u8-indebted-thorp-0, u8-indebted-village-0, u8-indebted-town-0) is NOT a blocker: master prints the same claim in older words; it JOINS THE OWNER'S PROPOSAL beside U8's cure.
 12. (E112, 18:19 UTC; it REPLACES E100) U8 is NOT a fault of the fortune law: the crisis with no body is the NORM, dark as lit (509 / 511 of 900). THE CURE DOES NOT LAND IN THE FIRST DEPLOY. It STAYS, whole, on `lane/fortune-7-2026-11-22-u8-wip` = 0b7037727 with its measures, A PROPOSAL FOR THE OWNER after the first deploy. Its open points, AS QUESTIONS: (i) lift a mass ceiling of 1 to a room of two? (ii) a two-crisis place seats the stated crisis's body only (17 of 900): enough? (iv) if it ever lands it is unpacked (COMMON-RULES 10) and cited lines are re-addressed to symbols. The guard's three lit misses are premise moves: the lit arm is re-seated (FORTUNE-C, test only). R13 stays red lit as a listed row (FLIP-LIST-B.md section 4). The false printed line (35 dark, 35 lit, the creditor's agent) is routed by the chair.
 11. (16:00 UTC) "FORTUNE-B effdb3480" ACCEPTED for the next stack. NO commit on this branch that changes `src/` or `tests/` until the chair says it has landed or names a red. U8 lives on its own branch; then "FORTUNE-C <commit>". Hand over if U8's merge would pass 640,000.
 10. (12:28 UTC) The pages ACCEPTED as built. The "also" row keys on the first merit's sentence having PRINTED (U7d, done). In the landing line, say whether the flip's census with both merits fits before 700,000.
