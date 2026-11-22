@@ -41,6 +41,11 @@
  *   (g) THE ONE PIN of `birthConfig(null)` (E61 (5), COMMON-RULES 14 (c)): from the rows' own mints, dark and lit. The
  *       three wiring files' CREATE arms keep their own law's key only and point here.
  *
+ * ⭐ (a) ALSO HOLDS livingContentLawWiring's "⛔ a PERSISTED law-1 world survives load, section regen and the clone
+ * seam unstamped" (the chair's E101 (1)): that arm duplicated (a) but for one check, a law-1 world acquires no
+ * `customContentRoster`, which (a) now makes on every world step (red first: a roster stamped on a law-1 world by a
+ * planted import scrub reds (a) with that check's own message); the duplicate arm was then cut.
+ *
  * THE OLD ARMS' HOMES (E61 (4)): seatLawSavedTown 1 (save, load, regen, clone), 5 (import), 6 (the tick) -> (a)/(b);
  * 2 -> (b); 3 -> (d); 4 -> (e). fortuneLawSavedTown 0 and 1's NEGATIVE CONTROL -> (f); 1 -> (a); 2 -> (b); 4a, 4b ->
  * (d); 5 -> (e); 6 -> (a)/(b). The `birthConfig(null)` pins of livingContentLawWiring "CREATE (LIT, the product path)",
@@ -630,6 +635,10 @@ describe('SAVED-PLACE: a saved place keeps every generation law it was born unde
       .toEqual(worlds.map(([label]) => [label, movesOf(DARK, darkByLabel.get(label))]));
     expect(movesOf(LIT, run.rederived), 'the tick re-derive did not re-derive the dark place\'s own world')
       .toEqual(movesOf(DARK, DARK_WALK.rederived));
+    // The living-content law's own record (carried from livingContentLawWiring's PERSISTED arm, E101 (1)): a law-1
+    // place acquires no roster on any step.
+    expect(worlds.filter(([, w]) => Object.hasOwn(w, 'customContentRoster')).map(([label]) => label),
+      'livingContent: a law-1 place acquired a customContentRoster').toEqual([]);
 
     // THE TICK RE-DERIVE'S CONTROL (SAVED-SEAT's arm 6 (b)): the same re-derivation with no marker in any config in
     // play gives the same people, the same power levels and bands, and the same readings. One tree, two runs.

@@ -600,64 +600,15 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
  * silently. The arms below take a world born BEFORE the flip through the hops a
  * saved world really makes on the lit build and require it to come back as dark
  * as it went in.
+ *
+ * ⭐ THE PERSISTED-WORLD ARM MOVED (CLOSE-1 JOIN, the chair's E101 (1)). "⛔ a
+ * PERSISTED law-1 world survives load, section regen and the clone seam
+ * unstamped" is cut: `tests/domain/generationLawsSavedPlace.test.js` (a) walks the
+ * same hops (and more) for every generation law with every dial lit, and carries
+ * this arm's one check it lacked, that a law-1 world acquires no
+ * `customContentRoster`, proved red first by a planted roster.
  */
 describe('NO MIGRATION — a law-1 world stays law-1 on every path, on the LIT build', () => {
-  it('⛔ a PERSISTED law-1 world survives load, section regen and the clone seam unstamped', async () => {
-    const { createSettlementSlice } = await import('../../src/store/settlementSlice.js');
-    const store = create(immer((...a) => ({
-      ...stubSlice(),
-      ...createSettlementSlice(...a),
-    })));
-
-    // BORN BEFORE THE FLIP: a markerless world, exactly what a saved world from
-    // any day before 2026-09-08 is.
-    const born = generateSettlementPipeline({ ...CONFIG }, null, { seed: 'no-migration-born' });
-    expect(born.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-    expect(born[ROSTER_KEY]).toBeUndefined();
-
-    // LOAD: the JSON round trip a save and a reload are.
-    const loaded = JSON.parse(JSON.stringify(born));
-
-    // …onto a store whose wizard config IS lit, which is the adversarial setting:
-    // if any read path consulted the form config or the dial, the regen below
-    // would stamp the world.
-    store.setState({ settlement: loaded, config: { ...LIT_CONFIG }, phase: 'draft', locks: {} });
-    expect(
-      materializesLivingContent(store.getState().config),
-      'the store config is not lit — this arm would pass on a world nothing threatened',
-    ).toBe(true);
-    expect(
-      NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
-      'the build is not lit — the whole point of this arm is that a LIT build leaves a v1 world alone',
-    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
-
-    const npcsBefore = JSON.stringify(loaded.npcs);
-    await store.getState().regenSection('npcs');
-    const after = store.getState().settlement;
-    // THE POSITIVE CONTROL: the regen really ran, so the three absences below are
-    // absences after a live operation and not after a no-op.
-    expect(
-      JSON.stringify(after.npcs),
-      'regenSection("npcs") did not change the world — this arm would be asserting that an'
-      + ' operation which never ran also failed to stamp a law',
-    ).not.toBe(npcsBefore);
-
-    // UNDO / SNAPSHOT: the clone seam every undo, snapshot and version-history
-    // entry round-trips through.
-    const cloned = deepClone(after);
-
-    for (const [label, world] of [['loaded', loaded], ['regenerated', after], ['cloned', cloned]]) {
-      expect(
-        world.config[LIVING_CONTENT_LAW_CONFIG_KEY],
-        `${label}: a world born under law 1 acquired a law marker on a lit build. There is NO`
-        + ' MIGRATION, deliberately, and no path may stamp a persisted config.',
-      ).toBeUndefined();
-      expect(resolveLivingContentLawVersion(world.config))
-        .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
-      expect(world[ROSTER_KEY], `${label}: a law-1 world acquired a roster`).toBeUndefined();
-    }
-  });
-
   it('⭐ every reader of the roster key treats ABSENT as empty, driven not argued', () => {
     // ⛔ WHY THIS IS AN ARM AND NOT A READING. "There is no migration" means most
     // worlds in the estate will never carry this key, so every reader of it meets
