@@ -1,0 +1,145 @@
+births 60; the law each was born under (seat, fortune): {"[2,2]":60}
+
+(1) WHO RULES: the DM's act on born places (T hidden taker; R hidden retired holder; K criminal taker), each read off / dm.
+acts: {"T":40,"R":34,"K":1}
+
+  T / off: 40 places; the act's power served as a row (so NOT hidden on this read): server 0, twin 0
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                     40/40            0/0                          40/40
+    b_contest                    34/34            4/4                          40/40
+    c_desk                       40/40            0/0                          40/40
+    d_desc                       40/40            4/4                          40/40
+    e_recentConflict             40/40            0/0                          40/40
+    f_edges(behind/retired)       0/0             0/0                          40/40
+    g_holder(reader)              7/7             0/0                          40/40
+    g: the reader's holder (server) differs from the owner's: 40 {"R1->R4":31,"R1->R3":7,"R1->R5":2}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 40
+    ANY served string naming what the read hides (whole document): server 79, twin 79 {"npcs":16,"stress":2,"stressors":2,"relationships":9,"d:factions[].desc":4,"institutions":5,"economicState":40,"economicViability":1} {"npcs":16,"d:factions[].desc":4,"relationships":9,"stress":2,"stressors":2,"economicState":40,"institutions":5,"economicViability":1}; closed searches 0
+      jp6-city-4 npcs[0].institution.family: Merchant guilds (3-8)
+      jp6-city-8 npcs[2].id: npc_power_noble_families
+      jp6-city-8 stress.cast.roles[0].id: npc_power_noble_families
+      jp6-city-8 stressors.cast.roles[0].id: npc_power_noble_families
+      jp6-city-8 relationships[2].id: tie_npc_power_noble_families
+      jp6-city-8 relationships[2].from: npc_power_noble_families
+    server = twin on the hits: 40/40
+
+  T / dm: 40 places; the act's power served as a row (so NOT hidden on this read): server 40, twin 40
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                     40/40            0/0                          40/40
+    b_contest                    34/34            0/0                          40/40
+    c_desk                       40/40            0/0                          40/40
+    d_desc                       40/40            0/0                          40/40
+    e_recentConflict             40/40            0/0                          40/40
+    f_edges(behind/retired)      40/40            0/0                          40/40
+    g_holder(reader)              0/0             0/0                          40/40
+    g: the reader's holder (server) differs from the owner's: 40 {"R1->R1":40}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 0
+    ANY served string naming what the read hides (whole document): server 0, twin 0 {} {}; closed searches 0
+    server = twin on the hits: 40/40
+
+  R / off: 34 places; the act's power served as a row (so NOT hidden on this read): server 0, twin 0
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                     34/34            0/0                          34/34
+    b_contest                    28/28            4/4                          34/34
+    c_desk                       34/34            0/0                          34/34
+    d_desc                       34/34            4/4                          34/34
+    e_recentConflict             34/34            0/0                          34/34
+    f_edges(behind/retired)      34/34            0/0                          34/34
+    g_holder(reader)             34/34            0/0                          34/34
+    g: the reader's holder (server) differs from the owner's: 0 {"R1->R1":34}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 0
+    ANY served string naming what the read hides (whole document): server 79, twin 79 {"npcs":16,"stress":2,"stressors":2,"relationships":9,"d:factions[].desc":4,"institutions":5,"economicState":40,"economicViability":1} {"npcs":16,"d:factions[].desc":4,"relationships":9,"stress":2,"stressors":2,"economicState":40,"institutions":5,"economicViability":1}; closed searches 0
+      jp6-city-4 npcs[0].institution.family: Merchant guilds (3-8)
+      jp6-city-8 npcs[2].id: npc_power_noble_families
+      jp6-city-8 stress.cast.roles[0].id: npc_power_noble_families
+      jp6-city-8 stressors.cast.roles[0].id: npc_power_noble_families
+      jp6-city-8 relationships[2].id: tie_npc_power_noble_families
+      jp6-city-8 relationships[2].from: npc_power_noble_families
+    server = twin on the hits: 34/34
+
+  R / dm: 34 places; the act's power served as a row (so NOT hidden on this read): server 34, twin 34
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                     34/34            0/0                          34/34
+    b_contest                    28/28            0/0                          34/34
+    c_desk                       34/34            0/0                          34/34
+    d_desc                       34/34            0/0                          34/34
+    e_recentConflict             34/34            0/0                          34/34
+    f_edges(behind/retired)      34/34            0/0                          34/34
+    g_holder(reader)             34/34            0/0                          34/34
+    g: the reader's holder (server) differs from the owner's: 0 {"R1->R1":34}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 0
+    ANY served string naming what the read hides (whole document): server 0, twin 0 {} {}; closed searches 0
+    server = twin on the hits: 34/34
+
+  K / off: 1 places; the act's power served as a row (so NOT hidden on this read): server 0, twin 0
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                      1/1             0/0                          1/1
+    b_contest                     1/1             0/0                          1/1
+    c_desk                        1/1             0/0                          1/1
+    d_desc                        1/1             0/0                          1/1
+    e_recentConflict              1/1             1/1                          1/1
+    f_edges(behind/retired)       0/0             0/0                          1/1
+    g_holder(reader)              0/0             0/0                          1/1
+    g: the reader's holder (server) differs from the owner's: 1 {"R1->R4":1}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 0
+    ANY served string naming what the read hides (whole document): server 2, twin 2 {"governance(merit sentence)":1,"e:recentConflict":1} {"e:recentConflict":1,"governance(merit sentence)":1}; closed searches 0
+      jp6-metropolis-0 publicProse.blocks.power:governance.text: Lincheng is governed by the Shadow Senate. No one is named to its seat. Insecurity has left the Shadow Senate's right to rule contested in Lincheng. The Guard and the Religious Authorities are at odds with it. Nothing la
+      jp6-metropolis-0 powerStructure.recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.
+      jp6-metropolis-0 powerStructure.recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.
+      jp6-metropolis-0 publicProse.blocks.power:governance.text: Lincheng is governed by the Shadow Senate. No one is named to its seat. Insecurity has left the Shadow Senate's right to rule contested in Lincheng. The Guard and the Religious Authorities are at odds with it. Nothing la
+    server = twin on the hits: 1/1
+
+  K / dm: 1 places; the act's power served as a row (so NOT hidden on this read): server 0, twin 0
+    surface                    served srv/twin   names the hidden power srv/twin   server=twin
+    a_config                      1/1             0/0                          1/1
+    b_contest                     1/1             0/0                          1/1
+    c_desk                        1/1             0/0                          1/1
+    d_desc                        1/1             0/0                          1/1
+    e_recentConflict              1/1             1/1                          1/1
+    f_edges(behind/retired)       0/0             0/0                          1/1
+    g_holder(reader)              0/0             0/0                          1/1
+    g: the reader's holder (server) differs from the owner's: 1 {"R1->R4":1}
+    g: the reader's holder IS the act's power where the read withholds it: 0; f: a served corrupted/capture edge with no captureState: 0; the capture rung served: 0; e: recentConflict masked "an unseen interest" (server): 0
+    ANY served string naming what the read hides (whole document): server 2, twin 2 {"governance(merit sentence)":1,"e:recentConflict":1} {"e:recentConflict":1,"governance(merit sentence)":1}; closed searches 0
+      jp6-metropolis-0 publicProse.blocks.power:governance.text: Lincheng is governed by the Shadow Senate. No one is named to its seat. Insecurity has left the Shadow Senate's right to rule contested in Lincheng. The Guard and the Religious Authorities are at odds with it. Nothing la
+      jp6-metropolis-0 powerStructure.recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.
+      jp6-metropolis-0 powerStructure.recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.
+      jp6-metropolis-0 publicProse.blocks.power:governance.text: Lincheng is governed by the Shadow Senate. No one is named to its seat. Insecurity has left the Shadow Senate's right to rule contested in Lincheng. The Guard and the Religious Authorities are at odds with it. Nothing la
+    server = twin on the hits: 1/1
+
+  example T jp6-village-0 (hidden Merchant Guilds; Elder Council -> Merchant Council; owner's holder R1 Merchant Guilds):
+    owner recentConflict: Merchant Guilds overthrew the elder council and reshaped the government as a merchant council.
+    owner edge: Merchant Guilds is the power behind the merchant council. The seat answers to them now.
+    off server recentConflict: an unseen interest overthrew the elder council and reshaped the government as a merchant council.; edges []; reader holder R4 null
+    dm server recentConflict: Merchant Guilds overthrew the elder council and reshaped the government as a merchant council.; edges ["Merchant Guilds is the power behind the merchant council. The seat answers to them now."]; reader holder R1 null
+
+  example R jp6-town-2 (hidden Religious Authorities; Theocratic Council -> Merchant City Council; owner's holder R1 Merchant Guilds):
+    owner recentConflict: Merchant Guilds overthrew the theocratic council and reshaped the government as a merchant city council.
+    owner edge: Religious Authorities held the theocratic council until Merchant Guilds took it.
+    owner edge: The Merchant Guilds and the Religious Authorities want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the church's rules on lending are a standing grievance with the merchants.
+    off server recentConflict: Merchant Guilds overthrew the theocratic council and reshaped the government as a merchant city council.; edges ["Merchant Guilds is the power behind the merchant city council. The seat answers to them now."]; reader holder R1 Merchant Guilds
+    dm server recentConflict: Merchant Guilds overthrew the theocratic council and reshaped the government as a merchant city council.; edges ["Merchant Guilds is the power behind the merchant city council. The seat answers to them now.","Religious Authorities held the theocratic council until Merchant Guilds took it."]; reader holder R1 Merchant Guilds
+
+  example K jp6-metropolis-0 (hidden Thieves' Guild; Grand Merchant Oligarchy -> Shadow Senate; owner's holder R1 Thieves' Guild):
+    owner recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.
+    owner edge: Thieves' Guild is the power behind the shadow senate. The seat answers to them now.
+    owner edge: The Guard is hunting the Thieves' Guild in earnest and making real arrests; the Thieves' Guild knows the streets and the people better, hides, and comes back.
+    off server recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.; edges []; reader holder R4 null
+    dm server recentConflict: Thieves' Guild overthrew the grand merchant oligarchy and reshaped the government as a shadow senate.; edges []; reader holder R4 null
+
+(2) FORTUNE: breakdown.merits and the merit's sentence on the served document (no act), both engines, reads off / dm.
+size        births  merits>0(owner)  served merits = owner srv/twin  score = owner  meritsOf(doc) = owner  CAPTURED: meritsOf same  served merits+score same srv/twin  NO-HIDEABLE: meritsOf same  sentence served srv/twin  sentence same captured  sentence names hidden  rung served
+thorp          10         1         10/10                          10             10                     10                        10/10                            10                          1/1                     10                       0                      0
+hamlet         10         0         10/10                          10             10                     10                        10/10                            10                          0/0                     10                       0                      0
+village        10         0         10/10                          10             10                     10                        10/10                            10                          0/0                     10                       0                      0
+town           10         1         10/10                          10             10                     10                        10/10                            10                          1/1                     10                       0                      0
+city           10         0         10/10                          10             10                     10                        10/10                            10                          0/0                     10                       0                      0
+metropolis     10         1         10/10                          10             10                     10                        10/10                            10                          1/1                     10                       0                      0
+all            60         3         60/60                          60             60                     60                        60/60                            60                          3/3                     60                       0                      0
+  merit sentence served jp6-thorp-2 (merits 10): The Flood is within living memory at Hákondal, and coming through it has left its people readier to stand by the Elder Council.
+  merit sentence served jp6-metropolis-0 (merits 10): The Siege is within living memory at Lincheng; the place came through it, and its people hold the more firmly to the Grand Merchant Oligarchy.
+  merit sentence served jp6-town-5 (merits 10): The Occupation is within living memory at Dzibmul, and coming through it has left its people readier to stand by the Town Mayor.
+  (no act) ANY served string naming what the read hides, both reads, both engines: 0 {}
+  server = twin (fortune reads and hits): 60/60
+
+LITSURF 60 births, 75 acts: RED (10 findings above)

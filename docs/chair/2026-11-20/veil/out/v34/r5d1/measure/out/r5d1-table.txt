@@ -1,0 +1,195 @@
+towns 140; pages 6528; pages with y 6528; yErr 0
+
+== M1 THE 13: served instances by the card's kind (server, both reads; R5D-0's Q2 rows, T05+T06 its one row) ==
+  T01 rulingStructure.js :: generatePowerStructure govDescByLabel[Elected Reeve]; applyDensityLaw.js :: reeveToRoster
+     picked by: noblePower > gate or hasNobleInst (step); a noble power on the roster or a noble house (reeveToRoster)
+     reads: noble (a noble POWER or a noble house); writes (by the read): government (the reeve seat)
+     served off 0, dm 0; nothing-hidden 0; on a withholding page 0; by kind {}; by size {}
+  T02 rulingStructure.js :: generatePowerStructure nobleDesc (hasNobleInst && nobleGoverns && military very_high)
+     picked by: the seat's name holds Feudal/Noble/Royal Authority/Household Council; prints the seat's NAME
+     reads: the SEAT (government/noble kind); writes (by the read): noble
+     served off 35, dm 35; nothing-hidden 70; on a withholding page 0; by kind {"noble":70}; by size {"town":22,"city":48}
+  T03 rulingStructure.js :: generatePowerStructure nobleDesc (nobleGoverns rungs)
+     picked by: the seat noble-kind (+ noblePower rung)
+     reads: the SEAT; writes (by the read): noble
+     served off 107, dm 107; nothing-hidden 194; on a withholding page 20; by kind {"noble":214}; by size {"city":94,"metropolis":72,"town":48}
+  T04 rulingStructure.js :: generatePowerStructure nobleDesc (merchantAligned)
+     picked by: the seat Merchant oligarchy / Democratic assembly / Guild Council
+     reads: the SEAT; writes (by the read): noble
+     served off 36, dm 36; nothing-hidden 52; on a withholding page 20; by kind {"noble":72}; by size {"city":72}
+  T05 rulingStructure.js :: generatePowerStructure nobleDesc (Royal Authority)
+     picked by: the seat Royal Authority (+ hasNobleInst)
+     reads: the SEAT; writes (by the read): noble
+     served off 0, dm 0; nothing-hidden 0; on a withholding page 0; by kind {}; by size {}
+  T06 rulingStructure.js :: generatePowerStructure nobleDesc (council seat or not)
+     picked by: the seat Town/City/Grand Council ("the elected council") or not ("the seat")
+     reads: the SEAT; writes (by the read): noble
+     served off 0, dm 0; nothing-hidden 0; on a withholding page 0; by kind {}; by size {}
+  T07 rulingStructure.js :: generatePowerStructure merchantDesc (merchantGoverns)
+     picked by: the seat a merchant oligarchy / council
+     reads: the SEAT; writes (by the read): economy
+     served off 143, dm 143; nothing-hidden 206; on a withholding page 80; by kind {"economy":286}; by size {"city":240,"town":46}
+  T08 rulingStructure.js :: generatePowerStructure militaryDescFinal
+     picked by: the seat a military council / martial
+     reads: the SEAT; writes (by the read): military
+     served off 94, dm 94; nothing-hidden 168; on a withholding page 20; by kind {"military":188}; by size {"town":68,"metropolis":120}
+  T09 rulingStructure.js :: generatePowerStructure religiousDesc
+     picked by: the seat Theocratic / Church Council / ecclesiastical
+     reads: the SEAT; writes (by the read): religious
+     served off 48, dm 48; nothing-hidden 96; on a withholding page 0; by kind {"religious":96}; by size {"town":24,"metropolis":48,"city":24}
+  T10 stressFactions.js :: applyStressEventFactions (politically_fractured, indebted, succession_void)
+     picked by: the seat 'Royal Authority' or not (P); S = hasNobleInst
+     reads: the SEAT; writes (by the read): noble, other (the injected powers); noble (the appended crown-debt line)
+     served off 375, dm 375; nothing-hidden 590; on a withholding page 160; by kind {"other":726,"noble":24}; by size {"town":158,"city":236,"metropolis":288,"village":68}
+  T11 stressFactions.js :: applyStressEventFactions (religious_conversion)
+     picked by: the seat's NAME length mod 3 (a draw where no seat)
+     reads: the SEAT; writes (by the read): religious, other
+     served off 0, dm 0; nothing-hidden 0; on a withholding page 0; by kind {}; by size {}
+  T12 applyDensityLaw.js :: rivalDescOf (RIVAL_DESC_OF_HOST)
+     picked by: the HOST power's opening line (the rival minted from a present power)
+     reads: the HOST (military, government, criminal, other); writes (by the read): the host's kind (the rival takes the host's category)
+     served off 276, dm 276; nothing-hidden 432; on a withholding page 120; by kind {"military":548,"criminal":4}; by size {"city":312,"metropolis":240}
+  T13 applyDensityLaw.js :: resizePoliticalRoster (the mint's { ...host }: the host's base copied)
+     picked by: the HOST's presence
+     reads: the HOST (any kind); writes (by the read): the host's kind
+     served off 987, dm 987; nothing-hidden 1598; on a withholding page 340; by kind {"economy":740,"religious":522,"noble":336,"magic":144,"other":116,"criminal":20,"military":96}; by size {"city":908,"metropolis":1066}
+  T14 claimStanding.js :: settleClaimsToLabel (SEAT_WORDS, ARCANE_ADVISORY_UNDER_ARCANE_SEAT, UNDERWORLD_UNDER_STRONGER_SEAT) / settleClergyToFinalRoster (CLERGY_WITH_WEIGHT)
+     picked by: the seat: council or not, magic, its label's rank, its power
+     reads: the SEAT; writes (by the read): economy, noble, military (SEAT_WORDS); magic; criminal; religious
+     served off 215, dm 215; nothing-hidden 306; on a withholding page 100; by kind {"religious":72,"magic":144,"economy":142,"noble":72}; by size {"city":144,"metropolis":240,"town":24,"village":22}
+  minted rivals served (server, both reads) by kind: {"economy":740,"religious":546,"military":644,"noble":336,"magic":144,"other":116,"criminal":24} (the host link 'contestsNiche' served on: 0)
+
+== M2 FIDELITY on the nothing-hidden pages: the page's picker (late options) over the served roster, each presence-picked base ==
+  the picker's seat (generatePowerStructure's own, from config and houses) equal to the served seat: 2559 / 2559 server pages; differ e.g. []
+  sv T01: 0 served on nothing-hidden pages
+  sv T02: reproduced 70 / 70 (late options); 70 / 70 (none); seeds a,b both equal 70 / 70, a != b 0
+  sv T03: reproduced 194 / 194 (late options); 194 / 194 (none); seeds a,b both equal 194 / 194, a != b 0
+  sv T04: reproduced 52 / 52 (late options); 52 / 52 (none); seeds a,b both equal 52 / 52, a != b 0
+  sv T05: 0 served on nothing-hidden pages
+  sv T06: 0 served on nothing-hidden pages
+  sv T07: reproduced 130 / 206 (late options); 130 / 206 (none); seeds a,b both equal 130 / 206, a != b 0
+  sv T08: reproduced 168 / 168 (late options); 168 / 168 (none); seeds a,b both equal 168 / 168, a != b 0
+  sv T09: reproduced 96 / 96 (late options); 96 / 96 (none); seeds a,b both equal 96 / 96, a != b 0
+  sv T10: reproduced 496 / 590 (late options); 496 / 590 (none); seeds a,b both equal 496 / 590, a != b 0
+  sv T11: 0 served on nothing-hidden pages
+  sv T12: reproduced 142 / 432 (late options); 142 / 432 (none); seeds a,b both equal 142 / 432, a != b 0
+  sv T13: reproduced 928 / 1598 (late options); 900 / 1598 (none); seeds a,b both equal 414 / 866, a != b 0
+  sv T14: reproduced 258 / 306 (late options); 258 / 306 (none); seeds a,b both equal 258 / 306, a != b 0
+  tw T01: 0 served on nothing-hidden pages
+  tw T02: reproduced 70 / 70 (late options); 70 / 70 (none)
+  tw T03: reproduced 194 / 194 (late options); 194 / 194 (none)
+  tw T04: reproduced 52 / 52 (late options); 52 / 52 (none)
+  tw T05: 0 served on nothing-hidden pages
+  tw T06: 0 served on nothing-hidden pages
+  tw T07: reproduced 130 / 206 (late options); 130 / 206 (none)
+  tw T08: reproduced 168 / 168 (late options); 168 / 168 (none)
+  tw T09: reproduced 96 / 96 (late options); 96 / 96 (none)
+  tw T10: reproduced 496 / 590 (late options); 496 / 590 (none)
+  tw T11: 0 served on nothing-hidden pages
+  tw T12: reproduced 142 / 432 (late options); 142 / 432 (none)
+  tw T13: reproduced 928 / 1598 (late options); 900 / 1598 (none)
+  tw T14: reproduced 258 / 306 (late options); 258 / 306 (none)
+  MISSES by cause (late options):
+    sv|T07|no base picked: kind: several B cards: 76  e.g. ["r3m-city-none-0-33","off|own|sv","The Merchant Bloc",["The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.","null"]]
+    sv|T10|no base picked: kind: several B cards: 94  e.g. ["r3m-city-politically_fractured-1-120","off|own|sv","The Grey Council",["Claims legitimate authority through different means and has a following of its own.","null"]]
+    sv|T12|no base picked: kind: several B cards: 290  e.g. ["r3m-city-under_siege-0-48","off|own|sv","The Martial Alliance",["A second armed company that wants a share of keeping order here, and of the say that goes with it.","null"]]
+    sv|T13|no base picked: kind: several B cards: 630  e.g. ["r3m-city-infiltrated-0-32","off|own|sv","The Guild Alliance",null]
+    sv|T13|the host by kind (kind:copy:host served): its base differs: 40  e.g. ["r3m-city-politically_fractured-1-120","off|own|sv","The Devout Circle",["Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.","Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."]]
+    sv|T14|a step after the power step rewrote it: assembleSettlement: 20  e.g. ["r3m-metropolis-none-1-131","off|own|sv","Merchant Guilds",["Established merchant community; fund civic works and expect access to the hall in return.","Merchants with local reach; a consistent civic presence, though other powers set the course here."]]
+    sv|T14|no base picked: kind: several B cards: 28  e.g. ["r3m-metropolis-politically_fractured-1-140","off|allShown|sv","The Commercial Circle",["Established merchant community; fund civic works and expect access to the hall in return.","null"]]
+    tw|T07|no base picked: kind: several B cards: 76  e.g. ["r3m-city-none-0-33","off|own|tw","The Merchant Bloc",["The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.","null"]]
+    tw|T10|no base picked: kind: several B cards: 94  e.g. ["r3m-city-politically_fractured-1-120","off|own|tw","The Grey Council",["Claims legitimate authority through different means and has a following of its own.","null"]]
+    tw|T12|no base picked: kind: several B cards: 290  e.g. ["r3m-city-under_siege-0-48","off|own|tw","The Martial Alliance",["A second armed company that wants a share of keeping order here, and of the say that goes with it.","null"]]
+    tw|T13|no base picked: kind: several B cards: 630  e.g. ["r3m-city-infiltrated-0-32","off|own|tw","The Guild Alliance",null]
+    tw|T13|the host by kind (kind:copy:host served): its base differs: 40  e.g. ["r3m-city-politically_fractured-1-120","off|own|tw","The Devout Circle",["Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.","Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."]]
+    tw|T14|a step after the power step rewrote it: assembleSettlement: 20  e.g. ["r3m-metropolis-none-1-131","off|own|tw","Merchant Guilds",["Established merchant community; fund civic works and expect access to the hall in return.","Merchants with local reach; a consistent civic presence, though other powers set the course here."]]
+    tw|T14|no base picked: kind: several B cards: 28  e.g. ["r3m-metropolis-politically_fractured-1-140","off|allShown|tw","The Commercial Circle",["Established merchant community; fund civic works and expect access to the hall in return.","null"]]
+  seed-varying template cards (server) by id|kind|size: {}
+  SERVER nothing-hidden cards (all kinds) {"kind:religious":2266,"size:village":939,"all":12933,"kind:government":1052,"kind:military":2972,"kind:criminal":248,"size:town":2584,"tplCards":3322,"tpl|kind:religious":566,"tpl|size:town":326,"kind:other":776,"tpl|kind:other":588,"kind:noble":1178,"tpl|kind:noble":580,"kind:economy":3421,"tpl|kind:military":692,"size:city":4188,"tpl|kind:economy":680,"tpl|size:city":1448,"kind:magic":1020,"size:metropolis":5222,"tpl|size:metropolis":1458,"tpl|size:village":90,"tpl|kind:magic":192,"tpl|kind:criminal":24}
+  template cards the picker does NOT reproduce (would LOSE their base on a shared page), server: {"kind:economy":484,"size:city":546,"all":980,"how:kind: several B cards":920,"kind:military":362,"size:metropolis":434,"kind:religious":20,"how:picked, differs":60,"kind:other":94,"kind:noble":20}
+    kind:criminal: lose 0 of 248 cards (0.0%); of its 24 presence-picked cards 0.0%
+    kind:economy: lose 484 of 3421 cards (14.1%); of its 680 presence-picked cards 71.2%
+    kind:government: lose 0 of 1052 cards (0.0%); of its 0 presence-picked cards -
+    kind:magic: lose 0 of 1020 cards (0.0%); of its 192 presence-picked cards 0.0%
+    kind:military: lose 362 of 2972 cards (12.2%); of its 692 presence-picked cards 52.3%
+    kind:noble: lose 20 of 1178 cards (1.7%); of its 580 presence-picked cards 3.4%
+    kind:other: lose 94 of 776 cards (12.1%); of its 588 presence-picked cards 16.0%
+    kind:religious: lose 20 of 2266 cards (0.9%); of its 566 presence-picked cards 3.5%
+    size:city: lose 546 of 4188 cards (13.0%); of its 1448 presence-picked cards 37.7%
+    size:metropolis: lose 434 of 5222 cards (8.3%); of its 1458 presence-picked cards 29.8%
+    size:town: lose 0 of 2584 cards (0.0%); of its 326 presence-picked cards 0.0%
+    size:village: lose 0 of 939 cards (0.0%); of its 90 presence-picked cards 0.0%
+    all: lose 980 of 12933 (7.6%); of 3322 presence-picked cards 29.5%; by how {"how:kind: several B cards":920,"how:picked, differs":60}
+  every distinct (birth, card) the picker picks WRONG (code 0) on a nothing-hidden server page: 14
+    r3m-city-politically_fractured-1-120|Religious Authorities ["off|own|sv","name",[],["Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.","Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."]]
+    r3m-city-politically_fractured-1-120|Corrupt City Council ["off|own|sv","name",[],["null","Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests."]]
+    r3m-city-politically_fractured-1-120|The Devout Circle ["off|own|sv","kind:copy:host served",[],["Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.","Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."]]
+    r3m-village-none-0-1|Elected Reeve ["off|own|sv","name",[],["One of the peasantry, elected by the rest, manages labour and mediates disputes, and answers to the people who chose them.","A reeve elected from the peasantry manages labour and mediates disputes under noble oversight."]]
+    r3m-city-none-0-37|Craft Guilds ["off|own|sv","name",[],["Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.","The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."]]
+    r3m-metropolis-under_siege-0-58|Military/Guard ["off|own|sv","name",[],["City watch; law enforcement and external defence, stretched between multiple responsibilities.","City watch; it answers for keeping order and is growing more sure of its own authority."]]
+    r3m-metropolis-under_siege-0-58|Noble Houses ["off|own|sv","name",[],["Minor landed families with limited political reach; present in civic life but rarely decisive.","Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital."]]
+    r3m-metropolis-under_siege-0-58|The Old Houses ["off|own|sv","kind:copy:host served",[],["Minor landed families with limited political reach; present in civic life but rarely decisive.","Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital."]]
+    r3m-metropolis-politically_fractured-0-70|Merchant Guilds ["off|own|sv","name",[],["Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both.","Merchants with local reach; a consistent civic presence, though other powers set the course here."]]
+    r3m-town-infiltrated-1-82|Corrupt Council ["off|own|sv","name",[],["null","The governing body is systematically compromised; offices are sold and justice is purchasable."]]
+    r3m-city-indebted-1-106|Corrupt City Council ["off|own|sv","name",[],["null","Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests."]]
+    r3m-metropolis-indebted-1-126|Merchant Guilds ["off|own|sv","name",[],["Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.","Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both."]]
+    r3m-metropolis-none-0-63|Craft Guilds ["off|own|sv","name",[],["The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops.","The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."]]
+    r3m-metropolis-none-1-131|Merchant Guilds ["off|own|sv","name",["T14"],["Established merchant community; fund civic works and expect access to the hall in return.","Merchants with local reach; a consistent civic presence, though other powers set the course here."]]
+
+== M3 THE PLANTS (the 140 births, read off, unmarked): the picker on the hiding read vs the place with that power never there ==
+  [plant host r3m-city-wartime-1-119 hides Arcane Orders] picker != the hiding read's served base: ["Religious Authorities",[],1,["Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. The pastoral burden of wartime (soldiers praying before departure, families grieving) ha","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. The pastoral burden of wartime (soldiers praying before departure, families grieving) ha","Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited. The pastoral burden of wartime (soldiers praying before departure, families grieving) ha"]]
+  diff:host|sv|-1|kind: several B cards: 50  e.g. ["r3m-city-infiltrated-0-32","Craft Guilds","The Guild Alliance",null]
+  diff:host|tw|-1|kind: several B cards: 50  e.g. ["r3m-city-infiltrated-0-32","Craft Guilds","The Guild Alliance",null]
+  diff:noble|sv|-1|kind: several B cards: 14  e.g. ["r3m-metropolis-insurgency-0-64","Noble Houses","The Merchant Bloc",null]
+  diff:noble|tw|-1|kind: several B cards: 14  e.g. ["r3m-metropolis-insurgency-0-64","Noble Houses","The Merchant Bloc",null]
+  host|none: 63
+  host|sv: {"plants":77,"err":0,"hiddenServed":0,"masked":0,"seatEq":77,"cards":462,"eq":412,"tpl":75,"tplEq":52,"noPick":50,"tplPickNeStored":3,"storedEqNever":440}
+  host|sv|picker != served base: a standing left on the served base (names the mask; the table does not cut it): 19
+  host|sv|picker != served base: the base itself: 1
+  host|tw: {"plants":77,"err":0,"hiddenServed":0,"masked":0,"seatEq":77,"cards":462,"eq":412,"tpl":75,"tplEq":52,"noPick":50,"tplPickNeStored":3,"storedEqNever":440}
+  host|tw|picker != served base: a standing left on the served base (names the mask; the table does not cut it): 19
+  host|tw|picker != served base: the base itself: 1
+  noble|none: 101
+  noble|sv: {"plants":39,"err":0,"hiddenServed":0,"masked":0,"seatEq":39,"cards":234,"eq":220,"tpl":40,"tplEq":32,"noPick":14,"tplPickNeStored":0,"storedEqNever":228}
+  noble|sv|picker != served base: a standing left on the served base (names the mask; the table does not cut it): 6
+  noble|tw: {"plants":39,"err":0,"hiddenServed":0,"masked":0,"seatEq":39,"cards":234,"eq":220,"tpl":40,"tplEq":32,"noPick":14,"tplPickNeStored":0,"storedEqNever":228}
+  noble|tw|picker != served base: a standing left on the served base (names the mask; the table does not cut it): 6
+
+== M3 LIT (the copied litsurf probe, act T: the hidden taker; the picker on each read vs the place with it never there) ==
+  births 60; act T with y 40
+  diff:dm|server|-1|kind: several B cards: 10  e.g. ["jp6-city-0","Military/Guard","The Merchant Bloc",null]
+  diff:dm|server|-1|not minted by the picker: 23  e.g. ["jp6-village-0","Merchant Guilds","Merchant Council",null]
+  diff:dm|twin|-1|kind: several B cards: 10  e.g. ["jp6-city-0","Military/Guard","The Merchant Bloc",null]
+  diff:dm|twin|-1|not minted by the picker: 23  e.g. ["jp6-village-0","Merchant Guilds","Merchant Council",null]
+  diff:off|server|-1|kind: several B cards: 10  e.g. ["jp6-city-0","Military/Guard","The Merchant Bloc",null]
+  diff:off|server|-1|not minted by the picker: 23  e.g. ["jp6-village-0","Merchant Guilds","Merchant Council",null]
+  diff:off|twin|-1|kind: several B cards: 10  e.g. ["jp6-city-0","Military/Guard","The Merchant Bloc",null]
+  diff:off|twin|-1|not minted by the picker: 23  e.g. ["jp6-village-0","Merchant Guilds","Merchant Council",null]
+  dm|server: {"acts":40,"err":0,"hidingReads":0,"seatPickEq":40,"cards":179,"eq":146,"tpl":27,"tplEq":24,"noPick":33}
+  dm|twin: {"acts":40,"err":0,"hidingReads":0,"seatPickEq":40,"cards":179,"eq":146,"tpl":27,"tplEq":24,"noPick":33}
+  off|server: {"acts":40,"err":0,"hidingReads":40,"seatPickEq":40,"cards":179,"eq":146,"tpl":27,"tplEq":24,"noPick":33}
+  off|twin: {"acts":40,"err":0,"hidingReads":40,"seatPickEq":40,"cards":179,"eq":146,"tpl":27,"tplEq":24,"noPick":33}
+  the picker's seat (config) vs the served seat after the act; the template cards' picked base vs the base the read serves: {"off|server":{"reads":40,"pickerSeatIsServedSeat":0,"tplCards":27,"pickerEqStored":14,"pickerNeStored":10,"noPick":3,"neIsStandingResidue":2},"off|twin":{"reads":40,"pickerSeatIsServedSeat":0,"tplCards":27,"pickerEqStored":14,"pickerNeStored":10,"noPick":3,"neIsStandingResidue":2},"dm|server":{"reads":40,"pickerSeatIsServedSeat":0,"tplCards":27,"pickerEqStored":15,"pickerNeStored":9,"noPick":3,"neIsStandingResidue":2},"dm|twin":{"reads":40,"pickerSeatIsServedSeat":0,"tplCards":27,"pickerEqStored":15,"pickerNeStored":9,"noPick":3,"neIsStandingResidue":2}}
+    e.g. ["jp6-town-2","Religious Authorities",["Theocratic Council","Town Mayor","Theocratic Council","Town Mayor"],"Merchant Guilds",["T14"],["T14"],["Established merchant community; fund civic works and expect access to the hall in return. They operate in the shadow of the an unseen interest, close enough to matter and too far behind to lead.","Established merchant community; fund civic works and expect access to the hall in return. The gap between them and the Religious Authorities is narrow. A single shift in patronage, scandal, or armed m"]]
+    e.g. ["jp6-city-0","Military/Guard",["Grand Military Council","City Council","Grand Military Council","City Council"],"Grand Military Council",[],["T12"],["Officers rule; orders come down the chain of command, and keeping the place safe comes first.","A second armed company that wants a share of keeping order here, and of the say that goes with it."]]
+    e.g. ["jp6-city-4","Merchant Guilds",["Grand Merchant Senate","City Council","Grand Merchant Senate","City Council"],"Religious Authorities",["T14"],["T14"],["The faith holds no office in the hall, but its moral authority is real and its word carries political weight here. The gap between them and the an unseen interest is narrow. A single shift in patronag","The faith holds no office in the hall, but its moral authority is real and its word carries political weight here. The gap between them and the Merchant Guilds is narrow. A single shift in patronage, "]]
+    e.g. ["jp6-metropolis-3","Noble Houses",["Noble Regency","Royal Authority","Noble Regency","Royal Authority"],"Noble Regency",[],["T03","T14"],["A noble family rules; rank, favour and inheritance decide everything.","Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the hall works alongside them, not over them. The gap between them and the Royal Authorit"]]
+    e.g. ["jp6-town-0","Religious Authorities",["Theocratic Council","Guild Council","Theocratic Council","Guild Council"],"The Independent Bloc",["T10"],["T10"],["Claims legitimate authority through different means and has a following of its own. Close enough to the two above that their support is worth buying; they play the Merchant Guilds and the an unseen in","Claims legitimate authority through different means and has a following of its own."]]
+    e.g. ["jp6-metropolis-4","Noble Houses",["Noble Regency","Royal Authority","Noble Regency","Royal Authority"],"Noble Regency",[],["T03","T14"],["A noble family rules; rank, favour and inheritance decide everything.","Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the hall works alongside them, not over them. The gap between them and the Royal Authorit"]]
+  the four places:
+    ["jp6-city-8","off|server","Noble Families","servedRow 0","seat served/picker hide Royal Authority/City Council never Royal Authority/City Council","cards 6 equal 5",[["Religious Authorities",["T14"],["T14"],1,"The faith holds no office in the hall, but its moral authority is real and its word carrie","The faith holds no office in the hall, but its moral authority is real and its word carrie"],["The Independent Bloc",["T10"],["T10"],1,"Claims legitimate authority through different means and has a following of its own.","Claims legitimate authority through different means and has a following of its own."],["The Grey Council",["T10"],[],-1,"Claims legitimate authority through different means and has a following of its own.","null"]]]
+    ["jp6-city-8","off|twin","Noble Families","servedRow 0","seat served/picker hide Royal Authority/City Council never Royal Authority/City Council","cards 6 equal 5",[["Religious Authorities",["T14"],["T14"],1,"The faith holds no office in the hall, but its moral authority is real and its word carrie","The faith holds no office in the hall, but its moral authority is real and its word carrie"],["The Independent Bloc",["T10"],["T10"],1,"Claims legitimate authority through different means and has a following of its own.","Claims legitimate authority through different means and has a following of its own."],["The Grey Council",["T10"],[],-1,"Claims legitimate authority through different means and has a following of its own.","null"]]]
+    ["jp6-city-8","dm|server","Noble Families","servedRow 1","seat served/picker hide Royal Authority/City Council never Royal Authority/City Council","cards 6 equal 5",[["Religious Authorities",["T14"],["T14"],1,"The faith holds no office in the hall, but its moral authority is real and its word carrie","The faith holds no office in the hall, but its moral authority is real and its word carrie"],["The Independent Bloc",["T10"],["T10"],1,"Claims legitimate authority through different means and has a following of its own.","Claims legitimate authority through different means and has a following of its own."],["The Grey Council",["T10"],[],-1,"Claims legitimate authority through different means and has a following of its own.","null"]]]
+    ["jp6-city-8","dm|twin","Noble Families","servedRow 1","seat served/picker hide Royal Authority/City Council never Royal Authority/City Council","cards 6 equal 5",[["Religious Authorities",["T14"],["T14"],1,"The faith holds no office in the hall, but its moral authority is real and its word carrie","The faith holds no office in the hall, but its moral authority is real and its word carrie"],["The Independent Bloc",["T10"],["T10"],1,"Claims legitimate authority through different means and has a following of its own.","Claims legitimate authority through different means and has a following of its own."],["The Grey Council",["T10"],[],-1,"Claims legitimate authority through different means and has a following of its own.","null"]]]
+    ["jp6-village-6","off|server","Religious Authorities","servedRow 0","seat served/picker hide Church Council/Elder Council never Church Council/Elder Council","cards 2 equal 2",[]]
+    ["jp6-village-6","off|twin","Religious Authorities","servedRow 0","seat served/picker hide Church Council/Elder Council never Church Council/Elder Council","cards 2 equal 2",[]]
+    ["jp6-village-6","dm|server","Religious Authorities","servedRow 1","seat served/picker hide Church Council/Elder Council never Church Council/Elder Council","cards 2 equal 2",[]]
+    ["jp6-village-6","dm|twin","Religious Authorities","servedRow 1","seat served/picker hide Church Council/Elder Council never Church Council/Elder Council","cards 2 equal 2",[]]
+    ["jp6-city-2","off|server","Religious Authorities","servedRow 0","seat served/picker hide High Theocratic Council/Merchant oligarchy never High Theocratic Council/Merchant oligarchy","cards 5 equal 4",[["The Martial Alliance",["T12"],[],-1,"A second armed company that wants a share of keeping order here, and of the say that goes ","null"]]]
+    ["jp6-city-2","off|twin","Religious Authorities","servedRow 0","seat served/picker hide High Theocratic Council/Merchant oligarchy never High Theocratic Council/Merchant oligarchy","cards 5 equal 4",[["The Martial Alliance",["T12"],[],-1,"A second armed company that wants a share of keeping order here, and of the say that goes ","null"]]]
+    ["jp6-city-2","dm|server","Religious Authorities","servedRow 1","seat served/picker hide High Theocratic Council/Merchant oligarchy never High Theocratic Council/Merchant oligarchy","cards 5 equal 4",[["The Martial Alliance",["T12"],[],-1,"A second armed company that wants a share of keeping order here, and of the say that goes ","null"]]]
+    ["jp6-city-2","dm|twin","Religious Authorities","servedRow 1","seat served/picker hide High Theocratic Council/Merchant oligarchy never High Theocratic Council/Merchant oligarchy","cards 5 equal 4",[["The Martial Alliance",["T12"],[],-1,"A second armed company that wants a share of keeping order here, and of the say that goes ","null"]]]
+    ["jp6-metropolis-0","off|server","Religious Authorities","servedRow 0","seat served/picker hide High Theocratic Council/Grand Merchant Oligarchy never High Theocratic Council/Grand Merchant Oligarchy","cards 6 equal 6",[]]
+    ["jp6-metropolis-0","off|twin","Religious Authorities","servedRow 0","seat served/picker hide High Theocratic Council/Grand Merchant Oligarchy never High Theocratic Council/Grand Merchant Oligarchy","cards 6 equal 6",[]]
+    ["jp6-metropolis-0","dm|server","Religious Authorities","servedRow 1","seat served/picker hide High Theocratic Council/Grand Merchant Oligarchy never High Theocratic Council/Grand Merchant Oligarchy","cards 6 equal 6",[]]
+    ["jp6-metropolis-0","dm|twin","Religious Authorities","servedRow 1","seat served/picker hide High Theocratic Council/Grand Merchant Oligarchy never High Theocratic Council/Grand Merchant Oligarchy","cards 6 equal 6",[]]
