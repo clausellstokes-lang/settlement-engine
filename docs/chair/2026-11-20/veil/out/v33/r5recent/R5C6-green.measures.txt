@@ -1,0 +1,12 @@
+R5R plant (a) r5-taker: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (b) r5-owner: reads 54 | gated reads (engine x read) 60 | own engine-reads withholding the target 20 | of them gated 20 | faults 0 
+R5R plant (c) r5-bare: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-possessive: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-lower: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-owner-lower: reads 54 | gated reads (engine x read) 60 | own engine-reads withholding the target 20 | of them gated 20 | faults 0 
+R5R tooth r5-served: engine-reads 108 | beside a withheld power 100 | faults 0 
+R5R tooth r5-owner-served: engine-reads 108 | beside a withheld power 60 | faults 0 
+R5R tooth hides-nothing: the open town's engine-reads 108 | other towns' reads that hide nothing 52 | faults 0 
+R5C6 fidelity (standing pool): births 37 | nothing-hidden 22 | engine-door-reads 176 | reproduced 168 | missed places ["r5c2-m3-hamlet-8 (8 reads; cause [\"Citizen militia\"])"] | faults 0 
+R5C6 differential (standing pool): hiding places 15 | hiding reads (place x Reveal DM) 30 | engine-door-reads 120 | equal 120 | faults 0 
+R5C6 count (standing pool): births 37 | a 25 | b 6 | b on places that hide 3 | engine-reads 132 | c server 0 | c twin 0 | hit reads server 0 | twin 0 

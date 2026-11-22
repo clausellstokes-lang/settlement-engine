@@ -1884,6 +1884,14 @@
       "kind": "rationale",
       "ref": "walker-totality-executed"
     },
+    "tests/lint/recentConflictReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "EVERY READER OF THE RECENT-CONFLICT SENTENCE, REGISTERED (R5-RECENT's cure, second half; VEIL-33's V33-R5C6, 2026-11-22; the chair's E92 (2), (5), E93, E97 (1); on tests/lint/crimeTypesReaders.walker.test.js's pattern): every code line under src/ naming recentConflict is a site registered with its count and verdict; the ONE reader (pageRederive.js :: rederiveRecentConflict) must call generatePowerStructure, never name pressureSentence, and be wired at rederiveForPage and importRederive.js :: rederiveInPlace (authoritative); both always-hosts must withhold the key and its pressureSentence copy and the registry rows stand. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS EXECUTED: (1) its own controls judge a synthetic source on every ordinary run (declBody to the next declaration; a word in a comment line not counted); (2) the RED-FIRST run before the reader existed red both the census arm (the registered reader site stale) and the door arm (no reader, not wired at either door), recorded in docs/chair/2026-11-20/veil/out/v33/r5recent/R5C6-red.txt. A standing sweep plant would mutate shared src/ modules a concurrent lane may hold."
+    },
+    "tests/security/galleryVeilRecent.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/shareRenderTwice.pglite.test.jsx": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -3066,6 +3074,10 @@
     "tests/lint/rosterChoiceRegistry.walker.test.js": {
       "kind": "rationale",
       "rationale": "THE ROSTER-CHOICE REGISTRY'S WALKER (VEIL-R1, 2026-11-20; ruling VR7, SUB-BRIEF-VR7 stage R1): binds src/domain/veil/rosterChoiceRegistry.js to 212 and the client twin and to every chooser site. IT IS A RATIONALE BECAUSE EACH ARM'S CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE PLANT, each removed after (the tracked files restored byte-identical, sha256 verified; the record: docs/chair/2026-11-20/veil/r1/R1-walker-redgreen.txt): (A1) a call of isCriminalInstitution from a new src/generators function reds ARM A; (A2) a new /smuggler den/i literal at a new generator site reds ARM A; (B) a second crime-name literal at the registered site src/domain/threatProfile.js :: TYPE_PATTERNS reds ARM B (registered 1, found 2); (C1) a row with no server symbol and (C2) one with no twin symbol each red ARM C; (D1) a row marked built whose host is a planned R2 helper reds ARM D (not a function of 212, not a top-level twin declaration); (D2) a row marked built on an existing host whose body carries no '-- registry: <id>' / '// registry: <id>' reds ARM D; (E) registry.json edited by hand reds ARM E (and scripts/veil/rosterChoiceRegistry.mjs --check exits 1). (F, the chair's rulings of 2026-11-20 00:44 UTC) a page answer planted on every diffuse row reds ARM F (a page answer only on a value withheld on every read; every rng row built; a diffuse row built exactly when its condition is; a copy takes its source's rule). The census also proves itself on every run: a synthetic source with a planted predicate call, a planted crime-name regex and a registerStep site is walked before the live tree is trusted, and zero parse failures over the whole scope are asserted. Promote to kind:mutation once the tree is quiescent."
+    },
+    "tests/lint/rosterChoiceComposedHosts.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE WALKER R5 WANTS FIRST (VEIL-33's V33-R5R, 2026-11-22; the chair's E78 (2), docs/chair/2026-11-20/veil/briefs/R5-RECENT-BRIEF.md): every COMPOSED row of src/domain/veil/rosterChoiceRegistry.js (inputs non-empty, VR12) names a server and a twin host declared in REGISTRY_HOSTS for its own engine, and a row whose host is PLANNED reds, one test per row, named by row id (power.recentConflict first). IT IS A RATIONALE BECAUSE ITS CATCHING POWER IS EXECUTED ON EVERY ORDINARY RUN, in two forms: (1) its own controls in the same file judge synthetic rows (a planted PLANNED server host, a planted PLANNED twin host, both, a missing host, an undeclared host, crossed engines: each reds by name; two existing hosts: none); (2) the live registry REDS IT TODAY BY DESIGN, one red per composed row on R5's planned host (public._gallery_veil_composed / gallerySecondHomes.js :: withholdComposed), its failing list R5's worklist, recorded in docs/chair/2026-11-20/veil/out/v33/r5recent/R5R-HANDBACK.md. A standing sweep plant would duplicate (1) at the cost of transiently mutating the shared registry module each sweep; the registry walker's ARM C (tests/lint/rosterChoiceRegistry.walker.test.js) binds a host declared 'exists' to its existence, so a row cannot leave this list by a false state."
     },
     "tests/data/namingDataCharset.test.js": {
       "kind": "mutation",
