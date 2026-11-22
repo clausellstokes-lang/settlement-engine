@@ -120,6 +120,26 @@ verified by ls-remote).
     WITH THE MEASURE, ONE QUESTION: can GATE-1 as built see this class (a served list that is a STRICT PART of its twin's)? If not,
     say so plainly and propose the arm (served equals twin, per family, on all 92) as part of the unit: a gate that cannot see a
     tell is itself a finding for the security reader.
+82. THE CHAIR, 03:30 UTC 2026-11-22: UNIT (iii) ACCEPTED as read and re-run (GATE-2 26 -> 20; the EIGHT VR42 towns LOWER BY RULE,
+    listed); merge when the seat's gates and suites finish. THE STOP ON `powerStructure.criminalCaptureState` (25 towns, Reveal DM)
+    RULED AS RECOMMENDED: where the SERVED crime signal is false the sent form is 'none' (what every open place in that state shows;
+    the twin's own in 21 of 25), built in UNIT (v) with the other sent forms, both engines, red first. THE FOUR WHOSE TWIN KEEPS A
+    RUNG ARE NOT SERVED THE TWIN'S VALUE (a rung on a page that shows no criminal house or power is a value no open place shows;
+    MEMBERSHIP GOVERNS where the two laws part): listed for the security reader with both values. ORDER: merge (iii), then (vii),
+    then (iv), (v), (vi).
+    WHAT GIVES EACH OF THE FOUR TWINS ITS RUNG (measured 03:33, `out/v31/twins/twins4.json`: the twin's powers and capture relations;
+    0 hideable houses left in each twin, 0 criminal-category houses, 0 allegiances): A CRIMINAL POWER THAT IS NOT A HOUSE, which the
+    cut (hideable houses only) does not reach and the generator raises without one; NOT a hole in the instrument:
+    - r3m-town-none-0-23 (twin 'adversarial', served 'adversarial'): the twin's non-governing "Thieves' Guild" (criminal), its
+      relation with the governing "Merchant oligarchy" 'adversarial'.
+    - r3m-metropolis-wartime-0-59 (twin 'adversarial', served 'adversarial'): "Thieves' Guild" (criminal), adversarial to the
+      "City-State Council" and the "War Council".
+    - r3m-metropolis-indebted-0-66 (twin 'adversarial', served 'equilibrium'): "Thieves' Guild" and "The Hidden Hand" (criminal),
+      the Guild adversarial to the "City-State Council" and "Military/Guard".
+    - r3m-metropolis-insurgency-1-124 (twin 'equilibrium', served 'corrupted'): "Thieves' Guild" (criminal), in 'equilibrium' with
+      the governing "Grand Merchant Senate" (whose own captureState is 'equilibrium').
+    The hiding read withholds each such power (ruling 62 (5)), so its served page is one with no criminal power: 'none' is that
+    page's open form; the twin, which keeps the power, is a different page.
 
 ## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
 | file | failed tests | sort (a) lane / (b) old base |
@@ -156,3 +176,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 02:31 the chair's 02:28 ruling (80) read; the seat's correction sent (unit (iii) is a FRESH builder). 02:32 the twins measured; sent. 02:32 recorded.
 - 02:36 the chair's 02:35 ruling (81) read; unit (vii) placed. 02:37 recorded.
 - (before 03:20, not clocked) unit (iii) returned; pushed -wip; diff read; chain3 launched 03:20; the capture twins measured 03:27 and sent. 03:28 recorded.
+- 03:32 the chair's 03:30 ruling (82) read. 03:33 the four twins' rungs measured and recorded.
