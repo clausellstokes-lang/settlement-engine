@@ -17,7 +17,18 @@ reference, plus §2 below.
 25. E30: the lane does not hold the first deploy.
 26. COMMON-EIGHTH 11: `tests/lint` WHOLE after any change to a test file, its count in every report.
 
-## 3. UNIT 1 — UNIT 13's FAILURES BY NAME
-(filled when the batch is read)
+## 3. UNIT 1 — UNIT 13's FAILURES BY NAME (EXECUTED by TRAD-6 at `cd6989657`, 08:23–08:52 UTC)
+The directories (tests/lint, components, pdf, data, domain/dossier, kernel) and the 12 test files elsewhere that name a module the
+lane changed: 857 files, 8,394 tests, 4 red. `tests/lint` whole inside it: 221 files, 3,313 tests, 1 red.
+| test | on `RED-AT-LINE.tsv`? | cause |
+|---|---|---|
+| `tests/lint/presumptionClasses.walker.test.js` "no NEW undeclared line…" | NO: the lane's | ONE hit, `ELEMENT_GLOSS_ALSO.forge` "also honours the forge" (goods:none): the line declares `institution: smith` (which answers goods) inside `Object.freeze([...])`, a form the scanner (`presumptionClasses.shared.mjs :: scanSource`) does not read; the plain forge glosses are 3 words, so never scanned. CURE: the declaration written as a literal array, no wording moved (brief `briefs/TRAD-6-U1-ALSO-FORGE-DECLARED.md`, builder on `-u1-wip`) |
+| `tests/components/phoneChromeFloor.census.test.js` (TRAD-5's unnamed second) | NO (it left the list at points 92/93) | `/create` 621→622, `/settlements` 864→865, `/gallery` 666→667: the +1 of point 88's description line, already re-recorded on the LINE by its door at `6d581ce5b`; unit 13 touches no component. Not re-recorded on the lane (the merge takes the line's side) |
+| `tests/generators/generationForkCensus.test.js` A1 | YES (row 13) | stored fingerprint |
+| `tests/property/generatorGoldenMaster.test.js` "every config…" | YES (row 31) | golden master |
+`VERIFY_DIST=1 tests/build` whole after a fresh build: 612 tests, 13 red, ALL ON THE LIST by title: the eight edge-bundle tests
+(`engineBundleReplay` ×3, `engineServiceCore` ×1, `engineServiceStoreParity` ×4) and the five size rows. Build exit 0.
+First paint at `cd6989657` (`fp.mjs`, the test's reading): 1,177,013 / 374,555 / 314,617 (TRAD-5's figures reproduced). RAW IS
+IDENTICAL to `a89c29f74`'s (= cf5b24079's code), so the Brotli +173 is content, not bytes: being located by chunk (cf5b24079 built).
 
 ## Updated (append at each later commit, with `date -u`)
