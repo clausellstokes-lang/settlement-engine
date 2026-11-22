@@ -47,6 +47,18 @@ c. Commit the merge: `Merge <lane> at <short commit>: point <n> (<the chair's ti
    and how it was resolved, then the trailers. A lane that did not land takes no point number: the next lane that
    lands takes the next number.
 
+c2. WHAT ROSE (added 2026-11-22 04:24 UTC, after a seat showed how a merge can raise a shrink-only row with no gate reading
+   it: a lane that took its own side of a register, a door that only tightens, and at the landing no conflict left
+   to send the row back to the line's side). Once every merge of the stack is committed:
+   `python3 -I /home/user/wt/chair/docs/chair/2026-11-21/eighth/landing/raised.py <the commit the chair's message names> HEAD > <scratch>/raised-merges.txt`
+   and once more after step d's doors (`raised-top.txt`). It reads git objects only. It lists every register leaf
+   that rose and every named ceiling or budget that moved. YOU JUDGE NOTHING AND CURE NOTHING BY IT: in your final
+   message give the file lines of `raised-top.txt` (the lines that do not begin with a space) and, in full, every
+   `ROSE` or `moved` line that names a ceiling, a budget, a ratchet, or a row of `scripts/.writer-reach-baseline.json`
+   outside `scanStats`, `scripts/census/pool-dominance.register.json` outside `lines` and `census`, or any
+   `*baseline*.json` under `scripts/` or `tests/copy/`, with the landed lane whose merge brought it
+   (`git log --oneline <base>..HEAD -- <file>`). The chair reads them before it pushes.
+
 ## STEP 2, ONCE, at the top of the stack: registers, then the gate
 d. `npx vitest run tests/lint --maxWorkers=3` whole. Each red that is a register OWED TO ITS DOOR (its own message
    names the door: the lighting census `LIGHTING_CENSUS_REFREEZE=<n> LIGHTING_CENSUS_NOTE="<why>" npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`;
