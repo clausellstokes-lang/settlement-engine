@@ -24,7 +24,9 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   arms Tell8+3+4+5 green; `tests/lint` WHOLE 16 files / 22 tests of 3,267 = THE SIXTEEN STANDING ONLY (223 files). THE GATES FAILED TO
   RUN, A SLIP OF THIS SEAT'S: the template named `v33tplH` (mixed case) and the probe's unquoted SQL reads `v33tplh`: part A's four
   shards failed (`gates rc=2`). RE-RUN from 14:30 (`/var/tmp/v18/out/v33/h/chainH2.sh`: template `v33tplh`, fresh pool
-  `/var/tmp/v18/t2/pool-t2sig-4`, to `/var/tmp/v18/out/v33/h/g2/done.txt`). Every database is local.
+  `/var/tmp/v18/t2/pool-t2sig-4`, to `/var/tmp/v18/out/v33/h/g2/done.txt`). THE GATES AT 83d236813 (15:10): GATE-1 4 of 92 at every gated
+  setting, both reads (7 LOWER BY RULE, the same seven), GATE-2 20 of 40, 0 against the rule, twin = server: EQUAL to VEIL-32's on
+  its pool. Sent to the chair 15:11. (H) IS DONE. Every database is local.
 - READ (08:05-08:08 UTC): the prompt's list, each whole; PART 33 section 2 as well (rulings 89-90 are the probe's terms); 212
   (`8688ddb6…5a3a`) and the registry WHOLE, once.
 - (0) THE POOL AND THE GREEN CHAIN, this container: `/var/tmp/v18/out/v33/chain0.sh` (npm ci 0, ledger 0, make-instruments:
@@ -88,6 +90,16 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   `/home/user/wt/r5c`, branch `v33-r5cure`: the lane at 2e0cfa1be + the instruments merged as f8d8ea6e3, one manifest conflict taken
   both sides; the brief's CURE BUILDER section cbaa8d540: the rule hosted in R3's EXISTING host, R5's composed host stays planned;
   the open form measured first; the owner-hidden plants a STOP if they need the hidden name or 210/211).
+- R5-RECENT'S CURE STOPPED BEFORE ANY EDIT (V33-R5C, `lane/veil-33-2026-11-22-r5cure-wip` at 6b204fd65; hand-back
+  `out/v33/r5recent/R5C-HANDBACK.md`): (1) NO WITHHELD FORM AN OPEN PAGE SHOWS: `recentConflict` a non-empty string on 240 of 240
+  births and 136 of 136 nothing-hidden served pages (the writer ends on a fallback); absent, null or '' is a tell; (2) THE OWNER-HIDDEN
+  NAME is not in R3's host (the full town only in `_gallery_apply_member_overrides`, not on the link or the map's member; the mask
+  case-sensitive). At its cut: the plant red 6 of 9 (teeth green), the walker red 27. ALSO: the registry names the wrong writer for
+  `power.recentConflict` (it is `governanceNarrative.js :: buildGovernanceLabels` and `rulingPower.js :: transferRulingPower`).
+  THE SEAT'S RECOMMENDATION to the chair 15:11: THE OTHER WAY ((viii)'s pattern): withheld ALWAYS on every shared read, both engines;
+  ONE page reader re-derives it from the served document by the engine's own writer (`deriveBaselineConflict` over the served
+  powers), MEASURED FIRST for fidelity on nothing-hidden pages; if seed-drawn, the page draws none, everywhere (the chair weighs the
+  loss). AWAITING THE RULING.
 - PER-LAW GATES (ruling 95 (4)): scratch trees `/home/user/wt/jpf` (`lane/veil-33-2026-11-22-joinprobe-lawf-wip` d3c4da41f:
   fortune's dial alone on 27c7e79dd) and `/home/user/wt/jps` (`…-laws-wip` 44f9eef84: the seat's two alone); pools `pool-jpf`,
   `pool-jps`, both gates each: `/var/tmp/v18/out/v33/perlaw/perlaw.sh` (log `perlaw.log`), queued on the mutex after pass 2's END.
@@ -184,3 +196,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - (before 14:37, not clocked) R5R returned; its diff read; pushed `-wip`; the cure's worktree cut and merged; R5C seated. A SLIP, SAID: commit 2e0cfa1be's `Claude-Session` trailer names the chair's session (session_01ACmDYY29VRchM87v1yhL9Q), not this seat's (session_01ACmDYYeP5WWiLi6bmykSME); pushed before it was seen; not rewritten (no history is).
 - 14:36 the chair's ruling 97 read; 14:38 answered; R5-DESC's brief drafted (its open question waits on R5C's).
 - 14:40 the chair's E89 (ruling 98) read 14:46; R5-DESC's brief widened to every power-card composed row (29 composed; 2 built today; 6 after R5-DESC).
+- 15:10 the gates at 83d236813 read (equal). R5C's STOP read; pushed `-wip`; 15:11 the (H) line and the STOP with the recommendation to the chair.
