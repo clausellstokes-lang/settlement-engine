@@ -13,6 +13,10 @@ A place merited ONLY by LASTING would show a lifted band with no reason given. S
 `powerStateProse.js :: legitimacyReadingPoolKey` counts `merits` as a pull, so the "no strong opinion" line does not
 print there either. The page must say why.
 
+FORTUNE-7'S NOTE (2026-11-22 08:1x UTC): STEP 1 IS DONE BY FORTUNE-7 (its unit 0(c)), as
+`measures/sentences/LASTING-DRAFT.md`. THE BUILDER STARTS AT STEP 2, on the chair's ruled words, which FORTUNE-7 copies
+into this brief VERBATIM before the cut.
+
 ## STEP 1: THE DRAFT (to the chair, NOTHING BUILT)
 
 A file of at most 60 lines, `measures/sentences/LASTING-DRAFT.md`, holding:
