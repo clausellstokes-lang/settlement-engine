@@ -127,3 +127,7 @@ only; the holder is never marked). (a) r2r-city-56 lit: holder Merchant Guilds (
 the five: city 2 (0), metropolis 2 (1); holder outside: city 2 (2), metropolis 21 (20); NEITHER in the five: city 1 (0),
 metropolis 1 (1); holder a different row from the governing row: hamlet 8 (8), village 37 (33), town 109 (110), city 124
 (124), metropolis 122 (122); every other cell 0.
+(the order, 15:4x UTC, `census/order-ex.mjs`): the stored order is out of power order DARK as well: 111 of the 300
+cities and metropolises dark, 100 of them lit too. What is out of order is the LAST row, an alliance or coalition power
+appended after the sorted list ("… Compact", "… Alliance", "The Underground"), whenever its share tops the row before
+it; the lit law only moves shares. NOT the lit law's; not the holder put first.
