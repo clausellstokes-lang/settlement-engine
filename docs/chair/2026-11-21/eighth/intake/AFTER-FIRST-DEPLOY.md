@@ -71,3 +71,29 @@ row widened (`yearsAgo on legacyAnnotations`, dossier-pdf N to R: E108): a leaf 
 sameness census's stale "Narrative refinement" row: its door refused on a rise outside the Daily Life lane. (c) `en.js` holds `ai.dailyLife.*`
 keys with no reader since the button went. Also the owner's: the server's AI daily-life function and its price row are his to retire.
 
+## 9. The Daily Life page as printed: three things read on six places (E110)
+
+(a) ONE FACT TWICE ON ONE PAGE: the city hxd-city-0 opens "The country around is overrun with beasts…" (outsider impressions) and closes "Beasts
+now roam the country around…" (recent changes): a later slot should not repeat a fact an earlier slot printed (it draws its next line). (b) THE
+SAME SENTENCE ON TWO OF SIX PLACES ("People do as the Headman's Authority says, but few of them think well of it."; "Ask who decides things here,
+and a visitor hears more than one name."): their shares by size are asked in DAILY-B's landing line. (c) A FORM's NAME IN THE POSSESSIVE reads
+badly ("the Headman's Authority's mark is on every door that matters"): the office atoms let such lines say "the headman's".
+
+## 10. The stored pressure line "grazing rights" on 21% of thorps' pages (E111)
+
+CLOSE-2's reading of the joint measure's stop 1 (450 births; dark equals lit): one trouble line over the sameness bar. The sameness program's.
+
+## 11. What the page means by a contender (E113): THE OWNER's QUESTION
+
+The first power the page prints as the seat's contender is tied to the ruler (the web's dependent, symbiotic or subordinate bargain) on 280 to 408
+of 640 dark pages and 378 to 438 of 622 lit; "Contests the seat" is on master since PR #72. Three ways: a softer word where the two are tied (the
+chair's leaning: the same list); the contender chosen among powers not tied (104 to 154 places then print none; `coupContenders` moves births); or
+leave it. The measure: `contender/CONTENDER-MEASURE.md` on `lane/close-2-2026-11-22`.
+
+## 12. "The crisis has a body": A PROPOSAL FOR THE OWNER (E112)
+
+Built whole on `lane/fortune-7-2026-11-22-u8-wip` at 0b7037727: under the fortune law a crisis that names a power of its own always has it seated
+with its leader. Today 509 of 900 places state such a crisis with no power of it on the roster (lit 508; 0 after). It lifts a mass ceiling of one to
+two and changes the density design he signed. Open points: the lifted ceiling; two-crisis places (17 left: the stated crisis gets the one body);
+the packed lines (unpacked if it lands). Also listed: `defenceParts` R13's bound re-cut score by score (the defence lane's).
+

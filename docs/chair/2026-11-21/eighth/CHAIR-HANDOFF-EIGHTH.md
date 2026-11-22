@@ -129,6 +129,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   traditions, place and trouble pages 70 to 85; the people page, the state sentences, the display work, wants and
   ties, depth, the session sheet 40 to 60; the players' page cut 15). He was told the share veil decides the date.
 
+- **PUT TO THE OWNER, NOT BLOCKING (written 2026-11-22 19:01 UTC), each in plain words in the chat, none answered yet:** (1) THE CRISIS's OWN FACTION (E112): a built change would always
+  give a crisis its own faction and leader: about 56% of new places gain a faction and the smallest go from one
+  power to two: it changes the density design he signed: his to accept or decline; the chair advises after the
+  first deploy. (2) THE CONTENDER's WORD (E113): about half of the places that show a contender also call that
+  power the ruler's dependent or partner; live since 4 November; the chair leans to a softer word where the two
+  are tied, after the first deploy. (3) THE DAILY LIFE PAGE's ORDER OF EIGHT (E110) and its six sample places (a
+  file sent to him): he may change the order. (4) AT THE FLIP HE SIGNS TWO GOLDEN RECORDS (E111). (5) THE VETOABLE
+  RULING ON A HIDDEN SEAT-HOLDER (E94).
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1491,6 +1500,62 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   section 2) in place of PART 30 and PART 32 whole: it would give each later seat 100,000 or more of working
   room; 212 and the registry stay read whole; (6) FORTUNE-7 goes on to "FORTUNE-C" while the record stays under
   700,000 (told at 680,000); CLOSE-2 keeps its context for the final census and the flip.
+- E110 · THE DAILY LIFE PAGE PRINTED THREE OF ITS EIGHT LINES: ONE HOME, THE CHAIR'S ORDER, THE OWNER-ONLY LINE (2026-11-22 19:01 UTC; DAILY-4's catch at 18:01). On the lane's tip `DailyLifeTab.jsx :: ENGINE_SLOTS`
+  was still point 95's three and 4c's `dailyLife.js :: DAILY_LIFE_PAGE_SLOTS` the same; the five new slots and the
+  owner-only slot were derived and printed nowhere (DAILY-3.txt's unit 4 never done; its hand-back silent). THE
+  CHAIR HAD TOLD THE OWNER "the lines are built": CORRECTED TO HIM THE SAME HOUR. RULED: ONE HOME
+  (`DAILY_LIFE_PAGE_SLOTS`, read by the tab and the PDF chapter); THE ORDER: `outsider_impressions`, `dawn_work`,
+  `food_culture`, `gathering_places`, `child_warnings`, `commoner_resentments`, `unspoken_topics`, `recent_changes`;
+  a slot with no line prints nothing; `commoner_resentments_dm` on the owner's own read only, one line after the
+  public resentment, by the tab's existing owner-only mark; never in the PDF, never on a shared read; one builder,
+  red first (a tab differential over 30 births; the PDF's lines equal the tab's public eight; the three walkers).
+  THE SIX PLACES (PREVIEW-E110.md on `lane/daily-4-2026-11-22` at 81713cfff) READ BY THE CHAIR AND SENT TO THE
+  OWNER AS A FILE: the order confirmed. LISTED, NOT BUILT (`intake/AFTER-FIRST-DEPLOY.md` item 9): one fact twice
+  on a page (the city's beasts, first and eighth line); two sentences each on two of six places (their shares by
+  size asked in the landing line); a form's name in the possessive ("the Headman's Authority's mark").
+- E111 · THE LIT GOLDEN TWIN PROVEN; THE OWNER SIGNS TWO RECORDS; THE TWIN LANDS RED AND LISTED (2026-11-22 19:01 UTC; CLOSE-2's `close/close-2/GOLDEN-LIT-PROOF.md` at 285decdc3). With no manifest 3 of 3 red by name; a scratch
+  manifest 3 of 3 green in 57 seconds, a planted row reds one; lit against dark 525 of 525 (prosperity 330, holder
+  74, crisis powers 516, powers 525). THE DARK MASTER IS 0 OF 525 ON THE DARK LINE TOO: stale since its record of
+  2026-11-19, not the dials: TWO RECORDS FOR HIS SIGNING (told to him). The twin lands in the flip's own stack,
+  last, RED AND LISTED (three rows, class "golden master", his until his shift record and the register row
+  exist); not parked. `FOR-THE-OWNER-DRAFT.md` is one page he can act from; a builder reads out three places of
+  the old master's diff (the record's commit beside today) for it.
+- E112 · U8 IS NOT A FAULT OF THE LIT LAW: E100 WITHDRAWN; THE BUILT CHANGE IS A PROPOSAL FOR THE OWNER (2026-11-22 19:01 UTC; IT REPLACES E100; FORTUNE-7's counts at 18:18). On 900 DARK births 509 places state a crisis that has no
+  power of it on the roster; LIT 508 (0 after the built cure): the lit law changes which places, not how many. THE
+  CHAIR HAD RULED E100 BEFORE THE COUNT IT ASKED FOR, believing the case rare, and had told the owner fortune
+  "breaks some small places in crisis": WITHDRAWN TO HIM BY NAME, with the count. RULED: the cure
+  (`lane/fortune-7-2026-11-22-u8-wip` at 0b7037727: `densityRoll.js :: seatCrisisBodies`,
+  `applyDensityLaw.js :: crisisBodiesOf`; it lifts a mass ceiling of one to two) is NOT merged and NOT in the first
+  deploy: it changes the DENSITY design, which carries the owner's signature: a proposal for him, its open points
+  written (the lifted ceiling; two-crisis places; the packed lines unpacked if it ever lands). THE GUARD's three
+  lit misses are PREMISE MOVES (class (a)): `dualHatPoliticalMass`'s lit arm re-seated by its premise's predicate:
+  "FORTUNE-C", test only, cut from the line's tip. ONE MEASURE OWED: in how many of those places a printed
+  sentence NAMES the crisis's own power or leader while it is not on the roster (a false line if above zero).
+  `defenceParts` R13 stays RED UNDER THE LIT ARM AS A LISTED ROW (its bound is points-only; the will a
+  score-by-score sum; the overshoot one rounding unit): the defence lane re-cuts it after the first deploy. THE
+  REHEARSAL's "2 faults" read: one cured by a row at the flip (E91), none of the fortune law's.
+- E113 · THE CONTENDER TIED TO THE RULER IS THE PAGE'S HABIT AND ON MASTER: THE OWNER'S EYE, AFTER THE FIRST DEPLOY (2026-11-22 19:01 UTC; CLOSE-2 read three calm places that read Contested: town-26 prints the Religious Authorities as
+  "Contests the seat" while the web calls them and the Town Mayor Dependent). ITS MEASURE (150 a size; dark
+  c110dd85b's src, lit with the dials; `contender/CONTENDER-MEASURE.md`): pages printing a contender: dark 640,
+  lit 622 of 900; the FIRST contender tied to the ruler: dark 280 (dependent or symbiotic) to 408 (with
+  subordinate); lit 378 to 438; the sketched cure would leave 104 to 154 places with no contender. "Contests the
+  seat" came with fddb437de, on master by PR #72 (2026-11-04). The list is computed at print by
+  `rulingPowerCoup.js :: coupContenders` (never reads relations); a cure there moves births; a page-only cure
+  leaves five other surfaces; twelve test files pin today's contenders. RULED: not owed before the first deploy,
+  not built: what the page means by a contender beside the web's bargain, and its word: the owner's (item 11).
+- E114 · POINTS 99 TO 102 LANDED UNDER ONE GATE IN TWO AND A HALF HOURS; THE NEXT STACK (2026-11-22 19:01 UTC). "STACK-99 DONE" at 18:54: tip 04c270eae; the four merges at exactly their named commits; the only
+  conflicts the two the chair's trial merge had shown (the lighting census; `HAND_CEILING` 77), THE TOP MERGE
+  DIFFERING FROM AN INDEPENDENT TRIAL MERGE IN THOSE TWO FILES ONLY; one register by its door; the gate: lint 3,
+  `tests/build` 15, step f 23 of 13,776 on 1,470 files, the four ratchet directories 2 on 207 files: all 43 on the
+  list, class (4) none; `bar7OrderUnderTheLaw` (d) and (f) cured. JOINED by 54c8a4b58 (its tree the gated tip's
+  own); the rows c1144ba18; THE LINE = c1144ba18f89aafed5e1bf61055a3b6f6f4a9b59 on origin (pushed 18:59:45 by the
+  push log). SIZES: first paint 1,184,741 / 376,987 / 316,646; the worker 2,709,263; the engine chunk 932,369
+  (+670 / +4,946 / +2,697 against point 98: for the owner's signing). THE RED LIST: 61 rows. THE CHAIR'S RE-RUN AT
+  THE JOIN: the bar7 file green; rows 61 and 62 red (the Daily Life lane's). BOTH LAWS ARE WHOLE ON THE LINE AND
+  DARK. THE TIP SENT to DAILY-4 (its one merge after its page unit), FORTUNE-7 (FORTUNE-C cut from it), CLOSE-2
+  and VEIL-34 (to know). STACK-100 (`prompts/STACK-100.txt`): point 103 "JOIN" a1319f388 and point 104
+  "FORTUNE-C" by "ADD", both test only, "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2. "DAILY-B"
+  goes to the stack after, with whatever stands ready.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2018,6 +2083,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    (STACK-100) stands on 04c270eae and takes "JOIN", "FORTUNE-C" and "DAILY-B" as they come: it needs a place: the
    one VEIL-33 frees at its hand-over. COMMON-EIGHTH 15 (a push names a local lane branch) sent to every working
    seat. The chair's branch: origin equals local before this commit (23cf48191).
+- 2026-11-22 19:01 UTC · NET 19 (a few minutes after its trigger's hour). THE LINE IS AT POINT 102 (E114). THE RECORDS, READ BY A HELPER AT 18:00 (E109): VEIL-33 229,791 (summarized at about
+   15:17), VEIL-34 484,267, FORTUNE-7 559,486, CLOSE-2 262,567; to be read again at this net with DAILY-4 and
+   STACK-100. THE SIX: VEIL-33 (R5C6 finishing R5-RECENT; hands over at its merge); VEIL-34 (the digest written;
+   (vi) green; two measures running; carries the review and R5-DESC; VEIL-35 when R5-DESC's cure is in build);
+   FORTUNE-7 (E112: "FORTUNE-C", test only); DAILY-4 (E110: the page's eight; then the line's merge, rule 8,
+   "DAILY-B"); CLOSE-2 (JOIN's line sent; GOLDEN-LIT proven; the old master's diff for the owner; then it waits
+   for "THE LINE IS READY"); the landing place: STACK-100, seated at this net. FIVE CORRECTIONS OF THE CHAIR'S OWN
+   TO THE OWNER TODAY, each made the hour it was found: the veil seat's count; the Daily Life lines "built"; the
+   crisis fault and its fix; the two ways on the hidden holder; the contender's cure condition.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
