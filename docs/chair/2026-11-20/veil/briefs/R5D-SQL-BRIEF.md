@@ -27,7 +27,9 @@ the standing.
 2. A HIDDEN OR MASKED ROW'S OWN DESC (E115 (2): "a masked or hidden row's own desc leaves with the row"): a power row flagged
    `hidden: true` (the DM door serves it so), AND a row served under the mask (its `faction` or `name` equal to the projection's mask,
    `publicSafe.js :: HIDDEN_POWER_MASK`, 'an unseen interest': act T's owner-hidden taker), is served with no `desc`, both lists, both
-   engines, every read the always-pass runs on.
+   engines, every read the always-pass runs on. THE MARKS (the chair, 21:05): HIDDEN = the row's own `hidden: true` (the stamp of
+   `stressFactions.js`'s infiltrator, served on the DM door); MASKED = `faction` or `name` equal to `HIDDEN_POWER_MASK` (an
+   owner-hidden power served masked, act T's taker). R5D-PAGE plants BOTH (its plants (d) and (d2)); test both marks, not one.
 3. THE BELT (E121 (c)), in `_gallery_veil_roster_choices`' withheld-power block and `applyRosterChoices`: after the cut, a desc whose
    base still names a withheld power by the lane's fold (`hits`, `_gallery_veil_power_named`) leaves WHOLE (0 expected; said).
 4. `dmNote` PER ENTRY (E115 (3), E121 Q1): a served `powerStructure.factionRelationships[].dmNote` that names a withheld power by the fold

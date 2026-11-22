@@ -25,7 +25,7 @@ Dispatched only after R5D-SQL's commit is read whole by the seat.
    `rederiveRecentConflict` are (`rederiveForPage`; `importRederive.js :: rederiveInPlace`, authoritative). First paint +0 (a lazy import).
 2. RED FIRST, then green: `tests/security/galleryVeilDesc.pglite.test.js`, both engines, both stored shapes, every setting, Reveal off and
    on, gallery and link: PLANTS (a) a shown power's standing naming a power withheld by rule; (b) the same owner-hidden; (c) lower case and
-   bare form; (d) a hidden row's own desc; (e) the mask in a standing ("the an unseen interest"); (f) a dmNote naming a withheld power;
+   bare form; (d) a HIDDEN row's own desc (the row's `hidden: true`, served on the DM door); (d2) a MASKED row's own desc (`faction`/`name` equal to `publicSafe.js :: HIDDEN_POWER_MASK`, act T's taker); (e) the mask in a standing ("the an unseen interest"); (f) a dmNote naming a withheld power;
    (g) a tension party served as the mask. GREEN BY ABSENCE on every served payload (the standing tail, the hidden row's desc, the note,
    the masked party). TEETH: a read that hides nothing: the page's desc (base + S) equals the stored, byte for byte, but for the class below.
 3. THE FIDELITY ARM PINS THE CLASS (E115 (1)): every nothing-hidden page's re-derived desc equals the stored, EXCEPT descs whose stored
@@ -44,7 +44,7 @@ Dispatched only after R5D-SQL's commit is read whole by the seat.
    their origin commits): the walker never reads git. THE LEGACY ARM: places born by MASTER'S engine, stored, read through 212 and
    the twin: every legacy standing cut whole (count of count) and the differential on them. USE VEIL-33's INSTRUMENT, DO NOT BUILD A
    SECOND: the read-stored-documents mode (`RV9_MODE=stored` in `out/v33/legacy/legacy.probe.jsx`, with its dump mode run at
-   origin/master) on `lane/veil-33-2026-11-22-legacy-wip` at the commit the seat gives you; if the seat has none to give at your
+   origin/master) on `lane/veil-33-2026-11-22-legacy-wip` (commit to follow: the chair sends it to the seat when it is pushed); each form the arm exercises named by its row's id, kind and source; if the seat has none to give at your
    turn, build everything else and STOP on this item with what you would run. Say the closed-branch count (descs served as base
    because no row matched) and what the 3 of 328 no-match descs that carry a tail are.
 5b. THE PRESENCE-PICKED BASES' ARM (E126): the 13 templates of `out/v34/r5d1/R5D1-MEASURE.md` (`lane/veil-34-2026-11-22-r5d1-wip`
