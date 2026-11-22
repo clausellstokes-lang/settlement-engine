@@ -10,32 +10,29 @@
  * four branches' NEW wordings, keyed by BRANCH, and the door through which a drawn line is said as one of them:
  *
  *   1. The `pickRandom` is untouched (no draw added, removed or moved): `checkInstCompat` draws exactly as before.
- *   2. A LITERAL HAS ONE HOME: checkInstCompat's lines are never copied here, nor keyed by their text. A drawn line is
- *      named by its BRANCH and its INDEX in the branch (`DRAWN_DECLARED`: the declaration it carries in checkInstCompat,
- *      which `textOf` drops on the way out). The candidate list is composed AT THE CALL SITE:
- *        `sayLandmark([drawnRowOf(branch, index, drawn), ...landmarkSiblingsOf(branch)], names, facts, key)`.
+ *   2. A LITERAL HAS ONE HOME: checkInstCompat's lines are never copied here, nor keyed by their text. It hands back
+ *      the drawn landmark WITH its branch, its index there and its row (`{ text, branch, index, line }`; the chair's
+ *      ruling 13 of 22:34), so the drawn line is named by branch and index and its declaration is read from its own
+ *      row (`drawnRowOf`). The candidate list is composed AT THE CALL SITE (`arrivalScene.js :: composeArrivalScene`):
+ *        `sayLandmark([drawnRowOf(landmark), ...landmarkSiblingsOf(landmark.branch)], names, facts, key)`.
  *   3. A row is a candidate only where its HOUSE stands: `house` is the native-name fragment the branch's own `has`
- *      reads (a substring of a live native name, lowercased), so no vocabulary atom is added. The drawn line's house is
+ *      reads (a substring of a native name, lowercased), so no vocabulary atom is added. The drawn line's house is
  *      its branch's own test, which stands wherever the branch was reached: the 57 lines that name a house grander than
  *      the roster's are NAMED, NOT CURED (the chair).
  *   4. The list passes the door's filter WHOLE (`drawDeclared.js :: filterDeclared` on the facts), the drawn line
- *      included: so "unremarkable but intact" is not said under siege.
+ *      included: so "unremarkable but intact" is not said under siege, and no line needing walls, a gate or a church
+ *      is said where the record's readers refuse it (a ruined house still reaches its branch by name).
  *   5. The keyed pick: `proseHash.js :: pickVariantMixed` over the admitted rows, keyed on the arrival substream's seed
  *      and the beat (`${seed}::landmark`). Draw-free. Where nothing is admitted the door answers null and the culture's
  *      built detail speaks, the existing fall-back.
  *
- * ⛔ NOT WIRED (STOPPED, for the chair's ruling; its word of 20:50: "where only the text identifies it, say so and I
- * rule"). `checkInstCompat` returns its line through `textOf`, a bare string: at the arrival site (`arrivalScene.js ::
- * composeArrivalScene`) ONLY THE TEXT identifies which branch and which index were drawn. Naming them there needs either a
- * table keyed by the text (or its hash), or `checkInstCompat` saying its branch and index (`structuralValidator.js`, not
- * in this unit's files). Until the chair rules, nothing imports this file and no paragraph moves.
- *
- * 28 OF THE CHAIR'S 31 ARE HERE. Three are HELD for its word, because a walker reds their approved words and the chair
- * rules words: the citadel's "plainly built to be held rather than admired" (the style law strikes "rather than"), "The
- * road in passes beneath the citadel ..." and "The great cathedral was plainly built to be seen from far off ..." (the
- * presumption classes read "the road in" and "from far" as an arrival from outside, and neither line has an atom of that
- * class it could truly declare). Two rows declare a size the chair did not see: `tier: ≥ village` on the two that say
- * "streets" (the size class; neither branch is reached below a city, so it refuses nowhere).
+ * ALL 31 OF THE CHAIR'S APPROVED LINES ARE HERE (its read of 20:02: 31 of 32, great cathedral [10] struck, three
+ * cures), three of them in the words its ruling 13 (22:34) approved where a walker had redded the drafted words: the
+ * citadel's [3] "plainly built to be held, not admired" (no "rather than", the style law), its [7] "The road passes
+ * beneath the citadel ..." (no "The road in") and the great cathedral's [16] "... built to be seen from a long way off"
+ * (no "from far off"; both the presumption classes' arrival from outside). Ruling 13 also approved the declarations the
+ * chair did not see in the draft: `church` on every cathedral row and `tier: ≥ village` on the two that say "streets"
+ * (the size class; neither branch is reached below a city, so it refuses nowhere).
  *
  * Only the picked row is noted in the presumption ledger (pool `arrivalLandmarkWordings:<branch>`, `lineId` = its `id`:
  * `<branch>/0` and `/1` for checkInstCompat's two, `<branch>/+k` for the new, k = the draft's NEW [k]). A row naming a
@@ -57,20 +54,6 @@ import { pickVariantMixed } from '../kernel/proseHash.js';
  * @typedef {{ needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string> }} Declared
  */
 
-/**
- * The declaration each of checkInstCompat's lines carries there, by branch and index (its two lines, in its order).
- * @type {Readonly<Record<string, ReadonlyArray<Declared>>>}
- */
-export const DRAWN_DECLARED = Object.freeze({
-  'great cathedral': Object.freeze([Object.freeze({}), Object.freeze({})]),
-  cathedral: Object.freeze([Object.freeze({}), Object.freeze({})]),
-  'massive wall / citadel': Object.freeze([Object.freeze({ needs: Object.freeze(['walls']) }), Object.freeze({})]),
-  'wall / gatehouse': Object.freeze([
-    Object.freeze({ needs: Object.freeze(['walls']), excludes: Object.freeze(['crisis: under_siege']) }),
-    Object.freeze({ needs: Object.freeze(['gate']) }),
-  ]),
-});
-
 /** The new wordings, keyed by branch (row id `<branch>/+k`, k = the draft's NEW [k]). @type {ReadonlyArray<LandmarkBranch>} */
 export const LANDMARK_WORDINGS = Object.freeze(/** @type {LandmarkBranch[]} */ ([
   Object.freeze({
@@ -90,7 +73,7 @@ export const LANDMARK_WORDINGS = Object.freeze(/** @type {LandmarkBranch[]} */ (
       { id: 'great cathedral/+13', text: "The great cathedral's size is hard to judge from the road, because nothing near it is large enough to measure it by.", house: ['great cathedral'], needs: ['church'] },
       { id: 'great cathedral/+14', text: 'Towers flank the front of the great cathedral, and the whole skyline of the settlement is built around them.', house: ['great cathedral'], needs: ['church'] },
       { id: 'great cathedral/+15', text: 'The great cathedral stands at the heart of the settlement, and every lane seems to know the way to it.', house: ['great cathedral'], needs: ['church'] },
-      // great cathedral/+16 HELD for the chair's word (see the hand-back): a walker reds its approved words
+      { id: 'great cathedral/+16', text: 'The great cathedral was plainly built to be seen from a long way off, and it is.', house: ['great cathedral'], needs: ['church'] }, // the chair's rewording (ruling 13, 22:34): "from far off" -> "from a long way off"
     ]),
   }),
   Object.freeze({
@@ -105,11 +88,11 @@ export const LANDMARK_WORDINGS = Object.freeze(/** @type {LandmarkBranch[]} */ (
     branch: 'massive wall / citadel',
     said: Object.freeze([
       { id: 'massive wall / citadel/+2', text: 'The walls run on as far as the eye can follow, with towers set into them at steady intervals.', house: ['walls'], needs: ['walls'] },
-      // massive wall / citadel/+3 HELD for the chair's word (see the hand-back): a walker reds its approved words
+      { id: 'massive wall / citadel/+3', text: 'The citadel stands a little apart from the houses, plainly built to be held, not admired.', house: ['citadel'] }, // the chair's rewording (ruling 13, 22:34): no "rather than"
       { id: 'massive wall / citadel/+4', text: 'The walls stand higher than the houses behind them, so that from the road you see stone first and roofs only afterward.', house: ['walls'], needs: ['walls'] },
       { id: 'massive wall / citadel/+5', text: "The citadel's keep is the tallest thing in sight, and it has very few windows.", house: ['citadel'] },
       { id: 'massive wall / citadel/+6', text: "Banners hang from the citadel's towers, the first colour you see on the approach.", house: ['citadel'] },
-      // massive wall / citadel/+7 HELD for the chair's word (see the hand-back): a walker reds its approved words
+      { id: 'massive wall / citadel/+7', text: 'The road passes beneath the citadel, close enough to see how thick its foundations are.', house: ['citadel'] }, // the chair's rewording (ruling 13, 22:34): no "The road in"
     ]),
   }),
   Object.freeze({
@@ -142,17 +125,22 @@ export function landmarkSiblingsOf(branch) {
 }
 
 /**
- * The drawn line as a declared row: its text as drawn (its one home is checkInstCompat), its id, its declaration there.
- * Its house is its branch's own test (`house: ['']`: every name holds the empty fragment), reached where it was drawn.
- * @param {string} branch @param {number} index @param {string} drawn @returns {LandmarkRow}
+ * The drawn line as a declared row: checkInstCompat's landmark (its text, branch, index and row, ruling 13), its id
+ * `<branch>/<index>`, its declaration read from its own row there (a bare string declares nothing). Its house is its
+ * branch's own test (`house: ['']`: every name holds the empty fragment), reached where it was drawn.
+ * @param {{ text: string, branch: string, index: number, line: string | Declared }} landmark @returns {LandmarkRow}
  */
-export function drawnRowOf(branch, index, drawn) {
-  return Object.freeze({ id: `${branch}/${index}`, text: drawn, house: Object.freeze(['']), ...(DRAWN_DECLARED[branch]?.[index] ?? {}) });
+export function drawnRowOf(landmark) {
+  const { needs, excludes } = typeof landmark.line === 'object' && landmark.line ? landmark.line : /** @type {Declared} */ ({});
+  return Object.freeze({
+    id: `${landmark.branch}/${landmark.index}`, text: landmark.text, house: Object.freeze(['']),
+    ...(needs ? { needs } : {}), ...(excludes ? { excludes } : {}),
+  });
 }
 
 /**
  * The landmark said from the house that stands (see the header). Draw-free.
- * @param {ReadonlyArray<LandmarkRow>} candidates `[drawnRowOf(branch, index, drawn), ...landmarkSiblingsOf(branch)]`
+ * @param {ReadonlyArray<LandmarkRow>} candidates `[drawnRowOf(landmark), ...landmarkSiblingsOf(landmark.branch)]`
  * @param {ReadonlyArray<string>} names the native institution names, lowercased (absences removed)
  * @param {object | null | (() => object | null)} facts `factsOf(record)`, or a thunk to it
  * @param {string} key the keyed pick's seed (`${arrival substream seed}::landmark`)

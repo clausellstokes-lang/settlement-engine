@@ -157,9 +157,11 @@ const add = (id, beat, lines, hook = false) => pools.push({ id, beat, lines: lin
 for (const [k, v] of Object.entries(ARRIVAL_SCENES)) add(`ARRIVAL_SCENES.${k}`, 'scene', v, true);
 for (const [k, v] of Object.entries(STRESS_DESCS)) add(`STRESS_DESCS.${k}`, 'vignette', v, true);
 // THE BUILT TREE (ARRIVAL-LINES-2-BUILD): where `src/data/arrivalLandmarkWordings.js` exists, a landmark pool is its branch's
-// drawn rows and its new wordings, so a printed new wording is attributed (index >= 2 is a new wording).
+// two lines (mirrored above, index 0 and 1) and its new wordings, so a printed new wording is attributed (index >= 2 is a new
+// wording). The file holds no copy of checkInstCompat's lines (a literal has one home), so they come from BRANCHES.
 let LANDMARK_WORDINGS = null; try { ({ LANDMARK_WORDINGS } = await import(`${L}/src/data/arrivalLandmarkWordings.js`)); } catch { /* the base tree */ }
-for (const b of BRANCHES) { const w = LANDMARK_WORDINGS?.find((x) => x.branch === b.id); add(`LANDMARK ${b.id}`, 'landmark', w ? [...w.drawn, ...w.said].map((r) => r.text) : b.lines.map((l) => l.text)); }
+const landmarkRowsOf = (b) => { const w = LANDMARK_WORDINGS?.find((x) => x.branch === b.id); return w ? [...b.lines, ...w.said] : b.lines; };
+for (const b of BRANCHES) add(`LANDMARK ${b.id}`, 'landmark', landmarkRowsOf(b).map((r) => r.text));
 for (const [k, p] of Object.entries(CULTURE_PROFILES)) pools.push({ id: `BUILT ${k}`, beat: 'built detail', lines: (p.architecturalDetails || []).map((d) => ({ fn: () => `${sentenceCase(String(textOf(d)).trim())}.` })) });
 pools.push({ id: 'BUILT twins', beat: 'built detail', lines: Object.values(CULTURE_LINE_SIBLINGS).flatMap((rows) => rows.filter((r) => r.twinOf).map((r) => ({ fn: () => `${sentenceCase(String(r.text).trim())}.` }))) });
 for (const s of ARRIVAL_SENSES) for (const f of ['lines', 'dominant']) if (s[f]?.length) add(`ARRIVAL_SENSES.${s.key}.${f}`, 'senses', s[f]);
@@ -276,7 +278,7 @@ for (const [k, v] of houseNames) out(`   ${k} <- ${[...v].join(' | ')}`);
 
 // ═════ 8. UNDER SIEGE: places printing a landmark row that excludes `crisis: under_siege` while the record holds it
 {
-  const rowsOf = (id) => { const w = LANDMARK_WORDINGS?.find((x) => `LANDMARK ${x.branch}` === id); if (w) return [...w.drawn, ...w.said]; const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === id); return br ? br.lines : []; };
+  const rowsOf = (id) => { const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === id); return br ? landmarkRowsOf(br) : []; };
   const hits = [];
   for (const pl of places) for (const b of pl.beats.filter((x) => x.pool.beat === 'landmark')) {
     const r = rowsOf(b.pool.id).find((x) => x.text === b.text);

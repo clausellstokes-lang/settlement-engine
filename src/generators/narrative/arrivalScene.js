@@ -38,7 +38,7 @@ import { pickRandom } from '../helpers.js'; import { getActiveRng } from '../../
 import { textOf } from '../../domain/facts/textOf.js';
 import { resolvePrimaryStress } from '../stressPriority.js';
 import { sentenceCase } from '../narrativeProse.js';
-import { checkInstCompat } from '../structuralValidator.js';
+import { checkInstCompat } from '../structuralValidator.js'; import { drawnRowOf, landmarkSiblingsOf, sayLandmark } from '../../data/arrivalLandmarkWordings.js'; // ARRIVAL-LINES-2: one line, so no cited line moves
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
 import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
@@ -313,7 +313,7 @@ export function composeArrivalScene(settlement) {
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
   if (!underStress) {
-    sight = checkInstCompat(institutions, tier, config.priorityMagic ?? 50)?.text ?? null; // ARRIVAL-LINES-2 (ruling (ii)): the landmark comes back with its branch and index; its text, as before
+    const landmark = checkInstCompat(institutions, tier, config.priorityMagic ?? 50); sight = landmark && sayLandmark([drawnRowOf(landmark), ...landmarkSiblingsOf(landmark.branch)], names, facts, `${getActiveRng()?.seed ?? ''}::landmark`); // ARRIVAL-LINES-2 (the chair's 20:02; ruling 13): the drawn line and its siblings pass the door WHOLE, then the keyed pick; none admitted, the built detail below
     if (sight && !speaks(sight)) sight = null;
     if (!sight) {
       const materialized = typeof culturalIdentity?.architecturalDetail === 'string'

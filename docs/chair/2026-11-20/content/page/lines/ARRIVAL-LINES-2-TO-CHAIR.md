@@ -4,13 +4,13 @@
 > `src/data/arrivalLandmarkWordings.js` (ARRIVAL-LINES-2-BUILD), keyed by branch, each row by its id (`<branch>/+k`, k =
 > NEW [k] below). There every cathedral row also declares `church` (the presumed-things walker's atom for the word
 > "cathedral"; the faith reading's `hasChurch`, true wherever a cathedral stands), and the two "streets" rows (great
-> cathedral [9], cathedral [2]) declare `tier: ≥ village` (the size class). **28 are in the file; three are HELD for the
-> chair's word**, a walker reddening their approved words: citadel [3] ("rather than": the style law; proposed "...
-> plainly built to be held, not admired."), citadel [7] ("The road in": the presumption classes' arrival from outside;
-> proposed "The road passes beneath the citadel, close enough to see how thick its foundations are."), great cathedral
-> [16] ("from far off", the same class; proposed "... built to be seen from a long way off, and it is."). **NOT WIRED:**
-> the arrival site knows the drawn line only by its text (`checkInstCompat` returns `textOf` of its row), so naming its
-> branch and index there is stopped for the chair's ruling (its word of 20:50).
+> cathedral [9], cathedral [2]) declare `tier: ≥ village` (the size class). **All 31 are in the file** (ruling 13, 22:34):
+> three in the words the chair approved where a walker had redded the drafted ones, marked in place below (citadel [3],
+> citadel [7], great cathedral [16]); ruling 13 also approved `church` on every cathedral row and `tier: ≥ village` on the
+> two "streets" rows. **WIRED** (ruling 13): `checkInstCompat` returns the drawn landmark with its branch, index and row;
+> the arrival site's one call line composes `[drawnRowOf(landmark), ...landmarkSiblingsOf(branch)]`, the door filters it
+> whole and the keyed pick says one. Measured on the 900 after: the landmark beat 6.8% / 8.1% / 9.1% (town / city /
+> metropolis); the siege refusal moves 0 of 900 (the 13 places under siege open on the siege vignette, which yields the beat).
 
 For the chair's eye before any builder is cut. Nothing under `src/` or `tests/` was written. The measure is
 `measures/page-8/arrival2/measure.mjs` (forge once, cache, read the cache; the projection below parses THIS file's lines).
@@ -120,7 +120,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 14. EXISTING [1]: A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.
    **NEW [15]: The great cathedral stands at the heart of the settlement, and every lane seems to know the way to it.**  _(house: ["great cathedral"])_
 15. EXISTING [0]: The great cathedral's spire is the tallest thing for miles.
-   **NEW [16]: The great cathedral was plainly built to be seen from far off, and it is.**  _(house: ["great cathedral"])_
+   **NEW [16]: The great cathedral was plainly built to be seen from a long way off, and it is.**  _(house: ["great cathedral"])_  [REWORDED by the chair, ruling 13 (22:34): was "... from far off ..." (the presumption classes' arrival from outside)]
 
 ## LANDMARK cathedral (the second branch, `has('cathedral')` outside a thorp or hamlet: 2 lines at the base, +3; house: "cathedral")
 1. EXISTING [0]: A stone cathedral anchors the high ground.
@@ -134,7 +134,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 1. EXISTING [0]: The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.  _(needs: ["walls"])_
    **NEW [2]: The walls run on as far as the eye can follow, with towers set into them at steady intervals.**  _(house: ["walls"]; needs: ["walls"])_
 2. EXISTING [1]: The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.
-   **NEW [3]: The citadel stands a little apart from the houses, plainly built to be held rather than admired.**  _(house: ["citadel"])_
+   **NEW [3]: The citadel stands a little apart from the houses, plainly built to be held, not admired.**  _(house: ["citadel"])_  [REWORDED by the chair, ruling 13 (22:34): was "... held rather than admired." (the style law)]
 3. EXISTING [0]: The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.  _(needs: ["walls"])_
    **NEW [4]: The walls stand higher than the houses behind them, so that from the road you see stone first and roofs only afterward.**  _(house: ["walls"]; needs: ["walls"])_
 4. EXISTING [1]: The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.
@@ -142,7 +142,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 5. EXISTING [0]: The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.  _(needs: ["walls"])_
    **NEW [6]: Banners hang from the citadel's towers, the first colour you see on the approach.**  _(house: ["citadel"])_
 6. EXISTING [1]: The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.
-   **NEW [7]: The road in passes beneath the citadel, close enough to see how thick its foundations are.**  _(house: ["citadel"])_
+   **NEW [7]: The road passes beneath the citadel, close enough to see how thick its foundations are.**  _(house: ["citadel"])_  [REWORDED by the chair, ruling 13 (22:34): was "The road in passes ..." (the presumption classes' arrival from outside)]
 
 ## LANDMARK wall / gatehouse (the fourth branch, `has('wall', 'gatehouse') && !has('massive')`: 2 lines at the base, +8; houses: "walls" (5), "gates" (3))
 1. EXISTING [0]: A wall circuit, unremarkable but intact.  _(needs: ["walls"]; excludes: ["crisis: under_siege"])_
