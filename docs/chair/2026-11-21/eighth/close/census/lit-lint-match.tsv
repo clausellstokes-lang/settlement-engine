@@ -1,0 +1,5 @@
+NEW	tests/lint/factLayers.walker.test.js	the layer table covers every leaf and every pool every leaf declares exactly the strata it touches, and every stored field it reads is placed
+NEW	tests/lint/factLayers.walker.test.js	nothing reads at or above its own layer (shrink-only) LEAVES: the tree reads exactly the register
+ON 	tests/lint/proseComposed.walker.test.js	A0b — the text claims every declared field and no other ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+ON 	tests/lint/proseCorpusBytes.test.js	the prose byte ratchet — the roster and the measurement (ARCH §10) RAW is EXACT: above fails, below demands the row be lowered
+ON 	tests/lint/proseCorpusBytes.test.js	the prose byte ratchet — the roster and the measurement (ARCH §10) GZIP sits inside the 1 % band around its committed figure

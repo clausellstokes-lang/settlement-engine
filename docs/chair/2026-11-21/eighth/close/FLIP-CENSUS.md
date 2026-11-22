@@ -76,3 +76,18 @@ beside the line at point 98 (dark):
 | first paint Brotli | 316,424 | 316,505 | +81 (PLAUSIBLY hash entropy) |
 | the generation worker | 2,704,317 | 2,706,652 | +2,335 (PLAUSIBLY the flip: the dark dials let the minifier drop dead lit branches; NOT YET PROVEN by a dark build of the same tree) |
 | the engine chunk | 929,672 | 929,672 | 0 |
+
+## PART 4: tests/lint whole (lit, ended 15:10 UTC)
+223 files, 3,364 tests: 5 red; 3 on RED-AT-LINE (the line's three size rows); 2 NEW, both one fault:
+
+### (d) FAULT 2 FOR THE CHAIR'S RULING: THE SEAT LAW LIT BREAKS THE FACT LAYERS (sent to the chair at once)
+`tests/lint/factLayers.walker.test.js` › "every leaf declares exactly the strata it touches, and every stored field it
+reads is placed" and › "nothing reads at or above its own layer (shrink-only) LEAVES: the tree reads exactly the
+register". CONFIRMED by `census/leaf-probe.mjs` (the walker's own `gridBirths` and `leafArm`) on four trees: the leaf
+`powersList` (`factLayers.js`: layer 3, `domain/dossier/powerStrata.js :: derivePowerStrata`, reads powerStructure,
+config, _config) touches exactly those three dark and with fortune alone; with the SEAT law (alone or both) it also
+touches economicState (stratum 1), npcs (3), stress (0), stressors (0) and tier (0): npcs at the leaf's own layer is
+the VIOLATION. PLAUSIBLY by `rulingPowerCoup.js :: coupContenders`, whose lit contest (`SEAT_CONTEST_LIT`) reads the
+circumstances and the cast. Two cures, the chair's to rule: the contest does not read the cast inside that leaf (a src
+cure of the seat lane), or the row is re-declared and re-layered by the chair's leave (COMMON-RULES 6). Neither lane's
+own census ran `tests/lint` lit: JOIN.
