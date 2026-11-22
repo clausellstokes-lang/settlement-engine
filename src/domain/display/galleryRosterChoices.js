@@ -362,7 +362,7 @@ function withholdPowerCopies(s, pub, ps) {
   const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
   const out = [...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
     .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)));
-  const wIds = new Set(out.map(f => idText(f.id)).filter(v => v !== ''));
+  const wIds = new Set(out.filter(f => typeof f.id !== 'boolean').map(f => idText(f.id)).filter(v => v !== ''));
   const search = buildNameSearch(out.flatMap(powerNamesOf).filter(v => v !== ''), servedNames);
   if (!search && wIds.size === 0) return;
   /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
@@ -410,10 +410,10 @@ function withholdPowerCopies(s, pub, ps) {
       for (const k of NPC_AFFILIATION_KEYS) if (typeof o[k] === 'string' && named(o[k])) delete o[k];
       // the same person before the sweep: its goal and its memberships as the projection held them. R3-CURE-5 (the chair,
       // 14:21 UTC: A GAP TOWARD SENDING, the id was matched only where it was a string): the person by its id AS TEXT for any
-      // scalar id (idKeyOf); a person with NO id is judged against EVERY person of `pub`: its goal or a membership leaves where
+      // scalar id (idText); a person with NO id is judged against EVERY person of `pub`: its goal or a membership leaves where
       // a naming pre-sweep one holds it (heldBy, 212's `@>`)
-      const key = idKeyOf(o.id);
-      const before = key !== '' ? objectsOf(pub.npcs).filter(q => idKeyOf(q.id) === key) : [];
+      const key = idText(o.id);
+      const before = key !== '' ? objectsOf(pub.npcs).filter(q => idText(q.id) === key) : [];
       const anyone = key === '' ? objectsOf(pub.npcs) : [];
       if (isRec(o.goal) && (goalNames(o.goal) || before.some(q => goalNames(q.goal)) || anyone.some(q => goalNames(q.goal) && heldBy(q.goal, o.goal)))) delete o.goal;
       if (Array.isArray(o.memberships)) {
@@ -440,15 +440,12 @@ function heldBy(a, b) {
   return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
 }
 
-/** R3-CURE-5: a person's id AS TEXT: a non-empty string as itself, a finite number or a boolean by its String() (212: the
- * jsonb scalar's text, `->>`); anything else, the empty string included, '' (no id). @param {unknown} v @returns {string} */
-function idKeyOf(v) {
+/** R3-CURE-5, folded by R4-IDS (ruling 53's fold, STOP 1's "one helper per engine": the former `idKeyOf` and `idText` are
+ * this one function): an id AS TEXT, as the client's String() of it: a string as itself, a finite number or a boolean by
+ * its String(); anything else '' (no id), the empty string itself ''. 212 :: _gallery_veil_id_text (a number by
+ * JavaScript's spelling, _gallery_veil_jsstr: 1.0 is '1'). @param {unknown} v @returns {string} */
+export function idText(v) {
   return typeof v === 'string' ? v : (typeof v === 'number' && Number.isFinite(v)) || typeof v === 'boolean' ? String(v) : '';
-}
-
-/** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
-function idText(v) {
-  return typeof v === 'string' ? v : typeof v === 'number' && Number.isFinite(v) ? String(v) : '';
 }
 
 /** Whether the shares' EXACT decimal sum is 100 (212: sum(power::numeric) = 100): each share by its decimal spelling

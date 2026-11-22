@@ -1,0 +1,25 @@
+R4I-PAGE (VEIL-35, chain B; brief R4-IDS PART TWO, the twin and the proofs). Branch lane/veil-35-2026-11-22-r4ids-wip on b983c16b6.
+Every database local (pglite; the scratch PostgreSQL at /var/tmp/rv7). Figures, not logs.
+
+(a) tests/security/galleryVeilIds.pglite.test.js (part one + plants (e), (f) + THE CHAIR'S ARM):
+    RED FIRST on b983c16b6 + the new arms, BEFORE the twin edit (server cured by R4I-SQL; every red TWIN SIDE):
+      arm (1) 18 reds, all twin (plant, both shapes: the 12 of R4I-SQL's run + 6 npc_power_noble_families ids of plant (e));
+      (e) 51 reds, all twin reads / the twin's import clone (server reads, imports and their clones 0);
+      (f) 12 reds, all twin (rekeyServed absent; the server keeps npc.bo's entry under its card's served id, revealDm true);
+      THE CHAIR'S ARM 144 reds: twin side 132 (two twin reads share 4-5 person ids; rekeyServed absent; the twin import
+        clone holds 12-16 stored ids), server side 12 = the instrument's own first criterion (the import's normalization
+        drops 2 cast references on town-infiltrated-0-12 over STORED ids too): re-stated to "the clone loses no more than
+        the import loses over the stored ids" (baseline: the same import over the twin's body before the re-key).
+      arms (2), (3), (4), (4) CAN FAIL and the three teeth: green before and after.
+    AFTER the twin: 12 of 12 green. The chair's arm's figures (references judged by part [resolve, resolve to no card];
+      every flag equal before/after the re-key and server = twin): cards [1800,2392] (goal targets/handlers naming no
+      person are not persons), ties [15392,0], cardTies [96,0], roster [644,0], casts [576,0], trace [32,9864],
+      marker [216,0], clone cards [18,0], clone ties [3840,0], clone cardTies [36,0], clone casts [108,0];
+      reds 0 (twin 0, server 0). Two reads share no person id (gallery, link, twin, import, import clone): 0 shared.
+(c) node scripts/veil/rosterChoiceRegistry.mjs --check: exit 0. Walkers rosterChoiceRegistry, mutationCoverageManifest,
+    rosterChoicePools, crimeTypesReaders: 4 files, 30 of 30 green (ARM C and D, R4I-SQL's two twin-side reds, now green).
+    Ruling 53's walker re-stated (galleryRosterChoices.pglite.test.js, R3-CURE-7): 3 of 3 green: inline id-as-text forms
+    left in 212: 0; _gallery_veil_id_text calls in _gallery_veil_roster_choices: 6 (n, pq, n, n, pq, n); the helper on a
+    bare pglite against idText on 10 values (true, false, '', 1.0, 90001, two strings, null, an object, an array): differ 0.
+(f) node scripts/check-full-typecheck.mjs: 167 errors, ceiling 167, OK. npx eslint on the five touched files: exit 0.
+(g) template: createdb -T v27x211 v35r4tpl + this tree's 212 (psql -v ON_ERROR_STOP=1): exit 0 (g-template.txt).

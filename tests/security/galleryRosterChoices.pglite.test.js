@@ -984,35 +984,72 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
 
 });
 
-// ── R3-CURE-7 (ruling 53, condition 2: THE WALKER) ───────────────────────────────────────────────────────────────────────
-// Until the fold owed in R4-CURE-2 (one id-as-text helper in 212, revoked by name, the six sites repointed), 212 writes "a
-// person's id as text" INLINE, six times, in _gallery_veil_roster_choices's people pass (R3-CURE-5). This walker reads 212's
-// own text, finds every expression of the shape
+// ── R3-CURE-7 (ruling 53, condition 2: THE WALKER), RE-STATED BY R4-IDS (VEIL-35, R4I-PAGE; brief PART TWO item 4) ─────────
+// Until R4-IDS, 212 wrote "a person's id as text" INLINE, six times, in _gallery_veil_roster_choices's people pass
+// (R3-CURE-5), and this walker held the six identical. R4-IDS made the fold (ruling 53; STOP 1's "one helper per engine"):
+// ONE helper, 212 :: _gallery_veil_id_text, revoked by name, the six sites repointed to it; the twin's idKeyOf folded into
+// galleryRosterChoices.js :: idText, exported. The walker now holds: (a) NO inline form is left anywhere in 212 (the old shape,
 //   coalesce(case when jsonb_typeof(<x> -> 'id') <...> then <x> ->> 'id' end, '')
-// (any body between `jsonb_typeof(<x> -> 'id')` and `end, ''`, so a drifted occurrence is found and compared, not missed),
-// normalizes <x> and the whitespace, and holds EXACTLY SIX occurrences, all ONE text, that text the scalar's own. Its own
-// describe: it needs no database, so it runs without the pglite boot above.
+// any body between the two, so a drifted occurrence is found, not missed); (b) every one of the six sites of
+// _gallery_veil_roster_choices calls the helper on a person's id (`public._gallery_veil_id_text(<x> -> 'id')`, exactly six);
+// (c) the helper's text (its own statement and the statements it reads, taken from the migrations on disk and run on a bare
+// pglite) equals the twin's idText on the tooth's values: `true`, `false`, '', a number (1.0, 90001), a string. Its own
+// describe: it needs no chain, so it runs without the pglite boot above.
+const MIGRATION_211_URL = new URL('../../supabase/migrations/211_server_side_share_veil.sql', import.meta.url);
 const MIGRATION_212_URL = new URL('../../supabase/migrations/212_share_veil_later_cures.sql', import.meta.url);
 const ID_TEXT_SHAPE = /coalesce\(\s*case\s+when\s+jsonb_typeof\(\s*([a-z_][a-z0-9_]*)\s*->\s*'id'\s*\)([\s\S]*?)\bend\s*,\s*''\s*\)/gi;
-const ID_TEXT_ONE = "coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')";
-/** Every inline id-as-text expression of a SQL text, normalized: { at: line, x, text }. */
+const ID_TEXT_CALL = /public\._gallery_veil_id_text\(\s*([a-z_][a-z0-9_]*)\s*->\s*'id'\s*\)/gi;
+/** Every inline id-as-text expression of a SQL text: { at: line, x }. */
 function idTextSitesOf(sql) {
-  return [...sql.matchAll(ID_TEXT_SHAPE)].map((m) => {
-    const x = m[1];
-    const text = m[0].replace(/\s+/g, ' ').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')')
-      .replace(new RegExp(`\\b${x}\\b(?=\\s*-)`, 'g'), '<x>');
-    return { at: sql.slice(0, m.index).split('\n').length, x, text };
-  });
+  return [...sql.matchAll(ID_TEXT_SHAPE)].map((m) => ({ at: sql.slice(0, m.index).split('\n').length, x: m[1] }));
 }
-describe('R3-CURE-7 (ruling 53, condition 2): THE WALKER over 212\'s inline id-as-text expressions', () => {
-  it('212 writes a person\'s id as text EXACTLY SIX times, all ONE text (ruling 53: one helper owed; the fold owed in R4-CURE-2 retires this walker)', () => {
+/** The text of one function's LAST statement among the files (`create or replace function public.<name>(` to its `$$;`). */
+function statementOf(name, ...sqls) {
+  let found = null;
+  for (const sql of sqls) {
+    const re = new RegExp(`^create or replace function public\\.${name}\\([\\s\\S]*?^(?:end )?\\$\\$;`, 'gm');
+    for (const m of sql.matchAll(re)) found = m[0];
+  }
+  if (!found) throw new Error(`no statement of ${name}`);
+  return found;
+}
+describe('R3-CURE-7 (ruling 53, condition 2): THE WALKER, re-stated by R4-IDS: no inline id-as-text form left in 212, every site calls _gallery_veil_id_text, its text the twin\'s idText', () => {
+  it('212 writes a person\'s id as text INLINE nowhere (the fold made: ONE helper, _gallery_veil_id_text)', () => {
+    const sites = idTextSitesOf(readFileSync(MIGRATION_212_URL, 'utf8'));
+    note('R4-IDS walker (ruling 53): inline id-as-text expressions left in 212:', sites.length, J(sites.map((s) => `${s.at}:${s.x}`)));
+    expect(sites, `ruling 53's fold: no inline form is left; found ${J(sites)}`).toEqual([]);
+  });
+
+  it('_gallery_veil_roster_choices\'s six id-as-text sites each call public._gallery_veil_id_text on a person\'s id (exactly six)', () => {
     const sql = readFileSync(MIGRATION_212_URL, 'utf8');
-    const sites = idTextSitesOf(sql);
-    const texts = [...new Set(sites.map((s) => s.text))];
-    const said = `ruling 53 (the chair, 15:10): until the fold owed in R4-CURE-2 retires this walker (one id-as-text helper in 212, the six sites repointed), 212's inline id-as-text expressions are six and ONE text; found ${sites.length}: ${J(sites.map((s) => `line ${s.at} (${s.x}): ${s.text}`))}`;
-    note('R3-CURE-7 walker (ruling 53): inline id-as-text expressions in 212:', sites.length, J(sites.map((s) => `${s.at}:${s.x}`)), '| texts:', texts.length);
-    expect(sites.length, said).toBe(6);
-    expect(texts, said).toEqual([ID_TEXT_ONE]);
+    const body = statementOf('_gallery_veil_roster_choices', sql);
+    const calls = [...body.matchAll(ID_TEXT_CALL)].map((m) => m[1]);
+    note('R4-IDS walker (ruling 53): _gallery_veil_id_text calls in _gallery_veil_roster_choices:', calls.length, J(calls));
+    expect(calls.length, `the six sites, each on the helper: ${J(calls)}`).toBe(6);
+    expect(idTextSitesOf(body)).toEqual([]);
+  });
+
+  it('the helper\'s text (212 :: _gallery_veil_id_text, on a bare pglite) equals the twin\'s idText on `true`, `false`, \'\', a number (1.0, 90001) and a string', async () => {
+    const { idText } = await import('../../src/domain/display/galleryRosterChoices.js');
+    const s211 = readFileSync(MIGRATION_211_URL, 'utf8');
+    const s212 = readFileSync(MIGRATION_212_URL, 'utf8');
+    const db = new PGlite();
+    try {
+      await db.exec('set check_function_bodies = off;'); // jsstr and join read each other
+      for (const fn of ['_gallery_veil_num_inf', '_gallery_veil_num_zero', '_gallery_veil_numstr', '_gallery_veil_jsstr', '_gallery_veil_join', '_gallery_veil_id_text']) {
+        await db.exec(statementOf(fn, s211, s212));
+      }
+      // each value as the JSON a stored id spells it, and as JavaScript reads that JSON back
+      const tooth = ['true', 'false', '""', '1.0', '90001', '"npc.bo"', '"npc_power_noble_families"', 'null', '{"a":1}', '[1]'];
+      const bad = [];
+      for (const j of tooth) {
+        const sv = (await db.query('select public._gallery_veil_id_text($1::jsonb) t', [j])).rows[0].t;
+        const tw = idText(JSON.parse(j));
+        if (sv !== tw) bad.push(`${j}: 212 ${J(sv)}, the twin ${J(tw)}`);
+      }
+      note('R4-IDS walker (ruling 53): the helper against idText on', tooth.length, 'values; differ:', bad.length);
+      expect(bad).toEqual([]);
+    } finally { await db.close(); }
   });
 });
 

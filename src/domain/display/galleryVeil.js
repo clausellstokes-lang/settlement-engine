@@ -73,6 +73,7 @@ import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from
 import { applyRosterChoices } from './galleryRosterChoices.js';
 import { rederiveIncomeShares, renumberTrace, secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdIncomeWeights, withholdSecondHomes } from './gallerySecondHomes.js';
 import { withholdAlways } from './galleryWithholdAlways.js';
+import { readSalt, rekeyPeople } from './galleryVeilPeople.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -618,6 +619,8 @@ function dropField(card, kind, field) {
  */
 export function applyVeil(publicSettlement, veil) {
   const s = /** @type {Rec} */ (deepClone(isRec(publicSettlement) ? publicSettlement : {}));
+  // R4-IDS (item 1; VR10): ONE salt for this projection call, its whole payload (212 :: _gallery_veil draws one a call)
+  const salt = readSalt();
   // VEIL-19 (item D): the income rows the projection holds before the veil (a row withheld re-derives the shares)
   const econ0 = recAt(s, 'economicState');
   const incomeBefore = econ0 && Array.isArray(econ0.incomeSources) ? econ0.incomeSources.length : null;
@@ -776,6 +779,10 @@ export function applyVeil(publicSettlement, veil) {
   dropVeiledPublicProse(s, groupings);
   // VEIL-22 (R3): the drawn conditional rows (212 :: _gallery_veil_roster_choices, before R2's step)
   applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf);
+  // R4-IDS (item 5; VR10): every person id re-keyed under the call's salt, after the roster choices (which compare the
+  // body's people with the projection's by stored id) and before withhold-always (whose cast pass matches roles to people
+  // by id: both re-keyed); 212 :: _gallery_veil_rekey, galleryVeilPeople.js :: rekeyPeople (registry: people.rekey)
+  rekeyPeople(s, salt);
   // VEIL-21 (R2; VR16, VR33, VR37): last, what no non-owner read sends whatever the veil (212 :: _gallery_veil runs
   // _gallery_veil_withhold_always on every body it returns)
   withholdAlways(s);
@@ -1269,9 +1276,12 @@ export function projectShareVeil(publicSettlement, memberOverrides) {
   // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read);
   // VEIL-21 (R2): and for what no non-owner read sends whatever the veil (212 :: _gallery_veil, the unmarked body)
   // VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
+  // R4-IDS (items 1, 5; VR10): and every person id re-keyed between the two, under this call's one salt
+  // (withhold_always(rekey(roster_choices(pub, pub), salt)), 212 :: _gallery_veil's unmarked body)
   if (!marked) {
     const s = /** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement)));
     applyRosterChoices(s, publicSettlement, CARD_KINDS.institution.idOf);
+    rekeyPeople(s, readSalt());
     return withholdAlways(s);
   }
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));

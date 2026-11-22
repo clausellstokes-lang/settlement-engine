@@ -27,7 +27,7 @@
  *   TEETH THAT PASS TODAY: a read that hides nothing serves the same people (modulo the bijection); a served person's every
  *   non-id byte is the twin's.
  */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
@@ -35,6 +35,22 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
 import { canonPeople, storedIdsServed, notBijective, readsDiffer, bijectionTeeth } from './personIdBijection.shared.mjs';
 import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
+import { galleryMemberKey } from '../../src/domain/display/publicSafe.js';
+
+// R4-IDS PART TWO (R4I-PAGE, the chair's arm): the import's own door over the served import (galleryImportRederive.test.js's
+// door: the rpc answers with the pglite read the arm took, the save is captured).
+const mocks = vi.hoisted(() => ({ row: null, captured: null }));
+vi.mock('../../src/lib/analytics.js', () => ({ track: vi.fn(), Funnel: { track: vi.fn() }, EVENTS: new Proxy({}, { get: (_t, k) => String(k) }) }));
+vi.mock('../../src/lib/supabase.js', () => {
+  const supabase = {
+    auth: { getSession: async () => ({ data: { session: null } }), getUser: async () => ({ data: { user: null } }), onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }) },
+    from: () => ({ select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: null, error: null }), single: async () => ({ data: null, error: null }) }) }) }),
+    rpc: async (name) => (name === 'import_gallery_dossier' ? { data: [JSON.parse(JSON.stringify(mocks.row))], error: null } : { data: null, error: null }),
+  };
+  return { supabase, isConfigured: true, default: supabase };
+});
+vi.mock('../../src/lib/saves.js', async (orig) => ({ ...(await orig()), saves: { save: async (e) => { mocks.captured = e; return 'new-id'; } } }));
+const READER = '22222222-2222-2222-2222-222222222222';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -54,6 +70,12 @@ const TG_REP = 'npc_power_thieves_guild'; // (a) mintTitles.js :: OTHER_CARD_PRE
 const DEN = "Smugglers' den";
 const DEN_REP = 'npc_smugglers_den'; // (b) representatives.js :: cardIdFor's unveiled form, npc_<house slug>
 const NUM = 90001; // (c)
+// R4-IDS PART TWO (R4I-PAGE): (e) an OWNER-hidden power (`hidden: true`, the act T case) whose face carries
+// `npc_power_noble_families` (the lane's dark witness of the lit jp6-city-8 case); (f) the marker key `npc.bo` of the card
+// whose stored id is `npc.bo` (item 6: decided by the card, never by the key's spelling).
+const NOBLE = 'Noble Families';
+const NOBLE_REP = 'npc_power_noble_families'; // (e)
+const BO = 'npc.bo'; // (f)
 const PLANT = Object.freeze({
   name: 'Saltmarrow', tier: 'town',
   institutions: [{ id: 'inst-tgc', name: "Thieves' guild chapter", category: 'Criminal', desc: 'A chapter of the guild.' },
@@ -62,7 +84,8 @@ const PLANT = Object.freeze({
   powerStructure: {
     factions: [{ faction: 'Town Council', category: 'civic', power: 50, isGoverning: true, desc: 'The council sits weekly.' },
       { faction: TG, category: 'criminal', power: 30, desc: 'The guild takes its cut.' },
-      { faction: 'Fishers', category: 'economic', power: 20, desc: 'The fishers keep the quay.' }],
+      { faction: 'Fishers', category: 'economic', power: 20, desc: 'The fishers keep the quay.' },
+      { faction: NOBLE, category: 'noble', power: 0, hidden: true, desc: 'The old houses watch.' }], // (e)
   },
   npcs: [
     { id: TG_REP, name: 'Vex Morrow', role: 'Guildmaster', title: 'the guildmaster', institution: { kind: 'power', key: TG, title: 'the guildmaster' },
@@ -70,7 +93,9 @@ const PLANT = Object.freeze({
     { id: DEN_REP, name: 'Rook Hale', role: 'Smuggler', title: 'the smuggler', institution: { kind: 'house', key: 'inst-den', title: 'the smuggler' },
       memberships: [], goal: { short: 'Move the cargo.', long: 'Retire rich.' } },
     { id: NUM, name: 'Ada Vell', role: 'Fishwife', memberships: [{ power: 'Fishers', role: 'member' }], goal: { short: 'Sell the catch.', long: 'Own a boat.' } },
-    { id: 'npc.bo', name: 'Bo Tarn', role: 'Councillor', memberships: [{ power: 'Town Council', role: 'member' }],
+    { id: NOBLE_REP, name: 'Lord Aster', role: 'Lord', title: 'the lord', institution: { kind: 'power', key: NOBLE, title: 'the lord' }, // (e)
+      memberships: [{ power: NOBLE, role: 'leader' }], goal: { short: 'Watch the council.', long: 'Restore the old houses.' } },
+    { id: BO, name: 'Bo Tarn', role: 'Councillor', memberships: [{ power: 'Town Council', role: 'member' }],
       relationships: [{ id: 'tie_bo_ada', from: 'npc.bo', to: NUM, type: 'ally', description: 'Old friends from the quay.' }],
       goal: { short: 'Keep the tolls.', long: 'Hold the chair.', intent: { short: { target: { id: NUM, kind: 'npc' } } } } },
   ],
@@ -79,7 +104,8 @@ const PLANT = Object.freeze({
     { id: `tie_${DEN_REP}__ada`, from: DEN_REP, to: NUM, type: 'patron', description: 'He buys her silence.' }],
 });
 /** (d) the person keys the owner's marker holds for the plant's people. */
-const PERSON_KEYS = Object.freeze({ [TG_REP]: { revealDm: false }, [DEN_REP]: { allowImport: false }, [String(NUM)]: { revealDm: true }, 'npc.vex_morrow': { revealDm: false } });
+const PERSON_KEYS = Object.freeze({ [TG_REP]: { revealDm: false }, [DEN_REP]: { allowImport: false }, [String(NUM)]: { revealDm: true }, 'npc.vex_morrow': { revealDm: false },
+  [BO]: { revealDm: true } }); // (f)
 /** master's stored shape: the powers also in the top-level factions[], each with its roster copy members[]. */
 const masterOf = (t) => ({ ...t, factions: clone(t.powerStructure?.factions || []).map((f) => ({ ...f,
   members: recs(t.npcs).filter((n) => recs(n.memberships).some((m) => m.power === f.faction)).map((n) => ({ id: n.id, name: n.name })) })) });
@@ -93,10 +119,25 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
   let reads;
   let db;
   let catalogue;
+  let rekeyServed;
+  let rekeyId;
 
   beforeAll(async () => {
     db = new PGlite({ extensions: { pgcrypto } });
     expect(await bootChain(db)).toEqual([]);
+    await db.exec(`insert into auth.users (id) values ('${READER}') on conflict do nothing; insert into public.profiles (id) values ('${READER}') on conflict do nothing;
+      create or replace function public.current_user_has_premium_access() returns boolean language sql stable as $f$ select true $f$;`);
+    const { importGallerySettlementImpl } = await import('../../src/store/galleryImportSettlement.js');
+    const people = await import('../../src/domain/display/galleryVeilPeople.js');
+    ({ rekeyServed, rekeyId } = people);
+    const importer = () => ({ auth: { user: { id: READER }, tier: 'premium', role: null }, maxSaves: () => Infinity, savedSettlements: [] });
+    /** The tree's own import over one served import row (the rpc's row as pglite gives it): the clone it would save. */
+    const importOf = async (row) => { mocks.row = row; mocks.captured = null; await importGallerySettlementImpl(importer, () => {}, 'r4i-import'); return mocks.captured?.settlement; };
+    /** One twin projection under a KNOWN salt (the arm reads the twin's one read whole: its body before the re-key too). */
+    const twinUnder = (salt, stored, dm, ov) => {
+      const spy = vi.spyOn(globalThis.crypto, 'randomUUID').mockReturnValue(salt);
+      try { return veil.projectShareVeil(veil.galleryPayloadFor(clone(stored), { shareDm: dm, memberOverrides: ov }), ov); } finally { spy.mockRestore(); }
+    };
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
     const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
@@ -137,8 +178,24 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
         const lx = await l();
         const lx2 = await l();
         const twin = veil.projectShareVeil(veil.galleryPayloadFor(clone(stored), { shareDm: dm, memberOverrides: ov }), ov);
-        reads.push({ seed: t.seed, shape, kind, dm, stored, ov, twin,
-          docs: { gallery: { doc: g1?.d, marker: g1?.o, again: g2?.d }, link: { doc: lx?.dossier, marker: lx?.gallery_member_overrides ?? null, again: lx2?.dossier } } });
+        // R4I-PAGE (the chair's arm): two twin reads under two known salts; at Reveal DM off, the import read twice and
+        // each served import (and the twin's first read) through the tree's own import
+        const salts = [`4e1d5a17-0000-4000-8000-${String(2 * n).padStart(12, '0')}`, `4e1d5a17-0000-4000-8000-${String(2 * n + 1).padStart(12, '0')}`];
+        const twins = salts.map((salt) => ({ salt, doc: twinUnder(salt, stored, dm, ov) }));
+        let imports = null;
+        if (!dm) {
+          await db.exec(`set test.uid = '${READER}';`);
+          const i1 = (await db.query('select g.* from public.import_gallery_dossier($1) g', [slug])).rows[0];
+          const i2 = (await db.query('select g.* from public.import_gallery_dossier($1) g', [slug])).rows[0];
+          await db.exec(`set test.uid = '';`);
+          imports = { served: [i1?.data, i2?.data], clones: [await importOf(i1), await importOf(i2)],
+            twin: await importOf({ id: id, name: String(stored.name || 'T'), tier: String(stored.tier || 'town'), data: twins[0].doc }) };
+          // the baseline: the same import over the twin's body BEFORE the re-key (stored ids): what the import itself drops
+          imports.preDoc = unRekey(twins[0].doc, stored, twins[0].salt);
+          imports.pre = await importOf({ id: id, name: String(stored.name || 'T'), tier: String(stored.tier || 'town'), data: imports.preDoc });
+        }
+        reads.push({ seed: t.seed, shape, kind, dm, stored, ov, twin, twins, imports,
+          docs: { gallery: { doc: g1?.d, marker: g1?.o, again: g2?.d, againMarker: g2?.o }, link: { doc: lx?.dossier, marker: lx?.gallery_member_overrides ?? null, again: lx2?.dossier, againMarker: lx2?.gallery_member_overrides ?? null } } });
       }
     }
     // THE CATALOGUE: every function 211 and 212 create or restate (the files read as text; their names only)
@@ -313,5 +370,181 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
     }
     expect(judged).toBeGreaterThan(0);
     expect(bad).toEqual([]);
+  });
+  // ── R4-IDS PART TWO (R4I-PAGE, VEIL-35): THE PLANTS (e), (f) AND THE CHAIR'S ARM ─────────────────────────────────────────
+  /** Each re-keyed site of the fixed walk (personIdBijection.shared.mjs :: sites, 212 :: _gallery_veil_rekey's paths):
+   * [holder, key, phase, part, path]; phase 'card' | 'ref' | 'tie'. */
+  const walkSites = (doc) => {
+    const out = [];
+    if (!isRec(doc)) return out;
+    const at = (obj, keys, phase, part, path) => {
+      let cur = obj;
+      for (const k of keys.slice(0, -1)) { if (!isRec(cur)) return; cur = cur[k]; }
+      const leaf = keys[keys.length - 1];
+      if (isRec(cur) && (typeof cur[leaf] === 'string' || typeof cur[leaf] === 'number')) out.push([cur, leaf, phase, part, `${path}.${keys.join('.')}`]);
+    };
+    recs(doc.npcs).forEach((n, i) => at(n, ['id'], 'card', 'cards', `npcs[${i}]`));
+    recs(doc.powerStructure?.factions).forEach((f, i) => recs(f.members).forEach((m, j) => at(m, ['id'], 'card', 'roster', `powerStructure.factions[${i}].members[${j}]`)));
+    recs(doc.factions).forEach((f, i) => recs(f.members).forEach((m, j) => at(m, ['id'], 'card', 'roster', `factions[${i}].members[${j}]`)));
+    recs(doc.npcs).forEach((n, i) => { for (const k of [['goal', 'intent', 'short', 'target', 'id'], ['goal', 'intent', 'long', 'target', 'id'], ['allegiance', 'handler']]) at(n, k, 'ref', 'cards', `npcs[${i}]`); });
+    recs(doc.relationships).forEach((t, i) => { for (const k of ['from', 'to', 'npc1Id', 'npc2Id']) at(t, [k], 'ref', 'ties', `relationships[${i}]`); });
+    recs(doc.npcs).forEach((n, i) => recs(n.relationships).forEach((t, j) => { for (const k of ['from', 'to', 'npc1Id', 'npc2Id', 'targetId', 'npcId']) at(t, [k], 'ref', 'cardTies', `npcs[${i}].relationships[${j}]`); }));
+    for (const key of ['stress', 'stressors']) {
+      (Array.isArray(doc[key]) ? doc[key] : [doc[key]]).forEach((c, i) => {
+        if (!isRec(c) || !isRec(c.cast)) return;
+        recs(c.cast.roles).forEach((r, j) => at(r, ['id'], 'ref', 'casts', `${key}[${i}].cast.roles[${j}]`));
+        recs(c.cast.levers).forEach((l, j) => at(l, ['holderId'], 'ref', 'casts', `${key}[${i}].cast.levers[${j}]`));
+      });
+    }
+    recs(doc.simulationTrace).forEach((e, i) => { at(e, ['targetId'], 'ref', 'trace', `simulationTrace[${i}]`); recs(e.downstreamEffects).forEach((x, j) => at(x, ['target'], 'ref', 'trace', `simulationTrace[${i}].downstreamEffects[${j}]`)); });
+    recs(doc.relationships).forEach((t, i) => at(t, ['id'], 'tie', 'ties', `relationships[${i}]`));
+    recs(doc.npcs).forEach((n, i) => recs(n.relationships).forEach((t, j) => at(t, ['id'], 'tie', 'cardTies', `npcs[${i}].relationships[${j}]`)));
+    return out;
+  };
+  /** The person card ids of a document, by their text. */
+  const cardIdsOf = (doc) => new Set(walkSites(doc).filter((x) => x[2] === 'card').map(([h, k]) => String(h[k])).filter((v) => v !== ''));
+  /** Each reference of a document: [path, part, resolves to one of its own cards]. */
+  const refsOf = (doc) => { const ids = cardIdsOf(doc); return walkSites(doc).filter((x) => x[2] === 'ref').map(([h, k, , part, path]) => [path, part, ids.has(String(h[k]))]); };
+  /** The twin's read under its KNOWN salt, un-keyed back to the stored ids (every card's stored id by its re-keyed form): the
+   * body before the re-key, site for site. */
+  const unRekey = (doc, stored, salt) => {
+    const back = new Map();
+    for (const [h, k] of walkSites(stored).filter((x) => x[2] === 'card')) { const v = h[k]; const t = String(v); if (t !== '') back.set(rekeyId('npc_', t, salt), v); }
+    const c = clone(doc);
+    for (const [h, k, phase] of walkSites(c)) if (phase !== 'tie' && back.has(h[k])) h[k] = back.get(h[k]);
+    return c;
+  };
+  /** The served marker's person entries as 212 :: _gallery_veil_served hands them to the re-key (the stored person keys). */
+  const entriesOf = (ov) => ({ $veil: { v: 2 }, ...Object.fromEntries(Object.entries(isRec(ov) ? ov : {}).filter(([k, v]) => k !== '$veil' && isRec(v))) });
+  /** A marker key that names nothing of ITS read: neither a served card's id nor the member key of a served card with no id. */
+  const strayKeys = (marker, doc) => {
+    if (!isRec(marker)) return [];
+    const ids = cardIdsOf(doc);
+    const nameKeys = new Set(walkSites(doc).length ? [...recs(doc.npcs), ...recs(doc.powerStructure?.factions).flatMap((f) => recs(f.members)), ...recs(doc.factions).flatMap((f) => recs(f.members))]
+      .filter((c) => c.id == null || String(c.id) === '').map((c) => galleryMemberKey(c)) : []);
+    return Object.keys(marker).filter((k) => k !== '$veil' && !ids.has(k) && !nameKeys.has(k));
+  };
+  /** The marker's person keys of two reads in common (a shared key is a person id stable across reads). */
+  const sharedKeys = (a, b) => (isRec(a) && isRec(b) ? Object.keys(a).filter((k) => k !== '$veil' && !k.startsWith('npc.') && Object.prototype.hasOwnProperty.call(b, k)) : []);
+  const FORMS_E = ['noble_families', 'noblefamilies'];
+
+  it('(e) THE PLANT (R4I-PAGE): an OWNER-hidden power\'s face (`npc_power_noble_families`) is served under no id, key or slug that spells the power, on any read (server, twin, import)', () => {
+    const bad = [];
+    let faces = 0;
+    for (const r of reads.filter((y) => y.seed === 'plant')) {
+      const docs = [...served(r).map(([read, x]) => [read, x.doc, x.marker]), ...served(r).map(([read, x]) => [`${read} again`, x.again, x.againMarker]),
+        ['twin', r.twin, null], ...r.twins.map((t, i) => [`twin ${i}`, t.doc, null]),
+        ...(r.imports ? [...r.imports.served.map((d, i) => [`import ${i}`, d, null]), ...r.imports.clones.map((d, i) => [`import clone ${i}`, d, null]), ['twin import clone', r.imports.twin, null]] : [])];
+      for (const [read, doc, marker] of docs) {
+        if (!isRec(doc)) { bad.push(`${label(r, read)}: no document`); continue; }
+        faces += recs(doc.npcs).filter((c) => c.name === 'Lord Aster').length;
+        for (const [p, v] of idSites(doc, marker, r.stored)) {
+          const low = String(v).toLowerCase();
+          if (FORMS_E.some((f) => low.replace(/[^a-z0-9]+/g, '_').includes(f) || low.replace(/[^a-z0-9]+/g, '').includes(f))) bad.push(`${label(r, read)}: ${p} = ${v}`);
+        }
+      }
+    }
+    expect(faces, 'the hidden power\'s face is served (else the plant judges nothing)').toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  it('(f) THE PLANT (R4I-PAGE): the marker key `npc.bo` of the card whose stored id is `npc.bo` is kept under THAT card\'s served id (decided by the card), revealDm true, the card revealed at Reveal DM off, server and twin (212 :: _gallery_veil_rekey_served; galleryVeilPeople.js :: rekeyServed)', () => {
+    const bad = [];
+    let judged = 0;
+    for (const r of reads.filter((y) => y.seed === 'plant' && !y.dm)) {
+      const g = r.docs.gallery;
+      const bo = recs(g.doc?.npcs).find((c) => c.name === 'Bo Tarn');
+      judged += 1;
+      if (!bo) { bad.push(`${label(r, 'gallery')}: Bo is not served`); continue; }
+      if (g.marker?.[bo.id]?.revealDm !== true) bad.push(`${label(r, 'gallery')}: the marker holds no revealDm true under Bo's served id ${bo.id} (keys ${J(Object.keys(g.marker || {}))})`);
+      if (isRec(g.marker) && Object.prototype.hasOwnProperty.call(g.marker, BO)) bad.push(`${label(r, 'gallery')}: the stored id npc.bo served as a marker key`);
+      if (bo.goal == null) bad.push(`${label(r, 'gallery')}: Bo is not revealed (no goal served)`);
+      for (const t of r.twins) {
+        const tb = recs(t.doc.npcs).find((c) => c.name === 'Bo Tarn');
+        let tm;
+        try { tm = rekeyServed(entriesOf(r.ov), unRekey(t.doc, r.stored, t.salt), t.salt); } catch (e) { bad.push(`${label(r, 'twin')}: rekeyServed ${e.message}`); continue; }
+        if (!tb) { bad.push(`${label(r, 'twin')}: Bo is not served`); continue; }
+        if (tm?.[tb.id]?.revealDm !== true) bad.push(`${label(r, 'twin')}: the twin's marker holds no revealDm true under Bo's served id ${tb.id}`);
+        if (tb.id === BO) bad.push(`${label(r, 'twin')}: Bo served under the stored id npc.bo`);
+        if (tb.goal == null) bad.push(`${label(r, 'twin')}: Bo is not revealed`);
+      }
+    }
+    expect(judged).toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  it('THE CHAIR\'S ARM (R4I-PAGE, the re-stamp\'s condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker\'s keys, the import\'s clone rows through importGallerySettlementImpl over the served import), server and twin', () => {
+    const bad = [];
+    const tally = {};
+    const count = (part, ok) => { tally[part] = tally[part] || [0, 0]; tally[part][ok ? 0 : 1] += 1; };
+    for (const r of reads) {
+      // (A) two reads of one place share no person id
+      const pairs = [...served(r).map(([read, x]) => [read, x.doc, x.again, x.marker, x.againMarker]), ['twin', r.twins[0].doc, r.twins[1].doc, null, null],
+        ...(r.imports ? [['import', r.imports.served[0], r.imports.served[1], null, null], ['import clone', r.imports.clones[0], r.imports.clones[1], null, null]] : [])];
+      for (const [read, a, b, ma, mb] of pairs) {
+        if (!isRec(a) || !isRec(b)) { bad.push(`${label(r, read)}: a read is missing`); continue; }
+        const shared = readsDiffer(a, b);
+        if (shared.length) bad.push(`${label(r, read)}: two reads share ${shared.length} person ids: ${shared.slice(0, 3).join(', ')}`);
+        const keys = sharedKeys(ma, mb);
+        if (keys.length) bad.push(`${label(r, read)}: two reads' markers share ${keys.length} person keys: ${keys.slice(0, 3).join(', ')}`);
+      }
+      // (B) one read's references resolve. The twin's, site for site against its own body before the re-key (its salt known):
+      for (const t of r.twins) {
+        const pre = unRekey(t.doc, r.stored, t.salt);
+        const after = refsOf(t.doc);
+        const before = refsOf(pre);
+        if (after.length !== before.length) bad.push(`${label(r, 'twin')}: ${after.length} references against ${before.length} before the re-key`);
+        after.forEach(([p, part, ok], i) => { count(part, ok); if (ok !== before[i]?.[2]) bad.push(`${label(r, 'twin')}: ${p} ${ok ? 'resolves' : 'resolves to no card'} (before the re-key: ${before[i]?.[2]})`); });
+        // the roster copies: each copy's id is a person card's of npcs[] after the re-key exactly where it was before
+        const rosterOf = (d) => { const own = new Set(recs(d.npcs).map((c) => String(c.id))); return walkSites(d).filter((y) => y[2] === 'card' && y[3] === 'roster').map(([h, k, , , p]) => [p, own.has(String(h[k]))]); };
+        const ra = rosterOf(t.doc); const rb = rosterOf(pre);
+        ra.forEach(([p, ok], i) => { count('roster', ok); if (ok !== rb[i]?.[1]) bad.push(`${label(r, 'twin')}: the roster copy ${p} ${ok ? 'is' : 'is not'} a card of npcs[] (before the re-key: ${rb[i]?.[1]})`); });
+        let tm;
+        try { tm = rekeyServed(entriesOf(r.ov), pre, t.salt); } catch (e) { bad.push(`${label(r, 'twin')}: rekeyServed ${e.message}`); continue; }
+        for (const k of strayKeys(tm, t.doc)) bad.push(`${label(r, 'twin')}: the marker key ${k} names no card of its read`);
+        count('marker', true);
+        const leak = storedIdsServed([t.doc, tm], r.stored);
+        if (leak.length) bad.push(`${label(r, 'twin')}: stored ids served ${leak.length}: ${leak.slice(0, 2).join('; ')}`);
+      }
+      // the server's: the gallery read site for site against the twin's (the same people, modulo the bijection); the link
+      // and every second read against their first; each marker's keys name a card of their own read
+      for (const [read, x] of served(r)) {
+        const ref = read === 'gallery' ? refsOf(r.twins[0].doc).map((y) => y[2]) : refsOf(x.doc).map((y) => y[2]);
+        for (const [doc, marker, which] of [[x.doc, x.marker, read], [x.again, x.againMarker, `${read} again`]]) {
+          const got = refsOf(doc);
+          got.forEach(([p, part, ok], i) => { count(part, ok); if (ok !== ref[i]) bad.push(`${label(r, which)}: ${p} ${ok ? 'resolves' : 'resolves to no card'} (its reference: ${ref[i]})`); });
+          if (got.length !== ref.length) bad.push(`${label(r, which)}: ${got.length} references against its reference's ${ref.length}`);
+          for (const k of strayKeys(marker, doc)) bad.push(`${label(r, which)}: the marker key ${k} names no card of its read`);
+          if (isRec(marker)) count('marker', true);
+        }
+      }
+      // the import's clone rows (importGallerySettlementImpl over the served import, and over the twin's read): no stored id,
+      // a bijection, and every reference that resolved in what was served resolves in the clone
+      if (r.imports) {
+        const lossBase = refsOf(r.imports.preDoc).filter((y) => y[2]).length - refsOf(r.imports.pre).filter((y) => y[2]).length;
+        count('clone baseline loss', lossBase === 0);
+        for (const [which, src, cl] of [...r.imports.served.map((d, i) => [`import ${i}`, d, r.imports.clones[i]]), ['twin import', r.twins[0].doc, r.imports.twin]]) {
+          if (!isRec(cl)) { bad.push(`${label(r, which)}: no clone saved`); continue; }
+          const leak = storedIdsServed([cl], r.stored);
+          if (leak.length) bad.push(`${label(r, which)}: the clone holds ${leak.length} stored ids: ${leak.slice(0, 2).join('; ')}`);
+          const twice = notBijective(cl);
+          if (twice.length) bad.push(`${label(r, which)}: the clone is not a bijection: ${twice.slice(0, 2).join('; ')}`);
+          const a = refsOf(src).filter((y) => y[2]).length;
+          const b = refsOf(cl);
+          b.forEach(([, part, ok]) => count(`clone ${part}`, ok));
+          // the import's own loss (a cast row its normalization drops) is the loss it makes over the stored ids, no more
+          const loss = a - b.filter((y) => y[2]).length;
+          if (loss !== lossBase) bad.push(`${label(r, which)}: the clone loses ${loss} resolving references of ${a} served (over the stored ids: ${lossBase})`);
+          const ids = cardIdsOf(src);
+          const lost = [...ids].filter((v) => !cardIdsOf(cl).has(v));
+          if (lost.length) bad.push(`${label(r, which)}: ${lost.length} served cards not in the clone under their served id: ${lost.slice(0, 2).join(', ')}`);
+        }
+      }
+    }
+    const twinSide = bad.filter((b) => / twin( |:)/.test(b)).length;
+    console.log(`R4I-PAGE chair's arm: references judged by part [resolve, resolve to no card]: ${J(tally)}; reds ${bad.length} (twin side ${twinSide}, server side ${bad.length - twinSide})`);
+    if (process.env.R4I_PEEK) console.log(`R4I-PAGE server-side reds: ${J(bad.filter((b) => !/ twin( |:)/.test(b)).slice(0, 12))}`);
+    for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker', 'clone ties']) expect(tally[part]?.[0] ?? 0, `${part}: judged`).toBeGreaterThan(0);
+    expect(bad.slice(0, 40)).toEqual([]);
   });
 });
