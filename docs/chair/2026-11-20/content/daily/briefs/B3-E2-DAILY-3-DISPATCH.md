@@ -5,7 +5,7 @@ word, 2026-11-22; this file governs where it differs). Paths are under `docs/cha
 
 ## Where you work
 - Worktree `/home/user/wt-daily3-e2`, branch `lane/daily-3-2026-11-22-e2-wip`, cut from the lane `lane/daily-3-2026-11-22`
-  after E1's merge (4c1a72892 or later: it carries E1, the owner-only slot, its gate and its test).
+  after E1's merge and its two cures (978968735: it carries E1, the owner-only slot, its gate and its test).
 - Wherever a brief says DAILY-1 or DAILY-2, read DAILY-3. Trailer (B-BUILD-COMMON item 9):
   `Claude-Session: https://claude.ai/code/session_01ACmDYYZpEdm9Ag2ikDGTf9`. You commit; you do NOT push or merge.
 - B3's read 3: B2's report is the commit message of 888227143; E1's is the commit message of 739adf5a3 and its
@@ -40,8 +40,10 @@ word, 2026-11-22; this file governs where it differs). Paths are under `docs/cha
    meaning keeps that meaning; say each one in the commit message).
 7. GREEN at your commit (B-BUILD-COMMON item 8), every heavy run through `sh scripts/gate-mutex.sh --run -- <cmd>`, to a
    file: your test file(s); `tests/domain/dailyLife*.test.js` (with E1's `dailyLifeOwnerSlot.test.js`); every test file
-   under `tests/` that names `dailyLife` (grep); the sameness walker; `tests/lint/domainAnyCastBaseline*`; the
-   presumption walkers; eslint on touched files; both typechecks. Not `tests/lint` whole (DAILY-3 runs it at the merge).
+   under `tests/` that names `dailyLife` (grep); the sameness walker; `tests/lint/domainAnyCastBaseline*`;
+   `tests/lint/negativeAssertionAnchor.walker.test.js` (E1's lesson: a bare `not.toMatch` needs an `// anchored:` marker
+   on the ONE line above, or `tests/helpers/anchoredNegatives.js`); the presumption walkers; eslint on touched files; both typechecks. Not `tests/lint` whole (DAILY-3 runs it at the merge;
+   the lighting census's file count, moved by a new test file, is DAILY-3's to re-take: leave it).
 8. MEASURE after the commit (into `measures/B3/E2/`, E1's `measure.e1.mjs` shape over the BUILT code, the re-run line at
    the top of the out file): on the 900, for both slots: top sentence share by size against the bar (about 15%, to 20%
    as sampling), EMPTY by size, each branch's reach and its thinnest eligible count, false lines 0 by M1's tests and
