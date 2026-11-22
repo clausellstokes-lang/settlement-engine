@@ -1,4 +1,4 @@
-# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-22 02:24 UTC by `date -u`)
+# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-22 02:43 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names (under `briefs/`), then `PAGE-10-HANDBACK.md` only where this file sends it.
 PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff is read once, at the merge.
@@ -12,7 +12,8 @@ PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff
 - UNIT 2 MERGED: the parity (B 76540c08f, H fdba43c84, W 08315200e, F 88b75c298, on M f1b55a3ae) merged at b79dc3735; diff read whole once; red re-run by PAGE-12 on f1b55a3ae's tree with the tip's three test files: 10 failed | 35 passed; green at 88b75c298: 45/45 (logs `/home/user/page12-logs/parity-red.log`, `parity-green.log`). The lighting census refrozen by its own door at 62c0fdb9d (files 3730 -> 3731, parked 476 -> 477, titles 31396 -> 31400, suiteTitles 8702 -> 8705; verified 34/34); the wiring censuses green.
 - UNIT 3 MERGED: cure C (bdf40775c, finishing 1da4c7c56) and the bar6 (c) reseat (b31c57f63) merged at 0ad6729a8; diff read whole once; red re-run by PAGE-12 on 6bb213151's leaf with the tip's hooks test (arm 3e: 1 failed | 16 skipped), green at b31c57f63 (troubleHooksPools + bar6CrimeOneReading: 21/21). Lighting census refrozen at 70699c8f6 (titles 31400 -> 31401, suiteTitles 8705 -> 8706; censuses 122/122).
 - CURE C's FIGURES (900 births; `measures/page-12/cures/`): two-tree 257 identical, 0 non-string differences, 2339 string differences, all `history.currentTensions[].plotHooks[]` (643 towns). THE BAR, top / second share by size, before -> after: thorp 10.7/10.7 -> 12.0/12.0; hamlet 12.0/9.3 -> 11.3/11.3; village 8.0/8.0 -> 9.3/9.3; town 10.7/9.3 -> 10.7/9.3; city 15.3/14.7 -> 16.0/14.0; metropolis 14.7/14.0 -> 15.3/14.7 (PAGE-7's: city 14.0, metropolis 14.7). The city's top sentence after C: "A guard captain is on the payroll of the criminal network", 24 of 150 (16.0%). THE MIXED KEY DOES NOT LOWER THE BAR: it is the chair's one keyed law (20:03), not a sameness cure; the city and metropolis top shares rise by 0.7 and 0.6 points (one place in 150). For the chair.
-- NEXT: unit 5 (the closing measure and the owner's plain file, `briefs/CLOSE-MEASURE.md`), AFTER = the lane's tip.
+- UNIT 5 MERGED: the closing measure (2bf51d2d5, births 02:33-02:41 UTC; BEFORE 43ab0f5eb, AFTER 0359e7086; 150 a size, pools M `hxd-` and V `visitor-`) merged at 0fb957eb7: `measures/page-12/close/` (close.md, close.out.txt, kinds.md, OWNER-SIX.md, the scripts). BARS NOT MET AFTER: hook2 (a second place shares a hook; bar under 30%) M city 32.4% (before 53.7%), M metropolis 36.5% (61.0%), V city 30.3% (50.2%); V city row3 (sentences, any two of three) 26.4% (before 75.0%). Top shares all under 20% AFTER (sentences 5.3-12.0%, hooks 9.3-16.0%); BEFORE failed the top-share bar for town, city and metropolis in both pools. The guard-captain hook in V AFTER: town 8/150 (5.3%) of 32 eligible, city 12/150 (8.0%) of 73, metropolis 12/150 (8.0%) of 68, none in the three small sizes: under 20% everywhere (ruling 15 (a): not brought). COVER (V, the first trouble's kind has a cause table): thorp 53.3%, hamlet 50.0%, village 48.7%, town 69.3%, city 75.3%, metropolis 76.0%; nine in ten at every size takes 13 kinds (kinds.md). BEFORE's sentence: the stored `description` (else `issue`, `type`), printed by `HistoryTab.jsx :: TensionRow`.
+- NEXT: unit 6 (the line again: read `ci/LINE-NOW.md`, merge the line meeting `samenessHideable.walker` by declared exemption; rule 8 as widened by ruling 15 (b); then "PAGE-TROUBLE <commit>").
 
 ## 2. Units (the eighth chair's order, PAGE-12.txt)
 | # | unit | state | commit | next |
@@ -21,7 +22,7 @@ PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff
 | 2 | THE PARITY (B, H the five house rows, W, F) | MERGED, red 10 / green 45 re-run by PAGE-12 | b79dc3735 (census 62c0fdb9d) | done |
 | 3 | CURE C (the mixed key) + the bar6 (c) reseat | MERGED, red 1 / green 21 re-run by PAGE-12 | 0ad6729a8 (census 70699c8f6) | done |
 | 4 | THE THEMES' ROWS | WAITS: PAGE-10's hand-back §2 row (3): built ONLY after the depth lane's themes unit is on the working line (the chair names the commit); at a64619510 `src/domain/hookThemes.js` is not yet re-keyed by `textKey` | draft 5a88385f7, ruling 636d5f68a | the chair's commit (the chair 23:39: NOT owed before "PAGE-TROUBLE") |
-| 5 | CLOSING MEASURE + OWNER'S PLAIN FILE | brief `briefs/CLOSE-MEASURE.md` | | after 2 and 3 |
+| 5 | CLOSING MEASURE + OWNER'S PLAIN FILE | MERGED | 0fb957eb7 (measure 2bf51d2d5) | done |
 | 6 | THE LINE AGAIN, RULE 8, "PAGE-TROUBLE" | | | last |
 
 ## 3. Rulings in force (one list; every one vetoable by the owner)
