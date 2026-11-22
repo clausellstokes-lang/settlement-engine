@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "1d551fd54ce1d1276c5d8ca6b2233fe0da1a53e8",
-  "measuredBy": "SEAT-10",
+  "measuredAtSha": "e6f2a42279571dc744aeac9b70c13884a556d071",
+  "measuredBy": "CLOSE-1",
   "date": "2026-11-22",
-  "note": "the chair's second base e8bc160f8 took the line's side of the inventory; the lane's SEAT_CIRCUMSTANCE_TUNING row (draft, every factor 1) restored as the lane froze it, no value moved",
+  "note": "the trial join 4bba8781d (point 97 + fortune f13f31820): the line side taken; SEAT_CIRCUMSTANCE_TUNING and FORTUNE_LAW_TUNING both registered DRAFT; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1248,7 +1248,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 452,
+      "line": 453,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1262,7 +1262,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 453,
+      "line": 454,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1306,7 +1306,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 631,
+      "line": 635,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1321,7 +1321,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 633,
+      "line": 637,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1336,7 +1336,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 635,
+      "line": 639,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1351,7 +1351,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 637,
+      "line": 641,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -1459,6 +1459,86 @@
         "src/generators/steps/assembleSettlement.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/fortune/fortuneLaw.js#FORTUNE_LAW_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 4,
+      "line": 122,
+      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
+      "leaves": {
+        "developmentFigure": 1,
+        "magicScale": 0.6,
+        "depthExpectation.thorp": 3,
+        "depthExpectation.hamlet": 5,
+        "depthExpectation.village": 8,
+        "depthExpectation.town": 20,
+        "depthExpectation.city": 42,
+        "depthExpectation.metropolis": 53,
+        "standing.prosperityPoints.Struggling": -20,
+        "standing.prosperityPoints.Subsistence": -20,
+        "standing.prosperityPoints.Poor": -10,
+        "standing.prosperityPoints.Moderate": 0,
+        "standing.prosperityPoints.Comfortable": 8,
+        "standing.prosperityPoints.Prosperous": 15,
+        "standing.prosperityPoints.Wealthy": 20,
+        "standing.defenceUsualRange.thorp.0": "Vulnerable",
+        "standing.defenceUsualRange.thorp.1": "Vulnerable",
+        "standing.defenceUsualRange.hamlet.0": "Undefended",
+        "standing.defenceUsualRange.hamlet.1": "Vulnerable",
+        "standing.defenceUsualRange.village.0": "Undefended",
+        "standing.defenceUsualRange.village.1": "Vulnerable",
+        "standing.defenceUsualRange.town.0": "Lightly Defended",
+        "standing.defenceUsualRange.town.1": "Defensible",
+        "standing.defenceUsualRange.city.0": "Well-Defended",
+        "standing.defenceUsualRange.city.1": "Fortress",
+        "standing.defenceUsualRange.metropolis.0": "Well-Defended",
+        "standing.defenceUsualRange.metropolis.1": "Fortress",
+        "standing.defencePointsPerBand": 4,
+        "standing.defenceBound": 10,
+        "standing.safetyCalmLadder.0": "Dangerous",
+        "standing.safetyCalmLadder.1": "Unsafe",
+        "standing.safetyCalmLadder.2": "Moderate",
+        "standing.safetyCalmLadder.3": "Safe",
+        "standing.safetyCalmLadder.4": "Very Safe",
+        "standing.safetyUsualRange.thorp.0": "Moderate",
+        "standing.safetyUsualRange.thorp.1": "Moderate",
+        "standing.safetyUsualRange.hamlet.0": "Moderate",
+        "standing.safetyUsualRange.hamlet.1": "Moderate",
+        "standing.safetyUsualRange.village.0": "Moderate",
+        "standing.safetyUsualRange.village.1": "Moderate",
+        "standing.safetyUsualRange.town.0": "Moderate",
+        "standing.safetyUsualRange.town.1": "Moderate",
+        "standing.safetyUsualRange.city.0": "Unsafe",
+        "standing.safetyUsualRange.city.1": "Moderate",
+        "standing.safetyUsualRange.metropolis.0": "Moderate",
+        "standing.safetyUsualRange.metropolis.1": "Moderate",
+        "standing.meritPoints": 10,
+        "standing.weatheredWithinYears": 40,
+        "standing.endorsedMinReasons": 2,
+        "standing.weatheredSeverity": "catastrophic",
+        "standing.rulerTroubleKinds.0": "succession_crisis",
+        "standing.rulerTroubleKinds.1": "corruption_scandal",
+        "standing.rulerTroubleKinds.2": "tyranny",
+        "standing.rulerTroubleKinds.3": "popular_uprising",
+        "standing.rulerTroubleKinds.4": "legitimacy_crisis",
+        "standing.rulerTroubleKinds.5": "leadership_vacuum"
+      },
+      "dependents": [
+        "src/domain/density/densityCreateBoundary.js",
+        "src/domain/display/governanceAccount.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/domain/fortune/fortuneMerits.js",
+        "src/generators/economy/prosperity.js",
+        "src/generators/factionDynamics.js",
+        "src/generators/power/rulingStructure.js"
+      ],
+      "namedDependents": [
+        "src/domain/display/governanceAccount.js",
+        "src/domain/fortune/fortuneMerits.js",
+        "src/generators/economy/prosperity.js",
+        "src/generators/factionDynamics.js"
+      ]
     },
     "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING": {
       "exported": true,
@@ -9318,8 +9398,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 281,
-    "keys": 2296,
+    "tables": 282,
+    "keys": 2300,
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
