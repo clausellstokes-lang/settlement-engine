@@ -10,6 +10,14 @@ Branch `lane/depth-5-2026-11-22`, started at 96e193785 (DEPTH-4's saved tip, ver
   - `briefs/CURE-REWORD-LODGER.md` -> `lane/depth-5-2026-11-22-reword-wip` (red 9, the chair's words; the answers fixture by a step file).
   - RED 1 (A3e) INVESTIGATED (below): a stored figure, re-taken by its door after both merges (the cures must not move it).
 - Merged: nothing new yet. Not built: the ties; hooks tranche 3 (released by E54, after "DEPTH <commit>").
+  - 08:29 the reword builder STOPPED (report e467cd425): the old hash is typed in the base fixture's golden/hxd parts, which
+    `hookThemeTotality.walker` reads directly. RULED (brief ADDENDUM 1, 110196fc0): the step retires it in every part (tranche 1 never
+    shipped); ONE helper `tests/helpers/hookThemeAnswers.js` composes base and steps for both readers; the builder runs the digest door.
+- TRIAL MERGE of the line at f5295e425 (scratch, aborted; 08:33): six conflicts. Registers (line's side, then each door):
+  `docs/content/wiring-census.json`, `scripts/census/pool-dominance.register.json`, `tests/lint/.lighting-census-baseline.json`,
+  `tests/lint/presumptionClasses.register.json`. Tables: `factVocabulary.js :: FACT_DIMENSIONS` (union: the line's three rows, then
+  ours three); `registeredWords.js`: the line's `HOUSE_FAMILY_KINDS` and our `HOUSE_FAMILY_ATOMS`, disjoint keys: both kept, the
+  house entry's `atoms` the two concatenated and its `leaf` the line's where a kind answers, ours where an atom does (to the chair).
 - NEXT: read each builder's diff whole, re-run red/green, merge; the digest door; the fork register by its door; two-tree; tests/lint whole.
 
 ## RED 1, A3e, INVESTIGATED (2026-11-22, DEPTH-5)
