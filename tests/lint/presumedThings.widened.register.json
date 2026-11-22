@@ -1485,6 +1485,26 @@
     "2ebbd63d6a33ff5d"
    ]
   ],
+  "src/data/crisis/stakeReasonLines.js": [
+   [
+    "temple",
+    "root",
+    "the church gains while the seat struggles",
+    "6362016ab7cd7eab"
+   ],
+   [
+    "occupation",
+    "word",
+    "the occupier gains by it",
+    "735fba0c13964804"
+   ],
+   [
+    "armedForce",
+    "family",
+    "the military gains in a vacuum of governance",
+    "c9dfc07fb36b9cc3"
+   ]
+  ],
   "src/data/cultureProfiles.js": [
    [
     "quarters",
@@ -11308,12 +11328,6 @@
   ],
   "src/domain/crisis/crisisCast.js": [
    [
-    "temple",
-    "root",
-    "the church gains while the seat struggles",
-    "6362016ab7cd7eab"
-   ],
-   [
     "occupation",
     "word",
     "the occupier's local face",
@@ -11351,12 +11365,6 @@
    ],
    [
     "occupation",
-    "word",
-    "the occupier gains by it",
-    "735fba0c13964804"
-   ],
-   [
-    "occupation",
     "implied",
     "no occupying power on the roster",
     "c38b7e7dbbe0a6fb"
@@ -11384,12 +11392,6 @@
     "family",
     "leads the military",
     "cfa7229eec5be46e"
-   ],
-   [
-    "armedForce",
-    "family",
-    "the military gains in a vacuum of governance",
-    "c9dfc07fb36b9cc3"
    ],
    [
     "armedForce",
