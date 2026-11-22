@@ -89,8 +89,9 @@ THE BRANCHES (every one on origin, pushed by its own name; no pull request):
   (rename v36), mkdir `/var/tmp/v18/out/<seat>/g`, then `sh chain0.sh; sh after0.sh` in the background (npm ci, the ledger ref,
   `out/v28/seated/make-instruments.sh`, `out/v27/tell2/measure/pool.sh <checkout> /var/tmp/v18/t2/pool-<seat> v28tpl`, then chain1:
   typecheck, eslint, walkers, arms, --check, template `<seat>tpl` LOWER CASE, verify, both gates by `tell2.sh`, then the suites).
-- NOT RUN (this container's files do not outlive it): chain1's rest after "sv+handrows+born" (harnesses, the R3 gate, acceptance,
-  `tests/lint` whole: re-run by `chain1.sh`'s last four lines at the tip); (iv)'s re-pointed probe (`out/v36/seated/q36-chain.sh`:
+- RUN AT THE TIP (af708f2fd) AFTER THE SV RUN: harnesses rc=0; the R3 gate rc=0; acceptance 40 PASS; `tests/lint` WHOLE 17 files /
+  48 tests failed of 3,304 (22:43): the COUNT equals E127's 48 at the tip (the lane's 22 + R5-DESC's 26 designed composed-hosts rows),
+  files by name in `out/v36/seated/lint-whole-fails-af708f2fd.txt` (not read row by row here). NOT RUN: (iv)'s re-pointed probe (`out/v36/seated/q36-chain.sh`:
   a detached worktree at the tip with `out/v33/q/measure/` checked out from `lane/veil-33-2026-11-22-q-wip`, a node_modules link, the
   pool, template `t36q`; smoke, towns, pool modes through the mutex; analyzer `q-an.mjs`): a builder reads its output and hands figures.
 - THE CHAIR'S LAST READ OF THIS SEAT'S RECORD: 506,417 (21:55).
