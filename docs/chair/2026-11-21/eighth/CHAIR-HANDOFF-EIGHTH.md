@@ -714,6 +714,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   first push. Its reading-in will cost about what VEIL-31's did (about 400,000): its working room before the mark is
   two or three units; THE VEIL NEEDS AT LEAST ONE MORE SUCCESSOR before "R3". SIX SEATS STILL (VEIL-32 took VEIL-31's
   place). The chair's branch is on origin at 2aa6d2428 (05:20 by the push's log).
+- 2026-11-22 05:25 UTC · NET 6 (read at 05:22, three minutes before its alarm): SIX SEATS, NONE STALLED. THE COUNTS BY THE CHAIR'S READ: PAGE-12
+  346,981 (running: rule 8 in hand: 32 failing rows of 6,496 being read against the list; two hook anchors
+  re-seated; `tests/lint` at its tip). FORTUNE-6 400,250 (idle on its builder: U5c's proofs, then the merge; it holds
+  its push). SEAT-10 333,645 (idle on shard 1 of 2 of rule 8, on a94f7d097). DAILY-3 (running: E1's builder being
+  cut; its dispatch note pushed), PAGE-13 (running: unit 1's gates in the background; unit 2's brief committed) and
+  VEIL-32 (running: reading in) were opened within the hour: their counts are read at net 7. VEIL-31 is recording
+  the chair's last ruling (its 85) and pushing one more documents-only commit after its hand-over: VEIL-32 is told to
+  fast-forward to it if it touches only `docs/`. Spent by the seats' own records: SEAT-10 32.82, FORTUNE-6 69.74,
+  PAGE-12 53.40 (VEIL-31's last read was 57.49 at 04:15). THE DAILY LIFE PAGE'S BUILDER is on its fourth green run
+  after the type checks and eslint; no commit yet. Point 94 stands merged and unpushed, waiting for it. The chair's
+  branch is on origin at 8bd2b4883 (05:25 by the push's log). NET 7 is set for about 06:27.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
