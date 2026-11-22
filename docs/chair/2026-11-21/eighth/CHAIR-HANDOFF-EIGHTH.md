@@ -788,6 +788,42 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   was still running at 08:18 with 649 files done. Corrected to the owner by name in the next message; nothing was
   pushed on it. ITS CAUSE IN PART IS THE CHAIR'S OWN: six pushes of this branch in forty minutes, each a typecheck
   and a lint on the same four cores. SO: this branch is committed and NOT pushed while a local gate runs.
+- E59 · THE DAILY LIFE LINES IN THE PDF: WHERE THEY ARE DERIVED AND WHAT PRINTS (2026-11-22 08:58 UTC; DAILY-3's measure U4c-M: the PDF prints
+  from the OWNER's saved record: `generateSettlementPDF` to `buildViewModel({ settlement, dmView: true })`, no
+  `toPublicSafe` on the road). RULED: (1) DERIVED IN THE CHAPTER, not in `dailySlice` (one home, `deriveDailyLife`;
+  two callers, the tab and the chapter): no register moves and Foundry's reach is not widened for a slot it never
+  prints. (2) THE OWNER-ONLY SLOT `commoner_resentments_dm` DOES NOT PRINT IN THE PDF (a PDF is handed across the
+  table): pinned by a test. (3) The food callout unchanged; a saved AI account keeps today's rule. THE CHAIR'S EARLIER
+  WORD TO THE OWNER WAS WRONG AND IS CORRECTED TO HIM: it had said the PDF step would move a reference snapshot of
+  his: the measure shows NO golden and NO text pin moves (`goldenViewModel` holds).
+- E60 · THREE SMALL RULINGS FOR THE NEW SEATS (2026-11-22 08:58 UTC). PROSE-5: DS-ECO-11's sixth variant, the seat's wording as written: "Nothing
+  more can be taken from the {resource} at {settlement} until what was taken has had time to come back." (the pool's
+  fills are the fifteen renewable resources: all can "come back"); AND THE SEAT'S CORRECTION OF E45: the pool lost its
+  second grammar through the OLD v4 at 9513ba024, not through v6: the chair's note in the wiring census walker names
+  the wrong variant and is corrected by the seat in the commit that takes the literals back. Its line merge is a
+  plain `--no-ff` merge (docs-only difference). PAGE-14: its own permission check refused the merge of the built
+  unit: THE CHAIR MADE BOTH BASES (COMMON-EIGHTH 10) on `lane/page-14-2026-11-22-base`: 24220d68d (F5-NARROW's wip
+  merged, no conflict) and f4c9813dc (the line at 2486d1301 merged: two registers at the line's side, re-taken by the
+  seat). F5's two PACKED fragments are UNPACKED (COMMON-RULES 10 is the later rule). ARM (u): the seat's test-only
+  form: the arm wraps the narrow pass and admits a moved holding only if the pass changed its card's secret; the ten
+  pinned exact by size (village 2, town 1, city 4, metropolis 3); a plant red; the fixture stays d3937c3f8's.
+- E61 · THE CLOSE'S REHEARSAL, SECOND HOUR (2026-11-22 08:58 UTC). THE OBSERVED-SHAPE READERS' BASELINE AT POINT 98 IS THE LANE'S SIDE, THEN ITS
+  DOOR (the line holds schema rung 45; fortune brings rung 46 by its governed migration; the door refuses 45): it
+  amends E53's list of five registers to four and one; the landing helper stops if the bank or the identities read
+  higher than fortune's own (2215 findings / 1553 identities / 445 files; bank 79 / 53). THE LAWS' JOIN, CLOSE-1's
+  PLAN APPROVED: one new test over every `GENERATION_LAWS` row (no migration with every law lit; the converse; each
+  law lit alone marks only its own key; Apply and re-roll are births; both legacy edges; a live negative control
+  each; the ONE pin of `birthConfig(null)`); each lane's own saved-place file keeps only the arms that are its own;
+  a table in the brief maps every old arm to its new home; no `src` file. THE PIN OF "seat contested" IS NOT JOIN's:
+  the atom does not exist: it is the state-sentence lane's SEAT-TOWN (PROSE-5) and lands AFTER who rules' U6 cures
+  law 1's `contestedBy`. FOR THE FLIP'S RECIPE: both law rows' `why` text ("THE DIAL IS DARK") and the wiring test's
+  pin of it move at the flip. BOTH SAVED-PLACE TESTS PASS ON THE LIT REF (15 of 15).
+- E62 · FORTUNE'S SECOND MERIT: E57 AMENDED AT THE SEAT'S PAIR READING (2026-11-22 08:58 UTC). Where BOTH merits credit (3 of 46 places) the
+  first merit's line B before LASTING B said one claim twice: so the both-case has ONE fixed line of its own:
+  "{place} has also lasted {span}, and that too counts for {seat}."; A, B and C print only where LASTING credits
+  alone; the pool's table has four rows. Where the sentence directly before opens on the place's name (the three
+  bare standing lines), the lasting sentence opens on "It": only if the composer knows the sentence before at no
+  new draw. "FORTUNE 8cc9212fd" was named to FORTUNE-7 at 08:27; U7 is cut.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1187,6 +1223,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    variants, with a plant): accepted in form, read at the landing; FORTUNE-7's read-in commit is f13f31820 (the
    hand-back's section 6 is written for it). THE LOCAL GATE OF POINTS 94 TO 96: run A green (523 files, 3,960 tests),
    run B (the governing files) still going at 07:55. THIS CONTAINER HAS 4 CORES: no second gate here.
+- 2026-11-22 08:58 UTC · NET 9, AND THE LINE AT POINT 96. THE LINE IS PUSHED: `lane/join-2026-11-14` = 2486d1301 on origin (08:52:48 by the push
+   log): points 94, 95, 96, the rows 1bf1427dd and the four cures merged (E58). THE LOCAL GATE'S REPORT (the helper's,
+   read whole): lint at the top 6 red: the list's three and the three the cures answer; the checks 167 of 167 and 1113
+   of 1113, lint 0 errors, build clean; `tests/build` 15 red, all listed; run A 523 files 0 red; run B 760 files, 17
+   red, all listed; `raised-top.txt`: no ceiling raised but the ruled `HAND_CEILING` 74 (one ceiling moved DOWN:
+   prose numerics 184 to 183); writer-reach's closure sizes +2 a surface at point 96 (two modules of the trouble
+   lane). THE CHAIR'S OWN LINT ON THE JOINED TIP: 225 files, 3,395 tests, 3 red: the list's three. FIGURES: first
+   paint 1,180,086 / 375,348 / 314,994; the worker 2,682,827; the engine chunk 927,493. THE RED LIST: 27 rows left,
+   59 stand (six of the helper's cured titles were cut at 120 characters and were matched by their prefix);
+   LINE-NOW at point 96 (502827274). THE TIP SENT to DAILY-3, PAGE-13, PAGE-12, PROSE-5, PLACE-3, PEOPLE-3, GOALS-5,
+   DEPTH-5, FRAME-9 and (as a second base) PAGE-14. "FORTUNE 8cc9212fd" CAME at 08:19 (figures and reds by name in the
+   seat's message; one DRAFT table `FORTUNE_LAW_TUNING` for the owner): STACK-98 seated at 08:27 on its own machine,
+   waiting for STACK-97's register commits as its base. NET 9's READ (`list_sessions`, 08:55): TWENTY-ONE CHILD
+   SESSIONS, none failed, none blocked: FORTUNE-6 and VEIL-31 complete; STACK-98 and REVIEW-VEIL-15 idle by design
+   (each waits on one line from the chair); the rest working. THE ACCOUNT'S LIMIT STATUS still reads
+   `allowed_warning` (the seven-day window): by rule 23 and the owner's word it changes nothing. THE CHAIR'S OWN
+   RECORD still shows the figures of before its 07:37 compaction (it is one long turn since 07:41).
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
@@ -1234,3 +1287,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | DEPTH-5 | session_01ACmDYZwy2ZW4uoujqPNZ44 | `lane/depth-4-2026-11-20` 96e193785 | `lane/depth-5-2026-11-22` | the depth lane: nine reds cured, the line (it writes the trouble hooks' theme rows: a table to the chair first), "DEPTH"; then "DEPTH-TIES" after "WANTS" lands, and "DEPTH-HOOKS-3" |
 | FRAME-9 | session_01ACmDYXnwjzw5YzWaEc1KqQ | `lane/frame-8-2026-11-20` b2dee95f5 | `lane/frame-9-2026-11-22` | the session sheet: SR1's merge finished (six lint failures by their doors), F3 and F4, P1, the line and the mixed pick, "FRAME", the six sheets for the owner |
 | TRAD-6 | session_01ACmDYYaZ8cU8ZYJb7BBw95 | `lane/trad-5-2026-11-20` b97fd16f7 | `lane/trad-6-2026-11-22` | the traditions lane: unit 13's failures named, the 292 bytes itemized, "TRAD"; it merges NOTHING of the line |
+| STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61 |
