@@ -30,6 +30,32 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
   needs; the class-table and vocabulary rows for the join; the stored figures moved; tuning tables: none); (e) "DAILY-B
   <commit>" to the chair with the veil reader's line (the office atoms are NOT hideable: a faction card's floor keeps its
   name and isGoverning; the one writer of `hidden: true` is the infiltrator in `generators/power/stressFactions.js`).
+- FOR THE SUCCESSOR, THE LINE (the chair, 16:58): this lane holds the line at **1ec3e81d1 (point 97)**. The line is at
+  c110dd85b (point 98) and goes to point 102 in a few hours (fortune's second merit, who rules' second half, the
+  old-families cure, the close's fixture cure). Files both this lane and the line since 97 touch (planned, not met):
+  `scripts/.observed-shape-readers-baseline.json`, `scripts/mutation-coverage-manifest.json`,
+  `tests/lint/.lighting-census-baseline.json`, `tests/lint/samenessHideable.handPools.json`,
+  `tests/lint/samenessHideable.walker.test.js` (HAND_CEILING); `vite.config.js` (L8's lazy pin for `officeForms.js`; the
+  line touched it at 98); and, if 97's second half lands, `src/domain/rulingPower.js` / `src/domain/seat/seatTable.js`
+  (L8 READS them; it edits neither), `src/domain/facts/factVocabulary.js`, `registeredWords.js`, `factsOf.js` (L8 edits
+  them), `DailyLifeTab.jsx` (4b, 4c edit it). Registers: the line's side, then each by its door.
+- HAND_CEILING at the merge = the line's figure (77 at point 102) + this lane's 6 = 83, the six rows:
+  `commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM` (E1; also DM_BY_CONSTRUCTION's row), `commonerResentments.js ::
+  COMMONER_RESENTMENTS`, `foodCulture.js :: FOOD_CULTURE` (E2), `outsiderImpressions.js :: OUTSIDER_IMPRESSIONS`,
+  `recentChanges.js :: RECENT_CHANGES`, `unspokenTopics.js :: UNSPOKEN_TOPICS` (E3); every comment kept.
+- THE DARK PROOF for rule 8: the slots are DERIVED AT READ, never stored (M1: 0 of 900 born records carry a
+  `dailyLife` field), so no Daily Life line is written at birth. PROVE it, do not assume it: L8 touches
+  `registeredWords.js` and `factVocabulary.js`, which generation's coherence passes may read. The proof: M1's 900 births
+  on the line's tip and on the lane's tip, `JSON.stringify` of each record hashed (sha256 of the joined 900), equal, the
+  hash and the count said (a 30-line script beside the owner's in `owner/`, through the mutex). If unequal, name what
+  moved and why: then the whole directories are owed.
+- THE OWNER'S FILE is ONE script, `owner/owner-file.mjs` (tried once on this lane at c7a5b7f6b+, exit 0): BEFORE on a
+  detached worktree of the line's tip, AFTER on the lane's tip, each through the mutex:
+  `sh scripts/gate-mutex.sh --run -- node docs/chair/2026-11-20/content/daily/owner/owner-file.mjs <abs root> > owner/<before|after>.md`
+  (six places, seed `hxd-<size>-0`; the page's own slots: `DAILY_LIFE_PAGE_SLOTS` once 4c lands, else the three of
+  point 95; drop the mutex's first stdout line). Then `owner/OWNER-FILE.md` in plain words: the six places before and
+  after, every house a wording needs (section 3), the class and vocabulary rows (section 3), the stored figures moved,
+  no tuning table.
 - FOR THE CHAIR (open): the sameness census's stale row "Generate Daily Life: Narrative refinement" (its door refused on a
   rise outside this lane: hamlet NPCsTab InfoPill shareAll 1.00 > 0.7); `src/copy/en.js` `ai.dailyLife.*` keys with no
   reader (the owner's AI copy, left).
