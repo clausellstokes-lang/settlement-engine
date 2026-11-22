@@ -1,0 +1,121 @@
+== BEFORE: places of 100 holding any viability hook; the commonest masked hook (places / 100, of holders)
+thorp       holders 18   top 11  (11/18)  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+                next 5   "The settlement is starving, and its hungriest are turning to banditry."
+                next 1   "The settlement is starving, and its hungriest steal what food they can find."
+                next 1   "The settlement is starving. Its hungriest are turning to banditry, and a merchant has offe"
+hamlet      holders 19   top 10  (10/19)  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+                next 3   "The settlement is starving, and its hungriest are turning to banditry."
+                next 2   "One importer now holds all the grain that comes in from outside and has quadrupled its pri"
+                next 2   "Iron has doubled in price this season, and tools are being mended with scrap. Work slows, "
+village     holders 21   top 12  (12/21)  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+                next 3   "The iron carts are three weeks late and the carters will not say why. What iron there is g"
+                next 2   "A new toll on the iron road has made metal dear. People blame whoever set it, and the tool"
+                next 2   "The timber carts stopped coming a month ago, and the builders are bidding against each oth"
+town        holders 46   top 19  (19/46)  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+                next 8   "One importer now holds all the grain that comes in from outside and has quadrupled its pri"
+                next 4   "A new toll on the iron road has made metal dear. People blame whoever set it, and the tool"
+                next 4   "The iron carts are three weeks late and the carters will not say why. What iron there is g"
+city        holders 60   top 15  (15/60)  "Iron has doubled in price this season, and tools are being mended with scrap. Work slows, "
+                next 11  "The iron carts are three weeks late and the carters will not say why. What iron there is g"
+                next 11  "One importer now holds all the grain that comes in from outside and has quadrupled its pri"
+                next 10  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+metropolis  holders 74   top 16  (16/74)  "The settlement grows less food than it eats, and a merchant has offered to make up the dif"
+                next 14  "A new toll on the iron road has made metal dear. People blame whoever set it, and the tool"
+                next 13  "The iron carts are three weeks late and the carters will not say why. What iron there is g"
+                next 12  "One importer now holds all the grain that comes in from outside and has quadrupled its pri"
+
+== PER TEMPLATE: places of 100 holding it, by size (thorp hamlet village town city metropolis)
+F2.nothingBought         0    0    0    0    1    2   
+F3.sourceFailed          0    2    1    1    0    0   
+F4.poorHarvest           0    2    0    0    0    0   
+S1.starving              1    0    1    0    0    0   
+S1t.moderateGapTwin      11   10   12   19   10   16  
+S1s.starvingShut         5    3    0    0    0    0   
+S1b.starvingBesieged     1    1    0    0    0    0   
+S2.hoarded               0    0    0    0    1    3   
+S3.importer              0    2    0    8    11   12  
+S4.dam                   0    0    0    2    0    0   
+T2.rafts                 0    0    1    3    7    9   
+T2t.carts                0    0    2    1    7    5   
+T3.short                 0    0    1    1    4    4   
+I1.war                   0    0    0    1    0    1   
+I2.price                 0    2    1    4    17   11  
+I3.carts                 0    1    3    5    13   15  
+I4.toll                  0    0    2    5    2    14  
+
+== DISTINCT MASKED TEXTS PER TEMPLATE (slots that already vary)
+F2.nothingBought         1 text(s): 3× "No food can be bought in from outside now, so the grain already here i…"
+F3.sourceFailed          4 text(s): 1× "The hunt failed here this year, and what food can still be bought from…" | 1× "The fishing failed here this year, and what food can still be bought f…" | 1× "The crops failed here this year, and what food can still be bought fro…" | 1× "The crops failed here this year, and what food can still be bought fro…"
+F4.poorHarvest           1 text(s): 2× "A poor harvest somewhere else has spiked the price of grain. The settl…"
+S1.starving              1 text(s): 2× "The settlement is starving. Its hungriest are turning to banditry, and…"
+S1t.moderateGapTwin      1 text(s): 78× "The settlement grows less food than it eats, and a merchant has offere…"
+S1s.starvingShut         1 text(s): 8× "The settlement is starving, and its hungriest are turning to banditry.…"
+S1b.starvingBesieged     1 text(s): 2× "The settlement is starving, and its hungriest steal what food they can…"
+S2.hoarded               1 text(s): 4× "No food comes in by trade now, and what is left here is in a few hands…"
+S3.importer              1 text(s): 33× "One importer now holds all the grain that comes in from outside and ha…"
+S4.dam                   1 text(s): 2× "A town upstream has dammed the river or turned it: the water is low he…"
+T2.rafts                 1 text(s): 20× "The timber rafts stopped coming a month ago, and the shipwrights and b…"
+T2t.carts                1 text(s): 15× "The timber carts stopped coming a month ago, and the builders are bidd…"
+T3.short                 1 text(s): 10× "Timber is short this season, and the builders are bidding against each…"
+I1.war                   2 text(s): 1× "War has taken the iron: the metal suppliers sell to the armies first, …" | 1× "War has taken the iron: the metal suppliers sell to the armies first, …"
+I2.price                 2 text(s): 31× "Iron has doubled in price this season, and tools are being mended with…" | 4× "Iron has doubled in price this season, and metal for tools and repairs…"
+I3.carts                 2 text(s): 32× "The iron carts are three weeks late and the carters will not say why. …" | 5× "The iron carts are three weeks late and the carters will not say why. …"
+I4.toll                  2 text(s): 21× "A new toll on the iron road has made metal dear. People blame whoever …" | 2× "A new toll on the iron road has made metal dear. Nobody will say who s…"
+
+== CATEGORY / SEVERITY of the moderate-gap twin (S1t), by size
+thorp       7× Survival Crisis / critical | 1× Import-Dependent / medium | 3× Pressured / low
+hamlet      2× Import-Dependent / medium | 5× Survival Crisis / critical | 3× Pressured / low
+village     9× Survival Crisis / critical | 2× Pressured / low | 1× Import-Dependent / medium
+town        9× Survival Crisis / critical | 10× Pressured / low
+city        10× Survival Crisis / critical
+metropolis  16× Survival Crisis / critical
+
+== S1t holders: food band (printed / raw), route, market, granary, stores, food sources, importChannel
+n = 78
+band (shown/raw): 56× "pressured/secure" | 18× "pressured/pressured" | 4× "importDependent/importDependent"
+route:            78× "road"
+market:           49× true | 29× false
+guild:            48× true | 30× false
+granary:          45× true | 33× false
+mill:             57× true | 21× false
+docks:            78× false
+tavern:           55× true | 23× false
+lead source:      55× null | 10× "livestock" | 9× "grain" | 4× "game"
+stores (months):  37× "6+" | 33× "1-3" | 8× "3-6"
+importChannel:    76× "road trade" | 2× null
+grain import:     42× true | 36× false
+imports > 0:      76× true | 2× false
+war:              74× "peace" | 4× "at war"
+terrain:          31× "mountain" | 25× "desert" | 17× "forest" | 4× "hills" | 1× "plains"
+navigable:        78× false
+stress:           53× [] | 7× ["plague_onset"] | 4× ["succession_void"] | 2× ["indebted"] | 2× ["wartime"] | 2× ["mass_migration"] | 2× ["occupied"] | 2× ["infiltrated"] | 1× ["monster_pressure"] | 1× ["politically_fractured"] | 1× ["insurgency"] | 1× ["recently_betrayed"]
+deficitPercent:   78× "gap>0"
+
+== WRITER vs FINAL (C): the hooks the generateNarratives step returned against the final record
+hooks equal at the writer and on the final record: 553 / 600
+later steps that changed the hooks: none
+ctx._seed non-empty at the writer's step: 600 / 600; equals the birth seed: 600
+config._seed at the writer: 0 / 600; active stream seed form: hxd-thorp-0::generateNarratives
+
+facts at the writer (the thunk viability.js hands deriveSupplyRiskAnalysis) vs the final record, places that DISAGREE, all 600 / S1t holders:
+   route        0    / 0
+   market       0    / 0
+   guild        24   / 3   e.g. hxd-hamlet-0: false -> true
+   foodBand     0    / 0
+   foodBandRaw  0    / 0
+   foodSources  0    / 0
+   stores       0    / 0
+   surplus      0    / 0
+   war          0    / 0
+   terrain      0    / 0
+   water        0    / 0
+   inst         0    / 0
+   imports      0    / 0
+   crisis       0    / 0
+   inst keys that disagree: none
+
+== PER TEMPLATE AT THE WRITER (the generateNarratives step) where it differs from the final record (the drops of assembleSettlement.js :: storeTrueHooksOnly)
+S1.starving              writer 1    0    1    1    0    0     final 1    0    1    0    0    0   
+S1b.starvingBesieged     writer 1    1    0    0    0    1     final 1    1    0    0    0    0   
+S4.dam                   writer 1    4    5    2    7    5     final 0    0    0    2    0    0   
+S5.blockade              writer 1    4    1    3    6    8     final 0    0    0    0    0    0   

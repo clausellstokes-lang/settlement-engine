@@ -1,0 +1,45 @@
+SAME-2 brief H (hideable phase 3), THE MEASURE FIRST. Recorded 2026-11-20 by builder H on lane/same-2-hideable-2026-11-20,
+on the merged line (lane/same-2-2026-11-20 at 1c9673e84, which holds the join's 8196e5712) after unit 0 (26241a090:
+GOALS' two key lists on the hand list, HAND_CEILING 42 -> 44). A first, one-level pass on the base (src = 43ab0f5eb) already gave 158 reds.
+
+VERDICT: STOP. 184 lines would red (bar: about 40), and one pool cannot be read without a call on fabricated records.
+
+THE READING MEASURED (a scratch replica, nothing committed to the walker): each hand pool is walked to its leaves
+(arrays, objects of arrays, nested objects; metadata keys key/type/label/twinOf/needs/excludes/crisis/institutions/
+trade/dominant/arcane/colour/marks skipped). A leaf is a string, a function (called with one stub name), or a
+{ text | line } row. DECLARED = a row with `needs` or `marks`: rule 1 by atom (atomClass crime|hideable), rule 2
+lists its house atoms. BARE = every other line: CRIME_KEY_WORDS on its text. CRIME POOL = any key on its path matches
+CRIME_KEY_WORDS: every line reds unless dm-only (no hand line carries a dm-only mark).
+
+TOTAL: 2892 lines in 44 rows (42 pools importable; TENSION_CAUSES and TENSION_SIDE_MEANINGS are not on this line):
+314 declared, 2578 bare, 238 functions, 36 unreadable. RED 184 = 140 by crime key + 0 by atom + 70 by crime word
+(overlapping). Rule 2 would list 114 house readings. 8 declared rows hold a crime word in their text but need no crime fact.
+
+PER POOL (lines / declared / RED (key, atom, word) / houses) — pools with no red omitted except as noted:
+  arrivalProse ARRIVAL_TENSIONS              20 /   1 /   4 (4, 0, 0) / 0    key `criminal_governance`
+  institutionBacking BACKING_ARCHETYPES       8 /   0 /   1 (0, 0, 1) / 0
+  institutionDescVariants DESC_VARIANT_SIBLINGS 110 / 53 /  6 (6, 0, 1) / 38   keys are sentences: "Organised bands of hired blades", "guild-organised" cartographers (false)
+  institutionDescVariants INSTITUTION_DESC_VARIANTS 1038 / 0 / 116 (78, 0, 64) / 0   39 `<tier>|Criminal|<name>` keys x 2 lines; 64 word hits
+  institutionServices SERVICE_DESC_SIBLINGS  36 /   9 /   2 (2, 0, 1) / 4    key "Organised road transport" (false)
+  npcData NPC_FACTION_LOYALTY               174 /  33 /  18 (18, 0, 0) / 17  key `criminal`
+  npcData NPC_PERSONALITY_TRAITS            105 /   0 /   2 (0, 0, 2) / 0
+  npcData NPC_WANTS                          56 /   3 /   8 (8, 0, 0) / 3    key `criminal`
+  npcData STRESS_ECONOMIC_EFFECTS            36 /   0 /   2 (2, 0, 0) / 0    ALL 36 UNREADABLE: desc/tension are pairProse closures over (r, s) NPC records
+  people/goalFamilies GOAL_FAMILY_LINES     528 /  70 /  13 (12, 0, 1) / 7
+  people/goalSecretRefusals GOAL_SECRET_REFUSAL_ROWS 119 / 0 / 11 (10, 0, 2) / 0   keyed `criminal.any.criminal[n]`: card secrets
+  traditionProse TRAD_OUTCOME_PHRASE         18 /   0 /   1 (0, 0, 1) / 0
+  (no red) ARRIVAL_PEOPLE 56, ARRIVAL_SENSES 97, FOODWAYS_PRINT_SIBLINGS 8, HISTORY_DESC_SIBLINGS 57, HISTORY_QUARTER_WORDS 8,
+  ARRIVAL_SCENES 29, STRESS_NOTES 45, TERRAIN_NARRATIVE_HOOKS 48, GOAL_RESERVE_LINES 41, the npc trait/feature/speech lists,
+  the tradition corpus, and the key lists (TIER_ORDER, TOWN_PLUS_TIERS, WEEK_ORDINALS, CULTURES, MONSTER_THREAT_*,
+  GOAL_SECRET_REFUSAL_RARE_KEYS, GOAL_SECRET_REFUSED_CLUSTERS).
+
+THE WORD HITS (70 lines): organised/Organised 30, criminal/Criminal 17, underground 11, gang 5, shadow 2, corrupt 2,
+clandest 2, underworld 1. Most "organised" hits are innocent ("A body of spellcasters organised together", "guild-organised"
+carters); CRIME_KEY_WORDS was cut for pool KEYS, not free text.
+
+WHAT THE CHAIR RULES BEFORE UNIT 1 CAN BE BUILT:
+  (a) Most of the 140 key reds are lines whose house the veil may already withhold (a Criminal institution's description,
+      a criminal-faction NPC's loyalty and want, a card's criminal secret). Whether each is "withheld" needs the unit-2 proof
+      (`withheldBy`, path :: symbol) per pool, not a bank of ~180 rows.
+  (b) A free-text word list for BARE lines (CRIME_KEY_WORDS reds 30 innocent "organised" lines), or the key test alone.
+  (c) STRESS_ECONOMIC_EFFECTS: read by calling its closures on stub records (a render in all but name), or banked whole.

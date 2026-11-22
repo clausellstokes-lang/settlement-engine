@@ -25,7 +25,10 @@ describe('the port scene: a harbour row declares the docks; a shore row says onl
       if (HARBOUR.test(text)) expect(d.needs, text).toContain('docks');
       else expect(d.needs, text).toEqual(['coast']);
     }
-    expect(ARRIVAL_SCENES.port.filter((r) => !HARBOUR.test(/** @type {any} */ (r).text('X')))).toHaveLength(2);
+    // 2 -> 4 (L2, 2026-11-20; re-keyed by identity): L2 APPENDED two shore rows that declare `coast` and name no harbour ("The last
+    // stretch of road … runs beside the sea", "Gulls ride the wind above …"); the law above (a harbour word needs the docks, the rest
+    // need only the coast) is unchanged and holds of every row, the appended moorings row naming the harbour it declares
+    expect(ARRIVAL_SCENES.port.filter((r) => !HARBOUR.test(/** @type {any} */ (r).text('X')))).toHaveLength(4);
   });
 });
 
@@ -35,8 +38,13 @@ describe('the cold list\'s thorp, born as the app births it', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'thorp', selectedStressesRandom: false, selectedStresses: [], _randomizePriorities: true }), null, { seed: 'rw3-thorp-calm-1', customContent: {} }));
     expect(factsOf(s).hasInstitution('docks')).toBe(false);
     const opener = String(s.arrivalScene || '').split(/(?<=[.!?])\s+/)[0];
-    expect(opener).toMatch(/comes down to the sea|face to the open water/);
-    // anchored: the toMatch above proves this same opener is the shore row's live sentence
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35): the anchor was two shore rows' words (/comes down to the
+    // sea|face to the open water/); L2 APPENDED two shore rows and the draw moved to one of them ("Gulls ride the wind above …").
+    // The anchor is now COMPUTED from the pool's own export: the opener is one of the port rows that declare only the coast
+    const SHORE = ARRIVAL_SCENES.port.filter((r) => !HARBOUR.test(/** @type {any} */ (r).text('X'))).map((r) => /** @type {any} */ (r).text(s.name));
+    expect(SHORE.length).toBeGreaterThan(0);
+    expect(SHORE).toContain(opener);
+    // anchored: the toContain above proves this same opener is the shore row's live sentence
     expect(opener).not.toMatch(HARBOUR);
   });
 });

@@ -1,0 +1,65 @@
+TOWNS 300; both rows print on the Overview: 300; two steps or more apart: 26
+  by size: thorp 0/50 · hamlet 0/50 · village 10/50 · town 9/50 · city 6/50 · metropolis 1/50
+  pairs: [["relied-upon | CRITICAL",9],["relied-upon | WEAK",9],["none | ADEQUATE",6],["present | ADEQUATE",1],["present | STRONG",1]]
+  record reading == page reading in the far towns: 23/26
+  relied upon/integral beside Weak/Critical: 18; of them a divine-healing chain among the dependents: 16
+  none/present beside Adequate/Strong: 8
+
+WHAT CAPABILITY COUNTS: scores.magical against the magic presence (computeEffectiveMagicPresence) in the far towns
+  hxd-village-6: magical 0 (CRITICAL) · presence 30 [foraging areas] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-10: magical 0 (CRITICAL) · presence 30 [foraging areas] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-13: magical 0 (CRITICAL) · presence 33 [ancient grove] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-20: magical 0 (CRITICAL) · presence 30 [foraging areas] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-21: magical 25 (WEAK) · presence 37 [druid circle, ancient grove, foraging areas] · dial 50 · reliance relied-upon · deps ["Food supply"] · practitioners [] · supply "Druid Circle"
+  hxd-village-22: magical 0 (CRITICAL) · presence 38 [apothecary, village scribe, foraging areas] · dial 50 · reliance relied-upon · deps ["River Fishing","Divine & Magical Healing"] · practitioners [] · supply "House of worship and Priest"
+  hxd-village-34: magical 0 (CRITICAL) · presence 33 [ancient grove] · dial 50 · reliance relied-upon · deps ["Livestock & Dairy","Divine & Magical Healing"] · practitioners [] · supply "House of worship and Priest"
+  hxd-village-39: magical 0 (CRITICAL) · presence 30 [foraging areas] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-41: magical 0 (CRITICAL) · presence 28 [-] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-village-43: magical 0 (CRITICAL) · presence 28 [-] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "House of worship"
+  hxd-town-11: magical 41 (ADEQUATE) · presence 41 [alchemist shop, scroll scribe, ancient grove] · dial 50 · reliance present · deps [] · practitioners ["Scroll scribe"] · supply null
+  hxd-town-13: magical 31 (WEAK) · presence 37 [apothecary, ancient ruins, foraging areas] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "Houses of worship"
+  hxd-town-22: magical 43 (ADEQUATE) · presence 43 [ley line node] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-town-25: magical 43 (ADEQUATE) · presence 43 [ley line node] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-town-27: magical 46 (ADEQUATE) · presence 46 [ley line node, ancient ruins] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-town-29: magical 28 (WEAK) · presence 28 [-] · dial 50 · reliance relied-upon · deps ["Grain & Bread","River Fishing","Brewing & Malting","Divine & Magical Healing"] · practitioners [] · supply "Houses of worship and Monastery or friary"
+  hxd-town-40: magical 42 (ADEQUATE) · presence 42 [elder grove council, ancient grove, foraging areas] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-town-44: magical 36 (WEAK) · presence 36 [alchemist shop, apothecary] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "Houses of worship"
+  hxd-town-45: magical 39 (WEAK) · presence 39 [apothecary, ancient grove, foraging areas] · dial 50 · reliance relied-upon · deps ["Herbalism & Remedies","Divine & Magical Healing"] · practitioners [] · supply "Houses of worship and Monastery or friary"
+  hxd-city-7: magical 46 (ADEQUATE) · presence 46 [apothecary, alchemist quarter, elder grove council] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-city-9: magical 33 (WEAK) · presence 33 [ancient grove] · dial 50 · reliance relied-upon · deps ["Divine & Magical Healing"] · practitioners [] · supply "Houses of worship"
+  hxd-city-12: magical 39 (WEAK) · presence 39 [apothecary, ancient grove, foraging areas] · dial 50 · reliance relied-upon · deps ["Herbalism & Remedies"] · practitioners [] · supply "Apothecary district"
+  hxd-city-15: magical 39 (WEAK) · presence 39 [apothecary, mages' guild] · dial 50 · reliance relied-upon · deps ["spellcasting","divine_healing"] · practitioners ["Mages' guild"] · supply "Mages' guild, Houses of worship and Multiple monasteries"
+  hxd-city-21: magical 41 (ADEQUATE) · presence 41 [apothecary, alchemist quarter, foraging areas] · dial 50 · reliance none · deps [] · practitioners [] · supply null
+  hxd-city-39: magical 39 (WEAK) · presence 39 [apothecary, mages' guild] · dial 50 · reliance relied-upon · deps ["spellcasting","divine_healing"] · practitioners ["Mages' guild"] · supply "Mages' guild and Houses of worship"
+  hxd-metropolis-14: magical 70 (STRONG) · presence 70 [apothecary, enchanter's shop, academy of magic, ancient grove] · dial 50 · reliance present · deps [] · practitioners ["Academy of magic","Enchanter's shop"] · supply null
+
+THE MAGIC TAB HEADLINE (deriveMagicPosture().display) across the 300: [["Medium",300]]; dial (config.priorityMagic): [[50,300]]
+
+THE LINE: 26 towns carry it; far towns without it: none; lined towns not far: none
+  hxd-village-6: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-10: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-13: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-20: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-21: The village leans on magic for food (druidic provision), but its arcane strength is weak.
+  hxd-village-22: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-34: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-39: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-41: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-village-43: The village leans on magic for Divine & Magical Healing, but its arcane strength is very weak.
+  hxd-town-11: Nothing in the town depends on magic, though its arcane strength is fair.
+  hxd-town-13: The town leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+  hxd-town-22: Nothing in the town depends on magic, though its arcane strength is fair.
+  hxd-town-25: Nothing in the town depends on magic, though its arcane strength is fair.
+  hxd-town-27: Nothing in the town depends on magic, though its arcane strength is fair.
+  hxd-town-29: The town leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+  hxd-town-40: Nothing in the town depends on magic, though its arcane strength is fair.
+  hxd-town-44: The town leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+  hxd-town-45: The town leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+  hxd-city-7: Nothing in the city depends on magic, though its arcane strength is fair.
+  hxd-city-9: The city leans on magic for Divine & Magical Healing, but its arcane strength is weak.
+  hxd-city-12: The city leans on magic for Herbalism & Remedies, but its arcane strength is weak.
+  hxd-city-15: The city leans on magic for Spellcasting Services and Divine & Magical Healing, but its arcane strength is weak.
+  hxd-city-21: Nothing in the city depends on magic, though its arcane strength is fair.
+  hxd-city-39: The city leans on magic for Spellcasting Services and Divine & Magical Healing, but its arcane strength is weak.
+  hxd-metropolis-14: Nothing in the metropolis depends on magic, though its arcane strength is strong.
+  headline caption: [["Magic in the world at large, not the thorp's own:",50],["Magic in the world at large, not the hamlet's own:",50],["Magic in the world at large, not the village's own:",50],["Magic in the world at large, not the town's own:",50],["Magic in the world at large, not the city's own:",50],["Magic in the world at large, not the metropolis's own:",50]]

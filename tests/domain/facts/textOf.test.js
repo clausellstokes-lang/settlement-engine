@@ -71,6 +71,11 @@ describe('textOf', () => {
     // 4 + 4 + 1 = 9. The dyer's, the tanners' dominant, the smiths', the brought-in and the work party's twins are reworded, not added.
     // 242 -> 244 (BAR8-SCENES, 2026-11-17, the chair's BR23 (1) and (3); re-keyed by identity): two declared twins join, the small
     // working quarry's ("A laden cart or two …") and enchanting offered with the arcane trade not at work ("Signs in … still offer …")
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(244);
+    // 244 -> 290 (L2, 2026-11-20, the arrival paragraph's thin pools deepened; re-keyed by identity, this unit's own count): of the
+    // 76 lines APPENDED to the arrival tables (docs/chair/2026-11-20/content/page/L2-LINES.md), 40 are declared objects, and the
+    // chair's cures of 15:35 declare six bare ones (fish dominant [6]-[8] `trade at work: fish`, arcane dominant [7]-[9]
+    // `trade at work: arcane`): 40 + 6 = 46. No existing row changed shape.
+    // 290 -> 293 (L2, the chair's three fish twins of 17:13; re-keyed by identity): the twins of fish dominant [6]-[8] join.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(293);
   });
 });

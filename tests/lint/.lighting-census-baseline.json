@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "31a053445069b18f67ab296e4551505be1bf9ffa",
-  "measuredBy": "chair landing helper, point 84 (kernel-mix bd42d63c7 + goals-3 f721d11cd)",
-  "date": "2026-11-20",
-  "note": "the line at point 84: the kernel commit (bd42d63c7) adds test titles to tests/kernel/proseHash.test.js, merged with GOALS-3 at f721d11cd",
-  "files": 3712,
-  "parked": 475,
-  "credited": 3237,
-  "titles": 31257,
-  "suiteTitles": 8659
+  "measuredAtSha": "6d581ce5b33c1dcd2bd5968f14258294f3707398",
+  "measuredBy": "landing-stack-92",
+  "date": "2026-11-22",
+  "note": "points 92 and 93: the sameness join and the people lane's first half landed (their test files), and the phone chrome floor's re-record",
+  "files": 3741,
+  "parked": 478,
+  "credited": 3263,
+  "titles": 31570,
+  "suiteTitles": 8751
 }

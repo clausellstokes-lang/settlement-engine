@@ -111,12 +111,13 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // on magic, from the one leaf that counts the dependents (`magicProvisionShown.js :: magicDependentChainsShown`,
   // `foodAmongMagicDependents`): each chain under the name it prints through its leaf (`chainPrintName`), the food
   // supply as the Economics tab's food row names it ("by divine provision"). Only where the word says magic is relied on.
-  const relyNames = reliance.reliesOnMagic ? [...new Set([
-    ...magicDependentChainsShown(settlement).map(c => chainPrintName(c, settlement).label).filter(l => typeof l === 'string' && l !== ''),
-    ...(foodAmongMagicDependents(settlement) ? [`food (${magicFoodChannelWord(foodRowShown(settlement, false)?.fb.magicFoodNote)} provision)`] : []),
-  ])] : [];
-  const relyHead = relyNames.slice(0, -1).join(', ');
-  const relyFor = relyNames.length < 2 ? relyNames.join('') : `${relyHead} and ${relyNames[relyNames.length - 1]}`;
+  // PAGE-1 MAGIC: the names are read from one leaf (`magicMeasuresApart.js :: magicRelyNames`), which the Overview's
+  // line under the reliance word reads too, so the two pages name what the town leans on in the same words.
+  // PAGE-4 MAGIC-AUDIENCE: through the one gate both read (`magicRelyNamesPrinted`, the gates this line already sits
+  // under), so the Overview never names what this tab does not print, for any audience.
+  const relyFor = spokenList(magicRelyNamesPrinted(settlement));
+  // PAGE-1 MAGIC (F3c): the headline word is the dial's band (the magic around the town), so a caption says so.
+  const headlineScope = magicHeadlineScope(settlement);
   // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
   // owner's player view drew, shipped at the save (`magic`); unstamped, SILENT (magicDeskRead.js).
   const magicProse = magicDeskRead(settlement, { publicDossier, playerView });
@@ -134,6 +135,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
       <div style={{
         fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4,
       }}>Magic</div>
+      {posture.magicExists && headlineScope && <div data-testid="magic-headline-scope" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: '0 0 2px' }}>{headlineScope}</div>}
       <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>{posture.display}</p>
 
       {posture.magicExists ? (
@@ -228,6 +230,5 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 }
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
 import { religiousAcceptanceUnderHeresy } from '../../../domain/facts/heresyStance.js'; // HR2 (BAR6-CULTURE): the row reads the heresy flag the Faith tab's line reads
-import { foodAmongMagicDependents, magicDependentChainsShown, magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
-import { magicFoodChannelWord } from '../../../domain/display/foodBalanceBar.js'; // L1b: the food row's own channel word
-import { foodRowShown } from '../../../domain/display/foodRowShown.js'; // L1b: the food record as the food row prints it
+import { magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
+import { magicHeadlineScope, magicRelyNamesPrinted, spokenList } from '../../../domain/display/magicMeasuresApart.js'; // PAGE-1 MAGIC: the reliance names and the headline caption, one home
