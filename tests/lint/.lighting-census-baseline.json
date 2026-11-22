@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "acf568ac2ef7601add7d11b0e4b6763b1ba315d3",
-  "measuredBy": "STACK-98",
+  "measuredAtSha": "6e3577d19e9422d1e138e82dcc4e68c12933c085",
+  "measuredBy": "FORTUNE-7",
   "date": "2026-11-22",
-  "note": "point 98: lane/fortune-6-2026-11-21 at 8cc9212fd merged on the line at 1ec3e81d1 (the fortune law, its merits and their tests)",
-  "files": 3769,
+  "note": "FORTUNE-B at the line point 98 (c110dd85b) merged: the lane U7 and U7b test files, tests/domain/fortuneLastingVeil.test.js and tests/domain/fortuneLastingSentence.test.js, and their titles",
+  "files": 3771,
   "parked": 485,
-  "credited": 3284,
-  "titles": 31819,
-  "suiteTitles": 8824
+  "credited": 3286,
+  "titles": 31839,
+  "suiteTitles": 8831
 }
