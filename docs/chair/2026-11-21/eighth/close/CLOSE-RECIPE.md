@@ -16,10 +16,29 @@ Every step of the worklist's items (3), (4), (5) and (8), as exact commands in o
 sed -i 's/^export const NEW_SETTLEMENT_SEAT_LAW_VERSION = DEFAULT_SEAT_LAW_VERSION;$/export const NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION;/' src/domain/seat/seatLaw.js
 sed -i 's/^export const SEAT_CONTEST_LIT = false;$/export const SEAT_CONTEST_LIT = true;/' src/domain/seat/seatCircumstances.js
 sed -i 's/^export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;$/export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION;/' src/domain/fortune/fortuneLaw.js
-git diff --stat   # exactly 3 files, 3 lines
+git diff --stat   # exactly 3 files, 3 lines (then step 1b's one row: 4 files in the flip's commit)
 ```
 Printed: 3 files changed, 3 insertions(+), 3 deletions(-). Proof: `birthConfig({settType:'town'})` mints
 `_seatLawVersion: 2` and `_fortuneLawVersion: 2`; both saved-place tests 15/15 on the lit tree.
+
+### 1b. THE ONE FACT-LAYER ROW THAT MOVES IN THE FLIP'S OWN COMMIT (the chair's E91; leave under COMMON-RULES 6 for this row only)
+Lit, the seat contest reads the circumstances and the cast inside `domain/dossier/powerStrata.js :: derivePowerStrata`
+(CONFIRMED by `census/path-probe.mjs`: npcs and tier by `coupContenders` → `holderOfSeat.js :: holderOf` →
+`dossier/seatHolder.js :: seatCandidatesOf`; stress and stressors by `seatCircumstances.js :: seatCircumstancesOf` →
+`stressTypesOf`; economicState by the circumstance tests `hunger`, `trade_wealth`, `craft_led` via `incomeOf`). The
+walker wants a row to declare EXACTLY what its leaf touches, and dark the leaf touches three fields only, so the row
+moves WITH the dials, never before. In `src/domain/facts/factLayers.js :: LEAVES`, replace
+```
+  powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure', 'config', '_config'],
+```
+by
+```
+  powersList: leaf({ layer: 4, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure', 'config', '_config', 'economicState', 'npcs', 'stress', 'stressors', 'tier'],
+```
+(and move the row under the `// ── layer 4: over the cast ──` heading). PROOF: `tests/lint/factLayers.walker.test.js` whole,
+lit. REHEARSED in a copy of the lit scratch (`census/all-leaves.mjs`): powersList clean; the other failing leaves exactly
+the dark tree's 8 banked (warState, crisis, defence, guardPresence, soldiers, commander, crime, faith); no row names
+powersList. The walker's own file run: see FLIP-CENSUS.md part 4.
 
 ### 1a. THE TEXTS OF DARKNESS THAT MOVE WITH THE FLIP (E61 (7); every one met so far)
 | where | what says "dark" | at the flip |

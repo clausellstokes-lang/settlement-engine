@@ -91,3 +91,9 @@ the VIOLATION. PLAUSIBLY by `rulingPowerCoup.js :: coupContenders`, whose lit co
 circumstances and the cast. Two cures, the chair's to rule: the contest does not read the cast inside that leaf (a src
 cure of the seat lane), or the row is re-declared and re-layered by the chair's leave (COMMON-RULES 6). Neither lane's
 own census ran `tests/lint` lit: JOIN.
+
+RULED (the chair's E91, 15:13 UTC): NOT a lane's fault but an EXPECTED MOVE OF THE FLIP: the lit contest is meant to
+read the circumstances and the cast; the leaf's row moves to layer 4 with its eight reads IN THE FLIP'S OWN COMMIT
+(`CLOSE-RECIPE.md` step 1b). The path is CONFIRMED by `census/path-probe.mjs`; the row change REHEARSED in a copy of the
+lit tree by `census/all-leaves.mjs`: no knock-on. For the veil (the chair carries it): the contenders list read from
+the cast on a shared read goes on the security reader's list.
