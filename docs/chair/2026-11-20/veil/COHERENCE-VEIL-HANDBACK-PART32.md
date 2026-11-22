@@ -94,6 +94,17 @@ verified by ls-remote).
     phrase): cured on the lane, NEVER by raising a baseline; (b) THE OLD BASE'S (shown green on the working line's tip by name):
     they leave at the join and are only listed. The list is section 2b. (3) A SLIP, SAID: the seat wrote "00:5x" in a message; an
     hour is read from `date -u` in the command that writes it.
+80. THE CHAIR, 02:28 UTC 2026-11-22: UNIT (ii) ACCEPTED (GATE-2 34 -> 26; svc.criminal and income closed; the typecheck slip and
+    its cure recorded). THE TWO STOPS RULED AS RECOMMENDED, EACH ON ONE CONDITION SHOWN FIRST: birth the house-free TWIN (the same
+    seed, the withheld houses absent) and show its value. (1) sp.crimeTypes, r3m-city-under_siege-1-108: if the twin under the same
+    siege shows "black market food", it STAYS, LOWER BY RULE under VR39, listed. (2) sp.ops, r3m-town-infiltrated-0-12 and
+    r3m-town-insurgency-0-14: if the twin lists "Gambling Den", it STAYS (withholding it would be an absence no open place shows),
+    listed. If a twin does NOT show it: not kept; the twin's value to the chair. BOTH go into "R3 <commit>" BY TOWN WITH THE TWIN'S
+    EVIDENCE (the fresh reader judges them cold). inst.criminal / chains.criminal: after (iii), the pages and the forms.
+    MET 02:32 (`out/v31/twins/twins.json`, the R3 gate's own birth, `twins.probe.jsx`): (1) twin crimeTypes ["Survival crime",
+    "black market food"]: STAYS; (2) both twins' ops ["Gambling Den"]: STAYS. A NEW FINDING sent with it (unruled): the twin shows a
+    type the served page lacks: siege city "Survival crime" (the map credits it to hasCriminalInst; the twin, with no criminal house,
+    writes it), insurgency town "Background crime" (the engine's fallback; served has none): an absence no open place shows.
 
 ## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
 | file | failed tests | sort (a) lane / (b) old base |
@@ -127,3 +138,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 02:19 the lane's push REFUSED by the pre-push typecheck ratchet (section 1); the builder resumed for the cure.
 - 02:22 the cure c60daddd2 re-run and merged; the lane pushed.
 - 02:26 the unit (ii) line to the chair (the two STOPS with recommendations). 02:27 unit (iii)'s fresh builder seated.
+- 02:31 the chair's 02:28 ruling (80) read; the seat's correction sent (unit (iii) is a FRESH builder). 02:32 the twins measured; sent. 02:32 recorded.
