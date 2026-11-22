@@ -1,0 +1,4 @@
+import { readFileSync } from 'node:fs';
+const a = JSON.parse(readFileSync(process.argv[2])); const b = JSON.parse(readFileSync(process.argv[3]));
+const diff = (x, y, at = '') => { if (JSON.stringify(x) === JSON.stringify(y)) return []; if (!x || !y || typeof x !== 'object' || typeof y !== 'object') return [[at, x, y]]; return [...new Set([...Object.keys(x), ...Object.keys(y)])].flatMap((k) => diff(x[k], y[k], at ? `${at}.${k}` : k)); };
+for (const seed of Object.keys(a)) { const d = diff(a[seed], b[seed]); console.log(`== ${seed} (${a[seed].powerStructure?.factions?.find((f) => f.isGoverning)?.faction}; stress ${JSON.stringify(a[seed].stress?.type ?? a[seed].stress)?.slice(0,40)}) ${d.length} paths`); for (const [p, x, y] of d.slice(0, 6)) console.log(`  ${p}\n    - ${String(x).slice(-170)}\n    + ${String(y).slice(-170)}`); }

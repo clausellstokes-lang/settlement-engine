@@ -1,0 +1,54 @@
+== lm-city-108 (Merchant oligarchy; stress "succession_void") 2 paths
+  powerStructure.factions.0.desc
+    - ocal reach; a consistent civic presence without yet being the dominant commercial voice. They hold the Merchant oligarchy, and nothing it decides is decided without them.
+    + Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice. They held the Merchant oligarchy's seat, and it stands empty now.
+  powerStructure.factionRelationships.1.narrative
+    - Whoever comes before the Merchant oligarchy comes before the Merchant Guilds.
+    + The Merchant oligarchy is the office here, and the seat the Merchant Guilds held in it stands empty.
+== lm-city-47 (Merchant oligarchy; stress "succession_void") 2 paths
+  powerStructure.factions.0.desc
+    - ith local reach; a consistent civic presence without yet being the dominant commercial voice. They are the ones who sit in the Merchant oligarchy, and its word is theirs.
+    + hants with local reach; a consistent civic presence without yet being the dominant commercial voice. The Merchant oligarchy was theirs, and no one sits in its seat today.
+  powerStructure.factionRelationships.1.narrative
+    - It is the Merchant Guilds who sit in the Merchant oligarchy.
+    + The Merchant oligarchy's seat was filled by the Merchant Guilds, and no one fills it now.
+== lm-metropolis-119 (Grand Council; stress "succession_void") 2 paths
+  powerStructure.factions.1.desc
+    -  nothing it decides is decided without them. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+    + and Council's seat, and it stands empty now. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  powerStructure.factionRelationships.1.narrative
+    - The Grand Council is how this place is ruled, and the Merchant Guilds rule through it.
+    + The Merchant Guilds sat in the Grand Council until its seat fell empty.
+== lm-metropolis-51 (Grand Guild Consortium; stress "succession_void") 2 paths
+  powerStructure.factions.1.desc
+    - sortium's seat, and answer for what it does. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+    + s theirs, and no one sits in its seat today. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  powerStructure.factionRelationships.1.narrative
+    - The Merchant Guilds sit in the Grand Guild Consortium and make its rulings.
+    + The Merchant Guilds sat in the Grand Guild Consortium until its seat fell empty.
+== lm-metropolis-89 (Grand Council; stress "succession_void") 2 paths
+  powerStructure.factions.1.desc
+    -  Council, and what it orders is their order. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+    + and Council's seat, and it stands empty now. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  powerStructure.factionRelationships.1.narrative
+    - Whoever comes before the Grand Council comes before the Merchant Guilds.
+    + The Grand Council is the office here, and the seat the Merchant Guilds held in it stands empty.
+== lm-thorp-78 (Feudal Stewardship; stress "succession_void") 1 paths
+  powerStructure.factions.0.desc
+    - Hereditary or institutional claim; has legal arguments; lacks popular support. They hold the Feudal Stewardship, and nothing it decides is decided without them.
+    + Hereditary or institutional claim; has legal arguments; lacks popular support. The Feudal Stewardship was theirs, and no one sits in its seat today.
+== lm-town-125 (Guild Council; stress "succession_void") 2 paths
+  powerStructure.factions.1.desc
+    -  nothing it decides is decided without them. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+    + s theirs, and no one sits in its seat today. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  powerStructure.factionRelationships.1.narrative
+    - The Merchant Guilds sit in the Guild Council and make its rulings.
+    + The Merchant Guilds sat in the Guild Council until its seat fell empty.
+== lm-town-29 (Feudal Appointee; stress "succession_void") 1 paths
+  powerStructure.factions.0.desc
+    - appointed to govern in their name, which raises questions about why the steward exists at all. They sit in the Feudal Appointee themselves, and its rulings are their own.
+    + the steward appointed to govern in their name, which raises questions about why the steward exists at all. They held the Feudal Appointee's seat, and it stands empty now.
+== lm-town-31 (Feudal Appointee; stress "succession_void") 1 paths
+  powerStructure.factions.0.desc
+    -  appointed to govern in their name, which raises questions about why the steward exists at all. They are the ones who sit in the Feudal Appointee, and its word is theirs.
+    + han the steward appointed to govern in their name, which raises questions about why the steward exists at all. They sat in the Feudal Appointee until its seat fell empty.
