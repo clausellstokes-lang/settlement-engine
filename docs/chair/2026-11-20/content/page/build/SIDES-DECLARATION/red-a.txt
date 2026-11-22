@@ -1,0 +1,63 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 18012 after 10 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/sides-decl
+
+ ❯ tests/domain/display/tensionSidesServed.test.js (4 tests | 2 failed) 459ms
+     ✓ the planted records: every row at every place, H holding every house it presumes and its one power, W without them 19ms
+     × (a) the sole criminal power's named fill: the owner's page prints the power's name; (b) the `organised crime` atom: the twin prints "Lawbreakers" 12ms
+     ✓ every row at every place, under each of the five projections, prints the twin's sides where the projection hid the house or the power and the owner's where it hid nothing; the reds are the pinned states 233ms
+     × (D) the pinned state exists: under the gallery veil's default set the criminal house is gone, its power's row left, `organised crime` answers yes and the served page names the power 193ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/tensionSidesServed.test.js > the sides table on a served document: every row, every place, the five projections > (a) the sole criminal power's named fill: the owner's page prints the power's name; (b) the `organised crime` atom: the twin prints "Lawbreakers"
+AssertionError: (a) crime_wave/base: expected 'Criminal organisations' to be 'The Hollow Hand' // Object.is equality
+
+Expected: "The Hollow Hand"
+Received: "Criminal organisations"
+
+ ❯ tests/domain/display/tensionSidesServed.test.js:168:64
+    166|       const name = solePowerNameOf(H, 'criminal', true);
+    167|       expect(name).toBe(POWER_OF['criminal power'].faction);
+    168|       expect(shownOf(H, t)[p.slot], `(a) ${p.kind}/${p.form}`).toBe(/*…
+       |                                                                ^
+    169|       expect(shownOf(W, t)[p.slot], `(b) ${p.kind}/${p.form}`).toBe(sh…
+    170|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/display/tensionSidesServed.test.js > the sides table on a served document: every row, every place, the five projections > (D) the pinned state exists: under the gallery veil's default set the criminal house is gone, its power's row left, `organised crime` answers yes and the served page names the power
+AssertionError: toPublicSafe + default veil :: Criminal organisations :: crime_wave/base/2: expected [ [ 'Those in charge', …(2) ], …(2) ] to deeply equal [ [ 'Those in charge', …(2) ], …(2) ]
+
+- Expected
++ Received
+
+@@ -2,8 +2,8 @@
+    [
+      "Those in charge",
+      "Vigilantes",
+      "Criminal organisations",
+    ],
+-   "The Hollow Hand",
++   "Criminal organisations",
+    "Lawbreakers",
+  ]
+
+ ❯ tests/domain/display/tensionSidesServed.test.js:196:63
+    194|       // the served page prints the owner's sides, the power's name at…
+    195|       const slot = Number(v.place.split('/')[2]);
+    196|       expect([v.served, v.served[slot], v.twin[slot]], v.key).toEqual(…
+       |                                                               ^
+    197|     }
+    198|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  08:44:29
+   Duration  2.21s (transform 1.12s, setup 61ms, import 1.55s, tests 459ms, environment 0ms)
+
+[gate-tail] end:  08:44:32 up 58 min,  0 user,  load average: 1.13, 1.36, 1.66
+[gate-tail] full log: /tmp/gate-tail.18829.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

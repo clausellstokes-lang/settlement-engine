@@ -48,6 +48,7 @@
  *                    called. The reds standing on 1c9673e84 are the bank's `hand` rows (pool, text hash, why); the
  *                    houses are the readings' `hand` rows. A seat's hand row whose table is not on this line is skipped.
  *   UNREAD           (the chair, 04:19 UTC 2026-11-22) a hand row declared in `UNREAD_ON_THIS_LINE` is skipped as such a row is, and `unreadFaults` reds it once any file under `src/` imports its module.
+ *   WORD-KEYED       (the chair, 07:11 UTC 2026-11-22) a table in `WORD_KEYED` is keyed by a side's own words: its keys are read by `CRIME_KEY_WORDS` whatever their length, outside the SENTENCE KEYS arm; a table in `PRESUMES_AS_NEEDS` has its `presumes` read as declared needs.
  *
  * It renders nothing and births nothing: seconds.
  *
@@ -189,6 +190,14 @@ const EXEMPT = Object.freeze({
     reason: 'a trouble\'s hooks are withheld by default on every shared read, the DM door (`gallery_share_dm`) included; shown only where the owner opens the DM door AND the hooks\' eye; in that state a hook whose need is a house still veiled is served. That state is LISTED for the security reader, eleven rows: WITHHELD 5 (crime_wave 2, 10, 12 and guild_conflict 12 by crime facts, crime_wave 11 by veiled powers); LISTED 6 (crime_wave 9, external_threat 8, succession_crisis 1, 2, 3, 8)',
     withheldBy: 'src/domain/display/publicSafe.js :: PRIVATE_KEY_RE',
     provedBy: "tests/domain/display/troubleHooksShared.test.js :: (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served",
+  },
+  // THE SIDES TABLE (PAGE-13's SIDES-DECLARATION, the chair's ruling of 07:11 UTC 2026-11-22): its real declaration, with
+  // its one reader in hand (the display lane's `tensionShown.js`), in place of its UNREAD_ON_THIS_LINE row.
+  'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS': {
+    class: 'trouble',
+    reason: 'a trouble\'s sides are printed only by the one reader, which reads only the document in hand: for every row at every place (162 placements), a planted record holding the houses the row presumes and its one power of the kind it means, and its twin without them, under the five projections a non-owner page is given (toPublicSafe, toPublicSafe full, publicVeiledRecordOf, and the first two through the gallery veil\'s default set): the served record prints the twin\'s sides wherever the projection hid the house or the power, and the owner\'s where it hid nothing. FOUR STATES ARE PINNED, NOT HELD (owed to the share veil\'s instrument; LISTED for the security reader): "Criminal organisations" at crime_wave/base/2 and crime_wave/unanchored/2 under the default veil over toPublicSafe and over toPublicSafe full, where the criminal house leaves institutions[] whole and the criminal power\'s row stays in powerStructure.factions[], so organised crime answers yes and the power is named. Its presumed houses are rule 2\'s listed readings',
+    withheldBy: 'src/domain/display/tensionShown.js :: tensionSidesShown',
+    provedBy: 'tests/domain/display/tensionSidesServed.test.js :: every row at every place, under each of the five projections, prints the twin\'s sides where the projection hid the house or the power and the owner\'s where it hid nothing; the reds are the pinned states',
   },
 });
 
@@ -403,6 +412,23 @@ export const isCrimeKey = (key) => (isSentenceKey(key) ? crimeFormOf(key) !== nu
 /** The tables keyed by a sentence (the measure above): the sentence-key rule takes all their keys and no other table's. */
 const SENTENCE_KEYED = Object.freeze(['src/data/foodwaysPrintSiblings.js :: FOODWAYS_PRINT_SIBLINGS', 'src/data/historyData.js :: HISTORY_DESC_SIBLINGS',
   'src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS', 'src/data/institutionServices.js :: SERVICE_DESC_SIBLINGS', 'src/data/npcData.js :: NPC_HOOK_SIBLINGS']);
+/**
+ * THE WORD-KEYED TABLES (PAGE-13's SIDES-DECLARATION (c), the chair's ruling of 07:11 UTC 2026-11-22): a hand table keyed by
+ * a side's own words, so a key of five words or more is a party's words, not a base sentence. Its keys are read by
+ * `CRIME_KEY_WORDS` whatever their length (never by `isSentenceKey`), and it is left out of the SENTENCE KEYS arm, whose
+ * exactness for every other table is unchanged.
+ * @type {ReadonlyArray<{ ref: string, reason: string }>}
+ */
+const WORD_KEYED = Object.freeze([
+  { ref: 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS', reason: 'keyed by a side\'s own words: every distinct side string of HISTORICAL_EVENTS_DATA and the fixed words the history generator writes in a template\'s place' },
+]);
+const WORD_KEYED_REFS = new Set(WORD_KEYED.map((e) => e.ref));
+/**
+ * THE TABLES WHOSE `presumes` IS READ AS NEEDS (SIDES-DECLARATION (d)): a leaf under a row's `presumes` is a declared atom
+ * (the sides table's header: "the house or office the words presume … as fact-vocabulary atoms"). A crime fact or a
+ * hideable house reds by rule 1 (and stands under its exemption); every other presumed atom is a HOUSE, listed by rule 2.
+ */
+const PRESUMES_AS_NEEDS = Object.freeze(['src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS']);
 /** A row's fields that are not lines (its declaration, its classifiers, its labels). */
 const NOT_LINE_KEYS = new Set(['key', 'type', 'label', 'twinOf', 'needs', 'excludes', 'crisis', 'institutions', 'trade',
   'dominant', 'arcane', 'colour', 'marks']);
@@ -519,23 +545,29 @@ export function poolLeaves(value) {
  * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
  * @param {Readonly<Record<string, unknown>>} [keys] the declared crime keys (`HAND_CRIME_KEYS`)
  * @param {readonly DerivedForm[]} [derived] the derived forms (`DERIVED_FORMS`)
+ * @param {ReadonlySet<string>} [wordKeyed] the word-keyed tables (`WORD_KEYED`): their keys by `CRIME_KEY_WORDS`, whatever their length
+ * @param {readonly string[]} [presumesAsNeeds] the tables whose `presumes` leaves are declared atoms (`PRESUMES_AS_NEEDS`)
  */
-export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS, derived = DERIVED_FORMS) {
+export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS, derived = DERIVED_FORMS,
+  wordKeyed = WORD_KEYED_REFS, presumesAsNeeds = PRESUMES_AS_NEEDS) {
   /** @type {Array<{ pool: string, sha: string, text: string|null, why: string[], houses: string[], quiet: boolean }>} */ const out = [];
   for (const { ref, value } of hand) for (const { path, x } of poolLeaves(value)) {
     const pool = [ref, ...path].join('::');
     const row = /** @type {Record<string, any>} */ (isRow(x) ? x : {});
-    const declared = Array.isArray(row.needs) || Array.isArray(row.marks);
-    const atoms = declared ? [...new Set([...(row.needs || []), ...(row.marks || []).filter((/** @type {string} */ m) => m !== COVERT)])] : [];
+    const presumed = presumesAsNeeds.includes(ref) && path[path.length - 1] === 'presumes' && typeof x === 'string';
+    const declared = presumed || Array.isArray(row.needs) || Array.isArray(row.marks);
+    const atoms = presumed ? [/** @type {string} */ (x)] : declared ? [...new Set([...(row.needs || []), ...(row.marks || []).filter((/** @type {string} */ m) => m !== COVERT)])] : [];
     const text = lineText(x);
     /** @type {string[]} */ const why = [];
-    if (path.some(isCrimeKey)) why.push('crime pool');
+    if (path.some(wordKeyed.has(ref) ? (/** @type {string} */ k) => CRIME_KEY_WORDS.test(k) : isCrimeKey)) why.push('crime pool');
     else if (Object.hasOwn(keys, pool)) why.push('crime key, declared');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
     else if (words && text !== null && crimeFormOf(text, derived)) why.push(String(crimeFormOf(text, derived)));
     if (text === null) why.push('unreadable');
     const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref) || Object.hasOwn(dm, ref);
-    out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter((a) => atomClass(a) === 'house'), quiet });
+    // a presumed atom rule 1 does not take is a house (the table's header declares each one "the house or office the words presume")
+    const isHouse = (/** @type {string} */ a) => atomClass(a) === 'house' || (presumed && parseAtom(a) !== null && atomClass(a) === null);
+    out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter(isHouse), quiet });
   }
   return out;
 }
@@ -656,16 +688,11 @@ const readRel = (rel) => (existsSync(join(ROOT, rel)) ? readFileSync(join(ROOT, 
  * "Not yet wired" is no withholding: it is NO exemption. Phase 3 skips the row, as it skips a table not on this line, and
  * `unreadFaults` reds the entry the day any file under `src/` names its module in an import specifier: the walker then reds
  * until the table's real declaration is written with its reader in hand. Each entry: the hand ref, why it is unread, and
- * the lane that owes its reader.
+ * the lane that owes its reader. Empty since SIDES-DECLARATION (the chair's ruling of 07:11 UTC 2026-11-22): the sides table's
+ * row left when its reader came on the line and its declaration was written (its EXEMPT entry, WORD_KEYED, PRESUMES_AS_NEEDS).
  * @type {ReadonlyArray<{ ref: string, reason: string, owedBy: string }>}
  */
-const UNREAD_ON_THIS_LINE = Object.freeze([
-  {
-    ref: 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS',
-    reason: 'the sides table of the trouble half (PAGE-7): no file under src/ imports it on this line; its one reader, `src/domain/display/tensionShown.js`, is the display lane\'s and not yet on this line',
-    owedBy: 'the display lane (PAGE-9: tensionShown.js)',
-  },
-]);
+const UNREAD_ON_THIS_LINE = Object.freeze(/** @type {Array<{ ref: string, reason: string, owedBy: string }>} */ ([]));
 /**
  * The faults of the unread arm: an entry that names no hand row; an entry whose module some file under `src/` (but its own)
  * names in an import specifier, static or dynamic (`from`, `import`, `import(`, `require(` before a quoted specifier that holds
@@ -775,7 +802,12 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
 
   test('SENTENCE KEYS: the rule takes every key of the sentence-keyed tables and no other table\'s key', async () => {
     const taken = new Map();
-    for (const { ref, value } of await handPoolsOnLine(readJson(HAND_REL).rows)) {
+    const onLine = await handPoolsOnLine(readJson(HAND_REL).rows);
+    // the word-keyed tables are left out (their keys are read by CRIME_KEY_WORDS): each a hand table on this line, with its reason
+    expect(WORD_KEYED.filter((e) => !onLine.some((h) => h.ref === e.ref) || !e.reason.length).map((e) => e.ref)).toEqual([]);
+    expect(PRESUMES_AS_NEEDS.filter((r) => !onLine.some((h) => h.ref === r))).toEqual([]);
+    for (const { ref, value } of onLine) {
+      if (WORD_KEYED_REFS.has(ref)) continue;
       const keys = new Set(poolLeaves(value).flatMap(({ path }) => path));
       taken.set(ref, [[...keys].filter(isSentenceKey).length, keys.size]);
     }
@@ -897,6 +929,24 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value: { [blades]: ['Hired swords, by the hundred.'] } }])).toEqual([]);
       expect(handReds([{ ref, value: { 'A chapter of organised crime. Thirty to a hundred members.': ['A cell of the wider order.'] } }]).map((r) => r.why)).toEqual(['crime pool']);
       expect(handReds([{ ref: 'src/data/npcData.js :: NPC_WANTS', value: { organised: ['x'] } }]).map((r) => r.why)).toEqual(['crime pool']);
+    });
+
+    test('WORD-KEYED (SIDES-DECLARATION (c)): a five-word side key holding a crime word reads as a crime pool; the same key in any other table is a sentence key, read by its free-text form', () => {
+      const ref = 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS';
+      const key = 'Officials grown corrupt in office';
+      expect([WORD_KEYED_REFS.has(ref), isSentenceKey(key), CRIME_KEY_WORDS.test(key), crimeFormOf(key)]).toEqual([true, true, true, null]);
+      expect(handReds([{ ref, value: { [key]: { means: 'none' } } }], {}).map((r) => r.why)).toEqual(['crime pool']);
+      expect(handReds([{ ref: 'src/data/npcData.js :: NPC_WANTS', value: { [key]: ['none'] } }], {})).toEqual([]);
+      expect(handReds([{ ref, value: { 'Quiet folk of the low lanes': { means: 'none' } } }], {})).toEqual([]);
+    });
+
+    test('PRESUMES AS NEEDS (SIDES-DECLARATION (d)): a presumed house is listed; a presumed crime fact reds by rule 1 and stands under the entry; elsewhere a bare atom word is a line', () => {
+      const ref = 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS';
+      const value = { 'Price regulators': { means: 'none', presumes: ['market', 'force: kept', 'organised crime'] } };
+      expect(handHouseReadings([{ ref, value }]).map((r) => r.house).sort()).toEqual(['force: kept', 'market']);
+      expect(handReds([{ ref, value }], {}).map((r) => r.why)).toEqual(['needs organised crime']);
+      expect(handReds([{ ref, value }])).toEqual([]);
+      expect(handHouseReadings([{ ref: 'src/data/npcData.js :: NPC_WANTS', value }])).toEqual([]);
     });
 
     test('PHASE 3: a bare line holding a free-text form reds in a non-crime hand pool, a string or a function read by its source', () => {

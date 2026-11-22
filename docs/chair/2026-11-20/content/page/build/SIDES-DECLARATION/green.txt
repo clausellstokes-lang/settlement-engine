@@ -1,0 +1,17 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 22262 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  08:47:35 up  1:01,  0 user,  load average: 0.78, 1.17, 1.53 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/sides-decl
+
+ ✓ tests/domain/display/tensionSidesServed.test.js (4 tests) 465ms
+ ✓ tests/domain/display/tensionShown.test.js (21 tests) 4064ms
+     ✓ the three born towns: their guild members keep their own words beside a sole economy power  3761ms
+
+ Test Files  2 passed (2)
+      Tests  25 passed (25)
+   Start at  08:47:36
+   Duration  5.86s (transform 4.75s, setup 105ms, import 3.69s, tests 4.53s, environment 0ms)
+
+[gate-tail] end:  08:47:42 up  1:01,  0 user,  load average: 1.20, 1.25, 1.55
+[gate-tail] full log: /tmp/gate-tail.22550.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
