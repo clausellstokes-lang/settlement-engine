@@ -362,6 +362,7 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
     const textOf = (chain, rowId) => rowsOf(mod, chain, {}, TODAY.luxury_goods).find((r) => r.id === rowId).text;
     for (const rowId of ['lux-kinds', 'lux-market']) {
       expect(textOf(named, rowId), rowId).toMatch(/jewellery/);
+      // anchored: the same row's text is pinned live both ways in this loop (the named record's arm above matches jewellery, the bare record's arm below matches "costly goods"), so the bare text cannot be empty or missing
       expect(textOf(bare, rowId), rowId).not.toMatch(/jewel|metalwork/);
       expect(textOf(bare, rowId), rowId).toMatch(/costly goods/i);
     }
@@ -384,6 +385,7 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
   it('the pick is the mixed keyed pick, keyed on the seed, the field and the chain', () => {
     const src = readFileSync(POOL_FILE, 'utf8');
     expect(src).toMatch(/pickVariantMixed\(/);
+    // anchored: src is the pool file read live, and the arms either side pin it (it calls pickVariantMixed and holds the seed::entrepotNote::chainId key), so it cannot be empty or the wrong file
     expect(src).not.toMatch(/\bpickVariant\(/);
     expect(src).toContain('`${seed}::entrepotNote::${chain.chainId}`');
   });
