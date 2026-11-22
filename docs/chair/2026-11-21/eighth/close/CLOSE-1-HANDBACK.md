@@ -32,6 +32,7 @@ and `close/OWNER-GOLDEN-LIT.md`; push `lane/close-1-2026-11-22-golden-wip`.
 (3) UNIT 6: `measures/joint-lit/JOINT-MEASURE-LIT.md` (stop condition 1 OWED: read the trouble cause slots by shareAll in
 its `SAME-CENSUS.md`; 2 PLAUSIBLY passed; 3 saturates; STORY at one position by size).
 (4) UNIT 7: `FOR-THE-OWNER-DRAFT.md`, re-cut from the final census.
+BOTH BUILDERS ENDED AND PUSHED (diffs NOT read by CLOSE-1; each report PLAUSIBLE): JOIN `lane/close-1-2026-11-22-join-wip` at a1319f388 (E101 done: the roster check in arm (a), red by its own plant, the duplicate cut; `tests/lint` 3 red, the line's). GOLDEN-LIT `lane/close-1-2026-11-22-golden-wip` at ba0e1c288 (four commits, no manifest, no shift record; TWO FINDINGS FOR CLOSE-2: the dark golden master reproduces 0 of 525 of its own manifest on the lit ref, PLAUSIBLY line drift since its 2026-11-19 record; the door needs a `.golden-freeze-register.json` row that belongs to the owner's signing act; its scratch capture `lit-manifest.json`, `capture-report.json`, `summaries.json` sit in CLOSE-1's scratch `golden/` only).
 DONE AND ACCEPTED: unit 1 (the trial join), unit 2 (the lit ref), CLOSE-FIXTURE (a true fault found and cured; lands
 in the next stack), unit 4's REHEARSAL (the lit half only, by E90: 3,765 files, 43,183 tests, 204 red, 54 listed, 150
 new: 146 pins, 1 re-cut, 2 faults: U8 to fortune; the powers leaf ruled E91 a step of the flip, proven 15/15), the
