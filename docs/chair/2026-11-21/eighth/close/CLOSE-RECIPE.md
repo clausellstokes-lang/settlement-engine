@@ -39,5 +39,33 @@ Printed: 3 files changed, 3 insertions(+), 3 deletions(-). Proof: `birthConfig({
 ## 2. THE FLIPPED RUN (item (3)) — see `FLIP-CENSUS.md` (unit 4)
 ## 3. REGISTERS BY THEIR DOORS (item (4)) — not yet rehearsed lit
 ## 4. THE EDGE BUNDLES (item (5)) — not yet rehearsed
-## 5. FOR THE OWNER'S HAND AND EYE (item (5)) — not yet rehearsed
+## 5. FOR THE OWNER'S HAND AND EYE (item (5)) — partly rehearsed
+
+### 5c. THE HOME PAGE'S SAMPLE TOWN (the chair's step; its stock narration for the owner's eye)
+Needs CLOSE-FIXTURE (landed) first. The command, ON THE FLIPPED TREE, never before the flip:
+```
+node scripts/generate-landing-fixture.mjs --check         # exit 1 = stale (expected)
+node scripts/generate-landing-fixture.mjs --seed lf-033 --emit
+node scripts/generate-landing-fixture.mjs --check         # exit 0
+```
+THE EXPECTED DIFF, DARK (rendered without --emit at f6d764473 = point 97 + the cure; CLOSE-1, 13:33 UTC 2026-11-22):
+
+| what | committed module | cut script | cured script |
+|---|---|---|---|
+| bytes | 8,337 | 8,362 | 8,394 (+57) |
+| lines differing from the committed module | — | 1 (`town.prose`, stale already) | 16 |
+| the town's own brief (name, population, config, arrival, pressure, hooks) | — | unchanged | unchanged |
+| `realm.whyTrace` | — | — | one reason: "Public legitimacy 14 colors trust" becomes 12 |
+| `realm.advance` | — | — | five entries move (weeks, headlines, texts reorder: the four neighbours are births through `birthConfig` now) |
+| `realm.chronicle` | — | — | one entry (week, text) |
+
+THE EXPECTED DIFF, LIT (the cured script rendered on a copy of the lit scratch e987c3e36, no --emit; 13:3x UTC):
+8,361 bytes (+24), 15 lines from the committed module. FOR THE OWNER'S EYE, the sample town's own readings move:
+`town.prose` (the arrival's opening line, stale already); `realm.whyTrace`: "Religious Authorities carries power 30"
+becomes 24, and the trust band "strained to critical (danger), public legitimacy 14" becomes "adequate to strained
+(warning), public legitimacy 33" (the fortune law's size-relative standing lifts the village's legitimacy); and
+`realm.advance` entries reorder ("Cnocby turns to the faith of Vael" now leads at week 1). These replace the dark
+expected diff above once the flip is made: the close emits on the flipped tree only. The two
+freshness rows (`tests/build/landingFixtureFreshness.test.js`: "a fresh derivation reproduces the committed module BYTE
+FOR BYTE", "the script's own --check arm agrees, and is wired to say how to fix it") go green by the emit.
 ## 6. THE CHECK AND CI (item (8)) — not yet rehearsed
