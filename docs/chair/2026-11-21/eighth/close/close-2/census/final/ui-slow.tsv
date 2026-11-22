@@ -1,0 +1,41 @@
+## FAILURES BY KIND
+kind	file	title	ms
+WRONG RESULT	tests/components/governingModifierSurfaces.test.jsx	the ruling power's modifier prints through one reader on the Power tab, the PDF and the Summary legend r2r-city-56 (arcane-advised): every s	449
+WRONG RESULT	tests/components/magicAudience.test.jsx	(b) for each audience, the chains the line names are printed by that audience's Magic tab the chair's 300, owner, player and public	46040
+WRONG RESULT	tests/components/magicMeasuresApart.test.jsx	PAGE-1 MAGIC: where reliance and capability sit apart, the Overview says what each counts the 300: a line exactly where the two words sit on	12347
+WRONG RESULT	tests/components/pageCensus.walker.test.jsx	the rendered dossier reads exactly its banked rows (the grid) r2s-insurgency-metropolis-0	6182
+WRONG RESULT	tests/components/powerSeatRender.test.jsx	the governs note names the rival or goes names the outranking rival when one outranks the governing faction (thorp 57: People's Council)	71
+WRONG RESULT	tests/components/powerSeatRender.test.jsx	the governs note names the rival or goes drops the claim when no rival outranks the governing faction (thorp 13); the fracture reading stays	86
+WRONG RESULT	tests/components/tailCrisisK26.test.jsx	K26: a stake row names its power by the one leaf, on the tab, the PDF and the journal each census town: the re-formed label prints as the le	522
+WRONG RESULT	tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the cured account sentences no longer print, an	9
+WRONG RESULT	tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the true siblings still print	2
+WRONG RESULT	tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the Foundations legitimacy row prints the recor	198
+WRONG RESULT	tests/components/tailDisplayCivicBatch2.test.jsx	batch 2: a pair's chip does not call a high quarrel stable the true chips still print	8
+WRONG RESULT	tests/components/tailDisplayCivicBatch4.test.jsx	batch 4: the ruling authority row is capped by the record the rows at or below their cap keep their word	5
+WRONG RESULT	tests/store/deadOperationRatchet.test.js	R-4 dead-op ratchet — the list only shrinks (owner queue #21) no registered operation JOINS the dead list	8
+WRONG RESULT	tests/ui/safetyReaderBytes.test.jsx	every reader, shared and public path prints the bytes it printed before the owner's line each town's every reader surface hashes as pinned	25
+
+## OVER 8000 MS
+file	title	ms	budget
+tests/components/leftChainCards.test.jsx	LEFT-CHAIN: the chain card says who works the chain now, and its lists follow the marks (a) L18 (BR10 (3)): no card on a spent ground lists 	127370	own
+tests/components/leftChainCards.test.jsx	LEFT-CHAIN: the chain card says who works the chain now, and its lists follow the marks (d) N4: the owner's page and the shared page read th	116509	NEEDS-READ
+tests/components/seatHolderOnThePage.test.jsx	COHERENCE-POWERS-5 — the seat-holder on the rendered page (the guard for N1–N3) at six sizes on random dials and under every crisis forced, 	64510	own
+tests/components/publicProseVeilInvariance.test.js	(i) the invariance pin: the projection depends on nothing the sanitizer strips composePublicProse(owner) deep-equals composePublicProse(stri	51512	own
+tests/components/magicAudience.test.jsx	(b) for each audience, the chains the line names are printed by that audience's Magic tab the chair's 300, owner, player and public	46040	NEEDS-READ
+tests/ui/safetyOwnerGuard.test.jsx	the owner's page never leaves two measures apart without a line between them screen: the owner's Overview and Defense tabs carry the line wh	37000	NEEDS-READ
+tests/components/seatWordsOnce.test.jsx	COHERENCE-POWERS-5 — the seat's words on the page (REVIEW-POWERS-2 N5–N7) N5: at every size, random and under every crisis — the title reads	33549	own
+tests/components/statBandsOverDigits.test.jsx	No rendered row says "None" beside a bar that has width over a generated corpus, neither tab ever pairs the word with a width	29069	own
+tests/components/seatWordsOnce.test.jsx	COHERENCE-POWERS-5 — the seat's words on the page (REVIEW-POWERS-2 N5–N7) N7: at every size, random and under every crisis — the seat row ne	28418	own
+tests/components/seatWordsOnce.test.jsx	COHERENCE-POWERS-5 — the seat's words on the page (REVIEW-POWERS-2 N5–N7) N6: at every size, random and under every crisis — every Connectio	27880	own
+tests/components/economicsFoodStores.test.jsx	the stored food is printed once, on the Economics tab the Economics tab prints the record's months exactly once, in words that follow the re	17961	NEEDS-READ
+tests/lib/localEngineCallers.test.js	flag off, the seam is a pass-through sixty settlements hashed through the seam equal sixty hashed through the direct import	14939	own
+tests/components/economicsFoodStores.test.jsx	the stored food is printed once, on the Economics tab the stores sentence has one writer: the Economics row prints the Tonight sheet's own w	14698	own
+tests/components/dossierPhoneFloorAllViews.test.jsx	THE PHONE FLOORS — every dossier view every line in every tab clears its floor (prose 14px, chrome 12px) at phone width	12486	NEEDS-READ
+tests/components/magicMeasuresApart.test.jsx	PAGE-1 MAGIC: where reliance and capability sit apart, the Overview says what each counts the 300: a line exactly where the two words sit on	12347	own
+tests/ui/safetyOwnerGuard.test.jsx	the owner's page never leaves two measures apart without a line between them print: the DM's own PDF carries the line on its Cover, Overview	11050	NEEDS-READ
+tests/components/tierViewerRender.test.jsx	the Faith tab is present for the free and the premium owner alike (V2) twelve towns: sf-tab-faith registers for both owners	10358	own
+tests/pdf/fullDocByteRender.test.js	SettlementPDF renders the whole document to real PDF bytes (R8) a metropolis settlement paginates to a valid multi-page PDF	9561	NEEDS-READ
+tests/components/bar7CardsMarkOnce.test.jsx	BAR7-CARDS: a person's card says its house's state once; the PDF prints what the tabs print 1. THE TAB'S CARD: a marked house's keeper carri	9332	NEEDS-READ
+tests/components/houseLabelEverySurface.test.jsx	ruling (a): no house prints with the catalogue's machinery, on any rendered surface rr2s-town-under_siege-rand-1: every surface	8804	NEEDS-READ
+tests/components/bar2ServicesRows.test.jsx	BAR2-SERVICES batch 1: a service row carries its house's mark; four rows reworded or renamed true SV1 MARKED: each row prints with its house	8546	NEEDS-READ
+tests/pdf/renderedFontEmbedding.test.js	a rendered dossier draws every text run with an embedded font renders a real multi-page dossier (the arm is not vacuous)	8144	own

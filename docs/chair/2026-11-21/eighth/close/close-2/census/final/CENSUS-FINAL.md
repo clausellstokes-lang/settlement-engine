@@ -19,7 +19,7 @@ against the rehearsal's `census/lit-<part>-classed.tsv`; `close-2/census/slow.mj
 | build (one fresh `npm run build`) | 21:41:52 | exit 0 | | | | | | |
 | 3 tests/build (VERIFY_DIST=1) | 21:45:32 | 623 | 15 | 15 | 0 | | 0 | 15 / 15 / 0 |
 | 4 tests/lint whole | 22:01:17 | 3,364 | 3 | 3 | 0 | (the powers leaf's row holds: rehearsal fault 2 gone) | 0 | 5 / 3 / 2 |
-| 5 components, ui, pdf, store, lib | see section 0 of the hand-back | | | | | | | 14 / 2 / 12 |
+| 5 components, ui, pdf, store, lib | 22:35:15 | 8,489 | 14 | 2 | 12 | the SAME 12 BY NAME as the rehearsal (`ui-diff-names.txt`: 0 new, 0 gone): (a) there (premise 4, born anchor 4, stored pin 3 incl. `pageCensus.walker`, 1 (d?) verified not (d)); not re-classed | 0 | 14 / 2 / 12 |
 | 6 the rest | see section 0 of the hand-back | | | | | | | 9 / 9 / 0 |
 
 NO (d) IN PARTS 1 TO 4. Files: `<part>-match.tsv` (ON/NEW), `<part>-new.md` (each NEW red's first lines),

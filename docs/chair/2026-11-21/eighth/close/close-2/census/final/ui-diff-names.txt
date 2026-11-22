@@ -1,0 +1,15 @@
+## NEW: 0
+## GONE: 0
+## CHANGED: 12
+tests/components/governingModifierSurfaces.test.jsx	the ruling power's modifier prints through one reader on the Power tab, the PDF and the Summary lege	(d?) GUARD -> ? ?
+tests/components/magicAudience.test.jsx	(b) for each audience, the chains the line names are printed by that audience's Magic tab the chair'	(a) STORED PIN -> ? ?
+tests/components/magicMeasuresApart.test.jsx	PAGE-1 MAGIC: where reliance and capability sit apart, the Overview says what each counts the 300: a	(a) STORED PIN -> ? ?
+tests/components/pageCensus.walker.test.jsx	the rendered dossier reads exactly its banked rows (the grid) r2s-insurgency-metropolis-0	(a) STORED PIN -> ? ?
+tests/components/powerSeatRender.test.jsx	the governs note names the rival or goes names the outranking rival when one outranks the governing 	(a) PREMISE -> ? ?
+tests/components/powerSeatRender.test.jsx	the governs note names the rival or goes drops the claim when no rival outranks the governing factio	(a) PREMISE -> ? ?
+tests/components/tailCrisisK26.test.jsx	K26: a stake row names its power by the one leaf, on the tab, the PDF and the journal each census to	(a) PREMISE -> ? ?
+tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the cur	(a) BORN ANCHOR -> ? ?
+tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the tru	(a) BORN ANCHOR -> ? ?
+tests/components/tailDisplayCivicBatch1.test.jsx	batch 1: the governance account and the Foundations legitimacy row say what the record holds the Fou	(a) PREMISE -> ? ?
+tests/components/tailDisplayCivicBatch2.test.jsx	batch 2: a pair's chip does not call a high quarrel stable the true chips still print	(a) BORN ANCHOR -> ? ?
+tests/components/tailDisplayCivicBatch4.test.jsx	batch 4: the ruling authority row is capped by the record the rows at or below their cap keep their 	(a) BORN ANCHOR -> ? ?
