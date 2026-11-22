@@ -310,6 +310,18 @@ export function applyRosterChoices(s, pub, idOf) {
   // the served crime signal (crimeSignal.js :: crimeSignalOf)
   const crimHouse = houses.some(h => asciiLowerOf(h.category) === 'criminal' || asciiLowerOf(h.priorityCategory) === 'criminal');
   const signal = crimHouse || objectsOf(ps?.factions).some(f => asciiLowerOf(f.category) === 'criminal');
+  // R3-TELL-5b unit (iii) (the chair's ruling 73 (2); ruling 74 (iii)): WHERE THE SERVED CRIME SIGNAL IS FALSE (no criminal
+  // house and no criminal power this read serves), no served power (either list) and no relation carries `captureState`:
+  // the hall's birth seed on the governing row (hallCapture.js :: writeHallCapture) and a capture relation's rung
+  // (factionDynamics.js :: withCaptureRelations) leave, THE KEY only (the open place's form: no nothing-hidden page of the
+  // pool serves one without a criminal house or power, at any size; ruling 47: no husk). A criminal governing power (VR42) is
+  // a served criminal power: its row and its rung stay. `criminalCaptureState` is not touched here. SQL twin: 212, the same rule
+  // registry: power.captureState
+  if (!signal) {
+    const noCapture = (/** @type {unknown} */ x) => (isRec(x) && Object.prototype.hasOwnProperty.call(x, 'captureState') ? (({ captureState: _c, ...rest }) => rest)(x) : x);
+    for (const holder of [ps, s]) if (holder && Array.isArray(holder.factions)) holder.factions = holder.factions.map(noCapture);
+    if (ps && Array.isArray(ps.factionRelationships)) ps.factionRelationships = ps.factionRelationships.map(noCapture);
+  }
   const hist = recAt(s, 'history');
   // registry: history.tension.crimeWave ((b): where the served crime signal is false)
   if (hist && !signal && Array.isArray(hist.currentTensions)) hist.currentTensions = hist.currentTensions.filter(t => !(isRec(t) && t.type === 'crime_wave'));

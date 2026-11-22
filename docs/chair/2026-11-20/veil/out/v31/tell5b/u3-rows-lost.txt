@@ -1,0 +1,17 @@
+ROWS LOST (capture keys, the worst gated page of each town, twin, pre-cure records): towns losing one or more 16 of 92; median 0, worst 1; median among those losing 1
+r3m-town-under_siege-0-28 1
+r3m-city-politically_fractured-0-40 1
+r3m-metropolis-indebted-0-56 1
+r3m-metropolis-politically_fractured-0-60 1
+r3m-metropolis-insurgency-1-124 1
+r3m-metropolis-under_siege-1-128 1
+r3m-metropolis-politically_fractured-1-140 1
+r3m-town-none-0-17 1
+r3m-metropolis-occupied-0-65 1
+r3m-metropolis-wartime-0-69 1
+r3m-city-infiltrated-0-42 1
+r3m-metropolis-indebted-0-66 1
+r3m-city-infiltrated-1-102 1
+r3m-metropolis-insurgency-1-134 1
+r3m-metropolis-none-1-127 1
+r3m-metropolis-occupied-1-135 1

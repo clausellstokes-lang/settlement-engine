@@ -1,0 +1,110 @@
+city|control|#births	4
+city|control|dm|served=-|ccs=#absent|pw=0|rel=0	4
+city|control|dm|served=-|ccs=none|pw=0|rel=0	4
+city|control|off|served=-|ccs=#absent|pw=0|rel=0	4
+city|control|stored ccs=none pw=0 rel=0 gov=government	3
+city|control|stored ccs=none pw=0 rel=0 gov=magic	1
+city|hidden|#births	36
+city|hidden|dm|NOCRIM pw economy|gov=true|"equilibrium"	2
+city|hidden|dm|NOCRIM pw government|gov=true|"equilibrium"	1
+city|hidden|dm|served=-|ccs=#absent|pw=0|rel=0	30
+city|hidden|dm|served=-|ccs=adversarial|pw=0|rel=0	3
+city|hidden|dm|served=-|ccs=equilibrium|pw=1|rel=0	3
+city|hidden|dm|served=-|ccs=none|pw=0|rel=0	24
+city|hidden|dm|served=P|ccs=#absent|pw=0|rel=0	6
+city|hidden|dm|served=P|ccs=corrupted|pw=1|rel=0	6
+city|hidden|off|served=-|ccs=#absent|pw=0|rel=0	30
+city|hidden|off|served=P|ccs=#absent|pw=0|rel=0	6
+city|hidden|stored ccs=adversarial pw=0 rel=1 gov=economy	1
+city|hidden|stored ccs=adversarial pw=0 rel=1 gov=military	1
+city|hidden|stored ccs=adversarial pw=0 rel=2 gov=magic	1
+city|hidden|stored ccs=corrupted pw=1 rel=0 gov=criminal	2
+city|hidden|stored ccs=corrupted pw=1 rel=1 gov=criminal	1
+city|hidden|stored ccs=corrupted pw=1 rel=2 gov=criminal	3
+city|hidden|stored ccs=equilibrium pw=1 rel=2 gov=economy	2
+city|hidden|stored ccs=equilibrium pw=1 rel=2 gov=government	1
+city|hidden|stored ccs=none pw=0 rel=0 gov=economy	13
+city|hidden|stored ccs=none pw=0 rel=0 gov=government	7
+city|hidden|stored ccs=none pw=0 rel=0 gov=magic	2
+city|hidden|stored ccs=none pw=0 rel=0 gov=military	1
+city|hidden|stored ccs=none pw=0 rel=0 gov=religious	1
+metropolis|control|#births	2
+metropolis|control|dm|served=-|ccs=#absent|pw=0|rel=0	2
+metropolis|control|dm|served=-|ccs=none|pw=0|rel=0	2
+metropolis|control|off|served=-|ccs=#absent|pw=0|rel=0	2
+metropolis|control|stored ccs=none pw=0 rel=0 gov=government	2
+metropolis|hidden|#births	38
+metropolis|hidden|dm|NOCRIM pw economy|gov=true|"corrupted"	3
+metropolis|hidden|dm|NOCRIM pw economy|gov=true|"equilibrium"	2
+metropolis|hidden|dm|NOCRIM pw government|gov=true|"equilibrium"	6
+metropolis|hidden|dm|served=-|ccs=#absent|pw=0|rel=0	37
+metropolis|hidden|dm|served=-|ccs=adversarial|pw=0|rel=0	3
+metropolis|hidden|dm|served=-|ccs=corrupted|pw=1|rel=0	3
+metropolis|hidden|dm|served=-|ccs=equilibrium|pw=1|rel=0	8
+metropolis|hidden|dm|served=-|ccs=none|pw=0|rel=0	23
+metropolis|hidden|dm|served=P|ccs=#absent|pw=0|rel=0	1
+metropolis|hidden|dm|served=P|ccs=corrupted|pw=1|rel=0	1
+metropolis|hidden|off|served=-|ccs=#absent|pw=0|rel=0	37
+metropolis|hidden|off|served=P|ccs=#absent|pw=0|rel=0	1
+metropolis|hidden|stored ccs=adversarial pw=0 rel=2 gov=economy	1
+metropolis|hidden|stored ccs=adversarial pw=0 rel=2 gov=government	2
+metropolis|hidden|stored ccs=corrupted pw=1 rel=1 gov=economy	1
+metropolis|hidden|stored ccs=corrupted pw=1 rel=2 gov=criminal	1
+metropolis|hidden|stored ccs=corrupted pw=1 rel=2 gov=economy	2
+metropolis|hidden|stored ccs=equilibrium pw=1 rel=0 gov=government	2
+metropolis|hidden|stored ccs=equilibrium pw=1 rel=2 gov=economy	2
+metropolis|hidden|stored ccs=equilibrium pw=1 rel=2 gov=government	4
+metropolis|hidden|stored ccs=none pw=0 rel=0 gov=economy	4
+metropolis|hidden|stored ccs=none pw=0 rel=0 gov=government	11
+metropolis|hidden|stored ccs=none pw=0 rel=0 gov=magic	2
+metropolis|hidden|stored ccs=none pw=0 rel=0 gov=military	5
+metropolis|hidden|stored ccs=none pw=0 rel=0 gov=religious	1
+town|control|#births	23
+town|control|dm|served=-|ccs=#absent|pw=0|rel=0	22
+town|control|dm|served=-|ccs=none|pw=0|rel=0	22
+town|control|dm|served=P|ccs=#absent|pw=0|rel=0	1
+town|control|dm|served=P|ccs=corrupted|pw=1|rel=0	1
+town|control|off|served=-|ccs=#absent|pw=0|rel=0	22
+town|control|off|served=P|ccs=#absent|pw=0|rel=0	1
+town|control|stored ccs=corrupted pw=1 rel=0 gov=criminal	1
+town|control|stored ccs=none pw=0 rel=0 gov=economy	6
+town|control|stored ccs=none pw=0 rel=0 gov=government	3
+town|control|stored ccs=none pw=0 rel=0 gov=magic	3
+town|control|stored ccs=none pw=0 rel=0 gov=military	5
+town|control|stored ccs=none pw=0 rel=0 gov=noble	1
+town|control|stored ccs=none pw=0 rel=0 gov=religious	4
+town|hidden|#births	17
+town|hidden|dm|NOCRIM pw magic|gov=true|"equilibrium"	1
+town|hidden|dm|NOCRIM pw military|gov=true|"corrupted"	1
+town|hidden|dm|served=-|ccs=#absent|pw=0|rel=0	13
+town|hidden|dm|served=-|ccs=adversarial|pw=0|rel=0	3
+town|hidden|dm|served=-|ccs=corrupted|pw=1|rel=0	1
+town|hidden|dm|served=-|ccs=equilibrium|pw=1|rel=0	1
+town|hidden|dm|served=-|ccs=none|pw=0|rel=0	8
+town|hidden|dm|served=P|ccs=#absent|pw=0|rel=0	4
+town|hidden|dm|served=P|ccs=corrupted|pw=1|rel=0	4
+town|hidden|off|served=-|ccs=#absent|pw=0|rel=0	13
+town|hidden|off|served=P|ccs=#absent|pw=0|rel=0	4
+town|hidden|stored ccs=adversarial pw=0 rel=1 gov=economy	1
+town|hidden|stored ccs=adversarial pw=0 rel=1 gov=military	1
+town|hidden|stored ccs=adversarial pw=0 rel=2 gov=economy	1
+town|hidden|stored ccs=corrupted pw=1 rel=0 gov=military	1
+town|hidden|stored ccs=corrupted pw=1 rel=1 gov=criminal	1
+town|hidden|stored ccs=corrupted pw=1 rel=2 gov=criminal	3
+town|hidden|stored ccs=equilibrium pw=1 rel=1 gov=magic	1
+town|hidden|stored ccs=none pw=0 rel=0 gov=economy	2
+town|hidden|stored ccs=none pw=0 rel=0 gov=noble	2
+town|hidden|stored ccs=none pw=0 rel=0 gov=other	2
+town|hidden|stored ccs=none pw=0 rel=0 gov=religious	2
+village|control|#births	19
+village|control|dm|served=-|ccs=#absent|pw=0|rel=0	19
+village|control|dm|served=-|ccs=none|pw=0|rel=0	19
+village|control|off|served=-|ccs=#absent|pw=0|rel=0	19
+village|control|stored ccs=none pw=0 rel=0 gov=government	16
+village|control|stored ccs=none pw=0 rel=0 gov=other	1
+village|control|stored ccs=none pw=0 rel=0 gov=religious	2
+village|hidden|#births	1
+village|hidden|dm|served=-|ccs=#absent|pw=0|rel=0	1
+village|hidden|dm|served=-|ccs=none|pw=0|rel=0	1
+village|hidden|off|served=-|ccs=#absent|pw=0|rel=0	1
+village|hidden|stored ccs=none pw=0 rel=0 gov=government	1

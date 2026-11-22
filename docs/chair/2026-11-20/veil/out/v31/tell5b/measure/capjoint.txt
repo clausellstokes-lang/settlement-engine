@@ -1,0 +1,168 @@
+births by size|part {"village|A":300,"town|A":300,"city|A":300,"metropolis|A":300,"village|B":152,"town|B":152,"city|B":152,"metropolis|B":152}
+city|dm|ALL|cap=0	452
+city|dm|ALL|cap=1	20
+city|dm|ALL|cap=n	35
+city|dm|cap=0 ccs=a pc=0 ic=0 rel=0	300
+city|dm|cap=0 ccs=a pc=0 ic=1 rel=0	22
+city|dm|cap=0 ccs=a pc=0 ic=n rel=0	89
+city|dm|cap=0 ccs=a pc=1 ic=n rel=1	13
+city|dm|cap=0 ccs=a pc=1 ic=n rel=n	5
+city|dm|cap=0 ccs=a pc=n ic=n rel=1	10
+city|dm|cap=0 ccs=a pc=n ic=n rel=n	13
+city|dm|cap=0 ccs=p pc=0 ic=0 rel=0	300
+city|dm|cap=0 ccs=p pc=0 ic=1 rel=0	21
+city|dm|cap=0 ccs=p pc=0 ic=n rel=0	76
+city|dm|cap=1 ccs=p pc=0 ic=1 rel=0	1
+city|dm|cap=1 ccs=p pc=0 ic=n rel=0	13
+city|dm|cap=1 ccs=p pc=1 ic=n rel=1	2
+city|dm|cap=1 ccs=p pc=1 ic=n rel=n	2
+city|dm|cap=1 ccs=p pc=n ic=n rel=1	2
+city|dm|cap=n ccs=p pc=1 ic=n rel=1	11
+city|dm|cap=n ccs=p pc=1 ic=n rel=n	3
+city|dm|cap=n ccs=p pc=n ic=n rel=1	8
+city|dm|cap=n ccs=p pc=n ic=n rel=n	13
+city|dm|partA|cap=0	300
+city|dm|partB|cap=0	152
+city|dm|partB|cap=1	20
+city|dm|partB|cap=n	35
+city|off|ALL|cap=0	452
+city|off|cap=0 ccs=a pc=0 ic=0 rel=0	300
+city|off|cap=0 ccs=a pc=0 ic=1 rel=0	22
+city|off|cap=0 ccs=a pc=0 ic=n rel=0	89
+city|off|cap=0 ccs=a pc=1 ic=n rel=0	16
+city|off|cap=0 ccs=a pc=1 ic=n rel=n	2
+city|off|cap=0 ccs=a pc=n ic=n rel=0	17
+city|off|cap=0 ccs=a pc=n ic=n rel=1	2
+city|off|cap=0 ccs=a pc=n ic=n rel=n	4
+city|off|partA|cap=0	300
+city|off|partB|cap=0	152
+metropolis|dm|ALL|cap=0	452
+metropolis|dm|ALL|cap=1	15
+metropolis|dm|ALL|cap=n	61
+metropolis|dm|cap=0 ccs=a pc=0 ic=0 rel=0	300
+metropolis|dm|cap=0 ccs=a pc=0 ic=1 rel=0	8
+metropolis|dm|cap=0 ccs=a pc=0 ic=n rel=0	77
+metropolis|dm|cap=0 ccs=a pc=1 ic=n rel=1	19
+metropolis|dm|cap=0 ccs=a pc=1 ic=n rel=n	17
+metropolis|dm|cap=0 ccs=a pc=n ic=n rel=1	5
+metropolis|dm|cap=0 ccs=a pc=n ic=n rel=n	26
+metropolis|dm|cap=0 ccs=p pc=0 ic=0 rel=0	300
+metropolis|dm|cap=0 ccs=p pc=0 ic=1 rel=0	8
+metropolis|dm|cap=0 ccs=p pc=0 ic=n rel=0	68
+metropolis|dm|cap=1 ccs=p pc=0 ic=n rel=0	9
+metropolis|dm|cap=1 ccs=p pc=1 ic=n rel=1	5
+metropolis|dm|cap=1 ccs=p pc=n ic=n rel=1	1
+metropolis|dm|cap=n ccs=p pc=1 ic=n rel=1	14
+metropolis|dm|cap=n ccs=p pc=1 ic=n rel=n	17
+metropolis|dm|cap=n ccs=p pc=n ic=n rel=1	4
+metropolis|dm|cap=n ccs=p pc=n ic=n rel=n	26
+metropolis|dm|partA|cap=0	300
+metropolis|dm|partB|cap=0	152
+metropolis|dm|partB|cap=1	15
+metropolis|dm|partB|cap=n	61
+metropolis|off|ALL|cap=0	452
+metropolis|off|cap=0 ccs=a pc=0 ic=0 rel=0	300
+metropolis|off|cap=0 ccs=a pc=0 ic=1 rel=0	8
+metropolis|off|cap=0 ccs=a pc=0 ic=n rel=0	77
+metropolis|off|cap=0 ccs=a pc=1 ic=n rel=0	34
+metropolis|off|cap=0 ccs=a pc=1 ic=n rel=1	2
+metropolis|off|cap=0 ccs=a pc=n ic=n rel=0	16
+metropolis|off|cap=0 ccs=a pc=n ic=n rel=1	4
+metropolis|off|cap=0 ccs=a pc=n ic=n rel=n	11
+metropolis|off|partA|cap=0	300
+metropolis|off|partB|cap=0	152
+town|dm|ALL|cap=0	452
+town|dm|ALL|cap=1	49
+town|dm|ALL|cap=n	60
+town|dm|cap=0 ccs=a pc=0 ic=0 rel=0	271
+town|dm|cap=0 ccs=a pc=0 ic=1 rel=0	44
+town|dm|cap=0 ccs=a pc=0 ic=n rel=0	39
+town|dm|cap=0 ccs=a pc=1 ic=0 rel=1	15
+town|dm|cap=0 ccs=a pc=1 ic=0 rel=n	12
+town|dm|cap=0 ccs=a pc=1 ic=1 rel=1	9
+town|dm|cap=0 ccs=a pc=1 ic=1 rel=n	3
+town|dm|cap=0 ccs=a pc=1 ic=n rel=1	22
+town|dm|cap=0 ccs=a pc=1 ic=n rel=n	12
+town|dm|cap=0 ccs=a pc=n ic=0 rel=n	2
+town|dm|cap=0 ccs=a pc=n ic=1 rel=n	7
+town|dm|cap=0 ccs=a pc=n ic=n rel=1	3
+town|dm|cap=0 ccs=a pc=n ic=n rel=n	13
+town|dm|cap=0 ccs=p pc=0 ic=0 rel=0	271
+town|dm|cap=0 ccs=p pc=0 ic=1 rel=0	39
+town|dm|cap=0 ccs=p pc=0 ic=n rel=0	33
+town|dm|cap=1 ccs=p pc=0 ic=1 rel=0	5
+town|dm|cap=1 ccs=p pc=0 ic=n rel=0	6
+town|dm|cap=1 ccs=p pc=1 ic=0 rel=1	12
+town|dm|cap=1 ccs=p pc=1 ic=0 rel=n	11
+town|dm|cap=1 ccs=p pc=1 ic=1 rel=1	4
+town|dm|cap=1 ccs=p pc=1 ic=1 rel=n	2
+town|dm|cap=1 ccs=p pc=1 ic=n rel=1	5
+town|dm|cap=1 ccs=p pc=1 ic=n rel=n	4
+town|dm|cap=n ccs=p pc=1 ic=0 rel=1	3
+town|dm|cap=n ccs=p pc=1 ic=0 rel=n	1
+town|dm|cap=n ccs=p pc=1 ic=1 rel=1	5
+town|dm|cap=n ccs=p pc=1 ic=1 rel=n	1
+town|dm|cap=n ccs=p pc=1 ic=n rel=1	17
+town|dm|cap=n ccs=p pc=1 ic=n rel=n	8
+town|dm|cap=n ccs=p pc=n ic=0 rel=n	2
+town|dm|cap=n ccs=p pc=n ic=1 rel=n	7
+town|dm|cap=n ccs=p pc=n ic=n rel=1	3
+town|dm|cap=n ccs=p pc=n ic=n rel=n	13
+town|dm|partA|cap=0	300
+town|dm|partA|cap=1	23
+town|dm|partA|cap=n	6
+town|dm|partB|cap=0	152
+town|dm|partB|cap=1	26
+town|dm|partB|cap=n	54
+town|off|ALL|cap=0	452
+town|off|cap=0 ccs=a pc=0 ic=0 rel=0	271
+town|off|cap=0 ccs=a pc=0 ic=1 rel=0	44
+town|off|cap=0 ccs=a pc=0 ic=n rel=0	39
+town|off|cap=0 ccs=a pc=1 ic=0 rel=0	6
+town|off|cap=0 ccs=a pc=1 ic=0 rel=1	10
+town|off|cap=0 ccs=a pc=1 ic=0 rel=n	11
+town|off|cap=0 ccs=a pc=1 ic=1 rel=0	7
+town|off|cap=0 ccs=a pc=1 ic=1 rel=1	3
+town|off|cap=0 ccs=a pc=1 ic=1 rel=n	2
+town|off|cap=0 ccs=a pc=1 ic=n rel=0	27
+town|off|cap=0 ccs=a pc=1 ic=n rel=1	3
+town|off|cap=0 ccs=a pc=1 ic=n rel=n	4
+town|off|cap=0 ccs=a pc=n ic=0 rel=1	2
+town|off|cap=0 ccs=a pc=n ic=1 rel=1	4
+town|off|cap=0 ccs=a pc=n ic=1 rel=n	3
+town|off|cap=0 ccs=a pc=n ic=n rel=0	3
+town|off|cap=0 ccs=a pc=n ic=n rel=1	9
+town|off|cap=0 ccs=a pc=n ic=n rel=n	4
+town|off|partA|cap=0	300
+town|off|partB|cap=0	152
+village|dm|ALL|cap=0	452
+village|dm|ALL|cap=1	18
+village|dm|ALL|cap=n	8
+village|dm|cap=0 ccs=a pc=0 ic=0 rel=0	296
+village|dm|cap=0 ccs=a pc=0 ic=1 rel=0	138
+village|dm|cap=0 ccs=a pc=0 ic=n rel=0	10
+village|dm|cap=0 ccs=a pc=1 ic=0 rel=1	4
+village|dm|cap=0 ccs=a pc=1 ic=1 rel=1	3
+village|dm|cap=0 ccs=a pc=1 ic=n rel=1	1
+village|dm|cap=0 ccs=p pc=0 ic=0 rel=0	296
+village|dm|cap=0 ccs=p pc=0 ic=1 rel=0	123
+village|dm|cap=0 ccs=p pc=0 ic=n rel=0	7
+village|dm|cap=1 ccs=p pc=0 ic=1 rel=0	15
+village|dm|cap=1 ccs=p pc=0 ic=n rel=0	3
+village|dm|cap=n ccs=p pc=1 ic=0 rel=1	4
+village|dm|cap=n ccs=p pc=1 ic=1 rel=1	3
+village|dm|cap=n ccs=p pc=1 ic=n rel=1	1
+village|dm|partA|cap=0	300
+village|dm|partA|cap=n	4
+village|dm|partB|cap=0	152
+village|dm|partB|cap=1	18
+village|dm|partB|cap=n	4
+village|off|ALL|cap=0	452
+village|off|cap=0 ccs=a pc=0 ic=0 rel=0	296
+village|off|cap=0 ccs=a pc=0 ic=1 rel=0	138
+village|off|cap=0 ccs=a pc=0 ic=n rel=0	10
+village|off|cap=0 ccs=a pc=1 ic=0 rel=0	4
+village|off|cap=0 ccs=a pc=1 ic=1 rel=0	3
+village|off|cap=0 ccs=a pc=1 ic=n rel=0	1
+village|off|partA|cap=0	300
+village|off|partB|cap=0	152

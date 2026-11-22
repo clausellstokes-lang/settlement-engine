@@ -285,6 +285,11 @@
     "by": "src/generators/factionDynamics.js :: withCaptureRelations"
   },
   {
+    "path": "^powerStructure\\.(factions|factionRelationships)\\[\\]\\.captureState$",
+    "rule": "withhold",
+    "by": "src/domain/people/hallCapture.js :: writeHallCapture"
+  },
+  {
     "path": "^powerStructure\\.publicLegitimacy\\.breakdown\\.(prosperity|safety|defense)$",
     "rule": "withhold",
     "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"

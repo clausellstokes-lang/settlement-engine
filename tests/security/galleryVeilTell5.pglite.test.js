@@ -13,6 +13,12 @@
  *     record's own list). Every other row (the climate's '(lawless)' and '(informal)', drawn from the criminal climate the
  *     houses moved) leaves; what is left may be [] (VR29: the list stays a list). The tooth: a row a served house, a shown
  *     crime type or a crisis's type accounts for is served byte for byte.
+ *   UNIT (iii) `powers.capture` (R3-TELL-5b): on a read that hides a house whole and serves NO criminal house and NO criminal
+ *     power (the served crime signal false), no served power or relation carries `captureState` (the hall's birth seed on the
+ *     governing row, a capture relation's rung): the open place's form, measured (out/v31/tell5b/capform/: no nothing-hidden
+ *     page of the pool serves one without a criminal house or power, at any size). `criminalCaptureState`'s VALUE is not
+ *     judged here (the hand-back's STOP: its only open form under an open grouping is 'none', a sent value). The teeth: beside
+ *     a shown criminal house, and on a criminal governing power's row (VR42), every capture key is served byte for byte.
  */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -51,6 +57,24 @@ const HAND_SVC = Object.freeze({
 });
 const SVC_KEPT = new Set(['Fence', 'Contraband transport', 'Official shakedown']);
 
+/** R3-TELL-5b UNIT (iii) powers.capture: a hidden street gang and NO criminal house or power left to serve; the governing civic
+ * power carries the hall's birth seed (`captureState`), a relation carries one, and the town its `criminalCaptureState` (each
+ * key must leave the served powers and relations: no nothing-hidden page serves one without a criminal house or power). The
+ * teeth: the same town with a black market SHOWN beside the hidden gang (a criminal house served), and a town whose GOVERNING
+ * power is itself criminal (VR42: its row stays, and the hall's rung its own seat accounts for), each served byte for byte. */
+const capTown = (extraHouses, gov, ccs) => ({
+  name: 'Varrow', tier: 'town',
+  institutions: [{ id: 'inst-sg52', name: 'Street gang', category: 'Criminal', desc: 'The gang works the docks.' }, ...extraHouses,
+    { id: 'inst-mk52', name: 'Fish market', category: 'Economy', desc: 'Fish.' }, { id: 'inst-ho52', name: 'Harbour office', category: 'Government', desc: 'Berths and dues.' }],
+  powerStructure: { factions: [{ faction: gov.faction, category: gov.category, power: 70, powerLabel: 'Dominant', captureState: ccs, isGoverning: true }, { faction: 'Fishers', category: 'economic', power: 30, powerLabel: 'Minor' }],
+    factionRelationships: [{ pair: [gov.faction, 'Fishers'], type: 'tense', direction: 'stable', captureState: ccs, narrative: 'The two bargain over the quays.' }],
+    criminalCaptureState: ccs },
+  npcs: [{ id: 'npc-c52', name: 'Pell Arno', role: 'Net-maker' }],
+});
+const HAND_CAP = Object.freeze(capTown([], { faction: 'Town Council', category: 'civic' }, 'equilibrium'));
+const HAND_CAP_SHOWN = Object.freeze(capTown([{ id: 'inst-bm52', name: 'Black market', category: 'Criminal', desc: 'Goods without questions.' }], { faction: 'Town Council', category: 'civic' }, 'equilibrium'));
+const HAND_CAP_GOV = Object.freeze(capTown([], { faction: 'Corrupt Council', category: 'criminal' }, 'corrupted'));
+
 describe('R3-TELL-5 (ruling 73 (2), unit (ii)): the empty arrays on hand plants, the twin against 212', () => {
   let db;
   let veil;
@@ -72,10 +96,11 @@ describe('R3-TELL-5 (ruling 73 (2), unit (ii)): the empty arrays on hand plants,
     out.off = sw.setCriminalVeil(opened(OPEN), model.defaults, true, present, model);
     return out;
   };
-  /** Every read of one record by BOTH engines: [{ setting, dm, read, eng, doc }]. */
-  const readAll = async (stored) => {
+  /** Every read of one record by BOTH engines: [{ setting, dm, read, eng, doc }]. R3-TELL-5b unit (iii): `extra` adds settings
+   * (each a list of deltas) to the owner's switch settings, by name. */
+  const readAll = async (stored, extra = {}) => {
     const out = [];
-    for (const dm of [false, true]) for (const [setting, deltas] of Object.entries(settingsOf(stored, dm))) {
+    for (const dm of [false, true]) for (const [setting, deltas] of Object.entries({ ...settingsOf(stored, dm), ...extra })) {
       m += 1;
       const ov = veil.writeShareVeil({}, deltas, { mode: 'live', at });
       const id = `7e5c5000-0000-0000-0000-${String(m).padStart(12, '0')}`;
@@ -136,6 +161,48 @@ describe('R3-TELL-5 (ruling 73 (2), unit (ii)): the empty arrays on hand plants,
     note('R3-TELL-5 unit (ii) svc.criminal on the hiding plant: hiding reads serving the family', hiding, '| engine:row (served):', J(seen), '| faults', bad.length, '| tooth: accounted rows served', keptServed, 'missing or not byte for byte', tooth.length,
       bad.length ? `\n  ${bad.slice(0, 12).join('\n  ')}` : '', tooth.length ? `\n  TOOTH ${tooth.slice(0, 6).join('\n  TOOTH ')}` : '');
     expect(hiding).toBeGreaterThan(0);
+    expect(keptServed).toBeGreaterThan(0);
+    expect(tooth).toEqual([]);
+    expect(bad).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  /** The served copies that carry the capture keys: a power's `captureState` (both lists), a relation's `captureState`. */
+  const capKeys = (d) => {
+    const ps = isRec(d?.powerStructure) ? d.powerStructure : {};
+    const powers = [...(Array.isArray(ps.factions) ? ps.factions : []), ...(Array.isArray(d?.factions) ? d.factions : [])].filter(isRec);
+    return [...powers.filter((f) => 'captureState' in f).map((f) => `power ${f.faction ?? f.name} captureState ${J(f.captureState)}`),
+      ...(Array.isArray(ps.factionRelationships) ? ps.factionRelationships : []).filter((x) => isRec(x) && 'captureState' in x).map((x) => `relation ${J(x.pair)} captureState ${J(x.captureState)}`)];
+  };
+  it('UNIT (iii) (powers.capture): on a read that withholds the house and serves NO criminal house and NO criminal power, no served power or relation carries a capture key (the open place\'s form), both engines, every read and setting, Reveal DM off and on; beside a shown criminal house, and on a criminal governing power\'s row (VR42), the keys are served byte for byte (the teeth)', async () => {
+    const bad = []; const tooth = []; let hiding = 0; let underside = 0; let keptServed = 0;
+    for (const r of await readAll(HAND_CAP)) {
+      if (!hides(r.doc)) continue;
+      hiding += 1;
+      if (isRec(r.doc.powerStructure) && 'criminalCaptureState' in r.doc.powerStructure) underside += 1;
+      for (const k of capKeys(r.doc)) bad.push(`${tag(r)}: ${k}`);
+    }
+    const bm = HAND_CAP_SHOWN.institutions[1];
+    const shownBm = { 'own+bm': [...opened(OPEN), { address: `card:institution:${veil.CARD_KINDS.institution.idOf(bm)}`, hidden: false }] };
+    for (const [plant, extra, label] of [[HAND_CAP_SHOWN, shownBm, 'shown black market'], [HAND_CAP_GOV, {}, 'criminal governing power']]) {
+      const ccs = plant.powerStructure.criminalCaptureState; const gov = plant.powerStructure.factions[0].faction;
+      for (const r of await readAll(plant, extra)) {
+        if (!hides(r.doc)) continue;
+        if (plant === HAND_CAP_SHOWN && !(Array.isArray(r.doc.institutions) && r.doc.institutions.some((h) => isRec(h) && h.name === bm.name))) continue;
+        const ps = r.doc.powerStructure;
+        if (!isRec(ps) || !('criminalCaptureState' in ps)) continue; // the capture reading's grouping shut, or Reveal off: nothing of it is served
+        keptServed += 1;
+        const g = (Array.isArray(ps.factions) ? ps.factions : []).find((f) => isRec(f) && f.faction === gov);
+        const rel = (Array.isArray(ps.factionRelationships) ? ps.factionRelationships : []).find((x) => isRec(x) && J(x.pair) === J([gov, 'Fishers']));
+        if (ps.criminalCaptureState !== ccs) tooth.push(`${label} ${tag(r)}: criminalCaptureState ${J(ps.criminalCaptureState)}`);
+        if (!g || g.captureState !== ccs) tooth.push(`${label} ${tag(r)}: the governing row ${J(g)}`);
+        if (!rel || rel.captureState !== ccs) tooth.push(`${label} ${tag(r)}: the relation ${J(rel)}`);
+      }
+    }
+    note('R3-TELL-5b unit (iii) powers.capture on the hiding plant: hiding reads', hiding, '| of them serving the capture reading (criminalCaptureState present)', underside, '| faults', bad.length,
+      '| teeth: reads serving the capture reading beside a shown criminal house or a criminal governing power', keptServed, 'not byte for byte', tooth.length,
+      bad.length ? `\n  ${bad.slice(0, 12).join('\n  ')}` : '', tooth.length ? `\n  TOOTH ${tooth.slice(0, 6).join('\n  TOOTH ')}` : '');
+    expect(hiding).toBeGreaterThan(0);
+    expect(underside).toBeGreaterThan(0);
     expect(keptServed).toBeGreaterThan(0);
     expect(tooth).toEqual([]);
     expect(bad).toEqual([]);

@@ -1,0 +1,13 @@
+R3-TELL-5b unit (iii) powers.capture on the hiding plant: hiding reads 50 | of them serving the capture reading (criminalCaptureState present) 12 | faults 24 | teeth: reads serving the capture reading beside a shown criminal house or a criminal governing power 14 not byte for byte 0 
+  server gallery own dm=true: power Town Council captureState "equilibrium"
+  server gallery own dm=true: relation ["Town Council","Fishers"] captureState "equilibrium"
+  twin gallery own dm=true: power Town Council captureState "equilibrium"
+  twin gallery own dm=true: relation ["Town Council","Fishers"] captureState "equilibrium"
+  server import own dm=true: power Town Council captureState "equilibrium"
+  server import own dm=true: relation ["Town Council","Fishers"] captureState "equilibrium"
+  twin import own dm=true: power Town Council captureState "equilibrium"
+  twin import own dm=true: relation ["Town Council","Fishers"] captureState "equilibrium"
+  server gallery g:001 dm=true: power Town Council captureState "equilibrium"
+  server gallery g:001 dm=true: relation ["Town Council","Fishers"] captureState "equilibrium"
+  twin gallery g:001 dm=true: power Town Council captureState "equilibrium"
+  twin gallery g:001 dm=true: relation ["Town Council","Fishers"] captureState "equilibrium" 
