@@ -419,6 +419,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   LAWS AND DAILY LIFE LANDED (E30); the trouble lane's hooks arm (E23, half B: the full reveal veils nothing) is
   true of the line's 206 twin and reds by design at the veil's merge if 212 veils a reveal share: the hooks are then
   the veil's instrument's to hold.
+- E34 · THE VEIL'S CURE OF UNIT (vii) IS RULED: WITHHOLD ALWAYS, THE PAGE RE-DERIVES; NO GENERATOR BRANCH IN SQL (2026-11-22 05:16 UTC; the
+  seat's own recommendation on the chair's question: it is the lane's VR37 (a) and R2's proven pattern; cost one
+  unit against two or three for the port, whose logic would live twice). UNIT (viii), in order: (1) FIRST the
+  measure of what else in a served document is a function of the STORED list (`plotHooks` by the same flags; the
+  Defense key's `magical` reading; `EconomicsTab`'s smuggling filter; DS-DEF-3 and DS-DEF-4's crime-key wordings):
+  each fed by the reader, or withheld and re-derived, or shown not to tell; (2) `crimeTypes`, the key, on no shared
+  read of any place, in 212 and its twin; one reader deriving the list from the document in hand by the engine's own
+  writer; a reader census; `importRederive`; (3) the arm in two halves (no shared read carries the key; on all 92 the
+  reader's list equals the record reference: the 26 are its red-first); (4) EXECUTED: every input of the writer
+  survives the projection (the seed does not: `plotHooks` are not cured by this); (5) the merchant-army hook's row
+  corrected in both engines if its flag is served-derivable, else withheld and the town LOWER BY RULE. A WRONG LINE
+  OF THE CHAIR'S, CORRECTED TO THE SEAT THE SAME HOUR: E33 said "R3" is measured on the line with the content lanes
+  landed; THE LANE'S RULE STANDS: the line is not merged into the veil's lane before the close and "R3" is reached on
+  the lane. NEW INSTEAD: A JOIN PROBE on a scratch branch when the chair says (the line merged into a copy of the
+  lane, the pool re-made, the gates read dark and with the two laws lit): a measure of what the join adds, never the
+  join. VEIL-31 HANDS OVER (its own hand-over point); `prompts/VEIL-32.txt` is written; VEIL-32 is seated on VEIL-31's
+  tip the hour its one line comes (source `lane/veil-31-2026-11-21`, branch `lane/veil-32-2026-11-22`).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
