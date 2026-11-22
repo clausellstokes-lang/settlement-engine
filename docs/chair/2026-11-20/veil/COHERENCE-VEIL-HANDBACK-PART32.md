@@ -27,7 +27,10 @@ verified by ls-remote).
   REDS RE-RUN: R3-TELL-3 at 95f2ddfb8 2 failed / 1 passed (units 2, 4b); R3-TELL-4 at fff96514a 1 failed of 1 (unit 1). GREEN: both
   arms (galleryVeilTell3 + galleryVeilTell4) 4 of 4 at the tip. Instruments: --check 0, harnesses 0, acceptance 40 PASS, the R3
   gate HIGHER 0 / EQUAL 79 / LOWER 13 every engine and Reveal; walker 1 (the ARM D red, ruling 77).
-- IN FLIGHT: chain1's green chain, then `tests/lint` whole at the tip (ruling 77).
+- IN FLIGHT: chain1's green chain, then `tests/lint` whole at the tip (ruling 77). BUILDER R3-TELL-5 (an Agent subagent of this seat,
+  the seat's own tier) seated ~00:11 on worktree `/home/user/wt/r3tell5`, branch `v31-r3tell5` (local, cut at f22bb8324): unit 0
+  (ruling 77's marker) then unit (ii); it waits for the seat's chain before any heavy run. If this seat stops, its work goes up
+  as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
 - 212 AND THE REGISTRY READ WHOLE by this seat 00:02-00:03 UTC (the character tables included), before any brief or merge.
 - BRIEF: `briefs/R3-TELL-5-BRIEF.md` carries VEIL-31's amendments at its head (paths, the pool, unit 0 = ruling 77's marker, tests/lint whole per unit).
 - NEXT: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
