@@ -167,6 +167,11 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   places work; the fix of the first two and the landing of "DAILY-B" each wait for a place (about an hour and a
   half) unless he allows two short-lived extra workers.
 
+- **THE OWNER'S ORDER TO RECORD AND STOP (written 2026-11-22 22:22 UTC; it came at about 22:03 UTC by the session's record), verbatim:** "At the next hourly check. Focus all your attention and effort on recording every lane's progress for
+  handoff to a different account and stoping the progress of each lane once you have recorded them." READ AS: at the
+  22:58 net the chair does ONLY this: every lane's state recorded on origin for a chair on ANOTHER account (who can
+  see no session of this one), then each lane stopped. Answered the same turn in plain words. CARRIED OUT AS E135.
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1966,6 +1971,16 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   "LEGACY-TELLS", the four rows, the player read's first; (3) chains A and B add a STORED ARM to their proofs with
   VEIL-33's read-stored mode (told to VEIL-36 and VEIL-35); neither cures the stored prose. THE READER'S LIST gains
   the class. THIS IS WHY THE MEASURE WAS ORDERED (E121): it found what the pool could not hold.
+- E135 · THE PROGRAM IS RECORDED FOR ANOTHER ACCOUNT AND STOPPED AT THE 22:58 NET, BY THE OWNER'S ORDER (recorded 2026-11-22 22:22 UTC; his words in section 1). BEFORE THE NET: all six seats warned (priority "next"): start nothing that cannot be recorded by 22:58; every builder
+  brought to a commit (work in progress said as such); every branch pushed by its own name; each hand-back's first
+  section final, written for a reader who has never seen the session: done with commits, half done and where, next
+  in order, how to re-make its machine's state. NO "TIP?", no merge into the veil's tip, no landing, no GO, no new
+  seat: "DAILY-B" stays accepted and not landed; the flip stays not started; the two sentence pairs stay not
+  started (`prompts/GO-PROSE-5-DISAGREE.txt` was never sent). THE HAND-OFF NOTE: `PICKUP-FOR-NEXT-ACCOUNT.md` beside
+  this file (the one command, what binds, the state in one page, every lane with its branches and its successor's
+  prompt, what the next chair does first, the owner's list at the close); each lane's last row is filled from the
+  seat's final line once `git ls-remote` shows origin holds every commit it names: only then is the lane counted
+  recorded and stopped. The question put to the owner about two extra workers is overtaken by this order.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 

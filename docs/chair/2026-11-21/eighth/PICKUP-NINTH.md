@@ -4,6 +4,8 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## THE PROGRAM WAS STOPPED FOR A HAND-OFF TO ANOTHER ACCOUNT (2026-11-22 22:22 UTC): READ `PICKUP-FOR-NEXT-ACCOUNT.md` BESIDE THIS FILE INSTEAD OF THIS ONE. The blocks below are the eighth chair's own running notes and are kept as history.
+
 ## READ THIS FIRST (2026-11-22 21:29 UTC; it supersedes every block below it)
 
 (AMENDED 2026-11-22 21:56 UTC: the chair's record is 825,812; CI on point 105 is read: every red on the list, none new; VEIL-36 is at 506,417 after one hour and hands over at 620,000: A THIRD SEAT FOR CHAIN A is owed the next place after PROSE-5 and the stack; R5D-FORMS is in (117 standing forms), R5D-SQL building; DAILY-C's 34 new lines are read and taken; net 23 is armed for 22:58.)
