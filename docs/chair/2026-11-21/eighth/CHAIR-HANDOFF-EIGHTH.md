@@ -224,6 +224,36 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   under a lit world's form config kept law 1 but re-made its people under law 2's band
   (`tests/domain/seat/seatLawSavedTown.test.js` arm 4, red since the UK merge, never run by SEAT-9). The law is read
   off the RECORD being regenerated; a sweep of every other reader on the regenerate, re-derive, clone and load roads.
+- E18 · FORTUNE: THE EVENT-KIND SPLIT OF E15 IS WITHDRAWN; THE THREE WORDINGS ARE KIND-NEUTRAL; FIRST PAINT IS CURED BEFORE THE
+  LANDING LINE (ruled 2026-11-22 03:38 and 03:50 UTC, as the chair's messages to the seat carry the hours). The seat
+  showed that choosing a wording by the event's kind needs a new vocabulary atom (a declared fact every read serves):
+  more than the fault is worth. SO NO WORDING SAYS "hit": A "{event} is {past} at {place}; the place came through it,
+  and its people hold the more firmly to {seat}." · B (unchanged) "{event} is {past} at {place}; having come through
+  it, people there are slower to turn on {seat}." · C "{event} is {past} at {place}, and coming through it has left
+  its people readier to stand by {seat}." The `{ago}` forms retire. FIRST PAINT: the lane read +6,609 raw over the
+  line; the seat itemized it: `fortuneMerits.js` has been pulled into the eager engine core by
+  `computeEngineSharedDomain` since U5a, dragging `fortuneLaw.js`, `bandLadders.js` and
+  `legacyUnresolvedWordings.js`. THE CURE, RULED: a row in `ENGINE_SHARED_DOMAIN_EXCISIONS` and the file pinned into
+  the `fortune-law` chunk (U6's own form); the build is the proof; done BEFORE "FORTUNE <commit>". The landing line
+  also carries: the line at f5295e425 merged; the lane's one pool table on the sameness door's hand list
+  (`HAND_CEILING` 73 to 74); rule 8 with the governing suites; the size account in the hand-back.
+- E19 · THE VEIL: `powerStructure.criminalCaptureState` READS 'none' WHERE THE SERVED CRIME SIGNAL IS FALSE (ruled 2026-11-22 03:30
+  UTC by the chair's message; the seat's ruling 82). A rung of capture served beside "no crime to speak of" tells a
+  reader a hidden house holds the place. THE FOUR PLACES WHOSE HOUSE-FREE TWIN KEEPS A RUNG are listed LOWER BY RULE
+  in "R3" with their cause, which the seat found and the chair accepts: a criminal POWER that is not a house (the twin
+  has it too): not a hole in the instrument.
+- E20 · WHO RULES: UNIT 3 ACCEPTED, THE SECOND BASE MADE BY THE CHAIR, ONE ARM OWED (2026-11-22 03:54 to 04:05 UTC). ACCEPTED as the seat
+  reported it: UK-LEGACY merged (a4b3fff4a; the law is read off the record through `seatLaw.js ::
+  withRecordSeatLaw`); THE FLIP'S CENSUS: flipped, 46 reds in 26 files (10 dial pins, 12 born fixtures in 7 files,
+  nothing else); control 24 (23 on the list by name and arm 4, now cured); the dark proof a64619510 against a4b3fff4a
+  EQUAL. THE SEAT'S OWN FINDING: `tests/domain/seat/seatLawSavedTown.test.js` does NOT execute the re-derive road:
+  ORDERED: one arm that executes it for a law-1 place under a lit world's config (the place stays law 1, its people's
+  bands with it), red first by a planted fault. THE SECOND BASE: `lane/seat-10-base-2026-11-21` e8bc160f8 = the
+  seat's bb4c3e874 with the line at f5295e425 merged in by the chair (COMMON-EIGHTH 10): five conflicts, all
+  registers or tables (wiring census, writer-reach, lighting census, tuning inventory at the line's side, byte-equal;
+  the manifest the union, invariants 1,190); `tests/lint/proseWiringCensus.walker.test.js` auto-merged, both sides
+  read (disjoint hunks); NOTHING RE-PINNED; the push's hook green (167, 1113, eslint 0 errors). THE LESSON OF THE FIRST
+  BASE KEPT: the seat named its exact tip and added no commit until the base returned.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -386,15 +416,39 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   only; the strikes list is the closed one); PAGE-12: `--tighten` once, nothing raised; its hooks' second-place share
   over the 30% bar at the two large sizes (32.4%, 36.5%; 30.3% on the visitor's pool at city) does not hold the
   landing and is said by its figures. Both seats told to merge f5295e425 before registering their pools.
+- 2026-11-22 04:06 UTC · AFTER THE COMPACTION OF THE CHAIR'S OWN CONTEXT (between SEAT-10's message of 03:57 and the chair's next command at 04:00; the work went on from
+  the summary, this log and `PICKUP-NINTH.md`). RULED BETWEEN 03:23 AND NOW: E18 (fortune's wordings and first paint), E19 (the veil's
+  capture rung), E20 (who rules: unit 3, the second base, the owed arm). THE SECOND BASE FOR SEAT-10 is pushed
+  (e8bc160f8, 04:05) and the seat told (the message's own label says 04:06: written a minute ahead of the clock, the
+  chair's slip). POINT 94 IS IN FLIGHT: `lane/prose-4-2026-11-22` at 9ae014014 (the chair's builder: cb4a47963, 25
+  guards and counts re-pointed, tests only; 9513ba024, five rows of `WORD_CORRECTIONS` and the self-vouch anchor;
+  9ae014014, the v6 row), one landing helper on f5295e425 since about 03:30: merged, registers by their doors, type
+  ratchet, strict, eslint, build, `tests/build` 15 red of 612 (the same count as at point 93); its long run (141
+  governing files beside the directories) started 04:05. THE SIX SENTENCES AS GENERATED (they govern over E14's
+  drafts): ECO-8 PROSPEROUS v7 "Money keeps going into what {settlement} has built, and the upkeep never waits on
+  it." · ECO-11 v4 "Little is being taken from the {resource} at {settlement} now, and what was taken is coming back
+  on its own, in its own time." · ECO-11 v6 "Nothing more can be taken from the {resource} at {settlement} for the
+  present, but not for good; given time, there will be something to take again." · ECO-12 CRITICAL IMPORT v4 "A
+  visitor who asks at {settlement} about {good} is told that the country around never yields enough." · GEN-13
+  NO-MARKET v9 "{settlement} keeps no market and no market day; goods change hands whenever one neighbour has
+  something another wants." · v12 "{settlement} has no market, and trades in a small way: a sack here, a bundle
+  there, carried between neighbours." CI's run on f5295e425 (44980166938) started 03:20:24 and is still running.
+  WRITTEN FOR THE NEXT FREE SEAT: `prompts/PAGE-13.txt` (the display lane: the tip proved, the safety pages' test
+  re-made, the line merged, "PAGE-SIDES"; then the three Daily Life slots printed, "PAGE-THIN"; then the cause
+  sentence wired after the trouble lane lands, "PAGE-DISPLAY"). `PLACE-3.txt` and `PEOPLE-3.txt` AMENDED: their first
+  units are landed (points 91 and 93); each seat fast-forwards to the line and starts at its unit 2.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
-PLACE (three failures of its own to cure, then "PLACE") · PEOPLE (PEOPLE-1's landing line; then PEOPLE-2's B2 and
-B3 as their own line) · DISPLAY (the SIDES merge; the cause sentence's wiring after the trouble lane's parity cure) ·
-GOALS AND TIES (27 failures to name; TIES-HOLD) · DEPTH (two rulings owed by this chair; its tie pairs after
-TIES-HOLD) · PEOPLE AND PLACE (frames, landmarks, F5-NARROW; arm (u) owed a ruling) · SESSION SHEET (six lint
-failures left by SR1's merge) · STATE SENTENCES (after "PROSE 588967385" is read: SEAT-TOWN) · DAILY LIFE (after
-"DAILY b1a205d14" is read) · TRADITIONS (unit 13, after point 88) · TROUBLES LAW (dark; K3; ONLY ON THE OWNER'S YES).
+(Rewritten 2026-11-22 04:06 UTC.) DISPLAY (`prompts/PAGE-13.txt`, written: THE NEXT FREE SEAT; source `lane/page-9-2026-11-20`
+1cf317f5f, branch `lane/page-13-2026-11-22`) · PLACE (the trade note's cure: `PLACE-3.txt` as amended; source and
+branch `lane/place-3-2026-11-21`) · PEOPLE (the second half, B3 then B2: `PEOPLE-3.txt` as amended; source and branch
+`lane/people-3-2026-11-21`) · GOALS AND TIES (27 failures to name; TIES-HOLD) · DEPTH (two rulings owed by this
+chair; its tie pairs after TIES-HOLD) · PEOPLE AND PLACE (frames, landmarks, F5-NARROW; arm (u) owed a ruling) ·
+SESSION SHEET (six lint failures left by SR1's merge) · STATE SENTENCES (the next units: SEAT-TOWN) · DAILY LIFE (the
+other five slots and the owner-only line: worded and ruled, NOT built) · TRADITIONS (unit 13) · TROUBLES LAW (dark;
+K3; ONLY ON THE OWNER'S YES). The last eight have no eighth-chair prompt yet: each is written from the pickup's
+paragraph for its lane, its hand-back's first section and the form of `PAGE-13.txt`.
 
 ## 5. Waiting on the owner (carried from the pickup; none blocks a seat today)
 
