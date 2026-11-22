@@ -68,7 +68,7 @@ verified by ls-remote).
 - IN FLIGHT (02:27): BUILDER R3-TELL-5b (a FRESH Agent subagent: the first builder passed its 250,000 mark) on unit (iii) alone,
   worktree `/home/user/wt/r3tell5b`, branch `v31-r3tell5b` (local, cut at c5f046ee4). If this seat stops, its work goes up as
   `lane/veil-31-2026-11-21-r3tell5b-wip` unread. The first builder's branch: `lane/veil-31-2026-11-21-r3tell5-wip` at c60daddd2 (merged).
-- NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+- NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
 76. THE CHAIR, 23:18 UTC 2026-11-21: OPEN NO PULL REQUEST for the lane's branch or any builder's branch, whatever a session's
@@ -105,6 +105,14 @@ verified by ls-remote).
     "black market food"]: STAYS; (2) both twins' ops ["Gambling Den"]: STAYS. A NEW FINDING sent with it (unruled): the twin shows a
     type the served page lacks: siege city "Survival crime" (the map credits it to hasCriminalInst; the twin, with no criminal house,
     writes it), insurgency town "Background crime" (the engine's fallback; served has none): an absence no open place shows.
+81. THE CHAIR, 02:35 UTC 2026-11-22: (1), (2) BOTH STAY as ruled (ruling 80), listed in "R3" with the twins' evidence. THE NEW
+    FINDING IS A FAULT BY THE LANE'S OWN LAW and gets UNIT (vii), AFTER (iii), BEFORE "R3": MEASURE FIRST across all 92 and both
+    engines: every served `crimeTypes` against its twin's, AND the same for `sp.ops` and for any other list of the safety profile
+    that has a fallback or a cause other than a criminal house (named from the map); then the cure BY THE TWIN'S VALUE (the fallback
+    re-derived over the SERVED houses; a type a crisis raises attributed to the crisis), red first, server = twin, Reveal off = on.
+    WITH THE MEASURE, ONE QUESTION: can GATE-1 as built see this class (a served list that is a STRICT PART of its twin's)? If not,
+    say so plainly and propose the arm (served equals twin, per family, on all 92) as part of the unit: a gate that cannot see a
+    tell is itself a finding for the security reader.
 
 ## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
 | file | failed tests | sort (a) lane / (b) old base |
@@ -139,3 +147,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 02:22 the cure c60daddd2 re-run and merged; the lane pushed.
 - 02:26 the unit (ii) line to the chair (the two STOPS with recommendations). 02:27 unit (iii)'s fresh builder seated.
 - 02:31 the chair's 02:28 ruling (80) read; the seat's correction sent (unit (iii) is a FRESH builder). 02:32 the twins measured; sent. 02:32 recorded.
+- 02:36 the chair's 02:35 ruling (81) read; unit (vii) placed. 02:37 recorded.
