@@ -6,8 +6,21 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 `lane/veil-32-2026-11-22` at the seating; src, supabase and tests identical to VEIL-32's gated tip 3cca025b8).
 
 ## 1. WHERE THIS SEAT STANDS (kept current at every push)
-- THE ONE RULE: migration 212 has ONE writer, VEIL-32, until the chair says it has handed over. THIS SEAT CHANGES NOTHING in 212,
-  its rollback, the twin or the registry, and briefs no builder that does. Every database is local.
+- (H) THE HAND-OVER (the chair, 13:07 UTC: "VEIL-32-PART 7027b89ea, HANDED OVER"): THIS SEAT IS THE LANE'S ONE WRITER of 212, its
+  twin and the registry FROM 13:07. `lane/veil-32-2026-11-22` at 7027b89ea MERGED into this branch as 929739889 (`--no-ff`, NO
+  CONFLICT: this branch held documents, briefs and instruments only). WHAT IT BROUGHT: unit (viii) (VEIL-32's merge c2625fb1f):
+  `crimeTypes` withheld ALWAYS in 212 (`_gallery_veil_withhold_always`) and the twin (`withholdAlways`); the R3 attribution block
+  gone from both; the merchant-army hook's raiser the engine's `merchantArmy` (both engines); THE ONE READER
+  `pageRederive.js :: rederiveCrimeTypes` (wired in `rederiveForPage` and `importRederive.js :: rederiveInPlace`);
+  `GROUPING_OPEN_EVIDENCE` narrowed to `criminalInstitutions`; the registry row `safety.crimeTypes` withhold/always/re-derive;
+  `tests/lint/crimeTypesReaders.walker.test.js` (every reader registered, the key never ships); `tests/security/galleryVeilTell8.pglite.test.js`
+  (halves 1 and 2, the hook, the evidence's converse); two re-stated arms. THE DIFF READ WHOLE ONCE by this seat (13:08-13:09) with 212
+  and the registry beside it (both read whole at 08:05-08:08; the diff is all 212 changed since): NO FAULT (one cosmetic: 212's
+  header item (35) stands above (34)). BYTES at 929739889: 212 `0352a5028544cce0…` (VEIL-32: 0352a502…b278), rollback
+  `8cbd7d1c…`, 211 `eface6d0…` / `ce8474ff…` unchanged (`/var/tmp/v18/out/v33/h/g/sha256.txt`). VEIL-32's figures on ITS new pool
+  (pool-t2sig-3): GATE-1 4 of 92 (7 LOWER), GATE-2 20 of 40, server = twin. THIS SEAT'S RE-MAKE: `/var/tmp/v18/out/v33/h/chainH.sh`
+  (template v33tplH; NEW pool `/var/tmp/v18/t2/pool-t2sig-3` in this container; both gates; typecheck; arms Tell8+3+4+5; `tests/lint`
+  whole) to `/var/tmp/v18/out/v33/h/g/done.txt`, queued on the mutex behind pass 2's chain from 13:09. Every database is local.
 - READ (08:05-08:08 UTC): the prompt's list, each whole; PART 33 section 2 as well (rulings 89-90 are the probe's terms); 212
   (`8688ddb6…5a3a`) and the registry WHOLE, once.
 - (0) THE POOL AND THE GREEN CHAIN, this container: `/var/tmp/v18/out/v33/chain0.sh` (npm ci 0, ledger 0, make-instruments:
@@ -77,8 +90,10 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   load); (vi) both teeth edited, never run. Resumed after pass 2 by a FRESH builder from that branch (the first spent ~348,000).
 - THE MACHINE: one heavy run at a time; the builders' heavy runs wait for the green chain's END and then go through
   `scripts/gate-mutex.sh --run`.
-- NEXT STEP IN ONE LINE: chain1's END; pass 1 (the builder's report read once, its branch pushed `-wip`); pass 2; (Q) from
-  `lane/veil-33-2026-11-22-q-wip` with a fresh builder, (iv) first; at the chair's word of VEIL-32's hand-over, (H).
+- NEXT STEP IN ONE LINE (the chair's order of 13:07): chainH's gates -> ONE line to the chair; R5-RECENT (its instruments from
+  V33-R5R, then ONE builder for 212 and the twin, the diff read whole, red and green by this seat, the gates re-read); then (iv)
+  (say whether its cure answers pass 2's three lit `powers.relations` cities), (v), (vi), (R3). JOINPROBE.md when pass 2's runs end.
+  THE PER-LAW GATES were CANCELLED 13:08 before any pool (the writer's heavy lane first; no pool beside another): re-queued after.
 
 ## 2. RULINGS SINCE PART 33 (numbered on from 91, PART 33's last; the eighth chair's; each vetoable by the owner)
 92. THE CHAIR TO VEIL-33, 08:20 UTC: the probe's two refs are CLOSE-1's scratch refs, READ-ONLY, merged into the probe branch only:
@@ -113,6 +128,14 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     first unit. (3) Act T's 79 strings read one by one before JOINPROBE.md, sorted true / collision, the true by surface and place.
     (4) Fortune clean is taken. The three new GATE-1 cities: GATED PER LAW before the cause is written as more than plausible. One
     line when (2) is committed.
+96. THE CHAIR TO VEIL-33, 13:07 UTC: VEIL-32 HAS HANDED OVER ("VEIL-32-PART 7027b89ea, HANDED OVER"): THIS SEAT IS THE LANE'S ONE
+    WRITER (unit (H)). (1) merge 7027b89ea; read (viii)'s diff WHOLE once with 212 and the registry beside it; re-make the pool on the
+    merged tip and read both gates: ONE LINE, with the count. (2) R5-RECENT (E78): the prepared brief, plant and walker; ONE builder;
+    the diff read whole; red and green by this seat; the gates re-read. (3) Then VEIL-32.txt's order: (iv) relations (say whether its
+    cure answers pass 2's three lit GATE-1 cities on `powers.relations`), (v), (vi), (R3). Pass 2's runs in the air finish and
+    JOINPROBE.md is written (with the 79 sorted), but the writer's builder has the box's heavy lane: ONE builder at a time for 212; a
+    pool never beside another. THE MARK: 700,000 by the chair's read; at it, hand over as VEIL-32 did, PART 34's section 1 current.
+    REVIEW-VEIL-15 waits for "R3 <commit>" from this seat, through the chair.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -126,3 +149,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 11:29 the chair's E75 (ruling 94) read; its pass-2 addition relayed to the builder. (ix) and the worklist (b)-(d): after pass 2, on the probe branch.
 - 12:12 pass 2 returned interim (33d6ad00b); its lit gates re-read; the probe branch pushed; the line to the chair.
 - 12:21 the chair's E78 (ruling 95) read. then act T's strings sorted; the R5-RECENT brief committed (abd68e653); its builder seated; the per-law trees cut and their run queued (12:25).
+- 13:07 the chair: VEIL-32 handed over (ruling 96). 13:08 the per-law run cancelled (no pool had started). 13:08 7027b89ea merged (929739889), no conflict; (viii)'s diff read whole; 13:09 chainH launched (queued on the mutex).
