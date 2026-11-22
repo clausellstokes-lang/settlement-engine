@@ -498,6 +498,26 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/facts/timberAtHand.js',
   '/src/domain/facts/tradeAtWork.js',
   '/src/domain/facts/sceneSupply.js',
+  // FIRSTPAINT-PIN (PAGE-7, 2026-11-20; the chair's ruling of 19:59, a rise is cured on the lane). THE SAME PREMISE,
+  // THE SAME MEASUREMENT, the BAR4-FIRSTPAINT block above line for line. The causes (CAUSES-DATA addenda 3 and 4,
+  // merged at 01c2bbb99) gave facts/factsOf.js (pinned here) two new leaves, facts/causeHouses.js (the group table and
+  // causeHouseStands) and facts/entrepot.js (isEntrepot, a zero-import leaf). factsOf.js is generator-reached, so the
+  // derivation walked through it before the .delete() and put both in EAGER engine-core, where causeHouseStands's call
+  // to liveInstitutionNames (excised above, it rides this chunk) was an engine-core -> coherence-lazy edge in dist/
+  // (`import{l as Ma}from"./coherence-lazy-…js"`): coherence-lazy, data-lazy and the FIX-B2 chunk narrative-mutations
+  // entered first paint. Their importers: facts/factsOf.js (pinned here) and display/tensionCauseHolds.js (imported by
+  // nothing yet); NO module of the true first-paint graph reaches either. Their imports: causeHouses.js reads
+  // facts/liveInstitutionNames.js, which already rides this chunk; entrepot.js imports nothing. So coherence-lazy gains
+  // no edge. No source line moves.
+  // MEASURED (npm run build, VERIFY_DIST=1 vendorPdfLazy + generationWorkerLazy; the lane tip 634bb257b before, this pin
+  // after): first paint 3,282,737 -> 1,177,993 B raw (gzip 941,766 -> 374,744; Brotli 768,543 -> 314,659), 325 B
+  // over PAGE-7's base f7f5986b5 (1,177,668);
+  // engine-core 309,740 -> 308,455; coherence-lazy 279,371 -> 280,570; the engine chunk 913,179 -> 913,178; the
+  // generation worker unchanged (2,589,546).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (the eager graph holds neither) and
+  //   tests/build/vendorPdfLazy.test.js (the first-paint byte budget). Pinned here, never left unpinned (FP-G11).
+  '/src/domain/facts/causeHouses.js',
+  '/src/domain/facts/entrepot.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);

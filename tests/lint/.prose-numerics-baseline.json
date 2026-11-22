@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 991,
+    "line": 986,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -328,12 +328,6 @@
     "line": 171,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
-  },
-  {
-    "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 258,
-    "category": "floatInterpolation",
-    "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
