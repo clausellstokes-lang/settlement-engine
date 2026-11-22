@@ -178,12 +178,16 @@ describe('U6 (4): the licensed pair takes W2', () => {
 });
 
 describe('U6 (5): under law 1 not one byte moves', () => {
-  it.each([['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['town', 'u6t-city-4']])('a %s birth (%s), law 1, against law 1 with the new paths off', (settType, seed) => {
-    build(false);
-    const on = born(settType, seed);
-    expect(seatLaw.seatsByHolder(on), 'the birth is law 1').toBe(false);
-    sw.off = true;
-    const off = born(settType, seed);
-    expect(JSON.stringify(on), 'the law-1 record is byte-identical with the new paths off').toBe(JSON.stringify(off));
+  it('four births (a town, a village, a city, and the lit witness seed born dark), law 1, against law 1 with the new paths off', () => {
+    // a plain loop over the rows, never an `each` (sovereigntyLightingContract's park debt only shrinks)
+    for (const [settType, seed] of [['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['city', 'u6t-city-4']]) {
+      build(false);
+      sw.off = false;
+      const on = born(settType, seed);
+      expect(seatLaw.seatsByHolder(on), `${seed}: the birth is law 1`).toBe(false);
+      sw.off = true;
+      const off = born(settType, seed);
+      expect(JSON.stringify(on), `${seed}: the law-1 record is byte-identical with the new paths off`).toBe(JSON.stringify(off));
+    }
   });
 });
