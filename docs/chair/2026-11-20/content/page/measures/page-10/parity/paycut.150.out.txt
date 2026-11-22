@@ -1,0 +1,21 @@
+M: 14 of 900 places differ (payCut as written on the owner record vs the served restatement on plain toPublicSafe)
+owner payCut true: 21; served restatement true: 35
+owner-only (true on the owner, false served): 0; served-only: 14
+by size: thorp 0/150 hamlet 2/150 village 9/150 town 2/150 city 1/150 metropolis 0/150
+by reason:
+  14× condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+places:
+  hxd-hamlet-73 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-hamlet-97 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-7 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-13 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-34 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-49 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-62 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-89 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-94 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-119 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-village-139 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-town-28 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-town-108 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)
+  hxd-city-1 owner=false served=true :: condition economic_stress; a military card stands but none carries settlementCondition (outside the enrichment cut, or its template refused)

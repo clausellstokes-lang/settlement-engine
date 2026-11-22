@@ -20,6 +20,8 @@ import { declarationAdmits, declarationOf } from '../../../src/domain/facts/fact
 import { solePowerNameOf } from '../../../src/data/tensionSidePower.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
+import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
+import { orderForceOf } from '../../../src/domain/facts/orderForce.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<[string, any]>} */ let births = [];
@@ -208,4 +210,96 @@ describe('a house is matched by its catalogue identity on the live roster, never
     expect(TENSION_CAUSES.crime_wave.plain.map((l) => l.text)).toContain(said);
     expectAbsentWithAnchor(blackMarketLines, said, blackMarketLines[0], 'a ruined black market');
   });
+});
+
+// CAUSES-PARITY B (PAGE-10, the chair's NOT-EXACT branch: measures/page-10/parity/paycut.mjs found payCut's served restatement
+// differs at 14 of 900): force_unpaid_or_cut holds on its SERVED arms alone (volunteers, pay short or unpaid), never on
+// `orderForce.payCut`, which reads `npcs[].settlementCondition` (no shared read serves it).
+describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)', () => {
+  const ROW = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'force_unpaid_or_cut'));
+  /** a fully paid garrison; a soldier whose card carries the hard-times condition (payCut on the owner record) */
+  const cut = () => ({
+    name: 'Ashford', institutions: [{ name: 'Garrison' }], powerStructure: { factions: [] },
+    defenseProfile: { economicGates: { military: 1.2 } },
+    npcs: [{ id: 'n1', name: 'Sergeant Vell', category: 'military', settlementCondition: 'economic_stress' }],
+  });
+  it('a kept, fully paid force whose soldier carries economic_stress: payCut is true, the row does not hold, owner == served', () => {
+    const record = cut();
+    const facts = factsOf(record);
+    expect(orderForceOf(record).payCut).toBe(true);
+    expect(facts.orderForce.pay).toBe('full');
+    expect(TENSION_CAUSE_HOLDS[ROW.holds](record, facts)).toBe(false);
+    expect(tensionCauseSentenceOf(record, { type: 'crime_wave' })).toBe(tensionCauseSentenceOf(toPublicSafe(record), { type: 'crime_wave' }));
+  });
+  it('the served arms still hold it: volunteers (a militia alone), pay short', () => {
+    const militia = { ...cut(), institutions: [{ name: 'Militia' }], npcs: [] };
+    const short = { ...cut(), defenseProfile: { economicGates: { military: 0.6 } }, npcs: [] };
+    for (const [label, record] of /** @type {Array<[string, any]>} */ ([['volunteers', militia], ['short', short]])) {
+      expect(TENSION_CAUSE_HOLDS[ROW.holds](record, factsOf(record)), label).toBe(true);
+    }
+  });
+  describe('the three plain-toPublicSafe faults (PAGE-9 caf3509e7, build/CAUSES-WIRING-PARITY/pairs.2026-11-20.txt)', () => {
+    const WANT = ['r2r-city-19', 'r2s-religious_conversion-city-0', 'r2s-wartime-metropolis-2'];
+    /** @type {Array<[string, any]>} */ let faults = [];
+    beforeAll(async () => {
+      const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
+      const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
+      const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
+      const { censusPlan, configOf } = await import('../../components/pageCensusWalk.shared.mjs');
+      await loadGenerationLawPayloads();
+      faults = censusPlan('r2').filter((r) => WANT.includes(r.seed)).map((row) => /** @type {[string, any]} */ ([row.seed,
+        generateSettlementPipeline(configOf(row, DEFAULT_CONFIG, birthConfig), null, { seed: row.seed, customContent: {} })]));
+    }, 120000);
+    it('each is reborn with payCut on the owner record, and its crime_wave sentence is the same on plain toPublicSafe', () => {
+      expect(faults.map(([seed]) => seed).sort()).toEqual([...WANT].sort());
+      for (const [seed, doc] of faults) {
+        expect(orderForceOf(doc).payCut, seed).toBe(true);
+        const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+        expect(t, seed).toBeTruthy();
+        expect(tensionCauseSentenceOf(toPublicSafe(doc), t), seed).toBe(tensionCauseSentenceOf(doc, t));
+      }
+    });
+  });
+});
+
+// CAUSES-PARITY-2 F (PAGE-12; the first brief's F, the chair's (3)): THE LAW ON A BORN PLACE. hxd-city-138 (born as
+// measures/page-7/sim.mjs births it) holds crime_wave by its black market alone, and the black market is its one hideable
+// house. On the gallery's hiding read (toPublicSafe, then the veil's default set) the house is gone and the served page prints
+// what the same place born WITHOUT the house (its twin: the record with the black market removed) prints; the owner's page
+// keeps the black market's own wording.
+describe('a hidden house prints what the place without it prints (CAUSES-PARITY-2 F)', () => {
+  it('hxd-city-138: served == the house-free twin; the owner keeps the black market\'s wording', async () => {
+    const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
+    const { applyVeil, defaultVeilFor, resolveVeil } = await import('../../../src/domain/display/galleryVeil.js');
+    const { isHideableHouse } = await import('../../../src/domain/people/cardVeil.js');
+    const { CAUSE_HOUSES } = await import('../../../src/domain/facts/causeHouses.js');
+    const { atomHolds } = await import('../../../src/domain/facts/factVocabulary.js');
+    await loadGenerationLawPayloads();
+    const doc = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city' }), null, { seed: 'hxd-city-138', customContent: {} }));
+    const hide = (/** @type {any} */ r) => { const pub = toPublicSafe(r); return applyVeil(pub, resolveVeil(defaultVeilFor(pub), null)); };
+    const isBlackMarket = (/** @type {any} */ i) => CAUSE_HOUSES.blackMarket.has(String(i?.name ?? '').trim().toLowerCase());
+    const row = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market'));
+    const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    expect(t).toBeTruthy();
+    // the place: its one hideable house is the black market, and the owner prints the black market's wording
+    expect(doc.institutions.filter((/** @type {any} */ i) => isHideableHouse(i)).map((/** @type {any} */ i) => isBlackMarket(i))).toEqual([true]);
+    expect(row.wordings.map((/** @type {any} */ w) => w.text)).toContain(tensionCauseSentenceOf(doc, t));
+    expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(doc)))).toBe(true);
+    // the hiding read: the house is gone, the row does not hold, its declared atom reads no
+    const served = hide(doc);
+    const t2 = served.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    expect(served.institutions.some(isBlackMarket)).toBe(false);
+    expect(TENSION_CAUSE_HOLDS[row.holds](served, factsOf(served))).toBe(false);
+    expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(served)))).toBe(false);
+    // the twin: the same place with the house removed
+    const twin = structuredClone(doc);
+    twin.institutions = twin.institutions.filter((/** @type {any} */ i) => !isBlackMarket(i));
+    expect(twin.institutions.length).toBe(doc.institutions.length - 1);
+    const plain = tensionCauseSentenceOf(twin, t);
+    expect(tensionCauseSentenceOf(served, t2)).toBe(plain);
+    expect(tensionCauseSentenceOf(hide(twin), t2)).toBe(plain);
+    expect(tensionCauseSentenceOf(doc, t)).not.toBe(plain);
+  }, 120000);
 });
