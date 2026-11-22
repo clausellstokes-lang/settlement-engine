@@ -102,7 +102,9 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   loss). RULED 15:16 (ruling 99, E92): THE OTHER WAY. THE CURE: a FRESH builder V33-R5C2 (same worktree and branch `v33-r5cure`; the
   brief's E92 section 42640f37d): measure first by the two writers, then build as pre-ruled or STOP with figures; the plant green by
   the key's absence, the differential (a hiding read's page sentence = the same place's with the power never there), a readers'
-  walker, the composed-hosts walker's row green (26 red), the registry's writer corrected, first paint +0.
+  walker, the composed-hosts walker's row green (26 red), the registry's writer corrected, first paint +0. R5C2 STOPPED at E92 (4)
+  (ac809527e, 286/287; pushed as `lane/veil-33-2026-11-22-r5cure-wip`); RULED 15:29 (ruling 100, E93): R1, reader B; the brief's E93
+  section edf115e09; R5C2 resumed on it at 15:31.
 - THE HAND-OVER (ruling 99 (7)): VEIL-33 HANDS OVER AT R5-RECENT'S MERGE ("VEIL-33 HANDS OVER <commit>"), R5-DESC's brief written
   (`briefs/R5-DESC-BRIEF.md`, widened by ruling 98 and the contenders, row 18) and its plant if it costs little. VEIL-34 (seated by
   the chair on `prompts/VEIL-34.txt` within the hour) reads in beside; its units as writer: R5-DESC, R4-IDS, (iv), (v), (vi),
@@ -207,6 +209,18 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     cost little; VEIL-34 seated within the hour beside. ONE QUESTION ANSWERED 15:17: the Power tab's contenders (row 18) WERE judged
     within the probe's surface (b) (derivePowerStrata's output searched): hits on 4 places, in the strata, PLAUSIBLY the
     descriptions: R5-DESC's scope.
+100. THE CHAIR TO VEIL-33, 15:29 UTC (E93), ON R5C2's STOP ac809527e (measure (3)(i): reader B 286/287 nothing-hidden, 478/480
+    full; reader A 132/141; reader C 135/141; the one miss r5c2-m3-hamlet-8, a coherence repair's Citizen militia added after the
+    power step wrote the famine sentence; 0 transfers in 480 births): R1, BUILD READER B (`generatePowerStructure` over the served
+    page). (1) THE FIDELITY ARM PINS THE CLASS: misses only where a coherence repair added a house after the power step, listed by
+    name; any other cause reds; (2) the differential is the unit's proof, the plant green by absence, R5's walker; (3) transfers
+    out: the page prints B's baseline; "R5-RECENT-T" (transfers composed where the served page carries their parts and the
+    winner's row) is the successor's, placed by CLOSE-1's lit count; (4) the registry's writer row corrected to
+    `buildGovernanceLabels` / `transferRulingPower`; (5) no new 212 helper, the rollback untouched. THE HAND-OVER STAYS AT THIS
+    UNIT'S MERGE. INTAKE (the generation lane, after the first deploy): the power step's sentence is written before the coherence
+    repair and never re-settled. VEIL-33's line 15:31: `governingName` "Shadow Senate" IS served on jp6-metropolis-0's hiding read
+    (the governance sentence) and is the criminal taker's own label (`rulingPower.js:173`): a VR42 question, the chair's;
+    `previousGovernments`' cause on that read NOT KNOWN.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -227,3 +241,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 14:40 the chair's E89 (ruling 98) read 14:46; R5-DESC's brief widened to every power-card composed row (29 composed; 2 built today; 6 after R5-DESC).
 - 15:10 the gates at 83d236813 read (equal). R5C's STOP read; pushed `-wip`; 15:11 the (H) line and the STOP with the recommendation to the chair.
 - 15:13 push of 8a54f10d5. 15:16 the chair's E92 (ruling 99) read; 15:17 the contenders answered; the brief's E92 section 42640f37d; R5C2 seated; section 1 written for the hand-over.
+- 15:19 push of de8959b0f landed. 15:28 R5C2's STOP read and sent; ac809527e pushed (-r5cure-wip). 15:29 E93 (ruling 100); 15:30 the brief's E93 section edf115e09; 15:31 R5C2 resumed; the chair's one line answered.
