@@ -59,7 +59,20 @@ Your last message: at most 250 words: your last commit, the two files' paths, M'
 
 ---
 
-# R4-IDS — PART TWO: THE CURE (written by VEIL-35, chain B, E116; DRAFT until the chair's "TIP <commit>": the base, 212's sha and the line numbers below are re-stamped then). Vetoable by the owner.
+# R4-IDS — PART TWO: THE CURE (written by VEIL-35, chain B, E116). Vetoable by the owner.
+RE-STAMPED AT THE TIP (20:41 UTC 2026-11-22): the chair's "TIP af708f2fd" (`lane/veil-33-2026-11-22`: R5-RECENT MERGED at 0d9ec0113).
+212 there is `ff20ed89…` (+14 lines against `0352a502…`: `_gallery_veil_withhold_always` withholds `powerStructure.recentConflict`
+and its copy `pressureSentence`; the registry rows `power.recentConflict`, `power.recentConflict.pressureSentence`); nothing of it
+touches the re-key's sites. WORKTREE `/home/user/wt/r4i35`, branch `lane/veil-35-2026-11-22-r4ids-wip` at 08081ffdc (af708f2fd +
+part one 24a6f7ef5 merged, no conflict); `node_modules` is a link to the main checkout's. Commit there by explicit paths; NEVER
+push, never a pull request, never `--no-verify`. CHAIN A (R5-DESC) IS BUILT FROM THE SAME TIP: its SQL builder edits 212's
+`_gallery_veil_withhold_always` and the roster-choices power block and the registry; this unit's edit of
+`_gallery_veil_roster_choices` is ONLY ruling 53's six inline sites (item 4): touch nothing else in that function or in
+`_gallery_veil_withhold_always`, so the later merge of the two tips is a line-level union.
+THE CHAIR'S CONDITION (20:40, on the salt): AN ARM SHOWS that two reads of one place share NO served person id AND that every
+reference inside ONE read still resolves (cards, ties, the casts, the trace, roster copies, the served marker's keys, and the
+import's clone rows: `src/store/galleryImportSettlement.js :: importGallerySettlementImpl` over the served import), server and
+twin. R4I-PAGE builds it (in the part-one file or beside it).
 IN TWO BUILDERS, ONE AFTER THE OTHER, each on the seat's `lane/veil-35-2026-11-22-r4ids-wip` (cut from the lane's tip the chair
 names, with part one's two test files and manifest row merged in from `lane/veil-34-2026-11-22-r4ids-wip` at 24a6f7ef5):
 - **R4I-SQL** READS WHOLE, AS ITS FIRST ACT: `supabase/migrations/212_share_veil_later_cures.sql` and
