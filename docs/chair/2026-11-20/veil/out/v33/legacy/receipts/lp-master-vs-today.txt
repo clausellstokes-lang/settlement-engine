@@ -1,0 +1,66 @@
+DOCUMENTS: this 440 (/var/tmp/v18/lp/docs-master) | baseline 440 (/var/tmp/v18/lp/docs-today)
+  this: role/holds {"A:none":176,"A:holds":4,"B:holds":120,"T:holds":91,"T:none":49}; owner-hidden powers in 23; publicProse stored 0
+  baseline: role/holds {"A:none":180,"B:holds":120,"T:holds":92,"T:none":48}; owner-hidden powers in 21; publicProse stored 440
+
+(2) THE DIFFERENTIAL (own, Reveal off and on; server page + import, twin; the withheld powers and houses never there)
+  this: hiding places 225 | hiding reads 440 | engine-door reads 1760 (want 1760) | equal 1760/1760 | faults 0
+  baseline: hiding places 221 | hiding reads 433 | engine-door reads 1732 (want 1732) | equal 1732/1732 | faults 1492
+    1492 x the served payload serves the stored sentence  e.g. t2p-town-infiltrated-11 server page dm=false: the served payload serves the stored sentence (or a string holding it)
+
+(3) THE TELLS per registry row: documents telling (name / kind / key) | baseline's; LEGACY-ONLY where this tells a kind and the baseline does not
+  (unregistered) availableServices.criminal: 0/0/181 | 0/0/187
+  (unregistered) availableServices.information: 0/0/0 | 0/0/3
+  (unregistered) conflicts: 0/0/18 | 0/0/12
+  LEGACY-ONLY (unregistered) factions[]: 0/0/82 | 0/0/0 [key] e.g. t2b-city-insurgency-23 dm|allOpen factions[7].members[1].corruptTies = {}
+  (unregistered) history.currentTensions: 0/0/5 | 0/0/6
+  (unregistered) npcs[]: 0/0/85 | 0/0/4
+  (unregistered) powerStructure.conflicts: 0/0/18 | 0/0/12
+  LEGACY-ONLY (unregistered) relationships[]: 12/0/0 | 0/0/0 [name] e.g. r3m-city-none-1-117 off|own relationships[20].npc2Role: Thieves' Guild Master (withheld ["Thieves' Guild","The Hidden Hand","Smuggling network","Front businesses","Whis)
+  (unregistered) simulationTrace[]: 0/0/12 | 0/0/12
+  LEGACY-ONLY people.card: 32/0/0 | 0/0/0 [name] e.g. t2b-city-none-12 dm|own npcs[4].secondaryAffiliation: Thieves' Guild (withheld ["Thieves' Guild","Front businesses","Whisper market","Black market"])
+  LEGACY-ONLY people.rosterCopy: 30/0/0 | 0/0/0 [name] e.g. t2b-city-none-12 dm|own factions[1].members[1].secondaryAffiliation: Thieves' Guild (withheld ["Thieves' Guild","Front businesses","Whisper market","Black market"])
+  power.desc: 4/0/0 | 7/0/0
+  safety.criminalInstitutions: 0/0/43 | 0/0/43
+  safety.plotHooks: 0/0/114 | 0/0/106
+LEGACY-ONLY ROWS: 4 ((unregistered) factions[], (unregistered) relationships[], people.card, people.rosterCopy)
+
+(4) THE READERS (pageRederive.js) fed a nothing-hidden read (twin, Reveal off), the value against the record: equal / differ / notDrawn / recordLacks / served / none
+  this: 417 documents read with nothing hidden
+    defenseProfile.scores.disaster: equal 102/417 (differ 315, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 59 | re-derived 84
+    defenseProfile.scores.economic: equal 47/417 (differ 370, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 40 | re-derived 91
+    defenseProfile.scores.internal: equal 35/417 (differ 382, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 29 | re-derived 50
+    defenseProfile.scores.magical: equal 109/417 (differ 308, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 31 | re-derived 38
+    defenseProfile.scores.military: equal 40/417 (differ 377, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 54 | re-derived 82
+    defenseProfile.scores.monster: equal 88/417 (differ 329, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record 36 | re-derived 45
+    defenseProfile.readiness.score: equal 17/417 (differ 219, notDrawn 181, recordLacks 0; served 0, none 0)  e.g. t2p-city-infiltrated-111: record 81 | re-derived 82
+    defenseProfile.economicGates: equal 100/417 (differ 317, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record {"military":0.74,"monster":0.8,"internal":0.77,"economic":0.64,"disaster":0.7} | re-derived {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}
+    economicState.compound.economyOutput: equal 417/417 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.blackMarketCapture (unveiled): equal 417/417 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.crimeTypes (rederiveCrimeTypes, authoritative): equal 239/417 (differ 178, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-insurgency-83: record [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."} | re-derived [{"type":"political violence","desc
+    powerStructure.recentConflict (rederiveRecentConflict, authoritative): equal 111/417 (differ 306, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2p-city-indebted-225: record "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt ag | re-derived "The creditor's agent has blocked th
+    activeConditions[].severity: equal 12/329  e.g. t2p-city-indebted-225 condition.regional_tax_revenue_disruption.3sukpk: record 0.33 | re-derived 0.35 (band medium)
+  baseline: 419 documents read with nothing hidden
+    defenseProfile.scores.disaster: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.economic: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.internal: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.magical: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.military: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.monster: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.readiness.score: equal 408/419 (differ 0, notDrawn 11, recordLacks 0; served 0, none 0)
+    defenseProfile.economicGates: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.compound.economyOutput: equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.blackMarketCapture (unveiled): equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.crimeTypes (rederiveCrimeTypes, authoritative): equal 419/419 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    powerStructure.recentConflict (rederiveRecentConflict, authoritative): equal 418/419 (differ 1, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2b-town-wartime-38: record "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have | re-derived "The barracks guard has doubled and th
+    activeConditions[].severity: equal 13/331  e.g. t2p-city-indebted-225 condition.regional_tax_revenue_disruption.3sukpk: record 0.23 | re-derived 0.15 (band low)
+
+(5) THE WORD RULES: 7 rows. Per row: documents carrying the path / of them, stored words naming a hideable house or a criminal (or owner-hidden) power by the fold; tells name/kind/key (this | baseline)
+  compound.inst.flags (getInstFlags's keyword table over house NAMES (one fold)): present 440/440, naming 0 | present 440/440, naming 0; tells 0/0/0 | 0/0/0
+  income.desc (a desc NAMING a hidden house leaves its row): present 440/440, naming 7 | present 440/440, naming 7; tells 0/0/0 | 0/0/0  e.g. t2b-city-insurgency-23: An estimated 27% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black market trade. This in
+  safety.criminalInstitutions (built by name (212 (16)/(19))): present 440/440, naming 173 | present 440/440, naming 166; tells 0/0/43 | 0/0/43  e.g. t2p-metropolis-insurgency-1053: Black Market Bazaar
+  power.entry (a criminal-WORDED governing body kept; a thieves' NAME withheld): present 440/440, naming 87 | present 440/440, naming 87; tells 0/0/0 | 0/0/0  e.g. t2p-town-infiltrated-11: Corrupt Council
+  power.relation.dmNote (the note NAMES the withheld criminal power): present 297/440, naming 42 | present 290/440, naming 48; tells 0/0/0 | 0/0/0  e.g. t2b-town-infiltrated-11: Ask: which specific officials have arrangements with Thieves' Guild? The answer drives dozens of plot hooks.
+  power.conflicts (a conflict NAMING a withheld power follows recentConflict): present 375/440, naming 44 | present 322/440, naming 46; tells 0/0/0 | 0/0/0  e.g. t2p-town-occupied-24: Corrupt Council
+  people.pressureSentence (it NAMES a withheld tie's two ends or holds its WORDS): present 440/440, naming 11 | present 440/440, naming 11; tells 0/0/0 | 0/0/0  e.g. t2b-town-infiltrated-11: Whoever is inside Altaikhurel has not asked for anything yet, and the waiting is the tell: they are still building the position, and by the 
+  compound.inst.has* against TODAY's getInstFlags over the stored houses: this 0/880 compounds differ | baseline 0/880
+WORD RULES: 7
