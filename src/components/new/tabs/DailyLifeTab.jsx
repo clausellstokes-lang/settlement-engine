@@ -5,7 +5,7 @@ import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { extractSettlementContext } from '../dailyLifeLogic';
-import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT, DAILY_LIFE_PAGE_SLOTS } from '../../../domain/dailyLife.js';
+import { deriveDailyLife, DAILY_LIFE_EMPTY_SLOT_TEXT, DAILY_LIFE_PAGE_SLOTS } from '../../../domain/dailyLife.js';
 import { useStore } from '../../../store/index.js';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
@@ -14,6 +14,10 @@ import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the foo
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'],
       BORDER = swatch['#E0D0B0'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
+
+/** The dossier's owner-only box, as `tabs/WhoRunsThisTownPanel.jsx :: box` draws it (its stacking rule aside: here it
+ * sits inside the page's box, between its lines). */
+const DM_BOX = Object.freeze({ background: swatch['#FAF8F4'], border: '1px solid #d8c090', borderLeft: '4px solid #4a1a4a', padding: '10px 14px' });
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
@@ -49,28 +53,55 @@ const STRESS_LABELS = {
 
 /**
  * DAILY-PAGE-1 (the owner's order of 2026-11-22: "remove the button prompt for Daily life and simply generate it
- * automatically"): the engine's own Daily Life lines, in the order the page prints them. The other five slots join when
- * built.
+ * automatically"): the Daily Life lines the domain derives, in the order the page prints them. DAILY-4 unit P (the
+ * chair's E110): all eight public slots, in the chair's order, which lives in its one home.
  */
 const ENGINE_SLOTS = DAILY_LIFE_PAGE_SLOTS; // the one home of the order (domain/dailyLife.js), read by the PDF's chapter too
+
+/** The public slot the owner-only line follows, and that line's key (`domain/dailyLife.js :: OWNER_ONLY_DAILY_LIFE_SLOT`). */
+const RESENTMENT_SLOT = 'commoner_resentments';
+const OWNER_ONLY_SLOT = 'commoner_resentments_dm';
+
+/** @param {unknown} text @returns {string} a slot's sentence, '' where it is empty or the empty marker */
+const printable = (text) => {
+  const sentence = typeof text === 'string' ? text.trim() : '';
+  return sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT ? sentence : '';
+};
 
 export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = false, playerView = false }) {
   const mobile = useIsMobile();
   const aiDailyLife = useStore(s => s.aiDailyLife);
-  // The engine's three slots, derived from the settlement THIS PAGE IS HANDED (a shared read is handed the shared
-  // document), once per render pass. A slot whose text is empty or "—" prints nothing.
+  // THE OWNER'S OWN READ (never `publicDossier`, never `playerView`): the one read that carries the owner-only line.
+  const ownerRead = !publicDossier && !playerView;
+  // The page's slots, derived once from the settlement THIS PAGE IS HANDED (a shared read is handed the shared
+  // document), once per render pass. A slot whose text is empty or "—" prints nothing. On the owner's read alone the
+  // derivation is asked for the owner's audience (`deriveDailyLife(r, { audience: 'owner' })`, the module's one door to
+  // `commoner_resentments_dm`); its line follows the public resentment's place, marked as the owner's.
   const engineLines = useMemo(() => {
-    /** @type {string[]} */ const out = [];
+    /** @type {Array<{ key: string, sentence: string, ownerOnly: boolean }>} */ const out = [];
     if (!r) return out;
+    const { slots } = deriveDailyLife(r, ownerRead ? { audience: 'owner' } : null);
     for (const key of ENGINE_SLOTS) {
-      const slot = deriveDailyLifeSlot(key, r);
-      const sentence = typeof slot?.text === 'string' ? slot.text.trim() : '';
-      if (sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT) out.push(sentence);
+      const sentence = printable(slots[key]?.text);
+      if (sentence) out.push({ key, sentence, ownerOnly: false });
+      if (ownerRead && key === RESENTMENT_SLOT) {
+        const ownerLine = printable(slots[OWNER_ONLY_SLOT]?.text);
+        if (ownerLine) out.push({ key: OWNER_ONLY_SLOT, sentence: ownerLine, ownerOnly: true });
+      }
     }
     return out;
-  }, [r]);
+  }, [r, ownerRead]);
 
   if (!r) return null;
+
+  // Each line's type: the narrative's, held to the phone prose floor (one style for every line of the box).
+  const lineStyle = {
+    fontSize: proseFontSize(FS['13.5'], mobile),
+    lineHeight: 1.75,
+    color: INK,
+    margin: 0,
+    fontFamily: `Georgia, 'Times New Roman', serif`,
+  };
 
   // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #848: the tile read "Surplus" beside a record that
   // reads secure): whether the place has food to spare is the food record's band
@@ -137,10 +168,13 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = fal
           the ladder block may join in its own pool, drawn at the same position under the rung. */}
       <DeskLines mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.foodOnProsperity]} />
 
-      {/* ── THE ENGINE'S OWN LINES (DAILY-PAGE-1, the owner's order of 2026-11-22) ──────────
-          Where the button stood: how the day starts, where people gather, what children are warned
-          about. No heading and no label (each sentence names its own subject); where all three are
-          empty the box is absent. */}
+      {/* ── THE PAGE'S OWN LINES (DAILY-PAGE-1, the owner's order of 2026-11-22; DAILY-4 unit P, E110) ──
+          Where the button stood: the eight public slots in the chair's order. No heading and no label
+          (each sentence names its own subject); where every line is empty the box is absent. Each
+          public line is a `p` of the box. THE OWNER-ONLY LINE, on the owner's read alone, stands
+          right after the public resentment's place in the dossier's owner-only mark, the box and the
+          muted line of `tabs/WhoRunsThisTownPanel.jsx` (`data-layer="dm"`, "For the DM only."): a
+          `div`, so the box's `p` lines stay the public lines the PDF chapter prints. */}
       {engineLines.length > 0 && (
         <div data-testid="daily-life-engine" style={{
           background: PARCH,
@@ -148,18 +182,19 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = fal
           padding: mobile ? '16px 14px' : '20px 22px',
           marginBottom: 16,
         }}>
-          {engineLines.map((line, i, arr) => (
-            <p key={i} style={{
-              fontSize: proseFontSize(FS['13.5'], mobile), // the narrative's type, held to the phone prose floor
-              lineHeight: 1.75,
-              color: INK,
-              margin: 0,
-              marginBottom: i < arr.length - 1 ? 16 : 0,
-              fontFamily: `Georgia, 'Times New Roman', serif`,
-            }}>
-              {line}
-            </p>
-          ))}
+          {engineLines.map((line, i, arr) => {
+            const marginBottom = i < arr.length - 1 ? 16 : 0;
+            return line.ownerOnly ? (
+              <div key={line.key} data-testid="daily-life-owner-only" data-layer="dm" style={{ ...DM_BOX, marginBottom }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
+                <div style={lineStyle}>{line.sentence}</div>
+              </div>
+            ) : (
+              <p key={line.key} style={{ ...lineStyle, marginBottom }}>
+                {line.sentence}
+              </p>
+            );
+          })}
         </div>
       )}
 

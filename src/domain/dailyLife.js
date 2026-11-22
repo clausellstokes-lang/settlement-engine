@@ -888,9 +888,20 @@ export const DAILY_LIFE_EMPTY_SLOT_TEXT = /** @type {string} */ (deriveDailyLife
  * THE PAGE'S PUBLIC SLOTS, IN THE PAGE'S ORDER (DAILY-3 U4c, the chair's E59 of 2026-11-22): the slots the Daily Life tab
  * prints (`components/new/tabs/DailyLifeTab.jsx :: ENGINE_SLOTS`) and the PDF's chapter prints
  * (`pdf/sections/IdentityDailyLife.jsx`), one home for both callers. Public slots only: never the owner-only slot.
+ * ALL EIGHT, IN THE CHAIR'S ORDER (DAILY-4 unit P, the chair's E110 of 2026-11-22; not `DAILY_LIFE_SLOTS`' own order):
+ * a newcomer's eye first, what lies beneath next, what is new last.
  * @type {readonly string[]}
  */
-export const DAILY_LIFE_PAGE_SLOTS = Object.freeze(['dawn_work', 'gathering_places', 'child_warnings']);
+export const DAILY_LIFE_PAGE_SLOTS = Object.freeze([
+  'outsider_impressions',
+  'dawn_work',
+  'food_culture',
+  'gathering_places',
+  'child_warnings',
+  'commoner_resentments',
+  'unspoken_topics',
+  'recent_changes',
+]);
 
 /**
  * Derive every canonical daily-life slot. Builds context once.
