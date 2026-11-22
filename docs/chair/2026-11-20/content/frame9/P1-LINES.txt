@@ -1,0 +1,49 @@
+FRAME-9 · P1 (B8 U3): THE NEW FACE REASONS, FOR THE CHAIR BEFORE ANY IS BUILT. Base 28cf667e0, branch frame9-p1. Written 2026-11-22 08:59-09:09 UTC (date -u).
+B7's design needs NEW wording: no face reason for a keeper or a records trade exists in the tree (grep: none). Home proposed: a NEW data file
+src/data/crisis/faceReasonLines.js (rule 1), resolved through drawDeclared.js :: resolveDeclared (kind T, no draw; the rung's choice is castHash).
+
+THE POOL TODAY (CAST_REASONS.face, crisisCast.js; one line): "leads the occupying power"
+  page: "<name> · the occupier's local face · leads the occupying power"
+  hook: "In the occupation, the occupier's orders come through <name> of the Occupation Authority." (CLAUSE_SAYS: the reason is not echoed)
+SIBLINGS ALREADY RULED FOR A LODGING KEEPER (the same keeper rule, the page's and the trouble's):
+  FRAME_REASONS.outsider:            "not named here; {other} keeps the {house}, where strangers lodge, and would know of them"
+  CRISIS_ABSENCE_REACH.outsideHand:  "{keeper} keeps the {house}, where strangers lodge, and would know of them" (P1BF: "the modest one")
+
+1. OUTSIDER RUNG (a lodging keeper; the officer never named). {house} = the keeper's house key, less its parenthesis, lower case.
+  1A (B7/B8 verbatim): "keeps the {house} where an officer of the occupation lodges; the officer is never named"
+  1B (B7's drafted After):  "keeps the {house} where an officer of the occupation lodges"
+  1C (the modest one, P1BF's words): "keeps the {house}, where strangers lodge"
+  NEEDS: institution atom `tavern` (facts/institutions.js: tavern|inns?|ale ?house; a hostel or caravanserai keeper is refused, the rung
+  falls to trade); crisis `occupation` (registeredWords `occupation`: "the occupation"/"occupier" in 1A/1B); the keeper's house not
+  hideable (cardVeil.js :: isHideableHouse, rule 5). No pronoun of the holder (ruling 9 holds); no "town"; names nobody but the house.
+  READ BEFORE RULING: (i) 1A/1B say an officer lodges there: the record holds no such officer (P1BF struck "the hand's people come and
+  go" on that ground); 1C says only what the record holds. (ii) 1A's "; " is the separator castReasonSentence and castDerived's
+  startsWithAny read as a tail; I would not store it. (iii) a plural key prints "keeps the taverns" / "the inns and taverns"
+  (FRAME-3 ruling 17 parked "keeps the taverns" for after the deploy): see the measure below.
+
+2. TRADE RUNG (a records trade's master: TROUBLE_MATTER.occupation_legacy.trade = RECORDS_TRADE; scribe, clerk, notary, herald, steward…)
+  2A (B7 verbatim): "keeps the rolls the occupier taxes by"
+  2B (modest):      "keeps the records the occupier's orders pass through"
+  NEEDS: crisis `occupation` ("occupier"); the person faces a house (castDerived.test.js: "every person a cast names … is a face").
+  READ BEFORE RULING: 2A says the occupier taxes by the rolls; no record fact says the occupier taxes (CF9). 2B says no more than the face's
+  own clause already does.
+
+3. THE HOOK (crisisHooks.js, NOT in my manifest): a reason outside CLAUSE_SAYS and PREDICATE_REASONS prints after a colon, subjectless:
+  today's code would write "In the occupation, the occupier's orders come through Flaccus Aurelius of <power>: keeps the alehouse, …."
+  (the fault TAIL-CRISIS-2 batch 3 cured). The relative form ("…come through Flaccus Aurelius of <power>, who keeps the alehouse, where
+  strangers lodge.") needs PREDICATE_REASONS to admit the new reasons by key (they are filled, so a text set cannot hold 1x). RULING ASKED:
+  (a) leave crisisHooks.js to me for that one admission, or (b) the colon form stands until FRAME-9 cures it, or (c) another form.
+
+4. WHAT ELSE MOVES BY CONSTRUCTION (ruled before I build; proof (b) would otherwise STOP me):
+  (a) CRISIS_LINKS occupied → insurgency (targetFromFace): the insurgency's TARGET is the occupation's face, so in a two-crisis town where
+      the rung fires the OTHER crisis's target moves to the keeper/trade ("the occupation's resistance turns on its local face"). Keep the
+      link reading the new face, or read it from the occupier's own rows only?
+  (b) famine → occupied (collaboratorFromExploiter) skips an exploiter who is the face: a local face can now be that exploiter.
+  (c) the collaborator rule never sees an occupier; a local face can ALSO be cast collaborator in the same crisis (no contradictory pair).
+      Allow, or bar the face from the collaborator (that moves a role P1 does not target)?
+
+THE MEASURE (occupied, B7's 24 seeds, born at base; the first free keeper and records-trade person; castHash at 'face:outsider'/'face:trade'):
+  UNRUN. The lane was parked at 09:08 UTC while the run waited on the gate mutex (it gave up after 40 polls: another seat's tests/lint
+  held the lock). Script: frame9/tools/P1/premeasure.mjs <worktree root>, through the gate mutex, to a log. Until it runs, B7's own
+  record of this pool stands: keeper in 14/24, records trade in 11/24, either in 16/24; the keepers' houses across B7's whole pool include "Alehouse", "Taverns (5-20)",
+  "Inns and taverns (district)", "Inn (multiple)", "Travelers' inn", "Coaching inn" (so the plural of note (iii) is real).
