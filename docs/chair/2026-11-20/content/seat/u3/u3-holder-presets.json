@@ -1,0 +1,112 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/u3/measure-u3.mjs",
+  "leaf": "src/domain/seat/holderOfSeat.js",
+  "arm": "presets",
+  "n": 10,
+  "towns": 960,
+  "errors": 0,
+  "seconds": 207
+ },
+ "owner": {
+  "R4": 444,
+  "R3": 243,
+  "R2": 213,
+  "R5": 60
+ },
+ "reader": {
+  "R4": 444,
+  "R3": 243,
+  "R2": 213,
+  "R5": 60
+ },
+ "proposal": {
+  "R1": 0,
+  "R2": 213,
+  "R3": 243,
+  "R4": 444,
+  "R5": 60,
+  "disagree": 2
+ },
+ "kinds": {
+  "R4:government": 370,
+  "R2:merchant": 144,
+  "R3:merchant": 84,
+  "R2:noble": 64,
+  "R5:noble": 60,
+  "R3:military": 58,
+  "R3:religious": 55,
+  "R3:noble": 30,
+  "R4:religious": 30,
+  "R4:criminal": 22,
+  "R3:arcane": 16,
+  "R4:merchant": 15,
+  "R4:arcane": 4,
+  "R2:military": 3,
+  "R4:military": 3,
+  "R2:craft": 2
+ },
+ "byTier": {
+  "thorp": {
+   "R4": 139,
+   "R5": 20,
+   "R3": 1
+  },
+  "hamlet": {
+   "R4": 135,
+   "R2": 3,
+   "R5": 22
+  },
+  "village": {
+   "R4": 111,
+   "R2": 33,
+   "R5": 10,
+   "R3": 6
+  },
+  "town": {
+   "R3": 82,
+   "R2": 42,
+   "R4": 33,
+   "R5": 3
+  },
+  "city": {
+   "R3": 105,
+   "R5": 3,
+   "R2": 39,
+   "R4": 13
+  },
+  "metropolis": {
+   "R2": 96,
+   "R3": 49,
+   "R4": 13,
+   "R5": 2
+  }
+ },
+ "personRules": {
+  "seat": 960
+ },
+ "noPerson": 0,
+ "readerRefused": [],
+ "readerOther": [],
+ "disagreements": [
+  {
+   "seed": "seat-measure-city-mage_city-7",
+   "tier": "city",
+   "form": "Merchant Guild Council",
+   "R1": null,
+   "R2": "The Guild Alliance",
+   "R3": "Merchant Guilds",
+   "chosen": "R2 The Guild Alliance"
+  },
+  {
+   "seed": "seat-measure-city-arcane_academy-3",
+   "tier": "city",
+   "form": "Merchant oligarchy",
+   "R1": null,
+   "R2": "The Merchant Bloc",
+   "R3": "Merchant Guilds",
+   "chosen": "R2 The Merchant Bloc"
+  }
+ ],
+ "draftDiff": []
+}

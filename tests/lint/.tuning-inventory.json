@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "b0f759b3cf46f37b54f7daaf6dc9758edf4f56ed",
-  "measuredBy": "PEOPLE-1 (lane/people-1-2026-11-20)",
-  "date": "2026-11-20",
-  "note": "dependents moved, no value moved: npcStructure.js imports the goals fillers (fillLine, houseFill, resourceFill)",
+  "measuredAtSha": "1d551fd54ce1d1276c5d8ca6b2233fe0da1a53e8",
+  "measuredBy": "SEAT-10",
+  "date": "2026-11-22",
+  "note": "the chair's second base e8bc160f8 took the line's side of the inventory; the lane's SEAT_CIRCUMSTANCE_TUNING row (draft, every factor 1) restored as the lane froze it, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1846,6 +1846,38 @@
         "src/domain/worldPulse/warSeatBooks.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 56,
+      "spanDigest": "cbaa10baa9430e21bb6e367aeb21455a4b954031537e392b7e3cb82978d510e4",
+      "leaves": {
+        "factors.craft_led.craft": 1,
+        "factors.trade_wealth.merchant": 1,
+        "factors.strong_faith.religious": 1,
+        "factors.martial_pressure.noble": 1,
+        "factors.hunger.labor": 1,
+        "factors.mandate.noble": 1,
+        "factors.mandate.craft": 1,
+        "factors.outside_debt.outsider": 1,
+        "factors.outside_debt.merchant": 1,
+        "factors.occupation.outsider": 1,
+        "productCeiling": 1.6,
+        "cuts.craftOfMerchant": 0.8,
+        "cuts.guildIncomeFrom": 25,
+        "cuts.priorityFrom": 70
+      },
+      "dependents": [
+        "src/domain/rulingPowerCoup.js",
+        "src/domain/worldPulse/applyWorldPulse.js",
+        "src/domain/worldPulse/applyWorldPulseFactionRoster.js",
+        "src/domain/worldPulse/stressorDynamics.js"
+      ],
+      "namedDependents": [
+        "src/domain/rulingPowerCoup.js"
+      ]
     },
     "src/domain/spatial/armyTransit.js#ARMY_TRANSIT_TUNING": {
       "exported": true,
@@ -4733,7 +4765,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 457,
+      "line": 452,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -8569,7 +8601,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 70,
+      "line": 78,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8608,7 +8640,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 95,
+      "line": 103,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
@@ -9286,8 +9318,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 280,
-    "keys": 2293,
+    "tables": 281,
+    "keys": 2296,
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,

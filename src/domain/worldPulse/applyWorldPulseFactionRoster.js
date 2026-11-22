@@ -8,6 +8,7 @@ import { stablePart } from '../region/index.js';
 import { INSTITUTION_SUPPRESSION_SEVERITY } from './factionCompetition.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { withImpairment } from '../entities/status.js';
+import { seatCircumstancesOf } from '../seat/seatCircumstances.js';
 // THE TYPE SURFACE IS PART OF THE PUBLIC SURFACE (R-BLD-9 / the file-2 lesson):
 // these aliases are re-declared in every member of the family that names them, so a
 // split never silently drops a typedef and lands strict errors on a consumer.
@@ -121,6 +122,8 @@ export function applyFactionPayloadEffect(settlement, outcome, state, { now, tic
       const result = transferRulingPower(rulingView, factionName, {
         cause: 'appointment',
         tick: Number.isFinite(tick) ? tick : null,
+        // SEAT-1 train 1, U5-CURE (b): read only under the seat law and only for a licensed pair (dark: never called).
+        seatCircumstances: () => seatCircumstancesOf(settlement),
       });
       return result.error ? settlement : /** @type {SimSettlement} */ (result.settlement);
     }
