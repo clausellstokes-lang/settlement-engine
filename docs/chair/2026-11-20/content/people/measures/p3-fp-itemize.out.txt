@@ -1,0 +1,4 @@
+closure raw A 1178915 B 1179503 delta 588
+chunk engine-core: 309108 -> 309696 (+588)
++588	src/domain/facts/factVocabulary.js
+sum of source deltas 588

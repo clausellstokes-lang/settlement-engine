@@ -45,4 +45,6 @@ Read from the two census declarations at bd7933433 (`docs/census/declarations/np
 - The tuning inventory (`tests/lint/.tuning-inventory.json`, re-frozen by its door: "npcStructure.js imports the goals' fillers"); the mutation manifest (the lane's rationale entries); the lighting census (3,736 → 3,741 files, by the chair's door 6197c4c72); the hideable walker's hand list (two tables, f5295e425, by the chair).
 
 ## 4. THE +588 RAW OF FIRST PAINT AT POINT 93, FILE BY FILE
-(below)
+Measured: two fresh builds with sourcemaps (2482e40e3, the line at point 92; bd7933433, point 93), each through the gate mutex; the entry's static closure walked as `tests/build/vendorPdfLazy.test.js :: entryStaticClosure` walks it, each chunk's bytes attributed to its source by its map (the script `measures/p3-fp-itemize.mjs`, its output `measures/p3-fp-itemize.out.txt`).
+- Closure raw 1,178,915 → 1,179,503: **+588**, ONE chunk (`engine-core`, 309,108 → 309,696), ONE source: **`src/domain/facts/factVocabulary.js` +588** (the three atoms' rows, `own house`, `export good`, `import good`: the vocabulary is eager by design and an atom's reader rides with it). `npcStructure.js` and `src/data/npcStructureVariants.js` add 0 to first paint (lazy side). Sum of source deltas 588 = the closure delta.
+- For the owner's size sign-off: a ruled-exception candidate of 588 raw (the chair names it; this seat signs nothing).
