@@ -53,13 +53,16 @@ import { inferImportance } from '../../src/domain/entities/npcs.js';
 // lane's to make. So its two bands are mirrored below AND PINNED TO THE SOURCE: the
 // arrays are read out of npcGenerator.js and compared, so a drift there reds here
 // instead of quietly making this pin measure a function that no longer exists.
+// UK-CURE (SEAT-7 item 79, merged by SEAT-9): the band and its two arrays moved to the
+// leaf src/generators/npc/powerBand.js (npcGenerator.js imports and re-exports it), so
+// the arrays are read out of the LEAF now; the meaning of the pin is unchanged.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const NPC_GENERATOR_SRC = readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), '../../src/generators/npcGenerator.js'),
+  join(dirname(fileURLToPath(import.meta.url)), '../../src/generators/npc/powerBand.js'),
   'utf8',
 );
 const HIGH_POWER = ['mayor', 'lord', 'governor', 'bishop', 'archmage', 'guild_master', 'captain', 'commander', 'crime lord'];
@@ -90,7 +93,7 @@ describe('setting-agnostic role renames are mechanically inert', () => {
     // cannot see a specific array at all. The arrays are extracted and compared.
     const arrayLiteral = (name) => {
       const match = NPC_GENERATOR_SRC.match(new RegExp(`const ${name} = \\[([\\s\\S]*?)\\];`));
-      expect(match, `${name} is no longer a literal array in npcGenerator.js`).toBeTruthy();
+      expect(match, `${name} is no longer a literal array in npc/powerBand.js`).toBeTruthy();
       return [...match[1].matchAll(/'([^']*)'/g)].map((m) => m[1]);
     };
     // EQUALITY, so the mirror cannot drift in EITHER direction: a keyword added to the

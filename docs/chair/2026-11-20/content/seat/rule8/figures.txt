@@ -1,0 +1,12 @@
+rule 8 (a) at 08b0ba7d2 (the chair's second base e8bc160f8 + the lane's register and docs commits), build 04:27:23Z, VERIFY_DIST 04:27:29Z
+figure            lane 08b0ba7d2   line 2fe514628 (LINE-NOW)   delta     budget
+first paint raw   1,183,329        1,179,511                   +3,818    1,175,492
+first paint gzip    376,540          375,172                   +1,368      373,999
+first paint br      316,004          315,169                     +835      313,994
+worker            2,686,966        2,671,005                  +15,961    2,579,708
+engine chunk        926,808          926,608                     +200      909,928
+the five build rows: red on the line itself (LINE-NOW); 61 of 66 other build-test rows green
+
+THE WORKER'S +15,961, ITEMIZED (PLAUSIBLE: esbuild minify of each lane-changed src file at f5295e425 and at HEAD, per file, not bundled):
+the lane's 16 src files: +13,904 minified; of it the four new seat modules seatTable 4,705 + holderOfSeat 4,223 + seatCircumstances 2,868 + seatLaw 745 = 12,541; densityCreateBoundary +940; npc/powerBand 515 (new leaf; npcGenerator -252); rulingPowerCoup +394; rulingPower -661; the rest within +/-200.
+The bundle's +15,961 against the sum's +13,904: the ~2 kB rest is PLAUSIBLY module wrapping and imports.
