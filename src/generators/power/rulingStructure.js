@@ -12,6 +12,7 @@ import {
   computeCriminalCaptureState,
   computeFactionRelationships, boycottReadsRelation, // BAR3-POWERS (C27440)
   computePublicLegitimacy,
+  seatHolderApartOf, // SEAT-10 U6 (CS12): the holder apart from the form, under the seat law
 } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
 import { drawCouncilOfAKind } from './rulerKin.js'; // COHERENCE-POWERS 2B
@@ -734,8 +735,8 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
-  settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
-  annotateFactionStanding(factions, standingForce, { publicLegitimacy }); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort; BAR4-HISTORY C14176 (FS2): the seat's legitimacy, for its coup reading
+  settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy, seatHolderApartOf(factions, config)?.holder.faction ?? null); // SEAT-10 U6 (CS12, condition 4): the holder's own row; COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
+  annotateFactionStanding(factions, standingForce, { publicLegitimacy, config }); // SEAT-10 U6 (fault c): the born config, so the coup reading reads the world's seat law; SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort; BAR4-HISTORY C14176 (FS2): the seat's legitimacy, for its coup reading
 
   const safetyRatio = safetyRatioOf(instFlags);
   // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is
@@ -754,7 +755,7 @@ export const generatePowerStructure = (
       safetyRatio,
     },
     publicLegitimacy,
-    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), courtHoldersOf({ institutions: nativeInstitutions }).length > 0, // R6: the soldiers line reads the place's forces; FAULTS-WATCH FR25 (c): the roster's court, the Legal row's own function
+    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), courtHoldersOf({ institutions: nativeInstitutions }).length > 0, config, // SEAT-10 U6: the born config, for the holder's row; R6: the soldiers line reads the place's forces; FAULTS-WATCH FR25 (c): the roster's court, the Legal row's own function
   );
 
   return {

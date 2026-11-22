@@ -6,7 +6,7 @@
 
 import { powerNameWithArticle, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): a power named in a standing sentence takes its article
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
-import { powerLabelOf } from '../factionDynamics.js';
+import { powerLabelOf, seatHolderApartOf, seatHolderLineOf } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line
 import { seatIsCouncil } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
@@ -83,6 +83,10 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         // reader reads the OLD law (fail closed): under the seat law the power that holds the seat is no challenger of it.
         seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy }, ...(seat.config ? { config: seat.config } : {}) })) : null, // BAR4-HISTORY C14176 (FS2)
         contestedBy = seatReading && coupRiskLabel(seatReading) === 'Contested' ? (seatReading.challengers[0]?.name ?? null) : null;
+      // SEAT-10 U6 (CS12, W3): under the seat law, the holder apart from the form says it holds the form's seat, in place of the
+      // rank line that sets it below the seat ("in the shadow of", "The gap between them", "Behind"); absent the born config, none
+      var apart = seat && seat.config ? seatHolderApartOf(factions, seat.config) : null,
+        holderStanding = apart ? seatHolderLineOf('standing', apart) : null;
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
       var topSaid = topFactionName ? powerNameWithArticle(topFactionName) : null;
       factions[1] && factions[1].faction;
@@ -121,7 +125,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         if (
           (rank === 1 &&
             !faction.isGoverning &&
-            (topTwoGap <= 6
+            (holderStanding && apart && faction === apart.holder
+              ? (standing = holderStanding)
+              : topTwoGap <= 6
               ? (standing = topFactionName
                   ? 'The gap between them and ' +
                     (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
