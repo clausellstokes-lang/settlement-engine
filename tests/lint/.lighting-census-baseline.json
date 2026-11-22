@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d04c5d7b562e702534320d5d8bef9d3ba6876c07",
+  "measuredAtSha": "56c2855a32340ce38f344876429a18c20f706581",
   "measuredBy": "CLOSE-1-JOIN",
   "date": "2026-11-22",
-  "note": "CLOSE-1 JOIN (E61): one new test file, tests/domain/generationLawsSavedPlace.test.js, holds the saved-place arms common to every GENERATION_LAWS row",
+  "note": "CLOSE-1 JOIN, E101 (1): the duplicate PERSISTED law-1 arm cut from livingContentLawWiring, its roster check carried into generationLawsSavedPlace (a)",
   "files": 3770,
   "parked": 485,
   "credited": 3285,
-  "titles": 31816,
+  "titles": 31815,
   "suiteTitles": 8825
 }
