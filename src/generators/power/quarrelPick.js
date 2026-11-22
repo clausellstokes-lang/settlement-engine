@@ -7,7 +7,8 @@
  * Where such a rung's line PRINTS (the site's own rule: no primary-stress narrative overrides it, or the `infiltrated` one
  * carries it), the site hands it here, and the place's quarrel is chosen from the rung's pool
  * (`data/powerSiblings.js :: QUARREL_POOLS`, keyed by `QUARREL_POOL_OF_RUNG`, and the field rotation the site hands in
- * beside: its literal stays at the site, where the presumption-classes register banks it). THE MIXED PICK (the chair's
+ * beside: its literal stays at the site, where the presumption-classes register banks it; the pool is composed here with
+ * it in its slot, `FIELD_ROTATION_SLOT`, which keeps the row's id and needs). THE MIXED PICK (the chair's
  * rule of 17:18 UTC: a keyed pool not yet built takes it from the start): `pickVariantMixed(<the lines whose needs the
  * place holds, in pool order>, '<seed>::governanceNarrative:<POOL>')` (`kernel/proseHash.js`: the FNV hash, mixed by a
  * 32-bit finalizer before the modulo; the per-line argmax it replaced is gone).
@@ -30,13 +31,14 @@
  * Pure apart from reading the active stream's seed; draws nothing.
  * @enforced-by tests/generators/power/conflictQuarrelPick.test.js
  */
-import { QUARREL_POOLS, QUARREL_POOL_OF_RUNG } from '../../data/powerSiblings.js';
+import { FIELD_ROTATION_SLOT, QUARREL_POOLS, QUARREL_POOL_OF_RUNG } from '../../data/powerSiblings.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
 import { pickVariantMixed } from '../../kernel/proseHash.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
 
 /** @typedef {{ id: string, text: string | null, needs: ReadonlyArray<string> }} Quarrel */
+/** @typedef {{ id: string, text?: string, needs: ReadonlyArray<string> }} PoolRow a data row, or the field rotation's slot */
 
 /**
  * The place's everyday quarrel, where the ladder's line is a rung line of a pool.
@@ -55,28 +57,29 @@ export function pickQuarrel(baseline, { facts, noGrazing = null, fieldRotation =
   const poolName = rungPool ?? (grazingRung ? 'GRAZING' : null);
   const seed = getActiveRng()?.seed;
   if (!poolName || !seed) return baseline;
-  const pool = /** @type {ReadonlyArray<Quarrel>} */ (QUARREL_POOLS[/** @type {'GRAZING'|'LEVIES'} */ (poolName)]);
-  // a row with no text is the site's own line (the field rotation): it prints the text handed in, and with none it is
-  // never picked
-  const textOf = (/** @type {Quarrel} */ line) => (line.text === null ? fieldRotation : line.text);
+  const rows = /** @type {ReadonlyArray<PoolRow>} */ (QUARREL_POOLS[/** @type {'GRAZING'|'LEVIES'} */ (poolName)]);
+  // the field rotation's slot takes the site's own line (the text handed in), in the slot's place, with its id and
+  // needs; with none handed in it carries no text and is never picked
+  const rotation = /** @type {Quarrel} */ ({ id: FIELD_ROTATION_SLOT.id, text: fieldRotation, needs: FIELD_ROTATION_SLOT.needs });
+  const pool = rows.map((row) => (row === FIELD_ROTATION_SLOT ? rotation : /** @type {Quarrel} */ (row)));
   /** @type {object | null | undefined} */
   let held;
   const read = () => {
     if (held === undefined) held = facts();
     return held;
   };
-  const key = `${seed}::governanceNarrative:${poolName}`;
-  const admitted = (/** @type {Quarrel} */ line) => typeof textOf(line) === 'string'
+  const seedKey = `${seed}::governanceNarrative:${poolName}`;
+  const admitted = (/** @type {Quarrel} */ line) => typeof line.text === 'string'
     && declarationAdmits(declarationOf(line), /** @type {import('../../domain/facts/factVocabulary.js').FactsLike} */ (read())).admitted;
   const picked = drawDeclared(pool, {
-    draw: (lines) => pickVariantMixed(lines.filter(admitted), key) ?? null,
+    draw: (lines) => pickVariantMixed(lines.filter(admitted), seedKey) ?? null,
     facts: read,
-    key,
+    key: seedKey,
     poolId: `governanceNarrative:${poolName}`,
     surface: 'power',
     drawKind: 'H',
   });
-  const text = picked.line ? textOf(picked.line) : null;
+  const text = picked.line ? picked.line.text : null;
   if (typeof text !== 'string') return baseline;
   // the no-grazing twin stands in for GRAZING's index 0 only: it is read off every place, a town's included (the merge read of da16f2f4b)
   return poolName === 'GRAZING' && picked.line === pool[0] && noGrazing ? noGrazing : text;

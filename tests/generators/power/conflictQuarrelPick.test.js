@@ -32,7 +32,7 @@ import { clearActiveRng, getActiveRng, setActiveRng } from '../../../src/kernel/
 import { pickVariantMixed } from '../../../src/kernel/proseHash.js';
 import { pickQuarrel } from '../../../src/generators/power/quarrelPick.js';
 
-/** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text: string | null, needs: ReadonlyArray<string> }>>>} */
+/** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text?: string, needs: ReadonlyArray<string> }>>>} */
 const POOLS = /** @type {any} */ (SIBLINGS).QUARREL_POOLS ?? {};
 const POOL_OF = (/** @type {string} */ ledgerPool) => ledgerPool.replace(/^governanceNarrative:/, '');
 const isQuarrelNote = (/** @type {{ pool?: unknown }} */ e) => typeof e?.pool === 'string' && e.pool.startsWith('governanceNarrative:') && Object.hasOwn(POOLS, POOL_OF(e.pool));
@@ -51,10 +51,10 @@ function born(size, i) {
   return { seed, record: /** @type {any} */ (result), pick: notes.length ? notes[notes.length - 1] : null };
 }
 
-/** The pool line a ledger note names (the field rotation's row carries its text at the site). @param {{ pool: string, lineId: string | number }} note */
+/** The pool line a ledger note names (the field rotation's slot carries no text: its text is the site's). @param {{ pool: string, lineId: string | number }} note */
 const lineOf = (note) => {
   const line = (POOLS[POOL_OF(note.pool)] || []).find((l) => l.id === note.lineId) ?? null;
-  return line && line.text === null ? { ...line, text: FIELD_ROTATION_QUARREL } : line;
+  return line && !Object.hasOwn(line, 'text') ? { ...line, text: FIELD_ROTATION_QUARREL } : line;
 };
 
 const BASE = Object.freeze({
@@ -94,8 +94,8 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
 
   it('the pools: index 0 of each is the rung line it serves, and every line declares its needs in the vocabulary', () => {
     expect(Object.keys(POOLS).sort()).toEqual(['GRAZING', 'LEVIES', 'MILITARY_ARMED', 'MILITARY_COURT']);
-    // the one row with no text is the field rotation's, whose literal stays at the site
-    expect(Object.values(POOLS).flat().filter((l) => l.text === null).map((l) => l.needs)).toEqual([['tier: village']]);
+    // the one row with no text is the field rotation's slot, whose literal stays at the site
+    expect(Object.values(POOLS).flat().filter((l) => !Object.hasOwn(l, 'text')).map((l) => l.needs)).toEqual([['tier: village']]);
     for (const [name, pool] of Object.entries(POOLS)) {
       expect(new Set(pool.map((l) => l.id)).size, `${name}: ids are unique`).toBe(pool.length);
       expect(new Set(pool.map((l) => l.text)).size, `${name}: texts are unique`).toBe(pool.length);
@@ -160,14 +160,21 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
   it('(b) every printed quarrel\'s needs hold on the final record, and the ledger notes the line\'s own atoms', () => {
     const picked = ['town', 'village'].flatMap(birthsOf).filter((b) => b.pick);
     expect(picked.length, 'places whose baseline quarrel printed and was picked').toBeGreaterThanOrEqual(20);
+    // every place is read before one assertion (the seed-loop law): what each place shows, beside what it must show
+    /** @type {Record<string, unknown>} */ const shown = {};
+    /** @type {Record<string, unknown>} */ const owed = {};
     for (const { seed, record, pick } of picked) {
       const line = lineOf(/** @type {any} */ (pick));
-      expect(line, `${seed}: the noted line is a pool line`).not.toBe(null);
-      expect(pick?.atoms, `${seed}: the note carries the line's atoms`).toEqual(atomsOf(declarationOf(line)));
-      const verdict = declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record)));
-      expect(verdict.refused, `${seed}: ${line?.id} needs ${line?.needs.join(', ') || 'nothing'}`).toEqual([]);
-      expect(typeof record.powerStructure?.recentConflict, `${seed}: a sentence is stored`).toBe('string');
+      const at = `${seed}: ${line?.id ?? '(no pool line)'} needs ${line?.needs.join(', ') || 'nothing'}`;
+      shown[at] = {
+        poolLine: line !== null,
+        atoms: pick?.atoms,
+        refused: line ? declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused : null,
+        stored: typeof record.powerStructure?.recentConflict,
+      };
+      owed[at] = { poolLine: true, atoms: line ? atomsOf(declarationOf(line)) : null, refused: [], stored: 'string' };
     }
+    expect(shown, 'each place: the noted line is a pool line, the note carries its atoms, its needs hold, a sentence is stored').toEqual(owed);
   }, 600_000);
 
   it('(d) over hxd-town-0..19 and hxd-village-0..19: more than four distinct quarrels print, none in more than eight of twenty', () => {
@@ -188,10 +195,12 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
   it('(e) over hxd-thorp-0..19 and hxd-hamlet-0..19: a quarrel on each of the three new atoms prints, and every printed quarrel\'s needs hold', () => {
     const picked = ['thorp', 'hamlet'].flatMap(birthsOf).filter((b) => b.pick);
     expect(picked.length, 'places whose baseline quarrel printed and was picked').toBeGreaterThanOrEqual(20);
+    /** @type {Record<string, unknown>} */ const refusedAt = {};
     for (const { seed, record, pick } of picked) {
       const line = lineOf(/** @type {any} */ (pick));
-      expect(declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused, `${seed}: ${line?.id}`).toEqual([]);
+      refusedAt[`${seed}: ${line?.id}`] = declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused;
     }
+    expect(refusedAt, 'each small place: the printed quarrel\'s needs hold').toEqual(Object.fromEntries(Object.keys(refusedAt).map((k) => [k, []])));
     for (const atom of NEW_ATOMS) {
       const ids = (POOLS.GRAZING || []).filter((l) => l.needs.includes(atom)).map((l) => l.id);
       expect(ids.length, `GRAZING holds a quarrel needing ${atom}`).toBeGreaterThan(0);
@@ -204,11 +213,15 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
     const births = [...Array.from({ length: 40 }, (_, i) => born('city', i)), ...Array.from({ length: 20 }, (_, i) => born('metropolis', i))];
     const military = births.filter((b) => b.pick && MILITARY.includes(POOL_OF(/** @type {any} */ (b.pick).pool)));
     expect(military.length, 'places whose military rung printed and was picked').toBeGreaterThanOrEqual(3);
+    /** @type {Record<string, unknown>} */ const shownMil = {};
+    /** @type {Record<string, unknown>} */ const owedMil = {};
     for (const { seed, record, pick } of military) {
       const line = lineOf(/** @type {any} */ (pick));
-      expect(line, `${seed}: the noted line is a pool line`).not.toBe(null);
-      expect(declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused, `${seed}: ${line?.id}`).toEqual([]);
+      const at = `${seed}: ${line?.id ?? '(no pool line)'}`;
+      shownMil[at] = { poolLine: line !== null, refused: line ? declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused : null };
+      owedMil[at] = { poolLine: true, refused: [] };
     }
+    expect(shownMil, 'each military place: the noted line is a pool line, and its needs hold').toEqual(owedMil);
     expect(new Set(military.map((b) => /** @type {any} */ (b.pick).lineId)).size, 'distinct military quarrels').toBeGreaterThan(1);
   }, 600_000);
 

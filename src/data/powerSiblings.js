@@ -176,13 +176,22 @@ export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
 
 /**
  * One quarrel of a pool, frozen whole: `{ id, text, needs }`. Its id names it in the ledger; `needs` stands on the row as
- * an array literal, so the presumption walkers read the declaration where the line is written.
- * @param {{ id: string, text: string | null, needs: string[] }} row
+ * an array literal, so the presumption walkers read the declaration where the line is written. The field rotation's
+ * slot alone carries no text (`FIELD_ROTATION_SLOT` below).
+ * @param {{ id: string, text?: string, needs: string[] }} row
  */
 const quarrel = (row) => {
   Object.freeze(row.needs);
   return Object.freeze(row);
 };
+
+/**
+ * THE FIELD ROTATION'S SLOT in GRAZING (CURE-NINE, DEPTH-5, 2026-11-22): its id and needs, and no text. It is no
+ * declared line (a line carries a string or function text, `tests/lint/declaredLineShape.test.js`): the pick composes
+ * GRAZING at its call (`power/quarrelPick.js :: pickQuarrel`), the site's own line standing in this slot, so the
+ * literal keeps its one home (`governanceNarrative.js :: FIELD_ROTATION_QUARREL`) and this slot keeps the id and needs.
+ */
+export const FIELD_ROTATION_SLOT = quarrel({ id: 'g2-rotation', needs: ['tier: village'] });
 
 /**
  * BUILD-CONFLICT (DEPTH-2, 2026-11-20; the chair's word of 16:08 UTC, the lines `docs/chair/2026-11-20/content/depth/lines/
@@ -196,14 +205,14 @@ const quarrel = (row) => {
  * boycottReadsRelation`) fire as before wherever it is picked. A line is appended at the end of its pool, never reordered:
  * the mixed pick reads the admitted lines in pool order. Each need is a vocabulary atom (`factVocabulary.js`), answered at the site by the roster, the tier
  * and the config.
- * THE FIELD ROTATION'S TEXT IS NOT COPIED HERE (`text: null`): its literal stays where the presumption-classes register
- * banks it (`governanceNarrative.js :: FIELD_ROTATION_QUARREL`, a `resource` word at the guard's base), and the site hands
- * it to the pick.
+ * THE FIELD ROTATION'S TEXT IS NOT COPIED HERE (GRAZING's second is its slot, `FIELD_ROTATION_SLOT`, with no text): its
+ * literal stays where the presumption-classes register banks it (`governanceNarrative.js :: FIELD_ROTATION_QUARREL`, a
+ * `resource` word at the guard's base), and the site hands it to the pick, which composes the pool with it in the slot.
  */
 export const QUARREL_POOLS = Object.freeze({
   GRAZING: Object.freeze([
     quarrel({ id: 'g1-grazing', text: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', needs: [] }),
-    quarrel({ id: 'g2-rotation', text: null, needs: ['tier: village'] }),
+    FIELD_ROTATION_SLOT,
     quarrel({ id: 'g3-mill', text: 'The miller wants a bigger share of each sack for the grinding, and the households who bring their grain say the old share was fair.', needs: ['institution: mill'] }),
     quarrel({ id: 'g4-road', text: 'The households along the road cannot agree who should fill the ruts outside their doors, so the work keeps being put off.', needs: ['route: road'] }),
     quarrel({ id: 'g5-river', text: 'The households nearest the river and those further off disagree over who may draw water first when the river runs low.', needs: ['river'] }),
