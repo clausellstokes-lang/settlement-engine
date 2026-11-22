@@ -275,3 +275,26 @@ describe('U5b (e): once on the page; every wording reachable', () => {
     expect([...reached].sort()).toEqual(POOL.map((/** @type {any} */ l) => l.id).sort());
   });
 });
+
+describe('U5b-WORDING: no wording says the event struck (the chair\'s ruling of 03:38 UTC 2026-11-22)', () => {
+  /** @param {string} text @returns {string[]} the slots a wording names, sorted */
+  const slotsOf = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+  /** @param {string} text @returns {string} the wording's opening clause (to its first ';' or ',') */
+  const openingOf = (text) => text.split(/[;,]/)[0];
+  /** @returns {any} wording B, the one the ruling left unchanged */
+  const lineB = () => POOL?.find((/** @type {any} */ l) => l.id === 'B');
+
+  it('every wording takes the opening wording B takes, and only the slots wording B takes', () => {
+    expect(POOL).toHaveLength(3);
+    const B = lineB();
+    const off = POOL.filter((/** @type {any} */ l) => openingOf(l.text) !== openingOf(B.text)
+      || slotsOf(l.text).join() !== slotsOf(B.text).join()).map((/** @type {any} */ l) => l.id);
+    expect(off).toEqual([]);
+  });
+
+  it('each band keeps one time word, the one wording B takes', () => {
+    const timeSlots = slotsOf(lineB().text).filter((k) => !['event', 'place', 'seat'].includes(k));
+    expect(timeSlots).toHaveLength(1);
+    for (const band of Object.keys(TIMES ?? {})) expect(Object.keys(TIMES[band]), band).toEqual(timeSlots);
+  });
+});
