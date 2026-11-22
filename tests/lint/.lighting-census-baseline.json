@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d2a572d0e129463658d6fc7849afafb38a1f7e79",
-  "measuredBy": "PAGE-10",
-  "date": "2026-11-21",
-  "note": "the working line a64619510 merged into the trouble lane (6f84deba7)",
-  "files": 3730,
-  "parked": 476,
+  "measuredAtSha": "b79dc373590432ca9ba332e450e7c6c50a1f50b0",
+  "measuredBy": "PAGE-12",
+  "date": "2026-11-22",
+  "note": "CAUSES-PARITY-2 W adds tests/domain/display/tensionCauseAtoms.walker.test.js (merge b79dc3735)",
+  "files": 3731,
+  "parked": 477,
   "credited": 3254,
-  "titles": 31396,
-  "suiteTitles": 8702
+  "titles": 31400,
+  "suiteTitles": 8705
 }
