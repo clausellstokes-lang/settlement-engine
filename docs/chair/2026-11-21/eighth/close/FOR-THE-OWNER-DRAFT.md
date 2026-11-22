@@ -36,7 +36,14 @@ already cured and waiting to land.)
 ## 4. The goldens: the stored "this is what the engine makes" records
 The engine keeps a fixed set of births (the golden master) to prove nothing changes by accident. Switching the rules
 on changes them, by design. The old set is kept to prove that saved places still come out the same. A NEW set, born
-under the new rules, is made beside it for you to sign. **NOT YET MADE**: the chair makes it at the close.
+under the new rules, is made beside it for you to sign. **YOU SIGN TWO RECORDS HERE, NOT ONE** (CLOSE-2, 2026-11-22
+18:1x UTC, measured): (1) **the old set itself is out of date already**: born today the old way, none of its 525 places
+matches what was recorded on 2026-11-19, on the working line as it stands, before any switch (the line's other work
+since then moved them; this is the one golden row already red on the line, and it waits for your re-signing whatever the
+close does); (2) **the new set** (the "lit twin": the same 525 places born the new way) is prepared and waits for its
+first signing: every one of the 525 reads differently from the old way (a place's wealth in 330, the powers and their
+strength in all 525, who holds the seat in 74). Until you sign, both show red by name, never a silent pass. What you see
+and the one command after your signing: `close/OWNER-GOLDEN-LIT.md`.
 
 ## 5. Sizes (how much the app downloads)
 The first screen's download stays as it is on the working line today (already above its budget before this close;
