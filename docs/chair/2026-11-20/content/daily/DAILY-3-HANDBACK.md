@@ -31,8 +31,14 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
    the public `commoner_resentments` and `food_culture`.
 2. Ruling 22 of DAILY-2 (one whole `npm run test:ratchet`) is read as superseded by rule 8 as re-ruled (DAILY-3.txt, 6).
 3. The measure runs after EACH unit (DAILY-3.txt, 1), not only after E3.
-4. E1's test keeps the 900 births (about 280 s, the brief's word); E2 and E3 test files use a few a size, the 900 in the
-   measure (for the chair's veto: E1's cut to 5 a size is proposed).
+4. THE CHAIR'S RULINGS OF 06:17 UTC on E1: (1) crime70 #4 REWORDED, built red first (unit E1b, after E2's merge):
+   "Ordinary folk resent that the law here bends for anyone who can pay."; (2) crime55's four smugglers lines WAIT for
+   the trouble lane's atom `house: smuggling` (point 96): added at unit 4 after the line's merge, each with
+   `house: smuggling` beside its LINES-2b needs (the income-row half NOT built); the hideable need is lawful in the
+   owner-only table and is named in the `DM_BY_CONSTRUCTION` row's notes; crime55's top sentence share said before and
+   after; (3) E1's test cut to 5 a size (30 births, every size), the 900 kept in the measure with "900 of 900" in the
+   test's header and `measures/B3/` (unit E1b). At the line's merge `HAND_CEILING` = the line's figure + exactly this
+   lane's rows, both comments kept.
 
 ## 3. Houses, class rows, stored figures, worker bytes
 None yet (written at each merge).
