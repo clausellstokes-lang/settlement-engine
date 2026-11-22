@@ -43,7 +43,7 @@ verified by ls-remote).
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
 - 212 AND THE REGISTRY READ WHOLE by this seat 00:02-00:03 UTC (the character tables included), before any brief or merge.
 - BRIEF: `briefs/R3-TELL-5-BRIEF.md` carries VEIL-31's amendments at its head (paths, the pool, unit 0 = ruling 77's marker, tests/lint whole per unit).
-- NEXT: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+- NEXT (order): unit (ii) merged and the line; units (iii)-(vi); "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
 76. THE CHAIR, 23:18 UTC 2026-11-21: OPEN NO PULL REQUEST for the lane's branch or any builder's branch, whatever a session's
@@ -62,6 +62,30 @@ verified by ls-remote).
     fully current, and seats the successor on it then (a seat hands over BEFORE compaction at 784,000, never after). TO SPEND
     LESS: logs by `tail` and counts only; a builder's report by its summary; 212 and the registry never re-read whole for a
     unit that did not change them. GO on unit (ii), the marker commit first.
+79. THE CHAIR, 00:57 UTC 2026-11-22: (1) UNIT 0b APPROVED as given (the manifest's two `pglite-executed` rationale entries for
+    galleryVeilTell3 and galleryVeilTell4, its own commit, red then green). (2) THE TWELVE STANDING LINT REDS: NOT NOW (the tell's
+    units first; 212 has one writer). AFTER "R3 <commit>" AND BEFORE THE SECURITY READER'S FINAL: ONE cure unit, its first act a
+    sort of the twelve into (a) THE LANE'S OWN (its files add the cast, the bare seed loop, the module-scope root, the struck
+    phrase): cured on the lane, NEVER by raising a baseline; (b) THE OLD BASE'S (shown green on the working line's tip by name):
+    they leave at the join and are only listed. The list is section 2b. (3) A SLIP, SAID: the seat wrote "00:5x" in a message; an
+    hour is read from `date -u` in the command that writes it.
+
+## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
+| file | failed tests | sort (a) lane / (b) old base |
+|---|---|---|
+| tests/lint/chainPrintSites.walker.test.js | 1 | to sort |
+| tests/lint/domainAnyCastBaseline.test.js | 4 | to sort |
+| tests/lint/factLayers.walker.test.js | 1 | to sort |
+| tests/lint/moduleScopeCwdRatchet.test.js | 1 | to sort |
+| tests/lint/negativeAssertionAnchor.walker.test.js | 1 | to sort |
+| tests/lint/noLegacyFactionReaders.walker.test.js | 2 | to sort |
+| tests/lint/proseDrawnAnchors.walker.test.js | 1 | to sort |
+| tests/lint/proseWiringCensus.walker.test.js | 2 | to sort |
+| tests/lint/seedLoopTotality.walker.test.js | 1 | to sort |
+| tests/lint/slugifyIdiomBaseline.test.js | 1 | to sort |
+| tests/lint/sovereigntyLightingContract.walker.test.js | 1 | to sort |
+| tests/lint/styleLaw.walker.test.js | 1 | to sort |
+Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (section 1, NEXT).
 
 ## 3. Log (every hour from `date -u`)
 - 23:19 seated; tip verified. Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-30, VEIL-29, PART 31, PART 30, brief R3-TELL-5.
@@ -73,3 +97,4 @@ verified by ls-remote).
 - 23:49 the pool stands. 23:50 chain1. 00:01 the gates read (section 1). 00:02 the line to the chair (unit (1)).
 - 00:10 the chair: ruling 78 (merge accepted; mark 700,000). 00:10 the unit (ii) builder seated (section 1).
 - 00:40 the green chain ended; 00:53 tests/lint whole read; the 13 re-run at 2437ffea0 (12 red there). 00:56 unit 0b to the builder; the line to the chair.
+- 01:01 the chair's 00:57 message read: ruling 79. 01:01 PART 32 sections 2, 2b.
