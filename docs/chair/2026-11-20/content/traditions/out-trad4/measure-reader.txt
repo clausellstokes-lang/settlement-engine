@@ -1,0 +1,100 @@
+# TRAD-4 unit 6 measure (the final leaf) — audience=reader; towns=432; printed rites=1232
+ALL            n=1232  house/owner=633 (51.4%)  power=474 (38.5%)  cause=430 (34.9%)  economy=347 (28.2%)  SHORT=107 (8.7%)
+  (of house/owner: house=633, the rite's owner in play=0)
+  set: the shared page's rows (sharedTraditionRowsOf), each description checked against the row's own text; rites shown=1232; rows not matched to a rite=0; rows whose text differs from the description here=0; no description composed=0
+
+## by tier (size)
+thorp          n=  81  house/owner=7 (8.6%)  power=56 (69.1%)  cause=54 (66.7%)  economy=11 (13.6%)  SHORT=10 (12.3%)
+hamlet         n=  78  house/owner=4 (5.1%)  power=61 (78.2%)  cause=60 (76.9%)  economy=5 (6.4%)  SHORT=8 (10.3%)
+village        n= 112  house/owner=31 (27.7%)  power=65 (58.0%)  cause=60 (53.6%)  economy=11 (9.8%)  SHORT=13 (11.6%)
+town           n= 203  house/owner=95 (46.8%)  power=86 (42.4%)  cause=75 (36.9%)  economy=55 (27.1%)  SHORT=21 (10.3%)
+city           n= 315  house/owner=195 (61.9%)  power=97 (30.8%)  cause=83 (26.3%)  economy=122 (38.7%)  SHORT=22 (7.0%)
+metropolis     n= 443  house/owner=301 (67.9%)  power=109 (24.6%)  cause=98 (22.1%)  economy=143 (32.3%)  SHORT=33 (7.4%)
+
+## by element
+founding       n= 229  house/owner=0 (0.0%)  power=229 (100.0%)  cause=220 (96.1%)  economy=3 (1.3%)  SHORT=0 (0.0%)
+first-landing  n= 148  house/owner=0 (0.0%)  power=148 (100.0%)  cause=95 (64.2%)  economy=30 (20.3%)  SHORT=0 (0.0%)
+charter        n=  97  house/owner=0 (0.0%)  power=97 (100.0%)  cause=72 (74.2%)  economy=10 (10.3%)  SHORT=0 (0.0%)
+hearth         n=  33  house/owner=19 (57.6%)  power=0 (0.0%)  cause=0 (0.0%)  economy=8 (24.2%)  SHORT=14 (42.4%)
+harvest        n=  74  house/owner=66 (89.2%)  power=0 (0.0%)  cause=0 (0.0%)  economy=34 (45.9%)  SHORT=0 (0.0%)
+river          n=  42  house/owner=36 (85.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=14 (33.3%)  SHORT=4 (9.5%)
+stone          n=  62  house/owner=43 (69.4%)  power=0 (0.0%)  cause=0 (0.0%)  economy=18 (29.0%)  SHORT=19 (30.6%)
+the-dead       n=  63  house/owner=63 (100.0%)  power=0 (0.0%)  cause=43 (68.3%)  economy=2 (3.2%)  SHORT=0 (0.0%)
+field          n=  62  house/owner=42 (67.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=29 (46.8%)  SHORT=12 (19.4%)
+forge          n=  61  house/owner=61 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=17 (27.9%)  SHORT=0 (0.0%)
+market         n=  82  house/owner=82 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=81 (98.8%)  SHORT=0 (0.0%)
+hunt           n=  49  house/owner=43 (87.8%)  power=0 (0.0%)  cause=0 (0.0%)  economy=15 (30.6%)  SHORT=6 (12.2%)
+long-sun       n=  40  house/owner=23 (57.5%)  power=0 (0.0%)  cause=0 (0.0%)  economy=14 (35.0%)  SHORT=17 (42.5%)
+tide           n=  41  house/owner=41 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=40 (97.6%)  SHORT=0 (0.0%)
+greening       n=  86  house/owner=55 (64.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=20 (23.3%)  SHORT=31 (36.0%)
+stars          n=  63  house/owner=59 (93.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=12 (19.0%)  SHORT=4 (6.3%)
+
+rites of the dead: 63; keeping a cause (a major or catastrophic siege, fire, flood or plague): 43
+
+## per slot pool: draws · distinct lines printed · THE POOL-DOMINANCE FIGURE (the most printed line and its share) · lines refused and what replaced them
+# read from the presumption ledger (`pool`, `lineId`), the drawn line re-read by the leaf's own key; a refusal to nothing is seen where the slot always draws (gloss)
+# re-derivation disagreements with the ledger: 0
+# towns of this pool holding a stress (a crisis the record holds: crisis-scoped lines answer to it): 146 of 432
+# drawn-top: the most DRAWN line (before any refusal) and its share; the pick is kernel/proseHash.js :: pickVariant, fnv1a32(key) % pool size
+cause.dead             draws=  43 lines=3  top=37.2% "It is kept in memory of {event}, {when}."  drawn-top=37.2% "It is kept in memory of {event}, {when}."
+cause.foundingBare     draws= 387 lines=3  top=33.6% "{Town} has kept it since its founding, {age} years ago."  drawn-top=33.6% "{Town} has kept it since its founding, {age} years ago."
+economy.chief          draws= 256 lines=3  top=35.5% "{Income} {brings} {town} more than anything else."  drawn-top=35.5% "{Income} {brings} {town} more than anything else."
+economy.lesser         draws=  82 lines=3  top=40.2% "{Income} {is} one of the mainstays of {town}."  drawn-top=40.2% "{Income} {is} one of the mainstays of {town}."
+economy.only           draws=   9 lines=3  top=55.6% "All that {town} takes in comes from {income}."  drawn-top=55.6% "All that {town} takes in comes from {income}."
+gloss.charter          draws=  97 lines=3  top=36.1% "honours the charter"  drawn-top=36.1% "honours the charter"
+gloss.field            draws=  62 lines=3  top=41.9% "honours the fields"  drawn-top=41.9% "honours the fields"
+gloss.first-landing    draws= 148 lines=3  top=35.8% "marks the first landing"  drawn-top=35.8% "marks the first landing"
+gloss.forge            draws=  61 lines=3  top=34.4% "blesses the forge"  drawn-top=34.4% "blesses the forge"
+gloss.founding         draws= 229 lines=3  top=37.6% "marks the founding"  drawn-top=37.6% "marks the founding"
+gloss.greening         draws=  86 lines=3  top=34.9% "welcomes the year's new growth"  drawn-top=34.9% "welcomes the year's new growth"
+gloss.harvest          draws=  74 lines=5  top=35.1% "marks the gathering of the harvest"  drawn-top=35.1% "marks the gathering of the harvest"
+                        refused: twin 17: 10× "gives thanks for what the fields have given" → "is kept for what the fields give"; 7× "gives thanks for the harvest" → "is kept for the harvest"
+gloss.hearth           draws=  33 lines=3  top=48.5% "blesses hearth and home"  drawn-top=48.5% "blesses hearth and home"
+gloss.hunt             draws=  49 lines=3  top=51.0% "marks the hunting season"  drawn-top=51.0% "marks the hunting season"
+gloss.long-sun         draws=  40 lines=3  top=42.5% "marks the long days of high summer"  drawn-top=42.5% "marks the long days of high summer"
+gloss.market           draws=  82 lines=3  top=36.6% "blesses the market and its trade"  drawn-top=36.6% "blesses the market and its trade"
+gloss.river            draws=  42 lines=3  top=38.1% "honours the river"  drawn-top=38.1% "honours the river"
+gloss.stars            draws=  63 lines=3  top=36.5% "honours the stars"  drawn-top=36.5% "honours the stars"
+gloss.stone            draws=  62 lines=3  top=33.9% "keeps faith with the standing stones"  drawn-top=33.9% "keeps faith with the standing stones"
+gloss.the-dead         draws=  63 lines=3  top=38.1% "honours the dead"  drawn-top=38.1% "honours the dead"
+gloss.tide             draws=  41 lines=3  top=46.3% "honours the tide"  drawn-top=46.3% "honours the tide"
+house.body             draws= 358 lines=3  top=36.9% "Its keeping falls to {house}."  drawn-top=36.9% "Its keeping falls to {house}."
+house.place            draws=  46 lines=3  top=37.0% "It takes place at {house}."  drawn-top=37.0% "It takes place at {house}."
+house.placePower       draws= 229 lines=3  top=36.7% "It is kept at {house} and falls to {power}."  drawn-top=36.7% "It is kept at {house} and falls to {power}."
+lead.contest           draws= 125 lines=4  top=28.0% "A contest"  drawn-top=28.0% "A contest"
+lead.fair              draws= 280 lines=6  top=32.9% "A fair"  drawn-top=32.9% "A fair"
+                        refused: twin 49: 27× "A fair of stalls and trading" → "A fair kept by custom"; 22× "A fair with traders from outside" → "A fair kept as of old"
+lead.feast             draws= 309 lines=8  top=36.9% "A common feast"  drawn-top=55.3% "A common feast"
+                        refused: twin 91: 57× "A common feast" → "A feast day"; 16× "A feast at long tables" → "A feast kept as of old"; 11× "A feast eaten in common" → "A feast day kept by custom"; 7× "A feast shared among neighbours" → "A feast day kept as of old"
+lead.offering          draws= 157 lines=4  top=34.4% "An offering"  drawn-top=34.4% "An offering"
+lead.procession        draws= 203 lines=4  top=44.3% "A procession"  drawn-top=44.3% "A procession"
+lead.vigil             draws= 158 lines=4  top=36.7% "A night's vigil"  drawn-top=36.7% "A night's vigil"
+power.seat             draws= 474 lines=3  top=34.4% "It falls to {power}."  drawn-top=34.4% "It falls to {power}."
+
+most dominated pool (of pools with 20 draws or more): gloss.hunt — "marks the hunting season" 25 of 49 (51.0%)
+
+## ten most repeated shapes (town masked)
+4x  A fair day that blesses the market and its trade. It is held at the market squares, in the keeping of the Merchant Guilds. Market taxes bring {town} more than anything else.
+3x  A contest that marks the coming of spring.
+3x  A common feast that welcomes the year's new growth.
+2x  An offering that marks the coming of spring.
+2x  A contest that welcomes the year's new growth.
+2x  A walking procession that honours the first green of the year.
+2x  A night's vigil that is kept under the stars.
+2x  A walking procession that welcomes the year's new growth.
+2x  A walking procession that honours the standing stones.
+2x  A walking procession that marks the long days of high summer.
+
+## ten most repeated whole descriptions
+3x  A contest that marks the coming of spring.
+3x  A common feast that welcomes the year's new growth.
+2x  An offering that marks the coming of spring.
+2x  A contest that welcomes the year's new growth.
+2x  A walking procession that honours the first green of the year.
+2x  A night's vigil that is kept under the stars.
+2x  A walking procession that welcomes the year's new growth.
+2x  A walking procession that honours the standing stones.
+2x  A walking procession that marks the long days of high summer.
+2x  A feast at long tables that honours the forge. Its keeping falls to the blacksmiths.
+
+distinct whole: 1205 of 1232; distinct shapes: 1196

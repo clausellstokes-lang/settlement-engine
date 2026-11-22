@@ -1,0 +1,66 @@
+WHAT MOVED SINCE THE FIRST CUT. One: no town now prints the same sentence in two of its traditions (before, 94
+of 432 towns did). A later tradition takes the next wording (141 descriptions moved); a keeper's fourth or fifth
+tradition reads "too" (8 times); where the wordings about income run out, the income is left out (11 times). Two:
+no opening sentence says "kept" or "keeps" twice (before, 13 rites). Three: all 387 founding sentences now end on
+who founded the place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of
+feasts, now 24 percent. Nothing new was invented: every sentence still states only what the town's record holds.
+
+THE TRADITIONS DESCRIPTIONS, MEASURED AGAIN — IN PLAIN WORDS
+Written 2026-11-20 19:36 UTC (TRAD-5, unit 12). "First cut" is TRAD-4-MEASURES.txt (unit 6). "Now" is the same 432 towns (six sizes,
+twelve cultures, six seeds each), born the same way and read on the descriptions as they stand today. Your page unless
+said otherwise. The full figures are in out-trad5/measure-owner.txt and out-trad5/measure-reader.txt.
+
+WHO KEEPS IT. The 432 towns print 1,232 rites. 633 of them (51.4%) name a house that keeps the rite, 474 (38.5%) name
+the town's ruling power, and 125 name no keeper. First cut: the same. Where one keeper keeps a fourth or fifth rite in
+the same town, that rite now says so with "too" ("It too falls to the City Council."): 8 rites. No town has a sixth.
+
+WHERE IT COMES FROM. 432 rites of 1,232 (35.1%) say where the rite comes from: 387 go back to the town's founding, and 45
+rites of the dead are kept in memory of a great fire, flood, sickness or siege the town's own history holds (45 of its
+63 rites of the dead). First cut: the same. All 387 founding sentences now end on who founded the place ("Xingang has
+kept it since its founding 129 years ago by a discharged soldier who liked the view and had nowhere better to be.").
+
+WHO PAYS. 335 rites of 1,232 (27.2%) say what the town lives on. First cut: 346 (28.1%). The 11 fewer are rites where
+the town's earlier rites had already used every wording about that income: the sentence is left out rather than said
+twice.
+
+THE SHORT FORM. 107 rites of 1,232 (8.7%) are one sentence, what is done and nothing more. By size: thorp 10 of 81,
+hamlet 8 of 78, village 13 of 112, town 21 of 203, city 22 of 315, metropolis 33 of 443. First cut: the same.
+
+THE MOST REPEATED DESCRIPTION. No description is printed more than twice across the 432 towns; 13 are printed twice,
+each in two different towns. First cut: two were printed 3 times. Different descriptions: 1,219 of 1,232 (first cut:
+1,213). With the town's name hidden, the most repeated pattern is printed twice (first cut: 4 times). Inside one town:
+0 of 432 towns print the same sentence in two of their rites (before this rule: 94 towns). 141 descriptions took a
+later wording to keep it so.
+
+IS ANY POOL DOMINATED BY ONE LINE? No. Of the pools drawn 20 times or more, the most lopsided is the tide's "honours the
+tide", printed 19 times of 41 (46%); next the keeper sentence "It is held at [the place], in the keeping of [the power]",
+72 of 159 (45%); every other pool's commonest line holds 21% to 44%. First cut: the hunt's "marks the hunting season"
+led with 51%; it is now 41%. The lean of the first cut is gone: the feast picked "A common feast" 171 times of 309
+(55%); now 75 (24%), and the commonest feast pick is "A feast shared among neighbours", 94 of 309 (30%). As printed,
+"A common feast" stands in 52 of 309 (17%; first cut 37%). The procession's "A procession" (44%) gave way too: its
+commonest is now "A slow procession", 26%.
+
+"CALM" TOWNS ARE NOT ALL CALM. 146 of the 432 towns are born with a pressure of their own. There the lines that would
+jar with hardship are quietly swapped for plain ones ("A feast day", "A fair kept by custom", "is held for the
+harvest"): 91 feast lines, 41 fair lines, 21 harvest lines (first cut 91, 49, 17: the picks moved). Nothing about the
+hardship is said. "Kept" or "keeps" said twice in one opening ("A feast day kept by custom that is kept for ..."): now
+in 0 rites, calm or in any crisis (before: 13 of 1,232 calm rites, 11 saying "kept" twice and 2 "keeps faith" after a
+"kept"; 29 under famine).
+
+THE READER'S PAGE shows the same 1,232 rites. 430 say where they come from (two rites of the dead whose event's name
+carries a name the town holds are not tied to it for the reader), and 336 say who pays (first cut 347: the same 11
+left out). No town repeats a sentence there either (0 of 432). Different descriptions: 1,206 (first cut 1,205).
+
+WHERE YOUR PAGE AND THE READER'S DIFFER BECAUSE OF CRIME. 45 of 432 towns hold a criminal income. On 17 of 1,232 rites
+your sentence about what the town lives on differs from the reader's, because you see the criminal income ranked among
+the others and the reader does not. First cut: 17. For example: yours, "A good share of what [the town] takes in comes
+from market taxes."; the reader's, "Nothing brings [the town] more than market taxes." (The full figures file prints 34
+here: it also counts wordings moved by the rule that no town repeats a sentence. Compared like for like, it is 17.)
+
+IN CRISIS. The same 432 seeds were born five more times, each with one crisis forced (famine, siege, occupation, war,
+plague). Every crisis town shows exactly the same rites as its calm twin (none of 6,160 missing), and no crisis town
+repeats a sentence (0 of 432 in each). Of each crisis's 1,232 rites, these read differently from the calm reading:
+famine 539, siege 547, occupation 405, war 443, plague 506 (first cut 531, 541, 401, 434, 496). Two reasons: a line is
+swapped for its plain twin (218 feast lines, 99 fair lines, 29 harvest lines, the same in every crisis; first cut 218,
+91, 31), or the town itself came out differently (another house or keeper, another income first, another memory:
+famine 298, siege 323, occupation 144, war 201, plague 263). No line speaks of the crisis.

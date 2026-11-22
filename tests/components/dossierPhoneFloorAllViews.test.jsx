@@ -655,6 +655,9 @@ const desktopShape = (perView) => Object.fromEntries(
 // (MAGIC, fdec4d96f: the headline's caption, "Magic in the world at large, not the city's own:", data-testid magic-headline-scope).
 // The caption was printed at chromeFontSize(FS.xs) and read 12px PROSE on the phone, under the floor; PIN-FIX prints it at
 // proseFontSize(FS.xs) (identity on desktop, so no desktop size moved). Nothing else moved; no token moved; sub12 0.
+// ── RE-MEASURED 2026-11-20 (TRAD-1, CTR9): World/Traditions measured/sub14 1 -> 5. CAUSE: the description under each
+// tradition (domain/traditions/traditionDescription.js), one new prose line on each of the fixture's four cards; nothing
+// else moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -719,7 +722,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "World/Daily Life":    { measured: 1, sub14: 1 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
-  "World/Traditions":    { measured: 1, sub14: 1 },
+  "World/Traditions":    { measured: 5, sub14: 5 },
   "World/History":       { measured: 18, sub14: 18 },
   "Notes/Chronicle":     { measured: 0, sub14: 0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
@@ -845,6 +848,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-11-20 (PAGE-4 PIN-FIX), the same red run and bisection as DESKTOP_BASELINE's note: World/NPCs prose
 // 283 -> 292 (CARD, fe1ff5410: the Standing rows and the plain-words tie lines); Systems/Magic prose 1 -> 2 (MAGIC, fdec4d96f: the
 // headline's caption, now at proseFontSize, so the floors arm reads zero violations). Chrome, sub14 and sub12 hold in every view.
+// ── RE-MEASURED 2026-11-20 (TRAD-1, CTR9): World/Traditions prose 1 -> 5 (sub14 0, sub12 0: every new line clears the
+// floor). CAUSE: the description under each tradition, one prose line on each of the fixture's four cards.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -897,7 +902,7 @@ const MOBILE_BASELINE = Object.freeze({
   "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Traditions":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },
   "World/History":       { prose: 16, chrome: 2, sub14: 2, sub12: 0 },
   "Notes/Chronicle":     { prose: 0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });
