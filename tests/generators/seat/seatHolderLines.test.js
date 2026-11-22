@@ -199,9 +199,9 @@ describe('U6 (4): the licensed pair takes W2', () => {
 });
 
 describe('U6 (5): under law 1 not one byte moves', () => {
-  it('four births (a town, a village, a city, and the lit witness seed born dark), law 1, against law 1 with the new paths off', () => {
+  it('five births (a town, a village, a city, and two lit witness seeds born dark, one an R2 seat), law 1, against law 1 with the new paths and the final-record pass off', () => {
     // every row run and collected, never an `each` (sovereigntyLightingContract's park debt only shrinks)
-    expectNoSeedFailures(collectSeedFailures([['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['city', 'u6t-city-4']], ([settType, seed]) => {
+    expectNoSeedFailures(collectSeedFailures([['town', 'u6d-town-0'], ['village', 'u6d-village-0'], ['city', 'u6d-city-0'], ['city', 'u6t-city-4'], ['village', 'u6p-village-3']], ([settType, seed]) => {
       build(false);
       sw.off = false;
       const on = born(settType, seed);
@@ -209,6 +209,7 @@ describe('U6 (5): under law 1 not one byte moves', () => {
       sw.off = true;
       const off = born(settType, seed);
       expect(JSON.stringify(on), `${seed}: the law-1 record is byte-identical with the new paths off`).toBe(JSON.stringify(off));
+      expect(diffPaths(JSON.parse(JSON.stringify(on)), JSON.parse(JSON.stringify(off))), `${seed}: 0 differences of any kind`).toEqual([]);
     }), 'the law-1 differential');
   });
 });
