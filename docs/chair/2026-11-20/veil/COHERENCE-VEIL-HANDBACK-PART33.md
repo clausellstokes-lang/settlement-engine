@@ -1,4 +1,4 @@
-# COHERENCE-VEIL — hand-back, part 33: the thirty-second seat (VEIL-32). Read with PART 30 (section 1, rulings 1-75: THE RULINGS IN FORCE; section 4: the pool; section 8: the list after R3) and PART 32 (rulings 76-84; section 2b, the standing lint reds). A successor needs this, PART 30, PART 32 and the briefs alone.
+# COHERENCE-VEIL — hand-back, part 33: the thirty-second seat (VEIL-32). Read with PART 30 (section 1, rulings 1-75: THE RULINGS IN FORCE; section 4: the pool; section 8: the list after R3) and PART 32 (rulings 76-85; section 2b, the standing lint reds). A successor needs this, PART 30, PART 32 and the briefs alone.
 
 Seat: VEIL-32, a seat of the EIGHTH chair (session_01ACmDYY29VRchM87v1yhL9Q; send_message, Claude Code Remote MCP). Branch
 `lane/veil-32-2026-11-22`. Assignment: `lane/chair-2026-11-08 :: docs/chair/2026-11-21/eighth/prompts/VEIL-32.txt` (read at
@@ -8,10 +8,12 @@ verified by ls-remote).
 ## 1. WHERE THE LANE STANDS (kept current at every push)
 - TWO CORRECTIONS TO PART 32 (the chair, in this seat's seating; PART 32 was closed minutes before its last ruling reached it):
   (1) PART 32's NEXT STEP says the cure of unit (vii) is only RECOMMENDED: IT IS RULED: "THE OTHER WAY" (withhold the key
-  always, the page re-derives), as ruling 85 (b) below orders it. (2) PART 32 section 1 says "R3" is measured ON THE LINE WITH
-  the content lanes landed: that line was the chair's own error, corrected the same hour: ruling 85 (e) is the law: the working
+  always, the page re-derives), as ruling 86 (b) below orders it. (2) PART 32 section 1 says "R3" is measured ON THE LINE WITH
+  the content lanes landed: that line was the chair's own error, corrected the same hour: ruling 86 (e) is the law: the working
   line is NOT merged into this lane before the close; "R3" is reached ON THE LANE; a JOIN PROBE on a scratch branch
-  (`lane/veil-32-2026-11-22-joinprobe-wip`) only when the chair says.
+  (`lane/veil-32-2026-11-22-joinprobe-wip`) only when the chair says. BOTH ARE NOW ALSO IN PART 32 ITSELF: VEIL-31's last
+  commit 9fd3623c5 (documents only, read by this seat; merged here after PART 33's first push, which preceded the chair's word to
+  fast-forward) carries them as PART 32's ruling 85 and its section 1. PART 33 numbers the prompt's rulings 86.
 - THE LANE: `lane/veil-32-2026-11-22` = 385067da2 (VEIL-31's tip: units (i), (ii), (iii) merged; unit (vii)'s measure merged,
   docs only) + this seat's records. 212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback
   `8cbd7d1c…ded5b0`; 211 `eface6d0…0b01` / `ce8474ff…712f` (to be re-proved by the green chain's sha256 file).
@@ -22,7 +24,7 @@ verified by ls-remote).
   (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
   gate, acceptance, `tests/lint` whole) to `/var/tmp/v18/out/v32/g/done.txt`. Copies of the scripts: `out/v32/`.
 - 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
-- UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 85 (b): the measure of dependents first, then the row in both
+- UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 86 (b), = PART 32's ruling 85: the measure of dependents first, then the row in both
   engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder: not yet
   seated (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` when it is; if this seat stops, its work goes up as
   `lane/veil-32-2026-11-22-r3tell8-wip` unread).
@@ -30,8 +32,8 @@ verified by ls-remote).
   GATE-2 at the tip; then unit (viii)'s builder from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
   then "R3 <commit>".
 
-## 2. RULINGS SINCE PART 32 (numbered on from 84; the eighth chair's; each vetoable by the owner)
-85. THE CHAIR, VEIL-32's prompt (written 05:15 UTC 2026-11-22):
+## 2. RULINGS SINCE PART 32 (numbered on from 85, PART 32's last; the eighth chair's; each vetoable by the owner)
+86. THE CHAIR, VEIL-32's prompt (written 05:15 UTC 2026-11-22; its (b) and (e) are PART 32's ruling 85):
     (a) THE TWIN IS ANOTHER DRAW: it finds candidates and is the witness, never the oracle; an arm's reference is THE RECORD
         (what is derived from served facts alone).
     (b) UNIT (viii), THE CURE OF (vii), BY "THE OTHER WAY" (VR37 (a), R2's pattern: withhold always, the page re-derives): NO

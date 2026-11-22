@@ -11,7 +11,7 @@ asking for one). A security lane: a slip is a leak. Measure first, red first. A 
   owes), its six causes by town, THE RECORD REFERENCE (`generateSafetyProfile` then `settleCrimeLinesToSignal` over the served
   config, tier and houses: 184/184 stored lists reproduced, 0/48 controls), "THE PROPOSED ARM". Its probes
   `out/v31/tell7/measure/{ref.probe.jsx,lists.probe.jsx,lists.sh,lists-an.mjs,causes-an.mjs}` are yours to reuse, READ WHOLE.
-- `COHERENCE-VEIL-HANDBACK-PART32.md` section 2 (rulings 76-84); `COHERENCE-VEIL-HANDBACK-PART33.md` section 1; PART 30
+- `COHERENCE-VEIL-HANDBACK-PART32.md` section 2 (rulings 76-85; 85 is this unit's ruling); `COHERENCE-VEIL-HANDBACK-PART33.md` section 1; PART 30
   section 1 rulings 6, 7, 9, 10, 24, 54, 58, 62, 73.
 - THE READ-WHOLE LAW: 212 (`supabase/migrations/212_share_veil_later_cures.sql`) WHOLE, the character tables included; the
   registry `src/domain/veil/rosterChoiceRegistry.js` WHOLE; the twin's `src/domain/display/galleryRosterChoices.js` and
