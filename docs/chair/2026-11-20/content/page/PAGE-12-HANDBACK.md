@@ -1,9 +1,16 @@
-# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-22 09:04 UTC by `date -u`)
+# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-22 09:17 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names (under `briefs/`), then `PAGE-10-HANDBACK.md` only where this file sends it.
 PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff is read once, at the merge.
 
 ## 1. WHERE THE LANE STANDS
+- ⛔ PARKED (the chair, 09:08 UTC 2026-11-22, on the owner's "limit work to 6 children at a time"): no run, no builder, no message until the chair's "GO PAGE-12". Every ruling below stands (E51's five lines, arm 1c, E46).
+- DONE AND PROVEN: the first tranche is ON THE LINE as point 96 (`lane/join-2026-11-14` 2486d1301; this lane's ab9804585, merge c35847792); merged back into the lane at 103828d92 (the lane = the line but `docs/`). LANE TIP: 956d5a9c5 (+ this hand-back).
+- IN THE AIR (1), HOOKS-POOL-2 on `lane/page-12-2026-11-21-pool2-wip` at 90c00e73c (pushed; from 1b1b0eb2d, before the line merge): 1f0bc50a9 the 24 lines with E51's five (arm 1's counts red then green; arm 1c as assented); 1b1f133ba the proofs (hook2 under 30% at every size, both pools, 25.8% at most); 90c00e73c an empty WIP marker, RED: the sameness walker's RULE 2 lacks the 3 new guild_conflict readings. NOT DONE: commit 3 (the readings re-take by the walker's own reading), the registers (pool-dominance `--bank-new`, the lighting census), `tests/lint` whole, the goldens named (the generators/data run was stopped). The diff NOT YET READ by PAGE-12.
+- IN THE AIR (2), GUARDLINE-HK1 on `lane/page-12-2026-11-21-guardline-wip` at 3ac002b5e (pushed; from 4cb353cb8): 2a4ad08a6 the new differential pin `tests/domain/display/guardLinePayCutOwnerOnly.test.js` (4 passed; NO earlier test held (a)-(c)); 3ac002b5e WIP, RED: HK1's comment in `lawBand.js` (comment-only, proven by the stripped file) and two `// anchored:` markers added after `tests/lint` whole failed `negativeAssertionAnchor` (lines 105, 107). NOT DONE: re-run the pin and that walker, then `tests/lint` whole. The diff NOT YET READ by PAGE-12.
+- EXACT NEXT STEP on "GO PAGE-12": staff a builder (one at a time unless the chair says two) on each wip branch to finish its NOT DONE list; read each diff whole once; re-run red and green; merge each into the lane (which holds the line at 2486d1301: merge the branch, registers at the line's side, then by their doors); rule 8 for the second tranche; "PAGE-TROUBLE-B <commit>".
+
+## 1b. WHERE THE LANE STOOD BEFORE THE PARK (kept for its figures)
 - STANDS ON: `lane/page-12-2026-11-21`, started at cbbe87154 (= `lane/page-10-2026-11-20`, PAGE-10's saved tip; verified by ls-remote 23:19 UTC 2026-11-21).
 - THE WORKING LINE: `lane/join-2026-11-14` at a64619510 (point 86), already merged into the lane by PAGE-10 (6f84deba7).
 - MERGED (PAGE-10's, unproven at the tip until unit 1): causes 3411c9c83; first-paint pin afacca8a6; hooks 81076db2d; HOOKS-CURES A+B 12c211dc9; line a64619510 at 6f84deba7.
