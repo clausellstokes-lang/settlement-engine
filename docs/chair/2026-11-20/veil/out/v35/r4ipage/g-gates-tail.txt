@@ -1,0 +1,29 @@
+verify: 45 cached births re-read, 0 differ
+verify exit 0
+own | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:110 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:101 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:011 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:100 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:010 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:001 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+g:000 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+allOpen | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+off | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+own | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+g:110 | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+g:101 | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+g:011 | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+g:100 | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+g:010 | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+g:001 | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+g:000 | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+allOpen | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+off | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+GATE-2: 20 cell(s) with p below 0.05: RED
+THE TOWNS LOWER BY RULE (ruling 62 (5): VR42 keeps a governing row GATE-1 does not find at that size): 7
+TODAY: GATE-1 own (off 4, dm 4); off (off 4, dm 4); mixed (off 4, dm 4)
+TODAY: GATE-1 allOpen (off 4, dm 4); any gated setting (off 4, dm 4); LOWER BY RULE 7
+TODAY: GATE-2 L3 any gated setting, non-members (off 10, dm 10); Fisher cells below 0.05: 20
+GATE: 4 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)
+tell2 exit 1

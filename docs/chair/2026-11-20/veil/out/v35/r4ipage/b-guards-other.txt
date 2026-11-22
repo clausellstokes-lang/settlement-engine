@@ -1,0 +1,17 @@
+Every non-security file calling galleryPayloadFor/applyVeil/projectShareVeil/get_gallery_dossier/get_unlisted_dossier (34 files, --maxWorkers=2): 6 failed | 28 passed; 16 failed | 850 passed | 1 skipped
+     × EXISTENCE IS PUBLIC: a card address is never hideable; a card-level delta hides its depth, the card and its identity stay 28ms
+     × X-21e, THE ONE EXCEPTION: a criminal or clandestine house's card is hideable whole, with its services and its people's membership; no other card is 4ms
+     × THE IDENTITY FLOOR can never be hidden: refused, dropped, and spared even by a malformed set 3ms
+     × an institution hides its services (its rows in every category) and its people (their link, never the person) 1ms
+     × everything else is shown: a town with nothing to hide loses only its housekeeping and hooks 5ms
+     × PROPERTY: for any veil, every path and value in the output already sits at that path in the projection 3ms
+     × a master switch hides a field class for everyone; one card eye is its exception, and the reader agrees 3ms
+     × a share marked with a veil renders through it: the defaults hide, a delta shows 16ms
+     × VR34 (b): a power's members carried only on master's top-level list are offered and covered 19ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 4017ms
+     × the gallery veil (the NPC card's ties eye) removes the row and the door together 11ms
+     × the veil and the public projection take the honorific with the house: the name stays bare 3ms
+     × is disabled with its words on a town with no criminal part 49ms
+       × does not show (iii) on a town with no criminal parts 58ms
+     × a planted veil hides the same rows on both reads 35ms
+     × a link-only town that was never exported hides what the default hides 4ms
