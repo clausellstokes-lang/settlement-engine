@@ -1,0 +1,312 @@
+guards: 85 relation variants, 111 description variants; season / machinery / >45 words misses: 0
+
+=== thorp · narrative: places holding the field 3
+branch thorp narrative GM.occ: places 2 · entries 2 (67%)
+branch thorp narrative GM.comp+strongest: places 1 · entries 1 (33%)
+pooled rows thorp: varied 0 · kept index 0 0 · conflict twins left as they are 0
+TODAY thorp narrative top 2/3 67% | The # carries out what the # decides.
+PROJECTED thorp narrative top 2/3 67% | The # carries out what the # decides.
+PROJECTED-NO-ATOM thorp narrative top 2/3 67% (only the variants that declare no atom)
+  over the bar after the projection thorp: 1 | The # no longer takes orders from the #. The # keeps the title; the # makes the decisions that matter.
+  over the bar after the projection thorp: 2 | The # carries out what the # decides.
+
+=== thorp · desc: places holding the field 100
+opening thorp desc: places 41 · entries 41 (41%) | The oldest heads of the community decide things together; people follow them out of respec
+opening thorp desc: places 22 · entries 22 (22%) | Settlement governed by heads of household; decisions by informal consensus among property 
+opening thorp desc: places 13 · entries 13 (13%) | The oldest heads of the community still decide things together, but fewer and fewer people
+TODAY thorp desc top 41/100 41% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+PROJECTED thorp desc top 10/100 10% | Respected elders guide the community; authority is moral and traditional rather than formal.
+PROJECTED thorp desc commonest OPENING wording 8/100 8% | Disputes here go to the oldest heads of the households, who settle them together; people abide by what they decide out of respect, not because any law says so.
+CAUTION thorp desc commonest standing coda after a pooled opening (unchanged by the proposal) 0/100 0% | null
+PROJECTED+CODAS thorp desc top 10/100 10% | Respected elders guide the community; authority is moral and traditional rather than formal.
+SENTENCE thorp desc commonest sentence: today 41/100 41% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+SENTENCE thorp desc commonest sentence: openings pooled 10/100 10% | Respected elders guide the community; authority is moral and traditional rather than formal.
+SENTENCE thorp desc commonest sentence: openings and codas pooled 10/100 10% | Respected elders guide the community; authority is moral and traditional rather than formal.
+
+=== hamlet · narrative: places holding the field 19
+branch hamlet narrative GM.tense: places 4 · entries 4 (21%)
+branch hamlet narrative GM.occ: places 3 · entries 3 (16%)
+branch hamlet narrative GM.sub: places 3 · entries 3 (16%)
+branch hamlet narrative GM.comp+strongest: places 2 · entries 2 (11%)
+branch hamlet narrative GM.sym: places 2 · entries 2 (11%)
+branch hamlet narrative NG.tense: places 2 · entries 2 (11%)
+branch hamlet narrative GE.dep: places 1 · entries 1 (5%)
+branch hamlet narrative GE.dep (+conflict twin): places 1 · entries 1 (5%)
+branch hamlet narrative GE.comp: places 1 · entries 1 (5%)
+pooled rows hamlet: varied 8 · kept index 0 2 · conflict twins left as they are 1
+TODAY hamlet narrative top 5/19 26% | The # carries out what the # decides.
+PROJECTED hamlet narrative top 3/19 16% | The # carries out what the # decides.
+PROJECTED-NO-ATOM hamlet narrative top 3/19 16% (only the variants that declare no atom)
+  over the bar after the projection hamlet: 3 | The # carries out what the # decides.
+
+=== hamlet · desc: places holding the field 100
+opening hamlet desc: places 35 · entries 35 (35%) | The oldest heads of the community decide things together; people follow them out of respec
+opening hamlet desc: places 21 · entries 21 (21%) | A headman settles disputes and speaks for the community.
+opening hamlet desc: places 17 · entries 17 (17%) | The oldest heads of the community still decide things together, but fewer and fewer people
+opening hamlet desc: places 14 · entries 14 (14%) | The elders of the hamlet decide things together, and none of them rules alone.
+opening hamlet desc: places 1 · entries 1 (1%) | Established merchant community; fund civic works and expect access to the hall in return.
+TODAY hamlet desc top 35/100 35% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+PROJECTED hamlet desc top 10/100 10% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+PROJECTED hamlet desc commonest OPENING wording 7/100 7% | Disputes are brought to the headman, and when the community must speak to outsiders, the headman speaks for it.
+CAUTION hamlet desc commonest standing coda after a pooled opening (unchanged by the proposal) 1/100 1% | Under pressure from both sides of the faith to make a formal declaration of support. Has so far avoided doing so.
+PROJECTED+CODAS hamlet desc top 10/100 10% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+SENTENCE hamlet desc commonest sentence: today 35/100 35% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+SENTENCE hamlet desc commonest sentence: openings pooled 10/100 10% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+SENTENCE hamlet desc commonest sentence: openings and codas pooled 10/100 10% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+
+=== village · narrative: places holding the field 97
+branch village narrative GR.tense: places 64 · entries 64 (66%)
+branch village narrative GR.dep: places 20 · entries 20 (21%)
+branch village narrative GE.dep: places 10 · entries 10 (10%)
+branch village narrative GE.comp: places 7 · entries 7 (7%)
+branch village narrative GM.comp+strongest: places 4 · entries 4 (4%)
+branch village narrative GE.dep (+conflict twin): places 3 · entries 3 (3%)
+branch village narrative GM.sym: places 2 · entries 2 (2%)
+branch village narrative GR.dep-twin: places 2 · entries 2 (2%)
+branch village narrative GM.tense: places 2 · entries 2 (2%)
+branch village narrative GM.sub: places 1 · entries 1 (1%)
+branch village narrative GM.sym (+conflict twin): places 1 · entries 1 (1%)
+branch village narrative GM.occ: places 1 · entries 1 (1%)
+branch village narrative GE.comp(occupied): places 1 · entries 1 (1%)
+pooled rows village: varied 86 · kept index 0 13 · conflict twins left as they are 4
+TODAY village narrative top 64/97 66% | People take their marriages, inheritances and hard times to the #, not to the #, and the two do not agree on who decides what.
+PROJECTED village narrative top 13/97 13% | Weddings, wills and help in hard times are all sought at the church, not from the #, and the two do not agree on who decides what.
+PROJECTED-NO-ATOM village narrative top 22/97 23% (only the variants that declare no atom)
+
+=== village · desc: places holding the field 100
+opening village desc: places 74 · entries 74 (74%) | The village priest is the most educated person for miles; moral authority and practical in
+opening village desc: places 44 · entries 44 (44%) | The oldest heads of the community decide things together; people follow them out of respec
+opening village desc: places 18 · entries 18 (18%) | One of the peasantry, elected by the rest, manages labour and mediates disputes, and answe
+opening village desc: places 18 · entries 18 (18%) | The oldest heads of the community still decide things together, but fewer and fewer people
+opening village desc: places 8 · entries 8 (8%) | A headman settles disputes and speaks for the community.
+opening village desc: places 5 · entries 5 (5%) | Established merchant community; fund civic works and expect access to the hall in return.
+opening village desc: places 5 · entries 5 (5%) | Established merchant community; fund civic works and expect council access in return.
+TODAY village desc top 41/100 41% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+PROJECTED village desc top 12/100 12% | The oldest heads of the community decide things together, from what the place sends out to how a quarrel is settled; people follow them out of respect and custom, not law.
+PROJECTED village desc commonest OPENING wording 14/100 14% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+CAUTION village desc commonest standing coda after a pooled opening (unchanged by the proposal) 11/100 11% | The gap between them and the # is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+PROJECTED+CODAS village desc top 12/100 12% | The oldest heads of the community decide things together, from what the place sends out to how a quarrel is settled; people follow them out of respect and custom, not law.
+SENTENCE village desc commonest sentence: today 74/100 74% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+SENTENCE village desc commonest sentence: openings pooled 22/100 22% | A single shift in patronage, scandal, or armed muscle could swap their positions.
+SENTENCE village desc commonest sentence: openings and codas pooled 14/100 14% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+
+=== town · narrative: places holding the field 100
+branch town narrative GR.dep: places 61 · entries 61 (61%)
+branch town narrative GE.dep: places 48 · entries 48 (48%)
+branch town narrative MR.dep: places 41 · entries 41 (41%)
+branch town narrative MR.tense: places 35 · entries 35 (35%)
+branch town narrative GE.dep (+conflict twin): places 30 · entries 30 (30%)
+branch town narrative GM.sym: places 25 · entries 25 (25%)
+branch town narrative GR.tense: places 20 · entries 20 (20%)
+branch town narrative MC.vote: places 19 · entries 19 (19%)
+branch town narrative MC.atOdds: places 16 · entries 16 (16%)
+branch town narrative GM.sub: places 15 · entries 15 (15%)
+branch town narrative GE.comp: places 9 · entries 9 (9%)
+branch town narrative GM.sym (+conflict twin): places 8 · entries 8 (8%)
+branch town narrative GR.dep-twin: places 7 · entries 7 (7%)
+branch town narrative GM.comp+strongest: places 6 · entries 6 (6%)
+branch town narrative MR.dep (+conflict twin): places 5 · entries 5 (5%)
+branch town narrative GM.tense: places 5 · entries 5 (5%)
+branch town narrative GM.sub+soldiers: places 4 · entries 4 (4%)
+branch town narrative GM.comp: places 3 · entries 3 (3%)
+branch town narrative GC.equilibrium: places 3 · entries 3 (3%)
+branch town narrative GE.sub: places 2 · entries 2 (2%)
+branch town narrative MC.comp: places 1 · entries 1 (1%)
+branch town narrative MC.vote-against: places 1 · entries 1 (1%)
+branch town narrative GM.occ: places 1 · entries 1 (1%)
+branch town narrative GE.comp(occupied): places 1 · entries 1 (1%)
+branch town narrative GR.dep(occupied): places 1 · entries 1 (1%)
+branch town narrative NG.dep (+conflict twin): places 1 · entries 1 (1%)
+pooled rows town: varied 226 · kept index 0 50 · conflict twins left as they are 44
+TODAY town narrative top 61/100 61% | The # holds the seat and collects the taxes; the # tell people that the #'s rule is right and ordained. Each props up the other.
+PROJECTED town narrative top 14/100 14% | A newcomer soon learns two things: the # collects the taxes, and the # will tell them it has the right to. Each props up the other.
+PROJECTED-NO-ATOM town narrative top 35/100 35% (only the variants that declare no atom)
+
+=== town · desc: places holding the field 100
+opening town desc: places 80 · entries 80 (80%) | Church institutions are well-embedded in civic life; their opinion on appointments, taxati
+opening town desc: places 66 · entries 66 (66%) | Town watch; it enforces ordinances, manages disorder, and reports to the council.
+opening town desc: places 37 · entries 37 (37%) | Craft guilds regulating production and apprenticeships; a reliable secondary presence in c
+opening town desc: places 34 · entries 34 (34%) | A mayor runs the town's day-to-day business.
+opening town desc: places 31 · entries 31 (31%) | Established merchant community; fund civic works and expect access to the hall in return.
+opening town desc: places 29 · entries 29 (29%) | Established merchant community; fund civic works and expect council access in return.
+opening town desc: places 25 · entries 25 (25%) | An elected or appointed council governs; merchants, guilds, and prominent families compete
+opening town desc: places 20 · entries 20 (20%) | The guilds govern together; the richer the guild, the more say it has.
+opening town desc: places 2 · entries 2 (2%) | Clergy are present but operate at the margins of civic life; their moral authority is real
+TODAY town desc top 34/100 34% | Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+PROJECTED town desc top 10/100 10% | The craft guilds control what is made for the market and who may learn to make it; in civic matters they are a reliable second voice. The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+PROJECTED town desc commonest OPENING wording 15/100 15% | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+CAUTION town desc commonest standing coda after a pooled opening (unchanged by the proposal) 35/100 35% | The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+PROJECTED+CODAS town desc top 9/100 9% | The town's daily business is the mayor's to run.
+SENTENCE town desc commonest sentence: today 80/100 80% | Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+SENTENCE town desc commonest sentence: openings pooled 52/100 52% | They and the religious authorities both keep people in line.
+SENTENCE town desc commonest sentence: openings and codas pooled 17/100 17% | Their support is worth buying, and both the # and the # know it; they play one against the other when they can.
+  sentence over the bar with codas pooled town: 17 | Their support is worth buying, and both the # and the # know it; they play one against the other when they can.
+  sentence over the bar with codas pooled town: 17 | They and the clergy both keep order, one in the streets and one in people's heads, and each would like the other to say less.
+
+=== city · narrative: places holding the field 100
+branch city narrative MR.dep: places 71 · entries 71 (71%)
+branch city narrative GE.sub: places 48 · entries 48 (48%)
+branch city narrative GR.dep: places 39 · entries 39 (39%)
+branch city narrative GM.sub+soldiers: places 37 · entries 37 (37%)
+branch city narrative GE.dep (+conflict twin): places 31 · entries 31 (31%)
+branch city narrative GM.sym: places 26 · entries 26 (26%)
+branch city narrative NG.sub: places 26 · entries 26 (26%)
+branch city narrative GM.sym (+conflict twin): places 20 · entries 20 (20%)
+branch city narrative NG.dep: places 13 · entries 13 (13%)
+branch city narrative GE.dep: places 11 · entries 11 (11%)
+branch city narrative MC.comp: places 8 · entries 8 (8%)
+branch city narrative MC.atOdds: places 8 · entries 8 (8%)
+branch city narrative MC.vote-against: places 7 · entries 7 (7%)
+branch city narrative MR.dep (+conflict twin): places 5 · entries 5 (5%)
+branch city narrative GR.tense: places 5 · entries 5 (5%)
+branch city narrative GM.comp+strongest: places 4 · entries 4 (4%)
+branch city narrative MR.comp: places 3 · entries 3 (3%)
+branch city narrative GM.tense: places 3 · entries 3 (3%)
+branch city narrative NG.tense: places 3 · entries 3 (3%)
+branch city narrative GE.comp: places 3 · entries 3 (3%)
+branch city narrative MC.vote: places 2 · entries 2 (2%)
+branch city narrative GM.comp: places 2 · entries 2 (2%)
+branch city narrative GM.occ: places 1 · entries 1 (1%)
+branch city narrative GC.equilibrium: places 1 · entries 1 (1%)
+branch city narrative CM.equilibrium: places 1 · entries 1 (1%)
+branch city narrative GR.dep-twin: places 1 · entries 1 (1%)
+branch city narrative NG.dep (+conflict twin): places 1 · entries 1 (1%)
+pooled rows city: varied 247 · kept index 0 41 · conflict twins left as they are 57
+TODAY city narrative top 71/100 71% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+PROJECTED city narrative top 12/100 12% | The # make their money on what the place sends out and brings in, and part of it goes to the # for the poor. Each needs the other, and neither likes it.
+PROJECTED-NO-ATOM city narrative top 37/100 37% (only the variants that declare no atom)
+
+=== city · desc: places holding the field 100
+opening city desc: places 79 · entries 101 (79%) | Clergy are present but operate at the margins of civic life; their moral authority is real
+opening city desc: places 67 · entries 67 (67%) | City watch; it answers for keeping order and is growing more sure of its own authority.
+opening city desc: places 42 · entries 52 (42%) | Magical practitioners are consulted but not formally empowered. Their influence is advisor
+opening city desc: places 35 · entries 35 (35%) | A full council governs the city: aldermen, guild masters and appointed officials see to it
+opening city desc: places 34 · entries 34 (34%) | A second armed company that wants a share of keeping order here, and of the say that goes 
+opening city desc: places 25 · entries 25 (25%) | City watch; law enforcement and external defence, stretched between multiple responsibilit
+opening city desc: places 23 · entries 35 (23%) | Established merchant community; fund civic works and expect council access in return.
+opening city desc: places 22 · entries 22 (22%) | A consortium of guild masters holds power; policy is shaped by trade interests and inter-g
+opening city desc: places 22 · entries 24 (22%) | The trades regulate their own production and apprenticeships, but carry little weight beyo
+opening city desc: places 12 · entries 17 (12%) | Established merchant community; fund civic works and expect access to the hall in return.
+opening city desc: places 3 · entries 4 (3%) | Craft guilds regulating production and apprenticeships; a reliable secondary presence in c
+TODAY city desc top 38/100 38% | Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.
+PROJECTED city desc top 14/100 14% | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+PROJECTED city desc commonest OPENING wording 16/100 16% | The city watch keeps order and knows it is needed, and it is growing more sure of its own authority.
+CAUTION city desc commonest standing coda after a pooled opening (unchanged by the proposal) 37/100 37% | The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+PROJECTED+CODAS city desc top 14/100 14% | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+SENTENCE city desc commonest sentence: today 79/100 79% | Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.
+SENTENCE city desc commonest sentence: openings pooled 71/100 71% | They and the religious authorities both keep people in line.
+SENTENCE city desc commonest sentence: openings and codas pooled 24/100 24% | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+  sentence over the bar with codas pooled city: 24 | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+  sentence over the bar with codas pooled city: 19 | Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointments to maintain relevance.
+  sentence over the bar with codas pooled city: 19 | They and the religious authorities both keep people in line.
+  sentence over the bar with codas pooled city: 19 | The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+  sentence over the bar with codas pooled city: 19 | They are part of every bargain, but never the ones who set its terms.
+  sentence over the bar with codas pooled city: 19 | They are always consulted, and seldom get their own way.
+  sentence over the bar with codas pooled city: 18 | The garrison keeps order with its hands and the clergy with their sermons; each finds the other too loud.
+  sentence over the bar with codas pooled city: 18 | They and the clergy both keep order, one in the streets and one in people's heads, and each would like the other to say less.
+  sentence over the bar with codas pooled city: 17 | Nothing is settled without them in the room, and nothing on their terms alone.
+  sentence over the bar with codas pooled city: 17 | Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.
+  sentence over the bar with codas pooled city: 16 | The city watch keeps order and knows it is needed, and it is growing more sure of its own authority.
+  sentence over the bar with codas pooled city: 16 | Between them, the garrison and the religious authorities keep people in line, the one by force and the other by conscience, and neither enjoys sharing the work.
+
+=== metropolis · narrative: places holding the field 100
+branch metropolis narrative MR.dep: places 90 · entries 90 (90%)
+branch metropolis narrative GE.sub: places 78 · entries 78 (78%)
+branch metropolis narrative GM.sub+soldiers: places 59 · entries 59 (59%)
+branch metropolis narrative NG.sub: places 49 · entries 49 (49%)
+branch metropolis narrative MC.vote-against: places 30 · entries 30 (30%)
+branch metropolis narrative NG.dep: places 20 · entries 20 (20%)
+branch metropolis narrative GR.dep: places 19 · entries 19 (19%)
+branch metropolis narrative GM.sym: places 18 · entries 18 (18%)
+branch metropolis narrative MC.atOdds: places 17 · entries 17 (17%)
+branch metropolis narrative MC.vote: places 11 · entries 11 (11%)
+branch metropolis narrative GE.dep (+conflict twin): places 10 · entries 10 (10%)
+branch metropolis narrative GR.tense: places 9 · entries 9 (9%)
+branch metropolis narrative GM.sym (+conflict twin): places 8 · entries 8 (8%)
+branch metropolis narrative NG.tense: places 7 · entries 7 (7%)
+branch metropolis narrative GM.comp+strongest: places 6 · entries 6 (6%)
+branch metropolis narrative GC.equilibrium: places 5 · entries 5 (5%)
+branch metropolis narrative CM.equilibrium: places 5 · entries 5 (5%)
+branch metropolis narrative MR.dep (+conflict twin): places 4 · entries 4 (4%)
+branch metropolis narrative GE.dep: places 4 · entries 4 (4%)
+branch metropolis narrative GM.tense: places 3 · entries 3 (3%)
+branch metropolis narrative GR.dep-twin: places 3 · entries 3 (3%)
+branch metropolis narrative NG.dep (+conflict twin): places 2 · entries 2 (2%)
+branch metropolis narrative GE.comp: places 2 · entries 2 (2%)
+branch metropolis narrative GC.adversarial: places 2 · entries 2 (2%)
+branch metropolis narrative CM.adversarial: places 2 · entries 2 (2%)
+branch metropolis narrative GC.corrupted: places 1 · entries 1 (1%)
+branch metropolis narrative CM.corrupted: places 1 · entries 1 (1%)
+pooled rows metropolis: varied 329 · kept index 0 61 · conflict twins left as they are 24
+TODAY metropolis narrative top 90/100 90% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+PROJECTED metropolis narrative top 14/100 14% | Ask who gives the orders here and the answer is the #; the Guard carries them out, and the soldiers do not make the law.
+PROJECTED-NO-ATOM metropolis narrative top 59/100 59% (only the variants that declare no atom)
+
+=== metropolis · desc: places holding the field 100
+opening metropolis desc: places 98 · entries 120 (98%) | Magical practitioners are consulted but not formally empowered. Their influence is advisor
+opening metropolis desc: places 90 · entries 115 (90%) | Clergy are present but operate at the margins of civic life; their moral authority is real
+opening metropolis desc: places 64 · entries 64 (64%) | City watch; it answers for keeping order and is growing more sure of its own authority.
+opening metropolis desc: places 56 · entries 64 (56%) | The trades regulate their own production and apprenticeships, but carry little weight beyo
+opening metropolis desc: places 47 · entries 62 (47%) | Established merchant community; fund civic works and expect access to the hall in return.
+opening metropolis desc: places 43 · entries 57 (43%) | Minor landed families with limited political reach; present in civic life but rarely decis
+opening metropolis desc: places 30 · entries 30 (30%) | City watch; law enforcement and external defence, stretched between multiple responsibilit
+opening metropolis desc: places 29 · entries 29 (29%) | A grand council of senior officials, guild masters, and appointed magnates governs the met
+opening metropolis desc: places 26 · entries 33 (26%) | Established merchant community; fund civic works and expect council access in return.
+opening metropolis desc: places 25 · entries 25 (25%) | A second armed company that wants a share of keeping order here, and of the say that goes 
+opening metropolis desc: places 21 · entries 21 (21%) | A formal consortium of the metropolis's most powerful guild masters holds civic authority;
+opening metropolis desc: places 3 · entries 6 (3%) | Craft guilds regulating production and apprenticeships; a reliable secondary presence in c
+TODAY metropolis desc top 86/100 86% | Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+PROJECTED metropolis desc top 14/100 14% | In a place this large there is steady work for magical practitioners, but no office; their influence is advisory, paid for, and quietly resented. The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+PROJECTED metropolis desc commonest OPENING wording 18/100 18% | In a place this large there is steady work for magical practitioners, but no office; their influence is advisory, paid for, and quietly resented.
+CAUTION metropolis desc commonest standing coda after a pooled opening (unchanged by the proposal) 86/100 86% | The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+PROJECTED+CODAS metropolis desc top 11/100 11% | A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.
+SENTENCE metropolis desc commonest sentence: today 98/100 98% | The arcane orders are present but operate in the clergy's shadow.
+SENTENCE metropolis desc commonest sentence: openings pooled 98/100 98% | The arcane orders are present but operate in the clergy's shadow.
+SENTENCE metropolis desc commonest sentence: openings and codas pooled 25/100 25% | The clergy stand above the arcane orders here; what counts as permitted magic and what as heresy is left, on purpose, unsaid.
+  sentence over the bar with codas pooled metropolis: 25 | The clergy stand above the arcane orders here; what counts as permitted magic and what as heresy is left, on purpose, unsaid.
+  sentence over the bar with codas pooled metropolis: 25 | The church outweighs the arcane orders here, and leaves the line between sanctioned magic and heresy undrawn, by choice.
+  sentence over the bar with codas pooled metropolis: 24 | The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+  sentence over the bar with codas pooled metropolis: 24 | They are always at the table, but cannot set their own terms.
+  sentence over the bar with codas pooled metropolis: 24 | The arcane orders are present but operate in the clergy's shadow.
+  sentence over the bar with codas pooled metropolis: 24 | Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.
+  sentence over the bar with codas pooled metropolis: 24 | They and the religious authorities both keep people in line.
+  sentence over the bar with codas pooled metropolis: 24 | The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+  sentence over the bar with codas pooled metropolis: 24 | The arcane orders work in the clergy's shadow here, and no one has settled which magic the faith allows and which it does not.
+  sentence over the bar with codas pooled metropolis: 23 | Between them, the garrison and the religious authorities keep people in line, the one by force and the other by conscience, and neither enjoys sharing the work.
+  sentence over the bar with codas pooled metropolis: 23 | Where the church speaks on public matters, the arcane orders keep silent and go their own way around it.
+  sentence over the bar with codas pooled metropolis: 23 | The garrison keeps order with its hands and the clergy with their sermons; each finds the other too loud.
+  sentence over the bar with codas pooled metropolis: 22 | Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.
+  sentence over the bar with codas pooled metropolis: 22 | Still ahead of merchant interests in real influence, for now.
+  sentence over the bar with codas pooled metropolis: 22 | They know the gap is narrowing and are arranging marriages accordingly.
+  sentence over the bar with codas pooled metropolis: 22 | The arcane orders defer to the clergy in public and pursue their own business quietly.
+  sentence over the bar with codas pooled metropolis: 21 | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  sentence over the bar with codas pooled metropolis: 21 | With the clergy ahead of them in public affairs, the arcane orders keep out of their way and never cross them openly.
+  sentence over the bar with codas pooled metropolis: 21 | They and the clergy both keep order, one in the streets and one in people's heads, and each would like the other to say less.
+  sentence over the bar with codas pooled metropolis: 19 | Nothing is settled without them in the room, and nothing on their terms alone.
+  sentence over the bar with codas pooled metropolis: 19 | The richest merchant houses of the metropolis sit as its senate, so the houses that control the trade also make the law.
+  sentence over the bar with codas pooled metropolis: 19 | Merchants set the prices and the craft guilds argue; more often than not, the merchants win.
+  sentence over the bar with codas pooled metropolis: 18 | In a place this large there is steady work for magical practitioners, but no office; their influence is advisory, paid for, and quietly resented.
+  sentence over the bar with codas pooled metropolis: 18 | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal.
+  sentence over the bar with codas pooled metropolis: 18 | People go to the clergy for their souls and to others for everything else; their moral authority is real, but their political leverage is limited.
+  sentence over the bar with codas pooled metropolis: 18 | There is money enough here to keep magical practitioners in work, though not in office; their influence is advisory, transactional, and quietly resented.
+  sentence over the bar with codas pooled metropolis: 18 | The noble families feel the merchants closing on them, and use law and connection alike to slow them.
+  sentence over the bar with codas pooled metropolis: 17 | They always have a voice when the council bargains, but never the deciding one.
+  sentence over the bar with codas pooled metropolis: 16 | They are part of every bargain, but never the ones who set its terms.
+  sentence over the bar with codas pooled metropolis: 16 | The craft guilds have a voice, but a smaller one: the merchants set prices, the craft masters object, and the merchants usually prevail.
+  sentence over the bar with codas pooled metropolis: 16 | Outvoted on prices and on the terms of work, the craft masters fight their corner in the small print of each deal.
+
+SUMMARY (places printing the commonest sentence / places holding the field)
+SUMMARY narrative thorp: today 2/3 67% · projected 2/3 67% · no-atom variants only 2/3 67%
+SUMMARY narrative hamlet: today 5/19 26% · projected 3/19 16% · no-atom variants only 3/19 16%
+SUMMARY narrative village: today 64/97 66% · projected 13/97 13% · no-atom variants only 22/97 23%
+SUMMARY narrative town: today 61/100 61% · projected 14/100 14% · no-atom variants only 35/100 35%
+SUMMARY narrative city: today 71/100 71% · projected 12/100 12% · no-atom variants only 37/100 37%
+SUMMARY narrative metropolis: today 90/100 90% · projected 14/100 14% · no-atom variants only 59/100 59%
+SUMMARY desc thorp: today 41/100 41% · projected 10/100 10% · commonest opening 8/100 8% · with codas pooled 10/100 10% · SENTENCE-level today 41% / openings 10% / openings+codas 10%
+SUMMARY desc hamlet: today 35/100 35% · projected 10/100 10% · commonest opening 7/100 7% · with codas pooled 10/100 10% · SENTENCE-level today 35% / openings 10% / openings+codas 10%
+SUMMARY desc village: today 41/100 41% · projected 12/100 12% · commonest opening 14/100 14% · with codas pooled 12/100 12% · SENTENCE-level today 74% / openings 22% / openings+codas 14%
+SUMMARY desc town: today 34/100 34% · projected 10/100 10% · commonest opening 15/100 15% · with codas pooled 9/100 9% · SENTENCE-level today 80% / openings 52% / openings+codas 17%
+SUMMARY desc city: today 38/100 38% · projected 14/100 14% · commonest opening 16/100 16% · with codas pooled 14/100 14% · SENTENCE-level today 79% / openings 71% / openings+codas 24%
+SUMMARY desc metropolis: today 86/100 86% · projected 14/100 14% · commonest opening 18/100 18% · with codas pooled 11/100 11% · SENTENCE-level today 98% / openings 98% / openings+codas 25%
+
+APPROXIMATIONS: (1) the facts are read through factsOf on the FINAL record (m4-births.mjs), which is what the proposed final pass reads; a pick placed at the writer instead (the power step) would read the power step's partial record and differ where a late step changes a fact. (2) The atoms are read by m4-common.mjs :: atomHolds over cached facts, a stand-in for factVocabulary.js's readers (the same homes). (3) The branch is read off the row's sentence shape, not re-run through the writer; an unrecognised row is OTHER and is never varied. (4) 100 places a size: a swing of about 3 places is noise; a figure at 14-15% sits at the bar, not under it by a margin.
