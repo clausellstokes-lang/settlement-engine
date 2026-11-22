@@ -29,6 +29,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { ORIGIN_POOLS } from '../../src/generators/narrative/settlementOriginProse.js';
 import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
 import { deriveDailyLife } from '../../src/domain/dailyLife.js';
+import { FOOD_CULTURE } from '../../src/data/dailyLife/foodCulture.js';
 import { foodwaysLineOf } from '../../src/domain/foodways.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -111,10 +112,17 @@ describe('BAR5-WORLD (b): the daily-life cells that speak of the outside declare
 describe('BAR5-WORLD (c): a town in want is not told its bread is plentiful', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
+  // DAILY-3 B3 E2 (LINES-2 § 1 as the chair ruled), the pin re-read: the surplus band under a famine or a siege now
+  // takes its own pool, `FOOD_CULTURE['surplus.wanting']` (W0 "The stores still hold: …" and four siblings, by the keyed
+  // pick), so these towns print W1, W4 and W2 where W0 alone printed. The meaning kept: a town in want is told what it
+  // still has, never that its bread is plentiful.
   it('the famine towns of the surplus band print the stores that still hold (every town; red at the base)', () => {
+    const wanting = FOOD_CULTURE['surplus.wanting'].map((l) => l.text);
+    expect(wanting.length).toBeGreaterThan(0);
     expectNoSeedFailures(collectSeedFailures(['r2s-famine-hamlet-2', 'r2s-famine-town-1', 'r2s-famine-metropolis-3'], (seed) => {
       const text = String(deriveDailyLife(born(seed)).slots.food_culture?.text);
-      expect(text, `${seed}: what prints instead`).toBe('The stores still hold: bread and broth reach most tables, and the households count what is left.');
+      expect(wanting, `${seed}: what prints instead: "${text}"`).toContain(text);
+      expect(/plentiful|plenty/i.test(text), `${seed}: told its bread is plentiful: "${text}"`).toBe(false);
     }), 'the surplus band under a famine');
   });
 });
