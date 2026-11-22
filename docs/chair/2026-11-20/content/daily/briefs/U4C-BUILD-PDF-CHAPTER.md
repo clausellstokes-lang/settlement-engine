@@ -36,3 +36,10 @@ line of `DailyLifeTab.jsx`); your NEW test file(s) under `tests/pdf/`. Nothing u
 
 Final message: at most 200 words plus one table: commit shas; red (titles, lines) and green counts with `tests/lint`
 whole's failing titles by name; what moved; anything left red by rule 5.
+
+## DAILY-3's ruling at dispatch (the builder's stop: `tests/architecture/layerBoundaries.test.js` holds `src/pdf` at zero
+imports from `src/components`)
+The slot order's ONE home is `src/domain/dailyLife.js` itself: one exported frozen constant (`DAILY_LIFE_PAGE_SLOTS`)
+beside `DAILY_LIFE_EMPTY_SLOT_TEXT`; the tab's `ENGINE_SLOTS` becomes that import; the chapter imports it with
+`deriveDailyLifeSlot`. The file list gains `src/domain/dailyLife.js` for that constant only; the layer arm is not widened;
+`tests/architecture` whole joins the green set.
