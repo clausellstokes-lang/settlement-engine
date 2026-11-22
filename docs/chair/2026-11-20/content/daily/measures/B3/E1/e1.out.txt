@@ -1,0 +1,66 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/E1/measure.e1.mjs > docs/chair/2026-11-20/content/daily/measures/B3/E1/e1.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 129s
+the dm key on a no-audience read: 0 of 900
+dm texts not traced to a pool line: 0
+
+════ commoner_resentments_dm (the owner's read)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 3 | 3 | 1 | 3 | 8 | 8 |
+| top whole text % of 150 | 3 | 3 | 1 | 3 | 8 | 8 |
+| distinct texts | 3 | 3 | 2 | 4 | 3 | 3 |
+| EMPTY (no true line) | 140 | 139 | 147 | 138 | 125 | 125 |
+| reach % / min eligible: crime70 | 0 / — | 0 / — | 0 / — | 1 / 5 | 0 / — | 0 / — |
+| reach % / min eligible: crime55 | 7 / 3 | 7 / 3 | 2 / 3 | 7 / 3 | 17 / 3 | 17 / 3 |
+| FALSE blind eye: no guard force: factsOf(r).guardPresence (M1 row 191, the clause now owner-only) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bthe watch\b: no watch: defenceOf(r).watch (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE those who keep order: no guard force: factsOf(r).guardPresence (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE smuggl: no smuggling home (no line may say it) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at any place | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (5/150): "People grumble that those who break the rules do better here than those who keep them."
+  top sentence hamlet (5/150): "People grumble that those who break the rules do better here than those who keep them."
+  top sentence village (2/150): "Honest folk say that crime pays better here than work."
+  top sentence town (5/150): "Honest folk say that crime pays better here than work."
+  top sentence city (12/150): "People resent how little is done about wrongdoing that everyone knows of."
+  top sentence metropolis (12/150): "People grumble that those who break the rules do better here than those who keep them."
+
+════ commoner_resentments (public, no audience)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 65 | 71 | 84 | 37 | 48 | 60 |
+| top whole text % of 150 | 65 | 71 | 84 | 37 | 48 | 60 |
+| distinct texts | 3 | 3 | 4 | 4 | 4 | 4 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE blind eye|smugglers who pay no tax: a crime clause on the public slot (ruling 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE merchants who claim: no market: marketOf(r) (M1 row 192) | 22 | 28 | 10 | 0 | 0 | 0 | e.g. hxd-thorp-7
+| FALSE the council's indifference: not a council: rulingBodyOf(r) !== true (M1 row 193) | 10 | 46 | 39 | 34 | 3 | 5 | e.g. hxd-thorp-52
+| FALSE officials who keep their posts: no appointed post (M1 row 194) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE of any town: not a town: populationBand small (M1 row 195) | 30 | 13 | 7 | 4 | 0 | 0 | e.g. hxd-thorp-0
+| FALSE the gate fee: no gate (M1 row 196) | 30 | 13 | 12 | 19 | 0 | 0 | e.g. hxd-thorp-0
+| FALSE market day: no market (M1 row 197) | 30 | 11 | 4 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| FALSE the council's favorite: not a council (M1 row 198) | 5 | 2 | 3 | 24 | 9 | 10 | e.g. hxd-thorp-78
+| FALSE favorite tavern: no tavern/inn (M1 row 199) | 30 | 3 | 6 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at a place smaller than a town (rule 4) | 30 | 13 | 12 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| the word "town" at any place | 30 | 13 | 12 | 55 | 55 | 41 | e.g. hxd-thorp-0
+  top sentence thorp (98/150): "Commoners resent the council's indifference to ordinary complaints."
+  top sentence hamlet (106/150): "Commoners resent the council's indifference to ordinary complaints."
+  top sentence village (126/150): "Commoners resent the council's indifference to ordinary complaints."
+  top sentence town (55/150): "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  top sentence city (72/150): "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  top sentence metropolis (90/150): "Commoners resent rising bread prices and merchants who claim they cannot help it."
+
+FALSE-LINE TOTAL (both slots, every row above): 462
+HOUSE-RULE HITS TOTAL (both slots, every row above): 261
+
+── M1's named places ──
+hxd-thorp-0: dm "" | public "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+hxd-hamlet-0: dm "" | public "Commoners resent the council's indifference to ordinary complaints."
+hxd-hamlet-7: dm "" | public "Commoners resent the council's indifference to ordinary complaints."
+hxd-metropolis-0: dm "" | public "Commoners resent rising bread prices and merchants who claim they cannot help it; and the council's indifference to ordinary complaints."
+
+done in 129s

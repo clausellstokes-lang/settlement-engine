@@ -46,6 +46,7 @@ import { powerPossessive } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
 import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
+import { COMMONER_RESENTMENTS_DM } from '../data/dailyLife/commonerResentmentsDm.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -136,7 +137,16 @@ const SLOT_LABELS = Object.freeze({
   outsider_impressions: 'Outsider impressions',
   unspoken_topics:      'Unspoken topics',
   recent_changes:       'Recent changes',
+  commoner_resentments_dm: 'Commoner resentments (owner only)',
 });
+
+/**
+ * THE OWNER-ONLY SLOT (the chair's ruling 6 of 2026-11-20; DAILY-3 B3 E1): carries the crime clauses, and is derived
+ * ONLY when the caller passes the audience `'owner'` (`deriveDailyLife(record, { audience: 'owner' })`). It is not one of
+ * `DAILY_LIFE_SLOTS`: no default derives it, `deriveDailyLifeSlot` does not know it, `compareDailyLife` never diffs it,
+ * and on every other read the key is ABSENT (`tests/domain/dailyLifeOwnerSlot.test.js`).
+ */
+const OWNER_ONLY_DAILY_LIFE_SLOT = 'commoner_resentments_dm';
 
 // ── Per-slot derivers ────────────────────────────────────────────────────
 //
@@ -460,16 +470,8 @@ function deriveCommonerResentments(s, ctx) {
   const causalState = ctx.causal;
   const resentments = [];
 
-  // Criminal opportunity is INVERTED (lower_is_better): high score = more
-  // crime = more resentment. We check the raw score against thresholds.
-  const crimScore = causalState.scores.criminal_opportunity ?? 50;
-  if (crimScore >= 70) {
-    resentments.push('the watch turning a blind eye to the right pockets');
-    refs.push({ id: 'var.criminal_opportunity', label: 'Criminal opportunity', type: 'system_variable' });
-  } else if (crimScore >= 55) {
-    resentments.push('the smugglers who pay no tax while honest carts queue');
-    refs.push({ id: 'var.criminal_opportunity', label: 'Criminal opportunity', type: 'system_variable' });
-  }
+  // DAILY-3 B3 E1 (ruling 6): the criminal-opportunity clauses are not said here; they are the owner-only slot's
+  // (`deriveCommonerResentmentsDm`, below). A shared read's public slot is chosen by no crime fact.
 
   // Strained merchant wealth + active food chain pressure → grain prices
   const food = ctx.capacities.capacities.food_production;
@@ -495,7 +497,37 @@ function deriveCommonerResentments(s, ctx) {
     ? `Commoners resent ${resentments.join('; and ')}.`
     : 'Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council\'s favorite tavern.';
 
-  return slot('commoner_resentments', text, 'criminal_opportunity + food_production + public_legitimacy + corruption', refs);
+  return slot('commoner_resentments', text, 'food_production + public_legitimacy + corruption', refs);
+}
+
+// ── commoner_resentments_dm (OWNER-ONLY; LINES-2 § 2b and LINES-2b § 6, as the chair ruled at 18:26, 18:47 and 18:56) ──
+//
+// Today's ladder on `deriveCausalState().scores.criminal_opportunity` (INVERTED, lower_is_better: a high score is more
+// crime): `crime70` at >= 70, else `crime55` at >= 55; below 55 no branch and the slot is the EMPTY string (ruling 3).
+// The branch's pool (`data/dailyLife/commonerResentmentsDm.js`) goes by THE ROUTE (`pickNameable`), keyed
+// `<name>::dailyLife.commoner_resentments_dm::<branch>`. Called by `deriveDailyLife` for the owner's audience alone.
+
+/** The ladder's rungs, highest first: the score at or above which a branch is taken. */
+const CRIME_RUNGS = Object.freeze(/** @type {const} */ ([['crime70', 70], ['crime55', 55]]));
+
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
+function deriveCommonerResentmentsDm(s, ctx) {
+  /** @type {SlotReference[]} */
+  const refs = [];
+  const score = ctx.causal.scores.criminal_opportunity ?? 50;
+  const branch = CRIME_RUNGS.find(([, at]) => score >= at)?.[0];
+  let text = '';
+  if (branch) {
+    const house = houseFinder(s);
+    const eligible = filterDeclared(COMMONER_RESENTMENTS_DM[branch], { facts: factsFor(s), poolId: `dailyLife.commoner_resentments_dm.${branch}`, surface: 'dailyLife' });
+    text = sayDeclared(pickNameable(s, eligible, OWNER_ONLY_DAILY_LIFE_SLOT, branch, house), house, refs);
+    if (text) refs.push({ id: 'var.criminal_opportunity', label: 'Criminal opportunity', type: 'system_variable' });
+  }
+  return slot(OWNER_ONLY_DAILY_LIFE_SLOT, text, 'criminal_opportunity (owner only)', refs);
 }
 
 /**
@@ -687,17 +719,24 @@ export function deriveDailyLifeSlot(key, settlement) {
 /**
  * Derive every canonical daily-life slot. Builds context once.
  *
+ * THE AUDIENCE (ruling 6; fails closed): only `{ audience: 'owner' }` adds the owner-only slot
+ * (`OWNER_ONLY_DAILY_LIFE_SLOT`) to `slots`; no options, no audience and any other value leave the key ABSENT. The eight
+ * public slots and the summary are the same whatever the audience (the summary says the eight alone).
+ *
  * @param {DailyLifeSettlement | null | undefined} settlement
+ * @param {{ audience?: string } | null} [options] (`null` reads as no audience)
  * @returns {{slots: Record<string, DailyLifeSlot>, summary: string[]}} {
  *   slots: { [key]: DailyLifeSlot },
  *   summary: string[],
  * }
  */
-export function deriveDailyLife(settlement) {
+export function deriveDailyLife(settlement, options = {}) {
+  const owner = options?.audience === 'owner';
   if (!settlement) {
     /** @type {Record<string, DailyLifeSlot>} */
     const empty = {};
     for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '—', 'no settlement', []);
+    if (owner) empty[OWNER_ONLY_DAILY_LIFE_SLOT] = slot(OWNER_ONLY_DAILY_LIFE_SLOT, '', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
@@ -710,6 +749,7 @@ export function deriveDailyLife(settlement) {
     slots[key] = s;
     summary.push(`${s.label}: ${s.text}`);
   }
+  if (owner) slots[OWNER_ONLY_DAILY_LIFE_SLOT] = deriveCommonerResentmentsDm(settlement, ctx);
   return { slots, summary };
 }
 
