@@ -1190,6 +1190,16 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   TAKEN, NAMED: a lane's red may first show at the landing's gate and hold a stack; the dark proof and the lane's
   full run at its first landing are the evidence against it. `prompts/COMMON-EIGHTH.txt` item 14; sent to SEAT-10
   and FORTUNE-7 at once (priority next), to the others with their next line.
+- E90, AMENDED (2026-11-22 15:11 UTC): the first wording did not narrow: SEAT-10 counted it at 2,635 files (`tests/domain/` flat is 1,150 files; `generateSettlementPipeline.js`, one
+  of its ten changed files, is named by 824 tests, mostly births; `tests/components` 444). RE-CUT (COMMON-EIGHTH 14
+  as it now reads): a file whose only hit is a module on the births' road that it merely RUNS is OUT (the dark
+  proof is its evidence; the chair's 04:29 ruling that put birth-only files in is withdrawn for a lane whose dark
+  proof is equal); `tests/domain/` flat is NOT run as a directory (only its files that name a changed module);
+  of components and pdf only the files that name a changed module and the three walkers that render every tab. THE
+  CHAIR'S OWN ERROR, NAMED: it widened rule 8 at E67 by "the test files directly under `tests/domain/`" without
+  counting them (1,150). THE NET FOR WHAT A SEAT NO LONGER RUNS: the landing's step f on the stack and CI's whole
+  suite, read by name within the hour of each push; a lane's red that first shows there holds the stack and is
+  cured on top. Sent to SEAT-10 (interrupting: it had started the shards twice) and FORTUNE-7.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
