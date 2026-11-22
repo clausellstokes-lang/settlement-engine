@@ -16,6 +16,9 @@
  *    `drawDeclared`), its slots read the final record, and the rows the chair re-worded stand as ruled.
  * 4. THE HIDEABLE RULE (the chair, 17:21, item 5): no wording needs a fact about crime, and every printed wording's
  *    `needs` still hold with every hideable house (`cardVeil.js :: isHideableHouse`) taken off the roster.
+ * 5. `{export}` IS A PHYSICAL GOOD (PEOPLE-3 B3; the seventh chair, 22:35 UTC 2026-11-20, ruled with the four rewordings
+ *    road.7, river.5, crossroads.3 and metropolis.8): every printed fill over the 900 places is a word of `EXPORT_WORD`, and a
+ *    record whose only export is a service, a right or a trade fills no `{export}`.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -72,12 +75,13 @@ const SHARES = {};
 /** @type {string[]} */ const HIDEABLE_MISSES = [];
 /** @type {string[]} */ const GRAIN_MISSES = [];
 /** @type {Map<string, number>} */ const PRINTED = new Map();
+/** @type {Array<{ seed: string, fill: string }>} */ const EXPORT_FILLS = [];
 /** @type {any} */ let V = null;
 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
   V = await loadVariants();
-  const rows = V ? rowsOf(V).map((r) => ({ ...r, re: templateRe(r.row.text) })) : [];
+  const rows = V ? rowsOf(V).map((r) => ({ ...r, re: templateRe(r.row.text), slots: [...r.row.text.matchAll(/\{(ground|export|routeWay)\}/g)].map((m) => m[1]) })) : [];
   for (const size of SIZES) {
     const share = { places: 0, bySentence: new Map() };
     SHARES[size] = share;
@@ -100,6 +104,10 @@ beforeAll(async () => {
         const admitted = (/** @type {any} */ f) => hits.some((h) => drawDeclared([h.row], { draw: (p) => p[0], facts: f, poolId: 'test' }).resolvedBy === 'drawn');
         const filledHere = hits.some((h) => V.fillWording(h.row.text, V.slotsOf(facts, GROUND_PHRASE)) === line);
         for (const h of hits) PRINTED.set(`${h.pool} :: ${h.row.text}`, (PRINTED.get(`${h.pool} :: ${h.row.text}`) || 0) + 1);
+        for (const h of hits.filter((x) => x.slots.includes('export'))) {
+          const m = /** @type {RegExpExecArray} */ (h.re.exec(line));
+          EXPORT_FILLS.push({ seed, fill: m[1 + h.slots.indexOf('export')] });
+        }
         if (!admitted(facts)) ADMIT_MISSES.push(`${seed}: ${line}`);
         if (!filledHere) SLOT_MISSES.push(`${seed}: ${line}`);
         if (!admitted(unveiled)) HIDEABLE_MISSES.push(`${seed}: ${line}`);
@@ -196,5 +204,43 @@ describe('4. the hideable rule (the chair, 17:21, item 5)', () => {
   it('every printed wording\'s needs still hold with the hideable houses taken off the roster (900 places)', () => {
     expect(V).not.toBeNull();
     expect(HIDEABLE_MISSES).toEqual([]);
+  });
+});
+
+describe('5. {export} is a physical good (the chair, 22:35 UTC 2026-11-20)', () => {
+  /*
+   * The condition ruled with the four rewordings (road.7, river.5, crossroads.3, metropolis.8): `{export}` is a PHYSICAL GOOD,
+   * never "its transit trade" or "its water rights". `slotsOf` fills it only from `EXPORT_WORD` (grain, hides, ale, weapons),
+   * through `facts.goodExported` over the export list (`economicState.primaryExports`, `canonicalAccessors.js :: canonExports`).
+   * GRAMMAR: each of the four words reads right inside each sentence that carries the slot, the plural words under the
+   * sentences' own verbs ("It stands on the road, and sends its weapons out along it to be sold."; "A river settlement; it
+   * sends its ale out by the river to be sold."; "Built at a crossroads; it sends its hides out along its roads."; "It sells
+   * its grain across the region."; small.11 "The place sends out its weapons to be sold."): the subject is the place, so no
+   * verb agrees with the good.
+   */
+  it('every printed {export} fill over the 900 places is a word of EXPORT_WORD', () => {
+    expect(V).not.toBeNull();
+    expect(EXPORT_FILLS.length, 'some {export} wording prints').toBeGreaterThan(0);
+    const words = new Set(Object.values(V.EXPORT_WORD));
+    expect(EXPORT_FILLS.filter((x) => !words.has(x.fill)).map((x) => `${x.seed}: ${x.fill}`)).toEqual([]);
+  });
+  it('a record whose only export is a service, a right or a trade fills no {export}, so no {export} row is eligible', () => {
+    expect(V).not.toBeNull();
+    const exportRows = rowsOf(V).filter(({ row }) => row.text.includes('{export}'));
+    expect(exportRows.length).toBeGreaterThan(0);
+    for (const only of [['Transit trade'], ['Water rights'], ['Toll revenue', 'Pass transit trade'], ['Banking services']]) {
+      const record = { tier: 'town', institutions: [], config: { terrainType: 'plains', tradeRouteAccess: 'road', stressTypes: [] }, economicState: { primaryExports: only } };
+      const slots = V.slotsOf(factsOf(record), GROUND_PHRASE);
+      expect(slots.export, only.join(', ')).toBeUndefined();
+      for (const { pool, row } of exportRows) expect(V.fillWording(row.text, slots), `${pool} ${row.id}: ${only.join(', ')}`).toBeNull();
+    }
+  });
+  it('the four rows stand as ruled (the chair, 22:35 UTC 2026-11-20), their ids kept', () => {
+    expect(V).not.toBeNull();
+    const byId = new Map(rowsOf(V).map(({ row }) => [row.id, row.text]));
+    expect(byId.get('road.7')).toBe('It stands on the road, and sends its {export} out along it to be sold.');
+    expect(byId.get('river.5')).toBe('A river settlement; it sends its {export} out by the river to be sold.');
+    expect(byId.get('crossroads.3')).toBe('Built at a crossroads; it sends its {export} out along its roads.');
+    expect(byId.get('metropolis.8')).toBe('It sells its {export} across the region.');
   });
 });
