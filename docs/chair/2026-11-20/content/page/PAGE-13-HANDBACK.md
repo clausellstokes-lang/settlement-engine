@@ -41,6 +41,20 @@ the security reader's list) and the briefs under `briefs/`. Prompt:
   five projections; red first on the criminal fill); remove the UNREAD row; a `WORD_KEYED` list excluded from the SENTENCE
   KEYS arm. OPEN RISK: a projection that drops the criminal power but leaves 'organised crime' answering yes prints
   "Criminal organisations" where the twin prints "Lawbreakers".
+- THE DECLARATION RULED (the chair, 07:11 UTC), TO BE BUILT AFTER THE LINE MERGE (the chair names point 96's push):
+  (1)(2) the arm `tests/domain/display/tensionSidesServed.test.js` as proposed; where a projection hides the house but the
+  'organised crime' atom still answers yes, or a criminal (or masked, still-criminal) power row stays for
+  `solePowerNameOf`, the arm reds: A FINDING FOR THE VEIL'S LANE, NOT CURED HERE (no projection changes): PINNED as
+  `troubleHooksShared` (D) pins its gap (assert the state, comment naming projection and field, owed to the share veil's
+  instrument) and LISTED in the landing line for the security reader; if the READER can be made blind to it without a
+  projection change (a masked power is no named power), say so and the chair rules. (3) EXEMPT entry class 'trouble' keyed
+  by the hand ref, withheldBy the reader, provedBy the arm's title, `reason` saying exactly what is proven and what is
+  pinned and listed; the UNREAD row leaves in the same commit. (4) `WORD_KEYED` (ref, reason) out of the SENTENCE KEYS arm,
+  its keys read by `CRIME_KEY_WORDS` whatever their length; a plant shows a five-word side key with a crime word read as a
+  crime pool; other tables' exactness unchanged; untouched `isSentenceKey`, `SENTENCE_KEYED`, `NOT_LINE_KEYS`, the bank,
+  both ceilings. RULE 2 READS `presumes` AS NEEDS for this table: the five houses LISTED (readings re-taken from the walker's
+  own reading, count by house in the commit); a hideable or crime `presumes` is read by rule 1 and stands under the entry.
+  Until the line moves: nothing else.
 - UNIT 4's LISTS WRITTEN (the chair's 05:26 order): `build/SIDES-LISTS/LISTS.md` (`8c35fa909`): SIDES moves 89 of 300
   towns (thorp 16, hamlet 13, village 15, town 20, city 15, metropolis 10); the surfaces; ONE house reader,
   `tensionShown.js :: tensionSidesShown`, which by construction can choose a wording by the `organised crime` atom and by
@@ -50,7 +64,7 @@ the security reader's list) and the briefs under `briefs/`. Prompt:
 - NOT BUILT: unit 3; unit 4's runs ("PAGE-SIDES"); unit 6 (causes' wiring, on "PAGE-TROUBLE IS POINT <n>"). Unit 5 is the
   chair's (DAILY-PAGE-1, point 95).
 - AT THE MERGED TIP 9b7282425: tests/lint whole 220 files, 3,271 of 3,271 green.
-- NEXT STEP: on the chair's word, merge the line (unit 3).
+- NEXT STEP: on the chair's word (point 96 pushed), merge the line (unit 3), then one builder for the ruled declaration.
 
 ## Rulings in force (the eighth chair's, in PAGE-13.txt; each vetoable by the owner)
 (a) the line has landed 87-93 (LINE-NOW). (b) the reader pin is re-made as a differential, never re-recorded.
