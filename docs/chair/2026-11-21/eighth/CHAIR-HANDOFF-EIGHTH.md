@@ -937,6 +937,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   seeded town changing under a test nobody named: `bar7OrderUnderTheLaw`) is caught by CI, not by the gate: said
   plainly. STACK-97 was stopped in its f2 and stood down; STACK-98 has the cut-down f2. THE CHAIR HAD TOLD THE OWNER
   "a landing runs the entire test suite": CORRECTED TO HIM the same hour.
+- E72 · THE DAILY LIFE PAGE'S FIVE OFFICE LINES: ONE ATOM FAMILY GRANTED (2026-11-22 10:56 UTC; DAILY-3 found that point 97 brought NO label atom:
+  the chair's "who rules' label atom" in E56 was an assumption, not a thing on the line). LEAVE FOR FIVE KEYS:
+  `office: elders`, `office: headman`, `office: mayor`, `office: reeve`, `office: lord's steward`. CONDITIONS: the
+  home is the ONE table of forms point 97 landed (`src/domain/seat/seatTable.js`: the seat names the reader), never
+  a name test on a label string (the seventh chair's ruling 10 stands); it reads the OFFICE, never the holder, so
+  the same dark and lit; it reads the document in hand and FAILS CLOSED where the form's row is withheld (what the
+  hideable walker reads for the five keys is said first); the table reaches the tab by its own lazy road (first
+  paint not one byte up); the seat's table of keys, forms, shares by size and atom wordings to the chair's eye
+  before the build; the thorp's commonest resentment re-measured after L8.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1385,6 +1394,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    (459ee0c0e). THE TIP SENT: STACK-98 ("BASE 1ec3e81d1": the landing place is its own now; fortune as point 98),
    SEAT-10 (the word to merge U6 and U7; rule 8 widened; "SEAT-B"), DAILY-3 (L8 to L12 open), FORTUNE-7. E68 to E71.
    CI's run on 1ec3e81d1 is to be read by name (net 11).
+- 2026-11-22 10:56 UTC · NET 11. THE SIX: VEIL-32 530,630 by its record (the mark 700,000; its own re-runs of unit (viii) under way; it says at the
+   merge whether (iv) fits or it hands over to VEIL-33); VEIL-33 in the probe's pass 1; SEAT-10 with the word to merge
+   U6 and U7 (E70); FORTUNE-7 on U7b (E68); DAILY-3 on E3, then 4b with the two cures, L8 to L12 on the new atom
+   family (E72); THE LANDING PLACE: STACK-98 MERGED fortune as 93fca9a8f on the line's tip 1ec3e81d1 (exactly the
+   nine conflicts, resolved as ruled; `HAND_CEILING` 75; `GENERATION_LAWS` four rows; `birthConfig` clamps both
+   laws; the observed-shape baseline at fortune's own 2215 findings / 1553 identities, schema 46), pushed as
+   `lane/stack-98-wip-2026-11-22`; its step d next: BOTH LAWS NOW SIT ON ONE REF. STACK-97 HAD NOT READ THE CHAIR'S
+   STOP (its session sits in long waits; messages reach it only when a wait ends): it was still in step f2 (piece 0
+   of 4 green, 540 files): stopped again with the priority that interrupts. ELEVEN PARKED, none working. NO PLACE
+   FREED but the landing's, which passed to STACK-98. CI's run on 1ec3e81d1 is not yet read (the push was 10:48).
+   THE LESSON FOR EVERY LATER LANDING PROMPT: a landing session must come back from a wait at most every ten minutes
+   AND read its messages between waits; the chair uses the interrupting priority for a stop.
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
