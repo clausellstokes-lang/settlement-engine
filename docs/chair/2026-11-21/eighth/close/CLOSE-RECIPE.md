@@ -88,9 +88,46 @@ THE DARK LIST is `ci/RED-AT-LINE.tsv` on the chair's branch at that tip (CI's wh
 7. SIZES: from the `build` part's log (`static closure = … bytes`, the two `transfer = … B` lines, `worker-….js is … B`)
    and `ls dist/assets/engine-*.js`; beside LINE-NOW's figures at the tip.
 
+## 2b. THE FLIP'S COMMITS, IN ORDER (the chair's 15:48 UTC: so that a red between two commits always has ONE cause)
+1. THE DIALS AND THE LEAF'S ROW, ONE COMMIT: step 1's three `sed` lines and step 1b's `powersList` row (4 files). Proof:
+   `tests/lint/factLayers.walker.test.js` whole (rehearsed 15/15) and both saved-place tests (rehearsed 15/15).
+2. THE DOORS, ONE COMMIT A DOOR, each its door's own command on the clean tree, its file re-run plainly after
+   (the rehearsal's census, `census/pins-by-door.tsv`; the counts are the rehearsal's at e987c3e36, the final census
+   re-counts them):
+   | door | rows it re-records | its command |
+   |---|---|---|
+   | the goal-sentence hashes `tests/fixtures/goalHashes.mjs` | 5 (`goalSentencesOnceInTown`, five tiers) | the fixture's own regeneration (named in the test's header; READ IT FIRST: a hash fixture is a stored figure, re-recorded with the cause written) |
+   | the Daily Life no-people fixture `tests/fixtures/daily-life-no-people-before.json` | 1 (`dailyLifeNoPeople`) | the test's own capture arm (read its header) |
+   | the page census `scripts/census/page-census.register.json` | 1 (`pageCensus.walker`: one banked finding, P16three, LOST, none gained) | the census's own `--write` (shrink only: a finding lost is a shrink) |
+   | the lighting census, the wiring census, writer-reach, the tuning inventory, the observed-shape readers | each by its door if the flip's tree reds it (the rehearsal re-took them on the join BEFORE the flip; the lit run showed no further register red) | as in section 3 |
+3. THE HAND ANCHORS: 136 rows in 74 test files (PREMISE 64: a seed chosen to meet a case that no longer meets it,
+   re-picked or re-keyed; BORN ANCHOR 58: a value pinned on a born town; DIAL PIN 14: a test pinning a dial's dark
+   default or an absent marker, step 1a's list; and three in-test counts: `bar5SafetyLawBand` 22 vs 45,
+   `magicAudience`, `magicMeasuresApart`). One commit A LANE'S FILES (who rules', fortune's, the join's), each row's
+   new value READ BY CAUSE against the lanes' paper flip lists (E90 (3)) before it is written; a move no list expected
+   is a SURPRISE and stops the commit.
+4. THE GOLDENS, FOR THE OWNER'S SIGNING, LAST: section 5b.
+
 ## 3. REGISTERS BY THEIR DOORS (item (4)) — not yet rehearsed lit
 ## 4. THE EDGE BUNDLES (item (5)) — not yet rehearsed
 ## 5. FOR THE OWNER'S HAND AND EYE (item (5)) — partly rehearsed
+
+### 5b. THE LIT GOLDEN CORPUS (the seventh chair's ruling of 2026-11-20 20:03: a LIT corpus BESIDE the old; the owner signs)
+WHAT IS TRUE TODAY (CONFIRMED by reading): `tests/property/generatorGoldenMaster.test.js` births its 525 configurations
+(`tests/helpers/goldenMasterCorpus.js :: goldenCorpus`, four seeds each) with `generateSettlementPipeline(cfg, …)`
+WITHOUT `birthConfig`, so it is a LAW-1 corpus whatever the dials say: THE FLIP DOES NOT MOVE IT (the lit run: its rows
+red only as on the line). The same is true of every corpus built from `goldenCorpus` (the composed-prose manifest's
+DRIFT corpus, `tests/property/dossierProseManifest.test.js`) and of the confinement instruments' 525/720. The old corpus
+STAYS, as the saved towns' control.
+WHAT MUST BE MADE (a unit, test-only, BEFORE the flip, owed: no lane holds it yet): a twin suite, e.g.
+`tests/property/generatorGoldenMasterLit.test.js`, that births the same 525 configurations through `birthConfig(cfg)`
+(after `loadGenerationLawPayloads()`), with its own manifest `tests/fixtures/generator-golden-master-lit.json`, written
+ONLY through `tests/helpers/goldenRecordDoor.js :: recordGolden` (the one signed door: it REFUSES unless a signed shift
+record on disk authorizes the move; `tests/lint/goldenFreeze.walker.test.js` convicts any other writer).
+AT THE FLIP: `UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMasterLit.test.js` (about 64 s: the dark
+master's own time on this box), after the owner's signed shift record exists. THE OWNER'S SIGNING: the new manifest and
+its shift record (and any reference snapshot a later unit adds). A SEAT ONLY PREPARES: it shows him the diff's shape
+(how many of the 525 x 4 rows differ from the dark corpus, by size, and three rows in plain words) and never signs.
 
 ### 5c. THE HOME PAGE'S SAMPLE TOWN (the chair's step; its stock narration for the owner's eye)
 Needs CLOSE-FIXTURE (landed) first. The command, ON THE FLIPPED TREE, never before the flip:
