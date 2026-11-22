@@ -1271,9 +1271,48 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   (c) a government's label is drawn from the kind's table and never composed from the house's own name: proven in
   R5-DESC's measure by the writers and held by a pin. "R5-RECENT-T" (a transfer's sentence composed from served
   parts) FOLLOWS R3. THE READER'S LIST ROW 19 puts the design and two open questions to the reader. THE CHAIR
-  CORRECTS ITSELF TO THE OWNER: it told him at 15:36 there were two ways to settle this (show the ruling house, or
+  CORRECTS ITSELF TO THE OWNER: it told him in the same hour that there were two ways to settle this (show the ruling house, or
   build a public name); the lane's own earlier rulings are a third, already built, and it is the one taken.
   ALSO: CI's run on point 98 (45033049183), read by name at 15:34: 63 failing rows, all listed, none new, none gone.
+- E95 · DAILY LIFE's OFFICE LINES BUILT; THREE ANSWERING ROWS GRANTED (2026-11-22 15:51 UTC; DAILY-3's L8 on `lane/daily-3-2026-11-22-l8-wip` at 79b18643e). The measure on 900: the five
+  atoms equal the office measure at every size; L8 to L12 print on 0 to 8% of a size, false 0; the thorp's
+  commonest resentment 17% to 10% (under the bar; the other sizes 11, 11, 8, 9, 14); an `office: headman` line and
+  W11, B19 or P13 on the same page: 0 at every size (E83's question closed). STRIKE 1 (`presumedThings.walker` reads
+  "the headman", "the reeve", "the lord's steward" as the catalogue's house families, which have no answering atom):
+  LEAVE GIVEN (COMMON-RULES 6) for three rows in `registeredWords.js :: HOUSE_FAMILIES`' answering expression
+  (each family answered by its `office:` atom), on three conditions: the row's comment says it answers the
+  OFFICE-HOLDER's reading, never a building (a line that presumes the house itself still needs the house's atom;
+  L9, L11, L12 named building-free); on the four steward thorps where L12 prints with no steward's house the page
+  elsewhere agrees a steward governs; the walkers and `tests/lint` whole green. STRIKE 2 (the seat's own): L12
+  gains the stricter need `sovereign`, no place lost. `officeForms.js` lazy in FIRSTPAINT2_LAZY_DOMAIN.
+- E96 · THE STORED ORDER OF POWERS, AND THE SUMMARY's BAR: NOT THE FLIP's; LISTED FOR AFTER THE FIRST DEPLOY (2026-11-22 15:51 UTC; CLOSE-1's `bar-count.mjs` and `order-ex.mjs`; the chair's own
+  read-only census of readers on c110dd85b). The Summary's bar takes `factions.slice(0,5)` in STORED order and
+  marks the governing ROW only, never the holder. DARK already stores 61 of 150 metropolises and 50 of 150 cities
+  out of power order (lit 69 and 55): only the LAST row, an alliance or coalition appended after the sort; the
+  first row is the strongest; the holder is not put first. A bar with NO ruler: 2 of 900 lit, 1 dark. The census:
+  nine readers assume strongest-first and print (the Summary's four; the stored pressure sentence's `topFaction`;
+  the NPC secrets' `topFaction`; two of the history writer; the AI context), two decide (`conflicts.js`,
+  `factionCompetition.js`); the writers that append without a re-sort are the DENSITY law's
+  (`applyDensityLaw.js :: resizeSeats`, `rulerKin.js :: foldKin`), live long before the new laws. RULED: an old,
+  small imprecision; `intake/AFTER-FIRST-DEPLOY.md` item 1 (the page sorts and marks the holder: no birth moves; or
+  the writer re-sorts: births and goldens); in the flip census the tails' lit moves are EXPECTED.
+- E97 · A SECOND COPY OF THE VEIL's SENTENCE: `pressureSentence`; P1 NOW, THE RE-FILL AFTER R3 (2026-11-22 15:51 UTC; VEIL-33's 15:40, R5C3 STOP 141831a1a, CONFIRMED by its re-read).
+  `narrativeGenerator.js :: generatePressureSentence` (about line 879) falls back to `detail.recentConflict`, and the
+  assembler stores the result as `settlement.pressureSentence`: 154 of 480 births store the two EQUAL (thorp 47,
+  hamlet 27, village 21, town 23, city 21, metropolis 15; 43 of them hide something); the twin serves it on all
+  154; neither engine's second-homes pass removes it. So withholding `recentConflict` alone moves act K's fault
+  to the copy on a third of births. RULED P1: the always-pass ALSO withholds `pressureSentence` wherever it EQUALS
+  the stored `recentConflict`, on every place, both engines (a fact of the generator's fallback, not of a hide: no
+  tell); the page does not re-fill it in this unit. THE COST, NAMED: the pressure line absent from 32% of shared
+  pages until "R5-PRESSURE" (the other way for the whole sentence: withheld always, re-derived on the page by the
+  engine's own writer over the served document; it replaces the second-homes pass's two special cases).
+  ITS PLACE BY COUNT (V33-R5C4 on the 480 births): 326 stored pressure sentences do not equal `recentConflict`; 90
+  of those name a power or house (the stress branch 60, succession-by-elimination 30); 0 name a WITHHELD one that
+  no pass removes today (the twin; the server not run: to be CONFIRMED on 212 in the unit's own proof): SO
+  R5-PRESSURE IS A PRODUCT UNIT AFTER R3. The third-copy scan over every stored string of the 480 records: none
+  beyond `pressureSentence`. For the build: the composed-hosts walker walks `power.recentConflict` by name as a row
+  that left the composed form; the registry's site map moves the row to `generatePowerStructure` (ARM E); the
+  fallback registered as a COPY, so a third copy reds.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1768,6 +1807,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    PLACE (E88: "BAR7" is a product fault; cure (B) building). NINE PARKED. STACK-98 done. WHEN TWO LANES EACH ADD ONE
    HAND ROW (SEAT-B 76, FORTUNE-B 76), THE STACK'S TOP IS 77: the line's 75 plus exactly the two rows: a classed
    conflict for STACK-99's prompt. THE CHAIR'S BRANCH: origin equals local (dfa0a9eb3 before this commit).
+- 2026-11-22 15:51 UTC · NET 16 (written a few minutes before its trigger). CI ON POINT 98 READ BY NAME: 63 failing rows, all listed, none new (E94's last line; LINE-NOW). THE FLIP's
+   REHEARSAL IS DONE (CLOSE-1, `FLIP-CENSUS.md` at c1c65fff8): 3,765 files, 43,183 tests, 204 red lit: 54 listed, 150
+   NEW: 146 PINS (premise, born anchor, stored pin, dial pin), 1 RE-CUT (`defenceParts` R13 against X4: U8's second
+   arm), 2 FAULTS (fortune's crisis power: U8, E86; the powers leaf: E91, cured by one row at the flip, its walker
+   file 15 of 15 on a copy of the lit tree). NO golden or reference among the 150; THE LIT GOLDEN CORPUS IS NOT YET
+   MADE (the owner's signing at the flip). THE LIT REF: `lane/close-1-lit-scratch-2026-11-22` at 217b628f3 = the
+   line plus three lines in three files. Asked for the recipe: the golden corpus's making, the 146 pins grouped by
+   door, the order of the flip's commits. THE SIX: VEIL-33 (E92, E93, E94, E97: R5-RECENT building by its fourth
+   builder; hands over at its merge; about 580,000 by its trend); SEAT-10 (E90: 699 files in two shards; about
+   555,000; "SEAT-B" next); FORTUNE-7 (rule 8: 551 files and a superset run in flight; U8's diagnosis out; about
+   490,000); DAILY-3 (E95: L8 built, 4c next); CLOSE-1 (the rehearsal done; JOIN's builder out on c110dd85b; about
+   470,000); PAGE-12 (E88: cure (B) building; no line yet). NO PLACE HAS FREED SINCE POINT 98. THE NEXT PLACE GOES
+   TO VEIL-34 (`prompts/VEIL-34.txt`), THE ONE AFTER TO STACK-99. `intake/AFTER-FIRST-DEPLOY.md` started (five
+   items). The chair's branch: origin equals local before this commit (7d0ae5ada).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
