@@ -113,9 +113,6 @@ export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
  *   standing.meritPoints          — the points one counted merit adds, only upward, only at Tolerated or better (the
  *     gate is READ from `LEGITIMACY_CUTS.tolerated` by the predicates, never copied here).
  *   standing.weatheredWithinYears — a catastrophe weathered within this many years (a generation) is a merit.
- *   standing.weatheredRecentYears — FORTUNE U5b (the seventh chair's ruling of 22:26 UTC 2026-11-20): the merit's sentence
- *     (`display/governanceAccount.js`, its words in `data/fortuneMeritLines.js`) takes its RECENT time words for an event
- *     at most this many years ago, and its GENERATION words above it to `weatheredWithinYears`; it changes no score.
  *   standing.endorsedMinReasons   — Endorsed never stands on fewer reasons than this (a reason: a merit, or a positive
  *     term of the sum).
  *   VOCABULARY, NOT TUNING (read, not chosen): standing.weatheredSeverity (the history's grade of a catastrophe) and
@@ -151,7 +148,6 @@ export const FORTUNE_LAW_TUNING = Object.freeze({
     }),
     meritPoints: 10,
     weatheredWithinYears: 40,
-    weatheredRecentYears: 10,
     endorsedMinReasons: 2,
     weatheredSeverity: 'catastrophic',
     rulerTroubleKinds: Object.freeze(['succession_crisis', 'corruption_scandal', 'tyranny', 'popular_uprising', 'legitimacy_crisis', 'leadership_vacuum']),

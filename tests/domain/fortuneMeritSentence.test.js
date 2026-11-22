@@ -76,7 +76,7 @@ const withLaw = (record, law) => ({ ...record, config: { ...record.config, [FORT
 const bandOf = (record) => {
   const ev = weatheredCatastrophe(record);
   if (!ev || typeof ev.yearsAgo !== 'number') return null;
-  if (ev.yearsAgo <= STANDING.weatheredRecentYears) return 'recent';
+  if (ev.yearsAgo <= RECENT) return 'recent';
   return ev.yearsAgo <= STANDING.weatheredWithinYears ? 'generation' : null;
 };
 
@@ -105,6 +105,7 @@ const countOf = (hay, needle) => hay.split(needle).length - 1;
 
 /** @type {any} */ let POOL = null;
 /** @type {any} */ let TIMES = null;
+/** @type {any} */ let RECENT = null;
 /** @type {Array<{ seed: string, record: any }>} */ const SIX = [];
 /** @type {any} */ let LAW1 = null;
 /** @type {any} */ let UNMERITED = null;
@@ -114,6 +115,7 @@ beforeAll(async () => {
   const lines = await import('../../src/data/fortuneMeritLines.js').catch(() => null);
   POOL = lines?.FORTUNE_MERIT_LINES ?? null;
   TIMES = lines?.FORTUNE_MERIT_TIME_WORDS ?? null;
+  RECENT = lines?.FORTUNE_MERIT_RECENT_YEARS ?? null;
   await loadGenerationLawPayloads();
   for (const [seed, size, dials] of PLACES) SIX.push({ seed: /** @type {string} */ (seed), record: born(/** @type {string} */ (seed), /** @type {string} */ (size), /** @type {object} */ (dials), 2) });
   LAW1 = born('hxd-metropolis-73', 'metropolis', {}, null);
@@ -127,8 +129,10 @@ describe('U5b (a): the merit\'s sentence, directly after the standing', () => {
   it('the pool and the new cut-off are there: three wordings, two bands of time words, a recent cut-off under the generation', () => {
     expect(POOL).toHaveLength(3);
     expect(Object.keys(TIMES ?? {}).sort()).toEqual(['generation', 'recent']);
-    expect(typeof STANDING.weatheredRecentYears).toBe('number');
-    expect(STANDING.weatheredRecentYears).toBeLessThan(STANDING.weatheredWithinYears);
+    expect(typeof RECENT).toBe('number');
+    expect(RECENT).toBeLessThan(STANDING.weatheredWithinYears);
+    // a wording threshold, not a law tuning (the chair, 01:48 UTC 2026-11-22): the law's table does not carry it
+    expect(Object.keys(STANDING)).not.toContain('weatheredRecentYears'); // anchored: the same keys hold weatheredWithinYears, read one line above
   });
 
   it('every one of the six merited places prints the keyed pick, once, right after the standing; nothing else moved', () => {

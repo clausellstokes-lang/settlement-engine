@@ -8,9 +8,11 @@
  * STORED name (`weatheredCatastrophe(record).name`); `{place}` is the paragraph's place and `{seat}` the governing power
  * as the paragraph carries it mid-sentence (`powerNameInProse`).
  *
- * THE TIME WORDS band the event's own `yearsAgo`, never a figure: at most `FORTUNE_LAW_TUNING.standing.weatheredRecentYears`
- * reads `recent`; above it, to `standing.weatheredWithinYears`, reads `generation` (`fortune/fortuneLaw.js`, the law's one
- * table; both cut-offs DRAFT). `{ago}` fills A and C, `{past}` fills B.
+ * THE TIME WORDS band the event's own `yearsAgo`, never a figure: at most `FORTUNE_MERIT_RECENT_YEARS` reads `recent`;
+ * above it, to the law's `FORTUNE_LAW_TUNING.standing.weatheredWithinYears` (`fortune/fortuneLaw.js`, DRAFT), reads
+ * `generation`. `{ago}` fills A and C, `{past}` fills B. The recent cut-off is a WORDING threshold, not a law tuning (the
+ * seventh chair's ruling of 01:48 UTC 2026-11-22): it lives here beside the words it chooses, and nothing that computes
+ * the merit, the birth or any score reads it.
  *
  * THE PICK among A, B and C is the kernel's mixed keyed pick (`kernel/proseHash.js :: pickVariantMixed`), drawn through
  * the one door (`facts/drawDeclared.js :: drawDeclared`) at its one call site; no roll, no draw count changed. The lines
@@ -28,6 +30,9 @@ export const FORTUNE_MERIT_LINES = Object.freeze([
   Object.freeze({ id: 'B', text: '{event} is {past} at {place}; having come through it, people there are slower to turn on {seat}.' }),
   Object.freeze({ id: 'C', text: '{event} hit {place} {ago}, and coming through it has left its people readier to stand by {seat}.' }),
 ]);
+
+/** The recent band's cut-off: an event at most this many years ago takes the `recent` time words. */
+export const FORTUNE_MERIT_RECENT_YEARS = 10;
 
 /** The time words, by band of the event's `yearsAgo`. */
 export const FORTUNE_MERIT_TIME_WORDS = Object.freeze({

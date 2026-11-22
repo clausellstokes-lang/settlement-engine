@@ -33,7 +33,7 @@ import { textOf } from '../facts/textOf.js';
 import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
 import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
 import { pickVariantMixed } from '../../kernel/proseHash.js';
-import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
+import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
 
 /** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
  *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
@@ -366,7 +366,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     // THE MERIT'S REASON (FORTUNE U5b; the seventh chair's ruling of 22:26 UTC 2026-11-20, vetoable by the owner): where
     // the fortune law's merit credits the record (`fortuneMerits.js :: meritsOf`, the predicate the birth used), the
     // event `weatheredCatastrophe` returns is named directly after the standing, opening on its stored name. The time
-    // words band its `yearsAgo` by the law's table (`weatheredRecentYears`, then `weatheredWithinYears`), never a figure.
+    // words band its `yearsAgo` (the pool's own `FORTUNE_MERIT_RECENT_YEARS`, then the law's `weatheredWithinYears`), never a figure.
     // The wording is the kernel's mixed keyed pick through the one door, keyed on the place's name and the event's (what
     // every shared read serves, so the owner's page and a shared one say the same line); no roll.
     const meritRecord = /** @type {import('../fortune/fortuneMerits.js').MeritRecord} */ (/** @type {unknown} */ (s));
@@ -374,7 +374,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     const event = weathered ? text(weathered.name) : '';
     const yearsAgo = weathered && typeof weathered.yearsAgo === 'number' ? weathered.yearsAgo : null;
     const band = yearsAgo === null ? null
-      : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredRecentYears ? FORTUNE_MERIT_TIME_WORDS.recent
+      : yearsAgo <= FORTUNE_MERIT_RECENT_YEARS ? FORTUNE_MERIT_TIME_WORDS.recent
         : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
     if (event && band) {
       const identity = `${place}::${event}::${yearsAgo}`;
