@@ -74,6 +74,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   least"; the rest "still several days at four workers"). SAID TO HIM: the chair's own context was compacted at
   about 04:00 and at least two seats' were; the spend by the sessions' own records (the chair 106, the four seats
   180; the weekly limit allowed, no overage); the five things waiting on him, unchanged.
+- **2026-11-22, between the clock's readings of 04:31 and 04:34 UTC, the owner (verbatim, the whole message):** "So, remove the
+  button prompt for Daily life and simply generate it automatically. The original design was for an ai synthesize
+  through that button. But since we scrapped that, just skip that step and have it generate with the rest of the
+  dossier." ANSWERED THE SAME TURN, in plain words, after the chair read the page's code (`DailyLifeTab.jsx`): what
+  the page does today (tiles, one sentence, a "Generate Daily Life (N credits)" button that calls the AI; an unsaved
+  place gets a "save to enable" line); what it will do (no button, no credits; the engine's own lines print when the
+  dossier opens, saved or not: the three rebuilt lines now, the other five as they are built). THREE DEFAULTS SAID TO
+  HIM AS HIS TO CHANGE: (1) an AI account already saved on a settlement stays visible, read-only; (2) the server's AI
+  function and its credit price are not touched (his hand; listed for the close); (3) the PDF's chapter follows as a
+  second step and moves the PDF's reference snapshot (his signing). TIMING SAID: a builder now, one to two hours;
+  landed with point 94 under one gate; on the live site only after his merge and deploy.
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -310,6 +321,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   and the seat says what is withheld. FOR THE SECURITY READER'S LIST AT THE JOIN: the three listed cause rows; the
   hideable hooks; whether any hook template names a person (a per-member override in full mode reduces that member's
   card only).
+- E24 · THE OWNER'S ORDER ON THE DAILY LIFE PAGE IS BUILT NOW BY THE CHAIR'S OWN BUILDER, NOT BY A FIFTH SEAT (ruled 2026-11-22 04:40 UTC).
+  The unit is small, stands on the line's own tip and needs nothing of the display lane's unproven tip: the brief is
+  `briefs/DAILY-PAGE-1.md` (the owner's words verbatim at its head); the branch `lane/daily-page-1-2026-11-22` (cut
+  from f5295e425; worktree `/home/user/wt/dailypage`); one builder on the middle tier. COMMIT 1: the page (red
+  first): the offer line and the button gone with every state that served only them; `dawn_work`,
+  `gathering_places`, `child_warnings` printed from the document the page is handed (a shared read prints what ITS
+  document derives), no heading, nothing where a slot is empty; a saved AI account kept read-only; first paint not
+  one byte up or the chair rules. COMMIT 2 (only if narrow): the local narrative and the offer line, which print
+  nowhere afterwards, removed with their census declarations by their doors. NOT TOUCHED: the store's
+  `requestDailyLife`, the edge function, the pricing row (for the owner's close); the PDF (a report only: what moves).
+  IT REPLACES unit 5 of `prompts/PAGE-13.txt` (THIN's three slots). IT LANDS AS POINT 95 STACKED ON POINT 94 UNDER ONE
+  GATE (E8): point 94's own long run died with the machine's restart at about 04:33 and is not re-run alone. FOR THE
+  SECURITY READER'S LIST: the Daily Life page now prints three derived lines on every read, each from the served
+  document.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -545,6 +570,16 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   off the clock (rule 29): from now a message of the chair's carries no hour unless the same command read it. THE
   CHAIR'S OWN RECORD READS 897,812 of 1,000,000 with no boundary shown: stale, or a second compaction is near: the
   pickup and this log are current either way. The chair's branch is on origin at 214a3d5cb (04:30 by the push's log).
+- 2026-11-22 04:40 UTC · THE MACHINE RESTARTED (uptime read 0 minutes at 04:34): every process died, NO FILE WAS LOST. Dead: the helper landing
+  point 94 and its long run (102 of about 630 files done; the failing files it had reached were all on the list).
+  STANDING IN `/home/user/wt/line`, committed and NOT pushed: the merge 66c46de37 (point 94), the observed-shape
+  baseline by its door 718aaddbd, the wiring census by its door 9373b190d; its `tests/lint`, type checks, eslint,
+  build and `tests/build` (15 red of 612) had run before the restart (logs in the scratch `landing/stack-94/`). The
+  gate mutex shows a stale lock of a dead process: the next `--run` reclaims it. THE OWNER'S ORDER ON THE DAILY LIFE
+  PAGE came at the same minute (section 1; E24): a builder is on it since 04:41. THE PLAN: when it reports and its
+  diff is read, it is merged on top of point 94 as point 95 and ONE gate runs for both (a fresh helper, the stack
+  brief with its new step c2); then the push, the list and `LINE-NOW.md`. The chair's branch holds the brief and
+  these entries locally (6a909ade9 and after) and is pushed next.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
