@@ -677,18 +677,21 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     legitimacyAfter: { score: publicLegitimacy.score, label: publicLegitimacy.label },
   };
 
-  // U5-STALE: the kept form's hat moves to the winner's first (see the header)
-  const cards = kept && Array.isArray(settlement.npcs) ? settlement.npcs : null;
-  /** @type {(n: any, p: string) => boolean} */
-  const wears = (n, p) => Array.isArray(n?.memberships) && n.memberships.some((/** @type {any} */ m) => m?.power === p && m.rank === 1);
-  const heir = cards ? cards.find(n => wears(n, winnerName) && !n.ousted) : null;
-  const worn = cards ? cards.filter(n => n !== heir && wears(n, fromGovernment)
-    && n.memberships.some((/** @type {any} */ m) => m?.rank === 1 && m.power !== fromGovernment && m.power !== winnerName)) : [];
-  const hat = worn.length ? worn[0].memberships.find((/** @type {any} */ m) => m?.power === fromGovernment && m.rank === 1) : null;
+  // U5-STALE: the kept form's hat moves off the old house's person to the winner's first (see the header)
+  /** @typedef {{ power?: unknown, rank?: unknown }} HatRow */
+  /** @typedef {{ memberships?: HatRow[], role?: unknown, title?: unknown, ousted?: unknown }} HatCard */
+  const raw = /** @type {{ npcs?: unknown }} */ (settlement).npcs;
+  const cards = kept && Array.isArray(raw) ? /** @type {HatCard[]} */ (raw) : null;
+  /** @param {HatCard} n @param {string} p */
+  const first = (n, p) => (n.memberships || []).some(m => m?.rank === 1 && m.power === p);
+  const heir = cards ? cards.find(n => !!n && first(n, winnerName) && !n.ousted) || null : null;
+  const worn = cards ? cards.filter(n => !!n && n !== heir && first(n, fromGovernment)
+    && (n.memberships || []).some(m => m?.rank === 1 && m.power !== fromGovernment && m.power !== winnerName)) : [];
+  const hat = worn.length ? (worn[0].memberships || []).find(m => m?.rank === 1 && m.power === fromGovernment) : null;
   const office = worn.length && worn[0].title && worn[0].role !== worn[0].title ? worn[0].role : null;
   const npcs = cards && hat ? cards.map(n => (worn.includes(n)
-    ? { ...n, ...(n.title ? { role: n.title } : {}), memberships: n.memberships.filter((/** @type {any} */ m) => m?.power !== fromGovernment) }
-    : n === heir && !wears(n, fromGovernment) ? { ...n, ...(office ? { role: office } : {}), memberships: [...n.memberships, { ...hat }] } : n)) : null;
+    ? { ...n, ...(n.title ? { role: n.title } : {}), memberships: (n.memberships || []).filter(m => m?.power !== fromGovernment) }
+    : n === heir && !first(n, fromGovernment) ? { ...n, ...(office ? { role: office } : {}), memberships: [...(n.memberships || []), { ...hat }] } : n)) : null;
 
   return {
     settlement: {

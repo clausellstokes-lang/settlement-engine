@@ -393,7 +393,8 @@ export function rulingChainOf(settlement, options) {
 
   // (0) U7 (the chair's E77): where the holder stands apart, the record's hat-wearer, and nothing else.
   const wearer = apart ? apart.person : null;
-  let npc = wearer ? { name: String(wearer.name || ''), role: cardHatsOf(wearer), via: /** @type {'roster'} */ ('roster') } : null;
+  /** @type {{ name: string, role: string, via: 'ladder' | 'roster' } | null} */
+  let npc = wearer ? { name: String(wearer.name || ''), role: cardHatsOf(wearer), via: 'roster' } : null;
   // (1) The ladder-backed ruler — the governing faction's top rung.
   if (!apart && governing && hasLadder(settlement)) {
     const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(governing));
