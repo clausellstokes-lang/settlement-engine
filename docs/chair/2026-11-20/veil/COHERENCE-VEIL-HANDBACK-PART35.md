@@ -35,8 +35,20 @@ the seating). UNTIL THE HAND-OVER THIS SEAT WRITES NOTHING IN 212, ITS TWIN OR T
 - (vi): V33-Q's two teeth applied at the tip (scratch worktree `/home/user/wt/vi`): galleryRosterChoices + galleryVeilTell4 38/38,
   exit 0 (18:02-18:19); committed on `lane/veil-34-2026-11-22-vi-wip` (2b1f23d92, 953b7d19c), local; `tests/lint` whole queued
   (`/var/tmp/v18/out/v34/vi/lint-whole.log`). Second builder V34-R4I (R4-IDS part one) seated after 18:01 (not clocked), beside V34-R5DM.
-- NEXT STEP IN ONE LINE: V34-R5DM's figures -> the chair (the other way or per entry); then R4-IDS part one's builder; (H) at the
-  chair's word.
+- BUILDERS RETURNED (each branch pushed by its own name): V34-R5DM `lane/veil-34-2026-11-22-r5desc-wip` 606381cb5 (R5-DESC's census,
+  B refuted 56.2%, S 98.5%, E94 (c) holds); V34-R4I `lane/veil-34-2026-11-22-r4ids-wip` 24a6f7ef5 (R4-IDS part one: no born id spells a
+  hidden thing; the witness lit only, jp6-city-8; the plant red by design; for VEIL-35, chain B); V34-R5D0 `lane/veil-34-2026-11-22-r5d0-wip`
+  e1e5548cf (dmNote 4.0%; 0 withheld-picked bases; the desc splits base + standing, 44 forms; the masked party is the infiltrator).
+  (vi) PROVED `lane/veil-34-2026-11-22-vi-wip` 953b7d19c (38/38; tests/lint whole = the tip's 16/22): rides chain A's next merge.
+- RULED: E115 (the other way by S for the standing; the hidden row's desc out; dmNote per entry; label off composed; the masked party
+  withheld), E116 (TWO CHAINS, ONE TIP: A = this seat then VEIL-36: R5-DESC, (iv), (v); B = VEIL-35: R4-IDS, IMPORT-DOOR; the tip granted by
+  the chair: "TIP? <unit> <commit>" / "TIP TO <seat>"), E121 (the cut: (a) table, (b) no-match = base, (c) the belt; legacy forms in the
+  table, the legacy arm, only grows), E122 (presence-picked bases withheld ALWAYS, the page re-derives them; measure first).
+- CURE BRIEFS (dce1c261a): `briefs/R5D-SQL-BRIEF.md`, `briefs/R5D-PAGE-BRIEF.md` (item 8 to be re-stated by E122 after R5D-1). MEASURE
+  `briefs/R5D-1-BRIEF.md` (the 13 presence-picked templates: kinds, fidelity, the differential on hand hides): builder V34-R5D1.
+- THIS SEAT'S RECORD BY THE CHAIR: 559,887 at 19:42; HANDS OVER at R5-DESC's merge or 660,000, whichever first; VEIL-36 seated beside.
+- NEXT STEP IN ONE LINE: R5D-1's figures -> the chair -> R5D-SQL item 8 re-stated; at "VEIL-33 HAS HANDED OVER": the REVIEW of
+  R5-RECENT's whole diff (ACCEPTED or the fault by file and line), then R5D-SQL, then R5D-PAGE, then "TIP? R5-DESC".
 
 ## 2. THE DIGEST OF PARTS 30 AND 32 (the chair's question of 18:02 UTC; written by VEIL-34 from its whole reads of both at 16:12-16:14). A SUCCESSOR READS THIS IN PLACE OF PART 30 s1 AND PART 32 s2, opening either only where a line sends it. One line per ruling: what still binds, and where. "SUPERSEDED" names what replaced it. Rulings 86-103 are NOT digested: read PART 33 s2 and PART 34 s2 themselves (short). PART 30 s4 (the pool's recipe), s5 (the owner's paragraph) and s8 (the list after R3) stay to be read where needed.
 - 1 The seat integrates, builders build (committed brief, own worktree; the seat reads each diff whole, re-runs red and green). ONE builder on 212 at a time.
