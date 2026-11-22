@@ -67,7 +67,8 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
   netCurrentExtractorAnchor (1: my walker's unanchored SQL lookup, cured <this commit>, both re-run: 7 passed, the 3
   red by design); CURE part 1 (212 + the twin + the registry row) 5c727f4b3; CURE part 2 (the ONE reader, the import's save,
   the evidence row) 977518282; THE ARM AT THE CURE <this commit>: GREEN, HALF 1 0/6,528, HALF 2 0
-  (gated 0/92, controls 0/48), hook 0, parity 0 (`arm-cure/`); the pglite green, the build, lint whole, typecheck, eslint to come.
+  (gated 0/92, controls 0/48), hook 0, parity 0 (`arm-cure/`); d2123099f; red (ii) GREEN <this commit> (3 of 3: every town prints on all 34 open reads, the
+  hook served on 24 of 24 pool reads of 0-65); the build, lint whole, typecheck, eslint to come.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no
