@@ -1,0 +1,14 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 10920 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+{
+ "NEW_SETTLEMENT_SEAT_LAW_VERSION": 2,
+ "HOLDER_SEAT_LAW_VERSION": 2,
+ "SEAT_CONTEST_LIT": true,
+ "NEW_SETTLEMENT_FORTUNE_LAW_VERSION": 2,
+ "SIZE_RELATIVE_FORTUNE_LAW_VERSION": 2,
+ "birthConfig": {
+  "_densityLawVersion": 2,
+  "_livingContentLawVersion": 2,
+  "_seatLawVersion": 2,
+  "_fortuneLawVersion": 2
+ }
+}

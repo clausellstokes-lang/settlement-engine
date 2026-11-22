@@ -1,0 +1,150 @@
+1c1
+< R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool /var/tmp/v18/t2/pool-jp1; towns /home/user/wt/jp/docs/chair/2026-11-20/veil/out/v33/joinprobe/gates
+---
+> R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool /var/tmp/v18/t2/pool-jp2; towns /home/user/wt/jp/docs/chair/2026-11-20/veil/out/v33/joinprobe/lit/gates
+5,8c5,8
+< village | 300 | 152 (2336) | 1577 / 2124 | 8.4 | 5.7
+< town | 300 | 152 (424) | 2254 / 2753 | 6.0 | 10.1
+< city | 300 | 152 (164) | 1787 / 2238 | 9.4 | 18.3
+< metropolis | 300 | 152 (154) | 1546 / 1753 | 12.9 | 30.7
+---
+> village | 300 | 152 (2336) | 1647 / 2205 | 8.7 | 8.2
+> town | 300 | 152 (424) | 2279 / 2760 | 6.7 | 13.7
+> city | 300 | 152 (164) | 1874 / 2367 | 10.6 | 20.1
+> metropolis | 300 | 152 (154) | 1599 / 1846 | 13.0 | 32.3
+10,11c10,11
+< part A wall clock: 16.5 minutes (2026-11-22T09:48:04Z to 2026-11-22T10:04:35Z, four shards)
+< part B wall clock: 9.8 minutes (2026-11-22T10:04:35Z to 2026-11-22T10:14:24Z, four shards)
+---
+> part A wall clock: 19.1 minutes (2026-11-22T11:30:09Z to 2026-11-22T11:49:13Z, four shards)
+> part B wall clock: 10.3 minutes (2026-11-22T11:49:13Z to 2026-11-22T11:59:29Z, four shards)
+15,24c15,24
+< own | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:110 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:101 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:011 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:100 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:010 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:001 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< g:000 | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< allOpen | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+< off | 4 / 4 [11 / 11] | 4 / 4 [11 / 11] | 0 | 0
+---
+> own | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:110 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:101 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:011 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:100 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:010 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:001 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> g:000 | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> allOpen | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+> off | 6 / 6 [10 / 10] | 3 / 3 [10 / 10] | 0 | 0
+29a30
+>   3 | off|r.powers.relations="1" (e.g. r3m-city-under_siege-1-108, r3m-city-politically_fractured-1-120)
+32d32
+<   1 | off|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+34d33
+<   1 | dm|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+36a36
+>   3 | off|r.powers.relations="1" (e.g. r3m-city-under_siege-1-108, r3m-city-politically_fractured-1-120)
+39d38
+<   1 | off|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+41d39
+<   1 | dm|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+44a43,45
+>   r3m-city-none-1-117 (city) | 20 reads | r.powers.relations="1"
+>   r3m-city-politically_fractured-1-120 (city) | 20 reads | r.powers.relations="1"
+>   r3m-city-under_siege-1-108 (city) | 20 reads | r.powers.relations="1"
+46d46
+<   r3m-town-insurgency-0-14 (town) | 40 reads | r.imports.criminal="n"
+69,72c69,76
+<   r3m-city-indebted-1-106 (city) | 34 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+<   r3m-city-indebted-1-106 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.powers.capture:+->0
+<   r3m-city-insurgency-1-104 (city) | 34 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+<   r3m-city-insurgency-1-104 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.powers.capture:+->0
+---
+>   r3m-city-indebted-1-106 (city) | 20 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+>   r3m-city-indebted-1-106 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.powers.capture:+->0 r.powers.conflicts:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+>   r3m-city-indebted-1-106 (city) | 10 pages (twin:dm:g:110 twin:dm:g:100 twin:dm:g:010 ...) | r.powers.conflicts:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+>   r3m-city-indebted-1-106 (city) | 4 pages (twin:dm:g:101 twin:dm:g:001 server:dm:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.sp.plotHooks:0->+
+>   r3m-city-insurgency-1-104 (city) | 20 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+>   r3m-city-insurgency-1-104 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.powers.capture:+->0 r.powers.conflicts:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+>   r3m-city-insurgency-1-104 (city) | 10 pages (twin:dm:g:110 twin:dm:g:100 twin:dm:g:010 ...) | r.powers.conflicts:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+>   r3m-city-insurgency-1-104 (city) | 4 pages (twin:dm:g:101 twin:dm:g:001 server:dm:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.sp.plotHooks:0->+
+78c82,83
+<   r3m-city-politically_fractured-1-120 (city) | 40 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+---
+>   r3m-city-politically_fractured-1-120 (city) | 30 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.powers.criminal:+->0 r.powers.relations:+->0
+>   r3m-city-politically_fractured-1-120 (city) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+81,83c86,87
+<   r3m-metropolis-indebted-1-136 (metropolis) | 30 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.powers.criminal:+->0 r.powers.relations:+->0
+<   r3m-metropolis-indebted-1-136 (metropolis) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.powers.capture:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+<   r3m-metropolis-indebted-1-136 (metropolis) | 4 pages (twin:dm:g:101 twin:dm:g:001 server:dm:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+---
+>   r3m-metropolis-indebted-1-136 (metropolis) | 34 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+>   r3m-metropolis-indebted-1-136 (metropolis) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.sp.plotHooks:0->+
+101,110c105,114
+< own | 92/92 / 16/48 / 5.84e-20 | 92/92 / 26/48 / 1.07e-12
+< g:110 | 92/92 / 12/48 / 1.98e-23 | 92/92 / 16/48 / 5.84e-20
+< g:101 | 75/92 / 13/48 / 3.28e-10 | 91/92 / 21/48 / 9.26e-15
+< g:011 | 92/92 / 16/48 / 5.84e-20 | 92/92 / 24/48 / 5.04e-14
+< g:100 | 63/92 / 6/48 / 1.00e-10 | 89/92 / 11/48 / 1.62e-20
+< g:010 | 92/92 / 11/48 / 2.29e-24 | 92/92 / 16/48 / 5.84e-20
+< g:001 | 72/92 / 13/48 / 4.74e-9 | 90/92 / 18/48 / 8.02e-16
+< g:000 | 62/92 / 6/48 / 2.21e-10 | 88/92 / 9/48 / 2.04e-21
+< allOpen | 92/92 / 16/48 / 5.84e-20 | 92/92 / 26/48 / 1.07e-12
+< off | 62/92 / 6/48 / 2.21e-10 | 88/92 / 9/48 / 2.04e-21
+---
+> own | 92/92 / 17/48 / 3.74e-19 | 92/92 / 27/48 / 4.72e-12
+> g:110 | 92/92 / 10/48 / 2.44e-25 | 92/92 / 16/48 / 5.84e-20
+> g:101 | 75/92 / 15/48 / 5.73e-9 | 90/92 / 24/48 / 1.05e-11
+> g:011 | 92/92 / 17/48 / 3.74e-19 | 92/92 / 25/48 / 2.36e-13
+> g:100 | 64/92 / 6/48 / 4.47e-11 | 89/92 / 11/48 / 1.62e-20
+> g:010 | 92/92 / 9/48 / 2.40e-26 | 92/92 / 16/48 / 5.84e-20
+> g:001 | 74/92 / 11/48 / 3.79e-11 | 89/92 / 20/48 / 1.90e-13
+> g:000 | 64/92 / 6/48 / 4.47e-11 | 89/92 / 8/48 / 2.06e-23
+> allOpen | 92/92 / 17/48 / 3.74e-19 | 92/92 / 27/48 / 4.72e-12
+> off | 64/92 / 6/48 / 4.47e-11 | 89/92 / 8/48 / 2.06e-23
+136,142c140,146
+<   LOWER BY RULE r3m-city-indebted-1-106 (city) | 40 reads | x.powerNoHouse="1"
+<   LOWER BY RULE r3m-city-insurgency-1-104 (city) | 40 reads | x.powerNoHouse="1" k.powers.modifier="p" k.powers.crisisNote="p"
+<   LOWER BY RULE r3m-city-insurgency-1-114 (city) | 40 reads | x.powerNoHouse="1" k.powers.crisisNote="p"
+<   LOWER BY RULE r3m-city-none-1-117 (city) | 40 reads | x.powerNoHouse="1"
+<   LOWER BY RULE r3m-city-politically_fractured-1-120 (city) | 40 reads | x.powerNoHouse="1"
+<   LOWER BY RULE r3m-city-under_siege-1-108 (city) | 40 reads | x.powerNoHouse="1" k.powers.crisisNote="p"
+<   LOWER BY RULE r3m-metropolis-indebted-1-136 (metropolis) | 40 reads | x.powerNoHouse="1" k.powers.modifier="p"
+---
+>   LOWER BY RULE r3m-city-indebted-1-106 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="n" k.powers.captureState="p"
+>   LOWER BY RULE r3m-city-insurgency-1-104 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="p" k.powers.modifiers="p" k.powers.crisisNote="p" k.powers.captureState="p"
+>   LOWER BY RULE r3m-city-insurgency-1-114 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="n" k.powers.modifiers="p" k.powers.crisisNote="p" k.powers.captureState="p"
+>   LOWER BY RULE r3m-city-none-1-117 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="n" k.powers.captureState="p"
+>   LOWER BY RULE r3m-city-politically_fractured-1-120 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="n" k.powers.modifiers="p" k.powers.crisisNote="p" k.powers.captureState="p"
+>   LOWER BY RULE r3m-city-under_siege-1-108 (city) | 40 reads | x.powerNoHouse="1" k.powers.isGoverning="p" k.powers.modifier="n" k.powers.crisisNote="p" k.powers.captureState="p"
+>   LOWER BY RULE r3m-metropolis-indebted-1-136 (metropolis) | 40 reads | x.powerNoHouse="1" k.powers.modifier="p" k.powers.crisisNote="p"
+167c171
+<   r3m-city-none-1-117 (city) | 2222222222 | 2222222222
+---
+>   r3m-city-none-1-117 (city) | bbbbbbbbbb | 2222222222
+173c177
+<   r3m-city-politically_fractured-1-120 (city) | 2222222222 | 2222222222
+---
+>   r3m-city-politically_fractured-1-120 (city) | bbbbbbbbbb | 2222222222
+175c179
+<   r3m-city-under_siege-1-108 (city) | 2222222222 | 2222222222
+---
+>   r3m-city-under_siege-1-108 (city) | bbbbbbbbbb | 2222222222
+222c226
+<   r3m-town-insurgency-0-14 (town) | bbbbbbbbbb | bbbbbbbbbb
+---
+>   r3m-town-insurgency-0-14 (town) | 2222222222 | 2222222222
+238,239c242,243
+< TODAY: GATE-1 own (off 4, dm 4); off (off 4, dm 4); mixed (off 4, dm 4)
+< TODAY: GATE-1 allOpen (off 4, dm 4); any gated setting (off 4, dm 4); LOWER BY RULE 7
+---
+> TODAY: GATE-1 own (off 6, dm 3); off (off 6, dm 3); mixed (off 6, dm 3)
+> TODAY: GATE-1 allOpen (off 6, dm 3); any gated setting (off 6, dm 3); LOWER BY RULE 7
+241c245
+< GATE: 4 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)
+---
+> GATE: 6 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)

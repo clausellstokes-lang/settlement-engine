@@ -1,0 +1,21 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 17270 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+PART A dm|own k.powers.captureState: dark {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+                                     lit  {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+PART A dm|own k.powers.isGoverning: dark {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+                                    lit  {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+PART A dm|own k.powers.modifier: dark {"village:\"a\"":300,"town:\"a\"":277,"town:\"n\"":16,"town:\"an\"":2,"city:\"a\"":300,"metropolis:\"a\"":300,"town:\"p\"":5}
+                                 lit  {"village:\"a\"":300,"town:\"a\"":277,"town:\"n\"":16,"town:\"an\"":2,"city:\"a\"":300,"metropolis:\"a\"":300,"town:\"p\"":5}
+PART A dm|own k.powers.crisisNote: dark {"village:\"a\"":300,"town:\"a\"":300,"city:\"a\"":300,"metropolis:\"a\"":300}
+                                   lit  {"village:\"a\"":300,"town:\"a\"":300,"city:\"a\"":300,"metropolis:\"a\"":300}
+PART A dm|own r.powers.relations: dark {"village:\"0\"":296,"town:\"0\"":271,"town:\"n\"":14,"town:\"1\"":15,"city:\"0\"":300,"metropolis:\"0\"":300,"village:\"1\"":4}
+                                  lit  {"village:\"0\"":297,"town:\"0\"":271,"town:\"n\"":14,"town:\"1\"":15,"city:\"0\"":300,"metropolis:\"0\"":300,"village:\"1\"":3}
+PART B dm|own k.powers.captureState: dark {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":142,"city:\"p\"":2,"city:\"ap\"":8,"metropolis:\"a\"":135,"metropolis:\"p\"":2,"metropolis:\"ap\"":15}
+                                     lit  {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":142,"city:\"p\"":1,"city:\"ap\"":9,"metropolis:\"a\"":135,"metropolis:\"p\"":2,"metropolis:\"ap\"":15}
+PART B dm|own k.powers.isGoverning: dark {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":127,"city:\"ap\"":23,"city:\"p\"":2,"metropolis:\"a\"":119,"metropolis:\"p\"":2,"metropolis:\"ap\"":31}
+                                    lit  {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":120,"city:\"ap\"":31,"city:\"p\"":1,"metropolis:\"a\"":116,"metropolis:\"ap\"":34,"metropolis:\"p\"":2}
+PART B dm|own k.powers.modifier: dark {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":3,"town:\"ap\"":12,"town:\"an\"":11,"city:\"a\"":142,"city:\"n\"":2,"city:\"an\"":5,"metropolis:\"a\"":135,"metropolis:\"p\"":1,"metropolis:\"ap\"":6,"metropolis:\"an\"":9,"town:\"n\"":9,"metropolis:\"n\"":1,"city:\"ap\"":3}
+                                 lit  {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":3,"town:\"ap\"":12,"town:\"an\"":11,"city:\"a\"":142,"city:\"n\"":1,"city:\"an\"":6,"metropolis:\"a\"":135,"metropolis:\"p\"":1,"metropolis:\"ap\"":6,"metropolis:\"an\"":9,"town:\"n\"":9,"metropolis:\"n\"":1,"city:\"ap\"":3}
+PART B dm|own k.powers.crisisNote: dark {"village:\"a\"":152,"town:\"a\"":152,"city:\"a\"":152,"metropolis:\"a\"":152}
+                                   lit  {"village:\"a\"":152,"town:\"a\"":152,"city:\"a\"":152,"metropolis:\"a\"":152}
+PART B dm|own r.powers.relations: dark {"village:\"0\"":148,"village:\"1\"":4,"town:\"1\"":34,"town:\"0\"":83,"town:\"n\"":35,"city:\"0\"":111,"city:\"1\"":23,"city:\"n\"":18,"metropolis:\"0\"":85,"metropolis:\"n\"":43,"metropolis:\"1\"":24}
+                                  lit  {"village:\"0\"":149,"village:\"1\"":3,"town:\"1\"":33,"town:\"0\"":84,"town:\"n\"":35,"city:\"0\"":99,"city:\"1\"":28,"city:\"n\"":25,"metropolis:\"0\"":79,"metropolis:\"n\"":48,"metropolis:\"1\"":25}

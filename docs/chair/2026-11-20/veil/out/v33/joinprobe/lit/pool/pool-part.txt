@@ -1,0 +1,17 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 16932 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+PART A off|own r.powers.relations: dark {"village:\"0\"":300,"town:\"0\"":277,"town:\"n\"":11,"town:\"1\"":12,"city:\"0\"":300,"metropolis:\"0\"":300}
+                                   lit  {"village:\"0\"":300,"town:\"0\"":277,"town:\"n\"":11,"town:\"1\"":12,"city:\"0\"":300,"metropolis:\"0\"":300}
+PART A off|own r.imports.criminal: dark {"village:\"0\"":300,"town:\"0\"":299,"city:\"0\"":300,"metropolis:\"0\"":300,"town:\"1\"":1}
+                                   lit  {"village:\"0\"":300,"town:\"0\"":299,"city:\"0\"":300,"metropolis:\"0\"":300,"town:\"1\"":1}
+PART A off|own k.powers.captureState: dark {"village:\"a\"":300,"town:\"a\"":300,"city:\"a\"":300,"metropolis:\"a\"":300}
+                                      lit  {"village:\"a\"":300,"town:\"a\"":300,"city:\"a\"":300,"metropolis:\"a\"":300}
+PART A off|own k.powers.isGoverning: dark {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+                                     lit  {"village:\"a\"":300,"town:\"a\"":277,"town:\"p\"":21,"town:\"ap\"":2,"city:\"a\"":300,"metropolis:\"a\"":300}
+PART B off|own r.powers.relations: dark {"village:\"0\"":152,"town:\"0\"":120,"town:\"n\"":13,"town:\"1\"":19,"city:\"0\"":144,"city:\"n\"":6,"city:\"1\"":2,"metropolis:\"0\"":135,"metropolis:\"1\"":6,"metropolis:\"n\"":11}
+                                   lit  {"village:\"0\"":152,"town:\"0\"":120,"town:\"n\"":14,"town:\"1\"":18,"city:\"0\"":144,"city:\"n\"":7,"city:\"1\"":1,"metropolis:\"0\"":135,"metropolis:\"1\"":6,"metropolis:\"n\"":11}
+PART B off|own r.imports.criminal: dark {"village:\"0\"":152,"town:\"0\"":146,"town:\"1\"":6,"city:\"0\"":151,"city:\"1\"":1,"metropolis:\"0\"":152}
+                                   lit  {"village:\"0\"":152,"town:\"0\"":145,"town:\"1\"":7,"city:\"0\"":151,"city:\"1\"":1,"metropolis:\"0\"":152}
+PART B off|own k.powers.captureState: dark {"village:\"a\"":152,"town:\"a\"":152,"city:\"a\"":152,"metropolis:\"a\"":152}
+                                      lit  {"village:\"a\"":152,"town:\"a\"":152,"city:\"a\"":152,"metropolis:\"a\"":152}
+PART B off|own k.powers.isGoverning: dark {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":127,"city:\"ap\"":23,"city:\"p\"":2,"metropolis:\"a\"":119,"metropolis:\"p\"":2,"metropolis:\"ap\"":31}
+                                     lit  {"village:\"a\"":152,"town:\"a\"":117,"town:\"p\"":12,"town:\"ap\"":23,"city:\"a\"":120,"city:\"ap\"":31,"city:\"p\"":1,"metropolis:\"a\"":116,"metropolis:\"ap\"":34,"metropolis:\"p\"":2}
