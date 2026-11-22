@@ -1467,6 +1467,30 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   600,000). DAILY-4 SEATED AT 17:57 UTC (session_01ACmDYaBKhNdEcUSm1G57q1; `prompts/DAILY-4.txt`): the L12 cut;
   4c's merge under this ruling; `tests/lint` whole at the tip; the line merged at the tip the chair names
   (`HAND_CEILING` 77 and the lane's six: 83); the owner's file by `owner/owner-file.mjs`; rule 8; "DAILY-B".
+- E109 · A SEAT RAN OUT OF ROOM UNSEEN; FROM NOW THE CHAIR READS EVERY SEAT'S RECORD, AND A SEAT'S OWN COUNT IS ONLY AN ESTIMATE (2026-11-22 18:02 UTC). VEIL-33 asked for the chair's read of its count: its record's last request
+  at 17:59 carried about 227,000 tokens: and on the chair's question it answered that ITS CONVERSATION BEGINS WITH A
+  SUMMARY ending at about 15:17 UTC (at the push of de8959b0f, PART 34 ruling 99): it had reached the window's end
+  while its own estimate read 560,000; it holds no seating prompt, no first reads, no whole read of 212 or the
+  registry verbatim; since then it has read in full only R5-RECENT's two halves' diffs. THE CHAIR HAD TOLD THE
+  OWNER MINUTES EARLIER that the seat was "at about a quarter of its limit, not near it": wrong in what it implied:
+  CORRECTED TO HIM BY NAME THE SAME HOUR. A CHEAP HELPER THEN READ EVERY SEAT'S RECORD (list_events, kinds result:
+  the last element of `usage.iterations`: input + cache read + cache creation; CONFIRMED by its own reads):
+  VEIL-33 229,791 (after its summary); VEIL-34 484,267 at 17:55 (its read-in cost about 450,000); FORTUNE-7
+  559,486 at 17:47 (its estimate 575,000); CLOSE-2 262,567 at 18:00 (its estimate 110,000); and the retired:
+  CLOSE-1 726,918 at its end (its estimate 590,000), DAILY-3 577,722 (600,000), SEAT-10 653,762 (575,000);
+  DAILY-4 and STACK-99 have no finished turn yet. A SEAT'S ESTIMATE IS WRONG IN EITHER DIRECTION, BY UP TO
+  SEVERAL HUNDRED THOUSAND. RULED: (1) AT EVERY NET a cheap helper reads each working seat's last request size and
+  the chair tells each seat its figure; the hand-over mark (620,000) and the line (700,000) are applied to THE
+  RECORD; (2) VEIL-33 writes its summary into PART 34's section 1; R5-RECENT's merge stays its own on EXECUTED
+  proofs; it builds nothing else on 212; (3) VEIL-34's hand-over unit is A REVIEW FIRST: R5-RECENT's whole diff
+  against its own whole read of 212 and the registry: ACCEPTED or the fault, before R5-DESC is built on it; PART
+  35 and the security reader's packet say that R5-RECENT was integrated by a writer whose context had been
+  summarized and was re-read by its successor; (4) VEIL-34 has about 135,000 before its mark: the review, R5-DESC,
+  perhaps R4-IDS: VEIL-35 IS SEATED ONE UNIT EARLY (when R5-DESC's cure is in build); (5) ASKED OF VEIL-34, which
+  holds the lane's law whole: whether a successor may read a DIGEST of the rulings that still bind (PART 35's
+  section 2) in place of PART 30 and PART 32 whole: it would give each later seat 100,000 or more of working
+  room; 212 and the registry stay read whole; (6) FORTUNE-7 goes on to "FORTUNE-C" while the record stays under
+  700,000 (told at 680,000); CLOSE-2 keeps its context for the final census and the flip.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
