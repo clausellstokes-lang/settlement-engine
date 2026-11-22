@@ -1037,6 +1037,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   LIT HALF (the dark list is CI's own run on the line: the red list). THE SIX NOW: VEIL-33, SEAT-10, FORTUNE-7,
   DAILY-3, CLOSE-1 and the landing place (STACK-98). TEN STAY PARKED; the next place goes to PAGE-12 for its one
   unit (the two reds of point 96 on the line).
+- E81 · WHO RULES' PAGE AND U5-STALE BUILT; TWO JUDGMENTS OF THE BUILDER ACCEPTED (2026-11-22 14:03 UTC; SEAT-10's u7-wip at 8abd0eeb1: the page reads
+  the record's hat-wearer, the fall-back removed; 0 of 160 lit births move; the four "nobody" cases name their
+  office person again; on the six transfers the chain, the Institutions face, the card hats and the tonight seat row
+  agree; law 1 untouched). (1) THE HAT MOVES ONLY OFF A WEARER WHO IS ALSO THE OLD HOLDER HOUSE'S FIRST (the dual
+  hat); the office's own person (a crown's sovereign, a council's own mayor) keeps it: it agrees with CS22 (c) and
+  the 24 measured births; both sides pinned by name. (2) The tonight sheet's HOOK sources still list the man who
+  lost the office on 4 of 6: ACCEPTED AS TRUE (he is still a strong person), on condition that no office word is
+  printed for him. FIRST PAINT: `rulingPower.js` gains about 1,200 unminified bytes in the closure: kept out of the
+  entry chunk by a leaf if a few lines do it, else named for the owner's size signing. ALSO THIS HOUR:
+  "CLOSE-FIXTURE 6f579f0e7" ACCEPTED FOR LANDING (red 0 of 2, green 2 of 2; rule 8 widened: all reds listed; the
+  five figures equal the line's; under the cured script the dark fixture renders 16 lines different, +57 bytes,
+  the town's own brief unchanged: the re-emit is the chair's at the close); FORTUNE-7's U7d (the both-merits line
+  keys on the first merit's sentence having printed: three lines; red 1 of 10 on a planted empty-name event, then
+  green): every unit of "FORTUNE-B" but the line's merge and rule 8 is done.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1512,6 +1526,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    (tips on origin at 13:05: veil-32 fb320eded, seat-10 3df69ec1b, fortune-7 e7cae21cb, daily-3 067e13fcb). VEIL-33:
    pass 2's gates read and the critical of E78. FORTUNE-7: units 0 to 3 done (E79). SEAT-10: U6 merged; U7 with
    U5-STALE building (E77). ELEVEN PARKED. NO PLACE FREED. The chair's branch: origin equals local (e27928ae8).
+- 2026-11-22 14:03 UTC · NET 14. THE LANDING PLACE: STACK-98 in step f, 689 of 1,197 files at 13:51 by its record (alive; the cut-down f2 queued
+   after); no report yet. THE SIX: VEIL-33 (the lane's writer since E80; no line yet since the hand-over); SEAT-10
+   (E81: merging U7 with U5-STALE, then its doors and rule 8); FORTUNE-7 (all but unit 4 done; about 450,000 by its
+   count); DAILY-3 (F2 merged and pushing at 14:01; 458,645 by its record: its mark is near enough to ask at its
+   next line whether "DAILY-B" fits); CLOSE-1 ("CLOSE-FIXTURE" sent; the lit half of the flipped run started).
+   TEN PARKED. NO PLACE FREED. WAITING FOR THE NEXT STACK: "CLOSE-FIXTURE 6f579f0e7".
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
