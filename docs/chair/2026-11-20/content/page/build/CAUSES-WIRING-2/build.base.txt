@@ -1,0 +1,23 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 21043 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+dist/assets/SettlementPDF-DDN1_4_I.js                             194.64 kB │ gzip:  60.80 kB
+dist/assets/convergence-DNN2qBqr.js                               198.59 kB │ gzip:  68.17 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/SettlementsPanel-DX-AWzLE.js                          250.70 kB │ gzip:  76.31 kB
+dist/assets/applyWorldPulse-DlJXywx-.js                           263.06 kB │ gzip:  88.58 kB
+dist/assets/coherence-lazy--Bvl9fFf.js                            285.52 kB │ gzip:  96.49 kB
+dist/assets/npcComponents-BTnTIxkc.js                             289.15 kB │ gzip:  73.17 kB
+dist/assets/engine-core-Kd9yUXZa.js                               310.27 kB │ gzip:  99.82 kB
+dist/assets/advanceInterval-BVjiyb6y.js                           471.67 kB │ gzip: 156.09 kB
+dist/assets/index-BlTiiOyc.js                                     489.00 kB │ gzip: 155.46 kB
+dist/assets/engine-imBGlkI9.js                                    927.49 kB │ gzip: 304.10 kB
+dist/assets/vendor-pdf-CJyk-MIG.js                              1,852.21 kB │ gzip: 616.93 kB
+dist/assets/data-lazy-CKwpLdeV.js                               1,963.87 kB │ gzip: 509.05 kB
+✓ built in 50.25s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 314 static route documents (13 views + 15 gallery hubs + 275 compendium entries + 11 compendium sections) under dist/
+[gate-tail] end:  08:46:29 up  1:00,  0 user,  load average: 1.82, 1.38, 1.62
+[gate-tail] full log: /tmp/gate-tail.21357.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

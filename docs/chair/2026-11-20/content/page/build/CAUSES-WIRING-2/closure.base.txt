@@ -1,0 +1,13 @@
+CLOSURE-FILE raw     5362 gzip    2610 br    2244 content-identity-BiMB_uYV.js
+CLOSURE-FILE raw   156695 gzip   46204 br   37912 data-DyhM_cC1.js
+CLOSURE-FILE raw   310265 gzip   99666 br   83831 engine-core-Kd9yUXZa.js
+CLOSURE-FILE raw   489003 gzip  155263 br  128775 index-BlTiiOyc.js
+CLOSURE-FILE raw     4960 gzip    2571 br    2320 kernel-CpshneWc.js
+CLOSURE-FILE raw     3579 gzip    1472 br    1319 vendor-icons-aOW4IQH8.js
+CLOSURE-FILE raw   193176 gzip   60454 br   52076 vendor-react-DsScxBXT.js
+CLOSURE-FILE raw    17046 gzip    7106 br    6420 vendor-state-DXnjcO3h.js
+CLOSURE files 8 raw 1180086 gzip 375346 brotli 314897
+TABLE data/tensionSideMeanings.js marker "Those who profit from the muddle" in data-lazy-CKwpLdeV.js (lazy), pdfRender.worker-Ci4U9YKn.js (lazy)
+TABLE data/tensionSidePower.js marker "solePowerNameOf" in no chunk (minified away or absent)
+TABLE data/tensionCauses.js marker "governedByTrade" in no chunk (minified away or absent)
+TABLE domain/display/tensionShown.js marker "tensionSidesShown" in no chunk (minified away or absent)

@@ -1,0 +1,317 @@
+PAIR toPublicSafe + default veil hxd-town-8 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-town-8 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-2 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-2 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-4 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-4 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-5 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-5 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-7 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-7 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-10 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-10 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-11 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-11 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-13 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-13 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-14 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-14 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-17 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-17 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-20 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-20 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-22 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-22 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-23 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-23 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-25 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-25 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-28 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-28 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-29 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-29 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-30 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-30 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-37 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-37 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-39 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-39 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-41 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-41 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-43 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-43 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-46 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-46 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-47 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-47 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-city-48 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-city-48 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-0 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-0 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-2 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-2 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-4 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-4 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-6 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-6 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-7 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-7 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-8 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-8 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-12 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-12 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-14 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-14 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-16 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-16 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-19 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-19 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-20 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-20 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-22 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-22 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-23 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-23 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-24 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-24 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-25 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-25 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-26 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-26 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-30 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-30 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-33 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil hxd-metropolis-33 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil hxd-metropolis-36 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-36 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-39 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-39 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-40 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-40 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-46 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-46 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil hxd-metropolis-48 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil hxd-metropolis-48 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-hamlet-20 owner-row law_thin declares ["law: ≤ critical"] flips ["law: ≤ critical"] reads-hidden true served-row force_unpaid_or_cut member
+PAIR toPublicSafe full + default veil r2r-hamlet-20 owner-row law_thin declares ["law: ≤ critical"] flips ["law: ≤ critical"] reads-hidden true served-row force_unpaid_or_cut member
+PAIR toPublicSafe + default veil r2r-town-26 owner-row outlaws_near declares ["house: outlaws"] flips ["house: outlaws"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-town-26 owner-row outlaws_near declares ["house: outlaws"] flips ["house: outlaws"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-town-42 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-town-42 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-2 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-2 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-7 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-7 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-9 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-9 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-10 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-10 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-11 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-11 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-13 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-13 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-17 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-17 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2r-city-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2r-city-20 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-20 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-21 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-21 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-23 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-23 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-31 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-31 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-32 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-32 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-37 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-37 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-40 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-40 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-42 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-42 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-45 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-45 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-46 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-46 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-47 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-47 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-48 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-48 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-51 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-51 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-53 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-53 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-54 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-54 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-55 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-55 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-city-56 owner-row criminal_power declares [] flips [] reads-hidden false served-row rival_rings SIGNATURE
+PAIR toPublicSafe full + default veil r2r-city-56 owner-row criminal_power declares [] flips [] reads-hidden false served-row rival_rings SIGNATURE
+PAIR toPublicSafe + default veil r2r-city-57 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-city-57 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-11 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2r-metropolis-11 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2r-metropolis-16 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-16 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-19 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-20 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-20 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-29 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-29 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-31 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-31 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-32 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-33 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-33 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-35 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-35 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-36 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-36 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-37 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-37 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-40 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-40 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-42 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-42 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-46 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-46 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-48 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-48 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-50 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-50 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-51 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-51 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-52 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2r-metropolis-52 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2r-metropolis-54 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-54 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-56 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-56 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2r-metropolis-57 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2r-metropolis-57 owner-row assassins declares ["house: assassins"] flips ["house: assassins"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-under_siege-metropolis-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-under_siege-metropolis-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-under_siege-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-under_siege-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-occupied-city-1 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-occupied-city-1 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-occupied-metropolis-0 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-occupied-metropolis-0 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-indebted-city-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-indebted-city-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-indebted-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2s-indebted-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2s-recently_betrayed-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-recently_betrayed-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-recently_betrayed-city-2 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-recently_betrayed-city-2 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-recently_betrayed-metropolis-0 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-recently_betrayed-metropolis-0 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-recently_betrayed-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-recently_betrayed-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-infiltrated-town-1 owner-row outlaws_near declares ["house: outlaws"] flips ["house: outlaws"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-infiltrated-town-1 owner-row outlaws_near declares ["house: outlaws"] flips ["house: outlaws"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-infiltrated-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-infiltrated-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-infiltrated-city-2 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-infiltrated-city-2 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-infiltrated-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-infiltrated-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-infiltrated-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2s-infiltrated-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2s-infiltrated-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-infiltrated-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-plague_onset-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-plague_onset-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-plague_onset-city-2 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-plague_onset-city-2 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-plague_onset-metropolis-0 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-plague_onset-metropolis-0 owner-row whisper_market declares ["house: whisper_market"] flips ["house: whisper_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-plague_onset-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-plague_onset-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-plague_onset-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-plague_onset-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-succession_void-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-succession_void-city-0 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-succession_void-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-succession_void-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-succession_void-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-succession_void-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-succession_void-metropolis-0 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-succession_void-metropolis-0 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-monster_pressure-city-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-monster_pressure-city-0 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-monster_pressure-city-2 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-monster_pressure-city-2 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-monster_pressure-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-monster_pressure-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-monster_pressure-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-monster_pressure-metropolis-2 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-monster_pressure-metropolis-3 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-monster_pressure-metropolis-3 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-insurgency-city-1 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-insurgency-city-1 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-insurgency-metropolis-3 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-insurgency-metropolis-3 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-religious_conversion-metropolis-0 owner-row criminal_power declares [] flips [] reads-hidden false served-row rival_rings SIGNATURE
+PAIR toPublicSafe full + default veil r2s-religious_conversion-metropolis-0 owner-row criminal_power declares [] flips [] reads-hidden false served-row rival_rings SIGNATURE
+PAIR toPublicSafe + default veil r2s-slave_revolt-city-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-slave_revolt-city-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-slave_revolt-city-3 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-slave_revolt-city-3 owner-row contraband_water declares ["house: smuggling","navigable"] flips ["house: smuggling"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-slave_revolt-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe full + default veil r2s-slave_revolt-metropolis-1 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row criminal_power member
+PAIR toPublicSafe + default veil r2s-wartime-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-wartime-city-1 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-wartime-city-3 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-wartime-city-3 owner-row black_market declares ["house: black_market"] flips ["house: black_market"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-wartime-metropolis-0 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-wartime-metropolis-0 owner-row underground declares ["house: underground"] flips ["house: underground"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-wartime-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-wartime-metropolis-1 owner-row thieves_house declares ["house: thieves_guild"] flips ["house: thieves_guild"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-wartime-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-wartime-metropolis-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe + default veil r2s-mass_migration-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+PAIR toPublicSafe full + default veil r2s-mass_migration-city-3 owner-row rival_rings declares ["rival rings"] flips ["rival rings"] reads-hidden true served-row plain member
+ROW rival_rings pairs 132 declares ["rival rings"] reads-hidden 132 declared-atom-flips 132 FAULT 0 served: member 132 SIGNATURE 0 by row {"plain":118,"criminal_power":14}
+ROW black_market pairs 60 declares ["house: black_market"] reads-hidden 60 declared-atom-flips 60 FAULT 0 served: member 60 SIGNATURE 0 by row {"plain":60}
+ROW thieves_house pairs 32 declares ["house: thieves_guild"] reads-hidden 32 declared-atom-flips 32 FAULT 0 served: member 32 SIGNATURE 0 by row {"plain":32}
+ROW assassins pairs 20 declares ["house: assassins"] reads-hidden 20 declared-atom-flips 20 FAULT 0 served: member 20 SIGNATURE 0 by row {"plain":20}
+ROW underground pairs 18 declares ["house: underground"] reads-hidden 18 declared-atom-flips 18 FAULT 0 served: member 18 SIGNATURE 0 by row {"plain":18}
+ROW whisper_market pairs 12 declares ["house: whisper_market"] reads-hidden 12 declared-atom-flips 12 FAULT 0 served: member 12 SIGNATURE 0 by row {"plain":12}
+ROW contraband_water pairs 10 declares ["house: smuggling","navigable"] reads-hidden 10 declared-atom-flips 10 FAULT 0 served: member 10 SIGNATURE 0 by row {"plain":10}
+ROW outlaws_near pairs 4 declares ["house: outlaws"] reads-hidden 4 declared-atom-flips 4 FAULT 0 served: member 4 SIGNATURE 0 by row {"plain":4}
+ROW criminal_power pairs 4 declares [] reads-hidden 0 declared-atom-flips 0 FAULT 0 served: member 0 SIGNATURE 4 by row {"rival_rings":4}
+ROW law_thin pairs 2 declares ["law: ≤ critical"] reads-hidden 2 declared-atom-flips 2 FAULT 0 served: member 2 SIGNATURE 0 by row {"force_unpaid_or_cut":2}
+COUNTS pairs 294
+DECLARED criminal_power hideable true holds criminalPowerSeated declares []
+DECLARED law_thin hideable true holds lawCriticalOrCollapsed declares ["law: ≤ critical"]
+DECLARED rival_rings hideable true holds rivalRings declares ["rival rings"]
+DECLARED no_force hideable true holds noForceKept declares ["no force: kept","no garrison","no watch","no militia"]
+DECLARED force_unpaid_or_cut hideable true holds forceUnpaidOrCut declares ["force: kept"]
+DECLARED thieves_house hideable true holds thievesGuildHouse declares ["house: thieves_guild"]
+DECLARED contraband_water hideable true holds smugglingByWater declares ["house: smuggling","navigable"]
+DECLARED underground hideable true holds undergroundHouse declares ["house: underground"]
+DECLARED assassins hideable true holds assassinsHouse declares ["house: assassins"]
+DECLARED black_market hideable true holds blackMarketHouse declares ["house: black_market"]
+DECLARED whisper_market hideable true holds whisperMarketHouse declares ["house: whisper_market"]
+DECLARED outlaws_near hideable true holds outlawsHouse declares ["house: outlaws"]
