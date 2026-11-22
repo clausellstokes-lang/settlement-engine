@@ -25,7 +25,7 @@
  *   (U7) LASTING, THE SECOND MERIT (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC): the law's table
  *       holds one DRAFT lasting age for each size, inside that size's own age range; `meritsOf` credits `lasting` on
  *       every forced birth exactly where `history.age` reaches its size's age through the same gates; two merits are two
- *       reasons at the Endorsed guard; the edge is the table's own figure and the size is read as the record carries it;
+ *       reasons at the Endorsed guard; the edge is the table's own figure and the size is read from `tier` alone;
  *       law 1 and a legacy config move nothing; a lit place without it holds the first merit's legitimacy exactly; at
  *       every capture rung and on the shared read under the widest veil, a lasting place carries the same merits.
  *
@@ -332,8 +332,8 @@ describe('U5a (S) — every input of the merit is served, unchanged, on every sh
 
 describe('U7 — LASTING, the second merit: a place that has lasted, through the same gates and points', () => {
   const seams = { bandFor: legitimacyBandFor, recapture: withCaptureRelations, restand: settleStandingToLegitimacy };
-  /** the lasting age of the size the record carries (`tier`, else `config.settType`), from the law's table */
-  const lastingAgeOf = (/** @type {any} */ town) => STANDING.lastingAgeBySize[town.tier ?? town.config?.settType];
+  /** the lasting age of the size the record carries (`tier` alone), from the law's table */
+  const lastingAgeOf = (/** @type {any} */ town) => STANDING.lastingAgeBySize[town.tier];
   /** does the record pass the merits' gates, on the birth's own score? */
   const gated = (/** @type {any} */ town) => {
     const pl = town.powerStructure.publicLegitimacy;
@@ -379,7 +379,7 @@ describe('U7 — LASTING, the second merit: a place that has lasted, through the
     expect(lone.score).toBe(LEGITIMACY_CUTS.endorsed - 1);
   });
 
-  it('the edge is the table\'s own figure, and the size is read as the record carries it (tier, else config.settType)', () => {
+  it('the edge is the table\'s own figure, and the size is read from tier alone (no tier, no lasting)', () => {
     const town = lasting()[0]?.town;
     expect(town).toBeTruthy();
     const edge = lastingAgeOf(town);
@@ -394,8 +394,8 @@ describe('U7 — LASTING, the second merit: a place that has lasted, through the
     expect(meritsOf(at(edge)).includes('lasting')).toBe(true);
     expect(meritsOf(at(edge - 1)).includes('lasting')).toBe(false);
     expect(at(edge).powerStructure.publicLegitimacy.breakdown.merits).toBeGreaterThan(at(edge - 1).powerStructure.publicLegitimacy.breakdown.merits ?? 0);
-    expect(meritsOf(at(edge, 'drop')).includes('lasting')).toBe(true);
-    expect(meritsOf(at(edge - 1, 'drop')).includes('lasting')).toBe(false);
+    expect(meritsOf(at(edge, 'drop')).includes('lasting')).toBe(false);
+    expect(meritsOf(at(Number.MAX_SAFE_INTEGER, 'drop')).includes('lasting')).toBe(false);
     expect(meritsOf(at(Number.MAX_SAFE_INTEGER, 'nowhere')).includes('lasting')).toBe(false);
   });
 
