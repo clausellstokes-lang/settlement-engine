@@ -1413,6 +1413,33 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `lane/flip-2026-11-22` in the recipe's four steps on "BUILD THE FLIP". THE SEVENTH HANDOFF's "the flip is the
   chair's unit" IS KEPT AS THE CHAIR'S RESPONSIBILITY (it rules the surprises, reads the dials' commit whole, lands
   it); the keystrokes are a seat's; the owner's signings stay his.
+- E105 · THREE SEATS NEAR THEIR MARKS AT ONCE: HOW EACH LANE REACHES ITS LANDING LINE (2026-11-22 17:42 UTC). FORTUNE-7 (about 575,000; U8's cure in build: `densityRoll.js`, `applyDensityLaw.js`, the guard's
+  lit arm, `measures/u8/crisis-body.mjs`; its diagnosis on origin as `lane/fortune-7-2026-11-22-u8-wip` at 9a0512c02):
+  "FORTUNE-C" NO LONGER MERGES THE LINE'S NEW TIP: the lane is FORTUNE-B (point 100 of the stack in its gate) plus
+  U8's commits, and THE NEXT STACK merges it onto point 102 (the registers and the classed `HAND_CEILING` are the
+  landing's work); it runs rule 8 once on the lane as it stands and sends the line itself, the three counts first
+  (crisis places with no power of the crisis: lit before, lit after, DARK: the dark one owed to the owner); only if
+  that would pass 640,000 does it hand over at U8's merge. DAILY-3 (about 560,000; 4b MERGED at fcf8a7aef, both
+  cures green; L8's three rows and 4c in their builders): it merges L8 and 4c, then "DAILY-3 HANDS OVER <commit>";
+  DAILY-4 (`prompts/DAILY-4.txt`, a draft with two placeholders) is seated in its place and BUILDS NOTHING: the tip
+  proven, the line merged at the tip the chair names (`HAND_CEILING` 77 and the lane's six: 83), the owner's file
+  (six places, one a size, the page before and after), rule 8, "DAILY-B <commit>". THE CLOSE: E104.
+- E106 · CLOSE-2 SEATED; THE LANDING's DOORS; A QUESTION OF THE GOLDEN TWIN LEFT OPEN (2026-11-22 17:42 UTC). "CLOSE-1 DONE 935c3d633" at 17:40: JOIN pushed at a1319f388 (`lane/close-1-2026-11-22-join-wip`: by its builder,
+  PLAUSIBLE: the roster check lives in arm (a), its plant reds (a), the duplicate is cut; `tests/lint` whole 3 of
+  3,364, the line's); GOLDEN-LIT pushed at ba0e1c288 (`…-golden-wip`, from the lit ref, four commits: the test
+  `tests/property/generatorGoldenMasterLit.test.js`, `close/OWNER-GOLDEN-LIT.md`, the lighting census, the mutation
+  manifest; NO manifest and NO shift record made; by its builder, PLAUSIBLE: with no manifest the test is RED BY
+  NAME; against a scratch manifest green in about 55 seconds and a planted row reds; lit against dark 525 of 525
+  rows differ; the door needs a `.golden-freeze-register.json` row that belongs to the owner's signing act; the
+  dark master reproduces 0 of 525 rows of its own manifest on the lit ref: PLAUSIBLY the line's drift since the
+  record of 2026-11-19: if the dark line shows the same, THE OWNER SIGNS TWO RECORDS at the close, the dark
+  master's and the lit twin's). CLOSE-2 SEATED AT 17:42 UTC (session_01ACmDYZKhD2ZTU9VKzNg4ZE; `prompts/CLOSE-2.txt`)
+  on CLOSE-1's last commit. OPEN, FOR THE CHAIR TO RULE ON CLOSE-2's PROPOSAL: how a test that is red by name until
+  the owner signs lands in the flip's stack (red and listed as his, or parked by the lighting census's own rule).
+  "STACK-99 DOORS 04c270eae2d622b6ab2ddc46e293733d39299f12" at 17:07: `tests/lint` whole 3 failed of 3,364 after
+  one door (the lighting census: 3,771 to 3,774 files); the wiring census's check green; no other register red;
+  its step e running. THE NEXT STACK STANDS ON 04c270eae. THE SIX: VEIL-33, VEIL-34, FORTUNE-7, DAILY-3, STACK-99,
+  CLOSE-2. CLOSE-1 done.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1989,3 +2016,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61. DONE (E85): tip 7c03296d8, joined to the line by 4799b293f; no further run |
 | VEIL-34 | session_01ACmDYZ5m4beq8gsAMyMoZd | `lane/veil-33-2026-11-22` as it stood at 16:11 UTC on 2026-11-22 (beside VEIL-33) | `lane/veil-34-2026-11-22` | the share veil's next writer (E89, E92, E102): reads in, re-makes the pool, prepares R5-DESC and R4-IDS; the one writer of 212 from VEIL-33's hand-over line: R5-DESC, R4-IDS, (iv), (v), (vi), IMPORT-DOOR, "R3" |
 | STACK-99 | session_01ACmDYWhdEXf7vcmpySd5Yw | the working line `lane/join-2026-11-14` at c110dd85b (point 98) | `lane/stack-99-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E103): points 99 to 102 under one gate: the close's fixture cure, FORTUNE-B, PAGE-BAR7, SEAT-B; the chair alone moves the line |
+| CLOSE-2 | session_01ACmDYZKhD2ZTU9VKzNg4ZE | `lane/close-1-2026-11-22` at 935c3d633 (CLOSE-1's last commit; it is done) | `lane/close-2-2026-11-22` | the close's second seat (E104, E106): JOIN's re-runs and "JOIN <commit>"; GOLDEN-LIT read and proven; the final census on "THE LINE IS READY <tip>"; the flip's branch on "BUILD THE FLIP" |
