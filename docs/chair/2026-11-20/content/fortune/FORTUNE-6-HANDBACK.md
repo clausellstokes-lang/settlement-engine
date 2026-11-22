@@ -37,12 +37,27 @@ NEXT STEP: on the chair's confirmation of the split, seat ONE builder for the wo
    the dark cohort (1,425 -> 1,423); (2) `yearsAgo on legacyAnnotations` becomes a true read (LIT 700 -> 701); (3)
    the closures web-transitive 1,077, dossier-pdf 614, campaign-pdf 212, world-book 227, foundry 510, webWhole 1,876.
    No identity is new. All three identities go on the veil reader's list, beside the served fields.
-4. (the chair, 02:58 UTC, from reading Cobamal) A flood, a plague, a siege or a shortage HITS a place; a tyranny, a
-   purge or an occupation is LIVED UNDER. Wordings A and C ("{event} hit {place}") are eligible ONLY where the event's
-   kind strikes. Wording B is eligible for every kind, and is the only one for kinds that are lived under. Declare it
-   in the pool by the event's own `templateType`, through the one door, still the mixed keyed pick over the eligible
-   wordings. First the list of kinds to the chair, then one builder. U5b, the re-measure and the hand-back are
-   accepted; the chair read the three pages at 48cbca5cf.
+4. (the chair, 02:58 UTC, from reading Cobamal; confirmed 03:23 UTC; SUPERSEDED at 03:38 UTC by item 5) A split of
+   the wordings by the event's kind ("strikes" against "lived under"). The chair read the three pages at 48cbca5cf and
+   accepted U5b, the re-measure and the hand-back.
+5. (the chair, 03:38 UTC) THE ATOM IS NOT GRANTED AND THE SPLIT IS WITHDRAWN: no vocabulary row, no closed list, no
+   `needsContext`. No wording says "hit". A and C take B's opening, and the `{ago}` time words retire (only `{past}`
+   stays: "only a few years past" / "within living memory"):
+   A "{event} is {past} at {place}; the place came through it, and its people hold the more firmly to {seat}."
+   B "{event} is {past} at {place}; having come through it, people there are slower to turn on {seat}." (unchanged)
+   C "{event} is {past} at {place}, and coming through it has left its people readier to stand by {seat}."
+   No new need is declared; the pool goes through the door as before; the pick is unchanged. The pool's row goes on
+   the sameness hand list (`HAND_CEILING` 73 -> 74, its comment extended), AFTER merging the line's f5295e425.
+6. (the chair, 03:50 UTC) THE FIRST-PAINT CURE: `fortuneMerits.js` gains an `ENGINE_SHARED_DOMAIN_EXCISIONS` row AND is
+   pinned into the `fortune-law` chunk, U6's form exactly (never the excision without the pin). U5a made this regression
+   against U6's own proof; it is cured on the lane BEFORE the landing line. Proof: first paint's three figures beside
+   the line's f5295e425 build, the residual named file by file; `fortuneLaw.js`, `bandLadders.js` and
+   `legacyUnresolvedWordings.js` out of every first-paint chunk; `engineChunkLazy` green on the fresh dist; the
+   `vite.config.js` comment true again. `vite.config.js` is shared between lanes: append only, the lines listed for the
+   join. Churn on unchanged sources is accepted only as what remains once those four files are out, by its figure.
+   The size account goes into this hand-back.
+7. (the chair, 03:23 UTC, rule 8) Beside the directories, every test file anywhere under `tests/` that names a module
+   the lane changed.
 
 ## 3. For the join and the security reader
 
