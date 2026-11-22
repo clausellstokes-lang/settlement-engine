@@ -523,6 +523,25 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   income-row half of "smuggling" is not built: a smugglers line prints only where a smuggling house lives); the
   hideable need is lawful in an owner-only table and is named for the security reader; (3) E1's standing test runs 5
   births a size, the 900 stay in the measure's script with its result in the test's header. E2 is building.
+- E39 · THREE REDS AT THE STACK'S `tests/lint` THAT NO LIST HOLDS, TRACED AND THEIR CURES READY (2026-11-22 06:32 UTC; the helper cures nothing
+  and reports them; the chair traced them in a scratch copy of the stack's top, c35847792, without touching the
+  line's worktree). (1) `proseEntryContradiction.walker`, the QUALIFY arm's count of entries carrying a trailing
+  coordinate: 392 against 391: POINT 94's: the chair's own rewording of DS-ECO-11 "worked out, recovers in time" v6
+  ("…for the present, but not for good; given time, there will be something to take again.") joined the class
+  (measured: that one entry joined, none left); the class is report-only and re-keyed at every corpus change. (2)
+  `negativeAssertionAnchor.walker`: `tests/domain/warFaithStateProseDesk.test.js` 759 and 760: POINT 94's: the
+  builder's `// anchored:` marker was wrapped over two comment lines, which the walker's header names as the known
+  pitfall. (3) The same walker: `tests/domain/display/troubleHooksShared.test.js` 134: POINT 96's: the gap's
+  `not.toContain` (E35's (D)) carries no marker: THE CHAIR'S OWN FAULT IN PART: it told PAGE-12 to re-run only four
+  things after that cure and left `tests/lint` whole out. THE CURES (tests and comments only; verified in the scratch
+  copy: the two walkers and the two test files, 69 of 69; eslint clean; saved as `cure96/cure96.patch` in the
+  chair's scratch): the count re-keyed to 392 with its cause; the two anchors each on ONE line above its assertion;
+  the gap's negative put after its positive with the marker above it. APPLIED ON THE LINE BY THE CHAIR'S HAND WHEN THE
+  HELPER REPORTS, then `tests/lint` whole again and the changed files, then the push. TWO LESSONS: (a) AFTER ANY
+  CHANGE TO A TEST FILE, HOWEVER SMALL, `tests/lint` WHOLE (walkers read the test corpus itself): now item 11 of
+  `COMMON-EIGHTH.txt`; (b) a builder of the chair's own runs `tests/lint` whole before it reports (prose-4's did
+  not). OWED, NOT NOW: v6's "; …" afterthought is the form the owner's style law dropped from the power blocks: it is
+  re-read at the state sentences' next unit.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
