@@ -137,6 +137,8 @@ describe('R3-TELL-4 (ruling 73 (2)): the joint tell\'s cure on hand plants, the 
     note('R3-TELL-4 unit 1, people.allegiance on the hiding plant: hiding reads', hiding, '| engine:kind:state (cards):', J(seen), '| faults', bad.length, '| tooth: kept allegiances served', keptServed, 'not byte for byte', tooth.length,
       bad.length ? `\n  ${bad.slice(0, 12).join('\n  ')}` : '');
     expect(hiding).toBeGreaterThan(0);
+    // (V33-Q, ruling 72 (c)'s second tooth: the tooth judges something; with no kept allegiance served it would pass empty)
+    expect(keptServed).toBeGreaterThan(0);
     expect(tooth).toEqual([]);
     expect(bad).toEqual([]);
   }, ARM_TIMEOUT_MS);
