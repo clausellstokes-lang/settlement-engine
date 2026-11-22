@@ -24,8 +24,8 @@ verified by ls-remote).
   manifest TOTALITY now green.
 - A RED THE SEAT'S RE-RUNS MISSED, FOUND BY THE PRE-PUSH HOOK (02:19): `typecheck:ratchet` refused the push of 66e43865d:
   `galleryRosterChoices.js` 1 error, baseline 0 (TS2339 at the unit's second `svc.criminal.filter`: the narrowing reset by the
-  first assignment). The builder is resumed for ONE cure commit (no behaviour change, no baseline raised); the lane's push waits
-  for it. LESSON for every later unit: the seat's re-runs add `node scripts/check-full-typecheck.mjs` before the merge.
+  first assignment). CURED: c60daddd2 (the two filters on one typed local), merged; re-run by the seat: check-full-typecheck 0 (red at
+  964426a72), eslint 0, Tell3+4+5 + registry walker 16/16. LESSON for every later unit: the seat's re-runs add `node scripts/check-full-typecheck.mjs` before the merge.
 - TWO STOPS TO THE CHAIR (the builder's; `out/v31/tell5/TELL5-HANDBACK.md`): (1) sp.crimeTypes, r3m-city-under_siege-1-108: the
   one type left, "black market food", is the siege's own: VR39 keeps it; (2) sp.ops, r3m-town-infiltrated-0-12 and
   r3m-town-insurgency-0-14: "Gambling Den" is accounted for by a SERVED house carrying that label. NOT CLOSED as ruling 74
@@ -59,7 +59,7 @@ verified by ls-remote).
   FOR THE JOIN, cured by no one on this lane unless the chair rules. ONE MORE THE MERGES CARRIED: `mutationCoverageManifest`
   TOTALITY names `galleryVeilTell3`/`galleryVeilTell4.pglite.test.js` (no manifest entry; green at 2437ffea0): given to the builder
   as UNIT 0b (its own commit; the lane's precedent entry `{kind: rationale, ref: pglite-executed}`); told the chair (vetoable).
-- DONE: BUILDER R3-TELL-5 (an Agent subagent of this seat,
+- DONE (its unit (ii) sitting and its cure): BUILDER R3-TELL-5 (an Agent subagent of this seat,
   the seat's own tier) seated ~00:11 on worktree `/home/user/wt/r3tell5`, branch `v31-r3tell5` (local, cut at f22bb8324): unit 0
   (ruling 77's marker) then unit (ii); it waits for the seat's chain before any heavy run. If this seat stops, its work goes up
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
@@ -122,3 +122,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 01:01 the chair's 00:57 message read: ruling 79. 01:01 PART 32 sections 2, 2b.
 - (before 01:25, not clocked) the builder returned (units 0, 0b, (ii); two STOPS); its branch pushed `-wip`; diff read whole once. 01:25 chain2 (the seat's re-runs); 02:06 END, every figure reproduced. 66e43865d merged. 02:17 tests/lint whole at the merge running.
 - 02:19 the lane's push REFUSED by the pre-push typecheck ratchet (section 1); the builder resumed for the cure.
+- 02:22 the cure c60daddd2 re-run and merged; the lane pushed.
