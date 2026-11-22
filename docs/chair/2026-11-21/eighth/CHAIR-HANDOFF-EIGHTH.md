@@ -271,6 +271,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the walker's own reading (a temporary, uncommitted dump; no script exists): the lane runs it for its own two tables
   only, the diff's counts by table and by house in the commit. A CONSEQUENCE FOR THE DISPLAY LANE: its merge of the
   line comes AFTER the trouble lane is landed (the walker's cures arrive with it); `PAGE-13.txt` says so.
+- E22 · A MERGE CAN RAISE A SHRINK-ONLY ROW WITH NO GATE READING IT: EVERY LANDING NOW LISTS WHAT ROSE (ruled 2026-11-22 04:25 UTC). FOUND
+  from FORTUNE-6's own note: at its merge of the line it took ITS LANE'S side of the registers, then ran each door
+  ("each door re-derives from the tree"). True of a census; NOT of a door that only tightens: where the line holds a
+  row lower than the lane's tree measures, the line's side makes it red and seen; the lane's side leaves it loose and
+  green, and at the landing nothing conflicts there any more, so the stack's "line's side" rule never fires and the
+  row lands. ORDERED OF FORTUNE-6 before "FORTUNE <commit>": one table: every register its merge conflicted on, and
+  for each shrink-only one or ceiling, row by row against the line at f5295e425, no row above the line's but the
+  three writer-reach movements already ruled (COMMON-RULES 9's three-way form). FOR EVERY LANDING FROM NOW:
+  `landing/raised.py <before> <after>` (the brief's new step c2): it lists every register leaf that rose and every
+  named ceiling or budget that moved; it judges nothing; THE CHAIR READS IT BEFORE IT PUSHES THE LINE. Run over this
+  chair's own landings (a64619510 to f5295e425, points 87 to 93): census counts, scan statistics, pool line counts
+  and the ruled `HAND_CEILING` only: nothing raised unread.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -476,6 +488,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   WHOLE before its next merge and says so. FROM NOW EVERY NET READS ALL FOUR COUNTS and writes them here. Spent so far
   by the seats' own records: 57.49, 24.68, 57.70 and 39.79 (179.66 together). POINT 94's long run is still going
   (started 04:05). THE NEXT NET is set for about 05:25.
+- 2026-11-22 04:25 UTC · TWO SEATS WROTE AND WERE ANSWERED. VEIL-31: UNIT (iii) MERGED (8807cde93; the lane pushed at 5d664d585): GATE-1 4 of 92
+  with 7 LOWER BY RULE; GATE-2 20 of 40 red (from 26); the server equals the twin in every cell; `tests/lint` the
+  sixteen standing only. UNIT (vii) NEXT, AND ITS CAUTION ACCEPTED: the house-free twin is ANOTHER DRAW (criminal
+  content of its own in 81 of 92), so "served equals twin on all 92" would red on the draw: the builder sorts every
+  difference by cause, cures only the veil's, and PROPOSES the arm. FIXED BY THE CHAIR: the arm is owed BEFORE "R3";
+  its reference is THE RECORD (what is derived from served facts alone is present in each served list; a fallback
+  stands only where nothing is owed), never the twin's draw: the twin is the witness, not the oracle. FORTUNE-6:
+  compacted once at about 01:40 and re-read its prompt, both common files and its rulings; the first-paint cure is
+  RULED AND NOT YET BUILT (the same builder, after the rewording of A and C); the lane before the cure reads
+  1,186,120 / 377,705 / 317,071 beside the line's 1,179,511 / 375,172 / 315,169; the two U6 titles of
+  `engineChunkLazy` are the cure's red-first (the old "needs a fresh dist" reading was wrong). E22 came of its
+  second note. The chair's branch is on origin at 5338bb123 (04:25; the hook green).
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
