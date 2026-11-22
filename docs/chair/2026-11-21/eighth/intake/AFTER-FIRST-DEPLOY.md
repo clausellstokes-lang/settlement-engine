@@ -73,6 +73,8 @@ keys with no reader since the button went. Also the owner's: the server's AI dai
 
 ## 9. The Daily Life page as printed: three things read on six places (E110)
 
+**MOVED BEFORE THE FIRST DEPLOY BY THE OWNER'S ORDER ("Fix all:", 2026-11-22; recorded 20:22 UTC): all three are DAILY-4's unit "(0c) THE OWNER'S THREE" (E125). This entry stays as the record of what was read; it is no longer waiting.**
+
 (a) ONE FACT TWICE ON ONE PAGE: the city hxd-city-0 opens "The country around is overrun with beasts…" (outsider impressions) and closes "Beasts
 now roam the country around…" (recent changes): a later slot should not repeat a fact an earlier slot printed (it draws its next line). (b) THE
 SAME SENTENCE ON TWO OF SIX PLACES ("People do as the Headman's Authority says, but few of them think well of it."; "Ask who decides things here,

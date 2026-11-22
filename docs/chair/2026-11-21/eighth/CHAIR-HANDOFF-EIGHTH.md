@@ -138,6 +138,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   file sent to him): he may change the order. (4) AT THE FLIP HE SIGNS TWO GOLDEN RECORDS (E111). (5) THE VETOABLE
   RULING ON A HIDDEN SEAT-HOLDER (E94).
 
+- **THE OWNER'S ORDER ON THE DAILY LIFE PAGE's THREE FLAWS (written 2026-11-22 20:22 UTC; it came at 20:20 by the session's record), verbatim:** "Fix all:", followed by the chair's own line to him of 18:16, quoted back: "If
+  you want a different order, or want any of those three fixed before the deploy, say so." READ AS: ALL THREE ARE
+  FIXED BEFORE THE FIRST DEPLOY; he did not ask for a different order, so the order of the eight stands. THE THREE,
+  as the chair had named them to him with six sample places: (1) one fact said twice on a page (the city opens and
+  closes on the beasts: a later line should not repeat what an earlier line said); (2) two sentences each turned up
+  in two of the six places; (3) one clumsy wording, "the Headman's Authority's mark". Answered the same turn in
+  plain words (what each fix means; a few hours more on the Daily Life piece; the share veil still decides the
+  date). CARRIED OUT AS E125. Item (3) of the list just below is thereby answered.
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1722,6 +1731,38 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   (a cure in one commit before the flip lands), and names every TIMEOUT apart from a wrong result. WHY THE GATE DID
   NOT SEE IT: the stack's gate and the seats' narrowed rule 8 do not run `tests/domain/` flat (E71, E90); CI read
   by name within the hour is the net that did.
+- E124 · IMPORT-DOOR TAKES THE DOORS' MERGE INTO ITSELF (recorded 2026-11-22 20:22 UTC; ruled to VEIL-35 in the half hour before). VEIL-35's preparation (f9c14fa61 on `lane/veil-35-2026-11-22`; nothing in 212): the door census stands (no function
+  created, granted or revoked in supabase/ between decc8c9e7 and 632968087; re-run on the merged tip after R4-IDS
+  makes the three 212 reads VOLATILE); doors-3 (`lane/veil-doors-3-2026-11-20` at 3e1115c81) RESTATES THREE of
+  IMPORT-DOOR's four functions (`_gallery_public_tile_rows`, `get_gallery_map`, `get_unlisted_map`) with eleven
+  `_gallery_doors_*` helpers and two one-line `import_gallery_dossier` hunks; `import_gallery_map` is not in it;
+  the TRAD-4 pin's file and three traditions modules are not on the lane (the re-cut keeps the round trip and
+  "clone rows = served", compared modulo the person-id bijection). RULED as VEIL-35 recommends: doors-3's
+  VEIL-DOORS section is IMPORT-DOOR's base, so each function is restated ONCE in 212's final text (what the
+  security reader reads). FOUR CONDITIONS: the doors' section read whole once against today's tip, with every later
+  ruling (76 on; E115 to E122) that changes what a door serves listed; the doors' own arms measured on their
+  branch first, re-run on the merged tree and named in the proof, VR44 and VR41 named in the registry rows; the
+  eleven helpers revoked by name and dropped in the rollback, 001..211 + 212 + down = 001..211, the catalogue's
+  new count; the two-builder split; if the pulled-forward part cannot be proved inside the unit it is cut back
+  out. R4-IDS first: IMPORT-DOOR never merges before it. A LESSON OF THE SAME HOUR: a seat inside ONE LONG TURN
+  does not receive a message sent with the default priority until the turn ends (VEIL-35 had not heard two of the
+  chair's lines after 36 minutes): the chair sends with priority "next" to a seat that is mid-turn, and keeps
+  "now" for a stop.
+- E125 · THE OWNER'S "FIX ALL": THE DAILY LIFE PAGE's THREE FLAWS ARE CURED BEFORE THE FIRST DEPLOY (recorded 2026-11-22 20:22 UTC; his words in section 1). THE FINISH LINE's third part (E30) now reads: the Daily Life page prints all eight lines AND the three are
+  cured. GIVEN TO DAILY-4 AS UNIT "(0c) THE OWNER'S THREE", after its page unit and before the line's merge, one
+  builder at a time, MEASURE FIRST over 900 born places (150 a size): (1) NO FACT TWICE ON A PAGE: the composer
+  walks the slots in the page's order; a sentence whose atom an EARLIER slot printed is not printed; the slot takes
+  its next sentence, else is left out; a sentence that only NAMES the ruler while stating another fact is not a
+  repeat (the borderline pairs come to the chair as a table before the build); THE OWNER-ONLY LINE NEVER CHANGES
+  WHAT THE PUBLIC LINES PRINT (the public eight are composed first among themselves; the owner-only line then
+  avoids what they said: so the public page stays the same on every read, and the two prose walkers keep holding);
+  (2) THE SAME SENTENCE IN TWO PLACES: per slot, each sentence's share of the pages that print the slot, by size;
+  every sentence family over the sameness door's own bar gets variants until it is under it, in the house's plain
+  words, picked by the place's facts or a stable keyed pick, never a draw; each pool on the hand list
+  (`HAND_CEILING` then counts them); (3) "the Headman's Authority's mark": no Daily Life line puts "'s" after a
+  power's name ("the mark of the Headman's Authority"), held by a walker; the same double possessive COUNTED on
+  the rest of the page and sent to the chair (not the lane's to cure). The owner's file shows the same six seeds
+  before and after. COST: some hours more on "DAILY-B"; the veil still decides the date.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
