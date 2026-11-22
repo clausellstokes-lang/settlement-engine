@@ -1093,6 +1093,28 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the second deploy, not built unless he asks. THE BRIEF: `briefs/SHARE-EMPTY-CUT.md` (PAGE-13's, at its GO; tab
   level first; sections only where the same helper decides them). TOLD TO THE OWNER in plain words the same hour.
   It does not hold the first deploy; it is on the security reader's list.
+- E85 · POINT 98 LANDED: FORTUNE'S FIRST MERIT IS ON THE LINE, DARK; WHAT THE LANDING TAUGHT; WHO TAKES THE FREED PLACE (2026-11-22 14:31 UTC). "STACK-98 FINAL" (14:21):
+  the merge 93fca9a8f of `lane/fortune-6-2026-11-21` at 8cc9212fd on 1ec3e81d1, the nine conflicts of E53 and none
+  beside (THE CHAIR'S CHECK: the real merge differs from `git merge-tree`'s trial merge in those nine files and
+  nowhere else; `HAND_CEILING` 75; four laws' rows; the three dials dark); five registers by their doors (tip
+  7c03296d8); THE WHOLE SUITE RAN ON THAT TREE (its f2 was the whole complement, 2,281 files: E71's cut reached it
+  only after its report): 3 + 15 + 27 + 9 red, every one on the list; class (4) NONE. JOINED by 4799b293f (its tree
+  the gated tip's own), the rows c110dd85b; THE LINE = c110dd85bc8ea723104d15a41b61136814cd4268 on origin (pushed
+  14:28:56 by the push log). SIZES: first paint 1,184,071 / 376,756 / 316,424; the worker 2,704,317; the engine
+  chunk 929,672 (+167 / +5,529 / +1,991 for the owner's signing). THE RED LIST: 63 rows, unchanged (the chair
+  re-ran `voiceMechanics`, `bar7OrderUnderTheLaw` and the dead-op ratchet at the join: 4 red of 46, the list's four;
+  the helper's "did not fail here" was its own error, corrected from its logs). LESSONS: (1) A LANDING SESSION THAT
+  WAITS IN LONG PIECES DOES NOT HEAR THE CHAIR: two messages of 10:51 and 11:15 reached STACK-98 at 14:21, after
+  its report: `prompts/STACK-99.txt` item 7 orders waits under ten minutes with the messages read between them;
+  (2) ITS THIRD PUSH HAD NOTHING TO SEND AND STARTED THE WHOLE CHECK (the hook's no-ref path; killed; nothing
+  changed): item 4 of that prompt: a push only when origin lacks the local tip; (3) `safepush.sh` IS NOW ON THIS
+  BRANCH (`landing/safepush.sh`): a successor's container has no scratchpad of mine. THE TIP WAS SENT to
+  FORTUNE-7 (unit 4, then "FORTUNE-B"), SEAT-10 (`HAND_CEILING` 76 if it adds one row; "SEAT-B"), DAILY-3,
+  CLOSE-1 (the laws' join is cut from this tip), VEIL-33 (to know; the reader's list named to it for corrections).
+  THE FREED PLACE: "GO PAGE-12" FOR ONE UNIT, "PAGE-BAR7" (the two reds of point 96, on a branch cut from the
+  line's tip, the cause named first: E67); it is parked again at its line. STACK-99 IS SEATED WHEN THE FIRST OF
+  "SEAT-B" AND "FORTUNE-B" COMES (the place that seat frees), with "CLOSE-FIXTURE 6f579f0e7" as point 99 and
+  every line that has come by then; PAGE-BAR7 joins the stack it is ready for.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1578,19 +1600,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 13:10 UTC after E80.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-33 (the lane's one writer since VEIL-32's hand-over),
-SEAT-10, FORTUNE-7, DAILY-3, CLOSE-1 (back since E80), and ONE landing (STACK-98: fortune, point 98). TEN ARE PARKED
-and come back one for each place that frees: PAGE-12 FIRST, FOR ONE UNIT (the two reds of point 96 on the line), then
-PAGE-13, PAGE-12 (the rest), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked seat is
-woken by ONE line, "GO <seat>", with the line's tip then, the red list's count, COMMON-EIGHTH 13 and the push rule of
-E73; it goes on from its own hand-back. WHAT EACH OF THE SIX WAITS ON FROM THE CHAIR: STACK-98: nothing (its report
-comes) · FORTUNE-7: the line's tip with point 98 on it (its unit 4) · SEAT-10: that same tip (`HAND_CEILING` 76) for
-its landing check · DAILY-3: nothing (the office atoms' table comes to the chair's eye) · CLOSE-1: that same tip for
-the laws' join · VEIL-33: nothing; it says "R3 <commit>" and the chair then sends REVIEW-VEIL-15 the LOWER towns, the
-reader's list and JOINPROBE.md. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who rules
-and fortune (both merits) landed and flipped; the Daily Life page whole. BEFORE THE FIRST DEPLOY, NAMED SINCE: the
-veil's R5-RECENT (E78) and unit (ix) (E75); who rules' U5-STALE (E76); the close's fixture cure (E55) and the laws'
-join (E61); the trouble lane's two reds (E67).
+(Rewritten 2026-11-22 14:31 UTC after E85.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-33 (the veil's one writer:
+R5-RECENT, then (iv), (v), (vi), "R3"), SEAT-10 ("SEAT-B": the line's tip merged, rule 8), FORTUNE-7 ("FORTUNE-B": its
+unit 4 on the line's tip), DAILY-3 ("DAILY-B": L8 to L12 and 4c building; it hands over at 620,000), CLOSE-1 (the lit
+half of the flipped run; the laws' join cut from the line's tip), and PAGE-12 IN THE LANDING'S PLACE FOR ONE UNIT
+("PAGE-BAR7"). NINE ARE PARKED and come back one for each place that frees: PAGE-13 (its first unit at GO is
+`briefs/SHARE-EMPTY-CUT.md` only if "PAGE-SIDES" is done or blocked; else its own order), PAGE-12 (the rest: its two
+wip branches), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked seat is woken by ONE
+line, "GO <seat>", with the line's tip then, the red list's count, COMMON-EIGHTH 13, the push rule of E73 (a push only
+when origin lacks the local tip) and the widened rule 8. THE NEXT LANDING: `prompts/STACK-99.txt` (its base, stack and
+red count filled at seating), seated in the place the first of SEAT-10 and FORTUNE-7 frees: "CLOSE-FIXTURE 6f579f0e7"
+(point 99) and each landing line that has come. WHAT EACH OF THE SIX WAITS ON FROM THE CHAIR: nothing: each has the
+line's tip (c110dd85b, point 98) and its order. THE CHAIR OWES: CI's run on c110dd85b read by name; at "R3 <commit>"
+the reader's list (`veil/READERS-LIST.md`), the LOWER towns and JOINPROBE.md to REVIEW-VEIL-15, then ONE top-tier
+read-only review of 212's final text in a fresh context. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven
+with its review; who rules and fortune (both merits) landed and flipped; the Daily Life page whole. BEFORE THE FIRST
+DEPLOY, NAMED SINCE: the veil's R5-RECENT (E78) and unit (ix) (E75); who rules' U5-STALE (E76); the close's fixture
+cure (E55) and the laws' join (E61); the trouble lane's two reds (E67, "PAGE-BAR7"); the Daily Life lane's two (4b).
 
 ## 5. Waiting on the owner
 
@@ -1625,4 +1651,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | DEPTH-5 | session_01ACmDYZwy2ZW4uoujqPNZ44 | `lane/depth-4-2026-11-20` 96e193785 | `lane/depth-5-2026-11-22` | the depth lane: nine reds cured, the line (it writes the trouble hooks' theme rows: a table to the chair first), "DEPTH"; then "DEPTH-TIES" after "WANTS" lands, and "DEPTH-HOOKS-3" |
 | FRAME-9 | session_01ACmDYXnwjzw5YzWaEc1KqQ | `lane/frame-8-2026-11-20` b2dee95f5 | `lane/frame-9-2026-11-22` | the session sheet: SR1's merge finished (six lint failures by their doors), F3 and F4, P1, the line and the mixed pick, "FRAME", the six sheets for the owner |
 | TRAD-6 | session_01ACmDYYaZ8cU8ZYJb7BBw95 | `lane/trad-5-2026-11-20` b97fd16f7 | `lane/trad-6-2026-11-22` | the traditions lane: unit 13's failures named, the 292 bytes itemized, "TRAD"; it merges NOTHING of the line |
-| STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61 |
+| STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61. DONE (E85): tip 7c03296d8, joined to the line by 4799b293f; no further run |

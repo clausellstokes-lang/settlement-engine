@@ -4,6 +4,22 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## READ THIS FIRST (2026-11-22 14:31 UTC; it supersedes the block of 09:09 below it)
+
+THE OWNER'S NEWEST WORD GOVERNS: SIX CHILDREN AT A TIME (verbatim: "Hey limit work to 6 children at a time. The way
+you're going full force might make small progress on many without completing any"). THE LINE: `lane/join-2026-11-14` =
+c110dd85bc8ea723104d15a41b61136814cd4268 on origin (POINT 98: who rules and fortune's first merit both landed, both
+DARK; `ci/LINE-NOW.md` at point 98; the red list 63 rows). THE SIX THAT WORK, WHAT EACH WAITS ON, AND THE NINE PARKED:
+the handoff's section 4 (rewritten at this hour); its section 2 holds E1 to E85; section 6 every session id. YOUR FIRST
+ACTS: (1) read CI's run on the line's tip by name (a cheap helper; job logs by `return_content`) against the red
+list; (2) read your messages: the next landing lines are "SEAT-B", "FORTUNE-B", "PAGE-BAR7", "DAILY-B", "JOIN", and
+the veil's "R3"; (3) seat STACK-99 from `prompts/STACK-99.txt` when the first of SEAT-B and FORTUNE-B comes (its three
+placeholders filled: the line's tip, the stack in order, the red list's count). EVERY PUSH OF YOURS GOES THROUGH
+`landing/safepush.sh` (E73: lane branches only, a clean worktree, only when origin lacks the local tip, no second push
+beside one in flight, the whole check killed if it starts); NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS IN FLIGHT: wait
+for the push log's own `exit=` line. THE VEIL: `veil/READERS-LIST.md` is the reader's list (draft until R3). THE
+OWNER'S RULE ON THE PLAYERS' PAGE: E84 and `briefs/SHARE-EMPTY-CUT.md`.
+
 ## READ THIS FIRST (2026-11-22 09:09 UTC): THE OWNER'S NEWEST WORD GOVERNS: SIX CHILDREN AT A TIME (verbatim: "Hey limit work to 6 children at a time. The way you're going full force might make small progress on many without completing any"). It ends "any number". THE SIX THAT WORK (E64): VEIL-32 (the one writer of migration 212), VEIL-33 (the veil's probe on the joined tree; the next units prepared; the writer's successor), SEAT-10 (who rules: U6 and U7), FORTUNE-7 (fortune's second merit), DAILY-3 (the Daily Life page), and ONE LANDING AT A TIME (STACK-97: who rules as point 97, in its gate on its own machine; then STACK-98: fortune as point 98, idle until you send "BASE <commit>"). ELEVEN ARE PARKED (each pushed everything and wrote its state in its hand-back; it does nothing until your line "GO <seat>"): CLOSE-1 (FIRST BACK: the fixture cure and the laws' join must land before the flip), PAGE-13, PAGE-12, PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: one comes back for each place that frees. REVIEW-VEIL-15 waits unspent for "R3". THE LINE: `lane/join-2026-11-14` = 2486d1301 on origin (points 94 to 96 and four test cures; pushed 08:52; `ci/LINE-NOW.md` at point 96; the red list 59 rows). CI's run on it is NOT yet read by name: do that first (a cheap helper; job logs by `return_content`). A STACK'S TIP IS MERGED `--no-ff` INTO THE LINE after its report, and `git diff --stat <stack tip> <the merge>` must show `docs/` only (E45); then the rows in LANDINGS-SIXTH.md, the red list, LINE-NOW, and the tip to the seats that work. THE HANDOFF'S SECTION 4 SAYS WHAT EACH OF THE SIX WAITS ON FROM YOU; section 2 holds E1 to E64; section 6 every session id. THIS CONTAINER HAS 4 CORES: no gate here beside a push; the chair's own helpers count against the six. A HARD LESSON OF 2026-11-22 11:16 UTC (E73): PUSH ONLY THROUGH THE SCRATCH'S `safepush.sh <worktree> <branch> <log>` (one push at a time; only if origin differs from the local tip; the log's first lines read; a push that shows `npm run check` is killed at once): an empty push from this branch's old hook ran the whole check and its git-fixture tests wrote four junk commits here and broke the shared git config; repaired at 1ccd08e6f with nothing rewritten. NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS IN FLIGHT.
 
 ## THE STATE AT 2026-11-22 04:50 UTC (NEWER THAN EVERYTHING BELOW; the eighth chair's own context compacted at about 04:00 UTC; its decisions are E1 to E30 in the handoff's section 2; ITS MACHINE RESTARTED AT ABOUT 04:33: no file lost, every process dead)
