@@ -1763,6 +1763,46 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   power's name ("the mark of the Headman's Authority"), held by a walker; the same double possessive COUNTED on
   the rest of the page and sent to the chair (not the lane's to cure). The owner's file shows the same six seeds
   before and after. COST: some hours more on "DAILY-B"; the veil still decides the date.
+- E126 · E122's ALWAYS-WITHHOLD IS WITHDRAWN AS A CLASS; THE DIFFERENTIAL IS THE ARM (recorded 2026-11-22 20:41 UTC; ruled to VEIL-34 in the half hour before, on its measure). R5D-1 (`lane/veil-34-2026-11-22-r5d1-wip` ee2dbda33; `out/v34/r5d1/R5D1-MEASURE.md`): the page's picker over the served
+  roster finds the seat 2,559 of 2,559 and every base it finds by name byte for byte (580 of 580); NO seed draw sits
+  inside a presence-picked base; BUT a minted rival's host link (`contestsNiche`) is withheld always (the lane's
+  ruling 51), so the page cannot pair a rival with its host where a kind has several cards: under E122's
+  always-withhold 980 of 12,933 cards (7.6%; 29.5% of the presence-picked 3,322) would LOSE THEIR BASE on every
+  shared page: 920 none, 60 a WRONG one (economy 14.1%, military 12.2%; cities and metropolises). AND THE TELL IS
+  NOT FOUND: on 77 density-host plants, 39 noble plants and 40 lit act-T reads the hiding read's picked base EQUALS
+  the never-there base on 778 of 778, server and twin: the seat-picked templates take the seat from config and the
+  houses, never from the roster, so a hidden power never reaches the picker. RULED, as VEIL-34 recommends: the
+  table cut of E121 for EVERY kind; S on the page; the belt; and THE DIFFERENTIAL BUILT AS THE CLASS's ARM in
+  R5D-PAGE, WIDENED BY THE CHAIR: its plants hide by hand every input the 13 picks read that an owner can hide: A
+  HOUSE the pick reads (the seat's own, a noble house) as well as a power row, on born towns and on act T; the
+  stored base must equal the base picked over the SERVED document, both engines; a difference reds and names its
+  template; a template that ever reds is withheld always (E122 then holds for that template alone); a house no
+  owner can hide is said in the arm's header with its rule. Ruling 51 untouched. An export of `rivalDescOf` or
+  `reeveToRoster` for the arm only if no birth and no first-paint byte moves. THE OPEN POINT (what "never there"
+  means after a seat transfer, in play only) is the reader's list row 22: R5-RECENT-T's ground after "R3". BOTH
+  R5-DESC BRIEFS FINAL at 2566872c5. THE CHAIR's OWN NOTE: E122 was ruled on a hypothetical an hour before its
+  measure; the measure-first order held and the ruling fell to the measure.
+- E127 · "R5-RECENT MERGED 0d9ec0113": THE VEIL's TIP HANDED OVER; THREE HANDS BUILD FROM IT (recorded 2026-11-22 20:41 UTC). VERIFIED BY THE CHAIR on origin: `lane/veil-33-2026-11-22` at af708f2fd; the merge's parents 5e0a584b6 and
+  96c777381; docs only after the merge; 212 is ff20ed89e3e67240…; against 5e0a584b6: 35 files, +2,538 -6 (src 5
+  files +89 -5: `pageRederive.js` +53, `rosterChoiceRegistry.js`, `importRederive.js`,
+  `galleryWithholdAlways.js`; 212 +14). VEIL-33's re-runs: green 6 files 42 tests; red at 8784dd91f the 4
+  reader-dependent arms; `tests/lint` whole 48 red = the lane's 22 by name + R5-DESC's 26 by design; A NEW POOL on
+  the cured tree: GATE-1 4 of 92, 7 LOWER BY RULE, GATE-2 20 of 40, server = twin (the lane's figures, unmoved);
+  R5C6: fidelity 286 of 287 (hamlet-8 listed), the differential 1,540 of 1,540, c 0 on the server and the twin
+  (R5-PRESSURE stays after R3), first paint +0; one fix of VEIL-33's own (96c777381: the always-pass test judges
+  the always rows, not their copies). FROM THIS LINE THE LANE's TIP IS A COMMIT THE CHAIR NAMES WITH ITS BRANCH
+  ("TIP <commit> on <branch>"): it moves from branch to branch as each chain merges. SENT: to VEIL-34 "VEIL-33 HAS
+  HANDED OVER 0d9ec0113" with its order for its room (merge the tip; DISPATCH R5D-SQL at once from af708f2fd; its
+  REVIEW of 5e0a584b6..0d9ec0113 whole meanwhile; at the builder's return push its branch and, past 640,000 by the
+  chair's read, "HANDS OVER" without reading that diff: VEIL-36 reads it whole, dispatches R5D-PAGE and proves the
+  unit); to VEIL-35 "TIP af708f2fd" (its -wip cut; its salt accepted: one `gen_random_uuid()` a call in
+  `_gallery_veil`, never shipped, the twin's one draw a projection, the catalogue's rule read as "a drawer and its
+  callers' closure are VOLATILE"; one arm added: two reads of one place share no served person id and every
+  reference inside one read resolves); to VEIL-33 "LEGACY-POOL: GO" (a builder of about two hours for a dump mode
+  run at origin/master and a read-stored-documents mode on the lane's tree, then about 40 minutes of pool for 300
+  places; the read-stored mode stays as an instrument for the reader and for R5-DESC's legacy arm; its report
+  lists every registry rule that reads WORDS rather than a key), then JOIN-PREP (E119). VEIL-36
+  (`prompts/VEIL-36.txt`) is seated in the landing's place when STACK-100 is done.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
