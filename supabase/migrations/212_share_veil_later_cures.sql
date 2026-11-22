@@ -2620,6 +2620,22 @@ begin
                                 or translate(public._gallery_veil_str(e -> 'priorityCategory'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'));
   signal := crim_house or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) e
                                    where jsonb_typeof(e) = 'object' and translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal');
+  -- R3-TELL-5b unit (iii) (the chair's ruling 73 (2); ruling 74 (iii)): WHERE THE SERVED CRIME SIGNAL IS FALSE (no criminal
+  -- house and no criminal power this read serves), no served power (either list) and no relation carries `captureState`: the
+  -- hall's birth seed on the governing row (hallCapture.js :: writeHallCapture) and a capture relation's rung
+  -- (factionDynamics.js :: withCaptureRelations) leave, THE KEY only (the open place's form: no nothing-hidden page of the pool
+  -- serves one without a criminal house or power, at any size; ruling 47: no husk). A criminal governing power (VR42) is a
+  -- served criminal power: its row and its rung stay. criminalCaptureState is not touched here. Twin: galleryRosterChoices.js
+  -- :: applyRosterChoices, the same rule
+  -- registry: power.captureState
+  if not signal then
+    for pth in select v.p from (values (array['powerStructure', 'factions']), (array['factions']), (array['powerStructure', 'factionRelationships'])) v(p) loop
+      if jsonb_typeof(s #> pth) = 'array' then
+        s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'captureState' else e end order by o), '[]')
+                                  from jsonb_array_elements(s #> pth) with ordinality x(e, o)));
+      end if;
+    end loop;
+  end if;
   -- registry: history.tension.crimeWave ((b): the crime_wave tension where the SERVED crime signal is false)
   if not signal and jsonb_typeof(s #> '{history,currentTensions}') = 'array' then
     s := jsonb_set(s, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{history,currentTensions}') with ordinality x(e, o)
