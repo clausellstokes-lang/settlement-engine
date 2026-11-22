@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "a5e0247a6b0ca93c94e55b55f9848a0b84468ed8",
+ "frozenAtSha": "86dc2470896cfb69b79c048db9c5a201aa40f050",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584",
  "detectorDigest": "5240d93609ff51bf3a11afb51e15982d22e3bf48b861241a98f72ca66ce8e85c",
- "verdictDigest": "31c2c30f3153e8b14aa2fe7a203c34e8b047390820909c8c18b1aa07e8c08339",
+ "verdictDigest": "b0aa947befdfdd1e9d30f5942f6a4c5314b84e84801e8f4eaabd870c321e6386",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,33 +73,33 @@
  ],
  "closureSizes": {
   "web-display": 803,
-  "web-transitive": 1086,
-  "dossier-pdf": 629,
-  "campaign-pdf": 216,
-  "world-book": 231,
-  "foundry": 517,
+  "web-transitive": 1094,
+  "dossier-pdf": 645,
+  "campaign-pdf": 217,
+  "world-book": 232,
+  "foundry": 518,
   "json-export": 12,
   "news": 29
  },
  "population": {
   "judged": 12726,
-  "lit": 704,
-  "litName": 10614,
+  "lit": 705,
+  "litName": 10613,
   "dark": 1408,
   "thinKeys": 16769,
   "thinShapes": 1203,
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1890,
-  "sites": 44654,
-  "propRead": 42374,
+  "files": 1898,
+  "sites": 44661,
+  "propRead": 42381,
   "elemRead": 2,
   "destructure": 2258,
   "inOp": 20,
-  "rGrades": 7938,
-  "nGrades": 1888160,
-  "resolvedReceivers": 8847
+  "rGrades": 7952,
+  "nGrades": 1888245,
+  "resolvedReceivers": 8854
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
@@ -9696,7 +9696,7 @@
   "eventName on legacyAnnotations": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "eventType on legacyAnnotations": "web-display=N web-transitive=N",
   "severity on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "yearsAgo on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
+  "yearsAgo on legacyAnnotations": "campaign-pdf=N dossier-pdf=R foundry=N web-display=N web-transitive=R world-book=N",
   "desc on legal": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on legal": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "name on legal": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
