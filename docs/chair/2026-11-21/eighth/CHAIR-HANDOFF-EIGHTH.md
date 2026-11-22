@@ -1025,6 +1025,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   second-deploy unit). FORTUNE'S SECOND MERIT, the same hour: U7b merged at fdbff1852 (four rows; the "It" opening
   built); the pages read and accepted; unit 3: the four states on 900 births each equal BANDS.md's tables and every
   figure of E32; "FORTUNE-B" waits for point 98's tip.
+- E80 · THE VEIL'S WRITER CHANGES HANDS, AND THE FIRST PARKED SEAT COMES BACK (2026-11-22 13:10 UTC). "VEIL-32-PART 7027b89ea, HANDED OVER": unit (viii)
+  MERGED at c2625fb1f: `crimeTypes` withheld on every shared read in 212 and its twin; the ONE reader in
+  `pageRederive.js`; its arm green (half 1 0 of 6,528; half 2 0; controls 0; the hook 0); on the new pool
+  pool-t2sig-3 BOTH GATES UNCHANGED (GATE-1 4 of 92 with seven LOWER; GATE-2 20 of 40; server equal to twin): the
+  class it cures is one GATE-1 cannot see; 212's text 0352a502…b278; PART 33's section 1 current. VEIL-33 IS THE
+  LANE'S ONE WRITER FROM THIS LINE: it merges 7027b89ea, reads (viii)'s diff whole, re-makes the pool, then
+  R5-RECENT (E78), (iv), (v), (vi), R3; its probe's pass 2 finishes its runs and writes JOINPROBE.md, but one
+  builder at a time writes 212. THE PLACE THAT FREED GOES TO CLOSE-1 ("GO CLOSE-1" sent): the fixture cure to its
+  landing line; the laws' join on the line's tip with both laws when point 98 is the line; THE FLIPPED RUN CUT TO ITS
+  LIT HALF (the dark list is CI's own run on the line: the red list). THE SIX NOW: VEIL-33, SEAT-10, FORTUNE-7,
+  DAILY-3, CLOSE-1 and the landing place (STACK-98). TEN STAY PARKED; the next place goes to PAGE-12 for its one
+  unit (the two reds of point 96 on the line).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1504,18 +1516,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 09:09 UTC after E64.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-32, VEIL-33, SEAT-10, FORTUNE-7, DAILY-3,
-and ONE landing (STACK-97, then STACK-98). ELEVEN ARE PARKED and come back one for each place that frees, in E64's
-order AS AMENDED BY E67 (PAGE-12 comes back early for ONE unit, the two reds of point 96 on the line): CLOSE-1, PAGE-12
-(that one unit), PAGE-13, PAGE-12 (the rest), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked
-seat is woken by ONE line, "GO <seat>", with the line's tip then; it goes on from its own hand-back. WHAT EACH OF
-THE SIX WAITS ON FROM THE CHAIR: STACK-98: "BASE <commit>" when STACK-97's gate has reported · SEAT-10: the word to
-merge U6 and U7, after "SEAT" is on the line · FORTUNE-7: the line's tip with point 98 on it, for its landing check ·
-DAILY-3: the line's tip with point 97 on it (L8 to L12) · VEIL-33: nothing (its two refs are named) · VEIL-32:
-nothing; it says "HAND-OVER <commit>" at its mark · REVIEW-VEIL-15 (waiting, not working): "R3 <commit>" with the
-LOWER towns and the reader's list. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who
-rules and fortune (both merits) landed and flipped; the Daily Life page whole. A lane that has not landed when those
-three are done ships in the second deploy.
+(Rewritten 2026-11-22 13:10 UTC after E80.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-33 (the lane's one writer since VEIL-32's hand-over),
+SEAT-10, FORTUNE-7, DAILY-3, CLOSE-1 (back since E80), and ONE landing (STACK-98: fortune, point 98). TEN ARE PARKED
+and come back one for each place that frees: PAGE-12 FIRST, FOR ONE UNIT (the two reds of point 96 on the line), then
+PAGE-13, PAGE-12 (the rest), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked seat is
+woken by ONE line, "GO <seat>", with the line's tip then, the red list's count, COMMON-EIGHTH 13 and the push rule of
+E73; it goes on from its own hand-back. WHAT EACH OF THE SIX WAITS ON FROM THE CHAIR: STACK-98: nothing (its report
+comes) · FORTUNE-7: the line's tip with point 98 on it (its unit 4) · SEAT-10: that same tip (`HAND_CEILING` 76) for
+its landing check · DAILY-3: nothing (the office atoms' table comes to the chair's eye) · CLOSE-1: that same tip for
+the laws' join · VEIL-33: nothing; it says "R3 <commit>" and the chair then sends REVIEW-VEIL-15 the LOWER towns, the
+reader's list and JOINPROBE.md. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who rules
+and fortune (both merits) landed and flipped; the Daily Life page whole. BEFORE THE FIRST DEPLOY, NAMED SINCE: the
+veil's R5-RECENT (E78) and unit (ix) (E75); who rules' U5-STALE (E76); the close's fixture cure (E55) and the laws'
+join (E61); the trouble lane's two reds (E67).
 
 ## 5. Waiting on the owner
 
