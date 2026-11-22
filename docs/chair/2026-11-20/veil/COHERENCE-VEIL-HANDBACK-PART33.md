@@ -1,0 +1,68 @@
+# COHERENCE-VEIL — hand-back, part 33: the thirty-second seat (VEIL-32). Read with PART 30 (section 1, rulings 1-75: THE RULINGS IN FORCE; section 4: the pool; section 8: the list after R3) and PART 32 (rulings 76-84; section 2b, the standing lint reds). A successor needs this, PART 30, PART 32 and the briefs alone.
+
+Seat: VEIL-32, a seat of the EIGHTH chair (session_01ACmDYY29VRchM87v1yhL9Q; send_message, Claude Code Remote MCP). Branch
+`lane/veil-32-2026-11-22`. Assignment: `lane/chair-2026-11-08 :: docs/chair/2026-11-21/eighth/prompts/VEIL-32.txt` (read at
+2aa6d2428) with `COMMON-EIGHTH.txt`. Seated 05:21 UTC 2026-11-22 (`date -u`) on 385067da2 (= origin `lane/veil-31-2026-11-21`,
+verified by ls-remote).
+
+## 1. WHERE THE LANE STANDS (kept current at every push)
+- TWO CORRECTIONS TO PART 32 (the chair, in this seat's seating; PART 32 was closed minutes before its last ruling reached it):
+  (1) PART 32's NEXT STEP says the cure of unit (vii) is only RECOMMENDED: IT IS RULED: "THE OTHER WAY" (withhold the key
+  always, the page re-derives), as ruling 85 (b) below orders it. (2) PART 32 section 1 says "R3" is measured ON THE LINE WITH
+  the content lanes landed: that line was the chair's own error, corrected the same hour: ruling 85 (e) is the law: the working
+  line is NOT merged into this lane before the close; "R3" is reached ON THE LANE; a JOIN PROBE on a scratch branch
+  (`lane/veil-32-2026-11-22-joinprobe-wip`) only when the chair says.
+- THE LANE: `lane/veil-32-2026-11-22` = 385067da2 (VEIL-31's tip: units (i), (ii), (iii) merged; unit (vii)'s measure merged,
+  docs only) + this seat's records. 212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback
+  `8cbd7d1c…ded5b0`; 211 `eface6d0…0b01` / `ce8474ff…712f` (to be re-proved by the green chain's sha256 file).
+- AT THE TIP BY VEIL-31's WORD (proved again by this seat's green chain, below): GATE-1 4 of 92 (7 LOWER BY RULE); GATE-2 20
+  of 40 cells red; server = twin every cell; `tests/lint` whole = the sixteen standing reds.
+- THE POOL AND THE GREEN CHAIN (this container only): `/var/tmp/v18/out/v32/chain0.sh` (npm ci 0, ledger ref 0,
+  make-instruments, pool.sh to `/var/tmp/v18/t2/pool-t2sig-2`) launched 05:22; `after0.sh` then runs `/var/tmp/v18/out/v32/chain1.sh`
+  (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
+  gate, acceptance, `tests/lint` whole) to `/var/tmp/v18/out/v32/g/done.txt`. Copies of the scripts: `out/v32/`.
+- 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
+- UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 85 (b): the measure of dependents first, then the row in both
+  engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder: not yet
+  seated (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` when it is; if this seat stops, its work goes up as
+  `lane/veil-32-2026-11-22-r3tell8-wip` unread).
+- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the green chain's done.txt read and one line to the chair with GATE-1 /
+  GATE-2 at the tip; then unit (viii)'s builder from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
+  then "R3 <commit>".
+
+## 2. RULINGS SINCE PART 32 (numbered on from 84; the eighth chair's; each vetoable by the owner)
+85. THE CHAIR, VEIL-32's prompt (written 05:15 UTC 2026-11-22):
+    (a) THE TWIN IS ANOTHER DRAW: it finds candidates and is the witness, never the oracle; an arm's reference is THE RECORD
+        (what is derived from served facts alone).
+    (b) UNIT (viii), THE CURE OF (vii), BY "THE OTHER WAY" (VR37 (a), R2's pattern: withhold always, the page re-derives): NO
+        generator branch goes into SQL. In order: (1) the measure of what else in a served document is a function of the
+        STORED list (plotHooks, the Defense key's magical reading, EconomicsTab's smuggling filter, DS-DEF-3/4's crime-key
+        wordings): fed by the reader, withheld and re-derived, or shown not to tell (one more unit only if a dependent needs
+        it: tell the chair); (2) `crimeTypes`, the key, on NO shared read of ANY place, both engines; ONE reader deriving the
+        list from the document in hand by the engine's own writer; a reader census in the door walker's shape;
+        importRederive; (3) THE ARM, two halves: no shared read carries the key (total); on all 92 the reader's list equals
+        the record reference (the 26 its red-first); (4) EXECUTED: every input the writer reads survives the projection;
+        (5) the merchant-army hook: its map row corrected in both engines if its flag is served-derivable, else that hook
+        withheld and the town LOWER BY RULE. FIRST PAINT: the writer only through a lazy import; the build is the proof.
+    (c) `powerStructure.criminalCaptureState` reads 'none' where the served crime signal is false; the four places whose twin
+        keeps a rung are LOWER BY RULE with their cause (a criminal POWER that is not a house).
+    (d) THE BAR (the owner left it to the chair, 2026-11-22; the chair keeps it): nothing of 212 ships at "not shown"; the bar
+        is "not inferable": GATE-1 0 of 92 and GATE-2 0 red, then the fresh security reader. The first deploy waits for it.
+        No security posture changed and no served shape widened by a seat on its own.
+    (e) THE WORKING LINE IS NOT MERGED INTO THIS LANE before the close; "R3" is reached ON THE LANE. A JOIN PROBE, WHEN THE
+        CHAIR SAYS: the line's tip merged into a SCRATCH branch cut from the lane (`lane/veil-32-2026-11-22-joinprobe-wip`), the
+        pool re-made there, both gates read dark and then with the two laws lit: a MEASURE of what the join adds, never the
+        join. KNOW FOR IT: the trouble lane's stored hooks (`history.currentTensions[].plotHooks`) and its cause sentence; its
+        exemption on the sameness walker stands on an arm that says THE FULL REVEAL VEILS NOTHING: if 212 veils any house on a
+        reveal share that arm reds at the probe, by design, and the hooks are then this lane's instrument's to hold. The Daily
+        Life page prints three lines derived from the document it is handed.
+    ORDER: (0) instruments and pool, the green chain, one line with GATE-1 / GATE-2 (they must read 4/92 and 20/40, else stop
+    and send both tables); (viii); (iv); (v) the three sent forms + (c); (vi) the shown-power tooth (and `galleryVeilTell4`'s
+    unit-1 tooth never asserts `keptServed > 0`). One builder at a time. After each unit both gates and one line to the chair.
+    "R3 <commit>" at GATE-1 0 AND GATE-2 0, with IMPORT-DOOR and the LOWER towns; then the lint cure unit (PART 32 2b sorted);
+    then PART 30 section 8's list.
+
+## 3. Log (every hour from `date -u`)
+- 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
+- 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
+- 05:23-05:25 212 and the registry read whole. 05:25 `briefs/R3-TELL-8-BRIEF.md` written; PART 33 opened.
