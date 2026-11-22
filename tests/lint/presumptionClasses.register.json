@@ -42,6 +42,11 @@
   "src/data/biomeTexture.js": [
    ["resource","none","meltchannels seam the glacier road","504d351bbe7456b3"]
   ],
+  "src/data/crisis/stakeReasonLines.js": [
+   ["outside","none","contracts have made some of it rich while others have lost their trade routes","1b6ce4bda88a0124"],
+   ["sovereign","none","some of its houses hold the crown's debt","e2d354fb58d85754"],
+   ["sovereign","none","its houses hold the crown's debt","f752da5c98cfa973"]
+  ],
   "src/data/cultureProfiles.js": [
    ["goods","none","Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.","1b4b4958e2437e5e"],
    ["goods","none","Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.","3b971686b58c2c9d"],
@@ -856,12 +861,9 @@
   ],
   "src/domain/crisis/crisisCast.js": [
    ["office","other","holds the garrison\\'s office","895e77efea27e7ed"],
-   ["outside","none","contracts have made some of it rich while others have lost their trade routes","1b6ce4bda88a0124"],
    ["size","none","its streets are where the crime lands","1ce9fbd03964170a"],
    ["sovereign","none","Several of these houses hold crown debt","9dba7589022d1a5f"],
-   ["sovereign","none","A coalition of noble houses that hold the crown's debt.","c8022cb158866ccc"],
-   ["sovereign","none","some of its houses hold the crown's debt","e2d354fb58d85754"],
-   ["sovereign","none","its houses hold the crown's debt","f752da5c98cfa973"]
+   ["sovereign","none","A coalition of noble houses that hold the crown's debt.","c8022cb158866ccc"]
   ],
   "src/domain/crisis/crisisSummaryVantage.js": [
    ["ease","none","Arguments over faith in {name} run hot, and a feast day can end in a fight.","349ec3ff7eb8d171"],
