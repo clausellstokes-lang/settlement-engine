@@ -13,18 +13,30 @@
  *
  * ── THE ARM ──────────────────────────────────────────────────────────────
  * Every composed row names a server host and a twin host, each declared in REGISTRY_HOSTS for its own engine; a row whose
- * server or twin host is PLANNED reds, ONE TEST PER ROW, named by row id. `power.recentConflict` is walked first (E78:
- * R5's worklist starts there); the rest follow in the registry's order.
+ * server or twin host is PLANNED reds, ONE TEST PER ROW, named by row id, in the registry's order (`power.recentConflict`
+ * was walked first, E78; it has LEFT the composed form, below).
  *
  * RED TODAY BY DESIGN: the failing list IS R5's worklist. It stays as a standing test: a row leaves the list when R5
  * builds its host (the host's state 'exists', the registry walker's ARM C then proving it exists) or moves the row to a
  * host that exists. The judgment is proven on synthetic rows first (its own controls), so a green row is not a vacuous one.
+ *
+ * ── THE ROW THAT LEFT (R5-RECENT; the chair's E92 (1), E93 and E97 (5) of 2026-11-22; V33-R5C6) ─────────────
+ * `power.recentConflict` LEFT THE COMPOSED FORM: its inputs are gone and it is withheld ALWAYS on R2's always-host in both
+ * engines (212 :: _gallery_veil_withhold_always, galleryWithholdAlways.js :: withholdAlways), the page re-deriving the
+ * sentence (pageRederive.js :: rederiveRecentConflict), as `safety.crimeTypes`. It is walked BY NAME below as that row:
+ * not composed, withhold / always / page re-derive / built, both hosts existing. A row that left can come back only by a
+ * registry edit this arm reds. The census pin on ORDERED[0] is RE-TAKEN (E97 (5)): with the row gone from the composed
+ * list, ORDERED[0] is the first composed row in the registry's own order (`history.founding.overcoming`); the pin
+ * holds that `power.recentConflict` is NOT among the composed rows, so the walk cannot silently re-admit it. The 26
+ * composed rows still on R5's planned host are R5-DESC's worklist (the chair's E97 (5)), red by design.
  */
 import { describe, expect, test } from 'vitest';
 import { REGISTRY_HOSTS, REGISTRY_ROWS } from '../../src/domain/veil/rosterChoiceRegistry.js';
 
-/** E78 (2): R5's worklist starts at this row. */
-const FIRST = 'power.recentConflict';
+/** E78 (2): R5's worklist started at this row; E92 (1), E93, E97 (5): it LEFT the composed form, and is walked by name. */
+const LEFT = 'power.recentConflict';
+/** E97 (5), the census pin re-taken: the first composed row in the registry's own order once LEFT is gone from the list. */
+const FIRST = 'history.founding.overcoming';
 
 /** A composed row (VR12): its `inputs` non-empty. */
 const isComposed = (r) => Array.isArray(r.inputs) && r.inputs.length > 0;
@@ -49,7 +61,7 @@ function hostFaultsOf(r, hosts) {
 }
 
 const COMPOSED = REGISTRY_ROWS.filter(isComposed);
-const ORDERED = [...COMPOSED.filter((r) => r.id === FIRST), ...COMPOSED.filter((r) => r.id !== FIRST)];
+const ORDERED = [...COMPOSED];
 
 describe('the judgment proves itself on synthetic rows (its own controls)', () => {
   const HOSTS = Object.freeze({
@@ -78,11 +90,25 @@ describe('the judgment proves itself on synthetic rows (its own controls)', () =
     expect(isComposed({ inputs: ['power.entry'] })).toBe(true);
   });
 
-  test('the census is not vacuous: the registry holds composed rows, power.recentConflict among them, walked first', () => {
+  test('the census is not vacuous: the registry holds composed rows, walked in its own order from the first; power.recentConflict is not among them (E97 (5): the pin re-taken, the row having left the composed form)', () => {
     expect(COMPOSED.length).toBeGreaterThanOrEqual(10);
     expect(ORDERED[0]?.id).toBe(FIRST);
+    expect(ORDERED.map((r) => r.id)).not.toContain(LEFT);
     expect(ORDERED.map((r) => r.id).sort()).toEqual(COMPOSED.map((r) => r.id).sort());
     expect(Object.keys(REGISTRY_HOSTS).length).toBeGreaterThan(0);
+  });
+});
+
+describe('THE ROW THAT LEFT THE COMPOSED FORM, walked by name (R5-RECENT: E92 (1), E93, E97 (5))', () => {
+  test(`${LEFT}: not composed; withheld ALWAYS, the page re-deriving it, built on R2's always-host in both engines (hosts that exist)`, () => {
+    const r = REGISTRY_ROWS.find((x) => x.id === LEFT);
+    expect(r, `the registry holds ${LEFT}`).toBeTruthy();
+    if (!r) return;
+    expect(isComposed(r), `${LEFT} has left the composed form (no inputs)`).toBe(false);
+    expect({ rule: r.rule, when: r.when, page: r.page, built: r.built }).toEqual({ rule: 'withhold', when: 'always', page: 're-derive', built: true });
+    expect({ server: r.server, twin: r.twin }).toEqual({ server: 'public._gallery_veil_withhold_always', twin: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways' });
+    // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
+    expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
   });
 });
 

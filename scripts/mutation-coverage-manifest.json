@@ -1884,6 +1884,10 @@
       "kind": "rationale",
       "ref": "walker-totality-executed"
     },
+    "tests/lint/recentConflictReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "EVERY READER OF THE RECENT-CONFLICT SENTENCE, REGISTERED (R5-RECENT's cure, second half; VEIL-33's V33-R5C6, 2026-11-22; the chair's E92 (2), (5), E93, E97 (1); on tests/lint/crimeTypesReaders.walker.test.js's pattern): every code line under src/ naming recentConflict is a site registered with its count and verdict; the ONE reader (pageRederive.js :: rederiveRecentConflict) must call generatePowerStructure, never name pressureSentence, and be wired at rederiveForPage and importRederive.js :: rederiveInPlace (authoritative); both always-hosts must withhold the key and its pressureSentence copy and the registry rows stand. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS EXECUTED: (1) its own controls judge a synthetic source on every ordinary run (declBody to the next declaration; a word in a comment line not counted); (2) the RED-FIRST run before the reader existed red both the census arm (the registered reader site stale) and the door arm (no reader, not wired at either door), recorded in docs/chair/2026-11-20/veil/out/v33/r5recent/R5C6-red.full.log. A standing sweep plant would mutate shared src/ modules a concurrent lane may hold."
+    },
     "tests/security/galleryVeilRecent.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
