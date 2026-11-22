@@ -82,23 +82,26 @@ describe('tensionSidesShown: rule 2 (EXACTLY ONE power of the kind meant)', () =
 // born towns of the census's 720 (`build/SIDES/craftCases.before.txt`) whose sole economy power was cast as the guild members.
 describe('tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark)', () => {
   const BORN = ['r2s-famine-town-2', 'r2s-famine-city-3', 'r2r-city-25'];
-  it.each(BORN)('born %s: its guild members keep their own words beside a sole economy power', async (seed) => {
+  // One plain test looping over the three towns in its body (the lighting walker's each-family park debt only shrinks).
+  it('the three born towns: their guild members keep their own words beside a sole economy power', async () => {
     const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
     const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
     const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
     const { censusPlan, configOf } = await import('../../components/pageCensusWalk.shared.mjs');
     await loadGenerationLawPayloads();
-    const row = censusPlan('r2').find((/** @type {{ seed: string }} */ r) => r.seed === seed);
-    expect(row).toBeTruthy();
-    const doc = generateSettlementPipeline(configOf(row, DEFAULT_CONFIG, birthConfig), null, { seed, customContent: {} });
-    const crafts = (doc.history?.currentTensions || []).flatMap((/** @type {any} */ t) => (t.factions || [])
-      .map((/** @type {string} */ s, /** @type {number} */ i) => ({ t, s, i }))
-      .filter((/** @type {{ s: string }} */ x) => M[x.s]?.means === 'craft power'));
-    expect(crafts.length).toBeGreaterThan(0);
-    // the precondition the economy mark would have named: exactly one economy power on the roster
-    expect(solePowerNameOf(doc, 'economy', true)).toBeTruthy();
-    for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)[i]).toBe(s);
-  }, 120000);
+    for (const seed of BORN) {
+      const row = censusPlan('r2').find((/** @type {{ seed: string }} */ r) => r.seed === seed);
+      expect(row, seed).toBeTruthy();
+      const doc = generateSettlementPipeline(configOf(row, DEFAULT_CONFIG, birthConfig), null, { seed, customContent: {} });
+      const crafts = (doc.history?.currentTensions || []).flatMap((/** @type {any} */ t) => (t.factions || [])
+        .map((/** @type {string} */ s, /** @type {number} */ i) => ({ t, s, i }))
+        .filter((/** @type {{ s: string }} */ x) => M[x.s]?.means === 'craft power'));
+      expect(crafts.length, seed).toBeGreaterThan(0);
+      // the precondition the economy mark would have named: exactly one economy power on the roster
+      expect(solePowerNameOf(doc, 'economy', true), seed).toBeTruthy();
+      for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)[i], seed).toBe(s);
+    }
+  }, 360000);
   it('a made-up roster whose one economy power is a craft guild: still the row\'s own words', () => {
     const rec = town([RULER, { faction: 'Craft Guilds', category: 'economy' }]);
     const t = { type: 'guild_conflict', factions: ['Guild members', 'Those who would trade outside the guild', 'Non-guild workers'] };
