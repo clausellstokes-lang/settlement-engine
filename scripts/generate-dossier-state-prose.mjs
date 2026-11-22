@@ -601,6 +601,14 @@ const WORD_CORRECTIONS = Object.freeze([
   // "There is no watch"; its words corrected in place
   { pool: 'DS-DEF-3 :: Unsafe', vid: 6, from: '2ab8fa180378f08d13e1fa047c7d8df733c1ea70fe18f996ed526428850200ed', to: '87c78172c08ce1e0a54bb926c8ea0cdd9cb1676156ab2783767d0de5ae258e3d', ruling: 'LR6' },
   { pool: 'DS-POW-2 :: recentConflict present', vid: 1, from: 'b9c7576493170bf4b61ba47e4f30b6485372953aff2b0ed5441021b41f8c329f', to: '5f631039f93489f9a1b9bbddfe2a307bc26decd9f4097240d716e40035ea48b4', ruling: 'CHAIR-2026-11-20-17:38' },
+  // POINT89-CHAIR-2026-11-22 (the chair's rulings on LINES-FOR-THE-CHAIR, point 89's own reds): five of BUILD-1's appended members corrected in
+  // place: DS-GEN-13 NO-MARKET v9 and v12 to the pool's contract; DS-ECO-8 PROSPEROUS v7 no longer presumes halls and
+  // defences; DS-ECO-11 worked-out v4 off the plural-resource fault; DS-ECO-12 land-cannot-give v4 a shortfall, not an absence
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 4, from: '199350795cb8021b65417d8b1d01b242386b3d201063c815687fa243fb6825f7', to: 'db6bf3aa7c38940bdba811c6fb1cf40d0213df93ca7f3fa4679c2ce0c01a112a', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-12 :: CRITICAL IMPORT: the land cannot give it', vid: 4, from: '088efe12e309b545361cd9de64179993f36e07a41c77b1865c89163deae7bf11', to: 'ded9eebe20cde9e321e795c28f2164fbc8b39d35edb621e8853319fed433bb11', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-8 :: PROSPEROUS', vid: 7, from: '68d8269711c72f99fab0db5311cdcbfdebef5531c3bceca53d09c74aa9687ea0', to: 'a6db5e16c25ce8870a9a1699e8801e2d473be6f487d862e3740dde2204c74397', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 12, from: 'aa699fd8f0ba666bb491464d98ba96f23f8b4d68a80f0e4c0084933a5108b7d6', to: '895382b92022c26a53aaabed4b71ffd26279f589338925cf7e06199fc894dd25', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
 ]);
 
 async function readNumberingBaseline() {

@@ -3072,7 +3072,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Money keeps going into {settlement}'s halls, works and defences, and the upkeep never waits on it.",
+          "text": "Money keeps going into what {settlement} has built, and the upkeep never waits on it.",
           "slots": [
             "settlement"
           ],
@@ -6319,7 +6319,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The {resource} at {settlement} is worked out and coming back on its own, at the ground's own pace.",
+          "text": "Little is being taken from the {resource} at {settlement} now, and what was taken is coming back on its own, in its own time.",
           "slots": [
             "resource",
             "settlement"
@@ -7315,7 +7315,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A visitor looking over the country around {settlement} sees little sign of the {good} the place needs.",
+          "text": "A visitor who asks at {settlement} about {good} is told that the country around never yields enough.",
           "slots": [
             "settlement",
             "good"
