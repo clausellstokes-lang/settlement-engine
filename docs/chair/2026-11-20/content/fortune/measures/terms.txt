@@ -1,0 +1,30 @@
+THE FORTUNE SUM BY SIZE (the printed call; mean of each term; raw = the sum before rounding, the cap, food and the floor)
+size      routeBasetierBonus      eco    magic   threat      mil  defPrem    depthdiversity   raw baseIdx
+thorp          1.97     0.00     0.00     0.00    -0.40     0.00     0.00    -0.03     0.00  1.54    1.92
+hamlet         1.97     0.00     0.00     0.00    -0.45     0.00     0.00    -0.49     0.00  1.03    1.53
+village        2.12     0.00     0.00     0.10    -0.36     0.00     0.00    -0.59     0.04  1.30    1.45
+town           2.27     1.00     0.00     0.20    -0.45     0.00     0.00    -0.15     0.40  3.27    2.97
+city           2.36     1.00     0.00     0.33    -0.48     0.00     0.11     1.00     0.50  4.82    3.97
+metropolis     2.22     2.00     0.00     0.47    -0.43     0.00     0.07     1.00     0.50  5.82    3.87
+
+THE GAP village -> city in the raw sum: 3.52; each term's share of it: routeBase 7% · tierBonus 28% · eco 0% · magic 7% · threat -3% · mil 0% · defPrem 3% · depth 45% · diversity 13%
+
+THE GAP village -> metropolis in the raw sum: 4.52; each term's share of it: routeBase 2% · tierBonus 44% · eco 0% · magic 8% · threat -1% · mil 0% · defPrem 1% · depth 35% · diversity 10%
+
+THE GAP hamlet -> town in the raw sum: 2.24; each term's share of it: routeBase 13% · tierBonus 45% · eco 0% · magic 9% · threat 0% · mil 0% · defPrem 0% · depth 15% · diversity 18%
+
+THE COUNTS THE SIZE-RELATIVE TERMS READ (printed call): economy+crafts institutions; income sources
+thorp      econInst p10 2 p25 3 median 3 p75 3 p90 4 (mean 3.0) | income p25 1 median 1 p75 2 | depth +1 15 0 67 -1 18 | diversity>0 0
+hamlet     econInst p10 3 p25 4 median 6 p75 6 p90 8 (mean 5.5) | income p25 1 median 2 p75 2 | depth +1 0 0 51 -1 49 | diversity>0 0
+village    econInst p10 4 p25 6 median 8 p75 11 p90 14 (mean 8.6) | income p25 2 median 2 p75 4 | depth +1 1 0 39 -1 60 | diversity>0 12
+town       econInst p10 14 p25 17 median 21 p75 25 p90 28 (mean 20.6) | income p25 6 median 7 p75 8 | depth +1 9 0 67 -1 24 | diversity>0 98
+city       econInst p10 26 p25 33 median 43 p75 49 p90 53 (mean 40.7) | income p25 10 median 11 p75 12 | depth +1 100 0 0 -1 0 | diversity>0 100
+metropolis econInst p10 47 p25 50 median 53 p75 55 p90 57 (mean 52.4) | income p25 11 median 12 p75 13 | depth +1 100 0 0 -1 0 | diversity>0 100
+
+ROUTES, THREAT AND FOOD MODIFIERS BY SIZE (counts)
+thorp      route: road 40 · river 21 · isolated 14 · crossroads 13 · port 12 | threat: -0.5 58 · 0 31 · -1 11 | food mod: none 86 · cap:0 6 · penalty:-1 6 · cap:1 2
+hamlet     route: road 32 · river 20 · crossroads 19 · isolated 17 · port 12 | threat: -0.5 44 · 0 33 · -1 23 | food mod: none 80 · penalty:-1 13 · cap:0 5 · cap:1 2
+village    route: road 34 · river 24 · crossroads 16 · isolated 15 · port 11 | threat: -0.5 43 · 0 42 · -1 15 | food mod: none 88 · penalty:-1 10 · cap:1 1 · cap:0 1
+town       route: road 57 · river 16 · crossroads 16 · port 11 | threat: -0.5 50 · 0 30 · -1 20 | food mod: none 86 · penalty:-1 13 · cap:0 1
+city       route: road 34 · river 30 · crossroads 20 · port 16 | threat: -0.5 47 · 0 28 · -1 25 | food mod: none 99 · cap:1 1
+metropolis route: road 52 · river 26 · port 14 · crossroads 8 | threat: -0.5 50 · 0 32 · -1 18 | food mod: none 95 · cap:1 4 · penalty:-1 1

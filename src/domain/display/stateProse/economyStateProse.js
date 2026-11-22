@@ -83,6 +83,7 @@ import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js';
 import { isLiveInstitution } from '../../institutions/institutionRoster.js';
+import { isSizeRelativeFortune } from '../../fortune/fortuneLaw.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -1199,6 +1200,12 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   if (complexityDisplay) headerDetail.push({ label: 'Economy', value: complexityDisplay });
 
   const headerKey = prosperityHeaderPoolKey(rank, access);
+  // FS7 F1 (FORTUNE-1's U4, the fortune law ONLY): the high rung credits its money to the economy `{complexity}` names
+  // ("lives on a {complexity} and ends each year with money to spare"); under the law a thorp or hamlet reaches it on the
+  // size ladder's bottom rung, and "subsistence living" is no source of that money. There the slot is left unfilled, so the
+  // variants naming it are not drawn (anchored liveness) and the pool keeps the lines that never needed it. Law 1 fills it.
+  const headerSlots = isSizeRelativeFortune(settlement) && rank >= HIGH_RUNG_FROM
+    && complexityDisplay === COMPLEXITY_LABEL.SUBSISTENCE ? { complexity: undefined } : null;
   const foodKey = foodTilePoolKey(foodBalance);
   const granaryKey = granaryPoolKey(granary);
   // BAR5-FOOD (BRIEF-BAR5 fact (c); AUDIT-A 1b): the rung keys on the food word THE PAGE PRINTS (`foodWordShown.js`: the band's
@@ -1279,7 +1286,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
 
   return Object.freeze({
     prosperityHeader: headerKey
-      ? legibilityRung(prosperity, line('DS-ECO-1', headerKey), headerDetail)
+      ? legibilityRung(prosperity, line('DS-ECO-1', headerKey, headerSlots), headerDetail)
       : null,
     prosperityRung: rank >= 0
       ? legibilityRung(prosperity, line('DS-ECO-8', prosperity.toUpperCase()), [])

@@ -457,8 +457,12 @@ export function legitimacyReadingPoolKey(ledger, legitimacy) {
   if (!ledger?.present) return 'present: false (no legitimacy reading)';
   const b = legitimacy?.breakdown;
   if (!b) return null;
-  const flat = ['prosperity', 'safety', 'defense', 'food']
-    .every((f) => contribution(b[/** @type {keyof LegitimacyBreakdownView} */ (f)]) === 0);
+  // FORTUNE U5b (the seventh chair's ruling of 22:26 UTC 2026-11-20, item 3): the merit the fortune law adds
+  // (`breakdown.merits`, fortune/fortuneMerits.js) is a pull too, so a place it lifted with the four terms at 0 does not
+  // read "no strong opinion" beside its standing. Absent on every law-1 record, so no born page moves.
+  const terms = /** @type {Record<string, unknown>} */ (b);
+  const flat = ['prosperity', 'safety', 'defense', 'food', 'merits']
+    .every((f) => contribution(terms[f]) === 0);
   // Nothing pulling either way is exactly the state DS-POW-1's lens goes silent on, so the
   // two blocks tile the space instead of overlapping or leaving a hole in it.
   return flat ? 'neutral baseline (nothing pulling either way)' : null;
