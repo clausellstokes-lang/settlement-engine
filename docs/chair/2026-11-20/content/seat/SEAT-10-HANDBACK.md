@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T07:15:31Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T07:41:06Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -45,8 +45,19 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **(b)** 1,387 files, 13,913 tests, 61 failed, **every one on RED-AT-LINE by name** (fresh at `0ac15c2e0`). One title has drifted: `landingFixtureFreshness`, stale at the line itself, and unmoved by the lane (CONFIRMED).
   - **`tests/lint` whole:** 223 files, 3,362 tests, 3 red (the line's own three: `proseCorpusBytes` RAW and GZIP, `proseComposed` A0b).
   - **The line tip the run stood on:** `f5295e425`.
-- **NEXT:** wait for the chair to land "SEAT <commit>" and give its word; then U6 and on (SEAT-5 item 20's order, SEAT-7 §0 NEXT). No brief past U6 before then. U6's brief carries the sweep's (b) and (c) (item 91; the chair's word of 03:54Z).
-- **OUT:** none. BKP, BUL and BSR are finished.
+- **"SEAT 46339e5c7" ACCEPTED FOR LANDING (the chair, 07:20Z).** It is stacked after points 94 to 96 with the fortune lane. NO COMMIT under `src/` or `tests/` on this lane until the chair says it is landed.
+- **SINCE (docs only), each committed and pushed:**
+  - the worker's +15,961 itemized exactly (`rule8/WORKER-ITEMIZED.md`, accepted: `cultureOfficeTitles.js` +9,369 through `isSovereignSeat`; the five seat modules +8,126);
+  - U7's probe (`u7probe/U7-PROBE.md`: 6 of 11 kept-form transfers name the old house's person; U7 is ruled before the first deploy, after U6);
+  - U6's probe (`u6probe/`).
+- **THE FINISH LINE (the chair, 07:21Z):** before the first deploy, U6 then U7. U9 to U14 and CS21/22 are second-deploy work: no brief. U8, the flip, is the chair's.
+- **U6 THE PROSE (CS12): OUT to builder BU6.**
+  - **Brief:** `briefs/U6-PROSE.md` at `2786f0178`, carrying the chair's ruled wordings verbatim: W1 six, W2 one, W3 five, by `pickVariantMixed`. Plus the gate `!isVeiledRow(holder)`, the hand list, the council-access clause as a gate only, and faults (b) and (c) red first.
+  - **Where:** scratch clone `bu6`, branch `u6` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u6-wip`.
+  - **Merge:** into the lane ONLY on the chair's word after "SEAT" lands, once its diff is read whole and its red and green re-run.
+  - **Then the integrator:** the dark proof; the doors; `tests/lint` whole; the commonest W1 and W3 sentence by size on the 150 lit births (bar about 15%), one line to the chair; "SEAT-B <commit>".
+- **NEXT:** U7 (its red first is U7-PROBE's six seeds). Its builder is cut by this seat or its successor, said at U6's merge (the fit by the 620,000 mark).
+- **OUT:** BU6 (U6). BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
