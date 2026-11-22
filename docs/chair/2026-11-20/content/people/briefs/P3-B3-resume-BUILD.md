@@ -1,0 +1,31 @@
+# PEOPLE-3 builder B3, resumed: why the place is here (`settlementReason[]`), finished (written 2026-11-22T07:58Z)
+
+YOU ARE A BUILDER of PEOPLE-3 (the people lane's integrator). Your worktree: `/tmp/claude-0/-home-user-settlement-engine/5ba7fc48-44c0-5a12-ad09-20a5a240c608/scratchpad/wt-b3`, branch `lane/people-3-2026-11-21-b3-wip` at 31d4191b2 = PEOPLE-2's B3 (red 3f954559d, cure ce1c6cab9, an UNVERIFIED wip a915fc17a) with the people lane merged in at the working line's tip f5295e425 (the pool-dominance register at the line's side). Work ONLY in that worktree (`node_modules` is a link to the main checkout's). Never touch `/home/user/settlement-engine` itself.
+
+## READ, AND NO WIDER
+1. `docs/chair/2026-11-20/content/people/briefs/P2-B3-settlementReason-BUILD.md` WHOLE: every rule, file limit, red and green there BINDS YOU, except where this file says otherwise.
+2. `docs/chair/2026-11-20/content/people/PEOPLE-2-HANDBACK.md`: ONLY the bullets "21:58" and "22:35".
+3. `src/data/settlementReasonVariants.js` and `tests/generators/settlementReasonVariants.test.js` WHOLE; `git show a915fc17a` (the wip) whole; `src/generators/narrativeGenerator.js :: generateSettlementReason` and the one handed argument in `src/generators/steps/generateNarratives.js`.
+
+## WHAT YOU DO, IN ORDER
+1. VERIFY THE WIP (a915fc17a): the strikes of small.3 and small.15 (agreed by the chair 22:35), the mutation-manifest entry, `bar2PlacesRows` / `bar3PlacesRows` re-keyed by identity or widened to the pool (never a blind re-record). Re-run those files; fix what is wrong in its own commit.
+2. THE FOUR RULED REWORDINGS (the seventh chair, 22:35 UTC 2026-11-20, verbatim; replace the four rows' `text`, ids kept):
+   - road.7 "It stands on the road, and sends its {export} out along it to be sold."
+   - river.5 "A river settlement; it sends its {export} out by the river to be sold."
+   - crossroads.3 "Built at a crossroads; it sends its {export} out along its roads."
+   - metropolis.8 "It sells its {export} across the region."
+3. THE CONDITION, ruled with them: `{export}` is a PHYSICAL GOOD, through the lane's goods filter or a declared need: "its transit trade" or "its water rights" must NEVER fill it. Today `slotsOf` fills `{export}` only from `EXPORT_WORD` (flour, hides, ale, arms through `facts.goodExported`): MEASURE FIRST whether that already holds by construction. (a) On 900 places (`hxd-<size>-0..149`, the six sizes), count the places whose record lists an export that is NOT a physical good (a service, a right, transit trade: read where the record keeps its exports and name the field) and, of those, how many print one of the four rows: the count goes in your commit and your final message. (b) A test, red first by plant-and-restore (plant a filler that would take the record's first listed export): every printed `{export}` fill over the 900 places is a value of `EXPORT_WORD`, and a record whose only export is a service fills no `{export}` (the row is then not eligible). Grammar: each of `EXPORT_WORD`'s words reads right inside each of the four sentences and in small.11 ("The place sends out its {export} to be sold."): say so in the test or the commit.
+4. THE MEASURE AGAIN on your tip: `node docs/chair/2026-11-20/content/people/measures/m3-origins.mjs` (n = 150), top sentence share by size before (01c74837c, the people lane) and after; the two trees `node docs/chair/2026-11-20/content/tools/confinement/trees.mjs 01c74837c <your tip> <a workdir in the scratchpad>`: 0 non-string differences, the strings that move listed.
+5. GREEN at your last commit, every run through `sh scripts/gate-mutex.sh --run -- <command>` to a log file and read with `sh scripts/gate-tail.sh` or by grepping the log's count lines (NEVER through a pipe; ONE heavy run at a time; another builder shares this box and the mutex): your tests; EVERY test file anywhere under `tests/` that names `settlementReasonVariants`, `narrativeGenerator`, `generateSettlementReason`, `generateNarratives` or `settlementOriginProse` (the standard's rule 40 addendum (b): list them with `grep -rlE` first, run them in ONE vitest invocation); `tests/lint` WHOLE (COMMON-EIGHTH 11: after any change to a test file; report its count); `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`; `npm run lint`. Never the whole suite; never `npm run check`.
+
+## THE REGISTERS ARE NOT YOURS (another builder works beside you on the same registers)
+Do NOT edit `scripts/census/pool-dominance.register.json`, `tests/lint/samenessHideable.handPools.json`, `tests/lint/samenessHideable.walker.test.js` (`HAND_CEILING`), `tests/lint/.lighting-census-baseline.json`, `docs/content/wiring-census.json`, or any golden. The integrator takes each by its own door at the merge. In `tests/lint` whole, the reds these cause (the pool-dominance walker's new-pool rows, the hideable walker's hand list, the lighting census) are EXPECTED: name each failing test and its offending pool or path; anything else red is yours to cure or to report by name. Reds that are the line's own are in `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`.
+
+## ENVIRONMENT
+Before any `tests/lint` run: the local ref `review-fixes-2026-07-08` already exists (do not touch it). Never run a test with `GIT_DIR`, `GIT_WORK_TREE`, `GIT_INDEX_FILE` or another of git's repository variables set (the machine's own `GIT_SSL_CAINFO`, `GIT_ASKPASS`, `GIT_EDITOR`, `GIT_TERMINAL_PROMPT`, `GIT_CONFIG_*` are fine). No packing of statements onto one line (F31). Cite by symbol, never by line number. If your own permission check refuses an action, stop that action and report it in one line.
+
+## HAND-BACK
+Commits on your branch by explicit paths (red first, then the cure), never `--no-verify`, NEVER PUSH, no pull request. Each message carries its receipts and ends:
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01ACmDYabE8Q8QFDT9ZPVoDe
+Final message at most 250 words: the commits; the four rows as written; the non-good count; shares before and after by size; the two trees; `tests/lint` whole's count and every red by name with whose it is; the house list by pool (unchanged or not).
