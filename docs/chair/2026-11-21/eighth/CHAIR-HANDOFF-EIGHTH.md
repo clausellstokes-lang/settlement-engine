@@ -807,6 +807,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   pushed. THE NEXT STACK: point 94 (already merged in the line's worktree), point 95 (the Daily Life page) and, if
   its re-worded commit comes within minutes, point 96 (the trouble lane): ONE gate. If it does not come, 94 and 95 go
   alone and the trouble lane is stacked with "SEAT" and "FORTUNE".
+- 2026-11-22 05:58 UTC · THE STACK OF POINTS 94, 95 AND 96 IS LAUNCHED (one helper, 05:59; scratch `landing/stack-96/`; the stack stands on
+  f5295e425). 94: the state-sentence cures, already merged in the line's worktree (66c46de37, with 718aaddbd and
+  9373b190d). 95: the Daily Life page, `lane/daily-page-1-2026-11-22` at 3947e3e6b (on origin 05:56; its push's hook
+  green: 167, 1113, eslint 0 errors). 96: THE TROUBLE LANE, `lane/page-12-2026-11-21` at ab9804585: PAGE-12's cure of
+  E35 is read and accepted (6db907d40: the arm's (C), the DM-door payload under the gallery's default veil serves no
+  hook; (D), the gap pinned: with only the hooks' eyes opened and the thieves' guild veiled the planted hook is served
+  and the house's card is gone; the entry's reason re-worded; nothing under `src/`). ITS FIRST PAINT'S +575 RAW IS
+  ITEMIZED: `factVocabulary.js` +568, `rngContext.js` +7 (for the owner's size signing). ONE gate at the top; step f
+  split in two runs if over about 900 files; step c2 (`raised.py`) for the first time; the rows the stack cures are
+  written to `cured-rows.txt`. WHEN IT REPORTS: read it and what rose; `git ls-remote`; push the line; the list and
+  `LINE-NOW.md` to point 96; CI by name; tell PAGE-13 (its unit 3 may start), DAILY-3 (its unit 4's line), VEIL-32
+  (the join probe may be ordered once "SEAT" and "FORTUNE" are landed too). PAGE-12 MEANWHILE: the second tranche's
+  paper only (which kinds and branches carry the hooks' repeat at city and metropolis; the draft lines to the chair).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
