@@ -55,6 +55,7 @@ import { advanceTime } from '../../src/domain/timeProgression.js';
 import { supportedArchetypes } from '../../src/domain/factionRelationshipUpdate.js';
 import { CAPTURE_RUNGS } from '../../src/data/people/dmPowerLines.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { legacyConfig } from '../helpers/fortuneLegacyConfig.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { CARD_KINDS, GROUPING_REMOVERS, applyVeil, isHideable } from '../../src/domain/display/galleryVeil.js';
 
@@ -68,10 +69,11 @@ const SEEDS = [
   ['hxr-metropolis-30', DIALS], ['hxr-town-42', DIALS], ['hxr-village-3', DIALS], ['hxr-hamlet-22', DIALS], ['hxr-town-30', DIALS],
 ];
 const sizeOf = (/** @type {string} */ seed) => seed.split('-')[1];
-/** @param {string} seed @param {object|undefined} dials @param {unknown} [law] the marker forced AFTER birthConfig */
+/** @param {string} seed @param {object|undefined} dials @param {unknown} [law] the marker forced AFTER birthConfig;
+ *  absent, a LEGACY config (the law's key deleted, whatever the dial) */
 const configOf = (seed, dials, law) => {
-  const born = birthConfig({ ...DEFAULT_CONFIG, settType: sizeOf(seed), ...(dials || {}) });
-  return law === undefined ? born : { ...born, [FORTUNE_LAW_CONFIG_KEY]: law };
+  const config = { ...DEFAULT_CONFIG, settType: sizeOf(seed), ...(dials || {}) };
+  return law === undefined ? legacyConfig(config) : { ...birthConfig(config), [FORTUNE_LAW_CONFIG_KEY]: law };
 };
 const birth = (/** @type {string} */ seed, /** @type {any} */ dials, /** @type {unknown} */ law) => /** @type {any} */ (generateSettlementPipeline(configOf(seed, dials, law), null, { seed, customContent: {} }));
 const requestFor = (/** @type {any} */ fullConfig, /** @type {string} */ seed) => ({
@@ -106,6 +108,7 @@ describe('U5a (a) — DARK: no marker is law 1, and the trace partition and the 
     expect(getStepOrder()).toEqual([...TRACE_STEP_ORDER]);
   });
 
+  // "with no marker" means a LEGACY config (the law's key deleted), not a bare birthConfig that mints the dial
   it('every seed with no marker is byte-identical to `_fortuneLawVersion: 1`, its trace and its rail included', () => {
     expectNoSeedFailures(collectSeedFailures(SEEDS, ([seed, dials]) => {
       const none = runGenerationRequest(requestFor(configOf(seed, dials), seed));

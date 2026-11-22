@@ -45,6 +45,7 @@ import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { legacyConfig } from '../helpers/fortuneLegacyConfig.js';
 
 const STANDING = /** @type {any} */ (FORTUNE_LAW_TUNING.standing);
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
@@ -243,9 +244,10 @@ const ARM = TIER_ORDER.flatMap((tier) => [0, 1].flatMap((k) => [
  *  stand still. Its label is asserted, not assumed. */
 const WITNESS = { tier: 'city', seed: 'hxd-city-2', dials: {} };
 const SEEDS = [...ARM, WITNESS];
-/** @param {string} tier @param {string} seed @param {Record<string, unknown>} dials @param {Record<string, unknown>} [law] */
-const birth = (tier, seed, dials, law = {}) => generateSettlementPipeline(
-  { ...birthConfig({ ...DEFAULT_CONFIG, settType: tier, ...dials }), ...law },
+/** @param {string} tier @param {string} seed @param {Record<string, unknown>} dials @param {Record<string, unknown>} [law]
+ *  the marker forced AFTER birthConfig; absent, the town is born from a LEGACY config (the law's key deleted, whatever the dial) */
+const birth = (tier, seed, dials, law) => generateSettlementPipeline(
+  law ? { ...birthConfig({ ...DEFAULT_CONFIG, settType: tier, ...dials }), ...law } : legacyConfig({ ...DEFAULT_CONFIG, settType: tier, ...dials }),
   null,
   { seed, customContent: {} },
 );
@@ -297,6 +299,7 @@ describe('(d) FS4\'s ARM, born forced: under law 2 no score falls and no band is
   }
 });
 
+// "without the marker" means a LEGACY config (the law's key deleted), not a bare birthConfig that mints the dial
 describe('(e) without the marker every birth is byte-identical to _fortuneLawVersion: 1', () => {
   for (const { seed } of SEEDS) {
     it(`${seed}`, () => {

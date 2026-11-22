@@ -44,6 +44,7 @@ import { TIER_ORDER } from '../../src/domain/density/densityBands.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { legacyConfig } from '../helpers/fortuneLegacyConfig.js';
 
 const STANDING = FORTUNE_LAW_TUNING.standing;
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
@@ -214,9 +215,10 @@ describe('(b) LIT: under law 2 defence is judged against the size\'s usual range
 
 // ── (c) BORN, forced ──────────────────────────────────────────────────────────
 const SEEDS = TIER_ORDER.map((tier) => ({ tier, seed: `fs2-${tier}-0` }));
-/** @param {string} tier @param {string} seed @param {Record<string, unknown>} [law] */
-const birth = (tier, seed, law = {}) => generateSettlementPipeline(
-  { ...birthConfig({ ...DEFAULT_CONFIG, settType: tier }), ...law },
+/** @param {string} tier @param {string} seed @param {Record<string, unknown>} [law] the marker forced AFTER
+ *  birthConfig; absent, the town is born from a LEGACY config (the law's key deleted, whatever the dial) */
+const birth = (tier, seed, law) => generateSettlementPipeline(
+  law ? { ...birthConfig({ ...DEFAULT_CONFIG, settType: tier }), ...law } : legacyConfig({ ...DEFAULT_CONFIG, settType: tier }),
   null,
   { seed, customContent: {} },
 );
@@ -253,6 +255,7 @@ describe('(c) BORN, forced: six births, one a size', () => {
       expect(legitimacy.label).toBe(legitimacyBandFor(legitimacy.score).label);
     });
 
+    // "without the marker" means a LEGACY config (the law's key deleted), not a bare birthConfig that mints the dial
     it(`${seed}: without the marker the town is byte-identical to _fortuneLawVersion: 1`, () => {
       const { none, one } = births[seed];
       expect(bytesWithoutMarker(none)).toBe(JSON.stringify(none));
