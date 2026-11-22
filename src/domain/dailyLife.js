@@ -42,7 +42,7 @@ import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities, CAPACITY_NAMES, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
-import { fillAgreement, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from './display/powerSentenceName.js';
+import { fillAgreement, powerNameWithArticle } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN, GATHERING_DOES } from '../data/dailyLife/gatheringPlaces.js';
 import { DAWN_WORK, DAWN_WORK_DOES } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS, CHILD_WARNINGS_DOES } from '../data/dailyLife/childWarnings.js';
@@ -630,14 +630,14 @@ const pickKey = (s, slotKey, branch) => {
 };
 
 /**
- * Each line's `{power}` and kin said: the name with its article, `{Power}` at a sentence's head, `{power's}` its
- * possessive after "the", `{power|one|many}` in the name's number (`display/powerSentenceName.js`).
+ * Each line's `{power}` and kin said: the name with its article, `{Power}` at a sentence's head, `{power|one|many}` in
+ * the name's number (`display/powerSentenceName.js`). No possessive filler (D4C-1, the chair's E133 (3)): a power's name
+ * may itself hold "'s", so no line appends one.
  * @template {{ text: string }} T
  * @param {ReadonlyArray<T>} lines @param {string} name @returns {T[]}
  */
 function withPower(lines, name) {
   return lines.map((l) => ({ ...l, text: fillAgreement(l.text, { power: name })
-    .replace(/\{power's\}/g, `the ${powerPossessive(powerNameAfterArticle(name))}`)
     .replace(/\{Power\}/g, powerNameWithArticle(name, true)).replace(/\{power\}/g, powerNameWithArticle(name)) }));
 }
 

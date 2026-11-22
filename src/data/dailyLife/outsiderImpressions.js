@@ -12,9 +12,10 @@
  *   isVeiledPower`, a criminal power among them: then nothing is said). Where it CLEARLY LEADS (`facts/leaderLead.js ::
  *   leaderLeadOfRecord(r).leadOverSecond` over 6, or no second power: the `topTwoGap <= 6` cut the standing line holds
  *   before "No one clearly leads here") the branch `power`, naming it: `{power}` is its name with its article
- *   (`display/powerSentenceName.js :: powerNameWithArticle`), `{Power}` the same at a sentence's head, `{power's}` its
- *   possessive after "the" (`powerPossessive`), `{power|one|many}` a verb in the name's number (`fillAgreement`). Else
- *   the branch `power.level`, naming no one.
+ *   (`display/powerSentenceName.js :: powerNameWithArticle`), `{Power}` the same at a sentence's head,
+ *   `{power|one|many}` a verb in the name's number (`fillAgreement`); NO line puts "'s" on the name (D4C-1, the chair's
+ *   E133 (3): a name may itself hold one, "the Headman's Authority's mark"; P0 says "the mark of {power}";
+ *   `tests/lint/dailyLifePossessive.walker.test.js`). Else the branch `power.level`, naming no one.
  * - THE THREAT PART: the most severe OPEN threat that is not a defence RATING (the order and supply ratings
  *   `threatProfile.js` raises from `defenseProfile.scores`, "Civic stability at risk" and "Economic fragility", are no
  *   threat: THE CALM RULE), band above low, said as an outsider sees it: `threat.<kind>.<form>`. A hidden or rumoured
@@ -57,7 +58,7 @@ const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({
 export const OUTSIDER_IMPRESSIONS = Object.freeze({
   /** the top power, not veiled, clearly leading: named. */
   power: frozen([
-    { id: 'P0', text: 'Outsiders notice {power\'s} mark is on every door that matters.', needs: [] },
+    { id: 'P0', text: 'Outsiders notice the mark of {power} on every door that matters.', needs: [] },
     { id: 'P1', text: 'A visitor soon learns that little happens here without {power}.', needs: [] },
     { id: 'P2', text: 'Ask who decides things here, and the answer is {power}.', needs: [] },
     { id: 'P3', text: 'Strangers with business here are sent to {power} sooner or later.', needs: [] },
