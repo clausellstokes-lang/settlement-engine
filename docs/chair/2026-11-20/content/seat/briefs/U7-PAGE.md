@@ -77,3 +77,20 @@ If a surface needs a sentence it does not have (for example a holder line on `Po
 - your sha.
 
 Label each claim CONFIRMED (run) or PLAUSIBLE (read). Final message: at most 200 words, the sha first.
+
+## ADDENDUM (written 2026-11-22T10:29:54Z by SEAT-10, on the chair's E70 of 10:26Z)
+
+1. **INTENDED:** where the holder stands apart, the chain's `faction` and the Power tab's ruler ARE the holder, at birth as after a transfer; `power` stays the form.
+   - Write `docs/chair/2026-11-20/content/seat/briefs/U7-OWNER-VIEW.md` for the owner's eye.
+   - It shows THREE lit places, chosen to show the change: for each, the Power tab's ruler card and the governance paragraph AS PRINTED, dark beside lit, read off the real readers (`derivePowerStrata`, `governanceAccount.js`) on the tree and on a flipped copy.
+2. **THE PERSON:** the chain's person is ALWAYS of the holder's house. It is the record's named person (`holderOf().person`) where that person is of the holder's house; else the holder house's first, by today's ladder or roster rule.
+   - NAME every reader of `holderOf(…).person` in `src`.
+   - For each, say whether any printed surface still shows the old house's person after U7 (run it on the six seeds).
+   - Cure nothing outside the manifest: report.
+3. **THE MANIFEST WIDENS** to `src/domain/coherence/seatHolderFindings.js`, that one file. Under the seat law the finding checks the chain's person against the HOLDER.
+   - RED FIRST on the six (the false `seat_outside_governing_faction`).
+   - Keep a converse: a person truly outside the holder's house still raises it.
+4. **THE RULER CARD'S CAPTION (the chair's wording):** "Holds the seat of {form}."
+   - It goes on the holder's card in `PowerStrata.jsx`, ONLY where the holder stands apart from the form, NEVER for a veiled holder (then today's card).
+   - The form's name with its article by the paragraph's own helper.
+   - The governance paragraph's new sentence is DROPPED (second deploy): write none.

@@ -99,3 +99,12 @@ Label each claim CONFIRMED (run) or PLAUSIBLE (read). Final message: at most 200
 **(3) FAULT (b) IS CLOSED: unreachable at birth, named, not cured** (600 lit births, 526 calls, 0 differ). Stop searching.
 - KEEP ONE SMALL GUARD: a test over a seeded sample (as many births as run in a few seconds) that the fold leaves `raiseToOfficeBand` unchanged, so it reds the day the fault becomes reachable.
 - Say its size.
+
+## ADDENDUM 2 (written 2026-11-22T10:29:54Z by SEAT-10, on the chair's E70 of 10:26Z)
+
+- **(a) THE REGEX COPIES:** ONE totality test. Every line of the standing ladder (`annotateFactionStanding`) that the pass must replace is recognised by the pass, so a reworded ladder line reds THERE and never silently appends.
+  - Better, if a few lines do it: the pass reads the ladder's own table. That means lifting the ladder's sentences to named constants in `factionStanding.js`, byte-identical, no word changed.
+- **(b) `regenSection('npcs')`, MEASURE FIRST:** does the regen road (`store/settlementRegenAction.js` → `generateSettlementPipeline.js :: regenNPCsPipeline`) re-run `settleArcaneToPractitioners`?
+  - **If it does:** yours joins it in the same place. The manifest widens to the file where it is called.
+  - **If it re-runs none:** pin the stale state in a test as a NAMED GAP, and say in the report what a game master sees after regenerating the people of a lit place where the holder is R2.
+- **(c) THE BAR at 150 a size** is the integrator's, with rule 8. Do not run it.
