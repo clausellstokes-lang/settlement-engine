@@ -4,23 +4,21 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-3.txt` (bebdb15cb). Predecessor's record:
 `DAILY-2-HANDBACK.md` (its section 3, every ruling in force, binds; this file governs where it says more).
 
-## 1. WHERE THE LANE STANDS (written 2026-11-22 10:39 UTC)
-- `lane/daily-3-2026-11-22` (pushed) = the working line 2486d1301 (points 94-96, merged 05ad452f5; registers at the line's
-  side then by their doors: observed-shape da4fb7052, lighting 9bf2f1593) + E1 + E2 + F1 (merge 348773a4f; lighting
-  79e55ba30) + docs. HAND_CEILING 77 (the line's 74 + this lane's 3). GREEN at 79e55ba30: `tests/lint` whole + 24
-  governing files, 247 files, 8 red, ALL on the point-96 list by name (`RED-AT-LINE.96.tsv` beside this file; the chair
-  added 5 rows since: fetch before rule 8).
-- MERGED: E1 (owner-only slot + gate), E2 (food, resentments), F1 (the chair's six lines; E1's test on 30 births).
-  Measured on the 900 (`measures/B3/F1/f1.out.txt`): food top 9/9/9/7/8/9%, EMPTY 0; resentments 17/11/13/8/9/14%
-  (thorp's cure L8 owed at point 97), EMPTY 19/9/7/35/34/26% (calm rule); dm 3/3/1/3/8/8%; false 0 everywhere.
-- IN FLIGHT: E3 on `-e3-wip` (cut 771f1865f; worktree `/home/user/wt-daily3-e3`); it must be merged onto the line-merged
-  lane (expect register conflicts: re-take by doors).
-- QUEUED, briefs written: 4b `briefs/U4B-DEAD-NARRATIVE.md` (the chair's cures A em-dash and B `requestDailyLife` FIRST)
-  after E3's merge (cure A touches `dailyLife.js`); 4c `briefs/U4C-BUILD-PDF-CHAPTER.md` after 4b (both touch
-  `DailyLifeTab.jsx`); the four smugglers lines on `house: smuggling` (crime55, DM_BY_CONSTRUCTION note); L8-L12 when
-  point 97 is the line; then rule 8 (WIDENED: also `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs` whole
-  and the files directly under `tests/domain/`) and "DAILY-B" with the owner's file.
-- THE OWNER'S WORD (09:14 UTC): six children at a time; this lane's ONE deliverable is "DAILY-B"; nothing outside it.
+## 1. WHERE THE LANE STANDS (written 2026-11-22 14:15 UTC)
+- `lane/daily-3-2026-11-22` (pushed) = the working line 1ec3e81d1 (point 97, merged f2c2ffb6a; lighting 2f22ed041) +
+  E1 + E2 + F1 + E3 (merge 99c9b5ff0) + F2 (merge 067e13fcb; lighting 03f67a396) + OFFICE-M (measures/OFFICE) + docs.
+  HAND_CEILING 80 (the line's 74 + this lane's 6). Green at 5a1cac48f (E3): 284 files, 8 red, all on the list; the
+  green at 03f67a396 (F2) IN FLIGHT at this writing.
+- MERGED, ALL FIVE SLOTS BUILT: food, resentments (+F1's lines), outsider, unspoken, recent; the owner-only slot with its
+  gate and crime55's smugglers lines (house: smuggling, lawful in the owner-only table; arm (c)'s one exception).
+- IN FLIGHT: 4b on `-4b-wip` (remote d7d814b71 = the two cures A em-dash + B requestDailyLife, committed; the removal
+  commit in progress; worktree `/home/user/wt-daily3-4b`); L8 on `-l8-wip` (cut 03f67a396; the five `office:` atoms in a
+  lazy facts leaf, E82; legitimacy L8..L12; + the chair's co-print count of L9 beside W11/B19/P13).
+- NEXT: 4c (`briefs/U4C-BUILD-PDF-CHAPTER.md`) after 4b's merge; the line's merge at point 98 (fortune) on the chair's
+  tip, ONCE, before rule 8; rule 8 WIDENED; the owner's file; "DAILY-B".
+- HAND-OVER: at 620,000 (the chair's read) this seat stops building, pushes, says "DAILY-3 HANDS OVER <commit>"; the
+  successor takes rule 8 and the owner's file (and any unit not merged) from this file. Count at 14:01: 458,645.
+- AFTER THE FIRST DEPLOY (the chair's intake, not this lane): W11, B19, P13 re-keyed `ruler: elder` -> `office: elders`.
 
 ## 2. RULINGS OF THIS SEAT (vetoable by the chair)
 1. B3's split: the dm pool file `commonerResentmentsDm.js` is E1's (the gate and its content land together); E2 builds
@@ -53,6 +51,12 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
    (visible, read-only). 4c is built after 4b or beside it where files do not touch. Proofs: a differential test (the
    chapter's lines equal the tab's for the same record); the PDF's size and first paint's three figures beside the line's;
    `tests/pdf`, `tests/components`, `tests/lint` whole.
+7. THE CHAIR'S E72/E82 (10:53, 14:05 UTC): five atoms `office: elders|headman|mayor|reeve|lord's steward`, home the
+   governing ROW's form through `seatTable.js :: formKindOf` (never `powerStructure.government`), the key->forms map in a
+   LAZY facts leaf; Household Council under elders; Feudal Appointee is NOT the lord's steward; fail closed on a hidden
+   row; NOT hideable by an owner (faction floor keeps name and isGoverning; the one writer of `hidden: true` is the
+   infiltrator in `generators/power/stressFactions.js`): say so in the landing line for the veil's reader.
+   E59 for 4c (derive in the chapter; no owner-only slot in the PDF). 4b's two cures first (10:02). The six-children cap.
 
 ## 3. Houses, class rows, stored figures, worker bytes
 None yet (written at each merge).
