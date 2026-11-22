@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T10:25:25Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T11:36:12Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -63,6 +63,15 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
     - (2) W3 at any rank?
     - (3) fault (b): no witness in 600 births (0 of 526 calls differ); close it?
   - **At the merge, the integrator owes:** the mutation-manifest row for `tests/generators/seat/seatHolderLines.test.js`, and the wiring and lighting doors.
+- **POINT 97 IS THE LINE (the chair, 10:49Z): `lane/join-2026-11-14` = `1ec3e81d1`, holding this lane's `46339e5c7`.** The word to merge is given.
+  - **The line's merge:** `1ec3e81d1` merged into the lane as `4e9e58f8f` (11:04Z; clean, no conflict, pushed).
+  - **The registers:** at the line's side; the seven walkers 285/285 and wiring `--dry` delta 0.
+- **E70 (the chair, 10:26Z):**
+  - **U7:** DONE at `lane/seat-10-2026-11-21-u7-wip` `fb0c732f9`, diff read whole. Covered: the person rule, `seatHolderFindings.js` widened (red first 6/6), the caption "Holds the seat of {form}.", `U7-OWNER-VIEW.md`. Two rulings asked at 11:2xZ:
+    - (A) 3 lit births now name nobody;
+    - (B) the old person survives on three surfaces after a kept-form transfer; a unit U5-STALE in `transferRulingPower` is proposed.
+  - **U7's doors at the merge:** lighting, `.prose-numerics-baseline.json`, and `phoneChromeFloor` ROUTE_BASELINE (floored +1 ×3; bare unmoved).
+  - **U6:** BU6 on ADDENDUM 2 (the totality test; the measure of `regenSection('npcs')`).
 - **U6 FINISHED (E65 applied): `lane/seat-10-2026-11-21-u6-wip` at `c1ffee696`, diff read whole.**
   - **The pass:** `factionStanding.js :: settleSeatHolderToRecord` in `generateSettlementPipeline.js`.
   - **Coverage:** W1 63/63, W3 78/78, W2 0 (no licensed pair born); the bar is at most 16%.
