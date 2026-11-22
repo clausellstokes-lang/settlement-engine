@@ -21,13 +21,40 @@ full record.
 - DAILY-C's 34 NEW LINES DRAFTED (4364d5262, `lines/D4C/DRAFT-1.md`, `DRAFT-2.md`) AND READ BY THE CHAIR, TAKEN AS DRAFTED
   BUT ONE: F9 becomes "Short rations are the talk of every household, and patience is wearing thin." (21:55 UTC).
 
+### 0.1b EVERY BRANCH OF THIS SEAT ON ORIGIN (read with `git ls-remote origin 'refs/heads/lane/daily-4-*'`)
+- `lane/daily-4-2026-11-22`: the lane; DAILY-B is its commit 4e7fa5667; the tip after it carries docs only (the
+  measure, the drafts, the briefs, this file).
+- `lane/daily-4-2026-11-22-c1-wip` a2bb723d6: D4C-1, built, unmerged (0.2).
+- `lane/daily-4-2026-11-22-c-measure-wip` 78377130e and `lane/daily-4-2026-11-22-c2-draft-wip` 4364d5262: both already
+  in the lane (fast-forwarded); kept as they are.
+- Local only, merged (never pushed): `-l12-wip` e52394c64, `-page-wip` 3f4442b81. DAILY-3's `lane/daily-3-2026-11-22-4c-wip`
+  5c5ab5466: merged at 86dc24708.
+
 ### 0.2 HALF DONE, EXACTLY WHERE
-- D4C-1 (units (1) and (3), brief `briefs/D4C-1-REPEAT-AND-POSSESSIVE.md`): IN FLIGHT at 22:21 UTC on `lane/daily-4-2026-11-22-c1-wip` (its builder told to commit what it has by 22:45 and report; this line is replaced by its state before 22:58).
+- D4C-1 (units (1) and (3), brief `briefs/D4C-1-REPEAT-AND-POSSESSIVE.md`): BUILT AND PROVED BY ITS BUILDER, PUSHED,
+  NOT YET READ BY THE SEAT, NOT MERGED: `lane/daily-4-2026-11-22-c1-wip` at a2bb723d6 (1ed4186f2 unit (1), a2bb723d6
+  unit (3); both on 4071a6264). By the builder's report (CONFIRMED by it, NOT re-run by the seat): (1) declarations ONE
+  PER BRANCH, `<POOL>_DOES` exported by each of the nine pool files (`{states: key}` / `{consequence: true}` /
+  `{names: true}`; recent changes `calm` and outsider `ordinary` declared consequences); in `dailyLife.js` the seven
+  other public slots are derived first and record what they state, the outsider line drops a part another slot states
+  and takes its next (the next threat by severity, or the next option of its second part), kept its first part on 0 of
+  900 pages; the owner-only line last, avoiding what the eight stated; the PDF's per-slot read gets the same outsider
+  line. The arm `tests/domain/dailyLifeNoRepeat.test.js`: red 3 of 7 on unchanged src, red 1 of 7 with declarations
+  alone, green 7 of 7; on the 900: table 1a 31 to 25 rows, both cured pairs 0. (3) P0 exactly as ruled, `{power's}`
+  gone; the walker `tests/lint/dailyLifePossessive.walker.test.js` red 1 of 3 on the base, green 3 of 3; table 3: power
+  possessives 99 to 0, doubles 4 to 0. RUNS: 23 targeted files 238 passed (3 skipped); `tests/lint` whole 4 of 3,366 red
+  (the known three, and the lighting census's file count, NOT re-taken); eslint 0; typecheck 167/167, strict 1113/1113.
+  PINS IT RE-POINTED BY CAUSE: `tests/domain/dailyLife.test.js` (the threat cited once on the page),
+  `dailyLifeOutsiderUnspokenRecent.test.js` (its oracle applies the yielding), `dailyLifeGrammar.test.js` ("the mark
+  of the Merchant Guilds"); `scripts/mutation-coverage-manifest.json` one rationale row for the walker. OWED AT THE
+  MERGE: the seat's read of the diff whole and its red re-run; the lighting census by its door; the observed-shape
+  readers' baseline by its door (`node scripts/check-observed-shape-readers.mjs --write`: it holds the changed pool
+  files' hashes). The rule is shown on 30 test births and the 900 measured, PLAUSIBLE beyond them.
 - D4C-2 (unit (2), brief `briefs/D4C-2-SAMENESS-LINES.md`): PHASE A DONE (the drafts above); PHASE B NOT BUILT (it waits
   for D4C-1's merge: both touch `src/data/dailyLife/outsiderImpressions.js`).
 
 ### 0.3 NEXT, IN ORDER (the successor's units)
-1. D4C-1 finished on its branch (what 0.2 says is left), its diff read whole once, its red re-run, merged onto
+1. D4C-1 (built, 0.2): its diff read whole once, its two reds re-run, merged onto
    `lane/daily-4-2026-11-22`'s tip; the lighting census re-taken by its door (`LIGHTING_CENSUS_REFREEZE=<seat>` with
    `LIGHTING_CENSUS_NOTE=<cause>`, then the walker without the switch as the proof).
 2. D4C-2 PHASE B on a branch cut from that tip: the 34 lines (F9 as reworded) into their pools, RE-MEASURED on the pools
