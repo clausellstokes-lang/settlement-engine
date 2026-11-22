@@ -4,21 +4,23 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-3.txt` (bebdb15cb). Predecessor's record:
 `DAILY-2-HANDBACK.md` (its section 3, every ruling in force, binds; this file governs where it says more).
 
-## 1. WHERE THE LANE STANDS (written 2026-11-22 08:03 UTC)
-- `lane/daily-3-2026-11-22` (pushed) = f5295e425 + E1 (merge 4c1a72892; cures 4a9ff22bf, 978968735) + E2 (merge of
-  `-e2-wip` fceee55ea; the observed-shape readers by their door 3b0e62e44; the lighting census 771f1865f, 3,743 files) +
-  docs. `tests/lint` whole at 35a25ab11 (before E2): 3 red = the line's three. At E2's merge (771f1865f): `tests/lint` whole
-  + 24 governing files, 247 files, 8 red, ALL on RED-AT-LINE by name.
-- E2 (red on its base 11 of 14): food top sentence 9/9/9/7/9/8%, EMPTY 0; resentments top 17/11/13/7/10/14%, EMPTY
-  19/9/7/35/34/26% (the calm rule); false 0; hand +2 (HAND_CEILING 76), house readings hand 378 -> 385; classes ceiling
-  1779 -> 1775. NOT BUILT: food S10/A13 (millSource), T9/C5 + resentments F0 (grainHeld), L4 (legitimacyGrave), L8-L12
-  (ruler labels); food A4/A12 struck by the style law ("rather than": the chair's rewording).
-- Builders: `-e1-wip` e0e5125c5 and `-e2-wip` fceee55ea MERGED (the remote `-e2-wip` holds the earlier snapshot
-  5151936b2, superseded); `-e3-wip` cut at 771f1865f, IN FLIGHT (`briefs/B3-E3-DAILY-3-DISPATCH.md`); `-f1-wip` cut at d2295da8a, IN FLIGHT
-  (`briefs/B3-F1-DAILY-3-DISPATCH.md`: the chair's ruled lines). U4c-M DONE (2026-11-22 08:25 UTC): `measures/U4C/REPORT.md` (the print
-  is the owner's record, dmView; one writer-reach row would move; no golden; three questions with the chair).
-- NEXT: E2's green read by name; E3's merge; E1b (rulings of 06:17: crime70 #4 reworded; E1's test to 5 a size); on
-  the line's tip: the merge, 4b, the smugglers lines, 4 and 4c.
+## 1. WHERE THE LANE STANDS (written 2026-11-22 10:39 UTC)
+- `lane/daily-3-2026-11-22` (pushed) = the working line 2486d1301 (points 94-96, merged 05ad452f5; registers at the line's
+  side then by their doors: observed-shape da4fb7052, lighting 9bf2f1593) + E1 + E2 + F1 (merge 348773a4f; lighting
+  79e55ba30) + docs. HAND_CEILING 77 (the line's 74 + this lane's 3). GREEN at 79e55ba30: `tests/lint` whole + 24
+  governing files, 247 files, 8 red, ALL on the point-96 list by name (`RED-AT-LINE.96.tsv` beside this file; the chair
+  added 5 rows since: fetch before rule 8).
+- MERGED: E1 (owner-only slot + gate), E2 (food, resentments), F1 (the chair's six lines; E1's test on 30 births).
+  Measured on the 900 (`measures/B3/F1/f1.out.txt`): food top 9/9/9/7/8/9%, EMPTY 0; resentments 17/11/13/8/9/14%
+  (thorp's cure L8 owed at point 97), EMPTY 19/9/7/35/34/26% (calm rule); dm 3/3/1/3/8/8%; false 0 everywhere.
+- IN FLIGHT: E3 on `-e3-wip` (cut 771f1865f; worktree `/home/user/wt-daily3-e3`); it must be merged onto the line-merged
+  lane (expect register conflicts: re-take by doors).
+- QUEUED, briefs written: 4b `briefs/U4B-DEAD-NARRATIVE.md` (the chair's cures A em-dash and B `requestDailyLife` FIRST)
+  after E3's merge (cure A touches `dailyLife.js`); 4c `briefs/U4C-BUILD-PDF-CHAPTER.md` after 4b (both touch
+  `DailyLifeTab.jsx`); the four smugglers lines on `house: smuggling` (crime55, DM_BY_CONSTRUCTION note); L8-L12 when
+  point 97 is the line; then rule 8 (WIDENED: also `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs` whole
+  and the files directly under `tests/domain/`) and "DAILY-B" with the owner's file.
+- THE OWNER'S WORD (09:14 UTC): six children at a time; this lane's ONE deliverable is "DAILY-B"; nothing outside it.
 
 ## 2. RULINGS OF THIS SEAT (vetoable by the chair)
 1. B3's split: the dm pool file `commonerResentmentsDm.js` is E1's (the gate and its content land together); E2 builds
