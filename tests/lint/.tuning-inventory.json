@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "b6492abd34b7da6467cef47b09a1838071e3f621",
-  "measuredBy": "FORTUNE-7",
+  "measuredAtSha": "e78b959c86c7574e104015579246922cce8346bd",
+  "measuredBy": "fortune-7 U8 builder",
   "date": "2026-11-22",
-  "note": "FORTUNE-B at the line point 98 (c110dd85b) merged: FORTUNE_LAW_TUNING gains the DRAFT leaves standing.lastingAgeBySize (six sizes, E32), the lane U7",
+  "note": "U8 (E100): applyDensityLaw.js now imports fortuneLaw.js (isSizeRelativeFortune, the crisis body under the fortune law only), so FORTUNE_LAW_TUNING gains a dependent; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1535,6 +1535,7 @@
         "src/domain/display/governanceAccount.js",
         "src/domain/display/stateProse/economyStateProse.js",
         "src/domain/fortune/fortuneMerits.js",
+        "src/generators/density/applyDensityLaw.js",
         "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js",
         "src/generators/power/rulingStructure.js"
