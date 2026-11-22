@@ -16,14 +16,6 @@
  */
 
 import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); // one line: the holder census keys this file by line
-import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings
-import { fillAgreement } from '../data/people/powerSentenceName.js';
-import { pickVariantMixed } from '../kernel/proseHash.js';
-import { getActiveRng } from '../kernel/rngContext.js';
-import { seatsByHolder } from '../domain/seat/seatLaw.js';
-import { holderOf } from '../domain/seat/holderOfSeat.js';
-import { isVeiledRow, pairLicense } from '../domain/seat/seatTable.js';
-
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -425,6 +417,14 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
 /** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
  * HIGH twin (withConflictRelations). */
 const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
+
+import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
+import { fillAgreement } from '../data/people/powerSentenceName.js';
+import { pickVariantMixed } from '../kernel/proseHash.js';
+import { getActiveRng } from '../kernel/rngContext.js';
+import { seatsByHolder } from '../domain/seat/seatLaw.js';
+import { holderOf } from '../domain/seat/holderOfSeat.js';
+import { isVeiledRow, pairLicense } from '../domain/seat/seatTable.js';
 
 /**
  * THE HOLDER APART (SEAT-10 U6, CS12; the chair's rulings of 2026-11-22): the power that holds the seat, read off the
