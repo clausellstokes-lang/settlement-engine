@@ -76,7 +76,7 @@ function foldedKeysOf(obj) {
 }
 
 /** Reduce one birth to Map<path, {key, shape}>; paths are strings. */
-function pathsOf(record) {
+function pathsOf(record, rootName = 'settlement') {
   const out = new Map();
   const ancestors = new Set();
   const visit = (value, path, shape, depth) => {
@@ -101,7 +101,7 @@ function pathsOf(record) {
       ancestors.delete(value);
     }
   };
-  visit(record, 'settlement', 'settlement', 0);
+  visit(record, rootName, rootName, 0);
   return out;
 }
 
@@ -311,6 +311,225 @@ async function readersMode() {
   process.stderr.write(`readers done: ${rows.length} candidate identities, corpus ${tCorpus}s, total ${Math.round((Date.now() - t0) / 1000)}s\n`);
 }
 
+
+/**
+ * PLAY MODE (the addendum). 6 sizes × kpp-<size>-0..4, germanic; each pair born under law 1 and
+ * law 2 in the --root tree (the lit clone), then for each law, the SAME play:
+ *   (a) six one-month `simulateCampaignWorldPulse` intervals, commit:true, fixed now, the corpus's
+ *       pulse-producer campaign with the one save (its tier-coverage one-save form: no edges, no
+ *       relationshipStates), every discovered `*Enabled` rule lit except advanceEpochEnabled;
+ *   (b) on the (a) save: `mutateSettlementChecked` with CHANGE_RULING_POWER at the first
+ *       non-governing faction in roster order (`affordanceManifest.js :: rulingPowerTargets`);
+ *   (c) on the (a) save: one `power_transfer` outcome, built by hand in `coup.js`'s fall shape with
+ *       the winner `coupContenders(settlement).challengers[0]`, applied through
+ *       `applyWorldPulseOutcomes` (applyWorldPulse.js) with a `buildWorldSnapshot` snapshot, as
+ *       `applyWorldPulseProposal` drives it.
+ * Records diffed per step: save after (a) [root 'save'], pulse result of each interval
+ * [root 'pulseResult'], save after (b), save after (c).
+ */
+async function playMode() {
+  const root = args.root;
+  const imp = (rel) => import(`${root}/${rel}`);
+  const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
+  const { simulateCampaignWorldPulse } = await imp('src/domain/worldPulse/index.js');
+  const { ensureRegionalGraph } = await imp('src/domain/region/index.js');
+  const { buildSpatialDigest } = await imp('src/domain/spatial/index.js');
+  const { makeGridPack, placeSettlements } = await imp('tests/fixtures/spatialPackFixtures.js');
+  const { discoverSimulationFlags } = await imp('scripts/lib/observed-shape-corpus.mjs');
+  const { mutateSettlementChecked } = await imp('src/domain/events/mutate.js');
+  const { applyWorldPulseOutcomes } = await imp('src/domain/worldPulse/applyWorldPulse.js');
+  const { buildWorldSnapshot } = await imp('src/domain/worldPulse/worldSnapshot.js');
+  const { governingFactionOf } = await imp('src/domain/rulingPower.js');
+  const { coupContenders } = await imp('src/domain/rulingPowerCoup.js');
+  const { holderOf } = await imp('src/domain/seat/holderOfSeat.js');
+  const { SEAT_CONTEST_LIT } = await imp('src/domain/seat/seatCircumstances.js');
+  const { readdirSync, statSync } = await import('node:fs');
+  const domainFiles = [];
+  (function walkDir(d) {
+    for (const e of readdirSync(d)) {
+      const p = join(d, e);
+      if (statSync(p).isDirectory()) walkDir(p); else if (p.endsWith('.js')) domainFiles.push(p);
+    }
+  }(join(root, 'src/domain')));
+  const flags = discoverSimulationFlags(readFileSync, domainFiles);
+  const simulationRules = Object.fromEntries(flags.map((f) => [f, true]));
+  simulationRules.advanceEpochEnabled = false;
+  const NOW = '2026-01-01T00:00:00.000Z';
+  const INTERVALS = 6;
+  const PER_SIZE = Number(args.perSize ?? 5);
+  const jobs = [];
+  for (const settType of SIZES) for (let i = 0; i < PER_SIZE; i += 1) jobs.push({ cfg: { settType, culture: 'germanic' }, seed: `kpp-${settType}-${i}` });
+  if (args.limit) jobs.splice(Number(args.limit));
+
+  const nameOf = (f) => String(f?.faction || f?.name || '');
+  const govOnly = (s) => nameOf(governingFactionOf(s)) || null;
+  // The seat as both laws know it: the governing power AND (law 2) the holder, owner audience.
+  const govName = (s) => {
+    let h = null;
+    try { h = holderOf(s, { audience: 'owner' })?.holder; } catch { h = null; }
+    return `${govOnly(s)}|${h ? nameOf(h) || String(h.id || '?') : '-'}`;
+  };
+  const firstNonGoverning = (s) => {
+    const g = governingFactionOf(s);
+    const fs = s?.powerStructure?.factions || s?.factions || [];
+    const t = fs.find((f) => f && f !== g && nameOf(f));
+    return t ? nameOf(t) : null;
+  };
+
+  function play(law, job) {
+    const id = 'kpp000';
+    const settlement = generateSettlementPipeline({ ...job.cfg, _seatLawVersion: law }, null, { seed: job.seed, customContent: {} });
+    const pack = makeGridPack({ cols: 10, rows: 8 });
+    const [place] = placeSettlements(pack, 1);
+    let campaign = {
+      id: 'key-probe-play', name: 'Key probe play', settlementIds: [id],
+      worldState: {
+        rngSeed: 'observed-shape-corpus', tick: 1, simulationRules,
+        calendar: { elapsedWeeks: 20, year: 1 }, spatialCanonVersion: 1,
+        spatialDigest: buildSpatialDigest({ pack, placements: [{ id, cellId: place.cellId }] }),
+        relationshipStates: {}, stressors: [],
+      },
+      regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }),
+      wizardNews: { currentTick: 1, entries: [] },
+    };
+    let saves = [{ id, name: 'Probe', phase: 'canon', settlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } }];
+    const records = new Map();
+    const transfers = { pulse: 0, pulseByCoupRoad: 0, dm: 0, coup: 0 };
+    const notes = [];
+    const gov0 = govName(settlement);
+    for (let i = 0; i < INTERVALS; i += 1) {
+      const before = govName(saves[0].settlement);
+      const out = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_month', commit: true, now: NOW });
+      if (out?.worldState) campaign = { ...campaign, worldState: out.worldState };
+      if (out?.wizardNews) campaign = { ...campaign, wizardNews: out.wizardNews };
+      if (out?.regionalGraph) campaign = { ...campaign, regionalGraph: out.regionalGraph };
+      if (Array.isArray(out?.saves) && out.saves.length) saves = out.saves;
+      const after = govName(saves[0].settlement);
+      if (after !== before) transfers.pulse += 1;
+      const pts = (out?.autoApplied || []).filter((o) => o?.type === 'power_transfer' || o?.powerTransfer);
+      for (const o of pts) { if (o.candidateType === 'coup_succeeded') transfers.pulseByCoupRoad += 1; notes.push(`interval ${i + 1}: autoApplied ${o.type}/${o.candidateType}`); }
+      records.set(`a.pulseResult.${i + 1}`, pathsOf(out, 'pulseResult'));
+    }
+    const saveA = saves[0];
+    records.set('a.save', pathsOf(saveA, 'save'));
+    // (b)
+    const target = firstNonGoverning(saveA.settlement);
+    let bVeto = null;
+    if (target) {
+      const res = mutateSettlementChecked({
+        settlement: saveA.settlement,
+        event: { id: `kpp.dm.${job.seed}`, type: 'CHANGE_RULING_POWER', targetId: target, payload: {} },
+        now: NOW,
+      });
+      bVeto = res.veto ? (res.veto.code || JSON.stringify(res.veto).slice(0, 80)) : null;
+      if (govName(res.settlement) !== govName(saveA.settlement)) transfers.dm += 1;
+      records.set('b.save', pathsOf({ ...saveA, settlement: res.settlement }, 'save'));
+    } else notes.push('b: no non-governing faction');
+    // (c)
+    const cont = coupContenders(saveA.settlement);
+    const winner = cont?.challengers?.[0]?.name || null;
+    let cRefused = null;
+    if (winner) {
+      const tick = campaign.worldState?.tick || 0;
+      const outcome = {
+        id: `world_outcome.coup_verdict.kpp.${tick}`, ruleFamily: 'stressor', probability: 1, targetSaveId: id,
+        metadata: { verdict: { holds: false, winner, incumbent: cont.incumbent, challengers: cont.challengers, variant: null } },
+        type: 'power_transfer', candidateType: 'coup_succeeded', ruleId: 'coup_verdict_fall', applyMode: 'auto',
+        severity: 0.6, headline: `${winner} seizes power`, summary: 'probe', reasons: ['probe'],
+        powerTransfer: { toPowerName: winner, cause: 'coup', tick, losers: cont.challengers.filter((c) => c.name !== winner).map((c) => c.name), sourceStressorId: 'kpp.coup' },
+        condition: { archetype: 'government_overthrown', severity: 0.5, triggeredAt: { tick, sourceEventType: 'COUP_VERDICT', sourceEventTargetId: 'kpp.coup' }, causes: [{ source: 'kpp.coup', effect: 'government_overthrown', reason: 'probe' }] },
+      };
+      const snapshot = buildWorldSnapshot({
+        campaign: { ...campaign, settlementIds: [id] }, saves: [{ ...saveA, phase: 'canon' }],
+        worldState: campaign.worldState, regionalGraph: campaign.regionalGraph,
+      });
+      const res = applyWorldPulseOutcomes({
+        snapshot, worldState: campaign.worldState, regionalGraph: campaign.regionalGraph, wizardNews: campaign.wizardNews,
+        settlementMap: new Map([[id, { saveId: id, save: saveA, settlement: saveA.settlement }]]),
+        outcomes: [outcome], tick, now: NOW, advanceNewsTick: false, advanceRegionalImpacts: false,
+        simulationRules: campaign.worldState?.simulationRules,
+      });
+      const upd = (res.settlementUpdates || []).find((u) => String(u.saveId) === id);
+      const cSettlement = upd?.settlement || saveA.settlement;
+      if (govName(cSettlement) !== govName(saveA.settlement)) transfers.coup += 1;
+      else cRefused = 'no seat change';
+      records.set('c.save', pathsOf({ ...saveA, settlement: cSettlement }, 'save'));
+    } else notes.push('c: no coup contender');
+    return { records, transfers, notes, gov0, govA: govName(saveA.settlement), target, bVeto, winner, cRefused };
+  }
+
+  const steps = new Map(); // step -> { pairs, diff Map, union1, union2 }
+  const stepOf = (k) => {
+    if (!steps.has(k)) steps.set(k, { pairs: 0, diff: new Map(), union1: new Map(), union2: new Map() });
+    return steps.get(k);
+  };
+  const perPair = [];
+  const errors = [];
+  const t0 = Date.now();
+  let peakHeap = 0;
+  for (const [i, job] of jobs.entries()) {
+    const label = `${job.cfg.settType}/${job.seed}`;
+    const tp = Date.now();
+    let r1; let r2;
+    try { r1 = play(1, job); r2 = play(2, job); } catch (e) { errors.push({ label, error: String(e?.stack || e).slice(0, 800) }); continue; }
+    for (const k of new Set([...r1.records.keys(), ...r2.records.keys()])) {
+      const p1 = r1.records.get(k); const p2 = r2.records.get(k);
+      if (!p1 || !p2) { errors.push({ label, error: `step ${k} ran under one law only` }); continue; }
+      const st = stepOf(k);
+      st.pairs += 1;
+      for (const [p, m] of p1) if (!st.union1.has(p)) st.union1.set(p, m);
+      for (const [p, m] of p2) if (!st.union2.has(p)) st.union2.set(p, m);
+      const bump = (p, m, side) => {
+        let e = st.diff.get(p);
+        if (!e) { e = { ...m, l2only: 0, l1only: 0, ex2: null, ex1: null }; st.diff.set(p, e); }
+        if (side === 2) { e.l2only += 1; e.ex2 ??= label; } else { e.l1only += 1; e.ex1 ??= label; }
+      };
+      for (const [p, m] of p2) if (!p1.has(p)) bump(p, m, 2);
+      for (const [p, m] of p1) if (!p2.has(p)) bump(p, m, 1);
+    }
+    const strip = (r) => ({ transfers: r.transfers, notes: r.notes, gov0: r.gov0, govA: r.govA, dmTarget: r.target, dmVeto: r.bVeto, coupWinner: r.winner, coupRefused: r.cRefused });
+    perPair.push({ label, seconds: Math.round((Date.now() - tp) / 100) / 10, law1: strip(r1), law2: strip(r2) });
+    r1 = null; r2 = null;
+    peakHeap = Math.max(peakHeap, process.memoryUsage().heapUsed);
+    process.stderr.write(`[play] pair ${i + 1}/${jobs.length} ${label} ${perPair.at(-1).seconds}s heap=${(process.memoryUsage().heapUsed / 1e6).toFixed(0)}MB\n`);
+  }
+  const stepsOut = {};
+  const all1 = new Map(); const all2 = new Map();
+  for (const [k, st] of [...steps].sort()) {
+    for (const [p, m] of st.union1) all1.set(p, m);
+    for (const [p, m] of st.union2) all2.set(p, m);
+    stepsOut[k] = {
+      pairs: st.pairs, union1Paths: st.union1.size, union2Paths: st.union2.size,
+      law2NeverLaw1Paths: [...st.union2.keys()].filter((p) => !st.union1.has(p)).sort(),
+      law1NeverLaw2Paths: [...st.union1.keys()].filter((p) => !st.union2.has(p)).sort(),
+      diffRows: [...st.diff].map(([path, e]) => ({ path, ...e, inLaw1Union: st.union1.has(path), inLaw2Union: st.union2.has(path) })).sort((a, b) => a.path.localeCompare(b.path)),
+    };
+  }
+  const dynamicCheck = (a, b, otherUnion) => a.map((p) => {
+    const parent = p.replace(/\.("(?:[^"\\]|\\.)*"|[^."]+)$/, '');
+    const entryRe = /^(.*\.provenance)\.("(?:[^"\\]|\\.)*"|[^.]+)/;
+    const em = entryRe.exec(p);
+    const tail = em ? p.slice(em[0].length) : null;
+    const sameShapeEntries = em ? [...otherUnion.keys()].filter((q) => { const qm = entryRe.exec(q); return qm && qm[1] === em[1] && q.slice(qm[0].length) === tail; }).length : null;
+    return { path: p, parent, sameShapeEntriesInOtherLaw: sameShapeEntries };
+  });
+  const sumT = (law, k) => perPair.reduce((n, p) => n + p[law].transfers[k], 0);
+  const out = {
+    mode: 'play', root, SEAT_CONTEST_LIT, intervals: INTERVALS, jobs: jobs.length, pairsRun: perPair.length, errors,
+    seconds: Math.round((Date.now() - t0) / 1000), peakHeapMB: Math.round(peakHeap / 1e6),
+    transfers: Object.fromEntries(['pulse', 'pulseByCoupRoad', 'dm', 'coup'].map((k) => [k, { law1: sumT('law1', k), law2: sumT('law2', k) }])),
+    allStepsLaw2NeverLaw1Paths: [...all2.keys()].filter((p) => !all1.has(p)).sort(),
+    allStepsLaw1NeverLaw2Paths: [...all1.keys()].filter((p) => !all2.has(p)).sort(),
+    law2OnlyEntryCheck: dynamicCheck([...all2.keys()].filter((p) => !all1.has(p)).sort(), null, all1),
+    law1OnlyEntryCheck: dynamicCheck([...all1.keys()].filter((p) => !all2.has(p)).sort(), null, all2),
+    provenanceEntryCounts: { law1: [...all1.keys()].filter((p) => /spatialLedgers\.provenance\.[^.]+$|spatialLedgers\.provenance\."[^"]*"$/.test(p)).length, law2: [...all2.keys()].filter((p) => /spatialLedgers\.provenance\.[^.]+$|spatialLedgers\.provenance\."[^"]*"$/.test(p)).length },
+    steps: stepsOut, perPair,
+  };
+  writeFileSync(args.out, `${JSON.stringify(out, null, 1)}\n`);
+  process.stderr.write(`[play] done ${perPair.length} pairs, ${errors.length} errors, ${out.seconds}s\n`);
+}
+
 if (args.mode === 'pairs') await pairsMode();
+else if (args.mode === 'play') await playMode();
 else if (args.mode === 'readers') await readersMode();
-else throw new Error('--mode=pairs|readers');
+else throw new Error('--mode=pairs|play|readers');

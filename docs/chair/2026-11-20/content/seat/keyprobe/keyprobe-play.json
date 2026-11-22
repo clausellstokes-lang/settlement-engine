@@ -1,0 +1,2721 @@
+{
+ "mode": "play",
+ "root": "<scratch>/treeP: git clone --shared, detached ef5abf4da34205519f37bf42f4a4801431825d5c, node_modules cp -al, one edit SEAT_CONTEST_LIT = true",
+ "SEAT_CONTEST_LIT": true,
+ "intervals": 6,
+ "jobs": 30,
+ "pairsRun": 30,
+ "errors": [],
+ "seconds": 28,
+ "peakHeapMB": 326,
+ "transfers": {
+  "pulse": {
+   "law1": 0,
+   "law2": 0
+  },
+  "pulseByCoupRoad": {
+   "law1": 0,
+   "law2": 0
+  },
+  "dm": {
+   "law1": 27,
+   "law2": 14
+  },
+  "coup": {
+   "law1": 27,
+   "law2": 27
+  }
+ },
+ "allStepsLaw2NeverLaw1Paths": [
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".parents",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".tick",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".type"
+ ],
+ "allStepsLaw1NeverLaw2Paths": [
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+  "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type"
+ ],
+ "law2OnlyEntryCheck": [
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".parents",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".tick",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".type",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+   "sameShapeEntriesInOtherLaw": 98
+  }
+ ],
+ "law1OnlyEntryCheck": [
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+   "sameShapeEntriesInOtherLaw": 98
+  },
+  {
+   "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type",
+   "parent": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+   "sameShapeEntriesInOtherLaw": 98
+  }
+ ],
+ "provenanceEntryCounts": {
+  "law1": 98,
+  "law2": 98
+ },
+ "steps": {
+  "a.pulseResult.1": {
+   "pairs": 30,
+   "union1Paths": 6926,
+   "union2Paths": 6922,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type"
+   ],
+   "diffRows": [
+    {
+     "path": "pulseResult.autoApplied[].appliedHeadline",
+     "key": "appliedHeadline",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].applyMode",
+     "key": "applyMode",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].candidateType",
+     "key": "candidateType",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].conflictResolution",
+     "key": "conflictResolution",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].conflictResolution.exclusiveTags",
+     "key": "exclusiveTags",
+     "shape": "conflictResolution",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].conflictResolution.selected",
+     "key": "selected",
+     "shape": "conflictResolution",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].conflictTags",
+     "key": "conflictTags",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].factionId",
+     "key": "factionId",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].headline",
+     "key": "headline",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].id",
+     "key": "id",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata",
+     "key": "metadata",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.actionFamily",
+     "key": "actionFamily",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.dotRank",
+     "key": "dotRank",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.factionSeat",
+     "key": "factionSeat",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.influenceBasis",
+     "key": "influenceBasis",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].metadata.roleArchetype",
+     "key": "roleArchetype",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcId",
+     "key": "npcId",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch",
+     "key": "npcPatch",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.ambitionHeat",
+     "key": "ambitionHeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.corruptionHeat",
+     "key": "corruptionHeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.dotRank",
+     "key": "dotRank",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.factionSeat",
+     "key": "factionSeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.goalProgress",
+     "key": "goalProgress",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.goalProgress.long",
+     "key": "long",
+     "shape": "goalProgress",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.goalProgress.short",
+     "key": "short",
+     "shape": "goalProgress",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.lastActedTick",
+     "key": "lastActedTick",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.lastAction",
+     "key": "lastAction",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.leverage",
+     "key": "leverage",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.loyalty",
+     "key": "loyalty",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.momentum",
+     "key": "momentum",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].npcPatch.rivalryTargets",
+     "key": "rivalryTargets",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].probability",
+     "key": "probability",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].proposalPayload",
+     "key": "proposalPayload",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].reasons",
+     "key": "reasons",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].rivalPatch",
+     "key": "rivalPatch",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].roll",
+     "key": "roll",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].ruleFamily",
+     "key": "ruleFamily",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].ruleId",
+     "key": "ruleId",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].severity",
+     "key": "severity",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].summary",
+     "key": "summary",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].targetSaveId",
+     "key": "targetSaveId",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.autoApplied[].type",
+     "key": "type",
+     "shape": "autoApplied",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.actionFamily",
+     "key": "actionFamily",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.dotRank",
+     "key": "dotRank",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.factionSeat",
+     "key": "factionSeat",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.influenceBasis",
+     "key": "influenceBasis",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].metadata.roleArchetype",
+     "key": "roleArchetype",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.contextSignature",
+     "key": "contextSignature",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.contextTier",
+     "key": "contextTier",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.dotRank",
+     "key": "dotRank",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.factionSeat",
+     "key": "factionSeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.lastAction",
+     "key": "lastAction",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.longGoal",
+     "key": "longGoal",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.pulseRecord.selectedOutcomes[].npcPatch.shortGoal",
+     "key": "shortGoal",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].factionId",
+     "key": "factionId",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.actionFamily",
+     "key": "actionFamily",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.dotRank",
+     "key": "dotRank",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.factionSeat",
+     "key": "factionSeat",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.influenceBasis",
+     "key": "influenceBasis",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].metadata.roleArchetype",
+     "key": "roleArchetype",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcId",
+     "key": "npcId",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch",
+     "key": "npcPatch",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.ambitionHeat",
+     "key": "ambitionHeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.corruptionHeat",
+     "key": "corruptionHeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.dotRank",
+     "key": "dotRank",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.factionSeat",
+     "key": "factionSeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.goalProgress",
+     "key": "goalProgress",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.goalProgress.long",
+     "key": "long",
+     "shape": "goalProgress",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.goalProgress.short",
+     "key": "short",
+     "shape": "goalProgress",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.lastActedTick",
+     "key": "lastActedTick",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.lastAction",
+     "key": "lastAction",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.leverage",
+     "key": "leverage",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.loyalty",
+     "key": "loyalty",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.momentum",
+     "key": "momentum",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].npcPatch.rivalryTargets",
+     "key": "rivalryTargets",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].proposalPayload",
+     "key": "proposalPayload",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.selected[].rivalPatch",
+     "key": "rivalPatch",
+     "shape": "selected",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.npcStates.{*}.goalHistory",
+     "key": "goalHistory",
+     "shape": "npcStates",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.actionFamily",
+     "key": "actionFamily",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.dotRank",
+     "key": "dotRank",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.factionSeat",
+     "key": "factionSeat",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.influenceBasis",
+     "key": "influenceBasis",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.rivalNpcId",
+     "key": "rivalNpcId",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].metadata.roleArchetype",
+     "key": "roleArchetype",
+     "shape": "metadata",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.contextSignature",
+     "key": "contextSignature",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.contextTier",
+     "key": "contextTier",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.dotRank",
+     "key": "dotRank",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.factionSeat",
+     "key": "factionSeat",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.lastAction",
+     "key": "lastAction",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.longGoal",
+     "key": "longGoal",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.pulseHistory[].selectedOutcomes[].npcPatch.shortGoal",
+     "key": "shortGoal",
+     "shape": "npcPatch",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+     "key": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "shape": "provenance",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+     "key": "parents",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+     "key": "tick",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type",
+     "key": "type",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    }
+   ]
+  },
+  "a.pulseResult.2": {
+   "pairs": 30,
+   "union1Paths": 6803,
+   "union2Paths": 6803,
+   "law2NeverLaw1Paths": [
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".parents",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".tick",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".type"
+   ],
+   "law1NeverLaw2Paths": [
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+    "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type"
+   ],
+   "diffRows": [
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\"",
+     "key": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "shape": "provenance",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".parents",
+     "key": "parents",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".tick",
+     "key": "tick",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2\".type",
+     "key": "type",
+     "shape": "wizard_news.2.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_town_watch.2",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": false
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\"",
+     "key": "wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3",
+     "shape": "provenance",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": false,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".parents",
+     "key": "parents",
+     "shape": "wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": false,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".tick",
+     "key": "tick",
+     "shape": "wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": false,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.spatialLedgers.provenance.\"wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3\".type",
+     "key": "type",
+     "shape": "wizard_news.3.world_pulse.applied.candidate.npc.mobilize.kpp000_npc_free_company_hall.3",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": false,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "a.pulseResult.3": {
+   "pairs": 30,
+   "union1Paths": 7265,
+   "union2Paths": 7265,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "pulseResult.candidates[].recordMode",
+     "key": "recordMode",
+     "shape": "candidates",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/kpp-town-1",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "a.pulseResult.4": {
+   "pairs": 30,
+   "union1Paths": 6976,
+   "union2Paths": 6976,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "a.pulseResult.5": {
+   "pairs": 30,
+   "union1Paths": 7098,
+   "union2Paths": 7098,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "a.pulseResult.6": {
+   "pairs": 30,
+   "union1Paths": 6802,
+   "union2Paths": 6802,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.dotRank",
+     "key": "dotRank",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.name",
+     "key": "name",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "pulseResult.worldState.factionStates.\"kpp000:merchant_guilds\".internalSeats.agent_protege.npcId",
+     "key": "npcId",
+     "shape": "agent_protege",
+     "l2only": 1,
+     "l1only": 0,
+     "ex2": "town/kpp-town-1",
+     "ex1": null,
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "a.save": {
+   "pairs": 30,
+   "union1Paths": 982,
+   "union2Paths": 982,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": []
+  },
+  "b.save": {
+   "pairs": 27,
+   "union1Paths": 1027,
+   "union2Paths": 1027,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "save.settlement.powerStructure.previousGovernments",
+     "key": "previousGovernments",
+     "shape": "powerStructure",
+     "l2only": 0,
+     "l1only": 15,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].cause",
+     "key": "cause",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 15,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].label",
+     "key": "label",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 15,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].tick",
+     "key": "tick",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 15,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "c.save": {
+   "pairs": 27,
+   "union1Paths": 988,
+   "union2Paths": 988,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "diffRows": [
+    {
+     "path": "save.settlement.powerStructure.previousGovernments",
+     "key": "previousGovernments",
+     "shape": "powerStructure",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].cause",
+     "key": "cause",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].label",
+     "key": "label",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "save.settlement.powerStructure.previousGovernments[].tick",
+     "key": "tick",
+     "shape": "previousGovernments",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "thorp/kpp-thorp-4",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  }
+ },
+ "perPair": [
+  {
+   "label": "thorp/kpp-thorp-0",
+   "seconds": 0.6,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "thorp/kpp-thorp-1",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "thorp/kpp-thorp-2",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Household Council|-",
+    "govA": "Household Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 0
+    },
+    "notes": [
+     "b: no non-governing faction",
+     "c: no coup contender"
+    ],
+    "gov0": "Household Council|-",
+    "govA": "Household Council|-",
+    "dmTarget": null,
+    "dmVeto": null,
+    "coupWinner": null,
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "thorp/kpp-thorp-3",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "thorp/kpp-thorp-4",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Household Council|-",
+    "govA": "Household Council|-",
+    "dmTarget": "People's Council",
+    "dmVeto": null,
+    "coupWinner": "People's Council",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Household Council|-",
+    "govA": "Household Council|-",
+    "dmTarget": "People's Council",
+    "dmVeto": null,
+    "coupWinner": "People's Council",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "hamlet/kpp-hamlet-0",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Headman's Authority|-",
+    "govA": "Headman's Authority|-",
+    "dmTarget": "Military Party",
+    "dmVeto": null,
+    "coupWinner": "Military Party",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Headman's Authority|-",
+    "govA": "Headman's Authority|-",
+    "dmTarget": "Military Party",
+    "dmVeto": null,
+    "coupWinner": "Military Party",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "hamlet/kpp-hamlet-1",
+   "seconds": 0.5,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|Merchant Guilds",
+    "govA": "Elder Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|Merchant Guilds",
+    "govA": "Elder Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military Party",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "hamlet/kpp-hamlet-2",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "hamlet/kpp-hamlet-3",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Headman's Authority|-",
+    "govA": "Headman's Authority|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Headman's Authority|-",
+    "govA": "Headman's Authority|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "hamlet/kpp-hamlet-4",
+   "seconds": 0.3,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "village/kpp-village-0",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Occupation Authority",
+    "dmVeto": null,
+    "coupWinner": "Occupation Authority",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Occupation Authority",
+    "dmVeto": null,
+    "coupWinner": "Occupation Authority",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "village/kpp-village-1",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "village/kpp-village-2",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|-",
+    "govA": "Elder Council|-",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "village/kpp-village-3",
+   "seconds": 0.5,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|Merchant Guilds",
+    "govA": "Elder Council|Merchant Guilds",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elder Council|Merchant Guilds",
+    "govA": "Elder Council|Merchant Guilds",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "village/kpp-village-4",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elected Reeve|Merchant Guilds",
+    "govA": "Elected Reeve|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Elected Reeve|Merchant Guilds",
+    "govA": "Elected Reeve|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "town/kpp-town-0",
+   "seconds": 0.7,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Guild Council|Merchant Guilds",
+    "govA": "Guild Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Guild Council|Merchant Guilds",
+    "govA": "Guild Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "town/kpp-town-1",
+   "seconds": 0.9,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Guild Council|Merchant Guilds",
+    "govA": "Guild Council|Merchant Guilds",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Guild Council|Merchant Guilds",
+    "govA": "Guild Council|Merchant Guilds",
+    "dmTarget": "Religious Authorities",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "town/kpp-town-2",
+   "seconds": 0.9,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Council|Merchant Guilds",
+    "govA": "Town Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Council|Merchant Guilds",
+    "govA": "Town Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "town/kpp-town-3",
+   "seconds": 0.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Mayor|Merchant Guilds",
+    "govA": "Town Mayor|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Mayor|Merchant Guilds",
+    "govA": "Town Mayor|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Religious Authorities",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "town/kpp-town-4",
+   "seconds": 0.6,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Council|Merchant Guilds",
+    "govA": "Town Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Town Council|Merchant Guilds",
+    "govA": "Town Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "city/kpp-city-0",
+   "seconds": 1.9,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "City Council|Merchant Guilds",
+    "govA": "City Council|Merchant Guilds",
+    "dmTarget": "Military/Guard",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "City Council|Merchant Guilds",
+    "govA": "City Council|Merchant Guilds",
+    "dmTarget": "Military/Guard",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "city/kpp-city-1",
+   "seconds": 1.9,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "City Council|Merchant Guilds",
+    "govA": "City Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "City Council|Merchant Guilds",
+    "govA": "City Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "city/kpp-city-2",
+   "seconds": 1.4,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant oligarchy|Merchant Guilds",
+    "govA": "Merchant oligarchy|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant oligarchy|Merchant Guilds",
+    "govA": "Merchant oligarchy|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "city/kpp-city-3",
+   "seconds": 1.5,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant Guild Council|Merchant Guilds",
+    "govA": "Merchant Guild Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant Guild Council|Merchant Guilds",
+    "govA": "Merchant Guild Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "city/kpp-city-4",
+   "seconds": 1.1,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant oligarchy|Merchant Guilds",
+    "govA": "Merchant oligarchy|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Merchant Guilds",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Merchant oligarchy|Merchant Guilds",
+    "govA": "Merchant oligarchy|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "metropolis/kpp-metropolis-0",
+   "seconds": 2.5,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Grand Council|Merchant Guilds",
+    "govA": "Grand Council|Merchant Guilds",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Grand Council|Merchant Guilds",
+    "govA": "Grand Council|Merchant Guilds",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "metropolis/kpp-metropolis-1",
+   "seconds": 2,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Ducal Governorship|Noble Houses",
+    "govA": "Ducal Governorship|Noble Houses",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Noble Houses",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Ducal Governorship|Noble Houses",
+    "govA": "Ducal Governorship|Noble Houses",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "metropolis/kpp-metropolis-2",
+   "seconds": 2,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Grand Council|Merchant Guilds",
+    "govA": "Grand Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Grand Council|Merchant Guilds",
+    "govA": "Grand Council|Merchant Guilds",
+    "dmTarget": "Merchant Guilds",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "metropolis/kpp-metropolis-3",
+   "seconds": 1.9,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Royal Authority|Noble Houses",
+    "govA": "Royal Authority|Noble Houses",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Noble Houses",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 0,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Royal Authority|Noble Houses",
+    "govA": "Royal Authority|Noble Houses",
+    "dmTarget": "Noble Houses",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  },
+  {
+   "label": "metropolis/kpp-metropolis-4",
+   "seconds": 2,
+   "law1": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Ducal Governorship|Noble Houses",
+    "govA": "Ducal Governorship|Noble Houses",
+    "dmTarget": "Military/Guard",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   },
+   "law2": {
+    "transfers": {
+     "pulse": 0,
+     "pulseByCoupRoad": 0,
+     "dm": 1,
+     "coup": 1
+    },
+    "notes": [],
+    "gov0": "Ducal Governorship|Noble Houses",
+    "govA": "Ducal Governorship|Noble Houses",
+    "dmTarget": "Military/Guard",
+    "dmVeto": null,
+    "coupWinner": "Military/Guard",
+    "coupRefused": null
+   }
+  }
+ ],
+ "cloneSha": "ef5abf4da34205519f37bf42f4a4801431825d5c",
+ "dialDiff": [
+  "-export const SEAT_CONTEST_LIT = false;",
+  "+export const SEAT_CONTEST_LIT = true;"
+ ],
+ "onePairTiming": {
+  "pair": "thorp/kpp-thorp-0",
+  "seconds": 0.5,
+  "projection": "30 pairs, under 2 minutes at the slowest size (metropolis ~2 s/pair)"
+ }
+}
