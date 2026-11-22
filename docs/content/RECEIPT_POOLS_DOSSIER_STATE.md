@@ -1270,7 +1270,7 @@ contradict** it (R-DST-C).
 4. `[visitor · no walls]` {settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
 5. `[counterforce · colour]` Nothing at {settlement} is left to fall into disrepair for want of money.
 6. `[threshold · colour]` {settlement} is well past getting by and short of the deepest wealth: it spends freely on itself, and keeps no great hoard.
-7. `[unfolding · colour]` Money keeps going into {settlement}'s halls, works and defences, and the upkeep never waits on it.
+7. `[unfolding · colour]` Money keeps going into what {settlement} has built, and the upkeep never waits on it.
 
 **WEALTHY** — *reserves deep enough to outlast most crises* {crisis-scoped}
 1. `[ledger · crisis: any · stores: ≥ 3]` {settlement} has reserves deep enough to ride out most of what could happen to it.
@@ -1778,9 +1778,9 @@ their surface does render.
 1. `[ledger · colour]` {settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
 2. `[street · colour]` Little is left worth taking from the {resource} at {settlement} this year, and it will be some seasons before there is more.
 3. `[visitor · colour]` A visitor finds little being taken from the {resource} around {settlement}: what was there has been worked out.
-4. `[unfolding · colour]` The {resource} at {settlement} is worked out and coming back on its own, at the ground's own pace.
+4. `[unfolding · colour]` Little is being taken from the {resource} at {settlement} now, and what was taken is coming back on its own, in its own time.
 5. `[counterforce · colour]` Nobody at {settlement} needs to spend labour or money to bring the {resource} back; left alone, it returns.
-6. `[threshold · colour]` The {resource} at {settlement} is spent for the present and not for good: the ground still holds the means to give it again.
+6. `[threshold · colour]` Nothing more can be taken from the {resource} at {settlement} for the present, but not for good; given time, there will be something to take again.
 
 **RESOURCE CONDITION: worked out, recovers only with work** *(condition `depleted`, recoveryMode `manual`)*
 1. `[ledger · colour]` {settlement} has worked out its {resource}, and it will not come back on its own: someone has to put labour and money into it before it yields again.
@@ -1893,7 +1893,7 @@ shape.
 1. `[ledger · colour]` The country around {settlement} does not give the town enough {good} for what the town needs of it.
 2. `[street · colour]` Not enough of the {good} that {settlement} needs comes from the country here.
 3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
-4. `[visitor · colour]` A visitor looking over the country around {settlement} sees little sign of the {good} the place needs.
+4. `[visitor · colour]` A visitor who asks at {settlement} about {good} is told that the country around never yields enough.
 5. `[counterforce · colour]` However the people of {settlement} work their land, it does not yield the {good} the place needs in full.
 6. `[threshold · colour]` {settlement} is short of {good} by its own land alone; whether the place goes short in fact depends on what it brings in.
 7. `[unfolding · colour]` {settlement}'s need for {good} keeps running ahead of what its own country yields.
@@ -7115,10 +7115,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 6. `[visitor · no market · crisis: under_siege]` With the siege across the road, nobody comes in to sell at {settlement}, which has no market to come to.
 7. `[ledger · no market · no crisis: under_siege]` {settlement} keeps no market of any kind, so no stall fee or market due is taken there.
 8. `[visitor · no market · no crisis: under_siege]` A visitor with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.
-9. `[counterforce · no market · no crisis: under_siege]` No market day sets the rhythm of {settlement}'s week; buying and selling happen whenever one neighbour has something another wants.
+9. `[counterforce · no market · no crisis: under_siege]` {settlement} keeps no market and no market day; goods change hands whenever one neighbour has something another wants.
 10. `[threshold · no market · no crisis: under_siege]` Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.
 11. `[street · no market · no crisis: under_siege]` {settlement} keeps no market, so nobody here speaks of going to one.
-12. `[unfolding · no market · no crisis: under_siege]` {settlement} trades in the small way of a place without a market: a sack here, a bundle there, and nothing set out for sale.
+12. `[unfolding · no market · no crisis: under_siege]` {settlement} has no market, and trades in a small way: a sack here, a bundle there, carried between neighbours.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
 1. `[visitor · no crisis: under_siege]` A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.

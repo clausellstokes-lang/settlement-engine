@@ -9809,7 +9809,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no market",
             "no crisis: under_siege"
           ],
-          "text": "No market day sets the rhythm of {settlement}'s week; buying and selling happen whenever one neighbour has something another wants.",
+          "text": "{settlement} keeps no market and no market day; goods change hands whenever one neighbour has something another wants.",
           "slots": [
             "settlement"
           ],
@@ -9845,7 +9845,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no market",
             "no crisis: under_siege"
           ],
-          "text": "{settlement} trades in the small way of a place without a market: a sack here, a bundle there, and nothing set out for sale.",
+          "text": "{settlement} has no market, and trades in a small way: a sack here, a bundle there, carried between neighbours.",
           "slots": [
             "settlement"
           ],

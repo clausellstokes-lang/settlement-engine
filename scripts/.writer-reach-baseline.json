@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "822d514b6a1cfbc91139d040fbc7907ed342c8a7",
+ "frozenAtSha": "2fff67f493ea4197c2065f1ea113caf761708d96",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584",
  "detectorDigest": "5240d93609ff51bf3a11afb51e15982d22e3bf48b861241a98f72ca66ce8e85c",
- "verdictDigest": "1c4ee22292bcd2d7032e96be43f39654b662a5bbe5bc14750b406346d7859b3d",
+ "verdictDigest": "40e94cab07df68cd13479a4e8db5fb6226ae8709423fdb2b6a7856b270dc1bb9",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,11 +73,11 @@
  ],
  "closureSizes": {
   "web-display": 803,
-  "web-transitive": 1079,
-  "dossier-pdf": 621,
-  "campaign-pdf": 208,
-  "world-book": 223,
-  "foundry": 509,
+  "web-transitive": 1081,
+  "dossier-pdf": 623,
+  "campaign-pdf": 210,
+  "world-book": 225,
+  "foundry": 511,
   "json-export": 12,
   "news": 29
  },
@@ -91,15 +91,15 @@
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1883,
-  "sites": 44561,
-  "propRead": 42290,
+  "files": 1885,
+  "sites": 44574,
+  "propRead": 42303,
   "elemRead": 2,
   "destructure": 2249,
   "inOp": 20,
-  "rGrades": 7885,
-  "nGrades": 1887384,
-  "resolvedReceivers": 8794
+  "rGrades": 7891,
+  "nGrades": 1887759,
+  "resolvedReceivers": 8800
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
@@ -9086,7 +9086,7 @@
   "foodSecurity on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "incomeSources on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "institutionalServices on economicState": "web-display=R",
-  "isEntrepot on economicState": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
+  "isEntrepot on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "localProduction on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "necessityImports on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "primaryExports on economicState": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",

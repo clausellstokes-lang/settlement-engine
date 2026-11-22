@@ -47,6 +47,7 @@
  *                    form: `isSentenceKey`). A function line is read from its own source (literals and template quasis), never
  *                    called. The reds standing on 1c9673e84 are the bank's `hand` rows (pool, text hash, why); the
  *                    houses are the readings' `hand` rows. A seat's hand row whose table is not on this line is skipped.
+ *   UNREAD           (the chair, 04:19 UTC 2026-11-22) a hand row declared in `UNREAD_ON_THIS_LINE` is skipped as such a row is, and `unreadFaults` reds it once any file under `src/` imports its module.
  *
  * It renders nothing and births nothing: seconds.
  *
@@ -72,7 +73,7 @@ const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
 const EXISTING_CEILING = 251; // 96 + 155 (SAME-2 brief H4, the chair's 20:31: the garden fence, "moving a fence", released, fence reds only as a person; 147 by key (1 declared), 6 by word, 2 by house, 0 by atom. H3 stood at 252: 151 + the granary reeve by its declared key + a bribe, that fence and the slave market's two "trafficked")
-const HAND_CEILING = 76; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is) + 27 (SAME-3, the join's points 88 to 91: TRAD-5's 14 tables, PLACE-2's 9, DAILY-2's 4, as point 84's were) + 2 (the join's point 93: the people lane's position and constraint pools, PEOPLE-1's POSITION_VARIANTS and CONSTRAINT_VARIANTS) + 1 (DAILY-3's B3 E1: the owner-only slot's pool, COMMONER_RESENTMENTS_DM, quiet by construction as DM_BY_CONSTRUCTION names it) + 2 (DAILY-3's B3 E2: the public slots' pools, COMMONER_RESENTMENTS and FOOD_CULTURE, read by their declared atoms)
+const HAND_CEILING = 77; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is) + 27 (SAME-3, the join's points 88 to 91: TRAD-5's 14 tables, PLACE-2's 9, DAILY-2's 4, as point 84's were) + 2 (the join's point 93: the people lane's position and constraint pools, PEOPLE-1's POSITION_VARIANTS and CONSTRAINT_VARIANTS) + 1 (PAGE-12, the trouble half, on the chair's second form of 03:25 UTC 2026-11-22: its pool `troubleHooks.js :: TROUBLE_HOOKS`, registered by the lane that adds it, as LINE-NOW says) + 1 (DAILY-3's B3 E1: the owner-only slot's pool, COMMONER_RESENTMENTS_DM, quiet by construction as DM_BY_CONSTRUCTION names it) + 2 (DAILY-3's B3 E2: the public slots' pools, COMMONER_RESENTMENTS and FOOD_CULTURE, read by their declared atoms)
 const COVERT = 'dm-only';
 
 // ── THE VOCABULARY, CLASSED ──────────────────────────────────────────────────────────────────────
@@ -174,6 +175,20 @@ const EXEMPT = Object.freeze({
     reason: 'the state a hook is framed from: DS-HK-1 prints nowhere. Its desk position `plot_hooks.framing` is a GLANCE (dossierMounts.js; the chair\'s RULINGS-T1 of 2026-10-30), so the reader hands no surface a framing line, privately or publicly (print reads the same framingLines); a public dossier reads GENERAL_STATE_PROSE_SILENT and PUBLIC_SITE_GROUP ships no hooks group',
     withheldBy: 'src/components/new/generalDeskRead.js :: generalDeskLines',
     provedBy: 'tests/ui/generalDeskTabFlow.test.js :: no "Plot hooks" title and no DS-HK-1 framing, privately or publicly; the hooks keep their own words',
+  },
+  // THE TROUBLE HALF'S TWO TABLES (the chair's ruling of 04:27 UTC 2026-11-22; LINE91-SAMENESS-2 (a)): one entry a table,
+  // keyed by its hand ref (`readHandLines` honours a ref), each with its reader's line and the arm that walks the whole table.
+  'src/data/tensionCauses.js :: TENSION_CAUSES': {
+    class: 'trouble',
+    reason: 'a trouble\'s cause sentence is held equal on a served and a possible-world document: every predicate reads only the document in hand, and every withholdable fact it reads is answered by a declared atom on every wording, so a served document that has lost a hidden house or power prints what a place without it prints. THREE ROWS ARE LISTED, NOT PARITY-HELD (ruling 9; the security reader rules them at the join): crime_wave:criminal_power, guild_conflict:guilds_rule, outside_debt:merchants_rule (each reads the powers\' roster; no atom answers it). The served evidence: the five house rows (black_market, assassins, underground, whisper_market, outlaws_near), each hidden by the gallery\'s read and printing its house-free twin\'s sentence; hxd-city-138 (served == the house-free twin); PARITY-SORT at FAULT 0 for every row (294 pairs, crime_wave)',
+    withheldBy: 'src/domain/display/tensionCauseHolds.js :: TENSION_CAUSE_HOLDS',
+    provedBy: 'tests/domain/display/tensionCauseAtoms.walker.test.js :: no row reads a withholdable fact without an atom answering it on every wording, but those on the exemption list',
+  },
+  'src/data/troubleHooks.js :: TROUBLE_HOOKS': {
+    class: 'trouble',
+    reason: 'a trouble\'s hooks are withheld by default on every shared read, the DM door (`gallery_share_dm`) included; shown only where the owner opens the DM door AND the hooks\' eye; in that state a hook whose need is a house still veiled is served. That state is LISTED for the security reader, eleven rows: WITHHELD 5 (crime_wave 2, 10, 12 and guild_conflict 12 by crime facts, crime_wave 11 by veiled powers); LISTED 6 (crime_wave 9, external_threat 8, succession_crisis 1, 2, 3, 8)',
+    withheldBy: 'src/domain/display/publicSafe.js :: PRIVATE_KEY_RE',
+    provedBy: "tests/domain/display/troubleHooksShared.test.js :: (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served",
   },
 });
 
@@ -640,10 +655,47 @@ const treeFiles = () => walk(join(ROOT, 'src')).filter((p) => /\.(?:jsx?|mjs)$/.
   .map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), text: readFileSync(p, 'utf8') }));
 /** A file of the tree, or null. @param {string} rel */
 const readRel = (rel) => (existsSync(join(ROOT, rel)) ? readFileSync(join(ROOT, rel), 'utf8') : null);
-/** The hand-listed tables on this line (a seat's row whose table is not on this line yet is skipped). @param {Array<{ pool: string }>} rows */
+/**
+ * UNREAD ON THIS LINE (the chair's ruling of 04:19 UTC 2026-11-22; LINE91-SAMENESS-2 (a)): a hand-listed table that no file
+ * under `src/` but its own imports, so no reader of this line prints it and its lines have no declaration to be read by.
+ * "Not yet wired" is no withholding: it is NO exemption. Phase 3 skips the row, as it skips a table not on this line, and
+ * `unreadFaults` reds the entry the day any file under `src/` names its module in an import specifier: the walker then reds
+ * until the table's real declaration is written with its reader in hand. Each entry: the hand ref, why it is unread, and
+ * the lane that owes its reader.
+ * @type {ReadonlyArray<{ ref: string, reason: string, owedBy: string }>}
+ */
+const UNREAD_ON_THIS_LINE = Object.freeze([
+  {
+    ref: 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS',
+    reason: 'the sides table of the trouble half (PAGE-7): no file under src/ imports it on this line; its one reader, `src/domain/display/tensionShown.js`, is the display lane\'s and not yet on this line',
+    owedBy: 'the display lane (PAGE-9: tensionShown.js)',
+  },
+]);
+/**
+ * The faults of the unread arm: an entry that names no hand row; an entry whose module some file under `src/` (but its own)
+ * names in an import specifier, static or dynamic (`from`, `import`, `import(`, `require(` before a quoted specifier that holds
+ * the module's basename: over-detects, never under-detects).
+ * @param {ReadonlyArray<{ ref: string }>} unread @param {string[]} refs the hand list's tables
+ * @param {Array<{ rel: string, text: string }>} files the files under `src/`
+ */
+export function unreadFaults(unread, refs, files) {
+  /** @type {string[]} */ const out = [];
+  for (const { ref } of unread) {
+    if (!refs.includes(ref)) out.push(`${ref}: names no hand row`);
+    const rel = ref.split(' :: ')[0];
+    const base = (rel.split('/').pop() ?? '').replace(/\.[cm]?[jt]sx?$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const spec = new RegExp(String.raw`(?:\bfrom|\bimport|\brequire)\s*\(?\s*['"\x60][^'"\x60]*${base}[^'"\x60]*['"\x60]`);
+    const readers = files.filter((f) => f.rel !== rel && spec.test(f.text)).map((f) => f.rel);
+    if (readers.length) out.push(`${ref}: imported by ${readers.join(', ')}`);
+  }
+  return out;
+}
+const UNREAD_REFS = new Set(UNREAD_ON_THIS_LINE.map((e) => e.ref));
+/** The hand-listed tables on this line (a seat's row whose table is not on this line yet, or an unread row, is skipped). @param {Array<{ pool: string }>} rows */
 const handPoolsOnLine = async (rows) => {
   /** @type {HandPool[]} */ const out = [];
   for (const { pool } of rows) {
+    if (UNREAD_REFS.has(pool)) continue;
     const [rel, symbol] = pool.split(' :: ');
     if (!existsSync(join(ROOT, rel))) continue;
     const value = (await import(join(ROOT, rel)))[symbol];
@@ -669,9 +721,10 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     expect(isHideableHouse(houseOfKind('criminal'))).toBe(true);
   });
 
-  test('the crime pools, the not-crime pools and the exemptions each name a real pool; a crime-like key is classed', () => {
+  test('the crime pools, the not-crime pools and the exemptions each name a real pool (an exemption, or a table on the hand list that is on this line); a crime-like key is classed', async () => {
     const named = [...Object.keys(CRIME_POOLS), ...Object.keys(NOT_CRIME_POOLS), ...Object.keys(EXEMPT)];
-    expect(named.filter((id) => !ids.has(id))).toEqual([]);
+    const handOnLine = new Set((await handPoolsOnLine(readJson(HAND_REL).rows)).map((h) => h.ref));
+    expect(named.filter((id) => !ids.has(id) && !(Object.hasOwn(EXEMPT, id) && handOnLine.has(id)))).toEqual([]);
     expect(Object.keys(CRIME_BLOCKS).filter((b) => !pools.some((p) => p.id.startsWith(`${b}::`)))).toEqual([]);
     const unclassed = pools.map((p) => p.id).filter((id) => CRIME_KEY_WORDS.test(id.split('::')[1]) && !isCrimePool(id) && !Object.hasOwn(NOT_CRIME_POOLS, id));
     expect(unclassed).toEqual([]);
@@ -694,6 +747,12 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
 
   test('DM BY CONSTRUCTION: every dm-named hand table names its owner-only gate and its proof; every entry is one', () => {
     expect(byConstructionFaults(readJson(HAND_REL).rows.map((/** @type {{ pool: string }} */ r) => r.pool), DM_BY_CONSTRUCTION, readRel)).toEqual([]);
+  });
+
+  test('UNREAD ON THIS LINE: every declared row is a hand row, with its reason and its owing lane, and no file under src/ imports its module', () => {
+    const files = walk(join(ROOT, 'src')).filter((p) => /\.(?:[cm]?[jt]sx?)$/.test(p)).map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), text: readFileSync(p, 'utf8') }));
+    expect(unreadFaults(UNREAD_ON_THIS_LINE, readJson(HAND_REL).rows.map((/** @type {{ pool: string }} */ r) => r.pool), files)).toEqual([]);
+    for (const e of UNREAD_ON_THIS_LINE) expect(e.reason.length && e.owedBy.length, e.ref).toBeTruthy();
   });
 
   test('RULE 1: the reds equal the bank of the base exactly (a new red line reds; a cured one leaves the bank)', () => {
@@ -798,6 +857,18 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value }], EXEMPT, true, table)).toEqual([]);
       expect(byConstructionFaults([ref], { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLifeDm', provedBy: table[ref].provedBy } }, read)).toHaveLength(1);
       expect(byConstructionFaults(['src/data/npcData.js :: NPC_WANTS'], { 'src/data/npcData.js :: NPC_WANTS': table[ref] }, read)).toHaveLength(1);
+    });
+
+    test('UNREAD ON THIS LINE: an importer of the declared module makes the entry fault; so does an entry that names no hand row', () => {
+      const ref = 'src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS';
+      const own = { rel: 'src/data/tensionSideMeanings.js', text: "import { x } from './tensionSideMeanings.js';" };
+      const prose = { rel: 'src/data/tensionSidePower.js', text: '/** beside the sides table (`data/tensionSideMeanings.js`) */ export const y = 1;' };
+      expect(unreadFaults([{ ref }], [ref], [own, prose])).toEqual([]);
+      const reader = { rel: 'src/domain/display/tensionShown.js', text: "import { TENSION_SIDE_MEANINGS } from '../../data/tensionSideMeanings.js';" };
+      expect(unreadFaults([{ ref }], [ref], [prose, reader])).toEqual([`${ref}: imported by src/domain/display/tensionShown.js`]);
+      const lazy = { rel: 'src/domain/display/lazySides.js', text: 'export const load = () => import(`../../data/tensionSideMeanings`);' };
+      expect(unreadFaults([{ ref }], [ref], [lazy])).toHaveLength(1);
+      expect(unreadFaults([{ ref }], [], [])).toEqual([`${ref}: names no hand row`]);
     });
 
     test('DECLARED CRIME KEYS (the chair, 19:58): a line under a declared key reds by key; a cite not found faults', () => {

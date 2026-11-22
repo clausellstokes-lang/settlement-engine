@@ -64,7 +64,11 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
   }, 60_000);
 
   test('ww-544 (HIGH): no hook of an ailing or poisoned ruler while the seat stands empty (rww-hamlet-succession_void-1)', () => {
-    const town = bornInc('rww-hamlet-succession_void-1');
+    // RULE8-RESEAT (PAGE-12, 2026-11-22): reseated from rww-hamlet-succession_void-1, whose history no longer prints the would-be
+    // heir's hook. The current tension's pool (troubleHooks.js) draws by key since HOOKS-BUILD, by the mixed key since cure C
+    // (there the line needs `ruler: lord`; the timeline template's plotHooks 0 needs nothing). rww-hamlet-succession_void-3 is
+    // the first of rww-hamlet-succession_void-0..9 where all three expectations hold (3, 7, 8, 9).
+    const town = bornInc('rww-hamlet-succession_void-3');
     expect((Array.isArray(town.stress) ? town.stress : [town.stress]).map((/** @type {any} */ x) => x?.type)).toContain('succession_void');
     expect(historyText(town)).toContain('A would-be heir approaches outsiders');
     // anchored: the same history text is shown directly above to print the would-be heir's hook

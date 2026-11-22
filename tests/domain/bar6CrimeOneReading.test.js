@@ -126,9 +126,12 @@ describe('BAR6-CRIME: crime and the force that keeps order have one reading', ()
     applyUserEdit(edited, 'economicState.safetyProfile.safetyDesc', m36.economicState.safetyProfile.safetyDesc);
     expect(deriveSafetyLine(edited), 'a DM\'s own line').toBe(m36.economicState.safetyProfile.safetyDesc);
     // C154050 (9a.contested, HK1): the diffuse note beside the coordinated hook speaks of appearances
-    const t34 = town('bar0-thorp-calm-rand-34');
-    expect([criminalStructureKeyOf(t34), crimeWaveCoordinated(t34)]).toEqual(['diffuse', true]);
-    expect(deriveCriminalStructure(t34)?.note).toBe(DIFFUSE_NOTE_COORDINATED);
+    // HOOKS-CURES-C2 step 6 (PAGE-12's ruling 13): reseated from bar0-thorp-calm-rand-34, whose stored hooks no longer hold
+    // the coordinated line (the pool draws it by key, mixed since cure C); rand-8 is the first of thorp-calm 0..599 born
+    // diffuse AND coordinated (14 of 600: 8, 28, 54, 115, 154, 182, 247, 310, 315, 347, 551, 552, 587, 594).
+    const t8 = town('bar0-thorp-calm-rand-8');
+    expect([criminalStructureKeyOf(t8), crimeWaveCoordinated(t8)]).toEqual(['diffuse', true]);
+    expect(deriveCriminalStructure(t8)?.note).toBe(DIFFUSE_NOTE_COORDINATED);
     // C200637 (9a.watch): the stored guard line "exists on paper" beside a working rota watch
     const v28 = town('bar0-village-calm-rand-28');
     expect(v28.economicState.safetyProfile.guardEffectivenessDesc, 'C200637: the draw is not moved').toMatch(PAPER);
