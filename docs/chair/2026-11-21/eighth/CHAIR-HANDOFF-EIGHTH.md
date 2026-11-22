@@ -502,7 +502,27 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   meaning. FOR ALL: true at the smallest size where its kind occurs; no need on a hideable house (the eleven listed
   rows stay eleven); the brief `briefs/HOOKS-POOL-2.md` is cut only after point 96 is on the line; the goldens it
   moves again are named, not re-recorded. THE POOL'S OWN STYLE STANDS (the seventh chair's lines there use "he" and
-  "her" of a watchman, a carter, an old woman): no line was changed for that.
+  "her" of a watchman, a carter, an old woman): no line was changed for that. AMENDED THE SAME HOUR ON THE SEAT'S READING
+  OF A THORP (crime_wave occurs from that size): crime_wave 1 becomes "A household's strongbox was opened without
+  being forced, and only three people held a key" (a thorp need hold no merchant) and crime_wave 12 "A reward has
+  been offered for the thief, and a stranger claims to know where the stolen goods are kept" ("posted" presumes an
+  office): SO 16 STAND AS FIRST WRITTEN, 6 ARE REWORDED, 2 ARE HELD TO THE WALKERS. The seat's documents are on its
+  branch at 398420e98 (the hold was lifted for documents once the helper had merged its ab9804585).
+- E38 · DAILY LIFE'S OWNER-ONLY SLOT (B3's E1) ACCEPTED; THREE RULINGS (2026-11-22 06:18 UTC). MERGED BY DAILY-3 at ae1a5d460 (pushed):
+  `commoner_resentments_dm` is derived ONLY for `{ audience: 'owner' }` (a missing audience is a reader); the key is
+  absent on 900 of 900 no-audience reads and `toPublicSafe` documents; `deriveRegenerationDelta` and
+  `buildAiGroundingPayload` never carry it; the crime clauses have left the public slot. Red 4 of 10 on the base;
+  green `tests/lint` whole and 22 governing files (10 red: 8 on the list, 2 the lane's and cured). FIRST PAINT THE
+  LINE'S TO THE BYTE. The dm slot's commonest sentence 3, 3, 1, 3, 8, 8% by size; false 0; hideable 0; "town" 0. THE
+  COUNT THE CHAIR ASKED: 133,650 trapped reads of `secret`, `plotHooks` and `goal` over the 900 shared documents, all
+  the substrate's own (`deriveCausalState` → `deriveAllNpcProfiles`), none daily life's, NONE GIVING A VALUE (the
+  document carries none). The sameness door: one hand row (`HAND_CEILING` 73 to 74 on the lane), a
+  `DM_BY_CONSTRUCTION` row, three house readings. RULED: (1) crime70 #4 REWORDED: "Ordinary folk resent that the law
+  here bends for anyone who can pay." (the classes walker read "to spare" as plenty); (2) crime55's FOUR SMUGGLERS
+  LINES WAIT for `house: smuggling`, which arrives with point 96: added at the lane's unit 4 with that atom (the
+  income-row half of "smuggling" is not built: a smugglers line prints only where a smuggling house lives); the
+  hideable need is lawful in an owner-only table and is named for the security reader; (3) E1's standing test runs 5
+  births a size, the 900 stay in the measure's script with its result in the test's header. E2 is building.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -836,6 +856,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `LINE-NOW.md` to point 96; CI by name; tell PAGE-13 (its unit 3 may start), DAILY-3 (its unit 4's line), VEIL-32
   (the join probe may be ordered once "SEAT" and "FORTUNE" are landed too). PAGE-12 MEANWHILE: the second tranche's
   paper only (which kinds and branches carry the hooks' repeat at city and metropolis; the draft lines to the chair).
+- 2026-11-22 06:18 UTC · WHILE THE STACK'S GATE RUNS (points 95 and 96 merged in the line's worktree as 1fb3ef17b and c35847792; `tests/lint`
+  first): PAGE-12's hold lifted for documents (its brief HOOKS-POOL-2 and ruling 20 pushed at 398420e98); E37 amended
+  (two lines reworded for a thorp). VEIL-32 REPRODUCED PART 32's COUNTS AT ITS TIP 3cca025b8 (the pool re-made
+  05:22 to 05:56 by its clock, every shard clean): GATE-1 4 of 92 with the same seven LOWER BY RULE; GATE-2 20 of 40
+  red; the server equals the twin in every cell; unit (viii)'s builder starts its heavy runs after the green chain.
+  DAILY-3: E38. The chair's branch is on origin at 9564f10d1 (06:02 by the push's log).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
