@@ -17,6 +17,21 @@ FORTUNE-7'S NOTE (2026-11-22 08:1x UTC): STEP 1 IS DONE BY FORTUNE-7 (its unit 0
 `measures/sentences/LASTING-DRAFT.md`. THE BUILDER STARTS AT STEP 2, on the chair's ruled words, which FORTUNE-7 copies
 into this brief VERBATIM before the cut.
 
+THE CHAIR'S WORDS (E57, 2026-11-22 08:21 UTC, VERBATIM; the draft's lines are struck: band-neutral, no "stand", no
+possessive of {seat}, no verb that must agree with {seat}):
+- A "{place} has lasted {span}, and its people count that in favour of {seat}."
+- B "{place} has been here {span}, and people there are loath to see {seat} unsettled."
+- C "{place} has endured {span}, and its people give {seat} some of the credit."
+THE TIME WORDS: `history.age` under 200 years "for generations", otherwise "for centuries"; the threshold (200) is a
+WORDING constant beside the words in the pool's own data file (as `FORTUNE_MERIT_RECENT_YEARS`), never in the law's table.
+THE PICK: `pickVariantMixed` keyed on `${place}::${age}` through `drawDeclared` (poolId
+`fortuneLastingLines:FORTUNE_LASTING_LINES`, surface 'power', drawKind 'H'), as the draft gives it. No need declared.
+THE HAND LIST: ONE row; `HAND_CEILING` is the LINE's figure at the merge plus exactly this row (75 after the first merit
+lands, so 76), its comment extended.
+THE FILE FOR THE CHAIR'S EYE after the build: the three places of `measures/sentences/LASTING-RULED.md` (Radhawadi lasting
+only; Albaminus both; Kabahchihua the captured hall under Tolerated), nine paragraphs as built, owner's page and shared
+page; plus two places with both merits and two with LASTING alone (FORTUNE-7's prompt, unit 2).
+
 ## STEP 1: THE DRAFT (to the chair, NOTHING BUILT)
 
 A file of at most 60 lines, `measures/sentences/LASTING-DRAFT.md`, holding:
