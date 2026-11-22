@@ -131,7 +131,8 @@ describe('a trouble\'s hooks on a shared read: absent from every shared projecti
     const opened = projectShareVeil(galleryPayloadFor(record, { shareDm: true, memberOverrides: eyes }), eyes);
     expect(troubleHooksIn(opened)).toContain(PLANTED_HOOK);
     expect(collectPlotHooks(opened).map((/** @type {any} */ h) => h.text)).toContain(PLANTED_HOOK);
-    expect((opened.institutions ?? []).map((/** @type {any} */ i) => i.name)).not.toContain('Thieves guild');
     expect((opened.institutions ?? []).map((/** @type {any} */ i) => i.name)).toContain('Town watch');
+    // anchored: the same list holds 'Town watch' (the line above), so the institutions were served and only the veiled house is gone
+    expect((opened.institutions ?? []).map((/** @type {any} */ i) => i.name)).not.toContain('Thieves guild');
   });
 });
