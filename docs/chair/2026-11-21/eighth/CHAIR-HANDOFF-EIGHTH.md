@@ -970,6 +970,37 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   PUSH IS IN FLIGHT (the chair waits for the log's own exit line, read from that log and no other); and the seats
   were given the same three lines for their own boxes. NOT DONE, NAMED: this branch's hook is still the old copy
   (it is the record branch's own tree; a lane-path push never runs a test, so the guard above is what protects it).
+- E74 · FORTUNE'S SECOND MERIT: `age on history` MAY BE RE-FROZEN BY WRITER-REACH's DOOR (2026-11-22 12:04 UTC; FORTUNE-7's U7c merged at ecce1402e:
+  `lastingSizeOf` reads `tier` alone, state D identical by its hash, `settType on _config` back to the frozen
+  register). The walker still reds on a second identity the first had hidden: `age on history` goes N to R on the
+  campaign PDF and the world book: the merit's own read through `meritsOf` in the governance paragraph: the feature,
+  proven served unchanged on eleven projections. Conditions: the door's report shows that identity alone moving; the
+  row before and after and the cause in the commit; the field on the veil reader's list with its six surfaces.
+- E75 · THE VEIL'S JOIN PROBE, PASS 1 (DARK): THE VEIL HOLDS ON THE JOINED TREE, AND THE HOOK GAP IS MEASURED (2026-11-22 12:04 UTC; VEIL-33,
+  `lane/veil-33-2026-11-22-joinprobe-wip` at 44c2007ab, report `out/v33/joinprobe/JOINPROBE-PASS1.md`). The merge of
+  the close's dark join (4bba8781d) into the lane: 11 conflicts, none in 212 or its twin; all 1,808 births byte-equal
+  to the lane's; BOTH GATES IDENTICAL TO THE LANE'S (GATE-1 4 of 92 with the same seven LOWER; GATE-2 20 of 40; the
+  twin equals the server); every lane suite green. THE JOIN'S REDS: the roster-choice registry walker: 16
+  unregistered sites (14 from point 88, one each from 84 and 85); line registers lost in the conflicts
+  (tuningRegister, ruinFilterRoster, fixtureGitIsolation); the list's own size row. E35's HOOK GAP: 240 births, 92
+  places with a trouble and a hideable house: 462 hooks served, 11 OF THEM NEED A HOUSE THE READ HIDES (all one
+  line, the one that needs organised crime); 0 name a hidden house or power. RULED: UNIT "(ix)" OF THE JOIN: a
+  served trouble hook whose declared need is a house the read hides leaves the served document, both engines; its
+  arm 0 at every setting, the twin equal to the server. It cannot be built on the lane (the pool is on the line;
+  ruling (e) stands): VEIL-33 PREPARES it (the brief, the red-first instrument on the probe branch; not a line of
+  212 or the twin) and the lane's writer writes it at the join; the 16 sites registered there; the trouble lane's
+  pinned arm (D) is then re-stated the other way. PASS 2 (lit) is running.
+- E76 · WHO RULES' PAGE: THE STALE OFFICE PERSON IS CURED AT ITS SOURCE, AND E70 (2) IS NARROWED (2026-11-22 12:04 UTC; SEAT-10's U7 at fb0c732f9).
+  After a kept-form transfer three printed places still showed the old house's person (the tonight sheet's hook
+  sources, the seat-house face on the Institutions tab, the card's office hat): "U5-STALE", BEFORE THE FIRST DEPLOY:
+  `rulingPower.js :: transferRulingPower`'s kept-form branch moves the office hat to the holder's first; red first
+  on the six. E70 (2) had said the chain's person is "always of the holder's house, else the house's first": that
+  made four births say the seat is unfilled while a person wears its hat: TOO WIDE, the chair's own.
+- E77 · WHO RULES' PAGE READS ONE FACT (2026-11-22 12:04 UTC; the measure E76 asked for: all 24 R3 births whose chain person had moved are births
+  where the hat-wearer belongs to no other house: no contradiction at birth). THE PAGE NAMES THE RECORD'S HAT-WEARER;
+  U5-STALE keeps the hat on the right head at a transfer; THE FALL-BACK IS REMOVED; where nobody wears the hat,
+  today's absence line stands. U6 is merged on the lane at 674148b9c (`HAND_CEILING` 75 there; 76 once point 98 is
+  the line).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1430,6 +1461,16 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    FREED but the landing's, which passed to STACK-98. CI's run on 1ec3e81d1 is not yet read (the push was 10:48).
    THE LESSON FOR EVERY LATER LANDING PROMPT: a landing session must come back from a wait at most every ten minutes
    AND read its messages between waits; the chair uses the interrupting priority for a stop.
+- 2026-11-22 12:04 UTC · NET 12. CI ON POINT 97, READ BY NAME: run 45014246650 at 1ec3e81d1: 63 failing rows, ALL LISTED, NOTHING NEW: who rules
+   landed clean on the whole suite; `tests/domain/distribution.test.js` was green there too and leaves the list (63
+   rows). THE SIX: VEIL-32 (unit (viii) built and read; its re-runs and the new pool under way; 530,630 at 10:56);
+   VEIL-33 (pass 1 done: E75; pass 2 lit running); SEAT-10 (the line merged at 4e9e58f8f; U6 merged at 674148b9c; U7
+   with U5-STALE being built: E76, E77); FORTUNE-7 (U7c merged; U7b building: E74); DAILY-3 (F1 merged at
+   79e55ba30; E3 building; the office atoms: E72); THE LANDING PLACE: STACK-98's doors at 7c03296d8 (five registers
+   by their doors; the observed-shape figures equal fortune's own; lint whole 3 red of 3,364), its step e next.
+   STACK-97 stood down (its f2 pieces 00 and 01 green, 02 with 9 unread reds in 5 files, 03 killed: CI's clean run
+   on the same tree supersedes them). ELEVEN PARKED, none working. NO PLACE FREED. The chair's own branch: E73's
+   repair holds (origin equals local at 77a60f5a6; identity and config right; every push through `safepush.sh`).
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
