@@ -484,12 +484,15 @@ function keepsForm(winner, form, circumstances) {
  * the form. Elsewhere the form becomes the winner's own, exactly today's path. On both paths every edge on the seat whose
  * narrative is the "power behind" sentence for ANOTHER power is RETIRED to a competitive edge naming both powers (the
  * old holder lost the seat), so R1 reads one taker. No key is added; no edge is deleted or added beyond today's.
- * ⭐ U5-STALE (the chair's E77): on the KEPT form, and there alone, the office HAT moves. The hat is the form's rank-1
- * membership and the office word on the wearer's `role`. Every card wearing it loses it (the membership goes; the role
- * becomes the card's house title); the winner's first (its rank-1 card, not ousted) takes it (that membership, and the
- * old wearer's office word where its role carried one). So the seat's candidates (`dossier/seatHolder.js`), the chain,
- * the seat-house face and the card's two hats all read the holder's person. A winner with no first leaves the hat unworn:
- * the seat then reads unfilled. No other card field moves (power, influence, the prose). Absent or old law: byte-identical.
+ * ⭐ U5-STALE (the chair's E77): on the KEPT form, and there alone, the OLD HOUSE's person loses the office HAT. The hat
+ * is the form's rank-1 membership and the office word on the wearer's `role`; the old house's person is a wearer who is
+ * also the first (rank 1) of a third house, neither the form nor the winner (the dual hat of the house that held the
+ * seat). That card loses the hat (the membership goes; the role becomes the card's house title); the winner's first (its
+ * rank-1 card, not ousted) takes it (that membership, and the office word where the old role carried one). So the seat's
+ * candidates (`dossier/seatHolder.js`), the chain, the seat-house face and the card's two hats all read the holder's
+ * person. A winner with no first leaves the hat unworn: the seat then reads unfilled. A wearer who is no other house's
+ * first is the OFFICE's own person (a crown's sovereign, a council's own Mayor) and keeps it, so a crown never passes to
+ * the taker's keeper (CS22 (c)). No other card field moves (power, influence, the prose). Absent or old law: byte-identical.
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
@@ -679,7 +682,8 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
   /** @type {(n: any, p: string) => boolean} */
   const wears = (n, p) => Array.isArray(n?.memberships) && n.memberships.some((/** @type {any} */ m) => m?.power === p && m.rank === 1);
   const heir = cards ? cards.find(n => wears(n, winnerName) && !n.ousted) : null;
-  const worn = cards ? cards.filter(n => n !== heir && wears(n, fromGovernment)) : [];
+  const worn = cards ? cards.filter(n => n !== heir && wears(n, fromGovernment)
+    && n.memberships.some((/** @type {any} */ m) => m?.rank === 1 && m.power !== fromGovernment && m.power !== winnerName)) : [];
   const hat = worn.length ? worn[0].memberships.find((/** @type {any} */ m) => m?.power === fromGovernment && m.rank === 1) : null;
   const office = worn.length && worn[0].title && worn[0].role !== worn[0].title ? worn[0].role : null;
   const npcs = cards && hat ? cards.map(n => (worn.includes(n)
