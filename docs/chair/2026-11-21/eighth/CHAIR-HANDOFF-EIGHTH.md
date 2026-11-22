@@ -1803,6 +1803,39 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   places; the read-stored mode stays as an instrument for the reader and for R5-DESC's legacy arm; its report
   lists every registry rule that reads WORDS rather than a key), then JOIN-PREP (E119). VEIL-36
   (`prompts/VEIL-36.txt`) is seated in the landing's place when STACK-100 is done.
+- E128 · R5-RECENT's REVIEW: ACCEPTED FOR 212 AND THE TWIN; ONE GAP ON THE PAGE, CURED INSIDE R5-DESC (recorded 2026-11-22 20:51 UTC; ruled in the half hour before). VEIL-34's unit (H): the merge taken into its branch as d31846045; READ WHOLE: every code hunk (212's
+  always-pass lines; `galleryWithholdAlways.js`; `pageRederive.js`; `importRederive.js`; the registry rows and
+  sites; `registry.json`; the manifest) and VEIL-33's fix 96c777381 (right: a copy row takes its source's rule, so
+  the always-arm must skip it); the plant's arms by title, its differential whole; the two walkers by their
+  manifest rationales only. THE GAP (a missing proof, not a seen leak): `pageRederive.js ::
+  rederiveRecentConflict` builds the sentence by `generatePowerStructure` from the served HOUSES and config, never
+  from the served powers, and its differential and name check ran on pool births only, which are house hides: a
+  power an OWNER hid by hand (the plant (b); act T) is never judged on the page, and that reader is known to
+  re-create a withheld power (930 of 1,410 hiding pages in VEIL-34's first measure). RULED: cured by R5D-PAGE as
+  its ITEM 0 (one writer on `pageRederive.js`; no line of 212): RED FIRST (the differential and the name check on
+  the plant (b), on jp6-city-8 and on planted hand hides of a density host and of a noble power); THE RULE FOR
+  EVERY PAGE READER: a page reader prints no power's name and no kind word of a power that the served roster does
+  not carry: what the reader builds is cut to the served roster's rows before a sentence is drawn; a sentence that
+  still needs a cut power is NOT DRAWN (toward withholding, never a mask); THE ARM over the pool, the plants and
+  act T, both engines, for every string a page reader writes (recentConflict, the standing by S, the crime lists,
+  the picked bases' arm). If the red does not show, the rule and the arm are built all the same.
+- E129 · VEIL-34 HANDS OVER WITH NO LINE OF R5-DESC BUILT; VEIL-36 SEATED IN ITS PLACE AS CHAIN A's WRITER (recorded 2026-11-22 20:51 UTC). "VEIL-34 HANDS OVER e0ea27cf2" at 20:49 (`lane/veil-34-2026-11-22`; verified by the chair: the lane's tip af708f2fd is merged in; code equal to the
+  tip; PART 35's section 1 current). ITS FIRST BUILDER, R5D-SQL, STOPPED BEFORE ITS FIRST EDIT under the brief's
+  own STOP: it judged that 212 whole (about 121,000 tokens), the registry (about 20,000) and `factionStanding.js`
+  at both trees left it no room "in a 200k window"; nothing edited, committed or pushed (212 unchanged, ff20ed89…).
+  THE PREMISE IS WRONG (a builder on a seat's tier has that tier's window; R5C5-SQL read 212 and the registry
+  whole and built in one sitting, E98). RULED: VEIL-36 (`prompts/VEIL-36.txt`, re-cut for a hand-over that has
+  happened) dispatches R5D-SQL afresh with the line "your window is this seat's tier's; budget about 350,000",
+  AND LIGHTENS IT FIRST: a small builder that reads neither 212 nor the registry drafts the STANDING_FORMS list
+  once (today's forms, master's, any older wording by `git log -S`) as ONE data file with a generator that prints
+  both engines' literals: R5D-SQL then reads 212 and the registry only and pastes a generated literal, and the
+  walker derives the same list (a single source for the table of E121). A by-symbol read of 212 stays forbidden
+  (THE READ-WHOLE LAW). VEIL-36 also writes E128's item 0 into R5D-PAGE's brief (VEIL-34 handed over before it
+  could). WHAT VEIL-34 LEAVES: the digest of rulings 1 to 85 (PART 35 section 2); R5-DESC's three measures
+  (`-r5desc-wip` 606381cb5, `-r5d0-wip` e1e5548cf, `-r5d1-wip` ee2dbda33) and two cure briefs (final at
+  2566872c5); R4-IDS's part one (`-r4ids-wip` 24a6f7ef5, chain B's); (vi) proved (`-vi-wip` 953b7d19c); the
+  review of R5-RECENT (E128). It is not messaged again. A LESSON FOR EVERY BRIEF OF THIS LANE: a builder's brief
+  states the builder's WINDOW in figures, beside what it reads whole.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
