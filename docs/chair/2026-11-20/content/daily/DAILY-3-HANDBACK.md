@@ -44,6 +44,13 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
    OWED TO THE SECOND DEPLOY: millSource (atom: the food record's mill key, `factsOf(r).foodSources` mill; blocked by the
    fact-layer walker's READERS arm, shrink-only); legitimacyGrave (atom: a fact home for the causal band
    `deriveCausalState().bands.public_legitimacy` critical or collapsed).
+6. THE CHAIR'S E59 (08:28 UTC) on U4c: DERIVE IN THE CHAPTER (`SettlementPDF` or `IdentityDailyLife.jsx`), NOT in
+   `dailySlice` (one home `deriveDailyLife`, two callers; no register moves); `commoner_resentments_dm` NEVER prints in
+   the PDF, pinned by one test (the chapter prints no owner-only slot whatever record it is handed); the public slots in
+   the page's `ENGINE_SLOTS` order, empty or "—" dropped; the food callout unchanged; a saved AI account keeps today's rule
+   (visible, read-only). 4c is built after 4b or beside it where files do not touch. Proofs: a differential test (the
+   chapter's lines equal the tab's for the same record); the PDF's size and first paint's three figures beside the line's;
+   `tests/pdf`, `tests/components`, `tests/lint` whole.
 
 ## 3. Houses, class rows, stored figures, worker bytes
 None yet (written at each merge).
