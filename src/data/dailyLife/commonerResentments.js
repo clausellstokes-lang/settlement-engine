@@ -24,13 +24,17 @@
  * - legitimacy #4 "There is open doubt here about whether {gov} {gov|has|have} any right to decide for everyone."
  *   (`legitimacyGrave`: the causal band critical or collapsed has no fact home; the nearest atom, `legitimacy crisis`,
  *   reads another field).
+ * - legitimacy #12 "The lord's steward is obeyed, but not much liked." (the chair's E107, DAILY-4 unit (0a)): cut from
+ *   this landing, for after the first deploy, in the ruled shape `house: lord's steward` beside `office: lord's steward`
+ *   and `sovereign` (a lord's steward presumes a steward's house, not only the office: on four steward thorps the page
+ *   gave the seat to another officer and no steward's house stood). Its atom `office: lord's steward` stays, unused.
  * A line with no true need is not eligible; each branch keeps the rest.
  *
- * THE CHAIR'S LINES OF B3 L8 (E72 and E82 of 2026-11-22, the brief `briefs/B3-L8-OFFICE-LINES.md`): legitimacy #8 to #12,
- * the lines that name the body by its office's own noun, L8 to L12, each on its one `office:` atom (`office: elders`,
- * `office: headman`, `office: mayor`, `office: reeve`, `office: lord's steward`: the governing row's form, read through
- * `seat/seatTable.js :: formKindOf` by the lazy leaf `facts/officeForms.js`); L12 takes the stricter need `sovereign` beside
- * its office (the chair's E95: a lord's steward presumes a lord).
+ * THE CHAIR'S LINES OF B3 L8 (E72 and E82 of 2026-11-22, the brief `briefs/B3-L8-OFFICE-LINES.md`): legitimacy #8 to #11,
+ * the four office lines that name the body by its office's own noun, L8 to L11, each on its one `office:` atom (`office:
+ * elders`, `office: headman`, `office: mayor`, `office: reeve`: the governing row's form, read through
+ * `seat/seatTable.js :: formKindOf` by the lazy leaf `facts/officeForms.js`). L12, the fifth, is NOT BUILT (above; the
+ * chair's E107). The ids are not renumbered: L13 stays L13.
  *
  * THE CHAIR'S LINE OF B3 F1 (06:17 and E56 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 items 4 and 5): food #0, today's
  * text, on `grain` and `market` (bread prices need grain in the food record; "merchants who claim" needs a market, M1's
@@ -57,7 +61,6 @@ export const COMMONER_RESENTMENTS = Object.freeze({
     { id: 'L9', text: 'People grumble that the headman listens to friends first and everyone else last.', needs: ['office: headman'] },
     { id: 'L10', text: 'The mayor is blamed for most of what goes wrong, fairly or not.', needs: ['office: mayor'] },
     { id: 'L11', text: 'People say the reeve they chose has forgotten who chose them.', needs: ['office: reeve'] },
-    { id: 'L12', text: 'The lord\'s steward is obeyed, but not much liked.', needs: ['sovereign', "office: lord's steward"] },
     { id: 'L13', text: 'People say the council is slow to listen and quick to decide without them.', needs: ['ruling body'] },
   ]),
   /** the food band strained, critical or collapsed. */
