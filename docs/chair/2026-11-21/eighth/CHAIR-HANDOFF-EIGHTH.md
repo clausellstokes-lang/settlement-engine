@@ -378,6 +378,14 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   03:20: VEIL-31 on unit (iii) with a fresh builder (GATE-2 26 of 40); SEAT-10's census flipped 46 reds in 26 files,
   its control finishing, UK-LEGACY building; FORTUNE-6 on the line's merge and the event-kind split; PAGE-12 on its
   closing measure (cure C merged; the bar 16.0% and 15.3%, inside the sampling band).
+- 2026-11-22 03:23 UTC · NET 4 (03:23): all four seats reported inside the last half hour. THE CHAIR'S OWN CONTEXT READ 860,516 OF 1,000,000
+  (its cost so far 96.67, the dearest single item; the owner twice told a new chair session is due, silent): it
+  compacts at 901,600 and goes on from `PICKUP-NINTH.md`'s first block and this log. RULED SINCE 03:20: DS-ECO-11 v6
+  reworded with its whole text in hand (the builder had rightly left it); fortune's event kinds split as the seat
+  sorted them (strikes: `external_threat`, `great_flood`, `plague_years`, `great_fire`; lived under and unknown: B
+  only; the strikes list is the closed one); PAGE-12: `--tighten` once, nothing raised; its hooks' second-place share
+  over the 30% bar at the two large sizes (32.4%, 36.5%; 30.3% on the visitor's pool at city) does not hold the
+  landing and is said by its figures. Both seats told to merge f5295e425 before registering their pools.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 

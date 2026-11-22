@@ -4,6 +4,18 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## THE STATE AT 2026-11-22 03:23 UTC (NEWER THAN EVERYTHING BELOW; the eighth chair's own context read 860,516 of 1,000,000: it compacts at 901,600 and goes on from this block and the handoff's log, unless the owner starts a new chair)
+
+- THE LINE: `lane/join-2026-11-14` at f5295e425 (points 87 to 93, pushed 03:20). `ci/LINE-NOW.md` at point 93; `ci/RED-AT-LINE.tsv` 86 rows. OWED: CI's run on f5295e425 read by name (a cheap helper; expect the 86 and nothing else).
+- NEXT ON THE LINE: `lane/prose-4-2026-11-22` (a chair's builder in the chair's container, worktree `/home/user/wt/prose4`, NOT YET ON ORIGIN): cb4a47963 (25 guards and counts re-pointed, tests only), 9513ba024 (five lines reworded by ruling E14, `selfVouchReceipt`'s anchor), and one more commit building (DS-ECO-11 v6: "Nothing more can be taken from the {resource} at {settlement} for the present, but not for good; given time, there will be something to take again."). WHEN IT REPORTS: read the diff of the wording commits, push the branch, land it as point 94 by `landing/BRIEF-LANDING-STACK.md` (its gate runs the governing suites): 25 rows then leave the list.
+- THE FOUR SEATS, each told the line is f5295e425 and to run every test that names a changed module:
+  - FORTUNE-6: U5b merged and pushed (48cbca5cf); the three pages READ by the chair; building the event-kind split (A and C only for kinds that strike: `external_threat`, `great_flood`, `plague_years`, `great_fire`; B for the rest and for no kind); then merges f5295e425, registers its pool on the hand list (the ceiling 73 to 74), rule 8, "FORTUNE <commit>".
+  - PAGE-12: parity and cure C merged; the closing measure merged (every top share under 20%; the second-place share of hooks 32.4% and 36.5% at city and metropolis: OVER the 30% bar, ruled not to hold the landing, said by its figures, first aim of the second tranche); `--tighten` granted once; then merges f5295e425, its sameness rows, rule 8, "PAGE-TROUBLE <commit>".
+  - SEAT-10: the census flipped 46 reds in 26 files; the control's second shard and the four lists owed; UK-LEGACY (E17) building; then rule 8, "SEAT <commit>". Its base holds the line at a64619510 only: THE CHAIR JOINS THE NEWER LINE AT ITS LANDING (or makes a base again if the seat's check refuses the merge).
+  - VEIL-31: units (i) and (ii) proven (GATE-1 4 of 92; GATE-2 26 of 40); unit (iii) with a fresh builder; then (vii) (E16 b), (iv), (v), (vi); "R3 <commit>" at GATE-1 0 and GATE-2 0; 426,535 tokens at 01:18 against the mark of 700,000.
+- THE NETS: the chair wakes itself hourly by `send_later` (net 5 is set for about 04:25): seats running or stalled, the line, CI, its own context.
+- THE OWNER: asked at 01:50 for all progress and every step as tables (answered); has NOT answered on a fifth seat nor started a new chair. The display lane is first for any new seat.
+
 ## Read in this order, and no wider
 1. `docs/OPERATING_STANDARD.md` (master) and CLAUDE.md.
 2. On `origin/lane/chair-2026-11-08`: this file; then `docs/chair/2026-11-21/eighth/CHAIR-HANDOFF-EIGHTH.md` WHOLE (short:
