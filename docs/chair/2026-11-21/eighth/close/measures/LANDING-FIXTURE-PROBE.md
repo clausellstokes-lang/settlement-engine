@@ -13,3 +13,10 @@ scratch): the fixture's seed `lf-033`, its recorded settType `village`.
   either law moves this village, the sample no longer forges the town it shows. RE-MEASURED ON THE LIT SCRATCH: see
   below when run. If the town differs there, it is a TRUE FAULT of class (d) for the recipe (the script must birth
   through `birthConfig` before the close re-emits it).
+
+## ON THE LIT SCRATCH (5c4419815; 2026-11-22 08:13 UTC)
+CONFIRMED by run: the script's birth and the button's birth of `lf-033` (village) now DIFFER beyond the config: in
+`economicState`, `powerStructure`, `npcs`, `history`, `_config`, `arrivalScene`, `defenseProfile` and
+`simulationTrace` (the name and population stay Cnocby, 82). A TRUE FAULT, class (d), sent to the chair: the fixture
+must be emitted through `birthConfig` (after `loadLivingContentRoster`) before the close's `--emit`;
+`tests/build/landingFixtureFreshness.test.js` cannot see it (it re-runs the same script).
