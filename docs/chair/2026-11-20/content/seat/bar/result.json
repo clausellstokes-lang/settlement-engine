@@ -1,0 +1,164 @@
+{
+ "thorp": {
+  "places": 150,
+  "holderApart": 0,
+  "w1Places": 0,
+  "w3Places": 0,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 0,
+   "pct": 0,
+   "s": null
+  },
+  "w1Template": {
+   "n": 0,
+   "pct": 0,
+   "t": null
+  },
+  "w3Sentence": {
+   "n": 0,
+   "pct": 0,
+   "s": null
+  },
+  "w3Template": {
+   "n": 0,
+   "pct": 0,
+   "t": null
+  }
+ },
+ "hamlet": {
+  "places": 150,
+  "holderApart": 14,
+  "w1Places": 5,
+  "w3Places": 14,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 1,
+   "pct": 0.7,
+   "s": "Whoever comes before the Free Elder Council comes before the Merchant Guilds."
+  },
+  "w1Template": {
+   "n": 1,
+   "pct": 0.7,
+   "t": "Whoever comes before the {form} comes before {holder}."
+  },
+  "w3Sentence": {
+   "n": 3,
+   "pct": 2,
+   "s": "They hold the Feudal Stewardship's seat, and answer for what it does."
+  },
+  "w3Template": {
+   "n": 5,
+   "pct": 3.3,
+   "t": "They sit in the {form} themselves, and its rulings are their own."
+  }
+ },
+ "village": {
+  "places": 150,
+  "holderApart": 37,
+  "w1Places": 37,
+  "w3Places": 37,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 10,
+   "pct": 6.7,
+   "s": "The Elder Council is the office here, and the Merchant Guilds hold it."
+  },
+  "w1Template": {
+   "n": 11,
+   "pct": 7.3,
+   "t": "The {form} is the office here, and {holder} {holder|holds|hold} it."
+  },
+  "w3Sentence": {
+   "n": 10,
+   "pct": 6.7,
+   "s": "They hold the Elder Council, and nothing it decides is decided without them."
+  },
+  "w3Template": {
+   "n": 10,
+   "pct": 6.7,
+   "t": "They hold the {form}, and nothing it decides is decided without them."
+  }
+ },
+ "town": {
+  "places": 150,
+  "holderApart": 117,
+  "w1Places": 96,
+  "w3Places": 117,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 12,
+   "pct": 8,
+   "s": "The Merchant Guilds sit in the Town Council and make its rulings."
+  },
+  "w1Template": {
+   "n": 21,
+   "pct": 14,
+   "t": "{holder} {holder|sits|sit} in the {form} and {holder|makes|make} its rulings."
+  },
+  "w3Sentence": {
+   "n": 11,
+   "pct": 7.3,
+   "s": "They sit in the Town Council themselves, and its rulings are their own."
+  },
+  "w3Template": {
+   "n": 29,
+   "pct": 19.3,
+   "t": "They hold the {form's} seat, and answer for what it does."
+  }
+ },
+ "city": {
+  "places": 150,
+  "holderApart": 141,
+  "w1Places": 121,
+  "w3Places": 141,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 11,
+   "pct": 7.3,
+   "s": "The City Council is how this place is ruled, and the Merchant Guilds rule through it."
+  },
+  "w1Template": {
+   "n": 25,
+   "pct": 16.7,
+   "t": "Whoever comes before the {form} comes before {holder}."
+  },
+  "w3Sentence": {
+   "n": 15,
+   "pct": 10,
+   "s": "They govern through the City Council, and what it orders is their order."
+  },
+  "w3Template": {
+   "n": 40,
+   "pct": 26.7,
+   "t": "They govern through the {form}, and what it orders is their order."
+  }
+ },
+ "metropolis": {
+  "places": 150,
+  "holderApart": 145,
+  "w1Places": 117,
+  "w3Places": 145,
+  "w2": 0,
+  "w1Sentence": {
+   "n": 10,
+   "pct": 6.7,
+   "s": "The Grand Council is the office here, and the Merchant Guilds hold it."
+  },
+  "w1Template": {
+   "n": 23,
+   "pct": 15.3,
+   "t": "It is {holder} who {holder|sits|sit} in the {form}."
+  },
+  "w3Sentence": {
+   "n": 11,
+   "pct": 7.3,
+   "s": "They govern through the Grand Council, and what it orders is their order."
+  },
+  "w3Template": {
+   "n": 36,
+   "pct": 24,
+   "t": "They sit in the {form} themselves, and its rulings are their own."
+  }
+ }
+}
