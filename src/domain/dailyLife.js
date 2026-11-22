@@ -884,6 +884,13 @@ export function deriveDailyLifeSlot(key, settlement) {
   return DERIVERS[key](settlement, ctx);
 }
 export const DAILY_LIFE_EMPTY_SLOT_TEXT = /** @type {string} */ (deriveDailyLifeSlot(DAILY_LIFE_SLOTS[0], null)?.text); // the empty slot's marker, read from the one place that writes it (no second spelling)
+/**
+ * THE PAGE'S PUBLIC SLOTS, IN THE PAGE'S ORDER (DAILY-3 U4c, the chair's E59 of 2026-11-22): the slots the Daily Life tab
+ * prints (`components/new/tabs/DailyLifeTab.jsx :: ENGINE_SLOTS`) and the PDF's chapter prints
+ * (`pdf/sections/IdentityDailyLife.jsx`), one home for both callers. Public slots only: never the owner-only slot.
+ * @type {readonly string[]}
+ */
+export const DAILY_LIFE_PAGE_SLOTS = Object.freeze(['dawn_work', 'gathering_places', 'child_warnings']);
 
 /**
  * Derive every canonical daily-life slot. Builds context once.
