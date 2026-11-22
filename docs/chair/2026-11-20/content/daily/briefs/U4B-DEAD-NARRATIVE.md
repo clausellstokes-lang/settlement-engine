@@ -16,6 +16,20 @@ than these, the doors you run, and the tests you run.
 Worktree and branch named by DAILY-3 at dispatch (`lane/daily-3-2026-11-22-4b-wip`), cut from the lane after the line's
 merge. Trailer `Claude-Session: https://claude.ai/code/session_01ACmDYYZpEdm9Ag2ikDGTf9`. You commit; you do NOT push or merge.
 
+## TWO CURES FIRST (the chair, 2026-11-22 10:02 UTC: red on the working line since point 95; they land with "DAILY-B")
+A. `tests/copy/voiceMechanics.test.js` "per-file JSX debt exactly matches the baseline": `src/components/new/tabs/
+   DailyLifeTab.jsx: baseline em:0 -> current em:1` (the tab's empty marker is a literal em dash in the JSX). CURE: the
+   literal leaves the JSX file; the marker is read from the ONE place that defines an empty slot, where
+   `deriveDailyLifeSlot` lives (`src/domain/dailyLife.js`: an exported constant, if none exists, is the one line you may
+   add there). The baseline is SHRINK-ONLY: never raised. Red first by the ratchet itself, then green.
+B. `tests/store/deadOperationRatchet.test.js` "no registered operation JOINS the dead list": `requestDailyLife` has no
+   consumer in `src` since the button went. CURE: the operation is RETIRED from the store with everything ONLY it used on
+   the client (prove each by grep); the dead list is NOT widened. UNTOUCHED: the server's AI daily-life function
+   (`supabase/**`) and its price row (the owner's hand, listed for the close), and a saved AI account's read-only display
+   (`aiDailyLife` as the tab reads it). A symbol with any other live consumer stays: say which.
+PROOFS for A and B: both ratchets red then green; `tests/copy`, `tests/store`, `tests/components` WHOLE; `tests/lint` WHOLE.
+Commit A and B as ONE commit before the removal's commit (two commits in all: the cures, then 4b).
+
 ## The unit
 1. FIRST PROVE IT DEAD: for each symbol you remove, the grep of its callers in `src/` (and `supabase/`) at the tip, in the
    commit message. A symbol with a live caller is NOT removed: STOP and report it.
@@ -38,8 +52,9 @@ merge. Trailer `Claude-Session: https://claude.ai/code/session_01ACmDYYZpEdm9Ag2
 6. BYTES: removing code may LOWER first paint; DAILY-3 builds and measures it.
 
 ## Files you may touch
-`src/components/new/dailyLifeLogic.js`, `src/components/new/tabs/DailyLifeTab.jsx` (imports and dead code only; NOT its
-`ENGINE_SLOTS` or its print), `tests/components/dailyLifeOffer.test.js` (deleted), the tests that name a removed symbol
+`src/components/new/dailyLifeLogic.js`, `src/components/new/tabs/DailyLifeTab.jsx` (imports, dead code and the em-dash literal only;
+NOT its `ENGINE_SLOTS` or its print); `src/domain/dailyLife.js` (ONE exported empty-marker constant, cure A, only if none
+exists); the store files that hold `requestDailyLife` and the client code only it uses (cure B), `tests/components/dailyLifeOffer.test.js` (deleted), the tests that name a removed symbol
 (their arms for it only), the census / declaration / register files by their doors. Nothing else; on a mismatch STOP.
 
 Final message: at most 200 words plus one table (file, rows removed, door): commit shas; the dead-proof greps' counts;
