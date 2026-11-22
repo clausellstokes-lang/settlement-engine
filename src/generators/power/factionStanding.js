@@ -6,12 +6,13 @@
 
 import { powerNameWithArticle, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): a power named in a standing sentence takes its article
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
-import { powerLabelOf, seatHolderApartOf, seatHolderLineOf } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line
-import { seatIsCouncil } from './claimStanding.js';
+import { powerLabelOf, seatHolderApartOf, seatHolderLineOf, seatHolderLinesOf, seatHolderRelationLineOf } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line
+import { seatIsCouncil, withoutSeatAccess } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
 import { inferFactionCategory } from './factionCategories.js';
 import { isCriminalPower } from '../../domain/people/allegiance.js';
+import { seatsByHolder } from '../../domain/seat/seatLaw.js'; // SEAT-10 U6 (E65): the final-record pass reads the record's own law
 
 // BAR8-K-POWERS (rule 13g, the audit's C21547; BRIEF-BAR8 K-POWERS 1): THE GUARD AND THE GUILD'S NOTE READS THEIR TIE. Where
 // the governing seat is itself a criminal power (a purchased council: "Shadow Senate", "Corrupt Council"), the hall-capture
@@ -340,3 +341,60 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         standing && (faction.desc = faction.desc ? faction.desc + ' ' + standing : standing);
       });
 };
+
+/**
+ * THE RANK LINES the standing ladder above writes (rank 1, rank 2, the last rank), read back on the final record: a holder's
+ * row says it holds the seat in place of whichever of them it carries (SEAT-10 U6, the chair's E65 (2): W3 at ANY rank). Read,
+ * never written: the words are the ladder's own, above.
+ */
+const RANK_STANDINGS = Object.freeze([
+  /The gap between them and .+? is narrow\. A single shift in patronage, scandal, or armed muscle could swap their positions\./,
+  /No one clearly leads here; one scandal or one lost ally could change who does\./,
+  new RegExp(SEAT_CONTESTED_STANDING.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+  /They operate in the shadow of .+?, close enough to matter and too far behind to lead\./,
+  /They are strong enough to resist those above them, but too far behind to risk an open fight\./,
+  /Behind .+? by too much to challenge openly, so they get their way through petitions and procedure instead\./,
+  /The order is settled for now; they are busy holding on to second place and make no move on first\./,
+  /\w+ powers stand almost level here, and no one leads; every (?:council vote|decision) has to be bargained for\./,
+  /They are always at the table, but cannot set their own terms\./,
+  /Close enough to the two above that their support is worth buying; they play .+? and .+? against each other when they can\./,
+  /They have a say on only a few matters; on everything else they side with whoever will deal with them that week\./,
+]);
+
+/**
+ * THE FINAL-RECORD PASS (SEAT-10 U6, the chair's E65 of 2026-11-22): where the holder is known only on the final record (R2,
+ * the person's first power, cast after the power step), the form<->holder rows take W1 (and W2 on a licensed pair), the
+ * holder's row takes W3 in place of its rank line at any rank (one row a seat; appended where it carries none), and its
+ * "expect council access" clause is cut. The same gate as the power step (`factionDynamics.js :: seatHolderApartOf`, the
+ * record handed): the seat law off the record's own config, the holder apart, not veiled. Under law 1 it returns before it
+ * reads anything else. Keyed picks only (`seatHolderLineOf`): it draws nothing from the stream. Mutates in place, as
+ * `claimStanding.js :: settleArcaneToPractitioners` beside it does; it runs before `withConflictRelations` reads the rows.
+ * A W3 on any other row (a density-law rival's copy of its host) is cut.
+ * @param {Record<string, any> | null | undefined} record the final settlement record
+ */
+export function settleSeatHolderToRecord(record) {
+  const ps = record?.powerStructure;
+  if (!ps || !Array.isArray(ps.factions) || !seatsByHolder(record)) return;
+  const apart = seatHolderApartOf(ps.factions, record, record);
+  // ONE ROW A SEAT: a W3 the power step wrote on a row that is not the final holder (a density-law rival minted as a copy
+  // of its host carries its host's sentence) is cut, never reworded; no word is authored
+  const form = ps.factions.find((f) => f?.isGoverning);
+  if (form) {
+    for (const f of ps.factions) {
+      if (!f || f === apart?.holder || typeof f.desc !== 'string') continue;
+      for (const line of seatHolderLinesOf('standing', { form, holder: f })) if (f.desc.includes(line)) f.desc = f.desc.replace(` ${line}`, '').replace(line, '').trim();
+    }
+  }
+  if (!apart) return;
+  const seed = record?._seed; // the record's seed: the stream is spent by now, so the key reads the seed the record carries
+  const relation = seatHolderRelationLineOf(apart, seed);
+  for (const row of Array.isArray(ps.factionRelationships) ? ps.factionRelationships : []) {
+    if (row && Array.isArray(row.pair) && row.pair.includes(apart.form.faction) && row.pair.includes(apart.holder.faction)) row.narrative = relation;
+  }
+  const own = seatHolderLineOf('standing', apart, seed);
+  const desc = withoutSeatAccess(String(apart.holder.desc || ''));
+  // one row a seat: the power step's W3 (drawn off the step's stream seed) gives way to the record's, else the rank line, else appended
+  const written = seatHolderLinesOf('standing', apart).find((line) => desc.includes(line));
+  const rankLine = RANK_STANDINGS.find((re) => re.test(desc));
+  apart.holder.desc = written ? desc.replace(written, own) : rankLine ? desc.replace(rankLine, own) : desc ? `${desc} ${own}` : own;
+}
