@@ -1147,6 +1147,35 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   if not inside R5-RECENT, is "R5-DESC" directly after it (withheld, not masked; both engines; a plant red first;
   the mask's wording cured there). THE WRITER NAMES ITS HAND-OVER UNIT NOW; VEIL-34 IS SEATED BESIDE IT ONE UNIT
   BEFORE (it reads in on what is merged; it writes nothing of 212, the twin or the registry until the hand-over).
+- E88 · THE TROUBLE LANE'S TWO REDS ARE A PRODUCT FAULT ON THE LINE SINCE POINT 96; CURE (B) ALONE (2026-11-22 14:56 UTC; PAGE-12's "BAR7" stopped at the cause, 14:35).
+  `guardLineUnderTheLaw.js :: familiesHeldOf` stringifies `history.currentTensions` WHOLE (stored plotHooks included)
+  and tests `FAMILIES_NAMED`; since the pools (cure C's mixed key, bdf40775c) six Collapsed towns keep
+  `TROUBLE_HOOKS.resource_scarcity[2]` ("A family that cannot pay the prices asked is selling its last good
+  tools…"), their only hit: five (r2r-hamlet-0, r2r-hamlet-24, r2s-famine-hamlet-3, bar0-village-famine-rand-38 and
+  -39) print "The old families once kept the peace; they have fallen out among themselves…" and
+  bar0-hamlet-under_siege-rand-29 prints "…the heads of the oldest families"; before point 96 they printed the
+  neighbours and the heads of households. THE CLASS: five need-free pool lines say "a family" or "her family"
+  (crime_wave 13, guild_conflict 6, resource_scarcity 2, external_threat 4, outside_debt 4). RULED: (B) ALONE: A
+  HOOK IS A LEAD, NOT THE RECORD'S PARTY: `familiesHeldOf` reads a tension's description, issue and sides, not its
+  hooks; red first in `src` (the file's two arms and ONE differential pin, both directions, on the six towns and
+  one true holder); the audit's premise narrowed to the same fields with its reason, no assertion loosened, no
+  town re-recorded blind. NOT (A): the five lines keep their words (true prose; a reword moves stored hook strings
+  and the owner's goldens for a fault (B) cures at the root). ONE GREP FOR THE CLASS, reported and not cured: every
+  reader under `src/` that stringifies a record subtree whole and tests words on the string. Rule 8 with one build;
+  "PAGE-BAR7 <commit>" on a branch cut from c110dd85b. TOLD TO THE OWNER the same hour.
+- E89 · THE VEIL'S ORDER BEFORE "R3", AND ITS WRITER'S HAND-OVER (2026-11-22 14:56 UTC; VEIL-33's 14:38, accepted whole). R5-RECENT, R5-DESC (a second unit: every
+  composed sentence of a power's card that can carry another power's name or kind is WITHHELD, not masked, both
+  engines, a plant first; the mask's wording "the an unseen interest" cured there; the walker proves no composed
+  row is left with a host only planned), R4-IDS (VR10's re-key ALONE, split from R4-CURE-2 on
+  `lane/veil-22-r4-2026-11-20` at a4b89bf9d: every person's id re-keyed per read, one salt), then (iv), (v), (vi),
+  IMPORT-DOOR, "R3 <commit>" with the LOWER towns. INV-LIT (the inversion harness re-pointed at the lit law's own
+  score) AT THE JOIN, AFTER R3: accepted as a blind spot that names nothing, ON CONDITION that the probe's
+  lit-surfaces table (owner = server = twin, 60 of 60) is re-run on the joined tree after the three cures and goes
+  to the reader. THE HAND-OVER: VEIL-33 hands over after R5-DESC is merged (or at R5-RECENT's merge if its record
+  passes 600,000 there); VEIL-34 IS SEATED AT "R5-RECENT MERGED <commit>" (`prompts/VEIL-34.txt`, a draft: its hour
+  filled at seating; it reads in beside the writer and prepares R4-IDS; it writes nothing of 212, the twin or the
+  registry until the hand-over). A SEAT OF THIS LANE SPENDS ABOUT 400,000 READING IN: a successor is seated one
+  unit EARLY, never at the mark.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1629,6 +1658,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    next line whether "DAILY-B" fits); CLOSE-1 ("CLOSE-FIXTURE" sent; the lit half of the flipped run started).
    TEN PARKED. NO PLACE FREED. WAITING FOR THE NEXT STACK: "CLOSE-FIXTURE 6f579f0e7".
 
+- 2026-11-22 14:56 UTC · NET 15. POINT 98 IS THE LINE (E85): c110dd85b on origin since 14:28:56; the tip sent to the five seats; CI's run on it is read by name
+   at 15:32 (a check armed). THE SIX: VEIL-33 (the writer: (viii)'s hand-over merged as 929739889; the pool re-made
+   after a slip in a template's name; R5-RECENT's plant and walker written; E87, E89; about 480,000); SEAT-10 (three
+   walker baselines done: ea9f5c449, 4be9bccd7, a20eaddef; the dark proof equal; merging the line; `HAND_CEILING` 76;
+   BU7 after the line; then "SEAT-B"); FORTUNE-7 (the line merged at b6492abd3; `HAND_CEILING` 76 = 75 and LASTING's
+   row; the build done; rule 8 queued; U8's diagnosis builder out on `-u8`: E86; about 490,000; hands over at 640,000
+   if U8's cure is not merged); DAILY-3 (E82, E83: L8 to L12 and 4c building, two builders; hands over at 620,000);
+   CLOSE-1 (E86's finder; its probes at 8500e4406; `defenceParts` R13 not a fault: U8's second arm, test only; the 77
+   class (a) by name, no golden among them; JOIN's builder out on c110dd85b; about 400,000); PAGE-12 IN THE LANDING'S
+   PLACE (E88: "BAR7" is a product fault; cure (B) building). NINE PARKED. STACK-98 done. WHEN TWO LANES EACH ADD ONE
+   HAND ROW (SEAT-B 76, FORTUNE-B 76), THE STACK'S TOP IS 77: the line's 75 plus exactly the two rows: a classed
+   conflict for STACK-99's prompt. THE CHAIR'S BRANCH: origin equals local (dfa0a9eb3 before this commit).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
