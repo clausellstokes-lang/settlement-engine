@@ -1216,6 +1216,44 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   one row applied and the walker whole (both titles green; no knock-on; who reads `powersList`); if a knock-on
   exists, its cure (1) returns (the contest's cast-reading part settled at birth and stored), the seat lane's.
   FOR THE VEIL: the contenders list read from the cast on a shared read is row 18 of the reader's list.
+- E92 · R5-RECENT GOES "THE OTHER WAY": THE SENTENCE IS WITHHELD ALWAYS AND THE PAGE RE-DERIVES IT (ruled 2026-11-22 15:17 UTC; written 2026-11-22 15:30 UTC). VEIL-33's 15:11: the gates
+  at 83d236813 on a fresh pool (pool-t2sig-4): GATE-1 4 of 92 (the same seven lower by rule), GATE-2 20 of 40, twin
+  equal to server: EQUAL to VEIL-32's; its count about 560,000. The cure's builder stopped before any edit
+  (`lane/veil-33-2026-11-22-r5cure-wip` at 6b204fd65; the plant red 6 of 9 with its teeth green; the walker 27) on
+  two real STOPs: (1) NO WITHHELD FORM EXISTS: `recentConflict` is a non-empty string on 240 of 240 births and is
+  served on 136 of 136 nothing-hidden pages: an absent value on a hiding read is itself a tell; (2) the owner-hidden
+  name is not in the ruled host (the full town is in hand only in `_gallery_apply_member_overrides`), and a
+  lower-case spelling slips the case-sensitive mask. RULED: `powerStructure.recentConflict` IS WITHHELD ALWAYS, on
+  every shared read of every place, both engines; ONE READER on the page re-derives it from the served document
+  with the engine's own writer, wired at the doors where `rederiveCrimeTypes` is; never a per-place withheld form,
+  never the hidden name in any host; the measure first, split by the sentence's two writers
+  (`governanceNarrative.js :: buildGovernanceLabels`; `rulingPower.js :: transferRulingPower`); the registry's
+  writer row corrected (it named `conflicts.js`). THE HAND-OVER MOVES UP: VEIL-33 hands over AT THIS UNIT's MERGE;
+  VEIL-34 IS SEATED IN THE NEXT PLACE THAT FREES, before the landing (the veil is the longest road).
+- E93 · R5-RECENT's MEASURE, AND THE READER CHOSEN: R1, READER B (2026-11-22 15:30 UTC; VEIL-33's 15:28, R5C2 STOP ac809527e; 480 births, 40 a size, two samples; Reveal off
+  equal to dm in every cell). Reader A (`buildGovernanceLabels` over the served powers): 132 of 141 nothing-hidden
+  pages, 221 of 240 full. READER B (`generatePowerStructure` over the served page, which calls the writer): 286 OF
+  287 nothing-hidden, 478 of 480 full. Reader C (B less the coherence-repair rows): 135 of 141. THE ONE MISS,
+  r5c2-m3-hamlet-8 (it hides nothing): a coherence repair adds a Citizen militia AFTER the power step wrote the
+  famine sentence; the served page shows the militia, so B takes another famine branch ("Food is short…" against
+  the stored "The last harvest failed badly…"); not recoverable from the record. TRANSFERS: 0 of 480 dark births;
+  in play the served page carries `previousGovernments` (label, cause), `governingName`, the winner's row
+  `ascendant` and a lawful cause's deposed row `fell_from_power`: composable only where the winner's row is served.
+  RULED: BUILD B. (1) the fidelity arm pins THE CLASS, not a count (a page whose record shows a house added by a
+  coherence repair after the power step: listed by name with that cause; a miss of any other cause reds); (2) the
+  unit's proof is the differential (a hiding read's page sentence equals that of the same place with the power
+  never there, both doors) and the plant green by ABSENCE of the field on every served payload, both engines;
+  (3) TRANSFERS ARE NOT IN THE UNIT: the page prints B's baseline sentence there; a second step, "R5-RECENT-T"
+  (a transfer's sentence composed where the served page carries its parts and the winner's row is served), is
+  placed by the LIT count asked of CLOSE-1 (how many lit births store a transfer's sentence, and how many of those
+  takers a share hides by default): few, and it follows R3; many, and it goes before (iv); the successor's;
+  (4) no new 212 helper; the rollback untouched. ASKED OF VEIL-33: whether `previousGovernments`' cause and
+  `governingName` spell or imply a withheld taker on a hiding read. INTAKE AFTER THE FIRST DEPLOY (the generation
+  lane): the power step's sentence is written BEFORE the coherence repair and never re-settled. ALSO THIS HOUR:
+  CLOSE-1 confirmed E91's path by a read-trap (`derivePowerStrata` to `rulingPowerCoup.js :: coupContenders` to
+  `seatCandidatesOf` for npcs and tier, to `seatCircumstancesOf` for stress, stressors and economicState) and the
+  one row clean over all 90 leaves with no knock-on; VEIL-33's probe HAD judged the contenders (row 18): a hidden
+  name in the strata's own output on four places: inside R5-DESC's scope (`prompts/VEIL-34.txt` says so).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
