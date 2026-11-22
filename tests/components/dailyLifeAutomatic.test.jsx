@@ -9,8 +9,9 @@
  *   · (b) any control or line offers to make a daily-life account (`daily-life-offer`, "Generate Daily Life", a credit
  *     price, the save-to-enable line), saved (`saveId` given) or unsaved (`saveId` null);
  *   · (c) a shared read (`publicDossier`, and `playerView`) handed `toPublicSafe(record)` prints lines derived from
- *     anything but THAT document;
- *   · (d) mounting the page calls the store's `requestDailyLife`.
+ *     anything but THAT document.
+ * (Its arm (d), "mounting the page never calls the store's `requestDailyLife`", left with that operation: DAILY-3 U4b
+ * retired it from the store, so there is nothing left to call.)
  *
  * Six born places, one a size, seeds `dlauto-<size>-0` (the census dials, as bar2ServicesRows births them). The store is
  * mocked with `isConfigured` true (the product's configured mode, where the old offer was a credit-spending button).
@@ -55,10 +56,9 @@ const lines = (doc) => SLOTS.map((k) => String(deriveDailyLifeSlot(k, doc)?.text
 
 /** @param {any} props */
 const mount = (props) => {
-  const requestDailyLife = vi.fn();
-  mocks.store = { savedSettlements: [], auth: { tier: 'premium' }, aiDailyLife: null, aiLoading: false, aiRegenerating: false, aiError: null, aiProgress: '', creditBalance: 100, requestDailyLife };
+  mocks.store = { savedSettlements: [], auth: { tier: 'premium' }, aiDailyLife: null, aiLoading: false, aiRegenerating: false, aiError: null, aiProgress: '', creditBalance: 100 };
   const { container } = render(<DailyLifeTab {...props} />);
-  return { text: container.textContent || '', container, requestDailyLife };
+  return { text: container.textContent || '', container };
 };
 
 /** each text appears, and in the given order @param {string} hay @param {string[]} texts */
@@ -125,15 +125,5 @@ describe('the Daily Life page prints the engine\'s own three lines, with no butt
       }
     }
     expect(wrong).toEqual([]);
-  });
-
-  test('(d) mounting the page never calls the store\'s requestDailyLife', () => {
-    for (const size of SIZES) {
-      for (const saveId of ['s1', null]) {
-        const { requestDailyLife } = mount({ settlement: towns.get(size), saveId });
-        expect(requestDailyLife).not.toHaveBeenCalled();
-        cleanup();
-      }
-    }
   });
 });

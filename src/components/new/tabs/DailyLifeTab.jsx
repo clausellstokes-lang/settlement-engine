@@ -5,7 +5,7 @@ import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { extractSettlementContext } from '../dailyLifeLogic';
-import { deriveDailyLifeSlot } from '../../../domain/dailyLife.js';
+import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT } from '../../../domain/dailyLife.js';
 import { textOf } from '../../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared row gives back its text until its site is wired
 import { useStore } from '../../../store/index.js';
 import { economyDeskRead } from '../economyDeskRead.js';
@@ -67,7 +67,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = fal
     for (const key of ENGINE_SLOTS) {
       const slot = deriveDailyLifeSlot(key, r);
       const sentence = typeof slot?.text === 'string' ? slot.text.trim() : '';
-      if (sentence && sentence !== '—') out.push(sentence);
+      if (sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT) out.push(sentence);
     }
     return out;
   }, [r]);

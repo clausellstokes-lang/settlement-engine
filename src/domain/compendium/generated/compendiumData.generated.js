@@ -86,11 +86,11 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 159,
+    "count": 158,
     "exemptCount": 70,
     "byKlass": {
       "canon": 6,
-      "macro": 47,
+      "macro": 46,
       "mechanical": 106
     },
     "scopes": ["campaign","global","save"],
@@ -119,7 +119,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"applyQueuedRegionalImpact","label":"Apply a queued regional impact","description":"Applies one queued regional impact to its target settlement and records the result.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"impact-result","undoToken":null},
       {"opType":"resolveRegionalImpact","label":"Resolve a regional impact","description":"Marks a regional impact as resolved and records its outcome.","klass":"macro","slice":"campaignRegionalSlice","targetScope":"campaign","receiptRef":"impact-result","undoToken":null},
       {"opType":"requestNarrative","label":"Request narrative refinement","description":"Sends the settlement for AI narrative refinement and records the result to the chronicle. It can be reverted to the raw generated text.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":"AI_GENERATION_COMPLETED+chronicle","undoToken":"revertCurrentToRaw"},
-      {"opType":"requestDailyLife","label":"Request a daily-life account","description":"Requests an AI daily-life account for the settlement. It can be reverted to the raw generated text.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":"AI_GENERATION_COMPLETED","undoToken":"revertCurrentToRaw"},
       {"opType":"requestProgression","label":"Request a progression account","description":"Requests an AI account of how the settlement has progressed and records it to the chronicle. It can be reverted to the raw text.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":"AI_GENERATION_COMPLETED+chronicle","undoToken":"revertCurrentToRaw"},
       {"opType":"applyCosmeticRename","label":"Apply a cosmetic rename","description":"Applies a purely cosmetic rename returned by narrative refinement, without changing any underlying canon.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"revertCurrentToRaw","label":"Revert to the raw text","description":"Discards the AI-refined narrative for the current settlement and restores the raw generated text, recording a chronicle entry.","klass":"macro","slice":"aiSlice","targetScope":"save","receiptRef":"chronicle-entry","undoToken":null},
