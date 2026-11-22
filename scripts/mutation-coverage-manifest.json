@@ -2878,6 +2878,22 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/fortuneLawStanding.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawMerits.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawSafety.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
+    "tests/generators/fortuneLawTradeLine.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by FORTUNE-1 U4 (FS7 finding F2, FORTUNE-3's builder) on lane/fortune-3-u4-2026-11-20. It pins src/generators/economy/prosperity.js :: deriveEconomicSituationDesc under the fortune law (src/domain/fortune/fortuneLaw.js :: isSizeRelativeFortune): (a) where law 1 prints the high band's guild line at a law-2 small birth holding no guild, law 2 prints a line naming no guild that TRADE_LINE_BANDS still reads as the high band, and a place with a guild house keeps the line; (b) the same records' line recomputed without the marker, or with 1, is today's. Its red-first IS on record: before prosperity.js changed, (a) failed on Lipoev (thorp, Prosperous) printing the guild line. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
+    },
     "tests/generators/randomConfigReroll.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
@@ -4014,6 +4030,10 @@
     "tests/generators/prosperityStanding.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by COHERENCE-UPKEEP-5 R3 (the chair's R3, the standing label), commit 0c950f06. It pins src/generators/economy/prosperity.js :: deriveProsperityLabels and src/domain/facts/keep.js :: keepOfRecord: on fresh v3build-* births the printed label equals e1b2f9c1f's, economicState.prosperityStanding equals the probe's no-crisis reading, the stores are laid by at the standing share, an old save without the field reads its label, and the two labels take one Subsistence draw. Its pins were measured against a probe copy, but its red-first is not on record. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
+    },
+    "tests/generators/fortuneLawFortune.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by FORTUNE-1 U2 (fortune judged against the place's own size: FS1, and FS4's calm floor), on lane/fortune-2-u2-2026-11-20. It pins src/generators/economy/prosperity.js :: computeBaseProsperity and deriveProsperityLabels under the fortune law (src/domain/fortune/fortuneLaw.js :: isSizeRelativeFortune, FORTUNE_LAW_TUNING): (a) with no marker every call equals law 1 and every garbage marker over a grid; (b) under 2 the size alone moves no base, the depth term reads each size's own expectation, the diversity count moves nothing; (c) the calm floor holds at Poor and only where it should; (d) twelve forced births read what the functions compute, and the same births with no marker are byte-identical to law 1. Its red-first IS on record: before prosperity.js changed, every lit title of (b), (c) and (d) failed for the law's absence, each lit arm carrying its own today-control computed on the same inputs, which is the attribution a planted mutant would give. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
     },
     "tests/generators/defenceParts.test.js": {
       "kind": "rationale",

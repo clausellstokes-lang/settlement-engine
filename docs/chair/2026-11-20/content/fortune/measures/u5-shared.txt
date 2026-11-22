@@ -1,0 +1,20 @@
+
+u5-hxd.jsonl: 600 towns probed; 64 with a merit counted
+  ruler        carried in 100% of towns; in 100% of the towns with a merit
+  rulerTraits  carried in 100% of towns; in 100% of the towns with a merit
+  events       carried in 100% of towns; in 100% of the towns with a merit
+  tensions     carried in 100% of towns; in 100% of the towns with a merit
+  notes        carried in 100% of towns; in 100% of the towns with a merit
+  capture      carried in 0% of towns; in 0% of the towns with a merit
+  breakdown    carried in 100% of towns; in 100% of the towns with a merit
+  towns whose shared page would OMIT a counted merit's reason: 0
+
+u5-hxr.jsonl: 600 towns probed; 45 with a merit counted
+  ruler        carried in 96% of towns; in 100% of the towns with a merit
+  rulerTraits  carried in 96% of towns; in 100% of the towns with a merit
+  events       carried in 100% of towns; in 100% of the towns with a merit
+  tensions     carried in 100% of towns; in 100% of the towns with a merit
+  notes        carried in 100% of towns; in 100% of the towns with a merit
+  capture      carried in 0% of towns; in 0% of the towns with a merit
+  breakdown    carried in 100% of towns; in 100% of the towns with a merit
+  towns whose shared page would OMIT a counted merit's reason: 0

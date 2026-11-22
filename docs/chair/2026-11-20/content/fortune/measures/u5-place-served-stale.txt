@@ -1,0 +1,57 @@
+== stale-served-hxd
+{
+ "tree": "<scratch>/served",
+ "order": [
+  "assembleSettlement",
+  "u5PlaceMerits",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxd",
+ "births": 600,
+ "moved": 33,
+ "moves": {
+  "Tolerated -> Tolerated": 3,
+  "Tolerated -> Approved": 23,
+  "Approved -> Endorsed": 7
+ },
+ "W1": 0,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 4,
+ "W4": 0,
+ "W5": 6,
+ "W4control": {
+  "towns": 180,
+  "differ": 0
+ },
+ "examples": []
+}
+== stale-served-hxr
+{
+ "tree": "<scratch>/served",
+ "order": [
+  "assembleSettlement",
+  "u5PlaceMerits",
+  "resolveCrisisCast"
+ ],
+ "prefix": "hxr",
+ "births": 600,
+ "moved": 31,
+ "moves": {
+  "Tolerated -> Approved": 13,
+  "Approved -> Endorsed": 10,
+  "Tolerated -> Tolerated": 3,
+  "Endorsed -> Endorsed": 5
+ },
+ "W1": 0,
+ "W2": 0,
+ "W3": 0,
+ "W4towns": 3,
+ "W4": 0,
+ "W5": 1,
+ "W4control": {
+  "towns": 201,
+  "differ": 0
+ },
+ "examples": []
+}
