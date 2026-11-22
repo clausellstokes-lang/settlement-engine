@@ -18,7 +18,7 @@
  * THE STEPS (CURE-REWORD-LODGER, addendum 1, DEPTH-5, 2026-11-22). The base is never edited: a later tranche or rewording
  * that moves a line's hash APPENDS a step to tests/fixtures/hookThemeAnswers.steps.json, and this file reads base ∘ steps
  * through tests/helpers/hookThemeAnswers.js (the one home of the composition; the totality walker reads it too). The
- * `steps` part below holds the composition itself: a step retires only hashes its part held, adds only hashes it did not,
+ * pools part below first holds the composition itself: a step retires only hashes its part held, adds only hashes it did not,
  * the composed pools hold 270, and every answer no step names is the base's.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -66,37 +66,39 @@ function answersNow(texts) {
 }
 
 describe('themeOfText answers what it answered at the base 2582075ed', () => {
-  it('steps: each retires only what its part held and adds only what it did not; the pools hold 270; every other answer is the base\'s', () => {
-    const base = readAnswersBase();
-    const steps = readAnswersSteps();
-    const { parts, faults } = composeAnswers(base, steps);
-    // anchored: the steps file is live and its first step moves the pools (CURE-REWORD-LODGER, E6 (c))
-    expect(steps.length).toBeGreaterThanOrEqual(1);
-    expect(steps[0].part).toBe('pools');
-    expect(faults).toEqual([]);
-    expect(answerByHash(parts.pools).size, 'the composed pool part').toBe(270);
-    expect(Object.keys(parts).sort()).toEqual(Object.keys(base.parts).sort());
-    for (const [name, part] of Object.entries(base.parts)) {
-      const named = new Set(steps.filter((s) => s.part === name).flatMap((s) => [...(s.retire || []), ...Object.values(s.add || {}).flat()]));
-      const was = answerByHash(part);
-      const now = answerByHash(parts[name]);
-      expect([...was].filter(([h, a]) => !named.has(h) && now.get(h) !== a), `${name}: an answer no step names moved`).toEqual([]);
-      expect([...now].filter(([h]) => !named.has(h) && !was.has(h)), `${name}: a hash no step names appeared`).toEqual([]);
-    }
-    // the composition's refusals, EXECUTED on planted steps: a retire of an unheld hash, an add of a held one, no cause
-    const [held] = [...answerByHash(base.parts.pools).keys()];
-    const planted = composeAnswers(base, [
-      { cause: 'planted', part: 'pools', retire: ['zzzzzzz'], add: { ambition: [held] } },
-      { cause: '', part: 'pools', retire: [], add: {} },
-    ]);
-    expect(planted.faults).toEqual([
-      'step 0 (pools): retires zzzzzzz, which the part did not hold',
-      `step 0 (pools): adds ${held}, which the part already held`,
-      'step 1 (pools): no cause',
-    ]);
-  });
-
   it('pools: every NPC_FACTION_LOYALTY line, exact set, every answer equal', () => {
+    // THE STEPS (no title of their own: the sovereignty lighting census counts titles): each retires only what its part
+    // held and adds only what it did not; the pools hold 270; every other answer is the base's.
+    {
+      const base = readAnswersBase();
+      const steps = readAnswersSteps();
+      const { parts, faults } = composeAnswers(base, steps);
+      // anchored: the steps file is live and its first step moves the pools (CURE-REWORD-LODGER, E6 (c))
+      expect(steps.length).toBeGreaterThanOrEqual(1);
+      expect(steps[0].part).toBe('pools');
+      expect(faults).toEqual([]);
+      expect(answerByHash(parts.pools).size, 'the composed pool part').toBe(270);
+      expect(Object.keys(parts).sort()).toEqual(Object.keys(base.parts).sort());
+      for (const [name, part] of Object.entries(base.parts)) {
+        const named = new Set(steps.filter((s) => s.part === name).flatMap((s) => [...(s.retire || []), ...Object.values(s.add || {}).flat()]));
+        const was = answerByHash(part);
+        const now = answerByHash(parts[name]);
+        expect([...was].filter(([h, a]) => !named.has(h) && now.get(h) !== a), `${name}: an answer no step names moved`).toEqual([]);
+        expect([...now].filter(([h]) => !named.has(h) && !was.has(h)), `${name}: a hash no step names appeared`).toEqual([]);
+      }
+      // the composition's refusals, EXECUTED on planted steps: a retire of an unheld hash, an add of a held one, no cause
+      const [held] = [...answerByHash(base.parts.pools).keys()];
+      const planted = composeAnswers(base, [
+        { cause: 'planted', part: 'pools', retire: ['zzzzzzz'], add: { ambition: [held] } },
+        { cause: '', part: 'pools', retire: [], add: {} },
+      ]);
+      expect(planted.faults).toEqual([
+        'step 0 (pools): retires zzzzzzz, which the part did not hold',
+        `step 0 (pools): adds ${held}, which the part already held`,
+        'step 1 (pools): no cause',
+      ]);
+    }
+
     const base = baseOf('pools');
     const { now, split } = answersNow(Object.values(NPC_FACTION_LOYALTY).flat().map(lineText));
     expect(base.size, 'the fixture\'s pool part').toBe(270);
