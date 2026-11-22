@@ -79,6 +79,15 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   (worktree `/home/user/wt/r5r`, branch `v33-r5recent`; to go up as `lane/veil-33-2026-11-22-r5recent-wip`): the plant
   `tests/security/galleryVeilRecent.pglite.test.js` and the walker `tests/lint/rosterChoiceComposedHosts.walker.test.js`, both RED by
   design; the lit witness is the probe's act K. Nothing in 212, the twin or the registry.
+- R5-RECENT'S INSTRUMENTS RETURNED (V33-R5R, `lane/veil-33-2026-11-22-r5recent-wip` at 69ccb5498, pushed; the diff read whole once
+  by the seat: no fault): the plant RED 6 of 6 (both engines, both stored shapes, every setting, Reveal off and on; server = twin on
+  every read), its three teeth GREEN; the composed-hosts walker RED on 27 rows (R5's planned host; `power.recentConflict` first),
+  its controls green; manifest rows; `tests/lint` whole = the sixteen standing + the walker's 27 designed rows. ITS NOTE: on Reveal
+  DM both engines serve an owner-hidden power's row (`hidden: true`) and `recentConflict` names it unmasked: that read does not
+  withhold it (the plant judges the player view there); for the chair. THE CURE: builder V33-R5C seated (worktree
+  `/home/user/wt/r5c`, branch `v33-r5cure`: the lane at 2e0cfa1be + the instruments merged as f8d8ea6e3, one manifest conflict taken
+  both sides; the brief's CURE BUILDER section cbaa8d540: the rule hosted in R3's EXISTING host, R5's composed host stays planned;
+  the open form measured first; the owner-hidden plants a STOP if they need the hidden name or 210/211).
 - PER-LAW GATES (ruling 95 (4)): scratch trees `/home/user/wt/jpf` (`lane/veil-33-2026-11-22-joinprobe-lawf-wip` d3c4da41f:
   fortune's dial alone on 27c7e79dd) and `/home/user/wt/jps` (`…-laws-wip` 44f9eef84: the seat's two alone); pools `pool-jpf`,
   `pool-jps`, both gates each: `/var/tmp/v18/out/v33/perlaw/perlaw.sh` (log `perlaw.log`), queued on the mutex after pass 2's END.
@@ -155,3 +164,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 12:21 the chair's E78 (ruling 95) read. then act T's strings sorted; the R5-RECENT brief committed (abd68e653); its builder seated; the per-law trees cut and their run queued (12:25).
 - 13:07 the chair: VEIL-32 handed over (ruling 96). 13:08 the per-law run cancelled (no pool had started). 13:08 7027b89ea merged (929739889), no conflict; (viii)'s diff read whole; 13:09 chainH launched (queued on the mutex).
 - 14:30 the chair: the line at point 98 (c110dd85b; both laws dark on it; to know); the readers' list to check. 14:30 the gates' failure found (the template's case) and re-run. 14:31 the line to the chair (status, the three asked lines, the readers' list notes).
+- (before 14:45, not clocked) R5R returned; its diff read; pushed `-wip`; the cure's worktree cut and merged; R5C seated. A SLIP, SAID: commit 2e0cfa1be's `Claude-Session` trailer names the chair's session (session_01ACmDYY29VRchM87v1yhL9Q), not this seat's (session_01ACmDYYeP5WWiLi6bmykSME); pushed before it was seen; not rewritten (no history is).
