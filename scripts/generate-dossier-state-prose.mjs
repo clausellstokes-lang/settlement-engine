@@ -609,6 +609,8 @@ const WORD_CORRECTIONS = Object.freeze([
   { pool: 'DS-ECO-8 :: PROSPEROUS', vid: 7, from: '68d8269711c72f99fab0db5311cdcbfdebef5531c3bceca53d09c74aa9687ea0', to: 'a6db5e16c25ce8870a9a1699e8801e2d473be6f487d862e3740dde2204c74397', ruling: 'POINT89-CHAIR-2026-11-22' },
   { pool: 'DS-GEN-13 :: NO-MARKET', vid: 12, from: 'aa699fd8f0ba666bb491464d98ba96f23f8b4d68a80f0e4c0084933a5108b7d6', to: '895382b92022c26a53aaabed4b71ffd26279f589338925cf7e06199fc894dd25', ruling: 'POINT89-CHAIR-2026-11-22' },
   { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
+  // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: 'f745a2b64d58f148a15563dcdfdf61ca42ec3a4f2817aba09771fea9930fd8cc', to: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', ruling: 'POINT89-CHAIR-2026-11-22-V6' },
 ]);
 
 async function readNumberingBaseline() {

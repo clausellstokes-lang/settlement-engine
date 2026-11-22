@@ -6343,7 +6343,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The {resource} at {settlement} is spent for the present and not for good: the ground still holds the means to give it again.",
+          "text": "Nothing more can be taken from the {resource} at {settlement} for the present, but not for good; given time, there will be something to take again.",
           "slots": [
             "resource",
             "settlement"
