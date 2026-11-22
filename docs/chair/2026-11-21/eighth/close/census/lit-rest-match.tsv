@@ -1,0 +1,9 @@
+ON 	tests/copy/voiceMechanics.test.js	E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+ON 	tests/edgeFunctions/aiCharterBundle.freshness.test.js	aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+ON 	tests/edgeFunctions/aiGroundingBundle.freshness.test.js	Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+ON 	tests/edgeFunctions/aiGroundingBundle.freshness.test.js	Tier 6.8 — runtime smoke: the bundle is loadable and behaves like the source buildAiGroundingPayload from the bundle agrees with the source for a fixture
+ON 	tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js	aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+ON 	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+ON 	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+ON 	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content
+ON 	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) engineBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content

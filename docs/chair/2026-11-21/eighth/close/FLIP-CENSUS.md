@@ -131,3 +131,19 @@ metropolis 1 (1); holder a different row from the governing row: hamlet 8 (8), v
 cities and metropolises dark, 100 of them lit too. What is out of order is the LAST row, an alliance or coalition power
 appended after the sorted list ("… Compact", "… Alliance", "The Underground"), whenever its share tops the row before
 it; the lit law only moves shares. NOT the lit law's; not the holder put first.
+
+## PART 6: every other directory under tests/ and the root test files (lit, ended 15:46 UTC)
+431 files, 5,957 tests: 9 red, ALL 9 ON RED-AT-LINE; nothing new.
+
+## THE REHEARSAL'S TOTALS (lit, e987c3e36; all six parts; 13:34 to 15:46 UTC)
+| part | files | tests | red | on the list | NEW | (a) | (a*) | (d) |
+|---|---|---|---|---|---|---|---|---|
+| 1 gen, data, property | 633 | 4,692 | 99 | 20 | 79 | 77 | 1 | 1 (fault 1, fortune: U8) |
+| 2 domain | 1,353 | 20,060 | 62 | 5 | 57 | 57 | 0 | 0 |
+| 3 build (after one build) | 68 | 621 | 15 | 15 | 0 | 0 | 0 | 0 |
+| 4 lint | 223 | 3,364 | 5 | 3 | 2 | 0 | 0 | 1 (fault 2, seat: RULED E91, an expected move: step 1b) |
+| 5 components, ui, pdf, store, lib | 1,057 | 8,489 | 14 | 2 | 12 | 12 | 0 | 0 |
+| 6 the rest | 431 | 5,957 | 9 | 9 | 0 | 0 | 0 | 0 |
+| ALL | 3,765 | 43,183 | 204 | 54 | 150 | 146 | 1 | 2 |
+NO GOLDEN AND NO REFERENCE among the 150: the golden master's rows are red at the line already (RED-AT-LINE, the
+owner's), and stay red lit; THE LIT GOLDEN CORPUS (births through `birthConfig`, beside the old) is not yet made.
