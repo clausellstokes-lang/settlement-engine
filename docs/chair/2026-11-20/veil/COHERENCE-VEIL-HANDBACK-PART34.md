@@ -233,6 +233,18 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     reader's list (row 19), this ruling beside them: the fold's hit on "The Shadow Compact"'s bare form; and `previousGovernments`'
     cause on a hiding read in play (IF IT NAMES THE TAKER: a composed row of R5-DESC's class, for the successor). R5-DESC's brief
     carries (c) and the cause question.
+102. THE CHAIR TO VEIL-33, 15:42 UTC (E97), ON R5C3's STOP 141831a1a (a SECOND COPY: `narrativeGenerator.js:879 ::
+    generatePressureSentence` falls back to `recentConflict`; 154/480 births store `pressureSentence === recentConflict`, served on
+    all 154 by the twin; neither engine's second-homes pass removes it): P1 IN THIS UNIT: the always-pass also withholds
+    `pressureSentence` wherever it EQUALS the stored `recentConflict`, every place, both engines (a fact of how the place was
+    written, not of what is hidden); the page does not re-fill it; THE COST NAMED: the pressure line gone from 154/480 shared pages
+    (32%). Not P2 (a new served key), P3 (per-place), P4 (off-lane). R5-PRESSURE (the successor's): `pressureSentence` withheld
+    always and re-derived by its own writer; its place set by THE COUNT (a: pressureSentences not equal to recentConflict; b: those
+    naming a power or house by the fold, by branch; c: on hiding reads, those naming a WITHHELD one no pass removes): c > 0, after
+    R5-DESC and before R4-IDS; c = 0, a product unit after R3. THE THIRD-COPY SCAN (every stored string of the 480 records, for the
+    stored `recentConflict` as a substring) is the proof of no third copy. The fallback is registered as a COPY of the row. The
+    walker walks `power.recentConflict` by name as a row that left the composed form (the `ORDERED[0]` pin re-taken); the 26 red are
+    R5-DESC's. The brief's E97 section 9aa4f37b3; V33-R5C4 seated fresh, the count first.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -255,3 +267,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:13 push of 8a54f10d5. 15:16 the chair's E92 (ruling 99) read; 15:17 the contenders answered; the brief's E92 section 42640f37d; R5C2 seated; section 1 written for the hand-over.
 - 15:19 push of de8959b0f landed. 15:28 R5C2's STOP read and sent; ac809527e pushed (-r5cure-wip). 15:29 E93 (ruling 100); 15:30 the brief's E93 section edf115e09; 15:31 R5C2 resumed; the chair's one line answered.
 - 15:32 R5C2 STOPPED at its own mark before the first edit (8d6643a10); V33-R5C3 seated fresh on v33-r5cure. 15:34 the chair's E94 (ruling 101); R5-DESC's brief gains (c) and the cause question.
+- 15:40 R5C3's STOP read and sent (141831a1a, pushed as -r5cure-wip). 15:42 E97 (ruling 102); the brief's E97 section 9aa4f37b3; V33-R5C4 seated, the count and the scan before the first edit.
