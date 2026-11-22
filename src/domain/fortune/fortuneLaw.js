@@ -115,6 +115,13 @@ export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
  *   standing.weatheredWithinYears — a catastrophe weathered within this many years (a generation) is a merit.
  *   standing.endorsedMinReasons   — Endorsed never stands on fewer reasons than this (a reason: a merit, or a positive
  *     term of the sum).
+ *   standing.lastingAgeBySize     — the second merit, A PLACE THAT HAS LASTED (FORTUNE-7 U7; the chair's decision E32 of
+ *     2026-11-22 04:51 UTC, on the owner's word "build it"): a place whose `history.age` is at or above its own size's
+ *     figure. Each is the p90 of `history.age` at that size (nearest rank, `ceil(0.9·150) − 1`, 150 visitor births a
+ *     size; FORTUNE-4 `measures/bands/BANDS.md`, re-measured unchanged by FORTUNE-7 `measures/lasting/AGES.md`). IN PLAIN
+ *     WORDS, for the owner's signing: a hamlet's lasting age (108) is below a thorp's (269) because the age table draws a
+ *     hamlet's age from 30 to 120 years and a thorp's from 15 to 300 (`src/data/historyData.js :: AGE_BY_TIER`). That is
+ *     a property of the age's own generator, told to the chair, not cured in this unit.
  *   VOCABULARY, NOT TUNING (read, not chosen): standing.weatheredSeverity (the history's grade of a catastrophe) and
  *   standing.rulerTroubleKinds (the tension types that concern the ruler). NO capture rung, no governing power's name,
  *   kind or house, no card's trait: the chair barred each (the rung is DM-only; memberships ride per row by the veil).
@@ -149,6 +156,7 @@ export const FORTUNE_LAW_TUNING = Object.freeze({
     meritPoints: 10,
     weatheredWithinYears: 40,
     endorsedMinReasons: 2,
+    lastingAgeBySize: Object.freeze({ thorp: 269, hamlet: 108, village: 225, town: 276, city: 441, metropolis: 731 }),
     weatheredSeverity: 'catastrophic',
     rulerTroubleKinds: Object.freeze(['succession_crisis', 'corruption_scandal', 'tyranny', 'popular_uprising', 'legitimacy_crisis', 'leadership_vacuum']),
   }),
