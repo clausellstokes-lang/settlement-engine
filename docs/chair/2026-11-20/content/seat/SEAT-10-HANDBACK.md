@@ -56,6 +56,13 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **Where:** scratch clone `bu6`, branch `u6` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u6-wip`.
   - **Merge:** into the lane ONLY on the chair's word after "SEAT" lands, once its diff is read whole and its red and green re-run.
   - **Then the integrator:** the dark proof; the doors; `tests/lint` whole; the commonest W1 and W3 sentence by size on the 150 lit births (bar about 15%), one line to the chair; "SEAT-B <commit>".
+- **U6 RETURNED (BU6 `98d998287`), PUSHED as `lane/seat-10-2026-11-21-u6-wip` (09:13Z); its diff read whole.**
+  - **Done:** W1/W2/W3 by `pickVariantMixed`; the gate; the clause gate; fault (c) red first (`u6f-town-18`); hand list 74; the new test 9/9; flipped, only the census's list-1 pins red.
+  - **Asked of the chair (09:13Z):**
+    - (1) the R2 holders are not reached at the power step (28 of 63 rows): widen the manifest to a final-record pass in `generateSettlementPipeline.js`?
+    - (2) W3 at any rank?
+    - (3) fault (b): no witness in 600 births (0 of 526 calls differ); close it?
+  - **At the merge, the integrator owes:** the mutation-manifest row for `tests/generators/seat/seatHolderLines.test.js`, and the wiring and lighting doors.
 - **U7 THE PAGE (CS13): OUT to builder BU7 beside U6.** The chair's E45 of 07:46Z allows two builders when their files are disjoint.
   - **Brief:** `briefs/U7-PAGE.md` at `daaaddb96`. Red first on U7-PROBE's six seeds; no wording without a ruling; the audience `reader` on served reads.
   - **Where:** scratch clone `bu7`, branch `u7` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u7-wip`.
