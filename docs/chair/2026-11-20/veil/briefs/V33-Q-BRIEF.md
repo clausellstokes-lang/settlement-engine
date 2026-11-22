@@ -1,5 +1,19 @@
 # V33-Q — brief for a BUILDER of VEIL-33: THE PREPARATION OF UNITS (iv), (v), (vi) (the eighth chair's rulings bind, each vetoable by the owner)
 
+> RE-STAMPED BY VEIL-34 (2026-11-22, on `lane/veil-34-2026-11-22`; where this block and the brief below differ, THIS BLOCK GOVERNS):
+> (1) A FRESH builder resumes from `origin/lane/veil-33-2026-11-22-q-wip` at 96a4c4994 (its WIP 85584d03d: the probe, the runner, the
+> analyzer, Tell6's skeleton and the two teeth, ALL UNRUN), merged onto the seat's tip in a new worktree `/home/user/wt/q34`, branch
+> `v34-q` (local); read `out/v33/q/Q-HANDBACK.md`'s PARKED section first and only. (2) THE POOL is `/var/tmp/v18/t2/pool-v34`, the
+> template `t34q` (= `createdb -T v27x211 t34q` + the tip's 212; LOWER CASE: the probe's unquoted SQL reads it so), databases `q34m_<n>`;
+> outputs under `docs/chair/2026-11-20/veil/out/v34/q/`; the gate table to compare with is `/var/tmp/v18/out/v34/g/gates/tell2-table.txt`
+> (4 of 92, 20 of 40, the same towns this brief names). (3) THE TIP CARRIES UNIT (viii) (`crimeTypes` withheld always) and, after the
+> hand-over, R5-RECENT (`recentConflict` withheld always; `pressureSentence` where it equals it): a measure that reads either key reads
+> its absence, and says so. (4) (iv) ALSO SAYS whether its cure answers the LIT GATE-1's three relations cities (JOINPROBE.md section 2:
+> r3m-city-none-1-117, r3m-city-politically_fractured-1-120, r3m-city-under_siege-1-108, Reveal off; the controls moved, fortune
+> suspected): read off the lane's dark pool only; the lit gates per law stay owed. (5) The seat's machine: wait for the seat's word that
+> the gate is free; then every heavy run inside `scripts/gate-mutex.sh --run`. (6) (vi) FIRST: run its two teeth at the tip (tests only)
+> and report green or the red; then (iv), then (v). Your mark: about 250,000 tokens.
+
 You are a BUILDER. You MEASURE and you write RED-FIRST INSTRUMENTS (tests). YOU CHANGE NOTHING in migration 212, its rollback,
 the twin (`src/domain/display/galleryVeil.js`, `galleryRosterChoices.js`, `gallerySecondHomes.js`, `galleryWithholdAlways.js`,
 `galleryVeilPeople.js`, `src/domain/veil/**`) or the registry: migration 212 has ONE writer (VEIL-32) and it is not you or your
