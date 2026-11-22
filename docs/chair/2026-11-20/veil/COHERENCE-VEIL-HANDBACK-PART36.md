@@ -19,19 +19,43 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   server (4/4, raw 11/11), controls 0, 7 LOWER BY RULE (the same seven); GATE-2 20 of 40; against the rule 0: EQUAL to PART 35.
   Typecheck 167/167, eslint 0, walkers + manifest 0, arms Tell3+4+5+8 0, --check 0. Sent to the chair 20:09. (`gates rc=1` is the
   gate's own RED exit: 4 of 92 remain by design until R3.) The chain's rest: PENDING.
-- (1) R4-IDS: part one (the measure + the red-first `tests/security/galleryVeilIds.pglite.test.js`) is VEIL-34's builder's, on
-  `lane/veil-34-2026-11-22-r4ids-wip` (commit from the chair: PENDING). Part two (the cure's brief, two builders R4I-SQL then
-  R4I-PAGE): PENDING the measure. The a4b89bf9d family's names (`lane/veil-22-r4-2026-11-20`, NOT GREEN there): server
+- (1) R4-IDS: PART ONE IN (the chair 19:34): `lane/veil-34-2026-11-22-r4ids-wip` at 24a6f7ef5; `out/v34/r4ids/R4IDS-MEASURE.md`
+  read once; `tests/security/galleryVeilIds.pglite.test.js` and `tests/security/personIdBijection.shared.mjs` READ WHOLE by this
+  seat (20:2x). Finding: no BORN served id spells what a read hides (0 on 6,528 pages; withheld faces are born `npc_veiled_`); the
+  re-key half's born witness whole (316,640 / 316,640 stored; 129,656 / 129,656 stable); the spelling half LIT ONLY (jp6-city-8).
+  Red by design: arm 1 72 on 16 reads, arm 2 72/72, arm 3 12, arm 4 green (its plant red). PART TWO DRAFTED: `briefs/R4-IDS-BRIEF.md`
+  "PART TWO" (two builders R4I-SQL then R4I-PAGE, their manifests; the salt; the catalogue; ruling 53's fold; the marker's rule with
+  a correction of a4b89bf9d; plants (e), (f); the guards VR46 re-states; the lit witness; the proofs). Re-stamped at the TIP. The a4b89bf9d family's names (`lane/veil-22-r4-2026-11-20`, NOT GREEN there): server
   `_gallery_veil_rekey_id`, `_rekey_ref`, `_rekey_at`, `_rekey_each`, `_rekey`, `_rekey_served`, the salt `gen_random_uuid()` drawn
   in `_gallery_veil`, every salt-carrier and every read reaching one VOLATILE; twin `galleryVeilPeople.js :: rekeyId, rekeyPeople,
   readSalt` (one salt a projection call). The registry's planned hosts `public._gallery_veil_rekey` / `gallerySecondHomes.js ::
   rekeyPeople` (E116 places the twin in `galleryVeil.js` / `galleryVeilPeople.js`).
-- (2) IMPORT-DOOR: prepared while R4-IDS's builders run (nothing in 212); built after "R4-IDS MERGED".
+- (2) IMPORT-DOOR: PREPARED (f9c14fa61, the brief's RE-STAMP section; nothing in 212): census unchanged since decc8c9e7; doors-3's
+  212 restates three of its four functions; the TRAD-4 pin's re-cut. RULED 36.3 (E124): doors-3's section is its base. Built after
+  "R4-IDS MERGED", on 36.3's four conditions.
 - BRANCHES: `lane/veil-35-2026-11-22` (this file). No pull request.
-- NEXT STEP IN ONE LINE: (0)'s gates line to the chair; then R4-IDS part two's brief from the measure.
+- NEXT STEP IN ONE LINE: at the chair's "TIP <commit>": 212's diff read, the -wip cut, part one merged in, part two re-stamped, R4I-SQL seated.
 
-## 2. RULINGS SINCE PART 35 (numbered on from PART 35's last; the eighth chair's; each vetoable by the owner)
-(none yet)
+## 2. RULINGS SINCE PART 35 (chain B's, numbered 36.n so they never collide with chain A's; the eighth chair's; each vetoable by the owner)
+36.1 THE CHAIR, 19:32 UTC: DO NOT CUT FROM 5e0a584b6: R5-RECENT's second half (806217e88) is being proved by VEIL-33; the chair sends
+     "TIP <commit>" when it lands; 212's hash moves (the SQL half: `_gallery_veil_withhold_always`, the registry rows for
+     `power.recentConflict` and its copy): READ 212's DIFF then, not the file again. VEIL-33 does not retire at its hand-over (E119):
+     it prepares the join on its own branch and merges every tip move into it.
+36.2 THE CHAIR, 19:34 and 20:09 UTC: part one in at 24a6f7ef5 (read both test files whole before building on them); the cure is
+     proved on the lane by the plants and the re-key's arms; THE LIT WITNESS re-run where a lit tree exists (the brief says how);
+     the brief says where the one salt comes from given the catalogue's rule.
+36.3 THE CHAIR, 20:15 UTC (E124), on this seat's IMPORT-DOOR line, RULED AS RECOMMENDED: IMPORT-DOOR TAKES DOORS-3's VEIL-DOORS SECTION
+     AS ITS BASE (the doors' merge pulled forward into it): each of `_gallery_public_tile_rows`, `get_gallery_map`, `get_unlisted_map`
+     restated ONCE in 212's final text; `import_gallery_map` restated as the brief says; the two one-line `import_gallery_dossier`
+     hunks ride with it. FOUR CONDITIONS: (1) before taking it, the doors' section read WHOLE once against the tip (the six commits as
+     one diff), and every place where a later ruling (76 on; PART 33, 34; E115-E122) changes what a door must serve LISTED in the
+     brief; (2) MEASURE FIRST: the doors' own arms as they stand at 3e1115c81 (which, their recorded figures), re-run on the merged
+     tree and NAMED in the unit's proof beside the import's; VR44 and VR41 named in the registry rows they bind; (3) the eleven
+     `_gallery_doors_*` helpers revoked by name in s7's loop and dropped in the rollback; 001..211 + 212 + down = 001..211 with them;
+     the catalogue's new count (none draws but `_gallery_veil`); (4) the two-builder split; if the pulled-forward part cannot be
+     proved inside the unit (an arm red for a cause outside it), it is cut back out, IMPORT-DOOR restates the three fresh, the chair
+     told. THE ORDER STANDS: R4-IDS first.
 
 ## 3. Log (every hour from `date -u`)
-- 19:28 seated on 632968087. 19:29 chain0 launched. 19:32 first line to the chair.
+- 19:28 seated on 632968087. 19:29 chain0 launched. 19:32 first line to the chair. 19:57 the pool done. 20:09 (0)'s line. 20:15 IMPORT-DOOR's line.
+  A SLIP, SAID: the chair's 19:32 and 19:34 lines were read only at 20:18 (this seat waited in shell loops without reading its queue).
