@@ -499,16 +499,19 @@ import { getActiveRng } from '../kernel/rngContext.js';
 import { seatsByHolder } from '../domain/seat/seatLaw.js';
 import { holderOf } from '../domain/seat/holderOfSeat.js';
 import { isVeiledRow, pairLicense } from '../domain/seat/seatTable.js';
+import { isSeatVacant } from '../domain/people/seatKeeper.js'; // VACANT (CLOSE-3 unit (1)): the one reader of the empty seat
 
 /**
  * THE HOLDER APART (SEAT-10 U6, CS12; the chair's rulings of 2026-11-22): the power that holds the seat, read off the
  * roster as the seat law reads it (`holderOf`, the owner's audience), where the world was born under the seat law
  * (`seatsByHolder`, off the born config), that power stands APART from the form (the governing row), and it is not
  * veiled (`isVeiledRow`). Else null, and every line stays as it is: a hidden or criminal holder exposes nothing, and
- * under law 1 this answers null before it reads anything else.
+ * under law 1 this answers null before it reads anything else. `vacant` (VACANT, CLOSE-3 unit (1), the chair's E131): the
+ * seat stands empty, read by its one reader (`domain/people/seatKeeper.js :: isSeatVacant`) off the record handed, else the
+ * roster, so the holder's lines say that it held the seat (`seatHolderLineOf`).
  * @param {ReadonlyArray<Record<string, any>>} factions @param {unknown} config the born config
  * @param {unknown} [record] the final record (the final-record pass, `power/factionStanding.js :: settleSeatHolderToRecord`), else the roster alone
- * @returns {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean } | null}
+ * @returns {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean, vacant: boolean } | null}
  */
 export function seatHolderApartOf(factions, config, record = null) {
   if (!seatsByHolder(config) || !Array.isArray(factions)) return null;
@@ -518,23 +521,33 @@ export function seatHolderApartOf(factions, config, record = null) {
   const held = holderOf(/** @type {any} */ (record || { powerStructure: { factions }, config }), { audience: 'owner' });
   const holder = /** @type {Record<string, any> | null} */ (held.holder);
   if (!holder || holder === form || holder.faction === form.faction || isVeiledRow(holder)) return null;
-  return { form, holder, licensed: pairLicense(String(held.kind || ''), form.faction).pair === 'licensed' };
+  return { form, holder, licensed: pairLicense(String(held.kind || ''), form.faction).pair === 'licensed', vacant: isSeatVacant(record || { powerStructure: { factions } }) };
 }
+
+/** The vacant twin each drawn pool takes where the seat stands empty (`data/seatHolderLines.js`, W1v and W3v). */
+const VACANT_TWIN = Object.freeze({ relation: 'relationVacant', standing: 'standingVacant' });
 
 /**
  * One of the holder's lines (`data/seatHolderLines.js`), drawn through the kernel's mixed key from what every read
  * serves (the record's seed and the two names), its slots filled: the form after its article, the holder with its
- * article, the verb in the holder's number. A sentence that opens on the holder opens "The" (`opening`).
- * @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart
+ * article, the verb in the holder's number. A sentence that opens on the holder opens "The" (`opening`). Where the seat
+ * stands empty (`apart.vacant`) the pool's vacant twin is drawn in its place (`VACANT_TWIN`) through the SAME key, which
+ * names the base pool: only the pool handed to the pick differs.
+ * @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any>, vacant?: boolean }} apart
  * @param {unknown} [seed] the record's seed: the birth's stream seed at the power step, the record's `_seed` on the final record
  * @returns {string}
  */
 export function seatHolderLineOf(pool, apart, seed = getActiveRng()?.seed) {
   const key = seed ? `${seed}::seatHolder:${pool}:${apart.form.faction}:${apart.holder.faction}` : null;
-  return seatHolderFill(String(pickVariantMixed(SEAT_HOLDER_LINES[pool], key) ?? SEAT_HOLDER_LINES[pool][0]), apart);
+  const lines = SEAT_HOLDER_LINES[apart.vacant ? VACANT_TWIN[pool] : pool];
+  return seatHolderFill(String(pickVariantMixed(lines, key) ?? lines[0]), apart);
 }
 
-/** Every line of a pool, filled for this pair (no draw): what the final-record pass finds already written. @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string[]} */
+/**
+ * Every line of a pool, filled for this pair (no draw): what the final-record pass finds already written. The pool is any
+ * drawn pool BY NAME, a base pool or its vacant twin (`relationVacant`, `standingVacant`), so a caller lists both by naming both.
+ * @param {'relation' | 'standing' | 'relationVacant' | 'standingVacant'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string[]}
+ */
 export function seatHolderLinesOf(pool, apart) {
   return SEAT_HOLDER_LINES[pool].map((line) => seatHolderFill(line, apart));
 }
