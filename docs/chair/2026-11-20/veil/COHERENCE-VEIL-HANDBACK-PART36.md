@@ -36,7 +36,8 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   rekeyPeople` (E116 places the twin in `galleryVeil.js` / `galleryVeilPeople.js`).
 - (2) IMPORT-DOOR: PREPARED (f9c14fa61, the brief's RE-STAMP section; nothing in 212): census unchanged since decc8c9e7; doors-3's
   212 restates three of its four functions; the TRAD-4 pin's re-cut. RULED 36.3 (E124): doors-3's section is its base. Built after
-  "R4-IDS MERGED", on 36.3's four conditions.
+  "R4-IDS MERGED", on 36.3's four conditions. IT GOES TO A SUCCESSOR (36.5): its brief is COMPLETE at c416b1a88
+  (`briefs/IMPORT-DOOR-BRIEF.md`: RE-STAMP items 1-3, E124's conditions c1-c4 as item 4, the order 5, the proofs 6).
 - BRANCHES: `lane/veil-35-2026-11-22` (this file). No pull request.
 - THE TIP (the chair 20:40): af708f2fd (`lane/veil-33-2026-11-22`; R5-RECENT MERGED at 0d9ec0113); 212 `ff20ed89…`: its DIFF read
   (+14 lines, `_gallery_veil_withhold_always`: `recentConflict` and its `pressureSentence` copy; the registry's two rows): nothing
@@ -53,6 +54,10 @@ branch (never the reverse) and E116's five steps before the "TIP?".
 36.2 THE CHAIR, 19:34 and 20:09 UTC: part one in at 24a6f7ef5 (read both test files whole before building on them); the cure is
      proved on the lane by the plants and the re-key's arms; THE LIT WITNESS re-run where a lit tree exists (the brief says how);
      the brief says where the one salt comes from given the catalogue's rule.
+36.5 THE CHAIR, 21:02 UTC: THIS SEAT'S RECORD 501,913 by the chair's read at 20:49 (its own estimate ran far low, E109). IT CARRIES
+     R4-IDS TO ITS MERGE AND NO FURTHER: logs by tail, each builder's diff read ONCE, R4I-PAGE re-runs the proofs and hands figures.
+     "HANDS OVER <commit>" at "R4-IDS MERGED" or at 660,000 by the chair's read, whichever first, section 1 current at every push.
+     IMPORT-DOOR GOES TO A SUCCESSOR (VEIL-37): its brief complete on this branch. VEIL-34 handed over; VEIL-36 is chain A's writer.
 36.4 THE CHAIR, 20:40 UTC: TIP af708f2fd. The salt ACCEPTED as stated (one `gen_random_uuid()` a call in `_gallery_veil`, never
      shipped; the twin's one draw a projection; the catalogue read as "a drawer and its callers' closure are VOLATILE"), ON ONE
      CONDITION: an arm shows two reads of one place share NO served person id AND every reference inside ONE read still resolves
