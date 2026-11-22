@@ -115,6 +115,26 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   neither 212 nor the registry. Each builder's brief says in its first line what it reads whole and that it reads nothing else
   whole. IF THE SEAT'S RECORD REACHES 620,000 BEFORE THE MERGE: "VEIL-33 HANDS OVER <commit>" at R5C5-SQL's commit, this
   section current.
+- R5-RECENT MERGED (20:35 UTC): merge 0d9ec0113 of `v33-r5cure` at 96c777381 into this branch; its src, supabase, tests and scripts
+  EQUAL to 96c777381 (checked after the hooks). 212 ff20ed89e3e67240d399834876a05d92f63f88a52d8cef41585824ec78e6fdbf; the rollback
+  8cbd7d1c…, 211 eface6d0…, 210 9118c235… unchanged. COMMITS: bbad923a5 (R5C5-SQL: 212's and the twin's always-pass, the registry
+  row and its pressureSentence copy, registry.json), 8784dd91f (R5C6, red), 806217e88 (R5C6, the reader
+  `src/domain/veil/pageRederive.js :: rederiveRecentConflict`, wired in `rederiveForPage` and `importRederive.js :: rederiveInPlace`
+  authoritative), 96c777381 (the seat: `galleryWithholdAlways.pglite` judges the always rows, not their copies; its MAIN had
+  red 42 reads on served pressureSentences that are not the sentence, correct under E97 (1)).
+  THE SEAT'S OWN RE-RUNS (executed, `/var/tmp/v18/out/v33/merge/`): green: galleryWithholdAlways, galleryVeilRecent,
+  galleryVeilTell8, the crimeTypes, registry and recentConflict walkers (6 files, 42 tests); red at 8784dd91f: the readers'
+  walker's two arms, the fidelity arm and the differential (4 of 16); `tests/lint` whole 48 red = the lane's 22 (the same 22 at
+  5e0a584b6, by name) + the composed-hosts walker's 26 (R5-DESC's rows, by name), none gone; A NEW POOL born on the cured tree
+  (`/var/tmp/v18/t2/pool-r5c-1`, template v33tplr5): GATE-1 4 of 92 (off 4, dm 4), LOWER BY RULE 7, GATE-2 20 cells red, part A
+  server sample 0 of 112 differ from the twin: THE LANE'S FIGURES. R5C6's (its receipts `out/v33/r5recent/R5C6-*`): fidelity
+  286/287 (r5c2-m3-hamlet-8 listed, its cause witnessed), the differential 1540/1540 server and twin, the count's c 0 on the
+  SERVER and the twin (so R5-PRESSURE is a product unit after R3, E98), typecheck 167/167, first paint +0.
+  UNPROVEN: master's stored shape holds the sentence only at `powerStructure.recentConflict` (origin/master's writers by grep; no
+  master-born record scanned: LEGACY-POOL's question, the chair's next measure for this seat).
+  THE HAND-OVER: THE TIP TO VEIL-34 (E119), which re-reads R5-RECENT's whole diff (5e0a584b6..0d9ec0113 in src, supabase, tests,
+  scripts) against its own whole read of 212 and says ACCEPTED or names a fault before building on it. THIS SEAT stays, as a
+  NON-writer of the tip: LEGACY-POOL (the chair, 19:46), then JOIN-PREP (E119) on `lane/veil-33-2026-11-22-join-wip`.
 - R5-RECENT'S STATE AT 16:12 UTC (FOR VEIL-34; the cure's branch `v33-r5cure` in /home/user/wt/r5c, pushed as
   `lane/veil-33-2026-11-22-r5cure-wip`):
   BUILT, COMMITTED, READ WHOLE BY THE SEAT: R5C5-SQL at bbad923a5 (pushed). In 212 `_gallery_veil_withhold_always` and the twin
@@ -329,3 +349,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:50 R5C4's STOP read (820553c8a; the count re-read). 15:51 the split sent; R5C5-SQL seated. 15:52 E98 (ruling 103). 15:53 R5C6's brief written.
 - 15:55 R5C5-SQL in (bbad923a5; the diff read whole). 15:57 R5C6 seated. 16:00 bbad923a5 pushed (-r5cure-wip). 16:11 the chair: VEIL-34 seated at 16:10; section 1 brought current for it.
 - 17:47 COMMON-EIGHTH item 15 read (a push names a local lane branch by its own name). 17:59 R5C6's measures sent to the chair. 18:00 the summary's hour said (about 15:17). 18:01 ruling 104.
+- 19:22 R5C6 returned (806217e88); its src diff read whole. 19:23 the seat's fix 96c777381. 19:29-20:03 the seat's re-runs. 20:03-20:34 a new pool and both gates (the lane's figures). 20:35 merge 0d9ec0113: R5-RECENT MERGED. Section 1 for the hand-over.
