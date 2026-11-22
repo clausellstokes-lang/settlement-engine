@@ -1,0 +1,42 @@
++     "file": "src/domain/display/galleryRosterChoices.js",
++     "id": "faction",
++     "now": 1,
++     "was": 0,
++   },
++ ]
+
+ ❯ tests/lint/styleLaw.walker.test.js:52:7
+     50|       verdict.rises,
+     51|       `the style law: a struck phrase rose (rewrite the line; the reti…
+     52|     ).toEqual([]);
+       |       ^
+     53|   });
+     54|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/22]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/22]⎯
+
+
+ Test Files  16 failed | 206 passed (222)
+      Tests  22 failed | 3242 passed (3264)
+   Start at  04:05:04
+   Duration  818.59s (transform 25.00s, setup 3.60s, import 734.02s, tests 801.99s, environment 20ms)
+
+[gate-tail] end:  04:18:44 up  5:05,  0 user,  load average: 3.03, 2.49, 2.15
+[gate-tail] full log: /tmp/gate-tail.29698.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -65,7 +65,7 @@ verified by ls-remote).
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
 - 212 AND THE REGISTRY READ WHOLE by this seat 00:02-00:03 UTC (the character tables included), before any brief or merge.
 - BRIEF: `briefs/R3-TELL-5-BRIEF.md` carries VEIL-31's amendments at its head (paths, the pool, unit 0 = ruling 77's marker, tests/lint whole per unit).
-- IN FLIGHT (02:27): BUILDER R3-TELL-5b (a FRESH Agent subagent: the first builder passed its 250,000 mark) on unit (iii) alone,
+- DONE: BUILDER R3-TELL-5b (a FRESH Agent subagent: the first builder passed its 250,000 mark) on unit (iii) alone,
   worktree `/home/user/wt/r3tell5b`, branch `v31-r3tell5b` (local, cut at c5f046ee4). If this seat stops, its work goes up as
   `lane/veil-31-2026-11-21-r3tell5b-wip` unread. The first builder's branch: `lane/veil-31-2026-11-21-r3tell5-wip` at c60daddd2 (merged).
 - UNIT (iii) RETURNED (03:28; builder R3-TELL-5b, `lane/veil-31-2026-11-21-r3tell5b-wip` at f98c39ec4; red 090a2e905, cure a0d280580;
@@ -74,10 +74,12 @@ verified by ls-remote).
   DONE (`out/v31/u3/done.txt`): red 1/1 at 090a2e905; typecheck 0; eslint 0; walkers 27/27; arms green; --check 0; sv + hand
   rows + born 0; harnesses 0; verify 45/0; GATE-1 4/92 (7 LOWER BY RULE), GATE-2 20/40 red, twin = server every cell. MERGED as
   8807cde93 (212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback and 211 unchanged); typecheck at the
-  merge 0; tests/lint whole at the merge running. ITS STOP, sent to the chair 03:27 with the twins (`out/v31/twins/twins-ccs.json`):
+  merge 0; tests/lint whole at the merge = the sixteen standing only. ITS STOP, sent to the chair 03:27 with the twins (`out/v31/twins/twins-ccs.json`):
   `criminalCaptureState` served 'adversarial'/'equilibrium'/'corrupted' on 25 towns (Reveal DM) where no criminal house or power is
   served; open pages show 'none' (DM) or absent (off); the twins read 'none' on 21 of 25. Recommended: 'none' as a sent form in
   unit (v); the four whose twin keeps a rung listed. RULED 03:30 (ruling 82).
+- IN FLIGHT (04:20): BUILDER R3-TELL-7 (fresh) on UNIT (vii), worktree `/home/user/wt/r3tell7`, branch `v31-r3tell7` (local, cut at
+  5d664d585); if this seat stops, its work goes up as `lane/veil-31-2026-11-21-r3tell7-wip` unread.
 - UNIT (vii)'S BRIEF: `briefs/R3-TELL-7-BRIEF.md` (ruling 81; it carries ruling 54's caution: the twin is another draw, so every
   difference is separated into the veil's cause and the draw's; the per-family arm is PROPOSED with its cost, not built).
 - NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
@@ -183,3 +185,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - (before 03:20, not clocked) unit (iii) returned; pushed -wip; diff read; chain3 launched 03:20; the capture twins measured 03:27 and sent. 03:28 recorded.
 - 03:32 the chair's 03:30 ruling (82) read. 03:33 the four twins' rungs measured and recorded.
 - 04:03 chain3 END, every figure reproduced; 8807cde93 merged; typecheck 0 at the merge. 04:16 brief R3-TELL-7 written.
+- 04:18 tests/lint whole at 8807cde93: the sixteen standing only; the unit (iii) line to the chair (with ruling 54's caution on the arm). 04:20 the unit (vii) builder seated.
