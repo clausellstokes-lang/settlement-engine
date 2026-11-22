@@ -237,7 +237,10 @@ describe('commoner_resentments behavior', () => {
     expect(s.references.some(r => r.id === 'capacity.food_production')).toBe(true);
   });
 
-  it('falls back to generic complaints when no major pressures', () => {
+  // DAILY-3 B3 E2 (LINES-2 § 2; rulings 3 and 8, the calm rule), the pin re-read: a place under no major pressure was
+  // given "the small grievances of any town" (an invented grievance, false at a small place); the meaning kept, no
+  // pressure in the record, the slot now says no grievance: the EMPTY string, and it cites nothing.
+  it('says no grievance when no major pressures (the calm rule: empty, never an invented one)', () => {
     const s = deriveDailyLifeSlot('commoner_resentments', {
       population: 1000,
       institutions: [
@@ -249,7 +252,8 @@ describe('commoner_resentments behavior', () => {
         factions: [{ faction: 'Town Council', power: 40 }],
       },
     });
-    expect(s.text.toLowerCase()).toMatch(/(gate fee|rain|tavern|small grievances)/);
+    expect(s.text).toBe('');
+    expect(s.references).toEqual([]);
   });
 });
 

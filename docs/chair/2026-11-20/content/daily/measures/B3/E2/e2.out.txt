@@ -1,0 +1,96 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/E2/measure.e2.mjs > docs/chair/2026-11-20/content/daily/measures/B3/E2/e2.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 121s
+
+════ food_culture
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 9 | 9 | 9 | 7 | 9 | 8 |
+| top whole text % of 150 | 9 | 9 | 9 | 7 | 9 | 8 |
+| distinct texts | 33 | 30 | 29 | 35 | 33 | 29 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| EMPTY % of 150 | 0 | 0 | 0 | 0 | 0 | 0 |
+| reach % / min eligible / bar's need: surplus.wanting | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: surplus | 20 / 4 / 2 | 33 / 5 / 3 | 47 / 5 / 4 | 13 / 5 / 1 | 8 / 7 / 1 | 1 / 7 / 1 |
+| reach % / min eligible / bar's need: adequate | 65 / 7 / 5 | 46 / 7 / 4 | 45 / 8 / 3 | 51 / 9 / 4 | 33 / 9 / 3 | 28 / 9 / 2 |
+| reach % / min eligible / bar's need: strained | 9 / 6 / 1 | 16 / 6 / 2 | 7 / 6 / 1 | 33 / 7 / 3 | 47 / 7 / 4 | 51 / 7 / 4 |
+| reach % / min eligible / bar's need: critical | 6 / 5 / 1 | 5 / 5 / 1 | 1 / 5 / 1 | 3 / 6 / 1 | 12 / 6 / 1 | 19 / 6 / 2 |
+| reach % / min eligible / bar's need: collapsed | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 1 / 4 / 1 |
+| places on surplus.wanting with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on surplus with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on adequate with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on strained with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on critical with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on collapsed with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE markets close their stalls: no market (M1 row 187) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the wealthier streets: a thorp or hamlet (M1 row 188) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE temple kitchens: no sacred house (M1 row 189) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE caravans that never arrived: no trade route (M1 row 190) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bmarket|\bbought\b: no market (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bstreets\b|better-off: a thorp or hamlet (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a printed text not its branch's keyed pick of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a veiled power's name printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a crime word (crim|smuggl|corrupt|thie|brib|black market) printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at any place | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (14/150): "There is enough to eat, if nobody asks for much more than the day needs."
+  top sentence hamlet (13/150): "There is more than enough to eat, and nobody here goes to bed hungry."
+  top sentence village (14/150): "There is more than enough to eat, and nobody here goes to bed hungry."
+  top sentence town (11/150): "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+  top sentence city (14/150): "Food costs more than most people can comfortably pay, so they buy less of it."
+  top sentence metropolis (12/150): "There is less to eat than people would like, and nothing is thrown away."
+
+════ commoner_resentments (public, no audience)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 17 | 11 | 13 | 7 | 10 | 14 |
+| top whole text % of 150 | 11 | 9 | 12 | 4 | 9 | 10 |
+| distinct texts | 39 | 54 | 41 | 60 | 46 | 39 |
+| EMPTY (no true line) | 29 | 13 | 11 | 53 | 51 | 39 |
+| EMPTY % of 150 | 19 | 9 | 7 | 35 | 34 | 26 |
+| reach % / min eligible / bar's need: legitimacy | 80 / 6 / 6 | 91 / 6 / 7 | 91 / 6 / 7 | 46 / 6 / 4 | 15 / 6 / 1 | 13 / 6 / 1 |
+| reach % / min eligible / bar's need: food | 15 / 5 / 1 | 21 / 5 / 2 | 8 / 5 / 1 | 36 / 8 / 3 | 59 / 8 / 4 | 71 / 8 / 5 |
+| reach % / min eligible / bar's need: uprising | 3 / 3 / 1 | 5 / 3 / 1 | 8 / 3 / 1 | 3 / 3 / 1 | 9 / 3 / 1 | 5 / 3 / 1 |
+| places on legitimacy with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on food with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| places on uprising with NO eligible line (that part EMPTY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE blind eye|smuggl: a crime clause on the public slot (ruling 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE merchants who claim: no market (M1 row 192) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's indifference: not a council: rulingBodyOf(r) !== true (M1 row 193) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE officials who keep their posts: no appointed post (M1 row 194) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE of any town: not a town: populationBand small (M1 row 195) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the gate fee: no gate (M1 row 196) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE market day: no market (M1 row 197) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's favorite: not a council (M1 row 198) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE favorite tavern: no tavern/inn (M1 row 199) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bthe council\b: not a council (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE price of food|\bstalls\b: no market (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a printed text not its branch's keyed pick of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a veiled power's name printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a crime word (crim|smuggl|corrupt|thie|brib|black market) printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" at any place | 0 | 0 | 0 | 41 | 0 | 0 | e.g. hxd-town-2: "Ordinary people grumble that the Town Mayor looks after its own first."
+  top sentence thorp (25/150): "Talk among neighbours turns, sooner or later, to what the Elder Council has got wrong lately."
+  top sentence hamlet (16/150): "People say the council is slow to listen and quick to decide without them."
+  top sentence village (20/150): "People do as the Elder Council says, but few of them think well of it."
+  top sentence town (11/150): "Many feel that those in charge should be doing more to see everyone fed."
+  top sentence city (15/150): "People resent paying more for less, and they say so at the stalls."
+  top sentence metropolis (21/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+
+FALSE-LINE TOTAL (both slots, every FALSE row above): 0
+HOUSE-RULE HITS TOTAL (both slots, every rule row above): 41
+
+── the government label said in a {gov} line ──
+places whose commoner_resentments names the government: 472 of 900
+of them, a criminal archetype's label (Corrupt Council / Corrupt City Council / Shadow Senate): 0
+
+── M1's named places ──
+hxd-thorp-0: food "The everyday fare is a simple stew and whatever else the day provides." | resent ""
+hxd-hamlet-0: food "Food is steady rather than generous: enough for every household, with little to spare." | resent "Many here feel that the Headman's Authority no longer listens to people like them."
+hxd-hamlet-7: food "Meals are plain and filling, and little goes to waste." | resent "People bring their complaints to the Free Elder Council and expect little to come of them."
+hxd-metropolis-0: food "Rations are tight, and the poor eat watered stew." | resent "Few here would say that the Ducal Governorship speaks for them. Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+
+done in 121s
