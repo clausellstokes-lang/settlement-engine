@@ -85,6 +85,16 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   function and its credit price are not touched (his hand; listed for the close); (3) the PDF's chapter follows as a
   second step and moves the PDF's reference snapshot (his signing). TIMING SAID: a builder now, one to two hours;
   landed with point 94 under one gate; on the live site only after his merge and deploy.
+- **2026-11-22, between the clock's readings of 04:42 and 04:43 UTC, the owner (verbatim, the whole message; he quotes the chair's own
+  list of five and answers beneath it):** "A fifth and sixth worker? That would start display now instead of in about
+  three hours. 2. May the share veil ship at "not shown" before it reaches "not inferable"? The earlier advice was no.
+  3. Troubles law: yes or no. 4. Fortune's second merit: build it, or leave it for after the deploy. 5. A finish line,
+  or keep "all of it before the deploy"? I leave all decisions to you'd but got number 4 build it" READ AS: he
+  decides number 4 (BUILD fortune's second merit before the deploy); the other four he leaves to the chair. ANSWERED
+  THE SAME TURN with a table of the five (E25 to E30), each said to be his to overturn at any time; the merge, the
+  deploy, the migrations and the production credentials said again to be his alone; ONE CAUTION SAID: the chair
+  cannot see what is left of the weekly allowance (about 290 spent in under six hours; six seats spend faster; the
+  earlier account ran out): he is asked to say if he wants the pace slowed.
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -335,6 +345,37 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   GATE (E8): point 94's own long run died with the machine's restart at about 04:33 and is not re-run alone. FOR THE
   SECURITY READER'S LIST: the Daily Life page now prints three derived lines on every read, each from the served
   document.
+- E25 · WHAT THE OWNER'S "I leave all decisions to you" COVERS (ruled 2026-11-22 04:44 UTC). The four questions he quoted and left open, and
+  rulings of their kind (what is built, in what order, by how many seats, to what bar, into which deploy). IT DOES
+  NOT COVER what is his hand by the standard, said to him again in the answer: the pull request's merge, the deploy,
+  every migration, production credentials; nor the signings (goldens, references, tuning tables, size rises), which
+  are named for him at the close. Each decision below is recorded as VETOABLE and was told to him in plain words.
+- E26 · A FIFTH AND A SIXTH SEAT, NOW (E1 amended; 2026-11-22 04:44 UTC). DAILY-3 (the other five Daily Life slots and the owner-only slot:
+  `prompts/DAILY-3.txt`; source the working line, branch `lane/daily-3-2026-11-22`) and PAGE-13 (the display lane:
+  `prompts/PAGE-13.txt`; source `lane/page-9-2026-11-20`, branch `lane/page-13-2026-11-22`). WHY NOW: three of the
+  four seats are entering long test runs; Daily Life is what the owner asked about three times tonight and its page
+  would stand at three lines. SIX IS THE CEILING until a landing frees a seat; the chair's own box stays the one
+  place where lanes are joined (one gate at a time).
+- E27 · THE VEIL'S BAR STAYS "NOT INFERABLE" (the owner left it to the chair; 2026-11-22 04:44 UTC). Nothing of migration 212 ships at "not
+  shown": GATE-1 at 0 and GATE-2 at 0 red, then the fresh security reader, as the seventh chair advised. A bar that
+  guards what a game master hid is not lowered on a schedule's account.
+- E28 · THE TROUBLES LAW IS NOT IN THIS DEPLOY (the owner left it to the chair; 2026-11-22 04:44 UTC). It stays dark and is given no seat:
+  two laws are already switched on at the close, each moving many stored fixtures; a third adds risk and days for
+  nothing the owner asked of this deploy. Its branches stay as the save left them (`lane/kinds-1-2026-11-20` and its
+  K3 work); it is put to him again after the first deploy.
+- E29 · FORTUNE'S SECOND MERIT IS BUILT BEFORE THE DEPLOY (THE OWNER'S OWN DECISION: "got number 4 build it"; 2026-11-22 04:44 UTC). The
+  first merit lands first as its own point ("FORTUNE <commit>" as ruled); the second follows on the same lane as
+  "FORTUNE-B <commit>", so that the law ships once with both merits and one law version. Before a builder is cut the
+  seat sends what FORTUNE-4 and FORTUNE-5 measured for it and the chair rules. `prompts/FORTUNE-6.txt`'s "NOT YOURS:
+  the second merit" is struck by this entry and by the chair's message to the seat.
+- E30 · THE FINISH LINE (the owner left it to the chair; 2026-11-22 04:44 UTC; it replaces "all of it before the deploy"). THE FIRST DEPLOY IS
+  READY WHEN THREE THINGS ARE DONE: (1) the share veil proven (E27) with its security review; (2) who rules and
+  fortune (both merits) landed, and the close's flip made on the joined tree; (3) the Daily Life page printing all
+  eight lines (E24 and DAILY-3). EVERYTHING ELSE THAT HAS LANDED BY THEN SHIPS WITH IT; whatever has not follows in a
+  second deploy: no lane holds the first deploy but those three. The close's own work is unchanged (the signing
+  list, the home page's sample re-emitted once, the known failing tests cured or signed, CI's run read by name).
+  ORDER OF SEATS AS THEY FREE: the lanes nearest a landing first (the place lane's trade note, the people lane's
+  second half), then by what the owner reads on a page.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
