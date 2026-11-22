@@ -137,7 +137,17 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   `v33-r5cure` into this branch; "R5-RECENT MERGED <commit>".
   FOR R5-DESC'S WRITER: the registry's `power.conflicts` scope still says "a conflict naming a withheld power follows
   power.recentConflict" (now withheld always): stale, re-word it in R5-DESC.
-  RULINGS ON THIS UNIT: 99 (E92), 100 (E93), 101 (E94), 102 (E97), 103 (E98), section 2. THE JOIN PROBE: JOINPROBE.md on
+  THE WRITER'S MEMORY (said plainly, the chair's 18:01 ask): this seat's conversation was SUMMARIZED at about 15:17 UTC (the push
+  of de8959b0f). Its whole reads of 212 and the registry, its seating prompt and its first reads survive only as the summary's
+  account. Since 15:17 the seat has read WHOLE only R5C5-SQL's diff (bbad923a5) and R5C6's (when it returns). The merge's proofs
+  are EXECUTED (the plant, fidelity, the differential, the count, the gates on a new pool) and do not rest on memory. VEIL-34
+  (212 and the registry read whole since 16:15) re-reads R5-RECENT's whole diff against its read at the hand-over and says
+  ACCEPTED or names a fault before anything is built on it. Until the hand-over this seat builds nothing else on 212: R5-DESC's
+  brief and plant are VEIL-34's now.
+  R5C6 AT 17:59 (measures read by the seat; red committed 8784dd91f, the reader uncommitted): the plant 6/6 with its teeth;
+  fidelity 2,288/2,296 engine-door reads on 287 nothing-hidden places, the one miss r5c2-m3-hamlet-8 (the Citizen militia, the
+  listed class); the differential 1,540/1,540 on 193 hiding places, server and twin; the server's c 0 on 2 of 4 shards.
+  RULINGS ON THIS UNIT: 99 (E92), 100 (E93), 101 (E94), 102 (E97), 103 (E98), section 2. 104 (the chair, 18:01: the hand-over's terms), section 2. THE JOIN PROBE: JOINPROBE.md on
   `lane/veil-33-2026-11-22-joinprobe-wip` (df7447e58), `docs/chair/2026-11-20/veil/out/v33/joinprobe/JOINPROBE.md`, with
   JOINPROBE-PASS1.md, lit/JOINPROBE-PASS2.md, conflicts.md and briefs/IX-TROUBLE-HOOKS-BRIEF.md.
 - THE HAND-OVER (ruling 99 (7)): VEIL-33 HANDS OVER AT R5-RECENT'S MERGE ("VEIL-33 HANDS OVER <commit>"), R5-DESC's brief written
@@ -287,6 +297,12 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     reaches 620,000 before the merge, VEIL-33 HANDS OVER at R5C5-SQL's commit, with R5C6's brief written and section 1 saying
     what is built, what is unproven, and what the next builder is given. EACH BUILDER'S BRIEF: its first line says what it reads
     whole, and that it reads nothing else whole (logs by tail; a hand-back's first section only).
+104. THE CHAIR TO VEIL-33, 17:58-18:01 UTC: the seat's count by the chair's read of the record is far below 620,000 (the
+    seat's own estimate ran ahead of it); the merge of R5-RECENT stays the seat's WITH EVERY PROOF; the hand-over at the merge as
+    planned. The seat said its conversation begins with a summary ending at about 15:17: so (1) section 1 says so; (2) the merge's
+    proofs are executed, not remembered; (3) VEIL-34 re-reads R5-RECENT's whole diff against its own whole read of 212 at the
+    hand-over, ACCEPTED or a fault named, before anything is built on it; (4) until then the seat builds nothing else on 212;
+    R5-DESC's brief and plant are VEIL-34's.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -312,3 +328,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:40 R5C3's STOP read and sent (141831a1a, pushed as -r5cure-wip). 15:42 E97 (ruling 102); the brief's E97 section 9aa4f37b3; V33-R5C4 seated, the count and the scan before the first edit.
 - 15:50 R5C4's STOP read (820553c8a; the count re-read). 15:51 the split sent; R5C5-SQL seated. 15:52 E98 (ruling 103). 15:53 R5C6's brief written.
 - 15:55 R5C5-SQL in (bbad923a5; the diff read whole). 15:57 R5C6 seated. 16:00 bbad923a5 pushed (-r5cure-wip). 16:11 the chair: VEIL-34 seated at 16:10; section 1 brought current for it.
+- 17:47 COMMON-EIGHTH item 15 read (a push names a local lane branch by its own name). 17:59 R5C6's measures sent to the chair. 18:00 the summary's hour said (about 15:17). 18:01 ruling 104.
