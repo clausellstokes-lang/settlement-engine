@@ -1,0 +1,577 @@
+DOCUMENTS 1948 (/var/tmp/v18/stored/today); by role {"A":1200,"B":608,"T":140}
+  the store's carry was identity in 1948; activateFaithIfEntitled changed the record in 0
+
+(1) [bare] STORED-ONLY PATHS: 524 generalized paths, UNREGISTERED 460 (no registry row matches the path or a prefix of it); documents carrying any: 1948/1948
+  mapEdits: 2 paths in 1948 documents, unregistered 2; writer src/components/generate/SaveToLibraryButton.jsx :: handleSave -> src/domain/townMap/mapEdits.js :: newSettlementMapEdits (the create chokepoint that calls saves.save)
+  publicProse: 3 paths in 1948 documents, unregistered 3; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:criminal: 7 paths in 1948 documents, unregistered 0; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:forces: 21 paths in 1948 documents, unregistered 21; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:posture: 25 paths in 1948 documents, unregistered 22; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:state: 17 paths in 1948 documents, unregistered 12; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:status: 9 paths in 1948 documents, unregistered 9; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:supporting: 6 paths in 1948 documents, unregistered 6; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:threat: 18 paths in 1948 documents, unregistered 17; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.defense:wall: 5 paths in 1948 documents, unregistered 4; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.economy:daily_life: 49 paths in 1948 documents, unregistered 45; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.economy:economics: 98 paths in 1948 documents, unregistered 80; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.economy:resources: 49 paths in 1948 documents, unregistered 45; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.economy:services: 52 paths in 1948 documents, unregistered 48; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.general:economics: 2 paths in 1948 documents, unregistered 2; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.general:history: 6 paths in 1948 documents, unregistered 6; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.general:overview: 11 paths in 1948 documents, unregistered 11; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.general:viability: 3 paths in 1948 documents, unregistered 3; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.magic: 5 paths in 1948 documents, unregistered 5; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.overview:identity: 3 paths in 1948 documents, unregistered 3; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.power:desk: 56 paths in 1948 documents, unregistered 45; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.power:governance: 2 paths in 1948 documents, unregistered 2; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.stressors:overview: 25 paths in 1948 documents, unregistered 23; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.viability: 5 paths in 1948 documents, unregistered 5; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.viewModel:viability: 2 paths in 1948 documents, unregistered 2; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  publicProse.blocks.warFaith:faith: 43 paths in 1948 documents, unregistered 39; writer src/lib/saves.js :: supabaseSave -> publicProseForRow -> src/components/new/publicProseCompose.js :: composePublicProse; written by saves.js :: withPublicProse
+  EVERY PATH (documents | registry row or UNREGISTERED | exact-path row):
+    mapEdits | 1948 | UNREGISTERED
+    mapEdits.layoutLawVersion | 1948 | UNREGISTERED
+    publicProse | 1948 | UNREGISTERED
+    publicProse.blocks | 1948 | UNREGISTERED
+    publicProse.blocks.defense:criminal | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.capture | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.ringNote | 1474 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.structure | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.structure.detail | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.structure.glance | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:criminal.structure.sentence | 1948 | prose.criminal | exact prose.criminal
+    publicProse.blocks.defense:forces | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.arcane | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.arcane.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.arcane.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.arcane.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.charter | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.charter.detail | 1592 | UNREGISTERED
+    publicProse.blocks.defense:forces.charter.glance | 1592 | UNREGISTERED
+    publicProse.blocks.defense:forces.charter.sentence | 1592 | UNREGISTERED
+    publicProse.blocks.defense:forces.contracted | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.contracted.detail | 653 | UNREGISTERED
+    publicProse.blocks.defense:forces.contracted.glance | 653 | UNREGISTERED
+    publicProse.blocks.defense:forces.contracted.sentence | 653 | UNREGISTERED
+    publicProse.blocks.defense:forces.force | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.force.detail | 1904 | UNREGISTERED
+    publicProse.blocks.defense:forces.force.glance | 1904 | UNREGISTERED
+    publicProse.blocks.defense:forces.force.sentence | 1904 | UNREGISTERED
+    publicProse.blocks.defense:forces.fortification | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.fortification.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.fortification.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:forces.fortification.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.defense:posture | 1948 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture | 1948 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.beside | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.field | 1691 | prose.posture.posture | exact prose.posture.posture
+    publicProse.blocks.defense:posture.posture.hasField | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.rung | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.rung.detail | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.rung.glance | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.posture.rung.sentence | 1691 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize | 1948 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.beside | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.field | 780 | prose.posture.prize | exact prose.posture.prize
+    publicProse.blocks.defense:posture.prize.hasField | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.rung | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.rung.detail | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.rung.glance | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.prize.rung.sentence | 780 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain | 1948 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.beside | 1295 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.field | 1295 | prose.posture.terrain | exact prose.posture.terrain
+    publicProse.blocks.defense:posture.terrain.hasField | 1295 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.rung | 1295 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.rung.detail | 1295 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.rung.glance | 1295 | UNREGISTERED
+    publicProse.blocks.defense:posture.terrain.rung.sentence | 1295 | UNREGISTERED
+    publicProse.blocks.defense:state | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.beside | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.field | 1948 | prose.state.firstSurvey | exact prose.state.firstSurvey
+    publicProse.blocks.defense:state.firstSurvey.hasField | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.rung | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.rung.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.rung.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.firstSurvey.rung.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.publicOrder | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.publicOrder.beside | 1948 | prose.state.publicOrder.beside | exact prose.state.publicOrder.beside
+    publicProse.blocks.defense:state.publicOrder.field | 1948 | prose.state.publicOrder.field | exact prose.state.publicOrder.field
+    publicProse.blocks.defense:state.publicOrder.hasField | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.publicOrder.rung | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.publicOrder.rung.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:state.publicOrder.rung.glance | 1948 | prose.state.publicOrder.rung.glance | exact prose.state.publicOrder.rung.glance
+    publicProse.blocks.defense:state.publicOrder.rung.sentence | 1948 | prose.state.publicOrder.rung.sentence | exact prose.state.publicOrder.rung.sentence
+    publicProse.blocks.defense:status | 1948 | UNREGISTERED
+    publicProse.blocks.defense:status.override | 1948 | UNREGISTERED
+    publicProse.blocks.defense:status.override.detail | 1553 | UNREGISTERED
+    publicProse.blocks.defense:status.override.glance | 1553 | UNREGISTERED
+    publicProse.blocks.defense:status.override.sentence | 1553 | UNREGISTERED
+    publicProse.blocks.defense:status.viability | 1948 | UNREGISTERED
+    publicProse.blocks.defense:status.viability.detail | 1553 | UNREGISTERED
+    publicProse.blocks.defense:status.viability.glance | 1553 | UNREGISTERED
+    publicProse.blocks.defense:status.viability.sentence | 1553 | UNREGISTERED
+    publicProse.blocks.defense:supporting | 1948 | UNREGISTERED
+    publicProse.blocks.defense:supporting.logistics | 1948 | UNREGISTERED
+    publicProse.blocks.defense:supporting.naval | 1948 | UNREGISTERED
+    publicProse.blocks.defense:supporting.naval.detail | 245 | UNREGISTERED
+    publicProse.blocks.defense:supporting.naval.glance | 245 | UNREGISTERED
+    publicProse.blocks.defense:supporting.naval.sentence | 245 | UNREGISTERED
+    publicProse.blocks.defense:threat | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.beasts | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.beasts.detail | 1322 | UNREGISTERED
+    publicProse.blocks.defense:threat.beasts.glance | 1322 | UNREGISTERED
+    publicProse.blocks.defense:threat.beasts.sentence | 1322 | UNREGISTERED
+    publicProse.blocks.defense:threat.disaster | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.economic | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.economic.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.economic.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.economic.sentence | 1948 | prose.threat.economic | exact prose.threat.economic
+    publicProse.blocks.defense:threat.internal | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.internal.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.internal.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.internal.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.invasion | 1948 | UNREGISTERED
+    publicProse.blocks.defense:threat.invasion.detail | 1408 | UNREGISTERED
+    publicProse.blocks.defense:threat.invasion.glance | 1408 | UNREGISTERED
+    publicProse.blocks.defense:threat.invasion.sentence | 1408 | UNREGISTERED
+    publicProse.blocks.defense:wall | 1948 | UNREGISTERED
+    publicProse.blocks.defense:wall.rationale | 1948 | UNREGISTERED
+    publicProse.blocks.defense:wall.rationale.detail | 1948 | UNREGISTERED
+    publicProse.blocks.defense:wall.rationale.glance | 1948 | UNREGISTERED
+    publicProse.blocks.defense:wall.rationale.sentence | 1948 | prose.wall.rationale | exact prose.wall.rationale
+    publicProse.blocks.economy:daily_life | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.arcaneMarket | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.catalogStanding | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.catalogStanding.@ | 259 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.criminalLine | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.criticalImport | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.criticalImport.@ | 1690 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.economicStrengths | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.economicStrengths.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.exploitation | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.exploitation.@ | 464 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.exportPosture | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.exportPosture.@ | 1943 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.famineSource | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.famineSource.@ | 3 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodMeans | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodMeans.@ | 1155 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodOnProsperity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodOnProsperity.@ | 395 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodSecurityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodSecurityRung.@ | 1936 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodSources | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodSources.@ | 1058 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.foodTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.granaryTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.hiddenHouse | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.impairedService | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.incomeMix | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.incomeMix.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.incomeWeight | 1948 | prose.incomeWeight.alias | exact prose.incomeWeight.alias
+    publicProse.blocks.economy:daily_life.incomeWeight.@ | 983 | prose.incomeWeight.alias
+    publicProse.blocks.economy:daily_life.prosperityHeader | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.prosperityHeader.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.prosperityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.prosperityRung.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.resourceCondition | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.resourceCondition.@ | 1551 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.shadowEconomy | 1948 | prose.shadowEconomy.alias | exact prose.shadowEconomy.alias
+    publicProse.blocks.economy:daily_life.shadowEconomy.@ | 1169 | prose.shadowEconomy.alias
+    publicProse.blocks.economy:daily_life.strategicValue | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.strategicValue.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.terrainIdentity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.terrainIdentity.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.theocraticEconomy | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.tradeFlow | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.tradeProfile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.tradeProfile.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.upstreamWeak | 1948 | UNREGISTERED
+    publicProse.blocks.economy:daily_life.upstreamWeak.@ | 515 | UNREGISTERED
+    publicProse.blocks.economy:economics | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.arcaneMarket | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.catalogStanding | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.catalogStanding.detail | 259 | UNREGISTERED
+    publicProse.blocks.economy:economics.catalogStanding.glance | 259 | UNREGISTERED
+    publicProse.blocks.economy:economics.catalogStanding.sentence | 259 | UNREGISTERED
+    publicProse.blocks.economy:economics.criminalLine | 1948 | prose.incomeMix | exact prose.incomeMix
+    publicProse.blocks.economy:economics.criticalImport | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.criticalImport.detail | 1690 | UNREGISTERED
+    publicProse.blocks.economy:economics.criticalImport.glance | 1690 | UNREGISTERED
+    publicProse.blocks.economy:economics.criticalImport.sentence | 1690 | UNREGISTERED
+    publicProse.blocks.economy:economics.economicStrengths | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.economicStrengths.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.economicStrengths.glance | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.economicStrengths.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.exploitation | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.exploitation.detail | 464 | UNREGISTERED
+    publicProse.blocks.economy:economics.exploitation.glance | 464 | UNREGISTERED
+    publicProse.blocks.economy:economics.exploitation.sentence | 464 | UNREGISTERED
+    publicProse.blocks.economy:economics.exportPosture | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.exportPosture.detail | 1943 | UNREGISTERED
+    publicProse.blocks.economy:economics.exportPosture.glance | 1943 | UNREGISTERED
+    publicProse.blocks.economy:economics.exportPosture.sentence | 1943 | UNREGISTERED
+    publicProse.blocks.economy:economics.famineSource | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.famineSource.detail | 3 | UNREGISTERED
+    publicProse.blocks.economy:economics.famineSource.glance | 3 | UNREGISTERED
+    publicProse.blocks.economy:economics.famineSource.sentence | 3 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodMeans | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodMeans.detail | 1155 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodMeans.glance | 1155 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodMeans.sentence | 1155 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodOnProsperity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodOnProsperity.detail | 395 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodOnProsperity.glance | 395 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodOnProsperity.sentence | 395 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSecurityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSecurityRung.detail | 1936 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSecurityRung.glance | 1936 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSecurityRung.sentence | 1936 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSources | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSources.detail | 1058 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSources.glance | 1058 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodSources.sentence | 1058 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.detail[] | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.detail[].label | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.detail[].value | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.glance | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.foodTile.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.granaryTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.hiddenHouse | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.impairedService | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.incomeMix | 1948 | prose.incomeMix | exact prose.incomeMix
+    publicProse.blocks.economy:economics.incomeMix.detail | 1948 | prose.incomeMix
+    publicProse.blocks.economy:economics.incomeMix.glance | 1948 | prose.incomeMix
+    publicProse.blocks.economy:economics.incomeMix.sentence | 1948 | prose.incomeMix | exact prose.incomeMix
+    publicProse.blocks.economy:economics.incomeWeight | 1948 | prose.incomeWeight | exact prose.incomeWeight
+    publicProse.blocks.economy:economics.incomeWeight.detail | 983 | prose.incomeWeight
+    publicProse.blocks.economy:economics.incomeWeight.glance | 983 | prose.incomeWeight
+    publicProse.blocks.economy:economics.incomeWeight.sentence | 983 | prose.incomeWeight
+    publicProse.blocks.economy:economics.prosperityHeader | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityHeader.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityHeader.detail[] | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityHeader.detail[].label | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityHeader.detail[].value | 1948 | prose.prosperityHeader.detail | exact prose.prosperityHeader.detail
+    publicProse.blocks.economy:economics.prosperityHeader.glance | 1948 | prose.prosperity.glance | exact prose.prosperity.glance
+    publicProse.blocks.economy:economics.prosperityHeader.sentence | 1948 | prose.prosperity.sentence | exact prose.prosperity.sentence
+    publicProse.blocks.economy:economics.prosperityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityRung.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.prosperityRung.glance | 1948 | prose.prosperity.glance | exact prose.prosperity.glance
+    publicProse.blocks.economy:economics.prosperityRung.sentence | 1948 | prose.prosperity.sentence | exact prose.prosperity.sentence
+    publicProse.blocks.economy:economics.resourceCondition | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.resourceCondition.detail | 1551 | UNREGISTERED
+    publicProse.blocks.economy:economics.resourceCondition.glance | 1551 | UNREGISTERED
+    publicProse.blocks.economy:economics.resourceCondition.sentence | 1551 | UNREGISTERED
+    publicProse.blocks.economy:economics.shadowEconomy | 1948 | prose.shadowEconomy | exact prose.shadowEconomy
+    publicProse.blocks.economy:economics.shadowEconomy.detail | 1169 | prose.shadowEconomy
+    publicProse.blocks.economy:economics.shadowEconomy.glance | 1169 | prose.shadowEconomy
+    publicProse.blocks.economy:economics.shadowEconomy.sentence | 1169 | prose.shadowEconomy | exact prose.shadowEconomy
+    publicProse.blocks.economy:economics.strategicValue | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.strategicValue.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.strategicValue.glance | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.strategicValue.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.terrainIdentity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.terrainIdentity.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.terrainIdentity.glance | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.terrainIdentity.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.theocraticEconomy | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.tradeFlow | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.tradeProfile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.tradeProfile.detail | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.tradeProfile.glance | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.tradeProfile.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.upstreamWeak | 1948 | UNREGISTERED
+    publicProse.blocks.economy:economics.upstreamWeak.detail | 515 | UNREGISTERED
+    publicProse.blocks.economy:economics.upstreamWeak.glance | 515 | UNREGISTERED
+    publicProse.blocks.economy:economics.upstreamWeak.sentence | 515 | UNREGISTERED
+    publicProse.blocks.economy:resources | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.arcaneMarket | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.catalogStanding | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.catalogStanding.@ | 259 | UNREGISTERED
+    publicProse.blocks.economy:resources.criminalLine | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.criticalImport | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.criticalImport.@ | 1690 | UNREGISTERED
+    publicProse.blocks.economy:resources.economicStrengths | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.economicStrengths.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.exploitation | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.exploitation.@ | 464 | UNREGISTERED
+    publicProse.blocks.economy:resources.exportPosture | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.exportPosture.@ | 1943 | UNREGISTERED
+    publicProse.blocks.economy:resources.famineSource | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.famineSource.@ | 3 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodMeans | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodMeans.@ | 1155 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodOnProsperity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodOnProsperity.@ | 395 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodSecurityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodSecurityRung.@ | 1936 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodSources | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodSources.@ | 1058 | UNREGISTERED
+    publicProse.blocks.economy:resources.foodTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.granaryTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.hiddenHouse | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.impairedService | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.incomeMix | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.incomeMix.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.incomeWeight | 1948 | prose.incomeWeight.alias | exact prose.incomeWeight.alias
+    publicProse.blocks.economy:resources.incomeWeight.@ | 983 | prose.incomeWeight.alias
+    publicProse.blocks.economy:resources.prosperityHeader | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.prosperityHeader.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.prosperityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.prosperityRung.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.resourceCondition | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.resourceCondition.@ | 1551 | UNREGISTERED
+    publicProse.blocks.economy:resources.shadowEconomy | 1948 | prose.shadowEconomy.alias | exact prose.shadowEconomy.alias
+    publicProse.blocks.economy:resources.shadowEconomy.@ | 1169 | prose.shadowEconomy.alias
+    publicProse.blocks.economy:resources.strategicValue | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.strategicValue.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.terrainIdentity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.terrainIdentity.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.theocraticEconomy | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.tradeFlow | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.tradeProfile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.tradeProfile.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.upstreamWeak | 1948 | UNREGISTERED
+    publicProse.blocks.economy:resources.upstreamWeak.@ | 515 | UNREGISTERED
+    publicProse.blocks.economy:services | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.arcaneMarket | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.catalogStanding | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.catalogStanding.@ | 259 | UNREGISTERED
+    publicProse.blocks.economy:services.criminalLine | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.criticalImport | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.criticalImport.@ | 1690 | UNREGISTERED
+    publicProse.blocks.economy:services.economicStrengths | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.economicStrengths.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.exploitation | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.exploitation.@ | 464 | UNREGISTERED
+    publicProse.blocks.economy:services.exportPosture | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.exportPosture.@ | 1943 | UNREGISTERED
+    publicProse.blocks.economy:services.famineSource | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.famineSource.@ | 3 | UNREGISTERED
+    publicProse.blocks.economy:services.foodMeans | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.foodMeans.@ | 1155 | UNREGISTERED
+    publicProse.blocks.economy:services.foodOnProsperity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.foodOnProsperity.@ | 395 | UNREGISTERED
+    publicProse.blocks.economy:services.foodSecurityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.foodSecurityRung.@ | 1936 | UNREGISTERED
+    publicProse.blocks.economy:services.foodSources | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.foodSources.@ | 1058 | UNREGISTERED
+    publicProse.blocks.economy:services.foodTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.granaryTile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.hiddenHouse | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.impairedService | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.impairedService.detail | 92 | UNREGISTERED
+    publicProse.blocks.economy:services.impairedService.glance | 92 | UNREGISTERED
+    publicProse.blocks.economy:services.impairedService.sentence | 92 | UNREGISTERED
+    publicProse.blocks.economy:services.incomeMix | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.incomeMix.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.incomeWeight | 1948 | prose.incomeWeight.alias | exact prose.incomeWeight.alias
+    publicProse.blocks.economy:services.incomeWeight.@ | 983 | prose.incomeWeight.alias
+    publicProse.blocks.economy:services.prosperityHeader | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.prosperityHeader.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.prosperityRung | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.prosperityRung.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.resourceCondition | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.resourceCondition.@ | 1551 | UNREGISTERED
+    publicProse.blocks.economy:services.shadowEconomy | 1948 | prose.shadowEconomy.alias | exact prose.shadowEconomy.alias
+    publicProse.blocks.economy:services.shadowEconomy.@ | 1169 | prose.shadowEconomy.alias
+    publicProse.blocks.economy:services.strategicValue | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.strategicValue.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.terrainIdentity | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.terrainIdentity.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.theocraticEconomy | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.tradeFlow | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.tradeProfile | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.tradeProfile.@ | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.upstreamWeak | 1948 | UNREGISTERED
+    publicProse.blocks.economy:services.upstreamWeak.@ | 515 | UNREGISTERED
+    publicProse.blocks.general:economics | 1948 | UNREGISTERED
+    publicProse.blocks.general:economics.craftReasonLine | 1948 | UNREGISTERED
+    publicProse.blocks.general:history | 1948 | UNREGISTERED
+    publicProse.blocks.general:history.foundedLine | 1948 | UNREGISTERED
+    publicProse.blocks.general:history.identityLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:history.legacyLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:history.legacyLines[] | 1868 | UNREGISTERED
+    publicProse.blocks.general:history.recordLine | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.conflictLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.conflictLines[] | 1393 | UNREGISTERED
+    publicProse.blocks.general:overview.connectionLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.healthLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.originLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.populationLine | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.siteLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.siteLines[] | 1939 | UNREGISTERED
+    publicProse.blocks.general:overview.situationLine | 1948 | UNREGISTERED
+    publicProse.blocks.general:overview.warningLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:viability | 1948 | UNREGISTERED
+    publicProse.blocks.general:viability.verdictLines | 1948 | UNREGISTERED
+    publicProse.blocks.general:viability.verdictLines[] | 577 | UNREGISTERED
+    publicProse.blocks.magic | 1948 | UNREGISTERED
+    publicProse.blocks.magic.arcaneReliance | 1948 | UNREGISTERED
+    publicProse.blocks.magic.arcaneReliance.detail | 1948 | UNREGISTERED
+    publicProse.blocks.magic.arcaneReliance.glance | 1948 | UNREGISTERED
+    publicProse.blocks.magic.arcaneReliance.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.overview:identity | 1948 | UNREGISTERED
+    publicProse.blocks.overview:identity.governs | 1948 | UNREGISTERED
+    publicProse.blocks.overview:identity.scope | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.blocEnd | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.blocGlue | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.blocPresence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.captureReading | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.captureReading.detail | 953 | UNREGISTERED
+    publicProse.blocks.power:desk.captureReading.glance | 953 | UNREGISTERED
+    publicProse.blocks.power:desk.captureReading.sentence | 953 | UNREGISTERED
+    publicProse.blocks.power:desk.gmAdvisory | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.gmAdvisory.detail | 219 | UNREGISTERED
+    publicProse.blocks.power:desk.gmAdvisory.glance | 219 | UNREGISTERED
+    publicProse.blocks.power:desk.gmAdvisory.sentence | 219 | UNREGISTERED
+    publicProse.blocks.power:desk.governingTitle | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.governingTitle.detail | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.governingTitle.glance | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.governingTitle.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyBanner | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyBanner.detail | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyBanner.glance | 1948 | prose.legitimacyBanner | exact prose.legitimacyBanner
+    publicProse.blocks.power:desk.legitimacyBanner.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyLens | 1948 | prose.legitimacyLens | exact prose.legitimacyLens
+    publicProse.blocks.power:desk.legitimacyLens.detail | 1756 | prose.legitimacyLens
+    publicProse.blocks.power:desk.legitimacyLens.glance | 1756 | prose.legitimacyLens
+    publicProse.blocks.power:desk.legitimacyLens.sentence | 1756 | prose.legitimacyLens
+    publicProse.blocks.power:desk.legitimacyReading | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyReading.detail | 6 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyReading.glance | 6 | UNREGISTERED
+    publicProse.blocks.power:desk.legitimacyReading.sentence | 6 | UNREGISTERED
+    publicProse.blocks.power:desk.operationReading | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.operationReading.detail | 1042 | UNREGISTERED
+    publicProse.blocks.power:desk.operationReading.glance | 1042 | UNREGISTERED
+    publicProse.blocks.power:desk.operationReading.sentence | 1042 | UNREGISTERED
+    publicProse.blocks.power:desk.rulingStructure | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.rulingStructure.detail | 1747 | UNREGISTERED
+    publicProse.blocks.power:desk.rulingStructure.glance | 1747 | UNREGISTERED
+    publicProse.blocks.power:desk.rulingStructure.sentence | 1747 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityHeader | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityHeader.detail | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityHeader.glance | 1948 | prose.stabilityHeader | exact prose.stabilityHeader
+    publicProse.blocks.power:desk.stabilityHeader.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityLens | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityLens.detail | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityLens.glance | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.stabilityLens.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.structureFlag | 1948 | prose.structureFlag | exact prose.structureFlag
+    publicProse.blocks.power:desk.structureFlag.detail | 88 | prose.structureFlag
+    publicProse.blocks.power:desk.structureFlag.glance | 88 | prose.structureFlag
+    publicProse.blocks.power:desk.structureFlag.sentence | 88 | prose.structureFlag
+    publicProse.blocks.power:desk.successionHold | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.successionHold.detail | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.successionHold.glance | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.successionHold.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.successionRisk | 1948 | UNREGISTERED
+    publicProse.blocks.power:desk.successionRisk.detail | 1931 | UNREGISTERED
+    publicProse.blocks.power:desk.successionRisk.glance | 1931 | prose.successionRisk | exact prose.successionRisk
+    publicProse.blocks.power:desk.successionRisk.sentence | 1931 | UNREGISTERED
+    publicProse.blocks.power:governance | 1948 | UNREGISTERED
+    publicProse.blocks.power:governance.text | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionArchetype | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionDirection | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionDirection.detail | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionDirection.glance | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionDirection.sentence | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionDuration | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionProvenance | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionProvenance.detail | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionProvenance.glance | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionProvenance.sentence | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionSeverity | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionSeverity.detail | 1553 | UNREGISTERED
+    publicProse.blocks.stressors:overview.conditionSeverity.glance | 1553 | prose.conditionSeverity.glance | exact prose.conditionSeverity.glance
+    publicProse.blocks.stressors:overview.conditionSeverity.sentence | 1553 | prose.conditionSeverity | exact prose.conditionSeverity
+    publicProse.blocks.stressors:overview.crisisArity | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisArity.detail | 5 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisArity.glance | 5 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisArity.sentence | 5 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisFraming | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisFraming.detail | 395 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisFraming.glance | 395 | UNREGISTERED
+    publicProse.blocks.stressors:overview.crisisFraming.sentence | 395 | UNREGISTERED
+    publicProse.blocks.stressors:overview.worldStressorLifecycle | 1948 | UNREGISTERED
+    publicProse.blocks.stressors:overview.worldStressorOrigin | 1948 | UNREGISTERED
+    publicProse.blocks.viability | 1948 | UNREGISTERED
+    publicProse.blocks.viability.isolationSupply | 1948 | UNREGISTERED
+    publicProse.blocks.viability.isolationSupply.detail | 120 | UNREGISTERED
+    publicProse.blocks.viability.isolationSupply.glance | 120 | UNREGISTERED
+    publicProse.blocks.viability.isolationSupply.sentence | 120 | UNREGISTERED
+    publicProse.blocks.viewModel:viability | 1948 | UNREGISTERED
+    publicProse.blocks.viewModel:viability.summary | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.creedFall | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.creedLegitimacy | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.creedNiche | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.creedStanding | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.devotion | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.dormantNote | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.faithDark | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.faithTeaser | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.faithTeaser.detail | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.faithTeaser.glance | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.faithTeaser.sentence | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.mandate | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.nicheRow | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.patronCults | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.patronRank | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.pietyArc | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.sink | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.standings | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeCrusader | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeCrusader.detail | 35 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeCrusader.glance | 35 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeCrusader.sentence | 35 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeFraud | 1948 | prose.templeFraud | exact prose.templeFraud
+    publicProse.blocks.warFaith:faith.templeFraud.detail | 33 | prose.templeFraud
+    publicProse.blocks.warFaith:faith.templeFraud.glance | 33 | prose.templeFraud
+    publicProse.blocks.warFaith:faith.templeFraud.sentence | 33 | prose.templeFraud
+    publicProse.blocks.warFaith:faith.templeHeresy | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeHeresy.detail | 90 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeHeresy.glance | 90 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeHeresy.sentence | 90 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeMageTheocracy | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeMageTheocracy.detail | 42 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeMageTheocracy.glance | 42 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.templeMageTheocracy.sentence | 42 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.treatyDocument | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.treatyFraying | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.treatyTerm | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.warExhaustion | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.warHoldings | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.warMobilization | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.warOccupation | 1948 | UNREGISTERED
+    publicProse.blocks.warFaith:faith.warStatus | 1948 | UNREGISTERED
+    publicProse.v | 1948 | UNREGISTERED
+  [bare] BIRTH-ONLY PATHS: 0
+  [bare] VALUE DIFFERS (same exact path, other value): 0 generalized paths
+
+(1) [lane] STORED-ONLY PATHS: 2 generalized paths, UNREGISTERED 2 (no registry row matches the path or a prefix of it); documents carrying any: 1948/1948
+  mapEdits: 2 paths in 1948 documents, unregistered 2; writer src/components/generate/SaveToLibraryButton.jsx :: handleSave -> src/domain/townMap/mapEdits.js :: newSettlementMapEdits (the create chokepoint that calls saves.save)
+  EVERY PATH (documents | registry row or UNREGISTERED | exact-path row):
+    mapEdits | 1948 | UNREGISTERED
+    mapEdits.layoutLawVersion | 1948 | UNREGISTERED
+  [lane] BIRTH-ONLY PATHS: 0
+  [lane] VALUE DIFFERS (same exact path, other value): 0 generalized paths
+
+(2) PROSE HOLDING A WITHHELD FIELD (twin, every gated setting, both Reveals): 1948 documents, 38960 reads; 8 rows (7 registered, 1 unregistered prefixes)
+  row [rule/when] | documents (by role) | reads | whole / cut hits | sites (reads) | paths | e.g.
+  power.recentConflict [withhold/always] | 1791 {"A":1106,"B":554,"T":131} | 35820 | 34080/1740 | {"power:governance":35820} | {"powerStructure.recentConflict":35820} | e.g. t2p-city-indebted-1155 off|own powerStructure.recentConflict -> publicProse.blocks.power:governance (whole): The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.
+  power.stability [recompose/always] | 1738 {"A":1060,"B":551,"T":127} | 34760 | 34760/0 | {"overview:identity":34760} | {"powerStructure.stability":34760} | e.g. t2p-city-indebted-1155 off|own powerStructure.stability -> publicProse.blocks.overview:identity (whole): Strained — the creditors have a say in every decision
+  safety.guardEffectivenessDesc [recompose/house-hidden] | 228 {"B":183,"T":45} | 4560 | 4440/120 | {"defense:posture":4440,"defense:state":120} | {"economicState.safetyProfile.guardEffectivenessDesc":4560} | e.g. t2b-city-indebted-145 off|own economicState.safetyProfile.guardEffectivenessDesc -> publicProse.blocks.defense:posture (whole): The garrison and city watch walk the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between th
+  power.recentConflict.pressureSentence [withhold/always] | 140 {"A":77,"B":51,"T":12} | 2800 | 2800/0 | {"power:governance":2800} | {"pressureSentence":2800} | e.g. t2p-city-none-1152 off|own pressureSentence -> publicProse.blocks.power:governance (whole): The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have no
+  economy.complexity [recompose/house-hidden] | 37 {"B":33,"T":4} | 740 | 740/0 | {"economy:economics":740} | {"economicState.economicComplexity":740} | e.g. t2b-city-infiltrated-121 off|own economicState.economicComplexity -> publicProse.blocks.economy:economics (whole): Highly diversified — multiple major revenue streams
+  safety.safetyDesc [recompose/house-hidden] | 23 {"B":19,"T":4} | 460 | 460/0 | {"defense:state":460} | {"economicState.safetyProfile.safetyDesc":460} | e.g. t2b-town-infiltrated-51 off|own economicState.safetyProfile.safetyDesc -> publicProse.blocks.defense:state (whole): Crime exists but is well-managed. The garrison is present and responsive. Petty theft is the primary risk; organized crime has a limited foo
+  (unregistered) history.currentTensions [-] | 18 {"B":18} | 360 | 360/0 | {"defense:state":260,"defense:posture":100} | {"history.currentTensions[].factions[]":360} | e.g. t2b-city-none-52 off|own history.currentTensions[].factions[] -> publicProse.blocks.defense:state (whole): The garrison
+  people.secret [withhold/house-hidden] | 1 {"A":1} | 20 | 0/20 | {"power:governance":20} | {"npcs[].secret.what":20} | e.g. t2p-city-wartime-1018 off|own npcs[].secret.what -> publicProse.blocks.power:governance (cut):  Kyriakos Photeinopoulos (the senior guild master) a debt from before either of them held their current position: one that Kyriakos Photeino
+PROSE ROWS: 8 (registered 7)

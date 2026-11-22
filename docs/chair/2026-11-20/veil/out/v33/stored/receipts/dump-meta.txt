@@ -1,0 +1,6 @@
+dump 2026-11-22T21:38:17Z tree /home/user/wt/lp at 216cb46d85de4a5be96f786fb012b0d693d4e2b7
+end 2026-11-22T21:42:08Z
+shard 0 rc=0
+shard 1 rc=0
+shard 3 rc=0
+shard 2 rc=0

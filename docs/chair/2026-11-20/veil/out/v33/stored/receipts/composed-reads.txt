@@ -1,0 +1,365 @@
+COMPOSED, BY SOURCE: per site, its reader closure (modules) and every field key the closure names (code, comments stripped), with up to 3 modules
+
+economy:*: 271 modules
+  power.recentConflict: nearest depth 2; 3 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@2, src/domain/rulingPower.js@3, src/domain/display/governanceAccount.js@4
+  pressureSentence: nearest depth 2; 2 module(s), nearest src/domain/userEdits.js@2, src/domain/summary/tonightSheet.js@3
+  safety.crimeTypes: nearest depth 1; 2 module(s), nearest src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/economy.generated.js@2
+  safety.criminalInstitutions: nearest depth 1; 4 module(s), nearest src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/economy.generated.js@2, src/domain/facts/criminalStructureKey.js@2
+  power.label (powerLabel): nearest depth 1; 6 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/criminalStructureKey.js@2, src/domain/dossier/faithReading.js@2
+  power.desc (factions[].desc): nearest depth 2; 4 module(s), nearest src/domain/display/crisisStoppedRow.js@2, src/domain/factionProfile.js@3, src/domain/facts/forceHours.js@3
+  power names (factions[].faction): nearest depth 1; 23 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/dossier/entityLinks.js@2, src/domain/crimeSignal.js@2
+  house names (institutions[].name): nearest depth 1; 62 module(s), nearest src/domain/display/stateProse/economyStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/domain/display/defenseDisplay.js@1
+  safety.plotHooks: nearest depth 2; 5 module(s), nearest src/domain/userEdits.js@2, src/domain/summary/tonightSheet.js@3, src/domain/npcProfile.js@3
+  economy.situationDesc: nearest depth 2; 1 module(s), nearest src/data/dossierStateProse/economy.generated.js@2
+  safety.economicDragDesc: nearest depth 2; 2 module(s), nearest src/data/dossierStateProse/economy.generated.js@2, src/domain/userEdits.js@2
+  npcs.stressNote: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  history.legacy: nearest depth 3; 1 module(s), nearest src/domain/facts/legacyRuin.js@3
+  people.secret: nearest depth 2; 4 module(s), nearest src/domain/dossier/entityLinks.js@2, src/domain/summary/tonightSheet.js@3, src/domain/foodSurplus.js@3
+  power.captureState: nearest depth 4; 1 module(s), nearest src/domain/display/governanceAccount.js@4
+  safety.blackMarketCapture: nearest depth 1; 4 module(s), nearest src/domain/display/stateProse/economyStateProse.js@1, src/data/dossierStateProse/economy.generated.js@2, src/domain/causalState.js@2
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 1; 9 module(s), nearest src/domain/display/stateProse/economyStateProse.js@1, src/data/dossierStateProse/economy.generated.js@2, src/domain/display/tradeListDisplay.js@2
+  power.factions.legitimacyCrisis: nearest depth 2; 3 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@3
+  compound.economyOutput: nearest depth 2; 1 module(s), nearest src/data/dossierStateProse/economy.generated.js@2
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 1; 6 module(s), nearest src/domain/display/dossierViewModel.js@1, src/domain/causalState.js@2, src/data/institutionServices.js@3
+  defence.economicGates: nearest depth 1; 3 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/guardPay.js@3, src/domain/worldPulse/foodStockpile.js@4
+  safety.safetyDesc: nearest depth 1; 2 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/userEdits.js@2
+  safety.guardEffectivenessDesc: nearest depth 1; 2 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/userEdits.js@2
+  history.tension (currentTensions): nearest depth 2; 6 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@2, src/domain/userEdits.js@2, src/domain/facts/lawBand.js@3
+  people.prominentRelationship: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  people.ties (relationships): nearest depth 2; 9 module(s), nearest src/domain/dossier/entityLinks.js@2, src/domain/facts/factsOf.js@2, src/domain/summary/tonightSheet.js@3
+  people.allegiance: nearest depth 3; 4 module(s), nearest src/domain/npcProfile.js@3, src/domain/crisis/crisisCast.js@4, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 1; 11 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/factsOf.js@2, src/domain/facts/seatMembers.js@3
+  legitimacy.crimMultiplier: nearest depth 3; 3 module(s), nearest src/domain/rulingPower.js@3, src/data/bandLadders.js@4, src/domain/crisis/crisisCast.js@4
+  cast.* (stress cast): nearest depth 3; 2 module(s), nearest src/domain/summary/tonightSheet.js@3, src/domain/crisis/crisisHooks.js@4
+  spatial.quarters: nearest depth 3; 1 module(s), nearest src/data/institutionalCatalog.js@3
+  history.timeline.year: nearest depth 2; 1 module(s), nearest src/domain/dossier/entityLinks.js@2
+  conditions.severity: nearest depth 0; 19 module(s), nearest src/components/new/tabHelpers.js@0, src/domain/display/validationOnPage.js@2, src/domain/causalState.js@2
+
+general:*: 187 modules
+  power.recentConflict: nearest depth 5; 1 module(s), nearest src/domain/rulingPower.js@5
+  safety.criminalInstitutions: nearest depth 4; 2 module(s), nearest src/domain/facts/criminalStructureKey.js@4, src/domain/corruption.js@5
+  power.label (powerLabel): nearest depth 4; 4 module(s), nearest src/domain/facts/rivalPower.js@4, src/domain/facts/seatOutranked.js@4, src/domain/dossier/faithReading.js@4
+  power.desc (factions[].desc): nearest depth 4; 2 module(s), nearest src/domain/facts/forceHours.js@4, src/domain/factionProfile.js@6
+  power names (factions[].faction): nearest depth 0; 13 module(s), nearest src/components/new/generalDeskRead.js@0, src/domain/facts/sovereign.js@4, src/domain/facts/seatMembers.js@4
+  house names (institutions[].name): nearest depth 0; 42 module(s), nearest src/components/new/generalDeskRead.js@0, src/domain/display/stateProse/generalStateProse.js@1, src/domain/display/stateProse/dossierMounts.js@1
+  safety.plotHooks: nearest depth 2; 3 module(s), nearest src/data/dossierStateProse/general.generated.js@2, src/domain/facts/lawBand.js@4, src/domain/npcProfile.js@6
+  history.siegeNarrative: nearest depth 1; 1 module(s), nearest src/domain/display/stateProse/generalStateProse.js@1
+  npcs.stressNote: nearest depth 2; 1 module(s), nearest src/data/dossierStateProse/general.generated.js@2
+  history.legacy: nearest depth 1; 2 module(s), nearest src/domain/display/stateProse/generalStateProse.js@1, src/domain/facts/legacyRuin.js@4
+  people.secret: nearest depth 3; 2 module(s), nearest src/domain/foodSurplus.js@3, src/domain/npcProfile.js@6
+  safety.blackMarketCapture: nearest depth 5; 2 module(s), nearest src/domain/corruption.js@5, src/domain/causalState.js@5
+  safety.safetyRatio: nearest depth 5; 1 module(s), nearest src/domain/corruption.js@5
+  income (incomeSources): nearest depth 2; 5 module(s), nearest src/domain/display/tradeListDisplay.js@2, src/domain/facts/magic.js@3, src/domain/dossier/faithReading.js@4
+  power.factions.legitimacyCrisis: nearest depth 3; 3 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@5
+  compound.criminalEffective: nearest depth 5; 1 module(s), nearest src/domain/corruption.js@5
+  defence.readiness.score: nearest depth 0; 7 module(s), nearest src/components/new/generalDeskRead.js@0, src/domain/display/stateProse/generalStateProse.js@1, src/data/dossierStateProse/general.generated.js@2
+  defence.economicGates: nearest depth 4; 1 module(s), nearest src/domain/facts/guardPay.js@4
+  safety.safetyDesc: nearest depth 1; 1 module(s), nearest src/domain/display/stateProse/dossierMounts.js@1
+  history.tension (currentTensions): nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/generalStateProse.js@1, src/data/dossierStateProse/general.generated.js@2, src/domain/facts/dangerComing.js@4
+  people.prominentRelationship: nearest depth 0; 3 module(s), nearest src/components/new/generalDeskRead.js@0, src/domain/display/stateProse/generalStateProse.js@1, src/data/dossierStateProse/general.generated.js@2
+  people.ties (relationships): nearest depth 0; 7 module(s), nearest src/components/new/generalDeskRead.js@0, src/domain/display/stateProse/generalStateProse.js@1, src/domain/display/stateProse/dossierMounts.js@1
+  people.allegiance: nearest depth 6; 2 module(s), nearest src/domain/npcProfile.js@6, src/domain/people/allegiance.js@7
+  npcs.memberships.veiled: nearest depth 3; 6 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/seatMembers.js@4, src/domain/facts/sharedPower.js@4
+  legitimacy.crimMultiplier: nearest depth 5; 2 module(s), nearest src/data/bandLadders.js@5, src/domain/rulingPower.js@5
+  spatial.quarters: nearest depth 2; 2 module(s), nearest src/data/dossierStateProse/general.generated.js@2, src/data/institutionalCatalog.js@2
+  history.timeline.year: nearest depth 2; 1 module(s), nearest src/data/dossierStateProse/general.generated.js@2
+  conditions.severity: nearest depth 1; 14 module(s), nearest src/domain/display/stateProse/generalStateProse.js@1, src/domain/display/validationOnPage.js@1, src/data/dossierStateProse/general.generated.js@2
+
+overview:identity: 208 modules
+  power.recentConflict: nearest depth 3; 2 module(s), nearest src/domain/display/governanceAccount.js@3, src/domain/rulingPower.js@4
+  pressureSentence: nearest depth 1; 3 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/summary/tonightSheet.js@2, src/domain/userEdits.js@3
+  safety.criminalInstitutions: nearest depth 3; 2 module(s), nearest src/domain/facts/criminalStructureKey.js@3, src/domain/corruption.js@4
+  power.label (powerLabel): nearest depth 1; 6 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/facts/rivalPower.js@3, src/domain/facts/seatOutranked.js@3
+  power.desc (factions[].desc): nearest depth 3; 3 module(s), nearest src/domain/display/governanceAccount.js@3, src/domain/facts/forceHours.js@3, src/domain/factionProfile.js@5
+  power names (factions[].faction): nearest depth 1; 21 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/facts/guild.js@2, src/domain/coherence/hookTruth.js@3
+  house names (institutions[].name): nearest depth 1; 42 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/facts/factsOf.js@2, src/domain/facts/guild.js@2
+  safety.plotHooks: nearest depth 1; 6 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/dossier/plotHooks.js@2, src/domain/summary/tonightSheet.js@2
+  economy.situationDesc: nearest depth 1; 1 module(s), nearest src/domain/summary/settlementQuickGuide.js@1
+  safety.economicDragDesc: nearest depth 3; 1 module(s), nearest src/domain/userEdits.js@3
+  npcs.stressNote: nearest depth 3; 1 module(s), nearest src/domain/userEdits.js@3
+  history.legacy: nearest depth 3; 1 module(s), nearest src/domain/facts/legacyRuin.js@3
+  people.secret: nearest depth 2; 3 module(s), nearest src/domain/summary/tonightSheet.js@2, src/domain/foodSurplus.js@4, src/domain/npcProfile.js@5
+  power.captureState: nearest depth 3; 1 module(s), nearest src/domain/display/governanceAccount.js@3
+  safety.blackMarketCapture: nearest depth 4; 2 module(s), nearest src/domain/corruption.js@4, src/domain/causalState.js@4
+  safety.safetyRatio: nearest depth 4; 1 module(s), nearest src/domain/corruption.js@4
+  income (incomeSources): nearest depth 3; 4 module(s), nearest src/domain/facts/magic.js@3, src/domain/dossier/faithReading.js@3, src/domain/facts/criminalStructureKey.js@3
+  power.factions.legitimacyCrisis: nearest depth 2; 3 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/facts/factVocabulary.js@2, src/domain/rulingPower.js@4
+  compound.criminalEffective: nearest depth 4; 1 module(s), nearest src/domain/corruption.js@4
+  defence.readiness.score: nearest depth 3; 4 module(s), nearest src/data/bandLadders.js@3, src/domain/causalState.js@4, src/data/institutionServices.js@5
+  defence.economicGates: nearest depth 3; 1 module(s), nearest src/domain/facts/guardPay.js@3
+  safety.safetyDesc: nearest depth 3; 1 module(s), nearest src/domain/userEdits.js@3
+  safety.guardEffectivenessDesc: nearest depth 3; 1 module(s), nearest src/domain/userEdits.js@3
+  history.tension (currentTensions): nearest depth 1; 6 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/domain/dossier/plotHooks.js@2, src/domain/facts/dangerComing.js@3
+  people.prominentRelationship: nearest depth 3; 1 module(s), nearest src/domain/userEdits.js@3
+  people.ties (relationships): nearest depth 2; 8 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/dossier/plotHooks.js@2, src/domain/summary/tonightSheet.js@2
+  people.allegiance: nearest depth 3; 4 module(s), nearest src/domain/crisis/crisisCast.js@3, src/domain/dossier/hookLines.js@3, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 2; 10 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/people/membership.js@3, src/domain/facts/seatMembers.js@3
+  legitimacy.crimMultiplier: nearest depth 3; 3 module(s), nearest src/domain/crisis/crisisCast.js@3, src/data/bandLadders.js@3, src/domain/rulingPower.js@4
+  cast.* (stress cast): nearest depth 2; 2 module(s), nearest src/domain/crisis/crisisHooks.js@2, src/domain/summary/tonightSheet.js@2
+  spatial.quarters: nearest depth 1; 2 module(s), nearest src/domain/summary/settlementQuickGuide.js@1, src/data/institutionalCatalog.js@4
+  conditions.severity: nearest depth 2; 14 module(s), nearest src/domain/facts/factVocabulary.js@2, src/domain/dossier/plotHooks.js@2, src/domain/facts/magicSupply.js@3
+
+stressors:overview: 221 modules
+  power.recentConflict: nearest depth 2; 2 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@2, src/domain/rulingPower.js@3
+  pressureSentence: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  safety.crimeTypes: nearest depth 1; 1 module(s), nearest src/domain/display/defenseDisplay.js@1
+  safety.criminalInstitutions: nearest depth 1; 3 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/criminalStructureKey.js@2, src/domain/corruption.js@3
+  power.label (powerLabel): nearest depth 1; 5 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/criminalStructureKey.js@2, src/domain/dossier/faithReading.js@2
+  power.desc (factions[].desc): nearest depth 2; 3 module(s), nearest src/domain/display/crisisStoppedRow.js@2, src/domain/factionProfile.js@3, src/domain/facts/forceHours.js@3
+  power names (factions[].faction): nearest depth 1; 16 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/crimeSignal.js@2, src/domain/dossier/faithReading.js@2
+  house names (institutions[].name): nearest depth 1; 54 module(s), nearest src/domain/activeConditions.js@1, src/domain/display/dossierViewModel.js@1, src/domain/display/defenseDisplay.js@1
+  safety.plotHooks: nearest depth 2; 3 module(s), nearest src/domain/userEdits.js@2, src/domain/npcProfile.js@3, src/domain/facts/lawBand.js@3
+  safety.economicDragDesc: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  npcs.stressNote: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  history.legacy: nearest depth 3; 1 module(s), nearest src/domain/facts/legacyRuin.js@3
+  people.secret: nearest depth 3; 3 module(s), nearest src/domain/npcProfile.js@3, src/domain/foodSurplus.js@3, src/domain/dossier/entityLinks.js@3
+  safety.blackMarketCapture: nearest depth 2; 2 module(s), nearest src/domain/causalState.js@2, src/domain/corruption.js@3
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 2; 7 module(s), nearest src/domain/worldPulse/treasury.js@2, src/domain/display/tradeListDisplay.js@2, src/domain/display/crisisStoppedRow.js@2
+  power.factions.legitimacyCrisis: nearest depth 2; 3 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@3
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 1; 6 module(s), nearest src/domain/display/dossierViewModel.js@1, src/domain/causalState.js@2, src/domain/capacityModel.js@3
+  defence.economicGates: nearest depth 1; 3 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/guardPay.js@3, src/domain/worldPulse/foodStockpile.js@4
+  safety.safetyDesc: nearest depth 1; 2 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/userEdits.js@2
+  safety.guardEffectivenessDesc: nearest depth 1; 2 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/userEdits.js@2
+  history.tension (currentTensions): nearest depth 2; 5 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@2, src/domain/userEdits.js@2, src/domain/facts/lawBand.js@3
+  people.prominentRelationship: nearest depth 2; 1 module(s), nearest src/domain/userEdits.js@2
+  people.ties (relationships): nearest depth 2; 4 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/npcProfile.js@3, src/domain/dossier/entityLinks.js@3
+  people.allegiance: nearest depth 3; 2 module(s), nearest src/domain/npcProfile.js@3, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 1; 7 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/factsOf.js@2, src/domain/facts/seatMembers.js@3
+  legitimacy.crimMultiplier: nearest depth 3; 2 module(s), nearest src/domain/rulingPower.js@3, src/data/bandLadders.js@4
+  spatial.quarters: nearest depth 3; 1 module(s), nearest src/data/institutionalCatalog.js@3
+  history.timeline.year: nearest depth 3; 1 module(s), nearest src/domain/dossier/entityLinks.js@3
+  conditions.severity: nearest depth 1; 18 module(s), nearest src/domain/display/stateProse/stressorsStateProse.js@1, src/domain/activeConditions.js@1, src/domain/conditionPromotion.js@2
+
+defense:*: 232 modules
+  power.recentConflict: nearest depth 2; 2 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@2, src/domain/rulingPower.js@3
+  pressureSentence: nearest depth 1; 3 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@2
+  safety.crimeTypes: nearest depth 1; 1 module(s), nearest src/domain/display/defenseDisplay.js@1
+  safety.criminalInstitutions: nearest depth 1; 4 module(s), nearest src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/defense.generated.js@2, src/domain/facts/criminalStructureKey.js@2
+  power.label (powerLabel): nearest depth 1; 5 module(s), nearest src/domain/display/defenseDisplay.js@1, src/domain/facts/criminalStructureKey.js@2, src/domain/dossier/faithReading.js@2
+  power.desc (factions[].desc): nearest depth 2; 3 module(s), nearest src/domain/display/crisisStoppedRow.js@2, src/domain/factionProfile.js@3, src/domain/facts/forceHours.js@3
+  power names (factions[].faction): nearest depth 1; 20 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/display/defenseDisplay.js@1, src/domain/display/stateProse/magicFlagTruth.js@2
+  house names (institutions[].name): nearest depth 1; 59 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/publicSafe.js@1, src/domain/display/dossierViewModel.js@1
+  safety.plotHooks: nearest depth 1; 4 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/userEdits.js@2, src/domain/npcProfile.js@3
+  safety.economicDragDesc: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@2
+  npcs.stressNote: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@2
+  history.legacy: nearest depth 3; 1 module(s), nearest src/domain/facts/legacyRuin.js@3
+  people.secret: nearest depth 3; 3 module(s), nearest src/domain/npcProfile.js@3, src/domain/foodSurplus.js@3, src/domain/dossier/entityLinks.js@3
+  power.captureState: nearest depth 1; 3 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/publicSafe.js@1, src/domain/display/stateProse/crimeLineDisqualifiers.js@2
+  safety.blackMarketCapture: nearest depth 2; 2 module(s), nearest src/domain/causalState.js@2, src/domain/corruption.js@3
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 2; 7 module(s), nearest src/domain/worldPulse/treasury.js@2, src/domain/display/tradeListDisplay.js@2, src/domain/display/crisisStoppedRow.js@2
+  power.factions.legitimacyCrisis: nearest depth 2; 3 module(s), nearest src/domain/facts/factsOf.js@2, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@3
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 1; 9 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/data/bandLadders.js@2
+  defence.economicGates: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/defense.generated.js@2
+  safety.safetyDesc: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/defense.generated.js@2
+  safety.guardEffectivenessDesc: nearest depth 1; 4 module(s), nearest src/domain/display/defenseDisplay.js@1, src/data/dossierStateProse/defense.generated.js@2, src/domain/display/stateProse/dmFieldProjection.js@2
+  history.tension (currentTensions): nearest depth 1; 6 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/display/guardLineUnderTheLaw.js@2, src/domain/userEdits.js@2
+  people.prominentRelationship: nearest depth 1; 3 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@2
+  people.ties (relationships): nearest depth 1; 5 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/facts/factsOf.js@2, src/domain/npcProfile.js@3
+  people.allegiance: nearest depth 3; 3 module(s), nearest src/domain/facts/officialsInPay.js@3, src/domain/npcProfile.js@3, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 1; 8 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/display/defenseDisplay.js@1, src/domain/people/cardPowers.js@2
+  legitimacy.crimMultiplier: nearest depth 2; 2 module(s), nearest src/data/bandLadders.js@2, src/domain/rulingPower.js@3
+  cast.* (stress cast): nearest depth 1; 1 module(s), nearest src/domain/display/publicSafe.js@1
+  spatial.quarters: nearest depth 3; 1 module(s), nearest src/data/institutionalCatalog.js@3
+  history.timeline.year: nearest depth 3; 1 module(s), nearest src/domain/dossier/entityLinks.js@3
+  conditions.severity: nearest depth 2; 15 module(s), nearest src/domain/causalState.js@2, src/domain/facts/factVocabulary.js@3, src/domain/capacityModel.js@3
+
+power:desk / power:governance / power:ladder: 188 modules
+  power.recentConflict: nearest depth 1; 4 module(s), nearest src/domain/display/stateProse/powerStateProse.js@1, src/domain/display/governanceAccount.js@1, src/data/dossierStateProse/power.generated.js@2
+  pressureSentence: nearest depth 1; 2 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/userEdits.js@5
+  safety.criminalInstitutions: nearest depth 1; 3 module(s), nearest src/domain/display/stateProse/powerStateProse.js@1, src/domain/facts/criminalStructureKey.js@3, src/domain/corruption.js@4
+  power.label (powerLabel): nearest depth 2; 5 module(s), nearest src/domain/dossier/powerStrata.js@2, src/domain/facts/rivalPower.js@3, src/domain/facts/seatOutranked.js@3
+  power.desc (factions[].desc): nearest depth 1; 3 module(s), nearest src/domain/display/governanceAccount.js@1, src/domain/facts/forceHours.js@3, src/domain/factionProfile.js@5
+  power names (factions[].faction): nearest depth 0; 20 module(s), nearest src/components/new/powerDeskRead.js@0, src/domain/display/publicSafe.js@1, src/domain/display/governanceAccount.js@1
+  house names (institutions[].name): nearest depth 1; 40 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/spatial/cohesionWeave.js@1, src/domain/defense/defenseFacts.js@2
+  safety.plotHooks: nearest depth 1; 4 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/facts/lawBand.js@3, src/domain/userEdits.js@5
+  safety.economicDragDesc: nearest depth 5; 1 module(s), nearest src/domain/userEdits.js@5
+  npcs.stressNote: nearest depth 5; 1 module(s), nearest src/domain/userEdits.js@5
+  history.legacy: nearest depth 3; 1 module(s), nearest src/domain/facts/legacyRuin.js@3
+  people.secret: nearest depth 4; 2 module(s), nearest src/domain/foodSurplus.js@4, src/domain/npcProfile.js@5
+  power.relation.dmNote: nearest depth 1; 1 module(s), nearest src/domain/display/stateProse/powerStateProse.js@1
+  power.captureState: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/powerStateProse.js@1, src/domain/display/publicSafe.js@1, src/domain/display/governanceAccount.js@1
+  safety.blackMarketCapture: nearest depth 4; 2 module(s), nearest src/domain/corruption.js@4, src/domain/causalState.js@4
+  safety.safetyRatio: nearest depth 4; 1 module(s), nearest src/domain/corruption.js@4
+  income (incomeSources): nearest depth 3; 4 module(s), nearest src/domain/facts/magic.js@3, src/domain/dossier/faithReading.js@3, src/domain/facts/criminalStructureKey.js@3
+  power.factions.legitimacyCrisis: nearest depth 2; 3 module(s), nearest src/domain/rulingPower.js@2, src/domain/facts/factsOf.js@2, src/domain/facts/factVocabulary.js@3
+  compound.criminalEffective: nearest depth 4; 1 module(s), nearest src/domain/corruption.js@4
+  defence.readiness.score: nearest depth 4; 4 module(s), nearest src/data/bandLadders.js@4, src/domain/causalState.js@4, src/data/institutionServices.js@5
+  defence.economicGates: nearest depth 3; 1 module(s), nearest src/domain/facts/guardPay.js@3
+  safety.safetyDesc: nearest depth 5; 1 module(s), nearest src/domain/userEdits.js@5
+  safety.guardEffectivenessDesc: nearest depth 5; 1 module(s), nearest src/domain/userEdits.js@5
+  history.tension (currentTensions): nearest depth 1; 5 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/facts/dangerComing.js@3, src/domain/facts/lawBand.js@3
+  people.prominentRelationship: nearest depth 1; 2 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/userEdits.js@5
+  people.ties (relationships): nearest depth 1; 6 module(s), nearest src/domain/display/stateProse/powerStateProse.js@1, src/domain/display/publicSafe.js@1, src/domain/dossier/powerStrata.js@2
+  people.allegiance: nearest depth 3; 3 module(s), nearest src/domain/facts/officialsInPay.js@3, src/domain/people/allegiance.js@4, src/domain/npcProfile.js@5
+  npcs.memberships.veiled: nearest depth 1; 11 module(s), nearest src/domain/display/publicSafe.js@1, src/domain/people/cardPowers.js@2, src/domain/dossier/powerStrata.js@2
+  legitimacy.crimMultiplier: nearest depth 2; 2 module(s), nearest src/domain/rulingPower.js@2, src/data/bandLadders.js@4
+  cast.* (stress cast): nearest depth 1; 1 module(s), nearest src/domain/display/publicSafe.js@1
+  spatial.quarters: nearest depth 2; 2 module(s), nearest src/data/dossierStateProse/power.generated.js@2, src/data/institutionalCatalog.js@4
+  conditions.severity: nearest depth 1; 12 module(s), nearest src/domain/rulingPowerCoup.js@1, src/domain/facts/factVocabulary.js@3, src/domain/facts/magicSupply.js@3
+
+warFaith:faith: 483 modules
+  power.recentConflict: nearest depth 4; 2 module(s), nearest src/domain/rulingPower.js@4, src/domain/display/guardLineUnderTheLaw.js@14
+  pressureSentence: nearest depth 4; 2 module(s), nearest src/domain/display/publicSafe.js@4, src/domain/userEdits.js@14
+  safety.crimeTypes: nearest depth 13; 1 module(s), nearest src/domain/display/defenseDisplay.js@13
+  safety.criminalInstitutions: nearest depth 3; 4 module(s), nearest src/domain/corruption.js@3, src/domain/facts/criminalStructureKey.js@4, src/domain/worldPulse/npcAgency.js@8
+  power.label (powerLabel): nearest depth 2; 5 module(s), nearest src/domain/dossier/faithReading.js@2, src/domain/facts/rivalPower.js@4, src/domain/facts/seatOutranked.js@4
+  power.desc (factions[].desc): nearest depth 4; 3 module(s), nearest src/domain/facts/forceHours.js@4, src/domain/factionProfile.js@4, src/domain/display/crisisStoppedRow.js@12
+  power names (factions[].faction): nearest depth 2; 35 module(s), nearest src/domain/dossier/faithReading.js@2, src/domain/facts/sovereign.js@4, src/domain/facts/seatMembers.js@4
+  house names (institutions[].name): nearest depth 1; 78 module(s), nearest src/domain/display/stateProse/dossierMounts.js@1, src/components/settlement/faithPanelModel.js@1, src/data/dossierStateProse/warFaith.generated.js@2
+  safety.plotHooks: nearest depth 4; 4 module(s), nearest src/domain/facts/lawBand.js@4, src/domain/display/publicSafe.js@4, src/domain/npcProfile.js@5
+  safety.economicDragDesc: nearest depth 14; 1 module(s), nearest src/domain/userEdits.js@14
+  npcs.stressNote: nearest depth 14; 1 module(s), nearest src/domain/userEdits.js@14
+  history.legacy: nearest depth 4; 1 module(s), nearest src/domain/facts/legacyRuin.js@4
+  people.secret: nearest depth 4; 3 module(s), nearest src/domain/dossier/entityLinks.js@4, src/domain/foodSurplus.js@5, src/domain/npcProfile.js@5
+  power.captureState: nearest depth 4; 4 module(s), nearest src/domain/display/publicSafe.js@4, src/domain/worldPulse/npcLadderKernel.js@7, src/domain/worldPulse/settlementPolitics.js@8
+  safety.blackMarketCapture: nearest depth 3; 3 module(s), nearest src/domain/corruption.js@3, src/domain/causalState.js@4, src/domain/state/deriveSystemState.js@9
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 2; 8 module(s), nearest src/domain/dossier/faithReading.js@2, src/domain/facts/magic.js@4, src/domain/facts/criminalStructureKey.js@4
+  power.factions.legitimacyCrisis: nearest depth 3; 3 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@4
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 3; 20 module(s), nearest src/domain/worldPulse/martialReadiness.js@3, src/domain/causalState.js@4, src/domain/capacityModel.js@4
+  defence.economicGates: nearest depth 4; 3 module(s), nearest src/domain/facts/guardPay.js@4, src/domain/worldPulse/foodStockpile.js@9, src/domain/display/defenseDisplay.js@13
+  safety.safetyDesc: nearest depth 1; 3 module(s), nearest src/domain/display/stateProse/dossierMounts.js@1, src/domain/display/defenseDisplay.js@13, src/domain/userEdits.js@14
+  safety.guardEffectivenessDesc: nearest depth 13; 2 module(s), nearest src/domain/display/defenseDisplay.js@13, src/domain/userEdits.js@14
+  history.tension (currentTensions): nearest depth 4; 6 module(s), nearest src/domain/facts/dangerComing.js@4, src/domain/facts/lawBand.js@4, src/domain/facts/uprising.js@4
+  people.prominentRelationship: nearest depth 4; 2 module(s), nearest src/domain/display/publicSafe.js@4, src/domain/userEdits.js@14
+  people.ties (relationships): nearest depth 1; 25 module(s), nearest src/domain/display/stateProse/dossierMounts.js@1, src/domain/facts/factsOf.js@3, src/domain/worldPulse/relationshipState.js@3
+  people.allegiance: nearest depth 5; 4 module(s), nearest src/domain/npcProfile.js@5, src/domain/people/allegiance.js@6, src/domain/worldPulse/npcAgency.js@8
+  trace.criminalAllegiance: nearest depth 10; 1 module(s), nearest src/domain/trace.js@10
+  npcs.memberships.veiled: nearest depth 3; 14 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/seatMembers.js@4, src/domain/facts/sharedPower.js@4
+  legitimacy.crimMultiplier: nearest depth 4; 2 module(s), nearest src/domain/rulingPower.js@4, src/data/bandLadders.js@5
+  cast.* (stress cast): nearest depth 4; 1 module(s), nearest src/domain/display/publicSafe.js@4
+  spatial.quarters: nearest depth 5; 4 module(s), nearest src/data/institutionalCatalog.js@5, src/domain/worldPulse/urbanFabricKernel.js@8, src/domain/worldPulse/demographicsRisk.js@9
+  history.timeline.year: nearest depth 4; 1 module(s), nearest src/domain/dossier/entityLinks.js@4
+  conditions.severity: nearest depth 3; 68 module(s), nearest src/domain/facts/factVocabulary.js@3, src/domain/worldPulse/piety.js@3, src/domain/stressorPicker.js@4
+
+magic: 219 modules
+  power.recentConflict: nearest depth 3; 2 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@3, src/domain/rulingPower.js@3
+  pressureSentence: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  safety.crimeTypes: nearest depth 2; 1 module(s), nearest src/domain/display/defenseDisplay.js@2
+  safety.criminalInstitutions: nearest depth 2; 4 module(s), nearest src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2, src/domain/facts/criminalStructureKey.js@3
+  power.label (powerLabel): nearest depth 2; 5 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/facts/criminalStructureKey.js@3, src/domain/dossier/faithReading.js@3
+  power.desc (factions[].desc): nearest depth 2; 3 module(s), nearest src/domain/display/crisisStoppedRow.js@2, src/domain/factionProfile.js@3, src/domain/facts/forceHours.js@4
+  power names (factions[].faction): nearest depth 2; 19 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/display/stateProse/magicFlagTruth.js@2, src/domain/crimeSignal.js@3
+  house names (institutions[].name): nearest depth 1; 57 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/domain/institutions/defenseInstitutionBuckets.js@2
+  safety.plotHooks: nearest depth 3; 3 module(s), nearest src/domain/userEdits.js@3, src/domain/npcProfile.js@3, src/domain/facts/lawBand.js@3
+  safety.economicDragDesc: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  npcs.stressNote: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  history.legacy: nearest depth 4; 1 module(s), nearest src/domain/facts/legacyRuin.js@4
+  people.secret: nearest depth 3; 3 module(s), nearest src/domain/npcProfile.js@3, src/domain/foodSurplus.js@3, src/domain/dossier/entityLinks.js@3
+  power.captureState: nearest depth 1; 2 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/stateProse/crimeLineDisqualifiers.js@2
+  safety.blackMarketCapture: nearest depth 2; 2 module(s), nearest src/domain/causalState.js@2, src/domain/corruption.js@3
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 2; 7 module(s), nearest src/domain/worldPulse/treasury.js@2, src/domain/display/tradeListDisplay.js@2, src/domain/display/crisisStoppedRow.js@2
+  power.factions.legitimacyCrisis: nearest depth 3; 3 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@3
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 1; 9 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/data/bandLadders.js@2
+  defence.economicGates: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2
+  safety.safetyDesc: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2
+  safety.guardEffectivenessDesc: nearest depth 2; 4 module(s), nearest src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2, src/domain/display/stateProse/dmFieldProjection.js@2
+  history.tension (currentTensions): nearest depth 3; 5 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@3, src/domain/userEdits.js@3, src/domain/facts/lawBand.js@3
+  people.prominentRelationship: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  people.ties (relationships): nearest depth 3; 4 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/npcProfile.js@3, src/domain/dossier/entityLinks.js@3
+  people.allegiance: nearest depth 3; 3 module(s), nearest src/domain/facts/officialsInPay.js@3, src/domain/npcProfile.js@3, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 2; 7 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/facts/factsOf.js@3, src/domain/facts/seatMembers.js@4
+  legitimacy.crimMultiplier: nearest depth 2; 2 module(s), nearest src/data/bandLadders.js@2, src/domain/rulingPower.js@3
+  spatial.quarters: nearest depth 3; 1 module(s), nearest src/data/institutionalCatalog.js@3
+  history.timeline.year: nearest depth 3; 1 module(s), nearest src/domain/dossier/entityLinks.js@3
+  conditions.severity: nearest depth 2; 15 module(s), nearest src/domain/causalState.js@2, src/domain/facts/factVocabulary.js@3, src/domain/capacityModel.js@3
+
+viability / viewModel:viability: 219 modules
+  power.recentConflict: nearest depth 3; 2 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@3, src/domain/rulingPower.js@3
+  pressureSentence: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  safety.crimeTypes: nearest depth 2; 1 module(s), nearest src/domain/display/defenseDisplay.js@2
+  safety.criminalInstitutions: nearest depth 2; 4 module(s), nearest src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2, src/domain/facts/criminalStructureKey.js@3
+  power.label (powerLabel): nearest depth 2; 5 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/facts/criminalStructureKey.js@3, src/domain/dossier/faithReading.js@3
+  power.desc (factions[].desc): nearest depth 2; 3 module(s), nearest src/domain/display/crisisStoppedRow.js@2, src/domain/factionProfile.js@3, src/domain/facts/forceHours.js@4
+  power names (factions[].faction): nearest depth 2; 19 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/display/stateProse/magicFlagTruth.js@2, src/domain/crimeSignal.js@3
+  house names (institutions[].name): nearest depth 1; 57 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/domain/institutions/defenseInstitutionBuckets.js@2
+  safety.plotHooks: nearest depth 3; 3 module(s), nearest src/domain/userEdits.js@3, src/domain/npcProfile.js@3, src/domain/facts/lawBand.js@3
+  safety.economicDragDesc: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  npcs.stressNote: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  history.legacy: nearest depth 4; 1 module(s), nearest src/domain/facts/legacyRuin.js@4
+  people.secret: nearest depth 3; 3 module(s), nearest src/domain/npcProfile.js@3, src/domain/foodSurplus.js@3, src/domain/dossier/entityLinks.js@3
+  power.captureState: nearest depth 1; 2 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/stateProse/crimeLineDisqualifiers.js@2
+  safety.blackMarketCapture: nearest depth 2; 2 module(s), nearest src/domain/causalState.js@2, src/domain/corruption.js@3
+  safety.safetyRatio: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  income (incomeSources): nearest depth 2; 7 module(s), nearest src/domain/worldPulse/treasury.js@2, src/domain/display/tradeListDisplay.js@2, src/domain/display/crisisStoppedRow.js@2
+  power.factions.legitimacyCrisis: nearest depth 3; 3 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/facts/factVocabulary.js@3, src/domain/rulingPower.js@3
+  compound.criminalEffective: nearest depth 3; 1 module(s), nearest src/domain/corruption.js@3
+  defence.readiness.score: nearest depth 1; 9 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/dossierViewModel.js@1, src/data/bandLadders.js@2
+  defence.economicGates: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2
+  safety.safetyDesc: nearest depth 1; 5 module(s), nearest src/domain/display/stateProse/defenseStateProse.js@1, src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2
+  safety.guardEffectivenessDesc: nearest depth 2; 4 module(s), nearest src/domain/display/defenseDisplay.js@2, src/data/dossierStateProse/defense.generated.js@2, src/domain/display/stateProse/dmFieldProjection.js@2
+  history.tension (currentTensions): nearest depth 3; 5 module(s), nearest src/domain/display/guardLineUnderTheLaw.js@3, src/domain/userEdits.js@3, src/domain/facts/lawBand.js@3
+  people.prominentRelationship: nearest depth 2; 2 module(s), nearest src/domain/display/stateProse/dmFieldProjection.js@2, src/domain/userEdits.js@3
+  people.ties (relationships): nearest depth 3; 4 module(s), nearest src/domain/facts/factsOf.js@3, src/domain/npcProfile.js@3, src/domain/dossier/entityLinks.js@3
+  people.allegiance: nearest depth 3; 3 module(s), nearest src/domain/facts/officialsInPay.js@3, src/domain/npcProfile.js@3, src/domain/people/allegiance.js@4
+  npcs.memberships.veiled: nearest depth 2; 7 module(s), nearest src/domain/display/defenseDisplay.js@2, src/domain/facts/factsOf.js@3, src/domain/facts/seatMembers.js@4
+  legitimacy.crimMultiplier: nearest depth 2; 2 module(s), nearest src/data/bandLadders.js@2, src/domain/rulingPower.js@3
+  spatial.quarters: nearest depth 3; 1 module(s), nearest src/data/institutionalCatalog.js@3
+  history.timeline.year: nearest depth 3; 1 module(s), nearest src/domain/dossier/entityLinks.js@3
+  conditions.severity: nearest depth 2; 15 module(s), nearest src/domain/causalState.js@2, src/domain/facts/factVocabulary.js@3, src/domain/capacityModel.js@3
+
+(the source record: publicVeiledRecordOf): 7 modules
+  pressureSentence: nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  power names (factions[].faction): nearest depth 0; 3 module(s), nearest src/domain/display/publicSafe.js@0, src/domain/people/cardPowers.js@1, src/domain/people/membership.js@2
+  house names (institutions[].name): nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  safety.plotHooks: nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  power.captureState: nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  history.tension (currentTensions): nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  people.prominentRelationship: nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  people.ties (relationships): nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+  npcs.memberships.veiled: nearest depth 0; 3 module(s), nearest src/domain/display/publicSafe.js@0, src/domain/people/cardPowers.js@1, src/domain/people/membership.js@2
+  cast.* (stress cast): nearest depth 0; 1 module(s), nearest src/domain/display/publicSafe.js@0
+
+BY FIELD: the sites whose closure names it, NEAR (the reader or a module it imports directly: depth 0-1) and FAR (depth 2+, the whole closure)
+  power.recentConflict: NEAR power:desk / power:governance / power:ladder (src/domain/display/stateProse/powerStateProse.js@1); FAR economy:*@2 | general:*@5 | overview:identity@3 | stressors:overview@2 | defense:*@2 | warFaith:faith@4 | magic@3 | viability / viewModel:viability@3
+  pressureSentence: NEAR overview:identity (src/domain/summary/settlementQuickGuide.js@1) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@2 | stressors:overview@2 | warFaith:faith@4 | magic@2 | viability / viewModel:viability@2
+  safety.crimeTypes: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/defenseDisplay.js@1); FAR warFaith:faith@13 | magic@2 | viability / viewModel:viability@2
+  safety.criminalInstitutions: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/defenseDisplay.js@1) | power:desk / power:governance / power:ladder (src/domain/display/stateProse/powerStateProse.js@1); FAR general:*@4 | overview:identity@3 | warFaith:faith@3 | magic@2 | viability / viewModel:viability@2
+  power.label (powerLabel): NEAR economy:* (src/domain/display/defenseDisplay.js@1) | overview:identity (src/domain/summary/settlementQuickGuide.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/defenseDisplay.js@1); FAR general:*@4 | power:desk / power:governance / power:ladder@2 | warFaith:faith@2 | magic@2 | viability / viewModel:viability@2
+  power.desc (factions[].desc): NEAR power:desk / power:governance / power:ladder (src/domain/display/governanceAccount.js@1); FAR economy:*@2 | general:*@4 | overview:identity@3 | stressors:overview@2 | defense:*@2 | warFaith:faith@4 | magic@2 | viability / viewModel:viability@2
+  power names (factions[].faction): NEAR economy:* (src/domain/display/defenseDisplay.js@1) | general:* (src/components/new/generalDeskRead.js@0) | overview:identity (src/domain/summary/settlementQuickGuide.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/components/new/powerDeskRead.js@0) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR warFaith:faith@2 | magic@2 | viability / viewModel:viability@2
+  house names (institutions[].name): NEAR economy:* (src/domain/display/stateProse/economyStateProse.js@1) | general:* (src/components/new/generalDeskRead.js@0) | overview:identity (src/domain/summary/settlementQuickGuide.js@1) | stressors:overview (src/domain/activeConditions.js@1) | defense:* (src/domain/display/stateProse/defenseStateProse.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | warFaith:faith (src/domain/display/stateProse/dossierMounts.js@1) | magic (src/domain/display/stateProse/defenseStateProse.js@1) | viability / viewModel:viability (src/domain/display/stateProse/defenseStateProse.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR (none)
+  safety.plotHooks: NEAR overview:identity (src/domain/summary/settlementQuickGuide.js@1) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@2 | general:*@2 | stressors:overview@2 | warFaith:faith@4 | magic@3 | viability / viewModel:viability@3
+  economy.situationDesc: NEAR overview:identity (src/domain/summary/settlementQuickGuide.js@1); FAR economy:*@2
+  history.siegeNarrative: NEAR general:* (src/domain/display/stateProse/generalStateProse.js@1); FAR (none)
+  safety.economicDragDesc: NEAR (none); FAR economy:*@2 | overview:identity@3 | stressors:overview@2 | defense:*@2 | power:desk / power:governance / power:ladder@5 | warFaith:faith@14 | magic@2 | viability / viewModel:viability@2
+  npcs.stressNote: NEAR (none); FAR economy:*@2 | general:*@2 | overview:identity@3 | stressors:overview@2 | defense:*@2 | power:desk / power:governance / power:ladder@5 | warFaith:faith@14 | magic@2 | viability / viewModel:viability@2
+  history.legacy: NEAR general:* (src/domain/display/stateProse/generalStateProse.js@1); FAR economy:*@3 | overview:identity@3 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@3 | warFaith:faith@4 | magic@4 | viability / viewModel:viability@4
+  people.secret: NEAR (none); FAR economy:*@2 | general:*@3 | overview:identity@2 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@4 | warFaith:faith@4 | magic@3 | viability / viewModel:viability@3
+  power.relation.dmNote: NEAR power:desk / power:governance / power:ladder (src/domain/display/stateProse/powerStateProse.js@1); FAR (none)
+  power.captureState: NEAR defense:* (src/domain/display/stateProse/defenseStateProse.js@1) | power:desk / power:governance / power:ladder (src/domain/display/stateProse/powerStateProse.js@1) | magic (src/domain/display/stateProse/defenseStateProse.js@1) | viability / viewModel:viability (src/domain/display/stateProse/defenseStateProse.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@4 | overview:identity@3 | warFaith:faith@4
+  safety.blackMarketCapture: NEAR economy:* (src/domain/display/stateProse/economyStateProse.js@1); FAR general:*@5 | overview:identity@4 | stressors:overview@2 | defense:*@2 | power:desk / power:governance / power:ladder@4 | warFaith:faith@3 | magic@2 | viability / viewModel:viability@2
+  safety.safetyRatio: NEAR (none); FAR economy:*@3 | general:*@5 | overview:identity@4 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@4 | warFaith:faith@3 | magic@3 | viability / viewModel:viability@3
+  food.storageNote: NEAR (none); FAR (none)
+  income (incomeSources): NEAR economy:* (src/domain/display/stateProse/economyStateProse.js@1); FAR general:*@2 | overview:identity@3 | stressors:overview@2 | defense:*@2 | power:desk / power:governance / power:ladder@3 | warFaith:faith@2 | magic@2 | viability / viewModel:viability@2
+  power.contestsNiche: NEAR (none); FAR (none)
+  power.factions.legitimacyCrisis: NEAR (none); FAR economy:*@2 | general:*@3 | overview:identity@2 | stressors:overview@2 | defense:*@2 | power:desk / power:governance / power:ladder@2 | warFaith:faith@3 | magic@3 | viability / viewModel:viability@3
+  compound.economyOutput: NEAR (none); FAR economy:*@2
+  compound.criminalEffective: NEAR (none); FAR economy:*@3 | general:*@5 | overview:identity@4 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@4 | warFaith:faith@3 | magic@3 | viability / viewModel:viability@3
+  defence.readiness.score: NEAR economy:* (src/domain/display/dossierViewModel.js@1) | general:* (src/components/new/generalDeskRead.js@0) | stressors:overview (src/domain/display/dossierViewModel.js@1) | defense:* (src/domain/display/stateProse/defenseStateProse.js@1) | magic (src/domain/display/stateProse/defenseStateProse.js@1) | viability / viewModel:viability (src/domain/display/stateProse/defenseStateProse.js@1); FAR overview:identity@3 | power:desk / power:governance / power:ladder@4 | warFaith:faith@3
+  defence.economicGates: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/stateProse/defenseStateProse.js@1) | magic (src/domain/display/stateProse/defenseStateProse.js@1) | viability / viewModel:viability (src/domain/display/stateProse/defenseStateProse.js@1); FAR general:*@4 | overview:identity@3 | power:desk / power:governance / power:ladder@3 | warFaith:faith@4
+  safety.safetyDesc: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | general:* (src/domain/display/stateProse/dossierMounts.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/stateProse/defenseStateProse.js@1) | warFaith:faith (src/domain/display/stateProse/dossierMounts.js@1) | magic (src/domain/display/stateProse/defenseStateProse.js@1) | viability / viewModel:viability (src/domain/display/stateProse/defenseStateProse.js@1); FAR overview:identity@3 | power:desk / power:governance / power:ladder@5
+  safety.guardEffectivenessDesc: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/defenseDisplay.js@1); FAR overview:identity@3 | power:desk / power:governance / power:ladder@5 | warFaith:faith@13 | magic@2 | viability / viewModel:viability@2
+  history.tension (currentTensions): NEAR general:* (src/domain/display/stateProse/generalStateProse.js@1) | overview:identity (src/domain/summary/settlementQuickGuide.js@1) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@2 | stressors:overview@2 | warFaith:faith@4 | magic@3 | viability / viewModel:viability@3
+  people.prominentRelationship: NEAR general:* (src/components/new/generalDeskRead.js@0) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@2 | overview:identity@3 | stressors:overview@2 | warFaith:faith@4 | magic@2 | viability / viewModel:viability@2
+  people.ties (relationships): NEAR general:* (src/components/new/generalDeskRead.js@0) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/stateProse/powerStateProse.js@1) | warFaith:faith (src/domain/display/stateProse/dossierMounts.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@2 | overview:identity@2 | stressors:overview@2 | magic@3 | viability / viewModel:viability@3
+  people.allegiance: NEAR (none); FAR economy:*@3 | general:*@6 | overview:identity@3 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@3 | warFaith:faith@5 | magic@3 | viability / viewModel:viability@3
+  trace.criminalAllegiance: NEAR (none); FAR warFaith:faith@10
+  npcs.memberships.veiled: NEAR economy:* (src/domain/display/defenseDisplay.js@1) | stressors:overview (src/domain/display/defenseDisplay.js@1) | defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR general:*@3 | overview:identity@2 | warFaith:faith@3 | magic@2 | viability / viewModel:viability@2
+  people.card secondaryAffiliation: NEAR (none); FAR (none)
+  power.rawPower: NEAR (none); FAR (none)
+  power.fingerprint: NEAR (none); FAR (none)
+  legitimacy.crimMultiplier: NEAR (none); FAR economy:*@3 | general:*@5 | overview:identity@3 | stressors:overview@3 | defense:*@2 | power:desk / power:governance / power:ladder@2 | warFaith:faith@4 | magic@2 | viability / viewModel:viability@2
+  cast.* (stress cast): NEAR defense:* (src/domain/display/publicSafe.js@1) | power:desk / power:governance / power:ladder (src/domain/display/publicSafe.js@1) | (the source record: publicVeiledRecordOf) (src/domain/display/publicSafe.js@0); FAR economy:*@3 | overview:identity@2 | warFaith:faith@4
+  spatial.quarters: NEAR overview:identity (src/domain/summary/settlementQuickGuide.js@1); FAR economy:*@3 | general:*@2 | stressors:overview@3 | defense:*@3 | power:desk / power:governance / power:ladder@2 | warFaith:faith@5 | magic@3 | viability / viewModel:viability@3
+  history.timeline.year: NEAR (none); FAR economy:*@2 | general:*@2 | stressors:overview@3 | defense:*@3 | warFaith:faith@4 | magic@3 | viability / viewModel:viability@3
+  conditions.severity: NEAR economy:* (src/components/new/tabHelpers.js@0) | general:* (src/domain/display/stateProse/generalStateProse.js@1) | stressors:overview (src/domain/display/stateProse/stressorsStateProse.js@1) | power:desk / power:governance / power:ladder (src/domain/rulingPowerCoup.js@1); FAR overview:identity@2 | defense:*@2 | warFaith:faith@3 | magic@2 | viability / viewModel:viability@2
