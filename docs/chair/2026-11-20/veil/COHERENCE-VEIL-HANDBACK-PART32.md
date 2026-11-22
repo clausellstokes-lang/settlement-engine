@@ -20,6 +20,8 @@ verified by ls-remote).
   diff read whole once with 212 and the registry: no fault (one raised map, one served-house list, one type table, both engines).
   FAMILIES LEFT (by town): powers.capture 21, inst.criminal 6, chains.criminal 6, powers.criminal 3, sp.ops 2, powers.relations
   2, sp.crimeTypes 1, imports.criminal 1, tensions.crime 1; svc.criminal 27 -> 0, income.criminal 1 -> 0.
+- `tests/lint` WHOLE AT 66e43865d (ruling 77): 16 files, 22 tests: the twelve of section 2b and PART 30's known four; ARM D and the
+  manifest TOTALITY now green.
 - A RED THE SEAT'S RE-RUNS MISSED, FOUND BY THE PRE-PUSH HOOK (02:19): `typecheck:ratchet` refused the push of 66e43865d:
   `galleryRosterChoices.js` 1 error, baseline 0 (TS2339 at the unit's second `svc.criminal.filter`: the narrowing reset by the
   first assignment). The builder is resumed for ONE cure commit (no behaviour change, no baseline raised); the lane's push waits
