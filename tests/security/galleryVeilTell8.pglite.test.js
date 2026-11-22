@@ -223,3 +223,26 @@ describe('R3-TELL-8 unit (viii): the crime list withheld always, the page re-der
     expect(hook).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });
+
+describe('R3-TELL-8 (viii): the types\' grouping\'s evidence once the key is withheld always (galleryVeil.js :: GROUPING_OPEN_EVIDENCE)', () => {
+  const ADDR = 'block:defense.criminalStructure';
+  const page = (sp) => ({ name: 'Corvel', tier: 'town', economicState: { safetyProfile: sp } });
+  it('a page whose grouping is open does not read as shut once the key is gone (criminalInstitutions an array, no crimeTypes)', async () => {
+    const veil = await import('../../src/domain/display/galleryVeil.js');
+    expect(veil.isVeiled(page({ criminalInstitutions: [], safetyLabel: 'Safe' }), ADDR, { publicDossier: true })).toBe(false);
+    expect(veil.isVeiled(page({ criminalInstitutions: ['Street Gang'] }), ADDR, { publicDossier: true })).toBe(false);
+  });
+  it('THE CONVERSE: a shut grouping stays shut (the remover\'s output, a missing list, a list that is not an array, the mark); no page opens by the narrowing', async () => {
+    const veil = await import('../../src/domain/display/galleryVeil.js');
+    const removed = page({ criminalInstitutions: ['Street Gang'], crimeTypes: [{ type: 'Smuggling', desc: 'Goods.' }], safetyLabel: 'Safe' });
+    veil.GROUPING_REMOVERS[ADDR](removed);
+    expect(removed.economicState.safetyProfile).toEqual({ safetyLabel: 'Safe' });
+    expect(veil.isVeiled(removed, ADDR, { publicDossier: true })).toBe(true);
+    expect(veil.isVeiled(page({ crimeTypes: [] }), ADDR, { publicDossier: true })).toBe(true);
+    expect(veil.isVeiled(page({ criminalInstitutions: {} }), ADDR, { publicDossier: true })).toBe(true);
+    expect(veil.isVeiled({ name: 'Corvel' }, ADDR, { publicDossier: true })).toBe(true);
+    const marked = page({ criminalInstitutions: [] });
+    veil.markVeiled(marked, [ADDR]);
+    expect(veil.isVeiled(marked, ADDR, { publicDossier: true })).toBe(true);
+  });
+});
