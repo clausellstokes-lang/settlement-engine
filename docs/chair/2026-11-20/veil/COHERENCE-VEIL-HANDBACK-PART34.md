@@ -17,8 +17,11 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   `/var/tmp/v18/out/v33/g/done.txt`. Copies of the scripts are VEIL-32's `out/v32/chain0.sh`, `after0.sh`, `chain1.sh` with
   v32 -> v33. IN FLIGHT.
 - (P) THE JOIN PROBE, PASS 1 (DARK): worktree `/home/user/wt/jp`, branch `lane/veil-33-2026-11-22-joinprobe-wip` (local), cut at
-  ed027fca7, the line's newest stacked ref `lane/stack-97-wip-2026-11-22` 840020b9b merged in (it holds stack-96 cc2f43aee and the
-  line f5295e425; merge-base 8f3b8bf4b; lane +391, line +1051). ELEVEN CONFLICTS, NONE in 212 or the twin (the line touches
+  ed027fca7, THE CHAIR'S PASS-1 REF (08:20 UTC) `lane/close-1-join-scratch-2026-11-22` AT THE COMMIT 4bba8781d (not its tip:
+  CLOSE-1 adds register commits) merged in: the line f5295e425, stack-96 cc2f43aee, who rules as point 97 840020b9b, fortune's
+  lane f13f31820 as a trial, BOTH LAWS DARK (merge-base 8f3b8bf4b). Pass 2: `lane/close-1-lit-scratch-2026-11-22` at 5c4419815
+  (the same join, the three dials flipped and nothing else). (A first merge of stack-97 840020b9b, made before the chair's word,
+  was aborted uncommitted; it fell with the same conflicts.) ELEVEN CONFLICTS, NONE in 212 or the twin (the line touches
   neither); every one resolved toward the line (six tests, five registers): `out/v33/joinprobe/conflicts.md` on that branch. Five
   of the eleven are ruling 69's fixture-git files. Builder V33-JOINPROBE (brief `briefs/V33-JOINPROBE-BRIEF.md`) seated 08:1x to
   commit the merge, re-make the pool THERE (`/var/tmp/v18/t2/pool-jp1`), read both gates, run the green chain, measure E35's hook
@@ -37,3 +40,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
 - 08:08 the reading-in done; the first message to the chair.
 - 08:09-08:14 the checkout unshallowed (needed for the merge); the probe's merge made and resolved (11 conflicts); the briefs written and committed (76fa9431b); both builders seated.
+- 08:20 the chair: the probe's two refs (pass 1 close-1-join-scratch 4bba8781d, pass 2 close-1-lit-scratch 5c4419815; the commits, not the tips); 08:22 the merge redone on 4bba8781d (the same eleven conflicts), the brief amended (dcc79a5a5), the builder told.
