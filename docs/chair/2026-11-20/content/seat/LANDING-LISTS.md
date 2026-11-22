@@ -63,3 +63,9 @@ the five build rows: red on the line itself (LINE-NOW); 61 of 66 other build-tes
 - **First paint:** +3,818 raw is the seat train's ruled first-paint exception (about 4,500 B minified: `seatTable.js` and `seatLaw.js` in engine-core, SEAT-7 §3).
 - **The worker's +15,961 (PLAUSIBLE, by esbuild minify per file):** the lane's 16 src files sum to +13,904. Of that, the four new seat modules are 12,541: `seatTable` 4,705, `holderOfSeat` 4,223, `seatCircumstances` 2,868 and `seatLaw` 745. The rest is `densityCreateBoundary` +940, `npc/powerBand` 515 (`npcGenerator` −252), `rulingPowerCoup` +394 and `rulingPower` −661.
 - **The ruling owed:** the worker's rise is NOT covered by a ruled exception. It is named for the owner's size sign-off.
+
+## 6. RULE 8 (b) AND `tests/lint` WHOLE AT THE LAST TEST CHANGE (COMMON-EIGHTH 11)
+
+- **The run:** at `a94f7d097` and `b6bb6bdcd` (identical `src/` and `tests/`): 1,387 files, 13,913 tests, 61 failed, all on RED-AT-LINE by name (`rule8/reds-by-name.tsv`).
+- **`tests/lint` whole:** 223 files, 3,362 tests, 3 red, the line's own three.
+- **No test file has changed since**: the commits after `a94f7d097` are docs only.

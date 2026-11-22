@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T04:35:21Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T07:15:31Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -40,10 +40,12 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **Unchanged and green:** the sameness door's hand list (the lane adds no pool table: `samenessHideable.walker` green), the size baseline and the mutation manifest (121/121 with the two walkers).
 - **THE OWED ARM: MERGED at `b7a373480` (item 94; BSR `8328ba467`).** The lighting census was re-taken by its door at `a94f7d097` (titles 31664 → 31665).
 - **CONTEXT:** this seat's context was compacted once, between 00:30Z and 02:04Z. Before the next merge it re-read whole SEAT-10.txt, COMMON-EIGHTH, this file's §1 and COMMON-RULES 8 and 9 (told to the chair 04:28Z).
-- **UNIT 4 (rule 8): RUNNING.**
-  - **(a) DONE at `08b0ba7d2`** (the build at 04:27:23Z, clean; VERIFY_DIST 61/66; the five reds are the five build rows, red on the line itself). The five figures beside LINE-NOW's are in `LANDING-LISTS.md` §5: first paint +3,818 / +1,368 / +835, the worker +15,961, the engine chunk +200.
-  - **(b) the test run:** the chair's ruling (A) of 04:29Z: 1,387 files (the prompt's directories, `tests/domain/facts`, `tests/domain/worldPulse`, `tests/lint`, `tests/build`, plus every test file naming a changed module). Two shards at `a94f7d097`: shard 1 is RUNNING (launched 04:34Z), then shard 2. The failing rows will be read BY NAME against a fresh RED-AT-LINE.
-  - **The landing lists:** written in `LANDING-LISTS.md` (houses and class rows, the stored figures moved, the flip's pins and born fixtures by file, the DRAFT tuning, size).
+- **UNIT 4 (rule 8): DONE (item 95; `rule8/RULE8.md`). "SEAT <commit>" is sent to the chair with this push.**
+  - **(a)** The build is clean at `08b0ba7d2`. VERIFY_DIST 61/66; the five reds are the five build rows, red on the line. The five figures are in `LANDING-LISTS.md` §5.
+  - **(b)** 1,387 files, 13,913 tests, 61 failed, **every one on RED-AT-LINE by name** (fresh at `0ac15c2e0`). One title has drifted: `landingFixtureFreshness`, stale at the line itself, and unmoved by the lane (CONFIRMED).
+  - **`tests/lint` whole:** 223 files, 3,362 tests, 3 red (the line's own three: `proseCorpusBytes` RAW and GZIP, `proseComposed` A0b).
+  - **The line tip the run stood on:** `f5295e425`.
+- **NEXT:** wait for the chair to land "SEAT <commit>" and give its word; then U6 and on (SEAT-5 item 20's order, SEAT-7 §0 NEXT). No brief past U6 before then. U6's brief carries the sweep's (b) and (c) (item 91; the chair's word of 03:54Z).
 - **OUT:** none. BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
@@ -134,6 +136,16 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
    - **Green:** clean 6/6, flipped 6/6. `rosterOpsAtTick` 6/6, the negative-assertion walker 9/9.
    - **So the sweep's (d) is closed:** the road reads the record's own stored config, and a law-1 place stays law 1 on it.
 
+95. **RULE 8 AT THE TIP (unit 4; CONFIRMED by run; `rule8/RULE8.md`, `rule8/reds-by-name.tsv`, `rule8/files.txt`, `rule8/figures.txt`).**
+   - **(a) The build (`08b0ba7d2`), beside LINE-NOW's `2fe514628`:**
+     - first paint 1,183,329 raw / 376,540 gzip / 316,004 br, against the line's 1,179,511 / 375,172 / 315,169 (+3,818 / +1,368 / +835): the seat train's ruled exception, about 4,500;
+     - the worker 2,686,966 (+15,961): NOT under a ruled exception; PLAUSIBLY the four new seat modules, 12,541 of an esbuild-per-file +13,904;
+     - the engine chunk 926,808 (+200).
+
+     All are named for the owner's size sign-off.
+   - **(b) The tests:** the chair's (A), 1,387 files in two shards: 61 failed, all on RED-AT-LINE. The landing fixture row's title has drifted on the list; the fixture is stale at the line, and line and lane emit byte-equal fixtures.
+   - **`tests/lint` whole:** 223 files, 3,362 tests, 3 red, all on the list.
+
 ## 2. THE UNITS
 
 | unit | branch | state |
@@ -143,7 +155,7 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 | 3 FLIP CENSUS (re-cut) | `recut/recut.sh`; scratch clone `census-flip` at `ef5abf4da` | DONE (item 92; `recut/CENSUS-LISTS.md`) |
 | UK-LEGACY (the chair's order) | BUL (subagent; scratch clone `bul`, `d9133148d`) | MERGED `a4b3fff4a` (item 91); confine-two EQUAL; accepted 03:54Z |
 | SAVED-SEAT-REDERIVE (the chair's order) | BSR (subagent; scratch clone `bsr`, `8328ba467`) | MERGED `b7a373480` (item 94) |
-| 4 RULE 8 | `r8/` in the scratchpad | (a) done; (b) running at `a94f7d097` |
+| 4 RULE 8 | `rule8/` | DONE (item 95); "SEAT <commit>" sent |
 
 ## 3. STORED FIGURES THIS SEAT MOVED
 
