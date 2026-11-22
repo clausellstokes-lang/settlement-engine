@@ -40,4 +40,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
 - 08:08 the reading-in done; the first message to the chair.
 - 08:09-08:14 the checkout unshallowed (needed for the merge); the probe's merge made and resolved (11 conflicts); the briefs written and committed (76fa9431b); both builders seated.
-- 08:20 the chair: the probe's two refs (pass 1 close-1-join-scratch 4bba8781d, pass 2 close-1-lit-scratch 5c4419815; the commits, not the tips); 08:22 the merge redone on 4bba8781d (the same eleven conflicts), the brief amended (dcc79a5a5), the builder told.
+- 08:20 the chair: the probe's two refs (pass 1 close-1-join-scratch 4bba8781d, pass 2 close-1-lit-scratch 5c4419815; the commits, not the tips); 08:21 the merge redone on 4bba8781d (the same eleven conflicts), the brief amended (dcc79a5a5), the builder told.
