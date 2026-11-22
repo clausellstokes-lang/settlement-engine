@@ -862,6 +862,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   05:22 to 05:56 by its clock, every shard clean): GATE-1 4 of 92 with the same seven LOWER BY RULE; GATE-2 20 of 40
   red; the server equals the twin in every cell; unit (viii)'s builder starts its heavy runs after the green chain.
   DAILY-3: E38. The chair's branch is on origin at 9564f10d1 (06:02 by the push's log).
+- 2026-11-22 06:29 UTC · NET 7: SIX SEATS, NONE STALLED. THE COUNTS BY THE CHAIR'S READ, AND EACH RECORD'S OWN SPEND: VEIL-32 425,311 (17.34;
+  running: its green chain's proving run; unit (viii)'s builder waits on it; ITS READING-IN COST WHAT WAS FORESEEN:
+  its room before the word at 620,000 is under 200,000). DAILY-3 250,594 (19.74; E1 merged, E2 building). PAGE-13
+  264,265 (9.49; unit 2's builder's diff read, red and green being re-run). PAGE-12 432,452 (65.41; idle on the
+  chair's word that point 96 is on the line; its brief pushed at 1b1b0eb2d; the second tranche must end under the
+  word: watched). FORTUNE-6 420,748 (72.12; idle on its rule-8 landing run: so U5c is in and the line merged).
+  SEAT-10 344,114 (34.08; shard 1 of its rule 8 done with 35 reds, all known; shard 2 running). VEIL-31 is complete
+  (its last read 57.49). THE STACK OF POINTS 94 TO 96: both merges made (1fb3ef17b, c35847792); its first
+  `tests/lint` run was killed at ten minutes by the helper's own foreground limit and re-run in the background (ten
+  minutes lost; the lesson for the next helper's prompt: EVERY RUN OVER FIVE MINUTES IS STARTED IN THE BACKGROUND AND
+  WAITED FOR). The chair's branch is on origin at 735d578da. NET 8 is set by the command that follows this entry.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
