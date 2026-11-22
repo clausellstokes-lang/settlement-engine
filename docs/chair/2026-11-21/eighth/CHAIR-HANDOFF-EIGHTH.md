@@ -487,6 +487,22 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   WORD TO THE OWNER THAT THE PDF MOVES A SNAPSHOT OF HIS MAY BE WRONG: he is told when the unit measures it. AN OPEN
   QUESTION, NOT THIS UNIT'S: the page reads the saved account from the store's `aiDailyLife` whatever settlement it
   is handed (as before the change): whether a gallery page can show the viewer's own account is to be checked.
+- E37 · THE TROUBLE LANE'S SECOND TRANCHE: 24 HOOK LINES RULED (2026-11-22 06:00 UTC; the bar it aims at: the hooks' second-place share under 30%
+  at every size: 32.4% and 36.5% on the default pool at city and metropolis, 30.3% on the visitor's at city). THE
+  SEAT'S PAPER (no build): the repeat sits in the need-free core of two kinds: guild_conflict (in about half the
+  places of the two large sizes; 6 need-free lines of 16) and crime_wave (10 of 16); +12 lines each (16 to 28) brings
+  the modelled metropolis figure to about 27% with room. RULED: 18 ACCEPTED AS WRITTEN (guild_conflict 1 to 6, 8, 10,
+  11, 12; crime_wave 1, 3, 4, 6, 7, 10, 11, 12); 4 REWORDED BY THE CHAIR: guild_conflict 7 "A craftsman's best work
+  has been copied and sold more cheaply, and the craftsman can name who did it"; crime_wave 2 "Someone has been
+  paying for copies of house keys, and the one who cut them is having second thoughts" (no locksmith named in a
+  need-free line); crime_wave 5 "A stolen heirloom has turned up for sale a day's travel away, and its owner wants
+  it back quietly" (no road presumed); crime_wave 9 "A hound that barked every night has been poisoned, and the
+  household expects the thieves tonight"; 2 HELD TO THE PRESUMPTION WALKERS (guild_conflict 9, "goods from outside";
+  crime_wave 8, "a shop"): each passes, or takes the one declared need the walker names, or is reworded inside its
+  meaning. FOR ALL: true at the smallest size where its kind occurs; no need on a hideable house (the eleven listed
+  rows stay eleven); the brief `briefs/HOOKS-POOL-2.md` is cut only after point 96 is on the line; the goldens it
+  moves again are named, not re-recorded. THE POOL'S OWN STYLE STANDS (the seventh chair's lines there use "he" and
+  "her" of a watchman, a carter, an old woman): no line was changed for that.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
