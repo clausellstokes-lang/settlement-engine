@@ -11,7 +11,10 @@ comes later on a ref the chair names; not yours now.
 ## Where you work
 - Worktree `/home/user/wt/jp`, branch `lane/veil-33-2026-11-22-joinprobe-wip` (local). It holds THE MERGE, UNCOMMITTED BUT
   RESOLVED, made by the seat: lane side ed027fca7 (src/supabase/tests = the lane's gated tip 3cca025b8), line side
-  `lane/stack-97-wip-2026-11-22` at 840020b9b (it holds stack-96 cc2f43aee and the line f5295e425). Eleven conflicts, every one
+  THE CHAIR'S PASS-1 REF (08:20 UTC) `lane/close-1-join-scratch-2026-11-22` AT THE COMMIT 4bba8781d, NOT its tip (CLOSE-1 adds
+  register commits to it): the line f5295e425, stack-96 cc2f43aee, who rules as point 97 (840020b9b) and fortune's lane f13f31820
+  merged on top as a trial, BOTH LAWS PRESENT AND DARK. Pass 2 will be `lane/close-1-lit-scratch-2026-11-22` at 5c4419815 (the
+  same join, the three dials flipped and nothing else): not yours now. Eleven conflicts, every one
   resolved TOWARD THE LINE (tests; registers at the line's side): `docs/chair/2026-11-20/veil/out/v33/joinprobe/conflicts.md`.
   The line touches nothing in `supabase/` nor the twin. STEP 1: `cp -al /home/user/settlement-engine/node_modules node_modules`
   in the worktree (git ignores it), then COMMIT THE MERGE as it stands (`git commit --no-edit` after adding
@@ -64,7 +67,7 @@ LOCAL: no hosted database, no production credential, no `supabase` command, no d
    Also: does any served hook NAME a hidden house or a withheld power (the lane's name fold: `gallerySecondHomes.js ::
    buildNameSearch`)? Probe files under `<out>/measure/`, run as the lane's probes run (vitest with RV6_SRC=<worktree>).
 6. EVERY RED BY THE LANDED LANE THAT BRINGS IT: for each red of steps 3-5, the line's point that brought it (find it by `git log
-   --format='%h %s' 8f3b8bf4b..840020b9b -- <the file or the source it reads>`: the merge commits name "point NN"); for each,
+   --format='%h %s' 8f3b8bf4b..4bba8781d -- <the file or the source it reads>`: the merge commits name "point NN"); for each,
    WHAT 212 AND ITS TWIN WOULD HAVE TO GAIN, as a PROPOSED unit for the lane's writer (one line each: the row, both engines, its
    red first). Build none.
 
