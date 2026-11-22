@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "4044990a4ba6aa469765eb2db70f5fb14a93b3c6",
-  "measuredBy": "FORTUNE-4",
-  "date": "2026-11-20",
-  "note": "re-taken by its own door at the U5a merge (4044990a4): FORTUNE_LAW_TUNING.standing gains the merits rows (meritPoints, weatheredWithinYears, endorsedMinReasons; vocabulary weatheredSeverity, rulerTroubleKinds) and the dependent fortuneMerits.js; the lane side of the conflict carried U4 F1 (economyStateProse.js)",
+  "measuredAtSha": "10afe3873b82870e9119fde376594bf300af2d67",
+  "measuredBy": "FORTUNE-6 builder U5b",
+  "date": "2026-11-22",
+  "note": "re-taken by its own door at FORTUNE U5b (10afe3873; the seventh chair's ruling of 22:26 UTC 2026-11-20): FORTUNE_LAW_TUNING.standing gains one DRAFT leaf, weatheredRecentYears 10 (the merit sentence's time-word cut-off, no score reads it), and the dependent display/governanceAccount.js; no other value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1306,7 +1306,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 631,
+      "line": 635,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1321,7 +1321,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 633,
+      "line": 637,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1336,7 +1336,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 635,
+      "line": 639,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1351,7 +1351,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 637,
+      "line": 641,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 122,
-      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
+      "line": 125,
+      "spanDigest": "d4d60ee55885e341a0d74808130c57c937086ba44ce2b724cd446d42ce08fca1",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1515,6 +1515,7 @@
         "standing.safetyUsualRange.metropolis.1": "Moderate",
         "standing.meritPoints": 10,
         "standing.weatheredWithinYears": 40,
+        "standing.weatheredRecentYears": 10,
         "standing.endorsedMinReasons": 2,
         "standing.weatheredSeverity": "catastrophic",
         "standing.rulerTroubleKinds.0": "succession_crisis",
@@ -1526,6 +1527,7 @@
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
+        "src/domain/display/governanceAccount.js",
         "src/domain/display/stateProse/economyStateProse.js",
         "src/domain/fortune/fortuneMerits.js",
         "src/generators/economy/prosperity.js",
@@ -1533,6 +1535,7 @@
         "src/generators/power/rulingStructure.js"
       ],
       "namedDependents": [
+        "src/domain/display/governanceAccount.js",
         "src/domain/fortune/fortuneMerits.js",
         "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js"
@@ -8647,7 +8650,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 70,
+      "line": 78,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8685,7 +8688,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 95,
+      "line": 103,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
