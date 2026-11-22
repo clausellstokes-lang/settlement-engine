@@ -27,9 +27,11 @@
  * - legitimacy #8 to #12, the lines that name the body by its kind's own noun: the elders (`elders`), the headman
  *   (`headman`), the mayor (`mayor`), the reeve (`reeve`), the lord's steward (`steward`): each is a government-label
  *   name test with no fact home.
- * - food #0 "Commoners resent rising bread prices and merchants who claim they cannot help it." (today's text; `grainHeld`,
- *   grain or a mill source or imported grain, one composite over two homes).
  * A line with no true need is not eligible; each branch keeps the rest.
+ *
+ * THE CHAIR'S LINE OF B3 F1 (06:17 and E56 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 items 4 and 5): food #0, today's
+ * text, on `grain` and `market` (bread prices need grain in the food record; "merchants who claim" needs a market, M1's
+ * false line).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} ResentmentLine */
@@ -52,6 +54,7 @@ export const COMMONER_RESENTMENTS = Object.freeze({
   ]),
   /** the food band strained, critical or collapsed. */
   food: frozen([
+    { id: 'F0', text: 'Commoners resent rising bread prices and merchants who claim they cannot help it.', needs: ['grain', 'market'] },
     { id: 'F1', text: 'People grumble that there is less food to go round than there ought to be.', needs: [] },
     { id: 'F2', text: 'Many feel that those in charge should be doing more to see everyone fed.', needs: [] },
     { id: 'F3', text: 'Households that go short look hard at the ones that do not.', needs: [] },

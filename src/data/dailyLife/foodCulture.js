@@ -17,17 +17,14 @@
  * `<record.name>::dailyLife.food_culture::<branch>`. No line needs a hideable house or a crime atom
  * (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  *
- * NOT BUILT (a need with no atom, ruling 10; `dailyLifeAtoms.test.js :: NOT_GRANTED`):
- * - `millSource` (the food record's mill key): surplus #10 "Flour from the mill is never short, and nobody goes without
- *   bread." and adequate #13 "Flour comes from the mill, and the bread made from it is the backbone of most suppers.".
- * - `grainHeld` (grain or a mill source or imported grain, one composite over two homes): strained #9 "Bread is eaten
- *   carefully, and not even the heel of the loaf is wasted." and critical #5 "The stew is thin and the bread is thinner.".
- * A line with no true need is not eligible; each branch keeps the rest.
+ * NOT BUILT (a need with no atom, ruling 10; `dailyLifeAtoms.test.js :: NOT_GRANTED`): `millSource` (the food record's
+ * mill key): surplus #10 "Flour from the mill is never short, and nobody goes without bread." and adequate #13 "Flour
+ * comes from the mill, and the bread made from it is the backbone of most suppers.". A line with no true need is not
+ * eligible; each branch keeps the rest.
  *
- * NOT BUILT (a walker's reading whose cure is a rewording, the chair's): adequate #4 "Food is steady rather than
- * generous: enough for every household, with little to spare." and adequate #12 "The grain is bought in rather than
- * grown here, so bread is never wasted." The style law (`tests/lint/styleLaw.walker.test.js`) strikes "rather than",
- * and its ratchet only falls; the wordings are ruled, so the lines wait for the chair's rewording.
+ * THE CHAIR'S LINES OF B3 F1 (06:17 and E56 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 items 4 and 5, verbatim): adequate
+ * #4 and #12 as the chair reworded them (the style law struck "rather than"), and strained #9 and critical #5 on `grain`
+ * (the chair's ruling for `grainHeld`: a line that says bread needs grain in the food record).
  *
  * STRICTER NEEDS THAN LINES-2 WROTE (the walkers' own cure, a line declares what it presumes; wordings unchanged):
  * surplus #2 and #3 ("Food is plentiful …") and strained #4 ("Most households get by, but few have anything to spare …")
@@ -70,6 +67,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'A1', text: 'There is enough to eat, if nobody asks for much more than the day needs.', needs: [] },
     { id: 'A2', text: 'Meals are plain and filling, and little goes to waste.', needs: [] },
     { id: 'A3', text: 'Most households eat simply, and they eat enough.', needs: [] },
+    { id: 'A4', text: 'Food is steady here, if not generous, and every household has enough with little left over.', needs: [] },
     { id: 'A5', text: 'The everyday fare is a simple stew and whatever else the day provides.', needs: [] },
     { id: 'A6', text: 'A pot of stew over the fire is the usual supper, and there is usually enough to go round.', needs: [] },
     { id: 'A7', text: 'Nobody here goes hungry, though few eat richly.', needs: ['prosperity: < comfortable'] },
@@ -77,6 +75,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'A9', text: 'Bread is the mainstay of the table, with whatever else the household can add to it.', needs: ['grain'] },
     { id: 'A10', text: 'What the hunters bring home goes into the common pot, and it stretches a long way.', needs: ['game'] },
     { id: 'A11', text: 'What the herds give fills out plain meals.', needs: ['livestock'] },
+    { id: 'A12', text: 'The grain is bought in, not grown here, so bread is never wasted.', needs: ['grain imported'] },
     { id: 'A14', text: 'The better-off eat well, and the rest eat plainly but enough.', needs: ['tier: ≥ village'] },
     { id: 'A15', text: 'Ordinary suppers here have a little more in them than plain fare elsewhere.', needs: ['prosperity: ≥ comfortable'] },
     { id: 'A16', text: 'Money is short, so meals are plain, but nobody goes without.', needs: ['prosperity: ≤ poor'] },
@@ -90,6 +89,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'T6', text: 'There is enough to keep going, but not enough to feel easy.', needs: [] },
     { id: 'T7', text: 'Food costs more than most people can comfortably pay, so they buy less of it.', needs: ['market'] },
     { id: 'T8', text: 'The catch does not go as far as it needs to, and fish is eaten sparingly.', needs: ['fish'] },
+    { id: 'T9', text: 'Bread is eaten carefully, and not even the heel of the loaf is wasted.', needs: ['grain'] },
     { id: 'T10', text: 'Even in comfortable households, the cooks count what goes into the pot.', needs: ['prosperity: ≥ comfortable'] },
     { id: 'T11', text: 'Families here have little money, and they eat less than they would like.', needs: ['prosperity: ≤ poor'] },
   ]),
@@ -99,6 +99,7 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'C2', text: 'Every meal is measured out, and the poorest eat least.', needs: [] },
     { id: 'C3', text: 'There is not enough food to go round, and everyone knows it.', needs: [] },
     { id: 'C4', text: 'Most households eat less than they need, and the children are fed first.', needs: [] },
+    { id: 'C5', text: 'The stew is thin and the bread is thinner.', needs: ['grain'] },
     { id: 'C6', text: 'Food is short, and what can be bought costs more than most can pay.', needs: ['market'] },
     { id: 'C7', text: 'The catch is too small to feed everyone, and fish is shared out carefully.', needs: ['fish'] },
   ]),
