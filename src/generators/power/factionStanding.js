@@ -74,7 +74,7 @@ const LEVEL_COUNT_WORDS = Object.freeze(['', '', '', 'Three', 'Four', 'Five', 'S
  * THE STANDING LADDER'S RANK LINES (rank 1, rank 2, the last rank), lifted from `annotateFactionStanding` BYTE-IDENTICAL
  * (SEAT-10 U6, the chair's E70 (a)): each row is its sentence's fixed parts, a name or a word between each pair. The ladder
  * writes from them and the final-record pass (`settleSeatHolderToRecord`) reads them (`RANK_STANDINGS`), so the two can
- * never drift: a reworded line is reworded for both. `level`'s first part is the count word the ladder sets ("Three"…"Many").
+ * never drift: a reworded line is reworded for both. `level` opens on "Three", which the ladder replaces with its count word ("Three"…"Many"), as before.
  * @enforced-by tests/generators/seat/seatHolderLines.test.js (the ladder's totality arm)
  */
 export const LADDER = Object.freeze({
@@ -85,7 +85,7 @@ export const LADDER = Object.freeze({
   resist: Object.freeze(['They are strong enough to resist those above them, but too far behind to risk an open fight.']),
   behind: Object.freeze(['Behind ', ' by too much to challenge openly, so they get their way through petitions and procedure instead.']),
   settled: Object.freeze(['The order is settled for now; they are busy holding on to second place and make no move on first.']),
-  level: Object.freeze(['Three', ' powers stand almost level here, and no one leads; every ', ' has to be bargained for.']),
+  level: Object.freeze(['Three powers stand almost level here, and no one leads; every ', ' has to be bargained for.']),
   atTable: Object.freeze(['They are always at the table, but cannot set their own terms.']),
   worthBuying: Object.freeze(['Close enough to the two above that their support is worth buying; they play ', ' and ', ' against each other when they can.']),
   fewMatters: Object.freeze(['They have a say on only a few matters; on everything else they side with whoever will deal with them that week.']),
@@ -171,7 +171,7 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5 && levelCount >= 3
-                  ? `${LADDER.level[0]}${LADDER.level[1]}${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'}${LADDER.level[2]}`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
+                  ? `${LADDER.level[0]}${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'}${LADDER.level[1]}`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
                   : LADDER.atTable[0])
               : gapAbove <= 10
                 ? (standing =
@@ -369,10 +369,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
  * carries (E65 (2): W3 at ANY rank). A name or a word sits between each pair of fixed parts, never across a sentence's end.
  */
 const escapeText = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-/** `level`'s first part is itself the count word, so its pattern opens on a word; every other slot is a name (no full stop in it). */
-export const RANK_STANDINGS = Object.freeze(Object.entries(LADDER).map(([key, parts]) => new RegExp(key === 'level'
-  ? `\\b\\w+${parts.slice(1).map(escapeText).join('[^.]+?')}`
-  : parts.map(escapeText).join('[^.]+?'))));
+/** `level` opens on the count word the ladder sets in place of "Three", so its pattern opens on a word; every other slot is a name (no full stop in it). */
+export const RANK_STANDINGS = Object.freeze(Object.entries(LADDER).map(([key, parts]) => new RegExp(parts.map(escapeText).join('[^.]+?')
+  .replace(key === 'level' ? /^Three/ : /^$/, '\\b\\w+'))));
 
 /**
  * THE FINAL-RECORD PASS (SEAT-10 U6, the chair's E65 of 2026-11-22): where the holder is known only on the final record (R2,
