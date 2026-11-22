@@ -211,6 +211,10 @@
 --       unmarked share's gallery read and import, restated here for that alone; the link always runs the veil). Never a
 --       stored change (_gallery_veil_apply, get_gallery_dossier, import_gallery_dossier; gallerySecondHomes.js ::
 --       withholdCriminalIncome, rederiveIncomeShares, withholdIncomeWeights). No signature changes.
+--   (35) THE CRIME LIST WITHHELD ALWAYS, THE PAGE RE-DERIVES (R3-TELL-8; the eighth chair's ruling (b) of 2026-11-22, THE OTHER
+--       WAY): economicState.safetyProfile.crimeTypes joins (34)'s rows (registry: safety.crimeTypes), and its R3 attribution
+--       rule leaves _gallery_veil_roster_choices; the merchant-army hook's raiser is the engine's stress flag merchantArmy (the
+--       record's flag and the served houses' half), not hasGangInfra. No function added, removed or re-signed.
 --   (34) WHAT NO NON-OWNER READ SENDS, WHATEVER THE VEIL (VEIL-21, R2; the sixth chair's VR16 rule 1, the seventh chair's VR28,
 --       VR33, VR37; SUB-BRIEF-VR7 point 5): every row of the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js)
 --       hosted in _gallery_veil_withhold_always, each rule naming its row: the fields no non-owner page draws, the crime
@@ -1987,7 +1991,11 @@ begin
   s := public._gallery_veil_minus_at(s, '{economicState}', array['situationDesc']);
   -- registry: safety.blackMarketCapture
   -- registry: safety.safetyRatio
-  s := public._gallery_veil_minus_at(s, '{economicState,safetyProfile}', array['blackMarketCapture', 'safetyRatio']);
+  -- registry: safety.crimeTypes (R3-TELL-8; the eighth chair's ruling (b) of 2026-11-22, THE OTHER WAY: the key itself on no
+  -- shared read of any place, marked or not, both stored shapes, every door, Reveal DM off and on, so its absence tells
+  -- nothing; the page re-derives the list from the served document by the engine's own writer where the served data proves
+  -- the types' grouping open, pageRederive.js :: rederiveCrimeTypes, and the import's save the same, importRederive.js)
+  s := public._gallery_veil_minus_at(s, '{economicState,safetyProfile}', array['blackMarketCapture', 'safetyRatio', 'crimeTypes']);
   -- registry: safety.flags.anyActive
   -- registry: safety.flags.arcaneBlackMarket
   -- registry: safety.flags.merchantArmy
@@ -2182,8 +2190,9 @@ declare
     "black market bazaar": "Black Market Bazaar", "smuggling operation": "Smuggling Operation", "smuggling network": "Smuggling Network",
     "street gang": "Street Gang", "front businesses": "Front Businesses", "underground city": "Underground City", "gambling den": "Gambling Den",
     "gambling halls": "Gambling Halls", "gambling district": "Gambling District", "red light district": "Red Light District"}';
-  -- registry: safety.crimeTypes (each type by the flags that raise it: safetyProfile.js's crime types and the stress flags
-  -- they read, priorityHelpers.js :: getStressFlags; criminalEffective moves only with hasCriminalInst among the houses)
+  -- THE RAISERS of each crime type (the flags that raise it: safetyProfile.js's crime types and the stress flags they read,
+  -- priorityHelpers.js :: getStressFlags; criminalEffective moves only with hasCriminalInst among the houses). R3-TELL-8: the
+  -- list itself is withheld always (_gallery_veil_withhold_always); this map stays for the services rule's `acc_types` below
   -- R3-CURE (VEIL-23's builder, unit 3): EVERY type the engine writes is a key (tests/lint/rosterChoicePools.walker.test.js
   -- holds the map equal to safetyProfile.js's own set); a crisis's type is raised by no house ([]); 'contested property'
   -- by a standing religious house (safetyProfile.js, RELIGIOUS_HOUSE). A type the map does not hold: unsure, WITHHELD
@@ -2207,9 +2216,9 @@ declare
     'A part from the wizard''s tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.', '["hasCriminalInst"]'::jsonb,
     'A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.', '["hasCriminalInst"]'::jsonb,
     'A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.', '["hasCriminalInst"]'::jsonb,
-    'The merchant guild''s private security force just detained someone, with no legal authority to do so. The watch is looking the other way.', '["hasGangInfra"]'::jsonb,
+    'The merchant guild''s private security force just detained someone, with no legal authority to do so. The watch is looking the other way.', '["merchantArmy"]'::jsonb,
     -- R3-CURE (unit 3): the two tellings safetyProfile.js :: said writes from SAFETY_LINE_SIBLINGS, each by its sibling's flags
-    'The merchant guild''s private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.', '["hasGangInfra"]'::jsonb,
+    'The merchant guild''s private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.', '["merchantArmy"]'::jsonb,
     'The settlement''s chaplain also leads its armed men, and is authorizing military action for reasons that sound theological.', '[]'::jsonb,
     'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.', '["hasSmuggling"]'::jsonb,
     'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.', '["hasSmuggling"]'::jsonb,
@@ -2467,6 +2476,14 @@ begin
     and not exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
                      where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* '(church|cathedral|temple|monaster|friary|shrine|abbey|chapel)'
                        and public._gallery_veil_str(e -> 'name') !~* '^access to'));
+  -- R3-TELL-8 (TELL7 cause (f), TELL8 1f: the merchant-army hook's raiser is the engine's own stress flag): priorityHelpers.js ::
+  -- getStressFlags raises merchantArmy on the priorities and fires(55), which read the config alone, AND (hasMerchantGuild or
+  -- hasBank) AND (hasMercenary or hasGangInfra). A hidden house raised it where the record does not hold it false and the
+  -- served flags (recomposed over the served houses, item C) no longer give the houses' half. Twin: the same rule
+  raised := raised || jsonb_build_object('merchantArmy',
+    coalesce(p #> '{economicState,safetyProfile,flags,merchantArmy}', 'null'::jsonb) <> 'false'::jsonb
+    and not ((coalesce(sfl -> 'hasMerchantGuild' = 'true'::jsonb, false) or coalesce(sfl -> 'hasBank' = 'true'::jsonb, false))
+             and (coalesce(sfl -> 'hasMercenary' = 'true'::jsonb, false) or coalesce(sfl -> 'hasGangInfra' = 'true'::jsonb, false))));
   beneath := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
                       where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* 'smuggling (network|operation)|underground (network|city)');
   es := s -> 'economicState';
@@ -2594,15 +2611,8 @@ begin
         s := jsonb_set(s, '{economicState,safetyProfile,safetyDesc}', to_jsonb(replace(sd, 'organized crime has a limited foothold.', 'organized crime has found no foothold.')));
       end if;
     end if;
-    -- registry: safety.crimeTypes ((b) BY ATTRIBUTION, VR39: an entry leaves where a flag that raises its type was raised by a
-    -- hidden house; an entry a shown house or a crisis raises stays; an entry with no type, or a type the map does not hold
-    -- (R3-CURE unit 3): unsure, withheld. VR29: the array stays an array)
-    if jsonb_typeof(s #> '{economicState,safetyProfile,crimeTypes}') = 'array' then
-      s := jsonb_set(s, '{economicState,safetyProfile,crimeTypes}', coalesce((select jsonb_agg(e order by o)
-        from jsonb_array_elements(s #> '{economicState,safetyProfile,crimeTypes}') with ordinality x(e, o)
-       where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'type') = 'string' and raisers ? (e ->> 'type')
-         and not exists (select 1 from jsonb_array_elements_text(raisers -> (e ->> 'type')) fk where (raised -> fk) = 'true'::jsonb)), '[]'));
-    end if;
+    -- (R3-TELL-8: the crime list's attribution rule LEFT; the list is withheld on every read by _gallery_veil_withhold_always,
+    -- and a rule here would only assure what no read sends: ruling 59)
     -- registry: safety.plotHooks ((b): a hook stays where it is of the pool and no flag that raises it was raised by a hidden
     -- house; a hook the pool does not hold: unsure, withheld)
     if jsonb_typeof(s #> '{economicState,safetyProfile,plotHooks}') = 'array' then

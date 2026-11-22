@@ -1,0 +1,90 @@
+
+ RUN  v4.1.8 /home/user/wt/r3tell8b
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js (3 tests | 3 failed) 447ms
+     × every site is registered with its count; none is stale; each owner-only, own-record, veil and not-a-read site gives its reason 437ms
+     × THE ONE READER exists and is wired at every door: rederiveForPage (the gallery page, the party link, the map's member) and the import's save 2ms
+     × THE KEY NEVER SHIPS: both always-hosts withhold it; the R3 attribution block has left both engines; the registry row is withheld always and re-derived by the page 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/crimeTypesReaders.walker.test.js > R3-TELL-8 (viii): every reader of the crime list, registered > every site is registered with its count; none is stale; each owner-only, own-record, veil and not-a-read site gives its reason
+AssertionError: expected { …(4) } to deeply equal { unregistered: [], stale: [], …(2) }
+
+- Expected
++ Received
+
+  {
+-   "moved": [],
++   "moved": [
++     "src/domain/display/galleryRosterChoices.js :: applyRosterChoices: count 4, registered 1",
++   ],
+    "reasonless": [],
+-   "stale": [],
+-   "unregistered": [],
++   "stale": [
++     "src/domain/veil/pageRederive.js :: rederiveCrimeTypes: registered, not found",
++     "src/domain/display/galleryWithholdAlways.js :: withholdAlways: registered, not found",
++   ],
++   "unregistered": [
++     "src/domain/display/galleryVeil.js :: GROUPING_OPEN_EVIDENCE (1): not registered",
++   ],
+  }
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js:117:56
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/lint/crimeTypesReaders.walker.test.js > R3-TELL-8 (viii): every reader of the crime list, registered > THE ONE READER exists and is wired at every door: rederiveForPage (the gallery page, the party link, the map's member) and the import's save
+AssertionError: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "pageRederive.js :: rederiveCrimeTypes: no such top-level declaration",
++   "rederiveForPage does not call rederiveCrimeTypes",
++   "importRederive.js does not import rederiveCrimeTypes from ./pageRederive.js",
++   "importRederive.js :: rederiveInPlace does not call rederiveCrimeTypes",
++ ]
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js:135:17
+    133|     const gallery = read('src/lib/gallery.js');
+    134|     for (const door of ['fetchGalleryMap', 'sanitizeDossier']) if (!(d…
+    135|     expect(out).toEqual([]);
+       |                 ^
+    136|   });
+    137|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/crimeTypesReaders.walker.test.js > R3-TELL-8 (viii): every reader of the crime list, registered > THE KEY NEVER SHIPS: both always-hosts withhold it; the R3 attribution block has left both engines; the registry row is withheld always and re-derived by the page
+AssertionError: expected [ …(7) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "212 :: _gallery_veil_withhold_always does not name safety.crimeTypes",
++   "212 :: _gallery_veil_withhold_always does not withhold economicState.safetyProfile.crimeTypes",
++   "galleryWithholdAlways.js :: withholdAlways does not name safety.crimeTypes",
++   "galleryWithholdAlways.js :: withholdAlways does not withhold economicState.safetyProfile.crimeTypes",
++   "212 :: _gallery_veil_roster_choices still names safety.crimeTypes (the attribution block: a false assurance, ruling 59)",
++   "galleryRosterChoices.js :: applyRosterChoices still names safety.crimeTypes",
++   "the registry row safety.crimeTypes is withhold/house-hidden/page null/built true",
++ ]
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js:152:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  3 failed | 7 passed (10)
+   Start at  08:04:59
+   Duration  2.35s (transform 156ms, setup 112ms, import 2.24s, tests 477ms, environment 0ms)
+

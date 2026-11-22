@@ -1,0 +1,20 @@
+start 10:17:09 tip e716c84d6
+red walker at bb8de9df3 rc=1 (expect 1) [first launch 10:16, kept]
+red tell8 at bb8de9df3 rc=1 (expect 1: half 1/2/hook and the evidence)
+typecheck rc=0 [typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+eslint rc=0
+registry-check rc=0
+walkers+manifest rc=0
+arms 3+4+5+8 rc=0
+sv+handrows+born+cures+secondhomes rc=0
+harnesses+signalCopies rc=1 (signalCopies city-2 pre-existing: read by name)
+tpl rc=0
+arm rc=0 RULING 88 (the writer over the served page != the writer with the record's own settle inputs): 4 of 6528 pages, towns r3m-village-under_siege-0-8; by setting {"own":0,"g:000":0,"g:001":0,"g:010":4,"g:011":0,"g:100":0,"g:101":0,"g:110":0,"allOpen":0,"off":0,"unmarked":0,"allShown":0} VERDICT: GREEN (0 and 0, controls 0, hook 0, parity 0) 
+build rc=0
+verify-dist rc=1 (5 pre-existing at the tip per the builder: read by name)
+new pool rc=0 12:19:30
+verify rc=0 verify: 45 cached births re-read, 0 differ
+gates rc=1 12:27:27
+r3gate rc=0
+lint-whole rc=1 12:44:34
+END 12:44:34

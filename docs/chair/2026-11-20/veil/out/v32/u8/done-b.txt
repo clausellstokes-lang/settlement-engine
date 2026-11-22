@@ -1,0 +1,6 @@
+start 12:45:03 lane fb320eded; src diff vs b6b6b723e: 0 files
+tip build rc=0
+tip verify-dist rc=1
+tip signalCopies rc=1
+compare rc=0
+END 13:01:21

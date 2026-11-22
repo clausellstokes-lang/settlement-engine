@@ -1,0 +1,63 @@
+
+ RUN  v4.1.8 /home/user/wt/r3tell8b
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js (3 tests | 2 failed) 303ms
+     × every site is registered with its count; none is stale; each owner-only, own-record, veil and not-a-read site gives its reason 295ms
+     × THE ONE READER exists and is wired at every door: rederiveForPage (the gallery page, the party link, the map's member) and the import's save 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/crimeTypesReaders.walker.test.js > R3-TELL-8 (viii): every reader of the crime list, registered > every site is registered with its count; none is stale; each owner-only, own-record, veil and not-a-read site gives its reason
+AssertionError: expected { …(4) } to deeply equal { unregistered: [], stale: [], …(2) }
+
+- Expected
++ Received
+
+  {
+    "moved": [],
+    "reasonless": [],
+-   "stale": [],
+-   "unregistered": [],
++   "stale": [
++     "src/domain/veil/pageRederive.js :: rederiveCrimeTypes: registered, not found",
++   ],
++   "unregistered": [
++     "src/domain/display/galleryVeil.js :: GROUPING_OPEN_EVIDENCE (1): not registered",
++   ],
+  }
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js:117:56
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/crimeTypesReaders.walker.test.js > R3-TELL-8 (viii): every reader of the crime list, registered > THE ONE READER exists and is wired at every door: rederiveForPage (the gallery page, the party link, the map's member) and the import's save
+AssertionError: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "pageRederive.js :: rederiveCrimeTypes: no such top-level declaration",
++   "rederiveForPage does not call rederiveCrimeTypes",
++   "importRederive.js does not import rederiveCrimeTypes from ./pageRederive.js",
++   "importRederive.js :: rederiveInPlace does not call rederiveCrimeTypes",
++ ]
+
+ ❯ tests/lint/crimeTypesReaders.walker.test.js:135:17
+    133|     const gallery = read('src/lib/gallery.js');
+    134|     for (const door of ['fetchGalleryMap', 'sanitizeDossier']) if (!(d…
+    135|     expect(out).toEqual([]);
+       |                 ^
+    136|   });
+    137|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  2 failed | 28 passed (30)
+   Start at  08:05:29
+   Duration  2.29s (transform 1.56s, setup 153ms, import 2.19s, tests 2.32s, environment 1ms)
+
