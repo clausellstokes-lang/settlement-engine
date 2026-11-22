@@ -67,6 +67,53 @@ describe('the word, through the vocabulary\'s door', () => {
   });
 });
 
+/**
+ * SEAT-TOWN Part 1 (the chair's "GRANTED", 2026-11-20 21:13 UTC): the family's fifth atom, `seat contested`
+ * (`src/domain/facts/seatContested.js`), over the page's own risk ladder (`rulingPowerCoup.js :: coupRiskLabel` of
+ * `coupContenders`). Each record's label is asserted first, so a fixture that stops being what it claims reds here.
+ */
+describe('the fifth atom: seat contested, over the page\'s own risk word', () => {
+  const coup = (faction, power, isGoverning) => ({ faction, power, ...(isGoverning ? { isGoverning: true } : {}) });
+  const field = (govMultiplier, ...factions) => ({ powerStructure: { factions, publicLegitimacy: { govMultiplier } } });
+  const CASES = {
+    Contested: field(0.8, coup('Headman\'s Authority', 52, true), coup('Religious Authorities', 48)),
+    'Critical. The seat could fall': field(1, coup('Elder Council', 10, true), coup('Merchant Guilds', 50), coup('Religious Authorities', 40), coup('Craft Guilds', 30)),
+    Holding: field(1, coup('Elder Council', 50, true), coup('Merchant Guilds', 40)),
+    Stable: field(1, coup('Elder Council', 50, true), coup('Craft Guilds', 3)),
+  };
+  const ungoverned = field(1, coup('Merchant Guilds', 40));
+  /** @type {any} */ let atom = null;
+  /** @type {any} */ let coupModule = null;
+  beforeAll(async () => {
+    atom = await import('../../../src/domain/facts/seatContested.js');
+    coupModule = await import('../../../src/domain/rulingPowerCoup.js');
+  });
+
+  it('is true on Contested and on Critical, false on Stable and Holding, the label read first', () => {
+    for (const [label, record] of Object.entries(CASES)) {
+      expect(coupModule.coupRiskLabel(coupModule.coupContenders(record)), label).toBe(label);
+    }
+    expect(atom.seatContestedOf(CASES.Contested)).toBe(true);
+    expect(atom.seatContestedOf(CASES['Critical. The seat could fall'])).toBe(true);
+    expect(atom.seatContestedOf(CASES.Holding)).toBe(false);
+    expect(atom.seatContestedOf(CASES.Stable)).toBe(false);
+  });
+  it('is UNANSWERED where the record holds no governing power (fail-closed)', () => {
+    expect(coupModule.coupContenders(ungoverned).governing).toBeNull();
+    expect(atom.seatContestedOf(ungoverned)).toBeUndefined();
+    expect(atom.seatContestedOf({})).toBeUndefined();
+    expect(atom.seatContestedOf(null)).toBeUndefined();
+  });
+  it('is a declarable presence atom, homed in factsOf and in the layer table, and holds as the record does', () => {
+    expect(V.assertDeclarable('seat contested').dimension).toBe('seat contested');
+    expect(V.FACT_DIMENSIONS['seat contested']).toMatchObject({ shape: 'presence', home: 'seatContested' });
+    expect(LEAVES.seatContested).toMatchObject({ layer: 3, reads: ['powerStructure'] });
+    expect(V.atomHolds('seat contested', factsOf(CASES.Contested))).toBe(true);
+    expect(V.atomHolds('seat contested', factsOf(CASES.Holding))).toBe(false);
+    expect(V.atomHolds('seat contested', factsOf(ungoverned))).toBeUndefined();
+  });
+});
+
 describe('its one declaring line: DS-POW-4 › Holding v3', () => {
   it('declares no seat outranked (and no occupation), and is the only line that does (no other line re-keyed this round)', () => {
     const lines = declaring();
