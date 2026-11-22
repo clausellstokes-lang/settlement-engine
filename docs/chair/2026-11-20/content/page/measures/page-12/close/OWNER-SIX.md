@@ -254,3 +254,15 @@ Openings for the players:
 - A series of 'accidents' targeting newcomers is being attributed to chance
 - An old family is deliberately inflaming tensions to drive out a newcomer who knows something
 
+
+## What is still not good enough
+
+This part was added by hand on the chair's word, after the measure ran.
+
+We made 150 places of each size and compared every pair of places of the same size. The question was: how often do two places share at least one opening for the players, word for word? The aim is fewer than 30 pairs in every 100.
+
+- Among the cities, 32.4 pairs in every 100 shared an opening (it was 53.7 before the work).
+- Among the metropolises, 36.5 in every 100 did (it was 61.0 before).
+- With the second set of places, made as a visitor makes them, cities came to 30.3 in every 100 (it was 50.2 before).
+
+So the openings are far less alike than they were, but in the two biggest sizes they still repeat a little more often than the aim allows. This is the first thing to fix after this work lands.
