@@ -208,7 +208,16 @@ const OLDEST_UNHELD = Object.freeze([
 
 /**
  * Whether the finished record holds the families as a party: a power's name (a word of the families, or a name of the noble
- * pool), a conflict, a tension or a crisis names them.
+ * pool), a conflict, a tension or a crisis names them. The powers, the conflicts, the crisis (`stress`) and the recent
+ * conflict are read whole.
+ *
+ * A TENSION IS READ BY WHAT IT STATES OF THE PLACE, NOT BY ITS LEADS (the chair's E88, 2026-11-22, cure B; vetoable by the
+ * owner): a current tension (`history.currentTensions[]`, `historyGenerator.js`) carries `type`, `description`,
+ * `specificIssue`, `factions` (its sides), `severity`, `lastingEffects` and `plotHooks`. It is read by its description, its
+ * issue, its sides and its lasting effects (what the trouble has left standing: "Newcomers and the old families still keep
+ * apart"). Its `plotHooks` are NOT read: a hook is a lead, not the record's party (point 96's mixed key keeps "A family that
+ * cannot pay the prices asked …", one household, in six Collapsed towns that then printed the old families). Its `type` and
+ * `severity` are keys, not words. A tension stored as a bare string is read whole.
  * @param {unknown} record @returns {boolean}
  */
 function familiesHeldOf(record) {
@@ -216,7 +225,13 @@ function familiesHeldOf(record) {
   const factions = Array.isArray(r?.powerStructure?.factions) ? r.powerStructure.factions : [];
   const names = factions.map((f) => /** @type {{ faction?: unknown } | null} */ (f)?.faction);
   if (names.some((n) => typeof n === 'string' && NOBLE_NAMES.has(n))) return true;
-  const held = JSON.stringify([names, r?.conflicts, r?.history?.currentTensions, r?.stress, r?.powerStructure?.recentConflict]);
+  // the fields a tension states of the place, by name (a list, as the whole-tension read before it named none)
+  const said = ['description', 'specificIssue', 'factions', 'lastingEffects'];
+  const raw = r?.history?.currentTensions;
+  const tensions = Array.isArray(raw)
+    ? raw.map((t) => (t && typeof t === 'object' ? said.map((k) => /** @type {Record<string, unknown>} */ (t)[k]) : t))
+    : raw;
+  const held = JSON.stringify([names, r?.conflicts, tensions, r?.stress, r?.powerStructure?.recentConflict]);
   return FAMILIES_NAMED.test(held ?? '');
 }
 
