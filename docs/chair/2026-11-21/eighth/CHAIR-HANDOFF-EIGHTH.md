@@ -122,6 +122,13 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   on the share. Answered the same turn in plain words; taken in as a unit (E66), not built in the middle of the six.
 
 
+- **THE OWNER'S QUESTION ON PROGRESS (written 2026-11-22 16:56 UTC; it came in the hour before), verbatim:** "What is our progress with everything in terms of
+  percentage?" ANSWERED THE SAME TURN, IN PLAIN WORDS, AS ESTIMATES AND SAID TO BE ESTIMATES: about 60% of the way to
+  the first deploy: who rules 80; fortune (both halves) 70; the switch-on itself 45; the Daily Life page 70; the share
+  veil and its security review 50; his own steps 0 (they cannot start yet); the parked lanes in three groups (the
+  traditions, place and trouble pages 70 to 85; the people page, the state sentences, the display work, wants and
+  ties, depth, the session sheet 40 to 60; the players' page cut 15). He was told the share veil decides the date.
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1392,6 +1399,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   POINT 101 PAGE-BAR7 (b6aa8cb78: it cures the red list's rows 63 and 64), POINT 102 SEAT-B (9e3feca9f); "GATE"
   given in the prompt. THE SIX NOW: VEIL-33, VEIL-34, FORTUNE-7 (U8's cure), DAILY-3, CLOSE-1, STACK-99. PARKED:
   PAGE-12 again, and the nine others. SEAT-10 done.
+- E104 · THE CLOSE's FIRST SEAT HANDS OVER; THE FLIP IS BUILT BY ITS SUCCESSOR FROM THE RECIPE, ON THE CHAIR'S WORD (2026-11-22 16:56 UTC). "CLOSE-1 HANDS OVER 85bcba0e5" (16:33; about 590,000 by
+  its count): its hand-back's section 0 is CLOSE-2's whole read-in. IN THE AIR, both by builders that are subagents
+  of CLOSE-1's own session: JOIN's builder on E101's unit (the seat's own re-runs written, NOT run: "JOIN <commit>"
+  NOT sent); GOLDEN-LIT's builder, ITS WORKTREE NOT YET ON ORIGIN. Unit 6 in part
+  (`close/measures/joint-lit/JOINT-MEASURE-LIT.md`: 900 lit births on 217b628f3; 23 calm places read Contested with
+  the first challenger's name on the page: PLAUSIBLY passed; the story at one position by size 0, 0, 4, 47, 149,
+  150: the sameness program's; STOP 1 owed); unit 7's draft stands. RULED: CLOSE-1 does not go quiet: when each
+  builder reports it reads no diff, pushes the builder's branch by name and sends one line; then "CLOSE-1 DONE
+  <commit>"; CLOSE-2 IS SEATED AT THAT LINE, IN ITS PLACE (a retiring seat whose builders still run holds its place
+  under the six). `prompts/CLOSE-2.txt` (a draft: four placeholders): JOIN's re-runs and landing line; GOLDEN-LIT
+  read and proven; the rehearsal's loose ends; THE FINAL CENSUS on "THE LINE IS READY <tip>"; THE FLIP's BRANCH
+  `lane/flip-2026-11-22` in the recipe's four steps on "BUILD THE FLIP". THE SEVENTH HANDOFF's "the flip is the
+  chair's unit" IS KEPT AS THE CHAIR'S RESPONSIBILITY (it rules the surprises, reads the dials' commit whole, lands
+  it); the keystrokes are a seat's; the owner's signings stay his.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1900,6 +1921,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    470,000); PAGE-12 (E88: cure (B) building; no line yet). NO PLACE HAS FREED SINCE POINT 98. THE NEXT PLACE GOES
    TO VEIL-34 (`prompts/VEIL-34.txt`), THE ONE AFTER TO STACK-99. `intake/AFTER-FIRST-DEPLOY.md` started (five
    items). The chair's branch: origin equals local before this commit (7d0ae5ada).
+- 2026-11-22 16:56 UTC · NET 17. THE LANDING: "STACK-99 MERGED 9d3a95a6f" at 16:28 (point 99 c60a572d7, point 100 044427246, point 101 d757f3a55, point 102 9d3a95a6f; the
+   conflicts exactly the chair's trial merge: the lighting census, and `HAND_CEILING` 77 at point 102; handPools 77
+   rows by itself; no "any other"); its step d running. THE VEIL: VEIL-34 read in within minutes of its seating and
+   made its own pool: GATE-1 4 of 92 (the same seven lower by rule), GATE-2 20 of 40, twin equal to server: EQUAL to
+   PART 34's; its (Q): R5-DESC's measure first with the other way's fidelity (builder V34-R5DM); (vi) nearly ready;
+   (iv), (v), IMPORT-DOOR each wait on a measure; measures-only builders two at once by the chair's steer. VEIL-33:
+   R5C5-SQL in at bbad923a5; R5C6 on the page side; no line since 15:57. FORTUNE-7: "FORTUNE-B" landing as point
+   100; U8's cure under E100 (its diagnosis branch is not on origin: asked to push). DAILY-3: no push since 15:52:
+   asked for three lines. CLOSE-1: handed over (E104): its two builders finishing; CLOSE-2 at "CLOSE-1 DONE".
+   THE SIX: VEIL-33, VEIL-34, FORTUNE-7, DAILY-3, CLOSE-1 (retiring), STACK-99. THE OWNER ASKED FOR PROGRESS IN
+   PERCENT AND WAS ANSWERED (section 1). The chair's branch: origin equals local before this commit (9b9a7f47f).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
