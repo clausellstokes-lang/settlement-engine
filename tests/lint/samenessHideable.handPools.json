@@ -50,6 +50,7 @@
   {"pool":"src/data/safetyDescLines.js :: UNSAFE_GARRISON","seat":"PLACE-2","branch":"lane/place-2-2026-11-20","commit":"282ba60a3"},
   {"pool":"src/data/safetyDescLines.js :: UNSAFE_OPENING","seat":"PLACE-2","branch":"lane/place-2-2026-11-20","commit":"282ba60a3"},
   {"pool":"src/data/safetyDescLines.js :: UNSAFE_WALLS","seat":"PLACE-2","branch":"lane/place-2-2026-11-20","commit":"282ba60a3"},
+  {"pool":"src/data/seatHolderLines.js :: SEAT_HOLDER_LINES","seat":"SEAT-10","branch":"lane/seat-10-2026-11-21-u6-wip","commit":"72db0b9f3"},
   {"pool":"src/data/tensionCauses.js :: TENSION_CAUSES","seat":"PAGE-7","branch":"lane/page-7-2026-11-20-causes-wip","commit":"27b349d0e"},
   {"pool":"src/data/tensionSideMeanings.js :: TENSION_SIDE_MEANINGS","seat":"PAGE-7","branch":"lane/page-7-2026-11-20","commit":"32161f93f"},
   {"pool":"src/data/traditionCorpus.js :: TRADITION_ADJECTIVES","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
