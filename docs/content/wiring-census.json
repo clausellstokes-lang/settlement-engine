@@ -37,8 +37,8 @@
     "syntheticTableFields": 178,
     "tiers": {
       "MISSING": 33,
-      "THIN": 612,
-      "COVERED": 249,
+      "THIN": 613,
+      "COVERED": 248,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -18722,7 +18722,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "depletedRow",
@@ -69915,12 +69915,12 @@
       "count": "5 variant(s) · 3 grammar(s) · slots {good, resource, settlement}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-11",
       "subject": "RESOURCE CONDITION: worked out, recovers in time",
       "fields": [],
       "readingFunction": "resourceConditionPoolKey",
-      "count": "6 variant(s) · 2 grammar(s) · slots {resource, settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {resource, settlement}"
     },
     {
       "tier": "THIN",
