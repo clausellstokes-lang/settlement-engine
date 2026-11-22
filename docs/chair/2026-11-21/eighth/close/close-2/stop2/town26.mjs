@@ -1,0 +1,12 @@
+const T = process.argv[2];
+const { generateSettlementPipeline } = await import(`${T}/src/generators/generateSettlementPipeline.js`);
+const { birthConfig, loadGenerationLawPayloads } = await import(`${T}/src/domain/density/densityCreateBoundary.js`);
+const { coupContenders, coupRiskLabel } = await import(`${T}/src/domain/rulingPowerCoup.js`);
+const { DEFAULT_CONFIG } = await import(`${T}/src/store/configSlice.js`);
+await loadGenerationLawPayloads();
+const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'town' }), null, { seed: 'visitor-town-26', customContent: {} });
+const c = coupContenders(s);
+const rels = (s.powerStructure?.factionRelationships || s.powerStructure?.relationships || []).filter((r) => JSON.stringify(r).includes('Religious')).map((r) => JSON.stringify(r).slice(0, 160));
+console.log(T.split('/').pop(), 'risk', coupRiskLabel(c), 'challengers', (c.challengers || []).map((x) => `${x.name || x.faction}:${x.reason || x.why || x.kind || ''}`).join(' | '), 'legit', s.powerStructure?.publicLegitimacy?.label || JSON.stringify(s.powerStructure?.publicLegitimacy)?.slice(0, 60), 'cfg', s.config?._seatLawVersion, s.config?._fortuneLawVersion);
+console.log('  first challenger keys:', Object.keys((c.challengers || [])[0] || {}).join(','));
+console.log('  rels:', rels.slice(0, 3).join(' || '));

@@ -32,3 +32,11 @@ owner's: red by name until his signed shift record and the twin's register row e
 `OWNER-GOLDEN-LIT.md` section 3". NOT parked by the lighting census: a parked file in that census (the twin is already
 counted parked, 486, for its capture arm's non-straight-line block) is a COUNT of the census, not a skip: the test still
 runs and reds; parking it would hide nothing and prove nothing.
+
+RULED (the chair's E111): AS PROPOSED. THE THREE ROWS FOR `ci/RED-AT-LINE.tsv` AT THE FLIP'S STACK (job, title, class; the
+text the chair asked for: what turns each green, and that no seat may do it):
+```
+test ratchet	generator golden master, lit (the 525 configurations born through birthConfig) manifest exists (the owner's signed capture through the door records it)	golden master: THE OWNER'S ALONE. Green when his signed shift record (docs/shift-records/, surface generator-golden-master-lit, 525 rows) and the twin's row in tests/fixtures/.golden-freeze-register.json exist and GOLDEN_SHIFT_SIGNED=<record> UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMasterLit.test.js has run once (about a minute). NO SEAT MAY DO IT.
+test ratchet	generator golden master, lit (the 525 configurations born through birthConfig) covers the full corpus (no keys added/removed without a manifest update)	golden master: the same; green by the same one run of the owner's.
+test ratchet	generator golden master, lit (the 525 configurations born through birthConfig) every config, born through birthConfig, produces byte-identical output to the lit golden master	golden master: the same; green by the same one run of the owner's.
+```

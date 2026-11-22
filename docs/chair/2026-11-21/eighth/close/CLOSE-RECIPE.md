@@ -56,6 +56,16 @@ powersList. The walker's own file run: see FLIP-CENSUS.md part 4.
 | `tests/domain/fortuneLawWiring.test.js` 7 "the leaf's header says the fortune law is never lit before the seat's law" | an ORDER pin, not darkness | holds: both dials flip in ONE unit |
 | comments: `densityCreateBoundary.js` (the clamp's two paragraphs, "a build whose dial is dark"), `fortuneLaw.js` header property 3, `seatLaw.js` header | prose only | read once at the flip; the flipped run (unit 4) names every test that pins one |
 (The flipped run's class (a) list is the complete set: see `FLIP-CENSUS.md` when written.)
+CORRECTED BY CLOSE-2 (2026-11-22 18:17 UTC, the chair's ruling on "JOIN a1319f388"): with JOIN on the line, the three wiring
+files show NINE dial pins lit, not ten: `seatLawWiring` "the vocabulary: one key, two versions, the dial at the default",
+"1. CREATE (dark): birthConfig carries no _seatLawVersion — its own key only…", "2. CREATE (THE CLAMP): an incoming
+_seatLawVersion: 2 is clamped away…"; the same three in `fortuneLawWiring`; `livingContentLawWiring` "CREATE (dark, fired
+deliberately)", "⭐⭐ CREATE (THE SAME-SEED CONTROL, LIT)", "⛔ CREATE (THE CLAMP)". `livingContentLawWiring` "⭐ CREATE (LIT,
+the product path)" is GREEN lit (its `birthConfig(null)` pin is now `generationLawsSavedPlace` arm (g)): it is NOT re-pinned.
+(Measured on a1319f388 plus the three dials: `close/close-2/JOIN-RERUN.md`.) `seatContest` (5) stays on the list as above.
+OWED, NOT DONE (the chair's ruling: no commit on JOIN's -wip): one header line in `tests/domain/generationLawsSavedPlace.test.js`
+saying that a DROPPED MINT is caught by the harness's shared precondition ("a birth on the LIT build mints no marker") on
+every arm, not localized to (d) and (g); a later unit that touches the file adds it, with `tests/lint` whole after.
 
 ## 2. THE FLIP'S CENSUS (item (3); E90: THE CLOSE'S ALONE, run ONCE on the final tree): THE RECIPE THAT RE-RUNS IT
 REHEARSED on the lit scratch e987c3e36 (2026-11-22, 13:34 UTC onward); its classed tables are the reference

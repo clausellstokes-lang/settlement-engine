@@ -33,17 +33,45 @@ already cured and waiting to land.)
 - **The second merit's ages** (coming with LASTING): how old a place must be, by size, to count as long-standing. Note:
   the hamlet's figure (108 years) is lower than the thorp's (269).
 
-## 4. The goldens: the stored "this is what the engine makes" records
-The engine keeps a fixed set of births (the golden master) to prove nothing changes by accident. Switching the rules
-on changes them, by design. The old set is kept to prove that saved places still come out the same. A NEW set, born
-under the new rules, is made beside it for you to sign. **YOU SIGN TWO RECORDS HERE, NOT ONE** (CLOSE-2, 2026-11-22
-18:1x UTC, measured): (1) **the old set itself is out of date already**: born today the old way, none of its 525 places
-matches what was recorded on 2026-11-19, on the working line as it stands, before any switch (the line's other work
-since then moved them; this is the one golden row already red on the line, and it waits for your re-signing whatever the
-close does); (2) **the new set** (the "lit twin": the same 525 places born the new way) is prepared and waits for its
-first signing: every one of the 525 reads differently from the old way (a place's wealth in 330, the powers and their
-strength in all 525, who holds the seat in 74). Until you sign, both show red by name, never a silent pass. What you see
-and the one command after your signing: `close/OWNER-GOLDEN-LIT.md`.
+## 4. The goldens: the stored "this is what the engine makes" records — TWO SIGNINGS (CLOSE-2, measured 2026-11-22 by 18:12 UTC, written 18:17 UTC)
+The engine keeps a fixed set of 525 sample places, each stored as a fingerprint, to prove nothing changes by accident.
+Only you can re-sign one: the tool that writes them refuses unless your signed "shift record" (a short file under
+`docs/shift-records/` naming the set and how many rows move) exists. No seat writes one. Both sets below show red, by
+name, until you sign: never a silent pass.
+
+**Signing 1: the OLD set (`generator-golden-master`), re-signed.** It births places the old way (without the new rules),
+so switching the rules on does not move it; it stays as the proof that saved places come out the same.
+- What moved: born today, NONE of its 525 places matches the fingerprints recorded on 2026-11-19, on the working line as
+  it stands, before any switch. The line's own work since that day moved them (it is the one golden row already red on
+  the line). The stored file keeps only fingerprints, so what changed inside each place cannot be read from it; the
+  chair can have a seat birth the same places at the 2026-11-19 record's commit and today, and read three out for you,
+  before you sign.
+- Its row in `tests/fixtures/.golden-freeze-register.json` exists already; your act re-writes its fingerprint and names
+  your word.
+- The command, after your shift record exists (about a minute here):
+  `GOLDEN_SHIFT_SIGNED=docs/shift-records/<your record>.json UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js`
+
+**Signing 2: the NEW set, the "lit twin" (`generator-golden-master-lit`), signed for the first time.** The same 525
+places, born the way the product births a NEW place under the switched-on rules.
+- What moved, against the old way, born on the same tree: **all 525** (thorp 84, hamlet 84, village 84, town 105, city
+  84, metropolis 84). Inside them: the powers and their strength in all 525; the crisis's powers in 516; a place's
+  wealth in 330; who holds the seat in 74. Three read out:
+  - a forest metropolis far from the roads (Suryaganj): wealth Comfortable becomes **Poor** (a great city judged against
+    cities); the City-State Council's seat passes from the Craft Guilds to **the Merchant Guilds**; nine powers become
+    seven.
+  - a riverside hamlet (Schwarzwalde): wealth Poor becomes **Comfortable**; the ruler's standing 38 (Contested) becomes
+    **58 (Tolerated)**; the Feudal Stewardship becomes the hamlet's only power.
+  - a plains town on a river route (Schwarzwalde): wealth Moderate becomes **Comfortable**; standing 48 becomes **68
+    (Approved)**; seven powers become four.
+  (The metropolis is re-read by CLOSE-2's own run; the hamlet and the town are the builder's reading.)
+- **One step comes first, and it is part of your act:** a NEW row for `generator-golden-master-lit` in
+  `tests/fixtures/.golden-freeze-register.json` (its file `tests/fixtures/generator-golden-master-lit.json`, its test
+  `tests/property/generatorGoldenMasterLit.test.js`, 525 rows, your word as its owner line), written by whoever you have
+  carry the act out; the tool refuses the set without it.
+- The command, after your shift record and that row exist (about a minute here; the run then fails ON PURPOSE, which is
+  the tool saying "written"; the same command without the two settings, run again, shows green):
+  `GOLDEN_SHIFT_SIGNED=docs/shift-records/<your record>.json UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMasterLit.test.js`
+- Where to see it: `close/OWNER-GOLDEN-LIT.md`.
 
 ## 5. Sizes (how much the app downloads)
 The first screen's download stays as it is on the working line today (already above its budget before this close;
