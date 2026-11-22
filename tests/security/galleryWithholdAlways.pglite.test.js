@@ -75,7 +75,11 @@ describe('R2: the withhold-always rows leave every non-owner read, both Reveal s
     const { REGISTRY_ROWS } = await import('../../src/domain/veil/rosterChoiceRegistry.js');
     veil = await import('../../src/domain/display/galleryVeil.js');
     await loadGenerationLawPayloads();
-    rows = REGISTRY_ROWS.filter((r) => r.server === 'public._gallery_veil_withhold_always' && r.rule === 'withhold' && r.when === 'always')
+    // A COPY row (V10-1's `copyOf`) takes its source's rule and when, not its own condition: R5-RECENT's
+    // power.recentConflict.pressureSentence leaves only where the stored pressureSentence EQUALS the stored recentConflict (the
+    // chair's E97 (1)); every other pressureSentence is served. Its absence is judged by its own plant,
+    // tests/security/galleryVeilRecent.pglite.test.js (the copied pressureSentence absent, both engines), not here.
+    rows = REGISTRY_ROWS.filter((r) => r.server === 'public._gallery_veil_withhold_always' && r.rule === 'withhold' && r.when === 'always' && !r.copyOf)
       .map((r) => ({ id: r.id, re: new RegExp(r.path) }));
     towns = BIRTHS.map(([size, crisis], i) => {
       const cfg = birthConfig({ ...DEFAULT_CONFIG, ...BIRTH_DIALS, settType: size, ...(crisis ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) });
