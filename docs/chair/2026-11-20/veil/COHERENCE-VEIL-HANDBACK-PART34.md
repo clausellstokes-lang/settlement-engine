@@ -31,7 +31,17 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   neither); every one resolved toward the line (six tests, five registers): `out/v33/joinprobe/conflicts.md` on that branch. Five
   of the eleven are ruling 69's fixture-git files. Builder V33-JOINPROBE (brief `briefs/V33-JOINPROBE-BRIEF.md`) seated 08:1x to
   commit the merge, re-make the pool THERE (`/var/tmp/v18/t2/pool-jp1`), read both gates, run the green chain, measure E35's hook
-  gap, attribute every red; its heavy runs wait for chain1's END. Pass 2 (lit) on 5c4419815 after pass 1, one pool at a time.
+  gap, attribute every red. PASS 1 DONE: `lane/veil-33-2026-11-22-joinprobe-wip` at 44c2007ab (merge 27c7e79dd; report
+  `out/v33/joinprobe/JOINPROBE-PASS1.md`, read by the seat; the gates and the hook table re-read by the seat). The pool's 1,808 births
+  are BYTE-EQUAL to the lane's (dark laws move no birth); the two gates IDENTICAL to the lane's (4/92, 7 LOWER; 20/40; 0 against the
+  rule; twin = server); every lane suite green at the join, acceptance 40 PASS. Reds at the join: the registry walker ARM A 16
+  unregistered sites (14 point 88, 1 point 84, 1 point 85); the line's registers lost to the conflicts (tuningRegister 3,
+  ruinFilterRoster 2, fixtureGitIsolation 3; points 76, 90, 93/97); observedShapeReaders +2 (fortune's trial); proseComposed A0b
+  2322 against 2103 (fortune or point 89, PLAUSIBLE). E35's HOOK GAP: 240 births, 92 places with a trouble and a hideable house;
+  server = twin; 462 hooks served, 11 needing a house the read hides (all guild_conflict 12, "organised crime"), 0 naming one.
+  Proposed for 212's writer: a served trouble hook whose declared need is a house the read hides leaves (both engines); the 16
+  sites registered. Told the chair 11:2x. PASS 2 (lit, 5c4419815): a FRESH builder V33-JOINPROBE-2 seated (the brief's PASS 2
+  section, f05637681), pool `/var/tmp/v18/t2/pool-jp2`; it writes the product `out/v33/joinprobe/JOINPROBE.md`.
   CLOSE-1 IS PARKED (the chair, 09:14): its register commits a349917e7 (over the dark join) and e987c3e36 (over the lit) are NOT
   used: the probe takes the two commits the chair named.
 - (Q) UNITS (iv), (v), (vi) PREPARED: builder V33-Q (brief `briefs/V33-Q-BRIEF.md`), worktree `/home/user/wt/q`, branch `v33-q`
@@ -65,3 +75,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 08:42 the pool stood; chain1 launched. 08:50 both gates read (equal to the hand-back).
 - 09:15 the chair's 09:14 word read (ruling 93); the (0) line to the chair; the (Q) builder parked; its WIP pushed `-wip` unread.
 - 09:47 chain1 END (the sixteen standing only). 11:15 the chair's notice of its branch's broken tip 11:04-11:14 read: this seat fetched it only at 08:05; this repository clean (core.bare false, no Fixture commit on any of its three trees).
+- 11:1x pass 1 returned (44c2007ab); its gates and hook table re-read; the probe branch pushed `-wip`; the line to the chair; pass 2's builder seated.
