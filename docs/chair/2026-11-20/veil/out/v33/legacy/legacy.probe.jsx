@@ -303,14 +303,14 @@ it(`R3-TELL-2 instrument (${MODE})`, async () => {
           if (k === 'g:111') continue;
           const ov = V.write(d); const page = V.twin(t, dm, ov); const wh = withheldAllOf(t, page); if (!wh.length) continue;
           const np = V.twin(neverOf(t, wh), dm, ov); const nl = leaves(np); const nKeys = new Set(); const nCrime = new Set();
-          for (const [p, v] of nl) { const q = norm(p); nKeys.add(q); if (v[0] === '"' && CRIME.test(JSON.parse(v))) nCrime.add(q); }
+          for (const [p, v] of nl) { const q = norm(p); nKeys.add(q); if (typeof v === 'string' && v[0] === '"' && CRIME.test(JSON.parse(v))) nCrime.add(q); }
           const named = namerOf(wh, page); const tag = `${dm ? 'dm' : 'off'}|${k}`; const seenRow = new Set();
           for (const [p, v] of leaves(page)) {
             const q = norm(p); const row = rowOf(q);
-            if (v[0] === '"') { const s = JSON.parse(v);
+            if (typeof v === 'string' && v[0] === '"') { const s = JSON.parse(v);
               if (named(s)) { if (!seenRow.has(`n${row}`)) { seenRow.add(`n${row}`); add(row, 'name', `${tag} ${p}: ${s.slice(0, 120)} (withheld ${JSON.stringify(wh).slice(0, 80)})`); } }
               else if (CRIME.test(s) && !nCrime.has(q) && !seenRow.has(`c${row}`)) { seenRow.add(`c${row}`); add(row, 'kind', `${tag} ${p}: ${s.slice(0, 120)}`); } }
-            if (!nKeys.has(q) && !seenRow.has(`k${row}`)) { seenRow.add(`k${row}`); add(row, 'key', `${tag} ${p} = ${v.slice(0, 80)}`); }
+            if (!nKeys.has(q) && !seenRow.has(`k${row}`)) { seenRow.add(`k${row}`); add(row, 'key', `${tag} ${p} = ${String(v).slice(0, 80)}`); }
           }
         }
       }
