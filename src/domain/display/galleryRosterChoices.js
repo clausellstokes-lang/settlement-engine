@@ -12,6 +12,7 @@
  * on the veil's own copy.
  */
 import { buildNameSearch, caseFold, renumberTrace, rosterHouses } from './gallerySecondHomes.js';
+import { standingBase } from './galleryWithholdAlways.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 
@@ -163,7 +164,16 @@ export function applyRosterChoices(s, pub, idOf) {
     // (R3-CURE-4, unit 1: A HUSK IS A TELL: a relation whose PRE-SWEEP counterpart in `pub` named an unserved power leaves
     // whole, though the name sweep took that name out of its pair: heldBy, the containment 212 reads as `@>`)
     const rels0 = objectsOf(recAt(pub, 'powerStructure')?.factionRelationships).filter(unserved);
-    ps.factionRelationships = ps.factionRelationships.filter(r => isRec(r) && !unserved(r) && !rels0.some(r0 => heldBy(r0, r)));
+    const rels = ps.factionRelationships.filter(r => isRec(r) && !unserved(r) && !rels0.some(r0 => heldBy(r0, r)));
+    ps.factionRelationships = rels;
+    // registry: power.relation.dmNote (R5-DESC, 212 (36) (d); E115 (3), E121 Q1): a served relation's `dmNote` that NAMES A
+    // WITHHELD POWER (withheldPowerNamer: the fold, the bare form, the id) leaves, THE KEY, per entry; the relation stays
+    if (rels.some(r => isRec(r) && typeof r.dmNote === 'string')) {
+      const namer = withheldPowerNamer(s, pub, ps);
+      if (namer) {
+        ps.factionRelationships = rels.map(r => (isRec(r) && typeof r.dmNote === 'string' && namer.named(r.dmNote) ? (({ dmNote: _d, ...rest }) => rest)(r) : r));
+      }
+    }
   }
   if (!whole) return;
 
@@ -359,14 +369,9 @@ function es0(d) {
  * @param {Rec} s @param {Rec} pub @param {Rec | null} ps
  */
 function withholdPowerCopies(s, pub, ps) {
-  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
-  const out = [...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
-    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)));
-  const wIds = new Set(out.map(f => idText(f.id)).filter(v => v !== ''));
-  const search = buildNameSearch(out.flatMap(powerNamesOf).filter(v => v !== ''), servedNames);
-  if (!search && wIds.size === 0) return;
-  /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
-  const named = (v) => (typeof v === 'number' && wIds.has(idText(v))) || (typeof v === 'string' && v !== '' && (wIds.has(v) || (!!search && search.hit(v))));
+  const namer = withheldPowerNamer(s, pub, ps);
+  if (!namer) return;
+  const { search, named } = namer;
   const recNames = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(named);
   // R3-CURE-4 (unit 1; the chair, 11:12: "a goal naming a withheld power LEAVES WITH IT: the whole goal, every field of it; a
   // husk is a tell"): each structured copy is judged on what it held BEFORE any pass stripped it. The hidden-house name sweep
@@ -429,6 +434,35 @@ function withholdPowerCopies(s, pub, ps) {
     s.simulationTrace = kept;
     if (kept.length < nt) renumberTrace(s);
   }
+  // R5-DESC, 212 (36) (e): power.desc's BELT (E121 (c)). The standing is cut on every read (row power.desc, withholdAlways,
+  // after this pass); a desc whose BASE, as that cut leaves it (standingBase), still names a withheld power leaves WHOLE,
+  // both lists. None is expected: every name the measures found sits in the standing. Asked only of a desc that names one
+  // whole (a base that names one is held in its desc). SQL twin: 212 :: _gallery_veil_roster_choices, the same rule
+  for (const holder of [ps, s]) {
+    if (holder && Array.isArray(holder.factions)) {
+      holder.factions = holder.factions.map(f => (isRec(f) && typeof f.desc === 'string' && named(f.desc) && named(standingBase(f.desc)) ? (({ desc: _d, ...rest }) => rest)(f) : f));
+    }
+  }
+}
+
+/**
+ * THE WITHHELD POWERS' TEST (R3-CURE-2's, shared by withholdPowerCopies and R5-DESC's dmNote rule): every power of `pub`'s
+ * two lists that neither served list names; a value names one by its id (a string, a number by its String()) or by its name
+ * FOLDED, itself and its bare form, at the name boundary (buildNameSearch, the served names its open names). Null where
+ * there is nothing to ask. SQL twin: 212 :: _gallery_veil_roster_choices (wn, wn_ids, srch; _gallery_veil_power_named).
+ * @param {Rec} s @param {Rec} pub @param {Rec | null} ps
+ * @returns {{ search: ReturnType<typeof buildNameSearch>, named: (v: unknown) => boolean } | null}
+ */
+function withheldPowerNamer(s, pub, ps) {
+  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
+  const out = [...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
+    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)));
+  const wIds = new Set(out.map(f => idText(f.id)).filter(v => v !== ''));
+  const search = buildNameSearch(out.flatMap(powerNamesOf).filter(v => v !== ''), servedNames);
+  if (!search && wIds.size === 0) return null;
+  /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
+  const named = (v) => (typeof v === 'number' && wIds.has(idText(v))) || (typeof v === 'string' && v !== '' && (wIds.has(v) || (!!search && search.hit(v))));
+  return { search, named };
 }
 
 /** R3-CURE-4: jsonb containment as 212 reads it (its containment operator) below the top level: an object holds every key of `b` with a value
