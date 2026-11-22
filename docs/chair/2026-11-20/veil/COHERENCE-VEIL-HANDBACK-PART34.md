@@ -157,6 +157,15 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     R4-CURE-2): "R4-IDS" (VR10's re-key alone, split from R4-CURE-2) before (iv). ORDER PROPOSED: R5-RECENT, R5-DESC, R4-IDS, (iv),
     (v), (vi), IMPORT-DOOR, R3. HAND-OVER: VEIL-33 HANDS OVER AFTER R5-DESC IS MERGED (or after R5-RECENT if the chair's read passes
     600,000 at its merge); VEIL-34 seated when R5-RECENT merges.
+98. THE CHAIR TO VEIL-33, 14:40 UTC (E89): THE SEAT'S 14:38 ACCEPTED WHOLE. THE ORDER BEFORE "R3": R5-RECENT, R5-DESC, R4-IDS (VR10's
+    re-key ALONE, split from R4-CURE-2: every person's id re-keyed per read, every reference following, one salt; STOP 1 and the
+    catalogue red; R4-CURE-2's other parts after R3), (iv), (v), (vi), IMPORT-DOOR, "R3 <commit>" with the LOWER towns. INV-LIT AT THE
+    JOIN, AFTER R3, ON CONDITION: the probe's lit-surfaces table RE-RUN on the joined tree after R5-RECENT, R5-DESC and R4-IDS are
+    merged, to the reader with JOINPROBE.md. THE HAND-OVER: after R5-DESC's merge (or at R5-RECENT's if the record passes 600,000
+    there, R5-DESC's brief and plant written); VEIL-34 SEATED WHEN THIS SEAT SAYS "R5-RECENT MERGED <commit>" (it reads in beside,
+    writes nothing of 212, the twin or the registry until the hand-over line; R4-IDS its first unit). R5-DESC's SCOPE: EVERY
+    composed sentence of a power's card that can carry another power's name or kind; the walker the proof; the seat's line says how
+    many composed rows the registry holds and how many have a built host after R5-DESC (29; 6 after: section 1's R5-DESC brief).
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -174,3 +183,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 14:30 the chair: the line at point 98 (c110dd85b; both laws dark on it; to know); the readers' list to check. 14:30 the gates' failure found (the template's case) and re-run. 14:31 the line to the chair (status, the three asked lines, the readers' list notes).
 - (before 14:37, not clocked) R5R returned; its diff read; pushed `-wip`; the cure's worktree cut and merged; R5C seated. A SLIP, SAID: commit 2e0cfa1be's `Claude-Session` trailer names the chair's session (session_01ACmDYY29VRchM87v1yhL9Q), not this seat's (session_01ACmDYYeP5WWiLi6bmykSME); pushed before it was seen; not rewritten (no history is).
 - 14:36 the chair's ruling 97 read; 14:38 answered; R5-DESC's brief drafted (its open question waits on R5C's).
+- 14:40 the chair's E89 (ruling 98) read 14:46; R5-DESC's brief widened to every power-card composed row (29 composed; 2 built today; 6 after R5-DESC).

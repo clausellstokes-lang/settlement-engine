@@ -40,6 +40,20 @@ applied base, so 212 would restate it: a NEW posture question for the chair); (3
 in it (catches the masked spellings only, not the lower case). The writer measures each option's loss on the probe's 60 births
 and the lane's pool before the chair rules. Change nothing in 210 or 211.
 
+## THE SCOPE, WIDENED BY THE CHAIR (14:40 UTC, E89): EVERY COMPOSED SENTENCE OF A POWER'S CARD
+The rule covers EVERY composed sentence of a power's card that can carry another power's NAME or KIND, not the two fields act T
+caught. The registry (measured at c74fee3b2) holds 29 COMPOSED rows; 2 have a built host (`history.founding.overcoming`,
+`prose.incomeWeight`); the POWER CARD's composed rows on R5's planned host are FOUR: `power.recentConflict` (R5-RECENT's),
+`power.desc` (a power's description), `power.relation.dmNote` (Reveal DM: the relation's note naming the withheld criminal power by
+its own name) and `power.label` (the label ladder over the re-derived share: it carries no name or kind; the unit SAYS so by a
+census of its served values and hosts it in R3 as a recompose over the served share, or proves it a no-name label and moves it
+off the composed form with that reason). R5-DESC builds `power.desc` and `power.relation.dmNote` (and `power.label` as said) in R3's
+host, both engines. AFTER R5-DESC: 29 composed rows, 6 with a built host (the two, R5-RECENT's one, R5-DESC's three); the 23 left are
+`prose.*` rows of the public prose (R5's own), each still red on the composed-hosts walker: THE WALKER IS THE PROOF that no
+power-card row is left. Any OTHER served sentence of a power's card the registry does not list (a governance line, a `stability`
+cause, a contest line, the seat's train) that can carry another power's name is found by THE LANE'S SEARCH over every served
+string of the probe's 60 lit births and the lane's pool: a hit not on the list is a STOP with the path (a new registry row).
+
 ## THE RED FIRST
 `tests/security/galleryVeilDesc.pglite.test.js` (R5-RECENT's plant's harness, both engines, both stored shapes, every setting, Reveal
 off and on): PLANTS (a) a shown power's description naming a power withheld BY RULE (power.entry under a hidden criminal house);
