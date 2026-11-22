@@ -564,3 +564,74 @@ describe('FORTUNE U6 — the fortune law leaves the first-paint closure for its 
     expect(staticDeps(boundary[0]).filter(dep => ENGINE_CHUNK_RE.test(dep))).toEqual([]);
   });
 });
+
+// ── FORTUNE U5c (2026-11-22): the merits are EXCISED AND PINNED to their own lazy chunk, U6's form ──
+// src/domain/fortune/fortuneMerits.js (U5a) rode EAGER engine-core only because ESD seeds it (its two
+// importers: generators/steps/assembleSettlement.js, and display/governanceAccount.js, which a generator
+// imports); both are lazy, and no first-paint surface computes or prints a merit. Riding engine-core,
+// its three static imports (the law, data/bandLadders.js, data/legacyUnresolvedWordings.js) followed it
+// into first paint and undid U6's probe C. The rulings (the chair, 03:50 and 04:51 UTC): its excision
+// row AND a pin to its own `fortune-merits` chunk; never the row without the pin (probe B: the orphan
+// co-locates into the big lazy `engine` chunk), and not into `fortune-law` (that import-free chunk would
+// gain a data-lazy edge). The measure: docs/chair/2026-11-20/content/fortune/briefs/U5c-FIRSTPAINT.md.
+// Written as filters and booleans, never a bare negated matcher (the walker's frozen count).
+describe('FORTUNE U5c — the fortune merits leave the first-paint closure for their own chunk', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+  const MERITS = '/src/domain/fortune/fortuneMerits.js';
+  const meritsPath = join(ROOT, MERITS.slice(1));
+  const FORTUNE_MERITS_CHUNK_RE = /^fortune-merits-[A-Za-z0-9_-]+\.js$/;
+
+  it('the merits exist and are a row of ENGINE_SHARED_DOMAIN_EXCISIONS', () => {
+    expect(existsSync(meritsPath), `${MERITS} is gone — this block now proves nothing`).toBe(true);
+    expect(ENGINE_SHARED_DOMAIN_EXCISIONS.filter(frag => frag === MERITS)).toEqual([MERITS]);
+  });
+
+  it('manualChunks places the merits in their own `fortune-merits` chunk (a control generator still routes to the engine)', () => {
+    expect(manualChunks(meritsPath)).toBe('fortune-merits');
+    expect(manualChunks(join(ROOT, 'src/generators/steps/assembleSettlement.js'))).toBe('engine');
+  });
+
+  it('the merits are out of vite\'s own eager first-paint derivation', () => {
+    expect(EAGER_FIRST_PAINT_MODULES.size).toBeGreaterThan(100);
+    expect(EAGER_FIRST_PAINT_MODULES.has(meritsPath), 'fortuneMerits.js is in the first-paint closure').toBe(false);
+  });
+
+  // The emitted graph: the vendorPdfLazy closure walk (static edges only; import() is lazy).
+  const staticDeps = (file) => {
+    const code = readFileSync(join(assetsDir, file), 'utf-8');
+    const specs = new Set();
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    return [...specs];
+  };
+  const entryClosure = () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
+    return seen;
+  };
+
+  it.skipIf(!requireDist)('the `fortune-merits` chunk is outside the entry closure and unpreloaded', () => {
+    const chunks = readdirSync(assetsDir).filter(f => FORTUNE_MERITS_CHUNK_RE.test(f));
+    expect(chunks, 'the merits are not in one `fortune-merits` chunk').toHaveLength(1);
+    const closure = entryClosure();
+    expect(closure.size, 'the entry closure walked nothing').toBeGreaterThan(3);
+    expect([...closure].filter(f => FORTUNE_MERITS_CHUNK_RE.test(f) || /^fortune-law-/.test(f) || /^engine-(?!core-)/.test(f))).toEqual([]);
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*fortune-merits-/.test(html)).toBe(false);
+  });
+});
