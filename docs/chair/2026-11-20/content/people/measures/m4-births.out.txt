@@ -1,0 +1,7 @@
+births thorp: places 100 · powers 108 · relation rows 3
+births hamlet: places 100 · powers 126 · relation rows 19
+births village: places 100 · powers 225 · relation rows 118
+births town: places 100 · powers 410 · relation rows 368
+births city: places 100 · powers 645 · relation rows 380
+births metropolis: places 100 · powers 808 · relation rows 465
+written <cache.json> (a local cache, not committed; reproduce: M4_BASE=<base> node m4-births.mjs <checkout> 100 <cache.json>)
