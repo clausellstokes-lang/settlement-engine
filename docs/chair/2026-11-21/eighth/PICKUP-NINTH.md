@@ -6,6 +6,8 @@ ACCOUNT: you can see and message every seat below.
 
 ## READ THIS FIRST (2026-11-22 21:29 UTC; it supersedes every block below it)
 
+(AMENDED 2026-11-22 21:56 UTC: the chair's record is 825,812; CI on point 105 is read: every red on the list, none new; VEIL-36 is at 506,417 after one hour and hands over at 620,000: A THIRD SEAT FOR CHAIN A is owed the next place after PROSE-5 and the stack; R5D-FORMS is in (117 standing forms), R5D-SQL building; DAILY-C's 34 new lines are read and taken; net 23 is armed for 22:58.)
+
 WHY THIS BLOCK: the chair's own record read 743,455 of 1,000,000 at 21:23 UTC (a helper's read of this session: E109 holds
 for the chair too): its context will be summarized soon. EVERYTHING BELOW IS IN THE FILES NAMED; trust them over memory.
 

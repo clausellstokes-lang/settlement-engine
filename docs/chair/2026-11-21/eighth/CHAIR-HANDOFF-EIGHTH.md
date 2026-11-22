@@ -2529,6 +2529,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    and its two teaser tabs) and the list for his hand at the close. ARMED: CI on point 105 for 21:55; net 22 for
    21:58. THE ORDER OF THE FREE PLACE: the stack of "DAILY-B" (with "PRONOUN" if it stands), then VEIL-37
    (IMPORT-DOOR), then CLOSE-3 when CLOSE-2 passes about 560,000.
+- 2026-11-22 21:56 UTC · NET 22. THE LINE IS AT POINT 105 (244fa84ef); CI ON IT READ BY NAME (run 45069602146): 62 failing rows, every one on the list of 61, NONE NEW; the two timeouts gone. THE RECORDS (a helper, 21:55): VEIL-33 328,146;
+   VEIL-35 545,906; VEIL-36 506,417 (one hour in: this lane's read-in costs that: it hands over at 620,000 or at
+   R5D-SQL's acceptance; a third seat for chain A is owed a place); DAILY-4 414,229; CLOSE-2 441,852; CLOSE-3
+   290,717; THE CHAIR 825,812 (743,455 at 21:23): ITS CONTEXT WILL BE SUMMARIZED WITHIN THE HOUR: the pickup note's
+   first block (21:29, amended for E134) is the state. DECISIONS OF THE HOUR: E131 to E134, and the owner's order
+   "Can you fix these:" (section 1). THE SIX: VEIL-33 (CHAIN C: "STORED-UNIVERSE", the stored prose's cure
+   proposed, "LEGACY-TELLS"), VEIL-35 (R4I-PAGE proving; then "TIP? R4-IDS"), VEIL-36 (R5D-FORMS in: 117 standing
+   forms; R5D-SQL dispatched), DAILY-4 ("DAILY-B" accepted and waiting for a landing; "DAILY-C": 34 new lines read
+   and taken by the chair, one reworded), CLOSE-2 (the census: parts 1 and 2 classed, all (a), no (d), no timeout),
+   CLOSE-3 ("VACANT"; the flip's base waits for the word cures). WAITING FOR A PLACE, IN ORDER: "GO PROSE-5"
+   (`prompts/GO-PROSE-5-DISAGREE.txt`), STACK-106 (`prompts/STACK-106.txt`), chain A's third seat, VEIL-37
+   (IMPORT-DOOR). ONE QUESTION IS WITH THE OWNER (two short-lived extra workers): not answered: six stands.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
