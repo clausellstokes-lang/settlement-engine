@@ -42,6 +42,13 @@ verified by ls-remote).
     5818130c4, then green 11 of 11; nothing else in that commit; 212's new sha256 and the rollback's go into this file with the
     cause. Then unit (ii) proper. FOR THE REST OF THE RUN: `tests/lint` WHOLE AT EVERY MERGE (this red rode in because the merge
     was never walker-run). The like-for-like gates run at 2437ffea0 on the seat's own pool: kept.
+78. THE CHAIR, 00:12 UTC 2026-11-22: (1) THE MERGE IS PROVEN, accepted as measured (GATE-1 4/92, 7 LOWER BY RULE, against 87
+    like for like; GATE-2 34/40, not worse, people.allegiance out of it; both reds reproduced; both arms green). (2) THE MARK
+    FOR THIS SEAT IS 700,000 by the chair's read (400,910 at 00:10): no hand-over at 420,000 or 450,000; the seat reads its
+    builders' diffs and merges as the lane's owner; at about 620,000 the chair says finish the unit in hand and bring PART 32
+    fully current, and seats the successor on it then (a seat hands over BEFORE compaction at 784,000, never after). TO SPEND
+    LESS: logs by `tail` and counts only; a builder's report by its summary; 212 and the registry never re-read whole for a
+    unit that did not change them. GO on unit (ii), the marker commit first.
 
 ## 3. Log (every hour from `date -u`)
 - 23:19 seated; tip verified. Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-30, VEIL-29, PART 31, PART 30, brief R3-TELL-5.
@@ -51,3 +58,4 @@ verified by ls-remote).
 - 23:21 make-instruments: check 0, walker 1 (section 1). 23:2x first message to the chair; then the walker red to the chair (that message said "23:23", written WITHOUT a `date -u` read: a slip; the clock read 23:22 after it).
 - 23:26 the chair's two messages read: rulings 76 and 77.
 - 23:49 the pool stands. 23:50 chain1. 00:01 the gates read (section 1). 00:02 the line to the chair (unit (1)).
+- 00:10 the chair: ruling 78 (merge accepted; mark 700,000). 00:10 the unit (ii) builder seated (section 1).
