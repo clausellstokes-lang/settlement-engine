@@ -43,11 +43,12 @@
  * THE CLOCK IS PASSED IN: the Cover is called with a fixed `now` (its injectable seam, the export date being the one
  * non-reproducible byte on a cover), in both renders. No other reader surface reads the clock.
  *
- * THE TOWNS: 300, the old recipe (`hxd-<size>-0..49`, fifty of each of the six sizes), one generation per town, all
- * renders from it. The full pool is kept because the run stays inside a sane budget (277 s on the 4-core builder machine,
- * 2026-11-22, against the old file's 1,800,000 ms allowance, which is kept) and it is the population the old pin walked,
- * so the arm's coverage did not shrink when the hash left. Every one of the 300 carries a Safety label today, so arm (c)
- * counts 300 on each owner's surface.
+ * THE TOWNS: 60, ten of each of the six sizes (`hxd-<size>-0..9`), one generation per town, all renders from it. The old
+ * pin walked 300 (fifty a size) because a stored hash proves only the towns it stores. A differential needs no pool of
+ * that size: a reader surface that carried the owner's line would carry it in EVERY labelled town (the line is the same
+ * reader on every town; the sentinel stands in it wherever the owner's branch is taken), so sixty see what three hundred
+ * see, and every size is still walked (the chair's ruling of 2026-11-22 06:45 UTC: 280 s a run was too dear for that).
+ * Every one of the towns carries a Safety label today, so arm (c) counts all of them on each owner's surface.
  *
  * THE COUNT LINE ("READER DIFF: …") is logged from the walk; Vitest's agent reporter hides a passing file's logs, so read
  * it with `npx vitest run --reporter=default tests/ui/safetyReaderBytes.test.jsx`.
@@ -100,7 +101,7 @@ vi.mock('../../src/domain/display/safetyShown.js', async (importOriginal) => {
 
 /** The Cover's export date, passed in (the clock). */
 const NOW = 'January 1, 2026';
-const PER_SIZE = 50;
+const PER_SIZE = 10;
 
 /** The PDF's text leaves (the goldenViewModel idiom: the sections are plain hook-free functions). */
 function collectText(node, out = []) {
