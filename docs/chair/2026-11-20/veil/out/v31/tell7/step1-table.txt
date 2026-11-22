@@ -1,0 +1,60 @@
+R3-TELL-7 STEP 1: the safety lists served against the house-free twin's, 92 hidden-house towns, every gated setting (10), Reveal off and DM, server and twin (pages: 1840 per engine)
+ENGINE PARITY: A server != twin on 0 pages; B server != twin on 0 pages (all three lists, byte for byte)
+
+THE TABLE: per family and size, towns by their WORST class over every page (EQ equal, ORD equal in another order, FORM presence differs, PART served a strict part of twin, HOLDS served holds what twin lacks, BOTH)
+  crimeTypes
+    city       EQ 24 | PART 12
+        PART: r3m-city-under_siege-0-48, r3m-city-insurgency-1-104, r3m-city-under_siege-1-108, r3m-city-wartime-1-109, r3m-city-none-1-117, r3m-city-infiltrated-0-42, r3m-city-infiltrated-1-102, r3m-city-politically_fractured-1-110, r3m-city-insurgency-1-114, r3m-city-under_siege-1-118, r3m-city-none-0-31, r3m-city-none-1-103
+    metropolis EQ 28 | PART 10
+        PART: r3m-metropolis-under_siege-0-68, r3m-metropolis-insurgency-1-124, r3m-metropolis-under_siege-1-128, r3m-metropolis-indebted-1-136, r3m-metropolis-none-1-137, r3m-metropolis-under_siege-0-58, r3m-metropolis-indebted-0-66, r3m-metropolis-wartime-0-59, r3m-metropolis-none-1-127, r3m-metropolis-wartime-1-139
+    town       EQ 14 | PART 3
+        PART: r3m-town-under_siege-0-28, r3m-town-none-0-17, r3m-town-insurgency-0-14
+    village    EQ 1
+  ops
+    city       EQ 36
+    metropolis EQ 38
+    town       EQ 17
+    village    EQ 1
+  plotHooks
+    city       EQ 36
+    metropolis EQ 37 | PART 1
+        PART: r3m-metropolis-occupied-0-65
+    town       EQ 17
+    village    EQ 1
+
+EVERY STRICT-PART (and BOTH) PAGE GROUPED BY TOWN, FAMILY AND WHAT IS LACKING (with its cause); engines:readings:settings
+  r3m-city-infiltrated-0-42 (city, infiltrated) | crimeTypes | PART | lacks Magical crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-infiltrated-1-102 (city, infiltrated) | crimeTypes | PART | lacks Lawlessness <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-insurgency-1-104 (city, insurgency) | crimeTypes | PART | lacks Survival crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-insurgency-1-114 (city, insurgency) | crimeTypes | PART | lacks Survival crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-none-0-31 (city, none) | crimeTypes | PART | lacks black market food <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-none-1-103 (city, none) | crimeTypes | PART | lacks black market passage <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-none-1-117 (city, none) | crimeTypes | PART | lacks Survival crime <veil:withheld>; Magical crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-politically_fractured-1-110 (city, politically_fractured) | crimeTypes | PART | lacks Magical crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-under_siege-0-48 (city, under_siege) | crimeTypes | PART | lacks Magical crime <veil:withheld>; black market food <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-under_siege-1-108 (city, under_siege) | crimeTypes | PART | lacks Survival crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-under_siege-1-118 (city, under_siege) | crimeTypes | PART | lacks Magical crime <veil:withheld>; black market food <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-city-wartime-1-109 (city, wartime) | crimeTypes | PART | lacks Magical crime <draw> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-indebted-0-66 (metropolis, indebted) | crimeTypes | PART | lacks Magical crime <draw> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-indebted-1-136 (metropolis, indebted) | crimeTypes | PART | lacks Background crime <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-insurgency-1-124 (metropolis, insurgency) | crimeTypes | PART | lacks Lawlessness <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-none-1-127 (metropolis, none) | crimeTypes | PART | lacks Magical crime <draw> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-none-1-137 (metropolis, none) | crimeTypes | PART | lacks desperation theft <veil:crisis?>; black market food <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-occupied-0-65 (metropolis, occupied) | plotHooks | PART | lacks The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way. <veil:withheld> | 20 pages: server+twin dm|own dm|g:000 dm|g:001 dm|g:010 dm|g:011 dm|g:100 dm|g:101 dm|g:110 dm|allOpen dm|off
+  r3m-metropolis-under_siege-0-58 (metropolis, under_siege) | crimeTypes | PART | lacks Magical crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-under_siege-0-68 (metropolis, under_siege) | crimeTypes | PART | lacks black market food <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-under_siege-1-128 (metropolis, under_siege) | crimeTypes | PART | lacks Magical crime <veil:withheld> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-wartime-0-59 (metropolis, wartime) | crimeTypes | PART | lacks Magical crime <draw> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-metropolis-wartime-1-139 (metropolis, wartime) | crimeTypes | PART | lacks Background crime <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-town-insurgency-0-14 (town, insurgency) | crimeTypes | PART | lacks Background crime <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-town-none-0-17 (town, none) | crimeTypes | PART | lacks Background crime <veil:fallback> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+  r3m-town-under_siege-0-28 (town, under_siege) | crimeTypes | PART | lacks desperation theft <veil:crisis?> | 20 pages: server+twin off|own off|g:010 off|g:011 off|g:110 off|allOpen dm|own dm|g:010 dm|g:011 dm|g:110 dm|allOpen
+
+THE CAUSES, by family: strict-part TOWNS by the cause of each lacking entry (a town counted once per cause)
+  crimeTypes veil:crisis?: 2 town(s): r3m-town-under_siege-0-28, r3m-metropolis-none-1-137
+  crimeTypes veil:withheld: 14 town(s): r3m-city-under_siege-0-48, r3m-metropolis-under_siege-0-68, r3m-city-insurgency-1-104, r3m-city-under_siege-1-108, r3m-metropolis-under_siege-1-128, r3m-city-none-1-117, r3m-metropolis-none-1-137, r3m-city-infiltrated-0-42, r3m-metropolis-under_siege-0-58, r3m-city-politically_fractured-1-110, r3m-city-insurgency-1-114, r3m-city-under_siege-1-118, r3m-city-none-0-31, r3m-city-none-1-103
+  crimeTypes veil:fallback: 6 town(s): r3m-metropolis-insurgency-1-124, r3m-metropolis-indebted-1-136, r3m-town-none-0-17, r3m-town-insurgency-0-14, r3m-city-infiltrated-1-102, r3m-metropolis-wartime-1-139
+  crimeTypes draw: 4 town(s): r3m-city-wartime-1-109, r3m-metropolis-indebted-0-66, r3m-metropolis-wartime-0-59, r3m-metropolis-none-1-127
+  plotHooks veil:withheld: 1 town(s): r3m-metropolis-occupied-0-65
+
+THE HOLDS PAGES (served holds what the twin lacks), by town and family: what is extra
