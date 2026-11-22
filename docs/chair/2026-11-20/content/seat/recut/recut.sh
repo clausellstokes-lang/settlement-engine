@@ -124,6 +124,13 @@ const hit = (r, [f, t]) => r.file === f && r.title.includes(t);
 // (2) THE READING, filled by the integrator after reading each red: file -> the born pin's kind
 const BORN = {
   // BORN-MAP
+  'tests/generators/bar3PeopleTies.test.js': 'prose anchor on a born town (a KEEP line of r2r-town-14 no longer prints)',
+  'tests/domain/bar4PeopleKinds.test.js': 'prose anchor on a born town (C41801 bar0-town-occupied-rand-22: the liveness sibling moved)',
+  'tests/domain/bar5PowersStanding.test.js': 'prose anchor on a born town (C35627 bar0-town-calm-rand-26: the liveness sibling moved)',
+  'tests/generators/powersReadTheRosterP31.test.js': 'prose anchor on a born town (r2r-town-34: the cured line no longer prints)',
+  'tests/generators/people/goalSentencesOnceInTown.test.js': 'a count gate over born towns (the holdings moved per tier: 2/4/1/92/348/781)',
+  'tests/generators/people/seatKeeperContender.test.js': 'a born fixture\'s rank (rvf-succession_void-town-4: the keeper heads Landed Gentry; the rule\'s two census arms stay green flipped)',
+  'tests/domain/tonightOwnGoal.test.js': 'a born town\'s Tonight sheet (a pinned card goal is undefined flipped)',
 };
 const list1 = reds.filter((r) => TEN.some((k) => hit(r, k)) || TWO.some((k) => hit(r, k)));
 const rest = reds.filter((r) => !list1.includes(r));

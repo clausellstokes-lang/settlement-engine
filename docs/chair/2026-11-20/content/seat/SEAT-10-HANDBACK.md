@@ -8,11 +8,11 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T00:04:37Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T03:47:17Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
-  - **The lane's own commits since:** `18530fc0d` (unit 2's docs, the re-cut script); `5e26f4062` (wiring census); `ef5abf4da` (lighting census); `9fa2612b1` (KEY-PROBE's play addendum); `70e4e1945` (writer-reach, item 89); `5c9fa5b81` (unit 2's play-time answer, item 90).
+  - **The lane's own commits since:** `18530fc0d` (unit 2's docs, the re-cut script); `5e26f4062` (wiring census); `ef5abf4da` (lighting census); `9fa2612b1` (KEY-PROBE's play addendum); `70e4e1945` (writer-reach, item 89); `5c9fa5b81` (unit 2's play-time answer, item 90); `18e291616` (UK-LEGACY's brief); `a4b3fff4a` (UK-LEGACY merged, BUL `d9133148d`, item 91). The others are hand-back commits.
 - **The working line:** `lane/join-2026-11-14` has moved to `89ab44e34` (point 87, the sameness door: no `src/`, two new `tests/lint` walkers). By the chair's word of 23:41Z the lane stays on `a64619510` for the census; the chair joins the newer line at the landing.
 - **UNIT 1 (the line): DONE except its proofs in flight.**
   - **The doors:** each re-taken by its own door, red before and green after: the wiring census, the lighting census, writer-reach (on the chair's three-way condition, item 89). The `npcGenerator.js` size baseline needed nothing: `sizeBaseline.test.js` is green at 930. The mutation manifest, the chair's union, is green.
@@ -24,11 +24,14 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **UNIT 2: DONE.**
   - **At birth (item 87):** accepted by the chair at 23:42Z.
   - **Over play time (item 90):** accepted by the chair at 00:10Z (the pulse's own road not exercised; the coup road stands in for it).
-- **UNIT 3 (the flip's census, re-cut): RUNNING** (the set plus flipped shards 1 and 2, launched 00:28:26Z by the chain's own `date -u`; then the control's 1 and 2, then `lists`).
-  - **The flipped clone:** made by `recut/recut.sh prep` at `ef5abf4da` in the scratchpad (`census-flip`, exactly the two dials). Its `src/` and `tests/` equal the tip's, because the doors since touched only registers under `scripts/`, `docs/` and `tests/lint/.lighting-census-baseline.json`.
-  - The re-cut runs one run at a time; the outputs go to the scratchpad's `census` directory, and the four lists are folded into this file.
+- **UNIT 3 (the flip's census, re-cut): DONE (item 92; the four lists in `recut/CENSUS-LISTS.md`).**
+  - Flipped: 46 reds in 26 files. Control: 24 in 16. The lists are (1) 10, all ten pins red; (2) 12 rows in 7 files; (3) 0; (4) 24, 23 of them in RED-AT-LINE by name.
+  - The 24th known red is `seatLawSavedTown` arm 4. It is a lane red and is **cured by UK-LEGACY** (item 91).
+- **UK-LEGACY (the chair's order of 02:52Z, before "SEAT <commit>"): MERGED at `a4b3fff4a`.**
+  - At the merged tip: `seatLawSavedTown`, `seatBandFold` and `roleCategory` pass 60/60 (03:46:04Z).
+  - **THE DARK PROOF** `confine-two.sh a64619510 a4b3fff4a` is RUNNING in the exclusive slot (launched 03:46Z).
 - **UNIT 4 (rule 8, "SEAT <commit>"):** not started.
-- **OUT:** none. BKP is finished.
+- **OUT:** none. BKP and BUL are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
@@ -76,13 +79,47 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
      - coup 27 / 27.
    - **Cost:** 28 s.
 
+91. **UK-LEGACY: a town that reads law 1 takes law 1's band whoever regenerates it (the chair's order of 02:52Z; brief `briefs/UK-LEGACY.md`, report `briefs/UK-LEGACY-REPORT.md`).**
+   - **The red (CONFIRMED by single-file runs in a scratch clone):** `tests/domain/seat/seatLawSavedTown.test.js` arm 4, "THE LEGACY EDGE". It was green 5/5 at `b2845bafc` and red at the UK merge `9624a7ac4`. It stayed red at `3e8e2e37d` and at this seat's `47d4e959f`, dark and flipped. It was not in RED-AT-LINE, because the file is the lane's.
+   - **The mechanism (CONFIRMED by the cure):** `npc/powerBand.js :: powerBandOfRole` reads `seatsByHolder(config)` off the config it is handed. On the regen road that is `settlement.config || config`, the FORM config for a legacy save, and the form holds a lit marker once a lit town was Library-loaded. So a law-1 town's regenerated people took law 2's band fold.
+   - **The cure (BUL `d9133148d`, merged `a4b3fff4a`):**
+     - `seatLaw.js :: withRecordSeatLaw(config, record)`, one export through the one resolver. It returns the same reference when the record's law and the handed config's already agree.
+     - `generateSettlementPipeline.js :: regenNPCsPipeline` and `regenHistoryPipeline` hand down `withRecordSeatLaw(handedConfig, settlement)`. This one seam covers the store and the engine service's passes.
+     - Nothing in `tests/` changed.
+   - **GREEN (BUL, CONFIRMED):**
+     - `seatLawSavedTown` passes 5/5 unflipped and 5/5 flipped (in a second scratch copy with exactly the two dials). A pre-cure copy reproduces the red.
+     - Unmoved: seatBandFold 13, roleCategory 42, holderOfSeat 51, seatContest 25, seatTable 45, seatTransfer 39, seatLawWiring 6.
+     - The doors are green with nothing moved: sizeBaseline (`generateSettlementPipeline.js` 740 → 747, under 800), densityCreateBoundary 17, writerReach 52, the lighting census 34, wiring-census `--dry` delta 0. eslint and domain-strict (1113 at its ceiling) pass too.
+   - **THE SWEEP:** the regen, re-derive, clone and load roads are in the report's table. **Named to the chair, not cured (outside the manifest):**
+     - (a) The hosted `engine-generate` runs the committed bundle `supabase/functions/_shared/engineBundle.js`, built from `d989d32` before the seat train; it holds no seat-law code at all. The cure reaches it only when the bundle is rebuilt, and that rebuild is the owner's. `tests/build/engineBundleReplay.test.js` is already red at the line, in RED-AT-LINE.
+     - (b) `castPowers.js :: raiseToOfficeBand` calls `powerBandOfRole(officeRole)` with no config, so it always reads law 1, by its comment.
+     - (c) `power/factionStanding.js :: annotateFactionStanding` is handed a partial seat with no `config` by `rulingStructure.js` at birth, so it reads law 1 (fail closed).
+     - (d) The re-derive road (`editSlice.js :: storedConfigFor`) reads the save row's stored config, never the form; the row config's provenance was not traced end to end (PLAUSIBLE).
+     - (e) Comment drift in `seatLaw.js`'s header and `npcGenerator.js:128`.
+
+92. **THE FLIP'S CENSUS, RE-CUT (unit 3; CONFIRMED by run; the lists in `recut/CENSUS-LISTS.md`, the record in `recut/out/census.json`).**
+   - **The set:** 810 files: 518 birth-reaching files plus `tests/generators`, `tests/data` and `tests/domain/seat`.
+   - **The runs:** the flipped copy, made by `recut.sh prep` at `ef5abf4da` with exactly the two dials, ran 00:28:26Z to 02:04:28Z. The control, on the checkout at `47d4e959f`, ran 02:04:44Z to 03:44:34Z. Two shards a side, `--maxWorkers=2`.
+   - **(1) The dial's own pins: 10.** All ten of SEAT-6-TO-LIGHT §2 are red. Neither conditional is red.
+   - **(2) Born fixtures that move: 12 rows in 7 files**, against SEAT-6-TO-LIGHT's "the largest unknown, 516 files":
+     - prose anchors on born towns: bar3PeopleTies, bar4PeopleKinds, bar5PowersStanding, powersReadTheRosterP31;
+     - a count gate over born towns: goalSentencesOnceInTown, six tiers;
+     - a pinned rank on one forced town: seatKeeperContender arm 2 (the rule's two census arms stay green flipped);
+     - a pinned card goal: tonightOwnGoal.
+     Each is re-pinned AT the flip, by the flip's unit.
+   - **(3) Anything else: 0.**
+   - **(4) Red without the flip: 24.** 23 are named in RED-AT-LINE (`recut/out/list4-vs-line.tsv`). The 24th is `seatLawSavedTown` arm 4, red unflipped and cured by UK-LEGACY (item 91).
+   - **Neither way:** no flipped red falls outside the control's files, and the flip cures no red.
+   - **Against SEAT-6-TO-LIGHT:** §2's worklist stands as written. Its "born fixtures" unknown is now 7 files. Its §3 legacy-edge PLAUSIBLE became a real lane red, now cured (item 91).
+
 ## 2. THE UNITS
 
 | unit | branch | state |
 |---|---|---|
-| 1 THE LINE | `lane/seat-10-2026-11-21` (base `3e6894120`) | merged by the chair, fast-forwarded; doors done (items 88, 89); `tests/lint` whole and confine-two in flight |
+| 1 THE LINE | `lane/seat-10-2026-11-21` (base `3e6894120`) | merged by the chair, fast-forwarded; doors done (items 88, 89); `tests/lint` whole 219/220 (the red taken by its door); confine-two EQUAL |
 | 2 THE KEY QUESTION | BKP (subagent; `keyprobe/`) | DONE at birth (87) and over play time (90) |
-| 3 FLIP CENSUS (re-cut) | `recut/recut.sh`; scratch clone `census-flip` at `ef5abf4da` | prepared; shards next |
+| 3 FLIP CENSUS (re-cut) | `recut/recut.sh`; scratch clone `census-flip` at `ef5abf4da` | DONE (item 92; `recut/CENSUS-LISTS.md`) |
+| UK-LEGACY (the chair's order) | BUL (subagent; scratch clone `bul`, `d9133148d`) | MERGED `a4b3fff4a` (item 91); its dark proof running |
 | 4 RULE 8 | — | not started |
 
 ## 3. STORED FIGURES THIS SEAT MOVED
