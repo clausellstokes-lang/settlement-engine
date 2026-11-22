@@ -115,6 +115,31 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   neither 212 nor the registry. Each builder's brief says in its first line what it reads whole and that it reads nothing else
   whole. IF THE SEAT'S RECORD REACHES 620,000 BEFORE THE MERGE: "VEIL-33 HANDS OVER <commit>" at R5C5-SQL's commit, this
   section current.
+- R5-RECENT'S STATE AT 16:12 UTC (FOR VEIL-34; the cure's branch `v33-r5cure` in /home/user/wt/r5c, pushed as
+  `lane/veil-33-2026-11-22-r5cure-wip`):
+  BUILT, COMMITTED, READ WHOLE BY THE SEAT: R5C5-SQL at bbad923a5 (pushed). In 212 `_gallery_veil_withhold_always` and the twin
+  `src/domain/display/galleryWithholdAlways.js :: withholdAlways`, after the `power.fingerprint` rule: `pressureSentence` leaves
+  where it EQUALS the stored `powerStructure.recentConflict` (judged on the document as passed in), then `recentConflict` leaves
+  always; ARM D markers `power.recentConflict` and `power.recentConflict.pressureSentence` on lines of their own. 212
+  0352a502… -> ff20ed89e3e67240…; the rollback 8cbd7d1c…, 211 eface6d0… and 210 9118c235… unchanged; no new helper. The registry
+  row `power.recentConflict`: withhold/always/re-derive, writer `W.governance` (`buildGovernanceLabels`; `transferRulingPower` named
+  in the scope, no site for it, as ARM A finds none), site moved to `generatePowerStructure`; the copy row
+  `power.recentConflict.pressureSentence` (`copyOf`, `built: false` by the copy shape, so not in `registry.json`; its `page:
+  're-derive'` is the shape's default and the page must NOT re-fill it). `registry.json` +1 row, `--check` 0. Its gates: the
+  registry walker green, eslint ok, the composed-hosts walker red 27 (its census pin, R5C6's; the 26, R5-DESC's).
+  BUILDING: R5C6 (seated 15:57, brief `briefs/R5C6-BRIEF.md` on this branch, plus the seat's notes: master's stored shape covered
+  or a STOP with the path; reader B lazy; the differential and the plant on the SERVER (pglite, 212 applied) and the twin; the
+  server's c reported). It writes `pageRederive.js :: rederiveRecentConflict` (reader B), the plant green by absence, the fidelity
+  arm (the class: r5c2-m3-hamlet-8), the differential, the readers' walker, the composed-hosts walker re-stated, and the gates
+  (tests/lint whole, typecheck, eslint, build, first paint). NOT YET PROVEN: all of it, and c on the server.
+  THE MERGE (the writer's): read R5C6's diff whole; re-run the plant and walkers red-at-bbad923a5's-parent and green; re-make the
+  pool on the cured tree in a NEW directory (lower-case template, `out/v33/h/chainH2.sh`'s pattern) and read both gates; merge
+  `v33-r5cure` into this branch; "R5-RECENT MERGED <commit>".
+  FOR R5-DESC'S WRITER: the registry's `power.conflicts` scope still says "a conflict naming a withheld power follows
+  power.recentConflict" (now withheld always): stale, re-word it in R5-DESC.
+  RULINGS ON THIS UNIT: 99 (E92), 100 (E93), 101 (E94), 102 (E97), 103 (E98), section 2. THE JOIN PROBE: JOINPROBE.md on
+  `lane/veil-33-2026-11-22-joinprobe-wip` (df7447e58), `docs/chair/2026-11-20/veil/out/v33/joinprobe/JOINPROBE.md`, with
+  JOINPROBE-PASS1.md, lit/JOINPROBE-PASS2.md, conflicts.md and briefs/IX-TROUBLE-HOOKS-BRIEF.md.
 - THE HAND-OVER (ruling 99 (7)): VEIL-33 HANDS OVER AT R5-RECENT'S MERGE ("VEIL-33 HANDS OVER <commit>"), R5-DESC's brief written
   (`briefs/R5-DESC-BRIEF.md`, widened by ruling 98 and the contenders, row 18) and its plant if it costs little. VEIL-34 (seated by
   the chair on `prompts/VEIL-34.txt` within the hour) reads in beside; its units as writer: R5-DESC, R4-IDS, (iv), (v), (vi),
@@ -286,3 +311,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:32 R5C2 STOPPED at its own mark before the first edit (8d6643a10); V33-R5C3 seated fresh on v33-r5cure. 15:34 the chair's E94 (ruling 101); R5-DESC's brief gains (c) and the cause question.
 - 15:40 R5C3's STOP read and sent (141831a1a, pushed as -r5cure-wip). 15:42 E97 (ruling 102); the brief's E97 section 9aa4f37b3; V33-R5C4 seated, the count and the scan before the first edit.
 - 15:50 R5C4's STOP read (820553c8a; the count re-read). 15:51 the split sent; R5C5-SQL seated. 15:52 E98 (ruling 103). 15:53 R5C6's brief written.
+- 15:55 R5C5-SQL in (bbad923a5; the diff read whole). 15:57 R5C6 seated. 16:00 bbad923a5 pushed (-r5cure-wip). 16:11 the chair: VEIL-34 seated at 16:10; section 1 brought current for it.
