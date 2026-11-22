@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T15:04:34Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T16:16:44Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -72,8 +72,7 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **THE DARK PROOF:** `confine-two.sh c110dd85b c61571627` is **EQUAL** (`all 07873739…`, 1245; 14:58:08Z).
   - **E81 (the chair):** the hat rule is pinned both ways by name (moves: u7p-town-8, Judith Weber → Felix Naumann; keeps: a crown, Aldric Vane, synthetic; and a council's own Mayor, u7p-town-1, Konrad Berger). The tonight sheet prints no office word for the old person (u7p-metropolis-15: "Dietrich Engel" plus the hook's text). The leaf for U5-STALE is not possible in a few lines (the DM's road is static); its own first-paint cost is +661 raw, +219 gzip and −32 br.
   - **RULE 8 (a), DONE (`rule8b/figures.txt`):** the build is clean; VERIFY_DIST 61/66, the five build rows red as on the line. First paint 1,184,741 / 376,992 / 316,535 against point 98's 1,184,071 / 376,756 / 316,424 (+670 / +236 / +111); the worker 2,708,894 (+4,577); the engine chunk 932,367 (+2,695).
-  - **RULE 8 (b), RUNNING:** 2,860 of 3,771 files (`rule8b/files.txt`): the touched directories with `tests/components` and `tests/pdf` whole (`PowerStrata.jsx`), `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, `tests/domain` flat whole, every file naming a changed module, `tests/lint` and `tests/build`. Four shards, ONE AT A TIME (`rule8b/run.sh <k> 4`, its JSON in the scratchpad's `r8b/`). Shard 1 started at about 15:06Z; then shards 2, 3 and 4. Read the failing rows BY NAME against a fresh `ci/RED-AT-LINE.tsv` (63 rows).
-  - **THEN THE FLIP'S CENSUS AT THIS TIP:** `recut/recut.sh prep c61571627 <flip> <out>`, `sets`, flipped shards 1 and 2, and the control (the unflipped shards, or the rule-8 JSON for the files both runs hold); then `lists`. Fold what U6 and U7 change against item 92's lists. U7's birth move (112 of 160 lit births: the ruler and the chain's faction are the holder) is INTENDED (E70).
+  - **RULE 8 (b), DONE by the chair's E90 as amended (`rule8c/RULE8.md`):** 699 files, 9,648 tests, 18 failed, ALL on RED-AT-LINE (63 rows); `tests/lint` whole 3,364 tests with the line's three red. The four- and three-shard runs were stopped by the chair's rulings before any result. The flip's census is the close's: `FLIP-LIST.md` is the seat's list on paper.
   - **THEN "SEAT-B c61571627" (or the tip with only docs after it)** to the chair, with:
     - the conflicts (above);
     - the five figures;
