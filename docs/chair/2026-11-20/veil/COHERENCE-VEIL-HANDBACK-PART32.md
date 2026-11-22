@@ -88,8 +88,8 @@ verified by ls-remote).
   where a served list lacks an entry the reference writes; 26/92 today, all veil; ~3 min single-process. SENT TO THE CHAIR 05:09 with
   the cure's shape (crimeTypes and plotHooks RECOMPOSED over served facts by the same reference, both engines; three causes need
   criminalEffective and the stress flags in 212: a port with a parity walker). AWAITING THE CHAIR'S WORD ON THE ARM'S FORM AND THE CURE.
-- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the chair's ruling on the cure (ruling 84: THE OTHER WAY, recommended, or the
-  port); then THE CURE'S UNIT with the arm as its red (26/92 today); then units (iv) relations, (v) the three sent forms +
+- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): UNIT (viii) by ruling 85 (THE OTHER WAY: its five steps in order; a brief to cut
+  from ruling 85, `briefs/R3-TELL-7-BRIEF.md`'s laws and unit (vii)'s hand-back), the arm's two halves its red (26/92 today); then units (iv) relations, (v) the three sent forms +
   `criminalCaptureState` 'none' (ruling 82), (vi) the tooth, per `briefs/R3-TELL-5-BRIEF.md`; then "R3 <commit>" + IMPORT-DOOR.
 - FOR THE SUCCESSOR, FROM THE CHAIR (05:11, two lines): (i) THE TROUBLE LANE LANDS ON THE LINE BEFORE "R3" and brings stored hooks of
   troubles (`history.currentTensions[].plotHooks`) and the cause sentence's reader; its exemption for the hooks on the sameness
@@ -97,7 +97,8 @@ verified by ls-remote).
   share, THAT ARM REDS AT THE MERGE OF THE LINE, BY DESIGN: the hooks are then this lane's instrument's to hold (cause 6 of unit (vii)
   is that class). (ii) THE OWNER'S FINISH LINE (2026-11-22, left to the chair): the bar stays "NOT INFERABLE" (GATE-1 0, GATE-2 0, then
   the fresh security reader); the first deploy waits for it; "R3" is measured ON THE LINE WITH the trouble lane, the two laws and
-  Daily Life landed.
+  Daily Life landed. CORRECTED BY RULING 85: the line is NOT merged into the lane before the close; "R3" is reached ON THE LANE;
+  the JOIN PROBE (a scratch copy of the lane with the line merged, the pool re-made, both gates dark and lit) runs when the chair says.
 - THE INSTRUMENTS (this container only; a successor in a new container re-makes them by PART 30 section 4 with this seat's
   `out/v31/chain0.sh`, `chain1.sh`, `after0.sh`, `after1.sh`; a seat's re-runs of a unit: `out/v31/chain2.sh` / `u3/chain3.sh`
   shape, ADDING `node scripts/check-full-typecheck.mjs`; the twin probe `out/v31/twins/twins.probe.jsx` (RV9_ONLY=<seeds>)).
@@ -195,6 +196,22 @@ verified by ls-remote).
     needs importRederive; (e) RECOMMENDED: THE OTHER WAY (VR37 (a), the lane's first preference; R2's withhold-always + pageRederive
     pattern; no generator branch in SQL): one unit (+1 if (a) finds dependents), against two to three for the port.
     THE CHAIR RULES THE CURE ON THAT ANSWER; THE SUCCESSOR IS SEATED ON PART 32 FOR THE CURE'S UNIT.
+85. THE CHAIR, 05:14 UTC 2026-11-22 (THIS PART'S LAST RULING): RULED: THE OTHER WAY, as recommended (VR37 (a), R2's proven pattern:
+    withhold always, the page re-derives). NO GENERATOR BRANCH GOES INTO SQL. THE SUCCESSOR BUILDS IT AS UNIT (viii), IN THIS ORDER:
+    (1) FIRST THE MEASURE of the dependents named in ruling 84 (a): `plotHooks` (keyed by the same flags), the Defense key's `magical`
+    reading, `EconomicsTab`'s smuggling filter (ruling 64), DS-DEF-3 and DS-DEF-4's crime-key wordings in `publicProse`: each then FED
+    BY THE READER, or WITHHELD AND RE-DERIVED by the same pattern, or SHOWN NOT TO TELL; one more unit only if the measure finds a
+    dependent that needs it. (2) THE ROW in 212 and its twin (`crimeTypes` withheld, the key, on every shared read of every place,
+    both engines); ONE READER (the engine's own writer, `generateSafetyProfile` then `settleCrimeLinesToSignal`, on the served config,
+    tier and houses); A READER CENSUS in the door walker's shape (a surface that reads the stored key on a shared document reds);
+    `importRederive`. (3) THE ARM, two halves: NO SHARED READ CARRIES THE KEY (total); ON ALL 92 THE READER'S LIST ON THE SERVED
+    DOCUMENT EQUALS THE RECORD REFERENCE (unit (vii)'s 26 are its red-first). (4) EXECUTED, NOT PLAUSIBLE: every input the writer
+    reads survives the projection. (5) THE MERCHANT-ARMY HOOK'S ROW: the map row corrected in both engines if its flag is
+    served-derivable; else that hook withheld and the town LOWER BY RULE, listed.
+    A CORRECTION TO THE CHAIR'S 05:11 LINE (ii) (section 1 states it so): THE PROMPT'S RULE STANDS: the working line is NOT merged into
+    the lane before the close, and "R3" is reached ON THE LANE. NEW: A JOIN PROBE the successor runs WHEN THE CHAIR SAYS: the line
+    merged into a SCRATCH copy of the lane, the pool re-made there, the two gates read, dark and with the two laws lit: a measure of
+    what the join adds, never the join. The chair: the stop at step 2 and the caution on the twin were both right.
 
 ## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
 | file | failed tests | sort (a) lane / (b) old base |
@@ -237,3 +254,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 04:24 the chair's ruling 83 read; relayed to the (vii) builder 04:24.
 - (before 05:09, not clocked) unit (vii)'s builder returned (STOP after step 2); pushed -wip; 9185c48cf merged (docs only); 05:09 the line to the chair. 05:09 section 1 current.
 - 05:13 the chair's 05:11 message read (ruling 84). 05:14 the answer sent; PART 32 brought fully current for the hand-over.
+- 05:17 the chair's 05:14 ruling (85) read: THE OTHER WAY. 05:18 written as PART 32's last ruling; pushed; the one line to the chair.
