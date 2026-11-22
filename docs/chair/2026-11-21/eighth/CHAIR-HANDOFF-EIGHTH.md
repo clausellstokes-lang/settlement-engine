@@ -1115,6 +1115,38 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   line's tip, the cause named first: E67); it is parked again at its line. STACK-99 IS SEATED WHEN THE FIRST OF
   "SEAT-B" AND "FORTUNE-B" COMES (the place that seat frees), with "CLOSE-FIXTURE 6f579f0e7" as point 99 and
   every line that has come by then; PAGE-BAR7 joins the stack it is ready for.
+- E86 · A TRUE FAULT OF THE LIT FORTUNE LAW, FOUND BY THE FLIPPED RUN; ITS CURE IS THE FORTUNE LANE'S NEW UNIT "U8 CRISIS-POWER" (2026-11-22 14:36 UTC; CLOSE-1's lit half
+  on `lane/close-1-lit-scratch-2026-11-22` at e987c3e36, CONFIRMED by run; fortune lit ALONE gives the same misses;
+  the seat's law lit alone holds). THE GUARD: `tests/generators/people/dualHatPoliticalMass.test.js` > "a small place
+  keeps the power the fold of the office's face into the leader's house cut" (green dark; on no list). LIT, three of
+  eight seeded small places lose their crisis's own power and keep one face ("Elder Council*" alone):
+  rvf-slave_revolt-thorp-5 (no Revolt Leadership), rvf-wartime-thorp-2 (no War Council), rvw-thorp-86 (no Highborn
+  Circle). On the slave-revolt thorp, dark to lit: prosperity Poor to Comfortable; legitimacy 19 "Legitimacy Crisis"
+  to 38 "Contested"; factions [Revolt Leadership 59, Elder Council 41] to [Elder Council 100]; the revolt's leader
+  gone from the cast; stability still "Unstable (revolt not contained)": A PAGE THAT CONTRADICTS ITSELF. RULED:
+  (1) it is FORTUNE-7's unit U8: THE DIAGNOSIS FIRST (the gate named: file, symbol, the value that crossed it), sent
+  to the chair before a cure is built; THE CURE'S RULE IS THE CHAIR'S (its leaning: a crisis's own power and leader
+  exist because the crisis exists; the size-relative reading may move what a standing READS as, never whether the
+  crisis has a body); red first under the explicit `_fortuneLawVersion: 2` arm; E32's figures re-measured where the
+  cure can move them; the dark proof equal. (2) IT DOES NOT HOLD "FORTUNE-B" (the second merit lands dark); IT HOLDS
+  THE FLIP. (3) `defenceParts` R13 ("v3build-village-3: 6.9 ≤ 6.8", PLAUSIBLY the X4 floor): CLOSE-1 verifies; if (d),
+  the same seat. (4) THE FLIP'S CENSUS, FIRST PART (tests/generators, data, property; both laws lit): 99 red: 20
+  listed, 79 new: 77 pins or born anchors (class (a): kept BY NAME; goldens apart for the owner's signing), this (d)
+  and one (d?); 47 of the 79 are on neither lane's own flip list (the two laws' interaction). (5) THE LIT SCRATCH REF
+  gets the merge of c110dd85b on top when the lit half ends (it then equals the line plus the three dials exactly).
+  TOLD TO THE OWNER the same hour in plain words.
+- E87 · THE VEIL UNDER THE LIT LAWS: THREE MORE ITEMS NEED AN OWNER BEFORE "R3"; THE WRITER'S SUCCESSOR IS PLANNED (2026-11-22 14:36 UTC; VEIL-33's 14:31: (viii)'s
+  hand-over merged as 929739889 with no conflict, its diff read whole, no fault; the pool re-made after a slip in a
+  template's name; R5-RECENT's brief abd68e653, its plant and walker written and unrun, the cure not started; ITS
+  ORDER BEFORE "R3": R5-RECENT, (iv), (v), (vi), IMPORT-DOOR; its count about 480,000). THE THREE (the reader's list
+  rows 15 to 17): (a) the inversion harness cannot judge `legitimacy.label/score/colours` lit (its re-deriver is the
+  dark legitimacy); (b) act T's power descriptions name or spell a hidden power and the mask reads "the an unseen
+  interest" (R5's `power.desc` row); (c) a hidden power's representative is served under `npc_power_<slug>` (VR10's
+  re-key, R4-CURE-2). RULED: each gets a named unit in the writer's order or a stated reason it may follow R3;
+  EVERYTHING THAT CAN NAME OR SPELL A WITHHELD POWER ON A LIT READ COMES BEFORE (iv), (v), (vi) AND IMPORT-DOOR; (b),
+  if not inside R5-RECENT, is "R5-DESC" directly after it (withheld, not masked; both engines; a plant red first;
+  the mask's wording cured there). THE WRITER NAMES ITS HAND-OVER UNIT NOW; VEIL-34 IS SEATED BESIDE IT ONE UNIT
+  BEFORE (it reads in on what is merged; it writes nothing of 212, the twin or the registry until the hand-over).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
