@@ -16,13 +16,14 @@
  */
 import { describe, expect, test } from 'vitest';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { dirname, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { NPC_FACTION_LOYALTY } from '../../src/data/npcData.js';
 import { lineText } from '../../src/domain/facts/drawDeclared.js';
 import { hookThemeKey } from '../../src/domain/hookThemes.js';
 
-const ROOT = process.cwd();
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const HOME = 'src/data/npcData.js';
 
 /** @param {string} dir @param {string[]} out @returns {string[]} */

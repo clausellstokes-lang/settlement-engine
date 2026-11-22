@@ -55,7 +55,8 @@
  */
 import { describe, expect, test } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { NPC_FACTION_LOYALTY, NPC_FACTION_LOYALTY_THEMES, STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import {
   HOOK_THEMES,
@@ -80,7 +81,7 @@ import {
   readDigestBlock,
 } from '../../scripts/hook-theme-digest.mjs';
 
-const ROOT = process.cwd();
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 /** Every authored loyalty template the generator can draw, in pool order (CENSUS-3e: a declared row is `{ text, needs }`; its text is the template). */
 const livePoolTemplates = Object.values(NPC_FACTION_LOYALTY).flat().map(lineText);
 /** Every (pool, index) cell with its text and its authored theme. */
