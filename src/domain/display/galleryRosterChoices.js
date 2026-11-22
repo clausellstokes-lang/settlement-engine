@@ -83,6 +83,11 @@ export const CRIMINAL_INST_LABELS = Object.freeze(/** @type {Record<string, stri
   'smuggling network': 'Smuggling Network', 'street gang': 'Street Gang', 'front businesses': 'Front Businesses', 'underground city': 'Underground City',
   'gambling den': 'Gambling Den', 'gambling halls': 'Gambling Halls', 'gambling district': 'Gambling District', 'red light district': 'Red Light District' }));
 const COVERT = '(covert)';
+/** R3-TELL-5 unit (ii): each criminal services tag by the crime types whose row it is (servicesGenerator.js: the stress rows
+ * and the crime-type rows); 212's `svctags`, the same literal. */
+const SERVICE_TYPE_TAGS = Object.freeze(/** @type {Record<string, string[]>} */ ({ '(street gang)': ['Street gang activity'], '(smuggling)': ['Smuggling'],
+  '(arcane underground)': ['Magical crime', 'Arcane black market'], '(state apparatus)': ['State predation'], '(criminal governance)': ['Criminal governance'],
+  '(religious fraud)': ['Religious fraud'], '(commercial crime)': ['Commercial crime'] }));
 const ROSTER_FLAGS = Object.freeze(['hasCriminalInst', 'hasSmuggling', 'hasThievesGuild', 'hasGangInfra', 'hasMarket']);
 const RELIGIOUS_HOUSE = /church|cathedral|temple|monaster|friary|shrine|abbey|chapel/i;
 const ACCESS_TO = /^access to/i;
@@ -168,6 +173,7 @@ export function applyRosterChoices(s, pub, idOf) {
   // WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` stays only BY POSITIVE ACCOUNT: its `house` a
   // house this read lists, its `power` null, absent or a power this read serves (both served lists); else THE KEY leaves, the
   // open place's form (ruling 47: no husk; a husk the sweep left names no listed house). SQL twin: 212, the same rule
+  // registry: people.allegiance
   if (Array.isArray(s.npcs)) {
     const listed = new Set(houses.map(h => str(h.name)).filter(v => v !== ''));
     const powersServed = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
@@ -216,6 +222,17 @@ export function applyRosterChoices(s, pub, idOf) {
   const svc = recAt(s, 'availableServices');
   if (svc && Array.isArray(svc.criminal)) {
     svc.criminal = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
+    // R3-TELL-5 unit (ii) (the chair's ruling 73 (2); ruling 74 (ii)): (e) BY POSITIVE ACCOUNT, a criminal services row stays
+    // only where its `institution` is the name of a house this read lists, or the tag of a crime type a shown house or a
+    // crisis raises (SERVICE_TYPE_TAGS), the type kept by VR39's attribution over `pub`'s own list (the grouping that shuts
+    // the types does not shut the services). Every other row (the climate's '(lawless)', '(informal)'; a non-object) leaves;
+    // what is left may be [] (VR29). SQL twin: 212, the same rule
+    const types0 = objectsOf(es0(pub)?.crimeTypes);
+    const accTypes = new Set(types0.filter(c => typeof c.type === 'string' && Object.prototype.hasOwnProperty.call(CRIME_TYPE_RAISERS, c.type)
+      && !CRIME_TYPE_RAISERS[c.type].some(f => raised[f])).map(c => /** @type {string} */ (c.type)));
+    const listedNames = new Set(houses.map(h => str(h.name)).filter(v => v !== ''));
+    svc.criminal = svc.criminal.filter(x => isRec(x) && typeof x.institution === 'string' && (listedNames.has(x.institution)
+      || (Object.prototype.hasOwnProperty.call(SERVICE_TYPE_TAGS, x.institution) && SERVICE_TYPE_TAGS[x.institution].some(t => accTypes.has(t)))));
   }
   // R3-TELL-3 unit 4b (ruling 60, R3-CURE-8's STOP 1; the chair's word of 20:03 UTC): (d) A NON-CRIMINAL SERVICES ROW WHOSE
   // `institution` NAMED A HIDDEN HOUSE LEAVES WHOLE (a husk, ruling 42 (1)): the hidden-house name sweep takes the key only

@@ -1,0 +1,32 @@
++   "server gallery g:110 dm=true: served {\"desc\":\"Ask around quietly: the plant's words.\",\"name\":\"Ask around quietly\",\"institution\":\"(informal)\"}",
++   "server gallery g:110 dm=true: served {\"desc\":\"Relic forgery: the plant's words.\",\"name\":\"Relic forgery\",\"institution\":\"(religious fraud)\"}",
++   "twin gallery g:110 dm=true: served {\"name\":\"No law; bring coin\",\"desc\":\"No law; bring coin: the plant's words.\",\"institution\":\"(lawless)\"}",
++   "twin gallery g:110 dm=true: served {\"name\":\"Ask around quietly\",\"desc\":\"Ask around quietly: the plant's words.\",\"institution\":\"(informal)\"}",
++   "twin gallery g:110 dm=true: served {\"name\":\"Relic forgery\",\"desc\":\"Relic forgery: the plant's words.\",\"institution\":\"(religious fraud)\"}",
++   "server gallery allOpen dm=true: served {\"desc\":\"No law; bring coin: the plant's words.\",\"name\":\"No law; bring coin\",\"institution\":\"(lawless)\"}",
++   "server gallery allOpen dm=true: served {\"desc\":\"Ask around quietly: the plant's words.\",\"name\":\"Ask around quietly\",\"institution\":\"(informal)\"}",
++   "server gallery allOpen dm=true: served {\"desc\":\"Relic forgery: the plant's words.\",\"name\":\"Relic forgery\",\"institution\":\"(religious fraud)\"}",
++   "twin gallery allOpen dm=true: served {\"name\":\"No law; bring coin\",\"desc\":\"No law; bring coin: the plant's words.\",\"institution\":\"(lawless)\"}",
++   "twin gallery allOpen dm=true: served {\"name\":\"Ask around quietly\",\"desc\":\"Ask around quietly: the plant's words.\",\"institution\":\"(informal)\"}",
++   "twin gallery allOpen dm=true: served {\"name\":\"Relic forgery\",\"desc\":\"Relic forgery: the plant's words.\",\"institution\":\"(religious fraud)\"}",
++ ]
+
+ ❯ tests/security/galleryVeilTell5.pglite.test.js:141:17
+    139|     expect(keptServed).toBeGreaterThan(0);
+    140|     expect(tooth).toEqual([]);
+    141|     expect(bad).toEqual([]);
+       |                 ^
+    142|   }, ARM_TIMEOUT_MS);
+    143| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  01:01:53
+   Duration  5.63s (transform 1.15s, setup 33ms, import 50ms, tests 5.45s, environment 0ms)
+
+[gate-tail] end:  01:01:59 up  1:48,  0 user,  load average: 2.41, 4.16, 3.35
+[gate-tail] full log: /tmp/gate-tail.24129.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

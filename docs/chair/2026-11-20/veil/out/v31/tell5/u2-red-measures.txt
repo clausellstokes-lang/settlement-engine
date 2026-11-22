@@ -1,0 +1,13 @@
+R3-TELL-5 unit (ii) svc.criminal on the hiding plant: hiding reads serving the family 30 | engine:row (served): {"server:No law; bring coin":15,"server:Ask around quietly":15,"server:Relic forgery":15,"server:Fence":15,"server:Contraband transport":15,"server:Official shakedown":15,"twin:No law; bring coin":15,"twin:Ask around quietly":15,"twin:Relic forgery":15,"twin:Fence":15,"twin:Contraband transport":15,"twin:Official shakedown":15} | faults 90 | tooth: accounted rows served 90 missing or not byte for byte 0 
+  server gallery own dm=false: served {"desc":"No law; bring coin: the plant's words.","name":"No law; bring coin","institution":"(lawless)"}
+  server gallery own dm=false: served {"desc":"Ask around quietly: the plant's words.","name":"Ask around quietly","institution":"(informal)"}
+  server gallery own dm=false: served {"desc":"Relic forgery: the plant's words.","name":"Relic forgery","institution":"(religious fraud)"}
+  twin gallery own dm=false: served {"name":"No law; bring coin","desc":"No law; bring coin: the plant's words.","institution":"(lawless)"}
+  twin gallery own dm=false: served {"name":"Ask around quietly","desc":"Ask around quietly: the plant's words.","institution":"(informal)"}
+  twin gallery own dm=false: served {"name":"Relic forgery","desc":"Relic forgery: the plant's words.","institution":"(religious fraud)"}
+  server map own dm=false: served {"desc":"No law; bring coin: the plant's words.","name":"No law; bring coin","institution":"(lawless)"}
+  server map own dm=false: served {"desc":"Ask around quietly: the plant's words.","name":"Ask around quietly","institution":"(informal)"}
+  server map own dm=false: served {"desc":"Relic forgery: the plant's words.","name":"Relic forgery","institution":"(religious fraud)"}
+  twin map own dm=false: served {"name":"No law; bring coin","desc":"No law; bring coin: the plant's words.","institution":"(lawless)"}
+  twin map own dm=false: served {"name":"Ask around quietly","desc":"Ask around quietly: the plant's words.","institution":"(informal)"}
+  twin map own dm=false: served {"name":"Relic forgery","desc":"Relic forgery: the plant's words.","institution":"(religious fraud)"} 

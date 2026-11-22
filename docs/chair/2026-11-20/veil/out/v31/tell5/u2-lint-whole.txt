@@ -1,0 +1,62 @@
+    7551|     } else {
+    7552|       expect(TEST_FILES.length, 'the estate\'s file count moved — re-m…
+    7553|         .toBe(CENSUS.files);
+       |          ^
+    7554|       expect(parked.length, 'the parked-file count moved from SP-C\'s …
+    7555|         + ' a rule widened or narrowed, or a lane changed a file\'s sh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/22]⎯
+
+ FAIL  tests/lint/styleLaw.walker.test.js > the style walker — the ratchet at the tree > ⛔ no file's count of any struck phrase RISES above its baseline
+AssertionError: the style law: a struck phrase rose (rewrite the line; the retired word's word is "power"):
+  src/domain/display/galleryRosterChoices.js :: faction 0 -> 1
+      src/domain/display/galleryRosterChoices.js:81 "multiple criminal factions": expected [ { …(4) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "file": "src/domain/display/galleryRosterChoices.js",
++     "id": "faction",
++     "now": 1,
++     "was": 0,
++   },
++ ]
+
+ ❯ tests/lint/styleLaw.walker.test.js:52:7
+     50|       verdict.rises,
+     51|       `the style law: a struck phrase rose (rewrite the line; the reti…
+     52|     ).toEqual([]);
+       |       ^
+     53|   });
+     54|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/22]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/22]⎯
+
+
+ Test Files  16 failed | 206 passed (222)
+      Tests  22 failed | 3242 passed (3264)
+   Start at  01:10:23
+   Duration  779.10s (transform 24.32s, setup 3.48s, import 704.21s, tests 763.89s, environment 19ms)
+
+[gate-tail] end:  01:23:22 up  2:09,  0 user,  load average: 1.05, 1.87, 2.91
+[gate-tail] full log: /tmp/gate-tail.26101.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

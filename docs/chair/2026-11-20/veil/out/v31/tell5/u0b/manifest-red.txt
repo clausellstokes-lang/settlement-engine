@@ -1,0 +1,32 @@
+tests/security/galleryVeilTell3.pglite.test.js
+tests/security/galleryVeilTell4.pglite.test.js
+: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/galleryVeilTell3.pglite.test.js",
++   "tests/security/galleryVeilTell4.pglite.test.js",
++ ]
+
+ ❯ tests/lint/mutationCoverageManifest.test.js:99:7
+     97|       + `rationale entry to scripts/mutation-coverage-manifest.json wi…
+     98|       + `Do NOT add it as uncovered — the gap list only shrinks:\n${mi…
+     99|     ).toEqual([]);
+       |       ^
+    100|   });
+    101|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  00:56:31
+   Duration  341ms (transform 53ms, setup 33ms, import 147ms, tests 30ms, environment 0ms)
+
+[gate-tail] end:  00:56:31 up  1:42,  0 user,  load average: 5.21, 3.52, 2.69
+[gate-tail] full log: /tmp/gate-tail.22529.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

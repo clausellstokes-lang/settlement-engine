@@ -2168,6 +2168,12 @@ declare
   -- R3-CURE-2 (VEIL-24's builder): the withheld powers' ids (a string, or a number by its text), the name search over the
   -- withheld powers' names and its hits over the structured copies; the operations list's label table (unit 2 (a))
   wn_ids text[];
+  -- R3-TELL-5 unit (ii): the crime types a shown house or a crisis raises (VR39 over `pub`'s list), and each criminal
+  -- services tag by the types whose row it is (servicesGenerator.js: the stress rows and the crime-type rows)
+  acc_types text[];
+  svctags jsonb := '{"(street gang)": ["Street gang activity"], "(smuggling)": ["Smuggling"], "(arcane underground)": ["Magical crime", "Arcane black market"],
+    "(state apparatus)": ["State predation"], "(criminal governance)": ["Criminal governance"], "(religious fraud)": ["Religious fraud"],
+    "(commercial crime)": ["Commercial crime"]}';
   nt int;
   srch jsonb;
   hits jsonb;
@@ -2436,6 +2442,7 @@ begin
   -- 47: no husk). A husk the name sweep left (its `house` taken) names no listed house, so it leaves (stated, not left to
   -- SQL's null: an absent `house` makes the test null, which would keep the husk). Twin:
   -- galleryRosterChoices.js :: applyRosterChoices, the same rule
+  -- registry: people.allegiance
   if jsonb_typeof(s -> 'npcs') = 'array' then
     s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) = 'object' and n ? 'allegiance'
         and not coalesce(jsonb_typeof(n -> 'allegiance') = 'object' and jsonb_typeof(n #> '{allegiance,house}') = 'string'
@@ -2486,6 +2493,25 @@ begin
   if jsonb_typeof(s #> '{availableServices,criminal}') = 'array' then
     s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
       where not (jsonb_typeof(e) = 'object' and (not (e ? 'institution') or e -> 'institution' = '"(covert)"'::jsonb))), '[]'));
+    -- R3-TELL-5 unit (ii) (the chair's ruling 73 (2): WHAT DEPENDS ON A WITHHELD HOUSE IS SERVED AS THE HOUSE-FREE TWIN WOULD
+    -- SERVE IT; ruling 74 (ii)): (e) BY POSITIVE ACCOUNT, a criminal services row stays only where its `institution` is the
+    -- name of a house this read lists, or the tag of a crime type a shown house or a crisis raises (servicesGenerator.js
+    -- writes each tag row from its type: `svctags`), the type kept by VR39's attribution over `pub`'s own list (the grouping
+    -- that shuts the types does not shut the services: the house-free twin's row stands on its type, served or not). Every
+    -- other row (the climate's '(lawless)' and '(informal)', drawn from the criminal climate the houses moved; a row that is
+    -- not an object) leaves; what is left may be [] (VR29: the list stays a list; [] is an open place's form at every
+    -- size). Twin: galleryRosterChoices.js :: applyRosterChoices, the same rule
+    acc_types := array(select e ->> 'type'
+                         from jsonb_array_elements(case when jsonb_typeof(p #> '{economicState,safetyProfile,crimeTypes}') = 'array' then p #> '{economicState,safetyProfile,crimeTypes}' else '[]' end) e
+                        where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'type') = 'string' and raisers ? (e ->> 'type')
+                          and not exists (select 1 from jsonb_array_elements_text(raisers -> (e ->> 'type')) fk where (raised -> fk) = 'true'::jsonb));
+    s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
+      where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'institution') = 'string'
+        and ((e ->> 'institution') = any(array(select public._gallery_veil_str(h -> 'name')
+                                                  from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) h
+                                                 where jsonb_typeof(h) = 'object' and public._gallery_veil_str(h -> 'name') <> ''))
+             or exists (select 1 from jsonb_array_elements_text(case when jsonb_typeof(svctags -> (e ->> 'institution')) = 'array' then svctags -> (e ->> 'institution') else '[]' end) t
+                         where t = any(acc_types)))), '[]'));
   end if;
   -- R3-TELL-3 unit 4b (ruling 60, R3-CURE-8's STOP 1; the chair's word of 20:03 UTC): (d) A NON-CRIMINAL SERVICES ROW WHOSE
   -- `institution` NAMED A HIDDEN HOUSE LEAVES WHOLE (a husk, ruling 42 (1)): the name sweep takes the key only where its text

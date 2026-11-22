@@ -1864,6 +1864,18 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryVeilTell3.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell4.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell5.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/shareRenderTwice.pglite.test.jsx": {
       "kind": "rationale",
       "ref": "pglite-executed"
