@@ -1001,6 +1001,30 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   U5-STALE keeps the hat on the right head at a transfer; THE FALL-BACK IS REMOVED; where nobody wears the hat,
   today's absence line stands. U6 is merged on the lane at 674148b9c (`HAND_CEILING` 75 there; 76 once point 98 is
   the line).
+- E78 · A CRITICAL FOUND BY THE VEIL'S LIT PROBE: A WITHHELD POWER NAMED ON A SHARED READ; ITS CURE PULLED TO THE FRONT (2026-11-22 13:06 UTC; VEIL-33,
+  pass 2, `out/v33/joinprobe/lit/measure/litsurf/litsurf-table.txt` at 0dbfebcf8). WHO RULES LIT, a criminal taker
+  (1 place of 60 births, jp6-metropolis-0: the Thieves' Guild takes the Grand Merchant Oligarchy's seat): the read
+  withholds the Guild's row, yet `powerStructure.recentConflict` serves "Thieves' Guild overthrew the grand merchant
+  oligarchy and reshaped the government as a shadow senate.", Reveal off AND dm, server equal to twin (the seat
+  lane's TO-LIGHT surface (e)). The cause as read: the mask covers a DM-hidden row only; the registry's composed row
+  `power.recentConflict` has its host only PLANNED (R5), built in neither engine. NOTHING IS LIVE (212 is applied
+  nowhere; the law is dark on the line). RULED: "R5-RECENT" IS THE WRITER'S NEXT UNIT AFTER (viii), BEFORE (iv), ON
+  THE LANE: the sentence is WITHHELD (not masked) wherever it names a power the read withholds, both engines; a
+  PLANT as its red-first; R5's walker first (a composed row whose host is only planned reds). VEIL-33 prepares the
+  brief, the plant and the walker and writes nothing of 212, the twin or the registry; if VEIL-32 hands over at
+  (viii), it is VEIL-33's first unit as writer. TOLD TO THE OWNER the same hour. ALSO FROM PASS 2: lit GATE-1 6 of
+  92 against 4 dark (three new cities on `powers.relations`, Reveal off: the towns byte-equal dark and lit, the
+  CONTROLS moved; fortune suspected, to be gated per law); GATE-2 20 of 40; FORTUNE CLEAN (merits and score equal
+  for owner, server and twin on 60 of 60; the sentence names nothing hidden); 79 served strings flagged as naming
+  a DM-hidden taker on 40 places are being read one by one (collisions with served houses' names expected); the
+  sanitizer's arm for the lit surfaces is ABSENT from the tree (the join's worklist).
+- E79 · THE BAR READS SENTENCES AS PRINTED; TEMPLATES ARE A SECOND READING, BOUNDED AT 30% (2026-11-22 13:06 UTC; SEAT-10's measure at 150 a size, 900
+  births). W1 and W3 pass as built: the commonest printed sentence is at most 10.0% (city W3). By template (the same
+  line, any names): W3 town 19.3, city 26.7, metropolis 24.0; W1 city 16.7, metropolis 15.3: under the hooks' own
+  bar for the large sizes. No new wordings; named for the owner's eye (two more lines each would be a small
+  second-deploy unit). FORTUNE'S SECOND MERIT, the same hour: U7b merged at fdbff1852 (four rows; the "It" opening
+  built); the pages read and accepted; unit 3: the four states on 900 births each equal BANDS.md's tables and every
+  figure of E32; "FORTUNE-B" waits for point 98's tip.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1471,6 +1495,11 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    STACK-97 stood down (its f2 pieces 00 and 01 green, 02 with 9 unread reds in 5 files, 03 killed: CI's clean run
    on the same tree supersedes them). ELEVEN PARKED, none working. NO PLACE FREED. The chair's own branch: E73's
    repair holds (origin equals local at 77a60f5a6; identity and config right; every push through `safepush.sh`).
+- 2026-11-22 13:06 UTC · NET 13. THE LANDING PLACE: STACK-98 (fortune, point 98): d and e green after the merge, step f queued at 12:33 by its record
+   (its worker epoch reads 4: if its long run died with a restart, ask at net 14); no report yet. THE SIX ALL PUSHING
+   (tips on origin at 13:05: veil-32 fb320eded, seat-10 3df69ec1b, fortune-7 e7cae21cb, daily-3 067e13fcb). VEIL-33:
+   pass 2's gates read and the critical of E78. FORTUNE-7: units 0 to 3 done (E79). SEAT-10: U6 merged; U7 with
+   U5-STALE building (E77). ELEVEN PARKED. NO PLACE FREED. The chair's branch: origin equals local (e27928ae8).
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
