@@ -107,6 +107,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   session; what to do if the allowance runs out). READ AS: the weekly allowance stands at 27%; no slowing, no holding,
   no fresh session on its account; the fastest pace the rules allow, until the allowance is spent. NOT READ AS a grant
   of anything that stays his hand (the merge, the deploy, migrations, credentials, signings): E45.
+- **THE OWNER'S WORD ON THE NUMBER OF SEATS (written 2026-11-22 09:09 UTC; it came a few minutes before), verbatim:** "Hey limit work to 6 children at a time. The way you're going full force might make small progress on many without completing any"
+  IT GOVERNS OVER HIS EARLIER "go wild" WHERE THEY DIFFER: the pace is no longer "any number". The chair had read
+  "go wild" as leave to seat every lane at once (twenty-one children at 08:55): he corrects it: SIX AT A TIME, so that
+  things are FINISHED. Carried out the same minute (E64). Before it, the same hour, his question: "What is the trouble
+  half?": answered in plain words (a trouble is one of a place's live problems; that part of the page work says why
+  each is there and gives it hooks that fit the place); the chair's own shorthand had not been explained to him.
 
 
 ## 2. Decisions of this chair (each vetoable by the owner)
@@ -824,6 +830,29 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   alone; the pool's table has four rows. Where the sentence directly before opens on the place's name (the three
   bare standing lines), the lasting sentence opens on "It": only if the composer knows the sentence before at no
   new draw. "FORTUNE 8cc9212fd" was named to FORTUNE-7 at 08:27; U7 is cut.
+- E63 · THE TROUBLE HOOKS' THEMES: ALL 85 ARE TYPED (2026-11-22 09:09 UTC; DEPTH-5 asked: 22 of the pool's 85 lines are today's stored template
+  hooks, held `untyped` in the answers fixture). RULED (a): "untyped" is the absence of an answer, not an answer: all
+  85 are typed; the fixture's step file names each of the 22 with its old answer and its new theme; the fixture
+  proves no typed answer moved (a plant red); one plain paragraph for the owner on what a theme changes on a page of
+  a town saved before; THE TABLE TO THE CHAIR'S EYE before it is committed under `src/` (not yet on origin).
+- E64 · SIX CHILDREN AT A TIME, BY THE OWNER'S WORD (2026-11-22 09:09 UTC; his word verbatim in section 1; it ends E45's "any number" and E54's
+  seating of every lane at once). THE SIX THAT WORK, chosen by the finish line of the first deploy (E30): (1) VEIL-32
+  (the one writer of migration 212: the cure of unit (viii), then the units to R3); (2) VEIL-33 (the veil's probe on
+  the joined tree and the next units prepared: the veil is the longest road and this seat is already read in; it
+  takes the writer's place when VEIL-32 hands over); (3) SEAT-10 (who rules: U6 and U7, one deliverable, "SEAT-B");
+  (4) FORTUNE-7 (fortune's second merit, "FORTUNE-B"); (5) DAILY-3 (the Daily Life page's last lines, the page, the
+  PDF chapter: "DAILY-B"); (6) ONE LANDING AT A TIME: STACK-97 now (who rules, point 97, in its gate), then STACK-98
+  (fortune, point 98: idle until its base is named), then each landing line in turn. PARKED (each told: start nothing
+  new; a run in the air may end only inside ten minutes; builders commit what stands and stop; push everything; the
+  state in the hand-back; one line "PARKED <tip>"; then nothing until "GO <seat>"): CLOSE-1, PAGE-13, PAGE-12,
+  PLACE-3, PEOPLE-3, PROSE-5, GOALS-5, PAGE-14, DEPTH-5, FRAME-9, TRAD-6. WAITING BY DESIGN, NOT WORKING:
+  REVIEW-VEIL-15 (for "R3"). COMPLETE: FORTUNE-6, VEIL-31. THE ORDER THEY COME BACK, ONE FOR EACH PLACE THAT FREES:
+  CLOSE-1 first (the fixture cure and the laws' join must land before the flip; then its flipped run); then by
+  nearness to a landing line: PAGE-13 ("PAGE-SIDES" was in its rule 8), PAGE-12 (the hook pool's second tranche),
+  PLACE-3, PEOPLE-3; then PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6. A PLACE FREES when a seat's landing
+  line is sent and nothing of its lane is left for the first deploy, or when VEIL-32 hands over (the veil then holds
+  one place until its successor is needed). TWO BUILDERS AT ONCE only inside one deliverable (COMMON-EIGHTH 13). THE
+  CHAIR'S OWN HELPERS COUNT: no local helper runs beside the six except a short read of CI by name.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1244,15 +1273,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 08:22 UTC.) EVERY LANE IS SEATED (E45, E48, E49, E52, E54): nothing waits for a seat. WHAT EACH WAITS ON FROM THE
-CHAIR: THE LINE'S NEW TIP (points 94 to 96 and the four cures: the moment the local gate reports): DAILY-3, PAGE-12,
-PAGE-13, PLACE-3, PEOPLE-3, PROSE-5, GOALS-5, PAGE-14, DEPTH-5, FRAME-9 (TRAD-6 merges nothing of the line) ·
-"FORTUNE <commit>" NAMED: FORTUNE-7 (then it builds) and STACK-98 (to be seated on STACK-97's tip with E53's conflict
-classes) · THE WORD TO MERGE U6 AND U7: SEAT-10, after "SEAT" is on the line · "R3 <commit>" WITH THE LOWER TOWNS AND
-THE READER'S LIST: REVIEW-VEIL-15 · THE HAND-OVER: VEIL-33, when VEIL-32 says "HAND-OVER <commit>" · "WANTS" LANDED,
-NAMED: DEPTH-5's ties. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who rules and
-fortune (both merits) landed and flipped; the Daily Life page whole. A lane that has not landed when those three are
-done ships in the second deploy; THE LINE IS FROZEN FOR EVERY OTHER LANE the hour CLOSE-1's second rehearsal starts.
+(Rewritten 2026-11-22 09:09 UTC after E64.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-32, VEIL-33, SEAT-10, FORTUNE-7, DAILY-3,
+and ONE landing (STACK-97, then STACK-98). ELEVEN ARE PARKED and come back one for each place that frees, in E64's
+order: CLOSE-1, PAGE-13, PAGE-12, PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked
+seat is woken by ONE line, "GO <seat>", with the line's tip then; it goes on from its own hand-back. WHAT EACH OF
+THE SIX WAITS ON FROM THE CHAIR: STACK-98: "BASE <commit>" when STACK-97's gate has reported · SEAT-10: the word to
+merge U6 and U7, after "SEAT" is on the line · FORTUNE-7: the line's tip with point 98 on it, for its landing check ·
+DAILY-3: the line's tip with point 97 on it (L8 to L12) · VEIL-33: nothing (its two refs are named) · VEIL-32:
+nothing; it says "HAND-OVER <commit>" at its mark · REVIEW-VEIL-15 (waiting, not working): "R3 <commit>" with the
+LOWER towns and the reader's list. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven with its review; who
+rules and fortune (both merits) landed and flipped; the Daily Life page whole. A lane that has not landed when those
+three are done ships in the second deploy.
 
 ## 5. Waiting on the owner
 
