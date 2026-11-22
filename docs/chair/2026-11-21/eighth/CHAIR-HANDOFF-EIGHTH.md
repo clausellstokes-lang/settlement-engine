@@ -437,6 +437,15 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   re-made, the line merged, "PAGE-SIDES"; then the three Daily Life slots printed, "PAGE-THIN"; then the cause
   sentence wired after the trouble lane lands, "PAGE-DISPLAY"). `PLACE-3.txt` and `PEOPLE-3.txt` AMENDED: their first
   units are landed (points 91 and 93); each seat fast-forwards to the line and starts at its unit 2.
+- 2026-11-22 04:11 UTC · CI'S RUN ON f5295e425 IS READ BY NAME (run 44980166938, ended 04:06; a cheap helper; `ci/run-f5295e425.tsv` in the
+  chair's scratch): build and dist 15, coverage floors 8, the golden master under tr_TR 1, the test ratchet 62: ALL 86
+  ROWS OF THE LIST FAILED AGAIN, NOTHING NEW, NOTHING CURED (the extractor printed 87: one `corpusEcoTailGuards` row
+  twice, its title cut short in the log's re-printed summary). A NOTE FOR THE NEXT READING: the proxy refuses the blob
+  URL of a job log (403): the helper takes the log by `return_content`. The chair's branch is pushed at 3167a0320
+  (04:11; the hook green: 167, 1113, eslint 0 errors), at low priority beside the landing's run, not through the
+  mutex: the hook is three single-threaded checks and the run keeps its three workers. `PICKUP-NINTH.md`'s first block
+  is rewritten to this hour. The task of handing the chair to a fresh session is closed as MET BY THE COMPACTION: the
+  pickup stays current so that a new session can take over at any time.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
