@@ -15,6 +15,8 @@ BESIDE FORTUNE-6, which still finishes "FORTUNE <commit>" on `lane/fortune-6-202
 | `lane/fortune-7-2026-11-22-u7c` | e7fa14369 (local, MERGED at ecce1402e) | U7c's builder branch (E68) |
 | `lane/fortune-7-2026-11-22-u7b` | 9e118ee23 (local, MERGED at fdbff1852) | U7b's builder branch |
 | `lane/fortune-7-2026-11-22-u7d` | 0bd40ee51 (local, MERGED) | U7d's builder branch |
+| `lane/fortune-7-2026-11-22-c` | 53996e954 (PUSHED) | FORTUNE-C, cut from the line's point 102 c1144ba18 (the chair, 19:00 UTC): the guard's lit arm, the measure, the lighting census by its door. SENT as "FORTUNE-C 53996e954" |
+| `lane/fortune-7-2026-11-22-u8-wip` | 0b7037727 (PUSHED) | U8's cure: the OWNER'S PROPOSAL after the first deploy (E112); NOT to land as it stands |
 
 | unit | state |
 |---|---|
