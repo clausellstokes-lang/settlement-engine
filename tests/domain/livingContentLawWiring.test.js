@@ -107,12 +107,13 @@ import { buildLivingContentRoster } from '../../src/domain/content/livingContent
 // ⭐ THE SECOND LAW AT BIRTH (LANDING-7 lane D, 2026-11-06). Register VII was lit at 3420d01e3
 // (X-46 car 4, the owner's word of 2026-11-04, ODQ §934.104 R6(1)), so `birthConfig` now spreads
 // the DENSITY mint's marker beside this law's — the event the LIT arm's "or the density mint
-// waking up" was written to catch. The four CREATE arms below name that marker by its own mint
+// waking up" was written to catch. The mocked CREATE arms below name that marker by its own mint
 // (`newSettlementDensityLaw()`), so each still asserts that the LIVING-CONTENT law writes exactly
-// its one key and nothing else, and the density half is held to what its own dial mints.
+// its one key and nothing else, and the density half is held to what its own dial mints; the
+// product-path LIT arm keeps this law's own key only since the JOIN (its whole-value pin moved to
+// `generationLawsSavedPlace.test.js` (g)).
 import {
   DENSITY_LAW_CONFIG_KEY,
-  REGISTER_VII_DENSITY_LAW_VERSION,
   newSettlementDensityLaw,
 } from '../../src/domain/density/densityLaw.js';
 
@@ -249,24 +250,24 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
 
   // ── CREATE ─────────────────────────────────────────────────────────────────
   it('⭐ CREATE (LIT, the product path): birthConfig writes the law marker and NOTHING else', () => {
-    // The density mint woke at 3420d01e3 (Register VII lit): it is named here as exactly the
-    // marker its own lit dial mints, so a THIRD key, or a density mint writing a second field,
-    // still reds this arm.
-    expect(newSettlementDensityLaw()).toEqual({ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION });
+    // ⭐ ITS OWN KEY ONLY (CLOSE-1 JOIN, the chair's E61 (5), COMMON-RULES 14 (c)). The whole value of
+    // `birthConfig(null)`, which this arm used to pin, is pinned ONCE, in
+    // `tests/domain/generationLawsSavedPlace.test.js` (g), from every register row's own mint, dark and lit: every
+    // other law's key is that arm's to hold, so the flip of another law's dial moves no pin here.
     const minted = birthConfig({ ...CONFIG });
-    expect(minted).toEqual({
-      ...CONFIG, ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
-    });
-    // EXACTLY ONE KEY MORE than the config and the density marker — the arm that would catch a
-    // mint that started writing a second field.
-    expect(Object.keys(minted).sort())
-      .toEqual([...Object.keys(CONFIG), DENSITY_LAW_CONFIG_KEY, LIVING_CONTENT_LAW_CONFIG_KEY].sort());
-    // Null/undefined tolerance is the boundary's own contract, unchanged by the
-    // second mint being spread beside the first.
-    expect(birthConfig(null))
-      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
-    expect(birthConfig(undefined))
-      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+    expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    // EXACTLY ONE KEY OF THIS LAW'S, beyond the config and the other register rows' own keys — the arm that would
+    // catch this mint writing a second field.
+    const otherLaws = Object.values(GENERATION_LAWS)
+      .map((row) => row.configKey)
+      .filter((key) => key !== LIVING_CONTENT_LAW_CONFIG_KEY);
+    expect(Object.keys(minted).filter((key) => !Object.hasOwn(CONFIG, key) && !otherLaws.includes(key)))
+      .toEqual([LIVING_CONTENT_LAW_CONFIG_KEY]);
+    // Null/undefined tolerance is the boundary's own contract.
+    for (const empty of [null, undefined]) {
+      expect(birthConfig(empty)[LIVING_CONTENT_LAW_CONFIG_KEY], `birthConfig(${empty})`)
+        .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    }
   });
 
   it('CREATE (dark, fired deliberately): at the dormant dial birthConfig still writes not one byte', () => {
