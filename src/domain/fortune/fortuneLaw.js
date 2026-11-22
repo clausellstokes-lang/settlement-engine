@@ -82,7 +82,7 @@ export const SIZE_RELATIVE_FORTUNE_LAW_VERSION = FORTUNE_LAW_VERSIONS[1];
  *  kernel the day that dial was lit): a dial's type is the SPACE of versions, never today's
  *  setting, so the mint's dormant comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
+export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 
 /**
  * ⭐ THE FORTUNE LAW'S ONE TUNING TABLE. EVERY VALUE IS A DRAFT, signed by none (the proposal's
