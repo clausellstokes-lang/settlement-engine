@@ -23,7 +23,7 @@ Tree: scratch clone `bu6`, branch `u6`, cut at `46339e5c7`. Times are UTC, read 
   - RED FIRST: with line 738 put back to `{ publicLegitimacy }`, the new file went 3 failed / 6 passed (07:54:00Z). The arm-1 red: "the power step hands annotateFactionStanding the born config: expected false to be true". Both arm-2 cases also went red, because W3 rides the same config. Restored, the file is 9/9 green. CONFIRMED.
 - FAULT (b): NO WITNESS. The same 600 lit births made 526 `raiseToOfficeBand` calls, and 0 of them took a different band under the law's fold. The office role is `seatPoolFor(tier).role`, one of Elder, Mayor or Governor, and the fold maps each to itself. By the brief's rule I stopped there: no fabricated fault, no cure, no arm. CONFIRMED (run, 07:44:35Z to 07:46:20Z).
 
-## A FINDING THE INTEGRATOR NEEDS (STOP-class, by symbol)
+## A FINDING THE INTEGRATOR NEEDS (STOP-class, by symbol) — RULED BY E65, CURED BY THE ADDENDUM BELOW
 
 The brief puts the writers at the power step, and there `holderOf` sees no people: it reads only R3, or R4/R5. On the finished record the holder is mostly R2, the person's first power, which is cast after the power step.
 
@@ -41,35 +41,112 @@ The brief puts the writers at the power step, and there `holderOf` sees no peopl
   - `power/rosterText.js :: standingsOf` re-reads the standing with no config, which is fault (c)'s twin.
   - The row's `type` stays `subordinate` or `dependent`.
 
+## ADDENDUM (the chair's E65; the brief's ADDENDUM of 09:19:34Z): THE FINAL-RECORD PASS
+
+### The cure, by `file :: symbol`
+- `src/generators/power/factionStanding.js :: settleSeatHolderToRecord` (NEW). It runs on the final record and has the same gate as the power step: `factionDynamics.js :: seatHolderApartOf(factions, record, record)`, which now reads `holderOf` off the whole record, so R2 is visible. That gate is the record's own seat law, the holder apart from the form, and `!isVeiledRow`. Under law 1 it returns at `seatsByHolder(record)` and reads nothing more. On a lit record:
+  - every {form, holder} relation row takes W1, plus W2 on a licensed pair (`seatHolderRelationLineOf`);
+  - the holder's row loses the "expect council access" clause (`claimStanding.js :: withoutSeatAccess`, the same cut as the power step);
+  - W3 replaces, in this order of preference, a W3 the power step wrote, or else the first rank line it carries (`RANK_STANDINGS`: the eleven rank-1, rank-2 and last-rank lines, read and never written), or else it is appended. This holds at ANY rank (E65 (2));
+  - ONE ROW A SEAT: a W3 on any other row is cut and not reworded. This is a density-law rival copied from its host, measured at 7 births before the cut and 0 after.
+- `factionDynamics.js`:
+  - `seatHolderLineOf` takes a `seed`. The pass keys by the record's `_seed`, because the stream is spent by then.
+  - `seatHolderLinesOf` (the pool filled, no draw) and `seatHolderRelationLineOf` are new.
+  - The 7 new imports sit below the lines the holder census cites by number, which cures the `proseWiringCensus` red without packing a line.
+- `src/generators/generateSettlementPipeline.js`: one call, `settleSeatHolderToRecord(finalCtx.settlement)`, immediately after `settleArcaneToPractitioners` and before `withConflictRelations`.
+
+### (a) It draws nothing from the stream
+- The pass uses keyed picks only. CONFIRMED by two in-tree arms:
+  - **Arm 5, law 1 (the law's key absent).** Five births: `u6d-town-0`, `u6d-village-0`, `u6d-city-0`, `u6t-city-4` and the R2 seat `u6p-village-3`. Each is compared with the same birth with every new path and the pass forced off: byte-identical, with 0 differences of any kind (`diffPaths`, empty).
+  - **Arm 6, lit.** `u6p-village-3` with the pass alone off against on. The only paths that differ are `powerStructure.factionRelationships.N.narrative` and `powerStructure.factions.N.desc`: no draw count, id or other field moved.
+- Confine-two is the integrator's.
+
+### (b) Under the lit law, on u6probe's 150 births (09:41:36Z)
+CONFIRMED (`u6work/bar.mjs`, in the flipped copy):
+- 78 births have the holder apart, with 63 form↔holder rows between them.
+- **All 63 rows print W1**, so no row is left to name.
+- **78 of 78 holder rows print W3.** No row carries two W3 lines, no stray W3 sits on another row, and no stray W1 sits on another pair.
+- **W2: 0 places.** None of the 150 births seats a merchant holder in a Royal Authority or a Ducal Governorship, the only licensed pair. W2 is proved by arm 4, a planted holding.
+
+### (c) THE BAR
+The commonest W1 sentence and the commonest W3 sentence in each size, out of 25 places per size. 15% of 25 is 3.75.
+
+| size | W1 rows | commonest W1 | W3 rows | commonest W3 |
+|---|---|---|---|---|
+| thorp | 0 | none | 0 | none |
+| hamlet | 0 | none | 2 | 1 ("They are the ones who sit in the Feudal Stewardship, and its word is theirs.") |
+| village | 9 | 3 ("The Elder Council's seats are filled by the Merchant Guilds.") | 9 | 3 ("They govern through the Elder Council, and what it orders is their order.") |
+| town | 16 | 3 ("The Guild Council is the office here, and the Merchant Guilds hold it.") | 19 | 2 ("They govern through the Guild Council, and what it orders is their order.") |
+| city | 18 | **4** ("It is the Merchant Guilds who sit in the City Council.") | 23 | 3 ("They govern through the Merchant oligarchy, and what it orders is their order.") |
+| metropolis | 20 | 3 ("The Grand Guild Consortium is how this place is ruled, and the Merchant Guilds rule through it.") | 25 | **4** ("They sit in the Grand Guild Consortium themselves, and its rulings are their own.") |
+
+- Two cells reach 4 of 25 (16%). Every other cell is at 3 or under (12% or less). CONFIRMED.
+- An earlier cut keyed the pass with no seed, because the stream is spent at that point, so every pass draw took line 0. That cut put the city's commonest W1 at 10 of 25. Keying the pass by `record._seed` cured it.
+
+### (d) Named, and what it moves
+- **Where the pipeline's settle passes are listed or pinned.** I searched `tests`, `scripts` and the registers. No register lists or pins the final passes as a sequence.
+  - `tests/generators/power/arcanePractitioners.test.js` pins `settleArcaneToPractitioners` alone, and `conflictRelationsTwin.test.js` and `regenDerivedState.test.js` pin `withConflictRelations` alone.
+  - The mutation manifest's rationale text names `settleArcaneToPractitioners`.
+  - The pass is named at its call in the pipeline, in its own header, and here. PLAUSIBLE (search).
+- **Stored fingerprints and censuses it moves:**
+  - `supabase/functions/_shared/engineBundle.js` and its `.meta.json` `sourceHash` are generated, so any src change moves them. This shows as `tests/edgeFunctions/edgeSharedBundleReproducibility.test.js` ×4 ("the recorded sourceHash equals the builder hash over INDEX content"), ALL FOUR ALREADY RED on RED-AT-LINE. No build was run, by the rules.
+  - The estate's file count in `sovereigntyLightingContract.walker.test.js` (3748 → 3749) is moved by the new test file, not by the pass. NOT on RED-AT-LINE.
+  - The holder census (`proseWiringCensus`) is NOT moved: the imports moved below its cited lines, and it is CONFIRMED green.
+- **Under law 1 the output moves nowhere** (arm 5). The pipeline's output fingerprints were run at 09:45:10Z, and 11 reds came back:
+  - `generatorGoldenMaster` "every config produces byte-identical output…";
+  - `dossierProseManifest` "THE DRIFT ARM…";
+  - `generationForkCensus` "A1 — the instrument reaches…";
+  - `pipelinePinnedMode` A1, A2 and A5;
+  - `pipelinePinnedChoosers` A1;
+  - `edgeSharedBundleReproducibility` ×4.
+  - EVERY ONE is a row on RED-AT-LINE (`ral/chair-2026-11-08:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`, fetched from the clone's origin as `refs/remotes/origin/lane/chair-2026-11-08`). That they did not move FURTHER is PLAUSIBLE, from arm 5 and the in-tree differential: their figures were not compared with 46339e5c7's.
+  - Green in the same run: `regenDerivedState`, `conflictRelationsTwin`, `arcanePractitioners`.
+- Residue, not cured: a section regen (`regenSectionAction`: npcs) re-casts the people without re-running this pass, so a regen that moves R2 can leave the lines on the old holder. PLAUSIBLE (read).
+
+### (e) ONE ORDERING PROOF
+Arm 6, `u6p-village-3`, an R2 seat. CONFIRMED:
+- The pass ran once.
+- When it ran, the record had people cast (`npcs > 0`).
+- When it ran, no row yet carried the conflicts' " Even so, " clause.
+- On the final record the rewritten row reads "The Elder Council's seats are filled by the Merchant Guilds. Even so, the two are now at odds over blame for a costly failure last season.", so `withConflictRelations` read the rewritten row after the pass.
+- Only `power/rosterText.js :: settleNarrativesToRoster` reads a relation narrative before the pass, and it reads only the merchant↔craft vote lines. `people/goals.js` reads a row's `type`, which the pass does not touch. PLAUSIBLE (read).
+
+### (2) W3 at any rank
+CONFIRMED:
+- Arm 6, `u6p-village-18`: the Military Party holds the Headman's Authority by R2 from rank 2. Its "They are always at the table, but cannot set their own terms." gives way to "They are the ones who sit in the Headman's Authority, and its word is theirs.".
+- A planted record: a rank-2 power that does NOT hold keeps "always at the table", and exactly one row carries W3.
+
+### (3) Fault (b): CLOSED, not cured
+- The guard is arm 7: 6 lit births, one of each size (`u6b-<size>-0`).
+- Every band that `castPowers.js` asks `powerBandOfRole` for reads the same under the law's fold. The test asserts that more than 0 bands were asked for and that 0 differ.
+- The whole file of 11 tests runs in about 6 seconds. CONFIRMED.
+
 ## GREEN
 
 All runs used `TMPDIR=/tmp GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 …`, with output to a file that was read afterwards.
 
-- The new file `tests/generators/seat/seatHolderLines.test.js`: 9/9, and 9/9 again after its last change (08:43:27Z, beside `seedLoopTotality` and `sovereigntyLightingContract`). CONFIRMED.
-- The final GREEN set, run together at 08:18:40Z on `089bc7eea`: 12 files, 225 tests, 224 passed. It covered the new file, `tests/domain/seat` (the filter also takes `tests/domain/seatLawWiring.test.js`), `tests/generators/seatBandFold.test.js`, `tests/generators/people/seatKeeperContender.test.js` and `tests/generators/powerStructure.test.js`. The one red is RED-AT-LINE's own: `powerStructure.test.js` "no power/ module packs more statements…", with `relationshipArchetypes.js: 1 packed lines`, a file I did not touch. The module line ceiling arm is green. CONFIRMED.
+- The new file `tests/generators/seat/seatHolderLines.test.js`: 11/11 on the tree as delivered (09:53:49Z, run with `proseWiringCensus`, which is green). CONFIRMED.
+- The final GREEN set, run together at 09:44:24Z on `479ea3034` (the pass and its arms in): 12 files, 230 tests, 229 passed. It covered the new file, `tests/domain/seat` (the filter also takes `tests/domain/seatLawWiring.test.js`), `tests/generators/seatBandFold.test.js`, `tests/generators/people/seatKeeperContender.test.js` and `tests/generators/powerStructure.test.js`. The one red is RED-AT-LINE's own: `powerStructure.test.js` "no power/ module packs more statements…", with `relationshipArchetypes.js: 1 packed lines`, a file I did not touch. `power/factionStanding.js` stands at 400 lines, under the 800 ceiling. CONFIRMED. After it came only arm 5's widening and the import move in `factionDynamics.js`, which is a move with no change in meaning. Neither was run again through this whole set, but the new file and `tests/domain/seat` ran again on the flipped copy. PLAUSIBLE that the set is unmoved.
 - `tests/lint/samenessHideable.walker.test.js`: 29/29 with the new row and HAND_CEILING at 74. The house readings were re-taken and needed no row: RULE 2 is green, and none of the six lines on THE WATCH is this table's. CONFIRMED.
 
 ## `tests/lint` WHOLE
 
-The final run was 08:44:19Z to 09:07:17Z, on `e9c302208` (the last test change, below). Result: 223 files (6 failed), 3,352 tests, 3,346 passed, 6 failed. CONFIRMED. The reds by name:
+The final run was 09:54:51Z to 10:18:12Z, on `f16551bc4`, the tree as delivered; no test or source changed after it. Result: 223 files (5 failed), 3,352 tests, 3,347 passed, 5 failed. CONFIRMED. The reds by name:
 
 - **The line's own (RED-AT-LINE), unmoved, 3:**
   - `proseCorpusBytes.test.js` "RAW is EXACT…".
   - `proseCorpusBytes.test.js` "GZIP sits inside the 1 % band…".
   - `proseComposed.walker.test.js` "⭐ THE SHIPPED CORPUS READING…".
-- **Register reds for the integrator's door, 2:**
-  - `proseWiringCensus.walker.test.js` "⭐⭐ EVERY MAPPING ROW IS CITED TO A PRODUCER THE TREE STILL CARRIES…". This is the wiring census, the holder census of factionDynamics.js lines. The new import lines moved what it cites.
-  - `sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION, NOT A SENTENCE…": "the estate's file count moved — re-measure, do not re-word: expected 3749 to be 3748". The +1 is the new test file. The figure lives in that walker, outside this manifest.
-- **Reported, outside the manifest, 1:**
-  - `mutationCoverageManifest.test.js` "TOTALITY: every enumerated invariant file has a manifest entry" names `tests/generators/seat/seatHolderLines.test.js`.
-  - `mutationCoverage.shared.mjs :: enumerateInvariants` enumerates EVERY file under `tests/generators` (ENFORCER_DIRS), whatever its basename. Keeping the basename clear of the name pattern therefore cannot clear it.
-  - The cure is one row in `scripts/mutation-coverage-manifest.json`, presumably under the admitted-tree rationale `generators-tree-admitted-subject-coupled-2026-08-30`. That file is not in the manifest.
+- **For the integrator's door, outside this manifest, 2:**
+  - `sovereigntyLightingContract.walker.test.js` "THE CENSUS IS AN ASSERTION, NOT A SENTENCE…": "the estate's file count moved — re-measure, do not re-word: expected 3749 to be 3748". The +1 is the new test file. The figure lives in that walker. Not on RED-AT-LINE.
+  - `mutationCoverageManifest.test.js` "TOTALITY: every enumerated invariant file has a manifest entry" names `tests/generators/seat/seatHolderLines.test.js`. `mutationCoverage.shared.mjs :: enumerateInvariants` takes EVERY file under `tests/generators` (ENFORCER_DIRS), whatever its basename. The cure is one row in `scripts/mutation-coverage-manifest.json`, presumably under `generators-tree-admitted-subject-coupled-2026-08-30`. Not on RED-AT-LINE.
 - **Environmental, 1 file with no test:** `ledgerCitationIntegrity.test.js` cannot load, with "fatal: Not a valid object name refs/heads/review-fixes-2026-07-08". The scratch clone has no such ref.
-- **Cured on the way, 2.** Each was CONFIRMED with a targeted rerun and by the final whole run.
-  - `sovereigntyLightingContract` "⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS". My first arm 5 used `it.each`, which made `foreignGuestHold` 107 > 106. Arm 5 is now one plain test.
-  - `seedLoopTotality` ×2 "no NEW bare seed loop…" and "…quarantine is EXACT". The arm's rows now run through `collectSeedFailures` / `expectNoSeedFailures`.
+- **Cured on the way, 4.** Each was CONFIRMED with a targeted rerun and by this run.
+  - `proseWiringCensus` "⭐⭐ EVERY MAPPING ROW IS CITED…": the imports moved below the cited lines `factionDynamics.js:109/115/161`.
+  - `sovereigntyLightingContract` "⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS": no `it.each`.
+  - `seedLoopTotality` ×2: the rows are collected through `collectSeedFailures`.
 
-An earlier whole run (07:55:52Z to 08:17Z, on `a5532af3e`) gave 3,352 tests and 7 failed: the six above plus the each-park red.
+The earlier whole runs were 08:44:19Z (on `e9c302208`), with 6 failed, the wiring census among them, and 07:55:52Z (on `a5532af3e`), with 7 failed.
 
 ## THE FLIPPED COPY
 
@@ -82,13 +159,13 @@ src/domain/seat/seatLaw.js:77            - export const NEW_SETTLEMENT_SEAT_LAW_
                                          + export const NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION;
 ```
 
-The run at 09:07:35Z, on the final test, covered the new file and `tests/domain/seat`: 9 files, 204 tests, 198 passed. The run at 08:19:20Z gave the same figures.
+The run at 09:54:25Z, on the tree as delivered, covered the new file and `tests/domain/seat`: 9 files, 209 tests, 203 passed.
 
-- The new file is green (9/9). CONFIRMED.
+- The new file is green (11/11). CONFIRMED.
 - Six reds are tests that pin the DARK dials, and the flip turns them by construction. PLAUSIBLE (read) that they are only that: they were not run against an unmodified flipped tree.
   - `tests/domain/seat/seatContest.test.js`, 3: "the dial is dark and every factor…", "under the law, dark: the kind read is today's…", "dark: today's read (a craft archetype has no row…)".
   - `tests/domain/seatLawWiring.test.js`, 3: "the vocabulary: … the dial at the default", "1. CREATE (dark)…", "2. CREATE (THE CLAMP)…".
 
 ## COMMITS
 
-The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then `e9c302208` (arm 5 collected), then this report's commit, whose sha is in the final message. Nothing was pushed.
+The commits are `72db0b9f3` (source), `f75114c2f` (the test and the hand list), `a5532af3e` (F31's ceiling) and `089bc7eea` (arm 5 as a loop), then `e9c302208` (arm 5 collected), `98d998287` (the first report). The addendum's commits: `b965259f4` (the final-record pass), `479ea3034` (arms 6 and 7), `a22a75dee` (arm 5 widened), `f16551bc4` (the imports below the census lines), then this report's commit, whose sha is in the final message. Nothing was pushed.
