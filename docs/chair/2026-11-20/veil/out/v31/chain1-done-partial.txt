@@ -1,0 +1,10 @@
+start 23:50:07 merged 6d698bcf2
+red-t3 rc=1 (expect 1: units 2 and 4b)
+red-t4 rc=1 (expect 1)
+green-arms rc=0
+tpl rc=0
+verify rc=0 verify: 45 cached births re-read, 0 differ
+gates rc=1 23:56:23
+tiptpl rc=0
+tip-gates(old analyzer) rc=1 00:01:28
+tip-restated rc=1

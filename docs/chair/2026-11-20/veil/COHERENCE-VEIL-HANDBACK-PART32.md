@@ -17,7 +17,17 @@ verified by ls-remote).
   people.allegiance."). Comment-only; it moves 212's sha256. Told the chair ~23:22; RULED 23:24 as proposed (ruling 77): unit (ii)'s builder's first commit.
 - BRANCHES: `lane/veil-30-r3tell5-wip-2026-11-20` d251a2d55 (VEIL-30's builder: an unrun 71-line step-0 probe
   `out/v30/tell5/measure/step0.probe.jsx`; nothing built).
-- IN FLIGHT: the pool and chain1 (section 3).
+- THE MERGE PROVED ON THE GATES (unit (1), 23:50-00:01 UTC; `out/v31/`): the pool re-made at 5818130c4 (`/var/tmp/v18/t2/pool-t2sig-2`,
+  A 1,200 23:27-23:4x, B 608 to 23:49, every shard rc=0; verify 45 re-read / 0 differ). AT THE MERGE (212 1bfb961b): GATE-1 4 of
+  92 at every gated setting, both reads, twin = server (7 LOWER BY RULE: the same seven cities/metropolis as PART 31); GATE-2 34 of
+  40 cells red, twin = server in every cell; non-members Reveal off own 36, DM own 46. LIKE FOR LIKE at 2437ffea0 (same pool, the
+  restated analyzer): GATE-1 87 of 92, GATE-2 34 of 40. NOT WORSE. people.allegiance LEFT GATE-2 (DM own non-members 74 -> 46).
+  GATE-2 families left, by distinct town: svc.criminal 27, powers.capture 21, inst.criminal 6, chains.criminal 6, powers.criminal 3,
+  sp.ops 3, powers.relations 2, income.criminal 1, sp.crimeTypes 1, imports.criminal 1, tensions.crime 1.
+  REDS RE-RUN: R3-TELL-3 at 95f2ddfb8 2 failed / 1 passed (units 2, 4b); R3-TELL-4 at fff96514a 1 failed of 1 (unit 1). GREEN: both
+  arms (galleryVeilTell3 + galleryVeilTell4) 4 of 4 at the tip. Instruments: --check 0, harnesses 0, acceptance 40 PASS, the R3
+  gate HIGHER 0 / EQUAL 79 / LOWER 13 every engine and Reveal; walker 1 (the ARM D red, ruling 77).
+- IN FLIGHT: chain1's green chain, then `tests/lint` whole at the tip (ruling 77).
 - NEXT: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
@@ -38,3 +48,4 @@ verified by ls-remote).
   the "worse than" comparison is like for like) once the pool stands.
 - 23:21 make-instruments: check 0, walker 1 (section 1). 23:2x first message to the chair; then the walker red to the chair (that message said "23:23", written WITHOUT a `date -u` read: a slip; the clock read 23:22 after it).
 - 23:26 the chair's two messages read: rulings 76 and 77.
+- 23:49 the pool stands. 23:50 chain1. 00:01 the gates read (section 1). 00:02 the line to the chair (unit (1)).
