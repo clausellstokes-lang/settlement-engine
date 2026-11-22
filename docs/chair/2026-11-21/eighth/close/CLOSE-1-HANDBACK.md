@@ -1,4 +1,4 @@
-# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 08:07 UTC, read from `date -u`)
+# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 08:43 UTC, read from `date -u`)
 
 The seat that rehearses THE CLOSE on scratch refs (prompt: `docs/chair/2026-11-21/eighth/prompts/CLOSE-1.txt` on
 `lane/chair-2026-11-08`, from e75a95c6b). The chair: session_01ACmDYY29VRchM87v1yhL9Q (send_message).
@@ -7,21 +7,23 @@ The seat that rehearses THE CLOSE on scratch refs (prompt: `docs/chair/2026-11-2
 
 | ref | tip | what |
 |---|---|---|
-| `lane/close-1-2026-11-22` | (this push) | the briefs, the measures, the recipe; later unit 3's code |
-| `lane/close-1-join-scratch-2026-11-22` | 4bba8781d (+ the doors, when run) | THE TRIAL JOIN: point 97 (840020b9b) + fortune f13f31820. SCRATCH, merged into no lane |
-| `lane/close-1-lit-scratch-2026-11-22` | not yet cut | unit 2: the join with the three dials flipped |
+| `lane/close-1-2026-11-22` | (this push) | the briefs, the measures, the recipe |
+| `lane/close-1-join-scratch-2026-11-22` | e6f2a4227 (pushed: 4bba8781d; the doors on top, local until pushed) | THE TRIAL JOIN: point 97 (840020b9b) + fortune f13f31820 = 4bba8781d, then the doors: wiring da1f77a0d; observed-shape c2c2f6bad (fortune's side, schema 46) + 3cec680f2 (its door); writer-reach e6f2a4227; tuning inventory and lighting census next. SCRATCH: merged into no lane. VEIL-33 reads 4bba8781d: never rewritten |
+| `lane/close-1-lit-scratch-2026-11-22` | 5c4419815 (pushed) | the three dials on 4bba8781d; proven lit on a birth and by both saved-place tests 15/15. The doors reach it by a merge of the join scratch. VEIL-33 reads 5c4419815: never rewritten |
+| `lane/close-1-2026-11-22-fixture-wip` | builder's (local; worktree `/home/user/wt/fixture`) | CLOSE-FIXTURE (E55), cut from 988f51771 |
 
 | unit | state |
 |---|---|
-| 1 THE TRIAL JOIN | MERGED 4bba8781d, pushed; nine conflicts sent to the chair (`JOIN-CONFLICTS.md`); `tests/lint` whole running, then the registers by their doors |
-| 2 THE LIT REF | next |
-| 3 THE LAWS' JOIN | measuring (the saved-place tests: `tests/domain/seat/seatLawSavedTown.test.js` SAVED-SEAT, arms 1 to 6; `tests/domain/fortuneLawSavedTown.test.js` SAVED-TOWN, arms 0 to 6) |
-| 4 THE FLIPPED RUN | after 2 |
+| 1 THE TRIAL JOIN | DONE: merge 4bba8781d; nine conflicts classed by the chair (E53; `JOIN-CONFLICTS.md`). `tests/lint` whole at 4bba8781d: 18 failed / 3346 passed (223 files): the line's three size rows; `ledgerCitationIntegrity` x3, red at the base too (the ledger ref moved 07:47 UTC); the rest registers, by their doors (above). OPEN: the observed-shape baseline's class for point 98 (the line's side is refused by its own gate) |
+| 2 THE LIT REF | DONE: 5c4419815, pushed, told to the chair |
+| CLOSE-FIXTURE (E55, LANDS) | builder out, brief `briefs/CLOSE-FIXTURE.md`; true fault found by `measures/LANDING-FIXTURE-PROBE.md` |
+| 3 THE LAWS' JOIN | measure `measures/JOIN-LAWS-MEASURE.md`; draft brief `briefs/JOIN-LAWS.md`; the ten-line plan to the chair next |
+| 4 THE FLIPPED RUN | after the doors |
 | 5 THE RECIPE | after 4 |
-| 6 THE JOINT MEASURE | after 2 |
+| 6 THE JOINT MEASURE | the instrument: `scripts/sameness-census.mjs --measure --plan=<file> [--text]` (its renderer births through `birthConfig`, so the lit ref births lit); the stop conditions: seventh handoff 20:45 UTC; STORY AT ONE POSITION: 21:14 UTC, table (c)'s same-list rows |
 | 7 THE SIGNING LIST | after 4 and 5 |
 
-NEXT: the join's registers by their doors, then cut the lit scratch.
+NEXT: the last two doors on the join; push it; merge it into the lit ref; then unit 4's parts.
 
 ## 1. RULINGS IN FORCE (numbered; the chair's)
 1. The troubles law is not in this deploy (E28): every item of it struck.
@@ -31,4 +33,4 @@ NEXT: the join's registers by their doors, then cut the lit scratch.
 
 ## 2. OPEN QUESTIONS PUT TO THE CHAIR
 - The class of `tests/lint/.tuning-register.json` in a merge (unit 1).
-- Item (7)'s "three stop conditions" and "STORY at one position 0": where they are defined.
+- (answered by the chair: SAME-3.txt and the seventh handoff's two entries)
