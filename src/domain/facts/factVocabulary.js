@@ -193,6 +193,21 @@ export const LAW_ORDER_RUNGS = Object.freeze(['collapsed', 'critical', 'strained
 
 /** BAR6-CRIME (BRIEF-BAR6 (d) and B6; vetoable by the owner): the force that keeps order (`orderForce.js :: orderForceOf`). */
 export const ORDER_FORCE_WORDS = Object.freeze(['kept', 'paid', 'volunteers']);
+/**
+ * `house: <key>` → its `causeHouses.js` group (PAGE-12, CAUSES-PARITY-2 H; the chair's leave of 23:39 UTC 2026-11-21): the
+ * one table the `house` dimension's reader reads.
+ * @type {Readonly<Record<string, string>>}
+ */
+const HOUSE_KEY_GROUPS = Object.freeze({
+  thieves_guild: 'thievesGuild',
+  smuggling: 'smuggling',
+  caravans: 'caravans',
+  black_market: 'blackMarket',
+  assassins: 'assassins',
+  underground: 'underground',
+  whisper_market: 'whisperMarket',
+  outlaws: 'outlaws',
+});
 
 /** The prosperity ladder (`prosperityRank.js :: PROSPERITY_LABELS`, below it the generator's own bottom rung `Subsistence`), lower-cased. */
 export const PROSPERITY_WORDS = Object.freeze(['subsistence', 'struggling', 'poor', 'moderate', 'comfortable', 'prosperous', 'wealthy']);
@@ -571,10 +586,13 @@ export const FACT_DIMENSIONS = Object.freeze({
   // PAGE-7 (CAUSES-DATA addendum 3, item 2: the chair's ruling of 16:30; addendum 4 adds `caravans`; vetoable by the owner,
   // new vocabulary): `house: thieves_guild`, `house: smuggling` and `house: caravans` = a house of the group stands on the live roster by catalogue identity
   // (`causeHouses.js :: causeHouseStands`): the troubles' causes that name a thieves' guild or smuggling presume one.
-  house: dim({ shape: 'presence', home: 'causeHouses', keys: ['thieves_guild', 'smuggling', 'caravans'],
+  // PAGE-12 (CAUSES-PARITY-2 H, the chair's leave of 23:39 UTC 2026-11-21; vetoable by the owner, new vocabulary): five keys
+  // more, each the crime_wave row of the hideable house it names (`black_market`, `assassins`, `underground`,
+  // `whisper_market`, `outlaws`), mapped to its `causeHouses` group by HOUSE_KEY_GROUPS.
+  house: dim({ shape: 'presence', home: 'causeHouses', keys: ['thieves_guild', 'smuggling', 'caravans', 'black_market', 'assassins', 'underground', 'whisper_market', 'outlaws'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
       const houses = /** @type {Record<string, unknown>} */ (f).causeHouses;
-      const group = key === 'thieves_guild' ? 'thievesGuild' : key === 'smuggling' || key === 'caravans' ? key : null;
+      const group = key && Object.hasOwn(HOUSE_KEY_GROUPS, key) ? HOUSE_KEY_GROUPS[key] : null;
       return houses && typeof houses === 'object' && group ? bool(/** @type {Record<string, unknown>} */ (houses)[group]) : undefined;
     } }),
   // PAGE-7 (CAUSES-DATA addendum 4: the chair's 17:32; vetoable by the owner, new vocabulary): `house: caravans` (above: a
