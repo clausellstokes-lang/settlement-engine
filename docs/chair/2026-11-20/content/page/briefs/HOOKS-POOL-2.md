@@ -4,7 +4,8 @@ THE AIM (ruling 16 (2), the chair's 05:58 and 06:00): the closing measure (`meas
 (`hook2`: over every unordered pair of distinct places of a size, the share that store at least one hook word for word in common) OVER
 its 30% bar: M city 32.4%, M metropolis 36.5%, V city 30.3%. A pool model (PAGE-12's paper, 06:0x) puts the repeat in two pools'
 need-free cores: `guild_conflict` (6 of 16 lines need-free; about 12.6 points) and `crime_wave` (10 of 16; 10-11.6 points). THE CURE,
-RULED: +12 lines to each pool (16 -> 28), the lines below EXACTLY as the chair ruled them.
+RULED: +12 lines to each pool (16 -> 28), the lines below EXACTLY as the chair ruled them (06:00 and 06:07 UTC: 16 as first
+written, 6 reworded by the chair: guild_conflict 7; crime_wave 1, 2, 5, 9, 12; 2 HELD to the walkers: guild_conflict 9, crime_wave 8).
 
 Read first: `CLAUDE.md`, `briefs/BUILDER-RULES.md` (every rule binds), the chair's common rules (`git show
 origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt`: rules 1, 5, 6, 12, 14 (e)), WHOLE:
@@ -27,7 +28,7 @@ guild_conflict:
 11 ["guild"] The guild has called a vote on the quarrel, and a few members have had visitors at night beforehand
 12 ["market"] The weights at one side's market stalls have been found short, and that side swears they were tampered with
 crime_wave:
- 1 [] A merchant's strongbox was opened without being forced, and only three people held a key
+ 1 [] A household's strongbox was opened without being forced, and only three people held a key
  2 [] Someone has been paying for copies of house keys, and the one who cut them is having second thoughts
  3 [] A child has been seen climbing in through windows at night, and a family wants him caught before anyone else does
  4 [] A householder has set a trap for the thief, and wants someone to sit up with him tonight
@@ -38,7 +39,7 @@ crime_wave:
  9 [] A hound that barked every night has been poisoned, and the household expects the thieves tonight
 10 [] Two neighbours accuse each other of the same theft, and one of them is lying
 11 [] A cart thief left his own horse behind, and someone will come looking for it
-12 [] A reward has been posted for the thief, and a stranger claims to know where the stolen goods are kept
+12 [] A reward has been offered for the thief, and a stranger claims to know where the stolen goods are kept
 
 THE TWO HELD LINES (guild_conflict 9: presumes trade from outside; crime_wave 8: presumes a shop): each EITHER passes the presumption
 walkers as it stands, OR takes the ONE declared need the walker names (never a hideable house, never a crime fact), OR, if neither,
