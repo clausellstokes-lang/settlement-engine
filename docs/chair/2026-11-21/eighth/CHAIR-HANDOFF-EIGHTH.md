@@ -953,6 +953,17 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   to 96 is pushed. ASKED OF THE SEAT MEANWHILE: the worker's bytes by source file; and what U6 and each later unit
   is, which of them the lit law needs, what each costs: the chair rules which go before the first deploy (E30).
   E40 and E41 (the display lane; the veil's unit (viii)) were ruled in the same hour.
+- 2026-11-22 07:35 UTC · NET 8, AND THE ACCOUNT'S WEEKLY-LIMIT WARNING IS ON. Every session's record now reads `rate_limit_info.status:
+  allowed_warning` (the seven-day limit; it read `allowed` at net 7; it resets 2026-11-28 at about 23:00 UTC; no
+  overage in use). THE CHAIR'S OWN RECORD: 865,094 of 1,000,000 used (it compacts again at 901,600) and 191.44 spent,
+  85 of it since 04:29: THE CHAIR IS THE DEAREST SESSION BY FAR: every action of a session this full re-reads all of
+  it. COUNTS AND SPEND AT THIS NET: VEIL-32 457,772 (32.97; unit (viii)'s cure builder relaunched); FORTUNE-6 427,755
+  (73.29; writing a brief `U5d-ECO-ANCHOR`, not yet explained to the chair); DAILY-3 259,251 (30.34; E2 building);
+  PAGE-13 327,362 (12.79; idle, waiting for point 96); SEAT-10 about 400,000 by its own estimate (U6's reading-in;
+  U7's probe: 6 of 11 kept-form transfers name the old house's person as ruler: U7 goes before the first deploy);
+  PAGE-12 432,452 at net 7 (idle). WHAT THE CHAIR DOES ABOUT THE LIMIT (E43, next commit): tells the owner at once;
+  asks him to start the fresh chair session (the standard's rule 19: the one step that cuts the most); pushes the
+  stack's merges to a lane ref so that a stop loses nothing; holds the two lanes that are not on the finish line.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 

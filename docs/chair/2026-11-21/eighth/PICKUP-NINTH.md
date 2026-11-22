@@ -4,6 +4,8 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## READ THIS FIRST (2026-11-22 07:35 UTC): THE ACCOUNT'S WEEKLY-LIMIT WARNING IS ON, AND THE EIGHTH CHAIR'S SESSION IS THE DEAREST THING RUNNING (865,094 of 1,000,000 used; 191 spent). A FRESH CHAIR SESSION IS THE FIRST CURE: if you are it, keep your own record small: read only what this file names; one net an hour; no seat's whole record in your context (use `list_sessions` with `children` for status and `get_session` for one count at a time); write the handoff once an hour, not once an event. NEWER THAN THE BLOCK BELOW (the handoff's log holds all of it, E35 to E43): POINTS 94, 95 AND 96 are merged in `/home/user/wt/line` and under ONE gate (helper; scratch `landing/stack-96/`; a copy of the merges is pushed as `lane/stack-96-wip-2026-11-22`); THREE reds of that stack's lint are traced and their cures ready (`cure96/cure96.patch` in the scratch; E39): apply, commit, `tests/lint` whole, push the line, the list, `LINE-NOW.md`, CI by name. "SEAT 46339e5c7" IS IN and accepted: stack it with "FORTUNE" when that comes (task: every helper run over five minutes is started in the background). SEAT-10 builds U6 on a wip branch and then U7 (E42). VEIL-32 builds unit (viii)'s cure (E34, E41). DAILY-3 builds E2 and E3, then 4b and 4c (E38). HELD UNTIL THE OWNER ANSWERS ON THE ALLOWANCE: PAGE-12's second tranche (its 24 lines are ruled: E37) and PAGE-13's unit 3 (the sides table's declaration is ruled: E40). The owner's reveal-share correction and the pinned gap: E35.
+
 ## THE STATE AT 2026-11-22 04:50 UTC (NEWER THAN EVERYTHING BELOW; the eighth chair's own context compacted at about 04:00 UTC; its decisions are E1 to E30 in the handoff's section 2; ITS MACHINE RESTARTED AT ABOUT 04:33: no file lost, every process dead)
 
 - THE OWNER'S DECISIONS OF 04:42 (the handoff's section 1, verbatim): he decided ONE thing, fortune's second merit is BUILT before the deploy (E29), and left four to the chair: a fifth and a sixth seat YES (E26); the veil ships only at "not inferable" (E27); the troubles law NOT in this deploy (E28); A FINISH LINE (E30): the first deploy is ready when the share veil is proven, who rules and fortune (both merits) are landed, and the Daily Life page prints all eight lines; everything else that has landed by then ships with it, the rest in a second deploy. The merge, the deploy, the migrations, production credentials and the signings stay his.
@@ -22,7 +24,7 @@ ACCOUNT: you can see and message every seat below.
 ## Read in this order, and no wider
 1. `docs/OPERATING_STANDARD.md` (master) and CLAUDE.md.
 2. On `origin/lane/chair-2026-11-08`: this file; then `docs/chair/2026-11-21/eighth/CHAIR-HANDOFF-EIGHTH.md` WHOLE (short:
-   its section 2 is every decision of the eighth chair, E1 to E30; its section 3 is the log, newest last: THE LAST
+   its section 2 is every decision of the eighth chair, E1 to E43; its section 3 is the log, newest last: THE LAST
    ENTRIES ARE NEWER THAN THIS FILE and govern where they differ).
 3. `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` and `docs/chair/2026-11-21/eighth/prompts/COMMON-EIGHTH.txt`
    (what every seat obeys); `docs/chair/2026-11-21/eighth/landing/BRIEF-LANDING-STACK.md` (how lanes are landed now);
