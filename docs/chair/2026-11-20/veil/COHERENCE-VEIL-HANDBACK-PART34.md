@@ -50,6 +50,21 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   law: not split (fortune suspected, PLAUSIBLE). Told the chair 12:12. STILL RUNNING (its `lit/measure/run-pass2.sh`, through the
   mutex, from 12:09): birthdiff by law, the hook gap lit, the lit-surfaces probe, the chain, to `lit/run-pass2.log` (END). THEN THIS
   SEAT reads them and writes the product `out/v33/joinprobe/JOINPROBE.md`, then (ix) and the worklist (ruling 94).
+  THE LIT-SURFACES TABLE (re-read by the seat): FORTUNE CLEAN (merits and score owner = server = twin 60/60; the same under
+  capture; the merit's sentence names nothing hidden). A CRITICAL (ruling 95): act K, jp6-metropolis-0, a criminal taker withheld by
+  rule, NAMED in the served `powerStructure.recentConflict` (Reveal off and dm, server = twin). Act T's 79 strings SORTED by the seat:
+  53 a SERVED house's own name, 5 a served house's description (collisions), 17 ids `npc_power_<slug>` of the hidden power's face on
+  4 places (VR10, R4-CURE-2), 4 `factions[].desc` (true on jp6-city-8 and jp6-city-2; jp6-village-6 and jp6-metropolis-0: the mask
+  reads "the an unseen interest", a further hit past the probe's cut, PLAUSIBLE); contest (b) `namesHidden` on 4 places, text not
+  kept: PLAUSIBLE. HOOK GAP LIT: 10/456 (dark 11/462), the same one line, naming 0, server = twin. BIRTHDIFF: powers and shares,
+  hideable houses and the rung move by FORTUNE ALONE (seat: the contest only).
+- R5-RECENT (ruling 95), PREPARED HERE: the brief `briefs/R5-RECENT-BRIEF.md` (abd68e653); its instruments by builder V33-R5R
+  (worktree `/home/user/wt/r5r`, branch `v33-r5recent`; to go up as `lane/veil-33-2026-11-22-r5recent-wip`): the plant
+  `tests/security/galleryVeilRecent.pglite.test.js` and the walker `tests/lint/rosterChoiceComposedHosts.walker.test.js`, both RED by
+  design; the lit witness is the probe's act K. Nothing in 212, the twin or the registry.
+- PER-LAW GATES (ruling 95 (4)): scratch trees `/home/user/wt/jpf` (`lane/veil-33-2026-11-22-joinprobe-lawf-wip` d3c4da41f:
+  fortune's dial alone on 27c7e79dd) and `/home/user/wt/jps` (`…-laws-wip` 44f9eef84: the seat's two alone); pools `pool-jpf`,
+  `pool-jps`, both gates each: `/var/tmp/v18/out/v33/perlaw/perlaw.sh` (log `perlaw.log`), queued on the mutex after pass 2's END.
   CLOSE-1 IS PARKED (the chair, 09:14): its register commits a349917e7 (over the dark join) and e987c3e36 (over the lit) are NOT
   used: the probe takes the two commits the chair named.
 - (Q) UNITS (iv), (v), (vi) PREPARED: builder V33-Q (brief `briefs/V33-Q-BRIEF.md`), worktree `/home/user/wt/q`, branch `v33-q`
@@ -87,6 +102,17 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     same table and what the LIT laws add: the sanitizer's arm for who rules' surfaces (a hidden taker, a hidden retired holder) and
     fortune's (the merit's sentence), each served surface by name (relayed to the pass 2 builder 11:29). One line when pass 2's gates
     are read. JOINPROBE-PASS1.md goes to the security reader with R3, as a lead.
+95. THE CHAIR TO VEIL-33, 12:21 UTC (E78), ON PASS 2's act K: A CRITICAL: a power the read WITHHOLDS BY RULE NAMED on a shared read
+    (`powerStructure.recentConflict`, jp6-metropolis-0, who rules lit; Reveal off and dm; server = twin). Nothing live; it must not
+    ship. (1) BUILT EARLY, ON THE LANE, THE WRITER'S NEXT UNIT AFTER (viii), BEFORE (iv): "R5-RECENT": the composed row
+    `power.recentConflict` gets its host: the sentence WITHHELD (not masked) on a shared read wherever it names a power the read
+    withholds (by rule or by the owner), both engines; a PLANT its red-first; the lit witness the join's check. (2) THIS SEAT PREPARES
+    IT NOW: the brief; the red-first instrument (the plant on the lane's tree; jp6-metropolis-0 on the probe branch); THE WALKER R5
+    WANTS FIRST (every composed row names its host; a PLANNED host reds): NOT ONE LINE of 212, the twin or the registry; the commit to
+    the chair, who hands it to the writer at (viii)'s merge; if VEIL-32 hands over at (viii), this seat is the writer and it is the
+    first unit. (3) Act T's 79 strings read one by one before JOINPROBE.md, sorted true / collision, the true by surface and place.
+    (4) Fortune clean is taken. The three new GATE-1 cities: GATED PER LAW before the cause is written as more than plausible. One
+    line when (2) is committed.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -99,3 +125,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - (before 11:28, not clocked) pass 1 returned (44c2007ab); its gates and hook table re-read; the probe branch pushed `-wip`; the line to the chair; pass 2's builder seated.
 - 11:29 the chair's E75 (ruling 94) read; its pass-2 addition relayed to the builder. (ix) and the worklist (b)-(d): after pass 2, on the probe branch.
 - 12:12 pass 2 returned interim (33d6ad00b); its lit gates re-read; the probe branch pushed; the line to the chair.
+- 12:21 the chair's E78 (ruling 95) read. then act T's strings sorted; the R5-RECENT brief committed (abd68e653); its builder seated; the per-law trees cut and their run queued (12:25).
