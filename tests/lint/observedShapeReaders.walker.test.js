@@ -1427,7 +1427,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // 2026-11-09 21:2x): the ROSTER grows by one, the first of a NEW class (played-worlds-writer) — `outcome on
     // outcome`, the minted proposal's outcome — whose one address (src/domain/display/newsBody.js) carries one
     // read. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(78);
+    // ⭐ 78 → 79 AT THE SCHEMA-46 RUNG (2026-11-20, FORTUNE U5a-CURE item 2, route B, the chair's ruling of 22:18 UTC
+    // 2026-11-20 on the fortune lane): the ROSTER grows by one — `merits on breakdown`, the fortune merits written only
+    // under the fortune law, which no corpus CONFIG carries — whose one address (src/domain/fortune/fortuneMerits.js)
+    // carries one read. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(79);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1506,6 +1510,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // declared, always.
       // ⭐ THE SCHEMA-23 RUNG'S OTHER DECLARATION: the phantom counterparty's discriminant.
       'kind on settlement',
+      // ⭐ THE SCHEMA-46 RUNG'S ONE (2026-11-20, the fortune merits; 22:18 UTC), alphabetical.
+      'merits on breakdown',
       // ⭐ THE SCHEMA-29 RUNG'S ONE (the migration direction's config projection; WIRING-W0).
       'migrationDirection on config',
       'narrativeSummary on eventLog',
@@ -1713,6 +1719,9 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // ⭐ THE SCHEMA-41 ONE (2026-11-11, STYLE-2-MERGE closing act 5, 21:2x): `itemSettlementIds`'s one read in
       // src/domain/display/newsBody.js, written by worldPulse/convergence.js's minted proposal.
       'outcome on outcome': { reads: 1, addresses: 1 },
+      // ⭐ THE SCHEMA-46 ONE (2026-11-20, FORTUNE U5a-CURE item 2, route B, 22:18 UTC): `baseScoreOf`'s one read in
+      // src/domain/fortune/fortuneMerits.js, written by the same file's meritedLegitimacy under the fortune law only.
+      'merits on breakdown': { reads: 1, addresses: 1 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
@@ -1723,7 +1732,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // moving with the banked figure pinned above rather than being a second hand-held copy of it.
     // − 76 from the schema-32 car-merge rung (MERGE-CAR). − 77 from the schema-40 rung (SW-B7b).
     // − 78 from the schema-41 rung (2026-11-11, STYLE-2-MERGE closing act 5, the played-worlds writer).
-    expect(clearOutright).toHaveLength(live.findings.length - 78);
+    // − 79 from the schema-46 rung (2026-11-20, the fortune merits).
+    expect(clearOutright).toHaveLength(live.findings.length - 79);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 

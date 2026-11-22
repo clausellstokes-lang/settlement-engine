@@ -1,0 +1,44 @@
+U5a FIRST ACT (the chair's census ruling (1), 2026-11-20 16:45 UTC): the prototype's late step moved to the RULED PLACE
+(its own pipeline step after `assembleSettlement`, before `resolveCrisisCast`) in a scratch copy, and `u5-run.sh`'s tables
+re-taken there. Base: c83aebb48 (the lane tip: the fortune law U1-U3 and U5s's safety term, both under the law). Every
+law-2 arm is the fixture arm of COMMON.md. Instrument: `instruments/u5-place.mjs` + `u5-place-run.sh` (one command;
+EXECUTED end to end under the gate mutex). Seeds: hxd-<size>-<0..99> untouched, hxr-<size>-<0..99> every dial,
+hxu-<size>-<0..199> untouched. "today" = law 1, "ruled" = law 2 at the tip, "with U5" = law 2 plus the step.
+
+1. THE TWO PLACES AGREE TOWN FOR TOWN (u5-place-compare.txt): score, band, merits, capture rung, protection, crisis,
+   ruler and history differ late vs end in 0 of 600 (hxd), 0 of 600 (hxr), 0 of 1200 (hxu). The tables at the ruled
+   place (u5-place-{untouched,every-dial,confirm}.txt) are byte-identical to the same tables with the step at the end of
+   birth on this tip (u5-place-end-*.txt; `diff` finds no difference). The merits read nothing `resolveCrisisCast` or
+   the tail writes.
+
+2. FS4 HOLDS at the ruled place: the Legitimacy Crisis share is unchanged at every size, calm and crisis-born, on all
+   three sets; no town's score fell. Endorsed never on fewer than two reasons (calm Endorsed with U5: hxd 15, hxr 64,
+   hxu 28; fewer than two reasons: 0, 0, 0).
+
+3. THE CONTEST at the ruled place: calm protection ruled -> U5 unchanged at every size on every set (hxd 100% throughout;
+   hxr town 99 -> 99, city 98 -> 98); crisis-born protection unchanged at every size. Against the proposal's section 8
+   (end of birth, base f20b80b0a), the hxd contest block (u5-untouched.txt) differs in ONE line: the calm city's ruled
+   column (below 45: 8% -> 3%; mean 56.3 -> 58.3), because U5s's safety term is now in the ruled birth; the "with U5"
+   column is the same (3%, 60.1).
+
+4. THE CAPTURE RUNG differs from the ruled birth in 0 of 600 (hxd), 0 of 600 (hxr), 0 of 1200 (hxu) (the proposal:
+   0, 1, 0; its one was a city PART 1 forgave, and PART 1 is now U5s, in the ruled birth). Band moved by the step:
+   60 (hxd), 32 (hxr), 83 (hxu) (the proposal, PART 1 included: 71, 36, 109).
+
+5. THE STALE COLUMN (u5-place-stale.txt): towns the step moved where a census word-writer's stored output differs from
+   the same writer at the stored band. Moved: hxd 64, hxr 45 (both places).
+     W1 seat-criminal direction  late 0 / 2   end 0 / 2   (hxd / hxr; hxr-town-34, hxr-city-13: adversarial, Approved -> Endorsed, stored `stable`)
+     W2 standing sentences       late 0 / 0   end 0 / 0
+     W3 legitimacy tension twins late 0 / 0   end 0 / 0
+     W4 crisis stakes            late 0 / 0   end 0 / 0   of 4 / 4 stressed moved towns (control: 180 / 200 unmoved stressed towns, 0 differ)
+     W5 law band moved (upward)  late 9 / 1   end 9 / 1   ("never contradicted", the chair's ruling (2))
+   At the ruled place W4 is 0 BY CONSTRUCTION (the cast is derived after the step, from the moved band); at the end it
+   was 0 on these samples only. W1 stays live at either place: U5a re-runs it (`withCaptureRelations`). W2 re-runs by the
+   rosterText sibling (0 here, reachable by the code).
+
+6. FS5 AND THE STEP'S CONFINEMENT (u5-place-fs5.txt, hxd): with the step REGISTERED (23 steps against 22), law-1
+   births byte-identical to the tip in 600 of 600; law-2 births the step did not move byte-identical in 536 of 536.
+   The step's registration leaves no byte in a born document. (Outside the document: the generating session's
+   `pipelineHistory`, the reveal rail's step list, gains one row; it is store state, never saved with the town.)
+
+EXECUTED: every figure above (births on scratch copies; no source file of the checkout changed).

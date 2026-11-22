@@ -39,6 +39,7 @@ import {
   CLOSE_ROUND_TARGET_SCHEMA,
   FINAL_PASS_TARGET_SCHEMA,
   LAST_CLOSE_TARGET_SCHEMA,
+  FORTUNE_MERITS_TARGET_SCHEMA,
   declaredBankOf,
   DEAD_DEPENDENCY_TARGET_SCHEMA,
   PRESET_LIGHT_TARGET_SCHEMA,
@@ -1217,7 +1218,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND AGAIN AT THE TIER-SEED RUNG (STYLE-2-MERGE point 47, STOP 47a): 42 takes a schema-41 predecessor.
       // ⭐ AND AGAIN AT THE CLOSE-OF-ROUND RUNG (OR2): 43 takes a schema-42 predecessor.
       // ⭐ AND AGAIN AT THE FINAL-PASS RUNG (OR2's law): 44 takes a schema-43 predecessor.
-      ])).toThrow(/predecessor baseline must be a schema-44 object/); // ⭐ 45 takes a schema-44 predecessor (the last close, the chair's ruling CL26)
+      // ⭐ AND AGAIN AT THE LAST-CLOSE RUNG (CL26): 45 takes a schema-44 predecessor.
+      ])).toThrow(/predecessor baseline must be a schema-45 object/); // ⭐ 46 takes a schema-45 predecessor (the fortune merits writer's admission, the chair's ruling of 2026-11-20 22:18 UTC)
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1269,8 +1271,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ AND UP AGAIN AT THE CAR-MERGE RUNG: 32 became a defined rung on 2026-11-08 (MERGE-CAR),
       // so the probe moves to 33 and the message names 32 as the live leaf.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=46',
-      ])).toThrow(/--target-schema must be 45/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=47',
+      ])).toThrow(/--target-schema must be 46/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1355,6 +1357,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(CLOSE_ROUND_TARGET_SCHEMA).toBe(43);
     expect(FINAL_PASS_TARGET_SCHEMA).toBe(44);
     expect(LAST_CLOSE_TARGET_SCHEMA).toBe(45);
+    expect(FORTUNE_MERITS_TARGET_SCHEMA).toBe(46);
     // ⭐ FROM 19 ONWARD A RUNG DECLARES ITS POST-BANK AS DATA, and the checker's write
     // refuses a migration whose measured bank disagrees (`assertBankTwins`). 19's figure
     // is read off the register `fe021a487` froze; 20 moves no row and declares the same.
@@ -1433,6 +1436,9 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(declaredBankOf(FINAL_PASS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     // ⭐ AND 45 HOLDS IT (the last close, CL26): no declaration moves.
     expect(declaredBankOf(LAST_CLOSE_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
+    // ⭐ AND 46 GROWS IT BY ONE (the fortune merits writer's admission, the chair's ruling of 2026-11-20 22:18 UTC):
+    // one declaration (`merits on breakdown`), one address, one read, so the pair goes 78/52 -> 79/53.
+    expect(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA)).toEqual({ bankedReads: 79, taggedRows: 53 });
     expect(declaredBankOf(LINEAGE_REANCHOR_TARGET_SCHEMA)).toBeNull();
     expect(Object.isFrozen(declaredBankOf(BANK_FENCE_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA))).toBe(true);
@@ -1460,6 +1466,7 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(Object.isFrozen(declaredBankOf(CLOSE_ROUND_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(FINAL_PASS_TARGET_SCHEMA))).toBe(true);
     expect(Object.isFrozen(declaredBankOf(LAST_CLOSE_TARGET_SCHEMA))).toBe(true);
+    expect(Object.isFrozen(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA))).toBe(true);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
@@ -1541,6 +1548,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       44: 43,
       // ⭐ 45 -> 44, the last close (CL26). The chain stays SINGLE-STEP.
       45: 44,
+      // ⭐ 46 -> 45, the fortune merits writer's admission (FORTUNE U5a-CURE item 2, route B). The chain stays SINGLE-STEP.
+      46: 45,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1574,13 +1583,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 46))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42 or 43 or 44 or 45;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 47))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42 or 43 or 44 or 45 or 46;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42 or 43 or 44 or 45;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 or 32 or 33 or 34 or 35 or 36 or 37 or 38 or 39 or 40 or 41 or 42 or 43 or 44 or 45 or 46;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.
