@@ -97,6 +97,7 @@ verified by ls-remote).
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 07:2x R3-TELL-8b stopped after the read-whole (212, the registry, galleryRosterChoices.js whole: four fifths of its 250,000 mark; 85a8c6562, docs only: edit points listed); RESUMED with its mark raised to 600,000 (it holds the three reads; a fresh builder would spend them again): sitting A (the reds) then B (the cure).
 - 07:22 the chair's 07:19 ruling (88) read; the brief amended with it; R3-TELL-8b seated.
 - 07:1x R3-TELL-8 returned (STOP after step 1); -wip pushed; merged 6cd5b4fe3; the two STOPS to the chair; the brief amended.
 - 06:33 ruling 87 read; relayed. 07:01 the green chain ended: tests/lint whole = the sixteen standing.
