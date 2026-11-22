@@ -29,7 +29,7 @@ Every claim is labelled: **CONFIRMED** (run) or **PLAUSIBLE** (read).
 - **No new import edge.** `powerStrata.js` already reached `holderOfSeat.js` and `seatLaw.js` through `rulingPowerCoup.js`. PLAUSIBLE; `engineCoreLazyEdge.test.js` is green.
 - **eslint** on both files: exit 0. CONFIRMED.
 
-### A judgment for the chair: how I read "the holder's person"
+### A judgment for the chair: how I read "the holder's person" (SUPERSEDED by the chair's E70, item 2: see the last section)
 
 I read "the HOLDER's person: `holderOf(…).person` where the record names one" as: keep `holderOf`'s person unless it is the old holder's first.
 
@@ -178,3 +178,105 @@ Two surfaces are left without a word that ties the form to the holder. These dra
 ## SHA
 
 The work: `3060cb1ee`, `8634e9d9d`, `9b32160b0`. The report: the commit after them, named in the final message. Not pushed.
+
+---
+
+## THE CHAIR'S E70 (10:26Z): THE FOUR ITEMS, BUILT on top of `0b3ed8802`
+
+The new commits are `6aadcb7fe` (items 2, 3 and 4) and `1e028c69d` (item 1, `U7-OWNER-VIEW.md`); the report commit follows them. Every claim below is CONFIRMED by run unless it is labelled.
+
+### Item 1: `briefs/U7-OWNER-VIEW.md`
+
+- **What it holds:** three lit places, each with the ruler card and the governance paragraph as printed, dark beside lit:
+  - `u7p-town-8` at birth (R2);
+  - `u7p-town-2` at birth (R3);
+  - `u7p-metropolis-15` after the DM's transfer.
+- **How they were read:** off `ThePowers` over `derivePowerStrata`, and `governanceAccountRead`, by a scratch test that was never committed. It ran in a dark copy of the clone and in the flipped copy (10:39:55Z–10:40:16Z).
+
+### Item 2: THE PERSON IS ALWAYS OF THE HOLDER'S HOUSE (`powerStrata.js :: holderPersonOf`)
+
+- **The rule now:** `holderOf`'s person where it is of the holder's house (any rank); else the holder house's first, by today's ladder rule, then the roster rule (`holderFaceOf`). This replaces my "first of a third house" reading.
+- **Arm 1b** now pins `u7p-town-2` (R3): Beatrix Eisenberg leaves the chain for **Ulrike Goldstein**, the Merchant Guilds' first.
+- **What it moves on the lit pool** (flipped copy, 160 births, reader audience, 10:49:02Z–11:04:43Z):
+  - **Births:** the person moves on **24** births, all R3.
+  - **For the chair:** on **3** of those (`u7p-town-39`, `u7p-city-2`, `u7p-city-8`) the holder's house has no rank-1 face. The chain then names nobody and prints its absence line. `seatHolderFindings` raises `seat_unfilled` there.
+  - **Findings at birth:** 4 births change their findings in all. The fourth is past the probe's example cap and unnamed.
+  - **Kept-form transfers:** the person moves on exactly the six, with no finding.
+  - **Faction and ruler entry:** unchanged from before: 112 births and 10 transfers.
+- **The readers of `holderOf(…).person` in `src`:** exactly ONE, `dossier/powerStrata.js :: rulingHouseApartOf`, which hands it to `holderPersonOf`. `rulingPowerCoup.js :: coupContenders` reads `holderOf(…).holder` only. `seatCircumstances.js` and `rulingPower.js` name it in comments. PLAUSIBLE: grep and read.
+- **What prints on the six after U7** (lit, `bu7work/ownerview-flipped*.json`). Cured nothing outside the manifest.
+  - **Shows the holder's person, on all six:**
+    - the "Who runs this place?" chain (`rulingChainOf`);
+    - the governance paragraph (it names the new person and never the old);
+    - the tonight sheet's seat row (`why: 'seat'`);
+    - the crisis cast's seat row (it reads the chain; PLAUSIBLE: read);
+    - the ruler card (the holder).
+  - **Still shows the OLD house's person, through other reads than `holderOf(…).person`:**
+    - **The tonight sheet's hooks.** On 4 of 6, a hook's `source` is the old person (`metropolis-15/21/26/28`). It names them as the hook's source, not as the seat's holder; I did not read the hook text.
+    - **Institutions: the seat house's face.** On `u7p-metropolis-15`, the Democratic assembly's face is still Dietrich Engel. The path is `InstitutionsTab.jsx` and `crisisCast.js`, through `seatHolder.js :: seatHouseFaceOf`, which calls `seatCandidatesOf`.
+    - **The old person's own card.** It still wears the office: "the exchange master and Lord Mayor", "the smelt master and Mayor" (`cardPowers.js :: cardHatsOf`, read off the card's office). So a people page can still call the old house's person the Mayor. PLAUSIBLE that the People tab prints it; `cardHatsOf` was run.
+    - **The engine's seat read.** `seatCandidatesOf`'s first is still the old person on all six; its reader in `src/generators/npcStructure.js` is generation-time.
+  - These are the cast's, not the seat chain's: the cast change after a transfer (CS8's neighbour, `holderOfSeat.js`'s header). They are outside the manifest.
+
+### Item 3: `coherence/seatHolderFindings.js :: seatHolderFindings`
+
+- **The cure:** under the seat law, where the chain's faction is a holder apart from the form, `seat_outside_governing_faction` checks the chain's person against the HOLDER. The detail names the holder. Elsewhere it reads as before.
+- **Red first** (arm 5, 10:35:47Z–10:36:29Z, before the cure): "6 of 6 case(s) failed", each on `expected [ 'seat_outside_governing_faction' ] to deeply equal []`.
+- **Green after.** The converse still raises it: the holder's top ladder rung is named for the old house's person, so the chain names that person and the finding reads `{ code: 'seat_outside_governing_faction', detail: '<old person> is not of Merchant Guilds' }`, on all six.
+- **Covered beside it:** the finding joined the `reads()` differential, so law 1 (arm 3) and the veiled holder (arm 2) hold it at today's.
+
+### Item 4: the chair's caption, "Holds the seat of {form}."
+
+- **The data:** `derivePowerStrata` sets `seatOf` (the form) on the ruler entry only where the holder stands apart. It is never set for a holder veiled to the reader, who is then not the ruler.
+- **The card:** `PowerStrata.jsx :: ThePowers` prints `Holds the seat of ${powerNameInProse(p.seatOf)}.` under the holder's card, through `governanceAccount.js :: powerNameInProse`, the paragraph's own helper. PowerTab already reaches `governanceAccount.js` through `powerDeskRead.js`, so the import adds no edge on that path; `engineCoreLazyEdge` is green.
+- **No governance sentence was written.**
+- **Arm 6** renders `ThePowers` (`renderToStaticMarkup`):
+  - on `u7p-town-8` after the transfer it prints "Ruler Merchant Guilds … Holds the seat of the Town Mayor.";
+  - a hidden holder gets today's card exactly (Ruler Town Mayor, no caption), and so does the record under law 1.
+  - Red without the caption (the flipped copy with `0b3ed8802`'s `PowerStrata.jsx`, 10:48:07Z–10:48:23Z); green with it.
+
+### GREEN at `1e028c69d`'s files (shared tier, `--maxWorkers=2`, 10:41:43Z–10:47:24Z)
+
+- **The run:** `tests/domain/seat/` whole, plus every test file outside `tests/lint` that names `powerStrata`, `PowerStrata` or `seatHolderFindings`. That is 34 files: 376 passed, 1 failed.
+  - `tests/domain/seat/`: `holderOfSeat` 51, `seatChainHolder` **7**, `seatContest` 25, `seatLawSavedTown` 6, `seatTable` 45, `seatTransfer` 39.
+  - Newly in the set, all green: `dossierLabelCase` 14, `institutionLinkBlockContainer` 5, `powerSeatHeading` 3, `tailDisplayCivicBatch2` 2, `deepCraftKillList` 4, `coherenceBattery` 7.
+- **The one red is MINE, and STOPPED by symbol (outside the manifest):** `tests/components/phoneChromeFloor.census.test.js` :: "THE PHONE CHROME FLOOR … each surface matches its registry row".
+  - **The figures:** `/create` floored 620 → 621, `/settlements` 863 → 864, `/gallery` 665 → 666.
+  - **The cause:** the caption, one new floored line (`proseFontSize`, not a bare size): a count, not a breach.
+  - **Proven by run:** the same census on a dark copy with `0b3ed8802`'s `PowerStrata.jsx` is 9/9 green (10:47:47Z–10:47:55Z).
+  - **The cure:** the census's own door re-records `ROUTE_BASELINE` with the cause named. It is the integrator's, like the line's own row for point 88.
+- **eslint** on all four files: exit 0.
+
+### THE FLIPPED COPY at `1e028c69d`'s files
+
+- **Its diff from the clone:** exactly the two dials.
+- **The run** (10:48:23Z–10:48:51Z): `tests/domain/seat/`, 170 passed and 3 failed.
+  - The new file: 7/7.
+  - The three reds are the same `seatContest` dark pins as before, red without the cure too.
+
+### `tests/lint` WHOLE at the E70 tree
+
+Run once at `1e028c69d`'s files (shared tier, 11:05:12Z–11:28:33Z). CONFIRMED.
+
+**Totals:** 223 files, 3,352 tests (3,347 passed, 5 failed).
+
+**The line's own reds and the clone's environment, as before:**
+- `proseComposed.walker` (A0b, 2322 against 2103);
+- `proseCorpusBytes` (RAW, GZIP);
+- `ledgerCitationIntegrity` fails to load (no `review-fixes-2026-07-08` ref in the clone).
+
+**Mine, as before; the integrator's door:**
+- `sovereigntyLightingContract.walker` :: "THE CENSUS IS AN ASSERTION …": 3749 against 3748, from the one new test file.
+- The cure is to re-freeze `tests/lint/.lighting-census-baseline.json`.
+
+**NEW, and mine (the caption); STOPPED by symbol, outside the manifest:**
+- **The red:** `tests/lint/proseNumerics.test.js` :: "path + line + category + snippet debt exactly matches the committed baseline".
+- **The cause:** the caption's 8 lines in `PowerStrata.jsx` move that file's three frozen rows in `tests/lint/.prose-numerics-baseline.json` down by 8:
+  - lines 277 and 279 (`` `${r.name}: ${pct} percent (power ${r.power})` ``, `{pct}`) to 285 and 287;
+  - line 331 (`{r.power}`) to 339.
+- **No numeric is added:** the caption carries none, and the count stays 184 on both sides.
+- **Proven by run:** the same test on a dark copy with `0b3ed8802`'s `PowerStrata.jsx` is 29/29 green (11:29:27Z–11:30:09Z).
+- **The cure:** regenerate the baseline by its own door and review the three moved rows. That file is the integrator's.
+
+**Outside `tests/lint`, also the integrator's:**
+- `tests/components/phoneChromeFloor.census.test.js` (above): +1 floored line on `/create`, `/settlements` and `/gallery`.
