@@ -20,6 +20,10 @@ verified by ls-remote).
   diff read whole once with 212 and the registry: no fault (one raised map, one served-house list, one type table, both engines).
   FAMILIES LEFT (by town): powers.capture 21, inst.criminal 6, chains.criminal 6, powers.criminal 3, sp.ops 2, powers.relations
   2, sp.crimeTypes 1, imports.criminal 1, tensions.crime 1; svc.criminal 27 -> 0, income.criminal 1 -> 0.
+- A RED THE SEAT'S RE-RUNS MISSED, FOUND BY THE PRE-PUSH HOOK (02:19): `typecheck:ratchet` refused the push of 66e43865d:
+  `galleryRosterChoices.js` 1 error, baseline 0 (TS2339 at the unit's second `svc.criminal.filter`: the narrowing reset by the
+  first assignment). The builder is resumed for ONE cure commit (no behaviour change, no baseline raised); the lane's push waits
+  for it. LESSON for every later unit: the seat's re-runs add `node scripts/check-full-typecheck.mjs` before the merge.
 - TWO STOPS TO THE CHAIR (the builder's; `out/v31/tell5/TELL5-HANDBACK.md`): (1) sp.crimeTypes, r3m-city-under_siege-1-108: the
   one type left, "black market food", is the siege's own: VR39 keeps it; (2) sp.ops, r3m-town-infiltrated-0-12 and
   r3m-town-insurgency-0-14: "Gambling Den" is accounted for by a SERVED house carrying that label. NOT CLOSED as ruling 74
@@ -115,3 +119,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 00:40 the green chain ended; 00:53 tests/lint whole read; the 13 re-run at 2437ffea0 (12 red there). 00:56 unit 0b to the builder; the line to the chair.
 - 01:01 the chair's 00:57 message read: ruling 79. 01:01 PART 32 sections 2, 2b.
 - (before 01:25, not clocked) the builder returned (units 0, 0b, (ii); two STOPS); its branch pushed `-wip`; diff read whole once. 01:25 chain2 (the seat's re-runs); 02:06 END, every figure reproduced. 66e43865d merged. 02:17 tests/lint whole at the merge running.
+- 02:19 the lane's push REFUSED by the pre-push typecheck ratchet (section 1); the builder resumed for the cure.
