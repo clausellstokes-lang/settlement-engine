@@ -258,6 +258,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [fishBoughtIn] FAULTS-ROWS (FR12 (3)): `fishBoughtIn.js :: fishBoughtIn`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
+ * @property {Readonly<Record<string, boolean>>} [office] DAILY-3 B3 L8: `officeForms.js :: officesOf`, office key -> holds
  */
 /**
  * @typedef {object} Dimension
@@ -550,6 +551,31 @@ export const FACT_DIMENSIONS = Object.freeze({
   // getter; vetoable by the owner, on the veto list as new vocabulary): `government named` = the record names a
   // government of some kind (`rulerKindOf` not null). A daily-life line naming the government by its label needs it.
   'government named': dim({ shape: 'presence', home: 'rulerKind', reader: (f) => (f.rulerKind === undefined ? undefined : f.rulerKind !== null) }),
+  // DAILY-3 B3 L8 (the chair's E72 and E82 of 2026-11-22, on the measure `measures/OFFICE`; vetoable by the owner, new
+  // vocabulary): `office: <key>` = the place is governed by that office's FORM: the governing ROW's name (`rulingPower.js ::
+  // nameOf(governingFactionOf(record))`, the read `seat/holderOfSeat.js :: holderOf` makes) is one of the key's forms, each a
+  // KEY of its row of `seat/seatTable.js :: SEAT_TABLE` (row `government`; row `noble` for the steward), read through
+  // `formKindOf`. Answered by `factsOf(record).office` (the lazy leaf `facts/officeForms.js :: officesOf`, which holds the
+  // map); NEVER `powerStructure.government`, never a name test on a label (ruling 10). FAIL CLOSED: no governing row, or one
+  // stamped `hidden: true` (a shared read drops such a row), and every key is false; dark and lit read the same (the office,
+  // not the holder). FOR THE VEIL'S READER: NOT hideable by an owner. A faction card's floor keeps its name and `isGoverning`;
+  // the one writer of `hidden: true` is the infiltrator in `generators/power/stressFactions.js`.
+  office: dim({ shape: 'presence', home: 'office', keys: [
+    // ATOM office: elders : seat (seatTable.js :: formKindOf) : the place is governed by the elders's form (Elder Council, Free Elder Council, Elder Consensus, Household Council)
+    'elders',
+    // ATOM office: headman : seat (seatTable.js :: formKindOf) : the place is governed by the headman's form (Headman's Authority)
+    'headman',
+    // ATOM office: mayor : seat (seatTable.js :: formKindOf) : the place is governed by the mayor's form (Town Mayor)
+    'mayor',
+    // ATOM office: reeve : seat (seatTable.js :: formKindOf) : the place is governed by the reeve's form (Elected Reeve)
+    'reeve',
+    // ATOM office: lord's steward : seat (seatTable.js :: formKindOf) : the place is governed by the lord's steward's form (Feudal Stewardship)
+    "lord's steward",
+  ],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
+      const o = f.office;
+      return o && typeof o === 'object' && key && Object.hasOwn(o, key) ? bool(o[key]) : undefined;
+    } }),
   // BAR6-HOUSES, THE CHAIR'S RULING SV1 of 2026-11-16 (new vocabulary; vetoable by the owner): the record gives the town a
   // sovereign (a lord, a liege, an overlord, a crown): the government, a power, a house, a person or the founding names one, or a
   // war or an occupation supplies the realm's (`sovereign.js`). A line that names a sovereign declares it, or takes a twin naming none.
