@@ -20,10 +20,17 @@
  *   3. LAW 1: the reads are byte-identical to the reads with the holder unread, on dark births that DO hold a holder
  *      apart; the control (the same seam on the lit record) moves them, so the differential can see.
  *   4. THE HOLDER IS THE FORM'S OWN ROW (R4, the office holds itself): the reads are the law-1 reads of the same record.
+ *   5. THE SELF-CHECK (the chair's E70, item 3): under the seat law `seatHolderFindings` checks the chain's person
+ *      against the HOLDER. Red first on the six (a false `seat_outside_governing_faction`); the converse, a person truly
+ *      outside the holder's house (the holder's top ladder rung named for the old house's person), still raises it.
+ *   6. THE RULER CARD'S CAPTION (the chair's E70, item 4, the chair's wording): "Holds the seat of {form}." on the
+ *      holder's card, only where the holder stands apart, never for a veiled holder (then today's card).
  *
  * @enforced-by this test
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 /** THE ONE SWITCH between the two builds, and the holder seam, read live by the mocked modules below. */
 const dial = vi.hoisted(() => ({ lit: false }));
@@ -66,6 +73,9 @@ import { governingFactionOf } from '../../../src/domain/rulingPower.js';
 import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { rankIn } from '../../../src/domain/people/membership.js';
 import { derivePowerStrata, deciderOf, outrankingRivalOf, rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
+import { seatHolderFindings } from '../../../src/domain/coherence/seatHolderFindings.js';
+import { ThePowers } from '../../../src/components/new/tabs/power/PowerStrata.jsx';
+import { ladderFactionKeyOf } from '../../../src/domain/townMap/ladderRead.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
@@ -122,6 +132,7 @@ const reads = (s, options) => JSON.stringify({
   roster: derivePowerStrata(s, options).roster.map((r) => [r.name, r.isPower, r.powerRole]),
   decider: deciderOf(s, options),
   rival: outrankingRivalOf(s, options),
+  findings: seatHolderFindings(s),
 });
 
 /** `fn` read with the holder unread: the reads as they stood before U7. */
@@ -191,17 +202,21 @@ describe('1. RED FIRST: the probe\'s six kept-form transfers name the holder\'s 
   }, 300_000);
 });
 
-describe('1b. the seat\'s own person stays where no old house holds them (BU7\'s reading, for the chair)', () => {
-  it('u7p-town-2 born lit, the holder by kind (R3): the faction is the holder, the person is still the seat\'s, Beatrix Eisenberg', () => {
+describe('1b. the person is ALWAYS of the holder\'s house, at birth too (the chair\'s E70, item 2)', () => {
+  it('u7p-town-2 born lit, the holder by kind (R3): the faction is the holder, the person the holder\'s first, Ulrike Goldstein', () => {
     build(true);
     const born = bear('town', 'u7p-town-2');
     const held = holderOf(born, READER);
     expect(held.rule, 'the holder by kind').toBe('R3');
     expect(held.holderName, 'the holder').toBe(TAKER);
+    const was = today(() => rulingChainOf(born));
+    expect(was.npc?.name, 'today\'s chain names the form\'s seat-holder').toBe('Beatrix Eisenberg');
     const chain = rulingChainOf(born);
     expect(chain.faction?.name, 'the chain\'s faction is the holder').toBe(TAKER);
-    expect(chain.npc?.name, 'the chain keeps the seat\'s person').toBe('Beatrix Eisenberg');
-    expect(chain.npc?.name, 'today\'s person, unmoved').toBe(today(() => rulingChainOf(born)).npc?.name);
+    expect(chain.npc?.name, 'the chain names the holder\'s first').toBe('Ulrike Goldstein');
+    expect(rankIn((born.npcs || []).find((n) => n?.name === 'Ulrike Goldstein'), TAKER), 'the person is the holder\'s first').toBe(1);
+    // anchored: today's chain names Beatrix Eisenberg (asserted above), so the before list holds her
+    expectPresentThenAbsent([was.npc?.name], [chain.npc?.name], 'Beatrix Eisenberg', 'the form\'s seat-holder leaves the chain');
   }, 60_000);
 });
 
@@ -268,5 +283,52 @@ describe('4. the holder is the form\'s own row: unchanged', () => {
     expect(chain.power?.name, 'the power').toBe('Town Council');
     expect(chain.faction?.name, 'the faction is the form\'s own row').toBe('Town Council');
     expect(chain.npc?.name, 'the person').toBe('Konrad Berger');
+  }, 60_000);
+});
+
+describe('5. the self-check reads the holder: no false finding on the six, and the converse still raises it', () => {
+  it('the six after the transfer: no finding; the holder\'s rung named for the old house\'s person: seat_outside_governing_faction', () => {
+    build(true);
+    expectNoSeedFailures(collectSeedFailures([
+      { settType: 'town', seed: 'u7p-town-8', oldPerson: 'Judith Weber', person: 'Felix Naumann' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-15', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-21', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-26', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-27', oldPerson: 'Conrad Brandt', person: 'Katharina Rosenfeld' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-28', oldPerson: 'Josef Frank', person: 'Notburga Weber' },
+    ], ({ settType, seed, oldPerson, person }) => {
+      const after = dmTransfer(bear(settType, seed), seed, TAKER);
+      expect(rulingChainOf(after).npc?.name, `${seed}: the chain's person`).toBe(person);
+      expect(seatHolderFindings(after).map((f) => f.code), `${seed}: the holder's own person raises no finding`).toEqual([]);
+      // the converse: the holder's top ladder rung names the old house's person, who is not of the holder's house
+      const holderRow = after.powerStructure.factions.find((f) => f?.faction === TAKER);
+      const laddered = { ...after, npcLadder: { factions: { [ladderFactionKeyOf(holderRow)]: { rungs: [{ npcId: 'u7.rung', name: oldPerson, standing: 1 }] } } } };
+      expect(rulingChainOf(laddered).npc?.name, `${seed}: the converse chain names the rung`).toBe(oldPerson);
+      expect(seatHolderFindings(laddered), `${seed}: a person outside the holder's house still raises it`)
+        .toEqual([{ code: 'seat_outside_governing_faction', detail: `${oldPerson} is not of Merchant Guilds` }]);
+    }), 'the six, the self-check');
+  }, 300_000);
+});
+
+/** The Power tab's seat cards as printed (`PowerStrata.jsx :: ThePowers` over `derivePowerStrata`), as text. */
+const cardsOf = (s) => renderToStaticMarkup(React.createElement(ThePowers, { settlement: s, powers: derivePowerStrata(s).powers, factionSupport: new Map() }))
+  .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+describe('6. the holder\'s ruler card says whose seat it holds, never for a veiled holder', () => {
+  it('u7p-town-8 after the transfer: "Holds the seat of the Town Mayor."; veiled, or under law 1, today\'s card', () => {
+    build(true);
+    const after = dmTransfer(bear('town', 'u7p-town-8'), 'u7p-town-8', TAKER);
+    const lit = cardsOf(after);
+    expect(lit, 'the holder\'s card').toContain('Ruler Merchant Guilds');
+    expect(lit, 'the caption, the chair\'s wording').toContain('Holds the seat of the Town Mayor.');
+    const hidden = veiled(after, TAKER, { hidden: true });
+    expect(cardsOf(hidden), 'a veiled holder: today\'s card').toBe(today(() => cardsOf(hidden)));
+    expect(cardsOf(hidden), 'a veiled holder: the form is the ruler').toContain('Ruler Town Mayor');
+    // anchored: the lit card carries the caption (asserted above), so the veiled card's lacking it is the veil's work
+    expectPresentThenAbsent(lit, cardsOf(hidden), 'Holds the seat of', 'the veiled holder\'s card names no seat');
+    const dark = withLaw(after, null);
+    expect(cardsOf(dark), 'law 1: today\'s card').toBe(today(() => cardsOf(dark)));
+    // anchored: the same record under the seat law carries the caption (asserted above)
+    expectPresentThenAbsent(lit, cardsOf(dark), 'Holds the seat of', 'law 1 names no seat');
   }, 60_000);
 });

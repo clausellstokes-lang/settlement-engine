@@ -107,6 +107,8 @@ function rulingHouseApartOf(settlement, options) {
  * @property {number}    [weight]       Coup weight (contenders only).
  * @property {boolean}   [gated]        Whether the ruler's amplified case re-enters the field (ruler only).
  * @property {number}    [contenderCount]  How many contenders press the seat (ruler only).
+ * @property {string}    [seatOf]       U7: the FORM whose seat the ruler holds, where the ruler is a holder apart from
+ *                                      it (ruler only; never for a holder veiled to the reader, who is then not the ruler).
  */
 
 /**
@@ -165,10 +167,12 @@ export function derivePowerStrata(settlement, options) {
     powers.push(entry);
   };
 
-  const ruler = rulingHouseApartOf(settlement, options)?.holder || governing;
+  const apart = rulingHouseApartOf(settlement, options);
+  const ruler = apart?.holder || governing;
   if (ruler) {
     const name = nameOf(ruler);
     pushPower({
+      ...(apart && governing ? { seatOf: nameOf(governing) } : {}),
       name,
       archetype: factionArchetype(ruler),
       power: num(ruler.power),
@@ -315,22 +319,16 @@ export function liveSeatCandidatesOf(settlement) {
 }
 
 /**
- * U7: `holderOf`'s person as the chain's npc, unless that person is the first (rank 1) of a THIRD house, neither the
- * form nor the holder: after a kept-form transfer `holderOf`'s person is still the form's seat candidate, the old
- * holder's first. Then null, and the chain reads the holder's row. A person filed in the holder's house (any rank;
- * R2's dual hat is its rank-1) or first of no other house (R3's seat) stays the seat's person.
- * @param {RulingChainSettlement | null | undefined} settlement
+ * U7 (the chair's E70, item 2): THE CHAIN'S PERSON IS ALWAYS OF THE HOLDER'S HOUSE. `holderOf`'s person is the chain's
+ * npc where the record files that person in the holder's house (a membership of any rank: R2's dual hat is its rank-1);
+ * else null, and the chain reads the holder's row (after a kept-form transfer `holderOf`'s person is still the form's
+ * seat candidate, of the old house; at a birth held by kind, R3, it is the form's own).
  * @param {{ holder: StrataFaction, person: import('./seatHolder.js').SeatNpc | null }} apart
  * @returns {{ name: string, role: string, via: 'roster' } | null}
  */
-function holderPersonOf(settlement, apart) {
+function holderPersonOf(apart) {
   const person = apart.person;
-  if (!person) return null;
-  const holder = nameOf(apart.holder);
-  const form = nameOf(governingFactionOf(settlement));
-  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
-  const oldHouses = factions.filter((f) => !!f && nameOf(f) !== form && nameOf(f) !== holder && rankIn(person, nameOf(f)) === 1);
-  if (rankIn(person, holder) === undefined && oldHouses.length) return null;
+  if (!person || rankIn(person, nameOf(apart.holder)) === undefined) return null;
   return { name: String(person.name || ''), role: cardHatsOf(person), via: /** @type {'roster'} */ ('roster') };
 }
 
@@ -377,9 +375,9 @@ function holderFaceOf(settlement, holder, options) {
  *             TE-DENSITY-1 is censusing the gap).
  *
  * UNDER THE SEAT LAW (U7, CS13), where the holder stands apart from the form (`rulingHouseApartOf`): `power` stays
- * the FORM (the office); `faction` is the HOLDER; `npc` is the holder's person: `holderOf`'s person, unless the
- * record files that person as the first of a third house (the old holder's, `holderPersonOf`), else the holder
- * house's first by the same two rules, applied to the holder's row: (1) its top ladder rung; (2) its rank-1 face (the people car's seat rule), less the ousted and the
+ * the FORM (the office); `faction` is the HOLDER; `npc` is ALWAYS of the holder's house: `holderOf`'s person where
+ * the record files that person in the holder's house (`holderPersonOf`), else the holder house's first by the same
+ * two rules, applied to the holder's row: (1) its top ladder rung; (2) its rank-1 face (the people car's seat rule), less the ousted and the
  * office stand-ins, and for the reader less a veiled face (`holderOf`'s own person rule). Elsewhere, not a byte moves.
  *
  * @param {RulingChainSettlement | null | undefined} settlement
@@ -420,8 +418,8 @@ export function rulingChainOf(settlement, options) {
     ? { name: nameOf(house), power: num(house.power), powerLabel: house.powerLabel || '', vacant }
     : null;
 
-  // (0) U7: `holderOf`'s person, unless it is the old holder's first (`holderPersonOf`).
-  let npc = apart ? holderPersonOf(settlement, apart) : null;
+  // (0) U7: `holderOf`'s person, where it is of the holder's house (`holderPersonOf`).
+  let npc = apart ? holderPersonOf(apart) : null;
   // (1) The ladder-backed ruler — the ruling house's top rung.
   if (!npc && house && hasLadder(settlement)) {
     const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(house));
