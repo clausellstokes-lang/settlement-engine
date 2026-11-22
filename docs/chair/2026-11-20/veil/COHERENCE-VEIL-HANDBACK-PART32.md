@@ -78,8 +78,18 @@ verified by ls-remote).
   `criminalCaptureState` served 'adversarial'/'equilibrium'/'corrupted' on 25 towns (Reveal DM) where no criminal house or power is
   served; open pages show 'none' (DM) or absent (off); the twins read 'none' on 21 of 25. Recommended: 'none' as a sent form in
   unit (v); the four whose twin keeps a rung listed. RULED 03:30 (ruling 82).
-- IN FLIGHT (04:20): BUILDER R3-TELL-7 (fresh) on UNIT (vii), worktree `/home/user/wt/r3tell7`, branch `v31-r3tell7` (local, cut at
-  5d664d585); if this seat stops, its work goes up as `lane/veil-31-2026-11-21-r3tell7-wip` unread.
+- UNIT (vii) STOPPED AFTER STEP 2 (its brief's three-cause limit); its measure MERGED as 9185c48cf (docs only: builder R3-TELL-7,
+  `lane/veil-31-2026-11-21-r3tell7-wip` at b28d3610f; hand-back `out/v31/tell7/TELL7-HANDBACK.md`). MEASURED: a served safety list is a
+  STRICT PART of the twin's in 26 of 92 towns (crimeTypes 25, plotHooks 1, sp.ops 0), server = twin; by THE RECORD REFERENCE
+  (ruling 83: `generateSafetyProfile` then `settleCrimeLinesToSignal` over the SERVED config, tier and houses; 184/184 stored lists
+  reproduced; 0/48 controls) ALL 26 ARE THE VEIL'S, 0 the draw's. SIX CAUSES: threshold types under hasCriminalInst 10; Magical
+  crime with a withheld Arcane black market 4; the Background crime / Lawlessness fallback 6; a crisis's own type 6; desperation
+  theft 2; the merchant-army hook's map row 1. GATE-1 CANNOT SEE THE CLASS. THE ARM PROPOSED (hand-back, "THE PROPOSED ARM"): red
+  where a served list lacks an entry the reference writes; 26/92 today, all veil; ~3 min single-process. SENT TO THE CHAIR 05:09 with
+  the cure's shape (crimeTypes and plotHooks RECOMPOSED over served facts by the same reference, both engines; three causes need
+  criminalEffective and the stress flags in 212: a port with a parity walker). AWAITING THE CHAIR'S WORD ON THE ARM'S FORM AND THE CURE.
+- NEXT STEP IN ONE LINE (a successor starts here): the chair's ruling on the arm's form and the cure (ruling 83); then the arm
+  (instrument, before "R3") and the cure unit; then units (iv), (v), (vi) per R3-TELL-5's brief (+ ruling 82's 'none').
 - UNIT (vii)'S BRIEF: `briefs/R3-TELL-7-BRIEF.md` (ruling 81; it carries ruling 54's caution: the twin is another draw, so every
   difference is separated into the veil's cause and the draw's; the per-family arm is PROPOSED with its cost, not built).
 - NEXT (order, ruling 82/83): unit (vii) (in flight); THE ARM (its form ruled on (vii)'s proposal, then built: before "R3"); units (iv), (v) (the three sent forms + criminalCaptureState 'none', ruling 82), (vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
@@ -198,3 +208,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 04:03 chain3 END, every figure reproduced; 8807cde93 merged; typecheck 0 at the merge. 04:16 brief R3-TELL-7 written.
 - 04:18 tests/lint whole at 8807cde93: the sixteen standing only; the unit (iii) line to the chair (with ruling 54's caution on the arm). 04:20 the unit (vii) builder seated.
 - 04:24 the chair's ruling 83 read; relayed to the (vii) builder 04:24.
+- (before 05:09, not clocked) unit (vii)'s builder returned (STOP after step 2); pushed -wip; 9185c48cf merged (docs only); 05:09 the line to the chair. 05:09 section 1 current.
