@@ -26,6 +26,8 @@ import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.
 import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
 import { ARRIVAL_PEOPLE, ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
+import { ORIGIN_POOLS } from '../../src/generators/narrative/settlementOriginProse.js';
+import { ORIGIN_VARIANTS } from '../../src/data/settlementReasonVariants.js';
 
 /**
  * RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): "what prints instead" on an
@@ -35,6 +37,19 @@ import { textOf } from '../../src/domain/facts/textOf.js';
  */
 const slotOf = (pool, gone) => new RegExp(pool.map((l) => { const t = textOf(l); return String(typeof t === 'function' ? t('@@NAME@@') : t); })
   .filter((t) => !gone.test(t)).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('@@NAME@@').join('[^"]+?')).join('|'));
+
+/**
+ * WIDENED TO THE POOL at PEOPLE-3 B3 (2026-11-22; the brief P3-B3-resume-BUILD.md, item 1: "re-keyed by identity or widened to the
+ * pool (never a blind re-record)"): "what prints instead" on the origin line, COMPUTED from the arm's own pools, never quoted: the
+ * record's `settlementReason[0]` is any line of the arm's pool (`settlementOriginProse.js :: ORIGIN_POOLS`) or of the wordings that
+ * follow it (`settlementReasonVariants.js :: ORIGIN_VARIANTS`), but the flagged words; each slot any phrase.
+ * @param {'road' | 'river' | 'crossroads'} arm @param {RegExp} gone @returns {RegExp}
+ */
+const originOf = (arm, gone) => {
+  const lines = [...ORIGIN_POOLS[arm], ...ORIGIN_VARIANTS[arm].map((row) => row.text)].filter((t) => !gone.test(t));
+  const wild = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:ground|holds|channels|export|routeWay)\\\}/g, '[^"]+?');
+  return new RegExp(`"settlementReason":\\["(?:${lines.map(wild).join('|')})"`);
+};
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -210,8 +225,8 @@ describe('BAR3-PLACES-2 batch 2: the origin, the war and the table read the town
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C30340 no founding cause on the bank (the read town)', 'bar0-town-occupied-rand-7', /Founded on the bank, where the current/, /It stands on the river out on the open plain, and the river is its way in and out\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
-    ['C30340 (a thorp)', 'r2r-thorp-41', /Founded on the bank, where the current/, /Built on the river; its people fish it, and draw their water from it\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C30340 no founding cause on the bank (the read town)', 'bar0-town-occupied-rand-7', /Founded on the bank, where the current/, originOf('river', /Founded on the bank, where the current/)], // widened to the pool at PEOPLE-3 B3 (2026-11-22, `originOf`): the town prints a line of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C30340 (a thorp)', 'r2r-thorp-41', /Founded on the bank, where the current/, originOf('river', /Founded on the bank, where the current/)], // widened to the pool at PEOPLE-3 B3 (2026-11-22, `originOf`): the town prints a line of its own arm on its own facts (src/data/settlementReasonVariants.js)
     ['C30340 (a city at war)', 'r2s-wartime-city-3', /Founded on the bank, where the current/, /It stands on the bank, and the current does the hauling/],
     ['C34042 no trade that never paid better (the read city)', 'bar0-city-wartime-rand-13', /trade has never paid better/, /(running day and night on the army's contracts|lives on the army's contracts), and the place now needs the war/],
     ['C34042 (a village)', 'r2s-wartime-village-0', /trade has never paid better/, /(running day and night on the army's contracts|lives on the army's contracts), and the place now needs the war/],

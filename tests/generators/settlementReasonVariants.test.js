@@ -167,7 +167,7 @@ describe('3. every printed wording holds on the final record', () => {
     expect([...road8.needs].sort()).toEqual(['grain', 'terrain: plains']);
     expect(road8.excludes).toContain('famine');
     expect(V.SMALL_PLACE_VARIANTS[0].text).toBe('A few households {ground}, each with its own work.');
-    const small4 = V.SMALL_PLACE_VARIANTS.find((/** @type {any} */ r) => r.id === 'small.4'); // by its id: small.3 is struck (the integrator's word)
+    const small4 = V.SMALL_PLACE_VARIANTS.find((/** @type {any} */ r) => r.id === 'small.4'); // by its id: small.3 is struck (the chair agreed the strike, 22:35 UTC 2026-11-20)
     expect(small4.text).toBe('Grain from their own fields feeds the households here.');
     expect(small4.needs).toContain('grain');
     expect(small4.excludes).toContain('famine');

@@ -92,9 +92,9 @@ export const ORIGIN_VARIANTS = Object.freeze({
 });
 
 /** settlementReason[1], thorp and hamlet: the wordings that follow `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES`.
- * small.3 ("Fishing is part of how …") and small.15 ("… taken elsewhere to market.") are STRUCK (the integrator's word,
- * 2026-11-20): no atom declares what the presumption walker reads in them (a house named fishing; a market), and a
- * wording no atom declares is not built. The ids of the rest are kept.
+ * small.3 ("Fishing is part of how …") and small.15 ("… taken elsewhere to market.") are STRUCK (offered by the builder at
+ * 21:58, AGREED by the chair at 22:35 UTC 2026-11-20): no atom declares what the presumption walker reads in them (a house
+ * named fishing; a market), and a wording no atom declares is not built. The ids of the rest are kept.
  */
 export const SMALL_PLACE_VARIANTS = Object.freeze([
   // the chair, 17:21, item 2: small places 1 as ruled ("each with its own work.")

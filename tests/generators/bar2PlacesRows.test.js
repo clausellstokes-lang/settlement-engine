@@ -21,6 +21,8 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { ARRIVAL_TENSIONS } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
+import { ORIGIN_POOLS } from '../../src/generators/narrative/settlementOriginProse.js';
+import { ORIGIN_VARIANTS } from '../../src/data/settlementReasonVariants.js';
 
 /**
  * RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): "what prints instead" on an
@@ -30,6 +32,19 @@ import { textOf } from '../../src/domain/facts/textOf.js';
  */
 const slotOf = (pool, gone) => new RegExp(pool.map((l) => { const t = textOf(l); return String(typeof t === 'function' ? t('@@NAME@@') : t); })
   .filter((t) => !gone.test(t)).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('@@NAME@@').join('[^"]+?')).join('|'));
+
+/**
+ * WIDENED TO THE POOL at PEOPLE-3 B3 (2026-11-22; the brief P3-B3-resume-BUILD.md, item 1: "re-keyed by identity or widened to the
+ * pool (never a blind re-record)"): "what prints instead" on the origin line, COMPUTED from the arm's own pools, never quoted: the
+ * record's `settlementReason[0]` is any line of the arm's pool (`settlementOriginProse.js :: ORIGIN_POOLS`) or of the wordings that
+ * follow it (`settlementReasonVariants.js :: ORIGIN_VARIANTS`), but the flagged words; each slot any phrase.
+ * @param {'road' | 'river' | 'crossroads'} arm @param {RegExp} gone @returns {RegExp}
+ */
+const originOf = (arm, gone) => {
+  const lines = [...ORIGIN_POOLS[arm], ...ORIGIN_VARIANTS[arm].map((row) => row.text)].filter((t) => !gone.test(t));
+  const wild = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:ground|holds|channels|export|routeWay)\\\}/g, '[^"]+?');
+  return new RegExp(`"settlementReason":\\["(?:${lines.map(wild).join('|')})"`);
+};
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -60,9 +75,9 @@ describe('BAR2-PLACES: the rows read the town', () => {
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C24150 no generations', 'r2r-thorp-10', /for generations its news came/, /Built beside the road in the desert; what the place sells goes out along it, and what it buys comes in\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
-    ['C29731 no road age', 'r2r-thorp-5', /a road a century old/, /It stands on the road out on the open plain, and the road is how people and goods reach it\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
-    ['C25604 the road, not the living', 'r2r-hamlet-32', /makes its living from other people's journeys/, /The road climbs to it through the hills, and every load comes up that road\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C24150 no generations', 'r2r-thorp-10', /for generations its news came/, originOf('road', /for generations its news came/)], // widened to the pool at PEOPLE-3 B3 (2026-11-22, `originOf`): the town prints a line of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C29731 no road age', 'r2r-thorp-5', /a road a century old/, originOf('road', /a road a century old/)], // widened to the pool at PEOPLE-3 B3 (2026-11-22, `originOf`): the town prints a line of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C25604 the road, not the living', 'r2r-hamlet-32', /makes its living from other people's journeys/, originOf('road', /makes its living from other people's journeys/)], // widened to the pool at PEOPLE-3 B3 (2026-11-22, `originOf`): the town prints a line of its own arm on its own facts (src/data/settlementReasonVariants.js)
     ['C14951 no mill claimed', 'r2r-thorp-1', /All three still hold/, /Built on the river: it gives the place its water, and carries what the fields produce, as it always has\./],
     ['C25910 no public ovens', 'r2r-village-25', /Public ovens/, /Market vendors and shared dining customs make food distribution visibly civic\./],
     ['C26954 no shared ovens', 'r2r-thorp-23', /and shared ovens stretch/, /Fermentation, pickling, and drying stretch the harvest through winter\./],
