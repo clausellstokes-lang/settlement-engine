@@ -1,0 +1,254 @@
+# CLOSE-MEASURE run 2026-11-22T02:41:31.719Z (the births; report 2026-11-22T02:42:56.999Z); 150 places a size; triples 200000 ordered, LCG seed 20261121 (restarted per size, and per tree and pool; MIXED seed 20261122)
+# fields: sentTop/hookTop = the three most printed, each n/(all places of the size); sent2/hook2 = unordered pairs sharing one; sent3/hook3 = ordered triples whose third repeats the first or second; row3/hookRow3 = sim.mjs three in a row
+BAR BEFORE M thorp sentTop=13/150(8.7%)|9/150(6.0%)|9/150(6.0%) sent2=394/11175(3.5%) sent3=13981/200000(7.0%) row3=13/148(8.8%) hookTop=25/150(16.7%)|25/150(16.7%)|13/150(8.7%) hook2=737/11175(6.6%) hook3=25610/200000(12.8%) hookRow3=24/148(16.2%) none=0/150
+BAR BEFORE M hamlet sentTop=21/150(14.0%)|13/150(8.7%)|8/150(5.3%) sent2=498/11175(4.5%) sent3=16787/200000(8.4%) row3=21/148(14.2%) hookTop=26/150(17.3%)|26/150(17.3%)|21/150(14.0%) hook2=841/11175(7.5%) hook3=27905/200000(14.0%) hookRow3=30/148(20.3%) none=0/150
+BAR BEFORE M village sentTop=15/150(10.0%)|12/150(8.0%)|11/150(7.3%) sent2=669/11175(6.0%) sent3=22723/200000(11.4%) row3=32/148(21.6%) hookTop=21/150(14.0%)|21/150(14.0%)|16/150(10.7%) hook2=1033/11175(9.2%) hook3=33511/200000(16.8%) hookRow3=36/148(24.3%) none=0/150
+BAR BEFORE M town sentTop=48/150(32.0%)|31/150(20.7%)|10/150(6.7%) sent2=1910/11175(17.1%) sent3=56512/200000(28.3%) row3=57/148(38.5%) hookTop=49/150(32.7%)|49/150(32.7%)|48/150(32.0%) hook2=2185/11175(19.6%) hook3=64806/200000(32.4%) hookRow3=68/148(45.9%) none=0/150
+BAR BEFORE M city sentTop=79/150(52.7%)|69/150(46.0%)|12/150(8.0%) sent2=5491/11175(49.1%) sent3=138915/200000(69.5%) row3=123/148(83.1%) hookTop=79/150(52.7%)|79/150(52.7%)|79/150(52.7%) hook2=6000/11175(53.7%) hook3=149043/200000(74.5%) hookRow3=129/148(87.2%) none=0/150
+BAR BEFORE M metropolis sentTop=79/150(52.7%)|65/150(43.3%)|18/150(12.0%) sent2=5327/11175(47.7%) sent3=137279/200000(68.6%) row3=120/148(81.1%) hookTop=88/150(58.7%)|88/150(58.7%)|79/150(52.7%) hook2=6815/11175(61.0%) hook3=160613/200000(80.3%) hookRow3=139/148(93.9%) none=0/150
+MIXED BEFORE M sentTop=231/900(25.7%)|185/900(20.6%)|50/900(5.6%) sent2=55392/404550(13.7%) sent3=48243/200000(24.1%) row3=308/898(34.3%) hookTop=231/900(25.7%)|231/900(25.7%)|215/900(23.9%) hook2=71851/404550(17.8%) hook3=61361/200000(30.7%) hookRow3=382/898(42.5%)
+BAR BEFORE V thorp sentTop=17/150(11.3%)|14/150(9.3%)|10/150(6.7%) sent2=473/11175(4.2%) sent3=15710/200000(7.9%) row3=21/148(14.2%) hookTop=26/150(17.3%)|26/150(17.3%)|18/150(12.0%) hook2=825/11175(7.4%) hook3=27652/200000(13.8%) hookRow3=27/148(18.2%) none=0/150
+BAR BEFORE V hamlet sentTop=12/150(8.0%)|12/150(8.0%)|11/150(7.3%) sent2=448/11175(4.0%) sent3=15752/200000(7.9%) row3=20/148(13.5%) hookTop=20/150(13.3%)|20/150(13.3%)|15/150(10.0%) hook2=669/11175(6.0%) hook3=23724/200000(11.9%) hookRow3=27/148(18.2%) none=0/150
+BAR BEFORE V village sentTop=13/150(8.7%)|12/150(8.0%)|12/150(8.0%) sent2=661/11175(5.9%) sent3=23979/200000(12.0%) row3=23/148(15.5%) hookTop=26/150(17.3%)|26/150(17.3%)|13/150(8.7%) hook2=1142/11175(10.2%) hook3=39122/200000(19.6%) hookRow3=40/148(27.0%) none=0/150
+BAR BEFORE V town sentTop=41/150(27.3%)|33/150(22.0%)|11/150(7.3%) sent2=1658/11175(14.8%) sent3=52079/200000(26.0%) row3=57/148(38.5%) hookTop=46/150(30.7%)|46/150(30.7%)|41/150(27.3%) hook2=2081/11175(18.6%) hook3=64200/200000(32.1%) hookRow3=70/148(47.3%) none=0/150
+BAR BEFORE V city sentTop=73/150(48.7%)|67/150(44.7%)|12/150(8.0%) sent2=4768/11175(42.7%) sent3=125364/200000(62.7%) row3=111/148(75.0%) hookTop=76/150(50.7%)|76/150(50.7%)|73/150(48.7%) hook2=5614/11175(50.2%) hook3=142452/200000(71.2%) hookRow3=122/148(82.4%) none=0/150
+BAR BEFORE V metropolis sentTop=68/150(45.3%)|62/150(41.3%)|14/150(9.3%) sent2=4457/11175(39.9%) sent3=118931/200000(59.5%) row3=117/148(79.1%) hookTop=76/150(50.7%)|76/150(50.7%)|68/150(45.3%) hook2=5532/11175(49.5%) hook3=140638/200000(70.3%) hookRow3=133/148(89.9%) none=0/150
+MIXED BEFORE V sentTop=210/900(23.3%)|172/900(19.1%)|59/900(6.6%) sent2=49311/404550(12.2%) sent3=43774/200000(21.9%) row3=283/898(31.5%) hookTop=210/900(23.3%)|210/900(23.3%)|200/900(22.2%) hook2=66222/404550(16.4%) hook3=57385/200000(28.7%) hookRow3=362/898(40.3%)
+BAR AFTER M thorp sentTop=8/150(5.3%)|6/150(4.0%)|5/150(3.3%) sent2=154/11175(1.4%) sent3=5859/200000(2.9%) row3=6/148(4.1%) hookTop=18/150(12.0%)|18/150(12.0%)|17/150(11.3%) hook2=686/11175(6.1%) hook3=24050/200000(12.0%) hookRow3=22/148(14.9%) none=0/150
+BAR AFTER M hamlet sentTop=9/150(6.0%)|9/150(6.0%)|8/150(5.3%) sent2=234/11175(2.1%) sent3=8309/200000(4.2%) row3=14/148(9.5%) hookTop=17/150(11.3%)|17/150(11.3%)|15/150(10.0%) hook2=724/11175(6.5%) hook3=24010/200000(12.0%) hookRow3=22/148(14.9%) none=0/150
+BAR AFTER M village sentTop=12/150(8.0%)|11/150(7.3%)|9/150(6.0%) sent2=386/11175(3.5%) sent3=13092/200000(6.5%) row3=21/148(14.2%) hookTop=14/150(9.3%)|14/150(9.3%)|13/150(8.7%) hook2=969/11175(8.7%) hook3=31500/200000(15.8%) hookRow3=30/148(20.3%) none=0/150
+BAR AFTER M town sentTop=18/150(12.0%)|15/150(10.0%)|10/150(6.7%) sent2=531/11175(4.8%) sent3=17907/200000(9.0%) row3=24/148(16.2%) hookTop=16/150(10.7%)|14/150(9.3%)|12/150(8.0%) hook2=1373/11175(12.3%) hook3=43917/200000(22.0%) hookRow3=37/148(25.0%) none=0/150
+BAR AFTER M city sentTop=16/150(10.7%)|15/150(10.0%)|13/150(8.7%) sent2=994/11175(8.9%) sent3=33468/200000(16.7%) row3=22/148(14.9%) hookTop=24/150(16.0%)|21/150(14.0%)|20/150(13.3%) hook2=3623/11175(32.4%) hook3=108025/200000(54.0%) hookRow3=87/148(58.8%) none=0/150
+BAR AFTER M metropolis sentTop=14/150(9.3%)|14/150(9.3%)|12/150(8.0%) sent2=838/11175(7.5%) sent3=29135/200000(14.6%) row3=46/148(31.1%) hookTop=23/150(15.3%)|22/150(14.7%)|22/150(14.7%) hook2=4079/11175(36.5%) hook3=117034/200000(58.5%) hookRow3=119/148(80.4%) none=0/150
+MIXED AFTER M sentTop=40/900(4.4%)|35/900(3.9%)|34/900(3.8%) sent2=10246/404550(2.5%) sent3=10150/200000(5.1%) row3=61/898(6.8%) hookTop=73/900(8.1%)|62/900(6.9%)|57/900(6.3%) hook2=48804/404550(12.1%) hook3=44934/200000(22.5%) hookRow3=283/898(31.5%)
+BAR AFTER V thorp sentTop=9/150(6.0%)|8/150(5.3%)|7/150(4.7%) sent2=211/11175(1.9%) sent3=7426/200000(3.7%) row3=2/148(1.4%) hookTop=18/150(12.0%)|17/150(11.3%)|15/150(10.0%) hook2=756/11175(6.8%) hook3=25250/200000(12.6%) hookRow3=23/148(15.5%) none=0/150
+BAR AFTER V hamlet sentTop=10/150(6.7%)|10/150(6.7%)|7/150(4.7%) sent2=207/11175(1.9%) sent3=7319/200000(3.7%) row3=12/148(8.1%) hookTop=16/150(10.7%)|14/150(9.3%)|11/150(7.3%) hook2=627/11175(5.6%) hook3=22361/200000(11.2%) hookRow3=24/148(16.2%) none=0/150
+BAR AFTER V village sentTop=13/150(8.7%)|10/150(6.7%)|8/150(5.3%) sent2=399/11175(3.6%) sent3=14332/200000(7.2%) row3=12/148(8.1%) hookTop=16/150(10.7%)|15/150(10.0%)|14/150(9.3%) hook2=1072/11175(9.6%) hook3=37322/200000(18.7%) hookRow3=38/148(25.7%) none=0/150
+BAR AFTER V town sentTop=13/150(8.7%)|10/150(6.7%)|6/150(4.0%) sent2=330/11175(3.0%) sent3=10916/200000(5.5%) row3=13/148(8.8%) hookTop=14/150(9.3%)|13/150(8.7%)|12/150(8.0%) hook2=1296/11175(11.6%) hook3=41776/200000(20.9%) hookRow3=51/148(34.5%) none=0/150
+BAR AFTER V city sentTop=14/150(9.3%)|11/150(7.3%)|11/150(7.3%) sent2=781/11175(7.0%) sent3=27656/200000(13.8%) row3=39/148(26.4%) hookTop=21/150(14.0%)|20/150(13.3%)|20/150(13.3%) hook2=3381/11175(30.3%) hook3=101815/200000(50.9%) hookRow3=96/148(64.9%) none=0/150
+BAR AFTER V metropolis sentTop=15/150(10.0%)|13/150(8.7%)|11/150(7.3%) sent2=750/11175(6.7%) sent3=26713/200000(13.4%) row3=29/148(19.6%) hookTop=19/150(12.7%)|18/150(12.0%)|18/150(12.0%) hook2=3311/11175(29.6%) hook3=99725/200000(49.9%) hookRow3=98/148(66.2%) none=0/150
+MIXED AFTER V sentTop=40/900(4.4%)|36/900(4.0%)|34/900(3.8%) sent2=10790/404550(2.7%) sent3=10760/200000(5.4%) row3=69/898(7.7%) hookTop=65/900(7.2%)|65/900(7.2%)|64/900(7.1%) hook2=46246/404550(11.4%) hook3=42992/200000(21.5%) hookRow3=262/898(29.2%)
+NOTMET BEFORE M town sentTop 48/150(32.0%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M town hookTop 49/150(32.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M city sentTop 79/150(52.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M city hookTop 79/150(52.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M city hook2 6000/11175 53.7% (bar: under 30%)
+NOTMET BEFORE M city row3 123/148 83.1% (sim.mjs's bar: three cities in a row under 25%)
+NOTMET BEFORE M metropolis sentTop 79/150(52.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M metropolis hookTop 88/150(58.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE M metropolis hook2 6815/11175 61.0% (bar: under 30%)
+NOTMET BEFORE M MIXED row3 308/898 34.3% (sim.mjs's bar: interleaved sizes under 10%)
+NOTMET BEFORE V town sentTop 41/150(27.3%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V town hookTop 46/150(30.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V city sentTop 73/150(48.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V city hookTop 76/150(50.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V city hook2 5614/11175 50.2% (bar: under 30%)
+NOTMET BEFORE V city row3 111/148 75.0% (sim.mjs's bar: three cities in a row under 25%)
+NOTMET BEFORE V metropolis sentTop 68/150(45.3%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V metropolis hookTop 76/150(50.7%) (bar: about 15%, to 20% passes)
+NOTMET BEFORE V metropolis hook2 5532/11175 49.5% (bar: under 30%)
+NOTMET BEFORE V MIXED row3 283/898 31.5% (sim.mjs's bar: interleaved sizes under 10%)
+NOTMET AFTER M city hook2 3623/11175 32.4% (bar: under 30%)
+NOTMET AFTER M metropolis hook2 4079/11175 36.5% (bar: under 30%)
+NOTMET AFTER V city hook2 3381/11175 30.3% (bar: under 30%)
+NOTMET AFTER V city row3 39/148 26.4% (sim.mjs's bar: three cities in a row under 25%)
+GUARD BEFORE V thorp prints=0/150(0.0%) crimeWave=17/150
+GUARD BEFORE V hamlet prints=0/150(0.0%) crimeWave=8/150
+GUARD BEFORE V village prints=2/150(1.3%) crimeWave=11/150
+GUARD BEFORE V town prints=33/150(22.0%) crimeWave=33/150 OVER-20%
+GUARD BEFORE V city prints=73/150(48.7%) crimeWave=73/150 OVER-20%
+GUARD BEFORE V metropolis prints=68/150(45.3%) crimeWave=68/150 OVER-20%
+GUARD BEFORE M thorp prints=0/150(0.0%) crimeWave=13/150
+GUARD BEFORE M hamlet prints=0/150(0.0%) crimeWave=21/150
+GUARD BEFORE M village prints=1/150(0.7%) crimeWave=8/150
+GUARD BEFORE M town prints=31/150(20.7%) crimeWave=31/150 OVER-20%
+GUARD BEFORE M city prints=79/150(52.7%) crimeWave=79/150 OVER-20%
+GUARD BEFORE M metropolis prints=79/150(52.7%) crimeWave=79/150 OVER-20%
+GUARD AFTER V thorp prints=0/150(0.0%) crimeWave=17/150 eligible=0/150 printsOfEligible=0/0(-)
+GUARD AFTER V hamlet prints=0/150(0.0%) crimeWave=8/150 eligible=0/150 printsOfEligible=0/0(-)
+GUARD AFTER V village prints=0/150(0.0%) crimeWave=11/150 eligible=0/150 printsOfEligible=0/0(-)
+GUARD AFTER V town prints=8/150(5.3%) crimeWave=33/150 eligible=32/150 printsOfEligible=8/32(25.0%)
+GUARD AFTER V city prints=12/150(8.0%) crimeWave=73/150 eligible=73/150 printsOfEligible=12/73(16.4%)
+GUARD AFTER V metropolis prints=12/150(8.0%) crimeWave=68/150 eligible=68/150 printsOfEligible=12/68(17.6%)
+GUARD AFTER M thorp prints=0/150(0.0%) crimeWave=13/150 eligible=0/150 printsOfEligible=0/0(-)
+GUARD AFTER M hamlet prints=0/150(0.0%) crimeWave=21/150 eligible=0/150 printsOfEligible=0/0(-)
+GUARD AFTER M village prints=0/150(0.0%) crimeWave=8/150 eligible=1/150 printsOfEligible=0/1(0.0%)
+GUARD AFTER M town prints=6/150(4.0%) crimeWave=31/150 eligible=30/150 printsOfEligible=6/30(20.0%)
+GUARD AFTER M city prints=24/150(16.0%) crimeWave=79/150 eligible=79/150 printsOfEligible=24/79(30.4%)
+GUARD AFTER M metropolis prints=13/150(8.7%) crimeWave=79/150 eligible=79/150 printsOfEligible=13/79(16.5%)
+# KINDS: V pool, AFTER births; places whose trouble kinds (in order) differ BEFORE vs AFTER: 0/900
+KIND V thorp resource_scarcity 26/150 17.3% TABLE
+KIND V thorp external_threat 18/150 12.0% TABLE
+KIND V thorp crime_wave 17/150 11.3% TABLE
+KIND V thorp legitimacy_crisis 10/150 6.7% TABLE
+KIND V thorp leadership_vacuum 8/150 5.3%
+KIND V thorp wild_magic 8/150 5.3%
+KIND V thorp corruption_scandal 7/150 4.7%
+KIND V thorp great_fire 6/150 4.0%
+KIND V thorp magical_controversy 6/150 4.0%
+KIND V thorp succession_crisis 6/150 4.0% TABLE
+KIND V thorp heresy_trial 5/150 3.3%
+KIND V thorp infiltration_fear 5/150 3.3%
+KIND V thorp outside_debt 5/150 3.3% TABLE
+KIND V thorp plague_years 4/150 2.7%
+KIND V thorp popular_uprising 4/150 2.7%
+KIND V thorp religious_tension 4/150 2.7%
+KIND V thorp generational_divide 3/150 2.0%
+KIND V thorp great_flood 3/150 2.0% TABLE
+KIND V thorp disputed_land 2/150 1.3%
+KIND V thorp population_friction 2/150 1.3%
+KIND V thorp trade_collapse 2/150 1.3%
+KIND V thorp tyranny 2/150 1.3%
+KIND V thorp demographic_pressure 1/150 0.7%
+KIND V thorp pilgrimage_surge 1/150 0.7%
+KIND V hamlet resource_scarcity 20/150 13.3% TABLE
+KIND V hamlet external_threat 15/150 10.0% TABLE
+KIND V hamlet legitimacy_crisis 12/150 8.0% TABLE
+KIND V hamlet corruption_scandal 11/150 7.3%
+KIND V hamlet outside_debt 11/150 7.3% TABLE
+KIND V hamlet plague_years 10/150 6.7%
+KIND V hamlet tyranny 10/150 6.7%
+KIND V hamlet crime_wave 8/150 5.3% TABLE
+KIND V hamlet succession_crisis 6/150 4.0% TABLE
+KIND V hamlet disputed_land 5/150 3.3%
+KIND V hamlet great_flood 5/150 3.3% TABLE
+KIND V hamlet popular_uprising 5/150 3.3%
+KIND V hamlet religious_tension 5/150 3.3%
+KIND V hamlet infiltration_fear 4/150 2.7%
+KIND V hamlet magical_controversy 4/150 2.7%
+KIND V hamlet trade_collapse 4/150 2.7%
+KIND V hamlet generational_divide 3/150 2.0%
+KIND V hamlet heresy_trial 3/150 2.0%
+KIND V hamlet leadership_vacuum 3/150 2.0%
+KIND V hamlet wild_magic 3/150 2.0%
+KIND V hamlet great_fire 2/150 1.3%
+KIND V hamlet population_friction 2/150 1.3%
+KIND V hamlet occupation_legacy 1/150 0.7%
+KIND V village resource_scarcity 26/150 17.3% TABLE
+KIND V village disputed_land 13/150 8.7%
+KIND V village heresy_trial 13/150 8.7%
+KIND V village leadership_vacuum 12/150 8.0%
+KIND V village legitimacy_crisis 12/150 8.0% TABLE
+KIND V village population_friction 12/150 8.0%
+KIND V village crime_wave 11/150 7.3% TABLE
+KIND V village external_threat 11/150 7.3% TABLE
+KIND V village wild_magic 11/150 7.3%
+KIND V village magical_controversy 10/150 6.7%
+KIND V village outside_debt 10/150 6.7% TABLE
+KIND V village succession_crisis 10/150 6.7% TABLE
+KIND V village great_flood 9/150 6.0% TABLE
+KIND V village infiltration_fear 9/150 6.0%
+KIND V village corruption_scandal 8/150 5.3%
+KIND V village pilgrimage_surge 8/150 5.3%
+KIND V village plague_years 8/150 5.3%
+KIND V village popular_uprising 5/150 3.3%
+KIND V village trade_dispute 5/150 3.3%
+KIND V village demographic_pressure 4/150 2.7%
+KIND V village generational_divide 4/150 2.7%
+KIND V village occupation_legacy 4/150 2.7%
+KIND V village religious_tension 4/150 2.7%
+KIND V village trade_collapse 4/150 2.7%
+KIND V village tyranny 4/150 2.7%
+KIND V village great_fire 3/150 2.0%
+KIND V village economic_disparity 2/150 1.3%
+KIND V village guild_conflict 2/150 1.3% TABLE
+KIND V town guild_conflict 46/150 30.7% TABLE
+KIND V town crime_wave 33/150 22.0% TABLE
+KIND V town external_threat 15/150 10.0% TABLE
+KIND V town legitimacy_crisis 14/150 9.3% TABLE
+KIND V town resource_scarcity 14/150 9.3% TABLE
+KIND V town succession_crisis 10/150 6.7% TABLE
+KIND V town corruption_scandal 9/150 6.0%
+KIND V town religious_tension 9/150 6.0%
+KIND V town great_flood 8/150 5.3% TABLE
+KIND V town infiltration_fear 6/150 4.0%
+KIND V town leadership_vacuum 6/150 4.0%
+KIND V town occupation_legacy 5/150 3.3%
+KIND V town pilgrimage_surge 5/150 3.3%
+KIND V town population_friction 5/150 3.3%
+KIND V town tyranny 5/150 3.3%
+KIND V town great_fire 4/150 2.7%
+KIND V town heresy_trial 4/150 2.7%
+KIND V town outside_debt 4/150 2.7% TABLE
+KIND V town trade_dispute 4/150 2.7%
+KIND V town disputed_land 3/150 2.0%
+KIND V town economic_disparity 3/150 2.0%
+KIND V town popular_uprising 3/150 2.0%
+KIND V town trade_collapse 3/150 2.0%
+KIND V town wild_magic 3/150 2.0%
+KIND V town demographic_pressure 2/150 1.3%
+KIND V town generational_divide 2/150 1.3%
+KIND V town market_crash 2/150 1.3%
+KIND V town plague_years 2/150 1.3%
+KIND V town magical_controversy 1/150 0.7%
+KIND V city guild_conflict 76/150 50.7% TABLE
+KIND V city crime_wave 73/150 48.7% TABLE
+KIND V city resource_scarcity 18/150 12.0% TABLE
+KIND V city external_threat 14/150 9.3% TABLE
+KIND V city outside_debt 13/150 8.7% TABLE
+KIND V city pilgrimage_surge 13/150 8.7%
+KIND V city wild_magic 13/150 8.7%
+KIND V city corruption_scandal 12/150 8.0%
+KIND V city infiltration_fear 12/150 8.0%
+KIND V city legitimacy_crisis 12/150 8.0% TABLE
+KIND V city popular_uprising 10/150 6.7%
+KIND V city religious_tension 9/150 6.0%
+KIND V city succession_crisis 9/150 6.0% TABLE
+KIND V city generational_divide 8/150 5.3%
+KIND V city great_flood 8/150 5.3% TABLE
+KIND V city tyranny 8/150 5.3%
+KIND V city heresy_trial 7/150 4.7%
+KIND V city leadership_vacuum 7/150 4.7%
+KIND V city population_friction 7/150 4.7%
+KIND V city magical_controversy 6/150 4.0%
+KIND V city plague_years 6/150 4.0%
+KIND V city trade_dispute 6/150 4.0%
+KIND V city economic_disparity 5/150 3.3%
+KIND V city great_fire 5/150 3.3%
+KIND V city occupation_legacy 5/150 3.3%
+KIND V city market_crash 4/150 2.7%
+KIND V city trade_collapse 4/150 2.7%
+KIND V city disputed_land 3/150 2.0%
+KIND V city demographic_pressure 1/150 0.7%
+KIND V metropolis guild_conflict 76/150 50.7% TABLE
+KIND V metropolis crime_wave 68/150 45.3% TABLE
+KIND V metropolis succession_crisis 19/150 12.7% TABLE
+KIND V metropolis external_threat 16/150 10.7% TABLE
+KIND V metropolis disputed_land 14/150 9.3%
+KIND V metropolis resource_scarcity 13/150 8.7% TABLE
+KIND V metropolis generational_divide 12/150 8.0%
+KIND V metropolis religious_tension 12/150 8.0%
+KIND V metropolis pilgrimage_surge 11/150 7.3%
+KIND V metropolis economic_disparity 10/150 6.7%
+KIND V metropolis magical_controversy 10/150 6.7%
+KIND V metropolis leadership_vacuum 9/150 6.0%
+KIND V metropolis legitimacy_crisis 9/150 6.0% TABLE
+KIND V metropolis outside_debt 9/150 6.0% TABLE
+KIND V metropolis population_friction 9/150 6.0%
+KIND V metropolis popular_uprising 8/150 5.3%
+KIND V metropolis corruption_scandal 7/150 4.7%
+KIND V metropolis great_flood 7/150 4.7% TABLE
+KIND V metropolis infiltration_fear 7/150 4.7%
+KIND V metropolis tyranny 7/150 4.7%
+KIND V metropolis wild_magic 7/150 4.7%
+KIND V metropolis great_fire 6/150 4.0%
+KIND V metropolis trade_dispute 6/150 4.0%
+KIND V metropolis heresy_trial 5/150 3.3%
+KIND V metropolis market_crash 5/150 3.3%
+KIND V metropolis plague_years 4/150 2.7%
+KIND V metropolis trade_collapse 4/150 2.7%
+KIND V metropolis demographic_pressure 3/150 2.0%
+KIND V metropolis occupation_legacy 3/150 2.0%
+COVER V thorp firstHasTable=80/150(53.3%) anyTrouble=150/150(100.0%)
+COVER V hamlet firstHasTable=75/150(50.0%) anyTrouble=150/150(100.0%)
+COVER V village firstHasTable=73/150(48.7%) anyTrouble=150/150(100.0%)
+COVER V town firstHasTable=104/150(69.3%) anyTrouble=150/150(100.0%)
+COVER V city firstHasTable=113/150(75.3%) anyTrouble=150/150(100.0%)
+COVER V metropolis firstHasTable=114/150(76.0%) anyTrouble=150/150(100.0%)
+COVER V ALL fewest=13 kinds=corruption_scandal,leadership_vacuum,wild_magic,infiltration_fear,religious_tension,disputed_land,pilgrimage_surge,heresy_trial,magical_controversy,population_friction,tyranny,popular_uprising,plague_years → thorp 138/150 92.0%; hamlet 140/150 93.3%; village 137/150 91.3%; town 136/150 90.7%; city 142/150 94.7%; metropolis 139/150 92.7%
+COVER V thorp aloneFewest=10 kinds=leadership_vacuum,wild_magic,corruption_scandal,great_fire,magical_controversy,heresy_trial,infiltration_fear,plague_years,popular_uprising,religious_tension → 137/150 91.3%
+COVER V hamlet aloneFewest=10 kinds=corruption_scandal,plague_years,tyranny,disputed_land,popular_uprising,religious_tension,infiltration_fear,magical_controversy,trade_collapse,generational_divide → 136/150 90.7%
+COVER V village aloneFewest=12 kinds=disputed_land,heresy_trial,leadership_vacuum,population_friction,wild_magic,magical_controversy,infiltration_fear,corruption_scandal,pilgrimage_surge,plague_years,popular_uprising,trade_dispute → 136/150 90.7%
+COVER V town aloneFewest=9 kinds=corruption_scandal,religious_tension,infiltration_fear,leadership_vacuum,occupation_legacy,pilgrimage_surge,population_friction,tyranny,great_fire → 136/150 90.7%
+COVER V city aloneFewest=8 kinds=pilgrimage_surge,wild_magic,corruption_scandal,infiltration_fear,popular_uprising,religious_tension,generational_divide,tyranny → 135/150 90.0%
+COVER V metropolis aloneFewest=10 kinds=disputed_land,generational_divide,religious_tension,pilgrimage_surge,economic_disparity,magical_controversy,leadership_vacuum,population_friction,popular_uprising,corruption_scandal → 136/150 90.7%
