@@ -1,22 +1,54 @@
-# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 13:34 UTC, read from `date -u`)
+# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 16:10 UTC, read from `date -u`)
 
 The seat that rehearses THE CLOSE on scratch refs (prompt: `docs/chair/2026-11-21/eighth/prompts/CLOSE-1.txt` on
 `lane/chair-2026-11-08`, from e75a95c6b). The chair: session_01ACmDYY29VRchM87v1yhL9Q (send_message).
 
-## 0. WHERE THE SEAT STANDS (2026-11-22 13:34 UTC; back at work on the chair's "GO CLOSE-1" of 13:07 UTC)
+## 0. WHERE THE SEAT STANDS (2026-11-22 16:10 UTC; the seat's count about 540,000; at 600,000 it hands over to CLOSE-2, E101)
 
-1. CLOSE-FIXTURE SENT FOR LANDING: "CLOSE-FIXTURE 6f579f0e7" (lane `lane/close-1-2026-11-22`: the line 1ec3e81d1 merged fb0ef3ebb; the cure 72d412265 merged bbc04eb80, its diff read whole; the lighting census by its door f6d764473). Red re-run 0/2, green 2/2; rule 8 widened: `tests/build` 15 red, `tests/lint` 3 red, copy/store/architecture/docs + two importers 2 red: every red on RED-AT-LINE (64 rows). Five figures equal the line's (1,183,904 / 376,718 / 316,242; worker 2,698,788; engine 927,681). The dark fixture under the cure: +57 bytes, 16 lines, the town's brief unchanged (realm lines only). Logs: scratchpad `cf/`.
-2. THE TRIAL JOIN a349917e7 and THE LIT REF e987c3e36: on origin, unchanged (VEIL-33 reads 4bba8781d and 5c4419815 beneath them).
-3. JOIN brief: APPROVED (E61), checked against stack-98 7c03296d8 (two arms more in the table). Its builder is cut only on the chair's tip with both laws.
-4. IN THE AIR: unit 4, THE LIT HALF ONLY (the chair: the dark list IS RED-AT-LINE), on the lit scratch e987c3e36: `scratchpad/u4/run-parts.sh /home/user/wt/lit lit` (parts gen, domain, build after one build, lint, ui, rest; progress in `u4/lit/progress.txt`; reds by name with `match.mjs <json> RED-AT-LINE.now.tsv`).
-5. NEXT: FLIP-CENSUS.md from the lit reds not on the list, in the four classes; a TRUE FAULT to the chair at once (one known: E78, `powerStructure.recentConflict` names a power the shared read withholds: the veil's writer cures it). Then units 5, 6, 7.
-6. A FAULT OF MINE, told: 6f579f0e7 was committed while the push of f6d764473 was in flight (COMMON-RULES 11); nothing lost.
+A SUCCESSOR'S WHOLE READ-IN: this section; `CLOSE-RECIPE.md` (THE FLIP, step by step: 0 before it; 1 the dials, 1a
+the texts of darkness, 1b the one fact-layer row; 2 the census's re-run recipe; 2b the flip's commits in order and the
+146 pins by door; 5b the lit golden corpus; 5c the home page's sample town); `FLIP-CENSUS.md` (the rehearsal's reading:
+six parts, the totals, two faults, the veil's counts, the Summary bar, the power order); `census/` (the tools:
+`run-parts.sh`, `match.mjs`, `dump.mjs`, `CLASSIFY-BRIEF.md` the classifier's rules, `diff-classed.mjs`, the probes,
+the per-part `lit-<part>-match.tsv` and `-classed.tsv`, `pins-by-door.tsv`); the briefs `briefs/JOIN-LAWS.md`,
+`briefs/CLOSE-FIXTURE.md`, `briefs/GOLDEN-LIT.md`.
+
+| ref | tip | state |
+|---|---|---|
+| `lane/close-1-2026-11-22` (this lane) | this push | the line 1ec3e81d1 merged; CLOSE-FIXTURE merged and ACCEPTED for landing ("CLOSE-FIXTURE 6f579f0e7", the next stack); then docs only |
+| `lane/close-1-lit-scratch-2026-11-22` | 217b628f3 | THE LIT REF the chair names: the line at point 98 (c110dd85b) plus the three dials, exactly (`git diff c110dd85b 217b628f3 -- . ':!docs'`: 3 lines). Beneath: e987c3e36, 5c4419815 (VEIL-33 read it), 4bba8781d |
+| `lane/close-1-join-scratch-2026-11-22` | a349917e7 | the trial join with its doors (history; superseded by the line at point 98) |
+| `lane/close-1-2026-11-22-join-wip` | 8b935be05 (+ E101's unit in flight) | JOIN (unit 3) on c110dd85b: built by a builder, its diff READ WHOLE by CLOSE-1; NOT YET re-run by CLOSE-1 (red, dark green, lit green, rule 8: queued in `scratchpad/joinlaws/verify/verify.sh`, to be re-launched on the builder's E101 tip) |
+| `lane/close-1-2026-11-22-golden-wip` | builder's (worktree `/home/user/wt/golden`, from 217b628f3) | GOLDEN-LIT (E99): a builder is OUT on `briefs/GOLDEN-LIT.md` (the lit twin of the golden master, prepared, NEVER recorded; `close/OWNER-GOLDEN-LIT.md` the owner's draft). Lands only in the flip's own stack, step 4 |
+
+DONE AND ACCEPTED: unit 1 (the trial join), unit 2 (the lit ref), CLOSE-FIXTURE (a true fault found and cured; lands
+in the next stack), unit 4's REHEARSAL (the lit half only, by E90: 3,765 files, 43,183 tests, 204 red, 54 listed, 150
+new: 146 pins, 1 re-cut, 2 faults: U8 to fortune; the powers leaf ruled E91 a step of the flip, proven 15/15), the
+recipe's items (E91, E99's order, pins by door, the lit golden corpus), unit 7's DRAFT (`FOR-THE-OWNER-DRAFT.md`).
+IN THE AIR: (1) JOIN's builder on E101 (the duplicate's roster-key check carried into arm (a), red first, then the
+duplicate cut, or kept with a header note); (2) GOLDEN-LIT's builder; (3) unit 6's render: `scripts/sameness-census.mjs
+--measure --plan=scratchpad/u6/plan900.json --text --workers=3 --out=scratchpad/u6/run1` on the lit ref, through the
+mutex; the stop-condition script `scratchpad/u6/stop2.mjs` reads its text files after.
+NEXT, IN THE CHAIR'S ORDER (E101): "JOIN <commit>" after CLOSE-1's own re-run (the exact commit, three plants red and
+green, `tests/lint` whole, nothing outside `tests/` moved); GOLDEN-LIT's diff read and `close/OWNER-GOLDEN-LIT.md`;
+then unit 6 (the three stop conditions, STORY at one position by size from the census's table (c), twelve places'
+texts for the chair) and unit 7 re-cut from the final census.
 
 ## 1. RULINGS IN FORCE (numbered; the chair's)
 1. The troubles law is not in this deploy (E28): every item of it struck.
 2. The finish line (E30): an item "whichever of two lanes lands second" is done by the lane that HAS landed, or named owed.
 3. Fortune ships with two merits (E32: LASTING by FORTUNE-7, "FORTUNE-B"); who rules gains U6 and U7 later ("SEAT-B", E42): the rehearsal runs again on them.
 4. Full pace (E45, COMMON-EIGHTH 12): up to two builders where manifests do not touch; a stack ref is read-only.
+
+5. E53/E61: the nine trial-join conflicts classed (the union for `densityCreateBoundary.js`, its walker and `.tuning-register.json`; `HAND_CEILING` 75; observed-shape: the LANE's side, then its plain `--write`, stopping if bank or identities read higher than 2215/1553/445, 79/53).
+6. E55: CLOSE-FIXTURE is this seat's unit that lands (the sample town born on the button's road); `--emit` is the chair's at the close.
+7. E61: JOIN's plan approved (one file over GENERATION_LAWS; each lane keeps its own arms; arm (g) the one `birthConfig(null)` pin); the atom `seat contested` is SEAT-TOWN's (PROSE-5), not JOIN's.
+8. E86: fault 1 (fortune cuts a crisis's own power in a thorp) is fortune's U8, cured before the flip.
+9. E90: the flip's census is the close's alone, run ONCE on the final tree from this seat's recipe; the lanes send paper flip lists; a move no list expected is a SURPRISE.
+10. E91: fault 2 (the seat contest reads the cast in `powersList`) is cured by ONE factLayers row moved IN THE FLIP'S OWN COMMIT (recipe step 1b).
+11. E96: the stored power order's tail is out of order dark as well: not the flip's; for the display lane after the first deploy.
+12. E99: GOLDEN-LIT is this seat's unit: prepared and shown, never recorded; it lands only at the flip's step 4.
+13. E101: the living-content duplicate's check carried into JOIN's arm (a) red-first, then cut (or kept with a note); the order: JOIN, the hand-back, GOLDEN-LIT, then units 6 and 7; hand over at 600,000.
 
 ## 2. OPEN QUESTIONS PUT TO THE CHAIR
 - The class of `tests/lint/.tuning-register.json` in a merge (unit 1).
