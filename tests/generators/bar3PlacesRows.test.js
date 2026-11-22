@@ -86,7 +86,10 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['C29348 class: no wider region', 'r2r-town-18', /and the wider region\. It eats grain/, /supplying the town's taverns\. It eats grain/],
     ['C13819 no seigniorage revenue claimed', 'r2r-city-13', /Significant ongoing revenue via seigniorage/, /Its seigniorage is revenue while precious metal reaches the dies\./],
     ['H2/H4 class: no royal charter', 'r2r-town-1', /Requires noble or royal charter/, /under the charter of whoever rules\. Revenue for the granting authority while metal comes in\./],
-    ['C14378 no northern furs', 'r2r-city-0', /Furs originate in frontier/, /Furs travel from the hunting grounds through trading posts/],
+    // PLACE-1 (entrepotNote, 2026-11-20): the fur note is drawn from its declared pool (src/data/entrepotNotes.js); r2r-city-0 (a road
+    // city hunting its own grounds) stored furs-regular, not the stock note ("Furs travel from the hunting grounds through trading posts");
+    // PLACE-2's cure (the chair's two more furs rows, 18:52 UTC: a pool of 13) moves its pick to furs-own-rest, its own grounds filled in
+    ['C14378 no northern furs', 'r2r-city-0', /Furs originate in frontier/, /Furs and pelts come off the hunting grounds nearby, and what is not used here is traded on\./],
     ['C15699 no trade built upon at the founding', 'r2s-succession_void-hamlet-2', /was built upon failed|what it was collapsed|depended on failed/, /The trade the settlement was founded to serve failed within its first few years/],
     ['C24238 no one kind of tension', 'r2r-city-36', /The tensions here are the domestic kind/, /Beside whatever else divides it, its oldest quarrels are the domestic kind/],
     ['C24620 no stability claimed', 'r2r-city-18', /Stable enough that its tensions/, /Its oldest tensions are the slow kind/],

@@ -82,6 +82,8 @@ export const TABLE_POOLS = Object.freeze([
   { id: 'safetyDescLines.UNSAFE_GARRISON', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_GARRISON', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot' },
   { id: 'safetyDescLines.UNSAFE_ADVICE', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_ADVICE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot' },
   { id: 'safetyDescLines.UNSAFE_WALLS', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_WALLS', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege, walls) → safetyDescSlot' },
+  // PLACE-1 (entrepotNote, 2026-11-20): the chain cards' entrepot note, one declared pool a chain id (row 0 today's sentence, read from the chain).
+  { id: 'entrepotNotes.ENTREPOT_NOTES', module: 'src/data/entrepotNotes.js', name: 'ENTREPOT_NOTES', drawKind: 'H', drawSite: 'steps/economyReconcilePass.js → entrepotNotes.js :: entrepotNotesOf (drawDeclared over pickVariantMixed, key `${seed}::entrepotNote::${chainId}`)', lines: (t) => Object.values(t) },
 ]);
 
 /**

@@ -222,6 +222,8 @@ export function factsOf(record, options = {}) {
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
     get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
+    /** PLACE-1 (the chair's ATOM `carrier`, 2026-11-20 17:18 UTC): what carries one chain, own · substitute · transit · bought · none, read per chain (`chainCarrier.js :: chainCarrierOf`) */
+    get chainCarrier() { return (/** @type {unknown} */ chain) => chainCarrierOf(chain, record).kind; },
   });
 }
 
@@ -285,3 +287,4 @@ import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
 import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves
 import { fishBoughtIn } from './fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): at the END, no line above moves
+import { chainCarrierOf } from './chainCarrier.js'; // PLACE-1 (the chair's ATOM `carrier`): at the END, no line above moves

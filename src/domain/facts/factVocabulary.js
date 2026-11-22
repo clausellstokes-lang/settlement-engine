@@ -592,6 +592,13 @@ export const FACT_DIMENSIONS = Object.freeze({
   'own house': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc', reader: (_f, _key, ctx) => { if (!ctx || !('npc' in ctx)) return undefined; const inst = /** @type {{ institution?: { kind?: unknown, key?: unknown, veiled?: unknown } } | null} */ (ctx.npc)?.institution; return inst?.kind === 'house' && inst.veiled === false && typeof inst.key === 'string' && inst.key.trim() !== ''; } }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 of 2026-11-20 16:41 UTC (vetoable by the owner, new vocabulary): the card handed as `ctx.npc` keeps a house of its own (its `institution`, kind 'house'), stamped public at birth (`veiled: false`: no criminal or clandestine house, `cardVeil.js :: isHideableHouse`); a line naming {house} needs it
   'export good': dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.some((x) => String(typeof x === 'string' ? x : /** @type {{ name?: unknown } | null} */ (x)?.name ?? '').replace(/\([^)]*\)/g, '').trim() !== '') : undefined) }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 (vetoable by the owner, new vocabulary): the export list (`canonExports`, the list `goodExported.js` reads) names a good; a line naming {export} needs it
   'import good': dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.some((x) => typeof x === 'string' && x.replace(/\([^)]*\)/g, '').trim() !== '') : undefined) }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 (vetoable by the owner, new vocabulary): the import list (`canonImports`, the list `criticalImportBroughtIn.js` reads) names a good; a line naming {import} needs it
+  // PLACE-1 (the chair's ruling of 2026-11-20 17:18 UTC, "THE ATOM IS GRANTED: ATOM carrier: own|transit :
+  // src/domain/facts/chainCarrier.js :: chainCarrierOf : chain-scoped"; vetoable by the owner, on the veto list as new
+  // vocabulary), APPENDED: what carries the chain a line is drawn for, the place's own ground (`own`) or passing trade
+  // (`transit`), read per chain through `factsOf(record).chainCarrier` (the leaf `chainCarrierOf`); the draw hands the chain
+  // as `ctx.chain` (`data/entrepotNotes.js`), and without it the atom is unanswered.
+  carrier: dim({ shape: 'presence', home: 'chainCarrier', keys: Object.freeze(['own', 'transit']), needsContext: 'chain',
+    reader: (f, key, ctx) => { const read = /** @type {{ chainCarrier?: unknown }} */ (f).chainCarrier; return typeof read === 'function' && key && ctx && 'chain' in ctx ? read(ctx.chain) === key : undefined; } }),
 });
 
 /** The crisis dimension's legal values. */

@@ -1,0 +1,13 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 24291 after 2 atomic poll(s) + 12 legacy poll(s) + 0 shared-drain poll(s).
+EVERY DISTINCT {resource} FILL, in its sentence, over the 600 census births (hxd-<size>-0..99).
+open = places where the own row stood admitted (the chain carried by the place's own resource); stored = places whose stored note is this sentence.
+own rows with the slot: salt-own, salt-own-keep, furs-own, furs-own-rest, lux-own, magic-own
+
+furs_north     furs-own       open  48  stored   7  (hamlet, village, town, city, metropolis)  "Many of the furs sold here are taken on the place's own hunting grounds."
+furs_north     furs-own-rest  open  48  stored   5  (hamlet, village, town, city, metropolis)  "Furs and pelts come off the hunting grounds nearby, and what is not used here is traded on."
+luxury_goods   lux-own        open  23  stored   5  (city, metropolis)  "The luxury trade here begins with the precious metal veins nearby."
+magical_goods  magic-own      open  10  stored   3  (city, metropolis)  "The enchanted goods sold here begin at the magical ley line node nearby, and go on to buyers elsewhere."
+salt           salt-own       open  26  stored   8  (hamlet, village, town, city, metropolis)  "Much of the salt sold here is its own, taken from the salt flats nearby."
+salt           salt-own-keep  open  26  stored   3  (hamlet, village, town, city, metropolis)  "Salt flats nearby supply the salt, for preserving food here and for selling on."
+
+distinct fills: 6
