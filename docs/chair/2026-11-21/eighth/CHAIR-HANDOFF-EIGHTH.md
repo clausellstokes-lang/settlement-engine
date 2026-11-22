@@ -398,6 +398,27 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   FORTUNE-7, seated ON FORTUNE-6's hand-back the hour "FORTUNE <commit>" comes (the seat's own advice: about 400,000
   now by its estimate, and the second merit would end near 620,000): FORTUNE-6 commits the two briefs
   (`briefs/U7-LASTING.md`, `briefs/U7b-LASTING-SENTENCE.md`) with this ruling in them.
+- E33 · THE VEIL'S UNIT (vii): THE MEASURE ACCEPTED, THE ARM'S FORM ACCEPTED, THE CURE NOT YET RULED (2026-11-22 05:12 UTC). MEASURED BY VEIL-31
+  on all 92, both engines, every gated setting (9185c48cf, documents only): a served list is a STRICT PART of the
+  twin's in 26 towns (`crimeTypes` 25, `plotHooks` 1, `sp.ops` 0); no page serves what its twin lacks. By THE RECORD
+  REFERENCE (the engine's own writer re-run on the served config, tier and houses: `generateSafetyProfile`, then
+  `settleCrimeLinesToSignal`; it reproduces 184 of 184 stored lists given all houses and flags 0 of 48 controls) ALL
+  26 ARE THE VEIL'S, none the twin's draw. Six causes: threshold types under `hasCriminalInst` 10; "Magical crime"
+  suppressed by a withheld arcane black market 4; the "Background crime" / "Lawlessness" fallback 6; a crisis's own
+  type withheld 6; desperation theft beside the withheld network line 2; the merchant-army hook's map row 1. GATE-1
+  CANNOT SEE THE CLASS. THE ARM (accepted as the cure's red, 26 of 92 today): red wherever a served list lacks an
+  entry the record reference writes; a fallback owed only where the reference writes it. THE SEAT'S CURE: recompose
+  the lists over served facts in both engines, which means PORTING THE WRITER'S BRANCHES INTO SQL with a parity
+  walker (a large unit). THE CHAIR PUT ANOTHER WAY TO IT BEFORE RULING: the server WITHHOLDS the key `crimeTypes` on
+  every shared read of every place (an absence every place shows is no tell) and ONE READER on the page derives the
+  list from the document in hand by the engine's own writer (a function of the served document says nothing the
+  document does not): no logic twice, no generator branch in SQL. Asked of the seat in 200 words: what else in the
+  served document is a function of the stored list; whether every input of the writer is served; the surfaces; what
+  it does not cure (the hook's row needs the seed); its recommendation with costs. THEN VEIL-31 HANDS OVER and its
+  successor is seated on PART 32 for the cure. ALSO FIXED: "R3" IS MEASURED ON THE LINE WITH THE TROUBLE LANE, THE TWO
+  LAWS AND DAILY LIFE LANDED (E30); the trouble lane's hooks arm (E23, half B: the full reveal veils nothing) is
+  true of the line's 206 twin and reds by design at the veil's merge if 212 veils a reveal share: the hooks are then
+  the veil's instrument's to hold.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
