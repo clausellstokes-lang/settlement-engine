@@ -946,6 +946,30 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   hideable walker reads for the five keys is said first); the table reaches the tab by its own lazy road (first
   paint not one byte up); the seat's table of keys, forms, shares by size and atom wordings to the chair's eye
   before the build; the thorp's commonest resentment re-measured after L8.
+- E73 · THE CHAIR'S OWN FAULT ON ITS RECORD BRANCH, 10:53 TO 11:15 UTC ON 2026-11-22, AND ITS REPAIR (written 2026-11-22 11:16 UTC). WHAT HAPPENED: (1) the
+  chair committed on this branch while a push of it was in flight, and started the next push without comparing the
+  remote with the local tip; that push (the scratch log `push-chair-38.log`) ran the pre-push hook's WHOLE CHECK
+  (`npm run check`), which the hook does for a push that hands it no ref; the chair did not read the log's first
+  lines; (2) this branch's old copy of `.husky/pre-push` does not clear git's repository variables, so the suite's
+  git-fixture tests ran their git commands against THIS repository: four commits by "Fixture" on this branch
+  (7da28a72d "fixture base", which deletes all 10,726 files; cb09843eb, 8ba972867, 2f8d03601), the fixture's
+  `user.name`, `user.email` and `commit.gpgsign` and `core.bare=true` written into the shared `.git/config` (so the
+  main checkout in this container refused every git command), the chair worktree's index replaced; (3) the chair
+  started ANOTHER push while that one was still running: it carried the four commits to origin at 11:04:32. WHAT
+  WAS NOT TOUCHED (each read on origin): master db832c892, the working line 1ec3e81d1, the ledger 235efce1a, every
+  lane and stack ref, tags, stash; the main checkout's HEAD, index and files; every other worktree here. THE REPAIR:
+  the run killed at 11:08; the shared config restored (a copy of the damaged one is in the scratch as
+  `git-config-after-incident.txt`); ONE commit by git's plumbing, 1ccd08e6f, on top of the junk commits, whose
+  tree IS faaebd712's tree (`git diff --quiet`: equal), pushed at 11:14:57 by the hook's lane path: NOTHING
+  REWRITTEN, NOTHING FORCED: the four junk commits stay in this branch's history. FOR TEN MINUTES a fetch of this
+  branch found an empty tree: the six working seats and STACK-98 were told to fetch again if it bit them (the tip
+  must descend from 1ccd08e6f). TOLD TO THE OWNER IN PLAIN WORDS THE SAME HOUR. WHAT CHANGES, FOR THE CHAIR AND ANY
+  SUCCESSOR: EVERY PUSH FROM THIS CONTAINER GOES THROUGH `safepush.sh` in the scratch (one push at a time; a lane
+  ref only; a clean worktree; only if origin differs from the local tip and is its ancestor; the log's first
+  lines read after 25 seconds and the push KILLED if they show the whole check); NO COMMIT ON A BRANCH WHILE ITS
+  PUSH IS IN FLIGHT (the chair waits for the log's own exit line, read from that log and no other); and the seats
+  were given the same three lines for their own boxes. NOT DONE, NAMED: this branch's hook is still the old copy
+  (it is the record branch's own tree; a lane-path push never runs a test, so the guard above is what protects it).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
