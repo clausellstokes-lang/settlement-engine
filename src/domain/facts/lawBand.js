@@ -56,13 +56,16 @@ function crimeWaveTensions(record) {
     .filter((x) => x && typeof x === 'object' && /** @type {{ type?: unknown }} */ (x).type === 'crime_wave'));
 }
 
-/** The crime-wave tension's own hook that says someone directs it (`historyData.js`, the `crime_wave` row's first hook). */
+/** The crime-wave hook that says someone directs it: the coordinated line, line 0 of the crime_wave template of the trouble
+ * pools (`src/data/troubleHooks.js`, drawn by the mixed key since HOOKS-BUILD's cure C), one line among the pool. */
 export const COORDINATED_WAVE_HOOK = /^The crime wave is coordinated\b/;
 
 /**
  * THE HOOK KEEPS ITS TWIST (BAR6-CRIME, the chair's ruling HK1 of 2026-11-16; vetoable by the owner): the crime-wave tension
- * carries the hook "The crime wave is coordinated. Someone is directing it …" (every `crime_wave` row of `historyData.js`
- * draws it first). Where it stands, no line may say that nobody runs the crime: the diffuse lines speak of appearances.
+ * may carry the hook "The crime wave is coordinated. Someone is directing it …". Since the trouble pools (HOOKS-BUILD, cure
+ * C) the tension draws its hooks from `src/data/troubleHooks.js` by the mixed key, and this line (the template's line 0) is
+ * one line among the pool: drawn on some places, not on every one. Where it stands, no line may say that nobody runs the
+ * crime: the diffuse lines speak of appearances.
  * @param {unknown} record @returns {boolean}
  */
 export function crimeWaveCoordinated(record) {

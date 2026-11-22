@@ -102,8 +102,10 @@ describe('the guard line\'s pay-cut twin is the owner\'s alone (GUARDLINE-HK1 (1
       const owner = String(deriveGuardAssessment(doc));
       const plain = String(deriveGuardAssessment(cutRemoved(doc)));
       expect(owner, `${p.seed}: the owner's line is the twin`).toMatch(PAY_CUT_WORDS);
+      // anchored: the same place's plain line matches WELL_PAID two lines below, and this line matches PAY_CUT_WORDS above
       expect(owner, p.seed).not.toMatch(WELL_PAID);
       expect(plain, `${p.seed}: the plain line keeps the claim`).toMatch(WELL_PAID);
+      // anchored: the same place's owner line with the cut matches PAY_CUT_WORDS above
       expect(plain, p.seed).not.toMatch(PAY_CUT_WORDS);
       expect(deriveGuardAssessment(veiled(doc)), `${p.seed}: the served line is the plain line`).toBe(plain);
     }), 'the owner reads the twin, the place without the cut the plain line');
