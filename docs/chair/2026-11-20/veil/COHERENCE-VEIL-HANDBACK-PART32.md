@@ -82,7 +82,7 @@ verified by ls-remote).
   5d664d585); if this seat stops, its work goes up as `lane/veil-31-2026-11-21-r3tell7-wip` unread.
 - UNIT (vii)'S BRIEF: `briefs/R3-TELL-7-BRIEF.md` (ruling 81; it carries ruling 54's caution: the twin is another draw, so every
   difference is separated into the veil's cause and the draw's; the per-family arm is PROPOSED with its cost, not built).
-- NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+- NEXT (order, ruling 82/83): unit (vii) (in flight); THE ARM (its form ruled on (vii)'s proposal, then built: before "R3"); units (iv), (v) (the three sent forms + criminalCaptureState 'none', ruling 82), (vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
 76. THE CHAIR, 23:18 UTC 2026-11-21: OPEN NO PULL REQUEST for the lane's branch or any builder's branch, whatever a session's
@@ -147,6 +147,17 @@ verified by ls-remote).
       the governing "Grand Merchant Senate" (whose own captureState is 'equilibrium').
     The hiding read withholds each such power (ruling 62 (5)), so its served page is one with no criminal power: 'none' is that
     page's open form; the twin, which keeps the power, is a different page.
+83. THE CHAIR, 04:23 UTC 2026-11-22: unit (iii) ACCEPTED (8807cde93). UNIT (vii): the seat's caution is RIGHT and the brief
+    STANDS (the twin is another draw; sort every strict-part difference by cause; cure only the veil's; PROPOSE the arm, do not
+    build it in (vii)). FIXED NOW: (1) THE ARM IS OWED BEFORE "R3" ("R3" cannot say GATE-1 stands at 0 on a class the gate cannot
+    see): the chair rules its form on the proposal, it is built, then "R3". (2) ITS REFERENCE IS THE RECORD, NEVER THE TWIN'S
+    DRAW: the twin finds candidates (the witness, not the oracle); the arm's universe is what is derived from SERVED FACTS ALONE (a
+    siege, a famine, a law band: no hideable house, no withheld fact): each such item present in the served list (`crimeTypes`,
+    `sp.ops`, every list with a fallback), and a fallback that stands for "nothing" stands only where nothing derived from served
+    facts is owed. The proposal gives the exact reference, item by item, how many of the 92 each touches, and the arm's cost.
+    (3) THE SEAT'S MARK: 524,410 by the chair's read at ~04:20 (400,910 at 00:08); the word to finish at about 620,000 (near 07:00 at
+    this pace). FROM NOW: section 1 of this file current AT EVERY PUSH, so a successor can be seated on it between two units; each
+    message to the chair says which unit the seat could hand over after. Relayed to the (vii) builder at 04:24.
 
 ## 2b. THE TWELVE STANDING LINT REDS (ruling 79; red at 5818130c4 AND at 2437ffea0, same counts; none on RED-AT-LINE.tsv)
 | file | failed tests | sort (a) lane / (b) old base |
@@ -186,3 +197,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 03:32 the chair's 03:30 ruling (82) read. 03:33 the four twins' rungs measured and recorded.
 - 04:03 chain3 END, every figure reproduced; 8807cde93 merged; typecheck 0 at the merge. 04:16 brief R3-TELL-7 written.
 - 04:18 tests/lint whole at 8807cde93: the sixteen standing only; the unit (iii) line to the chair (with ruling 54's caution on the arm). 04:20 the unit (vii) builder seated.
+- 04:24 the chair's ruling 83 read; relayed to the (vii) builder 04:24.
