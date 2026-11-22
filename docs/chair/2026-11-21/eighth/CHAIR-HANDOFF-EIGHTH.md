@@ -672,6 +672,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   rehearsed commands; the joint measure (900 births lit); the owner's signing list in plain words as a draft. ONE
   UNIT OF IT LANDS: the laws' join (the worklist's item (1)), "JOIN <commit>", built on the line once both laws are
   on it. THE FLIP ITSELF STAYS THE CHAIR'S; every signing stays the owner's.
+- E49 · A SECOND SEAT ON THE SHARE VEIL, BESIDE THE FIRST: VEIL-33 (2026-11-22 08:01 UTC; `prompts/VEIL-33.txt`). The veil is the longest
+  road to the first deploy; reading the lane in costs a seat about 400,000 and an hour or more; VEIL-32 stands near
+  500,000 by its own guess, with (viii), (iv), (v), (vi), the probe and R3 before it; one pool fills its four cores
+  for 35 minutes. SO: VEIL-33 reads in NOW on its own machine, RUNS THE JOIN PROBE THERE (dark on the stacked ref at
+  once; lit on CLOSE-1's ref when it exists: E47's probe moves from VEIL-32 to VEIL-33), and PREPARES (iv), (v), (vi)
+  (measures, briefs, red-first instruments). MIGRATION 212 KEEPS ONE WRITER: VEIL-32 until it hands over, then
+  VEIL-33; VEIL-33 changes nothing in 212, the twin or the registry before that. The bar and the fresh security
+  reader are unchanged (E27).
+- E50 · E43 WAS AGAINST THE STANDARD'S RULE 23, AND THE CHAIR SAYS SO (2026-11-22 08:01 UTC). Rule 23 (the owner, 2026-09-21): "the chair
+  never slows, holds or re-tiers a seat to save allowance". Telling the owner that the limit's warning was on was
+  right (rule 1's amendment of 2026-11-10: "a warning band is told to the owner"); HOLDING two lanes and telling
+  four seats to spend little was not: it cost PAGE-12 and PAGE-13 about forty minutes each. The owner had to say it
+  again. Rule 1 as amended on 2026-11-08 18:01 also answers the count of seats: "any number", "bounded by work that
+  lands without rework". Told to the owner by name in the chair's next message.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1111,3 +1125,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | PLACE-3 | session_01ACmDYao9UsWJpsH3xFbHKj | `lane/place-3-2026-11-21` 3dccb0069 | the same branch | the place lane: the trade note's cure, "PLACE-NOTE"; what is owed from unit 1 |
 | PEOPLE-3 | session_01ACmDYabE8Q8QFDT9ZPVoDe | `lane/people-3-2026-11-21` 930413518 | the same branch | the people lane's second half: B3 (the "why here" sentence), then B2 with B2b; "PEOPLE-B" |
 | STACK-97 | session_01ACmDYWhzK8coXeB7BokWRC | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/stack-97-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E45): who rules at 46339e5c7 as point 97: the merge and the whole gate; the chair alone moves the line |
+| CLOSE-1 | session_01ACmDYYk4tUS8QsZcpVWX3h | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/close-1-2026-11-22` (and two scratch refs it pushes for others to read) | THE CLOSE REHEARSED (E48): a trial join of the two laws; the lit scratch ref; the flipped run's census by name; the recipe; the joint measure; the signing list's draft; ONE unit that lands: the laws' join, "JOIN" |
