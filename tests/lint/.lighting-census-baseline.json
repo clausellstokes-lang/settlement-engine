@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "acf568ac2ef7601add7d11b0e4b6763b1ba315d3",
-  "measuredBy": "STACK-98",
+  "measuredAtSha": "aa53ca8d7adfebfe4d5a72907c2f565efeeeec6c",
+  "measuredBy": "CLOSE-1 GOLDEN-LIT builder",
   "date": "2026-11-22",
-  "note": "point 98: lane/fortune-6-2026-11-21 at 8cc9212fd merged on the line at 1ec3e81d1 (the fortune law, its merits and their tests)",
-  "files": 3769,
-  "parked": 485,
+  "note": "GOLDEN-LIT: tests/property/generatorGoldenMasterLit.test.js added (the lit twin of the golden master), parked as its dark peer is (its capture arm makes its suite block not straight-line)",
+  "files": 3770,
+  "parked": 486,
   "credited": 3284,
   "titles": 31819,
   "suiteTitles": 8824
