@@ -542,6 +542,24 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `COMMON-EIGHTH.txt`; (b) a builder of the chair's own runs `tests/lint` whole before it reports (prose-4's did
   not). OWED, NOT NOW: v6's "; …" afterthought is the form the owner's style law dropped from the power blocks: it is
   re-read at the state sentences' next unit.
+- E40 · THE DISPLAY LANE: THE SAFETY PAGES' TEST RE-MADE (E11 done on the lane) AND THE SIDES TABLE'S DECLARATION RULED ON PAPER (2026-11-22 07:11 UTC).
+  UNIT 2 (PAGE-13, 071f56cda; the pool cut by the chair's word to ten a size, 066c1e87c): one tree, two renders;
+  the mock swaps only the owner's line's text and only where the real reader took its owner branch; red by a plant
+  (the owner's line on the Overview: every Overview reader surface moves and holds the sentinel); green in 58
+  seconds; no stored hash; the base file and its door gone; `tests/lint` whole clean. THE ROW LEAVES
+  `RED-AT-LINE.tsv` WHEN "PAGE-SIDES" LANDS. THE SIDES TABLE (`TENSION_SIDE_MEANINGS`; its one reader is this lane's
+  `tensionSidesShown`), ruled for AFTER the lane's merge of the line: (1) AN ARM, total over the table: for every
+  row and every slot a planted record in two versions (holding the house or power; a twin without): under each of
+  the five projections the served page shows what the twin shows wherever that projection hides the house or power.
+  THE SEAT'S OWN WARNING, WHICH THE ARM EXISTS TO TEST: the reader asks the document in hand (`presumes` through
+  `atomHolds`, then `solePowerNameOf`), but nobody has proved that every projection which hides the house also stops
+  the 'organised crime' atom and drops the criminal power's row: where one does not, a served page prints "Criminal
+  organisations" where the twin prints "Lawbreakers": THAT IS PINNED AS A GAP AND LISTED FOR THE VEIL'S LANE (the
+  display lane changes no projection). (2) The walker's entry: class 'trouble' by the hand ref on that arm; the
+  UNREAD row leaves in the same commit. (3) A declared `WORD_KEYED` list (tables keyed by a side's own words): out
+  of the SENTENCE KEYS arm (63 of the table's 138 keys run to five words), its keys read by the key-word list
+  whatever their length; nothing else of the walker moves. (4) RULE 2 READS `presumes` AS NEEDS for that table (five
+  houses listed). THE CHAIR READS THIS WALKER'S DIFF WHOLE BEFORE "PAGE-SIDES" LANDS, as it did the trouble lane's.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
