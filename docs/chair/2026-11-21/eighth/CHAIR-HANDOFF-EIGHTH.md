@@ -925,6 +925,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `tests/lint` run was killed at ten minutes by the helper's own foreground limit and re-run in the background (ten
   minutes lost; the lesson for the next helper's prompt: EVERY RUN OVER FIVE MINUTES IS STARTED IN THE BACKGROUND AND
   WAITED FOR). The chair's branch is on origin at 735d578da. NET 8 is set by the command that follows this entry.
+- 2026-11-22 07:20 UTC · "SEAT 46339e5c77e5d3e9b02ef83e4ad9c949863aad3e" CAME (07:19 by the seat's clock; `lane/seat-10-2026-11-21`; it stands on the
+  line at f5295e425 through the chair's base e8bc160f8; `src/` and `tests/` unchanged since a94f7d097). ITS RULE 8:
+  the build clean; first paint 1,183,329 / 376,540 / 316,004 (+3,818 raw: the seat train's ruled exception, for the
+  owner's size signing); worker 2,686,966 (+15,961: NOT under an exception; itemized only "plausibly": THE EXACT
+  ITEMIZATION IS ORDERED); engine chunk 926,808 (+200). TESTS BY READING (A): 1,387 files, 13,913 tests, 61 red, ALL
+  ON THE LIST BY NAME (86 rows); `tests/lint` whole 3 red, the line's three. NO HOUSE, NO CLASS-TABLE ROW, NO POOL
+  TABLE. STORED FIGURES MOVED, EACH BY ITS DOOR, NONE RAISED: the wiring census, writer-reach (four lane rows, for
+  the security reader), the tuning inventory, the tuning register (DRAFT), the lighting census, the size baseline
+  (two rows down), the any-baseline (down), the manifest's `seatBandFold` row. NO GOLDEN MOVED. `SEAT_CIRCUMSTANCE_
+  TUNING` IN DRAFT FOR THE OWNER. THE FLIP MOVES 10 pins and 12 born rows in 7 files (its LANDING-LISTS §3). A NOTE
+  FOR THE LIST: `landingFixtureFreshness`'s --check row carries a stale title (the live one ends ", and is wired to
+  say how to fix it"). ACCEPTED FOR LANDING: STACKED WITH "FORTUNE" (in its rule-8 run) after the stack of points 94
+  to 96 is pushed. ASKED OF THE SEAT MEANWHILE: the worker's bytes by source file; and what U6 and each later unit
+  is, which of them the lit law needs, what each costs: the chair rules which go before the first deploy (E30).
+  E40 and E41 (the display lane; the veil's unit (viii)) were ruled in the same hour.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
