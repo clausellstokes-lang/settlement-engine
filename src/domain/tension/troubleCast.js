@@ -82,6 +82,8 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  * @property {string} line            the record's own sentence for it
  * @property {string[]} hooks         its own hooks, as the record holds them
  * @property {TroubleSide[]} sides
+ * @property {WeightStrain['strain']} strain the strain its weight is read on (FRAME-8 · F3, the chair's ruling of 22:02 UTC: the
+ *                                    sheet's Facts read it; derived, never stored)
  */
 
 /**
@@ -378,7 +380,7 @@ export function castTroubleFrame(settlement) {
   if (!seed) return null; // CF3: a shared projection carries no seed, so no frame
   const weighty = troubleOfWeight(s);
   if (!weighty) return null;
-  const { tension, at } = weighty;
+  const { tension, at, strain } = weighty;
   const type = str(tension.type);
   const matter = TROUBLE_MATTER[type] || TROUBLE_MATTER_DEFAULT;
   const roster = rosterOf(s);
@@ -611,5 +613,6 @@ export function castTroubleFrame(settlement) {
     line: str(tension.description),
     hooks: arr(tension.plotHooks).map(str).filter(Boolean).slice(0, FRAME_TUNING.hookCount),
     sides: out,
+    strain: strain.strain,
   };
 }

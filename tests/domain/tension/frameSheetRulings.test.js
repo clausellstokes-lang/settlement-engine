@@ -22,11 +22,20 @@
  *        the one line `seatLineOf`; the people to voice stay the sides' faces. Count: framed owner sheets whose holder is
  *        printed nowhere (no face, no seat line), 32 at the base 90874e392 (W3 16, W2 12, W4 3, W1 1) -> 0. The
  *        renderers are held in tests/components/tonightSeatLine.test.jsx.
+ *   F3 — a W3 sheet says what is short (FRAME-8 · F3; the chair's ruling 45, 17:12 UTC, and its words of 22:02 UTC, each
+ *        vetoable by the owner; brief frame8/F3F4-BUILD.md, lines frame8/F3F4-LINES.txt): under Facts, a third row,
+ *        "Supply", names the FIRST impaired chain in the record's own order by its printed name, its source and its cause
+ *        (`domain/display/chainCauseShown.js`), and where more chains are impaired, the count of ALL the others in digits;
+ *        where that first chain has no source or no cause, NO row (FRAME-9, fail closed; brief frame9/F3F4-BUILD-2.md).
+ *        Count: W3 owner sheets naming the impaired resource, 0 of 26 at the base b2dee95f5 -> 26.
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { composeTonightSheet, seatLineOf, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
 import { castTroubleFrame, FRAME_REASONS, FRAME_STANDING_TIES } from '../../../src/domain/tension/troubleCast.js';
+import { chainPrintName } from '../../../src/domain/display/chainPrintName.js';
+import { chainSourceOf } from '../../../src/domain/display/chainHouses.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../../src/data/supplyChainData.js';
 import { FRAME_TUNING } from '../../../src/domain/tension/sideArchetypes.js';
 import { membersByRank } from '../../../src/domain/people/membership.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
@@ -240,4 +249,91 @@ describe('F5R: the seat\'s holder is a printed line on every framed sheet', () =
     });
     expectNoSeedFailures(failures, 'the stranger\'s sheet carries no seat line');
   }, 300000);
+});
+
+/**
+ * F3's row over one town, re-derived here from the record (not through the sheet): the impaired chains in the record's own
+ * order, the first one's printed name and source and its `resourceCondition`, the count of the rest. Null where none.
+ * @param {any} s
+ */
+function supplyRowOf(s) {
+  const impaired = (s.economicState?.activeChains || []).filter((c) => c && c.status === 'impaired');
+  if (!impaired.length) return null;
+  const first = impaired[0];
+  const printed = chainPrintName(first, s);
+  const rest = impaired.length - 1;
+  return `${printed.label}: ${chainSourceOf(first, printed)} (${first.resourceCondition})${rest ? `; ${rest} more impaired` : ''}.`;
+}
+
+/** The 26 W3 sheets of the 63 (the trouble of weight's strain, W3: every one an impaired chain), measured at a42e90d89. */
+const W3_SHEETS = Object.freeze([
+  'frame-calm-hamlet-7', 'frame-calm-hamlet-35', 'frame-calm-hamlet-49', 'frame-calm-village-20', 'frame-calm-town-1',
+  'frame-calm-town-33', 'frame-calm-town-56', 'frame-calm-town-68', 'frame-calm-town-74', 'frame-calm-city-22',
+  'frame-calm-city-23', 'frame-calm-city-27', 'frame-calm-city-30', 'frame-calm-city-52', 'frame-calm-metropolis-1',
+  'frame-calm-metropolis-5', 'frame-calm-metropolis-12', 'frame-calm-metropolis-14', 'frame-calm-metropolis-21',
+  'frame-calm-metropolis-22', 'frame-calm-metropolis-39', 'frame-calm-metropolis-44', 'frame-calm-metropolis-48',
+  'frame-calm-metropolis-53', 'frame-calm-metropolis-57', 'frame-calm-metropolis-59',
+]);
+
+describe('F3: a W3 sheet says what is short', () => {
+  it('frame-calm-village-20 (one chain impaired): "Supply Leather & Hides: Hunting grounds (depleted)." under Facts, and no count', () => {
+    const sheet = composeTonightSheet(bySeed('frame-calm-village-20'), OWNER);
+    expect(sheet.facts.map((f) => f.id)).toEqual(['food', 'defence', 'supply']);
+    expect(sheet.facts[2]).toEqual({ id: 'supply', label: 'Supply', text: 'Leather & Hides: Hunting grounds (depleted).', sourcePath: 'economicState.activeChains[0]' });
+  });
+
+  it('frame-calm-city-22 (five chains impaired): the first in the record\'s order, then the count of the rest in digits', () => {
+    const sheet = composeTonightSheet(bySeed('frame-calm-city-22'), OWNER);
+    expect(sheet.facts.find((f) => f.id === 'supply')).toEqual({ id: 'supply', label: 'Supply', text: 'Alchemy & Reagents: Magical ley line node (depleted); 4 more impaired.', sourcePath: 'economicState.activeChains[0]' });
+  });
+
+  it('FAIL CLOSED (FRAME-9 (i)): a first impaired chain with no cause prints NO row, never the next; the count is of ALL the others', () => {
+    const s = structuredClone(bySeed('frame-calm-city-22'));
+    const impaired = s.economicState.activeChains.filter((c) => c.status === 'impaired');
+    expect(impaired.length).toBe(5);
+    // a later chain with no cause is still one of the others counted
+    impaired[3].resourceCondition = 'available';
+    expect(composeTonightSheet(s, OWNER).facts.find((f) => f.id === 'supply')?.text).toBe('Alchemy & Reagents: Magical ley line node (depleted); 4 more impaired.');
+    // the first chain with no cause: no row, though four others carry one
+    impaired[0].resourceCondition = 'available';
+    expect(castTroubleFrame(s)?.strain).toBe('W3');
+    const ids = composeTonightSheet(s, OWNER).facts.map((f) => f.id);
+    expect(ids).toEqual(['food', 'defence']);
+    // the first chain with no source (a criminal chain's catalogue ground is null): no row
+    const t = structuredClone(bySeed('frame-calm-city-22'));
+    t.economicState.activeChains.find((c) => c.status === 'impaired').resource = null;
+    expect(composeTonightSheet(t, OWNER).facts.map((f) => f.id)).toEqual(['food', 'defence']);
+  });
+
+  it('over the 63: every W3 owner sheet names its impaired resource (0 of 26 at the base -> 26), and no other sheet carries the row', () => {
+    const failures = collectSeedFailures(TOWNS.map((t) => t.seed), (seed) => {
+      const s = bySeed(seed);
+      const sheet = composeTonightSheet(s, OWNER);
+      const row = sheet.facts.find((f) => f.id === 'supply');
+      if (W3_SHEETS.includes(seed)) {
+        expect(castTroubleFrame(s)?.strain, `${seed}: W3`).toBe('W3');
+        expect(row?.label, `${seed}: the row's label`).toBe(TONIGHT_COPY.supply);
+        expect(row?.text, `${seed}: the first impaired chain, its source and cause, the count of the rest`).toBe(supplyRowOf(s));
+      } else expect(row, `${seed}: no Supply row off W3`).toBeUndefined();
+      // the two facts every reader gets are unchanged: the stranger's, row for row
+      expect(sheet.facts.slice(0, 2), `${seed}: Food and Defence are the stranger's`).toEqual(composeTonightSheet(s).facts);
+    });
+    expectNoSeedFailures(failures, 'the Supply row stands on every W3 owner sheet and on no other');
+    expect(TOWNS.filter(({ s }) => composeTonightSheet(s, OWNER).facts.some((f) => f.id === 'supply')).map((t) => t.seed)).toEqual(W3_SHEETS);
+    // both forms are on the pool: one chain (no count) and several (the count)
+    const texts = W3_SHEETS.map((seed) => /** @type {string} */ (supplyRowOf(bySeed(seed))));
+    expect(texts.filter((t) => !t.includes('more impaired')).length).toBe(5);
+    expect(texts.filter((t) => / \d+ more impaired\.$/.test(t)).length).toBe(21);
+  }, 300000);
+
+  it('over the 63: the stranger\'s sheet carries no Supply row', () => {
+    const carrying = TOWNS.filter(({ s }) => composeTonightSheet(s).facts.some((f) => f.id === 'supply')).map((t) => t.seed);
+    expect(carrying).toEqual([]);
+  }, 300000);
+
+  it('a criminal chain is never the row\'s chain: every chain of the criminal economy draws on no ground (no source, no cause)', () => {
+    const chains = SUPPLY_CHAIN_NEEDS.criminal_economy.chains;
+    expect(chains.map((c) => c.id)).toEqual(['smuggling', 'black_market', 'guild_crime', 'slave_trade']);
+    for (const c of chains) expect(c.resource, c.id).toBe(null);
+  });
 });
