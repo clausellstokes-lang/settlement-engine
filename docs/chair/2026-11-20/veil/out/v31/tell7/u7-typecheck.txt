@@ -1,0 +1,5 @@
+[gate-tail] start:  05:07:28 up  5:53,  0 user,  load average: 0.00, 0.37, 1.32 · cores: 4
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  05:08:06 up  5:54,  0 user,  load average: 1.01, 0.57, 1.34
+[gate-tail] full log: /tmp/gate-tail.15603.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
