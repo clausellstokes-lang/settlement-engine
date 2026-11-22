@@ -99,6 +99,15 @@ verified by ls-remote).
     each in its own worktree on its own -wip branch; heavy runs ONE at a time through the gate mutex; every diff read whole
     before a merge. THE JOIN PROBE may be cut as a second builder (a scratch branch, never the lane) the moment who rules and
     fortune sit on one ref (the chair names it). THE FRESH SECURITY READER is seated the hour the seat names 212's final text.
+90. THE CHAIR, 07:55 UTC, THE JOIN PROBE: (3) the merge read AS IT FALLS: conflicts toward the line in tests, toward the lane
+    in 212 and the twin, EVERY ONE LISTED with its resolution (the join step's worklist at the close). (2) The ref, its
+    LINE-NOW tip and its red list come from the chair WITH the ref. (1) The laws are lit on ONE LIT SCRATCH REF made by the
+    close's rehearsal seat (CLOSE-1): both laws merged, the three dials flipped as the close will (`seatLaw.js ::
+    NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION`, `seatCircumstances.js :: SEAT_CONTEST_LIT = true`,
+    `fortuneLaw.js :: NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION`; births through
+    `densityCreateBoundary.js :: birthConfig`), proven lit; the probe merges THAT ref with the lane on the scratch branch (ruling
+    63 met by construction). ORDER: (viii)'s pool re-make first, the probe's pool after it, never beside it. THE PROBE ALSO
+    MEASURES E35's HOOK GAP (DM door open, the hooks' eye opened, a criminal house left veiled: a trouble's hook is served).
 
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
