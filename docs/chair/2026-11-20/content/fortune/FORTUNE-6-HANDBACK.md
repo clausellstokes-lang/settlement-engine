@@ -118,3 +118,67 @@ NEXT STEP: merge U5d (`briefs/U5d-ECO-ANCHOR.md`, test-only: arm (b) of `tests/d
   The worker runs the birth, so all of it is the law's own code, truly needed there. FOR THE OWNER'S SIZE SIGNING.
   The line's own worker figure is already red against its ceiling (2,579,708).
 - Earlier, now superseded: FORTUNE-4 section 3 ("after U6 about +58") predates U5a.
+
+## 6. FOR FORTUNE-7: WHAT LASTING NEEDS (written 2026-11-22 07:5x UTC; the chair's E45 seats FORTUNE-7 now)
+
+Read with `briefs/U7-LASTING.md` and `briefs/U7b-LASTING-SENTENCE.md` (the chair's decision E32 is in both). Cut NO builder
+until the chair names "FORTUNE <commit>" to you; then stand on that commit.
+
+**WHERE THE MERIT'S GATES AND POINTS LIVE** (read whole: `src/domain/fortune/fortuneMerits.js`, `fortuneLaw.js`):
+- `MERIT_NAMES` is the list of counted merits. Today it is `['weathered']`; LASTING adds `'lasting'`.
+- `meritsOf(settlement)` is THE predicate. The birth, the sentence and the neutral-reading cure all import it, and none
+  restates it.
+- The gates are in `meritsOf`:
+  - the base score at Tolerated or better, read from `data/bandLadders.js :: LEGITIMACY_CUTS.tolerated`;
+  - no ruler-trouble tension (`rulerTroubled`, `FORTUNE_LAW_TUNING.standing.rulerTroubleKinds`).
+- The points: `meritedLegitimacy(legitimacy, names, bandFor)` adds `standing.meritPoints` (10) per merit, upward only.
+  Endorsed needs `standing.endorsedMinReasons` (2) reasons, and a merit is a reason.
+- The write is `settleMeritsOfRule(settlement, seams)`, the assembly step's tail
+  (`generators/steps/assembleSettlement.js`). Law 1 writes no byte.
+- The weathered merit's own input is `weatheredCatastrophe(settlement)` (`historicalEvents[]`, catastrophic,
+  `yearsAgo <= standing.weatheredWithinYears` (40), its kind naming no tension of today, no unresolved legacy note via
+  `data/legacyUnresolvedWordings.js`).
+- First paint: `fortuneMerits.js` is EXCISED from ESD and pinned to its own lazy `fortune-merits` chunk (U5c,
+  `vite.config.js`). A new import into it lands in that chunk. Rebuild and read `engineChunkLazy`'s U5c block.
+
+**THE SENTENCE DOOR** (U5b's form, `display/governanceAccount.js :: governanceAccountOf`, section "2. THE STANDING"):
+- It is pushed right after the standing sentence, only where `meritsOf(...)` credits the merit.
+- The wording comes from `drawDeclared(POOL, { draw: (pool) => pickVariantMixed(pool, identity), key, facts, poolId,
+  surface: 'power', drawKind: 'H' })`, then `{slot}` fills.
+- The pool is its OWN data file (`src/data/fortuneMeritLines.js` is the model), imported only by `governanceAccount.js`
+  (lazy).
+- The pool goes on `tests/lint/samenessHideable.handPools.json`, and `HAND_CEILING` is raised by one with its comment
+  extended, by the chair's word.
+
+**THE VEIL PROOFS' FORM** (`tests/domain/fortuneMeritSentence.test.js`): each wording by each band is the same string on
+the owner's record, on `toPublicSafe(record)` (`display/publicSafe.js`) and under the widest veil
+(`display/galleryVeil.js`, every hideable grouping shut), on the six places of `measures/sentences/PAGES.md`. That is the
+"eighteen equalities". LASTING's input (`history.age`) needs the same proof BEFORE the merit is built (U7 step 1).
+
+**THE LIT RE-MEASURE'S RECIPE** (`measures/bands/BANDS-LIT.md`, `lit-run.mjs`, `lit-report.mjs`):
+- The visitor's pool is `measure-lit.mjs :: visitorJob`: seeds `visitor-<size>-0..149`, 900 births a state.
+- `node lit-run.mjs <tree> <state> '<force-json>' <out.jsonl>`, then `node lit-report.mjs A.jsonl B.jsonl C.jsonl`.
+- A state without a merit is a PLANT in a `git archive` scratch copy (e.g. `meritsOf` returning `[]`), checked by
+  `diff -r` to the one line.
+- Run through the mutex. Expect state D to equal `BANDS.md`'s D byte for byte.
+
+**WHAT BIT ME** (each cost a stop and a ruling):
+1. A NEW IMPORT INTO AN EAGER MODULE IS A FIRST-PAINT RISE. `computeEngineSharedDomain` puts every domain module a
+   generator imports into eager engine-core: U5a's merits did, and dragged the law and two data files with them
+   (+6,609). Build and read the closure (`scratchpad/fp-closure.mjs` and `sm-attr.mjs`, copies in section 5's method)
+   before you call any unit green.
+2. PIN A LAZY MODULE TO ITS OWN CHUNK, never into the law's: data imports give an import-free chunk a `data-lazy` edge,
+   and the create boundary's closure triples.
+3. Brotli moving with raw at 0 is chunk-hash entropy. Prove it by normalising `-XXXXXXXX.js` in the entry chunk.
+4. A new import moves WRITER-REACH: identities leave the dark cohort and closures grow. That is the chair's to rule
+   (rule 9); state every movement.
+5. A NEW POOL needs its row on the sameness HAND list (TOTALITY red) after merging the line that carries the walker.
+6. A NEW TABLE ROW in `FORTUNE_LAW_TUNING` costs first-paint bytes only if the law's chunk is in first paint (it is
+   not now). A wording threshold is NOT a law tuning: it lives beside its words (ruling 2).
+7. A TEST ANCHORED ON A DRAW BREAKS WHEN THE LINE REGENERATES POOLS (U5d). Anchor on eligibility.
+8. `it.each` raises the lighting census's park count; write plain tests.
+9. MERGING THE LINE: take THE LINE'S SIDE of every register, then its door (the chair, 04:23). The lane's side hides a
+   shrink-only raise. Then compare three ways (`measures/REGISTERS-AT-LINE.md`).
+10. The observed-shape register needs an explained-writer row for a key written only under law 2 (rung 46, this
+    lane's). If LASTING writes a NEW key, a rung 47 is the chair's call.
+11. COMMON-EIGHTH 11: `tests/lint` WHOLE after ANY test-file change, before calling a commit green.

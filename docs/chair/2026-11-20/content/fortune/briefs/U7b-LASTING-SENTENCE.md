@@ -1,6 +1,6 @@
 # FORTUNE U7b LASTING SENTENCE: the second merit's reason on the page (a draft to the chair FIRST, then the build)
 
-Written 2026-11-22 by FORTUNE-6 on the chair's ruling of 04:51 UTC, for FORTUNE-7. It follows U7 (`briefs/U7-LASTING.md`)
+Written 2026-11-22 by FORTUNE-6 on the chair's ruling of 04:51 UTC (decision E32), for FORTUNE-7. It follows U7 (`briefs/U7-LASTING.md`)
 MERGED. Read FIRST: `briefs/COMMON.md`; COMMON-RULES 1 to 12 (rule 12: EVERY AUTHORED LINE IS READ BY THE CHAIR BEFORE
 IT IS BUILT); `briefs/U5b-BUILD.md` and the U5b merges in `FORTUNE-6-HANDBACK.md` (the form this unit repeats: the
 governance paragraph, the one door, the mixed keyed pick, the eighteen equalities, the sameness hand row); and

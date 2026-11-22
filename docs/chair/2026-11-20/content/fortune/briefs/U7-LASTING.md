@@ -1,6 +1,6 @@
 # FORTUNE U7 LASTING: the second merit, a place that has lasted (built under the one law version, dark-safe)
 
-Written 2026-11-22 by FORTUNE-6 on the chair's ruling of 04:51 UTC (verbatim in substance below), for FORTUNE-7 to
+Written 2026-11-22 by FORTUNE-6 on the chair's ruling of 04:51 UTC (decision E32; verbatim in substance below), for FORTUNE-7 to
 staff. Base: the lane tip FORTUNE-7 is seated on, after "FORTUNE <commit>". Read FIRST: `briefs/COMMON.md` (its laws
 bind). Then `COMMON-RULES.txt` on `origin/lane/chair-2026-11-08` under `docs/chair/2026-11-20/seventh/prompts/` (rules
 1 to 11 and 14(c) and (e) bind). Then `measures/bands/BANDS.md` (FORTUNE-4: state D, the plant this unit builds, and
@@ -11,7 +11,7 @@ its `plant.diff` description), and `src/domain/fortune/fortuneMerits.js` and `fo
 THE OWNER, 2026-11-22, asked "Fortune's second merit: build it, or leave it for after the deploy", answered:
 "I leave all decisions to you'd but got number 4 build it". The second merit is BUILT BEFORE THE DEPLOY.
 
-THE CHAIR, 04:51 UTC:
+THE CHAIR, 04:51 UTC (the chair's decision E32):
 - ACCEPTED AS MEASURED (BANDS.md, state D).
 - THE MERIT: `history.age` at or above the p90 of the place's own size, through the same `meritsOf` gates and points.
   Two merits count as two reasons at the Endorsed guard, as D measured.
