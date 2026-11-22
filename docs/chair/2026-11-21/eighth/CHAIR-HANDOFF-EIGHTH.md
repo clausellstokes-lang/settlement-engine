@@ -463,6 +463,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   mutex: the hook is three single-threaded checks and the run keeps its three workers. `PICKUP-NINTH.md`'s first block
   is rewritten to this hour. The task of handing the chair to a fresh session is closed as MET BY THE COMPACTION: the
   pickup stays current so that a new session can take over at any time.
+- 2026-11-22 04:21 UTC · NET 5 (taken at 04:20, four minutes before its alarm): ALL FOUR SEATS RUNNING AND CONNECTED. THE COUNTS BY THE CHAIR'S
+  READ: VEIL-31 524,410 (400,910 at 00:08; 426,535 at 01:05: about 33,000 an hour: the word to finish, at about
+  620,000, falls near 07:00; its successor is then seated ON its hand-back); unit (iii) merged, its `tests/lint`
+  running before the push. SEAT-10 231,916 "after a boundary" (309,690 at 00:09; its worker restarted once): on the
+  second base, the three-way row proof passed, taking the next door. FORTUNE-6 315,590 "after a boundary" (199,171 at
+  00:09): the first-paint cure in hand (the engine-chunk guards red on its lane; a builder rewording). PAGE-12 285,101
+  "after a boundary" (206,147 at 23:47): given E21 at 04:18. A HOLE IN THE CHAIR'S OWN NETS, FOUND AND CLOSED: nets 3
+  and 4 read only VEIL-31's count. Three records now read "after a boundary" (a compaction or a clearing of old
+  context), and E10 says a seat hands over BEFORE compaction: EACH OF THE THREE IS ASKED IN ONE LINE whether its
+  context was compacted and when; one that was re-reads its prompt's rules, COMMON-EIGHTH and its hand-back's rulings
+  WHOLE before its next merge and says so. FROM NOW EVERY NET READS ALL FOUR COUNTS and writes them here. Spent so far
+  by the seats' own records: 57.49, 24.68, 57.70 and 39.79 (179.66 together). POINT 94's long run is still going
+  (started 04:05). THE NEXT NET is set for about 05:25.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
