@@ -1,0 +1,23 @@
+diff --git a/src/domain/rulingPowerCoup.js b/src/domain/rulingPowerCoup.js
+index 8a594b630..f1c4b6b6d 100644
+--- a/src/domain/rulingPowerCoup.js
++++ b/src/domain/rulingPowerCoup.js
+@@ -84,8 +84,17 @@ export function coupContenders(settlement) {
+   const governing = governingFactionOf(settlement);
+   const govMultiplier = num(ps.publicLegitimacy?.govMultiplier, 1);
+ 
++  // SIM-MEASURE arm B ONLY (throwaway worktree, never committed): CS3 — the power that holds the seat never contests
++  // it. The holder is docs/chair/2026-11-20/content/seat/seat-draft.mjs :: holderOf (owner audience), injected by the
++  // instrument through globalThis after the towns are born (a static import would close a TLA cycle through powerStrata).
++  const cs3 = /** @type {any} */ (globalThis).__SIM_CS3__;
++  let cs3Holder = null;
++  if (cs3 && typeof cs3.holderOf === 'function') {
++    try { cs3Holder = cs3.holderOf(settlement)?.holder || null; } catch (e) { cs3.throws += 1; cs3.lastThrow = String(e).slice(0, 200); }
++    cs3.calls += 1; if (cs3Holder) cs3.excluded += 1;
++  }
+   const challengers = factions
+-    .filter(f => f && f !== governing)
++    .filter(f => f && f !== governing && f !== cs3Holder)
+     .map(f => {
+       const archetype = factionArchetype(f);
+       // §8 read-side: effective power = base × the ladder's leadership/churn factor. The

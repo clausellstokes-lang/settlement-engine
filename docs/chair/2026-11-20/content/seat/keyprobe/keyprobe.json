@@ -1,0 +1,688 @@
+{
+ "head": "f82c2a183",
+ "armBDiff": [
+  "-export const SEAT_CONTEST_LIT = false;",
+  "+export const SEAT_CONTEST_LIT = true;"
+ ],
+ "arms": {
+  "A": {
+   "arm": "A",
+   "root": "/home/user/settlement-engine",
+   "SEAT_CONTEST_LIT": false,
+   "jobs": 166,
+   "pairs": 166,
+   "errors": [],
+   "hashes": [
+    {
+     "label": "town/germanic/osr-a",
+     "law1": "8375951e44897ee3bd6823404b47e7d8c4430bcd86576aa241dc1cb68236477a",
+     "law2": "209aa99318dd7db208fae4da055806f722554a116453b5014bc8947756bba9ae"
+    },
+    {
+     "label": "town/germanic/osr-b",
+     "law1": "1758d72c6683f64a464f9a0fd50a9872fd1ea58d04068a0ecc42d8ee9dbe730a",
+     "law2": "ca61a92451f981fa4a9cffb80438dc6f935bd1b7b0c18f095f35810a88755711"
+    },
+    {
+     "label": "town/germanic/osr-c",
+     "law1": "5b8c355510fd419e8929890a03383cdfdcb7cb96ac08c2b7e599b2003292b434",
+     "law2": "0de03325e407e972a2e5926094cd30e93354e47fd2ed4eee72854251924d680c"
+    },
+    {
+     "label": "town/germanic/osr-d",
+     "law1": "9c110608d351a076112c29eeb83d9ca1a57c22076cdc4bdac8cc60ec44abb6a4",
+     "law2": "48e831ebdbfb339f2214479ebba54899a2befefd8e4ca61f6b1a63758c29d570"
+    },
+    {
+     "label": "city/nordic/osr-a",
+     "law1": "7f59823aa8c9580224bf1ef365ae2b9441ba1620b63214473f238a6ea390c061",
+     "law2": "b2f6c939dc982353d590e3a08876abceedb444879da903cdaa9dfc85bb6ccee7"
+    },
+    {
+     "label": "city/nordic/osr-b",
+     "law1": "0579c549069e9762d79f2a4c4afd0faaf0eb65ba74f04038a24836217503f13e",
+     "law2": "be823c4f14718ff8376e6186413c5392bdc9cf142c527afa0d066e0de60017fc"
+    },
+    {
+     "label": "city/nordic/osr-c",
+     "law1": "d0bf0198767d059c57caaa5ea77a6abf33763dff1889aa9d61cb4c97201a514a",
+     "law2": "5dd0cd4585d22f03ec422aec57f88f2fb309b261f30f97e6d887ee0544069142"
+    },
+    {
+     "label": "city/nordic/osr-d",
+     "law1": "430921d72421e7bebefb0e0c342947f1a2437884bc8c9d89190a530665d9a4f3",
+     "law2": "562de3960a0ba128dc0c85328fcdbcf32d294715c1155df6c06c08cd3109ea81"
+    },
+    {
+     "label": "village/celtic/osr-a",
+     "law1": "402f3ca13f0fa5b2b3126b33fe364b36a0f729ac618ad426ee42daa8492e70b0",
+     "law2": "2668f429efe71d0b63a6c34f02ee6af3e54036e80e5c5d38baa676b7062e0b2a"
+    },
+    {
+     "label": "village/celtic/osr-b",
+     "law1": "d094bcb1ed773260c75a5066634c1f288438546c8c015418266328d199d2f44f",
+     "law2": "6ca41f468d5abebc4c16b872873f8cd6198d75b300dc28c88b9beebf3a73e69d"
+    }
+   ],
+   "peakHeapMB": 244,
+   "seconds": 42,
+   "union1Paths": 1028,
+   "union2Paths": 1028,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "law2NeverLaw1Identities": [],
+   "law1NeverLaw2Identities": [],
+   "diffRows": [
+    {
+     "path": "settlement.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "B": {
+   "arm": "B",
+   "root": "<scratch>/treeB (git archive f82c2a183, one edit)",
+   "SEAT_CONTEST_LIT": true,
+   "jobs": 166,
+   "pairs": 166,
+   "errors": [],
+   "hashes": [
+    {
+     "label": "town/germanic/osr-a",
+     "law1": "8375951e44897ee3bd6823404b47e7d8c4430bcd86576aa241dc1cb68236477a",
+     "law2": "209aa99318dd7db208fae4da055806f722554a116453b5014bc8947756bba9ae"
+    },
+    {
+     "label": "town/germanic/osr-b",
+     "law1": "1758d72c6683f64a464f9a0fd50a9872fd1ea58d04068a0ecc42d8ee9dbe730a",
+     "law2": "ca61a92451f981fa4a9cffb80438dc6f935bd1b7b0c18f095f35810a88755711"
+    },
+    {
+     "label": "town/germanic/osr-c",
+     "law1": "5b8c355510fd419e8929890a03383cdfdcb7cb96ac08c2b7e599b2003292b434",
+     "law2": "0de03325e407e972a2e5926094cd30e93354e47fd2ed4eee72854251924d680c"
+    },
+    {
+     "label": "town/germanic/osr-d",
+     "law1": "9c110608d351a076112c29eeb83d9ca1a57c22076cdc4bdac8cc60ec44abb6a4",
+     "law2": "48e831ebdbfb339f2214479ebba54899a2befefd8e4ca61f6b1a63758c29d570"
+    },
+    {
+     "label": "city/nordic/osr-a",
+     "law1": "7f59823aa8c9580224bf1ef365ae2b9441ba1620b63214473f238a6ea390c061",
+     "law2": "b2f6c939dc982353d590e3a08876abceedb444879da903cdaa9dfc85bb6ccee7"
+    },
+    {
+     "label": "city/nordic/osr-b",
+     "law1": "0579c549069e9762d79f2a4c4afd0faaf0eb65ba74f04038a24836217503f13e",
+     "law2": "be823c4f14718ff8376e6186413c5392bdc9cf142c527afa0d066e0de60017fc"
+    },
+    {
+     "label": "city/nordic/osr-c",
+     "law1": "d0bf0198767d059c57caaa5ea77a6abf33763dff1889aa9d61cb4c97201a514a",
+     "law2": "5dd0cd4585d22f03ec422aec57f88f2fb309b261f30f97e6d887ee0544069142"
+    },
+    {
+     "label": "city/nordic/osr-d",
+     "law1": "430921d72421e7bebefb0e0c342947f1a2437884bc8c9d89190a530665d9a4f3",
+     "law2": "562de3960a0ba128dc0c85328fcdbcf32d294715c1155df6c06c08cd3109ea81"
+    },
+    {
+     "label": "village/celtic/osr-a",
+     "law1": "402f3ca13f0fa5b2b3126b33fe364b36a0f729ac618ad426ee42daa8492e70b0",
+     "law2": "2668f429efe71d0b63a6c34f02ee6af3e54036e80e5c5d38baa676b7062e0b2a"
+    },
+    {
+     "label": "village/celtic/osr-b",
+     "law1": "d094bcb1ed773260c75a5066634c1f288438546c8c015418266328d199d2f44f",
+     "law2": "6ca41f468d5abebc4c16b872873f8cd6198d75b300dc28c88b9beebf3a73e69d"
+    }
+   ],
+   "peakHeapMB": 224,
+   "seconds": 41,
+   "union1Paths": 1028,
+   "union2Paths": 1028,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "law2NeverLaw1Identities": [],
+   "law1NeverLaw2Identities": [],
+   "diffRows": [
+    {
+     "path": "settlement.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  },
+  "B_nofold": {
+   "arm": "B",
+   "root": "<scratch>/treeB (git archive f82c2a183, one edit)",
+   "SEAT_CONTEST_LIT": true,
+   "fold": "none",
+   "jobs": 166,
+   "pairs": 166,
+   "errors": [],
+   "hashes": [
+    {
+     "label": "town/germanic/osr-a",
+     "law1": "8375951e44897ee3bd6823404b47e7d8c4430bcd86576aa241dc1cb68236477a",
+     "law2": "209aa99318dd7db208fae4da055806f722554a116453b5014bc8947756bba9ae"
+    },
+    {
+     "label": "town/germanic/osr-b",
+     "law1": "1758d72c6683f64a464f9a0fd50a9872fd1ea58d04068a0ecc42d8ee9dbe730a",
+     "law2": "ca61a92451f981fa4a9cffb80438dc6f935bd1b7b0c18f095f35810a88755711"
+    },
+    {
+     "label": "town/germanic/osr-c",
+     "law1": "5b8c355510fd419e8929890a03383cdfdcb7cb96ac08c2b7e599b2003292b434",
+     "law2": "0de03325e407e972a2e5926094cd30e93354e47fd2ed4eee72854251924d680c"
+    },
+    {
+     "label": "town/germanic/osr-d",
+     "law1": "9c110608d351a076112c29eeb83d9ca1a57c22076cdc4bdac8cc60ec44abb6a4",
+     "law2": "48e831ebdbfb339f2214479ebba54899a2befefd8e4ca61f6b1a63758c29d570"
+    },
+    {
+     "label": "city/nordic/osr-a",
+     "law1": "7f59823aa8c9580224bf1ef365ae2b9441ba1620b63214473f238a6ea390c061",
+     "law2": "b2f6c939dc982353d590e3a08876abceedb444879da903cdaa9dfc85bb6ccee7"
+    },
+    {
+     "label": "city/nordic/osr-b",
+     "law1": "0579c549069e9762d79f2a4c4afd0faaf0eb65ba74f04038a24836217503f13e",
+     "law2": "be823c4f14718ff8376e6186413c5392bdc9cf142c527afa0d066e0de60017fc"
+    },
+    {
+     "label": "city/nordic/osr-c",
+     "law1": "d0bf0198767d059c57caaa5ea77a6abf33763dff1889aa9d61cb4c97201a514a",
+     "law2": "5dd0cd4585d22f03ec422aec57f88f2fb309b261f30f97e6d887ee0544069142"
+    },
+    {
+     "label": "city/nordic/osr-d",
+     "law1": "430921d72421e7bebefb0e0c342947f1a2437884bc8c9d89190a530665d9a4f3",
+     "law2": "562de3960a0ba128dc0c85328fcdbcf32d294715c1155df6c06c08cd3109ea81"
+    },
+    {
+     "label": "village/celtic/osr-a",
+     "law1": "402f3ca13f0fa5b2b3126b33fe364b36a0f729ac618ad426ee42daa8492e70b0",
+     "law2": "2668f429efe71d0b63a6c34f02ee6af3e54036e80e5c5d38baa676b7062e0b2a"
+    },
+    {
+     "label": "village/celtic/osr-b",
+     "law1": "d094bcb1ed773260c75a5066634c1f288438546c8c015418266328d199d2f44f",
+     "law2": "6ca41f468d5abebc4c16b872873f8cd6198d75b300dc28c88b9beebf3a73e69d"
+    }
+   ],
+   "peakHeapMB": 241,
+   "seconds": 43,
+   "union1Paths": 1068,
+   "union2Paths": 1068,
+   "law2NeverLaw1Paths": [],
+   "law1NeverLaw2Paths": [],
+   "law2NeverLaw1Identities": [],
+   "law1NeverLaw2Identities": [],
+   "diffRows": [
+    {
+     "path": "settlement.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].desc",
+     "key": "desc",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].intensity",
+     "key": "intensity",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].issue",
+     "key": "issue",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].parties",
+     "key": "parties",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].plotHooks",
+     "key": "plotHooks",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    },
+    {
+     "path": "settlement.powerStructure.conflicts[].stakes",
+     "key": "stakes",
+     "shape": "conflicts",
+     "l2only": 0,
+     "l1only": 1,
+     "ex2": null,
+     "ex1": "town/mediterranean/osr-d",
+     "inLaw1Union": true,
+     "inLaw2Union": true
+    }
+   ]
+  }
+ },
+ "armBLaw1EqualsArmA": [
+  {
+   "label": "town/germanic/osr-a",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "town/germanic/osr-b",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "town/germanic/osr-c",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "town/germanic/osr-d",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "city/nordic/osr-a",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "city/nordic/osr-b",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "city/nordic/osr-c",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "city/nordic/osr-d",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "village/celtic/osr-a",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  },
+  {
+   "label": "village/celtic/osr-b",
+   "law1ArmAEqualsArmB": true,
+   "law2ArmAEqualsArmB": true,
+   "law1DiffersFromLaw2": true
+  }
+ ],
+ "law2OnlyPaths": [],
+ "readerTable": [],
+ "marker": {
+  "note": "outside the pairing: a marker-free birth (as the corpus births) carries no _seatLawVersion; a law-2 birth carries it at config._seatLawVersion and _config._seatLawVersion",
+  "absent": "none",
+  "law2": [
+   "settlement.config._seatLawVersion",
+   "settlement._config._seatLawVersion"
+  ]
+ }
+}

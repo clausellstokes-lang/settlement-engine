@@ -1,0 +1,6856 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/u4/measure-lit.sh",
+  "seatSha": "213ec7cbbb6da480457f2089f1f9bddc157126a6",
+  "fortuneSha": "1cd2e6d9338a378be979211282820ce2a5122f2f",
+  "calSeatSha": "c4df8a027c170aa61ee2cae001e5cc906ff8591c",
+  "calFortuneSha": "c167b5f1169da6ba98b39c1af56127bdc62e0283",
+  "writtenAt": "2026-11-20T18:23:14.548Z",
+  "totalPlaces": 21000,
+  "totalErrors": 0,
+  "standing": "fortune-off arms are under today's standing"
+ },
+ "calibration": {
+  "at": {
+   "seat": "c4df8a027c170aa61ee2cae001e5cc906ff8591c",
+   "fortune": "c167b5f1169da6ba98b39c1af56127bdc62e0283"
+  },
+  "arm0": {
+   "chair": [
+    "0",
+    "7.6",
+    "70",
+    "8.6",
+    "0",
+    "0"
+   ],
+   "measured": [
+    "0",
+    "7.6",
+    "70",
+    "8.6",
+    "0",
+    "0"
+   ],
+   "calmN": [
+    70,
+    66,
+    70,
+    70,
+    73,
+    67
+   ]
+  },
+  "both-D": {
+   "chair": [
+    "0",
+    "1.5",
+    "17.1",
+    "8.6",
+    "16.4",
+    "10.4"
+   ],
+   "measured": [
+    "0",
+    "1.5",
+    "17.1",
+    "8.6",
+    "16.4",
+    "10.4"
+   ],
+   "calmN": [
+    70,
+    66,
+    70,
+    70,
+    73,
+    67
+   ]
+  },
+  "pass": true,
+  "sfOffEqualsArm0": {
+   "same": 596,
+   "of": 600,
+   "differ": [
+    {
+     "seed": "hxd-village-32",
+     "calm": false,
+     "contestReadingSame": true
+    },
+    {
+     "seed": "hxd-city-23",
+     "calm": false,
+     "contestReadingSame": true
+    },
+    {
+     "seed": "hxd-metropolis-35",
+     "calm": false,
+     "contestReadingSame": true
+    },
+    {
+     "seed": "hxd-metropolis-89",
+     "calm": false,
+     "contestReadingSame": true
+    }
+   ]
+  }
+ },
+ "sanity": {
+  "arm0EqualsArm0Cal": {
+   "same": 600,
+   "of": 600,
+   "differ": []
+  },
+  "sfOffEqualsArm0": {
+   "chair600": {
+    "same": 596,
+    "of": 600,
+    "differ": [
+     {
+      "seed": "hxd-village-32",
+      "calm": false,
+      "contestReadingSame": true
+     },
+     {
+      "seed": "hxd-city-23",
+      "calm": false,
+      "contestReadingSame": true
+     },
+     {
+      "seed": "hxd-metropolis-35",
+      "calm": false,
+      "contestReadingSame": true
+     },
+     {
+      "seed": "hxd-metropolis-89",
+      "calm": false,
+      "contestReadingSame": true
+     }
+    ]
+   },
+   "visitor": {
+    "same": 599,
+    "of": 600,
+    "differ": [
+     {
+      "seed": "visitor-city-37",
+      "calm": false,
+      "contestReadingSame": true
+     }
+    ]
+   }
+  }
+ },
+ "cause": {
+  "arm0": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -3.9,
+      "twoSE": 6.9,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 5.5,
+      "twoSE": 13.7,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": 1.7,
+      "twoSE": 9.1,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 11.1,
+    "beyond": []
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": 3.1,
+      "twoSE": 9.2,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -6.9,
+      "twoSE": 14.7,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -0.5,
+      "twoSE": 8.4,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 10.5,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -6,
+      "twoSE": 7.3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -38.3,
+      "twoSE": 17.4,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -5.7,
+      "twoSE": 7.9,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 50,
+    "beyond": [
+     "village"
+    ]
+   },
+   "reading": "no gap beyond noise to close"
+  },
+  "seat-D": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -4.8,
+      "twoSE": 6.5,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 1.5,
+      "twoSE": 14.5,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -3.8,
+      "twoSE": 5.6,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 10.1,
+    "beyond": []
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": 2.1,
+      "twoSE": 9,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -7.9,
+      "twoSE": 15,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -2.1,
+      "twoSE": 6.3,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 12.1,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -6,
+      "twoSE": 7.3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -40.2,
+      "twoSE": 17.4,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -2.8,
+      "twoSE": 6.9,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 49,
+    "beyond": [
+     "village"
+    ]
+   },
+   "reading": "no gap beyond noise to close"
+  },
+  "seat-L1": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -4.8,
+      "twoSE": 6.5,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 1.5,
+      "twoSE": 14.5,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -3.8,
+      "twoSE": 5.6,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 10.1,
+    "beyond": []
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": 2.1,
+      "twoSE": 9,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -7.9,
+      "twoSE": 15,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -2.1,
+      "twoSE": 6.3,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 12.1,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -6,
+      "twoSE": 7.3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -40.2,
+      "twoSE": 17.4,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -2.8,
+      "twoSE": 6.9,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 49,
+    "beyond": [
+     "village"
+    ]
+   },
+   "reading": "no gap beyond noise to close"
+  },
+  "seat-LP": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -4.8,
+      "twoSE": 6.5,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 1.5,
+      "twoSE": 14.5,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -3.8,
+      "twoSE": 5.6,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 10.1,
+    "beyond": []
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": 2.1,
+      "twoSE": 9,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -7.9,
+      "twoSE": 15,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -2.1,
+      "twoSE": 6.3,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 12.1,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -6,
+      "twoSE": 7.3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -33.8,
+      "twoSE": 17.4,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -2.8,
+      "twoSE": 6.9,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     }
+    ],
+    "sum": 42.6,
+    "beyond": [
+     "village"
+    ]
+   },
+   "reading": "no gap beyond noise to close"
+  },
+  "both-D": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 2.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -15.2,
+      "twoSE": 8.5,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -8.6,
+      "twoSE": 5.6,
+      "beyond": true
+     },
+     {
+      "size": "city",
+      "diff": -11,
+      "twoSE": 6.3,
+      "beyond": true
+     },
+     {
+      "size": "metropolis",
+      "diff": -10.4,
+      "twoSE": 6.1,
+      "beyond": true
+     }
+    ],
+    "sum": 46.7,
+    "beyond": [
+     "village",
+     "town",
+     "city",
+     "metropolis"
+    ]
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -0.5,
+      "twoSE": 3.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 0.3,
+      "twoSE": 11.7,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -5,
+      "twoSE": 7,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -2.8,
+      "twoSE": 8.8,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -2.9,
+      "twoSE": 8.8,
+      "beyond": false
+     }
+    ],
+    "sum": 11.5,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -6,
+      "twoSE": 12.2,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -7.1,
+      "twoSE": 7.4,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -6.8,
+      "twoSE": 8.8,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -6,
+      "twoSE": 9,
+      "beyond": false
+     }
+    ],
+    "sum": 27.4,
+    "beyond": []
+   },
+   "reading": "CLOSES (no size beyond noise)"
+  },
+  "both-L1": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 2.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -15.2,
+      "twoSE": 8.5,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -8.6,
+      "twoSE": 5.6,
+      "beyond": true
+     },
+     {
+      "size": "city",
+      "diff": -11,
+      "twoSE": 6.3,
+      "beyond": true
+     },
+     {
+      "size": "metropolis",
+      "diff": -10.4,
+      "twoSE": 6.1,
+      "beyond": true
+     }
+    ],
+    "sum": 46.7,
+    "beyond": [
+     "village",
+     "town",
+     "city",
+     "metropolis"
+    ]
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -0.5,
+      "twoSE": 3.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 0.3,
+      "twoSE": 11.7,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -5,
+      "twoSE": 7,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -2.8,
+      "twoSE": 8.8,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -2.9,
+      "twoSE": 8.8,
+      "beyond": false
+     }
+    ],
+    "sum": 11.5,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -6,
+      "twoSE": 12.2,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -7.1,
+      "twoSE": 7.4,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -6.8,
+      "twoSE": 8.8,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -6,
+      "twoSE": 9,
+      "beyond": false
+     }
+    ],
+    "sum": 27.4,
+    "beyond": []
+   },
+   "reading": "CLOSES (no size beyond noise)"
+  },
+  "both-LP": {
+   "A": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 2.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -15.2,
+      "twoSE": 8.5,
+      "beyond": true
+     },
+     {
+      "size": "town",
+      "diff": -8.6,
+      "twoSE": 5.6,
+      "beyond": true
+     },
+     {
+      "size": "city",
+      "diff": -12.3,
+      "twoSE": 6.7,
+      "beyond": true
+     },
+     {
+      "size": "metropolis",
+      "diff": -10.4,
+      "twoSE": 6.1,
+      "beyond": true
+     }
+    ],
+    "sum": 48,
+    "beyond": [
+     "village",
+     "town",
+     "city",
+     "metropolis"
+    ]
+   },
+   "Aprime": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -0.5,
+      "twoSE": 3.4,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": 0.3,
+      "twoSE": 11.7,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -5,
+      "twoSE": 7,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -4.1,
+      "twoSE": 9,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -2.9,
+      "twoSE": 8.8,
+      "beyond": false
+     }
+    ],
+    "sum": 12.8,
+    "beyond": []
+   },
+   "visitor": {
+    "sizes": [
+     {
+      "size": "thorp",
+      "diff": 0,
+      "twoSE": 0,
+      "beyond": false
+     },
+     {
+      "size": "hamlet",
+      "diff": -1.5,
+      "twoSE": 3,
+      "beyond": false
+     },
+     {
+      "size": "village",
+      "diff": -1.3,
+      "twoSE": 12.9,
+      "beyond": false
+     },
+     {
+      "size": "town",
+      "diff": -7.1,
+      "twoSE": 7.4,
+      "beyond": false
+     },
+     {
+      "size": "city",
+      "diff": -8.2,
+      "twoSE": 9.2,
+      "beyond": false
+     },
+     {
+      "size": "metropolis",
+      "diff": -3.1,
+      "twoSE": 9.8,
+      "beyond": false
+     }
+    ],
+    "sum": 21.2,
+    "beyond": []
+   },
+   "reading": "CLOSES (no size beyond noise)"
+  }
+ },
+ "arms": [
+  {
+   "id": "arm0",
+   "label": "Arm 0, today (S, no law forced; fortune off)",
+   "set": "today",
+   "variant": "D",
+   "force": {}
+  },
+  {
+   "id": "seat-D",
+   "label": "seat law, D (dark); fortune off",
+   "set": "seat",
+   "variant": "D",
+   "force": {
+    "_seatLawVersion": 2
+   }
+  },
+  {
+   "id": "seat-L1",
+   "label": "seat law, L1 (lit at 1); fortune off",
+   "set": "seat",
+   "variant": "L1",
+   "force": {
+    "_seatLawVersion": 2
+   }
+  },
+  {
+   "id": "seat-LP",
+   "label": "seat law, LP (lit, proposed); fortune off",
+   "set": "seat",
+   "variant": "LP",
+   "force": {
+    "_seatLawVersion": 2
+   }
+  },
+  {
+   "id": "both-D",
+   "label": "seat + fortune, D (dark); fortune on",
+   "set": "both",
+   "variant": "D",
+   "force": {
+    "_seatLawVersion": 2,
+    "_fortuneLawVersion": 2
+   }
+  },
+  {
+   "id": "both-L1",
+   "label": "seat + fortune, L1 (lit at 1); fortune on",
+   "set": "both",
+   "variant": "L1",
+   "force": {
+    "_seatLawVersion": 2,
+    "_fortuneLawVersion": 2
+   }
+  },
+  {
+   "id": "both-LP",
+   "label": "seat + fortune, LP (lit, proposed); fortune on",
+   "set": "both",
+   "variant": "LP",
+   "force": {
+    "_seatLawVersion": 2,
+    "_fortuneLawVersion": 2
+   }
+  }
+ ],
+ "plants": {
+  "S-L1": {
+   "variant": "L1",
+   "file": "src/domain/seat/seatCircumstances.js",
+   "dial": "SEAT_CONTEST_LIT false -> true",
+   "factors": null,
+   "productCeiling": null
+  },
+  "S-LP": {
+   "variant": "LP",
+   "file": "src/domain/seat/seatCircumstances.js",
+   "dial": "SEAT_CONTEST_LIT false -> true",
+   "factors": {
+    "craft_led": {
+     "craft": 1.5
+    },
+    "trade_wealth": {
+     "merchant": 1.15
+    },
+    "strong_faith": {
+     "religious": 1.25
+    },
+    "martial_pressure": {
+     "noble": 1.15
+    },
+    "hunger": {
+     "labor": 1.4
+    },
+    "mandate": {
+     "noble": 1.3,
+     "craft": 1.2
+    },
+    "outside_debt": {
+     "outsider": 1.4,
+     "merchant": 1.15
+    },
+    "occupation": {
+     "outsider": 1.2
+    }
+   },
+   "productCeiling": 1.6,
+   "registerNoteAgrees": true
+  },
+  "SF-L1": {
+   "variant": "L1",
+   "file": "src/domain/seat/seatCircumstances.js",
+   "dial": "SEAT_CONTEST_LIT false -> true",
+   "factors": null,
+   "productCeiling": null
+  },
+  "SF-LP": {
+   "variant": "LP",
+   "file": "src/domain/seat/seatCircumstances.js",
+   "dial": "SEAT_CONTEST_LIT false -> true",
+   "factors": {
+    "craft_led": {
+     "craft": 1.5
+    },
+    "trade_wealth": {
+     "merchant": 1.15
+    },
+    "strong_faith": {
+     "religious": 1.25
+    },
+    "martial_pressure": {
+     "noble": 1.15
+    },
+    "hunger": {
+     "labor": 1.4
+    },
+    "mandate": {
+     "noble": 1.3,
+     "craft": 1.2
+    },
+    "outside_debt": {
+     "outsider": 1.4,
+     "merchant": 1.15
+    },
+    "occupation": {
+     "outsider": 1.2
+    }
+   },
+   "productCeiling": 1.6,
+   "registerNoteAgrees": true
+  }
+ },
+ "checks": [
+  "arm0: lit false, every factor 1, every place's config seat=null fortune=null; `_randomizePriorities: true` on every visitor place and on no other",
+  "seat-D: lit false, every factor 1, every place's config seat=2 fortune=null; `_randomizePriorities: true` on every visitor place and on no other",
+  "seat-L1: lit true, every factor 1, every place's config seat=2 fortune=null; `_randomizePriorities: true` on every visitor place and on no other",
+  "seat-LP: lit true, factors = the planted proposal, every place's config seat=2 fortune=null; `_randomizePriorities: true` on every visitor place and on no other",
+  "both-D: lit false, every factor 1, every place's config seat=2 fortune=2; `_randomizePriorities: true` on every visitor place and on no other",
+  "both-L1: lit true, every factor 1, every place's config seat=2 fortune=2; `_randomizePriorities: true` on every visitor place and on no other",
+  "both-LP: lit true, factors = the planted proposal, every place's config seat=2 fortune=2; `_randomizePriorities: true` on every visitor place and on no other"
+ ],
+ "pools": {
+  "visitor": {
+   "arm0": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 7,
+      "merchant": 259,
+      "criminal": 90,
+      "military": 233,
+      "noble": 119,
+      "religious": 253,
+      "craft": 151,
+      "arcane": 120
+     },
+     "contends": {
+      "other": 25,
+      "government": 4,
+      "merchant": 221,
+      "criminal": 4,
+      "military": 218,
+      "noble": 91,
+      "religious": 223,
+      "craft": 79,
+      "arcane": 67
+     },
+     "none": 195
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 57,
+       "Holding": 7,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 20,
+       "Holding": 34,
+       "Stable": 9
+      },
+      "crisis": {
+       "Contested": 29,
+       "Holding": 5,
+       "Stable": 3
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 67,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 9,
+       "Critical": 5
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 11,
+       "Holding": 11,
+       "Critical": 5,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 17,
+       "Contested": 11,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 26,
+      "d": 31,
+      "pct": "83.9"
+     },
+     "city": {
+      "n": 23,
+      "d": 28,
+      "pct": "82.1"
+     },
+     "metropolis": {
+      "n": 28,
+      "d": 32,
+      "pct": "87.5"
+     }
+    },
+    "markers": {
+     "seat=null fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 99,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 267,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 118,
+     "craft_led": 13
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 65,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 20,
+      "d": 63,
+      "pct": "31.7"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 69,
+      "pct": "2.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 72,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 68,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-D": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 7,
+      "merchant": 259,
+      "criminal": 90,
+      "military": 233,
+      "noble": 119,
+      "religious": 253,
+      "craft": 151,
+      "arcane": 120
+     },
+     "contends": {
+      "other": 25,
+      "government": 5,
+      "merchant": 116,
+      "criminal": 5,
+      "military": 204,
+      "religious": 221,
+      "craft": 107,
+      "noble": 68,
+      "arcane": 75
+     },
+     "none": 205
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 17,
+       "Holding": 32,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 5,
+       "Stable": 4
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 12,
+       "Critical": 2
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 18,
+       "Contested": 10,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 29,
+      "d": 31,
+      "pct": "93.5"
+     },
+     "city": {
+      "n": 26,
+      "d": 28,
+      "pct": "92.9"
+     },
+     "metropolis": {
+      "n": 28,
+      "d": 32,
+      "pct": "87.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 99,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 267,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 118,
+     "craft_led": 13
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 65,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 17,
+      "d": 63,
+      "pct": "27"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 69,
+      "pct": "2.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 72,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 68,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-L1": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 7,
+      "merchant": 259,
+      "criminal": 90,
+      "military": 233,
+      "noble": 119,
+      "religious": 253,
+      "craft": 151,
+      "arcane": 120
+     },
+     "contends": {
+      "other": 25,
+      "government": 6,
+      "merchant": 119,
+      "military": 204,
+      "religious": 222,
+      "craft": 94,
+      "noble": 69,
+      "arcane": 79
+     },
+     "none": 207
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 29,
+       "Contested": 6
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 17,
+       "Holding": 32,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 4,
+       "Stable": 5
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 16,
+       "Holding": 13,
+       "Critical": 2
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 18,
+       "Contested": 10,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 29,
+      "d": 31,
+      "pct": "93.5"
+     },
+     "city": {
+      "n": 26,
+      "d": 28,
+      "pct": "92.9"
+     },
+     "metropolis": {
+      "n": 28,
+      "d": 32,
+      "pct": "87.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 99,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 267,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 118,
+     "craft_led": 13
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 65,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 17,
+      "d": 63,
+      "pct": "27"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 69,
+      "pct": "2.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 72,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 68,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-LP": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 7,
+      "merchant": 259,
+      "criminal": 90,
+      "military": 233,
+      "noble": 119,
+      "religious": 253,
+      "craft": 151,
+      "arcane": 120
+     },
+     "contends": {
+      "other": 25,
+      "government": 5,
+      "merchant": 118,
+      "military": 204,
+      "religious": 219,
+      "craft": 99,
+      "noble": 75,
+      "arcane": 71
+     },
+     "none": 207
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 29,
+       "Contested": 6
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 21,
+       "Holding": 28,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 4,
+       "Stable": 5
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 11,
+       "Critical": 3
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 17,
+       "Contested": 9,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 68
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 28,
+      "d": 31,
+      "pct": "90.3"
+     },
+     "city": {
+      "n": 26,
+      "d": 28,
+      "pct": "92.9"
+     },
+     "metropolis": {
+      "n": 26,
+      "d": 32,
+      "pct": "81.3"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 99,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 267,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 118,
+     "craft_led": 13
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 65,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 21,
+      "d": 63,
+      "pct": "33.3"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 69,
+      "pct": "2.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 72,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 68,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-D": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 6,
+      "merchant": 259,
+      "criminal": 101,
+      "military": 234,
+      "noble": 117,
+      "religious": 251,
+      "craft": 145,
+      "arcane": 118
+     },
+     "contends": {
+      "other": 25,
+      "government": 5,
+      "merchant": 115,
+      "criminal": 5,
+      "military": 207,
+      "religious": 222,
+      "craft": 108,
+      "noble": 63,
+      "arcane": 73
+     },
+     "none": 202
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 59,
+       "Holding": 6
+      },
+      "crisis": {
+       "Stable": 27,
+       "Contested": 6,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 43,
+       "Contested": 7,
+       "Stable": 13
+      },
+      "crisis": {
+       "Contested": 26,
+       "Holding": 7,
+       "Stable": 4
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 67,
+       "Stable": 1,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 16,
+       "Holding": 12,
+       "Critical": 3
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 68,
+       "Contested": 3,
+       "Stable": 1
+      },
+      "crisis": {
+       "Critical": 6,
+       "Holding": 10,
+       "Contested": 11,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 8,
+       "Critical": 13,
+       "Holding": 11
+      },
+      "calm": {
+       "Holding": 65,
+       "Contested": 3
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 28,
+      "d": 31,
+      "pct": "90.3"
+     },
+     "city": {
+      "n": 22,
+      "d": 28,
+      "pct": "78.6"
+     },
+     "metropolis": {
+      "n": 19,
+      "d": 32,
+      "pct": "59.4"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 127,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 256,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 79,
+     "craft_led": 9
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 7,
+      "d": 63,
+      "pct": "11.1"
+     },
+     {
+      "size": "town",
+      "n": 1,
+      "d": 69,
+      "pct": "1.4"
+     },
+     {
+      "size": "city",
+      "n": 3,
+      "d": 72,
+      "pct": "4.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 3,
+      "d": 68,
+      "pct": "4.4"
+     }
+    ]
+   },
+   "both-L1": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 6,
+      "merchant": 259,
+      "criminal": 101,
+      "military": 234,
+      "noble": 117,
+      "religious": 251,
+      "craft": 145,
+      "arcane": 118
+     },
+     "contends": {
+      "other": 25,
+      "government": 6,
+      "merchant": 117,
+      "military": 210,
+      "religious": 223,
+      "craft": 96,
+      "noble": 64,
+      "arcane": 75
+     },
+     "none": 204
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 59,
+       "Holding": 6
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 43,
+       "Contested": 7,
+       "Stable": 13
+      },
+      "crisis": {
+       "Contested": 26,
+       "Holding": 6,
+       "Stable": 5
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 67,
+       "Stable": 1,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 15,
+       "Holding": 13,
+       "Critical": 3
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 68,
+       "Contested": 3,
+       "Stable": 1
+      },
+      "crisis": {
+       "Critical": 6,
+       "Holding": 10,
+       "Contested": 11,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 8,
+       "Critical": 13,
+       "Holding": 11
+      },
+      "calm": {
+       "Holding": 65,
+       "Contested": 3
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 28,
+      "d": 31,
+      "pct": "90.3"
+     },
+     "city": {
+      "n": 22,
+      "d": 28,
+      "pct": "78.6"
+     },
+     "metropolis": {
+      "n": 19,
+      "d": 32,
+      "pct": "59.4"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 127,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 256,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 79,
+     "craft_led": 9
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 7,
+      "d": 63,
+      "pct": "11.1"
+     },
+     {
+      "size": "town",
+      "n": 1,
+      "d": 69,
+      "pct": "1.4"
+     },
+     {
+      "size": "city",
+      "n": 3,
+      "d": 72,
+      "pct": "4.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 3,
+      "d": 68,
+      "pct": "4.4"
+     }
+    ]
+   },
+   "both-LP": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 34,
+      "government": 6,
+      "merchant": 259,
+      "criminal": 101,
+      "military": 234,
+      "noble": 117,
+      "religious": 251,
+      "craft": 145,
+      "arcane": 118
+     },
+     "contends": {
+      "other": 25,
+      "government": 5,
+      "merchant": 116,
+      "military": 209,
+      "religious": 220,
+      "craft": 99,
+      "noble": 71,
+      "arcane": 69
+     },
+     "none": 204
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 59,
+       "Holding": 6
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 40,
+       "Contested": 10,
+       "Stable": 13
+      },
+      "crisis": {
+       "Contested": 26,
+       "Holding": 6,
+       "Stable": 5
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 67,
+       "Stable": 1,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 16,
+       "Critical": 4,
+       "Holding": 11
+      }
+     },
+     "city": {
+      "calm": {
+       "Holding": 68,
+       "Contested": 3,
+       "Stable": 1
+      },
+      "crisis": {
+       "Critical": 8,
+       "Holding": 10,
+       "Contested": 9,
+       "Stable": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 8,
+       "Critical": 15,
+       "Holding": 9
+      },
+      "calm": {
+       "Holding": 63,
+       "Contested": 5
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 35,
+      "d": 35,
+      "pct": "100"
+     },
+     "village": {
+      "n": 37,
+      "d": 37,
+      "pct": "100"
+     },
+     "town": {
+      "n": 27,
+      "d": 31,
+      "pct": "87.1"
+     },
+     "city": {
+      "n": 20,
+      "d": 28,
+      "pct": "71.4"
+     },
+     "metropolis": {
+      "n": 17,
+      "d": 32,
+      "pct": "53.1"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 127,
+     "martial_pressure": 217,
+     "hunger": 34,
+     "mandate": 256,
+     "strong_faith": 169,
+     "outside_debt": 12,
+     "occupation": 6,
+     "trade_wealth": 79,
+     "craft_led": 9
+    },
+    "routes": {
+     "crossroads": 100,
+     "isolated": 63,
+     "river": 147,
+     "port": 67,
+     "road": 223
+    },
+    "threats": {
+     "frontier": 293,
+     "plagued": 112,
+     "heartland": 195
+    },
+    "rolledPriorities": 600,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 65,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 10,
+      "d": 63,
+      "pct": "15.9"
+     },
+     {
+      "size": "town",
+      "n": 1,
+      "d": 69,
+      "pct": "1.4"
+     },
+     {
+      "size": "city",
+      "n": 3,
+      "d": 72,
+      "pct": "4.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 5,
+      "d": 68,
+      "pct": "7.4"
+     }
+    ]
+   },
+   "seat:D->L1": {
+    "paired": 600,
+    "fieldOrRiskMoved": 111,
+    "topKindsMoved": 18,
+    "enter": {
+     "religious": 1,
+     "arcane": 4,
+     "merchant": 3,
+     "government": 1,
+     "noble": 1
+    },
+    "leave": {
+     "criminal": 5,
+     "craft": 13
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "seat:L1->LP": {
+    "paired": 600,
+    "fieldOrRiskMoved": 182,
+    "topKindsMoved": 21,
+    "enter": {
+     "craft": 7,
+     "noble": 6,
+     "merchant": 2
+    },
+    "leave": {
+     "merchant": 3,
+     "arcane": 8,
+     "religious": 3,
+     "craft": 2,
+     "government": 1
+    },
+    "calmContestedOn": [
+     "visitor-village-23",
+     "visitor-village-28",
+     "visitor-village-75",
+     "visitor-village-77"
+    ],
+    "calmContestedOff": []
+   },
+   "both:D->L1": {
+    "paired": 600,
+    "fieldOrRiskMoved": 112,
+    "topKindsMoved": 17,
+    "enter": {
+     "religious": 1,
+     "arcane": 2,
+     "military": 3,
+     "merchant": 2,
+     "government": 1,
+     "noble": 1
+    },
+    "leave": {
+     "criminal": 5,
+     "craft": 12
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:L1->LP": {
+    "paired": 600,
+    "fieldOrRiskMoved": 170,
+    "topKindsMoved": 18,
+    "enter": {
+     "noble": 7,
+     "craft": 5,
+     "merchant": 1
+    },
+    "leave": {
+     "merchant": 2,
+     "military": 1,
+     "religious": 3,
+     "craft": 2,
+     "arcane": 6,
+     "government": 1
+    },
+    "calmContestedOn": [
+     "visitor-village-9",
+     "visitor-village-15",
+     "visitor-village-77",
+     "visitor-metropolis-53",
+     "visitor-metropolis-59"
+    ],
+    "calmContestedOff": []
+   }
+  },
+  "chair600": {
+   "arm0": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 29,
+      "military": 282,
+      "merchant": 305,
+      "government": 13,
+      "criminal": 14,
+      "noble": 149,
+      "religious": 359,
+      "craft": 122,
+      "arcane": 140
+     },
+     "contends": {
+      "other": 16,
+      "military": 279,
+      "merchant": 287,
+      "government": 5,
+      "criminal": 1,
+      "noble": 85,
+      "religious": 295,
+      "craft": 5,
+      "arcane": 22
+     },
+     "none": 166
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 9,
+       "Stable": 52,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 11,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 49,
+       "Holding": 21
+      },
+      "crisis": {
+       "Contested": 30
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 64,
+       "Contested": 6
+      },
+      "crisis": {
+       "Contested": 18,
+       "Critical": 9,
+       "Holding": 3
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 8,
+       "Critical": 5
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 9,
+       "Critical": 6,
+       "Holding": 18
+      },
+      "calm": {
+       "Holding": 67
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 21,
+      "d": 30,
+      "pct": "70"
+     },
+     "city": {
+      "n": 22,
+      "d": 27,
+      "pct": "81.5"
+     },
+     "metropolis": {
+      "n": 27,
+      "d": 33,
+      "pct": "81.8"
+     }
+    },
+    "markers": {
+     "seat=null fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 151,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 246,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 177,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 5,
+      "d": 66,
+      "pct": "7.6"
+     },
+     {
+      "size": "village",
+      "n": 49,
+      "d": 70,
+      "pct": "70"
+     },
+     {
+      "size": "town",
+      "n": 6,
+      "d": 70,
+      "pct": "8.6"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 73,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 67,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-D": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 29,
+      "military": 282,
+      "merchant": 305,
+      "government": 13,
+      "criminal": 14,
+      "noble": 149,
+      "religious": 359,
+      "craft": 122,
+      "arcane": 140
+     },
+     "contends": {
+      "other": 22,
+      "military": 279,
+      "merchant": 96,
+      "government": 6,
+      "criminal": 1,
+      "noble": 76,
+      "religious": 341,
+      "craft": 33,
+      "arcane": 55
+     },
+     "none": 177
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 11,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 5,
+       "Holding": 3
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 9,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 6,
+       "Holding": 21,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 25,
+      "d": 30,
+      "pct": "83.3"
+     },
+     "city": {
+      "n": 23,
+      "d": 27,
+      "pct": "85.2"
+     },
+     "metropolis": {
+      "n": 27,
+      "d": 33,
+      "pct": "81.8"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 151,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 246,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 177,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 5,
+      "d": 66,
+      "pct": "7.6"
+     },
+     {
+      "size": "village",
+      "n": 47,
+      "d": 70,
+      "pct": "67.1"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 70,
+      "pct": "5.7"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 73,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 67,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-L1": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 29,
+      "military": 282,
+      "merchant": 305,
+      "government": 13,
+      "criminal": 14,
+      "noble": 149,
+      "religious": 359,
+      "craft": 122,
+      "arcane": 140
+     },
+     "contends": {
+      "other": 22,
+      "military": 279,
+      "merchant": 97,
+      "government": 6,
+      "noble": 76,
+      "religious": 341,
+      "craft": 32,
+      "arcane": 55
+     },
+     "none": 178
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 23,
+       "Contested": 11
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 5,
+       "Holding": 3
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 9,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 6,
+       "Holding": 21,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 25,
+      "d": 30,
+      "pct": "83.3"
+     },
+     "city": {
+      "n": 23,
+      "d": 27,
+      "pct": "85.2"
+     },
+     "metropolis": {
+      "n": 27,
+      "d": 33,
+      "pct": "81.8"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 151,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 246,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 177,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 5,
+      "d": 66,
+      "pct": "7.6"
+     },
+     {
+      "size": "village",
+      "n": 47,
+      "d": 70,
+      "pct": "67.1"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 70,
+      "pct": "5.7"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 73,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 67,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-LP": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 29,
+      "military": 282,
+      "merchant": 305,
+      "government": 13,
+      "criminal": 14,
+      "noble": 149,
+      "religious": 359,
+      "craft": 122,
+      "arcane": 140
+     },
+     "contends": {
+      "other": 20,
+      "military": 278,
+      "merchant": 102,
+      "government": 6,
+      "noble": 83,
+      "religious": 334,
+      "craft": 31,
+      "arcane": 49
+     },
+     "none": 178
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 23,
+       "Contested": 11
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 21,
+       "Critical": 6,
+       "Holding": 3
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 8,
+       "Critical": 5
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 8,
+       "Holding": 19,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 24,
+      "d": 30,
+      "pct": "80"
+     },
+     "city": {
+      "n": 22,
+      "d": 27,
+      "pct": "81.5"
+     },
+     "metropolis": {
+      "n": 27,
+      "d": 33,
+      "pct": "81.8"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 600
+    },
+    "circumstances": {
+     "(none)": 151,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 246,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 177,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 5,
+      "d": 66,
+      "pct": "7.6"
+     },
+     {
+      "size": "village",
+      "n": 47,
+      "d": 70,
+      "pct": "67.1"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 70,
+      "pct": "5.7"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 73,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 67,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-D": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 28,
+      "merchant": 304,
+      "military": 283,
+      "government": 12,
+      "criminal": 21,
+      "noble": 149,
+      "religious": 364,
+      "craft": 115,
+      "arcane": 138
+     },
+     "contends": {
+      "other": 22,
+      "merchant": 95,
+      "military": 280,
+      "government": 6,
+      "criminal": 1,
+      "noble": 54,
+      "religious": 350,
+      "craft": 35,
+      "arcane": 74
+     },
+     "none": 172
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 24,
+       "Contested": 6
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 10,
+       "Stable": 55,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 20,
+       "Contested": 12,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 55,
+       "Contested": 12,
+       "Stable": 3
+      },
+      "crisis": {
+       "Contested": 29,
+       "Holding": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 64,
+       "Contested": 6
+      },
+      "crisis": {
+       "Contested": 21,
+       "Critical": 5,
+       "Holding": 4
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 7,
+       "Contested": 11,
+       "Critical": 9
+      },
+      "calm": {
+       "Holding": 65,
+       "Contested": 8
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 11,
+       "Critical": 17,
+       "Holding": 5
+      },
+      "calm": {
+       "Holding": 60,
+       "Contested": 7
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 25,
+      "d": 30,
+      "pct": "83.3"
+     },
+     "city": {
+      "n": 18,
+      "d": 27,
+      "pct": "66.7"
+     },
+     "metropolis": {
+      "n": 16,
+      "d": 33,
+      "pct": "48.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 323,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 194,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 64,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 66,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 12,
+      "d": 70,
+      "pct": "17.1"
+     },
+     {
+      "size": "town",
+      "n": 6,
+      "d": 70,
+      "pct": "8.6"
+     },
+     {
+      "size": "city",
+      "n": 8,
+      "d": 73,
+      "pct": "11"
+     },
+     {
+      "size": "metropolis",
+      "n": 7,
+      "d": 67,
+      "pct": "10.4"
+     }
+    ]
+   },
+   "both-L1": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 28,
+      "merchant": 304,
+      "military": 283,
+      "government": 12,
+      "criminal": 21,
+      "noble": 149,
+      "religious": 364,
+      "craft": 115,
+      "arcane": 138
+     },
+     "contends": {
+      "other": 23,
+      "merchant": 95,
+      "military": 280,
+      "government": 6,
+      "noble": 54,
+      "religious": 350,
+      "craft": 34,
+      "arcane": 74
+     },
+     "none": 173
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 24,
+       "Contested": 6
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 10,
+       "Stable": 55,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 21,
+       "Contested": 12,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 55,
+       "Contested": 12,
+       "Stable": 3
+      },
+      "crisis": {
+       "Contested": 29,
+       "Holding": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 64,
+       "Contested": 6
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 4,
+       "Holding": 4
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 7,
+       "Contested": 11,
+       "Critical": 9
+      },
+      "calm": {
+       "Holding": 65,
+       "Contested": 8
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 11,
+       "Critical": 17,
+       "Holding": 5
+      },
+      "calm": {
+       "Holding": 60,
+       "Contested": 7
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 26,
+      "d": 30,
+      "pct": "86.7"
+     },
+     "city": {
+      "n": 18,
+      "d": 27,
+      "pct": "66.7"
+     },
+     "metropolis": {
+      "n": 16,
+      "d": 33,
+      "pct": "48.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 323,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 194,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 64,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 66,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 12,
+      "d": 70,
+      "pct": "17.1"
+     },
+     {
+      "size": "town",
+      "n": 6,
+      "d": 70,
+      "pct": "8.6"
+     },
+     {
+      "size": "city",
+      "n": 8,
+      "d": 73,
+      "pct": "11"
+     },
+     {
+      "size": "metropolis",
+      "n": 7,
+      "d": 67,
+      "pct": "10.4"
+     }
+    ]
+   },
+   "both-LP": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 28,
+      "merchant": 304,
+      "military": 283,
+      "government": 12,
+      "criminal": 21,
+      "noble": 149,
+      "religious": 364,
+      "craft": 115,
+      "arcane": 138
+     },
+     "contends": {
+      "other": 21,
+      "merchant": 96,
+      "military": 278,
+      "government": 6,
+      "noble": 63,
+      "religious": 346,
+      "craft": 33,
+      "arcane": 69
+     },
+     "none": 173
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 24,
+       "Contested": 6
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 10,
+       "Stable": 55,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 21,
+       "Contested": 12,
+       "Holding": 1
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 55,
+       "Contested": 12,
+       "Stable": 3
+      },
+      "crisis": {
+       "Contested": 29,
+       "Holding": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 64,
+       "Contested": 6
+      },
+      "crisis": {
+       "Contested": 21,
+       "Critical": 5,
+       "Holding": 4
+      }
+     },
+     "city": {
+      "crisis": {
+       "Holding": 7,
+       "Contested": 11,
+       "Critical": 9
+      },
+      "calm": {
+       "Holding": 64,
+       "Contested": 9
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 8,
+       "Critical": 20,
+       "Holding": 5
+      },
+      "calm": {
+       "Holding": 60,
+       "Contested": 7
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 34,
+      "d": 34,
+      "pct": "100"
+     },
+     "village": {
+      "n": 30,
+      "d": 30,
+      "pct": "100"
+     },
+     "town": {
+      "n": 25,
+      "d": 30,
+      "pct": "83.3"
+     },
+     "city": {
+      "n": 18,
+      "d": 27,
+      "pct": "66.7"
+     },
+     "metropolis": {
+      "n": 13,
+      "d": 33,
+      "pct": "39.4"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 600
+    },
+    "circumstances": {
+     "(none)": 323,
+     "martial_pressure": 50,
+     "hunger": 17,
+     "mandate": 194,
+     "outside_debt": 19,
+     "occupation": 8,
+     "strong_faith": 6,
+     "trade_wealth": 64,
+     "craft_led": 8
+    },
+    "routes": {
+     "river": 137,
+     "road": 249,
+     "crossroads": 92,
+     "port": 76,
+     "isolated": 46
+    },
+    "threats": {
+     "frontier": 292,
+     "heartland": 196,
+     "plagued": 112
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 70,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 66,
+      "pct": "1.5"
+     },
+     {
+      "size": "village",
+      "n": 12,
+      "d": 70,
+      "pct": "17.1"
+     },
+     {
+      "size": "town",
+      "n": 6,
+      "d": 70,
+      "pct": "8.6"
+     },
+     {
+      "size": "city",
+      "n": 9,
+      "d": 73,
+      "pct": "12.3"
+     },
+     {
+      "size": "metropolis",
+      "n": 7,
+      "d": 67,
+      "pct": "10.4"
+     }
+    ]
+   },
+   "seat:D->L1": {
+    "paired": 600,
+    "fieldOrRiskMoved": 34,
+    "topKindsMoved": 2,
+    "enter": {
+     "merchant": 1
+    },
+    "leave": {
+     "criminal": 1,
+     "craft": 1
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "seat:L1->LP": {
+    "paired": 600,
+    "fieldOrRiskMoved": 101,
+    "topKindsMoved": 18,
+    "enter": {
+     "merchant": 7,
+     "noble": 7
+    },
+    "leave": {
+     "other": 2,
+     "arcane": 6,
+     "religious": 7,
+     "merchant": 2,
+     "military": 1,
+     "craft": 1
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:D->L1": {
+    "paired": 600,
+    "fieldOrRiskMoved": 36,
+    "topKindsMoved": 2,
+    "enter": {
+     "other": 1
+    },
+    "leave": {
+     "criminal": 1,
+     "craft": 1
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:L1->LP": {
+    "paired": 600,
+    "fieldOrRiskMoved": 64,
+    "topKindsMoved": 20,
+    "enter": {
+     "merchant": 5,
+     "noble": 9,
+     "craft": 1
+    },
+    "leave": {
+     "other": 2,
+     "religious": 4,
+     "merchant": 4,
+     "arcane": 5,
+     "military": 2,
+     "craft": 2
+    },
+    "calmContestedOn": [
+     "hxd-city-71"
+    ],
+    "calmContestedOff": []
+   }
+  },
+  "default": {
+   "arm0": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 41,
+      "government": 15,
+      "military": 452,
+      "noble": 252,
+      "merchant": 473,
+      "criminal": 28,
+      "religious": 545,
+      "craft": 161,
+      "arcane": 207
+     },
+     "contends": {
+      "other": 19,
+      "government": 7,
+      "military": 446,
+      "noble": 98,
+      "merchant": 450,
+      "criminal": 2,
+      "religious": 472,
+      "craft": 2,
+      "arcane": 29
+     },
+     "none": 240
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 19,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 84,
+       "Holding": 21,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 23,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 77,
+       "Holding": 23,
+       "Stable": 2
+      },
+      "crisis": {
+       "Contested": 48
+      }
+     },
+     "town": {
+      "calm": {
+       "Contested": 11,
+       "Holding": 96
+      },
+      "crisis": {
+       "Contested": 19,
+       "Critical": 19,
+       "Holding": 5
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 8,
+       "Contested": 14,
+       "Holding": 23
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 25,
+       "Critical": 6,
+       "Contested": 12
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 24,
+      "d": 43,
+      "pct": "55.8"
+     },
+     "city": {
+      "n": 37,
+      "d": 45,
+      "pct": "82.2"
+     },
+     "metropolis": {
+      "n": 37,
+      "d": 43,
+      "pct": "86"
+     }
+    },
+    "markers": {
+     "seat=null fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 295,
+     "mandate": 329,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "craft_led": 9,
+     "trade_wealth": 228
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 4,
+      "d": 109,
+      "pct": "3.7"
+     },
+     {
+      "size": "village",
+      "n": 77,
+      "d": 102,
+      "pct": "75.5"
+     },
+     {
+      "size": "town",
+      "n": 11,
+      "d": 107,
+      "pct": "10.3"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-D": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 41,
+      "government": 15,
+      "military": 452,
+      "noble": 252,
+      "merchant": 473,
+      "criminal": 28,
+      "religious": 545,
+      "craft": 161,
+      "arcane": 207
+     },
+     "contends": {
+      "other": 25,
+      "government": 8,
+      "military": 444,
+      "noble": 115,
+      "merchant": 145,
+      "criminal": 2,
+      "religious": 525,
+      "craft": 37,
+      "arcane": 71
+     },
+     "none": 269
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 19,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 7,
+       "Contested": 3
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 23,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 70,
+       "Stable": 13,
+       "Holding": 19
+      },
+      "crisis": {
+       "Contested": 45,
+       "Stable": 3
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 105,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 26,
+       "Critical": 12,
+       "Holding": 5
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 6,
+       "Contested": 13,
+       "Holding": 26
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 26,
+       "Critical": 6,
+       "Contested": 11
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 39,
+      "d": 45,
+      "pct": "86.7"
+     },
+     "metropolis": {
+      "n": 37,
+      "d": 43,
+      "pct": "86"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 295,
+     "mandate": 329,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "craft_led": 9,
+     "trade_wealth": 228
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 3,
+      "d": 109,
+      "pct": "2.8"
+     },
+     {
+      "size": "village",
+      "n": 70,
+      "d": 102,
+      "pct": "68.6"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 107,
+      "pct": "1.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-L1": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 41,
+      "government": 15,
+      "military": 452,
+      "noble": 252,
+      "merchant": 473,
+      "criminal": 28,
+      "religious": 545,
+      "craft": 161,
+      "arcane": 207
+     },
+     "contends": {
+      "other": 25,
+      "government": 8,
+      "military": 444,
+      "noble": 115,
+      "merchant": 145,
+      "religious": 525,
+      "craft": 36,
+      "arcane": 71
+     },
+     "none": 271
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 19,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 7,
+       "Contested": 3
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 25
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 70,
+       "Stable": 13,
+       "Holding": 19
+      },
+      "crisis": {
+       "Contested": 45,
+       "Stable": 3
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 105,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 26,
+       "Critical": 12,
+       "Holding": 5
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 6,
+       "Contested": 13,
+       "Holding": 26
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 26,
+       "Critical": 6,
+       "Contested": 11
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 39,
+      "d": 45,
+      "pct": "86.7"
+     },
+     "metropolis": {
+      "n": 37,
+      "d": 43,
+      "pct": "86"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 295,
+     "mandate": 329,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "craft_led": 9,
+     "trade_wealth": 228
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 3,
+      "d": 109,
+      "pct": "2.8"
+     },
+     {
+      "size": "village",
+      "n": 70,
+      "d": 102,
+      "pct": "68.6"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 107,
+      "pct": "1.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-LP": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 41,
+      "government": 15,
+      "military": 452,
+      "noble": 252,
+      "merchant": 473,
+      "criminal": 28,
+      "religious": 545,
+      "craft": 161,
+      "arcane": 207
+     },
+     "contends": {
+      "other": 25,
+      "government": 7,
+      "military": 442,
+      "noble": 117,
+      "merchant": 147,
+      "religious": 526,
+      "craft": 37,
+      "arcane": 67
+     },
+     "none": 271
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 19,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 7,
+       "Contested": 3
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 25
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 70,
+       "Stable": 13,
+       "Holding": 19
+      },
+      "crisis": {
+       "Contested": 45,
+       "Stable": 3
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 105,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 26,
+       "Critical": 12,
+       "Holding": 5
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 6,
+       "Contested": 15,
+       "Holding": 24
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 24,
+       "Critical": 6,
+       "Contested": 13
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 39,
+      "d": 45,
+      "pct": "86.7"
+     },
+     "metropolis": {
+      "n": 37,
+      "d": 43,
+      "pct": "86"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 295,
+     "mandate": 329,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "craft_led": 9,
+     "trade_wealth": 228
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 3,
+      "d": 109,
+      "pct": "2.8"
+     },
+     {
+      "size": "village",
+      "n": 70,
+      "d": 102,
+      "pct": "68.6"
+     },
+     {
+      "size": "town",
+      "n": 2,
+      "d": 107,
+      "pct": "1.9"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-D": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 31,
+      "government": 13,
+      "military": 453,
+      "noble": 252,
+      "merchant": 474,
+      "criminal": 46,
+      "religious": 551,
+      "craft": 142,
+      "arcane": 199
+     },
+     "contends": {
+      "other": 21,
+      "government": 6,
+      "military": 446,
+      "noble": 67,
+      "merchant": 140,
+      "criminal": 2,
+      "religious": 542,
+      "craft": 36,
+      "arcane": 114
+     },
+     "none": 266
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 35
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 10
+      },
+      "crisis": {
+       "Contested": 12,
+       "Stable": 23,
+       "Holding": 6
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 92,
+       "Stable": 8,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 2,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107
+      },
+      "crisis": {
+       "Contested": 24,
+       "Critical": 12,
+       "Holding": 7
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 21,
+       "Contested": 20,
+       "Holding": 4
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 16,
+       "Critical": 23,
+       "Holding": 4
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 24,
+      "d": 45,
+      "pct": "53.3"
+     },
+     "metropolis": {
+      "n": 20,
+      "d": 43,
+      "pct": "46.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 619,
+     "mandate": 239,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "trade_wealth": 25,
+     "craft_led": 9
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 109,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 2,
+      "d": 102,
+      "pct": "2"
+     },
+     {
+      "size": "town",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-L1": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 31,
+      "government": 13,
+      "military": 453,
+      "noble": 252,
+      "merchant": 474,
+      "criminal": 46,
+      "religious": 551,
+      "craft": 142,
+      "arcane": 199
+     },
+     "contends": {
+      "other": 21,
+      "government": 6,
+      "military": 446,
+      "noble": 67,
+      "merchant": 140,
+      "religious": 542,
+      "craft": 36,
+      "arcane": 114
+     },
+     "none": 268
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 35
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 10
+      },
+      "crisis": {
+       "Contested": 12,
+       "Stable": 25,
+       "Holding": 4
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 92,
+       "Stable": 8,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 2,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107
+      },
+      "crisis": {
+       "Contested": 24,
+       "Critical": 12,
+       "Holding": 7
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 21,
+       "Contested": 20,
+       "Holding": 4
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 16,
+       "Critical": 23,
+       "Holding": 4
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 24,
+      "d": 45,
+      "pct": "53.3"
+     },
+     "metropolis": {
+      "n": 20,
+      "d": 43,
+      "pct": "46.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 619,
+     "mandate": 239,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "trade_wealth": 25,
+     "craft_led": 9
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 109,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 2,
+      "d": 102,
+      "pct": "2"
+     },
+     {
+      "size": "town",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-LP": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 31,
+      "government": 13,
+      "military": 453,
+      "noble": 252,
+      "merchant": 474,
+      "criminal": 46,
+      "religious": 551,
+      "craft": 142,
+      "arcane": 199
+     },
+     "contends": {
+      "other": 21,
+      "government": 5,
+      "military": 444,
+      "noble": 86,
+      "merchant": 137,
+      "religious": 537,
+      "craft": 37,
+      "arcane": 105
+     },
+     "none": 268
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 99
+      },
+      "crisis": {
+       "Contested": 16,
+       "Stable": 35
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 99,
+       "Holding": 10
+      },
+      "crisis": {
+       "Contested": 12,
+       "Stable": 25,
+       "Holding": 4
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 92,
+       "Stable": 8,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 2,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107
+      },
+      "crisis": {
+       "Contested": 24,
+       "Critical": 12,
+       "Holding": 7
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 23,
+       "Contested": 19,
+       "Holding": 3
+      },
+      "calm": {
+       "Holding": 105
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 14,
+       "Critical": 25,
+       "Holding": 4
+      },
+      "calm": {
+       "Holding": 107
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 51,
+      "d": 51,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 41,
+      "d": 41,
+      "pct": "100"
+     },
+     "village": {
+      "n": 48,
+      "d": 48,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 43,
+      "pct": "72.1"
+     },
+     "city": {
+      "n": 22,
+      "d": 45,
+      "pct": "48.9"
+     },
+     "metropolis": {
+      "n": 18,
+      "d": 43,
+      "pct": "41.9"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 619,
+     "mandate": 239,
+     "martial_pressure": 103,
+     "outside_debt": 30,
+     "occupation": 10,
+     "hunger": 23,
+     "strong_faith": 23,
+     "trade_wealth": 25,
+     "craft_led": 9
+    },
+    "routes": {
+     "road": 900
+    },
+    "threats": {
+     "frontier": 900
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 99,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 0,
+      "d": 109,
+      "pct": "0"
+     },
+     {
+      "size": "village",
+      "n": 2,
+      "d": 102,
+      "pct": "2"
+     },
+     {
+      "size": "town",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 105,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 107,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat:D->L1": {
+    "paired": 900,
+    "fieldOrRiskMoved": 39,
+    "topKindsMoved": 3,
+    "enter": {},
+    "leave": {
+     "criminal": 2,
+     "craft": 1
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "seat:L1->LP": {
+    "paired": 900,
+    "fieldOrRiskMoved": 140,
+    "topKindsMoved": 10,
+    "enter": {
+     "craft": 1,
+     "merchant": 3,
+     "noble": 2,
+     "religious": 2
+    },
+    "leave": {
+     "government": 1,
+     "military": 2,
+     "religious": 1,
+     "arcane": 4,
+     "merchant": 1
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:D->L1": {
+    "paired": 900,
+    "fieldOrRiskMoved": 38,
+    "topKindsMoved": 2,
+    "enter": {},
+    "leave": {
+     "criminal": 2
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:L1->LP": {
+    "paired": 900,
+    "fieldOrRiskMoved": 77,
+    "topKindsMoved": 25,
+    "enter": {
+     "craft": 1,
+     "noble": 19
+    },
+    "leave": {
+     "government": 1,
+     "religious": 5,
+     "military": 2,
+     "arcane": 9,
+     "merchant": 3
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   }
+  },
+  "cause": {
+   "arm0": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 46,
+      "government": 16,
+      "military": 424,
+      "noble": 241,
+      "merchant": 461,
+      "criminal": 34,
+      "religious": 551,
+      "craft": 200,
+      "arcane": 209
+     },
+     "contends": {
+      "other": 24,
+      "government": 5,
+      "military": 416,
+      "noble": 142,
+      "merchant": 424,
+      "criminal": 2,
+      "religious": 459,
+      "craft": 16,
+      "arcane": 36
+     },
+     "none": 245
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 17,
+       "Stable": 30
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 79,
+       "Contested": 11,
+       "Holding": 13
+      },
+      "crisis": {
+       "Contested": 11,
+       "Stable": 33,
+       "Holding": 3
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 38,
+       "Contested": 65
+      },
+      "crisis": {
+       "Contested": 46,
+       "Holding": 1
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 102,
+       "Contested": 9
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 12,
+       "Holding": 5
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 9,
+       "Contested": 13,
+       "Holding": 18
+      },
+      "calm": {
+       "Holding": 110
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 25,
+       "Critical": 9,
+       "Contested": 10
+      },
+      "calm": {
+       "Holding": 106
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 27,
+      "d": 39,
+      "pct": "69.2"
+     },
+     "city": {
+      "n": 31,
+      "d": 40,
+      "pct": "77.5"
+     },
+     "metropolis": {
+      "n": 35,
+      "d": 44,
+      "pct": "79.5"
+     }
+    },
+    "markers": {
+     "seat=null fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 249,
+     "mandate": 332,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 271,
+     "craft_led": 17
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 11,
+      "d": 103,
+      "pct": "10.7"
+     },
+     {
+      "size": "village",
+      "n": 65,
+      "d": 103,
+      "pct": "63.1"
+     },
+     {
+      "size": "town",
+      "n": 9,
+      "d": 111,
+      "pct": "8.1"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 110,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 106,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-D": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 46,
+      "government": 16,
+      "military": 424,
+      "noble": 241,
+      "merchant": 461,
+      "criminal": 34,
+      "religious": 551,
+      "craft": 200,
+      "arcane": 209
+     },
+     "contends": {
+      "other": 27,
+      "government": 6,
+      "military": 419,
+      "noble": 113,
+      "merchant": 166,
+      "criminal": 2,
+      "religious": 527,
+      "craft": 52,
+      "arcane": 89
+     },
+     "none": 265
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 17,
+       "Stable": 30
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 88,
+       "Contested": 10,
+       "Holding": 5
+      },
+      "crisis": {
+       "Contested": 11,
+       "Stable": 33,
+       "Holding": 3
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 33,
+       "Contested": 61,
+       "Stable": 9
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 1,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 25,
+       "Critical": 8,
+       "Holding": 6
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 8,
+       "Contested": 11,
+       "Holding": 21
+      },
+      "calm": {
+       "Holding": 110
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 26,
+       "Critical": 9,
+       "Contested": 9
+      },
+      "calm": {
+       "Holding": 106
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 32,
+      "d": 40,
+      "pct": "80"
+     },
+     "metropolis": {
+      "n": 35,
+      "d": 44,
+      "pct": "79.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 249,
+     "mandate": 332,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 271,
+     "craft_led": 17
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 10,
+      "d": 103,
+      "pct": "9.7"
+     },
+     {
+      "size": "village",
+      "n": 61,
+      "d": 103,
+      "pct": "59.2"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 110,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 106,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-L1": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 46,
+      "government": 16,
+      "military": 424,
+      "noble": 241,
+      "merchant": 461,
+      "criminal": 34,
+      "religious": 551,
+      "craft": 200,
+      "arcane": 209
+     },
+     "contends": {
+      "other": 28,
+      "government": 6,
+      "military": 419,
+      "noble": 114,
+      "merchant": 167,
+      "religious": 527,
+      "craft": 49,
+      "arcane": 89
+     },
+     "none": 266
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 17,
+       "Stable": 30
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 88,
+       "Contested": 10,
+       "Holding": 5
+      },
+      "crisis": {
+       "Contested": 11,
+       "Stable": 34,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 33,
+       "Contested": 61,
+       "Stable": 9
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 1,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 25,
+       "Critical": 8,
+       "Holding": 6
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 8,
+       "Contested": 11,
+       "Holding": 21
+      },
+      "calm": {
+       "Holding": 110
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 26,
+       "Critical": 9,
+       "Contested": 9
+      },
+      "calm": {
+       "Holding": 106
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 32,
+      "d": 40,
+      "pct": "80"
+     },
+     "metropolis": {
+      "n": 35,
+      "d": 44,
+      "pct": "79.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 249,
+     "mandate": 332,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 271,
+     "craft_led": 17
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 10,
+      "d": 103,
+      "pct": "9.7"
+     },
+     {
+      "size": "village",
+      "n": 61,
+      "d": 103,
+      "pct": "59.2"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 110,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 106,
+      "pct": "0"
+     }
+    ]
+   },
+   "seat-LP": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 46,
+      "government": 16,
+      "military": 424,
+      "noble": 241,
+      "merchant": 461,
+      "criminal": 34,
+      "religious": 551,
+      "craft": 200,
+      "arcane": 209
+     },
+     "contends": {
+      "other": 28,
+      "government": 5,
+      "military": 418,
+      "noble": 115,
+      "merchant": 168,
+      "religious": 526,
+      "craft": 50,
+      "arcane": 85
+     },
+     "none": 266
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 17,
+       "Stable": 30
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 88,
+       "Contested": 10,
+       "Holding": 5
+      },
+      "crisis": {
+       "Contested": 11,
+       "Stable": 34,
+       "Holding": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 33,
+       "Contested": 61,
+       "Stable": 9
+      },
+      "crisis": {
+       "Contested": 44,
+       "Holding": 1,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 25,
+       "Critical": 8,
+       "Holding": 6
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 9,
+       "Contested": 11,
+       "Holding": 20
+      },
+      "calm": {
+       "Holding": 110
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 26,
+       "Critical": 9,
+       "Contested": 9
+      },
+      "calm": {
+       "Holding": 106
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 31,
+      "d": 40,
+      "pct": "77.5"
+     },
+     "metropolis": {
+      "n": 35,
+      "d": 44,
+      "pct": "79.5"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=null": 900
+    },
+    "circumstances": {
+     "(none)": 249,
+     "mandate": 332,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 271,
+     "craft_led": 17
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 10,
+      "d": 103,
+      "pct": "9.7"
+     },
+     {
+      "size": "village",
+      "n": 61,
+      "d": 103,
+      "pct": "59.2"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 0,
+      "d": 110,
+      "pct": "0"
+     },
+     {
+      "size": "metropolis",
+      "n": 0,
+      "d": 106,
+      "pct": "0"
+     }
+    ]
+   },
+   "both-D": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 42,
+      "government": 16,
+      "military": 439,
+      "merchant": 464,
+      "noble": 235,
+      "criminal": 43,
+      "religious": 545,
+      "craft": 186,
+      "arcane": 203
+     },
+     "contends": {
+      "other": 27,
+      "government": 6,
+      "military": 434,
+      "merchant": 164,
+      "noble": 82,
+      "criminal": 2,
+      "religious": 524,
+      "craft": 53,
+      "arcane": 110
+     },
+     "none": 259
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 15,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 85,
+       "Holding": 17,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 10,
+       "Stable": 31,
+       "Holding": 6
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 79,
+       "Stable": 6,
+       "Contested": 18
+      },
+      "crisis": {
+       "Contested": 41,
+       "Holding": 4,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 24,
+       "Holding": 7,
+       "Critical": 8
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 15,
+       "Contested": 17,
+       "Holding": 8
+      },
+      "calm": {
+       "Holding": 101,
+       "Contested": 9
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 11,
+       "Critical": 21,
+       "Holding": 12
+      },
+      "calm": {
+       "Holding": 98,
+       "Contested": 8
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 25,
+      "d": 40,
+      "pct": "62.5"
+     },
+     "metropolis": {
+      "n": 23,
+      "d": 44,
+      "pct": "52.3"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 504,
+     "mandate": 252,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 112,
+     "craft_led": 18
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 103,
+      "pct": "1"
+     },
+     {
+      "size": "village",
+      "n": 18,
+      "d": 103,
+      "pct": "17.5"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 9,
+      "d": 110,
+      "pct": "8.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 8,
+      "d": 106,
+      "pct": "7.5"
+     }
+    ]
+   },
+   "both-L1": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 42,
+      "government": 16,
+      "military": 439,
+      "merchant": 464,
+      "noble": 235,
+      "criminal": 43,
+      "religious": 545,
+      "craft": 186,
+      "arcane": 203
+     },
+     "contends": {
+      "other": 27,
+      "government": 6,
+      "military": 434,
+      "merchant": 165,
+      "noble": 83,
+      "religious": 524,
+      "craft": 50,
+      "arcane": 111
+     },
+     "none": 260
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 15,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 85,
+       "Holding": 17,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 10,
+       "Stable": 32,
+       "Holding": 5
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 79,
+       "Stable": 6,
+       "Contested": 18
+      },
+      "crisis": {
+       "Contested": 41,
+       "Holding": 4,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 24,
+       "Holding": 7,
+       "Critical": 8
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 15,
+       "Contested": 17,
+       "Holding": 8
+      },
+      "calm": {
+       "Holding": 101,
+       "Contested": 9
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 11,
+       "Critical": 21,
+       "Holding": 12
+      },
+      "calm": {
+       "Holding": 98,
+       "Contested": 8
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 25,
+      "d": 40,
+      "pct": "62.5"
+     },
+     "metropolis": {
+      "n": 23,
+      "d": 44,
+      "pct": "52.3"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 504,
+     "mandate": 252,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 112,
+     "craft_led": 18
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 103,
+      "pct": "1"
+     },
+     {
+      "size": "village",
+      "n": 18,
+      "d": 103,
+      "pct": "17.5"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 9,
+      "d": 110,
+      "pct": "8.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 8,
+      "d": 106,
+      "pct": "7.5"
+     }
+    ]
+   },
+   "both-LP": {
+    "places": 900,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "other": 42,
+      "government": 16,
+      "military": 439,
+      "merchant": 464,
+      "noble": 235,
+      "criminal": 43,
+      "religious": 545,
+      "craft": 186,
+      "arcane": 203
+     },
+     "contends": {
+      "other": 27,
+      "government": 5,
+      "military": 433,
+      "merchant": 163,
+      "noble": 89,
+      "religious": 520,
+      "craft": 51,
+      "arcane": 107
+     },
+     "none": 260
+    },
+    "ladder": {
+     "thorp": {
+      "calm": {
+       "Stable": 103
+      },
+      "crisis": {
+       "Contested": 15,
+       "Stable": 32
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 85,
+       "Holding": 17,
+       "Contested": 1
+      },
+      "crisis": {
+       "Contested": 10,
+       "Stable": 32,
+       "Holding": 5
+      }
+     },
+     "village": {
+      "calm": {
+       "Holding": 79,
+       "Stable": 6,
+       "Contested": 18
+      },
+      "crisis": {
+       "Contested": 41,
+       "Holding": 4,
+       "Stable": 2
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 107,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 24,
+       "Holding": 7,
+       "Critical": 8
+      }
+     },
+     "city": {
+      "crisis": {
+       "Critical": 17,
+       "Contested": 15,
+       "Holding": 8
+      },
+      "calm": {
+       "Holding": 101,
+       "Contested": 9
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 10,
+       "Critical": 23,
+       "Holding": 11
+      },
+      "calm": {
+       "Holding": 98,
+       "Contested": 8
+      }
+     }
+    },
+    "crisisProtected": {
+     "thorp": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "hamlet": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "village": {
+      "n": 47,
+      "d": 47,
+      "pct": "100"
+     },
+     "town": {
+      "n": 31,
+      "d": 39,
+      "pct": "79.5"
+     },
+     "city": {
+      "n": 23,
+      "d": 40,
+      "pct": "57.5"
+     },
+     "metropolis": {
+      "n": 21,
+      "d": 44,
+      "pct": "47.7"
+     }
+    },
+    "markers": {
+     "seat=2 fortune=2": 900
+    },
+    "circumstances": {
+     "(none)": 504,
+     "mandate": 252,
+     "martial_pressure": 82,
+     "outside_debt": 30,
+     "occupation": 9,
+     "hunger": 29,
+     "strong_faith": 23,
+     "trade_wealth": 112,
+     "craft_led": 18
+    },
+    "routes": {
+     "road": 367,
+     "river": 194,
+     "crossroads": 162,
+     "port": 116,
+     "isolated": 61
+    },
+    "threats": {
+     "frontier": 454,
+     "plagued": 133,
+     "heartland": 313
+    },
+    "rolledPriorities": 0,
+    "calmContested": [
+     {
+      "size": "thorp",
+      "n": 0,
+      "d": 103,
+      "pct": "0"
+     },
+     {
+      "size": "hamlet",
+      "n": 1,
+      "d": 103,
+      "pct": "1"
+     },
+     {
+      "size": "village",
+      "n": 18,
+      "d": 103,
+      "pct": "17.5"
+     },
+     {
+      "size": "town",
+      "n": 4,
+      "d": 111,
+      "pct": "3.6"
+     },
+     {
+      "size": "city",
+      "n": 9,
+      "d": 110,
+      "pct": "8.2"
+     },
+     {
+      "size": "metropolis",
+      "n": 8,
+      "d": 106,
+      "pct": "7.5"
+     }
+    ]
+   },
+   "seat:D->L1": {
+    "paired": 900,
+    "fieldOrRiskMoved": 54,
+    "topKindsMoved": 5,
+    "enter": {
+     "noble": 1,
+     "merchant": 1,
+     "other": 1
+    },
+    "leave": {
+     "criminal": 2,
+     "craft": 3
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "seat:L1->LP": {
+    "paired": 900,
+    "fieldOrRiskMoved": 161,
+    "topKindsMoved": 13,
+    "enter": {
+     "craft": 1,
+     "merchant": 3,
+     "noble": 1,
+     "religious": 2
+    },
+    "leave": {
+     "government": 1,
+     "military": 1,
+     "merchant": 2,
+     "arcane": 4,
+     "religious": 3
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:D->L1": {
+    "paired": 900,
+    "fieldOrRiskMoved": 55,
+    "topKindsMoved": 5,
+    "enter": {
+     "noble": 1,
+     "arcane": 1,
+     "merchant": 1
+    },
+    "leave": {
+     "criminal": 2,
+     "craft": 3
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   },
+   "both:L1->LP": {
+    "paired": 900,
+    "fieldOrRiskMoved": 106,
+    "topKindsMoved": 17,
+    "enter": {
+     "craft": 1,
+     "merchant": 3,
+     "noble": 6
+    },
+    "leave": {
+     "government": 1,
+     "military": 1,
+     "religious": 4,
+     "merchant": 5,
+     "arcane": 4
+    },
+    "calmContestedOn": [],
+    "calmContestedOff": []
+   }
+  }
+ }
+}

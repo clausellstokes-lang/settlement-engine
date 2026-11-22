@@ -1,0 +1,28 @@
+== default
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds beside, contends: 18
+- Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 12
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside, contends: 12
+- Guild Council | Craft Guilds absent | Merchant Guilds beside, contends: 10
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 10
+- Grand Guild Consortium | Craft Guilds absent | Merchant Guilds beside, contends: 9
+- Guild Council | Craft Guilds absent | Merchant Guilds absent: 3
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds absent: 3
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds beside: 1
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside: 1
+== presets
+- Guild Council | Craft Guilds beside, contends | Merchant Guilds beside, contends: 25
+- Guild Council | Craft Guilds absent | Merchant Guilds beside, contends: 10
+- Merchant Guild Council | Craft Guilds beside, contends | Merchant Guilds beside, contends: 8
+- Guild Council | Craft Guilds absent | Merchant Guilds absent: 7
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 5
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds beside, contends: 5
+- Grand Guild Consortium | Craft Guilds beside, contends | Merchant Guilds beside, contends: 5
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside, contends: 5
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds beside: 3
+- Grand Guild Consortium | Craft Guilds absent | Merchant Guilds beside: 3
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds absent: 2
+- Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 1
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside: 1
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside: 1
+- Grand Guild Consortium | Craft Guilds absent | Merchant Guilds absent: 1
+- Grand Guild Consortium | Craft Guilds absent | Merchant Guilds beside, contends: 1

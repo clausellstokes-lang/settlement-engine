@@ -3111,6 +3111,29 @@
       "band": null,
       "note": "COHERENCE-UPKEEP-5 (V3 with the chair’s R13 and R14, docs/chair/2026-11-13/UPKEEP-DEFENCE-PARTS.md, the addendum’s weight table): every number the defence profile uses, one frozen table, each row’s one-line reason in DEFENCE_WEIGHT_REASONS beside it; the values are today’s formula’s terms as measured for V3 (and R14’s neighbour factor, moved byte-identical from priorityHelpers.js), raw-authored and unsoaked. Registered DRAFT in the minting commit, the owner’s to sign."
     },
+    "src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "factors.craft_led.craft": "multiplier",
+        "factors.trade_wealth.merchant": "multiplier",
+        "factors.strong_faith.religious": "multiplier",
+        "factors.martial_pressure.noble": "multiplier",
+        "factors.hunger.labor": "multiplier",
+        "factors.mandate.noble": "multiplier",
+        "factors.mandate.craft": "multiplier",
+        "factors.outside_debt.outsider": "multiplier",
+        "factors.outside_debt.merchant": "multiplier",
+        "factors.occupation.outsider": "multiplier",
+        "productCeiling": "multiplier",
+        "cuts.craftOfMerchant": "fraction01",
+        "cuts.guildIncomeFrom": "score100",
+        "cuts.priorityFrom": "score100"
+      },
+      "band": null,
+      "note": "SEAT-1 train 1, U4 THE CONTEST (lane/seat-2026-11-20-u4, builder B4; brief docs/chair/2026-11-20/content/seat/briefs/U4-CONTEST.md; SEAT-1-PROPOSAL.md section (5), CS5): the contest's circumstance factors, circumstance -> kind -> factor, a challenger's weight being power x COUP_COERCION[kind] x min(productCeiling, the product of the held circumstances' factors for its kind); read only under the seat law (_seatLawVersion 2) and only when the contest's one dial SEAT_CONTEST_LIT (same file, DARK) is lit. LANDS DARK: every factor is 1, so the ceiling is never reached. PROPOSED, the owner's unsigned proposal (SEAT-1's figures; each factor in [1, 1.5]): factors.craft_led.craft 1.5, factors.trade_wealth.merchant 1.15, factors.strong_faith.religious 1.25, factors.martial_pressure.noble 1.15, factors.hunger.labor 1.4, factors.mandate.noble 1.3, factors.mandate.craft 1.2, factors.outside_debt.outsider 1.4, factors.outside_debt.merchant 1.15, factors.occupation.outsider 1.2, productCeiling 1.6 (landed at its proposed figure: it bounds a product of ones). The labour and outsider factors are inert until train 2 bears a power of theirs. cuts are the reads' own thresholds as SEAT-1 measured them: craftOfMerchant (a craft power at this fraction of the strongest merchant power reads craft-led), guildIncomeFrom (guild fees or licensing at this percentage of the income, a 0 to 100 figure), priorityFrom (the faith or military priority, 0 to 100, at which strong faith or martial pressure is held). DRAFT, registered in the minting commit; nothing here is signed, and lighting the dial is the owner's word at the tuning sitting."
+    },
     "src/domain/fortune/fortuneLaw.js#FORTUNE_LAW_TUNING": {
       "role": null,
       "status": "draft",

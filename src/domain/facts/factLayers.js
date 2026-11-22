@@ -214,7 +214,7 @@ export const LEAVES = Object.freeze({
   }),
   beastsReadiness: leaf({ layer: 3, module: 'domain/facts/beastsReadiness.js', exported: 'beastsReadinessOf', call: 'record', reads: ['config', 'defenseProfile'] }),
   leaderLead: leaf({ layer: 3, module: 'domain/facts/leaderLead.js', exported: 'leaderLeadOfRecord', call: 'record', reads: ['powerStructure'] }),
-  powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
+  powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure', 'config', '_config'],
     note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
   importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'availableServices', 'config', 'economicState', 'economicViability', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config); CLOSE-SWEEP S2: and the viability (layer 3); BAR8 J-INCOME item 4: a live house's printed service row (dealtInHere reads availableServices, stratum 1)
@@ -251,6 +251,12 @@ export const LEAVES = Object.freeze({
     note: 'the stored capture climate, written at assembly from the cast (a back-write)' }),
   // ── layer 5 ──
   hallCapture: leaf({ layer: 5, module: 'domain/people/hallCapture.js', exported: 'hallCaptureOf', call: 'record', reads: ['npcs', 'powerStructure', 'powerStructure.criminalCaptureState'] }),
+  // ── appended ──
+  // PAGE-7 (CAUSES-DATA addendum 3): the houses a trouble's cause names, on the live roster by catalogue identity
+  // (`causeHouses.js`); layer 1, the roster's: a criminal or covert house the shared document hides is gone from it there
+  causeHouses: home('causeHouses', 1, ['institutions']),
+  // PAGE-7 (CAUSES-DATA addendum 4): goods pass through here, the economy's stored mark (`entrepot.js`; layer 2 over the economy)
+  entrepot: home('entrepot', 2, ['economicState']),
 });
 
 /**

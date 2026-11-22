@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0e6221b5aa95056db24e0f5bb0a20267ad14a2a1",
-  "measuredBy": "FORTUNE-7 U7 builder",
+  "measuredAtSha": "b804659db1948d9378a5f7ca5fc3f4ba16903b3d",
+  "measuredBy": "STACK-98",
   "date": "2026-11-22",
-  "note": "FORTUNE U7 LASTING: FORTUNE_LAW_TUNING gains the DRAFT row standing.lastingAgeBySize (six sizes), the chair decision E32",
+  "note": "point 98: lane/fortune-6-2026-11-21 at 8cc9212fd merged on the line at 1ec3e81d1; the merge took the line side of the inventory; the lane FORTUNE_LAW_TUNING row (draft) re-taken as the lane froze it, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 129,
-      "spanDigest": "880df847520e76c7de543596b5629b0be561182050c554c92652b9d7944ca5f9",
+      "line": 122,
+      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1516,12 +1516,6 @@
         "standing.meritPoints": 10,
         "standing.weatheredWithinYears": 40,
         "standing.endorsedMinReasons": 2,
-        "standing.lastingAgeBySize.thorp": 269,
-        "standing.lastingAgeBySize.hamlet": 108,
-        "standing.lastingAgeBySize.village": 225,
-        "standing.lastingAgeBySize.town": 276,
-        "standing.lastingAgeBySize.city": 441,
-        "standing.lastingAgeBySize.metropolis": 731,
         "standing.weatheredSeverity": "catastrophic",
         "standing.rulerTroubleKinds.0": "succession_crisis",
         "standing.rulerTroubleKinds.1": "corruption_scandal",
@@ -1932,6 +1926,38 @@
         "src/domain/worldPulse/warSeatBooks.js"
       ],
       "namedDependents": []
+    },
+    "src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 56,
+      "spanDigest": "cbaa10baa9430e21bb6e367aeb21455a4b954031537e392b7e3cb82978d510e4",
+      "leaves": {
+        "factors.craft_led.craft": 1,
+        "factors.trade_wealth.merchant": 1,
+        "factors.strong_faith.religious": 1,
+        "factors.martial_pressure.noble": 1,
+        "factors.hunger.labor": 1,
+        "factors.mandate.noble": 1,
+        "factors.mandate.craft": 1,
+        "factors.outside_debt.outsider": 1,
+        "factors.outside_debt.merchant": 1,
+        "factors.occupation.outsider": 1,
+        "productCeiling": 1.6,
+        "cuts.craftOfMerchant": 0.8,
+        "cuts.guildIncomeFrom": 25,
+        "cuts.priorityFrom": 70
+      },
+      "dependents": [
+        "src/domain/rulingPowerCoup.js",
+        "src/domain/worldPulse/applyWorldPulse.js",
+        "src/domain/worldPulse/applyWorldPulseFactionRoster.js",
+        "src/domain/worldPulse/stressorDynamics.js"
+      ],
+      "namedDependents": [
+        "src/domain/rulingPowerCoup.js"
+      ]
     },
     "src/domain/spatial/armyTransit.js#ARMY_TRANSIT_TUNING": {
       "exported": true,
@@ -4819,7 +4845,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 457,
+      "line": 452,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -9372,8 +9398,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 281,
-    "keys": 2297,
+    "tables": 282,
+    "keys": 2300,
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
