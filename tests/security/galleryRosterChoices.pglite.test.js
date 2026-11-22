@@ -741,24 +741,32 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     const bad = [];
     const rs = cureReads().filter((x) => x.t.seed === 'hand-fold');
     expect(rs.length).toBe(4);
-    let tooth = 0;
+    let tooth = 0; let noGoal = 0;
     for (const r of rs) for (const [read, d] of docsOf(r)) {
       const tag = `hand-fold ${r.kind} dm=${r.dm} ${read}`;
       if (!withheldOf(r.stored, d).includes(TGP) || !withheldOf(r.stored, d).includes('7')) bad.push(`${tag}: the power is not withheld ${J(withheldOf(r.stored, d))}`);
       for (const h of searchHits(d, [TGP, '7'])) if (!R5_PROSE.includes(h.path)) bad.push(`${tag}: ${h.at} = ${J(h.text)}`);
       const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
       const eli = HAND_FOLD.npcs[2];
-      // THE TOOTH, where the read serves a person's goal and memberships at all (Reveal DM on; the gallery and the import):
-      // the shown power's goal and membership byte for byte (canonical key order: jsonb orders an object's keys)
-      if (npc('npc.eli') && 'goal' in npc('npc.eli')) {
+      // THE TOOTH, UNCONDITIONAL (ruling 72 (c), ruling 53's last paragraph; V33-Q): it is judged wherever the READ'S OWN
+      // PROJECTION holds the person's goal (galleryPayloadFor before the veil's passes, at the read's Reveal setting: the map's
+      // member and the link are read Reveal off), never by what the veil served: there the shown power's goal and membership
+      // are served byte for byte (canonical key order: jsonb orders an object's keys), and a person served WITHOUT the goal,
+      // or not served, is a fault, not a skip
+      const pubEli = (veil.galleryPayloadFor(clone(r.stored), { shareDm: read === 'map' || read === 'link' ? false : r.dm, memberOverrides: r.ov }).npcs || []).find((x) => x?.id === 'npc.eli');
+      if (isRec(pubEli) && 'goal' in pubEli) {
         tooth += 1;
-        if (canon(npc('npc.eli').goal) !== canon(eli.goal)) bad.push(`${tag}: the goal aimed at the shown Harbour Board ${J(npc('npc.eli')?.goal)}`);
-        if (canon(npc('npc.eli').memberships) !== canon(eli.memberships)) bad.push(`${tag}: a shown power's membership ${J(npc('npc.eli')?.memberships)}`);
+        if (!npc('npc.eli') || !('goal' in npc('npc.eli'))) bad.push(`${tag}: the goal aimed at the shown Harbour Board withheld (${npc('npc.eli') ? 'the person served without it' : 'the person not served'})`);
+        else if (canon(npc('npc.eli').goal) !== canon(eli.goal)) bad.push(`${tag}: the goal aimed at the shown Harbour Board ${J(npc('npc.eli')?.goal)}`);
+        if (canon(npc('npc.eli')?.memberships) !== canon(eli.memberships)) bad.push(`${tag}: a shown power's membership ${J(npc('npc.eli')?.memberships)}`);
         if (!(npc('npc.cass')?.memberships || []).some((m) => m?.power === 'Ropers')) bad.push(`${tag}: the Ropers membership lost`);
+      } else {
+        noGoal += 1;
+        if (npc('npc.eli') && 'goal' in npc('npc.eli')) bad.push(`${tag}: a goal served where the read's own projection holds none ${J(npc('npc.eli').goal)}`);
       }
       if (!(d.powerStructure?.conflicts || []).some((c) => J(c?.parties) === J(['Harbour Board', 'Ropers']))) bad.push(`${tag}: the shown conflict lost`);
     }
-    note('R3-CURE-2 unit 1, the tooth (reads serving the shown power\'s goal, compared byte for byte):', tooth);
+    note('R3-CURE-2 unit 1, the tooth, UNCONDITIONAL (reads whose own projection holds the shown power\'s goal, each judged byte for byte):', tooth, '| reads whose projection holds no goal for the person:', noGoal);
     expect(tooth).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
