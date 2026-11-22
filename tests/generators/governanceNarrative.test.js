@@ -101,7 +101,7 @@ describe('governance narrative precedence', () => {
 
     expect(result.stability).toBe('Stable');
     expect(result.recentConflict).toBe(
-      'An occupying officer arrested a local elder for "seditious speech". Elected Reeve filed a formal protest. The protest was returned unread.',
+      'An occupying officer arrested a local elder for "seditious speech". The Elected Reeve filed a formal protest. The protest was returned unread.', // NAMES-1 (CN1): the article
     );
   });
 });
@@ -128,7 +128,7 @@ describe('governance narrative institutional phrasing', () => {
     });
 
     expect(result.recentConflict).toBe(
-      'Two rival guilds are contesting control of the main trade route. Neither side will back down and Household Council is avoiding the question.',
+      'Two rival guilds are contesting control of the main trade route. Neither side will back down and the Household Council is avoiding the question.', // NAMES-1 (CN1): the article
     );
   });
 

@@ -19,6 +19,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { PROSPERITY_RANK } from '../../domain/prosperityRank.js';
+import { FORTUNE_LAW_TUNING, isSizeRelativeFortune } from '../../domain/fortune/fortuneLaw.js';
 
 
 // Public compatibility name retained for every generator caller. The vocabulary
@@ -35,7 +36,7 @@ export const deriveEconomicSituationDesc = (
   institutions = [],
   foodSecurity = null,
   prosperityLabel = null,
-) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), PROSPERITY_LINE_SIBLINGS, {
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), isSizeRelativeFortune(config) ? FORTUNE_LAW_LINE_SIBLINGS : PROSPERITY_LINE_SIBLINGS, {
   facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
 });
 
@@ -69,6 +70,7 @@ export const tradeBandContradictsLabel = (band, label) => {
 export const TRADE_LINE_BANDS = Object.freeze([
   [/^Trade is what this settlement lives on\./, 'very_high'],
   [/^Trade is brisk, the guilds are well run/, 'high'],
+  [/^Trade is brisk, and the settlement's coffers fill steadily/, 'high'], // FS7 F2: the guild line's twin (law 2 only)
   [/^Commerce is sluggish;/, 'low'],
   [/^Little coin changes hands here/, 'very_low'],
   [/^Cut off as it is, the settlement runs itself well/, 'high'],
@@ -216,6 +218,13 @@ export const standingBaseProsperity = (tier, tradeRoute, institutions, config, i
   return computeBaseProsperity(tier, tradeRoute, institutions, standing, instNames, incomeNormalized, food).label;
 };
 
+/**
+ * THE REQUIRED ECONOMY, ONE HOME: the houses whose presence marks a place's economy as functioning
+ * normally. Read by `computeBaseProsperity`'s Poor floor and, under the fortune law, by
+ * `labelFromBase`'s calm floor (FORTUNE-1 FS4), so the two floors ask one question.
+ */
+const REQUIRED_ECONOMY = /subsistence farming|access to external mill|farmland|town granary|weekly market|city granari|market square|district markets|state granary|inns and taverns \(district\)/i;
+
 /** The label from a base, the Subsistence index handed in (drawn once by the caller). */
 const labelFromBase = (prosperity, config, institutions, subsistenceIdx) => {
   const flags = getInstFlags(config, institutions);
@@ -267,6 +276,16 @@ const labelFromBase = (prosperity, config, institutions, subsistenceIdx) => {
   // prosperity row — active armed conflict with the market's commercial operations
   // suspended is at least as prosperity-suppressing as the siblings above. Golden-shifting (G2).
   if (active.includes('slave_revolt')) idx = Math.max(0, idx - 1);
+  // FORTUNE-1 FS4, under the fortune law only: the base's own floor ("Struggling is reserved for
+  // active stress") holds after the steps above too. Born under no crisis, holding its required
+  // economy, a place reads at least Poor; an isolated thorp or hamlet is excepted (its route makes
+  // it Subsistence). The standing label reads with no crisis, so it is floored alike.
+  if (
+    isSizeRelativeFortune(config)
+    && !active.length
+    && !isIsolatedSmall
+    && institutions.some((institution) => institutionMatchesRegex(institution, REQUIRED_ECONOMY))
+  ) idx = Math.max(1, idx);
   return LABELS[Math.min(5, Math.max(0, idx))];
 };
 
@@ -277,6 +296,10 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
   //         magic (tier-scaled production), threat (drag), military (dual effect),
   //         defensibility (security premium on trade routes)
   const _PLABELS = ['Subsistence', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+  // FORTUNE-1 FS1: under the fortune law (`_fortuneLawVersion: 2`, read from this config) the terms
+  // that only measured the size are read against the place's OWN size, every figure from the law's
+  // one table (`FORTUNE_LAW_TUNING`, DRAFT). Under law 1 every line below computes as before.
+  const _sizeRelative = isSizeRelativeFortune(config);
 
   // 1. Route base — how much commerce can flow at all
   const _routeBase =
@@ -291,7 +314,10 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
         : 2; // road/river → Moderate
 
   // 2. Tier development bonus — division of labour, institutional multiplication
-  const _tierBonus = { thorp: 0, hamlet: 0, village: 0, town: 1, city: 1, metropolis: 2 }[tier] || 0;
+  //    (under the fortune law: one development figure at every size)
+  const _tierBonus = _sizeRelative
+    ? FORTUNE_LAW_TUNING.developmentFigure
+    : { thorp: 0, hamlet: 0, village: 0, town: 1, city: 1, metropolis: 2 }[tier] || 0;
 
   // 3. Economy slider — institutional investment in commerce (±1.25 range)
   const _priEcon = config.priorityEconomy ?? 50;
@@ -300,7 +326,10 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
   // 4. Magic bonus — tier-scaled productive output (only meaningful at town+, only when active)
   const _priMagic = config.priorityMagic ?? 0;
   const _magicActive = config.magicExists !== false && _priMagic > 25;
-  const _magicTierScale = { thorp: 0, hamlet: 0, village: 0.3, town: 0.6, city: 1.0, metropolis: 1.4 }[tier] || 0;
+  // (under the fortune law: one scale at every size; the dial is the world's)
+  const _magicTierScale = _sizeRelative
+    ? FORTUNE_LAW_TUNING.magicScale
+    : { thorp: 0, hamlet: 0, village: 0.3, town: 0.6, city: 1.0, metropolis: 1.4 }[tier] || 0;
   const _magicBonus = _magicActive ? Math.max(0, (_priMagic - 25) / 75) * _magicTierScale : 0;
 
   // 5. Threat penalty — disrupted trade, insecure fields, rerouted merchants
@@ -330,13 +359,18 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
     !isMaterializedCustomContent(i)
     && (i.category === 'Economy' || i.category === 'Crafts')
   )).length;
-  const _tierExpectedEco = { thorp: 3, hamlet: 8, village: 13, town: 22, city: 13, metropolis: 14 }[tier] || 8;
+  // Under the fortune law the same ratios read against each size's MEASURED expectation.
+  const _tierExpectedEco = (_sizeRelative
+    ? FORTUNE_LAW_TUNING.depthExpectation
+    : { thorp: 3, hamlet: 8, village: 13, town: 22, city: 13, metropolis: 14 })[tier] || 8;
   // Bonus: +1 if well above expectation, -1 if well below. Bounded ±1 to avoid dominating.
   const _depthBonus = _econInstCount >= _tierExpectedEco * 1.3 ? 1 : _econInstCount >= _tierExpectedEco * 0.75 ? 0 : -1;
 
   // 8. Income diversity bonus — many distinct income sources = genuinely complex economy
+  //    (retired under the fortune law: a count that grows with size, which the depth term already
+  //    reads against the size; the count itself still feeds everything else that reads it)
   const _incomeCount = incomeNormalized?.length || 0;
-  const _diversityBonus = _incomeCount >= 7 ? 0.5 : _incomeCount >= 5 ? 0.25 : 0;
+  const _diversityBonus = _sizeRelative ? 0 : _incomeCount >= 7 ? 0.5 : _incomeCount >= 5 ? 0.25 : 0;
 
   // Combine — cap at Prosperous (4); Wealthy only through narrative modifier (strong econOut)
   let _baseIdx = Math.min(
@@ -366,10 +400,7 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
   // functioning normally should never label below Poor — they're not in crisis, they're
   // just small. Struggling is reserved for active stress/famine on top of structural poverty.
   const _hasRequiredEco = institutions.some(institution => (
-    institutionMatchesRegex(
-      institution,
-      /subsistence farming|access to external mill|farmland|town granary|weekly market|city granari|market square|district markets|state granary|inns and taverns \(district\)/i,
-    )
+    institutionMatchesRegex(institution, REQUIRED_ECONOMY)
   ));
   if (
     ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].includes(tier) &&
@@ -479,4 +510,23 @@ export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
   'Commerce is sluggish; markets meet infrequently and many crafts are in decline.': marketSet(
     'Commerce is sluggish; markets meet infrequently and many crafts are in decline.',
     'Commerce is sluggish; little is bought or sold and many crafts are in decline.'),
+});
+
+/**
+ * FS7 F2 (FORTUNE-1's U4, THE FORTUNE LAW ONLY): the `high` trade line names the place's guilds, and the label picks it at a
+ * Prosperous place on a slow output band; under the law the small places that are Prosperous are many, and it printed at
+ * thorps, hamlets and villages that hold no guild (docs/chair/2026-11-20/content/fortune/FS7-INVENTORY.md 1.A). Here the
+ * line declares the guild it names (`facts/guild.js`: at this step the roster's guild house), and its twin is the same line
+ * without the guilds; the twin claims nothing of guilds, so it declares nothing. Read only where the town was born under
+ * the law (`deriveEconomicSituationDesc`); a law-1 world reads `PROSPERITY_LINE_SIBLINGS`, so its line is today's.
+ * ⚠ Not exported, so not yet a census channel (`scripts/lib/table-pools.mjs`): it is dark, and enrolling it is the
+ * integrator's at the light.
+ */
+const GUILD_TRADE_LINE = "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
+const FORTUNE_LAW_LINE_SIBLINGS = Object.freeze({
+  ...PROSPERITY_LINE_SIBLINGS,
+  [GUILD_TRADE_LINE]: Object.freeze([
+    Object.freeze({ text: GUILD_TRADE_LINE, needs: Object.freeze(['guild']) }),
+    Object.freeze({ text: "Trade is brisk, and the settlement's coffers fill steadily.", twinOf: GUILD_TRADE_LINE }),
+  ]),
 });

@@ -1,0 +1,54 @@
+# TRAD-1 measure — audience=owner; towns=432; printed traditions=1232
+ALL            n=1232  keeper(house)=633 (51.4%)  keeper(power)=489 (39.7%)  origin(cause)=432 (35.1%)  payer(economy)=346 (28.1%)  SHORT=92 (7.5%)
+
+## by tier
+thorp          n=  81  keeper(house)=7 (8.6%)  keeper(power)=56 (69.1%)  origin(cause)=54 (66.7%)  payer(economy)=11 (13.6%)  SHORT=10 (12.3%)
+hamlet         n=  78  keeper(house)=4 (5.1%)  keeper(power)=61 (78.2%)  origin(cause)=60 (76.9%)  payer(economy)=5 (6.4%)  SHORT=8 (10.3%)
+village        n= 112  keeper(house)=31 (27.7%)  keeper(power)=65 (58.0%)  origin(cause)=60 (53.6%)  payer(economy)=11 (9.8%)  SHORT=13 (11.6%)
+town           n= 203  keeper(house)=95 (46.8%)  keeper(power)=90 (44.3%)  origin(cause)=75 (36.9%)  payer(economy)=55 (27.1%)  SHORT=17 (8.4%)
+city           n= 315  keeper(house)=195 (61.9%)  keeper(power)=105 (33.3%)  origin(cause)=83 (26.3%)  payer(economy)=122 (38.7%)  SHORT=14 (4.4%)
+metropolis     n= 443  keeper(house)=301 (67.9%)  keeper(power)=112 (25.3%)  origin(cause)=100 (22.6%)  payer(economy)=142 (32.1%)  SHORT=30 (6.8%)
+
+## by element
+founding       n= 229  keeper(house)=0 (0.0%)  keeper(power)=229 (100.0%)  origin(cause)=220 (96.1%)  payer(economy)=3 (1.3%)  SHORT=0 (0.0%)
+first-landing  n= 148  keeper(house)=0 (0.0%)  keeper(power)=148 (100.0%)  origin(cause)=95 (64.2%)  payer(economy)=30 (20.3%)  SHORT=0 (0.0%)
+charter        n=  97  keeper(house)=0 (0.0%)  keeper(power)=97 (100.0%)  origin(cause)=72 (74.2%)  payer(economy)=10 (10.3%)  SHORT=0 (0.0%)
+hearth         n=  33  keeper(house)=19 (57.6%)  keeper(power)=3 (9.1%)  origin(cause)=0 (0.0%)  payer(economy)=8 (24.2%)  SHORT=11 (33.3%)
+harvest        n=  74  keeper(house)=66 (89.2%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=34 (45.9%)  SHORT=0 (0.0%)
+river          n=  42  keeper(house)=36 (85.7%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=14 (33.3%)  SHORT=4 (9.5%)
+stone          n=  62  keeper(house)=43 (69.4%)  keeper(power)=2 (3.2%)  origin(cause)=0 (0.0%)  payer(economy)=18 (29.0%)  SHORT=17 (27.4%)
+the-dead       n=  63  keeper(house)=63 (100.0%)  keeper(power)=0 (0.0%)  origin(cause)=45 (71.4%)  payer(economy)=1 (1.6%)  SHORT=0 (0.0%)
+field          n=  62  keeper(house)=42 (67.7%)  keeper(power)=2 (3.2%)  origin(cause)=0 (0.0%)  payer(economy)=29 (46.8%)  SHORT=10 (16.1%)
+forge          n=  61  keeper(house)=61 (100.0%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=17 (27.9%)  SHORT=0 (0.0%)
+market         n=  82  keeper(house)=82 (100.0%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=81 (98.8%)  SHORT=0 (0.0%)
+hunt           n=  49  keeper(house)=43 (87.8%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=15 (30.6%)  SHORT=6 (12.2%)
+long-sun       n=  40  keeper(house)=23 (57.5%)  keeper(power)=4 (10.0%)  origin(cause)=0 (0.0%)  payer(economy)=14 (35.0%)  SHORT=13 (32.5%)
+tide           n=  41  keeper(house)=41 (100.0%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=40 (97.6%)  SHORT=0 (0.0%)
+greening       n=  86  keeper(house)=55 (64.0%)  keeper(power)=4 (4.7%)  origin(cause)=0 (0.0%)  payer(economy)=20 (23.3%)  SHORT=27 (31.4%)
+stars          n=  63  keeper(house)=59 (93.7%)  keeper(power)=0 (0.0%)  origin(cause)=0 (0.0%)  payer(economy)=12 (19.0%)  SHORT=4 (6.3%)
+
+## ten most repeated whole descriptions
+7x  A feast eaten in common that welcomes the year's new growth.
+6x  A common feast that welcomes the year's new growth.
+5x  A walking procession that welcomes the year's new growth.
+5x  A walking procession that honours the standing stones.
+4x  A common feast that honours the standing stones.
+4x  A procession that honours the standing stones.
+4x  A common feast that blesses the fields.
+4x  A procession that blesses the fields.
+3x  Contests that welcome the year's new growth.
+3x  A walking procession that marks the long days of high summer.
+
+## ten most repeated shapes (town name masked)
+10x  A fair of stalls and trading that celebrates the market. It is kept at the market squares and falls to the Merchant Guilds. Market taxes are {town}'s chief income.
+7x  A feast eaten in common that welcomes the year's new growth.
+7x  A fair of stalls and trading that honours the standing stones. It is kept at the market squares and falls to the Merchant Guilds. Market taxes are {town}'s chief income.
+7x  A fair that celebrates the market. It is held at the market squares, in the keeping of the Merchant Guilds. Market taxes are the chief of {town}'s incomes.
+6x  A common feast that welcomes the year's new growth.
+5x  A walking procession that welcomes the year's new growth.
+5x  A walking procession that honours the standing stones.
+5x  A night's vigil that celebrates the market. It is kept at the market squares and falls to the Religious Authorities. Market taxes are {town}'s chief income.
+4x  A common feast that honours the standing stones.
+4x  A procession that honours the standing stones.
+
+distinct whole descriptions: 1170 of 1232; distinct shapes: 1096

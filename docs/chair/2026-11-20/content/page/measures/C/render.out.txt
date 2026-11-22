@@ -1,0 +1,12 @@
+render: 24 towns rendered now (exit codes 0,0,0,0); views in /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/render/views
+
+RENDERED (30 towns, People tab as the census walker prints it): card headers 858, of them one dot (= "Standing marginal") 758; Standing words seen: commanding, marginal, established
+cards whose power line says "first of", header one dot: 35/102; the RECORD for the same seeds (first-of rows, influence low): 35/111 (a card first of two powers prints one line: rendered counts cards, the record counts rows)
+by size (rendered low/first | record low/first): city (5) 9/27 | 9/31 · hamlet (5) 6/6 | 6/6 · metropolis (5) 10/36 | 10/39 · thorp (5) 5/5 | 5/5 · town (5) 5/18 | 5/20 · village (5) 0/10 | 0/10
+samples:
+  hxd-city-0 Lakin Yax● "Inns and taverns (district) · first of The Commercial Circle"
+  hxd-city-1 Tepeu Zaz● "Merchant guilds · first of Merchant Guilds"
+  hxd-city-1 Itzcuintli Hau● "Alchemist quarter · first of The Enlightened"
+  hxd-city-2 Diogenes Skleraina● "Warehouse district · first of The Trade Compact"
+  hxd-city-2 Zosime Palaiologos● "Major hospital · first of The Devout Circle"
+  hxd-city-3 Credhe Sweetman● "Banking houses · first of Merchant Guilds"

@@ -105,7 +105,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities   = generateMany({ settType: 'city',    culture: 'germanic' });
     expect(averageOf(cities, s => s.institutions.length))
       .toBeGreaterThan(averageOf(villages, s => s.institutions.length));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.3 s in the last close's serial check; about 17.1 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 // ── Enforcement frequency ─────────────────────────────────────────────────
@@ -292,7 +292,7 @@ describe('supply-chain prevalence and status distribution', () => {
     const villageAvg = averageOf(villages, s => deriveAllSupplyChainStates(s).length);
     const cityAvg    = averageOf(cities,   s => deriveAllSupplyChainStates(s).length);
     expect(cityAvg).toBeGreaterThan(villageAvg);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 8.5 s in the last close's serial check; about 15.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   it('on healthy generation, at least half of chains are stable', () => {
     // Status remap: legacy 'operational' / 'running' / 'entrepot' all

@@ -7,7 +7,7 @@
  * ODQ §934.105: the module ceiling is cured by a split, never raised); the one edit is `export`.
  */
 import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js';
-import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { powerNameWithArticle } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): the seat named in a sentence takes its article
 
 import { resolveDeclared } from '../../domain/facts/drawDeclared.js';
 import { textOf } from '../../domain/facts/textOf.js';
@@ -30,7 +30,7 @@ const OCCUPIED_SEAT = Object.freeze([
  */
 export const occupiedSeatLine = (governingFactionName, facts) => {
   const { line } = resolveDeclared(OCCUPIED_SEAT, { facts, poolId: 'governingStressVignettes:OCCUPIED_SEAT', surface: 'power', drawKind: 'T' });
-  return line ? textOf(line).replace('{seat}', powerSentenceName(governingFactionName)) : null;
+  return line ? textOf(line).replace('{seat}', powerNameWithArticle(governingFactionName, true)) : null;
 };
 
 export const buildInsurgencyNarrative = (
@@ -62,6 +62,7 @@ export const buildWartimeNarrative = (institutionFlags, governingFactionName, in
   // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #706 #707): a town that governs itself as an independent polity (the
   // roster's City-state government: "No higher lord, no external charter") has no crown to pay, take or send an officer
   const sovereign = (institutionNames || []).some((n) => /^city-state government$/i.test(String(n || '')));
+  if (governingFactionName) governingFactionName = powerNameWithArticle(governingFactionName, true); // NAMES-1 (CN1): the seat opens its sentence
   const isWellSupplied =
     (institutionFlags.militaryEffective || 50) >= 55 &&
     (institutionFlags.economyOutput || 50) >= 45;
@@ -81,6 +82,7 @@ export const buildReligiousConversionNarrative = (governingFactionName) => {
   // The governing label has historically selected the stable prose variant.
   // Keep that deterministic selector until a seeded narrative selector owns it.
   const variant = governingFactionName ? governingFactionName.length % 3 : 0;
+  if (governingFactionName) governingFactionName = powerNameWithArticle(governingFactionName, variant === 1); // NAMES-1 (CN1): the seat opens variant 1's sentence, and stands inside variant 2's
   if (variant === 0) {
     return 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old faith has the building, the records, the donations of generations, and a congregation that is quietly slipping away to the new one. Neither side is ready to force a confrontation, and both are counting who comes on holy days.';
   }
@@ -102,6 +104,7 @@ export const buildMigrationNarrative = (institutionFlags, governingFactionName, 
   // MERGE-R2 (the chair's ruling 1; WIRING-W0, R-W7 e): the DIRECTION decides first and alone —
   // W0's one field, read through F13's reader; the economy below only chooses between the two
   // ARRIVALS wordings (F13's), never a direction.
+  if (governingFactionName) governingFactionName = powerNameWithArticle(governingFactionName, true); // NAMES-1 (CN1): the seat opens its sentence
   if (migrationDirectionOf(migrationEntry) === 'exodus') {
     return 'Three families left this week and two more the week before, quietly and in good order; they have thought it through. Those left behind are the ones who cannot go and the ones who will not, and every trade and office is short of hands.';
   }

@@ -1,0 +1,32 @@
+DROPPED ATOMS: ironPeace
+MASK: candidate rows hold no digit: true; the hook-truth words (the town / villagers / starv / famine / banditry / magic / watch / walls / soldiers) in no row: true
+DRAW: untouched 107, moderateGap:argmax 21, moderateGap:drawn 57, ironPeace:pool-dropped 95 (hooks of 600 births)
+
+TOP SHARE BY SIZE: places of 100 holding the commonest hook, BEFORE -> AFTER (of the size's holders)
+thorp       11 ->   5   (holders 18; distinct 4 -> 8)   after top: "The settlement is starving, and its hungriest are turning to banditry."
+hamlet      10 ->   3   (holders 19; distinct 9 -> 13)   after top: "The settlement is starving, and its hungriest are turning to banditry."
+village     12 ->   3   (holders 21; distinct 9 -> 15)   after top: "The iron carts are three weeks late and the carters will not say why. What iron "
+town        19 ->   8   (holders 46; distinct 14 -> 21)   after top: "One importer now holds all the grain that comes in from outside and has quadrupl"
+city        15 ->  15   (holders 60; distinct 13 -> 19)   after top: "Iron has doubled in price this season, and tools are being mended with scrap. Wo"
+metropolis  16 ->  14   (holders 74; distinct 13 -> 21)   after top: "A new toll on the iron road has made metal dear. People blame whoever set it, an"
+
+WORST AFTER: city 15/100. Its ten commonest after-sentences:
+   15  Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain.
+   11  The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools.
+   11  One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are arguing over whether to pay, find another supplier, or take the grain.
+    7  The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.
+    7  The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.
+    4  Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+    2  The settlement grows less food than it eats, and those who keep the granary are arguing over whether to open it now or hold it against a leaner month.
+    2  The carters who bring food up the road have raised their rates, and the settlement, which grows less than it eats, must pay them or send its own carts.
+    2  The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin.
+    2  Iron has doubled in price this season, and metal for tools and repairs is hard to come by. Work slows, and people are starting to complain.
+
+MODERATE_GAP: rows used over the 600 (of 12)
+  gap-canon 12, gap-buyer 11, gap-carters 10, gap-granary 9, gap-price 8, gap-desert 6, gap-keep 6, gap-tavern 6, gap-mountain 4, gap-mill 3, gap-market 2, gap-forest 1
+  never used: none
+IRON_PEACE: rows used over the 600 (of 13)
+  null 95
+  never used: iron-price, iron-price-t, iron-carts, iron-carts-t, iron-toll, iron-toll-t, iron-slag, iron-bidding, iron-river, iron-port, iron-crossroads, iron-market, iron-forge
+
+UNCHANGED: category, severity and the hook count (the summary's "N plot hooks available") are not read or written.

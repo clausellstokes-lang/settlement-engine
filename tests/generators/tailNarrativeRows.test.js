@@ -95,7 +95,7 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
 
   it('the branches without a birth: one power in both slots, the powers counted, a quiet history beside no great event', () => {
     const indebted = PRESSURE_SENTENCES.indebted({ name: 'X', topFaction: 'Old Council', govFaction: 'New Council' });
-    expect(String(indebted[1])).toContain('Old Council took the loans and New Council is repaying them');
+    expect(String(indebted[1])).toContain('The Old Council took the loans and the New Council is repaying them'); // NAMES-1 (CN1): the article
     const fractured = (/** @type {number} */ n) => PRESSURE_SENTENCES.politically_fractured({ name: 'X', powerCount: n, topNPCName: 'A', topNPCRole: 'elder' });
     expect(String(fractured(3)[1])).toContain('Three powers in X are each waiting for one of the others to slip');
     expect(String(fractured(3)[2])).toContain('the only person all three powers will still speak to');
@@ -323,8 +323,12 @@ describe('B5 the founding notes, the arrival lines and the secrets name only wha
     ['18689', 'r2s-occupied-hamlet-0', 'arrival', /where the roads meet/, /stand about in the middle of/],
     ['01080', 'r2s-wartime-village-3', 'arrival', /prosperous in a way|the warehouses are full/, /is busy in a way that feels wrong for a place this poor\. The forge fires burn past dark/], // re-keyed by identity (TAIL-NARRATIVE-5, N18 (1)): a struggling town takes the twin
     ['00340', 'r2s-religious_conversion-village-3', 'arrival', /in different quarters/, /forming at opposite ends of the settlement/],
-    ['B21058', 'r2r-thorp-35', 'arrival', /working waterfront/, /the particular mud of a bank that people use every day/],
-    ['21748', 'r2r-thorp-14', 'arrival', /becomes a street/, /becomes part of the settlement at a point/],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-35 -> r2r-hamlet-74, a census town whose river scene
+    // prints the bank line
+    ['B21058', 'r2r-hamlet-74', 'arrival', /working waterfront/, /the particular mud of a bank that people use every day/],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-14 -> r2r-thorp-4, a thorp (a small place, no street)
+    // whose ordinary scene prints the road's reword
+    ['21748', 'r2r-thorp-4', 'arrival', /becomes a street/, /becomes part of the settlement at a point/],
     ['01529', 'r2s-slave_revolt-thorp-0', 'arrival', /field gangs/, /field hands work without overseers today/],
     ['17390', 'r2s-insurgency-hamlet-2', 'secrets', /Ordered a crackdown/, /Named people who had nothing to do with the insurgency as its ringleaders/],
     ['17123', 'r2r-thorp-10', 'secrets', /patrol schedules|hit patrols/, /selling information about who travels the roads and when/],

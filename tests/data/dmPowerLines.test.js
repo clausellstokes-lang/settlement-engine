@@ -116,13 +116,13 @@ describe('DM power lines (WRITE-PEOPLE, design §9)', () => {
   });
 
   it('the helpers read the receipt plainly', () => {
-    expect(answerClause(fx([A2, A3]))).toBe('The second and the third of Ruler-Council answer to Guild-One');
-    expect(answerClause(fx([A1, { ...A3, guild: GUILD2 }]))).toBe('The head of Ruler-Council answers to Guild-One and the third to Guild-Two');
-    expect(namedAnswerClause(fx([A1, A2]))).toBe('In Ruler-Council, Agent-Head, the head, and Agent-Second, the second, both answer to Guild-One');
-    expect(namedAnswerClause(fx([A1, A2, A3]))).toBe('In Ruler-Council, Agent-Head, the head, Agent-Second, the second, and Agent-Third, the third, all answer to Guild-One');
-    expect(namedAnswerClause(fx([A1, { ...A2, guild: GUILD2 }]))).toBe('In Ruler-Council, Agent-Head, the head, answers to Guild-One, and Agent-Second, the second, to Guild-Two');
-    expect(namedAnswerClause(fx([A3]))).toBe('Agent-Third, the third of Ruler-Council, answers to Guild-One');
-    expect(patronPlace('steward', RULER)).toBe('steward of Ruler-Council while its seat stands empty');
+    expect(answerClause(fx([A2, A3]))).toBe('The second and the third of the Ruler-Council answer to the Guild-One'); // NAMES-1 (CN1): the article
+    expect(answerClause(fx([A1, { ...A3, guild: GUILD2 }]))).toBe('The head of the Ruler-Council answers to the Guild-One and the third to the Guild-Two'); // NAMES-1 (CN1): the article
+    expect(namedAnswerClause(fx([A1, A2]))).toBe('In the Ruler-Council, Agent-Head, the head, and Agent-Second, the second, both answer to the Guild-One'); // NAMES-1 (CN1): the article
+    expect(namedAnswerClause(fx([A1, A2, A3]))).toBe('In the Ruler-Council, Agent-Head, the head, Agent-Second, the second, and Agent-Third, the third, all answer to the Guild-One'); // NAMES-1 (CN1): the article
+    expect(namedAnswerClause(fx([A1, { ...A2, guild: GUILD2 }]))).toBe('In the Ruler-Council, Agent-Head, the head, answers to the Guild-One, and Agent-Second, the second, to the Guild-Two'); // NAMES-1 (CN1): the article
+    expect(namedAnswerClause(fx([A3]))).toBe('Agent-Third, the third of the Ruler-Council, answers to the Guild-One'); // NAMES-1 (CN1): the article
+    expect(patronPlace('steward', RULER)).toBe('steward of the Ruler-Council while its seat stands empty'); // NAMES-1 (CN1): the article
     expect([0.15, 0.25, 0.34, 0.5, 0.7, 1].map(shareWords)).toEqual(['a small share', 'a quarter share', 'a third share', 'a half share', 'a large share', 'a full share']);
     expect([0.99, 1, 1.25, 6.75].map(pointWords)).toEqual(['1', '1', '1.3', '6.8']);
   });

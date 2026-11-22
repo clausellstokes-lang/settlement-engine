@@ -54,6 +54,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { gitResolvesCommit, UNRESOLVABLE_WELL_FORMED_SHA } from '../helpers/gitObjectStore.js';
+import { fixtureGit } from '../helpers/gitFixture.js';
 import {
   measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest, astKeyNames,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
@@ -62,11 +63,6 @@ import {
   TUNING_SHIFT_CAUSE_RE, UNIT_VOCABULARY, DIVERGENCE_REASONS, IDIOMS, REFUSALS,
   INVENTORY_REL, TREES_P1, TREES_P2P3, SCHEMA_VERSION,
 } from '../../scripts/lib/tuning-inventory.mjs';
-import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
-
-// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
-// hook's GIT_DIR (tests/helpers/fixtureGit.js).
-isolateFromHostRepo();
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const INVENTORY_PATH = join(ROOT, INVENTORY_REL);
@@ -101,11 +97,7 @@ const CEILINGS = Object.freeze({
   // src/domain/display/shadowEconomyShown.js (63c3f2ae7 named it, 1f41c23dc set it: the capture share below which the
   // shadow economy's block is silent) and INCOME_LEADER_FROM = 20 in src/generators/economy/prosperity.js (2ac50c55d: the
   // income row share at or over which "Highly diversified" is not said). The names earn their register rows when the owner signs.
-  // RAISED 541 -> 542 (2026-11-19, VEIL-17 at the join into pull request #75) BY THE CHAIR'S RULING VR3, 2026-11-19 (vetoable by
-  // the owner); attributed: ONE name, by its DECLARED_GROWTH row: NAME_WALK_BOUND = 64 in src/domain/display/gallerySecondHomes.js
-  // (5abf99906: the share veil's name walk's security bound, 212's _gallery_veil_name_sweep's 64). The name earns its register row
-  // when the owner signs.
-  UNREGISTERED_NAMED_CEILING: 542,
+  UNREGISTERED_NAMED_CEILING: 541,
   UNITLESS_TABLE_CEILING: 220,
   DECLARED_DIVERGENCE_CEILING: 5,
   PHANTOM_ALIAS_CEILING: 3,
@@ -135,9 +127,7 @@ const CEILINGS = Object.freeze({
   // RAISED 12 -> 14 (2026-11-15, TAIL-CLOSE-SRC-2) BY THE CHAIR'S RULING TU1, 2026-11-15, the close of the tail; attributed: the
   // two DECLARED_GROWTH rows above (shadowEconomyShown.js 63c3f2ae7, prosperity.js 2ac50c55d). This counts ATTRIBUTED rows, so it
   // moves with them; the other population ceilings are not touched.
-  // RAISED 14 -> 15 (2026-11-19, VEIL-17) BY THE CHAIR'S RULING VR3; attributed: the DECLARED_GROWTH row above
-  // (gallerySecondHomes.js 5abf99906). This counts ATTRIBUTED rows, so it moves with them; the other ceilings are not touched.
-  DECLARED_GROWTH_CEILING: 15,
+  DECLARED_GROWTH_CEILING: 14,
 });
 
 const register = loadTuningRegister(ROOT);
@@ -1616,7 +1606,7 @@ describe('tuning register — the refreeze ritual refuses', () => {
     // whatever state the dock happens to be in when the gate runs.
     const dir = mkdtempSync(join(tmpdir(), 'tunereg-git-'));
     try {
-      execFileSync('git', ['init', '-q'], { cwd: dir, env: fixtureEnv() });
+      fixtureGit(dir, ['init', '-q']);
       writeFileSync(join(dir, 'someone-elses-work.js'), 'export const x = 1;\n', 'utf8');
       const args = {
         root: dir,

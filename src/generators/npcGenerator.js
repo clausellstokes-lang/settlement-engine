@@ -19,9 +19,10 @@ import { themeOfText, UNTYPED } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeHasThievesGuild, crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { generateFactionLeaderSecret, noteSecretSource, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
+import { powerBandOfRole } from './npc/powerBand.js'; // UK-CURE (SEAT-7, item 73): the keyword band moved to its leaf (the seat law's fold with it); re-exported below
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
@@ -29,7 +30,7 @@ import { TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS, crisisHolderAdmits } from '../data/stressInstitutionEffects.js'; // BAR8 K-PEOPLE (14f): the rows' holder test, beside them
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; import { powerSentenceName } from '../data/people/powerSentenceName.js'; // BAR3-PEOPLE-2 (C5844): the {faction} slot's power name from the one leaf; F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { rosterFramer } from './npc/rosterFrame.js'; import { foodStoreWord } from './economy/foodBalance.js'; import { fillAgreement, powerNameWithArticle, powerVerb, withPowerVerb } from '../domain/display/powerSentenceName.js'; import { qualifiedPossessives } from '../data/people/personMention.js'; /* NAMES-3 (item 3 (d)): "{npc}'s" of a qualified name opens its bracket */ // BAR3-PEOPLE-2 (C5844): the {faction} slot's power name from the one leaf; NAMES-1 (CN1, the seventh chair's ruling, vetoable by the owner): with its article, lower-case ("the Royal Authority"), `fillSentenceSlots` capitalising a slot that opens a sentence ("The Royal Authority suspects it."); F11 / CENSUS-1 / CENSUS-4b / GEN-SPEED cure 2 / R2-CODE-A item 1: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -56,24 +57,13 @@ const pickFromArray = r => ctxPick(r);
 // is the one it always described; the name it USED to wear has moved to the function that
 // actually generates the goal, twenty lines down (§759, the misleading-vocabulary risk: "each
 // new consumer that trusts a function name in that file risks wiring the wrong field").
-export const powerBandOfRole = role => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand
-  const HIGH_POWER = [
-    'mayor',
-    'lord',
-    'governor',
-    'bishop',
-    'archmage',
-    'guild_master',
-    'captain',
-    'commander',
-    'crime lord',
-  ];
-  const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
-  const r = String(role || '').toLowerCase();
-  return HIGH_POWER.some(kw => r.includes(kw)) ? 'high' : MID_POWER.some(kw => r.includes(kw)) ? 'moderate' : 'low';
+// powerBandOfRole lives in npc/powerBand.js (UK-CURE); re-exported here so people/castPowers.js and every test importing it from this module are untouched
+export { powerBandOfRole };
+// one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values; UK (a): the band read under the card's born config
+const generateNPCPowerLevel = (role, config) => {
+  const band = POWER_BANDS[powerBandOfRole(role, config)];
+  return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) };
 };
-// one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values
-const generateNPCPowerLevel = role => { const band = POWER_BANDS[powerBandOfRole(role)]; return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) }; };
 
 // generateSingleNPC
 // `hookRegistry` — the settlement-scoped anti-repetition registry, created once
@@ -123,20 +113,20 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // every other face — and a titled face whose three are all held — draws by its role and category, as before.
   const titled = titleLinesFor(options.title);
   const titleSecrets = titled ? titled.secrets.filter((row) => !hookRegistry?.secrets?.has(String(row.secret).trim())) : [];
-  const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret(
+  const secretSource = {}; const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret( // S9 (PAGE-6): one line, so no cited line moves
     config,
     institutions,
     worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
     hookRegistry?.secrets, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows)
-  );
+  secretSource); // S9 (PAGE-6): the pool the row was taken from, noted beside the card (factionLeaderSecret.js :: noteSecretSource)
   if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
   // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
   // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
   // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
   // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
   const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, { worldLaw, institutions, tier })];
-  const powerLevel = generateNPCPowerLevel(role);
-  return {
+  const powerLevel = generateNPCPowerLevel(role, config); // UK (a): the born config (every caller spreads it into its npcConfig) carries the seat law; on a regen road, the record's (UK-LEGACY, `seatLaw.js :: withRecordSeatLaw`)
+  const card = { // S9 (PAGE-6): the card's secret pool noted below for the town's post-pass (factionLeaderSecret.js :: settleMisfitSecrets); never stored
     id: null,
     name: fullName,
     gender,
@@ -162,7 +152,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     influence: powerLevel.level,
     power: powerLevel.power,
     presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw), religion), // ITEM 15: the title's own first impression; STYLE-2 SW-7 (B10(b)): else the card's own traits key "How they deal"
-  };
+  }; noteSecretSource(card, secretSource); return card;
 };
 
 // computeNPCWeights
@@ -617,10 +607,10 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []).filter(e => !e.direction || e.direction === (summary.migrationDirection || 'arrivals')), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection — MERGE-R2: read before the draw, so the held key reads the text the figure would carry
-    const secretKeyOf = (e) => fillSentenceSlots(e.secret, { faction: powerSentenceName(topFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }); const effect = drawDeclared(stressEffects, { draw: () => pickRandom2(stressEffects.filter((e) => !Object.hasOwn(e, 'twinOf') && !(held && held.size > 0 && held.has(String(secretKeyOf(e) ?? '').trim())))), facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held: new Set([...(held || []), '\u0000holder']), heldKey: (e) => (crisisHolderAdmits(e.holder, npc) ? secretKeyOf(e) : '\u0000holder') }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry // BAR8 K-PEOPLE (14f, BR14): the row's holder test refuses it as a held row is refused; the draw is the base's own (the same domain, the same roll)
+    const secretKeyOf = (e) => qualifiedPossessives(withPowerVerb(fillSentenceSlots(e.secret, { faction: powerNameWithArticle(topFaction), has: powerVerb(topFaction, 'has', 'have'), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), topFaction, 'considers', 'consider'), [otherNpc]); const effect = drawDeclared(stressEffects, { draw: () => pickRandom2(stressEffects.filter((e) => !Object.hasOwn(e, 'twinOf') && !(held && held.size > 0 && held.has(String(secretKeyOf(e) ?? '').trim())))), facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type, ...(type === 'mass_migration' && summary.migrationDirection ? { direction: summary.migrationDirection } : {}) })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', held: new Set([...(held || []), '\u0000holder']), heldKey: (e) => (crisisHolderAdmits(e.holder, npc) ? secretKeyOf(e) : '\u0000holder') }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record // MERGE-R2: REVIEW-INTAKE-4's held refusal; W0's direction on the partial record's migration entry // BAR8 K-PEOPLE (14f, BR14): the row's holder test refuses it as a held row is refused; the draw is the base's own (the same domain, the same roll)
     if (effect) return {
-      what: fillSentenceSlots(effect.secret, { faction: powerSentenceName(topFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
-      stakes: fillSentenceSlots(effect.stakes, { faction: powerSentenceName(govFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }),
+      what: qualifiedPossessives(withPowerVerb(fillSentenceSlots(effect.secret, { faction: powerNameWithArticle(topFaction), has: powerVerb(topFaction, 'has', 'have'), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), topFaction, 'considers', 'consider'), [otherNpc]), // NAMES-2 (item 5): the verb takes the power's number ("the Merchant Guilds consider"), here and in the held key alike // F11: a fallback that opens a sentence is sentence-cased; R2-CODE-A item 1: {food} is the town's own (foodBalance.js :: foodStoreWord)
+      stakes: qualifiedPossessives(fillSentenceSlots(fillAgreement(effect.stakes, { power: govFaction }), { faction: powerNameWithArticle(govFaction), commodity, food: foodStoreWord(summary.foodRecord), npc: otherNpc?.name }, { npc: 'someone' }), [otherNpc]), // NAMES-3 (CV7): the verb after {faction} by the power's own number (a secret's word slot `{has}` above, from the same reader)
     };
   }
 
@@ -719,7 +709,7 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = !crimeHasThievesGuild(crimeSignal, crimeFaction?.faction); /* the crime home's reader (TAIL-CLOSE-SRC-4) */ const underworld = 'the local underworld'; const noMarket = !hasMarketInstitution(institutions); /** @param {unknown} text @returns {unknown} */ const withoutMarketWords = (text) => (typeof text !== 'string' ? text : text.replace("the very merchants they're supposed to serve", "the very households they're supposed to serve").replace('the merchants have been keeping records', 'the households have been keeping records')); // R2-CODE-A-7 (step 1 item 4; the chair's ruling: a secret names merchants, a market or a guild only where the roster holds them): a town with no market hears the protection scheme of its households, each rewrite the whole phrase as the pool spells it; draw-free; one line, as the ceiling requires. "goes to market" is the register's ruled figure (presumedThings row: to sale), not rewritten // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
+  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = !crimeHasThievesGuild(crimeSignal, crimeFaction?.faction); /* the crime home's reader (TAIL-CLOSE-SRC-4) */ const underworld = 'the local underworld'; const noMarket = !hasMarketInstitution(institutions); // R2-CODE-A-7 (step 1 item 4; the chair's ruling: a secret names merchants, a market or a guild only where the roster holds them): a town with no market hears the protection scheme of its households, each rewrite the whole phrase as the pool spells it; draw-free; one line, as the ceiling requires. "goes to market" is the register's ruled figure (presumedThings row: to sale), not rewritten // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||

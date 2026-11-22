@@ -16,7 +16,7 @@ import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext
 import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
-import { dealGoals } from './people/goals.js';
+import { dealGoals, refuseWantsBesideSecrets } from './people/goals.js'; // GOALS-2: the want refused beside the secret, a post-pass (twice)
 import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { generateConflicts } from './powerGenerator.js';
 import { carryBornQuarrels } from './power/conflicts.js';
@@ -48,6 +48,7 @@ import {
   livingContentRosterFor,
 } from '../domain/content/livingContentSeam.js';
 import { createGenerationContext } from './generationContext.js';
+import { withRecordSeatLaw } from '../domain/seat/seatLaw.js'; // UK-LEGACY: a regen pass hands down the RECORD's seat law, never the handed one
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
@@ -506,7 +507,7 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
  * the roster this seed has always produced.
  *
  * @param {Object} settlement
- * @param {Object} config
+ * @param {Object} handedConfig  the config the caller holds; its seat key is replaced by the record's (`seatLaw.js :: withRecordSeatLaw`)
  * @param {{ seed?: string, mode?: string, locks?: Record<string, unknown>|null }} [options]
  *   `mode` selects the preservation policy (nudge / rebalance / reforge); it
  *   defaults to 'rebalance', which keeps user canon and locked entities.
@@ -514,7 +515,10 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
  *   names survive on top of whatever the mode already carries. Absent or empty ⇒
  *   the dormant path, byte-identical to a call that never passed it.
  */
-export function regenNPCsPipeline(settlement, config, options = {}) {
+export function regenNPCsPipeline(settlement, handedConfig, options = {}) {
+  // UK-LEGACY (the chair's rule): the seat law is read OFF THE RECORD, never off the config handed (for a save with no
+  // `config` the store hands the FORM config, which holds whatever world was loaded last); every other key is the handed one.
+  const config = withRecordSeatLaw(handedConfig, settlement);
   const seed = options.seed || generateSeed();
   // Save/restore: a regen called from inside an outer seeded run must restore
   // the outer RNG, not clear it to null (setActiveRng returns the prior RNG).
@@ -604,7 +608,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
     // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
     // SECRETS-1 (2026-11-17, ruling RS1): the very rare secrets beside the goals, on this regen's seed (no draw); a keeper keeps theirs
-    const goaledRoster = dealRareSecrets({ ...settlement, config, conflicts }, dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) }), finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext });
+    // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
+    // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
+    const dealtGoals = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
+    const goaledRoster = refuseWantsBesideSecrets({ ...settlement, config, conflicts }, dealRareSecrets({ ...settlement, config, conflicts }, dealtGoals, finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext }), finalRelationships, { keep: new Set(preserved.map((p) => String(p.id))), receiptsOf: dealtGoals });
     // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
     // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
     // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
@@ -684,11 +691,14 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
  * identity to be carried by (historyPreservation.js, deferral A).
  *
  * @param {Object} settlement
- * @param {Object} config
+ * @param {Object} handedConfig  the config the caller holds; its seat key is replaced by the record's (`seatLaw.js :: withRecordSeatLaw`)
  * @param {{ seed?: string }} [options]
  * @returns {{ history: Object, _regenSeed: string }}
  */
-export function regenHistoryPipeline(settlement, config, options = {}) {
+export function regenHistoryPipeline(settlement, handedConfig, options = {}) {
+  // UK-LEGACY (the chair's rule): the seat law is read OFF THE RECORD, never off the config handed (for a save with no
+  // `config` the store hands the FORM config, which holds whatever world was loaded last); every other key is the handed one.
+  const config = withRecordSeatLaw(handedConfig, settlement);
   const seed = options.seed || generateSeed();
   // Save/restore: same re-entrancy contract as regenNPCsPipeline.
   const prevRng = setActiveRng(createPRNG(seed));

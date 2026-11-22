@@ -48,7 +48,7 @@ describe('TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable
       expect(row.direction).not.toBe('stable');
       expect(row.direction).toBe('escalating');
       expect(row.narrative).toContain(`Even so, the two are now at odds over ${quarrel.issue.toLowerCase()}.`);
-      expect(row.narrative).toMatch(/gives the orders and The Guard carries them out/); // KEEP: the bargain stands
+      expect(row.narrative).toMatch(/gives the orders and the Guard carries them out/); // KEEP: the bargain stands // NAMES-1 (CN1): the article
     });
   }
   it('KEEP: every other row of those towns is kept as drawn (no twin where the pair is not at HIGH)', () => {

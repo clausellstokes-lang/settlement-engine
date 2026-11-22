@@ -640,7 +640,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     process.stdout.write(`\n[A7] seat pairs that do not commute on the five rows: ${seatPairs.length}\n`);
     expect(constructedPairs, 'THE CONSTRUCTED CONTROL: two names written to one person never commute, so these '
       + 'pairs are really being compared').toBe(PAIR_ROWS.size);
-  }, SLOW);
+  }, 540_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 338.5 s on CI's ratchet shard 5 (run 44494042373, past SLOW's 300 s), 213.9 s alone here; 338.5 s x 1.5 -> 540 s
 
   it('A8 · the constructed events control: a narrative count the history does not carry is restated', () => {
     const row = sample63()[0];

@@ -11,11 +11,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, test } from 'vitest';
-import { isolateFromHostRepo } from '../helpers/fixtureGit.js';
-
-// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
-// hook's GIT_DIR (tests/helpers/fixtureGit.js).
-isolateFromHostRepo();
+import { fixtureGit, withoutRepositoryEnv } from '../helpers/gitFixture.js';
 
 const SURFACE_READERS = {
   'generator master (525)': /golden-master-stage\.mjs/,
@@ -71,12 +67,15 @@ describe('landing-stage.sh measure', () => {
  * commit (control c).
  */
 describe('landing-stage.sh build guard', () => {
-  const run = (cmd, args, cwd) => spawnSync(cmd, args, { cwd, encoding: 'utf8' });
+  // Every fixture git here goes through the shared door (tests/helpers/gitFixture.js): an explicit
+  // cwd on the temp directory and an environment no git hook can reach through. The script under
+  // test spawns git itself, so it is started without git's repository variables as well.
+  const run = (cmd, args, cwd) => spawnSync(cmd, args, { cwd, encoding: 'utf8', env: withoutRepositoryEnv() });
   const script = resolve('scripts/audit/landing-stage.sh');
 
   function repo() {
     const dir = mkdtempSync(join(tmpdir(), 'stage-guard-'));
-    const git = (...args) => { const r = run('git', ['-c', 'user.name=t', '-c', 'user.email=t@t', ...args], dir); if (r.status !== 0) throw new Error(r.stderr); return r.stdout.trim(); };
+    const git = (...args) => fixtureGit(dir, ['-c', 'user.name=t', '-c', 'user.email=t@t', ...args]).trim();
     mkdirSync(join(dir, 'tests/fixtures'), { recursive: true });
     writeFileSync(join(dir, 'tests/fixtures/.golden-freeze-register.json'), JSON.stringify({ surfaces: [
       { surface: 'g', path: 'tests/fixtures/g.json', suite: 'tests/g.test.js' },
@@ -165,7 +164,7 @@ describe('landing-stage.sh build guard', () => {
   test('merge arm, red-first: without the arm a door path moved behind a merge STOPs; named, a one-side-whole merge carries', () => {
     const { dir, step, merge, side } = mergeRepo();
     const before = run('sh', [script, 'guard', step], dir);
-    const after = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: merge } });
+    const after = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...withoutRepositoryEnv(), LANDING_STAGE_MERGE_SIDE: merge } });
     rmSync(dir, { recursive: true, force: true });
     expect(before.status).toBe(1);
     expect(before.stderr).toMatch(/STOP: step \S+ touched door paths/);
@@ -176,7 +175,7 @@ describe('landing-stage.sh build guard', () => {
 
   test('merge arm NEGATIVE: a named merge that hand-edits the door path STOPs, naming the merge', () => {
     const { dir, step, merge } = mergeRepo({ handEdit: true });
-    const r = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: merge } });
+    const r = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...withoutRepositoryEnv(), LANDING_STAGE_MERGE_SIDE: merge } });
     rmSync(dir, { recursive: true, force: true });
     expect(r.status).toBe(1);
     expect(r.stderr).toContain(`tests/fixtures/g.json (the named merge ${merge.slice(0, 9)} hand-edits it: its bytes differ from its second parent's)`);
@@ -226,8 +225,8 @@ describe('landing-stage.sh build guard', () => {
 
   test('merge arm: a name that is not one merge on the first-parent line between the step and the carry STOPs', () => {
     const { dir, step, side } = mergeRepo();
-    const notMerge = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: side } });
-    const pattern = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...process.env, LANDING_STAGE_MERGE_SIDE: 'merge*' } });
+    const notMerge = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...withoutRepositoryEnv(), LANDING_STAGE_MERGE_SIDE: side } });
+    const pattern = spawnSync('sh', [script, 'guard', step], { cwd: dir, encoding: 'utf8', env: { ...withoutRepositoryEnv(), LANDING_STAGE_MERGE_SIDE: 'merge*' } });
     rmSync(dir, { recursive: true, force: true });
     expect(notMerge.status).toBe(1);
     expect(notMerge.stderr).toContain('does not name one merge commit');

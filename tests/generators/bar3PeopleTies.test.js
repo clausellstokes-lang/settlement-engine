@@ -28,17 +28,17 @@ function born(seed) {
 
 /** [town, the line that must not print, what prints in its place] */
 const ROWS = /** @type {Array<[string, string, string]>} */ ([
-  ['r2r-hamlet-10', 'Antonia Nero has asked Macer Varro for a vote against', "Antonia Nero has asked Macer Varro for a favour against Macer Varro's own interests. It is the first payment Antonia Nero has asked for."],
+  ['r2r-hamlet-10', 'Antonia Nero has asked Macer Varro for a vote against', "Antonia Nero has asked Macer Varro for a favour against his own interests. It is the first payment Antonia Nero has asked for."], // NAMES-1 (CN2): the second mention a pronoun,
   ['r2r-village-0', 'Mord Bjarnarson and Dag Magnusson sit on opposite sides of most questions and vote together', 'Mord Bjarnarson and Dag Magnusson take opposite sides of most questions and stand together on the few that touch their shared interests.'],
   ['r2r-hamlet-36', 'Ghalia al-Jabbar voted against Ziyad al-Hassan on a small matter', 'Ghalia al-Jabbar spoke against Ziyad al-Hassan on a small matter last week.'],
   ['r2r-hamlet-14', 'Muluc Balam took Chan Chan in as an apprentice and taught them the trade', 'Muluc Balam took Chan Chan under their wing early and taught them the customs, the clients, and the names worth knowing.'],
-  ['r2r-hamlet-3', 'Guta Müller has fallen on hard times', "Guta Müller has begun to count the debt Sabine Schröder owes among Guta Müller's assets, and has had it written down before witnesses."],
-  ['r2r-thorp-0', 'Cuauhtli Ahau has asked Cosij Chan for a second favour before repaying the first.', 'Cuauhtli Ahau has asked Cosij Chan for a second favour before repaying the first, which would put Cuauhtli Ahau two favours ahead.'],
+  ['r2r-hamlet-3', 'Guta Müller has fallen on hard times', "Guta Müller has begun to count the debt Sabine Schröder owes among the boat-master's assets, and has had it written down before witnesses."], // NAMES-1 (CN2): two women, the role,
+  ['r2r-thorp-0', 'Cuauhtli Ahau has asked Cosij Chan for a second favour before repaying the first.', 'Cuauhtli Ahau has asked Cosij Chan for a second favour before repaying the first, which would put the camp foreman two favours ahead.'], // NAMES-1 (CN2): two men, the role,
   ['r2r-hamlet-12', 'The friendship is warm and public', 'Tornikes Dalassenos and Glykeria Doukas are allies because each has reckoned what the other would cost as an enemy. The friendship is courteous, and it lasts only while that reckoning holds.'],
 ]);
 /** KEEP: [town, a true line that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
-  ['r2r-hamlet-42', "Ai Li has asked Rong Liu for a vote against Rong Liu's own interests."], // the voter is seated
+  ['r2r-hamlet-42', "Ai Li has asked Rong Liu for a vote against the head shepherd's own interests."], // the voter is seated; NAMES-1 (CN2): the role
   ['r2r-hamlet-26', 'Anastasia Borisov and Egor Petrov sit on opposite sides of most questions and vote together'], // one power in common
   ['r2r-hamlet-5', 'Panteleimon Akropolites voted against Dionysios Chomatenos on a small matter last week.'], // one power in common
   ['r2r-town-14', 'Hassan al-Basri took Badr ibn Khaldun in as an apprentice and taught them the trade'], // the pair shares a trade

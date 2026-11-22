@@ -46,7 +46,7 @@ describe('the military government line reads the standing forces', () => {
     const rel = relOf({ ...NO_FORCE, hasMilitia: true });
     expect(rel.type).toBe('subordinate');
     expect(rel.narrative).not.toContain('soldiers'); // anchored: the next line pins the relationship's whole narrative
-    expect(rel.narrative).toBe('The Guard carries out what Town Council decides.' /* TAIL-POWERS-B: re-keyed by identity (P3) */);
+    expect(rel.narrative).toBe('The Guard carries out what the Town Council decides.' /* TAIL-POWERS-B: re-keyed by identity (P3) */); // NAMES-1 (CN1): the article
   });
 });
 

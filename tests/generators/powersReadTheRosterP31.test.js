@@ -38,14 +38,14 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2s-famine-town-1', DIG, POTS],
   ['r2r-village-43', DIG, POTS],
   // (3) the conflicts hold the merchants and the craft guilds at HIGH
-  ['r2r-town-29', 'Merchant Guilds and Craft Guilds vote together whenever trade is at stake', 'Merchant Guilds and Craft Guilds are at odds over weights and measures used in trade, and fight over who keeps the profit of the trade.'],
-  ['r2r-town-34', 'Merchant Guilds and Craft Guilds vote together whenever trade is at stake', 'Merchant Guilds and Craft Guilds are at odds over who speaks for the place to outsiders'],
+  ['r2r-town-29', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake', 'The Merchant Guilds and the Craft Guilds are at odds over weights and measures used in trade, and fight over who keeps the profit of the trade.'], // NAMES-1 (CN1): the article
+  ['r2r-town-34', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake', 'The Merchant Guilds and the Craft Guilds are at odds over who speaks for the place to outsiders'], // NAMES-1 (CN1): the article
   // (4) not three level: a Significant power over Minor ones; or five level, said so
   ['r2r-city-7', 'Three powers stand almost level here', 'They are always at the table, but cannot set their own terms.'],
   ['r2r-metropolis-39', 'Three powers stand almost level here', 'Five powers stand almost level here, and no one leads'],
   // (5) a HIGH quarrel between the seat and the faith; an occupation
   ['r2r-metropolis-15', 'Each props up the other. Even so', 'long told people that'],
-  ['r2s-occupied-town-2', 'holds the seat and collects the taxes', 'Guild Council holds the seat; Religious Authorities tell people'],
+  ['r2s-occupied-town-2', 'holds the seat and collects the taxes', 'The Guild Council holds the seat; the Religious Authorities tell people'], // NAMES-1 (CN1): the article
   // (6) the thieves' guild in wartime: its own card (CARD_ROWS)
 ]);
 /** (1) and (6) [town, the card, the text its card must NOT carry, the text it carries instead] */
@@ -62,9 +62,9 @@ const CARD_ROWS = /** @type {Array<[string, string, string, string]>} */ ([
 const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-town-9', CLERGY], // a Minor faith far behind the seat (14 to 31)
   ['r2s-politically_fractured-metropolis-1', CLERGY], // The Holy Compact, 9 to the seat's 14
-  ['r2r-village-0', 'Merchant Guilds and Craft Guilds vote together whenever trade is at stake'], // no quarrel on the record
+  ['r2r-village-0', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake'], // no quarrel on the record // NAMES-1 (CN1): the article
   ['r2s-succession_void-metropolis-3', 'Three powers stand almost level here'], // 17, 16, 14: three, all Minor
-  ['r2r-village-7', 'holds the seat and collects the taxes; Religious Authorities tell people'], // no quarrel, no occupation
+  ['r2r-village-7', 'holds the seat and collects the taxes; the Religious Authorities tell people'], // no quarrel, no occupation // NAMES-1 (CN1): the article
   ['r2s-wartime-town-3', WAR_MERCH], // the merchant powers of the same town
 ]);
 /** @type {Record<string, string>} */

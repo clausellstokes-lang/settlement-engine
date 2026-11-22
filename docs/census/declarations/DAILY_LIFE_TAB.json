@@ -374,7 +374,7 @@
   {
    "pool": "localNarrative.food",
    "keyGuarantees": [
-    "local mode buildLocalDailyLifeNarrative; branch on ctx.foodDeficit / foodSurplus (economicViability.metrics.foodBalance), DailyLifeTab.jsx:291-297"
+    "local mode buildLocalDailyLifeNarrative; branch on ctx.foodDeficit / foodSurplus (economicViability.metrics.foodBalance), DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const food)"
    ],
    "poolNeeds": [],
    "poolExcludes": [],
@@ -383,7 +383,7 @@
    "colour": false,
    "ruling": "Opted in: renders under crisis and [deficit>0] asserts adequacy, [else] asserts an ordinary supply — a famine or the hunger family (siege) contradicts them. T lookup on a band: an excluded branch has no line, so twins.",
    "drawKind": "T",
-   "drawSite": "DailyLifeTab.jsx:291",
+   "drawSite": "DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const food)",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.food[deficit>20]",
@@ -464,7 +464,7 @@
   {
    "pool": "localNarrative.order",
    "keyGuarantees": [
-    "branch on ctx.safetyScore (safetyProfile.safetyRatio bands), DailyLifeTab.jsx:299-303"
+    "branch on ctx.safetyScore (safetyProfile.safetyRatio bands), DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const order)"
    ],
    "poolNeeds": [],
    "poolExcludes": [],
@@ -473,7 +473,7 @@
    "colour": false,
    "ruling": "Opted in: [>=70] asserts safety after dark, which threat or unrest contradicts; the safety score is a STOP (no reader) so only the crisis is declared.",
    "drawKind": "T",
-   "drawSite": "DailyLifeTab.jsx:299",
+   "drawSite": "DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const order)",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.order[>=70]",
@@ -524,7 +524,7 @@
   {
    "pool": "localNarrative.anchors",
    "keyGuarantees": [
-    "listText(institutions, fallback): the fallback prints when keyInsts holds NO institution in the eight listed categories (DailyLifeTab.jsx:308-309)"
+    "listText(institutions, fallback): the fallback prints when keyInsts holds NO institution in the eight listed categories (DailyLifeTab.jsx :: buildLocalDailyLifeNarrative, const anchors)"
    ],
    "poolNeeds": [],
    "poolExcludes": [],
@@ -533,7 +533,7 @@
    "colour": false,
    "ruling": "The fallback speaks exactly when the roster lists nothing — the births least likely to hold a market or a watch. Asserts no calm: stays out. Its one line needs both, so it carries a twin. Re-read 2026-11-09 (SW-9b-A): the line the file prints since f3558f539 is that twin, \"the wells, the lanes, and the common ground\", which presumes no market, watch, shrine or workshop; its needs and stops are struck.",
    "drawKind": "T",
-   "drawSite": "DailyLifeTab.jsx:309",
+   "drawSite": "DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const anchors)",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.anchors[fallback]",
@@ -557,7 +557,7 @@
   {
    "pool": "localNarrative.stress",
    "keyGuarantees": [
-    "ctx.stressTypes (settlement.stress[].type only — NOT the full crisis fact; a world-pulse crisis with an empty stress array takes the calm branch), DailyLifeTab.jsx:310-312"
+    "ctx.stressTypes (settlement.stress[].type only — NOT the full crisis fact; a world-pulse crisis with an empty stress array takes the calm branch), DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const stress)"
    ],
    "poolNeeds": [],
    "poolExcludes": [],
@@ -566,7 +566,7 @@
    "colour": false,
    "ruling": "Opted in: the [none] branch asserts routine normality; it is calm by construction, but its key reads s.stress alone, so it can print under a crisis the crisis home holds (pulse stressors).",
    "drawKind": "T",
-   "drawSite": "DailyLifeTab.jsx:310",
+   "drawSite": "DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (const stress)",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.stress[active]",
@@ -593,7 +593,7 @@
   {
    "pool": "localNarrative.paragraphs",
    "keyGuarantees": [
-    "local mode only (isConfigured false): the four joined paragraphs, DailyLifeTab.jsx:314-319; slots are declared in their own pools above"
+    "local mode only (isConfigured false): the four joined paragraphs, DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (its return); slots are declared in their own pools above"
    ],
    "poolNeeds": [],
    "poolExcludes": [],
@@ -602,7 +602,7 @@
    "colour": false,
    "ruling": "Opted in: [2][stability>=45] asserts settled authority, which a succession-family crisis contradicts. Paragraph [1] names priests and guards on every page.",
    "drawKind": "A",
-   "drawSite": "DailyLifeTab.jsx:314",
+   "drawSite": "DailyLifeTab.jsx :: buildLocalDailyLifeNarrative (its return)",
    "lines": [
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[0]",

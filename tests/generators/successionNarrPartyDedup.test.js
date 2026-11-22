@@ -60,7 +60,7 @@ describe('genSuccessionNarr party-pair dedup', () => {
       topFaction: 'Merchant Houses',
     });
     const line = findLine(narratives, 'who goes without');
-    expect(line).toContain('Corrupt Council and Merchant Houses quarrel over who goes without');
+    expect(line).toContain('the Corrupt Council and the Merchant Houses quarrel over who goes without'); // NAMES-1 (CN1): the article
   });
 
   test('dedup compares resolved names case-insensitively', () => {

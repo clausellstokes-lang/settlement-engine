@@ -139,7 +139,7 @@ describe('store lane — the converged cascade', () => {
     expect(s.powerStructure.government).toBe(NEW);
     expect(s.powerStructure.factionRelationships[0].pair).toEqual([NEW, 'Militia']);
     expect(s.powerStructure.factionRelationships[0].narrative).toBe(`${NEW} commands, Militia executes.`);
-    expect(s.powerStructure.recentConflict).toBe(`The ${NEW} broke the grain cartel.`);
+    expect(s.powerStructure.recentConflict).toBe(`${NEW} broke the grain cartel.`); // NAMES-1 (CN1): "The Amber Concord broke", never "The The Amber Concord"
     expect(s.npcs[0].memberships[0].power).toBe(NEW);
     expect(s.institutions[0].factionSource).toBe(NEW);
     expect(s.interSettlementRelationships[0].factionName).toBe(NEW);

@@ -15,7 +15,7 @@
  * proven without one — the plan, the argv, the shapes, the comparisons, and the door.
  */
 
-import { execFileSync, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -41,13 +41,9 @@ import { buildRealmScalePlan, soakArgsFor } from '../../scripts/audit/realm-scal
 // here and a shape the observer writes cannot mean two different things.
 import { MOTION_FLOOR_01 } from '../../scripts/audit/soakInvariants.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { fixtureEnv, isolateFromHostRepo } from '../helpers/fixtureGit.js';
+import { fixtureGit, withoutRepositoryEnv } from '../helpers/gitFixture.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-
-// git runs in throwaway folders here, and so do the library and CLIs under test: none may inherit the
-// hook's GIT_DIR (tests/helpers/fixtureGit.js).
-isolateFromHostRepo();
 const CLI = join(ROOT, 'scripts/soak/soak-register.mjs');
 const REGISTER = join(ROOT, 'tests/soak-harness/.soak-register.json');
 const WORKFLOW = join(ROOT, '.github/workflows/soak-research.yml');
@@ -198,7 +194,7 @@ const measure = (receipt) => deriveRegisterFigures(annotate(receipt));
 /** A temporary git repository carrying its own register, so the door meets a real tree. */
 function gitFixture(register) {
   const dir = mkdtempSync(join(tmpdir(), 'soak-register-'));
-  const run = (...args) => execFileSync('git', args, { cwd: dir, encoding: 'utf8', env: fixtureEnv() });
+  const run = (...args) => fixtureGit(dir, args);
   run('init', '-q');
   run('config', 'user.email', 'fixture@example.invalid');
   run('config', 'user.name', 'Fixture');
@@ -217,7 +213,7 @@ function runCliTolerant(args, env = {}) {
   const result = spawnSync(process.execPath, [CLI, ...args], {
     encoding: 'utf8',
     cwd: ROOT,
-    env: { ...process.env, ...env },
+    env: { ...withoutRepositoryEnv(), ...env },
   });
   return {
     status: result.status,

@@ -1,0 +1,19 @@
+{
+ "checkout": "<checkout>",
+ "tree": "<scratch>/late",
+ "prefix": "hxd",
+ "orderCheckout": 22,
+ "orderTree": 23,
+ "law1": {
+  "births": 600,
+  "differ": 0,
+  "seeds": []
+ },
+ "law2": {
+  "births": 600,
+  "unmoved": 536,
+  "unmovedDiffer": 0,
+  "moved": 64,
+  "seeds": []
+ }
+}

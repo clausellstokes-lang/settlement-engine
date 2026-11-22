@@ -1,0 +1,1461 @@
+{
+ "born": {
+  "label": "born legitimacy (as birthConfig mints it)",
+  "meta": {
+   "A": {
+    "instrument": "docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs",
+    "tree": "/home/user/settlement-engine",
+    "arm": "A",
+    "patched": false,
+    "regions": 12,
+    "towns": 14,
+    "seeds": 2,
+    "ticks": 52,
+    "legit": "born",
+    "rules": {
+     "stressorsEnabled": true,
+     "factionCompetitionEnabled": true,
+     "majorChangesRequireProposal": false
+    },
+    "draftSha256": "dd27bb339c6ee0a639adca7b0085cc87cb39dbc07e52a8d99b818b4d6d55c31c",
+    "coupLeafSha256": "5f1ecbc2feb66e11929c466ee222746e90fd9faa0f47a52f82fc855a4d3b9b3a",
+    "birthErrors": [],
+    "bornTowns": 168,
+    "birthFingerprint": "3f88fa342c40c7e3",
+    "birthLegitDecades": {
+     "0": 10,
+     "10": 9,
+     "20": 14,
+     "30": 28,
+     "40": 31,
+     "50": 37,
+     "60": 15,
+     "70": 24
+    },
+    "seconds": 280,
+    "cs3": null
+   },
+   "B": {
+    "instrument": "docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs",
+    "tree": "/tmp/claude-0/-home-user-settlement-engine/f7cf96af-6606-528f-9c94-4191004961ae/scratchpad/simB",
+    "arm": "B",
+    "patched": true,
+    "regions": 12,
+    "towns": 14,
+    "seeds": 2,
+    "ticks": 52,
+    "legit": "born",
+    "rules": {
+     "stressorsEnabled": true,
+     "factionCompetitionEnabled": true,
+     "majorChangesRequireProposal": false
+    },
+    "draftSha256": "7f16859b9f7ebae1962f206b84a633b0f2280427b75f710968bbff4c4478f501",
+    "coupLeafSha256": "7157d5e471765b6f790715dbe472f51eb4b667fabba409293e9d26468305f3d2",
+    "birthErrors": [],
+    "bornTowns": 168,
+    "birthFingerprint": "3f88fa342c40c7e3",
+    "birthLegitDecades": {
+     "0": 10,
+     "10": 9,
+     "20": 14,
+     "30": 28,
+     "40": 31,
+     "50": 37,
+     "60": 15,
+     "70": 24
+    },
+    "seconds": 281,
+    "cs3": {
+     "calls": 31621,
+     "excluded": 19240,
+     "throws": 0,
+     "lastThrow": null
+    }
+   }
+  },
+  "determinism": {
+   "A1fp": "3927b6991dbb2358",
+   "A2fp": "3927b6991dbb2358",
+   "fileIdenticalButSeconds": true
+  },
+  "sameTowns": true,
+  "rows": [
+   [
+    "town-ticks run (towns x worlds x ticks)",
+    17472,
+    17472
+   ],
+   [
+    "coup_detat births ROLLED (candidates)",
+    120,
+    130
+   ],
+   [
+    "coup_detat stressors BORN (landed)",
+    6,
+    6
+   ],
+   [
+    "verdicts reached",
+    6,
+    6
+   ],
+   [
+    "seats that FELL",
+    4,
+    4
+   ],
+   [
+    "seats that HELD",
+    2,
+    2
+   ],
+   [
+    "plots collapsed for want of challengers",
+    0,
+    0
+   ],
+   [
+    "falls with the incumbent ungated",
+    0,
+    0
+   ],
+   [
+    "winner was the seat's own holder",
+    4,
+    0
+   ],
+   [
+    "verdicts where the holder sat among the challengers",
+    4,
+    0
+   ],
+   [
+    "governing-row changes, every cause",
+    421,
+    421
+   ],
+   [
+    "town-ticks the gate's politics were open (legit<45, no occupation, a challenger)",
+    6464,
+    6101
+   ],
+   [
+    "town-ticks a holder stood / the holder contended",
+    "11273 / 9853",
+    "11273 / 0"
+   ],
+   [
+    "proposals ruled by full auto-resolve",
+    6184,
+    6185
+   ],
+   [
+    "throws",
+    0,
+    0
+   ]
+  ],
+  "winners": {
+   "A": {
+    "contestKind": {
+     "merchant": 2,
+     "noble": 1,
+     "religious": 1
+    },
+    "factionArchetype": {
+     "merchant": 2,
+     "noble": 1,
+     "religious": 1
+    },
+    "holderRule": {
+     "R2": 2,
+     "R4": 2,
+     "R1": 1,
+     "R3": 1
+    }
+   },
+   "B": {
+    "contestKind": {
+     "government": 2,
+     "religious": 2
+    },
+    "factionArchetype": {
+     "government": 2,
+     "religious": 2
+    },
+    "holderRule": {
+     "R2": 2,
+     "R4": 2,
+     "R1": 1,
+     "R3": 1
+    }
+   }
+  },
+  "gate": {
+   "politicsOpenAonly": [
+    "sim-cs3-world-r1-s0/r1t02",
+    "sim-cs3-world-r1-s1/r1t02",
+    "sim-cs3-world-r2-s0/r2t13",
+    "sim-cs3-world-r2-s1/r2t02",
+    "sim-cs3-world-r2-s1/r2t13",
+    "sim-cs3-world-r4-s0/r4t02",
+    "sim-cs3-world-r4-s1/r4t02",
+    "sim-cs3-world-r6-s0/r6t02",
+    "sim-cs3-world-r6-s1/r6t02"
+   ],
+   "politicsOpenBonly": [],
+   "politicsOpenA": 229,
+   "politicsOpenB": 220,
+   "candidateAonly": [],
+   "candidateBonly": [],
+   "candidateA": 35,
+   "candidateB": 35,
+   "bornAonly": [],
+   "bornBonly": []
+  },
+  "cs3": {
+   "calls": 31621,
+   "excluded": 19240,
+   "throws": 0,
+   "lastThrow": null
+  },
+  "falls": {
+   "A": [
+    {
+     "town": "sim-cs3-world-r1-s1/r1t13",
+     "tick": 3,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Religious Authorities",
+     "holderRule": "R1",
+     "incumbent": "Church Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Elected Reeve"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t07",
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Quarantine Council",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s1/r10t05",
+     "tick": 2,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t07",
+     "tick": 5,
+     "winner": "Landed Gentry",
+     "contestKind": "noble",
+     "factionArchetype": "noble",
+     "holder": "Landed Gentry",
+     "holderRule": "R3",
+     "incumbent": "Feudal Appointee",
+     "gated": true,
+     "challengers": [
+      "Landed Gentry",
+      "Religious Authorities"
+     ]
+    }
+   ],
+   "B": [
+    {
+     "town": "sim-cs3-world-r1-s1/r1t13",
+     "tick": 3,
+     "winner": "Elected Reeve",
+     "contestKind": "government",
+     "factionArchetype": "government",
+     "holder": "Religious Authorities",
+     "holderRule": "R1",
+     "incumbent": "Church Council",
+     "gated": true,
+     "challengers": [
+      "Elected Reeve"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t07",
+     "tick": 4,
+     "winner": "Quarantine Council",
+     "contestKind": "government",
+     "factionArchetype": "government",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Quarantine Council"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s1/r10t05",
+     "tick": 2,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t07",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Landed Gentry",
+     "holderRule": "R3",
+     "incumbent": "Feudal Appointee",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    }
+   ]
+  }
+ },
+ "low": {
+  "label": "hand-lowered: every score capped at 25 at tick 0",
+  "meta": {
+   "A": {
+    "instrument": "docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs",
+    "tree": "/home/user/settlement-engine",
+    "arm": "A",
+    "patched": false,
+    "regions": 12,
+    "towns": 14,
+    "seeds": 2,
+    "ticks": 52,
+    "legit": "25",
+    "rules": {
+     "stressorsEnabled": true,
+     "factionCompetitionEnabled": true,
+     "majorChangesRequireProposal": false
+    },
+    "draftSha256": "dd27bb339c6ee0a639adca7b0085cc87cb39dbc07e52a8d99b818b4d6d55c31c",
+    "coupLeafSha256": "5f1ecbc2feb66e11929c466ee222746e90fd9faa0f47a52f82fc855a4d3b9b3a",
+    "birthErrors": [],
+    "bornTowns": 168,
+    "birthFingerprint": "3f88fa342c40c7e3",
+    "birthLegitDecades": {
+     "0": 10,
+     "10": 9,
+     "20": 14,
+     "30": 28,
+     "40": 31,
+     "50": 37,
+     "60": 15,
+     "70": 24
+    },
+    "seconds": 396,
+    "cs3": null
+   },
+   "B": {
+    "instrument": "docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs",
+    "tree": "/tmp/claude-0/-home-user-settlement-engine/f7cf96af-6606-528f-9c94-4191004961ae/scratchpad/simB",
+    "arm": "B",
+    "patched": true,
+    "regions": 12,
+    "towns": 14,
+    "seeds": 2,
+    "ticks": 52,
+    "legit": "25",
+    "rules": {
+     "stressorsEnabled": true,
+     "factionCompetitionEnabled": true,
+     "majorChangesRequireProposal": false
+    },
+    "draftSha256": "7f16859b9f7ebae1962f206b84a633b0f2280427b75f710968bbff4c4478f501",
+    "coupLeafSha256": "7157d5e471765b6f790715dbe472f51eb4b667fabba409293e9d26468305f3d2",
+    "birthErrors": [],
+    "bornTowns": 168,
+    "birthFingerprint": "3f88fa342c40c7e3",
+    "birthLegitDecades": {
+     "0": 10,
+     "10": 9,
+     "20": 14,
+     "30": 28,
+     "40": 31,
+     "50": 37,
+     "60": 15,
+     "70": 24
+    },
+    "seconds": 395,
+    "cs3": {
+     "calls": 42029,
+     "excluded": 28369,
+     "throws": 0,
+     "lastThrow": null
+    }
+   }
+  },
+  "determinism": {
+   "A1fp": "44b030cb255015ce",
+   "A2fp": "44b030cb255015ce",
+   "fileIdenticalButSeconds": true
+  },
+  "sameTowns": true,
+  "rows": [
+   [
+    "town-ticks run (towns x worlds x ticks)",
+    17472,
+    17472
+   ],
+   [
+    "coup_detat births ROLLED (candidates)",
+    2430,
+    2317
+   ],
+   [
+    "coup_detat stressors BORN (landed)",
+    37,
+    36
+   ],
+   [
+    "verdicts reached",
+    37,
+    36
+   ],
+   [
+    "seats that FELL",
+    29,
+    27
+   ],
+   [
+    "seats that HELD",
+    8,
+    9
+   ],
+   [
+    "plots collapsed for want of challengers",
+    0,
+    0
+   ],
+   [
+    "falls with the incumbent ungated",
+    3,
+    2
+   ],
+   [
+    "winner was the seat's own holder",
+    9,
+    0
+   ],
+   [
+    "verdicts where the holder sat among the challengers",
+    25,
+    0
+   ],
+   [
+    "governing-row changes, every cause",
+    450,
+    438
+   ],
+   [
+    "town-ticks the gate's politics were open (legit<45, no occupation, a challenger)",
+    11125,
+    10712
+   ],
+   [
+    "town-ticks a holder stood / the holder contended",
+    "11738 / 10159",
+    "11712 / 0"
+   ],
+   [
+    "proposals ruled by full auto-resolve",
+    6233,
+    6233
+   ],
+   [
+    "throws",
+    0,
+    0
+   ]
+  ],
+  "winners": {
+   "A": {
+    "contestKind": {
+     "merchant": 10,
+     "military": 10,
+     "religious": 7,
+     "government": 1,
+     "noble": 1
+    },
+    "factionArchetype": {
+     "merchant": 10,
+     "military": 10,
+     "religious": 7,
+     "government": 1,
+     "noble": 1
+    },
+    "holderRule": {
+     "R2": 21,
+     "R4": 10,
+     "R3": 5,
+     "R1": 1
+    }
+   },
+   "B": {
+    "contestKind": {
+     "military": 12,
+     "religious": 11,
+     "craft": 2,
+     "merchant": 2
+    },
+    "factionArchetype": {
+     "military": 12,
+     "religious": 11,
+     "merchant": 4
+    },
+    "holderRule": {
+     "R2": 18,
+     "R4": 10,
+     "R3": 6,
+     "R1": 2
+    }
+   }
+  },
+  "gate": {
+   "politicsOpenAonly": [
+    "sim-cs3-world-r1-s0/r1t02",
+    "sim-cs3-world-r1-s1/r1t02",
+    "sim-cs3-world-r2-s0/r2t02",
+    "sim-cs3-world-r2-s0/r2t13",
+    "sim-cs3-world-r2-s1/r2t02",
+    "sim-cs3-world-r2-s1/r2t13",
+    "sim-cs3-world-r4-s0/r4t02",
+    "sim-cs3-world-r4-s1/r4t02",
+    "sim-cs3-world-r6-s0/r6t02",
+    "sim-cs3-world-r6-s1/r6t02"
+   ],
+   "politicsOpenBonly": [],
+   "politicsOpenA": 277,
+   "politicsOpenB": 267,
+   "candidateAonly": [
+    "sim-cs3-world-r1-s0/r1t02",
+    "sim-cs3-world-r1-s1/r1t02",
+    "sim-cs3-world-r2-s0/r2t02",
+    "sim-cs3-world-r2-s0/r2t13",
+    "sim-cs3-world-r2-s1/r2t02",
+    "sim-cs3-world-r2-s1/r2t13",
+    "sim-cs3-world-r6-s0/r6t02",
+    "sim-cs3-world-r6-s1/r6t02"
+   ],
+   "candidateBonly": [],
+   "candidateA": 228,
+   "candidateB": 220,
+   "bornAonly": [
+    "sim-cs3-world-r1-s0/r1t02",
+    "sim-cs3-world-r2-s0/r2t02",
+    "sim-cs3-world-r2-s1/r2t02"
+   ],
+   "bornBonly": [
+    "sim-cs3-world-r1-s0/r1t03",
+    "sim-cs3-world-r2-s1/r2t04"
+   ]
+  },
+  "cs3": {
+   "calls": 42029,
+   "excluded": 28369,
+   "throws": 0,
+   "lastThrow": null
+  },
+  "falls": {
+   "A": [
+    {
+     "town": "sim-cs3-world-r1-s0/r1t02",
+     "tick": 3,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r1-s0/r1t07",
+     "tick": 10,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r1-s1/r1t08",
+     "tick": 3,
+     "winner": "Noble Families",
+     "contestKind": "noble",
+     "factionArchetype": "noble",
+     "holder": "Noble Families",
+     "holderRule": "R2",
+     "incumbent": "Noble Governorship",
+     "gated": true,
+     "challengers": [
+      "Noble Families",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r1-s1/r1t13",
+     "tick": 3,
+     "winner": "Elected Reeve",
+     "contestKind": "government",
+     "factionArchetype": "government",
+     "holder": "Religious Authorities",
+     "holderRule": "R1",
+     "incumbent": "Church Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Elected Reeve"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t01",
+     "tick": 1,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Free Elder Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t02",
+     "tick": 3,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t03",
+     "tick": 8,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t08",
+     "tick": 2,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t10",
+     "tick": 2,
+     "winner": "War Council",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t03",
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t07",
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t10",
+     "tick": 2,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r3-s0/r3t11",
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R2",
+     "incumbent": "Ducal Governorship",
+     "gated": true,
+     "challengers": [
+      "Noble Houses",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t05",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t08",
+     "tick": 6,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s0/r7t05",
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s0/r7t10",
+     "tick": 8,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s1/r7t05",
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t02",
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t07",
+     "tick": 5,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Landed Gentry",
+     "holderRule": "R2",
+     "incumbent": "Feudal Appointee",
+     "gated": true,
+     "challengers": [
+      "Landed Gentry",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t08",
+     "tick": 5,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t09",
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds",
+      "Military/Guard",
+      "The Merchant Bloc"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s1/r8t04",
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": false,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s1/r8t06",
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Craft Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s0/r10t04",
+     "tick": 10,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s0/r10t11",
+     "tick": 12,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R3",
+     "incumbent": "Royal Authority",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Noble Houses"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s1/r10t02",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t02",
+     "tick": 9,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t05",
+     "tick": 3,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    }
+   ],
+   "B": [
+    {
+     "town": "sim-cs3-world-r1-s0/r1t07",
+     "tick": 10,
+     "winner": "Craft Guilds",
+     "contestKind": "craft",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard",
+      "Craft Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r1-s1/r1t08",
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Families",
+     "holderRule": "R2",
+     "incumbent": "Noble Governorship",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t01",
+     "tick": 1,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Free Elder Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t03",
+     "tick": 8,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t08",
+     "tick": 2,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "The Martial Alliance"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s0/r2t10",
+     "tick": 2,
+     "winner": "War Council",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t03",
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t04",
+     "tick": 3,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t07",
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r2-s1/r2t10",
+     "tick": 2,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Merchant Guild Council",
+     "gated": false,
+     "challengers": [
+      "Military/Guard",
+      "War Council",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r3-s0/r3t11",
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R2",
+     "incumbent": "Ducal Governorship",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t05",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r5-s1/r5t08",
+     "tick": 6,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "Arcane Orders"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s0/r7t05",
+     "tick": 4,
+     "winner": "Craft Guilds",
+     "contestKind": "craft",
+     "factionArchetype": "merchant",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "Craft Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s0/r7t10",
+     "tick": 8,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "The Shield Compact"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r7-s1/r7t05",
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "Craft Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t02",
+     "tick": 4,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t07",
+     "tick": 5,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Landed Gentry",
+     "holderRule": "R2",
+     "incumbent": "Feudal Appointee",
+     "gated": true,
+     "challengers": [
+      "Merchant Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t08",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "City Council",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Religious Authorities",
+      "Noble Families"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s0/r8t09",
+     "tick": 4,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Merchant oligarchy",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "The Merchant Bloc",
+      "The Shield Compact"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s1/r8t04",
+     "tick": 3,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard",
+      "Craft Guilds"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r8-s1/r8t06",
+     "tick": 4,
+     "winner": "Merchant Guilds",
+     "contestKind": "merchant",
+     "factionArchetype": "merchant",
+     "holder": "Craft Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Merchant Guilds",
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s0/r10t04",
+     "tick": 10,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Merchant Guilds",
+     "holderRule": "R2",
+     "incumbent": "Town Mayor",
+     "gated": true,
+     "challengers": [
+      "Military/Guard"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s0/r10t11",
+     "tick": 12,
+     "winner": "Military/Guard",
+     "contestKind": "military",
+     "factionArchetype": "military",
+     "holder": "Noble Houses",
+     "holderRule": "R3",
+     "incumbent": "Royal Authority",
+     "gated": true,
+     "challengers": [
+      "Military/Guard",
+      "Merchant Guilds",
+      "The Martial Alliance"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r10-s1/r10t02",
+     "tick": 5,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t02",
+     "tick": 9,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": null,
+     "holderRule": "R4",
+     "incumbent": "Elder Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities"
+     ]
+    },
+    {
+     "town": "sim-cs3-world-r11-s1/r11t05",
+     "tick": 3,
+     "winner": "Religious Authorities",
+     "contestKind": "religious",
+     "factionArchetype": "religious",
+     "holder": "Merchant Guilds",
+     "holderRule": "R3",
+     "incumbent": "Guild Council",
+     "gated": true,
+     "challengers": [
+      "Religious Authorities",
+      "Military/Guard"
+     ]
+    }
+   ]
+  }
+ }
+}

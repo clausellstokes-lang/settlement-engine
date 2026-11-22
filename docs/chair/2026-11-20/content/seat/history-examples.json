@@ -1,0 +1,171 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/history-examples.mjs",
+  "towns": 900,
+  "withCause": 637,
+  "withHolder": 328
+ },
+ "templateTypes": {
+  "infiltration_fear": 461,
+  "population_friction": 408,
+  "occupation_legacy": 406,
+  "religious_tension": 389,
+  "external_threat": 368,
+  "succession_crisis": 359,
+  "magical_controversy": 335,
+  "economic_disparity": 266,
+  "economic": 170,
+  "resource_scarcity": 139,
+  "wild_magic": 125,
+  "heresy_trial": 120,
+  "pilgrimage_surge": 119,
+  "trade_collapse": 107,
+  "great_fire": 99,
+  "plague_years": 80,
+  "outside_debt": 76,
+  "great_flood": 75,
+  "leadership_vacuum": 67,
+  "generational_divide": 63,
+  "popular_uprising": 62,
+  "market_crash": 60,
+  "guild_conflict": 58,
+  "tyranny": 56,
+  "disputed_land": 54,
+  "corruption_scandal": 51,
+  "magical": 3
+ },
+ "examples": [
+  {
+   "seed": "seat-measure-hamlet-39",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": "Manor Household",
+   "rule": "R2",
+   "event": null,
+   "mandateOnly": true,
+   "legitimacy": "Contested",
+   "line": "The Feudal Stewardship's mandate is questioned (Contested); it answers to Manor Household, and not everyone accepts that it should."
+  },
+  {
+   "seed": "seat-measure-hamlet-49",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": "Manor Household",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Tolerated",
+   "line": "Since The Succession Crisis (88 years ago: \"The ruler of the time was aging or ill, and potential heirs jockeyed for position\"), the Feudal Stewardship has answered to Manor Household."
+  },
+  {
+   "seed": "seat-measure-hamlet-53",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": "Manor Household",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Contested",
+   "line": "Since The Succession Crisis (86 years ago: \"The one who led was failing in health, and rivals maneuvered quietly to take that place\"), the Feudal Stewardship has answered to Manor Household."
+  },
+  {
+   "seed": "seat-measure-hamlet-55",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Tolerated",
+   "line": "Since The Succession Crisis (60 years ago: \"The ruler of the time was aging or ill, and potential heirs jockeyed for position\"), the Headman's Authority has answered to Merchant Guilds."
+  },
+  {
+   "seed": "seat-measure-hamlet-56",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Contested",
+   "line": "Since The Succession Crisis (58 years ago: \"The one who led was failing in health, and rivals maneuvered quietly to take that place\"), the Free Elder Council has answered to Merchant Guilds."
+  },
+  {
+   "seed": "seat-measure-hamlet-83",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": "Military Party",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Contested",
+   "line": "Since The Succession Crisis (97 years ago: \"The one who led was failing in health, and rivals maneuvered quietly to take that place\"), the Free Elder Council has answered to Military Party."
+  },
+  {
+   "seed": "seat-measure-hamlet-115",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": "Military Party",
+   "rule": "R2",
+   "event": null,
+   "mandateOnly": true,
+   "legitimacy": "Contested",
+   "line": "The Headman's Authority's mandate is questioned (Contested); it answers to Military Party, and not everyone accepts that it should."
+  },
+  {
+   "seed": "seat-measure-village-3",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": null,
+   "mandateOnly": true,
+   "legitimacy": "Contested",
+   "line": "The Elected Reeve's mandate is questioned (Contested); it answers to Merchant Guilds, and not everyone accepts that it should."
+  },
+  {
+   "seed": "seat-measure-village-4",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Legitimacy Crisis",
+   "line": "Since The Succession Crisis (70 years ago: \"The ruler of the time was aging or ill, and potential heirs jockeyed for position\"), the Elder Council has answered to Merchant Guilds."
+  },
+  {
+   "seed": "seat-measure-village-13",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Contested",
+   "line": "Since The Succession Crisis (167 years ago: \"The ruler of the time was aging or ill, and potential heirs jockeyed for position\"), the Elder Council has answered to Merchant Guilds."
+  },
+  {
+   "seed": "seat-measure-village-19",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "event": null,
+   "mandateOnly": true,
+   "legitimacy": "Legitimacy Crisis",
+   "line": "The Elder Council's mandate is questioned (Legitimacy Crisis); it answers to Merchant Guilds, and not everyone accepts that it should."
+  },
+  {
+   "seed": "seat-measure-village-20",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Military Party",
+   "rule": "R2",
+   "event": "The Succession Crisis [succession_crisis]",
+   "mandateOnly": false,
+   "legitimacy": "Tolerated",
+   "line": "Since The Succession Crisis (35 years ago: \"The ruler of the time was aging or ill, and potential heirs jockeyed for position\"), the Elder Council has answered to Military Party."
+  }
+ ]
+}

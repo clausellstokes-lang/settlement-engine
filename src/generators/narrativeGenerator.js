@@ -38,13 +38,13 @@ import { captureClimateOf } from './power/rulingStructure.js';
 import { withCaptureRelations } from './factionDynamics.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
-import { dealGoals } from './people/goals.js';
+import { dealGoals, refuseWantsBesideSecrets } from './people/goals.js'; // GOALS-2: the want refused beside the secret, a post-pass (twice)
 import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
-import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { pick, pickRandom, pickRandom2, random01 } from './helpers.js'; import { powerNameWithArticle, withPowerVerb } from '../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a coherence note names a power with its article; one line, so no cited line moves
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R2-CODE-A-7: the roster's courthouses (record 422), read from the defence home (R2-CODE-A-10)
 
@@ -70,7 +70,7 @@ import { composeArrivalScene, ROUTE_TO_SCENE } from './narrative/arrivalScene.js
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
-import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; // REVIEW-INTAKE-4, one line so no cited line moves
+import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; import { settleMisfitSecrets, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; /* S9 (PAGE-6) */ // REVIEW-INTAKE-4, one line so no cited line moves
 import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // The history half of the coherence tail. Extracted so the history REROLL runs
 // the same derivations assembly runs instead of shipping generateHistory's raw
@@ -593,7 +593,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'economics',
-      note: `${crimeFaction.faction} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
     });
   }
 
@@ -640,7 +640,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'power',
-      note: `Economic activity flows through religious institutions, but formal governance rests with ${govFaction.faction}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
+      note: `Economic activity flows through religious institutions, but formal governance rests with ${powerNameWithArticle(govFaction.faction)}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
     });
   }
 
@@ -654,7 +654,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'overview',
-      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
     });
   }
 
@@ -858,7 +858,7 @@ export const generatePressureSentence = settlement => {
       const licensed = drawable.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : drawable, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
       const twinOfDrawn = twins.find((t) => /** @type {{twinOf: string}} */ (t).twinOf === textOf(drawn) && admitted(t));
       const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? twinOfDrawn ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
-      return typeof template === 'function' ? template(detail) : template;
+      const said = typeof template === 'function' ? template(detail) : template; return typeof said === 'string' ? withPowerVerb(said, detail.topFaction, 'controls', 'control') : said; // NAMES-2 (item 5): the leading power's verb takes its number ("the Merchant Guilds control one district"), after the draw
     }
   }
 
@@ -973,7 +973,7 @@ export const enrichNpcCoherence = (settlement) => {
   // rank deal → A4 the handlers, draw-free, after the ranks they read. The receipts are left for the
   // assembly step's trace (steps/assembleSettlement.js); a regeneration's are dropped, as before.
   const rng = getActiveRng();
-  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
+  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null); settleMisfitSecrets(landed.all, { carry: hasMarketInstitution(settlement.institutions || []) ? undefined : withoutMarketWords }); // S9 (PAGE-6, S9-POST.md): every card dealt (the births, the overlay, the mints), the misfit secrets settled draw-free before the temperament yield and the ranks read them; a town with no market carries a row as mergeNPCLists does; one line, so no cited line moves
   const dealt = dealAllegiances(settlement, landed.all, rng);
   // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
   // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
@@ -1062,7 +1062,10 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   // key is the DM's cast: its goals are not redrawn.
   const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
   // SECRETS-1 (2026-11-17, the owner's word; ruling RS1): the very rare secrets, dealt beside the goals by the seed's keyed hash, no draw taken
-  const goaledNpcs = npcsHeld ? mergedNpcs : dealRareSecrets(settlement, dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng()), relationships, { seed: seed ?? settlement._seed });
+  // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
+  // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
+  const dealtGoals = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  const goaledNpcs = npcsHeld ? mergedNpcs : refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals });
   const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};

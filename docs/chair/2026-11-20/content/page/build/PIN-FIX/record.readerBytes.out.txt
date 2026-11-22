@@ -1,0 +1,11 @@
+tree: ab01d4cc5 + the cure; the door SAFETY_READER_BYTES_RECORD=1
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12476 after 35 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a73c735c63d168c2c
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  18:02:39
+   Duration  122.34s (transform 5.38s, setup 51ms, import 7.65s, tests 114.04s, environment 500ms)
+

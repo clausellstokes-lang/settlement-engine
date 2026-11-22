@@ -1,0 +1,82 @@
+BARE-ADDRESS ARM (report-only): 1255 bare `:NNN` address(es) read; 33 point past the end of the file their sentence names.
+  tests/lint/proseNumerics.test.js:574  :123 inherits viabilitySummary.js -> src/domain/viabilitySummary.js (69 lines)
+  tests/lint/proseWiringCensus.walker.test.js:1837  :603 inherits src/generators/narrativeText.js -> src/generators/narrativeText.js (572 lines)
+  tests/lint/proseWiringCensus.walker.test.js:1837  :608 inherits src/generators/narrativeText.js -> src/generators/narrativeText.js (572 lines)
+  docs/DESIGN_FP_ARCH_CN.md:123  :262 inherits dossierLazyTabs.js -> src/components/dossier/dossierLazyTabs.js (70 lines)
+  docs/DESIGN_FP_ARCH_CN.md:123  :283 inherits dossierLazyTabs.js -> src/components/dossier/dossierLazyTabs.js (70 lines)
+  docs/DESIGN_FP_ARCH_EC.md:431  :1063-1064 inherits aiGrounding.js -> src/domain/aiGrounding.js (572 lines)
+  docs/DESIGN_FP_ARCH_EC.md:2254  :1099 inherits strategicPosture.js -> src/domain/worldPulse/strategicPosture.js (325 lines)
+  docs/DESIGN_FP_ARCH_WY.md:1437  :574 inherits armyStrength.js -> src/domain/display/armyStrength.js (238 lines)
+  docs/DESIGN_FP_COHERENCE_FOLD.md:420  :213 inherits patronFall.js -> src/domain/worldPulse/patronFall.js (168 lines)
+  docs/DESIGN_FP_COUPLINGS.md:699  :311 inherits armyStrength.js -> src/domain/display/armyStrength.js (238 lines)
+  docs/DESIGN_FP_FAITH.md:1144  :1133 inherits beliefAxisSubjects.js -> src/domain/worldPulse/beliefAxisSubjects.js (463 lines)
+  docs/DESIGN_FP_TRADE.md:234  :872 inherits peaceTermsCatalog.js -> src/domain/worldPulse/peaceTermsCatalog.js (458 lines)
+  docs/implementation/PACKET_MANIFEST.json:34821  :549 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/foreign-policy/ES-5D.md:677  :2031 inherits espionageCareerCreditDormancy.test.js -> tests/property/espionageCareerCreditDormancy.test.js (424 lines)
+  docs/implementation/packets/foreign-policy/ES-5D.md:677  :2563 inherits espionageCareerCreditDormancy.test.js -> tests/property/espionageCareerCreditDormancy.test.js (424 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :604 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :207 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :309 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :382 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :495 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :311 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B2a2.md:168  :128 inherits generatePopulation.js -> src/generators/steps/generatePopulation.js (108 lines)
+  docs/implementation/packets/settlement-editor/EM-B2a2.md:168  :168 inherits generatePopulation.js -> src/generators/steps/generatePopulation.js (108 lines)
+  docs/implementation/packets/settlement-editor/EM-B3e.md:311  :442 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/settlement-editor/EM-B3e.md:311  :549 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/town-cartography/MF-UC0.md:206  :2249 inherits institutionalCatalog.js -> src/data/institutionalCatalog.js (2095 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :128 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :210 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :312 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :420 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :525 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :623 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/preambles/WC-PREAMBLE.md:70  :1360 inherits settlementStrategy.js -> src/domain/worldPulse/settlementStrategy.js (1347 lines)
+
+
+[A3s] the two comparands disagree on 14 rows: resolveConfig|effectiveConfig, resolveResources|effectiveConfig, resolveStress|effectiveConfig, resolveNeighbour|effectiveConfig, assembleInstitutions|institutions, subsumptionPass|institutions, cascadePass|institutions, isolationPass|institutions, isolationPass|effectiveConfig, stressConfirmPass|effectiveConfig, generateEconomy|effectiveConfig, factionCorrelationPass|institutions, coherenceRepairPass|institutions, economyReconcilePass|availableServices
+
+EM-A1 ARM I-2 — the 12 declared pool ids:
+  faction.category
+  institution.class
+  institution.state
+  npc.role
+  npc.status
+  power.holder
+  tier
+  worldFact.culture
+  worldFact.monsterThreat
+  worldFact.resources
+  worldFact.stressors
+  worldFact.terrain
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3710 to be 3709 // Object.is equality
+
+- Expected
++ Received
+
+- 3709
++ 3710
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7553:10
+    7551|     } else {
+    7552|       expect(TEST_FILES.length, 'the estate\'s file count moved — re-m…
+    7553|         .toBe(CENSUS.files);
+       |          ^
+    7554|       expect(parked.length, 'the parked-file count moved from SP-C\'s …
+    7555|         + ' a rule widened or narrowed, or a lane changed a file\'s sh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 219 passed (220)
+      Tests  1 failed | 3270 passed (3271)
+   Start at  15:29:37
+   Duration  1025.19s (transform 22.29s, setup 5.88s, import 882.16s, tests 1117.21s, environment 19ms)
+
+[gate-tail] end:  15:46:43 up  1:16,  0 user,  load average: 5.02, 4.27, 4.43
+[gate-tail] full log: /tmp/gate-tail.21666.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

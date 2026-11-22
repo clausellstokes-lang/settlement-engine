@@ -81,7 +81,7 @@ export const classesOf = (t) => CLASS_IDS.filter((k) => CLASSES[k].test(t));
 const C = ['crisis', 'famine', 'starving', 'failed', 'danger coming', 'food', 'stores', 'war', 'migration', 'source spent', 'threat', 'hunger', 'succession', 'unrest'];
 const GOODS = ['trade at work', 'institution', 'exports', 'imports', 'market', 'guild', 'iron at hand', 'timber at hand', 'timber reaches the saws', 'fish', 'grain', 'game', 'livestock', 'failed', 'enchanting', 'magic supply', 'docks', 'port', 'navigable', 'own plots', 'source spent'];
 export const CLASS_DIMS = Object.freeze({
-  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate', 'exported'],
+  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate', 'exported', 'house', 'entrepot', 'route open'], // PAGE-7 (CAUSES-DATA addendum 4: the chair names `house: caravans` and `entrepot`, outside words: caravans, passing trade)
   plenty: [...C, 'prosperity', 'own plots', 'fish', 'grain', 'game', 'livestock', 'food surplus'],
   work: [...C, 'prosperity'],
   animals: [...C, 'institution', 'livestock'],
@@ -408,6 +408,7 @@ export const NOT_PAGE = Object.freeze([
   ['src/components/HomeHero.jsx', 'the home screen'],
   ['src/components/HowToUse.jsx', 'the how-to screen'],
   ['src/components/ConfigurationPanel.jsx', 'the generation form: configuration chrome'],
+  ['src/data/people/goalSecretRefusals.js', "the goals lane's closed list of venal secrets: a matcher, never printed (its texts copy live pool lines, which this walker reads where they stand); admitted as presumedThings' ARM1_INSTRUMENTS, parity arm '(i) PARITY' of tests/data/goalSecretRefusals.test.js; the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)"],
 ]);
 export const notPage = (rel) => NOT_PAGE.some(([p]) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
 export const ANNEX_DESKS = Object.freeze({ defense: 'DOSSIER_STATE_PROSE_DEFENSE', economy: 'DOSSIER_STATE_PROSE_ECONOMY', general: 'DOSSIER_STATE_PROSE_GENERAL', power: 'DOSSIER_STATE_PROSE_POWER', stressors: 'DOSSIER_STATE_PROSE_STRESSORS', warFaith: 'DOSSIER_STATE_PROSE_WAR_FAITH' });

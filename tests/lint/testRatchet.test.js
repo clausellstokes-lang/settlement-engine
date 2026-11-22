@@ -41,6 +41,7 @@ import {
   DEBT_CLASSES, discoverBuildTestFiles, identityOf, normalizePath, rowsOf,
   runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
   classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
+  numericConstantsOf, unreadBudgetNamesOf,
   FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
   MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf, parseReadOnlyArgs, MODE_FLAGS,
   remoteDistBuildCommandOf, ENGINE_REMOTE_DIST_DIR,
@@ -2973,6 +2974,64 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         + ' (vite.config.js testTimeout; the file also declares 5000ms)'
         + ' — the row ran at or past its whole budget',
       );
+
+      // ── ⛔ A BUDGET PASSED BY NAME (CI-FIT point 75, 2026-11-20) ─────────────
+      // CI run 44494042373 printed "ran 338457ms against a 20000ms budget (vite.config.js
+      // testTimeout)" for mergeLadderHeldKeys A7, whose budget is a same-file constant of
+      // 300,000 passed by name: the scan saw no literal and the CONFIG's clock was shown as the
+      // row's own, and the chair read a test seventeen times over its budget (it was 1.13).
+      // The names, like the numbers above, are BUILT, so this file's own source never carries
+      // a budget position the scan could read.
+      const slowName = ['SL', 'OW'].join('');
+      const importedName = ['CORPUS', 'BUDGET', 'MS'].join('_');
+      const fileConst = `const ${slowName} = ${sep(fileBudget)};`;
+      expect(numericConstantsOf(fileConst)).toEqual({ [slowName]: fileBudget });
+      // A same-file constant passed in EITHER budget position is that budget.
+      expect(timeoutLiteralsOf(`${fileConst}\nregister('a', () => { x(); }, ${slowName});`)).toEqual([fileBudget]);
+      expect(timeoutLiteralsOf(`${fileConst}\nawait findByRole('b', { timeout: ${slowName} });`)).toEqual([fileBudget]);
+      expect(unreadBudgetNamesOf(`${fileConst}\nregister('a', () => { x(); }, ${slowName});`)).toEqual([]);
+      // ...under the SAME length floors as a literal: a constant of 999 is still not a budget.
+      expect(timeoutLiteralsOf(`const ${slowName} = 999;\nfn(() => { g(); }, ${slowName});`)).toEqual([]);
+      // A name the file does NOT bind to a numeral (an import, an expression) is not guessed:
+      // it is UNREAD, and named.
+      const imported = `import { ${importedName} } from './budgets.js';\nregister('a', () => {}, ${importedName});`;
+      expect(timeoutLiteralsOf(imported)).toEqual([]);
+      expect(unreadBudgetNamesOf(imported)).toEqual([importedName]);
+      const product = `const ${slowName} = 5 * ${sep(perTest)};\nregister('a', () => {}, ${slowName});`;
+      expect(timeoutLiteralsOf(product)).toEqual([]);
+      expect(unreadBudgetNamesOf(product)).toEqual([slowName]);
+      // A lower-case trailing argument is an ordinary call, never a budget name (a reduce seed),
+      // and neither is an upper-case one not SPELLED as a budget (`f({ … }, ROOT)`: this very
+      // file passes one, and an unread flag on it turned this file's own end-to-end arm red).
+      expect(unreadBudgetNamesOf('rows.reduce((m, r) => { m.add(r); }, seen);')).toEqual([]);
+      const rootName = ['RO', 'OT'].join('');
+      expect(unreadBudgetNamesOf(`discover({ a: 1 }, ${rootName});`)).toEqual([]);
+
+      // THE PRINTED LINE: the config's clock is never presented as an unread budget's own.
+      const killed = { duration: 338457, failureMessages: ['Error: STACK_TRACE_ERROR\n    at task (…)'] };
+      expect(failureEvidenceOf(killed, {
+        budget: 20000, budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [], unread: [importedName],
+      })[0]).toBe(
+        `      TIMEOUT · ran 338457ms; budget not read (the file passes a budget by a name this scan cannot resolve: ${importedName};`
+        + " vite.config.js testTimeout sets 20000ms, which may not be this test's)"
+        + ' — vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`'
+        + " with the stack captured at the test's own registration site",
+      );
+      // ...and where the file's own resolved budget governs, the unread name rides beside it.
+      expect(failureEvidenceOf(killed, {
+        budget: fileBudget, budgetSource: 'vite.config.js testTimeout', globalBudget: 20000, literals: [fileBudget], unread: [importedName],
+      })[0]).toBe(
+        `      TIMEOUT · ran 338457ms against a 300000ms budget (the file's own declared budget — it declares 300000ms;`
+        + ` vite.config.js testTimeout sets 20000ms; the file passes a budget by a name this scan cannot resolve: ${importedName})`
+        + ' — vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`'
+        + " with the stack captured at the test's own registration site",
+      );
+      // THE LIVE CASE, read from the estate itself: A7's file binds its budget by name, and the
+      // scan now reads it, so the printed budget is the file's 300,000, not the config's 20,000.
+      const ladder = readFileSync(join(ROOT, 'tests/domain/mergeLadderHeldKeys.test.js'), 'utf8');
+      expect(ladder).toMatch(new RegExp(`const ${slowName} = `));
+      expect(timeoutLiteralsOf(ladder)).toContain(fileBudget);
+      expect(unreadBudgetNamesOf(ladder)).toEqual([]);
     });
 
     test('uncollectedOf names every suite whose failure the PER-TEST census cannot see', () => {

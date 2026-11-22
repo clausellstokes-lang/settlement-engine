@@ -104,8 +104,9 @@ describe('the births: every sentence of this lane names its power in the prose f
       expect(labels.length, 'anchored: the town has a slashed or bracketed power').toBeGreaterThan(0);
       const lines = sentencesOf(s);
       expect(lines.filter((t) => LABEL.test(t)), 'no sentence prints a catalogue label').toEqual([]);
-      const forms = labels.map((n) => powerSentenceName(n));
-      expect(lines.filter((t) => forms.some((f) => t.includes(f))).length, 'kept: the sentences still name the power').toBeGreaterThan(0);
+      // NAMES-1 (CN1): a sentence names the power with its article, "the Guard" inside it and "The Guard" at its head
+      const forms = labels.map((n) => powerSentenceName(n).toLowerCase());
+      expect(lines.filter((t) => forms.some((f) => t.toLowerCase().includes(f))).length, 'kept: the sentences still name the power').toBeGreaterThan(0);
     });
   }
   it(`${KEEP} (KEEP): a town with no slashed power prints its powers' names as the record holds them`, () => {

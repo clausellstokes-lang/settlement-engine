@@ -96,8 +96,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/stressorGates.js': 'existence-gate — .some() magic-dependence → narrative strings',
   'src/domain/tableLedger.js': 'name/existence-lookup — exposureTargets offers corruption-marked NPCs/institutions/factions as DM exposure-picker options (selection list, not live-provider aggregation)',
   'src/domain/display/galleryVeil.js': 'mutation — THE GALLERY VEIL (X-21e) REMOVES criminal and clandestine houses from a visitor\'s projected copy; it credits no institution with capacity and sums nothing. A ruined criminal house is hidden exactly as a standing one (existence is the fact veiled), so routing the read through liveInstitutions() would LEAK the ruined ones, not filter them. RULED EXEMPT BY THE CHAIR at the W2-VEIL-A landing (2026-10-31).',
-  'src/domain/veil/importRederive.js': 'birth-derivation — THE IMPORT\'S RE-DERIVATION (ruling VR25): it hands the engine\'s own birth derivers (getInstFlags, computeBaseProsperity, generateSpatialLayout, defenceExactOf) the served roster exactly as they read it at birth (the stamped roster, ruins included), so the importer\'s value is the engine\'s own: measured equal to the stored value in 72 of 72 born towns. RULED EXEMPT BY THE CHAIR (2026-11-20, the seventh chair\'s grant in VR2\'s form, to VEIL-20).',
-  'src/domain/veil/pageRederive.js': 'birth-derivation — THE SHARED PAGE\'S RE-DERIVATION (the seventh chair\'s VR19 (c), VR33, VR37 (a); VEIL-21, R2): where the server withholds a drawn figure on every non-owner read (the defence scores, the readiness score, the economy\'s output), the page hands the engine\'s own derivers (getInstFlags, generateDefenseProfile) the served roster exactly as they read it at birth (the stamped roster, ruins included), as importRederive.js does for the import, so the page draws the engine\'s own value: equal to the stored value on every born town with nothing hidden (tests/security/galleryWithholdAlways.pglite.test.js). Added in VR2\'s form by VEIL-21\'s R2 builder; FOR THE CHAIR\'S GRANT.',
   'src/domain/settlementMigrations.js': 'name-lookup — PEOPLE-5B (2026-11-07, M-7): the v1 -> v2 save migration reads the roster\'s NAMES once, to recognise a v1 card\'s string `institution` (or an unmapped `secondaryAffiliation`) as a house on the roster. A ruined house is still the house that card was the face of: filtering ruins would turn a DM\'s ruined-temple priest into a face of no house and mis-report the value. It sums nothing and credits no institution with capacity.',
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
@@ -122,7 +120,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // `.institutions` reader the apply pass owned — verbatim out of applyWorldPulse.js into
   // this leaf. Same read, same exemption; only the address changed.
   'src/domain/worldPulse/applyWorldPulseFactionRoster.js': 'name-lookup + mutation — finds one named institution to impair',
-  'src/domain/dailyLife.js': 'name-lookup/display — first temple/market/inn for gathering-place flavour',
   'src/domain/npcProfile.js': 'name-lookup/display — NPC→institution links + category/power name lists',
   'src/domain/explanation.js': 'name-lookup/display — single-institution explain + entity catalog',
   'src/domain/dossier/entityLinks.js': 'name-lookup — name→id resolution + link-index build',
@@ -544,14 +541,9 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // (BAR7-CARDS, JOIN-17 points 20 and 25; EXEMPT above, ruled by the chair after the landing at a44495b59) and
     // src/domain/facts/sovereign.js :: liveNamesOf's roster read (BAR6-HOUSES, JOIN-17 point 2), COMPLIANT (a local
     // `_worldPulseInactive` standing guard). The arm "every reader is COMPLIANT or EXEMPT" is green on both.
-    // VEIL-17 (2026-11-19, the chair's ruling VR2, at the join into pull request #75): 115 -> 116, read from this arm's own
-    // failure message ("expected 116 to be 115") at the joined tree ad093c92c: src/domain/display/gallerySecondHomes.js ::
-    // the share veil's client twin's roster-name read (EXEMPT above, name-lookup), measured by this file's own scan.
-    // VEIL-20 (2026-11-20, the seventh chair's grant in VR2's form): 116 -> 117, read from this arm's own failure message
-    // ("expected 117 to be 116"): src/domain/veil/importRederive.js :: the import's re-derivation (EXEMPT above).
-    // VEIL-21 (R2, 2026-11-20; for the chair's grant in VR2's form): 117 -> 118: src/domain/veil/pageRederive.js :: the shared
-    // page's re-derivation (EXEMPT above).
-    expect(readers.length).toBe(118);
+    // DAILY-2 B1b C3 (2026-11-20, LINES-1 § gathering_places): 115 -> 114, src/domain/dailyLife.js no longer reads
+    // `.institutions` (its gathering lines name houses from `liveInstitutions`, the ruin filter); its EXEMPT row is deleted.
+    expect(readers.length).toBe(114);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

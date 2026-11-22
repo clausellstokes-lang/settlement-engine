@@ -1436,5 +1436,5 @@ describe('generator golden master (cross-build output stability)', () => {
       if (manifest[k] !== got) drift.push(k);
     }
     expect(drift).toEqual([]);
-  }, 120_000);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 61.7 s in its shard here / 51.7 s in the last close's serial check; about 98.7 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 });

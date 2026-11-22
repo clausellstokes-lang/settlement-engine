@@ -198,6 +198,25 @@ export function runnerCommandOf({ verifyDist = false, outputFile }) {
 }
 
 /**
+ * The environment each phase's runner is spawned with; exported so the CI shard runner
+ * (scripts/test-ratchet-shard.mjs) spawns its shard of the source phase with the SAME
+ * environment `run` gives the whole one, never a hand copy. Moved here out of `run`
+ * unchanged (CI-SHARD, 2026-11-19): the source phase strips both dist switches, the
+ * strict phase sets both, and the runner is told the report path it must write.
+ */
+export function runnerEnvOf({ verifyDist = false, outputFile }, baseEnv = process.env) {
+  const runnerEnv = { ...baseEnv, TEST_RATCHET_OUTPUT_FILE: outputFile };
+  if (verifyDist) {
+    runnerEnv.VERIFY_DIST = '1';
+    runnerEnv.VERIFY_ENGINE_REMOTE_DIST = '1';
+  } else {
+    delete runnerEnv.VERIFY_DIST;
+    delete runnerEnv.VERIFY_ENGINE_REMOTE_DIST;
+  }
+  return runnerEnv;
+}
+
+/**
  * THE FLAGGED DIST (DIST-FLAGGED, 2026-11-10; the chair's D1). The production artifact is the
  * FLAGGED build — docs/DEPLOY.md sets VITE_ENGINE_REMOTE=true on Vercel, and a flagged build
  * carries no generator (vite.config.js :: engineAbsentWhenRemote) — yet until this line no gate
@@ -395,10 +414,17 @@ export function globalTestTimeoutOf(root = ROOT) {
  * only direction able to INVENT a TIMEOUT label on a genuine assertion failure. The
  * separator is house style, not a different budget, so it is now read as one.
  *
- * ⚠ WHAT IS STILL MISSED, STATED RATHER THAN LEFT TO BE RE-FOUND: a budget passed as a
- * NAMED CONSTANT (`}, CORPUS_BUDGET_MS)` — tests/lint/siteCoherenceRatchet.test.js:70,
- * a 120,000 ms budget) is invisible to a text scan and stays invisible. Resolving it needs
- * const-folding, which is a different instrument; it is docketed, not silently accepted.
+ * ⛔ A BUDGET PASSED BY NAME (CI-FIT point 75, 2026-11-20). A budget passed as a NAMED
+ * CONSTANT (`}, SLOW)`, `}, CORPUS_BUDGET_MS)`) was invisible to this scan, and the reader
+ * was then shown the CONFIG's clock as the row's own: CI run 44494042373 printed
+ * "ran 338457ms against a 20000ms budget (vite.config.js testTimeout)" for
+ * tests/domain/mergeLadderHeldKeys.test.js's A7, whose budget is `const SLOW = 300_000;`,
+ * and the chair read it as a test seventeen times over its budget (it was 1.13). So an
+ * UPPER-CASE name in either budget position is now resolved against the file's own
+ * `const NAME = <numeral>;` (`numericConstantsOf`), under the same length floors as a
+ * literal. A name the file does NOT bind that way (an import, an expression) is NOT
+ * guessed: `unreadBudgetNamesOf` names it, and the printed line says "budget not read"
+ * rather than presenting the config's clock as the row's (`failureEvidenceOf`).
  *
  * ⛔ WHAT THIS FUNCTION CAN AND CANNOT MOVE — CORRECTED 2026-09-14 (LT29 car 2). The old
  * wording here read "No threshold, exit code or census row moves", and the THRESHOLD half of
@@ -420,22 +446,76 @@ export function globalTestTimeoutOf(root = ROOT) {
  * decision, a ceiling or the baseline; the classifier's output is printed evidence and the one
  * advisory paragraph that keys off a cost class.
  */
+/** `60_000` and `60000` are ONE budget written two ways; the separator is house style. */
+const BUDGET_NUMERAL = String.raw`\d[\d_]*\d|\d`;
+/** A budget passed BY NAME: the house spells its constants in upper case (`SLOW`, `CORPUS_BUDGET_MS`). */
+const BUDGET_NAME = String.raw`[A-Z][A-Z0-9_]*`;
+const budgetDigitsOf = (raw) => raw.replace(/_/g, '');
+/** The two budget positions, each with its length floor on the SEPARATOR-FREE digits. */
+const BUDGET_POSITIONS = Object.freeze([
+  { before: String.raw`\}\s*,\s*`, after: String.raw`\s*\)`, floor: 4 },
+  { before: String.raw`\btimeout\s*:\s*`, after: String.raw`\b`, floor: 3 },
+]);
+
+/**
+ * The file's own numeric constants, `const NAME = <numeral>;` with an upper-case NAME, as
+ * { NAME: number }. Only a plain numeral is folded (`300_000`, `300000`); an expression
+ * (`5 * 60_000`) or an import binds nothing here, so a budget passed by that name stays
+ * UNREAD (`unreadBudgetNamesOf`) rather than guessed.
+ */
+export function numericConstantsOf(src) {
+  const constants = {};
+  const pattern = new RegExp(String.raw`\bconst\s+(${BUDGET_NAME})\s*=\s*(${BUDGET_NUMERAL})\s*;`, 'g');
+  for (const m of String(src).matchAll(pattern)) constants[m[1]] = Number(budgetDigitsOf(m[2]));
+  return constants;
+}
+
 export function timeoutLiteralsOf(src) {
   const found = new Set();
-  /** `60_000` and `60000` are ONE budget written two ways; the separator is house style. */
-  const NUMERAL = String.raw`\d[\d_]*\d|\d`;
-  const digitsOf = (raw) => raw.replace(/_/g, '');
+  const text = String(src);
+  const constants = numericConstantsOf(text);
   // The length floors are unchanged and are applied to the SEPARATOR-FREE digits, so
-  // `}, 999)` is still an argument list and `{ timeout: 50 }` is still not a budget.
-  for (const m of String(src).matchAll(new RegExp(String.raw`\}\s*,\s*(${NUMERAL})\s*\)`, 'g'))) {
-    const digits = digitsOf(m[1]);
-    if (digits.length >= 4) found.add(Number(digits));
-  }
-  for (const m of String(src).matchAll(new RegExp(String.raw`\btimeout\s*:\s*(${NUMERAL})\b`, 'g'))) {
-    const digits = digitsOf(m[1]);
-    if (digits.length >= 3) found.add(Number(digits));
+  // `}, 999)` is still an argument list and `{ timeout: 50 }` is still not a budget. A
+  // budget passed by a NAME the file binds to a numeral is the same budget and meets the
+  // same floor.
+  for (const { before, after, floor } of BUDGET_POSITIONS) {
+    for (const m of text.matchAll(new RegExp(`${before}(${BUDGET_NUMERAL})${after}`, 'g'))) {
+      const digits = budgetDigitsOf(m[1]);
+      if (digits.length >= floor) found.add(Number(digits));
+    }
+    for (const m of text.matchAll(new RegExp(`${before}(${BUDGET_NAME})${after}`, 'g'))) {
+      if (!Object.hasOwn(constants, m[1])) continue;
+      if (String(constants[m[1]]).length >= floor) found.add(constants[m[1]]);
+    }
   }
   return [...found].sort((a, b) => a - b);
+}
+
+/**
+ * A name SPELLED as a budget. The budget positions also carry ordinary upper-case arguments
+ * (`f({ … }, ROOT)`, `}, SEED)`, `}, NOW)`: 51 unbound names across tests/ at 29ec255fe, measured;
+ * none of them is budget-spelled),
+ * so only a budget-spelled name is called an unread BUDGET; resolution above is not filtered,
+ * because a folded non-budget constant can only WIDEN the threshold, the safe direction.
+ */
+export const BUDGET_SPELLING = /(?:TIMEOUT|BUDGET|SLOW)|(?:^|_)MS$/;
+
+/**
+ * The budget-spelled names (`BUDGET_SPELLING`) a file passes in a budget position that it does
+ * NOT bind to a numeral (an imported budget, an expression): the budgets this scan could not
+ * read. Printed by `failureEvidenceOf`, so the config's clock is never presented as such a
+ * row's own.
+ */
+export function unreadBudgetNamesOf(src) {
+  const text = String(src);
+  const constants = numericConstantsOf(text);
+  const unread = new Set();
+  for (const { before, after } of BUDGET_POSITIONS) {
+    for (const m of text.matchAll(new RegExp(`${before}(${BUDGET_NAME})${after}`, 'g'))) {
+      if (!Object.hasOwn(constants, m[1]) && BUDGET_SPELLING.test(m[1])) unread.add(m[1]);
+    }
+  }
+  return [...unread].sort();
 }
 
 /**
@@ -492,7 +572,7 @@ export function classifyFailure({ duration, message, budget }) {
  * before this cure.
  */
 export function failureEvidenceOf(row, {
-  budget, budgetSource, globalBudget, literals = [],
+  budget, budgetSource, globalBudget, literals = [], unread = [],
 } = {}) {
   const raw = Number.isFinite(row?.duration) ? row.duration : null;
   // A sub-millisecond row rounds to `0ms`, which reads as "no measurement" — the
@@ -510,13 +590,24 @@ export function failureEvidenceOf(row, {
   const suiteClock = Number.isFinite(globalBudget) ? globalBudget : budget;
   const fileGoverns = Number.isFinite(budget) && budget > suiteClock;
   const declaredClause = literals.length ? ` — it declares ${literals.join('ms, ')}ms` : '';
-  const attribution = fileGoverns
-    ? `the file's own declared budget${declaredClause}; ${budgetSource} sets ${suiteClock}ms`
-    : `${budgetSource}${literals.length ? `; the file also declares ${literals.join('ms, ')}ms` : ''}`;
-  const lines = [
-    `      ${verdict.class} · ran ${ms === null ? 'an unrecorded duration' : ms}`
-    + ` against a ${budget}ms budget (${attribution}) — ${verdict.why}`,
-  ];
+  // ⛔ A BUDGET PASSED BY A NAME THE SCAN COULD NOT RESOLVE (CI-FIT point 75): the number this
+  // line would print is then the config's clock, which may not be the row's, so it is never
+  // printed AS the row's budget: the line says "budget not read" and names what was unread.
+  const unreadClause = unread.length
+    ? `the file passes a budget by a name this scan cannot resolve: ${unread.join(', ')}` : '';
+  const ran = `ran ${ms === null ? 'an unrecorded duration' : ms}`;
+  let head;
+  if (unread.length && !fileGoverns) {
+    const alsoDeclared = literals.length ? `; it also declares ${literals.join('ms, ')}ms` : '';
+    head = `${ran}; budget not read (${unreadClause}${alsoDeclared};`
+      + ` ${budgetSource} sets ${suiteClock}ms, which may not be this test's)`;
+  } else {
+    const attribution = fileGoverns
+      ? `the file's own declared budget${declaredClause}; ${budgetSource} sets ${suiteClock}ms`
+      : `${budgetSource}${literals.length ? `; the file also declares ${literals.join('ms, ')}ms` : ''}`;
+    head = `${ran} against a ${budget}ms budget (${attribution}${unreadClause ? `; ${unreadClause}` : ''})`;
+  }
+  const lines = [`      ${verdict.class} · ${head} — ${verdict.why}`];
   // ⛔ AND THE ARM THE LITERAL DISABLES IS NAMED RATHER THAN LEFT SILENT. A file-declared
   // literal raises `classifyFailure`'s arm 3 for EVERY row of that file, because the scan is
   // file-scoped and cannot tie a literal to one test — the scan's own header says it cannot
@@ -981,16 +1072,15 @@ export async function run(argv = []) {
   } else {
     const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'test-ratchet-'));
     OUT = path.join(TMP, 'results.json');
-    const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
-    if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
-    else delete runnerEnv.VERIFY_DIST;
+    // runnerEnvOf: VERIFY_DIST and VERIFY_ENGINE_REMOTE_DIST set for the strict phase,
+    // both stripped for the source phase.
+    const runnerEnv = runnerEnvOf({ verifyDist: VERIFY_DIST, outputFile: OUT });
     // THE FLAGGED DIST (D1; remoteDistBuildCommandOf above). Built before the strict runner,
     // and the runner told to REQUIRE it. A build that fails is a closed failure, never a
     // skip. Under the injected runner seam alone (the meta-gate's fake vitest, which reads
     // no dist) nothing is built unless TEST_RATCHET_REMOTE_BUILD_CMD names a command; the
     // real runner always gets the real build.
     if (VERIFY_DIST) {
-      runnerEnv.VERIFY_ENGINE_REMOTE_DIST = '1';
       const remoteBuild = process.env.TEST_RATCHET_REMOTE_BUILD_CMD
         || (process.env.TEST_RATCHET_RUN_CMD ? null : remoteDistBuildCommandOf());
       if (remoteBuild) {
@@ -1006,7 +1096,7 @@ export async function run(argv = []) {
           ]);
         }
       }
-    } else delete runnerEnv.VERIFY_ENGINE_REMOTE_DIST;
+    }
     try {
       runnerOutput = execSync(
         process.env.TEST_RATCHET_RUN_CMD
@@ -1110,29 +1200,32 @@ export async function run(argv = []) {
   let globalBudgetMemo = null;
   const globalBudgetLazy = () => (globalBudgetMemo ??= globalTestTimeoutOf());
   const literalsCache = new Map();
-  const literalsFor = (file) => {
+  const budgetsFor = (file) => {
     if (!literalsCache.has(file)) {
       let literals = [];
+      let unread = [];
       try {
-        literals = timeoutLiteralsOf(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+        const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
+        literals = timeoutLiteralsOf(src);
+        unread = unreadBudgetNamesOf(src);
       } catch {
         // A row whose file is gone declares nothing; the suite-wide budget stands.
       }
-      literalsCache.set(file, literals);
+      literalsCache.set(file, { literals, unread });
     }
     return literalsCache.get(file);
   };
   // Returns { lines, class } so a caller can both PRINT the evidence and reason
   // about the class (the regression block's cost-failure inference needs the latter).
   const evidenceFor = (row, file) => {
-    const literals = literalsFor(file);
+    const { literals, unread } = budgetsFor(file);
     const { budget: globalBudget, source: budgetSource } = globalBudgetLazy();
     const budget = Math.max(globalBudget, ...literals);
     return {
       // ⚠ `globalBudget` rides beside `budget` so the printed parenthesis can attribute the
       // number it actually prints (LT29 car 2); the classifier's threshold is unchanged.
       lines: failureEvidenceOf(row, {
-        budget, budgetSource, globalBudget, literals,
+        budget, budgetSource, globalBudget, literals, unread,
       }),
       class: classifyFailure({
         duration: row?.duration,

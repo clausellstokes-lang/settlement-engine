@@ -104,6 +104,7 @@ import {
   validateSchema43Baseline,
   validateSchema44Baseline,
   validateSchema45Baseline,
+  validateSchema46Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -145,6 +146,7 @@ import {
   CLOSE_ROUND_TARGET_SCHEMA,
   FINAL_PASS_TARGET_SCHEMA,
   LAST_CLOSE_TARGET_SCHEMA,
+  FORTUNE_MERITS_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1204,6 +1206,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // RULING of 2026-11-09 21:2x), and the FIRST of the sixth class: the minted proposal's outcome,
       // written by worldPulse/convergence.js only in campaign time — the played-worlds writer.
       'outcome on outcome',
+      // ⭐⭐ THE SEVENTEENTH, DECLARED AT THE SCHEMA-46 RUNG (FORTUNE U5a-CURE item 2, route B, the chair's ruling
+      // of 2026-11-20 22:18 UTC): the fortune merits, written by fortune/fortuneMerits.js only under the fortune
+      // law, which no corpus CONFIG carries — the fifth class again.
+      'merits on breakdown',
     ]);
     // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
     // silently re-pair the survivors. The retired `factions on locks` was the OTHER
@@ -1225,6 +1231,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'conditional-generator-branch', // migrationDirection on config
       'save-time-writer', // publicProse on settlement
       'played-worlds-writer', // outcome on outcome
+      'conditional-generator-branch', // merits on breakdown
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
@@ -1258,6 +1265,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'src/lib/saves.js',
       // The minted proposal (21:2x): `mintedProposals.push({ … outcome, … })`, the shorthand key.
       'src/domain/worldPulse/convergence.js',
+      // The fortune merits (22:18): `meritedLegitimacy`'s `breakdown: { ...terms, merits: added }`, the property key.
+      'src/domain/fortune/fortuneMerits.js',
     ]);
     // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
     // At genesis this exact string is stamped into every tagged row's `reason`,
@@ -1362,6 +1371,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'publicProse on settlement',
       // ⭐ THE SCHEMA-41 ONE (21:2x), re-proved out of the scanned convergence.js on every scan.
       'outcome on outcome',
+      // ⭐ THE SCHEMA-46 ONE (22:18), re-proved out of the scanned fortuneMerits.js on every scan.
+      'merits on breakdown',
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
@@ -1372,6 +1383,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'migrationDirection',
       'publicProse',
       'outcome',
+      'merits',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
     // the four banked keys on `applyEvent.js` REFUSES the two nearest
@@ -1669,7 +1681,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(declaredBankOf(CLOSE_ROUND_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     expect(declaredBankOf(FINAL_PASS_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
     expect(declaredBankOf(LAST_CLOSE_TARGET_SCHEMA)).toEqual({ bankedReads: 78, taggedRows: 52 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(LAST_CLOSE_TARGET_SCHEMA));
+    // ⭐ AND 46 GROWS IT BY ONE (FORTUNE U5a-CURE item 2, route B): one declaration (the fortune merits), one address,
+    // one read, so the pair goes 78/52 -> 79/53. MEASURED off the live scan.
+    expect(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA)).toEqual({ bankedReads: 79, taggedRows: 53 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(FORTUNE_MERITS_TARGET_SCHEMA));
     expect(declaredBankOf(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA)).toEqual({ bankedReads: 77, taggedRows: 51 });
     expect(declaredBankOf(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
     expect(declaredBankOf(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA)).toEqual({ bankedReads: 76, taggedRows: 50 });
@@ -1700,7 +1715,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // for `notability`, which is how its founding case was refuted.
     expect(authoredInputHistoryCommits('zzzNoSuchObservedShapeKeyEverzzz')).toEqual([]);
     expect(() => authoredInputHistoryCommits('two words')).toThrow(/whitespace-free key/);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.0 s in the last close's serial check; about 16.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   /**
    * ⭐⭐ THE SCHEMA-4 / SCHEMA-5 SPLIT. One envelope law, two numbers. Sharing the
@@ -1763,7 +1778,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ SCHEMA 30: THE PEOPLE CAR'S CAST (the owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): schema 29's envelope, tag law, roster and corpus definition UNCHANGED, re-governed to a register that admits 19 ordinary rows the cast's year exposes and lets 0 go; nothing declared, the bank 77/51.
     // ⭐ SCHEMA 40: THE PUBLIC PROSE WRITER'S ADMISSION (SW-B7b PROJECTION, the chair's grant of 2026-11-09 13:5x): ONE save-time-writer declaration, `publicProse on settlement` (the roster 14 -> 15, the bank 77/51); its one new row is admitted tagged and nothing else moves.
     // ⭐ SCHEMA 41: THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL RULING of 2026-11-09 21:2x): a NEW writer class, played-worlds-writer, and its first declaration, `outcome on outcome` (the roster 15 -> 16, the bank 78/52); its one row is tagged and nothing else moves.
-    expect(BASELINE_SCHEMA).toBe(45); // the last-close rung, 2026-11-19 (the chair's ruling CL26)
+    // ⭐ SCHEMA 46: THE FORTUNE MERITS WRITER'S ADMISSION (FORTUNE U5a-CURE item 2, route B, the chair's ruling of 2026-11-20 22:18 UTC): ONE conditional-generator-branch declaration, `merits on breakdown` (the roster 16 -> 17, the bank 79/53); its one new row is admitted tagged and nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(46); // the fortune-merits rung, 2026-11-20 (the chair's ruling of 22:18 UTC)
     expect(RETIRED_MIGRATION_DIRECTION_BASELINE_SCHEMA).toBe(29);
     expect(RETIRED_TIER_COVERAGE_BASELINE_SCHEMA).toBe(28);
     expect(RETIRED_WINDOW_RUNG1_BASELINE_SCHEMA).toBe(27);
@@ -1792,7 +1808,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema45Baseline(live)).toBe(live); // the last-close rung (45), 2026-11-19 (the chair's ruling CL26)
+    expect(validateSchema46Baseline(live)).toBe(live); // the fortune-merits rung (46), 2026-11-20 (the chair's ruling of 22:18 UTC)
+    expect(() => validateSchema45Baseline(live)).toThrow(/is not schema 45/);
     expect(() => validateSchema44Baseline(live)).toThrow(/is not schema 44/);
     expect(() => validateSchema43Baseline(live)).toThrow(/is not schema 43/);
     expect(() => validateSchema42Baseline(live)).toThrow(/is not schema 42/);
@@ -1955,7 +1972,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(45); // the last-close rung, 2026-11-19 (the chair's ruling CL26)
+    expect(BASELINE_SCHEMA).toBe(46); // the fortune-merits rung, 2026-11-20 (the chair's ruling of 22:18 UTC)
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

@@ -12,7 +12,7 @@ import { describe, expect, test } from 'vitest';
 import { generateConflicts } from '../../src/generators/powerGenerator.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
-import { powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
+import { powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js'; // NAMES-1 (CN1): the article
 
 const CONSCRIPTION = 'Military conscription of guild apprentices';
 const seeded = (seed, body) => {
@@ -48,7 +48,7 @@ describe('a quarrel names the power its issue touches', () => {
     // anchored: the pair draws conscription somewhere in the run, so the clause is measured on a real quarrel
     expect(quarrel).not.toBeNull();
     // the crafts are reached first: the apprentices are theirs, though the merchants stand earlier
-    expect(quarrel.desc).toContain('It reaches Craft Guilds too');
+    expect(quarrel.desc).toContain('It reaches the Craft Guilds too'); // NAMES-1 (CN1): the article
     // anchored: the quarrel exists (not null above) and names its two parties
     expect(quarrel.parties).not.toContain('Craft Guilds');
   });
@@ -62,6 +62,6 @@ describe('a quarrel names the power its issue touches', () => {
     expect(quarrel).not.toBeNull();
     // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, the chair's U2): the sentence names each party by its prose form, from the
     // one leaf (582b8acad, POWERS-16 r2: "Military/Guard" -> "The Guard"); `parties` keeps the label, so the pin reads the leaf
-    expect(quarrel.desc).toBe(`Military/Guard and Town Council are in moderate conflict over ${CONSCRIPTION.toLowerCase()}. The stakes are labor control.`.replace('Military/Guard and Town Council', `${powerSentenceName(quarrel.parties[0])} and ${powerSentenceName(quarrel.parties[1])}`));
+    expect(quarrel.desc).toBe(`Military/Guard and Town Council are in moderate conflict over ${CONSCRIPTION.toLowerCase()}. The stakes are labor control.`.replace('Military/Guard and Town Council', `${powerNameWithArticle(quarrel.parties[0], true)} and ${powerNameWithArticle(quarrel.parties[1])}`)); // NAMES-1 (CN1): the article
   });
 });

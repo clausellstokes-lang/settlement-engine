@@ -28,16 +28,19 @@ const WORLD = () => ({
 });
 
 describe('npcInteriority — player-safe disposition & wants', () => {
-  it('composes wants (goal + ambition + ideal) and disposition (temperament + loyalty + fear), the standing under its own field', () => {
+  it('composes wants (goal + ambition + ideal) and disposition (temperament + loyalty + fear), and no standing word', () => {
     const view = npcInteriority({ npc: NPC() });
     expect(view.present).toBe(true);
     expect(view.wants).toEqual(['restore the old temple', 'reclaim his house', 'order above all']);
-    // A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES: the disposition list holds temperament, loyalty and fear;
-    // the person's standing ("commanding" for high influence) is asserted under its own field.
+    // A WORD IS PRINTED UNDER THE NAME OF WHAT IT MEASURES: the disposition list holds temperament, loyalty and fear.
+    // PAGE-1 CARD (F4, 2026-11-20): the read-model carries no standing word from the stored `influence` band (a keyword
+    // misread at birth); the card's Standing row is cardStandingRead.js's fact.
     expect(view.disposition).toEqual(['stern', 'the crown', 'the mob']);
-    expect(view.standing).toBe('commanding');
-    expect(npcInteriority({ npc: { ...NPC(), influence: 'moderate' } }).standing).toBe('established');
-    expect(npcInteriority({ npc: { ...NPC(), influence: 'low' } }).standing).toBe('marginal');
+    for (const influence of ['high', 'moderate', 'low']) {
+      const v = npcInteriority({ npc: { ...NPC(), influence } });
+      expect(Object.keys(v)).toEqual(['present', 'wants', 'disposition']);
+    }
+    expect(npcInteriority({ npc: { name: 'Bare', influence: 'high' } }), 'an influence alone makes no view').toBeNull();
     expect(view.groundTruth, 'no DM-truth block in the player view').toBeUndefined();
   });
 

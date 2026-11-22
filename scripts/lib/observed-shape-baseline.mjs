@@ -7,7 +7,15 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **45**: schema 44's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * `BASELINE_SCHEMA` is **46**: schema 45's tagged numeric heuristic-leaf envelope and tag law UNCHANGED, re-governed to
+ * THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE U5a-CURE item 2, route B):
+ * ONE declaration of the conditional-generator-branch class, `merits on breakdown` (writer fortune/fortuneMerits.js,
+ * which writes the key only under the fortune law, `_fortuneLawVersion: 2`, which the corpus's CONFIGS never carry);
+ * the roster 16 -> 17, the bank 78/52 -> 79/53, and its one row (src/domain/fortune/fortuneMerits.js x1) admitted
+ * TAGGED; nothing else moves. Its full rationale lives beside `FORTUNE_MERITS_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_LAST_CLOSE_BASELINE_SCHEMA` is **45**: schema 44's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
  * UNCHANGED, re-governed to THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close; the owner's word "Yes to both", 2026-11-18 about 19:07 UTC): the rounds' eleven new reads since the
  * register was last frozen (e56e112e2) ADMITTED BY CAUSE, each with its class in the instrument's vocabulary and its
  * landing; nothing declared, nothing gone. Its full rationale lives beside `LAST_CLOSE_TARGET_SCHEMA` in
@@ -672,7 +680,10 @@ export const RETIRED_CLOSE_ROUND_BASELINE_SCHEMA = 43;
 /** The RETIRED final-pass definition — schema 45's predecessor. Never redefined, never deleted, so a schema-44
  *  PREDECESSOR is still validated as schema 44. */
 export const RETIRED_FINAL_PASS_BASELINE_SCHEMA = 44;
-export const BASELINE_SCHEMA = 45;
+/** The RETIRED last-close definition — schema 46's predecessor. Never redefined, never deleted, so a schema-45
+ *  PREDECESSOR is still validated as schema 45. */
+export const RETIRED_LAST_CLOSE_BASELINE_SCHEMA = 45;
+export const BASELINE_SCHEMA = 46;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1507,8 +1518,18 @@ export function validateSchema44Baseline(baseline) {
   );
 }
 
-/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 45, the last close). */
+/** The RETIRED authority — schema 45's tagged envelope (the last close), re-governed by schema 46 to the fortune
+ *  merits writer's admission. Re-bound to its own LITERAL. */
 export function validateSchema45Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_LAST_CLOSE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 46, the fortune merits writer's admission). */
+export function validateSchema46Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

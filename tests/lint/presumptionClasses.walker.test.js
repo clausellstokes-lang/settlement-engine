@@ -150,7 +150,7 @@ describe('the five arms, planted', () => {
   test('the scope is the four roots, less the surfaces that are no town page (by rule, each present in the tree)', () => {
     expect(ROOTS).toEqual(['src/data', 'src/generators', 'src/domain', 'src/components']);
     expect(NOT_PAGE.map(([p]) => p).filter((p) => !existsSync(join(ROOT, p)))).toEqual([]);
-    expect(NOT_PAGE.length).toBe(19);
+    expect(NOT_PAGE.length).toBe(20); // 19 -> 20: the closed list of venal secrets, by the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)
     expect([notPage('src/domain/worldPulse/heraldLines.js'), notPage('src/components/new/tabs/DefenseTab.jsx'), notPage('src/components/HomeHero.jsx')]).toEqual([true, false, true]);
   });
 });

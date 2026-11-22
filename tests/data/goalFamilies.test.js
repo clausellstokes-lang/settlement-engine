@@ -12,13 +12,18 @@
  *     names a power, a house or a thing, or follows such a slot with a verb that must agree in number;
  *   - `PERSONALITY_CLUSTER_OF` is total over `NPC_PERSONALITY_TRAITS` (imported, never hand-copied),
  *     the 17 corruptible flaws sit in their own vectors, and every cluster key has its cell;
- *   - every declared `needs` is an atom of the fact vocabulary with a reader.
+ *   - every declared `needs` is an atom of the fact vocabulary with a reader;
+ *   - THE RESERVE (GOALS-1, builder 4; the chair's approval of 2026-11-20 10:48 UTC): `GOAL_RESERVE_LINES` is apart from the
+ *     cells and their totals; every reserve cell names an existing family, sub-kind and vantage, holds its approved count,
+ *     uses only its family's and sub-kind's slots, and repeats no line of the cells nor of the reserve; the harsh-tie map
+ *     (`GOAL_LINE_NOT_ON_TIES`) names only reserve TIES lines, real tie types and their real strengths. GOALS-3 (builder 7; the
+ *     chair's approval of 13:32 UTC): PERSONALITY 16 reserve lines in 13 cells, keyed like the PERSONALITY cells, 41 in all.
  * The anchored negatives: a planted bad slot and a planted tic each red the checker (controls).
  */
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import {
-  GOAL_FAMILIES, GOAL_FAMILY_LINES, GOAL_SLOTS, GOAL_SLOTS_STRUCK, GOAL_SUBKIND_SLOTS,
+  GOAL_FAMILIES, GOAL_FAMILY_LINES, GOAL_LINE_NOT_ON_TIES, GOAL_RESERVE_LINES, GOAL_SLOTS, GOAL_SLOTS_STRUCK, GOAL_SUBKIND_SLOTS,
   PERSONALITY_CLUSTERS, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND,
 } from '../../src/data/people/goalFamilies.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
@@ -47,6 +52,17 @@ const EXPECTED_CELLS = {
   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
 const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
+/** The reserve (GOALS-1, the chair's approval of 10:48 UTC; GOALS-3's PERSONALITY, its approval of 13:32 UTC), cell by cell: 41 lines, outside the totals above. */
+const EXPECTED_RESERVE = {
+  RANK: { enter: { short: 4, long: 3 } },
+  POWER: { tense: { short: 2, long: 3 } },
+  INSTITUTION: { solvency: { short: 2, long: 4 }, charter: { long: 1 } },
+  TIES: { rival_enemy: { short: 2, long: 4 } },
+  PERSONALITY: {
+    greed: { short: 1, long: 1 }, hunger_for_status: { long: 1 }, fear: { long: 1 }, forbidden_patron: { long: 2 }, kindness: { short: 1, long: 1 },
+    sway: { short: 1, long: 2 }, grudge: { short: 1, long: 2 }, impulse: { short: 1, long: 1 },
+  },
+};
 
 /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
 const STRUCK_TICS = [
@@ -61,7 +77,9 @@ const AGREEING_VERBS = ['is', 'has', 'was', 'does', 'needs', 'wants', 'makes', '
   'owes', 'spends', 'takes', 'turns', 'decides', 'raises', 'gives', 'runs', 'holds', 'earns', 'asks'];
 
 const textOf = (entry) => (typeof entry === 'string' ? entry : entry?.line);
-const slotsOf = (text) => [...String(text).matchAll(/\{([^}]*)\}/g)].map((m) => m[1]);
+const slotsOf = (text) => [...String(text).matchAll(/\{([^}]*)\}/g)].map((m) => m[1].split('|')[0]); // NAMES-3: an agreement form `{power|it|them}` names its power slot
+/** NAMES-3 (CV7): the power slots a word may agree with, through the agreement form `{slot|one|many}`. */
+const AGREEING_SLOTS = new Set(['power', 'rival', 'guild']);
 
 /** Every violation of the shape law in a table, as strings naming the line; [] when lawful. */
 function shapeViolations(table) {
@@ -93,6 +111,11 @@ function shapeViolations(table) {
             if (struck.includes(slot)) out.push(`slot: {${slot}} is struck in ${family} — ${where}`);
             else if (!famSlots.includes(slot)) out.push(`slot: {${slot}} is not in GOAL_SLOTS.${family} — ${where}`);
             else if (subSlots && !subSlots.includes(slot)) out.push(`slot: {${slot}} is not in GOAL_SUBKIND_SLOTS.${family}.${sub} — ${where}`);
+          }
+          // NAMES-3 (CV7): an agreement form agrees with a power slot the line itself prints, in two non-empty numbers
+          for (const m of text.matchAll(/\{([^}|]*)\|([^}]*)\}/g)) {
+            const [one, many, ...rest] = m[2].split('|');
+            if (!AGREEING_SLOTS.has(m[1]) || !text.includes(`{${m[1]}}`) || !one || !many || rest.length) out.push(`agreement: "{${m[1]}|${m[2]}}" — ${where}`);
           }
           const lower = text.toLowerCase();
           for (const tic of STRUCK_TICS) if (lower.includes(tic)) out.push(`tic: "${tic}" — ${where}`);
@@ -191,6 +214,10 @@ describe('goal families — the shape law', () => {
     expect(shapeViolations(plant('INSTITUTION', 'solvency', 'short', 'Keep the {house} out of debt this season.')).some((x) => x.startsWith('contract: an article'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'short', "Undo {rival}'s last gain this season.")).some((x) => x.startsWith('contract: "{rival}\'s"'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'long', 'See that {rival} needs {power} more than ever.')).some((x) => x.startsWith('contract: "{rival} needs"'))).toBe(true);
+    // NAMES-3 (CV7): an agreement form agrees with a power slot its line prints, in both numbers
+    expect(shapeViolations(plant('POWER', 'tense', 'long', 'See {power} last until {rival|it is|they are} gone.')).some((x) => x.startsWith('agreement:'))).toBe(true);
+    expect(shapeViolations(plant('RANK', 'climb', 'long', 'Lead {power} until {above|she|they} steps down.')).some((x) => x.startsWith('agreement:'))).toBe(true);
+    expect(shapeViolations(plant('RANK', 'enter', 'long', 'Serve {power} until {power|it is} strong.')).some((x) => x.startsWith('agreement:'))).toBe(true);
     expect(shapeViolations(plant('TIES', 'ally', 'long', { line: 'Stand with {other} at the market.', needs: ['bazaar'] })).some((x) => x.startsWith("needs: 'bazaar'"))).toBe(true);
     // POWERS-9: the excludes side is checked as the needs side is
     expect(shapeViolations(plant('SUPPLY', 'impaired', 'short', { line: 'Waste nothing at {house}.', needs: [], excludes: ['crisis: bazaar'] })).some((x) => x.startsWith("needs: 'crisis: bazaar'"))).toBe(true);
@@ -291,5 +318,67 @@ describe('goal families — UNCANNY, the magic gate', () => {
     expect(uncannyViolations(plantedA.UNCANNY).some((x) => x.startsWith('gate: UNCANNY.haunting.short'))).toBe(true);
     const plantedB = plant('UNCANNY', 'bargain', 'long', { line: 'Drown the bargain in the river for good.', needs: ['magic'] });
     expect(uncannyViolations(plantedB.UNCANNY).some((x) => x.startsWith("declare: 'river'"))).toBe(true);
+  });
+});
+
+/** The cells with the reserve's lines appended to each named cell (a reserve cell the cells lack is kept as its own). */
+const withReserve = (reserve) => {
+  const copy = JSON.parse(JSON.stringify(GOAL_FAMILY_LINES));
+  for (const [f, subs] of Object.entries(reserve)) for (const [k, vs] of Object.entries(subs)) for (const [v, lines] of Object.entries(vs)) {
+    ((copy[f] ??= {})[k] ??= {})[v] = [...(copy[f][k][v] || []), ...lines];
+  }
+  return copy;
+};
+/** Every reserve cell the cells do not hold, as `family.kind.vantage`. */
+const orphanReserveCells = (reserve) => Object.entries(reserve).flatMap(([f, subs]) => Object.entries(subs).flatMap(([k, vs]) => Object.keys(vs)
+  .filter((v) => !Array.isArray(GOAL_FAMILY_LINES[f]?.[k]?.[v])).map((v) => `${f}.${k}.${v}`)));
+
+describe('goal families — the reserve lines (GOALS-1, apart from the cells)', () => {
+  test('the reserve holds its approved count, cell by cell, 41 in all, and none of it is in the cells\' totals', () => {
+    const actual = Object.fromEntries(Object.entries(GOAL_RESERVE_LINES).map(([f, subs]) => [f,
+      Object.fromEntries(Object.entries(subs).map(([s, v]) => [s, Object.fromEntries(Object.entries(v).map(([k, lines]) => [k, lines.length]))]))]));
+    expect(actual).toEqual(EXPECTED_RESERVE);
+    expect(Object.values(GOAL_RESERVE_LINES).reduce((n, subs) => n + count(subs), 0)).toBe(41);
+    const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
+    expect(totals).toEqual(EXPECTED_TOTALS);
+  });
+
+  test('every reserve cell names an existing family, sub-kind and vantage of the cells', () => {
+    expect(Object.keys(GOAL_RESERVE_LINES).length).toBeGreaterThan(0);
+    expect(orphanReserveCells(GOAL_RESERVE_LINES)).toEqual([]);
+  });
+
+  test('the reserve is lawful alone, and with the cells: its family\'s slots only, no line twice anywhere', () => {
+    expect(shapeViolations(GOAL_RESERVE_LINES)).toEqual([]);
+    expect(shapeViolations(withReserve(GOAL_RESERVE_LINES))).toEqual([]);
+  });
+
+  test('the reserve is frozen to its lines', () => {
+    expect(Object.isFrozen(GOAL_RESERVE_LINES)).toBe(true);
+    for (const subs of Object.values(GOAL_RESERVE_LINES)) for (const v of Object.values(subs)) for (const lines of Object.values(v)) expect(Object.isFrozen(lines)).toBe(true);
+  });
+
+  test('CONTROL: a reserve line repeating a cell line, a reserve line, a foreign slot, or a cell the cells lack, each red the checker', () => {
+    const dupCell = { TIES: { rival_enemy: { long: [textOf(GOAL_FAMILY_LINES.TIES.rival_enemy.long[0])] } } };
+    expect(shapeViolations(withReserve(dupCell)).some((x) => x.startsWith('duplicate:'))).toBe(true);
+    const first = textOf(GOAL_RESERVE_LINES.TIES.rival_enemy.long[0]);
+    const dupReserve = { TIES: { rival_enemy: { short: [first], long: [first] } } };
+    expect(shapeViolations(dupReserve).some((x) => x.startsWith('duplicate:'))).toBe(true);
+    expect(shapeViolations({ TIES: { rival_enemy: { long: ['Stand against {rival} with {other} this season.'] } } }).some((x) => x.startsWith('slot: {rival} is not in GOAL_SLOTS.TIES'))).toBe(true);
+    expect(orphanReserveCells({ TIES: { rival_enemy: { middle: ['Wait on {other}.'] } }, POWER: { allied: { long: ['Help {rival}.'] } } })).toEqual(['TIES.rival_enemy.middle', 'POWER.allied.long']);
+  });
+
+  test('the harsh-tie map names only reserve TIES lines, real tie types and their real strengths', () => {
+    const reserveTies = Object.values(GOAL_RESERVE_LINES.TIES || {}).flatMap((vs) => Object.values(vs).flat().map(textOf));
+    const entries = Object.entries(GOAL_LINE_NOT_ON_TIES);
+    expect(entries.length).toBeGreaterThan(0);
+    for (const [line, refused] of entries) {
+      expect(reserveTies, line).toContain(line);
+      for (const [type, strengths] of Object.entries(refused)) {
+        expect(Object.keys(RELATIONSHIP_STRENGTHS), `${line}: ${type}`).toContain(type);
+        for (const s of strengths) expect(RELATIONSHIP_STRENGTHS[type], `${line}: ${type} ${s}`).toContain(s);
+      }
+    }
+    expect(Object.isFrozen(GOAL_LINE_NOT_ON_TIES)).toBe(true);
   });
 });

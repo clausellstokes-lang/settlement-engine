@@ -382,20 +382,89 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
   });
 
   it('gives the measured full-suite ratchet enough CI timeout headroom', () => {
-    // 135, raised from 90 on 2026-09-20 in the same commit as the cap it pins. 90 was itself
-    // set that morning with NO concluded run to measure — both of PR #53's first runs were cut
-    // at 45 — and its comment promised to tighten to measured-plus-headroom once a real figure
-    // arrived. It arrived, and it was not slack: both runs at f76ddf0ab CONCLUDED GREEN at
-    // 62m37s (35541172706, push) and 82m08s (35541276693, pull_request) — the SAME commit, a
-    // twenty-minute spread between two runners, and 82m08s is 91% of the 90-minute cap. The
-    // rule this cap now follows is the longest CONCLUDED run × 1.5, rounded up to the next 15:
-    // 82m08s × 1.5 = 123m12s → 135 (the job's own comment carries the run ids).
     // THE DIRECTION OF THIS PIN: it exists so the cap cannot drift back BELOW the measured
     // suite, so it is raised with a fresh measurement and never lowered to match a run that was
-    // cut. A cut run is not evidence that a smaller cap suffices.
+    // cut. A cut run is not evidence that a smaller cap suffices. The rule the cap follows is the
+    // longest CONCLUDED run × 1.5, rounded up to the next 15.
+    // HISTORY: 135 on the serial job from 2026-09-20 (82m08s × 1.5 → 135). By 2026-11-19 the
+    // serial step concluded at 113m45s and 132m33s and was CUT at 134m28s twice, so the suite
+    // was SHARDED (CI-SHARD) rather than given another cap: the suite now runs in the matrix job
+    // `check-tests-shard`, six shards, and `check-tests` is the verdict over their merged report.
+    // The shard cap is the estimate the job's comment carries (the largest local shard is 19.1%
+    // of the suite; 19.1% of 132m33s plus set-up = 26m20s × 1.5 → 45), TIGHTENED by the same
+    // rule at the first concluded shard figure; the verdict runs no test and carries 10.
+    // THE HOUSE RULE APPLIED (point 76, 2026-11-20): the longest concluded shard is shard 6 at 36m04s
+    // (run 44659169256 at 85fccf898; 36m01s the run before); × 1.5 = 54m06s → 60. The job is found by
+    // its identity (`check-tests-shard`), never by position, so the pin follows the job, not a line.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-    const testsJob = jobBody(ci, 'check-tests');
-    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*135\s*$/m);
+    const shardJob = jobBody(ci, 'check-tests-shard');
+    const verdictJob = jobBody(ci, 'check-tests');
+    expect(shardJob, 'ci.yml must declare the check-tests-shard matrix job').toBeTruthy();
+    expect(shardJob).toMatch(/^\s*timeout-minutes:\s*60\s*$/m);
+    expect(verdictJob).toMatch(/^\s*timeout-minutes:\s*10\s*$/m);
+  });
+
+  it('the sharded ratchet judges ALL six shards once, and the verdict cannot be skipped', () => {
+    // What the serial job guaranteed and the sharded shape must keep: ONE verdict, over the
+    // WHOLE source phase, by the ratchet's own code. The partition itself is vitest's sequencer
+    // and the merge refuses an overlap, a missing shard and a wrong count
+    // (tests/lint/vitestShardMerge.test.js drives each refusal); this pins the WIRING.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const shardJob = jobBody(ci, 'check-tests-shard');
+    const verdictJob = jobBody(ci, 'check-tests');
+    const shardList = shardJob.match(/^\s*shard:\s*\[([^\]]+)\]\s*$/m)?.[1].split(',').map((s) => Number(s.trim()));
+    expect(shardList, 'the matrix must list its shards explicitly').toEqual([1, 2, 3, 4, 5, 6]);
+    expect(shardJob).toMatch(/^\s*fail-fast:\s*false\s*$/m);
+    const shardRuns = runCommands(shardJob).join('\n');
+    expect(shardRuns).toMatch(/node scripts\/test-ratchet-shard\.mjs\s*\\?\s*"\$\{\{ matrix\.shard \}\}" 6 /);
+    // The shard keeps everything the serial job carried: the database, its URL, the ledger ref.
+    expect(shardJob).toMatch(/^\s*postgres:\s*$/m);
+    expect(shardJob).toMatch(/CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL:/);
+    expect(shardRuns).toContain('+refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08');
+
+    expect(verdictJob.match(/^\s*needs:\s*\[([^\]]+)\]\s*$/m)?.[1].trim()).toBe('check-tests-shard');
+    expect(verdictJob, 'the verdict must run after a failed shard, to fail closed with a reason')
+      .toMatch(/^\s*if:\s*\$\{\{\s*!cancelled\(\)\s*\}\}\s*$/m);
+    const verdictRuns = runCommands(verdictJob).join('\n');
+    expect(verdictRuns).toMatch(/node scripts\/merge-vitest-shard-reports\.mjs --count 6 /);
+    expect(verdictRuns).toMatch(/npm run test:ratchet -- --from-log "\$RUNNER_TEMP\/test-ratchet-merged\.json"/);
+    expect(verdictJob).toMatch(/SHARDS_RESULT:\s*\$\{\{\s*needs\.check-tests-shard\.result\s*\}\}/);
+    expect(verdictRuns).toContain('if [ "$SHARDS_RESULT" != success ]; then');
+  });
+
+  it('the two browser jobs run in Playwright\'s image at the LOCKFILE\'s exact version, and their install is the launch probe with its fallback', () => {
+    // CI-FIT point 75 (2026-11-20): the jobs' `npx playwright install --with-deps` spent 43m38s
+    // (e2e) and 9m45s (performance) in APT at 29ec255fe; the browsers took about 10 s. Both jobs
+    // now run in `mcr.microsoft.com/playwright:v<version>-noble`, which carries the browsers and
+    // their libraries. An image of ANOTHER version carries browsers this playwright-core does not
+    // launch (every launch would fall back to the slow install, silently restoring the cost), so
+    // the tag is pinned here to package-lock.json: a Playwright bump that forgets the workflow,
+    // or the reverse, turns this red.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const lock = JSON.parse(readFileSync(join(ROOT, 'package-lock.json'), 'utf8'));
+    const versions = ['node_modules/@playwright/test', 'node_modules/playwright', 'node_modules/playwright-core']
+      .map((key) => lock.packages?.[key]?.version);
+    // LIVENESS ANCHOR: the lockfile really names one Playwright version, so the equalities below
+    // cannot pass on an undefined read.
+    expect(versions[0], 'package-lock.json must lock @playwright/test').toMatch(/^\d+\.\d+\.\d+$/);
+    expect(new Set(versions).size, `the three Playwright packages must lock one version: ${versions.join(', ')}`).toBe(1);
+    const expected = `mcr.microsoft.com/playwright:v${versions[0]}-noble`;
+
+    const probes = { e2e: ['chromium', 'webkit'], performance: ['chromium'] };
+    for (const [id, browsers] of Object.entries(probes)) {
+      const job = jobBody(ci, id);
+      expect(job, `ci.yml must declare the ${id} job`).toBeTruthy();
+      const images = [...job.matchAll(/^\s*container:\s*\n\s*image:\s*(\S+)\s*$/gm)].map((m) => m[1]);
+      expect(images, `${id} runs in exactly one container, the lockfile's Playwright image`).toEqual([expected]);
+      const runs = runCommands(job);
+      // The install step is the probe, naming exactly the browsers the job launches; the old
+      // install survives ONLY as the probe's fallback (in the script), never as a step of its own.
+      expect(runs).toContain(`node scripts/ensure-playwright-browsers.mjs ${browsers.join(' ')}`);
+      expect(runs.filter((run) => /playwright install/.test(run)), `${id} must not install on the runner directly`).toEqual([]);
+      // The anti-vacuity guards stay: the probe cannot make a job pass that ran no test.
+      expect(runs.filter((run) => /scripts\/check-e2e-not-vacuous\.mjs --results /.test(run)).length,
+        `${id} keeps its runtime "is not vacuous" guard`).toBeGreaterThan(0);
+    }
   });
 
   it('every setup-node use reads the repository runtime pin', () => {

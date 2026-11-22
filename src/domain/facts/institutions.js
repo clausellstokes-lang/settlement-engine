@@ -45,6 +45,21 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
   // COHERENCE-PRESUME (the chair's ruling of 2026-11-11, additions only): a money changer, a bank or a
   // counting house — the houses a line naming coin-changing or banking presumes
   bank: /\bbank(?:s|ing|ers?)?\b|\bmoney.?changers?\b|\bcounting.?houses?\b/i,
+  // DAILY-1/DAILY-2 (the chair's grants of 2026-11-20 18:37 and 18:56, rulings 8 and 12; vetoable by the owner, appended rows
+  // only): the houses the daily-life lines need, each exactly the name test LINES-1 measured (`lines/L1/probe.1.mjs :: NEEDS`)
+  waterSource: /\bwells?\b|\bwater source|\bwater sources\b|\bwater system|\bwater infrastructure|\baqueduct/i,
+  dwellings: /\bdwellings?\b|\bhousing\b/i,
+  farmland: /\bfarmland\b|\bsubsistence farming\b/i,
+  commonGrazing: /\bcommon grazing\b/i,
+  bridge: /\bbridges?\b/i,
+  square: /\bsquares?\b/i,
+  bakery: /\bbak(?:er|ers|ery|eries|ehouse)\b/i,
+  warehouse: /\bwarehouse|\bstorehouse/i,
+  theatre: /\btheat(?:er|re)s?\b|\bopera house\b/i,
+  fishingLanding: /\bfisher'?s landing\b|\bfishing community\b/i,
+  rootCellar: /\broot cellar\b/i,
+  shepherd: /\bshepherd/i,
+  craftGuild: /\bcraft guilds?\b/i,
 });
 
 /** The kinds a line may declare. @type {ReadonlyArray<string>} */

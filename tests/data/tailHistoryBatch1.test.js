@@ -48,7 +48,12 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
     }), 'no war hook in peace');
   }, 240_000);
   test('Y1 KEEP: the war hooks still print where a war is in force', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-5', 'r2r-metropolis-4'], (seed) => {
+    // RULE8-RESEAT (PAGE-12, 2026-11-22): reseated from r2r-hamlet-5 and r2r-metropolis-4, whose history no longer prints a war
+    // hook. The current tension's pool (troubleHooks.js) draws by key since HOOKS-BUILD, by the mixed key since cure C, and holds
+    // the reworded lines; the war words are the timeline template's (historyData.js, external_threat plotHooks 0-1, excluding
+    // `war: peace`). r2r-hamlet-413 and r2r-metropolis-136 are the first of r2r-<hamlet|metropolis>-0..599 that print one
+    // (hamlet 3 of 600: 413, 525, 527; metropolis 4 of 600: 136, 232, 366, 591).
+    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-413', 'r2r-metropolis-136'], (seed) => {
       const town = bornCensus(seed);
       expect(WAR_HOOKS.test(historyText(town)), `${seed} keeps a war hook`).toBe(true);
     }), 'the war hooks at war');
@@ -83,7 +88,9 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
     }), 'no traffic or offered food under the siege or the famine');
   }, 600_000);
   test('Y4 KEEP: the same lines still print where no siege or famine stands', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-16', 'r2r-city-16', 'r2r-city-13', 'r2r-hamlet-17'], (seed) => {
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-metropolis-16, r2r-city-13 and r2r-hamlet-17 draw
+    // other lines now; r2r-metropolis-34, r2r-city-9 and r2r-hamlet-2 (the census's own, same tiers, no siege and no famine) print one
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-34', 'r2r-city-16', 'r2r-city-9', 'r2r-hamlet-2'], (seed) => {
       const town = bornCensus(seed);
       expect(/notice of the next fair|Porters bent under loaded frames|handed out to anyone who asks|stacked by the water/.test(arrivalText(town)), `${seed} keeps its arrival line`).toBe(true);
     }), 'the arrival lines in peace');

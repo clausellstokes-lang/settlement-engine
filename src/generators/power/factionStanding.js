@@ -4,7 +4,7 @@
  * craft, thieves vs guard, noble vs merchant, clergy vs arcane, …).
  */
 
-import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { powerNameWithArticle, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): a power named in a standing sentence takes its article
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
 import { powerLabelOf } from '../factionDynamics.js';
 import { seatIsCouncil } from './claimStanding.js';
@@ -42,7 +42,7 @@ const isAppointedOccupier = (f) => STRESS_POWER_FACES.some((row) => row.appointe
 /** @param {{ faction: string } | undefined} gov @returns {string} the occupier's standing line, its hall named as the relation line names it */
 const occupierStanding = (gov) => {
   if (!gov) return 'It does not bargain for its way: what it decides is carried out, whatever its numbers.';
-  const said = powerSentenceName(gov.faction);
+  const said = powerNameWithArticle(gov.faction);
   return `It does not bargain for its way: ${said} ${pluralPowerName(said) ? 'carry' : 'carries'} out what it decides, whatever its numbers.`;
 };
 
@@ -56,7 +56,7 @@ const isWeakPower = (f) => ['Minor', 'Suppressed'].includes(powerLabelOf(f.power
 // says so: 7 of the 17 towns at 4ff449a7b). The line names the rival it read, by its prose form and its number.
 /** @param {{ faction: string }} rival @returns {string} */
 const arcaneAheadSaid = (rival) => // TAIL-CLOSE-SRC-4 (SR4): named as its card names it, by the one grammar reader, as every power is
-  powerSentenceName(rival.faction) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
+  powerNameWithArticle(rival.faction, true) + (pluralPowerName(powerSentenceName(rival.faction)) ? ' have' : ' has');
 
 // BAR6-POWERS (LAW 10f-weight, the audit's C110252, the chair's 10/c): the nobles' card said "The merchant guilds now have more
 // say" of the FIRST power whose name holds "Merchant", which may be the ruling Grand Merchant Oligarchy while the Merchant Guilds
@@ -79,10 +79,12 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           });
         },
         topFactionName = factions[0] ? factions[0].faction : null,
-        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy } })) : null, // BAR4-HISTORY C14176 (FS2)
+        // SEAT-1 U4 (CS3): the partial settlement hands the law its seat carries (`seat.config`), or none, and then the coup's
+        // reader reads the OLD law (fail closed): under the seat law the power that holds the seat is no challenger of it.
+        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy }, ...(seat.config ? { config: seat.config } : {}) })) : null, // BAR4-HISTORY C14176 (FS2)
         contestedBy = seatReading && coupRiskLabel(seatReading) === 'Contested' ? (seatReading.challengers[0]?.name ?? null) : null;
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
-      var topSaid = topFactionName ? powerSentenceName(topFactionName) : null;
+      var topSaid = topFactionName ? powerNameWithArticle(topFactionName) : null;
       factions[1] && factions[1].faction;
       // TAIL-POWERS-B-4 (the chair's P31 (4), vetoable by the owner): "Three powers stand almost level ... no one leads" reads the
       // roster: the powers level with the first are those within five of it AT ITS OWN RUNG of the ladder (powerLabelOf), so a
@@ -146,9 +148,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
               : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
-                    (higherNeighbor ? powerSentenceName(higherNeighbor.faction) : 'the second power') +
+                    (higherNeighbor ? powerNameWithArticle(higherNeighbor.faction) : 'the second power') +
                     ' and ' +
-                    (factions[0] ? powerSentenceName(factions[0].faction) : 'the leading power') +
+                    (factions[0] ? powerNameWithArticle(factions[0].faction) : 'the leading power') +
                     ' against each other when they can.')
                 : (standing =
                     'They are always at the table, but cannot set their own terms.')),

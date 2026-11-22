@@ -1,0 +1,9 @@
+# first paint itemized by source file (PAGE-12, 2026-11-22 05:45 UTC): A = the line f5295e425 (git archive), B = the lane a5bd56a09 (code 6b98591f9); both 'vite build --sourcemap' into scratch; the closure as tests/build/vendorPdfLazy.test.js reads it (index.html's module entry and its static imports)
+A chunks content-identity data engine-core index kernel vendor-icons vendor-react vendor-state total 1179893
+B chunks content-identity data engine-core index kernel vendor-icons vendor-react vendor-state total 1180468
+DELTA total (B - A) 575
+    568    17299 ->    17867 src/domain/facts/factVocabulary.js
+   -181      181 ->        0 ../../linetree/__vite-browser-external
+    181        0 ->      181 ../../../../../../../home/user/settlement-engine/__vite-browser-external
+      7      912 ->      919 src/kernel/rngContext.js
+sum of attributed deltas 575

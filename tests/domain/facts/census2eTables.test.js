@@ -92,8 +92,10 @@ describe('DAILY_LIFE_CONTEXT — DEFENSE_CONTEXT declared at CENSUS-1e\'s wired 
 
 describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through textOf)', () => {
   const found = declaredLiteralsOf('src/components/new/tabs/DailyLifeTab.jsx');
-  it('the loading messages and the food / order cells declare what the ledger says', () => {
-    const ids = ['LOAD_MSGS[1]', 'LOAD_MSGS[2]', 'localNarrative.food[deficit>20]', 'localNarrative.food[deficit>0]', 'localNarrative.food[surplus>10]', 'localNarrative.food[else]',
+  // DAILY-PAGE-1 (the owner's order of 2026-11-22): the loading messages left with the Daily Life button; the ledger's
+  // LOAD_MSGS rows leave with the local narrative's (the brief's commit 2). The food / order cells stay pinned.
+  it('the food / order cells declare what the ledger says', () => {
+    const ids = ['localNarrative.food[deficit>20]', 'localNarrative.food[deficit>0]', 'localNarrative.food[surplus>10]', 'localNarrative.food[else]',
       'localNarrative.order[>=70]', 'localNarrative.order[>=45]', 'localNarrative.order[else]'];
     for (const id of ids) {
       const { pool, line } = ledgerLine('DAILY_LIFE_TAB', `DAILY_LIFE_TAB.${id}`);

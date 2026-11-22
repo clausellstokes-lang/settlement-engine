@@ -15,6 +15,19 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
+
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
+
+/** PEOPLE-1 B1: a pooled row's member, by identity (a `{slot}` reads as any fill); the pool as the writer composes it (B1c:
+ * [the T row's own line, ...the data pool]). @param {string} key @param {unknown} text */
+const memberOf = (key, text) => [{ text: T[key].position }, ...POSITION_VARIANTS[key]].some((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`).test(String(text)));
 
 /** @param {string} seed the readers' shape (rpf-/rw3-: DEFAULT_CONFIG, Random off for crises) */
 function born(seed) {
@@ -66,7 +79,9 @@ describe('POWERS-9 · a structural row of the card\'s own body', () => {
 
   it('THE GUARD: the true rows still print (the head of the town\'s one armed power; a noble body\'s lesser member)', () => {
     const calm = born('rpf-town-calm-13');
-    expect(calm.npcs.find((c) => c.name === 'Osterhild Gärtner')?.structuralPosition).toMatch(/^Commands those under arms in quiet times/);
+    // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the armed head's calm row is pooled
+    // (`data/npcStructureVariants.js :: POSITION_VARIANTS`); the head of the town's one armed power prints a member of it
+    expect(memberOf('military__stable__dominant', calm.npcs.find((c) => c.name === 'Osterhild Gärtner')?.structuralPosition), 'the armed head\'s row').toBe(true);
     // the census's 720 shape (SECOND-WAVE-CENSUS births: every random dial on)
     const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
       selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };

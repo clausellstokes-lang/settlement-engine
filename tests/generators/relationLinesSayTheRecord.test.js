@@ -29,15 +29,15 @@ const rels = (/** @type {any[]} */ f, stress = /** @type {string[]} */ ([])) => 
 
 /** [what, the narratives, must NOT print, prints instead] */
 const UNIT = /** @type {Array<[string, () => string, string, string]>} */ ([
-  ['the guard row names The Guard', () => rels([P('Elder Council', 40, true), P('Military/Guard', 26)]), 'Military/Guard carries', 'The Guard carries them out'],
-  ['about as strong: the force, not a commander', () => rels([P('Elder Council', 30, true), P('Military/Guard', 30)]), "the commander's agreement", "asks for The Guard's agreement"],
-  ['the faith: the seat, not order; the verb agrees', () => rels([P('Elder Council', 40, true), P('Religious Authorities', 25)]), 'keeps order and collects', "Religious Authorities tell people that Elder Council's rule is right and ordained"],
+  ['the guard row names The Guard', () => rels([P('Elder Council', 40, true), P('Military/Guard', 26)]), 'Military/Guard carries', 'the Guard carries them out'], // NAMES-1 (CN1): the article
+  ['about as strong: the force, not a commander', () => rels([P('Elder Council', 30, true), P('Military/Guard', 30)]), "the commander's agreement", "asks for the Guard's agreement"], // NAMES-1 (CN1): the article
+  ['the faith: the seat, not order; the verb agrees', () => rels([P('Elder Council', 40, true), P('Religious Authorities', 25)]), 'keeps order and collects', "the Religious Authorities tell people that the Elder Council's rule is right and ordained"], // NAMES-1 (CN1): the article
   ['the faith ahead: no quarrel claimed', () => rels([P('Elder Council', 30, true), P('Religious Authorities', 45)]), 'keep quarrelling', 'the two do not agree on who decides what'],
-  ['the merchants under the rules: the verb agrees', () => rels([P('Elder Council', 40, true), P('Merchant Guilds', 10)]), 'Merchant Guilds works', 'Merchant Guilds work under the rules Elder Council sets, and pay for a hearing'],
-  ['under an occupation no bargained taxes', () => rels([P('Elder Council', 30, true), P('Merchant Guilds', 50)], ['occupied']), 'taxes are bargained over', 'run by Merchant Guilds more than by Elder Council.'],
+  ['the merchants under the rules: the verb agrees', () => rels([P('Elder Council', 40, true), P('Merchant Guilds', 10)]), 'Merchant Guilds works', 'The Merchant Guilds work under the rules the Elder Council sets, and pay for a hearing'], // NAMES-1 (CN1): the article
+  ['under an occupation no bargained taxes', () => rels([P('Elder Council', 30, true), P('Merchant Guilds', 50)], ['occupied']), 'taxes are bargained over', 'run by the Merchant Guilds more than by the Elder Council.'], // NAMES-1 (CN1): the article
   ['a Suppressed noble power does not bargain', () => rels([P('Elder Council', 12, true), P('Noble Houses', 8)]), 'keep enough rights of their own', 'Noble Houses still have their titles'],
   ['the guard and the thieves when contested', () => criminalMilitaryRelation(P("Thieves' Guild", 20), P('Military/Guard', 25), 'equilibrium', { isContested: true }).narrative, 'Neither pushes the other', 'Neither has yet pushed the other hard enough'],
-  ['the hall at equilibrium, the climate alone', () => CAPTURE_LINES.equilibrium[0]({ ruler: 'Guild Council', agents: [], rulerCriminal: false, underworld: "Thieves' Guild" }), 'leave each other alone', "Guild Council has not set out to stamp Thieves' Guild out"],
+  ['the hall at equilibrium, the climate alone', () => CAPTURE_LINES.equilibrium[0]({ ruler: 'Guild Council', agents: [], rulerCriminal: false, underworld: "Thieves' Guild" }), 'leave each other alone', "the Guild Council has not set out to stamp the Thieves' Guild out"], // NAMES-1 (CN1): the article
   // KEEP (green before and after): the same rows in the state that bears the old words
   ['KEEP: merchants competitive, no occupation', () => rels([P('Elder Council', 30, true), P('Merchant Guilds', 50)]), 'Merchant Guilds works', 'taxes are bargained over, not ordered'],
   ['KEEP: a Minor noble power bargains', () => rels([P('Elder Council', 30, true), P('Noble Houses', 20)]), 'Noble Houses hold old rights', 'keep enough rights of their own'],
@@ -55,10 +55,10 @@ function born(seed) {
 }
 /** [census town, must NOT print, prints instead] (the town the reader read, or a town of the 720 that printed it at the base) */
 const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
-  ['r2r-hamlet-3', "Headman's Authority gives the orders and Military/Guard carries them out", "Headman's Authority gives the orders and The Guard carries them out"],
+  ['r2r-hamlet-3', "Headman's Authority gives the orders and Military/Guard carries them out", "The Headman's Authority gives the orders and the Guard carries them out"], // NAMES-1 (CN1): the article
   ['r2r-hamlet-5', "the commander's agreement", 'is now about as strong as'],
   // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, P31 (5), a declared move): under an occupation no taxes are said
-  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'Guild Council holds the seat; Religious Authorities tell people'],
+  ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'The Guild Council holds the seat; the Religious Authorities tell people'], // NAMES-1 (CN1): the article
   ['r2r-metropolis-39', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
 ]);
 /** @type {Record<string, any>} */

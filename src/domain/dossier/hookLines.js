@@ -39,7 +39,7 @@
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
-import { powerSentenceName } from '../../data/people/powerSentenceName.js';
+import { powerNameWithArticle, powerSentenceName } from '../../data/people/powerSentenceName.js';
 
 /**
  * The issue families, in the order they are tested. A family is matched on the issue text
@@ -89,7 +89,7 @@ const ISSUE_FAMILIES = Object.freeze([
 export function hookPartyOf(name, fallback) {
   const key = typeof name === 'string' && name !== '' ? name : fallback;
   const spelled = key === fallback ? key : powerSentenceName(key);
-  return Object.freeze({ name: spelled, plural: pluralPowerName(spelled), key });
+  return Object.freeze({ name: key === fallback ? key : powerNameWithArticle(key), plural: pluralPowerName(spelled), key }); // NAMES-1 (CN1): `openOnCapital`
 }
 
 // ── THE AGREEMENT, ONE HELPER PER WORD (the singular spelling is the line's old text, byte for byte) ──
@@ -226,7 +226,7 @@ export function conflictIssueFamily(issue) {
  */
 function spoken(line, a, b, issue) {
   const v = lineText(line);
-  return typeof v === 'function' ? v(a, b, issue) : String(v);
+  return typeof v === 'function' ? openOnCapital(v(a, b, issue)) : String(v);
 }
 
 /**
@@ -293,6 +293,17 @@ export function foodGapHookLine(place, facts = null) {
     poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',
   });
   return drawn.line == null ? '' : String(lineText(drawn.line));
+}
+
+/**
+ * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner): a
+ * party's printed name is `powerNameWithArticle` ("the Elder Council", "the Guard"; `hookPartyOf`), its number still read off
+ * the prose form; a line that opens on a party opens on the article's capital ("The Elder Council has …"), here (`spoken`).
+ * Kept below the draw so the draw's call site keeps its line (tests/lint/drawDeclaredKeys.walker.test.js lists it by line).
+ * @param {string} said @returns {string}
+ */
+function openOnCapital(said) {
+  return said.charAt(0).toUpperCase() + said.slice(1);
 }
 
 /** The pools, for the tests that measure their size and read their voice. */

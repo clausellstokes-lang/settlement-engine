@@ -338,7 +338,7 @@ describe('K3 the disaster buffer at the calamity seam', () => {
     const topEconomy = Math.max(...corpus.map((row) => row.economy01));
     expect(topEconomy).toBeLessThan(0.84);
     expect(corpus.filter((row) => row.regime === REGIME_INDUSTRIAL).length).toBe(0);
-  }, 60_000);
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 38.2 s in the last close's serial check; about 70.7 s on a CI runner (the measured factor), within three quarters of its 60 s; x 1.5 -> 120 s
 
   it('7. THE GATE IS K2\'s: the regime moves the mitigation, and K3 derives no gate', () => {
     const industrial = runStrike({ lit: true, regime: REGIME_INDUSTRIAL });
