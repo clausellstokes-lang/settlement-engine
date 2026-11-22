@@ -1876,6 +1876,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryVeilTell8.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/lint/crimeTypesReaders.walker.test.js": {
       "kind": "rationale",
       "ref": "walker-totality-executed"
