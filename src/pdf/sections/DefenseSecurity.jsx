@@ -20,6 +20,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the owner's line, led by its word
 import { cap, smart, label } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
@@ -87,6 +88,10 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           { label: 'Food resilience', value: smart(d.foodResilience) },
         ]}
       />
+      {/* The Safety tile's owner's line (PAGE-1 SAFETY; only in the DM's own document, vm.safetyQualifier). */}
+      {d.safetyLabel && vm.safetyQualifier && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{safetyQualifierLed(vm.safetyQualifier)}</Text>
+      )}
 
       {/* ── Guard assessment ─────────────────────────────────────── */}
       {d.guardAssessment && (

@@ -977,7 +977,7 @@ export const enrichNpcCoherence = (settlement) => {
   const dealt = dealAllegiances(settlement, landed.all, rng);
   // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
   // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
-  const withPowers = rankPowers(settlement, landed);
+  const withPowers = rankPowers(settlement, landed); settleMisfitSecrets(withPowers, { carry: hasMarketInstitution(settlement.institutions || []) ? undefined : withoutMarketWords, narrow: true }); // F5-NARROW (PAGE-8, the chair's ruling of 18:26): after the last writer of the temperament (rankPowers' yield), a principled, honest, incorruptible or plain-dealing card's venal secret walks, draw-free, to its pool's next admitted unheld row; one fragment, so no cited line moves
   assignHandlers(withPowers, settlement);
   leaveAllegianceReceipts(settlement, dealt);
   settlement.powerStructure = withHallCapture(settlement, withPowers); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it

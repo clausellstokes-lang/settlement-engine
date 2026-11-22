@@ -1,0 +1,7 @@
+PAGE-1 CARD — the hash proof (BUILD.md, the common law: render only, no stored field of a born town moves).
+Script: bornHash.mjs (sha256 of JSON.stringify of each born document).
+base: ff51769f7, extracted read-only by `git archive` into a scratch tree  -> bornHash.base.txt
+tip:  this worktree with the CARD change                                 -> bornHash.tip.txt
+hxd300    base 300 documents, tip 300 documents, list digest 61e0cfb1ef2dee06341ba0729c05cc1fd518dbf460ece57b4bece09bbd43acf2 at both
+census720 base 720 documents, tip 720 documents, list digest 877943f2a62be509605188658b3204d1afb0fec7ec9aa2eb6e387e306e1df88d at both
+`cmp bornHash.base.txt bornHash.tip.txt`: identical (1,022 lines each; 0 documents differ).

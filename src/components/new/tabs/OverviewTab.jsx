@@ -26,9 +26,10 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
-import { safetyBandOf } from '../../../domain/display/labelBands.js';
+import { safetyShownOf, safetyAudienceOf } from '../../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label, and the owner's line beside it
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
+import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
 import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 
@@ -114,7 +115,7 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent, testId, note = null }) {
+function StatusTag({ label, value, _color, accent, testId, note = null, noteTestId = 'overview-prosperity-in-crisis' }) {
   const mobile = useIsMobile();
   return (
     <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
@@ -127,8 +128,9 @@ function StatusTag({ label, value, _color, accent, testId, note = null }) {
         * the four call sites, so the next StatusTag cannot repeat it. */}
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
       {/* The tag's own word, where a crisis in force lowered it, says what the place is in ordinary
-        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). */}
-      {note && <div data-testid="overview-prosperity-in-crisis" style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
+        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). The Safety tag's note is
+        * the owner's line beside the law (safetyShown.js), the reliance tag's MAGIC's (magicMeasuresApart.js), each under its own test id. */}
+      {note && <div data-testid={noteTestId} style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
     </div>
   );
 }
@@ -160,7 +162,11 @@ function worldStressorFor(worldState, settlementId) {
   return mine ? normalizeStressor(mine) : null;
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier: publicDossierPassed, playerView: playerViewPassed, worldState = null}) {
+  // PAGE-4 SAFETY-MOUNT (the chair's ruling of 15:58): the Safety line's audience is read from the two props AS PASSED, so an
+  // omitted prop is a reader; every other use of the two flags keeps its default of false, exactly as the signature gave it.
+  const publicDossier = publicDossierPassed === undefined ? false : publicDossierPassed;
+  const playerView = playerViewPassed === undefined ? false : playerViewPassed;
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
@@ -189,10 +195,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const dp = r.defenseProfile || {};
   const scores = dp.scores || {};
   const magicReliance = deriveMagicRelianceView(r);
+  const magicApart = magicMeasuresApartLine(r); // PAGE-1 MAGIC: what reliance and capability each count, where they sit apart
   const foodWord = foodWordShown(r); // the food word's one home (SURFACES-2 item 1)
   const prosperityInCrisis = prosperityInCrisisLine(r);
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
+  // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the Safety label as born, and ON THE OWNER'S PAGE ONLY the one line
+  // beside it where Foundations' Law & order stands two or more steps away, or the record holds what the label could not
+  // see. A gallery, shared or player page is a reader: the born label alone, byte for byte (safetyShown.js fails closed).
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier: publicDossierPassed, playerView: playerViewPassed }));
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at
@@ -393,7 +404,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]} note={prosperityInCrisis}/>
-          <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
+          <StatusTag label="Safety" value={safetyShown.band} accent={safetySeverityOf(sp.safetyLabel).color} note={safetyShown.qualifier} noteTestId="overview-safety-beside-law"/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
           {/* RELIANCE ON MAGIC — THE ONE READING (lane MAGIC, chair ruling 2, 2026-11-03). A
@@ -401,9 +412,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               flag the defence generator sets only during a siege, famine or plague, so a city of
               mages read no reliance while its Magic tab read "integral". This tag prints the view
               model's one reading, in the word the Magic tab and Foundations print, and the shared
-              magic gate removes it where magic does not work. */}
+              magic gate removes it where magic does not work.
+              PAGE-1 MAGIC (F3c): where this word and the Magical Capability bar below sit on opposite
+              sides, the tag's note says what each counts (magicMeasuresApart.js; read only, both stay). */}
           {magicRowsGated(r, [{ key: 'magicReliance' }]).map(({ key }) => (
-            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic}/>
+            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic} note={magicApart} noteTestId="overview-magic-apart"/>
           ))}
         </div>
 

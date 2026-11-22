@@ -1,0 +1,10 @@
+PAGE-4 SAFETY-MOUNT — the hash proof (BUILD.md, the common law: render only, no stored field of a born town moves).
+Script: ../CARD/bornHash.mjs (sha256 of JSON.stringify of each born document), run in this worktree through gate-mutex.
+base: f6d892a94, src untouched (run before any edit)  -> bornHash.base.txt
+tip:  the edited tree (OverviewTab.jsx, DefenseTab.jsx) -> bornHash.tip.txt
+Line 1 of each file is the gate-mutex's own acquire line (its PID differs); every other line is compared.
+base: 300 hxd300 lines, 720 census720 lines
+tip:  300 hxd300 lines, 720 census720 lines
+COUNT hxd300 300 LIST-DIGEST 61e0cfb1ef2dee06341ba0729c05cc1fd518dbf460ece57b4bece09bbd43acf2 (both)
+COUNT census720 720 LIST-DIGEST 877943f2a62be509605188658b3204d1afb0fec7ec9aa2eb6e387e306e1df88d (both)
+RESULT: `diff` of the two files with the gate-mutex line removed prints nothing: the 1020 document hashes are EQUAL.
