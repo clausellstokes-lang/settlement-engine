@@ -1,97 +1,105 @@
 # R3-TELL-8b HAND-BACK (VEIL-32's second builder; worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`, from b6b6b723e)
 
-This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN** (the STOP below). Nothing in `src/`,
-`supabase/` or `tests/` changed. This file is the only thing committed.
+This sitting: unit (viii), steps 2 and 3. After the seat raised the mark, I did sitting A (the reds) and sitting B (the cure),
+and committed each step. Nothing is pushed.
 
 ## STOPS (first)
-1. **THE MARK, REACHED BY THE READ-WHOLE LAW ALONE (the brief's "more than this brief names ... say so and stop", and its
-   "if the cure outgrows it").** The law's three files are 389 KB together: 212 274 KB (3,170 lines), the registry 76 KB, the
-   twin 39 KB. Read WHOLE, as the law binds, they took about four fifths of the 250,000-token mark before any edit was
-   allowed. What was left could not build the three reds (an arm over 140 births on both engines, a pglite test over seven
-   causes and a control, a census walker) and a two-engine cure with its own reds, the build figures and `tests/lint` whole,
-   to this lane's standard. A half-built red in a security lane is worse than none, so I wrote none.
-   **THE SEAT'S CALL, PROPOSED:** split unit (viii) across sittings. Sitting A: the reds (i), (ii) and (iii), committed red.
-   Sitting B: the cure (1) to (4) with galleryVeil.js's red and its converse. Each sitting reads the law's three files whole.
-   The map below lets sitting B go straight to the edit points.
-
-## READ-WHOLE LAW, SAID PLAINLY
-- READ WHOLE, every line: `supabase/migrations/212_share_veil_later_cures.sql` (lines 1-3170, the character tables
-  `_gallery_veil_name_bound`, `_name_pad`, `_name_case` and `_name_prep`'s skew map included), `src/domain/veil/rosterChoiceRegistry.js`
-  (1-662), `src/domain/display/galleryRosterChoices.js` (1-494). Also read whole: the brief, `briefs/R3-TELL-5-BRIEF.md`,
-  `out/v31/tell7/TELL7-HANDBACK.md`, `out/v32/tell8/TELL8-HANDBACK.md`.
-- NOT READ (no edit was made, so the law did not yet bind them): `galleryWithholdAlways.js`, `safetyProfile.js`,
-  `pageRederive.js`, `importRederive.js`, `galleryVeil.js` (only its `GROUPING_OPEN_EVIDENCE` row, 863-869), PART 30/32/33's
-  rulings, the step-1 probes, the door walker. Sitting B must read each one it changes WHOLE.
-
-## THE CURE'S EDIT POINTS (read from the files at b6b6b723e; for sitting B, PLAUSIBLE until built)
-- **(1) 212, the always-rule.** `_gallery_veil_withhold_always` (1943-2071): add
-  `-- registry: safety.crimeTypes` and `economicState,safetyProfile` minus `crimeTypes` beside the existing
-  `safety.blackMarketCapture`/`safety.safetyRatio` line (1988-1990). It runs last on every body, and on the unmarked
-  projection too (`_gallery_veil` 2698-2701, 2712), so the gallery read, the import, the link and the map's member all lose the key.
-  No new function, so the rollback is unchanged. The twin's `withholdAlways` gets the same rule with `// registry: safety.crimeTypes`.
-- **(1) 212, the attribution block LEAVES.** `_gallery_veil_roster_choices` 2597-2605 (the `-- registry: safety.crimeTypes`
-  filter); twin `applyRosterChoices` 298-303. The `raisers` map (2185-2199) and the twin's `CRIME_TYPE_RAISERS` (33-46) STAY:
-  the services rule's `acc_types` (2504-2507; twin 231-233) reads `pub`'s list by them. `pub` is the projection before the
-  veil, so it still holds the stored list after the cure, and the services rule moves no byte. TO CHECK IN SITTING B:
-  `tests/lint/rosterChoiceRegistry.walker.test.js` binds each built row to its host's `registry:` marker. The row's host
-  changes (H.sChoice/tChoice to H.sAlways/tAlways). The `-- registry: safety.crimeTypes` comment at 2185 (above `raisers`)
-  may then name the row in a host that no longer hosts it. Read the walker before deciding whether that marker stays.
-- **(1) The registry row** (rosterChoiceRegistry.js 324-325): `rule: 'withhold', when: 'always', page: 're-derive'`,
-  `server: H.sAlways, twin: H.tAlways`, scope rewritten with ruling (b). `REGISTRY_SITES` rows naming `safety.crimeTypes`
-  (597, 609-611, 652, 654, 655, 659) stay valid: the writer is unchanged.
-- **(2) The grouping evidence** (galleryVeil.js 863-869): today it needs BOTH `criminalInstitutions` and `crimeTypes` to be
-  arrays. Once the key leaves, it reads false on every shared page, and DefenseTab's `crimeVeiled` shuts the block. Narrow it to
-  `criminalInstitutions` alone (TELL8 1e: proven on 6,528 of 6,528 pages). Red first: a page with the grouping open must not
-  read shut once the key is gone. Converse: a shut grouping stays shut.
-- **(4) The merchant-army hook, both engines.** 212's `hooks` map 2210 and 2212, and twin `SAFETY_HOOK_RAISERS` 58 and 60, both map
-  it to `hasGangInfra`. The engine raises it on `merchantArmy = (economy >= 68 && military <= 38) && (hasMerchantGuild ||
-  hasBank) && (hasMercenary || hasGangInfra) && fires(55)` (priorityHelpers.js 564-567). The priorities and `fires(55)` read
-  the config alone, not the houses, so a SQL form needs no hash (INFERRED; not executed): "raised by a hidden house" =
-  `pub`'s stored `safetyProfile.flags.merchantArmy` is true (or unsure) AND the served flags (`sfl`, recomposed by item C)
-  no longer give `(hasMerchantGuild or hasBank) and (hasMercenary or hasGangInfra)`. The hook map then names
-  `merchantArmy`, and `raised` carries it in both engines. `pub` keeps the stored flag because withhold-always runs on `doc`
-  only. Measure it on the pool before building: TELL8 1f found the stored flag true on every page of occupied-0-65.
-- **(2)/(3) The reader:** pageRederive.js and importRederive.js are not read this sitting. TELL8's first-paint note
-  (gallery.js already imports pageRederive.js, which already imports `generateSafetyProfile` statically) must be measured by
-  `npm run build` and `VERIFY_DIST=1` before and after.
+1. **THE MARK** (my first hand-back, 85a8c6562): ANSWERED by the seat (mark raised to 600,000, go on). Closed.
+2. **FIRST PAINT, BY THE LETTER (the seat's call).** First paint's raw bytes did not move: 1,175,552 at the tip and at the cure.
+   Seven of its eight chunks are byte-equal. The entry chunk is byte-equal once each lazy chunk's 8-character content hash
+   in it is normalised (`cmp`). The compressed figures moved: gzip 374,005 to 374,025 (+20), Brotli 314,230 to 314,125
+   (-105). Those moves come only from re-hashed lazy-chunk names. The worker is unchanged at 2,579,751. I read this as "not
+   one byte up in first paint". The brief says "ANY RISE: STOP", and gzip rose by 20, so I name it here for the seat's
+   ruling. Everything after it was runs only; I built nothing on it.
+3. **NOT MINE, PRE-EXISTING AT THE TIP** (executed at b6b6b723e from `git archive` into scratch):
+   - VERIFY_DIST=1: 5 of 66 failed at the tip and the same 5 at the cure. The budgets were already exceeded at the tip.
+   - galleryVeilSignalCopies `server-veil-city-2` (2 tests): "block:services.criminal ... the row is live". It fails the
+     same way at the tip.
 
 ## PROGRESS
-- RESUMED by VEIL-32 (mark raised to 600,000; STOP 1 above is answered: sitting A then sitting B in this same session).
-- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds: (iii) walker c325d9e59; (i) the arm <this commit>
-  (tip: HALF 1 3,728/6,528 pages, HALF 2 644 pages = 32 gated towns by [type, desc], 25 by type, 1 control; hook 20
-  shortfall pages on metropolis-occupied-0-65; parity 0; ruling 88: 4 pages, all at g:010, village-under_siege-0-8;
-  `out/v32/tell8b/arm-tip/`, `gunzip -k` the shards before `node measure/arm-an.mjs arm-tip`); (ii) the pglite test <this commit> (tip: 1 failed of 1 in
-  311 s; HALF 1 272, HALF 2 184, hook 22; the anti-vacuity and teeth arms hold); (iv) the evidence red and its converse <this commit> (tip: 1 failed, the
-  converse 1 passed); tests/lint WHOLE after the reds (08:04:23; `lint-whole-reds.txt`): 18 files / 26 tests failed: the
-  sixteen standing (the seat's 3cca025b8 list, 22 tests), mine crimeTypesReaders (3, red by design) and
-  netCurrentExtractorAnchor (1: my walker's unanchored SQL lookup, cured <this commit>, both re-run: 7 passed, the 3
-  red by design); CURE part 1 (212 + the twin + the registry row) 5c727f4b3; CURE part 2 (the ONE reader, the import's save,
-  the evidence row) 977518282; THE ARM AT THE CURE <this commit>: GREEN, HALF 1 0/6,528, HALF 2 0
-  (gated 0/92, controls 0/48), hook 0, parity 0 (`arm-cure/`); d2123099f; red (ii) GREEN <this commit> (3 of 3: every town prints on all 34 open reads, the
-  hook served on 24 of 24 pool reads of 0-65); the build's figures, typecheck and eslint <this commit>
-  (first paint raw 1,175,552 at tip and cure, +0; gzip +20 and Brotli -105 from the entry's references to re-hashed lazy
-  chunk names only (cmp equal once normalised); worker 2,579,751 +0; the five VERIFY_DIST reds are the tip's own;
-  typecheck 167/167 exit 0; eslint 0 on the nine touched files); c676a1048; tests/lint WHOLE at the cure <this commit>
-  (08:43:42): 16 files / 22 tests failed of 3,267, EXACTLY the sixteen standing (the seat's 3cca025b8 list); mine 0.
+- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds c325d9e59 (iii) + bb8de9df3 (its anchor),
+  dcf6f4514 (i), dc4ec187a (ii), 576e1123a (iv, the evidence), cure 5c727f4b3 (1: 212 + twin + registry, the hook) +
+  977518282 (2: the ONE reader, the import's save, the evidence row) + dbdf45ac0 (3: two neighbouring suites to ruling (b)):
+  GATE-1 / GATE-2 not read by me (the seat re-makes the pool, STOP 1g), arm 0/92 (HALF 1 0/6,528, HALF 2 0, controls 0/48,
+  hook 0, parity 0); families left: as at unit (vii) less this unit's (crimeTypes 25, the 7 desc-only, plotHooks 1).
+
+## THE REDS AND THEIR GREENS
+| red | at the tip (b6b6b723e) | at the cure |
+|---|---|---|
+| (i) THE ARM `measure/arm.{probe.jsx,sh}`, `arm-an.mjs` (140 births, both engines, every gated setting + allShown + unmarked, off and DM) | HALF 1 3,728/6,528 pages (92/92, 48/48); HALF 2 644 pages = 32 gated towns by [type, desc] (25 by type), 1 control; hook 20 shortfall pages (metropolis-occupied-0-65); parity 0 (`arm-tip/`) | GREEN: 0, 0, controls 0, hook 0, parity 0 (`arm-cure/`, 08:09-08:17) |
+| (ii) `tests/security/galleryVeilTell8.pglite.test.js` (8 born towns: causes (a)-(f), the debt-evasion desc, the control; every door) | 1 failed (HALF 1 272 reads, HALF 2 184, hook 22; anti-vacuity held) | 3 of 3 (every town prints on all 34 open reads; the hook served on 24 of 24 pool reads of 0-65) |
+| (iii) `tests/lint/crimeTypesReaders.walker.test.js` (census + the reader wired + the key never ships) | 3 failed of 3 | 3 of 3 |
+| (iv) the evidence red and its converse (in (ii)'s file, no database) | 1 failed, the converse 1 passed | 2 of 2 |
+
+RULING 88, BY SETTING: the reader over the served page differs from the writer run with the record's own settle inputs (the
+stored services, income rows and chains) on **4 of 6,528 pages, all at g:010** (village-under_siege-0-8, off and DM, both
+engines), and on 0 pages at every other setting. On those 4 pages the page now prints the served-facts list.
+
+## THE CURE (both engines, rule for rule)
+- 212 :: `_gallery_veil_withhold_always` withholds `economicState.safetyProfile.crimeTypes` (`-- registry: safety.crimeTypes`),
+  and the twin's `withholdAlways` does the same (`// registry: safety.crimeTypes`). R3's attribution block has been removed
+  from `_gallery_veil_roster_choices` and from `applyRosterChoices`. The `raisers` map and `CRIME_TYPE_RAISERS` stay, because
+  the services rule's `acc_types` reads `pub`'s list through them; the comment above `raisers` no longer names the row.
+  Header item (35). No function was added, removed or re-signed, so the rollback is unchanged.
+- The merchant-army hook's two tellings are now raised by `merchantArmy` in both engines. A hidden house raised it where both
+  hold: the record does not hold the flag false, and the served flags (item C) no longer give (hasMerchantGuild or hasBank)
+  and (hasMercenary or hasGangInfra). The priorities and fires(55) read the config alone (priorityHelpers.js 564-567).
+- `pageRederive.js :: rederiveCrimeTypes`, THE ONE READER, is
+  settleCrimeLinesToSignal(generateSafetyProfile(served config, tier, houses)) over the served seats, houses, tensions and
+  services. It runs only where `criminalInstitutions` is an array and the page model is not marked shut. `rederiveForPage`
+  calls it, so it covers the gallery page, the party link and the map's member. `importRederive.js :: rederiveInPlace` calls
+  it AUTHORITATIVE: the saved list is always the reader's, and the withheld path is never asked.
+- `galleryVeil.js :: GROUPING_OPEN_EVIDENCE['block:defense.criminalStructure']` is narrowed to `criminalInstitutions` alone.
+- Registry row `safety.crimeTypes`: withhold, always, `page: 're-derive'`, R2's hosts; scope rewritten.
+- THE SHARED PDF: none is offered on a shared page (PublicDossierView mounts OutputContainer read-only, with no export;
+  galleryVeilSignalCopies (D) holds this). The importer's PDF reads the save that importRederive re-derived (CONFIRMED from
+  the code; not run).
+- The two neighbouring suites (dbdf45ac0) asserted VR29 for crimeTypes, which ruling (b) supersedes. galleryRosterChoices
+  now judges VR39 and its control on the page's list. Its "Magical crime against the counterfactual" check is removed
+  (ruling (a): the twin is a witness, never the oracle). galleryVeilSignalCopies (C) now takes only criminalInstitutions as
+  evidence.
+
+## THE CENSUS (the walker's register at the cure)
+one-reader: pageRederive.js :: rederiveCrimeTypes (4). veil: withholdAlways (1), GROUPING_REMOVERS (1), applyRosterChoices
+(1, `pub`'s list for the services rule). page-copy: DefenseTab (4), EconomicsTab (3), dailyLifeLogic :: extractSettlementContext
+(4), defenseDisplay :: blockListsCrime (2), :: ringNoteUnderStreetFighting (3), shadowEconomyShown :: criminalsStandHere (1).
+own-record: viewModelBodySlices :: economicsSlice (3), :: defenseSlice (2), DefenseSecurity (3), EconomicsTrade (3).
+owner-only: safetyProfile :: generateSafetyProfile (20), :: settleCrimeLinesOnly (2), servicesGenerator (9),
+generationCoherence (6), aiLayer (2 + 2), recordRegister (1). not-a-read: economy.generated.js (1). The registry itself is
+not scanned (it is the list).
 
 ## RECEIPTS
-- 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no
-  heavy run, no test run (no test file changed, so `tests/lint` was not owed), nothing pushed.
-- Ruling 88's question (how many of the 6,528 pages change by the reader-over-the-served-page ruling alone, by setting) is
-  not answered. TELL8's measure gives 4 pages (r3m-village-under_siege-0-8, g:010, off and DM, both engines) by TYPE.
-  Re-count it by [type, desc] and by setting, from `out/v32/tell8/m1/`, in sitting A.
+- READ WHOLE before the first edit: 212 (all 3,170 lines, the character tables included), the registry, galleryRosterChoices.js;
+  also galleryWithholdAlways.js, pageRederive.js, importRederive.js, galleryRosterChoices.pglite and galleryVeilSignalCopies.pglite
+  (each edited, each read whole). NOT read whole: safetyProfile.js (not edited; its settle function was read) and galleryVeil.js
+  (one evidence row edited; its remover, mark and isVeiled read, not the whole 68 KB file): said plainly for the seat.
+- 212 sha256: tip `8688ddb6...5a3a`; the cure `0352a5028544cce06c7bd9f610c23c60bc6fda5413528467fb4e478792bbb278` (5c727f4b3
+  onward; unchanged by later commits). `t8btpl` re-made from it, rc 0 (`t8btpl-212-cure.txt`).
+- `tests/lint` WHOLE: after the reds, 18 files / 26 tests failed. The extras were mine: crimeTypesReaders, red by design, and
+  netCurrentExtractorAnchor, which I cured in bb8de9df3. At the cure (bd02400ab), 16 / 22, EXACTLY the sixteen standing
+  files of the seat's 3cca025b8 list. Final, after the neighbouring suites' edit (dbdf45ac0; `lint-whole-final.txt`, 10:14:22):
+  16 / 22, the same sixteen standing files, none mine.
+- `node scripts/check-full-typecheck.mjs` (GIT_* unset): exit 0, 167 errors, ceiling 167.
+- eslint exit 0 on every touched file (`eslint.txt`; the two neighbouring suites the same).
+- Other suites run at the cure: rosterChoiceRegistry, rosterChoicePools, mutationCoverageManifest, veilCopySites,
+  galleryImportRederive, galleryImportServedBand, publicProseEquality, ruinFilterRoster, galleryRosterChoices.pglite (37/37):
+  all green.
+- NOT RUN by me (the seat's green chain): GATE-1 and GATE-2 on a re-made pool; galleryWithholdAlways, gallerySecondHomes,
+  galleryVeilTell3/4/5, shareRenderTwice, galleryServerVeil, galleryVeilCures (the rollback pins).
 
 ## CONFIRMED vs PLAUSIBLE
-- CONFIRMED: the three files read whole; 212's sha256; the line anchors above (read off the files at b6b6b723e); the
-  evidence row's two-array test; the merchantArmy rule's text.
-- PLAUSIBLE: every edit point's effect (nothing built or run); that the services rule moves no byte (it reads `pub`, by the code);
-  the hash-free SQL form of the merchant-army raise.
+- CONFIRMED (executed): every red at the tip and its green at the cure; the arm's zeroes on 6,528 pages in both engines;
+  ruling 88's 4 pages; first paint's raw +0 and the cause of the compressed moves (the hash-normalised cmp); the pre-existing
+  reds at the tip; the typecheck, eslint and lint-whole results.
+- PLAUSIBLE: the hash-free merchant-army raise holds beyond the 140 births (it is exact on them); the importer's PDF draws
+  from the re-derived save (by code); the unrun suites listed above.
 
 ## FOR THE OWNER, in plain words
-The new builder was asked to write the tests that fail first, then the fix. The lane's rule says the builder must first read
-three long files from start to finish. One of them is the 3,170-line database change. That reading used up most of the
-builder's working budget before any edit was allowed. Rather than leave a half-made security test, the builder wrote down
-exactly where each part of the fix goes and stopped. The seat should split this unit into two sittings: one for the failing
-tests and one for the fix.
+A shared town no longer sends its crime list at all. The page works the list out again from what the town already shows, and
+only where the crime section is meant to be open. Every test town now shows the list its own visible facts imply. Before,
+32 of the 92 towns showed a shorter or tell-tale list. The guard-force plot hook now follows the right trigger. The fix made
+no bytes of the first page load heavier. The gzip size moved by 20 bytes only because file names changed, and your chair
+decides whether that counts. Two older test failures existed before this change and were left alone.
 
-COMMITS: one, this file (`docs/chair/2026-11-20/veil/out/v32/tell8b/TELL8B-HANDBACK.md`); 212 sha256 above, unchanged.
+COMMITS (branch v32-r3tell8b, in order): 85a8c6562 c325d9e59 dcf6f4514 dc4ec187a 576e1123a bb8de9df3 5c727f4b3 977518282
+d2123099f 315b92561 c676a1048 bd02400ab dbdf45ac0, and this file's commit. 212 sha256 0352a502...b278.
