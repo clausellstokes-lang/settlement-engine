@@ -105,6 +105,16 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   walker, the composed-hosts walker's row green (26 red), the registry's writer corrected, first paint +0. R5C2 STOPPED at E92 (4)
   (ac809527e, 286/287; pushed as `lane/veil-33-2026-11-22-r5cure-wip`); RULED 15:29 (ruling 100, E93): R1, reader B; the brief's E93
   section edf115e09; R5C2 resumed on it at 15:31.
+  THEN, EACH STOP CONFIRMED BY THE SEAT: R5C2 stopped at its own mark, no edit (8d6643a10). R5C3 stopped on a SECOND COPY:
+  `pressureSentence` = `recentConflict` on 154/480 (`narrativeGenerator.js:879`'s fallback; 141831a1a); ruled E97 (102): P1, the copy
+  withheld too. R5C4 took the count (a 326, b 90, c 0 on the twin, no third copy; 820553c8a) and stopped before its first edit:
+  212 whole (about 160k tokens) did not fit its budget. RULED 15:52 (ruling 103, E98): THE SPLIT. R5C5-SQL (seated 15:51) reads
+  212 and the registry whole and makes only 212's always-pass lines and ARM D marker, the registry row and copy, `registry.json`
+  and the twin's `withholdAlways` lines. THEN R5C6 (brief `briefs/R5C6-BRIEF.md`, on this branch) builds the page reader, the
+  plant, the walkers, the fidelity arm, the differential (both engines: it confirms c on the server) and the gates. R5C6 touches
+  neither 212 nor the registry. Each builder's brief says in its first line what it reads whole and that it reads nothing else
+  whole. IF THE SEAT'S RECORD REACHES 620,000 BEFORE THE MERGE: "VEIL-33 HANDS OVER <commit>" at R5C5-SQL's commit, this
+  section current.
 - THE HAND-OVER (ruling 99 (7)): VEIL-33 HANDS OVER AT R5-RECENT'S MERGE ("VEIL-33 HANDS OVER <commit>"), R5-DESC's brief written
   (`briefs/R5-DESC-BRIEF.md`, widened by ruling 98 and the contenders, row 18) and its plant if it costs little. VEIL-34 (seated by
   the chair on `prompts/VEIL-34.txt` within the hour) reads in beside; its units as writer: R5-DESC, R4-IDS, (iv), (v), (vi),
@@ -245,6 +255,13 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     stored `recentConflict` as a substring) is the proof of no third copy. The fallback is registered as a COPY of the row. The
     walker walks `power.recentConflict` by name as a row that left the composed form (the `ORDERED[0]` pin re-taken); the 26 red are
     R5-DESC's. The brief's E97 section 9aa4f37b3; V33-R5C4 seated fresh, the count first.
+103. THE CHAIR TO VEIL-33, 15:52 UTC (E98): THE SPLIT ACCEPTED: R5C5-SQL (212, the registry and the twin's always-pass, read
+    whole first), then R5C6 (the page reader, the plant, the walkers, fidelity, the differential, the gates; neither 212 nor the
+    registry; STOPS if it must). ONE WRITER AT A TIME. The count taken (a 326, b 90, c 0 on the twin, no third copy): R5-PRESSURE a
+    product unit after R3, ON CONDITION that c is confirmed on the SERVER in R5C6's differential. THE SEAT'S MARK: if its record
+    reaches 620,000 before the merge, VEIL-33 HANDS OVER at R5C5-SQL's commit, with R5C6's brief written and section 1 saying
+    what is built, what is unproven, and what the next builder is given. EACH BUILDER'S BRIEF: its first line says what it reads
+    whole, and that it reads nothing else whole (logs by tail; a hand-back's first section only).
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -268,3 +285,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:19 push of de8959b0f landed. 15:28 R5C2's STOP read and sent; ac809527e pushed (-r5cure-wip). 15:29 E93 (ruling 100); 15:30 the brief's E93 section edf115e09; 15:31 R5C2 resumed; the chair's one line answered.
 - 15:32 R5C2 STOPPED at its own mark before the first edit (8d6643a10); V33-R5C3 seated fresh on v33-r5cure. 15:34 the chair's E94 (ruling 101); R5-DESC's brief gains (c) and the cause question.
 - 15:40 R5C3's STOP read and sent (141831a1a, pushed as -r5cure-wip). 15:42 E97 (ruling 102); the brief's E97 section 9aa4f37b3; V33-R5C4 seated, the count and the scan before the first edit.
+- 15:50 R5C4's STOP read (820553c8a; the count re-read). 15:51 the split sent; R5C5-SQL seated. 15:52 E98 (ruling 103). 15:53 R5C6's brief written.
