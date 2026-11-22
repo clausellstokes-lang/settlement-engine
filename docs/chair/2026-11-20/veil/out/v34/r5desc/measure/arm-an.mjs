@@ -49,6 +49,10 @@ for (const set of uniq(all.map((x) => x.set))) {
 }
 const kwBy = {}; for (const x of all.filter((y) => y.eng === 'sv')) for (const [p, m] of Object.entries(x.p.kw || {})) for (const [w, n] of Object.entries(m)) { kwBy[p] = kwBy[p] || {}; kwBy[p][w] = (kwBy[p][w] || 0) + n; }
 say(`(c) by path and word (sv, both reads): ${J(kwBy)}`);
+const csBy = {}; for (const x of all) for (const [p, m] of Object.entries(x.p.cs || {})) { const k = `${p} ${x.dm}/${x.eng}`; csBy[k] = csBy[k] || { n: 0, ex: [] }; csBy[k].n += m.n; for (const e of m.ex) if (csBy[k].ex.length < 3 && !csBy[k].ex.includes(e)) csBy[k].ex.push(e); }
+say('(c) STRICT (a kind word no served power\'s own name carries, the idiom "in the shadow of" / "\'s shadow" set aside), strings by path and side:');
+for (const [k, v] of Object.entries(csBy).sort()) say(`  ${k}: ${v.n}  e.g. ${J(v.ex)}`);
+const m5cs = {}; for (const x of all) for (const [p, m] of Object.entries(x.p.m5cs || {})) { const k = `${p} ${x.dm}/${x.eng}`; m5cs[k] = (m5cs[k] || 0) + m.n; }
 const exs = all.filter((x) => x.eng === 'sv').flatMap((x) => (x.p.ex || []).map((e) => [x.t.seed, x.k, ...e]));
 for (const cls of [[2, 'a(W)'], [3, 'a(H)'], [4, 'b'], [5, 'bt'], [6, 'c']]) {
   const hits = exs.filter((e) => e[4][cls[0] - 2] === '1');
@@ -65,7 +69,7 @@ for (const x of all.filter((y) => y.eng === 'sv' && y.p.wex?.length).slice(0, 5)
 
 // ── M3
 say('');
-const nh = all.filter((x) => !x.p.W?.length && !x.p.H?.length && x.p.m3);
+const nh = all.filter((x) => !x.p.hide && x.p.m3);
 const tallyRows = (xs) => {
   const o = { pages: xs.length, strings: 0, B: 0, S: 0, Svac: 0, pagesB: 0, pagesS: 0, lbl: 0, lblN: 0, dm: 0, dmN: 0, codes: {} };
   for (const x of xs) {
@@ -77,7 +81,7 @@ const tallyRows = (xs) => {
   }
   return o;
 };
-say(`M3 THE OTHER WAY'S FIDELITY on the NOTHING-HIDDEN pages (no W, no H): ${J(tallyRows(nh))}`);
+say(`M3 THE OTHER WAY'S FIDELITY on the NOTHING-HIDDEN pages (no withheld power: no W, every stamped row served): ${J(tallyRows(nh))}`);
 for (const dm of ['off', 'dm']) for (const eng of ['sv', 'tw']) say(`  ${dm}/${eng}: ${J(tallyRows(nh.filter((x) => x.dm === dm && x.eng === eng)))}`);
 say(`  by setting (sv): ${J(Object.fromEntries(uniq(nh.map((x) => x.set)).map((s) => { const o = tallyRows(nh.filter((x) => x.set === s && x.eng === 'sv')); return [s, `${o.B}/${o.strings} B, ${o.S}/${o.strings} S, pages ${o.pagesB}/${o.pagesS} of ${o.pages}`]; })))}`);
 const causeOf = (x, r) => {
@@ -99,18 +103,25 @@ const causeOf = (x, r) => {
 const miss = nh.flatMap((x) => x.p.m3.rows.filter((r) => r[1] && r[2] !== 1).map((r) => ({ x, r, cause: causeOf(x, r) })));
 const byCause = {}; for (const m of miss) byCause[m.cause] = (byCause[m.cause] || 0) + 1;
 say(`  B MISSES by cause (${miss.length}): ${J(Object.entries(byCause).sort((a, b) => b[1] - a[1]))}`);
+const bySplit = {}; for (const m of miss.filter((y) => y.r[2] === 0)) { const k = `${m.cause.slice(0, 70)} | base ${m.r[7]?.[0] ?? '?'} standing ${m.r[7]?.[1] ?? '?'}`; bySplit[k] = (bySplit[k] || 0) + 1; }
+say(`  B MISSES (B holds the power, the desc differs) by cause and split (base equal 1/0, standing equal 1/0): ${J(Object.entries(bySplit).sort((a, b) => b[1] - a[1]))}`);
+say(`  B misses by power (top): ${J(Object.entries(miss.reduce((a, m) => { a[m.r[0]] = (a[m.r[0]] || 0) + 1; return a; }, {})).sort((a, b) => b[1] - a[1]).slice(0, 14))}`);
 for (const [cause] of Object.entries(byCause).sort((a, b) => b[1] - a[1]).slice(0, 8)) { const m = miss.find((y) => y.cause === cause); say(`    e.g. [${cause.slice(0, 60)}] ${m.x.t.seed} ${m.x.k} ${m.r[0]}: served ${J(m.r[6]?.[0] ?? '')} | B ${J(m.r[6]?.[1] ?? '')}`); }
 const smiss = nh.flatMap((x) => x.p.m3.rows.filter((r) => r[1] && r[3] === 0).map((r) => ({ x, r })));
+say(`  S' (the served rows whole, not name-only copies): reproduced ${nh.reduce((a, x) => a + x.p.m3.rows.filter((r) => r[1] && (r[9] === 1 || r[9] === 2)).length, 0)} of ${nh.reduce((a, x) => a + x.p.m3.rows.filter((r) => r[1]).length, 0)}; misses ${nh.reduce((a, x) => a + x.p.m3.rows.filter((r) => r[1] && r[9] === 0).length, 0)}; S misses S' reproduces ${nh.reduce((a, x) => a + x.p.m3.rows.filter((r) => r[1] && r[3] === 0 && (r[9] === 1 || r[9] === 2)).length, 0)}`);
 say(`  S MISSES (the served desc does not end in the standing the served roster gives): ${smiss.length}; by power ${J(Object.entries(smiss.reduce((a, m) => { a[m.r[0]] = (a[m.r[0]] || 0) + 1; return a; }, {})).sort((a, b) => b[1] - a[1]).slice(0, 12))}`);
-for (const m of smiss.slice(0, 4)) say(`    e.g. ${m.x.t.seed} ${m.x.k} ${m.r[0]}`);
+const sd = new Map(); for (const m of smiss) { const k = `${m.r[0]} :: ${m.r[8]?.[1] ?? ''}`; if (!sd.has(k)) sd.set(k, [m, 0]); sd.get(k)[1] += 1; }
+for (const [, [m, n]] of [...sd].sort((a, b) => b[1][1] - a[1][1]).slice(0, 8)) say(`    e.g. (${n}) ${m.x.t.seed} ${m.x.k} ${m.r[0]}: served tail ${J(m.r[8]?.[0])} | the served roster's standing ${J(m.r[8]?.[1])}`);
 say(`  B over the record (once a birth, per stored power): ${J(towns.flatMap((t) => Object.values(t.causes)).reduce((a, c) => { const k = `rrec${typeof c.rrec === 'string' ? 'T' : c.rrec}/ba${typeof c.ba === 'string' ? 'T' : c.ba}/bao${typeof c.bao === 'string' ? 'T' : c.bao}/bas${typeof c.bas === 'string' ? 'T' : c.bas}`; a[k] = (a[k] || 0) + 1; return a; }, {}))}`);
 // THE HIDING PAGES
-const hp = all.filter((x) => (x.p.W?.length || x.p.H?.length) && x.p.m3);
-say(`M3 THE HIDING PAGES (W or H): ${hp.length} pages, towns ${uniq(hp.map((x) => x.t.seed)).length}`);
+const hp = all.filter((x) => x.p.hide && x.p.m3);
+say(`M3 THE HIDING PAGES (a W power, or a stamped row not served): ${hp.length} pages, towns ${uniq(hp.map((x) => x.t.seed)).length}`);
 say(`  B re-creates a withheld power in its roster: ${hp.filter((x) => x.p.m3.Brecreates?.length).length} pages (${J(uniq(hp.flatMap((x) => x.p.m3.Brecreates || [])))}); B threw on ${hp.filter((x) => x.p.m3.why).length}`);
-const flagCount = (xs, pick) => { const o = { aW: 0, aH: 0, b: 0, bt: 0, c: 0, n: 0 }; for (const s of xs.map(pick).filter((v) => typeof v === 'string' && v.length === 5)) { o.n += 1; ['aW', 'aH', 'b', 'bt', 'c'].forEach((k, i) => { o[k] += s[i] === '1' ? 1 : 0; }); } return o; };
+const flagCount = (xs, pick) => { const o = { aW: 0, aH: 0, b: 0, bt: 0, c: 0, cStrict: 0, n: 0, strictWords: {} }; for (const s of xs.map(pick).filter((v) => typeof v === 'string' && /^[01]{6}:/.test(v))) { o.n += 1; ['aW', 'aH', 'b', 'bt', 'c', 'cStrict'].forEach((k, i) => { o[k] += s[i] === '1' ? 1 : 0; }); for (const w of s.slice(7).split(',').filter(Boolean)) o.strictWords[w] = (o.strictWords[w] || 0) + 1; } return o; };
 say(`  B's descs of the SERVED powers (withheld absent): ${J(flagCount(hp.flatMap((x) => x.p.m3.Bhits || []), (r) => r[1]))}`);
 say(`  S, withheld ABSENT (base kept + the served roster's standing): ${J(flagCount(hp.flatMap((x) => x.p.m3.S || []), (r) => r[1]))}; equal to the record's desc ${hp.flatMap((x) => x.p.m3.S || []).filter((r) => r[3] === 1).length}; no base ${hp.flatMap((x) => x.p.m3.S || []).filter((r) => r[1] === 'nobase').length}`);
+const sx = hp.flatMap((x) => (x.p.m3.S || []).filter((r) => r[5]).map((r) => [x, r]));
+say(`  S ABSENT's strict kind hits by where they sit (the base sentence kept, or the re-derived standing): ${JSON.stringify(sx.reduce((a, [, r]) => { a[r[6]] = (a[r[6]] || 0) + 1; return a; }, {}))}; distinct: ${JSON.stringify([...new Set(sx.map(([, r]) => `${r[0]} [${r[6]}]: ${r[5].slice(0, 200)}`))].slice(0, 8))}`);
 say(`  S, a masked row KEPT (the withheld rows named '${meta.mask}'): ${J(flagCount(hp.flatMap((x) => x.p.m3.S || []), (r) => r[2]))}`);
 for (const s of hp.flatMap((x) => (x.p.m3.S || []).filter((r) => r[4]).map((r) => [x.t.seed, x.k, r[0], r[4]])).slice(0, 5)) say(`    e.g. kept: ${s[0]} ${s[1]} ${s[2]}: ${J(s[3])}`);
 
@@ -121,6 +132,9 @@ say('M5 THE STRATA AND CONTENDERS (derivePowerStrata, coupContenders over the pa
 for (const path of m5p) { const tot = sum(all, 'm5', path); if (!tot[1] && !tot[2] && !tot[3] && !tot[5]) continue; for (const dm of ['off', 'dm']) for (const eng of ['sv', 'tw']) say(`${path} | ${dm}/${eng} | ${cols(sum(all.filter((x) => x.dm === dm && x.eng === eng), 'm5', path))}`); }
 const m5all = all.reduce((a, x) => { for (const v of Object.values(x.p.m5 || {})) for (let i = 0; i < 6; i += 1) a[i] += v[i]; return a; }, [0, 0, 0, 0, 0, 0]);
 say(`M5 total over every path (both engines): ${cols(m5all)}`);
+say(`M5 (c) STRICT by path and side: ${J(m5cs)}`);
+const m5off = all.filter((x) => x.dm === 'off').reduce((a, x) => { for (const v of Object.values(x.p.m5 || {})) for (let i = 0; i < 6; i += 1) a[i] += v[i]; return a; }, [0, 0, 0, 0, 0, 0]);
+say(`M5 Reveal off only (both engines): ${cols(m5off)}`);
 for (const e of all.filter((x) => x.eng === 'sv').flatMap((x) => (x.p.m5ex || []).map((y) => [x.t.seed, x.k, ...y])).slice(0, 5)) say(`  e.g. ${e[0]} ${e[1]} ${e[3]} ${e[4]} [${e[5]}] ${J(e[6])}`);
 
 // ── M4 (executed part)

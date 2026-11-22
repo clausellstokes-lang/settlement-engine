@@ -113,6 +113,12 @@ it('R5-DESC-MEASURE: the arm', async () => {
     annotateFactionStanding(seats, standingForceOf(institutions), { publicLegitimacy: leg });
     return new Map(seats.map((f) => [f.faction, String(f.desc || '')]));
   };
+  /** S' (a variant): the same sentence over the served rows whole (category, rawPower and all), sorted as standingRosterOf sorts. */
+  const standingsFull = (factions, institutions, leg) => {
+    const seats = recs(factions).filter((f) => nameOf(f)).map((f) => ({ ...f, faction: nameOf(f), power: Number(f.power) || 0, desc: '' })).sort((a, b) => b.power - a.power);
+    annotateFactionStanding(seats, standingForceOf(institutions), { publicLegitimacy: leg });
+    return new Map(seats.map((f) => [f.faction, String(f.desc || '')]));
+  };
   const baseOf = (desc, st) => (!st ? desc : desc === st ? '' : desc.endsWith(` ${st}`) ? desc.slice(0, -st.length - 1) : null);
   const join = (base, st) => (base && st ? `${base} ${st}` : (base || st));
   /** The searches a page reads: the withheld names (W, H), the mask, the withheld powers' kind words. */
@@ -125,16 +131,20 @@ it('R5-DESC-MEASURE: the arm', async () => {
     }
     const kre = words.size ? new RegExp(`(?<![A-Za-z])(${[...words].sort().map(esc).join('|')})`, 'gi') : null;
     const tellRe = new RegExp(`\\bthe ${esc(HIDDEN_POWER_MASK)}`, 'i');
+    const servedLow = open.map((n) => String(n).toLowerCase());
     return (t) => {
       const kw = kre ? [...new Set([...t.matchAll(kre)].map((m) => m[1].toLowerCase()))] : [];
-      return { aW: sw ? (sw.hit(t) ? 1 : 0) : 0, aH: sh ? (sh.hit(t) ? 1 : 0) : 0, b: t.includes(HIDDEN_POWER_MASK) ? 1 : 0, bt: tellRe.test(t) ? 1 : 0, c: kw.length ? 1 : 0, kw };
+      const idiom = t.replace(/\b(in|operate in) the shadow of\b|'s shadow\b/gi, ' ');
+      const strict = kw.filter((w) => !servedLow.some((n) => n.includes(w)) && new RegExp(`(?<![A-Za-z])${esc(w)}`, 'i').test(idiom));
+      return { aW: sw ? (sw.hit(t) ? 1 : 0) : 0, aH: sh ? (sh.hit(t) ? 1 : 0) : 0, b: t.includes(HIDDEN_POWER_MASK) ? 1 : 0, bt: tellRe.test(t) ? 1 : 0, c: kw.length ? 1 : 0, kw, cs: strict.length ? 1 : 0, strict };
     };
   };
-  const tally = (pairs, test, into, kwInto, ex, exTag) => {
+  const tally = (pairs, test, into, kwInto, ex, exTag, csInto = null) => {
     for (const [p, t] of pairs) {
       const k = norm(p); const h = test(t); const row = into[k] || (into[k] = [0, 0, 0, 0, 0, 0]);
       row[0] += 1; row[1] += h.aW; row[2] += h.aH; row[3] += h.b; row[4] += h.bt; row[5] += h.c;
       if (h.c && kwInto) { const m = kwInto[k] || (kwInto[k] = {}); for (const w of h.kw) m[w] = (m[w] || 0) + 1; }
+      if (h.cs && csInto) { const m = csInto[k] || (csInto[k] = { n: 0, ex: [] }); m.n += 1; if (m.ex.length < 2) m.ex.push(t.slice(0, 300)); }
       if ((h.aW || h.aH || h.b || h.c) && ex.length < 6) ex.push([exTag, p, `${h.aW}${h.aH}${h.b}${h.bt}${h.c}`, h.kw.join(','), t.slice(0, 320)]);
     }
   };
@@ -168,7 +178,7 @@ it('R5-DESC-MEASURE: the arm', async () => {
       const iStep = snaps.findIndex(([s]) => s === 'generatePower');
       const after = []; for (let i = Math.max(iStep, 0) + 1; i < snaps.length; i += 1) if (snaps[i][1][n] !== snaps[i - 1][1][n]) after.push(snaps[i][0]);
       const lastSnap = snaps.length ? snaps[snaps.length - 1][1][n] : undefined;
-      if (lastSnap !== want) after.push('#tail(after the last step)');
+      if (lastSnap !== want) after.push('#tail (generateSettlementPipeline.js:203-204, claimStanding.js :: settleClergyToFinalRoster / settleArcaneToPractitioners, after the last step)');
       causes[n] = {
         rrec: typeof Rrec === 'string' ? Rrec : Rrec?.get(n) ? (String(Rrec.get(n).desc) === want ? 1 : 0) : -1,
         ba: BA.v ? (dOf(BA, n) === undefined ? -1 : dOf(BA, n) === want ? 1 : 0) : BA.why,
@@ -197,16 +207,16 @@ it('R5-DESC-MEASURE: the arm', async () => {
         const projOf = { sv: () => V.veil.projectServedVeil(clone(sv.data), sv.ov), tw: () => clone(twinDoc) };
         const pageOf = { sv: (p) => rederiveForPage(clone(p), { unveiled: !V.veil.isServedVeil(sv.ov) && unmarked }), tw: (p) => rederiveForPage(clone(p), { unveiled: unmarked }) };
         for (const eng of ['tw', 'sv']) {
-          const P = { m1: {}, kw: {}, ex: [], wide: {}, m3: null, m5: {}, m5kw: {}, m5ex: [] };
+          const P = { m1: {}, kw: {}, cs: {}, ex: [], wide: {}, m3: null, m5: {}, m5kw: {}, m5cs: {}, m5ex: [] };
           let proj; try { proj = projOf[eng](); } catch (e) { proj = null; P.err = `proj threw ${String(e?.message).slice(0, 80)}`; }
           const d = isRec(proj) ? proj : {};
           const servedRows = rowsOf(d); const servedNames = [...new Set(servedRows.map(nameOf).filter(Boolean))];
           const W = recNames.filter((n) => !servedNames.includes(n) && !recH.includes(n));
-          P.W = W; P.H = recH; P.Hserved = recH.filter((n) => servedNames.includes(n)); P.masked = servedRows.filter((f) => nameOf(f).includes(HIDDEN_POWER_MASK)).length;
+          P.W = W; P.H = recH; P.hide = W.length > 0 || recH.some((n) => !servedNames.includes(n)) ? 1 : 0; P.Hserved = recH.filter((n) => servedNames.includes(n)); P.masked = servedRows.filter((f) => nameOf(f).includes(HIDDEN_POWER_MASK)).length;
           P.gov = [d.powerStructure?.governingName ?? null, d.powerStructure?.government ?? null];
           const test = searchesFor(W, recH, servedNames, catOf);
           // M1 + M2 (the power card's paths, walked)
-          tally([...strings(d.powerStructure, 'powerStructure', []), ...strings(d.factions, 'factions', []), ...(typeof d.pressureSentence === 'string' ? [['pressureSentence', d.pressureSentence]] : [])], test, P.m1, P.kw, P.ex, 'm1');
+          tally([...strings(d.powerStructure, 'powerStructure', []), ...strings(d.factions, 'factions', []), ...(typeof d.pressureSentence === 'string' ? [['pressureSentence', d.pressureSentence]] : [])], test, P.m1, P.kw, P.ex, 'm1', P.cs);
           if (W.length || recH.length) {
             const wide = {}; const wex = [];
             for (const [p, t] of strings(d, '', [])) {
@@ -224,6 +234,8 @@ it('R5-DESC-MEASURE: the arm', async () => {
             const Bm = B.v ? descMap(B.v) : null;
             const served = recs(page.powerStructure?.factions);
             let stS = null; try { stS = standings(served, page.institutions, page.powerStructure?.publicLegitimacy); } catch (e) { stS = null; P.sErr = String(e?.message).slice(0, 80); }
+            let stF = null; try { stF = standingsFull(served, page.institutions, page.powerStructure?.publicLegitimacy); } catch { stF = null; }
+            let stB = null; try { stB = B.v ? standings(recs(B.v.factions), page.institutions, B.v.publicLegitimacy) : null; } catch { stB = null; }
             const rows = served.map((f) => {
               const n = nameOf(f); const has = typeof f.desc === 'string'; const desc = has ? f.desc : null;
               const bd = Bm ? Bm.get(n)?.desc : undefined;
@@ -232,16 +244,21 @@ it('R5-DESC-MEASURE: the arm', async () => {
               const sCode = !has || st === undefined ? -1 : baseOf(desc, st) === null ? 0 : st === '' ? 2 : 1;
               const lbl = Bm && Bm.get(n) ? (Bm.get(n).powerLabel === f.powerLabel ? 1 : 0) : -1;
               const bTest = bd !== undefined ? test(String(bd)) : null;
-              return [n, has ? 1 : 0, bCode, sCode, lbl, bTest ? `${bTest.aW}${bTest.aH}${bTest.b}${bTest.bt}${bTest.c}` : '', bCode === 0 && desc !== null ? [desc.slice(0, 260), String(bd).slice(0, 260)] : null];
+              // a B miss split: the base sentence (the desc less its standing on its own roster) equal or not, the standing equal or not
+              const stf = stF ? stF.get(n) : undefined;
+              const sfCode = !has || stf === undefined ? -1 : baseOf(desc, stf) === null ? 0 : stf === '' ? 2 : 1;
+              const sDiag = sCode === 0 ? [desc.slice(-240), String(st).slice(0, 240)] : null;
+              const split = bCode === 0 && has && stB && st !== undefined ? (() => { const bs = stB.get(n) ?? ''; const bb = baseOf(String(bd), bs); const sb = baseOf(desc, st); return `${bb !== null && bb === sb ? 1 : 0}${bs === st ? 1 : 0}`; })() : '';
+              return [n, has ? 1 : 0, bCode, sCode, lbl, bTest ? `${bTest.aW}${bTest.aH}${bTest.b}${bTest.bt}${bTest.c}` : '', bCode === 0 && desc !== null ? [desc.slice(0, 260), String(bd).slice(0, 260)] : null, split, sDiag, sfCode];
             });
             const sRel = recs(page.powerStructure?.factionRelationships); const bRel = B.v ? new Map(recs(B.v.factionRelationships).map((r) => [relKey(r), r])) : null;
             const relDm = sRel.filter((r) => typeof r.dmNote === 'string').map((r) => [relKey(r), bRel ? (bRel.get(relKey(r))?.dmNote === r.dmNote ? 1 : 0) : -2]);
             const m3 = { why: B.why || null, rows, relDm, Bnames: B.v ? recs(B.v.factions).map(nameOf) : [] };
-            if (W.length || recH.length) {
+            if (P.hide) {
               // THE HIDING PAGE: B and S with every withheld power absent (the served roster) against S with a masked row kept
               const withheld = [...W, ...recH];
               m3.Brecreates = m3.Bnames.filter((n) => withheld.includes(n));
-              const hitStr = (s) => { const h = test(s); return `${h.aW}${h.aH}${h.b}${h.bt}${h.c}`; };
+              const hitStr = (s) => { const h = test(s); return `${h.aW}${h.aH}${h.b}${h.bt}${h.c}${h.cs}:${h.strict.join(',')}`; };
               m3.Bhits = B.v ? recs(B.v.factions).filter((f) => servedNames.includes(nameOf(f))).map((f) => [nameOf(f), hitStr(String(f.desc ?? ''))]) : [];
               let stRec = null; try { stRec = standings(recs(A.powerStructure?.factions), A.institutions, A.powerStructure?.publicLegitimacy); } catch { stRec = null; }
               const keptRows = [...served, ...recRows.filter((f) => withheld.includes(nameOf(f))).map((f) => ({ ...f, faction: HIDDEN_POWER_MASK, name: undefined }))];
@@ -250,13 +267,14 @@ it('R5-DESC-MEASURE: the arm', async () => {
                 const n = nameOf(f); const rd = stored.get(n)?.desc; const base = stRec && typeof rd === 'string' ? baseOf(rd, stRec.get(n) || '') : null;
                 if (base === null || !stS) return [n, 'nobase'];
                 const sAbs = join(base, stS.get(n) || ''); const sKept = stKept ? join(base, stKept.get(n) || '') : null;
-                return [n, hitStr(sAbs), sKept === null ? '' : hitStr(sKept), sAbs === rd ? 1 : 0, sKept !== null && /an unseen interest/.test(sKept) ? sKept.slice(0, 300) : null];
+                const hA = test(sAbs);
+                return [n, hitStr(sAbs), sKept === null ? '' : hitStr(sKept), sAbs === rd ? 1 : 0, sKept !== null && /an unseen interest/.test(sKept) ? sKept.slice(0, 300) : null, hA.cs ? sAbs.slice(0, 300) : null, base.length < sAbs.length && hA.cs ? (test(base).cs ? 'base' : 'standing') : hA.cs ? 'base' : null];
               });
             }
             P.m3 = m3;
             try {
               const st = derivePowerStrata(page); const cc = coupContenders(page);
-              tally([...strings(st, 'strata', []), ...strings(cc, 'coup', [])], test, P.m5, P.m5kw, P.m5ex, 'm5');
+              tally([...strings(st, 'strata', []), ...strings(cc, 'coup', [])], test, P.m5, P.m5kw, P.m5ex, 'm5', P.m5cs);
             } catch (e) { P.m5err = String(e?.message).slice(0, 80); }
           }
           rec.pages[`${dm ? 'dm' : 'off'}|${k}|${eng}`] = P;
