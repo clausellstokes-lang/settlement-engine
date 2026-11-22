@@ -71,10 +71,15 @@ verified by ls-remote).
 - UNIT (iii) RETURNED (03:28; builder R3-TELL-5b, `lane/veil-31-2026-11-21-r3tell5b-wip` at f98c39ec4; red 090a2e905, cure a0d280580;
   212 there `8688ddb6…5a3a`): where the SERVED crime signal is false no served power or relation carries `captureState`.
   Builder's figures: GATE-1 4/92, GATE-2 20/40 red. Diff read once: no fault. The seat's re-runs (`/var/tmp/v18/out/v31/chain3.sh`)
-  running; NOT YET MERGED. ITS STOP, sent to the chair 03:27 with the twins (`out/v31/twins/twins-ccs.json`):
+  DONE (`out/v31/u3/done.txt`): red 1/1 at 090a2e905; typecheck 0; eslint 0; walkers 27/27; arms green; --check 0; sv + hand
+  rows + born 0; harnesses 0; verify 45/0; GATE-1 4/92 (7 LOWER BY RULE), GATE-2 20/40 red, twin = server every cell. MERGED as
+  8807cde93 (212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback and 211 unchanged); typecheck at the
+  merge 0; tests/lint whole at the merge running. ITS STOP, sent to the chair 03:27 with the twins (`out/v31/twins/twins-ccs.json`):
   `criminalCaptureState` served 'adversarial'/'equilibrium'/'corrupted' on 25 towns (Reveal DM) where no criminal house or power is
   served; open pages show 'none' (DM) or absent (off); the twins read 'none' on 21 of 25. Recommended: 'none' as a sent form in
-  unit (v); the four whose twin keeps a rung listed. AWAITING THE CHAIR.
+  unit (v); the four whose twin keeps a rung listed. RULED 03:30 (ruling 82).
+- UNIT (vii)'S BRIEF: `briefs/R3-TELL-7-BRIEF.md` (ruling 81; it carries ruling 54's caution: the twin is another draw, so every
+  difference is separated into the veil's cause and the draw's; the per-family arm is PROPOSED with its cost, not built).
 - NEXT (order): unit (ii) merged and the line (DONE 02:26); units (iii)-(vi); UNIT (vii) (ruling 81: served lists against the twin's; the GATE-1 question) before "R3"; "R3 <commit>" + IMPORT-DOOR; THE TWELVE's cure unit (ruling 79, section 2b) before the reader's FINAL; then PART 30 section 8's list. Done: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
 ## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
@@ -177,3 +182,4 @@ Its unit stands in the list after "R3 <commit>" and before the reader's FINAL (s
 - 02:36 the chair's 02:35 ruling (81) read; unit (vii) placed. 02:37 recorded.
 - (before 03:20, not clocked) unit (iii) returned; pushed -wip; diff read; chain3 launched 03:20; the capture twins measured 03:27 and sent. 03:28 recorded.
 - 03:32 the chair's 03:30 ruling (82) read. 03:33 the four twins' rungs measured and recorded.
+- 04:03 chain3 END, every figure reproduced; 8807cde93 merged; typecheck 0 at the merge. 04:16 brief R3-TELL-7 written.
