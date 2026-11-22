@@ -95,6 +95,13 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   deploy, the migrations and the production credentials said again to be his alone; ONE CAUTION SAID: the chair
   cannot see what is left of the weekly allowance (about 290 spent in under six hours; six seats spend faster; the
   earlier account ran out): he is asked to say if he wants the pace slowed.
+- **A WRONG WORD OF THE CHAIR'S ON THE REVEAL SHARE, CORRECTED TO THE OWNER BY NAME (2026-11-22 05:42 UTC).** At about 04:28 the chair told him an
+  owner's "reveal everything" share hides nothing, so a trouble's hook there can give nothing away. FALSE AS SAID: the
+  chair had read `publicSafe.js :: toPublicSafe` and not the gallery's own veil that runs after it
+  (`galleryVeil.js`). Told to him in plain words the same turn it was found: by default nothing leaks (the hooks and
+  the criminal houses are both hidden by default); the gap is an owner who opens the reveal switch AND un-hides the
+  hooks while a criminal house stays hidden; it is pinned in a test, listed for the veil's seat and the security
+  reader, does not hold the trouble lane's landing, and must be closed before the deploy (E27).
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -436,6 +443,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   lane, the pool re-made, the gates read dark and with the two laws lit): a measure of what the join adds, never the
   join. VEIL-31 HANDS OVER (its own hand-over point); `prompts/VEIL-32.txt` is written; VEIL-32 is seated on VEIL-31's
   tip the hour its one line comes (source `lane/veil-31-2026-11-21`, branch `lane/veil-32-2026-11-22`).
+- E35 · E23's HALF (B) WAS THE CHAIR'S ERROR; THE HOOKS' EXEMPTION IS RE-WORDED AND ITS GAP PINNED (2026-11-22 05:42 UTC; found when the chair read
+  the walker's diff and `troubleHooksShared.test.js` WHOLE at "PAGE-TROUBLE a5bd56a09", as E21 promised). TRUE:
+  `toPublicSafe(record, { full: true })` veils nothing. BUT THE GALLERY'S READER RUNS ITS OWN VEIL AFTER IT
+  (`galleryVeil.js`: `galleryPayloadFor(…, { shareDm })`, then `projectShareVeil` → `applyVeil`): a criminal or
+  clandestine house is hidden WHOLE BY DEFAULT (X-21e), on a DM-door share too; a trouble's hooks are hidden by
+  default (`tab:plot_hooks`, `class:tension:hooks`); EVERY DEFAULT IS AN EYE the owner may open. SO A READ EXISTS
+  THAT HIDES A HOUSE AND SHOWS A HOOK: the DM door open, the hooks' eye opened, the house left veiled. ORDERED OF
+  PAGE-12 (tests and words only, no `src`): the arm gains (C) (the DM-door payload under the DEFAULT veil serves no
+  hook of a trouble) and (D), THE GAP PINNED (with only the hooks' eyes opened and the thieves' guild veiled, the
+  planted hook IS served and the house's card is gone: the assertion reds the day the veil holds that state); the
+  entry's reason says exactly that and names the eleven rows (5 and 6) for the security reader. NOT A NEW KIND OF
+  LEAK: every other hook on a card stands in the same state today; the trouble lane adds lines to it. IT DOES NOT HOLD
+  THE LANDING; IT HOLDS THE DEPLOY (E27): THE VEIL'S JOIN PROBE MEASURES IT (DM mode, hooks' eye open) and the veil's
+  lane cures it in 212 and its twin. THE REST OF THE WALKER'S DIFF IS ACCEPTED AS READ: `HAND_CEILING` 74; the causes'
+  entry on the static atom walker with its three listed rows named; `UNREAD_ON_THIS_LINE` with `unreadFaults` (an
+  import specifier naming the module's basename, static or dynamic; own file excepted) and its plant; the "real
+  pool" clause; nothing else moved (`EXISTING_CEILING`, the bank, `NOT_LINE_KEYS`, `SENTENCE_KEYED` untouched).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -739,6 +763,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   cure's five steps and the join probe in its section 1; its own estimate 560,000). VEIL-32: stands on 385067da2,
   told to fast-forward to 9fd3623c5 (documents only); its documents read; 212 and the registry being read whole; the
   pool and the green chain running since 05:22; next from it: the two gates at the tip.
+- 2026-11-22 05:42 UTC · "PAGE-TROUBLE a5bd56a09" CAME AT 05:38 (the code at 6b98591f9; the line f5295e425 merged). ITS RULE 8: the build
+  clean; first paint 1,180,086 / 375,339 / 315,202 (+575 raw over the line: 325 the ruled trouble vocabulary; 250
+  NOT ITEMIZED, asked for file by file); worker 2,682,827 (+11,822); engine chunk 927,493 (+885); the directories
+  and 70 naming files: 6,496 tests, 32 red: 30 on the list, 2 the lane's and cured; `tests/lint` 3,364 tests, 4 red:
+  3 the line's, 1 the lane's and cured. FOR THE VEIL READER: the eleven hooks with a hideable need (5 and 6); the
+  seven `house:` atoms; the crime and power facts; criminal_power's four signatures; the three listed cause rows;
+  the two EXEMPT entries and the UNREAD row; rule 2's 42 readings. FOR THE JOIN: the five `house` keys and
+  `HOUSE_KEY_GROUPS`; two inline atoms to move into `HOUSE_FAMILY_ATOMS`; `CLASS_DIMS.outside`. GOLDENS NAMED FOR THE
+  OWNER: `generatorGoldenMaster` (422 of 525 by `plotHooks`), `dossierProseManifest`, `dmLayerGoldenIsolation` A7,
+  `editCorpusRatchet` A3 and A7. ITS BARS: the hooks' second-place share 32.4%, 36.5%, 30.3% (over 30: said, not
+  held). A GAP IT NAMES: `guardLineUnderTheLaw.js` still reads `payCut`; HK1's comment is stale. THE CHAIR'S READ OF
+  THE WALKER'S DIFF: E35: one cure ordered (tests and words), then a new "PAGE-TROUBLE <commit>". IT LANDS AS POINT
+  96, stacked with points 94 and 95 if the Daily Life page's builder has reported by then.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
