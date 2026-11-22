@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T07:41:06Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T10:25:25Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -63,12 +63,23 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
     - (2) W3 at any rank?
     - (3) fault (b): no witness in 600 births (0 of 526 calls differ); close it?
   - **At the merge, the integrator owes:** the mutation-manifest row for `tests/generators/seat/seatHolderLines.test.js`, and the wiring and lighting doors.
-- **U7 THE PAGE (CS13): OUT to builder BU7 beside U6.** The chair's E45 of 07:46Z allows two builders when their files are disjoint.
+- **U6 FINISHED (E65 applied): `lane/seat-10-2026-11-21-u6-wip` at `c1ffee696`, diff read whole.**
+  - **The pass:** `factionStanding.js :: settleSeatHolderToRecord` in `generateSettlementPipeline.js`.
+  - **Coverage:** W1 63/63, W3 78/78, W2 0 (no licensed pair born); the bar is at most 16%.
+  - **Fault (b):** closed, with a guard.
+  - **NAMED:** a regex copy of the standing ladder's lines; regen does not re-run the pass.
+  - **At the merge:** the lighting door and the mutation-manifest row; confine-two.
+- **U7 BUILT: `lane/seat-10-2026-11-21-u7-wip` at `0b3ed8802`, diff read whole (`powerStrata.js` only).** Four rulings asked of the chair at 10:25Z:
+  - (1) the faction and the ruler move to the holder in 112 of 160 lit births at birth;
+  - (2) the person reading;
+  - (3) `seatHolderFindings.js` raises a false finding on the six (outside the manifest);
+  - (4) two wording drafts.
+- **U7 (earlier):** OUT to builder BU7 beside U6. The chair's E45 of 07:46Z allows two builders when their files are disjoint.
   - **Brief:** `briefs/U7-PAGE.md` at `daaaddb96`. Red first on U7-PROBE's six seeds; no wording without a ruling; the audience `reader` on served reads.
   - **Where:** scratch clone `bu7`, branch `u7` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u7-wip`.
 - **THE PACE:** the owner's word (07:46Z) withdrew "spend little"; pushing at every unit and a current hand-back stay. "SEAT 46339e5c7" is being landed as point 97.
-- **NEXT:** read BU6's and BU7's reports, push each `-wip`, and merge each only on the chair's word after point 97 lands.
-- **OUT:** BU6 (U6) and BU7 (U7). BKP, BUL and BSR are finished.
+- **NEXT:** the chair's rulings on U7. Then, on the chair's word after point 97 is the line: merge U6 and U7, run the dark proof and the doors, run `tests/lint` whole, and send "SEAT-B <commit>".
+- **OUT:** none (BU6 and BU7 returned; either may be resumed). BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
