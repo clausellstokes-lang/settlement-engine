@@ -6,6 +6,8 @@ Seat: VEIL-32, a seat of the EIGHTH chair (session_01ACmDYY29VRchM87v1yhL9Q; sen
 verified by ls-remote).
 
 ## 1. WHERE THE LANE STANDS (kept current at every push)
+- HANDED OVER (13:03 UTC 2026-11-22) at the commit carrying this section: THE LANE'S NEXT WRITER IS VEIL-33 (ruling 91;
+  `lane/veil-33-2026-11-22`), already read in. This seat writes nothing more.
 - TWO CORRECTIONS TO PART 32 (the chair, in this seat's seating; PART 32 was closed minutes before its last ruling reached it):
   (1) PART 32's NEXT STEP says the cure of unit (vii) is only RECOMMENDED: IT IS RULED: "THE OTHER WAY" (withhold the key
   always, the page re-derives), as ruling 86 (b) below orders it. (2) PART 32 section 1 says "R3" is measured ON THE LINE WITH
@@ -14,51 +16,40 @@ verified by ls-remote).
   (`lane/veil-32-2026-11-22-joinprobe-wip`) only when the chair says. BOTH ARE NOW ALSO IN PART 32 ITSELF: VEIL-31's last
   commit 9fd3623c5 (documents only, read by this seat; merged here after PART 33's first push, which preceded the chair's word to
   fast-forward) carries them as PART 32's ruling 85 and its section 1. PART 33 numbers the prompt's rulings 86.
-- THE LANE: `lane/veil-32-2026-11-22` = 385067da2 (VEIL-31's tip: units (i), (ii), (iii) merged; unit (vii)'s measure merged,
-  docs only) + this seat's records. 212 `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`; rollback
-  `8cbd7d1c…ded5b0`; 211 `eface6d0…0b01` / `ce8474ff…712f` (to be re-proved by the green chain's sha256 file).
-- AT THE TIP 3cca025b8, REPRODUCED BY THIS SEAT (06:04 UTC, pool re-made here 05:22-05:56, every shard rc=0; verify 45 / 0
-  differ): GATE-1 4 of 92 at every gated setting, both reads (7 LOWER BY RULE, the same seven); GATE-2 20 of 40 cells red;
-  server = twin every cell; non-governing rows against the rule 0 (`out/v32/tell2-table-3cca025b8.txt`). Typecheck 0
-  (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Told to the chair 06:05. THE GREEN CHAIN ENDED
-  07:01 (`out/v32/chain1-done.txt`): sv + hand rows + born 0; harnesses 0; the R3 gate 0; acceptance 40 PASS; `tests/lint`
-  WHOLE: 16 files / 22 tests failed of 3,264 = THE SIXTEEN STANDING ONLY (PART 32 2b's twelve + PART 30's four;
-  `out/v32/lint-whole-3cca025b8-summary.txt`). Bytes at the tip (`out/v32/sha256-3cca025b8.txt`): 212 8688ddb6, rollback
-  8cbd7d1c, 211 eface6d0 / ce8474ff: as PART 32 says.
-- THE POOL AND THE GREEN CHAIN (this container only): `/var/tmp/v18/out/v32/chain0.sh` (npm ci 0, ledger ref 0,
-  make-instruments, pool.sh to `/var/tmp/v18/t2/pool-t2sig-2`) launched 05:22; `after0.sh` then runs `/var/tmp/v18/out/v32/chain1.sh`
-  (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
-  gate, acceptance, `tests/lint` whole) to `/var/tmp/v18/out/v32/g/done.txt`. Copies of the scripts: `out/v32/`.
-- 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
-- UNIT (viii) STEP 1 (THE MEASURE) RETURNED 07:1x and MERGED as 6cd5b4fe3 (`--no-ff` of `v32-r3tell8` at ebdeb3f30, docs only;
-  pushed as `lane/veil-32-2026-11-22-r3tell8-wip`; builder R3-TELL-8, its context spent at ~300,000; it read 212, the registry
-  and galleryRosterChoices.js only in part and edited nothing). Hand-back `out/v32/tell8/TELL8-HANDBACK.md`. EXECUTED, both
-  engines, 6,528 pages: the other way HOLDS (seedless 140/140; inputs survive; no class-(B) dependent on a gated read;
-  merchantArmy served-derivable; the types' grouping is open exactly where `criminalInstitutions` is an array). HALF 2 today
-  32/92 by [type, desc] (TELL7's 25 by type + 7 `debt evasion` lines naming unserved networks: NEW). TWO STOPS sent to the
-  chair 07:1x: (1) the pool caches served signatures: the seat re-makes it on the cured tree in a NEW directory before the
-  gates (recommended: accept); (2) one control (village-under_siege-0-8, g:010): the stored list carries two shut groupings'
-  content; recommended: the reader's list over the served page governs. BOTH RULED 07:19 (ruling 88).
-- UNIT (viii) BUILT by R3-TELL-8b (resumed with its mark at 600,000; it read 212, the registry and galleryRosterChoices.js
-  WHOLE): `lane/veil-32-2026-11-22-r3tell8b-wip` at e716c84d6 (worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`).
-  Reds c325d9e59 + bb8de9df3 (the census walker), dcf6f4514 (the arm, `out/v32/tell8b/measure/arm.sh`), dc4ec187a
-  (`galleryVeilTell8.pglite`), 576e1123a (the evidence and its converse); cure 5c727f4b3 (212 + twin: crimeTypes withheld
-  always, the R3 attribution block gone, the merchant-army hook by `merchantArmy`), 977518282 (the ONE reader
-  `pageRederive.js :: rederiveCrimeTypes`, wired in rederiveForPage and importRederive; GROUPING_OPEN_EVIDENCE narrowed to
-  criminalInstitutions), dbdf45ac0 (two neighbouring suites read ruling (b), not VR29). Builder's figures: arm 0/92 (HALF 1
-  0/6,528, HALF 2 0, controls 0/48, hook 0); ruling 88 moves 4 of 6,528 pages (all g:010); tests/lint whole = the sixteen;
-  typecheck 167/167; first paint raw unchanged, gzip +20 / Brotli -105 by re-hashed lazy-chunk names (ASKED of the chair
-  10:2x, recommended: no rise). THE SEAT READ THE DIFF WHOLE ONCE with 212 and the registry beside it: no fault. NOT YET
-  MERGED: the seat's re-runs (`/var/tmp/v18/out/v32/u8/chain8.sh`: the reds at bb8de9df3, the greens, the arm, the build,
-  the NEW POOL `/var/tmp/v18/t2/pool-t2sig-3` re-read from pool-t2sig-2's births on the cured tree, both gates, the R3 gate,
-  tests/lint whole) running from 10:2x. 212 at the cure: changed (sha256 in `out/v32/u8/sha256.txt` when the chain ends).
-- VEIL-33 (ruling 91) is seated beside this seat: the join probe and the preparation of (iv), (v), (vi) are its; 212, the twin
-  and the registry are written by THIS seat alone until "HAND-OVER <commit>". 212 LAST CHANGED at 8807cde93 (unit (iii), the
-  capture key where the served crime signal is false): `8688ddb6…5a3a`; no change by this seat yet.
-- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): chain8's done.txt read; if every figure holds, merge `v32-r3tell8b` (--no-ff),
-  re-run the pool RE-MADE on the cured tree in a NEW
-  directory (the old kept until the new counts are in), both gates, one line to the chair; then (iv), (v), (vi) per R3-TELL-5's
-  brief; then "R3 <commit>".
+- THE LANE: `lane/veil-32-2026-11-22` = VEIL-31's tip 385067da2 + VEIL-31's last docs commit 9fd3623c5 (merged acfa07b02) +
+  unit (viii)'s measure (6cd5b4fe3) + UNIT (viii) MERGED as c2625fb1f (`--no-ff` of `v32-r3tell8b` at e716c84d6) + records.
+- BYTES AT c2625fb1f: 212 `0352a5028544cce06c7bd9f610c23c60bc6fda5413528467fb4e478792bbb278` (changed by unit (viii):
+  `economicState.safetyProfile.crimeTypes` withheld in `_gallery_veil_withhold_always`; the R3 crimeTypes attribution block
+  removed from `_gallery_veil_roster_choices`; the merchant-army hook's raiser `merchantArmy` in `raised`; header item (35));
+  rollback `8cbd7d1c…ded5b0` UNCHANGED; 211 `eface6d0…0b01` / `ce8474ff…712f` UNCHANGED (`out/v32/u8/sha256.txt`).
+- UNIT (viii) (rulings 85/86 (b), 88): crimeTypes, THE KEY, on no shared read of any place, both engines; THE ONE READER
+  `src/domain/veil/pageRederive.js :: rederiveCrimeTypes` (generateSafetyProfile then settleCrimeLinesToSignal over the served
+  page), called by rederiveForPage (the gallery doors) and `importRederive.js :: rederiveInPlace` (authoritative), only where
+  `criminalInstitutions` is an array and the page is not marked shut; `galleryVeil.js :: GROUPING_OPEN_EVIDENCE` narrowed to
+  `criminalInstitutions`; the registry row safety.crimeTypes withhold/always/page re-derive; the census walker
+  `tests/lint/crimeTypesReaders.walker.test.js`; `tests/security/galleryVeilTell8.pglite.test.js`; the arm
+  `out/v32/tell8b/measure/arm.sh` (TELL_DB=<p> sh arm.sh <tree> <out> <tpl>). Built by R3-TELL-8 (measure) and R3-TELL-8b.
+  THE SEAT'S RE-RUNS (`out/v32/u8/done.txt`, `done-b.txt`): reds at bb8de9df3 (walker 3/3, Tell8 2/3); typecheck 167/167;
+  eslint 0; --check 0; walkers + manifest 0; arms Tell3+4+5+8 0; sv + hand rows + born + cures + second homes 0; the arm GREEN
+  (HALF 1 0/6,528, HALF 2 0, controls 0, hook 0, parity 0); RULING 88 MOVES 4 OF 6,528 PAGES, ALL r3m-village-under_siege-0-8
+  AT g:010 (Reveal off and DM, both engines); the R3 gate 0; tests/lint whole = the sixteen standing. PRE-EXISTING AT THE TIP,
+  the same by name (re-run there by the seat): galleryVeilSignalCopies server-veil-city-2 (2 tests), VERIFY_DIST 5 (the
+  first-paint budgets were already exceeded at the tip: raw 1,175,552 against 1,175,492). FIRST PAINT (ruling 92's E69):
+  seven chunks byte-equal, the entry chunk raw 489,017 both and byte-identical once lazy-chunk hashes are normalised
+  (`out/v32/u8/firstpaint-compare.txt`, its last line).
+- THE GATES AT c2625fb1f ON THE NEW POOL `/var/tmp/v18/t2/pool-t2sig-3` (this container; made 11:54-12:19 on the cured tree, part
+  A re-read from pool-t2sig-2's births; verify 45/0; the OLD pool pool-t2sig-2 kept): GATE-1 4 of 92 at every gated setting,
+  both reads (7 LOWER BY RULE, the same seven); GATE-2 20 of 40 cells red; server = twin; against-the-rule 0
+  (`out/v32/u8/tell2-table-c2625fb1f-pool3.txt`). UNCHANGED by unit (viii) (the key's absence on every page moved no count).
+- FAMILIES LEFT (unit (iii)'s list less (viii)'s): GATE-1's four (safetyDesc 2, currentTensions 1, imports.criminal 1: unit
+  (v)); GATE-2's inst.criminal 6, chains.criminal 6, powers.capture 5 (VR42), powers.criminal 3 (VR42), powers.relations 2
+  (unit (iv)), sp.ops 2 (ruled, stays), imports.criminal 1, tensions.crime 1, sp.crimeTypes 1 (ruled, stays: its family now
+  reads the key's absence on every page).
+- BRANCHES: `lane/veil-32-2026-11-22-r3tell8-wip` ebdeb3f30 (the measure, merged); `lane/veil-32-2026-11-22-r3tell8b-wip`
+  e716c84d6 (merged). Worktrees in this container: /home/user/wt/r3tell8, r3tell8b, v32u8red (bb8de9df3).
+- NEXT STEP IN ONE LINE (VEIL-33 STARTS HERE): R5-RECENT (ruling 92: `powerStructure.recentConflict` withheld on a shared read
+  wherever it names a power the read withholds, both engines; red first on a plant; R5's walker first), from VEIL-33's
+  prepared brief; then (iv), (v) + ruling 82's criminalCaptureState 'none', (vi); then "R3 <commit>" + IMPORT-DOOR.
 
 ## 2. RULINGS SINCE PART 32 (numbered on from 85, PART 32's last; the eighth chair's; each vetoable by the owner)
 86. THE CHAIR, VEIL-32's prompt (written 05:15 UTC 2026-11-22; its (b) and (e) are PART 32's ruling 85):
@@ -126,12 +117,24 @@ verified by ls-remote).
     SUCCESSOR IS VEIL-33, already read in: at the mark, "HAND-OVER <commit>" to the chair and stop. (4) SECTION 1 IS KEPT CURRENT
     AT EVERY PUSH (the state, the gates' counts, what 212 last changed and why): VEIL-33 reads it today. No message to VEIL-33;
     anything for it goes through the chair.
+92. THE CHAIR, 10:17 (E69) and 12:21 (E78) UTC: (E69) the first-paint question RULED: NO RISE (raw unchanged, seven chunks
+    byte-equal, the entry chunk byte-equal once lazy hashes are normalised; gzip +20 / Brotli -105 is the hash names'
+    entropy), on the condition that the seat's own build shows the same and the merge message carries the proof in two lines
+    (MET: c2625fb1f). (E78) A NEW UNIT RIGHT AFTER (viii), BEFORE (iv): "R5-RECENT": VEIL-33's join probe (who rules LIT)
+    found `powerStructure.recentConflict` serving "Thieves' Guild overthrew the grand merchant oligarchy and reshaped the
+    government as a shadow senate." on a shared read (one place of 60 births; Reveal off and DM; server = twin): the
+    registry's composed row `power.recentConflict` has its host `_gallery_veil_composed` only PLANNED (R5), built in neither
+    engine. It must not ship: WITHHELD on a shared read wherever it names a power the read withholds, both engines; red first
+    on a PLANT on the lane's own tree; R5's walker first (a composed row whose host is only planned reds). VEIL-33 prepares its
+    brief, plant and walker; at this seat's hand-over it is VEIL-33's first unit as the lane's writer.
 
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 12:44 chain8 END; 13:01 chain8b END (the tip's build, reds and the chunk comparison); every figure held; c2625fb1f merged; the hand-over (ruling 91).
+- 12:21 ruling 92 (E78) read; 10:21 E69 read.
 - 10:1x R3-TELL-8b returned (unit (viii) built); its diff read whole once; chain8 launched (a glob that matched nothing would have run the whole suite: the chain stopped at 10:17 before that line and was relaunched without it); the first-paint question to the chair.
 - 07:46 ruling 89 read; the probe's needs and the count sent.
 - 07:2x R3-TELL-8b stopped after the read-whole (212, the registry, galleryRosterChoices.js whole: four fifths of its 250,000 mark; 85a8c6562, docs only: edit points listed); RESUMED with its mark raised to 600,000 (it holds the three reads; a fresh builder would spend them again): sitting A (the reds) then B (the cure).

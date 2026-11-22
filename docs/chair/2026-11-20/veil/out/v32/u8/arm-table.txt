@@ -1,0 +1,10 @@
+R3-TELL-8b THE ARM (arm.probe.jsx): 140 births (92 hidden-house, 48 controls), 6528 pages; shards 0/4 2026-11-22T11:45:13.889Z..2026-11-22T11:53:15.044Z; 1/4 2026-11-22T11:45:14.413Z..2026-11-22T11:52:58.882Z; 2/4 2026-11-22T11:45:14.244Z..2026-11-22T11:52:47.065Z; 3/4 2026-11-22T11:45:13.926Z..2026-11-22T11:53:00.773Z
+ENGINE PARITY (server against twin, h1/ref/shown/maHook): 0 differences
+HALF 1 (a shared read carries the key): 0 of 6528 pages; hidden-house towns 0 of 92, controls 0 of 48; by setting {"own":0,"g:000":0,"g:001":0,"g:010":0,"g:011":0,"g:100":0,"g:101":0,"g:110":0,"allOpen":0,"off":0,"unmarked":0,"allShown":0}
+HALF 2 (the list the page prints != the record reference over the served page): 0 pages; by [type, desc]: gated towns 0 of 92, controls 0, nothing-hidden reads of hidden-house towns 0; by type: gated towns 0, controls 0; by setting {"own":0,"g:000":0,"g:001":0,"g:010":0,"g:011":0,"g:100":0,"g:101":0,"g:110":0,"allOpen":0,"off":0,"unmarked":0,"allShown":0}
+  gated towns (by [type, desc]): 
+  controls: 
+  a page whose grouping is not proven open and prints a list: 0
+THE MERCHANT-ARMY HOOK (pool served, stored had it, served != the served flag): 0 pages, towns none; by setting {"own":0,"g:000":0,"g:001":0,"g:010":0,"g:011":0,"g:100":0,"g:101":0,"g:110":0,"allOpen":0,"off":0,"unmarked":0,"allShown":0}; shortfall 0, surplus 0
+RULING 88 (the writer over the served page != the writer with the record's own settle inputs): 4 of 6528 pages, towns r3m-village-under_siege-0-8; by setting {"own":0,"g:000":0,"g:001":0,"g:010":4,"g:011":0,"g:100":0,"g:101":0,"g:110":0,"allOpen":0,"off":0,"unmarked":0,"allShown":0}
+VERDICT: GREEN (0 and 0, controls 0, hook 0, parity 0)

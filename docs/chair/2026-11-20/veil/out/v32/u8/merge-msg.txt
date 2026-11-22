@@ -1,0 +1,17 @@
+Merge R3-TELL-8b: unit (viii), crimeTypes withheld on every shared read, the page re-derives (e716c84d6)
+
+Rulings 85/86 (b) (the other way) and 88 (the reader's list over the served page governs). Diff read whole once by the
+seat with 212 and the registry beside it: no fault. The seat's re-runs (out/v32/u8/): reds at bb8de9df3 (walker 3/3,
+Tell8 2/3 red); greens: typecheck 167/167, eslint 0, registry --check 0, walkers + manifest 0, arms Tell3+4+5+8 0,
+sv + hand rows + born + cures + second homes 0, the arm GREEN (HALF 1 0/6,528, HALF 2 0, controls 0, hook 0, parity 0;
+ruling 88 moves 4 of 6,528 pages, all r3m-village-under_siege-0-8 at g:010), the R3 gate 0; tests/lint whole = the sixteen
+standing. Pre-existing at the tip, the same by name: galleryVeilSignalCopies server-veil-city-2 (2), VERIFY_DIST 5.
+FIRST PAINT, the chair's E69 condition, by the seat's own builds (tip = the lane's checkout, src = b6b6b723e):
+  seven first-paint chunks byte-equal (content-identity, data, engine-core, kernel, vendor-icons, vendor-react, vendor-state);
+  the entry chunk index-RiApOl3i.js vs index-C1Bq8rmq.js: raw 489,017 both, byte-identical once lazy-chunk hashes are normalised.
+THE NEW POOL /var/tmp/v18/t2/pool-t2sig-3 (made on the cured tree, A re-read from pool-t2sig-2's births; verify 45/0):
+GATE-1 4 of 92 (7 LOWER BY RULE), GATE-2 20 of 40 cells red, server = twin, against-the-rule 0: unchanged.
+212 sha256 0352a5028544cce06c7bd9f610c23c60bc6fda5413528467fb4e478792bbb278; rollback 8cbd7d1c (unchanged); 211 unchanged.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01ACmDYa6UzQjDBufm3KqGHw
