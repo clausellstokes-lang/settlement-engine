@@ -1,0 +1,20 @@
+1c1
+< R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool /var/tmp/v18/t2/pool-t2sig-2; towns /var/tmp/v18/out/v33/g/gates
+---
+> R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool /var/tmp/v18/t2/pool-jp1; towns /home/user/wt/jp/docs/chair/2026-11-20/veil/out/v33/joinprobe/gates
+5,8c5,8
+< village | 300 | 152 (2336) | 1577 / 2124 | 7.3 | 6.8
+< town | 300 | 152 (424) | 2254 / 2753 | 5.7 | 13.8
+< city | 300 | 152 (164) | 1787 / 2238 | 9.1 | 22.1
+< metropolis | 300 | 152 (154) | 1546 / 1753 | 12.4 | 30.1
+---
+> village | 300 | 152 (2336) | 1577 / 2124 | 8.4 | 5.7
+> town | 300 | 152 (424) | 2254 / 2753 | 6.0 | 10.1
+> city | 300 | 152 (164) | 1787 / 2238 | 9.4 | 18.3
+> metropolis | 300 | 152 (154) | 1546 / 1753 | 12.9 | 30.7
+10,11c10,11
+< part A wall clock: 18.5 minutes (2026-11-22T08:14:53Z to 2026-11-22T08:33:22Z, four shards)
+< part B wall clock: 9.2 minutes (2026-11-22T08:33:22Z to 2026-11-22T08:42:31Z, four shards)
+---
+> part A wall clock: 16.5 minutes (2026-11-22T09:48:04Z to 2026-11-22T10:04:35Z, four shards)
+> part B wall clock: 9.8 minutes (2026-11-22T10:04:35Z to 2026-11-22T10:14:24Z, four shards)

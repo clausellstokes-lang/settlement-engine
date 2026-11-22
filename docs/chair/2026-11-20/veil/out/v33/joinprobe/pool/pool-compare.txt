@@ -1,0 +1,14 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 27566 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+PART A (nothing hidden): lane 1200 births, join 1200
+  village    births 300 -> 300; tried 325 -> 325; rejected 25 -> 25 ({"assembleInstitutions":25} -> {"assembleInstitutions":25}); seeds in both 300 (dial equal on 300); only lane 0, only join 0
+  town       births 300 -> 300; tried 518 -> 518; rejected 218 -> 218 ({"assembleInstitutions":210,"factionCorrelationPass":8} -> {"assembleInstitutions":210,"factionCorrelationPass":8}); seeds in both 300 (dial equal on 300); only lane 0, only join 0
+  city       births 300 -> 300; tried 2211 -> 2211; rejected 1911 -> 1911 ({"assembleInstitutions":1910,"factionCorrelationPass":1} -> {"assembleInstitutions":1910,"factionCorrelationPass":1}); seeds in both 300 (dial equal on 300); only lane 0, only join 0
+  metropolis births 300 -> 300; tried 11054 -> 11054; rejected 10754 -> 10754 ({"assembleInstitutions":10754} -> {"assembleInstitutions":10754}); seeds in both 300 (dial equal on 300); only lane 0, only join 0
+
+PART B (a hideable house held): lane 608 births, join 608
+  village    births 152 -> 152; tried 2336 -> 2336; rejected 0 -> 0 ({} -> {}); seeds in both 152 (dial equal on 152); only lane 0, only join 0; houses held 163 -> 163
+  town       births 152 -> 152; tried 424 -> 424; rejected 0 -> 0 ({} -> {}); seeds in both 152 (dial equal on 152); only lane 0, only join 0; houses held 282 -> 282
+  city       births 152 -> 152; tried 164 -> 164; rejected 0 -> 0 ({} -> {}); seeds in both 152 (dial equal on 152); only lane 0, only join 0; houses held 559 -> 559
+  metropolis births 152 -> 152; tried 154 -> 154; rejected 0 -> 0 ({} -> {}); seeds in both 152 (dial equal on 152); only lane 0, only join 0; houses held 759 -> 759
+  hideable houses held, by size|house: lane -> join (moved only)

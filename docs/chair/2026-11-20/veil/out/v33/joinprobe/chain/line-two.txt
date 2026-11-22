@@ -1,0 +1,37 @@
+[gate-tail] start:  11:11:48 up  3:14,  0 user,  load average: 2.76, 2.10, 1.63 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/jp
+
+THE WATCH (samenessHideable, SAME-2 H2 unit 5): 6 new hand line(s) with a bare crime word outside both form sets (the hand forms, the catalogue's derived forms). A human reads each; none reds.
+  watch  src/data/narrativeData.js :: ARRIVAL_SCENES::ordinary  1a54cbe0b630  "fence"  A cart has stopped half across the road into ‹› while its driver talks to someone over a fence, and nobody minds going round it.
+  watch  src/data/narrativeData.js :: ARRIVAL_SCENES::ordinary  46571453ff90  "fence"  ‹› has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house.
+  watch  src/data/safetyDescLines.js :: UNSAFE_OPENING  07893914f986  "crime"  Crime here is common, and nobody pretends otherwise.
+  watch  src/data/safetyDescLines.js :: UNSAFE_OPENING  0f291f2705f1  "crime"  Crime here is steady and out in the open.
+  watch  src/data/safetyDescLines.js :: UNSAFE_OPENING  38187e893d68  "crime"  Crime is a persistent and visible problem.
+  watch  src/data/safetyDescLines.js :: UNSAFE_OPENING  ec84f8ebd76a  "crime"  Crime here is common and out in the open.
+ ❯ tests/domain/display/troubleHooksShared.test.js (1 test | 1 failed) 9396ms
+     × (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served 4871ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/troubleHooksShared.test.js > a trouble's hooks on a shared read: absent from every shared projection; the full reveal veils nothing; the gallery's veil and its gap > (A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served
+AssertionError: expected [] to include 'A fixer of the Hollow Hand wants a do…'
+ ❯ tests/domain/display/troubleHooksShared.test.js:132:36
+    130|     const eyes = writeShareVeil({}, [{ address: 'tab:plot_hooks', hidd…
+    131|     const opened = projectShareVeil(galleryPayloadFor(record, { shareD…
+    132|     expect(troubleHooksIn(opened)).toContain(PLANTED_HOOK);
+       |                                    ^
+    133|     expect(collectPlotHooks(opened).map((/** @type {any} */ h) => h.te…
+    134|     expect((opened.institutions ?? []).map((/** @type {any} */ i) => i…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 31 passed (32)
+   Start at  11:11:49
+   Duration  13.41s (transform 3.19s, setup 85ms, import 2.06s, tests 10.99s, environment 0ms)
+
+[gate-tail] end:  11:12:03 up  3:14,  0 user,  load average: 2.29, 2.03, 1.62
+[gate-tail] full log: /tmp/gate-tail.3147.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

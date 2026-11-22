@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7042 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+       |                                                                                                       ^
+     96|   });
+     97|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/fixtureGitIsolation.walker.test.js > fixture-git isolation walker > the walk sees its subjects: the five suites that leaked on 2026-11-13 are repository builders
+AssertionError: expected [ 'tests/helpers/gitFixture.js', …(4) ] to deeply equal ArrayContaining{…}
+
+- Expected
++ Received
+
+- ArrayContaining [
++ [
++   "tests/helpers/gitFixture.js",
++   "tests/helpers/gitFixture.test.js",
+    "tests/lint/tuningRegister.walker.test.js",
+-   "tests/scripts/implementationPackets.test.js",
+-   "tests/scripts/implementationSession.test.js",
+    "tests/scripts/landingStageMeasure.test.js",
+    "tests/soak-harness/soakRegister.test.js",
+  ]
+
+ ❯ tests/lint/fixtureGitIsolation.walker.test.js:100:22
+     98|   test('the walk sees its subjects: the five suites that leaked on 202…
+     99|     const builders = [...sources].filter(([, src]) => buildsRepo(src))…
+    100|     expect(builders).toEqual(expect.arrayContaining([
+       |                      ^
+    101|       'tests/lint/tuningRegister.walker.test.js',
+    102|       'tests/scripts/implementationPackets.test.js',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+   Start at  11:22:59
+   Duration  576ms (transform 46ms, setup 58ms, import 186ms, tests 208ms, environment 0ms)
+
+[gate-tail] end:  11:23:00 up  3:25,  0 user,  load average: 0.55, 1.45, 1.55
+[gate-tail] full log: /tmp/gate-tail.7342.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

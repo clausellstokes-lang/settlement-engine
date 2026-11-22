@@ -1,0 +1,42 @@
+
+ ❯ tests/lint/tuningRegister.walker.test.js:564:67
+    562|       if (count > banked) problems.push(`${file}: ${banked} -> ${count…
+    563|     }
+    564|     expect(problems, 'P2 is SHRINK-ONLY with new files at zero.').toEq…
+       |                                                                   ^
+    565|   });
+    566|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise
+AssertionError: every ceiling here is a banked MEASUREMENT of what the estate already is, so the only movement it permits is downward. Raising one is not a lane's act — TIME IS NOT THE CONSTRAINT, and a raised ceiling is a debt taken silently.: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "UNREGISTERED_NAMED_CEILING: 541 -> 542",
++   "DECLARED_GROWTH_CEILING: 14 -> 15",
++ ]
+
+ ❯ tests/lint/tuningRegister.walker.test.js:600:88
+    598|     expect(problems, 'every ceiling here is a banked MEASUREMENT of wh…
+    599|       + ' is, so the only movement it permits is downward. Raising one…
+    600|       + ' TIME IS NOT THE CONSTRAINT, and a raised ceiling is a debt t…
+       |                                                                                        ^
+    601|   });
+    602|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  7 failed | 20 passed (27)
+      Tests  14 failed | 901 passed (915)
+   Start at  11:12:04
+   Duration  590.11s (transform 10.14s, setup 600ms, import 78.40s, tests 507.91s, environment 3ms)
+
+[gate-tail] end:  11:21:54 up  3:24,  0 user,  load average: 1.35, 1.80, 1.66
+[gate-tail] full log: /tmp/gate-tail.3220.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
