@@ -81,3 +81,25 @@ report it and try nothing else to the same end).
 beside the lane's; the green chain's exits and reds; E35's table; every red by its landed lane; the proposed units; CONFIRMED vs
 PLAUSIBLE. Committed. END YOUR TURN with ONE line: "PASS1 <commit>: GATE-1 x/92 (n LOWER), GATE-2 y/40, hook gap <served hooks
 needing a hidden house>/<served hooks>, reds <n> by <lanes>". Your mark: about 250,000 tokens: stop at the step in hand, commit.
+
+## PASS 2 (LIT): a FRESH builder (added by the seat after pass 1 returned; where it differs from the text above, THIS governs)
+- PASS 1 IS DONE: `lane/veil-33-2026-11-22-joinprobe-wip` at 44c2007ab (merge 27c7e79dd + the report `out/v33/joinprobe/JOINPROBE-PASS1.md`,
+  READ IT WHOLE FIRST: it is your baseline, its scripts are yours to reuse). Its pool `/var/tmp/v18/t2/pool-jp1` stands: never overwrite it.
+- THE LIT REF: `lane/close-1-lit-scratch-2026-11-22` AT THE COMMIT 5c4419815 (NOT its tip e987c3e36, whose register commits the
+  chair has not named: CLOSE-1 is parked). It is 4bba8781d with the three dials flipped and nothing else (`seatLaw.js ::
+  NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION`, `seatCircumstances.js :: SEAT_CONTEST_LIT = true`, `fortuneLaw.js ::
+  NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION`). STEP 1: in `/home/user/wt/jp`, `git merge --no-ff
+  5c4419815` (expected: no conflict; any conflict is a STOP) with the hooks; then PROVE IT LIT ON A BIRTH (`birthConfig` from
+  `src/domain/density/densityCreateBoundary.js` mints `_seatLawVersion` 2 and `_fortuneLawVersion` 2 on this tree), the receipt in
+  your report.
+- THEN steps 2 to 6 of the text above ON THE LIT TREE, with these names: pool `/var/tmp/v18/t2/pool-jp2`, template `jp2tpl`, TELL_DB
+  `jp2`, outputs under `docs/chair/2026-11-20/veil/out/v33/joinprobe/lit/`. Every count BESIDE PASS 1's (dark) and the lane's own:
+  what the lit laws alone add. In step 3 the pool's births WILL move (the laws change births): say what moved by size (powers, the
+  seat's holder and contest, fortune's `breakdown.merits`) before attributing anything. ADD to step 4: any test on this tree that
+  names the seat's lit surfaces or fortune's merits on a shared read (the who-rules lane's eight surfaces, ruling 67 (3); fortune's
+  `merits` riding `breakdown`, ruling 63 (1), PART 30): run the ones the tree holds and name the ones it does not.
+- Your report: `<out>/lit/JOINPROBE-PASS2.md`; then the PRODUCT `docs/chair/2026-11-20/veil/out/v33/joinprobe/JOINPROBE.md`: the
+  conflicts (pass 1's list); the two gates dark and lit beside the lane's own; EVERY RED BY THE LANDED LANE THAT BRINGS IT (dark and
+  lit, the lit laws' own named apart); E35's hook gap dark and lit; what 212 and its twin must gain, each as a PROPOSED unit for the
+  lane's writer (not built). Say in it that the refs are the two commits the chair named, not the tips. Last line: "PASS2 <commit>:
+  GATE-1 x/92 (n LOWER), GATE-2 y/40, hook gap a/b, reds <n> by <lanes>; lit adds <one clause>". Your mark: about 250,000 tokens.
