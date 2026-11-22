@@ -55,6 +55,23 @@ the security reader's list) and the briefs under `briefs/`. Prompt:
   both ceilings. RULE 2 READS `presumes` AS NEEDS for this table: the five houses LISTED (readings re-taken from the walker's
   own reading, count by house in the commit); a hideable or crime `presumes` is read by rule 1 and stands under the entry.
   Until the line moves: nothing else.
+- THE HOLD LIFTED (the chair, 07:46: the owner's "go wild until you run out"; up to TWO builders at once, decision E45).
+  THE BASE FOR UNIT 3, built as a trial and pushed: `lane/page-13-2026-11-22-base96-wip` = `66645bd59` (from `f8807d94c`):
+  the merge of stack-96 `b03a31560` (6 conflicts: DossierSearchResults.jsx both kept, the tension row's `settlement` and
+  the line's tradition description/calendar line; the mutation manifest as the union, the line's block a superset; four
+  registers at the line's side, then by their doors: observed-shape readers 1,552 -> 1,551 (viewModel.js "parties on
+  currentTensions", stale since SIDES), wiring producer index 1,446 -> 1,447, lighting 3,751 -> 3,752, writer-reach green
+  untouched), then the line's four test-only cures `cc2f43aee`. tests/lint whole there: 4 red of 3,364 = the line's three
+  (proseComposed A0b, proseCorpusBytes RAW, GZIP) + the UNREAD row (SIDES-DECLARATION cures it). The recipe:
+  `scratchpad/merge96.sh` (in the container; its steps are the list above). UNIT 3's REAL MERGE: the line's final tip on
+  top of this base, then fast-forward the lane.
+- TWO BUILDERS OUT (08:3x), both on `66645bd59`, file lists disjoint: SIDES-DECLARATION (brief `briefs/SIDES-DECLARATION.md`,
+  worktree `.claude/worktrees/sides-decl`, branch `lane/page-13-2026-11-22-sides-decl-wip`) and CAUSES-WIRING-2 (brief
+  `briefs/CAUSES-WIRING-2.md`, worktree `.claude/worktrees/wiring`, branch `lane/page-13-2026-11-22-wiring-wip`). Briefs
+  at `eda04c373`. If PAGE-13 is relieved before they return: push each branch as it stands with its report.
+- TWO FAULTS OF PAGE-13's, told to the chair: the clone was SHALLOW (the observed-shape door cannot find its genesis):
+  `git fetch --unshallow origin` first in a fresh container; unit 1 never ran `check:observed-shape-readers`. One scratch
+  commit used `--no-verify`: reset and redone with the hooks at once.
 - UNIT 4's LISTS WRITTEN (the chair's 05:26 order): `build/SIDES-LISTS/LISTS.md` (`8c35fa909`): SIDES moves 89 of 300
   towns (thorp 16, hamlet 13, village 15, town 20, city 15, metropolis 10); the surfaces; ONE house reader,
   `tensionShown.js :: tensionSidesShown`, which by construction can choose a wording by the `organised crime` atom and by
@@ -64,7 +81,7 @@ the security reader's list) and the briefs under `briefs/`. Prompt:
 - NOT BUILT: unit 3; unit 4's runs ("PAGE-SIDES"); unit 6 (causes' wiring, on "PAGE-TROUBLE IS POINT <n>"). Unit 5 is the
   chair's (DAILY-PAGE-1, point 95).
 - AT THE MERGED TIP 9b7282425: tests/lint whole 220 files, 3,271 of 3,271 green.
-- NEXT STEP: on the chair's word (point 96 pushed), merge the line (unit 3), then one builder for the ruled declaration.
+- NEXT STEP: read the two builders' diffs as they return; on the chair's word (point 96 pushed), the real merge on the base.
 
 ## Rulings in force (the eighth chair's, in PAGE-13.txt; each vetoable by the owner)
 (a) the line has landed 87-93 (LINE-NOW). (b) the reader pin is re-made as a differential, never re-recorded.
