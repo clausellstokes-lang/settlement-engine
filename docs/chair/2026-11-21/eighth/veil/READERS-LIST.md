@@ -1,0 +1,29 @@
+# THE SECURITY READER'S LIST for the share veil (kept by the eighth chair; DRAFT until "R3 <commit>" is sent; written 2026-11-22 14:18 UTC)
+
+WHAT THIS IS: every "for the security reader" item of the chair's decisions (CHAIR-HANDOFF-EIGHTH.md, section 2), as one
+table. The chair sends it to the fresh reader (REVIEW-VEIL-15, `prompts/REVIEW-VEIL-15.txt`) WITH "R3 <commit>", the
+LOWER towns by name and the join probe's report (JOINPROBE.md) as a lead. The reader reads nothing of the lane before
+R3. THE BAR IS "NOT INFERABLE" (GATE-1 0 of 92, GATE-2 0 red): a shared read of a place that hides a thing prints what
+the same place prints with the thing never there. A row marked NOT ON THE LINE names work still in a lane: the reader
+reads it where the row says, or it waits for the review of that lane's landing.
+
+| # | the item | ruled in | what the reader checks | where it lives |
+|---|---|---|---|---|
+| 1 | The three LISTED cause rows of a trouble (a cause that names a house) | E23 | a hiding read prints the cause a place without the house prints; the three rows are served on evidence the read itself serves | `tensionCauseHolds.js :: TENSION_CAUSE_HOLDS`; on the line (point 96) |
+| 2 | The cause-house rows that declare a key-to-group (black_market, assassins, underground, whisper_market, outlaws) | section 3, 2026-11-21 23:54 | the lane's arm W: a hiding read prints what a place without the house prints; `criminal_power`'s four signatures are LISTED, not cured | `causeHouses.js`; on the line |
+| 3 | THE HOOKS' PINNED GAP: the DM door open, the hooks' eye opened, the house left veiled: the hook is served and the house's card is gone | E35 (it corrects E23's half B), E75 | the eleven rows (5 and 6) by name; whether any hook line names a person; the measured gap: 11 of 462 served hooks on the joined tree; the 16 unregistered roster-choice sites | `tests/domain/display/troubleHooksShared.test.js` arms (C), (D); unit (ix) is the veil lane's cure AT THE JOIN |
+| 4 | `safetyDesc` is drawn from sentence pools | E12 | the veil's twin for it is re-derived over those pools; a veiled garrison clause prints its no-house sibling | on the line (point 92 on) |
+| 5 | The Daily Life page prints DERIVED lines on every read (three at point 95; eight slots and the five office lines L8 to L12 when DAILY-B lands) | E24, E38, E72, E82 | every line is derived from the SERVED document; none reads the owner's record; the office atoms read the governing ROW and are FALSE where that row is hidden (fail closed); they are NOT hideable by an owner (a faction card's floor keeps its name and `isGoverning`; the one writer of `hidden: true` is the infiltrator in `stressFactions.js`) | `DailyLifeTab.jsx`, the Daily Life pools, `facts/` (the lazy office leaf: NOT ON THE LINE until DAILY-B) |
+| 6 | The OWNER-ONLY slot `commoner_resentments_dm` | E38 | derived ONLY for `{ audience: 'owner' }` (a missing audience is a reader); absent on every no-audience read; `toPublicSafe` documents it; `deriveRegenerationDelta` and `buildAiGroundingPayload` never carry it; the crime clauses have left the public slot | the Daily Life lane (NOT ON THE LINE until DAILY-B) |
+| 7 | THE GUARD LINE'S PAY-CUT TWIN (owner-only) | E46 | the shared read of a place with a pay cut equals the same place with the cut removed; the owner's read prints the twin | `guardLineUnderTheLaw.js`; its pin `tests/domain/display/guardLinePayCutOwnerOnly.test.js` is on `lane/page-12-2026-11-21-guardline-wip` (NOT ON THE LINE) |
+| 8 | The six rows of the sides table (`TENSION_SIDE_MEANINGS`) | E40 | a side's meaning names no house a read withholds | the display lane (NOT ON THE LINE: "PAGE-SIDES") |
+| 9 | THE CRIME LISTS: `crimeTypes` withheld on EVERY shared read; the page re-derives through ONE reader | E34, E41, E80 | the served list is written from served facts alone (a control town with services and underside shut stores a network line: the shared page says "desperation theft", no network); server equal to twin | 212 and its twin; `pageRederive.js`; the veil lane (unit (viii), merged at c2625fb1f) |
+| 10 | R5-RECENT: under who rules LIT, `powerStructure.recentConflict` named a withheld criminal taker ("Thieves' Guild overthrew the grand merchant oligarchy…", jp6-metropolis-0) | E78 | the sentence is WITHHELD (not masked) wherever it names a power the read withholds, both engines; the plant reds first; R5's walker reds on a composed row whose host is only planned | the veil lane (VEIL-33's first unit as writer) |
+| 11 | WHO RULES LIT, the probe's second pass | E75, E78 | lit GATE-1 6 of 92 (three new cities on `powers.relations`; controls moved); GATE-2 20 of 40; the 79 act-T strings sorted | JOINPROBE.md (the lead) |
+| 12 | `age on history`: fortune's second merit reads it; the field has six surfaces | E74 | the merit's sentence is served unchanged on the eleven projections; the age itself tells nothing a read withholds | the fortune lane (NOT ON THE LINE until FORTUNE-B) |
+| 13 | THE PLAYERS' PAGE CUTS ITS EMPTY SECTIONS | E66, E84 | the cut is a function of the SERVED document alone: veiled-to-nothing and never-had are cut alike; the reader's switch shows today's page | `briefs/SHARE-EMPTY-CUT.md` (NOT BUILT: the display lane's unit) |
+| 14 | What of a share's options travels to a reader | 211 (the lane's text) | the allowlist `_gallery_veil_served`: each person's `revealDm` and `allowImport`, the marker `{ v, mode, at, groupings }`, no other key; `at` only when the frozen copy was served | `supabase/migrations/211_server_side_share_veil.sql` on the veil lane |
+
+AFTER THE READER'S CLEARANCE (the standard's rule 1, the amendment of 2026-11-10): ONE read-only review of migration
+212's FINAL text by the top tier in a fresh context, before any deploy step. Migrations 204 to 212 are applied by the
+owner's hand only.
