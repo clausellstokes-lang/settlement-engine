@@ -1942,6 +1942,30 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   "lord's steward's") are named with their rows, cured by nobody here. DAILY-4's record 396,532 at 21:26. THE
   CHAIR'S OWN RECORD 743,455 at 21:23: the pickup note's first block is rewritten at this hour for a summary of
   this session or a successor.
+- E134 · THE VEIL WAS PROVED ON BIRTHS AND SERVES STORED DOCUMENTS: A FAULT IN THE MERGED R5-RECENT, FOUND BY THE LEGACY MEASURE; CHAIN C (recorded 2026-11-22 21:32 UTC). VEIL-33's "LEGACY-POOL" (`lane/veil-33-2026-11-22-legacy-wip`: instruments 4d03aaa0d, the measure 216cb46d8; 440 master-born
+  births at db832c892, stored as master's save stores them, and 440 today-born stored documents). (A) THE FAULT:
+  the document as the lane's `saves.js` stores it carries `publicProse`; its block
+  `publicProse.blocks.power:governance.text` holds the `recentConflict` sentence WORD FOR WORD on 338 of 440
+  today-born stored documents; that block is served: 1,492 absence faults on hiding reads. R5-RECENT's third-copy
+  scan, its plant and its differential all ran on births, which carry no `publicProse`. Master's stored places
+  carry none (master has no prose module): only places saved by THIS release are touched. IT MUST NOT SHIP. (B) THE
+  MASTER-BORN MEASURE: in a 300-place universe the gates read 17 of 91 with 32 red against today-born 16 of 92 with
+  40 red (the universe's size, not the engine); the differential 1,760 of 1,760; FOUR LEGACY-ONLY TELLS:
+  `npcs[].secondaryAffiliation` "Thieves' Guild" (the DM read, 32 places); the same in `factions[].members[]` (30);
+  `relationships[].npc2Role` "Thieves' Guild Master" ON THE PLAYER READ with Reveal off (12 places, unregistered);
+  `factions[].members[].corruptTies` (82, unregistered); server and twin differ on `k.powers.power` in 9 of 91
+  master-born towns; THE PAGE's READERS ON MASTER-BORN PAGES: `rederiveRecentConflict` equal on 111 of 417, the
+  crime lists on 239 of 417, the defence scores on 35 to 109 of 417: fidelity gaps, not leaks: a player would read
+  another sentence than the owner does on an older place (three examples asked; the owner is told); the seven word
+  rules: none with a legacy-only tell. RULED: (1) THE UNIVERSE OF EVERY PROOF OF THE VEIL IS THE DOCUMENT AS
+  `saves.js` STORES IT (today-born stored, and master-born stored), no longer the birth; (2) VEIL-33 IS CHAIN C's
+  WRITER; JOIN-PREP WAITS: (C1) "STORED-UNIVERSE", a measure: every stored-only field; every `publicProse` block
+  that holds a withheld, cut or masked field, by registry row; both gates and the differential on stored
+  documents; (C2) the cure of the stored prose PROPOSED WITH ITS COSTS for the chair's ruling (the whole
+  `publicProse` never served and composed on the page from the served document, or block by block); (C3)
+  "LEGACY-TELLS", the four rows, the player read's first; (3) chains A and B add a STORED ARM to their proofs with
+  VEIL-33's read-stored mode (told to VEIL-36 and VEIL-35); neither cures the stored prose. THE READER'S LIST gains
+  the class. THIS IS WHY THE MEASURE WAS ORDERED (E121): it found what the pool could not hold.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 

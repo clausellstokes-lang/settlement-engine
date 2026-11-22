@@ -17,7 +17,7 @@ without completing any"). ONE QUESTION IS PUT TO HIM AND NOT ANSWERED: whether t
 
 THE LINE: `lane/join-2026-11-14` = 244fa84ef6e3f8bf773b64b87d9def7c854d4f0a on origin (POINT 105; both laws whole and DARK;
 `ci/LINE-NOW.md` at point 105; the red list 61 rows, read by containment). CI on it is read by name at 21:55 (a trigger).
-The handoff's section 2 holds E1 to E133; section 6 every session id; `prompts/` every prompt as sent or drafted.
+The handoff's section 2 holds E1 to E134; section 6 every session id; `prompts/` every prompt as sent or drafted.
 
 THE SIX WHO WORK, AND WHAT EACH OWES:
 - VEIL-36 (chain A): "R5-DESC" (E115, E121, E126, E128): its builder drafts the STANDING_FORMS list first; then R5D-SQL and
@@ -25,8 +25,12 @@ THE SIX WHO WORK, AND WHAT EACH OWES:
 - VEIL-35 (chain B): R4I-SQL is built (212 at 7a85dec3… on its -wip); R4I-PAGE proves; then "TIP? R4-IDS <commit>": ANSWER
   "TIP TO VEIL-35"; at "R4-IDS MERGED <commit>" tell VEIL-36 and VEIL-33 that tip. It hands over there (its record 501,913
   at 20:49): its place then goes to what waits (below). IMPORT-DOOR's brief stands complete on its branch (c416b1a88; E124).
-- VEIL-33: "LEGACY-POOL" (E121: the veil measured on places born by master's engine; its read-stored mode works; when it
-  pushes `lane/veil-33-2026-11-22-legacy-wip`, SEND THAT COMMIT TO VEIL-36 for R5-DESC's legacy arm); then "JOIN-PREP" (E119).
+- VEIL-33 (CHAIN C, E134): its legacy measure found that THE VEIL WAS PROVED ON BIRTHS AND SERVES STORED DOCUMENTS (the
+  stored `publicProse` held a withheld sentence: a fault in the merged R5-RECENT; it must not ship) and four tells on
+  master-born places. Its units: "STORED-UNIVERSE" (a measure), then the stored prose's cure PROPOSED FOR YOUR RULING, then
+  "LEGACY-TELLS". "JOIN-PREP" (E119) waits. Chains A and B add a STORED arm to their proofs (told). Its legacy-wip commit
+  (216cb46d8 when pushed) goes to VEIL-36 and VEIL-35. THREE EXAMPLES are owed to you of a master-born place whose
+  re-derived recent-conflict sentence differs from its stored one: THE OWNER IS TO BE TOLD of that gap in plain words.
 - DAILY-4: "DAILY-B 4e7fa5667" IS ACCEPTED AND WAITS FOR A LANDING; it builds "DAILY-C" (the owner's three, ruled in E133).
 - CLOSE-2: THE FINAL CENSUS (the whole suite lit, from 383e752d5; part 1: 104 red, 84 new, 5 beyond the rehearsal, no
   timeout, no (d)) and its classing; then "PRONOUN" (E117). IT BUILDS NO FLIP (E131). Its report goes to CLOSE-3 through you.
