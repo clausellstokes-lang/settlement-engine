@@ -9,8 +9,15 @@
  *     share's projected veil; on born places that hold troubles and on a planted one.
  * (B) THE FULL REVEAL (`toPublicSafe(record, { full: true })`, reachable only where the owner set `gallery_share_dm`)
  *     PRINTS the hooks, by the owner's choice, and VEILS NOTHING: on a record with a veiled card and a hidden power it holds
- *     that card's house and that power's name exactly as the owner's record does. So no hook a hideable house chose is
- *     shown on a read that hides the house: the one read that shows the hooks hides nothing.
+ *     that card's house and that power's name exactly as the owner's record does.
+ * (C) THE GALLERY'S OWN VEIL (the chair's ruling of 05:42 UTC 2026-11-22): the reader runs `galleryVeil.js`'s veil after the
+ *     projection, and its DEFAULT set hides every hook (`tab:plot_hooks`, `class:tension:hooks`, X-21d) and a criminal or
+ *     clandestine house whole (X-21e), on a DM-door share too: the DM-door payload under the default veil (applied, and
+ *     through `projectShareVeil` with a marked, empty delta list) serves no hook of a trouble, on born places and the planted one.
+ * (D) THE GAP, PINNED: every default is an eye the owner can open. With the DM door and ONLY the hooks' eyes opened, the
+ *     thieves' guild left veiled, the planted hook IS served while the house's card is gone. That state is NOT held by the
+ *     sameness walker; it is owed to the share veil's instrument and LISTED for the security reader. The day the veil holds
+ *     it, (D) reds and the walker's TROUBLE_HOOKS entry is rewritten.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { HIDDEN_POWER_MASK, galleryMemberKey, toPublicSafe } from '../../../src/domain/display/publicSafe.js';
@@ -51,6 +58,12 @@ const SHARED = {
   'the share\'s projected veil': (r) => projectShareVeil(toPublicSafe(r), writeShareVeil({}, [])),
 };
 
+/** @type {Record<string, (record: any) => any>} the DM door (`gallery_share_dm`) under the gallery's DEFAULT veil (C) */
+const DM_DOOR_DEFAULT_VEIL = {
+  'the DM door, the default veil applied': (r) => { const p = galleryPayloadFor(r, { shareDm: true }); return applyVeil(p, resolveVeil(defaultVeilFor(p), null)); },
+  'the DM door, the share\'s projected veil (marked, no delta)': (r) => projectShareVeil(galleryPayloadFor(r, { shareDm: true }), writeShareVeil({}, [])),
+};
+
 /**
  * Where a shared projection serves a trouble's hook: `projection: hook` for each stored hook its document carries (as a
  * trouble's `plotHooks`, anywhere in its text, or as a hook the dossier's Plot Hooks tab collects).
@@ -80,8 +93,8 @@ beforeAll(async () => {
   })).filter(([, r]) => (r.history?.currentTensions ?? []).some((/** @type {any} */ t) => Object.hasOwn(TROUBLE_HOOKS, t?.type) && t.plotHooks?.length));
 }, 180000);
 
-describe('a trouble\'s hooks on a shared read: absent from every shared projection; the full reveal veils nothing', () => {
-  it("(A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does", () => {
+describe('a trouble\'s hooks on a shared read: absent from every shared projection; the full reveal veils nothing; the gallery\'s veil and its gap', () => {
+  it("(A) every shared projection but the owner's full reveal carries no hook of a trouble, on born places and a planted one; (B) the full reveal holds the veiled card's house and the hidden power's name as the owner's record does; (C) the DM-door payload under the gallery's default veil serves no hook of a trouble; (D) the gap: with only the hooks' eyes opened and the house veiled, the hook is served", () => {
     // (A) born places that hold troubles, and the planted one
     expect(troubled.length).toBeGreaterThan(0);
     expectNoSeedFailures(collectSeedFailures(troubled, ([seed, record]) => { expect(servedHooks(SHARED, record), seed).toEqual([]); }), 'no trouble hook on a shared projection of a born place');
@@ -104,5 +117,21 @@ describe('a trouble\'s hooks on a shared read: absent from every shared projecti
     const served = toPublicSafe(record);
     expect(served.npcs.find((/** @type {any} */ n) => n.id === 'npc.mara')?.institution).toBeUndefined();
     expect(count(served, 'The Hollow Hand')).toBe(0);
+    // (C) the DM door under the gallery's DEFAULT veil: applied, and through the share's projection with a marked, empty delta list
+    expectNoSeedFailures(collectSeedFailures([...troubled, ['planted', record]], ([seed, r]) => {
+      expect(servedHooks(DM_DOOR_DEFAULT_VEIL, r), seed).toEqual([]);
+    }), 'no trouble hook on the DM-door payload under the default veil');
+    // the fixture's house is one the default veil hides whole (X-21e)
+    const door = galleryPayloadFor(record, { shareDm: true });
+    const houseCard = defaultVeilFor(door).map((/** @type {any} */ d) => (typeof d === 'string' ? d : d.address)).filter((a) => a.startsWith('card:institution:'));
+    expect(houseCard).toHaveLength(1);
+    // (D) THE GAP, PINNED. NOT held by the sameness walker; owed to the share veil's instrument (LISTED for the security reader).
+    // The day the veil holds it, this reds and the walker's TROUBLE_HOOKS entry is rewritten.
+    const eyes = writeShareVeil({}, [{ address: 'tab:plot_hooks', hidden: false }, { address: 'class:tension:hooks', hidden: false }]);
+    const opened = projectShareVeil(galleryPayloadFor(record, { shareDm: true, memberOverrides: eyes }), eyes);
+    expect(troubleHooksIn(opened)).toContain(PLANTED_HOOK);
+    expect(collectPlotHooks(opened).map((/** @type {any} */ h) => h.text)).toContain(PLANTED_HOOK);
+    expect((opened.institutions ?? []).map((/** @type {any} */ i) => i.name)).not.toContain('Thieves guild');
+    expect((opened.institutions ?? []).map((/** @type {any} */ i) => i.name)).toContain('Town watch');
   });
 });
