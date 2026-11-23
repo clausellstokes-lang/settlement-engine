@@ -1,0 +1,68 @@
+start 2026-11-23T13:12:41Z src /var/tmp/sql2red (b5b6a5474 (code = 392aff978)) twin 823a4ad6532d1387 tpl sql2_redtpl out /var/tmp/v18/out/v42/sql2/sql2ctrlred
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12123 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+fatal: not a git repository (or any of the parent directories): .git
+shard 0 rc=0
+shard 1 rc=0
+shard 2 rc=0
+shard 3 rc=0
+documents 12; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 288 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 288 / 33
+  L1 gallery | canon: 288 / 33
+  L1 link | aligned: 288 / 0
+  L1 link | canon: 288 / 0
+  L2 gallery | aligned: 288 / 57
+  L2 gallery | canon: 288 / 57
+  L2-vs-L1 server | canon: 576 / 288
+  L2-vs-L1 twin | canon: 576 / 288
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 12
+
+== L1 gallery | aligned: 33 of 288 reads differ
+   by setting: master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3
+   documents (3): v102-city-0|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+== L1 gallery | canon: 33 of 288 reads differ
+   by setting: master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3
+   documents (3): v102-city-0|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   factions[].power: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0].power
+        server: 25
+        twin:   (absent)
+== L2 gallery | aligned: 57 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (5): v102-city-0|master, v102-hamlet-6|current, v102-hamlet-6|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+== L2 gallery | canon: 57 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (5): v102-city-0|master, v102-hamlet-6|current, v102-hamlet-6|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   factions[].power: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0].power
+        server: 25
+        twin:   (absent)
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship#keys
+EXIT rc=0 2026-11-23T13:16:59Z
