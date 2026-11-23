@@ -13,6 +13,8 @@ only be cured by one of those is a STOP, reported, not cured.
   ledger ref before `tests/lint`; commit by explicit paths after each step and push your own branch by its own name; never `--no-verify`,
   never a force push, NEVER A PULL REQUEST; "WIP, UNPROVED" before a wait over ten minutes; a refusal of your permission check stands. EVERY PUSH GUARDED IN THE SAME COMMAND (the chair, 12:07): push only when `git rev-parse HEAD` differs from `git ls-remote origin lane/veil-44-2026-11-23-trad4-wip | cut -f1` (a push with nothing to send starts the whole check); a push log showing `npm run check` or `test:ratchet` is killed with its whole process tree and reported.
 
+ONE FILE, TWO HANDS (the chair, 12:14): you NEVER create or edit `tests/security/traditionDescriptionSharedPage.test.js` (the join's seat owns its red in "TRAD-2 UNIT 2"); you only READ TRAD-4's block from 14f16760b by `git show`. If your work seems to need that file: STOP and report.
+
 ## THE UNIT: THE PIN "AN IMPORT EQUALS THE GALLERY READ"
 THE SOURCE: TRAD-4's block (14f16760b on `origin/lane/trad-4-2026-11-20-u8-wip`): 140 born towns, saved, served through PGlite on the
 migrations, imported through `importGallerySettlementImpl` with `fetchDossierForImport`, the clone compared with what was served. The file
