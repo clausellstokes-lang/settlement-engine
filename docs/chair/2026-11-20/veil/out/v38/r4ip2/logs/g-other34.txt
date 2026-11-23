@@ -1,0 +1,43 @@
+    801|     expect(out.availableServices.food).toEqual(s.availableServices.foo…
+    802|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/14]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > PROPERTY: for any veil, every path and value in the output already sits at that path in the projection
+AssertionError: expected '"n1"' to be '"npc_9cf69cadeac0e727"' // Object.is equality
+
+Expected: ""npc_9cf69cadeac0e727""
+Received: ""n1""
+
+ ❯ tests/domain/display/publicSafe.test.js:892:34
+    890|         if (value === '[]' && [...before.keys()].some(k => k.startsWit…
+    891|         if (value === '{}' && [...before.keys()].some(k => k.startsWit…
+    892|         expect(before.get(path)).toBe(value);
+       |                                  ^
+    893|       }
+    894|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the curate model and the share mode (W2-VEIL-B U2) > a master switch hides a field class for everyone; one card eye is its exception, and the reader agrees
+TypeError: Cannot read properties of undefined (reading 'secret')
+ ❯ tests/domain/display/publicSafe.test.js:971:45
+    969|     expect(after.lines.filter(l => /secret/i.test(l.text)).map(l => l.…
+    970|     const out = projectShareVeil(pub, writeShareVeil({}, deltas));
+    971|     expect(out.npcs.find(n => n.id === 'n1').secret).toBe(undefined);
+       |                                             ^
+    972|     expect(out.npcs.find(n => n.id === 'n2').secret).toEqual({ what: '…
+    973|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  5 failed | 29 passed (34)
+      Tests  14 failed | 852 passed | 1 skipped (867)
+   Start at  00:34:08
+   Duration  894.66s (transform 14.20s, setup 606ms, import 40.72s, tests 841.00s, environment 6.82s)
+
+[gate-tail] end:  00:49:03 up 37 min,  0 user,  load average: 8.89, 8.38, 6.00
+[gate-tail] full log: /tmp/gate-tail.8219.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1
