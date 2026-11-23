@@ -53,7 +53,7 @@ STATE AT 10:12 UTC: R5D-RIVAL's rule is in 212 (`_gallery_veil_roster_choices`, 
 (`galleryRosterChoices.js :: applyRosterChoices`, `withholdRivalsOfWithheld`), its arm `tests/security/galleryVeilRival.pglite.test.js`:
 UNCOMMITTED, runs not reported. B2: stored pools dumped 07:05 (`/var/tmp/v18/t2/stored-v40/{today,master}`); its batch
 (`/var/tmp/v18/t2/stored-v40/logs/full1/`) took the mutex 09:30; 7 of 10 jobs failed at vitest start-up (config error), 3 stored jobs
-running.
+running. WIP COMMITTED AND PUSHED (ruling 116): RIVAL 9a2f8ef9a, B2 c7a4e9a4e.
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -87,6 +87,12 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 115. THE CHAIR, 10:12: (1) VEIL-43 is THE JOIN's SEAT (a non-writer of the tip). (2) "MAP-COVERT" (N76): `get_gallery_map`'s member
     never runs the covert CASE (chain B's, IMPORT-DOOR); THE LANE's TWO GATES READ THE GALLERY READ ONLY: "TIP?" says WHICH DOORS the
     proofs read. (3) END A TURN AT LEAST ONCE AN HOUR, at a piece's end. The chair's read of this record: 286,352.
+116. THE CHAIR, 10:15: (1) NOTHING STAYS ONLY IN A CONTAINER: each builder's work committed as WIP, UNPROVED, and pushed by the fast
+    path before the next wait: DONE by this seat, R5D-RIVAL 9a2f8ef9a (`-r5rival-wip`), B2 c7a4e9a4e (`-r5desc-wip`); builders told to
+    commit on top. (2) THE MUTEX's ORDER after B2's three stored jobs end: R5D-RIVAL's runs FIRST, then this seat's NEW POOL AND BOTH
+    GATES (on RIVAL's branch, with ruling 114's sha table), THEN B2's re-run of its seven dead jobs; B2 reads its config error first
+    (no run) and says the cause. (3) An hour is read from `date -u` in the command that writes it (this seat wrote 10:16 having read
+    10:11: its error).
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -97,3 +103,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 07:00 ruling 113 (107 (3) closed). 07:07 R5D-RIVAL's brief (a079f6fbd), worktree cut, R5D-RIVAL dispatched; addendum 2, push 8335ac913 (07:11).
 - 07:17 ruling 114; relayed to B2; 07:18 PART 42's estimated hours replaced by commit times or removed.
 - 10:12 ruling 115; 10:12 the state line to the chair.
+- 10:15 ruling 116; 10:18 both WIP commits pushed; builders told; the chair told.
