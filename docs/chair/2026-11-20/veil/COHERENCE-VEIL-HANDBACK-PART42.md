@@ -165,6 +165,12 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     (else STOP: N94's lean); (b) S reads the seven by IMPORT from their one table; (c) a pin: no natural row's base equals one of the
     seven, re-counted on born and stored pools; (d) the import's save in the same arm; (e) red first on the 48 and a plant; the
     never-there differential and the share-class counts re-run after. Rides in the unit before "TIP?".
+124. THE CHAIR, 12:53 (N96), from chain C's mask-word measure: t2p-village-infiltrated-261 and -311 (gate pool seeds; NOT in B2's stored
+    set) serve the mask in a THIRD power's STANDING ("Religious Authorities: ...they play an unseen interest and Elected Reeve against
+    each other"; hidden: The Independent Bloc). R5-DESC's to show: both in the stored name arm: the mask word at no path of the served
+    document or the page's re-derived descs wherever the veil runs and the name is not served; Reveal DM on the page still serves the
+    name; one line to the chair when the stored arm has run. GIVEN TO SSKIP (after its cure's green): dump both as saved to
+    `/var/tmp/v18/t2/stored-v40/today-n96/`, add to the stored name arm. The tensions' half is chain C's (R5-TENSION).
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -183,3 +189,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 12:07 the chair's push-hygiene rule (`/var/tmp/v18/out/v40/push.sh`, guarded); 12:41 B2 returned; 12:43 pushed, the chair told.
 - 12:44 ruling 122; 12:48 the line on (2) sent.
 - 12:50 ruling 123; 12:59 SSKIP's brief (f3cdc6aa3), worktree, SSKIP dispatched; mutex-order rewritten (SSKIP, T5 WAIT).
+- 12:53 ruling 124 (read 13:03); 13:03 given to SSKIP.
