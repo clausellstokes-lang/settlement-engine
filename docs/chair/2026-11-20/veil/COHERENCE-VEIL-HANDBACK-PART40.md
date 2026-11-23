@@ -28,17 +28,23 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 - THE INSTRUMENTS (on the -wip at fd7163ba6): check 0, walker 0, acceptance 40 PASS, template `v28tpl` 0, the R3 gate 0 (HIGHER 0, EQUAL 79, LOWER 13 on both engines and both reads, equal to PART 36).
   - The harnesses are RED (exit 1, 14 of 22): `criminalSwitchHandReach` (S1's cause, expected) and `shareRenderTwice`. In the second, the DOM ids `dossier-npc-npc-<re-keyed>` are id pins, BUT on metropolis-calm-2 the Tonight sheet prints its "Wants to …" lines in a different ORDER on two reads. That is PLAUSIBLY a sort by person id, and so a NON-ID red: a STOP, sent to R4I-PAGE-2 and to the chair at 00:24.
 
+- R4I-PAGE-2 RETURNED (stopped at its budget; local branch `lane/veil-38-2026-11-23-r4ipage2-wip` at b088fcfc5; its hand-back `out/v38/r4ip2/R4IP2-HANDBACK.md`). The -wip was FAST-FORWARDED to b088fcfc5 at 00:58 UTC.
+  - S1 (05ec8213b), its diff READ ONCE by this seat: NO FAULT. `applyVeil(pub, veil, { salt })`; `presentCriminalGroupings` draws ONE salt for its calls; the walker shows no other caller (with a plant). JUDGMENT (vetoable, told to the chair): 212's six internal salt carriers take `salt`, so the server test asserts that the entry and the three reads take none, that `_gallery_veil` draws it, and that every taker is revoked. Its arm (reference: `rekeyPeople` as the identity) went from RED FIRST, 4 of 24 reads differ, to GREEN 6/6; the 140 towns: 280 reads, 0 differ. CONFIRMED by its logs; not re-run by the seat.
+  - O (THE CHAIR'S STOP, 40.2), MEASURED, NOT CURED (`ORDER-STOP.md`). It is NOT A SORT: `summary/tonightSheet.js :: castWantOf` picks a cast person's want line by `castHash(served person id, crisis, role)`. The served arrays are equal in order on two reads (twin 140/140, server 140/140). Of the whole page's views only the Tonight sheet moves (twin 39/140, server 44/140). Sent to the chair 00:59.
+  - S2: red at af708f2fd too, the same assertion (`gallery.test.js` :620): NOT R4-IDS's; named to the chair.
+  - A NEW STOP: `pgliteHookTimeoutRatchet` is red by R4I-PAGE's regex `\(` at `galleryVeilIds.pglite.test.js` :205 (green at af708f2fd). A test-only cure (`\x28`) was proposed to the chair.
+  - G PARTIAL: the 34 non-security files have 14 red after S1 (13 id pins confirmed by their failing lines, plus S2). `tests/security` whole was still running at the hand-back.
+
 ### (2) IN FLIGHT
-- THE INSTRUMENTS are being re-made on `/home/user/wip` (the -wip at fd7163ba6) by `out/v28/seated/make-instruments.sh`. The script and log are `/var/tmp/v18/out/v38/chain0.{sh,log}`, the exits are in `/var/tmp/v18/out/v38/seated/exits.txt`.
-- THE POOL IS HELD; it is not made at fd7163ba6. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2). The instruments' `tell-common.mjs :: settings` takes `present` from `criminalVeilSwitch.js :: presentCriminalGroupings`, and the pool's part B reads `setCriminalVeil(…, sc.present, …)`. That is S1's broken site, so a pool made on fd7163ba6 would be read under a switch that offers every default. The pool is made ONCE, on the -wip with S1 merged (N6's "the cured tree"). The chair was told.
-- R4I-PAGE-2 (subagent): S1, S2, the guards, the arms, the stored arm's person-id probe, `tests/lint` whole and the build. It works in `/home/user/wt/r4ip2` on the local branch `lane/veil-38-2026-11-23-r4ipage2-wip`.
+- THE POOL, ONCE, on the -wip at b088fcfc5 (S1 merged), started 00:58 UTC: `/var/tmp/v18/out/v38/pool.sh` (pool, verify, both gates) into `/var/tmp/v18/t2/pool-v38`. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
+- R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
 
 ### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
 Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat. They are read whole once, before the first trigger that 40.1 (b) names.
 
 ### (3) NEXT
-1. Take R4I-PAGE-2's diff, read once, and merge it into the -wip.
-2. Make the pool on the -wip; run both gates and the switch-offer probe on the pool.
+1. Read R4I-PAGE-3's diff once and merge it into the -wip.
+2. Run both gates, the switch-offer probe (`out/v38/r4ip2/switch-offer.sh`) and the order probe (`order.sh`) on the pool.
 3. Run the stored arm whole.
 4. Re-run the unit's proofs (PART 36 (3) / VEIL-38's unit (3)).
 5. Merge the new tip when the chair names it (VEIL-39's pin), with E116's five steps if 212 moved there.
