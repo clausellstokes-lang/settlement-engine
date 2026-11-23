@@ -1,6 +1,6 @@
 #!/bin/sh
 # VEIL-43 unit (1)(a): THE LANE'S POOL at the veil's tip 23bb8b8ae (a detached scratch worktree, never committed into), then the
-# probe's pool-compare (seeds, crises, dials, held houses, tries, rejections, signature tables) against the joined tree's pool-v43.
+# probe's pool-compare, and the lane's two gates beside the joined tree's (table diffed); the (seeds, crises, dials, held houses, tries, rejections, signature tables) against the joined tree's pool-v43.
 # Run as: sh scripts/gate-mutex.sh --run -- sh <this>   (from /home/user/join43)
 T=/home/user/lanetip; O=/var/tmp/v18/out/v43/lanepool; P=/var/tmp/v18/t2/pool-v43lane; mkdir -p $O; L=$O/done.txt
 export PGHOST=/var/tmp/rv7 PGUSER=postgres
@@ -16,4 +16,6 @@ for f in pool-shard0 pool-shard1 pool-shard2 pool-shard3 poolb-shard0 poolb-shar
   b=$(node -e "const j=JSON.parse(require('fs').readFileSync('/var/tmp/v18/t2/pool-v43/$f.json','utf8'));console.log(JSON.stringify({b:j.births,r:j.rejected,s:j.sigs}))" | sha256sum | cut -c1-16)
   echo "$f lane $a join $b $([ $a = $b ] && echo EQUAL || echo DIFFER)" >> $L
 done
+TELL_DB=v43l sh $T/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.sh $T $O/gates v28tpl $P > $O/gates.txt 2>&1; echo "lane gates rc=$? $(date -u +%H:%M:%S)" >> $L
+diff $O/gates/tell2-table.txt /var/tmp/v18/out/v43/gates/tell2-table.txt > $O/gates-table.diff 2>&1; echo "gates table diff rc=$? lines $(wc -l < $O/gates-table.diff)" >> $L
 echo "END $(date -u +%H:%M:%S)" >> $L
