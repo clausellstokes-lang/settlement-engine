@@ -1,0 +1,10 @@
+documents 140; stored-id occurrences 15002
+SITE  relationships[].npc1Id: 5020 in 140; e.g. [0].relationships[0].npc1Id = npc_1
+SITE  relationships[].npc2Id: 5020 in 140; e.g. [0].relationships[0].npc2Id = npc_9
+SITE  npcs[].id: 2080 in 140; e.g. [0].npcs[0].id = npc_1
+SITE  factions[].members[].id: 2080 in 140; e.g. [0].factions[0].members[0].id = npc_1
+SITE  stress.cast.roles[].id: 183 in 101; e.g. [0].stress.cast.roles[0].id = npc_1
+SITE  stressors.cast.roles[].id: 183 in 101; e.g. [0].stressors.cast.roles[0].id = npc_1
+SITE  stress.cast.levers[].holderId: 177 in 88; e.g. [0].stress.cast.levers[0].holderId = npc_5
+SITE  stressors.cast.levers[].holderId: 177 in 88; e.g. [0].stressors.cast.levers[0].holderId = npc_5
+SITE  simulationTrace[].targetId: 82 in 49; e.g. [0].simulationTrace[104].targetId = npc_12 (holds npc_1)

@@ -1,0 +1,14 @@
+documents 140; stored-id occurrences 32608
+SITE  npcs[].id: 6678 in 140; e.g. [0].npcs[0].id = npc_mages_guild
+SITE  relationships[].id: 6678 in 140; e.g. [0].relationships[0].id = tie_npc_mages_guild (holds npc_mages_guild)
+SITE  relationships[].from: 6678 in 140; e.g. [0].relationships[0].from = npc_mages_guild
+SITE  relationships[].to: 6678 in 140; e.g. [0].relationships[0].to = npc_scroll_scribe
+SITE  npcs[].goal.intent.short.target.id: 2068 in 139; e.g. [0].npcs[4].goal.intent.short.target.id = npc_warehouse_district
+SITE  npcs[].goal.intent.long.target.id: 1944 in 139; e.g. [0].npcs[0].goal.intent.long.target.id = npc_multiple_courthouses
+SITE  npcs[].allegiance.handler: 328 in 69; e.g. [0].npcs[11].allegiance.handler = npc_veiled_9ff389a85ec6c8df
+SITE  simulationTrace[].downstreamEffects[].target: 328 in 69; e.g. [0].simulationTrace[106].downstreamEffects[2].target = npc_red_light_district
+SITE  simulationTrace[].targetId: 328 in 69; e.g. [0].simulationTrace[106].targetId = npc_butchers_3_8
+SITE  stress.cast.levers[].holderId: 272 in 91; e.g. [0].stress.cast.levers[0].holderId = npc_banking_houses
+SITE  stressors.cast.levers[].holderId: 272 in 91; e.g. [0].stressors.cast.levers[0].holderId = npc_banking_houses
+SITE  stress.cast.roles[].id: 178 in 102; e.g. [0].stress.cast.roles[0].id = npc_mages_guild
+SITE  stressors.cast.roles[].id: 178 in 102; e.g. [0].stressors.cast.roles[0].id = npc_mages_guild

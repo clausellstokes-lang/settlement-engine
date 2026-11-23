@@ -46,3 +46,13 @@ The stored side's census lists `stress[].cast.roles[].id` (22 in 5 places, e.g. 
 `stress[].cast.levers[].holderId` (14 in 4, e.g. `npc_customs_house`): THESE ARE RE-KEYED SITES (212 :: `_gallery_veil_rekey` and
 `rekeyPeople` take `stress` as one crisis OR A LIST; `personIdBijection.shared.mjs :: crises` too); the census's own site list named
 `stress.cast…` and `stressors[]…` but not `stress[]…`: an omission of this unit's census, not a gap (0 served at those paths).
+
+## THE MASTER-BORN SET: THE STORED SIDE, READ BEFORE ITS SERVED RUN (`stored-census.mjs`, node over the documents, no run; 12:0x UTC)
+`logs/stored-census-master.txt` (and `-today.txt`): every occurrence of a stored person id in each stored document, by path
+(`storedIdsServed(doc, doc)`), each path marked SITE (one the re-key re-keys, 212 :: `_gallery_veil_rekey` / `rekeyPeople`) or OFF-SITE.
+- MASTER-BORN, 140 documents, 15,002 occurrences: ALL AT SITES (`relationships[].npc1Id`/`npc2Id` 5,020 each, `npcs[].id` 2,080,
+  `factions[].members[].id` 2,080, `stress`/`stressors.cast.roles[].id` 183 each, `.cast.levers[].holderId` 177 each,
+  `simulationTrace[].targetId` 82). 0 OFF-SITE: master's members carry `goal` as `{ short, long }` STRINGS and no `allegiance`
+  (`logs/shape-census.txt`), so the gap's three paths hold nothing to serve.
+- TODAY-BORN, 140 documents, 32,608 occurrences: all at sites (no roster copy at all).
+THE SERVED COUNT on the master-born set (`m140`, every door and twin): queued behind the Tonight seat's holdD (the mutex, since 11:58).
