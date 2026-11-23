@@ -2028,15 +2028,17 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
         if (rows.length && sum !== 100) bad.push(`${what}, ${tag}: the shares sum to ${sum}`);
         const pdf = normalizeIncomeSources(rows);
         if (JSON.stringify(pdf.map(x => x.percentage)) !== JSON.stringify(rows.filter(x => x.percentage > 0).map(x => x.percentage))) bad.push(`${what}, ${tag}: the PDF reads ${JSON.stringify(pdf.map(x => x.percentage))}`);
-        const blocks = doc.publicProse?.blocks || {};
-        const rungs = Object.values(blocks).flatMap(b => Object.keys(b || {}));
-        if (proseGoes) {
-          for (const n of ['gmix1', 'gcl1']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
-          if (rungs.includes('incomeMix') || rungs.includes('criminalLine')) bad.push(`${what}, ${tag}: an income prose rung is sent: ${JSON.stringify(blocks).slice(0, 200)}`);
-        } else if (!(blocks['general:overview']?.incomeMix?.text === 'gmix1 the town depends on one source of income' && blocks['economy:economics']?.criminalLine?.text === 'gcl1 the guild takes its cut')) bad.push(`${what}, ${tag}: the income prose is ${JSON.stringify(blocks).slice(0, 200)}`);
-        if (!rungs.includes('kother') || !rungs.includes('tradeProfile')) bad.push(`${what}, ${tag}: another rung went: ${JSON.stringify(blocks).slice(0, 200)}`);
+        // VEIL-41 C2-BUILD (a') (2707d6829, N49): THE PROSE RUNGS LEAVE WITH THE KEY ON EVERY DOOR. No served read carries
+        // publicProse (212 :: _gallery_veil_withhold_always, galleryWithholdAlways.js :: withholdAlways), so a rung's absence
+        // here is expected: the income rungs (incomeMix, criminalLine and their @ copies) AND the other rungs (kother,
+        // tradeProfile) on every row, the KEEP row too. The anchor is the stored town, which carries all four (counted below).
+        if (isRec(doc) && 'publicProse' in doc) bad.push(`${what}, ${tag}: publicProse is sent: ${JSON.stringify(doc.publicProse).slice(0, 200)}`);
+        for (const n of ['gmix1', 'gcl1', 'kother', 'ktrade']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: a prose rung arrives: ${a}`));
       }
     }
+    // the anchor: every row's stored town carries the four rungs the doors drop, so their absence on a served read is removal
+    const storedRungs = ROWS.map(([, t]) => Object.values(t.publicProse?.blocks || {}).flatMap(b => Object.keys(b || {})));
+    expect(storedRungs.filter(rs => ['incomeMix', 'criminalLine', 'kother', 'tradeProfile'].every(k => rs.includes(k))).length).toBe(ROWS.length);
     expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
