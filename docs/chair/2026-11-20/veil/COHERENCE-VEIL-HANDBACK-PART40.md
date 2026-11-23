@@ -204,6 +204,20 @@ THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` 
          RE-TAKEN BY NOBODY YET; this file names the identity (section 1 (3) 7); the chair rules when it has read it.
      (4) THE HAND-OVER AFTER M STANDS; section 1 gives the successor's first acts IN ORDER and the smallest list of files.
 
+40.9 THE CHAIR, 04:45 UTC: M on the 140 (three zeros, no unmapped id) TAKEN; M on the pool's three counts sent when it ends. THE
+     SURPRISE IS A STOP FOR "TIP? R4-IDS", NOT ONLY A LEAD: "server = twin" for this unit is proven on the WHOLE canonical document,
+     modulo the bijection, on every read of both pools. The 77 differing reads are cured or explained by their cause before "TIP?".
+     The successor's act 3 takes the 7 places first: the diff by path, server against twin, then the cause read in 212 and the twin.
+     WHAT THE GATES' SIGNATURE IS (asked, three lines, no run; `out/v27/tell2/measure/tell2-signature.mjs :: signatureOf`, its header read):
+       (1) IT IS MADE OF the served page's CRIMINAL SURFACE ONLY: f = each FIELDS path's state (present / absent / empty / null); k = per
+           row key of the criminal services and criminal powers rows, the set of states; r = each content family's row count as none /
+           one / several; x = five cross-field bits (powerNoHouse, typesNoHouse, svcNoHouse, sharesOff, dragMarket).
+       (2) IT LEAVES OUT every value (no string, no number, no id), every path outside the criminal surface (the people's cards, the
+           ties, the roster copies, the casts, the trace, prose), and order. NO PERSON ID IS IN IT: two engines that serve different ids,
+           different people or different non-criminal bytes share a signature.
+       (3) So "twin = server" by the gates is equality of the criminal surface's SHAPE, never of the document; the whole-document form
+           is the canonical document modulo the bijection (`personIdBijection.shared.mjs :: canonPeople`, as M's probe reads it).
+
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
 - 00:17 chain0 launched on the -wip.
