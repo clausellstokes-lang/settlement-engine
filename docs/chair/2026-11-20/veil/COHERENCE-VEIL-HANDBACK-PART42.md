@@ -54,6 +54,14 @@ STATE AT 10:12 UTC: R5D-RIVAL's rule is in 212 (`_gallery_veil_roster_choices`, 
 UNCOMMITTED, runs not reported. B2: stored pools dumped 07:05 (`/var/tmp/v18/t2/stored-v40/{today,master}`); its batch
 (`/var/tmp/v18/t2/stored-v40/logs/full1/`) took the mutex 09:30; 7 of 10 jobs failed at vitest start-up (config error), 3 stored jobs
 running. WIP COMMITTED AND PUSHED (ruling 116): RIVAL 9a2f8ef9a, B2 c7a4e9a4e.
+T5 (R3-TELL-5 units (iv), (v), (vi); ruling 117): brief `briefs/R3-TELL-5-IVVVI-BRIEF.md` 947c74b80; worktree `/home/user/wt/t5`,
+branch `lane/veil-40-2026-11-23-t5-wip` cut at 9a2f8ef9a; DISPATCHED after the brief's push. (iv)'s cure waits for this seat's word
+(after RIVAL's final is merged into T5's branch); (v)(2)'s cure waits for the chair's clearance against chain C's R5-TENSION.
+THE MUTEX's ORDER is the file `/var/tmp/v18/out/v40/mutex-order.txt` (every builder reads it): RIVAL GO; T5 WAIT; B2 WAIT.
+THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs` (ca72cfd4d, read once:
+additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/var/tmp/v18/t2/pool-v40r`, template `v40rtpl`, out
+`/var/tmp/v18/out/v40/rg/`), ON RIVAL's branch (or the stack with T5, ruling 117 (c)); shas recorded on every gallery read with a
+server page (hidden-house towns, every setting but g:111, off and DM).
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -93,6 +101,12 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     GATES (on RIVAL's branch, with ruling 114's sha table), THEN B2's re-run of its seven dead jobs; B2 reads its config error first
     (no run) and says the cause. (3) An hour is read from `date -u` in the command that writes it (this seat wrote 10:16 having read
     10:11: its error).
+117. THE CHAIR, 11:06 (N86): R3-TELL-5's units (iv), (v), (vi) BUILT NOW by one fresh builder (T5) on a wip cut at the rival's WIP;
+    ONE PROOF FOR THE THREE (one pool, one pair of gates read by family; "both gates after each unit" lifted); if green on their own
+    arms when the new pool is ready, the gates run ONCE on the stacked tree (rival + three) and "TIP?" names all four; else the rival's
+    gates run alone and the three take the next run: NO RUN WAITS FOR THE BUILDER. (v)(2) `currentTensions` vs chain C's
+    "R5-TENSION" (N85): name the function each touches; no shared hunk (tension-wip not on origin at 11:1x: the chair told). WIP
+    committed and pushed before every wait over ten minutes.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -104,3 +118,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 07:17 ruling 114; relayed to B2; 07:18 PART 42's estimated hours replaced by commit times or removed.
 - 10:12 ruling 115; 10:12 the state line to the chair.
 - 10:15 ruling 116; 10:18 both WIP commits pushed; builders told; the chair told.
+- 10:31 the sha instrument pushed (ca72cfd4d). 11:06 ruling 117; 11:13 T5's brief (947c74b80), worktree, T5 dispatched; the chair told.
