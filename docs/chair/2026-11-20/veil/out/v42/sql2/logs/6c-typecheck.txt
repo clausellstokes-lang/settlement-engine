@@ -1,0 +1,8 @@
+start 2026-11-23T14:59:15Z tree 3243957f323d1e986b6fd5f2660417f785219b65 212 70ce3b51a0099a65 twin 40bb8ab0779a04ce dirty 1
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 6446 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+EXIT rc=0 2026-11-23T14:59:46Z
