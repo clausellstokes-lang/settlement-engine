@@ -85,3 +85,11 @@ Their house-free twins serve the same two.
   crime signal is false". That is my reading of its text, so PLAUSIBLE as a citation.
 - PLAUSIBLE: the source of "EIGHT"; that the unruled rows are the generator's and not the veil's (the twin serves them all: ruling
   83 (2) makes the twin a witness, not the oracle).
+
+## (b2) sp.ops ACCOUNT (the seat's addendum, the chair's N88 (3), STOP 2): 106 and 104, own, Reveal DM, both engines
+THE RULE, by grep: `src/domain/display/galleryRosterChoices.js :: applyRosterChoices`, block (a). An sp.ops entry is kept, in order,
+only as many times as SERVED houses carry its label, `CRIMINAL_INST_LABELS[asciiLowerOf(h.name)]` (`rosterHouses(...).served`).
+The probe (`RV9_L7B2=1`, run 12:30:43-12:31:02 UTC, `b2.json`) imports the table; its A-Z lower-casing restates `asciiLowerOf`.
+106 (53 served houses) and 104 (75): "Gambling Halls" <- "Gambling halls" (Entertainment, tags []); "Red Light District" <-
+"Red light district" (Entertainment, tags []). NONE: 0. Twin = server (every house and the account). Every served house's name,
+category and tags are in `b2.json`. STOP 2 therefore has a CODE rule (unit (ii)'s positive account), though no RULING names these towns.
