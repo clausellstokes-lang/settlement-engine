@@ -455,3 +455,128 @@ helper, never into the chair's context. `/home/user/wt/line` is a clean worktree
 - 2026-11-23 02:44 UTC · DRAFTED ON THE CHAIR'S MACHINE ONLY (a fresh chair writes its own): `/home/user/scratch/chair/
   DRAFT-START-VEIL-40.txt` (the @@ marks are filled at VEIL-37's hand-over; committed under `prompts/` at the
   seating) and `DRAFT-START-CLOSE-5.txt` (the flip's seat: N31). `DRAFT-GO-STACK-106.txt` is DEAD (N34).
+- 2026-11-23 03:10 UTC · THE CHAIR'S SEVENTH PUSH (ebc0d79b8) ENDED exit=0 at 02:47 UTC through the lane hook: CONFIRMED from its log.
+- 2026-11-23 03:10 UTC · THE OWNER ASKED (02:46 UTC, in the chair's session, verbatim): "So what are your new expectations now?" ANSWERED
+  THE SAME TURN, as estimates and named as such: the small fixes on the line in about 4 to 5 hours; the flip ready for
+  his sign-offs in roughly 12 to 18 hours; THE SHARE VEIL IN DAYS (best guess 4 to 7: six units before "R3", then the
+  join, the security reader and the top-tier read of 212), and it alone decides the first deploy's date. PUT TO HIM,
+  OPEN, HIS TO GIVE OR NOT: one line in the chair's session, "You may push the working line when the landing's checks
+  pass.": the chair's push of `lane/join-2026-11-14` has not been judged by its own permission check on this account.
+  NOT ANSWERED YET. If no word comes, the chair pushes the line by E130 when the gate is read, its own check judges
+  it, and a refusal stands.
+- 2026-11-23 03:10 UTC · STACK-106: "MERGED 0fbb255f6" (point 107, VACANT; parents 2f3d614ac and 4ef6d6c32; no conflict; six files; its
+  hooks passed; `raised.py` adds one line: the lighting census ROSE 2). Its first `tests/lint` whole, run on 2f3d614ac
+  before 107: 223 files, 4 red: the line's three by name (`proseComposed` A0b 2,322 against 2,103; `proseCorpusBytes`
+  RAW and GZIP) and the lighting census owed to its door (3,780 files against 3,775). NOT CHECKED BY THE CHAIR: whether
+  A0b's 2,322 is the line's own figure or has risen behind a red row: read from `raised-top.txt` before the line moves.
+- 2026-11-23 03:10 UTC · N35 · R5D-PAGE-A RETURNED (VEIL-37, 03:00; `lane/veil-37-2026-11-23-r5dpage-wip` 74afc8219: 11 files, +1,336
+  -10 against 3ef7fb325, counted by the chair; ITS HAND-BACK `out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md` READ WHOLE BY THE
+  CHAIR; its runs are the builder's own: 58 of 58 on its four pglite files; fidelity 168 of 168; the arm 0 names and 0
+  mask in 2,872 reader-written strings; `tests/lint` whole 45 failures in 17 files = the lane's 22 + chain C's 23
+  `prose.*` rows; typecheck 167 of 167; raw first paint +0). ITEM 0 (a) DID NOT GO RED: reader B re-creates the hidden
+  power on 44 of 44 hiding reads, yet its sentence names none and equals the never-there page's on 176 of 176: TAKEN AS A
+  FINDING; the rule and the arm stand as built. THREE RULINGS:
+  (1) THE SHARE CLASS IS A LISTED CLASS, NOT A FAULT (36 engine-door reads on 9 hand-hide records, all on the DM door;
+  every Reveal-off read equal). On the DM door the stamped placeholder (`{power, hidden: true}`, E115 (2)) and every
+  kept row's raw figure are served by rule, so a line S derives from served figures says nothing the payload has not
+  said; the brief's "equal to never-there, Reveal off and DM" cannot hold there for a gap-based line (re-sharing the
+  served figures by largest remainder is off by one against the raw ones). **Decided:** S stays as built (the stamped
+  row out; the served figures; no re-sharing by the page). THE ARM: a read is listed ONLY IF it is on the DM door AND
+  the place serves a stamped row AND the two pages differ in S's gap-based forms alone (by the standing table's ids)
+  AND the same record's Reveal-off read is equal; the count pinned and re-counted on the full pool; anything else that
+  differs is a fault. A row for READERS-LIST. **Rejected:** S re-sharing the figures (still differs, by one); the
+  server serving re-shared figures on the DM door (it changes what 212 serves: E115 (2)'s ruled form); S counting the
+  stamped row as a rival (the brief rules it out: "as if never there"). **Reversal:** the list's conditions are one
+  test's. **Open, named for the security reader:** on the DM door a kept row's line may read "holds the most" beside
+  a stamped row with a larger share: true to the brief, odd to a reader.
+  (2) E128 (b)'s KIND HALF IS NOT BUILT; THE NAME BELT AND THE DIFFERENTIAL ARE ACCEPTED. The full cut withheld the
+  sentence on 7 of 21 births that hide nothing (the density law trims powers after the power step: a page cannot tell
+  a trimmed row from an owner-hidden one), and a cut that fired only on a hiding read would itself make the
+  difference it is meant to prevent. E128's RULE NOW READS: no NAME of a cut power is printed; a hiding read's
+  sentence equals the never-there page's; a template that ever differs is withheld always. CONDITIONS, builder B's:
+  the differential for reader B on the FULL pools and the stored pools; EVERY NAME ARM COMPARES WITHOUT REGARD TO CASE
+  and lists a hit by its exact form. **Reversal:** "the full cut is a short change in `holdsOverServed`" (the
+  builder's word).
+  (3) A SERVED BASE NAMING A HIDDEN HOST PAST THE MASK: AN OPEN FINDING OF R5-DESC; NO "TIP? R5-DESC" UNTIL THE CHAIR
+  HAS RULED IT. On the player view 8 served bases on 2 places name the power the read hides: a density rival's desc
+  copied from its hidden host in sentence case ("Noble families with hereditary land rights...", The Highborn Circle,
+  jp6-city-8 act T; "Craft guilds regulating production...", The Trade Compact, r3m-city-none-0-37 with Craft Guilds
+  hidden); the mask is case-sensitive; the belt holds house hides only; `rivalDescOf` is item 5b's class (E126).
+  **Decided:** NO CURE YET: MEASURE FIRST, as builder B's item 5b before its other items, on the full pools, for
+  every density rival whose host is hidden by hand: Q1 is the rival's served base equal to its base with the host
+  never there; Q2 does ANY OPEN place show that rival, with that base, WITHOUT that host on its roster (if none does,
+  THE ROSTER ITSELF IS THE TELL, whatever the words say); Q3 every case form of a hidden power's name in any served
+  string, by form, path and count, beside the same search on the never-there place. THEN THE CHAIR RULES ONE OF: the
+  template withheld always and re-derived on the page (E126's own rule; a builder that reads 212 whole); the rival
+  leaves with its host; the mask takes the engine's case forms; or the base stands, with a row on READERS-LIST.
+  **Why:** E126 served these bases on a measure of 778 of 778 equal; this is the first evidence against it, and
+  the three cures differ by what Q1 and Q2 show; a mask laid over "Craft guilds regulating production" would hide
+  the name and leave the kind. **Blast radius:** chain A's unit grows by a measure and perhaps one SQL builder.
+  THE CHAIR'S THOUGHT, NOT A RULING: "equal to the never-there place" proves nothing where the never-there place is
+  itself a roster no open place shows; Q2 is asked for that reason, and the same question may bear on other units.
+  VEIL-37's FIGURE: 553,176 at 03:01 UTC: IT READS A's DIFF NOW AND THEN HANDS OVER; it dispatches no further builder.
+- 2026-11-23 03:10 UTC · THE MARKS AT 03:01 UTC (one haiku helper): VEIL-37 553,176; VEIL-39 504,736; VEIL-38 452,578 (384,201 at 02:22:
+  68,000 in forty minutes: at that pace it reaches 600,000 before its proofs end: IT IS TOLD ITS FIGURE WITH ITS NEXT
+  RULING, and its proofs may be a successor's); CLOSE-4 361,711; STACK-106 172,763 (unchanged: its record's update is
+  02:43); DAILY-5 153,904 (unchanged since 02:10) and PROSE-6 112,307 (275,202 at 02:22; idle, parked): TWO FALLS,
+  EXPLAINED BY N36. A SECOND READ AT 03:07: VEIL-37 560,287 (reading A's diff); VEIL-38 465,078; CLOSE-4 362,506.
+- 2026-11-23 03:10 UTC · N36 · SEATS ARE SUMMARIZED BY THE MACHINE FAR BELOW 784,000 ON THIS ACCOUNT (found by a helper in two seats'
+  records; `compact_boundary`, trigger "auto", "Compacted using a summary written while you were away"): DAILY-5 at
+  01:55 UTC (233,606 down to 18,425) and PROSE-6 at 02:43 UTC (275,391 down to 17,576), each at the turn that a message
+  of the chair's woke after its own turn had ended. NOT FOUND in the pages read of VEIL-37, VEIL-38, VEIL-39 and CLOSE-4
+  (back to between 01:20 and 02:32 UTC; earlier pages unread). THE CAUSE IS NOT KNOWN TO THE CHAIR (the machine's own
+  documentation page on a session's limits does not speak of it). WHAT FOLLOWS: (1) COMMON-EIGHTH 8's premise
+  ("compaction forced at 784,000: a seat hands over BEFORE compaction, never after") does not hold here: A SEAT'S
+  HAND-BACK, FIRST SECTION, IS ITS MEMORY, and a summarized seat goes on only from it and from files; (2) THE MARK
+  READ BY get_session IS THE SEAT'S PRESENT CONTEXT, NOT WHAT IT HAS READ: a low figure can be a summarized seat;
+  (3) a seat found summarized is told so, and re-reads its start message (a file on origin under `prompts/`) and
+  COMMON-EIGHTH 11, 14 and 15 before its next landing line: DAILY-5 TOLD at 03:10 UTC; PROSE-6 is told with its "GO";
+  (4) A VEIL SEAT IS WORTH WHAT IT HAS READ WHOLE (212, the registry): if one is found summarized, it judges no diff
+  that touches 212 and no red inside it without re-reading what that judgment needs; (5) each hourly check asks the
+  helper for compactions since the last check, beside the marks.
+- 2026-11-23 03:10 UTC · N37 · PROSE-6 IS PARKED (03:00 UTC; "DISAGREE" built on its -wip 137d6c72c; hand-back 91334ccc6 READ BY THE
+  CHAIR, its first section; by its builder's runs on 900 births: FOOD 68 to 0, WAGES 2 to 0, the dark proof EQUAL,
+  the highest share 13.3%). ITS TWO STOPS ARE RULED HERE AND SENT WITH "GO PROSE-6", not before (it is parked):
+  (1) THE LAYER LAW HOLDS; THE REGISTER IS NOT RAISED; N16's WAGES HALF IS WITHDRAWN. `force: paid` is
+  `orderForce` (layer 4) and no dossier-state pool may declare it (`tests/lint/factLayers.walker.test.js`, POOLS arm;
+  the register is shrink-only: READ BY THE CHAIR: the walker's header and the register's eleven pool rows). THE
+  CHAIR'S ERROR: N16 ruled a mark the layer law forbids. **Decided:** every `force: paid` mark goes (DS-DEF-2
+  `Economic Survival: WEAK` v1 and v2 lose `no force: paid`; W1, W2 and W3 are withdrawn whole; DS-GEN-17 GARRISONED
+  v2 returns to its marks and text at 244fa84ef). THE WAGES PAIR IS CURED BY ONE RE-WORDING, THE CHAIR'S LINE, on the
+  same marks `[street · guardPresence · prosperity: ≤ comfortable]`: v2 was "The people who would have to hold
+  {settlement} through something know there is no money to pay them for it." AND BECOMES "The people who would have
+  to hold {settlement} through a long defence know there is nothing laid by to pay them for it." v1 stays (it speaks
+  of what is laid by already). **Why:** on both pages of the 900 the force is paid, and paid short: v2's "no money
+  to pay them" was the untrue side; a line about what is laid by is true beside "pays wages for its defense" and
+  needs no fact the pool may not read. **Rejected:** a row on the shrink-only register (raised by nobody); a
+  lower-layer stand-in for pay (`guardPresence` cannot tell a paid force from a rota); barring GEN-17 v2 where DEF-2
+  WEAK prints (it hides the page's true line and keeps the untrue one). **Reversal:** one line of the pools doc.
+  THE SEAT RE-RUNS the measure (`disagree.mjs`): WAGES must read 0 with no mark, or STOP with the two sentences; the
+  tooth pins that the old v2 words print on 0 pages. THE FOOD HALF STANDS AS BUILT (`food` is layer 2).
+  (2) THE MANIFEST GROWS BY THE NAMED TEST FILES, TEST-ONLY, EACH CHANGE RE-STATED BY CAUSE: the five literal pins
+  (`proseComposed`, `proseWiringCensus`, `proseEntryContradiction` twice, `proseWaveGate`) move by exactly the lines
+  added (six, once W1 to W3 are gone: each figure said before and after); `stateProseKernel`'s small-group lists by
+  the cells that changed; `defenseStateProseDesk`'s fixture answers a food band; `crisisBlindDossierProse` needs
+  nothing once `force: paid` is gone (still red: STOP); the samenessHideable house list is RE-MEASURED after the
+  withdrawal: if it still moves it is re-taken by the walker's own reading (the landing brief's way: a temporary,
+  uncommitted dump; its own commit; the counts by table and house), never by hand. `proseComposed` A0b and
+  `proseCorpusBytes` are the owner's size signings: NAMED with the new figures, raised by nobody.
+  ITS "GO" ALSO SAYS: its context was summarized at 02:43 UTC (N36): it re-reads `prompts/START-PROSE-6.txt`, its own
+  hand-back and `lines/DISAGREE-LINES.md` first.
+- 2026-11-23 03:10 UTC · N38 · VEIL-38 (its message of 03:02). R4I-TONIGHT STOPPED AT ITS MEASURE (item M): nothing built; M's teeth
+  proven; M NEVER RAN on the 140 or the pool. A FAULT OF THE SEAT's, SAID BY IT: its own pool probes ran outside the
+  gate mutex beside two builders; memory killed three shards, the build at the tip (exit 137) and the builder's turn.
+  TAKEN: one heavy run at a time on a box, the seat's own included. Prepared, not applied: `C-prepared-cure.patch`
+  (`castWantKeyOf(name, id)` in both callers) and the shareRenderTwice patch. RULED: THE TONIGHT ARM IN THREE HALVES
+  (40.3 (2), "equal to the owner's own sheet on nothing-hidden places", read 0 of 4 in a six-town trial: A WRONG
+  PREMISE OF THE CHAIR'S: a player's read withholds each person's own goal and secret by rule): (a) TWO READS OF ONE
+  PLACE print the same sheet line for line (red first at the tip: 39 of 140 twin, 44 of 140 server moved); (b) the
+  sheet from the served read equals the sheet from the twin's projection of the stored document, modulo the
+  bijection (not built twice if an arm holds it); (c) the builder's form: on nothing-hidden places every cast person
+  whose line is a ROLE line on both pages carries the same line on the owner's sheet and the shared one; the persons
+  whose line differs because the read withholds their goal are COUNTED AND NAMED, not red. THE KEY NEVER READS THE ID:
+  if `castWantKeyOf` falls back to the id for a nameless person, the fallback goes (the empty string), and M counts
+  nameless cast persons as a third count; any of the three not 0 is a STOP. ITS FIGURE: 452,578 at 03:01 (465,078 at
+  03:07): IT CARRIES R4I-PAGE-4's RETURN AND M, THEN HANDS OVER at its first natural stop (at once past 580,000 by the
+  chair's read); R4I-TONIGHT-2, the order count, the tip build, the cost law and "TIP?" are its successor's (VEIL-42,
+  lean, on its two commits) unless the chair tells it its figure allows more.
