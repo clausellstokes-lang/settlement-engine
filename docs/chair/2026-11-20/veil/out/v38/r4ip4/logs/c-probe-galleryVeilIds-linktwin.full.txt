@@ -1,0 +1,96 @@
+[gate-tail] start:  02:44:23 up  2:32,  0 user,  load average: 7.85, 7.50, 6.76 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+stdout | tests/security/zzProbeR4ip4LinkTwin.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin
+R4I-PAGE chair's arm: references judged by part [resolve, resolve to no card]: {"cards":[1800,2392],"ties":[15392,0],"cardTies":[96,0],"marker":[216,0],"clone baseline loss":[12,6],"clone cards":[18,0],"clone ties":[3840,0],"clone cardTies":[36,0],"roster":[644,0],"casts":[576,0],"clone casts":[108,0],"trace":[32,9864]}; reds 24 (twin side 0, server side 24)
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js (14 tests | 2 failed) 76655ms
+     × THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin 962ms
+     × THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair's ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one 55ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/zzProbeR4ip4LinkTwin.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4 references against its reference's 7",
++   "plant new marked dm=false link again: 4 references against its reference's 7",
++   "plant new marked dm=true link: 4 references against its reference's 7",
++   "plant new marked dm=true link again: 4 references against its reference's 7",
++   "plant new unmarked dm=false link: 4 references against its reference's 7",
++   "plant new unmarked dm=false link again: 4 references against its reference's 7",
++   "plant new unmarked dm=true link: 4 references against its reference's 7",
++   "plant new unmarked dm=true link again: 4 references against its reference's 7",
++   "plant new shown dm=false link: 6 references against its reference's 9",
++   "plant new shown dm=false link again: 6 references against its reference's 9",
++   "plant new shown dm=true link: 6 references against its reference's 9",
++   "plant new shown dm=true link again: 6 references against its reference's 9",
++   "plant master marked dm=false link: 4 references against its reference's 7",
++   "plant master marked dm=false link again: 4 references against its reference's 7",
++   "plant master marked dm=true link: 4 references against its reference's 7",
++   "plant master marked dm=true link again: 4 references against its reference's 7",
++   "plant master unmarked dm=false link: 4 references against its reference's 7",
++   "plant master unmarked dm=false link again: 4 references against its reference's 7",
++   "plant master unmarked dm=true link: 4 references against its reference's 7",
++   "plant master unmarked dm=true link again: 4 references against its reference's 7",
++   "plant master shown dm=false link: 6 references against its reference's 9",
++   "plant master shown dm=false link again: 6 references against its reference's 9",
++   "plant master shown dm=true link: 6 references against its reference's 9",
++   "plant master shown dm=true link again: 6 references against its reference's 9",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js:554:30
+    552|     if (process.env.R4I_PEEK) console.log(`R4I-PAGE server-side reds: …
+    553|     for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker…
+    554|     expect(bad.slice(0, 40)).toEqual([]);
+       |                              ^
+    555|   });
+    556|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/zzProbeR4ip4LinkTwin.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair's ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one
+AssertionError: the anchored form passes every clean link read (a STOP with its path where not): expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4/4 references against the link twin's 7",
++   "plant new marked dm=true link: 4/4 references against the link twin's 7",
++   "plant new unmarked dm=false link: 4/4 references against the link twin's 7",
++   "plant new unmarked dm=true link: 4/4 references against the link twin's 7",
++   "plant new shown dm=false link: 6/6 references against the link twin's 9",
++   "plant new shown dm=true link: 6/6 references against the link twin's 9",
++   "plant master marked dm=false link: 4/4 references against the link twin's 7",
++   "plant master marked dm=true link: 4/4 references against the link twin's 7",
++   "plant master unmarked dm=false link: 4/4 references against the link twin's 7",
++   "plant master unmarked dm=true link: 4/4 references against the link twin's 7",
++   "plant master shown dm=false link: 6/6 references against the link twin's 9",
++   "plant master shown dm=true link: 6/6 references against the link twin's 9",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js:583:106
+    581|     }
+    582|     expect(tally.plants, 'plants built').toBeGreaterThan(0);
+    583|     expect(cleanReds, 'the anchored form passes every clean link read …
+       |                                                                                                          ^
+    584|     expect(tally, 'the tooth: the self form passes each plant, the anc…
+    585|       selfFirstPasses: tally.plants, selfSecondReds: tally.plants, anc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  02:44:25
+   Duration  78.89s (transform 5.17s, setup 29ms, import 2.00s, tests 76.66s, environment 0ms)
+
+[gate-tail] end:  02:45:44 up  2:33,  0 user,  load average: 6.44, 7.17, 6.71

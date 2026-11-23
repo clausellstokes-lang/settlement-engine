@@ -1,0 +1,48 @@
+[gate-tail] start:  02:49:43 up  2:37,  0 user,  load average: 5.85, 6.18, 6.38 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js (14 tests | 1 failed | 13 skipped) 67102ms
+     × THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair's ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one 117ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/zzProbeR4ip4LinkTwin.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair's ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one
+AssertionError: the anchored form passes every clean link read (a STOP with its path where not): expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant new marked dm=true link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant new unmarked dm=false link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant new unmarked dm=true link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant new shown dm=false link: 6/6 references against the link twin's 9; the twin's the read lacks: npcs[4].goal.intent.short.target.id, npcs[4].relationships[0].from, npcs[4].relationships[0].to",
++   "plant new shown dm=true link: 6/6 references against the link twin's 9; the twin's the read lacks: npcs[4].goal.intent.short.target.id, npcs[4].relationships[0].from, npcs[4].relationships[0].to",
++   "plant master marked dm=false link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant master marked dm=true link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant master unmarked dm=false link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant master unmarked dm=true link: 4/4 references against the link twin's 7; the twin's the read lacks: npcs[3].goal.intent.short.target.id, npcs[3].relationships[0].from, npcs[3].relationships[0].to",
++   "plant master shown dm=false link: 6/6 references against the link twin's 9; the twin's the read lacks: npcs[4].goal.intent.short.target.id, npcs[4].relationships[0].from, npcs[4].relationships[0].to",
++   "plant master shown dm=true link: 6/6 references against the link twin's 9; the twin's the read lacks: npcs[4].goal.intent.short.target.id, npcs[4].relationships[0].from, npcs[4].relationships[0].to",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js:584:106
+    582|     }
+    583|     expect(tally.plants, 'plants built').toBeGreaterThan(0);
+    584|     expect(cleanReds, 'the anchored form passes every clean link read …
+       |                                                                                                          ^
+    585|     expect(tally, 'the tooth: the self form passes each plant, the anc…
+    586|       selfFirstPasses: tally.plants, selfSecondReds: tally.plants, anc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 13 skipped (14)
+   Start at  02:49:44
+   Duration  68.92s (transform 4.40s, setup 26ms, import 1.60s, tests 67.10s, environment 0ms)
+
+[gate-tail] end:  02:50:53 up  2:38,  0 user,  load average: 6.08, 6.18, 6.36

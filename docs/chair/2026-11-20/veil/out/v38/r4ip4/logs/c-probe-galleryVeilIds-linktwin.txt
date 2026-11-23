@@ -1,0 +1,83 @@
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4 references against its reference's 7",
++   "plant new marked dm=false link again: 4 references against its reference's 7",
++   "plant new marked dm=true link: 4 references against its reference's 7",
++   "plant new marked dm=true link again: 4 references against its reference's 7",
++   "plant new unmarked dm=false link: 4 references against its reference's 7",
++   "plant new unmarked dm=false link again: 4 references against its reference's 7",
++   "plant new unmarked dm=true link: 4 references against its reference's 7",
++   "plant new unmarked dm=true link again: 4 references against its reference's 7",
++   "plant new shown dm=false link: 6 references against its reference's 9",
++   "plant new shown dm=false link again: 6 references against its reference's 9",
++   "plant new shown dm=true link: 6 references against its reference's 9",
++   "plant new shown dm=true link again: 6 references against its reference's 9",
++   "plant master marked dm=false link: 4 references against its reference's 7",
++   "plant master marked dm=false link again: 4 references against its reference's 7",
++   "plant master marked dm=true link: 4 references against its reference's 7",
++   "plant master marked dm=true link again: 4 references against its reference's 7",
++   "plant master unmarked dm=false link: 4 references against its reference's 7",
++   "plant master unmarked dm=false link again: 4 references against its reference's 7",
++   "plant master unmarked dm=true link: 4 references against its reference's 7",
++   "plant master unmarked dm=true link again: 4 references against its reference's 7",
++   "plant master shown dm=false link: 6 references against its reference's 9",
++   "plant master shown dm=false link again: 6 references against its reference's 9",
++   "plant master shown dm=true link: 6 references against its reference's 9",
++   "plant master shown dm=true link again: 6 references against its reference's 9",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js:554:30
+    552|     if (process.env.R4I_PEEK) console.log(`R4I-PAGE server-side reds: …
+    553|     for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker…
+    554|     expect(bad.slice(0, 40)).toEqual([]);
+       |                              ^
+    555|   });
+    556|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/zzProbeR4ip4LinkTwin.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair's ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one
+AssertionError: the anchored form passes every clean link read (a STOP with its path where not): expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4/4 references against the link twin's 7",
++   "plant new marked dm=true link: 4/4 references against the link twin's 7",
++   "plant new unmarked dm=false link: 4/4 references against the link twin's 7",
++   "plant new unmarked dm=true link: 4/4 references against the link twin's 7",
++   "plant new shown dm=false link: 6/6 references against the link twin's 9",
++   "plant new shown dm=true link: 6/6 references against the link twin's 9",
++   "plant master marked dm=false link: 4/4 references against the link twin's 7",
++   "plant master marked dm=true link: 4/4 references against the link twin's 7",
++   "plant master unmarked dm=false link: 4/4 references against the link twin's 7",
++   "plant master unmarked dm=true link: 4/4 references against the link twin's 7",
++   "plant master shown dm=false link: 6/6 references against the link twin's 9",
++   "plant master shown dm=true link: 6/6 references against the link twin's 9",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4LinkTwin.pglite.test.js:583:106
+    581|     }
+    582|     expect(tally.plants, 'plants built').toBeGreaterThan(0);
+    583|     expect(cleanReds, 'the anchored form passes every clean link read …
+       |                                                                                                          ^
+    584|     expect(tally, 'the tooth: the self form passes each plant, the anc…
+    585|       selfFirstPasses: tally.plants, selfSecondReds: tally.plants, anc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  02:44:25
+   Duration  78.89s (transform 5.17s, setup 29ms, import 2.00s, tests 76.66s, environment 0ms)
+
+[gate-tail] end:  02:45:44 up  2:33,  0 user,  load average: 6.44, 7.17, 6.71
+[gate-tail] full log: /tmp/gate-tail.12467.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

@@ -34,6 +34,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
 import { canonPeople, storedIdsServed, notBijective, readsDiffer, bijectionTeeth } from './personIdBijection.shared.mjs';
+import { linkTwinOf } from './linkTwin.shared.mjs';
 import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
 import { galleryMemberKey } from '../../src/domain/display/publicSafe.js';
 
@@ -194,7 +195,9 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
           imports.preDoc = unRekey(twins[0].doc, stored, twins[0].salt);
           imports.pre = await importOf({ id: id, name: String(stored.name || 'T'), tier: String(stored.tier || 'town'), data: imports.preDoc });
         }
-        reads.push({ seed: t.seed, shape, kind, dm, stored, ov, twin, twins, imports,
+        // R4I-PAGE-4 (the chair's ruling (c)): the LINK's own twin (linkTwin.shared.mjs, its law cited there): its reference
+        const linkTwin = linkTwinOf(stored, ov);
+        reads.push({ seed: t.seed, shape, kind, dm, stored, ov, twin, twins, imports, linkTwin,
           docs: { gallery: { doc: g1?.d, marker: g1?.o, again: g2?.d, againMarker: g2?.o }, link: { doc: lx?.dossier, marker: lx?.gallery_member_overrides ?? null, again: lx2?.dossier, againMarker: lx2?.gallery_member_overrides ?? null } } });
       }
     }
@@ -510,7 +513,9 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
       // the server's: the gallery read site for site against the twin's (the same people, modulo the bijection); the link
       // and every second read against their first; each marker's keys name a card of their own read
       for (const [read, x] of served(r)) {
-        const ref = read === 'gallery' ? refsOf(r.twins[0].doc).map((y) => y[2]) : refsOf(x.doc).map((y) => y[2]);
+        // R4I-PAGE-4 (the chair's ruling (c), 02:38 UTC): the first LINK read is anchored to the LINK's twin (linkTwin.shared.mjs,
+        // get_unlisted_dossier's law), as the gallery read is to the gallery's, never judged against ITSELF (the tooth below)
+        const ref = read === 'gallery' ? refsOf(r.twins[0].doc).map((y) => y[2]) : read === 'link' ? refsOf(r.linkTwin).map((y) => y[2]) : refsOf(x.doc).map((y) => y[2]);
         for (const [doc, marker, which] of [[x.doc, x.marker, read], [x.again, x.againMarker, `${read} again`]]) {
           const got = refsOf(doc);
           got.forEach(([p, part, ok], i) => { count(part, ok); if (ok !== ref[i]) bad.push(`${label(r, which)}: ${p} ${ok ? 'resolves' : 'resolves to no card'} (its reference: ${ref[i]})`); });
@@ -547,6 +552,38 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
     if (process.env.R4I_PEEK) console.log(`R4I-PAGE server-side reds: ${J(bad.filter((b) => !/ twin( |:)/.test(b)).slice(0, 12))}`);
     for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker', 'clone ties']) expect(tally[part]?.[0] ?? 0, `${part}: judged`).toBeGreaterThan(0);
     expect(bad.slice(0, 40)).toEqual([]);
+  });
+
+  it('THE LINK ANCHOR TOOTH (R4I-PAGE-2, R4I-PAGE-3 measured; anchored to the LINK twin by the chair\'s ruling (c), 02:38 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one; every clean link read passes the anchored one', () => {
+    const misses = (ref, doc) => { const got = refsOf(doc); return got.filter(([, , ok], i) => ok !== ref[i]).length + (got.length !== ref.length ? 1 : 0); };
+    const tally = { plants: 0, selfFirstPasses: 0, selfSecondReds: 0, anchoredReds: 0, anchoredCleanPasses: 0 };
+    const cleanReds = [];
+    for (const r of reads) {
+      const x = r.docs.link;
+      if (!isRec(x.doc) || !isRec(x.again)) continue;
+      const planted = JSON.parse(JSON.stringify(x.doc));
+      const ids = cardIdsOf(planted);
+      const site = walkSites(planted).find((y) => y[2] === 'ref' && ids.has(String(y[0][y[1]])));
+      if (!site) continue;
+      site[0][site[1]] = 'npc_ffffffffffffffff';
+      tally.plants += 1;
+      const selfRef = refsOf(planted).map((y) => y[2]);
+      const linkRef = refsOf(r.linkTwin).map((y) => y[2]);
+      if (misses(selfRef, planted) === 0) tally.selfFirstPasses += 1;
+      if (misses(selfRef, x.again) > 0) tally.selfSecondReds += 1;
+      if (misses(linkRef, planted) > 0) tally.anchoredReds += 1;
+      if (misses(linkRef, x.doc) === 0 && misses(linkRef, x.again) === 0) tally.anchoredCleanPasses += 1;
+      else {
+        const got = refsOf(x.doc);
+        const at = got.findIndex(([, , ok], i) => ok !== linkRef[i]);
+        const lacks = refsOf(r.linkTwin).map(([p]) => p).filter((p) => !got.some(([q]) => q === p));
+        cleanReds.push(`${label(r, 'link')}: ${got.length}/${refsOf(x.again).length} references against the link twin's ${linkRef.length}${at >= 0 ? `, first at ${got[at][0]}` : ''}; the twin's the read lacks: ${lacks.join(', ')}`);
+      }
+    }
+    expect(tally.plants, 'plants built: one a link read of every town, shape, veil and setting (36, R4I-PAGE-3 measured)').toBe(36);
+    expect(cleanReds, 'the anchored form passes every clean link read (a STOP with its path where not)').toEqual([]);
+    expect(tally, 'the tooth: the self form passes each plant, the anchored form reds each, every clean read passes').toEqual({ plants: tally.plants,
+      selfFirstPasses: tally.plants, selfSecondReds: tally.plants, anchoredReds: tally.plants, anchoredCleanPasses: tally.plants });
   });
 });
 

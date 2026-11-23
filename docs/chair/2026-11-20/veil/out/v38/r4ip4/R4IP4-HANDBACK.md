@@ -54,5 +54,21 @@ tokens only: `(?<![0-9A-Za-z_])(npc|tie)_[0-9a-f]{16}(?![0-9A-Za-z_])` (it was `
 - THE COUNT on R4I-PAGE-3's stored sets (`/var/tmp/r4ip3/stored-{today,master}`, `e/fresh-shaped-count.mjs`): today-born
   140 documents, 0 stored ids of the fresh shape; master-born 140, 0 (logs/e-fresh-shaped-count.txt). `stored-ids.sh`
   re-run on both: queued on the mutex (below).
-## (c) the link twin and the anchor: built; measured green on a probe copy (logs/c-probe3-*.txt), commit pending
+## (c) THE LINK TWIN AND THE ANCHOR (the chair's ruling (c)): DONE, 36/36 AND 36/36 (commit: C)
+`tests/security/linkTwin.shared.mjs :: linkTwinOf(stored, overrides)` = `applyVeil(pub, resolveVeil(defaultVeilFor(pub),
+marked ? deltas : []))`, `pub = galleryPayloadFor(stored, { shareDm: false, memberOverrides: linkHonoured(overrides) })`.
+Its law cited in the file: 212 :3307 (`'gallery_share_dm', false`), :3328-3334 (the apply, `settlement_share_dm` false),
+:3338-3339 (`_gallery_veil(..., true)`, the comment); 211 :701 (`link`'s one branch: an unmarked share takes the default
+veil) and :739-742 (revealDm:false member keys as card deltas).
+ONE FINDING, MEASURED, in "what the link's apply honours": the link's `dm_full` is `pub.j` itself, the public projection
+plus three live keys (212 :3329-3333; the comment at :3058), and a member's `revealDm: true` takes its card from `dm_full`
+(:3111-3116), so on the link a reveal reveals nothing beyond the public card. With the overrides passed whole, the anchor
+passed 24 of 36 clean reads: the 12 `plant` link reads served 4 references against the twin's 7 (6 against 9, shown), the
+twin's three extra all on `npc.bo` (`revealDm: true`): `npcs[3].goal.intent.short.target.id`, `npcs[3].relationships[0]
+.from/.to` (logs/c-probe2-*.full.txt). `linkHonoured` drops each `revealDm: true` (nothing else): then 36/36.
+- The anchor: galleryVeilIds' chair's arm judges the first LINK read against `refsOf(linkTwin)`, not itself; THE LINK ANCHOR
+  TOOTH (R4I-PAGE-3's measured patch, re-anchored): plants 36 (pinned), the self form passes 36/36 planted reads, its second
+  read reds 36/36, the anchored form reds 36/36 and passes 36/36 clean reads. RED FIRST: against the gallery twin 12/36 clean
+  (R4I-PAGE-3, logs there); against the whole-overrides link twin 24/36 (above). GREEN: galleryVeilIds 14/14
+  (logs/c-galleryVeilIds.txt). eslint 0 (logs/c-eslint.txt).
 ## R — the runs: the 34 files and Tell3/4/5/8 queued on the mutex (chainA); SignalCopies at tip and tree, security and lint whole pending
