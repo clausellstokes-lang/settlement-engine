@@ -15,7 +15,7 @@ THE BRANCHES (pushed by their own names only):
   merged, no conflict). PUSHED at 9b1fe3c34. Builder B2 works IN it.
 - `/home/user/wt/a-rerun`: detached at 74afc8219, for this seat's re-run of A's own runs (B edits the -wip worktree).
 - THE LANE'S TIP (the chair, 05:17): 23bb8b8ae on `lane/veil-39-2026-11-23-tip` ("PIN-2": parent 2d7ed483f; `tests/lib/gallery.test.js`
-  and `galleryVeilSignalCopies.pglite`, +54 -6; read whole by the chair). MERGED into the code branch as 9b1fe3c34 (06:5x). After it the tip's ONE red
+  and `galleryVeilSignalCopies.pglite`, +54 -6; read whole by the chair). MERGED into the code branch as 9b1fe3c34 (its commit 06:57 UTC). After it the tip's ONE red
   in the 34-file set outside tests/security is `tests/domain/display/criminalVeilSwitch.test.js` "(a)-(e) hold on every birth, plain and
   DM-revealing": class it "the tip's, named"; do not cure.
 
@@ -33,18 +33,18 @@ whole 45 failed of 3,314 in 17 files (05:39) = the lane's 22 (the same 16 files 
 the 23 `prose.*` ids of PART 39. A's figures CONFIRMED. Out: `/var/tmp/v18/out/v40/arerun/` (lint log /tmp/gate-tail.25929.log).
 
 UNIT (2) R5D-PAGE-B: brief `briefs/R5D-PAGE-B-BRIEF.md` (ec23449fc; ADDENDUM 1 at 928576c43 governs phase 2).
-- PHASE 1 RETURNED (06:5x; ~326,000 builder tokens): f0a896d73, `out/v40/r5dpage-b/R5DPAGE-B-5B-MEASURE.md` READ WHOLE by this seat.
+- PHASE 1 RETURNED (its commit 06:56 UTC; ~326,000 builder tokens): f0a896d73, `out/v40/r5dpage-b/R5DPAGE-B-5B-MEASURE.md` READ WHOLE by this seat.
   Q1 2,760/2,760 equal BY CONSTRUCTION (never-there deletes rows): not evidence. Q2: T12 0 of 464 lone: THE ROSTER IS THE TELL; T13
   words lone on open places (the host's own card elsewhere), under the rival's name lone only on 2 places (host base rewritten); 0 of
   2,680 open rival rows without host; 26 of 29 rival names never natural. Q3: player view exact 0; sentence-case hidden name in a served
   desc 28 hits / 6 places, all T13; r3m-city-none-0-37 NOT reproduced (no Craft Guilds on this tree). Whole documents NOT compared.
-  SENT TO THE CHAIR as "5b MEASURE" (06:5x). 107 (3) RULED (113 below): THE RIVAL LEAVES WITH ITS HOST.
-- R5D-RIVAL (the cure of 113; brief `briefs/R5D-RIVAL-BRIEF.md` a079f6fbd): DISPATCHED ~07:1x UTC, worktree `/home/user/wt/r5rival`,
+  SENT TO THE CHAIR as "5b MEASURE" (before 07:00 UTC, the chair's answer). 107 (3) RULED (113 below): THE RIVAL LEAVES WITH ITS HOST.
+- R5D-RIVAL (the cure of 113; brief `briefs/R5D-RIVAL-BRIEF.md` a079f6fbd): DISPATCHED after the brief's commit (07:07 UTC), worktree `/home/user/wt/r5rival`,
   branch `lane/veil-40-2026-11-23-r5rival-wip` cut at 9b1fe3c34; reads 212 + registry whole first; manifest 212, rollback, registry
   row, the twin's resolve, a new arm `tests/security/galleryVeilRival.pglite.test.js`, its instruments `out/v40/r5drival/`; NOT A's two
   test files (B2's). At its return: its diff read whole by this seat; its runs re-run; then A NEW POOL AND BOTH GATES on its branch (if
   worse than 4 of 92 or 20: STOP, the chair rules); the owner's-screen line to the chair; merge into the code branch.
-- PHASE 2 IN TWO FRESH BUILDERS, one after the other (addendum 1): R5D-PAGE-B2 DISPATCHED ~07:0x UTC (stored pools to
+- PHASE 2 IN TWO FRESH BUILDERS, one after the other (addendum 1): R5D-PAGE-B2 DISPATCHED after addendum 1's push (commit 06:57 UTC) (stored pools to
   `/var/tmp/v18/t2/stored-v40/{today,master}/`; 5c; share class to 107 (1); case-blind; the two titles; hand-back
   `out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`); then R5D-PAGE-B3 AFTER R5D-RIVAL IS MERGED (item 5 walker + legacy arm; 5b's
   13-template arm; never-there to the closure in A's two files; measures 5d, 5e: brief addendum 2).
@@ -73,11 +73,18 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     SCREEN: after the cure, read what the curate model and offers show for a rival whose host is hidden: one line with the builder's
     return; nothing built. PHASE 2 GAINS (5d) and (5e), measures of Q2's kind, no cure. NO "TIP?" before R5D-RIVAL is in and proved
     and phase 2 has run. The chair's read of this record: 241,950 at 06:43.
+114. THE CHAIR, 07:17 (N67): THE RUN THAT READS THE UNIT's NEW POOL AND THE STORED POOL RECORDS, FOR EVERY READ, two sha256s (the
+    served document's canonical form, keys sorted; the twin's projection's for the same read) in one table (place, door, setting,
+    Reveal, the two shas) and KEEPS WHOLE the first 50 differing pairs. JUDGE NOTHING BY IT (material for the whole-document
+    "server = twin" form, ruled on chain B's measure). "TIP?" says how many reads differ. RELAYED to B2 for its stored reads
+    (`out/v40/r5dpage-b/stored-wholedoc-shas.tsv`); the new pool's table is this seat's own run at the proofs. Every hour written is
+    read from `date -u` or left out (the chair's correction of a "07:1x" heading).
 
 ## 3. Log (every hour from `date -u`)
-- 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:2x B's brief ec23449fc,
+- 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
   B dispatched (phase 1), A's re-run queued.
 - 04:03 (0)'s line to the chair. 04:46 ruling 110. 04:57 chain END. 05:17 ruling 111 (PIN-2). 05:24 / 05:39 A's re-run: CONFIRMED.
-- 06:12 ruling 112. 06:5x B phase 1 returned; 5b MEASURE to the chair; PIN-2 merged (9b1fe3c34), -wip pushed; addendum 1 (928576c43);
+- 06:12 ruling 112. 06:56 B phase 1 returned (its commit); 5b MEASURE to the chair; 06:57 PIN-2 merged (9b1fe3c34), -wip pushed; addendum 1 (928576c43);
   07:02 B2 dispatched.
-- 07:00 ruling 113 (107 (3) closed). 07:1x R5D-RIVAL's brief (a079f6fbd), worktree cut, R5D-RIVAL dispatched; addendum 2 (07:11).
+- 07:00 ruling 113 (107 (3) closed). 07:07 R5D-RIVAL's brief (a079f6fbd), worktree cut, R5D-RIVAL dispatched; addendum 2, push 8335ac913 (07:11).
+- 07:17 ruling 114; relayed to B2; 07:18 PART 42's estimated hours replaced by commit times or removed.
