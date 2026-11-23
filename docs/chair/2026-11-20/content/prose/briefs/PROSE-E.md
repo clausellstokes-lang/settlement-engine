@@ -64,3 +64,24 @@ Write `docs/chair/2026-11-20/content/prose/PROSE-E-REPORT.md` in the worktree, a
 - The tooth's header names the matcher's FLOOR: a clause cut under four literal words is not matched (`oppositeSentencePairs.mjs:97`). Leave a placeholder for the FLOOR measure's figure, which a second agent is taking beside you; I give you the figure. The floor itself is NOT changed.
 - THE REPORT gains, for each of the five re-worded lines, EVERY FORM THE PAGES PRINT: whole, and each cut, read from the readers' code (`siteClause` in `generalDeskRead.js` and its like on the defense and economy desks). Quote each form, and say which mount prints it. Each printed form is judged against the cell it stands beside, not only the whole sentence.
 - Everything else in this brief stands. Go on from item 1. One heavy run at a time on the box: a second agent shares the mutex with you.
+
+## AMENDMENT 2 (the chair's N77, 2026-11-23 08:58 UTC): THE CLOSE
+The seat has merged THE LINE 9b0ffaa97 into the -e-wip as c66c30e4b (clean; `gen:dossier-prose -- --check` exit 0). Work on top of it.
+1. THE PINS: in `tests/lint/proseMoveGrammar.walker.test.js` CONTROL 4, the three uniform-segment figures move by exactly one each, TEST ONLY:
+   - `uniformSegments` 577 → 578;
+   - its share 0.670 → 0.671 (578 / 861 = 0.67131);
+   - × 774: 519 → 520.
+   PREPEND each cause in the file's own form: "PROSE-E (the chair's ruling N77): DS-DEF-2 `Economic Survival: CRITICAL` v1 re-worded in place from two sentences to one by CHAIR-2026-11-23-N70, so the pool's three variants are one sentence each and it joins the uniform count; no line and no pool added: 861 stands". Re-read the arm's SECOND HALF and say what it holds. Then `tests/lint` whole. ONE commit.
+2. THE REGISTERS, ONCE, each by its OWN DOOR, one commit each, the cause in the message:
+   - the observed-shape readers' baseline;
+   - the lighting census, if a title moved (bar8DesksDef's row title did);
+   - any other register that reds BECAUSE of this unit at the merged tip.
+   Never raise a shrink-only ceiling. proseCorpusBytes (RAW, GZIP) and proseComposed A0b are the OWNER'S: report their new figures and touch nothing.
+3. RULE 8, by directory and exported names, as the landing runs it, in ONE run:
+   - every test file naming `dossierStateProse`, `generate-dossier-state-prose` or `oppositeSentencePairs`, or an exported symbol of a changed file;
+   - every file whose name contains `StateProse`;
+   - `tests/copy` whole.
+   Then `tests/store`, `tests/architecture` and `tests/docs` whole; `tests/lint` whole at the last commit.
+4. ONE BUILD: `npm run build`, then `VERIFY_DIST=1` on `tests/build` whole. Give the five figures beside the line's at 9b0ffaa97: first paint 1,180,816 / 376,065 / 315,768; worker 2,713,402; engine chunk 932,583.
+5. Every red BY NAME against the 59 rows of RED-AT-LINE.tsv as it now stands (`git -C /home/user/settlement-engine show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`; match by containment). A red not on it: STOP and report.
+6. The git config checks. Update PROSE-E-REPORT.md (at most 80 lines) to the final tip. Report in at most 150 words.
