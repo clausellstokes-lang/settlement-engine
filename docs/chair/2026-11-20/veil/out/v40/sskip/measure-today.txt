@@ -1,0 +1,29 @@
+SSKIP measure /var/tmp/v18/t2/stored-v40/today (tree /home/user/wt/sskip): places 440 | stored rows with a desc 2176 | density rivals (contestsNiche) 325, base one of the seven 70, not 255
+  (c) NATURAL rows (no contestsNiche) whose base is one of the seven: 0
+  standingBase vs the reference cut disagree: 0
+  (ii) rows whose base is one of the seven (70) that carry a STORED standing: 0
+  nothing-hidden twin door-pages 876 | rows 3732 | veiled 20 | seat-contest listed 28 | FAULTS 24 on rows 6, places 6 ["t2p-city-politically_fractured-179 The Garrison Bloc","t2p-city-under_siege-237 The Garrison Bloc","t2p-city-under_siege-267 The Shield Compact","t2p-metropolis-under_siege-327 The Martial Alliance","t2p-metropolis-under_siege-937 The Shield Compact","t2p-city-under_siege-47 The Martial Alliance"]
+  (i) faulting reads whose stored base is NOT one of the seven: 0
+  (iii) nothing-hidden: S gives a row with no stored standing a tail: base one of the seven 24 | OTHER 0
+  (iii) hiding reads (house hides, hand hides; 529 records, 2116 door-reads, 11336 rows): one of the seven 124 | OTHER 508
+    t2p-town-none-32 (hand hide noble power) page dm=false Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page ove that their support is worth buying; they play Merchant Guilds and Corrupt Council against each other when they can."
+    t2p-town-none-32 (hand hide noble power) import dm=false Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page ove that their support is worth buying; they play Merchant Guilds and Corrupt Council against each other when they can."
+    t2p-town-none-32 (hand hide noble power) page dm=true Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page ove that their support is worth buying; they play Merchant Guilds and Corrupt Council against each other when they can."
+    t2p-town-none-32 (hand hide noble power) import dm=true Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page ove that their support is worth buying; they play Merchant Guilds and Corrupt Council against each other when they can."
+    t2p-town-none-72 (hand hide noble power) page dm=false Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page uthority is real but their political leverage is limited. They are always at the table, but cannot set their own terms."
+    t2p-town-none-72 (hand hide noble power) import dm=false Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page uthority is real but their political leverage is limited. They are always at the table, but cannot set their own terms."
+    t2p-town-none-72 (hand hide noble power) page dm=true Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page uthority is real but their political leverage is limited. They are always at the table, but cannot set their own terms."
+    t2p-town-none-72 (hand hide noble power) import dm=true Religious Authorities: stored t the margins of civic life; their moral authority is real but their political leverage is limited." | page uthority is real but their political leverage is limited. They are always at the table, but cannot set their own terms."
+    t2p-town-none-76 (hand hide noble power) page dm=false Merchant Guilds: stored "Merchants with local reach; they trade here, but have little say in how the place is run." | page  trade here, but have little say in how the place is run. They are always at the table, but cannot set their own terms."
+    t2p-town-none-76 (hand hide noble power) import dm=false Merchant Guilds: stored "Merchants with local reach; they trade here, but have little say in how the place is run." | page  trade here, but have little say in how the place is run. They are always at the table, but cannot set their own terms."
+    t2p-town-none-76 (hand hide noble power) page dm=true Merchant Guilds: stored "Merchants with local reach; they trade here, but have little say in how the place is run." | page  trade here, but have little say in how the place is run. They are always at the table, but cannot set their own terms."
+    t2p-town-none-76 (hand hide noble power) import dm=true Merchant Guilds: stored "Merchants with local reach; they trade here, but have little say in how the place is run." | page  trade here, but have little say in how the place is run. They are always at the table, but cannot set their own terms."
+  rivals whose base is not one of the seven (copied host descs), first: 
+    t2p-city-insurgency-33 The Commercial Circle: "Established merchant community; fund civic works and expect council a
+    t2p-city-insurgency-33 The Holy Compact: "Church holds substantial temporal power; tithes fund civic works and 
+    t2p-city-politically_fractured-49 The Faithful Assembly: "Church holds substantial temporal power; tithes fund civic works and 
+    t2p-city-none-66 The Trade Compact: "Established merchant community; fund civic works and expect council a
+    t2p-city-none-66 The Devout Circle: "Clergy are present but operate at the margins of civic life; their mo
+    t2p-city-none-92 The Faithful Assembly: "Church holds substantial temporal power; tithes fund civic works and 
+    t2p-city-wartime-118 The Trade Compact: "The ruling class and the merchant class are the same people; commerci
+    t2p-city-occupied-134 The Trade Compact: "Craft guilds regulating production and apprenticeships; a reliable se
