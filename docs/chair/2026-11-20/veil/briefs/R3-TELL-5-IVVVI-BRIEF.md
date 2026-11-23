@@ -60,3 +60,26 @@ that names them is re-stated in the same commit by its cause.
 left as measured"); per unit the twin's form with its measure, rows lost (median and worst); CONFIRMED vs PLAUSIBLE; a plain paragraph
 for the owner; last line your commits, their files, 212's sha256. Last message at most 15 lines. A refused permission stands. STOP
 RATHER THAN INVENT. Every hour you write from `date -u`.
+
+## ADDENDUM 1 (VEIL-40, on the chair's N102 of 13:40 UTC): T5M, A FRESH BUILDER FOR THE MEASURES ONLY, NO CURE
+T5 (the first builder) handed back with NOTHING RUN (`out/v40/t5/T5-HANDBACK.md` at b690dadd2: read it WHOLE; its WIP 58cf00f6c +
+b690dadd2: the instruments re-pointed, Tell6, the manifest, the (vi) teeth, the (v)(1) arm; its (v)(1) cure DRAFTED IN SCRATCH, NOT
+APPLIED). T5M works on the SAME worktree and branch (`/home/user/wt/t5`, `lane/veil-40-2026-11-23-t5-wip` at b690dadd2). T5M RUNS
+THE MEASURES (`sh docs/chair/2026-11-20/veil/out/v33/q/measure/q-chain.sh tpl|smoke|towns|pool|insurg|an`, re-pointed; NO gate, NO
+pool of the seat's) AND THE RED-FIRST ARMS AS THEY STAND; IT APPLIES NO CURE (the cures are a later builder's, on these measures).
+READ WHOLE: this brief with this addendum, T5's hand-back, and only the instrument files you run; 212, the registry and the twin by
+symbol only (you change none of them). THE CHAIR's RULINGS ON T5's PAPER (N102), the measures to make:
+- (iv): confirm by the towns measure: on 117 and 136 every relation row but N88's four controls names a withheld power or house (and
+  is already taken). If confirmed: nothing to cure; the four controls stay lower by rule (N88).
+- (v)(3): N88's STOP IS LIFTED (the house-free twin shows the Thieves' Guild; this read withholds it; each power takes one good by
+  power, `demandProfile.js :: computeDemandImports`, so the second good is the withheld power's own). 72 (a) (3) RUNS, MADE JOINT: a
+  member only if two or more of the 300 insurgency births show several criminal imports BESIDE ONE criminal power on the page's
+  roster; say BOTH counts (the family alone; joint). Else the second criminal import is withheld (its cure later, red first).
+- (v)(2): 72 (a) (2)'s SENT crime_wave IS WITHDRAWN where the served crime signal is false (the crimeWave rule stands). THE MEASURE
+  DECIDES: nothing-hidden town births whose page shows an EMPTY tensions list, and the tension types no-signal births hold. A handful
+  or more empty: a member, nothing built. Fewer: STOP with the counts.
+- (v)(1): 72 (a) (1)'s precondition count; AND `bnAt` BY PATH on 113 and 62, served or not: a SERVED copy in `publicProse` is a STOP.
+- (vi): run its two teeth red/green as written (tests only).
+- THE LOCK: `/var/tmp/v18/out/v40/mutex-order.txt`: T5M runs only when it is named (after R5D-RIVAL's runner and SSKIP's count).
+  Commit by explicit paths (never `--no-verify`); never push; WIP before any wait over ten minutes. Report AT MOST 60 LINES, the
+  measures' figures by unit, in `out/v40/t5/T5M-HANDBACK.md`.
