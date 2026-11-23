@@ -1,11 +1,13 @@
 # PROSE-6 HAND-BACK (kept current at every push)
 
-## WHERE THE LANE STANDS (written 05:43 UTC 2026-11-23; LANDED ON PAPER: "PROSE-D 01ecf1e91" sent to the chair)
+## WHERE THE LANE STANDS (written 07:00 UTC 2026-11-23; PROSE-D 01ecf1e91 = landing point 110, PROSE-D-2 b443be64b = point 112; seated until the landing is in)
 - SEAT: PROSE-6 of the ninth chair (session_01FbPLbdpQrxXktCeSf32d4j), ONE UNIT: "DISAGREE". PROSE-5's units 2-5 and its -wip branches stay PARKED: untouched.
 - BRANCHES: `lane/prose-6-2026-11-23` (this file; `lines/DISAGREE-LINES.md` as ruled at 03:45 and 03:55; `briefs/DISAGREE.md` + `briefs/DISAGREE-ADDENDUM-1.md`); `lane/prose-6-2026-11-23-disagree-wip`, cut at 244fa84ef, pushed at 01ecf1e91 (report `DISAGREE-REPORT.md`). Worktrees /home/user/wt-disagree and /home/user/wt-disagree-base (244fa84ef + the tooth's two files, uncommitted, for the red run). Builder: Agent a6ac7eee0af5d9d50.
 - BUILT: FOOD: F1-F6 (DS-DEF-2 CHAIN v7-v12), flat v1-v4 gain `food: <= pressured`. WAGES: no `force: paid` anywhere; WEAK v1 and v2 re-worded in place by two WORD_CORRECTIONS rows (CHAIR-2026-11-23-03:45, -03:55); GEN-17 leaf equal to 244fa84ef. The tooth `tests/domain/oppositeSentencePairs.test.js` + `tests/helpers/oppositeSentencePairs.mjs` (FOOD row; old WEAK words and GEN-17 v2's tail pinned at 0; no cell empty but dz-city-101). Test pins re-stated by cause; registers by their doors.
 - RUN: on 900 births FOOD 68 -> 0 (OPPOSITE_PAIRS), `disagree.mjs` WAGES BOTH 0 with its pattern untouched (dz-town-2 and dz-town-36 print the new v1 and v2); bar max 13.3% (F4, metropolis); dark proof EQUAL (f2ecb50c..., 900, 0 strings differ); tooth red on 244fa84ef and green 6/6 at the tip, run by me; `tests/lint` whole 3,364, 3 red, all on RED-AT-LINE; ratchet dirs and tests/build reds on RED-AT-LINE; one build.
-- NEXT: nothing, unless the chair asks. The merge, the deploy and every signing are the owner's. E132 item (4), the wider measure, has not been run.
+- PROSE-D-2 b443be64b (the chair's N57; landing point 112): two pins the landing's gate found (bar3CorpusGuards WEAK v1 `now`; composeStateProse `variants` 3176 -> 3182), test-only. Rule 8 now greps a changed file's DIRECTORY and exported names too (the chair, N62).
+- E132 ITEM (4), MEASURED (no cure): `map/DISAGREE-ITEM4.md` f83becb1e, script `map/disagree-item4.mjs` (brief `briefs/DISAGREE-ITEM4.md` + amendment 1). 4 cell pairs read TRUE, on 38 of 900 pages (a lower bound), worst GEN-13 NO-MARKET x ECO-10 POSTURE: established (26). For the owner.
+- NEXT: nothing, unless the chair asks. Seated until the landing is in; then section 0 is final. The merge, the deploy and every signing are the owner's.
 
 ## OPEN FOR THE CHAIR
 - DS-GEN-17 GARRISONED empty on dz-city-101 (an occupied city; `no crisis: occupied` refuses v1 and v2), 1 of 900, empty at 244fa84ef too. Not this unit's (the chair, 01:38); the tooth holds it as a named exception by seed and cause.
