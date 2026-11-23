@@ -32,8 +32,13 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 14:08 UTC (the helper's read, its clock 14:08:51 to 14:08:57; NO FIGURE FELL since 13:07; every seat on
-claude-opus-5-5: configured, set and last served): CLOSE-6 340,311 (+31,588 in the hour); VEIL-40 452,195 (it moved: IT
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 15:07 UTC (the helper's read, its clock 15:07:37 to 15:07:43; NO FIGURE FELL since 14:08; every seat on
+claude-opus-5-5: configured, set and last served): CLOSE-6 358,884 (+18,573 in the hour); VEIL-40 458,250 (one long turn
+since 14:42: stale-low; IT HANDS OVER BY 570,000 OF THIS READ, AT A STEP'S END: `prompts/DRAFT-START-VEIL-48.txt` is
+filled then); VEIL-41 528,563 (+1,479: its proof runs; its line is 660,000 for this proof alone: N99); VEIL-42 449,024
+(+20,752); VEIL-43 501,405 (+32,354, the fastest: IT NEARS ITS HAND-OVER, after "REDS-CAUSE", at a step's end:
+`prompts/DRAFT-START-VEIL-46.txt`); VEIL-44 393,102 (unchanged: one long turn since 14:52); PROSE-6 361,559 (idle; it
+waits and is not one of the six). THE FIGURES OF 14:08 UTC (history; no figure fell since 13:07): CLOSE-6 340,311 (+31,588 in the hour); VEIL-40 452,195 (it moved: IT
 HANDS OVER BY 570,000 OF THIS READ, AT A STEP'S END: about two hours at its rate: `prompts/DRAFT-START-VEIL-48.txt` is
 filled then); VEIL-41 527,084 (+8,882: its proof runs; its line is 660,000 for this proof alone: N99); VEIL-42 428,272
 (+18,379); VEIL-43 469,051 (+14,432); VEIL-44 393,102 (its record last moved at 13:46: one long turn: stale-low);
@@ -244,14 +249,25 @@ cure. THE JOIN'S "PAGES" RUNS IN ITS 55-MINUTE FORM (N103); the chips' order it 
 stored read, the owner's own included: not the veil's. CHAIN B's "TONIGHT-2" RETURNED (57e847ce8): the id unit moves
 ONE "tonight" line on the owner's own page in 2 of 1,808 test towns. 13G's RED FIRST IS DONE; its cure goes through
 `rosterText.js`'s two settles (no veto, two conditions).
-SINCE N103 (N104): THE NEXT HOURLY CHECK IS trig_01YGHr43QZ7qTByhhu8Gde3x AT 15:10 UTC (its stored text lists what each
-seat owes). THE JOIN'S NAME SEARCH FOUND, ON THE LANE'S TIP AS IT STANDS, A SHOWN POWER'S STANDING NAMING THE WITHHELD
+SINCE N103 (N104): THE HOURLY REMINDER IS trig_01YGHr43QZ7qTByhhu8Gde3x, RE-ARMED EACH HOUR (its stored text lists what
+each seat owes; its next firing is named in the newest "SINCE" paragraph). THE JOIN'S NAME SEARCH FOUND, ON THE LANE'S TIP AS IT STANDS, A SHOWN POWER'S STANDING NAMING THE WITHHELD
 THIEVES' GUILD (2 of 95 hiding places, 240 reads, every door alike): KNOWN: CHAIN A's UNMERGED UNIT IS ITS CURE; the
 two seeds (r3m-town-none-0-17, r3m-city-none-1-117) must read 0 by name on chain A's tree and again on the join after
 its merge. THE OWNER ASKED FOR THE OVERALL PROGRESS AND FOR THE QUEUE IN ORDER: answered in fifteen steps (the
 switch-on's five; the veil's six; the finish-line checks, the security review, the last read of 212; his own hands),
 with the chair's guess SAID AS A GUESS: the switch-on ready to land within about half a day, the share veil more than
 a day, likely two. NOTHING WAITS ON HIM NOW; HIS DECISION ON PAGES PUBLISHED BEFORE THE VEIL IS STILL OPEN.
+SINCE N104 (N105 TO N110): THE NEXT HOURLY CHECK IS AT 16:10 UTC (the same reminder, re-armed). "13G" IS BUILT ON THE
+FLIP'S BRANCH (3b5a37a23: 3 dark and 4 lit to 0; no other byte): THE QUEUE'S FIRST STEP IS DONE; F-JOIN IS NEXT. "13G x
+S" IS RULED AND SENT (N108): at the lit join the page's reader hands the writer the SERVED relation rows; a public read
+prints the two war notes (the town whose hall was never bought), a Reveal DM read omits them: a listed difference
+(the reader's row 37). A SERVER FAULT ON MASTER-BORN DOCUMENTS WAS FOUND BY THE WHOLE-DOCUMENT FORM (N106: a guard that
+passes on an absent key writes shares the stored list never had: two lines of 212, none in 204 to 211; the reader's
+row 36): ITS CURE IS GRANTED TO CHAIN B (its SQL builder's unit); chain A takes the two lines at its merge. THE JOIN'S
+NAME SEARCH IS COMPLETE (N105: one path, chain A's; its re-run after chain A's merge reads the master-born stored form
+too). "PAGES" RUNS UNTIL ABOUT 16:30 (N110); ITS FIRST FINDING, share figures moving on a read that hides nothing by
+the hand, IS READ BY THE CHAIR AS THE LANE'S RULE VR31 AND IS BEING CONFIRMED BIRTH BY BIRTH (N109). TWO `tests/copy`
+REDS OF THE LANE'S TIP (code patterns in string literals) ARE ON THE JOIN'S WORKLIST (N107).
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -3125,3 +3141,117 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   (4) WHAT THIS SHOWS OF THE INSTRUMENTS: the whole-document form (N90), run on real stored documents, found what no
   pool proof of the lane had read: the old stored measure used a master SHAPE made from today's births, whose entries
   carry `power`. The form earns its place in every unit's proof; the bar's pool-wide run reads both stored sets.
+- 2026-11-23 15:10 UTC · N107 · CHAIN B's "TONIGHT-2" RE-RUN BY ITS SEAT AND MERGED; TWO `tests/copy` REDS OF THE
+  LANE'S TIP GO TO THE JOIN'S WORKLIST (CODE PATTERNS IN STRING LITERALS).
+  (1) VEIL-42 (queued 14:45:08; its run's own clock 14:37:11): R4I-TONIGHT-2 RE-RUN BY THE SEAT in a scratch worktree:
+  RED at the old source: `shareRenderTwice` 2 failed of 5 (MAIN, TONIGHT); GREEN: 22 of 22 (`shareRenderTwice`,
+  `tonightSheetOnce`, `criminalSwitchSalt`, `netCurrentExtractorAnchor`); MERGED into its -wip at ab05aa487 (no
+  conflict; pushed). `tests/copy`'s TWO REDS ARE THE TIP's: `voiceMechanics.test.js` reds identically at the tip
+  b58abc48b and at its -wip 392aff978 (`src/domain/display/galleryRosterChoices.js` em 0 to 1;
+  `src/domain/display/gallerySecondHomes.js` bang 0 to 18): not R4-IDS's. Its SQL builder builds.
+  (2) READ BY THE CHAIR AT 23bb8b8ae: the walker's header (tier 2: every string literal of `src/data/*.js` and
+  `src/domain/**`: a shrink-only ratchet by file; "never raise the baseline"); `galleryRosterChoices.js` :110 `const
+  DASH = '—'` (the twin of 212's chr(8212) at :2054); in `gallerySecondHomes.js` 15 of the 18 are regex lookarounds,
+  `(?<!` and `(?!`, inside the HOUSE_FLAGS JSON template (:118 to :151) and 3 stand in other literals: CODE, never
+  text a reader sees. **Decided (N107), sent after the clock read 14:46:31:** THEY GO TO THE JOIN'S WORKLIST:
+  `tests/copy` WHOLE is run on the join with "REDS-CAUSE" and every red classed (the line's, the lane's, the join's).
+  THE CHAIR'S LEAN FOR THE CURE, the join seat's to weigh: the two characters written as code points (`'—'`; `!`
+  inside the template, which JavaScript cooks before JSON.parse), VALUE-EQUAL (HOUSE_FLAGS and DASH pinned equal
+  before and after; the twin's per-read hashes unmoved); no baseline raised and no edit of the walker; a commit of
+  unit (2). VEIL-42's "TIP?" lists the two as the tip's, by name; it cures neither. **Why not an exemption:** a named
+  exemption would be an edit of a guard to get green; the escape leaves the guard and its baseline as they are and
+  moves no value.
+- 2026-11-23 15:10 UTC · N108 · "13G" IS BUILT ON THE FLIP'S BRANCH (3 DARK AND 4 LIT TO 0; NO OTHER BYTE); ITS
+  CHANGED LINES READ BY THE CHAIR; "13G x S" RULED: A PUBLIC READ PRINTS THE TWO WAR NOTES (THE TOWN WHOSE HALL WAS
+  NEVER BOUGHT), A REVEAL DM READ OMITS THEM.
+  (1) CLOSE-6 (queued 14:49:48): "13G 3b5a37a23" PUSHED on `lane/close-6-2026-11-23-flip` (4 files, +76 -6), then the
+  title census re-taken by its own door (1fe19098f: titles 31,924 to 31,925; not a frozen surface). THE CURE:
+  `src/generators/factionDynamics.js :: tieReadsBought(rows)`: a row that carries `captureState` and is typed
+  `corrupted`: THE ONE READING, beside the rows' builders (not in `hallCapture.js`: a new importer there moves the
+  tuning register's dependents: measured red); `annotateFactionStanding`'s gate reads `seatBoughtOf(factions) ||
+  tieReadsBought(seat?.factionRelationships)`, its new header naming the input for every caller (none passed: the old
+  lines); `rosterText.js`: `settleStandingToRoster`'s AFTER read carries the record's rows,
+  `settleStandingToLegitimacy`'s BEFORE and AFTER both; the power step's first call untouched. THE CHAIR'S TWO
+  CONDITIONS MET (the arm keeps its own `tieBought` and asserts 0 disagreements with the cure's on all 1,800 births;
+  the header). RED FIRST by name (lit dp-city-42, dp-metropolis-83, -111, -118; dark the same less -83; the old arm
+  r2r-city-5), green after: 6 of 6, the tooth live. THE HASH PROOF (sha256 of each birth, the tree before against
+  after): LIT 896 equal, 4 moved; DARK 897 equal, 3 moved; none outside the named; each moved birth moves only in two
+  `powerStructure.factions[].desc` fields: cut: "A slow war with the guild: arrests are made, the gangs rebuild, deals
+  are struck and quietly broken." and "They are roughly even with the military: the garrison can arrest their people,
+  and the guild can make every investigation costly."; nothing added. RUNS: the 19 files naming the symbols 255 pass
+  of 265, the 10 red the same with the cure lifted (the join's paper rows 9, the seat's 1); the 20 fortune files 286
+  of 287 (R13); `tests/copy` 172 of 172; `tests/lint` 4 failed of 3,374 (the line's three and the title census, cured
+  by its door); the typecheck ratchets and eslint clean; no file on the golden-freeze register.
+  (2) READ BY THE CHAIR: the three source files' diff at 3b5a37a23, whole. **Decided (N108), sent after the clock read
+  14:51:22:** TAKEN; NO VETO on the predicate's place or on the door's re-take; F-JOIN goes on. ONE LINE OWED IN
+  FOR-THE-OWNER.md, in plain words: the fix also moves the DARK world: 3 of the 900 test towns lose two sentences on
+  two cards today, 4 with the laws on; the two sentences by their words.
+  (3) "13G x S", RULED AND SENT TO THE JOIN'S SEAT (for its lit unit and its hand-back). READ BY THE CHAIR at the
+  veil's tip: `publicSafe.js` :404 to :411 (207's root branch the same): a public read deletes `criminalCaptureState`,
+  strips `captureState` from every power row and DROPS WHOLE every relation row that carries `captureState` or is
+  typed `corrupted` ("never re-typed; the DM layer keeps them"). SO: AT THE LIT JOIN the veil's page reader
+  (`pageRederive.js :: rederiveStanding`) passes the SERVED `powerStructure.factionRelationships` in
+  `seat.factionRelationships`, and every never-there reference passes its own rows. ON A REVEAL DM READ the capture
+  rows are served, the reading is true and the two notes are omitted, as on the owner's page. ON A REVEAL OFF READ no
+  capture row is served, the reading is false and BOTH NOTES PRINT: THE PUBLIC PAGE IS THE PAGE OF A TOWN WHOSE HALL
+  WAS NEVER BOUGHT: the never-there form of a covert fact: A LISTED DIFFERENCE from the owner's stored description,
+  never a GAINED fault; "PAGES" lit classes it "COVERT CAPTURE", apart, by name. THE ARM, red first at the lit join:
+  the four lit births, every door, both Reveals (DM: no war note on either card, the description equal to the stored
+  one; off: both notes present and no served row carrying `captureState` or typed `corrupted`); any other birth that
+  gains or loses a note comes at once. **Why:** the stored description omits the notes BECAUSE of a fact a public read
+  hides; an open town with both powers prints a pair note on each card, so a public page that also omitted them would
+  tell the bought hall by their absence. NOTED: the owner's own player-view preview prints the stored description,
+  without the notes: it differs from the shared public page on those births: the same class as task 35 (one reader on
+  every page: his later choice). SAID TO THE OWNER in plain words.
+- 2026-11-23 15:10 UTC · N109 · "PAGES" (F): THE POWER TAB'S SHARE FIGURES MOVE ON A READ THAT HIDES NOTHING BY THE
+  HAND: THE CHAIR'S READING IS THE LANE'S OWN RULE VR31 (SHARES RE-DERIVED TO 100 WHERE THE PROJECTION WITHHOLDS A
+  HIDDEN POWER), TO BE CONFIRMED BIRTH BY BIRTH.
+  (1) VEIL-43 (queued 15:00:31; the builder's stop at 15:00; the run at 610 of 720 births): GAINED LINES, SENT AT
+  ONCE: four bare figures on Systems/Power (r2r-metropolis-29 "16", r2r-village-48 "56", r2s-infiltrated-city-2 "10",
+  r2s-infiltrated-city-3 "10"), and on the same pages EVERY share tile moved ("Contests the seat Military 16" against
+  "18"; "Holds power Government 33" against "38"); the restore-one-key loop names `powerStructure` (keyed on one of
+  the four); village-48's "56" pairs with a lost "34"; the other three have no lost twin on the tab (plausibly a
+  repeated line kept once per view). Also: "Law & order" band tiles paired as CHANGED; the server sample shows ORDER
+  lines only; the owner-only slot 0.
+  (2) READ BY THE CHAIR AT THE TIP: 212 :2317 to :2331 and `galleryRosterChoices.js` :149 to :156 (registry
+  `power.share`; VR11, VR31): wherever a power is withheld, whatever withheld it, and wherever the served shares do
+  not sum to 100 ("a power the projection itself withheld, a hidden one off a Reveal-DM read, leaves the stored shares
+  short of 100"), the served shares are re-derived to 100 by largest remainder. **Decided (N109), sent after the clock
+  read 15:01:21:** THE CHAIR'S READING, TO BE CONFIRMED BEFORE IT IS CLASSED: IT IS VR31, NOT A FAULT: the read hides
+  nothing by the hand, but at Reveal off the projection itself withholds a power stamped `hidden`; the owner's public
+  read then prints the stored shares, short of 100, which tells that an unseen power holds the rest; the veil prints
+  them re-derived (33 to 38 and 16 to 18 fit one factor). THE CONFIRMATION, per birth of the class: the stored record
+  holds a power the public projection withholds, with its share; the owner's public tiles sum short of 100 by that
+  share; the veiled tiles sum to 100; each veiled tile is the owner's by largest remainder. THE CLASS IS "VR31",
+  COUNTED APART on all 720, by birth. A FAULT, AT ONCE: a moved share on a birth where the projection withholds no
+  power; and the count of stored rosters of the 720 that do not sum to 100 with nothing withheld (the rule would
+  re-derive those too; expected 0). One sample more: the four births at Reveal DM: the veiled tiles equal the owner's
+  own page's. **Why confirm first:** the rule's second trigger (a served set that does not sum to 100) would also move
+  the figures of a town whose stored shares were born off 100, and that would be a fault of fidelity, not the rule at
+  work.
+- 2026-11-23 15:10 UTC · N110 · "PAGES" OVERRUNS ITS HOLD AND IS LET RUN; THE HOURLY CHECK OF 15:07.
+  (1) VEIL-43 (queued 15:07:01): PAGES OVERRUNS ITS 55 MINUTES: the builder's sharding put every fourth birth (the
+  restore sample) and every twenty-fourth (the server sample) on shard 0, so one shard carries the whole restore loop:
+  shards 1 to 3 ended at 14:59; shard 0 stood at about 104 of 180. ITS END by the seat's estimate: (F) about 16:05
+  UTC, then (N) about 13 minutes, the key-fill, then N109's samples in a second hold of about 5 minutes (built,
+  committed e64db9be0): ABOUT 16:30 IN ALL, about two hours of its mutex; every piece under the platform's two-hour
+  limit. Behind it: `tests/copy` whole (the join and the lane's tip), then "REDS-CAUSE". It asked whether to cut PAGES
+  at (F) and move (N) behind "REDS-CAUSE". **Decided (N110), sent after the clock read 15:07:21:** LET IT RUN; NO CUT;
+  the order stands. ONE ORDER: the sharding fault is cured in the instrument and noted in its brief before the lit run
+  of unit (3) (the sample spread over all shards). **Why:** the join is not on today's critical road (chains A, B and
+  C have not merged): two hours of its mutex cost nothing there, and a restart costs more.
+  (2) THE HOURLY CHECK, MADE AT 15:07 (three minutes before its reminder; one haiku helper, its clock 15:07:37 to
+  15:07:43, seven get_session calls): CLOSE-6 358,884 (14:08: 340,311); VEIL-40 458,250 (452,195; its record last
+  moved at 14:42: one long turn: stale-low); VEIL-41 528,563 (527,084); VEIL-42 449,024 (428,272); VEIL-43 501,405
+  (469,051: +32,354, the fastest); VEIL-44 393,102 (unchanged; its record last moved at 14:52: one long turn); PROSE-6
+  361,559, idle, its bucket "completed" (it waits). NO FIGURE FELL; all six seats' status "running", bucket "working";
+  every one configured, set and last served on claude-opus-5-5. READ AGAINST THE LINES: VEIL-43 passes 570,000 in
+  about two hours at this hour's rate: its hand-over falls after "REDS-CAUSE", at a step's end
+  (`prompts/DRAFT-START-VEIL-46.txt` is brought to N108 with this entry); VEIL-40's true figure is higher than its
+  stale one; VEIL-41 has 111,000 to its 640,000 and grew 1,479 in the hour.
+  (3) THE CHAIR'S PUSHES AND REMINDERS: the forty-seventh push (ca4bde9a7: N106, the reader's row 36, VEIL-48's draft
+  (d2)) ended exit=0 at 14:42:30 UTC (its log; ls-remote equal to the local tip). The reminder
+  trig_01YGHr43QZ7qTByhhu8Gde3x was RE-ARMED before it fired (the server's clock read 15:08:52 at the update): ITS
+  NEXT FIRING IS 16:10:00 UTC, its stored text re-written with the figures of 15:07 and what each seat owes. COMMITTED
+  WITH THIS ENTRY: the reader's row 37 (the hall capture's standing: "13G x S"); `prompts/DRAFT-START-VEIL-46.txt`:
+  (h) as ruled in N108, (k) the two voice-walker reds, (l) the class VR31 and the sharding fault.
