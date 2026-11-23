@@ -42,11 +42,10 @@ Beside each new line (pages):
 ## (c2) NO CELL LEFT EMPTY, 900 births: CHAIN 75 held, 0 empty; WEAK 353, 0; GARRISONED 153, 1. The one is dz-city-101 (crisis `occupied`), also empty at 244fa84ef.
 ## (d) DARK PROOF: both trees give sha256 `f2ecb50cc3d3ea579de0d07a67a4cd31498e03fee01c62a9a06dc740c65c05b9` over 900 births: EQUAL. 0 births differ, 0 strings differ.
 
-## (e) `tests/lint` WHOLE at 5cc9f0122: 3,364 tests, 5 red.
+## (e) `tests/lint` WHOLE at 91bb5a941: 3,364 tests, 4 red.
 - On RED-AT-LINE: proseCorpusBytes RAW, GZIP; proseComposed A0b.
-- NEW, **STOP**: proseMoveGrammar "CONTROL 4 — today's R1 leaves reproduce PROBE_ALL's two figures EXACTLY…" (`repeatedOpener` 167 → 166) and "CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E…" (`repeatedOpenerShare × 800` 155 → 154).
-  - Cause, inferred, not measured: the 03:55 re-wording of WEAK v1 removed one repeated opener ("{settlement} is", which v1 shared with v6).
-  - The file is not in the manifest, so it is NOT touched.
+- NEW, **STOP**: proseMoveGrammar "CONTROL 4 — today's R1 leaves reproduce PROBE_ALL's two figures EXACTLY…", on a third pin: `repeatedOpener / cells.size` toBeCloseTo(0.194, 3) now reads 0.1928 (166 / 861; it was 167 / 861 = 0.1940). It is not ruled, so it is NOT touched.
+  - The two pins the chair ruled at 05:01 moved in 91bb5a941: `repeatedOpener` 167 → 166, and the share pin `× 800` 155 → 154 ("CONTROL 4, SECOND HALF" is green). The cause: WEAK v1 now opens '{} has' where it opened '{} is' like v6.
 - Cured at the tip, each by its row below: factLayers, samenessHideable (the house list does not move after the withdrawal: not re-taken), wiringCensusDeclared, proseWiringCensus, proseEntryContradiction, proseWaveGate, observedShapeReaders, sovereigntyLighting.
 
 ## (f) THE NAMED FILES: 97 named, 79 kept (the 18 out are helpers, fixtures and registers). The 63 outside `tests/lint` were run with the tooth: 1,000 tests, 1 red, voiceMechanics, which is on RED-AT-LINE. crisisBlindDossierProse is green with nothing changed.
@@ -54,7 +53,7 @@ Beside each new line (pages):
 - proseComposed GUARD THE GUARD: 3176 → 3182.
 - proseWiringCensus VARIANT column: 3176 → 3182 (×3); mean '3.69' → '3.70' (3182 / 861); histogram 6: 40 → 39, 12: 1 → 2.
 - proseEntryContradiction: 3644 → 3650; 2936 → 2942 (×2).
-- proseWaveGate: 712 → 718.
+- proseWaveGate: 712 → 718. proseMoveGrammar CONTROL 4: 167 → 166, share × 800 155 → 154 (the chair, 05:01).
 - stateProseKernel: departure list n=6 40 → 39, n=12 1 → 2; append list n=12 1 → 2. One pool moved: DS-DEF-2 CHAIN, 6 → 12 variants.
 - Desk fixture: `fort` takes `foodBand`; the clause test passes 'pressured'.
 ## REGISTERS MOVED (each by its own door)
