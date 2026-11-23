@@ -130,7 +130,7 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
     expectNoSeedFailures(failures, 'C26792: no "widely questioned" beside an accepted seat');
   }, 300000);
 
-  it('(e2) C26792: the twin prints only beside an accepted seat (r2s-infiltrated-hamlet-0: accepted at the history step, Endorsed at the end)', () => {
+  it('(e2) C26792: the twin prints only beside an accepted seat (r2s-infiltrated-hamlet-0: accepted at the history step, Tolerated at the end)', () => {
     const twins = new Set(Object.values(LEGITIMACY_HELD_TWINS));
     const failures = collectSeedFailures(['r2s-infiltrated-hamlet-0', ...STRIDE], (seed) => {
       const s = born(seed);
@@ -138,10 +138,15 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
       expect(twinned.length === 0 || s.powerStructure.publicLegitimacy.isApproved === true).toBe(true);
     });
     expectNoSeedFailures(failures, 'C26792: no twin beside a seat the record does not call approved');
-    // the lit birth's value (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): r2s-infiltrated-hamlet-0 is Endorsed at the end lit (Tolerated
-    // before), so its tension takes the twin (was /openly and widely questioned/). No r2s-infiltrated-hamlet of 200 lit is
-    // accepted at the history step and unapproved at the end, so the case cannot be re-picked in its family.
-    expect(born('r2s-infiltrated-hamlet-0').history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/^Most here accept the current authority's right to rule, but some question it openly/); // KEEP: its twin, true there
+    // BORN UNDER LAW 1 (THE FLIP, CLOSE-6 F-FORTUNE-3, 2026-11-23; the chair's ruling, COMMON-RULES 14 (c)): this KEEP's case, a seat
+    // accepted at the history step and unapproved at the end, is extinct lit: it holds on none of 2,280 lit births searched (r2r
+    // 0..199 and r2s 0..11, all sizes; 8 accepted at the history step, none of them unapproved at the end). PLAUSIBLE, by reading:
+    // the fortune law's merits only add to the seat's standing after the history step (FLIP-LIST-B s.1: +10, no base score
+    // moves), so a seat read accepted there ends accepted. Under both laws at 1 the hamlet is accepted at the history step and
+    // Tolerated at the end (probed), so its own form, true there, prints. The lit STRIDE arm above is the guard lit.
+    const lawOne = generateSettlementPipeline({ ...cfgFor('r2s-infiltrated-hamlet-0'), _seatLawVersion: 1, _fortuneLawVersion: 1 }, null, { seed: 'r2s-infiltrated-hamlet-0', customContent: {} });
+    expect(lawOne.powerStructure.publicLegitimacy.label, 'anchored: under law 1 the seat ends Tolerated').toBe('Tolerated');
+    expect(lawOne.history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/openly and widely questioned/); // KEEP: its own form, true there
   }, 300000);
 
   it('(f) C26792: the history section regeneration derives the same line (the chair\'s condition 3)', () => {
