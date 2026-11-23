@@ -8,6 +8,25 @@ import { readdirSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
 const [DIR, POOL = '/var/tmp/v18/t2/pool-v43'] = process.argv.slice(2);
 const J = (v) => JSON.stringify(v);
 const rows = readdirSync(DIR).filter((f) => f.endsWith('.json')).map((f) => JSON.parse(readFileSync(`${DIR}/${f}`, 'utf8')));
+// THE SHORT LABEL (the probe pairs a lost and a gained line of one tab on a common prefix of 12 characters or more; a tile's
+// label can be shorter, "Law & order" is 11): here a leftover lost and gained line that share a prefix of 6 characters or
+// more, the longest first, pair as CHANGED; its key is a key that restores both lines
+const repair = (r, d, t, keyed) => {
+  const pre = (x, y) => { let k = 0; while (k < x.length && k < y.length && x[k] === y[k]) k++; return k; };
+  for (;;) {
+    let best = null;
+    d.lost.forEach((a, i) => d.gained.forEach((b, j) => { const k = pre(a, b); if (k >= 6 && (!best || k > best[2])) best = [i, j, k]; }));
+    if (!best) break;
+    const a = d.lost[best[0]]; const b = d.gained[best[1]]; d.lost.splice(best[0], 1); d.gained.splice(best[1], 1); d.changed.push([a, b]);
+    if (keyed && r.restoredBy) { const ka = r.restoredBy[`${t}\u0001L\u0001${a}`] || []; const kb = r.restoredBy[`${t}\u0001G\u0001${b}`] || []; const both = ka.filter((k) => kb.includes(k)); if (both.length) r.restoredBy[`${t}\u0001C\u0001${a}\u0001${b}`] = both; }
+    (r.repaired ||= []).push(`${t}: ${a} => ${b}`);
+  }
+};
+for (const r of rows) {
+  if (r.diff) for (const [t, d] of Object.entries(r.diff)) repair(r, d, t, true);
+  if (r.server?.diff) for (const [t, d] of Object.entries(r.server.diff)) repair(r, d, t, false);
+  if (r.reads) for (const v of Object.values(r.reads)) for (const [t, d] of Object.entries(v.diff)) repair(r, d, t, false);
+}
 const F = rows.filter((r) => r.lines || (r.error && r.i != null)); const N = rows.filter((r) => r.reads || (r.error && r.held));
 const stops = [];
 const ORDER = ['conditions.severity', 'defence.readiness.score', 'defence.scores', 'defence.economicGates', 'compound', 'safety.compound', 'food.storage', 'income.weight', 'economy.situationDesc', 'safety.capture/ratio/crimeTypes', 'safety.flags', 'history.timeline.anchored/year', 'history.event.anchored', 'history.legacy/siegeNarrative', 'npcs.stressNote', 'npcs.memberships.veiled', 'power.fingerprint', 'power.recentConflict', 'power.factions.niche/rawPower/legitimacyCrisis', 'power.relation.ratio', 'legitimacy.breakdown', 'legitimacy.multipliers/flags', 'power.stability', 'prose.economy.aliases', 'prose.glance', 'spatial.quarters', 'cast'];
@@ -51,6 +70,7 @@ for (const r of F.filter((x) => !x.error)) {
 const tot = (cls) => Object.entries(FT).filter(([k]) => k.endsWith(`|${cls}`)).reduce((a, [, n]) => a + n, 0);
 console.log(`\n(F) ${F.length} births, P0 lines ${nLines}, P1 lines ${nP1}, renders ${renders}; hand marker left something hidden on ${hidLeft} births`);
 console.log(`(F) TOTAL lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} / order ${tot('ORDER')} / moved ${tot('MOVED')} over ${nLines} P0 lines`);
+console.log(`(F) pairs made on a short label (6 to 11 characters): ${rows.reduce((a, r) => a + (r.repaired?.length || 0), 0)}${rows.flatMap((r) => (r.repaired || []).map((x) => ` | ${r.seed} ${x}`)).slice(0, 3).join('')}`);
 console.log(`(F) tabs only on P0 ${J(tabsOnly.P0)} | only on P1 ${J(tabsOnly.P1)}`);
 console.log('(F) BY TAB x CLASS');
 for (const [k, n] of Object.entries(FT).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(48)} ${n}`);
