@@ -20,5 +20,8 @@ s_bt140() { step bt140 sh -c "cd $WIP && $MX env MEAS_BIJ=0 MEAS_DOORS=gallery,l
 s_bm140() { step bm140 sh -c "cd $WIP && $MX env MEAS_BIJ=0 MEAS_DOORS=gallery,link sh $P/meas.sh $TIP $O/bm140 v42tip stored $SM"; }
 s_pool() { until poolready; do sleep 60; done; step pool sh -c "cd $WIP && $MX env MEAS_C=1 MEAS_DOORS=gallery sh $P/meas.sh $WIP $O/pool v28tpl pool $POOL"; }
 s_bpool() { step bpool sh -c "cd $WIP && $MX env MEAS_BIJ=0 MEAS_DOORS=gallery sh $P/meas.sh $TIP $O/bpool v42tip pool $POOL"; }
-for n in ${@:-a7 ctrl dumps t140 pool m140 bt140 bm140 bpool}; do s_$n; done
+s_umtoday() { step umtoday sh -c "cd $WIP && $MX env UM_U=1 UM_M=1 sh $P/um.sh $WIP $O/umtoday v28tpl stored $ST"; }
+s_ummaster() { step ummaster sh -c "cd $WIP && $MX env UM_U=1 UM_M=1 sh $P/um.sh $WIP $O/ummaster v28tpl stored $SM"; }
+s_umpool() { step umpool sh -c "cd $WIP && $MX env UM_M=1 sh $P/um.sh $WIP $O/umpool v28tpl pool $POOL"; }
+for n in ${@:-a7 ctrl dumps t140 pool umtoday ummaster umpool m140 bt140 bm140 bpool}; do s_$n; done
 echo "END $(date -u +%H:%M:%S)" >> $L

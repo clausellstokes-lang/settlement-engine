@@ -1,0 +1,24 @@
+documents 2; all done true; faults 0
+U: documents read unmarked at Reveal off: 2; whose stored prominentRelationship is a covert copy: 1; whose pressureSentence is: 0
+  gallery data | prominentRelationship present (any place): 1 of 2
+  gallery data | prominentRelationship present where it is a COVERT copy: 0 of 1
+  gallery page (fetchPublicDossier) | prominentRelationship present (any place): 1 of 2
+  gallery page (fetchPublicDossier) | prominentRelationship present where it is a COVERT copy: 0 of 1
+  import data | prominentRelationship present (any place): 1 of 2
+  import data | prominentRelationship present where it is a COVERT copy: 0 of 1
+  import page (fetchDossierForImport) | prominentRelationship present (any place): 1 of 2
+  import page (fetchDossierForImport) | prominentRelationship present where it is a COVERT copy: 0 of 1
+  link dossier | prominentRelationship present (any place): 1 of 2
+  link dossier | prominentRelationship present where it is a COVERT copy: 0 of 1
+  map member | prominentRelationship present (any place): 2 of 2
+  map member | prominentRelationship present where it is a COVERT copy: 1 of 1
+  map page (fetchGalleryMap) | prominentRelationship present (any place): 2 of 2
+  map page (fetchGalleryMap) | prominentRelationship present where it is a COVERT copy: 1 of 1
+   {"gallery served marker: NONE":2}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"map member","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business.\",","equalToStored":true}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"map page (fetchGalleryMap)","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business.\",","equalToStored":true}
+M (on the projection): documents 2, reads 96; owner pages' cast persons 6 (nameless 0, no card 0, shared keys 0); served cast person-reads 288
+  (i) shared (name, crisis, role) keys: 0; (ii) served name differs: 0; (iii) nameless: 0; unmapped served cast ids: 0
+  gallery twin: {"reads":48,"i":0,"ii":0,"iii":0,"unmapped":0}
+  link twin: {"reads":48,"i":0,"ii":0,"iii":0,"unmapped":0}
+  STOPS listed: 0

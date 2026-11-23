@@ -1,0 +1,22 @@
+documents 2; all done true; faults 0
+U: documents read unmarked at Reveal off: 2; whose stored prominentRelationship is a covert copy: 2; whose pressureSentence is: 0
+  MARKED (default) gallery data | prominentRelationship present where it is a COVERT copy: 0 of 2
+  MARKED (default) map member | prominentRelationship present (any place): 2 of 2
+  MARKED (default) map member | prominentRelationship present where it is a COVERT copy: 2 of 2
+  gallery data | prominentRelationship present (any place): 0 of 2
+  gallery data | prominentRelationship present where it is a COVERT copy: 0 of 2
+  gallery page (fetchPublicDossier) | prominentRelationship present (any place): 0 of 2
+  gallery page (fetchPublicDossier) | prominentRelationship present where it is a COVERT copy: 0 of 2
+  import data | prominentRelationship present (any place): 0 of 2
+  import data | prominentRelationship present where it is a COVERT copy: 0 of 2
+  import page (fetchDossierForImport) | prominentRelationship present (any place): 0 of 2
+  import page (fetchDossierForImport) | prominentRelationship present where it is a COVERT copy: 0 of 2
+  link dossier | prominentRelationship present (any place): 0 of 2
+  link dossier | prominentRelationship present where it is a COVERT copy: 0 of 2
+  map member | prominentRelationship present (any place): 2 of 2
+  map member | prominentRelationship present where it is a COVERT copy: 2 of 2
+  map page (fetchGalleryMap) | prominentRelationship present (any place): 2 of 2
+  map page (fetchGalleryMap) | prominentRelationship present where it is a COVERT copy: 2 of 2
+   {"gallery served marker: NONE":2}
+  e.g. {"seed":"r3m-city-none-1-107","door":"map member","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar Claw Tut\",\"npc2\":\"Xiuhcoatl Chel\",\"type","equalToStored":true}
+  e.g. {"seed":"r3m-city-none-1-107","door":"map page (fetchGalleryMap)","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar Claw Tut\",\"npc2\":\"Xiuhcoatl Chel\",\"type","equalToStored":true}

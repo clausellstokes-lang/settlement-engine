@@ -43,6 +43,10 @@ value for value, no bijection, at the tip.
   Master-born and pool: to follow.
 - A's aside (control documents only): 212 :: `_gallery_veil_roster_choices` :2318-2337 writes a `power` share onto master-shape
   top-level `factions[]` entries that carry none (a NULL comparison in its guard); the twin does not (33 reads).
+- U (the chair's item, 08:45): `U-UNMARKED.md`. FIRST READING (2 of the 7, CONFIRMED there): THE MAP MEMBER SERVES THE COVERT
+  TIE'S COPY in `prominentRelationship` (unmarked AND marked shares, Reveal off), and `fetchGalleryMap` keeps it; 211 ::
+  `get_gallery_map` never runs `_gallery_apply_member_overrides` (the covert CASE's one home). Gallery, import, link: 0. Full sets queued.
+- M-TWIN (the chair's item, 08:45): `um.probe.jsx` (UM_M=1); trial on 2 places: (i) 0, (ii) 0, (iii) 0, unmapped 0. Runs queued.
 - B: `B-WHOLEDOC.md` (not yet read).
 
 ## LEFT (exact commands)
