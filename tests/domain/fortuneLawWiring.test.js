@@ -270,7 +270,8 @@ describe('the fortune law (FS5) is WIRED and lands DARK', () => {
     expect(header).toMatch(/NEVER LIT BEFORE THE SEAT'S LAW/);
     expect(header).toContain('src/domain/seat/seatLaw.js');
     expect(header).toMatch(/A WORLD BORN BEFORE THE LIGHT NEVER CHANGES/);
-    expect(header).toMatch(/\bDARK\b/);
+    // the lit header (the flip, 2026-11-23): this arm matched /\bDARK\b/ until that day; it pins the order the words now state
+    expect(header).toMatch(/LIT WITH THE SEAT'S LAW, IN ONE COMMIT, NEVER BEFORE IT/);
     // The leaf imports nothing: no cycle can form through it. The liveness anchor first: the
     // text read is the leaf itself (it declares the mint), so an absent import is the leaf's.
     expect(text).toMatch(/^export function newSettlementFortuneLaw\(\)/m);
