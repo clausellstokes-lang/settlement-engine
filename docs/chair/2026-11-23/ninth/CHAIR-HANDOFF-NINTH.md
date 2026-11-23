@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 07:08 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 07:23 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -38,9 +38,10 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
 - STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`: POINT 106 "DAILY-B"
   (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109 "PRONOUN" (4fa51f422), "DOORS"
   5e63f2603; POINT 110 "PROSE-D" (ab6e2f53f; "DOORS ab13c0e70" at 06:26, READ ON ORIGIN; its tree equals the chair's
-  trial merge). ADDED AND NOT YET REPORTED MERGED: POINT 111 "PRONOUN-2" 119f419bf (06:42: N60) and POINT 112
-  "PROSE-D-2" b443be64b (06:50: N62): EACH READ WHOLE, TRIAL-MERGED AND RUN BY THE CHAIR (38 of 38; 92 of 92). NOTHING
-  ELSE IS COMING. IT OWES: the two merges, the 97-file set and `tests/copy` whole (zero red expected), `tests/lint`
+  trial merge). POINT 111 "PRONOUN-2" MERGED f3196d774 (07:15; READ ON ORIGIN: its tree equals the chair's trial
+  merge; no door moved; `voiceMechanics` ALL GREEN; 3 red left in its set: one listed, two waiting for 112). POINT 112
+  "PROSE-D-2" b443be64b ADDED (N62) AND BEING MERGED. BOTH WERE READ WHOLE, TRIAL-MERGED AND RUN BY THE CHAIR (38 of
+  38; 92 of 92). NOTHING ELSE IS COMING. IT OWES: point 112's merge, its set and `tests/copy` whole, `tests/lint`
   whole, "DOORS", ONE BUILD AND `tests/build` AT THE FINAL TOP, its final message. THEN THE CHAIR LANDS (E130's form):
   verify origin's stack tip and the first-parent chain beyond ab13c0e70; read `raised-top.txt` whole; in
   `/home/user/wt/line` make the local branch `lane/join-2026-11-14` at 244fa84ef, `git merge --no-ff <tip>` (the
@@ -54,8 +55,13 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
   RULED N56: that one raise is dropped and NAMED for the owner; commit 0 is 15 budgets in 14 files; A STANDING RULE:
   an edit that moves a frozen surface's bytes is dropped from its commit and named for the owner. "PRONOUN-2 119f419bf"
-  IS BUILT AND IS POINT 111 (N60). THE FLIP'S COMMIT 0 IS f6cbaee69 (15 budgets in 14 files); builder F1 (the dials)
-  is next. It owes one line after each commit. It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
+  IS BUILT AND IS POINT 111 (N60). THE FLIP SO FAR: COMMIT 0 f6cbaee69 (15 budgets in 14 files); COMMIT 1 2bc483fc8
+  (THE THREE DIALS LIT; `powersList` to layer 4; the two whys as ruled; READ BY THE CHAIR ON ORIGIN: N65). RULED N66:
+  the goal-hash arm is a DIFFERENTIAL against a tree with no law code: it is born under law 1, its reference's own
+  law, and its fixture moves by no byte; "no goal sentence twice" is held on the lit births too; A DOOR THAT WOULD
+  RE-RECORD A DIFFERENTIAL'S REFERENCE FROM THE FLIPPED TREE IS NEVER RUN. OWED BEFORE "FLIP <commit>": one commit of
+  its own re-wording `fortuneLaw.js`'s "THE LAW IS DARK" paragraph with `fortuneLawWiring` arm 7. Next: the page
+  census door, then the hand anchors by lane. It owes one line after each commit. It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
   DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: A DRAFT WITH FIVE BLANKS, NOT A START MESSAGE). The owner's
   signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
 - PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" is point 110 and "PROSE-D-2 b443be64b" point 112 (N56,
@@ -65,12 +71,15 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   read whole by variant; the cure proposed for each TRUE variant pair): THE CHAIR READS AND RULES THE LINES; it builds
   only after that AND after "THE LINE IS <commit>", on `lane/prose-6-2026-11-23-e-wip` cut at the line's new tip.
 - VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
-  `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); its
-  machine and pool re-made; BOTH GATES EQUAL TO THE STANDING FIGURES (06:57). RUNNING: builder R4I-MEASURE (the three
-  measures "77" with the pool's 352, "WHOLE-DOC" at the tip's own code, "GAP": each sent to the chair; ON "WHOLE-DOC"
-  THE CHAIR RULES THE WHOLE-DOCUMENT FORM INTO EVERY UNIT'S PROOFS) and, by N59, builder R4I-TONIGHT-2 beside it
-  (disjoint manifests; one heavy run at a time). THEN R4I-SQL-2 from the measure's lists, the queue, "WRITER-REACH",
-  the proofs, "TIP? R4-IDS".
+  `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); BOTH
+  GATES EQUAL TO THE STANDING FIGURES (06:57). MEASURE "77" ON THE 7 PLACES (07:21): THE RPC's DOCUMENT AGAINST THE
+  TWIN'S PROJECTION: 0 DIFFER; the 84 differences were M's INSTRUMENT (its twin row was a raw stored record, read by
+  the client's pre-211 branch): N47's STOP IS LIFTED WHEN THE SAME READS 0 ON THE 140 AND THE POOL (N69). "GAP": its
+  positive control bites, and a THIRD un-re-keyed path is found (`factions[].members[].allegiance.handler`). RUNNING:
+  builder R4I-MEASURE (the rest of "77", "WHOLE-DOC" at the tip's own code, "GAP": ON "WHOLE-DOC" THE CHAIR RULES THE
+  WHOLE-DOCUMENT FORM INTO EVERY UNIT'S PROOFS) and builder R4I-TONIGHT-2 beside it (N59). IT OWES ALSO: one line on
+  whether M's three counts read that twin row; one line on whether any read door of 212 returns an unmarked row.
+  THEN R4I-SQL-2 from the measure's lists, the queue, "WRITER-REACH", the proofs, "TIP? R4-IDS".
 - VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A, R5-DESC; start message `prompts/START-VEIL-40.txt`): "5b MEASURE"
   CAME AT 06:57 AND RULING 107 (3) IS CLOSED (N63): THE RIVAL LEAVES WITH ITS HOST (a row minted against a withheld
   power is withheld the same way at each door; one rule in both engines; the never-there reference takes the same
@@ -78,11 +87,18 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   served rival has its host served beside it"; A NEW POOL: IF EITHER GATE IS WORSE IT STOPS AND THE CHAIR RULES). IT
   ALSO OWES: one line on what the owner's screen shows for a rival whose host is hidden (the chair then rules the
   screen); phase 2 (the legacy arm, the stored arm, the share class's four conditions) with two new measures (5d, 5e).
-  No "TIP? R5-DESC" before. Its code branch `lane/veil-40-2026-11-23-r5desc-wip` holds PIN-2 (9b1fe3c34).
-- VEIL-41 session_01FbPLbd3QgeKoNgJK2yVomF (chain C; start message `prompts/START-VEIL-41.txt`): stands on 5971496d4
-  and the tip; its machine is being re-made (about 110 minutes from 05:30). RULED N53: `prose.incomeWeight` re-hosted
-  with the 23; `prose.criminal` left. IT OWES: RED FIRST; "VS1 CAUSE" with the candidates; one builder for "C2-BUILD
-  (a')"; THE PROOF BY VALUE on the 1,948 stored documents; then "TIP? STORED-PROSE <commit>".
+  No "TIP? R5-DESC" before. Its code branch `lane/veil-40-2026-11-23-r5desc-wip` holds PIN-2 (9b1fe3c34). AT 07:15:
+  R5D-RIVAL IS DISPATCHED on `lane/veil-40-2026-11-23-r5rival-wip` (brief a079f6fbd) and R5D-PAGE-B2 (tests only)
+  runs beside it; then B3.
+- VEIL-41 session_01FbPLbd3QgeKoNgJK2yVomF (chain C; start message `prompts/START-VEIL-41.txt`): RED FIRST CONFIRMED
+  at the tip (07:16: the twin 46,752 of 46,752 reads carry `publicProse`; the server 4,800 of 4,800 at each of three
+  doors on 200 documents; the walker's 26). Its builder builds "C2-BUILD (a')" with N53's two rows. THE GREEN PROOF
+  RUNS ONCE, WHOLE, ON THE BUILT TREE (about two hours of its mutex) AND RECORDS, FOR EVERY READ, THE HASH OF THE
+  SERVED DOCUMENT AND OF THE TWIN'S PROJECTION (N67: the material for the whole-document form; VEIL-40's pool proofs
+  record the same). "VS1 CAUSE" CAME AND ITS CURE IS RULED (N68): "PIN-3", test-only, one commit on the tip: the tooth
+  moves to `safety criminalInstitutions`, with one new assertion that its key is withheld always by no row. IT OWES
+  "TIP? PIN-3 <commit>" AT ONCE WHEN PROVED (the chair grants; it pushes `lane/veil-41-2026-11-23-tip`; THE CHAIR
+  NAMES THE NEW TIP TO THE THREE CHAINS), then "TIP? STORED-PROSE <commit>".
 - EVERY VEIL UNIT'S PROOFS NOW ALSO HOLD (told to VEIL-40 and VEIL-41 right after VEIL-42's seating; it is in VEIL-42's start message): `tests/copy`
   WHOLE; and, for any line or string a unit re-words or removes, a grep of `tests/` for the old words (N54, N57).
 - DONE, AND MESSAGED NO MORE: DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT ("DAILY-C 8036cfe71" is point 108); CLOSE-4
@@ -115,7 +131,9 @@ UTC: without it the chair pushes the working line by E130, its own check judges,
 EACH SAID TO HIM IN PLAIN WORDS: (a') a shared page carries no state sentences in the first deploy (N49); A RIVAL IS
 HIDDEN WITH THE FACTION IT WAS CREATED AGAINST, so he cannot show a rival while hiding its host (N63); THE FOUR MORE
 SENTENCE PAIRS ARE CURED BEFORE THE DEPLOY IF READY, never gating it (N64). STILL HIS TO SAY: whether the five double
-possessives are cured before the first deploy. NAMED FOR HIS SIGNING SO FAR, SIGNED BY NOBODY: the generation
+possessives are cured before the first deploy. FOR THE DEPLOY DAY, SAID TO HIM (N69) AND OWED TO THE NOTES PREPARED
+FOR HIM: THE DATABASE CHANGES (204 TO 212) GO IN BEFORE THE PAGE (the pull request's merge and the deploy): a new page
+on an old server reads shared pages as today, one covert tie's copy included. NAMED FOR HIS SIGNING SO FAR, SIGNED BY NOBODY: the generation
 worker's size (+4,131 at 5e63f2603), the engine chunk's (+214), the three listed size reds of the state sentences
 (moved again by "PROSE-D"), and one budget raise in a file the golden-freeze register freezes (N56).
 
@@ -1204,8 +1222,8 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   GATES EQUAL TO THE STANDING FIGURES (GATE-1 4 of 92 at every gated setting, both reads, twin 4 and server 4, LOWER
   BY RULE 7; GATE-2 20; controls 0 of 48); R4I-TONIGHT-2 dispatched with the chair's two conditions in its brief's
   addendum (015b3c020); R4I-MEASURE running.
-- 2026-11-23 07:08 UTC · N63 · "5b MEASURE": THE ROSTER IS THE TELL; RULING 107 (3) CLOSED: THE RIVAL LEAVES WITH ITS HOST (ruled at
-  about 07:00 UTC; said to the owner with his veto the same turn). VEIL-40's line of 06:57 and builder B's report
+- 2026-11-23 07:08 UTC · N63 · "5b MEASURE": THE ROSTER IS THE TELL; RULING 107 (3) CLOSED: THE RIVAL LEAVES WITH ITS HOST (ruled between
+  VEIL-40's line of 06:57 and this entry; said to the owner with his veto the same turn). VEIL-40's line of 06:57 and builder B's report
   (`out/v40/r5dpage-b/R5DPAGE-B-5B-MEASURE.md` at f0a896d73 on its code branch, 166 lines: READ WHOLE BY THE CHAIR).
   THE MEASURE: A's full pool 140, R5-RECENT's full pool 480 and act T; 346 density rivals (a stored row with
   `contestsNiche`; its host is the row whose `seatKey` is that niche; template T12 where its base is one of
@@ -1243,7 +1261,7 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   NOTHING WHERE THE NEVER-THERE PLACE IS ITSELF A ROSTER NO OPEN PLACE SHOWS: Q2's question is asked of every row
   that exists only because of another.
 - 2026-11-23 07:08 UTC · N64 · THE WIDER MEASURE OF SENTENCES THAT DISAGREE: FOUR MORE PAIRS; UNIT "PROSE-E", NEVER GATING THE DEPLOY
-  (ruled at about 07:10 UTC; the table put to the owner in plain words with his veto the same turn). PROSE-6's line of
+  (ruled between PROSE-6's line of 07:05 and this entry; the table put to the owner in plain words with his veto the same turn). PROSE-6's line of
   07:05: E132's item (4) is pushed, measure only (`map/DISAGREE-ITEM4.md` at 0f7ba293f, 43 lines: READ WHOLE BY THE
   CHAIR). 151 cells classed LACK or SUFFICIENCY over five fact families; 25 cell pairs print together on the 900
   births; FOUR READ TRUE BY VARIANT (nine variant pairs), ON 38 OF 900 PAGES, A LOWER BOUND (at most eight variant
@@ -1267,3 +1285,91 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   `intake/AFTER-FIRST-DEPLOY.md` item 15, where the pairs read NOT and the unread pages stay in any case.
   THE HOURLY CHECK: THE NEXT IS trig_011HB6RMHZ1zbZr1adHa1hBy at 07:43 UTC (the task of 06:46 fired and is answered
   by N61). THE CHAIR'S TWENTY-THIRD PUSH (937d0a024) ENDED exit=0 at 06:47:42 UTC: CONFIRMED.
+- 2026-11-23 07:23 UTC · N65 · THE FLIP's COMMIT 1: THE THREE DIALS ARE LIT ON THE FLIP BRANCH. CLOSE-5's line of 07:10: 2bc483fc8 on
+  `lane/close-5-2026-11-23-flip` (parent f6cbaee69; 13 files, +203 -135; pushed through the hook's fast lane):
+  `NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION`, `SEAT_CONTEST_LIT = true`,
+  `NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION`; `powersList` to layer 4 with its reads;
+  the two whys in the ruled words; arm 4 re-pinned with its tooth; the 14 dial pins turned; the configs of Q3 and Q4.
+  Its builder: 12 proof files 14 red before (exactly the dial pins), 120 of 120 after; `tests/lint` whole the line's
+  three. The seat's own re-run at the commit: 12 files, 120 of 120 green lit; mint 2 of 2. NO FROZEN SURFACE TOUCHED.
+  READ BY THE CHAIR ON ORIGIN: the five src files' changed lines whole and `seatContest.test.js`'s hunk. ITS ONE
+  JUDGEMENT ACCEPTED: lit, arm (5) holds the three contenders BY NAME (Noble Houses, Temple of the Dawn, Craft Guilds:
+  the hidden Quiet Circle leaves), each kind by the contest's own read, each weight by the old law's arithmetic (power
+  x its kind's coercion, every factor 1), AND the old law's own weight for the two powers whose kind did not move: no
+  weaker than "every weight = the old law's", which cannot hold once the kind read moves a power in and one out.
+  LEFT AND NAMED by it: present-tense "dark" comments off the brief; describe titles "... lands DARK";
+  `fortuneLaw.js`'s "THE LAW IS DARK" paragraph, kept because `fortuneLawWiring` arm 7 reads it. **Decided:** that
+  paragraph and arm 7 are re-worded TOGETHER, red first, in one commit of their own before "FLIP <commit>". **Why:** a
+  shipped header that says the law is dark while the dial is lit is a false sentence in the product's own source.
+- 2026-11-23 07:23 UTC · N66 · A DOOR THAT WOULD HAVE EMPTIED A GUARD: THE GOAL-HASH ARM IS BORN UNDER ITS REFERENCE'S OWN LAW.
+  CLOSE-5's STOP of 07:11, no commit: `goalSentencesOnceInTown`'s six reds are each tier's `it`, which holds (p) "no
+  goal sentence is printed twice in a town" AND (u) A DIFFERENTIAL against `goal-hashes-d3937c3f8.json`, written once
+  from an archive of d3937c3f8, the tree BEFORE the goal cure (every card's goals equal that tree's but for the cure's
+  own repeats and refusals; the rosters are that tree's). d3937c3f8 HAS NO LAW CODE, so lit the rosters differ and
+  (u) reds. The census called it a door; re-recording the fixture from the flipped tree would make (u) compare the
+  goals with themselves. **Decided:** (u) is born under law 1 (both laws forced to 1 in that arm's own config), its
+  two clauses as written; THE FIXTURE MOVES BY NO BYTE AND THE DOOR IS NOT RUN; (p) is held on the product's LIT
+  births and also on the law-1 births (u) makes anyway; the budget in commit 0's form in the same commit; F-SEAT's
+  builder makes it, red first; if that test file is a frozen surface it is a STOP (it cannot be dropped: six reds
+  would stand). **Rejected:** the whole `it` under law 1 ((p) would stop guarding what ships); the door (an empty
+  guard). A STANDING RULE FOR THE FLIP's DOORS: A DOOR THAT WOULD RE-RECORD A DIFFERENTIAL'S REFERENCE FROM THE
+  FLIPPED TREE IS NEVER RUN (the arm is born under its reference's own law; each case said after its commit); a door
+  that re-takes a REGISTER of what the tree holds is run as planned. **Reversal:** the arm's config is one test's.
+- 2026-11-23 07:23 UTC · N67 · CHAIN C's RED FIRST; ITS PROOF RUNS ONCE AND RECORDS THE WHOLE-DOCUMENT HASHES. VEIL-41's line of
+  07:16, at the tip 23bb8b8ae (template `v27x211` + the tip's 212), on the 1,948 stored documents re-made on its
+  machine, at every setting plus the unmarked share, both Reveals: THE TWIN: 46,752 of 46,752 reads carry a
+  `publicProse` key (all 1,948 documents); THE SERVER, at three doors (the gallery page, the unlisted link, the import
+  as a non-owner) on 200 documents: 4,800 of 4,800 each; the composed-hosts walker 26 red (23 `prose.*`, 3
+  `power.*`). ITS COST NOTE: the server's doors take about 4 s a document a shard, so the whole server proof is about
+  two hours of its mutex; the twin about 23 minutes. **Decided:** (1) THE GREEN PROOF STAYS WHOLE (1,948 documents,
+  every setting, both Reveals, three doors and the twin) AND RUNS ONCE, on the built tree, in shards under one mutex
+  hold; its 200-document red stands as the red; (2) THE SAME RUN RECORDS, FOR EVERY READ, the sha256 of the served
+  document's canonical form and of the twin's projection's, in one table, and keeps whole the first 50 pairs that
+  differ: THE MATERIAL FOR THE WHOLE-DOCUMENT FORM (N48), judged by nobody yet; the count of differing reads is said
+  in its "TIP?" line; (3) the read-stored gates once on the tip tree and once on the built tree. THE SAME ADDITION
+  WAS SENT TO VEIL-40 for its pool proofs. **Why:** one long run instead of two once the whole-document form is ruled.
+  **Reversal:** the table is ignored. VEIL-40 at 07:15: R5D-RIVAL dispatched on `lane/veil-40-2026-11-23-r5rival-wip`
+  (brief a079f6fbd, as N63 orders) and R5D-PAGE-B2 (tests only) beside it; PART 42 at 8335ac913.
+- 2026-11-23 07:23 UTC · N68 · "VS1 CAUSE" CONFIRMED BY BISECT; ITS CURE RULED ("PIN-3"). VEIL-41's line of 07:17: green 770080aca,
+  red 929739889; inside that merge green fb320eded, red c2625fb1f (unit (viii)'s merge): unit (viii) made
+  `safety.crimeTypes` a built withhold-always row, so the test's served form never holds the tooth's key and the
+  tooth is tried 0 times on all 24 copies (12 births, plain and DM); the capture tooth stays live (24 of 24). THE
+  CANDIDATES served at the tip and withheld always by no row (births of 12, copies of 24): `safety
+  criminalInstitutions` 12 and 24; criminal services 12 and 24; capture state 12 and 12; and seven thinner ones.
+  **Decided (the chair's lean of N53, and the seat's):** "PIN-3": TEST-ONLY, ONE COMMIT ON THE TIP, on
+  `lane/veil-41-2026-11-23-pin3-wip`, by a small builder of its own beside C2's (one file,
+  `tests/domain/display/criminalVeilSwitch.test.js`): (1) the "other" tooth moves to `safety criminalInstitutions`;
+  (2) the liveness anchor's message says its true premise; (3) ONE NEW ASSERTION: the tooth's path is matched by no
+  row of the registry's withhold-always rows, so the next unit that withholds the tooth's key gets the cause, not
+  "tried 0"; (4) the comment re-worded. ITS PROOFS: red first (tried 0), green (24 and 24), one mutation run not
+  committed, the file whole, the 34-file set (0 red expected at the tip after it), `tests/lint` whole beside the
+  tip's 48. THEN "TIP? PIN-3 <commit>" AT ONCE: the chair grants, it pushes `lane/veil-41-2026-11-23-tip`, the chair
+  names the new tip to the three chains. **Why a tip move of its own:** a liveness anchor at 0 checks nothing; a tip
+  with no red of its own makes every chain's 34-file run read 0; PIN-2's precedent. **Reversal:** one test commit.
+- 2026-11-23 07:23 UTC · N69 · MEASURE "77" ON THE 7 PLACES: THE SERVER EQUALS THE TWIN'S PROJECTION; THE SURPRISE WAS THE
+  INSTRUMENT; THE CLIENT'S PRE-211 BRANCH IS NAMED, NOT CURED; A DEPLOY-ORDER LINE FOR THE OWNER. VEIL-42's line of
+  07:21 (its measure builder's f4b6c98d1, `out/v42/meas/A-77.md`): 168 server reads on the 7 places. L1, the RPC's
+  document against the twin's projection modulo the bijection: 0 DIFFER, at the gallery and the link. L2, M's own
+  level through `fetchPublicDossier`: 84 differ (M's 77 and the unmarked setting M did not read), all at Reveal off,
+  ONE PATH WHOLE: `prominentRelationship`. THE CAUSE: M's probe built its twin row from the raw stored record with
+  NO served marker, so the client read it by its pre-211 branch (`src/lib/gallery.js :: sanitizeDossier`:
+  `toPublicSafe(restampServedMemberships(...))`), which never applies `withholdCovertCopies`; the twin's projection
+  and 212's covert case both drop a covert tie's copy at Reveal off. NOT 212, NOT R4-IDS, NOT THE GAP. READ BY THE
+  CHAIR at the tip: `sanitizeDossier` :833 to :884 (`served ? source : toPublicSafe(...)`): the unserved branch is how
+  the page reads a server before 211, which is production today. "GAP": its positive control bites on master's
+  shape at Reveal DM on both engines, and A THIRD PATH is found: `factions[].members[].allegiance.handler`.
+  **Decided:** (1) N47's stop is LIFTED when L1 reads 0 on the 140 and the pool too; M's three counts stand only if
+  they do not read that twin row (one line owed); (2) THE CLIENT'S UNSERVED BRANCH IS NOT CURED IN R4-IDS: once 204
+  to 212 are applied every read is served and marked; it takes a row on the security reader's list, A DEPLOY-ORDER
+  LINE FOR THE OWNER (THE DATABASE CHANGES GO IN BEFORE THE PAGE: said to him in plain words the same turn; owed to
+  the notes prepared for him), and its retirement or fail-closed form is the join's to propose; (3) one small
+  measure for that row: does any read door of 212's catalogue closure return a row without the served marker; (4)
+  M's probe compares against the twin's projection from now on, and every other use of that raw twin row is named
+  and corrected (R4I-TONIGHT-2's arm among them); (5) "GAP" goes on to R4I-SQL-2's brief. **Why no cure now:** the
+  branch is dead once 212 serves; a fail-closed client is a design choice for the join. **Reversal:** the join may
+  take it sooner. STACK-106 at 07:15: POINT 111 MERGED f3196d774 (no conflict, two files, no door moved; READ BY THE
+  CHAIR ON ORIGIN: its tree 2ec3d392f… EQUALS THE CHAIR'S OWN TRIAL MERGE); its set and `tests/copy` whole: 101
+  files, 1,836 tests, 3 red (`generationForkCensus` A1, listed; the two pins that wait for 112); `voiceMechanics` ALL
+  GREEN; `tests/lint` whole 3 red, listed. It is merging point 112. THE CHAIR'S TWENTY-FOURTH PUSH (576f196a8) ENDED
+  exit=0 at 07:11:46 UTC: CONFIRMED from its log and by ls-remote. TWO HOUR LABELS OF N63 AND N64 THAT WERE NOT READ
+  FROM THE CLOCK ARE CORRECTED IN THIS COMMIT (each now names the two events it stood between).
