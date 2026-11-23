@@ -55,3 +55,13 @@ Run `npm run build`, then `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLaz
 As R4I-PAGE-2's brief says. STOP EARLY with what is left at about 250,000 tokens, everything committed and the hand-back current.
 
 YOUR LAST MESSAGE: at most 250 words. Give your last commit; G1's re-stated count and the 34 files' red count; G2's table by class; A's tooth figures; each arm's red and green; ST's figures; `tests/lint` whole's count; the build's figures; CONFIRMED vs PLAUSIBLE.
+
+## ADDENDUM (VEIL-38, 01:05 UTC; the chair's ruling 40.3 of 01:01 UTC). WINDOW: about 2.5 hours. It reads nothing more whole.
+- (4) `pgliteHookTimeoutRatchet` is RULED: a test-only cure inside R4-IDS.
+  - At `tests/security/galleryVeilIds.pglite.test.js`, the regex R4I-PAGE wrote with `\(` inside the `beforeAll` (about line 205) gets `\x28` in place of `\(`.
+  - Put ONE comment on the line above saying why: the ratchet's paren matcher reads `\(` as an open paren.
+  - No figure of the ratchet moves.
+  - Show `pgliteHookTimeoutRatchet` RED at b088fcfc5 and GREEN after, then run `tests/lint` whole.
+  - Do it with item A, in the same file, as its own commit.
+- S2 (`tests/lib/gallery.test.js` "a share marked with a veil renders through it") is CLASSED "red at af708f2fd, the chair's" by its title. The chair gives its cause to the tip's holder.
+- `tests/security/shareRenderTwice.pglite.test.jsx` is NOT YOURS. A second builder, R4I-TONIGHT, owns it, together with `summary/tonightSheet.js`, `coherence/crisisFactFindings.js` and every test that pins a "Wants to" line. In G2, class `shareRenderTwice`'s reds and leave the file untouched. Do not re-run it as one of your arms.

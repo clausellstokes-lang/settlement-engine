@@ -37,6 +37,7 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 
 ### (2) IN FLIGHT
 - THE POOL, ONCE, on the -wip at b088fcfc5 (S1 merged), started 00:58 UTC: `/var/tmp/v18/out/v38/pool.sh` (pool, verify, both gates) into `/var/tmp/v18/t2/pool-v38`. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
+- R4I-TONIGHT (subagent; brief `briefs/R4I-TONIGHT-BRIEF.md`), in `/home/user/wt/r4it` on the local `lane/veil-38-2026-11-23-r4tonight-wip` at b088fcfc5: 40.3 (2), measure first.
 - R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
 
 ### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
@@ -69,6 +70,24 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
      moves between two reads; whether the SERVED arrays' own order is equal on two reads ("keep the served order" a candidate if so;
      if the server's order moves, where); and the count on the pool: places whose printed order differs between two reads, by
      surface. A product change a player sees on a reload: it does not ride into "TIP?" unnamed. Relayed to R4I-PAGE-2 (item "O").
+
+40.3 THE CHAIR, 01:01 UTC: (1) S1 TAKEN, and the judgment on 212's six internal salt carriers ACCEPTED: "the server never takes a
+     salt from a caller" = no function a client can call takes one; `_gallery_veil` and the three reads take none, `_gallery_veil`
+     draws it, and every function with a salt parameter is revoked from public, anon, authenticated (asserted by signature, so a new
+     carrier without its revoke reds). (2) THE ORDER STOP RULED: `castWantOf`'s pick is KEYED ON THE PERSON'S NAME AS THE CARD
+     PRINTS IT, with the crisis and the role, on the owner's page and every shared read alike (one code path); both callers (the
+     sheet; the judge `coherence/crisisFactFindings.js`). `castWantOf` is not on master: no user's page moves. MEASURE FIRST on the
+     pool, STOP if either is not 0: (i) cast persons of one place sharing (name, crisis, role); (ii) cast persons whose served name
+     differs from the stored name on any read. Then red first on `shareRenderTwice`'s non-id rows; an arm (the sheet equal on two
+     reads, and equal to the owner's on nothing-hidden places); the owner-page moves counted ONCE and NAMED; every pin of a "Wants
+     to" line re-pinned by cause; the sameness door and registers by their doors; a moved PDF snapshot or golden NAMED for the
+     owner, signed by nobody. `tonightSheet.js` and `crisisFactFindings.js` join the manifest, LISTED for the join. It rides in
+     R4-IDS. (3) S2 is NOT this unit's: classed "red at af708f2fd, the chair's"; the chair gives its cause to VEIL-39. (4)
+     `pgliteHookTimeoutRatchet`: test-only inside R4-IDS: `\x28` at that regex, one comment above saying why, no ratchet figure
+     moves, `tests/lint` whole after; the matcher's limit is on the chair's list for after the first deploy.
+     DONE BY THIS SEAT: (4) and (3) to R4I-PAGE-3 (its brief's ADDENDUM); (2) to a SECOND builder, R4I-TONIGHT
+     (`briefs/R4I-TONIGHT-BRIEF.md`; disjoint manifest: the sheet, the judge, `shareRenderTwice` and the want pins; COMMON-EIGHTH
+     12 (a): two builders of one deliverable next to its landing line).
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
