@@ -48,9 +48,12 @@ const REFUSED = /** @type {Array<[string, string, (t: any) => string, string, st
   ['C11669', 'r2r-town-47', (t) => descOf(t, /military|guard/i), 'Undermanned and underfunded', 'Small for a place of this size; it cannot enforce the law everywhere at once, and it knows it.'],
   ['C11669', 'r2s-wartime-town-0', (t) => descOf(t, /military|guard/i), 'Undermanned and underfunded', 'Kept small before the war, and the war has put more on it than it was built to carry.'],
   ['C5398', 'r2r-city-36', (t) => descOf(t, /Ecclesiastical Council/), 'alongside elected aldermen', 'Senior clergy hold effective civic authority through the council'],
-  // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): the military's rank and standing moved, so its standing
-  // takes the far-behind rung (was ", close enough to matter and too far behind to lead.")
-  ['C45570', 'r2r-village-46', (t) => descOf(t, /military|guard/i), 'they are waiting for a chance to push back', 'Behind the Feudal Stewardship by too much to challenge openly, so they get their way through petitions and procedure instead.'],
+  // RE-PICKED BY THE PREMISE (the flip, 2026-11-23, CLOSE-5 F-SEAT, CLOSE-5's ruling: a PREMISE): r2r-village-46's military
+  // stands on the far-behind rung lit; r2r-village-8 is the lowest r2r-village of 200 lit holding the case by its own
+  // predicate (the ladder's shadow rung, `power/factionStanding.js`: the military at rank 1 under a governing first power,
+  // the gap over 6 and at most 14, neither the seat's holder apart nor its contested challenger), never the line's words;
+  // its seat~guard row is symbiotic, the bargain C45570 reads (was r2r-village-46)
+  ['C45570', 'r2r-village-8', (t) => descOf(t, /military|guard/i), 'they are waiting for a chance to push back', ', close enough to matter and too far behind to lead.'],
   ['C27440', 'r2r-town-2', conflictOf, 'The merchants have stopped attending the sessions.', 'The merchants have argued against every one of them, and nothing has been settled yet.'],
   ['C36418', 'r2r-hamlet-28', conflictOf, 'The last harvest failed badly.', `The ${FAILED_SOURCE_WORDS.fish} failed badly this year.`],
   ['C36418', 'r2s-famine-thorp-1', conflictOf, 'The last harvest failed badly.', `The ${FAILED_SOURCE_WORDS.livestock} failed badly this year.`],
