@@ -5,7 +5,7 @@ on 2026-11-23; the successor of CLOSE-4. Its law: `docs/chair/2026-11-23/ninth/p
 `docs/chair/2026-11-21/eighth/prompts/CLOSE-3.txt` (reading CLOSE-5 for CLOSE-3), both on `lane/chair-2026-11-08`.
 A successor reads those two, then this section, then `FLIP-PLAN.md`.
 
-## 0. WHERE THE FLIP STANDS — FOR CLOSE-6 (written 2026-11-23 08:30 UTC, read from date -u)
+## 0. WHERE THE FLIP STANDS — FOR CLOSE-6 (written 2026-11-23 09:00 UTC, read from date -u; CLOSE-5 HANDS OVER HERE)
 
 THE FLIP BRANCH `lane/close-5-2026-11-23-flip` (worktree `/home/user/wt/flip`, node_modules and `.husky/_` linked), cut at the
 chair's PROVISIONAL "BUILD THE FLIP 5e63f2603"; its commits, oldest first, each with what proved it:
@@ -14,9 +14,9 @@ chair's PROVISIONAL "BUILD THE FLIP 5e63f2603"; its commits, oldest first, each 
 | f6cbaee69 | COMMIT 0 (F0): 15 budgets in 14 files, CI-FIT-3 comments; FENCE 1's raise DROPPED (N56: its file is frozen whole) | builder: goldenFreeze 90/90, `tests/lint` the line's three; THIS SEAT dark: 400 tests, 1 red listed (`powerEconomyFreshness` A4); TAKEN |
 | 2bc483fc8 | COMMIT 1 (F1): three dials + `powersList` row (light.sh) + the two lit whys (WHY-DRAFT, the chair's words) + arm 4 re-pinned with its tooth + the 14 dial pins + CONFIGS.diff (seatChainHolder, dualHat original arm forced to fortune 1) | builder: 12 proof files 14 red → 120/120, `tests/lint` the line's three; THIS SEAT lit: 120/120, mint 2/2; TAKEN (N65; seatContest (5)'s judgement accepted) |
 | 075fbdd89 | DOOR: page census `--grid --shrink` (r2s-insurgency-metropolis-0 loses P16three) | walker 14/14; TAKEN |
-| b98a85bd9 | F-SEAT: the seat lane's 10 files (goalSentencesOnceInTown's (u) born under law 1 per N66; the fixture unmoved; budget 240,000) | builder: 24 red → 162/162 lit (twice), `tests/lint` the line's three; this seat read the diff (8 expect out, 9 in, no skip) |
+| b98a85bd9 | F-SEAT (TAKEN by the chair; its diff read by the chair on origin after this push): the seat lane's 10 files (goalSentencesOnceInTown's (u) born under law 1 per N66; the fixture unmoved; budget 240,000) | builder: 24 red → 162/162 lit (twice), `tests/lint` the line's three; this seat read the diff (8 expect out, 9 in, no skip) |
 | ec43beb7f | MERGE of the line's tip 9b0ffaa97 (points 106 to 112: 110 PROSE-D, 111 PRONOUN-2, 112 PROSE-D-2), plain, NO CONFLICT | THIS SEAT, lit, in `/home/user/wt/check` at ec43beb7f: the 5 test files the line changed + F-SEAT's 10: 352/352 GREEN; `tests/lint` whole 3 red of 3,374, the line's three only; TAKEN by the chair |
-| (next) | F-SEAT-2: `bar3PeopleTies` r2r-town-14 and `bar3PowersLines` C45570 RE-PICKED BY PREMISE (their KEEP re-pins proved less) | F-SEAT's builder resumed for it: its own commit on ec43beb7f |
+| 9df6731ee | F-SEAT-2: two KEEP anchors read as PREMISES, re-picked by their cases' own predicates (lowest lit seed of 200), their ORIGINAL lines restored: `bar3PeopleTies` r2r-town-14 -> r2r-town-34 ("Norbert Meyer took Hildegard Goldstein in as an apprentice and taught them the trade"); `bar3PowersLines` C45570 r2r-village-46 -> r2r-village-8 (", close enough to matter and too far behind to lead.") | builder: the 2 files 29/29, `tests/lint` the line's three (the lighting census walker green though two titles moved); THIS SEAT lit at 9df6731ee: 29/29. THE FLIP BRANCH IS PUSHED AT 9df6731ee |
 
 THE COMMITS LEFT, IN ORDER, each a builder's (an Agent of the seat's tier, no model override, ONE AT A TIME in `/home/user/wt/flip`),
 briefed by `close-5/briefs/FLIP-COMMON.md` + its own file; the seat reads each diff ONCE and re-runs it in `/home/user/wt/check`:

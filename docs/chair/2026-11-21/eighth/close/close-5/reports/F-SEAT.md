@@ -71,3 +71,25 @@ in number ("keep ... their own"); the corrected search found it.
 
 ## STOPs
 None.
+
+## Addendum: CLOSE-5's ruling on b98a85bd9 (written Mon Nov 23 08:54:50 UTC 2026, `date -u`)
+**Commit: 9df6731ee** (a new commit on ec43beb7f, never an amend; 2 files by explicit path; not pushed).
+CLOSE-5 ruled that the two rows I flagged as thinned (judgment call 4 above) are PREMISES, not born anchors. Each is
+re-picked to the lowest seed of its family, from 200 lit births, by its case's own predicate, never by the asserted
+outcome. Each row's original case and expected line are restored, with the new seed's names.
+
+| file | row | old (b98a85bd9) | new | predicate (hits of 200 lit) |
+|---|---|---|---|---|
+| bar3PeopleTies | KEEP | r2r-town-14 "Hassan al-Basri vouched for Badr ibn Khaldun when nobody else would." | r2r-town-34 "Norbert Meyer took Hildegard Goldstein in as an apprentice and taught them the trade" | a mentor_legacy tie drawn at the trade line's index (#3, `sharedTrade`), on a pair whose trades are known and shared (`pairTradeKnown`, `pairSharesTrade`): towns 34, 50, 54, 101 |
+| bar3PowersLines | C45570 | r2r-village-46 "Behind the Feudal Stewardship by too much ..." | r2r-village-8 ", close enough to matter and too far behind to lead." (the original line) | the ladder's shadow rung: military at rank 1 under a governing first power; gap over 6, at most 14; not the seat's holder apart (read with the record, as the final-record pass reads it); not its contested challenger. Hits: villages 8 and 146. The seat~guard row is symbiotic |
+
+My first predicate for the shadow rung read only the rung's numbers. It admitted village-6, where the military is the
+seat's holder apart and prints U6's line, and village-47, where it is the contested challenger. The ladder's own
+exceptions exclude both, so the predicate now carries them. Logs: search4.log, search5.log, search6.log.
+
+Runs, through the gate mutex, at ec43beb7f, lit:
+- run4-repick.log: the two files: 29 tests, 29 passed; exit 0.
+- lint2.log: tests/lint whole: 3,374 tests, 3,371 passed, 3 failed: the line's three (proseComposed A0b; proseCorpusBytes RAW and GZIP).
+- eslint2.log: npx eslint on the two files: exit 0.
+
+No STOPs. Titles that moved, for CLOSE-5's lighting door: bar3PeopleTies KEEP r2r-town-34; bar3PowersLines C45570 r2r-village-8.
