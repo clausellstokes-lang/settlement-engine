@@ -1,0 +1,181 @@
+DOCUMENTS 1948 (server 86)
+HIDDEN-POWER TENSION server import | dm | marked | allOpen | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:000 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:001 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:010 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:011 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:100 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:101 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:110 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | g:111 | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | name served: 22
+HIDDEN-POWER TENSION server import | dm | marked | off | name served: 2
+HIDDEN-POWER TENSION server import | dm | marked | own | name served: 2
+HIDDEN-POWER TENSION server import | dm | unmarked | name served: 2
+HIDDEN-POWER TENSION server import | dm | unmarked | unmarked | name served: 2
+HIDDEN-POWER TENSION server import | off | marked | allOpen | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:000 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:001 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:010 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:011 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:100 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:101 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:110 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | g:111 | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | masked: 22
+HIDDEN-POWER TENSION server import | off | marked | off | masked: 2
+HIDDEN-POWER TENSION server import | off | marked | own | masked: 2
+HIDDEN-POWER TENSION server import | off | unmarked | masked: 2
+HIDDEN-POWER TENSION server import | off | unmarked | unmarked | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | allOpen | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:000 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:001 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:010 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:011 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:100 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:101 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:110 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | g:111 | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | masked: 22
+HIDDEN-POWER TENSION server link | dm | marked | off | masked: 2
+HIDDEN-POWER TENSION server link | dm | marked | own | masked: 2
+HIDDEN-POWER TENSION server link | dm | unmarked | masked: 2
+HIDDEN-POWER TENSION server link | dm | unmarked | unmarked | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | allOpen | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:000 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:001 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:010 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:011 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:100 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:101 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:110 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | g:111 | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | masked: 22
+HIDDEN-POWER TENSION server link | off | marked | off | masked: 2
+HIDDEN-POWER TENSION server link | off | marked | own | masked: 2
+HIDDEN-POWER TENSION server link | off | unmarked | masked: 2
+HIDDEN-POWER TENSION server link | off | unmarked | unmarked | masked: 2
+HIDDEN-POWER TENSION server page | dm | marked | allOpen | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:000 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:001 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:010 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:011 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:100 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:101 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:110 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | g:111 | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | name served: 22
+HIDDEN-POWER TENSION server page | dm | marked | off | name served: 2
+HIDDEN-POWER TENSION server page | dm | marked | own | name served: 2
+HIDDEN-POWER TENSION server page | dm | unmarked | name served: 2
+HIDDEN-POWER TENSION server page | dm | unmarked | unmarked | name served: 2
+HIDDEN-POWER TENSION server page | off | marked | allOpen | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:000 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:001 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:010 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:011 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:100 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:101 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:110 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | g:111 | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | masked: 22
+HIDDEN-POWER TENSION server page | off | marked | off | masked: 2
+HIDDEN-POWER TENSION server page | off | marked | own | masked: 2
+HIDDEN-POWER TENSION server page | off | unmarked | masked: 2
+HIDDEN-POWER TENSION server page | off | unmarked | unmarked | masked: 2
+HIDDEN-POWER TENSION twin | dm | marked | allOpen | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:000 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:001 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:010 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:011 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:100 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:101 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:110 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | g:111 | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | name served: 22
+HIDDEN-POWER TENSION twin | dm | marked | off | name served: 2
+HIDDEN-POWER TENSION twin | dm | marked | own | name served: 2
+HIDDEN-POWER TENSION twin | dm | unmarked | name served: 2
+HIDDEN-POWER TENSION twin | dm | unmarked | unmarked | name served: 2
+HIDDEN-POWER TENSION twin | off | marked | allOpen | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:000 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:001 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:010 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:011 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:100 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:101 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:110 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | g:111 | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | masked: 22
+HIDDEN-POWER TENSION twin | off | marked | off | masked: 2
+HIDDEN-POWER TENSION twin | off | marked | own | masked: 2
+HIDDEN-POWER TENSION twin | off | unmarked | masked: 2
+HIDDEN-POWER TENSION twin | off | unmarked | unmarked | masked: 2
+MASK READS server import | off | marked: 44
+MASK READS server import | off | unmarked: 4
+MASK READS server link | dm | marked: 44
+MASK READS server link | dm | unmarked: 4
+MASK READS server link | off | marked: 44
+MASK READS server link | off | unmarked: 4
+MASK READS server page | off | marked: 44
+MASK READS server page | off | unmarked: 4
+MASK READS twin | off | marked: 44
+MASK READS twin | off | unmarked: 4
+MASK server import | off | marked | history.currentTensions[].factions[]: 22
+MASK server import | off | marked | powerStructure.factions[].desc: 22
+MASK server import | off | unmarked | history.currentTensions[].factions[]: 2
+MASK server import | off | unmarked | powerStructure.factions[].desc: 2
+MASK server link | dm | marked | history.currentTensions[].factions[]: 22
+MASK server link | dm | marked | powerStructure.factions[].desc: 22
+MASK server link | dm | unmarked | history.currentTensions[].factions[]: 2
+MASK server link | dm | unmarked | powerStructure.factions[].desc: 2
+MASK server link | off | marked | history.currentTensions[].factions[]: 22
+MASK server link | off | marked | powerStructure.factions[].desc: 22
+MASK server link | off | unmarked | history.currentTensions[].factions[]: 2
+MASK server link | off | unmarked | powerStructure.factions[].desc: 2
+MASK server page | off | marked | history.currentTensions[].factions[]: 22
+MASK server page | off | marked | powerStructure.factions[].desc: 22
+MASK server page | off | unmarked | history.currentTensions[].factions[]: 2
+MASK server page | off | unmarked | powerStructure.factions[].desc: 2
+MASK twin | off | marked | history.currentTensions[].factions[]: 22
+MASK twin | off | marked | powerStructure.factions[].desc: 22
+MASK twin | off | unmarked | history.currentTensions[].factions[]: 2
+MASK twin | off | unmarked | powerStructure.factions[].desc: 2
+READS server import | dm | marked: 946
+READS server import | dm | unmarked: 86
+READS server import | off | marked: 946
+READS server import | off | unmarked: 86
+READS server link | dm | marked: 946
+READS server link | dm | unmarked: 86
+READS server link | off | marked: 946
+READS server link | off | unmarked: 86
+READS server page | dm | marked: 946
+READS server page | dm | unmarked: 86
+READS server page | off | marked: 946
+READS server page | off | unmarked: 86
+READS twin | dm | marked: 21428
+READS twin | dm | unmarked: 1948
+READS twin | off | marked: 21428
+READS twin | off | unmarked: 1948
+stored documents with a hidden power: 86
+--- examples
+e.g. MASK server import | off | marked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 own ; t2p-metropolis-infiltrated-4601 g:000 ; t2p-metropolis-infiltrated-4601 g:001 ; t2p-metropolis-infiltrated-4601 g:010
+e.g. MASK server import | off | marked | powerStructure.factions[].desc: t2p-village-infiltrated-261 own ; t2p-village-infiltrated-261 g:000 ; t2p-village-infiltrated-261 g:001 ; t2p-village-infiltrated-261 g:010
+e.g. MASK server import | off | unmarked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 unmarked ; r3m-village-infiltrated-0-2 unmarked
+e.g. MASK server import | off | unmarked | powerStructure.factions[].desc: t2p-village-infiltrated-261 unmarked ; t2p-village-infiltrated-311 unmarked
+e.g. MASK server link | dm | marked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 own ; t2p-metropolis-infiltrated-4601 g:000 ; t2p-metropolis-infiltrated-4601 g:001 ; t2p-metropolis-infiltrated-4601 g:010
+e.g. MASK server link | dm | marked | powerStructure.factions[].desc: t2p-village-infiltrated-261 own ; t2p-village-infiltrated-261 g:000 ; t2p-village-infiltrated-261 g:001 ; t2p-village-infiltrated-261 g:010
+e.g. MASK server link | dm | unmarked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 unmarked ; r3m-village-infiltrated-0-2 unmarked
+e.g. MASK server link | dm | unmarked | powerStructure.factions[].desc: t2p-village-infiltrated-261 unmarked ; t2p-village-infiltrated-311 unmarked
+e.g. MASK server link | off | marked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 own ; t2p-metropolis-infiltrated-4601 g:000 ; t2p-metropolis-infiltrated-4601 g:001 ; t2p-metropolis-infiltrated-4601 g:010
+e.g. MASK server link | off | marked | powerStructure.factions[].desc: t2p-village-infiltrated-261 own ; t2p-village-infiltrated-261 g:000 ; t2p-village-infiltrated-261 g:001 ; t2p-village-infiltrated-261 g:010
+e.g. MASK server link | off | unmarked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 unmarked ; r3m-village-infiltrated-0-2 unmarked
+e.g. MASK server link | off | unmarked | powerStructure.factions[].desc: t2p-village-infiltrated-261 unmarked ; t2p-village-infiltrated-311 unmarked
+e.g. MASK server page | off | marked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 own ; t2p-metropolis-infiltrated-4601 g:000 ; t2p-metropolis-infiltrated-4601 g:001 ; t2p-metropolis-infiltrated-4601 g:010
+e.g. MASK server page | off | marked | powerStructure.factions[].desc: t2p-village-infiltrated-261 own ; t2p-village-infiltrated-261 g:000 ; t2p-village-infiltrated-261 g:001 ; t2p-village-infiltrated-261 g:010
+e.g. MASK server page | off | unmarked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 unmarked ; r3m-village-infiltrated-0-2 unmarked
+e.g. MASK server page | off | unmarked | powerStructure.factions[].desc: t2p-village-infiltrated-261 unmarked ; t2p-village-infiltrated-311 unmarked
+e.g. MASK twin | off | marked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 own ; t2p-metropolis-infiltrated-4601 g:000 ; t2p-metropolis-infiltrated-4601 g:001 ; t2p-metropolis-infiltrated-4601 g:010
+e.g. MASK twin | off | marked | powerStructure.factions[].desc: t2p-village-infiltrated-261 own ; t2p-village-infiltrated-261 g:000 ; t2p-village-infiltrated-261 g:001 ; t2p-village-infiltrated-261 g:010
+e.g. MASK twin | off | unmarked | history.currentTensions[].factions[]: t2p-metropolis-infiltrated-4601 unmarked ; r3m-village-infiltrated-0-2 unmarked
+e.g. MASK twin | off | unmarked | powerStructure.factions[].desc: t2p-village-infiltrated-261 unmarked ; t2p-village-infiltrated-311 unmarked
