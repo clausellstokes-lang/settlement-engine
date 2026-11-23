@@ -1,0 +1,7 @@
+start 2026-11-23T01:03:11Z tree /home/user/wt/lp at 30297638636a3fd8340165379ba1a84f092c575c stored /var/tmp/v18/stored/today/docs
+end 2026-11-23T02:07:13Z
+shard 0 rc=0
+shard 1 rc=0
+shard 3 rc=0
+shard 2 rc=0
+tell2-an rc=1

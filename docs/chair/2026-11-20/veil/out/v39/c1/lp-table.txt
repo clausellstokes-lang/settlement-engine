@@ -1,0 +1,48 @@
+DOCUMENTS: this 1948 (/var/tmp/v18/stored/today/docs)
+  this: role/holds {"A:none":1200,"B:holds":608,"T:holds":92,"T:none":48}; owner-hidden powers in 86; publicProse stored 1948
+
+(2) THE DIFFERENTIAL (own, Reveal off and on; server page + import, twin; the withheld powers and houses never there)
+  this: hiding places 756 | hiding reads 1456 | engine-door reads 5824 (want 5824) | equal 5824/5824 | faults 5008
+    5008 x the served payload serves the stored sentence  e.g. t2p-city-infiltrated-1441 server page dm=false: the served payload serves the stored sentence (or a string holding it)
+
+(3) THE TELLS per registry row: documents telling (name / kind / key)
+  (unregistered) availableServices.criminal: 0/0/596
+  (unregistered) availableServices.information: 0/0/7
+  (unregistered) conflicts: 0/0/28
+  (unregistered) history.currentTensions: 0/0/31
+  (unregistered) npcs[]: 0/0/18
+  (unregistered) powerStructure.conflicts: 0/0/28
+  (unregistered) simulationTrace[]: 0/0/30
+  power.conflicts: 3/0/0
+  power.desc: 20/0/0
+  power.recentConflict.pressureSentence: 2/0/0
+  safety.criminalInstitutions: 0/0/165
+  safety.plotHooks: 0/0/303
+LEGACY-ONLY ROWS: 0
+
+(4) THE READERS (pageRederive.js) fed a nothing-hidden read (twin, Reveal off), the value against the record: equal / differ / notDrawn / recordLacks / served / none
+  this: 1862 documents read with nothing hidden
+    defenseProfile.scores.disaster: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.economic: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.internal: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.magical: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.military: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.scores.monster: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    defenseProfile.readiness.score: equal 1807/1862 (differ 0, notDrawn 55, recordLacks 0; served 0, none 0)
+    defenseProfile.economicGates: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.compound.economyOutput: equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.blackMarketCapture (unveiled): equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    economicState.safetyProfile.crimeTypes (rederiveCrimeTypes, authoritative): equal 1862/1862 (differ 0, notDrawn 0, recordLacks 0; served 0, none 0)
+    powerStructure.recentConflict (rederiveRecentConflict, authoritative): equal 1861/1862 (differ 1, notDrawn 0, recordLacks 0; served 0, none 0)  e.g. t2b-town-wartime-38: record "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have | re-derived "The barracks guard has doubled and th
+    activeConditions[].severity: equal 56/1472  e.g. t2p-city-indebted-125 condition.regional_tax_revenue_disruption.3sukpk: record 0.47 | re-derived 0.35 (band medium)
+
+(5) THE WORD RULES: 7 rows. Per row: documents carrying the path / of them, stored words naming a hideable house or a criminal (or owner-hidden) power by the fold; tells name/kind/key (this)
+  compound.inst.flags (getInstFlags's keyword table over house NAMES (one fold)): present 1948/1948, naming 0; tells 0/0/0
+  income.desc (a desc NAMING a hidden house leaves its row): present 1948/1948, naming 19; tells 0/0/0  e.g. t2b-city-none-112: Guild-run fencing, extortion and black-market trade bring money in here, but it goes to the criminals who run them and the treasury sees non
+  safety.criminalInstitutions (built by name (212 (16)/(19))): present 1948/1948, naming 502; tells 0/0/165  e.g. t2b-city-indebted-145: Black Market
+  power.entry (a criminal-WORDED governing body kept; a thieves' NAME withheld): present 1948/1948, naming 320; tells 0/0/0  e.g. t2p-city-infiltrated-1441: The Independent Bloc
+  power.relation.dmNote (the note NAMES the withheld criminal power): present 1237/1948, naming 171; tells 0/0/0  e.g. t2p-town-none-412: Ask: which specific officials have arrangements with Thieves' Guild? The answer drives dozens of plot hooks.
+  power.conflicts (a conflict NAMING a withheld power follows recentConflict): present 1394/1948, naming 141; tells 3/0/0  e.g. t2p-town-insurgency-573: Corrupt Council
+  people.pressureSentence (it NAMES a withheld tie's two ends or holds its WORDS): present 1948/1948, naming 40; tells 0/0/0  e.g. t2p-town-insurgency-573: No one in Tumenüüd is marching, and that is what makes it dangerous. The opposition to Corrupt Council is a patient, well-lawyered thing tha
+  compound.inst.has* against TODAY's getInstFlags over the stored houses: this 0/3896 compounds differ
+WORD RULES: 7

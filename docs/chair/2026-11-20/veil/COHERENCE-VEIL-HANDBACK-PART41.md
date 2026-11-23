@@ -30,10 +30,17 @@ DONE, WITH COMMITS:
   'Black market' house; one assertion that an unaccounted row leaves) is a second test-only commit on `-tip`, file green and
   `tests/lint` whole, one "PIN" line naming both.
 
+- (C1) THE STORED UNIVERSE's GATES AND DIFFERENTIAL, DONE (01:03-02:07 UTC; tree lp at 302976386, template c1_tpl; receipts
+  `out/v39/c1/tell2-table.txt`, `lp-table.txt`, `run-window.txt`): on the 1,948 today-born STORED documents (each carries
+  `publicProse`): GATE-1 4 of 92 (off 4, dm 4, every gated setting), LOWER BY RULE 7 (the same seven cities and metropolis),
+  GATE-2 20 cells red: EQUAL TO THE BIRTHS' FIGURES. THE DIFFERENTIAL: 5,824 of 5,824 engine-door reads equal (server and twin; 756
+  hiding places, 1,456 hiding reads), and 5,008 ABSENCE FAULTS, every one "the served payload serves the stored sentence": the stored
+  prose (C2's fault, measured on the whole stored universe). The page's readers on 1,862 nothing-hidden reads: every defence score,
+  the gates, economyOutput, blackMarketCapture, crimeTypes equal 1,862; readiness 1,807 (55 not drawn); recentConflict 1,861 (1
+  differs: t2b-town-wartime-38). Row tells (name/kind/key): power.desc 20/0/0 (chain A's R5-DESC), power.conflicts 3/0/0,
+  pressureSentence copy 2/0/0; key-only tells (svc.criminal 596, plotHooks 303, criminalInstitutions 165, ...) as the lane's.
+
 RUNNING:
-- (C1) THE STORED UNIVERSE's GATES AND DIFFERENTIAL: the read-stored run over the 1,948 stored documents, started 01:03:11 UTC, about
-  80 minutes; out `/var/tmp/v18/stored/read-today/` (`tell2-table.txt` the gates, `lp-table.txt` the differential, `an-rc.txt`).
-  The births' figures beside: GATE-1 4/92, LOWER BY RULE 7, GATE-2 20.
 - (C2) builder V39-C2M (brief `briefs/V39-C2M-BRIEF.md`, branch `lane/veil-39-2026-11-23-c2m-wip`, worktree /home/user/wt/c2m): the
   measure of shape (c) (M1 equality, M2 the cure holds, M3 the three recompose rows' substitution, M4 bytes, M5 the pins it moves).
   Its full runs wait for C1's end.
@@ -58,7 +65,7 @@ RE-MAKING THIS MACHINE (a fresh container; wall times measured here, 4 cores):
   `tests/lint`.
 - To hold a long chain between its lines: `kill -STOP <the script's sh pid>` (the running child finishes), `kill -CONT` after.
 
-NEXT STEP IN ONE LINE: C1's figures to the chair; C2M's measure; the proposal file; then "HANDS OVER" with this section current.
+NEXT STEP IN ONE LINE: (P2)'s restatement on `-tip` (builder V39-P2, its lint run), "PIN-2"; C2M's measure; the proposal file; then "HANDS OVER" with this section current.
 
 ## 2. RULINGS SINCE PART 38's 111 (the ninth chair's; each vetoable by the owner)
 112. THE NINTH CHAIR'S SEATING WORD (N1-N6, 2026-11-23): the chair is session_01FbPLbdpQrxXktCeSf32d4j; no pull request ever; this
