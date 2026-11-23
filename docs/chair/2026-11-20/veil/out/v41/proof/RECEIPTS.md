@@ -36,3 +36,10 @@ prose-shard3.json
 prose-shard3.log
 window.txt
 ```
+
+## prose: C1's analyzer (node out/v33/stored/c1-an.mjs /var/tmp/v18/stored/today <prose out> <c2 registry>), rc 0
+```
+(2) PROSE HOLDING A WITHHELD FIELD (twin, every gated setting, both Reveals): 1948 documents, 38960 reads; 0 rows (0 registered, 0 unregistered prefixes)
+  row [rule/when] | documents (by role) | reads | whole / cut hits | sites (reads) | paths | e.g.
+PROSE ROWS: 0 (registered 0)
+```
