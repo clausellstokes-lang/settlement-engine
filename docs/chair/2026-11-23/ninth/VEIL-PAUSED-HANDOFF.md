@@ -149,15 +149,25 @@ successor is seated with the start message named below.
 - RULINGS THAT BIND IT: N49, N85, N90, N96, N99.
 
 ### 2.6 The join of the tip with the working line (VEIL-43, session_01FbPLbe3RSwLtDXde5aCrSm)
-- PAUSED: awaited (after PAGES' end). Documents `lane/veil-43-2026-11-23` (9792b3869 before the pause); hand-back
-  PART 45. The trial join: `-join-wip` 9e6547f0f (the lane's tip with the line 9b0ffaa97).
+- PAUSED AT b126c9813 (`lane/veil-43-2026-11-23`; its line was queued at 17:50:31 UTC; both branches read from origin
+  by the chair at 17:52 UTC). ITS PAUSE BLOCK IS PART 45, SECTION 0, written for a seat that has never seen that session.
+  The trial join: `-join-wip` 9e6547f0f, unchanged (the lane's tip with the line 9b0ffaa97).
+- "PAGES" ENDED BEFORE THE PAUSE TOOK IT (`out/v43/pages/PAGES.md` at 9671a3df0). THE SEAT'S FIGURES, NOT READ BY THE
+  CHAIR: (F) over 753,863 lines: LOST 1,969, GAINED 5 (all the lane's rule VR31, confirmed 9 of 9; 0 moved shares
+  without a withheld power), CHANGED 1,378, ORDER 2, MOVED 475; the keys led by safety capture, ratio and crimeTypes
+  983, power.stability 267, the legitimacy multipliers and flags 122 (287 of 300 line kinds keyed; 13 unkeyed: a
+  key-fill shard was killed for memory and was not re-run under the pause); the governance paragraph's classes 0; the
+  server sample differs in ORDER only (`InstitutionsTab.jsx :: serviceRows`); (N) 75,850 lines on the 92 (most of them
+  the house-free twin being a newly drawn town: UNJUDGED); the owner-only slot 0 over 1,118 pages. NONE OF THESE
+  DIFFERENCES HAS BEEN JUDGED BY A CHAIR: a resume reads PAGES.md first.
+- NOT RUN: `tests/copy`. NOT STARTED: "REDS-CAUSE" and the gates' listed-apart mode.
 - DONE: "GATES" (the join moves no birth and neither gate: N81); "SITES"; "GATE-MAP" and "LOWER-7" (N88); "REDS"
   whole: THE JOIN'S NEW REDS ARE FIVE FILES (`fortuneLawMerits` U5a (S), `fortuneLastingSentence` U7b (d),
   `tensionCause` CAUSES-PARITY-2 F, `traditionDescriptionSharedPage` TRAD-2 UNIT 2, `recentConflictReaders.walker`:
   `transferTakerOf`); "NAMES" complete: ONE path names a withheld power on the tip as it stands, a shown power's
   standing sentence on 2 of 95 places, and chain A's unit is its cure (N104, N105); "PAGES" (the whole rendered page
   compared): its tables are in the seat's pause block; its first finding is read by the chair as the lane's own rule
-  VR31 and was being confirmed (N109).
+  VR31 (N109), since confirmed by the seat, 9 of 9.
 - OPEN, IN ORDER: `tests/copy` whole (N107: two reds of the tip are code patterns in string literals); "REDS-CAUSE" (the
   cause of each of the five; THE CHAIR RULES EACH CURE: its lean for the paragraph on who governs: fail closed on a
   veiled read, or a re-deriver in `rederiveForPage`); the gates' listed-apart mode (N88 (e)); "VR42-NOTICE" (its words
