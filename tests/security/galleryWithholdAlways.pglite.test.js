@@ -12,13 +12,16 @@
  * (pageRederive.js :: rederiveForPage) and THE IMPORT'S SAVE (importRederive.js :: rederiveServed) put back what they draw
  * from the served document alone, equal to the stored value where nothing is hidden. Stored towns carry a planted value at
  * the master-shape-only paths (a person's stressNote, the cast's absences, a stability with its cause), so both stored
- * shapes' paths are read on every town. RED at R2's base (cfd77fdef): every row present (out/v21/r2/red.txt).
+ * shapes' paths are read on every town. RED at R2's base (cfd77fdef): every row present (out/v21/r2/red.txt). The two rows
+ * R5-DESC made PARTIAL BY RULE (power.desc, history.tension.maskedParty) are judged by their rule, not by absence (PARTIAL).
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { writeFileSync } from 'node:fs';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
+import { compileRows, cutDesc, readTable } from '../../scripts/veil/standingForms.mjs';
+import { HIDDEN_POWER_MASK } from '../../src/domain/display/publicSafe.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
@@ -38,6 +41,27 @@ function valuesAt(doc, re) {
   walk(doc, '', '');
   return out;
 }
+
+/**
+ * THE ROWS THAT ARE PARTIAL BY RULE (R5-DESC, 212 (36); the arm judges a row by what that row does, VEIL-33's 96c777381
+ * precedent; re-stated by VEIL-37's R5D-PAGE-A on the seat's find at 3ef7fb325): their path stays on a served document, so
+ * ABSENCE is not their rule.
+ *   power.desc                   no served desc still ends in a standing THE TABLE cuts (scripts/veil/standingForms.mjs ::
+ *                                cutDesc over standingForms.data.json, the table's own cut), and a hidden or masked row
+ *                                carries no desc (E115 (2));
+ *   history.tension.maskedParty  no served tension party equals the projection's mask ('an unseen interest').
+ * Each returns the faults of one served document.
+ */
+const TABLE = compileRows(readTable().forms);
+const isMaskedOrHidden = (f) => isRec(f) && (f.hidden === true || f.faction === HIDDEN_POWER_MASK || f.name === HIDDEN_POWER_MASK);
+const PARTIAL = Object.freeze({
+  'power.desc': (d) => [...(d?.powerStructure?.factions || []), ...(Array.isArray(d?.factions) ? d.factions : [])].filter(isRec).flatMap((f) => [
+    ...(isMaskedOrHidden(f) && Object.prototype.hasOwnProperty.call(f, 'desc') ? [`a hidden or masked row (${f.faction ?? f.name}) carries a desc`] : []),
+    ...(typeof f.desc === 'string' && cutDesc(f.desc, TABLE) ? [`${f.faction ?? f.name}: the desc still ends in a standing the table cuts`] : []),
+  ]),
+  'history.tension.maskedParty': (d) => (d?.history?.currentTensions || []).filter((t) => isRec(t) && Array.isArray(t.factions) && t.factions.includes(HIDDEN_POWER_MASK))
+    .map((t) => `tension ${JSON.stringify(t.name)}: a party served as the mask`),
+});
 
 /** Plant the master-shape-only paths so every town carries every row. */
 function plant(t) {
@@ -145,11 +169,16 @@ describe('R2: the withhold-always rows leave every non-owner read, both Reveal s
   });
 
   it('MAIN: no withhold-always row reaches the gallery read, the link, the import or the map member (marked and unmarked, Reveal DM off and on)', () => {
+    // anchored: the rule-judged rows are registered withhold-always rows of this list (not a vacuous judge)
+    expect(Object.keys(PARTIAL).every((id) => rows.some((r) => r.id === id)), 'each partial-by-rule row is a withhold-always row').toBe(true);
     const sent = [];
     for (const r of reads) {
       for (const [read, d] of Object.entries(r.docs)) {
         expect(isRec(d), `${r.t.seed} ${r.mark} dm=${r.dm} ${read}: a document`).toBe(true);
-        for (const row of rows) if (valuesAt(d, row.re).size) sent.push(`${row.id} @ ${r.t.seed} ${r.mark} ${r.dm ? 'dm' : 'pub'} ${read}`);
+        for (const row of rows) {
+          if (PARTIAL[row.id]) { for (const f of PARTIAL[row.id](d)) sent.push(`${row.id} @ ${r.t.seed} ${r.mark} ${r.dm ? 'dm' : 'pub'} ${read}: ${f}`); continue; }
+          if (valuesAt(d, row.re).size) sent.push(`${row.id} @ ${r.t.seed} ${r.mark} ${r.dm ? 'dm' : 'pub'} ${read}`);
+        }
       }
     }
     expect(sent).toEqual([]);
