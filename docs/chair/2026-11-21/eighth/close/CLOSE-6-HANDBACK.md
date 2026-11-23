@@ -54,10 +54,11 @@ over the 900 (3 dark, 4 lit by name; r2r-city-5); a tooth; the per-birth hash: n
 | 3b5a37a23 | 13G (N97): `factionDynamics.js :: tieReadsBought` (one reading; not hallCapture.js: its tuning register reds on a new importer); `annotateFactionStanding` gate `seatBoughtOf || tieReadsBought(seat.factionRelationships)`, header names the input; `rosterText.js` AFTER carries rows (roster settle), BOTH (legitimacy settle); bar8 arm over the 900 lit+dark, r2r-city-5 in TOWNS, tooth, judge-vs-cure agreement | red first by name (4 lit, 3 dark, r2r-city-5); hash lit 896=/4 moved, dark 897=/3 moved, none else; 19 naming files 10 red = same without cure (F-JOIN rows); fortune 286/287; copy 172/172; lint three + census title |
 | 1fe19098f | DOOR: lighting census (titles 31,924 -> 31,925), refreeze then plain green | the walker |
 THE OWNER'S ORDER (via the chair, N116, 16:12): the veil's seats paused; THIS LANE IS THE PROGRAM'S FIRST WORK.
-IN FLIGHT (since 16:13 UTC), TWO BUILDERS (COMMON-EIGHTH 12 (a) as 13 keeps it: two units of one deliverable at its landing line):
-(a) F-JOIN in `/home/user/wt/flip` on 1fe19098f (resumed 14:50; WIP saved `close-6/wip/F-JOIN-WIP-UNPROVED.patch`);
-(b) F9 B (sample town, OLD and NEW narrations whole), F9 A (the twin), then F8, in `/home/user/wt/f9` on `lane/close-6-2026-11-23-f9`
-cut at 1fe19098f; reports `close-6/reports/F9.md`, `F8.md`. I MERGE (b) into the flip after F-JOIN's commit (plain), re-run, door.
+| 21b0d74b5 | F-JOIN: 77 rows in 42 files (PREMISE 39, BORN 34+1, GUARD 1, STORED 2); 3 STOPS extinct lit (bar6CrimeOneReading C51048, mintedFaceUnderworld r2r-metropolis-39, churchNoteReadsFlag): ASKED the chair, lean the law-1 form | builder 49 files 45 red -> 3, lint the line's three; seat re-run running |
+IN FLIGHT (since 17:06 UTC): my lit re-run of the 49 join files (scratchpad logs/rerun-join.log); the F9 builder in `/home/user/wt/f9`
+(`lane/close-6-2026-11-23-f9`, pushed at b5746594d = F9 A the twin): F8 now, then COMMIT B by the chair's N118 (the emit + body2 in
+the ruled words + the test's weeks [3, 12]). THEN: merge f9 into the flip (plain); the mutation-manifest door (cherry-pick
+ba0e1c288 from `origin/lane/close-1-2026-11-22-golden-wip`); the three STOPS by the chair's ruling; lighting census door if red.
 NEXT after F-JOIN: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 

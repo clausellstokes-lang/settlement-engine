@@ -1,7 +1,7 @@
 # F-JOIN: the hand anchors of the join lane's files, re-pinned and re-picked on the lit tree (CLOSE-6's builder; not committed)
 
-Written 2026-11-23 (`date -u` ~16:4x UTC). Worktree `/home/user/wt/flip`, branch `lane/close-6-2026-11-23-flip`, resumed after 13G
-on its tip 1fe19098f (both laws lit; 13G 3b5a37a23 and the lighting census by its door). COMMIT: see the end of this file.
+Written 2026-11-23 (`date -u` 17:02 UTC). Worktree `/home/user/wt/flip`, branch `lane/close-6-2026-11-23-flip`, resumed after 13G
+on its tip 1fe19098f (both laws lit; 13G 3b5a37a23 and the lighting census by its door). COMMIT: 21b0d74b5.
 Every value below was read lit from 1fe19098f, by the file itself or by a probe; nothing was carried over from the run cut at
 the pause. Logs and probes: `/tmp/claude-0/-home-user-settlement-engine/237fca18-9a05-575d-8f9a-f8032f4bd46d/scratchpad/flip/F-JOIN/`
 (`run0.log` before, `run1.log` after, `lint1.log`, `probes/p*.probe.test.js` and their `probes/out/*.out`).
@@ -205,8 +205,16 @@ general description beside the host's "worth buying" line. The guard half (no ho
 - After (run1): 49 files, 3 failed / 46 passed; 527 tests, 3 failed / 524 passed. The 3 reds are the 3 STOPs above. No test was
   dropped (527 in both runs). The masked guards read green after: tensionCause's parity arm, bar2PayAndGrain's LAW and
   seatChainHolder's office word.
-- `tests/lint` whole (lint1): LINT_RESULT
+- `tests/lint` whole (lint1): 225 files, 2 failed; 3,374 tests, 3,371 passed, 3 failed: the line's three (proseComposed A0b; proseCorpusBytes RAW and GZIP). The lighting register (`sovereigntyLightingContract.walker`) stayed green despite the renamed titles, so there is nothing for CLOSE-6's door.
 - `npx eslint` on the 42 changed files: exit 0.
 - Probes: `probes/p1`..`p5`, `p7`..`p9` (`probes/out/*.out`); each probe was run through the mutex.
 
-COMMIT_LINE
+## The commit
+21b0d74b5 on `lane/close-6-2026-11-23-flip` (parent 1fe19098f): one commit, 42 test files by explicit pathspec, 270 insertions and
+92 deletions. Not pushed, merged or amended. The pre-commit hook (lint-staged, `eslint --fix`) ran over the 42 files and changed
+nothing: the committed stat equals the tested diff, and the tree is clean after. No src/ file was touched, and none of the 42 is a
+frozen surface (`tests/fixtures/.golden-freeze-register.json`).
+
+CONFIRMED: every count and value above, read from the runs and probes named. PLAUSIBLE: that the three extinct cases and the
+five at another size are the two laws' design (read from distributions over the births searched, not bisected), and the note
+on Grudino's missing claimant.
