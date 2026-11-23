@@ -1,0 +1,83 @@
+     × v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3663ms
+     × v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 4254ms
+     × v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 9329ms
+     × v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 19530ms
+     × v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 28040ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+Error: a stored person id is served (the re-key did not happen): .factions[0].members[0].goal.intent.short.target.id = npc_peat_cutter; .factions[0].members[1].goal.intent.short.target.id = npc_dairy_farmer; .factions[0].members[2].goal.intent.long.target.id = npc_peat_cutter
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:151:28
+    149| export function unkeyPeople(served, reference) {
+    150|   const leaked = storedIdsServed(served, reference);
+    151|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    152|   const twice = notBijective(served);
+    153|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:375:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+Error: a stored person id is served (the re-key did not happen): .factions[0].members[0].goal.intent.long.target.id = npc_peat_cutter; .factions[0].members[1].goal.intent.short.target.id = npc_charcoal_burner; .factions[0].members[2].goal.intent.long.target.id = npc_peat_cutter; .factions[0].members[3].goal.intent.short.target.id = npc_veiled_5064ee784f11c849; .factions[0].members[4].goal.intent.short.target.id = npc_cooper
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:151:28
+    149| export function unkeyPeople(served, reference) {
+    150|   const leaked = storedIdsServed(served, reference);
+    151|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    152|   const twice = notBijective(served);
+    153|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:375:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+Error: a stored person id is served (the re-key did not happen): .factions[0].members[2].goal.intent.long.target.id = npc_dyer; .factions[0].members[3].goal.intent.long.target.id = npc_adventurers_charter_hall; .factions[0].members[3].goal.intent.short.target.id = npc_inn_multiple; .factions[0].members[4].goal.intent.long.target.id = npc_mint; .factions[0].members[6].goal.intent.long.target.id = npc_small_prison_stocks
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:151:28
+    149| export function unkeyPeople(served, reference) {
+    150|   const leaked = storedIdsServed(served, reference);
+    151|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    152|   const twice = notBijective(served);
+    153|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:375:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+Error: a stored person id is served (the re-key did not happen): .factions[1].members[0].goal.intent.long.target.id = npc_mercenary_quarter; .factions[1].members[0].goal.intent.short.target.id = npc_veiled_f6e4b9a48b04ef62; .factions[1].members[1].goal.intent.short.target.id = npc_professional_city_watch; .factions[1].members[2].goal.intent.short.target.id = npc_mercenary_quarter; .factions[2].members[0].goal.intent.long.target.id = npc_major_hospital
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:151:28
+    149| export function unkeyPeople(served, reference) {
+    150|   const leaked = storedIdsServed(served, reference);
+    151|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    152|   const twice = notBijective(served);
+    153|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:375:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+Error: a stored person id is served (the re-key did not happen): .factions[0].members[0].goal.intent.long.target.id = npc_state_granary_complex; .factions[0].members[0].goal.intent.short.target.id = npc_carpenters_5_15; .factions[0].members[1].goal.intent.short.target.id = npc_state_granary_complex; .factions[0].members[2].goal.intent.long.target.id = npc_international_trade_center; .factions[0].members[5].goal.intent.short.target.id = npc_veiled_638aa17b7fc63730
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:151:28
+    149| export function unkeyPeople(served, reference) {
+    150|   const leaked = storedIdsServed(served, reference);
+    151|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    152|   const twice = notBijective(served);
+    153|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:375:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 9 passed (14)
+   Start at  02:32:50
+   Duration  157.16s (transform 10.73s, setup 34ms, import 65ms, tests 156.95s, environment 0ms)
+
+[gate-tail] end:  02:35:27 up  2:23,  0 user,  load average: 6.83, 7.00, 6.35
+[gate-tail] full log: /tmp/gate-tail.32640.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

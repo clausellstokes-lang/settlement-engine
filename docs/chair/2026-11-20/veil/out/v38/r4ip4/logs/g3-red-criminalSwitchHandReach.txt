@@ -1,0 +1,83 @@
++ Received
+
+- []
++ [
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_90f7f78dbfd2727f\" | \"npc_ea918c9f25357454\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_ee9fd3f56a38f7a2\" | \"npc_e4d4f139ec2c5b5a\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_2c16858934c37ab8\" | \"npc_ed58a36c436fa177\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_eec607e4ceed964e\" | \"npc_0ab545d9643f98d7\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_d5a7f12f549665cf\" | \"npc_e529764be6432621\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_5b5b14971a5a6d30\" | \"npc_040d8e19b7272ecc\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_bdf162e14a49eb47\" | \"npc_121024f39d157fcb\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_2fcce263eecdd629\" | \"npc_0eb1b9700be36ad0\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_e8e00ada2c55e761\" | \"npc_4eac439e3cd69ae5\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_fc0b0a01ad02a8bc\" | \"npc_758ffb9a3a0f4d58\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_b986e52f69d7363a\" | \"npc_b1932b24ea12d88b\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_ea41a9b3756c0755\" | \"npc_0357b7512688f5a2\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_5913f24ee601b63b\" | \"npc_065ca70cbb6c78ad\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_20f0b2a5d14698ca\" | \"npc_a341473f9982c9a4\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_789d40ed633276aa\" | \"npc_0572cddedd64f74d\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_f7a90ecbce0944a1\" | \"npc_4ff1e30cc93d3e07\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_f7bdfd540e2d6db5\" | \"npc_7ceca2ebd5239c6b\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_522d6607df2392b4\" | \"npc_58d65c8a1c1c26ae\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_95d2dd0b7d42ebe0\" | \"npc_cd7a039c154ca152\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_d9c85da96abf63a9\" | \"npc_15dd5ad08a40609d\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_01a6e75b81747066\" | \"npc_75fe2e538e40fe09\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_f49e9ba1bf3897f3\" | \"npc_0843dd87676a3658\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_d76f4b63c82aac20\" | \"npc_9cfda4c7d5f569b9\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_d0456203b2f209ba\" | \"npc_0901ba157eaaa81f\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[0].id: \"npc_3870a08781f2929b\" | \"npc_5c06ed30827327a4\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[1].id: \"npc_3b209cefc10972d3\" | \"npc_33a70c1017f925ca\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[2].id: \"npc_13e84ed9579ee92d\" | \"npc_1ff83052c41593af\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[3].id: \"npc_108177c8fe1390d3\" | \"npc_865b00991fc83275\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_2f7d70c11bd2e668\" | \"npc_c26c29f1af678d20\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_4eabf9f816b3fba4\" | \"npc_5ecbb3cdb88908df\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_f84b0b1094f7fcc5\" | \"npc_52463d8d908cd25c\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_2486b471cde85d33\" | \"npc_ba477c0abe585660\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_a276ee00c3594e9d\" | \"npc_d20d8f26d894a2e0\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_d5ac3e3b5f6828db\" | \"npc_558ab4a765caf0df\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_b1b30719d53c06c7\" | \"npc_d070036efc18dfef\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_d62b4874cfad1312\" | \"npc_05bf25455e9265f8\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_6a38e953b0ff74b4\" | \"npc_ba50c57a633dbce1\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_836955d15e3fcce8\" | \"npc_d8946e857ae70151\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_8556421e0145fca3\" | \"npc_fc5a36001f3a24f0\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_d1d696472171aa3c\" | \"npc_d049df6c004c0f48\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_1842926a0f050861\" | \"npc_22eb1c203815882d\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_a1c0d11e9cfc7fc8\" | \"npc_df75d115d0ddeba2\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_8e4a0d78e593892f\" | \"npc_8c1ef83a8fcbe833\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_eaa161a08b22fe84\" | \"npc_908ecd3f53c6c16a\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_12d7e5ce65ff32c2\" | \"npc_d36b81ada5ac6474\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_048c463f9881c2e7\" | \"npc_e81a6fe8e52e91c9\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_05b44f1c30a0bd7a\" | \"npc_fb50b6721e8746a6\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_1707fa1fd3c532aa\" | \"npc_baa4250fbc9fe9b6\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_dd556c22e40c2391\" | \"npc_70ccae87ac1d92aa\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_02f6485d8b97db74\" | \"npc_d91bd466bb67d471\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_6e96ca363f1c8e0a\" | \"npc_6df7ec0192183695\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_0bd0747ef12ba467\" | \"npc_c62ffa8e517a3eb6\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].id: \"npc_a0b043573fe3254d\" | \"npc_50c069539fffd6b9\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.long.target.id: \"npc_5e6919ab2fc68a00\" | \"npc_ed558c319d67b3e3\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.short.target.id: \"npc_5afa96c55b1ed682\" | \"npc_af4bfe51702e2b2e\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[1].id: \"npc_e1ca4cc338c7f33f\" | \"npc_64de7283b724e898\"",
++   "v102-metropolis-1 master dm=true (E): Zaachila Ku carries \"Smuggling network\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  12 failed | 2 passed (14)
+   Start at  02:30:11
+   Duration  115.46s (transform 3.69s, setup 31ms, import 66ms, tests 115.21s, environment 0ms)
+
+[gate-tail] end:  02:32:06 up  2:20,  0 user,  load average: 8.22, 6.83, 6.12
+[gate-tail] full log: /tmp/gate-tail.29664.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

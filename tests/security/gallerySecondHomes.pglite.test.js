@@ -48,8 +48,9 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { readFileSync, readdirSync } from 'node:fs';
+import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { bijectionTeeth, unkeyPeople } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const TOWN_TIMEOUT_MS = 1_800_000;
@@ -125,6 +126,27 @@ async function buildDb() {
 }
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const TEETH_FILE = 'gallerySecondHomes';
+// VR46 (R4I-PAGE-4, VEIL-38 G3): every non-owner read re-keys every person id under a salt of its own (VR10), so a guard that
+// found a person, a tie or a marker key by its STORED id reads the served document MODULO THE READ'S PERSON-ID BIJECTION AND
+// NOTHING ELSE: `unkeyPeople` against the stored record (it throws on a stored id served, tooth (ii), and on two cards under
+// one id, tooth (iv)), each unkeyed card then checked against the stored card of that id by its name, so a canonical order
+// the veil shifted can never pass as a person. `teethOn` executes VR46's five teeth on the guard's own equality and keeps
+// what each did (bit, missed, could not be built) in the file VR46_TEETH names, where it is set.
+function unkeyNamed(d, stored, out, tag) {
+  const u = unkeyPeople(d, stored);
+  const names = new Map((Array.isArray(stored?.npcs) ? stored.npcs : []).filter(isRec).map((n) => [n.id, n.name]));
+  for (const n of (Array.isArray(u?.npcs) ? u.npcs : []).filter(isRec)) {
+    if (names.has(n.id) && typeof n.name === 'string' && typeof names.get(n.id) === 'string' && n.name !== names.get(n.id)) out.push(`${tag}: VR46: the bijection reads ${n.name} as ${names.get(n.id)}`);
+  }
+  return u;
+}
+function teethOn(served, holds, opt, need, out, tag) {
+  const { missed, absent } = bijectionTeeth(served, holds, opt);
+  for (const m of missed) if (need.some((re) => re.test(m))) out.push(`${tag}: VR46 tooth did not bite: ${m}`);
+  if (process.env.VR46_TEETH) appendFileSync(process.env.VR46_TEETH, `${JSON.stringify({ file: TEETH_FILE, tag, missed, absent })}\n`);
+  return { missed, absent };
+}
 // THE MARKER: letters and digits only, so a case fold, a slug or a join keeps it (COHERENCE-VEIL-8)
 const MARK = (n) => `Sh6K${n}Q`;
 const TOKEN_RE = /sh6k(\d+)q/g; // read on the FOLDED string
@@ -551,9 +573,13 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
     const towns = (v) => (Array.isArray(v) ? v.flatMap(towns) : isRec(v) ? [...(Array.isArray(v.npcs) && Array.isArray(v.relationships) ? [v] : []), ...Object.values(v).flatMap(towns)] : []);
     const ends = (r) => `${r.from ?? r.npc1Id}>${r.to ?? r.npc2Id}`;
     const canon = (v) => (Array.isArray(v) ? v.map(canon) : isRec(v) ? Object.fromEntries(Object.keys(v).filter((k) => v[k] !== undefined).sort().map((k) => [k, canon(v[k])])) : v);
-    const tiesOf = (body) => JSON.stringify(canon(towns(body).map((t) => t.relationships)));
+    // VR46 (R4I-PAGE-4): every read re-keys every person and tie id under its own salt, so each town a read carries is read
+    // back to the stored record's ids by its own bijection (`unkeyPeople`: it throws on a stored id served, or two cards
+    // under one id), and the ties are then found by their ends and compared exactly as before
+    const unkeyed = (body, record) => towns(body).map((t) => unkeyPeople(t, record));
+    const tiesOf = (body, record) => JSON.stringify(canon(unkeyed(body, record).map((t) => t.relationships)));
     const db = LIVE.db; H.db = db;
-    const sent = []; const lost = []; const unequal = []; let reads = 0;
+    const sent = []; const lost = []; const unequal = []; let reads = 0; const teethBad = [];
     for (const [shape, record] of Object.entries(shapes(town))) {
       const pub = veil.galleryPayloadFor(record, { shareDm: true, memberOverrides: {} });
       for (const mode of ['live', 'snapshot']) {
@@ -581,17 +607,31 @@ describe('COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sen
           if (!body) { sent.push(`${label} ${read}: NO ROW`); continue; }
           const text = JSON.stringify(body);
           for (const m of MARKS) if (text.includes(m) || text.toLowerCase().includes(m.toLowerCase())) sent.push(`${label} ${read}: the tie's copy "${m}" of a role p1's card does not carry`);
-          const found = towns(body);
+          const found = unkeyed(body, record);
           if (!found.length) lost.push(`${label} ${read}: no town`);
           for (const t of found) {
             const byEnds = new Map(t.relationships.filter(isRec).map((r) => [ends(r), r]));
             for (const [tie, key, want] of CONTROLS) if (byEnds.get(tie)?.[key] !== want) lost.push(`${label} ${read}: the control "${want}" left the tie ${tie}`);
           }
         }
-        for (const read of ['gallery', 'import']) if (resp[read] && tiesOf(resp.client) !== tiesOf(resp[read])) unequal.push(`${label}: the twin's ties are not the ${read} read's: ${tiesOf(resp.client)} != ${tiesOf(resp[read])}`);
+        for (const read of ['gallery', 'import']) if (resp[read] && tiesOf(resp.client, record) !== tiesOf(resp[read], record)) unequal.push(`${label}: the twin's ties are not the ${read} read's: ${tiesOf(resp.client, record)} != ${tiesOf(resp[read], record)}`);
+        // VR46's teeth on the guard's own equality, on the gallery read's town: the controls on their ties, and the ties equal
+        // to the twin's. (i), (ii), (iv) both and (v) (a second read) must bite; (iii) cannot (the guard reads the ties, the
+        // tooth changes a card's name)
+        const holds = (c) => {
+          const u = unkeyPeople(c, record);
+          const byEnds = new Map(u.relationships.filter(isRec).map((r) => [ends(r), r]));
+          return CONTROLS.every(([tie, key, want]) => byEnds.get(tie)?.[key] === want)
+            && JSON.stringify(canon([u.relationships])) === tiesOf(resp.client, record);
+        };
+        const gTown = towns(resp.gallery)[0];
+        await db.exec(`set test.uid = '';`);
+        const again = towns((await db.query('select * from public.get_gallery_dossier($1)', [`sh${n}`])).rows[0])[0];
+        teethOn(gTown, holds, { storedId: 'p1', again }, [/^\(i\)/, /^\(ii\)/, /^\(iv\)/, /^\(v\)/, /^\(the equality/], teethBad, `${label} gallery`);
       }
     }
     expect(reads).toBe(2 * 2 * 4);
     expect({ sent: [...new Set(sent)], lost, unequal }).toEqual({ sent: [], lost: [], unequal: [] });
+    expect(teethBad).toEqual([]);
   }, TOWN_TIMEOUT_MS);
 });

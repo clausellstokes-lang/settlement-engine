@@ -1,0 +1,81 @@
+[gate-tail] start:  02:40:25 up  2:28,  0 user,  load average: 6.49, 6.32, 6.20 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F4: a member key naming no person is worked on by no read; one naming a person still hides its depth
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js (32 tests | 2 failed) 490982ms
+     × F4: a member key naming no person is worked on by no read; one naming a person still hides its depth 199ms
+     × V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes 442ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F4: a member key naming no person is worked on by no read; one naming a person still hides its depth
+AssertionError: expected [ '$veil', 'npc_def154f79389c927' ] to deeply equal [ '$veil', 'npc_0' ]
+
+- Expected
++ Received
+
+  [
+    "$veil",
+-   "npc_0",
++   "npc_def154f79389c927",
+  ]
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js:632:69
+    630|     expect(has(r.gResp, 'F4SECRET_FACE') || has(r.lResp, 'F4SECRET_FAC…
+    631|     // the served booleans are the people's: the one person with an en…
+    632|     expect(Object.keys(r.gResp[0].gallery_member_overrides).sort()).to…
+       |                                                                     ^
+    633|     expect(Object.keys(r.lResp.gallery_member_overrides).sort()).toEqu…
+    634|   }, ROW_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+AssertionError: expected { id: 'npc_093aa9f7528f8d57', …(2) } to deeply equal undefined
+
+- Expected:
+undefined
+
++ Received:
+{
+  "id": "npc_093aa9f7528f8d57",
+  "name": "Ada Hidden",
+  "role": "reeve",
+}
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js:813:44
+    811|         const now = structuredClone(r.gallery[0].data); const then = s…
+    812|         const card = now.npcs.find((n) => n.id === 'npc_1');
+    813|         expect(now.factions[0].members[0]).toEqual(card);
+       |                                            ^
+    814|         expect(now.powerStructure.factions[0].members[0]).toEqual(card…
+    815|         for (const d of [now, then]) { d.factions[0].members.splice(0,…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 30 passed (32)
+   Start at  02:40:28
+   Duration  492.07s (transform 9.18s, setup 63ms, import 648ms, tests 490.98s, environment 0ms)
+
+[gate-tail] end:  02:48:40 up  2:36,  0 user,  load average: 5.04, 6.16, 6.39
+[gate-tail] full log: /tmp/gate-tail.8287.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

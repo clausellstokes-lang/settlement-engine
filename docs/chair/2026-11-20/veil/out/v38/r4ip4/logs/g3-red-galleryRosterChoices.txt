@@ -1,0 +1,44 @@
+[gate-tail] start:  02:40:25 up  2:28,  0 user,  load average: 6.49, 6.32, 6.20 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (39 tests | 2 failed) 1202767ms
+     × R3-CURE-2 unit 1 and unit 4 (i): THE FOLD AND THE NUMBER ID: a withheld "Thieves' Guild (powerful)" named by its BARE form, and its number id 7, leave every structured copy (conflicts both lists, the tension, contestsNiche, memberships, the affiliation key, the goal named by sentence and the goal aimed by id), both shapes, every read, Reveal DM off and on; its tooth: a goal aimed at a SHOWN power and a membership of a shown power are served byte for byte 20ms
+     × R3-CURE-3 (the chair's ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 1 and unit 4 (i): THE FOLD AND THE NUMBER ID: a withheld "Thieves' Guild (powerful)" named by its BARE form, and its number id 7, leave every structured copy (conflicts both lists, the tension, contestsNiche, memberships, the affiliation key, the goal named by sentence and the goal aimed by id), both shapes, every read, Reveal DM off and on; its tooth: a goal aimed at a SHOWN power and a membership of a shown power are served byte for byte
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:762:19
+    760|     }
+    761|     note('R3-CURE-2 unit 1, the tooth (reads serving the shown power\'…
+    762|     expect(tooth).toBeGreaterThan(0);
+       |                   ^
+    763|     expect(bad).toEqual([]);
+    764|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-3 (the chair's ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:799:20
+    797|     }
+    798|     note('R3-CURE-3 ruling A: the three forms judged on', judged, 'peo…
+    799|     expect(judged).toBeGreaterThan(0);
+       |                    ^
+    800|     expect(tooth).toBeGreaterThan(0);
+    801|     expect(bad).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 37 passed (39)
+   Start at  02:40:28
+   Duration  1203.81s (transform 16.95s, setup 56ms, import 540ms, tests 1202.77s, environment 0ms)
+
+[gate-tail] end:  03:00:32 up  2:48,  0 user,  load average: 4.81, 4.73, 5.58
+[gate-tail] full log: /tmp/gate-tail.8288.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

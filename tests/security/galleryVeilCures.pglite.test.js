@@ -25,8 +25,9 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { readFileSync, readdirSync } from 'node:fs';
+import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { bijectionTeeth, canonPeople, canonServed, readsDiffer, storedIdsServed, unkeyPeople } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ROW_TIMEOUT_MS = 900_000;
@@ -112,6 +113,35 @@ const FORCE_ALL = resolve(process.cwd(), 'docs/chair/2026-11-12/veil-probe-2/dep
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const has = (v, s) => JSON.stringify(v ?? null).includes(s);
+const TEETH_FILE = 'galleryVeilCures';
+// VR46 (R4I-PAGE-4, VEIL-38 G3): every non-owner read re-keys every person id under a salt of its own (VR10), so a guard that
+// found a person, a tie or a marker key by its STORED id reads the served document MODULO THE READ'S PERSON-ID BIJECTION AND
+// NOTHING ELSE: `unkeyPeople` against the stored record (it throws on a stored id served, tooth (ii), and on two cards under
+// one id, tooth (iv)), each unkeyed card then checked against the stored card of that id by its name, so a canonical order
+// the veil shifted can never pass as a person. `teethOn` executes VR46's five teeth on the guard's own equality and keeps
+// what each did (bit, missed, could not be built) in the file VR46_TEETH names, where it is set.
+function unkeyNamed(d, stored, out, tag) {
+  const u = unkeyPeople(d, stored);
+  const names = new Map((Array.isArray(stored?.npcs) ? stored.npcs : []).filter(isRec).map((n) => [n.id, n.name]));
+  for (const n of (Array.isArray(u?.npcs) ? u.npcs : []).filter(isRec)) {
+    if (names.has(n.id) && typeof n.name === 'string' && typeof names.get(n.id) === 'string' && n.name !== names.get(n.id)) out.push(`${tag}: VR46: the bijection reads ${n.name} as ${names.get(n.id)}`);
+  }
+  return u;
+}
+function teethOn(served, holds, opt, need, out, tag) {
+  const { missed, absent } = bijectionTeeth(served, holds, opt);
+  for (const m of missed) if (need.some((re) => re.test(m))) out.push(`${tag}: VR46 tooth did not bite: ${m}`);
+  if (process.env.VR46_TEETH) appendFileSync(process.env.VR46_TEETH, `${JSON.stringify({ file: TEETH_FILE, tag, missed, absent })}\n`);
+  return { missed, absent };
+}
+/** VR46 (R4I-PAGE-4): the served marker's person keys, read back to the stored record's ids by the read's own bijection
+ *  (`canonServed` over the read's document, then each canonical name to the stored id of that name). */
+function markerKeysUnkeyed(marker, doc, stored) {
+  const back = new Map([...canonPeople(stored).names].map(([orig, name]) => [name, orig]));
+  return Object.keys(canonServed(marker, doc)).map((k) => back.get(k) ?? k).sort();
+}
+/** A spelling with every object's keys sorted, undefined keys gone (what `toEqual` compares). */
+const sorted = (v) => JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((k) => [k, x[k]])) : x));
 
 describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   /** @type {any} */ let LIVE; /** @type {any} */ let AT210; /** @type {any} */ let AT211;
@@ -623,14 +653,31 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
   it('F4: a member key naming no person is worked on by no read; one naming a person still hides its depth', async () => {
     const ov = { $veil: { v: 1, deltas: [] }, npc_0: { revealDm: false } };
     for (let i = 1; i <= 5000; i += 1) ov[`ghost_${i}`] = { revealDm: false, allowImport: true };
-    const share = await put(LIVE.db, { name: 'T', npcs: [{ id: 'npc_0', name: 'A', personality: { core: 'F4SECRET_FACE' } }, { id: 'npc_1', name: 'B', personality: { core: 'F4OPEN_FACE' } }] }, ov);
+    const F4_DOC = { name: 'T', npcs: [{ id: 'npc_0', name: 'A', personality: { core: 'F4SECRET_FACE' } }, { id: 'npc_1', name: 'B', personality: { core: 'F4OPEN_FACE' } }] };
+    const share = await put(LIVE.db, F4_DOC, ov);
     const r = await readBoth(LIVE.db, share);
     // anchored: the open face's depth is drawn, so the read is the town's
     expect(has(r.g.settlement, 'F4OPEN_FACE')).toBe(true);
     expect(has(r.gResp, 'F4SECRET_FACE') || has(r.lResp, 'F4SECRET_FACE')).toBe(false);
     // the served booleans are the people's: the one person with an entry, never a ghost
-    expect(Object.keys(r.gResp[0].gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
-    expect(Object.keys(r.lResp.gallery_member_overrides).sort()).toEqual(['$veil', 'npc_0']);
+    // VR46 (R4I-PAGE-4): each read re-keys its people under its own salt, the marker's person keys with them, so the keys
+    // are read back by the read's bijection; no stored id is served in the document or the marker (tooth (ii))
+    const reads = [['gallery', r.gResp[0].data, r.gResp[0].gallery_member_overrides], ['link', r.lResp.dossier, r.lResp.gallery_member_overrides]];
+    for (const [, doc, marker] of reads) expect(storedIdsServed([doc, marker], F4_DOC)).toEqual([]);
+    expect(markerKeysUnkeyed(r.gResp[0].gallery_member_overrides, r.gResp[0].data, F4_DOC)).toEqual(['$veil', 'npc_0']);
+    expect(markerKeysUnkeyed(r.lResp.gallery_member_overrides, r.lResp.dossier, F4_DOC)).toEqual(['$veil', 'npc_0']);
+    // VR46's teeth on the keys' equality: (ii) and (iv) two people under one id must bite (`unkeyPeople` throws); the
+    // fixture has no reference, so (i) and (iv) one person under two ids cannot be built; (iii) cannot bite (the guard
+    // reads the marker's keys, no byte of a card); (v) by hand: a second read holds and shares no person id with the first
+    const bad = [];
+    for (const [read, doc, marker] of reads) {
+      teethOn(doc, (c) => { unkeyPeople(c, F4_DOC); return sorted(markerKeysUnkeyed(marker, c, F4_DOC)) === sorted(['$veil', 'npc_0']); },
+        { storedId: 'npc_0' }, [/^\(ii\)/, /^\(iv\) two people/, /^\(the equality/], bad, `F4 ${read}`);
+    }
+    const r2 = await readBoth(LIVE.db, share);
+    expect(markerKeysUnkeyed(r2.gResp[0].gallery_member_overrides, r2.gResp[0].data, F4_DOC)).toEqual(['$veil', 'npc_0']);
+    expect(readsDiffer(r.gResp[0].data, r2.gResp[0].data)).toEqual([]);
+    expect(bad).toEqual([]);
   }, ROW_TIMEOUT_MS);
   // ── F7 ────────────────────────────────────────────────────────────────────────────────────────
   it('F7: the map member shows its frozen copy and its narration, each under its own listing\'s veil', async () => {
@@ -808,12 +855,27 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
       if (tag === 'unmarked') {
         // nothing else changes: the unmarked share's gallery response is 210's, but for Ada's two roster copies, each
         // now the very public card her own entry is
-        const now = structuredClone(r.gallery[0].data); const then = structuredClone(r210.gallery[0].data);
+        // VR46 (R4I-PAGE-4): the read after 212 re-keys every person id (210's never did), so it is read back to the stored
+        // ids by its own bijection (`unkeyPeople` against the stored record) and then compared exactly as before
+        const now = unkeyPeople(structuredClone(r.gallery[0].data), V54_DOC); const then = structuredClone(r210.gallery[0].data);
         const card = now.npcs.find((n) => n.id === 'npc_1');
         expect(now.factions[0].members[0]).toEqual(card);
         expect(now.powerStructure.factions[0].members[0]).toEqual(card);
         for (const d of [now, then]) { d.factions[0].members.splice(0, 1); d.powerStructure.factions[0].members.splice(0, 1); }
         expect(now).toEqual(then);
+        // VR46's teeth on that equality: (ii), (iii), (iv) two people under one id and (v) (a second read) must bite; the
+        // fixture has no reference, so (i) and (iv) one person under two ids cannot be built
+        const holds = (c) => {
+          const u = unkeyPeople(structuredClone(c), V54_DOC); const t = structuredClone(r210.gallery[0].data);
+          const k = u.npcs.find((n) => n.id === 'npc_1');
+          if (!k || sorted(u.factions[0].members[0]) !== sorted(k) || sorted(u.powerStructure.factions[0].members[0]) !== sorted(k)) return false;
+          for (const d of [u, t]) { d.factions[0].members.splice(0, 1); d.powerStructure.factions[0].members.splice(0, 1); }
+          return sorted(u) === sorted(t);
+        };
+        const again = (await v31Reads(LIVE.db, V54_DOC, ov)).gallery[0].data;
+        const bad = [];
+        teethOn(r.gallery[0].data, holds, { storedId: 'npc_1', again }, [/^\(ii\)/, /^\(iii\)/, /^\(iv\) two people/, /^\(v\)/, /^\(the equality/], bad, 'V5-4 unmarked gallery');
+        expect(bad).toEqual([]);
       }
     }
     // the red control: at 210 (no read veiled on the server) both shares send Ada's secret in the roster copy; at

@@ -1,0 +1,83 @@
++     "new snapshot gallery: the control \"the smith\" left the tie p1>p2",
++     "new snapshot gallery: the control \"the smith\" left the tie p2>p1",
++     "new snapshot gallery: the control \"the ferryman\" left the tie p1>p4",
++     "new snapshot gallery: the control \"the quiet reeve\" left the tie p3>p1",
++     "new snapshot import: the control \"the smith\" left the tie p1>p2",
++     "new snapshot import: the control \"the smith\" left the tie p2>p1",
++     "new snapshot import: the control \"the ferryman\" left the tie p1>p4",
++     "new snapshot import: the control \"the quiet reeve\" left the tie p3>p1",
++     "new snapshot client: the control \"the smith\" left the tie p1>p2",
++     "new snapshot client: the control \"the smith\" left the tie p2>p1",
++     "new snapshot client: the control \"the ferryman\" left the tie p1>p4",
++     "new snapshot client: the control \"the quiet reeve\" left the tie p3>p1",
++     "new snapshot page: the control \"the smith\" left the tie p1>p2",
++     "new snapshot page: the control \"the smith\" left the tie p2>p1",
++     "new snapshot page: the control \"the ferryman\" left the tie p1>p4",
++     "new snapshot page: the control \"the quiet reeve\" left the tie p3>p1",
++     "old live gallery: the control \"the smith\" left the tie p1>p2",
++     "old live gallery: the control \"the smith\" left the tie p2>p1",
++     "old live gallery: the control \"the ferryman\" left the tie p1>p4",
++     "old live gallery: the control \"the quiet reeve\" left the tie p3>p1",
++     "old live import: the control \"the smith\" left the tie p1>p2",
++     "old live import: the control \"the smith\" left the tie p2>p1",
++     "old live import: the control \"the ferryman\" left the tie p1>p4",
++     "old live import: the control \"the quiet reeve\" left the tie p3>p1",
++     "old live client: the control \"the smith\" left the tie p1>p2",
++     "old live client: the control \"the smith\" left the tie p2>p1",
++     "old live client: the control \"the ferryman\" left the tie p1>p4",
++     "old live client: the control \"the quiet reeve\" left the tie p3>p1",
++     "old live page: the control \"the smith\" left the tie p1>p2",
++     "old live page: the control \"the smith\" left the tie p2>p1",
++     "old live page: the control \"the ferryman\" left the tie p1>p4",
++     "old live page: the control \"the quiet reeve\" left the tie p3>p1",
++     "old snapshot gallery: the control \"the smith\" left the tie p1>p2",
++     "old snapshot gallery: the control \"the smith\" left the tie p2>p1",
++     "old snapshot gallery: the control \"the ferryman\" left the tie p1>p4",
++     "old snapshot gallery: the control \"the quiet reeve\" left the tie p3>p1",
++     "old snapshot import: the control \"the smith\" left the tie p1>p2",
++     "old snapshot import: the control \"the smith\" left the tie p2>p1",
++     "old snapshot import: the control \"the ferryman\" left the tie p1>p4",
++     "old snapshot import: the control \"the quiet reeve\" left the tie p3>p1",
++     "old snapshot client: the control \"the smith\" left the tie p1>p2",
++     "old snapshot client: the control \"the smith\" left the tie p2>p1",
++     "old snapshot client: the control \"the ferryman\" left the tie p1>p4",
++     "old snapshot client: the control \"the quiet reeve\" left the tie p3>p1",
++     "old snapshot page: the control \"the smith\" left the tie p1>p2",
++     "old snapshot page: the control \"the smith\" left the tie p2>p1",
++     "old snapshot page: the control \"the ferryman\" left the tie p1>p4",
++     "old snapshot page: the control \"the quiet reeve\" left the tie p3>p1",
++   ],
+    "sent": [],
+-   "unequal": [],
++   "unequal": [
++     "new live: the twin's ties are not the gallery read's: [[{\"from\":\"npc_ac46b38117681be4\",\"id\":\"tie_485778aca57fc2b1\",\"npc2Role\":\"the smith\",\"to\":\"npc_1a2f6933fb409c7a\"},{\"from\":\"npc_1a2f6933fb409c7a\",\"id\":\"tie_b6ae6063779d0176\",\"npc1Role\":\"the smith\",\"to\":\"npc_ac46b38117681be4\"},{\"from\":\"npc_ac46b38117681be4\",\"id\":\"tie_02fe13f248bb103b\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_f185d557a02fa378\"},{\"from\":\"npc_4c6c074168e41b3b\",\"id\":\"tie_d1e09fdfdc8edaf6\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_ac46b38117681be4\"}]] != [[{\"from\":\"npc_24ec0c49d690c3eb\",\"id\":\"tie_55f087fdb8ccc55f\",\"npc2Role\":\"the smith\",\"to\":\"npc_a4fad5649d430c22\"},{\"from\":\"npc_a4fad5649d430c22\",\"id\":\"tie_5c91d54ce632197b\",\"npc1Role\":\"the smith\",\"to\":\"npc_24ec0c49d690c3eb\"},{\"from\":\"npc_24ec0c49d690c3eb\",\"id\":\"tie_2c7bcbdd6de9dffe\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_3cf6245c1ba9b3e5\"},{\"from\":\"npc_5980a580e9403f8b\",\"id\":\"tie_62e6a15125c0816a\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_24ec0c49d690c3eb\"}]]",
++     "new live: the twin's ties are not the import read's: [[{\"from\":\"npc_ac46b38117681be4\",\"id\":\"tie_485778aca57fc2b1\",\"npc2Role\":\"the smith\",\"to\":\"npc_1a2f6933fb409c7a\"},{\"from\":\"npc_1a2f6933fb409c7a\",\"id\":\"tie_b6ae6063779d0176\",\"npc1Role\":\"the smith\",\"to\":\"npc_ac46b38117681be4\"},{\"from\":\"npc_ac46b38117681be4\",\"id\":\"tie_02fe13f248bb103b\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_f185d557a02fa378\"},{\"from\":\"npc_4c6c074168e41b3b\",\"id\":\"tie_d1e09fdfdc8edaf6\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_ac46b38117681be4\"}]] != [[{\"from\":\"npc_1ee92d8575c28989\",\"id\":\"tie_7a59673a6e919563\",\"npc2Role\":\"the smith\",\"to\":\"npc_b6527e046a7fd9df\"},{\"from\":\"npc_b6527e046a7fd9df\",\"id\":\"tie_d2138e477cd703e6\",\"npc1Role\":\"the smith\",\"to\":\"npc_1ee92d8575c28989\"},{\"from\":\"npc_1ee92d8575c28989\",\"id\":\"tie_1d3d855a4868d459\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_831d701e30dfc443\"},{\"from\":\"npc_0ce5dc349a64c189\",\"id\":\"tie_0fae065b8237c111\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_1ee92d8575c28989\"}]]",
++     "new snapshot: the twin's ties are not the gallery read's: [[{\"from\":\"npc_abf52a2f3956463d\",\"id\":\"tie_2e1ba4c2f507f3de\",\"npc2Role\":\"the smith\",\"to\":\"npc_e022ce2571c49fe1\"},{\"from\":\"npc_e022ce2571c49fe1\",\"id\":\"tie_f471ccf22285fadb\",\"npc1Role\":\"the smith\",\"to\":\"npc_abf52a2f3956463d\"},{\"from\":\"npc_abf52a2f3956463d\",\"id\":\"tie_2d70f78888a4f31c\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_f1ff471042d4815e\"},{\"from\":\"npc_edc2877556603227\",\"id\":\"tie_9832f5c05d00c0af\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_abf52a2f3956463d\"}]] != [[{\"from\":\"npc_c19177cc8bacd429\",\"id\":\"tie_2685f9686e1f39cf\",\"npc2Role\":\"the smith\",\"to\":\"npc_e80958c7c38c8ea7\"},{\"from\":\"npc_e80958c7c38c8ea7\",\"id\":\"tie_09338768d54383fd\",\"npc1Role\":\"the smith\",\"to\":\"npc_c19177cc8bacd429\"},{\"from\":\"npc_c19177cc8bacd429\",\"id\":\"tie_8584588357db6217\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_86a765cc6d0342ca\"},{\"from\":\"npc_8b775f94ddea58bd\",\"id\":\"tie_c1484f8689c19087\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_c19177cc8bacd429\"}]]",
++     "new snapshot: the twin's ties are not the import read's: [[{\"from\":\"npc_abf52a2f3956463d\",\"id\":\"tie_2e1ba4c2f507f3de\",\"npc2Role\":\"the smith\",\"to\":\"npc_e022ce2571c49fe1\"},{\"from\":\"npc_e022ce2571c49fe1\",\"id\":\"tie_f471ccf22285fadb\",\"npc1Role\":\"the smith\",\"to\":\"npc_abf52a2f3956463d\"},{\"from\":\"npc_abf52a2f3956463d\",\"id\":\"tie_2d70f78888a4f31c\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_f1ff471042d4815e\"},{\"from\":\"npc_edc2877556603227\",\"id\":\"tie_9832f5c05d00c0af\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_abf52a2f3956463d\"}]] != [[{\"from\":\"npc_6c7057178d4a877e\",\"id\":\"tie_2e93c52134a4a025\",\"npc2Role\":\"the smith\",\"to\":\"npc_c6cc77179cc11c0e\"},{\"from\":\"npc_c6cc77179cc11c0e\",\"id\":\"tie_2a55a385381b636c\",\"npc1Role\":\"the smith\",\"to\":\"npc_6c7057178d4a877e\"},{\"from\":\"npc_6c7057178d4a877e\",\"id\":\"tie_3fe75b93782d02f2\",\"npc2Role\":\"the ferryman\",\"to\":\"npc_9f1b12657a8db547\"},{\"from\":\"npc_320afe1d5cc28e38\",\"id\":\"tie_7c41884a41054176\",\"npc1Role\":\"the quiet reeve\",\"to\":\"npc_6c7057178d4a877e\"}]]",
++     "old live: the twin's ties are not the gallery read's: [[{\"npc1Id\":\"npc_56877fe4627b8d8e\",\"npc2Id\":\"npc_9c9343be6e508771\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_9c9343be6e508771\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_56877fe4627b8d8e\"},{\"npc1Id\":\"npc_56877fe4627b8d8e\",\"npc2Id\":\"npc_b09f25195bcc8f8e\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_f9110f1af2adf912\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_56877fe4627b8d8e\"}]] != [[{\"npc1Id\":\"npc_beda8e723e367344\",\"npc2Id\":\"npc_b753f4e1503ec7eb\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_b753f4e1503ec7eb\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_beda8e723e367344\"},{\"npc1Id\":\"npc_beda8e723e367344\",\"npc2Id\":\"npc_fc794e195d7e2e67\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_c8c28ab310414d05\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_beda8e723e367344\"}]]",
++     "old live: the twin's ties are not the import read's: [[{\"npc1Id\":\"npc_56877fe4627b8d8e\",\"npc2Id\":\"npc_9c9343be6e508771\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_9c9343be6e508771\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_56877fe4627b8d8e\"},{\"npc1Id\":\"npc_56877fe4627b8d8e\",\"npc2Id\":\"npc_b09f25195bcc8f8e\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_f9110f1af2adf912\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_56877fe4627b8d8e\"}]] != [[{\"npc1Id\":\"npc_b350a227c9bc164f\",\"npc2Id\":\"npc_1f9afcc16145823c\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_1f9afcc16145823c\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_b350a227c9bc164f\"},{\"npc1Id\":\"npc_b350a227c9bc164f\",\"npc2Id\":\"npc_8e290659421dc94f\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_62d06b95afa13afa\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_b350a227c9bc164f\"}]]",
++     "old snapshot: the twin's ties are not the gallery read's: [[{\"npc1Id\":\"npc_947ac6679a6cc7ce\",\"npc2Id\":\"npc_9e9c767a9ef3dcfa\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_9e9c767a9ef3dcfa\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_947ac6679a6cc7ce\"},{\"npc1Id\":\"npc_947ac6679a6cc7ce\",\"npc2Id\":\"npc_9ba616a145cffb99\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_7aa3a76aeec21b6d\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_947ac6679a6cc7ce\"}]] != [[{\"npc1Id\":\"npc_b31591d7fc023df6\",\"npc2Id\":\"npc_8a2904416b6eec65\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_8a2904416b6eec65\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_b31591d7fc023df6\"},{\"npc1Id\":\"npc_b31591d7fc023df6\",\"npc2Id\":\"npc_6ec8f2641f42d1e0\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_db66da3cc655bbf0\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_b31591d7fc023df6\"}]]",
++     "old snapshot: the twin's ties are not the import read's: [[{\"npc1Id\":\"npc_947ac6679a6cc7ce\",\"npc2Id\":\"npc_9e9c767a9ef3dcfa\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_9e9c767a9ef3dcfa\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_947ac6679a6cc7ce\"},{\"npc1Id\":\"npc_947ac6679a6cc7ce\",\"npc2Id\":\"npc_9ba616a145cffb99\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_7aa3a76aeec21b6d\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_947ac6679a6cc7ce\"}]] != [[{\"npc1Id\":\"npc_617327e7fa1f8ca1\",\"npc2Id\":\"npc_251192b92bf5fb00\",\"npc2Role\":\"the smith\"},{\"npc1Id\":\"npc_251192b92bf5fb00\",\"npc1Role\":\"the smith\",\"npc2Id\":\"npc_617327e7fa1f8ca1\"},{\"npc1Id\":\"npc_617327e7fa1f8ca1\",\"npc2Id\":\"npc_5906c252cb7c5f2d\",\"npc2Role\":\"the ferryman\"},{\"npc1Id\":\"npc_063d189366e467fd\",\"npc1Role\":\"the quiet reeve\",\"npc2Id\":\"npc_617327e7fa1f8ca1\"}]]",
++   ],
+  }
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:595:57
+    593|     }
+    594|     expect(reads).toBe(2 * 2 * 4);
+    595|     expect({ sent: [...new Set(sent)], lost, unequal }).toEqual({ sent…
+       |                                                         ^
+    596|   }, TOWN_TIMEOUT_MS);
+    597| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  02:40:28
+   Duration  814.13s (transform 18.80s, setup 33ms, import 722ms, tests 813.10s, environment 0ms)
+
+[gate-tail] end:  02:54:03 up  2:42,  0 user,  load average: 5.72, 6.16, 6.33
+[gate-tail] full log: /tmp/gate-tail.8289.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

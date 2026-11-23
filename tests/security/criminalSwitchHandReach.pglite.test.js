@@ -48,6 +48,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve, join } from 'node:path';
+import { bijectionTeeth, canonPeople, notBijective, readsDiffer, unkeyPeople } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const TOWN_TIMEOUT_MS = 1_800_000;
@@ -132,12 +133,43 @@ function diffPaths(a, b, p = '', out = []) {
   if (JSON.stringify(a) !== JSON.stringify(b)) out.push(`${p}: ${JSON.stringify(a)?.slice(0, 90)} | ${JSON.stringify(b)?.slice(0, 90)}`);
   return out;
 }
+/**
+ * VR46 (R4I-PAGE-4, VEIL-38 G3; the form of galleryVeilHandRows.pglite.test.js :: differServed): every non-owner read
+ * re-keys every person id under a salt of its own (VR10), so two served documents are compared MODULO EACH READ'S
+ * PERSON-ID BIJECTION AND NOTHING ELSE (`canonPeople` on both sides, every other byte by `diffPaths` as before), with the
+ * teeth the pair can carry: (ii) every served person or tie id is one the re-key made (`npc_`/`tie_` and 16 hex: a stored
+ * id served un-re-keyed reds); (iv) no two cards of one read under one id; (v) the two reads share no person id. Tooth (i)
+ * and (iii) bite through the canonical comparison itself; `teethOf` executes all five on the guard's own reads.
+ */
+const FRESH_ID = /^(npc|tie)_[0-9a-f]{16}$/;
+function diffServed(a, b) {
+  if (!isRec(a) || !isRec(b)) return diffPaths(a, b);
+  const ca = canonPeople(a); const cb = canonPeople(b);
+  const out = diffPaths(ca.doc, cb.doc);
+  for (const [side, c] of [['first', ca], ['second', cb]]) for (const v of c.names.keys()) if (!FRESH_ID.test(String(v))) out.push(`VR46 (ii): the ${side} read serves a person id the re-key did not make: ${String(v).slice(0, 60)}`);
+  for (const [side, d] of [['first', a], ['second', b]]) out.push(...notBijective(d).map((x) => `VR46 (iv): the ${side} read: ${x}`));
+  const shared = readsDiffer(a, b);
+  if (shared.length && shared[0] !== '(the first read serves no person id)') out.push(`VR46 (v): the two reads share ${shared.length} person ids`);
+  return out;
+}
 
 describe('a switch sets only what a hand can see and undo on that record (VR34)', () => {
   /** @type {any} */ let LIVE;
   /** @type {any} */ let lib;
   const tally = { cases: 0, groupingsOnly: 0, written: 0, served: 0, planted: 0, peopleOpen: 0, peopleWhole: 0, masterMembers: 0,
-    untouchedEyes: 0, untouchedShown: 0, untouched: {} };
+    untouchedEyes: 0, untouchedShown: 0, untouched: {}, teeth: 0, teethAbsent: {} };
+  /**
+   * VR46's FIVE TEETH (R4I-PAGE-4), executed on a re-stated guard's own reads: `x` the read the guard judges, `y` the read
+   * it is judged against, `again` a second read of `x`'s town and veil (tooth (v)), `storedId` a stored person id of the
+   * record (tooth (ii)). Each mutation of `x` must make `diffServed(x, y)` red. A tooth the payload cannot carry is
+   * tallied by name (`teethAbsent`), never counted as bitten.
+   */
+  function teethOf(faults, at, x, y, again, storedId) {
+    const { missed, absent } = bijectionTeeth(x, (c) => diffServed(c, y).length === 0, { storedId, again });
+    for (const m of missed) faults.push(`${at} VR46 teeth: ${m}`);
+    for (const a of absent) tally.teethAbsent[a] = (tally.teethAbsent[a] || 0) + 1;
+    tally.teeth += 1;
+  }
 
   beforeAll(async () => {
     LIVE = await buildDb();
@@ -298,13 +330,20 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
           // (B) and (C): served equal to the hand's, on the gallery read, the link and the twin
           const handOpen = byHand(pub, defaults, [], family, false);
           const handShut = byHand(pub, defaults, allOpen, family, true);
+          // VR46 (R4I-PAGE-4): each pair of reads compared modulo each read's person-id bijection, the teeth on each
+          const storedId = String(recs(record.npcs)[0]?.id ?? '');
           for (const [label, x, y] of [['(B) Show all', show, handOpen], ['(C) Hide all', hide, handShut]]) {
             for (const read of ['gallery', 'link']) {
-              const d = diffPaths(await serve(record, dm, x, read), await serve(record, dm, y, read));
+              const sx = await serve(record, dm, x, read);
+              const sy = await serve(record, dm, y, read);
+              const d = diffServed(sx, sy);
               tally.served += 1;
               for (const p of d) faults.push(`${at} ${label} vs the hand, ${read}: ${p}`);
+              teethOf(faults, `${at} ${label} vs the hand, ${read}`, sx, sy, await serve(record, dm, x, read), storedId);
             }
-            for (const p of diffPaths(twin(record, dm, x), twin(record, dm, y))) faults.push(`${at} ${label} vs the hand, the twin: ${p}`);
+            const [tx, ty] = [twin(record, dm, x), twin(record, dm, y)];
+            for (const p of diffServed(tx, ty)) faults.push(`${at} ${label} vs the hand, the twin: ${p}`);
+            teethOf(faults, `${at} ${label} vs the hand, the twin`, tx, ty, twin(record, dm, x), storedId);
           }
 
           // (D) the control: a planted family address no screen offers is named by (A), and is not served
@@ -315,8 +354,10 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
           if (plant) {
             const planted = [...show, { address: plant, hidden: false }];
             if (!unreachable(planted).includes(plant)) faults.push(`${at} (D): the planted ${plant} was not named`);
-            const d = diffPaths(await serve(record, dm, planted, 'gallery'), await serve(record, dm, show, 'gallery'));
+            const [sp, ss] = [await serve(record, dm, planted, 'gallery'), await serve(record, dm, show, 'gallery')];
+            const d = diffServed(sp, ss);
             for (const p of d) faults.push(`${at} (D): the planted ${plant} is served: ${p}`);
+            teethOf(faults, `${at} (D)`, sp, ss, await serve(record, dm, planted, 'gallery'), storedId);
             tally.planted += 1;
           }
 
@@ -327,7 +368,16 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
             const id = veil.CARD_KINDS.institution.idOf(house);
             const name = str(house.name);
             const open = [{ address: `card:institution:${id}`, hidden: false }, { address: `field:institution:${id}:people`, hidden: false }];
-            const doc = await serve(record, dm, open, 'gallery');
+            const served = await serve(record, dm, open, 'gallery');
+            // VR46 (R4I-PAGE-4): each served person read back to the projection's person by the read's bijection
+            // (`unkeyPeople` against the projection, which throws on a stored id served or two cards under one id); a
+            // person the bijection lines up with a card of another name reds, so a shifted canonical order cannot pass
+            const doc = unkeyPeople(served, pub);
+            const byId = new Map(peopleOf(pub).map((n) => [veil.CARD_KINDS.npc.idOf(n), n]));
+            for (const n of peopleOf(doc)) {
+              const p = byId.get(veil.CARD_KINDS.npc.idOf(n));
+              if (p && str(p.name) !== str(n.name)) faults.push(`${at} (E) VR46: the bijection reads ${n.name} as ${p.name}`);
+            }
             const mine = peopleOf(doc).filter((n) => houseOf(n) === name);
             const projected = new Map(peopleOf(pub).filter((n) => houseOf(n) === name).map((n) => [veil.CARD_KINDS.npc.idOf(n), n.institution]));
             if (!mine.length) faults.push(`${at} (E): the house ${name} shown with its People open sends none of its people`);
@@ -361,5 +411,6 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
     expect(tally.untouchedEyes, '(F) People and Members eyes read against the untouched share').toBeGreaterThan(0);
     expect(tally.untouchedShown, '(F) some of them open by default (a power\'s roster that is not criminal)').toBeGreaterThan(0);
     expect(Object.keys(tally.untouched)).toHaveLength(TOWNS.length * 2 * 2 * 4);
+    expect(tally.teeth, 'VR46 (R4I-PAGE-4): the five teeth executed on the re-stated guards').toBeGreaterThanOrEqual(tally.served);
   });
 });

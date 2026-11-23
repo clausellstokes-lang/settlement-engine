@@ -25,6 +25,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
 import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
+import { bijectionTeeth, unkeyPeople } from './personIdBijection.shared.mjs';
 
 const ARM_TIMEOUT_MS = 600_000; // deadlock guard for the twin arm (it projects every read again), not a perf budget
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
@@ -36,6 +37,27 @@ const J = (v) => JSON.stringify(v);
 const note = (...a) => { if (process.env.R3_MEASURES) appendFileSync(process.env.R3_MEASURES, `${a.join(' ')}\n`); };
 /** A stable spelling (keys sorted): a jsonb column gives keys back in its own order. */
 const canon = (v) => JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((k) => [k, x[k]])) : x));
+const TEETH_FILE = 'galleryRosterChoices';
+// VR46 (R4I-PAGE-4, VEIL-38 G3): every non-owner read re-keys every person id under a salt of its own (VR10), so a guard that
+// found a person, a tie or a marker key by its STORED id reads the served document MODULO THE READ'S PERSON-ID BIJECTION AND
+// NOTHING ELSE: `unkeyPeople` against the stored record (it throws on a stored id served, tooth (ii), and on two cards under
+// one id, tooth (iv)), each unkeyed card then checked against the stored card of that id by its name, so a canonical order
+// the veil shifted can never pass as a person. `teethOn` executes VR46's five teeth on the guard's own equality and keeps
+// what each did (bit, missed, could not be built) in the file VR46_TEETH names, where it is set.
+function unkeyNamed(d, stored, out, tag) {
+  const u = unkeyPeople(d, stored);
+  const names = new Map((Array.isArray(stored?.npcs) ? stored.npcs : []).filter(isRec).map((n) => [n.id, n.name]));
+  for (const n of (Array.isArray(u?.npcs) ? u.npcs : []).filter(isRec)) {
+    if (names.has(n.id) && typeof n.name === 'string' && typeof names.get(n.id) === 'string' && n.name !== names.get(n.id)) out.push(`${tag}: VR46: the bijection reads ${n.name} as ${names.get(n.id)}`);
+  }
+  return u;
+}
+function teethOn(served, holds, opt, need, out, tag) {
+  const { missed, absent } = bijectionTeeth(served, holds, opt);
+  for (const m of missed) if (need.some((re) => re.test(m))) out.push(`${tag}: VR46 tooth did not bite: ${m}`);
+  if (process.env.VR46_TEETH) appendFileSync(process.env.VR46_TEETH, `${JSON.stringify({ file: TEETH_FILE, tag, missed, absent })}\n`);
+  return { missed, absent };
+}
 // the measure's seeds (out/v21/r3/measure.txt): each row's case among them, and four towns with no hideable house
 const SEEDS = ['town-infiltrated-0-12', 'city-insurgency-1-104', 'city-infiltrated-0-32', 'city-politically_fractured-0-40', 'city-none-1-113',
   'metropolis-infiltrated-0-62', 'city-infiltrated-1-112', 'metropolis-none-0-61', 'city-insurgency-0-44', 'metropolis-indebted-0-56',
@@ -746,7 +768,9 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
       const tag = `hand-fold ${r.kind} dm=${r.dm} ${read}`;
       if (!withheldOf(r.stored, d).includes(TGP) || !withheldOf(r.stored, d).includes('7')) bad.push(`${tag}: the power is not withheld ${J(withheldOf(r.stored, d))}`);
       for (const h of searchHits(d, [TGP, '7'])) if (!R5_PROSE.includes(h.path)) bad.push(`${tag}: ${h.at} = ${J(h.text)}`);
-      const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
+      // VR46 (R4I-PAGE-4): the people found by their stored ids through the read's bijection
+      const u = unkeyNamed(d, r.stored, bad, tag);
+      const npc = (id) => (u.npcs || []).find((x) => x?.id === id);
       const eli = HAND_FOLD.npcs[2];
       // THE TOOTH, where the read serves a person's goal and memberships at all (Reveal DM on; the gallery and the import):
       // the shown power's goal and membership byte for byte (canonical key order: jsonb orders an object's keys)
@@ -755,6 +779,13 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
         if (canon(npc('npc.eli').goal) !== canon(eli.goal)) bad.push(`${tag}: the goal aimed at the shown Harbour Board ${J(npc('npc.eli')?.goal)}`);
         if (canon(npc('npc.eli').memberships) !== canon(eli.memberships)) bad.push(`${tag}: a shown power's membership ${J(npc('npc.eli')?.memberships)}`);
         if (!(npc('npc.cass')?.memberships || []).some((m) => m?.power === 'Ropers')) bad.push(`${tag}: the Ropers membership lost`);
+        // VR46's teeth on the tooth's own equality: a stored id served and two people under one id must bite; (iii) bites
+        // through the names the unkeying is checked against; (i) where the read's first reference is one the equality reads
+        teethOn(d, (c) => {
+          const o = []; const v = unkeyNamed(c, r.stored, o, tag); const f = (id) => (v.npcs || []).find((x) => x?.id === id);
+          return !o.length && !!f('npc.eli') && canon(f('npc.eli').goal) === canon(eli.goal) && canon(f('npc.eli').memberships) === canon(eli.memberships)
+            && (f('npc.cass')?.memberships || []).some((m) => m?.power === 'Ropers');
+        }, { storedId: 'npc.eli' }, [/^\(ii\)/, /^\(iv\) two people/, /^\(iii\)/, /^\(the equality/], bad, tag);
       }
       if (!(d.powerStructure?.conflicts || []).some((c) => J(c?.parties) === J(['Harbour Board', 'Ropers']))) bad.push(`${tag}: the shown conflict lost`);
     }
@@ -777,7 +808,9 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
         // (R3-CURE-5: once each: on master's shape the Watch is served in both lists, and the containing name is ONE name)
         const served = [...new Set([...(d.powerStructure?.factions || []), ...(d.factions || [])].flatMap((f) => [f?.faction, f?.name]).filter((v) => typeof v === 'string'))];
         if (!served.includes(TG_WATCH)) bad.push(`${tag}: the Watch not served ${J(served)}`);
-        const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
+        // VR46 (R4I-PAGE-4): the people found by their stored ids through the read's bijection
+        const u = unkeyNamed(d, r.stored, bad, tag);
+        const npc = (id) => (u.npcs || []).find((x) => x?.id === id);
         for (const [id, form] of Object.entries(FORMS)) {
           if (!npc(id)) continue;
           judged += 1;
@@ -792,6 +825,13 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
           const bare = buildNameSearch([TG], []);
           const holders = served.filter((n) => hal.goal.short.includes(n) && bare.hit(n));
           if (!bare.hit(hal.goal.short) || J(holders) !== J([TG_WATCH]) || bare.hit(hal.goal.short.split(TG_WATCH).join(' '))) bad.push(`${tag}: the exemption is not the containing served name ${J(holders)}`);
+          // VR46's teeth on the tooth's own equality (the twin's read: a second twin read for tooth (v))
+          const again = read === 'twin' ? veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov }), r.ov) : undefined;
+          teethOn(d, (c) => {
+            const o = []; const v = unkeyNamed(c, r.stored, o, tag); const f = (id) => (v.npcs || []).find((x) => x?.id === id);
+            return !o.length && !!f('npc.hal') && canon(f('npc.hal').goal) === canon(HAND_FORMS.npcs[3].goal)
+              && Object.keys(FORMS).every((id) => !f(id) || !('goal' in f(id)));
+          }, { storedId: 'npc.hal', again }, [/^\(ii\)/, /^\(iv\) two people/, /^\(iii\)/, /^\(v\)/, /^\(the equality/], bad, tag);
         } else if (npc('npc.jon') && 'goal' in npc('npc.jon')) bad.push(`${tag}: the goal naming the served Watch withheld where a plain goal is served`);
       }
     }

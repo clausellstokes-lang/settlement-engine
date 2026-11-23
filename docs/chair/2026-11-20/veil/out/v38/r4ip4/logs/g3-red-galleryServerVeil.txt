@@ -1,0 +1,83 @@
++   "relationships[id=tie_d8cc25d78d4d33f2].archetypeKey",
++   "relationships[id=tie_d8cc25d78d4d33f2].proseVariant",
++   "relationships[id=tie_04c8d7fbf4ef75c9].id",
++   "relationships[id=tie_04c8d7fbf4ef75c9].to",
++   "relationships[id=tie_04c8d7fbf4ef75c9].from",
++   "relationships[id=tie_04c8d7fbf4ef75c9].type",
++   "relationships[id=tie_04c8d7fbf4ef75c9].tension",
++   "relationships[id=tie_04c8d7fbf4ef75c9].npc1Name",
++   "relationships[id=tie_04c8d7fbf4ef75c9].npc1Role",
++   "relationships[id=tie_04c8d7fbf4ef75c9].npc2Name",
++   "relationships[id=tie_04c8d7fbf4ef75c9].npc2Role",
++   "relationships[id=tie_04c8d7fbf4ef75c9].strength",
++   "relationships[id=tie_04c8d7fbf4ef75c9].typeName",
++   "relationships[id=tie_04c8d7fbf4ef75c9].flagDriven",
++   "relationships[id=tie_04c8d7fbf4ef75c9].description",
++   "relationships[id=tie_04c8d7fbf4ef75c9].archetypeKey",
++   "relationships[id=tie_04c8d7fbf4ef75c9].proseVariant",
++   "relationships[id=tie_8b0facda4aec6fde].id",
++   "relationships[id=tie_8b0facda4aec6fde].to",
++   "relationships[id=tie_8b0facda4aec6fde].from",
++   "relationships[id=tie_8b0facda4aec6fde].type",
++   "relationships[id=tie_8b0facda4aec6fde].tension",
++   "relationships[id=tie_8b0facda4aec6fde].npc1Name",
++   "relationships[id=tie_8b0facda4aec6fde].npc1Role",
++   "relationships[id=tie_8b0facda4aec6fde].npc2Name",
++   "relationships[id=tie_8b0facda4aec6fde].npc2Role",
++   "relationships[id=tie_8b0facda4aec6fde].strength",
++   "relationships[id=tie_8b0facda4aec6fde].typeName",
++   "relationships[id=tie_8b0facda4aec6fde].flagDriven",
++   "relationships[id=tie_8b0facda4aec6fde].description",
++   "relationships[id=tie_8b0facda4aec6fde].archetypeKey",
++   "relationships[id=tie_8b0facda4aec6fde].proseVariant",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:503:53
+    501|     [OWNER, JSON.stringify(record), JSON.stringify({ $veil: { v: 1, de…
+    502|     const now = await readAll(db, 'clamp-p', 'clamp-l');
+    503|     expect(carried(now.gRow.data, now.gPage).paths).toEqual([]);
+       |                                                     ^
+    504|     expect(carried(now.lResp.dossier, now.lPage).paths).toEqual([]);
+    505|     // the page the 210 client draws from the same stored row (its own…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > RULING 4: no client path writes a served v2 marker back into a row
+AssertionError: expected [ …(12) ] to deeply equal [ …(11) ]
+
+- Expected
++ Received
+
+@@ -2,10 +2,11 @@
+    "src/components/SettlementDetail.jsx",
+    "src/components/ShareToGallery.jsx",
+    "src/components/dossier/DossierActionBand.jsx",
+    "src/components/gallery/GalleryDetail.jsx",
+    "src/domain/display/galleryVeil.js",
++   "src/domain/display/galleryVeilPeople.js",
+    "src/hooks/useGalleryShareControls.js",
+    "src/lib/gallery.js",
+    "src/lib/galleryUnlisted.js",
+    "src/lib/saveAdmission.js",
+    "src/lib/saves.js",
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:629:26
+    627|     } };
+    628|     walk(resolve(process.cwd(), 'src'));
+    629|     expect(found.sort()).toEqual(Object.keys(REGISTER).sort());
+       |                          ^
+    630|   });
+    631|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed | 7 passed (18)
+   Start at  02:32:07
+   Duration  755.26s (transform 4.46s, setup 34ms, import 321ms, tests 754.62s, environment 0ms)
+
+[gate-tail] end:  02:44:43 up  2:32,  0 user,  load average: 7.82, 7.51, 6.78
+[gate-tail] full log: /tmp/gate-tail.31974.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

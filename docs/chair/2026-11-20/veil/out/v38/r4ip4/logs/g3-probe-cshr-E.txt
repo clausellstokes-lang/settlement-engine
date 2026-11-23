@@ -1,0 +1,83 @@
+ ❯ tests/security/zzProbeR4ip4Cshr.pglite.test.js:398:56
+    396|           }
+    397|         }
+    398|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    399|       }, TOWN_TIMEOUT_MS);
+    400|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/security/zzProbeR4ip4Cshr.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-town-1 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[0].members[2].goal.intent.long.target.id = npc_dyer; .factions[0].members[3].goal.intent.long.target.id = npc_adventurers_charter_hall; .factions[0].members[3].goal.intent.short.target.id = npc_inn_multiple; .factions[0].members[4].goal.intent.long.target.id = npc_mint; .factions[0].members[6].goal.intent.long.target.id = npc_smal: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-town-1 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[0].members[2].goal.intent.long.target.id = npc_dyer; .factions[0].members[3].goal.intent.long.target.id = npc_adventurers_charter_hall; .factions[0].members[3].goal.intent.short.target.id = npc_inn_multiple; .factions[0].members[4].goal.intent.long.target.id = npc_mint; .factions[0].members[6].goal.intent.long.target.id = npc_smal",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4Cshr.pglite.test.js:398:56
+    396|           }
+    397|         }
+    398|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    399|       }, TOWN_TIMEOUT_MS);
+    400|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/security/zzProbeR4ip4Cshr.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-city-0 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[1].members[0].goal.intent.long.target.id = npc_mercenary_quarter; .factions[1].members[0].goal.intent.short.target.id = npc_veiled_f6e4b9a48b04ef62; .factions[1].members[1].goal.intent.short.target.id = npc_professional_city_watch; .factions[1].members[2].goal.intent.short.target.id = npc_mercenary_quarter; .factions[2].members[0]: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-city-0 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[1].members[0].goal.intent.long.target.id = npc_mercenary_quarter; .factions[1].members[0].goal.intent.short.target.id = npc_veiled_f6e4b9a48b04ef62; .factions[1].members[1].goal.intent.short.target.id = npc_professional_city_watch; .factions[1].members[2].goal.intent.short.target.id = npc_mercenary_quarter; .factions[2].members[0]",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4Cshr.pglite.test.js:398:56
+    396|           }
+    397|         }
+    398|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    399|       }, TOWN_TIMEOUT_MS);
+    400|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/security/zzProbeR4ip4Cshr.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-metropolis-1 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[0].members[0].goal.intent.long.target.id = npc_state_granary_complex; .factions[0].members[0].goal.intent.short.target.id = npc_carpenters_5_15; .factions[0].members[1].goal.intent.short.target.id = npc_state_granary_complex; .factions[0].members[2].goal.intent.long.target.id = npc_international_trade_center; .factions[0].members[: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-metropolis-1 master dm=true (E) PROBE-THROW: a stored person id is served (the re-key did not happen): .factions[0].members[0].goal.intent.long.target.id = npc_state_granary_complex; .factions[0].members[0].goal.intent.short.target.id = npc_carpenters_5_15; .factions[0].members[1].goal.intent.short.target.id = npc_state_granary_complex; .factions[0].members[2].goal.intent.long.target.id = npc_international_trade_center; .factions[0].members[",
++ ]
+
+ ❯ tests/security/zzProbeR4ip4Cshr.pglite.test.js:398:56
+    396|           }
+    397|         }
+    398|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    399|       }, TOWN_TIMEOUT_MS);
+    400|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 9 passed (14)
+   Start at  02:36:38
+   Duration  155.70s (transform 3.20s, setup 40ms, import 138ms, tests 155.24s, environment 0ms)
+
+[gate-tail] end:  02:39:14 up  2:27,  0 user,  load average: 5.88, 6.27, 6.18
+[gate-tail] full log: /tmp/gate-tail.3981.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

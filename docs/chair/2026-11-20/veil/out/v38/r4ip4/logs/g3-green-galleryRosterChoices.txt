@@ -1,0 +1,14 @@
+[gate-tail] start:  03:00:51 up  2:48,  0 user,  load average: 4.52, 4.67, 5.54 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+
+ Test Files  1 passed (1)
+      Tests  39 passed (39)
+   Start at  03:00:53
+   Duration  927.30s (transform 3.77s, setup 41ms, import 308ms, tests 926.78s, environment 0ms)
+
+[gate-tail] end:  03:16:20 up  3:04,  0 user,  load average: 1.05, 1.40, 3.00
+[gate-tail] full log: /tmp/gate-tail.1659.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT=0

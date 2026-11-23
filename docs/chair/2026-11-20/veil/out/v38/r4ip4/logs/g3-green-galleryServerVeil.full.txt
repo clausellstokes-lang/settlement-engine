@@ -1,0 +1,45 @@
+[gate-tail] start:  02:48:57 up  2:36,  0 user,  load average: 4.86, 6.06, 6.35 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js (18 tests | 1 failed) 725402ms
+     × RULING 4: no client path writes a served v2 marker back into a row 129ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > RULING 4: no client path writes a served v2 marker back into a row
+AssertionError: expected [ …(12) ] to deeply equal [ …(11) ]
+
+- Expected
++ Received
+
+@@ -2,10 +2,11 @@
+    "src/components/SettlementDetail.jsx",
+    "src/components/ShareToGallery.jsx",
+    "src/components/dossier/DossierActionBand.jsx",
+    "src/components/gallery/GalleryDetail.jsx",
+    "src/domain/display/galleryVeil.js",
++   "src/domain/display/galleryVeilPeople.js",
+    "src/hooks/useGalleryShareControls.js",
+    "src/lib/gallery.js",
+    "src/lib/galleryUnlisted.js",
+    "src/lib/saveAdmission.js",
+    "src/lib/saves.js",
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:714:26
+    712|     } };
+    713|     walk(resolve(process.cwd(), 'src'));
+    714|     expect(found.sort()).toEqual(Object.keys(REGISTER).sort());
+       |                          ^
+    715|   });
+    716|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 17 passed (18)
+   Start at  02:48:59
+   Duration  726.06s (transform 5.78s, setup 32ms, import 403ms, tests 725.40s, environment 0ms)
+
+[gate-tail] end:  03:01:05 up  2:49,  0 user,  load average: 5.52, 4.88, 5.60

@@ -44,8 +44,9 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { readFileSync, readdirSync } from 'node:fs';
+import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { bijectionTeeth, canonPeople, notBijective, readsDiffer, unkeyPeople } from './personIdBijection.shared.mjs';
 import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
@@ -165,6 +166,49 @@ function canon(v) {
   if (Array.isArray(v)) return v.map(canon);
   if (!isRec(v)) return v;
   return Object.fromEntries(Object.keys(v).sort().filter((k) => v[k] !== undefined).map((k) => [k, canon(v[k])]));
+}
+const TEETH_FILE = 'galleryServerVeil';
+// VR46 (R4I-PAGE-4, VEIL-38 G3): every non-owner read re-keys every person id under a salt of its own (VR10), so a guard that
+// found a person, a tie or a marker key by its STORED id reads the served document MODULO THE READ'S PERSON-ID BIJECTION AND
+// NOTHING ELSE: `unkeyPeople` against the stored record (it throws on a stored id served, tooth (ii), and on two cards under
+// one id, tooth (iv)), each unkeyed card then checked against the stored card of that id by its name, so a canonical order
+// the veil shifted can never pass as a person. `teethOn` executes VR46's five teeth on the guard's own equality and keeps
+// what each did (bit, missed, could not be built) in the file VR46_TEETH names, where it is set.
+function unkeyNamed(d, stored, out, tag) {
+  const u = unkeyPeople(d, stored);
+  const names = new Map((Array.isArray(stored?.npcs) ? stored.npcs : []).filter(isRec).map((n) => [n.id, n.name]));
+  for (const n of (Array.isArray(u?.npcs) ? u.npcs : []).filter(isRec)) {
+    if (names.has(n.id) && typeof n.name === 'string' && typeof names.get(n.id) === 'string' && n.name !== names.get(n.id)) out.push(`${tag}: VR46: the bijection reads ${n.name} as ${names.get(n.id)}`);
+  }
+  return u;
+}
+function teethOn(served, holds, opt, need, out, tag) {
+  const { missed, absent } = bijectionTeeth(served, holds, opt);
+  for (const m of missed) if (need.some((re) => re.test(m))) out.push(`${tag}: VR46 tooth did not bite: ${m}`);
+  if (process.env.VR46_TEETH) appendFileSync(process.env.VR46_TEETH, `${JSON.stringify({ file: TEETH_FILE, tag, missed, absent })}\n`);
+  return { missed, absent };
+}
+/**
+ * VR46 (R4I-PAGE-4, VEIL-38 G3): every non-owner read re-keys every person and tie id under a salt of its own (VR10): the
+ * server's response under 212's, the page under the client's own (`projectServedVeil` projects the served document again),
+ * the import and the map member each under theirs, and the 210 page under the current client's. So laws (1) and (2) compare
+ * them MODULO EACH READ'S PERSON-ID BIJECTION AND NOTHING ELSE: `people` maps each document's person and tie ids to their
+ * canonical names (`canonPeople`), every other byte as before; `freshFaults` holds the teeth a single read carries: (ii) every
+ * served person or tie id is one the re-key made, (iv) no two cards under one id.
+ */
+const FRESH_ID = /^(npc|tie)_[0-9a-f]{16}$/;
+const people = (v) => (isRec(v) ? canonPeople(v).doc : v);
+function freshFaults(doc) {
+  if (!isRec(doc)) return [];
+  const out = [];
+  for (const v of canonPeople(doc).names.keys()) if (!FRESH_ID.test(String(v))) out.push(`VR46 (ii): a person id the re-key did not make: ${String(v).slice(0, 60)}`);
+  out.push(...notBijective(doc).map((x) => `VR46 (iv): ${x}`));
+  return out;
+}
+/** A read (readAll) with its four documents read by `people`; `raw` keeps the read as served. */
+function canonRead(r) {
+  return { ...r, raw: r, gPage: people(r.gPage), lPage: people(r.lPage), gRow: r.gRow && { ...r.gRow, data: people(r.gRow.data) },
+    lResp: r.lResp && { ...r.lResp, dossier: people(r.lResp.dossier) } };
 }
 /** What the response carries that the page lacks: paths, and strings nowhere in the page's text. */
 function carried(resp, page) {
@@ -363,8 +407,14 @@ describe('the server-side share veil (211) — execution against the real SQL an
         const snapshot = mode === 'snapshot' ? veil.galleryPayloadFor(record, { shareDm: dm }) : mode === 'old-copy' ? record : null;
         const ov = deltas === null ? {} : veil.writeShareVeil({}, deltas, { mode: mode === 'live' ? 'live' : 'snapshot', at, snapshot });
         await setRow(ov, dm);
-        const now = await readAll(LIVE.db, slug, link);
-        const before = await readAll(AT210.db, slug, link);
+        // VR46 (R4I-PAGE-4): every read compared modulo its own person-id bijection (`canonRead`); the teeth a read carries on
+        // each read after 212, and (v): the gallery and the link reads share no person id
+        const nowRaw = await readAll(LIVE.db, slug, link);
+        const now = canonRead(nowRaw);
+        const before = canonRead(await readAll(AT210.db, slug, link));
+        for (const [where, d] of [['gallery.data', nowRaw.gRow.data], ['link.dossier', nowRaw.lResp.dossier], ['gallery page', nowRaw.gPage], ['link page', nowRaw.lPage]]) fault(`${tag} ${where}`, freshFaults(d));
+        const shared = readsDiffer(nowRaw.gRow.data, nowRaw.lResp.dossier);
+        if (shared.length && shared[0] !== '(the first read serves no person id)') fault(`${tag} VR46 (v)`, [`the gallery and the link reads share ${shared.length} person ids`]);
         // (4) no page carries a role its card withholds: the pages after 211 and 212, and the 210 pages
         for (const [where, page] of [['gallery page', now.gPage], ['link page', now.lPage], ['210 gallery page', before.gPage], ['210 link page', before.lPage]]) {
           fault(`${tag} ${where} carries a role its card withholds`, rolesItsCardWithholds(page));
@@ -383,7 +433,8 @@ describe('the server-side share veil (211) — execution against the real SQL an
           control.readable += r; control.rows += 1;
         }
         // R3-CURE-3 (the chair's ruling A): a goal aimed at, or naming, a power the page withholds leaves with it, every read
-        for (const [where, page] of [['gallery page', now.gPage], ['link page', now.lPage]]) {
+        // (VR46: the leak check finds each person by the stored record's id, so each page is read back to it by its bijection)
+        for (const [where, page] of [['gallery page', unkeyNamed(nowRaw.gPage, record, faults, `${tag} gallery page`)], ['link page', unkeyNamed(nowRaw.lPage, record, faults, `${tag} link page`)]]) {
           const a = goalsAimedAtWithheld(record, page); control.aimedAtWithheld += a.aimed;
           fault(`${tag} ${where} serves a goal aimed at a withheld power`, a.leaks);
         }
@@ -402,14 +453,24 @@ describe('the server-side share veil (211) — execution against the real SQL an
           if (JSON.stringify(now.gGroupings) !== JSON.stringify(ref.gGroupings)) fault(`${tag} gallery groupings`, [`${now.gGroupings} vs ${ref.gGroupings}`]);
           if (JSON.stringify(now.lPage) !== JSON.stringify(l2.page)) fault(`${tag} link page changed`, carried(l2.page, now.lPage).paths.concat(carried(now.lPage, l2.page).paths.map((p) => `+${p}`)).concat(['(order or value)']));
           if (JSON.stringify(now.lGroupings) !== JSON.stringify(ref.lGroupings)) fault(`${tag} link groupings`, [`${now.lGroupings} vs ${ref.lGroupings}`]);
+          // VR46's five teeth on law (2)'s gallery page equality, once a town (the default veil, live): a second read for (v)
+          if (name === 'default' && mode === 'live' && !dm) {
+            const want = JSON.stringify(g2.page);
+            const again = (await readAll(LIVE.db, slug, link)).gPage;
+            teethOn(nowRaw.gPage, (c) => freshFaults(c).length === 0 && JSON.stringify(people(c)) === want, { storedId: String(record.npcs?.[0]?.id ?? ''), again },
+              [/^\(i\)/, /^\(ii\)/, /^\(iii\)/, /^\(iv\)/, /^\(v\)/, /^\(the equality/], faults, `${tag} law (2) gallery page`);
+          }
         }
         if (mode !== 'live' && now.gMode !== 'snapshot') fault(`${tag} gallery mode`, [String(now.gMode)]);
         if (mode !== 'live' && now.gAt !== at) fault(`${tag} snapshotAt`, [String(now.gAt)]);
         // the import and the map page: the listing's page, nothing more
         if (mode === 'live' && !dm && ['all', 'opened', 'mixed', 'default', 'unmarked'].includes(name)) {
           H.db = LIVE.db; H.uid = READER;
-          const imp = await gallery.fetchDossierForImport(slug);
-          const iResp = H.last[0].data;
+          const impRaw = await gallery.fetchDossierForImport(slug);
+          const iRaw = H.last[0].data;
+          fault(`${tag} import response`, freshFaults(iRaw)); fault(`${tag} import page`, freshFaults(impRaw.settlement));
+          const imp = { ...impRaw, settlement: people(impRaw.settlement) };
+          const iResp = people(iRaw);
           fault(`${tag} import readable`, carried(iResp, now.gPage).readable);
           fault(`${tag} import page`, carried(imp.settlement, now.gPage).paths);
           fault(`${tag} import page carries a role its card withholds`, rolesItsCardWithholds(imp.settlement));
@@ -418,7 +479,9 @@ describe('the server-side share veil (211) — execution against the real SQL an
             values ($1, $2, 'map', $3, true, $4, 'map_with_campaign', true) on conflict do nothing`, [mapId, OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `map-${n}`]);
           H.uid = '';
           const map = await gallery.fetchGalleryMap(`map-${n}`);
-          const member = map.members.find((mm) => mm.settlement)?.settlement;
+          const memberRaw = map.members.find((mm) => mm.settlement)?.settlement;
+          if (memberRaw) fault(`${tag} map member`, freshFaults(memberRaw));
+          const member = people(memberRaw);
           if (!member) faults.push(`${tag} map: no member`);
           else {
             fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
@@ -466,8 +529,12 @@ describe('the server-side share veil (211) — execution against the real SQL an
       await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility, gallery_importable, gallery_member_overrides, gallery_share_dm)
         values ('abababab-0000-0000-0000-000000000001', $1, $2, 'town', $3, true, 'role-p', now(), 'role-l', 'unlisted', true, $4, true)`, [OWNER, town.name, JSON.stringify(town), JSON.stringify(ov)]);
     }
-    const now = await readAll(LIVE.db, 'role-p', 'role-l');
-    const before = await readAll(AT210.db, 'role-p', 'role-l');
+    // VR46 (R4I-PAGE-4): every page re-keys its people and ties (the 210 page under the current client's projection), so the
+    // planted ties are found by their stored ids through each page's own bijection (`unkeyPeople` against the planted town)
+    const nowRaw = await readAll(LIVE.db, 'role-p', 'role-l');
+    const beforeRaw = await readAll(AT210.db, 'role-p', 'role-l');
+    const now = { ...nowRaw, gPage: unkeyPeople(nowRaw.gPage, town), lPage: unkeyPeople(nowRaw.lPage, town) };
+    const before = { ...beforeRaw, gPage: unkeyPeople(beforeRaw.gPage, town), lPage: unkeyPeople(beforeRaw.lPage, town) };
     const pages = { 'gallery page': now.gPage, 'link page': now.lPage, '210 gallery page': before.gPage, '210 link page': before.lPage };
     const told = Object.entries(pages).flatMap(([where, page]) => rolesItsCardWithholds(page).map((x) => `${where}: ${x}`));
     const text = JSON.stringify([pages, now.gRow, now.lResp]);
@@ -480,6 +547,15 @@ describe('the server-side share veil (211) — execution against the real SQL an
     // THE CHECK IS LIVE: the copy planted back on a page is found
     const planted = structuredClone(now.gPage); planted.relationships.find((t) => t.id === 't0').npc1Role = MARKS[0];
     expect(rolesItsCardWithholds(planted)).toEqual([`relationships[id=t0].npc1Role = ${MARKS[0]}`]);
+    // VR46's teeth on the anchor's lookups: (ii), (iv) two people under one id and (v) (a second read) must bite; (i), (iii)
+    // and (iv) one person under two ids cannot (the anchor reads tie roles by the tie's id, not a person's reference nor a
+    // card's byte; measured: those three are missed, out/v38/r4ip4/logs/teeth-galleryServerVeil.jsonl)
+    const bad = [];
+    const anchored = (c) => { const m = new Map(unkeyPeople(c, town).relationships.map((t) => [t.id, t]));
+      return JSON.stringify([m.get('t0')?.npc2Role, m.get('t1')?.npc1Role, m.get('t9')?.npc1Role, m.get('t9')?.npc2Role]) === JSON.stringify(['the smith', 'the smith', 'the ferryman', 'the smith']); };
+    const again = (await readAll(LIVE.db, 'role-p', 'role-l')).gPage;
+    teethOn(nowRaw.gPage, anchored, { storedId: 'p2', again }, [/^\(ii\)/, /^\(iv\) two people/, /^\(v\)/, /^\(the equality/], bad, 'LAW (4) gallery page');
+    expect(bad).toEqual([]);
   });
 
   it('a share past the client\'s clamp: the server reads the same last 2,000 well-formed deltas the page reads', async () => {
@@ -499,19 +575,29 @@ describe('the server-side share veil (211) — execution against the real SQL an
     await db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility, gallery_member_overrides)
       values ('eeeeeeee-0000-0000-0000-000000000001', $1, 'T', 'town', $2, true, 'clamp-p', now(), 'clamp-l', 'unlisted', $3)`,
     [OWNER, JSON.stringify(record), JSON.stringify({ $veil: { v: 1, deltas } })]);
-    const now = await readAll(db, 'clamp-p', 'clamp-l');
+    // VR46 (R4I-PAGE-4): the response, the page and the twin each re-key under their own salt: compared by `canonRead` /
+    // `people`, modulo each read's person-id bijection and nothing else
+    const nowRaw = await readAll(db, 'clamp-p', 'clamp-l');
+    const now = canonRead(nowRaw);
+    expect([nowRaw.gRow.data, nowRaw.gPage, nowRaw.lResp.dossier, nowRaw.lPage].flatMap(freshFaults)).toEqual([]);
     expect(carried(now.gRow.data, now.gPage).paths).toEqual([]);
     expect(carried(now.lResp.dossier, now.lPage).paths).toEqual([]);
     // the page the 210 client draws from the same stored row (its own clamp), equal to what 211 serves
-    const want = canon(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } }));
+    const want = canon(people(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } })));
     expect(JSON.stringify(canon(now.gRow.data))).toBe(JSON.stringify(want));
+    // VR46's five teeth on the server-and-twin equality: a second read for (v)
+    const bad = [];
+    const again = (await readAll(db, 'clamp-p', 'clamp-l')).gRow.data;
+    teethOn(nowRaw.gRow.data, (c) => freshFaults(c).length === 0 && JSON.stringify(canon(people(c))) === JSON.stringify(want), { storedId: String(record.npcs?.[0]?.id ?? ''), again },
+      [/^\(i\)/, /^\(ii\)/, /^\(iii\)/, /^\(iv\)/, /^\(v\)/, /^\(the equality/], bad, 'clamp gallery.data');
+    expect(bad).toEqual([]);
     // R2-CURE (VEIL-21): RE-RECORDED BY THE RULING. The page is the served document AND the page's re-derivation of what the
     // server withholds on every read and the page draws (the seventh chair's VR19 (c), VR33, VR37 (a): the defence scores,
     // the readiness score, the gates, the economy's output, a condition's severity from its band; src/lib/gallery.js ::
     // sanitizeDossier -> src/domain/veil/pageRederive.js), so the page equals the twin's projection re-derived, from the
     // projection alone. The server's document still equals the twin's projection exactly (above).
     const { rederiveForPage } = await import('../../src/domain/veil/pageRederive.js');
-    expect(JSON.stringify(now.gPage)).toBe(JSON.stringify(canon(rederiveForPage(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } })))));
+    expect(JSON.stringify(now.gPage)).toBe(JSON.stringify(canon(people(rederiveForPage(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } }))))));
   });
 
   it('the $veil shapes never raise and never leak; an anonymous legacy event is veiled fail-closed', async () => {

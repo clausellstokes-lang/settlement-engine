@@ -1,0 +1,11 @@
+[gate-tail] start:  02:59:52 up  2:47,  0 user,  load average: 3.61, 4.54, 5.56 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  02:59:53
+   Duration  554.77s (transform 3.75s, setup 29ms, import 234ms, tests 554.41s, environment 0ms)
+
+[gate-tail] end:  03:09:08 up  2:57,  0 user,  load average: 2.02, 2.64, 4.18
