@@ -59,6 +59,14 @@ branch `lane/veil-40-2026-11-23-t5-wip` cut at 9a2f8ef9a; DISPATCHED after the b
 the (v)(1) arm, the (vi) teeth; nothing run). T5 had spent about 508,000 builder tokens before 11:29 (the read-whole law): if it runs
 out, re-staff from its WIP and its brief. (iv)'s cure waits for this seat's word
 (after RIVAL's final is merged into T5's branch); (v)(2)'s cure waits for the chair's clearance against chain C's R5-TENSION.
+T5 HANDED BACK at 13:23 WITH NOTHING RUN (its context near its limit; the lock never named it): WIP 58cf00f6c + b690dadd2 PUSHED;
+hand-back `out/v40/t5/T5-HANDBACK.md`; 212 unchanged. On paper (stored births): (iv) likely nothing to cure; (v)(3) likely a STOP
+under N88; (v)(2) likely a STOP (the crimeWave rule; its cure after it in roster_choices / applyRosterChoices; no hunk shared with
+R5-TENSION); (vi) teeth written; (v)(1) arm written, cure drafted in scratch. A FRESH T5 runs `out/v33/q/measure/q-chain.sh
+tpl|smoke|towns|pool|insurg|an` (re-pointed) and applies the drafts: the successor's, or the chair moves it.
+SSKIP: WIP c2ddfd6b2 PUSHED (instrument, figures; nothing in src/ or tests/). Its deciding count (ruling 127) waits for the lock.
+MASTER-BORN STORED (its measure): 140 OTHER rows with no master-written standing get one from S on nothing-hidden reads: ASKED OF
+THE CHAIR (whose; the rule on a master-born page; this seat's lean: a fault by N101, the cure likely N94's lean or a new served fact).
 THE MUTEX's ORDER is the file `/var/tmp/v18/out/v40/mutex-order.txt` (every builder reads it): RIVAL GO; T5 WAIT; B2 WAIT.
 THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs` (ca72cfd4d, read once:
 additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/var/tmp/v18/t2/pool-v40r`, template `v40rtpl`, out
@@ -210,3 +218,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 13:08 ruling 125: S1 stopped, the lock free, RIVAL GO; 13:09 PART 42.
 - 13:08 ruling 126; 13:14 the line sent; turn ended.
 - 13:16 SSKIP's STOP; 13:20 ruling 127; 13:21 relayed.
+- 13:23 T5 handed back (nothing run); T5 and SSKIP WIPs pushed; 13:25 both told the chair.
