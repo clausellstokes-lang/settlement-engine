@@ -4,12 +4,12 @@ The close's seat for its two word cures, seated by THE NINTH CHAIR (session_01Fb
 of CLOSE-3 (unit "VACANT") and of CLOSE-2 (unit "PRONOUN") for these two units only. Prompt: the ninth chair's seating message
 (CLOSE-4, the middle tier at high effort). THE FLIP IS NOT THIS SEAT'S: it touches nothing of it.
 
-## 0. WHERE THE SEAT STANDS (written 2026-11-23 01:3x UTC)
+## 0. WHERE THE SEAT STANDS (written 2026-11-23 01:45 UTC, read from date -u)
 
 | ref | tip | state |
 |---|---|---|
 | `lane/close-4-2026-11-23` (this lane) | this push | docs only: this hand-back; `briefs/VACANT-15.md` (the builder's brief for arm (15)) |
-| `lane/close-4-2026-11-23-vacant-wip` | 4ef6d6c32 | VACANT's code, cut AT CLOSE-3's 2b8cc2946 (on the line's tip 244fa84ef): fc0ec46a0 the cure; 003a1723b census; 2b8cc2946 cure one; d4ea9a9f2 arm (15); ac8121863 census; 4ef6d6c32 the voice cure |
+| `lane/close-4-2026-11-23-vacant-wip` | 4ef6d6c32 | VACANT AT ITS LANDING LINE: its code, cut AT CLOSE-3's 2b8cc2946 (on the line's tip 244fa84ef): fc0ec46a0 the cure; 003a1723b census; 2b8cc2946 cure one; d4ea9a9f2 arm (15); ac8121863 census; 4ef6d6c32 the voice cure |
 | `lane/close-4-2026-11-23-lit-scratch` | 1a2ee47e3 | the -wip + the flip's three dials and the `powersList` row (`close-2/census/light.sh`, 296668dea), the -wip merged in at 4ef6d6c32: a SCRATCH ref, never merged by anyone |
 | `lane/close-4-2026-11-23-pronoun-wip` | f5fa6316a | PRONOUN's code AT CLOSE-2's -wip (cut from the line at point 102, c1144ba18): NOT YET READ-RUN by this seat beyond its diff |
 
@@ -30,16 +30,26 @@ of CLOSE-3 (unit "VACANT") and of CLOSE-2 (unit "PRONOUN") for these two units o
   changed symbol 105/105; `tests/lint` whole 3 red of 3,364 = the line's three (`ledgerCitationIntegrity` GREEN: the ledger ref
   235efce1a is local on this box); eslint 0; `typecheck:ratchet` 167/167; strict 1113/1113; THE DARK PROOF EQUAL 242edc8e… (900).
   LIT BASE re-made: c1128c8f6 fb3f0172… (900 lit births, equal to CLOSE-3's figure).
-- THE FINAL WINDOW AT 4ef6d6c32: IN FLIGHT (see (3)).
+- THE FINAL WINDOW AT 4ef6d6c32 (RUN by this seat, `scratchpad/vf/gate.sh`): `domainGeneratorsBoundary` + `tests/architecture` +
+  `tests/copy tests/store tests/docs` + the 8 named files: 2 red of 2,144, both listed (voiceMechanics E-E, deadOperationRatchet);
+  `typecheck:ratchet` 167/167; strict 1113/1113; THE DARK PROOF EQUAL 242edc8e… (900); THE LIT TWIN 1a2ee47e3 f7e08e98… (900):
+  9 of 900 move against fb3f0172…, BY NAME the same nine as CLOSE-3's (lm-city-108, -47; lm-metropolis-119, -51, -89; lm-thorp-78;
+  lm-town-125, -29, -31). ONE BUILD clean; `VERIFY_DIST=1 tests/build` 15 red of 623, ALL ON THE LIST BY TITLE; `bootSmoke` alone
+  9/9. THE FIVE FIGURES beside the line's: first paint 1,184,741 / 377,004 / 316,476 (+0 / +17 / -170: raw unmoved, the
+  compressed moves are PLAUSIBLY the chunks' hashed names, same length); the worker 2,711,302 (+2,039); the engine chunk
+  932,583 (+214): RISES NAMED FOR THE OWNER, signed by nobody. `tests/lint` whole at 4ef6d6c32 (the builder's run): the line's
+  three. THE PAPER FLIP LIST: `close-3/FLIP-LIST-VACANT.md`, corrected for this tip. "VACANT 4ef6d6c32" SENT to the chair.
 
 ### (2) PRONOUN: not started beyond reading. Its diff 2904f0475..f5fa6316a READ WHOLE (the leaf `personMention.js` and the walker
 whole; the leaf test, the census and manifest rows). NOTE for the chair: the follower cure turns "an introduction him would rather
 keep to themselves" into "...he would rather keep to themselves": the template's "themselves" is the template's, not the cure's.
 
 ### (3) NEXT, IN ORDER
-1. VACANT's final window (`scratchpad/vf/gate.sh`): the ratchet dirs + architecture + named files; both typechecks; the dark
-   proof; the lit twin's 900 against fb3f0172…'s per-birth file; ONE build, `VERIFY_DIST=1 tests/build`, `bootSmoke` alone.
-2. "VACANT <commit>" to the chair. 3. PRONOUN by the prompt's unit (2). 4. This hand-back final.
+1. PRONOUN by the prompt's unit (2): re-run its red first and green; `tests/lint` whole, `tests/generators/people` whole, the
+   tests naming the leaf, its callers' tables or an old wrong form, the three walkers; both typechecks; ONE build, the five
+   figures, `VERIFY_DIST=1 tests/build`; which goldens move, named and counted; then merge the line's tip (244fa84ef unless the
+   chair sends "THE LINE IS <commit>"), the lighting census the line's side then its door; "PRONOUN <commit>".
+2. This hand-back final, one line to the chair.
 
 ## 1. WORKTREES ON THIS BOX (scratch; lost with the container)
 `/home/user/wt/vacant` (the -wip), `/home/user/wt/vlit` (its lit twin), `/home/user/wt/lit` (c1128c8f6, detached),
