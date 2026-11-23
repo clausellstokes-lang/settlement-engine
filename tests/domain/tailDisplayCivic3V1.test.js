@@ -58,16 +58,29 @@ const POW4 = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'ri
 // TAIL-CORPUS-DEF-2 reworded (51217c0e, DECLARED: "the office no longer shields the seat; no slot as a verb's subject")
 // on the joined line before this guard joined it: the same town, the same vid, computed as the two above.
 const POW4C = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'riskLabel: Critical. The seat could fall', 1, { seat: S0, settlement: S0, counterpart: c });
+// THE FLIP (CLOSE-6 F-FORTUNE, 2026-11-23): r2r-hamlet-27's lit pair is DS-POW-4 Contested v1, a drawn sentence whose named
+// power LEADS it, so the anchor is the clause BEFORE the sentinel (the slots after the power), computed as the three above.
+const POW4H = /** @param {string} c */ (c) => {
+  const text = variantByVid({ leaf: 'power', blockId: 'DS-POW-4', poolKey: 'riskLabel: Contested', vid: 1, slots: { counterpart: c, faction: S0, settlement: S0 } });
+  return text.slice(0, text.indexOf(S0)).trim();
+};
 // [seed, the sentence that must not print, what prints instead]
 const CURED = [
   ['r2r-city-44', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
-  ['r2r-hamlet-18', 'The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
-  ['r2r-city-37', 'The hall is at odds with the Military/Guard.', 'The hall is at odds with the Guard.'],
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2r-hamlet-18 holds its Military/Guard on the roster
+  // and no sentence names it; r2r-hamlet-10 is the lowest r2r-hamlet of the census's 60 whose text names the Guard in a
+  // sentence (10, 27), and it prints the row's own pair (was r2r-hamlet-18)
+  ['r2r-hamlet-10', 'The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
+  // the lit birth's value (THE FLIP, 2026-11-23): r2r-city-37's relation with the Guard moved; its Guard sentence now
+  // (was 'The hall is at odds with the Military/Guard.' / 'The hall is at odds with the Guard.')
+  ['r2r-city-37', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
   ['r2r-village-50', 'The hall is at odds with the Military/Guard and the Religious Authorities.', 'The hall is at odds with the Guard and the Religious Authorities.'],
   ['r2r-town-27', POW6('Military/Guard'), POW6(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
   ['r2r-city-37', POW4('Military/Guard'), POW4(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
   ['r2r-metropolis-50', POW4C('Military/Guard'), POW4C(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
-  ['r2r-hamlet-27', 'Military/Guard answers to the Elder Council', 'The Guard answers to the Elder Council'],
+  // the lit birth's value (THE FLIP, 2026-11-23): r2r-hamlet-27's Guard no longer answers to the hall; its Guard sentence now
+  // (was 'Military/Guard answers to the Elder Council' / 'The Guard answers to the Elder Council')
+  ['r2r-hamlet-27', POW4H('Military/Guard'), POW4H(powerSentenceName('Military/Guard'))], // the leaf's sentence-start form: the power leads
   ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],
   ['r2r-metropolis-39', 'Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],
 ];

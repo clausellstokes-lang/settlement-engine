@@ -25,20 +25,24 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
 /** seed -> [tier, forced crisis, printed label at e1b2f9c1f, standing label, months at the standing share] */
+// the lit birth's values (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the fortune law moves the labels and the months by design;
+// was hamlet-2 Struggling/Moderate/1.6, village-0 Struggling/Moderate/1.7, town-1 Moderate/Comfortable/6.1, metropolis-1
+// Moderate/Moderate/14.1, under_siege-city-0 Struggling/Wealthy/8.8, wartime-town-0 Comfortable/Wealthy/6.3, occupied-city-0
+// Poor/Prosperous/9 (printed/standing/months)
 const PINS = Object.freeze({
   'v3build-thorp-0': ['thorp', null, 'Struggling', 'Struggling', 1.4],
   'v3build-hamlet-1': ['hamlet', null, 'Struggling', 'Poor', 1.5],
-  'v3build-hamlet-2': ['hamlet', null, 'Struggling', 'Moderate', 1.6],
-  'v3build-village-0': ['village', null, 'Struggling', 'Moderate', 1.7],
-  'v3build-town-1': ['town', null, 'Moderate', 'Comfortable', 6.1],
+  'v3build-hamlet-2': ['hamlet', null, 'Poor', 'Comfortable', 1.7],
+  'v3build-village-0': ['village', null, 'Moderate', 'Prosperous', 1.9],
+  'v3build-town-1': ['town', null, 'Comfortable', 'Prosperous', 6.3],
   'v3build-city-0': ['city', null, 'Struggling', 'Comfortable', 8.7],
   'v3build-city-2': ['city', null, 'Wealthy', 'Wealthy', 9],
-  'v3build-metropolis-1': ['metropolis', null, 'Moderate', 'Moderate', 14.1],
+  'v3build-metropolis-1': ['metropolis', null, 'Poor', 'Poor', 13.2],
   'v3build-famine-town-0': ['town', 'famine', 'Struggling', 'Moderate', 1.4],
   'v3build-famine-city-0': ['city', 'famine', 'Struggling', 'Comfortable', 7],
-  'v3build-under_siege-city-0': ['city', 'under_siege', 'Struggling', 'Wealthy', 8.8],
-  'v3build-wartime-town-0': ['town', 'wartime', 'Comfortable', 'Wealthy', 6.3],
-  'v3build-occupied-city-0': ['city', 'occupied', 'Poor', 'Prosperous', 9],
+  'v3build-under_siege-city-0': ['city', 'under_siege', 'Struggling', 'Comfortable', 8.5],
+  'v3build-wartime-town-0': ['town', 'wartime', 'Moderate', 'Prosperous', 6.3],
+  'v3build-occupied-city-0': ['city', 'occupied', 'Poor', 'Comfortable', 8.7],
 });
 
 /** @param {string} seed */

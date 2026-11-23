@@ -53,19 +53,24 @@ const ACCOUNT_CURED = [
   ['r2s-occupied-metropolis-0', 'Chrissopetra is governed by the Grand Guild Consortium.', 'The Grand Guild Consortium answers to the occupiers of Chrissopetra.'],
   ['r2r-thorp-24', 'The Household Council governs Sanctaminus.', 'The Household Council answers to the occupiers of Sanctaminus.'],
   ['r2s-mass_migration-town-0', 'Crime is the reason.', 'Insecurity is the reason.'],
-  ['r2r-city-3', 'Crime is the reason.', 'Insecurity is the reason.'],
+  // the lit birth's value (THE FLIP, 2026-11-23): r2r-city-3's seat stands Contested lit (Tolerated before), so the slot's
+  // sentence is the Contested one; it names insecurity, not crime (was 'Crime is the reason.' / 'Insecurity is the reason.')
+  ['r2r-city-3', 'Crime has left the City-State Council\'s right to rule contested in Androntopia.', 'Insecurity has left the City-State Council\'s right to rule contested in Androntopia.'],
   ['r2s-occupied-thorp-1', 'Poverty and crime have cost the Elder Council its standing.', 'Poverty and insecurity have cost the Elder Council its standing.'],
   ['r2r-thorp-24', 'Poverty and crime are the reason.', 'Poverty and the curfew are the reason.'],
 ];
 // [seed, the true sibling that must still print]
 const ACCOUNT_KEPT = [
-  ['r2r-city-0', 'Crime keeps Goraka from more than tolerating the Merchant City Council.'],
+  // the lit birth's value (THE FLIP, 2026-11-23): was 'Crime keeps Goraka from more than tolerating the Merchant City Council.'
+  ['r2r-city-0', 'Weak defences keep Goraka from more than tolerating the Merchant City Council.'],
   ['r2r-city-1', 'The Military City Council governs Pengill.'],
   ['r2r-city-11', 'The Merchant oligarchy governs Puripat.'],
 ];
 // [seed, the Foundations word that must not print, the record's label that prints]
 const LEGIT_CURED = [
-  ['r2s-infiltrated-thorp-0', 'Adequate', 'Tolerated'],
+  // the lit birth's value (THE FLIP, 2026-11-23): the record reads 'Approved' lit (was 'Tolerated'); the causal ladder
+  // still bands it 'adequate', so the town still meets the case (the ladder's word is not the record's)
+  ['r2s-infiltrated-thorp-0', 'Adequate', 'Approved'],
   ['r2r-hamlet-0', 'Collapsed', 'Legitimacy crisis'],
 ];
 

@@ -162,8 +162,12 @@ describe('item 3 · the ledger line says money and keeps its words', () => {
     expect(v1.v.text).toMatch(/money laid by/);
     expect(v1.v.marks).toEqual(['no crisis: indebted']);
   });
-  test('the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-rand-43) still print it', () => {
-    expectNoSeedFailures(collectSeedFailures([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-43']], ([seed]) => {
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, C27960's town bar0-metropolis-calm-rand-43 reads
+  // Moderate, so the COMFORTABLE rung is not its pool. Re-scanned bar0-metropolis-calm-rand-0..199 lit for the case's own
+  // predicate (DS-ECO-8's pool COMFORTABLE, drawn at the ledger angle, the rung's provenance; no indebted crisis): 3 9 22 24
+  // ...; 3 is the first (was rand-43)
+  test('the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-rand-3) still print it', () => {
+    expectNoSeedFailures(collectSeedFailures([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-3']], ([seed]) => {
       const s = town(seed);
       const out = economyStateProse(s, { exportPosture: deriveExportPosture(s) }, { seed: String(s._seed ?? s.id ?? '') });
       expect(JSON.stringify(out.prosperityRung)).toMatch(/purse closes every year ahead/);
