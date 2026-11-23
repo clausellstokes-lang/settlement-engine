@@ -1,0 +1,338 @@
+documents 1808; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 43392 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 43392 / 0
+  L1 gallery | canon: 43392 / 0
+  L2 gallery | aligned: 43392 / 384
+  L2 gallery | canon: 43392 / 384
+  L2-vs-L1 server | canon: 86784 / 43392
+  L2-vs-L1 twin | canon: 86784 / 43392
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 1808
+
+== L2 gallery | aligned: 384 of 43392 reads differ
+   by setting: off|allOpen=32 off|default=32 off|g:000=32 off|g:001=32 off|g:010=32 off|g:011=32 off|g:100=32 off|g:101=32 off|g:110=32 off|off=32 off|own=32 off|unmarked=32
+   documents (32): t2b-village-none-312, t2b-town-none-260, t2b-city-none-140, t2b-town-under_siege-37, t2b-village-none-1906, t2b-village-wartime-2238, t2b-metropolis-under_siege-27, t2b-metropolis-infiltrated-131, t2b-town-none-320, t2b-city-infiltrated-161, t2b-village-wartime-798, t2b-village-none-1786, t2b-village-wartime-2058, t2b-town-none-240, t2b-town-none-412, t2b-city-wartime-148, t2b-metropolis-wartime-48, t2b-village-under_siege-1877, t2b-town-infiltrated-1, t2b-city-under_siege-77
+   #keys: reads 384, leaves 384
+      e.g. t2b-village-none-312 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+== L2 gallery | canon: 384 of 43392 reads differ
+   by setting: off|allOpen=32 off|default=32 off|g:000=32 off|g:001=32 off|g:010=32 off|g:011=32 off|g:100=32 off|g:101=32 off|g:110=32 off|off=32 off|own=32 off|unmarked=32
+   documents (32): t2b-village-none-312, t2b-town-none-260, t2b-city-none-140, t2b-town-under_siege-37, t2b-village-none-1906, t2b-village-wartime-2238, t2b-metropolis-under_siege-27, t2b-metropolis-infiltrated-131, t2b-town-none-320, t2b-city-infiltrated-161, t2b-village-wartime-798, t2b-village-none-1786, t2b-village-wartime-2058, t2b-town-none-240, t2b-town-none-412, t2b-city-wartime-148, t2b-metropolis-wartime-48, t2b-village-under_siege-1877, t2b-town-infiltrated-1, t2b-city-under_siege-77
+   #keys: reads 384, leaves 384
+      e.g. t2b-village-none-312 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship#keys
+        server: (absent)
+        twin:   full,npc1,npc2,phrasing,tension,type
+   prominentRelationship.full: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.full
+        server: (absent)
+        twin:   "Kamal al-Nuri owes Said al-Jabbar more than Kamal al-Nuri could repay in ten years. Said al-Jabbar does not ask for the money; Said al-Jabbar asks for favours, and each one is marked against the debt…
+   prominentRelationship.npc1: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.npc1
+        server: (absent)
+        twin:   "Kamal al-Nuri"
+   prominentRelationship.npc2: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.npc2
+        server: (absent)
+        twin:   "Said al-Jabbar"
+   prominentRelationship.phrasing: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.phrasing
+        server: (absent)
+        twin:   "Kamal al-Nuri has found a way to raise the money and pay Said al-Jabbar back in full. Said al-Jabbar has made it clear the debt is not for sale."
+   prominentRelationship.tension: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.tension
+        server: (absent)
+        twin:   "Kamal al-Nuri has found a way to raise the money and pay Said al-Jabbar back in full. Said al-Jabbar has made it clear the debt is not for sale."
+   prominentRelationship.type: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.type
+        server: (absent)
+        twin:   "Held Over Them"
+   pressureSentence: reads 24, leaves 24
+      e.g. t2b-village-none-312 off|default at pressureSentence
+        server: (absent)
+        twin:   "Portia Crispus has asked Hadrian Crispus for something Hadrian Crispus cannot give without being noticed. Hadrian Crispus asked for time, and Portia Crispus gave a week."
+== L2-vs-L1 server | canon: 43392 of 86784 reads differ
+   by setting: dm|allOpen=1808 dm|default=1808 dm|g:000=1808 dm|g:001=1808 dm|g:010=1808 dm|g:011=1808 dm|g:100=1808 dm|g:101=1808 dm|g:110=1808 dm|off=1808 dm|own=1808 dm|unmarked=1808 off|allOpen=1808 off|default=1808 off|g:000=1808 off|g:001=1808 off|g:010=1808 off|g:011=1808 off|g:100=1808 off|g:101=1808 off|g:110=1808 off|off=1808 off|own=1808 off|unmarked=1808
+   documents (0): 
+   defenseProfile#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.disaster
+        server: 42
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.economic
+        server: 32
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.internal
+        server: 16
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.military
+        server: 22
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.monster
+        server: 4
+        twin:   (absent)
+   economicState.compound#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at economicState.compound.economyOutput
+        server: 10.338463388650789
+        twin:   (absent)
+   powerStructure#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at powerStructure.recentConflict
+        server: "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 41080, leaves 41080
+      e.g. t2p-village-none-0 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 41080, leaves 41080
+      e.g. t2p-village-none-0 off|default at defenseProfile.readiness.score
+        server: 12
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 36024, leaves 36024
+      e.g. t2p-village-none-120 off|default at defenseProfile.economicGates.military
+        server: 0.88
+        twin:   (absent)
+   activeConditions[]#keys: reads 34608, leaves 34728
+      e.g. t2p-village-none-16 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 34608, leaves 34728
+      e.g. t2p-village-none-16 off|default at activeConditions[0].severity
+        server: 0.6
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 33144, leaves 33144
+      e.g. t2p-village-none-300 off|default at defenseProfile.economicGates.internal
+        server: 0.76
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 21696, leaves 21696
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 21696, leaves 21696
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 0
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.…
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Background crime"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 3616, leaves 3616
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 43392 of 86784 reads differ
+   by setting: dm|allOpen=1808 dm|default=1808 dm|g:000=1808 dm|g:001=1808 dm|g:010=1808 dm|g:011=1808 dm|g:100=1808 dm|g:101=1808 dm|g:110=1808 dm|off=1808 dm|own=1808 dm|unmarked=1808 off|allOpen=1808 off|default=1808 off|g:000=1808 off|g:001=1808 off|g:010=1808 off|g:011=1808 off|g:100=1808 off|g:101=1808 off|g:110=1808 off|off=1808 off|own=1808 off|unmarked=1808
+   documents (0): 
+   defenseProfile#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.disaster
+        server: 42
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.economic
+        server: 32
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.internal
+        server: 16
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.military
+        server: 22
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at defenseProfile.scores.monster
+        server: 4
+        twin:   (absent)
+   economicState.compound#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at economicState.compound.economyOutput
+        server: 10.338463388650789
+        twin:   (absent)
+   powerStructure#keys: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 43392, leaves 43392
+      e.g. t2p-village-none-0 off|default at powerStructure.recentConflict
+        server: "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another."
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 41080, leaves 41080
+      e.g. t2p-village-none-0 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 41080, leaves 41080
+      e.g. t2p-village-none-0 off|default at defenseProfile.readiness.score
+        server: 12
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 36024, leaves 36024
+      e.g. t2p-village-none-120 off|default at defenseProfile.economicGates.military
+        server: 0.88
+        twin:   (absent)
+   activeConditions[]#keys: reads 34608, leaves 34728
+      e.g. t2p-village-none-16 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 34608, leaves 34728
+      e.g. t2p-village-none-16 off|default at activeConditions[0].severity
+        server: 0.6
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 33144, leaves 33144
+      e.g. t2p-village-none-300 off|default at defenseProfile.economicGates.internal
+        server: 0.76
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 21696, leaves 21696
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 21696, leaves 21696
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 0
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.…
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 13928, leaves 31622
+      e.g. t2p-village-none-16 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Background crime"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 3616, leaves 3616
+      e.g. t2p-village-none-0 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+   #keys: reads 384, leaves 384
+      e.g. t2b-village-none-312 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship#keys
+        server: full,npc1,npc2,phrasing,tension,type
+        twin:   (absent)
+   prominentRelationship.full: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.full
+        server: "Kamal al-Nuri owes Said al-Jabbar more than Kamal al-Nuri could repay in ten years. Said al-Jabbar does not ask for the money; Said al-Jabbar asks for favours, and each one is marked against the debt…
+        twin:   (absent)
+   prominentRelationship.npc1: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.npc1
+        server: "Kamal al-Nuri"
+        twin:   (absent)
+   prominentRelationship.npc2: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.npc2
+        server: "Said al-Jabbar"
+        twin:   (absent)
+   prominentRelationship.phrasing: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.phrasing
+        server: "Kamal al-Nuri has found a way to raise the money and pay Said al-Jabbar back in full. Said al-Jabbar has made it clear the debt is not for sale."
+        twin:   (absent)
+   prominentRelationship.tension: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.tension
+        server: "Kamal al-Nuri has found a way to raise the money and pay Said al-Jabbar back in full. Said al-Jabbar has made it clear the debt is not for sale."
+        twin:   (absent)
+   prominentRelationship.type: reads 372, leaves 372
+      e.g. t2b-town-none-260 off|default at prominentRelationship.type
+        server: "Held Over Them"
+        twin:   (absent)
+   pressureSentence: reads 24, leaves 24
+      e.g. t2b-village-none-312 off|default at pressureSentence
+        server: "Portia Crispus has asked Hadrian Crispus for something Hadrian Crispus cannot give without being noticed. Hadrian Crispus asked for time, and Portia Crispus gave a week."
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=43392; gallery | server=43392; gallery | twin=43392; link | twin=43392
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 1808
+SERVED MARKER BY DOOR | setting kind | state (reads): 
+  gallery | marked | served marker: 39776
+  gallery | unmarked | NO served marker: 3616
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  stress[].cast.roles[].id: 22 in 5 documents; e.g. t2b-city-none-126 [0].stress[0].cast.roles[0].id = npc_veiled_f872a98fe3f51c30
+  stress[].cast.levers[].holderId: 14 in 4 documents; e.g. t2b-city-none-126 [0].stress[0].cast.levers[0].holderId = npc_customs_house
+HITS (outside publicProse):
+  none
+HITS INSIDE publicProse (apart, ruling (a')):
+  none

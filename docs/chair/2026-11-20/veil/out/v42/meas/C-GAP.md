@@ -39,3 +39,10 @@ Every door (gallery, link, import, map member, the gallery page) and both twins,
 SERVED, outside publicProse and inside it. 0 fresh-shaped stored ids. The stored side's census: NO path of any of the 140 documents
 holds a stored person id outside the re-key's own sites. Why (read off the documents, `logs/shape-census.txt`): today's births carry
 `npcs[].goal.intent` (a re-keyed site) and NO roster copy at all (no top-level `factions[]`, no `powerStructure.factions[].members`).
+
+## THE POOL'S BIRTHS (`pool`, 1,808 places, 43,392 reads; the gallery door only, for time: link, import and map member NOT read on the pool)
+gallery server (`data` + marker), gallery twin, link twin, gallery page: 0 STORED PERSON IDS SERVED; 0 in publicProse; 0 fresh-shaped.
+The stored side's census lists `stress[].cast.roles[].id` (22 in 5 places, e.g. t2b-city-none-126 `npc_veiled_f872a98fe3f51c30`) and
+`stress[].cast.levers[].holderId` (14 in 4, e.g. `npc_customs_house`): THESE ARE RE-KEYED SITES (212 :: `_gallery_veil_rekey` and
+`rekeyPeople` take `stress` as one crisis OR A LIST; `personIdBijection.shared.mjs :: crises` too); the census's own site list named
+`stress.cast…` and `stressors[]…` but not `stress[]…`: an omission of this unit's census, not a gap (0 served at those paths).

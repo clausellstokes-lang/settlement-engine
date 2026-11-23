@@ -27,11 +27,13 @@ side's census (every path of the stored document holding a stored person id, the
 value for value, no bijection, at the tip.
 
 ## RESULTS
+- A IS DONE (the 7, the 140, the pool). The 7 places' stop: L1 reads 0 on the 140 and on the pool.
 - A: `A-77.md`. THE 7: L1 differs on 0 of 168 reads (gallery and link); L2 on 84 of 168 (M's 77 + the 7 unmarked), all Reveal
   off, ONE path, `prominentRelationship` whole. Born in the client's processing of M's TWIN row: `src/lib/gallery.js ::
   sanitizeDossier`'s unserved branch never calls `gallerySecondHomes.js :: withholdCovertCopies` (the twin's and 212's covert rule).
   Not 212's, not R4-IDS's, not the gap. CONFIRMED on the 7 and the 140. L1 BY SET: the 7 0/168; the 140 0/3,360 gallery and
-  0/3,360 link (both instruments); the pool to follow. The 140's L2: 84/3,360, exactly the 7 places x 12 settings, Reveal off.
+  0/3,360 link; THE POOL 0/43,392 (both instruments). L2: the 140 84/3,360 (the 7 x 12), the pool 384/43,392 (32 places x 12; M's
+  352 = 32 x 11), all Reveal off; paths `prominentRelationship` (372) and `pressureSentence` (24): the covert CASE's two halves.
 - THE SEAT'S ASKS (A-77.md): (1) M's (i)-(iii) were taken on both halves, the twin half over the raw unserved row; (2) a row
   without the served marker: the gallery read of an UNMARKED share (trial: 2 of 2), and import and the map member carry no marker
   field at all (full counts at m140); (3) the raw twin row is also read by r4it/tonight-arm.probe.jsx, r4ip2/order.probe.jsx and
@@ -40,7 +42,7 @@ value for value, no bijection, at the tip.
   page) serve stored ids at `factions[].members[].goal.intent.short.target.id` (456 hits / 60 reads),
   `...goal.intent.long.target.id` (443 / 60) and a THIRD path, `factions[].members[].allegiance.handler` (35 / 10, unmarked DM).
   Link and map member: 0. TODAY-BORN SET: 0 on every door and twin (and 0 in publicProse); its documents carry no roster copy.
-  Master-born and pool: to follow.
+  POOL (gallery door only): 0. Master-born: to follow (m140).
 - A's aside (control documents only): 212 :: `_gallery_veil_roster_choices` :2318-2337 writes a `power` share onto master-shape
   top-level `factions[]` entries that carry none (a NULL comparison in its guard); the twin does not (33 reads).
 - U (the chair's item, 08:45): `U-UNMARKED.md`. FIRST READING (2 of the 7, CONFIRMED there): THE MAP MEMBER SERVES THE COVERT
