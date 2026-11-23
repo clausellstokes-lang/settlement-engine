@@ -29,3 +29,11 @@ Then one row per pair, worst first: family, the LACK cell (desk, position, pool)
 
 ## REPORT
 Commit both files by explicit path in `/home/user/settlement-engine`. Return at most 150 words: the commit, the three plain lines, and anything you could not classify.
+
+## AMENDMENT 1 (PROSE-6, on the builder's stop at the control; the error was the brief's)
+The cure works by VARIANT, not by cell: a cell may hold lines that contradict and lines that reconcile the two facts (F1-F6 say both truths). So:
+- THE CONTROL is taken by variant, the tooth's way: `OPPOSITE_PAIRS` and `PINNED_OLD_WORDS` read 0 pages on the 900. Say that it does.
+- THE TWO CURED CELL PAIRS stay in the table as rows like any other, read by variant as below. Their contradicting variants must read 0. If any variant pair you read as TRUE in them prints: STOP.
+- STEP 4 IS READ BY VARIANT. For each surviving cell pair, list its co-printing variant pairs (LACK vid × SUFFICIENCY vid) with their page counts. Read the variant pairs that together cover at least 80% of the cell pair's pages, worst first, and at most 8 per cell pair. Read one page of each and mark it TRUE or NOT, with why in at most 10 words.
+- The cell pair's row gives: pages in all; TRUE pages (the sum of its TRUE variant pairs); and pages not read. Rank the rows by TRUE pages. The table's first three lines count TRUE pages only.
+- Commit the script, its log summary and the table, the two files the brief names, by explicit path. Report in at most 150 words.
