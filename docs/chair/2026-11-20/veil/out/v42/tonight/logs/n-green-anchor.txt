@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /home/user/wt/tonight
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  06:45:41
+   Duration  1.57s (transform 30ms, setup 31ms, import 1.40s, tests 21ms, environment 0ms)
+
+EXIT 0

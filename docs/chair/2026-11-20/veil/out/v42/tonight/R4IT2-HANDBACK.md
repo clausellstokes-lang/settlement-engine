@@ -21,6 +21,23 @@ at 015b3c020 (with its ADDENDUM, N59). No message from the seat about the "77" r
 - Hold C then D then E (lint, copy, typecheck) are QUEUED (`/var/tmp/r4it2/holdC.sh`, `queue3.sh`) behind R4I-MEASURE's
   pool run, which has held the mutex since before 08:43.
 
+## HOLD C (11:43-11:58 UTC), THE TWIN RE-POINTED: C PROVED ON THE 140 (the pool: hold D, running from 11:58)
+- shareRenderTwice, the re-pointed harness on 9f9b819f7 (RED, logs/srt2-red.txt): 2 of 5 failed: MAIN 3 rows, every one a
+  non-id row, the Tonight sheet's want line (metropolis-calm-2, gallery/desktop, gallery/phone, link/phone); TONIGHT 3 rows
+  ("server, two reads", "twin vs server", "eight salts give 3 sheets"). On the cured tree (GREEN, logs/srt2-green.txt): 5 of 5.
+  The first red (hold A, logs/srt-red-patched.txt) gave MAIN 4 rows: the count moves with each run's salts, and every row is
+  the want line. CONFIRMED.
+- THE ARM ON THE 140 (four reads a place: gallery|link x Reveal off|DM; twin = the projection), logs/arm2-*-140-table.txt:
+  (a) twin2 58 of 140 places differ -> 0; server2 61 -> 0. (b) twin vs served 58 -> 0; the served document vs the page's
+  read of it (beside) 55 -> 0. (c) nothing-hidden places (48): a role line on both owner and shared sheet: 0 persons (red 0),
+  before and after; goal withheld by the read (named, not red): 16 persons in 14 places a read (off, link|dm), 0 on
+  gallery|dm; other line moved 2 on gallery|dm (owner's secret, served temperament: the DM read withholds the secret; named).
+  Named: `C-OWNER-HALF-140.md`. CONFIRMED.
+- WHAT CARRIES OVER FROM HOLDS A/B: the server halves (a) server2 (140: 58 -> 0; the pool red 728 of 1,808) and (c)
+  ownerServer; shareRenderTwice MAIN (the page through the server) and its green; the 30 d-files 238/238; the owner dumps
+  (OWNER-MOVES: no twin in them). RE-RUN: every twin half (twin2, twinServer, ownerTwin) and shareRenderTwice's TONIGHT arm.
+- OWNER-MOVES on the 140: 0 lines moved of 374 people (`OWNER-MOVES.md`).
+
 ## COMMITTED
 1. 550e2e427 docs: `out/v38/r4it/` brought from `lane/veil-42-2026-11-23` (said); the three-halves arm
    `out/v42/tonight/tonight-arm2.probe.jsx` + `.sh` + `-an.mjs` + `-named.mjs`; the hand-back (then a skeleton; this file now).

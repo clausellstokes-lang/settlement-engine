@@ -1,0 +1,46 @@
+ RUN  v4.1.8 /var/tmp/r4it2/base
+ ❯ tests/security/shareRenderTwice.pglite.test.jsx (5 tests | 2 failed) 170867ms
+     × MAIN (R2's green): every withhold-always row but the known drawn ones, grafted back, moves no byte (every surface, width and town) 106247ms
+     × TONIGHT (R4I-TONIGHT, ruling 40.3 (2)): the sheet is one sheet on two reads (twin and server) and under eight salts, and the owner's role lines are the served ones 4348ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/security/shareRenderTwice.pglite.test.jsx > VR16 (1): a field withheld on every non-owner read as undrawn moves no byte of a non-owner surface (through the server) > MAIN (R2's green): every withhold-always row but the known drawn ones, grafted back, moves no byte (every surface, width and town)
+AssertionError: expected [ …(3) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "metropolis-calm-2 gallery/desktop: SHEET/Tonight (Table View): …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> keep the pressure on until the seat gives way, and keep thei… | …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> be the one people turn to when the seat fails.</div></div><d…",
++   "metropolis-calm-2 gallery/phone: SHEET/Tonight (Table View): …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> be the one people turn to when the seat fails.</div></div><d… | …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> keep the pressure on until the seat gives way, and keep thei…",
++   "metropolis-calm-2 link/phone: SHEET/Tonight (Table View): …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> keep the pressure on until the seat gives way, and keep thei… | …ght: 1.45;\"><span style=\"font-weight: 800;\">Wants to</span> use this crisis to take the seat for themselves.</div></div>…",
++ ]
+ ❯ tests/security/shareRenderTwice.pglite.test.jsx:275:19
+    273|     if (OUT) { mkdirSync(OUT, { recursive: true }); writeFileSync(join…
+    274|     expect(report.towns.every((x) => x.grafted > 0)).toBe(true);
+    275|     expect(moved).toEqual([]);
+       |                   ^
+    276|   }, ARM_TIMEOUT_MS);
+    277|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+ FAIL  tests/security/shareRenderTwice.pglite.test.jsx > VR16 (1): a field withheld on every non-owner read as undrawn moves no byte of a non-owner surface (through the server) > TONIGHT (R4I-TONIGHT, ruling 40.3 (2)): the sheet is one sheet on two reads (twin and server) and under eight salts, and the owner's role lines are the served ones
+AssertionError: expected [ …(3) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "metropolis-calm-2: server, two reads",
++   "metropolis-calm-2: twin vs server",
++   "metropolis-calm-2: eight salts give 3 sheets",
++ ]
+ ❯ tests/security/shareRenderTwice.pglite.test.jsx:308:19
+    306|     // anchored: the arm reads at least one cast person the served she…
+    307|     expect(roleVoiced, `role-voiced cast persons on the served sheets …
+    308|     expect(moved).toEqual([]);
+       |                   ^
+    309|   }, ARM_TIMEOUT_MS);
+    310|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  11:43:51
+   Duration  171.60s (transform 7.35s, setup 28ms, import 204ms, tests 170.87s, environment 408ms)
+EXIT 1

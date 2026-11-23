@@ -1,0 +1,42 @@
+places 140 | hidden-house 92 | nothing hidden 48 | places with a cast-voiced person on the owner sheet 64 | reads gallery|off link|off gallery|dm link|dm
+reads that served no dossier 0 
+(a) twin2 gallery|off: EQUAL in 140 of 140 | differ 0
+(a) twin2 link|off: EQUAL in 140 of 140 | differ 0
+(a) twin2 gallery|dm: EQUAL in 140 of 140 | differ 0
+(a) twin2 link|dm: EQUAL in 140 of 140 | differ 0
+(a) twin2 any read: places differing 0 of 140
+(a) server2 gallery|off: EQUAL in 140 of 140 | differ 0
+(a) server2 link|off: EQUAL in 140 of 140 | differ 0
+(a) server2 gallery|dm: EQUAL in 140 of 140 | differ 0
+(a) server2 link|dm: EQUAL in 140 of 140 | differ 0
+(a) server2 any read: places differing 0 of 140
+(b) twinServer gallery|off: EQUAL in 140 of 140 | differ 0
+(b) twinServer link|off: EQUAL in 140 of 140 | differ 0
+(b) twinServer gallery|dm: EQUAL in 140 of 140 | differ 0
+(b) twinServer link|dm: EQUAL in 140 of 140 | differ 0
+(b) twinServer any read: places differing 0 of 140
+(b, beside) servedPage gallery|off: EQUAL in 140 of 140 | differ 0
+(b, beside) servedPage link|off: EQUAL in 140 of 140 | differ 0
+(b, beside) servedPage gallery|dm: EQUAL in 140 of 140 | differ 0
+(b, beside) servedPage link|dm: EQUAL in 140 of 140 | differ 0
+(b, beside) servedPage any read: places differing 0 of 140
+(c) ownerTwin gallery|off [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerTwin gallery|off [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0
+(c) ownerTwin link|off [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerTwin link|off [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0
+(c) ownerTwin gallery|dm [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 0 (line differs 0) | other same 14 | other moved 2 | not served 0
+     OTHER {"seed":"r3m-village-insurgency-0-4","name":"Sergei Korolev","role":"instigator","kind":"insurgency","owner":"Has been maintaining a cover-up of a past institutional failure that cost lives.","served":"Discerning."}
+     OTHER {"seed":"r3m-metropolis-insurgency-0-64","name":"Plotina Merula","role":"instigator","kind":"insurgency","owner":"Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named.","served":"Candid."}
+(c) ownerTwin gallery|dm [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 7 (line differs 7) | other same 51 | other moved 10 | not served 0
+(c) ownerTwin link|dm [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerTwin link|dm [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0
+(c) ownerServer gallery|off [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerServer gallery|off [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0
+(c) ownerServer link|off [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerServer link|off [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0
+(c) ownerServer gallery|dm [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 0 (line differs 0) | other same 14 | other moved 2 | not served 0
+     OTHER {"seed":"r3m-village-insurgency-0-4","name":"Sergei Korolev","role":"instigator","kind":"insurgency","owner":"Has been maintaining a cover-up of a past institutional failure that cost lives.","served":"Discerning."}
+     OTHER {"seed":"r3m-metropolis-insurgency-0-64","name":"Plotina Merula","role":"instigator","kind":"insurgency","owner":"Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named.","served":"Candid."}
+(c) ownerServer gallery|dm [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 7 (line differs 7) | other same 51 | other moved 10 | not served 0
+(c) ownerServer link|dm [nothing-hidden]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 16 (line differs 16) | other same 0 | other moved 0 | not served 0
+(c) ownerServer link|dm [every place]: role line on both 0 | of them moved (RED) 0 in 0 places | goal withheld by the read (named, not red) 68 (line differs 68) | other same 0 | other moved 0 | not served 0

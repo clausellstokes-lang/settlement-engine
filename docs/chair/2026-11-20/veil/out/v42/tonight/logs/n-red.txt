@@ -1,0 +1,36 @@
+
+ RUN  v4.1.8 /home/user/wt/tonight
+
+ ❯ tests/lint/netCurrentExtractorAnchor.walker.test.js (7 tests | 1 failed) 24ms
+     × no NEW unanchored create-or-replace-function regex in tests/ or scripts/ 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/netCurrentExtractorAnchor.walker.test.js > unanchored net-current extractor walker (habitat removal) > no NEW unanchored create-or-replace-function regex in tests/ or scripts/
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/criminalSwitchSalt.test.js: 1 unanchored create-or-replace-function regex(es) at line(s) 114 (frozen ceiling 0). An unanchored form also matches a migration HEADER that quotes the statement in prose, so an extractor starts mid-comment and swallows English instead of SQL — and text-asserting suites stay GREEN over prose. Spell it ^create\\s+or\\s+replace\\s+function… with the m flag (see tests/security/moneyRpcNetCurrentGuards.test.js). Fixed a site? LOWER this file's number in FROZEN_UNANCHORED (delete the row at 0). Never raise a number; never add a file.",
++ ]
+
+ ❯ tests/lint/netCurrentExtractorAnchor.walker.test.js:171:24
+    169|       }
+    170|     }
+    171|     expect(violations).toEqual([]);
+       |                        ^
+    172|   });
+    173|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  06:45:21
+   Duration  1.56s (transform 31ms, setup 28ms, import 1.39s, tests 24ms, environment 0ms)
+
+EXIT 1
