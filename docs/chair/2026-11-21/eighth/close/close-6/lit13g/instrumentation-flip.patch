@@ -1,0 +1,71 @@
+--- a/src/generators/power/factionStanding.js
++++ b/src/generators/power/factionStanding.js
+@@ -91,7 +91,7 @@
+   fewMatters: Object.freeze(['They have a say on only a few matters; on everything else they side with whoever will deal with them that week.']),
+ });
+ 
+-export const annotateFactionStanding = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
++const annotateFactionStanding__inner = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
+       var factionNames = factions.map(function (f) {
+           return f.faction;
+         }),
+@@ -414,3 +414,10 @@
+   const rankLine = RANK_STANDINGS.find((re) => re.test(desc));
+   apart.holder.desc = written ? desc.replace(written, own) : rankLine ? desc.replace(rankLine, own) : desc ? `${desc} ${own}` : own;
+ }
++// LIT-13G instrumentation (scratch copy only)
++const __WAR = /\bA slow war with the guild\b|\bthe guild can make every investigation costly\b|\bcan arrest their people\b|\benough to keep it down but not to stamp it out\b/i;
++export const annotateFactionStanding = (factions, force, seat) => {
++  const r = annotateFactionStanding__inner(factions, force, seat);
++  globalThis.__lit13g?.('annotateFactionStanding', { seatBought: seatBoughtOf(factions), governing: factions.filter((f) => f.isGoverning).map((f) => f.faction), war: factions.filter((f) => __WAR.test(String(f.desc || ''))).map((f) => `${f.faction}: ${(String(f.desc).match(__WAR) || [''])[0]}`), stack: new Error().stack.split('\n').slice(2, 4).map((s) => s.trim().replace(/.*\/src\//, '')).join(' < ') });
++  return r;
++};
+--- a/src/generators/narrativeGenerator.js
++++ b/src/generators/narrativeGenerator.js
+@@ -927,7 +927,8 @@
+  * @param {*} settlement @param {Array<Record<string, any>>} npcs @param {{ rederive?: boolean }} [opts]
+  * @returns {*} the new power structure
+  */
+-export const withHallCapture = (settlement, npcs, opts = {}) => {
++export const withHallCapture = (settlement, npcs, opts = {}) => { const __r = withHallCapture__inner(settlement, npcs, opts); const __h = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) }); globalThis.__lit13g?.("withHallCapture", { rederive: !!opts.rederive, state: __h.state, agentRung: __h.agentRung, climateRung: __h.climateRung, agentScore: __h.agentScore, agents: __h.agents.map((a) => `${a.rank}:${a.name}->${a.guild}`), ruler: __h.ruler, rulerCriminal: __h.rulerCriminal, underworld: __h.underworld, rowsAfter: (__r?.factionRelationships || []).filter((x) => x?.captureState !== undefined).map((x) => `${x.pair.join(" ~ ")}: ${x.type}/${x.captureState}`) }); return __r; };
++const withHallCapture__inner = (settlement, npcs, opts = {}) => {
+   const hall = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) });
+   // the capture rows of the relation matrix READ the one state (the chair's ruling on car 2's STOP 3)
+   return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall, opts), hall.state);
+--- a/src/generators/factionDynamics.js
++++ b/src/generators/factionDynamics.js
+@@ -320,6 +320,7 @@
+  * @param {{isLegitimacyCrisis?: boolean, isEndorsed?: boolean}} publicLeg
+  */
+ export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
++  globalThis.__lit13g?.("govCriminalRelation", { pair: [gov.faction, crim.faction], crimCapture });
+   let type, direction, narrative;
+ 
+   if (crimCapture === 'capture') {
+@@ -356,6 +357,7 @@
+  * @param {{isContested?: boolean, isLegitimacyCrisis?: boolean}} publicLeg
+  */
+ export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
++  globalThis.__lit13g?.("criminalMilitaryRelation", { pair: [crim.faction, mil.faction], crimCapture });
+   let type, direction, narrative;
+ 
+   if (crimCapture === 'corrupted' || crimCapture === 'capture') {
+--- a/src/domain/people/allegiance.js
++++ b/src/domain/people/allegiance.js
+@@ -287,6 +287,7 @@
+   const p = spawnCorruptionChance(climate, organized * ALLEGIANCE_TUNING.organizedCrime);
+   const housePool = crimHouses.map((h) => str(h.name)).filter(Boolean);
+   const family = rng.fork(ALLEGIANCE_FORK_LABEL);
++  globalThis.__lit13g?.("dealAllegiances", { p, organized, climate: { crime: climate.crime, security: climate.security, prosperity: climate.prosperity }, economicProsperity: settlement.economicState?.prosperity });
+   cards.forEach((card) => {
+     if (!card || card.id == null) return;
+     if (allegianceOf(card)) return;
+@@ -294,7 +295,7 @@
+     if (!flaw) return;
+     if (isCriminalFace(card, crimHouseNames, crimPowerNames)) return;
+     const fork = family.fork(String(card.id));
+-    if (!fork.chance(p)) return;
++    const __hit = fork.chance(p); if (/Arif al-Basri/.test(String(card.name))) globalThis.__lit13g?.("deal:card", { name: card.name, flaw, p, hit: __hit }); if (!__hit) return;
+     const house = /** @type {string} */ (fork.pick(housePool));
+     const vector = /** @type {AllegianceVector} */ (corruptionVectorForFlaw(flaw));
+     card.allegiance = {
