@@ -1,0 +1,7 @@
+start 10:27:45 at 9e6547f0f
+lint rc=1 10:48:53
+named rc=1 10:56:27
+restart (chain1b) 11:14:11
+security rc=1 12:06:54
+hookgap rc=0 HOOKGAP 11/462 (served hooks needing a hidden house / served hooks); naming 0; server=twin YES
+END 12:07:43

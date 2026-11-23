@@ -1,0 +1,4 @@
+UNLISTED	tests/security/traditionDescriptionSharedPage.test.js	TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can hide hidden, the traditions text stands NOT VACUOUS: every town draws rows; the pool holds every class of address, whole houses, veil-22's added eyes, a criminal income above a fitting one, an active crisis
+UNLISTED	tests/security/traditionDescriptionSharedPage.test.js	TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can hide hidden, the traditions text stands CONTROL: a hidden house's name, or a removed phrase, planted into a row makes the check red
+UNLISTED	tests/security/traditionDescriptionSharedPage.test.js	TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can hide hidden, the traditions text stands THE CHAIR'S QUESTIONS (a) and (b): with everything hidden, every non-veiled power, the stress readings, every event row and the founding stand
+TOTAL failing 3; files 602; tests 2142 passed 2138 failed 3
