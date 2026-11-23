@@ -34,7 +34,15 @@ BEFORE the PR's merge and the deploy, only after the security reader's clearance
 
 THE MARK: the chair read 258,492 at 11:10 UTC (my own estimates run low; hand over by 620,000 by its read).
 | ec216e759 | F-FORTUNE-2: four weakened rows re-picked by premise (Batch1 r2r-hamlet-161; 3V1 r2r-town-7, r2r-hamlet-128; Batch4 r2r-city-95 'Surplus'), defenceParts header; bar4 (e2) STOP (case extinct lit in 2,280 births): ASKED the chair, lean law-1 config | builder 18 files 1 red (R13), lint the line's three |
-IN FLIGHT: the seat's lit re-run of the 20 fortune files (log `logs/rerun-fortune.log` in the scratchpad), then PROSE-E's merge.
+| 83baeaf14 | MERGE of PROSE-E cf104777c, plain, NO CONFLICT | seat lit: the 20 fortune files at ec216e759 286/287 (R13); at 83baeaf14 bar8DesksDef + corpusCureGuards + oppositeSentencePairs + `tests/copy` whole 302/302; `tests/lint` whole the line's three; no register owes a door |
+THE CHAIR RULED (11:49) bar4 (e2): its KEEP birth UNDER LAW 1 (both laws forced to 1 in that assertion's config), the original
+/openly and widely questioned/ and title restored; a comment saying why the case is extinct lit and naming the 2,280; the lit
+STRIDE arm untouched. NOT a FOR-THE-OWNER line (this hand-back holds it). FOR-THE-OWNER.md DOES get three plain lines (the chair
+11:10, (4)): no approved seat on 0 of 500 religious-conversion cities lit; no Struggling village at output 50+ in 800 lit; no
+short-purse charter-only hamlet in 1,000 lit (all 56 Comfortable or Prosperous).
+HAZARD MET 12:06 (mine): a push with NOTHING TO SEND started the whole check; killed; 15 (d) clean. EVERY PUSH NOW GUARDED:
+`[ "$(git rev-parse <br>)" != "$(git ls-remote origin <br> | cut -f1)" ] && git push ...`.
+IN FLIGHT: F-FORTUNE-3 (the same builder, resumed 12:15) for bar4 (e2); then LIT-13G's builder (brief `close-6/briefs/LIT-13G.md`).
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
