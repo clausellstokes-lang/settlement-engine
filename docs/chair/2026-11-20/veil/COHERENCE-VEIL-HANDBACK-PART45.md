@@ -39,6 +39,9 @@
 - 11:36: the lane's tip is b58abc48b (PIN-3).
 - 11:48 (N91): PAGES (rendered read-only pages: (F) the banked 720 of `censusPlan('r2', 1)`, (N) the gate's 92) replaces DAILY; its owner-only slot check stays.
 - 12:09: the mark (the chair's read 409,431); a successor drafted; hand over at 570,000 by the chair's read or 620,000 by this seat's, at a commit boundary; builder reports at most 60 lines, by totals.
+- 13:40 (N102): hxd-city-138's red is PLAUSIBLY the crimeWave rule (no crime_wave sent where the served crime signal is false: THAT RULE STANDS): if REDS-CAUSE confirms it, the cure is on the TEST's side.
+- 13:42 (N103): PAGES' 55-minute split (the restore loop on every 4th birth, classes on all 720, (N) whole; every line kind ends with a key); the server's chip ORDER (jsonb key order, every stored town alike) a class of its own, a display nit for the worklist; an ORDER line whose meaning moves = a stop.
+- 14:07 (N104): NAMES' one hit (`powerStructure.factions[].desc`, a shown power's desc naming the withheld Thieves' Guild, 240 reads every door, r3m-town-none-0-17 and r3m-city-none-1-117) is chain A's R5-DESC: nothing built here; THE JOIN'S OWN PROOF LINE LATER: NAMES' born form re-run after chain A's tip is merged into the join reads 0 at that path, the two seeds by name. `dmNote` = the Reveal-DM payload by design.
 - N74, N84 and N89 were not named to this seat by number: read them in `CHAIR-HANDOFF-NINTH.md` on `lane/chair-2026-11-08`.
 
 ## 3. Log (every hour read from `date -u`)
