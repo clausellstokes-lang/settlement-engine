@@ -55,10 +55,14 @@ over the 900 (3 dark, 4 lit by name; r2r-city-5); a tooth; the per-birth hash: n
 | 1fe19098f | DOOR: lighting census (titles 31,924 -> 31,925), refreeze then plain green | the walker |
 THE OWNER'S ORDER (via the chair, N116, 16:12): the veil's seats paused; THIS LANE IS THE PROGRAM'S FIRST WORK.
 | 21b0d74b5 | F-JOIN: 77 rows in 42 files (PREMISE 39, BORN 34+1, GUARD 1, STORED 2); 3 STOPS extinct lit (bar6CrimeOneReading C51048, mintedFaceUnderworld r2r-metropolis-39, churchNoteReadsFlag): ASKED the chair, lean the law-1 form | builder 49 files 45 red -> 3, lint the line's three; seat re-run running |
-IN FLIGHT (since 17:06 UTC): my lit re-run of the 49 join files (scratchpad logs/rerun-join.log); the F9 builder in `/home/user/wt/f9`
-(`lane/close-6-2026-11-23-f9`, pushed at b5746594d = F9 A the twin): F8 now, then COMMIT B by the chair's N118 (the emit + body2 in
-the ruled words + the test's weeks [3, 12]). THEN: merge f9 into the flip (plain); the mutation-manifest door (cherry-pick
-ba0e1c288 from `origin/lane/close-1-2026-11-22-golden-wip`); the three STOPS by the chair's ruling; lighting census door if red.
+IN FLIGHT (since 17:50 UTC): F-JOIN-2 (the 3 STOPS in the bar4 (e2) form, N119) by the F-JOIN builder in `/home/user/wt/flip` on 21b0d74b5.
+`lane/close-6-2026-11-23-f9` DONE and PUSHED at 62f38c728: F9 A b5746594d (twin, 3 red by name), F8 125bdf684, F9 B 62f38c728 (emit +
+body2 by N118 + weeks [3,12]). Asked the chair (17:3x) whether F8's header phrase "ON THE OWNER'S WORD" stands.
+THEN, IN ORDER: merge f9 into the flip (plain); DOOR mutation manifest (cherry-pick -x ba0e1c288); DOOR lighting census; one build
+(five figures beside the line's); `close/FOR-THE-OWNER.md` (close-5 + close-6 OWNER-ITEMS, the narrations, the extinct-case lines
+N119 (3), N117's deploy section first); "FLIP <commit>" with N120's list (src/scripts/supabase files changed after 21b0d74b5, each
+with whether a birth or page moves; the census parts I ran lit and their commits). The landing seat runs the whole suite lit on
+21b0d74b5 (N120): its unknown reds come to me by file and title.
 NEXT after F-JOIN: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
