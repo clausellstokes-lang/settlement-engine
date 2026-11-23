@@ -1,0 +1,8 @@
+Shape census of the remade stored sets (node over /var/tmp/v18/out/v42/stored-{today,master}/*.json, 07:2x UTC):
+today-born (140, the -wip f4b6c98d1 = 9f9b819f7 + docs): top-level factions[] 0; powerStructure.factions[].members 0;
+  npcs[].goal.intent in 140 documents.
+master-born (140, master db832c892): top-level factions[] in 140 (no entry carries `power`); factions[].members[] whole records in 140
+  (keys id,name,gender,role,title,category,personality,physical,goal,secret,plotHooks,influence,power,presentation,corrupt,
+  factionAffiliation,importance,densityRungRole,structuralPosition,activeConstraint,settlementCondition,structuralRank);
+  members' goal is {short, long} STRINGS in 140 (goal.intent in 0); members' allegiance in 0; npcs[].goal.intent in 0;
+  powerStructure.factions[].members 0.

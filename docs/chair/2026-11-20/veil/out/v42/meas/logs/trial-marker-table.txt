@@ -1,0 +1,215 @@
+documents 1; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 24 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 24 / 0
+  L1 gallery | canon: 24 / 0
+  L1 link | aligned: 24 / 0
+  L1 link | canon: 24 / 0
+  L2 gallery | aligned: 24 / 0
+  L2 gallery | canon: 24 / 0
+  L2-vs-L1 server | canon: 48 / 24
+  L2-vs-L1 twin | canon: 48 / 24
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 1
+
+== L2-vs-L1 server | canon: 24 of 48 reads differ
+   by setting: dm|allOpen=1 dm|default=1 dm|g:000=1 dm|g:001=1 dm|g:010=1 dm|g:011=1 dm|g:100=1 dm|g:101=1 dm|g:110=1 dm|off=1 dm|own=1 dm|unmarked=1 off|allOpen=1 off|default=1 off|g:000=1 off|g:001=1 off|g:010=1 off|g:011=1 off|g:100=1 off|g:101=1 off|g:110=1 off|off=1 off|own=1 off|unmarked=1
+   documents (0): 
+   defenseProfile#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.military
+        server: 0.72
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.readiness.score
+        server: 19
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.disaster
+        server: 42
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.economic
+        server: 24
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.internal
+        server: 27
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.military
+        server: 70
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.monster
+        server: 28
+        twin:   (absent)
+   economicState.compound#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at economicState.compound.economyOutput
+        server: 8.64378912164632
+        twin:   (absent)
+   powerStructure#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at powerStructure.recentConflict
+        server: "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off."
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 12, leaves 12
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 12, leaves 12
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 0
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 2, leaves 2
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 24 of 48 reads differ
+   by setting: dm|allOpen=1 dm|default=1 dm|g:000=1 dm|g:001=1 dm|g:010=1 dm|g:011=1 dm|g:100=1 dm|g:101=1 dm|g:110=1 dm|off=1 dm|own=1 dm|unmarked=1 off|allOpen=1 off|default=1 off|g:000=1 off|g:001=1 off|g:010=1 off|g:011=1 off|g:100=1 off|g:101=1 off|g:110=1 off|off=1 off|own=1 off|unmarked=1
+   documents (0): 
+   defenseProfile#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.military
+        server: 0.72
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.readiness.score
+        server: 19
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.disaster
+        server: 42
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.economic
+        server: 24
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.internal
+        server: 27
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.military
+        server: 70
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at defenseProfile.scores.monster
+        server: 28
+        twin:   (absent)
+   economicState.compound#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at economicState.compound.economyOutput
+        server: 8.64378912164632
+        twin:   (absent)
+   powerStructure#keys: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 24, leaves 24
+      e.g. r3m-village-none-0-1 off|default at powerStructure.recentConflict
+        server: "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off."
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 12, leaves 12
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 12, leaves 12
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 0
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 2, leaves 2
+      e.g. r3m-village-none-0-1 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 0
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=24; gallery | server=24; gallery | twin=24; import | server=24; link | server=24; link | twin=24; map member | server=24
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 1
+SERVED MARKER BY DOOR | setting kind | state (reads): 
+  gallery | marked | served marker: 22
+  gallery | unmarked | NO served marker: 2
+  import | marked | no marker field: 22
+  import | unmarked | no marker field: 2
+  link | marked | served marker: 22
+  link | unmarked | served marker: 2
+  map member | marked | no marker field: 22
+  map member | unmarked | no marker field: 2
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  none
+HITS (outside publicProse):
+  none
+HITS INSIDE publicProse (apart, ruling (a')):
+  none

@@ -4,7 +4,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 const O = process.argv[2];
 const shards = readdirSync(O).filter((f) => /^meas-shard\d+\.json$/.test(f)).sort().map((f) => JSON.parse(readFileSync(`${O}/${f}`, 'utf8')));
-const M = { docs: 0, done: shards.every((s) => s.done), faults: [], linkTwinSame: { same: 0, differ: 0 }, cmp: {}, c: { hits: {}, prose: {}, reads: {}, freshShaped: 0, docsWithStoredIds: 0, census: {} }, storedCmp: { same: 0, differ: 0, missing: 0 }, perDoc: [] };
+const M = { docs: 0, done: shards.every((s) => s.done), faults: [], linkTwinSame: { same: 0, differ: 0 }, cmp: {}, c: { hits: {}, prose: {}, reads: {}, freshShaped: 0, docsWithStoredIds: 0, census: {} }, storedCmp: { same: 0, differ: 0, missing: 0 }, marker: {}, perDoc: [] };
 for (const s of shards) {
   M.docs += s.docs; M.faults.push(...s.faults); M.perDoc.push(...s.perDoc);
   M.linkTwinSame.same += s.linkTwinSame.same; M.linkTwinSame.differ += s.linkTwinSame.differ;
@@ -24,6 +24,7 @@ for (const s of shards) {
   for (const [k, n] of Object.entries(s.c.reads)) M.c.reads[k] = (M.c.reads[k] || 0) + n;
   for (const [p, e] of Object.entries(s.c.census || {})) { const x = (M.c.census[p] ||= { count: 0, docs: 0, example: null }); x.count += e.count; x.docs += e.docs; x.example ||= e.example; }
   if (s.storedCmp) for (const k of ['same', 'differ', 'missing']) M.storedCmp[k] += s.storedCmp[k];
+  for (const [k, n] of Object.entries(s.marker || {})) M.marker[k] = (M.marker[k] || 0) + n;
   M.c.freshShaped += s.c.freshShaped; M.c.docsWithStoredIds += s.c.docsWithStoredIds;
 }
 if (process.argv[3] === '--json') { process.stdout.write(JSON.stringify(M)); process.exit(0); }
@@ -54,6 +55,8 @@ for (const [k, t] of Object.entries(M.cmp).sort()) {
 L('');
 L('STORED IDS SERVED (C), reads searched by door | engine:', Object.entries(M.c.reads).sort().map(([k, n]) => `${k}=${n}`).join('; '));
 L(`fresh-shaped stored ids (F)(i): ${M.c.freshShaped}; documents whose own walk finds stored ids: ${M.c.docsWithStoredIds}`);
+L('SERVED MARKER BY DOOR | setting kind | state (reads):', Object.keys(M.marker).length ? '' : 'not recorded in this run');
+for (const [k, n] of Object.entries(M.marker).sort()) L(`  ${k}: ${n}`);
 L(`stored document = the dump's (MEAS_STORED_CMP): ${M.storedCmp.same} same, ${M.storedCmp.differ} differ, ${M.storedCmp.missing} missing`);
 L('STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key\'s own sites apart):');
 const cs = Object.entries(M.c.census).sort((a, c) => c[1].docs - a[1].docs);

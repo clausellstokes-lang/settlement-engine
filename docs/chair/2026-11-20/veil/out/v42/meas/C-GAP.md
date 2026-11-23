@@ -32,3 +32,10 @@ Examples: v102-village-3 (master), dm|default: `factions[0].members[1].goal.inte
 `factions[0].members[0].goal.intent.long.target.id = "npc_peat_cutter"`; dm|unmarked: `factions[1].members[0].allegiance.handler =
 "npc_veiled_5064ee784f11c849"` (a handler served on the unmarked DM read only: the default veil withholds the field on every marked one).
 60 reads = 5 master-shape towns x 12 settings, Reveal DM; 0 at Reveal off on every door.
+
+## THE TODAY-BORN SET (`t140`: the 140 births at the -wip = the dumped `/var/tmp/v18/out/v42/stored-today` byte for byte, 140 of 140;
+3,360 reads a door; `logs/t140-table.txt`)
+Every door (gallery, link, import, map member, the gallery page) and both twins, Reveal off and DM, 12 settings: 0 STORED PERSON IDS
+SERVED, outside publicProse and inside it. 0 fresh-shaped stored ids. The stored side's census: NO path of any of the 140 documents
+holds a stored person id outside the re-key's own sites. Why (read off the documents, `logs/shape-census.txt`): today's births carry
+`npcs[].goal.intent` (a re-keyed site) and NO roster copy at all (no top-level `factions[]`, no `powerStructure.factions[].members`).

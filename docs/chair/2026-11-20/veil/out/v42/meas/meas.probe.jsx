@@ -210,7 +210,7 @@ it('R4I-MEASURE: A (77), C (GAP), B (WHOLE-DOC)', async () => {
 
   // the tally: per comparison `cmp` (e.g. 'L1 gallery'), per instrument: reads compared, reads differing, by normalised path
   const out = { src: SRC, set: SET, bij: BIJ, doors: [...DOORS], shard: SHARD, started: new Date().toISOString(), docs: 0, faults: [], linkTwinSame: { same: 0, differ: 0 },
-    cmp: {}, c: { hits: {}, prose: {}, reads: {}, freshShaped: 0, docsWithStoredIds: 0, census: {} }, storedCmp: { same: 0, differ: 0, missing: 0 }, perDoc: [] };
+    cmp: {}, c: { hits: {}, prose: {}, reads: {}, freshShaped: 0, docsWithStoredIds: 0, census: {} }, storedCmp: { same: 0, differ: 0, missing: 0 }, marker: {}, perDoc: [] };
   const tallyOf = (cmp, inst) => { const k = `${cmp} | ${inst}`; out.cmp[k] ||= { reads: 0, differ: 0, paths: {}, byTag: {} }; return out.cmp[k]; };
   const judge = (cmp, inst, tag, diffs, doc) => {
     const t = tallyOf(cmp, inst); t.reads += 1;
@@ -301,6 +301,13 @@ it('R4I-MEASURE: A (77), C (GAP), B (WHOLE-DOC)', async () => {
         let srv;
         try { srv = await server(rec, dm, ov); } catch (e) { out.faults.push(`${tag}: server: ${String(e?.message || e).slice(0, 200)}`); continue; }
         lap('server');
+        // the seat's ask (2): does a door return a row WITHOUT the served marker ({ $veil: { v: 2 } }, galleryVeil.js :: isServedVeil)?
+        { const kind = k === 'unmarked' ? 'unmarked' : 'marked';
+          const mk = (door, has, mv) => { const key = `${door} | ${kind} | ${!has ? 'no marker field' : veil.isServedVeil(mv) ? 'served marker' : 'NO served marker'}`; out.marker[key] = (out.marker[key] || 0) + 1; };
+          if (srv.gallery !== undefined) mk('gallery', isRec(srv.gallery) && 'gallery_member_overrides' in srv.gallery, srv.gallery?.gallery_member_overrides);
+          if (srv.link !== undefined) mk('link', isRec(srv.link) && 'gallery_member_overrides' in srv.link, srv.link?.gallery_member_overrides);
+          if (srv.import !== undefined) mk('import', isRec(srv.import) && 'gallery_member_overrides' in srv.import, srv.import?.gallery_member_overrides);
+          if (srv.map !== undefined) mk('map member', isRec(srv.map) && 'gallery_member_overrides' in srv.map, srv.map?.gallery_member_overrides); }
         // the twins (L1)
         const tw = clone(veil.projectShareVeil(veil.galleryPayloadFor(clone(rec), { shareDm: dm, memberOverrides: ov }), ov));
         const lt = clone(linkTwinOf(rec, ov));
