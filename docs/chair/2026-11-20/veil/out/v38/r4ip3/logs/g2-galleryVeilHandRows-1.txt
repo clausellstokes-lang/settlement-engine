@@ -1,0 +1,31 @@
+[gate-tail] start:  01:25:16 up  1:13,  0 user,  load average: 15.35, 12.52, 10.41 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js (25 tests | 1 failed) 206778ms
+     × B THE TRACE BY POSITIVE ACCOUNT: on a share that hides any house whole, the trace keeps only what a native house still listed accounts for (an institution id whose fold is a listed house's catalogId or its name's fold): the reader's renamed hidden house (born Smuggling network, now The Velvet Hand; unstamped and stamped) leaves by its trace id as a target, a cause and an effect; an institution entry named bare or with no id leaves; an allegiance receipt whose house is hidden whole leaves whole (its handler and "The allegiance runs to the town's criminal power"), one that names no house leaves; what an open house accounts for stays (by its name's fold, by its catalogue identity under another name, the engine's capitalised spelling), and so does every entry that names no institution and an open house's allegiance receipt; a share that hides no house whole keeps its trace whole; every Reveal-DM read, server against twin 0 paths 417ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > B THE TRACE BY POSITIVE ACCOUNT: on a share that hides any house whole, the trace keeps only what a native house still listed accounts for (an institution id whose fold is a listed house's catalogId or its name's fold): the reader's renamed hidden house (born Smuggling network, now The Velvet Hand; unstamped and stamped) leaves by its trace id as a target, a cause and an effect; an institution entry named bare or with no id leaves; an allegiance receipt whose house is hidden whole leaves whole (its handler and "The allegiance runs to the town's criminal power"), one that names no house leaves; what an open house accounts for stays (by its name's fold, by its catalogue identity under another name, the engine's capitalised spelling), and so does every entry that names no institution and an open house's allegiance receipt; a share that hides no house whole keeps its trace whole; every Reveal-DM read, server against twin 0 paths
+TypeError: Cannot read properties of undefined (reading 'slice')
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:1865:133
+    1863|         if (JSON.stringify(got) !== JSON.stringify(WANT)) bad.push(`${…
+    1864|         const mira = (doc.simulationTrace || []).find(e => e.targetId …
+    1865|         if (differ(mira, TRACE[10]).length) bad.push(`${what}, ${tag}:…
+       |                                                                                                                                     ^
+    1866|       }
+    1867|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 24 passed (25)
+   Start at  01:25:17
+   Duration  207.72s (transform 1.88s, setup 23ms, import 715ms, tests 206.78s, environment 0ms)
+
+[gate-tail] end:  01:28:45 up  1:16,  0 user,  load average: 11.93, 12.22, 10.74
+[gate-tail] full log: /tmp/gate-tail.22053.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

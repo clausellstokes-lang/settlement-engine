@@ -46,5 +46,23 @@ canonical): every built tooth BITES (missed = [] on all 13 + the 48 VS1 copy-gua
   left out of the file (the self form stands; galleryVeilIds 12/12 green, logs/arm-galleryVeilIds.txt); the patch as run, with
   the clean-red labels, is `A-link-anchor-measured.patch`. The unpatched file was green beside it (12/12, same run).
 
+## G2 — `tests/security` WHOLE, CLASSIFIED (G-SECURITY.md; commit: G2). PARTIAL: 14 of 42 (i) re-stated.
+R4I-PAGE-2's run ended: 50 failed | 2060 passed | 1 skipped of 2111 (titles: g-security-fails.txt). By class: (i) 42; the
+ratchet 1 (ruled, cured in A); the anchor patch 2 (green without it); (iv) STOP 1 (galleryServerVeil RULING 4: the client
+file list pins 11, `galleryVeilPeople.js` is a 12th); (iv) PLAUSIBLE 2 (galleryVeilSignalCopies: the criminal services row
+already gone, S2's cause; its af708f2fd run queued); shareRenderTwice 2 (R4I-TONIGHT's, untouched); (ii) 0; (iii) 0.
+- CURED: galleryVeilHandRows 14 -> 0 (26/26 green, its new teeth test included): `differServed` (canonPeople both sides,
+  fresh-id shape, notBijective, readsDiffer) at its 8 server-vs-twin sites, and the trace read by `unkeyPeople`.
+  The V7-2 "STAYS" row is green after the merge.
+- LEFT (i), each with its cure named in G-SECURITY.md: criminalSwitchHandReach 12, galleryServerVeil 10,
+  galleryRosterChoices 2, galleryVeilCures 2, gallerySecondHomes 1, galleryWithholdAlways 1.
+
+## ARMS (each its own run, logs/arm-*.txt)
+criminalSwitchSalt 6/6 green; walkers (5 files) 34/34 green; `rosterChoiceRegistry.mjs --check` exit 0; galleryVeilIds 12/12
+green (after A); rosterChoiceInversion 4/4 green; galleryVeilHandRows 14 red of 25 BEFORE G2's cure, 26/26 after;
+criminalSwitchHandReach 12 red | 2 green (class (i), left). Tell3/4/5/8, galleryServerVeil, galleryRosterChoices: not run on
+their own (heavy; the security run's counts stand: ServerVeil 11 red, RosterChoices 2 red; Tell3/4/5/8 0 red there).
+shareRenderTwice: not mine (ruling 40.3).
+
 ## LEFT
-G1's 34-file count; G2; the ARMS; ST; L; B.
+G1's 34-file count (queued on the mutex); G2's 28 (i); the Tell arms alone; ST; L; B.

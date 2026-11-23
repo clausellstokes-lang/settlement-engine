@@ -1,0 +1,1105 @@
+[gate-tail] start:  01:23:42 up  1:11,  0 user,  load average: 13.78, 11.15, 9.78 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js (14 tests | 12 failed) 148221ms
+     × v102-thorp-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 2582ms
+     × v102-thorp-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 2102ms
+     × v102-hamlet-6 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 4160ms
+     × v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3439ms
+     × v102-village-3 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3734ms
+     × v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3555ms
+     × v102-town-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 5936ms
+     × v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 6575ms
+     × v102-city-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 15257ms
+     × v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 17104ms
+     × v102-metropolis-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 28391ms
+     × v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 41206ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-thorp-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-thorp-0 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_21930698fd18ee29" | "npc_05cf9b2ae229cf69"
+v102-thorp-0 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_c6b03b65f9b70856" | "npc_66063caa8fdfbcb1"
+v102-thorp-0 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_50278f0144ef3cb4" | "npc_66104ea986081bb9"
+v102-thorp-0 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_ffd6c93450ad0cfd" | "npc_0ea3dc1ea4b70225"
+v102-thorp-0 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_3dec79070fd459fd" | "npc_dbf4c84f4ed771eb"
+v102-thorp-0 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_e52e44a54835e23c" | "npc_af4d7c2134a72f56"
+v102-thorp-0 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: "npc_8f7912a9ba971936" | "npc_6278f887d272df80"
+v102-thorp-0 current dm=true (B) Show all vs the hand, link: npcs[0].id: "npc_9573622edff185eb" | "npc_654bc04c2e30d166"
+v102-thorp-0 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: "npc_6cfa92680fbdeda6" | "npc_43b7328c9b096b97"
+v102-thorp-0 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: "npc_e52d2e18ab64fde5" | "npc_59ec48a146d94245"
+v102-thorp-0 current dm=true (C) Hide all vs the hand, link: npcs[0].id: "npc_051792c31a9994f9" | "npc_78eaaa2092ebf013"
+v102-thorp-0 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: "npc_0b08ad3f84428443" | "npc_2546c2ca999a2ca2": expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-thorp-0 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_21930698fd18ee29\" | \"npc_05cf9b2ae229cf69\"",
++   "v102-thorp-0 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_c6b03b65f9b70856\" | \"npc_66063caa8fdfbcb1\"",
++   "v102-thorp-0 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_50278f0144ef3cb4\" | \"npc_66104ea986081bb9\"",
++   "v102-thorp-0 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_ffd6c93450ad0cfd\" | \"npc_0ea3dc1ea4b70225\"",
++   "v102-thorp-0 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_3dec79070fd459fd\" | \"npc_dbf4c84f4ed771eb\"",
++   "v102-thorp-0 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_e52e44a54835e23c\" | \"npc_af4d7c2134a72f56\"",
++   "v102-thorp-0 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_8f7912a9ba971936\" | \"npc_6278f887d272df80\"",
++   "v102-thorp-0 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_9573622edff185eb\" | \"npc_654bc04c2e30d166\"",
++   "v102-thorp-0 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_6cfa92680fbdeda6\" | \"npc_43b7328c9b096b97\"",
++   "v102-thorp-0 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_e52d2e18ab64fde5\" | \"npc_59ec48a146d94245\"",
++   "v102-thorp-0 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_051792c31a9994f9\" | \"npc_78eaaa2092ebf013\"",
++   "v102-thorp-0 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_0b08ad3f84428443\" | \"npc_2546c2ca999a2ca2\"",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-thorp-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-thorp-0 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_393518a1b08479d1" | "npc_6cb9f9958857627c"
+v102-thorp-0 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_b1e65a44f56ea641" | "npc_8f813aa73d2f3477"
+v102-thorp-0 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_e78fb3c20a5b1245" | "npc_7bc14d438f5199c6"
+v102-thorp-0 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_99f6bc9ee45b9ac9" | "npc_29121d9f7808751e"
+v102-thorp-0 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_649f2f7f88c40e57" | "npc_dfa21a7495201011"
+v102-thorp-0 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_aa7675b77fec4177" | "npc_d64ef55fe8c194e6"
+v102-thorp-0 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: "npc_270f8fd72bb7626b" | "npc_47e851b9eb8e480d"
+v102-thorp-0 master dm=true (B) Show all vs the hand, gallery: factions[0].members[0].id: "npc_270f8fd72bb7626b" | "npc_47e851b9eb8e480d"
+v102-thorp-0 master dm=true (B) Show all vs the hand, link: npcs[0].id: "npc_f13dcb059a799a0f" | "npc_61846a6ea160098d"
+v102-thorp-0 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: "npc_f8a4017991868f18" | "npc_b74a14bd5a3f977c"
+v102-thorp-0 master dm=true (B) Show all vs the hand, the twin: factions[0].members[0].id: "npc_f8a4017991868f18" | "npc_b74a14bd5a3f977c"
+v102-thorp-0 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: "npc_0a77634b25381d0a" | "npc_cad7c53617d419e7"
+v102-thorp-0 master dm=true (C) Hide all vs the hand, gallery: factions[0].members[0].id: "npc_0a77634b25381d0a" | "npc_cad7c53617d419e7"
+v102-thorp-0 master dm=true (C) Hide all vs the hand, link: npcs[0].id: "npc_ca3b0cdf4fc0f254" | "npc_6edd2c5b48503c35"
+v102-thorp-0 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: "npc_067e5fc1cb602f04" | "npc_8f3e8fa93470a600"
+v102-thorp-0 master dm=true (C) Hide all vs the hand, the twin: factions[0].members[0].id: "npc_067e5fc1cb602f04" | "npc_8f3e8fa93470a600": expected [ …(16) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-thorp-0 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_393518a1b08479d1\" | \"npc_6cb9f9958857627c\"",
++   "v102-thorp-0 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_b1e65a44f56ea641\" | \"npc_8f813aa73d2f3477\"",
++   "v102-thorp-0 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_e78fb3c20a5b1245\" | \"npc_7bc14d438f5199c6\"",
++   "v102-thorp-0 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_99f6bc9ee45b9ac9\" | \"npc_29121d9f7808751e\"",
++   "v102-thorp-0 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_649f2f7f88c40e57\" | \"npc_dfa21a7495201011\"",
++   "v102-thorp-0 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_aa7675b77fec4177\" | \"npc_d64ef55fe8c194e6\"",
++   "v102-thorp-0 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_270f8fd72bb7626b\" | \"npc_47e851b9eb8e480d\"",
++   "v102-thorp-0 master dm=true (B) Show all vs the hand, gallery: factions[0].members[0].id: \"npc_270f8fd72bb7626b\" | \"npc_47e851b9eb8e480d\"",
++   "v102-thorp-0 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_f13dcb059a799a0f\" | \"npc_61846a6ea160098d\"",
++   "v102-thorp-0 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_f8a4017991868f18\" | \"npc_b74a14bd5a3f977c\"",
++   "v102-thorp-0 master dm=true (B) Show all vs the hand, the twin: factions[0].members[0].id: \"npc_f8a4017991868f18\" | \"npc_b74a14bd5a3f977c\"",
++   "v102-thorp-0 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_0a77634b25381d0a\" | \"npc_cad7c53617d419e7\"",
++   "v102-thorp-0 master dm=true (C) Hide all vs the hand, gallery: factions[0].members[0].id: \"npc_0a77634b25381d0a\" | \"npc_cad7c53617d419e7\"",
++   "v102-thorp-0 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_ca3b0cdf4fc0f254\" | \"npc_6edd2c5b48503c35\"",
++   "v102-thorp-0 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_067e5fc1cb602f04\" | \"npc_8f3e8fa93470a600\"",
++   "v102-thorp-0 master dm=true (C) Hide all vs the hand, the twin: factions[0].members[0].id: \"npc_067e5fc1cb602f04\" | \"npc_8f3e8fa93470a600\"",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-hamlet-6 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_70e9fbc00fb15002" | "npc_f7faf4cdef73b832"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_cf0a47b3dfee0ac1" | "npc_25e399fd63a3aa16"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_966a68c68fb22d90" | "npc_45c851f9852152c8"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_adb7b0118e3139ed" | "npc_bf48816d842452c8"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_f42333d9988b296e" | "npc_5794e1a2dc3787e0"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_7a47db4b80e63e84" | "npc_a8cbafe0650dc8b8"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_6e2ad366c8d4349e" | "npc_1eacf0e73723e4f7"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_46be1c749a87e894" | "npc_1bad114d28e2c82e"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_d1bc8237c12d03e3" | "npc_afe68b7e0e8d6d6f"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_72986fa9a949ec7e" | "npc_90da43121df89bf4"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_b1e1bc673010a27d" | "npc_852f4053e8eb2a2d"
+v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_9feb67d8834322cc" | "npc_804cd1ceccbe13dc"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_85749bfe776a32c5" | "npc_785791d5bc599ece"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_8fe1b04872fbc207" | "npc_1477a4ca3802c70f"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_40bd4b8e1b8e21bb" | "npc_6b41a318d1cc7bc2"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_675a51e123face01" | "npc_7858c70f6350631f"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_9fe053472406f5f6" | "npc_b3ab3920f1410c1f"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_72769e9d4010a381" | "npc_c94390258ef975cf"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_7809dd0aae205e36" | "npc_a9d72c254ecdc0b3"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_bd26556d342c4140" | "npc_c45b6efe1b68adcf"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_86b2d8ece427dc28" | "npc_9fbe5aac6ae2f522"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_5e2a21b95b9ebe3a" | "npc_c9d14974062f424f"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_01b360c03f4ac453" | "npc_a17ce741032151c5"
+v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_f577611e0746753a" | "npc_7d9ebce5a8e3e6e9": expected [ …(53) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_70e9fbc00fb15002\" | \"npc_f7faf4cdef73b832\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_cf0a47b3dfee0ac1\" | \"npc_25e399fd63a3aa16\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_966a68c68fb22d90\" | \"npc_45c851f9852152c8\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_adb7b0118e3139ed\" | \"npc_bf48816d842452c8\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_f42333d9988b296e\" | \"npc_5794e1a2dc3787e0\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_7a47db4b80e63e84\" | \"npc_a8cbafe0650dc8b8\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_6e2ad366c8d4349e\" | \"npc_1eacf0e73723e4f7\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_46be1c749a87e894\" | \"npc_1bad114d28e2c82e\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_d1bc8237c12d03e3\" | \"npc_afe68b7e0e8d6d6f\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_72986fa9a949ec7e\" | \"npc_90da43121df89bf4\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_b1e1bc673010a27d\" | \"npc_852f4053e8eb2a2d\"",
++   "v102-hamlet-6 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_9feb67d8834322cc\" | \"npc_804cd1ceccbe13dc\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_85749bfe776a32c5\" | \"npc_785791d5bc599ece\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_8fe1b04872fbc207\" | \"npc_1477a4ca3802c70f\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_40bd4b8e1b8e21bb\" | \"npc_6b41a318d1cc7bc2\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_675a51e123face01\" | \"npc_7858c70f6350631f\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_9fe053472406f5f6\" | \"npc_b3ab3920f1410c1f\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_72769e9d4010a381\" | \"npc_c94390258ef975cf\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_7809dd0aae205e36\" | \"npc_a9d72c254ecdc0b3\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_bd26556d342c4140\" | \"npc_c45b6efe1b68adcf\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_86b2d8ece427dc28\" | \"npc_9fbe5aac6ae2f522\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_5e2a21b95b9ebe3a\" | \"npc_c9d14974062f424f\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_01b360c03f4ac453\" | \"npc_a17ce741032151c5\"",
++   "v102-hamlet-6 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_f577611e0746753a\" | \"npc_7d9ebce5a8e3e6e9\"",
++   "v102-hamlet-6 current dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[0].id: \"npc_4e4f8aacee0b2fd3\" | \"npc_95482bab490c2683\"",
++   "v102-hamlet-6 current dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[1].id: \"npc_b3132ab3f63be568\" | \"npc_231b66c626b8573a\"",
++   "v102-hamlet-6 current dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[2].id: \"npc_d1f4cbec273ad378\" | \"npc_4b7b38576a1ca453\"",
++   "v102-hamlet-6 current dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[3].id: \"npc_a640781db3639844\" | \"npc_0362b8f55abddfc9\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_7d5ceefeec8571cf\" | \"npc_656f267834dc24bd\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_b15047e5ae8264fa\" | \"npc_f5ef41bc885676c5\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[0].allegiance.handler: \"npc_871eeff5f8e0da8e\" | \"npc_9455066c5acfe223\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_b15047e5ae8264fa\" | \"npc_f5ef41bc885676c5\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_9110d590fa2eabee\" | \"npc_e85ad1203a4bd538\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_6de6b143c26986c1\" | \"npc_ff92a3ceb713b949\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_35dae3e33d842725\" | \"npc_f1d045b306ee4366\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_4654bdf36376c4dd\" | \"npc_b5e20da84b27609b\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_c7f137b1a96d4db8\" | \"npc_5c983769f8d46d6c\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_2180e23f73d168e4\" | \"npc_14efe68a210904d0\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[0].allegiance.handler: \"npc_c37561b43a458acc\" | \"npc_c5aaa3b38bf6d006\"",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_2180e23f73d168e4\" | \"npc_14efe68a210904d0\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_d4bcb9fc64b2016b\" | \"npc_4fdf47b9fc0d2e9e\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_162b6e6b9e84b13a\" | \"npc_2e3b1aaef8513f3e\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_162b6e6b9e84b13a\" | \"npc_2e3b1aaef8513f3e\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_d4bcb9fc64b2016b\" | \"npc_4fdf47b9fc0d2e9e\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_b1bf23eed1ce036f\" | \"npc_0267ed6141122686\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_04882a4d0b6ba1aa\" | \"npc_97b12fcbcaeb39a5\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_6189021d359c2cae\" | \"npc_034505195b72a971\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_4855b52adf9b89de\" | \"npc_921a4ebc5bdabe85\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_e3da3a9f5d209149\" | \"npc_9c6016cbc9b63a4d\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_d9b373fdfacf0f47\" | \"npc_12b03e22bbaf1c28\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_d9b373fdfacf0f47\" | \"npc_12b03e22bbaf1c28\"",
++   "v102-hamlet-6 current dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_e3da3a9f5d209149\" | \"npc_9c6016cbc9b63a4d\"",
++   "v102-hamlet-6 current dm=true (E): Dolgorsüren Taichiud carries {\"key\":\"Smuggling waypoint\",\"kind\":\"house\",\"title\":\"the smuggler\",\"family\":\"Smuggling waypoint\",\"veiled\":true} where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_e7fda0f23c74801c" | "npc_05d2fe00f21841c0"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_39830438a4d37c5c" | "npc_531147e07a7f39a8"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_87afc99236d80646" | "npc_0a5c7549256a7691"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_ed4079a21127e816" | "npc_32d44faed4f8c834"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_8954666627f5258a" | "npc_f264090d3d0f55dc"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_f2c8fe437631175a" | "npc_b141de42f22b45da"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_eb5659730c4fd44b" | "npc_ee049a9a4bfc61a5"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_415307c4490b567a" | "npc_b641f67587ecf5be"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_e7de304186c17ec0" | "npc_17a297852e66ec92"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_32ca2d9ed63b7665" | "npc_bed1b31afe100a10"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_7d600dd67cbc5df2" | "npc_bcbf5f55249eb160"
+v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_1e021f7f57d0a8b1" | "npc_48395ad6abd258f0"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_f08fa93ee32715e3" | "npc_0072ed3e7487ab36"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_283b2df7124cb78e" | "npc_09dcda2b1c058f77"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_51f927b2314e8c91" | "npc_46448a4dd72b2e80"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_0a3f601c14918f88" | "npc_709db8ebef5891ed"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_45a6960bec409fab" | "npc_218cd8fa2847b608"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_065ea155a93ff2b7" | "npc_2782397c02b0ac6e"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_9df45107e1d5f2a2" | "npc_584922df16569cbf"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_034368c2f19ec5ee" | "npc_1932f7ffb219c761"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_eacc3416381973e0" | "npc_5fbebf958b329b05"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_e025350f961f0429" | "npc_a208c27286ff0c3a"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_ac7ddfb15b80883b" | "npc_9df39ebf4ec7d1d3"
+v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_0f626788fb6cf4c3" | "npc_fd86f28fc77ca999": expected [ …(53) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_e7fda0f23c74801c\" | \"npc_05d2fe00f21841c0\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_39830438a4d37c5c\" | \"npc_531147e07a7f39a8\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_87afc99236d80646\" | \"npc_0a5c7549256a7691\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_ed4079a21127e816\" | \"npc_32d44faed4f8c834\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_8954666627f5258a\" | \"npc_f264090d3d0f55dc\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_f2c8fe437631175a\" | \"npc_b141de42f22b45da\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_eb5659730c4fd44b\" | \"npc_ee049a9a4bfc61a5\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_415307c4490b567a\" | \"npc_b641f67587ecf5be\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_e7de304186c17ec0\" | \"npc_17a297852e66ec92\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_32ca2d9ed63b7665\" | \"npc_bed1b31afe100a10\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_7d600dd67cbc5df2\" | \"npc_bcbf5f55249eb160\"",
++   "v102-hamlet-6 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_1e021f7f57d0a8b1\" | \"npc_48395ad6abd258f0\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_f08fa93ee32715e3\" | \"npc_0072ed3e7487ab36\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_283b2df7124cb78e\" | \"npc_09dcda2b1c058f77\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_51f927b2314e8c91\" | \"npc_46448a4dd72b2e80\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_0a3f601c14918f88\" | \"npc_709db8ebef5891ed\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_45a6960bec409fab\" | \"npc_218cd8fa2847b608\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_065ea155a93ff2b7\" | \"npc_2782397c02b0ac6e\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_9df45107e1d5f2a2\" | \"npc_584922df16569cbf\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_034368c2f19ec5ee\" | \"npc_1932f7ffb219c761\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_eacc3416381973e0\" | \"npc_5fbebf958b329b05\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_e025350f961f0429\" | \"npc_a208c27286ff0c3a\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_ac7ddfb15b80883b\" | \"npc_9df39ebf4ec7d1d3\"",
++   "v102-hamlet-6 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_0f626788fb6cf4c3\" | \"npc_fd86f28fc77ca999\"",
++   "v102-hamlet-6 master dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[0].id: \"npc_bd6cdd3c6feec1fa\" | \"npc_27544d2b14d310d8\"",
++   "v102-hamlet-6 master dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[1].id: \"npc_88c294b0f6cad966\" | \"npc_7cdb7b59ac8410aa\"",
++   "v102-hamlet-6 master dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[2].id: \"npc_bbcec5e31da7853c\" | \"npc_e62a8af2700b7f54\"",
++   "v102-hamlet-6 master dm=false (D): the planted field:institution:smuggling-waypoint:people is served: npcs[3].id: \"npc_612c1bf6ac5ee31d\" | \"npc_65d54523f6c4b7c2\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_1644f84d1337ac55\" | \"npc_6314b925cfa840ef\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_4d6f26d2613827bd\" | \"npc_2a28d196e5f75346\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, gallery: npcs[0].allegiance.handler: \"npc_6fd59303ea27925d\" | \"npc_55d88597ee7da93c\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_4d6f26d2613827bd\" | \"npc_2a28d196e5f75346\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_37a5a89568ee2987\" | \"npc_078864f91902f400\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_d0c143211966a23d\" | \"npc_5da1f69e44cf33a8\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_391c076152524e7d\" | \"npc_f8a49e4e0882b30e\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_19cc40d9f4c7c328\" | \"npc_d4e833431e2cc9c5\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_e2a2612e83af41f4\" | \"npc_cfd0e10e18756e6e\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_b4939d6404b7a9f9\" | \"npc_9cd8ec1a11d07456\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, the twin: npcs[0].allegiance.handler: \"npc_155da5c2ed86e5b4\" | \"npc_2747c9a0b3caf7f5\"",
++   "v102-hamlet-6 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_b4939d6404b7a9f9\" | \"npc_9cd8ec1a11d07456\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_4317885707b92df9\" | \"npc_d8c663e3ed59f142\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_1687805ce1f336e0\" | \"npc_a9e3cea78d67e55e\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_1687805ce1f336e0\" | \"npc_a9e3cea78d67e55e\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_4317885707b92df9\" | \"npc_d8c663e3ed59f142\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_313c4dd4ccb6110e\" | \"npc_ee3837b9030ed164\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_9d18071ce70bec3a\" | \"npc_08d2ee764cf2a18d\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_146a61c598157cc7\" | \"npc_e27c572d76775189\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_ec96fc3800f60094\" | \"npc_596d8532bdf28f0a\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_66c53b3c981f265f\" | \"npc_4662afb9999ce296\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_b93ddc55cd5c6d9d\" | \"npc_b05ca35b35951407\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_b93ddc55cd5c6d9d\" | \"npc_b05ca35b35951407\"",
++   "v102-hamlet-6 master dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_66c53b3c981f265f\" | \"npc_4662afb9999ce296\"",
++   "v102-hamlet-6 master dm=true (E): Dolgorsüren Taichiud carries \"Smuggling waypoint\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-village-3 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_877e4773fe37ffd3" | "npc_7a5a171763c2707d"
+v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_905d32db557bfc51" | "npc_6f6d2c6b6ccb0b1c"
+v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_db625d1065ec84d8" | "npc_5d4b4c11f5d7f909"
+v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_fe3affa12af5f1e9" | "npc_4672be00769a317b"
+v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_0d626f0153d89355" | "npc_6c5104bfc9a08360"
+v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_d46413fb857d8844" | "npc_3b543bfde0369545"
+v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_f965eae8858ec249" | "npc_aaa244a38d16ce97"
+v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_5f3c4c71c79f6ecf" | "npc_7c639b3bd78f509a"
+v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_2e877ac49281f324" | "npc_64ece8c4e542968b"
+v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_d7912ef44cbb117f" | "npc_24775ae8d1f805ca"
+v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_56aaf4392c90291f" | "npc_8ee846953350b7ca"
+v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_b74435fe83ab6d9f" | "npc_c6c63eaf2f9cdf49"
+v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_a5e488efe35674b3" | "npc_3524ab6b496604ef"
+v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_3cb5b011cfad1cfd" | "npc_d71b0d533a92d863"
+v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_cfe3281a6b36ec49" | "npc_7930afdcaedfcd7c"
+v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_4fc860e85e04f920" | "npc_4f6bf56336126bfb"
+v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_1447739a78ef355e" | "npc_4f5416d437f8ed0a"
+v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_b2db4989d12db492" | "npc_2d09311e94de459f"
+v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_465d0d151a7e3286" | "npc_1e3ba46e7fb63ac2"
+v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_5eb28440fbd9c9a0" | "npc_b3f119e055b0fcb5"
+v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_a8d65705bbd9c01b" | "npc_c8581f6ffd9e198b"
+v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_a1f7b30572185eb0" | "npc_bc0f560c9d2ada70"
+v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_723692e28562245b" | "npc_c4efa536c743622c"
+v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_99955a19ad8e50e0" | "npc_d36c17268e76bff4": expected [ …(53) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_877e4773fe37ffd3\" | \"npc_7a5a171763c2707d\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_905d32db557bfc51\" | \"npc_6f6d2c6b6ccb0b1c\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_db625d1065ec84d8\" | \"npc_5d4b4c11f5d7f909\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_fe3affa12af5f1e9\" | \"npc_4672be00769a317b\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_0d626f0153d89355\" | \"npc_6c5104bfc9a08360\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_d46413fb857d8844\" | \"npc_3b543bfde0369545\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_f965eae8858ec249\" | \"npc_aaa244a38d16ce97\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_5f3c4c71c79f6ecf\" | \"npc_7c639b3bd78f509a\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_2e877ac49281f324\" | \"npc_64ece8c4e542968b\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_d7912ef44cbb117f\" | \"npc_24775ae8d1f805ca\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_56aaf4392c90291f\" | \"npc_8ee846953350b7ca\"",
++   "v102-village-3 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_b74435fe83ab6d9f\" | \"npc_c6c63eaf2f9cdf49\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_a5e488efe35674b3\" | \"npc_3524ab6b496604ef\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_3cb5b011cfad1cfd\" | \"npc_d71b0d533a92d863\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_cfe3281a6b36ec49\" | \"npc_7930afdcaedfcd7c\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_4fc860e85e04f920\" | \"npc_4f6bf56336126bfb\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_1447739a78ef355e\" | \"npc_4f5416d437f8ed0a\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_b2db4989d12db492\" | \"npc_2d09311e94de459f\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_465d0d151a7e3286\" | \"npc_1e3ba46e7fb63ac2\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_5eb28440fbd9c9a0\" | \"npc_b3f119e055b0fcb5\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_a8d65705bbd9c01b\" | \"npc_c8581f6ffd9e198b\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_a1f7b30572185eb0\" | \"npc_bc0f560c9d2ada70\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_723692e28562245b\" | \"npc_c4efa536c743622c\"",
++   "v102-village-3 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_99955a19ad8e50e0\" | \"npc_d36c17268e76bff4\"",
++   "v102-village-3 current dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[0].id: \"npc_2f8d925170873d38\" | \"npc_bfdf07c97c504027\"",
++   "v102-village-3 current dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[1].id: \"npc_bb4b44600c546ca2\" | \"npc_01538a96b1123080\"",
++   "v102-village-3 current dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[2].id: \"npc_c7983c98d4c0ada1\" | \"npc_0dacffdc484c36f4\"",
++   "v102-village-3 current dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[3].id: \"npc_46062ba66f5164c1\" | \"npc_5e602e75e5a43b1e\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_eb70d408d3198815\" | \"npc_7929e45bce8ccf08\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_6a8f2e1451805879\" | \"npc_4893b40db69ff463\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_95538972ad06062c\" | \"npc_b4dea840712206e1\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[1].allegiance.handler: \"npc_42e64c6b65c7fc3f\" | \"npc_db87385545073fee\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_a711abab926fa51e\" | \"npc_acd4c3c735dfc2b1\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_18acd89df877b80a\" | \"npc_458f3838a4785561\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_8e79990cd450e728\" | \"npc_bb943438117124ab\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_ccbdabec8fd5b448\" | \"npc_7cb3ddfd44ea839f\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_d809fa6dca22ab5d\" | \"npc_e2ebdb85ff23177d\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_4d700ec9fb68ffda\" | \"npc_a6abed2ed4be5c23\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_90d89d695067adcd\" | \"npc_a609d9fcc148600b\"",
++   "v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[1].allegiance.handler: \"npc_ba565443084c8958\" | \"npc_c51a98f5a93cdfea\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_aa41674eb69f3fdc\" | \"npc_c33acf3537bc0f35\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_cad7de7044fc20c4\" | \"npc_1faaca13b0f4cd43\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_99d34e73d2fd909b\" | \"npc_b79b4860fea861a6\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_cad7de7044fc20c4\" | \"npc_1faaca13b0f4cd43\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_30a3765237c29ba6\" | \"npc_b4b2dded6c29dd2b\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_944c190a5c1c33db\" | \"npc_c6dbe975c5ac4e7c\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_edf004ec4e67428a\" | \"npc_f02401ac19b61293\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_04a38d3e4baf7b04\" | \"npc_5c337b77bb4074eb\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_8d921baa4b0ee2e7\" | \"npc_43b625d2f3922699\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_1e473828742f1c46\" | \"npc_2dc301d2eea23987\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_4db2c22dabd7f917\" | \"npc_6747913bf9daa908\"",
++   "v102-village-3 current dm=true (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_1e473828742f1c46\" | \"npc_2dc301d2eea23987\"",
++   "v102-village-3 current dm=true (E): Lakin Itza carries {\"key\":\"Fence (word of mouth)\",\"kind\":\"house\",\"title\":\"the fence\",\"family\":\"Fence (word of mouth)\",\"veiled\":true} where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_791cc633e83f5ed3" | "npc_899f73f034c5fff5"
+v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_9dff08e5c26ef2d4" | "npc_5499da55f24039d2"
+v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_bc5580ce715a4be9" | "npc_ef74c80c506b6728"
+v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_6c7df7f63e6bbd87" | "npc_de728a7c420519f5"
+v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_c1e91093831cdc3f" | "npc_88b9b40f02c0af20"
+v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_d2be25182b1149fc" | "npc_16e8b18da630d126"
+v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_b48a4f19cb25df95" | "npc_1319487f5011ec3f"
+v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_0f71382e764fb6f9" | "npc_97d7182661fd2c80"
+v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_bc61afdbdaeaa5d8" | "npc_da745f155663e659"
+v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_ebef19a943f2e08a" | "npc_1dd5f3691178a61d"
+v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_7c7d5c6e7dd7b386" | "npc_e4a8f7eed00bd4a3"
+v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_ab47ddd67109997b" | "npc_9ea49eed44a10b9a"
+v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_da2a592b8ab15d9e" | "npc_8dea66570fb882ca"
+v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_8c84a2d60b83c1bd" | "npc_41d1206e0a6d28e2"
+v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_aa0c60476a401148" | "npc_17355b7c1403aa6a"
+v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_9105fb4860b3e3a1" | "npc_1de130eb4413bc27"
+v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_3094b663c6b72bf2" | "npc_65be28f1102e4614"
+v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_ba926fe6714f8aa9" | "npc_4c39ab18c788e3eb"
+v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_93132d22ece65959" | "npc_5daa294871d719b3"
+v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_d256f1c8540e5bb3" | "npc_fab9be727970b40e"
+v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_5081e3bdc63e3518" | "npc_355533f997653553"
+v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_525a1ae76754e680" | "npc_3e5268e884955312"
+v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_008518031506e661" | "npc_fdc366e5344aed68"
+v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_f77e11ae49519190" | "npc_bf56520c0cb096b9": expected [ …(53) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_791cc633e83f5ed3\" | \"npc_899f73f034c5fff5\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_9dff08e5c26ef2d4\" | \"npc_5499da55f24039d2\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_bc5580ce715a4be9\" | \"npc_ef74c80c506b6728\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_6c7df7f63e6bbd87\" | \"npc_de728a7c420519f5\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_c1e91093831cdc3f\" | \"npc_88b9b40f02c0af20\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_d2be25182b1149fc\" | \"npc_16e8b18da630d126\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_b48a4f19cb25df95\" | \"npc_1319487f5011ec3f\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_0f71382e764fb6f9\" | \"npc_97d7182661fd2c80\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_bc61afdbdaeaa5d8\" | \"npc_da745f155663e659\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_ebef19a943f2e08a\" | \"npc_1dd5f3691178a61d\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_7c7d5c6e7dd7b386\" | \"npc_e4a8f7eed00bd4a3\"",
++   "v102-village-3 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_ab47ddd67109997b\" | \"npc_9ea49eed44a10b9a\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_da2a592b8ab15d9e\" | \"npc_8dea66570fb882ca\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_8c84a2d60b83c1bd\" | \"npc_41d1206e0a6d28e2\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_aa0c60476a401148\" | \"npc_17355b7c1403aa6a\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_9105fb4860b3e3a1\" | \"npc_1de130eb4413bc27\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_3094b663c6b72bf2\" | \"npc_65be28f1102e4614\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_ba926fe6714f8aa9\" | \"npc_4c39ab18c788e3eb\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_93132d22ece65959\" | \"npc_5daa294871d719b3\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_d256f1c8540e5bb3\" | \"npc_fab9be727970b40e\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_5081e3bdc63e3518\" | \"npc_355533f997653553\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_525a1ae76754e680\" | \"npc_3e5268e884955312\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_008518031506e661\" | \"npc_fdc366e5344aed68\"",
++   "v102-village-3 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_f77e11ae49519190\" | \"npc_bf56520c0cb096b9\"",
++   "v102-village-3 master dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[0].id: \"npc_95d2c461bdffd17c\" | \"npc_55840ad198de6518\"",
++   "v102-village-3 master dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[1].id: \"npc_780781a9acbb14c6\" | \"npc_2cf65878daadb98a\"",
++   "v102-village-3 master dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[2].id: \"npc_44ec2acf32a27257\" | \"npc_16f14090d2126f90\"",
++   "v102-village-3 master dm=false (D): the planted field:institution:fence-word-of-mouth:people is served: npcs[3].id: \"npc_c80f23a6f0d9c521\" | \"npc_cea3613fc67b2316\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_90147eb925c20ea7\" | \"npc_b83b7129993ce498\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_c463497d849388fd\" | \"npc_8ccd14dd727288dc\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_6b7e5d20bc149462\" | \"npc_e17753be64a0bf59\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, gallery: npcs[1].allegiance.handler: \"npc_32aa482015d777db\" | \"npc_b1cb143fbd78f0ca\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_185e5bea79ece8d1\" | \"npc_b378a99970336fd2\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_0b469e872c7e8af2\" | \"npc_d213c8baf355d783\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_825fc8af9492b0fd\" | \"npc_a1e6e69a07ca5f06\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_5b551a1dffd4d723\" | \"npc_3825a91791260751\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_53cc1f76173b9540\" | \"npc_b418edfc18e13197\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_01e38c4f72a582d0\" | \"npc_d79025a4091bb122\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_4262666e578a693e\" | \"npc_d19542a3aaef9851\"",
++   "v102-village-3 master dm=true (B) Show all vs the hand, the twin: npcs[1].allegiance.handler: \"npc_921e6baa28027179\" | \"npc_e828ee82d5947e3b\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_22e461b2d844a1f9\" | \"npc_db86a145f2ed8a3a\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_dfc36e19c125e37b\" | \"npc_efa4dde39fdba32c\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_3516c035899b0fc0\" | \"npc_cd61688e308eb470\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_dfc36e19c125e37b\" | \"npc_efa4dde39fdba32c\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_2c2a77690215c3d8\" | \"npc_a75796f48c2d49a0\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_e60d919b45bd7624\" | \"npc_df83c38c8a668889\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_955b962a2c170a3c\" | \"npc_8a6c9290cfed995d\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_6bb9cf33deaeb535\" | \"npc_23eb904ac4266b69\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_025f5094d29e8471\" | \"npc_c146b52a867aca73\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_1f768831c36dcab0\" | \"npc_88f64f939a02e716\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_b2b05f0689e40d88\" | \"npc_1d4ebc76a4ae90bf\"",
++   "v102-village-3 master dm=true (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_1f768831c36dcab0\" | \"npc_88f64f939a02e716\"",
++   "v102-village-3 master dm=true (E): Lakin Itza carries \"Fence (word of mouth)\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_cffcfe0e3404069e" | "npc_2635109a58ccf8ae"
+v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_a622e32f0ae14c6b" | "npc_e4b8428e32839212"
+v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_4bbc0bab963b3f7c" | "npc_b23389dad9b3428f"
+v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_69d34d8f0de23d6f" | "npc_3143360c948208ac"
+v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_737236c44ed02fe5" | "npc_0d6500531904154c"
+v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_3b87f7bd091326c0" | "npc_447020a7b3759301"
+v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_3e02697f60baf08b" | "npc_316c079ac4e4999f"
+v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_4367c05b8310ce12" | "npc_ab58709d3e4877b2"
+v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_26d46be0dd47aa0c" | "npc_08e2eba8c608e952"
+v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_237bcbf37d2ca402" | "npc_4a9725296d3a62a3"
+v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_57c49ab064a43862" | "npc_9c5a5a5c572ab7a7"
+v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_e3fa1ca6f542a7ab" | "npc_7e3c5f3f0f3592e4"
+v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_398d3f17059e75c1" | "npc_2261678200c1bdf2"
+v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_5f37598165eb88b5" | "npc_0a9476fecde8cc40"
+v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_e8b958149d58cb6e" | "npc_05773d2c19da914c"
+v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_a8f91fdb6f04d810" | "npc_1225a98a80167c8d"
+v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_9935aad33e494deb" | "npc_47c3911fa84eed94"
+v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_481675fd96d221a9" | "npc_7ab0ba432cc16866"
+v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_ec7fe1d33913fe2a" | "npc_87e2fa2213367f96"
+v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_57c85c66469c84d6" | "npc_9d7a1f6f784f6f86"
+v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_feebe279b796b7d5" | "npc_7d105ed7afd88f5a"
+v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_86a0a26955df83dd" | "npc_4398b61b33126381"
+v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_6e3805d4823d5f30" | "npc_c5bf9b3ec9186652"
+v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_ba1edb9157c80652" | "npc_30a29dc9039df148": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_cffcfe0e3404069e\" | \"npc_2635109a58ccf8ae\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_a622e32f0ae14c6b\" | \"npc_e4b8428e32839212\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_4bbc0bab963b3f7c\" | \"npc_b23389dad9b3428f\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_69d34d8f0de23d6f\" | \"npc_3143360c948208ac\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_737236c44ed02fe5\" | \"npc_0d6500531904154c\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_3b87f7bd091326c0\" | \"npc_447020a7b3759301\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_3e02697f60baf08b\" | \"npc_316c079ac4e4999f\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_4367c05b8310ce12\" | \"npc_ab58709d3e4877b2\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_26d46be0dd47aa0c\" | \"npc_08e2eba8c608e952\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_237bcbf37d2ca402\" | \"npc_4a9725296d3a62a3\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_57c49ab064a43862\" | \"npc_9c5a5a5c572ab7a7\"",
++   "v102-town-1 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_e3fa1ca6f542a7ab\" | \"npc_7e3c5f3f0f3592e4\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_398d3f17059e75c1\" | \"npc_2261678200c1bdf2\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_5f37598165eb88b5\" | \"npc_0a9476fecde8cc40\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_e8b958149d58cb6e\" | \"npc_05773d2c19da914c\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_a8f91fdb6f04d810\" | \"npc_1225a98a80167c8d\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_9935aad33e494deb\" | \"npc_47c3911fa84eed94\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_481675fd96d221a9\" | \"npc_7ab0ba432cc16866\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_ec7fe1d33913fe2a\" | \"npc_87e2fa2213367f96\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_57c85c66469c84d6\" | \"npc_9d7a1f6f784f6f86\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_feebe279b796b7d5\" | \"npc_7d105ed7afd88f5a\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_86a0a26955df83dd\" | \"npc_4398b61b33126381\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_6e3805d4823d5f30\" | \"npc_c5bf9b3ec9186652\"",
++   "v102-town-1 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_ba1edb9157c80652\" | \"npc_30a29dc9039df148\"",
++   "v102-town-1 current dm=false (D): the planted field:institution:street-gang:people is served: npcs[0].id: \"npc_ae22fc1984d9e8d3\" | \"npc_dda2cac788dbdbd9\"",
++   "v102-town-1 current dm=false (D): the planted field:institution:street-gang:people is served: npcs[1].id: \"npc_5837ae61b2fd2510\" | \"npc_fd6fb651a029b1f0\"",
++   "v102-town-1 current dm=false (D): the planted field:institution:street-gang:people is served: npcs[2].id: \"npc_7fa51b87d5b4646e\" | \"npc_acb6f788f3c7876a\"",
++   "v102-town-1 current dm=false (D): the planted field:institution:street-gang:people is served: npcs[3].id: \"npc_222acc0947bab140\" | \"npc_857d1d4c37f57f55\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_0a57baed1afbb7cd\" | \"npc_bf3ea00b8387e0ab\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_d8d2017c10ee816d\" | \"npc_5df628538760e9d3\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[2].id: \"npc_22e48d982f9a17e4\" | \"npc_319db108135b59bc\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[3].id: \"npc_0a274172a4f08d06\" | \"npc_eddd13930a2f7350\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_36abe269d4e736d6\" | \"npc_46dcd4897a5bc29c\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_422aa860998212ac\" | \"npc_b16a1c32457462f3\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_8e8b00c2aff1593b\" | \"npc_3420de1c19fa1123\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_517c0f8ac4508560\" | \"npc_7e7795677b872a70\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_7db1e59b90ff9f46\" | \"npc_c028f74ef7884324\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_f6ae0f2cba0a7712\" | \"npc_6d35237c9a45d668\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[2].id: \"npc_f0fae84541c39dff\" | \"npc_77ef5961deeb2c1d\"",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[3].id: \"npc_55a61cca2bc69089\" | \"npc_48718b9d780c212f\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_7e936afe91370c7e\" | \"npc_1fb859472e7a64f8\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_5c8dc7804d50a0d6\" | \"npc_a9ff5ddebed55e63\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_c05f7dcb59629c5d\" | \"npc_c3ae0fde0296216b\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_b40085f19df4a82d\" | \"npc_a7aa7dc9db8cdd6d\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_44058f895c6ba0d5\" | \"npc_af48a763e465ff13\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_7fa9f82f4af4b68e\" | \"npc_819bda39936c0fb5\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_a61038bc1819bc8d\" | \"npc_79998c7b3545fe18\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_d4edb1a20c651ce0\" | \"npc_14156abe9744d76a\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_69932270151211e3\" | \"npc_ac6fb0c9b3c1b82e\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_2500b813d925fc69\" | \"npc_80086eef9acfe58b\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_61fff6d7d60cf262\" | \"npc_5723d158a0804221\"",
++   "v102-town-1 current dm=true (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_5437ae698cc471f3\" | \"npc_456b77b94eb2736d\"",
++   "v102-town-1 current dm=true (D): the planted field:institution:front-businesses:services is served: npcs[0].id: \"npc_f9b949b1315883f4\" | \"npc_bc9192f4c47ee563\"",
++   "v102-town-1 current dm=true (D): the planted field:institution:front-businesses:services is served: npcs[1].id: \"npc_a8772b8078c123fb\" | \"npc_c06fcaa4d8d3f8ba\"",
++   "v102-town-1 current dm=true (D): the planted field:institution:front-businesses:services is served: npcs[2].id: \"npc_361838525f3fc652\" | \"npc_9b57c031892bac82\"",
++   "v102-town-1 current dm=true (D): the planted field:institution:front-businesses:services is served: npcs[3].id: \"npc_611780510bfa0f67\" | \"npc_2d75f0a4d8b16b3e\"",
++   "v102-town-1 current dm=true (E): Ibaka Suldus carries {\"key\":\"Street gang\",\"kind\":\"house\",\"title\":\"the gang boss\",\"family\":\"Multiple criminal factions\",\"veiled\":true} where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_73d0afb4681fedb7" | "npc_55790c4928db5149"
+v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_94b56eb59b689ba4" | "npc_ea23c63a301f0da3"
+v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_97a0c40e42d14ec1" | "npc_93afd27badcae4a7"
+v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_210cb0a056932563" | "npc_a7f1d9161f7e8f9f"
+v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_2fb889f3ec2ff2da" | "npc_c7f24434ec1f2ed9"
+v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_fcd681843a35b590" | "npc_7f97ae0c42cd722e"
+v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_5d82b2092d294a60" | "npc_54a330c2f72f7db8"
+v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_ef5d7fa2de6e5f64" | "npc_ddc601c48cffe84f"
+v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_29abc3840d9cd9ef" | "npc_f6ebd27ce2b60147"
+v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_117f9632a354cd1e" | "npc_9a57fa1f76b1973b"
+v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_3fd6112fc3b5f67a" | "npc_0a5d91f3fcc688f3"
+v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_123ed1ccc7f2eedb" | "npc_b0a95fe6502beb0a"
+v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_a370da01b404d765" | "npc_25f06909c4ce3cd2"
+v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_193d1b743ce0ff92" | "npc_d5c2429d39ed425b"
+v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_ce0801cbe16b3615" | "npc_d6b1c561c85a1d50"
+v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_7a58ed2696d4773a" | "npc_d2971d7d1ba0881c"
+v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_29c81dfaa96f4f0f" | "npc_0c66f7ae94c3ebf9"
+v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_532e057fe90b63a8" | "npc_8e3af710d7120614"
+v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_1dfc2fac730b0f0e" | "npc_99d5596672e84553"
+v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_cc6d63dc15a0ebaa" | "npc_05308e08f735c925"
+v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_bf95491d0d79dcc2" | "npc_8540dbbc0bc17e37"
+v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_3d8068d5bc0e8395" | "npc_cbd75cf31e15f6f9"
+v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_a7dcdfff0079a858" | "npc_0839b224b7133624"
+v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_88399f4ae86fdfe6" | "npc_e4bf082e2e0ad19e": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_73d0afb4681fedb7\" | \"npc_55790c4928db5149\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_94b56eb59b689ba4\" | \"npc_ea23c63a301f0da3\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_97a0c40e42d14ec1\" | \"npc_93afd27badcae4a7\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_210cb0a056932563\" | \"npc_a7f1d9161f7e8f9f\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_2fb889f3ec2ff2da\" | \"npc_c7f24434ec1f2ed9\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_fcd681843a35b590\" | \"npc_7f97ae0c42cd722e\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_5d82b2092d294a60\" | \"npc_54a330c2f72f7db8\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_ef5d7fa2de6e5f64\" | \"npc_ddc601c48cffe84f\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_29abc3840d9cd9ef\" | \"npc_f6ebd27ce2b60147\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_117f9632a354cd1e\" | \"npc_9a57fa1f76b1973b\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_3fd6112fc3b5f67a\" | \"npc_0a5d91f3fcc688f3\"",
++   "v102-town-1 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_123ed1ccc7f2eedb\" | \"npc_b0a95fe6502beb0a\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_a370da01b404d765\" | \"npc_25f06909c4ce3cd2\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_193d1b743ce0ff92\" | \"npc_d5c2429d39ed425b\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_ce0801cbe16b3615\" | \"npc_d6b1c561c85a1d50\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_7a58ed2696d4773a\" | \"npc_d2971d7d1ba0881c\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_29c81dfaa96f4f0f\" | \"npc_0c66f7ae94c3ebf9\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_532e057fe90b63a8\" | \"npc_8e3af710d7120614\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_1dfc2fac730b0f0e\" | \"npc_99d5596672e84553\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_cc6d63dc15a0ebaa\" | \"npc_05308e08f735c925\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_bf95491d0d79dcc2\" | \"npc_8540dbbc0bc17e37\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_3d8068d5bc0e8395\" | \"npc_cbd75cf31e15f6f9\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_a7dcdfff0079a858\" | \"npc_0839b224b7133624\"",
++   "v102-town-1 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_88399f4ae86fdfe6\" | \"npc_e4bf082e2e0ad19e\"",
++   "v102-town-1 master dm=false (D): the planted field:institution:street-gang:people is served: npcs[0].id: \"npc_d49fee5e20a1a5f0\" | \"npc_e736b394891d3bdb\"",
++   "v102-town-1 master dm=false (D): the planted field:institution:street-gang:people is served: npcs[1].id: \"npc_2af12ba78d4c283c\" | \"npc_b6c643cfdb2fb1a9\"",
++   "v102-town-1 master dm=false (D): the planted field:institution:street-gang:people is served: npcs[2].id: \"npc_2cfbaa66639fd120\" | \"npc_0faab33629a93602\"",
++   "v102-town-1 master dm=false (D): the planted field:institution:street-gang:people is served: npcs[3].id: \"npc_8a201b9d120e768a\" | \"npc_5f1e25cecda1489e\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_316f9827b49c538e\" | \"npc_086ac46dd3ef200c\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_24da6ceb749f6c0d\" | \"npc_5c0decdad5dab3c2\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, gallery: npcs[2].id: \"npc_2cf66f01afcd87e6\" | \"npc_55d656be7b9f43b6\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, gallery: npcs[3].id: \"npc_dd28dcac764e1340\" | \"npc_a5306e0b2d817dd0\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_277803453a34db66\" | \"npc_5eb7b6cecc32ba23\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_23f06cf2c5cb8822\" | \"npc_1681748055fe10c1\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_c03a8fc3327e60d3\" | \"npc_fbc99c7a5f53f724\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_9d9bec5623a3da71\" | \"npc_70d3e66bcb664ebb\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_6b8c6d92848809d2\" | \"npc_32336b816aa7b14c\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_9cf0457657e98ae1\" | \"npc_f012e5d867d4c34c\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, the twin: npcs[2].id: \"npc_36f0746de9249c64\" | \"npc_4e5472c05e7799c1\"",
++   "v102-town-1 master dm=true (B) Show all vs the hand, the twin: npcs[3].id: \"npc_e7d4a5ab0369587d\" | \"npc_1265613ac9794818\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_334ef1b8d29a2c5b\" | \"npc_80b06a6c1fef62d1\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_a1b2a1439b30270c\" | \"npc_3f1816bda7b0e77c\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_27efa1b13f5d3a91\" | \"npc_69cbf697aec58fec\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_546fb90b92be6203\" | \"npc_b96fc6e4db424b0d\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_37af7aa1072db0d5\" | \"npc_f747f3f973f5b681\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_f4a732184ee13fad\" | \"npc_4f66c238354a483e\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_9a060d1ae0c1d82f\" | \"npc_b618be282bc860b6\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_1f1bdd30a7b1b761\" | \"npc_6e3da342fd0eb47b\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_e74dc4ef39bedb28\" | \"npc_f4084711eafef472\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_7d183a32c2a511bd\" | \"npc_88f3cfec90ae193e\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_3e060bd47a184fac\" | \"npc_b17fed5f9a7b4b8f\"",
++   "v102-town-1 master dm=true (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_9c1eece1e8a4ee95\" | \"npc_41800b47b2186bfd\"",
++   "v102-town-1 master dm=true (D): the planted field:institution:front-businesses:services is served: npcs[0].id: \"npc_c0987a2269301406\" | \"npc_c9238235a6a812e9\"",
++   "v102-town-1 master dm=true (D): the planted field:institution:front-businesses:services is served: npcs[1].id: \"npc_db7546d4c4efb76d\" | \"npc_347a06c4330bd76f\"",
++   "v102-town-1 master dm=true (D): the planted field:institution:front-businesses:services is served: npcs[2].id: \"npc_927873bec4dc38ca\" | \"npc_23fe30b76de686e2\"",
++   "v102-town-1 master dm=true (D): the planted field:institution:front-businesses:services is served: npcs[3].id: \"npc_2b8ba8f1a35fd5d9\" | \"npc_7627adf7898418c7\"",
++   "v102-town-1 master dm=true (E): Ibaka Suldus carries \"Street gang\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_49a878bcbcbefadd" | "npc_fe65468d21216da9"
+v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_4d260c42f6f2503e" | "npc_aff7c91aef137b95"
+v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_df4e9c45bb6971b2" | "npc_158bb9ccc6eee63f"
+v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_9be3855f1ed797a8" | "npc_d9f96e7b38bc6f42"
+v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_ca06a8c5e1313093" | "npc_4a097769ffc2efc3"
+v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_fb5c2dde88e4b59e" | "npc_d171da657100bb70"
+v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_cef159f31405c17d" | "npc_1851d3aa1eb1998d"
+v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_54f6f43ae4a2aaa6" | "npc_0d228108c1efaec1"
+v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_94990b7f258cc69f" | "npc_642fa182d53cc841"
+v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_089be0a55d96966b" | "npc_d7c8128a6533b27d"
+v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_75be15aae37790b1" | "npc_7acf4c1c3a827aca"
+v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_72c4e14c7ef21c13" | "npc_2accb37b8320e147"
+v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_0dac084904ca38f6" | "npc_1794715fc7d75895"
+v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_ae60b8bb686fa87e" | "npc_450c30a4dbab51ee"
+v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_a3b61ec78b6cfc38" | "npc_3d66c35193a5890e"
+v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_532d3b60f3a57424" | "npc_d06f0ef0b5fd06e0"
+v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_a901f0eda042c497" | "npc_4b6ee7531d53e960"
+v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_dbbd956707964cf7" | "npc_0516a83f0486e2f2"
+v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_5c7d955fa817baf8" | "npc_57a140ce113dadab"
+v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_f6314a4ba8c9fa26" | "npc_16fec8c0d1a3556c"
+v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_6d5156d0bbead9e7" | "npc_e3de1310812e8c11"
+v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_166a58313a0d0dbf" | "npc_1f4ed996171e38cd"
+v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_3659576e95741f3a" | "npc_390e84e1921b247b"
+v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_cea4af7ffd003f10" | "npc_6265bfff23b611e0": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_49a878bcbcbefadd\" | \"npc_fe65468d21216da9\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_4d260c42f6f2503e\" | \"npc_aff7c91aef137b95\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_df4e9c45bb6971b2\" | \"npc_158bb9ccc6eee63f\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_9be3855f1ed797a8\" | \"npc_d9f96e7b38bc6f42\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_ca06a8c5e1313093\" | \"npc_4a097769ffc2efc3\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_fb5c2dde88e4b59e\" | \"npc_d171da657100bb70\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_cef159f31405c17d\" | \"npc_1851d3aa1eb1998d\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_54f6f43ae4a2aaa6\" | \"npc_0d228108c1efaec1\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_94990b7f258cc69f\" | \"npc_642fa182d53cc841\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_089be0a55d96966b\" | \"npc_d7c8128a6533b27d\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_75be15aae37790b1\" | \"npc_7acf4c1c3a827aca\"",
++   "v102-city-0 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_72c4e14c7ef21c13\" | \"npc_2accb37b8320e147\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_0dac084904ca38f6\" | \"npc_1794715fc7d75895\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_ae60b8bb686fa87e\" | \"npc_450c30a4dbab51ee\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_a3b61ec78b6cfc38\" | \"npc_3d66c35193a5890e\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_532d3b60f3a57424\" | \"npc_d06f0ef0b5fd06e0\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_a901f0eda042c497\" | \"npc_4b6ee7531d53e960\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_dbbd956707964cf7\" | \"npc_0516a83f0486e2f2\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_5c7d955fa817baf8\" | \"npc_57a140ce113dadab\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_f6314a4ba8c9fa26\" | \"npc_16fec8c0d1a3556c\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_6d5156d0bbead9e7\" | \"npc_e3de1310812e8c11\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_166a58313a0d0dbf\" | \"npc_1f4ed996171e38cd\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_3659576e95741f3a\" | \"npc_390e84e1921b247b\"",
++   "v102-city-0 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_cea4af7ffd003f10\" | \"npc_6265bfff23b611e0\"",
++   "v102-city-0 current dm=false (D): the planted field:institution:rookery:people is served: npcs[0].id: \"npc_d5d1b5c4927ad207\" | \"npc_584fd3618057befc\"",
++   "v102-city-0 current dm=false (D): the planted field:institution:rookery:people is served: npcs[1].id: \"npc_78fabcf40a5da7f6\" | \"npc_b9dd4114cd29d7b6\"",
++   "v102-city-0 current dm=false (D): the planted field:institution:rookery:people is served: npcs[2].id: \"npc_f8e4bfc2d21015d8\" | \"npc_120b1333e3e13868\"",
++   "v102-city-0 current dm=false (D): the planted field:institution:rookery:people is served: npcs[3].id: \"npc_c68e508b09101495\" | \"npc_5a49c55d84d879f8\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_be5abf4e4bec7dee\" | \"npc_b4ca663a6d6ce5e4\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_af916cf0ec62a178\" | \"npc_5e60605bc47d5231\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[1].goal.intent.long.target.id: \"npc_fb9a2d302766955b\" | \"npc_5aa53d1d36bfb20e\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_5bfd6cdc2c1de591\" | \"npc_1c16c01871e1204c\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_654979725fc5b6d4\" | \"npc_c2b8475106cf7243\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_dc00cab4dba9b841\" | \"npc_c9978b3150b4e560\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_f6daa739e0c5d3b4\" | \"npc_6da9b4f49150d3cc\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_248d4e199aa2dfac\" | \"npc_0d1012d55990087f\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_bac735e42cacaaba\" | \"npc_036c1ea19acd1e37\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_11acce6d7a0cade2\" | \"npc_beeedd39b47e681c\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_4fd5c645d1690d1d\" | \"npc_84dbcff093794683\"",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[1].goal.intent.long.target.id: \"npc_9691f89e66030e39\" | \"npc_088168d8da01a3aa\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_0fbde5df16f5b10a\" | \"npc_7677beedeafdb4b5\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_140669a7ff1b0f97\" | \"npc_63ee0eabb4aba0ed\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.long.target.id: \"npc_97a05bebc91ad1bf\" | \"npc_61c16444aa993fee\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_9c68447d1df39984\" | \"npc_8585109bd9b57bc6\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_235827b5f4f74619\" | \"npc_6c56a95a0ffc84ea\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_8f480702bc19673a\" | \"npc_8a73acfa08b50e96\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_48b97ed1c5cdea8b\" | \"npc_507ca01dbdb79593\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_28c1485db0d2c87c\" | \"npc_97ad366d42033336\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_4c8990d54224ac67\" | \"npc_13ff677d50d46654\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_728db43338b95a40\" | \"npc_787617942180ddb2\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_75afa35cfd3557d6\" | \"npc_5cf990624354ce26\"",
++   "v102-city-0 current dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.long.target.id: \"npc_93ebc5249333abcc\" | \"npc_d5833f2b50d05d14\"",
++   "v102-city-0 current dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[0].id: \"npc_c8b17a2b8755568a\" | \"npc_9d8bea93fe8f3919\"",
++   "v102-city-0 current dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].id: \"npc_a42ab71774429f29\" | \"npc_22e80850482736f4\"",
++   "v102-city-0 current dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].goal.intent.long.target.id: \"npc_7c5d8405bdf18a11\" | \"npc_50144c265bf3339b\"",
++   "v102-city-0 current dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].goal.intent.short.target.id: \"npc_f8906c8fc6b0d104\" | \"npc_497949e061afb7c1\"",
++   "v102-city-0 current dm=true (E): Aditi Dubey carries {\"key\":\"Smuggling network\",\"kind\":\"house\",\"title\":\"the network's head\",\"family\":\"Smuggling waypoint\",\"veiled\":true} where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_e9801c32446c262e" | "npc_a88e5b32d95ac92c"
+v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_eb3702e5b10d1695" | "npc_bcc472a7ead970a9"
+v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_b463cdabf36fdd98" | "npc_1388f34b9029177f"
+v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_9a7dedbc5b70479c" | "npc_1ff963d928a05cb1"
+v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_619712592d6b1964" | "npc_c21102a0d30815e6"
+v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_c8b6fcdf25dc4f74" | "npc_98d9709e701eec39"
+v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_cedf40a9f11f6de8" | "npc_7f211512efa34a51"
+v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_5da7d6f0f84e056b" | "npc_35dd3261c67cdce4"
+v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_5a962d15706382f2" | "npc_4b049a95175cc574"
+v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_53fe52c62486309d" | "npc_9e82dcf3b2b258c0"
+v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_0281c76dec3ce9c2" | "npc_195e3cb4c4511a6b"
+v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_781ec7c67243366e" | "npc_f033fc32e39af4af"
+v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_5119d4c4ef681507" | "npc_0b1f5eccabae34b5"
+v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_e4a606f2f4a4dae2" | "npc_bd948cc5ce2cd135"
+v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_5783b07974222d85" | "npc_c346458bbccf1cb2"
+v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_953ad27570b639d6" | "npc_abfd6606b89471da"
+v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_c6b98c906832805a" | "npc_6f1660259c95ed0f"
+v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_11a21cd96df8d183" | "npc_528a8c665c66eb0f"
+v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_2dbea1d2994ef9b9" | "npc_afac3fa9d1a4f887"
+v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_15c665c871669282" | "npc_c4b04d1e6f265896"
+v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_9a50a0d77daa29a1" | "npc_f88735a869171215"
+v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_34a5ab172277b5cc" | "npc_20fcc0876fcac172"
+v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_1c43cc5338c82314" | "npc_d9f692efdf3920db"
+v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_3bd7f61b55105441" | "npc_0f30323d24c54ef7": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_e9801c32446c262e\" | \"npc_a88e5b32d95ac92c\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_eb3702e5b10d1695\" | \"npc_bcc472a7ead970a9\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_b463cdabf36fdd98\" | \"npc_1388f34b9029177f\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_9a7dedbc5b70479c\" | \"npc_1ff963d928a05cb1\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_619712592d6b1964\" | \"npc_c21102a0d30815e6\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_c8b6fcdf25dc4f74\" | \"npc_98d9709e701eec39\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_cedf40a9f11f6de8\" | \"npc_7f211512efa34a51\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_5da7d6f0f84e056b\" | \"npc_35dd3261c67cdce4\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_5a962d15706382f2\" | \"npc_4b049a95175cc574\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_53fe52c62486309d\" | \"npc_9e82dcf3b2b258c0\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_0281c76dec3ce9c2\" | \"npc_195e3cb4c4511a6b\"",
++   "v102-city-0 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_781ec7c67243366e\" | \"npc_f033fc32e39af4af\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_5119d4c4ef681507\" | \"npc_0b1f5eccabae34b5\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_e4a606f2f4a4dae2\" | \"npc_bd948cc5ce2cd135\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_5783b07974222d85\" | \"npc_c346458bbccf1cb2\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_953ad27570b639d6\" | \"npc_abfd6606b89471da\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_c6b98c906832805a\" | \"npc_6f1660259c95ed0f\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_11a21cd96df8d183\" | \"npc_528a8c665c66eb0f\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_2dbea1d2994ef9b9\" | \"npc_afac3fa9d1a4f887\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_15c665c871669282\" | \"npc_c4b04d1e6f265896\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_9a50a0d77daa29a1\" | \"npc_f88735a869171215\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_34a5ab172277b5cc\" | \"npc_20fcc0876fcac172\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_1c43cc5338c82314\" | \"npc_d9f692efdf3920db\"",
++   "v102-city-0 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_3bd7f61b55105441\" | \"npc_0f30323d24c54ef7\"",
++   "v102-city-0 master dm=false (D): the planted field:institution:rookery:people is served: npcs[0].id: \"npc_2811b3375b0463aa\" | \"npc_c3288027dbdef9bf\"",
++   "v102-city-0 master dm=false (D): the planted field:institution:rookery:people is served: npcs[1].id: \"npc_e7f779758eda0d2a\" | \"npc_a93152653a23d676\"",
++   "v102-city-0 master dm=false (D): the planted field:institution:rookery:people is served: npcs[2].id: \"npc_7a68a9cfbee109ea\" | \"npc_ca657a44e17270b2\"",
++   "v102-city-0 master dm=false (D): the planted field:institution:rookery:people is served: npcs[3].id: \"npc_943702f60808e9e6\" | \"npc_db9eeb1bb81511ee\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_f81c86ae24a31aec\" | \"npc_c3b3a51aa0c18072\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_c43667459cfbd780\" | \"npc_b19142738161a615\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: npcs[1].goal.intent.long.target.id: \"npc_ffb296174e02df8b\" | \"npc_e2165195b76842c0\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_2e541dc486fa7ab5\" | \"npc_6d7688646a8b33d5\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_0faa9186a9f3b7fa\" | \"npc_7b534ca8981d7845\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_02f9f0bfade147e0\" | \"npc_1f10f83d9e0fd00f\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_099f49f832e7f59b\" | \"npc_756866208afd7e80\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_3b5f05f77f129d6f\" | \"npc_2c2156eb5c46045c\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_28c74d8ba40d0be2\" | \"npc_9a8f647a48e375bd\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_b8734e368270671e\" | \"npc_c628dee3d4385738\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_edfdd04c44a54b3a\" | \"npc_6d754d8b8d45b161\"",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: npcs[1].goal.intent.long.target.id: \"npc_67601b7c5a8d5e3b\" | \"npc_0bcf85d1a41be7cb\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_7847bf934bfe1d64\" | \"npc_500db598e9713a88\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_6125239837c0a7e5\" | \"npc_73738e79a1610ebe\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.long.target.id: \"npc_a905e43af726d280\" | \"npc_4b5632b14525583f\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, gallery: npcs[1].goal.intent.short.target.id: \"npc_7426471649b0ed7d\" | \"npc_81e21f6816f73eb9\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_6f51ef0367f13106\" | \"npc_cdb71a5647ca4761\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_a51b17b46d25d231\" | \"npc_3641d4ab091dc84e\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_3375890a382b188c\" | \"npc_3bb2bc17101d9159\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_af2209271e116421\" | \"npc_cef41a964ed4fe08\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_96985ccce1e2aaba\" | \"npc_e06911355a758290\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_9ce95b7b9a869cea\" | \"npc_cb73885db45e02f2\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.short.target.id: \"npc_7e522fa9fd6c1af2\" | \"npc_ab1578357ea471f2\"",
++   "v102-city-0 master dm=true (C) Hide all vs the hand, the twin: npcs[1].goal.intent.long.target.id: \"npc_1b556f28c1324d76\" | \"npc_01b7d42fbfffe8b0\"",
++   "v102-city-0 master dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[0].id: \"npc_12f096e1f7f09e3d\" | \"npc_6421559187a4e692\"",
++   "v102-city-0 master dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].id: \"npc_add30cf73f2c4291\" | \"npc_23ec7fa302cf56e3\"",
++   "v102-city-0 master dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].goal.intent.long.target.id: \"npc_d2f5ef247abeb355\" | \"npc_60a6757455fc4e9e\"",
++   "v102-city-0 master dm=true (D): the planted field:faction:faction.corrupt_city_council:goals is served: npcs[1].goal.intent.short.target.id: \"npc_849d864a423a5a52\" | \"npc_aa72ca75103f8ce9\"",
++   "v102-city-0 master dm=true (E): Aditi Dubey carries \"Smuggling network\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_54969086ec1ee005" | "npc_2763aed2613e59bb"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_cd91434f5490aa0d" | "npc_c03c9e5c50e67344"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_b2d4fbd34d2aa116" | "npc_55e596b0f97440e6"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_d6f458583ffedca0" | "npc_58e7da57c51a927f"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_5deb6cafe601dd2e" | "npc_94f97c73fb7b8275"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_486e9c05463e935f" | "npc_0cf81ac30fc16f93"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_9685fa56d51a50c8" | "npc_e2d8a2a942af603f"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_9c4148e036f4f7b1" | "npc_27dcc2e2aac57b62"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_176826238018e142" | "npc_478610333f7dc675"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_62d05389834ec65f" | "npc_0b00944a31945e85"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_825fccc6bbf3bada" | "npc_7d242ef3fb60b561"
+v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_bfb673acb5f00697" | "npc_abf44a6c13a56784"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_ebf0753185e8c2bb" | "npc_f23537697c33338b"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_88d7190ccccc4fc5" | "npc_e6c2a5a2f961e1f2"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_18cb3c1a9b876b8d" | "npc_c784ece94eb0211c"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_23150c5166da651b" | "npc_5f516b60ed4e7f68"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_ca0e10ae4ebb949a" | "npc_b694b25bc7724232"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_20d170673e4f36e7" | "npc_b03a1c0ade77afbe"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_0a256c4a4cbdb950" | "npc_4796ad0445212114"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_296dbe86ab0ede6e" | "npc_686cd58c3996482b"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_2a282a3b8821fc46" | "npc_bc11a7b4ea6ff9b5"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_2a9c666d5815ade2" | "npc_9d0cd6274b563523"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_0a4c95d0cc6cd5c7" | "npc_beffe6eb3221e8a1"
+v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_a9ece5c9ae17a0d3" | "npc_b369b8209fb0ec40": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_54969086ec1ee005\" | \"npc_2763aed2613e59bb\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_cd91434f5490aa0d\" | \"npc_c03c9e5c50e67344\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_b2d4fbd34d2aa116\" | \"npc_55e596b0f97440e6\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_d6f458583ffedca0\" | \"npc_58e7da57c51a927f\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_5deb6cafe601dd2e\" | \"npc_94f97c73fb7b8275\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_486e9c05463e935f\" | \"npc_0cf81ac30fc16f93\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_9685fa56d51a50c8\" | \"npc_e2d8a2a942af603f\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_9c4148e036f4f7b1\" | \"npc_27dcc2e2aac57b62\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_176826238018e142\" | \"npc_478610333f7dc675\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_62d05389834ec65f\" | \"npc_0b00944a31945e85\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_825fccc6bbf3bada\" | \"npc_7d242ef3fb60b561\"",
++   "v102-metropolis-1 current dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_bfb673acb5f00697\" | \"npc_abf44a6c13a56784\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_ebf0753185e8c2bb\" | \"npc_f23537697c33338b\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_88d7190ccccc4fc5\" | \"npc_e6c2a5a2f961e1f2\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_18cb3c1a9b876b8d\" | \"npc_c784ece94eb0211c\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_23150c5166da651b\" | \"npc_5f516b60ed4e7f68\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_ca0e10ae4ebb949a\" | \"npc_b694b25bc7724232\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_20d170673e4f36e7\" | \"npc_b03a1c0ade77afbe\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_0a256c4a4cbdb950\" | \"npc_4796ad0445212114\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_296dbe86ab0ede6e\" | \"npc_686cd58c3996482b\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_2a282a3b8821fc46\" | \"npc_bc11a7b4ea6ff9b5\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_2a9c666d5815ade2\" | \"npc_9d0cd6274b563523\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_0a4c95d0cc6cd5c7\" | \"npc_beffe6eb3221e8a1\"",
++   "v102-metropolis-1 current dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_a9ece5c9ae17a0d3\" | \"npc_b369b8209fb0ec40\"",
++   "v102-metropolis-1 current dm=false (D): the planted field:institution:whisper-market:people is served: npcs[0].id: \"npc_8cbcba3f9bfce76a\" | \"npc_9cd2826defd25110\"",
++   "v102-metropolis-1 current dm=false (D): the planted field:institution:whisper-market:people is served: npcs[1].id: \"npc_00a64b5844de4fd5\" | \"npc_ee55232c6240cde1\"",
++   "v102-metropolis-1 current dm=false (D): the planted field:institution:whisper-market:people is served: npcs[2].id: \"npc_65d704894f2eae4c\" | \"npc_8cf8ac308a22b32c\"",
++   "v102-metropolis-1 current dm=false (D): the planted field:institution:whisper-market:people is served: npcs[3].id: \"npc_4da11fc00a3c8b7b\" | \"npc_e79ee32b7caf9f24\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_4c41633c1b052d65\" | \"npc_2d34c7cf9daf53af\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_8ec54cbf1f541bca\" | \"npc_9d7b172586537f37\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_471d62ab272d1dca\" | \"npc_adbb36ce720396bc\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_d1f528fa8ee394c9\" | \"npc_97bbc1a2ed63d42e\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_f95ca3e579b89f41\" | \"npc_5623def1031bdf06\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_cf06f90383f018e4\" | \"npc_04fc874f915adcd6\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_c2f9851d2a6c50fb\" | \"npc_d975e677d36df45c\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_765900cdc64a6e13\" | \"npc_f1f55090cbe13cc4\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_2314727315bb20db\" | \"npc_f792767124fed4ab\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_35a9a3722a5d748e\" | \"npc_df61a9caec1a6e15\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_8cfe2d6ab28b3034\" | \"npc_66685004bfcaedb5\"",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_028c2d4788d6b0e2\" | \"npc_be7f90077098c1c4\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_9c9b330419b1c1cd\" | \"npc_0cf7f772ff4f1667\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_d3e08e98f0f09344\" | \"npc_f53ac8938eb880e0\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_8e8c0eeebbf46476\" | \"npc_4eefe5b719020170\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_51ccf921b806bee6\" | \"npc_4c7c5f22a39a1a41\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_e041d0b2dd476c19\" | \"npc_9187b58765b8c92c\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_8e75ab8397e3fe6e\" | \"npc_eabad6cea2c321fa\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_ba5e4698e579ea8c\" | \"npc_1051c59317449887\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_4bcd7b254afa71eb\" | \"npc_ac63a502c2d93153\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_f84d4aad5e772ffc\" | \"npc_631e498009b87d9d\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_e5042598a4984d64\" | \"npc_0d527bb88a96f057\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_eb89666d0fdc809f\" | \"npc_83a1c988ea2dbfb2\"",
++   "v102-metropolis-1 current dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_213fde1dee369146\" | \"npc_269d30ce787c145e\"",
++   "v102-metropolis-1 current dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].id: \"npc_9a65c194b7a4b5a5\" | \"npc_262bcc32cd744469\"",
++   "v102-metropolis-1 current dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.long.target.id: \"npc_c690482996c70ef4\" | \"npc_52a06fcf45792449\"",
++   "v102-metropolis-1 current dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.short.target.id: \"npc_fe052d766539d870\" | \"npc_a36422922a910e13\"",
++   "v102-metropolis-1 current dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[1].id: \"npc_0956f320a39f83e1\" | \"npc_e2778596bdb4380e\"",
++   "v102-metropolis-1 current dm=true (E): Zaachila Ku carries {\"key\":\"Smuggling network\",\"kind\":\"house\",\"title\":\"the network's head\",\"family\":\"Smuggling waypoint\",\"veiled\":true} where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: "npc_5cef191c4b883e68" | "npc_0614665282b60293"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: "npc_7968abe48a274c9b" | "npc_935353de2a02948d"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: "npc_bb4733b27a4f3814" | "npc_f80abd799e66b299"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: "npc_6fceada859e7d23d" | "npc_6cb8f2387898b98e"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[0].id: "npc_530247ae84d103ba" | "npc_9086c6aafe87b6db"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[1].id: "npc_c943a0171d974f9c" | "npc_2e34f70884da9e44"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[2].id: "npc_2e199983a5624ca8" | "npc_8c2af2d952305b65"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[3].id: "npc_d4490b749a6add68" | "npc_f04c152d18f4edb6"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: "npc_69e97a075bce38a5" | "npc_ccebbd2c00ddde10"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: "npc_60be063f3b232407" | "npc_e9dc41c773400f6a"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: "npc_090758de78ca8c23" | "npc_6fb43914c4704aa1"
+v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: "npc_bc8ae937db47ab0a" | "npc_39e1e0d0dde840d2"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: "npc_ff5aa35057f44888" | "npc_762329ddd4ca24aa"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: "npc_b4d6f205b59e7dbd" | "npc_ae1a765f50cdaeb9"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: "npc_aa9f65628a81099c" | "npc_52959f92a7c89e24"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: "npc_b30fd34c667d8d76" | "npc_182243dde185ab85"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[0].id: "npc_7d8411a72cc2ab14" | "npc_43be2fde4606621d"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[1].id: "npc_ad10b93e49cff127" | "npc_af4217ea842eecc3"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[2].id: "npc_e31e7a4e8a31badc" | "npc_a909073138c9e521"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[3].id: "npc_05d843fcb220900c" | "npc_2f77ffaa2b17e28b"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: "npc_442cc4a2312566b5" | "npc_6e668aeb27418b90"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: "npc_5f2a32e1a345e3f8" | "npc_8919b607ee4499d6"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: "npc_616ee213b83c9166" | "npc_44cf5d9db38dd387"
+v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: "npc_6a6f3dd468451aba" | "npc_64c8b82c71cb8cd1": expected [ …(57) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[0].id: \"npc_5cef191c4b883e68\" | \"npc_0614665282b60293\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[1].id: \"npc_7968abe48a274c9b\" | \"npc_935353de2a02948d\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[2].id: \"npc_bb4733b27a4f3814\" | \"npc_f80abd799e66b299\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, gallery: npcs[3].id: \"npc_6fceada859e7d23d\" | \"npc_6cb8f2387898b98e\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[0].id: \"npc_530247ae84d103ba\" | \"npc_9086c6aafe87b6db\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[1].id: \"npc_c943a0171d974f9c\" | \"npc_2e34f70884da9e44\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[2].id: \"npc_2e199983a5624ca8\" | \"npc_8c2af2d952305b65\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, link: npcs[3].id: \"npc_d4490b749a6add68\" | \"npc_f04c152d18f4edb6\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[0].id: \"npc_69e97a075bce38a5\" | \"npc_ccebbd2c00ddde10\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[1].id: \"npc_60be063f3b232407\" | \"npc_e9dc41c773400f6a\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[2].id: \"npc_090758de78ca8c23\" | \"npc_6fb43914c4704aa1\"",
++   "v102-metropolis-1 master dm=false (B) Show all vs the hand, the twin: npcs[3].id: \"npc_bc8ae937db47ab0a\" | \"npc_39e1e0d0dde840d2\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_ff5aa35057f44888\" | \"npc_762329ddd4ca24aa\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_b4d6f205b59e7dbd\" | \"npc_ae1a765f50cdaeb9\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[2].id: \"npc_aa9f65628a81099c\" | \"npc_52959f92a7c89e24\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, gallery: npcs[3].id: \"npc_b30fd34c667d8d76\" | \"npc_182243dde185ab85\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[0].id: \"npc_7d8411a72cc2ab14\" | \"npc_43be2fde4606621d\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[1].id: \"npc_ad10b93e49cff127\" | \"npc_af4217ea842eecc3\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[2].id: \"npc_e31e7a4e8a31badc\" | \"npc_a909073138c9e521\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, link: npcs[3].id: \"npc_05d843fcb220900c\" | \"npc_2f77ffaa2b17e28b\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_442cc4a2312566b5\" | \"npc_6e668aeb27418b90\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_5f2a32e1a345e3f8\" | \"npc_8919b607ee4499d6\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[2].id: \"npc_616ee213b83c9166\" | \"npc_44cf5d9db38dd387\"",
++   "v102-metropolis-1 master dm=false (C) Hide all vs the hand, the twin: npcs[3].id: \"npc_6a6f3dd468451aba\" | \"npc_64c8b82c71cb8cd1\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[0].id: \"npc_14a49736533e464f\" | \"npc_8560dab72f050edb\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[1].id: \"npc_fef1bb5dd74d3737\" | \"npc_a76219664c9ed323\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[2].id: \"npc_99be607cda5cf239\" | \"npc_45e52a9e0cf807d6\"",
++   "v102-metropolis-1 master dm=false (D): the planted field:institution:whisper-market:people is served: npcs[3].id: \"npc_3f030b72434e359a\" | \"npc_ec863a930fe10960\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].id: \"npc_2120678c371dd23c\" | \"npc_4cae1140b610fd78\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_8b021f58e3cb2611\" | \"npc_9a6147785c3cf2d0\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_d8d103e802069040\" | \"npc_8bdcc98c094500a1\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: npcs[1].id: \"npc_fbddbcef42ecb810\" | \"npc_d0eae8e7661e372d\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[0].id: \"npc_c5646eb7164de956\" | \"npc_691a54412fdbd0f0\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[1].id: \"npc_80abe6a6f79a59a6\" | \"npc_a3516734ab5c8174\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[2].id: \"npc_ffb87f81b1957495\" | \"npc_0d9a47f1b6b573c5\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, link: npcs[3].id: \"npc_8333427cea78ec10\" | \"npc_f6e93bfe414c88e5\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].id: \"npc_7629de91f7d699d7\" | \"npc_4eebe76d1e121c6d\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_3cff66043a5330c2\" | \"npc_84a4166c58dee55a\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_9467cfb92d29beaf\" | \"npc_6adf804d4056f53d\"",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: npcs[1].id: \"npc_11d36cce172cd481\" | \"npc_ce78431b4defd5cd\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].id: \"npc_7f6663b49887c296\" | \"npc_06ef8a91237b699f\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.long.target.id: \"npc_415b09f5df7f69b7\" | \"npc_35b3f27ae634c4ae\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[0].goal.intent.short.target.id: \"npc_c013b24fc80cf1ed\" | \"npc_5664d8b02356a56e\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, gallery: npcs[1].id: \"npc_d4c0189046521448\" | \"npc_1aac598e95f13fa9\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[0].id: \"npc_daf6abc7ffff76b3\" | \"npc_baa8d1057d3de684\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[1].id: \"npc_edf42923c3597e69\" | \"npc_1dbabf5a78d5938b\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[2].id: \"npc_50dacdfd92c7b788\" | \"npc_687cf279b2f077b6\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, link: npcs[3].id: \"npc_ccbb414438fd942c\" | \"npc_bd44143ff1cdfbf8\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].id: \"npc_5f14a104070ebdfa\" | \"npc_5087774688e329b7\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.short.target.id: \"npc_7fb52b5fcf75c88c\" | \"npc_0585265c67fa31c4\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[0].goal.intent.long.target.id: \"npc_85d09f439214be6d\" | \"npc_93e8cdedd522bd18\"",
++   "v102-metropolis-1 master dm=true (C) Hide all vs the hand, the twin: npcs[1].id: \"npc_9f43d8b3d955df5d\" | \"npc_d6fc172ba2646f1f\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].id: \"npc_c778c641930a17c6\" | \"npc_7643678fe32c2207\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.long.target.id: \"npc_e544e9e55b596722\" | \"npc_30d64fa75bb981cc\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[0].goal.intent.short.target.id: \"npc_16b1ade340903d9f\" | \"npc_b34ad6975c22406c\"",
++   "v102-metropolis-1 master dm=true (D): the planted field:faction:faction.thieves_guild:goals is served: npcs[1].id: \"npc_01f95d1610f90f0d\" | \"npc_f56cef36622eb0bb\"",
++   "v102-metropolis-1 master dm=true (E): Zaachila Ku carries \"Smuggling network\" where the projection carried undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  12 failed | 2 passed (14)
+   Start at  01:23:43
+   Duration  148.57s (transform 6.54s, setup 47ms, import 55ms, tests 148.22s, environment 0ms)
+
+[gate-tail] end:  01:26:12 up  1:14,  0 user,  load average: 13.17, 12.49, 10.54

@@ -1,0 +1,63 @@
+    1792|     }
+    1793|     expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    1794|     expect(paths).toEqual([]);
+       |                   ^
+    1795|   }, ARM_TIMEOUT_MS);
+    1796|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/14]⎯
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > B THE TRACE BY POSITIVE ACCOUNT: on a share that hides any house whole, the trace keeps only what a native house still listed accounts for (an institution id whose fold is a listed house's catalogId or its name's fold): the reader's renamed hidden house (born Smuggling network, now The Velvet Hand; unstamped and stamped) leaves by its trace id as a target, a cause and an effect; an institution entry named bare or with no id leaves; an allegiance receipt whose house is hidden whole leaves whole (its handler and "The allegiance runs to the town's criminal power"), one that names no house leaves; what an open house accounts for stays (by its name's fold, by its catalogue identity under another name, the engine's capitalised spelling), and so does every entry that names no institution and an open house's allegiance receipt; a share that hides no house whole keeps its trace whole; every Reveal-DM read, server against twin 0 paths
+TypeError: Cannot read properties of undefined (reading 'slice')
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:1846:133
+    1844|         if (JSON.stringify(got) !== JSON.stringify(WANT)) bad.push(`${…
+    1845|         const mira = (doc.simulationTrace || []).find(e => e.targetId …
+    1846|         if (differ(mira, TRACE[10]).length) bad.push(`${what}, ${tag}:…
+       |                                                                                                                                     ^
+    1847|       }
+    1848|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > B (V10-6, ruling VR21) NO COUNTER TAKEN BEFORE A REMOVAL: the trace's ts (the engine's sequence, 0..n-1) is dense in served order on every Reveal-DM read the veil runs, whatever it withheld (a hidden house's own steps by the name search, an entry no listed house accounts for, a hidden house's allegiance receipt): no hole places a withheld step; the entries keep their order; a trace that loses nothing keeps its stored ts; server against twin 0 paths
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "V10-6: veil/gallery: $.npcs[0].id | server \"npc_5811a48fb6ea06b0\" | twin \"npc_11875b9793ed23df\"",
++   "V10-6: veil/import: $.npcs[0].id | server \"npc_babb78532fce5014\" | twin \"npc_11875b9793ed23df\"",
++   "V10-6: dm/gallery: $.npcs[0].id | server \"npc_370c7f9ed51f7ccf\" | twin \"npc_726788dc98f42f4f\"",
++   "V10-6: dm/import: $.npcs[0].id | server \"npc_16b4d9aa8e5d9aac\" | twin \"npc_726788dc98f42f4f\"",
++   "V10-6: veil/link: $.npcs[0].id | server \"npc_785e6373c1630112\" | twin \"npc_11875b9793ed23df\"",
++   "V10-6: dm/link: $.npcs[0].id | server \"npc_5ad7f935630aa341\" | twin \"npc_11875b9793ed23df\"",
++   "V10-6 KEEP: veil/gallery: $.npcs[0].id | server \"npc_e32f8161fed0ecff\" | twin \"npc_b34d542045b39b50\"",
++   "V10-6 KEEP: veil/import: $.npcs[0].id | server \"npc_a6684b6f167de6a0\" | twin \"npc_b34d542045b39b50\"",
++   "V10-6 KEEP: dm/gallery: $.npcs[0].id | server \"npc_9d03d83944902b0b\" | twin \"npc_0e22b936aab9fdab\"",
++   "V10-6 KEEP: dm/import: $.npcs[0].id | server \"npc_22fb86114a0b0833\" | twin \"npc_0e22b936aab9fdab\"",
++   "V10-6 KEEP: veil/link: $.npcs[0].id | server \"npc_a9da96338813b47c\" | twin \"npc_b34d542045b39b50\"",
++   "V10-6 KEEP: dm/link: $.npcs[0].id | server \"npc_ac76a70b16f60a9d\" | twin \"npc_b34d542045b39b50\"",
++ ]
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:1893:19
+    1891|     }
+    1892|     expect(bad, `${bad.length} holes or losses`).toEqual([]);
+    1893|     expect(paths).toEqual([]);
+       |                   ^
+    1894|   }, ARM_TIMEOUT_MS);
+    1895|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  14 failed | 11 passed (25)
+   Start at  01:21:36
+   Duration  125.95s (transform 1.86s, setup 27ms, import 365ms, tests 125.39s, environment 0ms)
+
+[gate-tail] end:  01:23:42 up  1:11,  0 user,  load average: 13.78, 11.15, 9.78
+[gate-tail] full log: /tmp/gate-tail.19388.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

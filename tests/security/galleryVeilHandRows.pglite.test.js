@@ -110,6 +110,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { canonPeople, notBijective, readsDiffer, unkeyPeople } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
@@ -182,6 +183,24 @@ function differ(a, b) {
   }
   return out;
 }
+/**
+ * VR46 (R4I-PAGE-3, VEIL-38 G2): the server's read and the client's twin each re-key every person id under a salt of
+ * their own (VR10), so they are compared MODULO EACH READ'S PERSON-ID BIJECTION AND NOTHING ELSE (`canonPeople`, every
+ * other byte by `differ` as before), with the teeth the pair can carry: (ii) every served person or tie id is one the
+ * re-key made (`npc_`/`tie_` and 16 hex: a stored id served un-re-keyed reds); (iv) no two cards of one read under one
+ * id; (v) the two reads share no person id. Tooth (i) and (iii) bite through the canonical comparison itself.
+ */
+const FRESH_ID = /^(npc|tie)_[0-9a-f]{16}$/;
+function differServed(a, b) {
+  if (!isRec(a) || !isRec(b)) return differ(a, b);
+  const ca = canonPeople(a); const cb = canonPeople(b);
+  const out = differ(ca.doc, cb.doc);
+  for (const [side, c] of [['server', ca], ['twin', cb]]) for (const v of c.names.keys()) if (!FRESH_ID.test(String(v))) out.push(`VR46 (ii): the ${side} serves a person id the re-key did not make: ${String(v).slice(0, 60)}`);
+  for (const [side, d] of [['server', a], ['twin', b]]) out.push(...notBijective(d).map((x) => `VR46 (iv): the ${side}: ${x}`));
+  const shared = readsDiffer(a, b);
+  if (shared.length && shared[0] !== '(the first read serves no person id)') out.push(`VR46 (v): server and twin share ${shared.length} person ids`);
+  return out;
+}
 /** A value nested `depth` containers deep (arrays and records in turn). */
 function nested(depth, bottom) {
   let v = bottom;
@@ -245,7 +264,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     shares.flatMap(s => reads.map(k => ({ tag: `${s}/${k}`, doc: r[s][k] })));
   const cardAddress = (card) => `card:institution:${veil.CARD_KINDS.institution.idOf(card)}`;
   /** SERVER AGAINST TWIN: the paths at which the gallery read and the client's twin differ, on the two veiled shares. */
-  const twinDiffers = (r) => ['veil', 'dm'].flatMap(s => differ(r[s].gallery, r[s].client).map(d => `${s}: ${d}`));
+  const twinDiffers = (r) => ['veil', 'dm'].flatMap(s => differServed(r[s].gallery, r[s].client).map(d => `${s}: ${d}`));
 
   it('V7-3: a house hidden whole is removed whole by its id alone: in the class by a declared facet, by a subterranean facet, or as an illegal brokerage alone, with the function eye shut', async () => {
     const hidden = [
@@ -1234,7 +1253,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const bad = []; const differs = [];
     const publicReads = (r) => [...each(r, ['base', 'veil']), ...each(r, ['dm'], ['link'])];
     const dmKeeps = (r) => each(r, ['dm'], ['gallery', 'import', 'client']);
-    const engines = (what, r) => ['base', 'veil', 'dm'].flatMap(s => differ(r[s].gallery, r[s].client).map(d => `${what}, ${s}: ${d}`));
+    const engines = (what, r) => ['base', 'veil', 'dm'].flatMap(s => differServed(r[s].gallery, r[s].client).map(d => `${what}, ${s}: ${d}`));
     const OPEN_COPY = { npc1: 'Orrin Vale', npc2: 'Mira Vane', type: 'Rivals', full: 'They split the docks.', phrasing: 'Orrin Vale and Mira Vane split the docks.' };
     // [what, town, needles that must not arrive on a public read, whether the pressure sentence goes on a public read]
     const PLANTS = [
@@ -1476,7 +1495,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     // SERVER AGAINST TWIN, every read: the gallery read and the import against the twin of their share, the party link
     // (which never reveals the DM's layer) against the twin of the veiled share
     expect(twinDiffers(r)).toEqual([]);
-    expect(['veil', 'dm'].flatMap(s => [...differ(r[s].import, r[s].client).map(d => `${s}/import: ${d}`), ...differ(r[s].link, r.veil.client).map(d => `${s}/link: ${d}`)])).toEqual([]);
+    expect(['veil', 'dm'].flatMap(s => [...differServed(r[s].import, r[s].client).map(d => `${s}/import: ${d}`), ...differServed(r[s].link, r.veil.client).map(d => `${s}/link: ${d}`)])).toEqual([]);
 
     // THE PREMISES, on this engine (asked by plain SQL and 212's helpers of the base too, so the arm is green on the base's
     // bytes). (i) THE MARKS ARE THE TOKENS: a list of every code point of every plane (U+0000 and the surrogates aside),
@@ -1614,8 +1633,8 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       for (const s of ['veil', 'dm']) {
         const tw = r[s].client.doc;
         if (!tw) continue;
-        for (const k of ['gallery', 'import']) if (r[s][k].doc) paths.push(...differ(r[s][k].doc, tw).map(d => `${row}: ${s}/${k}: ${d}`));
-        if (r[s].link.doc && r.veil.client.doc) paths.push(...differ(r[s].link.doc, r.veil.client.doc).map(d => `${row}: ${s}/link: ${d}`));
+        for (const k of ['gallery', 'import']) if (r[s][k].doc) paths.push(...differServed(r[s][k].doc, tw).map(d => `${row}: ${s}/${k}: ${d}`));
+        if (r[s].link.doc && r.veil.client.doc) paths.push(...differServed(r[s].link.doc, r.veil.client.doc).map(d => `${row}: ${s}/link: ${d}`));
       }
       bad.push(...paths.slice(0, 5));
       if (!closed) exact[row] = r;
@@ -1637,8 +1656,8 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
   /** Every read of the two veiled shares (gallery, link, import, the twin), and the server against the twin: gallery and import against the twin of their share, the party link against the twin of the veiled share. */
   const everyRead = (r) => each(r, ['veil', 'dm']);
   const enginePaths = (what, r) => [
-    ...['veil', 'dm'].flatMap(s => ['gallery', 'import'].flatMap(k => differ(r[s][k], r[s].client).map(d => `${what}: ${s}/${k}: ${d}`))),
-    ...['veil', 'dm'].flatMap(s => differ(r[s].link, r.veil.client).map(d => `${what}: ${s}/link: ${d}`)),
+    ...['veil', 'dm'].flatMap(s => ['gallery', 'import'].flatMap(k => differServed(r[s][k], r[s].client).map(d => `${what}: ${s}/${k}: ${d}`))),
+    ...['veil', 'dm'].flatMap(s => differServed(r[s].link, r.veil.client).map(d => `${what}: ${s}/link: ${d}`)),
   ];
   /** The rows of the walls' list a read sends, by name. */
   const wallsOf = (doc) => (Array.isArray(doc?.defenseProfile?.institutions?.walls) ? doc.defenseProfile.institutions.walls : []);
@@ -1838,11 +1857,14 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
         if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
         for (const n of ['smuggling_network', 'smuggling network', 'Velvet', 'gtr1', 'gtr2', 'gtr3', 'gtr4', 'gtr5', 'gpow1', 'gpow2', 'gpow3', 'npc_veiled_gh']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
         if (!tag.startsWith('dm/') || tag === 'dm/link') continue;
-        // KEEP: what an open house accounts for, every entry that names no institution, the open house's allegiance receipt
-        const got = (Array.isArray(doc.simulationTrace) ? doc.simulationTrace : []).map(e => ({ targetId: e.targetId,
+        // KEEP: what an open house accounts for, every entry that names no institution, the open house's allegiance receipt.
+        // VR46 (R4I-PAGE-3): the trace's person targets read modulo the read's person-id bijection (unkeyPeople against the
+        // stored town; it throws where a stored person id is served or two people share one id)
+        const u = unkeyPeople(doc, town);
+        const got = (Array.isArray(u.simulationTrace) ? u.simulationTrace : []).map(e => ({ targetId: e.targetId,
           ...(e.targetId === 'institution.fish_market' ? { causes: (e.causes || []).map(c => c.reason), effects: (e.downstreamEffects || []).map(x => x.effect) } : {}) }));
         if (JSON.stringify(got) !== JSON.stringify(WANT)) bad.push(`${what}, ${tag}: the trace is ${JSON.stringify(got).slice(0, 300)}`);
-        const mira = (doc.simulationTrace || []).find(e => e.targetId === 'npc.mira');
+        const mira = (u.simulationTrace || []).find(e => e.targetId === 'npc.mira');
         if (differ(mira, TRACE[10]).length) bad.push(`${what}, ${tag}: the open house's allegiance receipt is ${JSON.stringify(mira).slice(0, 200)}`);
       }
     }
@@ -2015,7 +2037,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     ];
     for (const [what, t, deltas, want, proseGoes] of ROWS) {
       const r = await sharesOf(t, deltas);
-      paths.push(...enginePaths(what, r), ...differ(r.base.gallery, r.base.client).map(d => `${what}: base/gallery: ${d}`));
+      paths.push(...enginePaths(what, r), ...differServed(r.base.gallery, r.base.client).map(d => `${what}: base/gallery: ${d}`));
       for (const { tag, doc } of [...everyRead(r), ...each(r, ['base'])]) {
         if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
         const rows = doc.economicState?.incomeSources;
@@ -2040,4 +2062,24 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+});
+
+// VR46 (R4I-PAGE-3, VEIL-38 G2): THE FIVE TEETH of `differServed`, the re-stated server-and-twin comparison, on two reads of
+// one town through the twin (each its own salt, as the server's and the twin's are): each mutation of one read must make the
+// comparison red.
+describe('VR46: the teeth of the server-and-twin comparison modulo the bijection (R4I-PAGE-3)', () => {
+  it('a moved reference, a stored id served, a changed byte, two people under one id, one person under two ids and two reads sharing ids each red', async () => {
+    const { projectShareVeil, galleryPayloadFor } = await import('../../src/domain/display/galleryVeil.js');
+    const { bijectionTeeth } = await import('./personIdBijection.shared.mjs');
+    const town = { name: 'Teethwick', tier: 'town', institutions: [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      npcs: [{ id: 'npc.mira', name: 'Mira Vane', role: 'Fence', allegiance: { handler: 'npc.tam' } }, { id: 'npc.tam', name: 'Tam Reed', role: 'Smith' }],
+      relationships: [{ id: 'tie_a', from: 'npc.mira', to: 'npc.tam', type: 'lover', description: 'A boat.' }] };
+    const read = () => projectShareVeil(galleryPayloadFor(JSON.parse(JSON.stringify(town)), { shareDm: true, memberOverrides: {} }), {});
+    const [server, twin] = [read(), read()];
+    expect(differServed(server, twin), 'the two clean reads agree modulo the bijection').toEqual([]);
+    const { missed, absent } = bijectionTeeth(server, (c) => differServed(c, twin).length === 0, { storedId: 'npc.mira', again: read() });
+    expect(missed).toEqual([]);
+    expect(absent).toEqual([]);
+    expect(differServed(server, server).some((x) => x.startsWith('VR46 (v)')), 'one read against itself shares every id').toBe(true);
+  });
 });
