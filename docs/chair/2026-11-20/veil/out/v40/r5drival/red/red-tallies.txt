@@ -1,0 +1,12 @@
+== measures-A-0-2.txt
+R5DRV plants: faults 36 
+R5DRV pools: {"places":39,"births":141,"rivals":57,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":96,"reads":768,"rivalReads":1200,"rivalServed":1184,"lone":448,"q3Shown":8,"q3Own":0,"rosterMiss":0,"baseDiff":0,"lone hide shown":448}
+== measures-A-1-2.txt
+R5DRV plants: faults 36 
+R5DRV pools: {"places":39,"births":141,"rivals":59,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":97,"reads":776,"rivalReads":1248,"rivalServed":1232,"lone":472,"q3Shown":56,"q3Own":0,"rosterMiss":0,"baseDiff":0,"lone hide shown":472}
+== measures-C6-0-2.txt
+R5DRV plants: faults 36 
+R5DRV pools: {"places":78,"births":480,"rivals":115,"rivalsGoverning":0,"rivalsOwnStamp":0,"records":193,"reads":1544,"rivalReads":2432,"rivalServed":2432,"lone":920,"q3Shown":16,"q3Own":0,"rosterMiss":0,"baseDiff":0,"lone hide shown":920}
+== measures-C6-1-2.txt
+R5DRV plants: faults 36 
+R5DRV pools: {"places":77,"births":480,"rivals":113,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":190,"reads":1520,"rivalReads":2384,"rivalServed":2368,"lone":896,"q3Shown":24,"q3Own":0,"rosterMiss":0,"baseDiff":0,"lone hide shown":896}

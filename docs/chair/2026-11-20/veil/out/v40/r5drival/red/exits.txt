@@ -1,0 +1,6 @@
+full: tree /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/snap9b1 queued 2026-11-23T09:30:45Z
+shard-A-0-2 rc=1 2026-11-23T13:20:48Z
+shard-A-1-2 rc=1 2026-11-23T13:21:13Z
+shard-C6-0-2 rc=1 2026-11-23T13:38:01Z
+shard-C6-1-2 rc=1 2026-11-23T13:38:01Z
+full rc=1 2026-11-23T13:38:01Z

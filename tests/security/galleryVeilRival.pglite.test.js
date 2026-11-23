@@ -28,7 +28,8 @@
  *     Q2   EVERY SERVED RIVAL HAS ITS HOST SERVED BESIDE IT (served: a row neither stamped nor masked);
  *     Q3   no case form of a withheld power's name (the name; its bare form; without a leading "The"; its singular; each with
  *          an optional leading "the " and a plural or possessive ending; case-blind) in any SERVED power's desc, each hit
- *          listed by its exact form (asserted at `shown`, the measure's setting; counted and listed at `own`);
+ *          listed by its exact form (asserted at `shown`, the measure's setting; counted and listed at `own`); ONE CLASS LISTED
+ *          (Q3_LISTED: act T's governing seat's own base, "A noble family rules", counted, the seat's to rule);
  *     ROSTER server = twin on the served roster at each door (ruling 110: each row's list, name, form (open, stamped,
  *          masked) and base, the base by the JS reference cut; no whole-document arm);
  *     NEVER THERE (`shown`) the same place with the withheld powers and houses NEVER THERE, THE CLOSURE TAKEN (every row
@@ -283,6 +284,10 @@ describe('R5D-RIVAL: the rival leaves with its host (the chair\'s N63), both eng
   // the never-there reads. The arm's own run sets neither.
   const SETTINGS = (process.env.R5DRV_SETTINGS || 'shown,own').split(',').filter((x) => x === 'shown' || x === 'own');
   const NEVER = process.env.R5DRV_NEVER !== '0';
+  /** THE ONE LISTED Q3 CLASS (the seat's to rule; R5DPAGE-B-5B-MEASURE's "the seat's own label text, a different class"): on act T,
+   * the GOVERNING seat's own base names its form of government ("A noble family rules; ..."), which the hidden taker's name holds
+   * in lower case and the singular. No rival's text: the ruling rejects masking case forms. Counted (q3Listed), never a fault. */
+  const Q3_LISTED = Object.freeze([{ rec: /^jp6-city-8 act T/, withheld: 'Noble Families', in: 'Royal Authority', text: 'noble family' }]);
   const P_SIZES = Object.freeze(['village', 'town', 'town', 'city', 'city', 'metropolis', 'metropolis']);
   const P_CRISES = Object.freeze(['none', 'infiltrated', 'none', 'insurgency', 'occupied', 'indebted', 'none', 'under_siege', 'wartime', 'politically_fractured']);
   const C6_SIZES = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
@@ -390,6 +395,8 @@ describe('R5D-RIVAL: the rival leaves with its host (the chair\'s N63), both eng
                   q3Forms.set(key, (q3Forms.get(key) || 0) + 1);
                   if (setting === 'shown') tally.q3Shown += 1; else tally.q3Own += 1;
                   emit({ k: 'q3', setting, rec: r.rec, dm, eng, door, withheld: N, in: nameOf(f), form: hit.form, text: hit.text, desc: f.desc });
+                  const listed = Q3_LISTED.some((x) => x.rec.test(r.rec) && x.withheld === N && x.in === nameOf(f) && x.text === hit.text && f.isGoverning === true);
+                  if (listed) { tally.q3Listed = (tally.q3Listed || 0) + 1; continue; }
                   if (setting === 'shown' && faults.length < 400) faults.push(`${tag}: Q3 ${J(hit.text)} (${hit.form}, of the withheld ${N}) in the desc of ${nameOf(f)}`);
                 }
               }
