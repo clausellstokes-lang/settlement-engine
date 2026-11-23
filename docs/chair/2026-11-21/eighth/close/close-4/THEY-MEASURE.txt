@@ -1,0 +1,17 @@
+STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[1].line	r	«'s people will be, and where they»
+    Silas Brent's operation runs on a schedule Rhona Ashby provides: where her people will be, and where they will not.
+STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[5].line	r	«'s people are sent out, and sends them»
+    Rhona Ashby warns Silas Brent before her people are sent out, and sends them after the competitors he names.
+STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[7].line	r	«'s people go, and Silas Brent pays for their»
+    Rhona Ashby chooses where her people go, and Silas Brent pays for their routes.
+STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[1].line	s	«holds enough to finish Rhona Ashby, so the two of them»
+    Rhona Ashby knows enough to ruin Silas Brent, and he holds enough to finish her, so the two of them work together very carefully.
+STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[1].line	r	«, so the two of them»
+    Rhona Ashby knows enough to ruin Silas Brent, and he holds enough to finish her, so the two of them work together very carefully.
+STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[8].line	s	«cannot finish theirs»
+    Rhona Ashby cannot finish what they have started without Silas Brent's help, and he cannot finish theirs without her.
+STRESS_ECONOMIC_EFFECTS.mutual_leverage.tension[12].line	s	«would rather keep to themselves»
+    Rhona Ashby has asked Silas Brent for an introduction he would rather keep to themselves.
+STRESS_ECONOMIC_EFFECTS.genuine_respect.desc[3].line	s	«sends them»
+    Rhona Ashby sends difficult cases to Silas Brent, and he sends them back solved.
+candidates 8 templates 7
