@@ -3781,7 +3781,7 @@
     },
     "tests/domain/facts/census2gDailyLifePriest.test.js": {
       "kind": "rationale",
-      "rationale": "CENSUS-2g unit 3 (2d4608c8f): the Daily Life paragraph [1] declares guardPresence and priest and keeps its words (src/components/new/tabs/DailyLifeTab.jsx, read by the census's literal reader). IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE NEGATIVE CONTROL (LANDING-R2 seat E, 2026-11-07, at 104654b43): 'Farmers, haulers, priests, guards, and tradespeople' -> the priests dropped -> 1 failed / 23. File restored byte-exact from a cp backup (cmp equal; git diff clean) and the file green again. A standing sweep plant would re-run that identical check while mutating a module the generation suites share."
+      "rationale": "CENSUS-2g unit 3 (2d4608c8f): the `priest` atom refuses the declaration where no senior cleric is named and admits it where one is. DAILY-3 U4b (2026-11-22): the two arms that read the Daily Life paragraph [1] left with buildLocalDailyLifeNarrative (the in-place negative control of LANDING-R2 seat E, 2026-11-07 at 104654b43, 'the priests dropped -> 1 failed / 23', was on those arms). IT IS A RATIONALE BECAUSE THE ARM THAT STAYS IS TWO-SIDED BY CONSTRUCTION: one declaration is asserted REFUSED on a record without a senior cleric and ADMITTED on one with, so a `priest` reader answering a constant fails one half. A standing sweep plant would mutate factVocabulary.js, a module every generation suite shares."
     },
     "tests/domain/facts/census2gDecreeConnectives.test.js": {
       "kind": "rationale",

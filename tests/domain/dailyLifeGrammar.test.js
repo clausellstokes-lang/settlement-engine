@@ -23,9 +23,16 @@ describe('the daily-life lines read as sentences (C-L4)', () => {
     lines = [born('r2r-village-0', 'village'), born('r2r-thorp-0', 'thorp'), born('r2r-thorp-19', 'thorp')].flatMap(summarizeDailyLife);
   }, 120000);
 
+  // DAILY-3 B3 E3 (LINES-2 § 3): the possessive line is now one of the power pool's keyed picks, so the three births need
+  // not print it; the meaning is kept on a record whose top power is plural (a nameless record takes the pool's index 0,
+  // the possessive line), and no born line forms the possessive by hand.
   it('a plural power takes a bare apostrophe ("Merchant Guilds\' mark")', () => {
-    expect(lines.some((l) => /Merchant Guilds' mark/.test(l))).toBe(true);
-    expect(lines.filter((l) => /(?:ies|[bcdfghjklmnpqrtvwxyz]s)'s mark/.test(l))).toEqual([]);
+    const planted = summarizeDailyLife({ powerStructure: { factions: [
+      { id: 'faction.merchants', name: 'Merchant Guilds', faction: 'Merchant Guilds', power: 60 },
+      { id: 'faction.council', name: 'Town Council', faction: 'Town Council', power: 30 },
+    ] } });
+    expect(planted.some((l) => /Merchant Guilds' mark/.test(l))).toBe(true);
+    expect([...lines, ...planted].filter((l) => /(?:ies|[bcdfghjklmnpqrtvwxyz]s)'s mark/.test(l))).toEqual([]);
   });
   it('no slot repeats its label inside its text', () => {
     expect(lines.filter((l) => /^([^:]+): \1:/.test(l))).toEqual([]);

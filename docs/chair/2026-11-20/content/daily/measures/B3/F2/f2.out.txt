@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 28238 after 2 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/F2/measure.f2.mjs > docs/chair/2026-11-20/content/daily/measures/B3/F2/f2.out.txt 2>&1
+births: 900 (150 a size, M1's recipe) in 145s
+the crime55 branch: 85 places; a printed text not the branch's keyed pick of the admitted lines: 0
+places holding a smuggling house (causeHouseStands): 248 of 900; of the crime55 branch: 41
+
+════ commoner_resentments_dm (the owner's read), the crime55 branch
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| crime55 places (of 150) | 10 | 11 | 3 | 11 | 25 | 25 |
+| BEFORE top single SENTENCE % of 150 (the branch without the four; F1's unit) | 3 | 3 | 1 | 3 | 8 | 8 |
+| AFTER top single SENTENCE % of 150 | 3 | 3 | 1 | 3 | 8 | 5 |
+| BEFORE top % of the branch's places | 50 | 45 | 67 | 45 | 48 | 48 |
+| AFTER top % of the branch's places | 50 | 45 | 67 | 36 | 48 | 28 |
+  thorp: BEFORE (5/150) "People grumble that those who break the rules do better here than those who keep them." | AFTER (5/150) "People grumble that those who break the rules do better here than those who keep them."
+  hamlet: BEFORE (5/150) "People grumble that those who break the rules do better here than those who keep them." | AFTER (5/150) "People grumble that those who break the rules do better here than those who keep them."
+  village: BEFORE (2/150) "Honest folk say that crime pays better here than work." | AFTER (2/150) "Honest folk say that crime pays better here than work."
+  town: BEFORE (5/150) "Honest folk say that crime pays better here than work." | AFTER (4/150) "Honest folk say that crime pays better here than work."
+  city: BEFORE (12/150) "People resent how little is done about wrongdoing that everyone knows of." | AFTER (12/150) "People resent how little is done about wrongdoing that everyone knows of."
+  metropolis: BEFORE (12/150) "People grumble that those who break the rules do better here than those who keep them." | AFTER (7/150) "Commoners resent the smugglers who pay no tax while honest carts queue."
+
+════ K55_0 to K55_3: printed, and FALSE (printed where a need does not hold, read from its home)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| K55_0 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 1 (1) | 5 (7) |
+| FALSE K55_0 printed with no smuggling house | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE K55_0 printed with no gate | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE K55_0 printed with no route open | 0 | 0 | 0 | 0 | 0 | 0 |
+| K55_1 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 1 (2) | 3 (4) |
+| FALSE K55_1 printed with no smuggling house | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE K55_1 printed with no market | 0 | 0 | 0 | 0 | 0 | 0 |
+| K55_2 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 2 (3) | 3 (5) |
+| FALSE K55_2 printed with no smuggling house | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE K55_2 printed with no market | 0 | 0 | 0 | 0 | 0 | 0 |
+| K55_3 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 1 (1) | 1 (1) |
+| FALSE K55_3 printed with no smuggling house | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE K55_3 printed with no route open | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE any /smuggl/ printed with no smuggling house standing | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE any /smuggl/ printed off the crime55 branch | 0 | 0 | 0 | 0 | 0 | 0 |
+
+FALSE-LINE TOTAL (every FALSE row above, and the keyed-pick check): 0
+
+done in 145s

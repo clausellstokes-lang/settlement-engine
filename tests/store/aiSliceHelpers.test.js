@@ -7,7 +7,6 @@ import { buildAiDataBlob } from '../../src/store/aiPersistenceEnvelope.js';
 import { buildChronicleContextFromSave } from '../../src/store/aiChronicleContext.js';
 import {
   aiRequestDisposition,
-  DAILY_LIFE_FIELD_LABELS,
   NARRATIVE_FIELD_LABELS,
   ROTATING_AI_PROGRESS,
 } from '../../src/store/aiRequestLifecycle.js';
@@ -58,10 +57,8 @@ describe('AI slice helpers', () => {
 
   it('keeps request copy tables complete and immutable', () => {
     expect(Object.keys(NARRATIVE_FIELD_LABELS)).toHaveLength(12);
-    expect(Object.keys(DAILY_LIFE_FIELD_LABELS)).toHaveLength(5);
     expect(ROTATING_AI_PROGRESS.length).toBeGreaterThan(2);
     expect(Object.isFrozen(NARRATIVE_FIELD_LABELS)).toBe(true);
-    expect(Object.isFrozen(DAILY_LIFE_FIELD_LABELS)).toBe(true);
     expect(Object.isFrozen(ROTATING_AI_PROGRESS)).toBe(true);
   });
 });

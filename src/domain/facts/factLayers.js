@@ -257,6 +257,8 @@ export const LEAVES = Object.freeze({
   causeHouses: home('causeHouses', 1, ['institutions']),
   // PAGE-7 (CAUSES-DATA addendum 4): goods pass through here, the economy's stored mark (`entrepot.js`; layer 2 over the economy)
   entrepot: home('entrepot', 2, ['economicState']),
+  // DAILY-3 B3 L8 (the chair's E82): the office the place is governed by, the governing row's form (`officeForms.js`; layer 3 over the powers)
+  office: home('office', 3, ['powerStructure']),
 });
 
 /**
