@@ -1,3 +1,19 @@
+diff --git a/tests/components/governingModifierSurfaces.test.jsx b/tests/components/governingModifierSurfaces.test.jsx
+index 3a151aa3f..1ba50ff0e 100644
+--- a/tests/components/governingModifierSurfaces.test.jsx
++++ b/tests/components/governingModifierSurfaces.test.jsx
+@@ -24,7 +24,10 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
+   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+ /** seed -> [the stored key, the Power tab's words ('' = silent)] */
+ const TOWNS = {
+-  'r2r-city-56': ['arcane-advised', 'mage counsel'],
++  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (THE GUARD KEPT WHOLE): r2r-city-56's governing row lit stands seventh on the roster, out of the Summary
++  // legend's five; the lowest r2r-city whose ruler stores arcane-advised, whose Power tab prints "mage counsel", and whose
++  // governing row is in the five is city-17 (17 33 39 45 49 77 78 ... of 200; 56 the only one out of the five)
++  'r2r-city-17': ['arcane-advised', 'mage counsel'],
+   'r2r-village-36': ['church-guided', 'church guidance'],
+   'r2r-metropolis-16': ['military-dominated', 'armed sway'],
+   'r2r-hamlet-28': ['mage-advised', ''], // no arcane house: silent on every surface
 diff --git a/tests/components/magicAudience.test.jsx b/tests/components/magicAudience.test.jsx
 index ee81eba69..03b6330a2 100644
 --- a/tests/components/magicAudience.test.jsx
@@ -42,6 +58,22 @@ index 104c47994..ada251a10 100644
    'r2s-famine-village-1', // Military/Guard gains
    'r2s-politically_fractured-town-2', // Military/Guard is already at odds
    'r2s-politically_fractured-town-3', // Third Bloc (Neutrals) split
+diff --git a/tests/components/tailDisplayCivicBatch2.test.jsx b/tests/components/tailDisplayCivicBatch2.test.jsx
+index a10e741a3..e6aac6225 100644
+--- a/tests/components/tailDisplayCivicBatch2.test.jsx
++++ b/tests/components/tailDisplayCivicBatch2.test.jsx
+@@ -51,7 +51,10 @@ const CURED = [
+ const KEPT = [
+   ['r2r-city-1', 'Merchant Guilds~Craft Guildsstable'],
+   ['r2r-city-0', 'Merchant City Council⇌Military/Guardstable'],
+-  ['r2r-metropolis-31', 'Noble Houses↔Royal Authorityescalating'],
++  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-metropolis-31's Noble Houses and Royal Authority lit hold only a moderate quarrel, so the pair prints
++  // "declining"; the lowest r2r-metropolis whose conflicts hold the pair at HIGH and print this line is metropolis-173 (the pair
++  // at HIGH in 51 88 173 of 200; 51 and 88 are tense and subordinate rows)
++  ['r2r-metropolis-173', 'Noble Houses↔Royal Authorityescalating'],
+   ['r2r-city-10', 'The Highborn Circle↔Merchant Guild Councildeclining'],
+ ];
+ const LINES = new Map();
 diff --git a/tests/data/catalogGuildTag.test.js b/tests/data/catalogGuildTag.test.js
 index 9c20d64a4..56e786f47 100644
 --- a/tests/data/catalogGuildTag.test.js
@@ -220,6 +252,23 @@ index 7c7fc78f7..f80543fbf 100644
    'r2r-town-31': ['equilibrium', 'Nobody at the head of the Guild Council'], // NAMES-1 (CN1): the article; the climate alone (TAIL-POWERS-B re-keyed by identity: "... and Guild Council has not set out to stamp ...")
  };
  /** an equilibrium hall with a lesser agent ("The third of Elder Council answers to ..."): the chip is silent, never a hidden tie's tell */
+diff --git a/tests/domain/display/tensionCause.test.js b/tests/domain/display/tensionCause.test.js
+index 22a957534..a079fda89 100644
+--- a/tests/domain/display/tensionCause.test.js
++++ b/tests/domain/display/tensionCause.test.js
+@@ -239,7 +239,11 @@ describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)',
+     }
+   });
+   describe('the three plain-toPublicSafe faults (PAGE-9 caf3509e7, build/CAUSES-WIRING-PARITY/pairs.2026-11-20.txt)', () => {
+-    const WANT = ['r2r-city-19', 'r2s-religious_conversion-city-0', 'r2s-wartime-metropolis-2'];
++    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-19 and r2s-wartime-metropolis-2 lit carry no payCut on the owner record (the purse lifted);
++    // of the census plan's 720 the lowest r2r-city reborn with payCut and a crime wave is city-57 (alone of 0..59), and no
++    // metropolis of the plan is, so the wartime fault's row takes the plan's other such city, r2s-recently_betrayed-city-1
++    // (A JUDGEMENT, AT ANOTHER SIZE; the plan's r2s and r2r-metropolis births hold two: it and r2s-religious_conversion-city-0)
++    const WANT = ['r2r-city-57', 'r2s-religious_conversion-city-0', 'r2s-recently_betrayed-city-1'];
+     /** @type {Array<[string, any]>} */ let faults = [];
+     beforeAll(async () => {
+       const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
 diff --git a/tests/domain/famineStoresOneRounding.test.js b/tests/domain/famineStoresOneRounding.test.js
 index dea3f7d13..2c6351dda 100644
 --- a/tests/domain/famineStoresOneRounding.test.js
@@ -530,10 +579,23 @@ index 479e3ded5..84253cb66 100644
  ]);
  
 diff --git a/tests/generators/bar3PlacesRows.test.js b/tests/generators/bar3PlacesRows.test.js
-index 21c8fb6db..3e3fafc4b 100644
+index 21c8fb6db..ec0c7ae4a 100644
 --- a/tests/generators/bar3PlacesRows.test.js
 +++ b/tests/generators/bar3PlacesRows.test.js
-@@ -164,7 +164,9 @@ describe('BAR3-PLACES-2: the routed rows read the town', () => {
+@@ -95,7 +95,11 @@ describe('BAR3-PLACES: the rows read the town', () => {
+     // declared cure withdraws (7a4b48a84, BAR3-DEFECON-HANDBACK `flags.theocraticEconomy`: its tithes row, 12%, is not
+     // the income record's largest); r2r-town-54 (a Strong Feudal Appointee beside Strong Religious Authorities) is the
+     // one town of the census's 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 -> 1)
+-    ['C18651 no power over the seat', 'r2r-town-54', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
++    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-town-54's theocratic flag lit falls (its faith at Significant), and
++    // no r2r town of any size (0..199) nor r2s town, city or metropolis (0..11) prints the note lit (its four flagged towns are
++    // governed by a Church Council); the lowest of the file's read families that prints it is bar0-town-calm-rand-103 (a Feudal
++    // Appointee beside the flagged economy; of every bar0 shape's 0..199)
++    ['C18651 no power over the seat', 'bar0-town-calm-rand-103', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+     ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
+     ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
+     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
+@@ -164,7 +168,9 @@ describe('BAR3-PLACES-2: the routed rows read the town', () => {
  
    /** [row, seed, must not print, what prints instead] */
    const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
