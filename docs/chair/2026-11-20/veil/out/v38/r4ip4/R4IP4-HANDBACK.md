@@ -85,7 +85,14 @@ twin's three extra all on `npc.bo` (`revealDm: true`): `npcs[3].goal.intent.shor
 4. `tests/security` WHOLE at c7e60ef59: QUEUED, NOT READ (chainF, through the mutex, after the stored-ids chain; writes
    logs/r4-security-whole.txt). Expected by class: shareRenderTwice's rows (R4I-TONIGHT's), criminalSwitchHandReach's 5 (the
    G3 STOP), VS1-free (not in tests/security), galleryVeilSignalCopies 2 (the tip's); RULING 4 green now.
-5. `tests/lint` WHOLE at c7e60ef59: QUEUED in the same chain, first (logs/l-lint-whole.txt). See below if read.
+5. `tests/lint` WHOLE at c7e60ef59 (through the mutex; logs/l-lint-whole.full.txt): **52 failed | 3,252 passed of 3,304**
+   (18 files) against af708f2fd's 48: by name, the tip's 48 all still red, and FOUR NEW, NONE FROM THIS UNIT'S COMMITS (no src
+   touched; never lint-run by R4I-PAGE-2/3):
+   - `netCurrentExtractorAnchor` 1: `tests/security/criminalSwitchSalt.test.js:114`, an unanchored create-or-replace-function
+     regex (R4I-PAGE-2's S1 walker). Cure: anchor it (`^` with the `m` flag), as the walker says. NOT DONE (budget).
+   - `writerReach` 3 (the frozen register, the banked cohort, two mutants): src identities moved since af708f2fd: "veiled on
+     allegiance" lost `web-display` from its surfaceReach; "salt on reasons" is a new dark identity (PLAUSIBLE: R4-IDS's re-key /
+     S1's `{ salt }`). Cure: the register's rows, the seat's to rule (a frozen register of src writers). NOT DONE (budget).
 STORED-IDS (ruling (e)), `stored-ids.sh` re-run on both sets at c7e60ef59 through the mutex (logs/st-ids-*.txt; outdirs
 `/var/tmp/r4ip4/ids-{today,master}`): GATE GREEN both, exit 0. Today-born 140 / master-born 140: (1) withheld names in ids,
 keys, slugs: 0 / 0; (2) stored ids served un-re-keyed: 0 / 0, in stored-only fields 0 / 0; (3) ids shared by two reads 0 / 0,
@@ -93,7 +100,7 @@ unresolved beyond the stored own dangling 0 / 0; (4) re-keyed ids/refs/ties 26,7
 controls caught 700/700 and 140/140 on both. Fresh-shaped stored ids: 0 / 0 (above).
 
 ## LEFT (exact commands; every test command with the `env -u GIT_DIR ...` prefix, through the mutex)
-- Read logs/l-lint-whole.txt and logs/r4-security-whole.txt when chainF ends (`/tmp/claude-0/-home-user-settlement-engine/b88b7306-c131-56fd-80e9-32ab46d628ea/scratchpad/r4ip4/chainF.sh`, queued at 03:33 UTC through the mutex, which runs
+- Read logs/r4-security-whole.txt when chainF ends (lint is read, above) (`/tmp/claude-0/-home-user-settlement-engine/b88b7306-c131-56fd-80e9-32ab46d628ea/scratchpad/r4ip4/chainF.sh`, queued at 03:33 UTC through the mutex, which runs
   `sh scripts/gate-tail.sh npx vitest run tests/lint` then `... npx vitest run tests/security --maxWorkers=2`, PGHOST local).
   Count lint by name against `git show origin/lane/veil-36-2026-11-22:docs/chair/2026-11-20/veil/out/v36/seated/lint-whole-fails-af708f2fd.txt`
   (48 of 3,304); class every security red as item R4 says, the titles to `out/v38/r4ip4/g-security-final.txt`.

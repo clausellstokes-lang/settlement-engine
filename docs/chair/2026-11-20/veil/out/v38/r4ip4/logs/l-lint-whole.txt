@@ -1,0 +1,84 @@
+tree at c7e60ef59345c1eedb5b85253bf6524b5b0ebb02
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[49/52]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+AssertionError: expected [ 'salt on reasons' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "salt on reasons",
++ ]
+
+ ❯ tests/lint/writerReach.walker.test.js:521:57
+    519|   test('the banked cohort is exact — a member now LIT or no longer wri…
+    520|     const comparison = compareDark(liveView, baseline);
+    521|     expect(comparison.stale.map((row) => row.identity)).toEqual([]);
+       |                                                         ^
+    522|     const cohort = cohortOf(live.verdicts);
+    523|     expect(cohort.length).toBe(baseline.population.dark);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[50/52]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+AssertionError: expected 1423 to be 1424 // Object.is equality
+
+- Expected
++ Received
+
+- 1424
++ 1423
+
+ ❯ tests/lint/writerReach.walker.test.js:1174:34
+    1172|       ...live, verdicts: swapped, knownShapes: judged.knownShapes,
+    1173|     });
+    1174|     expect(view.population.dark).toBe(baseline.population.dark);
+       |                                  ^
+    1175|     const comparison = compareDark(view, baseline);
+    1176|     expect(comparison.violations).toEqual([`${PLANTED_KEY} on settleme…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[51/52]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+AssertionError: expected 1424 to be 1425 // Object.is equality
+
+- Expected
++ Received
+
+- 1425
++ 1424
+
+ ❯ tests/lint/writerReach.walker.test.js:1193:34
+    1191|     expect(refusal).toContain('--write REFUSED');
+    1192|     expect(refusal).toContain(`${PLANTED_KEY} on settlement`);
+    1193|     expect(view.population.dark).toBe(baseline.population.dark + 1);
+       |                                  ^
+    1194|   });
+    1195|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[52/52]⎯
+
+
+ Test Files  18 failed | 207 passed (225)
+      Tests  52 failed | 3252 passed (3304)
+   Start at  03:48:30
+   Duration  606.94s (transform 16.13s, setup 2.82s, import 564.61s, tests 639.27s, environment 16ms)
+
+[gate-tail] end:  03:58:37 up  3:46,  0 user,  load average: 1.04, 2.15, 2.67
+[gate-tail] full log: /tmp/gate-tail.29276.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1
