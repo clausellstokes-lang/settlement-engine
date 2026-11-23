@@ -1,7 +1,8 @@
 # R4I-MEASURE — HAND-BACK (VEIL-42, chain B; brief `docs/chair/2026-11-20/veil/briefs/R4I-MEASURE-BRIEF.md` at caba51270)
 
 STATUS (kept current at every commit): A on the 7 and the 140 READ; C's control and the today-born set READ; the chain runs on
-(m140, bt140, bm140, pool, bpool). The seat's four asks (N69) answered in A-77.md (marker counts complete at m140). MEASURES ONLY: no line under `src/`, `supabase/` or `tests/` changed; 211 and 212 read, never edited.
+IN THE SEAT'S ORDER (pool, then m140, bt140, bm140, bpool): m140 was started at 07:43 and INTERRUPTED by this builder at 07:44
+(1.5 minutes in) to put A's pool first; the mutex then passed to the Tonight seat's holdA.sh before the pool. The seat's four asks (N69) answered in A-77.md (marker counts complete at m140). MEASURES ONLY: no line under `src/`, `supabase/` or `tests/` changed; 211 and 212 read, never edited.
 
 ## WHERE IT RAN
 - Worktree `/home/user/wt/meas`, local branch `lane/veil-42-2026-11-23-meas-wip` cut at 9f9b819f7; `node_modules` a link
@@ -45,5 +46,5 @@ value for value, no bijection, at the tip.
 - B: `B-WHOLEDOC.md` (not yet read).
 
 ## LEFT (exact commands)
-- The chain: `sh docs/chair/2026-11-20/veil/out/v42/meas/chain.sh [first step]` from `/home/user/wt/meas` (steps a7 ctrl
-  dumps t140 m140 bt140 bm140 pool bpool; outputs `/var/tmp/v18/out/v42/meas/<step>/table.txt`, log `chain.log`).
+- The chain: `sh docs/chair/2026-11-20/veil/out/v42/meas/chain.sh [step ...]` from `/home/user/wt/meas` (steps a7 ctrl
+  dumps t140 pool m140 bt140 bm140 bpool, run in the order named; outputs `/var/tmp/v18/out/v42/meas/<step>/table.txt`, log `chain.log`).
