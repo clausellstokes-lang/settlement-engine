@@ -26,6 +26,14 @@ BRANCHES AND TREES (this container):
   ff20ed89e3e67240…, the same as at 302976386).
 
 RECEIPTS SO FAR:
+- RED FIRST ON THE STORED DOCUMENTS (tip tree, v41_tip), CONFIRMED: twin 46,752 of 46,752 reads carry publicProse (all 1,948 x 12 settings x 2
+  Reveals; `/var/tmp/v18/out/v41/ppkey-tip-twin/ppkey-table.txt`); server page, link, import on 200 documents: 4,800 of 4,800 each
+  (`ppkey-tip-srv200/`). Sent to the chair 07:16. Cost: twin 23 min; server ~4 s a document a shard (full 1,948 ~2 h).
+- VS1 CAUSE SENT 07:17: green 770080aca and fb320eded; red 929739889 and c2625fb1f (unit (viii)): crimeTypes withheld always, the tooth tried 0.
+  Candidates (births of 12): criminalInstitutions 12, criminal services 12, capture state 12, house 7, person's house 7, service row 6, allegiance 5,
+  income row 2, faction desc 1, pair capture 1 (`/var/tmp/v18/out/v41/vs1/candidates.json`). The chair rules the cure.
+- PART 41's read-stored run was STOPPED 6 min in (06:06; rc 143) to free the mutex; re-queued on the TIP tree (`/var/tmp/v18/out/v41/gates-tip.sh`,
+  log `gates.log`, output `read-tip/`).
 - RED FIRST, the composed-hosts walker at the tip: 26 failed of 33 (23 `prose.*`, 3 `power.*`: power.desc, power.label, power.relation.dmNote);
   log `/var/tmp/v18/out/v41/composed-hosts-tip.log`. CONFIRMED.
 - THE MACHINE: re-made by PART 41's `remake.sh` (started 05:28 UTC; cluster, acceptance exit 0, c1_tpl at 05:29); the pool, then the dump of the
