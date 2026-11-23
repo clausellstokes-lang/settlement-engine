@@ -126,3 +126,71 @@ messages in `prompts/` beside it (each seat's whole first message, as sent).
 - `close/close-2/census/final/CENSUS-FINAL.md` (on `lane/close-2-2026-11-22`) read by the chair before a flip seat.
 - Each hour: every working seat's record read by a cheap helper (E109); "HANDS OVER" at 620,000.
 - NOT RE-READ BY THIS CHAIR: CI's run on 244fa84ef by name; the eighth chair's 34 Daily Life lines.
+
+## 5. Since this file was written (newest last; each hour read from the clock when written)
+
+- 2026-11-23 01:18 UTC · THE FIRST HOUR, IN ONE ENTRY (the rulings below were each sent to their seat the minute they were made).
+  - N16 · PROSE-6's "DISAGREE" (E132 amended). **Decided:** both pairs are cured ON DS-DEF-2 ALONE with the grammar's
+    existing marks; NO NEW ATOM. FOOD: flat v1, v2, v3, v4 gain `food: ≤ pressured` (v2 RULED FLAT: it speaks of the
+    stores if cut off, not of today's tables, and it is the line the metropolises printed beside "food is not a worry
+    here"); new lines under `food: ≥ secure`: F1 "{settlement} eats well enough today, but its food trades are
+    failing, and less is being put by than it would need if it were cut off."; F2 "There is food enough on the tables at
+    {settlement}, though its food trades are failing and its stores are thinner for it."; F3 (gains `stores: < 12`)
+    "{settlement}'s tables are full for now, but its food trades are failing, and what they fail to put by would be
+    missed only if it were cut off."; F4 "The tables at {settlement} are full, but the trades that put food by against
+    hard times are failing."; F5 (`stores: ≥ 12`) "{settlement} eats well and has stores laid by, though the trades
+    that should go on putting food by are failing."; F6 (`stores: ≥ 12`, the chair's) "There is enough on the tables
+    at {settlement} and stores laid by besides, but its food trades are failing." WAGES: flat v1, v2 gain `no force:
+    paid`; new lines under `force: paid` (they say paid, never regular: on the 900 both pages of this branch have pay
+    'short'): W1' "{settlement} keeps paid guards, but nothing is laid by to pay them through a long defence."; W2'
+    "Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long
+    defence."; W3' "{settlement} has paid guards and little to pay them with: a long defence would find the money
+    gone."; DS-GEN-17 GARRISONED v2 gains `force: paid`. **Why:** the owner's "Can you fix these:"; COMMON-RULES 6 (no
+    atom without need); one side that says both truths ends the disagreement. **Rejected:** two new atoms (the
+    food-processing chain; the Economic Survival band) so that all four cells carry both-truths lines (vocabulary,
+    class tables and first-paint surface for no gain a reader sees); a WORD_CORRECTIONS row for GEN-17 v2's clause "and
+    the money is found every season" (the page cuts it on 63 of 63 prints: the arm pins that it prints on 0 pages).
+    **Reversal:** the marks and lines are one pools-doc edit. **Blast radius:** page-derived desks only; no birth
+    moves (the seat proves the dark sha); prose byte figures move and are NAMED for the owner.
+  - N17 · DAILY-5 DOES NOT WAIT FOR POINT 106: "THE LINE IS 244fa84ef" for its unit (3); "DAILY-C" goes onto the stack
+    after point 106. Its merge of D4C-1 went through (635e4acee; its own check refused nothing).
+  - N18 · THE COMPOSED-HOSTS WALKER's 26 RED ROWS, SPLIT (asked by VEIL-37; MEASURED BY THE CHAIR on the registry: at
+    af708f2fd 150 rows, 28 composed, 26 on R5's planned host; at eeda6a126 151, 26, 23): `power.desc`, `power.label`,
+    `power.relation.dmNote` were R5-DESC's and R5D-SQL has moved them; THE 23 `prose.*` ROWS ARE CHAIN C's WORKLIST
+    (E134 (2)): never exempted, never cured by chain A; VEIL-39's proposal carries a table of the 23.
+  - N19 · VEIL-38 (R4-IDS). S1's cure merged and read (no fault); ITS JUDGMENT ACCEPTED: "the server never takes a salt
+    from a caller" = no function a client can call takes one; every function with a salt parameter is revoked from
+    public, anon and authenticated, asserted by signature. THE TONIGHT SHEET (N15's cause: `summary/tonightSheet.js ::
+    castWantOf` picks by `castHash(served person id, crisis, role)`; twin 39 of 140, server 44 of 140 move between
+    two reads). **Decided:** THE PICK IS KEYED ON THE PERSON'S NAME as the card prints it, on the owner's page and
+    every shared read alike; both callers pass it (the sheet; `coherence/crisisFactFindings.js`). **Why:** the name
+    is the one identity every read serves unchanged; CHECKED BY THE CHAIR: `castWantOf` is not on master, so no
+    live page moves. **Rejected:** the served position (shifts when a hidden person leaves the array); serving the
+    chosen line (the composer in 212, or a new stored field). **Reversal:** one key. **Blast radius:** which role
+    line a goal-less cast person gets moves once on every page (counted and NAMED by the seat); measured first:
+    same-named cast persons in one (crisis, role), and served names that differ from stored: either not 0 is a STOP.
+    ALSO: `pgliteHookTimeoutRatchet` (red by a regex `\(` in a test file that its paren matcher misreads): a
+    test-only `\x28` with a comment; S2 (`gallery.test.js` "a share marked with a veil", red AT THE TIP) is not
+    R4-IDS's: its cause is VEIL-39's unit (P2), measure only.
+  - N20 · "PIN 2d7ed483f" ACCEPTED (01:03 UTC): one parent af708f2fd; ONE test file, +6 -3, read whole by the chair.
+    THE VEIL LANE'S TIP IS 2d7ed483f96160c5eb0e9cc06745137b857b295f ON `lane/veil-39-2026-11-23-tip`; named to the
+    three chains; VEIL-38 merged it at ec082df83.
+  - N21 · THE STORED PROSE's CURE: VEIL-33's lean (a) IS OUT (VEIL-39's find: STYLE-RULINGS-2 B10 (a): the seed never
+    leaves the owner's record; an absent publicProse prints silent, never a seedless re-draw). VEIL-39 proposes and
+    costs (a'), (b) alone, (c)+(b) ((c): the save composes the prose after the always-pass, PUBLIC_PROSE_VERSION pp-1
+    to pp-2). NOT RULED: on its file.
+  - N22 · THE MARKS AT 01:16 UTC. `get_session` READS A CHILD'S CONTEXT ON THIS ACCOUNT (external_metadata.context_usage):
+    VEIL-37 495,358; VEIL-38 364,709; CLOSE-4 278,457; PROSE-6 254,538; DAILY-5 232,291; STACK-106 172,763 (parked);
+    VEIL-39 read 0 there, so a cheap helper read its record: 449,165 at 01:08. A seat's own count ran 90,000 to
+    120,000 low (PROSE-6, DAILY-5). VEIL-37 AND VEIL-39 ARE TOLD: each ends inside its unit; R5D-SQL-2's acceptance is
+    VEIL-37's (the chain's one reader of 212); C2-BUILD is VEIL-39's successor's. A VEIL SUCCESSOR IS SEATED ON THE
+    HAND-OVER AND DOES NOT READ 212 WHOLE unless a red points into it.
+  - THE SEATS' CLOCKS run two to three minutes ahead of the chair's and the server's (their labels against the
+    queue's stamps): no correction is asked of them.
+  - A SLIP OF THE CHAIR'S, SAID TO THE OWNER: the first push of this lane (841a303b0, 00:37 UTC) went out with no
+    pre-push hook: the hook's shim directory did not exist in `/home/user/wt/chair` (husky installs it per worktree).
+    Eight new text files; `npx husky` run there since.
+  - FOR AFTER THE FIRST DEPLOY (the chair's intake; none blocks): the paren matcher of `pgliteHookTimeoutRatchet`
+    reads an escaped `\(` in a regex as an open paren; DS-GEN-17 GARRISONED v2's source carries a clause the page
+    always cuts (one WORD_CORRECTIONS row would make the source match the page).
+  - STILL OPEN WITH THE OWNER: his own line to STACK-106. No word since "I defer all decisions to you".
