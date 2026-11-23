@@ -26,7 +26,7 @@ mode: the gate's 92 towns and its 48 controls, both engines (the twin and `get_g
 reach both; if it reads one door only, say which and why)
 For EVERY HIDING read (a "read" = place x setting x Reveal x door x engine; THE CHAIR'S RULING 08:34 UTC: NO WHOLE-DOCUMENT
 COMPARER IS BUILT HERE: the served-versus-twin hash comparison is chain B's instrument, run by the seat; build nothing of it):
-1. DAILY (the security reader's rows 5 and 6): on every HIDING read (a setting that hides something the place holds), derive the Daily
+1. [WITHDRAWN BY THE CHAIR, N91, 11:48 UTC: "PAGES", its own brief, replaces it; its owner-only slot check moves there. SKIP THIS STEP.] DAILY (the security reader's rows 5 and 6): on every HIDING read (a setting that hides something the place holds), derive the Daily
    Life page from the SERVED document exactly as the page does on a shared read: `src/domain/dailyLife.js :: deriveDailyLife(served,
    null)` (`DailyLifeTab.jsx` passes `null` on any read that is not the owner's own). Its eight public slots (`DAILY_LIFE_SLOTS`) by
    text; and the office lines (`src/data/dailyLife/commonerResentments.js` ids L8 to L11; L12 is NOT BUILT: say so) wherever the
