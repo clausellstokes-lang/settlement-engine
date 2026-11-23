@@ -268,6 +268,13 @@ NAME SEARCH IS COMPLETE (N105: one path, chain A's; its re-run after chain A's m
 too). "PAGES" RUNS UNTIL ABOUT 16:30 (N110); ITS FIRST FINDING, share figures moving on a read that hides nothing by
 the hand, IS READ BY THE CHAIR AS THE LANE'S RULE VR31 AND IS BEING CONFIRMED BIRTH BY BIRTH (N109). TWO `tests/copy`
 REDS OF THE LANE'S TIP (code patterns in string literals) ARE ON THE JOIN'S WORKLIST (N107).
+SINCE N110 (N111): CHAIN A's ONE MACHINE IS THE BOTTLENECK: an arm on the full pools costs it hours and T5 never ran.
+T5 ("R3-TELL-5": the first gate's last reds) BECOMES A SEAT OF ITS OWN ON ITS OWN MACHINE, VEIL-49
+(`prompts/DRAFT-START-VEIL-49.txt`), merging after R5-DESC with its own proof. NO ARM OF CHAIN A RUNS ITS RED AND GREEN ON
+THE FULL POOLS ANY MORE: a slice; the full pools once per unit, at its proof. VEIL-40 HANDS OVER AT THE RIVAL'S RETURN
+(`prompts/DRAFT-START-VEIL-48.txt`, brought to this). A SEVENTH SEAT, FOR THIS PIECE ONLY, IS ASKED OF THE OWNER (15:52
+UTC): NONE IS CREATED WITHOUT HIS WORD; THE DEFAULT: VEIL-49 takes the first place that frees and the join's successor
+waits for the next.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -3255,3 +3262,49 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   NEXT FIRING IS 16:10:00 UTC, its stored text re-written with the figures of 15:07 and what each seat owes. COMMITTED
   WITH THIS ENTRY: the reader's row 37 (the hall capture's standing: "13G x S"); `prompts/DRAFT-START-VEIL-46.txt`:
   (h) as ruled in N108, (k) the two voice-walker reds, (l) the class VR31 and the sharding fault.
+- 2026-11-23 15:55 UTC · N111 · CHAIN A's ONE MACHINE IS THE BOTTLENECK (AN ARM ON THE FULL POOLS COSTS HOURS; T5
+  NEVER RAN): T5 BECOMES A SEAT OF ITS OWN (VEIL-49); NO ARM RUNS ITS RED AND GREEN ON THE FULL POOLS; VEIL-40 HANDS
+  OVER AT THE RIVAL'S RETURN; A SEVENTH SEAT IS ASKED OF THE OWNER.
+  (1) VEIL-40 (queued 15:48:52; its hour 15:49 read from `date -u`; its line of 13:3x had carried an unread hour: its
+  own error, said by itself): THE LOCK: the rival's runner has held it since about 13:10 and is in its green on the
+  full pools: two vitest workers at 96% CPU since 13:41 (2 h 07 m then); its last pushed commit 804fa23d2 (the red
+  recorded); no step of anyone else has run since. T5M (the measures builder dispatched on N102) HANDED BACK UNRUN at
+  15:48: its mutex order read "T5M: WAIT (after SSKIP's count)" at every read from 13:45 to 15:47; it prepared
+  `q-an.mjs`'s section "N102" (dd809dc4b: the joint count of (v)(3), the empty tensions lists of (v)(2)) and its
+  hand-back (b096065e5 on `lane/veil-40-2026-11-23-t5-wip`: READ BY THE CHAIR: the run order: the template step,
+  smoke, towns, pool, insurg, the analyser; then the arm of (v)(1) and the two teeth); 212 untouched. SSKIP waits with
+  a four-job runner (0544c77ad). THE SEAT'S WORDS: "on the full pools one arm costs hours on this box", and the
+  rival's green, SSKIP's count, T5's measures, the pool and gates, L1 and the tests builder's queue are serial on it:
+  "the road to TIP? is longer than my room"; its own count about 480,000 (an estimate); IT PROPOSED TO HAND OVER AT
+  THE RIVAL'S RETURN (its diff read and recorded by the seat), or at once.
+  (2) **Decided (N111), sent after the clock read 15:51:55:** (a) THE PROPOSAL IS TAKEN: VEIL-40 HANDS OVER AT THE
+  RIVAL'S RETURN, a step's end: the rival's diff read whole and recorded by it (the 212 hunks, the twin, the arm), its
+  receipt pushed; while it reads, the lock goes to SSKIP's count (both pools; the 694 by four classes), recorded if it
+  returns before the read ends. (b) T5 LEAVES THAT MACHINE: IT BECOMES A SEAT OF ITS OWN ON ITS OWN MACHINE, "VEIL-49"
+  (unit "R3-TELL-5": (iv), (v), (vi)), merging AFTER R5-DESC with a proof of its own (its pool, both gates by family,
+  L1 on the 140); VEIL-40 dispatches nothing more for it and owes, in its PART 42's first section, the machine's
+  recipe for T5 alone and the commit of the rival's tree T5's branch should stand on. THIS CHANGES N86's "one proof
+  for the three, the gates run once on the stacked tree": R5-DESC goes to its own "TIP?" WITHOUT T5 (its gates NOT
+  WORSE than the standing 4 of 92 and 20); the first gate reaches 0 only with VEIL-49's cures. (c) FOR EVERY BUILDER
+  OF CHAIN A FROM NOW: NO ARM RUNS ITS RED AND GREEN ON THE FULL POOLS: a builder's red and green run on its plant,
+  its named cases and A SLICE (said once in PART 42 and kept); THE FULL POOLS ARE READ ONCE PER UNIT, in the unit's
+  own proof before its "TIP?", every arm of the stacked tree in one hold; the rival's green now running is let finish
+  (it is the rival's part of that proof if the tree does not move under it). (d) Owed at once: how far the rival's
+  green is and the seat's guess of its end; again if it has not returned by 17:30 UTC. **Why (b):** T5 has waited
+  since 11:13 for a turn on a machine whose line never reached it; it is on the bar's road (the first gate's last
+  reds) and needs only a machine. **Why (c):** it extends N90's rule for the whole-document form (the pool-wide run
+  once) to every arm: six runs of hours each in one line are a whole day; a fault that shows only on the full pools is
+  found at the unit's proof, at the cost of one re-run. **Why hand over at the rival's return and not later:** the
+  remaining road of R5-DESC is longer than T5's, so the re-making of the machine by the successor costs the same
+  whenever it falls; a seat near its line reads a 212 diff worse than a fresh one.
+  (3) THE SIXTH-AND-SEVENTH PLACE. SIX SEATS WORK (the owner's rule); seven lines of work now want a machine: R5-DESC
+  (VEIL-40, then VEIL-48), T5 (VEIL-49), chain B (VEIL-42), chain C (VEIL-41, then VEIL-45), the doors (VEIL-44), the
+  join's preparation (VEIL-43, then VEIL-46), the flip (CLOSE-6, then its landing). ASKED OF THE OWNER IN PLAIN WORDS
+  (15:52 UTC), WITH THE CHAIR'S RECOMMENDATION: a seventh seat, for this piece only. THE CHAIR'S DEFAULT IF HE SAYS NO
+  OR DOES NOT ANSWER: VEIL-49 takes the first place that frees (the join's preparer's at its step's end, or
+  another's), and the join's successor waits for the next: the join is the last road and its preparation is the work
+  that can best wait. NO SEVENTH SEAT IS CREATED WITHOUT HIS WORD.
+  (4) COMMITTED WITH THIS ENTRY: `prompts/DRAFT-START-VEIL-49.txt` (T5's seat: lean; it reads the two hand-backs
+  first; the measures come to the chair as counts before any cure; the chair's rulings (a) to (h); its "TIP?" only
+  after R5-DESC's tip is named); `prompts/DRAFT-START-VEIL-48.txt` brought to it (T5 is not its unit; (b2) the slice
+  rule). VEIL-43's line of 15:27:35 (PAGES' end revised to about 16:45; nothing failing; it runs on) is noted here.
