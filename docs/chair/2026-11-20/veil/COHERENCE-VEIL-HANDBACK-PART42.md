@@ -181,6 +181,13 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     receipts). (2) EVERY FINISHED STEP's RECEIPT committed and pushed as it ends (log tail, tables, exit); builders' WIP before every
     wait. (3) This seat's line (13:14): own count about 430,000 (estimate); it can end through THE POOL AND BOTH GATES ON THE STACKED
     TREE (the rival's diff read and re-runs, the merges), L1 probably; T5's and SSKIP's reads and "TIP?" are the successor's.
+127. THE CHAIR, 13:20 (N101), on SSKIP's STOP (13:16: (i), (ii) hold; (iii) holds on nothing-hidden reads, fails on hiding reads: S
+    writes a standing on 508 other rows of 529 hides / 2,116 door-reads whose stored desc has none): RULED: THE STANDING A SHARED PAGE
+    PRINTS EQUALS, ROW FOR ROW, THE OWNER's PAGE's ON A READ THAT HIDES NOTHING, AND THE NEVER-THERE PAGE's ON A HIDING READ; a line
+    neither prints is a fault. (iii) judged on nothing-hidden reads (holds). THE DECIDING COUNT (SSKIP, when it holds the lock): of the
+    508, how many equal the never-there page's desc, by kind and template; ALL EQUAL: the seven-skip stands and the cure goes on; ANY
+    UNEQUAL: STOP, three sent whole to the chair. CONDITION: the never-there reference drops a rival whose host is gone (N63's closure),
+    built into SSKIP's count (its tree lacks RIVAL's rule). Relayed. SSKIP was told: no run outside the mutex (it had begun one).
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -202,3 +209,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 12:53 ruling 124 (read 13:03); 13:03 given to SSKIP.
 - 13:08 ruling 125: S1 stopped, the lock free, RIVAL GO; 13:09 PART 42.
 - 13:08 ruling 126; 13:14 the line sent; turn ended.
+- 13:16 SSKIP's STOP; 13:20 ruling 127; 13:21 relayed.
