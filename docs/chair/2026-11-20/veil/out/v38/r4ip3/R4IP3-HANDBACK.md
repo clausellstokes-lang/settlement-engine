@@ -28,5 +28,23 @@ canonical): every built tooth BITES (missed = [] on all 13 + the 48 VS1 copy-gua
 - eslint on the 5 files: 0 (logs/g1-eslint.txt).
 - The 34 files re-run: RUNNING at this commit (logs/g1-other34.txt). Expected: 2 red (S2, and VS1's tip red above).
 
+## MERGE (the seat's word): `lane/veil-38-2026-11-23-r4ids-wip` merged clean (1d786afd5, --no-edit: its message is git's, no trailer).
+
+## A — THE LINK ANCHOR: MEASURED, A STOP (the anchor NOT committed); THE RATCHET'S `\x28`: DONE (commit: A)
+- RATCHET (ruling 40.3): `pgliteHookTimeoutRatchet` RED at b088fcfc5 (logs/ratchet-red-b088fcfc5.txt: 1 failed | 17 passed,
+  "galleryVeilIds.pglite.test.js: 1 unguarded PGlite boot hook(s); frozen ceiling is 0"); `\(` written `\x28` with one
+  comment above (the comment itself holds no paren: the matcher counts every paren character): GREEN 18/18
+  (logs/ratchet-green.txt). The ratchet's file unchanged: no figure moved.
+- A, `A-link-anchor.patch` applied and run (logs/a-galleryVeilIds.txt, a-galleryVeilIds-2.full.txt). THE TOOTH:
+  plants 36; the self form PASSES the planted wrong first read 36/36; the anchored form REDS it 36/36 (and the self form's
+  second read reds it 36/36); BUT the anchored form passes the CLEAN link reads only 12/36. The 24 it reds: every Reveal-DM-on
+  link read of town-infiltrated-0-12 (68 references against the gallery twin's 247/285) and city-none-1-113 (148 against
+  503/545/544), and all 12 plant link reads (4 against 7 marked; 4 against 9 unmarked; 6 against 9 shown). CAUSE (read off the
+  counts, PLAUSIBLE as to the rule): the link read is not the gallery's projection: it does not carry Reveal DM (R1), nor the
+  plant's per-member `revealDm`, and an unmarked link fails closed to the default veil. So the GALLERY twin is not the link's
+  reference; the anchor needs a LINK twin, which the tree does not have and the brief does not define. A STOP: the anchor is
+  left out of the file (the self form stands; galleryVeilIds 12/12 green, logs/arm-galleryVeilIds.txt); the patch as run, with
+  the clean-red labels, is `A-link-anchor-measured.patch`. The unpatched file was green beside it (12/12, same run).
+
 ## LEFT
-G1's 34-file count; the r4ids-wip merge (the seat's word); G2; A (+ the ratchet's `\x28`, ruling 40.3); the ARMS; ST; L; B.
+G1's 34-file count; G2; the ARMS; ST; L; B.

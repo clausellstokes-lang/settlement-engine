@@ -1,0 +1,59 @@
+diff --git a/tests/security/galleryVeilIds.pglite.test.js b/tests/security/galleryVeilIds.pglite.test.js
+index abd1d5ae3..c223b511d 100644
+--- a/tests/security/galleryVeilIds.pglite.test.js
++++ b/tests/security/galleryVeilIds.pglite.test.js
+@@ -202,7 +202,8 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
+     const dir = resolve(process.cwd(), 'supabase', 'migrations');
+     const names = new Set();
+     for (const f of readdirSync(dir).filter((x) => /^21[12]_.*\.sql$/.test(x))) {
+-      for (const m of readFileSync(join(dir, f), 'utf-8').matchAll(/^create\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-z_][a-z0-9_]*)"?\s*\(/gim)) names.add(m[1].toLowerCase());
++      // \x28 is the escaped open paren: pgliteHookTimeoutRatchet's paren matcher reads a backslash-paren as an open paren, ruling 40.3
++      for (const m of readFileSync(join(dir, f), 'utf-8').matchAll(/^create\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-z_][a-z0-9_]*)"?\s*\x28/gim)) names.add(m[1].toLowerCase());
+     }
+     catalogue = [...names].sort();
+   }, PGLITE_BOOT_TIMEOUT_MS);
+@@ -509,7 +510,9 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
+       // the server's: the gallery read site for site against the twin's (the same people, modulo the bijection); the link
+       // and every second read against their first; each marker's keys name a card of their own read
+       for (const [read, x] of served(r)) {
+-        const ref = read === 'gallery' ? refsOf(r.twins[0].doc).map((y) => y[2]) : refsOf(x.doc).map((y) => y[2]);
++        // R4I-PAGE-2 (the read of the seat; the ruling of the chair, 00:23 UTC): the first LINK read is anchored to the
++        // reference of the twin as the gallery read is, never judged against ITSELF (THE LINK ANCHOR TOOTH, below, proves why)
++        const ref = refsOf(r.twins[0].doc).map((y) => y[2]);
+         for (const [doc, marker, which] of [[x.doc, x.marker, read], [x.again, x.againMarker, `${read} again`]]) {
+           const got = refsOf(doc);
+           got.forEach(([p, part, ok], i) => { count(part, ok); if (ok !== ref[i]) bad.push(`${label(r, which)}: ${p} ${ok ? 'resolves' : 'resolves to no card'} (its reference: ${ref[i]})`); });
+@@ -547,4 +550,33 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
+     for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker', 'clone ties']) expect(tally[part]?.[0] ?? 0, `${part}: judged`).toBeGreaterThan(0);
+     expect(bad.slice(0, 40)).toEqual([]);
+   });
++
++  it('THE LINK ANCHOR TOOTH (R4I-PAGE-2; the ruling of the chair, 00:23 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one', () => {
++    const misses = (ref, doc) => { const got = refsOf(doc); return got.filter(([, , ok], i) => ok !== ref[i]).length + (got.length !== ref.length ? 1 : 0); };
++    const tally = { plants: 0, selfFirstPasses: 0, selfSecondReds: 0, anchoredReds: 0, anchoredCleanPasses: 0 };
++    const cleanReds = [];
++    for (const r of reads) {
++      const x = r.docs.link;
++      if (!isRec(x.doc) || !isRec(x.again)) continue;
++      const planted = JSON.parse(JSON.stringify(x.doc));
++      const ids = cardIdsOf(planted);
++      const site = walkSites(planted).find((y) => y[2] === 'ref' && ids.has(String(y[0][y[1]])));
++      if (!site) continue;
++      site[0][site[1]] = 'npc_ffffffffffffffff';
++      tally.plants += 1;
++      const selfRef = refsOf(planted).map((y) => y[2]);
++      const twinRef = refsOf(r.twins[0].doc).map((y) => y[2]);
++      if (misses(selfRef, planted) === 0) tally.selfFirstPasses += 1;
++      if (misses(selfRef, x.again) > 0) tally.selfSecondReds += 1;
++      if (misses(twinRef, planted) > 0) tally.anchoredReds += 1;
++      if (misses(twinRef, x.doc) === 0 && misses(twinRef, x.again) === 0) tally.anchoredCleanPasses += 1;
++      else cleanReds.push(`${label(r, 'link')}: ${refsOf(x.doc).length}/${refsOf(x.again).length} references against the twin's ${twinRef.length}`);
++    }
++    console.log(`R4I-PAGE-2 the link anchor tooth: ${J(tally)}`);
++    console.log(`R4I-PAGE-3 the anchored form's reds on the CLEAN link reads (${cleanReds.length}): ${cleanReds.join(' | ')}`);
++    expect(tally.plants, 'plants built').toBeGreaterThan(0);
++    expect(tally.selfFirstPasses, 'the self-referencing form passes the planted first read').toBe(tally.plants);
++    expect(tally.anchoredReds, 'the anchored form reds it').toBe(tally.plants);
++    expect(tally.anchoredCleanPasses, 'the anchored form passes the clean link reads').toBe(tally.plants);
++  });
+ });

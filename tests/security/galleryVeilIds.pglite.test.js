@@ -202,7 +202,8 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
     const dir = resolve(process.cwd(), 'supabase', 'migrations');
     const names = new Set();
     for (const f of readdirSync(dir).filter((x) => /^21[12]_.*\.sql$/.test(x))) {
-      for (const m of readFileSync(join(dir, f), 'utf-8').matchAll(/^create\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-z_][a-z0-9_]*)"?\s*\(/gim)) names.add(m[1].toLowerCase());
+      // \x28 is the escaped open paren: pgliteHookTimeoutRatchet's paren matcher reads a backslash-paren as an open paren, ruling 40.3
+      for (const m of readFileSync(join(dir, f), 'utf-8').matchAll(/^create\s+(?:or\s+replace\s+)?function\s+(?:public\.)?"?([a-z_][a-z0-9_]*)"?\s*\x28/gim)) names.add(m[1].toLowerCase());
     }
     catalogue = [...names].sort();
   }, PGLITE_BOOT_TIMEOUT_MS);

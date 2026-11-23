@@ -1,0 +1,103 @@
+[gate-tail] start:  01:16:12 up  1:04,  0 user,  load average: 11.08, 11.25, 9.20 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+stdout | tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin
+R4I-PAGE chair's arm: references judged by part [resolve, resolve to no card]: {"cards":[1800,2392],"ties":[15392,0],"cardTies":[96,0],"marker":[216,0],"clone baseline loss":[12,6],"clone cards":[18,0],"clone ties":[3840,0],"clone cardTies":[36,0],"roster":[644,0],"casts":[576,0],"clone casts":[108,0],"trace":[32,9864]}; reds 1244 (twin side 0, server side 1244)
+
+stdout | tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE LINK ANCHOR TOOTH (R4I-PAGE-2; the ruling of the chair, 00:23 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one
+R4I-PAGE-2 the link anchor tooth: {"plants":36,"selfFirstPasses":36,"selfSecondReds":36,"anchoredReds":36,"anchoredCleanPasses":12}
+R4I-PAGE-3 the anchored form's reds on the CLEAN link reads (24): plant new marked dm=false link: 4/4 references against the twin's 7 | plant new marked dm=true link: 4/4 references against the twin's 7 | plant new unmarked dm=false link: 4/4 references against the twin's 9 | plant new unmarked dm=true link: 4/4 references against the twin's 9 | plant new shown dm=false link: 6/6 references against the twin's 9 | plant new shown dm=true link: 6/6 references against the twin's 9 | plant master marked dm=false link: 4/4 references against the twin's 7 | plant master marked dm=true link: 4/4 references against the twin's 7 | plant master unmarked dm=false link: 4/4 references against the twin's 9 | plant master unmarked dm=true link: 4/4 references against the twin's 9 | plant master shown dm=false link: 6/6 references against the twin's 9 | plant master shown dm=true link: 6/6 references against the twin's 9 | town-infiltrated-0-12 new marked dm=true link: 68/68 references against the twin's 247 | town-infiltrated-0-12 new unmarked dm=true link: 68/68 references against the twin's 285 | town-infiltrated-0-12 new shown dm=true link: 68/68 references against the twin's 285 | town-infiltrated-0-12 master marked dm=true link: 68/68 references against the twin's 247 | town-infiltrated-0-12 master unmarked dm=true link: 68/68 references against the twin's 285 | town-infiltrated-0-12 master shown dm=true link: 68/68 references against the twin's 285 | city-none-1-113 new marked dm=true link: 148/148 references against the twin's 503 | city-none-1-113 new unmarked dm=true link: 148/148 references against the twin's 545 | city-none-1-113 new shown dm=true link: 148/148 references against the twin's 544 | city-none-1-113 master marked dm=true link: 148/148 references against the twin's 503 | city-none-1-113 master unmarked dm=true link: 148/148 references against the twin's 545 | city-none-1-113 master shown dm=true link: 148/148 references against the twin's 544
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js (13 tests | 2 failed) 73075ms
+     × THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin 1064ms
+     × THE LINK ANCHOR TOOTH (R4I-PAGE-2; the ruling of the chair, 00:23 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one 74ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE CHAIR'S ARM (R4I-PAGE, the re-stamp's condition): two reads of one place share NO served person id (cards, references, marker keys), and every reference inside ONE read resolves (cards, ties, card ties, casts, trace, roster copies, the marker's keys, the import's clone rows through importGallerySettlementImpl over the served import), server and twin
+AssertionError: expected [ …(40) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false link: 4 references against its reference's 7",
++   "plant new marked dm=false link again: 4 references against its reference's 7",
++   "plant new marked dm=true link: 4 references against its reference's 7",
++   "plant new marked dm=true link again: 4 references against its reference's 7",
++   "plant new unmarked dm=false link: 4 references against its reference's 9",
++   "plant new unmarked dm=false link again: 4 references against its reference's 9",
++   "plant new unmarked dm=true link: 4 references against its reference's 9",
++   "plant new unmarked dm=true link again: 4 references against its reference's 9",
++   "plant new shown dm=false link: 6 references against its reference's 9",
++   "plant new shown dm=false link again: 6 references against its reference's 9",
++   "plant new shown dm=true link: 6 references against its reference's 9",
++   "plant new shown dm=true link again: 6 references against its reference's 9",
++   "plant master marked dm=false link: 4 references against its reference's 7",
++   "plant master marked dm=false link again: 4 references against its reference's 7",
++   "plant master marked dm=true link: 4 references against its reference's 7",
++   "plant master marked dm=true link again: 4 references against its reference's 7",
++   "plant master unmarked dm=false link: 4 references against its reference's 9",
++   "plant master unmarked dm=false link again: 4 references against its reference's 9",
++   "plant master unmarked dm=true link: 4 references against its reference's 9",
++   "plant master unmarked dm=true link again: 4 references against its reference's 9",
++   "plant master shown dm=false link: 6 references against its reference's 9",
++   "plant master shown dm=false link again: 6 references against its reference's 9",
++   "plant master shown dm=true link: 6 references against its reference's 9",
++   "plant master shown dm=true link again: 6 references against its reference's 9",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[3].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[4].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[6].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[7].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[8].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[8].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[9].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[9].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[10].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[10].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[11].to resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[12].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[13].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[14].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[15].from resolves (its reference: false)",
++   "town-infiltrated-0-12 new marked dm=true link: relationships[16].from resolves (its reference: false)",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:551:30
+    549|     if (process.env.R4I_PEEK) console.log(`R4I-PAGE server-side reds: …
+    550|     for (const part of ['cards', 'ties', 'cardTies', 'roster', 'marker…
+    551|     expect(bad.slice(0, 40)).toEqual([]);
+       |                              ^
+    552|   });
+    553|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > THE LINK ANCHOR TOOTH (R4I-PAGE-2; the ruling of the chair, 00:23 UTC): a link first read with one reference pointed at no card, its second read consistent, PASSES the self-referencing judgment and REDS the anchored one
+AssertionError: the anchored form passes the clean link reads: expected 12 to be 36 // Object.is equality
+
+- Expected
++ Received
+
+- 36
++ 12
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:580:88
+    578|     expect(tally.selfFirstPasses, 'the self-referencing form passes th…
+    579|     expect(tally.anchoredReds, 'the anchored form reds it').toBe(tally…
+    580|     expect(tally.anchoredCleanPasses, 'the anchored form passes the cl…
+       |                                                                                        ^
+    581|   });
+    582| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 23 passed (25)
+   Start at  01:16:12
+   Duration  144.01s (transform 4.30s, setup 35ms, import 420ms, tests 143.23s, environment 0ms)
+
+[gate-tail] end:  01:18:37 up  1:06,  0 user,  load average: 9.23, 10.57, 9.25

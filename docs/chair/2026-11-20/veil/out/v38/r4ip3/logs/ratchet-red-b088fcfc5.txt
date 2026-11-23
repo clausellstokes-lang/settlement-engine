@@ -1,0 +1,43 @@
+     × every boot-bearing hook is guarded, or frozen SHRINK-ONLY 35ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/pgliteHookTimeoutRatchet.test.js > pglite hook-timeout ratchet (F4 class habitat removal) > every boot-bearing hook is guarded, or frozen SHRINK-ONLY
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/galleryVeilIds.pglite.test.js: 1 unguarded PGlite boot hook(s); frozen ceiling is 0.
++ A hook that boots PGlite inherits vitest's 10000ms hookTimeout, which sits ON the
++ boot-noise band under gate load (measured 2026-07-27: 8.6-20.7s), so the file goes
++ FLAKY red with its tests unexecuted. Add at module/describe scope:
++   const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget
++ and pass it as the hook's second argument (copy the shape from
++ tests/security/tierCreditMultiplierSql.pglite.test.js). Never tune it to a measurement.
++ The FROZEN_UNGUARDED inventory was cleared 2026-07-27: fix the hook in this same
++ change — never append a row.",
++ ]
+
+ ❯ tests/security/pgliteHookTimeoutRatchet.test.js:361:24
+    359|       }
+    360|     }
+    361|     expect(violations).toEqual([]);
+       |                        ^
+    362|   });
+    363|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 17 passed (18)
+   Start at  01:12:43
+   Duration  502ms (transform 35ms, setup 25ms, import 33ms, tests 220ms, environment 0ms)
+
+[gate-tail] end:  01:12:44 up  1:00,  0 user,  load average: 11.84, 10.73, 8.51
+[gate-tail] full log: /tmp/gate-tail.16116.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1
