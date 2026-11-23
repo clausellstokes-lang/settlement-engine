@@ -66,6 +66,13 @@ warning: the figure is the seat's present context, not what it has read). Figure
   re-reads its start message first). Then "PROSE-D <commit>": a late "ADD".
 SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, PROSE-6, CLOSE-5. THE NEXT FREE PLACE (VEIL-39's end) goes to
 chain C's builder seat once "CURE <shape>" is ruled; VEIL-38's place goes to its successor VEIL-42.
+AT 04:59 UTC (section 5's entry of that hour is the detail): THE STACK HOLDS POINTS 106 TO 109 ("DOORS 5e63f2603")
+and is in its long runs; CLOSE-5's plan is taken (N45) and its read-only trial runs on that commit (N46); VEIL-38
+hands over when M's pool run ends, AND ITS SUCCESSOR VEIL-42 CARRIES: the diff by path on the 7 places where
+server and twin differ, the whole-document comparison AT THE TIP'S OWN CODE (N47, N48), the measure of every
+un-re-keyed reference (N44), R4I-SQL-2, R4I-TONIGHT-2, the proofs, "TIP? R4-IDS"; THE GATES' "server = twin" IS A
+SHAPE CHECK ONLY (N48): the whole-document form joins every unit's proofs once the chair has ruled on that measure.
+The hourly check: trig_ (re-armed each time; its stored prompt names the seats).
 THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
 there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
 "TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
@@ -753,3 +760,70 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   `close-2/census/light.sh`, the 83 anchor files and the files points 106 to 109 changed, ON THE COMMIT THE CHAIR
   NAMES: the stack's "DOORS" commit once 108 and 109 are merged into it. OWED BY THE CHAIR: that commit's name to
   CLOSE-5. Until then it prepares on paper only (the budget list; the configs of Q3 and Q4 as diffs).
+- 2026-11-23 04:59 UTC · THE FIFTH HOUR, IN ONE ENTRY (each ruling was sent to its seat the minute it was made).
+  - THE LANDING. STACK-106 "MERGED e85971dcc (point 108) and 4fa51f422 (point 109)" at 04:11 UTC: one conflict each,
+    the lighting census, its side then its door; the mutation manifest merged by itself; HAND_CEILING 83. It STOPPED
+    its step f (about 512 of 1,580 files done on cb598376f, no red read) to make the boundary at the new top; the
+    sitemap restored after step e's build, as told. "DOORS 5e63f2603" at 04:32 (READ BY THE CHAIR with ls-remote;
+    against the line: 137 files, 27 under src/): the lighting census by its door (files 3,780 to 3,784; credited
+    3,293 to 3,297; titles 31,893 to 31,918; suite titles 8,870 to 8,875); its walker 34 of 34; three doors checked,
+    exit 0; `tests/lint` whole 225 files, 3 red, the line's. It runs f (8 whole directories and 112 governing
+    files), then f2, then one build and `tests/build`. THE CHAIR's ESTIMATE, NOT A MEASURE: its final message at
+    about 07:15 UTC.
+  - N46 · THE FLIP's PAPERS AND ITS TRIAL (CLOSE-5). Papers at b59df9fef (04:16): `close-5/BUDGETS.md` (the 244
+    census rows over 8,000 ms re-read at cb598376f; 14 tests in 13 files take a budget by point 75's rule),
+    `close-5/CONFIGS.diff`, the two `why` texts with the chair's change. SECTION B RULED: two tests sit near their
+    own budgets by an estimated factor (`metropolisTailedRoll` 171 s lit against 300,000; `espionageDormancyFence`
+    FENCE 1 65 s against 120,000): NEITHER RAISED NOR LEFT BY A GUESS: each is measured ALONE, lit, in the trial; a
+    budget is raised in commit 0 only if the lone time times 1.84 passes nine tenths of it. THE Q8 COMMIT NAMED AT
+    04:34: 5e63f2603 (the stack's "DOORS"): THE TRIAL IS READ-ONLY AND PROVISIONAL (not yet the line; PROSE-D may
+    follow): every value is re-read on the tip named at "BUILD THE FLIP <tip>". Its scratch ref
+    `lane/close-5-2026-11-23-lit-scratch` b1628d34c (lit by `light.sh`: 4 files, 5 lines), started 04:34: 110 files
+    (the anchor files, 84 distinct, not 83; 28 test files landed since the line), then `tests/lint` whole, then the
+    two lone measures. Owed: "TRIAL <scratch commit>". ITS OWN SLIP, SAID AND CURED: the hooks did not run on the
+    scratch worktree's first commit and push (`.husky/_` is absent in a fresh worktree; no `--no-verify`).
+  - N47 · M ON THE 140 IS ZERO THREE TIMES; A SERVER-AGAINST-TWIN SURPRISE STOPS "TIP? R4-IDS" (VEIL-38, 04:45).
+    M (the Tonight line's measure): 6,160 reads, 356 cast persons, 15,664 cast person-reads: same-named in one
+    (crisis, role) 0; served name differing from stored 0; nameless 0; unmapped served cast ids 0: NO STOP; M on the
+    pool running. THE SURPRISE: on 77 of 6,160 reads THE SERVER'S CANONICAL DOCUMENT DIFFERS FROM THE TWIN'S, modulo
+    the bijection: all Reveal-off, at every setting, on 7 today-born places (r3m-town-wartime-0-29,
+    r3m-metropolis-none-1-137, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62,
+    r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-city-none-1-107). Its cause is NOT READ (plausibly
+    N44's gap in another dress). **Decided:** for this unit "server = twin" is proven on the WHOLE canonical
+    document, modulo the bijection, on every read of both pools; the 77 are cured or explained by cause before
+    "TIP?"; the successor's act 3 takes the 7 places first (the diff by path, then the cause in 212 and the twin).
+  - N48 · THE GATES' "server = twin" IS A SHAPE CHECK OF THE CRIMINAL SURFACE ONLY (VEIL-38's ruling 40.9 in PART 40;
+    `tell2-signature.mjs :: signatureOf`, its header read by the seat): each listed field's state (present, absent,
+    empty, null); per row key of the criminal services and powers rows its set of states; each content family's row
+    count as none, one or several; five cross-field bits. IT HOLDS NO VALUE (no string, no number, NO ID), nothing
+    outside the criminal surface (people's cards, ties, roster copies, casts, the trace, prose) and no order. So
+    the "server = twin 0 of 112" in every seat's standing figures proves equal SHAPE of one surface and no more.
+    **Decided:** THE WHOLE-DOCUMENT FORM (the served document equal to the twin's projection, value for value, on
+    every read of the pool; modulo the bijection once ids are re-keyed) JOINS EVERY UNIT'S PROOFS BEFORE "TIP?",
+    AFTER ONE MEASURE AT THE TIP'S OWN CODE (chain B's successor, in its act 3: the comparison on the pool at the
+    tip beside the -wip's, by path): on it the chair rules which differences are the tip's own (their own unit, or
+    listed by cause) and which a unit's. **Why:** a twin that differs from the server by value is an owner's
+    preview that is not what readers get; a proof that cannot see 77 differing reads is not the proof its name
+    claims. **Rejected:** imposing it on chains A and C before the tip's own count is known (it could stop every
+    chain at once on old drift). **Reversal:** the form is one arm. **Blast radius:** unknown until the measure:
+    SAID TO THE OWNER, with "the veil's estimate now leans to its longer end". TOLD: VEIL-40 at 04:48 (it builds
+    nothing for it yet; its own differential on the descriptions stands; its "TIP?" says which comparison it ran).
+    OWED: the same word to VEIL-39 or its successor; a row for READERS-LIST.
+  - THE OWNER ASKED at 04:38 "What's our overall progress?" and at 04:42 "What else is in que?": EACH ANSWERED THE
+    SAME TURN. A CORRECTION SAID TO HIM BY NAME: the chair had said "the two database changes"; the pickup's
+    section 6 lists MIGRATIONS 204 TO 212 as his at the close (nine; the chair cannot see which are applied on the
+    live database). Also told: the ten parked lanes (pickup 4.5: the chair knows two by content, eight by name);
+    `intake/AFTER-FIRST-DEPLOY.md` (15 items) and the chair's five of today; four questions open with him and
+    blocking nothing (E112 and E118, E113, E94, E84); his hand at the close (size rises; two DRAFT tuning tables;
+    two golden records; the sample town; the server's AI daily-life function and its price row; migrations 204 to
+    212; the pull request's merge; the deploy). STILL OPEN WITH HIM, HIS TO GIVE OR NOT: the five double possessives
+    before or after the deploy; the line "You may push the working line when the landing's checks pass."
+  - THE CHAIR'S FOURTEENTH AND FIFTEENTH PUSHES (86d42de9b, 1e3105cf0) ENDED exit=0 at 04:05 and 04:20 UTC:
+    CONFIRMED from their logs and by ls-remote.
+  - THE MARKS AT 04:57 UTC (one haiku helper; NO COMPACTION in any working seat's record since 04:00): VEIL-38
+    519,538 (idle on M's pool run; it hands over when M ends); VEIL-39 504,736 (ITS FIGURE HAS NOT MOVED SINCE 02:43:
+    one turn open on two builders for over two hours and no line to the chair: ASKED AT 04:59 for one status
+    message, and told N48 for its proposal); VEIL-40 221,283; PROSE-6 164,154; STACK-106 172,763 (stale: one turn
+    since 02:37); CLOSE-5 335,716 ONE HOUR AFTER ITS SEATING, with the flip's build ahead: TOLD AT 04:59 TO PROTECT
+    ITS WINDOW: every commit of the flip is A BUILDER's, briefed from `FLIP-PLAN.md`; it reads each diff once;
+    nothing large into its context; a successor (CLOSE-6) at a commit boundary if the chair's read nears 600,000.
