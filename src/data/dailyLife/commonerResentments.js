@@ -39,6 +39,10 @@
  * THE CHAIR'S LINE OF B3 F1 (06:17 and E56 of 2026-11-22, `DAILY-3-HANDBACK.md` § 2 items 4 and 5): food #0, today's
  * text, on `grain` and `market` (bread prices need grain in the food record; "merchants who claim" needs a market, M1's
  * false line).
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
+ * taken 2026-11-22 21:55 UTC): legitimacy L14 and L15; food F9 to F13, F9 as the chair reworded it ("Short rations");
+ * each appended at its branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} ResentmentLine */
@@ -62,6 +66,8 @@ export const COMMONER_RESENTMENTS = Object.freeze({
     { id: 'L10', text: 'The mayor is blamed for most of what goes wrong, fairly or not.', needs: ['office: mayor'] },
     { id: 'L11', text: 'People say the reeve they chose has forgotten who chose them.', needs: ['office: reeve'] },
     { id: 'L13', text: 'People say the council is slow to listen and quick to decide without them.', needs: ['ruling body'] },
+    { id: 'L14', text: 'There is little trust here that {gov} will do right by ordinary people.', needs: ['government named'] },
+    { id: 'L15', text: 'People put up with {gov}, but they expect little of {gov|it|them}.', needs: ['government named'] },
   ]),
   /** the food band strained, critical or collapsed. */
   food: frozen([
@@ -74,6 +80,11 @@ export const COMMONER_RESENTMENTS = Object.freeze({
     { id: 'F6', text: 'The price of food is the first complaint on everyone\'s lips.', needs: ['market'] },
     { id: 'F7', text: 'People resent paying more for less, and they say so at the stalls.', needs: ['market'] },
     { id: 'F8', text: 'People ask why {gov} cannot do more about the price of food.', needs: ['government named', 'market'] },
+    { id: 'F9', text: 'Short rations are the talk of every household, and patience is wearing thin.', needs: [] },
+    { id: 'F10', text: 'There is grumbling in every kitchen about how little there is to put on the table.', needs: [] },
+    { id: 'F11', text: 'People complain that a day\'s work does not buy a day\'s food.', needs: ['market'] },
+    { id: 'F12', text: 'Going short at table is the complaint heard most often here.', needs: [] },
+    { id: 'F13', text: 'Many households are eating less than they would like, and they say so.', needs: [] },
   ]),
   /** a live popular-uprising tension (`facts/uprising.js`): the common people pressing those in charge. */
   uprising: frozen([
