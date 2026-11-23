@@ -67,7 +67,7 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
@@ -88,7 +88,7 @@ vi.mock('../../src/lib/gallery.js', async (importOriginal) => {
 vi.mock('../../src/lib/saves.js', async (importOriginal) => ({ ...(await importOriginal()), saves: { save: vi.fn() } }));
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
-const POOL_TIMEOUT_MS = 3_000_000; // the pool's own hook: 140 born towns, six shares each, two reads and an import per share
+const POOL_TIMEOUT_MS = 7_200_000; // deadlock guard for the pool's own hook (140 born towns, six shares each, two reads and an import per share; measured about 3,000 s alone), never a budget
 const ARM_TIMEOUT_MS = 120_000;
 
 const MIGRATIONS = resolve(process.cwd(), 'supabase', 'migrations');
@@ -139,6 +139,11 @@ const markerOf = (name) => (name === 'unmarked' ? {}
 /** What fetchDossierForImport strips on purpose (src/lib/gallery.js :: stripImportConfidential), by name. */
 const FETCH_STRIPS = ['seed', '_seed', '_config', 'config._seed', 'dmNotes', 'dossierNotes', 'narrativeNotes'];
 
+/** The printed records (TRAD4-RECUT MEASURE, TOOTH): logged, and appended to TRAD4_RECORD_OUT when set (the gate may silence a passing test's log). */
+const record = (line) => {
+  console.log(line);
+  if (process.env.TRAD4_RECORD_OUT) writeFileSync(process.env.TRAD4_RECORD_OUT, `${line}\n`, { flag: 'a' });
+};
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 /** JSON with every record's keys sorted (a jsonb round trip reorders keys). */
 const J = (v) => JSON.stringify(v ?? null, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((q) => [q, x[q]])) : x));
@@ -282,7 +287,7 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
   /** @type {PGlite} */ let db;
   const pool = [];
   const red = { a: [], fetch: [], clone: [] };
-  const tally = { strips: {}, masked: 0, keys: {}, foreign: {}, refused: 0 };
+  const tally = { strips: {}, masked: 0, keys: {}, foreign: {}, refused: 0, ms: { birth: 0, gallery: 0, importRpc: 0, importClient: 0, checks: 0 }, byTier: {} };
   const veiled = Object.fromEntries(MARKERS.map((m) => [m, { shares: 0, towns: new Set(), rows: 0 }]));
   let tooth = null;
   let seq = 0;
@@ -307,7 +312,9 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
     const last = { row: null }; // the import RPC's row, as the PGlite import_gallery_dossier served it
     supabase.rpc.mockImplementation(async (fn, args) => {
       if (fn !== 'import_gallery_dossier') return { data: null, error: { message: `unexpected rpc ${fn}` } };
+      const t0 = Date.now();
       const rows = (await db.query('select * from public.import_gallery_dossier($1)', [args.dossier_slug])).rows;
+      tally.ms.importRpc += Date.now() - t0;
       last.row = rows[0] ?? null;
       return { data: rows, error: null };
     });
@@ -316,11 +323,13 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
     for (let i = 0; i < N; i += 1) {
       const tier = TIERS[i % TIERS.length];
       const culture = CULTURES[Math.floor(i / TIERS.length) % CULTURES.length];
+      const tb = Date.now();
       const t = generateSettlementPipeline(
         { settType: tier, culture, terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' },
         null, { seed: `trad4-u8-${tier}-${culture}-${i}`, customContent: {} },
       );
       const stored = withPublicProse(t, composePublicProse(t));
+      tally.ms.birth += Date.now() - tb;
       const town = { i, tier, culture, name: stored.name, neighbour: stored.neighborRelationship?.name ?? null, shares: 0, imported: 0 };
       for (const dm of [false, true]) {
         let unmarked = null;
@@ -333,15 +342,21 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
             values (gen_random_uuid(), $1, $2, $3, $4::jsonb, true, $5, now(), $6::jsonb, $7, true) returning id::text as id, name, tier`,
           [OWNER, stored.name, tier, JSON.stringify(stored), slug, JSON.stringify(overrides), dm])).rows[0];
           await db.exec(`set test.uid = '';`);
+          const tg = Date.now();
           const gallery = (await db.query('select to_jsonb(g.data) as d from public.get_gallery_dossier($1) g', [slug])).rows[0]?.d;
+          tally.ms.gallery += Date.now() - tg;
+          tally.byTier[tier] = (tally.byTier[tier] || 0) + Date.now() - tg;
           await db.exec(`set test.uid = '${IMPORTER}';`);
           last.row = null;
           const before = entries.length;
+          const ti = Date.now(); const rpcBefore = tally.ms.importRpc;
           const newId = await importGallerySettlementImpl(
             () => ({ auth: { user: { id: IMPORTER }, tier: 'premium' }, maxSaves: () => Infinity, savedSettlements: [] }),
             (fn) => fn({ savedSettlements: [] }), slug,
           );
+          tally.ms.importClient += Date.now() - ti - (tally.ms.importRpc - rpcBefore);
           await db.exec(`set test.uid = '';`);
+          const tc = Date.now();
           const imported = last.row?.data;
           const dossier = await fetchDossierForImport.mock.results.at(-1)?.value;
           const clone = entries.length === before + 1 ? entries.at(-1).settlement : null;
@@ -359,12 +374,13 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
             const k = Object.keys(unmarked).find((key) => J(unmarked[key]) !== J(gallery[key]));
             if (k) tooth = { where, key: k, imported, gallery, clone, overrides, restored: { ...gallery, [k]: unmarked[k] } };
           }
+          tally.ms.checks += Date.now() - tc;
         }
       }
       pool.push(town);
     }
     pool.ms = Date.now() - started;
-    console.log(`TRAD4-RECUT MEASURE: ${pool.length} towns, ${seq} shares, ${pool.ms} ms; fetch strips ${J(tally.strips)}; masked ${tally.masked}; clone keys ${J(tally.keys)}; foreign ${J(tally.foreign)}; veiled ${J(Object.fromEntries(MARKERS.map((m) => [m, { towns: veiled[m].towns.size, shares: veiled[m].shares, rows: veiled[m].rows }])))}; tooth ${tooth?.where} ${tooth?.key}`);
+    record(`TRAD4-RECUT MEASURE: ${pool.length} towns, ${seq} shares, ${pool.ms} ms; fetch strips ${J(tally.strips)}; masked ${tally.masked}; clone keys ${J(tally.keys)}; foreign ${J(tally.foreign)}; veiled ${J(Object.fromEntries(MARKERS.map((m) => [m, { towns: veiled[m].towns.size, shares: veiled[m].shares, rows: veiled[m].rows }])))}; tooth ${tooth?.where} ${tooth?.key}; ms ${J(tally.ms)}; gallery ms by tier ${J(tally.byTier)}`);
   }, POOL_TIMEOUT_MS);
 
   it('NOT VACUOUS (c): 140 towns, every tier, at least six cultures, each shared six times and imported six times; for every marker at least one town\'s share withholds a row (counted)', () => {
@@ -399,6 +415,6 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
     const restored = [...checkImportEqualsRead(tooth.where, tooth.imported, tooth.gallery, tooth.overrides),
       ...checkClone(tooth.where, tooth.clone, tooth.gallery, { keys: {}, foreign: {} })];
     expect(restored).toEqual([]);
-    console.log(`TRAD4-RECUT TOOTH: ${tooth.where}: ${tooth.key} restored, ${planted.length} reds: ${planted.slice(0, 3).join(' || ')}`);
+    record(`TRAD4-RECUT TOOTH: ${tooth.where}: ${tooth.key} restored, ${planted.length} reds: ${planted.slice(0, 3).join(' || ')}`);
   }, ARM_TIMEOUT_MS);
 });
