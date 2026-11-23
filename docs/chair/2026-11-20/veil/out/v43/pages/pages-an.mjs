@@ -30,6 +30,7 @@ for (const r of F.filter((x) => !x.error)) {
   nLines += r.lines.P0; nP1 += r.lines.P1; renders += r.renders || 0; if (r.hiddenLeft?.length) { hidLeft += 1; }
   for (const t of r.tabs.P0) if (!r.tabs.P1.includes(t)) bump(tabsOnly.P0, t); for (const t of r.tabs.P1) if (!r.tabs.P0.includes(t)) bump(tabsOnly.P1, t);
   for (const [t, d] of Object.entries(r.diff)) {
+    for (const l of d.moved || []) { bump(FT, `${t}|MOVED`); const e = `${t}|MOVED|-`; if (!ex[e]) ex[e] = { seed: r.seed, text: l.slice(0, 220) }; }
     const items = [...d.lost.map((l) => ['LOST', `${t}\u0001L\u0001${l}`, l]), ...d.gained.map((l) => ['GAINED', `${t}\u0001G\u0001${l}`, l]), ...d.changed.map(([a, b]) => ['CHANGED', `${t}\u0001C\u0001${a}\u0001${b}`, `${a}  =>  ${b}`, a, b])];
     for (const [cls, id, text, a, b] of items) {
       const key = causeOf(r.restoredBy?.[id]);
@@ -110,12 +111,12 @@ for (const [k, v] of Object.entries(DLs)) console.log(`  ${k.padEnd(28)} ${v.dif
 console.log(`(N) OFFICE LINES L8..L11 printed in commoner_resentments (L12 NOT BUILT): ${J(office)}`);
 
 // ── THE OWNER-ONLY SLOT
-const dm = { F_P1: [0, 0, 0, 0], F_server: [0, 0, 0, 0], N_A: [0, 0, 0, 0], N_B: [0, 0, 0, 0] }; // pages, printed, slot key, doc key
-const add = (k, s) => { if (!s) return; dm[k][0] += 1; if (s.printed) dm[k][1] += 1; if (s.slotKey) dm[k][2] += 1; if (s.docKey) dm[k][3] += 1; };
+const dm = { F_P1: [0, 0, 0, 0, 0], F_server: [0, 0, 0, 0, 0], N_A: [0, 0, 0, 0, 0], N_B: [0, 0, 0, 0, 0] }; // pages, printed, slot key, doc key, pages whose owner read has a line
+const add = (k, s) => { if (!s) return; dm[k][0] += 1; if (s.printed) dm[k][1] += 1; if (s.slotKey) dm[k][2] += 1; if (s.docKey) dm[k][3] += 1; if (s.dmText) dm[k][4] += 1; };
 for (const r of F.filter((x) => !x.error)) { add('F_P1', r.dm); add('F_server', r.server?.dm); }
 for (const r of N.filter((x) => !x.error)) for (const rd of Object.values(r.reads)) { add('N_A', rd.dmSlot.A); add('N_B', rd.dmSlot.B); }
 const dmPresent = Object.values(dm).reduce((a, v) => a + v[1] + v[2] + v[3], 0);
-console.log(`\nDM SLOT (commoner_resentments_dm) [pages, printed, in slots, key in document]: ${J(dm)} -> present ${dmPresent}`);
+console.log(`\nDM SLOT (commoner_resentments_dm) [pages, printed, in slots, key in document, owner line exists]: ${J(dm)} -> present ${dmPresent}`);
 if (dmPresent) stops.push(`DM SLOT present ${dmPresent}`);
 console.log(`\nSTOPS ${stops.length}`); for (const s of stops.slice(0, 40)) console.log(`  ${s}`);
 console.log(`ONE LINE: (F) lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} over ${nLines} lines; (N) differ ${nd} lines on ${ntowns} towns; dm-slot present ${dmPresent}`);

@@ -81,8 +81,9 @@ function diffLines(A, B) {
   const n = A.length; const m = B.length; const W = m + 1;
   const dp = new Uint32Array((n + 1) * W);
   for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) dp[i * W + j] = A[i] === B[j] ? dp[(i + 1) * W + j + 1] + 1 : Math.max(dp[(i + 1) * W + j], dp[i * W + j + 1]);
-  const out = { lost: [], gained: [], changed: [] }; let dels = []; let ins = [];
-  const flush = () => { const k = Math.min(dels.length, ins.length); for (let x = 0; x < k; x++) out.changed.push([dels[x], ins[x]]); out.lost.push(...dels.slice(k)); out.gained.push(...ins.slice(k)); dels = []; ins = []; };
+  // the hunks (a run of deletions and insertions between two equal lines), unpaired
+  const hunks = []; let dels = []; let ins = [];
+  const flush = () => { if (dels.length || ins.length) hunks.push({ dels, ins }); dels = []; ins = []; };
   let i = 0; let j = 0;
   while (i < n || j < m) {
     if (i < n && j < m && A[i] === B[j]) { flush(); i++; j++; }
@@ -90,6 +91,25 @@ function diffLines(A, B) {
     else dels.push(A[i++]);
   }
   flush();
+  const out = { lost: [], gained: [], changed: [], moved: [] };
+  const L = hunks.flatMap((h, x) => h.dels.map((t) => ({ t, x, used: false }))); const G = hunks.flatMap((h, x) => h.ins.map((t) => ({ t, x, used: false })));
+  // 1. MOVED: the same text on both sides at another place (an order change, not a text change)
+  for (const l of L) { const g = G.find((y) => !y.used && y.t === l.t); if (g) { l.used = true; g.used = true; out.moved.push(l.t); } }
+  // 2. THE SAME BLOCK: a lost and a gained line that open on the same label (a common prefix of at least 12 characters,
+  //    the longest first, anywhere in the tab: a disclosure's order can part them) are one line whose text moved: CHANGED
+  const pre = (x, y) => { let k = 0; while (k < x.length && k < y.length && x[k] === y[k]) k++; return k; };
+  for (;;) {
+    let best = null;
+    for (const l of L) if (!l.used) for (const g of G) if (!g.used) { const k = pre(l.t, g.t); if (k >= 12 && (!best || k > best[2])) best = [l, g, k]; }
+    if (!best) break;
+    best[0].used = true; best[1].used = true; out.changed.push([best[0].t, best[1].t]);
+  }
+  // 3. THE SAME PLACE: what is left of one hunk pairs by order (CHANGED); the rest is LOST or GAINED
+  hunks.forEach((_h, x) => {
+    const ls = L.filter((l) => l.x === x && !l.used); const gs = G.filter((g) => g.x === x && !g.used); const k = Math.min(ls.length, gs.length);
+    for (let y = 0; y < k; y++) out.changed.push([ls[y].t, gs[y].t]);
+    out.lost.push(...ls.slice(k).map((l) => l.t)); out.gained.push(...gs.slice(k).map((g) => g.t));
+  });
   return out;
 }
 /** Every tab's diff (views of `a` against `b`); `only` limits the tabs read. A tab one side lacks reads as all lost / gained. */
@@ -99,7 +119,7 @@ function diffViews(a, b, only = null) {
     if (only && !only.has(t)) continue;
     const d = diffLines(a[t] || [], b[t] || []);
     if (!(t in a)) d.tabGained = true; if (!(t in b)) d.tabLost = true;
-    if (d.lost.length || d.gained.length || d.changed.length) out[t] = d;
+    if (d.lost.length || d.gained.length || d.changed.length || d.moved.length) out[t] = d;
   }
   return out;
 }
