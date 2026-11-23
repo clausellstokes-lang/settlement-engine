@@ -1,0 +1,3 @@
+/var/tmp/r4ip3/stored-today: 140 stored documents, 0 stored person ids of the fresh shape
+/var/tmp/r4ip3/stored-master: 140 stored documents, 0 stored person ids of the fresh shape
+EXIT=0

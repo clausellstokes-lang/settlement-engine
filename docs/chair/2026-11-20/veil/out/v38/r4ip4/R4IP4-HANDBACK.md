@@ -37,6 +37,17 @@ ran before it. `tests/security` whole (item R4) runs every one at the last commi
 eslint on every touched file: 0 errors (logs/g3-eslint.txt).
 
 ## (b) RULING 4's register row: pending
-## (e) the mask's two conditions: built (logs/e-*.txt), commit pending
+## (e) THE MASK'S TWO CONDITIONS (the chair's ruling (e)): DONE (commit: E)
+`personIdBijection.shared.mjs` (F): (i) `freshShapedStoredIds(reference)` counts the stored person ids of the fresh shape;
+`storedIdsServed` compares them as whole tokens (never masked) and REDS BY NAME where one exists; (ii) the mask takes whole
+tokens only: `(?<![0-9A-Za-z_])(npc|tie)_[0-9a-f]{16}(?![0-9A-Za-z_])` (it was `(?![0-9a-z])`, no left edge).
+- RED FIRST, by execution (logs/e-red-green-plants.txt): R4I-PAGE-3's mask MISSED three of the plants "a short stored id
+  inside a longer string that is not a fresh token": `npc_2fffffffffffffff_x`, `npc_2fffffffffffffffX`, `xnpc_2fffffffffffffff`
+  (the bare id and `the npc_2 smith` were caught); no count existed. GREEN after: all caught; the fresh token a short id
+  begins is still the re-key's own.
+- The plants as a test: galleryVeilIds "(F) THE MASK'S TWO CONDITIONS" (pure), 1 passed (logs/e-galleryVeilIds-F.txt).
+- THE COUNT on R4I-PAGE-3's stored sets (`/var/tmp/r4ip3/stored-{today,master}`, `e/fresh-shaped-count.mjs`): today-born
+  140 documents, 0 stored ids of the fresh shape; master-born 140, 0 (logs/e-fresh-shaped-count.txt). `stored-ids.sh`
+  re-run on both: queued on the mutex (below).
 ## (c) the link twin and the anchor: built; measured green on a probe copy (logs/c-probe3-*.txt), commit pending
 ## R — the runs: the 34 files and Tell3/4/5/8 queued on the mutex (chainA); SignalCopies at tip and tree, security and lint whole pending

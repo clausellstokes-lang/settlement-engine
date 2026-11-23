@@ -1,0 +1,4 @@
+HEAD helper (R4I-PAGE-3's mask):
+[["bare",true],["npc_2fffffffffffffff_x",false],["npc_2fffffffffffffffX",false],["xnpc_2fffffffffffffff",false],["the npc_2 smith",true],["freshShapedStoredIds exists",false],["fresh-shaped stored reds by name",false]]
+this tree's helper ((F)):
+[["bare",true],["npc_2fffffffffffffff_x",true],["npc_2fffffffffffffffX",true],["xnpc_2fffffffffffffff",true],["the npc_2 smith",true],["freshShapedStoredIds exists",true],["fresh-shaped stored reds by name",true]]

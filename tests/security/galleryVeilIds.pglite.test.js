@@ -549,3 +549,26 @@ describe('R4-IDS: VR10\'s person ids on every non-owner read (through the server
     expect(bad.slice(0, 40)).toEqual([]);
   });
 });
+
+// R4I-PAGE-4 (VEIL-38; the chair's ruling (e), 02:38 UTC): R4I-PAGE-3's mask (personIdBijection.shared.mjs (E)) is accepted on
+// two conditions, (F): (i) a stored person id of the fresh shape is counted, compared as a whole token, and reds by name;
+// (ii) the mask takes whole tokens only, so a short stored id served bare, or inside a longer string that is not a fresh
+// token, stays caught. Pure: no read, the helper's own plants.
+describe('(F) THE MASK\'S TWO CONDITIONS (the chair\'s ruling (e))', () => {
+  it('a short stored id served bare and inside a longer non-token string is caught; a fresh token it begins is not; a stored id of the fresh shape reds by name', async () => {
+    const B = await import('./personIdBijection.shared.mjs');
+    const ref = { npcs: [{ id: 'npc_2', name: 'A' }, { id: 'npc_11', name: 'B' }] };
+    const hex = 'f'.repeat(15);
+    // (ii) the two plants that must stay caught after the mask
+    expect(B.storedIdsServed({ npcs: [{ id: 'npc_2' }] }, ref)).toEqual(['.npcs[0].id = npc_2']);
+    for (const s of [`npc_2${hex}_x`, `npc_2${hex}X`, `xnpc_2${hex}`, `the npc_2 smith`]) expect(B.storedIdsServed({ note: s }, ref), s).toEqual([`.note = ${s} (holds npc_2)`]);
+    // (E) still: a whole fresh token a short stored id begins is the re-key's own, not a stored id served
+    expect(B.storedIdsServed({ npcs: [{ id: `npc_2${hex}` }], note: `a npc_11${'e'.repeat(14)}.` }, ref)).toEqual([]);
+    // (i) a stored id of the fresh shape: counted, never masked, red by name whether served or not
+    const fresh = { npcs: [{ id: 'npc_0123456789abcdef', name: 'C' }] };
+    expect(B.freshShapedStoredIds(fresh)).toEqual(['npc_0123456789abcdef']);
+    expect(B.freshShapedStoredIds(ref)).toEqual([]);
+    expect(B.storedIdsServed({ npcs: [{ id: 'npc_aaaaaaaaaaaaaaaa' }] }, fresh)).toEqual(["(F) a stored person id has the re-key's fresh shape: npc_0123456789abcdef"]);
+    expect(B.storedIdsServed({ npcs: [{ id: 'npc_0123456789abcdef' }] }, fresh)).toEqual(["(F) a stored person id has the re-key's fresh shape: npc_0123456789abcdef", '.npcs[0].id = npc_0123456789abcdef']);
+  });
+});

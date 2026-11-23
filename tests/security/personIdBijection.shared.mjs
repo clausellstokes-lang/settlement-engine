@@ -41,6 +41,12 @@
  *   (E) tooth (ii)'s substring search masks the re-key's own fresh tokens first (`npc_`/`tie_` and 16 hex, not themselves a
  *       stored id): a stored id that is a PREFIX of a fresh token (a fixture's `npc_2`, `npc_11`; a number's text inside the
  *       hex) was read as served about one read in eight, a false red; every other occurrence still reds.
+ * R4I-PAGE-4 (VEIL-38; the chair's ruling (e), 02:38 UTC, accepting (E) on two conditions), CHANGED in one place more:
+ *   (F) (i) a STORED person id that itself has the fresh shape (`npc_`/`tie_` and 16 hex) is counted on every document
+ *       judged (`freshShapedStoredIds`), is compared as a WHOLE TOKEN and never masked, and `storedIdsServed` REDS BY NAME
+ *       wherever one exists (served or not: the mask could not tell it from the re-key's own); (ii) the mask takes WHOLE
+ *       tokens only: no word character before the prefix, 16 hex, then no word character (letters of either case, digits,
+ *       `_`), so a stored id served bare, or inside a longer string that is not a fresh token, still reds.
  */
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -123,6 +129,15 @@ function strings(v, p = '', out = []) {
   return out;
 }
 
+/** (F) The fresh shape of a re-keyed id, as a whole value; and as a whole token inside a string (no word character either side). */
+export const FRESH_SHAPE = /^(?:npc|tie)_[0-9a-f]{16}$/;
+const FRESH_TOKEN = /(?<![0-9A-Za-z_])(?:npc|tie)_[0-9a-f]{16}(?![0-9A-Za-z_])/g;
+/** (F)(i) The stored person ids of `reference` that themselves have the fresh shape: counted on every document judged. 0 wanted. */
+export function freshShapedStoredIds(reference) {
+  const ids = cardIds(reference);
+  return [...new Set(sites(reference).filter(([h, k, kind]) => kind === 'npc' && rekeyed(h[k], kind, ids)).map(([h, k]) => String(h[k])))].filter((x) => FRESH_SHAPE.test(x));
+}
+
 /**
  * TOOTH (ii): the original (stored) person ids of `reference` (its cards' and every person reference's), found anywhere
  * in `served` (a value or a key), AS A SUBSTRING (A): `served` may be any value, e.g. `[document, servedMarker]`, so the
@@ -133,10 +148,12 @@ export function storedIdsServed(served, reference) {
   const stored = [...new Set(sites(reference).filter(([h, k, kind]) => kind === 'npc' && rekeyed(h[k], kind, ids)).map(([h, k]) => String(h[k])))].filter((x) => x !== '');
   const out = [];
   const storedSet = new Set(stored);
+  // (F)(i) a stored id of the fresh shape reds by name, wherever it is (the mask below never takes it: a whole token)
+  for (const x of stored) if (FRESH_SHAPE.test(x)) out.push(`(F) a stored person id has the re-key's fresh shape: ${x}`);
   // (E) the re-key's own fresh tokens are masked before the search, so a short stored id that happens to begin a fresh
   // token (stored `npc_2` and served `npc_2f…`) is not read as served: a stored id served verbatim, or inside any other text,
-  // still reds; a token that IS a stored id is never masked
-  const fresh = (s) => s.replace(/(?:npc|tie)_[0-9a-f]{16}(?![0-9a-z])/g, (t) => (storedSet.has(t) ? t : '\u0000'));
+  // still reds; a token that IS a stored id is never masked. (F)(ii) whole tokens only
+  const fresh = (s) => s.replace(FRESH_TOKEN, (t) => (storedSet.has(t) ? t : '\u0000'));
   for (const [p, s] of strings(served)) { const m = fresh(s); const id = stored.find((x) => m.includes(x)); if (id !== undefined) out.push(`${p} = ${s}${s === id ? '' : ` (holds ${id})`}`); }
   return out;
 }
