@@ -50,7 +50,6 @@ Beside each new line (pages):
 - Cured at the tip, each by its row below: factLayers, samenessHideable (the house list does not move after the withdrawal: not re-taken), wiringCensusDeclared, proseWiringCensus, proseEntryContradiction, proseWaveGate, observedShapeReaders, sovereigntyLighting.
 
 ## (f) THE NAMED FILES: 97 named, 79 kept (the 18 out are helpers, fixtures and registers). The 63 outside `tests/lint` were run with the tooth: 1,000 tests, 1 red, voiceMechanics, which is on RED-AT-LINE. crisisBlindDossierProse is green with nothing changed.
-
 ## PINS, BEFORE → AFTER (each figure is the walker's own measurement; the cause is in each comment)
 - proseComposed GUARD THE GUARD: 3176 → 3182.
 - proseWiringCensus VARIANT column: 3176 → 3182 (×3); mean '3.69' → '3.70' (3182 / 861); histogram 6: 40 → 39, 12: 1 → 2.
@@ -58,7 +57,6 @@ Beside each new line (pages):
 - proseWaveGate: 712 → 718.
 - stateProseKernel: departure list n=6 40 → 39, n=12 1 → 2; append list n=12 1 → 2. One pool moved: DS-DEF-2 CHAIN, 6 → 12 variants.
 - Desk fixture: `fort` takes `foodBand`; the clause test passes 'pressured'.
-
 ## REGISTERS MOVED (each by its own door)
 - Wiring census: against 244fa84ef, variants 3176 → 3182; WEAK's grammars 2 → 1; tiers unchanged: THIN 613, COVERED 248.
 - Shift register: 3182, five pins; the notes say the re-wording.
@@ -68,7 +66,6 @@ OWNER'S, untouched:
 - proseCorpusBytes RAW: defense 299,885 → 302,541; general 312,515 → 312,515.
 - GZIP: defense 39,774 → 40,039; general 39,500 → 39,500.
 - A0b under-claim: 2,322 → 2,328.
-
 ## RATCHETS AND BUILD
 `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`: 2,035 tests, 2 red, both on RED-AT-LINE (voiceMechanics, deadOperationRatchet).
 `npm run build`: exit 0. `VERIFY_DIST=1 tests/build`: 623 tests, 15 red, all on RED-AT-LINE.
