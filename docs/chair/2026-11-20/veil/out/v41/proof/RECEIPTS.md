@@ -53,3 +53,7 @@ shard 0 rc=0
 shard 3 rc=0
 shard 2 rc=0
 ```
+
+## meas-ctrl rc=2 15:58:09
+```
+```
