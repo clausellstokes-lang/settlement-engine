@@ -5,6 +5,35 @@ E126 and E129 before its dispatch: the first line (the window), item 5 (the walk
 time; THE LEGACY ARM on VEIL-33's read-stored instrument, never a second one), item 5b (ruling 51 untouched) and the LAWS (paths).
 Dispatched only after R5D-SQL's commit is read whole by the seat.
 
+## VEIL-37's CORRECTIONS AND THE SPLIT (chain A's writer under the ninth chair; each vetoable; where they differ from below, these govern)
+- TWO BUILDERS, ONE AFTER THE OTHER on the code they share; each reads this WHOLE brief and builds only its half:
+  - R5D-PAGE-A: items 0, 1, 2, 3, 4, 6, 7 and 8. Worktree `/home/user/wt/r5dpage`, branch `lane/veil-37-2026-11-23-r5dpage-wip`, cut at
+    eeda6a126 (R5D-FORMS and R5D-SQL in). R5D-SQL-2 (the mask in the name slot, E136 (a); `briefs/R5D-SQL-2-BRIEF.md`) is building
+    beside you on `lane/veil-37-2026-11-23-r5desc-wip` and touches only `scripts/veil/standingForms.*`, 212's STANDING_FORMS literal and
+    header, `galleryWithholdAlways.js`'s literal (and perhaps one clause of the registry): never edit those. Plant (e) (the mask in a
+    standing) is EXPECTED RED on your branch until the seat merges R5D-SQL-2 into it: build it red and name it so. Budget about 400,000.
+  - R5D-PAGE-B: items 5 (the table's walker and THE LEGACY ARM), 5b and 5c (the stored halves of A's plant, fidelity arm and
+    differential; the `publicProse` count by block). Dispatched after A returns and is read, on the seat's branch with A merged; it
+    reads A's hand-back's first section and A's test files by the symbols it extends (never whole). Budget about 350,000. B WRITES
+    TEST FILES AND INSTRUMENTS ONLY: if it finds it must touch a file under `src/`, it STOPS and says so. After B: `tests/lint` whole
+    again, typecheck and eslint on its files.
+  - RULED BY THE NINTH CHAIR (00:23 UTC 2026-11-23): the split, one after the other; A is the ONE writer of `pageRederive.js`; THE
+    UNIT IS NOT PROVED, AND NO "TIP?" IS ASKED, BEFORE B's STORED ARM HAS RUN (E134 (1)). Both builders' window: 1,000,000 tokens
+    (compaction forced at 784,000); what each reads whole is this brief's first line (B: plus nothing of `src/` whole but the files
+    its item names).
+- ITEM 8's COUNT IS STALE: `tests/lint` whole at the tip af708f2fd is 48 failed tests in 17 files
+  (`out/v36/seated/lint-whole-fails-af708f2fd.txt` on `lane/veil-36-2026-11-22`): the lane's 22 (16 files) and
+  `rosterChoiceComposedHosts.walker`'s 26. AFTER R5-DESC THE EXPECTED RED IS: the lane's 22 by name, and on the composed-hosts walker
+  only the rows still on R5's planned host (`power.desc`, `power.relation.dmNote` and `power.label` have left it: R5D-SQL; the 23
+  `publicProse` rows stay red by design unless the chair rules otherwise): count them by name. Any other red is yours to cure or name.
+- E134 BINDS EVERY PROOF: the universe is the document as `saves.js` stores it (today-born stored and master-born stored); the stored
+  prose is COUNTED, never cured (chain C's). The lane's tip will move (VEIL-39's test-only re-statement of
+  `galleryVeilHandRows.pglite` V7-2): not yours; the seat merges it.
+- HAND-BACKS: `docs/chair/2026-11-20/veil/out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md` and `.../out/v37/r5dpage-b/R5DPAGE-B-HANDBACK.md`
+  (first section: commits, files, every run with its exit, `tests/lint` whole's count, what is not run). Never push. The database
+  cluster is `PGHOST=/var/tmp/rv7 PGUSER=postgres`; heavy runs through `scripts/gate-mutex.sh --run`; no git repository variables in a
+  test run's environment.
+
 ## WHAT YOU BUILD
 0. FIRST, THE GAP IN R5-RECENT (the chair's E128, from VEIL-34's review (H); one writer on `pageRederive.js`, no line of 212).
    `pageRederive.js :: rederiveRecentConflict` (reader B) builds the sentence by `generatePowerStructure` from the served HOUSES and
