@@ -16,8 +16,14 @@
  * with gallery_share_campaign, campaign.settlementIds holding the town, the 046 owner guard satisfied: one owner):
  *   (c) THE CONTROL   get_gallery_dossier(slug).data: neither the covert copy nor the covert-telling sentence, nor any
  *                     marked tag of the covert tie; a person of the town still arrives. GREEN at 23bb8b8ae.
+ *   (d) THE CONTROL, THE MEMBER'S ACCEPTANCE (the seat's correction, the chair's N84 (1), ruled 10:54 UTC: the map member
+ *                     is the PARTY LINK's read of the same town: the public projection always, an unmarked member takes the
+ *                     default veil, share-level Reveal DM never applies): get_unlisted_dossier(<unlisted slug>).dossier, a
+ *                     visitor: the same sends withheld. GREEN at 23bb8b8ae. Where (c) and (d) differ on the two keys is
+ *                     printed (MAPCOVERT-CD), never asserted: on an unmarked share (d) takes the default veil and (c) does not
+ *                     (ruled, VR23).
  *   (a)               get_gallery_map(slug) members[0].settlement, read as a visitor: the same, and the two keys present or
- *                     absent EXACTLY as on (c). RED at 23bb8b8ae (the fault).
+ *                     absent EXACTLY as on (d), the link. RED at 23bb8b8ae (the fault).
  *   (b)               import_gallery_map(slug) members[0].settlement, read as a signed-in reader (072's gate): the same. RED.
  *   THE TOOTH         a town with NO covert tie serves its prominentRelationship on all three doors (a member that drops the
  *                     key always does not pass (a) or (b)).
@@ -175,8 +181,9 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
 
   /**
    * One share of `town` under the marker, Reveal DM `dm`, on its own map_with_campaign map (one owner: the 046 guard), read
-   * by the three doors: { gallery: get_gallery_dossier data, map: get_gallery_map's member, mapImport: import_gallery_map's
-   * member (a signed-in reader) } and how many members each map door handed.
+   * by the four doors: { gallery: get_gallery_dossier data, link: get_unlisted_dossier's dossier (the party link, a visitor),
+   * map: get_gallery_map's member, mapImport: import_gallery_map's member (a signed-in reader) } and how many members each
+   * map door handed.
    */
   async function readsOf(key, town, marker, dm) {
     const k = `${key}|${marker}|${dm}`;
@@ -194,8 +201,9 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     await db.exec(`set test.uid = '${READER}';`);
     const mapImport = (await db.query(`select public.import_gallery_map($1) as x`, [`${slug}-m`])).rows[0]?.x;
     await db.exec(`set test.uid = '';`);
+    const link = (await db.query(`select public.get_unlisted_dossier($1) -> 'dossier' as d`, [`${slug}-l`])).rows[0]?.d;
     const members = (m) => (isRec(m) && Array.isArray(m.members) ? m.members : []);
-    const out = { gallery, map: members(map)[0]?.settlement, mapImport: members(mapImport)[0]?.settlement,
+    const out = { gallery, link, map: members(map)[0]?.settlement, mapImport: members(mapImport)[0]?.settlement,
       counts: { map: members(map).length, mapImport: members(mapImport).length } };
     memo.set(k, out);
     return out;
@@ -216,10 +224,17 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     if (!leaves(doc).some((l) => l.kind === 'value' && l.text === person)) bad.push(`${what}: the person ${person} is gone`);
     return bad;
   };
-  /** The keys on a map door present or absent EXACTLY as on the gallery read. */
-  const keysAsGallery = (what, doc, gallery) => ['prominentRelationship', 'pressureSentence']
-    .filter((key) => isRec(doc) && isRec(gallery) && (key in doc) !== (key in gallery))
-    .map((key) => `${what}: ${key} is ${key in doc ? 'present' : 'absent'} on the map door, ${key in gallery ? 'present' : 'absent'} on the gallery read`);
+  /**
+   * The keys on a map door present or absent EXACTLY as on the party link (the chair's N84 (1), 10:54 UTC: the map member is
+   * the link's read of the same town: the public projection, the default veil on an unmarked share, never Reveal DM).
+   */
+  const keysAsLink = (what, doc, link) => ['prominentRelationship', 'pressureSentence']
+    .filter((key) => !isRec(doc) || !isRec(link) || (key in doc) !== (key in link))
+    .map((key) => `${what}: ${key} is ${isRec(doc) && key in doc ? 'present' : 'absent'} on the map door, ${isRec(link) && key in link ? 'present' : 'absent'} on the link`);
+  /** Where the two controls differ, (c) the gallery read and (d) the link, on the two keys: RECORDED, not asserted (VR23). */
+  const cdDiffer = (what, r) => ['prominentRelationship', 'pressureSentence']
+    .filter((key) => (isRec(r.gallery) && key in r.gallery) !== (isRec(r.link) && key in r.link))
+    .map((key) => `MAPCOVERT-CD ${what}: ${key} ${isRec(r.gallery) && key in r.gallery ? 'present' : 'absent'} on (c) the gallery read, ${isRec(r.link) && key in r.link ? 'present' : 'absent'} on (d) the link`);
   /** The covert tie's own strings of a born place (its description and tension), the tags a hand plant carries in its marks. */
   const bornTags = (town) => {
     const pr = town.prominentRelationship;
@@ -236,35 +251,47 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('MAP-COVERT (a): get_gallery_map\'s member (members[0].settlement, a visitor) of that hand town serves neither the covert copy nor the covert-telling sentence, nor a tag of the covert tie, and the two keys present or absent exactly as on the gallery read, at Reveal off on the three markers', async () => {
+  it('MAP-COVERT (d) THE CONTROL, the member\'s acceptance (the chair\'s N84 (1)): the party link (get_unlisted_dossier dossier, a visitor) of that hand town serves neither the covert copy nor the covert-telling sentence, nor a tag of the covert tie, at Reveal off on the three markers; where (c) and (d) differ on the two keys is printed (MAPCOVERT-CD), not ruled here (VR23)', async () => {
+    const town = PLANT(); const cov = covertOf(town);
+    const bad = []; const cd = [];
+    for (const m of MARKERS) {
+      const r = await readsOf('plant', town, m, false);
+      bad.push(...sendsOf(`link | ${m} | off`, r.link, town, cov, PLANT_TAGS, 'Mira Vane'));
+      cd.push(...cdDiffer(`plant | ${m} | off`, r));
+    }
+    console.log(cd.length ? cd.join('\n') : 'MAPCOVERT-CD plant: (c) and (d) agree on both keys, three markers');
+    expect(bad, `${bad.length} sends`).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('MAP-COVERT (a): get_gallery_map\'s member (members[0].settlement, a visitor) of that hand town serves neither the covert copy nor the covert-telling sentence, nor a tag of the covert tie, and the two keys present or absent exactly as on the party link (d), at Reveal off on the three markers', async () => {
     const town = PLANT(); const cov = covertOf(town);
     const bad = [];
     for (const m of MARKERS) {
       const r = await readsOf('plant', town, m, false);
       if (r.counts.map !== 1) bad.push(`map | ${m} | off: ${r.counts.map} members`);
-      bad.push(...sendsOf(`map member | ${m} | off`, r.map, town, cov, PLANT_TAGS, 'Mira Vane'), ...keysAsGallery(`map member | ${m} | off`, r.map, r.gallery));
+      bad.push(...sendsOf(`map member | ${m} | off`, r.map, town, cov, PLANT_TAGS, 'Mira Vane'), ...keysAsLink(`map member | ${m} | off`, r.map, r.link));
     }
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('MAP-COVERT (b): import_gallery_map\'s member (members[0].settlement, a signed-in reader) of that hand town serves neither the covert copy nor the covert-telling sentence, nor a tag of the covert tie, and the two keys present or absent exactly as on the gallery read, at Reveal off on the three markers', async () => {
+  it('MAP-COVERT (b): import_gallery_map\'s member (members[0].settlement, a signed-in reader) of that hand town serves neither the covert copy nor the covert-telling sentence, nor a tag of the covert tie, and the two keys present or absent exactly as on the party link (d), at Reveal off on the three markers', async () => {
     const town = PLANT(); const cov = covertOf(town);
     const bad = [];
     for (const m of MARKERS) {
       const r = await readsOf('plant', town, m, false);
       if (r.counts.mapImport !== 1) bad.push(`map import | ${m} | off: ${r.counts.mapImport} members`);
-      bad.push(...sendsOf(`map import | ${m} | off`, r.mapImport, town, cov, PLANT_TAGS, 'Mira Vane'), ...keysAsGallery(`map import | ${m} | off`, r.mapImport, r.gallery));
+      bad.push(...sendsOf(`map import | ${m} | off`, r.mapImport, town, cov, PLANT_TAGS, 'Mira Vane'), ...keysAsLink(`map import | ${m} | off`, r.mapImport, r.link));
     }
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('MAP-COVERT THE TOOTH: a hand town with no covert tie serves its prominentRelationship, as stored, on the gallery read, the map member and the map import, at Reveal off on the three markers', async () => {
+  it('MAP-COVERT THE TOOTH: a hand town with no covert tie serves its prominentRelationship, as stored, on the gallery read, the party link, the map member and the map import, at Reveal off on the three markers', async () => {
     const town = TOOTH();
     expect(covertOf(town)).toEqual({ pr: false, ps: false });
     const bad = [];
     for (const m of MARKERS) {
       const r = await readsOf('tooth', town, m, false);
-      for (const door of ['gallery', 'map', 'mapImport']) {
+      for (const door of ['gallery', 'link', 'map', 'mapImport']) {
         if (J(r[door]?.prominentRelationship) !== J(town.prominentRelationship)) bad.push(`${door} | ${m} | off: prominentRelationship is ${JSON.stringify(r[door]?.prominentRelationship)}`);
       }
     }
@@ -272,19 +299,24 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
   }, ARM_TIMEOUT_MS);
 
   // ── CHAIN B'S TWO PLACES (born) ─────────────────────────────────────────────────────────────────────────────────────
-  it('MAP-COVERT (c) THE CONTROL on chain B\'s two places (r3m-town-wartime-0-29, r3m-city-none-1-107; born by the app\'s pipeline, stored as the save stores them): each stored prominentRelationship is a covert tie\'s copy, and the gallery read serves neither it nor a covert-telling sentence, nor the copy\'s full or tension, at Reveal off on the three markers', async () => {
-    const bad = [];
+  it('MAP-COVERT (c) THE CONTROL on chain B\'s two places (r3m-town-wartime-0-29, r3m-city-none-1-107; born by the app\'s pipeline, stored as the save stores them): each stored prominentRelationship is a covert tie\'s copy, and neither (c) the gallery read nor (d) the party link serves it or a covert-telling sentence, nor the copy\'s full or tension, at Reveal off on the three markers (where (c) and (d) differ: printed, MAPCOVERT-CD)', async () => {
+    const bad = []; const cd = [];
     for (const p of PLACES) {
       const town = born.get(p.seed);
       expect(town?.neighborRelationship?.name ?? null).toBe(null); // the save's neighbour step is a no-op on this document
       const cov = covertOf(town);
       expect([p.seed, cov.pr]).toEqual([p.seed, true]);
-      for (const m of MARKERS) bad.push(...sendsOf(`${p.seed} | gallery | ${m} | off`, (await readsOf(p.seed, town, m, false)).gallery, town, cov, bornTags(town), personOf(town)));
+      for (const m of MARKERS) {
+        const r = await readsOf(p.seed, town, m, false);
+        bad.push(...sendsOf(`${p.seed} | gallery | ${m} | off`, r.gallery, town, cov, bornTags(town), personOf(town)), ...sendsOf(`${p.seed} | link | ${m} | off`, r.link, town, cov, bornTags(town), personOf(town)));
+        cd.push(...cdDiffer(`${p.seed} | ${m} | off`, r));
+      }
     }
+    console.log(cd.length ? cd.join('\n') : 'MAPCOVERT-CD places: (c) and (d) agree on both keys, three markers');
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('MAP-COVERT (a) and (b) on chain B\'s two places: get_gallery_map\'s member and import_gallery_map\'s member serve neither the stored covert copy nor a covert-telling sentence, nor the copy\'s full or tension, and the two keys present or absent exactly as on the gallery read, at Reveal off on the three markers', async () => {
+  it('MAP-COVERT (a) and (b) on chain B\'s two places: get_gallery_map\'s member and import_gallery_map\'s member serve neither the stored covert copy nor a covert-telling sentence, nor the copy\'s full or tension, and the two keys present or absent exactly as on the party link (d), at Reveal off on the three markers', async () => {
     const bad = [];
     for (const p of PLACES) {
       const town = born.get(p.seed); const cov = covertOf(town);
@@ -292,7 +324,7 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
         const r = await readsOf(p.seed, town, m, false);
         for (const [door, label] of [['map', 'map member'], ['mapImport', 'map import']]) {
           if (r.counts[door] !== 1) bad.push(`${p.seed} | ${label} | ${m} | off: ${r.counts[door]} members`);
-          bad.push(...sendsOf(`${p.seed} | ${label} | ${m} | off`, r[door], town, cov, bornTags(town), personOf(town)), ...keysAsGallery(`${p.seed} | ${label} | ${m} | off`, r[door], r.gallery));
+          bad.push(...sendsOf(`${p.seed} | ${label} | ${m} | off`, r[door], town, cov, bornTags(town), personOf(town)), ...keysAsLink(`${p.seed} | ${label} | ${m} | off`, r[door], r.link));
         }
       }
     }
@@ -305,7 +337,7 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     for (const [key, town] of [['plant', PLANT()], ...PLACES.map((p) => [p.seed, born.get(p.seed)])]) {
       for (const m of MARKERS) {
         const r = await readsOf(key, town, m, true);
-        for (const door of ['gallery', 'map', 'mapImport']) {
+        for (const door of ['gallery', 'link', 'map', 'mapImport']) {
           const doc = r[door];
           if (!isRec(doc)) { missing.push(`${key} | ${door} | ${m} | DM`); continue; }
           const pr = !('prominentRelationship' in doc) ? 'absent' : J(doc.prominentRelationship) === J(town.prominentRelationship) ? 'the stored copy' : 'another';
@@ -316,6 +348,6 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     }
     console.log(rows.join('\n'));
     expect(missing).toEqual([]);
-    expect(rows.length).toBe(27);
+    expect(rows.length).toBe(36);
   }, ARM_TIMEOUT_MS);
 });
