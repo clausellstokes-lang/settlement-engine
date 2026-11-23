@@ -128,3 +128,25 @@ say(`  TOWNS (${Object.keys(ccTowns).length}):`);
 for (const [s, v] of Object.entries(ccTowns)) { const t = H.find((x) => x.seed === s); const bv = t.B ? [...new Set(Object.values(t.B.twin).map((p) => p.ccs))] : null; say(`    ${s}: ${[...new Set([...v].map((x) => x.split(':').pop()))].join(',')} on ${v.size} pages | house-free twin B's pages: ${J(bv)} (B stored ${J(t.B?.stored.ccs)}; B criminal powers ${J(t.B?.stored.crimP)})`); }
 const pc = {}; for (const b of pool) for (const [k, p] of Object.entries(b.pages)) if (!p.sig) inc(pc, `${b.size} ${J(p.ccs)}`);
 say(`  THE POOL, pages with no served crime signal, by size and value: ${J(pc)}`);
+
+// ── T5M (VEIL-40, the chair's N102 of 13:40 UTC): the two figures N102 asks for that the sections above do not print
+say('\n== N102 (v)(3) JOINT: births with a served page showing several (2+) criminal imports, the family alone vs BESIDE ONE criminal power on that page\'s served roster (crimP length 1; 1+ shown too)');
+for (const [label, bs] of [['insurgency births (q33i)', ins.filter((b) => b.size === 'town')], ['pool part A town, insurgency', pool.filter((b) => b.size === 'town' && b.part === 'A' && b.crisis === 'insurgency')], ['pool part A town, every crisis', pool.filter((b) => b.size === 'town' && b.part === 'A')]]) {
+  if (!bs.length) { say(`  ${label}: none`); continue; }
+  const sev = (p) => Array.isArray(p.imp) && p.imp.length >= 2;
+  const fam = bs.filter((b) => Object.values(b.pages).some(sev));
+  const one = bs.filter((b) => Object.values(b.pages).some((p) => sev(p) && p.crimP.length === 1));
+  const any = bs.filter((b) => Object.values(b.pages).some((p) => sev(p) && p.crimP.length >= 1));
+  const rost = {}; for (const b of fam) for (const p of Object.values(b.pages)) if (sev(p)) inc(rost, `crimP=${J(p.crimP)}`);
+  say(`  ${label}: births ${bs.length}; family alone ${fam.length}; JOINT (one criminal power served) ${one.length}${one.length ? ` (${one.slice(0, 8).map((b) => b.seed).join(', ')})` : ''}; beside one or more ${any.length}\n    rosters on the several-import pages (roster -> pages): ${top(rost, 8)}`);
+}
+say('\n== N102 (v)(2): nothing-hidden town births whose served page shows an EMPTY currentTensions list; the tension types no-signal births hold (by birth)');
+for (const [label, bs] of [['pool part A town', pool.filter((b) => b.size === 'town' && b.part === 'A')], ['insurgency births (q33i)', ins.filter((b) => b.size === 'town')]]) {
+  if (!bs.length) { say(`  ${label}: none`); continue; }
+  const emptyAny = bs.filter((b) => Object.values(b.pages).some((p) => Array.isArray(p.ten) && p.ten.length === 0));
+  const emptySt = bs.filter((b) => Array.isArray(b.stored.ten) && b.stored.ten.length === 0);
+  const noSig = bs.filter((b) => Object.values(b.pages).some((p) => !p.sig));
+  const noSigEmpty = bs.filter((b) => Object.values(b.pages).some((p) => !p.sig && Array.isArray(p.ten) && p.ten.length === 0));
+  const types = {}; for (const b of noSig) { const ts = new Set(); for (const p of Object.values(b.pages)) if (!p.sig && Array.isArray(p.ten)) for (const [ty] of p.ten) ts.add(ty); for (const ty of (ts.size ? ts : ['(none)'])) inc(types, ty); }
+  say(`  ${label}: births ${bs.length}; stored list empty ${emptySt.length}; a served page with an EMPTY list ${emptyAny.length}${emptyAny.length ? ` (${emptyAny.slice(0, 6).map((b) => b.seed).join(', ')})` : ''}\n    no-signal births ${noSig.length}, of them a no-signal page with an EMPTY list ${noSigEmpty.length}; tension types held on their no-signal pages (type -> births):\n    ${top(types, 15)}`);
+}
