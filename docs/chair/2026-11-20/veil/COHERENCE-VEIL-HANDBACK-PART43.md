@@ -78,6 +78,14 @@ STATE AT 07:48 UTC:
   "TIP?" line says how many reads differ (judged by nobody yet: N48). The 200-document server red stands. Read-stored gates once on tip, once built:
   BOTH NOT YET RUN (the tip run stopped twice to free the mutex for the builders: `gates-tip.sh`).
 
+- THE PINS MEASURED (55 files): tip 27 red in 2 files; built 236 in 9, every one (a')'s cause (`/var/tmp/v18/out/v41/pins-{tip,c2}.log`). N78:
+  publicProseEquality re-stated IN THIS UNIT; totality's two arms follow the key and keep their anchor (mechanism arms under test or PARKED by name,
+  "returns with (b)"); defenseRingNoteProjection: the served tab prints the served record's own note, none where defense.criminalStructure is shut, the
+  vantage difference LISTED as a fidelity gap; signalCopies: block:power.criminalUnderside INERT while no prose is served, a one-row shrink-only list.
+  OWED WITH THE PROOF: table A (every component site reading a publicProse block: NOTHING or A LOCAL LINE) and line B (criminalUnderside's Curate
+  label and default). Builder V41-PINS on c2-wip, brief 344d04753 (`out/v41/pins/PINS-BRIEF.md`), report `/var/tmp/v18/out/v41/pins/PINS-REPORT.md`.
+- MY CLOCK FAULT (N78): two hours I wrote ("07:47", "09:10") were not read from date -u; corrected to the chair 09:06. Every hour from date -u.
+
 NEXT ACTS, IN ORDER: PIN-3's return -> its re-runs -> "TIP? PIN-3" -> push the tip branch on the grant -> merge the new tip into c2-wip (E116's five
 steps); the pins' builder; then on the merged c2 tree: ppkey whole (N67), `out/v33/stored/prose.sh` all rows 0, the read-stored gates on tip and
 built, 001..211 + 212 + down and the catalogue, tests/lint and tests/copy whole, the N33 set, typecheck, eslint, first paint +0, the cost law's figure;
