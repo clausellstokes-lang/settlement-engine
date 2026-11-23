@@ -31,8 +31,22 @@ describe('secondMentions: the first mention keeps the full name; a later one in 
       .toBe('Keep what is held over Ivo Berger safe, and somewhere he cannot find it.');
     expect(secondMentions('Paul Schulz has put money into Thecla Schulz\'s affairs for years and takes a share of everything Thecla Schulz earns.', [M('Paul Schulz'), F('Thecla Schulz')]))
       .toBe('Paul Schulz has put money into Thecla Schulz\'s affairs for years and takes a share of everything she earns.');
-    expect(secondMentions('Thecla Schulz has asked Paul Schulz for an introduction Paul Schulz would rather keep to themselves.', [F('Thecla Schulz'), M('Paul Schulz')]))
-      .toBe('Thecla Schulz has asked Paul Schulz for an introduction he would rather keep to themselves.');
+  });
+
+  it('PRONOUN-THEY (CLOSE-4, ruling (A)): a later mention before a they-form bound to its own person skips the pronoun and takes the next rung; one bound to another keeps the pronoun', () => {
+    const roles = [F('Rhona Ashby', 'the reeve'), M('Silas Brent', 'the factor')];
+    // npcData.js :: STRESS_ECONOMIC_EFFECTS.mutual_leverage.tension[12] and .desc[8] (the measure's two bound mentions): the role
+    expect(secondMentions('Rhona Ashby has asked Silas Brent for an introduction Silas Brent would rather keep to themselves.', roles))
+      .toBe('Rhona Ashby has asked Silas Brent for an introduction the factor would rather keep to themselves.');
+    expect(secondMentions('Rhona Ashby cannot finish what they have started without Silas Brent\'s help, and Silas Brent cannot finish theirs without Rhona Ashby\'s. Neither lets the other forget it.', roles))
+      .toBe('Rhona Ashby cannot finish what they have started without Silas Brent\'s help, and the factor cannot finish theirs without her. Neither lets the other forget it.');
+    // the role shared, the surname distinct: the surname
+    const shared = [F('Rhona Ashby'), M('Silas Brent')];
+    expect(secondMentions('Rhona Ashby has asked Silas Brent for an introduction Silas Brent would rather keep to themselves.', shared))
+      .toBe('Rhona Ashby has asked Silas Brent for an introduction Brent would rather keep to themselves.');
+    // .genuine_respect.desc[3] (THEY_OTHER: "them" is the cases): the pronoun stands
+    expect(secondMentions('Rhona Ashby sends difficult cases to Silas Brent, and Silas Brent sends them back solved.', roles))
+      .toBe('Rhona Ashby sends difficult cases to Silas Brent, and he sends them back solved.');
   });
 
   it('PRONOUN: an object context stays the object, the verb after it belonging to another subject', () => {

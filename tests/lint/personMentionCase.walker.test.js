@@ -15,14 +15,22 @@
  *             both hold, `FOLLOWER_BY_BEFORE` with the word before it): a follower in neither is RED, "class it:
  *             <template> <follower>", so no new template can print the fault unseen;
  *   PRINTED   both genders (the first card a woman and the second a man, then the other way round): the leaf prints at
- *             each later mention the pronoun of its follower's class, the possessive before "'s".
+ *             each later mention the pronoun of its follower's class, the possessive before "'s" (a `THEY_BOUND` mention
+ *             the next rung, here its role);
+ *   THEY      (PRONOUN-THEY, CLOSE-4, the ninth chair's ruling (A) of 2026-11-23, amending its ruling of 01:55) every
+ *             later mention whose clause (to the next . ; : ! ?) carries a they-form is classed BY HAND, by its template
+ *             id: `THEY_BOUND` (the they-form binds the mention's own person, singular they: the mention skips the
+ *             pronoun and takes the leaf's next rung, with this walk's cards the ROLE, its tail in the leaf's
+ *             `NO_PRONOUN_TAILS`) or `THEY_OTHER` (it binds someone else: the pronoun stands); unclassed is RED, "class
+ *             it (they): <template id> <tail>". Measured on f5fa6316a (`close-4/THEY-MEASURE.txt` on
+ *             `lane/close-4-2026-11-23`): 8 later mentions in 7 templates, 2 bound, 6 other.
  * A want's person slots are all filled with ONE person (`goals.js :: personCardsOf` hands two slots of one name as one
  * card), so every person slot after the first in a sentence is walked as a later mention.
  * Each detector is proven to catch a planted case (the CONTROLS) before it is read on the tables.
  * @enforcement-walker
  */
 import { describe, expect, it } from 'vitest';
-import { FOLLOWER_BY_BEFORE, OBJECT_FOLLOWERS, SUBJECT_FOLLOWERS, followerAt, secondMentions, wordBeforeAt } from '../../src/data/people/personMention.js';
+import { FOLLOWER_BY_BEFORE, NO_PRONOUN_TAILS, OBJECT_FOLLOWERS, SUBJECT_FOLLOWERS, followerAt, secondMentions, wordBeforeAt } from '../../src/data/people/personMention.js';
 import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import { GOAL_FAMILY_LINES, GOAL_RESERVE_LINES } from '../../src/data/people/goalFamilies.js';
 
@@ -34,6 +42,33 @@ const FORCE = { body: 'garrison', members: 'soldiers', member: 'soldier' };
 const SPLIT = /((?<=[.!?…]["”')]?)\s+(?=["“'(]?\p{Lu}))/u;
 /** @param {string} s */
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** a they-form (the measure's own pattern) */
+const THEY = /\b(themselves|themself|theirs|their|them|they)\b/i;
+
+/**
+ * THE THEY TABLES (PRONOUN-THEY), classed by hand from the measure, by template id and the mention ('r' the first card,
+ * 's' the second). BOUND: the they-form binds the mention's own person (the mention takes the next rung: the role).
+ * @type {ReadonlyArray<{ id: string, who: 'r' | 's' }>}
+ */
+const THEY_BOUND = [
+  { id: 'STRESS_ECONOMIC_EFFECTS.mutual_leverage.tension[12].line', who: 's' }, // "… would rather keep to themselves."
+  { id: 'STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[8].line', who: 's' }, // "… cannot finish theirs without …"
+];
+/** OTHER: the they-form binds someone else (the pronoun stands), each with its five-word reason @type {ReadonlyArray<{ id: string, who: 'r' | 's', why: string }>} */
+const THEY_OTHER = [
+  { id: 'STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[1].line', who: 'r', why: 'they binds her people, plural' },
+  { id: 'STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[5].line', who: 'r', why: 'them binds her people, plural' },
+  { id: 'STRESS_ECONOMIC_EFFECTS.mil_crim_corruption.desc[7].line', who: 'r', why: 'their binds her people, plural' },
+  { id: 'STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[1].line', who: 's', why: 'them binds the pair together' },
+  { id: 'STRESS_ECONOMIC_EFFECTS.mutual_leverage.desc[1].line', who: 'r', why: 'them binds the pair together' },
+  { id: 'STRESS_ECONOMIC_EFFECTS.genuine_respect.desc[3].line', who: 's', why: 'them binds the difficult cases' },
+];
+/** @param {string} id @param {string} who */
+const isBound = (id, who) => THEY_BOUND.some((t) => t.id === id && t.who === who);
+/** @param {string} n a printed name @returns {'r' | 's'} */
+const whoOf = (n) => (n === S ? 's' : 'r');
+/** a card's role in this walk ("the silas"), distinct for each name @param {string} n */
+const roleOf = (n) => `the ${n.split(' ')[0].toLowerCase()}`;
 
 /**
  * The class of a later mention's follower: 'subject', 'object', or null (unclassed). @param {string} sentence
@@ -50,12 +85,15 @@ function classOf(sentence, start, end) {
 }
 
 /**
- * Every later mention of `names` in a text, sentence by sentence, with its case and the text the leaf must print.
- * @param {string} text @param {Record<string, 'female' | 'male'>} genders
- * @returns {{ mentions: Array<{ follower: string, kase: string | null }>, expected: string }}
+ * Every later mention of `names` in a text, sentence by sentence, with its case and the text the leaf must print; and
+ * every later mention whose clause carries a they-form (`they`: the mention, its tail to the they-form, the text after it).
+ * @param {string} text @param {Record<string, 'female' | 'male'>} genders @param {string} [id] the template id (a
+ *   `THEY_BOUND` mention takes its role in the expected text: the next rung, the pronoun skipped)
+ * @returns {{ mentions: Array<{ follower: string, kase: string | null }>, expected: string, they: Array<{ who: 'r' | 's', tail: string, after: string }> }}
  */
-function laterMentions(text, genders) {
+function laterMentions(text, genders, id = '') {
   /** @type {Array<{ follower: string, kase: string | null }>} */ const mentions = [];
+  /** @type {Array<{ who: 'r' | 's', tail: string, after: string }>} */ const they = [];
   const names = Object.keys(genders).sort((a, b) => b.length - a.length);
   const parts = text.split(SPLIT).map((part, i) => {
     if (i % 2 === 1) return part;
@@ -71,6 +109,10 @@ function laterMentions(text, genders) {
     const seen = new Set(); let out = ''; let at = 0;
     for (const h of hits) {
       if (!seen.has(h.n)) { seen.add(h.n); continue; }
+      const after = part.slice(h.end);
+      const clause = after.split(/[.;:!?]/)[0]; const t = THEY.exec(clause);
+      if (t) they.push({ who: whoOf(h.n), tail: clause.slice(0, t.index + t[0].length).trim(), after: after.trimStart() });
+      if (t && isBound(id, whoOf(h.n))) { out += part.slice(at, h.start) + roleOf(h.n); at = h.end; continue; }
       const forms = FORMS[genders[h.n]];
       if (/^['’]s(?![\p{L}\p{N}])/u.test(part.slice(h.end))) { out += part.slice(at, h.start) + forms.possessive; at = h.end + 2; continue; }
       const c = classOf(part, h.start, h.end);
@@ -80,7 +122,7 @@ function laterMentions(text, genders) {
     }
     return out + part.slice(at);
   });
-  return { mentions, expected: parts.join('') };
+  return { mentions, expected: parts.join(''), they };
 }
 
 /**
@@ -93,12 +135,36 @@ function judge(id, template, text, castings, cardsOf) {
   /** @type {string[]} */ const unclassed = []; /** @type {string[]} */ const misprinted = [];
   let mentions = 0;
   castings.forEach((genders, i) => {
-    const { mentions: ms, expected } = laterMentions(text, genders);
+    const { mentions: ms, expected } = laterMentions(text, genders, id);
     if (i === 0) { mentions += ms.length; for (const m of ms) if (!m.kase) unclassed.push(`class it: ${template} ${m.follower}`); }
     const printed = secondMentions(text, cardsOf(genders));
     if (printed !== expected) misprinted.push(`${id} (${Object.values(genders).join('/')}): ${printed}  ≠  ${expected}`);
   });
   return { mentions, unclassed, misprinted };
+}
+
+/**
+ * THE THEY ARM over one template text: an unclassed they-form mention; a `THEY_BOUND` mention not printed by the next
+ * rung (its role), or its tail not in `NO_PRONOUN_TAILS`. @param {string} id @param {string} text
+ * @param {Array<Record<string, 'female' | 'male'>>} castings @param {(g: Record<string, 'female' | 'male'>) => any[]} cardsOf
+ * @param {(t: string, cards: any[]) => string} [leaf] the leaf read (a CONTROL plants another)
+ * @returns {{ met: string[], unclassed: string[], unbound: string[] }}
+ */
+function judgeThey(id, text, castings, cardsOf, leaf = secondMentions) {
+  /** @type {string[]} */ const met = []; /** @type {string[]} */ const unclassed = []; /** @type {string[]} */ const unbound = [];
+  for (const { who, tail, after } of laterMentions(text, castings[0], id).they) {
+    met.push(`${id} ${who}`);
+    const classed = isBound(id, who) || THEY_OTHER.some((t) => t.id === id && t.who === who);
+    if (!classed) { unclassed.push(`class it (they): ${id} ${tail}`); continue; }
+    if (!isBound(id, who)) continue;
+    const role = roleOf(who === 's' ? S : R);
+    if (![...NO_PRONOUN_TAILS].some((k) => after.startsWith(k))) unbound.push(`${id}: the tail is not in NO_PRONOUN_TAILS: ${tail}`);
+    for (const genders of castings) {
+      const printed = leaf(text, cardsOf(genders));
+      if (!printed.includes(`${role} ${tail}`)) unbound.push(`${id} (${Object.values(genders).join('/')}): ${printed}  — not "${role} ${tail}"`);
+    }
+  }
+  return { met, unclassed, unbound };
 }
 
 /** the ties: each line (and twin) of each kind's desc and tension, drawn and reserve (`pairProse`'s own `lines`) */
@@ -135,7 +201,7 @@ const fillWant = (tpl) => { const t = tpl.replace(/\{(\w+)(?:\|[^}]*)?\}/g, (_w,
 const PAIR = /** @type {Array<Record<string, 'female' | 'male'>>} */ ([{ [R]: 'female', [S]: 'male' }, { [R]: 'male', [S]: 'female' }]);
 const ONE = /** @type {Array<Record<string, 'female' | 'male'>>} */ ([{ [R]: 'female' }, { [R]: 'male' }]);
 /** @param {Record<string, 'female' | 'male'>} g */
-const cardsFor = (g) => Object.entries(g).map(([name, gender]) => ({ name, gender, role: `the ${name.split(' ')[0].toLowerCase()}` }));
+const cardsFor = (g) => Object.entries(g).map(([name, gender]) => ({ name, gender, role: roleOf(name) }));
 
 describe('the CONTROLS: each detector catches its planted case', () => {
   it('CLASSED: a follower in neither class is red, named with its template', () => {
@@ -152,6 +218,24 @@ describe('the CONTROLS: each detector catches its planted case', () => {
     const { expected } = laterMentions(text, PAIR[0]);
     expect(objectLeaf(text, cardsFor(PAIR[0]))).not.toBe(expected);
     expect(expected).toBe(`${S} has asked ${R} to back a candidate she distrusts.`);
+  });
+  it('THEY: an unclassed later mention with a they-form in its clause is red, named with its template id and tail', () => {
+    const planted = `${S} has asked ${R} for a favour ${R} would rather hide themselves.`;
+    expect(judgeThey('planted', planted, PAIR, cardsFor).unclassed).toEqual(['class it (they): planted would rather hide themselves']);
+  });
+  it('THEY: a leaf with the tail set emptied prints the pronoun at a THEY_BOUND mention, and that is red', () => {
+    const id = THEY_BOUND[0].id;
+    const text = `${R} has asked ${S} for an introduction ${S} would rather keep to themselves.`;
+    expect(judgeThey(id, text, PAIR, cardsFor).unbound).toEqual([]);
+    // the leaf as if `NO_PRONOUN_TAILS` were empty: each listed tail's last letter masked, so no tail is met, then restored
+    const MASK = '\uE000';
+    const emptiedLeaf = (/** @type {string} */ t, /** @type {any[]} */ cards) => {
+      let masked = t; for (const k of NO_PRONOUN_TAILS) masked = masked.replaceAll(k, k.slice(0, -1) + MASK);
+      let out = secondMentions(masked, cards); for (const k of NO_PRONOUN_TAILS) out = out.replaceAll(k.slice(0, -1) + MASK, k);
+      return out;
+    };
+    expect(emptiedLeaf(text, cardsFor(PAIR[0]))).toBe(`${R} has asked ${S} for an introduction he would rather keep to themselves.`);
+    expect(judgeThey(id, text, PAIR, cardsFor, emptiedLeaf).unbound).toHaveLength(2);
   });
 });
 
@@ -174,6 +258,20 @@ describe('every template with a person\'s slot (the ties and the wants)', () => 
     }
     expect(unclassed).toEqual([]);
     expect(misprinted).toEqual([]);
+  });
+
+  it('THEY: every later mention with a they-form in its clause is classed by template id; a THEY_BOUND mention takes the next rung, not the pronoun (ties and wants, both genders)', () => {
+    /** @type {string[]} */ const met = []; /** @type {string[]} */ const unclassed = []; /** @type {string[]} */ const unbound = [];
+    const walked = [
+      ...tieTemplates().map(({ id, text }) => judgeThey(id, text, PAIR, cardsFor)),
+      ...wantTemplates().map(({ id, template }) => judgeThey(id, fillWant(template), ONE, cardsFor)),
+    ];
+    for (const j of walked) { met.push(...j.met); unclassed.push(...j.unclassed); unbound.push(...j.unbound); }
+    expect(unclassed).toEqual([]);
+    expect(unbound).toEqual([]);
+    // every hand-classed row is met by the walk (a table row no template carries is stale)
+    expect([...THEY_BOUND, ...THEY_OTHER].map((t) => `${t.id} ${t.who}`).sort()).toEqual([...met].sort());
+    expect(met).toHaveLength(8);
   });
 
   it('CLASSED + PRINTED: the wants (goalFamilies.js :: GOAL_FAMILY_LINES, GOAL_RESERVE_LINES)', () => {

@@ -24,7 +24,11 @@
  * introduction he would", "who knows her would"). A follower in neither class (a text no line of the census wrote)
  * keeps the reading the leaf had before: at a clause's head (the sentence's start, after a clause opener such as "and",
  * "but", "than", "that", or after a comma, semicolon, colon or dash) with a word after it, the subject ("and he holds
- * enough"); everywhere else the object. A mention at the sentence's head takes its capital.
+ * enough"); everywhere else the object. A mention at the sentence's head takes its capital. A pronoun never stands before
+ * a they-form bound to its own person: a later mention whose following text starts with a tail of `NO_PRONOUN_TAILS`
+ * (classed by hand from the measure) skips the pronoun rung only and takes the next rung of THE RULE (2-5), so "an
+ * introduction the factor would rather keep to themselves" (PRONOUN-THEY, CLOSE-4, the ninth chair's ruling (A) of
+ * 2026-11-23, which amends its ruling of 01:55 that the mention keep the full name). No reflexive is rewritten.
  * @enforced-by tests/lint/personMentionCase.walker.test.js (every template with a person's slot, both genders)
  *
  * ⛔ THE VEIL (the seventh chair's ruling CN3 (ii)). The share veil withholds a string by finding a hidden person's NAME
@@ -66,6 +70,14 @@ export const FOLLOWER_BY_BEFORE = Object.freeze({
   would: Object.freeze({ and: 'subject', that: 'subject', introduction: 'subject', knows: 'object' }),
 });
 
+/**
+ * THE TAILS THAT TAKE NO PRONOUN (PRONOUN-THEY, CLOSE-4, the chair's ruling (A)): the exact words after a later mention
+ * up to and including the they-form that binds that mention's own person (singular they: "an introduction the factor
+ * would rather keep to themselves"), classed by hand from the measure (`close-4/THEY-MEASURE.txt` on
+ * `lane/close-4-2026-11-23`). A mention before one skips the pronoun rung (`mentionOf`).
+ */
+export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -80,11 +92,12 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 /**
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
+ * @param {boolean} [noPronoun] the pronoun rung skipped (a mention before a tail of `NO_PRONOUN_TAILS`)
  * @returns {{ pronoun: 'female' | 'male' } | { word: string } | null}
  */
-function mentionOf(p, named) {
+function mentionOf(p, named, noPronoun = false) {
   const others = named.filter((q) => q !== p);
-  if ((p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
+  if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
   if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
@@ -162,7 +175,8 @@ function oneSentence(sentence, people) {
   let out = ''; let at = 0;
   for (const h of hits) {
     if (!seen.has(h.p)) { seen.add(h.p); continue; }
-    const m = mentionOf(h.p, named);
+    const after = sentence.slice(h.end).trimStart();
+    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)));
     if (!m) continue;
     const possessive = /^['’]s(?![\p{L}\p{N}])/u.test(sentence.slice(h.end));
     let word; let end = h.end;
