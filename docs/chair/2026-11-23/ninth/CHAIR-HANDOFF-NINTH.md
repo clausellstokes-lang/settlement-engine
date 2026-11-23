@@ -10,6 +10,61 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
+## READ THIS FIRST (written 2026-11-23 01:40 UTC; it supersedes every block below where they differ)
+
+WHY THIS BLOCK: the chair's own record read 744,703 of 1,000,000 at 01:21 UTC (a cheap helper's read of this session:
+`get_session` reads 0 for the chair itself). Its context will be summarized soon. EVERYTHING BELOW IS IN FILES ON
+ORIGIN; trust them over memory. A summarized chair, or a fresh chair on this account, goes on from this block.
+
+THE OWNER'S WORDS THAT GOVERN, newest first (verbatim in section 1 and in the eighth handoff's section 1): "I defer all
+decisions to you" (2026-11-23: the chair decides; NEVER read as a grant of the merge, the deploy, a migration, a
+credential, a signing or a permission setting); SIX CHILDREN WORK AT A TIME; "Can you fix these:"; "Fix all:". He is
+answered first and in full, in very simple words. He has not written since.
+
+ONE THING IS OPEN WITH HIM, AND ONLY HE CAN DO IT: one line typed BY HIM in STACK-106's own session
+(https://claude.ai/code/session_01FbPLbbPKhMeTbvdP2ZQmPt): "You may merge 4e7fa5667 into your branch. Go ahead." Both
+permission checks refused that merge (N9: the seat's; N13: the chair's own commit of it, "Undermining Oversight"). THE
+CHAIR MAKES NO MERGE FOR A SEAT WHOSE CHECK REFUSED IT, RE-SEATS NO SEAT TO GET ANOTHER VERDICT, AND CHANGES NO
+PERMISSION SETTING. If he writes to STACK-106, it goes on from its prompt and sends "STACK-106 MERGED <commit>".
+
+THE SEATS (all claude-opus-5-5 at high effort; message with send_message; read a mark with get_session:
+external_metadata.context_usage.used_tokens; VEIL-39's read 0 there once: then a haiku helper reads the newest result
+event of its record: last iteration: input + cache read + cache creation):
+- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: PARKED at 244fa84ef (npm ci done; the ledger ref set). 172,763.
+- VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): (P) done; (P2) RULED A STALE PIN (N23): owes "PIN-2 <commit>";
+  C1's stored read ends about 02:30 UTC; then the C2 proposal file ((a'), (b) alone, (c)+(b); the table of the 23
+  `prose.*` rows; the chair's questions (i) to (v)). C2-BUILD IS ITS SUCCESSOR'S. 449,165 at 01:08.
+- VEIL-37 session_01FbPLbcvhMzoJs1V2KQYq9M (chain A): accepts R5D-SQL-2 (cure ab6ade69a) itself; R5D-PAGE-A building;
+  PART 39 current; it ASKED FOR ITS FIGURE AGAIN when SQL-2's acceptance is done. 495,358 at 01:16. HANDS OVER at
+  about 600,000: ITS SUCCESSOR (VEIL-40) IS SEATED ON THE HAND-OVER COMMIT with a lean list (PART 39 first; 212 whole
+  only if a red points into it) and carries R5D-PAGE (A's read if unread, B), the proofs and "TIP? R5-DESC".
+- VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (chain B): S1 merged; the tip merged (ec082df83); builders R4I-PAGE-3 and
+  R4I-TONIGHT running; its pool running since 00:58. 364,709.
+- DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: D4C-1 merged (b6c48e5bb); D5C-2 phase B building; then merges the line
+  at 244fa84ef, rule 8, "DAILY-C <commit>". 232,291.
+- CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: VACANT (arm 15 as ruled) in its proofs; then PRONOUN. 278,457.
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: lines FINAL at 18a9791b3; THE BUILD GOES ON (01:38): "PROSE-D <commit>".
+  254,538. It may be parked at a natural stop if the landing goes on and seven would work.
+THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); a second
+test-only commit (PIN-2) is expected there: read its diff whole, then name "TIP <commit> on <branch>" to the three
+chains AND RULE INTO EVERY UNIT'S PROOF BEFORE "TIP?" THE 34 "VR46" FILES outside tests/security that call the veil's
+doors (VEIL-38's list `b-guards-other.txt`): (P2)'s red stood unseen through several merges because no unit ran them.
+
+WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: section 4 below, and: VEIL-37's figure when it reports SQL-2 accepted;
+"CURE <shape>" on VEIL-39's proposal (a persisted-shape change is NAMED for the owner); VEIL-38's two STOP counts for
+the Tonight line (same-named cast persons; served names that differ) if either is not 0; the landings of "VACANT",
+"PRONOUN", "DAILY-C" and "PROSE-D" need a landing seat whose merge its own check allows: THE NEXT STACK WAITS ON THE
+SAME WORD OF THE OWNER'S unless a landing seat's check lets its merge through (never the chair's hand for a refused
+seat).
+
+THE CHAIR'S MACHINE AND HABITS: `/home/user/wt/chair` (this lane; hooks installed; `node_modules` is a link to
+`/home/user/wt/line/node_modules`); EVERY PUSH: `sh docs/chair/2026-11-21/eighth/landing/safepush.sh /home/user/wt/chair
+lane/chair-2026-11-08 <log>` (the lane hook runs the type ratchet, the strict check and eslint: about three minutes;
+read `exit=` in the log). Commits by explicit path only. The hourly check is a one-shot scheduled task re-armed each
+time (the next: trig_01VDmTP6P3sJ36kaXTBN8Y3o at 02:10 UTC). The seats' start messages are in `prompts/` beside this
+file. The MCP tool list is re-sent whole at every reconnect (about 28,000 tokens each): bulky reads go to a haiku
+helper, never into the chair's context.
+
 ## 0. THE STATE AT THE TAKEOVER (read from origin at 00:01 UTC on 2026-11-23)
 - ORIGIN IS AS THE PICKUP SAYS: 36 of 36 branches it names are present; the 26 it gives a commit for all match
   (`git ls-remote`); this lane d85915ac8; the working line `lane/join-2026-11-14` 244fa84ef (point 105); draft pull
@@ -194,3 +249,18 @@ messages in `prompts/` beside it (each seat's whole first message, as sent).
     reads an escaped `\(` in a regex as an open paren; DS-GEN-17 GARRISONED v2's source carries a clause the page
     always cuts (one WORD_CORRECTIONS row would make the source match the page).
   - STILL OPEN WITH THE OWNER: his own line to STACK-106. No word since "I defer all decisions to you".
+- 2026-11-23 01:40 UTC · N23 · THE SECOND RED AT THE VEIL'S TIP (S2: `gallery.test.js` "a share marked with a veil renders through
+  it: the defaults hide, a delta shows") RULED A STALE PIN on VEIL-39's measure (`out/v39/p2/P2-MEASURE.md`, 6f19a6cee):
+  first red 369331d72, R3-TELL-5's unit (ii) cure (rulings 73 (2), 74 (ii)): `galleryRosterChoices.js ::
+  applyRosterChoices` rule (e): a criminal service's row stays only by positive account (its house listed on the
+  read, or the tag of an accounted crime type). THE CHAIR'S OWN HYPOTHESIS (unit (viii)) WAS REFUTED BY THE BISECT.
+  Re-statement ordered as a second test-only commit on the tip branch: (1) the house listed and shown: the row
+  stays; (2) the house not listed: the block is served as [] and the row's words arrive nowhere. If (1) does not go
+  green the cause is not whole: STOP. Owed: "PIN-2 <commit>".
+- 2026-11-23 01:40 UTC · N24 · PROSE-6's re-projection on the 900 taken (no line over 15%; F4 13.3% among metropolises; F6 prints on
+  10 of 44); THE BUILD GOES ON. One empty cell is OLD and not this unit's: DS-GEN-17 GARRISONED on dz-city-101, an
+  occupied city (`no crisis: occupied` refuses v1 and v2; empty at 244fa84ef by the same marks): named in its
+  hand-back, held by the tooth as a named exception. FOR AFTER THE FIRST DEPLOY: whether an occupied place gets a line.
+- 2026-11-23 01:40 UTC · THE CHAIR'S SECOND PUSH (85677ffff) ENDED exit=0 at 01:22 UTC THROUGH THE LANE HOOK (type ratchet 167 of
+  167; strict 1113 of 1113; eslint 0 errors, 38 warnings): CONFIRMED from its log. THE CHAIR'S OWN MARK: 744,703 at
+  01:21 UTC: the READ THIS FIRST block above is written for what follows.
