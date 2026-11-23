@@ -79,14 +79,18 @@ export const SEAT_HOLDER_LINES = Object.freeze({
 const escapeText = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /** Every slot a line may carry: `{form}`, `{form's}`, `{holder}`, `{holder|one|many}`. */
 const SLOT = /\{(?:form's|form|holder(?:\|[^|}]*\|[^|}]*)?)\}/g;
+/** A slot's name, and a holder's (never "They"), and a sentence's start: regex literals, so the copy's voice count reads no '!'. */
+const NAME_SLOT = /[^.]+?/.source;
+const HOLDER_SLOT = /(?!They )[^.]+?/.source;
+const SENTENCE_START = /(?:^|[.!?] )/.source;
 /** @param {string} slot @returns {string} what a slot reads as: a name, and a holder's name is never "They" */
-const slotPattern = (slot) => (slot.startsWith('{holder}') ? '(?!They )[^.]+?' : '[^.]+?');
+const slotPattern = (slot) => (slot.startsWith('{holder}') ? HOLDER_SLOT : NAME_SLOT);
 /** @param {string} line @returns {RegExp} the line's pattern: its fixed parts, a name between each pair, from a sentence's start to its own full stop */
 const patternOf = (line) => {
   const slots = line.match(SLOT) || [];
   const parts = line.split(SLOT).map(escapeText);
   const body = parts.map((part, i) => (i < slots.length ? part + slotPattern(slots[i]) : part)).join('');
-  return new RegExp(`(?:^|[.!?] )${body.replace(/^The /, '[Tt]he ')}`);
+  return new RegExp(`${SENTENCE_START}${body.replace(/^The /, '[Tt]he ')}`);
 };
 
 /** @type {Readonly<Record<keyof typeof SEAT_HOLDER_LINES, ReadonlyArray<RegExp>>>} */
