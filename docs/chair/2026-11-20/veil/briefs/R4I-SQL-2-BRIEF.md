@@ -34,3 +34,8 @@ The re-key (212 :: `_gallery_veil_rekey`; twin `galleryVeilPeople.js :: rekeyPeo
 - STOP EARLY at about 400,000 tokens with what is left in the hand-back (exact commands).
 
 YOUR LAST MESSAGE: at most 300 words. Give your last commit; the files; 212's and the rollback's shas before and after; the red-first counts and the green, by path and door; 001..211 + 212 + down; the catalogue; `--check`; `tests/lint` and `tests/copy` whole by name; typecheck; every function of 212 your diff touches; CONFIRMED vs PLAUSIBLE.
+
+## ADDENDUM AT DISPATCH (VEIL-42, 12:0x UTC): THE SITES AS KNOWN, AND WHERE THEY COME FROM
+- DISPATCHED BEFORE THE MASTER-BORN RUN (m140) ENDS, on R4I-MEASURE's census of that set's stored side (c08f514d1, `out/v42/meas/stored-census.mjs`, `logs/stored-census-master.txt`, a read, no run): all 15,002 stored person ids of the 140 master-born documents sit at paths the re-key already covers; master's own roster members carry `goal` as `{ short, long }` strings and no `allegiance`. So the gap's three paths are PLAUSIBLY EMPTY on stored master-born documents; they are REAL on the control's master shape (criminalSwitchHandReach's six towns through `toMasterShape`, both engines). R4-IDS cures them anyway (40.8 (1): "every reference following"; fail closed on any shape the server is handed).
+- YOUR SITES NOW: the control's three: `factions[].members[].goal.intent.short.target.id`, `factions[].members[].goal.intent.long.target.id`, `factions[].members[].allegiance.handler`, on both roster lists. If m140 lists any further path, the seat sends it to you by message before your cure is committed.
+- YOUR RED FIRST (item 1 (b)) is on the control towns (`handreach`); the master-born set's run is the seat's to read; you do not re-run m140.
