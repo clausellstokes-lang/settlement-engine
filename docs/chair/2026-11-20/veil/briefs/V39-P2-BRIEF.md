@@ -12,3 +12,16 @@ ANSWER THREE THINGS:
 WHAT YOU MAY WRITE: your report `docs/chair/2026-11-20/veil/out/v39/p2/P2-MEASURE.md` (at most 30 lines; CONFIRMED or PLAUSIBLE on each answer) and its logs, committed by explicit path on your branch `lane/veil-39-2026-11-23-p2-wip` (already cut for you, worktree /home/user/wt/p2wip). No test, no src, no 212, no registry change anywhere. Never push; never `--no-verify`. A refusal by your permission check stands: report it, try nothing else to the same end. Every hour from `date -u`.
 
 YOUR LAST MESSAGE: at most 150 words: (i), (ii), (iii), the commit.
+
+## ADDENDUM: THE RESTATEMENT (the chair's ruling, 2026-11-23 01:21 UTC: A STALE PIN; R3-TELL-5 unit (ii), 369331d72, rulings 73 (2), 74 (ii))
+READS WHOLE: `tests/lib/gallery.test.js` only (already read). WRITES: that ONE file, in the worktree /home/user/wt/tip on the branch
+`lane/veil-39-2026-11-23-tip` (the lane's tip 2d7ed483f), ONE test-only commit by explicit path. No 212, no registry, no file under src/.
+THE TEST MUST SAY BOTH FACES OF THE RULE AND STILL PROVE ITS OWN TITLE: (1) the fixture's 'Black market' is a house the read LISTS
+(present in the fixture and shown on that read by the delta): the row is accounted for and STAYS ("a delta shows" still holds);
+(2) the same delta with that house NOT listed on the read: `availableServices.criminal` is served as [] AND the row's words arrive
+nowhere in the served document (an unaccounted row LEAVES). IF (1) DOES NOT GO GREEN WITH THE HOUSE LISTED, STOP: write nothing,
+report (your cause is then not the whole cause). RECEIPTS (single-file runs, GIT_* unset, logs to /var/tmp/v18/out/v39/p2/): the one
+test RED at 2d7ed483f (before your edit), GREEN after; the file whole green; then `tests/lint` whole through `sh scripts/gate-mutex.sh
+--run --` (retry a give-up, exit 3; the heavy lane is busy until about 02:30 UTC): its count beside the tip's 48 of 3,304 and the
+failing files' names. Commit message: the cause, the ruling, the receipts. Never push; never `--no-verify`. LAST MESSAGE at most 120
+words: the commit, the receipts.
