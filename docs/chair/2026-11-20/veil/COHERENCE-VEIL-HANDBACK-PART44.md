@@ -18,6 +18,7 @@ THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE LANE'S TIP. THE LANE'S TIP: 2
 - R4I-MEASURE's brief committed (`briefs/R4I-MEASURE-BRIEF.md`, caba51270); the builder DISPATCHED 06:2x UTC (background Agent; its hand-back `out/v42/meas/MEASURE-HANDBACK.md` on its local branch).
 - Instruments re-made on the -wip at 06:23: --check 0, walker 0, acceptance 40 PASS, `v28tpl` 0, R3 gate 0 (HIGHER 0, EQUAL 79, LOWER 13, both engines and reads); harnesses 1 as expected (the gap; the Tonight sheet).
 - UNIT (0) DONE, sent 06:57: pool `pool-v42` (8 shards rc=0, 06:48; verify 45, 0 differ); GATE-1 4 of 92 at every gated setting, off and DM, twin 4 / server 4 (raw 11 / 11), controls 0 of 48, LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10): EQUAL to the standing figures.
+- MEASURE A on the 7 places SENT 07:21 (R4I-MEASURE f4b6c98d1): L1 0 of 168; L2 84 of 168, one path `prominentRelationship`, born in M's probe's twin row (no served marker: `src/lib/gallery.js :: sanitizeDossier`'s unserved branch skips `withholdCovertCopies`). NOT 212, NOT R4-IDS, NOT THE GAP; not in R4I-TONIGHT-2's files. Asked the chair whose the unserved branch is. C's control bites (f5ff3665b): master's shape, DM, both engines, gallery and import: `factions[].members[].goal.intent.{short,long}.target.id` and `factions[].members[].allegiance.handler`.
 - R4I-TONIGHT-2's brief committed (559d7b343, addendum N59 015b3c020); the builder DISPATCHED 06:3x UTC beside R4I-MEASURE (44.1).
 
 ### (3) IN FLIGHT
