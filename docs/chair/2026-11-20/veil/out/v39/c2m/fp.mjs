@@ -1,7 +1,7 @@
 // V39-C2M M4: THE BYTES. node fp.mjs <dist dir> [<other dist dir>]
 // First paint's three figures by tests/build/vendorPdfLazy.test.js's own reading (the entry chunk named by dist/index.html, its
 // transitive STATIC closure by the same two regexes, raw bytes by statSync, gzip level 9, Brotli quality 11), the chunk that
-// holds publicProseCompose.js (the one chunk whose text carries all of its distinctive site keys and its flag read), and with a
+// holds publicProseCompose.js (the one chunk whose text carries five of its site keys together), and with a
 // second dist: the two closures side by side (same file names = no chunk added to or dropped from first paint) and every
 // chunk whose bytes moved.
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -22,7 +22,7 @@ const read = (dist) => {
   let raw = 0; let gz = 0; let br = 0;
   for (const f of seen) { const b = readFileSync(join(assets, f)); raw += statSync(join(assets, f)).size; gz += gzipSync(b, { level: 9 }).length; br += brotliCompressSync(b, { params: { [Z.BROTLI_PARAM_QUALITY]: 11 } }).length; }
   const js = readdirSync(assets).filter((f) => f.endsWith('.js'));
-  const KEYS = ['"viewModel:viability"', '"warFaith:faith"', '"economy:daily_life"', '"canonicalViewModel"', '"power:ladder"'];
+  const KEYS = ['"viewModel:viability"', '"warFaith:faith"', '"economy:daily_life"', '"power:ladder"', '"overview:identity"'];
   const composer = js.filter((f) => { const s = readFileSync(join(assets, f), 'utf8'); return KEYS.every((k) => s.includes(k) || s.includes(k.replace(/"/g, "'"))); });
   const sizes = Object.fromEntries(js.map((f) => [f, statSync(join(assets, f)).size]));
   return { entry, closure: [...seen].sort(), raw, gz, br, composer: composer.map((f) => ({ f, bytes: sizes[f], inFirstPaint: seen.has(f), gz: gzipSync(readFileSync(join(assets, f)), { level: 9 }).length })), sizes };

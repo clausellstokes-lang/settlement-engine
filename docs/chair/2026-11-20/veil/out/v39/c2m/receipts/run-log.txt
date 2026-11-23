@@ -1,0 +1,18 @@
+start 2026-11-23T01:23:11Z
+gate open 02:08:11: read rc=0 02:07:30
+m1 rc=0 02:37:51
+cdocs-index rc=0 02:37:51
+m3 rc=0 03:00:00
+an rc=0 03:00:00
+m2 rc=0 03:24:23
+m2-an rc=0 03:24:24
+build-base rc=0 03:25:11
+verify-base rc=1 03:25:16
+build-scratch rc=0 03:26:02
+verify-scratch rc=1 03:26:08
+fp rc=0 03:26:12
+pins-scratch rc=1 03:27:37
+lint-scratch rc=1 03:40:42
+pins-base rc=0 03:42:05
+lint-base rc=1 03:55:11
+END 2026-11-23T03:55:11Z

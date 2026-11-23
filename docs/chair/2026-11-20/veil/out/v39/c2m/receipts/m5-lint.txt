@@ -1,0 +1,27 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 49 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  18 failed | 207 passed (225)
+      Tests  49 failed | 3255 passed (3304)
+--- base:
+⎯⎯⎯⎯⎯⎯ Failed Tests 48 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  17 failed | 208 passed (225)
+      Tests  48 failed | 3256 passed (3304)
+--- diff of FAIL titles (base < > scratch):
+43a44
+>  FAIL  tests/lint/rosterChoiceRegistry.walker.test.js > ARMS A and B: every chooser site in src/generators/** and the composer's reach is registered > ARM A: a site that calls a registered predicate, or holds a crime-name regex, is in REGISTRY_SITES; a registered site still does
+AssertionError: an UNREGISTERED chooser site: register it in REGISTRY_SITES with its rows: expected [ …(12) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "src/domain/display/galleryRosterChoices.js :: BENEATH_THE_WALLS",
++   "src/domain/display/galleryRosterChoices.js :: GATES_BENEATH",
++   "src/domain/display/galleryRosterChoices.js :: applyRosterChoices",
++   "src/domain/display/galleryRosterChoices.js :: entryOut",
++   "src/domain/display/galleryVeil.js :: DEFAULT_VEIL_RULES",
++   "src/domain/display/galleryVeil.js :: applyVeil",
++   "src/domain/display/galleryVeil.js :: curateModelFor",
++   "src/domain/display/galleryVeil.js :: isHideable",
++   "src/domain/people/cardVeil.js :: isHideableHouse",
++   "src/domain/people/cardVeil.js :: veiledOfInstitution",
++   "src/domain/veil/pageRederive.js :: rederiveCrimeTypes",
++   "src/domain/veil/pageRederive.js :: rederiveForPage",

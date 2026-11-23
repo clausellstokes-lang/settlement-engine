@@ -1,0 +1,44 @@
+# env-live builds (dummy non-secret VITE_SUPABASE_URL/ANON_KEY, --sourcemap; envbuild.sh), fp.mjs base -> scratch
+/var/tmp/v18/out/v39/c2m/dist-env-base: first paint raw 1382224 / gzip 429289 / brotli 360485; 9 chunks; entry index-CyFUnGnZ.js; composer chunk [{"f":"dossierSearch-JnDylThe.js","bytes":8359,"inFirstPaint":false,"gz":3367},{"f":"publicProseCompose-C_3JMC4Z.js","bytes":5813,"inFirstPaint":false,"gz":2422}]
+/var/tmp/v18/out/v39/c2m/dist-env-scratch: first paint raw 1382271 / gzip 429329 / brotli 360370; 9 chunks; entry index-BzlBq5gT.js; composer chunk [{"f":"dossierSearch-BHI9ThWL.js","bytes":8359,"inFirstPaint":false,"gz":3371},{"f":"publicProseCompose-B8AoxXJf.js","bytes":5873,"inFirstPaint":false,"gz":2450}]
+DELTA first paint: raw 47 / gzip 40 / brotli -115
+first-paint closure by chunk name (hash stripped): THE SAME
+  chunk moved: AdminPanel [107583] -> [107618]
+  chunk moved: CompendiumPanel [156357] -> [156358]
+  chunk moved: CrisisTab [9522] -> [9557]
+  chunk moved: DefenseTab [19317] -> [19291]
+  chunk moved: GalleryPage [86604] -> [86647]
+  chunk moved: GenerateWizard [105287] -> [105326]
+  chunk moved: HeraldGazetteer [12687] -> [12682]
+  chunk moved: HomeLanding [11149] -> [11186]
+  chunk moved: InstitutionLink [7129] -> [7130]
+  chunk moved: LandingBelowFold [28982] -> [29017]
+  chunk moved: MapShareEditorOverlay [23020] -> [23055]
+  chunk moved: OutputContainer [64893] -> [64927]
+  chunk moved: PartyLinkView [6628] -> [6700]
+  chunk moved: PublicDossierView [4815] -> [4850]
+  chunk moved: SettlementsPanel [250653] -> [250696]
+  chunk moved: ShareToGallery [30511] -> [30551]
+  chunk moved: VersionDiffView [7041] -> [7076]
+  chunk moved: VersionsTab [12663] -> [12700]
+  chunk moved: WorldMap [84823] -> [84861]
+  chunk moved: campaignRuntime [48569] -> [48608]
+  chunk moved: custom-registry [12209] -> [12207]
+  chunk moved: defenseStateProse [20634] -> [20633]
+  chunk moved: engine [910299] -> [910309]
+  chunk moved: gallery [130649] -> [54114]
+  chunk moved: galleryImportMap [7450] -> [7490]
+  chunk moved: galleryImportSettlement [5992] -> [6031]
+  chunk moved: generateWorldBook [15378] -> [15413]
+  chunk moved: generator-helpers [10300] -> [10299]
+  chunk moved: index [4588,11708,62844,500787] -> [4588,11708,62844,500834]
+  chunk moved: pageRederive [] -> [76443]
+  chunk moved: publicProseCompose [5813] -> [5873]
+  chunk moved: vendor-pdf [1852626] -> [1852663]
+# the chunks holding the three modules, by sourcemap (no-env builds: publicProseCompose.js in NO chunk at base or scratch: saves.js :: supabaseSave is dead with isConfigured false)
+base gallery-D4iurMjF.js 130649 src/domain/display/galleryWithholdAlways.js src/domain/veil/pageRederive.js | modules 11
+base publicProseCompose-C_3JMC4Z.js 5813 src/components/new/publicProseCompose.js | modules 1
+scratch pageRederive-VkxK1AGc.js 76443 src/domain/display/galleryWithholdAlways.js src/domain/veil/pageRederive.js | modules 5
+scratch publicProseCompose-B8AoxXJf.js 5873 src/components/new/publicProseCompose.js | modules 1
+# the entry's only new reference: its preload map entry
+"assets/pageRederive-VkxK1AGc.js"

@@ -1,0 +1,146 @@
+M1: 1,948 places (1,248 nothing-hidden: no hideable house); shards 0/4:487 861s, 1/4:487 900s, 2/4:487 901s, 3/4:487 811s
+  CONTROLS: base copy vs stored differs on 0 places; scratch composer vs the copy of (c) differs on 0; site-restricted compose vs whole on 0
+  PLACES WHOSE (c) PROSE DIFFERS FROM THE STORED: 1,948 of 1,948; nothing-hidden 1,248 of 1,248
+  ... differing OUTSIDE (i) (the target is 0 on nothing-hidden places): 1,948 places; nothing-hidden 1,248 of 1,248; equal outside (i) on nothing-hidden: 0
+
+  PER SITE: places differing | of them nothing-hidden | places differing by (i) alone | differing leaves | leaves by kind
+    power:desk: 1,948 | 1,248 | 0 | 26,444 | {"ii-w":24706,"i":1738}
+    power:governance: 1,923 | 1,240 | 0 | 1,923 | {"ii-w":1922,"ii-j":1}
+    general:history: 1,868 | 1,197 | 0 | 3,854 | {"ii-w":3246,"i":490,"ii-j":118}
+    overview:identity: 1,738 | 1,103 | 1,738 | 1,738 | {"i":1738}
+    economy:economics: 1,608 | 1,019 | 0 | 8,608 | {"ii-w":8608}
+    economy:services: 1,608 | 1,019 | 0 | 8,608 | {"ii-w":8608}
+    economy:resources: 1,608 | 1,019 | 0 | 8,608 | {"ii-w":8608}
+    economy:daily_life: 1,608 | 1,019 | 0 | 8,608 | {"ii-w":8608}
+    defense:posture: 111 | 77 | 0 | 422 | {"ii-w":420,"ii-j":2}
+    warFaith:faith: 33 | 1 | 0 | 132 | {"ii-w":132}
+    defense:criminal: 2 | 0 | 0 | 2 | {"ii-w":2}
+    viewModel:viability: 1 | 1 | 0 | 1 | {"ii-w":1}
+
+  KIND (i): 3,966 leaves on 1,812 places; by cause (leaves, places, sites):
+    3,476 leaves, 1,738 places | powerStructure.stability | overview:identity, power:desk
+    490 leaves, 490 places | history.legacyAnnotations[] (jointly) | general:history
+    e.g. t2p-city-indebted-1155 overview:identity governs [powerStructure.stability]
+         stored:   "Merchant Guild Council · Strained — the creditors have a say in every decision"
+         composed: "Merchant Guild Council · Strained"
+    e.g. t2p-city-indebted-1155 power:desk stabilityHeader.glance [powerStructure.stability]
+         stored:   "Strained — the creditors have a say in every decision"
+         composed: "Strained"
+    e.g. t2p-city-indebted-125 overview:identity governs [powerStructure.stability]
+         stored:   "City Council · Strained — the creditors have a say in every decision; monsters on the roads"
+         composed: "City Council · Strained"
+    e.g. t2p-city-indebted-125 power:desk stabilityHeader.glance [powerStructure.stability]
+         stored:   "Strained — the creditors have a say in every decision; monsters on the roads"
+         composed: "Strained"
+    e.g. t2p-city-indebted-1605 overview:identity governs [powerStructure.stability]
+         stored:   "Arcane Council · Strained — the creditors have a say in every decision"
+         composed: "Arcane Council · Strained"
+
+  KIND (ii-w): 64,861 leaves on 1,948 places; by cause (leaves, places, sites):
+    8,340 leaves, 1,948 places | powerStructure.publicLegitimacy.govMultiplier | power:desk
+    3,008 leaves, 1,749 places | history.legacyAnnotations[] (jointly) | general:history
+    5,147 leaves, 1,336 places | powerStructure.publicLegitimacy (jointly) | power:governance, power:desk
+    18,751 leaves, 1,173 places | economicState.safetyProfile.blackMarketCapture | economy:economics, economy:services, economy:resources, economy:daily_life, defense:posture, viewModel:viability, defense:criminal
+    4,129 leaves, 963 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.safety + powerStructure.publicLegitimacy.breakdown.defense | power:desk
+    9,068 leaves, 686 places | economicState.safetyProfile.compound.religionInfluence | economy:economics, economy:services, economy:resources, economy:daily_life
+    602 leaves, 602 places | powerStructure.publicLegitimacy.governanceFractured | power:desk
+    1,664 leaves, 596 places | powerStructure.publicLegitimacy.breakdown.safety | power:desk, power:governance
+    1,308 leaves, 545 places | powerStructure.publicLegitimacy.breakdown.prosperity | power:desk, power:governance
+    1,649 leaves, 485 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.safety | power:desk
+    4,752 leaves, 297 places | economicState.safetyProfile.compound.magicInfluence | economy:economics, economy:services, economy:resources, economy:daily_life
+    718 leaves, 239 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.safety + powerStructure.publicLegitimacy.breakdown.defense + powerStructure.publicLegitimacy.governanceFractured | power:desk
+    1,098 leaves, 220 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.defense | power:desk
+    209 leaves, 209 places | powerStructure.stability | power:desk
+    860 leaves, 182 places | powerStructure.publicLegitimacy.breakdown.safety + powerStructure.publicLegitimacy.breakdown.defense | power:desk
+    1,908 leaves, 159 places | economicState.safetyProfile.compound.religionInfluence + economicState.safetyProfile.compound.magicInfluence | economy:economics, economy:services, economy:resources, economy:daily_life
+    238 leaves, 119 places | history.siegeNarrative | general:history
+    393 leaves, 73 places | powerStructure.publicLegitimacy.breakdown.defense | power:desk, power:governance
+    98 leaves, 49 places | economicState.compound.militaryEffective | defense:posture
+    172 leaves, 43 places | economicState.safetyProfile.flags.merchantCriminalBlur | power:desk
+    278 leaves, 40 places | defenseProfile.readiness.score | defense:posture
+    117 leaves, 39 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.defense + powerStructure.publicLegitimacy.governanceFractured | power:desk
+    132 leaves, 33 places | economicState.safetyProfile.flags.religiousFraud | warFaith:faith
+    75 leaves, 27 places | economicState.safetyProfile.flags.merchantArmy | power:desk
+    78 leaves, 26 places | powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.safety + powerStructure.publicLegitimacy.governanceFractured | power:desk
+    ... 2 more causes
+    e.g. t2p-city-indebted-1155 economy:economics shadowEconomy.glance [economicState.safetyProfile.blackMarketCapture]
+         stored:   ""
+         composed: undefined
+    e.g. t2p-city-indebted-1155 economy:economics incomeWeight.glance [economicState.safetyProfile.compound.religionInfluence]
+         stored:   ""
+         composed: undefined
+    e.g. t2p-city-indebted-1155 general:history legacyLines[0] [history.legacyAnnotations[] (jointly)]
+         stored:   "In the wake of the shortage, Grímås settled into a shape that still holds, a legacy that is older than all but the oldest alive, though much has changed since."
+         composed: undefined
+    e.g. t2p-city-indebted-1155 power:desk legitimacyLens.glance [powerStructure.publicLegitimacy.breakdown.prosperity + powerStructure.publicLegitimacy.breakdown.safety]
+         stored:   ""
+         composed: undefined
+    e.g. t2p-city-indebted-1155 power:desk legitimacyLens.sentence [powerStructure.publicLegitimacy.breakdown.safety]
+         stored:   "Each season Grímås is policed worse, fewer people back the Merchant Guild Council, and it can do less about it."
+         composed: undefined
+
+  KIND (ii-r): 0 leaves on 0 places; by cause (leaves, places, sites):
+
+  KIND (ii-j): 121 leaves on 120 places; by cause (leaves, places, sites):
+    118 leaves, 118 places | jointly, across: (no single coarse group moves it) | general:history
+    1 leaves, 1 places | jointly, across: powerStructure.recentConflict + powerStructure.publicLegitimacy | power:governance
+    2 leaves, 1 places | jointly, across: defenseProfile.readiness | defense:posture
+    e.g. t2p-city-none-1636 general:history legacyLines[1] [jointly, across: (no single coarse group moves it)]
+         stored:   "Loughgill came through the succession crisis without losing what it had built, a legacy that is older than all but the oldest alive."
+         composed: undefined
+    e.g. t2p-city-none-796 general:history legacyLines[1] [jointly, across: (no single coarse group moves it)]
+         stored:   "Nobody in Qaryahdarya has finished putting right the legacy the siege left, and that legacy is a generation old."
+         composed: undefined
+    e.g. t2p-town-insurgency-453 general:history legacyLines[1] [jointly, across: (no single coarse group moves it)]
+         stored:   "Nobody in Yunshan has finished putting right the legacy the land dispute left, and that legacy is a generation old."
+         composed: undefined
+    e.g. t2p-town-insurgency-573 general:history legacyLines[1] [jointly, across: (no single coarse group moves it)]
+         stored:   "Nobody in Tumenüüd has finished putting right the legacy the tyranny left, and that legacy is two generations old."
+         composed: undefined
+    e.g. t2p-town-none-132 general:history legacyLines[1] [jointly, across: (no single coarse group moves it)]
+         stored:   "In the wake of the religious conflict, Hongpu settled into a shape that still holds, a legacy that is older than all but the oldest alive, though much has changed since."
+         composed: undefined
+
+  KIND (iii): 0 leaves on 0 places; by cause (leaves, places, sites):
+
+  VARIANT unveiled: true (blackMarketCapture re-derived): places differing 1,948; leaves 50,197 (default 68,948); same diff as default on 775 places; per site {"economy:economics":983,"economy:services":983,"economy:resources":983,"economy:daily_life":983,"general:history":1868,"overview:identity":1738,"power:desk":1948,"power:governance":1923,"defense:posture":89,"warFaith:faith":33}
+
+M3: 1,948 places read, 700 with a hideable house (each read by the twin at every gated setting, both Reveals)
+  row: places where served != stored | reads | served absent | stored block holds the stored text (reads) / not | of held: equal / differ (reads) | places all-equal / any-differ
+    safety.guardEffectivenessDesc: 231 | 4,620 | 0 | 4,560 / 60 | 4,560 / 0 | 228 / 0
+    economy.complexity: 37 | 740 | 0 | 740 / 0 | 300 / 440 | 15 / 22
+      differ e.g. t2b-city-infiltrated-121 off|own economy:economics prosperityHeader.sentence
+        stored field: Highly diversified — multiple major revenue streams
+        served field: Diversified — broad institutional economic base
+        substituted:  "Taiba lives on a spread of trades and ends each year with money to spare."
+        owner-side:   "Taiba lives on a broad base of trades and ends each year with money to spare."
+      differ e.g. t2b-city-politically_fractured-149 off|own economy:economics prosperityHeader.sentence
+        stored field: Diversified — broad institutional economic base
+        served field: Highly diversified — multiple major revenue streams
+        substituted:  "With a little left over each year, Velitsy gets by on a broad base of trades, and every year people argue over how to spend it."
+        owner-side:   "With a little left over each year, Velitsy gets by on a spread of trades, and every year people argue over how to spend it."
+      differ e.g. t2b-metropolis-infiltrated-1 off|own economy:economics prosperityHeader.sentence
+        stored field: Highly diversified — multiple major revenue streams
+        served field: Diversified — broad institutional economic base
+        substituted:  "Hartbach lives on a spread of trades and ends each year with money to spare."
+        owner-side:   "Hartbach lives on a broad base of trades and ends each year with money to spare."
+      differ e.g. t2b-metropolis-politically_fractured-89 off|own economy:economics prosperityHeader.sentence
+        stored field: Highly diversified — multiple major revenue streams
+        served field: Diversified — broad institutional economic base
+        substituted:  "With a little left over each year, Petenmul gets by on a spread of trades, and every year people argue over how to spend it."
+        owner-side:   "With a little left over each year, Petenmul gets by on a broad base of trades, and every year people argue over how to spend it."
+      differ e.g. t2b-metropolis-wartime-98 off|own economy:economics prosperityHeader.sentence
+        stored field: Diversified — broad institutional economic base
+        served field: Highly diversified — multiple major revenue streams
+        substituted:  "With a little left over each year, Chernograd gets by on a broad base of trades, and every year people argue over how to spend it."
+        owner-side:   "With a little left over each year, Chernograd gets by on a spread of trades, and every year people argue over how to spend it."
+    safety.safetyDesc: 23 | 460 | 200 | 260 / 0 | 260 / 0 | 13 / 0
+
+M2x THE RECENT-CONFLICT SENTENCE (c) SHIPS vs THE ONE THE PAGE DRAWS (rederiveRecentConflict over each read's served document): 1,948 places, 38,960 reads
+  (c) composes from a sentence on 1,948 places; its power:governance block holds it word for word on 1,704
+  reads: the page draws the SAME sentence 37,560 | a DIFFERENT one 1,400 (on 70 places) | none 0; places with a hideable house: same 12,600 | differ 1,400 | none 0
+    differ e.g. t2b-city-infiltrated-161 {"read":"off|own","shipped":"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.","page":"The church is demanding veto power over council appointments. Noble Governorship has not yet refused publicly."}
+    differ e.g. t2b-city-insurgency-113 {"read":"off|own","shipped":"Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge know that cells meet at night, and they have not moved, because moving would admit there is a rising.","page":"The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. 
+    differ e.g. t2b-city-none-10 {"read":"off|own","shipped":"Merchant oligarchy has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.","page":"A noble family is contesting a merchant's right to operate in their traditional market territory. Merchant oligarchy is hearing the case and wishes it were not."}
+    differ e.g. t2b-city-none-112 {"read":"off|own","shipped":"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.","page":"The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten."}
+    differ e.g. t2b-city-none-156 {"read":"off|own","shipped":"Several merchants have been found murdered this season, and people say the guard is doing nothing about it.","page":"Corrupt City Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost."}

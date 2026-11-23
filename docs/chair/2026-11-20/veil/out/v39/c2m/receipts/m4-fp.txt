@@ -1,0 +1,13 @@
+/home/user/wt/c2m-base/dist: first paint raw 1175552 / gzip 373992 / brotli 314122; 8 chunks; entry index-BO3ToT7P.js; composer chunk [{"f":"dossierSearch-Bj2KQoZK.js","bytes":8308,"inFirstPaint":false,"gz":3331}]
+/home/user/wt/c2m-scratch/dist: first paint raw 1175552 / gzip 374015 / brotli 313918; 8 chunks; entry index-CaJRWKzo.js; composer chunk [{"f":"dossierSearch-6j3sA4Dk.js","bytes":8308,"inFirstPaint":false,"gz":3332}]
+DELTA first paint: raw 0 / gzip 23 / brotli -204
+first-paint closure by chunk name (hash stripped): THE SAME
+  chunk moved: CompendiumPanel [156218] -> [156219]
+  chunk moved: GenerateWizard [105133] -> [105134]
+  chunk moved: HeraldGazetteer [12596] -> [12591]
+  chunk moved: InstitutionLink [7076] -> [7077]
+  chunk moved: custom-registry [12156] -> [12154]
+  chunk moved: defenseStateProse [20579] -> [20578]
+  chunk moved: engine [910255] -> [910265]
+  chunk moved: galleryImportSettlement [7275] -> [7274]
+  chunk moved: generator-helpers [10245] -> [10244]

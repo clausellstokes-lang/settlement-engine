@@ -1,0 +1,7 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/build/generationWorkerLazy.test.js > generation worker — production boundary > the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure raw bytes stay under the first-paint budget (1175492)
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure gzip bytes stay under 373999
+ Test Files  2 failed (2)
+      Tests  4 failed | 62 passed (66)

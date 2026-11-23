@@ -1,0 +1,6 @@
+start 2026-11-23T02:22:42Z mode m1 tree /home/user/wt/c2m-scratch at 7faa3d9250bda3cdcfb031f61b614378c7513be2 +  1 file changed, 3 insertions(+), 1 deletion(-) stored /var/tmp/v18/stored/today/docs
+end 2026-11-23T02:37:51Z
+start 2026-11-23T02:37:52Z mode m3 tree /home/user/wt/c2m-scratch at 7faa3d9250bda3cdcfb031f61b614378c7513be2 +  1 file changed, 3 insertions(+), 1 deletion(-) stored /var/tmp/v18/stored/today/docs
+end 2026-11-23T03:00:00Z
+start 2026-11-23T03:00:01Z tree /home/user/wt/c2m at 45e08f02c382aaab5931c528bc1d8d41ef272f3d stored /var/tmp/v18/out/v39/c2m/cdocs
+end 2026-11-23T03:24:23Z

@@ -1,0 +1,22 @@
+diff --git a/src/components/new/publicProseCompose.js b/src/components/new/publicProseCompose.js
+index c61de4dbd..a6d08a5dc 100644
+--- a/src/components/new/publicProseCompose.js
++++ b/src/components/new/publicProseCompose.js
+@@ -39,6 +39,8 @@ import { populationTrendBand } from '../../domain/display/trendLens.js';
+ import { computeChainSets } from './tabHelpers.js';
+ import { isPhantomRecord } from '../../domain/edit/phantoms.js';
+ import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
++import { withholdAlways } from '../../domain/display/galleryWithholdAlways.js';
++import { rederiveForPage } from '../../domain/veil/pageRederive.js';
+ 
+ 
+ /** @typedef {readonly [string, (settlement: any, publicDossier: boolean, ctx: {veiledRecord: any}) => any]} PublicProseSite */
+@@ -152,7 +154,7 @@ export function composePublicProse(settlement, { publicDossier = false } = {}) {
+   // to the three audience-gated readers (the governance account, the criminal lens, the power desk).
+   // Not built for a caller that says publicDossier: every site then prints what the save shipped.
+   /** @type {{veiledRecord: any}} */
+-  const ctx = { veiledRecord: publicDossier ? null : publicVeiledRecordOf(settlement) };
++  const ctx = { veiledRecord: publicDossier ? null : rederiveForPage(withholdAlways(publicVeiledRecordOf(settlement))) };
+   // COHERENCE-VEIL-6 (the fifth review's V5-2): EVERY site draws from what a public reader may see, the record
+   // after the strip (seed and all), never the owner's: the text ships to every reader of every share. Before,
+   // only the three audience-gated readers took the stripped record, and in a town with a hidden power the

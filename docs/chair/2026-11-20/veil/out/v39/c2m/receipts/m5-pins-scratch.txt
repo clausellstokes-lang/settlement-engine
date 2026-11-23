@@ -1,0 +1,45 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 42 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > economics, soak1k-1: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > economics, soak1k-8: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > economics, soak1k-10: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > economics, soak1k-11: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-1: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-2: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-3: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-4: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-5: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-7: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-8: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-9: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-10: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > history, soak1k-11: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > defense, soak1k-3: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > defense, soak1k-9: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-0: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-1: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-2: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-3: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-4: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-5: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-6: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-7: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-8: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-9: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-10: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > the shared page prints the owner's player view, line for line > overview, soak1k-11: every owner player-view line is on the shared page
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > defense:threat on defense, soak1k-3
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > defense:posture on defense, soak1k-9
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:desk on power, soak1k-3
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-0
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-1
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-2
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-3
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-4
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-5
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-6
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-7
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-8
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-10
+ FAIL  tests/components/publicProseEquality.test.jsx > each later family, from the owner's own draw: what the owner's player view prints, the shared page prints > power:governance on power, soak1k-11
+ Test Files  1 failed | 3 passed (4)
+      Tests  42 failed | 404 passed (446)
