@@ -1,51 +1,48 @@
-# DISAGREE: the lines for the chair (PROSE-6; drafted on line tip 244fa84ef; form as in item (1))
-LINES TAKEN by the chair 2026-11-23 00:46 UTC, with its changes applied here: F2 and W2 reworded word for word; F3 gains `stores: < 12`; F4 reads "against hard times".
-Marks use the grammar's own atoms: `food` (band, FOOD_BAND_WORDS), `force: paid` (orderForce), `guardPresence`, `stores`, `prosperity`.
-No line says "the town". Defence is spelled as the pool spells it.
+# DISAGREE: THE LINES AS TAKEN (PROSE-6; drafted on line tip 244fa84ef)
+LINES TAKEN by the chair in two rounds, 2026-11-23 00:46 UTC and 01:14 UTC. This file is FINAL and is the builder's only source of words and marks.
+Marks are the grammar's own atoms: `food` (band, FOOD_BAND_WORDS), `force: paid` (orderForce), `guardPresence`, `stores`, `prosperity`. No new atom. DS-ECO-9 is unchanged, and so is all of DS-GEN-17 except v2's mark.
 
-## FOOD: DS-DEF-2 `CHAIN: food trades failing` (the other cell: DS-ECO-9 [SECURE]; its fact as an atom here is `food: ≥ secure`)
-POOL LINE (v4, flat, gains `food: ≤ pressured`): `[unfolding · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
-POOL LINE (v1, flat, gains `food: ≤ pressured`): `[ledger · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, so less food is being put by than should be; ...
-POOL LINE (v3, flat, gains `food: ≤ pressured`): `[street · no crisis: under_siege · stores: < 12]` The food trades at {settlement} are struggling to keep up, ...
-POOL LINE (v2, unchanged: it already says both truths): `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry it if it were cut off.
-NEW F1 `[ledger · no crisis: under_siege · food: ≥ secure · stores: < 12]` {settlement} eats well enough today, but its food trades are failing, and less is being put by than it would need if it were cut off.
-NEW F2 `[street · no crisis: under_siege · food: ≥ secure · stores: < 12]` There is food enough on the tables at {settlement}, though its food trades are failing and its stores are thinner for it.
-NEW F3 `[unfolding · no crisis: under_siege · food: ≥ secure · stores: < 12]` {settlement}'s tables are full for now, but its food trades are failing, and what they fail to put by would be missed only if it were cut off.
-NEW F4 `[visitor · no crisis: under_siege · food: ≥ secure]` The tables at {settlement} are full, but the trades that put food by against hard times are failing.
-NEEDS: F1-F4 `food: ≥ secure` (the rung DS-ECO-9 prints); F1-F3 `stores: < 12` (as v1, v3, v4). The siege variants v5, v6 are left as they are (DS-ECO-9 SECURE is rarely printed under a siege: the census arm says so, or names it).
+## FOOD: DS-DEF-2 `CHAIN: food trades failing` (the other cell is DS-ECO-9 [SECURE], whose fact here is `food: ≥ secure`)
+FLAT ROWS, each gaining `food: ≤ pressured` (the chair: v2 is flat for this pair):
+v1 `[ledger · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, so less food is being put by than should be; ...
+v2 `[ledger · no crisis: under_siege · stores: ≥ 12]` {settlement}'s food trades are failing, though its stores would still carry it if it were cut off.
+v3 `[street · no crisis: under_siege · stores: < 12]` The food trades at {settlement} are struggling to keep up, ...
+v4 `[unfolding · no crisis: under_siege · stores: < 12]` {settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
+NEW LINES (appended in this order; they take the next ids):
+F1 `[ledger · no crisis: under_siege · food: ≥ secure · stores: < 12]` {settlement} eats well enough today, but its food trades are failing, and less is being put by than it would need if it were cut off.
+F2 `[street · no crisis: under_siege · food: ≥ secure · stores: < 12]` There is food enough on the tables at {settlement}, though its food trades are failing and its stores are thinner for it.
+F3 `[unfolding · no crisis: under_siege · food: ≥ secure · stores: < 12]` {settlement}'s tables are full for now, but its food trades are failing, and what they fail to put by would be missed only if it were cut off.
+F4 `[visitor · no crisis: under_siege · food: ≥ secure]` The tables at {settlement} are full, but the trades that put food by against hard times are failing.
+F5 `[ledger · no crisis: under_siege · food: ≥ secure · stores: ≥ 12]` {settlement} eats well and has stores laid by, though the trades that should go on putting food by are failing.
+F6 `[street · no crisis: under_siege · food: ≥ secure · stores: ≥ 12]` There is enough on the tables at {settlement} and stores laid by besides, but its food trades are failing.
+F6's register: if street cannot print on that ground, the builder says which register can and keeps the words; the change comes to the chair.
+The siege rows v5 and v6 stay as they are.
 
-## WAGES: DS-DEF-2 `Economic Survival: WEAK` (the other cell: DS-GEN-17 [GARRISONED] v2, "pays wages"; its fact as an atom here is `force: paid`)
-POOL LINE (v2, flat, gains `no force: paid`): `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
-POOL LINE (v1, flat, gains `no force: paid`): `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
-NEW W1 `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} pays its guards as the seasons come, but nothing is laid by to pay them through a long defence.
-NEW W2 `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} are paid from season to season, and they know nothing is laid by to go on paying them through a long defence.
-NEW W3 `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} can pay its guards from one season to the next and not much longer: a long defence would find the money gone.
-NEEDS: W1-W3 `guardPresence`, `force: paid` (a garrison, a paid watch or a hired company: `orderForce.js :: orderForceOf`), `prosperity: ≤ comfortable` (as v1, v2). They say "paid", never "paid in full": the guard's pay may be short (`guardPay.js :: guardPayOf`), and no atom reads it.
+## WAGES: DS-DEF-2 `Economic Survival: WEAK` (the other cell is DS-GEN-17 [GARRISONED] v2, whose fact here is `force: paid`)
+FLAT ROWS, each gaining `no force: paid`:
+v1 `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+v2 `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
+NEW LINES (appended in this order; the first W1 to W3 are withdrawn):
+W1 `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} keeps paid guards, but nothing is laid by to pay them through a long defence.
+W2 `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long defence.
+W3 `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} has paid guards and little to pay them with: a long defence would find the money gone.
+They say "paid" and never "regular": both pages of the branch on the 900 read pay 'short' (`guardPay.js :: guardPayOf`), which `force: paid` cannot tell.
 
-## THE FAULT OF FACTS, CURED IN ITS OWN ROW: DS-GEN-17 `GARRISONED` v2
-POOL LINE (gains `force: paid`): `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
-WHY: its key holds on a roster whose only watch is the village's unpaid rota (`guardPay.js :: watchIsUnpaidRota`), where nobody is paid. With `force: paid` it is never drawn there, and so never beside a flat WEAK v1, v2. NAMED, NOT CURED: "the money is found every season" where the guard's pay reads 'short' (no atom).
+## DS-GEN-17 `GARRISONED` v2
+It gains `force: paid` and its text stays: `[ledger · walls · no crisis: occupied · force: paid]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
+There is NO WORD_CORRECTIONS row now. The page cuts the line at its clause: "the money is found every season" printed on 0 of the 900. The tooth pins that at 0. The row that makes the source match the page is on the chair's list for after the first deploy.
 
-## WHAT THE TOOTH READS (item 3), one registered row a pair
-| pair | flat side A | flat side B |
+## THE TOOTH'S TABLE (`OPPOSITE_PAIRS`, one row a pair)
+| pair | side A (flat) | side B |
 |---|---|---|
-| FOOD | DS-DEF-2 `CHAIN: food trades failing` v1, v3, v4 | DS-ECO-9 `SECURE` (any variant) |
+| FOOD | DS-DEF-2 `CHAIN: food trades failing` v1, v2, v3, v4 | DS-ECO-9 `SECURE` (all) |
 | WAGES | DS-DEF-2 `Economic Survival: WEAK` v1, v2 | DS-GEN-17 `GARRISONED` v2 |
+A further arm pins GEN-17 v2's clause "the money is found every season" at 0 pages.
 
-## THE CHAIR'S CONDITIONS, ANSWERED (00:40 and 00:46 UTC)
-(a) `force: paid` reads `orderForce.js :: orderForceOf(record).paid`: a garrison, a hired company, or a watch that is not the unpaid rota alone. It is FALSE under the unpaid rota (`watchIsUnpaidRota`). IT CANNOT TELL 'short' FROM 'full' (`guardPayOf`: the record's `pay` field is beside it, not in the atom). So GEN-17 v2 is measured first, as ruled. W1-W3 say "paid", never "in full". W2's "from season to season" is the same question, so the builder counts W-branch pages where pay reads 'short', by size; if any, W2 comes back to the chair.
-(b) Reach by size and each new line's share: owed in the build. FOOD has four lines (F4 is its only line where stores ≥ 12, beside v2); WAGES has three.
-(c) ECO-9 SECURE v1-v10 and GEN-17 GARRISONED v1 are read against F1-F4 and W1-W3 by the builder; I read its list. The tooth's table holds both pairs; on 900 births its count is 0.
-(c2) No cell left empty, on 900 births: owed; 0, or STOP.
-(d) FOR THE VEIL'S READER. `food` reads the food rung (`famine.js :: famineOf`); `stores` the stored months; `prosperity` the prosperity rung; `guardPresence` a watch, garrison, militia or hired company; `force: paid` as in (a). None reads a fact about crime. `guardPresence` and `force: paid` read defence houses: garrison, watch, militia, mercenary. They are NOT a hideable kind by the catalogue; the builder proves it with `cardVeil.js :: isHideableHouse` = false on every such row of the 900 births. Every new line reads only facts every shared read serves (COMMON-RULES 14 (e)).
-(e) No new line says "the town"; no season, climate or age ("from season to season" is pay's rhythm, and "hard times" replaced "a hard season").
-(g) A walker that reds a new line brings the line back to the chair, never banked around.
-
-## BACK TO THE CHAIR AFTER PHASE 1 (900 births, `map/DISAGREE-PHASE1.md` on the -wip at 687ae0dbe)
-WAGES: the branch is eligible on 2 pages (towns), BOTH with pay 'short'. W1-W3 all say pay comes regularly, so all three are re-drafted (marks unchanged):
-W1' `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} keeps paid guards, but nothing is laid by to pay them through a long defence.
-W2' `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long defence.
-W3' `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} has paid guards and little to pay them with: a long defence would find the money gone.
-FOOD: every metropolis on the branch has stores ≥ 12 (44 of 150), where only F4 and v2 are eligible (projected near 15% and 19%). One more line for that ground:
-F5 `[ledger · no crisis: under_siege · food: ≥ secure · stores: ≥ 12]` {settlement} eats well and its stores are full, though the trades that should go on putting food by are failing.
-GEN-17 v2: printed on 63 pages, 8 with pay 'short'. ON EVERY PAGE THE PAGE ITSELF CUTS IT AT THE CLAUSE, to "{settlement} pays wages for its defense as well as keeping its walls.", so the full text printed on 0 pages. The ruled rewording changes no page. Recommended: make it anyway (one WORD_CORRECTIONS row), so that the source holds what the page prints if the cut ever changes; the dark proof shows no page moved.
+## THE CHAIR'S CONDITIONS, ANSWERED
+(a) `force: paid` = `orderForce.js :: orderForceOf(record).paid`: a garrison, a hired company, or a watch that is not the unpaid rota alone. It is false under the rota and cannot tell 'short' from 'full'. Hence the WAGES wordings above.
+(b), (c2) Owed by the builder before the build goes on: every line's share by size on each branch, under the bar, and NO CELL LEFT EMPTY on any of the four grounds (food secure or not × stores below 12 or not). A miss comes back to the chair.
+(c) The builder reads ECO-9 SECURE v1 to v10 and GEN-17 GARRISONED v1 against the new lines; I read its table.
+(d) THE VEIL'S READER: no mark reads a fact about crime. `guardPresence` and `force: paid` read defence houses (garrison, watch, militia, mercenary), and none is hideable: `isHideableHouse` was false on all 1,066 rows of the 900. Every new line reads only what every shared read serves.
+(e) No new line says "the town". None names a season, climate or age as weather ("hard times"; "a long defence").
+(g) A walker that reds a new line brings it back to the chair, never banked around.
