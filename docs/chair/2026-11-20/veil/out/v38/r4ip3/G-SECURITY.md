@@ -19,9 +19,9 @@ Re-run figures are at THIS tree (lane/veil-38-2026-11-23-r4ipage3-wip), file alo
 | galleryVeilCures | 1 | (i) | F4: the served marker's keys pinned `['$veil', 'npc_0']` (re-keyed `npc_6ec3…`) | `canonServed` | NOT DONE |
 | galleryVeilCures | 1 | (i) PLAUSIBLE | V5-4: a person found by stored id, expected undefined, got a re-keyed card | through `unkeyPeople` | NOT DONE |
 | gallerySecondHomes | 1 | (i) PLAUSIBLE | THE ROLE BY ITS VALUE: 64 "lost" ties `p1>p2`… named by their ends' stored ids | through `unkeyPeople` | NOT DONE |
-| galleryWithholdAlways | 1 | (i) | :193: the twin against the server at the registered path `stress.cast.roles[].id` (×4, town-indebted-3): two salts | compare that path modulo the bijection | NOT DONE |
+| galleryWithholdAlways | 1 | (i) | :193: the twin against the server at the registered path `stress.cast.roles[].id` (×4, town-indebted-3): two salts | values compared on `canonPeople` of each side; `unkeyPeople` against the stored town; (v) `readsDiffer`; `bijectionTeeth` once a town ((ii) and two-under-one-id must bite; (i)/(iii) reach few of these paths) | **GREEN 9/9** (logs/g2-galleryWithholdAlways.txt) |
 | galleryVeilSignalCopies | 2 | (iv) PLAUSIBLE, S2's cause | :305 `block:services.criminal`: shutting it removes nothing from the page (the criminal services row is already gone: S2's "Contraband goods", no such house) | none (the chair's, with S2) | run at af708f2fd: logs/g2-signalCopies-af708f2fd.txt (if it finished) |
 | shareRenderTwice | 2 | (i) + O | CONTROL and MAIN: DOM ids `dossier-npc-npc-<re-keyed>` differ between two renders; and the Tonight sheet's want line (O) | NOT MINE (R4I-TONIGHT owns the file, ruling 40.3) | untouched |
 
-COUNTS: 50 = (i) 42 (14 cured, 28 left) + ruled 1 (cured) + the patch's 2 (green without it) + (iv) 1 (RULING 4) + (iv) PLAUSIBLE 2
+COUNTS: 50 = (i) 42 (15 cured, 27 left) + ruled 1 (cured) + the patch's 2 (green without it) + (iv) 1 (RULING 4) + (iv) PLAUSIBLE 2
 (signal copies) + shareRenderTwice 2 (R4I-TONIGHT's) + (iii) 0 (V7-2's row green after the merge). (ii) 0: no red of the run is S1's.

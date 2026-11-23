@@ -46,7 +46,7 @@ canonical): every built tooth BITES (missed = [] on all 13 + the 48 VS1 copy-gua
   left out of the file (the self form stands; galleryVeilIds 12/12 green, logs/arm-galleryVeilIds.txt); the patch as run, with
   the clean-red labels, is `A-link-anchor-measured.patch`. The unpatched file was green beside it (12/12, same run).
 
-## G2 — `tests/security` WHOLE, CLASSIFIED (G-SECURITY.md; commit: G2). PARTIAL: 14 of 42 (i) re-stated.
+## G2 — `tests/security` WHOLE, CLASSIFIED (G-SECURITY.md; commit: G2). PARTIAL: 15 of 42 (i) re-stated.
 R4I-PAGE-2's run ended: 50 failed | 2060 passed | 1 skipped of 2111 (titles: g-security-fails.txt). By class: (i) 42; the
 ratchet 1 (ruled, cured in A); the anchor patch 2 (green without it); (iv) STOP 1 (galleryServerVeil RULING 4: the client
 file list pins 11, `galleryVeilPeople.js` is a 12th); (iv) PLAUSIBLE 2 (galleryVeilSignalCopies: the criminal services row
@@ -55,7 +55,7 @@ already gone, S2's cause; its af708f2fd run queued); shareRenderTwice 2 (R4I-TON
   fresh-id shape, notBijective, readsDiffer) at its 8 server-vs-twin sites, and the trace read by `unkeyPeople`.
   The V7-2 "STAYS" row is green after the merge.
 - LEFT (i), each with its cure named in G-SECURITY.md: criminalSwitchHandReach 12, galleryServerVeil 10,
-  galleryRosterChoices 2, galleryVeilCures 2, gallerySecondHomes 1, galleryWithholdAlways 1.
+  galleryRosterChoices 2, galleryVeilCures 2, gallerySecondHomes 1 (27). galleryWithholdAlways 1: CURED (9/9, a second G2 commit).
 
 ## ARMS (each its own run, logs/arm-*.txt)
 criminalSwitchSalt 6/6 green; walkers (5 files) 34/34 green; `rosterChoiceRegistry.mjs --check` exit 0; galleryVeilIds 12/12

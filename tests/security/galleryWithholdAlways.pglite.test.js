@@ -19,6 +19,7 @@ import { writeFileSync } from 'node:fs';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
+import { canonPeople, unkeyPeople, readsDiffer, bijectionTeeth } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
@@ -183,14 +184,32 @@ describe('R2: the withhold-always rows leave every non-owner read, both Reveal s
     // the cast rows by the keys R2's rule decides on (a stake's power, a role row's kind and id): their wording differs between
     // the engines at R2's base already (red.txt: the twin arm), a twin-laxer class of R7's (VR15 (b)), not this rule's
     const paths = [...rows.map((r) => r.re), /^powerStructure\.stability$/, /^(stress|stressors)\.cast\.stakes\[\]\.factionId$/, /^(stress|stressors)\.cast\.roles\[\]\.(kind|id)$/];
+    // VR46 (R4I-PAGE-3, VEIL-38 G2): the server and the twin each re-key every person id under a salt of their own (VR10), so
+    // the values are compared MODULO EACH READ'S PERSON-ID BIJECTION AND NOTHING ELSE (`canonPeople`; `unkeyPeople` against
+    // the stored town throws where a stored person id is served or two people share one id); five teeth on each read
+    const same = (g, twin, stored) => { unkeyPeople(g, stored); const cg = canonPeople(g).doc; const ct = canonPeople(twin).doc;
+      return paths.every((re) => JSON.stringify([...valuesAt(cg, re)].sort()) === JSON.stringify([...valuesAt(ct, re)].sort())); };
+    const missedTeeth = []; const teethRun = new Set();
     for (const r of reads) {
       const twin = veil.projectShareVeil(veil.galleryPayloadFor(r.t.stored, { shareDm: r.dm, memberOverrides: r.ov }), r.ov);
+      unkeyPeople(r.docs.gallery, r.t.stored);
+      const cg = canonPeople(r.docs.gallery).doc; const ct = canonPeople(twin).doc;
       for (const re of paths) {
-        const a = [...valuesAt(r.docs.gallery, re)].sort(); const b = [...valuesAt(twin, re)].sort();
+        const a = [...valuesAt(cg, re)].sort(); const b = [...valuesAt(ct, re)].sort();
         if (JSON.stringify(a) !== JSON.stringify(b)) differ.push(`${re} @ ${r.t.seed} ${r.mark} dm=${r.dm}`);
       }
+      const shared = readsDiffer(r.docs.gallery, twin);
+      if (shared.length && shared[0] !== '(the first read serves no person id)') differ.push(`VR46 (v): server and twin share ${shared.length} person ids @ ${r.t.seed} ${r.mark} dm=${r.dm}`);
+      if (teethRun.has(r.t.seed)) continue; // the teeth once a town (its first read): each costs seven canonical comparisons
+      teethRun.add(r.t.seed);
+      const storedId = (r.t.stored.npcs || []).map((n) => n?.id).find((v) => v != null);
+      const { missed } = bijectionTeeth(r.docs.gallery, (c) => same(c, twin, r.t.stored), { storedId: storedId == null ? undefined : String(storedId) });
+      // (i), (iii) and one person under two ids bite only where the mutated site lies on a compared path (these rows hold
+      // few person sites); (ii), two people under one id and the clean read must bite on every read
+      for (const m of missed) if (/^\(ii\)|^\(iv\) two people|^\(the equality/.test(m)) missedTeeth.push(`${m} @ ${r.t.seed} ${r.mark} dm=${r.dm}`);
     }
     expect(differ).toEqual([]);
+    expect(missedTeeth, 'VR46: teeth (ii) and (iv) bite on every read').toEqual([]);
   });
 
   it('THE PAGE re-derives what it draws from the served document alone, equal to the stored value where nothing is hidden', async () => {
