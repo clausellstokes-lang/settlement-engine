@@ -72,6 +72,12 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
    0f8bf5b21 after the merge and by rule 8; (iii) messages were not read between the pieces of long waits; (iv) rule 8
    (c): 240 named, 240 kept (none dropped as births-road only). 15 (d) after the whole runs: `core.bare` false, no
    user.name / user.email / gpgsign set locally, no Fixture commits in 3 hours.
+   THE SITEMAP (the chair, 03:37 UTC: "THE SITEMAP IS YOUR LANE'S"): e6834bb78 `public/sitemap.xml` ALONE by its door
+   (`node scripts/generate-sitemap.mjs`, 314 URLs): `/compendium/op-requestdailylife` leaves (DAILY-B retired the
+   operation), nothing else; the six files that name it (prerenderRoutes with VERIFY_DIST, compendiumHubs,
+   compendiumInstitutionSearch, landingFooterMigration, the walkers negativeAssertionAnchor and
+   settlementMapSurfaceAllowlist): 6 files, 46 of 46. Rule 8 and the dark proof stand for 80118a936 (the chair).
+   DAILY-C IS THE TIP AT THIS PUSH; sent as "DAILY-C <commit>".
 6. NEXT: nothing of the seat's own. The landing is the stack's (after point 106); a successor answers the chair's word.
 
 ## 1. RULINGS IN FORCE (each the chair's)
