@@ -24,9 +24,19 @@ Written 10:49 UTC 2026-11-23.
 ### (3) IN FLIGHT
 - MAPCOVERT-RED builder (dispatched ~10:56; told N84 (1) at ~11:08: the member's acceptance is the LINK's read).
 - (c2): `out/v44/c2/doors-arms.sh /home/user/wt/doors3` through the mutex (re-queued 11:25 with GATE_MUTEX_MAX_POLLS=100000; the first try gave up, exit 3); log `/var/tmp/v18/out/v44/c2-doors3.log`.
-### (4) NEXT, IN ORDER (start message unit (1))
-(c) MAP-COVERT RED (in flight); (d) (c2) (queued); (e) TRAD4-RECUT (brief written); SNAP-MEASURE (N84 (3), a brief owed); FROZEN-LISTS (N85, after (c2)); (b) done; (c) MAP-COVERT RED (a builder, tests only, briefed by a committed file); (d) (c2) the doors' arms at 3e1115c81; (e) unit 0,
-the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the build (two builders).
+### (4) NEXT, IN ORDER (written 12:12 UTC; THE CHAIR'S MARK 338,524 at 12:09: from here every measure goes to a builder and returns as counts)
+1. MAPCOVERT-RED returns: read its report (at most 60 lines) and its diff ONCE; re-run its red (the test file at the door -wip tip:
+   `sh scripts/gate-tail.sh npx vitest run <its file>` through the mutex) and its arm's exit (its `um.sh` line on `stored-today`); merge its
+   branch into the door -wip in `/home/user/wip` (a plain `git merge`); push the door -wip GUARDED (push only when HEAD differs from
+   `git ls-remote origin <branch> | cut -f1`); "MAP-COVERT RED <commit>" to the chair with the counts.
+2. Dispatch TRAD4-RECUT (`briefs/TRAD4-RECUT-BRIEF.md`): branch `lane/veil-44-2026-11-23-trad4-wip` cut at the door -wip, worktree
+   `/home/user/wt/trad4`, node_modules and .husky/_ linked to /home/user/wip's; background Agent, no model override; the same read-back.
+3. Brief and dispatch, one at a time: SNAP-MEASURE (N84 (3): both map reads' world snapshots on both stored sets and the fixtures: a
+   settlement copy, a person, a `publicProse` block, a name-search hit, by path and count); FROZEN-LISTS's red (N85: the curated and
+   featured lists print a frozen share's copy's name and tier: a plant); the chronicle's arm "a shown person stays shown" waits for the
+   R4-IDS merge (N84 (4)).
+4. On "R4-IDS MERGED <commit> on <branch>": merge that tip into the door -wip; the census re-run (`out/v44/census/census.mjs <tree>`);
+   then the build by the brief's two-builder split (start message unit (2)).
 ### (5) WHAT THIS SEAT HAS READ WHOLE (N36)
 212 at 23bb8b8ae: `_gallery_veil` (:2697-:2750), `_gallery_apply_member_overrides` with header (:2817-:2941), `get_gallery_dossier`,
 `get_unlisted_dossier`, `import_gallery_dossier` (:2942-:3194). 211 :: `get_gallery_map` (:1391-:1492). doors-3's 212 section as one diff
@@ -44,3 +54,4 @@ the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the
 - 10:55 (c1) and MAP-PIPELINE sent; MAPCOVERT-RED briefed (briefs/MAPCOVERT-RED-BRIEF.md), its branch lane/veil-44-2026-11-23-mapcovert-wip at 23bb8b8ae, worktree /home/user/wt/mapcovert.
 - 11:00 (f) census sent (4c602ddc7); (c2) doors-arms.sh queued behind the pool; TRAD4-RECUT brief written (dispatch after MAPCOVERT-RED returns).
 - 11:31 the machine's figures equal PART 44's (chain0 END 11:31).
+- 12:12 the chair's mark 338,524 (12:09); section 1 (4) re-written for a successor.
