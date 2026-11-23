@@ -52,6 +52,9 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
     - (d) VS1's crime-types tooth is red at af708f2fd too (the tip's); galleryVeilSignalCopies' 2 reds are PLAUSIBLY S2's.
 - ON THE POOL (`/var/tmp/v18/out/v38/poolprobes.sh`, at ec082df83): THE SWITCH OFFERS EXACTLY WHAT IT OFFERED BEFORE THE RE-KEY on 3,616 of 3,616 reads (10,848 groupings present). S1's arm, as ruled.
 
+- R4I-TONIGHT RETURNED AT ITEM M, a STOP (local `lane/veil-38-2026-11-23-r4tonight-wip` at 46f8de49c, docs only; `out/v38/r4it/R4IT-HANDBACK.md`). Its measure is built and its teeth proven, but it was NOT RUN: the gate mutex never cleared. The cure is prepared as a patch (`C-prepared-cure.patch`: `castWantKeyOf(name, id)` in both callers; `C-prepared-shareRenderTwice.patch`), NOT applied. FINDING sent to the chair 03:02: "equal to the owner's own sheet on nothing-hidden places" is 0 of 4 (the served read withholds each person's goal and secret); the builder proposes comparing role lines only.
+- A FAULT OF THIS SEAT, SAID TO THE CHAIR 03:02: its pool probes ran OUTSIDE the gate mutex beside two builders. Memory pressure killed three order shards (order rc=2, 02:55), the tip build (rc=137) and the builder's turn at the gate. FROM 03:02: ONE HEAVY RUN AT A TIME ON THIS BOX, the seat's included.
+
 ### (2) IN FLIGHT
 - On the pool, at the -wip (`/var/tmp/v18/out/v38/poolprobes.sh`): the switch-offer probe (S1's pool arm), then the order probe (40.2's count of places whose printed order moves, twin only), started 01:55 UTC. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
 - R4I-TONIGHT (subagent; brief `briefs/R4I-TONIGHT-BRIEF.md`), in `/home/user/wt/r4it` on the local `lane/veil-38-2026-11-23-r4tonight-wip` at b088fcfc5: 40.3 (2), measure first.
