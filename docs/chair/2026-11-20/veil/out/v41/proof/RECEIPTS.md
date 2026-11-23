@@ -61,3 +61,7 @@ shard 2 rc=0
 ## meas-t140 rc=2 15:58:11
 ```
 ```
+
+## meas-stored-today rc=2 15:58:13
+```
+```
