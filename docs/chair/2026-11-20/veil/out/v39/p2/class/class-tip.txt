@@ -1,0 +1,62 @@
+attempt 1 start Mon Nov 23 02:39:14 UTC 2026 at 2d7ed483f
+gate-mutex: GAVE UP after 40 poll(s) — atomic lock remains held.
+gate-mutex: HELD by atomic lock PID 31592: sh /home/user/wt/c2m/scripts/gate-mutex.sh --run -- sh /home/user/wt/c2m/docs/chair/2026-11-20/veil/out/v39/c2m/shards.sh /home/user/wt/c2m-scratch /var/tmp/v18/stored/today/docs /var/tmp/v18/out/v39/c2m/full m3
+attempt 1 exit 3 end Mon Nov 23 02:59:15 UTC 2026
+attempt 2 start Mon Nov 23 03:00:15 UTC 2026 at 2d7ed483f
+gate-mutex: GAVE UP after 40 poll(s) — atomic lock remains held.
+gate-mutex: HELD by atomic lock PID 1084: sh /home/user/wt/c2m/scripts/gate-mutex.sh --run -- sh /home/user/wt/c2m/docs/chair/2026-11-20/veil/out/v33/stored/prose.sh /home/user/wt/c2m /var/tmp/v18/out/v39/c2m/cdocs /var/tmp/v18/out/v39/c2m/prose-c
+attempt 2 exit 3 end Mon Nov 23 03:20:15 UTC 2026
+attempt 3 start Mon Nov 23 03:21:15 UTC 2026 at 2d7ed483f
+gate-mutex: GAVE UP after 40 poll(s) — atomic lock remains held.
+gate-mutex: HELD by atomic lock PID 10357: sh /home/user/wt/c2m/scripts/gate-mutex.sh --run -- npx vitest run tests/components/publicProseEquality.test.jsx tests/components/publicProseVeilInvariance.test.js tests/components/publicProseVeilOnce.test.js tests/domain/publicProse.test.js
+attempt 3 exit 3 end Mon Nov 23 03:41:15 UTC 2026
+attempt 4 start Mon Nov 23 03:42:15 UTC 2026 at 2d7ed483f
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11146 after 26 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/p2
+
+ ❯ tests/lib/gallery.test.js (50 tests | 1 failed) 329ms
+     × a share marked with a veil renders through it: the defaults hide, a delta shows 19ms
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 6180ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 3307ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lib/gallery.test.js > gallery.js — the gallery veil (X-21, W2-VEIL-A U3) > a share marked with a veil renders through it: the defaults hide, a delta shows
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/lib/gallery.test.js:620:59
+    618|     expect(dossier.settlement.institutions[0].desc).toBe('One for each…
+    619|     // The DM's delta flipped one default eye back to shown.
+    620|     expect(dossier.settlement.availableServices.criminal).toHaveLength…
+       |                                                           ^
+    621|     expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+    622|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: some copy carries the crime types, or the other teeth prove nothing: expected 0 to be greater than 0
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:410:102
+    408|     expect(WITHHELD_ALWAYS.length, 'the registry\'s withhold-always ro…
+    409|     expect(teeth.capture.tried, 'some copy carries the capture, or its…
+    410|     expect(teeth.other.tried, 'some copy carries the crime types, or t…
+       |                                                                                                      ^
+    411|     expect(teeth.capture.caught).toBe(teeth.capture.tried);
+    412|     expect(teeth.other.caught).toBe(teeth.other.tried);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 32 passed (34)
+      Tests  2 failed | 864 passed | 1 skipped (867)
+   Start at  03:55:17
+   Duration  466.81s (transform 14.83s, setup 657ms, import 44.81s, tests 874.34s, environment 6.10s)
+
+attempt 4 exit 1 end Mon Nov 23 04:03:04 UTC 2026

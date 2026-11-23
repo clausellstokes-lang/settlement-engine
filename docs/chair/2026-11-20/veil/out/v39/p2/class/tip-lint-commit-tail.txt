@@ -1,0 +1,12 @@
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[48/48]⎯
+
+
+ Test Files  17 failed | 208 passed (225)
+      Tests  48 failed | 3256 passed (3304)
+   Start at  05:21:58
+   Duration  809.33s (transform 25.49s, setup 3.58s, import 708.53s, tests 883.78s, environment 22ms)
+
+attempt 1 exit 1 end Mon Nov 23 05:35:28 UTC 2026
