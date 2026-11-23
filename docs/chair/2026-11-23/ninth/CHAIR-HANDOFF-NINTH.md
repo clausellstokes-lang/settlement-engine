@@ -3421,3 +3421,48 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   orphaned test worker of the rival's held the lock; both ended); VEIL-48 created as session_01FbPLbbhLQxTNjSrMJPCXX2
   at 16:09:51 UTC (source_revision `lane/veil-40-2026-11-23`, outcome branch `lane/veil-48-2026-11-23`,
   claude-opus-5-5 at high effort), and paused by (2) before any work.
+- 2026-11-23 16:25 UTC · N117 · THE WORKING LINE IS NOT RELEASABLE WITHOUT THE VEIL'S HIDING (THE CHAIR'S PROBE: A
+  COVERT TIE'S COPY ON THE PUBLIC PROJECTION IN 10 OF 180 NEW TOWNS): SAID TO THE OWNER; THE LANDING'S MIGRATIONS ARE
+  204 TO 210; CLOSE-6's REMAINING ROAD.
+  (1) CLOSE-6 ON N116 (queued 16:13:21): DONE on the flip (1fe19098f): F0, F1, the page-census door, F-SEAT and its
+  second, the line merged, F-FORTUNE and its two successors, PROSE-E merged, 13G and its door. LEFT, by its own
+  estimates: F-JOIN (its builder at work since 14:50; 39 files edited, not committed) about an hour and a half more;
+  F9 A (the twin) about 30 minutes; F9 B (the sample town) about 45; F8 about 30; the registers about 20; one build
+  and FOR-THE-OWNER.md about an hour. F9 A, F9 B and F8 do not depend on F-JOIN (tests only; F8 is comments in
+  `fortuneLaw.js`: no birth moves): IT STARTS A SECOND BUILDER in a worktree of its own on
+  `lane/close-6-2026-11-23-f9` at 1fe19098f, merged by it after F-JOIN; heavy runs one at a time; no second seat (a
+  read-in would cost more than it saves). FOR THE LANDING: the flip branch already holds the line 9b0ffaa97 and
+  PROSE-E cf104777c: ONE STACK, the flip's tip alone; the red list gains `defenceParts` R13 (lit) and the twin's three
+  rows and loses `landingFixtureFreshness`'s two rows (F9 B); FENCE 1 stays (row 30); the lighting census by its door;
+  the sizes and both goldens named in FOR-THE-OWNER.md.
+  (2) **Decided (N117):** ITS PLAN IS TAKEN (the second builder; no second seat); F9 B's two narrations come to the
+  chair the minute they stand, to be put to the owner. TWO CORRECTIONS, read by the chair on origin: (a) THE
+  MIGRATIONS OF THIS LANDING ARE 204 TO 210, not "204 to 212" as the seat wrote: master (db832c892) ends at 203; the
+  working line and the flip branch add exactly seven files; 211 and 212 exist only on the paused veil lane. (b)
+  FOR-THE-OWNER.md's deploy section says first, in plain words: the veil is paused by the owner; landing the flip is
+  not a release; the working line is not to be released to users before the share veil's hiding is in it.
+  (3) THE CHAIR'S OWN PROBE, read-only, on the working line at 9b0ffaa97 (committed with this entry:
+  `tools/covertcopy.probe.test.js` and `tools/covertcopy.probe.out.txt`; vitest, started 16:22:49, 53 s; the test's
+  own 20-second timer tripped AFTER the counts were printed: its exit 1 is that timer, the counts are whole): 180
+  births (60 each of town, city and metropolis): 123 hold at least one covert tie; IN 10 OF 180 THE PAGE'S "PROMINENT
+  RELATIONSHIP" IS A COVERT TIE, AND IN ALL 10 THE PUBLIC PROJECTION (`toPublicSafe`) SERVES THAT COPY (npc1, npc2,
+  type, phrasing, full, tension) WHILE THE TIE ITSELF IS DROPPED FROM THE SERVED LIST (ccp-town-20 and ccp-city-18
+  "Silent Partnership"; ccp-city-29 "The Patron No One Names"). READ IN CODE:
+  `src/generators/power/settlementNarrative.js` :244 (`genRelNarrative` scores every relationship and returns a copy
+  without the flag); `src/generators/people/ties.js` :213 (a handler tie is stamped `covert: true`); `publicSafe.js`
+  :65 and the allowlists of 206 :141, 207 :76 and 210 :73 serve `prominentRelationship`; the line's last
+  `_gallery_apply_member_overrides` is 093 and holds no covert case; 088's `get_gallery_map` serves each member
+  through the same sanitizer. NOT RUN: the SQL itself on the line. PRODUCTION TODAY: no covert tie in 140 master-born
+  documents. ON THE VEIL LANE 211 hides the copy at three doors and the doors unit at the map (MAP-COVERT, N76).
+  (4) SAID TO THE OWNER IN PLAIN WORDS, WITH THE CHAIR'S RECOMMENDATION (a security posture is his, not the chair's):
+  finish and land the flip on the working line; no merge and no deploy to users until the veil is resumed and
+  finished; if he wants a release sooner, the smallest safe part of the veil can be scoped. **Why said now:** his
+  order pauses the veil and puts all effort on the close lane; the close lane ends at a landed flip, not at a release,
+  and he must know that before he uses his own hand. A CANDIDATE, NOT BUILT, for after the flip: `genRelNarrative`
+  picks the best tie that is not covert (a rumour everyone tells about a tie nobody knows is a fault on the owner's
+  own page too; it would move only the births whose pick is covert, about one in eighteen; goldens are his).
+  (5) BEFORE THE PAUSE'S ORDERS REACHED THEM: VEIL-44's re-run of TRAD4-RECUT (5 of 5, exit 0) merged into its door
+  -wip at db9fddc7d; VEIL-48's first line (its clock 16:14:27): it stood on a3bc0dc9d, had read its list and started
+  its machine at 16:11:46; it found that three scripts PART 42 names lived only in VEIL-40's `/var/tmp` and that the
+  stored pools died with that machine (both noted in the veil's hand-off). THE FIFTY-SECOND PUSH (b09407647: N116, the
+  veil's hand-off, `fill49.py`, the tip's name corrected in START-VEIL-48.txt) ended exit=0 at 16:19:04 UTC.

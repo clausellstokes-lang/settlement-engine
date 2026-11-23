@@ -63,6 +63,10 @@ successor is seated with the start message named below.
 - PROVEN: THE RIVAL LEAVES WITH ITS HOST (N63): red on the full pools 2,736 of 2,736 hiding rival-reads served beside
   the withheld host; green 0 lone of 14,528; server = twin 0 misses; never-there base diff 0; its diff read whole by
   VEIL-40 without fault (N112).
+- FOUND BY VEIL-48 IN ITS FIRST MINUTES: three scripts PART 42 names lived only in VEIL-40's `/var/tmp`
+  (`rivalgates-run.sh`, `push.sh`, `mutex-order.txt`): they are re-written from the committed chain scripts; the stored
+  pools (today-born and master-born, 440 each) died with VEIL-40's machine and are re-made by the tests builder's
+  `b2.sh` dump.
 - OPEN, IN ORDER: the standing reader's deciding count (never started) and its cure (the page's reader skips the seven
   rival texts: N95, N101, N102), red first on a slice; the rival's chains, arms on slices, after, cost; the merges with
   PIN-3; the tests builder's owed re-runs and its third part; the unit's ONE proof on the stacked tree (a new pool and
@@ -156,6 +160,16 @@ THE FULL POOLS; T5 a seat of its own. N112 VEIL-40's hand-over. N115 the speed o
 
 ## 4. Open with the owner (the veil's; none blocks the close lane)
 
+0. THE WORKING LINE IS NOT TO BE RELEASED TO USERS BEFORE THE VEIL'S HIDING IS IN IT. SAID TO HIM AT THE PAUSE (N117),
+   with the chair's recommendation: land the flip on the working line (that is not a release); no merge or deploy to
+   users until the veil is resumed and finished; a smaller safe subset can be scoped if he asks. THE CHAIR'S OWN PROBE on
+   the line at 9b0ffaa97 (`docs/chair/2026-11-23/ninth/tools/covertcopy.probe.test.js` and its output beside it; 180
+   births): in 10 of 180 the page's "prominent relationship" is a COVERT tie and the public projection serves that copy
+   (both names, type, text) while the tie itself is dropped from the served list. The cause, read in code:
+   `genRelNarrative` scores every tie and returns a copy without the flag; the key is on every public allowlist (206,
+   207, 210; `publicSafe.js` :65); the line holds no covert case for it. On the veil lane 211 hides it at three doors
+   and the doors unit at the map. Production today holds no such tie (0 of 140 master-born). It is ONE verified case;
+   the reader's list holds the others (the stored prose, the standing sentences, the ids, the rival, the doors).
 1. PAGES PUBLISHED BEFORE THE VEIL: put to him with the chair's recommendation (the gallery page as today with the
    covert copy no longer served; the party link and the map member under the default veil); the counts given (7 of 140
    today-born test towns hold a covert tie; 0 of 140 master-born). NOT ANSWERED. It is asked again before any deploy

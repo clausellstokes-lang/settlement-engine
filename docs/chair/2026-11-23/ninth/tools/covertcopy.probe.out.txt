@@ -1,0 +1,52 @@
+
+ RUN  v4.1.8 /home/user/wt/line
+
+stdout | ../../scratch/chair/covertcopy.probe.test.js > covert tie copy on the public projection (count only)
+{
+ "births": 180,
+ "withCovert": 123,
+ "copyIsCovert": 10,
+ "servedCopy": 10,
+ "cases": [
+  {
+   "seed": "ccp-town-20",
+   "tieServedInList": false,
+   "servedKeys": [
+    "npc1",
+    "npc2",
+    "type",
+    "phrasing",
+    "full",
+    "tension"
+   ],
+   "type": "Silent Partnership"
+  },
+  {
+   "seed": "ccp-city-18",
+   "tieServedInList": false,
+   "servedKeys": [
+    "npc1",
+    "npc2",
+    "type",
+    "phrasing",
+    "full",
+    "tension"
+   ],
+   "type": "Silent Partnership"
+  },
+  {
+   "seed": "ccp-city-29",
+   "tieServedInList": false,
+   "servedKeys": [
+    "npc1",
+    "npc2",
+    "type",
+    "phrasing",
+    "full",
+    "tension"
+   ],
+   "type": "The Patron No One Names"
+  }
+ ]
+}
+
