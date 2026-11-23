@@ -604,3 +604,38 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   claude-opus-5-5, high), BY A SHORT PROMPT THAT POINTS TO `prompts/START-VEIL-40.txt` ON ORIGIN (pushed first,
   98e62deaa: no long prompt is retyped). THE CHAIR'S EIGHTH AND NINTH PUSHES (e290438d2, 98e62deaa) ENDED exit=0 at
   03:13 and 03:16 UTC: CONFIRMED from their logs. The hourly check is re-armed for 04:02 UTC.
+- 2026-11-23 03:37 UTC · VEIL-40's FIRST MESSAGE (03:20 UTC, three minutes after its seating): it stands on 19508fbb9; its code branch is
+  made at 74afc8219; it read its list by name and NOT 212, the registry, `pageRederive.js` or `galleryVeilDesc` whole;
+  its pool was started at 03:18:50 under the gate mutex; nothing it could not follow. THE CHAIR'S TENTH PUSH
+  (9c31e61a5) ENDED exit=0 at 03:20 UTC: CONFIRMED from its log and by ls-remote.
+- 2026-11-23 03:37 UTC · STACK-106 "DOORS cb598376f" (03:22 UTC; its push passed its hooks; ls-remote reads it, by its word): the lighting
+  census by its own door on the clean tree at 0fbb255f6 (files 3,775 to 3,780; parked 485 to 487; credited 3,290 to
+  3,293; titles 31,871 to 31,893; suite titles 8,858 to 8,870), its walker 34 of 34; the wiring census, writer-reach
+  and the observed-shape readers CHECKED, exit 0, nothing re-taken; `tests/lint` whole again: 223 files, 3 red, the
+  line's three (`proseComposed` A0b 2,322 against 2,103: THE LINE'S OWN FIGURE, by PROSE-6's hand-back: no rise).
+  It is in step e.
+- 2026-11-23 03:37 UTC · N40 · "DAILY-C 80118a936" READ BY THE CHAIR AND HELD FOR ONE COMMIT (DAILY-5, 03:35 UTC). CHECKED ON ORIGIN: it
+  is the branch's tip; the line's tip and DAILY-B are its ancestors; beyond (the line + DAILY-B) it holds 44 files,
+  +4,565 -176, 10 under src/ (the nine pools; `domain/dailyLife.js`). THE 34 LINES AND P0 ("Outsiders notice the mark
+  of {power} on every door that matters.") READ BY THE CHAIR IN THE POOLS' DIFF: TAKEN AS BUILT (this closes "not
+  re-read by this chair" for the eighth chair's 34 lines). No pull request exists for any seat's branch (the pull
+  refs on origin end at 75). BY THE SEAT'S OWN RUNS: the dark proof EQUAL (a54e0bb8…888acb, 900 births, at the line's
+  tip and its own); rule 8: 694 files, 8,857 tests, 6 red, DAILY-B's six, all listed; one build and VERIFY_DIST 623
+  tests, 15 red, all listed; first paint 1,180,816 raw (DAILY-B's; the line 1,184,741), 376,067 gzip, 315,708 Brotli;
+  the worker 2,710,153 (the line +890, as DAILY-B); the engine chunk equal; HAND_CEILING 83; the house register's
+  hand rows 447 to 466 by its door; no lit path changed: no flip list. FOR THE OWNER, DAILY-B TO DAILY-C: sentences
+  over the bar 34 to 0; families over 5 to 0; the largest sentence by size 16/17/18/15/18/21 to 14/13/14/14/14/14
+  of 150; the reader's figure (two places of one size) 0.363 to 0.299, any two places 0.221 to 0.189; families
+  between 10 and 15 percent 89 to 35, listed, not cured.
+  **Decided:** THE SITEMAP IS THE DAILY LANE'S, AND DAILY-C CARRIES IT: `public/sitemap.xml` is a committed file the
+  build's prebuild regenerates (`scripts/generate-sitemap.mjs`: CHECKED BY THE CHAIR in package.json; the line's copy
+  lists `/compendium/op-requestdailylife` once); DAILY-B retired that page, so every build after it dirties the
+  tree. DAILY-5 re-takes it by its door as ONE commit of that file alone on top of 80118a936, re-runs the six test
+  files that name `sitemap`, and sends "DAILY-C <new commit>"; more than one entry moving is a STOP. STACK-106 is
+  told not to commit it and to restore the file after its build's tests. **Why:** a generated file moves by its own
+  door, in the lane that caused it. **Rejected:** the landing seat committing it (it invents nothing); leaving it
+  (a dirty tree at every build; a dead URL in the committed sitemap). **Reversal:** one commit.
+  FOR AFTER THE FIRST DEPLOY (the chair's intake; DAILY-5's find): five double possessives outside the Daily Life
+  page: Relationships x4 "network's head's" (`institutionalCatalog.js` 1476 to 1477, with `handlerTieLines.js` 84 and
+  `npcData.js` 2100); NPCs x1 "lord's steward's office" (`goalFamilies.js` 368 with `goals.js` 165).
+  DAILY-5 did not say whether it re-read its start message after N36's caution: asked again, owed in its next line.
