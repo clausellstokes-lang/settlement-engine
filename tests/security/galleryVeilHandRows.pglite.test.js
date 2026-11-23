@@ -51,7 +51,8 @@
  *         THE PRESSURE SENTENCE   the one home the record gives no tie for: by the two ends it names; where nothing
  *                        else accounts for it (no stress on the town, not the power structure's recentConflict); and,
  *                        where only the words tie it, on the current and the stored wording, in both directions. What
- *                        stays: the stress's line, recentConflict, another tie's sentence, the open tension itself.
+ *                        stays: the stress's line, another tie's sentence, the open tension itself. A sentence EQUAL
+ *                        to the stored recentConflict (the generator's fallback) goes on every shared read (E97 (1)).
  *         NO EVENT, NO TIE   an entry in the older spelling, an entry whose event was renamed (by its type and years),
  *                        an entry with no event and a copy with no tie (closed: every event's, every tie's eye).
  *   VEIL-12  THE BOUNDARY INVERTED (REVIEW-VEIL-8's V8-1; the chair's ruling of 2026-11-14 04:42 UTC; the seat's call 2,
@@ -890,7 +891,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(cut).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress\'s line, recentConflict and the open tension itself stay', async () => {
+  it('V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress\'s line and the open tension itself stay; a sentence EQUAL to the stored recentConflict goes (E97 (1))', async () => {
     const bad = []; const differs = [];
     const rewritten = AMENDED['rewritten wholly'];
     const FAMINE = 'The granaries of Saltmere are a week from empty and everyone on the quay can count';
@@ -913,7 +914,9 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       // WHAT STAYS, the tie's two eyes shut and the tie rewritten wholly
       ['STAYS: the stress\'s line, in a town under a stress', { stress: { type: 'famine' }, pressure: FAMINE }, rewritten, { stays: FAMINE }],
       ['STAYS: the stress\'s line, the stress stored as a list', { stress: [{ type: 'famine' }], pressure: FAMINE }, rewritten, { stays: FAMINE }],
-      ['STAYS: the power structure\'s recentConflict', { recentConflict: WARDENS, pressure: WARDENS }, rewritten, { stays: WARDENS }],
+      // E97 (1): the always-pass withholds pressureSentence wherever it EQUALS the stored recentConflict (the generator's
+      // fallback), on every shared read, both engines; recentConflict itself is withheld always: the words arrive nowhere
+      ['GONE (E97 (1)): a sentence EQUAL to the power structure\'s recentConflict', { recentConflict: WARDENS, pressure: WARDENS }, rewritten, { gone: WARDENS }],
       // the description's eye alone shut: the sentence that IS the open tension stays; the composer's third form goes
       ['STAYS: the tension itself, its eye open, the description\'s eye alone shut', { shut: ['tieA.description'], pressure: BORN.insult }, AMENDED['as born'], { stays: BORN.insult }],
       ['the description\'s eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand)', { shut: ['tieA.description'] }, AMENDED['as born'], { gone: 'tied by a debt not yet paid' }],
