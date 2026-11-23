@@ -64,6 +64,14 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
 4. THE OWNER'S FILE AFTER: `owner/after-daily-c.md` (BEFORE `owner/after.md`); the figures `owner/DAILY-C.md`; DAILY-B's
    reader figure `measures/D5C/reader.dailyb.out.txt`. DONE.
 5. "DAILY-C <commit>" to the chair: SENT with this push (DAILY-C goes on the stack after point 106).
+   RE-READ (the chair's caution of 03:09 UTC, after the 01:55 compaction): the start message (`git show
+   origin/lane/chair-2026-11-08:docs/chair/2026-11-23/ninth/prompts/START-DAILY-5.txt`), COMMON-EIGHTH 11, 14, 15, this
+   file. DIFFERENCES FOUND: (i) rule 8's reds were first read against this checkout's `RED-AT-LINE.96.tsv` (60 rows);
+   the start names the chair lane's `seventh/ci/RED-AT-LINE.tsv` (62 rows): re-read against it, all 21 reds on it; (ii)
+   phase B2's brief said "no `tests/lint` whole", against COMMON-EIGHTH 11: covered by the seat's `tests/lint` whole at
+   0f8bf5b21 after the merge and by rule 8; (iii) messages were not read between the pieces of long waits; (iv) rule 8
+   (c): 240 named, 240 kept (none dropped as births-road only). 15 (d) after the whole runs: `core.bare` false, no
+   user.name / user.email / gpgsign set locally, no Fixture commits in 3 hours.
 6. NEXT: nothing of the seat's own. The landing is the stack's (after point 106); a successor answers the chair's word.
 
 ## 1. RULINGS IN FORCE (each the chair's)
