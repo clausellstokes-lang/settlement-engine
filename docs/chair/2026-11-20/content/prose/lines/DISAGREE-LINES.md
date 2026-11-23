@@ -20,7 +20,9 @@ The siege rows v5 and v6 stay as they are.
 
 ## WAGES: DS-DEF-2 `Economic Survival: WEAK` (RE-RULED by the chair, 2026-11-23 03:45 UTC: THE LAYER LAW HOLDS)
 `force: paid` is `orderForce`, layer 4: no dossier-state pool may declare it. EVERY `force: paid` MARK GOES. W1, W2 and W3 are WITHDRAWN whole. v1 and v2 lose `no force: paid` and return to their marks at 244fa84ef.
-v1 stays word for word: `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+v1 is RE-WORDED IN PLACE (the chair, 03:55 UTC: dz-town-2 prints v1 beside GARRISONED v2; the same marks, the same vid, through a SECOND row of WORD_CORRECTIONS, ruling CHAIR-2026-11-23-03:55):
+was `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+now `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} has nothing laid by to pay for a long defence, and whoever is called to make one knows it.
 v2 is RE-WORDED IN PLACE (the chair's line; the same marks, the same vid, through its row of WORD_CORRECTIONS):
 was `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
 now `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through a long defence know there is nothing laid by to pay them for it.
@@ -32,8 +34,7 @@ It RETURNS to its marks and its text at 244fa84ef: `[ledger · walls · no crisi
 | pair | side A (flat) | side B |
 |---|---|---|
 | FOOD | DS-DEF-2 `CHAIN: food trades failing` v1, v2, v3, v4 | DS-ECO-9 `SECURE` (all) |
-| WAGES | DS-DEF-2 `Economic Survival: WEAK` v1 | DS-GEN-17 `GARRISONED` v2 |
-Further arms pin GEN-17 v2's clause "the money is found every season" at 0 pages, and WEAK v2's OLD words ("...through something know there is no money to pay them for it.") at 0 pages. New v2 beside GARRISONED v2 is not a pair (the chair, 03:45).
+WAGES (the chair, 03:55): NO PAIR OF VARIANT IDS. The arm pins WEAK v1's and v2's OLD words at 0 pages, by template. A further arm pins GEN-17 v2's clause "the money is found every season" at 0 pages. The measure's own pattern (`disagree.mjs`) is NOT touched: WAGES reads 0 because the words changed.
 
 ## THE CHAIR'S CONDITIONS, ANSWERED
 (a) WITHDRAWN (03:45): `force: paid` is layer 4 (`orderForce`), which no dossier-state pool may declare.

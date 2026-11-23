@@ -20,3 +20,9 @@ THE LINES: `lines/DISAGREE-LINES.md` as amended on `lane/prose-6-2026-11-23` (re
 
 ## THEN (rule 8 narrow, COMMON-EIGHTH 14)
 `tests/lint` whole; the kept named files of (f), with the tooth; `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs` whole; ONE `npm run build`, then `VERIFY_DIST=1` on `tests/build` whole, with the five figures; the git config checks (core.bare, user.name, Fixture commits). Every red goes BY NAME against RED-AT-LINE.tsv. Update `DISAGREE-REPORT.md` (at most 80 lines) to the new tip: commits, red/green, (b)-(f), every register moved and its cause, every pin before → after. Final message to me: at most 200 words.
+
+## RULED AT 03:55 UTC (your stop at item 4; the chair's word on the seat's draft)
+- WEAK v1 is RE-WORDED IN PLACE on its own marks, through a SECOND `WORD_CORRECTIONS` row (vid 1, ruling `CHAIR-2026-11-23-03:55`): "{settlement} has nothing laid by to pay for a long defence, and whoever is called to make one knows it."
+- THE TOOTH: the WAGES row of `OPPOSITE_PAIRS` goes. NO PAIR OF VARIANT IDS is left for WAGES. ARM 5 pins WEAK v1's AND v2's OLD words at 0 pages, by template (red on 244fa84ef's leaf: dz-town-2 for v1, dz-town-36 for v2). The GEN-17 v2 clause arm stays.
+- `disagree.mjs` is NOT TOUCHED. On the 900, WAGES BOTH must read 0 because the words changed. Report the count, and the new lines on dz-town-2 and dz-town-36 by their words.
+- Everything else in this addendum stands. A re-wording adds no line, so the pins still move by six lines.
