@@ -1,0 +1,56 @@
+== shard-A-0-2.log (tail 40)
+[gate-tail] start:  13:40:53 up 10:27,  0 user,  load average: 4.30, 3.64, 3.78 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r5rival
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  13:40:54
+   Duration  2335.85s (transform 3.82s, setup 54ms, import 458ms, tests 2335.14s, environment 0ms)
+
+[gate-tail] end:  14:19:50 up 11:06,  0 user,  load average: 4.00, 4.25, 4.42
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/green1/tmp/gate-tail.29004.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== shard-A-1-2.log (tail 40)
+[gate-tail] start:  13:40:53 up 10:27,  0 user,  load average: 4.30, 3.64, 3.78 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r5rival
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  13:40:54
+   Duration  2498.36s (transform 3.86s, setup 40ms, import 413ms, tests 2497.78s, environment 0ms)
+
+[gate-tail] end:  14:22:33 up 11:09,  0 user,  load average: 3.07, 3.73, 4.19
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/green1/tmp/gate-tail.29009.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== shard-C6-0-2.log (tail 40)
+[gate-tail] start:  13:40:53 up 10:27,  0 user,  load average: 4.30, 3.64, 3.78 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r5rival
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  13:40:54
+   Duration  7871.83s (transform 4.26s, setup 44ms, import 581ms, tests 7871.03s, environment 0ms)
+
+[gate-tail] end:  15:52:06 up 12:39,  0 user,  load average: 2.94, 2.53, 2.22
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/green1/tmp/gate-tail.29014.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+== shard-C6-1-2.log (tail 40)
+[gate-tail] start:  13:40:53 up 10:27,  0 user,  load average: 4.30, 3.64, 3.78 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r5rival
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  13:40:54
+   Duration  7687.91s (transform 3.95s, setup 71ms, import 421ms, tests 7687.25s, environment 0ms)
+
+[gate-tail] end:  15:49:02 up 12:35,  0 user,  load average: 2.48, 2.11, 2.03
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/green1/tmp/gate-tail.29022.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

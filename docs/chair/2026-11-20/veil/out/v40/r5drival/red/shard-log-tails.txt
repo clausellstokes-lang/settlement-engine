@@ -1,0 +1,164 @@
+== shard-A-0-2.log (tail 40)
++   "r3m-metropolis-none-1-127 hand hide Thieves' Guild [shown dm=true server/import]: rival The Shadow Compact served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-none-1-127 hand hide Thieves' Guild [shown dm=true twin/page]: rival The Shadow Compact served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-none-1-127 hand hide Thieves' Guild [shown dm=true twin/import]: rival The Shadow Compact served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=false server/page]: rival The Order of the Watch served beside its withheld host Military/Guard (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=false server/import]: rival The Order of the Watch served beside its withheld host Military/Guard (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=false twin/page]: rival The Order of the Watch served beside its withheld host Military/Guard (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=false twin/import]: rival The Order of the Watch served beside its withheld host Military/Guard (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=true server/page]: rival The Order of the Watch served beside its withheld host Military/Guard (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=true server/import]: rival The Order of the Watch served beside its withheld host Military/Guard (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=true twin/page]: rival The Order of the Watch served beside its withheld host Military/Guard (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Military/Guard [shown dm=true twin/import]: rival The Order of the Watch served beside its withheld host Military/Guard (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=false server/page]: rival The Holy Compact served beside its withheld host Religious Authorities (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=false server/import]: rival The Holy Compact served beside its withheld host Religious Authorities (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=false twin/page]: rival The Holy Compact served beside its withheld host Religious Authorities (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=false twin/import]: rival The Holy Compact served beside its withheld host Religious Authorities (absent)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=true server/page]: rival The Holy Compact served beside its withheld host Religious Authorities (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=true server/import]: rival The Holy Compact served beside its withheld host Religious Authorities (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=true twin/page]: rival The Holy Compact served beside its withheld host Religious Authorities (stamped)",
++   "r3m-metropolis-wartime-1-129 hand hide Religious Authorities [shown dm=true twin/import]: rival The Holy Compact served beside its withheld host Religious Authorities (stamped)",
++ ]
+
+ ❯ tests/security/galleryVeilRival.pglite.test.js:424:20
+    422|     for (const f of faults) emit({ k: 'fault', f });
+    423|     expect(tally.places, 'the pools hold rival places').toBeGreaterTha…
+    424|     expect(faults).toEqual([]);
+       |                    ^
+    425|   }, POOL_TIMEOUT_MS);
+    426| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  13:08:50
+   Duration  718.33s (transform 3.84s, setup 44ms, import 322ms, tests 717.80s, environment 0ms)
+
+[gate-tail] end:  13:20:48 up 10:07,  0 user,  load average: 5.87, 6.10, 4.97
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/red2/tmp/gate-tail.21618.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+== shard-A-1-2.log (tail 40)
++   "r3m-metropolis-infiltrated-1-122 hand hide Noble Houses [shown dm=true server/import]: rival The Old Houses served beside its withheld host Noble Houses (stamped)",
++   "r3m-metropolis-infiltrated-1-122 hand hide Noble Houses [shown dm=true twin/page]: rival The Old Houses served beside its withheld host Noble Houses (stamped)",
++   "r3m-metropolis-infiltrated-1-122 hand hide Noble Houses [shown dm=true twin/import]: rival The Old Houses served beside its withheld host Noble Houses (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=false server/page]: rival The Guild Alliance served beside its withheld host Merchant Guilds (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=false server/import]: rival The Guild Alliance served beside its withheld host Merchant Guilds (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=false twin/page]: rival The Guild Alliance served beside its withheld host Merchant Guilds (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=false twin/import]: rival The Guild Alliance served beside its withheld host Merchant Guilds (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=true server/page]: rival The Guild Alliance served beside its withheld host Merchant Guilds (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=true server/import]: rival The Guild Alliance served beside its withheld host Merchant Guilds (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=true twin/page]: rival The Guild Alliance served beside its withheld host Merchant Guilds (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Merchant Guilds [shown dm=true twin/import]: rival The Guild Alliance served beside its withheld host Merchant Guilds (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=false server/page]: rival The Black Circle served beside its withheld host Thieves' Guild (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=false server/import]: rival The Black Circle served beside its withheld host Thieves' Guild (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=false twin/page]: rival The Black Circle served beside its withheld host Thieves' Guild (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=false twin/import]: rival The Black Circle served beside its withheld host Thieves' Guild (absent)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=true server/page]: rival The Black Circle served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=true server/import]: rival The Black Circle served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=true twin/page]: rival The Black Circle served beside its withheld host Thieves' Guild (stamped)",
++   "r3m-metropolis-insurgency-1-124 hand hide Thieves' Guild [shown dm=true twin/import]: rival The Black Circle served beside its withheld host Thieves' Guild (stamped)",
++ ]
+
+ ❯ tests/security/galleryVeilRival.pglite.test.js:424:20
+    422|     for (const f of faults) emit({ k: 'fault', f });
+    423|     expect(tally.places, 'the pools hold rival places').toBeGreaterTha…
+    424|     expect(faults).toEqual([]);
+       |                    ^
+    425|   }, POOL_TIMEOUT_MS);
+    426| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  13:08:50
+   Duration  742.70s (transform 3.78s, setup 33ms, import 460ms, tests 742.02s, environment 0ms)
+
+[gate-tail] end:  13:21:13 up 10:08,  0 user,  load average: 5.19, 5.92, 4.94
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/red2/tmp/gate-tail.21622.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+== shard-C6-0-2.log (tail 40)
++   "r5c2-m3-metropolis-20 hand hide Military/Guard [shown dm=true server/import]: rival The Shield Compact served beside its withheld host Military/Guard (stamped)",
++   "r5c2-m3-metropolis-20 hand hide Military/Guard [shown dm=true twin/page]: rival The Shield Compact served beside its withheld host Military/Guard (stamped)",
++   "r5c2-m3-metropolis-20 hand hide Military/Guard [shown dm=true twin/import]: rival The Shield Compact served beside its withheld host Military/Guard (stamped)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=false server/page]: rival The Trade Compact served beside its withheld host Craft Guilds (absent)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=false server/import]: rival The Trade Compact served beside its withheld host Craft Guilds (absent)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=false twin/page]: rival The Trade Compact served beside its withheld host Craft Guilds (absent)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=false twin/import]: rival The Trade Compact served beside its withheld host Craft Guilds (absent)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=true server/page]: rival The Trade Compact served beside its withheld host Craft Guilds (stamped)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=true server/import]: rival The Trade Compact served beside its withheld host Craft Guilds (stamped)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=true twin/page]: rival The Trade Compact served beside its withheld host Craft Guilds (stamped)",
++   "r5c2-m3-metropolis-22 hand hide Craft Guilds [shown dm=true twin/import]: rival The Trade Compact served beside its withheld host Craft Guilds (stamped)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=false server/page]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (absent)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=false server/import]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (absent)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=false twin/page]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (absent)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=false twin/import]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (absent)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=true server/page]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (stamped)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=true server/import]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (stamped)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=true twin/page]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (stamped)",
++   "r5c2-m3-metropolis-24 hand hide Loyalist Noble Opposition [shown dm=true twin/import]: rival The Landed Bloc served beside its withheld host Loyalist Noble Opposition (stamped)",
++ ]
+
+ ❯ tests/security/galleryVeilRival.pglite.test.js:424:20
+    422|     for (const f of faults) emit({ k: 'fault', f });
+    423|     expect(tally.places, 'the pools hold rival places').toBeGreaterTha…
+    424|     expect(faults).toEqual([]);
+       |                    ^
+    425|   }, POOL_TIMEOUT_MS);
+    426| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  13:08:50
+   Duration  1750.50s (transform 3.84s, setup 50ms, import 566ms, tests 1749.72s, environment 0ms)
+
+[gate-tail] end:  13:38:01 up 10:24,  0 user,  load average: 1.57, 2.39, 3.45
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/red2/tmp/gate-tail.21630.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+== shard-C6-1-2.log (tail 40)
++   "r5c2-m3-metropolis-25 hand hide Arcane Orders [shown dm=true server/import]: rival The Tower Alliance served beside its withheld host Arcane Orders (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Arcane Orders [shown dm=true twin/page]: rival The Tower Alliance served beside its withheld host Arcane Orders (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Arcane Orders [shown dm=true twin/import]: rival The Tower Alliance served beside its withheld host Arcane Orders (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=false server/page]: rival The Devout Circle served beside its withheld host Religious Authorities (absent)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=false server/import]: rival The Devout Circle served beside its withheld host Religious Authorities (absent)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=false twin/page]: rival The Devout Circle served beside its withheld host Religious Authorities (absent)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=false twin/import]: rival The Devout Circle served beside its withheld host Religious Authorities (absent)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=true server/page]: rival The Devout Circle served beside its withheld host Religious Authorities (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=true server/import]: rival The Devout Circle served beside its withheld host Religious Authorities (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=true twin/page]: rival The Devout Circle served beside its withheld host Religious Authorities (stamped)",
++   "r5c2-m3-metropolis-25 hand hide Religious Authorities [shown dm=true twin/import]: rival The Devout Circle served beside its withheld host Religious Authorities (stamped)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=false server/page]: rival The Hidden Hand served beside its withheld host Thieves' Guild (absent)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=false server/import]: rival The Hidden Hand served beside its withheld host Thieves' Guild (absent)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=false twin/page]: rival The Hidden Hand served beside its withheld host Thieves' Guild (absent)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=false twin/import]: rival The Hidden Hand served beside its withheld host Thieves' Guild (absent)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=true server/page]: rival The Hidden Hand served beside its withheld host Thieves' Guild (stamped)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=true server/import]: rival The Hidden Hand served beside its withheld host Thieves' Guild (stamped)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=true twin/page]: rival The Hidden Hand served beside its withheld host Thieves' Guild (stamped)",
++   "r5c2-m3-metropolis-27 hand hide Thieves' Guild [shown dm=true twin/import]: rival The Hidden Hand served beside its withheld host Thieves' Guild (stamped)",
++ ]
+
+ ❯ tests/security/galleryVeilRival.pglite.test.js:424:20
+    422|     for (const f of faults) emit({ k: 'fault', f });
+    423|     expect(tally.places, 'the pools hold rival places').toBeGreaterTha…
+    424|     expect(faults).toEqual([]);
+       |                    ^
+    425|   }, POOL_TIMEOUT_MS);
+    426| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  13:08:50
+   Duration  1717.95s (transform 4.14s, setup 51ms, import 461ms, tests 1717.30s, environment 0ms)
+
+[gate-tail] end:  13:37:28 up 10:24,  0 user,  load average: 2.02, 2.57, 3.55
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/2bd5f6e7-0c7f-58ac-a882-623c0e5708b1/scratchpad/logs/red2/tmp/gate-tail.21637.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
