@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 08:02 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 08:02 UTC; VEIL-43 and the FLOOR measure added 08:20 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -61,10 +61,10 @@ boundary after its own count passes 570,000); PROSE-6 300,890; VEIL-40 286,352; 
   N57, N62). UNIT "PROSE-E" (N64, N70, N71; said to the owner with his veto; NEVER GATING THE DEPLOY): FIVE LINES
   RE-WORDED IN PLACE, THEIR WORDS RULED BY THE CHAIR (N70 holds them word for word), for the four cell pairs that
   disagree on 63 of 900 pages at least; its builder works on `lane/prose-6-2026-11-23-e-wip` cut at b443be64b; THE
-  REGISTERS ARE TAKEN LAST, after it merges the line's tip 9b0ffaa97 ("THE LINE IS" was sent at the landing). IT
-  OWES: the "FLOOR" measure (the tooth's matcher drops printed cuts under four words: what item 4 and phase 1 missed,
-  read by the draw ledger; THE CORRECTED FIGURE IS OWED TO THE OWNER); for each of the five lines every form the pages
-  print; then "PROSE-E <commit>" for the next stack.
+  REGISTERS ARE TAKEN LAST, after it merges the line's tip 9b0ffaa97 ("THE LINE IS" was sent at the landing). "FLOOR"
+  CAME AND IS TAKEN (N74): the floor hid 111 pages, NONE a true disagreement: THE COUNT STANDS AT 63 OF 900 AND THE
+  OWNER WAS TOLD. IT OWES: for each of the five lines every form the pages print; then "PROSE-E <commit>" for the next
+  stack (STACK-113).
 - VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
   `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); BOTH
   GATES EQUAL TO THE STANDING FIGURES (06:57). MEASURE "77" ON THE 7 PLACES (07:21): THE RPC's DOCUMENT AGAINST THE
@@ -105,8 +105,18 @@ boundary after its own count passes 570,000); PROSE-6 300,890; VEIL-40 286,352; 
   session_01FbPLbcvhMzoJs1V2KQYq9M (handed over 03:09; PART 39); VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (handed over
   05:21; tail done 05:40); VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (HANDED OVER 06:07 UTC: e76873832 / f7f1cfe8c;
   PART 40's first section is its packet; no run left on its box).
-FIVE WORK NOW: CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42 (the landing place is free; one place is free beside it).
-PROSE-6's place frees when "PROSE-E" has landed or is stopped; CLOSE-5's goes to CLOSE-6.
+- VEIL-43 (THE JOIN'S SEAT, "JOIN-PREP", E119; N74; start message `prompts/START-VEIL-43.txt`; ITS SESSION ID IS IN THE
+  FIRST ENTRY OF SECTION 5 AFTER N74): a NON-writer of the lane's tip. Checkout `lane/veil-42-2026-11-23` at
+  abc98362d; its branch `lane/veil-43-2026-11-23`; THE JOIN IS BUILT ON `lane/veil-43-2026-11-23-join-wip`, created at
+  the line's tip 9b0ffaa97 with the veil's tip 23bb8b8ae merged into it (the line the first parent). UNIT (0) the
+  join as it falls (the eleven conflicts by the lane's ruling 90 (3)) and the machine; UNIT (1) SIX MEASURES ON THE
+  JOINED TREE, DARK, THEN IT STOPS AND THE CHAIR RULES ("GATES", "SITES", "REDS", "HOOKS", "DAILY", "NAMES"); unit (2)
+  the build on those rulings (unit (ix) among it: its shape is proposed, the chair rules before a line of 212); unit
+  (3) lit, on the chair's word "LIT <commit>" naming the flip branch's commit; unit (4) at the lane's bar. THE CHAIR
+  OWES IT: every new veil tip ("TIP <commit> on <branch>") and every new line ("THE LINE IS <commit>").
+SIX WORK NOW: CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43 (THE LANDING PLACE IS FREE ONLY WHEN ONE OF THE SIX
+PARKS: STACK-113 for "PROSE-E" takes PROSE-6's place when PROSE-6 has sent its commit and waits). CLOSE-5's place goes
+to CLOSE-6.
 THE GATES' "server = twin" IS A SHAPE CHECK ONLY (N48): the whole-document form joins every veil unit's proofs once the
 chair has ruled on VEIL-42's "WHOLE-DOC" measure at the tip's own code. The hourly check is a one-shot scheduled task
 re-armed each time: the last entry of section 5 that names one holds the next.
@@ -121,13 +131,16 @@ CURE IS RULED "(a')" (N49): no `publicProse` served on a shared read; VEIL-41 bu
 WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: CI's RUN ON 9b0ffaa97 READ BY NAME against the 59 rows (workflow "CI"
 on the pull request's head; written into `ci/LINE-NOW.md`); "TIP? PIN-3 <commit>" granted and the new veil tip named
 to the three chains; VEIL-42's measures ruled (the whole-document form into every unit); "TENSION-PARTIES" ruled;
-VEIL-40's builder's return (the gates; the owner's screen line); "FLOOR" read and the corrected figure said to the
-owner; "PROSE-E <commit>" read and a stack seated for it (STACK-113) when it is ready; CLOSE-5's lines after each
+VEIL-40's builder's return (the gates; the owner's screen line); VEIL-43's first message and its six measures
+(each ruled as it comes); "PROSE-E <commit>" read and a stack seated for it (STACK-113) when it is ready; CLOSE-5's lines after each
 flip commit, then its hand-over and CLOSE-6's seating (fill the draft's five blanks from CLOSE-5-HANDBACK.md section
-0); the sample town's narration read and put to the owner before the flip lands. A ROW OWED TO THE SECURITY READER'S
-LIST for each of: the share class on the DM door (N35 (1)); the gates' signature being shape-only and the
-whole-document form (N48); the rival's rule and its two open measures (N63); (a') (N49); the client's pre-211 branch
-and the deploy order (N69).
+0); the sample town's narration read and put to the owner before the flip lands. THE SECURITY READER'S LIST
+(`docs/chair/2026-11-21/eighth/veil/READERS-LIST.md`) HOLDS THE NINTH CHAIR'S ROWS 25 TO 30 SINCE N74 (the share class
+on the DM door; the gates' shape-only signature and the whole-document form; (a'); the rival's rule and its two open
+measures; the client's pre-211 branch and the deploy's order; five times a proof of the lane was blind): A ROW IS
+ADDED THERE WITH EVERY LATER RULING THAT NAMES THE READER. REVIEW-VEIL-15 IS ON THE EIGHTH CHAIR'S ACCOUNT: AT THE BAR
+A FRESH READER IS SEATED ON THIS ACCOUNT from `docs/chair/2026-11-21/eighth/prompts/REVIEW-VEIL-15.txt`'s form (its
+start message is NOT YET DRAFTED: the chair owes the draft).
 PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT: "You may push the working line when the landing's checks pass." (02:47
 UTC: without it the chair pushes the working line by E130, its own check judges, and a refusal stands). HIS VETOES,
 EACH SAID TO HIM IN PLAIN WORDS: (a') a shared page carries no state sentences in the first deploy (N49); A RIVAL IS
@@ -1478,3 +1491,56 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   keep landing toward the first deploy and E130's form; the push is to a lane ref, never the pull request's merge.
   **Reversal:** a later point on the line (never a force push). TWO LESSONS OF THIS LANDING ARE WRITTEN INTO
   LINE-NOW.md FOR EVERY LANE'S RULE 8 (`tests/copy` whole; the grep by directory, exported names and old words).
+- 2026-11-23 08:20 UTC · N74 · "FLOOR" TAKEN: THE COUNT STANDS AT 63 OF 900; THE JOIN'S SEAT (VEIL-43) IS SEATED IN THE FREE PLACE; THE
+  READER'S LIST GAINS ROWS 25 TO 30. (1) "FLOOR": PROSE-6's lines of 07:58 and 08:05 (`map/FLOOR.md` at 99a22c3ad on
+  `lane/prose-6-2026-11-23`, 27 lines: READ WHOLE BY THE CHAIR; one run of 900 births, 202 s, through the mutex). The
+  floor hid 2 cell pairs on 111 pages (17 variant pairs, all trade, thorps to villages): GEN-13 `NO-MARKET` v11's bare
+  cut "{settlement} keeps no market." (65 pages) and v12's "{settlement} has no market." (46), beside ECO-10
+  `POSTURE: established` (107 pair-pages) and ECO-1 `COMBINATION C4` (54). NONE IS TRUE, each read by the chair: goods,
+  carts and buyers can leave or come where no market stands; the C4 pairs say the same thing twice. No walls LACK
+  cell and walls SUFFICIENCY cell are drawn on one page (0 of 900); food, money and order 0. **Decided:** the measure
+  is taken; THE COUNT PUT TO THE OWNER STANDS: 14 TRUE variant pairs on 63 of 900 pages; the floor itself is not
+  changed in this unit; its figure goes in the tooth's header. SAID TO THE OWNER in plain words (the corrected figure
+  owed since N71): the tool had skipped 111 pages and none of them disagrees. ONE DIFFERENCE ASKED OF PROSE-6: N71
+  recorded v11's bare cut on 63 pages (its line of 07:40) and FLOOR.md says 65. NOTED FOR AFTER THE FIRST DEPLOY, NOT
+  A DISAGREEMENT: "no market" is said twice on 16 pages (the bare cut beside C4 v6, "There is no market at
+  {settlement} to hold whatever its road brings, and the thorp stays poor.").
+  (2) THE CHAIR'S TRIAL JOIN (`/home/user/wt/trial`, detached at the line's tip 9b0ffaa97; `git merge --no-commit
+  --no-ff 23bb8b8ae`; read; aborted; nothing pushed): merge base 8f3b8bf4b (point 73's row); the line 1,510 commits
+  ahead, the veil lane 458. ELEVEN CONFLICTS, NONE IN PRODUCT CODE AND NONE IN 212 OR THE TWIN: four registers (the
+  wiring census; the writer-reach baseline; the lighting census; the tuning inventory) and seven tests (five where
+  both sides cured the hook's GIT_DIR leak with a helper of their own; `ruinFilterRoster.walker`'s count, the line 114
+  and the lane 118; the phone-floor baseline's two sets of notes): THE SAME ELEVEN FILES AS THE EIGHTH CHAIR'S PROBE
+  AT POINT 97 (`out/v33/joinprobe/conflicts.md` at df7447e58 on `lane/veil-33-2026-11-22-joinprobe-wip`, read by the
+  chair with `JOINPROBE.md` whole and `briefs/IX-TROUBLE-HOOKS-BRIEF.md` whole). The veil's net contribution to the
+  line besides: migrations 211 and 212 with their rollbacks; seven generated files under `supabase/functions/_shared`;
+  11 added and 18 modified files in all of src and supabase; 17 added files of `tests/security`; `scripts/veil`.
+  (3) **Decided:** "JOIN-PREP" (E119) IS SEATED NOW AS VEIL-43, the sixth working seat: the join built on its own
+  branch (the line's tip with the veil's tip merged into it), MEASURED FIRST (the gates on the joined tree; the
+  unregistered roster-choice sites; every red classed; the hook gap; THE DAILY LIFE PAGE on hiding reads, a reader the
+  veil has never met; the name search over every served string), then built on the chair's rulings (the worklist and
+  the registers; the sites; unit (ix); arm (D); `seatHolderLines.js`'s row; INV-LIT; PART 30 section 7's re-proofs),
+  then lit on the chair's word, then one merge and one proof at the lane's bar. **Why:** E119 ruled it "built now"
+  and it never started for lack of a hand (VEIL-33 took chain C); everything after the lane's bar is serial (the
+  join, the security reader, the top-tier read of 212) and the join was the only part of that tail that is a BUILD;
+  nobody has measured the veil on the line since point 97, and points 98 to 112 brought new readers of a served
+  document. **Rejected:** leaving the place empty until a chain frees a seat (the join's unknowns would be met
+  last); seating the security reader early on this account for its instruments (it reads nothing before the bar, and
+  a container idle for many hours is reclaimed: its chain is re-made from its branch's scripts when the bar comes).
+  **Reversal:** the seat is parked by one line; its branches are scratch until the chair says "JOIN". **Blast
+  radius:** one more seat's rulings on the chair; unit (ix) writes 212 ON THE JOIN BRANCH ONLY (E119's own terms), so
+  each later veil tip is merged into it by E116's five steps. THE START MESSAGE (`prompts/START-VEIL-43.txt`) WAS
+  CHECKED BY THE CHAIR AGAINST THE FILES IT NAMES (PART 30's sections; PART 33's ruling 90; PART 34's 94; PART 36
+  section 1 (4); PART 40 section 1 (5); PART 44 section 1 (1); VEIL-35.txt's paragraphs) and is pushed with this
+  entry BEFORE the session is created. SAID TO THE OWNER the same turn.
+  (4) THE SECURITY READER'S LIST (`docs/chair/2026-11-21/eighth/veil/READERS-LIST.md`): ROWS 25 TO 30 WRITTEN (N35
+  (1); N48; N49; N63; N69; and one row of the five times a proof of this lane was blind) with a note that
+  REVIEW-VEIL-15 cannot be reached from this account. THE ROAD AFTER THE THREE UNITS NOW IN BUILD, from the pickup's
+  4.1, unchanged: chain A (iv) then (v); chain B "IMPORT-DOOR"; chain C "LEGACY-TELLS"; "R3" on the lane; the join; a
+  fresh security reader; one top-tier read of 212's final text; the owner alone applies 204 to 212.
+  (5) NOT RECORDED UNTIL NOW: VEIL-41 explained "unbuilt 40 to 23" (17 unbuilt rows moved and 7 were already built:
+  six diffuse composed rows and `legacyLines.b`) and briefed its TENSION-PARTIES measuring builder (brief 3d5dc4977).
+  CI ON THE LINE'S NEW TIP: workflow "CI", run 45135236667 (pull_request, run number 1289, head 9b0ffaa97), in
+  progress at 08:03 UTC by a helper's read; A REMINDER READS IT BY NAME at 08:51 UTC (trig_01YXoQPxr6fbvW4oP7pq5Bha).
+  THE HOURLY CHECK: trig_01QxH6uiXQgCaVezHiN94SAs at 08:42 UTC. The chair's twenty-seventh push (a69f4d9bb) ended
+  exit=0 at 08:06:01 UTC (its log; ls-remote equal).
