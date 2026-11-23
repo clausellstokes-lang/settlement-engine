@@ -1,0 +1,6 @@
+shard 2 rc=0
+shard 1 rc=0
+shard 0 rc=0
+shard 3 rc=0
+reads 280 | differ from the reference 0 | groupings present (reference) 840
+EXIT=0
