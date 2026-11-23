@@ -1,7 +1,7 @@
 # R4I-MEASURE — HAND-BACK (VEIL-42, chain B; brief `docs/chair/2026-11-20/veil/briefs/R4I-MEASURE-BRIEF.md` at caba51270)
 
-STATUS (kept current at every commit): A on the 7 places READ (`A-77.md`); the chain runs on (ctrl, dumps, t140, m140, bt140,
-bm140, pool, bpool); C and B not yet read. MEASURES ONLY: no line under `src/`, `supabase/` or `tests/` changed; 211 and 212 read, never edited.
+STATUS (kept current at every commit): A on the 7 READ; C's positive control READ (it bites); the stored sets remade
+(dumps, 140 + 140); the chain runs on (t140, m140, bt140, bm140, pool, bpool). MEASURES ONLY: no line under `src/`, `supabase/` or `tests/` changed; 211 and 212 read, never edited.
 
 ## WHERE IT RAN
 - Worktree `/home/user/wt/meas`, local branch `lane/veil-42-2026-11-23-meas-wip` cut at 9f9b819f7; `node_modules` a link
@@ -30,7 +30,12 @@ value for value, no bijection, at the tip.
   off, ONE path, `prominentRelationship` whole. Born in the client's processing of M's TWIN row: `src/lib/gallery.js ::
   sanitizeDossier`'s unserved branch never calls `gallerySecondHomes.js :: withholdCovertCopies` (the twin's and 212's covert rule).
   Not 212's, not R4-IDS's, not the gap. CONFIRMED on the 7; the 140 and the pool to follow.
-- C: `C-GAP.md` (not yet read).
+- C: `C-GAP.md`. THE CONTROL BITES: on master's shape, Reveal DM, both engines (gallery server and twin, import, the gallery
+  page) serve stored ids at `factions[].members[].goal.intent.short.target.id` (456 hits / 60 reads),
+  `...goal.intent.long.target.id` (443 / 60) and a THIRD path, `factions[].members[].allegiance.handler` (35 / 10, unmarked DM).
+  Link and map member: 0. The sets: to follow.
+- A's aside (control documents only): 212 :: `_gallery_veil_roster_choices` :2318-2337 writes a `power` share onto master-shape
+  top-level `factions[]` entries that carry none (a NULL comparison in its guard); the twin does not (33 reads).
 - B: `B-WHOLEDOC.md` (not yet read).
 
 ## LEFT (exact commands)

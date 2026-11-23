@@ -1,0 +1,6 @@
+dump 2026-11-23T07:06:07Z tree /home/user/wt/meas at f4b6c98d1bfe8c723e0e88b723babe403966f5bc
+end 2026-11-23T07:06:25Z
+shard 0 rc=0
+shard 3 rc=0
+shard 1 rc=0
+shard 2 rc=0
