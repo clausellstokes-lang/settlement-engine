@@ -40,3 +40,12 @@ WHY: its key holds on a roster whose only watch is the village's unpaid rota (`g
 (d) FOR THE VEIL'S READER. `food` reads the food rung (`famine.js :: famineOf`); `stores` the stored months; `prosperity` the prosperity rung; `guardPresence` a watch, garrison, militia or hired company; `force: paid` as in (a). None reads a fact about crime. `guardPresence` and `force: paid` read defence houses: garrison, watch, militia, mercenary. They are NOT a hideable kind by the catalogue; the builder proves it with `cardVeil.js :: isHideableHouse` = false on every such row of the 900 births. Every new line reads only facts every shared read serves (COMMON-RULES 14 (e)).
 (e) No new line says "the town"; no season, climate or age ("from season to season" is pay's rhythm, and "hard times" replaced "a hard season").
 (g) A walker that reds a new line brings the line back to the chair, never banked around.
+
+## BACK TO THE CHAIR AFTER PHASE 1 (900 births, `map/DISAGREE-PHASE1.md` on the -wip at 687ae0dbe)
+WAGES: the branch is eligible on 2 pages (towns), BOTH with pay 'short'. W1-W3 all say pay comes regularly, so all three are re-drafted (marks unchanged):
+W1' `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} keeps paid guards, but nothing is laid by to pay them through a long defence.
+W2' `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long defence.
+W3' `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} has paid guards and little to pay them with: a long defence would find the money gone.
+FOOD: every metropolis on the branch has stores ≥ 12 (44 of 150), where only F4 and v2 are eligible (projected near 15% and 19%). One more line for that ground:
+F5 `[ledger · no crisis: under_siege · food: ≥ secure · stores: ≥ 12]` {settlement} eats well and its stores are full, though the trades that should go on putting food by are failing.
+GEN-17 v2: printed on 63 pages, 8 with pay 'short'. ON EVERY PAGE THE PAGE ITSELF CUTS IT AT THE CLAUSE, to "{settlement} pays wages for its defense as well as keeping its walls.", so the full text printed on 0 pages. The ruled rewording changes no page. Recommended: make it anyway (one WORD_CORRECTIONS row), so that the source holds what the page prints if the cut ever changes; the dark proof shows no page moved.
