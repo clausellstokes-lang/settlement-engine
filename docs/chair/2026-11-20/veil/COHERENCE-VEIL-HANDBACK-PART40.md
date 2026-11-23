@@ -8,10 +8,9 @@ Branches:
 
 No pull request, ever (N2). THE LANE'S TIP is 2d7ed483f on `lane/veil-39-2026-11-23-tip` (40.4), merged into the -wip at ec082df83.
 
-## 1. WHERE THIS SEAT STANDS (kept current at every push)
-Written 00:21 UTC on 2026-11-23.
-
-THE UNIT: R4-IDS. Nothing of it is merged into the tip.
+## 1. WHERE THIS SEAT STANDS — FINAL AT THE HAND-OVER (40.7; written from 04:02 UTC on 2026-11-23; M's line is added when M ends)
+THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE TIP. The lane's tip is 2d7ed483f on `lane/veil-39-2026-11-23-tip`, merged into the -wip at ec082df83.
+THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` (the commit carrying this section) and `lane/veil-38-2026-11-23-r4ids-wip` at f7f1cfe8c (the unit's code; pushed).
 
 ### (1) DONE
 - R4I-PAGE's diff (08081ffdc..fd7163ba6 beyond b983c16b6; `src/domain/display/{galleryVeilPeople,galleryVeil,galleryRosterChoices}.js` and `tests/security/{galleryVeilIds,galleryRosterChoices}.pglite.test.js`) was READ ONCE, WHOLE, by this seat: NO FAULT.
@@ -43,7 +42,7 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
   - G1: the 13 non-security id pins re-stated modulo the bijection, five teeth each.
   - The ratchet's `\x28` (40.3 (4)): red at b088fcfc5, then 18/18 green.
   - galleryVeilHandRows 26/26 (the V7-2 row green after the tip); galleryWithholdAlways 9/9; galleryVeilIds 12/12; criminalSwitchSalt 6/6; rosterChoiceInversion 4/4; walkers 34/34; `--check` 0; typecheck 167.
-  - THE STORED ARM (E134; `out/v38/r4ip3/st/`): 140 today-born and 140 master-born documents, 3,360 reads each. 0 spelling hits; 0 stored person ids served (0 in stored-only fields: `publicProse`); 0 ids shared by two reads; 0 new unresolved references. The planted controls were caught 700/700 (bad references) and 140/140 (a stored id served).
+  - THE STORED ARM (E134; `out/v38/r4ip3/st/`). ITS "zero stored ids served" WAS READ WITH THE OLD MASK: IT IS NO PROOF ANY MORE (40.8 (2)); it is re-run with the corrected mask inside the unit's proofs. As read then: 140 today-born and 140 master-born documents, 3,360 reads each. 0 spelling hits; 0 stored person ids served (0 in stored-only fields: `publicProse`); 0 ids shared by two reads; 0 new unresolved references. The planted controls were caught 700/700 (bad references) and 140/140 (a stored id served).
   - INSTRUMENT CHANGE (E), vetoable: `personIdBijection :: storedIdsServed` masks the re-key's fresh tokens before its substring search (short stored ids gave false reds about one read in eight).
   - SENT TO THE CHAIR 02:27 FOR RULING:
     - (a) THE SIZE RISE (VERIFY_DIST 4 red: first paint +60 B raw / +14 B gzip, engine chunk +327 B, worker +43 B; the twin's `galleryVeilPeople.js` + `sha256Hex` and S1's import): the owner's.
@@ -66,25 +65,44 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
   - `tests/security` WHOLE at f7f1cfe8c: running at 04:00 in `/home/user/wt/r4ip4` (`out/v38/r4ip4/logs/r4-security-whole.txt`, uncommitted there); to be classed into `g-security-final.txt`.
 - M (40.7) queued at 04:00 behind that run: `/var/tmp/v18/out/v38/mrun.sh` (the 140, then the pool, ONE mutex hold), outputs `/var/tmp/v18/out/v38/m/`.
 
-### (2) IN FLIGHT
-- On the pool, at the -wip (`/var/tmp/v18/out/v38/poolprobes.sh`): the switch-offer probe (S1's pool arm), then the order probe (40.2's count of places whose printed order moves, twin only), started 01:55 UTC. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
-- R4I-TONIGHT (subagent; brief `briefs/R4I-TONIGHT-BRIEF.md`), in `/home/user/wt/r4it` on the local `lane/veil-38-2026-11-23-r4tonight-wip` at b088fcfc5: 40.3 (2), measure first.
-- R4I-PAGE-4 (subagent; brief `briefs/R4I-PAGE-4-BRIEF.md`), in `/home/user/wt/r4ip4` on the local `lane/veil-38-2026-11-23-r4ipage4-wip` at 0755698e6: the 27 id pins left, the runs the mutex starved, `tests/security` and `tests/lint` whole.
-- (returned) R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
+### (2) WHAT IS KNOWN OF THE GAP (40.8 (1)): every path where a stored person id stands after the re-key
+- FOUND (R4I-PAGE-4, CONFIRMED by tooth (ii), server side, master's stored shape): `factions[].members[].goal.intent.{short,long}.target.id` (e.g. `npc_peat_cutter`); the top-level `factions[]` copy is master's shape, and `powerStructure.factions[].members[]` is PLAUSIBLY the same.
+- WHAT THE TWIN RE-KEYS (`src/domain/display/galleryVeilPeople.js :: rekeyPeople`, read whole by this seat): `npcs[].id`; `npcs[].goal.intent.{short,long}.target.id`; `npcs[].allegiance.handler`; STOP 1's `npcs[].relationships[].{from,to,npc1Id,npc2Id,targetId,npcId}` and each tie's `.id`; `relationships[].{from,to,npc1Id,npc2Id}` and `.id`; `{stress,stressors}.cast.roles[].id` and `.cast.levers[].holderId`; `simulationTrace[].targetId` and `.downstreamEffects[].target`; `factions[].members[].id` and `powerStructure.factions[].members[].id`.
+- WHAT IT DOES NOT: anything else on a roster copy (`members[].goal…`, `members[].allegiance…`, `members[].relationships…`) and any person reference outside the fixed paths above. 212's `_gallery_veil_rekey` is the same rule for rule (R4I-SQL's brief item 3), so PLAUSIBLY the same gap on both engines: THE MEASURE decides, not this list.
 
-### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
-Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat (40.4's tip move changed neither). They are read whole once, before the first trigger that 40.1 (b) names.
+### (3) THE SUCCESSOR'S FIRST ACTS, IN ORDER (40.8 (4))
+1. THE MACHINE AND THE POOL: PART 36 section (4) with the names of (5) below (about 33 minutes wall; the pool ONCE, on the -wip; ONE heavy run at a time through the gate mutex, the seat's own probes included: 40.7 (1)).
+2. M's RESULT (40.7 (3)): three counts on the 140 and the pool: (i) cast persons sharing (name, crisis, role); (ii) served name differs from the stored name; (iii) nameless cast persons. ANY NOT 0 IS A STOP TO THE CHAIR. If M did not end in this seat, re-run it: `sh /var/tmp/v18/out/v38/mrun.sh`, or the probe `out/v38/r4it/tonight-names.sh <tree> <out> v28tpl [pooldir]` on R4I-TONIGHT's branch, through the mutex.
+3. THE MEASURE OF THE GAP (40.8 (1)): with the corrected `storedIdsServed` (`tests/security/personIdBijection.shared.mjs`, (E) + (F)), on both stored sets (today-born, master-born: `out/v38/r4ip3/st/stored-ids.sh`, `dump.sh`) and the pool, both engines, every door and setting: EVERY path where a stored person id of that document still stands after the re-key, by path and count.
+4. R4I-SQL-2: a builder that reads 212 and the registry WHOLE as its first act; it cures every path the measure lists, in 212, the rollback, the registry's `people.rekey` path (by its door) and the twin `rekeyPeople`; red first on tooth (ii)'s five and on the stored arm; 001..211 + 212 + down = 001..211; the catalogue; `--check`. THE SUCCESSOR READS 212 AND THE REGISTRY WHOLE before it reads that diff (40.1 (b)).
+5. R4I-TONIGHT-2: apply `out/v38/r4it/C-prepared-cure.patch` (`castWantKeyOf`: THE ID FALLBACK GOES, a nameless person takes '': 40.7 (3)) and `C-prepared-shareRenderTwice.patch`, red first; THE ARM IN THREE HALVES (40.7 (2)); OWNER-MOVES counted and named (the "before" is `out/v38/r4it/owner-before-140/`); every "Wants to" pin re-pinned by cause; a moved golden or snapshot NAMED for the owner. `tonightSheet.js` and `crisisFactFindings.js` LISTED for the join. The same builder (or the next) cures `netCurrentExtractorAnchor` at `tests/security/criminalSwitchSalt.test.js` :114, test-only (40.8 (3)).
+6. THE QUEUE FOR A QUIET BOX, one at a time:
+   - the order count on the pool, twin only (`out/v38/r4ip2/order.sh <tree> <out> '' /var/tmp/v18/t2/pool-v38`; killed here at 02:55 by memory);
+   - the build at the tip (`/var/tmp/v18/out/v38/tipbuild.sh`; killed here, rc=137) beside the -wip's (`out/v38/r4ip3/logs/b-*.txt`): the four VERIFY_DIST reds BY NAME, each with its module and the Brotli figure (the -wip's first-paint Brotli is 313,911 B over 8 chunks), for the owner's size signing (40.6 (a));
+   - THE COST LAW (VR36): `/var/tmp/v18/out/v38/cost/cost.sh` (prepared, not run: the largest born town, 211 against the -wip's 212, 9 rounds) beside its ceiling; chain A reads 465.0 against 523.2 ms.
+7. THE UNIT'S PROOFS, re-run by the seat:
+   - the plants red first (R1 at 08081ffdc: 3 of 9 red, `/var/tmp/v18/out/v38/red/`) and green after;
+   - STOP 1 and the catalogue (this seat's `sqlproofs.sh`: green at fd7163ba6; re-run on R4I-SQL-2's 212);
+   - 001..211 + 212 + down = 001..211;
+   - server = twin on every page of a pool; both gates no worse (GATE-1 4 of 92, 7 LOWER, GATE-2 20; this seat's pool read them so at b088fcfc5); row 17's count 0;
+   - THE STORED ARM RE-RUN WITH THE CORRECTED MASK;
+   - the arms and the walkers; `tests/security` whole classed (R4I-PAGE-4's last run: `out/v38/r4ip4/logs/r4-security-whole.txt` in `/home/user/wt/r4ip4`, uncommitted, if this machine still stands);
+   - `tests/lint` whole by name (52 of 3,304 at c7e60ef59 against the tip's 48: `netCurrentExtractorAnchor` 1, the unit's; `writerReach` 3, RE-TAKEN BY NOBODY YET (40.8 (3)): ONE new identity read off its log, "salt on reasons" (the LIT grammar round-trip names it; the two mutants count 1424 against 1423 and 1425 against 1424 because of it), PLAUSIBLY S1's `{ salt }` argument (`criminalVeilSwitch.js :: presentCriminalGroupings` / `galleryVeil.js :: applyVeil`'s `opts`): the file, symbol and field to be confirmed by the walker's own report before the chair rules);
+   - typecheck and eslint.
+8. The 34 files: their two reds (S2; VS1's crime-types tooth) are the tip's and leave with VEIL-39's "PIN-2" (40.6 (d)).
+9. "TIP? R4-IDS <commit>", with the four VERIFY_DIST reds named as the owner's size signings and the cost law's figure; E116's five steps first if the tip moved.
 
-### (3) NEXT
-1. Read R4I-PAGE-3's diff once and merge it into the -wip.
-2. Run both gates, the switch-offer probe (`out/v38/r4ip2/switch-offer.sh`) and the order probe (`order.sh`) on the pool.
-3. Run the stored arm whole.
-4. Re-run the unit's proofs (PART 36 (3) / VEIL-38's unit (3)).
-5. Merge the new tip when the chair names it (VEIL-39's pin), with E116's five steps if 212 moved there.
-6. Ask "TIP? R4-IDS <commit>".
+### (4) THE SMALLEST LIST OF FILES TO GO ON
+- This file's section 1 and section 2 (40.1 to 40.8); PART 36 sections 1 and 2; PART 35 section 2.
+- `briefs/R4-IDS-BRIEF.md` PART TWO (the cure's design); `briefs/R4I-PAGE-2-BRIEF.md` (WHERE YOU RUN and LAWS, which every later brief cites); `briefs/R4I-TONIGHT-BRIEF.md` (as 40.7 amends it).
+- The builders' hand-backs: `out/v38/r4ip4/R4IP4-HANDBACK.md` (the newest), `out/v38/r4ip3/R4IP3-HANDBACK.md`, `out/v38/r4it/R4IT-HANDBACK.md` (R4I-TONIGHT's whole `out/v38/r4it/` is COPIED onto THIS branch: it is not on the -wip), `out/v38/r4ip2/ORDER-STOP.md`.
+- Code a builder reads whole: `src/domain/display/galleryVeilPeople.js`; for R4I-SQL-2, 212 and the registry; for R4I-TONIGHT-2, `src/domain/summary/tonightSheet.js` and `src/domain/coherence/crisisFactFindings.js`.
 
-### (4) HOW TO RE-MAKE THE MACHINE
-Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp/v18/out/v38`, pool `/var/tmp/v18/t2/pool-v38`, template `v28tpl` (`v27x211` + the -wip's 212).
+### (5) BRANCHES, WORKTREES, MACHINE (every tip; nothing pushed but the two lane names)
+- `lane/veil-38-2026-11-23` (this file, the briefs); `lane/veil-38-2026-11-23-r4ids-wip` at f7f1cfe8c (pushed): fd7163ba6 + S1 + the tip's merge (ec082df83) + R4I-PAGE-3 + R4I-PAGE-4 by fast-forward.
+- LOCAL ONLY (this container; their work is IN the -wip but for R4I-TONIGHT's): `lane/veil-38-2026-11-23-r4ipage{2,3,4}-wip`; `lane/veil-38-2026-11-23-r4tonight-wip` at 46f8de49c (docs and the prepared patches, NOT merged: a successor fetches nothing of it from origin, so its whole `out/v38/r4it/` (the patches, the probes, the owner's "before") IS COPIED onto this branch, `docs/chair/2026-11-20/veil/out/v38/r4it/`).
+- This machine: the tree `/home/user/wip`; out `/var/tmp/v18/out/v38`; pool `/var/tmp/v18/t2/pool-v38`; template `v28tpl` (`v27x211` + the -wip's 212, unchanged since fd7163ba6: 212 `7a85dec3…`, rollback `b13c5be8…`).
+- UNREAD BY THIS SEAT (40.1 (b)): migration 212 and the registry, whole. Read them whole once before the first of: merging a tip that changes either; judging a red that points into either; E116's five steps; R4I-SQL-2's diff.
 
 ## 2. RULINGS SINCE PART 36 (numbered 40.n; the ninth chair's; each vetoable by the owner)
 40.1 THE CHAIR, 00:23 UTC 2026-11-23, on VEIL-38's first line:
@@ -172,6 +190,18 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
          nameless cast person takes ''. M counts nameless cast persons as a THIRD count beside (i) and (ii); any of the three not 0 is
          a STOP. (The probe already counts "with a card and NO NAME", owner and served.)
      (4) THE ORDER STANDS: R4I-PAGE-4; then M, run by the seat, one run at a time.
+
+40.8 THE CHAIR, 04:01 UTC: R4I-PAGE-4's results TAKEN (the link twin on 212's and 211's own lines; the mask's two conditions).
+     (1) THE GAP IS THE UNIT'S OWN, CURED INSIDE R4-IDS BEFORE "TIP?" ("every reference following"): "R4I-SQL-2", a builder that reads
+         212 and the registry WHOLE; THE SUCCESSOR dispatches it. MEASURE FIRST, so the cure is whole: with the corrected
+         `storedIdsServed`, on both stored sets and both engines, every door and setting, EVERY path where a stored person id still
+         stands after the re-key, by path and count. R4I-SQL-2 cures every path listed, red first on tooth (ii)'s five and the stored
+         arm. Section 1 (2) writes what is known.
+     (2) THE STORED ARM'S "zero stored ids served" OF 02:27 WAS READ WITH THE OLD MASK. IT IS NO PROOF ANY MORE. It is re-run with the
+         corrected mask inside the unit's proofs.
+     (3) `netCurrentExtractorAnchor`: the unit's own test file, cured test-only by the successor's next builder. `writerReach`'s three:
+         RE-TAKEN BY NOBODY YET; this file names the identity (section 1 (3) 7); the chair rules when it has read it.
+     (4) THE HAND-OVER AFTER M STANDS; section 1 gives the successor's first acts IN ORDER and the smallest list of files.
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).

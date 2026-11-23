@@ -1,0 +1,10 @@
+places 2 | hidden-house 0 | reads 44 | twin salt fixed (calls) 45
+owner page: cast persons 4 | with no card 0 | with a card and NO NAME 0
+served: cast persons read 89 | with a card and NO NAME 0
+M (i) PLACES WITH TWO CAST PERSONS SHARING (name, crisis, role): 1 | owner page: 0 | any served read: 1
+   r3m-village-occupied-0-5 [] [{"read":"twin|off|default","keys":[{"key":"Arif al-Kindi Planted|occupied|face","ids":2}]}]
+M (ii) CAST PERSONS WHOSE SERVED NAME DIFFERS FROM THE STORED NAME (person-reads): 4 | places: 1
+   r3m-village-occupied-0-5 [{"read":"twin|off|default","role":"face","crisis":"occupied","stored":["Arif al-Kindi","Arif al-Kindi"],"served":["Arif al-Kindi Planted","Arif al-Kindi"]},{"read":"twin|off|default","role":"profiteer","crisis":"occupied","stored":["Arif al-Kindi","Arif al-Kindi"],"served":["Arif al-Kindi Planted","Arif al-Kindi"]},{"read":"twin|off|default","role":"face","crisis":"occupied","stored":["Arif al-Kindi","Arif al-Kindi"],"served":["Arif al-Kindi Planted","Arif al-Kindi"]}]
+unmapped served cast ids (person-reads): 1 | places: 1
+   r3m-village-occupied-0-5 [{"read":"twin|off|default","role":"face","crisis":"occupied","name":"Arif al-Kindi Planted"}]
+server read: no | server vs twin canonical documents unequal (reads): 0
