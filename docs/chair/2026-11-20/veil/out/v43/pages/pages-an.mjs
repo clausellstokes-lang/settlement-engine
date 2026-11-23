@@ -4,7 +4,7 @@
 // paragraph's counts. The server sample. (N) every differing line of P2 against the house-free twin, by tab and class, one
 // example each, N63's caution (the house-free page's signature unseen in the pool's universe of its size and Reveal). The
 // owner-only Daily Life slot on every page. EXIT 1 on any STOP (a GAINED line in (F), a dm-slot presence, a server line differing).
-import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
 const [DIR, POOL = '/var/tmp/v18/t2/pool-v43'] = process.argv.slice(2);
 const J = (v) => JSON.stringify(v);
 const rows = readdirSync(DIR).filter((f) => f.endsWith('.json')).map((f) => JSON.parse(readFileSync(`${DIR}/${f}`, 'utf8')));
@@ -24,6 +24,12 @@ console.log(`ROWS ${rows.length}: (F) ${F.length} births (errors ${F.filter((r) 
 for (const r of rows.filter((x) => x.error)) { stops.push(`ERROR ${r.seed}`); console.log(`  ERROR ${r.seed}: ${r.error.split('\n').slice(0, 3).join(' / ')}`); }
 
 // ── (F)
+// ORDER (the chair's N103): a pair whose characters are the same multiset in another order (the same tokens, another order)
+const isOrder = (a, b) => a !== b && a.length === (b ?? '').length && [...a].sort().join('') === [...b].sort().join('');
+// A KIND (the chair's N103: tab + label): the line's label, its common prefix with its pair where 12 characters or more, else
+// its first 24 characters, figures masked
+const labelOf = (a, b) => { let k = 0; if (b != null && a !== b) while (k < a.length && k < b.length && a[k] === b[k]) k++; return (k >= 12 ? a.slice(0, k) : a.slice(0, 24)).replace(/\d+/g, '#').trim(); };
+const KINDS = {};
 const FT = {}; const FK = {}; const FH = {}; let nLines = 0; let nP1 = 0; const ex = {}; let hidLeft = 0; const tabsOnly = { P0: {}, P1: {} }; let renders = 0;
 const bump = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
 for (const r of F.filter((x) => !x.error)) {
@@ -31,9 +37,11 @@ for (const r of F.filter((x) => !x.error)) {
   for (const t of r.tabs.P0) if (!r.tabs.P1.includes(t)) bump(tabsOnly.P0, t); for (const t of r.tabs.P1) if (!r.tabs.P0.includes(t)) bump(tabsOnly.P1, t);
   for (const [t, d] of Object.entries(r.diff)) {
     for (const l of d.moved || []) { bump(FT, `${t}|MOVED`); const e = `${t}|MOVED|-`; if (!ex[e]) ex[e] = { seed: r.seed, text: l.slice(0, 220) }; }
-    const items = [...d.lost.map((l) => ['LOST', `${t}\u0001L\u0001${l}`, l]), ...d.gained.map((l) => ['GAINED', `${t}\u0001G\u0001${l}`, l]), ...d.changed.map(([a, b]) => ['CHANGED', `${t}\u0001C\u0001${a}\u0001${b}`, `${a}  =>  ${b}`, a, b])];
+    const items = [...d.lost.map((l) => ['LOST', `${t}\u0001L\u0001${l}`, l, l]), ...d.gained.map((l) => ['GAINED', `${t}\u0001G\u0001${l}`, l, l]), ...d.changed.map(([a, b]) => [isOrder(a, b) ? 'ORDER' : 'CHANGED', `${t}\u0001C\u0001${a}\u0001${b}`, `${a}  =>  ${b}`, a, b])];
     for (const [cls, id, text, a, b] of items) {
-      const key = causeOf(r.restoredBy?.[id]);
+      const key = r.restored ? causeOf(r.restoredBy?.[id]) : 'UNSAMPLED';
+      const kind = `${t}|${labelOf(a, b)}`; const kd = (KINDS[kind] ||= { n: 0, keyed: 0, seeds: new Set(), keys: {} }); kd.n += 1;
+      if (r.restored) { kd.keyed += 1; bump(kd.keys, key); } else kd.seeds.add(r.seed);
       bump(FT, `${tabOf(t)}|${cls}`); bump(FK, `${cls}|${key}`); if (cls === 'CHANGED') bump(FH, `${how(a, b)}|${key}`);
       const e = `${tabOf(t)}|${cls}|${key}`; if (!ex[e]) ex[e] = { seed: r.seed, text: text.slice(0, 220) };
       if (cls === 'GAINED') stops.push(`GAINED (F) ${r.seed} ${t}: ${text.slice(0, 160)}`);
@@ -42,13 +50,19 @@ for (const r of F.filter((x) => !x.error)) {
 }
 const tot = (cls) => Object.entries(FT).filter(([k]) => k.endsWith(`|${cls}`)).reduce((a, [, n]) => a + n, 0);
 console.log(`\n(F) ${F.length} births, P0 lines ${nLines}, P1 lines ${nP1}, renders ${renders}; hand marker left something hidden on ${hidLeft} births`);
-console.log(`(F) TOTAL lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} over ${nLines} P0 lines`);
+console.log(`(F) TOTAL lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} / order ${tot('ORDER')} / moved ${tot('MOVED')} over ${nLines} P0 lines`);
 console.log(`(F) tabs only on P0 ${J(tabsOnly.P0)} | only on P1 ${J(tabsOnly.P1)}`);
 console.log('(F) BY TAB x CLASS');
 for (const [k, n] of Object.entries(FT).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(48)} ${n}`);
 console.log('(F) BY CLASS x KEY (the narrowest single key that restores the line; JOINT = none alone)');
 for (const [k, n] of Object.entries(FK).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(60)} ${n}`);
 console.log('(F) CHANGED: HOW x KEY'); for (const [k, n] of Object.entries(FH).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(60)} ${n}`);
+const unkeyed = Object.entries(KINDS).filter(([, v]) => !v.keyed);
+console.log(`(F) KINDS (tab + label) ${Object.keys(KINDS).length}: keyed by the restore loop ${Object.keys(KINDS).length - unkeyed.length}, NOT YET KEYED ${unkeyed.length}`);
+for (const [k, v] of Object.entries(KINDS).sort((a, b) => b[1].n - a[1].n)) console.log(`  KIND ${k} | n ${v.n} | keyed ${v.keyed} ${J(v.keys)}`);
+const needs = [...new Set(unkeyed.flatMap(([, v]) => [...v.seeds].slice(0, 3)))];
+writeFileSync(`${DIR}/../needs.txt`, needs.join(','));
+console.log(`(F) RESTORE NEEDED on ${needs.length} births (up to three per unkeyed kind): ${needs.join(',')}`);
 console.log('(F) ONE EXAMPLE PER TAB x CLASS x KEY'); for (const [k, v] of Object.entries(ex).sort()) console.log(`  ${k} | ${v.seed} | ${J(v.text)}`);
 
 // ── (F) THE GOVERNANCE PARAGRAPH
@@ -76,9 +90,18 @@ console.log(`\n(F) GOVERNANCE PARAGRAPH (powerDeskRead.js :: governanceAccountRe
 for (const [k, v] of Object.entries(G.ex)) console.log(`  EX ${k} ${v.seed}: P0 ${J(v.P0)} | P1 ${J(v.P1)}`);
 
 // ── (F) THE SERVER SAMPLE
-const S = F.filter((r) => r.server); const sd = S.reduce((a, r) => a + (r.server.differ || 0), 0);
+const S = F.filter((r) => r.server); const sd0 = 0; void sd0; const sd = S.reduce((a, r) => a + (r.server.differ || 0), 0);
 console.log(`\n(F) SERVER SAMPLE: ${S.length} places; differing lines (server page vs twin page) ${sd}; same handed document ${S.filter((r) => r.server.sameDoc).length}; served marker ${S.filter((r) => r.server.served).length}; errors ${S.filter((r) => r.server.error).length}; chronicle ${J([...new Set(S.map((r) => r.server.chronicle))])}`);
-for (const r of S.filter((x) => x.server.differ)) { stops.push(`SERVER ${r.seed} differ ${r.server.differ}`); console.log(`  SERVER DIFFERS ${r.seed}: ${J(r.server.diff).slice(0, 400)}`); }
+const SC = {}; const SO = new Map();
+for (const r of S.filter((x) => x.server.differ)) for (const [t, d] of Object.entries(r.server.diff)) {
+  for (const l of d.lost) { bump(SC, `${t}|LOST`); stops.push(`SERVER LOST ${r.seed} ${t}: ${l.slice(0, 120)}`); }
+  for (const l of d.gained) { bump(SC, `${t}|GAINED`); stops.push(`SERVER GAINED ${r.seed} ${t}: ${l.slice(0, 120)}`); }
+  for (const l of d.moved || []) bump(SC, `${t}|MOVED`);
+  for (const [a, b] of d.changed) { const o = isOrder(a, b); bump(SC, `${t}|${o ? 'ORDER' : 'CHANGED'}`); if (o) { if (!SO.has(`${t}|${a}`)) SO.set(`${t}|${a}`, `${r.seed} ${a}  =>  ${b}`); } else stops.push(`SERVER CHANGED ${r.seed} ${t}: ${a.slice(0, 80)} => ${b.slice(0, 80)}`); }
+}
+console.log(`(F) SERVER by tab x class: ${J(SC)}`);
+console.log(`(F) SERVER ORDER lines, every distinct one (read each: does its meaning move with the order?): ${SO.size}`);
+for (const v of SO.values()) console.log(`  ORDER ${v.slice(0, 260)}`);
 
 // ── (N)
 const U = {}; // size|rv -> Set of signatures (the pool's universe: part A every setting, part B its nothing-hidden settings)

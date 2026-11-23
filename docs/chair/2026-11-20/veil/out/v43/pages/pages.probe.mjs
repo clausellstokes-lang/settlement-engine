@@ -281,7 +281,9 @@ it(`V43-PAGES (${MODE}) shard ${SHARD.join('/')}`, async () => {
   };
 
   if (MODE === 'F') {
-    const plan = W.censusPlan(W.BANKED_PREFIX, 1).map((r, i) => ({ ...r, i })).filter((r) => r.i % PICK === 0).filter((_, k) => k % SHARD[1] === SHARD[0]);
+    // PG_ONLY=<seed,...>: those births alone, the restore loop on each (the chair's N103: a kind the sampled births do not key)
+    const ONLY = process.env.PG_ONLY ? new Set(process.env.PG_ONLY.split(',').filter(Boolean)) : null;
+    const plan = W.censusPlan(W.BANKED_PREFIX, 1).map((r, i) => ({ ...r, i })).filter((r) => (ONLY ? ONLY.has(r.seed) : r.i % PICK === 0)).filter((_, k) => k % SHARD[1] === SHARD[0]);
     let dbInfo = null;
     for (const row of plan) {
       const t = { start: Date.now() }; const rec0 = { seed: row.seed, size: row.size, crisis: row.crisis, i: row.i };
@@ -297,9 +299,9 @@ it(`V43-PAGES (${MODE}) shard ${SHARD.join('/')}`, async () => {
         s0 = Date.now(); const v1 = await renderViews(P1, true); t.r1 = Date.now() - s0;
         const dv = diffViews(v0, v1); const items = itemsOf(dv);
         const out = { ...rec0, hiddenLeft, lines: { P0: Object.values(v0).reduce((a, l) => a + l.length, 0), P1: Object.values(v1).reduce((a, l) => a + l.length, 0) }, tabs: { P0: Object.keys(v0), P1: Object.keys(v1) }, diff: dv,
-          gov: { P0: govOf(P0, v0), P1: govOf(P1, v1) }, dm: dmSlotOf(rec, P1, v1), restoredBy: {}, cands: [], renders: 2 };
-        if (RESTORE && items.length && row.i % RESTORE_EVERY === 0) {
-          const cands = candidates(P0, P1); out.cands = cands;
+          gov: { P0: govOf(P0, v0), P1: govOf(P1, v1) }, dm: dmSlotOf(rec, P1, v1), restoredBy: {}, cands: [], renders: 2, restored: false };
+        if (RESTORE && items.length && (ONLY || row.i % RESTORE_EVERY === 0)) {
+          const cands = candidates(P0, P1); out.cands = cands; out.restored = true;
           const only = new Set(Object.keys(dv)); s0 = Date.now();
           for (const k of cands) {
             const Pk = pageOf(restore(clone(pre), P0, k));
