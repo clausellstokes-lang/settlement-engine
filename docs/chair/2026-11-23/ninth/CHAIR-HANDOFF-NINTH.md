@@ -226,6 +226,18 @@ SINCE N99 (N100): THE NEXT HOURLY CHECK IS trig_01EyMBZSjNWVfFfnudoLRSoY AT 14:1
 START MESSAGE ON THIS LANE (`prompts/DRAFT-START-VEIL-45.txt` chain C, `-46` the join, `-47` the doors, `-48` chain A):
 EACH IS FILLED AND PUSHED BEFORE ITS SESSION IS CREATED, AND A SUCCESSOR IS SEATED ONLY AFTER ITS PREDECESSOR HAS
 STOPPED, AT A STEP'S END, NEVER INSIDE A RUN.
+SINCE N100 (N101 TO N103): THE STANDING A SHARED PAGE PRINTS IS THE TABLE'S OWN SENTENCE FOR THE SERVED ROSTER, ON EVERY
+READ OF EVERY DOCUMENT (N101, N102): on a today-born document it equals the owner's page's on a read that hides
+nothing and the never-there page's on a hiding read; ON A MASTER-BORN DOCUMENT (every town stored before this
+release) IT DIFFERS FROM THE OWNER'S OWN PAGE (2,776 of 3,744 door-rows; 694 rows of about 936 on the old test
+towns), LISTED BY CLASS, NEVER A FAULT: SAID TO THE OWNER WITH HIS VETO; his later choice, not this release's: his own page reads the same line (task
+35). NO NEW SERVED FACT, NO LEGACY BRANCH IN THE PAGE'S READER. CHAIN A's BUILDER T5 HANDED BACK WITH NOTHING RUN (its
+mutex never named it between 11:13 and 13:23); its paper stops are ruled (N102 (2)); its MEASURES run after the
+rival's proof and SSKIP's deciding count, by a fresh builder or by VEIL-48, and come to the chair as counts before any
+cure. THE JOIN'S "PAGES" RUNS IN ITS 55-MINUTE FORM (N103); the chips' order it found is jsonb's key order on every
+stored read, the owner's own included: not the veil's. CHAIN B's "TONIGHT-2" RETURNED (57e847ce8): the id unit moves
+ONE "tonight" line on the owner's own page in 2 of 1,808 test towns. 13G's RED FIRST IS DONE; its cure goes through
+`rosterText.js`'s two settles (no veto, two conditions).
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2822,3 +2834,165 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   state; nothing needed of him; his open decision. SENT at the check: N99 to VEIL-41 (its proof carried to its "TIP?"
   on this session) and to VEIL-40 (never a hand-over inside a run; its own count and the step it can still end are
   owed).
+- 2026-11-23 13:45 UTC · N101 · THE STANDING RULE MADE EXACT (THE OWNER'S PAGE ON A READ THAT HIDES NOTHING, THE
+  NEVER-THERE PAGE ON A HIDING READ); CHAIN A's LOCK FREE AND THE RIVAL RUNNING; 13G's RED FIRST; CHAIN B's
+  "TONIGHT-2" RETURNED.
+  (1) CHAIN A's LOCK IS FREE AND THE RIVAL RUNS (VEIL-40 on N98, queued 13:14:06): DONE AT 13:08 UTC: its tests
+  builder's stored job S1 stopped by a plain TERM; the batch ended rc=1 at 13:08:29; R5D-RIVAL told GO (its runs
+  started 13:08); the log kept; what S1 had printed were figures the builder had already summed; nothing else lost; in
+  its PART 42. ON N99 (queued 13:14:35): its own count about 430,000 (an estimate); by it the seat can end "the pool
+  and both gates on the stacked tree" (the rival's diff read whole, its runs re-run, the merges, the pool and both
+  gates), and L1 probably; T5's and SSKIP's diff reads and the "TIP?" ARE ITS SUCCESSOR's (VEIL-48); it hands over
+  only at a step's end with its receipt pushed.
+  (2) R5D-SSKIP's FIRST MEASURE (VEIL-40, queued 13:20:20; the twin, the today-born stored pool, the owner's own
+  setting, both doors, Reveal off and DM; nothing edited): (i) HOLDS: the 6 faulting rows all have a seven-text base;
+  (ii) HOLDS: 70 rows carry one, 0 with a stored standing; 0 natural rows carry one; (iii) HOLDS ON READS THAT HIDE
+  NOTHING (0 other rows get a tail) AND FAILS ON HIDING READS: on 529 house and hand hides (2,116 door-reads) S writes
+  a standing on 508 OTHER rows whose stored description has none (t2p-town-none-76, a noble hand hide: Merchant Guilds
+  gets "They are always at the table, but cannot set their own terms."). ITS LEAN: on a hiding read the baseline is
+  the never-there page, not the stored description (a smaller roster changes the ranks). **Decided (N101), sent after
+  the clock read 13:20:45:** THE LEAN IS THE RULING AND MAKES N94 (3) EXACT: THE STANDING A SHARED PAGE PRINTS EQUALS,
+  ROW FOR ROW, THE OWNER'S PAGE'S ON A READ THAT HIDES NOTHING, AND THE NEVER-THERE PAGE'S ON A HIDING READ. A line S
+  writes that neither prints is a fault. (iii) is judged on reads that hide nothing; the 508 by THE DECIDING COUNT: of
+  the 508, how many equal the never-there page's description, by kind and template: all equal: the seven-skip stands
+  and the cure goes on; any unequal: STOP with three of them whole. A CAUTION: the never-there reference must itself
+  drop a rival whose host is gone (N63's closure), or it is equal by construction (the reader's row 28's fault).
+  **Why:** N94 (3) spoke of "the stored description" where it meant "the page the reader may compare with": on a
+  hiding read that page is the one where the hidden thing never was.
+  (3) THE FLIP, "13G" (CLOSE-6, queued 13:16:56): RED FIRST DONE: on 8f882d0f0 the new arm reds by name exactly: lit
+  dp-city-42, dp-metropolis-83, -111, -118; dark-by-config dp-city-42, dp-metropolis-111, -118; the old 13g arm
+  r2r-city-5; the tooth green. ITS BUILDER STOPPED on the seat's own brief error (`factionStanding.js` alone, while
+  the two re-annotations live in `rosterText.js`: `settleStandingToRoster` and `settleStandingToLegitimacy` hand the
+  writer roster copies and the legitimacy, never the rows); the seat widened the manifest to `rosterText.js` and the
+  rows' capture module (one exported predicate): the settles read the bought reading from the power structure they
+  hold and pass it to the standing read; the power step's first call untouched; a probe showed the re-annotation runs
+  after the rows turn bought on all 8 named births. **Decided, after the clock read 13:17:25:** NO VETO; TWO
+  CONDITIONS: the arm's own `tieBought` stays its own definition in the test (the judge is not the cure's predicate)
+  and one line of the arm shows the two agree on every birth of the 900; the standing writer's new input is named in
+  its header for every other caller, saying what a caller that passes nothing gets (today's lines, unchanged): THE
+  VEIL'S PAGE READER CALLS THE SAME WRITER OVER A SERVED ROSTER ("13G x S", owed to the join's seat with "LIT
+  <commit>").
+  (4) CHAIN B, "R4I-TONIGHT-2" RETURNED (VEIL-42, queued 13:20:07): `lane/veil-42-2026-11-23-tonight-wip` at
+  57e847ce8, pushed; its diff read whole by the seat, no fault (`castWantKeyOf(name)` is the name only, both callers;
+  `shareRenderTwice`'s ids named by the bijection and its TONIGHT arm with the twin as the projection;
+  `tonightSheetOnce` re-pinned by cause; `criminalSwitchSalt`'s extractor anchored). ITS FIGURES, places differing,
+  red then green: the twin twice 58 to 0 (the 140) and 729 to 0 (the pool); the server twice 61 to 0 and 719 to 0;
+  served against twin 58 to 0 and 723 to 0. "OWNER-MOVES": the 140: 0; THE POOL: 2 births, both monster_pressure
+  levers: "decide who gets the shelter..." becomes "share out the shelter..." ON THE OWNER'S OWN PAGE; no golden,
+  snapshot or register moved. `tests/lint` 51 = the tip's 48 and writerReach's 3. `tests/copy` 2 red (voiceMechanics
+  in `galleryRosterChoices.js` and `gallerySecondHomes.js`: not this builder's files): the seat checks whether they
+  stand at the tip or are R4-IDS's. TO SAY TO THE OWNER at the next hourly word: the id unit changes the wording of
+  one "tonight" line on his own page in 2 of 1,808 test towns.
+  (5) THE CHAIR'S PUSHES: the forty-third (8a87b8378: N100 and VEIL-47's draft) ended exit=0 at 13:16:49 UTC (its log;
+  ls-remote equal to the local tip).
+- 2026-11-23 13:45 UTC · N102 · ON A MASTER-BORN PAGE THE STANDING IS TODAY'S TABLE'S SENTENCE FOR THE SERVED ROSTER
+  (694 OF 936 ROWS DIFFER FROM THE OWNER'S PAGE: LISTED BY CLASS, NO NEW SERVED FACT); T5 HANDED BACK UNRUN: ITS PAPER
+  STOPS RULED.
+  (1) THE SEAT'S LINE (VEIL-40, queued 13:25:41, read 13:28:07): SSKIP on the MASTER-BORN stored pool: 0 rows with a
+  seven text; BUT on reads that hide nothing 140 OTHER rows whose master-written description carries no standing get
+  one from S; "whose are they, and what is the rule on a master-born page?"; its lean: by N101 a line the owner's page
+  lacks is a fault there too, cured by a new served fact or the chair's N94 lean. AND T5 HANDED BACK WITH NOTHING RUN.
+  READ BY THE CHAIR before ruling: `out/v40/sskip/SSKIP-HANDBACK.md` and both measure files at c2ddfd6b2
+  (`lane/veil-40-2026-11-23-sskip-wip`); `out/v40/t5/T5-HANDBACK.md` at b690dadd2 (`lane/veil-40-2026-11-23-t5-wip`);
+  master's writer (db832c892 `src/generators/power/factionStanding.js`); today's `rosterText.js :: standingRosterOf`
+  and `settleStandingToRoster`; reader S again at c2ddfd6b2 (`pageRederive.js` :261 to :295); ruling 72 (a) whole
+  (`briefs/R3-TELL-4-BRIEF.md` :38); `demandProfile.js :: computeDemandImports`.
+  (2) THE FACTS (SSKIP's first measure, the twin, both doors, Reveal off and DM). THE MASTER POOL (440 places born at
+  db832c892, read by this tree's S): reads that hide nothing: 860 door-pages (215 places by the chair's division by
+  the four door-reads), 3,744 door-rows (936 rows by the same division): 2,776 door-reads on 694 ROWS OF 214 PLACES
+  print another description than the stored one, every one with a base that is not one of the seven: A CROSS-ENGINE
+  COMPARISON (master's writer against today's), not the 48's class; of them 140 door-reads (35 rows) are "stored none,
+  S some" (t2p-village-politically_fractured-9 Elder Council; -19 Headman's Authority; t2p-village-insurgency-23 Elder
+  Council); hiding reads: 348 other (noble 82, density host 150, house hide 116; 89 record-rows, 62 places); rivals
+  346, none with a seven text (master predates them). THE TODAY POOL (440): 876 door-pages, 3,732 door-rows: 24
+  faulting door-reads on 6 rows, 6 places (the tests builder's six); 0 other. THE DECIDING COUNT is built, NOT RUN (it
+  waits for the lock; the builder's two measure runs were OUTSIDE the mutex: its own error, said by itself). WHAT THE
+  CODE SAYS: master's writer ranks on the power step's roster (rank 1 not governing, rank 2, the last rank under 7,
+  and the pair notes) and its sentence is NEVER settled to the final roster; today's birth settles it ("every text
+  that names a power reads the final roster"). On fractured-9 master's stored words put Elder Council first ("the gap
+  between them and the governing council is narrow" on the second row) while its stored figures put it third: S,
+  reading the figures the page shows, gives the first row none, the second "behind Religious Authorities by too much
+  to challenge openly", the third "always at the table".
+  (3) **Decided (N102 (1)), sent after the clock read 13:40:24:** THE 140 ARE NOT FAULTS AND NOT SSKIP's. THE RULE: ON
+  A SHARED PAGE THE STANDING IS THE TABLE'S OWN SENTENCE FOR THE SERVED ROSTER, ON EVERY READ OF EVERY DOCUMENT.
+  N101's first half (equal to the owner's page on a read that hides nothing) is the pin for TODAY-BORN documents,
+  where the stored sentence is the settled one. ON A MASTER-BORN DOCUMENT the difference from the owner's page is
+  LISTED BY CLASS, never a fault: same kind and slots / another kind or other slots / stored none, S some / stored
+  some, S none. THE SEAT'S LEAN AND THE CHAIR'S OWN N94 LEAN ARE BOTH REFUSED: no new served fact; `contestsNiche`
+  stays withheld; no legacy branch in S. ORDERED of SSKIP's builder, in the same lock turn as the deciding count: the
+  count on BOTH pools; and, master pool, reads that hide nothing, the 694 by those four classes with three whole
+  examples each; neither holds the seven-skip's cure. **Why:** (a) a fact of what the STORED description held is read
+  off the whole stored roster: on a hiding read it differs from the never-there page's, so serving it would tell; (b)
+  a page that kept master's silence on open reads and wrote today's line on hiding reads would word two reads of one
+  town differently: the wording would tell which read hides; (c) the server cuts every standing on every read (the
+  only form in which a hiding read and its never-there town are served alike), so the page can print master's sentence
+  on no read; (d) master's sentence was written before master's own roster settled: it can say of a row what its own
+  figures do not. It makes whole the eighth chair's "the same situation in today's words" (21:33 of 2026-11-22), which
+  judged a standing that exists. NOT CHOSEN, AND WHY: (W) no standing at all on a master-born shared page (the page
+  would have to know the birth's law from a served stamp: a build inside a unit at its proof, and a visitor of an old
+  town loses every such line); (U) the owner's OWN page also reads the standing through S, so that both pages always
+  agree: it changes what every old town prints on its maker's page: THE OWNER'S CHOICE, offered to him as a later
+  step, not this release's. SAID TO THE OWNER in plain words with the count and his veto. THE READER'S ROW 35 IS
+  WRITTEN WITH THIS ENTRY; the draft of VEIL-48's start message carries the rule in its (d).
+  (4) T5 (R3-TELL-5 units (iv), (v), (vi)): ITS BUILDER HANDED BACK AT ITS WINDOW WITH NOTHING RUN: "the mutex never
+  named T5 between 11:13 and 13:23"; WIP 58cf00f6c and b690dadd2 pushed: the instruments re-pointed
+  (`out/v33/q/measure/`: `q-chain.sh tpl|smoke|towns|pool|insurg|an`), the (v)(1) arm and the (vi) teeth written, the
+  (v)(1) cure drafted, not applied; 212 unchanged. ITS PAPER (PLAUSIBLE, from stored births): (iv) likely nothing to
+  cure (on 117 and 136 every row but N88's four controls names the withheld Thieves' Guild); (v)(3) a stop under N88
+  (0-14's two criminal imports are one good each for the Thieves' Guild, withheld, and the governing Corrupt Council;
+  the house-free twin serves both); (v)(2) likely a stop (0-23's only tension is a crime_wave naming the withheld
+  guild; its served crime signal is false, so 212's crimeWave rule would take any crime_wave sent); the join's red on
+  hxd-city-138 is plausibly that same rule; on 113 and 62 the "beneath" clause is ALSO stored in
+  `publicProse.blocks.defense:state.publicOrder.field` and `firstSurvey.field` (served or not: unmeasured). **Decided
+  (N102 (2)):** T5 STAYS CHAIN A's: a fresh builder FOR THE MEASURES ONLY when the lock is free, if the seat's own
+  count allows; else its successor's first builder; the order after the rival's runner: SSKIP's count, then T5's
+  measures; THE MEASURES COME TO THE CHAIR AS COUNTS BEFORE ANY CURE. (iv): if the towns measure confirms: nothing to
+  cure; the four controls stay lower by rule. (v)(3): N88's STOP IS LIFTED: the house-free twin shows the Thieves'
+  Guild, this read withholds it, and each qualifying power, by power, takes ONE good (the first of its category's list
+  not yet taken), so the second good is the withheld power's own; ruling 72 (a) (3) runs MADE JOINT: a member only if
+  two or more of the 300 show several criminal imports BESIDE ONE criminal power on the page's roster (both counts
+  said: the family alone, and joint); else the second criminal import is withheld, red first. (v)(2): ruling 72 (a)
+  (2)'s SENT crime_wave IS WITHDRAWN where the served crime signal is false: the crimeWave rule stands; THE MEASURE
+  DECIDES: births that hide nothing, of town size, whose page shows an EMPTY tensions list, and the tension types that
+  no-signal births hold: a handful or more empty: a member, nothing built; fewer: a STOP with the counts; any later
+  statement there is THE LAST over the tensions list in both engines, cleared by the chair against chain C's
+  "R5-TENSION" first (T5's would sit right after 212 `_gallery_veil_roster_choices`' crimeWave block and the twin's
+  line; R5-TENSION touches `_gallery_veil_withhold_always`'s masked-party statement or the copy pass's tension filter:
+  no shared hunk, an interaction by order). (v)(1): as 72 (a) (1), red first, after its precondition count; `bnAt` by
+  path on 113 and 62: A SERVED COPY IN `publicProse` IS A STOP (chain C's unit owns that key). (vi): as written. **Why
+  (v)(3):** the stop of N88 was set for a cure that would hide what the right reference shows; the right reference for
+  a read that withholds the guild is the page where the guild never was, and there the criminal row gives one good.
+  **Why joint:** an open town with two criminal powers shows two such goods beside two criminal powers; this page
+  shows one. **Why (v)(2):** a crime wave on a page with no visible crime is what the later rule forbids; the earlier
+  ruling's sent form contradicts it. SENT TO VEIL-43 too (one fact for REDS-CAUSE: if hxd-city-138's red is that rule,
+  the cure it proposes is on the test's side; the paper reading is not a finding).
+- 2026-11-23 13:45 UTC · N103 · THE JOIN: "REDS" WHOLE (FIVE NEW FILES); "PAGES" IN ITS 55-MINUTE FORM; THE CHIPS'
+  ORDER IS jsonb's, NOT THE VEIL's.
+  (1) "REDS" WHOLE, CLASSED BY RUN (VEIL-43, queued 13:31:08). THE LANE'S TIP 23bb8b8ae: `tests/security` 584 files 0
+  red; the named files 1 red (VS1's tooth, PIN-3's). THE LINE'S TIP 9b0ffaa97: the same named files 0 red (180 files,
+  906 tests). THE JOIN 9e6547f0f: `tests/lint` 65 = the tip's 48 + the line's 3 + the worklist's 12 + 1 by consequence
+  + 1 NEW (`transferTakerOf`, to unit (2)'s sites); the named files 8 = the lane's 1 + the join's 7:
+  `publicProseEquality` 3 (the line's walker against the lane's served prose: N49's re-statement at the join, known),
+  `troubleHooksShared` 1 (E75 (c)'s arm, known) and the NEW 3 (`fortuneLawMerits` U5a (S), `fortuneLastingSentence`
+  U7b (d), `tensionCause` CAUSES-PARITY-2 F); `tests/security` 3, all `traditionDescriptionSharedPage` TRAD-2 UNIT 2.
+  THE JOIN'S NEW REDS ARE FIVE FILES (with `recentConflictReaders`); everything else is the line's, the lane's or the
+  worklist's. Its order now: PAGES, NAMES, REDS-CAUSE.
+  (2) "PAGES" COST (queued 13:37:14; the builder's timing in the mutex 13:32 to 13:36): the walk takes the read-only
+  view as it stands (`walkDossier` unchanged; `OutputContainer` readOnly, playerView = !shareDm, as
+  `PublicDossierView.jsx` renders it; 18 tabs). Ten (F) births 158 s on one shard (70% the restore-one-key loop, about
+  22 re-renders a birth with a differing line); five (N) towns 130 s. WHOLE on four shards about 100 minutes of its
+  mutex. **Decided (N103), sent after the clock read 13:42:21:** THE 55-MINUTE SPLIT (the restore loop on every fourth
+  birth, 180; the classes on all 720; (N) whole). ONE CONDITION: every distinct differing line kind seen on the 720
+  (tab and label) ends with a causing key: where the sampled 180 do not show a kind, the loop runs on up to three
+  births that do. **Why:** every LOST, GAINED and CHANGED line is still counted on all 720; the causing key is an
+  attribution, and no kind may be left without one.
+  (3) A FINDING IN THE COST SAMPLE, NOT THE VEIL's: the server's page differs from the twin's on 3 of 10 sampled
+  places, 4 lines: an institution card's Services chips in another order ("Lodging, Meals and drink" against "Meals
+  and drink, Lodging"). READ BY THE CHAIR: `supabase/migrations/001_initial_schema.sql` :33: `settlements.data jsonb`:
+  every stored town, the owner's own saved one included, comes back with its object keys in jsonb's order; the twin
+  reads a birth in memory, in insertion order: IT SEPARATES "IN MEMORY" FROM "STORED", NOT "OWNER" FROM "READER", and
+  it is as old as the first migration. **Decided:** PAGES counts it in a class of its own, "ORDER" (the same tokens,
+  another order), apart from CHANGED, on the server sample; one line names the component and function that prints in
+  key order; an ORDER line whose MEANING moves with the order (a first-named party, a rank) is sent to the chair at
+  once; nothing is built for it in the join: a worklist display nit (the page states one order). Chain B's
+  whole-document form (sorted keys) cannot see it, by design (N90). No GAINED line so far; the owner-only slot 0.
