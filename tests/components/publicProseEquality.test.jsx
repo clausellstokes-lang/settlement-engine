@@ -15,6 +15,16 @@
  *
  * And RULE 1 rendered: an UNSTAMPED record (a save not yet re-published) prints none of the
  * shipped sentences — silence, never a re-draw.
+ *
+ * ── RE-STATED: VEIL-41 C2-BUILD (a') (2707d6829, the chair's N49, N72 (1), N78) ──────────
+ * A SHARED READ SERVES NO publicProse; THE OWNER'S READ PRINTS ITS OWN. Both engines now drop
+ * the key on every non-owner read (212 :: _gallery_veil_withhold_always, galleryWithholdAlways.js
+ * :: withholdAlways), so the shared page prints no shipped sentence. Every arm above is re-stated
+ * to that truth and keeps a liveness anchor: the owner's page still prints its prose lines
+ * (counted > 0, read from the projection BEFORE the veil, `toPublicSafe(withPublicProse(...))`),
+ * and the served shared read carries no `publicProse` key and prints none of those lines, but for
+ * the LOCAL lines named below (a shared tab's own draw from served fields that happens to equal
+ * a composed string; each counted live on the twelve).
  */
 import React from 'react';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
@@ -35,6 +45,8 @@ import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import { stressorsDeskRead } from '../../src/components/new/stressorsDeskRead.js';
 import { overviewStressesOf, criminalStructureOf } from '../../src/components/new/deskHostArgs.js';
+import { shadowCaptureShown } from '../../src/domain/display/shadowEconomyShown.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defenseDeskRead.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
@@ -100,6 +112,38 @@ const SITES = {
   viability: ['general:viability'],
 };
 
+/**
+ * THE LOCAL LINES (VEIL-41 (a')): with no publicProse served, a shared tab still prints its own draw
+ * from served fields, and a few of those lines equal a composed string. They are named here by their
+ * source, never by the line; each is counted live on the twelve below.
+ *   economics: EconomicsTab.jsx's Shadow Economy card, its scale note by the served
+ *     `economicState.safetyProfile.blackMarketCapture` (shadowCaptureShown), three bands;
+ *   defense: the served `economicState.safetyProfile.safetyDesc` and `.guardEffectivenessDesc`,
+ *     printed verbatim, and the Defense tab's ring note `criminalStructureOf(shared).note`.
+ * @type {Record<string, (shared: any) => string[]>}
+ */
+const SHADOW_SCALE_NOTES = [
+  'Much of the trade here is never taxed, so the duties come in far short and those who pay their dues are undersold by traders who pay none.',
+  'A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.',
+  'Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.',
+];
+const LOCAL = {
+  economics: (s) => (shadowCaptureShown(s?.economicState?.safetyProfile) == null ? [] : SHADOW_SCALE_NOTES),
+  defense: (s) => [
+    s?.economicState?.safetyProfile?.safetyDesc,
+    s?.economicState?.safetyProfile?.guardEffectivenessDesc,
+    criminalStructureOf(s)?.note,
+  ].filter((x) => typeof x === 'string' && x !== ''),
+};
+/** Is this composed string a LOCAL line of the tab's shared draw (part of a named local source)? */
+const isLocal = (tab, shared, str) => (LOCAL[tab]?.(shared) ?? []).some((line) => line.includes(str));
+
+/** Every sentence-length string the projection carries, every site, at any depth. */
+function composedStrings(record) {
+  const blocks = record?.publicProse?.blocks || {};
+  return [...new Set(Object.keys(blocks).flatMap((site) => shippedStrings(record, site)))];
+}
+
 /** Every string in a shipped site, at any depth. */
 function shippedStrings(record, site) {
   const out = [];
@@ -111,7 +155,7 @@ function shippedStrings(record, site) {
   return out;
 }
 
-/** @type {Record<number, {owner: any, shared: any, unstamped: any}>} */
+/** @type {Record<number, {owner: any, projected: any, shared: any, unstamped: any}>} */
 const towns = {};
 beforeAll(async () => {
   await ensureLaws();
@@ -123,8 +167,11 @@ beforeAll(async () => {
     // src/domain/veil/pageRederive.js, `unveiled`: the share carries no veil). R2-CURE (the chair's ruling of 04:27 UTC):
     // the comparison is with the OWNER'S OWN RECORD, unaltered; the page draws what the owner's page draws, by identity
     // (R2 had compared it with the owner's record less the black market's capture, which moved the owner's law band)
+    // VEIL-41 (a'): `projected` is the projection BEFORE the veil, where the lines still ship (the owner's composed
+    // prose, counted there); `shared` is the served read, which carries no publicProse key
     towns[i] = {
       owner,
+      projected: toPublicSafe(stamped),
       shared: rederiveForPage(projectShareVeil(toPublicSafe(stamped), null), { unveiled: true }),
       unstamped: projectShareVeil(toPublicSafe(owner), null),
     };
@@ -141,35 +188,59 @@ function proseLines(element) {
   return lines;
 }
 
-describe('the shared page prints the owner\'s player view, line for line', () => {
+/** The owner's composed strings (the projection before the veil) that the owner's page of this tab prints. */
+function ownerProseOn(tab, { owner, projected }) {
+  const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
+  return composedStrings(projected).filter((str) => a.includes(str));
+}
+
+describe('a shared read serves no publicProse; the owner\'s read prints its own (VEIL-41 (a\'), re-stated from "line for line")', () => {
   for (const tab of COMPLETE) {
-    it.each(TOWNS)(`${tab}, soak1k-%i: every owner player-view line is on the shared page`, (i) => {
-      const { owner, shared } = towns[i];
+    it.each(TOWNS)(`${tab}, soak1k-%i: the owner's page prints its lines; the served shared read carries no publicProse key and prints none of its prose`, (i) => {
+      const { owner, projected, shared } = towns[i];
       const veiled = VEILED[tab] ?? (() => false);
       const a = proseLines(TABS[tab](owner, { playerView: true })).filter((line) => !veiled(line));
-      const b = new Set(proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })));
+      const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
       expect(a.length).toBeGreaterThan(0);
-      expect(a.filter((line) => !b.has(line))).toEqual([]);
+      expectPresentThenAbsent(Object.keys(projected), Object.keys(shared), 'publicProse', `${tab}, soak1k-${i}: the key leaves on the served read`);
+      // anchored: ownerProseOn is counted > 0 per tab on the twelve in the arm below, so an empty list is a judgment
+      expect(ownerProseOn(tab, towns[i]).filter((str) => b.includes(str) && !isLocal(tab, shared, str))).toEqual([]);
+    });
+    it(`${tab}: not vacuous, the owner's page prints its composed prose on the twelve`, () => {
+      const hits = TOWNS.reduce((n, i) => n + ownerProseOn(tab, towns[i]).length, 0);
+      expect(hits).toBeGreaterThan(0);
     });
   }
+  it('the LOCAL lines are live: each named local source prints on the shared page somewhere on the twelve, and only there', () => {
+    for (const tab of Object.keys(LOCAL)) {
+      const hits = TOWNS.filter((i) => {
+        const b = proseLines(TABS[tab](towns[i].shared, { publicDossier: true, playerView: true })).join('\n');
+        return ownerProseOn(tab, towns[i]).some((str) => b.includes(str) && isLocal(tab, towns[i].shared, str));
+      });
+      expect(hits.length, `${tab}: a LOCAL source the shared page prints`).toBeGreaterThan(0);
+    }
+  }, 120_000);
 });
 
-describe('each lit family: what the owner\'s player view prints from it, the shared page prints', () => {
+describe('each lit family: what the owner\'s player view prints from it, the served shared read does not (VEIL-41 (a\'))', () => {
   for (const [tab, sites] of Object.entries(SITES)) {
     it.each(TOWNS)(`${tab} (${sites.join(', ')}), soak1k-%i`, (i) => {
-      const { owner, shared } = towns[i];
+      const { owner, projected, shared } = towns[i];
       const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
       const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
-      const printed = sites.flatMap((site) => shippedStrings(shared, site)).filter((str) => a.includes(str));
-      expect(printed.filter((str) => !b.includes(str))).toEqual([]);
+      // the site's lines as they ship on the projection BEFORE the veil; the served read carries none
+      const printed = sites.flatMap((site) => shippedStrings(projected, site)).filter((str) => a.includes(str));
+      expect(sites.flatMap((site) => shippedStrings(shared, site))).toEqual([]);
+      // anchored: the family arm below counts each site's printed lines > 0 on the twelve, so an empty list is a judgment
+      expect(printed.filter((str) => b.includes(str) && !isLocal(tab, shared, str))).toEqual([]);
     });
   }
-  it('the family arm is not vacuous: every lit site prints somewhere on the twelve', () => {
+  it('the family arm is not vacuous: every lit site prints on the owner\'s page somewhere on the twelve', () => {
     for (const [tab, sites] of Object.entries(SITES)) {
       for (const site of sites) {
         const hits = TOWNS.filter((i) => {
           const a = proseLines(TABS[tab](towns[i].owner, { playerView: true })).join('\n');
-          return shippedStrings(towns[i].shared, site).some((str) => a.includes(str));
+          return shippedStrings(towns[i].projected, site).some((str) => a.includes(str));
         });
         expect(hits.length, `${tab} :: ${site}`).toBeGreaterThan(0);
       }
@@ -219,14 +290,15 @@ function drawnStrings(desk) {
   return out;
 }
 
-describe('each later family, from the owner\'s own draw: what the owner\'s player view prints, the shared page prints', () => {
+describe('each later family, from the owner\'s own draw: what the owner\'s player view prints, the served shared read does not (VEIL-41 (a\'))', () => {
   for (const [site, { tab, draw }] of Object.entries(DRAWN)) {
     it.each(TOWNS)(`${site} on ${tab}, soak1k-%i`, (i) => {
       const { owner, shared } = towns[i];
       const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
       const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
       const printed = drawnStrings(draw(owner)).filter((str) => a.includes(str));
-      expect(printed.filter((str) => !b.includes(str))).toEqual([]);
+      // anchored: the not-vacuous arm beside this one counts the owner's printed draw > 0 on the twelve, so an empty list is a judgment
+      expect(printed.filter((str) => b.includes(str) && !isLocal(tab, shared, str))).toEqual([]);
     });
     it(`${site}: not vacuous, the owner's page prints its draw on the twelve`, () => {
       const hits = TOWNS.filter((i) => {
@@ -238,16 +310,19 @@ describe('each later family, from the owner\'s own draw: what the owner\'s playe
   }
 });
 
-describe('RULE 1, rendered: an unstamped record prints silence where the desk speaks', () => {
-  it.each(TOWNS)('economics, soak1k-%i: the shipped-only lines are absent from the unstamped page', (i) => {
-    const { owner, shared, unstamped } = towns[i];
-    const lit = new Set(proseLines(TABS.economics(shared, { publicDossier: true, playerView: true })));
-    const dark = new Set(proseLines(TABS.economics(unstamped, { publicDossier: true, playerView: true })));
-    const ownerLines = proseLines(TABS.economics(owner, { playerView: true }));
-    const shippedOnly = ownerLines.filter((line) => lit.has(line) && !dark.has(line));
-    // anchored: the lit page carries desk lines the dark one lacks, so the absence is not vacuous
+describe('RULE 1, rendered: an unstamped record prints silence where the desk speaks; with (a\') the stamped share does too', () => {
+  it.each(TOWNS)('economics, soak1k-%i: the shipped-only lines are absent from the unstamped page and from the served stamped share', (i) => {
+    const { owner, projected, shared, unstamped } = towns[i];
+    const lit = proseLines(TABS.economics(shared, { publicDossier: true, playerView: true })).join('\n');
+    const dark = proseLines(TABS.economics(unstamped, { publicDossier: true, playerView: true })).join('\n');
+    const a = proseLines(TABS.economics(owner, { playerView: true })).join('\n');
+    // VEIL-41 (a'): the shipped-only lines are the owner's composed strings (the projection before the veil), LOCAL ones aside
+    // (each page's LOCAL lines read from its own served fields: the page re-derives the capture the server withholds)
+    const shippedOnly = composedStrings(projected).filter((str) => a.includes(str));
+    // anchored: the owner's page prints its shipped lines on every town, so the absence below is not vacuous
     expect(shippedOnly.length).toBeGreaterThan(0);
-    expect([...dark].filter((line) => shippedOnly.includes(line))).toEqual([]);
+    expect(shippedOnly.filter((str) => dark.includes(str) && !isLocal('economics', unstamped, str))).toEqual([]);
+    expect(shippedOnly.filter((str) => lit.includes(str) && !isLocal('economics', shared, str))).toEqual([]);
   });
 });
 
@@ -318,21 +393,29 @@ describe('general:steadings stays SILENT on the shared page in this wave (the ch
   });
 });
 
-describe('the dossier search prints a found shipped block verbatim (SW-B7b item 3)', () => {
-  it.each([0, 4])('soak1k-%i: a defense lens line on the shared page renders as one paragraph of the carried text', async (i) => {
+describe('the dossier search prints a found shipped block verbatim (SW-B7b item 3); the served shared read ships none (VEIL-41 (a\'))', () => {
+  it.each([0, 4])('soak1k-%i: a defense lens line renders as one paragraph of the carried text where the block is carried, and is not found on the served shared read', async (i) => {
     const { default: DossierSearchResults } = await import('../../src/components/dossier/DossierSearchResults.jsx');
-    const { shared } = towns[i];
-    const desk = /** @type {any} */ (publicProseOf(shared, 'defense:threat')) || {};
+    const { projected, shared } = towns[i];
+    // the line as it ships on the projection BEFORE the veil (the mechanism's own record)
+    const desk = /** @type {any} */ (publicProseOf(projected, 'defense:threat')) || {};
     const line = desk.beasts?.sentence || desk.invasion?.sentence;
     expect(line).toBeTruthy();
-    const { container, unmount } = render(
-      <DossierSearchResults settlement={shared} query={line} tabs={[{ id: 'defense', label: 'Defense' }]}
-        publicDossier playerView onOpenTab={() => {}} />,
-    );
-    const found = [...container.querySelectorAll('[data-search-object="prose"] p')].map((p) => p.textContent);
-    unmount();
+    const search = (record) => {
+      const { container, unmount } = render(
+        <DossierSearchResults settlement={record} query={line} tabs={[{ id: 'defense', label: 'Defense' }]}
+          publicDossier playerView onOpenTab={() => {}} />,
+      );
+      const found = [...container.querySelectorAll('[data-search-object="prose"] p')].map((p) => p.textContent);
+      unmount();
+      return found;
+    };
+    const carried = search(projected);
     // NO NEW WORDS: the paragraph is the carried strings, and the query's line is among them.
-    expect(found.length).toBe(1);
-    expect(found[0]).toContain(line);
+    expect(carried.length).toBe(1);
+    expect(carried[0]).toContain(line);
+    // anchored: the same search finds the line where the block is carried (above); the served read carries no block
+    expect(publicProseOf(shared, 'defense:threat')).toBe(null);
+    expect(search(shared)).toEqual([]);
   });
 });
