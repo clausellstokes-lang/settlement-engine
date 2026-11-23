@@ -50,10 +50,12 @@ value for value, no bijection, at the tip.
   `get_gallery_map` never runs `_gallery_apply_member_overrides` (the covert CASE's one home). Gallery, import, link: 0. WIDENED (08:55: "MAP-COVERT", IMPORT-DOOR's cure): `import_gallery_map` hands the same member
   (1 place: all three markers, Reveal off); `get_unlisted_map` hands no member; table (e) of what the member lacks: row 1,
   212 :: `_gallery_apply_member_overrides` (:3078; covert CASE :3086-3094). Both full sets queued (umtoday, ummaster).
+- U MASTER-BORN READ: 0 places with a covert copy (no stored tie of master's is flagged `covert`): 0 on every door.
 - U TODAY-BORN READ: map member, map page and import_gallery_map serve the covert copy on 7 of 7 places at every marker, Reveal off;
   gallery/import/link 0 at Reveal off; the unmarked gallery row has no served marker (140/140) and its data no covert copy (0/7).
-- M-TWIN (`M-TWIN.md`): THE 140: 6,720 projection reads (gallery + link), (i) 0, (ii) 0, (iii) 0, unmapped 0. NO STOP. Pool queued.
-- B: `B-WHOLEDOC.md` (not yet read).
+- M-TWIN (`M-TWIN.md`): THE 140: 6,720 projection reads (gallery + link), (i) 0, (ii) 0, (iii) 0, unmapped 0. NO STOP. The master-born set: 6,720 reads, 0/0/0/0. The pool: DROPPED (N90).
+- B: DROPPED by the chair's ruling N90 (11:44 UTC: the whole-document form is ruled into every unit's proofs, with this unit's
+  instrument as it stands; `meas.probe.jsx`, `meas-an.mjs`, `meas.sh` FROZEN as the lane's instrument). bt140, bm140, bpool not run.
 
 ## LEFT (exact commands)
 - The chain: `sh docs/chair/2026-11-20/veil/out/v42/meas/chain.sh [step ...]` from `/home/user/wt/meas` (steps a7 ctrl

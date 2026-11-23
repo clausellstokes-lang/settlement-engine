@@ -1,0 +1,62 @@
+documents 140; all done true; faults 0
+U: documents read unmarked at Reveal off: 140; whose stored prominentRelationship is a covert copy: 0; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 140 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":140,"get_gallery_dossier marker | default | off | served marker":140,"get_gallery_dossier marker | hand | off | served marker":140,"get_gallery_dossier marker | unmarked | DM | NO served marker":140,"get_gallery_dossier marker | default | DM | served marker":140,"get_gallery_dossier marker | hand | DM | served marker":140}
+M (on the projection): documents 140, reads 6720; owner pages' cast persons 366 (nameless 0, no card 0, shared keys 0); served cast person-reads 17568
+  (i) shared (name, crisis, role) keys: 0; (ii) served name differs: 0; (iii) nameless: 0; unmapped served cast ids: 0
+  gallery twin: {"reads":3360,"i":0,"ii":0,"iii":0,"unmapped":0}
+  link twin: {"reads":3360,"i":0,"ii":0,"iii":0,"unmapped":0}
+  STOPS listed: 0

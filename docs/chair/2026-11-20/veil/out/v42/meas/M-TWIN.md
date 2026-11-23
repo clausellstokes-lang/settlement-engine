@@ -5,7 +5,9 @@ SUMMARY
    (gallery twin 3,360 = 140 x Reveal off/DM x 12 settings; link twin 3,360, the same settings), 17,088 served cast person-reads;
    the owner pages' 356 cast persons (nameless 0, no card 0, shared keys 0). (i) shared (name, crisis, role) 0; (ii) served name
    differs 0; (iii) nameless 0; unmapped served cast ids 0. NO STOP.
-2. THE POOL (`umpool`): below when read. The master-born set (`ummaster`, beside U): below when read.
+2. THE MASTER-BORN SET (`ummaster`, 11:35-11:43 UTC, `logs/ummaster-table.txt`): 6,720 projection reads (gallery 3,360, link 3,360),
+   17,568 served cast person-reads; owner pages' 366 cast persons (nameless 0, no card 0, shared keys 0): (i) 0, (ii) 0, (iii) 0,
+   unmapped 0. NO STOP. THE POOL: DROPPED by the chair's ruling N90 (11:44 UTC: the owner's question is about stored pages).
 3. INSTRUMENT: `um.probe.jsx`, M's `castPersons`, `shared` and `judge` verbatim (`out/v38/r4it/tonight-names.probe.jsx`), on
    `projectShareVeil(galleryPayloadFor(rec, { shareDm, memberOverrides: ov }), ov)` and on `linkTwinOf(rec, ov)` (its definition
    verbatim), the projection's salt fixed by stubbing `crypto.randomUUID` (`galleryVeilPeople.js :: readSalt`), so every served id maps

@@ -11,7 +11,9 @@ SUMMARY (10 lines)
    its served `data` carries NO covert copy (0 of 7), and `fetchPublicDossier`'s unserved branch adds none (0 of 7): it can only keep
    what was sent. For the map doors the answer is the fault: sent, and kept by the page.
 5. CAUSE (read, table (e)): the map member never runs 212 :: `_gallery_apply_member_overrides` (the covert CASE :3086-3094).
-6. MASTER-BORN SET: below when read (`ummaster`).
+6. MASTER-BORN SET (`ummaster`, 140 places): 0 places carry a covert copy to serve: no stored tie of master's is flagged `covert`
+   (0 of 140 documents; master's generator writes no such flag), so the covert CASE has nothing to drop on any door, and no door
+   serves a covert copy (0 reads on every door, marker and Reveal). The unmarked gallery row: NO served marker, 140 of 140.
 
 1. FIRST READING (a trial of two of the 7 places, today-born set, `logs/trial-U-2of7-table.txt`; the full sets below when run):
    the MAP MEMBER (`get_gallery_map` members[].settlement) SERVES THE COVERT TIE'S COPY in `prominentRelationship`, byte-equal to
@@ -75,3 +77,12 @@ Reads (of the 7 covert places' 7 a cell) carrying the stored covert `prominentRe
 The gallery row's served marker: unmarked 140 of 140 NO served marker (off and DM); default and hand 140 of 140 served marker.
 Example (r3m-city-none-1-107, unmarked, Reveal off, the map member): `prominentRelationship.full` = "Jaguar Claw Tut visits Xiuhcoatl Chel
 after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next." (the stored covert tie's copy).
+
+## THE MASTER-BORN SET (`ummaster`, 11:35-11:43 UTC, `logs/ummaster-table.txt`; 140 places x 3 markers x Reveal off/DM)
+Places whose stored `prominentRelationship` is a covert copy by the twin's rule: 0; whose `pressureSentence` tells a dropped tie: 0.
+WHY (read off the documents, node over `/var/tmp/v18/out/v42/stored-master`): 0 of 140 documents hold a tie with `covert: true`
+(master's tie keys: type, typeName, description, tension, strength, npc1Id, npc2Id, npc1Name, npc2Name, npc1Role, npc2Role,
+archetypeKey, proseVariant, flagDriven); the public projection drops no tie (`publicSafe.js :: sanitizePublicValue` drops `covert`
+exactly true), so no copy is a dropped tie's. `prominentRelationship` is stored in 87 documents and present (as a key) on every door's
+body at Reveal off, 140 of 140, the map doors and the gallery read ALIKE: no door differs from another here. MAP-COVERT: 0 reads.
+The gallery row's served marker: unmarked 140 of 140 NO served marker (off and DM); default and hand 140 of 140 served marker.
