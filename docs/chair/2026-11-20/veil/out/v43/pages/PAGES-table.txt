@@ -1,0 +1,532 @@
+ROWS 812: (F) 720 births (errors 0), (N) 92 towns (errors 0)
+
+(F) 720 births, P0 lines 753863, P1 lines 751899, renders 8728; hand marker left something hidden on 0 births
+(F) TOTAL lost 1969 / gained 5 / changed 1378 / order 2 / moved 475 over 753863 P0 lines
+(F) pairs made on a short label (6 to 11 characters): 843 | r2r-city-49 Summary/Foundations: Law & orderAdequate => Law & orderSurplus | r2r-metropolis-26 Summary/Foundations: Law & orderStrained => Law & orderAdequate | r2r-thorp-55 Summary/Foundations: Law & orderCritical => Law & orderStrained
+(F) tabs only on P0 {} | only on P1 {}
+(F) GAINED (a bare share figure): {"Systems/Power|GAINED (a bare share figure)|other:powerStructure":4,"Systems/Power|GAINED (a bare share figure)|UNSAMPLED":1}
+(F) THE SHARE TILES MOVE (a veiled read with nothing hidden against the owner's public read; Power tab): 9 births (r2r-metropolis-29, r2r-village-48, r2s-infiltrated-city-0, r2s-infiltrated-city-2, r2s-infiltrated-city-3, r2s-infiltrated-metropolis-0, r2s-infiltrated-metropolis-3, r2s-infiltrated-village-0, r2s-infiltrated-village-2); lines by class {"LOST":2,"GAINED":5,"CHANGED":88}
+  TILE (bare figure)#                       lost 2 gained 5 changed 21 | keys {"other:powerStructure":23,"UNSAMPLED":5}
+  TILE Contests the seat<category>#▼        lost 0 gained 0 changed 17 | keys {"other:powerStructure":16,"UNSAMPLED":1}
+  TILE Contests the seat<category>#▲        lost 0 gained 0 changed 17 | keys {"other:powerStructure":16,"UNSAMPLED":1}
+  TILE ↑ Holds power<category>#▲            lost 0 gained 0 changed 9 | keys {"other:powerStructure":7,"UNSAMPLED":2}
+  TILE ↑ Holds power<category>#▼            lost 0 gained 0 changed 8 | keys {"other:powerStructure":6,"UNSAMPLED":2}
+  TILE <category>#▼                         lost 0 gained 0 changed 8 | keys {"other:powerStructure":6,"UNSAMPLED":2}
+  TILE <category>#▲                         lost 0 gained 0 changed 8 | keys {"other:powerStructure":6,"UNSAMPLED":2}
+(F) BY TAB x CLASS
+  Systems/Economics|LOST                           1258
+  Systems/Power|CHANGED                            668
+  Systems/Power|LOST                               558
+  Summary/Foundations|CHANGED                      465
+  Summary/Foundations|MOVED                        434
+  World/Daily Life|CHANGED                         217
+  Summary/Overview|LOST                            144
+  Systems/Power|MOVED                              41
+  Systems/Defense|CHANGED                          27
+  World/Daily Life|LOST                            9
+  Systems/Power|GAINED                             5
+  World/Daily Life|ORDER                           2
+  Systems/Magic|CHANGED                            1
+(F) BY CLASS x KEY (the narrowest single key that restores the line; JOINT = none alone)
+  LOST|UNSAMPLED                                               823
+  LOST|safety.capture/ratio/crimeTypes                         800
+  CHANGED|UNSAMPLED                                            678
+  CHANGED|power.stability                                      267
+  CHANGED|safety.capture/ratio/crimeTypes                      183
+  LOST|legitimacy.multipliers/flags                            120
+  LOST|power.factions.niche/rawPower/legitimacyCrisis          120
+  CHANGED|history.legacy/siegeNarrative                        97
+  CHANGED|other:powerStructure                                 75
+  LOST|power.recentConflict                                    63
+  CHANGED|conditions.severity                                  48
+  LOST|other:prominentRelationship                             33
+  CHANGED|defence.readiness.score                              21
+  LOST|history.legacy/siegeNarrative                           6
+  CHANGED|conditions.severity|history.legacy/siegeNarrative    5
+  GAINED|other:powerStructure                                  4
+  LOST|other:powerStructure                                    2
+  LOST|conditions.severity                                     2
+  CHANGED|legitimacy.multipliers/flags                         2
+  ORDER|conditions.severity                                    2
+  CHANGED|JOINT                                                2
+  GAINED|UNSAMPLED                                             1
+(F) CHANGED: HOW x KEY
+  words dropped|UNSAMPLED                                      375
+  reworded|UNSAMPLED                                           288
+  words dropped|power.stability                                267
+  reworded|safety.capture/ratio/crimeTypes                     183
+  a figure|other:powerStructure                                72
+  words dropped|history.legacy/siegeNarrative                  71
+  reworded|conditions.severity                                 41
+  reworded|history.legacy/siegeNarrative                       26
+  reworded|defence.readiness.score                             21
+  a figure|UNSAMPLED                                           14
+  words added|conditions.severity                              5
+  reworded|conditions.severity|history.legacy/siegeNarrative   5
+  reworded|other:powerStructure                                3
+  reworded|legitimacy.multipliers/flags                        2
+  words dropped|conditions.severity                            2
+  reworded|JOINT                                               2
+  words added|UNSAMPLED                                        1
+(F) KINDS (tab + label) 300: keyed by the restore loop 287, NOT YET KEYED 13
+  KIND Summary/Foundations|Criminal opportunity | n 311 | keyed 138 {"safety.capture/ratio/crimeTypes":138}
+  KIND Systems/Power|Governance fractured. | n 278 | keyed 120 {"legitimacy.multipliers/flags":120}
+  KIND Systems/Power|⚠ | n 278 | keyed 120 {"power.factions.niche/rawPower/legitimacyCrisis":120}
+  KIND Systems/Economics|Shadow Economy: #% of t | n 236 | keyed 148 {"safety.capture/ratio/crimeTypes":148}
+  KIND Systems/Economics|Off-book | n 236 | keyed 148 {"safety.capture/ratio/crimeTypes":148}
+  KIND Systems/Economics|Criminal supply chains | n 157 | keyed 104 {"safety.capture/ratio/crimeTypes":104}
+  KIND Systems/Economics|Goods change hands here | n 135 | keyed 84 {"safety.capture/ratio/crimeTypes":84}
+  KIND Systems/Economics|Black market · Operation | n 86 | keyed 56 {"safety.capture/ratio/crimeTypes":56}
+  KIND Systems/Economics|Some goods change hands | n 68 | keyed 50 {"safety.capture/ratio/crimeTypes":50}
+  KIND Systems/Economics|Smuggling · Transhipment | n 61 | keyed 41 {"safety.capture/ratio/crimeTypes":41}
+  KIND Summary/Foundations|Defense readiness | n 55 | keyed 26 {"defence.readiness.score":21,"conditions.severity":3,"JOINT":2}
+  KIND Systems/Power|Desperate — hunger is er | n 40 | keyed 21 {"power.stability":21}
+  KIND Systems/Power|Fractured — no stable go | n 38 | keyed 14 {"power.stability":14}
+  KIND Systems/Economics|Much of the trade here i | n 37 | keyed 15 {"safety.capture/ratio/crimeTypes":15}
+  KIND Summary/Foundations|Law & orderC | n 34 | keyed 16 {"safety.capture/ratio/crimeTypes":16}
+  KIND Systems/Power|Unstable (insurgency con | n 34 | keyed 14 {"power.stability":14}
+  KIND Systems/Power|Tense (monster pressure | n 33 | keyed 8 {"power.stability":8}
+  KIND Systems/Economics|Some petty theft goes on | n 33 | keyed 15 {"safety.capture/ratio/crimeTypes":15}
+  KIND Systems/Power|Shaken — nobody trusts t | n 33 | keyed 13 {"power.stability":13}
+  KIND Systems/Power|Strained — the creditors | n 32 | keyed 14 {"power.stability":14}
+  KIND Systems/Power|Strained (people arrivin | n 32 | keyed 18 {"power.stability":18}
+  KIND Systems/Power|Unstable (pervasive orga | n 31 | keyed 23 {"power.stability":23}
+  KIND Systems/Power|Tense (requisition and c | n 31 | keyed 14 {"power.stability":14}
+  KIND Systems/Power|Volatile — power is avai | n 29 | keyed 12 {"power.stability":12}
+  KIND Systems/Economics|Ask how to bring goods i | n 28 | keyed 10 {"safety.capture/ratio/crimeTypes":10}
+  KIND Systems/Power|Anxious — people fear th | n 28 | keyed 19 {"power.stability":19}
+  KIND Systems/Power|# | n 28 | keyed 23 {"other:powerStructure":23}
+  KIND Systems/Power|Tense (the creed is cont | n 28 | keyed 11 {"power.stability":11}
+  KIND Systems/Power|Suppressed (under occupa | n 28 | keyed 14 {"power.stability":14}
+  KIND Summary/Overview|A dispute over grazing r | n 27 | keyed 6 {"power.recentConflict":6}
+  KIND World/Daily Life|Ask how things came to b | n 26 | keyed 7 {"history.legacy/siegeNarrative":7}
+  KIND Systems/Power|Tense — regional monster | n 25 | keyed 8 {"power.stability":8}
+  KIND World/Daily Life|People here still talk o | n 25 | keyed 11 {"history.legacy/siegeNarrative":10,"conditions.severity|history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|Talk here still comes ba | n 25 | keyed 10 {"history.legacy/siegeNarrative":9,"conditions.severity|history.legacy/siegeNarrative":1}
+  KIND Systems/Power|Critical (under siege) | n 25 | keyed 12 {"power.stability":12}
+  KIND Systems/Power|Ordered (strong military | n 24 | keyed 10 {"power.stability":10}
+  KIND Systems/Power|Unstable (revolt not con | n 24 | keyed 8 {"power.stability":8}
+  KIND Summary/Foundations|Labor capacity | n 22 | keyed 11 {"conditions.severity":11}
+  KIND Systems/Power|Vulnerable (decisions sh | n 21 | keyed 9 {"power.stability":9}
+  KIND World/Daily Life|The place still lives wi | n 20 | keyed 9 {"history.legacy/siegeNarrative":9}
+  KIND Summary/Overview|The most devout househol | n 20 | keyed 6 {"power.recentConflict":6}
+  KIND Systems/Economics|A good part of the trade | n 18 | keyed 10 {"safety.capture/ratio/crimeTypes":10}
+  KIND Systems/Economics|A little changes hands h | n 18 | keyed 9 {"safety.capture/ratio/crimeTypes":9}
+  KIND World/Daily Life|Much of how the place wo | n 18 | keyed 8 {"history.legacy/siegeNarrative":7,"conditions.severity|history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|With the siege closed ro | n 15 | keyed 5 {"safety.capture/ratio/crimeTypes":5}
+  KIND Summary/Overview|Notable connection | n 11 | keyed 11 {"other:prominentRelationship":11}
+  KIND Summary/Overview|Full relationship web → | n 11 | keyed 11 {"other:prominentRelationship":11}
+  KIND Systems/Power|Vulnerable (prosperous b | n 11 | keyed 5 {"power.stability":5}
+  KIND Summary/Foundations|Law & orderCritical | n 10 | keyed 6 {"safety.capture/ratio/crimeTypes":6}
+  KIND Systems/Economics|Guild crime · Operationa | n 10 | keyed 7 {"safety.capture/ratio/crimeTypes":7}
+  KIND Systems/Power|Tense (the seat has lost | n 9 | keyed 5 {"power.stability":5}
+  KIND Systems/Economics|With the siege on, what | n 9 | keyed 4 {"safety.capture/ratio/crimeTypes":4}
+  KIND Summary/Foundations|Law & orderStrained | n 9 | keyed 5 {"safety.capture/ratio/crimeTypes":5}
+  KIND Systems/Economics|Much of what changes han | n 8 | keyed 5 {"safety.capture/ratio/crimeTypes":5}
+  KIND Systems/Defense|Nobody here is paid to keep order. A quarrel | n 8 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Systems/Power|Contests the seatMerchant# | n 8 | keyed 8 {"other:powerStructure":8}
+  KIND Systems/Defense|There is no watch. When someone does wrong, | n 8 | keyed 4 {"safety.capture/ratio/crimeTypes":4}
+  KIND Summary/Overview|The church is demanding | n 7 | keyed 3 {"power.recentConflict":3}
+  KIND Summary/Foundations|Law & orderAdequate | n 7 | keyed 5 {"safety.capture/ratio/crimeTypes":5}
+  KIND World/Daily Life|The Succession Crisis is | n 7 | keyed 5 {"history.legacy/siegeNarrative":4,"conditions.severity|history.legacy/siegeNarrative":1}
+  KIND Summary/Foundations|Trade connectivity | n 7 | keyed 5 {"conditions.severity":5}
+  KIND Systems/Power|Contests the seatMilitary# | n 6 | keyed 6 {"other:powerStructure":6}
+  KIND Systems/Power|↑ Holds powerGovernment# | n 6 | keyed 4 {"other:powerStructure":4}
+  KIND Systems/Power|Critical (under siege); | n 6 | keyed 2 {"power.stability":2}
+  KIND World/Daily Life|The Succession Crisis st | n 5 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Power|Fragile (private securit | n 5 | keyed 4 {"power.stability":4}
+  KIND World/Daily Life|The Arcane Incident is s | n 5 | keyed 3 {"history.legacy/siegeNarrative":3}
+  KIND Summary/Overview|Several merchants have b | n 5 | keyed 3 {"power.recentConflict":3}
+  KIND Systems/Defense|There is no watch here. | n 5 | keyed 3 {"safety.capture/ratio/crimeTypes":3}
+  KIND Systems/Power|Tense (militarised); mon | n 4 | keyed 4 {"power.stability":4}
+  KIND Systems/Economics|The duties gathered at K | n 4 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Summary/Overview|Monsters prowl near the | n 4 | keyed 3 {"power.recentConflict":3}
+  KIND World/Daily Life|The Pilgrimage still sha | n 4 | keyed 3 {"history.legacy/siegeNarrative":3}
+  KIND World/Daily Life|The Religious Conflict s | n 4 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Power|Stable (theocratic gover | n 4 | keyed 2 {"power.stability":2}
+  KIND Systems/Power|Contests the seatReligious# | n 4 | keyed 4 {"other:powerStructure":4}
+  KIND Systems/Power|Contests the seatReligious | n 4 | keyed 2 {"other:powerStructure":2}
+  KIND Summary/Foundations|Defense readinessC | n 4 | keyed 4 {"conditions.severity":4}
+  KIND Summary/Foundations|Strength of the powers | n 4 | keyed 2 {"conditions.severity":2}
+  KIND Systems/Power|Contests the seatArcane# | n 4 | keyed 4 {"other:powerStructure":4}
+  KIND World/Daily Life|The mark the Succession | n 4 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Economics|The duties gathered at S | n 4 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Summary/Overview|The City-State Council h | n 3 | keyed 3 {"power.recentConflict":3}
+  KIND Summary/Overview|The crown has called in | n 3 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|The merchant class is ou | n 3 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|The mark the Religious C | n 3 | keyed 3 {"history.legacy/siegeNarrative":3}
+  KIND World/Daily Life|What the Religious Confl | n 3 | keyed 3 {"history.legacy/siegeNarrative":3}
+  KIND World/Daily Life|The Wild Magic is still | n 3 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Power|↑ Holds powerGovernment | n 3 | keyed 3 {"other:powerStructure":3}
+  KIND World/Daily Life|The mark the Shortage le | n 3 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Power|Criminal#▲ | n 3 | keyed 1 {"other:powerStructure":1}
+  KIND Systems/Power|Criminal#▼ | n 3 | keyed 1 {"other:powerStructure":1}
+  KIND Summary/Overview|Two guild masters are ha | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND World/Daily Life|The Siege still shapes h | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Economics|The duties gathered at J | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND World/Daily Life|Talk here still comes back, sooner or later, to the Siege. A sickness has taken hold here, and it is still spreading. | n 2 | keyed 1 {"conditions.severity":1}
+  KIND Summary/Overview|The Merchant oligarchy h | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND Systems/Economics|The shadow trade at Kall | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Mi | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|A guild's private soldie | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND Systems/Economics|The duties gathered at L | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND World/Daily Life|The Economic Divide is s | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND World/Daily Life|The Religious Conflict i | n 2 | keyed 1 {"conditions.severity|history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|A noble family is contes | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND Systems/Economics|Goods change hands at Li | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Summary/Overview|The Noble Governorship h | n 2 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The duties gathered at C | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Systems/Power|Tense (militarised) | n 2 | keyed 2 {"power.stability":2}
+  KIND Summary/Overview|Two rival guilds are con | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND World/Daily Life|The Schism still shapes | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Defense|There is no watch. The old families | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The household that sells | n 2 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The duties gathered at U | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND World/Daily Life|The Economic Divide stil | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Power|Merchant#▼ | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|Merchant#▲ | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Summary/Overview|The military commanders | n 2 | keyed 2 {"power.recentConflict":2}
+  KIND Systems/Economics|The duties gathered at H | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Systems/Economics|Goods change hands at Ta | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Systems/Economics|Goods change hands at Qa | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Shortage still shape | n 2 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Power|RulerMerchant oligarchyMerchantSignificantC | n 2 | keyed 2 {"legitimacy.multipliers/flags":2}
+  KIND Systems/Economics|Goods change hands at Va | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND Systems/Economics|The duties gathered at N | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Power|Contests the seatMerchant | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|↑ Holds powerMerchant# | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|Contests the seatNoble | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|Military#▼ | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|Military#▲ | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|↑ Holds powerMerchant | n 2 | keyed 0 {}
+  KIND Systems/Power|Contests the seatArcane | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|↑ Holds powerCriminal | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|Contests the seatMilitary | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND Systems/Power|↑ Holds powerReligious# | n 2 | keyed 2 {"other:powerStructure":2}
+  KIND World/Daily Life|The Trade Collapse is st | n 2 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|The Arcane Incident stil | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND Systems/Economics|Goods change hands at No | n 2 | keyed 2 {"safety.capture/ratio/crimeTypes":2}
+  KIND World/Daily Life|What the Shortage left b | n 2 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|Children are warned about | n 2 | keyed 2 {"conditions.severity":2}
+  KIND World/Daily Life|The Pilgrimage is still | n 2 | keyed 2 {"history.legacy/siegeNarrative":2}
+  KIND World/Daily Life|What the Succession Cris | n 2 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Defense|The military command h | n 2 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The duties gathered at G | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The Military City Counci | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Dhar | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Gang | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Someone has started digg | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|A noble house has begun | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|Grainne Shaughnessy and | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|The duties gathered at D | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|Visitors learn early that it pays to stay on good terms with the Religious Authorities. People here | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|The shadow trade at Qary | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Little of Benhurst's tra | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ka | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The City Council has bee | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|The Ecclesiastical Counc | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|Little of Tikalac's trad | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Vigdis Svensson's family | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|The shadow trade at Font | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|A servant saw Khadija al | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Plav | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Arch | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Sp | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Salma ibn Rashid and Ibt | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND World/Daily Life|The Heresy Trials still | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|The mark the Iron Disput | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|The largest farming hous | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|Someone has been stealin | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|Little of Baigang's trad | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The High Theocratic Coun | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|Goods change hands at Al | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|A hedge wizard was dragg | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Chin | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Weiß | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Guo Shin has been seen d | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Weim | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|What the Occupation left | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|Xenophon Strategopoulos | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|Goods change hands at Fi | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|People do as the Grand C | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|Goods change hands at Di | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Stei | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|People say the council i | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|The shadow trade at Beca | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The mark the Schism left | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|A dispute over rights on | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|A fever has begun to go round, and people are keeping their distance. Beasts now roam the country around, and people keep close to home. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Summary/Overview|A dispute over water acc | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|The mark the Heresy Tria | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|The duties gathered at F | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Little of Ardbridge's tr | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Siege is still remem | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|The shadow trade at Aris | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Power|Tense (militarised, chro | n 1 | keyed 1 {"power.stability":1}
+  KIND Systems/Economics|The duties gathered at V | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The Military Council has | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|The Guild Council has be | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Summary/Overview|Salma ibn Tufayl and Asa | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|Goods change hands at Ob | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The duties gathered at O | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Defense|The town watch is thinly kept. Susceptible to bribery; enforcers who can be bought by whoever has coin. | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Ormb | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The Town Mayor has been | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|What the Economic Divide | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|The Church Council has b | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Vara | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|The Arcane Council has b | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Linl | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ti | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The duties gathered at A | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Dag Magnusson is praised | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|What the Guild War left | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Overview|Ulfhéðinn Mordsson hopes | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Summary/Overview|A dispute over field rot | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Pian | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Magic|Legalityregulated | n 1 | keyed 1 {"other:powerStructure":1}
+  KIND Summary/Overview|A merchant has bought la | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND World/Daily Life|What the Great Construction left behind is still part of daily life here. A sickness has taken hold here, and it is still spreading. The | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Summary/Overview|The miller and the large | n 1 | keyed 1 {"power.recentConflict":1}
+  KIND Systems/Economics|The shadow trade at Dong | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|Whatever a visitor wants done, the Merchant Guilds have a say in it. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|Goods change hands at We | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Little of Víkli's trade | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Trade Collapse still | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|Little of Xiaba's trade | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Kumar Patil has asked De | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|Little of Kamalabari's t | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Crash still shapes h | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Summary/Foundations|Social trust | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Power|Religious#▲ | n 1 | keyed 1 {"other:powerStructure":1}
+  KIND Systems/Power|Religious#▼ | n 1 | keyed 1 {"other:powerStructure":1}
+  KIND Summary/Overview|A servant saw Adel al-Qu | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Summary/Foundations|Ruling authority | n 1 | keyed 0 {}
+  KIND Systems/Economics|The shadow trade at Terr | n 1 | keyed 0 {}
+  KIND Systems/Economics|Little of Petenhuacan's | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ox | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|Jelme Mangghud has asked | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|Goods change hands at Bu | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Padm | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Iron Dispute still s | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|Goods change hands at Co | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The duties gathered at Y | n 1 | keyed 0 {}
+  KIND Systems/Economics|Little of Al-para's trad | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Benh | n 1 | keyed 0 {}
+  KIND Systems/Economics|Goods change hands at Me | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ro | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at La | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Balg | n 1 | keyed 0 {}
+  KIND Systems/Economics|Goods change hands at Br | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Summary/Overview|A clerk has found a paym | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Summary/Overview|A servant saw Ulfhéðinn | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND Systems/Economics|The shadow trade at Qara | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Uprising still shape | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|The shadow trade at Dion | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Raji | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Cerr | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Little of Lykopetra's tr | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|Much of how the place works now goes back to the Religious Conflict. A sickness has taken hold here, and it is still spreading. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|No single name comes up first when a visitor asks who holds sway here. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|Children are warned about the woods once the light goes, and about | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|The Purge is still remembered here, and not lightly. Sickness has broken out in the place, and more people are falling ill. | n 1 | keyed 0 {}
+  KIND World/Daily Life|A fever has begun to go round, and people are keeping their distance. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|The Religious Conflict still shapes how people here go about things. Sickness has broken out in the place, and more people are falling ill. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|The Royal Authority carries the most weight here, and nobody pretends otherwise. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|The mark the Migration left on the place has not faded. A fever has begun to go round, and people are keeping their distance. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|There is no single master here, and getting anything done means winning over more than one side. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|It does not take a visitor long to see who holds sway here: the Religious Authorities. People here are | n 1 | keyed 0 {}
+  KIND World/Daily Life|What the Siege left behind is still part of daily life here. A fever has begun to go round, and people are keeping their distance. | n 1 | keyed 0 {}
+  KIND World/Daily Life|People here still talk of the Religious Conflict, and of what it changed. A fever has begun to go round, and people are keeping their distance. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|A visitor who wants anything settled here is told to speak to the Household Council first. A visitor | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|What the Siege left behind is still part of daily life here. A fever has begun to go round, and people are keeping their distance. Beasts have overrun the country around, and nobody travels alone any more. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|Goods change hands at Ol | n 1 | keyed 0 {}
+  KIND World/Daily Life|The Heresy Trials is sti | n 1 | keyed 0 {}
+  KIND Summary/Overview|Gereltsetseg Naiman has | n 1 | keyed 1 {"other:prominentRelationship":1}
+  KIND World/Daily Life|The Siege is still remembered here, and not lightly. Sickness has broken out in the place, and more people are falling ill. Beasts have overrun the country around, and nobody travels alone any more. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|Goods change hands at Lo | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|What the Siege left behind is still part of daily life here. A sickness has taken hold here, and it is still spreading. Travel has become dangerous: the land around is thick with beasts. The | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|People put up with the A | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Economics|Goods change hands at Ga | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The mark the Interregnum | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|People bring their compl | n 1 | keyed 0 {}
+  KIND Systems/Economics|The shadow trade at Achi | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ly | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|What the Uprising left b | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|The shadow trade at Grün | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The shadow trade at Divo | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|Goods change hands at Ei | n 1 | keyed 0 {}
+  KIND Systems/Economics|Little of Donggou's trad | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND Systems/Economics|The duties gathered at R | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|What the Great Harvest C | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|The Schism is still reme | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|Goods change hands at Ni | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|Whatever a visitor wants done, the Elder Council has a say in it. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|The place still lives with what the Occupation left behind. With a leading figure gone, the question of who comes next is open. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND World/Daily Life|Power here does not sit in one pair of hands, and a visitor learns to ask around. | n 1 | keyed 1 {"conditions.severity":1}
+  KIND Systems/Defense|Those holding the place | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The mark the Arcane Inci | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND Systems/Economics|Goods change hands at Sh | n 1 | keyed 1 {"safety.capture/ratio/crimeTypes":1}
+  KIND World/Daily Life|The Plague Years is stil | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+  KIND World/Daily Life|What the Trade Collapse | n 1 | keyed 1 {"history.legacy/siegeNarrative":1}
+(F) RESTORE NEEDED on 10 births (up to three per unkeyed kind): r2s-infiltrated-city-3,r2s-insurgency-metropolis-3,r2s-mass_migration-city-1,r2s-mass_migration-metropolis-3,r2s-plague_onset-hamlet-2,r2s-plague_onset-metropolis-3,r2s-plague_onset-thorp-1,r2s-plague_onset-town-1,r2s-recently_betrayed-city-2,r2s-religious_conversion-metropolis-2
+(F) ONE EXAMPLE PER TAB x CLASS x KEY
+  Summary/Foundations|CHANGED|JOINT | r2s-slave_revolt-thorp-0 | "Defense readinessCritical  =>  Defense readinessStrained"
+  Summary/Foundations|CHANGED|UNSAMPLED | r2r-city-25 | "Criminal opportunityElevated  =>  Criminal opportunityContained"
+  Summary/Foundations|CHANGED|conditions.severity | r2r-city-37 | "Labor capacityAdequate  =>  Labor capacityStrained"
+  Summary/Foundations|CHANGED|defence.readiness.score | r2r-hamlet-16 | "Defense readinessCritical  =>  Defense readinessAdequate"
+  Summary/Foundations|CHANGED|safety.capture/ratio/crimeTypes | r2r-city-16 | "Criminal opportunityElevated  =>  Criminal opportunityContained"
+  Summary/Foundations|MOVED|- | r2r-city-0 | "Criminal opportunityElevated"
+  Summary/Overview|LOST|UNSAMPLED | r2r-city-11 | "The church is demanding veto power over council appointments. The Merchant oligarchy has not yet refused publicly."
+  Summary/Overview|LOST|other:prominentRelationship | r2r-city-19 | "Notable connection"
+  Summary/Overview|LOST|power.recentConflict | r2r-city-0 | "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
+  Systems/Defense|CHANGED|UNSAMPLED | r2r-hamlet-5 | "There is no watch. The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.  =>  There is no watch. The old families keep the peace, and anyone who breaks it answers to all th"
+  Systems/Defense|CHANGED|safety.capture/ratio/crimeTypes | r2r-thorp-32 | "There is no watch here. Everyone knows who the thieves are, and nobody can make them give anything back.  =>  There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it righ"
+  Systems/Economics|LOST|UNSAMPLED | r2r-city-14 | "Shadow Economy: 21% of trade unrecorded▲"
+  Systems/Economics|LOST|safety.capture/ratio/crimeTypes | r2r-city-0 | "Shadow Economy: 16% of trade unrecorded▲"
+  Systems/Magic|CHANGED|other:powerStructure | r2r-village-48 | "Legalityregulated  =>  Legalityrestricted"
+  Systems/Power|CHANGED|UNSAMPLED | r2r-city-14 | "Unstable (pervasive organized crime)  =>  Unstable"
+  Systems/Power|CHANGED|legitimacy.multipliers/flags | r2s-famine-city-2 | "RulerMerchant oligarchyMerchantSignificantCritical▼  =>  RulerMerchant oligarchyMerchantSignificantContested▼"
+  Systems/Power|CHANGED|other:powerStructure | r2r-metropolis-29 | "Contests the seatReligious14▼  =>  Contests the seatReligious15▼"
+  Systems/Power|CHANGED|power.stability | r2r-city-0 | "Tense — regional monster threat  =>  Tense"
+  Systems/Power|GAINED|UNSAMPLED | r2s-infiltrated-city-3 | "10"
+  Systems/Power|GAINED|other:powerStructure | r2r-metropolis-29 | "16"
+  Systems/Power|LOST|UNSAMPLED | r2r-hamlet-17 | "Governance fractured."
+  Systems/Power|LOST|legitimacy.multipliers/flags | r2r-city-44 | "Governance fractured."
+  Systems/Power|LOST|other:powerStructure | r2r-metropolis-29 | "14"
+  Systems/Power|LOST|power.factions.niche/rawPower/legitimacyCrisis | r2r-city-44 | "⚠"
+  Systems/Power|MOVED|- | r2s-infiltrated-metropolis-0 | "ContenderCraft GuildsMerchantMinor▲"
+  World/Daily Life|CHANGED|UNSAMPLED | r2r-city-11 | "The Succession Crisis still shapes how people here go about things.  =>  Little has changed of late, and nobody is asking for it to."
+  World/Daily Life|CHANGED|conditions.severity | r2r-city-19 | "Talk here still comes back, sooner or later, to the Siege. A sickness has taken hold here, and it is still spreading.  =>  Talk here still comes back, sooner or later, to the Siege. A sickness has taken hold here, and it"
+  World/Daily Life|CHANGED|conditions.severity|history.legacy/siegeNarrative | r2s-plague_onset-hamlet-1 | "Much of how the place works now goes back to the Siege. A sickness has taken hold here, and it is still spreading. Travel has become dangerous: the land around is thick with beasts. There is sickness about, and it is get"
+  World/Daily Life|CHANGED|history.legacy/siegeNarrative | r2r-city-0 | "The Siege still shapes how people here go about things. Beasts now roam the country around, and people keep close to home.  =>  Beasts now roam the country around, and people keep close to home."
+  World/Daily Life|LOST|UNSAMPLED | r2s-infiltrated-city-3 | "Talk here still comes back, sooner or later, to the Trade Collapse."
+  World/Daily Life|LOST|conditions.severity | r2r-metropolis-50 | "People do as the Grand Council says, but few of them think well of it."
+  World/Daily Life|LOST|history.legacy/siegeNarrative | r2r-village-44 | "The place still lives with what the Arcane Incident left behind."
+  World/Daily Life|ORDER|conditions.severity | r2s-plague_onset-hamlet-3 | "Children are warned about begging favours from neighbours who have little enough themselves, and about sharing cups and spoons with anyone outside the household.  =>  Children are warned about sharing cups and spoons wit"
+
+(F) GOVERNANCE PARAGRAPH (powerDeskRead.js :: governanceAccountRead, publicDossier): {"births":720,"paragraphs":{"P0":720,"P1":720},"notInPage":{"P0":0,"P1":0},"differ":0,"causeLost":0,"foodAlone":0,"meritGained":0,"meritLost":0,"otherEvent":0,"lastingChanged":0}
+
+(F) SERVER SAMPLE: 30 places; differing lines (server page vs twin page) 22; same handed document 0; served marker 30; errors 0; chronicle [null]
+(F) SERVER by tab x class: {"Systems/Institutions|ORDER":22}
+(F) SERVER ORDER lines, every distinct one (read each: does its meaning move with the order?): 16
+  ORDER r2r-city-0 ServicesMessage relayParcel forwarding  =>  ServicesParcel forwardingMessage relay
+  ORDER r2r-city-0 ServicesDocument writingLegal documents  =>  ServicesLegal documentsDocument writing
+  ORDER r2r-city-24 ServicesExotic animal salesVeterinary careAnimal training  =>  ServicesVeterinary careExotic animal salesAnimal training
+  ORDER r2r-city-24 ServicesPublic recordsCivic administrationCourts and adjudicationLicensing and chartersTaxation and tolls  =>  ServicesCivic administrationCourts and adjudicationLicensing and chartersTaxation and tollsPublic records
+  ORDER r2r-city-24 ServicesDocument writingLetter draftingLegal documents  =>  ServicesLegal documentsDocument writingLetter drafting
+  ORDER r2r-hamlet-12 ServicesLodgingMeals and drinkMessage relay  =>  ServicesMeals and drinkLodgingMessage relay
+  ORDER r2r-metropolis-12 ServicesCargo storageVessel mooringCargo loading and unloading  =>  ServicesCargo loading and unloadingCargo storageVessel mooring
+  ORDER r2r-metropolis-12 ServicesNews and informationPrice discoveryTrade facilitation  =>  ServicesTrade facilitationNews and informationPrice discovery
+  ORDER r2r-metropolis-12 ServicesBerth assignmentVessel clearance  =>  ServicesVessel clearanceBerth assignment
+  ORDER r2r-metropolis-12 ServicesCentral registerBurial  =>  ServicesBurialCentral register
+  ORDER r2r-metropolis-36 ServicesNews and informationPrice discoveryQuality standardsTrade facilitation  =>  ServicesQuality standardsTrade facilitationNews and informationPrice discovery
+  ORDER r2r-metropolis-36 ServicesDruidic consultationNature arbitration  =>  ServicesNature arbitrationDruidic consultation
+  ORDER r2r-town-12 ServicesMonster bountiesDungeon clearance  =>  ServicesDungeon clearanceMonster bounties
+  ORDER r2r-town-12 ServicesAccommodationMeals and drinkStabling  =>  ServicesMeals and drinkAccommodationStabling
+  ORDER r2r-town-12 ServicesWeekly marketCivic announcements  =>  ServicesCivic announcementsWeekly market
+  ORDER r2r-town-36 ServicesAccommodationMeals and drink  =>  ServicesMeals and drinkAccommodation
+
+(N) 92 towns; differing lines 75850 on 92 towns (off 92, dm 92); N63: house-free page's signature unseen in the pool's universe: off 34, dm 84 of 92
+(N) BY READ x TAB x CLASS (lines; [N63] = of them on towns whose house-free page no pool page shows)
+  dm|World/Relationships|CHANGED                       17554  [N63 16899]  ex r3m-city-indebted-0-46 "the senior craft-guild master · unbreakable · the district madam  =>  the senior craft-guild master · unbreakable · the senior charter master"
+  off|World/Relationships|CHANGED                      16777  [N63 5485]  ex r3m-city-indebted-0-46 "the senior craft-guild master · unbreakable · the district madam  =>  the senior craft-guild master · unbreakable · the senior charter master"
+  dm|World/NPCs|CHANGED                                 8153  [N63 7874]  ex r3m-city-indebted-0-46 "Wants Be asked for an opinion by those who lead the Merchant oligarchy, once, this season.  =>  Wants Be asked for an opinion by those who lead the Merchant Guilds, once, this season."
+  off|World/NPCs|CHANGED                                5485  [N63 1899]  ex r3m-city-indebted-0-46 "Standing first of Noble Families, the joint second strongest power here  =>  Standing first of Noble Families, the joint third strongest power here"
+  dm|World/NPCs|GAINED                                  2512  [N63 2429]  ex r3m-city-indebted-0-46 "Dyer · member of Merchant Guilds"
+  off|World/NPCs|GAINED                                 1941  [N63 667]  ex r3m-city-indebted-0-46 "Vadim Lebedev holds a tie to them: Active Suppression"
+  dm|World/Relationships|GAINED                         1891  [N63 1813]  ex r3m-city-indebted-0-46 "A document Lev Vasilyev and Galina Horvat each believed only they possessed has turned up in someone else's hands."
+  dm|Systems/Power|CHANGED                              1495  [N63 1473]  ex r3m-city-indebted-0-46 "The Noble Families still have their titles, but the hall's offices have taken most of their power.  =>  The Noble Families still have their titles, but merchant money and the hall's offices have taken most of their power"
+  off|Systems/Power|CHANGED                             1466  [N63 616]  ex r3m-city-indebted-0-46 "The Noble Families still have their titles, but the hall's offices have taken most of their power.  =>  The Noble Families still have their titles, but merchant money and the hall's offices have taken most of their power"
+  off|World/Relationships|GAINED                        1343  [N63 387]  ex r3m-city-indebted-0-46 "A document Lev Vasilyev and Galina Horvat each believed only they possessed has turned up in someone else's hands."
+  off|World/Relationships|LOST                          1337  [N63 634]  ex r3m-city-indebted-0-46 "Vladimir Horvat needs Ctirad Sokolov's seal on certain papers; the chief magistrate needs the innkeeper's silence about certain others. Neither has asked for more than the other could pay."
+  off|World/History|CHANGED                              988  [N63 460]  ex r3m-city-indebted-0-46 "\"It has come through the Scandal and the Arcane Incident, and travellers still remember the place kindly\"  =>  \"It has come through the Religious Conflict and the Arcane Incident, and travellers still remember the place "
+  dm|World/History|CHANGED                               988  [N63 975]  ex r3m-city-indebted-0-46 "\"It has come through the Scandal and the Arcane Incident, and travellers still remember the place kindly\"  =>  \"It has come through the Religious Conflict and the Arcane Incident, and travellers still remember the place "
+  off|World/NPCs|LOST                                    984  [N63 439]  ex r3m-city-indebted-0-46 "Arcane Orders (3)▲"
+  dm|World/NPCs|LOST                                     934  [N63 907]  ex r3m-city-indebted-0-46 "Arcane Orders (3)▲"
+  off|Systems/Services|LOST                              765  [N63 367]  ex r3m-city-indebted-0-46 "Educational network"
+  dm|Systems/Services|LOST                               765  [N63 703]  ex r3m-city-indebted-0-46 "Educational network"
+  dm|Systems/Power|LOST                                  613  [N63 604]  ex r3m-city-indebted-0-46 "Arcane Orders"
+  off|Systems/Power|LOST                                 575  [N63 249]  ex r3m-city-indebted-0-46 "Arcane Orders"
+  dm|World/Relationships|LOST                            574  [N63 536]  ex r3m-city-indebted-0-46 "Vladimir Horvat needs Ctirad Sokolov's seal on certain papers; the chief magistrate needs the innkeeper's silence about certain others. Neither has asked for more than the other could pay."
+  off|Systems/Institutions|CHANGED                       566  [N63 258]  ex r3m-city-indebted-0-46 "BacksArcane OrdersReligious Authorities  =>  BacksMerchant oligarchyReligious Authorities"
+  dm|Systems/Institutions|CHANGED                        566  [N63 526]  ex r3m-city-indebted-0-46 "BacksArcane OrdersReligious Authorities  =>  BacksMerchant oligarchyReligious Authorities"
+  dm|Summary/Overview|CHANGED                            507  [N63 489]  ex r3m-city-indebted-0-46 "Merchant oligarchy vs Merchant GuildsModerate  =>  Merchant oligarchy vs Merchant GuildsHigh"
+  off|Summary/Overview|CHANGED                           494  [N63 185]  ex r3m-city-indebted-0-46 "Merchant oligarchy vs Merchant GuildsModerate  =>  Merchant oligarchy vs Merchant GuildsHigh"
+  off|Systems/Services|GAINED                            430  [N63 192]  ex r3m-city-indebted-1-106 "Entertainment venues"
+  dm|Systems/Services|GAINED                             430  [N63 392]  ex r3m-city-indebted-1-106 "Entertainment venues"
+  off|World/History|LOST                                 413  [N63 190]  ex r3m-city-indebted-1-106 "Disputed land"
+  dm|World/History|LOST                                  413  [N63 404]  ex r3m-city-indebted-1-106 "Disputed land"
+  dm|Systems/Power|GAINED                                383  [N63 377]  ex r3m-city-indebted-0-46 "Criminal capture"
+  off|Systems/Services|CHANGED                           356  [N63 156]  ex r3m-city-indebted-0-46 "Information(4)▲  =>  Information(3)▲"
+  dm|Systems/Services|CHANGED                            356  [N63 329]  ex r3m-city-indebted-0-46 "Information(4)▲  =>  Information(3)▲"
+  off|Systems/Economics|CHANGED                          335  [N63 183]  ex r3m-city-indebted-0-46 "31%  =>  30%"
+  dm|Systems/Economics|CHANGED                           335  [N63 318]  ex r3m-city-indebted-0-46 "31%  =>  30%"
+  off|Systems/Power|GAINED                               324  [N63 174]  ex r3m-city-indebted-0-46 "Enchanter's shop"
+  off|World/History|GAINED                               287  [N63 131]  ex r3m-city-indebted-0-46 "Religious"
+  dm|World/History|GAINED                                287  [N63 287]  ex r3m-city-indebted-0-46 "Religious"
+  off|Systems/Institutions|LOST                          171  [N63 80]  ex r3m-city-indebted-0-46 "BacksArcane Orders"
+  dm|Systems/Institutions|LOST                           171  [N63 166]  ex r3m-city-indebted-0-46 "BacksArcane Orders"
+  off|Summary/Overview|LOST                              169  [N63 78]  ex r3m-city-indebted-1-106 "A forgotten charter and the present occupation contradict each other, each side with law on its side"
+  dm|Summary/Overview|LOST                               148  [N63 141]  ex r3m-city-indebted-1-106 "A forgotten charter and the present occupation contradict each other, each side with law on its side"
+  off|Systems/Economics|LOST                             130  [N63 82]  ex r3m-city-indebted-1-106 "CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it."
+  dm|Systems/Economics|LOST                              130  [N63 118]  ex r3m-city-indebted-1-106 "CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it."
+  off|Systems/Defense|LOST                               120  [N63 45]  ex r3m-city-indebted-0-46 "No one boss runs the crime at Ravenka: whoever works a route keeps it, and nobody stands over them all."
+  dm|Systems/Defense|LOST                                120  [N63 104]  ex r3m-city-indebted-0-46 "No one boss runs the crime at Ravenka: whoever works a route keeps it, and nobody stands over them all."
+  off|Systems/Defense|CHANGED                            114  [N63 49]  ex r3m-city-indebted-0-46 "The garrison and city watch are disciplined, paid in full and properly equipped. Effective in a fight; vulnerable to sustained corruption. Thieves here know that the court sits and the cells are real. Everyone comes and "
+  dm|Systems/Defense|CHANGED                             114  [N63 110]  ex r3m-city-indebted-0-46 "The garrison and city watch are disciplined, paid in full and properly equipped. Effective in a fight; vulnerable to sustained corruption. Thieves here know that the court sits and the cells are real. Everyone comes and "
+  off|World/Daily Life|CHANGED                           110  [N63 59]  ex r3m-city-infiltrated-0-32 "Nobody here talks openly about whether to stand, bargain or leave if the danger comes.  =>  The water, and who must keep it back, is a quarrel nobody airs in front of outsiders."
+  dm|World/Daily Life|CHANGED                            110  [N63 105]  ex r3m-city-infiltrated-0-32 "Nobody here talks openly about whether to stand, bargain or leave if the danger comes.  =>  The water, and who must keep it back, is a quarrel nobody airs in front of outsiders."
+  off|Summary/Foundations|CHANGED                         68  [N63 39]  ex r3m-city-infiltrated-0-32 "Law & orderSurplus  =>  Law & orderAdequate"
+  dm|Summary/Foundations|CHANGED                          68  [N63 68]  ex r3m-city-infiltrated-0-32 "Law & orderSurplus  =>  Law & orderAdequate"
+  off|Systems/Economics|GAINED                            64  [N63 31]  ex r3m-city-indebted-0-46 "10%"
+  dm|Systems/Economics|GAINED                             64  [N63 57]  ex r3m-city-indebted-0-46 "10%"
+  off|Summary/Overview|GAINED                             57  [N63 16]  ex r3m-city-indebted-1-106 "No one holds a firm grip on the leadership, and those who would take it are each too weak to win it"
+  dm|Summary/Overview|GAINED                              57  [N63 57]  ex r3m-city-indebted-1-106 "No one holds a firm grip on the leadership, and those who would take it are each too weak to win it"
+  off|Systems/Institutions|GAINED                         40  [N63 6]  ex r3m-city-insurgency-0-44 "BacksArcane OrdersReligious Authorities"
+  dm|Systems/Institutions|GAINED                          40  [N63 40]  ex r3m-city-insurgency-0-44 "BacksArcane OrdersReligious Authorities"
+  dm|Summary/Plot Hooks|CHANGED                           32  [N63 29]  ex r3m-city-indebted-1-106 "A new toll on the iron road has made metal dear. Nobody will say who set it, and the tools still need mending.  =>  Iron has doubled in price this season, and metal for tools and repairs is hard to come by. Work slows, a"
+  dm|Summary/Plot Hooks|LOST                              19  [N63 19]  ex r3m-city-none-1-117 "Outlook"
+  off|Summary/Plot Hooks|CHANGED                          18  [N63 13]  ex r3m-city-infiltrated-0-42 "The infiltration turns on the customs house, run by Ning Yoshida: if it gives way, Merchant Guild Council loses most, because its own people feel the crisis first.  =>  The infiltration turns on the customs house, run by"
+  dm|Systems/Magic|CHANGED                                17  [N63 17]  ex r3m-city-insurgency-1-104 "Religious acceptanceindifferent  =>  Religious acceptancewary"
+  off|Systems/Magic|CHANGED                               16  [N63 9]  ex r3m-city-insurgency-1-104 "Religious acceptanceindifferent  =>  Religious acceptancewary"
+  off|World/Traditions|CHANGED                            10  [N63 4]  ex r3m-city-infiltrated-1-102 "A fair that marks the gathering of the harvest. It is held at the city granaries, in the keeping of the Merchant Guilds. Market taxes bring Brahmaabad more than anything else.  =>  A fair that marks the gathering of the "
+  dm|World/Traditions|CHANGED                             10  [N63 10]  ex r3m-city-infiltrated-1-102 "A fair that marks the gathering of the harvest. It is held at the city granaries, in the keeping of the Merchant Guilds. Market taxes bring Brahmaabad more than anything else.  =>  A fair that marks the gathering of the "
+  dm|Summary/Plot Hooks|GAINED                             9  [N63 9]  ex r3m-city-infiltrated-0-42 "In the infiltration, Guiying Kim of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it."
+  off|World/Daily Life|LOST                                5  [N63 3]  ex r3m-city-infiltrated-1-102 "Ask how things came to be as they are here, and the Succession Crisis soon comes up."
+  dm|World/Daily Life|LOST                                 5  [N63 5]  ex r3m-city-infiltrated-1-102 "Ask how things came to be as they are here, and the Succession Crisis soon comes up."
+  off|World/Daily Life|GAINED                              5  [N63 3]  ex r3m-metropolis-indebted-0-66 "People put up with the City-State Council, but they expect little of it."
+  dm|World/Daily Life|GAINED                               5  [N63 5]  ex r3m-metropolis-indebted-0-66 "People put up with the City-State Council, but they expect little of it."
+  off|Systems/Defense|GAINED                               4  [N63 2]  ex r3m-city-infiltrated-0-32 "The balance at Kilhurst has tipped and is still tipping. Each season the watch answers a smaller share of what happens."
+  dm|Systems/Defense|GAINED                                4  [N63 4]  ex r3m-city-infiltrated-0-32 "The balance at Kilhurst has tipped and is still tipping. Each season the watch answers a smaller share of what happens."
+  off|Summary/Plot Hooks|GAINED                            2  [N63 1]  ex r3m-city-infiltrated-0-42 "In the infiltration, Guiying Kim of Merchant Guilds, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it."
+  off|Systems/Outlook|CHANGED                              1  [N63 1]  ex r3m-city-none-1-117 "Nokhoigol grows less than it eats, and part of the difference arrives by road.  =>  Nokhoigol's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it."
+  dm|Systems/Outlook|CHANGED                               1  [N63 1]  ex r3m-city-none-1-117 "Nokhoigol grows less than it eats, and part of the difference arrives by road.  =>  Nokhoigol's trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it."
+(N) DAILY LIFE (deriveDailyLife(page, null), the eight slots, P2 vs house-free): reads with a slot differing 126
+  off|food_culture             9 / 92  ex r3m-city-insurgency-1-104: "The better-off eat well, and the rest eat plainly but enough." | "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+  off|dawn_work                3 / 92  ex r3m-city-politically_fractured-1-110: "The workshops open their doors early, and work is under way at the benches by first light." | "Before light, goods are carried out of the warehouses to where they will be sold."
+  off|gathering_places         0 / 92
+  off|child_warnings           5 / 92  ex r3m-city-under_siege-1-108: "Children are warned about joining in when the grown-ups' talk turns angry, and about slipping out of doors once it is dark." | "Children are warned about slipping out of doors once it is dark, and about joining in when the grown-ups' talk turns angry."
+  off|commoner_resentments     14 / 92  ex r3m-city-none-0-31: "Talk among neighbours turns, sooner or later, to what the Ecclesiastical Council has got wrong lately. Many households are eating less than they would like, and" | "Talk among neighbours turns, sooner or later, to what the Ecclesiastical Council has got wrong lately. Many households are eating less than they would like, and"
+  off|outsider_impressions     10 / 92  ex r3m-city-infiltrated-0-42: "A visitor soon learns that little happens here without the Merchant Guild Council. People here are used to living close to the wild, and they tell a visitor whe" | "Several powers carry weight here, and a visitor soon learns not to assume which one matters most. People here are used to living close to the wild, and they tel"
+  off|unspoken_topics          40 / 92  ex r3m-city-infiltrated-0-32: "The water, and who must keep it back, is a quarrel nobody airs in front of outsiders." | "Nobody here talks openly about whether to stand, bargain or leave if the danger comes."
+  off|recent_changes           16 / 92  ex r3m-city-infiltrated-1-102: "" | "Ask how things came to be as they are here, and the Succession Crisis soon comes up."
+  dm|food_culture              9 / 92  ex r3m-city-insurgency-1-104: "The better-off eat well, and the rest eat plainly but enough." | "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+  dm|dawn_work                 3 / 92  ex r3m-city-politically_fractured-1-110: "The workshops open their doors early, and work is under way at the benches by first light." | "Before light, goods are carried out of the warehouses to where they will be sold."
+  dm|gathering_places          0 / 92
+  dm|child_warnings            5 / 92  ex r3m-city-under_siege-1-108: "Children are warned about joining in when the grown-ups' talk turns angry, and about slipping out of doors once it is dark." | "Children are warned about slipping out of doors once it is dark, and about joining in when the grown-ups' talk turns angry."
+  dm|commoner_resentments      14 / 92  ex r3m-city-none-0-31: "Talk among neighbours turns, sooner or later, to what the Ecclesiastical Council has got wrong lately. Many households are eating less than they would like, and" | "Talk among neighbours turns, sooner or later, to what the Ecclesiastical Council has got wrong lately. Many households are eating less than they would like, and"
+  dm|outsider_impressions      10 / 92  ex r3m-city-infiltrated-0-42: "A visitor soon learns that little happens here without the Merchant Guild Council. People here are used to living close to the wild, and they tell a visitor whe" | "Several powers carry weight here, and a visitor soon learns not to assume which one matters most. People here are used to living close to the wild, and they tel"
+  dm|unspoken_topics           40 / 92  ex r3m-city-infiltrated-0-32: "The water, and who must keep it back, is a quarrel nobody airs in front of outsiders." | "Nobody here talks openly about whether to stand, bargain or leave if the danger comes."
+  dm|recent_changes            16 / 92  ex r3m-city-infiltrated-1-102: "" | "Ask how things came to be as they are here, and the Succession Crisis soon comes up."
+(N) OFFICE LINES L8..L11 printed in commoner_resentments (L12 NOT BUILT): {"off|A|L10":1,"off|B|L10":1,"dm|A|L10":1,"dm|B|L10":1}
+
+DM SLOT (commoner_resentments_dm) [pages, printed, in slots, key in document, owner line exists]: {"F_P1":[720,0,0,0,253],"F_server":[30,0,0,0,10],"N_A":[184,0,0,0,104],"N_B":[184,0,0,0,74]} -> present 0
+
+STOPS 5
+  GAINED (F) r2r-metropolis-29 Systems/Power: 16
+  GAINED (F) r2r-village-48 Systems/Power: 56
+  GAINED (F) r2s-infiltrated-city-2 Systems/Power: 10
+  GAINED (F) r2s-infiltrated-city-3 Systems/Power: 10
+  GAINED (F) r2s-infiltrated-metropolis-0 Systems/Power: 11
+ONE LINE: (F) lost 1969 / gained 5 / changed 1378 over 753863 lines; (N) differ 75850 lines on 92 towns; dm-slot present 0

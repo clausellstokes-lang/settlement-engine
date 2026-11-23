@@ -1,0 +1,23 @@
+VR31 (N109): V rows 720 (errors 0); (F) births whose Power tab moved a share tile: 9
+  r2r-metropolis-29: (1) YES withheld [["The Independent Bloc",6,"hidden"]] (2) YES P0 sum 94 (3) YES P1 sum 100 (4) YES | lines 13
+  r2r-village-48: (1) YES withheld [["The Independent Bloc",22,"hidden"]] (2) YES P0 sum 78 (3) YES P1 sum 100 (4) YES | lines 6
+  r2s-infiltrated-city-0: (1) YES withheld [["The Independent Bloc",8,"hidden"],["The Free Alliance",4,"hidden"]] (2) YES P0 sum 88 (3) YES P1 sum 100 (4) YES | lines 16
+  r2s-infiltrated-city-2: (1) YES withheld [["The Independent Bloc",13,"hidden"]] (2) YES P0 sum 87 (3) YES P1 sum 100 (4) YES | lines 15
+  r2s-infiltrated-city-3: (1) YES withheld [["The Independent Bloc",15,"hidden"],["The Free Alliance",8,"hidden"]] (2) YES P0 sum 77 (3) YES P1 sum 100 (4) YES | lines 9
+  r2s-infiltrated-metropolis-0: (1) YES withheld [["The Independent Bloc",10,"hidden"],["The Free Alliance",6,"hidden"]] (2) YES P0 sum 84 (3) YES P1 sum 100 (4) YES | lines 15
+  r2s-infiltrated-metropolis-3: (1) YES withheld [["The Independent Bloc",9,"hidden"],["The Grey Council",5,"hidden"]] (2) YES P0 sum 86 (3) YES P1 sum 100 (4) YES | lines 13
+  r2s-infiltrated-village-0: (1) YES withheld [["The Independent Bloc",26,"hidden"]] (2) YES P0 sum 74 (3) YES P1 sum 100 (4) YES | lines 2
+  r2s-infiltrated-village-2: (1) YES withheld [["The Independent Bloc",17,"hidden"]] (2) YES P0 sum 83 (3) YES P1 sum 100 (4) YES | lines 6
+ON ALL 720: {"births":720,"sharesMove":9,"sharesMoveNoWithheld":0,"withheld":9,"storedNot100NothingWithheld":0,"storedNot100":0,"lrHolds":9,"dmMove":0}
+THE FOUR AT REVEAL DM (P1, readOnly, Reveal DM) against the owner's own page (not read-only, premium): the Power tab's share tiles
+  r2r-metropolis-29: tiles owner 19 / dm 19 EQUAL | doc shares stored [33,15,15,14,8,6,5,4] P1dm [33,15,15,14,8,6,5,4]
+  r2r-village-48: tiles owner 9 / dm 9 EQUAL | doc shares stored [44,34,22] P1dm [44,34,22]
+  r2s-infiltrated-city-2: tiles owner 17 / dm 17 EQUAL | doc shares stored [33,17,16,13,12,9] P1dm [33,17,16,13,12,9]
+  r2s-infiltrated-city-3: tiles owner 12 / dm 12 EQUAL | doc shares stored [54,15,15,8,8] P1dm [54,15,15,8,8]
+THE UNPAIRED FIGURES: the Power views (P0 | P1), each bare figure with its line index and the line before it
+  r2r-metropolis-29 P0: [49] "The Powers (7)▲" -> 33 | [50] "33" -> 15 | [51] "15" -> 14
+  r2r-metropolis-29 P1: [49] "The Powers (7)▲" -> 35 | [50] "35" -> 16 | [51] "16" -> 15
+  r2s-infiltrated-city-2 P0: [21] "The Powers (5)▲" -> 33 | [22] "33" -> 17 | [23] "17" -> 16 | [24] "16" -> 12
+  r2s-infiltrated-city-2 P1: [21] "The Powers (5)▲" -> 38 | [22] "38" -> 20 | [23] "20" -> 18 | [24] "18" -> 14 | [25] "14" -> 10
+  r2s-infiltrated-city-3 P0: [65] "The Powers (3)▲" -> 54 | [66] "54" -> 15
+  r2s-infiltrated-city-3 P1: [65] "The Powers (3)▲" -> 70 | [66] "70" -> 20 | [67] "20" -> 10
