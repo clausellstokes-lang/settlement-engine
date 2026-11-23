@@ -53,7 +53,11 @@ branch read the record's bought row at every re-annotation after the coherence s
 over the 900 (3 dark, 4 lit by name; r2r-city-5); a tooth; the per-birth hash: nothing else moves (else STOP); N56.
 | 3b5a37a23 | 13G (N97): `factionDynamics.js :: tieReadsBought` (one reading; not hallCapture.js: its tuning register reds on a new importer); `annotateFactionStanding` gate `seatBoughtOf || tieReadsBought(seat.factionRelationships)`, header names the input; `rosterText.js` AFTER carries rows (roster settle), BOTH (legitimacy settle); bar8 arm over the 900 lit+dark, r2r-city-5 in TOWNS, tooth, judge-vs-cure agreement | red first by name (4 lit, 3 dark, r2r-city-5); hash lit 896=/4 moved, dark 897=/3 moved, none else; 19 naming files 10 red = same without cure (F-JOIN rows); fortune 286/287; copy 172/172; lint three + census title |
 | 1fe19098f | DOOR: lighting census (titles 31,924 -> 31,925), refreeze then plain green | the walker |
-IN FLIGHT (since 14:49 UTC): F-JOIN's builder RESUMED on 1fe19098f, its 49 files re-run from the start (report `close-6/reports/F-JOIN.md`).
+THE OWNER'S ORDER (via the chair, N116, 16:12): the veil's seats paused; THIS LANE IS THE PROGRAM'S FIRST WORK.
+IN FLIGHT (since 16:13 UTC), TWO BUILDERS (COMMON-EIGHTH 12 (a) as 13 keeps it: two units of one deliverable at its landing line):
+(a) F-JOIN in `/home/user/wt/flip` on 1fe19098f (resumed 14:50; WIP saved `close-6/wip/F-JOIN-WIP-UNPROVED.patch`);
+(b) F9 B (sample town, OLD and NEW narrations whole), F9 A (the twin), then F8, in `/home/user/wt/f9` on `lane/close-6-2026-11-23-f9`
+cut at 1fe19098f; reports `close-6/reports/F9.md`, `F8.md`. I MERGE (b) into the flip after F-JOIN's commit (plain), re-run, door.
 NEXT after F-JOIN: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
