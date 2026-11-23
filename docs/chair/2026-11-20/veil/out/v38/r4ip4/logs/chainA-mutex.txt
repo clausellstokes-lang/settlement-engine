@@ -1,0 +1,2 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 29662 after 64 atomic poll(s) + 29 legacy poll(s) + 0 shared-drain poll(s).
+EXIT=0

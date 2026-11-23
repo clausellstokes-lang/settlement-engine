@@ -1,4 +1,4 @@
-# R4I-PAGE-4 HANDBACK (VEIL-38, chain B). IN PROGRESS.
+# R4I-PAGE-4 HANDBACK (VEIL-38, chain B). STOPPED EARLY at the token budget, with what is left below.
 
 Branch `lane/veil-38-2026-11-23-r4ipage4-wip` (local, never pushed), cut at 0755698e6. Brief: `briefs/R4I-PAGE-4-BRIEF.md`
 (40e9ab00c); the chair's rulings (b), (c), (e) of 02:38 UTC, by the seat. Logs: `out/v38/r4ip4/logs/` (`*.full.txt` the
@@ -71,4 +71,30 @@ twin's three extra all on `npc.bo` (`revealDm: true`): `npcs[3].goal.intent.shor
   read reds 36/36, the anchored form reds 36/36 and passes 36/36 clean reads. RED FIRST: against the gallery twin 12/36 clean
   (R4I-PAGE-3, logs there); against the whole-overrides link twin 24/36 (above). GREEN: galleryVeilIds 14/14
   (logs/c-galleryVeilIds.txt). eslint 0 (logs/c-eslint.txt).
-## R — the runs: the 34 files and Tell3/4/5/8 queued on the mutex (chainA); SignalCopies at tip and tree, security and lint whole pending
+## R — THE RUNS
+1. THE 34 FILES once (through the mutex; the tree at bb8897599 + (e)'s helper in the working tree): **2 failed | 864 passed | 1
+   skipped of 867**, exactly the expected two (logs/r1-files34.full.txt): `tests/lib/gallery.test.js` "a share marked with a veil
+   renders through it" (S2) and `criminalVeilSwitch.test.js` VS1 "(a)-(e)" on its crime-types tooth ("some copy carries the
+   crime types ... expected 0 to be greater than 0"). No other red.
+2. THE ARMS ALONE: Tell3 3/3, Tell4 1/1, Tell5 2/2, Tell8 3/3 green (logs/r2-arm-*.txt); galleryServerVeil 18/18 (after (b),
+   logs/b-galleryServerVeil.txt); galleryRosterChoices 39/39 (logs/g3-green-galleryRosterChoices.txt).
+3. galleryVeilSignalCopies: at af708f2fd (`/home/user/wt/r4ip3-tip`, never committed to) 2 failed | 3 passed; at this tree 2
+   failed | 3 passed; THE SAME two tests (server-veil-city-2, current's and master's shape) on THE SAME assertion:
+   "block:services.criminal: shutting it removes something from the gallery page (the row is live): expected 0 to be greater
+   than 0" (logs/r3-signalCopies-*.full.txt). The tip's own (S2's cause), not R4-IDS's.
+4. `tests/security` WHOLE at c7e60ef59: QUEUED, NOT READ (chainF, through the mutex, after the stored-ids chain; writes
+   logs/r4-security-whole.txt). Expected by class: shareRenderTwice's rows (R4I-TONIGHT's), criminalSwitchHandReach's 5 (the
+   G3 STOP), VS1-free (not in tests/security), galleryVeilSignalCopies 2 (the tip's); RULING 4 green now.
+5. `tests/lint` WHOLE at c7e60ef59: QUEUED in the same chain, first (logs/l-lint-whole.txt). See below if read.
+STORED-IDS (ruling (e)), `stored-ids.sh` re-run on both sets at c7e60ef59 through the mutex (logs/st-ids-*.txt; outdirs
+`/var/tmp/r4ip4/ids-{today,master}`): GATE GREEN both, exit 0. Today-born 140 / master-born 140: (1) withheld names in ids,
+keys, slugs: 0 / 0; (2) stored ids served un-re-keyed: 0 / 0, in stored-only fields 0 / 0; (3) ids shared by two reads 0 / 0,
+unresolved beyond the stored own dangling 0 / 0; (4) re-keyed ids/refs/ties 26,712/64,484/26,056 and 12,345/43,204/0;
+controls caught 700/700 and 140/140 on both. Fresh-shaped stored ids: 0 / 0 (above).
+
+## LEFT (exact commands; every test command with the `env -u GIT_DIR ...` prefix, through the mutex)
+- Read logs/l-lint-whole.txt and logs/r4-security-whole.txt when chainF ends (`/tmp/claude-0/-home-user-settlement-engine/b88b7306-c131-56fd-80e9-32ab46d628ea/scratchpad/r4ip4/chainF.sh`, queued at 03:33 UTC through the mutex, which runs
+  `sh scripts/gate-tail.sh npx vitest run tests/lint` then `... npx vitest run tests/security --maxWorkers=2`, PGHOST local).
+  Count lint by name against `git show origin/lane/veil-36-2026-11-22:docs/chair/2026-11-20/veil/out/v36/seated/lint-whole-fails-af708f2fd.txt`
+  (48 of 3,304); class every security red as item R4 says, the titles to `out/v38/r4ip4/g-security-final.txt`.
+- THE STOP of G3 (master roster copies' goal targets un-re-keyed): the seat's / the chair's.
