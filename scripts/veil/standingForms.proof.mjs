@@ -14,6 +14,12 @@
 //     on the brief's four bases (which stay WHOLE), on each base + one standing, and on each base + two standings;
 // (e) with --walk N: N tip births (r5dforms-0..N-1, every size); every standing the tip's engine AND master's engine (75e60fc94,
 //     a scratch copy: it imports nothing) write over each roster cuts WHOLE, and the stored descs' split is counted.
+// (m) R5D-SQL-2 (VEIL-37, the chair's E136 (a)): THE MASK. (b) and (c) run first over the FIRST PASS's samples (the header's
+//     samples less the mask: the same cases as before, byte for byte), then over the MASK SAMPLES: every row with a name or label
+//     slot expanded with the mask (publicSafe.js :: HIDDEN_POWER_MASK) in each such slot, one slot at a time, and the header's
+//     own covering expansion where it differs; each cuts WHOLE to its row, in JS and (--pg) in Postgres; each of the four bases
+//     + one masked standing (+ two) cuts back to that base; and a BASE THAT HOLDS THE MASK mid-sentence (MASK_BASES) stays
+//     whole alone and is never swallowed by a slot (+ one standing, + two: back to that base exactly).
 // The last line is "PROOF exit <0|1>".
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -22,6 +28,7 @@ import { fileURLToPath } from 'node:url';
 import { compileRows, cutDesc, expandTokens, literalOf, readTable, sha256 } from './standingForms.mjs';
 import { powerSentenceName } from '../../src/data/people/powerSentenceName.js';
 import { pluralPowerName } from '../../src/domain/display/pluralPowerName.js';
+import { HIDDEN_POWER_MASK } from '../../src/domain/display/publicSafe.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const REPO_VARS = ['GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR', 'GIT_OBJECT_DIRECTORY', 'GIT_PREFIX', 'GIT_NAMESPACE'];
@@ -32,6 +39,11 @@ export const BASES = [
   'Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word.',
   'An external interest with its own people placed inside the settlement. Its presence is not known to the settlement.',
   'Emergency committee with authority over rationing, conscription, and defence spending; not accountable to normal governance.',
+];
+/** (m) bases that hold the mask mid-sentence (the projection masks a hidden power's label in a base as anywhere). */
+export const MASK_BASES = [
+  `An external interest with its own people placed inside ${HIDDEN_POWER_MASK}'s council.`,
+  `Its patrons answer to ${HIDDEN_POWER_MASK}, and say so only in private.`,
 ];
 const R5D0_TEXT = { '{X}': '{NAME|the governing council}', '{Y}': '{NAME|the second power}', '{Z}': '{NAME|the leading power}', '{S have}': '{NAME} {has|have}', '{S has}': '{NAME} {has|have}', '{S carries}': '{NAME} {carries|carry}', '{VOTE}': '{council vote|decision}' };
 
@@ -78,8 +90,11 @@ async function main(argv) {
   L(`    (R5D-0's NM-more also expands {S have} to "The merchant guilds now have more say now: ...", which no engine writes (the engine writes row NM-guilds, "...have more say: ..."); ${aBogus.length} such literals do not cut; it cuts here as NM-more, its words a name)`);
 
   // (b) every row's samples, whole, in JS
+  // (m): the first pass's samples are the header's less the mask, so these are the cases R5D-FORMS proved, byte for byte
+  const firstSamples = { ...table.header.samples, names: table.header.samples.names.filter((v) => v !== HIDDEN_POWER_MASK),
+    labels: table.header.samples.labels.filter((v) => v !== HIDDEN_POWER_MASK) };
   const samples = [];
-  for (const r of table.forms) for (const s of expandTokens(r.tokens, table.header.samples)) samples.push({ id: r.id, s });
+  for (const r of table.forms) for (const s of expandTokens(r.tokens, firstSamples)) samples.push({ id: r.id, s });
   let bWhole = 0;
   for (const { id, s } of samples) {
     const cut = cutDesc(s, rows);
@@ -108,6 +123,52 @@ async function main(argv) {
     if (base === c.base && ids === c.ids) baseOk += 1; else bad(`(c-js) "${c.s.slice(0, 160)}" -> base "${base.slice(0, 120)}" ids ${ids} (want ${c.ids})`);
   }
   L(`(c-js) the four bases: ${cases.length} cases (alone: whole; + one standing; + two): ${baseOk} cut back to the base exactly, by as many rows as were joined`);
+
+  // (m) THE MASK SAMPLES: each name or label slot of each row, one at a time, holds the mask (the slot's other values and
+  // the row's other slots as the covering expansion gives them); and the header's own expansion (which carries the mask as
+  // one more value) where it differs from the first pass's
+  const nameSlot = (t) => t.t === 'slot' && (t.k === 'name' || t.k === 'label');
+  const holdsName = (t) => nameSlot(t) || (t.t === 'choice' && t.alts.some(holdsName));
+  const seen = new Set(samples.map(({ s }) => s));
+  const maskSamples = [];
+  const addMask = (id, s) => { if (s.includes(HIDDEN_POWER_MASK) && !seen.has(s)) { seen.add(s); maskSamples.push({ id, s }); } };
+  let maskSlots = 0;
+  const maskRows = new Set();
+  for (const r of table.forms) {
+    r.tokens.forEach((t, k) => {
+      if (!holdsName(t)) return;
+      maskSlots += 1;
+      maskRows.add(r.id);
+      const tokens = r.tokens.map((x, j) => (j === k ? { t: 'lit', v: HIDDEN_POWER_MASK } : x));
+      for (const s of expandTokens(tokens, firstSamples)) addMask(r.id, s);
+    });
+    for (const s of expandTokens(r.tokens, table.header.samples)) addMask(r.id, s);
+  }
+  let mWhole = 0;
+  for (const { id, s } of maskSamples) {
+    const cut = cutDesc(s, rows);
+    if (ownCut(s, id)) { mWhole += 1; if (cut.ids[0] !== id) ties += 1; } else bad(`(m) ${id} mask sample does not cut whole to itself: "${s}" -> ${cut ? cut.ids.join('+') : 'no match'}`);
+  }
+  L(`(m) the mask "${HIDDEN_POWER_MASK}" in ${maskSlots} name or label slots of ${maskRows.size} rows: ${maskSamples.length} mask samples, ${mWhole} cut WHOLE to their own row (JS)`);
+  const mcases = [];
+  BASES.forEach((b, bi) => {
+    maskSamples.forEach(({ s }) => mcases.push({ s: `${b} ${s}`, base: b, ids: 1 }));
+    for (let i = bi; i < maskSamples.length; i += 7) mcases.push({ s: `${b} ${maskSamples[i].s} ${samples[(i * 13 + bi) % samples.length].s}`, base: b, ids: 2 });
+  });
+  MASK_BASES.forEach((b, bi) => {
+    mcases.push({ s: b, base: b, ids: 0 });
+    maskSamples.forEach(({ s }) => mcases.push({ s: `${b} ${s}`, base: b, ids: 1 }));
+    for (let i = bi; i < samples.length; i += 9) mcases.push({ s: `${b} ${samples[i].s}`, base: b, ids: 1 });
+    for (let i = bi; i < maskSamples.length; i += 5) mcases.push({ s: `${b} ${samples[(i * 7 + bi) % samples.length].s} ${maskSamples[i].s}`, base: b, ids: 2 });
+  });
+  let mBaseOk = 0;
+  for (const c of mcases) {
+    const cut = cutDesc(c.s, rows);
+    const base = cut ? cut.base : c.s;
+    const ids = cut ? cut.ids.length : 0;
+    if (base === c.base && ids === c.ids) mBaseOk += 1; else bad(`(m) "${c.s.slice(0, 160)}" -> base "${base.slice(0, 120)}" ids ${ids} (want ${c.ids})`);
+  }
+  L(`(m) the four bases + a masked standing (+ two), and ${MASK_BASES.length} bases that hold the mask (alone; + one standing; + two): ${mcases.length} cases, ${mBaseOk} cut back to the base exactly`);
   // the lazy base in JS too (the form the SQL builder writes): the same split, row by row
   let lazyAgree = 0;
   const lazyRows = table.forms.map((r) => ({ id: r.id, re: new RegExp(`^(.*?)(?:^| )(${r.re})`) }));
@@ -123,7 +184,10 @@ async function main(argv) {
     }
     return { base: rest, ids: ids.join('+') };
   };
-  const all = [...samples.map(({ s }) => s), ...cases.map((c) => c.s)];
+  // the first pass's cases first (cases.csv rows 0..first-1), then (m)'s
+  const all = [...samples.map(({ s }) => s), ...cases.map((c) => c.s), ...maskSamples.map(({ s }) => s), ...mcases.map((c) => c.s)];
+  const first = samples.length + cases.length;
+  L(`(m) cases: ${first} of the first pass, ${all.length - first} of the mask (${maskSamples.length} samples, ${mcases.length} base cases), ${all.length} in all`);
   for (const s of all) {
     const a = cutDesc(s, rows);
     const b = lazyCut(s);
@@ -170,7 +234,7 @@ do $$ declare moved int; f record; begin loop
       if ((a ? a.base : s) === base && (a ? a.ids.join('+') : '') === ids) eq += 1; else bad(`(c-pg) PG and JS differ on "${s.slice(0, 120)}": PG base "${base.slice(0, 80)}" ids ${ids}`);
     }
     if (pg.length !== all.length) bad(`(c-pg) PG returned ${pg.length} of ${all.length} cases`);
-    L(`(c-pg) the PG cut equals the JS cut on ${eq} / ${all.length} (${samples.length} samples, ${cases.length} base cases; the four bases alone stay whole)`);
+    L(`(c-pg) the PG cut equals the JS cut on ${eq} / ${all.length} (${samples.length} samples, ${cases.length} base cases; the four bases alone stay whole; (m) ${maskSamples.length} mask samples, ${mcases.length} mask base cases)`);
   }
 
   // (e) the engines over real rosters

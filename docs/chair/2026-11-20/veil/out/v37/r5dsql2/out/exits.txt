@@ -1,0 +1,19 @@
+print rc=0 00:42:05 sha256 2dced4651450f4b0f341d447aeee5d6971317523b46fb384c93aa9c69906676b length 24079
+a-check rc=0 00:42:06 green (117 rows
+a-check-file-red rc=1 00:42:06 (want 1, the message: yes)
+b-registry-check rc=0 00:42:06
+c-walker rc=0 00:42:08 Tests  11 passed (11)
+d-typecheck rc=0 00:42:48
+d-eslint rc=0 00:42:49
+e-make-dbs rc=0 00:42:56
+e-apply-212 rc=0 00:42:56
+e-apply-212-rollback rc=0 00:42:56
+e-rollback-equals-211 rc=0 00:42:56 (480 functions)
+e-veil-executable-by-anon-or-authenticated rc=0 00:42:56 (count 0)
+e-apply-212-at-eeda6a126 rc=0 00:42:56
+f-make-db rc=0 00:42:57
+f-proof rc=0 00:43:53 PROOF exit 0
+g-cases rc=0 00:44:10 SQL = JS = reference on 7555 / 7555 (first pass 6009 / 6009; mask 1546 / 1546)
+h-old-literal rc=0 00:44:10 old literal sha256 794367e0e6ae71dc7b82b5ee95ca69e8c4dfb77a990e2b2e81aeed36de4e8cc8 length 23737
+h-probe rc=0 00:46:18
+i-cost-law rc=0 01:47:33 this 212's Reveal-DM read 464.3 ms against twice 211's Reveal-off read (2 x 247.4 = 494.8): WITHIN

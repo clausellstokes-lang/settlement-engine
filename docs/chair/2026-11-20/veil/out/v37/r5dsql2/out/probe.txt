@@ -1,0 +1,42 @@
+r5dsql2 probe: 72 born towns; 288 reads (gallery unmarked, default veil, Reveal DM; the link); reads that raise 0
+  TWIN = SERVER: reads that differ 0
+  served descs 964: cut 512, a base as handed 452, no projected counterpart 0
+  STILL ENDING IN A TABLE TAIL: 0
+  DIFFERING FROM THE REFERENCE CUT of the desc the projection hands the veil: 0
+  differing from the reference cut of the STORED desc (the projection's mask aside, counted): 0
+  item 6, A SERVED BASE HOLDING THE MASK: reads 0, towns 0, sentences 0
+r5dsql2 plants (an owner-hidden power whose label another power's standing carries): 60 reads of 30 plants, by class (the row that cuts the masked standing; the slot's place):
+  M-R2-buy mid: 3
+  M-R2-buy+CM-outvote mid: 1
+  M-R2-buy+GR-line mid: 2
+  M-R2-buy+MC-outpaced mid: 3
+  M-R2-buy+NM-ahead mid: 1
+  NM-more head: 1
+  R1-behind mid: 3
+  R1-behind+MC-outpaced mid: 1
+  R1-behind+RA-more head: 1
+  R1-behind+RA-shadow mid: 3
+  R1-gap mid: 2
+  R1-shadow mid: 3
+  R1-shadow+MC-outpaced mid: 3
+  R1-shadow+RA-shadow mid: 1
+  RA-more head: 1
+  RL-few+NM-more head: 1
+  M-R2-buy mid: e.g. v11-ties-village-infiltrated-2, "Elder Council" hidden, in "Religious Authorities": "Close enough to the two above that their support is worth buying; they play Merchant Guilds and an unseen interest against each other when they can."
+  M-R2-buy+CM-outvote mid: e.g. v11-ties-metropolis-calm-4, "Ducal Governorship" hidden, in "Craft Guilds": "Close enough to the two above that their support is worth buying; they play Merchant Guilds and an unseen interest against each other when they can. The merchants consistently outvote them on pricing and labour standards"
+  M-R2-buy+GR-line mid: e.g. v11-ties-village-infiltrated-3, "Headman's Authority" hidden, in "Military Party": "Close enough to the two above that their support is worth buying; they play Religious Authorities and an unseen interest against each other when they can. They and the religious authorities both keep people in line. The "
+  M-R2-buy+MC-outpaced mid: e.g. v11-ties-town-infiltrated-0, "Guild Council" hidden, in "Merchant Guilds": "Close enough to the two above that their support is worth buying; they play The Guard and an unseen interest against each other when they can. The craft guilds are present but outpaced; merchants set prices, craft master"
+  M-R2-buy+NM-ahead mid: e.g. v11-ties-metropolis-calm-1, "Grand Guild Consortium" hidden, in "Noble Houses": "Close enough to the two above that their support is worth buying; they play The Guard and an unseen interest against each other when they can. Still ahead of merchant interests in real influence, for now. They know the g"
+  NM-more head: e.g. v11-ties-metropolis-calm-2, "Grand Merchant Senate" hidden, in "Noble Houses": "an unseen interest has more say now: the noble families keep their titles, their land and their precedence, but the money has moved."
+  R1-behind mid: e.g. v11-ties-village-infiltrated-3, "Headman's Authority" hidden, in "Religious Authorities": "Behind an unseen interest by too much to challenge openly, so they get their way through petitions and procedure instead."
+  R1-behind+MC-outpaced mid: e.g. v11-ties-metropolis-calm-4, "Ducal Governorship" hidden, in "Merchant Guilds": "Behind an unseen interest by too much to challenge openly, so they get their way through petitions and procedure instead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchan"
+  R1-behind+RA-more head: e.g. v11-ties-town-infiltrated-4, "Arcane Council" hidden, in "Religious Authorities": "Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure instead. an unseen interest has more say right now, and the clergy cannot accept it."
+  R1-behind+RA-shadow mid: e.g. v11-ties-city-infiltrated-1, "Merchant oligarchy" hidden, in "Religious Authorities": "Behind an unseen interest by too much to challenge openly, so they get their way through petitions and procedure instead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned "
+  R1-gap mid: e.g. v11-ties-village-infiltrated-4, "Elected Reeve" hidden, in "Religious Authorities": "The gap between them and an unseen interest is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions."
+  R1-shadow mid: e.g. v11-ties-city-calm-4, "Noble Governorship" hidden, in "Religious Authorities": "They operate in the shadow of an unseen interest, close enough to matter and too far behind to lead."
+  R1-shadow+MC-outpaced mid: e.g. v11-ties-city-calm-1, "Merchant oligarchy" hidden, in "Merchant Guilds": "They operate in the shadow of an unseen interest, close enough to matter and too far behind to lead. The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often tha"
+  R1-shadow+RA-shadow mid: e.g. v11-ties-metropolis-infiltrated-0, "Ducal Governorship" hidden, in "Religious Authorities": "They operate in the shadow of an unseen interest, close enough to matter and too far behind to lead. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is her"
+  RA-more head: e.g. v11-ties-metropolis-calm-0, "Arcane Orders" hidden, in "Religious Authorities": "an unseen interest have more say right now, and the clergy cannot accept it."
+  RL-few+NM-more head: e.g. v11-ties-town-calm-5, "Merchant Council" hidden, in "Landed Gentry": "They have a say on only a few matters; on everything else they side with whoever will deal with them that week. an unseen interest has more say now: the noble families keep their titles, their land and their precedence, "
+  THIS TREE, server and twin: the served desc is the base on 60 / 60
+  AT eeda6a126 (THE RED), server and twin: the masked standing served WHOLE on 60 / 60
