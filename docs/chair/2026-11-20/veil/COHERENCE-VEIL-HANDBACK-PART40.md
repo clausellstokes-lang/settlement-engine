@@ -8,7 +8,7 @@ Branches:
 
 No pull request, ever (N2). THE LANE'S TIP is 2d7ed483f on `lane/veil-39-2026-11-23-tip` (40.4), merged into the -wip at ec082df83.
 
-## 1. WHERE THIS SEAT STANDS — FINAL AT THE HAND-OVER (40.7; written from 04:02 UTC on 2026-11-23; M's line is added when M ends)
+## 1. WHERE THIS SEAT STANDS — FINAL AT THE HAND-OVER (40.7; written 04:02 to 06:06 UTC on 2026-11-23; M ENDED, its counts in (3) 2; VEIL-38 HANDS OVER at the commit carrying this line)
 THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE TIP. The lane's tip is 2d7ed483f on `lane/veil-39-2026-11-23-tip`, merged into the -wip at ec082df83.
 THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` (the commit carrying this section) and `lane/veil-38-2026-11-23-r4ids-wip` at f7f1cfe8c (the unit's code; pushed).
 
@@ -73,6 +73,8 @@ THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` 
 ### (3) THE SUCCESSOR'S FIRST ACTS, IN ORDER (40.8 (4))
 1. THE MACHINE AND THE POOL: PART 36 section (4) with the names of (5) below (about 33 minutes wall; the pool ONCE, on the -wip; ONE heavy run at a time through the gate mutex, the seat's own probes included: 40.7 (1)).
 2. M's RESULT (40.7 (3)). ON THE 140, RUN BY THIS SEAT at the -wip f7f1cfe8c, ended 04:44 UTC (`/var/tmp/v18/out/v38/m/m140/names-table.txt`): 6,160 reads; 356 cast persons on the owner pages, 15,664 cast person-reads served. (i) 0, (ii) 0, (iii) nameless 0, unmapped served cast ids 0: NO STOP. A SURPRISE FROM THE SAME PROBE, sent to the chair 04:45: the server's canonical document differs from the twin's, modulo the bijection, on 77 reads. All are Reveal OFF, at every setting, on 7 today-born places (r3m-town-wartime-0-29, r3m-metropolis-none-1-137, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-city-none-1-107). The gates compare signatures and cannot see it. PLAUSIBLY the gap in another dress; its cause is NOT read: THE GAP MEASURE (act 3) TAKES IT AS ITS FIRST LEAD, the diff by path on those 7 places. ON THE POOL: see this item's last line.
+   ON THE POOL, RUN BY THIS SEAT at f7f1cfe8c, ended 06:06 UTC rc 0 (`/var/tmp/v18/out/v38/m/mpool/names-table.txt`): 1,808 places (608 hidden-house), 79,552 reads; 4,608 cast persons on the owner pages, 202,752 cast person-reads served. (i) 0, (ii) 0, (iii) nameless 0, unmapped served cast ids 0: NO STOP. SERVER vs TWIN, the whole canonical document modulo the bijection: 352 reads differ (the table lists the first 10 places, all at Reveal off, at every setting). Together with the 140's 77, THESE ARE 40.9's STOP for "TIP?": cured or explained by cause first (act 3).
+   M IS DONE: R4I-TONIGHT-2 (act 5) may build on it (key on the name; the id fallback gone).
    The three counts are: three counts on the 140 and the pool: (i) cast persons sharing (name, crisis, role); (ii) served name differs from the stored name; (iii) nameless cast persons. ANY NOT 0 IS A STOP TO THE CHAIR. If M did not end in this seat, re-run it: `sh /var/tmp/v18/out/v38/mrun.sh`, or the probe `out/v38/r4it/tonight-names.sh <tree> <out> v28tpl [pooldir]` on R4I-TONIGHT's branch, through the mutex.
 3. THE MEASURE OF THE GAP (40.8 (1)): with the corrected `storedIdsServed` (`tests/security/personIdBijection.shared.mjs`, (E) + (F)), on both stored sets (today-born, master-born: `out/v38/r4ip3/st/stored-ids.sh`, `dump.sh`) and the pool, both engines, every door and setting: EVERY path where a stored person id of that document still stands after the re-key, by path and count.
 4. R4I-SQL-2: a builder that reads 212 and the registry WHOLE as its first act; it cures every path the measure lists, in 212, the rollback, the registry's `people.rekey` path (by its door) and the twin `rekeyPeople`; red first on tooth (ii)'s five and on the stored arm; 001..211 + 212 + down = 001..211; the catalogue; `--check`. THE SUCCESSOR READS 212 AND THE REGISTRY WHOLE before it reads that diff (40.1 (b)).
@@ -226,6 +228,8 @@ THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` 
      that cure is in the tip.
 
 ## 3. Log (every hour read from `date -u`)
+- 04:00 R4I-PAGE-4 merged (f7f1cfe8c); M queued. 04:4x tests/security whole ended, 9 of 2,113. 04:44 M on the 140: 0, 0, 0; the 77. 06:06 M on the pool: 0, 0, 0; 352.
+- 06:06 VEIL-38 HANDS OVER (40.7).
 - 00:15 seated (not clocked; the first clock read was 00:17).
 - 00:17 chain0 launched on the -wip.
 - 00:19 first line to the chair.
