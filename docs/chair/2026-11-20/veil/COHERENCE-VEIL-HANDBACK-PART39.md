@@ -7,6 +7,38 @@ N1-N8. Seated about 00:14 UTC 2026-11-23 on b5244a6a0 (VEIL-36's final; code equ
 eeda6a126 (`origin/lane/veil-36-2026-11-22-r5desc-wip`: the tip + R5D-FORMS 4583ad3d4 + R5D-SQL 051bae78e), worktree
 `/home/user/wt/r5desc`. No pull request.
 
+## 0. VEIL-37 HANDS OVER (the chair's order of 03:05 UTC; its read of this seat's record 553,176 at 03:01). VEIL-40 IS SEATED ON THIS FILE'S
+## COMMIT (on `lane/veil-37-2026-11-23`) AND ON `lane/veil-37-2026-11-23-r5dpage-wip` 74afc8219 (the unit's code: everything below is in it).
+- BUILT: R5D-FORMS, R5D-SQL, R5D-SQL-2 (the SQL half), R5D-PAGE-A (the page half). READ BY THIS SEAT, ONCE: R5D-SQL-2's diff (no fault,
+  ACCEPTED on this seat's own re-run of its runner, which re-ran R5D-SQL's builder-only proofs too) and R5D-PAGE-A's diff WHOLE
+  (3ef7fb325..74afc8219: 11 files, +1,336 -10; 03:0x-03:1x): NO FAULT. A's OWN RUNS ARE NOT RE-RUN BY ANY SEAT (58 of 58 on four pglite
+  files; `tests/lint` whole 45 = the lane's 22 + the 23 `prose.*`; typecheck 167/167; eslint 0; raw first paint +0): the unit's proofs re-run them.
+- NOT BUILT: R5D-PAGE-B (items 5, 5b, 5c; tests and instruments only), NOT DISPATCHED. NO "TIP? R5-DESC" UNTIL (i) B's stored arm has run
+  (ruling 105) AND (ii) the chair has ruled the OPEN FINDING (ruling 107 (3)) on B's measure.
+- VEIL-40's FIRST ACTS, IN ORDER: (1) the read-in its prompt gives (it does NOT read 212 whole: section 1 below carries what the page side
+  needs of 212 and the twin; a red that points into 212 is the exception); (2) re-make the machine (below) and the pool; (3) re-run A's
+  four pglite files and `tests/lint` whole on 74afc8219 (A's figures are unproven by a seat); (4) write R5D-PAGE-B's brief from
+  `briefs/R5D-PAGE-BRIEF.md` (its VEIL-37 section) WITH ruling 107: ITEM 5b IS A MEASURE FIRST (Q1-Q3), run BEFORE B's other items, on
+  the FULL pools; the share-class arm tightened to 107 (1)'s four conditions; reader B's differential on the FULL pools and the STORED
+  pools; every name arm case-blind, listing a hit by its exact form; the two plant (e) titles' "EXPECTED RED" re-worded (green since
+  R5D-SQL-2); then dispatch it; (5) the unit's proofs; (6) "TIP? R5-DESC <commit>" when the chair has ruled 107 (3).
+- THE SMALLEST LIST OF FILES VEIL-40 NEEDS TO GO ON (besides its prompt's): this file WHOLE; `briefs/R5D-PAGE-BRIEF.md`; on
+  74afc8219 `docs/chair/2026-11-20/veil/out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md` (section 1) and `.../out/v37/r5dsql2/R5DSQL2-HANDBACK.md`
+  (section 1); `src/domain/veil/pageRederive.js` (the page readers; B reads it, never edits it); `tests/security/galleryVeilDesc.pglite.test.js`
+  (B extends it); the R5D-1 measure's M1 table (`out/v34/r5d1/R5D1-MEASURE.md` on `lane/veil-34-2026-11-22-r5d1-wip` ee2dbda33) for 5b;
+  VEIL-33's read-stored instrument (`lane/veil-33-2026-11-22-legacy-wip` 216cb46d8; instruments 4d03aaa0d) for 5 and 5c.
+- WHERE `rivalDescOf` WRITES (for 107 (3)): `src/generators/density/applyDensityLaw.js :: resizePoliticalRoster` mints a rival as
+  `{ ...host, contestsNiche: key, ...rivalDescOf(host.desc) }` (the mint's own line, "BAR8-K-POWERS (14a)"): the rival's `desc` is
+  `rivalDescOf(host.desc)` = the row of `RIVAL_DESC_OF_HOST` (same file, near its end) whose host pattern matches the HOST's opening line,
+  else the host's own desc copied (R5D-1's T13: 987 served copies); so a rival's BASE is chosen by, and may copy words of, its host.
+  `contestsNiche` (the host link) is withheld always (ruling 51); the rival row itself is served like any other power.
+- WHICH STRINGS THE MASK READS (for 107 (3)): `src/domain/display/publicSafe.js :: maskHiddenNames` (called on the projection with
+  `hiddenPowerNamesOf(settlement)`, the owner-hidden powers' labels): EVERY STRING VALUE at any depth (never a key, an `id` at any depth,
+  the record's top-level `name`, or the prose format tag; `publicProse` through `maskProse`), each by `maskText`: an EXACT,
+  CASE-SENSITIVE `split(name).join('an unseen interest')`. So a hidden power's name in another case ("the religious authorities",
+  "Noble families ...") or another form (bare, plural, possessive) is NOT masked; 212's side is 210's string-leaf walk, its twin.
+- PART 39's rulings 107-109 (section 2) carry the chair's 03:05 word.
+
 ## 1. WHERE THIS SEAT STANDS (kept current at every push; written for a reader who has never seen this session)
 THE MARK: the chair's read of this seat's record 495,358 at 01:16 UTC (the hand-over word at 620,000; the line 700,000). R5-DESC does
 not end inside this seat's room: the successor is seated ON this seat's "VEIL-37 HANDS OVER <commit>" and carries the unit to "TIP?".
@@ -74,8 +106,11 @@ THE BUILDERS (subagents of this seat; a successor re-staffs from the brief and t
   equal); (2) reader B's full kind cut NOT built (it withheld the sentence on 7 of 21 nothing-hidden births): the name check + the
   differential instead; (3) A POSSIBLE LEAK: 8 served BASES on 2 places (jp6-city-8 act T; r3m-city-none-0-37) name an owner-hidden
   density host in sentence case past the case-sensitive mask, which the belt (only where a house is hidden whole) does not reach:
-  counted, not cured. ITS DIFF IS UNREAD BY THIS SEAT unless a later line here says otherwise.
-- R5D-PAGE-B (items 5, 5b, 5c; tests and instruments only): NOT DISPATCHED; after A is read and merged. NO "TIP?" BEFORE B's STORED ARM
+  counted, not cured. ITS DIFF READ WHOLE BY THIS SEAT (03:0x-03:1x; the chair's 03:05 word): NO FAULT. Two notes for B: the
+  share-class listing (`galleryVeilDesc.pglite` :: differential, `shareClass`) is looser than ruling 107 (1)'s arm; the two "EXPECTED RED"
+  titles of plant (e) and the born mask arm are stale (green since R5D-SQL-2).
+- R5D-PAGE-B (items 5, 5b, 5c; tests and instruments only): NOT DISPATCHED (the chair, 03:05: this seat dispatches no further builder);
+  VEIL-40's, from the brief with ruling 107; 5b IS A MEASURE FIRST. NO "TIP?" BEFORE B's STORED ARM
   HAS RUN (ruling 105).
 
 DONE AND ACCEPTED BY THIS SEAT:
@@ -146,6 +181,29 @@ chair's read leaves the room, else it is the successor's first act (said in the 
     standing reds by name, these 23 by id, nothing else). Two builders at once taken (two halves of one deliverable): ONE writer on 212
     and `galleryWithholdAlways.js` (R5D-SQL-2), ONE on `pageRederive.js` (A); plant (e) red on A's branch until R5D-SQL-2 merges.
 
+107. THE CHAIR, 03:05 UTC, ON R5D-PAGE-A's THREE: (1) THE SHARE CLASS IS A LISTED CLASS, NOT A FAULT: on the DM door the stamped row and
+    every kept row's raw figure are served by rule (E115 (2)); S stays as built (the stamped row out, the served figures, no re-sharing by
+    the page). THE ARM: a read is listed ONLY IF it is on the DM door AND the place serves a stamped row AND the two pages differ in S's
+    gap-based forms ALONE (by the standing table's ids) AND the same record's Reveal-off read is equal; the count pinned (36 reads on 9
+    records on this slice), re-counted on the full pool; anything else that differs is a fault; one row for READERS-LIST. (2) ACCEPTED AS
+    BUILT: the name belt and the differential; the full kind cut NOT built (it withheld the sentence on 7 of 21 nothing-hidden births; a
+    page cannot tell a density-trimmed row from an owner's hide, and a cut firing only on a hiding read would make the very difference).
+    E128's rule NOW READS: no NAME of a cut power is printed; a hiding read's sentence equals the never-there page's; a template that ever
+    differs is withheld always. TWO CONDITIONS, B's: reader B's differential on the FULL pools and the STORED pools (176 of 176 is a slice);
+    every name arm compares WITHOUT REGARD TO CASE and lists a hit by its exact form. (3) NOT A CLEANUP: AN OPEN FINDING OF R5-DESC; NO
+    "TIP? R5-DESC" UNTIL THE CHAIR HAS RULED IT; NO CURE YET: MEASURE FIRST as B's item 5b, BEFORE B's other items, on the full pools, for
+    every density rival whose host is hidden by hand: Q1 is the rival's served base equal to its base on the place with the host never
+    there? Q2 does ANY OPEN place of the pool show that rival, with that base, WITHOUT that host on its roster (if none, the roster itself
+    is the tell)? Q3 every case form of a hidden power's name in any served string, by form, path and count, beside the same search on the
+    never-there place. Then the chair rules one of: the template withheld always and re-derived on the page (E126's own rule; a builder that
+    reads 212 whole); the rival leaves with its host; the mask takes the engine's case forms; or the base stands, with a READERS-LIST row.
+    Item 0 (a) not going red is TAKEN as a finding: the rule and the arm stand as built.
+108. THE CHAIR, 03:05: R5D-PAGE-A's diff read whole by this seat (its read under 560,000); THEN HAND OVER; this seat dispatches no
+    further builder; PART 39 section 1 carries the three rulings and the smallest list of files the successor needs.
+109. THE CHAIR, 02:26 (its N29): the join's item: `powerNameWithArticle` (NAMES-1, d0549419b) is on the working line, not on the lane or
+    master: the table's name slot takes "the <Name>" and "the an unseen interest" AT THE JOIN, not now. The cost law's figure is said at
+    every chain's "TIP?" (this unit's: 465.0 against 523.2 ms).
+
 ## 3. Log (every hour from `date -u`)
 - 00:20 seated on b5244a6a0; chain0 launched (00:15); read-in; first line to the chair 00:18; R5D-SQL-2's brief and dispatch.
 - 00:44 pool END; 00:53 gates read; 00:56 (0)'s line to the chair (with the 23 composed prose rows' question).
@@ -154,3 +212,4 @@ chair's read leaves the room, else it is the successor's first act (said in the 
 - 01:4x R5D-SQL-2 returned; its diff read once, no fault; its runner re-run by the seat launched.
 - 02:18 the seat's re-run of R5D-SQL-2's runner: every step 0, the cost law WITHIN: ACCEPTED; 02:2x the tip merged into the -wip (3ef7fb325), pushed; the arms launched.
 - 02:3x the arms on the merged -wip: 2 reds, both pins moved by design (MAIN of galleryWithholdAlways; V8-4), sent to R5D-PAGE-A.
+- 02:5x R5D-PAGE-A returned; pushed unread 74afc8219; three rulings asked. 03:05 the chair: 553,176; read A's diff; the three ruled (107). 03:0x-03:1x A's diff read whole: no fault. VEIL-37 HANDS OVER at the commit carrying this line.
