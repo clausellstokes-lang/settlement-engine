@@ -4,14 +4,14 @@ The close's seat for its two word cures, seated by THE NINTH CHAIR (session_01Fb
 of CLOSE-3 (unit "VACANT") and of CLOSE-2 (unit "PRONOUN") for these two units only. Prompt: the ninth chair's seating message
 (CLOSE-4, the middle tier at high effort). THE FLIP IS NOT THIS SEAT'S: it touches nothing of it.
 
-## 0. WHERE THE SEAT STANDS (written 2026-11-23 01:45 UTC, read from date -u)
+## 0. WHERE THE SEAT STANDS (written 2026-11-23 02:13 UTC, read from date -u)
 
 | ref | tip | state |
 |---|---|---|
-| `lane/close-4-2026-11-23` (this lane) | this push | docs only: this hand-back; `briefs/VACANT-15.md` (the builder's brief for arm (15)) |
+| `lane/close-4-2026-11-23` (this lane) | this push | docs only: this hand-back; `briefs/VACANT-15.md`, `briefs/PRONOUN-THEY.md`; `close-4/` (the they measure); `close-3/FLIP-LIST-VACANT.md` corrected |
 | `lane/close-4-2026-11-23-vacant-wip` | 4ef6d6c32 | VACANT AT ITS LANDING LINE: its code, cut AT CLOSE-3's 2b8cc2946 (on the line's tip 244fa84ef): fc0ec46a0 the cure; 003a1723b census; 2b8cc2946 cure one; d4ea9a9f2 arm (15); ac8121863 census; 4ef6d6c32 the voice cure |
 | `lane/close-4-2026-11-23-lit-scratch` | 1a2ee47e3 | the -wip + the flip's three dials and the `powersList` row (`close-2/census/light.sh`, 296668dea), the -wip merged in at 4ef6d6c32: a SCRATCH ref, never merged by anyone |
-| `lane/close-4-2026-11-23-pronoun-wip` | f5fa6316a | PRONOUN's code AT CLOSE-2's -wip (cut from the line at point 102, c1144ba18): NOT YET READ-RUN by this seat beyond its diff |
+| `lane/close-4-2026-11-23-pronoun-wip` | f5fa6316a (local; not yet pushed) | PRONOUN's code AT CLOSE-2's -wip (cut from the line at point 102, c1144ba18); the they cure UNCOMMITTED in its worktree (section (2)) |
 
 ### (1) VACANT
 - CURE ONE READ WHOLE (003a1723b..2b8cc2946, 3 files): the findings judge imports nothing from `src/generators/`; it reads
@@ -40,12 +40,24 @@ of CLOSE-3 (unit "VACANT") and of CLOSE-2 (unit "PRONOUN") for these two units o
   932,583 (+214): RISES NAMED FOR THE OWNER, signed by nobody. `tests/lint` whole at 4ef6d6c32 (the builder's run): the line's
   three. THE PAPER FLIP LIST: `close-3/FLIP-LIST-VACANT.md`, corrected for this tip. "VACANT 4ef6d6c32" SENT to the chair.
 
-### (2) PRONOUN: not started beyond reading. Its diff 2904f0475..f5fa6316a READ WHOLE (the leaf `personMention.js` and the walker
-whole; the leaf test, the census and manifest rows). NOTE for the chair: the follower cure turns "an introduction him would rather
-keep to themselves" into "...he would rather keep to themselves": the template's "themselves" is the template's, not the cure's.
+### (2) PRONOUN (state at 02:13 UTC, read from date -u)
+- CLOSE-2's diff 2904f0475..f5fa6316a READ WHOLE (the leaf `personMention.js` and the walker whole; the leaf test, census and
+  manifest rows). RE-RUN at f5fa6316a: RED FIRST by plant (worktree `/home/user/wt/pplant`, the leaf's case reading restored to
+  `opensClause`): 4 red (the leaf's PRONOUN `it`; the walker's ties and wants arms and its PRINTED control); GREEN 27/27 (the leaf
+  test, `personMentionCase`, `namesInSentences`). Tests naming an old wrong form: 0 files.
+- THE CHAIR'S THEY RULING (01:55 UTC): a later mention followed in its clause by a they-form bound to it keeps the name.
+  MEASURED (`close-4/THEY-MEASURE.txt`, script beside it): 8 mentions in 7 templates carry a they-form; TWO bind the mention
+  (`mutual_leverage.tension[12]` "would rather keep to themselves", `mutual_leverage.desc[8]` "cannot finish theirs"); six bind
+  another. BUILT UNCOMMITTED in `/home/user/wt/pronoun` (brief `briefs/PRONOUN-THEY.md`): the leaf's `KEEP_NAME_TAILS`, the
+  walker's `THEY_BOUND`/`THEY_OTHER` by id, a leaf `it`; red 4 on f5fa6316a's leaf, green 18/18. STOPPED: `namesInSentences`
+  CN2 (`REPEATED_NAME_CEILING` 0) goes 0 -> 11 (the kept names, 6 + 5). PUT TO THE CHAIR with three ways, CLOSE-4's lean (A): skip
+  the pronoun only, take the leaf's next rung (role, surname, given name). WAITING ON ITS WORD.
+- NOT YET RUN for PRONOUN: `tests/lint` whole, `tests/generators/people` + the 34 named files, the 89 golden-reading files, both
+  typechecks, the dark births (base: the line's per-birth file), the golden's 525 on the line and the tip, the build; the merge
+  of the line's tip (src equal to point 102's; the lighting census conflicts: the line's side, then its door).
 
 ### (3) NEXT, IN ORDER
-1. PRONOUN by the prompt's unit (2): re-run its red first and green; `tests/lint` whole, `tests/generators/people` whole, the
+1. PRONOUN by the prompt's unit (2), after the chair's word on the they conflict: re-run its red first and green; `tests/lint` whole, `tests/generators/people` whole, the
    tests naming the leaf, its callers' tables or an old wrong form, the three walkers; both typechecks; ONE build, the five
    figures, `VERIFY_DIST=1 tests/build`; which goldens move, named and counted; then merge the line's tip (244fa84ef unless the
    chair sends "THE LINE IS <commit>"), the lighting census the line's side then its door; "PRONOUN <commit>".
