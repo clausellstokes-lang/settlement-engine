@@ -129,3 +129,14 @@ export const CHILD_WARNINGS = Object.freeze({
     { id: 'X17', text: 'Children are warned about the usual things: leaning over the water to look in, and straying far from home.', needs: ['institution: waterSource'] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** Every warning is a consequence (what a condition makes the grown-ups tell the children). */
+export const CHILD_WARNINGS_DOES = Object.freeze(Object.fromEntries(Object.keys(CHILD_WARNINGS).map((b) => [b, Object.freeze({ consequence: true })])));

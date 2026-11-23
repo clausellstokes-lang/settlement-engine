@@ -273,11 +273,16 @@ describe('outsider_impressions behavior', () => {
     expect(s.references.some(r => r.type === 'faction')).toBe(true);
   });
 
-  it('cites the top threat when present', () => {
-    const s = deriveDailyLifeSlot('outsider_impressions', {
-      config: { monsterThreat: 'plagued' },
-    });
-    expect(s.references.some(r => r.type === 'threat')).toBe(true);
+  // D4C-1 (the chair's E133 (1)): the top threat is cited ONCE on the page. Here recent_changes states its arrival
+  // ("Beasts have overrun the country around…"), so the outsider line yields its threat part and recent_changes cites it.
+  it('cites the top threat when present, once: the outsider line yields it where recent_changes states it', () => {
+    const rec = { config: { monsterThreat: 'plagued' } };
+    const s = deriveDailyLifeSlot('outsider_impressions', rec);
+    const recent = deriveDailyLifeSlot('recent_changes', rec);
+    const cites = (/** @type {any} */ x) => x.references.some((/** @type {any} */ r) => r.type === 'threat');
+    expect(cites(recent)).toBe(true);
+    expect(cites(s)).toBe(false);
+    expect(s.text).not.toBe('');
   });
 });
 

@@ -12,9 +12,10 @@
  *   isVeiledPower`, a criminal power among them: then nothing is said). Where it CLEARLY LEADS (`facts/leaderLead.js ::
  *   leaderLeadOfRecord(r).leadOverSecond` over 6, or no second power: the `topTwoGap <= 6` cut the standing line holds
  *   before "No one clearly leads here") the branch `power`, naming it: `{power}` is its name with its article
- *   (`display/powerSentenceName.js :: powerNameWithArticle`), `{Power}` the same at a sentence's head, `{power's}` its
- *   possessive after "the" (`powerPossessive`), `{power|one|many}` a verb in the name's number (`fillAgreement`). Else
- *   the branch `power.level`, naming no one.
+ *   (`display/powerSentenceName.js :: powerNameWithArticle`), `{Power}` the same at a sentence's head,
+ *   `{power|one|many}` a verb in the name's number (`fillAgreement`); NO line puts "'s" on the name (D4C-1, the chair's
+ *   E133 (3): a name may itself hold one, "the Headman's Authority's mark"; P0 says "the mark of {power}";
+ *   `tests/lint/dailyLifePossessive.walker.test.js`). Else the branch `power.level`, naming no one.
  * - THE THREAT PART: the most severe OPEN threat that is not a defence RATING (the order and supply ratings
  *   `threatProfile.js` raises from `defenseProfile.scores`, "Civic stability at risk" and "Economic fragility", are no
  *   threat: THE CALM RULE), band above low, said as an outsider sees it: `threat.<kind>.<form>`. A hidden or rumoured
@@ -57,7 +58,7 @@ const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({
 export const OUTSIDER_IMPRESSIONS = Object.freeze({
   /** the top power, not veiled, clearly leading: named. */
   power: frozen([
-    { id: 'P0', text: 'Outsiders notice {power\'s} mark is on every door that matters.', needs: [] },
+    { id: 'P0', text: 'Outsiders notice the mark of {power} on every door that matters.', needs: [] },
     { id: 'P1', text: 'A visitor soon learns that little happens here without {power}.', needs: [] },
     { id: 'P2', text: 'Ask who decides things here, and the answer is {power}.', needs: [] },
     { id: 'P3', text: 'Strangers with business here are sent to {power} sooner or later.', needs: [] },
@@ -201,3 +202,21 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'O3', text: 'A visitor finds nothing much to remark on, which suits the people here.', needs: [] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ * Here: the power part states the lead (`power:lead`, `power:no-clear-lead`); `threat.<kind>.<form>` states
+ * `threat:<kind>`; `services.food_production` `food:want`, `services.defense` `defence:want`, any other
+ * `services.<lens>` `cap:<lens>:want`; `ordinary` is the quiet as a visitor finds it.
+ */
+/** @param {string} b @returns {{ states: string } | { consequence: true }} */
+const outsiderDoes = (b) => (b === 'power' ? { states: 'power:lead' } : b === 'power.level' ? { states: 'power:no-clear-lead' }
+  : b.startsWith('threat.') ? { states: `threat:${b.split('.')[1]}` }
+  : b === 'services.food_production' ? { states: 'food:want' } : b === 'services.defense' ? { states: 'defence:want' }
+  : b.startsWith('services.') ? { states: `cap:${b.slice('services.'.length)}:want` } : { consequence: true });
+export const OUTSIDER_IMPRESSIONS_DOES = Object.freeze(Object.fromEntries(Object.keys(OUTSIDER_IMPRESSIONS).map((b) => [b, Object.freeze(outsiderDoes(b))])));

@@ -82,3 +82,14 @@ export const COMMONER_RESENTMENTS = Object.freeze({
     { id: 'U2', text: 'Many here feel they have asked {gov} for fair treatment for long enough.', needs: ['government named'] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** Every grievance is a consequence (what the record's want makes people say). */
+export const COMMONER_RESENTMENTS_DOES = Object.freeze(Object.fromEntries(Object.keys(COMMONER_RESENTMENTS).map((b) => [b, Object.freeze({ consequence: true })])));

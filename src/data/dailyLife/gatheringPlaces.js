@@ -77,3 +77,14 @@ export const GATHERING_PLAIN = frozen([
   { id: 'P14', text: 'People meet at the communal root cellar, where the stores are kept and the news is passed along.', needs: ['institution: rootCellar'] },
   { id: 'P15', text: 'When the flocks are brought in, people gather to help and to talk.', needs: ['institution: shepherd'] },
 ]);
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** Both branches name where people meet (a house, or the well, the common, the doors). */
+export const GATHERING_DOES = Object.freeze({ named: Object.freeze({ names: true }), plain: Object.freeze({ names: true }) });
