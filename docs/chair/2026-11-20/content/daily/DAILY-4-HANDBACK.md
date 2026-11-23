@@ -4,6 +4,94 @@ Seat DAILY-4 (session_01ACmDYaBKhNdEcUSm1G57q1), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-4.txt`. Predecessor: `DAILY-3-HANDBACK.md`
 (its section 1 was this seat's brief; its sections 2 and 3 stand).
 
+## 0. AT THE STOP (the owner's order of 2026-11-22: every lane recorded and stopped at the 22:58 UTC check; the program
+moves to another account; THE NEXT CHAIR HAS ONLY WHAT IS ON ORIGIN). THIS SECTION IS FINAL. Section 1 below is DAILY-B's
+full record.
+
+### 0.1 DONE (each pushed)
+- "DAILY-B 4e7fa5667" on `lane/daily-4-2026-11-22`: the Daily Life page prints all eight public lines in the chair's
+  order (E110), the owner-only line on the owner's own read only, the PDF's chapter 15 prints the same eight, L12 cut,
+  the working line at point 102 merged, every register by its door, rule 8 green against the red list, the owner's
+  file (`owner/OWNER-FILE.md`). ACCEPTED FOR LANDING BY THE CHAIR (21:17 UTC), NOT LANDED: no landing stack was seated
+  before the stop. The chair's trial merge of 4e7fa5667 with the line at point 105 (244fa84ef) had ONE conflict, the
+  lighting census (the line's side, then its door; this lane's figures at 7db50552d: files 3,779, parked 487, credited
+  3,292, titles 31,890, suiteTitles 8,863). Nothing is to be committed on 4e7fa5667's own history: DAILY-C goes on top.
+- DAILY-C's MEASURE: 78377130e (`measures/D4C/d4c.out.txt`, `measure.d4c.mjs`; read-only, every printed part read back to
+  its pool row).
+- DAILY-C's 34 NEW LINES DRAFTED (4364d5262, `lines/D4C/DRAFT-1.md`, `DRAFT-2.md`) AND READ BY THE CHAIR, TAKEN AS DRAFTED
+  BUT ONE: F9 becomes "Short rations are the talk of every household, and patience is wearing thin." (21:55 UTC).
+
+### 0.1b EVERY BRANCH OF THIS SEAT ON ORIGIN (read with `git ls-remote origin 'refs/heads/lane/daily-4-*'`)
+- `lane/daily-4-2026-11-22`: the lane; DAILY-B is its commit 4e7fa5667; the tip after it carries docs only (the
+  measure, the drafts, the briefs, this file).
+- `lane/daily-4-2026-11-22-c1-wip` a2bb723d6: D4C-1, built, unmerged (0.2).
+- `lane/daily-4-2026-11-22-c-measure-wip` 78377130e and `lane/daily-4-2026-11-22-c2-draft-wip` 4364d5262: both already
+  in the lane (fast-forwarded); kept as they are.
+- Local only, merged (never pushed): `-l12-wip` e52394c64, `-page-wip` 3f4442b81. DAILY-3's `lane/daily-3-2026-11-22-4c-wip`
+  5c5ab5466: merged at 86dc24708.
+
+### 0.2 HALF DONE, EXACTLY WHERE
+- D4C-1 (units (1) and (3), brief `briefs/D4C-1-REPEAT-AND-POSSESSIVE.md`): BUILT AND PROVED BY ITS BUILDER, PUSHED,
+  NOT YET READ BY THE SEAT, NOT MERGED: `lane/daily-4-2026-11-22-c1-wip` at a2bb723d6 (1ed4186f2 unit (1), a2bb723d6
+  unit (3); both on 4071a6264). By the builder's report (CONFIRMED by it, NOT re-run by the seat): (1) declarations ONE
+  PER BRANCH, `<POOL>_DOES` exported by each of the nine pool files (`{states: key}` / `{consequence: true}` /
+  `{names: true}`; recent changes `calm` and outsider `ordinary` declared consequences); in `dailyLife.js` the seven
+  other public slots are derived first and record what they state, the outsider line drops a part another slot states
+  and takes its next (the next threat by severity, or the next option of its second part), kept its first part on 0 of
+  900 pages; the owner-only line last, avoiding what the eight stated; the PDF's per-slot read gets the same outsider
+  line. The arm `tests/domain/dailyLifeNoRepeat.test.js`: red 3 of 7 on unchanged src, red 1 of 7 with declarations
+  alone, green 7 of 7; on the 900: table 1a 31 to 25 rows, both cured pairs 0. (3) P0 exactly as ruled, `{power's}`
+  gone; the walker `tests/lint/dailyLifePossessive.walker.test.js` red 1 of 3 on the base, green 3 of 3; table 3: power
+  possessives 99 to 0, doubles 4 to 0. RUNS: 23 targeted files 238 passed (3 skipped); `tests/lint` whole 4 of 3,366 red
+  (the known three, and the lighting census's file count, NOT re-taken); eslint 0; typecheck 167/167, strict 1113/1113.
+  PINS IT RE-POINTED BY CAUSE: `tests/domain/dailyLife.test.js` (the threat cited once on the page),
+  `dailyLifeOutsiderUnspokenRecent.test.js` (its oracle applies the yielding), `dailyLifeGrammar.test.js` ("the mark
+  of the Merchant Guilds"); `scripts/mutation-coverage-manifest.json` one rationale row for the walker. OWED AT THE
+  MERGE: the seat's read of the diff whole and its red re-run; the lighting census by its door; the observed-shape
+  readers' baseline by its door (`node scripts/check-observed-shape-readers.mjs --write`: it holds the changed pool
+  files' hashes). The rule is shown on 30 test births and the 900 measured, PLAUSIBLE beyond them.
+- D4C-2 (unit (2), brief `briefs/D4C-2-SAMENESS-LINES.md`): PHASE A DONE (the drafts above); PHASE B NOT BUILT (it waits
+  for D4C-1's merge: both touch `src/data/dailyLife/outsiderImpressions.js`).
+
+### 0.3 NEXT, IN ORDER (the successor's units)
+1. D4C-1 (built, 0.2): its diff read whole once, its two reds re-run, merged onto
+   `lane/daily-4-2026-11-22`'s tip; the lighting census re-taken by its door (`LIGHTING_CENSUS_REFREEZE=<seat>` with
+   `LIGHTING_CENSUS_NOTE=<cause>`, then the walker without the switch as the proof).
+2. D4C-2 PHASE B on a branch cut from that tip: the 34 lines (F9 as reworded) into their pools, RE-MEASURED on the pools
+   as D4C-1 leaves them (the outsider line's yielding moves what it prints); where a share then stands over the bar,
+   the FEWEST lines that clear it, in the same manner, UP TO SIX MORE without a second read by the chair (each listed
+   word for word in the landing line; a seventh goes to the chair's eye first); the fragile pools (`dawn_work.defence`;
+   `gathering_places.named` at +6; `plain` at +5; resentments `food` at +5) re-measured after every added line.
+3. The dark proof again (`owner/dark-proof.mjs` on the line's tip and the lane's: it should stay EQUAL, the lines being
+   derived on the page; say the sha), then RULE 8 NARROW (COMMON-EIGHTH 14: `tests/lint` whole; the tests that name a
+   changed file or symbol; the three walkers `dossierPhoneFloorAllViews`, `publicProseEquality`,
+   `publicProseVeilInvariance`; `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs` whole; one build with the
+   five figures and `VERIFY_DIST=1 tests/build`); `HAND_CEILING` 83 plus exactly the pool TABLES D4C adds (rows in
+   existing tables add none).
+4. The owner's file AFTER on the same six seeds (`owner/owner-file.mjs`; BEFORE is `owner/after.md` of DAILY-B).
+5. "DAILY-C <commit>": for the owner in plain figures, before and after: the count of sentences over the bar, the largest
+   share by size, and THE READER'S FIGURE (the mean number of identical Daily Life sentences two places of one size share,
+   and across sizes); the families between 10% and 15% listed with their shares (not cured); the five non-power double
+   possessives on the rest of the page (e.g. "network's head's" on Relationships, "lord's steward's" on NPCs) with file
+   and row, cured by nobody here.
+
+### 0.4 THE CHAIR'S E133 (21:28 UTC), IN THIS SEAT'S WORDS
+1. NO CONDITION STATED TWICE. A repeat is two parts that each STATE the same condition. A part that states a CONSEQUENCE
+   (a child's warning, going out in company at dawn, a grievance) or only NAMES a house or a power is not a repeat. Two
+   pairs are cured: the outsider line and recent changes on a threat (163 of 900 pages), the outsider line and food
+   culture on food want (95). The OUTSIDER LINE YIELDS (it is a visitor's digest): it drops the part whose condition
+   another printed slot states and takes its next part by its own ranking; no slot is emptied. Each pool row (or branch)
+   DECLARES what it does (states <condition> / consequence / names); the composer and a test arm read the declaration,
+   never the words: over the 900 no page prints two parts that state one condition. The public eight are composed first;
+   the owner-only line never changes what they print.
+2. THE BAR IS THE SAMENESS DOOR'S (`scripts/sameness-census.mjs :: LAW1_RED_SHARE = 0.1`), ON WHAT A READER SEES: every
+   filled sentence at 14 of 150 places of every size or under; every family at 22 of 150 or under. The fewest new lines
+   that reach both, in plain words, drawn as the pools are drawn now (keyed, no new draw); cap 120. Families between 10%
+   and 15% are listed, not cured.
+3. NO "'s" ON A POWER'S OR THE GOVERNMENT'S NAME: outsider P0 becomes exactly "Outsiders notice the mark of {power} on
+   every door that matters."; `{power's}` leaves the Daily Life pools; a walker holds it. The rest of the page's other
+   double possessives are named in the landing line, cured by nobody here.
+
 ## 1. WHERE THE LANE STANDS (written 2026-11-22 21:05 UTC) — "DAILY-B", the lane's landing line
 - `lane/daily-4-2026-11-22` (pushed with this file) = DAILY-3's hand-over b1bcb067d (+ its docs tip 9d8c0fb11) + (0a) L12
   cut + (0b) U4c, the PDF chapter + unit P, the page prints all its lines (the chair's E110) + THE LINE AT POINT 102

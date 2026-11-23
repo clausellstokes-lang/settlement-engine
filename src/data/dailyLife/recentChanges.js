@@ -47,6 +47,10 @@
  * threat.siege.any.realized #0 ("under siege") needs a siege in force (`crisis: under_siege`); trade_route_cut #0, #1
  * ("a trade route") need a route (`route open`); vassal_extraction #1, rebellion #0, vassal_trade_coercion #0, #1 ("an
  * overlord") need a sovereign (`sovereign`); calm #2 ("as usual") needs no crisis in force (`crisis: calm`).
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
+ * taken 2026-11-22 21:55 UTC): beat B8, appended at the branch's end, its keyed pick unchanged
+ * (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} RecentLine */
@@ -332,6 +336,7 @@ export const RECENT_CHANGES = Object.freeze({
     { id: 'B5', text: 'Much of how the place works now goes back to {event}.', needs: [] },
     { id: 'B6', text: 'The mark {event} left on the place has not faded.', needs: [] },
     { id: 'B7', text: 'Ask how things came to be as they are here, and {event} soon comes up.', needs: [] },
+    { id: 'B8', text: '{Event} is still remembered here, and not lightly.', needs: [] },
   ]),
   calm: frozen([
     { id: 'C1', text: 'Nothing much has changed here lately; the days go on as they always have.', needs: [] },
@@ -343,3 +348,19 @@ export const RECENT_CHANGES = Object.freeze({
     { id: 'C7', text: 'Nothing new has disturbed the ordinary run of things.', needs: [] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** `threat.<kind>.<form>.<stage>` states `threat:<kind>` (a threat's arrival); `condition.<archetype>` states
+ * `condition:<archetype>`; `beat` states `event:recent_disruption`; `calm` is the quiet as people live it.
+ * @param {string} b @returns {{ states: string } | { consequence: true }} */
+const recentDoes = (b) => (b.startsWith('threat.') ? { states: `threat:${b.split('.')[1]}` }
+  : b.startsWith('condition.') ? { states: `condition:${b.slice('condition.'.length)}` }
+  : b === 'beat' ? { states: 'event:recent_disruption' } : { consequence: true });
+export const RECENT_CHANGES_DOES = Object.freeze(Object.fromEntries(Object.keys(RECENT_CHANGES).map((b) => [b, Object.freeze(recentDoes(b))])));

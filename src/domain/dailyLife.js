@@ -42,16 +42,16 @@ import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities, CAPACITY_NAMES, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
-import { fillAgreement, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from './display/powerSentenceName.js';
-import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
-import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
-import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
-import { COMMONER_RESENTMENTS_DM } from '../data/dailyLife/commonerResentmentsDm.js';
-import { COMMONER_RESENTMENTS } from '../data/dailyLife/commonerResentments.js';
-import { FOOD_CULTURE } from '../data/dailyLife/foodCulture.js';
-import { OUTSIDER_IMPRESSIONS } from '../data/dailyLife/outsiderImpressions.js';
-import { UNSPOKEN_TOPICS } from '../data/dailyLife/unspokenTopics.js';
-import { RECENT_CHANGES } from '../data/dailyLife/recentChanges.js';
+import { fillAgreement, powerNameWithArticle } from './display/powerSentenceName.js';
+import { GATHERING_NAMED, GATHERING_PLAIN, GATHERING_DOES } from '../data/dailyLife/gatheringPlaces.js';
+import { DAWN_WORK, DAWN_WORK_DOES } from '../data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS, CHILD_WARNINGS_DOES } from '../data/dailyLife/childWarnings.js';
+import { COMMONER_RESENTMENTS_DM, COMMONER_RESENTMENTS_DM_DOES } from '../data/dailyLife/commonerResentmentsDm.js';
+import { COMMONER_RESENTMENTS, COMMONER_RESENTMENTS_DOES } from '../data/dailyLife/commonerResentments.js';
+import { FOOD_CULTURE, FOOD_CULTURE_DOES } from '../data/dailyLife/foodCulture.js';
+import { OUTSIDER_IMPRESSIONS, OUTSIDER_IMPRESSIONS_DOES } from '../data/dailyLife/outsiderImpressions.js';
+import { UNSPOKEN_TOPICS, UNSPOKEN_TOPICS_DOES } from '../data/dailyLife/unspokenTopics.js';
+import { RECENT_CHANGES, RECENT_CHANGES_DOES } from '../data/dailyLife/recentChanges.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -118,6 +118,7 @@ import { pickVariantMixed } from '../kernel/proseHash.js';
  * @property {CapacityState} capacities
  * @property {CausalState} causal
  * @property {{recentDisruption?: HistoryBeatLike|null, unresolvedWound?: HistoryBeatLike|null}} history
+ * @property {Set<string>} [stated] the conditions the slots derived so far have STATED (D4C-1; `composePublic`)
  */
 
 // ── Canonical catalog ────────────────────────────────────────────────────
@@ -153,6 +154,36 @@ const SLOT_LABELS = Object.freeze({
  * and on every other read the key is ABSENT (`tests/domain/dailyLifeOwnerSlot.test.js`).
  */
 const OWNER_ONLY_DAILY_LIFE_SLOT = 'commoner_resentments_dm';
+
+/**
+ * WHAT EACH BRANCH DOES (D4C-1, the chair's E133 (1)): every pool file's per-branch declaration (`<POOL>_DOES`:
+ * `{ states: '<condition key>' }`, `{ consequence: true }` or `{ names: true }`), read here and never the line's words.
+ * @typedef {Readonly<{ states: string }> | Readonly<{ consequence: true }> | Readonly<{ names: true }>} PoolDoes
+ * @type {Readonly<Record<string, Readonly<Record<string, PoolDoes>>>>}
+ */
+const POOL_DOES = Object.freeze({
+  food_culture: FOOD_CULTURE_DOES,
+  dawn_work: DAWN_WORK_DOES,
+  gathering_places: GATHERING_DOES,
+  child_warnings: CHILD_WARNINGS_DOES,
+  commoner_resentments: COMMONER_RESENTMENTS_DOES,
+  outsider_impressions: OUTSIDER_IMPRESSIONS_DOES,
+  unspoken_topics: UNSPOKEN_TOPICS_DOES,
+  recent_changes: RECENT_CHANGES_DOES,
+  [OWNER_ONLY_DAILY_LIFE_SLOT]: COMMONER_RESENTMENTS_DM_DOES,
+});
+
+/** @param {string} slotKey @param {string} branch @returns {string|null} the condition the branch's line states, if it states one */
+const statesOf = (slotKey, branch) => {
+  const d = POOL_DOES[slotKey]?.[branch];
+  return d && 'states' in d ? d.states : null;
+};
+
+/** @param {string} slotKey @param {string} branch @param {Set<string>|undefined} stated @returns {boolean} the branch states a condition already stated */
+const statedAlready = (slotKey, branch, stated) => {
+  const k = statesOf(slotKey, branch);
+  return !!k && !!stated?.has(k);
+};
 
 // ── Per-slot derivers ────────────────────────────────────────────────────
 //
@@ -200,7 +231,7 @@ function deriveFoodCulture(s, ctx) {
 
   const house = houseFinder(s);
   const eligible = filterDeclared(FOOD_CULTURE[branch], { facts: factsFor(s), poolId: `dailyLife.food_culture.${branch}`, surface: 'dailyLife' });
-  const text = sayDeclared(pickNameable(s, eligible, 'food_culture', branch, house), house, refs);
+  const text = sayDeclared(pickNameable(s, eligible, 'food_culture', branch, house, ctx.stated), house, refs);
   refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
   // The slot still cites its food-security chains (references, not text: the slot keeps explaining itself).
   const foodChains = ctx.chains.filter(c => c.needKey === 'food_security');
@@ -254,7 +285,7 @@ function deriveDawnWork(s, ctx) {
 
   const house = houseFinder(s);
   const eligible = filterDeclared(DAWN_WORK[branch], { facts: factsFor(s), poolId: `dailyLife.dawn_work.${branch}`, surface: 'dailyLife' });
-  const text = sayDeclared(pickNameable(s, eligible, 'dawn_work', branch, house), house, refs);
+  const text = sayDeclared(pickNameable(s, eligible, 'dawn_work', branch, house, ctx.stated), house, refs);
 
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
@@ -331,16 +362,21 @@ function houseFinder(s) {
  * (`facts/drawDeclared.js :: filterDeclared`, the pool named in the call so the presumed-things walker sees it drawn);
  * here the lines the record admits keep only those whose every named house the live roster can name, and
  * `kernel/proseHash.js :: pickVariantMixed(eligible, '<name>::dailyLife.<slot>::<branch>')` picks one (a nameless
- * record takes index 0 of the eligible list; no eligible line, nothing).
+ * record takes index 0 of the eligible list; no eligible line, nothing). A line picked (and so said) adds the condition
+ * its branch DECLARES it states to `stated` (D4C-1), where the caller hands one.
  * @template {{ text: string }} T
  * @param {DailyLifeSettlement} s @param {ReadonlyArray<T>} admitted the door's lines @param {string} slotKey @param {string} branch
  * @param {HouseFinder} house
+ * @param {Set<string>} [stated]
  * @returns {T|undefined}
  */
-function pickNameable(s, admitted, slotKey, branch, house) {
+function pickNameable(s, admitted, slotKey, branch, house, stated) {
   const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
   const name = /** @type {{ name?: unknown }} */ (s).name;
-  return pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null);
+  const pick = pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null);
+  const k = pick ? statesOf(slotKey, branch) : null;
+  if (k) stated?.add(k);
+  return pick;
 }
 
 /**
@@ -358,10 +394,10 @@ function sayDeclared(pick, house, refs) {
 
 /**
  * @param {DailyLifeSettlement} s
- * @param {DailyLifeContext} _ctx
+ * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
-function deriveGatheringPlaces(s, _ctx) {
+function deriveGatheringPlaces(s, ctx) {
   const facts = factsFor(s);
   const house = houseFinder(s);
   // the branch: a house of the three kinds the record holds (its atom) and the roster can name
@@ -373,7 +409,7 @@ function deriveGatheringPlaces(s, _ctx) {
   /** @type {SlotReference[]} */
   const refs = [];
   const eligible = filterDeclared(named ? GATHERING_NAMED : GATHERING_PLAIN, { facts, poolId: `dailyLife.gathering_places.${branch}`, surface: 'dailyLife' });
-  const text = sayDeclared(pickNameable(s, eligible, 'gathering_places', branch, house), house, refs);
+  const text = sayDeclared(pickNameable(s, eligible, 'gathering_places', branch, house, ctx.stated), house, refs);
 
   return slot('gathering_places', text, 'the live roster, by the lines\' declared atoms (LINES-1)', refs);
 }
@@ -436,12 +472,12 @@ function deriveChildWarnings(s, ctx) {
   let text;
   if (!kinds.length) {
     const eligible = filterDeclared(CHILD_WARNINGS.none, { facts, poolId: 'dailyLife.child_warnings.none', surface: 'dailyLife' });
-    text = sayDeclared(pickNameable(s, eligible, 'child_warnings', 'none', house), house, refs);
+    text = sayDeclared(pickNameable(s, eligible, 'child_warnings', 'none', house, ctx.stated), house, refs);
   } else {
     const parts = [];
     for (const kind of kinds) {
       const eligible = filterDeclared(CHILD_WARNINGS[kind], { facts, poolId: `dailyLife.child_warnings.${kind}`, surface: 'dailyLife' });
-      const said = sayDeclared(pickNameable(s, eligible, 'child_warnings', kind, house), house, refs);
+      const said = sayDeclared(pickNameable(s, eligible, 'child_warnings', kind, house, ctx.stated), house, refs);
       if (!said) continue;
       const t = /** @type {ThreatProfile} */ (byKind.get(kind));
       refs.push({ id: t.id, label: t.label, type: 'threat' });
@@ -502,7 +538,7 @@ function deriveCommonerResentments(s, ctx) {
   const parts = [];
   for (const branch of branches) {
     const eligible = withGovernment(filterDeclared(COMMONER_RESENTMENTS[branch], { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
-    const said = sayDeclared(pickNameable(s, eligible, 'commoner_resentments', branch, house), house, refs);
+    const said = sayDeclared(pickNameable(s, eligible, 'commoner_resentments', branch, house, ctx.stated), house, refs);
     if (!said) continue;
     const cited = GRIEVANCE_REFS[branch];
     if (cited) refs.push({ ...cited });
@@ -533,7 +569,8 @@ function deriveCommonerResentmentsDm(s, ctx) {
   const score = ctx.causal.scores.criminal_opportunity ?? 50;
   const branch = CRIME_RUNGS.find(([, at]) => score >= at)?.[0];
   let text = '';
-  if (branch) {
+  // D4C-1: derived after the public eight (`deriveDailyLife`), it avoids a condition they stated; it never changes them
+  if (branch && !statedAlready(OWNER_ONLY_DAILY_LIFE_SLOT, branch, ctx.stated)) {
     const house = houseFinder(s);
     const eligible = filterDeclared(COMMONER_RESENTMENTS_DM[branch], { facts: factsFor(s), poolId: `dailyLife.commoner_resentments_dm.${branch}`, surface: 'dailyLife' });
     text = sayDeclared(pickNameable(s, eligible, OWNER_ONLY_DAILY_LIFE_SLOT, branch, house), house, refs);
@@ -593,14 +630,14 @@ const pickKey = (s, slotKey, branch) => {
 };
 
 /**
- * Each line's `{power}` and kin said: the name with its article, `{Power}` at a sentence's head, `{power's}` its
- * possessive after "the", `{power|one|many}` in the name's number (`display/powerSentenceName.js`).
+ * Each line's `{power}` and kin said: the name with its article, `{Power}` at a sentence's head, `{power|one|many}` in
+ * the name's number (`display/powerSentenceName.js`). No possessive filler (D4C-1, the chair's E133 (3)): a power's name
+ * may itself hold "'s", so no line appends one.
  * @template {{ text: string }} T
  * @param {ReadonlyArray<T>} lines @param {string} name @returns {T[]}
  */
 function withPower(lines, name) {
   return lines.map((l) => ({ ...l, text: fillAgreement(l.text, { power: name })
-    .replace(/\{power's\}/g, `the ${powerPossessive(powerNameAfterArticle(name))}`)
     .replace(/\{Power\}/g, powerNameWithArticle(name, true)).replace(/\{power\}/g, powerNameWithArticle(name)) }));
 }
 
@@ -608,19 +645,46 @@ function withPower(lines, name) {
 const outsiderBranch = (branch) => (Object.hasOwn(OUTSIDER_IMPRESSIONS, branch) ? /** @type {keyof typeof OUTSIDER_IMPRESSIONS} */ (branch) : null);
 
 /**
+ * THE OUTSIDER LINE YIELDS (D4C-1, the chair's E133 (1)): it is derived after the other seven public slots
+ * (`composePublic`) and drops a part whose branch DECLARES a condition another printed slot STATES (`ctx.stated`),
+ * taking its next part by its own ranking: the threat part the next open threat by severity, the second part the
+ * keyed pick among the options left. NO SLOT IS EMPTIED by this rule: where no part is left, the line keeps the first
+ * part it says without the rule.
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveOutsiderImpressions(s, ctx) {
-  /** @type {SlotReference[]} */
-  const refs = [];
+  let parts = outsiderParts(s, ctx, ctx.stated);
+  if (!parts.length && ctx.stated?.size) parts = outsiderParts(s, ctx, undefined).slice(0, 1);
+  for (const p of parts) if (p.states) ctx.stated?.add(p.states);
+  return slot('outsider_impressions', parts.map((p) => p.said).join(' '), 'dominant faction + top open threat + strained visible capacities, by the lines\' declared atoms (LINES-2)', parts.flatMap((p) => p.refs));
+}
+
+/** @typedef {{ said: string, refs: SlotReference[], states: string|null }} OutsiderPart */
+
+/**
+ * The outsider line's parts, in order, each its own sentence and its own citations; a part whose branch states a
+ * condition in `stated` is not said.
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @param {Set<string>|undefined} stated the conditions the other slots stated (none: the line without the rule)
+ * @returns {OutsiderPart[]}
+ */
+function outsiderParts(s, ctx, stated) {
   const facts = factsFor(s);
   const house = houseFinder(s);
   /** @param {keyof typeof OUTSIDER_IMPRESSIONS} branch @returns {ReadonlyArray<{ id: string, text: string }>} the branch's admitted lines */
   const admitted = (branch) => filterDeclared(OUTSIDER_IMPRESSIONS[branch], { facts, poolId: `dailyLife.outsider_impressions.${branch}`, surface: 'dailyLife' });
-  /** @param {keyof typeof OUTSIDER_IMPRESSIONS} branch @param {ReadonlyArray<{ id: string, text: string }>} lines */
-  const say = (branch, lines) => sayDeclared(pickNameable(s, lines, 'outsider_impressions', branch, house), house, refs);
+  /** @param {keyof typeof OUTSIDER_IMPRESSIONS} branch @param {ReadonlyArray<{ id: string, text: string }>} lines @returns {OutsiderPart} */
+  const say = (branch, lines) => {
+    /** @type {SlotReference[]} */
+    const refs = [];
+    return { said: sayDeclared(pickNameable(s, lines, 'outsider_impressions', branch, house), house, refs), refs, states: statesOf('outsider_impressions', branch) };
+  };
+  /** @param {string} branch */
+  const yields = (branch) => statedAlready('outsider_impressions', branch, stated);
+  /** @type {OutsiderPart[]} */
   const parts = [];
 
   const top = [...ctx.profiles].sort((a, b) => (b.power || 0) - (a.power || 0))[0];
@@ -632,23 +696,25 @@ function deriveOutsiderImpressions(s, ctx) {
     const lead = leaderLeadOfRecord(s).leadOverSecond;
     // the `topTwoGap <= 6` cut: a lead over the second power of 6 or less is no clear lead
     const branch = lead === null || lead > 6 ? 'power' : 'power.level';
-    const said = say(branch, withPower(admitted(branch), String(top.name ?? '')));
-    if (said) {
-      refs.push({ id: top.id, label: top.name, type: 'faction' });
-      parts.push(said);
+    const part = yields(branch) ? null : say(branch, withPower(admitted(branch), String(top.name ?? '')));
+    if (part?.said) {
+      part.refs.push({ id: top.id, label: top.name, type: 'faction' });
+      parts.push(part);
     }
   }
 
-  const open = ctx.threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort(bySeverity)[0];
+  // the most severe open threat above low; one whose condition another slot states yields to the next by severity
   let real = false;
-  if (open && open.severityBand !== 'low') {
+  for (const open of ctx.threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort(bySeverity)) {
+    if (open.severityBand === 'low') break;
     const branch = outsiderBranch(`threat.${open.type}.${threatForm(open, s)}`);
-    const said = branch ? say(branch, admitted(branch)) : '';
-    if (said) {
-      real = true;
-      refs.push({ id: open.id, label: open.label, type: 'threat' });
-      parts.push(said);
-    }
+    const part = branch ? say(branch, admitted(branch)) : null;
+    if (!part?.said) break;
+    real = true;
+    if (branch && yields(branch)) continue;
+    part.refs.push({ id: open.id, label: open.label, type: 'threat' });
+    parts.push(part);
+    break;
   }
 
   const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => STRAINED_BANDS.includes(ctx.capacities.bands[n]));
@@ -661,17 +727,20 @@ function deriveOutsiderImpressions(s, ctx) {
     if (branch) options.push({ branch, lens, lines: withGovernment(admitted(branch), s) });
   }
   if (!real) options.push({ branch: 'ordinary', lens: null, lines: admitted('ordinary') });
-  const second = pickVariantMixed(options.filter((o) => o.lines.length > 0), pickKey(s, 'outsider_impressions', 'second'));
+  const sayable = options.filter((o) => o.lines.length > 0);
+  let second = pickVariantMixed(sayable, pickKey(s, 'outsider_impressions', 'second'));
+  // an option whose condition another slot states yields: the keyed pick among the options left
+  if (second && yields(second.branch)) second = pickVariantMixed(sayable.filter((o) => !yields(o.branch)), pickKey(s, 'outsider_impressions', 'second'));
   if (second) {
-    const said = say(second.branch, second.lines);
-    if (said && second.lens) {
+    const part = say(second.branch, second.lines);
+    if (part.said && second.lens) {
       const cap = ctx.capacities.capacities[second.lens];
-      refs.push({ id: `capacity.${second.lens}`, label: String(/** @type {{ label?: unknown }} */ (cap)?.label ?? second.lens), type: 'capacity' });
+      part.refs.push({ id: `capacity.${second.lens}`, label: String(/** @type {{ label?: unknown }} */ (cap)?.label ?? second.lens), type: 'capacity' });
     }
-    if (said) parts.push(said);
+    if (part.said) parts.push(part);
   }
 
-  return slot('outsider_impressions', parts.join(' '), 'dominant faction + top open threat + strained visible capacities, by the lines\' declared atoms (LINES-2)', refs);
+  return parts;
 }
 
 // ── unspoken_topics (DAILY-1 LINES-2 § 4 and LINES-2b § 2, as the chair ruled at 18:47 and 18:56; DAILY-3 B3 E3) ──
@@ -716,7 +785,7 @@ function deriveUnspokenTopics(s, ctx) {
   if (wound && branch) {
     const house = houseFinder(s);
     const eligible = filterDeclared(UNSPOKEN_TOPICS[branch], { facts: factsFor(s), poolId: `dailyLife.unspoken_topics.${branch}`, surface: 'dailyLife' });
-    text = sayDeclared(pickNameable(s, eligible, 'unspoken_topics', branch, house), house, refs);
+    text = sayDeclared(pickNameable(s, eligible, 'unspoken_topics', branch, house, ctx.stated), house, refs);
     // the wound beat is cited where it is the tension said (a fallen crime wound is not cited: rule 6)
     if (text && at === 0) refs.push({ id: 'history.unresolvedWound', label: wound.label, type: 'history_beat' });
   }
@@ -770,7 +839,7 @@ function deriveRecentChanges(s, ctx) {
     taken.push(branch);
     const eligible = filterDeclared(RECENT_CHANGES[branch], { facts, poolId: `dailyLife.recent_changes.${branch}`, surface: 'dailyLife' })
       .map((l) => ({ ...l, text: fill(l.text) }));
-    return sayDeclared(pickNameable(s, eligible, 'recent_changes', branch, house), house, refs);
+    return sayDeclared(pickNameable(s, eligible, 'recent_changes', branch, house, ctx.stated), house, refs);
   };
 
   const beat = ctx.history.recentDisruption;
@@ -881,7 +950,28 @@ export function deriveDailyLifeSlot(key, settlement) {
     return slot(key, '—', 'no settlement', []);
   }
   const ctx = buildContext(settlement);
-  return DERIVERS[key](settlement, ctx);
+  // the outsider line reads what the other seven state (D4C-1): the same line the page and the PDF print
+  return key === 'outsider_impressions' ? composePublic(settlement, ctx)[key] : DERIVERS[key](settlement, ctx);
+}
+
+/**
+ * THE PUBLIC EIGHT, COMPOSED (D4C-1, the chair's E133 (1)): the seven slots other than `outsider_impressions` first,
+ * each adding to `ctx.stated` the condition its printed lines' branches DECLARE they state; then the outsider line,
+ * which yields a part whose condition is already stated (`deriveOutsiderImpressions`). Keyed picks only: no draw, and
+ * the slots come back in `DAILY_LIFE_SLOTS` order.
+ * @param {DailyLifeSettlement} settlement @param {DailyLifeContext} ctx (its `stated` set here)
+ * @returns {Record<string, DailyLifeSlot>}
+ */
+function composePublic(settlement, ctx) {
+  ctx.stated = new Set();
+  /** @type {Record<string, DailyLifeSlot>} */
+  const derived = {};
+  for (const key of DAILY_LIFE_SLOTS) if (key !== 'outsider_impressions') derived[key] = DERIVERS[key](settlement, ctx);
+  derived.outsider_impressions = DERIVERS.outsider_impressions(settlement, ctx);
+  /** @type {Record<string, DailyLifeSlot>} */
+  const slots = {};
+  for (const key of DAILY_LIFE_SLOTS) slots[key] = derived[key];
+  return slots;
 }
 export const DAILY_LIFE_EMPTY_SLOT_TEXT = /** @type {string} */ (deriveDailyLifeSlot(DAILY_LIFE_SLOTS[0], null)?.text); // the empty slot's marker, read from the one place that writes it (no second spelling)
 /**
@@ -927,15 +1017,9 @@ export function deriveDailyLife(settlement, options = {}) {
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
-  /** @type {Record<string, DailyLifeSlot>} */
-  const slots = {};
-  /** @type {string[]} */
-  const summary = [];
-  for (const key of DAILY_LIFE_SLOTS) {
-    const s = DERIVERS[key](settlement, ctx);
-    slots[key] = s;
-    summary.push(`${s.label}: ${s.text}`);
-  }
+  const slots = composePublic(settlement, ctx);
+  const summary = DAILY_LIFE_SLOTS.map((key) => `${slots[key].label}: ${slots[key].text}`);
+  // the owner-only line after the public eight: it reads what they stated and never changes what they print
   if (owner) slots[OWNER_ONLY_DAILY_LIFE_SLOT] = deriveCommonerResentmentsDm(settlement, ctx);
   return { slots, summary };
 }

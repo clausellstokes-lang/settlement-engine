@@ -110,3 +110,20 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'X3', text: 'Food has all but run out, and people eat whatever they can find.', needs: [] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+export const FOOD_CULTURE_DOES = Object.freeze({
+  'surplus.wanting': Object.freeze({ states: 'food:surplus' }),
+  surplus: Object.freeze({ states: 'food:surplus' }),
+  adequate: Object.freeze({ states: 'food:adequate' }),
+  strained: Object.freeze({ states: 'food:want' }),
+  critical: Object.freeze({ states: 'food:want' }),
+  collapsed: Object.freeze({ states: 'food:want' }),
+});
