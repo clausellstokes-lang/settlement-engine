@@ -33,6 +33,9 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 - THE POOL IS HELD; it is not made at fd7163ba6. The instruments' `tell-common.mjs :: settings` takes `present` from `criminalVeilSwitch.js :: presentCriminalGroupings`, and the pool's part B reads `setCriminalVeil(…, sc.present, …)`. That is S1's broken site, so a pool made on fd7163ba6 would be read under a switch that offers every default. The pool is made ONCE, on the -wip with S1 merged (N6's "the cured tree"). The chair was told.
 - R4I-PAGE-2 (subagent): S1, S2, the guards, the arms, the stored arm's person-id probe, `tests/lint` whole and the build. It works in `/home/user/wt/r4ip2` on the local branch `lane/veil-38-2026-11-23-r4ipage2-wip`.
 
+### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
+Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat. They are read whole once, before the first trigger that 40.1 (b) names.
+
 ### (3) NEXT
 1. Take R4I-PAGE-2's diff, read once, and merge it into the -wip.
 2. Make the pool on the -wip; run both gates and the switch-offer probe on the pool.
@@ -45,11 +48,18 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp/v18/out/v38`, pool `/var/tmp/v18/t2/pool-v38`, template `v28tpl` (`v27x211` + the -wip's 212).
 
 ## 2. RULINGS SINCE PART 36 (numbered 40.n; the ninth chair's; each vetoable by the owner)
-(none yet)
+40.1 THE CHAIR, 00:23 UTC 2026-11-23, on VEIL-38's first line:
+     (a) THE NOTE IS TAKEN: R4I-PAGE-2 anchors the chair's arm's link first read to the twin, as the gallery read is (36.4), shown
+         RED FIRST if the present form can pass a wrong read. Relayed to R4I-PAGE-2 at 00:2x.
+     (b) 212 AND THE REGISTRY are NOT read whole by this seat for this unit (no builder of its edits them; R4I-SQL's diff was read by
+         VEIL-35 with 212 beside it). This seat reads BOTH WHOLE, ONCE, BEFORE the first of: merging into the -wip a tip that changes
+         212 or the registry (VEIL-39's one-test-file pin does not count); judging a red that points into either; E116's five steps.
+     (c) A CAUTION FOR EVERY SEAT: a refusal of a merge, commit or push by the seat's own permission check stands: one line to the
+         chair with the exact command, nothing else tried to the same end.
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
 - 00:17 chain0 launched on the -wip.
 - 00:19 first line to the chair.
 - 00:20 chain0's parent stopped before its pool step (the pool waits for S1); the instruments run on.
-- 00:21 R4I-PAGE-2's brief and this file written.
+- 00:21 R4I-PAGE-2's brief and this file written. 00:23 R4I-PAGE-2 seated. 00:2x the chair's 40.1 read. 00:27 red-first R1 started at 08081ffdc.
