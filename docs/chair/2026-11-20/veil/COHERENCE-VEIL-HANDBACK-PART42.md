@@ -176,6 +176,11 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     `/var/tmp/v18/t2/stored-v40/today-n96/`, add to the stored name arm. The tensions' half is chain C's (R5-TENSION).
 125. THE CHAIR, 13:03 (N98): B2's storedS1 STOPPED by the seat (tests since changed; what it counted is the seat's to re-run or moot:
     `publicProse` withheld whole since N49); its log kept; RIVAL GO. DONE 13:08.
+126. THE CHAIR, 13:08 (N99): (1) A SEAT NEVER HANDS OVER INSIDE A RUN: only at a step's end with its receipt committed and pushed; the
+    successor's draft is `prompts/DRAFT-START-VEIL-48.txt` on `lane/chair-2026-11-08` (it takes finished steps by their pushed
+    receipts). (2) EVERY FINISHED STEP's RECEIPT committed and pushed as it ends (log tail, tables, exit); builders' WIP before every
+    wait. (3) This seat's line (13:14): own count about 430,000 (estimate); it can end through THE POOL AND BOTH GATES ON THE STACKED
+    TREE (the rival's diff read and re-runs, the merges), L1 probably; T5's and SSKIP's reads and "TIP?" are the successor's.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -196,3 +201,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 12:50 ruling 123; 12:59 SSKIP's brief (f3cdc6aa3), worktree, SSKIP dispatched; mutex-order rewritten (SSKIP, T5 WAIT).
 - 12:53 ruling 124 (read 13:03); 13:03 given to SSKIP.
 - 13:08 ruling 125: S1 stopped, the lock free, RIVAL GO; 13:09 PART 42.
+- 13:08 ruling 126; 13:14 the line sent; turn ended.
