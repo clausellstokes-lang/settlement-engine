@@ -1,0 +1,21 @@
+// R4I-TONIGHT item M: the counts of tonight-names.probe.jsx's shards.  node tonight-names-an.mjs <outdir>
+import { readFileSync, readdirSync } from 'node:fs';
+const dir = process.argv[2];
+const shards = readdirSync(dir).filter((f) => /^names-shard\d+\.json$/.test(f)).map((f) => JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')));
+const births = shards.flatMap((s) => s.births);
+const line = (...a) => console.log(a.join(' '));
+const sum = (f) => births.reduce((a, b) => a + f(b), 0);
+line('places', births.length, '| hidden-house', births.filter((b) => b.hidden > 0).length, '| reads', sum((b) => b.reads), '| twin salt fixed (calls)', shards.map((s) => s.saltCalls || 0).join('+'));
+line('owner page: cast persons', sum((b) => b.own), '| with no card', sum((b) => b.ownNoCard), '| with a card and NO NAME', sum((b) => b.ownNoName));
+line('served: cast persons read', sum((b) => b.servedPersons), '| with a card and NO NAME', sum((b) => b.servedNoName));
+const i1 = births.filter((b) => b.ownShared.length || b.sharedReads.length);
+line('M (i) PLACES WITH TWO CAST PERSONS SHARING (name, crisis, role):', i1.length, '| owner page:', births.filter((b) => b.ownShared.length).length, '| any served read:', births.filter((b) => b.sharedReads.length).length);
+for (const b of i1) line('  ', b.seed, JSON.stringify(b.ownShared), JSON.stringify(b.sharedReads.slice(0, 3)));
+const i2 = births.filter((b) => b.differ.length);
+line('M (ii) CAST PERSONS WHOSE SERVED NAME DIFFERS FROM THE STORED NAME (person-reads):', sum((b) => b.differ.length), '| places:', i2.length);
+for (const b of i2.slice(0, 20)) line('  ', b.seed, JSON.stringify(b.differ.slice(0, 3)));
+line('unmapped served cast ids (person-reads):', sum((b) => b.unmapped.length), '| places:', births.filter((b) => b.unmapped.length).length);
+for (const b of births.filter((x) => x.unmapped.length).slice(0, 10)) line('  ', b.seed, JSON.stringify(b.unmapped.slice(0, 3)));
+const srv = births.filter((b) => b.reads > 22);
+line('server read:', srv.length ? 'yes' : 'no', '| server vs twin canonical documents unequal (reads):', sum((b) => b.canonUnequal.length));
+for (const b of births.filter((x) => x.canonUnequal.length).slice(0, 10)) line('  ', b.seed, b.canonUnequal.join(','));

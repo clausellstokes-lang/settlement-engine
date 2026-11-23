@@ -1,0 +1,7 @@
+places 2 | hidden-house 0 | reads 88 | twin salt fixed (calls) 45
+owner page: cast persons 4 | with no card 0 | with a card and NO NAME 0
+served: cast persons read 176 | with a card and NO NAME 0
+M (i) PLACES WITH TWO CAST PERSONS SHARING (name, crisis, role): 0 | owner page: 0 | any served read: 0
+M (ii) CAST PERSONS WHOSE SERVED NAME DIFFERS FROM THE STORED NAME (person-reads): 0 | places: 0
+unmapped served cast ids (person-reads): 0 | places: 0
+server read: yes | server vs twin canonical documents unequal (reads): 0
