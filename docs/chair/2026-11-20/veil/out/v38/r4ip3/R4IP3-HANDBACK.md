@@ -1,4 +1,4 @@
-# R4I-PAGE-3 HANDBACK (VEIL-38, chain B). IN PROGRESS: current at every commit.
+# R4I-PAGE-3 HANDBACK (VEIL-38, chain B). STOPPED EARLY at the token budget, with what is left below.
 
 Branch `lane/veil-38-2026-11-23-r4ipage3-wip` (local, never pushed), cut at b088fcfc5. Brief: `briefs/R4I-PAGE-3-BRIEF.md`
 (0fd610899, addendum 52063cb41). Scratch tip worktree (never committed to): `/home/user/wt/r4ip3-tip` at af708f2fd.
@@ -26,7 +26,8 @@ canonical): every built tooth BITES (missed = [] on all 13 + the 48 VS1 copy-gua
   (`npc_2`, `npc_11`) is a prefix of a fresh token about one read in eight, a FALSE tooth (ii) red (EXISTENCE flaked 1 of 2
   runs before (E), 0 of 8 after). Tooth (ii) still bites on every guard (a stored id served verbatim).
 - eslint on the 5 files: 0 (logs/g1-eslint.txt).
-- The 34 files re-run: RUNNING at this commit (logs/g1-other34.txt). Expected: 2 red (S2, and VS1's tip red above).
+- The 34 files re-run: NOT RUN. Each try through `gate-mutex.sh` gave up (the lock held by other runs: a HandRows run, PID
+  2515, and an `m-chain.sh` chain not mine). Each of the 4 re-stated files is green alone (above). Expected: 2 red (S2, VS1's tip red).
 
 ## MERGE (the seat's word): `lane/veil-38-2026-11-23-r4ids-wip` merged clean (1d786afd5, --no-edit: its message is git's, no trailer).
 
@@ -91,5 +92,11 @@ twin and server (v28tpl = v27x211 + 212, the same blob), Reveal off/on x unmarke
 PLAUSIBLE: "stored-only" for master-born is `publicProse` alone (no birth of master's to compare keys against); the (3)
 judgment counts unresolved references, not which card each one names.
 
-## LEFT
-G1's 34-file count (queued on the mutex); G2's 28 (i); the Tell arms alone; ST; L; B.
+## LEFT (exact commands; every test command with the `env -u GIT_DIR ...` prefix, through the mutex)
+1. The 34 files once: `sh scripts/gate-mutex.sh --run -- sh scripts/gate-tail.sh -n 80 npx vitest run $(cat docs/chair/2026-11-20/veil/out/v38/r4ip3/files34.txt) --maxWorkers=1`.
+2. `tests/lint` WHOLE (after the ratchet cure, and at the last commit): NOT RUN (the mutex gave up twice). `sh scripts/gate-mutex.sh --run -- sh scripts/gate-tail.sh npx vitest run tests/lint`; against af708f2fd's 48 of 3,304. The 5 walkers + the ratchet are green alone.
+3. G2's 27 (i): criminalSwitchHandReach 12, galleryServerVeil 10, galleryRosterChoices 2, galleryVeilCures 2, gallerySecondHomes 1 (cures in G-SECURITY.md; HandRows' `differServed` is the form).
+4. galleryVeilSignalCopies at af708f2fd (`/home/user/wt/r4ip3-tip`), to prove its 2 reds the tip's (S2's cause): not run (mutex).
+5. The Tell3/4/5/8, galleryServerVeil and galleryRosterChoices arms on their own (heavy).
+6. The link anchor (A): needs a LINK twin, the chair's to define.
+Scratch worktrees (never committed to): `/home/user/wt/r4ip3-tip` (af708f2fd), `/home/user/wt/r4ip3-master` (db832c892, own node_modules).
