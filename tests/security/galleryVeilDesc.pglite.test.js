@@ -560,7 +560,12 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
       x.powerStructure.factionRelationships = arr(x.powerStructure.factionRelationships).filter((r) => !(isRec(r) && arr(r.pair).some((n) => wh.includes(String(n)))));
     }
     if (Array.isArray(x.factions)) x.factions = x.factions.filter(keep);
-    if (isRec(x.history)) x.history.currentTensions = arr(x.history.currentTensions).map((c) => (isRec(c) && Array.isArray(c.factions) ? { ...c, factions: c.factions.filter((n) => !wh.includes(String(n))) } : c));
+    // a tension whose OWN words name a withheld power (its name, desc, stakes: not its party list) is no tension of the place
+    // where that power was never there (R5D-PAGE-B2, on the stored pool: the projection's sweep withholds such an entry on the
+    // hiding read, and a never-there place built by deletion kept it); its party list loses the withheld names as before
+    const tensionNames = (c) => { const { factions: _p, ...own } = c; return strings(own).some(([, v]) => namesWithheld(v, wh, t)); };
+    if (isRec(x.history)) x.history.currentTensions = arr(x.history.currentTensions).filter((c) => !(isRec(c) && tensionNames(c)))
+      .map((c) => (isRec(c) && Array.isArray(c.factions) ? { ...c, factions: c.factions.filter((n) => !wh.includes(String(n))) } : c));
     if (!dm && stamped.length) x = maskAll(x, stamped);
     return x;
   };
