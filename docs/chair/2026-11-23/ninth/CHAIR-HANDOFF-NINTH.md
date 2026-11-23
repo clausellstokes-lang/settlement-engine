@@ -37,8 +37,8 @@ warning: the figure is the seat's present context, not what it has read). Figure
   (0fbb255f6), both checked or reported; its first `tests/lint` whole: the line's three reds and the lighting census
   owed to its door. It owes "DOORS <commit>" and its final message; THEN THE CHAIR READS `raised-top.txt` WHOLE AND
   MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name). "DOORS cb598376f"
-  said at 03:22; POINT 108 "DAILY-C" 8036cfe71 ADDed at 03:46; still to come by "ADD <branch> <commit> POINT <n>":
-  PRONOUN, PROSE-D. 172,763.
+  said at 03:22; POINT 108 "DAILY-C" 8036cfe71 ADDed at 03:46 and POINT 109 "PRONOUN" 95180c283 at 03:53; still to
+  come by "ADD <branch> <commit> POINT <n>": PROSE-D. 172,763.
 - VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE; its (P2) builder sweeps the tip's reds as a class
   (N33) and it owes "PIN-2 <commit>"; then the C2 proposal file ((a'), (b) alone, (c)+(b); the 23 `prose.*` rows; the
   chair's questions (i) to (v)). C2-BUILD IS ITS SUCCESSOR'S. 504,736.
@@ -55,13 +55,17 @@ warning: the figure is the seat's present context, not what it has read). Figure
   prepared cure; the arm in three halves), the order count, the tip build, the cost law, "TIP? R4-IDS". 465,078.
 - DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: DONE. "DAILY-C 8036cfe71" is in the landing as point 108 (N40, N41); its
   hand-back final; it starts nothing else.
-- CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: building PRONOUN with its neighbour ruled (N26 as amended by N28); then
-  "PRONOUN <commit>": a late "ADD"; then CLOSE-5, the flip's seat, is seated on its final hand-back (N31). 362,506.
+- CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: DONE. "VACANT 4ef6d6c32" is point 107 and "PRONOUN 95180c283" point 109 of
+  the stack (N25, N42); its hand-back final at e5d1ca80a; it starts nothing else.
+- CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; seated 03:55 UTC on CLOSE-4's hand-back; its start
+  message is `prompts/START-CLOSE-5.txt`): reads in, writes `close/FLIP-PLAN.md`, sends "PLAN <commit>" and WAITS.
+  IT BUILDS ONLY ON THE CHAIR'S WORD "BUILD THE FLIP <tip>", sent when the line holds points 106 to 109 (N31, N42).
+  The owner's signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
 - PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: WORKING AGAIN ("GO PROSE-6" at 03:46 UTC with N37's two rulings: the wages
   half withdrawn, v2 re-worded, no `force: paid` anywhere; the manifest grows test-only; summarized at 02:43, it
   re-reads its start message first). Then "PROSE-D <commit>": a late "ADD".
-SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, CLOSE-4, PROSE-6. THE NEXT FREE PLACE (VEIL-39's end, or
-CLOSE-4's) goes to chain C's builder seat once "CURE <shape>" is ruled, and to CLOSE-5 (the flip) at CLOSE-4's end.
+SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, PROSE-6, CLOSE-5. THE NEXT FREE PLACE (VEIL-39's end) goes to
+chain C's builder seat once "CURE <shape>" is ruled; VEIL-38's place goes to its successor VEIL-42.
 THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
 there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
 "TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
@@ -654,3 +658,27 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   message first. SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, CLOSE-4, PROSE-6. THE NEXT FREE PLACE (VEIL-39's
   end, or CLOSE-4's) goes to chain C's builder seat once "CURE <shape>" is ruled, and to CLOSE-5 (the flip) at
   CLOSE-4's end.
+- 2026-11-23 03:55 UTC · N42 · "PRONOUN 95180c283" TAKEN FOR LANDING AND ADDED AS POINT 109 (CLOSE-4's line of 03:47; the ADD at 03:53 UTC).
+  CHECKED BY THE CHAIR ON ORIGIN: the -wip's tip 95180c283cd727399c10124812d71564b0da9f47; the line's tip its ancestor;
+  six files, ONE under src/: `src/data/people/personMention.js` (+81 -8), ITS WHOLE DIFF READ BY THE CHAIR: the
+  pronoun's case by the word after the mention (`SUBJECT_FOLLOWERS`, `OBJECT_FOLLOWERS`, `FOLLOWER_BY_BEFORE` for
+  "would"; a follower in neither class keeps the old clause-head reading); ruling (A) as `NO_PRONOUN_TAILS` (two
+  exact tails: "would rather keep to themselves", "cannot finish theirs"): a mention before one skips the pronoun
+  rung only (`mentionOf(p, named, noPronoun)`); no reflexive rewritten. THE CHAIR'S TRIAL MERGE into the stack's
+  cb598376f: ONE conflict, the lighting census; the mutation manifest merges by itself (against point 108 it is the
+  tables class). BY THE SEAT'S OWN RUNS: CLOSE-2's red re-run by plant (4 red; green 27 of 27); the they cure red 4,
+  green 18 of 18; CN2 stays 0; the walker classes THEY_BOUND 2 and THEY_OTHER 6 by id; `tests/lint` whole the line's
+  three; people and 34 named files 4 red of 485, listed; the 89 golden-reading files 18 red of 950, listed;
+  typecheck 167 of 167; strict 1113 of 1113; `tests/build` 15, listed; first paint +0 raw / +17 gzip / -171 Brotli;
+  the worker +1,202; the engine chunk +0. WHAT MOVES, WORDS ONLY: 390 of 900 DARK births; 0 non-string leaves; 919
+  strings change a pronoun's case only; 188 take the role in place of a pronoun. THE GOLDEN MASTER (already red on
+  the list) moves 238 of 525 rows; 136 rows take the role (216 strings): NAMED FOR THE OWNER, recorded and signed by
+  nobody. NOTE FOR EVERY LATER DARK PROOF: the line's dark sha changes at point 109: a lane proves "equal" against
+  the line's tip of its own day.
+  CLOSE-4 IS DONE (both units at their landing lines; its hand-back final at e5d1ca80a, READ BY THE CHAIR, its first
+  section). CLOSE-5, THE FLIP'S SEAT, SEATED at 03:55 UTC (session_01FbPLbczmgBJrps3Eo813m1; source
+  `lane/close-4-2026-11-23`, outcome `lane/close-5-2026-11-23`; claude-opus-5-5, high) by a short prompt that points
+  to `prompts/START-CLOSE-5.txt` on origin (a989741e9): it reads in and writes `close/FLIP-PLAN.md`; it touches no
+  line of the flip's code before "BUILD THE FLIP <tip>". THE CHAIR'S ELEVENTH AND TWELFTH PUSHES (598969241,
+  a989741e9) ENDED exit=0 at 03:48 and 03:54 UTC: CONFIRMED from their logs.
+  SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, PROSE-6, CLOSE-5.
