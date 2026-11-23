@@ -36,8 +36,9 @@ warning: the figure is the seat's present context, not what it has read). Figure
 - STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: LANDING. Point 106 "DAILY-B" merged (2f3d614ac) and point 107 "VACANT"
   (0fbb255f6), both checked or reported; its first `tests/lint` whole: the line's three reds and the lighting census
   owed to its door. It owes "DOORS <commit>" and its final message; THEN THE CHAIR READS `raised-top.txt` WHOLE AND
-  MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name); late lanes by "ADD
-  <branch> <commit> POINT <n>" (PRONOUN, DAILY-C, PROSE-D). 172,763.
+  MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name). "DOORS cb598376f"
+  said at 03:22; POINT 108 "DAILY-C" 8036cfe71 ADDed at 03:46; still to come by "ADD <branch> <commit> POINT <n>":
+  PRONOUN, PROSE-D. 172,763.
 - VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE; its (P2) builder sweeps the tip's reds as a class
   (N33) and it owes "PIN-2 <commit>"; then the C2 proposal file ((a'), (b) alone, (c)+(b); the 23 `prose.*` rows; the
   chair's questions (i) to (v)). C2-BUILD IS ITS SUCCESSOR'S. 504,736.
@@ -52,16 +53,15 @@ warning: the figure is the seat's present context, not what it has read). Figure
   register row; the id mask's two conditions: N32); then it runs M (the Tonight line's three counts: N38) itself and
   HANDS OVER at its first natural stop (at once past 580,000): successor VEIL-42, lean, carries R4I-TONIGHT-2 (the
   prepared cure; the arm in three halves), the order count, the tip build, the cost law, "TIP? R4-IDS". 465,078.
-- DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: SUMMARIZED BY THE MACHINE at 01:55 UTC (told at 03:10 to re-read its start
-  message before its landing line); phase B built; the dwellings need added (N27); the five other double possessives
-  being named; then the line merged at 244fa84ef, rule 8, "DAILY-C <commit>": a late "ADD". 153,904.
+- DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: DONE. "DAILY-C 8036cfe71" is in the landing as point 108 (N40, N41); its
+  hand-back final; it starts nothing else.
 - CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: building PRONOUN with its neighbour ruled (N26 as amended by N28); then
   "PRONOUN <commit>": a late "ADD"; then CLOSE-5, the flip's seat, is seated on its final hand-back (N31). 362,506.
-- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: PARKED at 03:00 UTC AND SUMMARIZED at 02:43. "GO PROSE-6" when a place
-  frees, WITH N37's TWO RULINGS (the wages half withdrawn: v2 re-worded, no `force: paid` anywhere; the manifest grows
-  test-only) and the order to re-read its start message. Then "PROSE-D <commit>": a late "ADD".
-SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, DAILY-5, CLOSE-4. THE NEXT FREE PLACE (VEIL-39's end) GOES TO
-CHAIN C's BUILDER SEAT if "CURE <shape>" is ruled by then, else to "GO PROSE-6".
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: WORKING AGAIN ("GO PROSE-6" at 03:46 UTC with N37's two rulings: the wages
+  half withdrawn, v2 re-worded, no `force: paid` anywhere; the manifest grows test-only; summarized at 02:43, it
+  re-reads its start message first). Then "PROSE-D <commit>": a late "ADD".
+SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, CLOSE-4, PROSE-6. THE NEXT FREE PLACE (VEIL-39's end, or
+CLOSE-4's) goes to chain C's builder seat once "CURE <shape>" is ruled, and to CLOSE-5 (the flip) at CLOSE-4's end.
 THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
 there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
 "TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
@@ -639,3 +639,18 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   page: Relationships x4 "network's head's" (`institutionalCatalog.js` 1476 to 1477, with `handlerTieLines.js` 84 and
   `npcData.js` 2100); NPCs x1 "lord's steward's office" (`goalFamilies.js` 368 with `goals.js` 165).
   DAILY-5 did not say whether it re-read its start message after N36's caution: asked again, owed in its next line.
+- 2026-11-23 03:45 UTC · N41 · "DAILY-C 8036cfe71" TAKEN FOR LANDING AND ADDED AS POINT 108 (03:46 UTC). CHECKED BY THE CHAIR ON ORIGIN:
+  the branch's tip 8036cfe71c56efb1ec2376f0ac44fb7965f1b824; beyond 80118a936 it holds `public/sitemap.xml` alone (five
+  lines leave: `/compendium/op-requestdailylife`; 314 URLs by the seat's word) and docs; THE CHAIR'S TRIAL MERGE into
+  the stack's cb598376f (`git merge-tree`, read-only): ONE conflict, the lighting census, a register. By the seat's
+  run: the six test files that name the sitemap, 46 of 46 green. DAILY-5 RE-READ its start message and COMMON-EIGHTH
+  11, 14 and 15 at 03:35 UTC (after N36's caution) and named four differences, all covered by its own runs (the red
+  list it had read was its checkout's copy: re-read against the chair lane's: all 21 reds on it; a builder's brief
+  lacked `tests/lint` whole: run by the seat twice; messages not read between waits; rule 8 (c) over, not under).
+  DAILY-5's UNITS ARE DONE: it brings its hand-back final and starts nothing else. TOLD TO STACK-106: a lane merged
+  after step e's build means ONE more build and `tests/build` at the stack's final top: the five figures of its
+  final message come from that build.
+  "GO PROSE-6" SENT (03:46 UTC) in the place DAILY-5 freed, with N37's two rulings and the order to re-read its start
+  message first. SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, CLOSE-4, PROSE-6. THE NEXT FREE PLACE (VEIL-39's
+  end, or CLOSE-4's) goes to chain C's builder seat once "CURE <shape>" is ruled, and to CLOSE-5 (the flip) at
+  CLOSE-4's end.
