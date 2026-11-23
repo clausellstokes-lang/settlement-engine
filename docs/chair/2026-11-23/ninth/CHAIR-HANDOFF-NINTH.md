@@ -39,7 +39,7 @@ turn's end); VEIL-43 0 (its first turn has not ended).
 - THE WORKING LINE IS 9b0ffaa9750f65f122e07c5d2b368797569b5055 (`lane/join-2026-11-14`, POINTS 106 TO 112; pushed by the
   chair at 08:00:32 UTC, exit 0: N73). Its join is 4eca0afb6 (parents 244fa84ef and the stack's gated tip 739e4a0c4;
   its tree the gated tip's own); one docs commit holds the seven rows and the gate's sentence. `ci/LINE-NOW.md` is at
-  point 112 and the red list at 59 rows. CI ON THIS TIP IS TO BE READ BY NAME (the chair owes it). THE LANDING PLACE IS
+  point 112 and the red list at 59 rows. CI ON THIS TIP IS READ BY NAME (N76; run 45135236667): IT FAILS AS EVERY TIP HAS, AND ALL 59 FAILING TESTS ARE THE LIST'S 59 ROWS: nothing new, nothing cured. THE LANDING PLACE IS
   FREE. STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt IS DONE and writes nothing more.
 - CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
   5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
@@ -129,9 +129,18 @@ turn's end); VEIL-43 0 (its first turn has not ended).
   add none). It runs chain B's instrument (L1 only) for the whole-document count; its own builder builds "DAILY" and
   "NAMES" only. RULED: in unit (2), what touches neither 212 nor the registry is built first; the sites' rows and
   (ix)'s SQL last, after the three units now in build have reached the tip.
-SIX WORK NOW: CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43 (THE LANDING PLACE IS FREE ONLY WHEN ONE OF THE SIX
-PARKS: STACK-113 for "PROSE-E" takes PROSE-6's place when PROSE-6 has sent its commit and waits). CLOSE-5's place goes
-to CLOSE-6.
+SIX WORK NOW: CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43. THE NEXT FREE PLACE (PROSE-6's, when it has sent
+"PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
+AS ITS FIRST RED (N76; `prompts/DRAFT-START-VEIL-44.txt`, A DRAFT WITH THREE BLANKS: chain B's counts, the checkout's
+commit, the lane's tip), NOT TO A LANDING STACK: "PROSE-E", WHICH NEVER GATES THE DEPLOY, LANDS IN THE SAME STACK AS
+THE FLIP. CLOSE-5's place goes to CLOSE-6.
+A HOLE FOUND IN THE VEIL AS BUILT, "MAP-COVERT" (N76; SAID TO THE OWNER): the shared map's member (`get_gallery_map`,
+211 :1392, not restated in 212) never runs `_gallery_apply_member_overrides`, the one home of the covert CASE, so a
+covert tie's copy (`prominentRelationship`) is served on every map member at Reveal off, marked or unmarked (chain
+B's first reading: 2 of 2 places; the gallery read, the import and the link 0 of 2; the cause read by the chair). No
+pool proof of the lane ever read the map member. ITS CURE IS IMPORT-DOOR's; chain B's full counts come after its
+pool run (about 10:25 UTC); THE OWNER IS OWED those counts, and with them the old question of what a page published
+before the veil shows.
 THE GATES' "server = twin" IS A SHAPE CHECK ONLY (N48): the whole-document form joins every veil unit's proofs once the
 chair has ruled on VEIL-42's "WHOLE-DOC" measure at the tip's own code. The hourly check is a one-shot scheduled task
 re-armed each time: the last entry of section 5 that names one holds the next.
@@ -143,8 +152,7 @@ file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projec
 CARRY THE WHOLE-DOCUMENT "server = twin" ONCE THE CHAIR HAS RULED ON ITS MEASURE AT THE TIP (N48). THE STORED PROSE'S
 CURE IS RULED "(a')" (N49): no `publicProse` served on a shared read; VEIL-41 builds it. THE TIP PASSES THE PUSH HOOK's TWO TYPE CHECKS (the chair's own run at 05:42 UTC in `/home/user/wt/veiltip`: 167 of 167; 1113 of 1113).
 
-WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: CI's RUN ON 9b0ffaa97 READ BY NAME against the 59 rows (workflow "CI"
-on the pull request's head; written into `ci/LINE-NOW.md`); "TIP? PIN-3 <commit>" granted and the new veil tip named
+WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: "TIP? PIN-3 <commit>" granted and the new veil tip named
 to the three chains; VEIL-42's measures ruled (the whole-document form into every unit); "TENSION-PARTIES" ruled;
 VEIL-40's builder's return (the gates; the owner's screen line); VEIL-43's first message and its six measures
 (each ruled as it comes); "PROSE-E <commit>" read and a stack seated for it (STACK-113) when it is ready; CLOSE-5's lines after each
@@ -1668,3 +1676,66 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   (9) THE CHAIR'S TWENTY-EIGHTH PUSH (28ef8d10c: N74) ENDED exit=0 at 08:23:07 UTC (its log; ls-remote equal to the
   local tip). CI's run 45135236667 on 9b0ffaa97 is read by name next (the reminder of 08:51). THE NEXT HOURLY CHECK IS
   SET WITH THIS ENTRY'S PUSH (its id in the next entry).
+- 2026-11-23 08:55 UTC · N76 · CI ON THE NEW LINE READ BY NAME: 59 OF 59, NOTHING NEW; "MAP-COVERT": THE SHARED MAP'S
+  DOOR SKIPS THE COVERT WITHHOLD; THE NEXT FREE PLACE GOES TO THE DOORS UNIT.
+  (1) CI ON THE LINE'S TIP 9b0ffaa97, READ BY NAME: workflow "CI", run 45135236667 (run number 1289; 08:00:40 to
+  08:48:16 UTC): conclusion FAILURE, AS ON EVERY TIP OF THE PULL REQUEST; EVERY FAILING TEST IS A ROW OF THE LIST: the
+  test ratchet 35 failed of 42,736 (its own line: "35 failing test(s) NOT in the frozen census"): the list's 35 rows,
+  each matched by file and title; build and dist 15 failed rows in six files of `tests/build`: the list's 15; the
+  coverage floors' job 8 failed of 5,966 in three files: the list's 8; the golden master under tr_TR and Chatham time
+  1 of 45: the list's one. 59 OF 59 FAILED AGAIN; NONE IS CURED; NONE STANDS OUTSIDE THE LIST. Green: the six ratchet
+  shards, lint, the type ratchets, validation, the Deno edge tests, Chromium end-to-end, the production-build browser
+  performance; skipped: the five weekly or manual jobs and BOTH DEPLOY JOBS. HOW: a first helper found the run still
+  in progress at 08:45; a second wrote the four failed jobs' failing lines to a file (104 lines) at 08:52;
+  `ci_match.py` (now beside LINE-NOW.md) matched them by containment and by file; the jobs' own totals read by the
+  chair from the saved logs (the coverage job's eighth title stood above the fetched tail: its file, its assertion's
+  words and the total of 8 identify it). WRITTEN INTO `ci/LINE-NOW.md`. SAID TO THE OWNER in plain words.
+  (2) "MAP-COVERT": A DOOR OF THE VEIL AS BUILT SKIPS A WITHHOLD. VEIL-42's surprise of 08:48, U-UNMARKED's first
+  reading (R4I-MEASURE d03b72941, `out/v42/meas/U-UNMARKED.md`; 2 places: PLAUSIBLE as a count, its cause read): THE
+  `get_gallery_map` MEMBER SERVES A COVERT TIE'S COPY in `prominentRelationship`, byte-equal to the stored copy, at
+  Reveal off, on UNMARKED AND MARKED (default marker) shares (r3m-town-wartime-0-29, r3m-city-none-1-107);
+  `fetchGalleryMap` keeps it for the page; the gallery read, its page, the import, the import's page and the link: 0
+  of 2. CONFIRMED BY THE CHAIR'S OWN READ at 23bb8b8ae: 211 :1392 to :1480 builds each member's `settlement` as
+  `coalesce(_gallery_veil(pub.j, s.gallery_member_overrides, false) -> 'body', pub.j)` over
+  `_gallery_sanitize_public_json(src.j)` and never calls `_gallery_apply_member_overrides`; 212 :2828 to :2942 holds
+  the covert CASE there alone (VEIL-13's ruling (5): `prominentRelationship` whole, and `pressureSentence` where it
+  tells a dropped tie). AND THE PREPARED BASE DOES NOT CURE IT: doors-3 (`lane/veil-doors-3-2026-11-20` at 3e1115c81;
+  E124) restates `get_gallery_map` at :2351 of its 212 and still builds the member as
+  `_gallery_veil(_gallery_sanitize_public_json(src.j), overrides, true) -> 'body'` (the link form: an unmarked member
+  takes the default veil there), with no call of the member overrides. **Decided:** a fault of the veil as built, not
+  of R4-IDS; the pool's run is NOT interrupted; the counts follow it inside U-UNMARKED and gain `pressureSentence` on
+  the map member, the three marker states, both stored sets, `import_gallery_map` and `get_unlisted_map` where they
+  hand a member, and ONE TABLE BY READING of every step the gallery read applies that the map member does not; THE
+  CURE IS THE DOOR CLASS (the lane's ruling 56: one veil, every door): THE FIRST RED OF "IMPORT-DOOR" (the door-census
+  walker reds on a door that hands a dossier without the whole pipeline; 212 restates `get_gallery_map`; the twin's
+  map path); VEIL-42 writes the finding into PART 44 and an addendum of the brief now. **Why not a unit of its own:**
+  IMPORT-DOOR already restates that function once in 212's final text (E124); a second restatement would be read twice
+  by the security reader. **A sixth blind proof:** every pool proof of the lane read the gallery read, the link and
+  the import; none read the map member (one line owed by VEIL-42 on which doors its own proofs read). THE READER'S
+  LIST: row 30 now counts six; ROW 31 "MAP-COVERT" added. VEIL-43 told (08:51): its "NAMES" and "DAILY" read every
+  door its instruments reach, the map member too, the known fault listed apart. SAID TO THE OWNER in plain words: the
+  ordinary shared page read clean on the first reading (old pages too); the shared map does not; nothing is deployed;
+  it is cured before the deploy; the full counts come about 10:25 UTC. THIS ALSO ANSWERS HALF OF N75 (4)'s MEASURE: on
+  the two places the unmarked GALLERY read at Reveal off carried no covert copy.
+  (3) THE NEXT FREE PLACE: **Decided:** when PROSE-6 has sent "PROSE-E <commit>" and waits, its place goes to VEIL-44,
+  chain B's second seat, seated one unit early (E89's own rule) for "IMPORT-DOOR": until "R4-IDS MERGED" it prepares
+  and measures (the brief's (c1) with every later ruling listed, N49, N63 and N76 among them; the table
+  "MAP-PIPELINE"; MAP-COVERT's plant and arm, red first, tests only; the doors' own arms; the TRAD-4 pin re-cut; the
+  door census at the tip) and writes no line of 212, the twin or the registry; then the build by the brief's
+  two-builder split. "PROSE-E" LANDS IN THE SAME STACK AS THE FLIP (one gate for both). **Why:** the veil decides the
+  date and has just grown by a door; PROSE-E never gates the deploy; the brief's re-stamp puts IMPORT-DOOR's SQL after
+  R4-IDS's merge, but its measures, pins and first red wait on nobody. **Rejected:** a landing stack for PROSE-E alone
+  in that place (two hours of a seat on what does not gate); leaving IMPORT-DOOR to VEIL-42's successor at its mark
+  (the whole unit would then sit on the tail). **Reversal:** the draft is not a seating.
+  `prompts/DRAFT-START-VEIL-44.txt` IS WRITTEN (three blanks: chain B's counts, the checkout's commit, the lane's
+  tip).
+  (4) THE STORED HOURLY CHECK OF 08:42 reached the chair at 08:47 with its work already done; CLOSE-5 told its figure
+  (543,955). VEIL-42 at 08:46: U-UNMARKED and M-TWIN (M's three counts and the unmapped ids re-taken on the twin's
+  projection, the 140 and the pool; any count not 0 a STOP) given to R4I-MEASURE; R4I-TONIGHT-2 resumed at 08:37 with
+  its twin re-pointed first (`shareRenderTwice`'s `env.twinRow` checked for the same fault). FIGURES THAT CAME FROM
+  THE RAW TWIN ROW, WITHDRAWN UNTIL RE-TAKEN: `r4ip2/order.probe.jsx`'s twin half (the Tonight sheet's move between
+  two reads, twin 39 of 140; "the served arrays equal in order, twin 140/140"; the server's 44 of 140 stands);
+  `r4it/tonight-arm.probe.jsx`'s "equal to the owner's sheet 0 of 4"; `tonight-names.probe.jsx`'s twin halves of M.
+  THE CHAIR'S TWENTY-NINTH PUSH (bba6580c4: N75) ENDED exit=0 at 08:47:13 UTC (its log; ls-remote equal). THE NEXT
+  HOURLY CHECK: trig_01RAKptvggFu2Gfj5cNBwDE8 at 09:43 UTC. A CORRECTION OF N75 (7): its words "(N47's block)" are
+  inexact: read "his question of 04:42 and the top block".
