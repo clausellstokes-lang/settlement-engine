@@ -67,7 +67,8 @@ PATH: the sites stay the control's three, both roster lists, as cured. `_gallery
   and one line beside R4-IDS's (comments, outside the function).
 - RED (before the two lines; the snapshot `/var/tmp/sql2c1` = `git archive 84f2e2bba`, template `sql2_c1tpl`):
   (a) control: `logs/3b-ctrl-green-table.txt` (the GAP's green, = this cure's red): L1 gallery 33 of 288 at `factions[].power`;
-      master-born set, gallery door: RUNNING (`logs/n106-red-m.log`);
+      master-born set, the gallery door, Reveal DM, the 11 marked settings: **L1 gallery 352 of 3,360 differ**, all at
+      `factions[]#keys` / `factions[].power`, 32 places (`logs/n106-red-m-table.txt`): the measure's figure exactly;
   (b) the plant `b-plant.mjs` (`logs/n106-red-b.txt`): RED, the server ADDS `power` [50,50] on BOTH lists where the twin adds none;
       its control (every power a number) green, [80,20] both engines;
   (d) the pin `tests/lint/veilTypeofGuard.walker.test.js` against the old 212: RED naming both lines (`logs/n106-red-d.txt`).
@@ -76,4 +77,12 @@ PATH: the sites stay the control's three, both roster lists, as cured. `_gallery
   with `e -> 'pair'` a non-empty array); the mutation manifest 10/10 (a rationale entry, `logs/n106-manifest.txt`); eslint 0;
   item 4 re-run on this 212 (sha fad4b9b9…): 480 = 480, diff empty, one drawer, closure all v, salt 0, smoke green; `--check` 0.
   (d) cost under thirty minutes.
-- QUEUED: `run-n106.sh grn-m grn-c c`, then tests/security (roster-choice readers + handreach), tests/lint + copy whole, typecheck.
+- GREEN (a): the master-born set, gallery door: **L1 352 -> 0 of 3,360**, L2 0 (`logs/n106-grn-m-table.txt`); the control
+  (handreach, every door, MEAS_C=1): **L1 gallery 33 -> 0 of 288**, L1 link 0, C hits none on every door and both engines, publicProse
+  none (`logs/n106-grn-c-table.txt`). So the GAP's item 3 "L1 0 differ" now holds on the control and the master-born set. L2 gallery
+  24 of 288 remain (v102-hamlet-6 at Reveal off, the page's prominentRelationship and #keys: in the red's 57 before either cure; the
+  page's, not a power share).
+- GREEN (c): NO TODAY-BORN READ MOVES: the gate's 140 (stored-today), Reveal off and DM, the 12 setting families, the gallery read and the
+  link: **6,720 reads, 6,720 the same hash modulo the bijection, 0 differ**, before (sql2_c1tpl) against after (v42sql2b); the control,
+  the raw documents, differ on all 6,720 (each read its own salt) (`logs/n106-c.txt`, `logs/n106-c-today-*.json`).
+- RUNNING/QUEUED: tests/security (roster-choice readers + handreach), tests/lint + copy whole, typecheck.

@@ -1,0 +1,10 @@
+{
+ "shard": "0/4",
+ "docs": 35,
+ "reads": 1680,
+ "same": 1680,
+ "differ": 0,
+ "rawDiffer": 1680,
+ "examples": [],
+ "faults": []
+}

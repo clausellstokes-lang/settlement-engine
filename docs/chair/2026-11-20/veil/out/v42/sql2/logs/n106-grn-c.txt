@@ -1,0 +1,68 @@
+start 2026-11-23T15:24:58Z src /home/user/wt/sql (f7db7b9a721d7c4156d2b7c61517d66623ee650d) 212 fad4b9b998f80722
+v42sql2b rc=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11263 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+shard 0 rc=0
+shard 1 rc=0
+shard 2 rc=0
+shard 3 rc=0
+documents 12; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 288 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 288 / 0
+  L1 gallery | canon: 288 / 0
+  L1 link | aligned: 288 / 0
+  L1 link | canon: 288 / 0
+  L2 gallery | aligned: 288 / 24
+  L2 gallery | canon: 288 / 24
+  L2-vs-L1 server | canon: 576 / 288
+  L2-vs-L1 twin | canon: 576 / 288
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 12
+
+== L2 gallery | aligned: 24 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (2): v102-hamlet-6|current, v102-hamlet-6|master
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+== L2 gallery | canon: 24 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (2): v102-hamlet-6|current, v102-hamlet-6|master
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship#keys
+        server: (absent)
+        twin:   full,npc1,npc2,phrasing,tension,type
+   prominentRelationship.full: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.full
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud holds letters Toquchar Qonggirad wrote years ago, in Toquchar Qonggirad's own hand. Toquchar Qonggirad does what Dolgorsüren Taichiud asks so the letters stay locked away."
+   prominentRelationship.npc1: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc1
+        server: (absent)
+        twin:   "Toquchar Qonggirad"
+   prominentRelationship.npc2: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc2
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud"
+   prominentRelationship.phrasing: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.phrasing
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+   prominentRelationship.tension: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.tension
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+   prominentRelationship.type: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.type
+        server: (absent)
+        twin:   "Held Over Them"
+== L2-vs-L1 server | canon: 288 of 576 reads differ
+   by setting: current|dm|allOpen=6 current|dm|default=6 current|dm|g:000=6 current|dm|g:001=6 current|dm|g:010=6 current|dm|g:011=6 current|dm|g:100=6 current|dm|g:101=6 current|dm|g:110=6 current|dm|off=6 current|dm|own=6 current|dm|unmarked=6 current|off|allOpen=6 current|off|default=6 current|off|g:000=6 current|off|g:001=6 current|off|g:010=6 current|off|g:011=6 current|off|g:100=6 current|off|g:101=6 current|off|g:110=6 current|off|off=6 current|off|own=6 current|off|unmarked=6 master|dm|allOpen=6 master|dm|default=6 master|dm|g:000=6 master|dm|g:001=6 master|dm|g:010=6 master|dm|g:011=6 master|dm|g:100=6 master|dm|g:101=6 master|dm|g:110=6 master|dm|off=6 master|dm|own=6 master|dm|unmarked=6 master|off|allOpen=6 master|off|default=6 master|off|g:000=6 master|off|g:001=6 master|off|g:010=6 master|off|g:011=6 master|off|g:100=6 master|off|g:101=6 master|off|g:110=6 master|off|off=6 master|off|own=6 master|off|unmarked=6
+   documents (0): 
+   defenseProfile#keys: reads 288, leaves 288
+EXIT rc=0 2026-11-23T15:28:49Z

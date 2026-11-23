@@ -1,0 +1,8 @@
+start 2026-11-23T15:28:49Z src /home/user/wt/sql (f7db7b9a721d7c4156d2b7c61517d66623ee650d) 212 fad4b9b998f80722
+v42sql2b rc=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12154 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+shard 3/4: docs 35, reads 1680, same 1680, differ 0 (raw documents differing, the control: 1680), faults 0
+shard 2/4: docs 35, reads 1680, same 1680, differ 0 (raw documents differing, the control: 1680), faults 0
+shard 1/4: docs 35, reads 1680, same 1680, differ 0 (raw documents differing, the control: 1680), faults 0
+shard 0/4: docs 35, reads 1680, same 1680, differ 0 (raw documents differing, the control: 1680), faults 0
+EXIT rc=0 2026-11-23T15:53:05Z

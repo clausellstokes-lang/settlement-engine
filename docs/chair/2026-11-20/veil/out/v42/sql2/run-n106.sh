@@ -7,6 +7,8 @@
 #   grn-m  the same measure from THE WORKTREE, template v42sql2b (v27x211 + this tree's 212, re-made here)
 #   grn-c  the control towns (handreach, every door, MEAS_C=1) from the worktree, template v42sql2b
 #   grn-b  the plant against v42sql2b (light)
+#   sec    tests/security: the roster-choice readers and handreach; lint: tests/lint + tests/copy WHOLE; tc: the typecheck ratchet
+#   after-red  wait for red-m's EXIT line (red first, in time)
 #   c      c-today.mjs, four shards: the gate's 140 today-born, every read hashed modulo its bijection, sql2_c1tpl against v42sql2b
 E="env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_COMMON_DIR -u GIT_OBJECT_DIRECTORY -u GIT_PREFIX -u GIT_NAMESPACE"
 W=/home/user/wt/sql; S1=/var/tmp/sql2c1; P=docs/chair/2026-11-20/veil/out/v42/sql2; L=$W/$P/logs; O=/var/tmp/v18/out/v42/sql2
@@ -21,4 +23,10 @@ s_grn_c() { f=$L/n106-grn-c.log; hd $W > $f; cd $W; tplb >> $f 2>&1; $MX env MEA
 s_grn_b() { f=$L/n106-grn-b.log; hd $W > $f; cd $W; tplb >> $f 2>&1; $E node $P/b-plant.mjs v42sql2b >> $f 2>&1; echo "EXIT rc=$? $(date -u +%FT%TZ)" >> $f; }
 s_c() { f=$L/n106-c.log; hd $W > $f; cd $W; tplb >> $f 2>&1
   $MX sh -c "for s in 0 1 2 3; do $E node $P/c-today.mjs sql2_c1tpl v42sql2b $ST \$s/4 $O/c-today-\$s.json & done; wait" >> $f 2>&1; echo "EXIT rc=$? $(date -u +%FT%TZ)" >> $f; }
+SECN="tests/security/criminalSwitchHandReach.pglite.test.js tests/security/galleryRosterChoices.pglite.test.js tests/security/galleryServerVeil.pglite.test.js tests/security/galleryVeilHandRows.pglite.test.js"
+s_sec() { f=$L/n106-sec.log; hd $W > $f; cd $W; $MX npx vitest run $SECN --maxWorkers=1 >> $f 2>&1; echo "EXIT rc=$? $(date -u +%FT%TZ)" >> $f; }
+s_lint() { f=$L/n106-lint-copy.log; hd $W > $f; cd $W; $E git fetch -q origin review-fixes-2026-07-08 >> $f 2>&1; echo "ledger fetch rc=$? $(git rev-parse origin/review-fixes-2026-07-08)" >> $f
+  $MX npx vitest run tests/lint tests/copy --maxWorkers=1 >> $f 2>&1; echo "EXIT rc=$? $(date -u +%FT%TZ)" >> $f; }
+s_tc() { f=$L/n106-typecheck.log; hd $W > $f; cd $W; $MX npm run typecheck:ratchet >> $f 2>&1; echo "EXIT rc=$? $(date -u +%FT%TZ)" >> $f; }
+s_after_red() { until grep -q '^EXIT' $L/n106-red-m.log 2>/dev/null; do sleep 30; done; }
 for n in "$@"; do s_$(echo $n | tr - _); done
