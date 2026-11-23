@@ -44,3 +44,7 @@ LIST in the hand-back that `tonightSheet.js` and `crisisFactFindings.js` join R4
 - STOP EARLY at about 350,000 tokens with what is left in the hand-back (exact commands).
 
 YOUR LAST MESSAGE: at most 300 words. Give your last commit; the red-first count and the green; the arm's three halves' figures (red and green, both sets); OWNER-MOVES' count; the tests re-pinned; N's red and green; any golden, snapshot or register named; `tests/lint` and `tests/copy` whole's counts by name; CONFIRMED vs PLAUSIBLE.
+
+## ADDENDUM — THE CHAIR'S N59 (06:29 UTC 2026-11-23): YOU START NOW, BESIDE R4I-MEASURE, ON TWO CONDITIONS
+1. IF R4I-MEASURE's "77" FINDS ITS CAUSE IN WHAT YOU EDIT (the sheet, the judge, or anything the client's page does with a person id), THE SEAT TELLS YOU AND YOU STOP: commit what is done, write the hand-back, end.
+2. YOUR PINS: BEFORE EACH COMMIT that moves a printed sentence or a key, a grep of `tests/` for every sentence or key it moves (N57), the hits listed in the hand-back with what each does; `tests/copy` WHOLE in your proofs (N54). A MOVED GOLDEN OR SNAPSHOT IS NAMED FOR THE OWNER, SIGNED BY NOBODY.
