@@ -32,14 +32,13 @@
   - MOVED: the same text at another place. ORDER: the same characters in another order.
 
 ## THE COST (measured)
-- Cost run: 10 births and 5 towns, 158 + 130 s. Estimated about 100 min whole; the chair ruled the about-55 min split.
-- The actual run took 14:27 to 17:38 UTC. Every restore birth fell on shard 0 (i mod 4 = 0), my sharding fault; then N, then
-  the key-fill (171 births).
-- N109's samples took 17:39 to 17:44.
+Cost run: 10 births and 5 towns, 158 + 130 s; about 100 min whole estimated; the chair ruled the about-55 min split. Actual:
+14:27 to 17:38 UTC (every restore birth fell on shard 0, i mod 4 = 0, my sharding fault; then N, then the key-fill of 171
+births). N109's samples: 17:39 to 17:44.
 
 ## (F) FIDELITY: the banked 720, P1 (veiled, nothing hidden) against P0 (the owner's public read)
-- 753,863 P0 lines; 699 of 720 births differ. The restore loop ran on 329 births: every 4th, plus 149 by the key-fill.
-- 300 line kinds (tab + label): 287 keyed, 13 not (STOP 2).
+753,863 P0 lines; 699 of 720 births differ. The restore loop ran on 329 births (every 4th, plus 149 by the key-fill). 300 line
+kinds (tab + label): 287 keyed, 13 not (STOP 2).
 
 | class | lines | the causing key (narrowest single key that restores the line; restore births only) |
 |---|---|---|
@@ -56,8 +55,7 @@ BY TAB:
   fractured.", "⚠"); MOVED 41; GAINED 5.
 - Foundations: CHANGED 465 (the band tiles); MOVED 434.
 - Daily Life: CHANGED 217 (the legacy sentence dropped); LOST 9; ORDER 2.
-- Overview: LOST 144 (the recentConflict vignette; "Notable connection").
-- Defense: CHANGED 27. Magic: CHANGED 1 (other:powerStructure).
+- Overview: LOST 144 (the recentConflict vignette; "Notable connection"). Defense: CHANGED 27. Magic: CHANGED 1 (other:powerStructure).
 - THE "LAW & ORDER" TILES: 60 CHANGED (Critical / Strained / Adequate / Surplus moving bands), all keyed
   safety.capture/ratio/crimeTypes (32 of 60 on restore births). The word moves only where a key is withheld (no STOP).
 
@@ -67,15 +65,14 @@ VR31 (N109; `vr31-table.txt`), on each of the 9 births, CONFIRMED:
 - (2) P0's shares sum short of 100 by exactly that share (74 to 94);
 - (3) P1's sum to 100;
 - (4) every P1 share equals P0's by largest remainder (restated from galleryRosterChoices.js :: largestRemainder).
-- ON ALL 720: shares move on 9 births, all 9 with a withheld power; 0 with none withheld (no STOP).
-- Stored rosters not summing to 100 with nothing withheld: 0 (storedNot100 is 0 at all).
+- ON ALL 720: shares move on 9 births, all 9 with a withheld power; 0 with none withheld (no STOP). Stored rosters not summing
+  to 100 with nothing withheld: 0 (storedNot100 is 0 at all).
 - AT REVEAL DM, the four named births: P1's Power share tiles EQUAL the owner's own page's (19/19, 9/9, 17/17, 12/12). The doc
   shares equal the stored roster; dmMove 0 on all 720.
 
 THE GOVERNANCE PARAGRAPH (governanceAccountRead, publicDossier: the stamped `power:governance` block):
-- It prints on 720 of 720, P0 and P1, every one found in the Power view.
-- P1 against P0, all 0: differ 0; a cause lost 0; food alone 0; a merit sentence gained / lost 0 / 0; another event named 0;
-  the lasting sentence changed 0.
+It prints on 720 of 720, P0 and P1, every one found in the Power view. P1 against P0, all 0: differ 0; a cause lost 0; food
+alone 0; a merit sentence gained / lost 0 / 0; another event named 0; the lasting sentence changed 0.
 
 THE SERVER (`get_gallery_dossier` on a v43x database from v28tpl; every 24th birth, 30 places):
 - Its page against the twin's page: 22 differing lines on Systems/Institutions, ALL ORDER. CHANGED 0, LOST 0, GAINED 0.
@@ -86,9 +83,8 @@ THE SERVER (`get_gallery_dossier` on a v43x database from v28tpl; every 24th bir
   the object's key order: jsonb's own key order on the server, the insertion order on the twin; PLAUSIBLE for jsonb).
 
 ## (N) NEVER-THERE: the gate's 92 hiding towns, P2 (own, Reveal off and DM) against the house-free twin under the same read
-- 75,850 differing lines on 92 of 92 towns, both reads.
-- N63: the house-free page's signature appears on no pool page of its size and Reveal for 34 of 92 towns (off) and 84 (DM).
-- The twin is born by `birth(cfg, seed, isHideableHouse)`: the generator runs on without the houses, so its cast, ties and
+75,850 differing lines on 92 of 92 towns, both reads. N63: the house-free page's signature appears on no pool page of its size
+and Reveal for 34 of 92 towns (off) and 84 (DM). The twin is born by `birth(cfg, seed, isHideableHouse)`: the generator runs on without the houses, so its cast, ties and
   history are drawn anew. Most lines are a different town, not the veil.
 
 | read | tab: CHANGED / GAINED / LOST, lines [of them on N63 towns] (largest first) |
@@ -113,23 +109,13 @@ Every page was checked for its printed text, its key in the slots, and its key i
 | (N) house-free | 184 | 0 | 0 | 0 | 74 |
 
 ## CONFIRMED vs PLAUSIBLE
-CONFIRMED (executed):
-- every count above.
-- the walk on the read-only view.
-- nothing hidden by the marker.
-- VR31 (1)-(4) on 9 of 9 births; 0 moved shares without a withheld power.
-- the four DM samples equal.
-- the server differing by ORDER alone.
-- the dm slot 0 with the owner line present on 441 pages.
+CONFIRMED (executed): every count above; the walk on the read-only view; nothing hidden by the marker; VR31 (1)-(4) on 9 of 9
+births and 0 moved shares without a withheld power; the four DM samples equal; the server differing by ORDER alone; the dm slot
+0 with the owner line present on 441 pages.
 
-PLAUSIBLE:
-- the 10-and-up print rule for a bare share figure.
-- jsonb key order as the server's chip order.
-- the pairing heuristics (labels of 6+ characters) as "the same place".
-- the 678 + 823 + 1 unsampled lines carrying the key their kind shows.
+PLAUSIBLE: the 10-and-up print rule for a bare share figure; jsonb key order as the server's chip order; the pairing heuristics
+(labels of 6+ characters) as "the same place"; the 678 + 823 + 1 unsampled lines carrying the key their kind shows.
 
 ## FILES
-- Probe and runners: `pages.probe.mjs`, `pages.vitest.config.mjs`, `pages.sh`, `pages-cost.sh`, `pages-full.sh`,
-  `pages-extra.sh`.
-- Tables and analyzers: `pages-an.mjs`, `vr31-an.mjs`, `PAGES-table.txt`, `vr31-table.txt`.
-- Rows: `/var/tmp/v18/out/v43/pages/{full,extra}`.
+`pages.probe.mjs`, `pages.vitest.config.mjs`, `pages.sh`, `pages-cost.sh`, `pages-full.sh`, `pages-extra.sh`; `pages-an.mjs`,
+`vr31-an.mjs`, `PAGES-table.txt`, `vr31-table.txt`. Rows: `/var/tmp/v18/out/v43/pages/{full,extra}`.
