@@ -43,8 +43,13 @@ A successor reads those two, then this section, then `FLIP-PLAN.md`.
   read first); after F-JOIN the page census (`--write`); after each test-changing commit, if red, the lighting census
   (`LIGHTING_CENSUS_REFREEZE=<label> npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean
   committed tree, then plainly).
-- THE ORDER ON THE FLIP BRANCH: F0 budgets; F1 dials; F-SEAT; door goal hashes; F-FORTUNE; F-JOIN; door page census;
-  registers by their doors; F9 twin + sample town; FOR-THE-OWNER.md (this seat). Each builder an Agent of this seat's tier.
+- "BUILD THE FLIP 5e63f2603", PROVISIONAL (the chair, 05:14): the stack's DOORS commit, not yet the line. CONDITIONS: the flip
+  branch cut AT it in its own worktree, hooks linked; BEFORE "FLIP <commit>" the line's tip the chair names (PROSE-D on top) is
+  MERGED into the flip branch, what it touches re-run, `tests/lint` whole, every anchor in a file it changed re-read; if the
+  stack's gate drops or changes a lane, STOP at the next commit boundary; ONE LINE to the chair after commit 1 is proved and
+  after each lane's commit. THE ORDER (the chair's): F0 budgets; F1 dials + texts + row + 14 dial pins + the Q3/Q4 configs;
+  the doors (goal hashes; page census), one commit each; F-SEAT; F-FORTUNE; F-JOIN; the sample town (F9 commit B); the twin
+  (F9 commit A) and FOR-THE-OWNER.md. Registers (the lighting census) by their door wherever a commit reds them.
 - NEXT, in one line: on "BUILD THE FLIP <tip>", the flip
   branch in `/home/user/wt/flip`: commit 0 the budgets, then `FLIP-PLAN.md` section 1 in order as section 5 rules it.
 
