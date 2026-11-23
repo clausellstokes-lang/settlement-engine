@@ -47,6 +47,8 @@ import { stressorsDeskRead } from '../../src/components/new/stressorsDeskRead.js
 import { overviewStressesOf, criminalStructureOf } from '../../src/components/new/deskHostArgs.js';
 import { shadowCaptureShown } from '../../src/domain/display/shadowEconomyShown.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { defenseDeskRead, DEFENSE_LENSES } from '../../src/components/new/defenseDeskRead.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
@@ -113,6 +115,19 @@ const SITES = {
 };
 
 /**
+ * The Shadow Economy card's three scale notes, READ FROM THE SHIPPED SOURCE (EconomicsTab.jsx's own `scaleNote`
+ * expression), never written here: a rewrite of the card's words moves this list with it. Read once, lazily.
+ * @type {string[] | null}
+ */
+let shadowScaleNotes = null;
+function shadowScaleNotesOf() {
+  if (shadowScaleNotes) return shadowScaleNotes;
+  const src = readFileSync(join(process.cwd(), 'src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
+  const expr = src.match(/const scaleNote = ([\s\S]*?);\n/)?.[1] ?? '';
+  shadowScaleNotes = [...expr.matchAll(/'((?:[^'\\]|\\.)+)'/g)].map((m) => m[1].replace(/\\'/g, "'"));
+  return shadowScaleNotes;
+}
+/**
  * THE LOCAL LINES (VEIL-41 (a')): with no publicProse served, a shared tab still prints its own draw
  * from served fields, and a few of those lines equal a composed string. They are named here by their
  * source, never by the line; each is counted live on the twelve below.
@@ -122,13 +137,8 @@ const SITES = {
  *     printed verbatim, and the Defense tab's ring note `criminalStructureOf(shared).note`.
  * @type {Record<string, (shared: any) => string[]>}
  */
-const SHADOW_SCALE_NOTES = [
-  'Much of the trade here is never taxed, so the duties come in far short and those who pay their dues are undersold by traders who pay none.',
-  'A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.',
-  'Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more.',
-];
 const LOCAL = {
-  economics: (s) => (shadowCaptureShown(s?.economicState?.safetyProfile) == null ? [] : SHADOW_SCALE_NOTES),
+  economics: (s) => (shadowCaptureShown(s?.economicState?.safetyProfile) == null ? [] : shadowScaleNotesOf()),
   defense: (s) => [
     s?.economicState?.safetyProfile?.safetyDesc,
     s?.economicState?.safetyProfile?.guardEffectivenessDesc,
@@ -212,6 +222,8 @@ describe('a shared read serves no publicProse; the owner\'s read prints its own 
     });
   }
   it('the LOCAL lines are live: each named local source prints on the shared page somewhere on the twelve, and only there', () => {
+    // the card's three bands are read from its source (a band lost there reds here)
+    expect(shadowScaleNotesOf()).toHaveLength(3);
     for (const tab of Object.keys(LOCAL)) {
       const hits = TOWNS.filter((i) => {
         const b = proseLines(TABS[tab](towns[i].shared, { publicDossier: true, playerView: true })).join('\n');
