@@ -7,6 +7,36 @@ Seat: VEIL-48, a seat of the NINTH chair (session_01FbPLbdpQrxXktCeSf32d4j; send
 ## 1. WHERE THIS SEAT STANDS (THIS SECTION IS THE SEAT'S MEMORY: kept current at every push, for a reader who has never seen this session)
 IF YOU ARE THIS SEAT AFTER A SUMMARY: tell the chair in one line; re-read the start message, PART 42 section 1 and this section first.
 
+### 0. VEIL-48 PAUSED (the owner's order, via the chair's N116 of 16:12 UTC: "Pause and record the progress to the veil work for handoff. Focus all your remaining effort on the close lane"; reached this seat at 16:29; every run stopped at 16:30:34 UTC)
+- STOPPED: chain0 at the pool seeds (`pool.sh`, part A started 16:18:59Z, mode pool: INCOMPLETE, `/var/tmp/v18/t2/pool-v48` unusable,
+  rebuild from scratch); the dump waiter and the lock queue (deciding count, base gates) killed BEFORE they started. No builder was
+  ever dispatched; nothing cured. The mutex lock is STALE (dead PID 531): the next `gate-mutex.sh --run` reclaims it.
+- DONE ON THIS BOX: npm ci rc=0; the ledger ref rc=0; make-instruments rc=0 16:18:59 (template `v27x211` and `v28tpl`; acceptance tally
+  per engine and Reveal: 79 EQUAL, 13 LOWER, 0 HIGHER, out `/var/tmp/v18/out/v48/seated/`).
+- THE SURPRISE, RECORDED, NOT CURED: the code branch's push (lane fast path) is refused by the pre-push hook's
+  `typecheck:domain:strict`, exact output: `[domain-strict] strict-type regressions in the domain kernel (fix or annotate; do not widen
+  the baseline):` / `src/domain/veil/pageRederive.js: 1 strict errors (baseline 0) — +1` / `Domain strict-error ceiling is 1113.
+  New/worsened files must be strict-clean.` The tsc line: `src/domain/veil/pageRederive.js(283,69): error TS2345: Argument of type '{
+  publicLegitimacy: unknown; }' is not assignable to parameter of type 'null | undefined'.`: the call of
+  `src/generators/power/factionStanding.js :: annotateFactionStanding` with a `seat` argument, which the callee's signature types as
+  null (`seat = null`, no JSDoc). THE SAME RED ON 0544c77ad (= aa54a6791 + docs), measured: R5D-PAGE-A's line, not this seat's merges.
+  The two cures named to the chair: (a) a JSDoc on `seat` in factionStanding.js; (b) a typed annotation at the call in pageRederive.js
+  (no any-cast). THE CHAIR'S FACT FOR WHOEVER RESUMES: the flip's commit 3b5a37a23 on `lane/close-6-2026-11-23-flip` already gives that
+  writer a JSDoc that types `seat` (publicLegitimacy, config, factionRelationships), so the error leaves at the join with the line;
+  whether it must be cured on the lane before then is the next chair's ruling. Never `--no-verify`.
+- THE TWO MERGES STAND ONLY IN THIS CONTAINER (never on origin): R5D-RIVAL 61a99a90d and PIN-3 b58abc48b into aa54a6791, plain, no
+  conflict (first made as 658f9e1cb, b4f705f91; re-made with the attribution trailers as 172bf7a1a, 20f718815). A successor re-makes
+  them by two plain merges: `git worktree add -b lane/<seat>-r5desc-wip <dir> aa54a67911b391e990b9719e47c9b08b179b16c7`, then
+  `git merge 61a99a90d`, then `git merge b58abc48b`.
+- WHAT DIED WITH VEIL-40's BOX AND IS NOT ON ORIGIN (re-made by the successor): `/var/tmp/v18/out/v40/rivalgates-run.sh` (the seat's
+  new pool + both gates runner), `/var/tmp/v18/out/v40/push.sh` (the push guard; this seat's equal is `/var/tmp/v18/out/v48/push.sh`),
+  `/var/tmp/v18/out/v40/mutex-order.txt` (the builders' lock order); and THE STORED POOLS `/var/tmp/v18/t2/stored-v40/{today,master}`
+  (re-made by VEIL-33's `out/v33/legacy/dump.sh <tree> <outdir> <seed index>`, LP 45/30/1, today-born from a tree at aa54a6791 and
+  master-born from a detached worktree of db832c892, after the pool seeds exist). THIS SEAT'S OWN SCRIPTS ARE ALSO ONLY HERE:
+  `/var/tmp/v18/out/v48/{chain0,chain1,dump-after,queue1,push}.sh`; chain1 = `out/v37/seated/chain1.sh` with v37 -> v48 names.
+- THE NEXT STEP ON RESUMPTION, unchanged: the machine (pool seeds, stored dumps), then SSKIP's deciding count (`out/v40/sskip/count.sh`
+  on 0544c77ad, both pools) to the chair, then the open list below.
+
 ### THE BRANCHES (pushed only by `/var/tmp/v18/out/v48/push.sh <worktree> <branch>`: lane/veil-48-2026-11-23* only, only when origin lacks the tip)
 - `lane/veil-48-2026-11-23` (main checkout `/home/user/settlement-engine`): documents, briefs, this file.
 - `lane/veil-48-2026-11-23-r5desc-wip` (worktree `/home/user/wt/r5desc`): THE CODE BRANCH: aa54a6791 + R5D-RIVAL 61a99a90d merged
@@ -38,4 +68,4 @@ the full pools in one hold, L1, the two N104 seeds by name, the mask documents, 
 (none yet)
 
 ## 3. Log (every hour from `date -u`)
-- 16:14 first message to the chair. 16:24 the push red (above) to the chair.
+- 16:14 first message to the chair. 16:24 the push red (above) to the chair. 16:29 the chair: PAUSED (N116); 16:30:34 every run stopped.
