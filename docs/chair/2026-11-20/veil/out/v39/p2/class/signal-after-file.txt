@@ -1,0 +1,101 @@
+tip-edited start Mon Nov 23 04:35:14 UTC 2026
+
+ RUN  v4.1.8 /home/user/wt/tip
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ❯ tests/security/galleryVeilSignalCopies.pglite.test.js (5 tests | 2 failed) 830402ms
+     × server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 145726ms
+     × server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 135648ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+ FAIL  tests/security/galleryVeilSignalCopies.pglite.test.js > the shut grouping's signal survives every copy a non-owner surface makes (VR17) > server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it
+AssertionError: server-veil-town-2: a row whose house the read lists stays: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/security/galleryVeilSignalCopies.pglite.test.js:320:126
+    318|             expect(Array.isArray(served), `${seed}: the open criminal …
+    319|             if (SERVICES_ACCOUNT[seed] === 'listed') {
+    320|               expect(served.some((x) => listedHouses.has(x.institution…
+       |                                                                                                                              ^
+    321|               expect(lines.length, `${g}: shutting it removes somethin…
+    322|             } else {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  04:35:15
+   Duration  831.14s (transform 6.23s, setup 42ms, import 91ms, tests 830.40s, environment 492ms)
+
+exit 1 end Mon Nov 23 04:49:06 UTC 2026

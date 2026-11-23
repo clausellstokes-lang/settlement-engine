@@ -1,0 +1,17 @@
+ FAIL  tests/lint/chainPrintSites.walker.test.js
+ FAIL  tests/lint/domainAnyCastBaseline.test.js
+ FAIL  tests/lint/factLayers.walker.test.js
+ FAIL  tests/lint/moduleScopeCwdRatchet.test.js
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js
+ FAIL  tests/lint/observedShapeReaders.walker.test.js
+ FAIL  tests/lint/presumedThings.walker.test.js
+ FAIL  tests/lint/presumptionClasses.walker.test.js
+ FAIL  tests/lint/proseDrawnAnchors.walker.test.js
+ FAIL  tests/lint/proseWiringCensus.walker.test.js
+ FAIL  tests/lint/rosterChoiceComposedHosts.walker.test.js
+ FAIL  tests/lint/seedLoopTotality.walker.test.js
+ FAIL  tests/lint/slugifyIdiomBaseline.test.js
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+ FAIL  tests/lint/styleLaw.walker.test.js
+ FAIL  tests/lint/writerReach.walker.test.js

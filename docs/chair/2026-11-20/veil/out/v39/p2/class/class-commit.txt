@@ -1,0 +1,29 @@
+attempt 1 start Mon Nov 23 05:05:03 UTC 2026 at 23bb8b8ae
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 21077 after 2 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/p2
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 9484ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 3733ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: some copy carries the crime types, or the other teeth prove nothing: expected 0 to be greater than 0
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:410:102
+    408|     expect(WITHHELD_ALWAYS.length, 'the registry\'s withhold-always ro…
+    409|     expect(teeth.capture.tried, 'some copy carries the capture, or its…
+    410|     expect(teeth.other.tried, 'some copy carries the crime types, or t…
+       |                                                                                                      ^
+    411|     expect(teeth.capture.caught).toBe(teeth.capture.tried);
+    412|     expect(teeth.other.caught).toBe(teeth.other.tried);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 34 passed (35)
+      Tests  1 failed | 870 passed | 1 skipped (872)
+   Start at  05:06:05
+   Duration  951.92s (transform 17.00s, setup 638ms, import 34.21s, tests 1822.30s, environment 7.28s)
+
+attempt 1 exit 1 end Mon Nov 23 05:21:57 UTC 2026
