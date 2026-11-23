@@ -19,3 +19,13 @@
    and the public copy (`toPublicSafe`; migration 210 allows the key) serves it with both names, its type and text, while the tie
    itself is dropped from the served list. Production today holds none (0 of 140 master-born places). Its cure belongs to the paused
    share veil (211's covert case and the doors' map cure).
+5. WHAT A VISITOR TO THE HOME PAGE WILL READ DIFFERENTLY (the sample village Cnocby, seed lf-033, re-made on the switched-on
+   tree; the chair's N118 and N121; BOTH ARE HIS VETO POINTS). (a) The paragraph `landing.realm.body2`, OLD and NEW whole, and the
+   lit timeline's six records by week, and the three readings that moved (the temple's power 30 -> 24; social trust "strained,
+   turning critical" -> "adequate, turning strained"; the ruler's public standing 14 -> 33): from `close-6/reports/F9.md`.
+   (b) THE REGION BAND beside the map, under "Beside it, the region: what the neighbours did while Cnocby was busy.", held one
+   card of Cnocby's own and two of its neighbours'; now it holds two of Cnocby's own and one neighbour's (week 4 "Skáloy, a town
+   of Korl, has broken its faith pact with Keshigordu." gave way to week 3 "Cnocby is mustering its levies and doubling its
+   watch."). NOT CHANGED IN THE FLIP: an authored line is his.
+6. THE EXTINCT CASES (the chair's N119): one plain sentence each, from F-JOIN-2's report, of the kind of town that no longer occurs
+   with the laws on (towns stored before still show it; their guards are kept, born under the old laws).
