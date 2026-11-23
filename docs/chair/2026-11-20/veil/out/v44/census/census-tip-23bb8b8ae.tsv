@@ -1,0 +1,63 @@
+_gallery_public_tile_rows	147	-	definer	settlements	table ( id uuid, public_slug text,		stable
+add_gallery_comment	195	-	definer	settlements	uuid	(default PUBLIC)	volatile
+admin_remove_gallery_item	053	-	definer	settlements	jsonb	service_role	volatile
+admin_remove_gallery_map	171	-	definer	saved_maps	jsonb	service_role	volatile
+admin_revoke_share_link	053	-	definer	settlements	jsonb	service_role	volatile
+admin_set_content_banned	171	-	definer	saved_maps,settlements	jsonb	service_role	volatile
+admin_soft_delete_map	171	-	definer	saved_maps	jsonb	service_role	volatile
+admin_soft_delete_settlement	053	-	definer	settlements	jsonb	service_role	volatile
+admin_user_summary	104	-	definer	settlements	jsonb	authenticated	stable
+apply_create_route_command	193	-	definer	settlements	jsonb	authenticated	volatile
+apply_cut_trade_route_command	183	-	definer	settlements	jsonb	authenticated	volatile
+apply_import_reconciliation_command	184	-	definer	saved_maps,settlements	jsonb	authenticated	volatile
+bump_map_import	106	-	definer	saved_maps	void	authenticated	volatile
+bump_public_view	029	-	definer	settlements	void	anon, authenticated	volatile
+claim_dossier_purchase_by_session	109	-	definer	settlements	jsonb	service_role	volatile
+compare_and_swap_campaign_content_binding	186	-	definer	saved_maps	jsonb	authenticated	volatile
+enforce_save_limit	033	-	definer	settlements	trigger	(default PUBLIC)	volatile
+get_gallery_dossier	212	VEIL	definer	settlements	table ( id uuid, public_slug text,	anon, authenticated	stable
+get_gallery_map	211	VEIL	definer	saved_maps,settlements	jsonb	anon, authenticated	volatile
+get_gallery_reaction_state	145	-	definer	settlements	table (reaction_key text, reaction_count	anon, authenticated	stable
+get_gallery_vote_state	020	-	definer	settlements	table (net_votes integer, voted boolean)	anon, authenticated	stable
+get_unlisted_dossier	212	VEIL	definer	settlements	jsonb	anon, authenticated	stable
+get_unlisted_map	168	-	definer	saved_maps	jsonb	anon, authenticated	stable
+grant_dossier_entitlement	108	-	definer	settlements	jsonb	service_role	volatile
+handle_premium_downgrade	024	-	definer	saved_maps,settlements	jsonb	service_role	volatile
+import_gallery_dossier	212	VEIL	definer	settlements	table ( id uuid, name text, tier t	authenticated	stable
+import_gallery_map	072	-	definer	saved_maps	jsonb	authenticated	volatile
+list_curated_dossiers	011	-	definer	settlements	table ( id uuid, public_s	anon, authenticated	stable
+list_featured_dossiers	168	-	definer	settlements	table (id uuid, public_slug text, name t	anon, authenticated	stable
+list_featured_maps	168	-	definer	saved_maps	table (id uuid, public_slug text, name t	anon, authenticated	stable
+list_gallery_comments	172	-	definer	settlements	table ( id uuid, body text, create	anon, authenticated	stable
+list_gallery_maps	148	-	definer	saved_maps,settlements	table( slug text, name text, kind text	anon, authenticated	volatile
+list_gallery_more_by_creator	147	-	definer	settlements	table ( id uuid, public_slug text,	anon, authenticated	stable
+list_gallery_reports	022	-	definer	settlements	table ( report_id uuid, settlement_i	authenticated	stable
+list_my_gallery_dossiers	147	-	definer	settlements	table ( id uuid, public_slug text,	authenticated	stable
+list_my_unlisted_dossiers	208	-	definer	settlements	table (id uuid, unlisted_slug text, name	authenticated	stable
+list_my_unlisted_maps	168	-	definer	saved_maps	table (id uuid, unlisted_slug text, name	authenticated	stable
+list_open_report_targets	173	-	definer	saved_maps,settlements	table ( kind text, target_id uuid,	authenticated	stable
+merge_neighbour_backlink	102	-	definer	settlements	void	authenticated	volatile
+mutate_settlement_batch	179	-	definer	settlements	integer	authenticated	volatile
+persist_world_pulse_advance	102	-	definer	saved_maps,settlements	jsonb	authenticated	volatile
+publish_map	148	-	definer	saved_maps,settlements	text	authenticated	volatile
+publish_settlement	105	-	definer	settlements	text	authenticated	volatile
+purge_expired_plan_inactive_assets	165	-	definer	saved_maps,settlements	jsonb	service_role	volatile
+purge_expired_plan_inactive_settlements	023	-	definer	settlements	integer	service_role	volatile
+reactivate_free_settlement	023	-	definer	settlements	jsonb	authenticated	volatile
+report_gallery_comment	169	-	definer	settlements	uuid	authenticated	volatile
+report_gallery_dossier	059	-	definer	settlements	uuid	authenticated	volatile
+report_gallery_map	173	-	definer	saved_maps	uuid	authenticated	volatile
+restore_premium_settlements	178	-	definer	saved_maps,settlements	integer	service_role	volatile
+revoke_map_unlisted	168	-	definer	saved_maps	void	authenticated	volatile
+revoke_settlement_unlisted	208	-	definer	settlements	void	authenticated	volatile
+rotate_map_unlisted_slug	168	-	definer	saved_maps	text	authenticated	volatile
+rotate_settlement_unlisted_slug	208	-	definer	settlements	text	authenticated	volatile
+set_curated	011	-	definer	settlements	void	authenticated	volatile
+set_featured	168	-	definer	settlements	void	authenticated	volatile
+set_featured_map	168	-	definer	saved_maps	void	authenticated	volatile
+share_map_unlisted	168	-	definer	saved_maps	text	authenticated	volatile
+share_settlement_unlisted	208	-	definer	settlements	text	authenticated	volatile
+toggle_gallery_reaction	145	-	definer	settlements	table (reaction_key text, reaction_count	authenticated	volatile
+toggle_gallery_vote	131	-	definer	settlements	table (net_votes integer, voted boolean)	(default PUBLIC)	volatile
+unpublish_map	059	-	definer	saved_maps	void	authenticated	volatile
+unpublish_settlement	059	-	definer	settlements	void	authenticated	volatile
