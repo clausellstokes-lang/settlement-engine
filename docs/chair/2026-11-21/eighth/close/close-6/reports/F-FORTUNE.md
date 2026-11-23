@@ -148,7 +148,7 @@ None by the common law's letter (every red was listed and explained by its cause
 CONFIRMED: every count and value above, read from the runs and probes named. PLAUSIBLE: that the extinct premises are the
 fortune law's design (read from the labels' distributions, not bisected), and the factionStanding observation in bar4 (h).
 
-## F-FORTUNE-2 (CLOSE-6's ruling on f02f969c2 and the chair's two additions; one commit, `__SHA2__`, on f02f969c2)
+## F-FORTUNE-2 (CLOSE-6's ruling on f02f969c2 and the chair's two additions; one commit, ec216e759, on f02f969c2)
 Written 2026-11-23, about 11:30 UTC (`date -u`). A KEEP or CURED row whose new value no longer carried its case's FORM was treated as a premise: it is
 re-picked by the case's predicate and the original line or pair is restored. Every value was read lit by a probe
 (`probes/f2.probe.test.js`, `e2.probe.test.js`, `surplus.probe.test.js` and their `.out` files).
@@ -179,5 +179,5 @@ re-picked by the case's predicate and the original line or pair is restored. Eve
 
 Runs (through the mutex, lit, on the F-FORTUNE-2 tree):
 - The 18 files: 276 tests, 275 passed, 1 failed (the listed R13).
-- `tests/lint` whole: __LINT3__
+- `tests/lint` whole: 3,374 tests, 3,371 passed, 3 failed, the line's three (proseComposed A0b; proseCorpusBytes RAW and GZIP).
 - `npx eslint` on the 4 changed files: exit 0.

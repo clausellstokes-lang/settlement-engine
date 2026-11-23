@@ -33,7 +33,8 @@ BEFORE the PR's merge and the deploy, only after the security reader's clearance
 "FLIP <commit>".
 
 THE MARK: the chair read 258,492 at 11:10 UTC (my own estimates run low; hand over by 620,000 by its read).
-IN FLIGHT: F-FORTUNE-2 (the same builder, resumed) in `/home/user/wt/flip`; report appended to `close-6/reports/F-FORTUNE.md`.
+| ec216e759 | F-FORTUNE-2: four weakened rows re-picked by premise (Batch1 r2r-hamlet-161; 3V1 r2r-town-7, r2r-hamlet-128; Batch4 r2r-city-95 'Surplus'), defenceParts header; bar4 (e2) STOP (case extinct lit in 2,280 births): ASKED the chair, lean law-1 config | builder 18 files 1 red (R13), lint the line's three |
+IN FLIGHT: the seat's lit re-run of the 20 fortune files (log `logs/rerun-fortune.log` in the scratchpad), then PROSE-E's merge.
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
