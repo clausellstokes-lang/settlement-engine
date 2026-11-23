@@ -4,7 +4,7 @@
  * variant id; each side is matched on the page (`buildPrintProse(s, {})`) by its leaf texts as templates, the page's
  * clause-cut forms included (GEN-17 GARRISONED v2 prints cut: `map/DISAGREE-PHASE1.md`).
  *   ARM 1: the chair's measure's five seeds (FOOD dz-town-12, dz-city-54, dz-metropolis-2; WAGES dz-town-2, dz-town-36) and
- *          the first N births of every size: no page prints both sides of any row (WAGES: WEAK v1 x GARRISONED v2).
+ *          the first N births of every size: no page prints both sides of any row (WAGES has none: ARM 5 holds it).
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (ARM 1's births
  *          and a named control seed) each side of each row is found.
  *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", which the page
@@ -14,8 +14,9 @@
  *          (`stateProseKernel.js :: eligibleVariants`, the desks' own entry answers) is not empty, but for the ONE NAMED
  *          exception, keyed by seed and cause: dz-city-101, GEN-17 GARRISONED, crisis `occupied` (`no crisis: occupied`
  *          refuses v1 and v2; empty at 244fa84ef by the same marks). The arm reds too if that exception stops being empty.
- *   ARM 5 (the chair, 2026-11-23 03:45): DS-DEF-2 Economic Survival: WEAK v2's OLD words (`PINNED_OLD_WORDS`; re-worded in
- *          place through its WORD_CORRECTIONS row) print on 0 pages of ARM 1's births; its matcher matches its own text.
+ *   ARM 5 (the chair, 2026-11-23 03:45 and 03:55): DS-DEF-2 Economic Survival: WEAK v1's and v2's OLD words
+ *          (`PINNED_OLD_WORDS`; each re-worded in place through its WORD_CORRECTIONS row) print on 0 pages of ARM 1's births
+ *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
  * The arm "GEN-17 v2 never prints where the guard's pay reads 'short'" is NOT built: phase 1 (i) counted 8 such pages.
  */
 import { describe, expect, it } from 'vitest';
@@ -40,8 +41,8 @@ const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const N = 6; // births a size: the file's own budget below
 const MEASURE_SEEDS = ['dz-town-12', 'dz-city-54', 'dz-metropolis-2', 'dz-town-2', 'dz-town-36'];
 // ARM 2b's control after the cure: a page that prints FOOD side A where it is true (food below secure; on the 900 at the
-// cure, FOOD side A printed on dz-metropolis-6, 38, 58, 77, 125: map/disagree-phase2.mjs). The other three sides print on
-// the first births of a size (thorps for FOOD b and WAGES a; dz-town-2 for WAGES b).
+// cure, FOOD side A printed on dz-metropolis-6, 38, 58, 77, 125: map/disagree-phase2.mjs). FOOD side B prints on the first
+// thorps.
 const CONTROL_SEEDS = ['dz-metropolis-6'];
 const SEEDS = [...new Set([...MEASURE_SEEDS, ...CONTROL_SEEDS, ...SIZES.flatMap((size) => Array.from({ length: N }, (_, i) => `dz-${size}-${i}`))])];
 

@@ -27,12 +27,9 @@ export const OPPOSITE_PAIRS = Object.freeze([
   Object.freeze({ id: 'FOOD',
     a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'CHAIN: food trades failing', vids: [1, 2, 3, 4] }),
     b: side({ desk: 'economy', position: 'DS-ECO-9', pool: 'SECURE', vids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }) }),
-  // WAGES: always short of money for its defence, beside a town that pays wages for its defence. v2 is no side: it was
-  // re-worded in place by the chair's ruling of 2026-11-23 03:45 UTC, and its new words beside GARRISONED v2 are no pair;
-  // its OLD words are pinned at 0 pages (`PINNED_OLD_WORDS`).
-  Object.freeze({ id: 'WAGES',
-    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1] }),
-    b: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
+  // WAGES HAS NO ROW (the chair, 2026-11-23 03:55 UTC): DS-DEF-2 Economic Survival: WEAK v1 and v2 were re-worded in place
+  // (their WORD_CORRECTIONS rows), so no pair of variant ids is left; their OLD words are pinned at 0 pages
+  // (`PINNED_OLD_WORDS`).
 ]);
 
 /**
@@ -52,6 +49,9 @@ export const PINNED_TAILS = Object.freeze([
  * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide, text: string }>>}
  */
 export const PINNED_OLD_WORDS = Object.freeze([
+  Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v1, the old words (CHAIR-2026-11-23-03:55)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1] }),
+    text: '{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.' }),
   Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v2, the old words (CHAIR-2026-11-23-03:45)',
     side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [2] }),
     text: 'The people who would have to hold {settlement} through something know there is no money to pay them for it.' }),
