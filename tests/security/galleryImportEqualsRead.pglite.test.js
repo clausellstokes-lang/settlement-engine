@@ -375,6 +375,9 @@ describe('AN IMPORT EQUALS THE GALLERY READ: 140 born towns, saved, shared on th
             if (k) tooth = { where, key: k, imported, gallery, clone, overrides, restored: { ...gallery, [k]: unmarked[k] } };
           }
           tally.ms.checks += Date.now() - tc;
+          // the share is read and imported: its row goes, so each read sees one share (get_gallery_dossier joins
+          // _gallery_public_tile_rows(), the whole public tile set: kept, the 840 rows cost ~3 s a read, 2,582 s in all)
+          await db.query('delete from public.settlements where id = $1::uuid', [row.id]);
         }
       }
       pool.push(town);
