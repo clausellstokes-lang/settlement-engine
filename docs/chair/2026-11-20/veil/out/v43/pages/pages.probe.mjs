@@ -298,8 +298,9 @@ it(`V43-PAGES (${MODE}) shard ${SHARD.join('/')}`, async () => {
         let s0 = Date.now(); const v0 = await renderViews(P0, true); t.r0 = Date.now() - s0;
         s0 = Date.now(); const v1 = await renderViews(P1, true); t.r1 = Date.now() - s0;
         const dv = diffViews(v0, v1); const items = itemsOf(dv);
+        const dumpViews = process.env.PG_DUMP_VIEWS === '1' ? Object.fromEntries(Object.keys(dv).map((t) => [t, { P0: v0[t] || null, P1: v1[t] || null }])) : undefined;
         const out = { ...rec0, hiddenLeft, lines: { P0: Object.values(v0).reduce((a, l) => a + l.length, 0), P1: Object.values(v1).reduce((a, l) => a + l.length, 0) }, tabs: { P0: Object.keys(v0), P1: Object.keys(v1) }, diff: dv,
-          gov: { P0: govOf(P0, v0), P1: govOf(P1, v1) }, dm: dmSlotOf(rec, P1, v1), restoredBy: {}, cands: [], renders: 2, restored: false };
+          gov: { P0: govOf(P0, v0), P1: govOf(P1, v1) }, dm: dmSlotOf(rec, P1, v1), restoredBy: {}, cands: [], renders: 2, restored: false, views: dumpViews };
         if (RESTORE && items.length && (ONLY || row.i % RESTORE_EVERY === 0)) {
           const cands = candidates(P0, P1); out.cands = cands; out.restored = true;
           const only = new Set(Object.keys(dv)); s0 = Date.now();

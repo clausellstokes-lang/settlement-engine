@@ -21,14 +21,6 @@ const repair = (r, d, t, keyed) => {
     if (keyed && r.restoredBy) { const ka = r.restoredBy[`${t}\u0001L\u0001${a}`] || []; const kb = r.restoredBy[`${t}\u0001G\u0001${b}`] || []; const both = ka.filter((k) => kb.includes(k)); if (both.length) r.restoredBy[`${t}\u0001C\u0001${a}\u0001${b}`] = both; }
     (r.repaired ||= []).push(`${t}: ${a} => ${b}`);
   }
-  // a lost and a gained BARE FIGURE of one tab (a share tile: "34" | "56") pair as CHANGED, in order
-  const fig = (x) => /^[\d.,%+\-−]+$/.test(x);
-  for (;;) {
-    const i = d.lost.findIndex(fig); const j = d.gained.findIndex(fig); if (i < 0 || j < 0) break;
-    const a = d.lost[i]; const b = d.gained[j]; d.lost.splice(i, 1); d.gained.splice(j, 1); d.changed.push([a, b]);
-    if (keyed && r.restoredBy) { const ka = r.restoredBy[`${t}\u0001L\u0001${a}`] || []; const kb = r.restoredBy[`${t}\u0001G\u0001${b}`] || []; const both = ka.filter((k) => kb.includes(k)); if (both.length) r.restoredBy[`${t}\u0001C\u0001${a}\u0001${b}`] = both; }
-    (r.repaired ||= []).push(`${t}: ${a} => ${b} (figure)`);
-  }
 };
 for (const r of rows) {
   if (r.diff) for (const [t, d] of Object.entries(r.diff)) repair(r, d, t, true);
@@ -57,6 +49,9 @@ const isOrder = (a, b) => a !== b && a.length === (b ?? '').length && [...a].sor
 // its first 24 characters, figures masked
 const labelOf = (a, b) => { let k = 0; if (b != null && a !== b) while (k < a.length && k < b.length && a[k] === b[k]) k++; return (k >= 12 ? a.slice(0, k) : a.slice(0, 24)).replace(/\d+/g, '#').trim(); };
 const KINDS = {};
+const FX = {}; const SHARE = { tiles: {}, births: new Set(), byClass: {} };
+// a share tile: "<label><figure>[▲▼]" or a bare figure; its tile is its label with the arrow, figures masked
+const shareTileOf = (a, b) => { const m = /^(.*?)(\d+)([▲▼]?)$/.exec(a); const n = b != null ? /^(.*?)(\d+)([▲▼]?)$/.exec(b) : m; if (!m || !n || m[1] !== n[1]) return null; return `${m[1] || '(bare figure)'}#${m[3]}`; };
 const FT = {}; const FK = {}; const FH = {}; let nLines = 0; let nP1 = 0; const ex = {}; let hidLeft = 0; const tabsOnly = { P0: {}, P1: {} }; let renders = 0;
 const bump = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
 for (const r of F.filter((x) => !x.error)) {
@@ -69,6 +64,10 @@ for (const r of F.filter((x) => !x.error)) {
       const key = r.restored ? causeOf(r.restoredBy?.[id]) : 'UNSAMPLED';
       const kind = `${t}|${labelOf(a, b)}`; const kd = (KINDS[kind] ||= { n: 0, keyed: 0, seeds: new Set(), keys: {} }); kd.n += 1;
       if (r.restored) { kd.keyed += 1; bump(kd.keys, key); } else kd.seeds.add(r.seed);
+      // THE SHARE TILES (the seat, 15:05): every Power-tab line that is a share figure, with or without its label
+      const tile = /\/Power$/.test(t) ? shareTileOf(a, b) : null;
+      if (tile) { const st = (SHARE.tiles[tile] ||= { LOST: 0, GAINED: 0, CHANGED: 0, ORDER: 0, keys: {} }); st[cls] = (st[cls] || 0) + 1; bump(st.keys, key); SHARE.births.add(r.seed); bump(SHARE.byClass, cls); }
+      if (cls === 'GAINED' && /^[\d.,%]+$/.test(a)) bump(FX, `${t}|GAINED (a bare share figure)|${key}`);
       bump(FT, `${tabOf(t)}|${cls}`); bump(FK, `${cls}|${key}`); if (cls === 'CHANGED') bump(FH, `${how(a, b)}|${key}`);
       const e = `${tabOf(t)}|${cls}|${key}`; if (!ex[e]) ex[e] = { seed: r.seed, text: text.slice(0, 220) };
       if (cls === 'GAINED') stops.push(`GAINED (F) ${r.seed} ${t}: ${text.slice(0, 160)}`);
@@ -78,8 +77,12 @@ for (const r of F.filter((x) => !x.error)) {
 const tot = (cls) => Object.entries(FT).filter(([k]) => k.endsWith(`|${cls}`)).reduce((a, [, n]) => a + n, 0);
 console.log(`\n(F) ${F.length} births, P0 lines ${nLines}, P1 lines ${nP1}, renders ${renders}; hand marker left something hidden on ${hidLeft} births`);
 console.log(`(F) TOTAL lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} / order ${tot('ORDER')} / moved ${tot('MOVED')} over ${nLines} P0 lines`);
-console.log(`(F) pairs made on a short label (6 to 11 characters) or as bare figures: ${rows.reduce((a, r) => a + (r.repaired?.length || 0), 0)}${rows.flatMap((r) => (r.repaired || []).map((x) => ` | ${r.seed} ${x}`)).slice(0, 3).join('')}`);
+console.log(`(F) pairs made on a short label (6 to 11 characters): ${rows.reduce((a, r) => a + (r.repaired?.length || 0), 0)}${rows.flatMap((r) => (r.repaired || []).map((x) => ` | ${r.seed} ${x}`)).slice(0, 3).join('')}`);
 console.log(`(F) tabs only on P0 ${J(tabsOnly.P0)} | only on P1 ${J(tabsOnly.P1)}`);
+console.log(`(F) GAINED (a bare share figure): ${J(FX)}`);
+console.log(`(F) THE SHARE TILES MOVE (a veiled read with nothing hidden against the owner's public read; Power tab): ${SHARE.births.size} births (${[...SHARE.births].join(", ")}); lines by class ${J(SHARE.byClass)}`);
+const byLabel = {}; for (const [k, v] of Object.entries(SHARE.tiles)) { const lab = k.replace(/(Military|Government|Religious|Arcane|Noble|Merchant|Criminal|Economic|Other|Civic|Labor|Foreign)[^#]*#/, '<category>#'); const o = (byLabel[lab] ||= { LOST: 0, GAINED: 0, CHANGED: 0, ORDER: 0, keys: {} }); for (const c of ['LOST', 'GAINED', 'CHANGED', 'ORDER']) o[c] += v[c] || 0; for (const [kk, n] of Object.entries(v.keys)) bump(o.keys, kk, n); }
+for (const [k, v] of Object.entries(byLabel).sort((x, y) => (y[1].CHANGED + y[1].LOST + y[1].GAINED) - (x[1].CHANGED + x[1].LOST + x[1].GAINED))) console.log(`  TILE ${k.padEnd(36)} lost ${v.LOST} gained ${v.GAINED} changed ${v.CHANGED} | keys ${J(v.keys)}`);
 console.log('(F) BY TAB x CLASS');
 for (const [k, n] of Object.entries(FT).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(48)} ${n}`);
 console.log('(F) BY CLASS x KEY (the narrowest single key that restores the line; JOINT = none alone)');
