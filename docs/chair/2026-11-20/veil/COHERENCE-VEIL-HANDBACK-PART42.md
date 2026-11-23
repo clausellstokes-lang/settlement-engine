@@ -49,6 +49,11 @@ UNIT (2) R5D-PAGE-B: brief `briefs/R5D-PAGE-B-BRIEF.md` (ec23449fc; ADDENDUM 1 a
   `out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`); then R5D-PAGE-B3 AFTER R5D-RIVAL IS MERGED (item 5 walker + legacy arm; 5b's
   13-template arm; never-there to the closure in A's two files; measures 5d, 5e: brief addendum 2).
 
+STATE AT 10:12 UTC: R5D-RIVAL's rule is in 212 (`_gallery_veil_roster_choices`, registry row `power.rival`, header (37)) and the twin
+(`galleryRosterChoices.js :: applyRosterChoices`, `withholdRivalsOfWithheld`), its arm `tests/security/galleryVeilRival.pglite.test.js`:
+UNCOMMITTED, runs not reported. B2: stored pools dumped 07:05 (`/var/tmp/v18/t2/stored-v40/{today,master}`); its batch
+(`/var/tmp/v18/t2/stored-v40/logs/full1/`) took the mutex 09:30; 7 of 10 jobs failed at vitest start-up (config error), 3 stored jobs
+running.
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -79,6 +84,9 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     "server = twin" form, ruled on chain B's measure). "TIP?" says how many reads differ. RELAYED to B2 for its stored reads
     (`out/v40/r5dpage-b/stored-wholedoc-shas.tsv`); the new pool's table is this seat's own run at the proofs. Every hour written is
     read from `date -u` or left out (the chair's correction of a "07:1x" heading).
+115. THE CHAIR, 10:12: (1) VEIL-43 is THE JOIN's SEAT (a non-writer of the tip). (2) "MAP-COVERT" (N76): `get_gallery_map`'s member
+    never runs the covert CASE (chain B's, IMPORT-DOOR); THE LANE's TWO GATES READ THE GALLERY READ ONLY: "TIP?" says WHICH DOORS the
+    proofs read. (3) END A TURN AT LEAST ONCE AN HOUR, at a piece's end. The chair's read of this record: 286,352.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -88,3 +96,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
   07:02 B2 dispatched.
 - 07:00 ruling 113 (107 (3) closed). 07:07 R5D-RIVAL's brief (a079f6fbd), worktree cut, R5D-RIVAL dispatched; addendum 2, push 8335ac913 (07:11).
 - 07:17 ruling 114; relayed to B2; 07:18 PART 42's estimated hours replaced by commit times or removed.
+- 10:12 ruling 115; 10:12 the state line to the chair.
