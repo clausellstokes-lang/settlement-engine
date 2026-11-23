@@ -242,6 +242,16 @@ const choiceWithhold = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', built
 const holder = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'withhold', when: 'house-hidden', server: H.sPeople, twin: H.tPeople });
 /** VR12: a composed path; its rule and `when` are derived from its inputs (R5). */
 const composed = (/** @type {ShortSpec & { inputs: string[], compose: 'recompose' | 'withhold' }} */ o) => row({ drawn: 'yes', ...o, server: H.sComposed, twin: H.tComposed });
+/**
+ * N49 (a') (the ninth chair, 2026-11-23): NO publicProse IS SERVED ON ANY SHARED READ. A composed publicProse row is
+ * withheld WHOLE with the key, which both engines drop last on every body (R2's always-host); the stored record is
+ * untouched. It carries no `inputs` and no `compose` (derivedRule would derive its rule from them): its former inputs
+ * (`was`) and compose answer (`answer`) stand in its scope, so the after-deploy unit (b) can restore them.
+ */
+const proseWhole = (/** @type {Omit<ShortSpec, 'inputs' | 'compose'> & { was: string[], answer: 'recompose' | 'withhold' }} */ { was, answer, scope, ...o }) => row({
+  drawn: 'yes', ...o, rule: 'withhold', when: 'always', built: true, server: H.sAlways, twin: H.tAlways,
+  scope: `(a'), N49: withheld whole with publicProse on every shared read; under (b) composed from [${was.join(', ')}], ${answer}${scope ? `; before (a'): ${scope}` : ''}`,
+});
 
 const ROWS_SPEC = [
   // ── the conditions (crisis severity: the stressors a hidden house moved)
@@ -409,42 +419,43 @@ const ROWS_SPEC = [
   undrawn({ id: 'power.factions.legitimacyCrisis', path: 'powerStructure.factions[].legitimacyCrisis', writer: W.ruling, house: P.any, drawn: 'unsettled', scope: 'master\'s shape' }),
 
   // ── publicProse (each composed block follows its inputs, VR12; an undrawn copy is withheld always, VR16)
-  composed({ id: 'prose.posture.posture', path: 'publicProse.blocks.defense:posture.posture.field', writer: W.composer, house: P.gates, drawn: 'no', inputs: ['safety.guardEffectivenessDesc'], compose: 'recompose' }),
-  composed({ id: 'prose.posture.prize', path: 'publicProse.blocks.defense:posture.prize.field', writer: W.composer, house: P.gates, drawn: 'no', inputs: ['safety.guardEffectivenessDesc'], compose: 'recompose' }),
-  composed({ id: 'prose.posture.terrain', path: 'publicProse.blocks.defense:posture.terrain.field', writer: W.composer, house: P.gates, drawn: 'no', inputs: ['safety.guardEffectivenessDesc'], compose: 'recompose' }),
-  composed({ id: 'prose.state.firstSurvey', path: 'publicProse.blocks.defense:state.firstSurvey.field', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['safety.safetyDesc'], compose: 'recompose' }),
-  composed({ id: 'prose.state.publicOrder.field', path: 'publicProse.blocks.defense:state.publicOrder.field', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['safety.safetyDesc'], compose: 'recompose' }),
-  composed({ id: 'prose.state.publicOrder.beside', path: 'publicProse.blocks.defense:state.publicOrder.beside', writer: W.composer, house: P.flags, inputs: ['safety.safetyLabel'], compose: 'recompose', scope: 'the order rung\'s sentence, chosen by the band' }),
-  composed({ id: 'prose.state.publicOrder.rung.sentence', path: 'publicProse.blocks.defense:state.publicOrder.rung.sentence', writer: W.composer, house: P.flags, inputs: ['safety.safetyLabel'], compose: 'recompose' }),
-  composed({ id: 'prose.state.publicOrder.rung.glance', path: 'publicProse.blocks.defense:state.publicOrder.rung.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['safety.safetyLabel'], compose: 'recompose' }),
-  composed({ id: 'prose.threat.economic', path: 'publicProse.blocks.defense:threat.economic.sentence', writer: W.composer, house: P.flags, inputs: ['defence.scores.economic'], compose: 'recompose' }),
-  composed({ id: 'prose.wall.rationale', path: 'publicProse.blocks.defense:wall.rationale.sentence', writer: W.composer, house: P.flags, inputs: ['defence.readiness.label'], compose: 'recompose', scope: 'the wall line, chosen by the defence state (DefenseTab :: wallLine)' }),
-  row({ id: 'prose.incomeWeight', path: 'publicProse.blocks.economy:economics.incomeWeight', writer: W.composer, house: P.criminal, vr14: 'ii', drawn: 'yes', inputs: ['income.percentage'], compose: 'recompose', server: H.sApply, twin: H.tIncome,
-    scope: 'ruling 6: a share (VR14 (ii)): it follows item D, re-derived with the percentages where a row is withheld, else withheld' }),
+  proseWhole({ id: 'prose.posture.posture', path: 'publicProse.blocks.defense:posture.posture.field', writer: W.composer, house: P.gates, drawn: 'no', was: ['safety.guardEffectivenessDesc'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.posture.prize', path: 'publicProse.blocks.defense:posture.prize.field', writer: W.composer, house: P.gates, drawn: 'no', was: ['safety.guardEffectivenessDesc'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.posture.terrain', path: 'publicProse.blocks.defense:posture.terrain.field', writer: W.composer, house: P.gates, drawn: 'no', was: ['safety.guardEffectivenessDesc'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.state.firstSurvey', path: 'publicProse.blocks.defense:state.firstSurvey.field', writer: W.composer, house: P.flags, drawn: 'no', was: ['safety.safetyDesc'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.state.publicOrder.field', path: 'publicProse.blocks.defense:state.publicOrder.field', writer: W.composer, house: P.flags, drawn: 'no', was: ['safety.safetyDesc'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.state.publicOrder.beside', path: 'publicProse.blocks.defense:state.publicOrder.beside', writer: W.composer, house: P.flags, was: ['safety.safetyLabel'], answer: 'recompose', scope: 'the order rung\'s sentence, chosen by the band' }),
+  proseWhole({ id: 'prose.state.publicOrder.rung.sentence', path: 'publicProse.blocks.defense:state.publicOrder.rung.sentence', writer: W.composer, house: P.flags, was: ['safety.safetyLabel'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.state.publicOrder.rung.glance', path: 'publicProse.blocks.defense:state.publicOrder.rung.glance', writer: W.composer, house: P.flags, drawn: 'no', was: ['safety.safetyLabel'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.threat.economic', path: 'publicProse.blocks.defense:threat.economic.sentence', writer: W.composer, house: P.flags, was: ['defence.scores.economic'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.wall.rationale', path: 'publicProse.blocks.defense:wall.rationale.sentence', writer: W.composer, house: P.flags, was: ['defence.readiness.label'], answer: 'recompose', scope: 'the wall line, chosen by the defence state (DefenseTab :: wallLine)' }),
+  // N53 (a) (the chair, 2026-11-23): re-hosted with the 23 composed prose rows
+  proseWhole({ id: 'prose.incomeWeight', path: 'publicProse.blocks.economy:economics.incomeWeight', writer: W.composer, house: P.criminal, vr14: 'ii', drawn: 'yes', was: ['income.percentage'], answer: 'recompose',
+    scope: 'ruling 6: a share (VR14 (ii)): it follows item D, re-derived with the percentages where a row is withheld, else withheld. N53 (a): its host was public._gallery_veil_apply / gallerySecondHomes.js :: withholdCriminalIncome, unbuilt; (b), after the first deploy, returns it to its inputs' }),
   undrawn({ id: 'prose.incomeWeight.alias', path: '^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.incomeWeight$', re: true, writer: W.composer, house: P.flags, scope: 'the aliases ({"@": "economy:economics"}) no tab draws' }),
-  composed({ id: 'prose.shadowEconomy', path: '^publicProse\\.blocks\\.economy:economics\\.shadowEconomy(\\.sentence)?$', re: true, writer: W.composer, house: P.flags, inputs: ['safety.economicDragDesc', 'safety.blackMarketCapture'], compose: 'withhold', crimeOnly: true,
+  proseWhole({ id: 'prose.shadowEconomy', path: '^publicProse\\.blocks\\.economy:economics\\.shadowEconomy(\\.sentence)?$', re: true, writer: W.composer, house: P.flags, was: ['safety.economicDragDesc', 'safety.blackMarketCapture'], answer: 'withhold', crimeOnly: true,
     scope: 'V9-5, VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole on that share; else withheld (VR12)' }),
   undrawn({ id: 'prose.shadowEconomy.alias', path: '^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.shadowEconomy$', re: true, writer: W.composer, house: P.flags, scope: 'the aliases no tab draws' }),
-  composed({ id: 'prose.incomeMix', path: '^publicProse\\.blocks\\.economy:economics\\.(incomeMix(\\.sentence)?|criminalLine)$', re: true, writer: W.composer, house: P.criminal, inputs: ['income.criminalRow', 'income.percentage'], compose: 'withhold',
+  proseWhole({ id: 'prose.incomeMix', path: '^publicProse\\.blocks\\.economy:economics\\.(incomeMix(\\.sentence)?|criminalLine)$', re: true, writer: W.composer, house: P.criminal, was: ['income.criminalRow', 'income.percentage'], answer: 'withhold',
     scope: 'item D (3) and VR4 ii-15: the sentences that carry the criminal income go with the row' }),
-  composed({ id: 'prose.prosperityHeader.detail', path: 'publicProse.blocks.economy:economics.prosperityHeader.detail[].value', writer: W.composer, house: P.criminal, drawn: 'no', inputs: ['economy.complexity'], compose: 'recompose' }),
-  composed({ id: 'prose.prosperity.sentence', path: '^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.sentence$', re: true, writer: W.composer, house: P.flags, inputs: ['economy.prosperity'], compose: 'recompose' }),
+  proseWhole({ id: 'prose.prosperityHeader.detail', path: 'publicProse.blocks.economy:economics.prosperityHeader.detail[].value', writer: W.composer, house: P.criminal, drawn: 'no', was: ['economy.complexity'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.prosperity.sentence', path: '^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.sentence$', re: true, writer: W.composer, house: P.flags, was: ['economy.prosperity'], answer: 'recompose' }),
   undrawn({ id: 'prose.prosperity.glance', path: '^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.glance$', re: true, writer: W.composer, house: P.flags, scope: 'a glance is rendered at one place only (WarFaithDesk patron seat)' }),
-  composed({ id: 'prose.legacyLines.a', path: 'publicProse.blocks.general:history.legacyLines[] (only in A)', writer: W.composer, house: P.criminal, inputs: ['history.event.crimeWave', 'history.event.description'], compose: 'withhold',
+  proseWhole({ id: 'prose.legacyLines.a', path: 'publicProse.blocks.general:history.legacyLines[] (only in A)', writer: W.composer, house: P.criminal, was: ['history.event.crimeWave', 'history.event.description'], answer: 'withhold',
     scope: 'a line composed from a crime_wave event leaves with it; every other line is the rng\'s re-draw (VR13)' }),
-  composed({ id: 'prose.legacyLines.b', path: 'publicProse.blocks.general:history.legacyLines[] (only in B)', writer: W.composer, house: P.any, inputs: ['history.event.redraw'], compose: 'recompose' }),
-  composed({ id: 'prose.legitimacyBanner', path: 'publicProse.blocks.power:desk.legitimacyBanner.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['legitimacy.label'], compose: 'recompose' }),
-  composed({ id: 'prose.legitimacyLens', path: 'publicProse.blocks.power:desk.legitimacyLens', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['legitimacy.label'], compose: 'recompose' }),
-  composed({ id: 'prose.stabilityHeader', path: 'publicProse.blocks.power:desk.stabilityHeader.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['power.stability'], compose: 'withhold' }),
-  composed({ id: 'prose.structureFlag', path: 'publicProse.blocks.power:desk.structureFlag', writer: W.composer, house: P.flags, inputs: ['safety.flags.merchantCriminalBlur'], compose: 'withhold', crimeOnly: true, scope: 'VR4 ii-15, VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
-  composed({ id: 'prose.successionRisk', path: 'publicProse.blocks.power:desk.successionRisk.glance', writer: W.composer, house: P.any, drawn: 'no', inputs: ['power.share'], compose: 'recompose' }),
-  composed({ id: 'prose.conditionSeverity', path: 'publicProse.blocks.stressors:overview.conditionSeverity.sentence', writer: W.composer, house: P.any, inputs: ['conditions.severity'], compose: 'recompose', scope: 'drawn (OverviewTab CONDITIONS_MOUNT)' }),
+  proseWhole({ id: 'prose.legacyLines.b', path: 'publicProse.blocks.general:history.legacyLines[] (only in B)', writer: W.composer, house: P.any, was: ['history.event.redraw'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.legitimacyBanner', path: 'publicProse.blocks.power:desk.legitimacyBanner.glance', writer: W.composer, house: P.flags, drawn: 'no', was: ['legitimacy.label'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.legitimacyLens', path: 'publicProse.blocks.power:desk.legitimacyLens', writer: W.composer, house: P.flags, drawn: 'no', was: ['legitimacy.label'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.stabilityHeader', path: 'publicProse.blocks.power:desk.stabilityHeader.glance', writer: W.composer, house: P.flags, drawn: 'no', was: ['power.stability'], answer: 'withhold' }),
+  proseWhole({ id: 'prose.structureFlag', path: 'publicProse.blocks.power:desk.structureFlag', writer: W.composer, house: P.flags, was: ['safety.flags.merchantCriminalBlur'], answer: 'withhold', crimeOnly: true, scope: 'VR4 ii-15, VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
+  proseWhole({ id: 'prose.successionRisk', path: 'publicProse.blocks.power:desk.successionRisk.glance', writer: W.composer, house: P.any, drawn: 'no', was: ['power.share'], answer: 'recompose' }),
+  proseWhole({ id: 'prose.conditionSeverity', path: 'publicProse.blocks.stressors:overview.conditionSeverity.sentence', writer: W.composer, house: P.any, was: ['conditions.severity'], answer: 'recompose', scope: 'drawn (OverviewTab CONDITIONS_MOUNT)' }),
   undrawn({ id: 'prose.conditionSeverity.glance', path: 'publicProse.blocks.stressors:overview.conditionSeverity.glance', writer: W.composer, house: P.any }),
-  composed({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, inputs: ['safety.flags.religiousFraud'], compose: 'withhold', crimeOnly: true,
+  proseWhole({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, was: ['safety.flags.religiousFraud'], answer: 'withhold', crimeOnly: true,
     scope: 'VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
 
   row({ id: 'prose.criminal', path: '^publicProse\\.blocks\\.defense:criminal\\b', re: true, writer: W.composer, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
-    scope: 'VR4 i-11: the criminal desk (structure sentence, ring note) composed from the crime key over the roster; withheld by the house\'s eye, not only by block:defense.criminalStructure' }),
+    scope: 'VR4 i-11: the criminal desk (structure sentence, ring note) composed from the crime key over the roster; withheld by the house\'s eye, not only by block:defense.criminalStructure. In the first deploy the whole key is withheld always (N49 (a\')), so this row\'s rule is shadowed, not removed; (b) needs it.' }),
 
   // ── V10-1 (the reader, HIGH): columns a read returns BESIDE `data` (get_gallery_dossier, the gallery list's cards), cut
   //    from data by public._gallery_public_tile_rows (147); each is a copy of its source path and takes its rule

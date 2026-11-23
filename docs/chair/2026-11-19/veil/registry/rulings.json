@@ -16,12 +16,6 @@
     "^powerStructure\\.publicLegitimacy\\.score$",
     "^powerStructure\\.publicLegitimacy\\.(bg|color)$",
     "^(powerStructure\\.)?conflicts\\[\\](\\.(intensity|issue))?$",
-    "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.beside$",
-    "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.rung\\.sentence$",
-    "^publicProse\\.blocks\\.defense:threat\\.economic\\.sentence$",
-    "^publicProse\\.blocks\\.defense:wall\\.rationale\\.sentence$",
-    "^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.sentence$",
-    "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.sentence$",
     "^tile\\.prosperity$",
     "^tile\\.threat_level$",
     "^tile\\.government_type$"
@@ -36,7 +30,6 @@
     "^history\\.historicalEvents\\[\\]\\.description$",
     "^history\\.historicalEvents\\[\\]\\.lastingEffects\\[\\] \\(only in [AB]\\)$",
     "^history\\.historicalEvents\\[\\]\\.severity$",
-    "^history\\.historicalEvents\\[\\]\\.yearsAgo$",
-    "^publicProse\\.blocks\\.general:history\\.legacyLines\\[\\] \\(only in B\\)$"
+    "^history\\.historicalEvents\\[\\]\\.yearsAgo$"
   ]
 }

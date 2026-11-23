@@ -179,5 +179,33 @@ export function withholdAlways(s) {
   // registry: cast.roles (castByServed: absent always; a stake or a role row per entry, by what is
   // served of the person, power or house it names)
   withholdCastByServed(s);
+  // registry: prose.posture.posture
+  // registry: prose.posture.prize
+  // registry: prose.posture.terrain
+  // registry: prose.state.firstSurvey
+  // registry: prose.state.publicOrder.field
+  // registry: prose.state.publicOrder.beside
+  // registry: prose.state.publicOrder.rung.sentence
+  // registry: prose.state.publicOrder.rung.glance
+  // registry: prose.threat.economic
+  // registry: prose.wall.rationale
+  // registry: prose.incomeWeight (N53 (a): re-hosted with the 23)
+  // registry: prose.shadowEconomy
+  // registry: prose.incomeMix
+  // registry: prose.prosperityHeader.detail
+  // registry: prose.prosperity.sentence
+  // registry: prose.legacyLines.a
+  // registry: prose.legacyLines.b
+  // registry: prose.legitimacyBanner
+  // registry: prose.legitimacyLens
+  // registry: prose.stabilityHeader
+  // registry: prose.structureFlag
+  // registry: prose.successionRisk
+  // registry: prose.conditionSeverity
+  // registry: prose.templeFraud
+  // (N49 (a'), the ninth chair, 2026-11-23: NO publicProse IS SERVED ON ANY SHARED READ. The key leaves WHOLE, last, on
+  // every body; the stored record keeps it, and the owner's own page prints it as today. The rules above that trim inside
+  // it stand, dead, for the after-deploy unit (b))
+  delete s.publicProse;
   return s;
 }
