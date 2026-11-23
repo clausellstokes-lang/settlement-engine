@@ -2,10 +2,17 @@
  * seatLawSavedTown.test.js — A SAVED TOWN KEEPS THE SEAT LAW IT WAS BORN UNDER, END TO END ON THE LIT BUILD
  * (SEAT-7's lane, brief `docs/chair/2026-11-20/content/seat/briefs/SAVED-SEAT.md`; tests only).
  *
- * ⭐ WHY THIS FILE. `seat/seatLaw.js :: resolveSeatLawVersion` reads the world's own config and never the dial, and its
- * property 3 is NO MIGRATION, DELIBERATELY. SEAT-6-TO-LIGHT §3 found the partial arms (bare objects, fixtures) and no
- * end-to-end one: the seat analogue of `tests/domain/livingContentLawWiring.test.js`'s describe "NO MIGRATION — a
- * law-1 world stays law-1 on every path, on the LIT build". This is that analogue, on a town the product really bore.
+ * ⭐ WHAT THIS FILE HOLDS SINCE THE JOIN (CLOSE-1 unit 3, the chair's E61 (4)): THE SEAT LAW'S OWN ARMS, AND ONLY
+ * THOSE. The arms every generation law shares moved to `tests/domain/generationLawsSavedPlace.test.js`, which walks
+ * every row of `GENERATION_LAWS` at once with every dial lit: NO MIGRATION through save, load, section regen, the clone
+ * seam, the tick re-derive and the import (this file's old arms 1, 5 and 6) is its (a); THE CONVERSE (old 2) its (b);
+ * "Apply Saved Configuration & Regenerate" is a BIRTH (old 3) its (d); THE LEGACY EDGE (old 4) its (e). What stays is
+ * what only the seat law has: THE TWO TRANSFERS (a pulse power transfer and the roster's `government_change`) on a
+ * saved town, under law 1 and under law 2.
+ *
+ * ⭐ WHY. `seat/seatLaw.js :: resolveSeatLawVersion` reads the world's own config and never the dial, and its property 3
+ * is NO MIGRATION, DELIBERATELY; a transfer is where the two laws part on the record (law 1 renames the civic form, the
+ * law keeps it and seats the taker), so a saved town's transfer must take the path of the law it was born under.
  *
  * ⭐ THE LIT BUILD, AND THE DARK ONE, ARE BOTH MOCKED (`build`). The seat's dial
  * (`seatLaw.js :: NEW_SETTLEMENT_SEAT_LAW_VERSION` and its mint) and the contest's dial
@@ -17,21 +24,16 @@
  * stays 1 (never the PROPOSED figures). The dark build is mocked too, so a later flip of the product dial cannot make a
  * "born dark" town a lit one; every arm asserts the build it stands on, each time it moves (`build`).
  *
- * THE ARMS, in the brief's order:
- *   1. NO MIGRATION: a town born dark walks save/load, the store's load, section regen, the clone seam, a pulse power
- *      transfer and the roster's `government_change` on the lit build, and stays law 1 at every step; the negative
- *      control is the same transfer on the same town stamped 2, which keeps the civic form.
- *   2. THE CONVERSE: a town born lit keeps 2 through the same steps.
- *   3. THE BIRTH BY DESIGN: "Apply Saved Configuration & Regenerate" on a saved dark town's config is a BIRTH: lit.
- *   4. THE LEGACY EDGE (SEAT-6-TO-LIGHT §3, PLAUSIBLE there): a save with no `settlement.config`, regenerated while the
- *      form config holds a lit world's `_config`. MEASURED here.
- *   5. THE IMPORT: a gallery file and a reconciled export keep a carried `_seatLawVersion: 2`; a markerless one stays so.
- *   6. THE RE-DERIVE ROAD (SAVED-SEAT-REDERIVE, executed): a saved law-1 town re-derived at the tick
- *      (`editSlice.js :: applyRosterDecreesAtTick`) while the form config holds a lit world's stays law 1, its bands with it.
+ * THE ARMS (the seat law's own):
+ *   1. THE TRANSFERS UNDER LAW 1: a town born dark, walked through save/load, the store's load, section regen and the
+ *      clone seam on the lit build, takes today's path at both transfers (byte for byte the dark build's, the civic
+ *      form renamed); the negative control is the same transfers on the same town stamped 2, which keep the civic form.
+ *   2. THE TRANSFERS UNDER LAW 2: a town born lit, walked the same way, takes the law's path at both: the civic form
+ *      kept, the taker holding the seat.
  *
  * ⚠ THE "POWER SECTION" IS NOT A REGEN BRANCH. `store/settlementRegenAction.js :: regenSectionAction` regenerates
  * `npcs` and `history` and nothing else; `regenSection('power')` is driven below and MEASURED as a no-op on the power
- * structure, so the day a power branch lands this arm reds and asks to be extended.
+ * structure, so the day a power branch lands this walk reds and asks to be extended.
  *
  * @enforced-by this test
  */
@@ -45,7 +47,6 @@ const dial = vi.hoisted(() => ({ lit: false }));
 vi.mock('../../../src/lib/saves.js', () => ({
   saves: {
     update: vi.fn(() => Promise.resolve()),
-    save: vi.fn(() => Promise.resolve('gallery-save-1')),
     isConfigured: false,
   },
 }));
@@ -76,20 +77,12 @@ import { applyWorldPulseOutcomes } from '../../../src/domain/worldPulse/applyWor
 import { deepClone } from '../../../src/domain/clone.js';
 import { createSettlementSlice } from '../../../src/store/settlementSlice.js';
 import { createConfigSlice } from '../../../src/store/configSlice.js';
-import { migrateSettlementConfig } from '../../../src/lib/settlementConfigMigration.js';
-import { admitExistingCampaignImport, ingestSettlementForgeExport } from '../../../src/lib/importReconciliation.js';
-import { ACCOUNT_EXPORT_VERSION } from '../../../src/lib/accountData.js';
 import { expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
-import { addOpPayloadFor, applyRosterDecreesAtTick, selectDecrees, stageAddDecreeIntent } from '../../../src/store/editSlice.js';
-import { poolValues } from '../../../src/domain/edit/pools.js';
-import { applyDecreesToSaves } from '../../../src/domain/worldPulse/decreeHook.js';
-import { powerBandOfRole } from '../../../src/generators/npc/powerBand.js';
 
 // The create boundary's async edge, awaited as production awaits it on every module that can reach the pipeline.
 await loadGenerationLawPayloads();
 
 const KEY = '_seatLawVersion';
-const LIVING_KEY = '_livingContentLawVersion';
 const OWNER = { audience: 'owner' };
 const NOW = '2026-11-20T00:00:00.000Z';
 
@@ -178,14 +171,6 @@ const storeOf = () => create(immer((...a) => ({
   ...createSettlementSlice(...a),
 })));
 
-/** `SettlementsPanel.jsx :: onLoad`'s two store hops, verbatim in order: the form config from the saved
- *  `settlement._config || config` through `migrateConfig`, then the settlement itself. */
-function libraryLoad(store, data) {
-  const raw = data.settlement?._config || data.config;
-  if (raw) store.getState().updateConfig(migrateSettlementConfig(raw));
-  if (data.settlement) store.getState().setSettlement(data.settlement);
-}
-
 // ── the world pulse ────────────────────────────────────────────────────────────────────────────────────────────
 
 /** The world pulse's apply pass over ONE outcome on ONE settlement (`seatTransfer.test.js`'s harness). */
@@ -268,10 +253,10 @@ async function walk(born, formConfig) {
   return { met, cloned, transferred, changed };
 }
 
-describe('SAVED-SEAT — a saved town keeps the seat law it was born under, on the LIT build', () => {
-  // ── 1. NO MIGRATION ─────────────────────────────────────────────────────────────────────────────────────────
+describe('SAVED-SEAT — the seat law\'s own arms on a saved town: the two transfers, on the LIT build', () => {
+  // ── 1. THE TRANSFERS UNDER LAW 1 ────────────────────────────────────────────────────────────────────────────
 
-  it('1. ⛔ NO MIGRATION: a town born DARK stays law 1 through save, load, regen, clone and both transfers on the LIT build', async () => {
+  it('1. THE SEAT LAW\'S OWN — the transfers under law 1: on a saved town born DARK, both transfers on the LIT build take today\'s path and rename the civic form; stamped 2, they keep it', async () => {
     build(false);
     const born = bear();
     expect(Object.hasOwn(born.config, KEY), 'the dark birth minted the seat law').toBe(false);
@@ -280,37 +265,21 @@ describe('SAVED-SEAT — a saved town keeps the seat law it was born under, on t
 
     build(true);
     // The holder the LAW would read (R2: the engine's own read), and the field it would leave: the anchor that makes
-    // "the holder still contends" a live claim, and the proof the lit build reads a law-2 town apart from the dark one.
+    // the negative control below a live claim, and the proof the lit build reads a law-2 town apart from the dark one.
     expect(holderOf(withLaw(born, 2), OWNER).holderName).toBe(TAKER);
     // Under the law the holder leaves the field it stands in on the dark build (anchored: present before, gone after).
     expectPresentThenAbsent(names(onDark(() => coupContenders(born))), names(coupContenders(withLaw(born, 2))), TAKER, 'the law-2 field');
-    expect(coupContenders(withLaw(born, 2)), 'the lit law reads this town as the dark build does: no control')
-      .not.toEqual(onDark(() => coupContenders(born)));
 
     // Adversarial: the form config IS lit, so a read of the form config or the dial would stamp the town.
-    const { met, cloned, transferred, changed } = await walk(born, { ...CONFIG, [KEY]: 2 });
-    for (const [label, world] of met) {
-      for (const echo of ['config', '_config']) {
-        expect(
-          world[echo] && Object.hasOwn(world[echo], KEY),
-          `${label}: ${echo} acquired _seatLawVersion on the lit build. There is NO MIGRATION, deliberately.`,
-        ).toBeFalsy();
-      }
-      expect(seatLaw.resolveSeatLawVersion(world), `${label}: resolveSeatLawVersion`).toBe(1);
-      expect(seatLaw.seatsByHolder(world), `${label}: seatsByHolder`).toBe(false);
-      expect(coupContenders(world), `${label}: coupContenders on the lit build is not the dark build's reading`)
-        .toEqual(onDark(() => coupContenders(world)));
-    }
-    // The holder still contends, today's kind read, on every world before a transfer.
-    for (const [label, world] of met.slice(0, -2)) {
-      expect(names(coupContenders(world)), `${label}: the holder left the field`).toContain(TAKER);
-    }
+    const { cloned, transferred, changed } = await walk(born, { ...CONFIG, [KEY]: 2 });
+    expect(seatLaw.resolveSeatLawVersion(cloned), 'the walked town is not law 1 (generationLawsSavedPlace (a) says why)').toBe(1);
 
     // THE TRANSFER TAKES TODAY'S PATH: byte for byte the dark build's, the civic form renamed.
     for (const outcome of [POWER_TRANSFER, GOVERNMENT_CHANGE]) {
       expect(JSON.stringify(pulse(cloned, outcome)), outcome.id).toBe(JSON.stringify(onDark(() => pulse(cloned, outcome))));
     }
     for (const [label, world] of [['pulse transfer', transferred], ['government_change', changed]]) {
+      expect(Object.hasOwn(world.config, KEY), `${label}: the transfer stamped the seat law`).toBe(false);
       expect(world.powerStructure.government, `${label}: the old law renames`).not.toBe(FORM);
       expect(world.powerStructure.previousGovernments?.at(-1)?.label, label).toBe(FORM);
     }
@@ -324,285 +293,21 @@ describe('SAVED-SEAT — a saved town keeps the seat law it was born under, on t
     }
   });
 
-  // ── 2. THE CONVERSE ─────────────────────────────────────────────────────────────────────────────────────────
+  // ── 2. THE TRANSFERS UNDER LAW 2 ────────────────────────────────────────────────────────────────────────────
 
-  it('2. THE CONVERSE: a town born LIT keeps _seatLawVersion 2 through the same steps; no step strips it or reads it dark', async () => {
+  it('2. THE SEAT LAW\'S OWN — the transfers under law 2: on a saved town born LIT, both transfers take the law\'s path: the civic form kept, the taker holding the seat', async () => {
     build(true);
     const born = bear();
     expect(born.config[KEY], 'the lit birth did not mint the seat law').toBe(2);
-    expect(born._config?.[KEY], 'the lit birth\'s _config echo').toBe(2);
     expect(born.powerStructure.government).toBe(FORM);
 
     // Adversarial the other way: the form config is DARK.
-    const { met, cloned, transferred, changed } = await walk(born, { ...CONFIG });
-    for (const [label, world] of met) {
-      expect(world.config?.[KEY], `${label}: config lost _seatLawVersion`).toBe(2);
-      if (world._config) expect(world._config[KEY], `${label}: _config lost _seatLawVersion`).toBe(2);
-      expect(seatLaw.resolveSeatLawVersion(world), `${label}: resolveSeatLawVersion`).toBe(2);
-      expect(seatLaw.seatsByHolder(world), `${label}: seatsByHolder`).toBe(true);
-      // It reads LIT: the lit contest of this world is not the dark build's reading of the same world unmarked.
-      expect(coupContenders(world), `${label}: the town reads dark`)
-        .not.toEqual(onDark(() => coupContenders(withLaw(world, null))));
-    }
-    for (const [label, world] of met.slice(0, -2)) {
-      // The holder is in the dark build's field of the unmarked world and leaves the lit field of the marked one.
-      expectPresentThenAbsent(names(onDark(() => coupContenders(withLaw(world, null)))), names(coupContenders(world)), TAKER, `${label}: the holder contends its own seat`);
-    }
-    // Both transfers take the law's path: the civic form kept, the taker holding it.
+    const { cloned, transferred, changed } = await walk(born, { ...CONFIG });
+    expect(cloned.config[KEY], 'the walked town lost the seat law (generationLawsSavedPlace (b) says why)').toBe(2);
     for (const [label, world] of [['pulse transfer', transferred], ['government_change', changed]]) {
+      expect(world.config[KEY], `${label}: the transfer stripped the seat law`).toBe(2);
       expect(world.powerStructure.government, `${label}: the law keeps the civic form`).toBe(FORM);
       expect(holderOf(world, OWNER).holderName, label).toBe(TAKER);
     }
-    expect(cloned.config[KEY]).toBe(2);
-  });
-
-  // ── 3. THE BIRTH BY DESIGN ──────────────────────────────────────────────────────────────────────────────────
-
-  it('3. "Apply Saved Configuration & Regenerate" on a saved DARK town is a BIRTH, not a migration: born lit on the LIT build', async () => {
-    build(false);
-    const savedDark = JSON.parse(JSON.stringify(bear()));
-    expect(Object.hasOwn(savedDark.config, KEY)).toBe(false);
-    expect(Object.hasOwn(savedDark._config, KEY)).toBe(false);
-    const untouched = JSON.stringify(savedDark);
-
-    build(true);
-    for (const [label, incoming] of [['markerless', undefined], ['an incoming 1', 1], ['an incoming unshipped 3', 3]]) {
-      const data = {
-        settlement: incoming === undefined ? JSON.parse(untouched) : withLaw(JSON.parse(untouched), incoming),
-        config: savedDark.config,
-      };
-      const store = storeOf();
-      libraryLoad(store, data);
-      // The hop really carried the saved config's marker (or its absence) into the form.
-      expect(store.getState().config[KEY], `${label}: the form config after the Library load`).toBe(incoming);
-      expect(store.getState().settlement, `${label}: setSettlement`).toBe(data.settlement);
-
-      const reborn = await store.getState().generateSettlement(SEED);
-      expect(reborn, `${label}: the regenerate produced no world`).toBeTruthy();
-      expect(reborn.config[KEY], `${label}: a BIRTH on the lit build is born under the seat law`).toBe(2);
-      expect(reborn._config?.[KEY], `${label}: the birth's _config echo`).toBe(2);
-      expect(seatLaw.seatsByHolder(reborn)).toBe(true);
-      // The birth wrote its law on the NEW world only: the form config keeps what the load put there.
-      expect(store.getState().config[KEY], `${label}: the birth wrote back to the form`).toBe(incoming);
-    }
-    // …and the saved town itself is not migrated: its bytes are what they were.
-    expect(JSON.stringify(savedDark)).toBe(untouched);
-  });
-
-  // ── 4. THE LEGACY EDGE ──────────────────────────────────────────────────────────────────────────────────────
-
-  it('4. THE LEGACY EDGE (measured): a save with no settlement.config regenerated under a lit world\'s form config stays law 1', async () => {
-    build(false);
-    const dark = JSON.parse(JSON.stringify(bear()));
-    build(true);
-    const litWorld = JSON.parse(JSON.stringify(bear('saved-seat-lit-first')));
-    expect(litWorld._config[KEY]).toBe(2);
-
-    const { config: _resolved, ...noConfig } = dark;
-    const { _config: _authoring, ...neither } = noConfig;
-    for (const [label, legacy] of [['no config, no _config', neither], ['no config, a markerless _config', noConfig]]) {
-      expect(Object.hasOwn(legacy, 'config'), label).toBe(false);
-      expect(seatLaw.resolveSeatLawVersion(legacy), `${label}: before`).toBe(1);
-
-      const store = storeOf();
-      // A lit town loaded FIRST, through the Library (its `_config` becomes the form config)…
-      libraryLoad(store, { settlement: litWorld, config: litWorld.config });
-      // …then the legacy save opened over it, and regenerated.
-      store.getState().hydrateFromSave({ id: 'legacy-1', settlement: JSON.parse(JSON.stringify(legacy)), campaignState: { phase: 'draft', eventLog: [] } });
-      const formAtRegen = store.getState().config;
-      const npcsBefore = JSON.stringify(store.getState().settlement.npcs);
-      await store.getState().regenSection('npcs');
-      await store.getState().regenSection('history');
-      const after = store.getState().settlement;
-      expect(JSON.stringify(after.npcs), `${label}: the regen did not run`).not.toBe(npcsBefore);
-
-      // THE PRECONDITION SEAT-6 named, measured: the regen's fallback config (`settlement.config || config`) IS lit.
-      expect(formAtRegen[KEY], `${label}: the form config is not lit; the edge is not reached`).toBe(2);
-      // THE MEASURE: the town did not acquire the law, and reads 1.
-      expect(Object.hasOwn(after, 'config'), `${label}: the regen wrote a config onto the legacy town`).toBe(false);
-      if (after._config) expect(Object.hasOwn(after._config, KEY), `${label}: _config`).toBe(false);
-      expect(seatLaw.resolveSeatLawVersion(after), `${label}: the legacy town reads the seat law LIT — a FINDING`).toBe(1);
-      expect(coupContenders(after), `${label}: coupContenders`).toEqual(onDark(() => coupContenders(after)));
-
-      // …and the marker in the fallback config moves not one regenerated byte. The store's regen rolls a fresh seed
-      // per call, so the comparison drives the same two passes it calls (`regenNPCsPipeline`, `regenHistoryPipeline`)
-      // on one fixed seed, with the fallback config as the store held it and with the seat marker stripped from it.
-      const unmarked = withLaw({ config: formAtRegen }, null).config;
-      expect(Object.hasOwn(unmarked, KEY)).toBe(false);
-      for (const pass of ['regenNPCsPipeline', 'regenHistoryPipeline']) {
-        const read = (cfg) => JSON.stringify(pipeline[pass](JSON.parse(JSON.stringify(legacy)), cfg, { seed: 'saved-seat-legacy' }));
-        expect(read(formAtRegen), `${label}: the seat marker in the fallback config moved ${pass}`).toBe(read(unmarked));
-      }
-    }
-  });
-
-  // ── 5. THE IMPORT ───────────────────────────────────────────────────────────────────────────────────────────
-
-  it('5. THE IMPORT: a gallery file and a reconciled export carrying _seatLawVersion 2 keep it; a markerless one stays markerless', async () => {
-    build(false);
-    const darkTown = JSON.parse(JSON.stringify(bear()));
-    build(true);
-    const litTown = JSON.parse(JSON.stringify(bear()));
-    expect(litTown.config[KEY]).toBe(2);
-    expect(litTown.config[LIVING_KEY], 'the living-content marker the scrubs DO drop rides the file').toBe(2);
-    expect(Object.hasOwn(darkTown.config, KEY)).toBe(false);
-
-    // ── the gallery path, the real body (`galleryImportSettlement.js :: importGallerySettlementImpl`), its network door
-    // (`gallery.js :: fetchDossierForImport`'s RPC) answered here; the client strip and the veil run for real ──
-    const rows = {
-      'lit-town': { id: 'd-lit', name: 'Lit Town', tier: 'town', data: litTown },
-      'dark-town': { id: 'd-dark', name: 'Dark Town', tier: 'town', data: darkTown },
-    };
-    vi.doMock('../../../src/lib/supabase.js', () => ({
-      supabase: { rpc: vi.fn(async (_name, args) => ({ data: [rows[args.dossier_slug]], error: null })) },
-      isConfigured: true,
-      setSessionPersistence: () => {},
-      hasActiveRecoveryFlow: () => false,
-      consumeRecoveryFlow: () => null,
-    }));
-    vi.resetModules();
-    try {
-      const { importGallerySettlementImpl } = await import('../../../src/store/galleryImportSettlement.js');
-      const state = { auth: { user: { id: 'u-1' }, tier: 'premium' }, maxSaves: () => 50, savedSettlements: [] };
-      const get = () => state;
-      const set = (recipe) => { recipe(state); };
-      await importGallerySettlementImpl(get, set, 'lit-town');
-      await importGallerySettlementImpl(get, set, 'dark-town');
-      const [litImported, darkImported] = state.savedSettlements.map((e) => e.settlement);
-      // ANCHOR: the scrub really ran on this path: the living-content marker is gone off the same config.
-      expect(Object.hasOwn(litImported.config, LIVING_KEY), 'the gallery scrub did not run').toBe(false);
-      expect(litImported.config[KEY], 'the gallery import dropped a carried _seatLawVersion 2').toBe(2);
-      expect(seatLaw.seatsByHolder(litImported)).toBe(true);
-      expect(Object.hasOwn(darkImported.config, KEY), 'the gallery import stamped a markerless town').toBe(false);
-      expect(seatLaw.resolveSeatLawVersion(darkImported)).toBe(1);
-    } finally {
-      vi.doUnmock('../../../src/lib/supabase.js');
-      vi.resetModules();
-    }
-
-    // ── the reconciliation admission (`importReconciliationAdmission.js :: admitExistingCampaignImport`) ──
-    const text = JSON.stringify({
-      version: ACCOUNT_EXPORT_VERSION,
-      campaigns: [],
-      settlements: [
-        { id: 's-lit', name: 'Lit Town', tier: 'town', settlement: litTown },
-        { id: 's-dark', name: 'Dark Town', tier: 'town', settlement: darkTown },
-      ],
-    });
-    const ingest = ingestSettlementForgeExport(text, {
-      label: 'saved-seat.sf.json', ingestedAt: NOW, storageRef: 'local-file:saved-seat.sf.json',
-    });
-    expect(ingest.ok).toBe(true);
-    const admitted = await admitExistingCampaignImport(ingest.value, {
-      targetCampaign: { id: 'target-campaign', name: 'Current campaign', settlementIds: [] },
-      existingSettlements: [],
-      existingCampaigns: [],
-    });
-    expect(admitted.ok).toBe(true);
-    const [litAdmitted, darkAdmitted] = admitted.value.proposals.map((p) => p.normalizedInput.settlement);
-    for (const echo of ['config', '_config']) {
-      expect(Object.hasOwn(litAdmitted[echo], LIVING_KEY), `admission ${echo}: the strip did not run`).toBe(false);
-      expect(litAdmitted[echo][KEY], `admission ${echo}: a carried _seatLawVersion 2 was dropped`).toBe(2);
-      expect(Object.hasOwn(darkAdmitted[echo], KEY), `admission ${echo}: a markerless town was stamped`).toBe(false);
-    }
-    expect(seatLaw.seatsByHolder(litAdmitted)).toBe(true);
-    expect(seatLaw.resolveSeatLawVersion(darkAdmitted)).toBe(1);
-  });
-
-  // ── 6. THE RE-DERIVE ROAD ───────────────────────────────────────────────────────────────────────────────────
-
-  it('6. THE RE-DERIVE ROAD (executed): a saved law-1 town re-derived at the tick under a lit world\'s form config stays law 1, its people\'s bands with it', async () => {
-    build(false);
-    const dark = JSON.parse(JSON.stringify(bear()));
-    expect(dark.powerStructure.government, 'the fixture is no longer a Town Council (re-measure the seed)').toBe(FORM);
-    build(true);
-    const litWorld = JSON.parse(JSON.stringify(bear('saved-seat-lit-first')));
-    // The marker is a key the lit birth writes on both echoes and the dark birth on neither (anchored by the lit birth).
-    for (const echo of ['config', '_config']) {
-      expectPresentThenAbsent(Object.keys(litWorld[echo]), Object.keys(dark[echo]), KEY, `the dark birth's ${echo} carries the seat law`);
-    }
-
-    const SAVE_ID = 'saved-seat-rederive';
-    const copy = (v) => JSON.parse(JSON.stringify(v));
-    const idsOf = (r) => r.npcs.map((npc) => npc.id);
-    /**
-     * The tick's half of the roster ops on the SAVED dark town, as `rosterOpsAtTick.test.js` arms it: a lit town
-     * Library-loaded FIRST (its `_config` becomes the form config, as arm 4), the dark town's library ROW (its `config`
-     * the town's own, markerless) opened, one add-decree staged, EM-E1's real tick marking it applied, and
-     * `applyRosterDecreesAtTick` run. `unmark` strips the seat marker off the form config: the control, the marker
-     * absent from every config in play.
-     */
-    const tick = async (unmark) => {
-      const store = storeOf();
-      libraryLoad(store, { settlement: litWorld, config: litWorld.config });
-      if (unmark) store.setState({ config: withLaw({ config: store.getState().config }, null).config });
-      const row = {
-        id: SAVE_ID, name: dark.name, tier: 'town', config: copy(dark.config), settlement: copy(dark),
-        campaignState: { phase: 'draft', eventLog: [] },
-      };
-      store.setState({ savedSettlements: [row] });
-      store.getState().hydrateFromSave(copy(row));
-      const live = store.getState().settlement;
-      const staged = stageAddDecreeIntent(store.getState, store.setState, {
-        cardType: 'npc',
-        values: { name: 'Wendel', role: poolValues('npc.role', live)[0] },
-        pools: Object.fromEntries(addOpPayloadFor('npc')
-          .filter((r) => typeof r.pool === 'string')
-          .map((r) => [r.pool, poolValues(r.pool, live)])),
-        orderedAt: NOW,
-      });
-      const applied = applyDecreesToSaves(
-        { tick: 1 }, [{ id: SAVE_ID, settlement: { decrees: selectDecrees(store.getState()) } }],
-        'world_pulse.saved-seat.1', { now: NOW },
-      );
-      store.setState((state) => { state.settlement.decrees = applied.saves[0].settlement.decrees; });
-      const form = store.getState().config;
-      const receipt = await applyRosterDecreesAtTick(store.getState, store.setState, { saveId: SAVE_ID });
-      return {
-        form, live, staged, receipt, causes: applied.causes.length,
-        derived: store.getState().settlement,
-        row: store.getState().savedSettlements.find((r) => r.id === SAVE_ID).settlement,
-      };
-    };
-
-    const lit = await tick(false);
-    // THE PRECONDITION: the form config at the tick IS lit, or the edge is not reached.
-    expect(lit.form[KEY], 'the form config at the tick is not lit; the edge is not reached').toBe(2);
-    expect(seatLaw.resolveSeatLawVersion(lit.live), 'the saved town opened is not law 1').toBe(1);
-    // THE GUARD THAT THE ROAD RAN: a decree applied, one newcomer minted, the record re-derived and carrying him.
-    expect(lit.staged.ok, 'the add-decree was not staged').toBe(true);
-    expect(lit.causes, 'EM-E1\'s hook applied no decree at this tick').toBe(1);
-    expect(lit.receipt.rederived, 'the re-derive road was SKIPPED: this arm would measure nothing').toBe(true);
-    expect(lit.receipt.minted, 'the tick minted another newcomer than the decree named').toEqual([lit.staged.decreeId]);
-    expect(lit.derived, 'the live view was not replaced by the re-derived record').not.toBe(lit.live);
-    expect(idsOf(lit.derived).length, 'the re-derived roster did not grow by exactly the newcomer').toBe(idsOf(lit.live).length + 1);
-    expectPresentThenAbsent(idsOf(lit.derived), idsOf(lit.live), lit.staged.decreeId, 'the newcomer is on the derived record, never on the live one');
-    expect(lit.row, 'the library row is not the derived record').toEqual(lit.derived);
-
-    // (a) THE LAW: the re-derived town reads 1 and carries no marker, on both homes.
-    for (const [label, world] of [['the live view', lit.derived], ['the library row', lit.row]]) {
-      expect(seatLaw.resolveSeatLawVersion(world), `(a) ${label}: the re-derived town reads the seat law LIT — a FINDING`).toBe(1);
-      for (const echo of ['config', '_config']) {
-        expectPresentThenAbsent(Object.keys(lit.form), Object.keys(world[echo]), KEY, `(a) ${label}: ${echo} acquired _seatLawVersion on the re-derive road`);
-      }
-    }
-
-    // (b) ITS PEOPLE'S BANDS WITH IT: the same re-derivation (same seed, same decree, same layer) with the seat marker
-    // absent from every config in play. One tree, two runs, no stored digest.
-    const control = await tick(true);
-    expectPresentThenAbsent(Object.keys(lit.form), Object.keys(control.form), KEY, '(b) the control form config still carries the seat marker');
-    expect(control.receipt.rederived, '(b) the control re-derivation was skipped').toBe(true);
-    expect(control.receipt.minted, '(b) the control minted another newcomer').toEqual(lit.receipt.minted);
-    const people = (r) => r.npcs.map((npc) => [npc.id, npc.role, npc.powerLevel, powerBandOfRole(npc.role, r)]);
-    expect(people(lit.derived).length, '(b) the re-derived roster is empty').toBeGreaterThan(1);
-    expect(people(lit.derived), '(b) the people\'s power levels or bands moved under the lit form config')
-      .toEqual(people(control.derived));
-
-    // (c) THE CONTEST: the lit build reads the re-derived town as the dark build does…
-    expect(coupContenders(lit.derived), '(c) coupContenders of the re-derived town on the lit build is not the dark build\'s reading')
-      .toEqual(onDark(() => coupContenders(lit.derived)));
-    // …and that is a live discriminator: the same town stamped 2 the lit build reads apart.
-    expect(coupContenders(withLaw(lit.derived, 2)), '(c) the lit law reads this town as the dark build does: no control')
-      .not.toEqual(onDark(() => coupContenders(lit.derived)));
   });
 });
