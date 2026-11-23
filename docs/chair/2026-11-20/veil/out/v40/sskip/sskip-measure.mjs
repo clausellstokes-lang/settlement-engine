@@ -135,6 +135,13 @@ const neverThere = (t, wh0, dm = true) => {
   return x;
 };
 const NT = process.env.SSKIP_NT === '1';
+/** N102's FOUR CLASSES of a nothing-hidden difference (my reading, vetoable): KIND = the standing's form ids, master's and the
+ * history's wordings folded (M-/H- dropped); SLOTS = the served roster's names the standing text names, in order of first
+ * appearance. (a) both carry a standing, same kinds and slots; (b) both carry one, another kind or other slots; (c) stored none,
+ * S some; (d) stored some, S none. */
+const cls = { rows: {}, reads: {}, ex: {} };
+const kindsOf = (c) => J((c?.ids ?? []).map((id) => id.replace(/^[HM]-/, '')).sort());
+const slotsOf = (text, names) => J(names.filter((n) => n && text.includes(n)).sort((a, b) => text.indexOf(a) - text.indexOf(b)));
 const nt = { cells: {}, ex: [], closure: { reads: 0, rows: 0, places: new Set() } }; // kind|template|equal-or-not = rows (door-reads)
 const pool = await poolOf();
 // SSKIP_SHAS=<file>: each birth's sha256 (its JSON as generated), the same-seed byte check of births before and after
@@ -183,7 +190,16 @@ for (const { seed, t } of pool) {
             if (v === undefined) { m.nh.veiled += 1; continue; }
             if (v !== sd) {
               if (typeof sd === 'string' && (refCut(sd)?.standing ?? '').includes(SEAT_CONTESTED_STANDING)) { m.nh.listedSeat += 1; continue; }
-              m.nh.faults.push(`${tagr} ${n}`); m.nh.faultRows.add(`${seed} ${n}`); m.nh.faultPlaces.add(seed);
+              m.nh.faults.push(`${tagr} ${n}`);
+              {
+                const a = typeof sd === 'string' ? refCut(sd) : null; const b = typeof v === 'string' ? refCut(v) : null;
+                const names = arr(p?.powerStructure?.factions).filter((x) => isRec(x) && !isCut(x)).map(nameOf);
+                const k = !a && b ? '(c) stored none, S some' : a && !b ? '(d) stored some, S none' : !a && !b ? '(e) neither has a standing (the base differs)'
+                  : kindsOf(a) === kindsOf(b) && slotsOf(a.standing, names) === slotsOf(b.standing, names) ? '(a) same kind and slots' : '(b) another kind or other slots';
+                cls.reads[k] = (cls.reads[k] || 0) + 1;
+                if (!m.nh.faultRows.has(`${seed} ${n}`)) { cls.rows[k] = (cls.rows[k] || 0) + 1; (cls.ex[k] ||= []); if (cls.ex[k].length < 3) cls.ex[k].push(`${seed} ${n} (${door} dm=${dm}):\n      STORED ${J(sd)}\n      S ${J(v)}\n      stored kinds ${kindsOf(a)} slots ${a ? slotsOf(a.standing, names) : '[]'} | S kinds ${kindsOf(b)} slots ${b ? slotsOf(b.standing, names) : '[]'}`); }
+              }
+              m.nh.faultRows.add(`${seed} ${n}`); m.nh.faultPlaces.add(seed);
               if (!b7) m.nh.i.push(`${tagr} ${n}: stored ${J(sd).slice(-120)} | page ${J(v).slice(-120)}`);
             }
             if (adds) { if (b7) m.nh.cureClass += 1; else m.nh.iii.push(`${tagr} ${n}: stored ${J(sd).slice(-100)} | page ${J(v).slice(-120)}`); }
@@ -216,3 +232,5 @@ console.log(`  (iii) hiding reads (house hides, hand hides; ${m.hide.recs} recor
 if (m.rivalsNot7.length) console.log(`  rivals whose base is not one of the seven (copied host descs), first: ${L(m.rivalsNot7, 8)}`);
 if (NT) console.log(`  N63 CLOSURE in the never-there: hiding (record x Reveal) reads where it dropped rows ${nt.closure.reads} | rows dropped ${nt.closure.rows} | records ${nt.closure.places.size}`);
 if (NT) console.log(`  NEVER-THERE (rows S gives a tail, stored desc without one; per door-read): ${J(Object.fromEntries(Object.entries(nt.cells).sort()), null, 0)}${L(nt.ex, 40)}`);
+console.log(`  N102 CLASSES of the nothing-hidden faults: rows ${J(cls.rows)} | door-reads ${J(cls.reads)}`);
+for (const [k, xs] of Object.entries(cls.ex).sort()) console.log(`  ${k}:${L(xs, 3)}`);
