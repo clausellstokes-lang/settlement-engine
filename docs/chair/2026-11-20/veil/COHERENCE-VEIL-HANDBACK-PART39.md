@@ -59,9 +59,22 @@ THE BUILDERS (subagents of this seat; a successor re-staffs from the brief and t
   465.0 ms against a CEILING OF TWICE 211's frozen Reveal-off read of the same record, 2 x 261.6 = 523.2 ms (the builder's own run: 464.3
   against 494.8; at eeda6a126 463.8). The margin is thin (about 11% on the seat's run, 6% on the builder's) and 211's read moves with the
   box's load: say the figure at each "TIP?".
-- R5D-PAGE-A (items 0-4, 6-8 of `briefs/R5D-PAGE-BRIEF.md` as VEIL-37 corrected it, a48c8b9a1): dispatched 00:27; relayed 00:58 the
-  chair's ruling 106 (the composed-hosts walker's header re-stated; the 23 `prose.*` rows stay red by name). STATE: building; UNREAD.
-  Plant (e) is red on its branch BY DESIGN until R5D-SQL-2 is merged into it. Hand-back `out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md`.
+- R5D-PAGE-A (items 0-4, 6-8 of `briefs/R5D-PAGE-BRIEF.md` as VEIL-37 corrected it, a48c8b9a1): dispatched 00:27; RETURNED 02:5x
+  (493,639 builder tokens). PUSHED UNREAD as `lane/veil-37-2026-11-23-r5dpage-wip` at 74afc8219: bd030f275 (the page half), 9bba26536
+  (3ef7fb325 merged in, no conflict), 74afc8219 (the two moved pins re-stated by cause: `galleryWithholdAlways.pglite` MAIN and
+  `galleryVeilHandRows.pglite` V8-4; the hand-back `out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md`). ITS OWN RUNS (NOT RE-RUN BY ANY SEAT):
+  four pglite files 58 of 58 on the merged tree; red first -> green: TEETH 464 -> 0, FIDELITY 88 -> 168 of 168, the standingReaders walker
+  3 -> 0; plant (e) and the born mask arm red until R5D-SQL-2 merged, then green; ITEM 0 (a) DOES NOT RED (reader B re-creates the hidden
+  power on 44 of 44 hiding reads, but its sentence names none and equals the never-there page's on 176 of 176); (b) and (c) built: 0
+  names, 0 mask in 2,872 reader strings; the differential 312 reads, 276 equal, 0 faults, 36 listed as a share class; `tests/lint` whole
+  45 failed in 17 files = the lane's 22 + the 23 `prose.*` rows; typecheck 167/167; eslint 0 on 9 files; raw first paint 1,175,552 B on
+  both trees (+0; gzip +4, a chunk hash; the four VERIFY_DIST reds the same on 3ef7fb325). ITS DEVIATIONS: the reader is imported
+  statically (raw +0 still); `galleryVeilHandRows` read only around V8-4. THREE RULINGS ASKED OF THE CHAIR (02:5x): (1) the share class:
+  36 DM-door reads on 9 hand-hide records differ from never-there because the served shares include the stamped row (player reads all
+  equal); (2) reader B's full kind cut NOT built (it withheld the sentence on 7 of 21 nothing-hidden births): the name check + the
+  differential instead; (3) A POSSIBLE LEAK: 8 served BASES on 2 places (jp6-city-8 act T; r3m-city-none-0-37) name an owner-hidden
+  density host in sentence case past the case-sensitive mask, which the belt (only where a house is hidden whole) does not reach:
+  counted, not cured. ITS DIFF IS UNREAD BY THIS SEAT unless a later line here says otherwise.
 - R5D-PAGE-B (items 5, 5b, 5c; tests and instruments only): NOT DISPATCHED; after A is read and merged. NO "TIP?" BEFORE B's STORED ARM
   HAS RUN (ruling 105).
 
