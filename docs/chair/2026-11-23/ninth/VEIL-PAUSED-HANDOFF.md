@@ -163,7 +163,7 @@ THE FULL POOLS; T5 a seat of its own. N112 VEIL-40's hand-over. N115 the speed o
 0. THE WORKING LINE IS NOT TO BE RELEASED TO USERS BEFORE THE VEIL'S HIDING IS IN IT. SAID TO HIM AT THE PAUSE (N117),
    with the chair's recommendation: land the flip on the working line (that is not a release); no merge or deploy to
    users until the veil is resumed and finished; a smaller safe subset can be scoped if he asks. THE CHAIR'S OWN PROBE on
-   the line at 9b0ffaa97 (`docs/chair/2026-11-23/ninth/tools/covertcopy.probe.test.js` and its output beside it; 180
+   the line at 9b0ffaa97 (`docs/chair/2026-11-23/ninth/tools/covertcopy.probe.js.txt` (rename it to `.test.js` in a scratch directory to run it with vitest) and its output beside it; 180
    births): in 10 of 180 the page's "prominent relationship" is a COVERT tie and the public projection serves that copy
    (both names, type, text) while the tie itself is dropped from the served list. The cause, read in code:
    `genRelNarrative` scores every tie and returns a copy without the flag; the key is on every public allowlist (206,
