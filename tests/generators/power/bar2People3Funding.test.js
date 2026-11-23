@@ -28,7 +28,10 @@ function born(seed) {
 const UNDERFUNDED = 'Tense (militarised, chronically underfunded)';
 const TWIN = 'Tense (militarised)';
 /** the funded towns (gate 1) that printed UNDERFUNDED at the base: each takes the twin */
-const ROWS = ['r2r-town-28', 'r2r-city-6', 'r2s-monster_pressure-city-0'];
+// RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): the gates of r2r-city-6 and r2s-monster_pressure-city-0 lit read 0.88 (fortune moves the funding); the
+// lowest r2r-city and r2s-monster_pressure-city whose gate is 1 and whose stability takes the militarised branch are city-135
+// and city-199 (each alone of 200)
+const ROWS = ['r2r-town-28', 'r2r-city-135', 'r2s-monster_pressure-city-199'];
 /** KEEP: a town whose gate is under 1 (0.88 on the base census) keeps the line */
 const KEEP = ['r2r-town-16'];
 

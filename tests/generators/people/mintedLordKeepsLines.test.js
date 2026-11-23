@@ -29,8 +29,11 @@ const born = (settType, seed, stress = null) => generateSettlementPipeline(birth
 const SIX = Object.freeze([
   // these two headed the old families' body at e86d069be ("Heads an old family while the seat fails, …"); its minted lord
   // heads it since point 46, so the line in its place is the one their rank behind the lord reads
-  ['r2r-village-56', 'village', null, 'npc_mill', 'Belongs to a lesser family behind the leading one while the seat fails.'],
-  ['r2s-succession_void-hamlet-0', 'hamlet', 'succession_void', 'npc_shepherd', 'Belongs to a lesser family behind the leading one while the seat fails.'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): the miller of r2r-village-56 and the shepherd of r2s-succession_void-hamlet-0 lit read no row (each
+  // second of The Highborn Circle behind its minted lord); the lowest r2r-village and r2s-succession_void-hamlet whose card reads
+  // the line in its minted lord's own body are village-231 (alone of 0..899) and hamlet-107 (alone of 0..199)
+  ['r2r-village-231', 'village', null, 'npc_mill', 'Belongs to a lesser family behind the leading one while the seat fails.'],
+  ['r2s-succession_void-hamlet-107', 'hamlet', 'succession_void', 'npc_woodcutter_s_camp', 'Belongs to a lesser family behind the leading one while the seat fails.'],
   // POWERS-9 (re-keyed by identity, the cause): this tailor is third of the Elder Council (a government power), in no old
   // family's body, so "Belongs to a lesser family behind the leading one" was false of him; he reads no row (BODY_KINDS)
   ['r2s-succession_void-village-3', 'village', 'succession_void', 'npc_tailor', null],

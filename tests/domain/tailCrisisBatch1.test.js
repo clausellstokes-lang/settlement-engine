@@ -64,7 +64,10 @@ const FALSE = [
   ['r2s-monster_pressure-thorp-1', summary, 'Its defences were built for quieter times.', 'It has nothing built or kept to hold such things off.'],
   ['r2s-slave_revolt-thorp-2', summary, 'Whole work gangs have downed tools', 'Those set to work have downed tools and will not take them up again.'],
   ['r2s-wartime-thorp-2', summary, 'certain families are quietly thriving on contracts', 'The governing authority is demanding sacrifice, and not every household gives it in equal measure.'],
-  ['r2r-thorp-58', hooks, 'The settlement is starving, and its hungriest are turning to banditry.', 'The settlement is starving, and its hungriest steal what food they can find.'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-thorp-58 lit is under its siege with a deficit, not starving
+  // (its outlook draws no starving hook); the lowest r2r-thorp under a siege whose outlook draws the starving hook is
+  // thorp-84 (of 200; the others draw it under a famine), the row's own pair restored
+  ['r2r-thorp-84', hooks, 'The settlement is starving, and its hungriest are turning to banditry.', 'The settlement is starving, and its hungriest steal what food they can find.'],
   ['r2r-thorp-52', vantages, 'officials who will not act', 'orders go unheeded and dues unpaid'], // TAIL-CRISIS-4 (K18): re-keyed by identity (the line now says the quarrel has turned to violence)
   ['r2r-thorp-52', vantages, 'one of its strongest powers is defying them', 'some of its people are defying them'],
   ['r2s-monster_pressure-thorp-0', vantages, 'the lookouts count the days between attacks', 'and people count the days between attacks'],

@@ -29,8 +29,11 @@ const TOWNS = Object.freeze({
   'bar0-city-under_siege+famine-rand-44': ['design'], // C7307, C7309
   'bar0-town-calm-rand-42': ['design'], // C33342
   'bar0-village-famine-rand-44': ['design'], // C45848
-  'bar0-hamlet-calm-rand-42': ['agree'], // "Weak defences keeps …" at the base
-  'bar0-hamlet-calm-rand-28': ['agree'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (A JUDGEMENT, AT ANOTHER SIZE): bar0-hamlet-calm-rand-42 and -28 lit name no plural cause ("Weak
+  // defences keeps …" at the base), and no bar0-hamlet-calm-rand of 0..799 does; the two lowest of the sample's calm town family
+  // that do are bar0-town-calm-rand-74 and -131 ("Weak defences are the reason."; 74 131 156 220 221 224 of 0..399)
+  'bar0-town-calm-rand-74': ['agree'],
+  'bar0-town-calm-rand-131': ['agree'],
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';

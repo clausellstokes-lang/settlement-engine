@@ -79,7 +79,10 @@ describe('(b) a rival of the density law carries its own standing, never its hos
     expect(String(host?.desc), 'premise: the host carries its own standing sentence').toContain(HOSTS);
     expectAbsentWithAnchor(String(circle.desc), HOSTS, 'Merchants trade here in number but carry little weight in how the place is run',
       'the rival keeps its host\'s general description, never its host\'s standing');
-    expect(String(circle.desc), 'the rival\'s own settled standing').toContain('They have a say on only a few matters');
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the rival holds the seat lit, and its own standing is the
+    // seat law's holder line (was "They have a say on only a few matters"); no rw3-metropolis-calm of 0..499 but this one seats a
+    // rival of Merchant Guilds with the host's general description beside the host's "worth buying" line
+    expect(String(circle.desc), 'the rival\'s own settled standing').toContain('They are the ones who sit in the Grand Council, and its word is theirs');
   }, 60_000);
 });
 

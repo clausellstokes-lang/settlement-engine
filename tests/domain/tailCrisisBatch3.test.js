@@ -44,14 +44,20 @@ const hooks = (s) => [].concat(s.stress || []).filter(Boolean).flatMap((e) => cr
 /** [seed, words that must NOT print, what prints in their place] (READ-ALL row ids) */
 const FALSE = [
   ['r2s-indebted-thorp-1', 'come to terms: holds the seat.', 'Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms.'], // 11595
-  ['r2s-recently_betrayed-thorp-2', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11549
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-recently_betrayed-thorp-2 lit aims the betrayal at its holder
+  // with no dispute clause ("..., who holds the seat."); the lowest r2s-recently_betrayed-thorp whose hook takes the clause
+  // is thorp-0 (0 7 8 9 10 12 of 200), the row's own line restored
+  ['r2s-recently_betrayed-thorp-0', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11549
   ['r2s-slave_revolt-thorp-3', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11671
   ['r2s-religious_conversion-thorp-3', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11569
   ['r2s-slave_revolt-thorp-2', 'Elder Council: holds the seat', 'of Elder Council, who holds the seat, and the right to it is already in dispute.'], // 11668
   ['r2s-indebted-city-2', 'come to terms: holds the seat.', 'of City Council, who holds the seat, is the one who would come to terms.'], // B11049
   ['r2r-thorp-22', 'Elder Council: holds the seat', 'it is aimed at Akna Balam of Elder Council, who holds the seat, and the right to it is already in dispute.'], // B11090
   ['r2r-hamlet-35', 'of The Independent Bloc, who already carries more weight', 'of The Independent Bloc, whose power already carries more weight than whoever holds the seat, and gains as the seat weakens, is stirring it.'], // batch 3's inheritor read: the power's standing, not the person's
-  ['r2s-insurgency-town-0', 'Military/Guard loses most', 'if it gives way, The Guard loses most, because its own people feel the crisis first.'], // 20875
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-insurgency-town-0 lit turns its insurgency on the town hall
+  // ("whoever wins it over decides how the insurgency goes"); the lowest r2s-insurgency-town whose hook names the Guard as the loser is
+  // town-33 (33 75 102 103 104 124 of 200), the row's own line restored
+  ['r2s-insurgency-town-33', 'Military/Guard loses most', 'if it gives way, The Guard loses most, because its own people feel the crisis first.'], // 20875
 ];
 
 /** [seed, a true sibling that must still print] */

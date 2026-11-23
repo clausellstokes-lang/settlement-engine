@@ -61,8 +61,12 @@ describe('the five further mislabelled rows carry no guild tag (CENSUS-4e)', () 
 
 describe('the three villages of CENSUS-4c unit 1', () => {
   beforeAll(async () => { await ensureLaws(); });
-  it('soak1k-236 and -320: the guild atom is false and no Guild Master is crewed', () => {
-    const failures = collectSeedFailures([236, 320], (i) => {
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): soak1k-236 lit holds a real guild beside its veterans' lodge (the
+  // atom true by the record); the lowest soak village not named here that holds a retagged row and no guild house or guild
+  // power (`guild.js :: guildOf`) is soak1k-512 (a Veteran's lodge; the villages of 0..999 holding a retagged row: 236 320 452
+  // 512 668 752 866, of which 320 512 752 866 hold no guild)
+  it('soak1k-512 and -320: the guild atom is false and no Guild Master is crewed', () => {
+    const failures = collectSeedFailures([512, 320], (i) => {
       const { settlement: s } = birth(i);
       expect(s.tier, `soak1k-${i}`).toBe('village');
       expect(factsOf(s).guild, `soak1k-${i}`).toBe(false);

@@ -51,7 +51,8 @@ const KEEP = [
   ['B02441', 'r2r-city-2', 'Operates unlicensed gambling.'],
   ['B00162', 'r2r-town-7', 'One criminal ring decides what crime is allowed here.'],
   ['B11428', 'r2r-town-0', 'It keeps the streets quiet because trouble brings the law'],
-  ['09264', 'r2r-town-0', 'the granary would carry the town for about five months at full rations'],
+  // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the granary's months moved (was "about five months")
+  ['09264', 'r2r-town-0', 'the granary would carry the town for about six months at full rations'],
 ];
 
 const towns = {};

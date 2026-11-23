@@ -93,7 +93,9 @@ describe('BAR3-DEFECON batch 1: the safety and food lines read the town they pri
 
   test('the theocratic flag stands only where the tithes lead the income and a religious power is Strong or Dominant', () => {
     expect(town('r2r-metropolis-3').economicState.safetyProfile.flags.theocraticEconomy, 'r2r-metropolis-3: Minor, 9%').toBe(false);
-    expect(town('r2r-town-54').economicState.safetyProfile.flags.theocraticEconomy, 'r2r-town-54: Strong, 27%, the largest').toBe(true);
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-town-54's faith lit stands at Significant (its tithes 27%, still the largest), so the flag falls; the
+    // lowest r2r-town whose tithes lead the income beside a Strong or Dominant religious power is town-19 (19 85 of 200)
+    expect(town('r2r-town-19').economicState.safetyProfile.flags.theocraticEconomy, 'r2r-town-19: Dominant, 25%, the largest').toBe(true);
   }, 300_000);
 
   test('KEEP: each true sibling still prints where the state is absent', () => {

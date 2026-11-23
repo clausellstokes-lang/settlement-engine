@@ -33,7 +33,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 const born = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [1582, 1445, 2962, 1589]) born[i] = birth(i).settlement;
+  for (const i of [1582, 1445, 1678, 1589]) born[i] = birth(i).settlement;
 }, 240_000);
 
 /** @param {number} storageMonths @param {boolean} stressFamine */
@@ -45,8 +45,11 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
   // the same records, the same held/open reading and the same rounding; the span now says "about".
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
   // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
-  it('soak1k-1582, -1445, -2962: a famine granary printed as six months is held, and the page says so', () => {
-    const failures = collectSeedFailures([1582, 1445, 2962], (i) => {
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): soak1k-2962's famine granary lit holds 5.1 months (the stores
+  // moved); the lowest soak seed not named here whose famine granary holds 5.5 to 5.9 months is soak1k-1678 (5.7, a city under
+  // a famine and a slave revolt: 1445 1582 1678 3076 3196 3592 3953 of 0..3999)
+  it('soak1k-1582, -1445, -1678: a famine granary printed as six months is held, and the page says so', () => {
+    const failures = collectSeedFailures([1582, 1445, 1678], (i) => {
       const s = born[i];
       const record = s.economicState.foodSecurity.foodRecord;
       expect(record, `soak1k-${i}`).toMatchObject({ band: 'famine', hasGranary: true });
@@ -61,10 +64,12 @@ describe('rung 2D · the held granary and the stores line read one rounding', ()
     expectNoSeedFailures(failures, 'every six-month famine granary reads as held');
   });
 
-  it('soak1k-1589 (the control): twelve months, held before and after', () => {
+  it('soak1k-1589 (the control): eleven months, held before and after', () => {
     const record = born[1589].economicState.foodSecurity.foodRecord;
     expect(record).toMatchObject({ band: 'famine', hasGranary: true, storesHeld: true });
-    expect(foodStoresWords(record)).toBe(`Stores: a granary of about twelve months that ${HELD_STORES_WORDS}.`);
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the control's stores moved, twelve months -> eleven,
+    // still a famine granary held well above six
+    expect(foodStoresWords(record)).toBe(`Stores: a granary of about eleven months that ${HELD_STORES_WORDS}.`);
   });
 
   it('the boundary is the printed figure: 5.49 prints five and is open, 5.5 prints six and is held', () => {

@@ -59,7 +59,9 @@ describe('REVIEW-INTAKE-4 — no roster carries one secret or one goal twice', (
     // chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 853 -> 889, measured by this file's
     // own 1,000 births at the golden's tree 8c11f73ea: the round gives a face to every seat of power that had none, so 36 more
     // births carry two cards or more.
-    expect(rosters).toBe(889);
+    // RE-MEASURED 2026-11-23 (THE FLIP, both birth laws lit): 889 -> 890, measured by this file's own 1,000 births on the
+    // lit tree.
+    expect(rosters).toBe(890);
   });
 
   it('no roster repeats a secret', () => {

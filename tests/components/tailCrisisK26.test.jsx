@@ -40,7 +40,9 @@ const cfgFor = (seed) => {
 /** The census towns, one per label and stake the leaf re-forms (each the first crisis town of its kind on the 720). */
 const SEEDS = [
   'r2s-under_siege-village-3', // Military/Guard split
-  'r2s-occupied-city-2', // Military/Guard loses
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-occupied-city-2 lit prints no stake row under a label the leaf re-forms; the lowest r2s-occupied-city
+  // whose first such row is Military/Guard loses is city-33 (33 76 111 of 200)
+  'r2s-occupied-city-33', // Military/Guard loses
   'r2s-famine-village-1', // Military/Guard gains
   'r2s-politically_fractured-town-2', // Military/Guard is already at odds
   'r2s-politically_fractured-town-3', // Third Bloc (Neutrals) split
