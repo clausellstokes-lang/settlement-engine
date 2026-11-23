@@ -216,6 +216,12 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     Thieves' Guild and the ...") and r3m-city-none-1-117 (the City watch); 240 reads, every door and setting, off and DM. R5-DESC is
     its cure: THESE TWO SEEDS BY NAME read 0 on the unit's tree, both engines, every door the proofs read (gallery and link), in the
     name arm; said in the proof's line. (They are gate-pool births: the L1 run's 140, or the name arm, can carry them.)
+130. THE CHAIR, 14:38 (N106): CHAIN B CHANGES TWO GUARD LINES in `_gallery_veil_roster_choices`'s power block by the chair's grant
+    (master's top-level `factions[]` and `powerStructure.factions`: `jsonb_typeof(e -> 'power') <> 'number'` -> `is distinct from
+    'number'`; on an absent `power` the old guard writes equal shares the stored entries never had: 352 of 3,360 master-born reads,
+    gallery, DM; the twin is right). This seat's tree leaves both lines as they stand (the rival hunk ends two lines above the first).
+    AT THE MERGE OF THE TIP AFTER "R4-IDS MERGED" (this seat's or VEIL-48's): TAKE CHAIN B's TWO LINES; nothing else of the block
+    moves; build nothing on those two lines meanwhile.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -241,3 +247,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 13:23 T5 handed back (nothing run); T5 and SSKIP WIPs pushed; 13:25 both told the chair.
 - 13:40 ruling 128; 13:45 relayed to SSKIP; T5M's addendum (9df9a3e41) and dispatch.
 - 14:07 ruling 129 (the two named seeds owed in the proof).
+- 14:38 ruling 130 (chain B's two guard lines, taken at the merge after R4-IDS).
