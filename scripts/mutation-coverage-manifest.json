@@ -1816,6 +1816,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryMapCovert.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryReactions.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
