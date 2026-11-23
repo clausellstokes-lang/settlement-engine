@@ -30,7 +30,9 @@
  * read as `[^.]+?`, anchored at a sentence's start (a first "The" of either case, since the writer's `opening` raises it)
  * and ending at the line's own full stop. A `{holder}` slot is a power's name, never the pronoun the standing lines
  * open on, so it reads `(?!They )[^.]+?`: else W1v's "{holder} sat in the {form} until ..." would find W3v's "They sat
- * in the {form} until ...". A reader below the generators (`domain/coherence/seatHolderFindings.js`)
+ * in the {form} until ...". A slot reads `[^.]+?`, so a power's name with a full stop in it would make its line's
+ * pattern miss; arm (15) of the seat file (`tests/generators/seat/seatHolderLines.test.js`) holds both premises, no name
+ * opening "They " and none carrying a full stop, over lit births. A reader below the generators (`domain/coherence/seatHolderFindings.js`)
  * recognises a printed line by them without importing the writer; a reworded line is re-read with it.
  *
  * The slots: `{form}` is the governing row's name after its article (the line writes its own "The"/"the"), `{form's}` its

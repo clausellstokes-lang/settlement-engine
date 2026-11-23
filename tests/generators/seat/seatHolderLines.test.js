@@ -29,6 +29,10 @@
  *   (13) THE POOLS VERBATIM: the two twins are the chair's six lines.
  *   (14) THE PATTERNS (cure one): each line's pattern (`SEAT_HOLDER_PATTERNS`, which the findings judge reads) finds its
  *        own filled line and no filled line of another pool, so no pool can be mistaken for another.
+ *   (15) THE WRITER'S LINES ON LIT BIRTHS (the ninth chair's condition on cure one's `{holder}` slot): over arm (11)'s census,
+ *        every holder line the writer wrote is found by a pattern of its own pool in the text that carries it and by no
+ *        pattern of another pool, and the premises the patterns rest on hold: no power's name begins "They " or carries a
+ *        full stop. The census is born once (`censusBirthOf`) by whichever of (11) and (15) reads it first.
  *
  * THE LIT BUILD is planted as `tests/domain/seat/seatLawSavedTown.test.js` plants it: the seat's dial and its mint
  * (`seatLaw.js`) and the contest's dial (`seatCircumstances.js :: SEAT_CONTEST_LIT`), each read live off one switch. Arms
@@ -392,29 +396,58 @@ const EMPTY_SEAT = 'No one holds the seat at';
 const HELD_POOLS = Object.freeze({ standing: 'W3', relation: 'W1' });
 const VACANT_POOLS = Object.freeze({ standingVacant: 'W3v', relationVacant: 'W1v' });
 
+/** @typedef {'standing' | 'standingVacant' | 'relation' | 'relationVacant'} WrittenPool */
+/** @typedef {{ pool: WrittenPool, line: string, text: string, at: string, row: string }} WrittenLine */
+
 /**
- * Every holder line a record prints, filled for its own row (`factionDynamics.js :: seatHolderLinesOf`): each non-form row's
- * description as the holder (W3, W3v), and each relation row that names the form, the other power as the holder (W1, W1v).
+ * Every holder line a record prints, line by line, filled for its own row (`factionDynamics.js :: seatHolderLinesOf`): each
+ * non-form row's description as the holder (`standing`, `standingVacant`), and each relation row that names the form, the
+ * other power as the holder (`relation`, `relationVacant`). Each carries the exact `line`, its `pool`, the `text` that
+ * carries it, the row it stands `at`, and the `row`'s own key (VACANT (15) reads them; `holderLinesOn` folds them).
+ * @param {any} s @returns {WrittenLine[]}
+ */
+function writtenHolderLinesOn(s) {
+  const factions = Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : [];
+  const form = factions.find((/** @type {any} */ f) => f?.isGoverning);
+  /** @type {WrittenLine[]} */
+  const out = [];
+  if (!form) return out;
+  factions.forEach((/** @type {any} */ f, /** @type {number} */ i) => {
+    if (!f || f === form || typeof f.desc !== 'string') return;
+    for (const pool of /** @type {const} */ (['standing', 'standingVacant'])) {
+      for (const line of seatHolderLinesOf(pool, { form, holder: f })) if (f.desc.includes(line)) out.push({ pool, line, text: f.desc, at: f.faction, row: `f${i}` });
+    }
+  });
+  (Array.isArray(s.powerStructure.factionRelationships) ? s.powerStructure.factionRelationships : []).forEach((/** @type {any} */ row, /** @type {number} */ j) => {
+    const other = Array.isArray(row?.pair) && row.pair.includes(form.faction) ? row.pair.find((/** @type {string} */ n) => n !== form.faction) : null;
+    if (!other) return;
+    const text = String(row.narrative);
+    for (const pool of /** @type {const} */ (['relation', 'relationVacant'])) {
+      for (const line of seatHolderLinesOf(pool, { form, holder: { faction: other } })) if (text.includes(line)) out.push({ pool, line, text, at: `${form.faction}<->${other}`, row: `r${j}` });
+    }
+  });
+  return out;
+}
+
+/** Each written pool by its wording's name. */
+const POOL_NAMES = Object.freeze({ standing: HELD_POOLS.standing, relation: HELD_POOLS.relation, standingVacant: VACANT_POOLS.standingVacant, relationVacant: VACANT_POOLS.relationVacant });
+
+/**
+ * Every holder line a record prints, by its wording's name: each non-form row's description as the holder (W3, W3v), and each
+ * relation row that names the form, the other power as the holder (W1, W1v); one entry a row and pool that carries a line,
+ * in the row's order (the fold of `writtenHolderLinesOn`).
  * @param {any} s @returns {Array<{ name: string, at: string }>}
  */
 function holderLinesOn(s) {
-  const factions = Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : [];
-  const form = factions.find((/** @type {any} */ f) => f?.isGoverning);
+  /** @type {Set<string>} */
+  const seen = new Set();
   /** @type {Array<{ name: string, at: string }>} */
   const out = [];
-  if (!form) return out;
-  for (const f of factions) {
-    if (!f || f === form || typeof f.desc !== 'string') continue;
-    for (const pool of /** @type {const} */ (['standing', 'standingVacant'])) {
-      if (seatHolderLinesOf(pool, { form, holder: f }).some((line) => f.desc.includes(line))) out.push({ name: pool === 'standing' ? HELD_POOLS.standing : VACANT_POOLS.standingVacant, at: f.faction });
-    }
-  }
-  for (const row of Array.isArray(s.powerStructure.factionRelationships) ? s.powerStructure.factionRelationships : []) {
-    const other = Array.isArray(row?.pair) && row.pair.includes(form.faction) ? row.pair.find((/** @type {string} */ n) => n !== form.faction) : null;
-    if (!other) continue;
-    for (const pool of /** @type {const} */ (['relation', 'relationVacant'])) {
-      if (seatHolderLinesOf(pool, { form, holder: { faction: other } }).some((line) => String(row.narrative).includes(line))) out.push({ name: pool === 'relation' ? HELD_POOLS.relation : VACANT_POOLS.relationVacant, at: `${form.faction}<->${other}` });
-    }
+  for (const w of writtenHolderLinesOn(s)) {
+    const key = `${w.row}|${w.pool}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ name: POOL_NAMES[w.pool], at: w.at });
   }
   return out;
 }
@@ -454,14 +487,22 @@ const CENSUS = Object.freeze([...new Map([
   ...VACANT_HELD, ...VACANT_UNHELD,
 ].map(([settType, seed]) => [seed, [settType, seed]])).values()]);
 
+/** The census's births, each born once, lit (`buildFortune()`, `bornBare`), by whichever of arms (11) and (15) reads it first. @type {Map<string, any>} */
+const CENSUS_BIRTHS = new Map();
+/** @param {string} settType @param {string} seed @returns {any} the census birth of a seed, born on its first read */
+function censusBirthOf(settType, seed) {
+  buildFortune();
+  if (!CENSUS_BIRTHS.has(seed)) CENSUS_BIRTHS.set(seed, bornBare(settType, seed));
+  return CENSUS_BIRTHS.get(seed);
+}
+
 describe('VACANT (11): THE TOOTH, a census of lit births: the holder\'s lines agree with the page\'s seat', () => {
   it('no empty seat carries W1 or W3, no held seat W1v or W3v, and seatHolderFindings returns neither new code', () => {
     let empty = 0;
     let emptyApart = 0;
     // every birth run and collected, never an `each`
     expectNoSeedFailures(collectSeedFailures(CENSUS, ([settType, seed]) => {
-      buildFortune();
-      const s = bornBare(settType, seed);
+      const s = censusBirthOf(settType, seed);
       const vacant = String(governanceAccountOf(s, {})?.text || '').includes(EMPTY_SEAT);
       if (vacant) empty += 1;
       if (vacant && seatHolderApartOf(s.powerStructure.factions, s, s)) emptyApart += 1;
@@ -547,4 +588,53 @@ describe('VACANT (14): THE PATTERNS: each pool\'s patterns find its own filled l
     // anchored: each pattern's own line is required found in this same loop, so the list is live
     expect(faults, 'a pattern that misses its own line or finds another pool\'s').toEqual([]);
   });
+});
+
+describe('VACANT (15): THE WRITER\'S LINES ON LIT BIRTHS: each found by its own pool and no other, on the premises the patterns rest on', () => {
+  it('over arm (11)\'s census: every holder line written is found by a pattern of its own pool in the text that carries it and by no pattern of another pool; no power\'s name begins "They " or carries a full stop', () => {
+    const pools = /** @type {Array<keyof typeof SEAT_HOLDER_PATTERNS>} */ (Object.keys(SEAT_HOLDER_PATTERNS));
+    /** How many written lines were read, by pool. @type {Record<WrittenPool, number>} */
+    const read = { standing: 0, relation: 0, standingVacant: 0, relationVacant: 0 };
+    /** Every miss, cross-find and broken premise on the census, each its own line. @type {string[]} */
+    const faults = [];
+    // every birth run and collected, never an `each`
+    const failures = collectSeedFailures(CENSUS, ([settType, seed]) => {
+      const s = censusBirthOf(settType, seed);
+      /** @type {string[]} */
+      const mine = [];
+      // (ii) THE PREMISES the patterns rest on: a `{holder}` slot reads `(?!They )[^.]+?` and every slot `[^.]+?`, so no
+      // power's name may begin with "They " (it would be read as the standing's pronoun) or carry a full stop (its line's
+      // pattern would stop short of it and miss). Every row's name, and each name in a relation row's pair.
+      const names = [
+        ...(s.powerStructure.factions || []).map((/** @type {any} */ f) => f?.faction),
+        ...(s.powerStructure.factionRelationships || []).flatMap((/** @type {any} */ r) => (Array.isArray(r?.pair) ? r.pair : [])),
+      ].filter((n) => typeof n === 'string');
+      for (const name of new Set(names)) {
+        if (name.startsWith('They ')) mine.push(`${seed}: "${name}" begins with "They "`);
+        if (name.includes('.')) mine.push(`${seed}: "${name}" carries a full stop`);
+      }
+      // (i) THE WRITER'S LINES, read as the judge read them before cure one (`writtenHolderLinesOn`, `holderLinesOn`'s own read):
+      // each is what `seatHolderFindings.js :: holderLineFindings`'s `found` reports (a match, its opening `[.!?] ` cut) for some
+      // pattern of its own pool over the text that carries it, every match taken; and no pattern of another pool finds the line alone
+      for (const { pool, line, text } of writtenHolderLinesOn(s)) {
+        read[pool] += 1;
+        const own = SEAT_HOLDER_PATTERNS[pool].some((re) => [...text.matchAll(new RegExp(re.source, `${re.flags}g`))].some((hit) => hit[0].replace(/^[.!?] /, '') === line));
+        if (!own) mine.push(`${seed}: ${pool} line "${line}" missed by its own pool`);
+        for (const other of pools) {
+          if (other !== pool && SEAT_HOLDER_PATTERNS[other].some((re) => re.test(line))) mine.push(`${seed}: ${pool} line "${line}" found by ${other}`);
+        }
+      }
+      faults.push(...mine);
+      // anchored: the liveness counts below require W3, W1 and W3v read on this census, so the lines checked are live
+      expect(mine.length, `${seed}: misses, cross-finds and broken premises (printed whole below)`).toBe(0);
+    });
+    // anchored: the liveness counts below require W3, W1 and W3v read, each line of them checked in this same loop
+    expect(faults.join('\n'), 'every miss, cross-find and broken premise on the census').toBe('');
+    expectNoSeedFailures(failures, 'the writer\'s holder lines on the census');
+    // LIVENESS (measured, VACANT-15, 2026-11-23): 57 W3, 46 W1, 10 W3v and 6 W1v written lines read on the census
+    expect(read.standing, 'LIVENESS: W3 lines read').toBeGreaterThanOrEqual(1);
+    expect(read.relation, 'LIVENESS: W1 lines read').toBeGreaterThanOrEqual(1);
+    expect(read.standingVacant, 'LIVENESS: W3v lines read').toBeGreaterThanOrEqual(10);
+    expect(read.relationVacant, 'LIVENESS: W1v lines read').toBeGreaterThanOrEqual(1);
+  }, 120_000); // its own budget, as arm (11)'s, carrying the measured figure (VACANT-15, 2026-11-23): 26 ms on arm (11)'s births in a run of this whole file; 19.2 s alone under `-t`, birthing the 135 itself; about 35.2 s on a CI runner (distribution.test.js's measured factor), over the default 20 s
 });
