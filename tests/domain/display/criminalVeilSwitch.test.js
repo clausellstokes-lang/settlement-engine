@@ -31,6 +31,7 @@ import {
   CRIMINAL_VEIL_CLASSES, NOT_CRIMINAL, criminalPartsOf, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings, setCriminalVeil,
 } from '../../../src/domain/display/criminalVeilSwitch.js';
 import { REGISTRY_ROWS } from '../../../src/domain/veil/rosterChoiceRegistry.js';
+import { unkeyPeople, canonPeople, bijectionTeeth } from '../../security/personIdBijection.shared.mjs';
 
 /** The births: two per tier. Seven carry a criminal house or faction (measured 2026-11-19 on 1f501779b). */
 const SEEDS = Object.freeze([
@@ -66,6 +67,13 @@ function minusWithheldAlways(doc) {
 }
 
 /** The counts, for the hand-back (the runner's console is muted): only when VS_TALLY names a file. */
+// VR46 (R4I-PAGE-3, VEIL-38 G1): every non-owner read re-keys its person ids under a salt of its own (VR10), so a guard that
+// pinned a served person id reads the served copy MODULO THE READ'S PERSON-ID BIJECTION AND NOTHING ELSE (`unkeyPeople`), and
+// runs the five teeth (`bijectionTeeth`) over `holds`, the guard's own equality on a served copy.
+const teethOf = (served, reference, holds, again) => {
+  const storedId = (reference?.npcs || []).map(n => n?.id).find(v => v != null);
+  return bijectionTeeth(served, holds, { storedId: storedId == null ? undefined : String(storedId), again });
+};
 const writeTally = (t) => { if (process.env.VS_TALLY) writeFileSync(process.env.VS_TALLY, JSON.stringify(t)); };
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const recs = (v) => (Array.isArray(v) ? v.filter(isRec) : []);
@@ -255,7 +263,14 @@ describe('the switch over a hand-made town', () => {
     const on = setCriminalVeil([], d, false, undefined, m);
     const open = applyVeil(master, resolveVeil(d, on));
     expect(open.powerStructure.factions.map((f) => f.faction), 'the switch on, no house hidden: the power row is served').toEqual(['Red hand']);
-    expect(open.factions[0].members, 'its members, on master\'s top-level list').toEqual([{ id: 'n1', name: 'Ada', role: 'Fence' }]);
+    // VR46 (R4I-PAGE-3): the members' ids read modulo the read's bijection (unkeyPeople), and its five teeth
+    const members = (c) => unkeyPeople(c, master).factions[0].members;
+    expect(members(open), 'its members, on master\'s top-level list').toEqual([{ id: 'n1', name: 'Ada', role: 'Fence' }]);
+    const openAgain = applyVeil(master, resolveVeil(d, on));
+    const sameRead = (c) => JSON.stringify(canonPeople(c).doc) === JSON.stringify(canonPeople(openAgain).doc);
+    const vr34b = teethOf(open, master, (c) => JSON.stringify(members(c)) === JSON.stringify([{ id: 'n1', name: 'Ada', role: 'Fence' }]) && sameRead(c), openAgain);
+    expect(vr34b.missed, 'VR46: every tooth bites').toEqual([]);
+    expect(vr34b.absent, 'VR46: no reference on this town; one card').toEqual(["(i) a reference moved to another person's key", '(i) a reference moved to a key no card holds', '(iv) two people served under one id', '(iv) one person served under two ids']);
     // (3) THE SWITCH ON AND A CRIMINAL HOUSE HIDDEN ELSEWHERE (a second criminal house hidden by hand): withheld whole again
     const m2 = { ...master, institutions: [...master.institutions, { id: 'inst-cove', name: "Smugglers' cove", category: 'Criminal', desc: 'A cove.' }] };
     const d2 = defaultVeilFor(m2);
@@ -304,7 +319,7 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
   it('(a)-(e) hold on every birth, plain and DM-revealing', () => {
     const failures = [];
     const tally = { copies: 0, criminal: 0, corruption: 0, groupings: 0, people: 0, a: 0, b: 0, c: 0, d: 0, e: 0, g: 0 };
-    const teeth = { capture: { tried: 0, caught: 0 }, other: { tried: 0, caught: 0 } };
+    const teeth = { capture: { tried: 0, caught: 0 }, other: { tried: 0, caught: 0 }, vr46: { guards: 0, absent: {} } };
     for (const { seed, born } of births) {
       for (const shareDm of [false, true]) {
         const label = `${seed}${shareDm ? ' dm' : ''}`;
@@ -324,7 +339,10 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         hand = toggleVeilDelta(hand, 'block:rumors.dmTruth', defaults);
         hand = toggleVeilDelta(hand, 'block:services.criminal', defaults);
         if (defaults.some(d => d.address === 'class:npc:corruption')) hand = toggleVeilDelta(hand, 'class:npc:corruption', defaults);
-        const view = (deltas) => applyVeil(pub, resolveVeil(defaults, deltas));
+        // VR46 (R4I-PAGE-3): each served copy is read modulo its own read's person-id bijection (unkeyPeople against `pub`),
+        // so (a), (b) and (c) compare every other byte as they did; their teeth run below
+        const served = (deltas) => applyVeil(pub, resolveVeil(defaults, deltas));
+        const view = (deltas) => unkeyPeople(served(deltas), pub);
         const before = view(hand);
         const hide = setCriminalVeil(hand, defaults, true, present, model);
         const show = setCriminalVeil(hand, defaults, false, present, model);
@@ -368,7 +386,7 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         // the click showed, so it re-derives the other rows' shares, and from the stored percentages, since the served copy
         // already lost `weight` (VR19). So the income shares are compared apart: the show copy carries the projection's own
         // shares, every row present; the rest of every copy is byte-equal.
-        const mask = (copy) => JSON.stringify(applyVeil(copy, criminalPartsOf(defaults, hand, undefined, model)));
+        const mask = (copy) => JSON.stringify(unkeyPeople(applyVeil(copy, criminalPartsOf(defaults, hand, undefined, model)), copy));
         const noShares = (copy) => {
           const c = JSON.parse(mask(copy));
           if (Array.isArray(c.economicState?.incomeSources)) c.economicState.incomeSources = c.economicState.incomeSources.map(r => (isRec(r) ? { ...r, percentage: null } : r));
@@ -379,6 +397,16 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
           && sharesOf(S) === sharesOf(pub)
           && ['tab:plot_hooks', 'block:rumors.dmTruth'].every(a => [hide, show].every(list => list.some(d => d.address === a && d.hidden === false)));
         if (!okC) failures.push(`${label} (c)`); else tally.c += 1;
+        // VR46's five teeth over (b) and (c) as re-stated: the hide copy against the copy before the click, the show copy
+        // against the projection (b) and the copy before the click (c); each on a second read of the same deltas
+        const holdsH = (c) => mask(unkeyPeople(c, pub)) === mask(before);
+        const holdsS = (c) => { const u = unkeyPeople(c, pub); return missingIn(u).length === 0 && noShares(u) === noShares(before) && sharesOf(u) === sharesOf(pub); };
+        for (const [which, deltas, holds] of [['hide', hide, holdsH], ['show', show, holdsS]]) {
+          const { missed, absent } = teethOf(served(deltas), pub, holds, served(deltas));
+          teeth.vr46.guards += 1;
+          for (const a of absent) teeth.vr46.absent[a] = (teeth.vr46.absent[a] || 0) + 1;
+          if (missed.length) failures.push(`${label} (VR46 ${which}): ${missed.join(' | ').slice(0, 300)}`);
+        }
 
         // (d) hide, show, hide is the first hide.
         const again = setCriminalVeil(setCriminalVeil(hide, defaults, false, present, model), defaults, true, present, model);
@@ -410,6 +438,8 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
     expect(teeth.other.tried, 'some copy carries the crime types, or the other teeth prove nothing').toBeGreaterThan(0);
     expect(teeth.capture.caught).toBe(teeth.capture.tried);
     expect(teeth.other.caught).toBe(teeth.other.tried);
+    console.log(`VR46 (R4I-PAGE-3) VS1 teeth: ${JSON.stringify(teeth.vr46)}`);
+    expect(teeth.vr46.guards, 'VR46: the teeth ran on the hide and the show copy of every copy').toBe(48);
     writeTally({ ...tally, teeth });
   }, 600000);
 });

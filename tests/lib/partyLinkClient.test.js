@@ -32,6 +32,21 @@ vi.mock('../../src/lib/supabase.js', () => {
 import { supabase } from '../../src/lib/supabase.js';
 import { fetchPublicDossier } from '../../src/lib/gallery.js';
 import { writeShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { unkeyPeople, bijectionTeeth, readsDiffer } from '../security/personIdBijection.shared.mjs';
+
+// VR46 (R4I-PAGE-3, VEIL-38 G1): every non-owner read re-keys its person ids under a salt of its own (VR10), so two reads of
+// one town are compared MODULO EACH READ'S PERSON-ID BIJECTION AND NOTHING ELSE (`unkeyPeople` against the stored town),
+// they share no person id (tooth (v)), and the five teeth run over the comparison.
+const NO_REFERENCE = ["(i) a reference moved to another person's key", '(i) a reference moved to a key no card holds', '(iv) one person served under two ids'];
+function expectSameModuloBijection(a, b, stored) {
+  expect(unkeyPeople(a, stored)).toEqual(unkeyPeople(b, stored));
+  expect(readsDiffer(a, b), 'VR46 (v): the two reads share no person id').toEqual([]);
+  const holds = (c) => JSON.stringify(unkeyPeople(c, stored)) === JSON.stringify(unkeyPeople(b, stored));
+  const storedId = (stored.npcs || []).map((n) => n?.id).find((v) => v != null);
+  const { missed, absent } = bijectionTeeth(a, holds, { storedId: String(storedId), again: b });
+  expect(missed, 'VR46: every tooth bites').toEqual([]);
+  return absent;
+}
 
 afterEach(() => vi.clearAllMocks());
 
@@ -69,7 +84,7 @@ describe('the party link honours the veil on the client (row (d))', () => {
     const linked = await fetchPublicDossier('u'.repeat(42));
 
     expect(linked.unlisted).toBe(true);
-    expect(linked.settlement).toEqual(listed.settlement);
+    expect(expectSameModuloBijection(linked.settlement, listed.settlement, SETTLEMENT), 'VR46: the teeth this payload cannot build').toEqual(NO_REFERENCE);
     expect(linked.shareDm).toBe(listed.shareDm);
     const printed = JSON.stringify(linked.settlement);
     expect(printed).toContain('patient-with-apprentices');
@@ -147,7 +162,7 @@ describe('R4: the party link fails closed to the default veil', () => {
       id: 'set-1', name: 'Highkeep', tier: 'city', slug: 'u'.repeat(42), unlisted: true,
       dossier: WITH_HOUSEKEEPING, gallery_member_overrides: writeShareVeil({}, []),
     } });
-    expect((await fetchPublicDossier('u'.repeat(42))).settlement).toEqual(linked.settlement);
+    expect(expectSameModuloBijection((await fetchPublicDossier('u'.repeat(42))).settlement, linked.settlement, WITH_HOUSEKEEPING), 'VR46: the teeth this payload cannot build').toEqual(NO_REFERENCE);
   });
   it('an unmarked LISTED gallery page is unchanged (the owner rules on the pre-veil pages)', async () => {
     serve({ galleryRow: {

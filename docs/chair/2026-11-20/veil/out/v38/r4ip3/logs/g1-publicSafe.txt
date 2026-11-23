@@ -1,0 +1,41 @@
+[gate-tail] start:  01:05:59 up 53 min,  0 user,  load average: 8.70, 8.31, 6.92 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+ ❯ tests/domain/display/publicSafe.test.js (59 tests | 1 failed) 532ms
+     × EXISTENCE IS PUBLIC: a card address is never hideable; a card-level delta hides its depth, the card and its identity stay 47ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1) > EXISTENCE IS PUBLIC: a card address is never hideable; a card-level delta hides its depth, the card and its identity stay
+AssertionError: VR46: every tooth bites: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "(v) the second read does not hold modulo the bijection",
++ ]
+
+ ❯ vr46 tests/domain/display/publicSafe.test.js:27:45
+     25|   const storedId = (reference?.npcs || []).map(n => n?.id).find(v => v…
+     26|   const { missed, absent } = bijectionTeeth(served, holds, { storedId:…
+     27|   expect(missed, 'VR46: every tooth bites').toEqual([]);
+       |                                             ^
+     28|   // `absentWanted` null: a property's trial, where the veil may remov…
+     29|   if (absentWanted === null) expect([[], NO_REFERENCE].map(x => JSON.s…
+ ❯ tests/domain/display/publicSafe.test.js:485:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 58 passed (59)
+   Start at  01:06:00
+   Duration  2.35s (transform 1.23s, setup 34ms, import 1.65s, tests 532ms, environment 0ms)
+
+[gate-tail] end:  01:06:02 up 54 min,  0 user,  load average: 9.36, 8.46, 6.98
+[gate-tail] full log: /tmp/gate-tail.13262.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

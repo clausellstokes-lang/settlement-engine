@@ -1,0 +1,56 @@
+   Start at  01:07:42
+   Duration  2.82s (transform 1.87s, setup 31ms, import 2.32s, tests 359ms, environment 0ms)
+
+[gate-tail] end:  01:07:45 up 55 min,  0 user,  load average: 9.87, 8.84, 7.27
+[gate-tail] full log: /tmp/gate-tail.13883.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 1 EXIT=0
+   Start at  01:07:46
+   Duration  2.24s (transform 1.22s, setup 30ms, import 1.66s, tests 347ms, environment 0ms)
+
+[gate-tail] end:  01:07:48 up 55 min,  0 user,  load average: 9.72, 8.83, 7.27
+[gate-tail] full log: /tmp/gate-tail.13942.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 2 EXIT=0
+   Start at  01:07:51
+   Duration  2.46s (transform 1.47s, setup 29ms, import 1.94s, tests 374ms, environment 0ms)
+
+[gate-tail] end:  01:07:53 up 55 min,  0 user,  load average: 9.75, 8.85, 7.29
+[gate-tail] full log: /tmp/gate-tail.13985.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 3 EXIT=0
+   Start at  01:07:54
+   Duration  2.22s (transform 1.14s, setup 26ms, import 1.58s, tests 439ms, environment 0ms)
+
+[gate-tail] end:  01:07:57 up 55 min,  0 user,  load average: 9.69, 8.85, 7.30
+[gate-tail] full log: /tmp/gate-tail.14036.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 4 EXIT=0
+   Start at  01:07:58
+   Duration  2.41s (transform 1.36s, setup 29ms, import 1.85s, tests 343ms, environment 0ms)
+
+[gate-tail] end:  01:08:00 up 55 min,  0 user,  load average: 9.69, 8.85, 7.30
+[gate-tail] full log: /tmp/gate-tail.14086.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 5 EXIT=0
+   Start at  01:08:01
+   Duration  2.54s (transform 1.52s, setup 38ms, import 2.05s, tests 341ms, environment 0ms)
+
+[gate-tail] end:  01:08:04 up 56 min,  0 user,  load average: 9.71, 8.87, 7.31
+[gate-tail] full log: /tmp/gate-tail.14139.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 6 EXIT=0
+   Start at  01:08:05
+   Duration  3.08s (transform 1.82s, setup 36ms, import 2.49s, tests 432ms, environment 0ms)
+
+[gate-tail] end:  01:08:08 up 56 min,  0 user,  load average: 9.97, 8.94, 7.34
+[gate-tail] full log: /tmp/gate-tail.14203.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 7 EXIT=0
+   Start at  01:08:09
+   Duration  2.15s (transform 1.22s, setup 25ms, import 1.63s, tests 408ms, environment 0ms)
+
+[gate-tail] end:  01:08:11 up 56 min,  0 user,  load average: 10.22, 9.01, 7.37
+[gate-tail] full log: /tmp/gate-tail.14295.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+RUN 8 EXIT=0

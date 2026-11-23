@@ -37,6 +37,10 @@
  *   (C) STOP 1: a card's OWN ties (`npcs[].relationships[]`: .from/.to/.npc1Id/.npc2Id/.targetId/.npcId, and the tie's own
  *       .id, kind `tie`) are re-keyed sites, walked after the top-level ties;
  *   (D) the walk's order is otherwise a4b89bf9d's, so a canonical name means what it meant there.
+ * R4I-PAGE-3 (VEIL-38, G1), CHANGED in one place more:
+ *   (E) tooth (ii)'s substring search masks the re-key's own fresh tokens first (`npc_`/`tie_` and 16 hex, not themselves a
+ *       stored id): a stored id that is a PREFIX of a fresh token (a fixture's `npc_2`, `npc_11`; a number's text inside the
+ *       hex) was read as served about one read in eight, a false red; every other occurrence still reds.
  */
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -128,7 +132,12 @@ export function storedIdsServed(served, reference) {
   const ids = cardIds(reference);
   const stored = [...new Set(sites(reference).filter(([h, k, kind]) => kind === 'npc' && rekeyed(h[k], kind, ids)).map(([h, k]) => String(h[k])))].filter((x) => x !== '');
   const out = [];
-  for (const [p, s] of strings(served)) { const id = stored.find((x) => s.includes(x)); if (id !== undefined) out.push(`${p} = ${s}${s === id ? '' : ` (holds ${id})`}`); }
+  const storedSet = new Set(stored);
+  // (E) the re-key's own fresh tokens are masked before the search, so a short stored id that happens to begin a fresh
+  // token (stored `npc_2` and served `npc_2f…`) is not read as served: a stored id served verbatim, or inside any other text,
+  // still reds; a token that IS a stored id is never masked
+  const fresh = (s) => s.replace(/(?:npc|tie)_[0-9a-f]{16}(?![0-9a-z])/g, (t) => (storedSet.has(t) ? t : '\u0000'));
+  for (const [p, s] of strings(served)) { const m = fresh(s); const id = stored.find((x) => m.includes(x)); if (id !== undefined) out.push(`${p} = ${s}${s === id ? '' : ` (holds ${id})`}`); }
   return out;
 }
 

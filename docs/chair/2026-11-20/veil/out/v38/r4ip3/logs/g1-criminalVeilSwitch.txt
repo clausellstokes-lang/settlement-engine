@@ -1,0 +1,31 @@
+[gate-tail] start:  01:09:08 up 57 min,  0 user,  load average: 10.86, 9.46, 7.63 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 23749ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 16497ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: some copy carries the crime types, or the other teeth prove nothing: expected 0 to be greater than 0
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:438:102
+    436|     expect(WITHHELD_ALWAYS.length, 'the registry\'s withhold-always ro…
+    437|     expect(teeth.capture.tried, 'some copy carries the capture, or its…
+    438|     expect(teeth.other.tried, 'some copy carries the crime types, or t…
+       |                                                                                                      ^
+    439|     expect(teeth.capture.caught).toBe(teeth.capture.tried);
+    440|     expect(teeth.other.caught).toBe(teeth.other.tried);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  01:09:09
+   Duration  26.06s (transform 4.55s, setup 34ms, import 1.83s, tests 23.75s, environment 0ms)
+
+[gate-tail] end:  01:09:35 up 57 min,  0 user,  load average: 10.97, 9.64, 7.74
+[gate-tail] full log: /tmp/gate-tail.14645.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT=1

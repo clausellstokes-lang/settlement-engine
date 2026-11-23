@@ -37,6 +37,17 @@ import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { factionIdFromName } from '../../src/lib/entities.js';
 import { useStore } from '../../src/store/index.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { unkeyPeople, canonPeople, bijectionTeeth } from '../security/personIdBijection.shared.mjs';
+
+// VR46 (R4I-PAGE-3, VEIL-38 G1): the gallery veil re-keys every person id under a salt of its own read (VR10), so a guard that
+// found a card by its stored id reads the served copy MODULO THE READ'S PERSON-ID BIJECTION AND NOTHING ELSE (`unkeyPeople`),
+// and runs the five teeth (`bijectionTeeth`) over its own equality on the served copy against a second read (`again`).
+const NO_REFERENCE = ["(i) a reference moved to another person's key", '(i) a reference moved to a key no card holds', '(iv) one person served under two ids'];
+const vr46Teeth = (served, reference, guard, again) => {
+  const same = (c) => JSON.stringify(canonPeople(c).doc) === JSON.stringify(canonPeople(again).doc);
+  const storedId = (reference?.npcs || []).map((n) => n?.id).find((v) => v != null);
+  return bijectionTeeth(served, (c) => guard(unkeyPeople(c, reference)) && same(c), { storedId: String(storedId), again });
+};
 
 const MILLER = {
   id: 'npc_mill', name: 'Edda Marl', role: 'the miller', title: 'the miller', category: 'craft',
@@ -156,9 +167,14 @@ describe('3. the NPC card: the institution line is a door back', () => {
 describe('4. the veil and the public projection hide the join as they hide the card\'s house', () => {
   it('the gallery veil (the NPC card\'s ties eye) removes the row and the door together', () => {
     const veiled = applyVeil(SETTLEMENT, ['field:npc:npc_mill:ties']);
-    const miller = veiled.npcs.find((n) => n.id === 'npc_mill');
+    const unkeyed = unkeyPeople(veiled, SETTLEMENT);
+    const miller = unkeyed.npcs.find((n) => n.id === 'npc_mill');
     expect(miller.name).toBe('Edda Marl');
-    expect(cardInstitutionDoorOf(miller, veiled)).toBeNull();
+    expect(cardInstitutionDoorOf(miller, unkeyed)).toBeNull();
+    const teeth = vr46Teeth(veiled, SETTLEMENT, (u) => { const m = u.npcs.find((n) => n.id === 'npc_mill'); return m?.name === 'Edda Marl' && cardInstitutionDoorOf(m, u) === null; },
+      applyVeil(SETTLEMENT, ['field:npc:npc_mill:ties']));
+    expect(teeth.missed, 'VR46: every tooth bites').toEqual([]);
+    expect(teeth.absent, 'VR46: the teeth this payload cannot build (no reference)').toEqual(NO_REFERENCE);
     const { container } = render(<Dossier settlement={veiled} setActiveTab={vi.fn()}><InstitutionsTab settlement={veiled} /></Dossier>);
     expect(cardOf(container, 'Mill').textContent).toContain('Grain ground');
     expect(container.querySelector('[data-testid="institution-face"]')).toBeNull();
@@ -253,9 +269,13 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
 
   it('the veil and the public projection take the honorific with the house: the name stays bare', () => {
     const veiled = applyVeil(CHURCHED, ['field:npc:npc_parish-church:ties']);
-    const v = veiled.npcs.find((n) => n.id === 'npc_parish-church');
+    const v = unkeyPeople(veiled, CHURCHED).npcs.find((n) => n.id === 'npc_parish-church');
     expect(faceNameOf(v)).toBe('Robert Thomas');
     expect(cardHonorificOf(v)).toBe('');
+    const teeth = vr46Teeth(veiled, CHURCHED, (u) => { const x = u.npcs.find((n) => n.id === 'npc_parish-church'); return !!x && faceNameOf(x) === 'Robert Thomas' && cardHonorificOf(x) === ''; },
+      applyVeil(CHURCHED, ['field:npc:npc_parish-church:ties']));
+    expect(teeth.missed, 'VR46: every tooth bites').toEqual([]);
+    expect(teeth.absent, 'VR46: the teeth this payload cannot build (no reference)').toEqual(NO_REFERENCE);
     // FIX-PUBLIC-VEIL: an open house's honorific prints on the public card as on the DM's
     const pub = toPublicSafe(CHURCHED).npcs.find((n) => n.name === 'Robert Thomas');
     expect(faceNameOf(pub)).toBe('Father Robert Thomas'); // VR47: was 'Pastor'
