@@ -13,7 +13,11 @@ and the split); `lane/veil-37-2026-11-23-r5desc-wip` at eeda6a126 (R5D-SQL-2 bui
 `lane/veil-37-2026-11-23-r5dpage-wip` at eeda6a126 (R5D-PAGE-A building, worktree `/home/user/wt/r5dpage`; not pushed yet). THE LANE'S TIP: af708f2fd on `lane/veil-33-2026-11-22` (N4: a newer tip comes from VEIL-39's re-stated V7-2 pin;
 merged into the -wip before the unit's proofs).
 - (0) THE POOL: chain0 launched 00:20 UTC from VEIL-36's `out/v36/seated/` scripts re-named v37 (`/var/tmp/v18/out/v37/`; pool
-  `/var/tmp/v18/t2/pool-v37`; template `v37tpl`; chain1 after it to `/var/tmp/v18/out/v37/g/done.txt`). Gates: not yet read.
+  `/var/tmp/v18/t2/pool-v37`; template `v37tpl`; chain1 after it to `/var/tmp/v18/out/v37/g/done.txt`; the scripts in `out/v37/seated/`). AT 2bcc53c0a (src/supabase/tests =
+  af708f2fd): pool 8 shards rc=0 (part A 13.9 min, B 8.9); verify 45 / 0 differ; GATE-1 4 of 92 at every gated setting, both reads,
+  twin = server, LOWER BY RULE 7, controls 0; GATE-2 20 cells below 0.05 (off 10, dm 10); server = twin 0 of 112; typecheck 167/167,
+  eslint 0, walkers + manifest 0, arms Tell3+4+5+8 0, --check 0. EQUAL TO PART 35 / 37 (the table `out/v37/seated/tell2-table-2bcc53c0a.txt`
+  differs from VEIL-36's only in wall-clock columns; its exit 1 is the gate's RED verdict on the lane's standing figures). Sent 00:56.
 - (1) R5D-SQL-2 (E136 (a)): brief `briefs/R5D-SQL-2-BRIEF.md`; builder dispatched 00:20 UTC on the -wip. Its acceptance re-runs R5D-SQL's
   own runs (the brief's runner `out/v37/r5dsql2/run.sh`).
 - (2) R5D-PAGE, SPLIT (the chair, 00:23: ACCEPTED, one after the other; no "TIP?" before B's stored arm has run): A (items 0-4, 6-8;
@@ -34,3 +38,4 @@ runner re-run; R5D-PAGE.
 
 ## 3. Log (every hour from `date -u`)
 - 00:20 seated on b5244a6a0; chain0 launched (00:15); read-in; first line to the chair 00:18; R5D-SQL-2's brief and dispatch.
+- 00:44 pool END; 00:53 gates read; 00:56 (0)'s line to the chair (with the 23 composed prose rows' question).
