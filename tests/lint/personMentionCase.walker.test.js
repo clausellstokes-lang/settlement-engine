@@ -30,7 +30,7 @@
  * @enforcement-walker
  */
 import { describe, expect, it } from 'vitest';
-import { FOLLOWER_BY_BEFORE, NO_PRONOUN_TAILS, OBJECT_FOLLOWERS, SUBJECT_FOLLOWERS, followerAt, secondMentions, wordBeforeAt } from '../../src/data/people/personMention.js';
+import { FOLLOWER_BY_BEFORE, NO_PRONOUN_TAILS, OBJECT_FOLLOWERS, OBJECT_STOP_MARK, SUBJECT_FOLLOWERS, followerAt, secondMentions, wordBeforeAt } from '../../src/data/people/personMention.js';
 import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import { GOAL_FAMILY_LINES, GOAL_RESERVE_LINES } from '../../src/data/people/goalFamilies.js';
 
@@ -81,7 +81,8 @@ function classOf(sentence, start, end) {
     const byBefore = FOLLOWER_BY_BEFORE[follower];
     return { follower: `${before} ${follower}`, kase: Object.hasOwn(byBefore, before) ? byBefore[before] : null };
   }
-  return { follower, kase: SUBJECT_FOLLOWERS.has(follower) ? 'subject' : OBJECT_FOLLOWERS.has(follower) ? 'object' : null };
+  // the stop marks are the leaf's one regex literal (PRONOUN-2, CLOSE-5), read beside the Set's words as the leaf reads them
+  return { follower, kase: SUBJECT_FOLLOWERS.has(follower) ? 'subject' : OBJECT_STOP_MARK.test(follower) || OBJECT_FOLLOWERS.has(follower) ? 'object' : null };
 }
 
 /**
@@ -210,6 +211,9 @@ describe('the CONTROLS: each detector catches its planted case', () => {
       .toEqual(['class it: {s} has asked {r} for a word {r} hesitates to give. hesitates']);
     const ambiguous = `${S} has asked ${R} for a word ${R} would never give.`;
     expect(judge('planted', 'a word {r} would', ambiguous, PAIR, cardsFor).unclassed).toEqual(['class it: a word {r} would word would']);
+    // PRONOUN-2 (CLOSE-5): each of the six stop marks is classed object (the leaf's `OBJECT_STOP_MARK`), and only those six
+    for (const mark of [',', '.', ';', ':', '!', '?']) expect(classOf(`${R}${mark}`, 0, R.length)).toEqual({ follower: mark, kase: 'object' });
+    for (const mark of ['—', '…', '"', ')']) expect(classOf(`${R}${mark}`, 0, R.length)).toEqual({ follower: mark, kase: null });
   });
   it('PRINTED: a leaf that prints the object where the class is the subject is red, both genders', () => {
     const text = `${S} has asked ${R} to back a candidate ${R} distrusts.`;
