@@ -22,14 +22,25 @@ const side = (/** @type {PairSide} */ s) => Object.freeze({ ...s, vids: Object.f
 
 /** @type {ReadonlyArray<Readonly<OppositePair>>} */
 export const OPPOSITE_PAIRS = Object.freeze([
-  // FOOD: the food trades fail to put food by, beside a table where food is no worry (v2 and the siege's v5, v6 say both truths).
+  // FOOD: the food trades fail to put food by, beside a table where food is no worry (the siege's v5, v6 stand apart; v2 is
+  // flat for this pair by the chair's final lines, 18a9791b3).
   Object.freeze({ id: 'FOOD',
-    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'CHAIN: food trades failing', vids: [1, 3, 4] }),
+    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'CHAIN: food trades failing', vids: [1, 2, 3, 4] }),
     b: side({ desk: 'economy', position: 'DS-ECO-9', pool: 'SECURE', vids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }) }),
   // WAGES: no money to pay the defenders, beside a town that pays wages for its defence.
   Object.freeze({ id: 'WAGES',
     a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1, 2] }),
     b: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
+]);
+
+/**
+ * THE CLAUSES PINNED AT 0 PAGES: a variant's tail after its first clause cut, which the page never prints (the page cuts the
+ * line there). GEN-17 GARRISONED v2's "and the money is found every season" printed on 0 of the 900 (DISAGREE-PHASE1.md);
+ * the row that makes the source match the page is on the chair's list for after the first deploy.
+ * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide }>>}
+ */
+export const PINNED_TAILS = Object.freeze([
+  Object.freeze({ id: 'GEN-17 GARRISONED v2 tail', side: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
 ]);
 
 const LEAVES = Object.freeze({ defense: DOSSIER_STATE_PROSE_DEFENSE, economy: DOSSIER_STATE_PROSE_ECONOMY, general: DOSSIER_STATE_PROSE_GENERAL });
@@ -89,6 +100,18 @@ export function matchersOf(s) {
   const res = Object.freeze([...sources].map((src) => new RegExp(src)));
   MATCHERS.set(s, res);
   return res;
+}
+
+/**
+ * The pinned tail's matcher: each of the side's texts after its first clause cut (", " "; " ": "), as a template.
+ * @param {PairSide} s @returns {ReadonlyArray<RegExp>}
+ */
+export function tailMatchersOf(s) {
+  return Object.freeze(textsOf(s).map((t) => {
+    const m = /[,;:] /.exec(t);
+    if (!m) throw new Error(`oppositeSentencePairs: no clause cut in "${t}"`);
+    return new RegExp(pattern(t.slice(m.index + 2).trim().replace(/[.!?]$/, '')).source);
+  }));
 }
 
 /** @param {unknown} printProse `buildPrintProse(s, {})` @returns {string[]} every mount's text */

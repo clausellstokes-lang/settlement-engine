@@ -7,6 +7,8 @@
  *          the first N births of every size: no page prints both sides of any row.
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (the five seeds,
  *          which print both sides on the uncured tree) each side of each row is found.
+ *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", which the page
+ *          cuts) prints on 0 pages of ARM 1's births; its matcher matches its own leaf text, and its variant's head prints.
  * The arm "GEN-17 v2 never prints where the guard's pay reads 'short'" is NOT built: phase 1 (i) counted 8 such pages.
  */
 import { describe, expect, it } from 'vitest';
@@ -14,7 +16,9 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
-import { OPPOSITE_PAIRS, matchersOf, oppositePairsOnPage, pageTextsOf, sidePrinted, textsOf } from '../helpers/oppositeSentencePairs.mjs';
+import {
+  OPPOSITE_PAIRS, PINNED_TAILS, matchersOf, oppositePairsOnPage, pageTextsOf, sidePrinted, tailMatchersOf, textsOf,
+} from '../helpers/oppositeSentencePairs.mjs';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const N = 6; // births a size: the file's own budget below
@@ -66,5 +70,24 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
       }
     }
     expect(missing).toEqual([]);
+  }, 120_000); // its own budget: the births of ARM 1, reused
+
+  it('ARM 3: each pinned tail prints on 0 pages, its matcher is live, and its variant\'s head prints', async () => {
+    const printed = [];
+    const headless = [];
+    for (const pin of PINNED_TAILS) {
+      for (const t of textsOf(pin.side)) {
+        expect(sidePrinted(tailMatchersOf(pin.side), [t.replaceAll(/\{[a-zA-Z]+\}/g, 'Drumburn')]), `${pin.id}: the matcher reads its own text`).toBe(true);
+      }
+      let head = false;
+      for (const seed of SEEDS) {
+        const texts = await pageOf(seed);
+        if (sidePrinted(tailMatchersOf(pin.side), texts)) printed.push(`${seed}: ${pin.id}`);
+        if (sidePrinted(matchersOf(pin.side), texts)) head = true;
+      }
+      if (!head) headless.push(pin.id);
+    }
+    expect(printed).toEqual([]);
+    expect(headless, 'the pinned variant prints (cut) on some page of the sample, so the 0 is not vacuous').toEqual([]);
   }, 120_000); // its own budget: the births of ARM 1, reused
 });
