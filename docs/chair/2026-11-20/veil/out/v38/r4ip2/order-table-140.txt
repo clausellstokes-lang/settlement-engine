@@ -1,0 +1,39 @@
+places 140 | hidden-house 92 | controls 48
+twin: SERVED DOCUMENT equal modulo the bijection on two reads: 140 of 140
+twin: served top-level keys that move (places): {}
+twin: served person arrays that move (places): {}
+twin: PRINTED views that move between two reads, by surface (places): {"SHEET/Tonight (Table View)":39}
+twin (the client seam over an unserved row, as rendered): served equal on two reads: 140 of 140
+twin: views rendered per place (min, max): 19 20 | the sheet drawn (places): 140
+twin: places with any printed view moved: 39 of 140
+   r3m-village-insurgency-0-4 SHEET/Tonight (Table View)
+   r3m-town-infiltrated-0-12 SHEET/Tonight (Table View)
+   r3m-town-under_siege-0-28 SHEET/Tonight (Table View)
+   r3m-city-politically_fractured-0-40 SHEET/Tonight (Table View)
+   r3m-metropolis-infiltrated-0-52 SHEET/Tonight (Table View)
+   r3m-metropolis-insurgency-0-64 SHEET/Tonight (Table View)
+   r3m-city-insurgency-1-104 SHEET/Tonight (Table View)
+   r3m-city-politically_fractured-1-120 SHEET/Tonight (Table View)
+   r3m-metropolis-under_siege-1-128 SHEET/Tonight (Table View)
+   r3m-village-wartime-0-9 SHEET/Tonight (Table View)
+   r3m-town-none-0-17 SHEET/Tonight (Table View)
+   r3m-town-wartime-0-29 SHEET/Tonight (Table View)
+server: SERVED DOCUMENT equal modulo the bijection on two reads: 140 of 140
+server: served top-level keys that move (places): {}
+server: served person arrays that move (places): {}
+server: PRINTED views that move between two reads, by surface (places): {"SHEET/Tonight (Table View)":44}
+server: views rendered per place (min, max): 19 20 | the sheet drawn (places): 140
+server: places with any printed view moved: 44 of 140
+   r3m-village-insurgency-0-4 SHEET/Tonight (Table View)
+   r3m-town-infiltrated-0-12 SHEET/Tonight (Table View)
+   r3m-city-under_siege-0-48 SHEET/Tonight (Table View)
+   r3m-metropolis-infiltrated-0-52 SHEET/Tonight (Table View)
+   r3m-metropolis-politically_fractured-0-60 SHEET/Tonight (Table View)
+   r3m-village-politically_fractured-1-80 SHEET/Tonight (Table View)
+   r3m-town-politically_fractured-1-100 SHEET/Tonight (Table View)
+   r3m-city-insurgency-1-104 SHEET/Tonight (Table View)
+   r3m-city-under_siege-1-108 SHEET/Tonight (Table View)
+   r3m-metropolis-under_siege-1-128 SHEET/Tonight (Table View)
+   r3m-metropolis-infiltrated-1-132 SHEET/Tonight (Table View)
+   r3m-metropolis-politically_fractured-1-140 SHEET/Tonight (Table View)
+twin vs server, first reads, served document equal modulo the bijection: 140 of 140 {}
