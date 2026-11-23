@@ -131,3 +131,24 @@ on, counted over 900 places), then a rule of precedence or a shared fact for eac
 trades against the help they draw on, and magic is not a thing any of them needs."; a number slip in "Nobody in Grímtun thinks of the town walls
 as ornament; the town knows what it is for and checks it."; "The steward governs in name" on a page whose office is "the lord's appointee".
 (The third pair read on that town, the empty seat beside its holder, is new with the flip and is cured before it: E131.)
+
+## ADDED BY THE NINTH CHAIR (2026-11-23; each ruled "after the first deploy" in CHAIR-HANDOFF-NINTH.md; written 08:28 UTC)
+
+- THE DOUBLE POSSESSIVE IS A CLASS, NOT FIVE LINES (N75; DAILY-5's find, N40): a possessive is put on a name slot whose
+  value already holds one. READ BY THE CHAIR on the line at 9b0ffaa97: `src/data/institutionalCatalog.js` :1476 and
+  :1477 give the Smuggling network's face as "the network's head" (cities, metropolises), which the tie lines print
+  as "${s.name}'s instructions", "${s.name}'s position" (`src/data/people/handlerTieLines.js`, `src/data/npcData.js`);
+  `src/generators/people/goals.js` :165 maps "lord's steward", "lord's appointee" and "lord's reeve" to "office",
+  printed "the lord's steward's office" (`src/data/people/goalFamilies.js`). THE UNIT: a measure over every printed
+  string of 900 births (the pattern "X's Y's", by the template that composed it); then the cure at the slot's value
+  ("the head of the network"; "the steward's office", as "noble governor" already has "the governor's office"), a
+  walker for the class, the pins by their cause. WHY AFTER: it moves the text of most city births, so it moves the
+  reference records the owner signs; before the deploy that would be a second signing for a wording that is awkward
+  and not wrong. SAID TO THE OWNER, with his veto.
+- "NO MARKET" SAID TWICE ON ONE PAGE (N74; PROSE-6's `map/FLOOR.md`): GEN-13 `NO-MARKET` v11's or v12's bare cut
+  ("{settlement} keeps no market." / "{settlement} has no market.") beside ECO-1 `COMBINATION C4` v6 ("There is no
+  market at {settlement} to hold whatever its road brings, and the thorp stays poor.") on 16 of 900 pages. An echo,
+  not a disagreement.
+- THE STORED STATE SENTENCES ON SHARED PAGES, "(b), THE COMPOSED HOST" (N49): the first deploy serves no
+  `publicProse` on any shared read; (b) re-hosts the 23 `prose.*` rows from withhold-always to a composed host in
+  212 (a new function, 23 rules) with its own security review.
