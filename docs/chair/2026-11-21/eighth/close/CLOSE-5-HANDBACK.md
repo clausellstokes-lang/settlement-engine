@@ -34,6 +34,17 @@ A successor reads those two, then this section, then `FLIP-PLAN.md`.
   times: `metropolisTailedRoll` 189.4 s, FENCE 1 62.9 s: both RAISED in commit 0 by the chair's rule (16 budgets, 15 files).
   "TRIAL b1628d34c" sent. A HOOK MISS, MINE, TOLD TO THE CHAIR: a fresh worktree lacks `.husky/_`, so the scratch's commit and
   push ran no hook; every worktree now gets `ln -s <checkout>/.husky/_ <wt>/.husky/_` before its first commit.
+- THE CHAIR'S 04:59 WORD (this seat at 335,716 by its read at 04:57): BUILDERS BUILD, ONE AT A TIME, each briefed by a
+  committed file; this seat reads each diff once and re-runs; nothing large into its context; at a figure near 600,000 it
+  hands over at the next commit boundary to CLOSE-6. THE BRIEFS, WRITTEN: `close-5/briefs/FLIP-COMMON.md` (the common law) and,
+  in order, `F0-BUDGETS.md`, `F1-DIALS.md`, `F-SEAT.md`, `F-FORTUNE.md`, `F-JOIN.md`, `F9-PREPARED.md`, with the lanes' rows
+  `rows-SEAT.tsv` (29), `rows-FORTUNE.tsv` (39), `rows-JOIN.tsv` (83, the SEAT+FORTUNE three in it). THE DOORS ARE THIS SEAT'S
+  (tool runs, not re-pins), each its own commit: after F-SEAT the goal hashes (`node tests/fixtures/goalHashes.mjs`, its header
+  read first); after F-JOIN the page census (`--write`); after each test-changing commit, if red, the lighting census
+  (`LIGHTING_CENSUS_REFREEZE=<label> npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean
+  committed tree, then plainly).
+- THE ORDER ON THE FLIP BRANCH: F0 budgets; F1 dials; F-SEAT; door goal hashes; F-FORTUNE; F-JOIN; door page census;
+  registers by their doors; F9 twin + sample town; FOR-THE-OWNER.md (this seat). Each builder an Agent of this seat's tier.
 - NEXT, in one line: on "BUILD THE FLIP <tip>", the flip
   branch in `/home/user/wt/flip`: commit 0 the budgets, then `FLIP-PLAN.md` section 1 in order as section 5 rules it.
 
