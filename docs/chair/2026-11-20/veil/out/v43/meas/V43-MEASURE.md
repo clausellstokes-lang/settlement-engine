@@ -1,44 +1,81 @@
-# V43-MEASURE — STOPPED AT THE BUDGET, NOTHING MEASURED (VEIL-43's builder; brief 5de9073eb, amended by the chair's N91)
+# V43-MEASURE: NAMES measured, both forms; DAILY withdrawn (N91) (VEIL-43's second builder; brief 5de9073eb)
+
+The predecessor's notes (commit 4d9f14cd3) are superseded by this file. The instrument (`wd.probe.jsx`, `wd.sh`, `wd-an.mjs`) is
+reused unchanged. The full run's chain is `names-full.sh`. The tables are `wd-table-born.txt` and `wd-table-stored.txt`.
 
 ## STOPS
-1. THE BUDGET (the seat's rule, 2026-11-23): this builder's context leaves under 120,000 of the 350,000. It stops before
-   V43-PAGES and before NAMES' first run. A fresh builder takes both.
-2. No other stop fired. 212 on the joined tree equals the veil tip's (`git -C /home/user/join43 diff 23bb8b8ae HEAD -- supabase`
-   is empty). No server read errored: no run of this probe happened.
+1. A MAP-MEMBER HIT THAT IS NOT THE KNOWN FAULT (`wd-an.mjs` exit 3, both forms). Sent to the seat at 14:05 UTC. THE CHAIR,
+   N104: known, chain A's (R5-DESC, not yet on the lane's tip); nothing built here. Classed below as R5-DESC.
+2. No other stop fired. No server read errored (no document missing on any of the 16,800 reads per form). My own permission check
+   refused nothing. The supabase diff (`git -C /home/user/join43 diff 23bb8b8ae HEAD -- supabase`) is empty.
 
-## WHAT STANDS (committed; never run)
-- `wd.probe.jsx` is the brief's copy of `tell2.probe.jsx`'s `towns` mode: the 140 births, every setting, Reveal off and DM,
-  both engines. Its doors: server gallery, link (`get_unlisted_dossier -> 'dossier'`), import (as reader 2222...), map member
-  (`get_gallery_map #> '{members,0,settlement}'`, via a `saved_maps` row); twin gallery, and twin link (Reveal off). `RV9_FORM=stored`
-  reads `<RV9_STORED_DIR>/<seed>.json` and compares it with the born document byte for byte.
-- NAMES (step 2) is built in. HIDING READ = `withheldAllOf(stored, served)` non-empty. The judgment (`withheldOf`, `withheldAllOf`,
-  `servedNamesOf`, `namesWithheld`, the never-there record) is carried line for line from
-  `tests/security/galleryVeilRecent.pglite.test.js` and checked against that file's bytes at start. `buildNameSearch` is IMPORTED,
-  memoized by its arguments. Withheld ids are power ids, house ids and the ids of stored npcs not served by name; they are matched
-  as whole strings and as keys. Hits go by `norm(path)`. Map-member hits on `prominentRelationship` / `pressureSentence` are
-  LISTED APART (by path; the map member never reads `gallery_share_dm`). Any other map hit makes `wd-an.mjs` exit 3, which is a
-  STOP to the seat.
-- DAILY (step 1) is WITHDRAWN (N91). It is switched off behind `WD_DAILY=1` (b1aeeaedc), never run, left as WIP. With it off,
-  no never-there reads are made.
-- `wd.sh <tree> <outdir> v28tpl <born|stored> [stored dir]` runs 4 shards (databases `v43x_<form>_<s>`). `RV9_PICK=14 WD_SHARDS=1`
-  is THE COST SHARD (10 towns). It was queued twice and withdrawn twice for LOWER7 and LOWER7-B, so NO COST FIGURE EXISTS.
-- THE STORED FORM: the lane's round trip, `out/v33/legacy/dump.sh` + `dump.probe.jsx` at origin/lane/veil-42-2026-11-23-r4ids-wip
-  9f9b819f7, extracted unchanged to `/var/tmp/v18/out/v43/meas/lp-src/` (sha256 83ffd4d2… / d8eca0a2…). Run it with `LP_A=0 LP_B=0
-  LP_POOL=/var/tmp/v18/out/v43/meas/emptypool` (the default pool dir does not exist; never point it at pool-v43). FOR THE SUCCESSOR:
-  `saves.js :: supabaseSave` stores `withPublicProse(withNeighbourNetworkFromRelationship(settlement), composePublicProse(...))`,
-  but dump.probe.jsx composes WITHOUT the neighbour step (it says it is a no-op without a neighbour). The probe counts births with a
-  `neighborRelationship.name` and the stored-vs-born byte equality, so that claim is measured, not assumed. Master-born stored
-  documents are not in this measure.
+## THE COST
+The cost shard (10 towns, born) took 305 s, 80% of it server reads. Extrapolated: about 50 min for both forms; sent to the seat.
+The run itself (13:41 to 14:27 UTC, one mutex hold): the dump took 2 min, born 21 min (4 shards), stored 23 min.
 
-## FOR THE SUCCESSOR, IN ORDER
-Cost shard (born), from /home/user/join43:
-`sh scripts/gate-mutex.sh --run -- sh <meas>/wd.sh /home/user/join43 /var/tmp/v18/out/v43/meas/cost-born v28tpl born`, with
-`WD_SHARDS=1 RV9_PICK=14` (and `GATE_MUTEX_MAX_POLLS=360`: the seat's chains hold the lock for long). Then the dump (stored) and
-both forms in full. R5's named list is NOT in PART30 §1 as a list. §1 names two R5 items: rule 14's six alias paths
-`publicProse.blocks.economy:{daily_life,resources,services}.{incomeMix,criminalLine}` and item (b) `powerStructure.factions[].desc`.
-Mark against those and say so (PLAUSIBLE). The landed point of an OUT path's writer:
-`git -C /home/user/join43 log --format='%h %s' 8f3b8bf4b..9b0ffaa97 -- <writer>`.
+## DOORS READ (by name)
+- Server: `get_gallery_dossier` (gallery), `get_unlisted_dossier -> 'dossier'` (link), `import_gallery_dossier` as reader
+  2222... (import), and `get_gallery_map #> '{members,0,settlement}'` (the map member, through a `saved_maps` row).
+- Twin: gallery (Reveal as set) and link (Reveal off).
+- Every setting `tell-common.mjs :: settings` computes (own, g:000..g:110, allOpen, off), Reveal off and DM, the gate's 140
+  births (92 hidden-house towns, 48 controls).
+
+| form | reads | hiding reads | places with a hiding read | NAMES path patterns | map known fault | map other |
+|---|---|---|---|---|---|---|
+| born   | 16,800 | 11,310 | 95 | 1 | 0 | 40 |
+| stored | 16,800 | 11,310 | 95 | 1 | 0 | 40 |
+
+The stored form is the lane's round trip: `out/v33/legacy/dump.probe.jsx` at 9f9b819f7, run unchanged with LP_A=0 LP_B=0 and
+an empty pool. All 140 stored documents equal the born ones byte for byte (140 same, 0 differ). No birth carries a
+`neighborRelationship.name` (0), so the neighbour step `dump.probe.jsx` skips is a no-op on these 140: MEASURED. Master-born
+stored documents are not in this measure.
+
+## NAMES: every hit, by class (both forms identical)
+| class | path | kind | reads | places | IN R5's list |
+|---|---|---|---|---|---|
+| R5-DESC: cured by chain A's merge | `powerStructure.factions[].desc` | name | 240 | 2 | IN (ruling 32 / 36 (b)) |
+| every other class | (none) | | **0** | 0 | |
+
+THE 240, by seed, row, door and Reveal:
+- r3m-town-none-0-17: the row is the Church's desc ("...they play the Thieves' Guild and the ..."). Withheld: Thieves' Guild,
+  Street gang, Front businesses.
+- r3m-city-none-1-117: the row is the City watch's desc ("...they play the Thieves' Guild and the Co...").
+- Each door and Reveal holds 20 reads: server gallery, link, import and map, and twin gallery and link, each at Reveal off and
+  at DM (12 x 20 = 240).
+- 20 = 2 places x the 10 settings. On the map member this is CONFIRMED: the listing names both seeds at every setting, Reveal off
+  and DM (40 lines). On the other doors the per-seed split is PLAUSIBLE, by the same arithmetic.
+- The map member serves it at the row's Reveal DM too (the map never reads `gallery_share_dm`).
+
+R5's named list is not a list in PART30 section 1 (grep `R5` and "named list"). Section 1 names in prose ruling 32 / 36 (b)
+(`powerStructure.factions[].desc`, `factions[].desc`) and ruling 14's six alias paths
+`publicProse.blocks.economy:{daily_life,resources,services}.{incomeMix,criminalLine}`. The marking is against those
+(PLAUSIBLE). There are NO OUT PATHS, so no writer or landed point is owed.
+
+## dmNote, the DM payload by design (ruled, N104)
+- `powerStructure.factionRelationships[].dmNote` is served on Reveal DM reads only: 870 each on server gallery, server import
+  and twin gallery (2,610 per form; born and stored alike).
+- At Reveal off it is ABSENT on all six door-engine pairs.
+- Even at DM it is absent from the server link and the server map member. The twin's link is read at Reveal off by design.
+- No other owner-ish key (`/audience|owner|^dm|_dm$|dmOnly|dm_only|dmLayer|isDm|gmOnly/i`) is in any served document. The
+  dm-slot key `commoner_resentments_dm` is absent from every served document: 0 per form. (DAILY's slot derivation is withdrawn
+  and was not run.)
+
+## TO RE-RUN
+TO RE-RUN after chain A's tip is merged into the join: NAMES born form must read 0 at `powerStructure.factions[].desc`
+(r3m-town-none-0-17 the Church; r3m-city-none-1-117 the City watch). From /home/user/join43 (about 21 min; if the merge changes
+212, the template must first carry the merged 212):
+`env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_COMMON_DIR -u GIT_OBJECT_DIRECTORY -u GIT_PREFIX -u GIT_NAMESPACE GATE_MUTEX_MAX_POLLS=360 sh scripts/gate-mutex.sh --run -- sh /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v43/meas/wd.sh /home/user/join43 /var/tmp/v18/out/v43/meas/rerun-born v28tpl born`
+Exit 0 and no `HIT` line in `/var/tmp/v18/out/v43/meas/rerun-born/wd-table.txt` is the bar.
 
 ## CONFIRMED vs PLAUSIBLE
-CONFIRMED: the supabase diff is empty; the carried judgment lines are checked by the probe at start (by design; not yet executed).
-Everything else: UNMEASURED.
+CONFIRMED (executed, both forms):
+- the counts above: 1 hit path; other classes 0; map known fault 0; dm-slot key 0; dmNote at DM only, on the three pairs
+  named.
+- stored equals born on all 140.
+- the carried judgment lines matched the test file's bytes at start (the probe throws otherwise).
+- the supabase diff is empty.
+
+PLAUSIBLE:
+- the IN marking (R5's list exists only as prose).
+- the per-seed split of the 240 on the non-map doors.
+- "cured by chain A's merge" is the chair's ruling, not measured here.
