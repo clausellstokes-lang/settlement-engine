@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0ed34e8a64072ba38d710678d17ec2757b516d67",
-  "measuredBy": "DAILY-4",
-  "date": "2026-11-22",
-  "note": "DAILY-4's merge of point 102: the Daily Life lane's test files since point 97 beside the line's: six added (dailyLifeOwnerSlot, dailyLifeFoodResentments, dailyLifeOutsiderUnspokenRecent, dailyLifeOffice, dailyLifeChapterLines, dailyLifePageEight), one removed (dailyLifeOffer, U4b)",
-  "files": 3779,
+  "measuredAtSha": "635e4acee898505f36f5f254fd464df3a453976f",
+  "measuredBy": "DAILY-5",
+  "date": "2026-11-23",
+  "note": "D4C-1 merged (635e4acee): two new test files, tests/domain/dailyLifeNoRepeat.test.js and tests/lint/dailyLifePossessive.walker.test.js, and the re-pointed pins in dailyLife.test.js and dailyLifeGrammar.test.js",
+  "files": 3781,
   "parked": 487,
-  "credited": 3292,
-  "titles": 31890,
-  "suiteTitles": 8863
+  "credited": 3294,
+  "titles": 31900,
+  "suiteTitles": 8865
 }
