@@ -67,6 +67,7 @@ tpl|smoke|towns|pool|insurg|an` (re-pointed) and applies the drafts: the success
 SSKIP: WIP c2ddfd6b2 PUSHED (instrument, figures; nothing in src/ or tests/). Its deciding count (ruling 127) waits for the lock.
 MASTER-BORN STORED (its measure): 140 OTHER rows with no master-written standing get one from S on nothing-hidden reads: ASKED OF
 THE CHAIR (whose; the rule on a master-born page; this seat's lean: a fault by N101, the cure likely N94's lean or a new served fact).
+T5M (measures only, ruling 128): DISPATCHED after 9df9a3e41's push; same worktree and branch as T5; report `out/v40/t5/T5M-HANDBACK.md`.
 THE MUTEX's ORDER is the file `/var/tmp/v18/out/v40/mutex-order.txt` (every builder reads it): RIVAL GO; T5 WAIT; B2 WAIT.
 THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs` (ca72cfd4d, read once:
 additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/var/tmp/v18/t2/pool-v40r`, template `v40rtpl`, out
@@ -196,6 +197,20 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     508, how many equal the never-there page's desc, by kind and template; ALL EQUAL: the seven-skip stands and the cure goes on; ANY
     UNEQUAL: STOP, three sent whole to the chair. CONDITION: the never-there reference drops a rival whose host is gone (N63's closure),
     built into SSKIP's count (its tree lacks RIVAL's rule). Relayed. SSKIP was told: no run outside the mutex (it had begun one).
+128. THE CHAIR, 13:40 (N102): (1) THE MASTER-BORN 140 ARE NOT FAULTS: master's writer ranks on the power step's roster, never settled
+    to the final; THE RULE: on a shared page the standing is the table's own sentence for the served roster, on every read of every
+    document; N101's nothing-hidden pin is for TODAY-BORN documents; on MASTER-BORN documents the difference from the owner's page is
+    LISTED BY CLASS (same kind and slots / another kind or slots / stored none S some / stored some S none), never a fault; no new
+    served fact, no legacy branch in S, `contestsNiche` withheld (both leans refused). ORDERED OF SSKIP in the same lock turn: the
+    deciding count on BOTH pools; the master pool's nothing-hidden 694 by the four classes, three whole examples each. (2) T5 STAYS
+    CHAIN A's: a fresh builder FOR THE MEASURES ONLY (q-chain.sh, no cure): T5M, DISPATCHED (brief addendum 1, 9df9a3e41; worktree
+    `/home/user/wt/t5` at b690dadd2). Lock order after RIVAL's runner: SSKIP's count, then T5M's measures. On T5's paper: (iv) nothing
+    to cure if the towns measure confirms (the four controls lower by rule); (v)(3) N88's STOP LIFTED: 72 (a) (3) runs MADE JOINT
+    (a member only if two or more of 300 show several criminal imports beside ONE criminal power; both counts), else the second
+    import withheld, red first; (v)(2) the SENT crime_wave WITHDRAWN where the signal is false; the measure decides (empty tensions
+    lists among nothing-hidden town births: a handful or more = a member; fewer = STOP); a later statement is LAST over the tensions
+    list in both engines, cleared against R5-TENSION first; (v)(1) as 72 (a) (1) after its precondition count, plus `bnAt` by path on
+    113 and 62 (a served copy in publicProse = STOP); (vi) as written.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -219,3 +234,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 13:08 ruling 126; 13:14 the line sent; turn ended.
 - 13:16 SSKIP's STOP; 13:20 ruling 127; 13:21 relayed.
 - 13:23 T5 handed back (nothing run); T5 and SSKIP WIPs pushed; 13:25 both told the chair.
+- 13:40 ruling 128; 13:45 relayed to SSKIP; T5M's addendum (9df9a3e41) and dispatch.
