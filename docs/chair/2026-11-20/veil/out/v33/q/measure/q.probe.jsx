@@ -66,7 +66,9 @@ it(`V33-Q measure (${MODE})`, async () => {
     const sp = isRec(d.economicState?.safetyProfile) ? d.economicState.safetyProfile : null;
     const sdv = sp ? sp.safetyDesc : undefined;
     const sd = { s: sp === null ? 'nosp' : sdv === undefined ? 'a' : sdv === null ? 'n' : typeof sdv === 'string' ? 'p' : 'o', ev: typeof sdv === 'string' && sdv.includes(EVERYONE) ? 1 : 0,
-      bn: typeof sdv === 'string' && sdv.includes(BENEATH) ? 1 : 0, vs: typeof sdv === 'string' && sdv.startsWith('Visitors can walk anywhere') ? 1 : 0, lbl: sp?.safetyLabel ?? null };
+      bn: typeof sdv === 'string' && sdv.includes(BENEATH) ? 1 : 0, vs: typeof sdv === 'string' && sdv.startsWith('Visitors can walk anywhere') ? 1 : 0, lbl: sp?.safetyLabel ?? null,
+      // (VEIL-40's T5: every OTHER served path whose string holds the beneath clause: the publicProse copies of the safety line)
+      bnAt: (() => { const at = []; const w = (v, p) => { if (typeof v === 'string') { if (v.includes(BENEATH.trim()) && p !== 'economicState.safetyProfile.safetyDesc') at.push(p); } else if (Array.isArray(v)) v.forEach((x) => w(x, `${p}[]`)); else if (isRec(v)) for (const k of Object.keys(v)) w(v[k], p ? `${p}.${k}` : k); }; w(d, ''); return at; })() };
     const hist = isRec(d.history) ? d.history : {};
     const ten = Array.isArray(hist.currentTensions) ? recs(hist.currentTensions).map((t) => [t.type ?? null, S(t.factions), (Array.isArray(t.factions) ? t.factions : []).map(cls).join('+')]) : '#a';
     const imps = Array.isArray(d.economicState?.primaryImports) ? d.economicState.primaryImports : null;

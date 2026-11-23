@@ -65,7 +65,7 @@ for (const size of ['village', 'town', 'city', 'metropolis']) for (const part of
 }
 for (const seed of ['r3m-city-none-1-113', 'r3m-metropolis-infiltrated-0-62']) {
   const t = H.find((x) => x.seed === seed); if (!t) { say(`  ${seed}: NOT IN THE RECORDS`); continue; }
-  const st = {}; for (const eng of ['twin', 'server']) for (const p of Object.values(t[eng] || {})) inc(st, `${eng} s=${p.sd.s} ev=${p.sd.ev} bn=${p.sd.bn}`);
+  const st = {}; for (const eng of ['twin', 'server']) for (const p of Object.values(t[eng] || {})) inc(st, `${eng} s=${p.sd.s} ev=${p.sd.ev} bn=${p.sd.bn} other-paths-holding-the-clause=${J(p.sd.bnAt || [])}`);
   const bs = t.B ? Object.values(t.B.twin).reduce((o, p) => inc(o, `s=${p.sd.s} ev=${p.sd.ev} bn=${p.sd.bn}`), {}) : null;
   say(`  ${seed}: stored ${J(t.stored.sdText)}\n    served (engine state: pages) ${J(st)}\n    house-free twin B stored ${J(t.B?.stored.sdText)}; B pages ${J(bs)}`);
 }
