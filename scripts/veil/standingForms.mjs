@@ -28,6 +28,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'acorn';
 import { powerSentenceName } from '../../src/data/people/powerSentenceName.js';
+import { HIDDEN_POWER_MASK } from '../../src/domain/display/publicSafe.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const DATA_PATH = join(ROOT, 'scripts', 'veil', 'standingForms.data.json');
@@ -41,11 +42,19 @@ export const CHECK_MESSAGE =
 const W1 = "[A-Z][A-Za-z'-]{0,24}";
 const W = "[A-Za-z][A-Za-z'-]{0,24}";
 const WORDS = `${W1}(?: ${W}){0,5}`;
-/** powerSentenceName's output: words only (the first of a slashed pair, a trailing bracket dropped; PROSE_FORMS are words). */
-export const NAME_RE = WORDS;
-/** A raw roster label (master's and older engines named the power so): words, one optional slashed pair, one trailing bracket. */
-export const LABEL_RE = `${WORDS}(?: ?/ ?${WORDS})?(?: [(]${WORDS}[)])?`;
 const META = new Set(['.', '(', ')', '?', '*', '+', '|', '{', '}', '$']);
+// R5D-SQL-2 (VEIL-37, the chair's E136 (a)): THE MASK IN THE NAME SLOT. Where an owner hides a power, the projection writes
+// HIDDEN_POWER_MASK over the hidden power's label in every other string (publicSafe.js :: maskText, an exact split/join of the
+// label), so a name or label slot that named it reads the mask, a fixed lower-case literal, at a sentence head as mid-sentence.
+// Each slot takes that ONE literal as a further choice; never a widened charset. (A name that holds a hidden label after its
+// own capital words, "Free Elder Council" -> "Free an unseen interest", is already words.)
+export const MASK_RE = [...HIDDEN_POWER_MASK].map((c) => (META.has(c) ? `[${c}]` : c)).join('');
+/** powerSentenceName's output: words only (the first of a slashed pair, a trailing bracket dropped; PROSE_FORMS are words);
+ * or the mask. */
+export const NAME_RE = `${WORDS}|${MASK_RE}`;
+/** A raw roster label (master's and older engines named the power so): words, one optional slashed pair, one trailing bracket;
+ * or the mask. */
+export const LABEL_RE = `${WORDS}(?: ?/ ?${WORDS})?(?: [(]${WORDS}[)])?|${MASK_RE}`;
 const FORBIDDEN = /[\\^[\]`]|\$\{/; // no literal may hold these (they cannot be bracket-escaped alike, or break the carriers)
 
 /** A literal, every metacharacter escaped as a one-character bracket ([.]): no backslash, so JSON, a JS template literal and a
@@ -389,7 +398,7 @@ function write() {
   const forms = rows.map((r) => ({ ...r, origins: [...r.origins].sort() })).sort((a, b) => (a.id < b.id ? -1 : 1));
   const dup = forms.map((r) => r.id).filter((id, i, all) => all.indexOf(id) !== i);
   if (dup.length) throw new Error(`standing forms --write: one id on two forms: ${dup.join(', ')}`);
-  const labels = [...SAMPLE_LABELS].sort();
+  const labels = [...SAMPLE_LABELS, HIDDEN_POWER_MASK].sort(); // E136 (a): the mask, a slot's further value
   const names = [...new Set(labels.map(powerSentenceName))].sort();
   const header = { ...HEADER, samples: { names, labels, force }, slotPatterns: { name: NAME_RE, label: LABEL_RE }, master: `${master}@${git('rev-parse', '--short', master).trim()}` };
   const ordered = forms.map((r) => ({ id: r.id, kind: r.kind, slots: r.slots, origins: r.origins, template: r.template, re: r.re, tokens: r.tokens }));
@@ -427,6 +436,8 @@ const HEADER = {
   slots: {
     name: 'powerSentenceName(<a power>) (data/people/powerSentenceName.js), the tip\'s; in a choice with the engine\'s literals',
     label: 'a raw roster label (master and older engines printed f.faction): NAME words, one slashed pair, one trailing bracket',
+    mask: 'E136 (a): a name or label slot also takes the projection\'s mask, the one literal "an unseen interest" (publicSafe.js :: ' +
+      'HIDDEN_POWER_MASK, which maskText writes over a hidden power\'s label), in its own lower case wherever the slot stands',
     force: 'force.body (defense/defenseFacts.js :: forceWordsOf); older engines wrote the literal garrison (a closed form)',
     count: 'LEVEL_COUNT_WORDS[n] at the sentence head (Three..Many)',
     choice: 'a conditional between single phrases inside one sentence ({have|has}, {council vote|decision}, {NAME|the second power})',
