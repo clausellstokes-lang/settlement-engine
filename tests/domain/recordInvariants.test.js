@@ -221,7 +221,7 @@ describe('EM-R0b — recordInvariants: the town\'s own invariants as a module', 
       .toEqual(KNOWN_VIOLATIONS.map((known) => known.corpusKey).sort());
     expect(FLAG_CORPUS.helper, 'the declared table names the corpus it was taught on')
       .toBe('tests/helpers/goldenMasterCorpus.js');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 10.4 s lit in the final census at c1128c8f6; about 19.1 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('EM-R0b A2 — CHECK_META is total both ways, its keys resolve in the register, and a violation carries them', () => {
     expect(CHECK_IDS.length, 'the declared roster').toBe(CHECK_COUNT);

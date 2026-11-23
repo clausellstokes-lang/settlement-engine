@@ -25,7 +25,7 @@ describe('faction power sums to exactly 100 across all tiers', () => {
         const sum = facs.reduce((t, f) => t + (Number(f.power) || 0), 0);
         expect(sum, `${tier} seed ${i} (n=${facs.length})`).toBe(100);
       }
-    });
+    }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 10.2 s lit in the final census at c1128c8f6; about 18.8 s on a CI runner (the measured factor), over three quarters of the default 20 s (the slowest of the six tiers; one budget covers all six)
   }
 
   it('rawPower is preserved for the raw→effective display (legitimacy shift stays visible)', () => {
