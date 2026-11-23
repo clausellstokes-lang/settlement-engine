@@ -92,3 +92,36 @@ until the seat writes to you.
 `out/v40/r5dpage-b/R5DPAGE-B-HANDBACK.md`, section 1 FIRST and kept current: commits, files, every run with its exit and log path,
 `tests/lint` whole's count by family, what is not run. Section 2: what needs a ruling (each a STOP rather than an invention). Last
 message at most 15 lines. MEASURE FIRST; STOP RATHER THAN INVENT.
+
+## ADDENDUM 1 (VEIL-40, after phase 1; governs over "PHASE 2" above where they differ): PHASE 2 IN TWO FRESH BUILDERS, ONE AFTER THE OTHER
+Phase 1 RETURNED (f0a896d73: `out/v40/r5dpage-b/R5DPAGE-B-5B-MEASURE.md`, instrument `r5dpageb-5b.probe.mjs`, `aggregate.mjs`,
+`rivalRows.mjs`, `run.sh`; the setting every read used: the owner's own with every grouping open AND galleryVeilDesc's `shown`).
+Its builder spent about 330,000 tokens; phase 2 is staffed FRESH, in two builders on the same worktree, one after the other. The
+code branch is now 9b1fe3c34: PIN-2 23bb8b8ae (the lane's tip, two test files) merged in. Each reads WHOLE: this brief, the phase-1
+measure file, A's hand-back section 1, `pageRederive.js` (never edited) and the test files it changes; nothing else whole.
+- R5D-PAGE-B2 FIRST: (1) THE STORED POOLS by VEIL-33's instruments (today-born stored AS SAVED with `publicProse`, by
+  `RV9_MODE=stored`; and master-born stored by `dump.sh` in a scratch detached worktree of db832c892): write both to
+  `/var/tmp/v18/t2/stored-v40/{today,master}/` and say their counts and recipe in the hand-back (B3 reads them); (2) ITEM 5c whole
+  (the stored halves of A's plant, fidelity and differential; reader B's differential on the full and stored pools; the
+  `publicProse` COUNT by block key and field); (3) the share-class arm to 107 (1)'s four conditions (phase 1 found the page desc
+  differing on 520 rows, 444 DM reads, 111 records on the full pools: judge them by the four conditions; the pinned standing-slice
+  count 36 on 9); (4) every name arm case-blind; (5) the two stale titles. Its hand-back: `out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`.
+- R5D-PAGE-B3 AFTER B2 RETURNS: ITEM 5 (the table's walker and THE LEGACY ARM on B2's master-born stored pool) and ITEM 5b's ARM
+  (the 13 templates of R5D1-MEASURE M1; T01-T11 and T14 by R5D-0's template patterns, `out/v34/r5d1/measure/templates.mjs` on
+  `lane/veil-34-2026-11-22-r5d1-wip` ee2dbda33, copied as data; hand hides of a power row AND of a house a pick reads; born, act T
+  and the stored half). Its hand-back: `out/v40/r5dpage-b/R5DPAGE-B3-HANDBACK.md`.
+- RULING 107 (3) IS STILL THE CHAIR's: NO CURE of the served rival base (no change to how a rival's base is served, cut or masked).
+  If an arm you build would red on that class, build it, run it, and name the red "107 (3), the chair's" in your hand-back: do not
+  pin it green and do not pin it red-expected without the seat's word.
+- RULING 111 (the chair, 05:17): the stored prose's cure is "(a')" (no `publicProse` served on any shared read; chain C's successor
+  builds it). 5c COUNTS the description-bearing blocks on the tip AS IT STANDS; write the count's arm so that, once (a') is in the
+  tip, it reads 0 by construction and says so (no assertion that the count is non-zero).
+- RULING 112 (the chair, 06:12): (a) `tests/copy` WHOLE is run after your last test change, beside `tests/lint` whole (a ratchet
+  there counts every `!` and em dash inside a string literal of src/data and src/domain); (b) FOR ANY STRING YOU RE-WORD OR REMOVE
+  (the two titles included): grep `tests/` for the old words before your commit; a pin that names them is re-stated in the same
+  commit, by its cause.
+- RULING 110 (the chair, 04:46): the gates' "server = twin" is a shape check only. Where an arm of yours compares the two engines,
+  say WHAT it compares (whole documents value for value, string leaves, rosters, a field) in the hand-back. Build no whole-document
+  arm (one will be ruled later).
+- The tip's ONE known red outside tests/security after PIN-2: `tests/domain/display/criminalVeilSwitch.test.js` "(a)-(e) hold on
+  every birth, plain and DM-revealing": the tip's, named; never cured here.
