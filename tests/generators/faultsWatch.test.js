@@ -61,8 +61,14 @@ const SEEDS = Object.freeze([
   'bar0-hamlet-under_siege-rand-29', 'bar0-hamlet-under_siege-rand-34',
   'r2r-town-5', 'r2r-town-4', // FR19 item 6: a town hall the stamped flag calls a court; the Legal row names none
   'bar0-town-calm-rand-35', 'r2r-town-1', // FR22 (3) item 7: the Holding cells beside a sitting court, and beside a council's bench
-  'bar0-town-calm-rand-30', 'r2s-plague_onset-town-0', 'r2r-town-29', 'bar0-city-wartime-rand-36', // FR25: the court's lines
-  'bar0-metropolis-calm-rand-40', // FR25 (c): the standing's courts beside a courthouse
+  // RE-PICKED BY THE PREMISE (the flip, 2026-11-23, CLOSE-5 F-SEAT), each the lowest of its family of 200 lit by the premise's
+  // own predicate, never the line's words: FR25's NEGATIVE bar0-city-wartime-rand-7 (was -36, whose bitter-history cycle no
+  // longer reaches the judge's index lit): a courthouse on the roster, and the tie cycle draws the judge's index
+  // (bitter_history #3) and the magistrate's (mil_crim_suppression #3); FR25 (c)'s NEGATIVE bar0-metropolis-calm-rand-2 (was
+  // -40, whose form↔holder row U6 rewrites lit, so no standing prints): a courthouse, and the standing "keep(s) enough rights
+  // of its (their) own" prints in either form
+  'bar0-town-calm-rand-30', 'r2s-plague_onset-town-0', 'r2r-town-29', 'bar0-city-wartime-rand-7', // FR25: the court's lines
+  'bar0-metropolis-calm-rand-2', // FR25 (c): the standing's courts beside a courthouse
 ]);
 
 /** @type {Map<string, any>} */
@@ -350,8 +356,8 @@ describe('8 · the court\'s ties print only where a court sits (FR25)', () => {
     });
     expectNoSeedFailures(failures, 'FR25 positives');
   });
-  it('NEGATIVE: where a courthouse sits (bar0-city-wartime-rand-36) both lines still print', () => {
-    const t = BORN.get('bar0-city-wartime-rand-36');
+  it('NEGATIVE: where a courthouse sits (bar0-city-wartime-rand-7) both lines still print', () => {
+    const t = BORN.get('bar0-city-wartime-rand-7');
     expect(courtHoldersOf({ institutions: t.institutions }).length, 'premise: a courthouse on the roster').toBeGreaterThan(0);
     const lines = tieLines(t);
     expect(lines.some((l) => JUDGE.test(l)), 'the judge').toBe(true);
@@ -385,8 +391,8 @@ describe('8 (c) · the standing names courts only where a court sits (FR25 (c))'
     expectAbsentWithAnchor(String(n), WITH, TWIN, 'the standing');
     expect(String(n).replace(TWIN, WITH)).toMatch(/keeps enough rights of its own \(land, courts, levies\) to bargain, not simply obey\.$/);
   });
-  it('NEGATIVE: beside a courthouse (bar0-metropolis-calm-rand-40) the standing keeps its courts', () => {
-    const t = BORN.get('bar0-metropolis-calm-rand-40');
+  it('NEGATIVE: beside a courthouse (bar0-metropolis-calm-rand-2) the standing keeps its courts', () => {
+    const t = BORN.get('bar0-metropolis-calm-rand-2');
     expect(courtHoldersOf({ institutions: t.institutions }).length, 'premise: a courthouse on the roster').toBeGreaterThan(0);
     expect(standings(t).some((x) => x.includes(WITH))).toBe(true);
   });

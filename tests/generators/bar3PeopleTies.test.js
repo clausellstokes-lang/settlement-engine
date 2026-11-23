@@ -41,7 +41,9 @@ const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-hamlet-42', "Ai Li has asked Rong Liu for a vote against the head shepherd's own interests."], // the voter is seated; NAMES-1 (CN2): the role
   ['r2r-hamlet-26', 'Anastasia Borisov and Egor Petrov sit on opposite sides of most questions and vote together'], // one power in common
   ['r2r-hamlet-5', 'Panteleimon Akropolites voted against Dionysios Chomatenos on a small matter last week.'], // one power in common
-  ['r2r-town-14', 'Hassan al-Basri took Badr ibn Khaldun in as an apprentice and taught them the trade'], // the pair shares a trade
+  // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): the pair's mentor tie draws its pool's #5 lit (#3 at the
+  // base, "Hassan al-Basri took Badr ibn Khaldun in as an apprentice and taught them the trade", the pair sharing a trade)
+  ['r2r-town-14', 'Hassan al-Basri vouched for Badr ibn Khaldun when nobody else would.'],
 ]);
 
 /** @type {Record<string, string>} */

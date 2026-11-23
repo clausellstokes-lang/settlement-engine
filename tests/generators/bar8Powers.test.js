@@ -22,7 +22,10 @@ const TOWNS = Object.freeze({
   'bar0-metropolis-calm-rand-45': ['13g'], // C21547: Shadow Senate, the guild has bought key people
   'r2r-city-14': ['13g'], // Corrupt City Council
   'r2s-wartime-city-2': ['13g'],
-  'r2r-city-5': ['13g-'], // NEGATIVE: the hall hunts the guild (adversarial): the war of arrests is the tie
+  // NEGATIVE: the hall hunts the guild (adversarial): the war of arrests is the tie. RE-PICKED BY THE PREMISE (the flip,
+  // 2026-11-23, CLOSE-5 F-SEAT): r2r-city-5's tie reads bought lit; r2r-city-16 is the lowest r2r-city of 200 lit whose
+  // relation rows hold an adversarial capture and none bought (the premise's own predicate, never the war's words)
+  'r2r-city-16': ['13g-'],
   'bar0-city-wartime-rand-47': ['14a'], // C14226: the War Council's "Crown-appointed emergency body"
   'bar0-city-under_siege+famine-rand-46': ['14a'], // the siege's "Emergency committee"
   'r2s-famine-metropolis-2': ['14a'], // "Organised criminal network controls the black market"

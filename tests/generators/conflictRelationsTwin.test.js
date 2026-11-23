@@ -26,7 +26,10 @@ function born(seed) {
 const REFUSED = /** @type {Array<[string, string, string]>} */ ([
   ['r2s-monster_pressure-metropolis-0', 'Grand Merchant Senate', 'Military/Guard'],
   ['r2s-insurgency-metropolis-3', 'Ducal Governorship', 'Military/Guard'],
-  ['r2s-religious_conversion-metropolis-1', 'Grand Merchant Oligarchy', 'Military/Guard'],
+  // RE-PICKED BY THE PREMISE (the flip, 2026-11-23, CLOSE-5 F-SEAT): r2s-religious_conversion-metropolis-1's Grand Merchant
+  // Oligarchy ~ Military/Guard row is drawn 'competitive' lit; metropolis-4 is the lowest of its family (of 200, lit) whose
+  // conflicts hold the seat and the Military/Guard at HIGH beside a symbiotic or dependent row (the premise's own predicate)
+  ['r2s-religious_conversion-metropolis-4', 'Grand Guild Consortium', 'Military/Guard'],
 ]);
 /** @type {Record<string, any>} */
 const births = {};
@@ -51,14 +54,20 @@ describe('TAIL-POWERS-B-2 · P19: a pair at HIGH conflict is not called a stable
       expect(row.narrative).toMatch(/gives the orders and the Guard carries them out/); // KEEP: the bargain stands // NAMES-1 (CN1): the article
     });
   }
-  it('KEEP: every other row of those towns is kept as drawn (no twin where the pair is not at HIGH)', () => {
+  // RE-KEYED TO BAR3-POWERS (the flip, 2026-11-23, CLOSE-5 F-SEAT; the census's cause): the seam twins a bargain beside a
+  // conflict of the pair at ANY intensity (the seam arm below holds it), so a row is kept as drawn where it is no bargain or
+  // the conflicts hold its pair at no intensity (was: at no HIGH), and a bargain held below HIGH must name its quarrel
+  it('KEEP: every other row of those towns is kept as drawn (no twin where the conflicts do not hold a bargain\'s pair; below HIGH the bargain names its quarrel)', () => {
     const failures = collectSeedFailures(REFUSED, ([seed]) => {
       const s = births[seed];
       const highs = (s.conflicts || []).filter((/** @type {any} */ c) => c.intensity === 'high');
       let kept = 0;
       for (const r of s.powerStructure.factionRelationships) {
         const atHigh = highs.some((/** @type {any} */ c) => same(c.parties, r.pair));
-        if (!atHigh || !['symbiotic', 'dependent'].includes(r.type)) {
+        const held = (s.conflicts || []).some((/** @type {any} */ c) => same(c.parties, r.pair));
+        const bargain = ['symbiotic', 'dependent'].includes(r.type);
+        if (bargain && held && !atHigh) expect(r.narrative, `${seed}: ${r.pair}, a bargain below HIGH, names its quarrel (BAR3-POWERS)`).toContain('Even so, the two are now at odds over');
+        if (!held || !bargain) {
           kept += 1;
           expect(r.narrative, `${seed}: ${r.pair} has a drawn narrative`).toMatch(/\S/);
           // anchored: the toMatch(/\S/) above proves this same row's narrative is a live drawn string
