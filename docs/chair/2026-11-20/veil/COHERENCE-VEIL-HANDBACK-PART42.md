@@ -143,6 +143,18 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     the bar's. The N67 sha tables stay a receipt. Cost told the chair: about 2 h on the mutex after the pool and gates (PLAUSIBLE).
     TRIMMED (the chair, 11:49): L1 IS THE INSTRUMENT's TWO DOORS, GALLERY AND LINK, on the 140 and on both stored sets; the import and
     the map member have no twin (held by chain B's door-equality arm in IMPORT-DOOR): build nothing for them; "TIP?" names the two.
+122. THE CHAIR, 12:44 (N94) on B2: (1) "GAP-BASED" = B2's reading (the rank family R1-, R2-, RL-few with M-/H- wordings AND the pair
+    forms AR, RA, CM, MC, MT, NM, GT, TG, RT, GR, ST; not OC-*): the ids written in the arm BY NAME, each with its two figures and
+    threshold; the slice's 36 on 9 RE-RUN; the full stored pool's count pinned beside it (508 rows / 115 records if this reading's);
+    every other difference a fault. (2) STORED FIDELITY 48 = A FAULT OF THE UNIT's OWN READER, CURED IN THE UNIT BEFORE "TIP?": THE
+    RULE: A SHARED PAGE PRINTS NO STANDING THE OWNER's PAGE LACKS: S appends a standing only to a row whose stored desc carried one.
+    A builder with src/ scope on `pageRederive.js`, red first on the 48 and a plant, the never-there differential re-run. THIS SEAT's
+    LINE (sent 12:48): the 48 are T12 rivals; the served fact = the row's base equals one of the seven `RIVAL_DESC_OF_HOST` texts (phase 1:
+    0 natural rows carry one): S skips such a row; 212, twin and registry untouched; the builder confirms first (all 48 T12; no
+    T12-text row ever has a stored standing; no other row lacks one S gives); else the chair's lean (serve `contestsNiche` with its row
+    once the rival rule holds; S skips a row carrying it; 212 + twin + registry row). NO BIRTH MOVES BY A BYTE. (3) THE MARK: the
+    chair's read 377,717 at 12:08 (+55,988 an hour); this seat passes 570,000 near the end of the stacked proof: PART 42 section 1
+    kept current for a successor; a builder's report at most 60 lines; the successor's start message drafted this hour.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -159,3 +171,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 11:36 ruling 120 (PIN-3 b58abc48b), fetched; 11:37 PART 42.
 - 11:44 ruling 121 (L1); the cost told; 11:44 PART 42.
 - 12:07 the chair's push-hygiene rule (`/var/tmp/v18/out/v40/push.sh`, guarded); 12:41 B2 returned; 12:43 pushed, the chair told.
+- 12:44 ruling 122; 12:48 the line on (2) sent.
