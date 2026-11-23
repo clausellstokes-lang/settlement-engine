@@ -37,7 +37,7 @@ const N = Number(process.argv[2] || 150);
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const NAMES = NEWLINES.map(([n]) => n);
 const by = Object.fromEntries(SIZES.map((z) => [z, { FOOD: 0, WAGES: 0, ...Object.fromEntries(NAMES.map((n) => [n, 0])) }]));
-const pairs = {}; const beside = {}; const empty = {}; const tail = []; const ctl = {};
+const pairs = {}; const beside = {}; const empty = {}; const tail = []; const ctl = {}; const old = []; const samples = [];
 // Real installed (pre-cure leaves hold no v7+): a side that names a vid the tree's pool lacks prints nowhere.
 const has = (sd) => { try { H.textsOf(sd); return true; } catch { return false; } };
 for (const settType of SIZES) {
@@ -58,6 +58,8 @@ for (const settType of SIZES) {
     if (printed.some((n) => n.startsWith('W'))) by[settType].WAGES++;
     for (const id of H.oppositePairsOnPage(texts)) (pairs[id] ||= []).push(seed);
     for (const pin of H.PINNED_TAILS) if (H.sidePrinted(H.tailMatchersOf(pin.side), texts)) tail.push(`${seed}: ${pin.id}`);
+    for (const pin of H.PINNED_OLD_WORDS || []) if (H.sidePrinted(H.oldWordsMatchersOf(pin), texts)) old.push(`${seed}: ${pin.id}`);
+    if (['dz-town-2', 'dz-town-36'].includes(seed)) for (const v of D['DS-DEF-2'].pools['Economic Survival: WEAK']) if (H.sidePrinted(H.matchersOf(side('defense', 'DS-DEF-2', 'Economic Survival: WEAK', v.vid)), texts)) samples.push(`${seed}: WEAK v${v.vid} "${v.text}"`);
     for (const p of H.OPPOSITE_PAIRS) for (const k of ['a', 'b']) if (H.sidePrinted(H.matchersOf(p[k]), texts)) { const c = (ctl[`${p.id} ${k}`] ||= []); if (c.length < 6) c.push(seed); }
     const read = { ...factsAnswered(s, crisisAnswered(s, wallsAnswered(s, { slots: { settlement: s.name } }))), audience: 'dm' };
     for (const [cell, pool, key, keyOf] of CELLS) {
@@ -75,5 +77,7 @@ console.log('(c) OPPOSITE_PAIRS pages:', JSON.stringify(Object.fromEntries(Objec
 console.log('(c) BESIDE:', JSON.stringify(beside));
 console.log('(c2) NO CELL LEFT EMPTY:', JSON.stringify(empty));
 console.log('PINNED TAIL pages:', tail.length, tail.slice(0, 5).join(' '));
+console.log('PINNED OLD WORDS pages:', old.length, old.slice(0, 6).join(' | '));
+console.log('SAMPLES:', samples.join(' || '));
 console.log('CONTROL seeds:', JSON.stringify(ctl));
 console.log(`RUN ${((Date.now() - t0) / 1000).toFixed(1)}s, ${N * SIZES.length} births`);
