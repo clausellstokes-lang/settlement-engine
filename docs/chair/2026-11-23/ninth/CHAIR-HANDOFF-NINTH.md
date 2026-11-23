@@ -74,11 +74,13 @@ un-re-keyed reference (N44), R4I-SQL-2, R4I-TONIGHT-2, the proofs, "TIP? R4-IDS"
 SHAPE CHECK ONLY (N48): the whole-document form joins every unit's proofs once the chair has ruled on that measure.
 The hourly check is re-armed each time (the next: trig_014n46rT8RYWctPfG1VbdSTb at 05:52 UTC; its stored prompt names
 the seats and what each owes).
-THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
-there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
-"TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
-`get_gallery_dossier` or `get_unlisted_dossier` (34 files; N33), AND SAYS THE COST LAW'S FIGURE (chain A: 465.0
-against 523.2 ms, thin already: N29).
+THE VEIL LANE'S TIP: 23bb8b8ae1155e948bca4308e479fba7adc8639c on `lane/veil-39-2026-11-23-tip` ("PIN-2", N51: named to
+the three chains at 05:20 UTC). ITS OWN RED LEFT: VS1's tooth (`criminalVeilSwitch.test.js`, `teeth.other.tried` 0):
+cause unread, chain C's successor reads it, the chair rules its cure. EVERY UNIT'S PROOF BEFORE "TIP?" RUNS every test
+file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`, `get_gallery_dossier` or
+`get_unlisted_dossier` (34 files; N33), SAYS THE COST LAW'S FIGURE (chain A: 465.0 against 523.2 ms: N29), AND WILL
+CARRY THE WHOLE-DOCUMENT "server = twin" ONCE THE CHAIR HAS RULED ON ITS MEASURE AT THE TIP (N48). THE STORED PROSE'S
+CURE IS RULED "(a')" (N49): no `publicProse` served on a shared read; VEIL-41 builds it on VEIL-39's hand-over.
 
 WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: section 4 below, and: "CURE <shape>" on VEIL-39's proposal (a
 persisted-shape change is NAMED for the owner), then its successor's seating; VEIL-38's hand-over and VEIL-42's
@@ -828,3 +830,80 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
     since 02:37); CLOSE-5 335,716 ONE HOUR AFTER ITS SEATING, with the flip's build ahead: TOLD AT 04:59 TO PROTECT
     ITS WINDOW: every commit of the flip is A BUILDER's, briefed from `FLIP-PLAN.md`; it reads each diff once;
     nothing large into its context; a successor (CLOSE-6) at a commit boundary if the chair's read nears 600,000.
+- 2026-11-23 05:17 UTC · THE SIXTH HOUR'S FIRST TWENTY MINUTES (each ruling sent to its seat the minute it was made).
+  - VEIL-39's STATUS (05:00, asked by the chair): the class sweep ran at the tip 03:55 to 04:03: 34 files, 2 red
+    (S2; VS1); `galleryVeilSignalCopies` alone 2 red of 5; C2M measured: shape (c) equal on 0 of 1,248
+    nothing-hidden places, recentConflict still held on 1,790, 42 pins red. Nothing failed: its silence was two long
+    runs.
+  - PROSE-6 (05:01): addendum 1 built at its -wip a1a68e155: WAGES 0 on the 900 by `disagree.mjs`, ITS PATTERN
+    UNTOUCHED; dz-town-2 prints v1's new words and dz-town-36 v2's; tooth 6 of 6; pins 3,182 / 3,650 / 2,942 / 718;
+    the house list unmoved; the dark proof equal (f2ecb50c…, 900); the bar's highest 13.3%; first paint 1,184,741 /
+    377,005 / 316,557, the worker 2,709,263, the engine chunk 932,369. ITS STOP RULED AT 05:02: the two calibration
+    pins of `tests/lint/proseMoveGrammar.walker.test.js` CONTROL 4 move by exactly one (`repeatedOpener` 167 to 166;
+    the share pin 155 to 154): CAUSE MEASURED BY THE SEAT: v1's opener "{} is" became "{} has", so DS-DEF-2 WEAK
+    leaves the repeated-opener count: a gain; test-only; the manifest grows by that file.
+  - N49 · "CURE (a')" RULED ON VEIL-39's "C2-PROPOSAL" (930cfb0f4 on lane/veil-39-2026-11-23;
+    `docs/chair/2026-11-20/veil/out/v39/c2/C2-PROPOSAL.md`, 47 lines: READ WHOLE BY THE CHAIR). THE FAULT AS
+    MEASURED (C1, 1,948 stored documents): the served `publicProse` (pp-1, composed at save from the owner's strip)
+    spells withheld rows: `power.recentConflict` in `power:governance` on 1,790 places (its pressureSentence copy on
+    140); `power.stability`'s cause in `overview:identity` on 1,738; three house-hidden recompose rows
+    (guardEffectivenessDesc 228, complexity 37, safetyDesc 23); one unregistered prefix
+    `history.currentTensions[].factions[]` on 18. (c) REFUTED BY ITS MEASURE (C2M): equal on 0 of 1,248
+    nothing-hidden places, 42 pins red, recentConflict still held on 1,790; it over-withholds and under-cures and
+    moves the persisted shape. **Decided:** (a') FOR THE FIRST DEPLOY: no `publicProse` is served on any shared read
+    (212 `_gallery_veil_withhold_always` and the twin's `withholdAlways` drop the key whole; the 23 `prose.*` rows
+    re-hosted to withhold-always; a shared page prints those desks silent, as for a place that stores no prose); THE
+    STORED RECORD IS UNTOUCHED (`{ v: 'pp-1', blocks }`): NO PERSISTED SHAPE MOVES. The unregistered prefix gets its
+    registry row and rule in the same unit (red first; not plainly its sibling's rule = STOP). (b), THE COMPOSED
+    HOST, GOES TO THE LIST FOR AFTER THE FIRST DEPLOY (the seat's lean was (b); its B10 (a) ruling point is ruled
+    then). **Why:** nothing spelled can be served if nothing is served; a few lines, no new host; the proof by value
+    is the absence of one key on both engines in the whole-document form (1,948 documents, every setting, both
+    Reveals), then `prose.sh` with every row held 0; nothing new for the security reader; (b) is a new function in
+    212 with 23 rules, substitution and rows lowered by rule: days on the longest road and a wider review, for a
+    capability production does not have today (PLAUSIBLE by the seat, not measured on production: master stores no
+    prose). **Rejected:** (b) now; (c). **Reversal:** (b) later re-hosts the rows from withhold-always to the
+    composed host; the stored prose is kept in every record meanwhile. **Blast radius:** EVERY SHARED PAGE (gallery
+    and link) CARRIES NO STATE SENTENCES IN THE FIRST DEPLOY: SAID TO THE OWNER WITH HIS VETO; the line's walkers
+    `publicProseEquality` and `publicProseVeilInvariance` are re-stated at the JOIN; chain A's 5c and chain B's
+    stored arm read no prose once this is in the tip; C1's 5,008 absence faults go to 0. "PIN-2" ORDERED NOW with
+    what is proven (S2 and VS1's tooth); `galleryVeilSignalCopies`' two reds, if still red, are NAMED as the tip's
+    own with cause unread and left to the successor. VEIL-39 then hands over; "C2-BUILD (a')" is VEIL-41's (lean, on
+    its two commits).
+  - N50 · THE FLIP'S TRIAL IS CLEAN AND "BUILD THE FLIP" IS GIVEN, PROVISIONAL (CLOSE-5's "TRIAL b1628d34c" at
+    05:12; `close-5/TRIAL-Q8.md` at d8289b9e4; its own runs 04:34 to 05:08 on 5e63f2603 lit): 110 files (84 anchor
+    files + 28 landed since the line; 2 are both), 1,250 tests, 151 red, EVERY ONE A CENSUS ROW, 0 on the red list;
+    `tests/lint` whole the line's three; NO SURPRISE. GONE 2 (153 = 151 + 2): `seatHolderLines` U6 (2) (VACANT mocks
+    fortune dark by default); `dailyLifeNoPeople`'s "every slot text equals the pre-change text" arm (emptied by the
+    Daily Life lane by design; its parity arm green lit): that door drops: the doors are the goal hashes (6) and the
+    page census (1). THE TWO LONE MEASURES (lit, one worker): `metropolisTailedRoll` 189.4 s (x1.84 = 348 s, over
+    nine tenths of 300 s); `espionageDormancyFence` FENCE 1 62.9 s (x1.84 = 116 s, over 108 s; red by its listed row
+    30, a wrong result, not a timeout): BOTH BUDGETS RAISED IN COMMIT 0 as proposed (300,000 to 600,000; 120,000 to
+    240,000), each with its measure in a comment: commit 0 holds 16 budgets in 15 files. Its own catch: a matcher
+    that folded two sibling titles onto one census row (two false GONEs), re-matched one to one before reading.
+    **Decided:** "BUILD THE FLIP 5e63f2603", PROVISIONAL (05:15 UTC): the flip branch `lane/close-5-2026-11-23-flip`
+    is cut at the stack's "DOORS" commit, NOT YET THE LINE, so that the two hours of the stack's long runs are not
+    lost. CONDITIONS: before "FLIP <commit>" the line's tip the chair names is merged in (a descendant expected:
+    PROSE-D and its registers), what the merge touches is re-run and every anchor in a changed file re-read; if the
+    gate drops or changes a lane the chair says so at once and the seat stops at its next commit boundary; each
+    commit a builder's, in the plan's order; a move no list explains STOPS; nothing of the owner's is recorded or
+    signed. **Why:** the trial read the whole anchor set on that very commit with no surprise; the lanes in it
+    passed their own runs and the stack's lint whole; the flip ends in the owner's signings and he is awake now.
+    **Rejected:** waiting for the line to move (two idle hours on a seat that holds one of the six places).
+    **Reversal:** the branch is a lane ref; if the stack changes under it, it is re-cut. **Blast radius:** a
+    builder's work on commits 0 and 1 if a lane were dropped (not expected).
+  - N51 · "PIN-2 23bb8b8ae" ACCEPTED AND THE VEIL LANE'S TIP MOVED (VEIL-39, 05:16; the chair's word at 05:20). READ
+    WHOLE BY THE CHAIR: one parent 2d7ed483f; two test files, +54 -6, no source line: `tests/lib/gallery.test.js` S2
+    in rule (e)'s two halves as N23 ordered (the house listed and shown: the row stays, pinned by its exact value;
+    the house not listed: the block served as [] and the row's words absent, anchored by their presence on the
+    listed read: `tests/helpers/anchoredNegatives.js :: expectPresentThenAbsent`);
+    `tests/security/galleryVeilSignalCopies.pglite.test.js`, the grouping `block:services.criminal` in the same two
+    halves by born town (`server-veil-town-2` accounted; `server-veil-city-2` unlisted): BISECTED BY ITS BUILDER
+    (green at d6d8644b2, red at 369331d72): rule (e)'s own. By the seat's re-run: S2 red at 2d7ed483f, green after
+    (50 of 50); by its builder's: signalCopies 5 of 5 at 23bb8b8ae. THE TIP IS
+    23bb8b8ae1155e948bca4308e479fba7adc8639c ON `lane/veil-39-2026-11-23-tip`: named to VEIL-40 (merge before its
+    proofs), to VEIL-38 for PART 40 (its successor merges), to VEIL-39. LEFT RED AT THE TIP, NAMED: VS1
+    (`tests/domain/display/criminalVeilSwitch.test.js`, "(a)-(e) hold on every birth, plain and DM-revealing":
+    `teeth.other.tried` 0): classed OTHER by the seat, cause unread, not cured: A LIVENESS ANCHOR AT 0 IS A TOOTH
+    THAT CHECKS NOTHING: chain C's successor reads its cause by bisect as a first small act and the chair rules its
+    cure; it does not ride into "R3" unread.
+  - THE CHAIR'S SIXTEENTH PUSH (073b53725) ENDED exit=0 at 05:02 UTC: CONFIRMED from its log and by ls-remote.
