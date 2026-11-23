@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 06:13 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 07:08 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -37,13 +37,18 @@ STACK-106 304,457; CLOSE-5 449,037 (426,693 at 05:46: it slowed); PROSE-6 232,55
 VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its reading).
 - STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`: POINT 106 "DAILY-B"
   (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109 "PRONOUN" (4fa51f422), "DOORS"
-  5e63f2603 (THE CHAIN TO THERE READ BY THE CHAIR ON ORIGIN at 05:37; its INTERIM report for 106 to 109 is in N56);
-  POINT 110 "PROSE-D" merged ab6e2f53f (doors a27ea19d7, ab13c0e70: "DOORS ab13c0e70" at 06:26, READ ON ORIGIN; the
-  merge's tree equals the chair's own trial merge). POINT 111 "PRONOUN-2" 119f419bf ADDed at 06:42 (N60). ONE LATE
-  LANE STILL TO COME by "ADD <branch> <commit> POINT 112": "PROSE-D-2" (PROSE-6: two pins, test-only: N57). THEN "DOORS", ONE BUILD AT
-  THE FINAL TOP, its final message ("CLOSE THE STACK" from the chair ends the wait). THEN THE CHAIR LANDS (E130's
-  form; the facts for the rows are in `/home/user/scratch/chair/landing-106-facts.txt`). BEFORE EACH "ADD" THE CHAIR
-  READS THE DIFF WHOLE AND TRIAL-MERGES IT in `/home/user/wt/trial` (a detached scratch worktree at 5e63f2603).
+  5e63f2603; POINT 110 "PROSE-D" (ab6e2f53f; "DOORS ab13c0e70" at 06:26, READ ON ORIGIN; its tree equals the chair's
+  trial merge). ADDED AND NOT YET REPORTED MERGED: POINT 111 "PRONOUN-2" 119f419bf (06:42: N60) and POINT 112
+  "PROSE-D-2" b443be64b (06:50: N62): EACH READ WHOLE, TRIAL-MERGED AND RUN BY THE CHAIR (38 of 38; 92 of 92). NOTHING
+  ELSE IS COMING. IT OWES: the two merges, the 97-file set and `tests/copy` whole (zero red expected), `tests/lint`
+  whole, "DOORS", ONE BUILD AND `tests/build` AT THE FINAL TOP, its final message. THEN THE CHAIR LANDS (E130's form):
+  verify origin's stack tip and the first-parent chain beyond ab13c0e70; read `raised-top.txt` whole; in
+  `/home/user/wt/line` make the local branch `lane/join-2026-11-14` at 244fa84ef, `git merge --no-ff <tip>` (the
+  join; its tree the gated tip's own), a docs commit of the rows and the gate's sentence in
+  `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`; `safepush.sh /home/user/wt/line lane/join-2026-11-14 <log>` (THE
+  CHAIR'S OWN CHECK JUDGES THE PUSH; A REFUSAL STANDS); then `ci/LINE-NOW.md` and the red list (two rows cured) on this
+  lane, CI by name, "THE LINE IS <commit>" to PROSE-6 and CLOSE-5, the owner told. The facts for the rows are in
+  `/home/user/scratch/chair/landing-106-facts.txt`.
 - CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
   5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
   `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
@@ -53,21 +58,27 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   is next. It owes one line after each commit. It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
   DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: A DRAFT WITH FIVE BLANKS, NOT A START MESSAGE). The owner's
   signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
-- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" (`lane/prose-6-2026-11-23-disagree-wip`) IS POINT 110
-  (N56). IT OWES "PROSE-D-2 <commit>": ONE test-only commit for the two pins its rule 8 did not run (N57:
-  `bar3CorpusGuards` :83; `composeStateProse` :187), with the stack's 97-file set re-run; THEN E132's item (4), a
-  measure only (one table for the owner). It stays seated until its lane lands.
-- VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; SEATED 06:12 UTC on VEIL-38's hand-over e76873832 /
-  f7f1cfe8c; start message `prompts/START-VEIL-42.txt`): lean; the tip merged first; the machine and the pool; THREE
-  MEASURES BEFORE ANY CURE, each sent to the chair: "77" (the diff by path on the 140's 7 places AND the pool's 352
-  reads where server and twin differ), "WHOLE-DOC" (the same comparison at the tip's own code, value for value: ON IT
-  THE CHAIR RULES THE WHOLE-DOCUMENT FORM INTO EVERY UNIT'S PROOFS), "GAP" (every path where a stored person id stands
-  after the re-key); then R4I-SQL-2, R4I-TONIGHT-2 (M is done: 0, 0, 0), the queue, "WRITER-REACH", the proofs, "TIP?
-  R4-IDS". Its first message is due by 06:57 UTC.
-- VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A, R5-DESC; start message `prompts/START-VEIL-40.txt`): builder A's
-  own runs RE-RUN BY THE SEAT and CONFIRMED (05:40); builder B is on ITEM 5b's MEASURE; "PIN-2" merged at B's phase-1
-  return. IT OWES "5b MEASURE", ON WHICH THE CHAIR RULES N35 (3) (the template withheld always; or the rival leaves
-  with its host; or the mask takes the case forms; or the base stands); no "TIP? R5-DESC" before.
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" is point 110 and "PROSE-D-2 b443be64b" point 112 (N56,
+  N57, N62). E132's item (4), THE WIDER MEASURE, IS PUSHED (`map/DISAGREE-ITEM4.md` at 0f7ba293f, read whole by the
+  chair): FOUR MORE CELL PAIRS DISAGREE, on 38 of 900 pages at least. DECIDED (N64, said to the owner with his veto):
+  UNIT "PROSE-E": cured before the first deploy if ready, NEVER GATING IT. IT OWES "E-LINES <commit>" (the four pairs
+  read whole by variant; the cure proposed for each TRUE variant pair): THE CHAIR READS AND RULES THE LINES; it builds
+  only after that AND after "THE LINE IS <commit>", on `lane/prose-6-2026-11-23-e-wip` cut at the line's new tip.
+- VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
+  `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); its
+  machine and pool re-made; BOTH GATES EQUAL TO THE STANDING FIGURES (06:57). RUNNING: builder R4I-MEASURE (the three
+  measures "77" with the pool's 352, "WHOLE-DOC" at the tip's own code, "GAP": each sent to the chair; ON "WHOLE-DOC"
+  THE CHAIR RULES THE WHOLE-DOCUMENT FORM INTO EVERY UNIT'S PROOFS) and, by N59, builder R4I-TONIGHT-2 beside it
+  (disjoint manifests; one heavy run at a time). THEN R4I-SQL-2 from the measure's lists, the queue, "WRITER-REACH",
+  the proofs, "TIP? R4-IDS".
+- VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A, R5-DESC; start message `prompts/START-VEIL-40.txt`): "5b MEASURE"
+  CAME AT 06:57 AND RULING 107 (3) IS CLOSED (N63): THE RIVAL LEAVES WITH ITS HOST (a row minted against a withheld
+  power is withheld the same way at each door; one rule in both engines; the never-there reference takes the same
+  closure): builder "R5D-RIVAL" (212 and the registry whole; red first on the measure's 346 records; the arm is "every
+  served rival has its host served beside it"; A NEW POOL: IF EITHER GATE IS WORSE IT STOPS AND THE CHAIR RULES). IT
+  ALSO OWES: one line on what the owner's screen shows for a rival whose host is hidden (the chair then rules the
+  screen); phase 2 (the legacy arm, the stored arm, the share class's four conditions) with two new measures (5d, 5e).
+  No "TIP? R5-DESC" before. Its code branch `lane/veil-40-2026-11-23-r5desc-wip` holds PIN-2 (9b1fe3c34).
 - VEIL-41 session_01FbPLbd3QgeKoNgJK2yVomF (chain C; start message `prompts/START-VEIL-41.txt`): stands on 5971496d4
   and the tip; its machine is being re-made (about 110 minutes from 05:30). RULED N53: `prose.incomeWeight` re-hosted
   with the 23; `prose.criminal` left. IT OWES: RED FIRST; "VS1 CAUSE" with the candidates; one builder for "C2-BUILD
@@ -92,17 +103,21 @@ file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projec
 CARRY THE WHOLE-DOCUMENT "server = twin" ONCE THE CHAIR HAS RULED ON ITS MEASURE AT THE TIP (N48). THE STORED PROSE'S
 CURE IS RULED "(a')" (N49): no `publicProse` served on a shared read; VEIL-41 builds it. THE TIP PASSES THE PUSH HOOK's TWO TYPE CHECKS (the chair's own run at 05:42 UTC in `/home/user/wt/veiltip`: 167 of 167; 1113 of 1113).
 
-WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: "PROSE-D-2 <commit>" and "PRONOUN-2 <commit>", each read whole,
-trial-merged and ADDed; the line moved after STACK-106's final message, then "THE LINE IS <commit>" to PROSE-6 and
-CLOSE-5 (or CLOSE-6) and CI read by name; VEIL-42's first message and its three measures ruled (the whole-document
-form into every unit); "5b MEASURE" ruled; "VS1 CAUSE" ruled; CLOSE-5's hand-over and CLOSE-6's seating (fill the
-draft's five blanks from CLOSE-5-HANDBACK.md section 0); the sample town's narration read and put to the owner before
-the flip lands. PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT: "You may push the working line when the landing's checks
-pass." (02:47 UTC); his veto on (a') (a shared page carries no state sentences in the first deploy: N49); whether
-the five double possessives are cured before the first deploy. Without his line the chair pushes the working line by
-E130, its own check judges, and a refusal stands. NAMED FOR HIS SIGNING SO FAR IN THIS STACK, SIGNED BY NOBODY: the
-generation worker's size (+4,131 at 5e63f2603), the engine chunk's (+214), the three listed size reds of the state
-sentences (moved again by "PROSE-D"), and one budget raise in a file the golden-freeze register freezes (N56).
+WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: THE LANDING after STACK-106's final message (the seat line above
+says how); "E-LINES <commit>" read and the lines ruled; VEIL-42's three measures ruled (the whole-document form into
+every unit); VEIL-40's builder's return (the gates; the owner's screen line); "VS1 CAUSE" ruled; CLOSE-5's lines after
+each flip commit, then its hand-over and CLOSE-6's seating (fill the draft's five blanks from CLOSE-5-HANDBACK.md
+section 0); the sample town's narration read and put to the owner before the flip lands. A ROW OWED TO THE SECURITY
+READER'S LIST for each of: the share class on the DM door (N35 (1)); the gates' signature being shape-only and the
+whole-document form (N48); the rival's rule and its two open measures (N63); (a') (N49).
+PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT: "You may push the working line when the landing's checks pass." (02:47
+UTC: without it the chair pushes the working line by E130, its own check judges, and a refusal stands). HIS VETOES,
+EACH SAID TO HIM IN PLAIN WORDS: (a') a shared page carries no state sentences in the first deploy (N49); A RIVAL IS
+HIDDEN WITH THE FACTION IT WAS CREATED AGAINST, so he cannot show a rival while hiding its host (N63); THE FOUR MORE
+SENTENCE PAIRS ARE CURED BEFORE THE DEPLOY IF READY, never gating it (N64). STILL HIS TO SAY: whether the five double
+possessives are cured before the first deploy. NAMED FOR HIS SIGNING SO FAR, SIGNED BY NOBODY: the generation
+worker's size (+4,131 at 5e63f2603), the engine chunk's (+214), the three listed size reds of the state sentences
+(moved again by "PROSE-D"), and one budget raise in a file the golden-freeze register freezes (N56).
 
 THE CHAIR'S MACHINE AND HABITS: `/home/user/wt/chair` (this lane; hooks installed; `node_modules` is a link to
 `/home/user/wt/line/node_modules`); EVERY PUSH: `sh docs/chair/2026-11-21/eighth/landing/safepush.sh /home/user/wt/chair
@@ -1172,3 +1187,83 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   THE HOURLY CHECK: done at 06:43, ahead of the task trig_01XTH9zojrxWMK8nfYw4ZoC7 (06:46 UTC); THE NEXT IS NAMED IN
   THE NEXT ENTRY THAT RE-ARMS IT. THE CHAIR'S TWENTY-SECOND PUSH (7a11491dd) ENDED exit=0 at 06:17:06 UTC: CONFIRMED
   from its log and by ls-remote.
+- 2026-11-23 07:08 UTC · N62 · "PROSE-D-2 b443be64b" READ, TRIAL-MERGED, RUN BY THE CHAIR AND ADDED AS POINT 112: THE STACK HAS
+  ALL IT WAITS FOR. PROSE-6's line of 06:46: one commit on 01ecf1e91, two test files, +2 -2: `bar3CorpusGuards` :83
+  (`now` re-pinned to `/nothing laid by to pay for a long defence/`; `gone` untouched; the note stamped
+  CHAIR-2026-11-23-03:55) and `composeStateProse` :187 (3176 to 3182, its cause prepended). RED FIRST at 01ecf1e91 (the
+  two pins and nothing else), green after 92 of 92; no other guard pins the old words (the tooth's own helper pins
+  them at 0 pages on purpose); the stack's set by its run: 95 files, 4 red, all on the list at its base; `tests/lint`
+  whole the line's three. WHY ITS RULE 8 DROPPED THE TWO FILES: its grep named the leaf FILES, and both tests reach the
+  leaves through a built path or the directory's name. READ WHOLE BY THE CHAIR (exactly the two ruled edits). THE
+  CHAIR'S TRIAL MERGE on ab13c0e70 (a scratch worktree, aborted): no conflict; tree af5cc1eaf…; ON IT THE CHAIR RAN THE
+  TWO FILES: 92 of 92 green, exit 0 (06:49 UTC). "ADD ... POINT 112" sent: then "DOORS", the build at the final top,
+  the final message. A LESSON: RULE 8 GREPS FOR A CHANGED FILE'S DIRECTORY AND ITS EXPORTED NAMES TOO. A FAULT OF THE
+  CHAIR, SAID TO THE OWNER BY NAME THE NEXT TURN: at about 06:46 the chair told him "the record is pushed" while its
+  twenty-third push was still in flight; it ended exit=0 at 06:47:42 UTC (origin 937d0a024: its log and ls-remote).
+  ALSO: VEIL-42 at 06:57: its pool re-made on its -wip 9f9b819f7 (8 shards rc 0; verify 45 re-read, 0 differ); BOTH
+  GATES EQUAL TO THE STANDING FIGURES (GATE-1 4 of 92 at every gated setting, both reads, twin 4 and server 4, LOWER
+  BY RULE 7; GATE-2 20; controls 0 of 48); R4I-TONIGHT-2 dispatched with the chair's two conditions in its brief's
+  addendum (015b3c020); R4I-MEASURE running.
+- 2026-11-23 07:08 UTC · N63 · "5b MEASURE": THE ROSTER IS THE TELL; RULING 107 (3) CLOSED: THE RIVAL LEAVES WITH ITS HOST (ruled at
+  about 07:00 UTC; said to the owner with his veto the same turn). VEIL-40's line of 06:57 and builder B's report
+  (`out/v40/r5dpage-b/R5DPAGE-B-5B-MEASURE.md` at f0a896d73 on its code branch, 166 lines: READ WHOLE BY THE CHAIR).
+  THE MEASURE: A's full pool 140, R5-RECENT's full pool 480 and act T; 346 density rivals (a stored row with
+  `contestsNiche`; its host is the row whose `seatKey` is that niche; template T12 where its base is one of
+  `RIVAL_DESC_OF_HOST`'s chosen texts, 71; T13 where its base is the mint's COPY of its host, 275; cities and
+  metropolises only); each host hidden by hand; 2,768 reads on both engines, both doors, Reveal off and DM, with
+  every criminal grouping open and every house shown, so the only hide is the hand's. The stored pool is NOT run.
+  Q1: the served rival base equals the never-there place's on 2,760 of 2,760 reads BY CONSTRUCTION (the never-there
+  reference deletes rows and keeps the copy): NO EVIDENCE. Q2: of 2,680 open rival rows NONE stands without its
+  host; no natural row carries a T12 text (0 of 464 reads lone; 0 of 4,856 open reads); T13's words stand lone on
+  open places on 2,000 of 2,040 reads (1,992 times as the host's own card elsewhere) but under the RIVAL's own name on
+  2 places only, by another cause (the host's base rewritten after the mint); of 29 rival names 26 are never a
+  natural power's. Q3: on the player view the exact or bare name: 0; THE HIDDEN HOST'S NAME IN SENTENCE CASE INSIDE A
+  SERVED RIVAL DESC: 28 hits on 6 places ("Noble families...", "Craft guilds..."), all T13 copies; 8 hits of "A noble
+  family rules" in the seat's own label (act T): another class; 6,972 hits inside other served names (a house's, a
+  membership's, a chain's institution): another class, counted and not judged. One record already drops its rival
+  (r5c2-m3b-metropolis-13, The Grey Council: 8 reads; cause not chased). **Decided:** THE RIVAL LEAVES WITH ITS HOST:
+  wherever a power's row is withheld on a read (by the hand or by rule; at either door, in the host's own way there:
+  absent on the player view, stamped on the DM door) EVERY ROW MINTED AGAINST IT (`contestsNiche` = that host's
+  `seatKey`; closed over) IS WITHHELD THE SAME WAY, with everything a withheld power already takes with it; ONE RULE IN
+  BOTH ENGINES where the withheld set is resolved; THE NEVER-THERE REFERENCE TAKES THE SAME CLOSURE. **Why:** a served
+  rival beside a hidden host is a roster no open place shows, and T13's card spells the hidden host's own description.
+  **Rejected:** the words withheld always and re-derived (the roster still tells); the mask taking the case forms
+  (the kind and the roster still tell); the base standing. **The build:** one builder, "R5D-RIVAL" (212 and the
+  registry whole; it reads the Grey Council record's cause first; RED FIRST on the 346 records; THE ARM IS Q2's OWN
+  SENTENCE, standing on the full pools: every served rival has its host served beside it; Q3's search 0 in every
+  served desc, shown by the arm; E116's steps for 212; A NEW POOL: IF EITHER GATE IS WORSE THAN 4 of 92 or 20 IT
+  STOPS AND THE CHAIR RULES (the served roster is shorter by one more row); the cost law's figure beside its ceiling).
+  THE OWNER'S SCREEN: read after the cure (what the curate model and the screen's offers show for a rival whose host
+  is hidden), one line to the chair, nothing built before. PHASE 2 GAINS TWO MEASURES OF Q2's KIND, NO CURE: (5d) the
+  6,972 hits inside other served names: does an OPEN place serve each form with no such power on its roster? (5e)
+  the seat's label: does an open place with that seat and no Noble Families serve it? A "no" is a finding. NO "TIP?
+  R5-DESC" BEFORE. **Blast radius:** chain A's unit grows by one SQL builder and both gates may move. **Reversal:** one
+  rule out of both engines and of the reference. THE PRODUCT'S COST, SAID TO THE OWNER: he cannot show a rival while
+  hiding its host. A LESSON FOR EVERY VEIL UNIT AND FOR THE SECURITY READER: "EQUAL TO THE NEVER-THERE PLACE" PROVES
+  NOTHING WHERE THE NEVER-THERE PLACE IS ITSELF A ROSTER NO OPEN PLACE SHOWS: Q2's question is asked of every row
+  that exists only because of another.
+- 2026-11-23 07:08 UTC · N64 · THE WIDER MEASURE OF SENTENCES THAT DISAGREE: FOUR MORE PAIRS; UNIT "PROSE-E", NEVER GATING THE DEPLOY
+  (ruled at about 07:10 UTC; the table put to the owner in plain words with his veto the same turn). PROSE-6's line of
+  07:05: E132's item (4) is pushed, measure only (`map/DISAGREE-ITEM4.md` at 0f7ba293f, 43 lines: READ WHOLE BY THE
+  CHAIR). 151 cells classed LACK or SUFFICIENCY over five fact families; 25 cell pairs print together on the 900
+  births; FOUR READ TRUE BY VARIANT (nine variant pairs), ON 38 OF 900 PAGES, A LOWER BOUND (at most eight variant
+  pairs were read a cell pair); no metropolis (27 thorps, hamlets and villages; 11 cities); no walls pair. THE FOUR:
+  trade: DS-GEN-13 `NO-MARKET` v10 beside DS-ECO-10 `POSTURE: established` v5 and v6, 26 pages ("Trade at {settlement}
+  goes as far as neighbours can carry it between themselves." beside "A merchant who comes to {settlement} for one
+  thing usually leaves with two or three."; 142 of that cell pair's 254 pages unread); order: DS-DEF-3 `Unsafe`
+  beside DS-DEF-2 `Internal Security: full legal chain`, 10 pages, cities; food: DS-ECO-9 `PRESSURED` v1 beside DS-DEF-2
+  `CHAIN: food trades working` v1, 1 page; money: DS-DEF-2 `Economic Survival: CRITICAL` v1 beside DS-GEN-17
+  `GARRISONED` v1, 1 page. THE CONTROL, by variant: the registered opposite pairs and the pinned old words print on 0
+  of the 900; the two cured cell pairs read 0 TRUE. The TRUE and NOT readings are the builder's. E132 had said "the
+  rest go to him". **Decided (delegated, vetoable):** THE FOUR TRUE PAIRS ARE CURED BEFORE THE FIRST DEPLOY IF THEY ARE
+  READY AND NEVER GATE IT: unit "PROSE-E", PROSE-6's, by PROSE-D's own means. PHASE 1, on paper, now: the four cell
+  pairs read whole by variant; for each TRUE variant pair the cure proposed (which side takes a mark, which cell it
+  empties, one line that says both truths where a cell empties); the pins, registers and size rows it would move, by
+  name: `lines/DISAGREE-E-LINES.md`, then "E-LINES <commit>": THE CHAIR RULES THE LINES; nothing is built before.
+  PHASE 2 after that ruling AND after "THE LINE IS <commit>": `lane/prose-6-2026-11-23-e-wip` at the line's new tip.
+  **Why:** they are of the kind the owner ordered cured ("Can you fix these:"), the worst prints on 26 of 900 pages
+  where his wage pair printed on 2, and a seat with the tooling has a place. **Why never gating:** the finish line
+  (E30 and his orders) stands as it is. **Reversal:** his veto: the unit stops and the table goes to
+  `intake/AFTER-FIRST-DEPLOY.md` item 15, where the pairs read NOT and the unread pages stay in any case.
+  THE HOURLY CHECK: THE NEXT IS trig_011HB6RMHZ1zbZr1adHa1hBy at 07:43 UTC (the task of 06:46 fired and is answered
+  by N61). THE CHAIR'S TWENTY-THIRD PUSH (937d0a024) ENDED exit=0 at 06:47:42 UTC: CONFIRMED.
