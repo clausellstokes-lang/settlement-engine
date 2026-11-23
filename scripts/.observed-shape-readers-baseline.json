@@ -239,14 +239,14 @@
  "digests": {
   "corpusMeta": "2fc0bed64cd75bee9bf307933c70806bddd7e3bca56bd43f6b10701001c26cf9",
   "inventory": "656a4d0007e96e46337a2ccfbef80d0e105da304c9aeaae4b35e118f0c65415e",
-  "manifests": "c08d059b181ac6c4cff3d7bc8502239b8a0c748cae80120a302ada7adf26716a",
+  "manifests": "19235d6216ae3f3ce535e605a0f72ed4d5e5552a0d889f0860ae8ea94fefdc54",
   "migrationReview": "e534f083e0e955fdb22847606961f18e4bda1cb8092c131f84b753bdd672cf4e",
   "rowTags": "d980efe88e9faed55dad533e43ccf6d4e3ea3dae24aa236375965207828d96f7",
   "scanStats": "3f918d8cd8a4398cb35e25fb2e7451bafa3a383204dd80aafd5e09b365d077ed",
   "sentinel": "aaaf27189328194eed9f9283a5869bc20b53d3a178e591a47e7647bb98661758"
  },
  "frozen": "2026-11-23",
- "frozenAtSha": "41c461008187eb03f0983604316623a444d8ba7a",
+ "frozenAtSha": "9632b6add6371b6f8cf2c0050abd165307f8554e",
  "identities": 1551,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2777,7 +2777,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "874e198255e61354a72c506941d6355e598bf9749ffab7b521dccf4f35fb4f86",
+   "digest": "fa50acc0404d977f94bfdf9e5691b2902ac266b27c1c9dfbf7b3fa33099db147",
    "entries": [
     {
      "mode": "100644",
@@ -7402,15 +7402,15 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/childWarnings.js",
-     "sha256": "39483f08730ce1a930abf2906b1022cbed0e64fc06a522d25e08c77cfd1b820d",
-     "size": 11319,
+     "sha256": "74b9df515c7476a1718b0f88996befc81e50a20bd787f70eb17ecdbc498b8b51",
+     "size": 11874,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/commonerResentments.js",
-     "sha256": "b073d6b82bb16a31750d42b67d7c05fd7176abcaf493061ba7e86279c1177635",
-     "size": 8566,
+     "sha256": "5d0d221685a299e496484a3c8d99bad26ecbe204680752f4af4945b80a25851a",
+     "size": 9683,
      "type": "file"
     },
     {
@@ -7423,8 +7423,8 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/dawnWork.js",
-     "sha256": "3634049904b311cdc6013ae0d7fa47114fd5a4fbfe57e429a2dba97fc1cb9bc3",
-     "size": 14821,
+     "sha256": "b3b393ac4ecde5f132f8124ec0f9dd52bdabb98fa85a57b2332ea1d8db54d5dd",
+     "size": 15424,
      "type": "file"
     },
     {
@@ -7437,22 +7437,22 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/gatheringPlaces.js",
-     "sha256": "71fe25f68e72edcdc218739c71f2695762f7af7f6d921894020cdcd3d0cff49d",
-     "size": 10219,
+     "sha256": "370d9fb63fa3640e56c358a120b335f8a4dd0d01a4319d241249c1360c0a16dd",
+     "size": 12453,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/outsiderImpressions.js",
-     "sha256": "b82ad5dc985234a093f57289f78f353b710823d1b89c68110b742f702441598a",
-     "size": 19178,
+     "sha256": "62d2dcf1b63c5d0ec10b6a0f6bcc74fb26919a60fd7a14ac5231b9cafb04f0ec",
+     "size": 20547,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/recentChanges.js",
-     "sha256": "e32a4de6e42aedbe2f320f3bc4227bf9967f3b599e2d3e4af7daa7cd2cce9589",
-     "size": 25886,
+     "sha256": "0078f4e9a90c1897c9d4a1ec60147353d77d0c3a492116fe1495e9c31b3d2640",
+     "size": 26199,
      "type": "file"
     },
     {
@@ -21361,7 +21361,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "b8df0d87970200b8611947dbb338d4d1e4da35b9493a759984387f42b932a448",
+   "digest": "4847d63710555c49b2b03fe7911c4430260acfd7ef7b0ab31965b3c037cf8e78",
    "entries": [
     {
      "mode": "100644",
@@ -25916,15 +25916,15 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/childWarnings.js",
-     "sha256": "39483f08730ce1a930abf2906b1022cbed0e64fc06a522d25e08c77cfd1b820d",
-     "size": 11319,
+     "sha256": "74b9df515c7476a1718b0f88996befc81e50a20bd787f70eb17ecdbc498b8b51",
+     "size": 11874,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/commonerResentments.js",
-     "sha256": "b073d6b82bb16a31750d42b67d7c05fd7176abcaf493061ba7e86279c1177635",
-     "size": 8566,
+     "sha256": "5d0d221685a299e496484a3c8d99bad26ecbe204680752f4af4945b80a25851a",
+     "size": 9683,
      "type": "file"
     },
     {
@@ -25937,8 +25937,8 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/dawnWork.js",
-     "sha256": "3634049904b311cdc6013ae0d7fa47114fd5a4fbfe57e429a2dba97fc1cb9bc3",
-     "size": 14821,
+     "sha256": "b3b393ac4ecde5f132f8124ec0f9dd52bdabb98fa85a57b2332ea1d8db54d5dd",
+     "size": 15424,
      "type": "file"
     },
     {
@@ -25951,22 +25951,22 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/gatheringPlaces.js",
-     "sha256": "71fe25f68e72edcdc218739c71f2695762f7af7f6d921894020cdcd3d0cff49d",
-     "size": 10219,
+     "sha256": "370d9fb63fa3640e56c358a120b335f8a4dd0d01a4319d241249c1360c0a16dd",
+     "size": 12453,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/outsiderImpressions.js",
-     "sha256": "b82ad5dc985234a093f57289f78f353b710823d1b89c68110b742f702441598a",
-     "size": 19178,
+     "sha256": "62d2dcf1b63c5d0ec10b6a0f6bcc74fb26919a60fd7a14ac5231b9cafb04f0ec",
+     "size": 20547,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/recentChanges.js",
-     "sha256": "e32a4de6e42aedbe2f320f3bc4227bf9967f3b599e2d3e4af7daa7cd2cce9589",
-     "size": 25886,
+     "sha256": "0078f4e9a90c1897c9d4a1ec60147353d77d0c3a492116fe1495e9c31b3d2640",
+     "size": 26199,
      "type": "file"
     },
     {
@@ -39749,7 +39749,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "48c282b08c99a63c57ef1f253163af98c59c2cf6cf7b719dd0dfa4fd8faa13b7",
+   "digest": "0237e487cc5bbae570218df778c6d81f18c982a86d10833f849ff2c1b3e90d0a",
    "entries": [
     {
      "mode": "100644",
@@ -44304,15 +44304,15 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/childWarnings.js",
-     "sha256": "39483f08730ce1a930abf2906b1022cbed0e64fc06a522d25e08c77cfd1b820d",
-     "size": 11319,
+     "sha256": "74b9df515c7476a1718b0f88996befc81e50a20bd787f70eb17ecdbc498b8b51",
+     "size": 11874,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/commonerResentments.js",
-     "sha256": "b073d6b82bb16a31750d42b67d7c05fd7176abcaf493061ba7e86279c1177635",
-     "size": 8566,
+     "sha256": "5d0d221685a299e496484a3c8d99bad26ecbe204680752f4af4945b80a25851a",
+     "size": 9683,
      "type": "file"
     },
     {
@@ -44325,8 +44325,8 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/dawnWork.js",
-     "sha256": "3634049904b311cdc6013ae0d7fa47114fd5a4fbfe57e429a2dba97fc1cb9bc3",
-     "size": 14821,
+     "sha256": "b3b393ac4ecde5f132f8124ec0f9dd52bdabb98fa85a57b2332ea1d8db54d5dd",
+     "size": 15424,
      "type": "file"
     },
     {
@@ -44339,22 +44339,22 @@
     {
      "mode": "100644",
      "path": "src/data/dailyLife/gatheringPlaces.js",
-     "sha256": "71fe25f68e72edcdc218739c71f2695762f7af7f6d921894020cdcd3d0cff49d",
-     "size": 10219,
+     "sha256": "370d9fb63fa3640e56c358a120b335f8a4dd0d01a4319d241249c1360c0a16dd",
+     "size": 12453,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/outsiderImpressions.js",
-     "sha256": "b82ad5dc985234a093f57289f78f353b710823d1b89c68110b742f702441598a",
-     "size": 19178,
+     "sha256": "62d2dcf1b63c5d0ec10b6a0f6bcc74fb26919a60fd7a14ac5231b9cafb04f0ec",
+     "size": 20547,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/data/dailyLife/recentChanges.js",
-     "sha256": "e32a4de6e42aedbe2f320f3bc4227bf9967f3b599e2d3e4af7daa7cd2cce9589",
-     "size": 25886,
+     "sha256": "0078f4e9a90c1897c9d4a1ec60147353d77d0c3a492116fe1495e9c31b3d2640",
+     "size": 26199,
      "type": "file"
     },
     {
@@ -58597,9 +58597,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "4510771aaad7171b24f7d28199255626c9dd37de9015d991904184b37a1fae76",
-  "executionTreeDigest": "874e198255e61354a72c506941d6355e598bf9749ffab7b521dccf4f35fb4f86",
-  "scanTreeDigest": "b8df0d87970200b8611947dbb338d4d1e4da35b9493a759984387f42b932a448",
-  "sourceTreeDigest": "48c282b08c99a63c57ef1f253163af98c59c2cf6cf7b719dd0dfa4fd8faa13b7",
+  "executionTreeDigest": "fa50acc0404d977f94bfdf9e5691b2902ac266b27c1c9dfbf7b3fa33099db147",
+  "scanTreeDigest": "4847d63710555c49b2b03fe7911c4430260acfd7ef7b0ab31965b3c037cf8e78",
+  "sourceTreeDigest": "0237e487cc5bbae570218df778c6d81f18c982a86d10833f849ff2c1b3e90d0a",
   "unscannedInputDigest": "f58695750d0b5538ee6fd1941ec108ef2cbb56a41ec959a21287954b9ec1d6f8"
  },
  "schema": 46,
