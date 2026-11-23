@@ -125,3 +125,14 @@ measure file, A's hand-back section 1, `pageRederive.js` (never edited) and the 
   arm (one will be ruled later).
 - The tip's ONE known red outside tests/security after PIN-2: `tests/domain/display/criminalVeilSwitch.test.js` "(a)-(e) hold on
   every birth, plain and DM-revealing": the tip's, named; never cured here.
+
+## ADDENDUM 2 (VEIL-40, on the chair's N63 of 07:00 UTC; for R5D-PAGE-B3)
+- 107 (3) IS CLOSED: THE RIVAL LEAVES WITH ITS HOST (`briefs/R5D-RIVAL-BRIEF.md`, built by R5D-RIVAL on its own branch). B3 is
+  dispatched only AFTER the seat has merged R5D-RIVAL into the code branch; B3 then takes THE NEVER-THERE REFERENCE in
+  `galleryVeilDesc.pglite` and `galleryVeilRecent.pglite` (`neverThere`) to the same closure (every row whose stored `contestsNiche`
+  is a withheld host's `seatKey`, closed over, leaves with it), with the cause in the commit.
+- B3 GAINS TWO MEASURES OF Q2's KIND, NO CURE (each "no" is a finding to the chair, sent by the seat): (5d) the 6,972 player-view hits
+  inside other served names (phase 1's Q3 "rest of the player view": house names, `npcs[].memberships[].power`, the compound's house
+  list): FOR EACH FORM, does an OPEN place serve it with NO such power on its roster? (5e) act T's seat label "A noble family rules"
+  (Royal Authority, jp6-city-8): does an open place with that seat and NO Noble Families serve the same label? A table each, in B3's
+  hand-back and a measure file `out/v40/r5dpage-b/R5DPAGE-B3-5DE-MEASURE.md`.

@@ -38,12 +38,18 @@ UNIT (2) R5D-PAGE-B: brief `briefs/R5D-PAGE-B-BRIEF.md` (ec23449fc; ADDENDUM 1 a
   words lone on open places (the host's own card elsewhere), under the rival's name lone only on 2 places (host base rewritten); 0 of
   2,680 open rival rows without host; 26 of 29 rival names never natural. Q3: player view exact 0; sentence-case hidden name in a served
   desc 28 hits / 6 places, all T13; r3m-city-none-0-37 NOT reproduced (no Craft Guilds on this tree). Whole documents NOT compared.
-  SENT TO THE CHAIR as "5b MEASURE" (06:5x). 107 (3) AWAITS THE CHAIR's RULING: NO CURE.
+  SENT TO THE CHAIR as "5b MEASURE" (06:5x). 107 (3) RULED (113 below): THE RIVAL LEAVES WITH ITS HOST.
+- R5D-RIVAL (the cure of 113; brief `briefs/R5D-RIVAL-BRIEF.md` a079f6fbd): DISPATCHED ~07:1x UTC, worktree `/home/user/wt/r5rival`,
+  branch `lane/veil-40-2026-11-23-r5rival-wip` cut at 9b1fe3c34; reads 212 + registry whole first; manifest 212, rollback, registry
+  row, the twin's resolve, a new arm `tests/security/galleryVeilRival.pglite.test.js`, its instruments `out/v40/r5drival/`; NOT A's two
+  test files (B2's). At its return: its diff read whole by this seat; its runs re-run; then A NEW POOL AND BOTH GATES on its branch (if
+  worse than 4 of 92 or 20: STOP, the chair rules); the owner's-screen line to the chair; merge into the code branch.
 - PHASE 2 IN TWO FRESH BUILDERS, one after the other (addendum 1): R5D-PAGE-B2 DISPATCHED ~07:0x UTC (stored pools to
   `/var/tmp/v18/t2/stored-v40/{today,master}/`; 5c; share class to 107 (1); case-blind; the two titles; hand-back
-  `out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`); then R5D-PAGE-B3 (item 5 walker + legacy arm; 5b's 13-template arm).
+  `out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`); then R5D-PAGE-B3 AFTER R5D-RIVAL IS MERGED (item 5 walker + legacy arm; 5b's
+  13-template arm; never-there to the closure in A's two files; measures 5d, 5e: brief addendum 2).
 
-UNIT (3) THE PROOFS: not started. NO "TIP?" before B's stored arm has run AND the chair has ruled 107 (3).
+UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
 110. THE CHAIR, 04:46: the gates' "server = twin" is a SHAPE check of the criminal surface only (`tell2-signature.mjs :: signatureOf`); chain
@@ -57,6 +63,16 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before B's stored arm has run AND th
 112. THE CHAIR, 06:12 (N54, N57): `tests/copy` WHOLE joins the proofs before "TIP?"; for any string the unit re-words or removes, grep
     `tests/` for the old words before the builder's commit, a naming pin re-stated in the same unit by cause. The chair's read of this
     seat's record: 240,133 at 05:46. Chain B is VEIL-42; chain C VEIL-41.
+113. THE CHAIR, 07:00 (N63), 107 (3) CLOSED: THE RIVAL LEAVES WITH ITS HOST: wherever a power's row is withheld (hand or rule; absent on
+    the player view, stamped on the DM door), every row minted against it (stored `contestsNiche` = its `seatKey`, closed over) is
+    withheld the same way with all a withheld power takes; one rule in both engines where the withheld set is resolved, before every
+    rule that reads it; the never-there reference takes the closure. Withholding the words, or masking case forms: REJECTED. Built by
+    one fresh builder R5D-RIVAL (212 + registry whole first; first the cause of r5c2-m3b-metropolis-13's dropped Grey Council; red
+    first on the 346 records; GREEN = every served rival has its host served beside it, full pools; Q3's search 0 in every served
+    desc; E116's steps; a NEW POOL, both gates: worse than 4/92 or 20 -> STOP, the chair rules; the cost law's figure). THE OWNER's
+    SCREEN: after the cure, read what the curate model and offers show for a rival whose host is hidden: one line with the builder's
+    return; nothing built. PHASE 2 GAINS (5d) and (5e), measures of Q2's kind, no cure. NO "TIP?" before R5D-RIVAL is in and proved
+    and phase 2 has run. The chair's read of this record: 241,950 at 06:43.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:2x B's brief ec23449fc,
@@ -64,3 +80,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before B's stored arm has run AND th
 - 04:03 (0)'s line to the chair. 04:46 ruling 110. 04:57 chain END. 05:17 ruling 111 (PIN-2). 05:24 / 05:39 A's re-run: CONFIRMED.
 - 06:12 ruling 112. 06:5x B phase 1 returned; 5b MEASURE to the chair; PIN-2 merged (9b1fe3c34), -wip pushed; addendum 1 (928576c43);
   07:02 B2 dispatched.
+- 07:00 ruling 113 (107 (3) closed). 07:1x R5D-RIVAL's brief (a079f6fbd), worktree cut, R5D-RIVAL dispatched; addendum 2 (07:11).
