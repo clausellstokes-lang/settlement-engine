@@ -116,6 +116,29 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
      through the mutex). A builder's WINDOW is its context in tokens, said in figures in the brief's first line (1,000,000; its budget),
      beside what it reads whole; wall time is a separate line. Both briefs' first lines corrected.
 
+40.6 THE CHAIR, 02:38 UTC, on the seat's 02:27 line: R4I-PAGE-3's results TAKEN.
+     (a) THE SIZE RISE IS NAMED FOR THE OWNER, NOT BOUGHT BACK: a ruled first-paint exception, +60 B raw / +14 B gzip (with the
+         Brotli figure), "the criminal switch's one-salt import (R4-IDS, S1)"; the engine chunk +327 B and the worker +43 B named beside
+         it. The seat re-takes no size baseline and signs nothing. THE FOUR VERIFY_DIST REDS GO BY NAME into this file and the "TIP?" as
+         the owner's size signings, each with the module that carries it by the build's own report (measured by a build at af708f2fd
+         beside the -wip's).
+     (b) `src/domain/display/galleryVeilPeople.js` JOINS galleryServerVeil's RULING 4 register, test-only, with its TRUE ROLE. The seat
+         read it: it names `gallery_member_overrides` only in a JSDoc comment (`rekeyServed`'s @param) and writes no row. If it writes
+         the column anywhere: STOP. To R4I-PAGE-4.
+     (c) THE LINK TWIN, TEST-SIDE, in the proof's shared helper, CITING ITS LAW. The seat found it written in 212 ::
+         `get_unlisted_dossier`: `'gallery_share_dm', false`; `_gallery_apply_member_overrides(…, false (settlement_share_dm), …)`;
+         `_gallery_veil(…, true (link))` "an unmarked share takes the default veil (the link's readers are players)". The arm: 36/36
+         plants red AND 36/36 clean link reads green, on both pools; a clean read still differing is a STOP with its path. The anchor
+         is not dropped. To R4I-PAGE-4.
+     (d) THE TIP'S OWN REDS outside tests/security (VS1's crime-types tooth; galleryVeilSignalCopies' two city-2 rows) go into
+         VEIL-39's "PIN-2"; until then they are classed "the tip's, named" (three lines sent 02:4x).
+     (e) `storedIdsServed`'s mask ACCEPTED ON TWO CONDITIONS: (i) it counts, on every document, the STORED ids that have the fresh
+         shape (`npc_`/`tie_` + 16 hex), compares such an id as a whole token (never masked) and reds by name if one exists: the count
+         said on both stored sets (master-born above all), expected 0; (ii) the mask takes whole tokens only, and two plants stay
+         caught (a short stored id served bare; one inside a longer string that is not a fresh token). To R4I-PAGE-4.
+     FOR "TIP?": the cost law's figure beside its ceiling (chain A reads 465.0 against 523.2 ms: thin; this unit adds to the same
+     read); the 34 files run whole on the merged tree, every red named. THE SEAT'S RECORD: 384,201 by the chair's read at 02:22 UTC.
+
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
 - 00:17 chain0 launched on the -wip.
