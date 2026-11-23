@@ -19,21 +19,24 @@ ORIGIN; trust them over memory. A summarized chair, or a fresh chair on this acc
 THE OWNER'S WORDS THAT GOVERN, newest first (verbatim in section 1 and in the eighth handoff's section 1): "I defer all
 decisions to you" (2026-11-23: the chair decides; NEVER read as a grant of the merge, the deploy, a migration, a
 credential, a signing or a permission setting); SIX CHILDREN WORK AT A TIME; "Can you fix these:"; "Fix all:". He is
-answered first and in full, in very simple words. He has not written since.
+answered first and in full, in very simple words. His last word is the line he typed to STACK-106 at 02:37 UTC (below).
 
-ONE THING IS OPEN WITH HIM, AND ONLY HE CAN DO IT: one line typed BY HIM in STACK-106's own session
-(https://claude.ai/code/session_01FbPLbbPKhMeTbvdP2ZQmPt). Both permission checks refused the merge of 4e7fa5667 (N9:
-the seat's; N13: the chair's own commit of it, "Undermining Oversight": its text ends "Let the user decide how to
-proceed"). Asked of him since 00:35 UTC as "You may merge 4e7fa5667 into your branch. Go ahead." THE CHAIR MAKES NO
-MERGE FOR A SEAT WHOSE CHECK REFUSED IT, RE-SEATS NO SEAT TO GET ANOTHER VERDICT, AND CHANGES NO PERMISSION SETTING.
-If he writes to STACK-106, it goes on from its prompt and sends "STACK-106 MERGED <commit>". THE NEXT STACK: N30 in
-section 5.
+NOTHING IS OPEN WITH HIM NOW. THE OWNER WROTE IN STACK-106's OWN SESSION at 02:37 UTC (read from that session's record
+by a helper: a user event from the iOS client, with no cross-session marker): "You may merge the lanes the chair names
+into your branch. Go ahead." IT GRANTS STACK-106's merges, into its own branch, of the lanes the chair names by "ADD",
+AND NOTHING ELSE: no grant to any other seat or to the chair, and never of the pull request's merge, the deploy, a
+migration, a credential, a signing or a permission setting. The refusals of 00:11 and 00:32 UTC (N9, N13) are history;
+N13's three NEVERs stand: THE CHAIR MAKES NO MERGE FOR A SEAT WHOSE CHECK REFUSED IT, RE-SEATS NO SEAT TO GET ANOTHER
+VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens; where that
 reads 0, the newest result event of the seat's record: last iteration: input + cache read + cache creation). Figures
 of 02:22 UTC:
-- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: PARKED at 244fa84ef (npm ci done; the ledger ref set). 172,763.
+- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: LANDING. Point 106 "DAILY-B" merged (2f3d614ac, checked on origin by
+  the chair); "ADD ... 4ef6d6c32 POINT 107" (VACANT) sent 02:43 UTC; it goes on through step d and the gate without
+  waiting; more by "ADD" (PRONOUN, PROSE-D, DAILY-C). It owes "DOORS <commit>" and its final message; THEN THE CHAIR
+  MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name). 172,763.
 - VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE (02:12); owes "PIN-2 <commit>" (N23) and the C2
   proposal file ((a'), (b) alone, (c)+(b); the table of the 23 `prose.*` rows; the chair's questions (i) to (v)).
   C2-BUILD IS ITS SUCCESSOR'S. 494,348.
@@ -49,8 +52,9 @@ of 02:22 UTC:
   IS ASKED AT ITS NEXT MESSAGE whether its context was summarized).
 - CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: "VACANT 4ef6d6c32" TAKEN FOR LANDING (N25); building PRONOUN with its
   neighbour ruled (N26 as amended by N28). 344,073.
-- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: lines final; its builder writes the cure and the proofs: "PROSE-D
-  <commit>". 275,202.
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: lines final; its builder writes the cure and the proofs. TOLD AT 02:43 UTC
+  TO PARK AT ITS BUILDER'S RETURN (seven would work); "GO PROSE-6" when a place frees (VEIL-39's place goes to chain
+  C's builder first; then CLOSE-4's or DAILY-5's finish). Then "PROSE-D <commit>", a late "ADD". 275,202.
 THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); a second
 test-only commit (PIN-2) is expected there: read its diff whole, then name "TIP <commit> on <branch>" to the three
 chains AND RULE INTO EVERY UNIT'S PROOF BEFORE "TIP?" THE 34 "VR46" FILES outside tests/security that call the veil's
@@ -94,8 +98,13 @@ helper, never into the chair's context. `/home/user/wt/line` is a clean worktree
   between those two is the chair's; the chair took the second (N12). NOT READ AS a grant of anything that stays his
   hand: THE PULL REQUEST'S MERGE, THE DEPLOY, EVERY MIGRATION, PRODUCTION CREDENTIALS, goldens, reference signings,
   tuning signatures, size rises, AND EVERY PERMISSION SETTING. Said to him in those words the same turn.
-- PUT TO HIM, OPEN: one line typed BY HIM in STACK-106's own session ("You may merge 4e7fa5667 into your branch. Go
-  ahead."), because both permission checks refused the landing's merge (N9, N13).
+- **2026-11-23 02:37 UTC, the owner, IN STACK-106's OWN SESSION (session_01FbPLbbPKhMeTbvdP2ZQmPt; verbatim, the whole
+  message; read from that session's record by a helper: a user event from the iOS client, with no cross-session
+  marker; the record has no field that says outright who typed it):** "You may merge the lanes the chair names into
+  your branch. Go ahead." It is the line the chair had put to him (from 00:35 UTC as "You may merge 4e7fa5667 into
+  your branch. Go ahead."; in this wording at 02:35 UTC), because both permission checks had refused the landing's
+  merge (N9, N13). READ AS: STACK-106 may merge into its own branch the lanes the chair names. NOT READ AS a grant to
+  any other session, nor of anything that stays his hand.
 - Every standing directive of the eighth handoff's section 1 stands (six children at a time; reports in very simple
   words; his prompt answered first and in full; "Fix all:"; "Can you fix these:").
 
@@ -408,3 +417,41 @@ helper, never into the chair's context. `/home/user/wt/line` is a clean worktree
   successor's. THE SAME SET, BY THE SAME GREP, IS RUN ON EVERY UNIT'S MERGED TREE BEFORE ITS "TIP?". CORRECTION OF THIS
   RECORD: VEIL-38's `b-guards-other.txt` (`docs/chair/2026-11-20/veil/out/v35/r4ipage/` on its -wip) is THE OUTPUT OF
   ONE RUN of those files at fd7163ba6, not a list of them: the set is derived by the grep above.
+- 2026-11-23 02:44 UTC · THE CHAIR'S SIXTH PUSH (cd4a8528f) ENDED exit=0 at 02:41 UTC through the lane hook: CONFIRMED from its log.
+- 2026-11-23 02:44 UTC · N34 · THE LANDING IS ON. THE OWNER WROTE IN STACK-106's OWN SESSION at 02:37 UTC (section 1 has his words
+  and how they were read from that session's record). STACK-106's check then allowed its merge: "STACK-106 MERGED
+  2f3d614ac" (CHECKED ON ORIGIN BY THE CHAIR: parents 244fa84ef and 4e7fa5667; tree 89dc54105773fb88…, the tree the
+  chair had verified at N13; 97 files against the line; by the seat: one conflict, the lighting census, the base's
+  side, owed to its door; HAND_CEILING 83; its commit hooks exit 0). Its c2 lines (`raised-merges.txt`): wiring-census
+  ROSE 1; observed-shape-readers ROSE 8, fell 3, left 2; writer-reach ROSE 11; handPools ROSE 1; houseReadings ROSE
+  1; presumedThings.widened left 9; presumptionClasses fell 1, left 7; the walker's HAND_CEILING 77 to 83. NOT YET
+  JUDGED ROW BY ROW BY THE CHAIR: `raised-top.txt` is read whole before the line moves.
+  **Decided:** (1) "ADD lane/close-4-2026-11-23-vacant-wip 4ef6d6c32431b03a030a051710551853d1bb8e87 POINT 107" sent
+  at once, before step d's doors. (2) STACK-106 DOES NOT WAIT for the other lanes: PRONOUN, PROSE-D and DAILY-C come
+  by "ADD" as its prompt's (2) provides (a lane after "DOORS" is merged, its own files and what names them re-run,
+  `tests/lint` whole again, "DOORS" said again). (3) SIX WORK AT A TIME: PROSE-6 PARKS AT ITS BUILDER'S RETURN (N14),
+  "GO PROSE-6" when a place frees. **Why:** the prompt's own design for late lanes makes one stack of them without
+  holding the gate; the count is the owner's. **Rejected:** holding the gate for PRONOUN (its hour is not known);
+  parking a veil seat (the long pole), CLOSE-4 or DAILY-5 (the flip and the page wait on them). **Reversal:** "GO
+  PROSE-6" at any time; a "HOLD" to STACK-106 before its gate. **Blast radius:** PROSE-D arrives one to two hours
+  later, as a late "ADD".
+  N30's (2), THE SEPARATE-WORKTREE ATTEMPT, WAS NEVER SENT AND IS MOOT: the owner's word came first. N30's (1) (one
+  stack sent when PRONOUN and PROSE-D are in) is replaced by (1) and (2) above.
+  A CORRECTION OF N30's WORDS, SAID TO THE OWNER: N30 says the refused command "broke the program's own rule on where
+  a landing works". NOT SO: STACK-106 DID AS ITS PROMPT SAID. The seventh chair's brief lands in a worktree of its
+  own; the eighth chair's `prompts/STACK-106.txt`, item 1, moved the landing into the seat's own checkout, and the
+  ninth chair sent that file as it stood.
+  A SLIP OF THE CHAIR'S, SAID TO THE OWNER: its note to him at about 02:41 UTC still asked for the line he had typed
+  at 02:37: STACK-106's message had not been read yet.
+- 2026-11-23 02:44 UTC · VEIL-38's FOLLOW-UP (02:39). (c) THE LINK READ'S LAW IS WRITTEN IN 212 :: `get_unlisted_dossier`, CHECKED BY
+  THE CHAIR on its -wip 0755698e6: line 3307 `'gallery_share_dm', false`; lines 3338 to 3339, the comment "an
+  unmarked share takes the default veil (the link's readers are players)" over `_gallery_veil(proj.d,
+  s.gallery_member_overrides, true)` (the third parameter is `link`). R4I-PAGE-4 defines the link twin test-side on
+  those lines. (d) ITS THREE NAMES ARE PASSED TO VEIL-39: `tests/domain/display/criminalVeilSwitch.test.js` "VS1
+  acceptance ..." "(a)-(e) hold on every birth, plain and DM-revealing" (CONFIRMED red at af708f2fd); two of
+  `tests/security/galleryVeilSignalCopies.pglite.test.js` (VR17; server-veil-city-2, current's and master's stored
+  shape; PLAUSIBLY S2's cause): THAT FILE IS INSIDE tests/security and is run at the tip beside the 34. (a) It
+  measures the Brotli figure and each chunk's module; the cost law's figure comes before "TIP?".
+- 2026-11-23 02:44 UTC · DRAFTED ON THE CHAIR'S MACHINE ONLY (a fresh chair writes its own): `/home/user/scratch/chair/
+  DRAFT-START-VEIL-40.txt` (the @@ marks are filled at VEIL-37's hand-over; committed under `prompts/` at the
+  seating) and `DRAFT-START-CLOSE-5.txt` (the flip's seat: N31). `DRAFT-GO-STACK-106.txt` is DEAD (N34).
