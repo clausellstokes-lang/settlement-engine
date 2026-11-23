@@ -47,7 +47,18 @@ THE BUILDERS (subagents of this seat; a successor re-staffs from the brief and t
   executable by anon or authenticated; PROOF exit 0; SQL = JS = reference 7,555 / 7,555 (6,009 + 1,546); the probe 0; THE COST LAW
   WITHIN (465.0 ms against 2 x 261.6 = 523.2). R5D-SQL-2 (AND R5D-SQL's unre-run proofs) ACCEPTED BY THIS SEAT.
   THE TIP 2d7ed483f MERGED INTO THE -wip as 3ef7fb325; that file's run with the arms (galleryVeilHandRows, Tell3, Tell4, Tell5, Tell8,
-  galleryWithholdAlways) through the mutex to `/var/tmp/v18/out/v37/merge1/arms.txt`: RUNNING at this push.
+  galleryWithholdAlways) through the mutex (`/var/tmp/v18/out/v37/merge1/arms.txt`, log /tmp/gate-tail.8256.log): 41 of 43 passed;
+  TWO RED, BOTH PINS R5D-SQL MOVED BY DESIGN, TOWARD WITHHOLDING (no leak; not the memory squeeze: the killed process at 02:2x was not
+  this run, which ended with its own exit line): (1) `galleryWithholdAlways.pglite` "MAIN: no withhold-always row reaches ...": 112 on
+  `power.desc` and `history.tension.maskedParty`: the arm judges every always-row by its path's ABSENCE; these two are partial by rule
+  (the standing cut; the mask entry out): to be judged by their rule (96c777381's precedent); (2) `galleryVeilHandRows.pglite` "V8-4 THE
+  TOP-LEVEL POWER'S FLOOR": master's top-level `{power:3, hidden:true}` entry served without its desc (E115 (2), 212 (36) (b)): `want`
+  re-stated. BOTH SENT TO R5D-PAGE-A (02:3x) to re-state in its item 6, with 3ef7fb325 merged into its branch. Arms 3, 4, 5, 8 green.
+  THE COST LAW (ruling 12, VR36; for chains B and C, who add to the same read before the join): R5-DESC's 212 at 3ef7fb325 reads the
+  largest born metropolis (502,604 characters; the default veil record; read as anon; 9 rounds, medians; a local cluster) on Reveal DM in
+  465.0 ms against a CEILING OF TWICE 211's frozen Reveal-off read of the same record, 2 x 261.6 = 523.2 ms (the builder's own run: 464.3
+  against 494.8; at eeda6a126 463.8). The margin is thin (about 11% on the seat's run, 6% on the builder's) and 211's read moves with the
+  box's load: say the figure at each "TIP?".
 - R5D-PAGE-A (items 0-4, 6-8 of `briefs/R5D-PAGE-BRIEF.md` as VEIL-37 corrected it, a48c8b9a1): dispatched 00:27; relayed 00:58 the
   chair's ruling 106 (the composed-hosts walker's header re-stated; the 23 `prose.*` rows stay red by name). STATE: building; UNREAD.
   Plant (e) is red on its branch BY DESIGN until R5D-SQL-2 is merged into it. Hand-back `out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md`.
@@ -129,3 +140,4 @@ chair's read leaves the room, else it is the successor's first act (said in the 
 - 01:35 chain1 END: equal to VEIL-36's at the tip (sv 1 of 80 = the stale V7-2; tests/lint whole 48 of 3,304 in the same 17 files).
 - 01:4x R5D-SQL-2 returned; its diff read once, no fault; its runner re-run by the seat launched.
 - 02:18 the seat's re-run of R5D-SQL-2's runner: every step 0, the cost law WITHIN: ACCEPTED; 02:2x the tip merged into the -wip (3ef7fb325), pushed; the arms launched.
+- 02:3x the arms on the merged -wip: 2 reds, both pins moved by design (MAIN of galleryWithholdAlways; V8-4), sent to R5D-PAGE-A.
