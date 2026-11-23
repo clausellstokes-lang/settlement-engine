@@ -7,8 +7,10 @@ Written 10:49 UTC 2026-11-23.
 ### (1) BRANCHES, WORKTREES, MACHINE
 - `lane/veil-44-2026-11-23` (this file, briefs, measures): on 8d4a81fef (VEIL-42's PART 44 commit). Checkout `/home/user/settlement-engine`
   (`node_modules`, `.husky/_` linked to `/home/user/wip`'s; both in `.git/info/exclude`).
-- `lane/veil-44-2026-11-23-door-wip` (the unit's code): cut at 23bb8b8ae (`lane/veil-39-2026-11-23-tip`; `lane/veil-41-2026-11-23-tip` (PIN-3,
-  b58abc48b) was not on origin at 10:42: merge it when the chair names it). Worktree `/home/user/wip` (npm ci done; hooks in).
+- `lane/veil-44-2026-11-23-door-wip` (the unit's code): cut at 23bb8b8ae; THE LANE'S TIP b58abc48b (`lane/veil-41-2026-11-23-tip`, PIN-3,
+  test-only; named by the chair 11:36) MERGED by fast-forward 11:38; PUSHED 11:40 at b58abc48b. Worktree `/home/user/wip` (npm ci done; hooks in).
+- `lane/veil-44-2026-11-23-mapcovert-wip` (MAPCOVERT-RED's), cut at 23bb8b8ae, worktree `/home/user/wt/mapcovert`: its builder pushes it.
+- Scratch: `/home/user/wt/doors3` (detached at 3e1115c81, (c2)).
 - THE MACHINE: `out/v44/chain0.sh` (this branch), started 10:43 through `scripts/gate-mutex.sh --run`: npm ci, ledger ref, make-instruments,
   pool `/var/tmp/v18/t2/pool-v44`, verify, gates (TELL_DB=v44m). Log `/var/tmp/v18/out/v44/chain0.log` (outer exit in `chain0.outer`). PG16
   `/var/tmp/v18pg`, socket `/var/tmp/rv7` (after a reboot: `su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`).
