@@ -67,7 +67,12 @@ tpl|smoke|towns|pool|insurg|an` (re-pointed) and applies the drafts: the success
 SSKIP: WIP c2ddfd6b2 PUSHED (instrument, figures; nothing in src/ or tests/). Its deciding count (ruling 127) waits for the lock.
 MASTER-BORN STORED (its measure): 140 OTHER rows with no master-written standing get one from S on nothing-hidden reads: ASKED OF
 THE CHAIR (whose; the rule on a master-born page; this seat's lean: a fault by N101, the cure likely N94's lean or a new served fact).
-T5M (measures only, ruling 128): DISPATCHED after 9df9a3e41's push; same worktree and branch as T5; report `out/v40/t5/T5M-HANDBACK.md`.
+T5M (measures only, ruling 128): HANDED BACK UNRUN at 15:48 (the lock never reached it): dd809dc4b (q-an.mjs's N102 section:
+(v)(3) joint count, (v)(2) empty-tensions count) + b096065e5 (`out/v40/t5/T5M-HANDBACK.md`: the run order: tpl under the mutex,
+smoke, towns, pool, insurg, an; Tell6 (red expected, no cure); the two (vi) teeth), PUSHED; 212 a4df6dac… untouched. A successor's
+measures builder runs that order when the lock is its.
+R5D-RIVAL at 15:48: holds the lock since about 13:10; its green on the full pools running (two workers since 13:41); last pushed
+804fa23d2 (its red on 9b1fe3c34 recorded in `out/v40/r5drival/red/`).
 THE MUTEX's ORDER is the file `/var/tmp/v18/out/v40/mutex-order.txt` (every builder reads it): RIVAL GO; T5 WAIT; B2 WAIT.
 THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs` (ca72cfd4d, read once:
 additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/var/tmp/v18/t2/pool-v40r`, template `v40rtpl`, out
@@ -248,3 +253,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 13:40 ruling 128; 13:45 relayed to SSKIP; T5M's addendum (9df9a3e41) and dispatch.
 - 14:07 ruling 129 (the two named seeds owed in the proof).
 - 14:38 ruling 130 (chain B's two guard lines, taken at the merge after R4-IDS).
+- 15:48 T5M handed back unrun; 15:48 the chair told: RIVAL's green 2 h+; this seat proposes to hand over at RIVAL's return.
