@@ -64,6 +64,8 @@ THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{
 additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/var/tmp/v18/t2/pool-v40r`, template `v40rtpl`, out
 `/var/tmp/v18/out/v40/rg/`), ON RIVAL's branch (or the stack with T5, ruling 117 (c)); shas recorded on every gallery read with a
 server page (hidden-house towns, every setting but g:111, off and DM).
+THE ORDER OF THE SEAT's OWN HEAVY RUNS: after RIVAL's red and green: the new pool + both gates (rivalgates-run.sh; on the stack if
+T5's three are green, ruling 117 (c)); then L1 (ruling 121): control, towns 140 (gallery, link), stored today and master (all doors).
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -124,6 +126,13 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     `tests/domain/display/criminalVeilSwitch.test.js` +9 -5; 212 unchanged). E116: merged into the wips before "TIP?"; re-run that one
     file on the merged tree; nothing else re-run for it. FETCHED; to be merged into the code branch at the next stop where no builder
     works in it (B2's return), and so reach the stack; the criminalVeilSwitch red of ruling 111 is this pin's.
+121. THE CHAIR, 11:44 (N90): THE WHOLE-DOCUMENT FORM IS IN EVERY VEIL UNIT's PROOFS. Instrument (COPIED, NEVER RE-WRITTEN):
+    `out/v42/meas/{meas.probe.jsx, meas-an.mjs, meas.sh}` on `lane/veil-42-2026-11-23-meas-wip` d1bc333af (`RECIPES.md` beside them);
+    its positive control (`handreach`) must bite on this seat's tree first. AT "TIP?": L1 (server served document = twin projection BY
+    VALUE, sorted keys, `MEAS_BIJ=0` until R4-IDS merges) on the gate's 140 at gallery and link, and on BOTH STORED SETS (the 140
+    seeds, `dump.sh` with `LP_A=0 LP_B=0 LP_TOWNS=1` at this tree and at master db832c892) at every door the unit's rule touches
+    (the rival's rule is in `_gallery_veil`: all four): 0 differing reads, or each listed by path with its ruling. The pool-wide run is
+    the bar's. The N67 sha tables stay a receipt. Cost told the chair: about 2 h on the mutex after the pool and gates (PLAUSIBLE).
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -138,3 +147,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 10:31 the sha instrument pushed (ca72cfd4d). 11:06 ruling 117; 11:13 T5's brief (947c74b80), worktree, T5 dispatched; the chair told.
 - 11:19 ruling 118; T5's WIP pushed (58cf00f6c); 11:28 ruling 119, relayed to T5; 11:29 PART 42 pushed.
 - 11:36 ruling 120 (PIN-3 b58abc48b), fetched; 11:37 PART 42.
+- 11:44 ruling 121 (L1); the cost told; 11:44 PART 42.
