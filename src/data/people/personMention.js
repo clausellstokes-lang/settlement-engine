@@ -53,14 +53,20 @@ const CLAUSE_OPENERS = Object.freeze(new Set(['and', 'but', 'so', 'yet', 'or', '
 /**
  * THE FOLLOWER'S CLASS (PRONOUN, CLOSE-2 unit 3c): the words after a person's later mention in every composed line
  * (`npcData.js` ties, `goalFamilies.js` wants), classed by hand. SUBJECT: a finite verb, or the adverb before one (the
- * mention is that clause's subject). OBJECT: a word that is not the mention's own verb, or a stop mark.
+ * mention is that clause's subject). OBJECT: a word that is not the mention's own verb, or a stop mark (`OBJECT_STOP_MARK`).
  */
 export const SUBJECT_FOLLOWERS = Object.freeze(new Set(['acts', 'asked', 'asks', 'calls', 'can', 'cannot', 'controls',
   'could', 'decides', 'did', 'distrusts', 'does', 'earns', 'gets', 'has', 'holds', 'is', 'keeps', 'knows', 'makes', 'means',
   'moves', 'names', 'needs', 'never', 'once', 'owes', 'pays', 'rarely', 'refused', 'remembers', 'sends', 'stands', 'still',
   'stops', 'survives', 'uses', 'vouches', 'wants', 'was', 'will']));
-export const OBJECT_FOLLOWERS = Object.freeze(new Set([',', '.', ';', ':', '!', '?', 'about', 'everything', 'gone', 'in',
-  'money', 'questions', 'something', 'standing', 'that', 'to', 'too', 'two', 'without']));
+export const OBJECT_FOLLOWERS = Object.freeze(new Set(['about', 'everything', 'gone', 'in', 'money', 'questions', 'something',
+  'standing', 'that', 'to', 'too', 'two', 'without']));
+/**
+ * The stop marks after a later mention ("ruin her."), the object (PRONOUN-2, CLOSE-5): the six (, . ; : ! ?) as ONE regex
+ * literal beside `OBJECT_FOLLOWERS`'s words, read where that Set is read, so the copy's voice count reads no '!' (as
+ * `NOT_AFTER_LETTER` below).
+ */
+export const OBJECT_STOP_MARK = /^[,.;:!?]$/;
 /**
  * A follower both classes hold, its class read off the word BEFORE the mention: "an introduction he would rather keep"
  * (subject) beside "nobody who knows her would believe it" (object: "would" is nobody's verb).
@@ -138,8 +144,8 @@ export function wordBeforeAt(sentence, start) {
 }
 
 /**
- * Whether a later mention is its clause's subject: by its follower's class (`SUBJECT_FOLLOWERS`, `OBJECT_FOLLOWERS`,
- * `FOLLOWER_BY_BEFORE`), else by the clause head (`opensClause`).
+ * Whether a later mention is its clause's subject: by its follower's class (`SUBJECT_FOLLOWERS`, `OBJECT_STOP_MARK` or
+ * `OBJECT_FOLLOWERS`, `FOLLOWER_BY_BEFORE`), else by the clause head (`opensClause`).
  * @param {string} sentence @param {number} start @param {number} end @returns {boolean}
  */
 function isSubject(sentence, start, end) {
@@ -148,7 +154,7 @@ function isSubject(sentence, start, end) {
   const before = byBefore ? wordBeforeAt(sentence, start) : '';
   if (byBefore && Object.hasOwn(byBefore, before)) return byBefore[before] === 'subject';
   if (!byBefore && SUBJECT_FOLLOWERS.has(follower)) return true;
-  if (!byBefore && OBJECT_FOLLOWERS.has(follower)) return false;
+  if (!byBefore && (OBJECT_STOP_MARK.test(follower) || OBJECT_FOLLOWERS.has(follower))) return false;
   return opensClause(sentence, start, end);
 }
 
