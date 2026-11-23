@@ -164,6 +164,14 @@ rows go back as "F-FORTUNE-2"; three judgements taken and named for the owner; O
 outranking rival a hidden power: a case the veil's seats need). (6) THE CHAIR OWES: the new tip named at "PIN-3
 MERGED"; VEIL-45's start message drafted; the guard line's pin (the reader's row 7) given to the join's seat with a
 doors arm; LOWER-7's ruling; the owner's decision on pages published before the veil, with chain B's counts.
+SINCE N86 (N87): THE JOIN TURNED THREE LINE TESTS RED ON THE JOINED TREE (fortune's merits arm (S), fortune's lasting
+sentence under the widest veil, one town's cause against its house-free twin): "REDS-CAUSE" IS ORDERED OF VEIL-43 AND
+THE CHAIR RULES EACH CURE; NONE IS BUILT BEFORE. A PERMISSION CHECK REFUSED VEIL-41 ONE ACTION (signals to waiting
+processes on its own box): THE REFUSAL STANDS, nothing was tried in its place, PIN-3's re-run waits its turn. CHAIN A
+TOOK N86: builder "T5" on `lane/veil-40-2026-11-23-t5-wip`; IT STOPS BEFORE (v)(2)'s CURE AND THE CHAIR CLEARS ITS
+FUNCTIONS AGAINST R5-TENSION. THE THIRTY-FIFTH PUSH (cf0b27a04) ended exit=0 at 11:16:45 UTC. THE NEXT HOURLY CHECK:
+trig_01GLpYCurM5gcmnrfzGvWB8p at 12:12 UTC. VEIL-45's START MESSAGE IS DRAFTED (`prompts/DRAFT-START-VEIL-45.txt`: A
+DRAFT WITH BLANKS).
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2219,3 +2227,65 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   running, served by claude-opus-5-5. None is past 570,000; VEIL-41 is the nearest (its own estimate 470,000):
   VEIL-45's start message is drafted when the chair's read passes 520,000. THE NEXT HOURLY CHECK IS SET WITH THIS
   ENTRY (its id in the next entry).
+- 2026-11-23 11:22 UTC · N87 · THE JOIN TURNED THREE LINE TESTS RED ("REDS-CAUSE" ORDERED; THE CHAIR RULES THE CURES);
+  A PERMISSION CHECK REFUSED VEIL-41 ONE ACTION AND THE REFUSAL STANDS; CHAIN A TOOK N86 (BUILDER "T5"); THE PROBES'
+  FAULT RAN IN THE SAFE DIRECTION; NO HIDDEN RIVAL IN THE SIX LIT THORPS.
+  (1) THE CHAIR'S PUSHES AND THE NEXT CHECK: the thirty-fifth (cf0b27a04: N84 to N86) ended exit=0 at 11:16:45 UTC
+  (its log; ls-remote equal to the local tip). THE NEXT HOURLY CHECK: trig_01GLpYCurM5gcmnrfzGvWB8p fires at 12:12:00
+  UTC. DRAFTED AND COMMITTED WITH THIS ENTRY: `prompts/DRAFT-START-VEIL-45.txt` (chain C's successor: a draft with ten
+  blanks; R5-TENSION inside the unit; the whole proof with the whole-document form; "LEGACY-TELLS" with its step 0).
+  SENT TO VEIL-43 (later priority): "GUARD-PIN" for its unit (2) (the reader's row 7: the pin carried from
+  `lane/page-12-2026-11-21-guardline-wip` 3ac002b5e onto the joined tree after that branch's diff is read; dark and
+  lit; a doors arm).
+  (2) A REFUSAL BY A PERMISSION CHECK (VEIL-41, queued 11:12:18; its hour 11:13): its own check refused a script that
+  would SIGSTOP the other WAITING gate-mutex pollers on its box (never the holder) until its 15-second PIN-3 re-run
+  held the lock, then SIGCONT them; the reason given: "Destructive or Unwanted Actions". IT TRIED NOTHING ELSE; its
+  re-run keeps its place in the mutex race. **Decided:** THE REFUSAL STANDS; PIN-3 is not urgent and waits its turn;
+  for later runs the order of a box's mutex is set BY WORD to the builders before they queue (an order file read at a
+  run boundary, as chain A keeps), never by a signal to a process that is running or waiting. SAID TO THE OWNER the
+  same turn.
+  (3) VEIL-41's OWED LINE (queued 11:11:49): in all three probes A MISS ONLY ADDS AND NO HIT EXCUSES (PLAUSIBLE, read,
+  every rowOf caller grepped; in `legacy.probe.jsx` a hit merges sibling paths into one count: coarser, no path
+  hidden): THE FAULT RAN IN THE SAFE DIRECTION. AT THE TIP 17 OF 150 REGISTRY ROWS CARRY THE " (only in A|B)" SUFFIX
+  (CONFIRMED, executed): income.criminalRow, income.composition, history.tension.crimeWave, history.tension.redraw,
+  history.tension.factions, history.event.crimeWave, history.event.redraw, history.event.lastingEffects, power.entry,
+  power.composition, power.relation.entry, power.relation.composition, prose.legacyLines.a, prose.legacyLines.b,
+  cast.roles.entry (it can match without), people.entry, people.ties. E94's exception is relayed to R5-TENSION's
+  builder. TOLD: its tension branch is pushed at its builder's first commit (chain A looked for it on origin); the
+  chair's read of its record (449,951); PART 43's first section is kept current for VEIL-45 from now.
+  (4) CHAIN A TOOK N86 (VEIL-40, queued 11:13:16): builder "T5" is seated on `lane/veil-40-2026-11-23-t5-wip`, cut at
+  the rival's wip 9a2f8ef9a (brief `briefs/R3-TELL-5-IVVVI-BRIEF.md` 947c74b80: R3-TELL-5's (iv), (v), (vi) as
+  written; GATE-MAP's rows by town; V33-Q's parked instruments 96a4c4994 as its start; it runs no gate and no pool).
+  Its order: measures, (vi), (v)(1), (v)(3), (v)(2), (iv). (iv)'s CURE waits for the seat's word: the rival's rule
+  re-gates `power.relation.*` in the same block of `_gallery_veil_roster_choices`, and the seat merges the rival's
+  final into T5's branch first. T5 STOPS BEFORE (v)(2)'s CURE and names the 212 and twin functions it would touch: THE
+  CHAIR CLEARS THAT LINE AGAINST R5-TENSION (chain C's brief `out/v41/ten/TEN-BRIEF.md` at 3b2d62a78, 42 lines, READ
+  BY THE CHAIR: its first act is arm (i)'s measure with the STOP; its statement sits beside the C2 statement in the
+  always-pass or at the tension rule, the builder says which). The mutex order on chain A's box: RIVAL GO; T5 and B2
+  WAIT. Its own count about 330,000 (the chair's read 321,729).
+  (5) "REDS": THE JOIN TURNED THREE LINE TESTS RED (VEIL-43, queued 11:14:51; the joined tree 9e6547f0f; three files
+  of the line that name the veil's functions, none on RED-AT-LINE; a line-side re-run is queued to confirm they are
+  green there). (i) `tests/generators/fortuneLawMerits.test.js`, "U5a (S): every input of the merit is served,
+  unchanged, on every shared read": 19 of 19 towns; hxd-hamlet-39: expected { food: +0, merits: 10 } to deeply equal {
+  prosperity: 15, safety: +0, and three more }. READ BY THE CHAIR ON THE LINE (:310 to :331): the arm asserts three
+  things of `toPublicSafe(town)` and of `applyVeil(toPublicSafe(town), WIDEST)`: the merits recomputed, the score, and
+  the BREAKDOWN, each equal to the owner's; the failing message is the breakdown's (the merits and the score pass
+  before it on that town): UNDER THE WIDEST VEIL THE LANE'S TWIN SERVES A BREAKDOWN WITHOUT ITS PROSPERITY, SAFETY AND
+  DEFENCE TERMS. The arm is an earlier chair's ruling (2026-11-20 19:38: "the score and its terms the shared page
+  carries"): TWO RULINGS MEET HERE. (ii) `tests/domain/fortuneLastingSentence.test.js`, "U7b (d)": 2 of 6
+  (visitor-thorp-52, visitor-hamlet-139, under the widest veil): the paragraph no longer prints the same lasting
+  sentence there. (iii) `tests/domain/display/tensionCause.test.js`, "(CAUSES-PARITY-2 F) hxd-city-138: served == the
+  house-free twin": expected null to be 'Crime is on the rise here.': the veil withholds a cause the house-free twin
+  prints. **Decided:** "REDS-CAUSE" is ordered of VEIL-43 after its REDS list is whole: for each, the input paths; the
+  rule that withholds or changes each (registry row, twin function, 212 function) and since which unit; the server
+  against the twin; for (i) and (ii) which cure is smaller, (S) the veil serves the input unchanged (and what it could
+  tell) or (R) the shared page prints the owner's stored result and recomputes nothing; for (iii) whether it is chain
+  A's (v)(2) class. THE CHAIR RULES THE CURES; NONE IS BUILT BEFORE. **Why this binds the first deploy:** the fortune
+  law is lit at the flip, and a shared page under the joined veil would print a legitimacy whose parts differ from the
+  owner's; the join found it before the deploy did. SAID TO THE OWNER.
+  (6) CLOSE-6 (its 11:14; queued 11:11:04): the fifth row and the header line passed to its builder for F-FORTUNE-2;
+  the three judgements noted for FOR-THE-OWNER.md; THE QUESTION ANSWERED BY EXECUTION
+  (`close-6/probes/thorp-hidden-rival.mjs` at f02f969c2, both laws lit): "The Independent Bloc" of rulers-thorp-35 is
+  NOT hidden (category other, power 78); NONE of the six lit thorps with the governs note holds a hidden power: NO
+  CASE FOR THE VEIL (told to VEIL-43). Its own count 150,000 against the chair's read 258,492: told that the mark is
+  by the chair's read.
