@@ -44,7 +44,7 @@ export function standingForceOf(institutions) {
 
 /**
  * Each power's standing sentence on a roster, by name, and its rank there.
- * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force @param {{ publicLegitimacy?: unknown } | null} [seat] its seat's legitimacy, for the coup reading (C14176)
+ * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force @param {{ publicLegitimacy?: unknown, factionRelationships?: unknown } | null} [seat] its seat's legitimacy, for the coup reading (C14176); the record's relation rows, where a settle hands them (13G)
  * @returns {Map<string, { standing: string, rank: number }>}
  */
 function standingsOf(roster, force, seat = null) {
@@ -83,7 +83,7 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   if (!factions || !annotated.length) return powerStructure;
   const finalRoster = standingRosterOf(factions);
   const before = standingsOf(annotated, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy }); // BAR4-HISTORY C14176
-  const after = standingsOf(finalRoster, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy });
+  const after = standingsOf(finalRoster, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships }); // 13G (N97): the AFTER read carries the record's rows (the tie read bought at the coherence seam), the BEFORE read the power step's
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
@@ -210,8 +210,8 @@ export function settleStandingToLegitimacy(powerStructure, previousLegitimacy, r
   if (!factions || previousLegitimacy === powerStructure?.publicLegitimacy) return powerStructure;
   const roster = standingRosterOf(factions);
   const force = standingForceOf(record?.institutions);
-  const before = standingsOf(roster, force, { publicLegitimacy: previousLegitimacy });
-  const after = standingsOf(roster, force, { publicLegitimacy: powerStructure?.publicLegitimacy });
+  const before = standingsOf(roster, force, { publicLegitimacy: previousLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships }); // 13G (N97): BOTH reads carry the record's rows (the roster's settle already read them)
+  const after = standingsOf(roster, force, { publicLegitimacy: powerStructure?.publicLegitimacy, factionRelationships: /** @type {{ factionRelationships?: unknown }} */ (powerStructure)?.factionRelationships });
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
