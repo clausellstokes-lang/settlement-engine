@@ -29,6 +29,7 @@ const OUT = process.env.PG_OUT;
 const PICK = Number(process.env.PG_PICK || 1); // every PICK-th row of the plan (the cost run)
 const SS = Number(process.env.PG_SERVER_EVERY || 24); // (F) the server sample: every SS-th birth of the plan
 const RESTORE = process.env.PG_RESTORE !== '0';
+const RESTORE_EVERY = Number(process.env.PG_RESTORE_EVERY || 1); // (F) the restore loop on every k-th birth of the plan only (the split)
 const clone = (v) => JSON.parse(JSON.stringify(v));
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 
@@ -297,7 +298,7 @@ it(`V43-PAGES (${MODE}) shard ${SHARD.join('/')}`, async () => {
         const dv = diffViews(v0, v1); const items = itemsOf(dv);
         const out = { ...rec0, hiddenLeft, lines: { P0: Object.values(v0).reduce((a, l) => a + l.length, 0), P1: Object.values(v1).reduce((a, l) => a + l.length, 0) }, tabs: { P0: Object.keys(v0), P1: Object.keys(v1) }, diff: dv,
           gov: { P0: govOf(P0, v0), P1: govOf(P1, v1) }, dm: dmSlotOf(rec, P1, v1), restoredBy: {}, cands: [], renders: 2 };
-        if (RESTORE && items.length) {
+        if (RESTORE && items.length && row.i % RESTORE_EVERY === 0) {
           const cands = candidates(P0, P1); out.cands = cands;
           const only = new Set(Object.keys(dv)); s0 = Date.now();
           for (const k of cands) {
