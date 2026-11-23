@@ -57,3 +57,10 @@ Do NOT re-take any register: the shift register, the observed-shape baseline, th
 
 ## REPORT
 Write `docs/chair/2026-11-20/content/prose/PROSE-E-REPORT.md` in the worktree, at most 80 lines, committed. It holds item 0; the commits; (a) to (g); the registers that red; anything refused, word for word. Final message to me: at most 200 words.
+
+## AMENDMENT 1 (the chair's N71, 2026-11-23 07:40 UTC; it rules your stop at item 0)
+- Item 0 is ANSWERED by your probe: v12 draws, and prints as the bare cut "{settlement} has no market." on 46 pages. Write that rule into the report with its file:line.
+- v12 is NOT re-worded. The watched row for NO-MARKET v12 × ECO-10 `established` is DROPPED from `OPPOSITE_PAIRS`. It becomes a `PINNED_TAILS` row in GEN-17 v2's form: v12's tail after its first cut ("trades in a small way: a sack here, a bundle there, carried between neighbours") prints on 0 pages. The CRITICAL v2, v3 × GARRISONED v1 watched row stands.
+- The tooth's header names the matcher's FLOOR: a clause cut under four literal words is not matched (`oppositeSentencePairs.mjs:97`). Leave a placeholder for the FLOOR measure's figure, which a second agent is taking beside you; I give you the figure. The floor itself is NOT changed.
+- THE REPORT gains, for each of the five re-worded lines, EVERY FORM THE PAGES PRINT: whole, and each cut, read from the readers' code (`siteClause` in `generalDeskRead.js` and its like on the defense and economy desks). Quote each form, and say which mount prints it. Each printed form is judged against the cell it stands beside, not only the whole sentence.
+- Everything else in this brief stands. Go on from item 1. One heavy run at a time on the box: a second agent shares the mutex with you.
