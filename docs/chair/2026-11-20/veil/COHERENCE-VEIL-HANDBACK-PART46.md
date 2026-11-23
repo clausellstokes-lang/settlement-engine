@@ -10,8 +10,10 @@ NOTHING OF THIS SEAT IS IN THE LANE'S TIP (b58abc48b on `lane/veil-41-2026-11-23
 - `lane/veil-44-2026-11-23-door-wip` db9fddc7d: the tip b58abc48b + MAPCOVERT-RED (merged 6c7bf0b97) + TRAD4-RECUT (merged db9fddc7d). TESTS ONLY; 212 untouched.
 - `lane/veil-44-2026-11-23-mapcovert-wip` 6edc79094 (merged); `lane/veil-44-2026-11-23-trad4-wip` c2afc9878 (merged).
 - `lane/veil-44-2026-11-23-mcsql-wip` (the shared map's NARROW GREEN, 212 + rollback + registry + hashes; brief `briefs/MAPCOVERT-GREEN-SQL-BRIEF.md`):
-  STOPPED AT ITS SAFE POINT on the owner's order, its work committed "WIP, UNPROVED (paused by the owner's order)"; its tip and state in its own
-  hand-back `out/v44/mcsql/MCSQL-HANDBACK.md` on that branch (read it FIRST; nothing of it is proven or merged).
+  STOPPED on the owner's order at d56bc1ab6 (pushed). 212 AND ITS ROLLBACK EDITED, committed 0dbb9a169 "WIP, UNPROVED": `get_gallery_map` restated
+  as the link's read (the link's splice, `_gallery_veil(..., true)`); 212 sha256 ff20ed89… -> c6679978…; rollback 8cbd7d1c… -> 62a7e609… (211's
+  `get_gallery_map` and grant verbatim). Rollback rehearsal on local PG16 EQUAL; `--check` 0. NONE of the brief's proofs (a)-(e) ran (template
+  `mcsqltpl` made for (e)). Its hand-back `out/v44/mcsql/MCSQL-HANDBACK.md` on that branch (38 lines): READ IT FIRST. Nothing of it merged.
 ### PROVEN (each with its receipt)
 1. MAP-COVERT'S RED (the unit's first red): `tests/security/galleryMapCovert.pglite.test.js` 3 failed | 5 passed of 8 (the map member 24 sends, the
    map import 24 on the hand plant at every marker, Reveal off; chain B's two places 60; controls (c) gallery, (d) link, the tooth green).
@@ -26,7 +28,7 @@ NOTHING OF THIS SEAT IS IN THE LANE'S TIP (b58abc48b on `lane/veil-41-2026-11-23
    MAP-PIPELINE: `out/v44/MAP-PIPELINE.md`. tests/lint whole at 6c7bf0b97: 48 = the base's titles (16:13: the run at db9fddc7d ended or was
    left; its log `/var/tmp/v18/out/v44/lint-door-db9fddc7d.log`, container-only: RE-RUN it on resumption, `out/v44/lint-whole.sh`).
 ### RUNNING AT THE PAUSE
-- The SQL builder (stopped, above). tests/lint whole on db9fddc7d (a read; nothing depends on it).
+- Nothing. The SQL builder stopped (d56bc1ab6); tests/lint whole on db9fddc7d was a read (re-run on resumption).
 ### OPEN, IN ORDER, TO "TIP? IMPORT-DOOR"
 1. MAPCOVERT-GREEN-SQL: finish from its hand-back (the narrow restatement of `get_gallery_map` as the LINK's read: the link's splice and
    `_gallery_veil(..., true)`, at both Reveals; rollback = 211's statement); its proofs (the brief's (a)-(e)); then a test-only builder turns the
@@ -117,3 +119,4 @@ Written 10:49 UTC 2026-11-23.
 - 13:06 tests/lint whole at 6c7bf0b97: 48, the base's titles; the SQL builder waits for TRAD4 (the chair, 12:55).
 - 16:00 TRAD4 returned; MCSQL dispatched; A SLIP SAID: a line to the chair carried an unread hour (13:3x for 16:00), corrected at once.
 - 16:14 PAUSED by the owner's order (N116): the SQL builder told to stop at its safe point; section 0 written.
+- 16:19 the SQL builder stopped at d56bc1ab6; section 0 final.
