@@ -28,7 +28,7 @@ off and DM, `logs/trial-U-widened-1-table.txt`. Reads carrying the stored covert
 | `get_unlisted_dossier` dossier | 0 | 0 | 0 | 0 | 0 | 0 |
 | `get_unlisted_map`: hands a member dossier at all | no | no | no | no | no | no |
 At Reveal DM the gallery and import doors serve the covert tie BY DESIGN (the owner's "Reveal DM content": the tie itself is kept);
-the map doors serve it at Reveal OFF on every marker. `import_gallery_map` (072 :~138, `return public.get_gallery_map(p_slug)` behind
+the map doors serve it at Reveal OFF on every marker. `import_gallery_map` (072 :146, `return public.get_gallery_map(p_slug)` behind
 its importable / signed-in gate) hands exactly `get_gallery_map`'s members. `get_unlisted_map` (168 :401) hands no member dossier
 (the publish-time world snapshot only): no door. The gallery row of the unmarked share carries NO served marker (as 211 decided).
 
