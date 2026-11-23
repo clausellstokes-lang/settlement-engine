@@ -238,6 +238,16 @@
 --       takes the projection's mask, the one literal 'an unseen interest' (publicSafe.js :: maskText writes it over a hidden
 --       power's label), so a standing that named an owner-hidden power is cut like any other (16 rows' `re` moved; the same
 --       117 ids; the literal since, in both engines: sha256 2dced465..., the 794367e0... above being the first pass's).
+--   (37) THE RIVAL LEAVES WITH ITS HOST (R5D-RIVAL, VEIL-40 on the chair's N63, ruling 107 (3) closed; each vetoable by the
+--       owner). In _gallery_veil_roster_choices, right after power.entry, where the withheld set is resolved: wherever a
+--       power's row is withheld on a read (by the hand or by rule), every row minted against it (its `contestsNiche` that
+--       row's seat key; CLOSED OVER, a rival's rival following) is withheld THE SAME WAY: absent where its host is absent (the
+--       player view; a host withheld by rule), stamped `hidden` where its host is stamped (the DM door), so its desc leaves
+--       (power.desc (b)); a governing row never moves (VR42). Every rule after it reads the set so moved: the shares, the
+--       relations and their dmNote, the structured copies with the name search and the belt (which now run wherever this rule
+--       took a row, as where a house is hidden whole), withhold_always's cast stakes. Registry row power.rival.
+--       contestsNiche is still never served (ruling 51). No function added, removed or re-signed;
+--       galleryRosterChoices.js :: applyRosterChoices, rule for rule.
 --   (34) WHAT NO NON-OWNER READ SENDS, WHATEVER THE VEIL (VEIL-21, R2; the sixth chair's VR16 rule 1, the seventh chair's VR28,
 --       VR33, VR37; SUB-BRIEF-VR7 point 5): every row of the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js)
 --       hosted in _gallery_veil_withhold_always, each rule naming its row: the fields no non-owner page draws, the crime
@@ -2458,6 +2468,15 @@ declare
   -- the name search's hits over those bases
   bl jsonb;
   hb jsonb;
+  -- R5D-RIVAL (registry power.rival): the seat keys of the open rows and of the stamped rows, a row count, whether the
+  -- closure moved a row in a pass, and whether it took one off a list (the structured copies then follow); JavaScript's blank
+  -- class (String.prototype.trim's), spelled as 206 spells it
+  rv_open text[];
+  rv_st text[];
+  rv_n int;
+  rv_moved boolean;
+  rv_out boolean := false;
+  rv_bl text := '[ \t\n\r\f\v   -     　﻿]';
   crimlabels jsonb := '{"thieves'' guild chapter": "Thieves'' Guild Chapter", "thieves'' guild (powerful)": "Thieves'' Guild (Powerful)",
     "assassins'' guild": "Assassins'' Guild", "multiple criminal factions": "Rival Gangs", "black market": "Black Market",
     "black market bazaar": "Black Market Bazaar", "smuggling operation": "Smuggling Operation", "smuggling network": "Smuggling Network",
@@ -2547,8 +2566,61 @@ begin
                  and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
                       or (coalesce(jsonb_typeof(e -> 'category'), 'none') <> 'string' and public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie')
                       or public._gallery_veil_str(e -> 'faction') = any(ps_out) or public._gallery_veil_str(e -> 'name') = any(ps_out)))), '[]'));
-    -- (VR11/VR31 on this list too: where the rule above took an entry, a share set left is re-derived to 100 by largest
-    -- remainder, as below)
+  end if;
+  -- registry: power.rival (R5D-RIVAL; the chair's N63, ruling 107 (3) closed, each line vetoable by the owner): THE RIVAL LEAVES
+  -- WITH ITS HOST. Wherever a power's row is withheld on this read, by the hand (the projection drops it, or serves it under
+  -- the mask, on the player view; it is stamped `hidden` on the DM door) or by rule (power.entry, above), every row minted
+  -- against it (applyDensityLaw.js :: resizeSeats: its `contestsNiche` the host's seat key) is withheld THE SAME WAY, CLOSED
+  -- OVER (a rival's rival follows): a row with a `contestsNiche` stays where an OPEN row (an object of either list, neither
+  -- stamped nor masked) has that seat key; is STAMPED (`hidden` true: its desc then leaves, power.desc (b)) where only a
+  -- stamped row has it; and LEAVES its list where no row has it (its host absent, or unsure). A seat key: the row's
+  -- `faction` with JavaScript's blank class trimmed from both ends where that is not empty, else its `name` so trimmed
+  -- (seatKey.js, strings only). A governing row is never moved (VR42). Resolved HERE, after power.entry and before every rule
+  -- that reads the withheld set: the shares, the relations and their dmNote, the structured copies with the name search and
+  -- the belt (which run wherever this rule took a row, as where a house is hidden whole), withhold_always's cast stakes and
+  -- the hidden row's desc. contestsNiche is read off the document handed in; it is never served (power.contestsNiche).
+  -- Twin: galleryRosterChoices.js :: applyRosterChoices, the same rule
+  if exists (select 1 from (select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+                            union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q
+              where jsonb_typeof(q.f) = 'object' and jsonb_typeof(q.f -> 'contestsNiche') = 'string') then
+    loop
+      select coalesce(array_agg(z.k) filter (where not z.st), '{}'), coalesce(array_agg(z.k) filter (where z.st), '{}') into rv_open, rv_st
+        from (select case when jsonb_typeof(q.f -> 'faction') = 'string' and regexp_replace(q.f ->> 'faction', '^' || rv_bl || '+|' || rv_bl || '+$', '', 'g') <> ''
+                          then regexp_replace(q.f ->> 'faction', '^' || rv_bl || '+|' || rv_bl || '+$', '', 'g')
+                          when jsonb_typeof(q.f -> 'name') = 'string' then regexp_replace(q.f ->> 'name', '^' || rv_bl || '+|' || rv_bl || '+$', '', 'g')
+                          else '' end as k,
+                     coalesce(q.f -> 'hidden' = 'true'::jsonb, false) as st
+                from (select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+                      union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q
+               where jsonb_typeof(q.f) = 'object'
+                 and not coalesce(q.f -> 'faction' = '"an unseen interest"'::jsonb or q.f -> 'name' = '"an unseen interest"'::jsonb, false)) z
+       where z.k <> '';
+      rv_moved := false;
+      foreach sd in array array['powerStructure', 'top'] loop
+        pth := case when sd = 'top' then array['factions'] else array['powerStructure', 'factions'] end;
+        if jsonb_typeof(s #> pth) = 'array' and exists (select 1 from jsonb_array_elements(s #> pth) e
+             where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+               and not ((e ->> 'contestsNiche') = any(rv_open))
+               and (not ((e ->> 'contestsNiche') = any(rv_st)) or not coalesce(e -> 'hidden' = 'true'::jsonb, false))) then
+          rv_n := jsonb_array_length(s #> pth);
+          s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string'
+                                                                      and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                                                                      and not ((e ->> 'contestsNiche') = any(rv_open))
+                                                                 then e || '{"hidden": true}'::jsonb else e end order by o), '[]')
+                                    from jsonb_array_elements(s #> pth) with ordinality x(e, o)
+                                   where not coalesce(jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string'
+                                                      and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                                                      and not ((e ->> 'contestsNiche') = any(rv_open) or (e ->> 'contestsNiche') = any(rv_st)), false)));
+          rv_out := rv_out or jsonb_array_length(s #> pth) < rv_n;
+          rv_moved := true;
+        end if;
+      end loop;
+      exit when not rv_moved;
+    end loop;
+  end if;
+  -- (VR11/VR31 on master's top-level factions[] too: where power.entry or the rival rule took an entry, a share set left is
+  -- re-derived to 100 by largest remainder, as below)
+  if jsonb_typeof(s -> 'factions') = 'array' then
     n1 := (select count(*) from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object');
     if n1 > 0 and n1 < (select count(*) from jsonb_array_elements(doc -> 'factions') e where jsonb_typeof(e) = 'object')
        and not exists (select 1 from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number') then
@@ -2652,7 +2724,9 @@ begin
       end if;
     end if;
   end if;
-  if not whole then return s; end if;
+  -- (R5D-RIVAL, registry power.rival: the structured copies below run wherever a house is hidden whole OR the rival rule took
+  -- a row: a rival withheld leaves every copy a withheld power leaves; every rule after them is the hidden house's alone)
+  if not (whole or rv_out) then return s; end if;
 
   -- R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
   -- `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict between powers (both lists)
@@ -2766,6 +2840,7 @@ begin
       end if;
     end loop;
   end if;
+  if not whole then return s; end if;
 
   -- R3-TELL-4 unit (i) (the chair's ruling 73 (2): WHAT NAMES OR DEPENDS ON A WITHHELD HOUSE IS SERVED AS THE HOUSE-FREE TWIN
   -- WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` ({power, house, ...}: allegiance.js ::

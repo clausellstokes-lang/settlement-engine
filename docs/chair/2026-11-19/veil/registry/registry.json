@@ -260,6 +260,11 @@
     "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
   },
   {
+    "path": "^powerStructure\\.factions\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/density/applyDensityLaw.js :: resizeSeats"
+  },
+  {
     "path": "^powerStructure\\.factions\\[\\]\\.contestsNiche$",
     "rule": "withhold",
     "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"

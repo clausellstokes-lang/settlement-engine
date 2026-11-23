@@ -13,6 +13,7 @@
  */
 import { buildNameSearch, caseFold, renumberTrace, rosterHouses } from './gallerySecondHomes.js';
 import { standingBase } from './galleryWithholdAlways.js';
+import { HIDDEN_POWER_MASK } from './publicSafe.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 
@@ -139,13 +140,19 @@ export function applyRosterChoices(s, pub, idOf) {
   }
   // R3-CURE (unit 2): master's stored shape, the top-level factions[]: the same rule, an entry naming a power withheld above
   // leaves too, one naming a governing power stays (VR42)
+  const topBefore = objectsOf(s.factions).length;
   if (whole && Array.isArray(s.factions)) {
-    const before = objectsOf(s.factions).length;
     s.factions = s.factions.filter(f => !(isRec(f) && f.isGoverning !== true && ![str(f.faction), str(f.name)].some(n => govNames.has(n))
       && (entryOut(f) || [str(f.faction), str(f.name)].some(n => psOut.has(n)))));
-    // (VR11/VR31 on this list too: where the rule took an entry, a share set left is re-derived to 100 by largest remainder)
+  }
+  // registry: power.rival (R5D-RIVAL; the chair's N63, ruling 107 (3) closed): THE RIVAL LEAVES WITH ITS HOST, here, after
+  // power.entry, where the withheld set is resolved (withholdRivalsOfWithheld); every rule below that reads the set follows
+  const rivalOut = withholdRivalsOfWithheld(s, ps);
+  // (VR11/VR31 on master's top-level factions[] too: where power.entry or the rival rule took an entry, a share set left is
+  // re-derived to 100 by largest remainder)
+  if (Array.isArray(s.factions)) {
     const left = objectsOf(s.factions);
-    if (left.length > 0 && left.length < before && left.every(f => typeof f.power === 'number')) s.factions = largestRemainder(/** @type {unknown[]} */ (s.factions));
+    if (left.length > 0 && left.length < topBefore && left.every(f => typeof f.power === 'number')) s.factions = largestRemainder(/** @type {unknown[]} */ (s.factions));
   }
   // registry: power.share (VR11, VR31: wherever any power is withheld, re-derived to 100 by largest remainder from `power`)
   const n0 = objectsOf(recAt(pub, 'powerStructure')?.factions).length;
@@ -175,11 +182,14 @@ export function applyRosterChoices(s, pub, idOf) {
       }
     }
   }
-  if (!whole) return;
+  // (R5D-RIVAL, registry power.rival: the structured copies run wherever a house is hidden whole OR the rival rule took a
+  // row; every rule after them is the hidden house's alone)
+  if (!whole && !rivalOut) return;
 
   // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
   // `pub`'s two lists that neither served list names) leave every STRUCTURED copy (withholdPowerCopies)
   withholdPowerCopies(s, pub, ps);
+  if (!whole) return;
   // R3-TELL-4 unit (i) (the chair's ruling 73 (2): WHAT NAMES OR DEPENDS ON A WITHHELD HOUSE IS SERVED AS THE HOUSE-FREE TWIN
   // WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` stays only BY POSITIVE ACCOUNT: its `house` a
   // house this read lists, its `power` null, absent or a power this read serves (both served lists); else THE KEY leaves, the
@@ -348,6 +358,55 @@ export function applyRosterChoices(s, pub, idOf) {
   // registry: prose.criminal ((b): the criminal desk, by the house's eye)
   const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
   if (blocks) delete blocks['defense:criminal'];
+}
+
+/** A row's seat key for the rival rule (seatKey.js, strings only): its `faction` with JavaScript's blank class trimmed from both
+ * ends where that is not empty, else its `name` so trimmed; '' where neither is a string. 212's `rv_bl`, the same class.
+ * @param {Rec} f @returns {string} */
+const rivalSeatOf = (f) => (typeof f.faction === 'string' && f.faction.trim() !== '' ? f.faction.trim() : typeof f.name === 'string' ? f.name.trim() : '');
+
+/**
+ * R5D-RIVAL (registry power.rival; the chair's N63, ruling 107 (3) closed, each line vetoable by the owner): THE RIVAL LEAVES
+ * WITH ITS HOST, in place on both lists. Wherever a power's row is withheld on this read, by the hand (the projection drops
+ * it, or serves it under the mask, on the player view; it is stamped `hidden` on the DM door) or by rule (power.entry), every
+ * row minted against it (applyDensityLaw.js :: resizeSeats: its `contestsNiche` the host's seat key) is withheld THE SAME
+ * WAY, CLOSED OVER (a rival's rival follows): a row with a `contestsNiche` stays where an OPEN row (an object of either list,
+ * neither stamped nor masked) has that seat key (rivalSeatOf); is STAMPED (`hidden` true: its desc then leaves, power.desc (b))
+ * where only a stamped row has it; and LEAVES its list where no row has it (its host absent, or unsure). A governing row is
+ * never moved (VR42). Each pass reads the keys once over both lists, then moves both; until a pass moves nothing. SQL twin:
+ * 212 :: _gallery_veil_roster_choices, the same rule.
+ * @param {Rec} s @param {Rec | null} ps
+ * @returns {boolean} whether the rule took a row off a list (the structured copies then follow it)
+ */
+function withholdRivalsOfWithheld(s, ps) {
+  const holders = /** @type {Rec[]} */ ([ps, s].filter(h => isRec(h)));
+  if (!holders.some(h => objectsOf(h.factions).some(f => typeof f.contestsNiche === 'string'))) return false;
+  const rival = (/** @type {unknown} */ f) => isRec(f) && typeof f.contestsNiche === 'string' && f.isGoverning !== true;
+  let out = false;
+  for (;;) {
+    /** @type {Set<string>} */ const open = new Set();
+    /** @type {Set<string>} */ const stamped = new Set();
+    for (const h of holders) {
+      for (const f of objectsOf(h.factions)) {
+        if (f.faction === HIDDEN_POWER_MASK || f.name === HIDDEN_POWER_MASK) continue;
+        const k = rivalSeatOf(f);
+        if (k !== '') (f.hidden === true ? stamped : open).add(k);
+      }
+    }
+    let moved = false;
+    for (const h of holders) {
+      const list = h.factions;
+      if (!Array.isArray(list)) continue;
+      const off = (/** @type {unknown} */ f) => rival(f) && !open.has(/** @type {string} */ (/** @type {Rec} */ (f).contestsNiche));
+      if (!list.some(f => off(f) && (!stamped.has(/** @type {string} */ (/** @type {Rec} */ (f).contestsNiche)) || /** @type {Rec} */ (f).hidden !== true))) continue;
+      const n = list.length;
+      h.factions = list.filter(f => !(off(f) && !stamped.has(/** @type {string} */ (/** @type {Rec} */ (f).contestsNiche))))
+        .map(f => (off(f) ? { .../** @type {Rec} */ (f), hidden: true } : f));
+      if (/** @type {unknown[]} */ (h.factions).length < n) out = true;
+      moved = true;
+    }
+    if (!moved) return out;
+  }
 }
 
 /** @param {Rec} d @returns {Rec | null} the served safety profile */
