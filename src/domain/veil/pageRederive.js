@@ -56,6 +56,35 @@
  * top-level `pressureSentence`, withheld wherever it copied the sentence, is NOT re-filled (E97 (1)). The import's save
  * calls the same reader (importRederive.js), authoritative.
  *
+ * THE PAGE READERS' ROSTER (R5-DESC; the chair's E128 (b), VEIL-34's review (H), vetoable by the owner): A PAGE READER PRINTS
+ * NO POWER'S NAME AND NO KIND WORD OF A POWER THE SERVED ROSTER DOES NOT CARRY. The served roster (servedRosterOf, below) is
+ * `powerStructure.factions` with every row the read hides OUT, as if never there: a row flagged `hidden` (the DM door serves
+ * it stamped) and a row under the projection's mask (publicSafe.js :: HIDDEN_POWER_MASK, act T's owner-hidden taker). Every
+ * reader here reads that roster: the crime list's seats; THE STANDING (below); and the recent-conflict sentence, whose writer
+ * (generatePowerStructure) builds its OWN roster from the served houses and config and may re-create a power the read
+ * withholds (a power the owner hid by hand: R5DESC-MEASURE, 930 of 1,410 hiding pages). What it builds is CUT to the served
+ * roster's rows before its sentence is drawn: the writer's rows the served roster does not carry, and the rows the read
+ * hides, are cut, and a sentence that names a cut power by the lane's fold (gallerySecondHomes.js :: buildNameSearch) is NOT
+ * DRAWN (toward withholding, never a mask). The writer's KIND reads of its roster (a noble power, a religious power of
+ * weight) are held by the differential, not by a cut: no page can tell a row the player view dropped (an owner's hide)
+ * from a row the density law trimmed after the power step, and the writer re-creates both alike on the place where the
+ * power was never there; cutting the writer's reads by every unserved row withheld the sentence on 7 of the 21
+ * nothing-hidden births of R5C2's slice measured (r5c2-m3-<size>-0..5; R5D-PAGE-A's hand-back: the seat's to rule).
+ *
+ * THE STANDING (R5-DESC; the chair's E115, E116, E121, E126, E129, each vetoable by the owner):
+ *   powerStructure.factions[].desc's standing tail    rosterText.js :: standingRosterOf + factionStanding.js ::
+ *                                                    annotateFactionStanding over the SERVED ROSTER (the served houses'
+ *                                                    force, the served seat's legitimacy), appended to the served base
+ * cut on every non-owner read of every place (212 :: _gallery_veil_withhold_always, by ONE table, STANDING_FORMS; the twin
+ * galleryWithholdAlways.js :: standingBase), it is drawn by every power card. THE ONE READER (rederiveStanding, below: reader
+ * S, R5DESC-MEASURE's) writes each served power's standing again by the engine's own writer over the served roster, the cut
+ * rows out, and appends it to the served base. The served desc is cut again by the twin's table first (a base is its own
+ * cut), so the reader is idempotent and a server that still sends the tail cannot double it. A cut row's own desc is
+ * served by neither engine; the import's save (importRederive.js, authoritative) drops one whatever the document held. On
+ * a nothing-hidden page it reproduces the stored desc but for one class, LISTED by the fidelity arm
+ * (tests/security/galleryVeilDesc.pglite.test.js): a stored standing carrying the seat-contest line
+ * (factionStanding.js :: SEAT_CONTESTED_STANDING, which reads the seat's legitimacy after the last standing write).
+ *
  * NOTHING HERE RUNS ON AN OWNER'S OWN RECORD: it is called on a non-owner page's served document alone
  * (src/lib/gallery.js :: fetchPublicDossier, fetchGalleryMap). Pure in its input's values; works in place on the page's
  * own copy and returns it.
@@ -70,6 +99,11 @@ import { READINESS_BANDS } from '../../data/bandLadders.js';
 import { generatePowerStructure } from '../../generators/power/rulingStructure.js';
 import { isAdversarialRelationship } from '../relationships/canonicalRelationship.js';
 import { deepClone } from '../clone.js';
+import { standingRosterOf, standingForceOf } from '../../generators/power/rosterText.js';
+import { annotateFactionStanding } from '../../generators/power/factionStanding.js';
+import { HIDDEN_POWER_MASK } from '../display/publicSafe.js';
+import { standingBase } from '../display/galleryWithholdAlways.js';
+import { buildNameSearch } from '../display/gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Doc */
 
@@ -81,6 +115,38 @@ const recOf = (v) => (isRec(v) ? v : null);
 const listOf = (v) => (Array.isArray(v) ? v : []);
 /** @param {unknown} v @returns {v is number} */
 const finite = (v) => typeof v === 'number' && Number.isFinite(v);
+
+/** A row the read hides: flagged `hidden` (the DM door serves it stamped) or under the projection's mask. @param {Doc} f */
+const isCutRow = (f) => f.hidden === true || f.faction === HIDDEN_POWER_MASK || f.name === HIDDEN_POWER_MASK;
+/** A power row's name. @param {unknown} f @returns {string} */
+const powerNameOf = (f) => (isRec(f) ? String(f.faction ?? f.name ?? '') : '');
+
+/**
+ * THE SERVED ROSTER (E128 (b)): the served `powerStructure.factions` rows a page reader may read, every row the read hides
+ * OUT (flagged `hidden`, or under the projection's mask), as if never there. The rows themselves, not copies.
+ * @param {unknown} doc @returns {Doc[]}
+ */
+export function servedRosterOf(doc) {
+  const ps = recOf(recOf(doc)?.powerStructure);
+  return listOf(ps?.factions).filter(isRec).filter((f) => powerNameOf(f) !== '' && !isCutRow(f));
+}
+
+/**
+ * Whether a sentence the writer drew over ITS roster names only the served roster (E128 (b)): the writer's rows the served
+ * roster does not carry, and the served rows the read hides (stamped or masked), are CUT; the sentence holds where it names
+ * no cut power by the lane's fold (gallerySecondHomes.js :: buildNameSearch, the served powers' and houses' names open).
+ * @param {string} sentence @param {Doc} fresh the writer's power structure @param {Doc} s the served document @returns {boolean}
+ */
+function holdsOverServed(sentence, fresh, s) {
+  const served = servedRosterOf(s);
+  const servedNames = new Set(served.map(powerNameOf));
+  const marked = listOf(recOf(s.powerStructure)?.factions).filter((f) => isRec(f) && isCutRow(f)).map(powerNameOf).filter((n) => n && n !== HIDDEN_POWER_MASK);
+  const cut = new Set([...listOf(fresh.factions).filter(isRec).map(powerNameOf).filter((n) => n && !servedNames.has(n)), ...marked]);
+  if (!cut.size) return true;
+  const opens = [...servedNames, ...listOf(s.institutions).filter(isRec).map((h) => h.name)].filter((n) => typeof n === 'string' && n && !cut.has(n));
+  const search = buildNameSearch([...cut], opens);
+  return !search || !search.hit(sentence);
+}
 
 /** The six scores (VR33): the page draws five on every town (R2's render-twice) and re-derives the sixth with them. */
 export const PAGE_DRAWN_SCORES = Object.freeze(['disaster', 'economic', 'internal', 'magical', 'military', 'monster']);
@@ -146,8 +212,8 @@ export function rederiveCrimeTypes(doc, { authoritative = false } = {}) {
   if (!config || !Array.isArray(sp.criminalInstitutions) || veilGroupingsOf(s).includes(CRIMINAL_STRUCTURE)) return doc;
   try {
     const fresh = generateSafetyProfile(config, typeof s.tier === 'string' ? s.tier : undefined, listOf(s.institutions));
-    const powers = recOf(s.powerStructure);
-    const lists = /** @type {any} */ ({ seats: powers?.factions, estate: s.institutions, tensions: recOf(s.history)?.currentTensions, services: s.availableServices });
+    const powers = recOf(s.powerStructure); // E128 (b): the seats are the served roster, every row the read hides out
+    const lists = /** @type {any} */ ({ seats: powers ? servedRosterOf(s) : undefined, estate: s.institutions, tensions: recOf(s.history)?.currentTensions, services: s.availableServices });
     const list = recOf(recOf(settleCrimeLinesToSignal(/** @type {any} */ ({ ...e, safetyProfile: fresh }), lists))?.safetyProfile)?.crimeTypes;
     if (Array.isArray(list)) sp.crimeTypes = list.map((c) => (isRec(c) ? { ...c } : c));
   } catch {
@@ -184,9 +250,46 @@ export function rederiveRecentConflict(doc, { authoritative = false } = {}) {
     const fresh = generatePowerStructure(s.tier, deepClone(recOf(s.economicState) ?? {}), deepClone(neighbour), deepClone(config),
       deepClone(listOf(s.institutions).filter(isRec)), projection);
     const v = recOf(fresh)?.recentConflict;
-    if (typeof v === 'string') ps.recentConflict = v;
+    // E128 (b): the writer's roster CUT to the served roster's rows; a sentence that still needs a cut power is not drawn
+    if (typeof v === 'string' && holdsOverServed(v, /** @type {Doc} */ (fresh), s)) ps.recentConflict = v;
   } catch {
     // a document the engine cannot read: the page draws no sentence
+  }
+  return doc;
+}
+
+/**
+ * THE ONE READER OF THE STANDING (R5-DESC, reader S): each served power's standing written again by the engine's own writer
+ * (rosterText.js :: standingRosterOf, factionStanding.js :: annotateFactionStanding, as rosterText.js :: standingsOf calls
+ * it) over the SERVED ROSTER (servedRosterOf: every row the read hides out), with the served houses' force and the served
+ * seat's legitimacy, and appended to each served row's base (its served desc as the one table cuts it:
+ * galleryWithholdAlways.js :: standingBase, so a desc already re-derived, or sent whole, is never doubled). In place. A row
+ * with no desc is left so; where the writer cannot read the roster the base is drawn alone.
+ * @template T @param {T} doc
+ * @param {{ authoritative?: boolean }} [opts] `authoritative` (the import's save): a row the read hides keeps no desc,
+ *   whatever the document held
+ * @returns {T}
+ */
+export function rederiveStanding(doc, { authoritative = false } = {}) {
+  if (!isRec(doc)) return doc;
+  const s = /** @type {Doc} */ (doc);
+  const ps = recOf(s.powerStructure);
+  if (!ps || !Array.isArray(ps.factions)) return doc;
+  if (authoritative) for (const f of ps.factions) if (isRec(f) && isCutRow(f)) delete f.desc;
+  const roster = servedRosterOf(s);
+  /** @type {Map<string, string> | null} */ let standings;
+  try {
+    const seats = standingRosterOf(roster).map((f) => ({ ...f, desc: '' }));
+    annotateFactionStanding(seats, standingForceOf(s.institutions), { publicLegitimacy: ps.publicLegitimacy });
+    standings = new Map(seats.map((f) => [f.faction, String(f.desc || '')]));
+  } catch {
+    standings = null; // a roster the engine cannot read: the page draws the base alone
+  }
+  for (const f of roster) {
+    if (typeof f.desc !== 'string') continue;
+    const base = standingBase(f.desc);
+    const tail = standings?.get(String(f.faction || '')) ?? '';
+    f.desc = base && tail ? `${base} ${tail}` : (base || tail);
   }
   return doc;
 }
@@ -233,6 +336,7 @@ export function rederiveForPage(doc, { unveiled = false } = {}) {
   }
   rederiveCrimeTypes(s);
   rederiveRecentConflict(s);
+  rederiveStanding(s);
   for (const c of listOf(s.activeConditions)) {
     const cond = recOf(c);
     if (cond && !('severity' in cond) && typeof cond.severityBand === 'string' && BANDS.includes(cond.severityBand)) {

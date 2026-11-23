@@ -49,6 +49,9 @@
  *   DIFFERENTIAL  the unit's real proof (E92 (5), E93 (2)): a HIDING read's page sentence equals the page sentence of the
  *              same place with the withheld powers and houses NEVER THERE (the stored record without them, read the same way),
  *              each engine, each door; and it names no power or house the read withholds (the lane's fold).
+ *   THE HAND HIDES (R5D-PAGE item 0 (a); the chair's E128): the differential and the name check over plant (b) r5-owner,
+ *              act T's jp6-city-8 and hand hides of a density host and a noble power on the pool's births (reader B re-creates a
+ *              power hidden by hand from the served houses; the page names no power the served roster does not carry).
  *   THE COUNT c (E97 (2) (c), E98): on hiding reads (every setting, Reveal DM off and on, the gallery read), the places whose
  *              stored pressureSentence is NOT the sentence and names a power or house, whose SERVED pressureSentence names a
  *              withheld one: the server's c beside the twin's (server = twin; the figure goes to the hand-back).
@@ -486,6 +489,91 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
     }
     note(`R5C6 differential (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool): hiding places`, births.length, '| hiding reads (place x Reveal DM)', hiding, '| engine-door-reads', reads, '| equal', equal, '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
     expect(hiding, 'the pool holds hiding reads').toBeGreaterThan(0);
+    expect(reads, 'both engines, both doors, every hiding read').toBe(hiding * 4);
+    // anchored: reads is asserted above, so an empty fault list is a judgment over every hiding read
+    expect(faults).toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  // ── THE HAND HIDES (R5D-PAGE item 0 (a); the chair's E128, VEIL-34's review (H)): reader B builds its sentence from the
+  // served HOUSES and config, never from the served powers, so a power an owner hid BY HAND is re-created in B's own roster.
+  // The differential and the name check above ran on house hides only; here they run on (1) plant (b) r5-owner, (2) act T's
+  // jp6-city-8 (the join probe's lit act by its recipe: the first non-governing, unveiled power hidden by the DM takes the
+  // seat by a coup, rulingPower.js :: transferRulingPower), (3) on R5C2's births, each density host (the power a
+  // density-law rival was minted from, seatKey(host) === rival.contestsNiche) and each non-governing noble power hidden by
+  // hand (`hidden: true`), each its own record. THE RULE (E128 (b)): a page reader names no power the SERVED ROSTER does not
+  // carry, every row the read hides OUT (a stamped row on the DM door too), as if never there.
+  it('THE HAND HIDES (E128 (a)): the differential and the name check over plant (b) r5-owner, act T\'s jp6-city-8 and hand hides of a density host and a noble power on born towns: the page\'s sentence equals the never-there page\'s and names no power the read hides (a stamped row out), each engine, both doors, Reveal DM off and on', async () => {
+    const births = await poolOf();
+    const { seatKey } = await import('../../src/domain/density/seatKey.js');
+    const { isVeiledPower } = await import('../../src/domain/people/cardVeil.js');
+    const { transferRulingPower } = await import('../../src/domain/rulingPower.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig } = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    const nameOf = (f) => (isRec(f) ? String(f.faction ?? f.name ?? '') : '');
+    const hideByHand = (t, name) => { const x = clone(t); x.powerStructure.factions = x.powerStructure.factions.map((f) => (nameOf(f) === name ? { ...f, hidden: true } : f)); return x; };
+    const recs = [{ seed: 'r5-owner', how: 'plant (b)', t: PLANTS.find((p) => p.seed === 'r5-owner').stored }];
+    const born = clone(generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city' }), null, { seed: 'jp6-city-8', customContent: {} }));
+    const gov = arr(born.powerStructure?.factions).find((f) => f?.isGoverning);
+    const A = nameOf(arr(born.powerStructure?.factions).find((f) => isRec(f) && f !== gov && !isVeiledPower(f)));
+    const tr = transferRulingPower(hideByHand(born, A), A, { cause: 'coup' });
+    if (!tr.error) recs.push({ seed: 'jp6-city-8', how: `act T (${A})`, t: clone(tr.settlement) });
+    for (const { seed, t } of births) {
+      const fs = arr(t.powerStructure?.factions).filter(isRec);
+      const rival = fs.find((f) => typeof f.contestsNiche === 'string');
+      const host = rival ? fs.find((f) => f !== rival && seatKey(f) === rival.contestsNiche && !f.hidden) : null;
+      if (host) recs.push({ seed, how: `hand hide: density host ${nameOf(host)}`, t: hideByHand(t, nameOf(host)) });
+      const noble = fs.find((f) => !f.isGoverning && !f.hidden && (f.category === 'noble' || ['Noble Families', 'Noble Houses', 'Landed Gentry', 'Manor Household'].includes(nameOf(f))));
+      if (noble && noble !== host) recs.push({ seed, how: `hand hide: noble power ${nameOf(noble)}`, t: hideByHand(t, nameOf(noble)) });
+    }
+    /** The powers the read hides: a stored power no served list carries UNCUT (a stamped or masked row is out). */
+    const hiddenBy = (stored, d) => {
+      const served = new Set(listsOf(d).filter((f) => f.hidden !== true && f.faction !== HIDDEN_POWER_MASK && f.name !== HIDDEN_POWER_MASK).map(nameOf).filter(Boolean));
+      return [...new Set([...listsOf(stored).map(nameOf).filter((n) => n && !served.has(n)), ...withheldAllOf(stored, d)])];
+    };
+    /** The lane's fold, the uncut served powers' and houses' names open (a stamped row's name is NOT open: it is hidden). */
+    const namesHidden = (text, wh, d) => {
+      const opens = [...listsOf(d).filter((f) => f.hidden !== true && f.faction !== HIDDEN_POWER_MASK && f.name !== HIDDEN_POWER_MASK).map(nameOf), ...arr(d?.institutions).filter(isRec).map((h) => h.name)]
+        .filter((v) => typeof v === 'string' && v && !wh.includes(v));
+      const search = buildNameSearch(wh, opens);
+      return !!search && search.hit(text);
+    };
+    const faults = []; let reads = 0; let equal = 0; let drawn = 0; let hiding = 0; const recreated = new Set();
+    for (const { seed, how, t } of recs) for (const dm of [false, true]) {
+      const got = await readOne(t, opened(OPEN), dm);
+      const wh = hiddenBy(t, got.twin.page);
+      if (!wh.length) continue;
+      hiding += 1;
+      const never = clone(t);
+      never.institutions = arr(never.institutions).filter((h) => !(isRec(h) && wh.includes(h.name)));
+      const keep = (f) => !(isRec(f) && wh.includes(nameOf(f)));
+      never.powerStructure.factions = arr(never.powerStructure.factions).filter(keep);
+      if (Array.isArray(never.factions)) never.factions = never.factions.filter(keep);
+      const ng = await readOne(never, opened(OPEN), dm);
+      for (const eng of ['server', 'twin']) for (const door of ['page', 'import']) {
+        const d = got[eng][door]; const n = ng[eng][door];
+        if (!isRec(d) || !isRec(n)) { faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: no document`); continue; }
+        reads += 1;
+        const ph = pageSentence(door, d); const pn = pageSentence(door, n);
+        if (ph !== null) drawn += 1;
+        if (ph === pn) equal += 1;
+        else faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: hiding ${J(ph).slice(0, 110)} | never there ${J(pn).slice(0, 110)}`);
+        if (typeof ph === 'string' && namesHidden(ph, wh, d)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence names a power the read hides ${J(wh)}: ${J(ph).slice(0, 140)}`);
+        if (typeof ph === 'string' && ph.includes(HIDDEN_POWER_MASK)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence carries the mask`);
+        if (eng === 'twin' && door === 'page' && isRec(d.config)) {
+          const { generatePowerStructure } = await import('../../src/generators/power/rulingStructure.js');
+          try {
+            const entries = arr(d.stressors).length ? arr(d.stressors) : isRec(d.stress) ? [d.stress] : arr(d.stress);
+            const fresh = generatePowerStructure(d.tier, clone(d.economicState ?? {}), null, clone(d.config), clone(arr(d.institutions).filter(isRec)), { stressEntries: clone(entries) });
+            for (const f of arr(fresh?.factions)) if (wh.includes(nameOf(f))) recreated.add(`${seed} (${how}) dm=${dm}: ${nameOf(f)}`);
+          } catch { /* the engine cannot read it: B draws nothing */ }
+        }
+      }
+    }
+    note('R5D-PAGE item 0 (a) hand hides: records', recs.length, J(recs.map((r) => `${r.seed} (${r.how})`)), '| hiding reads', hiding, '| engine-door-reads', reads, '| sentence drawn', drawn, '| equal', equal,
+      '| B re-creates the hidden power on', recreated.size, recreated.size ? J([...recreated].slice(0, 12)) : '', '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
+    expect(recs.some((r) => r.how.startsWith('act T')), 'act T was made on jp6-city-8').toBe(true);
+    expect(recs.some((r) => r.how.includes('density host')) && recs.some((r) => r.how.includes('noble power')), 'the births hold a density host and a noble power').toBe(true);
     expect(reads, 'both engines, both doors, every hiding read').toBe(hiding * 4);
     // anchored: reads is asserted above, so an empty fault list is a judgment over every hiding read
     expect(faults).toEqual([]);

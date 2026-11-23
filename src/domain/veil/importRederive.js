@@ -32,7 +32,7 @@ import { promoteStressorsToConditions } from '../conditionPromotion.js';
 import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
 import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
 import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/economy/prosperity.js';
-import { rederiveCrimeTypes, rederiveRecentConflict } from './pageRederive.js';
+import { rederiveCrimeTypes, rederiveRecentConflict, rederiveStanding } from './pageRederive.js';
 
 /** @typedef {Record<string, unknown>} Doc */
 
@@ -130,6 +130,7 @@ export function rederiveInPlace(s) {
     if (layout) delete layout.quarters;
     if (Array.isArray(s.activeConditions)) s.activeConditions = [];
     castsNotKnown(s);
+    rederiveStanding(s, { authoritative: true }); // 12 (below): the standing reads the served roster and houses alone, no config
     return s;
   }
 
@@ -233,5 +234,10 @@ export function rederiveInPlace(s) {
   //     AUTHORITATIVE: the saved sentence is the reader's whatever the document held. Its pressureSentence copy, withheld
   //     where it equalled the sentence, is not re-filled (E97 (1)).
   rederiveRecentConflict(s, { authoritative: true });
+
+  // 12. THE STANDING (R5-DESC; E115, E121, E126, E129): cut on every read, written again by the page's ONE reader over the
+  //     SERVED ROSTER (pageRederive.js :: rederiveStanding: every row the read hides out) and appended to each served base.
+  //     AUTHORITATIVE: a row the read hides keeps no desc, whatever the document held.
+  rederiveStanding(s, { authoritative: true });
   return s;
 }

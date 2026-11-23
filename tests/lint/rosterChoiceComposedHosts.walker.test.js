@@ -27,8 +27,21 @@
  * not composed, withhold / always / page re-derive / built, both hosts existing. A row that left can come back only by a
  * registry edit this arm reds. The census pin on ORDERED[0] is RE-TAKEN (E97 (5)): with the row gone from the composed
  * list, ORDERED[0] is the first composed row in the registry's own order (`history.founding.overcoming`); the pin
- * holds that `power.recentConflict` is NOT among the composed rows, so the walk cannot silently re-admit it. The 26
- * composed rows still on R5's planned host are R5-DESC's worklist (the chair's E97 (5)), red by design.
+ * holds that `power.recentConflict` is NOT among the composed rows, so the walk cannot silently re-admit it. R5-DESC's
+ * worklist (the chair's E97 (5)) held 26 composed rows on R5's planned host; THREE LEFT WITH R5-DESC (R5D-SQL moved them):
+ * `power.desc`, `power.label` and `power.relation.dmNote`, walked by name below. The 23 `prose.*` rows still on R5's
+ * planned host are CHAIN C's worklist (E134 (2); the ninth chair's ruling of 2026-11-23, 00:56 UTC), red by design, one
+ * test per row, by name: neither cured nor exempted here.
+ *
+ * ── R5-DESC's ROWS (VEIL-37's R5D-PAGE-A, brief item 6; the chair's E115 (3), E121, E126, E129; 212 (36)) ─────────────
+ * `power.desc` LEFT THE COMPOSED FORM (withheld ALWAYS on R2's always-host, the standing cut by one table, the page
+ * re-deriving it: pageRederive.js :: rederiveStanding); `power.relation.dmNote` is BUILT IN ITS HOSTS (composed, per entry,
+ * on R3's roster-choice host in both engines); `power.label` is OFF THE COMPOSED FORM (a plain diffuse row; its census over
+ * served labels, 0 names, 0 kind lines, 0 mask, is R5DESC-MEASURE's, and the page arm of
+ * tests/security/galleryVeilDesc.pglite.test.js counts again what the page's readers write). Each is walked BY NAME below.
+ * THE PINS RE-TAKEN BY CAUSE (R5D-SQL moved the three): the composed list is 26 rows, of which `power.relation.dmNote` is
+ * on a host that exists (R3's roster-choice host), so the red list is the 23 `prose.*` rows, pinned below by count and by
+ * prefix (CHAIN C's worklist); `power.desc` and `power.label` are not composed.
  */
 import { describe, expect, test } from 'vitest';
 import { REGISTRY_HOSTS, REGISTRY_ROWS } from '../../src/domain/veil/rosterChoiceRegistry.js';
@@ -111,11 +124,48 @@ describe('THE ROW THAT LEFT THE COMPOSED FORM, walked by name (R5-RECENT: E92 (1
   });
 });
 
-describe('every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design, R5\'s worklist)', () => {
+describe('every COMPOSED row of the registry names a host that exists in both engines (E78 (2): RED today by design; the 23 prose.* rows on R5\'s planned host are CHAIN C\'s worklist, E134 (2))', () => {
   for (const r of ORDERED) {
     test(`${r.id}: its server and twin hosts are declared and exist (not PLANNED)`, () => {
       // anchored: hostFaultsOf names three faults on the synthetic planned rows above, so an empty list here is a judgment
       expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
     });
   }
+});
+
+describe('R5-DESC\'s ROWS, walked by name (E115 (3), E121, E126, E129; 212 (36))', () => {
+  const rowOf = (id) => REGISTRY_ROWS.find((x) => x.id === id) ?? { id, inputs: ['(no such row)'], server: '', twin: '' };
+  test('power.desc: not composed; withheld ALWAYS, the page re-deriving it (rederiveStanding), built on R2\'s always-host in both engines (hosts that exist)', () => {
+    const r = rowOf('power.desc');
+    expect(isComposed(r), 'power.desc is in the registry and has left the composed form (no inputs)').toBe(false);
+    expect({ rule: r.rule, when: r.when, page: r.page, built: r.built }).toEqual({ rule: 'withhold', when: 'always', page: 're-derive', built: true });
+    expect({ server: r.server, twin: r.twin }).toEqual({ server: 'public._gallery_veil_withhold_always', twin: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways' });
+    // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
+    expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
+  });
+  test('power.relation.dmNote: composed and BUILT IN ITS HOSTS, per entry, on R3\'s roster-choice host in both engines (hosts that exist)', () => {
+    const r = rowOf('power.relation.dmNote');
+    expect(isComposed(r), 'power.relation.dmNote is composed (its input the relation\'s entry)').toBe(true);
+    expect({ rule: r.rule, built: r.built }).toEqual({ rule: 'withhold', built: true });
+    expect({ server: r.server, twin: r.twin }).toEqual({ server: 'public._gallery_veil_roster_choices', twin: 'src/domain/display/galleryRosterChoices.js :: applyRosterChoices' });
+    // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
+    expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
+  });
+  test('THE PINS RE-TAKEN BY CAUSE (R5D-SQL moved power.desc, power.label, power.relation.dmNote): of the composed rows, exactly the 23 prose.* rows sit on R5\'s planned host (CHAIN C\'s worklist, E134 (2)); no other row does', () => {
+    const planned = ORDERED.filter((r) => hostFaultsOf(r, REGISTRY_HOSTS).length > 0).map((r) => r.id);
+    expect(planned.length).toBe(23);
+    expect(planned.filter((id) => !id.startsWith('prose.'))).toEqual([]);
+    expect(ORDERED.length).toBe(26);
+  });
+  test('power.label: OFF THE COMPOSED FORM, a plain diffuse row (its census 0 hits: R5DESC-MEASURE; the page arm counts again)', () => {
+    const r = rowOf('power.label');
+    expect(isComposed(r), 'power.label is in the registry and has left the composed form (no inputs)').toBe(false);
+    expect({ rule: r.rule, built: r.built }).toEqual({ rule: 'diffuse', built: true });
+    expect(ORDERED.length, 'the composed list the absences are read from is the registry\'s, non-empty').toBeGreaterThanOrEqual(10);
+    // anchored: ORDERED is asserted non-empty on the line above and equal to the registry's composed list in the controls
+    expect(ORDERED.map((x) => x.id)).not.toContain('power.label');
+    // anchored: as above, the absence is of a member of a list asserted present
+    expect(ORDERED.map((x) => x.id)).not.toContain('power.desc');
+    expect(hostFaultsOf(r, REGISTRY_HOSTS)).toEqual([]);
+  });
 });
