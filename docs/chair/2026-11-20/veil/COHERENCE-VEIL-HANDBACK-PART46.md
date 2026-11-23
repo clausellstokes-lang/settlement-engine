@@ -16,10 +16,12 @@ Written 10:49 UTC 2026-11-23.
 - Chain B's instruments read from origin, no checkout: `lane/veil-42-2026-11-23-meas-wip` at eb0c60920 (U-UNMARKED; `out/v42/meas/meas.sh`, the lane's ONE
   whole-document instrument: extend it, never a second); `lane/veil-doors-3-2026-11-20` at 3e1115c81.
 ### (2) DONE
+- THE MACHINE RE-MADE (chain0 END 11:31): instruments rc 0 (--check 0, walker 0, accept 40, gate HIGHER 0 / EQUAL 79 / LOWER 13 both engines and Reveals); pool `pool-v44` 4 shards rc 0 (11:24); verify 45, 0 differ; gates rc 1 by design: GATE-1 4 at every gated setting (off and DM), LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10). EQUAL TO PART 44's standing figures.
 - Read-in as the start message orders; first line to the chair 10:47.
 - (c1) WRITTEN: `briefs/IMPORT-DOOR-BRIEF.md` ADDENDUM 2 (the eleven-item list; the owner's paragraph on N75 (4)).
 ### (3) IN FLIGHT
-- chain0 (the machine).
+- MAPCOVERT-RED builder (dispatched ~10:56; told N84 (1) at ~11:08: the member's acceptance is the LINK's read).
+- (c2): `out/v44/c2/doors-arms.sh /home/user/wt/doors3` through the mutex (re-queued 11:25 with GATE_MUTEX_MAX_POLLS=100000; the first try gave up, exit 3); log `/var/tmp/v18/out/v44/c2-doors3.log`.
 ### (4) NEXT, IN ORDER (start message unit (1))
 (c) MAP-COVERT RED (in flight); (d) (c2) (queued); (e) TRAD4-RECUT (brief written); SNAP-MEASURE (N84 (3), a brief owed); FROZEN-LISTS (N85, after (c2)); (b) done; (c) MAP-COVERT RED (a builder, tests only, briefed by a committed file); (d) (c2) the doors' arms at 3e1115c81; (e) unit 0,
 the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the build (two builders).
@@ -39,3 +41,4 @@ the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the
 - 10:41 seated; 10:43 chain0 started; 10:47 first line; 10:49 (c1) written.
 - 10:55 (c1) and MAP-PIPELINE sent; MAPCOVERT-RED briefed (briefs/MAPCOVERT-RED-BRIEF.md), its branch lane/veil-44-2026-11-23-mapcovert-wip at 23bb8b8ae, worktree /home/user/wt/mapcovert.
 - 11:00 (f) census sent (4c602ddc7); (c2) doors-arms.sh queued behind the pool; TRAD4-RECUT brief written (dispatch after MAPCOVERT-RED returns).
+- 11:31 the machine's figures equal PART 44's (chain0 END 11:31).
