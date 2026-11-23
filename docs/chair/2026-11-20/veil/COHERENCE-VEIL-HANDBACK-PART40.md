@@ -18,6 +18,15 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
   - The fold keeps behaviour: `withholdPowerCopies`'s id set filters booleans, as the former `idText` did.
   - ONE NOTE, passed to R4I-PAGE-2: in the chair's arm, the link's first read is judged against itself. It should be anchored to the twin's reference.
 - R4I-PAGE-2's brief is committed: `briefs/R4I-PAGE-2-BRIEF.md`.
+- R4I-SQL's PROOFS, RE-RUN BY THIS SEAT on the -wip at fd7163ba6, 00:23 UTC. The script is `/var/tmp/v18/out/v38/sqlproofs.sh` (R4I-SQL's commands with the names changed); the outputs are in `/var/tmp/v18/out/v38/sql/`. ALL GREEN, EQUAL TO R4I-SQL's figures:
+  - The shas: 212 `7a85dec3…`; rollback `b13c5be8…`; 211 `eface6d0…` / `ce8474ff…`, unchanged.
+  - 212 applies on `v27x211`: exit 0.
+  - 001..211 + 212 + down = 001..211: 480 = 480 functions, 25,988 dump lines each, diff empty.
+  - The catalogue: ONE drawer in the veil (`_gallery_veil(jsonb,jsonb,boolean,boolean)`: no salt parameter, so the server takes no salt from a caller). The closure has 29 members, all `v` (`get_gallery_dossier`, `get_unlisted_dossier`, `import_gallery_dossier`, `get_gallery_map`, `import_gallery_map` among them).
+  - The smoke reads: 8 of 8 GREEN (0 ids shared between two reads, 0 stored ids served, 0 unresolved).
+  - `--check`: 0.
+- THE INSTRUMENTS (on the -wip at fd7163ba6): check 0, walker 0, acceptance 40 PASS, template `v28tpl` 0, the R3 gate 0 (HIGHER 0, EQUAL 79, LOWER 13 on both engines and both reads, equal to PART 36).
+  - The harnesses are RED (exit 1, 14 of 22): `criminalSwitchHandReach` (S1's cause, expected) and `shareRenderTwice`. In the second, the DOM ids `dossier-npc-npc-<re-keyed>` are id pins, BUT on metropolis-calm-2 the Tonight sheet prints its "Wants to …" lines in a different ORDER on two reads. That is PLAUSIBLY a sort by person id, and so a NON-ID red: a STOP, sent to R4I-PAGE-2 and to the chair at 00:24.
 
 ### (2) IN FLIGHT
 - THE INSTRUMENTS are being re-made on `/home/user/wip` (the -wip at fd7163ba6) by `out/v28/seated/make-instruments.sh`. The script and log are `/var/tmp/v18/out/v38/chain0.{sh,log}`, the exits are in `/var/tmp/v18/out/v38/seated/exits.txt`.
