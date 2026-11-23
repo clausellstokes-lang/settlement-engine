@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3b5a37a23dec124becd6207c9cc529161f902b5e",
+  "measuredAtSha": "a6d2824a4fa47bdee7518a25fefb936263bf7ef0",
   "measuredBy": "CLOSE-6",
   "date": "2026-11-23",
-  "note": "13G (the ninth chair N97): one new it in tests/generators/bar8Powers.test.js, the 900-birth 13g arm",
-  "files": 3785,
-  "parked": 487,
+  "note": "the flip: F9 A adds tests/property/generatorGoldenMasterLit.test.js (one file, parked); measured at a6d2824a4 on a clean tree",
+  "files": 3786,
+  "parked": 488,
   "credited": 3298,
   "titles": 31925,
   "suiteTitles": 8876
