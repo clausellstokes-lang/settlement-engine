@@ -53,8 +53,20 @@ it('V43-LOWER7 rows', async () => {
       tensions: recs(d.history?.currentTensions).map((t) => ({ type: t.type, factions: t.factions, label: t.label ?? t.name })),
     };
   };
+  // (b2) RV9_L7B2=1: every SERVED institution, and for each served sp.ops entry the served houses that account for it under
+  // galleryRosterChoices.js :: applyRosterChoices (a) (an entry kept as many times as served houses carry its label:
+  // CRIMINAL_INST_LABELS[asciiLowerOf(h.name)]; asciiLowerOf there is A-Z to a-z only, restated here as such)
+  const { CRIMINAL_INST_LABELS } = await import(`${SRC}/src/domain/display/galleryRosterChoices.js`);
+  const asciiLower = (v) => String(v ?? '').replace(/[A-Z]/g, (c) => c.toLowerCase());
+  const b2Of = (d) => {
+    const inst = recs(d.institutions).map((h) => ({ name: h.name, category: h.category, tags: h.tags }));
+    const ops = Array.isArray(d.economicState?.safetyProfile?.criminalInstitutions) ? d.economicState.safetyProfile.criminalInstitutions : null;
+    const account = {}; if (ops) for (const e of ops) account[String(e)] = inst.filter((h) => CRIMINAL_INST_LABELS[asciiLower(h.name)] === e).map((h) => h.name);
+    return { inst, ops, account };
+  };
   const read = (d) => {
     if (!isRec(d)) return null;
+    if (process.env.RV9_L7B2 === '1') return { sig: signatureOf(d, E.isHideableHouse, hasMarketInstitution).sig, b2: b2Of(d) };
     const s = surfaceC(d, namesOf(E.isHideableHouse, d));
     const fams = {}; for (const [k, v] of Object.entries(s)) if (v.kind === 'C') fams[k] = v.items;
     return { sig: signatureOf(d, E.isHideableHouse, hasMarketInstitution).sig, fams, rows: rowsOf(d) };
