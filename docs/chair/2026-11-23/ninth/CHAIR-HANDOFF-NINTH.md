@@ -3081,3 +3081,47 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   standing writer's new input handed to the page's reader over the served rows), (i) PAGES' split and the ORDER class,
   (j) the crime-wave rule and the test-side cure of hxd-city-138 if "REDS-CAUSE" confirms the cause. THE CHAIR'S
   PUSHES: the forty-fifth (244a17c1f: N104) ended exit=0 at 14:17:36 UTC (its log; ls-remote equal to the local tip).
+- 2026-11-23 14:39 UTC · N106 · THE WHOLE-DOCUMENT FORM FOUND A SERVER FAULT ON REAL MASTER-BORN DOCUMENTS (A GUARD
+  THAT PASSES ON AN ABSENT KEY WRITES SHARES THE STORED LIST NEVER HAD: 352 OF 3,360 READS); THE CLASS COUNTED BY THE
+  CHAIR (TWO LINES OF 212, NONE IN 204 TO 211); THE CURE GRANTED TO CHAIN B.
+  (1) CHAIN B's MEASURE ENDED (VEIL-42, queued 14:35:15; "R4I-MEASURE" at d71a3ee44, pushed). THE GAP on the
+  master-born set (m140): 0 hits; the master-born path list is empty; nothing inside `publicProse` on any run: the gap
+  lives only on the control's master shape (`criminalSwitchHandReach`'s `toMasterShape` of today's births), which is
+  also why the old stored measure read 0; its SQL builder is told: no new path. A SURPRISE, NOT R4-IDS's: A
+  SERVER-AGAINST-TWIN DIFFERENCE AT L1 ON REAL STORED DOCUMENTS: the master-born set, the gallery read, Reveal DM, the
+  11 marked settings: 352 of 3,360 reads (32 places) differ at `factions[].power` (1,969 leaves); the link 0; the
+  control 33 of 288: THE SERVED TOP-LEVEL `factions[]` ENTRIES CARRY A `power` SHARE THE STORED ENTRIES NEVER HAD. Its
+  cause as the seat read it: 212 `_gallery_veil_roster_choices`'s block for master's top-level list guards its
+  re-derivation with `not exists (... jsonb_typeof(e -> 'power') <> 'number')`: an absent `power` makes that NULL, the
+  guard passes and the server WRITES a share; the twin's guard (`galleryRosterChoices.js` :147: every entry's `power`
+  a number) is false and writes nothing. Its questions: whose is the cure (E116 gives that power block to chain A),
+  and is it a tell.
+  (2) READ BY THE CHAIR AT THE TIP 23bb8b8ae (212 :2272 to :2366; the twin :138 to :156): CONFIRMED: :2295 is that
+  guard; with no `power` anywhere the base is all 0, so EQUAL shares are written into every entry left; AND THE SAME
+  GUARD STANDS AT :2326 for `powerStructure.factions`, under a comment that states the twin's rule ("a record whose
+  powers carry none, an old one, has no shares to re-derive, and none is added"). THE CHAIR'S CENSUS: in 212 (3,194
+  lines) 14 comparisons `jsonb_typeof(...) <>`: these two are the only ones whose operand can be absent; the twelve
+  others read an array's element, `jsonb_each`'s value, a value coalesced at its declaration (:2716), or at :2363 a
+  row held by `@>` of a relation that has a pair array (so its `pair` is an array there); of 77 lines with `<>` or
+  `!=`, 49 hold a JSON extraction and all but these two read through `_gallery_veil_str`, a typeof-guarded `->>`, or
+  an element. In 204 to 211: no such comparison of a key lookup (211 holds three typeof comparisons, none of a key
+  lookup). CHAIN A's TREE (9a2f8ef9a) leaves both lines as they stand (:2626, :2657); its rival hunk ends two lines
+  above the first.
+  (3) **Decided (N106), sent after the clock read 14:38:14:** A FAULT OF 212 AND A TELL; THE TWIN IS RIGHT: a key the
+  stored entries never had, written only where an entry was taken, tells that one was, and is a false figure wherever
+  a page reads it. THE CURE IS CHAIN B's, IN ITS SQL BUILDER'S UNIT (R4I-SQL-2), BY THE CHAIR'S GRANT, though E116
+  gives the block to chain A: TWO LINES ONLY: each guard reads `is distinct from 'number'`; no other byte of the
+  block; no twin edit. RED FIRST: (a) its measure is the red: 352 of 3,360 to 0, the control 33 of 288 to 0; (b) a
+  plant for the second guard: a record whose `powerStructure.factions` carry no `power`, one withheld: the server adds
+  none and equals the twin; (c) NO TODAY-BORN READ MOVES: the 140's per-read hashes equal before and after; (d) a pin
+  in `tests/lint`: 212 holds no `jsonb_typeof` of a key lookup compared by `<>` or `!=` outside a coalesce; its
+  inventory the one line :2363 with its reason; it only shrinks; dropped if it costs over thirty minutes. **Why chain
+  B:** it found it; it holds the set and the instrument that show it; its builder is in 212 now and its unit merges
+  first, so its form reads 0 there with nothing to list; chain A's seat is at its hand-over and its tree has not
+  touched the two lines. SENT TO VEIL-40 (for its PART 42's first section): at its merge of the tip after "R4-IDS
+  MERGED" it takes chain B's two lines and builds nothing on them meanwhile. THE READER'S ROW 36 IS WRITTEN WITH THIS
+  ENTRY (the class is put to the reader wider than the chair's census: any guard an absent key turns from "no" to
+  "yes"); VEIL-48's draft gains (d2).
+  (4) WHAT THIS SHOWS OF THE INSTRUMENTS: the whole-document form (N90), run on real stored documents, found what no
+  pool proof of the lane had read: the old stored measure used a master SHAPE made from today's births, whose entries
+  carry `power`. The form earns its place in every unit's proof; the bar's pool-wide run reads both stored sets.
