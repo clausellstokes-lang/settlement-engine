@@ -34,3 +34,4 @@ the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the
 ## 3. Log (every hour read from `date -u`)
 - 10:41 seated; 10:43 chain0 started; 10:47 first line; 10:49 (c1) written.
 - 10:55 (c1) and MAP-PIPELINE sent; MAPCOVERT-RED briefed (briefs/MAPCOVERT-RED-BRIEF.md), its branch lane/veil-44-2026-11-23-mapcovert-wip at 23bb8b8ae, worktree /home/user/wt/mapcovert.
+- 11:00 (f) census sent (4c602ddc7); (c2) doors-arms.sh queued behind the pool; TRAD4-RECUT brief written (dispatch after MAPCOVERT-RED returns).
