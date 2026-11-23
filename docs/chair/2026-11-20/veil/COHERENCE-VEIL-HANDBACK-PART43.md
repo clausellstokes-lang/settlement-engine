@@ -35,15 +35,36 @@ RECEIPTS SO FAR:
 IN FLIGHT: builder V41-C2B (background agent of this session); the machine; VS1's bisect queued after the pool (`/var/tmp/v18/out/v41/vs1-bisect.sh`,
 log `/var/tmp/v18/out/v41/vs1/bisect.log`: the tip, 770080aca, 929739889 = the merge of VEIL-32's tip carrying unit (viii) c2625fb1f).
 
-OPEN WITH THE CHAIR: (1) prose.incomeWeight (unbuilt, host _gallery_veil_apply) and prose.criminal (built, R3 host): re-host with the 23? (my lean:
-prose.incomeWeight yes, prose.criminal untouched); (2) the tension-factions row: the builder measures and STOPS if not plainly the sibling's rule.
+THE BUILDER WAS DISPATCHED BEFORE THE STORED RED-FIRST COUNT (05:3x): it edits only /home/user/wt/c2; the seat's red runs use /home/user/wt/tip (detached
+23bb8b8ae, never edited) and v41_tip, so the red is still measured on unedited code. N53 was relayed to the builder at 05:3x.
 
-NEXT STEP IN ONE LINE: the red-first key count (`ppkey.sh` on /home/user/wt/tip with v41_tip) once the dump ends; then the builder's diff read whole.
+THE CHAIR'S N53 (05:32 UTC), IN FORCE: (a) `prose.incomeWeight` RE-HOSTED WITH THE 23 (24 rows move): withhold/always, H.sAlways/H.tAlways, built true
+once the proof by value is green; inputs, compose, vr14 treated as the 23's; scope keeps ruling 6's words and adds what it was (host
+`_gallery_veil_apply` / `withholdCriminalIncome`, unbuilt) and that (b) returns it to its inputs; any count or register of unbuilt rows moves by its
+own door, before and after said in the "TIP?" line. (b) `prose.criminal` LEFT (H.sChoice/H.tChoice, house-hidden, built; 212 and twin lines
+byte-stable) with one scope sentence (shadowed, not removed; (b) needs it). STOP: a registry-driven arm red for prose.criminal under (a') is named to
+the chair with its cause BEFORE it is re-stated. (2) the tension-factions row: the builder's red first on the 18 places decides; STOP if not plainly the
+sibling's. VS1: confirm 929739889 by one run there and one at its first parent (770080aca); "VS1 CAUSE" carries, beside the cause, WHICH FAMILY VALUES THE
+REGISTRY DOES NOT WITHHOLD AT THE TIP AND THE TWELVE BIRTHS HOLD (each by name, its count of births): the tooth's candidates. The chair rules the cure.
+
+THE CHAIR'S READ OF MY RECORD: 293,005 at 05:46 UTC (my own estimate was ~110,000: mine runs low). FROM HERE: NOTHING MORE IS READ WHOLE unless a red
+points into it; logs by tail; the diff once.
+
+NEXT ACTS, IN ORDER:
+1. When `dump rc=0` is in remake.log: RED FIRST by `sh docs/chair/2026-11-20/veil/out/v41/c2/ppkey.sh /home/user/wt/tip /var/tmp/v18/stored/today/docs
+   /var/tmp/v18/out/v41/ppkey-tip v41_tip pt` THROUGH THE MUTEX (try RV9_LIMIT=5 first for speed); expected: every server and twin read carries the key.
+2. VS1: read `/var/tmp/v18/out/v41/vs1/bisect.log` (tip, 770080aca, 929739889); the candidates' count over the twelve births; "VS1 CAUSE" <=120 words.
+3. The builder's report and diff (read once, whole); re-run its walkers; then on /home/user/wt/c2 with a template v41_c2 (v27x211 + the new 212): ppkey
+   (green: 0 carry, both engines, all doors), `out/v33/stored/prose.sh` every row 0, the read-stored gates (GATE-1 4/92, LOWER 7, GATE-2 20), 001..211 +
+   212 + down, the catalogue, the three prose pins measured then re-stated test-only red first (a builder), tests/lint whole beside 48, the N33 class (34
+   files) once, typecheck, eslint, first paint +0, the cost law's figure.
+4. "TIP? STORED-PROSE <commit>" with the unbuilt-row count before/after.
 
 ## 2. RULINGS IN FORCE (the ninth chair's; continuing PART 41's 118)
 119. THE START MESSAGE (2026-11-23 05:21): seated lean; units (0)-(4); one builder for C2-BUILD; the whole-document "server = twin" form is the chair's
      to send (N48): build nothing for it beyond this key's proof.
 
 ## 3. Log (every hour from `date -u`)
+- 05:46 the chair's read 293,005; section 1 brought current and pushed. 05:32 N53 received (05:38 read), relayed.
 - 05:2x seated; 05:28 the machine started; 05:30 first message (the two questions); 05:3x the walker red 26; the brief and probe d3559c7cd; the
   builder dispatched; VS1's bisect queued.
