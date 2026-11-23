@@ -1,6 +1,6 @@
 # PROSE-6 HAND-BACK (kept current at every push)
 
-## WHERE THE LANE STANDS (written 10:04 UTC 2026-11-23; THE LINE IS 9b0ffaa97; "PROSE-E cf104777c" sent; WAITING for a stack seat to land it, beside the flip)
+## WHERE THE LANE STANDS (written 10:41 UTC 2026-11-23; THE LINE IS 9b0ffaa97; PROSE-E cf104777c TAKEN (N80), landing with the flip; LIT-DISAGREE measured; WAITING)
 - SEAT: PROSE-6 of the ninth chair (session_01FbPLbdpQrxXktCeSf32d4j), ONE UNIT: "DISAGREE". PROSE-5's units 2-5 and its -wip branches stay PARKED: untouched.
 - BRANCHES: `lane/prose-6-2026-11-23` (this file; `lines/DISAGREE-LINES.md` as ruled at 03:45 and 03:55; `briefs/DISAGREE.md` + `briefs/DISAGREE-ADDENDUM-1.md`); `lane/prose-6-2026-11-23-disagree-wip`, cut at 244fa84ef, pushed at 01ecf1e91 (report `DISAGREE-REPORT.md`). Worktrees /home/user/wt-disagree and /home/user/wt-disagree-base (244fa84ef + the tooth's two files, uncommitted, for the red run). Builder: Agent a6ac7eee0af5d9d50.
 - BUILT: FOOD: F1-F6 (DS-DEF-2 CHAIN v7-v12), flat v1-v4 gain `food: <= pressured`. WAGES: no `force: paid` anywhere; WEAK v1 and v2 re-worded in place by two WORD_CORRECTIONS rows (CHAIR-2026-11-23-03:45, -03:55); GEN-17 leaf equal to 244fa84ef. The tooth `tests/domain/oppositeSentencePairs.test.js` + `tests/helpers/oppositeSentencePairs.mjs` (FOOD row; old WEAK words and GEN-17 v2's tail pinned at 0; no cell empty but dz-city-101). Test pins re-stated by cause; registers by their doors.
@@ -11,6 +11,7 @@
 - FLOOR (N71 (2)): `map/FLOOR.md` 99a22c3ad: the matcher's floor hid 2 trade cell pairs on 111 pages, none TRUE; no walls pair even drawn on one page.
 - PROSE-E BUILT AND CLOSED: `lane/prose-6-2026-11-23-e-wip` at cf104777c (pushed), with THE LINE 9b0ffaa97 merged at c66c30e4b. Commits: c0514e27e the tooth (red first); 678d8d255 the cure (five WORD_CORRECTIONS rows, CHAIR-2026-11-23-N70); 887d1f760 the pins; 9d59425fe CONTROL 4's uniform pins (N77); 212f8f46a the observed-shape baseline, by its door (it also takes in the line's `personMention.js`). Report `PROSE-E-REPORT.md`.
 - FOR THE STACK SEAT: the doors re-taken: observed-shape only (lighting census green, not re-taken). Expected reds, all on RED-AT-LINE's 59 rows: proseCorpusBytes RAW, GZIP and proseComposed A0b (the owner's); generationWorkerLazy's worker ceiling; VERIFY_DIST's 15. Dark proof EQUAL (f2ecb50c..., 900).
+- LIT-DISAGREE (N80), MEASURE ONLY: `map/LIT-DISAGREE.md` 1631c2da2 (brief `briefs/LIT-DISAGREE.md`). On 900 LIT births (the flip 9df6731ee + cf104777c, scratch worktree /home/user/wt-lit, branch `lane/prose-6-2026-11-23-lit-scratch`, never pushed): 0 pages with a TRUE pair; the tooth 6/6 green lit; the five re-worded lines print as dark; one cell pair new lit (NO-MARKET x ECO-1 C1, 82 pages, all NOT).
 - NEXT: nothing but to wait. If the chair sends "THE LINE IS <commit>", merge it once more, re-take a register that reds by its door, re-run rule 8 by directory with `tests/copy` whole, and send the new commit. The merge to master, the deploy and every signing are the owner's.
 
 ## OPEN FOR THE CHAIR
