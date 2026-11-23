@@ -33,6 +33,10 @@
  * NOT BUILT: W12 ("With danger about in the country, …", needs `monster`): a monster_pressure threat has no fact home and
  * no atom (ruling 11; `dailyLifeAtoms.test.js :: NOT_GRANTED`), so the line cannot be declared. No line needs a hideable
  * house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-1.md`,
+ * taken 2026-11-22 21:55 UTC): defence W15; default B27, which excludes a siege in force as B26 does; each appended
+ * at its branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} DawnLine */
@@ -71,6 +75,7 @@ export const DAWN_WORK = Object.freeze({
     { id: 'W11', text: 'The elder is asked at first light whether all is well before anyone goes out to work.', needs: ['ruler: elder'] },
     { id: 'W13', text: 'The beasts are let out at first light and kept close to the houses through the day.', needs: ['livestock'] },
     { id: 'W14', text: 'Doors are opened late and with care, and the day\'s work starts a little after first light.', needs: ['institution: dwellings'] },
+    { id: 'W15', text: 'Before the day\'s work begins, someone looks out over the country around to see that nothing is stirring.', needs: [] },
   ]),
 
   /** `craft`: the craft power is 25 or more. */
@@ -126,6 +131,7 @@ export const DAWN_WORK = Object.freeze({
     { id: 'B24', text: 'The day begins with the walk out to the fields, and the work there runs on until midday.', needs: ['institution: farmland', 'tier: ≤ village'] },
     { id: 'B25', text: 'Some go out at first light to cut and carry wood, and the rest turn to the day\'s other work.', needs: ['timber at hand', 'tier: ≤ village'] },
     { id: 'B26', text: 'The boats go out from the landing at first light, and the catch decides the rest of the day.', needs: ['institution: fishingLanding'], excludes: ['crisis: under_siege'] },
+    { id: 'B27', text: 'Carts are already coming in at the gates as it grows light, bringing the day\'s goods.', needs: ['gate'], excludes: ['crisis: under_siege'] },
   ]),
 });
 

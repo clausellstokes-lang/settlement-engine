@@ -45,6 +45,10 @@
  * threat.siege.any #0, #2 ("under siege", "the siege") need a siege in force (`crisis: under_siege`); monster overrun #0
  * and frontier #4 ("traveller(s)") and economic route #0, #1 ("a trade route") need a route (`route open`).
  * A line with no true need is not eligible; each branch keeps the rest.
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-1.md`,
+ * taken 2026-11-22 21:55 UTC): power P12 to P14, power.level V4 and V5, frontier MF7 to MF9, services.defense D15,
+ * each appended at its branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} OutsiderLine */
@@ -66,6 +70,9 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'P5', text: 'Whatever a visitor wants done, {power} {power|has|have} a say in it.', needs: [] },
     { id: 'P6', text: 'Visitors learn early that it pays to stay on good terms with {power}.', needs: [] },
     { id: 'P8', text: '{Power} {power|carries|carry} the most weight here, and nobody pretends otherwise.', needs: [] },
+    { id: 'P12', text: 'A visitor who wants anything settled here is told to speak to {power} first.', needs: [] },
+    { id: 'P13', text: 'Nothing of weight is agreed here without the leave of {power}.', needs: [] },
+    { id: 'P14', text: 'Newcomers soon notice how often talk here comes round to {power}.', needs: [] },
   ]),
   /** the top power, not veiled, NOT clearly leading (a lead over the second of 6 or less): no one named (ruling 15). */
   'power.level': frozen([
@@ -73,6 +80,8 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'V1', text: 'No single name comes up first when a visitor asks who holds sway here.', needs: [] },
     { id: 'V2', text: 'Several powers carry weight here, and a visitor soon learns not to assume which one matters most.', needs: [] },
     { id: 'V3', text: 'A visitor finds more than one door to knock on before anything is decided here.', needs: [] },
+    { id: 'V4', text: 'Power here does not sit in one pair of hands, and a visitor learns to ask around.', needs: [] },
+    { id: 'V5', text: 'There is no single master here, and getting anything done means winning over more than one side.', needs: [] },
   ]),
   /** a Leadership-void condition (`dominant_npc_removed`) raised as an unrest threat. */
   'threat.unrest.void': frozen([
@@ -112,6 +121,9 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'MF4', text: 'Travellers here talk of beasts seen at the edge of the settled land.', needs: ['route open'] },
     { id: 'MF5', text: 'A visitor soon learns that the country beyond is not to be walked carelessly.', needs: [] },
     { id: 'MF6', text: 'Frontier habits show here: people go out in company and come back before dark.', needs: [] },
+    { id: 'MF7', text: 'People here are used to living close to the wild, and they tell a visitor where not to go.', needs: [] },
+    { id: 'MF8', text: 'Living this near the wild has made people watchful, and a visitor notices it.', needs: [] },
+    { id: 'MF9', text: 'People here know the wild country well, and they warn a visitor not to go far into it.', needs: [] },
   ]),
   /** a monster threat from a stressor or the record's own threats. */
   'threat.monster_pressure.stressor': frozen([
@@ -188,6 +200,7 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'D12', text: 'The watch is small for the ground it has to cover.', needs: ['watch'] },
     { id: 'D13', text: 'Few of the watch are about, and a visitor wonders how they keep order with so few.', needs: ['watch'] },
     { id: 'D14', text: 'Those who keep order here are spread thin, and a visitor can tell.', needs: ['guardPresence'] },
+    { id: 'D15', text: 'There is not much here to stop trouble once it starts, and people know it.', needs: [] },
   ]),
   /** the magical lens strained. */
   'services.magical': frozen([
