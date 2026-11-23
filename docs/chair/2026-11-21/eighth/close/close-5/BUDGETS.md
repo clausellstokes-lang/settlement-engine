@@ -55,4 +55,6 @@ budget, the line, the title).
 `metropolisTailedRoll` and `espionageDormancyFence` FENCE 1 (`close-5/trial.sh`, its last two parts, `--maxWorkers=1`). If a
 lone lit time x 1.84 passes NINE TENTHS of its budget (270 s of 300_000; 108 s of 120_000), its budget is raised in commit 0
 with that measure in a comment; if not, it is left and the measure is written here. The other ten of section B are left
-unless the trial shows one over three quarters when run alone. (Measures: owed by the trial.)
+unless the trial shows one over three quarters when run alone. MEASURED (`close-5/TRIAL-Q8.md`): `metropolisTailedRoll` 189.4 s
+alone lit (x 1.84 = 348.4 s > 270 s): RAISED, proposed 600_000; FENCE 1 62.9 s alone lit (115.8 s > 108 s): RAISED, proposed
+240_000. Commit 0 is then 16 budgets in 15 files.

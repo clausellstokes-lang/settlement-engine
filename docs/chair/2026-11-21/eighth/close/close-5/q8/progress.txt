@@ -1,0 +1,7 @@
+start 2026-11-23T04:34:35Z b1628d34c base 5e63f2603017ae7038a909fdec8e4b439e889345
+files: anchors 84, landed 28, run 110
+anchors 04:45:23 exit=1
+lint 05:04:20 exit=1
+alone-metropolisTailedRoll 05:07:42 exit=0
+alone-espionageFence1 05:08:54 exit=1
+done 2026-11-23T05:08:54Z

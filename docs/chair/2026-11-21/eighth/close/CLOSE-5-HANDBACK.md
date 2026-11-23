@@ -5,13 +5,13 @@ on 2026-11-23; the successor of CLOSE-4. Its law: `docs/chair/2026-11-23/ninth/p
 `docs/chair/2026-11-21/eighth/prompts/CLOSE-3.txt` (reading CLOSE-5 for CLOSE-3), both on `lane/chair-2026-11-08`.
 A successor reads those two, then this section, then `FLIP-PLAN.md`.
 
-## 0. WHERE THE SEAT STANDS (written 2026-11-23 04:13 UTC, read from date -u)
+## 0. WHERE THE SEAT STANDS (written 2026-11-23 05:09 UTC, read from date -u)
 
 | ref | tip | state |
 |---|---|---|
 | `lane/close-5-2026-11-23` (this lane) | this push | docs only: this hand-back; `FLIP-PLAN.md` (its section 5: the chair's rulings); `close-5/`: `ANCHORS-BY-FILE.tsv`, `WHY-DRAFT.md` (taken with the chair's change), `BUDGETS.md` + `BUDGETS.tsv` + `budgets.mjs` (commit 0's list), `CONFIGS.diff` (Q3, Q4) |
 | `lane/close-5-2026-11-23-flip` | not cut | THE FLIP: cut ONLY on the chair's "BUILD THE FLIP <tip>", from that tip |
-| `lane/close-5-2026-11-23-lit-scratch` | not made | Q8's read-only trial: RULED YES, ON THE COMMIT THE CHAIR NAMES (the stack's DOORS commit with 108 and 109 merged): WAITING for that word |
+| `lane/close-5-2026-11-23-lit-scratch` | b1628d34c | Q8's read-only trial: 5e63f2603 (the stack with 106 to 109) + light.sh; RUN 04:34 to 05:08: NO SURPRISE (`close-5/TRIAL-Q8.md`); merged by nobody. Worktree `/home/user/wt/lit5` (its `.husky/_` linked) |
 
 - STOOD ON: `lane/close-4-2026-11-23` at e5d1ca80a (CLOSE-4's final hand-back). The line: `lane/join-2026-11-14` at 244fa84ef;
   the stack `lane/stack-106-wip-2026-11-23` at cb598376f (106, 107 merged; read-only).
@@ -27,13 +27,14 @@ A successor reads those two, then this section, then `FLIP-PLAN.md`.
   1.84 rule: `metropolisTailedRoll`, `espionageDormancyFence` FENCE 1); the Q3/Q4 configs (`close-5/CONFIGS.diff`:
   `seatChainHolder :: bear` and `dualHatPoliticalMass`'s original arm forced to fortune law 1). FOUND: `seatHolderLines`
   already mocks fortune dark by default since VACANT, so its U6 (2) surprise is EXPECTED GONE (PLAUSIBLE; read at Q8).
-  NOTHING OF THE FLIP IS BUILT; no worktree.
-- THE BOX: `npm ci` done (exit 0); the ledger ref `review-fixes-2026-07-08` local at 235efce1a. No worktree yet.
-- THE Q8 TRIAL IS READY TO RUN (`close-5/trial.sh <lit tree> <base>`: the 83 anchor files and the test files landed since
-  244fa84ef, then `tests/lint` whole, then the two near their budgets alone, each through the mutex; `close-5/vs-census.mjs`
-  classes each red LISTED / CENSUS / SURPRISE and each untouched census row GONE). Its commit: the stack's DOORS commit with
-  108 and 109 (the stack stood at 4fa51f422 by the chair's 04:17 word, its lighting census at its door): NOT YET NAMED.
-- NEXT, in one line: on the chair's Q8 word, the lit trial on the commit it names; on "BUILD THE FLIP <tip>", the flip
+  NOTHING OF THE FLIP IS BUILT.
+- THE BOX: `npm ci` done (exit 0); the ledger ref `review-fixes-2026-07-08` local at 235efce1a.
+- THE Q8 TRIAL RAN (`close-5/TRIAL-Q8.md`): 151 reds, all census rows; lint lit the line's three; NO SURPRISE; GONE: U6 (2)
+  (as predicted: no diff owed) and `dailyLifeNoPeople` (the Daily Life landing emptied its arm: that door is dropped). Lone
+  times: `metropolisTailedRoll` 189.4 s, FENCE 1 62.9 s: both RAISED in commit 0 by the chair's rule (16 budgets, 15 files).
+  "TRIAL b1628d34c" sent. A HOOK MISS, MINE, TOLD TO THE CHAIR: a fresh worktree lacks `.husky/_`, so the scratch's commit and
+  push ran no hook; every worktree now gets `ln -s <checkout>/.husky/_ <wt>/.husky/_` before its first commit.
+- NEXT, in one line: on "BUILD THE FLIP <tip>", the flip
   branch in `/home/user/wt/flip`: commit 0 the budgets, then `FLIP-PLAN.md` section 1 in order as section 5 rules it.
 
 ## 1. RULINGS IN FORCE FOR THIS SEAT (numbered; the chair's)

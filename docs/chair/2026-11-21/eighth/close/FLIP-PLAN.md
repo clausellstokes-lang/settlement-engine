@@ -110,7 +110,7 @@ with 1 row and JOIN with 4: Q5).
 - POINTS 106 AND 108 (the Daily Life page) and PROSE-D: by their seats' words no lit path changed; `dailyLifeNoPeople`'s
   door waits for both.
 - WHAT THE CENSUS CANNOT HAVE SEEN: the test files points 106 to 109 (and PROSE-D) added or changed. So, AFTER COMMIT 1 and
-  before any anchor, ONE LIT RE-READ through the mutex: those files, the 83 anchor files, and `tests/lint` whole; each red
+  before any anchor, ONE LIT RE-READ through the mutex: those files, the 84 anchor files, and `tests/lint` whole; each red
   matched by name to the census's 153 and the red list: a red on neither is a SURPRISE, read by cause, and goes to the
   chair before anything is re-recorded; a census row now green is named GONE. The whole suite lit is CI's run on the
   pushed flip branch (rule 24a), read by name.
@@ -121,7 +121,7 @@ with 1 row and JOIN with 4: Q5).
 ## 3. WHERE THE RECIPE AND THE CENSUS DISAGREE (the census, being later and on the final tree, governs unless the chair rules)
 1. The goal-hash door: the recipe says 5 rows, "five tiers"; the census and SEAT-10's list say SIX tiers, 6 rows.
 2. The hand anchors: the recipe (the rehearsal at e987c3e36) says 136 rows in 74 files (premise 64, born anchor 58, dial
-   pin 14); the final census has 153 rows in 83 files (premise 63, born anchor 64, stored pin 11, dial pin 14, guard 1),
+   pin 14); the final census has 153 rows in 84 files (premise 63, born anchor 64, stored pin 11, dial pin 14, guard 1),
    8 of them door rows and 14 dial pins: 131 by hand.
 3. WHERE THE DIAL PINS GO: CLOSE-3 (3)(i) puts "the texts of darkness (step 1a)" in commit 1, and step 1a's table lists the
    dial pins; the recipe's 2b puts "DIAL PIN 14, step 1a's list" among the hand anchors (step 3) and calls commit 1
@@ -157,12 +157,12 @@ with 1 row and JOIN with 4: Q5).
 - Q7. 5c's `--emit` on the flip branch by this seat (CLOSE-3 (iv)) or the chair's own step (E55): lean, this seat's, with
   the narration shown to the owner.
 - Q8. While waiting, a READ-ONLY TRIAL on a scratch ref (`lane/close-5-2026-11-23-lit-scratch`: the stack's tip once it is
-  gated, lit by `close-2/census/light.sh`), running only the 83 anchor files and the files 106 to 109 changed, through the
+  gated, lit by `close-2/census/light.sh`), running only the 84 anchor files and the files 106 to 109 changed, through the
   mutex: the re-pin values and any surprise known before the word. It touches no line of the flip's branch.
 
 ## 5. THE CHAIR'S RULINGS ON THIS PLAN (its message received 2026-11-23 04:08 UTC; recorded 2026-11-23 04:12 UTC, read from `date -u`). THEY GOVERN SECTIONS 1 TO 4 WHERE THEY DIFFER
 "THE PLAN IS TAKEN." Where the recipe and the census differ, THE FINAL CENSUS GOVERNS (six goal-hash tiers; 153 rows in
-83 files; the in-test counts as re-measured).
+83 files [CORRECTED by this seat: 84 distinct files, 85 lane-file pairs, `powersReadTheRosterP31` in SEAT and JOIN]; the in-test counts as re-measured).
 - Q1 YES: the 14 dial pins in commit 1; the two "law 1" towns FORCE law 1 in their own configs.
 - Q2 YES: E123's budgets are THE FIRST COMMIT ON THE FLIP BRANCH, before the dials, test only; each NEEDS-READ row read by
   hand; each budget carries its lit measure in a comment in point 105's manner; no assertion changes; `tests/lint` whole
@@ -184,6 +184,6 @@ with 1 row and JOIN with 4: Q5).
 - Q7 THIS SEAT'S, AS ITS OWN COMMIT, on the flipped tree, by 5c; the emitted town's stock narration WHOLE and the diff's
   summary in `FOR-THE-OWNER.md`; the chair puts it to the owner before the flip lands.
 - Q8 YES, ON THE COMMIT THE CHAIR NAMES (the stack's DOORS commit once 108 and 109 are merged: WAIT for its word): lit by
-  `close-2/census/light.sh`; the 83 anchor files and the files 106 to 109 changed; one heavy run at a time; pushed as
+  `close-2/census/light.sh`; the 84 anchor files and the files 106 to 109 changed; one heavy run at a time; pushed as
   `lane/close-5-2026-11-23-lit-scratch`, merged by nobody; a red on neither the census nor the red list goes to the chair
   before anything is recorded.

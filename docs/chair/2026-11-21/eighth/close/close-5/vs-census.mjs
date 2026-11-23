@@ -14,7 +14,9 @@ for (const f of j.testResults || []) {
   for (const a of f.assertionResults || []) {
     if (a.status !== 'failed') continue;
     const full = norm(a.fullName);
-    const c = cen.find((x) => hit(x, file, full));
+    // one-to-one: among the unused census rows of the file that match, the one sharing the longest prefix with the title
+    const lcp = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
+    const c = cen.filter((x) => !used.has(x) && hit(x, file, full)).sort((x, y) => lcp(y.title, full) - lcp(x.title, full))[0];
     if (c) { used.add(c); console.log(`CENSUS\t${c.r[3]}\t${c.r[4]}\t${file}\t${full.slice(0, 160)}`); continue; }
     if (redRows.some((x) => hit(x, file, full))) { console.log(`LISTED\t\t\t${file}\t${full.slice(0, 160)}`); continue; }
     console.log(`SURPRISE\t\t\t${file}\t${full.slice(0, 160)}\t${String((a.failureMessages || [''])[0]).split('\n')[0].slice(0, 200)}`);
