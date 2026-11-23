@@ -10,8 +10,11 @@ eeda6a126 (`origin/lane/veil-36-2026-11-22-r5desc-wip`: the tip + R5D-FORMS 4583
 ## 1. WHERE THIS SEAT STANDS (kept current at every push)
 THE BRANCHES: `lane/veil-37-2026-11-23` (this file; `briefs/R5D-SQL-2-BRIEF.md`; `briefs/R5D-PAGE-BRIEF.md` with VEIL-37's corrections
 and the split); `lane/veil-37-2026-11-23-r5desc-wip` at eeda6a126 (R5D-SQL-2 building, worktree `/home/user/wt/r5desc`; not pushed yet);
-`lane/veil-37-2026-11-23-r5dpage-wip` at eeda6a126 (R5D-PAGE-A building, worktree `/home/user/wt/r5dpage`; not pushed yet). THE LANE'S TIP: af708f2fd on `lane/veil-33-2026-11-22` (N4: a newer tip comes from VEIL-39's re-stated V7-2 pin;
-merged into the -wip before the unit's proofs).
+`lane/veil-37-2026-11-23-r5dpage-wip` at eeda6a126 (R5D-PAGE-A building, worktree `/home/user/wt/r5dpage`; not pushed yet). THE LANE'S TIP: 2d7ed483f on `lane/veil-39-2026-11-23-tip` (the chair, 01:03: VEIL-39's (P), parent af708f2fd, ONE test file:
+`galleryVeilHandRows.pglite` V7-2's "STAYS" row re-stated to E97 (1); verified by this seat: 1 file +6 -3). E116's five steps reduce to:
+merge it INTO the -wip at the next natural stop (when R5D-SQL-2 returns; then into R5D-PAGE-A's branch at its merge), that file's run on
+the merged tree with the arms, `tests/lint` whole at the next whole run, no new pool. NOT YET MERGED. A second test-only commit may follow
+(`gallery.test.js` "a share marked with a veil": the chair names it if it comes).
 - (0) THE POOL: chain0 launched 00:20 UTC from VEIL-36's `out/v36/seated/` scripts re-named v37 (`/var/tmp/v18/out/v37/`; pool
   `/var/tmp/v18/t2/pool-v37`; template `v37tpl`; chain1 after it to `/var/tmp/v18/out/v37/g/done.txt`; the scripts in `out/v37/seated/`). AT 2bcc53c0a (src/supabase/tests =
   af708f2fd): pool 8 shards rc=0 (part A 13.9 min, B 8.9); verify 45 / 0 differ; GATE-1 4 of 92 at every gated setting, both reads,
@@ -47,3 +50,4 @@ runner re-run; R5D-PAGE.
 ## 3. Log (every hour from `date -u`)
 - 00:20 seated on b5244a6a0; chain0 launched (00:15); read-in; first line to the chair 00:18; R5D-SQL-2's brief and dispatch.
 - 00:44 pool END; 00:53 gates read; 00:56 (0)'s line to the chair (with the 23 composed prose rows' question).
+- 01:03 the chair: TIP 2d7ed483f on `lane/veil-39-2026-11-23-tip` (to be merged into the -wip when R5D-SQL-2 returns).
