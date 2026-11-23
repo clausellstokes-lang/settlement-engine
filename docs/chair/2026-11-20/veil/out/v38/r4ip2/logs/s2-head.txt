@@ -1,0 +1,37 @@
+[gate-tail] start:  00:33:31 up 21 min,  0 user,  load average: 6.12, 2.83, 1.46 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip2
+
+ ❯ tests/lib/gallery.test.js (50 tests | 1 failed | 49 skipped) 29ms
+     × a share marked with a veil renders through it: the defaults hide, a delta shows 28ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lib/gallery.test.js > gallery.js — the gallery veil (X-21, W2-VEIL-A U3) > a share marked with a veil renders through it: the defaults hide, a delta shows
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/lib/gallery.test.js:620:59
+    618|     expect(dossier.settlement.institutions[0].desc).toBe('One for each…
+    619|     // The DM's delta flipped one default eye back to shown.
+    620|     expect(dossier.settlement.availableServices.criminal).toHaveLength…
+       |                                                           ^
+    621|     expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+    622|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 49 skipped (50)
+   Start at  00:33:32
+   Duration  3.00s (transform 1.91s, setup 46ms, import 2.70s, tests 29ms, environment 0ms)
+
+[gate-tail] end:  00:33:35 up 21 min,  0 user,  load average: 6.83, 3.04, 1.54
+[gate-tail] full log: /tmp/gate-tail.8080.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
