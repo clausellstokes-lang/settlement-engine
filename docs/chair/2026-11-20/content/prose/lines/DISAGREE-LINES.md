@@ -1,6 +1,6 @@
 # DISAGREE: THE LINES AS TAKEN (PROSE-6; drafted on line tip 244fa84ef)
-LINES TAKEN by the chair in two rounds, 2026-11-23 00:46 UTC and 01:14 UTC. This file is FINAL and is the builder's only source of words and marks.
-Marks are the grammar's own atoms: `food` (band, FOOD_BAND_WORDS), `force: paid` (orderForce), `guardPresence`, `stores`, `prosperity`. No new atom. DS-ECO-9 is unchanged, and so is all of DS-GEN-17 except v2's mark.
+LINES TAKEN by the chair in two rounds, 2026-11-23 00:46 UTC and 01:14 UTC. This file is FINAL and is the builder's only source of words and marks. The WAGES half was RE-RULED at 03:45 UTC (below).
+Marks are the grammar's own atoms: `food` (band, FOOD_BAND_WORDS), `guardPresence`, `stores`, `prosperity` (`force: paid` withdrawn, 03:45). No new atom. DS-ECO-9 and DS-GEN-17 are unchanged from 244fa84ef.
 
 ## FOOD: DS-DEF-2 `CHAIN: food trades failing` (the other cell is DS-ECO-9 [SECURE], whose fact here is `food: ≥ secure`)
 FLAT ROWS, each gaining `food: ≤ pressured` (the chair: v2 is flat for this pair):
@@ -18,31 +18,27 @@ F6 `[street · no crisis: under_siege · food: ≥ secure · stores: ≥ 12]` Th
 F6's register: if street cannot print on that ground, the builder says which register can and keeps the words; the change comes to the chair.
 The siege rows v5 and v6 stay as they are.
 
-## WAGES: DS-DEF-2 `Economic Survival: WEAK` (the other cell is DS-GEN-17 [GARRISONED] v2, whose fact here is `force: paid`)
-FLAT ROWS, each gaining `no force: paid`:
-v1 `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
-v2 `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
-NEW LINES (appended in this order; the first W1 to W3 are withdrawn):
-W1 `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} keeps paid guards, but nothing is laid by to pay them through a long defence.
-W2 `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long defence.
-W3 `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} has paid guards and little to pay them with: a long defence would find the money gone.
-They say "paid" and never "regular": both pages of the branch on the 900 read pay 'short' (`guardPay.js :: guardPayOf`), which `force: paid` cannot tell.
+## WAGES: DS-DEF-2 `Economic Survival: WEAK` (RE-RULED by the chair, 2026-11-23 03:45 UTC: THE LAYER LAW HOLDS)
+`force: paid` is `orderForce`, layer 4: no dossier-state pool may declare it. EVERY `force: paid` MARK GOES. W1, W2 and W3 are WITHDRAWN whole. v1 and v2 lose `no force: paid` and return to their marks at 244fa84ef.
+v1 stays word for word: `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+v2 is RE-WORDED IN PLACE (the chair's line; the same marks, the same vid, through its row of WORD_CORRECTIONS):
+was `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
+now `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through a long defence know there is nothing laid by to pay them for it.
 
 ## DS-GEN-17 `GARRISONED` v2
-It gains `force: paid` and its text stays: `[ledger · walls · no crisis: occupied · force: paid]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
-There is NO WORD_CORRECTIONS row now. The page cuts the line at its clause: "the money is found every season" printed on 0 of the 900. The tooth pins that at 0. The row that makes the source match the page is on the chair's list for after the first deploy.
+It RETURNS to its marks and its text at 244fa84ef: `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season. There is no WORD_CORRECTIONS row for it. The page cuts the line at its clause ("the money is found every season" printed on 0 of the 900), and the tooth pins that at 0.
 
 ## THE TOOTH'S TABLE (`OPPOSITE_PAIRS`, one row a pair)
 | pair | side A (flat) | side B |
 |---|---|---|
 | FOOD | DS-DEF-2 `CHAIN: food trades failing` v1, v2, v3, v4 | DS-ECO-9 `SECURE` (all) |
-| WAGES | DS-DEF-2 `Economic Survival: WEAK` v1, v2 | DS-GEN-17 `GARRISONED` v2 |
-A further arm pins GEN-17 v2's clause "the money is found every season" at 0 pages.
+| WAGES | DS-DEF-2 `Economic Survival: WEAK` v1 | DS-GEN-17 `GARRISONED` v2 |
+Further arms pin GEN-17 v2's clause "the money is found every season" at 0 pages, and WEAK v2's OLD words ("...through something know there is no money to pay them for it.") at 0 pages. New v2 beside GARRISONED v2 is not a pair (the chair, 03:45).
 
 ## THE CHAIR'S CONDITIONS, ANSWERED
-(a) `force: paid` = `orderForce.js :: orderForceOf(record).paid`: a garrison, a hired company, or a watch that is not the unpaid rota alone. It is false under the rota and cannot tell 'short' from 'full'. Hence the WAGES wordings above.
+(a) WITHDRAWN (03:45): `force: paid` is layer 4 (`orderForce`), which no dossier-state pool may declare.
 (b), (c2) Owed by the builder before the build goes on: every line's share by size on each branch, under the bar, and NO CELL LEFT EMPTY on any of the four grounds (food secure or not × stores below 12 or not). A miss comes back to the chair.
 (c) The builder reads ECO-9 SECURE v1 to v10 and GEN-17 GARRISONED v1 against the new lines; I read its table.
-(d) THE VEIL'S READER: no mark reads a fact about crime. `guardPresence` and `force: paid` read defence houses (garrison, watch, militia, mercenary), and none is hideable: `isHideableHouse` was false on all 1,066 rows of the 900. Every new line reads only what every shared read serves.
+(d) THE VEIL'S READER: no mark reads a fact about crime. `guardPresence` reads defence houses (garrison, watch, militia, mercenary), and none is hideable: `isHideableHouse` was false on all 1,066 rows of the 900. Every new line reads only what every shared read serves.
 (e) No new line says "the town". None names a season, climate or age as weather ("hard times"; "a long defence").
 (g) A walker that reds a new line brings it back to the chair, never banked around.
