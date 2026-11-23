@@ -17,10 +17,10 @@ THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE LANE'S TIP. THE LANE'S TIP: 2
 - Read-in as the start message orders (said to the chair 06:17).
 - R4I-MEASURE's brief committed (`briefs/R4I-MEASURE-BRIEF.md`, caba51270); the builder DISPATCHED 06:2x UTC (background Agent; its hand-back `out/v42/meas/MEASURE-HANDBACK.md` on its local branch).
 - Instruments re-made on the -wip at 06:23: --check 0, walker 0, acceptance 40 PASS, `v28tpl` 0, R3 gate 0 (HIGHER 0, EQUAL 79, LOWER 13, both engines and reads); harnesses 1 as expected (the gap; the Tonight sheet).
+- UNIT (0) DONE, sent 06:57: pool `pool-v42` (8 shards rc=0, 06:48; verify 45, 0 differ); GATE-1 4 of 92 at every gated setting, off and DM, twin 4 / server 4 (raw 11 / 11), controls 0 of 48, LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10): EQUAL to the standing figures.
 - R4I-TONIGHT-2's brief committed (559d7b343, addendum N59 015b3c020); the builder DISPATCHED 06:3x UTC beside R4I-MEASURE (44.1).
 
 ### (3) IN FLIGHT
-- chain0 (unit 0): the GATE-1 / GATE-2 line to the chair when the gates are read (standing figures: GATE-1 4 of 92 at every gated setting, both reads, LOWER BY RULE 7; GATE-2 20 of 40).
 - R4I-MEASURE: A ("77"), C ("GAP"), B ("WHOLE-DOC"): each result sent to the chair as soon as its file exists.
 - R4I-TONIGHT-2 (unit 3, started early by 44.1). IF A's cause lies in what it edits: tell it to STOP and tell the chair (44.1 (1)).
 
@@ -39,4 +39,4 @@ THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE LANE'S TIP. THE LANE'S TIP: 2
 44.1 THE CHAIR, N59, 06:29 UTC: the first message, the instruments and the measure's dispatch TAKEN; the rebuilt machine scripts are committed. R4I-TONIGHT-2 STARTS NOW beside R4I-MEASURE (40.5's form; every heavy run one at a time through the mutex). Conditions: (1) if "77"'s cause is in what R4I-TONIGHT-2 edits, it stops and the chair is told; (2) before its commit a grep of `tests/` for every sentence or key it moves (N57), `tests/copy` whole in its proofs (N54); a moved golden or snapshot named for the owner, signed by nobody. R4I-SQL-2 is briefed from the measure's lists, as ordered.
 
 ## 3. Log (every hour read from `date -u`)
-- 06:13 seated (first clock read). 06:16 the tip merged into the -wip (9f9b819f7); chain0 launched under the mutex. 06:17 first line to the chair. 06:19 R4I-MEASURE's worktree cut; the builder dispatched. 06:28 instruments line and the question to the chair. 06:33 N59 read (44.1); R4I-TONIGHT-2 dispatched.
+- 06:13 seated (first clock read). 06:16 the tip merged into the -wip (9f9b819f7); chain0 launched under the mutex. 06:17 first line to the chair. 06:19 R4I-MEASURE's worktree cut; the builder dispatched. 06:28 instruments line and the question to the chair. 06:33 N59 read (44.1); R4I-TONIGHT-2 dispatched. 06:56 chain0 ended (gates read); 06:57 the gates line to the chair.
