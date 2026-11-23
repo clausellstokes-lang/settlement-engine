@@ -5,7 +5,7 @@ on 2026-11-23; the successor of CLOSE-4. Its law: `docs/chair/2026-11-23/ninth/p
 `docs/chair/2026-11-21/eighth/prompts/CLOSE-3.txt` (reading CLOSE-5 for CLOSE-3), both on `lane/chair-2026-11-08`.
 A successor reads those two, then this section, then `FLIP-PLAN.md`.
 
-## 0. WHERE THE FLIP STANDS — FOR CLOSE-6 (written 2026-11-23 08:08 UTC, read from date -u)
+## 0. WHERE THE FLIP STANDS — FOR CLOSE-6 (written 2026-11-23 08:30 UTC, read from date -u)
 
 THE FLIP BRANCH `lane/close-5-2026-11-23-flip` (worktree `/home/user/wt/flip`, node_modules and `.husky/_` linked), cut at the
 chair's PROVISIONAL "BUILD THE FLIP 5e63f2603"; its commits, oldest first, each with what proved it:
@@ -15,7 +15,7 @@ chair's PROVISIONAL "BUILD THE FLIP 5e63f2603"; its commits, oldest first, each 
 | 2bc483fc8 | COMMIT 1 (F1): three dials + `powersList` row (light.sh) + the two lit whys (WHY-DRAFT, the chair's words) + arm 4 re-pinned with its tooth + the 14 dial pins + CONFIGS.diff (seatChainHolder, dualHat original arm forced to fortune 1) | builder: 12 proof files 14 red → 120/120, `tests/lint` the line's three; THIS SEAT lit: 120/120, mint 2/2; TAKEN (N65; seatContest (5)'s judgement accepted) |
 | 075fbdd89 | DOOR: page census `--grid --shrink` (r2s-insurgency-metropolis-0 loses P16three) | walker 14/14; TAKEN |
 | b98a85bd9 | F-SEAT: the seat lane's 10 files (goalSentencesOnceInTown's (u) born under law 1 per N66; the fixture unmoved; budget 240,000) | builder: 24 red → 162/162 lit (twice), `tests/lint` the line's three; this seat read the diff (8 expect out, 9 in, no skip) |
-| ec43beb7f | MERGE of the line's tip 9b0ffaa97 (points 106 to 112: 110 PROSE-D, 111 PRONOUN-2, 112 PROSE-D-2), plain, NO CONFLICT | IN FLIGHT: this seat's re-run in `/home/user/wt/check` (`scratchpad/rerun/merge.sh`): the 5 test files the line changed + F-SEAT's 10, lit; then `tests/lint` whole |
+| ec43beb7f | MERGE of the line's tip 9b0ffaa97 (points 106 to 112: 110 PROSE-D, 111 PRONOUN-2, 112 PROSE-D-2), plain, NO CONFLICT | THIS SEAT, lit, in `/home/user/wt/check` at ec43beb7f: the 5 test files the line changed + F-SEAT's 10: 352/352 GREEN; `tests/lint` whole 3 red of 3,374, the line's three only; TAKEN by the chair |
 | (next) | F-SEAT-2: `bar3PeopleTies` r2r-town-14 and `bar3PowersLines` C45570 RE-PICKED BY PREMISE (their KEEP re-pins proved less) | F-SEAT's builder resumed for it: its own commit on ec43beb7f |
 
 THE COMMITS LEFT, IN ORDER, each a builder's (an Agent of the seat's tier, no model override, ONE AT A TIME in `/home/user/wt/flip`),
@@ -32,8 +32,27 @@ briefed by `close-5/briefs/FLIP-COMMON.md` + its own file; the seat reads each d
    + the twin + the sample town's narration + the sizes of ONE build on the flipped tree (five figures beside the line's) + the
    red-list rows to add (`defenceParts` R13 lit; the twin's three). SIGNED BY NOBODY.
 8. THEN "FLIP <commit>" to the chair with the list for the owner. If "PROSE-E" lands first the chair says so: merge it the same way.
-OPEN WITH THE CHAIR: the finding r2r-city-5 (lit: ties say the guild bought the hall; two cards print a war of arrests; 13g's rule
-does not cover it), sent with the merge line; not this seat's to cure.
+CLOSE-6's UNIT "LIT-13G" (the chair, 08:24 UTC: A MEASURE FIRST, then its ruling: cured before "FLIP" or listed for the owner;
+NOTHING BUILT BEFORE THAT RULING). THE FINDING, CONFIRMED on one birth by F-SEAT's probe (`close-5/reports/F-SEAT.md`, "Findings"):
+- THE SEED: `r2r-city-5`, born LIT as `tests/generators/bar8Powers.test.js` births it: `generateSettlementPipeline(birthConfig({
+  ...DEFAULT_CONFIG, ...configOf('r2r-city-5') }), null, { seed: 'r2r-city-5', customContent: {} })` after `loadGenerationLawPayloads()`
+  (that file's `configOf`), on the flip branch (b98a85bd9 or later: both laws lit).
+- THE TIE: both relation rows of the guild and the hall read BOUGHT (`type` / `captureState` 'corrupted'): the file's `tieBought(town)`
+  is TRUE lit.
+- THE TWO CARDS (the builder's quotes, word for word as it reported them; the full desc is printed by the command below): the
+  Thieves' Guild card: "the garrison can arrest their people, and the guild can make every investigation costly"; the
+  Military/Guard card: "A slow war with the guild". Both match the file's `WAR_OF_ARRESTS`.
+- THE ONE COMMAND THAT SHOWS IT: in a scratch copy of the flip tree, add `'r2r-city-5': ['13g'],` to `bar8Powers.test.js`'s `TOWNS`
+  and run `npx vitest run tests/generators/bar8Powers.test.js -t 13g`: the 13g arm reds with "r2r-city-5: Thieves' Guild: …"
+  and "… Military/Guard: …" (never committed).
+- WHAT 13g COVERS: "where the guild has bought the seat (the relation rows say corrupted), no power's card calls the tie a war of
+  arrests", asserted ONLY on the towns `TOWNS` lists for '13g' (bar0-metropolis-calm-rand-45, r2r-city-14, r2s-wartime-city-2).
+  WHY THIS TOWN FELL OUTSIDE: r2r-city-5 was 13g's NEGATIVE control ('13g-', a hall that HUNTS the guild); lit its tie turned
+  bought, so F-SEAT re-picked the negative by its premise (r2r-city-16), and no arm now reads r2r-city-5, whose cards still
+  print the hunted-hall wording beside a bought tie. The cause (PLAUSIBLE, not run): the cards' lines are written from a
+  capture state that the lit laws change later in the birth.
+- THE MEASURE OWED: on lit births (e.g. 150 a size), how many pages carry a bought tie (`tieBought`) beside a `WAR_OF_ARRESTS`
+  card, by size, dark and lit; and the writer of each line read by symbol.
 
 THE CHAIR'S STANDING RULES FOR THE FLIP: N56: an edit that would move a frozen surface (the golden-freeze register's surfaces, a
 golden, a reference snapshot, a tuning signature) is DROPPED and NAMED in `OWNER-ITEMS.md`, said in the line after that commit.
