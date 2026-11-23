@@ -47,8 +47,14 @@ LIT-13G MEASURED (`close-6/reports/LIT-13G.md`, outputs `close-6/lit13g/`): 13g 
 (dp-city-42, dp-metropolis-111, -118), 4 lit (+ dp-metropolis-83); only the fortune law moves it; cause: an ORDER fault
 (`factionStanding.js :: annotateFactionStanding` writes the war lines, gated by `seatBoughtOf`; the row's `corrupted` comes later
 at the coherence seam `withHallCapture`/`hallCaptureOf`). SENT to the chair ~12:55; ITS RULING PENDING; NOTHING BUILT FOR IT.
-IN FLIGHT (since 12:58 UTC): the F-JOIN builder (rows-JOIN.tsv; the addendum's rulings 5-8) in `/home/user/wt/flip` at 8f882d0f0;
-report `close-6/reports/F-JOIN.md`. NEXT: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
+THE CHAIR RULED (N97, 12:58): 13g IS CURED BEFORE "FLIP" as its own commit "13G", AHEAD of F-JOIN's re-pins, F9 and the
+registers: the card's gate reads what the tie reads (the two `seatBought ? ''` gates of `annotateFactionStanding`'s thieves/military
+branch read the record's bought row at every re-annotation after the coherence seam); lines OMITTED, no new sentence; red first
+over the 900 (3 dark, 4 lit by name; r2r-city-5); a tooth; the per-birth hash: nothing else moves (else STOP); N56.
+IN FLIGHT (since 13:07 UTC): the 13G builder (brief `close-6/briefs/13G.md`) in `/home/user/wt/flip` at 8f882d0f0; report
+`close-6/reports/13G.md`, hashes `close-6/13g/`. F-JOIN's builder is PAUSED (no edits; `close-6/reports/F-JOIN.md` has its partial
+read: `powersReadTheRosterP31` 5 red vs 4 listed, unread): RESUME IT (or a fresh one by the same brief) after 13G, values re-read.
+NEXT after F-JOIN: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
