@@ -32,7 +32,10 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 10:08 UTC (the helper's read; no figure fell since 08:42, so no seat was summarized meanwhile):
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 11:10 UTC (the helper's read, its clock 11:10:24; NO FIGURE FELL since 10:08): CLOSE-6 258,492; VEIL-40
+321,729 (it moved: its long turn ended); VEIL-41 449,951 (THE NEAREST TO ITS MARK: its own estimate 470,000; ITS
+SUCCESSOR VEIL-45's START MESSAGE IS DRAFTED WHEN THE CHAIR'S READ PASSES 520,000); VEIL-42 368,897; VEIL-43 337,240;
+VEIL-44 0 AS RETURNED (a new seat with no figure yet). THE FIGURES OF 10:08 UTC (history; no figure fell since 08:42):
 CLOSE-6 205,838 (seated 09:14); PROSE-6 347,336 (its turn completed at 10:08; then given "LIT-DISAGREE"); VEIL-40
 286,352 (UNCHANGED AT THREE CHECKS: one long turn; its liveness is in N80); VEIL-41 415,524; VEIL-42 360,272;
 VEIL-43 267,708. THE CHAIR'S OWN WORKER WAS RESTARTED BY THE PLATFORM (no turn between about 09:21 and 10:08 UTC):
@@ -141,13 +144,26 @@ nothing was lost; whoever reads this after another restart: the record on origin
   add none). It runs chain B's instrument (L1 only) for the whole-document count; its own builder builds "DAILY" and
   "NAMES" only. RULED: in unit (2), what touches neither 212 nor the registry is built first; the sites' rows and
   (ix)'s SQL last, after the three units now in build have reached the tip.
-SIX WORK NOW: CLOSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43 AND VEIL-44 (seated in PROSE-6's place after its LIT-DISAGREE
-line: N83; `prompts/START-VEIL-44.txt`; ITS SESSION ID IS IN THE FIRST ENTRY OF SECTION 5 AFTER N83). PROSE-6 WAITS
+SIX WORK NOW: CLOSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43 AND VEIL-44 (VEIL-44 IS session_01FbPLbf229d4Ks1UJSnj8vb,
+seated 10:41:28 UTC in PROSE-6's place for the doors unit "IMPORT-DOOR": N83, N84; `prompts/START-VEIL-44.txt`). PROSE-6 WAITS
 (nothing owed; "THE LINE IS <commit>" if the line moves). THE BAR'S SECOND GATE CANNOT READ 0 UNDER THE ORDER (N81:
 "GATE-MAP"): the seven VR42 towns and r3m-town-insurgency-0-14 stay non-members by listed rules; MEASURE "LOWER-7" IS
 WITH VEIL-43; THE CHAIR THEN RULES whether GATE-2 reads the towns that are non-members by a listed rule apart, by
 name, as GATE-1 does. "PIN-3 b58abc48b" IS GRANTED IN ADVANCE (N82): when VEIL-41 sends "PIN-3 MERGED b58abc48b" THE
 CHAIR NAMES THE NEW TIP (`lane/veil-41-2026-11-23-tip`) TO VEIL-40, VEIL-42, VEIL-43 AND VEIL-44.
+SINCE N83 (N84 TO N86; THE HOURLY CHECK OF 11:10 UTC): (1) THE MAP MEMBER IS THE PARTY LINK'S READ OF THE SAME TOWN
+(N84; the reader's row 32): the doors are held to one read by value, each ruled difference listed; no new twin. (2)
+THE READER'S ROW 21 (the stand-in "an unseen interest" in a tension's party list) HAD NO SEAT: IT RIDES IN CHAIN C's
+UNIT AS "R5-TENSION" (N85): a tension that names a hidden power whose name the read does not serve leaves whole; its
+builder's first act is a count of the mask word at every path of every served document, AND IT STOPS WITH PATHS AND
+COUNTS IF THE WORD STANDS ANYWHERE ELSE: THE CHAIR THEN RULES THOSE PLACES (E94's mask of a hidden holder of the seat
+is the one ruled exception). (3) THE TWO FRONT-PAGE LISTS FOLD INTO THE FROZEN RULE (N85; row 33; VEIL-44, after
+MAP-COVERT and the doors-3 arms). (4) CHAIN A BUILDS R3-TELL-5's UNITS (iv), (v), (vi) DURING THE RIVAL'S PROOF, ONE
+PROOF FOR THE THREE (N86); VEIL-40's answer is owed. (5) "F-FORTUNE f02f969c2" IS READ WHOLE BY THE CHAIR (N86): five
+rows go back as "F-FORTUNE-2"; three judgements taken and named for the owner; ONE QUESTION OPEN (is rulers-thorp-35's
+outranking rival a hidden power: a case the veil's seats need). (6) THE CHAIR OWES: the new tip named at "PIN-3
+MERGED"; VEIL-45's start message drafted; the guard line's pin (the reader's row 7) given to the join's seat with a
+doors arm; LOWER-7's ruling; the owner's decision on pages published before the veil, with chain B's counts.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2029,3 +2045,177 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   message went out before the entry's own stamp of 10:11): no hour goes into a message or an entry unless the command
   that writes it reads `date -u`. The same fault was named to VEIL-40 ("10:16" against 10:12:22) and to VEIL-43
   ("10:38" against 10:35:24): each owned it.
+- 2026-11-23 11:13 UTC · N84 · VEIL-44 IS SEATED; ITS FIRST LINES; THE MAP MEMBER IS THE PARTY LINK'S READ OF THE SAME
+  TOWN; THE WORLD SNAPSHOTS AND THE CHRONICLE AFTER THE RE-KEY ARE MEASURED FIRST; THE MAP IMPORT'S PAID GATE NAMED TO
+  THE OWNER.
+  (1) VEIL-44 IS SEATED: session_01FbPLbf229d4Ks1UJSnj8vb (created_at 2026-11-23T10:41:28Z by the server); source
+  `lane/veil-42-2026-11-23` (8d4a81fef); outcome `lane/veil-44-2026-11-23`; claude-opus-5-5 at high effort; tags
+  ninth-chair, pre-deploy, veil-doors; its short prompt points to `prompts/START-VEIL-44.txt` (13,086 bytes on origin
+  at d9c5093df). THE CHAIR'S THIRTY-FOURTH PUSH (d9c5093df: N81 to N83) ENDED exit=0 at 10:41:13 UTC (its log;
+  ls-remote equal to the local tip). VEIL-42 (queued 10:38:38): the standing rule done:
+  `lane/veil-42-2026-11-23-tonight-wip` 9cdeb4a0a ("WIP, UNPROVED": both twins re-pointed to the projection; its
+  proofs queued), `lane/veil-42-2026-11-23-meas-wip` eb0c60920 (the stored sets' and every run's recipes), its
+  documents branch 8d4a81fef (PART 44; the pool's recipe `out/v42/chain0.sh`); `-r4ids-wip` 9f9b819f7 unchanged; both
+  builders told to commit WIP before every wait over ten minutes.
+  (2) VEIL-44's FIRST LINES (queued 10:47:19, 10:53:35 and 10:53:36). It stands on 8d4a81fef; its `-door-wip` is cut
+  at 23bb8b8ae (it merges the PIN-3 tip when named); its machine re-made (chain0 through the mutex, the pool after).
+  "(c1)" (ADDENDUM 2 of the IMPORT-DOOR brief, 247cc3041 on its branch): EVERY LATER CURE LIVES INSIDE `_gallery_veil`
+  (withhold-always, (a'), E115/E121/E122, the rival's rule, the re-key), which returns a body for every object it is
+  handed: A DOOR THAT SERVES ITS OWN VEIL'S BODY INHERITS THEM ALL (doors-3's member does); WHAT LIVES OUTSIDE THE
+  VEIL IS RESTATED DOOR BY DOOR: the sanitiser, the member overrides (the splice, the roster splice, the covert CASE),
+  Reveal DM, the frozen copy, the marker; doors-3 skips the covert CASE. Three new items: R4-IDS against
+  `_gallery_doors_chronicle` (the chronicle finds gone and shown people by id against the body: once the body is
+  re-keyed every person reads as gone: it fails closed with a fidelity loss); the world snapshots of both map reads
+  never pass the veil, and whether they hold `publicProse` or a settlement copy is unmeasured; the map member serves
+  less with no ruling naming it (Reveal DM ignored at share and person level; no marker). "MAP-PIPELINE"
+  (`out/v44/MAP-PIPELINE.md`: 12 steps by 6 doors, by reading at 23bb8b8ae with doors-3 beside): SKIPPED: the covert
+  CASE on the map member and on `import_gallery_map` (072 :146 returns `get_gallery_map`'s payload), at the tip and in
+  doors-3; the veil on `get_unlisted_map`'s world snapshot and on `get_gallery_map`'s world (served as stored; doors-3
+  drops only the chronicle); the tile rows raw at the tip (doors-3 cures); the member's chronicle raw at the tip
+  (doors-3 cures); the member gets no served marker and has no twin (`fetchGalleryMap` re-derives and never projects).
+  SEEN IN PASSING: `import_gallery_dossier` requires premium on the server (migration 120) and `import_gallery_map`
+  (072) does not.
+  (3) **Decided (N84):** (a) THE MAP MEMBER IS THE PARTY LINK'S READ OF THE SAME TOWN, BY NAME (VR23): always the
+  public projection; Reveal DM at share level never applies; an unmarked member takes the default veil. THIS IS THE
+  FIRST LISTED DIFFERENCE OF THE DOOR-EQUALITY ARM (N77): the member is held by value, modulo the bijection, to the
+  LINK's served document of the same place and marker (less the marker); per-person `revealDm` as the link does; where
+  that serves less than the gallery page it is listed, not cured. (b) NO NEW TWIN for the member: its proof by value
+  is the door-equality arm, server against server. (c) The world snapshots are MEASURED before their red (a settlement
+  copy, a person, a `publicProse` block, a name-search hit: by path and count). (d) The chronicle after the re-key is
+  measured at R4-IDS's merge: a named risk in ADDENDUM 2 with its arm ("a shown person stays shown"). (e) THE PAID
+  GATE, READ BY THE CHAIR: 072's own header says the map import's premium cap sits on the client's clone path and the
+  per-tier save trigger, and its payload is the map read's own: THE OWNER'S PAID SURFACE: NAMED TO HIM, NOTHING
+  CHANGED. **Why (a):** a town on a shared map is read by players; the link is the lane's one players' read, already
+  ruled and proved; a third rule for the member would be a third thing to prove. SAID TO THE OWNER the same turn: the
+  member rule; that a town published before the veil shows as today on its own gallery page and takes the default veil
+  on a link and on a map (part of his pending decision); the paid gate.
+- 2026-11-23 11:13 UTC · N85 · "TENSION-PARTIES": NO READ SHORTENS A PARTY LIST; THE MASK (THE READER'S ROW 21) HAD NO
+  SEAT AND RIDES IN CHAIN C's UNIT AS "R5-TENSION"; THE DOOR CENSUS: THE TWO FRONT-PAGE LISTS FOLD INTO THE FROZEN
+  RULE; A SEVENTH BLIND INSTRUMENT (THREE PROBES, NO TEST).
+  (1) VEIL-41's REPORT (queued 10:53:48): a29c38f6a, `docs/chair/2026-11-20/veil/out/v41/tp/TP-REPORT.md` with its
+  probe (not on origin at 10:57:52, on origin at 10:58:56; READ WHOLE BY THE CHAIR, 75 lines, with 212 :2400 to :2416
+  and :3068 to :3082, 210 :300 to :316 and `publicSafe.js` :306, :346 beside it). The measure, at 23bb8b8ae: 1,948
+  stored documents; the twin on every document at 12 settings by 2 Reveals (46,752 reads); the server at three doors
+  (page, link, import as a non-owner) on 373 documents (8,952 reads a door). OUTCOME: NO READ ON ANY ENGINE OR DOOR
+  SHORTENS A TENSION'S PARTY LIST: a tension naming a party the read hides is DROPPED WHOLE (the crime signal false:
+  1,166 + 418 party-reads; it names a withheld power: 528 + 132) or the party is MASKED "an unseen interest" (24
+  party-reads on the twin: the `hidden: true` power on Reveal off; Reveal DM serves the name); 0 party gone; 0 stored
+  name served. Q0: 1,948 of 1,948 documents hold a non-empty `factions[]` (4,045 tensions, 11,932 parties). C1's 18
+  "unregistered" are crime_wave tensions dropped whole ("The garrison" 11, "The watch" 7: generic watch words the
+  defence prose uses on its own). Q1: 105 hideable parties in 104 documents (78 a non-governing criminal power; 25 a
+  criminal power whose name is the bare form of a hideable house; 2 the `hidden: true` power "The Independent Bloc",
+  the infiltrator); 0 name a hideable house exactly. Q3: the whole-tension rules are 212 :2409 to :2413 with
+  `_gallery_veil_copy_names` and `_gallery_veil_roster_choices` :2663 to :2666 (the twin: `withholdPowerCopies`,
+  `applyRosterChoices`); THE MASK IS WRITTEN BY 210 `_gallery_sanitize_public_json` :311 AND `publicSafe.js ::
+  maskHiddenNames` INTO EVERY STRING LEAF. Q4: 1,192 open places; 21 open tensions shorter than their kind's longest:
+  a shorter list is no tell, and no veil read makes one. THE LINK: masks on both Reveals (48) since
+  `get_unlisted_dossier` sends `gallery_share_dm` false (212 :3077, read by the chair); on the unmarked setting it
+  drops crime_wave and withheld-power tensions the page, the import and the twin serve (1,894 party-reads). NOT
+  RECEIPTED: whole-list server = twin (its first run compared without sorted keys).
+  (2) **Decided (N85):** (a) NO REGISTRY ROW for `factions[]` as a path; chain C's EDIT 4 stays out; C1's 18 are
+  closed as the lookup's artifact, on one check by execution (below). (b) THE MASK IS THE READER'S ROW 21 (E115 (6):
+  "the masked party is WITHHELD, not masked"); THE CHAIR'S SEARCH OF THE START MESSAGES OF CHAIN A FOUND NO WORD OF
+  IT: THE ROW WAS OPEN AND HELD BY NO SEAT. IT RIDES IN CHAIN C's UNIT AS "R5-TENSION", before that unit's whole proof
+  starts, so that it costs no run of its own. THE RULE, made exact by the measure: on every read the veil runs on that
+  does not serve a hidden power's name, a tension that names it LEAVES WHOLE, as a withheld power's tension already
+  does; no mask in a party list; no list shortened; both engines; a plant first, red at the unit's base; one registry
+  row. ITS ARMS: (i) the mask word in no served document AT ANY PATH on every door, Reveal and setting of the measure
+  where the veil runs and the name is not served: IF THE WORD STANDS AT ANY OTHER PATH THE BUILDER STOPS and the chair
+  gets the paths and counts before any cure there (E94's mask of a hidden holder of the seat, the reader's row 19, is
+  the one ruled exception: listed); (ii) the measure's "0 party gone" kept as an arm; (iii) Reveal DM on the page
+  still serves the name; the link drops the tension on both Reveals; the unmarked gallery page is served as before
+  (211's design): listed. (c) THE LINK'S TWO DIFFERENCES ARE NOT FAULTS: they are listed differences of the
+  door-equality arm, read by the chair in source (212 :3077; 211 :701); the 1,894 goes to the owner as a count in his
+  decision on pages published before the veil. (d) No rerun of the whole-list equality: its receipt is the
+  whole-document form at the unit's "TIP?". **Why (b) as "leaves whole" and not "the party withheld":** the place with
+  the hidden power never there has no such tension; a list with one party fewer is a thing no read makes today, and
+  making one would be a new form to prove.
+  (3) VEIL-41's ANSWERS. At 11:05 (its `date -u`): N85 taken; R5-TENSION briefed and seated beside the pins builder on
+  `lane/veil-41-2026-11-23-tension-wip`, cut at 79e94d633 (brief 3b2d62a78: it reads 212 and the registry whole; its
+  first act is arm (i)'s measure); the queued rerun was stopped at 10:53 before it started; PIN-3's re-run waits on
+  its mutex behind the pins builder's 55-file run: "PIN-3 MERGED" when green. At 11:09: THE READERS' CHECK, executed
+  against the tip's registry: NO TEST IS BLIND on the two tension rows: no test compiles them at all (each test that
+  compiles registry paths filters to other rules first; the registry walker's arm E only compiles and checks anchors;
+  the composed-hosts walker compiles none; the reader that does match them is the gate's differ, `r1/tally.mjs`, on
+  the real differ paths with their " (only in A|B)" suffix). THE BLIND ONES ARE THREE PROBES (`out/v33` `c1-an.mjs`,
+  `prose.probe.jsx`, `legacy.probe.jsx` :: rowOf): they walk the plain prefix with no suffix, so the three tension
+  rows can never match: C1's "unregistered" is that artifact, CONFIRMED. **Decided:** the three probes go on the
+  reader's row 30 as A SEVENTH BLIND INSTRUMENT; one line is owed (does any of the three use a HIT to skip or excuse a
+  path; how many registry rows carry the suffix); the fix (rowOf tries the suffixed forms, with a tooth) is STEP 0 OF
+  "LEGACY-TELLS", which runs `legacy.probe.jsx`.
+  (4) VEIL-44's "(f)", THE DOOR CENSUS (queued 10:57:19; `out/v44/census/CENSUS-TIP.md` at 4c602ddc7, on origin with
+  fb516a78d: READ WHOLE BY THE CHAIR, 15 lines): by a committed instrument (`census.mjs`: every SECURITY DEFINER
+  function whose latest definition reads `settlements` or `saved_maps`): 63 rows, a wider net than v27's 28; v27's 28
+  stand identical by name, latest migration and VEIL; the three 212 reads are `stable` and R4-IDS makes them volatile
+  (the one row change expected); of the 35 the wider net adds, none returns `data`, a world snapshot or a value
+  derived from `data` except through the tile rows; ONE FIDELITY ITEM: `list_curated_dossiers` (011) and
+  `list_featured_dossiers` (168), both anon, hand the LIVE `name` and `tier` where doors-3 gives a frozen share the
+  copy's. **Decided (N85):** BOTH FOLD INTO THE FROZEN RULE (a frozen share's tile prints the copy's name and tier on
+  every list), in the doors unit after MAP-COVERT and the doors-3 arms, red first by a plant (publish; rename and
+  re-tier the live town); the other 33 are enrolled in the door walker each with a "no veil needed" row and its
+  reason. **Why:** a live name or tier on a frozen share tells what the maker did after publishing; one rule for every
+  tile is one thing to prove. ITS ANSWERS at 11:05 (its `date -u`), by reading: both lists filter `is_public = true`
+  and `is_curated` (011) or `is_featured` (168): AN UNPUBLISHED TOWN CANNOT APPEAR; a live (unfrozen) share rightly
+  prints its live name; the served columns are id, public_slug, name, tier, published_at, view_count and the order;
+  the lists ignore `gallery_title`, which the tile rows honour. And N84 (a)'s owed line, read at 212 :3066: the link's
+  splice gets `dm_full` = the projection plus the live ties with `settlement_share_dm` false, so a person whose
+  `revealDm` is true is replaced by the projection's own card: THE LINK NEVER REVEALS A PERSON, and the member does
+  the same: LISTED as serving less than a gallery page whose share reveals that person. ITS HOURS: three in its lines
+  were guessed, not read (said and corrected by itself at 10:59, before the chair's line on it arrived). ITS SLIP,
+  said by itself: one commit made while a push of the same branch was in its hook; origin's tip was its own commit; no
+  harm read. ITS STATE: the MAPCOVERT-RED builder dispatched (brief bbd8a15ce); the doors-3 arms (five test files at
+  3e1115c81) queued on its mutex behind the pool; the TRAD4-RECUT builder's brief written, dispatched when
+  MAPCOVERT-RED returns.
+- 2026-11-23 11:13 UTC · N86 · THE READER'S LIST AUDITED FOR THE SEAT THAT HOLDS EACH ROW; CHAIN A BUILDS (iv), (v),
+  (vi) DURING THE RIVAL'S PROOF, ONE PROOF FOR THE THREE; "F-FORTUNE f02f969c2" READ WHOLE; THE HOURLY CHECK OF 11:10.
+  (1) THE READER'S LIST, AUDITED BY THE CHAIR FOR THE SEAT THAT HOLDS EACH ROW (rows 1 to 31, by reading the list, the
+  record and the line 9b0ffaa97). **Why:** row 21 was found open with no seat only because a measure happened to touch
+  it; a row nobody holds is found by the reader at the bar and costs a round then. FOUND: ROW 21 (N85). ROW 7:
+  `guardLineUnderTheLaw.js :: guardLineUnderTheForce` IS ON THE LINE (:286) with no audience gate: the pay-cut twin is
+  owner-only BY CONSTRUCTION (`facts/orderForce.js` :60 reads `npcs[].settlementCondition`, which no shared read
+  serves: `tensionCauseHolds.js` :68's note), and ITS PIN IS NOT ON THE LINE
+  (`tests/domain/display/guardLinePayCutOwnerOnly.test.js` on `lane/page-12-2026-11-21-guardline-wip` at 3ac002b5e: a
+  differential on `toPublicSafe` and the default veil at six sizes, the client's engine only): IT GOES TO THE JOIN'S
+  SEAT with a doors arm (no door and Reveal serves the field, or the door that does is listed). ROW 8:
+  `data/tensionSideMeanings.js` is on the line as DATA ONLY; no page prints the table. ROWS 13 AND 22 need no seat
+  before the bar (not built; after R3). UNITS (iv), (v), (vi) OF R3-TELL-5 are chain A's, after the rival: (2). THE
+  LIST AMENDED: rows 7, 8, 21 and 30; ROWS 32 (the doors held to one read; the listed differences) AND 33 (the
+  front-page lists) ADDED; the reader's draft start message says seven blind instruments where it said five.
+  (2) **Decided (N86), sent to VEIL-40 after the clock read 11:06:19:** WHILE THE RIVAL'S RUNS HOLD ITS MUTEX, UNITS
+  (iv), (v) AND (vi) OF R3-TELL-5 ARE BUILT, NOT WAITED FOR: one fresh builder on a wip branch cut where the merge
+  will be cleanest (the rival's wip 9a2f8ef9a unless the seat sees cause); its brief is R3-TELL-5-BRIEF's three units
+  as written (each measured first, each STOP as written, red first, the read-whole law) with GATE-MAP's rows by town;
+  its small runs take the mutex between the large ones, never ahead of the rival's red and green. ONE PROOF FOR THE
+  THREE: one pool and one pair of gates, read by family (relations to (iv); `safetyDesc`, `currentTensions`, `imports`
+  to (v)); the brief's "both gates after each unit" is lifted for these three. IF the three are green on their own
+  arms when the new pool is ready, the gates run ONCE on the stacked tree (the rival with the three) and the "TIP?"
+  names all four; if not, the rival's gates run alone as planned and the three take the next run: NO RUN WAITS FOR THE
+  BUILDER. Two chains now touch a tension ((v)(2) and chain C's R5-TENSION): each builder's brief names the function
+  it touches; no shared hunk without the chair's word (said to both seats). **Why:** GATE-MAP sends GATE-1's four all
+  to (v) and GATE-2's relations to (iv): they are the bar's last cures on chain A; each whole proof costs hours of one
+  mutex, and three units one after another would cost three; the gates' table by family tells which unit closed what.
+  VEIL-40's answer is owed (it may say its count or its box cannot carry a third builder; the chair then moves the
+  work).
+  (3) "F-FORTUNE f02f969c2" (CLOSE-6, queued 11:07:00; on the flip branch `lane/close-6-2026-11-23-flip`, pushed): 18
+  test files, 34 rows (PREMISE 17, BORN ANCHOR 16, STORED PIN 1); its builder's lit run of the 20 files 35 red to 1
+  (`defenceParts` R13, listed, stays); `tests/lint` whole the line's three; eslint 0; no src; nothing dropped for the
+  owner. READ WHOLE BY THE SEAT, WHICH SENT FOUR ROWS BACK as "F-FORTUNE-2" (each re-pinned to a different form and so
+  proving less). READ WHOLE BY THE CHAIR (618 lines): the four AGREED; A FIFTH OF THE SAME CLASS SENT:
+  `tailDisplayCivicBatch4` KEPT r2r-city-27, 'Surplus' to 'Adequate': the kept word 'Surplus' is pinned by no row now;
+  NOT a sixth: `tailDisplayCivicBatch1` r2r-city-3 moved to the Contested sentence and the old form is still pinned by
+  r2s-mass_migration-town-0. THE THREE JUDGEMENTS (an extinct premise taken at the nearest size that holds the case):
+  TAKEN, and each goes into FOR-THE-OWNER.md as one plain line of what the lit world no longer holds: no approved seat
+  on 0 of 500 religious-conversion cities; no Struggling village at output 50 or more in 800; no short-purse
+  charter-only hamlet in 1,000. TAKEN AS RE-MEASURED: `bar5SafetyLawBand`'s 45 to 21; `PRINTED_AT_BASE` (8 of 16) and
+  `prosperityStanding`'s seven rows (one line asked in `defenceParts` to say the values are the lit births' now). ONE
+  QUESTION, by execution: in rulers-thorp-35 lit the page prints "the decisions that matter are made by The
+  Independent Bloc": is that rival the `hidden: true` power, and which of the six lit thorps with the note hold a
+  hidden rival: the owner's page naming it is right either way; THE SHARE VEIL'S SEATS NEED THOSE SEEDS AS CASES (what
+  a shared read prints there is the join's question, lit).
+  (4) THE HOURLY CHECK OF 11:10 (the stored reminder trig_01GB6t9oB58L4GSFwU6TxzoK fired at 11:09:23 UTC; one haiku
+  helper, its clock 11:10:24): CLOSE-6 258,492; VEIL-40 321,729 (it moved by 35,377: its long turn ended); VEIL-41
+  449,951; VEIL-42 368,897 (last updated 10:43:15: one long turn behind its mutex); VEIL-43 337,240 (last updated
+  10:44:48: the same); VEIL-44 0 as returned (a new seat with no figure yet). NO FIGURE FELL; every seat connected,
+  running, served by claude-opus-5-5. None is past 570,000; VEIL-41 is the nearest (its own estimate 470,000):
+  VEIL-45's start message is drafted when the chair's read passes 520,000. THE NEXT HOURLY CHECK IS SET WITH THIS
+  ENTRY (its id in the next entry).
