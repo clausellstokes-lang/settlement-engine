@@ -1,0 +1,470 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 28214 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+RE-RUN: sh scripts/gate-mutex.sh --run -- node docs/chair/2026-11-20/content/daily/measures/D4C/measure.d4c.mjs > docs/chair/2026-11-20/content/daily/measures/D4C/d4c.out.txt 2>&1
+births: 900 (150 a size) in 154s
+COVERAGE: printed slot texts not wholly read back to pool rows: 0
+AMBIGUITY: parts whose printed span is the pick of two or more branches: 0
+
+════ TABLE 1 — ONE FACT TWICE ON A PAGE (the owner's (1)) ════
+A part = one pool row printed. Its FACT = the branch key it was drawn on, made concrete (food:want = food band strained or worse, from
+food_culture strained/critical/collapsed, commoner_resentments food, dawn_work food, outsider services.food_production; threat:<kind> from
+child_warnings, the outsider threat part, a recent_changes threat branch, dawn_work defence (each outside threat at medium+), food_culture
+surplus.wanting; power:<name> from the outsider power part and dawn craft/merchant; tension:<type> from unspoken_topics and the
+resentment uprising branch; condition:<archetype>, event:<name> from recent_changes; legitimacy:want; defence:want; cap:<lens>:want)
+plus its declared STATE atoms (crisis:*, famine, food surplus, grain imported, stores:*, prosperity:*). Count = pages holding the pair.
+
+── 1a. SAME FACT (exact key), the public eight: 25 rows (pages of 900; by size thorp / hamlet / village / town / city / metropolis)
+ 377  [78 / 43 / 43 / 74 / 63 / 76]  threat:monster_pressure | outsider_impressions | child_warnings
+        e.g. hxd-thorp-0: [outsider_impressions threat.monster_pressure.frontier#MF3] "The wild is not far off, and visitors hear stories of what comes out of it." || [child_warnings monster_pressure#P4] "going anywhere alone after dark"
+ 314  [22 / 31 / 12 / 54 / 89 / 106]  food:want | food_culture | commoner_resentments
+        e.g. hxd-thorp-7: [food_culture critical#C0] "Rations are tight, and the poor eat watered stew." || [commoner_resentments food#F2] "Many feel that those in charge should be doing more to see everyone fed."
+ 219  [91 / 57 / 46 / 25 / 0 / 0]  threat:monster_pressure | dawn_work | child_warnings
+        e.g. hxd-thorp-0: [dawn_work defence#W8] "People go out to their work together at dawn, and no one strays far from the houses alone." || [child_warnings monster_pressure#P4] "going anywhere alone after dark"
+ 212  [75 / 54 / 62 / 21 / 0 / 0]  threat:monster_pressure | outsider_impressions | dawn_work
+        e.g. hxd-thorp-0: [outsider_impressions threat.monster_pressure.frontier#MF3] "The wild is not far off, and visitors hear stories of what comes out of it." || [dawn_work defence#W8] "People go out to their work together at dawn, and no one strays far from the houses alone."
+ 162  [18 / 34 / 22 / 26 / 36 / 26]  threat:monster_pressure | child_warnings | recent_changes
+        e.g. hxd-thorp-6: [child_warnings monster_pressure#P12] "staying out once the evening comes on" || [recent_changes threat.monster_pressure.overrun.realized#T2] "Beasts now roam the country around, and people keep close to home."
+ 129  [38 / 31 / 38 / 22 / 0 / 0]  defence:want | outsider_impressions | dawn_work
+        e.g. hxd-thorp-0: [outsider_impressions services.defense#D1] "Nobody stands guard here, and a visitor walks in unchallenged." || [dawn_work defence#W8] "People go out to their work together at dawn, and no one strays far from the houses alone."
+  70  [9 / 7 / 2 / 5 / 18 / 29]  food:want | dawn_work | food_culture
+        e.g. hxd-thorp-7: [dawn_work food#F6] "Every hand that can be spared is in the fields at first light, looking for anything left to gather." || [food_culture critical#C0] "Rations are tight, and the poor eat watered stew."
+  70  [9 / 7 / 2 / 5 / 18 / 29]  food:want | dawn_work | commoner_resentments
+        e.g. hxd-thorp-7: [dawn_work food#F6] "Every hand that can be spared is in the fields at first light, looking for anything left to gather." || [commoner_resentments food#F2] "Many feel that those in charge should be doing more to see everyone fed."
+  41  [17 / 14 / 6 / 4 / 0 / 0]  threat:monster_pressure | dawn_work | recent_changes
+        e.g. hxd-thorp-6: [dawn_work defence#W11] "The elder is asked at first light whether all is well before anyone goes out to work." || [recent_changes threat.monster_pressure.overrun.realized#T2] "Beasts now roam the country around, and people keep close to home."
+  31  [5 / 7 / 10 / 1 / 5 / 3]  tension:popular_uprising | commoner_resentments | unspoken_topics
+        e.g. hxd-thorp-27: [commoner_resentments uprising#U2] "Many here feel they have asked the Elder Council for fair treatment for long enough." || [unspoken_topics wound.popular_uprising#W2] "The quarrel between the common people and those who rule them is not aired in public."
+  20  [5 / 7 / 5 / 2 / 0 / 1]  threat:plague | child_warnings | recent_changes
+        e.g. hxd-thorp-17: [child_warnings plague#L3] "unfamiliar coughs, and anyone who has one" || [recent_changes threat.plague.any.imminent#T1] "There is sickness about, and it is getting close to a real outbreak."
+  15  [4 / 5 / 3 / 1 / 1 / 1]  threat:unrest | outsider_impressions | child_warnings
+        e.g. hxd-thorp-65: [outsider_impressions threat.unrest.void#UV0] "The place has lost a leading figure, and visitors hear a good deal about who comes next." || [child_warnings unrest#U9] "wandering into other households while feelings are running high"
+  14  [0 / 0 / 0 / 14 / 0 / 0]  power:Guild Council | outsider_impressions | dawn_work
+        e.g. hxd-town-5: [outsider_impressions power#P13] "Nothing of weight is agreed here without the leave of the Guild Council." || [dawn_work merchant#M6] "The merchants are up before anyone else, and their business is under way by first light."
+  12  [0 / 0 / 0 / 2 / 10 / 0]  power:Merchant oligarchy | outsider_impressions | dawn_work
+        e.g. hxd-town-79: [outsider_impressions power#P0] "Outsiders notice the mark of the Merchant oligarchy on every door that matters." || [dawn_work merchant#M6] "The merchants are up before anyone else, and their business is under way by first light."
+   6  [0 / 0 / 0 / 2 / 3 / 1]  threat:plague | outsider_impressions | child_warnings
+        e.g. hxd-town-54: [outsider_impressions threat.plague.any#PL1] "People here are wary of fevers, and a visitor who coughs is watched." || [child_warnings plague#L3] "unfamiliar coughs, and anyone who has one"
+   5  [2 / 3 / 0 / 0 / 0 / 0]  threat:famine | outsider_impressions | child_warnings
+        e.g. hxd-thorp-18: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [child_warnings famine#A2] "wasting so much as a crust"
+   5  [0 / 0 / 0 / 0 / 5 / 0]  power:Merchant Guild Council | outsider_impressions | dawn_work
+        e.g. hxd-city-19: [outsider_impressions power#P2] "Ask who decides things here, and the answer is the Merchant Guild Council." || [dawn_work merchant#M6] "The merchants are up before anyone else, and their business is under way by first light."
+   3  [1 / 0 / 0 / 0 / 1 / 1]  threat:siege | outsider_impressions | child_warnings
+        e.g. hxd-thorp-103: [outsider_impressions threat.siege.any#SI1] "With enemies at hand, people here are tense and slow to trust a newcomer." || [child_warnings siege#S2] "straying far from home while there is danger outside"
+   3  [0 / 0 / 3 / 0 / 0 / 0]  atom:prosperity: ≤ poor | food_culture | child_warnings
+        e.g. hxd-village-17: [food_culture surplus#S12] "Money is not plentiful here, but food is, and nobody goes short." || [child_warnings economic_collapse#E8] "grumbling about going without"
+   2  [1 / 1 / 0 / 0 / 0 / 0]  threat:siege | outsider_impressions | dawn_work
+        e.g. hxd-thorp-103: [outsider_impressions threat.siege.any#SI1] "With enemies at hand, people here are tense and slow to trust a newcomer." || [dawn_work defence#W10] "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day."
+   2  [0 / 1 / 1 / 0 / 0 / 0]  threat:unrest | child_warnings | recent_changes
+        e.g. hxd-hamlet-96: [child_warnings unrest#U5] "taking sides in arguments that are not theirs" || [recent_changes threat.unrest.void.imminent#T0] "With a leading figure gone, order is under strain."
+   2  [0 / 1 / 1 / 0 / 0 / 0]  power:Merchant Guilds | outsider_impressions | dawn_work
+        e.g. hxd-hamlet-97: [outsider_impressions power#P8] "The Merchant Guilds carry the most weight here, and nobody pretends otherwise." || [dawn_work merchant#M1] "Traders are setting out their goods at the periodic market before light, and the first buyers come as it grows light."
+   1  [1 / 0 / 0 / 0 / 0 / 0]  threat:siege | dawn_work | child_warnings
+        e.g. hxd-thorp-103: [dawn_work defence#W10] "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day." || [child_warnings siege#S2] "straying far from home while there is danger outside"
+   1  [1 / 0 / 0 / 0 / 0 / 0]  power:Grain Holders | outsider_impressions | dawn_work
+        e.g. hxd-thorp-109: [outsider_impressions power#P3] "Strangers with business here are sent to the Grain Holders sooner or later." || [dawn_work merchant#M3] "Loads are made ready before light for the journey out, and the merchants see them off themselves."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  power:Grand Guild Consortium | outsider_impressions | dawn_work
+        e.g. hxd-metropolis-42: [outsider_impressions power#P2] "Ask who decides things here, and the answer is the Grand Guild Consortium." || [dawn_work merchant#M0] "Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain."
+
+── 1b. SAME TOPIC, NOT THE SAME EXACT FACT (the explicit alias table in the script), the public eight: 39 rows (pages of 900; by size thorp / hamlet / village / town / city / metropolis)
+ 183  [41 / 35 / 38 / 64 / 1 / 4]  danger outside | outsider_impressions | child_warnings
+        e.g. hxd-thorp-0: [outsider_impressions services.defense#D1] "Nobody stands guard here, and a visitor walks in unchallenged." || [child_warnings monster_pressure#P4] "going anywhere alone after dark"
+ 170  [30 / 62 / 45 / 8 / 9 / 16]  rule | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-17: [outsider_impressions services.administrative#A5] "Getting anything decided here takes time, for those who decide are few and busy." || [commoner_resentments legitimacy#L2] "Ordinary people grumble that the Elder Council looks after its own first."
+  98  [21 / 21 / 29 / 15 / 7 / 5]  rule | commoner_resentments | unspoken_topics
+        e.g. hxd-thorp-11: [commoner_resentments legitimacy#L15] "People put up with the Household Council, but they expect little of it." || [unspoken_topics wound.succession_crisis#W1] "Nobody raises the succession in company; everyone already has a side."
+  88  [17 / 17 / 19 / 22 / 5 / 8]  danger outside | outsider_impressions | recent_changes
+        e.g. hxd-thorp-7: [outsider_impressions threat.monster_pressure.frontier#MF6] "Frontier habits show here: people go out in company and come back before dark." || [recent_changes condition.war_pressure#K2] "War is close enough now to be felt in everyday business and in the mood of the place."
+  53  [14 / 13 / 4 / 6 / 9 / 7]  hunger | food_culture | unspoken_topics
+        e.g. hxd-thorp-7: [food_culture critical#C0] "Rations are tight, and the poor eat watered stew." || [unspoken_topics wound.resource_scarcity#W1] "People do not talk openly about the shortage, least of all with outsiders."
+  53  [11 / 9 / 9 / 7 / 8 / 9]  danger outside | child_warnings | recent_changes
+        e.g. hxd-thorp-7: [child_warnings monster_pressure#P3] "the far edges of the fields after dark" || [recent_changes condition.war_pressure#K2] "War is close enough now to be felt in everyday business and in the mood of the place."
+  53  [14 / 13 / 4 / 6 / 9 / 7]  hunger | commoner_resentments | unspoken_topics
+        e.g. hxd-thorp-7: [commoner_resentments food#F2] "Many feel that those in charge should be doing more to see everyone fed." || [unspoken_topics wound.resource_scarcity#W1] "People do not talk openly about the shortage, least of all with outsiders."
+  43  [9 / 8 / 7 / 7 / 7 / 5]  danger outside | child_warnings | unspoken_topics
+        e.g. hxd-thorp-12: [child_warnings monster_pressure#P5] "going out to look for whatever is heard in the night" || [unspoken_topics wound.external_threat#W1] "Nobody here talks openly about whether to stand, bargain or leave if the danger comes."
+  40  [9 / 6 / 9 / 7 / 6 / 3]  danger outside | outsider_impressions | unspoken_topics
+        e.g. hxd-thorp-12: [outsider_impressions threat.monster_pressure.frontier#MF8] "Living this near the wild has made people watchful, and a visitor notices it." || [unspoken_topics wound.external_threat#W1] "Nobody here talks openly about whether to stand, bargain or leave if the danger comes."
+  40  [8 / 7 / 14 / 1 / 4 / 6]  rule | outsider_impressions | unspoken_topics
+        e.g. hxd-thorp-19: [outsider_impressions services.administrative#A5] "Getting anything decided here takes time, for those who decide are few and busy." || [unspoken_topics wound.leadership_vacuum#W1] "Nobody here talks openly about the lack of anyone firmly in charge."
+  32  [6 / 6 / 7 / 3 / 5 / 5]  danger outside | unspoken_topics | recent_changes
+        e.g. hxd-thorp-15: [unspoken_topics wound.external_threat#W1] "Nobody here talks openly about whether to stand, bargain or leave if the danger comes." || [recent_changes threat.monster_pressure.overrun.realized#T1] "The country around is overrun with beasts, and the roads are dangerous."
+  28  [4 / 3 / 5 / 6 / 6 / 4]  rule | unspoken_topics | recent_changes
+        e.g. hxd-thorp-19: [unspoken_topics wound.leadership_vacuum#W1] "Nobody here talks openly about the lack of anyone firmly in charge." || [recent_changes condition.regional_authority_instability#K0] "Trouble in the place that governs this one is beginning to be felt here."
+  28  [10 / 9 / 9 / 0 / 0 / 0]  trade | child_warnings | unspoken_topics
+        e.g. hxd-thorp-30: [child_warnings economic_collapse#E7] "giving anything away without asking first" || [unspoken_topics wound.trade_collapse#W0] "The fate of the trade the place was built on is a sore subject, and strangers are not told much."
+  26  [9 / 6 / 2 / 2 / 3 / 4]  hunger | dawn_work | unspoken_topics
+        e.g. hxd-thorp-7: [dawn_work food#F6] "Every hand that can be spared is in the fields at first light, looking for anything left to gather." || [unspoken_topics wound.resource_scarcity#W1] "People do not talk openly about the shortage, least of all with outsiders."
+  26  [5 / 7 / 5 / 4 / 3 / 2]  sickness | child_warnings | recent_changes
+        e.g. hxd-thorp-17: [child_warnings plague#L3] "unfamiliar coughs, and anyone who has one" || [recent_changes condition.plague#K2] "A fever has begun to go round, and people are keeping their distance."
+  26  [4 / 7 / 11 / 3 / 0 / 1]  uprising | child_warnings | commoner_resentments
+        e.g. hxd-thorp-27: [child_warnings unrest#U5] "taking sides in arguments that are not theirs" || [commoner_resentments uprising#U2] "Many here feel they have asked the Elder Council for fair treatment for long enough."
+  24  [4 / 3 / 5 / 6 / 4 / 2]  rule | commoner_resentments | recent_changes
+        e.g. hxd-thorp-19: [commoner_resentments legitimacy#L6] "Few here would say that the Elder Council speaks for them." || [recent_changes condition.regional_authority_instability#K0] "Trouble in the place that governs this one is beginning to be felt here."
+  21  [10 / 8 / 2 / 1 / 0 / 0]  hunger | unspoken_topics | recent_changes
+        e.g. hxd-thorp-18: [unspoken_topics wound.resource_scarcity#W3] "Nobody asks a neighbour how they are managing for supplies; it is not a question to ask." || [recent_changes condition.famine#K1] "The shortage of food has grown into a trouble the whole place shares."
+  21  [4 / 7 / 10 / 0 / 0 / 0]  uprising | child_warnings | unspoken_topics
+        e.g. hxd-thorp-27: [child_warnings unrest#U5] "taking sides in arguments that are not theirs" || [unspoken_topics wound.popular_uprising#W2] "The quarrel between the common people and those who rule them is not aired in public."
+  19  [9 / 7 / 2 / 1 / 0 / 0]  hunger | food_culture | recent_changes
+        e.g. hxd-thorp-18: [food_culture strained#T6] "There is enough to keep going, but not enough to feel easy." || [recent_changes condition.famine#K1] "The shortage of food has grown into a trouble the whole place shares."
+  19  [9 / 7 / 2 / 1 / 0 / 0]  hunger | commoner_resentments | recent_changes
+        e.g. hxd-thorp-18: [commoner_resentments food#F3] "Households that go short look hard at the ones that do not." || [recent_changes condition.famine#K1] "The shortage of food has grown into a trouble the whole place shares."
+  16  [9 / 4 / 3 / 0 / 0 / 0]  danger outside | dawn_work | unspoken_topics
+        e.g. hxd-thorp-12: [dawn_work defence#W3] "Those sworn to turn out in danger meet briefly at first light before going to their own work." || [unspoken_topics wound.external_threat#W1] "Nobody here talks openly about whether to stand, bargain or leave if the danger comes."
+  16  [8 / 5 / 3 / 0 / 0 / 0]  danger outside | dawn_work | recent_changes
+        e.g. hxd-thorp-22: [dawn_work defence#W15] "Before the day's work begins, someone looks out over the country around to see that nothing is stirring." || [recent_changes condition.war_pressure#K2] "War is close enough now to be felt in everyday business and in the mood of the place."
+  14  [4 / 3 / 4 / 3 / 0 / 0]  uprising | child_warnings | recent_changes
+        e.g. hxd-thorp-58: [child_warnings unrest#U2] "repeating what they hear said at home about those in charge" || [recent_changes condition.rebellion#K1] "Some here have begun to organise against those who hold power over them."
+  13  [6 / 5 / 1 / 1 / 0 / 0]  hunger | dawn_work | recent_changes
+        e.g. hxd-thorp-38: [dawn_work food#F1] "Dawn work is the search for food: people are out before light to see what can be found." || [recent_changes condition.famine#K2] "Going hungry is no longer a private matter here; the whole place feels it."
+  12  [1 / 2 / 2 / 3 / 3 / 1]  sickness | outsider_impressions | recent_changes
+        e.g. hxd-thorp-100: [outsider_impressions services.healing#H6] "Those who fall ill here cannot count on much care." || [recent_changes condition.plague#K2] "A fever has begun to go round, and people are keeping their distance."
+  11  [3 / 6 / 1 / 1 / 0 / 0]  hunger | outsider_impressions | unspoken_topics
+        e.g. hxd-thorp-18: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [unspoken_topics wound.resource_scarcity#W3] "Nobody asks a neighbour how they are managing for supplies; it is not a question to ask."
+  11  [3 / 6 / 1 / 1 / 0 / 0]  hunger | outsider_impressions | recent_changes
+        e.g. hxd-thorp-18: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [recent_changes condition.famine#K1] "The shortage of food has grown into a trouble the whole place shares."
+  11  [2 / 2 / 1 / 0 / 3 / 3]  rule | outsider_impressions | recent_changes
+        e.g. hxd-thorp-19: [outsider_impressions services.administrative#A5] "Getting anything decided here takes time, for those who decide are few and busy." || [recent_changes condition.regional_authority_instability#K0] "Trouble in the place that governs this one is beginning to be felt here."
+  10  [5 / 2 / 0 / 0 / 3 / 0]  sickness | outsider_impressions | unspoken_topics
+        e.g. hxd-thorp-21: [outsider_impressions services.healing#H8] "A visitor who falls sick here will find no healer to call on." || [unspoken_topics wound.plague_years#W2] "The fear of sickness is real, but nobody speaks of it in company."
+   9  [2 / 5 / 1 / 1 / 0 / 0]  hunger | outsider_impressions | food_culture
+        e.g. hxd-thorp-18: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [food_culture strained#T6] "There is enough to keep going, but not enough to feel easy."
+   9  [2 / 5 / 1 / 1 / 0 / 0]  hunger | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-18: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [commoner_resentments food#F3] "Households that go short look hard at the ones that do not."
+   8  [1 / 2 / 1 / 2 / 2 / 0]  sickness | outsider_impressions | child_warnings
+        e.g. hxd-thorp-100: [outsider_impressions services.healing#H6] "Those who fall ill here cannot count on much care." || [child_warnings plague#L3] "unfamiliar coughs, and anyone who has one"
+   6  [1 / 4 / 0 / 1 / 0 / 0]  hunger | outsider_impressions | dawn_work
+        e.g. hxd-thorp-44: [outsider_impressions threat.famine.any#FA0] "Hunger is in the place, and a visitor sees it in thin faces." || [dawn_work food#F1] "Dawn work is the search for food: people are out before light to see what can be found."
+   5  [2 / 3 / 0 / 0 / 0 / 0]  hunger | child_warnings | unspoken_topics
+        e.g. hxd-thorp-18: [child_warnings famine#A2] "wasting so much as a crust" || [unspoken_topics wound.resource_scarcity#W3] "Nobody asks a neighbour how they are managing for supplies; it is not a question to ask."
+   5  [2 / 3 / 0 / 0 / 0 / 0]  hunger | child_warnings | recent_changes
+        e.g. hxd-thorp-18: [child_warnings famine#A2] "wasting so much as a crust" || [recent_changes condition.famine#K1] "The shortage of food has grown into a trouble the whole place shares."
+   3  [1 / 2 / 0 / 0 / 0 / 0]  hunger | food_culture | child_warnings
+        e.g. hxd-thorp-18: [food_culture strained#T6] "There is enough to keep going, but not enough to feel easy." || [child_warnings famine#A2] "wasting so much as a crust"
+   3  [1 / 2 / 0 / 0 / 0 / 0]  hunger | child_warnings | commoner_resentments
+        e.g. hxd-thorp-18: [child_warnings famine#A2] "wasting so much as a crust" || [commoner_resentments food#F3] "Households that go short look hard at the ones that do not."
+   2  [0 / 2 / 0 / 0 / 0 / 0]  hunger | dawn_work | child_warnings
+        e.g. hxd-hamlet-28: [dawn_work food#F1] "Dawn work is the search for food: people are out before light to see what can be found." || [child_warnings famine#A2] "wasting so much as a crust"
+
+── 1c. BORDERLINE — the same thing NAMED (a house, a power's or the government's name in the text, a naming atom), no shared fact or topic, the public eight: 67 rows (pages of 900; by size thorp / hamlet / village / town / city / metropolis)
+ 111  [57 / 45 / 9 / 0 / 0 / 0]  name:Elder Council | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-1: [outsider_impressions power#P8] "The Elder Council carries the most weight here, and nobody pretends otherwise." || [commoner_resentments legitimacy#L2] "Ordinary people grumble that the Elder Council looks after its own first."
+  55  [22 / 22 / 10 / 1 / 0 / 0]  atom:institution: dwellings | dawn_work | gathering_places
+        e.g. hxd-thorp-1: [dawn_work defence#W14] "Doors are opened late and with care, and the day's work starts a little after first light." || [gathering_places plain#P18] "People meet in the fields and on the paths between the houses, and talk as they go."
+  30  [0 / 1 / 0 / 6 / 10 / 13]  atom:market | gathering_places | commoner_resentments
+        e.g. hxd-hamlet-29: [gathering_places named#N24] "People meet at the periodic market and where the water is drawn, and between them most news gets about." || [commoner_resentments food#F6] "The price of food is the first complaint on everyone's lips."
+  25  [7 / 10 / 8 / 0 / 0 / 0]  atom:institution: waterSource | dawn_work | gathering_places
+        e.g. hxd-thorp-24: [dawn_work default#B7] "Water is drawn early, and the day's work begins once the households have what they need." || [gathering_places plain#P5] "Most talk happens in the fields while the work goes on, and again where the water is drawn."
+  23  [8 / 15 / 0 / 0 / 0 / 0]  name:Feudal Stewardship | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-59: [outsider_impressions power#P13] "Nothing of weight is agreed here without the leave of the Feudal Stewardship." || [commoner_resentments legitimacy#L5] "People do as the Feudal Stewardship says, but few of them think well of it."
+  22  [0 / 1 / 2 / 10 / 6 / 3]  atom:market | dawn_work | gathering_places
+        e.g. hxd-hamlet-122: [dawn_work merchant#M1] "Traders are setting out their goods at the periodic market before light, and the first buyers come as it grows light." || [gathering_places named#N24] "People meet at the periodic market and where the water is drawn, and between them most news gets about."
+  21  [9 / 9 / 0 / 3 / 0 / 0]  atom:institution: dwellings | gathering_places | child_warnings
+        e.g. hxd-thorp-4: [gathering_places plain#P20] "Most of the talk here goes on out of doors, wherever people are at work." || [child_warnings unrest#U9] "wandering into other households while feelings are running high"
+  21  [3 / 3 / 2 / 4 / 7 / 2]  atom:institution: waterSource | gathering_places | child_warnings
+        e.g. hxd-thorp-82: [gathering_places plain#P6] "Where the water is drawn is where people meet and pass on their news." || [child_warnings none#X15] "Children are warned about the usual things: the water's edge, the far fields, and being home before dark."
+  21  [0 / 18 / 3 / 0 / 0 / 0]  name:Headman's Authority | outsider_impressions | commoner_resentments
+        e.g. hxd-hamlet-0: [outsider_impressions power#P6] "Visitors learn early that it pays to stay on good terms with the Headman's Authority." || [commoner_resentments legitimacy#L1] "Many here feel that the Headman's Authority no longer listens to people like them."
+  17  [17 / 0 / 0 / 0 / 0 / 0]  name:Household Council | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-11: [outsider_impressions power#P0] "Outsiders notice the mark of the Household Council on every door that matters." || [commoner_resentments legitimacy#L15] "People put up with the Household Council, but they expect little of it."
+  17  [0 / 0 / 3 / 4 / 5 / 5]  atom:sacredHouse | outsider_impressions | gathering_places
+        e.g. hxd-village-24: [outsider_impressions ordinary#O0] "The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don't yet know yours." || [gathering_places named#N2] "People meet where the water is drawn and again by the house of worship, and most news passes between them."
+  16  [0 / 0 / 0 / 3 / 8 / 5]  atom:market | food_culture | gathering_places
+        e.g. hxd-town-77: [food_culture strained#T7] "Food costs more than most people can comfortably pay, so they buy less of it." || [gathering_places named#N20] "People meet at the mills and at the fish market, and the talk at each is of prices and of one another."
+  15  [10 / 3 / 2 / 0 / 0 / 0]  atom:institution: farmland | dawn_work | gathering_places
+        e.g. hxd-thorp-25: [dawn_work defence#W6] "The first light goes to walking the edges of the fields; the ordinary work begins once that is done." || [gathering_places plain#P18] "People meet in the fields and on the paths between the houses, and talk as they go."
+  15  [0 / 1 / 2 / 4 / 5 / 3]  house:market | dawn_work | gathering_places
+        e.g. hxd-hamlet-122: [dawn_work merchant#M1] "Traders are setting out their goods at the periodic market before light, and the first buyers come as it grows light." || [gathering_places named#N24] "People meet at the periodic market and where the water is drawn, and between them most news gets about."
+  14  [0 / 14 / 0 / 0 / 0 / 0]  name:Free Elder Council | outsider_impressions | commoner_resentments
+        e.g. hxd-hamlet-8: [outsider_impressions power#P2] "Ask who decides things here, and the answer is the Free Elder Council." || [commoner_resentments legitimacy#L1] "Many here feel that the Free Elder Council no longer listens to people like them."
+  11  [0 / 0 / 2 / 5 / 2 / 2]  atom:institution: mill | dawn_work | gathering_places
+        e.g. hxd-village-46: [dawn_work default#B3] "The first grain of the day is carried to the mill at first light." || [gathering_places named#N9] "People meet while they wait their turn at the mill, and again by the house of worship."
+   9  [4 / 3 / 2 / 0 / 0 / 0]  atom:institution: farmland | gathering_places | child_warnings
+        e.g. hxd-thorp-56: [gathering_places plain#P5] "Most talk happens in the fields while the work goes on, and again where the water is drawn." || [child_warnings monster_pressure#P3] "the far edges of the fields after dark"
+   9  [0 / 0 / 0 / 9 / 0 / 0]  name:Town Mayor | outsider_impressions | commoner_resentments
+        e.g. hxd-town-14: [outsider_impressions power#P2] "Ask who decides things here, and the answer is the Town Mayor." || [commoner_resentments legitimacy#L7] "Talk among neighbours turns, sooner or later, to what the Town Mayor has got wrong lately."
+   8  [2 / 2 / 3 / 1 / 0 / 0]  atom:institution: dwellings | dawn_work | child_warnings
+        e.g. hxd-thorp-4: [dawn_work defence#W8] "People go out to their work together at dawn, and no one strays far from the houses alone." || [child_warnings unrest#U9] "wandering into other households while feelings are running high"
+   8  [1 / 3 / 4 / 0 / 0 / 0]  atom:government named | outsider_impressions | commoner_resentments
+        e.g. hxd-thorp-120: [outsider_impressions services.administrative#A3] "Any business with the Elder Council means a long wait, and visitors are warned of it." || [commoner_resentments uprising#U2] "Many here feel they have asked the Elder Council for fair treatment for long enough."
+   8  [0 / 0 / 1 / 5 / 0 / 2]  atom:market | gathering_places | child_warnings
+        e.g. hxd-village-100: [gathering_places named#N20] "People meet at the mill and at the fish market, and the talk at each is of prices and of one another." || [child_warnings unrest#U3] "hanging about the fish market when tempers are short"
+   8  [0 / 0 / 0 / 8 / 0 / 0]  house:inn | gathering_places | child_warnings
+        e.g. hxd-town-34: [gathering_places named#N28] "Of an evening people drift from their doors to the inn to talk the day over." || [child_warnings unrest#U4] "loitering by the inn when voices are raised"
+   8  [0 / 0 / 0 / 8 / 0 / 0]  atom:institution: tavern | gathering_places | child_warnings
+        e.g. hxd-town-34: [gathering_places named#N28] "Of an evening people drift from their doors to the inn to talk the day over." || [child_warnings unrest#U4] "loitering by the inn when voices are raised"
+   7  [0 / 2 / 0 / 1 / 3 / 1]  house:inn | dawn_work | gathering_places
+        e.g. hxd-hamlet-77: [dawn_work default#B12] "At the alehouse, breakfast is already being served to those who mean to set out early." || [gathering_places named#N22] "People meet where the water is drawn by day, and at the alehouse in the evening."
+   7  [0 / 2 / 0 / 1 / 3 / 1]  atom:institution: tavern | dawn_work | gathering_places
+        e.g. hxd-hamlet-77: [dawn_work default#B12] "At the alehouse, breakfast is already being served to those who mean to set out early." || [gathering_places named#N22] "People meet where the water is drawn by day, and at the alehouse in the evening."
+   6  [0 / 0 / 2 / 2 / 1 / 1]  house:mill | dawn_work | gathering_places
+        e.g. hxd-village-46: [dawn_work default#B3] "The first grain of the day is carried to the mill at first light." || [gathering_places named#N9] "People meet while they wait their turn at the mill, and again by the house of worship."
+   6  [0 / 0 / 1 / 4 / 0 / 1]  house:market | gathering_places | child_warnings
+        e.g. hxd-village-100: [gathering_places named#N20] "People meet at the mill and at the fish market, and the talk at each is of prices and of one another." || [child_warnings unrest#U3] "hanging about the fish market when tempers are short"
+   6  [0 / 0 / 0 / 1 / 5 / 0]  name:Merchant oligarchy | outsider_impressions | commoner_resentments
+        e.g. hxd-town-99: [outsider_impressions power#P6] "Visitors learn early that it pays to stay on good terms with the Merchant oligarchy." || [commoner_resentments legitimacy#L5] "People do as the Merchant oligarchy says, but few of them think well of it."
+   6  [0 / 0 / 0 / 0 / 6 / 0]  name:City Council | outsider_impressions | commoner_resentments
+        e.g. hxd-city-17: [outsider_impressions power#P8] "The City Council carries the most weight here, and nobody pretends otherwise." || [commoner_resentments legitimacy#L1] "Many here feel that the City Council no longer listens to people like them."
+   5  [3 / 1 / 1 / 0 / 0 / 0]  atom:institution: farmland | dawn_work | child_warnings
+        e.g. hxd-thorp-7: [dawn_work food#F6] "Every hand that can be spared is in the fields at first light, looking for anything left to gather." || [child_warnings monster_pressure#P3] "the far edges of the fields after dark"
+   5  [0 / 0 / 0 / 5 / 0 / 0]  name:Guild Council | outsider_impressions | commoner_resentments
+        e.g. hxd-town-5: [outsider_impressions power#P13] "Nothing of weight is agreed here without the leave of the Guild Council." || [commoner_resentments legitimacy#L15] "People put up with the Guild Council, but they expect little of it."
+   5  [0 / 0 / 0 / 2 / 0 / 3]  atom:market | child_warnings | commoner_resentments
+        e.g. hxd-town-15: [child_warnings unrest#U3] "hanging about the fish market when tempers are short" || [commoner_resentments food#F6] "The price of food is the first complaint on everyone's lips."
+   5  [0 / 0 / 0 / 0 / 3 / 2]  atom:market | dawn_work | commoner_resentments
+        e.g. hxd-city-51: [dawn_work merchant#M1] "Traders are setting out their goods at the fish market before light, and the first buyers come as it grows light." || [commoner_resentments food#F11] "People complain that a day's work does not buy a day's food."
+   5  [0 / 0 / 0 / 0 / 0 / 5]  name:Grand Merchant Oligarchy | outsider_impressions | commoner_resentments
+        e.g. hxd-metropolis-19: [outsider_impressions power#P4] "It does not take a visitor long to see who holds sway here: the Grand Merchant Oligarchy." || [commoner_resentments food#F8] "People ask why the Grand Merchant Oligarchy cannot do more about the price of food."
+   4  [1 / 1 / 2 / 0 / 0 / 0]  atom:institution: waterSource | dawn_work | child_warnings
+        e.g. hxd-thorp-135: [dawn_work default#B7] "Water is drawn early, and the day's work begins once the households have what they need." || [child_warnings none#X17] "Children are warned about the usual things: leaning over the water to look in, and straying far from home."
+   4  [0 / 1 / 0 / 1 / 1 / 1]  atom:route open | dawn_work | child_warnings
+        e.g. hxd-hamlet-94: [dawn_work default#B12] "At the wayside inn, breakfast is already being served to those who mean to set out early." || [child_warnings monster_pressure#P0] "the road past sundown"
+   4  [0 / 0 / 0 / 4 / 0 / 0]  name:Town Council | outsider_impressions | commoner_resentments
+        e.g. hxd-town-30: [outsider_impressions power#P1] "A visitor soon learns that little happens here without the Town Council." || [commoner_resentments food#F8] "People ask why the Town Council cannot do more about the price of food."
+   4  [0 / 0 / 0 / 0 / 2 / 2]  atom:gate | dawn_work | child_warnings
+        e.g. hxd-city-28: [dawn_work default#B27] "Carts are already coming in at the gates as it grows light, bringing the day's goods." || [child_warnings monster_pressure#P8] "being outside the walls once the gates are shut"
+   3  [0 / 0 / 0 / 2 / 0 / 1]  atom:market | dawn_work | child_warnings
+        e.g. hxd-town-33: [dawn_work default#B4] "Stalls go up at the weekly market at first light, and the first buyers come soon after." || [child_warnings unrest#U3] "hanging about the weekly market when tempers are short"
+   3  [0 / 0 / 0 / 3 / 0 / 0]  atom:walls | dawn_work | child_warnings
+        e.g. hxd-town-71: [dawn_work default#B17] "The night's guard comes down off the walls at first light, and the day's guard goes up." || [child_warnings monster_pressure#P8] "being outside the walls once the gates are shut"
+   3  [0 / 0 / 0 / 0 / 3 / 0]  name:Merchant Guild Council | outsider_impressions | commoner_resentments
+        e.g. hxd-city-26: [outsider_impressions power#P5] "Whatever a visitor wants done, the Merchant Guild Council has a say in it." || [commoner_resentments food#F8] "People ask why the Merchant Guild Council cannot do more about the price of food."
+   3  [0 / 0 / 0 / 0 / 0 / 3]  atom:sacredHouse | gathering_places | child_warnings
+        e.g. hxd-metropolis-75: [gathering_places named#N29] "People pass the time of day by the great cathedral, and the talk there is of the work and of one another." || [child_warnings siege#S0] "staying close when the bells ring"
+   2  [2 / 0 / 0 / 0 / 0 / 0]  atom:ruler: elder | dawn_work | gathering_places
+        e.g. hxd-thorp-116: [dawn_work defence#W11] "The elder is asked at first light whether all is well before anyone goes out to work." || [gathering_places plain#P13] "Matters of any weight are talked over at the elder's door, where people gather of an evening."
+   2  [0 / 2 / 0 / 0 / 0 / 0]  atom:institution: commonGrazing | dawn_work | gathering_places
+        e.g. hxd-hamlet-82: [dawn_work default#B13] "At first light the beasts are driven out to graze on the common." || [gathering_places named#N32] "Where the water is drawn and out on the common, people stop to talk as they pass."
+   2  [0 / 0 / 2 / 0 / 0 / 0]  name:Elected Reeve | outsider_impressions | commoner_resentments
+        e.g. hxd-village-46: [outsider_impressions power#P13] "Nothing of weight is agreed here without the leave of the Elected Reeve." || [commoner_resentments legitimacy#L2] "Ordinary people grumble that the Elected Reeve looks after its own first."
+   2  [0 / 0 / 0 / 1 / 0 / 1]  house:market | dawn_work | child_warnings
+        e.g. hxd-town-33: [dawn_work default#B4] "Stalls go up at the weekly market at first light, and the first buyers come soon after." || [child_warnings unrest#U3] "hanging about the weekly market when tempers are short"
+   2  [0 / 0 / 0 / 0 / 2 / 0]  name:Noble Governorship | outsider_impressions | commoner_resentments
+        e.g. hxd-city-12: [outsider_impressions power#P14] "Newcomers soon notice how often talk here comes round to the Noble Governorship." || [commoner_resentments food#F8] "People ask why the Noble Governorship cannot do more about the price of food."
+   2  [0 / 0 / 0 / 0 / 1 / 1]  name:Royal Authority | outsider_impressions | commoner_resentments
+        e.g. hxd-city-35: [outsider_impressions power#P12] "A visitor who wants anything settled here is told to speak to the Royal Authority first." || [commoner_resentments uprising#U2] "Many here feel they have asked the Royal Authority for fair treatment for long enough."
+   2  [0 / 0 / 0 / 0 / 1 / 1]  atom:market | food_culture | child_warnings
+        e.g. hxd-city-102: [food_culture strained#T7] "Food costs more than most people can comfortably pay, so they buy less of it." || [child_warnings none#X1] "Children are warned about the usual things: getting lost among the stalls at the fish market, and keeping close in a crowd."
+   2  [0 / 0 / 0 / 0 / 1 / 1]  atom:market | gathering_places | unspoken_topics
+        e.g. hxd-city-141: [gathering_places named#N20] "People meet at the mills and at the fish market, and the talk at each is of prices and of one another." || [unspoken_topics wound.economic_disparity#W0] "How much richer the merchants have grown than the labourers is not a thing to raise in mixed company."
+   2  [0 / 0 / 0 / 0 / 0 / 2]  name:City-State Council | outsider_impressions | commoner_resentments
+        e.g. hxd-metropolis-59: [outsider_impressions power#P3] "Strangers with business here are sent to the City-State Council sooner or later." || [commoner_resentments food#F8] "People ask why the City-State Council cannot do more about the price of food."
+   2  [0 / 0 / 0 / 0 / 0 / 2]  name:Grand Council | outsider_impressions | commoner_resentments
+        e.g. hxd-metropolis-109: [outsider_impressions power#P0] "Outsiders notice the mark of the Grand Council on every door that matters." || [commoner_resentments food#F8] "People ask why the Grand Council cannot do more about the price of food."
+   1  [0 / 1 / 0 / 0 / 0 / 0]  atom:timber at hand | dawn_work | child_warnings
+        e.g. hxd-hamlet-17: [dawn_work default#B25] "Some go out at first light to cut and carry wood, and the rest turn to the day's other work." || [child_warnings none#X11] "Children are warned about the usual things: going into the woods alone, and being out after dark."
+   1  [0 / 0 / 0 / 1 / 0 / 0]  name:Feudal Appointee | outsider_impressions | commoner_resentments
+        e.g. hxd-town-27: [outsider_impressions power#P1] "A visitor soon learns that little happens here without the Feudal Appointee." || [commoner_resentments uprising#U0] "Working people are pressing the Feudal Appointee for a fairer deal, and they do not keep quiet about it."
+   1  [0 / 0 / 0 / 1 / 0 / 0]  atom:route open | outsider_impressions | dawn_work
+        e.g. hxd-town-117: [outsider_impressions threat.monster_pressure.frontier#MF4] "Travellers here talk of beasts seen at the edge of the settled land." || [dawn_work merchant#M3] "Loads are made ready before light for the journey out, and the merchants see them off themselves."
+   1  [0 / 0 / 0 / 0 / 1 / 0]  atom:livestock | food_culture | child_warnings
+        e.g. hxd-city-7: [food_culture surplus#S8] "Meat is common fare here, and there is no shortage of it." || [child_warnings monster_pressure#P6] "following the beasts out beyond calling distance"
+   1  [0 / 0 / 0 / 0 / 1 / 0]  house:mill | gathering_places | child_warnings
+        e.g. hxd-city-26: [gathering_places named#N20] "People meet at the mills and at the daily markets, and the talk at each is of prices and of one another." || [child_warnings none#X7] "Children are warned to keep clear of the turning stones at the mills, and to be home before dark."
+   1  [0 / 0 / 0 / 0 / 1 / 0]  atom:institution: mill | gathering_places | child_warnings
+        e.g. hxd-city-26: [gathering_places named#N20] "People meet at the mills and at the daily markets, and the talk at each is of prices and of one another." || [child_warnings none#X7] "Children are warned to keep clear of the turning stones at the mills, and to be home before dark."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:market | dawn_work | unspoken_topics
+        e.g. hxd-metropolis-16: [dawn_work default#B4] "Stalls go up at the fish market at first light, and the first buyers come soon after." || [unspoken_topics wound.economic_disparity#W0] "How much richer the merchants have grown than the labourers is not a thing to raise in mixed company."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  house:mill | dawn_work | child_warnings
+        e.g. hxd-metropolis-33: [dawn_work default#B3] "The first grain of the day is carried to the mills at first light." || [child_warnings none#X7] "Children are warned to keep clear of the turning stones at the mills, and to be home before dark."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:institution: mill | dawn_work | child_warnings
+        e.g. hxd-metropolis-33: [dawn_work default#B3] "The first grain of the day is carried to the mills at first light." || [child_warnings none#X7] "Children are warned to keep clear of the turning stones at the mills, and to be home before dark."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  name:Democratic assembly | outsider_impressions | commoner_resentments
+        e.g. hxd-metropolis-62: [outsider_impressions power#P2] "Ask who decides things here, and the answer is the Democratic assembly." || [commoner_resentments food#F8] "People ask why the Democratic assembly cannot do more about the price of food."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:sacredHouse | food_culture | gathering_places
+        e.g. hxd-metropolis-84: [food_culture collapsed#X0] "Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived." || [gathering_places named#N21] "People cross the market squares on their way to the great cathedral, and many stop to talk on the way."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:sacredHouse | food_culture | child_warnings
+        e.g. hxd-metropolis-84: [food_culture collapsed#X0] "Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived." || [child_warnings siege#S0] "staying close when the bells ring"
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:institution: smith | dawn_work | child_warnings
+        e.g. hxd-metropolis-112: [dawn_work default#B2] "The forge is lit early, and its hammering is the first sound of most mornings." || [child_warnings none#X2] "Children are warned about the usual things: the forge and its sparks, and straying too far from home."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:market | dawn_work | food_culture
+        e.g. hxd-metropolis-121: [dawn_work default#B4] "Stalls go up at the fish market at first light, and the first buyers come soon after." || [food_culture strained#T7] "Food costs more than most people can comfortably pay, so they buy less of it."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  name:Grand Guild Consortium | outsider_impressions | commoner_resentments
+        e.g. hxd-metropolis-147: [outsider_impressions power#P4] "It does not take a visitor long to see who holds sway here: the Grand Guild Consortium." || [commoner_resentments food#F8] "People ask why the Grand Guild Consortium cannot do more about the price of food."
+
+── 1d. THE OWNER-ONLY LINE against the eight: same fact: 0 rows (pages of 900; by size thorp / hamlet / village / town / city / metropolis)
+
+── 1e. THE OWNER-ONLY LINE against the eight: borderline (same thing named, no shared fact or topic): 9 rows (pages of 900; by size thorp / hamlet / village / town / city / metropolis)
+   6  [0 / 0 / 0 / 0 / 3 / 3]  atom:market | gathering_places | commoner_resentments_dm
+        e.g. hxd-city-1: [gathering_places named#N24] "People meet at the fish market and where the water is drawn, and between them most news gets about." || [commoner_resentments_dm crime55#K55_2] "People grumble that smuggled goods undercut honest sellers at the market."
+   4  [0 / 0 / 0 / 0 / 3 / 1]  atom:market | dawn_work | commoner_resentments_dm
+        e.g. hxd-city-1: [dawn_work food#F4] "People are at the fish market before light, waiting to see what food comes in and what it will cost." || [commoner_resentments_dm crime55#K55_2] "People grumble that smuggled goods undercut honest sellers at the market."
+   4  [0 / 0 / 0 / 0 / 0 / 4]  atom:market | commoner_resentments | commoner_resentments_dm
+        e.g. hxd-metropolis-19: [commoner_resentments food#F8] "People ask why the Grand Merchant Oligarchy cannot do more about the price of food." || [commoner_resentments_dm crime55#K55_2] "People grumble that smuggled goods undercut honest sellers at the market."
+   2  [0 / 0 / 0 / 0 / 2 / 0]  atom:market | food_culture | commoner_resentments_dm
+        e.g. hxd-city-1: [food_culture critical#C6] "Food is short, and what can be bought costs more than most can pay." || [commoner_resentments_dm crime55#K55_2] "People grumble that smuggled goods undercut honest sellers at the market."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:market | child_warnings | commoner_resentments_dm
+        e.g. hxd-metropolis-36: [child_warnings none#X1] "Children are warned about the usual things: getting lost among the stalls at the fish market, and keeping close in a crowd." || [commoner_resentments_dm crime55#K55_2] "People grumble that smuggled goods undercut honest sellers at the market."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:route open | outsider_impressions | commoner_resentments_dm
+        e.g. hxd-metropolis-38: [outsider_impressions threat.monster_pressure.frontier#MF4] "Travellers here talk of beasts seen at the edge of the settled land." || [commoner_resentments_dm crime55#K55_0] "Commoners resent the smugglers who pay no tax while honest carts queue."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:route open | dawn_work | commoner_resentments_dm
+        e.g. hxd-metropolis-42: [dawn_work merchant#M0] "Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain." || [commoner_resentments_dm crime55#K55_0] "Commoners resent the smugglers who pay no tax while honest carts queue."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:route open | child_warnings | commoner_resentments_dm
+        e.g. hxd-metropolis-83: [child_warnings monster_pressure#P0] "the road past sundown" || [commoner_resentments_dm crime55#K55_0] "Commoners resent the smugglers who pay no tax while honest carts queue."
+   1  [0 / 0 / 0 / 0 / 0 / 1]  atom:route open | food_culture | commoner_resentments_dm
+        e.g. hxd-metropolis-84: [food_culture collapsed#X0] "Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived." || [commoner_resentments_dm crime55#K55_0] "Commoners resent the smugglers who pay no tax while honest carts queue."
+
+════ TABLE 2 — THE SAME SENTENCE IN TWO PLACES (the owner's (2)) ════
+THE BAR: scripts/sameness-census.mjs :: LAW1_RED_SHARE = 0.1 -> law1RedPlaces(150) = 15 of 150 (the door reds an unregistered slot's commonest sentence there; "two thirds of the 15% bar"); watch LAW1_WATCH_SHARE = 8/150. The 15% bar itself = 23 of 150; 20% = 30.
+Shares: ALL = of the 150 places of the size; PRINT = of the places that print the slot. elig = the branch's eligible lines at the places that printed the row (min/median/max); pool = the branch's lines; reach = places taking the branch / 150; need = ceil(reach/0.15) (COMMON-RULES 3).
+
+── 2a. FAMILIES (pool row, template before names are filled) printed in >= 15 of 150 places of a size: 35
+  19  ALL  12.7%  PRINT  12.7%  elig 11/11/11 pool 11 reach 99% need 7  outsider_impressions | thorp | power#P4  "It does not take a visitor long to see who holds sway here: {power}."
+  17  ALL  11.3%  PRINT  11.3%  elig 11/11/11 pool 11 reach 99% need 7  outsider_impressions | thorp | power#P0  "Outsiders notice the mark of {power} on every door that matters."
+  16  ALL  10.7%  PRINT  10.7%  elig 11/11/11 pool 11 reach 99% need 7  outsider_impressions | thorp | power#P13  "Nothing of weight is agreed here without the leave of {power}."
+  16  ALL  10.7%  PRINT  10.7%  elig 11/11/11 pool 11 reach 99% need 7  outsider_impressions | thorp | power#P5  "Whatever a visitor wants done, {power} {power|has|have} a say in it."
+  15  ALL  10.0%  PRINT  10.0%  elig 11/11/11 pool 11 reach 99% need 7  outsider_impressions | thorp | power#P6  "Visitors learn early that it pays to stay on good terms with {power}."
+  19  ALL  12.7%  PRINT  12.7%  elig 11/11/11 pool 11 reach 95% need 7  outsider_impressions | hamlet | power#P8  "{Power} {power|carries|carry} the most weight here, and nobody pretends otherwise."
+  17  ALL  11.3%  PRINT  11.3%  elig 11/11/11 pool 11 reach 95% need 7  outsider_impressions | hamlet | power#P4  "It does not take a visitor long to see who holds sway here: {power}."
+  17  ALL  11.3%  PRINT  11.3%  elig 11/11/11 pool 11 reach 95% need 7  outsider_impressions | hamlet | power#P5  "Whatever a visitor wants done, {power} {power|has|have} a say in it."
+  15  ALL  10.0%  PRINT  10.0%  elig 11/11/11 pool 11 reach 95% need 7  outsider_impressions | hamlet | power#P1  "A visitor soon learns that little happens here without {power}."
+  16  ALL  10.7%  PRINT  10.7%  elig 11/11/11 pool 11 reach 73% need 5  outsider_impressions | town | power#P13  "Nothing of weight is agreed here without the leave of {power}."
+  17  ALL  11.3%  PRINT  11.3%  elig 6/7/7 pool 8 reach 47% need 4  child_warnings | thorp | economic_collapse#E3  "losing anything, however small, that the household paid for"
+  16  ALL  10.7%  PRINT  10.7%  elig 9/10/11 pool 14 reach 66% need 5  child_warnings | thorp | monster_pressure#P10  "slipping out of doors once it is dark"
+  15  ALL  10.0%  PRINT  10.0%  elig 6/7/7 pool 8 reach 47% need 4  child_warnings | thorp | economic_collapse#E7  "giving anything away without asking first"
+  18  ALL  12.0%  PRINT  12.0%  elig 6/7/8 pool 8 reach 59% need 4  child_warnings | hamlet | economic_collapse#E1  "asking for what the household cannot spare"
+  18  ALL  12.0%  PRINT  12.0%  elig 6/7/7 pool 8 reach 59% need 4  child_warnings | hamlet | economic_collapse#E2  "wasting anything that could still be mended or used again"
+  18  ALL  12.0%  PRINT  12.0%  elig 7/8/10 pool 11 reach 63% need 5  child_warnings | village | unrest#U8  "joining in when the grown-ups' talk turns angry"
+  18  ALL  12.0%  PRINT  12.0%  elig 7/8/11 pool 11 reach 63% need 5  child_warnings | village | unrest#U2  "repeating what they hear said at home about those in charge"
+  16  ALL  10.7%  PRINT  10.7%  elig 11/11/11 pool 11 reach 81% need 6  child_warnings | town | unrest#U9  "wandering into other households while feelings are running high"
+  15  ALL  10.0%  PRINT  10.0%  elig 11/11/11 pool 11 reach 81% need 6  child_warnings | town | unrest#U7  "getting caught up when people gather in the streets"
+  15  ALL  10.0%  PRINT  12.4%  elig 8/11/11 pool 14 reach 80% need 6  commoner_resentments | thorp | legitimacy#L3  "People bring their complaints to {gov} and expect little to come of them."
+  15  ALL  10.0%  PRINT  10.9%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | hamlet | legitimacy#L3  "People bring their complaints to {gov} and expect little to come of them."
+  15  ALL  10.0%  PRINT  10.9%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | hamlet | legitimacy#L6  "Few here would say that {gov} {gov|speaks|speak} for them."
+  18  ALL  12.0%  PRINT  12.9%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | village | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+  16  ALL  10.7%  PRINT  11.5%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | village | legitimacy#L6  "Few here would say that {gov} {gov|speaks|speak} for them."
+  21  ALL  14.0%  PRINT  14.0%  elig 9/9/9 pool 9 reach 80% need 6  recent_changes | hamlet | beat#B5  "Much of how the place works now goes back to {event}."
+  18  ALL  12.0%  PRINT  12.0%  elig 9/9/9 pool 9 reach 80% need 6  recent_changes | hamlet | beat#B3  "{Event} still shapes how people here go about things."
+  16  ALL  10.7%  PRINT  10.7%  elig 9/9/9 pool 9 reach 80% need 6  recent_changes | hamlet | beat#B6  "The mark {event} left on the place has not faded."
+  17  ALL  11.3%  PRINT  11.5%  elig 9/9/9 pool 9 reach 79% need 6  recent_changes | village | beat#B4  "Talk here still comes back, sooner or later, to {event}."
+  15  ALL  10.0%  PRINT  10.1%  elig 9/9/9 pool 9 reach 79% need 6  recent_changes | village | beat#B7  "Ask how things came to be as they are here, and {event} soon comes up."
+  16  ALL  10.7%  PRINT  10.7%  elig 9/9/9 pool 9 reach 78% need 6  recent_changes | town | beat#B1  "People here still talk of {event}, and of what it changed."
+  15  ALL  10.0%  PRINT  10.0%  elig 9/9/9 pool 9 reach 78% need 6  recent_changes | town | beat#B8  "{Event} is still remembered here, and not lightly."
+  15  ALL  10.0%  PRINT  10.0%  elig 9/9/9 pool 9 reach 78% need 6  recent_changes | town | beat#B7  "Ask how things came to be as they are here, and {event} soon comes up."
+  15  ALL  10.0%  PRINT  10.0%  elig 9/9/9 pool 9 reach 78% need 6  recent_changes | town | beat#B6  "The mark {event} left on the place has not faded."
+  17  ALL  11.3%  PRINT  11.6%  elig 9/9/9 pool 9 reach 65% need 5  recent_changes | city | beat#B4  "Talk here still comes back, sooner or later, to {event}."
+  16  ALL  10.7%  PRINT  10.7%  elig 9/9/9 pool 9 reach 73% need 5  recent_changes | metropolis | beat#B1  "People here still talk of {event}, and of what it changed."
+
+── 2b. FILLED SENTENCES (as printed; child_warnings: the whole sentence) printed in >= 15 of 150 places of a size: 0
+
+── 2c. EVERY SLOT, EVERY SIZE: places printing / the commonest family / the commonest filled sentence
+outsider_impressions | thorp: prints 150/150; top family power#P4 19 (12.7%); top filled 13 (8.7%) "Frontier habits show here: people go out in company and come back before dark."
+outsider_impressions | hamlet: prints 150/150; top family power#P8 19 (12.7%); top filled 11 (7.3%) "A visitor soon learns that little happens here without the Elder Council."
+outsider_impressions | village: prints 150/150; top family services.defense#D15 14 (9.3%); top filled 14 (9.3%) "There is not much here to stop trouble once it starts, and people know it."
+outsider_impressions | town: prints 150/150; top family power#P13 16 (10.7%); top filled 14 (9.3%) "There is not much here to stop trouble once it starts, and people know it."
+outsider_impressions | city: prints 150/150; top family ordinary#O1 14 (9.3%); top filled 14 (9.3%) "Outsiders find the place ordinary: quiet, unremarkable, and in no hurry."
+outsider_impressions | metropolis: prints 150/150; top family ordinary#O0 14 (9.3%); top filled 14 (9.3%) "The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces tha"
+dawn_work | thorp: prints 150/150; top family defence#W11 13 (8.7%); top filled 13 (8.7%) "The elder is asked at first light whether all is well before anyone goes out to work."
+dawn_work | hamlet: prints 150/150; top family defence#W7 11 (7.3%); top filled 11 (7.3%) "Water is fetched at first light in company, never alone, and the day's work starts after."
+dawn_work | village: prints 150/150; top family defence#W11 10 (6.7%); top filled 10 (6.7%) "The elder is asked at first light whether all is well before anyone goes out to work."
+dawn_work | town: prints 150/150; top family default#B11 13 (8.7%); top filled 13 (8.7%) "The workshops open their doors early, and work is under way at the benches by first light."
+dawn_work | city: prints 150/150; top family default#B5 14 (9.3%); top filled 14 (9.3%) "Those who kept guard through the night hand over at first light and go home to sleep."
+dawn_work | metropolis: prints 150/150; top family default#B27 14 (9.3%); top filled 14 (9.3%) "Carts are already coming in at the gates as it grows light, bringing the day's goods."
+food_culture | thorp: prints 150/150; top family adequate#A1 14 (9.3%); top filled 14 (9.3%) "There is enough to eat, if nobody asks for much more than the day needs."
+food_culture | hamlet: prints 150/150; top family surplus#S1 13 (8.7%); top filled 13 (8.7%) "There is more than enough to eat, and nobody here goes to bed hungry."
+food_culture | village: prints 150/150; top family surplus#S1 14 (9.3%); top filled 14 (9.3%) "There is more than enough to eat, and nobody here goes to bed hungry."
+food_culture | town: prints 150/150; top family adequate#A6 11 (7.3%); top filled 11 (7.3%) "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+food_culture | city: prints 150/150; top family strained#T7 12 (8.0%); top filled 12 (8.0%) "Food costs more than most people can comfortably pay, so they buy less of it."
+food_culture | metropolis: prints 150/150; top family strained#T1 13 (8.7%); top filled 13 (8.7%) "Food is tighter than it should be, and households stretch what they have."
+gathering_places | thorp: prints 150/150; top family plain#P18 12 (8.0%); top filled 12 (8.0%) "People meet in the fields and on the paths between the houses, and talk as they go."
+gathering_places | hamlet: prints 150/150; top family named#N33 10 (6.7%); top filled 10 (6.7%) "Most of the news is passed on in the fields and where the water is drawn."
+gathering_places | village: prints 150/150; top family named#N1 14 (9.3%); top filled 14 (9.3%) "Most days people stop to talk by the house of worship on their way to and from their work."
+gathering_places | town: prints 150/150; top family named#N7 12 (8.0%); top filled 12 (8.0%) "People gather in the market square at midday to talk, to trade a little, and to watch the "
+gathering_places | city: prints 150/150; top family named#N18 10 (6.7%); top filled 9 (6.0%) "People meet at the fish market and where the water is drawn, and between them most news ge"
+gathering_places | metropolis: prints 150/150; top family named#N2 10 (6.7%); top filled 10 (6.7%) "Many go to the public bathhouse as much for the talk as for the water."
+child_warnings | thorp: prints 150/150; top family economic_collapse#E3 17 (11.3%); top filled 6 (4.0%) "Children are warned about the far edges of the fields after dark."
+child_warnings | hamlet: prints 150/150; top family economic_collapse#E1 18 (12.0%); top filled 5 (3.3%) "Children are warned about the usual things: talking to strangers, and getting under the gr"
+child_warnings | village: prints 150/150; top family unrest#U8 18 (12.0%); top filled 4 (2.7%) "Children are warned about getting mixed up in the grown-ups' quarrels."
+child_warnings | town: prints 150/150; top family unrest#U9 16 (10.7%); top filled 8 (5.3%) "Children are warned about wandering into other households while feelings are running high."
+child_warnings | city: prints 150/150; top family monster_pressure#P7 13 (8.7%); top filled 11 (7.3%) "Children are warned about going down for water alone after dark."
+child_warnings | metropolis: prints 150/150; top family monster_pressure#P11 12 (8.0%); top filled 12 (8.0%) "Children are warned about answering any call that comes out of the dark."
+commoner_resentments | thorp: prints 121/150; top family legitimacy#L3 15 (10.0%); top filled 11 (7.3%) "Common folk say the elders decide among themselves and tell everyone else afterwards."
+commoner_resentments | hamlet: prints 137/150; top family legitimacy#L3 15 (10.0%); top filled 13 (8.7%) "Commoners resent the council's indifference to ordinary complaints."
+commoner_resentments | village: prints 139/150; top family legitimacy#L5 18 (12.0%); top filled 14 (9.3%) "People do as the Elder Council says, but few of them think well of it."
+commoner_resentments | town: prints 97/150; top family legitimacy#L5 11 (7.3%); top filled 9 (6.0%) "Households that go short look hard at the ones that do not."
+commoner_resentments | city: prints 99/150; top family food#F13 10 (6.7%); top filled 10 (6.7%) "Many households are eating less than they would like, and they say so."
+commoner_resentments | metropolis: prints 111/150; top family food#F4 11 (7.3%); top filled 11 (7.3%) "Thin meals and short portions are the grievance nearly everyone shares."
+unspoken_topics | thorp: prints 131/150; top family wound.resource_scarcity#W1 7 (4.7%); top filled 7 (4.7%) "People do not talk openly about the shortage, least of all with outsiders."
+unspoken_topics | hamlet: prints 119/150; top family wound.resource_scarcity#W1 8 (5.3%); top filled 8 (5.3%) "People do not talk openly about the shortage, least of all with outsiders."
+unspoken_topics | village: prints 139/150; top family wound.resource_scarcity#W4 9 (6.0%); top filled 9 (6.0%) "What is running short here is a sore subject, and visitors are not told much about it."
+unspoken_topics | town: prints 134/150; top family wound.guild_conflict#W2 11 (7.3%); top filled 11 (7.3%) "Traders here do not discuss the guild quarrel with customers, or with each other in public"
+unspoken_topics | city: prints 147/150; top family wound.guild_conflict#W0 13 (8.7%); top filled 13 (8.7%) "The quarrel between the guilds and those outside them is not raised where both can hear."
+unspoken_topics | metropolis: prints 143/150; top family wound.guild_conflict#W1 14 (9.3%); top filled 14 (9.3%) "Who may sell what, and who gets a say in how the place is run, is argued in private, not i"
+recent_changes | thorp: prints 149/150; top family beat#B8 14 (9.3%); top filled 11 (7.3%) "War is close enough now to be felt in everyday business and in the mood of the place."
+recent_changes | hamlet: prints 150/150; top family beat#B5 21 (14.0%); top filled 11 (7.3%) "Beasts have overrun the country around, and nobody travels alone any more."
+recent_changes | village: prints 148/150; top family beat#B4 17 (11.3%); top filled 11 (7.3%) "War is close enough now to be felt in everyday business and in the mood of the place."
+recent_changes | town: prints 150/150; top family beat#B1 16 (10.7%); top filled 9 (6.0%) "Life goes on as usual, and nobody can point to anything new."
+recent_changes | city: prints 147/150; top family beat#B4 17 (11.3%); top filled 9 (6.0%) "Beasts now roam the country around, and people keep close to home."
+recent_changes | metropolis: prints 149/150; top family beat#B1 16 (10.7%); top filled 9 (6.0%) "War is close enough now to be felt in everyday business and in the mood of the place."
+commoner_resentments_dm | thorp: prints 10/150; top family crime55#K55_4 5 (3.3%); top filled 5 (3.3%) "People grumble that those who break the rules do better here than those who keep them."
+commoner_resentments_dm | hamlet: prints 11/150; top family crime55#K55_4 5 (3.3%); top filled 5 (3.3%) "People grumble that those who break the rules do better here than those who keep them."
+commoner_resentments_dm | village: prints 3/150; top family crime55#K55_5 2 (1.3%); top filled 2 (1.3%) "Honest folk say that crime pays better here than work."
+commoner_resentments_dm | town: prints 12/150; top family crime55#K55_5 4 (2.7%); top filled 4 (2.7%) "Honest folk say that crime pays better here than work."
+commoner_resentments_dm | city: prints 25/150; top family crime55#K55_6 12 (8.0%); top filled 12 (8.0%) "People resent how little is done about wrongdoing that everyone knows of."
+commoner_resentments_dm | metropolis: prints 25/150; top family crime55#K55_0 7 (4.7%); top filled 7 (4.7%) "Commoners resent the smugglers who pay no tax while honest carts queue."
+
+── 2d. THE TWO SEEN IN SIX PLACES (their rows always, over the bar or not)
+  filled: "People do as the Headman's Authority says, but few of them think well of it."
+    thorp: 0
+       3  ALL   2.0%  PRINT   2.2%  elig 9/9/9 pool 14 reach 91% need 7  commoner_resentments | hamlet | legitimacy#L5  "People do as the Headman's Authority says, but few of them think well of it."
+       2  ALL   1.3%  PRINT   1.4%  elig 9/9/9 pool 14 reach 91% need 7  commoner_resentments | village | legitimacy#L5  "People do as the Headman's Authority says, but few of them think well of it."
+    town: 0
+    city: 0
+    metropolis: 0
+  family: "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+      10  ALL   6.7%  PRINT   8.3%  elig 8/11/11 pool 14 reach 80% need 6  commoner_resentments | thorp | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+      14  ALL   9.3%  PRINT  10.2%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | hamlet | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+      18  ALL  12.0%  PRINT  12.9%  elig 8/11/11 pool 14 reach 91% need 7  commoner_resentments | village | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+      11  ALL   7.3%  PRINT  11.3%  elig 9/10/10 pool 14 reach 46% need 4  commoner_resentments | town | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+       6  ALL   4.0%  PRINT   6.1%  elig 8/10/10 pool 14 reach 15% need 2  commoner_resentments | city | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+       2  ALL   1.3%  PRINT   1.8%  elig 10/10/10 pool 14 reach 13% need 1  commoner_resentments | metropolis | legitimacy#L5  "People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}."
+  filled: "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       4  ALL   2.7%  PRINT   3.1%  elig 3/3/3 pool 3 reach 7% need 1  unspoken_topics | thorp | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       4  ALL   2.7%  PRINT   3.4%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | hamlet | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       3  ALL   2.0%  PRINT   2.2%  elig 3/3/3 pool 3 reach 7% need 1  unspoken_topics | village | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       5  ALL   3.3%  PRINT   3.7%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | town | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       1  ALL   0.7%  PRINT   0.7%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | city | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       3  ALL   2.0%  PRINT   2.1%  elig 3/3/3 pool 3 reach 4% need 1  unspoken_topics | metropolis | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+  family: "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       4  ALL   2.7%  PRINT   3.1%  elig 3/3/3 pool 3 reach 7% need 1  unspoken_topics | thorp | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       4  ALL   2.7%  PRINT   3.4%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | hamlet | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       3  ALL   2.0%  PRINT   2.2%  elig 3/3/3 pool 3 reach 7% need 1  unspoken_topics | village | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       5  ALL   3.3%  PRINT   3.7%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | town | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       1  ALL   0.7%  PRINT   0.7%  elig 3/3/3 pool 3 reach 5% need 1  unspoken_topics | city | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+       3  ALL   2.0%  PRINT   2.1%  elig 3/3/3 pool 3 reach 4% need 1  unspoken_topics | metropolis | wound.external_threat#W0  "How the place should answer the danger it has been warned of is argued in private, not before strangers."
+
+── 2e-i. THE TEN COMMONEST FILLED SENTENCES, the eight public slots (ranked by places of 900; share of ALL 150 places by size thorp / hamlet / village / town / city / metropolis)
+ 1.   58  [7.3% / 6.7% / 7.3% / 6.0% / 5.3% / 6.0%]  max 11/150  recent_changes | condition.war_pressure#K2  "War is close enough now to be felt in everyday business and in the mood of the place."
+ 2.   54  [5.3% / 3.3% / 6.7% / 6.0% / 5.3% / 9.3%]  max 14/150  outsider_impressions | threat.monster_pressure.frontier#MF0  "This is frontier country, and people speak of the wild beyond as close at hand."
+ 3.   51  [8.0% / 8.0% / 4.0% / 6.0% / 4.0% / 4.0%]  max 12/150  food_culture | adequate#A2  "Meals are plain and filling, and little goes to waste."
+ 4.   48  [3.3% / 5.3% / 5.3% / 4.7% / 5.3% / 8.0%]  max 12/150  outsider_impressions | threat.monster_pressure.frontier#MF7  "People here are used to living close to the wild, and they tell a visitor where not to go."
+ 5.   47  [8.7% / 6.0% / 6.0% / 6.0% / 2.7% / 2.0%]  max 13/150  food_culture | adequate#A4  "Food is steady here, if not generous, and every household has enough with little left over."
+ 6.   47  [4.0% / 6.0% / 5.3% / 4.0% / 6.0% / 6.0%]  max 9/150  gathering_places | named#N34  "People talk at one another's doors and where the water is drawn, and little news is missed."
+ 7.   46  [6.7% / 3.3% / 3.3% / 6.7% / 4.7% / 6.0%]  max 10/150  outsider_impressions | threat.monster_pressure.frontier#MF8  "Living this near the wild has made people watchful, and a visitor notices it."
+ 8.   45  [8.7% / 4.7% / 5.3% / 4.0% / 5.3% / 2.0%]  max 13/150  outsider_impressions | threat.monster_pressure.frontier#MF6  "Frontier habits show here: people go out in company and come back before dark."
+ 9.   44  [7.3% / 5.3% / 3.3% / 7.3% / 3.3% / 2.7%]  max 11/150  food_culture | adequate#A6  "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+10.   44  [6.0% / 4.7% / 2.0% / 7.3% / 4.0% / 5.3%]  max 11/150  outsider_impressions | threat.monster_pressure.frontier#MF9  "People here know the wild country well, and they warn a visitor not to go far into it."
+
+── 2e-ii. THE TEN COMMONEST FAMILIES, the eight public slots (ranked by places of 900; share of ALL 150 places by size thorp / hamlet / village / town / city / metropolis)
+ 1.   83  [12.7% / 11.3% / 8.0% / 8.0% / 8.0% / 7.3%]  max 19/150  outsider_impressions | power#P4  "It does not take a visitor long to see who holds sway here: {power}."
+ 2.   82  [8.7% / 10.7% / 9.3% / 10.0% / 7.3% / 8.7%]  max 16/150  recent_changes | beat#B6  "The mark {event} left on the place has not faded."
+ 3.   79  [6.0% / 9.3% / 11.3% / 6.7% / 11.3% / 8.0%]  max 17/150  recent_changes | beat#B4  "Talk here still comes back, sooner or later, to {event}."
+ 4.   77  [7.3% / 8.0% / 6.7% / 10.7% / 8.0% / 10.7%]  max 16/150  recent_changes | beat#B1  "People here still talk of {event}, and of what it changed."
+ 5.   77  [7.3% / 14.0% / 8.0% / 6.7% / 6.0% / 9.3%]  max 21/150  recent_changes | beat#B5  "Much of how the place works now goes back to {event}."
+ 6.   75  [6.0% / 7.3% / 10.0% / 10.0% / 8.0% / 8.7%]  max 15/150  recent_changes | beat#B7  "Ask how things came to be as they are here, and {event} soon comes up."
+ 7.   73  [7.3% / 12.0% / 9.3% / 8.0% / 6.7% / 5.3%]  max 18/150  recent_changes | beat#B3  "{Event} still shapes how people here go about things."
+ 8.   71  [9.3% / 6.7% / 8.7% / 10.0% / 7.3% / 5.3%]  max 15/150  recent_changes | beat#B8  "{Event} is still remembered here, and not lightly."
+ 9.   70  [10.7% / 6.0% / 6.0% / 10.7% / 4.7% / 8.7%]  max 16/150  outsider_impressions | power#P13  "Nothing of weight is agreed here without the leave of {power}."
+10.   69  [10.7% / 11.3% / 3.3% / 5.3% / 6.7% / 8.7%]  max 17/150  outsider_impressions | power#P5  "Whatever a visitor wants done, {power} {power|has|have} a say in it."
+
+  families at or over the door's bar (15 of 150 of some size): 35; filled sentences: 0
+
+  pages printing one identical part sentence in two slots: 0
+
+════ TABLE 3 — "the Headman's Authority's mark" (the owner's (3)), the Daily Life page (eight + owner-only), 900 places ════
+3a. "<power name>'s" (a possessive on any power's or the government's name, the record's own names): 0 sentences
+3b. the DOUBLE: a power name that itself holds "'s", followed by "'s": 0 sentences
+3c. any "X's Y['s]" double possessive, by shape (no name list): 0 hits
+places whose government or a faction name itself holds "'s": 56 [2 / 29 / 13 / 0 / 3 / 9]
+  names: Headman's Authority 41; Creditor's Representative 12; People's Council 3
+
+done in 154s
+EXIT 0

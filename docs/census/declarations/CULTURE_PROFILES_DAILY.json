@@ -2,7 +2,7 @@
  "poolId": "CULTURE_PROFILES_DAILY",
  "source": "src/data/cultureProfiles.js :55-528 CULTURE_PROFILES — 11 profiles × 7 text fields × 2 lines (the field is exchangePattern, not \"exchange\"); architecturalDetails not ledgered here",
  "drawKind": "R",
- "drawSite": "src/data/cultureProfiles.js:556-560 choose → rng.pick on the named child stream rng.fork(\"cultural-identity\") at src/generators/steps/resolveConfig.js:174; read at src/components/new/dailyLifeLogic.js:112-114 (socialTexture ONLY, as ctx.cultureCtx; legacy saves read socialTexture[0], a T lookup). NOTE: ctx.cultureCtx has no consumer in DailyLifeTab.jsx today (buildLocalDailyLifeNarrative does not read it) — the other six fields reach the page only through culturalNotesFor (socialTexture + builtForm) and AI grounding.",
+ "drawSite": "src/data/cultureProfiles.js:556-560 choose → rng.pick on the named child stream rng.fork(\"cultural-identity\") at src/generators/steps/resolveConfig.js:174; read at src/components/new/dailyLifeLogic.js:112-114 (socialTexture ONLY, as ctx.cultureCtx; legacy saves read socialTexture[0], a T lookup). NOTE: ctx.cultureCtx has no consumer in DailyLifeTab.jsx today (nothing on the page reads it; buildLocalDailyLifeNarrative, which never did, left at DAILY-3 U4b) — the other six fields reach the page only through culturalNotesFor (socialTexture + builtForm) and AI grounding.",
  "pools": [
   {
    "pool": "germanic.builtForm",

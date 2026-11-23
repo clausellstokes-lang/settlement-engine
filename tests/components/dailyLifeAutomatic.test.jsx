@@ -4,13 +4,16 @@
  * 2026-11-22: "remove the button prompt for Daily life and simply generate it automatically").
  *
  * THIS FILE REDS WHEN
- *   · (a) the page, with no interaction, does not hold the engine's three rebuilt lines
- *     (`domain/dailyLife.js :: deriveDailyLifeSlot` for `dawn_work`, `gathering_places`, `child_warnings`) in that order;
+ *   · (a) the page, with no interaction, does not hold the page's eight public lines
+ *     (`domain/dailyLife.js :: deriveDailyLifeSlot` for each slot of the chair's E110 order: `outsider_impressions`,
+ *     `dawn_work`, `food_culture`, `gathering_places`, `child_warnings`, `commoner_resentments`, `unspoken_topics`,
+ *     `recent_changes`) in that order (re-pointed by DAILY-4 unit P from the three it pinned when the page printed three);
  *   · (b) any control or line offers to make a daily-life account (`daily-life-offer`, "Generate Daily Life", a credit
  *     price, the save-to-enable line), saved (`saveId` given) or unsaved (`saveId` null);
  *   · (c) a shared read (`publicDossier`, and `playerView`) handed `toPublicSafe(record)` prints lines derived from
- *     anything but THAT document;
- *   · (d) mounting the page calls the store's `requestDailyLife`.
+ *     anything but THAT document.
+ * (Its arm (d), "mounting the page never calls the store's `requestDailyLife`", left with that operation: DAILY-3 U4b
+ * retired it from the store, so there is nothing left to call.)
  *
  * Six born places, one a size, seeds `dlauto-<size>-0` (the census dials, as bar2ServicesRows births them). The store is
  * mocked with `isConfigured` true (the product's configured mode, where the old offer was a credit-spending button).
@@ -45,20 +48,21 @@ window.matchMedia = window.matchMedia || vi.fn((query) => ({ media: query, match
 afterEach(cleanup);
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const SLOTS = ['dawn_work', 'gathering_places', 'child_warnings'];
+/** The page's slots in the page's order (the chair's E110; DAILY-4 unit P: the page prints all eight). */
+const SLOTS = ['outsider_impressions', 'dawn_work', 'food_culture', 'gathering_places', 'child_warnings',
+  'commoner_resentments', 'unspoken_topics', 'recent_changes'];
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** @type {Map<string, any>} */
 const towns = new Map();
 
-/** the printable texts of the three slots, as derived from `doc` @param {any} doc @returns {string[]} */
+/** the printable texts of the page's slots, as derived from `doc` @param {any} doc @returns {string[]} */
 const lines = (doc) => SLOTS.map((k) => String(deriveDailyLifeSlot(k, doc)?.text ?? '').trim()).filter((t) => t && t !== '—');
 
 /** @param {any} props */
 const mount = (props) => {
-  const requestDailyLife = vi.fn();
-  mocks.store = { savedSettlements: [], auth: { tier: 'premium' }, aiDailyLife: null, aiLoading: false, aiRegenerating: false, aiError: null, aiProgress: '', creditBalance: 100, requestDailyLife };
+  mocks.store = { savedSettlements: [], auth: { tier: 'premium' }, aiDailyLife: null, aiLoading: false, aiRegenerating: false, aiError: null, aiProgress: '', creditBalance: 100 };
   const { container } = render(<DailyLifeTab {...props} />);
-  return { text: container.textContent || '', container, requestDailyLife };
+  return { text: container.textContent || '', container };
 };
 
 /** each text appears, and in the given order @param {string} hay @param {string[]} texts */
@@ -72,7 +76,7 @@ const inOrder = (hay, texts) => {
   return true;
 };
 
-describe('the Daily Life page prints the engine\'s own three lines, with no button', () => {
+describe('the Daily Life page prints its own eight lines, with no button', () => {
   beforeAll(async () => {
     await loadGenerationLawPayloads();
     for (const size of SIZES) {
@@ -81,7 +85,7 @@ describe('the Daily Life page prints the engine\'s own three lines, with no butt
     }
   }, 300_000);
 
-  test('(a) with no interaction the page holds dawn_work, gathering_places and child_warnings, in that order', () => {
+  test('(a) with no interaction the page holds the eight public slots, in E110\'s order', () => {
     const wrong = [];
     for (const size of SIZES) {
       const r = towns.get(size);
@@ -125,15 +129,5 @@ describe('the Daily Life page prints the engine\'s own three lines, with no butt
       }
     }
     expect(wrong).toEqual([]);
-  });
-
-  test('(d) mounting the page never calls the store\'s requestDailyLife', () => {
-    for (const size of SIZES) {
-      for (const saveId of ['s1', null]) {
-        const { requestDailyLife } = mount({ settlement: towns.get(size), saveId });
-        expect(requestDailyLife).not.toHaveBeenCalled();
-        cleanup();
-      }
-    }
   });
 });

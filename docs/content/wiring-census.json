@@ -18,12 +18,12 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1453
+    "producerIndexFiles": 1454
   },
   "totals": {
     "pools": 861,
     "blocks": 69,
-    "variants": 3176,
+    "variants": 3182,
     "resolved": 492,
     "unresolved": 369,
     "resolvedWithPredicate": 321,
@@ -2016,7 +2016,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 6,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
@@ -2342,7 +2342,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 12,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -2387,9 +2387,11 @@
       "declares": [],
       "lineDeclares": {
         "crisis: under_siege": 2,
-        "no crisis: under_siege": 4,
-        "stores: < 12": 4,
-        "stores: ≥ 12": 1
+        "food: ≤ pressured": 4,
+        "food: ≥ secure": 6,
+        "no crisis: under_siege": 10,
+        "stores: < 12": 7,
+        "stores: ≥ 12": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -56464,7 +56466,7 @@
         "DS-DEF-2 :: Economic Survival: CRITICAL"
       ],
       "variants": 25,
-      "grammars": 7,
+      "grammars": 6,
       "blocks": [
         "DS-DEF-2"
       ]
@@ -67636,7 +67638,7 @@
         "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
       ],
       "readingFunction": "ECONOMIC_ROW_POOL",
-      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -67678,7 +67680,7 @@
       "subject": "CHAIN: food trades failing",
       "fields": [],
       "readingFunction": "foodTradesPoolKey",
-      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "12 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

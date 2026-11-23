@@ -382,6 +382,10 @@ export const RANK_STANDINGS = Object.freeze(Object.entries(LADDER).map(([key, pa
  * reads anything else. Keyed picks only (`seatHolderLineOf`): it draws nothing from the stream. Mutates in place, as
  * `claimStanding.js :: settleArcaneToPractitioners` beside it does; it runs before `withConflictRelations` reads the rows.
  * A W3 on any other row (a density-law rival's copy of its host) is cut.
+ * WHERE THE SEAT STANDS EMPTY (VACANT, CLOSE-3 unit (1), the chair's E131): the gate's `vacant` (`seatHolderApartOf`, read
+ * off the record) makes the record's own lines the vacant twins (W3v, W1v: `seatHolderLineOf`), and the power step's line
+ * is found in EITHER pool (the step may have drawn the held pool where the final record is vacant, or the reverse): the
+ * cut on the other rows cuts a W3 and a W3v, and the holder's written line of either pool gives way to the record's.
  * @param {Record<string, any> | null | undefined} record the final settlement record
  */
 export function settleSeatHolderToRecord(record) {
@@ -394,7 +398,7 @@ export function settleSeatHolderToRecord(record) {
   if (form) {
     for (const f of ps.factions) {
       if (!f || f === apart?.holder || typeof f.desc !== 'string') continue;
-      for (const line of seatHolderLinesOf('standing', { form, holder: f })) if (f.desc.includes(line)) f.desc = f.desc.replace(` ${line}`, '').replace(line, '').trim();
+      for (const line of [...seatHolderLinesOf('standing', { form, holder: f }), ...seatHolderLinesOf('standingVacant', { form, holder: f })]) if (f.desc.includes(line)) f.desc = f.desc.replace(` ${line}`, '').replace(line, '').trim();
     }
   }
   if (!apart) return;
@@ -405,8 +409,8 @@ export function settleSeatHolderToRecord(record) {
   }
   const own = seatHolderLineOf('standing', apart, seed);
   const desc = withoutSeatAccess(String(apart.holder.desc || ''));
-  // one row a seat: the power step's W3 (drawn off the step's stream seed) gives way to the record's, else the rank line, else appended
-  const written = seatHolderLinesOf('standing', apart).find((line) => desc.includes(line));
+  // one row a seat: the power step's W3 or W3v (drawn off the step's stream seed) gives way to the record's, else the rank line, else appended
+  const written = [...seatHolderLinesOf('standing', apart), ...seatHolderLinesOf('standingVacant', apart)].find((line) => desc.includes(line));
   const rankLine = RANK_STANDINGS.find((re) => re.test(desc));
   apart.holder.desc = written ? desc.replace(written, own) : rankLine ? desc.replace(rankLine, own) : desc ? `${desc} ${own}` : own;
 }

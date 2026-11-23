@@ -73,7 +73,7 @@ const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
 const EXISTING_CEILING = 251; // 96 + 155 (SAME-2 brief H4, the chair's 20:31: the garden fence, "moving a fence", released, fence reds only as a person; 147 by key (1 declared), 6 by word, 2 by house, 0 by atom. H3 stood at 252: 151 + the granary reeve by its declared key + a bribe, that fence and the slave market's two "trafficked")
-const HAND_CEILING = 77; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is) + 27 (SAME-3, the join's points 88 to 91: TRAD-5's 14 tables, PLACE-2's 9, DAILY-2's 4, as point 84's were) + 2 (the join's point 93: the people lane's position and constraint pools, PEOPLE-1's POSITION_VARIANTS and CONSTRAINT_VARIANTS) + 1 (PAGE-12, the trouble half, on the chair's second form of 03:25 UTC 2026-11-22: its pool `troubleHooks.js :: TROUBLE_HOOKS`, registered by the lane that adds it, as LINE-NOW says) + 1 (FORTUNE-6, U5b: the merit's sentence, FORTUNE_MERIT_LINES; the chair's ruling of 03:23 UTC 2026-11-22) + 1 (FORTUNE-7, U7b: LASTING's sentence, FORTUNE_LASTING_LINES, one row for its four lines; the chair's word E57 of 08:21 UTC 2026-11-22) + 1 (SEAT-10's U6, CS12: the holder's lines, SEAT_HOLDER_LINES, one table a row)
+const HAND_CEILING = 83; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is) + 27 (SAME-3, the join's points 88 to 91: TRAD-5's 14 tables, PLACE-2's 9, DAILY-2's 4, as point 84's were) + 2 (the join's point 93: the people lane's position and constraint pools, PEOPLE-1's POSITION_VARIANTS and CONSTRAINT_VARIANTS) + 1 (PAGE-12, the trouble half, on the chair's second form of 03:25 UTC 2026-11-22: its pool `troubleHooks.js :: TROUBLE_HOOKS`, registered by the lane that adds it, as LINE-NOW says) + 1 (FORTUNE-6, U5b: the merit's sentence, FORTUNE_MERIT_LINES; the chair's ruling of 03:23 UTC 2026-11-22) + 1 (FORTUNE-7, U7b: LASTING's sentence, FORTUNE_LASTING_LINES, one row for its four lines; the chair's word E57 of 08:21 UTC 2026-11-22) + 1 (SEAT-10's U6, CS12: the holder's lines, SEAT_HOLDER_LINES, one table a row) + 1 (DAILY-3's B3 E1: the owner-only slot's pool, COMMONER_RESENTMENTS_DM, quiet by construction as DM_BY_CONSTRUCTION names it) + 2 (DAILY-3's B3 E2: the public slots' pools, COMMONER_RESENTMENTS and FOOD_CULTURE, read by their declared atoms) + 3 (DAILY-3's B3 E3: the public slots' pools, OUTSIDER_IMPRESSIONS, RECENT_CHANGES and UNSPOKEN_TOPICS, read by their declared atoms)
 const COVERT = 'dm-only';
 
 // ── THE VOCABULARY, CLASSED ──────────────────────────────────────────────────────────────────────
@@ -439,7 +439,13 @@ export function sourceText(fn) {
  * `audience === 'owner'`) and its proof are DAILY-2's B3 E1, not yet on any branch.
  * @type {Readonly<Record<string, { gatedBy: string, provedBy: string }>>}
  */
-const DM_BY_CONSTRUCTION = Object.freeze({});
+const DM_BY_CONSTRUCTION = Object.freeze({
+  'src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM': {
+    gatedBy: 'src/domain/dailyLife.js :: deriveDailyLife',
+    provedBy: 'tests/domain/dailyLifeOwnerSlot.test.js :: the key is ABSENT on every toPublicSafe document and on the read of it, on the 900 born places',
+    notes: 'crime55 K55_0..K55_3 need house: smuggling (a hideable house): lawful because the table is derived for the owner alone; for the security reader',
+  },
+});
 const DM_NAMED = /(?:_dm|Dm|_DM)$/;
 /** @param {string} ref `path :: symbol` */
 export const isDmNamed = (ref) => ref.split(' :: ').some((part) => DM_NAMED.test(part.replace(/\.[cm]?jsx?$/, '')));
@@ -846,7 +852,7 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(isDmNamed('src/data/npcData.js :: NPC_WANTS')).toBe(false);
       expect(byConstructionFaults([ref], {}, read)).toEqual([`${ref}: dm-named, no gate declared`]);
       const value = { crime70: ['The smugglers pay no toll while honest carts queue.'] };
-      expect(handReds([{ ref, value }]).map((r) => r.why)).toEqual(['crime pool; crime house smuggl-']);
+      expect(handReds([{ ref, value }], EXEMPT, true, {}).map((r) => r.why)).toEqual(['crime pool; crime house smuggl-']);
       const table = { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLife', provedBy: 'tests/domain/dailyLifeDm.test.js :: absent on every toPublicSafe document' } };
       expect(byConstructionFaults([ref], table, read)).toEqual([]);
       expect(handReds([{ ref, value }], EXEMPT, true, table)).toEqual([]);

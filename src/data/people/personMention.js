@@ -16,10 +16,20 @@
  *   5. else the full name, as before (two cards of one name and one role: nothing shorter tells them apart).
  * A card with no gender (an older stored town's card) takes 2-5.
  *
- * THE PRONOUN'S CASE, read off the sentence: before "'s" it is the possessive ("her own interests"); at a clause's head
- * (the sentence's start, after a clause opener such as "and", "but", "than", "that", or after a comma, semicolon,
- * colon or dash) with a word after it, the subject ("and he holds enough"); everywhere else the object ("would put her
- * two favours ahead"). A mention at the sentence's head takes its capital.
+ * THE PRONOUN'S CASE, read off the sentence: before "'s" it is the possessive ("her own interests"); else BY THE WORD
+ * AFTER IT (PRONOUN, CLOSE-2 unit 3c, the chair's E117): the words that follow a person's later mention in the composed
+ * lines are a closed set, classed by hand (`SUBJECT_FOLLOWERS`: a finite verb or the adverb before one, the mention a
+ * clause's subject, "a candidate she distrusts", "everything he has built"; `OBJECT_FOLLOWERS`: "want her gone", "asked
+ * him to", "ruin her."), the one follower both classes hold read with the word before it (`FOLLOWER_BY_BEFORE`: "an
+ * introduction he would", "who knows her would"). A follower in neither class (a text no line of the census wrote)
+ * keeps the reading the leaf had before: at a clause's head (the sentence's start, after a clause opener such as "and",
+ * "but", "than", "that", or after a comma, semicolon, colon or dash) with a word after it, the subject ("and he holds
+ * enough"); everywhere else the object. A mention at the sentence's head takes its capital. A pronoun never stands before
+ * a they-form bound to its own person: a later mention whose following text starts with a tail of `NO_PRONOUN_TAILS`
+ * (classed by hand from the measure) skips the pronoun rung only and takes the next rung of THE RULE (2-5), so "an
+ * introduction the factor would rather keep to themselves" (PRONOUN-THEY, CLOSE-4, the ninth chair's ruling (A) of
+ * 2026-11-23, which amends its ruling of 01:55 that the mention keep the full name). No reflexive is rewritten.
+ * @enforced-by tests/lint/personMentionCase.walker.test.js (every template with a person's slot, both genders)
  *
  * ⛔ THE VEIL (the seventh chair's ruling CN3 (ii)). The share veil withholds a string by finding a hidden person's NAME
  * in it, string by string. This leaf changes only a mention AFTER the first in the same sentence, so every string it
@@ -40,6 +50,40 @@ const CLAUSE_OPENERS = Object.freeze(new Set(['and', 'but', 'so', 'yet', 'or', '
   'though', 'although', 'until', 'unless', 'when', 'whenever', 'where', 'wherever', 'if', 'since', 'that', 'whether',
   'once', 'as', 'after', 'before']));
 
+/**
+ * THE FOLLOWER'S CLASS (PRONOUN, CLOSE-2 unit 3c): the words after a person's later mention in every composed line
+ * (`npcData.js` ties, `goalFamilies.js` wants), classed by hand. SUBJECT: a finite verb, or the adverb before one (the
+ * mention is that clause's subject). OBJECT: a word that is not the mention's own verb, or a stop mark (`OBJECT_STOP_MARK`).
+ */
+export const SUBJECT_FOLLOWERS = Object.freeze(new Set(['acts', 'asked', 'asks', 'calls', 'can', 'cannot', 'controls',
+  'could', 'decides', 'did', 'distrusts', 'does', 'earns', 'gets', 'has', 'holds', 'is', 'keeps', 'knows', 'makes', 'means',
+  'moves', 'names', 'needs', 'never', 'once', 'owes', 'pays', 'rarely', 'refused', 'remembers', 'sends', 'stands', 'still',
+  'stops', 'survives', 'uses', 'vouches', 'wants', 'was', 'will']));
+export const OBJECT_FOLLOWERS = Object.freeze(new Set(['about', 'everything', 'gone', 'in', 'money', 'questions', 'something',
+  'standing', 'that', 'to', 'too', 'two', 'without']));
+/**
+ * The stop marks after a later mention ("ruin her."), the object (PRONOUN-2, CLOSE-5): the six (, . ; : ! ?) as ONE regex
+ * literal beside `OBJECT_FOLLOWERS`'s words, read where that Set is read, so the copy's voice count reads no '!' (as
+ * `NOT_AFTER_LETTER` below).
+ */
+export const OBJECT_STOP_MARK = /^[,.;:!?]$/;
+/**
+ * A follower both classes hold, its class read off the word BEFORE the mention: "an introduction he would rather keep"
+ * (subject) beside "nobody who knows her would believe it" (object: "would" is nobody's verb).
+ * @type {Readonly<Record<string, Readonly<Record<string, 'subject' | 'object'>>>>}
+ */
+export const FOLLOWER_BY_BEFORE = Object.freeze({
+  would: Object.freeze({ and: 'subject', that: 'subject', introduction: 'subject', knows: 'object' }),
+});
+
+/**
+ * THE TAILS THAT TAKE NO PRONOUN (PRONOUN-THEY, CLOSE-4, the chair's ruling (A)): the exact words after a later mention
+ * up to and including the they-form that binds that mention's own person (singular they: "an introduction the factor
+ * would rather keep to themselves"), classed by hand from the measure (`close-4/THEY-MEASURE.txt` on
+ * `lane/close-4-2026-11-23`). A mention before one skips the pronoun rung (`mentionOf`).
+ */
+export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -54,11 +98,12 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 /**
  * The mention a later occurrence takes, without its case: a pronoun's gender, or the word that stands for the person.
  * @param {{ name: string, gender: string, role: string }} p @param {Array<{ name: string, gender: string, role: string }>} named
+ * @param {boolean} [noPronoun] the pronoun rung skipped (a mention before a tail of `NO_PRONOUN_TAILS`)
  * @returns {{ pronoun: 'female' | 'male' } | { word: string } | null}
  */
-function mentionOf(p, named) {
+function mentionOf(p, named, noPronoun = false) {
   const others = named.filter((q) => q !== p);
-  if ((p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
+  if (!noPronoun && (p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
   if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
@@ -78,6 +123,39 @@ function opensClause(sentence, start, end) {
   if (/^\W*$/.test(before) || /[,;:—–]\s*$/.test(before)) return true;
   const last = /(\w+)\s+$/.exec(before);
   return !!last && CLAUSE_OPENERS.has(last[1].toLowerCase());
+}
+
+/**
+ * The word after a mention ending at `end` (lower-cased), or the stop mark there; '' at the text's end.
+ * @param {string} sentence @param {number} end @returns {string}
+ */
+export function followerAt(sentence, end) {
+  const m = /^\s*(?:([\p{L}'’]+)|([^\s\p{L}]))/u.exec(sentence.slice(end));
+  return m ? (m[1] ? m[1].toLowerCase() : m[2]) : '';
+}
+
+/**
+ * The word before a mention starting at `start` (lower-cased), or '' where none stands before it.
+ * @param {string} sentence @param {number} start @returns {string}
+ */
+export function wordBeforeAt(sentence, start) {
+  const m = /([\p{L}'’]+)[^\p{L}]*$/u.exec(sentence.slice(0, start));
+  return m ? m[1].toLowerCase() : '';
+}
+
+/**
+ * Whether a later mention is its clause's subject: by its follower's class (`SUBJECT_FOLLOWERS`, `OBJECT_STOP_MARK` or
+ * `OBJECT_FOLLOWERS`, `FOLLOWER_BY_BEFORE`), else by the clause head (`opensClause`).
+ * @param {string} sentence @param {number} start @param {number} end @returns {boolean}
+ */
+function isSubject(sentence, start, end) {
+  const follower = followerAt(sentence, end);
+  const byBefore = Object.hasOwn(FOLLOWER_BY_BEFORE, follower) ? FOLLOWER_BY_BEFORE[follower] : null;
+  const before = byBefore ? wordBeforeAt(sentence, start) : '';
+  if (byBefore && Object.hasOwn(byBefore, before)) return byBefore[before] === 'subject';
+  if (!byBefore && SUBJECT_FOLLOWERS.has(follower)) return true;
+  if (!byBefore && (OBJECT_STOP_MARK.test(follower) || OBJECT_FOLLOWERS.has(follower))) return false;
+  return opensClause(sentence, start, end);
 }
 
 /**
@@ -103,13 +181,14 @@ function oneSentence(sentence, people) {
   let out = ''; let at = 0;
   for (const h of hits) {
     if (!seen.has(h.p)) { seen.add(h.p); continue; }
-    const m = mentionOf(h.p, named);
+    const after = sentence.slice(h.end).trimStart();
+    const m = mentionOf(h.p, named, [...NO_PRONOUN_TAILS].some((t) => after.startsWith(t)));
     if (!m) continue;
     const possessive = /^['’]s(?![\p{L}\p{N}])/u.test(sentence.slice(h.end));
     let word; let end = h.end;
     if ('pronoun' in m) {
       const forms = PRONOUN[m.pronoun];
-      if (possessive) { word = forms.possessive; end += 2; } else word = opensClause(sentence, h.start, h.end) ? forms.subject : forms.object;
+      if (possessive) { word = forms.possessive; end += 2; } else word = isSubject(sentence, h.start, h.end) ? forms.subject : forms.object;
     } else word = m.word;
     if (/^\W*$/.test(sentence.slice(0, h.start))) word = capFirst(word);
     out += sentence.slice(at, h.start) + word;

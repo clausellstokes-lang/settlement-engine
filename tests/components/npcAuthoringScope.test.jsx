@@ -71,7 +71,6 @@ function freshStore() {
     clearAiSettlement: vi.fn(),
     regenSection: vi.fn(),
     requestNarrative: vi.fn(),
-    requestDailyLife: vi.fn(),
     getCost: vi.fn(() => 0),
     creditBalance: 0,
     aiLoading: false,

@@ -547,6 +547,13 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   //   tests/build/vendorPdfLazy.test.js (the first-paint byte budget). Pinned here, never left unpinned (FP-G11).
   '/src/domain/facts/causeHouses.js',
   '/src/domain/facts/entrepot.js',
+  // DAILY-3 B3 L8 (the chair's E82 of 2026-11-22, item 1: "a NEW LAZY LEAF ... pinned lazy where the lazy pins are kept").
+  // THE SAME PREMISE as the FIRSTPAINT-PIN block above: facts/officeForms.js (the five `office:` atoms' map and reader) is a
+  // new leaf of facts/factsOf.js (pinned here), which is generator-reached, so the derivation would walk it into EAGER
+  // engine-core. Its importers: facts/factsOf.js alone. Its imports: rulingPower.js and seat/seatTable.js, both already in
+  // the eager graph, so coherence-lazy gains no edge back. Not measured by a build in this unit (the chair's at the close).
+  // @guarded-by tests/domain/dailyLifeOffice.test.js (e) (the eager graph does not hold it; it routes to coherence-lazy).
+  '/src/domain/facts/officeForms.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
