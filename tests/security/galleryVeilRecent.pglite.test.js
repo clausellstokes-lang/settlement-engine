@@ -55,6 +55,10 @@
  *   THE COUNT c (E97 (2) (c), E98): on hiding reads (every setting, Reveal DM off and on, the gallery read), the places whose
  *              stored pressureSentence is NOT the sentence and names a power or house, whose SERVED pressureSentence names a
  *              withheld one: the server's c beside the twin's (server = twin; the figure goes to the hand-back).
+ * EVERY NAME ARM IS CASE-BLIND (the chair's ruling 107 (2); R5D-PAGE-B2): the verdict is the lane's fold (A-Z lowered), the
+ * whole-text id match, the open-name exemption, the mask and the stored sentence are compared without regard to case, and a
+ * hit is LISTED BY ITS EXACT FORM (formsOf, maskForms). `R5C6_POOL=full` runs reader B's differential and the hand hides
+ * over all 480 (107 (2): the full pool, not a slice).
  */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -152,6 +156,30 @@ function poolSeeds() {
 const sentenceOf = (d) => (isRec(d?.powerStructure) && typeof d.powerStructure.recentConflict === 'string' ? d.powerStructure.recentConflict : null);
 /** BOTH STORED SHAPES: the new one, and master's (the powers also in the top-level factions[], R3's 'openM'). */
 const SHAPES = Object.freeze({ new: (s) => clone(s), master: (s) => ({ ...clone(s), factions: clone(s.powerStructure.factions) }) });
+/** Without regard to case: equal; holding. */
+const ci = (a, b) => typeof a === 'string' && typeof b === 'string' && a.toLowerCase() === b.toLowerCase();
+const ciHas = (text, part) => typeof text === 'string' && typeof part === 'string' && text.toLowerCase().includes(part.toLowerCase());
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** THE CASE-BLIND LOCATOR (107 (2)): the EXACT FORMS in which a text names any of `names` (the name; its bare form, a trailing
+ * bracketed qualifier dropped; that without a leading "The"; each with an optional article "the " and a plural or possessive
+ * ending), matched without regard to case. It LISTS hits; the verdict stays the lane's fold. */
+function formsOf(text, names) {
+  if (typeof text !== 'string' || text === '') return [];
+  const out = new Set();
+  for (const n of names) {
+    if (typeof n !== 'string' || n === '' || /^\d+$/.test(n)) continue;
+    const bare = n.replace(/\s*[([][^)\]]*[)\]]\s*$/, '');
+    for (const v of new Set([n, bare, bare.replace(/^the\s+/i, '')])) {
+      if (v.length < 2) continue;
+      const re = new RegExp(`(?<![\\p{L}\\p{N}])(?:the\\s+)?${esc(v).replace(/\s+/g, '[\\s_-]+')}(?:'s|s'|es|s)?(?![\\p{L}\\p{N}])`, 'giu');
+      for (const x of text.matchAll(re)) out.add(x[0]);
+    }
+  }
+  return [...out];
+}
+/** The mask, without regard to case: its exact forms in a text. */
+const maskForms = (s) => (typeof s === 'string' ? [...new Set(s.match(new RegExp(esc(HIDDEN_POWER_MASK), 'giu')) || [])] : []);
+const hitOf = (text, names) => { const f = formsOf(text, names); return f.length ? `forms ${J(f)}` : 'forms (the fold\'s hit; no listed form)'; };
 
 // ── THE JUDGMENT ─────────────────────────────────────────────────────────
 const listsOf = (x) => [...arr(x?.powerStructure?.factions), ...arr(x?.factions)].filter(isRec);
@@ -177,15 +205,15 @@ const servedNamesOf = (d) => [...new Set([...listsOf(d).flatMap((f) => [f.factio
  * document serves (galleryRosterChoices.pglite.test.js :: searchHits, its rule); an id as the whole text. */
 function namesWithheld(text, withheld, d) {
   if (typeof text !== 'string' || text === '') return false;
-  if (withheld.includes(text)) return true;
+  if (withheld.some((w) => ci(w, text))) return true;
   const words = withheld.filter((t) => !/^\d+$/.test(t));
   const opens = servedNamesOf(d);
   const bare = buildNameSearch(words, []);
   const search = buildNameSearch(words, opens);
   if (!bare || !bare.hit(text)) return false;
   if (search && search.hit(text)) return true;
-  const holders = opens.filter((n) => text.includes(n) && bare.hit(n));
-  return !holders.length || bare.hit(holders.reduce((x, n) => x.split(n).join(' '), text));
+  const holders = opens.filter((n) => ciHas(text, n) && bare.hit(n));
+  return !holders.length || bare.hit(holders.reduce((x, n) => x.split(new RegExp(esc(n), 'giu')).join(' '), text));
 }
 /** The served key: { has, v }. */
 const recentOf = (d) => (isRec(d?.powerStructure) && Object.prototype.hasOwnProperty.call(d.powerStructure, 'recentConflict')
@@ -195,8 +223,8 @@ const isWithheldForm = (k) => !k.has || k.v === null || k.v === '';
 /** One engine's fault on a GATED read (the stored sentence names a power the read withholds), or null. */
 function gatedFault(want, k, wh, d) {
   if (isWithheldForm(k)) return null;
-  if (namesWithheld(k.v, wh, d)) return 'names the withheld power';
-  if (typeof k.v === 'string' && k.v.includes(HIDDEN_POWER_MASK) && !want.includes(HIDDEN_POWER_MASK)) return 'serves the mask\'s form';
+  if (namesWithheld(k.v, wh, d)) return `names the withheld power (${hitOf(k.v, wh)})`;
+  if (maskForms(k.v).length && !maskForms(want).length) return `serves the mask's form (forms ${J(maskForms(k.v))})`;
   return 'serves a rewritten form';
 }
 
@@ -212,8 +240,8 @@ function absenceFaults(want, d) {
   const out = [];
   const { keys, strs } = walkDoc(d);
   if (keys.has('recentConflict')) out.push('serves a recentConflict key');
-  if (typeof want === 'string' && want !== '' && strs.some((x) => x.includes(want))) out.push('serves the stored sentence (or a string holding it)');
-  if (isRec(d) && Object.prototype.hasOwnProperty.call(d, 'pressureSentence') && d.pressureSentence === want) out.push('serves the pressureSentence copy');
+  if (typeof want === 'string' && want !== '' && strs.some((x) => ciHas(x, want))) out.push('serves the stored sentence (or a string holding it), case-blind');
+  if (isRec(d) && Object.prototype.hasOwnProperty.call(d, 'pressureSentence') && (d.pressureSentence === want || ci(d.pressureSentence, want))) out.push('serves the pressureSentence copy');
   return out;
 }
 /** What server = twin is judged on, per read: the field's presence and the copy's. */
@@ -482,7 +510,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
           if (ph === null) faults.push(`${seed} ${eng} ${door} dm=${dm}: the page drew no sentence (the reader is not at this door)`);
           else if (ph === pn) equal += 1;
           else faults.push(`${seed} ${eng} ${door} dm=${dm}: hiding ${J(ph).slice(0, 110)} | never there ${J(pn).slice(0, 110)}`);
-          if (namesWithheld(ph, wh, d)) faults.push(`${seed} ${eng} ${door} dm=${dm}: the page's sentence names a withheld power or house ${J(wh)}: ${J(ph).slice(0, 140)}`);
+          if (namesWithheld(ph, wh, d)) faults.push(`${seed} ${eng} ${door} dm=${dm}: the page's sentence names a withheld power or house ${J(wh)} (${hitOf(ph, wh)}): ${J(ph).slice(0, 140)}`);
         }
         for (const door of ['page', 'import']) if (at2[`server ${door}`] !== at2[`twin ${door}`]) faults.push(`${seed} ${door} dm=${dm}: server ${J(at2[`server ${door}`]).slice(0, 100)} | twin ${J(at2[`twin ${door}`]).slice(0, 100)}`);
       }
@@ -534,7 +562,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
     /** The lane's fold, the uncut served powers' and houses' names open (a stamped row's name is NOT open: it is hidden). */
     const namesHidden = (text, wh, d) => {
       const opens = [...listsOf(d).filter((f) => f.hidden !== true && f.faction !== HIDDEN_POWER_MASK && f.name !== HIDDEN_POWER_MASK).map(nameOf), ...arr(d?.institutions).filter(isRec).map((h) => h.name)]
-        .filter((v) => typeof v === 'string' && v && !wh.includes(v));
+        .filter((v) => typeof v === 'string' && v && !wh.some((w) => ci(w, v)));
       const search = buildNameSearch(wh, opens);
       return !!search && search.hit(text);
     };
@@ -558,8 +586,8 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
         if (ph !== null) drawn += 1;
         if (ph === pn) equal += 1;
         else faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: hiding ${J(ph).slice(0, 110)} | never there ${J(pn).slice(0, 110)}`);
-        if (typeof ph === 'string' && namesHidden(ph, wh, d)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence names a power the read hides ${J(wh)}: ${J(ph).slice(0, 140)}`);
-        if (typeof ph === 'string' && ph.includes(HIDDEN_POWER_MASK)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence carries the mask`);
+        if (typeof ph === 'string' && namesHidden(ph, wh, d)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence names a power the read hides ${J(wh)} (${hitOf(ph, wh)}): ${J(ph).slice(0, 140)}`);
+        if (maskForms(ph).length) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the page's sentence carries the mask (forms ${J(maskForms(ph))})`);
         if (eng === 'twin' && door === 'page' && isRec(d.config)) {
           const { generatePowerStructure } = await import('../../src/generators/power/rulingStructure.js');
           try {
@@ -598,7 +626,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
           const d = got[eng].page;
           if (!isRec(d)) { faults.push(`${seed} ${eng} ${setting} dm=${dm}: no document`); continue; }
           reads += 1;
-          if (typeof d.pressureSentence === 'string' && namesWithheld(d.pressureSentence, withheldAllOf(t, d), d)) { c[eng].add(seed); hits[eng].push(`${seed} ${setting} dm=${dm}`); }
+          if (typeof d.pressureSentence === 'string' && namesWithheld(d.pressureSentence, withheldAllOf(t, d), d)) { c[eng].add(seed); hits[eng].push(`${seed} ${setting} dm=${dm} (${hitOf(d.pressureSentence, withheldAllOf(t, d))})`); }
         }
       }
     }

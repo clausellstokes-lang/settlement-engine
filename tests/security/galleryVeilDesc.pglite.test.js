@@ -27,8 +27,8 @@
  *   (d) a HIDDEN row's own desc (the row's `hidden: true`, served on the DM door);
  *   (d2) a MASKED row's own desc (`name` the mask: an unstamped row carrying the owner-hidden power's name, which the
  *       projection serves under the mask);
- *   (e) THE MASK IN A STANDING ("they play the an unseen interest and ..."): EXPECTED RED on this branch until the seat
- *       merges R5D-SQL-2 (E136 (a): the mask in the name slot; the table's NAME slot begins [A-Z]), named so in its title;
+ *   (e) THE MASK IN A STANDING ("they play the an unseen interest and ..."): E136 (a), the mask in the name slot, cut by
+ *       R5D-SQL-2 (merged; green since);
  *   (f) a relation's dmNote naming a withheld power;
  *   (g) a tension's party served as the mask.
  * GREEN BY ABSENCE on every served payload: no served desc ends in a standing (by the JS reference cut,
@@ -52,10 +52,31 @@
  *                        and DM; and the same for the masked tension party (player view). On the player view the never-there
  *                        record's text is masked as the projection masks the hiding read's (a name the owner hid). A served
  *                        desc that keeps a masked standing UNCUT is E136 (a)'s (the mask in the name slot): counted in its own
- *                        arm, EXPECTED RED until R5D-SQL-2. ONE CLASS IS LISTED (the seat's to rule): on the DM door a row
- *                        the owner hid is SERVED stamped, so the served shares (registry power.share, re-derived to 100 over
- *                        the served rows) carry it and the never-there place's do not; S, its rows the stamped one out, reads
- *                        the served figures (witnessed: the kept rows' served figures differ between the two reads).
+ *                        arm (green since R5D-SQL-2 merged). ONE CLASS IS LISTED, THE SHARE CLASS, by ruling 107 (1)'s FOUR
+ *                        CONDITIONS and no looser (R5D-PAGE-B2): a differing row is listed ONLY IF (i) the read is on the DM
+ *                        door, (ii) the place serves a stamped row ({power, hidden: true}), (iii) the two page descs differ
+ *                        in S's GAP-BASED FORMS ALONE (GAP_BASED, below, by the standing table's ids) and (iv) the same
+ *                        record's Reveal-off read (same engine, same door) is equal; anything else that differs is a fault.
+ *                        The cause: on the DM door the stamped row is SERVED, so the served shares (registry power.share,
+ *                        re-derived to 100 over the served rows) carry it and the never-there place's do not; S, its rows the
+ *                        stamped one out, reads the served figures. READER B (rederiveRecentConflict) is judged the same way
+ *                        on the same reads (ruling 107 (2)): the hiding page's sentence equals the never-there page's.
+ *   THE STORED HALVES (item 5c; E134: the universe is the document AS src/lib/saves.js STORES IT): the plant's absence, the
+ *                        fidelity arm and the differential again over today-born places STORED AS SAVED, their publicProse
+ *                        composed as saves.js composes it (publicProseCompose.js :: composePublicProse, publicProse.js ::
+ *                        withPublicProse; VEIL-33's dump.probe.jsx's recipe), a hand hide composed again after the hide (a
+ *                        hide is a save). `R5DP_STORED=<dir>` reads a dumped pool (dump.sh's <seed>.json); else the standing
+ *                        slice's births are stored so in-process. THE publicProse COUNT (ruling 111): every served
+ *                        publicProse block field holding a power's stored desc, its base or its standing, word for word or
+ *                        by the lane's fold, by block key and field, per engine, on hiding and nothing-hidden reads: a
+ *                        figure, never asserted non-zero (once (a') serves no publicProse it reads 0 by construction).
+ *   THE WHOLE-DOCUMENT SHAS (the chair's N67; material for a later ruling, JUDGED BY NOTHING, ASSERTED BY NOTHING): every
+ *                        read of a stored document (the stored halves' records, the never-there place not among them) writes
+ *                        the sha256 of the server's served document and of the twin's projection for the same read, each in
+ *                        canonical form (keys sorted, recursively), to R5DP_SHAS (a TSV: place, pool, door, setting, Reveal,
+ *                        server sha, twin sha) where it is set, and keeps the first 50 differing pairs whole under R5DP_SHA_DIFFS.
+ *   EVERY NAME ARM IS CASE-BLIND (ruling 107 (2)): the verdict is the lane's fold (buildNameSearch: A-Z lowered), the mask is
+ *                        searched without regard to case, and a hit is LISTED BY ITS EXACT FORM (formsOf, maskForms).
  *   THE ARM (item 0 (c)) every string a page reader writes (the sentence, the standing by S, the crime lists) names only
  *                        served rows (the lane's fold) and carries no mask; with it item 7's count: the strata's and the
  *                        contenders' own strings over the page (powerStrata.js :: derivePowerStrata, rulingPowerCoup.js ::
@@ -65,9 +86,10 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
-import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
+import { buildNameSearch, nameFold } from '../../src/domain/display/gallerySecondHomes.js';
 import { HIDDEN_POWER_MASK } from '../../src/domain/display/publicSafe.js';
 import { isHideableHouse, isVeiledPower } from '../../src/domain/people/cardVeil.js';
 import { standingRosterOf, standingForceOf } from '../../src/generators/power/rosterText.js';
@@ -94,6 +116,73 @@ const nameOf = (f) => (isRec(f) ? String(f.faction ?? f.name ?? '') : '');
 const isMasked = (f) => isRec(f) && (f.faction === HIDDEN_POWER_MASK || f.name === HIDDEN_POWER_MASK);
 const isCut = (f) => isRec(f) && (f.hidden === true || isMasked(f));
 const listsOf = (x) => [...arr(x?.powerStructure?.factions), ...arr(x?.factions)].filter(isRec);
+/** Equal without regard to case. */
+const ci = (a, b) => typeof a === 'string' && typeof b === 'string' && a.toLowerCase() === b.toLowerCase();
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/**
+ * THE CASE-BLIND LOCATOR (107 (2)): the EXACT FORMS in which a text names any of `names`: the name, its bare form (a trailing
+ * bracketed qualifier dropped) and the bare form without a leading "The", each with an optional article "the " before it and
+ * a plural or possessive ending, matched without regard to case. It LISTS hits; the verdict stays the lane's fold.
+ */
+function formsOf(text, names) {
+  if (typeof text !== 'string' || text === '') return [];
+  const out = new Set();
+  for (const n of names) {
+    if (typeof n !== 'string' || n === '' || n === HIDDEN_POWER_MASK) continue;
+    const bare = n.replace(/\s*[([][^)\]]*[)\]]\s*$/, '');
+    for (const v of new Set([n, bare, bare.replace(/^the\s+/i, '')])) {
+      if (v.length < 2) continue;
+      const re = new RegExp(`(?<![\\p{L}\\p{N}])(?:the\\s+)?${esc(v).replace(/\s+/g, '[\\s_-]+')}(?:'s|s'|es|s)?(?![\\p{L}\\p{N}])`, 'giu');
+      for (const x of text.matchAll(re)) out.add(x[0]);
+    }
+  }
+  return [...out];
+}
+/** The mask, searched without regard to case: its exact forms in a text. */
+const MASK_RE = new RegExp(esc(HIDDEN_POWER_MASK), 'giu');
+const maskForms = (s) => (typeof s === 'string' ? [...new Set(s.match(MASK_RE) || [])] : []);
+const hasMask = (s) => maskForms(s).length > 0;
+/** A hit's listing: its exact forms (or the fold's own word where the locator finds none). */
+const hitOf = (text, names) => { const f = formsOf(text, names); return f.length ? `forms ${J(f)}` : 'forms (the fold\'s hit; no listed form)'; };
+/**
+ * 107 (1) (iii): THE STANDING TABLE's GAP-BASED FORMS, by id (R5D-PAGE-B2's reading, vetoable): a form is GAP-BASED where
+ * annotateFactionStanding PICKS it by a DIFFERENCE between two served figures against a threshold, so a re-share of the
+ * served figures (the stamped row in the served shares) can move it. Two families, both counted:
+ *   RANK (GAP_RANK)  the rank-1 forms R1-* (topTwoGap <= 6 / <= 14; R1-contest, the seat-contest line, only where topTwoGap
+ *                    > 6), the rank-2 forms R2-* (gapAbove, gapBelow <= 5 / <= 10, levelCount: figures within 5 of the
+ *                    first), the last rank's RL-few (power < 7 with gapAbove >= 5); master's and the history's wordings of
+ *                    the same rungs (M-R1-*, M-R2-*, M-RL-narrow, H-R1-*, H-R2-*);
+ *   PAIR             a named pair's figures against a margin: AR, RA (arcane vs religious, rival > power), CM, MC (merchant
+ *                    vs craft guild, > power, > power - 8), MT (thieves > power), NM (merchant vs noble, > power + 12, >
+ *                    power), GT, TG (guard vs thieves, +-10), RT (thieves > power), GR (|religious - guard| < 10), ST (the
+ *                    steward +-10, its wording by the two figures), and their M-/H- wordings.
+ * NOT gap-based: OC-* (the occupier's line reads no figure). A difference in an OC form, in the base, or in the forms' order
+ * outside a gap-based form, is a FAULT. The two families are counted apart in the note (the rank family alone: the
+ * stricter reading the hand-back gives beside it).
+ */
+const GAP_RANK = Object.freeze(new Set(readTable().forms.map((f) => f.id).filter((id) => /^(?:[HM]-)?R[12]-/.test(id) || id === 'RL-few' || id === 'M-RL-narrow')));
+const GAP_BASED = Object.freeze(new Set(readTable().forms.map((f) => f.id).filter((id) => !/^OC-/.test(id))));
+/** The standing's forms of a desc with their texts (the reference cut's own loop, each segment kept), and its base. */
+function standingSegments(desc) {
+  let rest = String(desc ?? ''); const segs = [];
+  for (;;) {
+    let best = null;
+    for (const r of ROWS) { const x = r.re.exec(rest); if (x && (!best || x.index < best.at || (x.index === best.at && r.id < best.id))) best = { id: r.id, at: x.index }; }
+    if (!best) break;
+    segs.unshift({ id: best.id, text: rest.slice(best.at).replace(/^ /, '') });
+    rest = rest.slice(0, best.at);
+  }
+  return { base: rest, segs };
+}
+/** 107 (1) (iii): two page descs differ in S's gap-based forms ALONE (the base equal, every other form equal in order). */
+function gapOnly(a, b, gap = GAP_BASED) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  const x = standingSegments(a); const y = standingSegments(b);
+  const other = (s) => J(s.segs.filter((g) => !gap.has(g.id)));
+  return x.base === y.base && other(x) === other(y);
+}
+/** 107 (1) (ii): the place serves a stamped row ({power, hidden: true}). */
+const servesStamped = (d) => listsOf(d).some((f) => f.hidden === true && Object.prototype.hasOwnProperty.call(f, 'power'));
 
 // ── THE HAND-MADE TOWNS (each desc the engine's own: base + the standing over the stored roster) ──────────────
 /** The stored roster's standings, as rosterText.js :: standingsOf writes them. */
@@ -162,7 +251,7 @@ const openNamesOf = (d) => [...new Set([...listsOf(d).filter((f) => !isCut(f)).m
 /** Whether a text names a withheld power by THE LANE'S FOLD (the served names open). */
 function namesWithheld(text, withheld, d) {
   if (typeof text !== 'string' || text === '' || !withheld.length) return false;
-  const search = buildNameSearch(withheld, openNamesOf(d).filter((n) => !withheld.includes(n)));
+  const search = buildNameSearch(withheld, openNamesOf(d).filter((n) => !withheld.some((w) => ci(w, n))));
   return !!search && search.hit(text);
 }
 /** Every string leaf of a value, with its path. */
@@ -176,7 +265,7 @@ function strings(v, p = '', out = []) {
  * THE ABSENCE on one engine's served payload: the faults, by plant letter. `stored` is the record read.
  * @returns {{ plant: string, why: string }[]}
  */
-function absenceFaults(stored, d) {
+function absenceFaults(stored, d, { born = false } = {}) {
   const out = [];
   // THE SERVER'S WITHHELD (the rule 212 (36) (d) and the projection read): a stored power no served list names at all; a
   // stamped row the DM door serves is NOT withheld from that reader (R5-RECENT's measure: the DM door serves it, unmasked)
@@ -190,17 +279,25 @@ function absenceFaults(stored, d) {
       if (!has || typeof f.desc !== 'string') continue;
       const c = refCut(f.desc);
       if (c) out.push({ plant: '(a)', why: `${list} ${nameOf(f)}: the desc ends in a standing (${c.ids.join('+')}): ${J(c.standing).slice(0, 100)}` });
-      if (namesWithheld(f.desc, wh, d)) out.push({ plant: '(a)', why: `${list} ${nameOf(f)}: the desc names a withheld power ${J(wh)}: ${J(f.desc).slice(-120)}` });
-      if (f.desc.includes(HIDDEN_POWER_MASK)) out.push({ plant: '(e)', why: `${list} ${nameOf(f)}: the desc carries the mask: ${J(f.desc).slice(-120)}` });
+      if (namesWithheld(f.desc, wh, d)) out.push({ plant: '(a)', row: nameOf(f), why: `${list} ${nameOf(f)}: the desc names a withheld power ${J(wh)} (${hitOf(f.desc, wh)}): ${J(f.desc).slice(-120)}` });
+      if (hasMask(f.desc)) out.push({ plant: '(e)', why: `${list} ${nameOf(f)}: the desc carries the mask (forms ${J(maskForms(f.desc))}): ${J(f.desc).slice(-120)}` });
     }
   }
   for (const r of arr(d?.powerStructure?.factionRelationships).filter(isRec)) {
-    if (typeof r.dmNote === 'string' && namesWithheld(r.dmNote, wh, d)) out.push({ plant: '(f)', why: `relation ${J(r.pair)}: the dmNote names a withheld power: ${J(r.dmNote)}` });
+    if (typeof r.dmNote === 'string' && namesWithheld(r.dmNote, wh, d)) out.push({ plant: '(f)', why: `relation ${J(r.pair)}: the dmNote names a withheld power (${hitOf(r.dmNote, wh)}): ${J(r.dmNote)}` });
   }
   for (const t of arr(d?.history?.currentTensions).filter(isRec)) {
-    if (arr(t.factions).includes(HIDDEN_POWER_MASK)) out.push({ plant: '(g)', why: `tension ${J(t.name)}: a party served as the mask` });
+    const ms = arr(t.factions).filter((p) => ci(p, HIDDEN_POWER_MASK));
+    if (ms.length) out.push({ plant: '(g)', why: `tension ${J(t.name)}: a party served as the mask (forms ${J(ms)})` });
   }
-  if (arr(stored?.history?.currentTensions).length !== arr(d?.history?.currentTensions).length && isRec(d?.history)) out.push({ plant: '(g)', why: 'a tension left with its masked party' });
+  // (g) the tension stays: on a hand-made plant town every tension stays; on a BORN place (the stored half) a tension leaves
+  // for other rules' reasons (a withheld house's), so there the tension that stays is one a power the owner hid is party to
+  if (!born && arr(stored?.history?.currentTensions).length !== arr(d?.history?.currentTensions).length && isRec(d?.history)) out.push({ plant: '(g)', why: 'a tension left with its masked party' });
+  if (born && isRec(d?.history)) {
+    const own = new Set(listsOf(stored).filter((f) => f.hidden === true).map(nameOf).filter((n) => n && wh.includes(n)));
+    const servedT = new Set(arr(d.history.currentTensions).filter(isRec).map((t) => t.name));
+    for (const t of arr(stored?.history?.currentTensions).filter(isRec)) if (arr(t.factions).some((p) => own.has(String(p))) && !servedT.has(t.name)) out.push({ plant: '(g)', why: `tension ${J(t.name)} left with its masked party` });
+  }
   return out;
 }
 /** THE PAGE's descs at a door: { name: desc } of the served powers. */
@@ -359,7 +456,7 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
     expect(faults).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('PLANT (e) [EXPECTED RED on this branch until the seat merges R5D-SQL-2: E136 (a), the mask in the name slot]: the owner-hidden power named in a shown power\'s standing, read on the player view where the projection masks it ("they play the an unseen interest and ..."): no served desc carries the mask, both engines, every setting, both stored shapes', async () => {
+  it('PLANT (e) (E136 (a), the mask in the name slot): the owner-hidden power named in a shown power\'s standing, read on the player view where the projection masks it ("they play the an unseen interest and ..."): no served desc carries the mask, both engines, every setting, both stored shapes', async () => {
     const out = []; let reached = 0;
     for (const [key, town] of [['owner', PLANT_TOWNS.owner], ['lower', PLANT_TOWNS.lower]]) {
       const r = await plantRun(key, town, ['(e)'], (rr, d) => !listsOf(d).some((f) => nameOf(f) === HAND || nameOf(f) === RA) && rr.read !== 'import');
@@ -481,7 +578,7 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
       const sd = stored.get(nameOf(f));
       if (typeof f.desc !== 'string' || typeof sd !== 'string') continue;
       const base = mk(refCut(sd)?.base ?? sd);
-      if (f.desc !== base && f.desc.startsWith(base) && f.desc.slice(base.length).includes(HIDDEN_POWER_MASK)) out.push(`${nameOf(f)}: ${J(f.desc.slice(base.length)).slice(0, 140)}`);
+      if (f.desc !== base && f.desc.startsWith(base) && hasMask(f.desc.slice(base.length))) out.push(`${nameOf(f)} (mask forms ${J(maskForms(f.desc.slice(base.length)))}): ${J(f.desc.slice(base.length)).slice(0, 140)}`);
     }
     return out;
   };
@@ -499,8 +596,15 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
     return [...new Set([...withheldOf(stored, d), ...arr(stored.institutions).filter((h) => isRec(h) && typeof h.name === 'string' && h.name && !sh.has(h.name)).map((h) => h.name)])];
   };
   const hidesAny = (t) => arr(t.institutions).some((h) => isRec(h) && isHideableHouse(h)) || listsOf(t).some((f) => f.hidden === true);
-  /** Every hiding record of the unit: the pool's hiding births, act T, the hand hides. */
-  const hidingRecords = async () => {
+  /** Every hiding record of the unit: the pool's hiding births, act T, the hand hides; on the STORED pool (item 5c) its
+   * hiding places and their hand hides, each hand hide stored AS SAVED again (a hide is a save; act T is the born half's). */
+  const hidingRecords = async (source = 'born') => {
+    if (source === 'stored') {
+      const pool = await storedPoolOf(); const out = [];
+      for (const b of pool) if (hidesAny(b.t)) out.push({ seed: b.seed, how: 'house hide', t: b.t });
+      for (const b of pool) for (const h of handHidesOf(b.t)) out.push({ seed: b.seed, how: `hand hide: ${h.kind} ${h.name}`, t: await asSaved(h.t) });
+      return out;
+    }
     const { pool, actT } = await poolOf();
     const out = pool.filter((b) => hidesAny(b.t)).map((b) => ({ seed: b.seed, how: 'house hide', t: b.t }));
     if (actT) out.push({ seed: actT.seed, how: `act T (${actT.hidden})`, t: actT.t });
@@ -508,19 +612,100 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
     return out;
   };
 
-  it('THE FIDELITY ARM (item 3; E115 (1)): every nothing-hidden born page\'s re-derived desc equals the stored, both engines, both doors, Reveal off and DM, EXCEPT descs whose stored standing carries the seat-contest line, LISTED as that class with its cause; a miss of any other cause reds', async () => {
-    const { pool } = await poolOf();
+  // ── THE STORED POOL (item 5c; E134): today-born places STORED AS SAVED ──────────────────────────────────────────────
+  /** N67: the canonical form (keys sorted, recursively) and its sha256. */
+  const canonOf = (v) => JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((k) => [k, x[k]])) : x));
+  const shaOf = (v) => createHash('sha256').update(canonOf(v) ?? 'null').digest('hex');
+  /** N67: one stored read's two shas per door, to R5DP_SHAS; the first 50 differing pairs whole to R5DP_SHA_DIFFS. Judges nothing. */
+  const recordShas = (place, dm, got) => {
+    const out = process.env.R5DP_SHAS; if (!out) return;
+    const pool = /master/i.test(STORED_DIR) ? 'master' : 'today';
+    for (const door of ['page', 'import']) {
+      const a = shaOf(got.server[door]); const b = shaOf(got.twin[door]);
+      appendFileSync(out, `${[place, pool, door, 'own', dm ? 'DM' : 'off', a, b].join('\t')}\n`);
+      const dir = process.env.R5DP_SHA_DIFFS;
+      if (a !== b && dir) {
+        if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+        if (readdirSync(dir).length < 50) writeFileSync(`${dir}/${createHash('sha256').update(`${place} ${door} ${dm}`).digest('hex').slice(0, 16)}.json`, JSON.stringify({ place, pool, door, setting: 'own', reveal: dm ? 'DM' : 'off', server: got.server[door], twin: got.twin[door] }));
+      }
+    }
+  };
+  const STORED_DIR = process.env.R5DP_STORED || '';
+  let asSavedFn = null;
+  /** A place as src/lib/saves.js stores it: its publicProse composed again over it (dump.probe.jsx's recipe). */
+  const asSaved = async (t) => {
+    if (!asSavedFn) {
+      const { composePublicProse } = await import('../../src/components/new/publicProseCompose.js');
+      const { withPublicProse } = await import('../../src/domain/display/publicProse.js');
+      asSavedFn = (x) => { const u = { ...x }; delete u.publicProse; return clone(withPublicProse(u, composePublicProse(u))); };
+    }
+    return asSavedFn(t);
+  };
+  let storedPool = null;
+  /** `R5DP_STORED=<dir>`: dump.sh's documents (<seed>.json, its index-shard*.json; `R5DP_SHARD=<i>/<k>` a shard by seed
+   * order); else the standing slice's births stored as saved, in-process. */
+  const storedPoolOf = async () => {
+    if (!storedPool) {
+      const out = [];
+      if (STORED_DIR) {
+        const index = readdirSync(STORED_DIR).filter((f) => /^index-shard\d+\.json$/.test(f)).sort()
+          .flatMap((f) => JSON.parse(readFileSync(`${STORED_DIR}/${f}`, 'utf8')).index).sort((a, b) => (a.seed < b.seed ? -1 : a.seed > b.seed ? 1 : 0));
+        index.forEach((j, i) => { if (!SHARD || i % Number(SHARD[2]) === Number(SHARD[1])) out.push({ seed: j.seed, role: j.role, t: JSON.parse(readFileSync(`${STORED_DIR}/${j.seed}.json`, 'utf8')) }); });
+      } else for (const b of (await poolOf()).pool) out.push({ seed: b.seed, role: 'slice', t: await asSaved(b.t) });
+      storedPool = out;
+    }
+    return storedPool;
+  };
+  const poolName = (source) => (source === 'stored' ? `stored ${STORED_DIR ? `${STORED_DIR}${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing slice, in-process'}`
+    : `${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool`);
+
+  /** THE publicProse COUNT (item 5c; rulings 107 (2), 111): per engine, hiding or nothing-hidden, block key, field and what
+   * (the stored desc, its base, its standing; word for word or by the lane's fold): the reads whose served publicProse holds it. */
+  const prose = { reads: {}, served: {}, cells: new Map(), ex: [] };
+  const tallyProse = (t, d, eng, hiding, tagOf) => {
+    prose.reads[eng] = (prose.reads[eng] || 0) + 1;
+    const pp = isRec(d?.publicProse) ? d.publicProse : null;
+    if (!pp) return;
+    prose.served[eng] = (prose.served[eng] || 0) + 1;
+    const needles = [];
+    for (const f of listsOf(t)) {
+      if (typeof f.desc !== 'string' || f.desc === '') continue;
+      const c = refCut(f.desc);
+      for (const [what, x] of [['desc', f.desc], ['base', c?.base], ['standing', c?.standing]]) if (typeof x === 'string' && x.length >= 12) needles.push({ what, x, fx: nameFold(x) });
+    }
+    const seen = new Set();
+    for (const [p, s] of strings(pp.blocks)) {
+      const block = p.split(/[.[]/)[0]; const field = p.slice(block.length).replace(/\[\d+\]/g, '[]').replace(/^\./, '') || '(the block)';
+      const fs = nameFold(s);
+      for (const { what, x, fx } of needles) {
+        const how = s.includes(x) ? 'word for word' : fx && fs.includes(fx) ? 'by the fold' : null;
+        if (!how) continue;
+        const key = `${eng}|${hiding ? 'hiding' : 'nothing hidden'}|${block}|${field}|${what}|${how}`;
+        if (seen.has(key)) continue;
+        seen.add(key); prose.cells.set(key, (prose.cells.get(key) || 0) + 1);
+        if (prose.ex.length < 8) prose.ex.push(`${tagOf} ${eng} ${block}.${field} holds a ${what} ${how}: ${J(x).slice(0, 90)}`);
+      }
+    }
+  };
+
+  /** THE FIDELITY ARM over a pool ([{ seed, t }]); on the stored pool the served publicProse is counted with it. */
+  const fids = new Map();
+  const fidelityOver = async (pool, source) => {
+    if (fids.has(source)) return fids.get(source);
     const faults = []; const listed = []; let pages = 0; let rows = 0; let equal = 0; let veiledField = 0; let closed = 0;
     for (const { seed, t } of pool) {
+      if (source === 'stored' && hidesAny(t)) continue; // a stored place that hides is the differential's
       const want = new Map(arr(t.powerStructure?.factions).filter(isRec).map((f) => [nameOf(f), f.desc]));
       for (const f of want.values()) if (typeof f === 'string' && !refCut(f)) closed += 1;
       for (const dm of [false, true]) {
         const got = await readOne(t, dm);
+        if (source === 'stored') recordShas(seed, dm, got);
         for (const eng of ['server', 'twin']) for (const door of ['page', 'import']) {
           const d = got[eng][door];
           if (!isRec(d)) { faults.push(`${seed} ${eng} ${door} dm=${dm}: no document`); continue; }
           if (!hidesNothing(t, d)) continue;
           pages += 1;
+          if (source === 'stored') tallyProse(t, d, `${eng} ${door}`, false, `${seed} dm=${dm}`);
           for (const [n, v] of pageDescs(rd, door, d)) {
             rows += 1;
             if (v === want.get(n)) { equal += 1; continue; }
@@ -531,22 +716,46 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
         }
       }
     }
-    note(`R5DP fidelity (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool): births`, pool.length, '| nothing-hidden engine-door-pages', pages, '| page rows', rows, '| equal', equal,
+    note(`R5DP fidelity (${poolName(source)}): places`, pool.length, '| nothing-hidden engine-door-pages', pages, '| page rows', rows, '| equal', equal,
       '| LISTED seat-contest (cause: the seat-contest line reads the seat\'s legitimacy after the last standing write)', listed.length, J([...new Set(listed.map((x) => x.split(' ')[0]))]),
       '| desc not served (field veil)', veiledField, '| stored descs no row cuts (served as base)', closed, '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
-    expect(pages, 'the pool holds nothing-hidden pages').toBeGreaterThan(0);
-    expect(rows).toBeGreaterThan(0);
-    expect(faults).toEqual([]);
+    const r = { pages, rows, faults };
+    fids.set(source, r);
+    return r;
+  };
+
+  it('THE FIDELITY ARM (item 3; E115 (1)): every nothing-hidden born page\'s re-derived desc equals the stored, both engines, both doors, Reveal off and DM, EXCEPT descs whose stored standing carries the seat-contest line, LISTED as that class with its cause; a miss of any other cause reds', async () => {
+    const r = await fidelityOver((await poolOf()).pool, 'born');
+    expect(r.pages, 'the pool holds nothing-hidden pages').toBeGreaterThan(0);
+    expect(r.rows).toBeGreaterThan(0);
+    expect(r.faults).toEqual([]);
   }, POOL_TIMEOUT_MS);
 
-  /** THE DIFFERENTIAL's faults over every hiding record, split: E136 (a)'s (the hiding page carries the mask) and the rest. */
-  let diff = null;
-  const differential = async () => {
-    if (diff) return diff;
-    const faults = []; const maskFaults = []; const listedShare = []; let reads = 0; let hiding = 0; let equal = 0; let tensionReads = 0; const recs = await hidingRecords();
-    for (const { seed, how, t } of recs) {
+  it('THE STORED HALF OF THE FIDELITY ARM (item 5c; E134): every nothing-hidden page of a today-born place STORED AS SAVED (its publicProse with it) re-derives the stored desc, both engines, both doors, Reveal off and DM, the seat-contest class LISTED; a miss of any other cause reds', async () => {
+    const r = await fidelityOver(await storedPoolOf(), 'stored');
+    expect(r.pages, 'the stored pool holds nothing-hidden pages').toBeGreaterThan(0);
+    expect(r.rows).toBeGreaterThan(0);
+    expect(r.faults).toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  /** The page document at a door (A's readers: the page's rederiveForPage on a copy; the import's rederiveServed). */
+  const pageOf = (door, d) => (door === 'page' ? rd.page(clone(d)) : rd.served(d));
+  /** THE DIFFERENTIAL over a source's hiding records: the faults split (E136 (a)'s mask; the share class by 107 (1)'s four
+   * conditions; reader B's sentence, 107 (2)); on the stored pool the served publicProse is counted with it. */
+  const diffs = new Map();
+  const differentialOver = async (source = 'born') => {
+    if (diffs.has(source)) return diffs.get(source);
+    const faults = []; const maskFaults = []; const bFaults = []; let reads = 0; let hiding = 0; let equal = 0; let tensionReads = 0;
+    const share = { rows: 0, reads: new Set(), records: new Set(), notListed: { dm: 0, stamped: 0, gapOnly: 0, offEqual: 0 }, figsDiffer: 0, rankOnly: 0, pairRows: 0, pairReads: new Set(), pairRecords: new Set(), pairEx: [] };
+    const b = { reads: 0, drawn: 0, equal: 0 };
+    const recs = await hidingRecords(source);
+    for (let ri = 0; ri < recs.length; ri += 1) {
+      const { seed, how, t } = recs[ri];
+      /** (iv): the same record's Reveal-off read, per engine and door: equal (no page desc differs) */
+      const offEqual = new Map();
       for (const dm of [false, true]) {
         const got = await readOne(t, dm);
+        if (source === 'stored') recordShas(`${seed} (${how})`, dm, got);
         const wh = withheldAllOf(t, got.twin.page);
         const whS = isRec(got.server.page) ? withheldAllOf(t, got.server.page) : null;
         if (J([...wh].sort()) !== J([...(whS || [])].sort())) faults.push(`${seed} (${how}) dm=${dm}: server and twin withhold differently: ${J(whS)} | ${J(wh)}`);
@@ -558,39 +767,62 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
           const d = got[eng][door]; const n = ng[eng][door];
           if (!isRec(d) || !isRec(n)) { faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: no document`); continue; }
           reads += 1;
-          const ph = pageDescs(rd, door, d); const pn = pageDescs(rd, door, n);
+          if (source === 'stored') tallyProse(t, d, `${eng} ${door}`, true, `${seed} (${how}) dm=${dm}`);
+          const pd = pageOf(door, d); const pnd = pageOf(door, n);
+          const descsOf = (p) => new Map(arr(p?.powerStructure?.factions).filter((f) => isRec(f) && !isCut(f)).map((f) => [nameOf(f), f.desc]));
+          const ph = descsOf(pd); const pn = descsOf(pnd);
           const names = [...new Set([...ph.keys(), ...pn.keys()])];
-          let same = true;
-          // THE SHARE CLASS (listed, the seat's to rule): on the DM door a stamped row is SERVED, so the served shares (registry
-          // power.share: re-derived to 100 over the served rows) carry it, and the never-there place's do not; S reads the
-          // served figures, its rows the stamped one out. WITNESSED: the kept rows' served figures differ between the two reads.
+          const diff = names.filter((k) => ph.get(k) !== pn.get(k));
+          if (!dm) offEqual.set(`${eng} ${door}`, diff.length === 0);
+          if (!diff.length) equal += 1;
+          // THE SHARE CLASS, 107 (1)'s four conditions, each judged and counted where it fails
           const figs = (x) => J(arr(x.powerStructure?.factions).filter((f) => isRec(f) && !isCut(f)).map((f) => [nameOf(f), f.power]).sort());
-          const shareClass = dm && stampedOf(t).some((n) => wh.includes(n)) && figs(d) !== figs(n);
-          for (const k of names) {
-            if (ph.get(k) === pn.get(k)) continue;
-            same = false;
-            if (shareClass) { listedShare.push(`${seed} (${how}) ${eng} ${door} ${k}`); continue; }
-            faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${k}: hiding ${J(ph.get(k)).slice(-140)} | never there ${J(pn.get(k)).slice(-140)}`);
+          if (diff.length && figs(d) !== figs(n)) share.figsDiffer += 1;
+          for (const k of diff) {
+            const c = { dm, stamped: servesStamped(d), gapOnly: gapOnly(ph.get(k), pn.get(k)), offEqual: offEqual.get(`${eng} ${door}`) === true };
+            if (c.dm && c.stamped && c.gapOnly && c.offEqual) {
+              share.rows += 1; share.reads.add(`${ri} ${eng} ${door}`); share.records.add(ri);
+              if (gapOnly(ph.get(k), pn.get(k), GAP_RANK)) share.rankOnly += 1; else { share.pairRows += 1; share.pairReads.add(`${ri} ${eng} ${door}`); share.pairRecords.add(ri); if (share.pairEx.length < 6) share.pairEx.push(`${seed} (${how}) ${eng} ${door} ${k}: hiding ${J(standingSegments(ph.get(k)).segs.map((g) => g.id))} | never there ${J(standingSegments(pn.get(k)).segs.map((g) => g.id))}`); }
+              continue;
+            }
+            if (dm) for (const w of Object.keys(share.notListed)) if (!c[w]) share.notListed[w] += 1;
+            const ids = (v) => J(standingSegments(v).segs.map((g) => g.id));
+            faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${k}${dm ? ` [not the share class: ${Object.entries(c).filter(([, v]) => !v).map(([w]) => w).join(', ')}]` : ''}: hiding ${ids(ph.get(k))} ${J(ph.get(k)).slice(-140)} | never there ${ids(pn.get(k))} ${J(pn.get(k)).slice(-140)}`);
           }
-          if (same) equal += 1;
+          // READER B (107 (2)): the hiding page's recent-conflict sentence equals the never-there page's; it names no power the
+          // read withholds (the lane's fold, case-blind) and carries no mask (case-blind)
+          const sh = typeof pd?.powerStructure?.recentConflict === 'string' ? pd.powerStructure.recentConflict : null;
+          const sn = typeof pnd?.powerStructure?.recentConflict === 'string' ? pnd.powerStructure.recentConflict : null;
+          b.reads += 1; if (sh !== null) b.drawn += 1;
+          if (sh === sn) b.equal += 1;
+          else bFaults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: reader B: hiding ${J(sh).slice(0, 120)} | never there ${J(sn).slice(0, 120)}`);
+          const whB = withheldOf(t, d);
+          if (sh !== null && namesWithheld(sh, whB, d)) bFaults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: reader B's sentence names a power the read hides ${J(whB)} (${hitOf(sh, whB)})`);
+          if (sh !== null && hasMask(sh)) bFaults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: reader B's sentence carries the mask (forms ${J(maskForms(sh))})`);
           // the masked tension party: the hiding page's tensions equal the never-there page's
-          const tp = (x) => J(arr((door === 'page' ? rd.page(clone(x)) : rd.served(x))?.history?.currentTensions).map((c) => arr(c?.factions)));
+          const tp = (x) => J(arr(x?.history?.currentTensions).map((c) => arr(c?.factions)));
           if (!dm && arr(t.history?.currentTensions).some((c) => arr(c?.factions).some((p) => stampedOf(t).includes(String(p)) && wh.includes(String(p))))) {
             tensionReads += 1;
-            if (tp(d) !== tp(n)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the tensions' parties: hiding ${tp(d).slice(0, 140)} | never there ${tp(n).slice(0, 140)}`);
+            if (tp(pd) !== tp(pnd)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: the tensions' parties: hiding ${tp(pd).slice(0, 140)} | never there ${tp(pnd).slice(0, 140)}`);
           }
         }
       }
     }
-    diff = { recs: recs.length, faults, maskFaults, listedShare, reads, hiding, equal, tensionReads };
-    // the masked tension party is judged where the record holds one (a party the owner hid, read on the player view)
-    note(`R5DP differential (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool + act T + hand hides): hiding records`, recs.length, '| hiding reads (record x Reveal DM)', hiding, '| engine-door-reads', reads, '| equal', equal,
-      '| tension reads', tensionReads, '| LISTED share class (DM door, a stamped row in the served shares)', listedShare.length, J([...new Set(listedShare.map((x) => x.split(' (')[0]))]), '| faults', faults.length, '| E136 (a): served descs on the player view whose standing carries the mask, uncut', maskFaults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '', maskFaults.length ? `\n  MASK: ${maskFaults.slice(0, 10).join('\n  MASK: ')}` : '');
-    return diff;
+    const r = { recs: recs.length, faults, maskFaults, bFaults, b, share, reads, hiding, equal, tensionReads };
+    diffs.set(source, r);
+    note(`R5DP differential (${poolName(source)}${source === 'born' ? ' + act T + hand hides' : ' + hand hides'}): hiding records`, recs.length, '| hiding reads (record x Reveal DM)', hiding, '| engine-door-reads', reads, '| equal', equal,
+      '| tension reads', tensionReads, '| LISTED share class by 107 (1)\'s four conditions: rows', share.rows, '| reads', share.reads.size, '| records', share.records.size, J([...share.records].map((i) => `${recs[i].seed} (${recs[i].how})`).slice(0, 40)),
+      '| DM rows differing that fail a condition', J(share.notListed), '| of the listed rows: the rank family alone', share.rankOnly, '| a PAIR form among the differing (rows / reads / records)', share.pairRows, share.pairReads.size, share.pairRecords.size, J(share.pairEx),
+      '| differing reads whose kept figures differ (the witness)', share.figsDiffer, '| GAP_RANK ids', J([...GAP_RANK]), '| not gap-based', J(readTable().forms.map((f) => f.id).filter((id) => !GAP_BASED.has(id))),
+      '| faults', faults.length, '| E136 (a) mask', maskFaults.length, '| READER B: engine-door-reads', b.reads, '| drawn', b.drawn, '| equal', b.equal, '| faults', bFaults.length,
+      faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '', maskFaults.length ? `\n  MASK: ${maskFaults.slice(0, 10).join('\n  MASK: ')}` : '', bFaults.length ? `\n  B: ${bFaults.slice(0, 20).join('\n  B: ')}` : '');
+    return r;
   };
+  /** The standing slice's share class, PINNED (R5D-PAGE-A's figure, 107 (1)): 36 engine-door reads on 9 records. */
+  const SHARE_PIN = Object.freeze({ reads: 36, records: 9 });
 
   it('THE DIFFERENTIAL (item 4): a hiding read\'s page desc equals that of the same place with the withheld powers and houses NEVER THERE, both engines, both doors, Reveal off and DM, over the pool\'s house hides, act T and the hand hides (a density host, a noble power); and the same for the masked tension party; server = twin', async () => {
-    const r = await differential();
+    const r = await differentialOver('born');
     expect((await poolOf()).actT, 'act T was made (transferRulingPower on jp6-city-8)').not.toBeNull();
     expect(r.hiding, 'the unit holds hiding reads').toBeGreaterThan(0);
     expect(r.reads, 'both engines, both doors, every hiding read').toBe(r.hiding * 4);
@@ -598,10 +830,68 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
     expect(r.faults).toEqual([]);
   }, POOL_TIMEOUT_MS);
 
-  it('THE MASK IN A STANDING ON THE BORN HAND HIDES [EXPECTED RED on this branch until the seat merges R5D-SQL-2: E136 (a), the mask in the name slot]: on the player view no served desc keeps a standing the projection masked (served = the masked base and an uncut tail carrying the mask), both engines', async () => {
-    const r = await differential();
+  it('THE SHARE CLASS (ruling 107 (1)): a differing row is LISTED only where (i) the read is on the DM door, (ii) the place serves a stamped row, (iii) the two page descs differ in S\'s gap-based forms alone and (iv) the same record\'s Reveal-off read is equal (anything else is a fault, judged by THE DIFFERENTIAL); the count pinned on the standing slice (36 reads on 9 records), re-counted on the full pool', async () => {
+    const r = await differentialOver('born');
+    expect(GAP_BASED.size, 'the table holds gap-based forms').toBeGreaterThan(0);
+    expect(r.share.reads.size, 'the listed reads lie on the records counted').toBeGreaterThanOrEqual(r.share.records.size);
+    if (!POOL_FULL) expect({ reads: r.share.reads.size, records: r.share.records.size }).toEqual(SHARE_PIN);
+  }, POOL_TIMEOUT_MS);
+
+  it('READER B\'s DIFFERENTIAL (ruling 107 (2)): on every hiding read of the born pool, act T and the hand hides, the page\'s recent-conflict sentence (rederiveRecentConflict, both doors) equals the never-there page\'s and names no power the read hides and no mask (case-blind), both engines, Reveal off and DM', async () => {
+    const r = await differentialOver('born');
+    expect(r.b.reads, 'reader B judged on every hiding engine-door read').toBe(r.reads);
+    expect(r.b.drawn, 'reader B draws its sentence somewhere').toBeGreaterThan(0);
+    expect(r.bFaults).toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  it('THE MASK IN A STANDING ON THE BORN HAND HIDES (E136 (a), the mask in the name slot): on the player view no served desc keeps a standing the projection masked (served = the masked base and an uncut tail carrying the mask, case-blind), both engines', async () => {
+    const r = await differentialOver('born');
     expect(r.reads).toBeGreaterThan(0);
     expect(r.maskFaults).toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  it('THE STORED HALF OF THE DIFFERENTIAL, THE SHARE CLASS AND READER B (item 5c; E134, 107 (1), 107 (2)): over today-born places STORED AS SAVED (their house hides and hand hides, each hide stored as saved again), the page desc and the page sentence equal the never-there place\'s, both engines, both doors, Reveal off and DM, the share class listed by its four conditions; the mask uncut nowhere', async () => {
+    const r = await differentialOver('stored');
+    expect(r.hiding, 'the stored pool holds hiding reads').toBeGreaterThan(0);
+    expect(r.reads, 'both engines, both doors, every hiding read').toBe(r.hiding * 4);
+    expect(r.b.reads).toBe(r.reads);
+    expect(r.maskFaults).toEqual([]);
+    expect(r.bFaults).toEqual([]);
+    expect(r.faults).toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  it('THE STORED HALF OF THE PLANT (item 5c; item 2\'s absence): on every read of every stored place and its hiding records, both engines, both doors, Reveal off and DM, no served desc ends in a standing, names a withheld power (the lane\'s fold, case-blind) or carries the mask; no hidden or masked row carries a desc; no dmNote names a withheld power; no tension party is the mask', async () => {
+    const pool = await storedPoolOf();
+    const recs = [...pool.filter((x) => !hidesAny(x.t)).map((x) => ({ seed: x.seed, how: 'nothing hidden', t: x.t })), ...(await hidingRecords('stored'))];
+    const faults = []; const chair = []; let judged = 0;
+    for (const { seed, how, t } of recs) for (const dm of [false, true]) {
+      const got = await readOne(t, dm);
+      for (const eng of ['server', 'twin']) for (const door of ['page', 'import']) {
+        const d = got[eng][door];
+        if (!isRec(d)) { faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm}: no document`); continue; }
+        judged += 1;
+        for (const f of absenceFaults(t, d, { born: true })) {
+          // RULING 107 (3), THE CHAIR's (no cure here): a density rival's SERVED base naming its hidden host (named so; it reds)
+          const rival = f.plant === '(a)' && f.row && listsOf(t).some((x) => nameOf(x) === f.row && typeof x.contestsNiche === 'string');
+          (rival ? chair : faults).push(`${rival ? '107 (3), the chair\'s: ' : ''}${seed} (${how}) ${eng} ${door} dm=${dm} ${f.plant}: ${f.why}`);
+        }
+      }
+    }
+    note(`R5DP plant, stored half (${poolName('stored')}): records`, recs.length, '| engine-door-reads', judged, '| faults', faults.length, '| 107 (3), the chair\'s (a rival\'s served base naming its hidden host)', chair.length, J([...new Set(chair.map((x) => x.slice("107 (3), the chair's: ".length).split(' ')[0]))]),
+      faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '', chair.length ? `\n  107 (3): ${chair.slice(0, 12).join('\n  107 (3): ')}` : '');
+    expect(judged, 'both engines, both doors, Reveal off and DM, every stored record').toBe(recs.length * 8);
+    expect(faults).toEqual([]);
+    expect(chair, '107 (3), the chair\'s: a rival\'s served base naming its hidden host (built and run, not pinned)').toEqual([]);
+  }, POOL_TIMEOUT_MS);
+
+  it('THE publicProse COUNT (item 5c; rulings 107 (2), 111): by block key and field, every served publicProse block that holds a power\'s stored desc, its base or its standing (word for word or by the lane\'s fold), on hiding and nothing-hidden reads of the stored pool, per engine; a figure, never asserted non-zero (once (a\') serves no publicProse on a shared read it reads 0 by construction)', async () => {
+    await fidelityOver(await storedPoolOf(), 'stored'); // the nothing-hidden reads (cached: counted once)
+    await differentialOver('stored');
+    const cells = [...prose.cells.entries()].sort(([a], [b]) => (a < b ? -1 : 1));
+    note(`R5DP publicProse count (${poolName('stored')}): page reads judged`, J(prose.reads), '| of them serving publicProse', J(prose.served),
+      !Object.values(prose.served).some(Boolean) ? '| 0 BY CONSTRUCTION: no shared read serves publicProse' : `| cells (engine|reads|block|field|what|how = reads)\n  ${cells.map(([k, v]) => `${k} = ${v}`).join('\n  ')}`, prose.ex.length ? `\n  EX: ${prose.ex.join('\n  EX: ')}` : '');
+    expect(Object.values(prose.reads).reduce((a, x) => a + x, 0), 'the count walked the stored pool\'s page reads').toBeGreaterThan(0);
+    if (!Object.values(prose.served).some(Boolean)) expect(cells).toEqual([]);
   }, POOL_TIMEOUT_MS);
 
   it('THE ARM (item 0 (c); E128 (b), (c)) and ITEM 7\'s COUNT: every string a page reader writes (the recent-conflict sentence, the standing by S, the crime lists) names only SERVED rows (the lane\'s fold, every row the read hides out) and carries no mask, over the pool, the plants, act T and the hand hides, both engines, both doors, Reveal off and DM; the strata\'s and contenders\' own strings counted', async () => {
@@ -615,11 +905,11 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
         reads += 1;
         const wh = withheldOf(t, d);
         // power.label's census (item 6: off the composed form): a served label naming a withheld power or carrying the mask
-        for (const f of listsOf(d)) if (typeof f.powerLabel === 'string') { labels.n += 1; if (namesWithheld(f.powerLabel, wh, d) || f.powerLabel.includes(HIDDEN_POWER_MASK)) labels.hits += 1; }
+        for (const f of listsOf(d)) if (typeof f.powerLabel === 'string') { labels.n += 1; if (namesWithheld(f.powerLabel, wh, d) || hasMask(f.powerLabel)) labels.hits += 1; }
         // a SERVED base (the desc as served, its standing cut) naming a power the read hides, past the mask (counted, not
         // judged here: a served field, 212's; the player view only, where the reader is not the DM)
         if (!dm) for (const f of arr(d.powerStructure?.factions).filter((x) => isRec(x) && !isCut(x) && typeof x.desc === 'string')) {
-          if (namesWithheld(f.desc, wh, d)) { bases.n += 1; if (bases.ex.length < 6) bases.ex.push(`${seed} (${how}) ${eng} ${door} ${nameOf(f)}: ${J(f.desc).slice(0, 140)}`); }
+          if (namesWithheld(f.desc, wh, d)) { bases.n += 1; if (bases.ex.length < 6) bases.ex.push(`${seed} (${how}) ${eng} ${door} ${nameOf(f)} (${hitOf(f.desc, wh)}): ${J(f.desc).slice(0, 140)}`); }
         }
         const p = door === 'page' ? rd.page(clone(d)) : rd.served(d);
         const written = [];
@@ -633,8 +923,8 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
         for (const [path, s] of strings(p?.economicState?.safetyProfile?.crimeTypes, 'crimeTypes')) written.push([path, s]);
         for (const [what, s] of written) {
           strs += 1;
-          if (namesWithheld(s, wh, d)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${what}: names a withheld power ${J(wh)}: ${J(s).slice(0, 140)}`);
-          if (s.includes(HIDDEN_POWER_MASK)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${what}: carries the mask: ${J(s).slice(0, 140)}`);
+          if (namesWithheld(s, wh, d)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${what}: names a withheld power ${J(wh)} (${hitOf(s, wh)}): ${J(s).slice(0, 140)}`);
+          if (hasMask(s)) faults.push(`${seed} (${how}) ${eng} ${door} dm=${dm} ${what}: carries the mask (forms ${J(maskForms(s))}): ${J(s).slice(0, 140)}`);
         }
         if (door === 'page') {
           let ss;
@@ -643,11 +933,11 @@ describe('R5-DESC, the page half (R5D-PAGE-A): the standing cut on every read, r
           // handed back whole is the description's, cured or counted there)
           const held = new Set(strings(p).map(([, x]) => x));
           for (const [path, s] of ss) {
-            const nh = namesWithheld(s, wh, d); const mh = s.includes(HIDDEN_POWER_MASK);
+            const nh = namesWithheld(s, wh, d); const mh = hasMask(s);
             if (nh) strataHits.name += 1;
             if (mh) strataHits.mask += 1;
             if ((nh || mh) && !held.has(s)) strataHits.own += 1;
-            if ((nh || mh) && strataHits.ex.length < 6) strataHits.ex.push(`${seed} ${eng} dm=${dm} ${path}: ${J(s).slice(0, 120)}`);
+            if ((nh || mh) && strataHits.ex.length < 6) strataHits.ex.push(`${seed} ${eng} dm=${dm} ${path} (${nh ? hitOf(s, wh) : `mask forms ${J(maskForms(s))}`}): ${J(s).slice(0, 120)}`);
           }
         }
       }
