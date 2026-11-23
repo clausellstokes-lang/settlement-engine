@@ -25,7 +25,8 @@ vi.mock(`${process.env.RV6_SRC}/src/lib/supabase.js`, () => ({ supabase: { rpc: 
 const SRC = process.env.RV6_SRC;
 const SHARD = (process.env.RV9_SHARD || '0/1').split('/').map(Number);
 const FORM = process.env.RV9_FORM || 'born';
-const PICK = Number(process.env.RV9_PICK || 1); // the cost shard: every PICK-th birth of the shard
+const PICK = Number(process.env.RV9_PICK || 1);
+const DAILY = process.env.WD_DAILY === '1'; // the chair's N91: step 1 "DAILY" is WITHDRAWN; NAMES only by default // the cost shard: every PICK-th birth of the shard
 const OWNER = '11111111-1111-1111-1111-111111111111';
 const READER = '22222222-2222-2222-2222-222222222222';
 
@@ -198,8 +199,8 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           out.reads += 1;
           if (!d) { bump(out.noDoc, `${tag}|dm=${dm}`); continue; }
           // the owner-only slot and anything a reader's derivation could take for the owner's (EVERY read)
-          const mine = DL.deriveDailyLife(d, null);
-          if (Object.prototype.hasOwnProperty.call(mine.slots, OWNER_SLOT)) out.dmSlot.inSlots += 1;
+          const mine = DAILY ? DL.deriveDailyLife(d, null) : null;
+          if (mine && Object.prototype.hasOwnProperty.call(mine.slots, OWNER_SLOT)) out.dmSlot.inSlots += 1;
           const strs = []; const keys = []; walk(d, '', strs, keys);
           for (const [q, k] of keys) {
             if (k === OWNER_SLOT) { out.dmSlot.asKey += 1; bump(out.dmSlot.keyPaths, norm(q)); }
@@ -208,6 +209,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           const wh = withheldAllOf(doc, d);
           if (!wh.length) continue;
           out.hiding += 1; place.hidingReads += 1; bump(out.hidingBy, `${tag}|dm=${dm}`);
+          if (DAILY) { // ── DAILY (withdrawn, the chair's N91: off unless WD_DAILY=1; never run)
           // the never-there place, read the same way
           const whk = JSON.stringify([...wh].sort());
           if (!nevers.has(whk)) {
@@ -221,8 +223,8 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
             nevers.set(whk, nreads);
           }
           const nd = nevers.get(whk).find((r) => r.eng === eng && r.door === door)?.d;
-          if (!nd) { bump(out.noDoc, `never|${tag}|dm=${dm}`); continue; }
-          // ── DAILY
+          if (!nd) bump(out.noDoc, `never|${tag}|dm=${dm}`);
+          else {
           const theirs = DL.deriveDailyLife(nd, null).slots;
           for (const slot of DL.DAILY_LIFE_SLOTS) {
             const a = mine.slots[slot]?.text ?? null; const c = theirs[slot]?.text ?? null;
@@ -238,6 +240,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
             const a = pa[slot]?.text ?? null; const c = pc[slot]?.text ?? null;
             if (a !== c) { bump(out.dailyPage, slot); if (!out.dailyPagePairs[slot]) out.dailyPagePairs[slot] = { served: a, never: c, seed: b.seed, setting: key, dm, eng, door }; }
           }
+          } } // the DAILY block
           // ── NAMES: every served string by the lane's fold; the withheld ids as strings and as keys
           const ids = withheldIds(doc, d, wh);
           const hit = (q, kind, ex) => {
