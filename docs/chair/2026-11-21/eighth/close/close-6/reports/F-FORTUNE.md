@@ -147,3 +147,37 @@ None by the common law's letter (every red was listed and explained by its cause
 
 CONFIRMED: every count and value above, read from the runs and probes named. PLAUSIBLE: that the extinct premises are the
 fortune law's design (read from the labels' distributions, not bisected), and the factionStanding observation in bar4 (h).
+
+## F-FORTUNE-2 (CLOSE-6's ruling on f02f969c2 and the chair's two additions; one commit, `__SHA2__`, on f02f969c2)
+Written 2026-11-23, about 11:30 UTC (`date -u`). A KEEP or CURED row whose new value no longer carried its case's FORM was treated as a premise: it is
+re-picked by the case's predicate and the original line or pair is restored. Every value was read lit by a probe
+(`probes/f2.probe.test.js`, `e2.probe.test.js`, `surplus.probe.test.js` and their `.out` files).
+1. **tailDisplayCivicBatch1, ACCOUNT_KEPT r2r-city-0 -> r2r-hamlet-161**, which prints 'Crime keeps Dar-al-serai from more than
+   tolerating the Elder Council.' (the original form). No r2r-city of 200 and no census r2s town prints a crime sibling. The
+   lowest r2r seed of 200 whose account prints the form is hamlet-161 (161, 196).
+2. **tailDisplayCivic3V1, CURED r2r-city-37 (hall-as-subject) -> r2r-town-7**, the original pair restored ('The hall is at odds
+   with the Military/Guard.' -> '... the Guard.'). No r2r-city of 200 prints it. town-7 is the lowest census r2r seed that does
+   (r2r: town 7, 111, 188; metropolis 69, 106, 199; census r2s: 5 more).
+3. **tailDisplayCivic3V1, r2r-hamlet-27 ("answers to") -> r2r-hamlet-128**, the lowest r2r-hamlet of 200 (128, 143). Its hall
+   is the Feudal Stewardship. The pair is computed from DS-POW-6 'GM ADVISORY: the commander is a political actor' v3 (the
+   clause before the settlement sentinel): 'Military/Guard answers to the Feudal Stewardship' -> 'The Guard answers to the
+   Feudal Stewardship'. POW4H is dropped and POW6A replaces it.
+4. **bar4HistoryOneTelling (e2): STOP (this row only).** The predicate: the tension's form is twinnable, the seat is accepted at
+   the history step (the first `legitimacyHeldTensions` call reads isApproved true; mocked) and unapproved at the end. It holds
+   on no seed of any family the file uses:
+   - census r2r 0..59 and r2s 0..3, all sizes (720 births): 0.
+   - r2r 60..199, all sizes (840 births): 54 twinnable, 7 accepted at the history step, 47 unapproved at the end, 0 both.
+   - r2s 4..11, all sizes (720 births): 149 twinnable, 1 accepted at the history step, 148 unapproved at the end, 0 both.
+
+   The row stays as f02f969c2 left it (the twin re-pin, title "Endorsed at the end") for CLOSE-6 to rule. The original
+   /openly and widely questioned/ cannot be restored green.
+5. **tailDisplayCivicBatch4, KEPT r2r-city-27 -> r2r-city-95**, 'Surplus' restored. The predicate: the Ruling authority row bands
+   'surplus' and `rulingAuthorityCapOf` reads null. Lowest of r2r-city 200: 95, 149 (metropolis: 71; town: 4, 6, 16, ...). The
+   KEEP list guards one word per band at or below its cap, and 'Surplus' was pinned by no other row: a fifth, as the chair
+   ruled.
+6. **defenceParts, PRINTED_AT_BASE's header** now says that, since THE FLIP, the values are the lit births' labels. No value moves.
+
+Runs (through the mutex, lit, on the F-FORTUNE-2 tree):
+- The 18 files: 276 tests, 275 passed, 1 failed (the listed R13).
+- `tests/lint` whole: __LINT3__
+- `npx eslint` on the 4 changed files: exit 0.

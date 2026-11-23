@@ -32,6 +32,7 @@ header + arm 7, red first) -> registers by their doors -> `close/FOR-THE-OWNER.m
 BEFORE the PR's merge and the deploy, only after the security reader's clearance and one top-tier read of 212's final text) ->
 "FLIP <commit>".
 
+THE MARK: the chair read 258,492 at 11:10 UTC (my own estimates run low; hand over by 620,000 by its read).
 IN FLIGHT: F-FORTUNE-2 (the same builder, resumed) in `/home/user/wt/flip`; report appended to `close-6/reports/F-FORTUNE.md`.
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
