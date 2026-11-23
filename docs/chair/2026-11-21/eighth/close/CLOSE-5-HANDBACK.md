@@ -5,7 +5,43 @@ on 2026-11-23; the successor of CLOSE-4. Its law: `docs/chair/2026-11-23/ninth/p
 `docs/chair/2026-11-21/eighth/prompts/CLOSE-3.txt` (reading CLOSE-5 for CLOSE-3), both on `lane/chair-2026-11-08`.
 A successor reads those two, then this section, then `FLIP-PLAN.md`.
 
-## 0. WHERE THE SEAT STANDS (written 2026-11-23 07:14 UTC, read from date -u)
+## 0. WHERE THE FLIP STANDS — FOR CLOSE-6 (written 2026-11-23 08:08 UTC, read from date -u)
+
+THE FLIP BRANCH `lane/close-5-2026-11-23-flip` (worktree `/home/user/wt/flip`, node_modules and `.husky/_` linked), cut at the
+chair's PROVISIONAL "BUILD THE FLIP 5e63f2603"; its commits, oldest first, each with what proved it:
+| commit | what | proved by |
+|---|---|---|
+| f6cbaee69 | COMMIT 0 (F0): 15 budgets in 14 files, CI-FIT-3 comments; FENCE 1's raise DROPPED (N56: its file is frozen whole) | builder: goldenFreeze 90/90, `tests/lint` the line's three; THIS SEAT dark: 400 tests, 1 red listed (`powerEconomyFreshness` A4); TAKEN |
+| 2bc483fc8 | COMMIT 1 (F1): three dials + `powersList` row (light.sh) + the two lit whys (WHY-DRAFT, the chair's words) + arm 4 re-pinned with its tooth + the 14 dial pins + CONFIGS.diff (seatChainHolder, dualHat original arm forced to fortune 1) | builder: 12 proof files 14 red → 120/120, `tests/lint` the line's three; THIS SEAT lit: 120/120, mint 2/2; TAKEN (N65; seatContest (5)'s judgement accepted) |
+| 075fbdd89 | DOOR: page census `--grid --shrink` (r2s-insurgency-metropolis-0 loses P16three) | walker 14/14; TAKEN |
+| b98a85bd9 | F-SEAT: the seat lane's 10 files (goalSentencesOnceInTown's (u) born under law 1 per N66; the fixture unmoved; budget 240,000) | builder: 24 red → 162/162 lit (twice), `tests/lint` the line's three; this seat read the diff (8 expect out, 9 in, no skip) |
+| ec43beb7f | MERGE of the line's tip 9b0ffaa97 (points 106 to 112: 110 PROSE-D, 111 PRONOUN-2, 112 PROSE-D-2), plain, NO CONFLICT | IN FLIGHT: this seat's re-run in `/home/user/wt/check` (`scratchpad/rerun/merge.sh`): the 5 test files the line changed + F-SEAT's 10, lit; then `tests/lint` whole |
+| (next) | F-SEAT-2: `bar3PeopleTies` r2r-town-14 and `bar3PowersLines` C45570 RE-PICKED BY PREMISE (their KEEP re-pins proved less) | F-SEAT's builder resumed for it: its own commit on ec43beb7f |
+
+THE COMMITS LEFT, IN ORDER, each a builder's (an Agent of the seat's tier, no model override, ONE AT A TIME in `/home/user/wt/flip`),
+briefed by `close-5/briefs/FLIP-COMMON.md` + its own file; the seat reads each diff ONCE and re-runs it in `/home/user/wt/check`:
+1. F-FORTUNE (`briefs/F-FORTUNE.md`, `rows-FORTUNE.tsv` 39 rows: 3 dial pins done; `defenceParts` R13 STAYS RED; dualHat done in F1).
+2. F-JOIN (`briefs/F-JOIN.md`, `rows-JOIN.tsv` 83 rows: 2 dial pins done; pageCensus done; seatChainHolder done in F1; the SEAT row
+   of `powersReadTheRosterP31` and the 3 SEAT+FORTUNE rows in it by file).
+3. F9 commit B, the home page's sample town (`briefs/F9-PREPARED.md`): --check / --emit lf-033 / --check; its narration WHOLE for the owner.
+4. F9 commit A, the lit golden twin (from `lane/close-1-2026-11-22-golden-wip` ba0e1c288, no manifest: 3 rows red by name).
+5. F8 (`briefs/F8-DARKTEXT.md`): `fortuneLaw.js`'s "THE LAW IS DARK" paragraph and `fortuneLawWiring` arm 7, together, red first.
+6. Any register a commit reds (the lighting census by `LIGHTING_CENSUS_REFREEZE=<label> npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`
+   on the clean committed tree, then plainly), each its own commit.
+7. `close/FOR-THE-OWNER.md` (the seat's own, docs): from `FOR-THE-OWNER-DRAFT.md` + `close-5/OWNER-ITEMS.md` (item 1: FENCE 1's budget)
+   + the twin + the sample town's narration + the sizes of ONE build on the flipped tree (five figures beside the line's) + the
+   red-list rows to add (`defenceParts` R13 lit; the twin's three). SIGNED BY NOBODY.
+8. THEN "FLIP <commit>" to the chair with the list for the owner. If "PROSE-E" lands first the chair says so: merge it the same way.
+OPEN WITH THE CHAIR: the finding r2r-city-5 (lit: ties say the guild bought the hall; two cards print a war of arrests; 13g's rule
+does not cover it), sent with the merge line; not this seat's to cure.
+
+THE CHAIR'S STANDING RULES FOR THE FLIP: N56: an edit that would move a frozen surface (the golden-freeze register's surfaces, a
+golden, a reference snapshot, a tuning signature) is DROPPED and NAMED in `OWNER-ITEMS.md`, said in the line after that commit.
+N66: a door that would re-record a DIFFERENTIAL's reference from the flipped tree is NEVER RUN: the arm is born under its
+reference's own law; a door that re-takes a register of what the tree holds is run. N65: the fortune header and arm 7 together.
+A line to the chair after each lane's commit; "HANDS OVER" at a commit boundary past 570,000 by the seat's own count.
+
+## 0b. EARLIER STATE (history; SUPERSEDED by section 0 above)
 
 | ref | tip | state |
 |---|---|---|
