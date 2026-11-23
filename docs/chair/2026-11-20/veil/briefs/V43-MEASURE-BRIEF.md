@@ -47,6 +47,14 @@ COMPARER IS BUILT HERE: the served-versus-twin hash comparison is chain B's inst
    report every hit unmarked). For each OUT path: the source field's writer (grep `src/`), and the landed point that brought it (`git
    -C /home/user/join43 log --format='%h %s' 8f3b8bf4b..9b0ffaa97 -- <the writer>`: merge subjects name "point NN").
 
+## EVERY DOOR (the chair, 08:50 UTC; N76 "MAP-COVERT")
+Steps 1 and 2 read EVERY DOOR your instruments can reach: the gallery read (`get_gallery_dossier`), the link (`get_unlisted_dossier`),
+the import, AND THE MAP MEMBER (`get_gallery_map`, migration 211's function, not restated in 212: it builds each member from the
+sanitiser and `_gallery_veil` only and never calls `_gallery_apply_member_overrides`, the one home of the covert case). Say BY NAME
+which doors each measure read. A hit on the map member that is THE KNOWN FAULT (a covert tie's copy in `prominentRelationship` or
+`pressureSentence`, served at Reveal off) is LISTED APART; ANY OTHER HIT THERE: STOP and tell the seat at once. If reading the map member
+costs more than an hour of build, say so and read the other three doors first. Its cure is chain B's, not yours: build none.
+
 ## N8: THE DOCUMENT AS STORED
 The probe's births are born, not saved. ALSO run steps 1 and 2 on the same 140 records AS `saves.js` STORES THEM: find how the lane
 does it (`docs/chair/2026-11-20/veil/out/v33/legacy/stored.sh` on `origin/lane/veil-42-2026-11-23-r4ids-wip`, read with `git show`;
