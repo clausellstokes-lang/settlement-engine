@@ -214,9 +214,9 @@ export const LEAVES = Object.freeze({
   }),
   beastsReadiness: leaf({ layer: 3, module: 'domain/facts/beastsReadiness.js', exported: 'beastsReadinessOf', call: 'record', reads: ['config', 'defenseProfile'] }),
   leaderLead: leaf({ layer: 3, module: 'domain/facts/leaderLead.js', exported: 'leaderLeadOfRecord', call: 'record', reads: ['powerStructure'] }),
-  powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure', 'config', '_config'],
-    note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
+  powersList: leaf({ layer: 4, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure', 'config', '_config', 'economicState', 'npcs', 'stress', 'stressors', 'tier'],
+    note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'availableServices', 'config', 'economicState', 'economicViability', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config); CLOSE-SWEEP S2: and the viability (layer 3); BAR8 J-INCOME item 4: a live house's printed service row (dealtInHere reads availableServices, stratum 1)
   // BAR6-HOUSES (the chair's ruling SV1): a sovereign given by the government, a power, a house, a person or the founding, or a
   // war or an occupation (`sovereign.js`); read at the settled record (the houses' late re-read)

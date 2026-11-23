@@ -294,14 +294,14 @@ export const PIPELINE_REACHERS = Object.freeze({
  * every config the product produces.
  *
  * ⛔ THE SEAT LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (CS10, U1). Its dial
- * sits at the dormant default, so its mint is `{}` and deletes nothing: without its own
+ * sat at the dormant default, so its mint was `{}` and deleted nothing: without its own
  * destructure, an imported seat-law world's configuration loaded through the Library and
- * regenerated would birth a NEW world under the seat law on a build whose dial is dark.
+ * regenerated would have birthed a NEW world under the seat law on a build whose dial was dark.
  *
  * ⛔ THE FORTUNE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (FS5, FORTUNE-1 U1).
- * Its dial sits at the dormant default, so its mint is `{}` and deletes nothing: without its own
+ * Its dial sat at the dormant default, so its mint was `{}` and deleted nothing: without its own
  * destructure, an imported fortune-law world's configuration loaded through the Library and
- * regenerated would birth a NEW world under the fortune law on a build whose dial is dark.
+ * regenerated would have birthed a NEW world under the fortune law on a build whose dial was dark.
  *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
@@ -360,7 +360,7 @@ export function birthConfig(config) {
  * with no dial moving at all (the Library's "Apply Saved Configuration &
  * Regenerate" hydrates the wizard form from a saved `settlement._config`, and
  * `updateConfig` admits the underscore family by prefix). A PREVIEW or an
- * EXECUTOR can therefore meet a lit config on a build whose dial is dark. Every
+ * EXECUTOR could therefore meet a lit config on a build whose dial was dark. Every
  * row of `PIPELINE_REACHERS` names, in `payloadAwaitedBy`, the module that
  * awaits this on its behalf, and `tests/lint/densityCreateBoundary.walker.test.js`
  * holds those names to the tree.
@@ -562,11 +562,12 @@ export const GENERATION_LAWS = Object.freeze({
     why: 'the seat law (CS10: the form of government, the holder of the seat and the person in '
       + 'it read apart), spread by birthConfig beside the other two, with its incoming marker '
       + 'clamped off, so every classified BIRTH mints it and no PREVIEW or re-derivation can. THE '
-      + 'DIAL IS DARK, and that is the chair\'s ruling (a) of 2026-11-20, not an omission: the mint '
-      + 'writes not one config byte, so no born world, golden or born fixture moves while every '
-      + 'unit of the train proves itself on its own explicit _seatLawVersion: 2 arm; lighting it '
-      + 'is the last unit (U8), on the owner\'s word, the living-content precedent. Its module is '
-      + 'a zero-import leaf, so the edge brings nothing behind it.',
+      + 'DIAL IS LIT since 2026-11-23 (the first deploy\'s finish line, which the owner left to the '
+      + 'chair on 2026-11-22: both laws landed and lit; E30), so the mint writes _seatLawVersion: 2 '
+      + 'on every classified BIRTH and a new place reads its form of government, the holder of its '
+      + 'seat and the person in it apart; a saved place keeps the law it was born under. This row '
+      + 'read "THE DIAL IS DARK, and that is the chair\'s ruling (a) of 2026-11-20, not an omission" '
+      + 'until that day. Its module is a zero-import leaf, so the edge brings nothing behind it.',
   }),
   fortune: Object.freeze({
     mint: 'newSettlementFortuneLaw',
@@ -576,11 +577,13 @@ export const GENERATION_LAWS = Object.freeze({
     wiring: 'WIRED',
     why: 'the fortune law (FS5: a place\'s fortune and its public standing read against its own '
       + 'size), spread by birthConfig beside the others, with its incoming marker clamped off, so '
-      + 'every classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS DARK, and '
-      + 'that is the chair\'s ruling of 2026-11-20 10:33 UTC, not an omission: the mint writes not '
-      + 'one config byte, so no born world, golden or born fixture moves while every unit of the '
-      + 'build proves itself on its own explicit _fortuneLawVersion: 2 arm; lighting it is the '
-      + 'owner\'s word, and never before the seat\'s law (the chair\'s ruling 3). Its module is a '
-      + 'zero-import leaf, so the edge brings nothing behind it.',
+      + 'every classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS LIT since '
+      + '2026-11-23 (the first deploy\'s finish line, which the owner left to the chair on '
+      + '2026-11-22: both laws landed and lit; E30), in the same commit as the seat\'s law and never '
+      + 'before it (the chair\'s ruling 3), so the mint writes _fortuneLawVersion: 2 on every '
+      + 'classified BIRTH and a new place\'s fortune and public standing are read against places of '
+      + 'its own size; a saved place keeps the law it was born under. This row read "THE DIAL IS '
+      + 'DARK, and that is the chair\'s ruling of 2026-11-20 10:33 UTC, not an omission" until that '
+      + 'day. Its module is a zero-import leaf, so the edge brings nothing behind it.',
   }),
 });

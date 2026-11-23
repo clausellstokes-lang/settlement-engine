@@ -24,7 +24,7 @@
  *   3. NO MIGRATION, DELIBERATELY. A WORLD BORN BEFORE THE LIGHT NEVER CHANGES: it never acquires
  *      this law by upgrade or by any stamp on a read, save, load, regen, undo or import path. Its
  *      law travels in its own persisted `config` (echoed on `_config`), so every replay obeys the
- *      law it was BORN under, and while the dial is dark zero bytes of any born town move.
+ *      law it was BORN under, and while the dial was dark zero bytes of any born town moved.
  *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_FORTUNE_LAW_VERSION` is the only place a new world's
  *      fortune law is chosen, and the mint reads it and nothing else, so lighting it and reverting
  *      it are the same one-line act.
@@ -82,7 +82,7 @@ export const SIZE_RELATIVE_FORTUNE_LAW_VERSION = FORTUNE_LAW_VERSIONS[1];
  *  kernel the day that dial was lit): a dial's type is the SPACE of versions, never today's
  *  setting, so the mint's dormant comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
+export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 
 /**
  * ⭐ THE FORTUNE LAW'S ONE TUNING TABLE. EVERY VALUE IS A DRAFT, signed by none (the proposal's

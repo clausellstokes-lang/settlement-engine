@@ -55,11 +55,13 @@ const LIT_CASES = Object.freeze(CASES.map(([seed, ...rest]) => [({
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s political mass', () => {
-  it('a small place keeps the power the fold of the office\'s face into the leader\'s house cut', () => {
+  it('a small place keeps the power the fold of the office\'s face into the leader\'s house cut (the fortune law forced to 1: the dark arm)', () => {
     const misses = [];
     for (const [seed, settType, stress, power] of CASES) {
       const config = stress ? { ...DIALS, settType, selectedStresses: [stress], selectedStressesRandom: false } : { ...DIALS, settType };
-      const s = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+      // the fortune law FORCED TO 1 in the arm's own config (the chair's Q4): this arm is the reviewer's eight as they were
+      // found, under law 1; the lit arm below carries the fortune law's own eight
+      const s = generateSettlementPipeline({ ...birthConfig(config), _fortuneLawVersion: 1 }, null, { seed, customContent: {} });
       const roster = (s.powerStructure?.factions || []).map((f) => f.faction);
       if (!roster.includes(power)) misses.push(`${seed}: ${power} is not on the page (${roster.join(', ')})`);
     }

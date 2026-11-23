@@ -1,21 +1,21 @@
 /**
- * seatLawWiring.test.js — THE SEAT LAW (CS10), WIRED AND DARK (SEAT-1 train 1, unit U1).
+ * seatLawWiring.test.js — THE SEAT LAW (CS10), WIRED, LANDED DARK, LIT AT THE FLIP (SEAT-1 train 1, unit U1).
  *
  * ⭐ WHAT THIS FILE PROVES. A third birth law, `_seatLawVersion`, rides the create boundary
  * beside the density and living-content laws, shaped exactly like the living-content law, so
  * every later unit of the train can ask "was this world born under the seat law?" through ONE
- * reader (`src/domain/seat/seatLaw.js`). It lands DARK: its dial sits at the default, so
- * `birthConfig` mints nothing and no byte of any born world, golden or born fixture moves. The
- * light is a later unit (U8), on the owner's word.
+ * reader (`src/domain/seat/seatLaw.js`). It landed DARK: its dial sat at the default, so
+ * `birthConfig` minted nothing and no byte of any born world, golden or born fixture moved. The
+ * light came last (U8), at the flip of 2026-11-23.
  *
  * THE ARMS, in the brief's order:
- *   1. CREATE (dark, the product path) — no `_seatLawVersion` on a birth (its own key only: the one
- *      pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g), E61 (5)).
- *   2. CREATE/CLAMP — an incoming `_seatLawVersion: 2` (the Library-Load hop, walked) is clamped
- *      away: an imported marker never decides a birth.
+ *   1. CREATE (lit, the product path) — `_seatLawVersion: 2` on every birth (its own key only: the
+ *      one pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g), E61 (5)).
+ *   2. CREATE/CLAMP (lit) — an incoming `_seatLawVersion` (the Library-Load hop, walked) is clamped
+ *      away and the dial's own is minted: an imported marker never decides a birth.
  *   3. READ — the closed membership read, from a config, a settlement's `config` and a
  *      settlement's `_config`; everything that is not an enabled version fails closed to 1.
- *   4. THE REGISTER — `GENERATION_LAWS.seat` is a WIRED row whose why says the dial is dark.
+ *   4. THE REGISTER — `GENERATION_LAWS.seat` is a WIRED row whose why says the dial is lit.
  *   5. CREATE (lit, fired deliberately) — through the living-content file's own seam (a mocked
  *      law module, the boundary re-imported), the mint reaches `birthConfig` and the clamp does
  *      not defeat it; and the real reader still reads a markerless world as 1 under a lit dial.
@@ -71,58 +71,66 @@ function tearDownLitSeatLaw() {
 }
 
 describe('the seat law (CS10) is WIRED and lands DARK', () => {
-  it('the vocabulary: one key, two versions, the dial at the default', () => {
+  it('the vocabulary: one key, two versions, the dial lit', () => {
     expect(SEAT_LAW_CONFIG_KEY).toBe('_seatLawVersion');
     expect([...SEAT_LAW_VERSIONS]).toEqual([1, 2]);
     expect(Object.isFrozen(SEAT_LAW_VERSIONS)).toBe(true);
     expect(DEFAULT_SEAT_LAW_VERSION).toBe(1);
     expect(HOLDER_SEAT_LAW_VERSION).toBe(2);
+    // the lit dial (the flip, 2026-11-23): this arm pinned the default and a mint of {} until that day
     expect(
       NEW_SETTLEMENT_SEAT_LAW_VERSION,
-      'the seat dial is not at the default. Lighting it is U8, on the owner\'s word, and moves'
-      + ' every born pin at once; revert this arm with it, never before.',
-    ).toBe(DEFAULT_SEAT_LAW_VERSION);
-    expect(newSettlementSeatLaw()).toEqual({});
+      'the seat dial is not lit. It was lit at the flip (2026-11-23), and reverting it is the same'
+      + ' one line that moves every born pin at once; revert this arm with it, never before.',
+    ).toBe(HOLDER_SEAT_LAW_VERSION);
+    expect(newSettlementSeatLaw()).toEqual({ _seatLawVersion: 2 });
   });
 
-  // ── 1. CREATE (dark) ─────────────────────────────────────────────────────────
-  it('1. CREATE (dark): birthConfig carries no _seatLawVersion — its own key only, on a config, null and undefined', () => {
+  // ── 1. CREATE (lit) ──────────────────────────────────────────────────────────
+  it('1. CREATE (lit): birthConfig carries _seatLawVersion: 2 — its own key only, on a config, null and undefined', () => {
     const born = birthConfig({ ...CONFIG });
-    expect(Object.hasOwn(born, SEAT_LAW_CONFIG_KEY)).toBe(false);
-    expect(born[SEAT_LAW_CONFIG_KEY]).toBeUndefined();
-    expect(seatsByHolder(born)).toBe(false);
+    // the lit dial (the flip, 2026-11-23): this arm pinned the marker absent until that day
+    expect(Object.hasOwn(born, SEAT_LAW_CONFIG_KEY)).toBe(true);
+    expect(born[SEAT_LAW_CONFIG_KEY]).toBe(HOLDER_SEAT_LAW_VERSION);
+    expect(seatsByHolder(born)).toBe(true);
     // ⭐ THE WHOLE VALUE OF `birthConfig(null)` IS PINNED ONCE, NOT HERE (CLOSE-1 JOIN, the chair's E61 (5),
     // COMMON-RULES 14 (c)): `tests/domain/generationLawsSavedPlace.test.js` (g) pins it from every register row's own
-    // mint, dark and lit. This arm keeps the seat law's own key: absent on every birth while its dial is dark.
+    // mint, dark and lit. This arm keeps the seat law's own key: present on every birth since its dial was lit (absent
+    // while it was dark).
     for (const empty of [null, undefined]) {
-      expect(Object.hasOwn(birthConfig(empty), SEAT_LAW_CONFIG_KEY), `birthConfig(${empty})`).toBe(false);
+      expect(birthConfig(empty)[SEAT_LAW_CONFIG_KEY], `birthConfig(${empty})`).toBe(HOLDER_SEAT_LAW_VERSION);
     }
   });
 
-  // ── 2. CREATE/CLAMP ──────────────────────────────────────────────────────────
-  it('2. CREATE (THE CLAMP): an incoming _seatLawVersion: 2 is clamped away — an imported marker never decides a birth', () => {
-    // Each hop of the Library-Load path is measured, so this arm cannot go green because the
-    // path stopped existing: the saved config survives the migration with its marker, and the
-    // store's `updateConfig` admits the underscore family by prefix.
-    const hydrated = migrateSettlementConfig({ ...CONFIG, [SEAT_LAW_CONFIG_KEY]: 2 });
+  // ── 2. CREATE/CLAMP (lit) ────────────────────────────────────────────────────
+  it('2. CREATE (THE CLAMP, LIT): an incoming _seatLawVersion is clamped away and the dial mints 2 — an imported marker never decides a birth', () => {
+    // THE LIT CLAMP (the flip, 2026-11-23): this arm drove an incoming 2 against the dark dial until that day. Lit, the
+    // mint re-adds 2, so the adversarial direction is now an imported LAW-1 world's marker (the living-content file's
+    // lit clamp arm's shape). Each hop of the Library-Load path is measured, so this arm cannot go green because the
+    // path stopped existing: the saved config survives the migration with its marker, and the store's `updateConfig`
+    // admits the underscore family by prefix.
+    const hydrated = migrateSettlementConfig({ ...CONFIG, [SEAT_LAW_CONFIG_KEY]: DEFAULT_SEAT_LAW_VERSION });
     expect(
       hydrated[SEAT_LAW_CONFIG_KEY],
       'migrateSettlementConfig stopped carrying the marker — this arm no longer tests the'
       + ' Library-Load path it was written for',
-    ).toBe(HOLDER_SEAT_LAW_VERSION);
+    ).toBe(DEFAULT_SEAT_LAW_VERSION);
     expect(isAllowedConfigKey(SEAT_LAW_CONFIG_KEY)).toBe(true);
-    // THE POSITIVE CONTROL: unclamped, that config really is a seat-law world.
-    expect(seatsByHolder(hydrated)).toBe(true);
+    // THE POSITIVE CONTROL: unclamped, that config really is a law-1 world.
+    expect(seatsByHolder(hydrated)).toBe(false);
+    expect(resolveSeatLawVersion(hydrated)).toBe(DEFAULT_SEAT_LAW_VERSION);
 
     const born = birthConfig(hydrated);
     expect(
-      Object.hasOwn(born, SEAT_LAW_CONFIG_KEY),
-      'the marker survived birthConfig — a birth\'s seat law is no longer the dial\'s law',
-    ).toBe(false);
-    expect(seatsByHolder(born)).toBe(false);
-    expect(resolveSeatLawVersion(born)).toBe(DEFAULT_SEAT_LAW_VERSION);
+      born[SEAT_LAW_CONFIG_KEY],
+      'the incoming marker survived birthConfig — a birth\'s seat law is no longer the dial\'s law',
+    ).toBe(HOLDER_SEAT_LAW_VERSION);
+    expect(seatsByHolder(born)).toBe(true);
+    expect(resolveSeatLawVersion(born)).toBe(HOLDER_SEAT_LAW_VERSION);
+    // …and a marker for a version that HAS NOT SHIPPED loses too, the same rule a future v3 would arrive by.
+    expect(birthConfig(migrateSettlementConfig({ ...CONFIG, [SEAT_LAW_CONFIG_KEY]: 3 }))[SEAT_LAW_CONFIG_KEY]).toBe(HOLDER_SEAT_LAW_VERSION);
     // The clamp takes the marker and NOTHING ELSE: every other incoming key is carried, and the
-    // two lit laws add exactly their own keys.
+    // lit laws add exactly their own keys.
     expect(born).toEqual(birthConfig(migrateSettlementConfig({ ...CONFIG })));
   });
 
@@ -160,7 +168,7 @@ describe('the seat law (CS10) is WIRED and lands DARK', () => {
   });
 
   // ── 4. THE REGISTER ──────────────────────────────────────────────────────────
-  it('4. GENERATION_LAWS.seat is a WIRED row that says the dial is dark, and why', () => {
+  it('4. GENERATION_LAWS.seat is a WIRED row that says the dial is lit, and why', () => {
     const row = GENERATION_LAWS.seat;
     expect(row, 'the create boundary carries no seat-law row').toBeTruthy();
     expect(row.configKey).toBe('_seatLawVersion');
@@ -170,8 +178,16 @@ describe('the seat law (CS10) is WIRED and lands DARK', () => {
     expect(row.module).toBe('src/domain/seat/seatLaw.js');
     expect(row.wiring).toBe('WIRED');
     expect(String(row.why).length).toBeGreaterThan(60);
-    expect(row.why).toMatch(/\bdark\b/i);
+    // the lit why (the flip, 2026-11-23): this arm matched /\bdark\b/i until that day
+    expect(row.why).toMatch(/\bDIAL IS LIT\b/);
     expect(row.why).toMatch(/owner/i);
+    // THE TOOTH (the chair's Q6): with the quoted history cut out, the text holds no "dark"
+    const history = /This row read ".*" until that day\./;
+    expect(row.why).toMatch(history);
+    const outside = String(row.why).replace(history, '');
+    expect(outside).toMatch(/\bDIAL IS LIT\b/);
+    // anchored: the quoted history is matched above and the lit sentence survives the cut, so the read is live
+    expect(outside).not.toMatch(/\bdark\b/i);
   });
 
   // ── 5. CREATE (lit, fired deliberately) ──────────────────────────────────────
