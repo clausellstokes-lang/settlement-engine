@@ -1,0 +1,4 @@
+start 2026-11-23T11:58:29Z tree /home/user/wt/mapcovert at 748e715d19bb2a32699a696a52fb3a9a54b02979 tpl v28tpl set stored /var/tmp/v18/out/v44/stored-today U=1 M=0 ASSERT=map
+end 2026-11-23T12:04:18Z
+start 2026-11-23T12:04:19Z tree /home/user/wt/mapcovert at 748e715d19bb2a32699a696a52fb3a9a54b02979 tpl v28tpl set stored /var/tmp/v18/out/v44/stored-master U=1 M=0 ASSERT=map
+end 2026-11-23T12:08:27Z

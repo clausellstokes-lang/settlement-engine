@@ -1,0 +1,38 @@
+MAPCOVERT-CD plant: (c) and (d) agree on both keys, three markers
+MAPCOVERT-CD places: (c) and (d) agree on both keys, three markers
+MAPCOVERT-DM plant | gallery | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | link | unmarked | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM plant | map | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | mapImport | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | gallery | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | link | default | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM plant | map | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | mapImport | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | gallery | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | link | hand | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM plant | map | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM plant | mapImport | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | gallery | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | link | unmarked | DM | prominentRelationship: absent | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | map | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | mapImport | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | gallery | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | link | default | DM | prominentRelationship: absent | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | map | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | mapImport | default | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | gallery | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | link | hand | DM | prominentRelationship: absent | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | map | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-town-wartime-0-29 | mapImport | hand | DM | prominentRelationship: the stored copy | pressureSentence: the stored sentence
+MAPCOVERT-DM r3m-city-none-1-107 | gallery | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | link | unmarked | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | map | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | mapImport | unmarked | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | gallery | default | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | link | default | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | map | default | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | mapImport | default | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | gallery | hand | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | link | hand | DM | prominentRelationship: absent | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | map | hand | DM | prominentRelationship: the stored copy | pressureSentence: absent
+MAPCOVERT-DM r3m-city-none-1-107 | mapImport | hand | DM | prominentRelationship: the stored copy | pressureSentence: absent
