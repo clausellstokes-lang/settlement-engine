@@ -74,6 +74,11 @@ fidelity 48 faults, reader S gives a density rival a standing its stored desc la
 40, the plant's 128); the plant's 4 = 107 (3) (RIVAL's). The stored plant + publicProse count jobs still running at 12:42. OWED: B2's
 re-run queue (`/var/tmp/v18/t2/stored-v40/logs/full2/jobs.txt`: the 7 dead jobs + the fixed arms), `tests/lint` + `tests/copy` whole:
 THIS SEAT runs them after L1 (mutex-order.txt).
+R5D-SSKIP (ruling 123): brief `briefs/R5D-SSKIP-BRIEF.md` f3cdc6aa3; worktree `/home/user/wt/sskip`, branch
+`lane/veil-40-2026-11-23-sskip-wip` cut at aa54a6791 (the code branch with B2); the one writer of `pageRederive.js` now; DISPATCHED
+after the brief's push; its first measure (three checks) before any edit; mutex-order "WAIT" until the seat flips it.
+B2's BATCH (logs/full1) at 12:58: storedS0 and S2 ended (each 3 failed of 4 run: the stored arms B2 named); storedS1 still running
+(97% CPU since 09:30): IT HOLDS THE LOCK; RIVAL waits behind it.
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -155,6 +160,11 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     once the rival rule holds; S skips a row carrying it; 212 + twin + registry row). NO BIRTH MOVES BY A BYTE. (3) THE MARK: the
     chair's read 377,717 at 12:08 (+55,988 an hour); this seat passes 570,000 near the end of the stacked proof: PART 42 section 1
     kept current for a successor; a builder's report at most 60 lines; the successor's start message drafted this hour.
+123. THE CHAIR, 12:50 (N95): THE SERVED FACT TAKEN: a row whose served base equals one of the seven `RIVAL_DESC_OF_HOST` texts exactly
+    gets no standing from S; PAGE-ONLY (212, twin, registry unchanged; `contestsNiche` withheld). Conditions: (a) the three checks first
+    (else STOP: N94's lean); (b) S reads the seven by IMPORT from their one table; (c) a pin: no natural row's base equals one of the
+    seven, re-counted on born and stored pools; (d) the import's save in the same arm; (e) red first on the 48 and a plant; the
+    never-there differential and the share-class counts re-run after. Rides in the unit before "TIP?".
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -172,3 +182,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 11:44 ruling 121 (L1); the cost told; 11:44 PART 42.
 - 12:07 the chair's push-hygiene rule (`/var/tmp/v18/out/v40/push.sh`, guarded); 12:41 B2 returned; 12:43 pushed, the chair told.
 - 12:44 ruling 122; 12:48 the line on (2) sent.
+- 12:50 ruling 123; 12:59 SSKIP's brief (f3cdc6aa3), worktree, SSKIP dispatched; mutex-order rewritten (SSKIP, T5 WAIT).
