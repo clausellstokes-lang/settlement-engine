@@ -29,10 +29,11 @@
  *      fortune law is chosen, and the mint reads it and nothing else, so lighting it and reverting
  *      it are the same one-line act.
  *
- * ⛔ THE LAW WAS LIT WITH THE SEAT'S LAW, IN ONE COMMIT, NEVER BEFORE IT (the flip, 2026-11-23), ON
- * THE OWNER'S WORD, NOT A LANE'S. The build landed dark (the chair's rulings of 2026-11-20 10:33
- * UTC): every unit proved its behaviour on its own fixture arm that set `_fortuneLawVersion: 2`
- * explicitly AFTER `birthConfig`, and the lit dial moved every born pin of every later unit at once.
+ * ⛔ THE LAW WAS LIT WITH THE SEAT'S LAW, IN ONE COMMIT, NEVER BEFORE IT (the flip, 2026-11-23), AT
+ * THE FIRST DEPLOY'S FINISH LINE, WHICH THE OWNER LEFT TO THE CHAIR ON 2026-11-22 (E30), NEVER A
+ * LANE'S. The build landed dark (the chair's rulings of 2026-11-20 10:33 UTC): every unit proved
+ * its behaviour on its own fixture arm that set `_fortuneLawVersion: 2` explicitly AFTER
+ * `birthConfig`. A lit dial before then would have moved every born pin of every later unit at once.
  *
  * ⛔ THE FORTUNE LAW IS NEVER LIT BEFORE THE SEAT'S LAW (`src/domain/seat/seatLaw.js`, the seat
  * lane): under the old contest code a weaker incumbent in a crisis-born large place amplifies a
