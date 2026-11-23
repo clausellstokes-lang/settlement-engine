@@ -1,7 +1,28 @@
-# R4I-TONIGHT-2 HANDBACK (VEIL-42, chain B; rulings 40.3 (2), 40.7 (2), (3), 40.8 (3)). STOPPED EARLY: the run was ended at about 06:58 UTC, before any of my heavy runs held the mutex.
+# R4I-TONIGHT-2 HANDBACK (VEIL-42, chain B; rulings 40.3 (2), 40.7 (2), (3), 40.8 (3), N69 (4)). DONE: C, N, L, D (the sections below run newest first).
 
-Branch `lane/veil-42-2026-11-23-tonight-wip` (local, never pushed), cut at 9f9b819f7. Brief `briefs/R4I-TONIGHT-2-BRIEF.md`
-at 015b3c020 (with its ADDENDUM, N59). No message from the seat about the "77" reached me.
+Branch `lane/veil-42-2026-11-23-tonight-wip` (never pushed by me; the seat pushes it), cut at 9f9b819f7. Brief `briefs/R4I-TONIGHT-2-BRIEF.md`
+at 015b3c020 (with its ADDENDUM, N59). The "77" was M's instrument, not in my files (the seat, N69 (4), 08:37).
+
+## SUMMARY AT THE LAST COMMIT
+- C: the want keyed on the card's name only (`castWantKeyOf(name)`); both callers. RED FIRST shareRenderTwice (9f9b819f7):
+  MAIN 3 non-id rows (4 in the first run), all the Tonight want line, TONIGHT arm 3; GREEN 5 of 5. THE ARM, the twin the
+  projection, red -> green: the 140 (a) twin2 58 -> 0, server2 61 -> 0, (b) 58 -> 0; the pool (a) 729 -> 0, 719 -> 0,
+  (b) 723 -> 0; (c) role-on-both moved 0 on the 140 (0 such persons), on the pool 0-2 a read -> 0; goal withheld (named,
+  not red) 16 a read on the 140, 554 on the pool. OWNER-MOVES: 140 0, pool 2 (named). Re-pinned: tonightSheetOnce (its key).
+  No golden, snapshot or register moved; none named. CONFIRMED.
+- N: netCurrentExtractorAnchor red 1 of 7 -> green 7 of 7; criminalSwitchSalt 6 of 6. CONFIRMED.
+- L (hold E at 7ea3dfc69; src and tests as at the last commit): `tests/lint` WHOLE 51 failed of 3,304 (17 files) = the tip's 48
+  by name, every one still red (chainPrintSites 1, domainAnyCastBaseline 4, factLayers 1, moduleScopeCwdRatchet 1,
+  negativeAssertionAnchor 1, noLegacyFactionReaders 2, observedShapeReaders 2, presumedThings 1, presumptionClasses 1,
+  proseDrawnAnchors 1, proseWiringCensus 2, rosterChoiceComposedHosts 26, seedLoopTotality 1, slugifyIdiomBaseline 1,
+  sovereigntyLightingContract 1, styleLaw 1, writerReach 1) + writerReach's THREE new (the register, the banked cohort, the
+  mutants: the chair's, left); netCurrentExtractorAnchor no longer red (N). Nothing else new. `logs/lint-whole-summary.txt`.
+  `tests/copy` WHOLE: 2 failed of 172 (voiceMechanics: `galleryRosterChoices.js` em 0 -> 1, `gallerySecondHomes.js` bang
+  0 -> 18; total 26 > 15): NEITHER FILE IS MINE (this lane's src diff from 9f9b819f7 is tonightSheet.js and
+  crisisFactFindings.js, comments and code only, no string literal with `!` or an em dash), so both reds stand at 9f9b819f7:
+  0 new. `logs/copy-whole-summary.txt`. CONFIRMED by name; the copy reds' origin PLAUSIBLE (read from the diff, not re-run).
+- D: typecheck ratchet 167 of ceiling 167 OK; domain strict 1,113 of ceiling 1,113 OK; eslint 0 on the five src/tests files
+  touched. The 30 d-files 238 of 238 (hold A). N57: the grep of tests/ for every moved line and key is in "C" below.
 
 ## RESUMED 08:37 UTC (the seat: N69 (4)); STATE AT THE WIP COMMIT (10:2x UTC)
 - HOLD A (07:45-08:00) and HOLD B (08:00-08:34) ran. shareRenderTwice RED FIRST (the patched harness on 9f9b819f7, R2):

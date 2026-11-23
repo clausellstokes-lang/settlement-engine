@@ -1,0 +1,8 @@
+      Tests  2 failed | 170 passed (172)
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > total debt never grows past its committed budget
+ Test Files  1 failed | 14 passed (15)
++   "src/domain/display/galleryRosterChoices.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/display/gallerySecondHomes.js: baseline em:0 bang:0 → current em:0 bang:18",
+src/domain/display/galleryRosterChoices.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/display/gallerySecondHomes.js: baseline em:0 bang:0 → current em:0 bang:18
