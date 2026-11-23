@@ -682,3 +682,48 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   line of the flip's code before "BUILD THE FLIP <tip>". THE CHAIR'S ELEVENTH AND TWELFTH PUSHES (598969241,
   a989741e9) ENDED exit=0 at 03:48 and 03:54 UTC: CONFIRMED from their logs.
   SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, PROSE-6, CLOSE-5.
+- 2026-11-23 04:02 UTC · N43 · PROSE-6's SECOND STOP, RULED (its message of 03:55; the chair's of 03:57 UTC). The seat ran the page
+  itself at its -wip's f7784d722: dz-town-2 prints DS-GEN-17 GARRISONED v2 ("The town pays wages for its defense as
+  well as keeping its walls.") beside DS-DEF-2 WEAK v1, not v2: the measure's pattern matches v1 too (the seat's
+  error of reading, said by it; dz-town-36 printed v2 and is cured by N37's line). **Decided:** v1 IS RE-WORDED IN
+  PLACE, on its own marks `[ledger · guardPresence · prosperity: ≤ comfortable]`, through a second WORD_CORRECTIONS
+  row: was "{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and
+  whoever is called to make one knows it." AND BECOMES "{settlement} has nothing laid by to pay for a long defence,
+  and whoever is called to make one knows it." (the seat's draft, taken). The tooth pins v1's and v2's OLD words at
+  0 pages, by template; no pair of variant ids is left. THE MEASURE'S OWN PATTERN IS NOT TOUCHED: WAGES reads 0
+  because the words changed. **Why:** beside "pays wages" a reader takes "always short of money" as the opposite
+  claim; what the cell knows is that nothing is laid by. ALSO RULED AT 03:48: the WORD_CORRECTIONS row of
+  `scripts/generate-dossier-state-prose.mjs` IS THE MEANS for a line changed in place (the door's own way; the
+  DS-POW-2 precedent); the manifest grows by the two rows. Built so far on its -wip: eed24a1cf (every `force: paid`
+  mark gone; W1 to W3 withdrawn; v2 re-worded), f7784d722 (the tooth). SAID TO THE OWNER with both sentences.
+- 2026-11-23 04:02 UTC · N44 · R4-IDS HAS A GAP OF ITS OWN CURE (VEIL-38, 04:00 UTC; R4I-PAGE-4 stopped at its budget; its diff read by
+  the seat, no fault; -wip f7f1cfe8c; nothing under src or supabase changed). BY ITS RUNS: 22 of 27 id pins
+  re-stated; `galleryServerVeil` 18 of 18 with the twelfth register row; THE MASK'S TWO CONDITIONS (N32 (e)) MET: 0
+  fresh-shaped stored ids on both pools; whole tokens; THE OLD MASK HAD MISSED THREE PLANTS THE NEW ONE CATCHES; the
+  link twin (`tests/security/linkTwin.shared.mjs`) cites 212 :: `get_unlisted_dossier` and 211 ::
+  `_gallery_veil_resolve`: plants 36 of 36 red, clean link reads 36 of 36 green; the 34 files 2 red of 867 (S2 and
+  VS1's tooth, the tip's); `galleryVeilSignalCopies`' two reds stand at af708f2fd too (the tip's).
+  THE GAP: on MASTER'S STORED SHAPE the server serves the roster copies' goal targets UN-RE-KEYED
+  (`factions[].members[].goal.intent.{short,long}.target.id`, e.g. `npc_peat_cutter`); tooth (ii) catches it (5 reds
+  in `criminalSwitchHandReach`); PLAUSIBLY the twin too (`rekeyPeople` re-keys `members[].id` only).
+  **Decided:** IT IS CURED INSIDE R4-IDS BEFORE "TIP?" (the unit's promise is "every reference following"), by
+  "R4I-SQL-2", a builder that reads 212 and the registry whole, DISPATCHED BY VEIL-38's SUCCESSOR. MEASURE FIRST: with
+  the corrected `storedIdsServed`, on both pools, both engines, every door and setting: EVERY path of the served
+  payload where a stored person id still stands after the re-key, by path and count; the cure covers every path
+  listed, red first on tooth (ii)'s five and on the stored arm. **Why:** the gap was found by one tooth on one
+  path; a cure of one path leaves its siblings. THE STORED ARM'S "zero stored ids served" OF 02:27 (N32) WAS READ
+  WITH THE OLD MASK AND IS NO PROOF ANY MORE: it is re-run with the corrected mask in the unit's proofs.
+  `tests/lint` whole on its -wip: 52 of 3,304 against the tip's 48: `netCurrentExtractorAnchor` 1 (its own test
+  file: cured test-only by the successor's next builder) and `writerReach` 3 (src identities, PLAUSIBLY the twin's
+  new writers): RE-TAKEN BY NOBODY YET: PART 40 names the three (file, symbol, field) and the chair rules them.
+  VEIL-38 HANDS OVER AFTER M; PART 40's first section gives its successor (VEIL-42) its first acts in order and the
+  smallest file list.
+- 2026-11-23 04:02 UTC · THE HOURLY CHECK OF 04:02 UTC. THE MARKS AT 04:01 (one haiku helper; NO COMPACTION in any working seat's record
+  since 03:05): VEIL-38 480,767 (told; it hands over after M); VEIL-39 504,736 (unchanged since 02:43: its turn is
+  open on two builders); VEIL-40 214,548 after its read-in, builder B dispatched at 03:24; PROSE-6 151,530;
+  STACK-106 172,763 AND CLOSE-5 0: A FIGURE MOVES ONLY WHEN A TURN ENDS (get_session reads the newest `result` event):
+  a seat inside one long turn reads stale, and STACK-106 has been in one turn since the owner's line at 02:37.
+  VEIL-40's UNIT (0) (its line of 04:03): its pool made (8 shards, exit 0); GATE-1 4 of 92 at every gated setting,
+  both reads, LOWER BY RULE 7; GATE-2 20 cells (off 10, dm 10); server = twin 0 of 112: THE LANE'S STANDING FIGURES,
+  line for line with VEIL-37's table; typecheck 167 of 167; its builder B is on phase 1 (5b's measure only; brief
+  ec23449fc on its branch). THE CHAIR'S THIRTEENTH PUSH (ad9b5f29a) ENDED exit=0 at 03:58 UTC: CONFIRMED.
