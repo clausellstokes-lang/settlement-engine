@@ -72,7 +72,8 @@ hands over when M's pool run ends, AND ITS SUCCESSOR VEIL-42 CARRIES: the diff b
 server and twin differ, the whole-document comparison AT THE TIP'S OWN CODE (N47, N48), the measure of every
 un-re-keyed reference (N44), R4I-SQL-2, R4I-TONIGHT-2, the proofs, "TIP? R4-IDS"; THE GATES' "server = twin" IS A
 SHAPE CHECK ONLY (N48): the whole-document form joins every unit's proofs once the chair has ruled on that measure.
-The hourly check: trig_ (re-armed each time; its stored prompt names the seats).
+The hourly check is re-armed each time (the next: trig_014n46rT8RYWctPfG1VbdSTb at 05:52 UTC; its stored prompt names
+the seats and what each owes).
 THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
 there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
 "TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
@@ -91,7 +92,7 @@ THE CHAIR'S MACHINE AND HABITS: `/home/user/wt/chair` (this lane; hooks installe
 lane/chair-2026-11-08 <log>` (it returns at once: the lane hook then runs the type ratchet, the strict check and
 eslint: about three minutes; wait for `exit=` in the log; NO COMMIT WHILE A PUSH IS IN FLIGHT). Commits by explicit
 path only. The hourly check is a one-shot scheduled task re-armed each time (the next:
-trig_01DumdxiZPvUidWHoWuGUC6e at 04:02 UTC). The seats' start messages are in `prompts/` beside this file; A SEAT IS
+trig_014n46rT8RYWctPfG1VbdSTb at 05:52 UTC). The seats' start messages are in `prompts/` beside this file; A SEAT IS
 SEATED BY A SHORT PROMPT THAT POINTS TO ITS START MESSAGE ON ORIGIN (pushed first), never by a retyped one. The MCP
 tool list is re-sent whole at every reconnect (about 28,000 tokens each): bulky reads go to a haiku helper, never
 into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef (local branch
