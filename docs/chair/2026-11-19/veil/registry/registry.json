@@ -195,6 +195,11 @@
     "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
   },
   {
+    "path": "^history\\.currentTensions\\[\\]\\.factions\\[\\]$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: generateHistory"
+  },
+  {
     "path": "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in A\\)$",
     "rule": "withhold",
     "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"

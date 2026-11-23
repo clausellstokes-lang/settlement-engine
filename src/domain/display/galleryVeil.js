@@ -62,7 +62,7 @@
  * Pure; never mutates its inputs.
  */
 
-import { galleryMemberKey, toPublicSafe } from './publicSafe.js';
+import { HIDDEN_POWER_MASK, galleryMemberKey, toPublicSafe } from './publicSafe.js';
 import { deriveDefenseVulnerabilities } from './defenseDisplay.js';
 import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.js';
 import { deepClone } from '../clone.js';
@@ -776,6 +776,15 @@ export function applyVeil(publicSettlement, veil) {
   dropVeiledPublicProse(s, groupings);
   // VEIL-22 (R3): the drawn conditional rows (212 :: _gallery_veil_roster_choices, before R2's step)
   applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf);
+  // VEIL-41 (R5-TENSION; N85 (2), N96 (2), E115 (6): THE MASKED PARTY IS WITHHELD, NOT MASKED): a tension whose party list
+  // holds the projection's mask of a hidden power's name (the read does not serve it) leaves WHOLE, as a withheld power's
+  // tension does; none shortened. Here, on the marked path alone: the unmarked share is served as before (projectShareVeil,
+  // 211's design). 212 :: _gallery_veil, the same rule
+  // registry: history.tension.hiddenPower
+  const hist = s.history;
+  if (isRec(hist) && Array.isArray(hist.currentTensions)) {
+    hist.currentTensions = hist.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(v => typeof v === 'string' && v.includes(HIDDEN_POWER_MASK))));
+  }
   // VEIL-21 (R2; VR16, VR33, VR37): last, what no non-owner read sends whatever the veil (212 :: _gallery_veil runs
   // _gallery_veil_withhold_always on every body it returns)
   withholdAlways(s);

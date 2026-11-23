@@ -93,6 +93,8 @@ const H = Object.freeze({
   tChronicle: 'src/domain/display/gallerySecondHomes.js :: withholdChronicle',
   sSent: 'public.get_gallery_dossier',
   tSent: 'src/domain/display/galleryVeil.js :: galleryPayloadFor',
+  sVeil: 'public._gallery_veil',
+  tVeil: 'src/domain/display/galleryVeil.js :: applyVeil',
 });
 
 /** @type {Readonly<Record<string, RegistryHost>>} */
@@ -117,6 +119,8 @@ export const REGISTRY_HOSTS = Object.freeze({
   [H.tChronicle]: { engine: 'twin', state: 'planned', stage: 'V10-1' },
   [H.sSent]: { engine: 'server', state: 'exists', stage: 'none: a diffuse (VR8) or rng-only (VR13) row is sent as stored' },
   [H.tSent]: { engine: 'twin', state: 'exists', stage: 'none' },
+  [H.sVeil]: { engine: 'server', state: 'exists', stage: 'R5-TENSION (VEIL-41, N85 (2), N96 (2)): the marked branch\'s own step, after the roster choices, in 212 by V41-TEN' },
+  [H.tVeil]: { engine: 'twin', state: 'exists', stage: 'R5-TENSION' },
 });
 
 // ── THE WRITERS (the choosers, traced to their code; cited by symbol)
@@ -341,6 +345,9 @@ const ROWS_SPEC = [
 
   // ── history: the crime-wave entries are the house's; every other re-draw is the rng's (VR13)
   choiceWithhold({ id: 'history.tension.crimeWave', path: 'history.currentTensions[] (only in A)', writer: W.event, house: P.signal, scope: 'VR4 ii-7: the crime_wave tension withheld where the SERVED crime signal is false (no criminal seat, no served criminal house)' }),
+  row({ id: 'history.tension.hiddenPower', path: 'history.currentTensions[].factions[]', writer: W.history, house: 'a power the owner hid (powerStructure.factions[].hidden: true), its name masked by the projection (publicSafe.js :: HIDDEN_POWER_MASK; 210)',
+    rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sVeil, twin: H.tVeil, built: true,
+    scope: 'R5-TENSION (VEIL-41; the chair\'s N85 (2), N96 (2); the reader\'s E115 (6): the masked party is WITHHELD, not masked): on a marked read and every party-link read, a tension whose party list holds the mask of a hidden power\'s name (the read does not serve the name: Reveal DM off; the link on both Reveals) leaves WHOLE, as a withheld power\'s tension does (power.entry); no party list shortened. The unmarked share\'s gallery read and import are served as before (211\'s design): LISTED, not cured. The mask in a third power\'s desc is power.desc\'s (N96 (1): R5-DESC)' }),
   rng({ id: 'history.tension.redraw', path: 'history.currentTensions[] (only in B)', writer: W.history, house: P.any }),
   rng({ id: 'history.tension.description', path: 'history.currentTensions[].description', writer: W.history, house: P.any }),
   rng({ id: 'history.tension.factions', path: '^history\\.currentTensions\\[\\]\\.factions\\[\\] \\(only in [AB]\\)$', re: true, writer: W.history, house: P.any,

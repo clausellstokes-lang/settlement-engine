@@ -234,6 +234,13 @@
 --       it ((33) (3), the prose minus_at lines of (34), prose.criminal's in _gallery_veil_roster_choices) stand, dead and
 --       byte-stable, for the after-deploy unit (b). galleryWithholdAlways.js :: withholdAlways, rule for rule.
 --       No function added, removed or re-signed.
+--   (37) THE MASKED PARTY IS WITHHELD, NOT MASKED (VEIL-41, R5-TENSION; the chair's N85 (2) and N96 (2), the reader's E115
+--       (6)): on a marked read and on every party-link read, a current tension whose party list holds the projection's mask
+--       of a hidden power's name ('an unseen interest': the read does not serve the name) leaves WHOLE, as a withheld power's
+--       tension does; no party list is shortened. _gallery_veil (RESTATED here) runs it after the roster choices, on its
+--       marked branch alone: the unmarked share's gallery read and import are served as before (211's design; listed, not
+--       cured). Reveal DM on the gallery read and the import serves the name and the tension (registry:
+--       history.tension.hiddenPower). galleryVeil.js :: applyVeil, rule for rule. No function added, removed or re-signed.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -2768,6 +2775,24 @@ begin
   end if;
   -- VEIL-22 (R3): the drawn conditional rows (the roster choices), then R2's step
   body := public._gallery_veil_roster_choices(body, pub);
+  -- VEIL-41 (R5-TENSION; the chair's N85 (2) and N96 (2), the reader's E115 (6): THE MASKED PARTY IS WITHHELD, NOT
+  -- MASKED). On a read the veil runs (a marked share; the party link always) the projection writes a hidden power's name (a
+  -- powerStructure.factions[] row the owner stamped hidden: true) as 'an unseen interest' in every string leaf, wherever the
+  -- read does not serve the name (210 :: _gallery_sanitize_public_json: Reveal DM off; the link on both Reveals). A tension
+  -- (history.currentTensions[]) whose party list holds the word names that power, so it LEAVES WHOLE, as a withheld power's
+  -- tension does (_gallery_veil_roster_choices): no mask in a served party list, no list shortened; what is left dense, in
+  -- order (VR21). A party a sharer wrote with the word in it: withheld (where unsure, withhold). HERE, on the marked branch
+  -- alone: not in the roster choices' tension rule, and not in _gallery_veil_withhold_always, which runs on the unmarked
+  -- share too, served as before (211's design; N85 (2): listed, not cured). Reveal DM serves the power's row, so its name
+  -- and its tension stay. Twin: galleryVeil.js :: applyVeil, the same rule
+  -- registry: history.tension.hiddenPower
+  if jsonb_typeof(body #> '{history,currentTensions}') = 'array' then
+    body := jsonb_set(body, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o)
+      from jsonb_array_elements(body #> '{history,currentTensions}') with ordinality x(e, o)
+     where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'factions') = 'array'
+                and exists (select 1 from jsonb_array_elements(e -> 'factions') f
+                             where jsonb_typeof(f) = 'string' and position('an unseen interest' in (f #>> '{}')) > 0))), '[]'));
+  end if;
   -- VEIL-21 (R2): last, what no non-owner read sends whatever the veil
   body := public._gallery_veil_withhold_always(body);
   return jsonb_build_object(
