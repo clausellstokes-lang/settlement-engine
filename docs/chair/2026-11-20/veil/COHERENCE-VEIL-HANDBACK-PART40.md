@@ -30,7 +30,7 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 
 ### (2) IN FLIGHT
 - THE INSTRUMENTS are being re-made on `/home/user/wip` (the -wip at fd7163ba6) by `out/v28/seated/make-instruments.sh`. The script and log are `/var/tmp/v18/out/v38/chain0.{sh,log}`, the exits are in `/var/tmp/v18/out/v38/seated/exits.txt`.
-- THE POOL IS HELD; it is not made at fd7163ba6. The instruments' `tell-common.mjs :: settings` takes `present` from `criminalVeilSwitch.js :: presentCriminalGroupings`, and the pool's part B reads `setCriminalVeil(…, sc.present, …)`. That is S1's broken site, so a pool made on fd7163ba6 would be read under a switch that offers every default. The pool is made ONCE, on the -wip with S1 merged (N6's "the cured tree"). The chair was told.
+- THE POOL IS HELD; it is not made at fd7163ba6. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2). The instruments' `tell-common.mjs :: settings` takes `present` from `criminalVeilSwitch.js :: presentCriminalGroupings`, and the pool's part B reads `setCriminalVeil(…, sc.present, …)`. That is S1's broken site, so a pool made on fd7163ba6 would be read under a switch that offers every default. The pool is made ONCE, on the -wip with S1 merged (N6's "the cured tree"). The chair was told.
 - R4I-PAGE-2 (subagent): S1, S2, the guards, the arms, the stored arm's person-id probe, `tests/lint` whole and the build. It works in `/home/user/wt/r4ip2` on the local branch `lane/veil-38-2026-11-23-r4ipage2-wip`.
 
 ### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
@@ -56,6 +56,13 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
          212 or the registry (VEIL-39's one-test-file pin does not count); judging a red that points into either; E116's five steps.
      (c) A CAUTION FOR EVERY SEAT: a refusal of a merge, commit or push by the seat's own permission check stands: one line to the
          chair with the exact command, nothing else tried to the same end.
+40.2 THE CHAIR, 00:25 UTC: (1) THE POOL IS MADE ONCE, ON THE -wip WITH S1 MERGED (accepted). R4I-PAGE's own "new pool, no worse"
+     figures (`pool-v35r4`, PART 36 (2)) were taken UNDER THE BROKEN SWITCH and ARE RELIED ON BY NOBODY. (2) THE ORDER RED IS A STOP:
+     no cure before the chair's ruling. The seat brings the cause: the sort's site by `file :: symbol` and its key; EVERY page reader
+     and sheet that orders people, wants, ties or cards by a person's id (a grep over the page's readers), each with whether its order
+     moves between two reads; whether the SERVED arrays' own order is equal on two reads ("keep the served order" a candidate if so;
+     if the server's order moves, where); and the count on the pool: places whose printed order differs between two reads, by
+     surface. A product change a player sees on a reload: it does not ride into "TIP?" unnamed. Relayed to R4I-PAGE-2 (item "O").
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
