@@ -43,3 +43,13 @@ window.txt
   row [rule/when] | documents (by role) | reads | whole / cut hits | sites (reads) | paths | e.g.
 PROSE ROWS: 0 (registered 0)
 ```
+
+## dumps rc=0 15:57:37
+```
+shard 3 rc=0
+shard 2 rc=0
+shard 1 rc=0
+shard 0 rc=0
+shard 3 rc=0
+shard 2 rc=0
+```
