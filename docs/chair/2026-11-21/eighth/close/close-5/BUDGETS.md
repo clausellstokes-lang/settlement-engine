@@ -49,3 +49,10 @@ None timed out in the census (0 TIMEOUTS in every part) and CI's whole runs on t
 seat's lean: not in the commit unless CI's run on the pushed flip branch shows one; the two over the line named to the
 chair now. The whole table: `close-5/BUDGETS.tsv` (part, file, lit ms, the heuristic's mark, the budget's source, the
 budget, the line, the title).
+
+## C. THE CHAIR'S RULING ON SECTION B (its message of 2026-11-23 04:17 UTC; recorded 2026-11-23 04:18 UTC, read from `date -u`)
+"NOT BY A GUESS IN EITHER DIRECTION." In the Q8 trial the two near their budgets are measured ALONE, one at a time, lit:
+`metropolisTailedRoll` and `espionageDormancyFence` FENCE 1 (`close-5/trial.sh`, its last two parts, `--maxWorkers=1`). If a
+lone lit time x 1.84 passes NINE TENTHS of its budget (270 s of 300_000; 108 s of 120_000), its budget is raised in commit 0
+with that measure in a comment; if not, it is left and the measure is written here. The other ten of section B are left
+unless the trial shows one over three quarters when run alone. (Measures: owed by the trial.)

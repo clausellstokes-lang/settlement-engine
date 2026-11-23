@@ -29,6 +29,10 @@ A successor reads those two, then this section, then `FLIP-PLAN.md`.
   already mocks fortune dark by default since VACANT, so its U6 (2) surprise is EXPECTED GONE (PLAUSIBLE; read at Q8).
   NOTHING OF THE FLIP IS BUILT; no worktree.
 - THE BOX: `npm ci` done (exit 0); the ledger ref `review-fixes-2026-07-08` local at 235efce1a. No worktree yet.
+- THE Q8 TRIAL IS READY TO RUN (`close-5/trial.sh <lit tree> <base>`: the 83 anchor files and the test files landed since
+  244fa84ef, then `tests/lint` whole, then the two near their budgets alone, each through the mutex; `close-5/vs-census.mjs`
+  classes each red LISTED / CENSUS / SURPRISE and each untouched census row GONE). Its commit: the stack's DOORS commit with
+  108 and 109 (the stack stood at 4fa51f422 by the chair's 04:17 word, its lighting census at its door): NOT YET NAMED.
 - NEXT, in one line: on the chair's Q8 word, the lit trial on the commit it names; on "BUILD THE FLIP <tip>", the flip
   branch in `/home/user/wt/flip`: commit 0 the budgets, then `FLIP-PLAN.md` section 1 in order as section 5 rules it.
 
