@@ -141,7 +141,14 @@ nothing was lost; whoever reads this after another restart: the record on origin
   add none). It runs chain B's instrument (L1 only) for the whole-document count; its own builder builds "DAILY" and
   "NAMES" only. RULED: in unit (2), what touches neither 212 nor the registry is built first; the sites' rows and
   (ix)'s SQL last, after the three units now in build have reached the tip.
-SIX WORK NOW: CLOSE-6, PROSE-6 (LIT-DISAGREE), VEIL-40, VEIL-41, VEIL-42, VEIL-43. THE NEXT FREE PLACE (PROSE-6's, when it has sent
+SIX WORK NOW: CLOSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43 AND VEIL-44 (seated in PROSE-6's place after its LIT-DISAGREE
+line: N83; `prompts/START-VEIL-44.txt`; ITS SESSION ID IS IN THE FIRST ENTRY OF SECTION 5 AFTER N83). PROSE-6 WAITS
+(nothing owed; "THE LINE IS <commit>" if the line moves). THE BAR'S SECOND GATE CANNOT READ 0 UNDER THE ORDER (N81:
+"GATE-MAP"): the seven VR42 towns and r3m-town-insurgency-0-14 stay non-members by listed rules; MEASURE "LOWER-7" IS
+WITH VEIL-43; THE CHAIR THEN RULES whether GATE-2 reads the towns that are non-members by a listed rule apart, by
+name, as GATE-1 does. "PIN-3 b58abc48b" IS GRANTED IN ADVANCE (N82): when VEIL-41 sends "PIN-3 MERGED b58abc48b" THE
+CHAIR NAMES THE NEW TIP (`lane/veil-41-2026-11-23-tip`) TO VEIL-40, VEIL-42, VEIL-43 AND VEIL-44.
+THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
 AS ITS FIRST RED (N76; `prompts/DRAFT-START-VEIL-44.txt`, A DRAFT WITH THREE BLANKS: chain B's counts, the checkout's
@@ -1920,3 +1927,105 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   that line comes. SAID TO THE OWNER.
   (7) THE NEXT HOURLY CHECK IS SET WITH THIS ENTRY (its id in the next entry). The stored check of 09:43
   (trig_01RAKptvggFu2Gfj5cNBwDE8) fired while the worker was down and was done at 10:08.
+- 2026-11-23 10:37 UTC · N81 · THE JOIN MOVES NO BIRTH AND NEITHER GATE; "GATE-MAP": THE SECOND GATE CANNOT READ 0
+  UNDER THE ORDER ("LOWER-7" ORDERED; THE CHAIR'S FIRST LEAN CORRECTED); CHAIN A's QUEUE RE-ORDERED; NOTHING STAYS
+  ONLY IN A CONTAINER.
+  (1) THE JOIN MOVES NOTHING, DARK ("GATES" COMPLETE; VEIL-43's lines of 10:21 and 10:29). THE WHOLE-DOCUMENT COUNT ON
+  THE JOINED TREE: chain B's comparer (aa5e3f30f unchanged, value for value) on the 140 towns: L1 0 of 3,360 at the
+  gallery read and 0 of 3,360 at the link: the lane tip's own figure; L2 84, all `prominentRelationship` at Reveal off
+  on 7 documents (the unserved-branch class, by design). THE BIRTHS: the lane's own pool, made at 23bb8b8ae, against
+  the joined tree's: EQUAL shard for shard (8 of 8 hash-equal; 1,200 + 608 births; tries and rejections by step equal;
+  the held hideable houses equal); THE TWO GATE TABLES IDENTICAL but for paths, clocks and timing: the same four, the
+  same seven, the same twenty. So points 98 to 112 move no birth of the pool and neither gate.
+  (2) "GATE-MAP", BY READING (`out/v43/GATE-MAP.md` at e6565510c): GATE-1's FOUR ALL FALL TO "(v)", the sent forms
+  (both `safetyDesc` towns to (v)(1); r3m-town-insurgency-0-14's `imports.criminal` to (v)(3); r3m-town-none-0-23's
+  `currentTensions` to (v)(2): the lane's rulings 74 and 72 (a)). GATE-2's TWENTY = five settings (g:101, g:100,
+  g:001, g:000, off) x 2 Reveals x 2 engines: 9 towns fail against 0 controls: relations (two towns) to (iv); imports
+  and tensions.crime to (v); `sp.ops` on two towns STAY (80 (2), 81); `powers.criminal` and `capture` LOWER BY RULE
+  (82); `inst.criminal` and `chains.criminal` on the VR42 towns: NO UNIT; `sp.ops` on two DM pages UNPLACED. THE
+  FINDING: THE SEVEN LOWER-BY-RULE TOWNS FAIL GATE-2 AT EVERY SETTING; with 0 controls failing a cell is red from 7
+  towns (Fisher: 6 gives p 0.076, 7 gives 0.049); with every unit landed as ruled the five settings still hold eight
+  towns (p 0.031): GATE-2 CANNOT READ 0 RED UNDER THE ORDER, and no ruling reads GATE-2 apart from the VR42 towns as
+  GATE-1 does. **Not ruled yet; one measure first, "LOWER-7"** (brief fb908ddf6; after its chain of REDS and HOOKS):
+  for each of the seven and 0-14: its joint L3 signature and its nearest member, every differing family with its
+  direction; every "+ -> 0" family (the town serves what no member has) by its served rows and the rule that serves
+  each, or NO RULE FOUND, at once; the controls that themselves have a governing criminal row, and whether each shows
+  criminal institutions and chains; the membership re-read against those controls; ruling 82's eight against seven.
+  THE CHAIR'S FIRST LEAN WAS WRONG AND IS CORRECTED, TO THE SEAT AND TO THE OWNER BY NAME: it had said the institution
+  and chain traces were "still showing"; READ BY THE CHAIR (PART 30's table under ruling 74; PART 33 :45; PART 35 :85
+  and :96; ruling 62 (5)): those two families are "0 -> +": the hiding town serves NONE and its nearest member has
+  them: an ABSENCE beside a governing criminal row that VR42 keeps; "nothing sent: expected to close as the others
+  leave; to be PROVED by GATE-2's re-read". THE LIKELY RULING: GATE-2 reads the towns that are non-members by a listed
+  rule apart, each by name with its rule, as GATE-1 does (VR42; E94: a criminal government is public; that criminal
+  houses exist can be inferred there; which, and what they do, is what the veil hides). **Why the map was ordered:**
+  every listed unit could land and the bar still not be met; that is now known today.
+  (3) CHAIN A's STATE (VEIL-40, 10:12 and 10:17): alive in one long turn behind its box's mutex. R5D-RIVAL: the rule
+  written in 212 and the twin, the arm file made; red first not yet seen; the pool and the gates not run. B2: 7 of its
+  10 jobs died at start-up (`xargs -I{}` ate the backslashes of a test-name pattern: read and fixed); its three stored
+  jobs ran on. ITS ESTIMATES, PLAUSIBLE: the rival's runs about 13:00, its pool and gates about 14:30 UTC.
+  **Decided:** (a) nothing stays only in a container: both builders' work committed as "WIP, UNPROVED" and pushed:
+  DONE (R5D-RIVAL 9a2f8ef9a on `lane/veil-40-2026-11-23-r5rival-wip`, 10 files, +805 -7; B2 c7a4e9a4e on the
+  r5desc-wip); (b) THE MUTEX'S ORDER: the rival's runs first (red first on the 346 records, then green), then the
+  seat's new pool and both gates; B2's re-run of its seven after. THE SAME RULE (a) RE-SAID TO EVERY WORKING SEAT
+  after the chair's own worker was restarted: VEIL-41 pushed its c2-wip (88b5156e3) and pin3-wip; VEIL-43 its
+  documents branch with its builder's WIP and every script (7970222cf); CLOSE-6 its flip branch (9df6731ee) and saves
+  its builder's diff as a patch on its documents branch at every wait (accepted as the rule's equal); VEIL-42 asked
+  for its local branches. READ BY THE CHAIR, EARLY AND WITHOUT A VERDICT: R5D-RIVAL's hunks of 212 whole at 9a2f8ef9a:
+  N63 as ruled (the seat keys of the open and of the stamped rows over both lists, masked rows left out; a
+  non-governing row with a `contestsNiche` stays where an open row has that key, is stamped where only a stamped row
+  has it, leaves where none has it; closed over; it terminates); NO FAULT FOUND BY READING; a governing rival is never
+  moved (VR42), so the arm "every served rival has its host served beside it" exempts it.
+- 2026-11-23 10:37 UTC · N82 · "PIN-3 b58abc48b": READ, RUN RED AND GREEN BY THE CHAIR, AND GRANTED IN ADVANCE; CHAIN
+  C's ROAD TO "TIP? STORED-PROSE".
+  VEIL-41's line (its `date -u` 10:29:35): PIN-3 built on `lane/veil-41-2026-11-23-pin3-wip` at b58abc48b: red 1 at
+  the tip; green 9 of 9, the other tooth 24 of 24; mutation red 24 of 24, restored byte-identical; N33's 34 files 0
+  red; `tests/lint` whole 48 of 3,304 = the tip. THE CHAIR'S OWN CHECKS: b58abc48b is ONE commit on 23bb8b8ae, one
+  file (`tests/domain/display/criminalVeilSwitch.test.js`), +9 -5, READ WHOLE: the tooth moved to `safety
+  criminalInstitutions` and the new anchored assertion that no WITHHELD_ALWAYS row matches its key: N68 as ruled; AND
+  THE CHAIR'S OWN TWO RUNS of that file in `/home/user/wt/veiltip`: at 23bb8b8ae 1 failed of 9 ("some copy carries the
+  crime types ... expected 0 to be greater than 0"), at b58abc48b 9 of 9, exit 0. **Decided:** "TIP TO VEIL-41" FOR
+  PIN-3 IS GRANTED IN ADVANCE, on the one condition of its own green re-run: it pushes `lane/veil-41-2026-11-23-tip`
+  at b58abc48b (a fast-forward of the tip) and sends "PIN-3 MERGED b58abc48b"; the chair then names the new tip to the
+  other chains and to the join's and the doors' seats. **Why in advance:** the chair's reads and runs are done; a
+  round trip is saved. ITS MARK: 415,524 at 10:08; "TIP? STORED-PROSE" needs five to six more hours of its one mutex
+  after the pins (the prose-key proof whole about 2.5 hours; the read-stored gates about 80 minutes, twice; lint,
+  copy, the 55 files, the build): reachable inside 620,000 only if its machine runs clean; the chair drafts its
+  successor's start message when its read passes 520,000.
+- 2026-11-23 10:37 UTC · N83 · "LIT-DISAGREE": 0 OF 900 LIT PAGES CARRY A TRUE PAIR; VEIL-44 SEATED FOR THE DOORS.
+  (1) "LIT-DISAGREE" (PROSE-6, 10:35; `map/LIT-DISAGREE.md` at 1631c2da2 on `lane/prose-6-2026-11-23`, 79 lines: READ
+  WHOLE BY THE CHAIR). The tree: the flip 9df6731ee with cf104777c merged, a scratch worktree, never pushed; one run,
+  1,800 births (900 lit, 900 dark), 376.5 s. THE BIRTHS ARE LIT: 900 of 900 read seat law 2, fortune law 2 and the
+  contest lit; 763 of the 900 pages differ from their dark twins. THE WHOLE CROSS, FLOOR LIFTED: 0 OF 900 LIT PAGES
+  CARRIES A TRUE PAIR (dark: 63 before the cures, 0 after); all 263 co-printing variant pairs in 25 cell pairs read
+  NOT, each by its printed forms. ONE CELL PAIR CO-PRINTS LIT AND NOT DARK: GEN-13 `NO-MARKET` beside ECO-1
+  `COMBINATION C1` (a high rung), 82 pages, thorps to villages, 36 variant pairs: NOT (under the size-relative fortune
+  law a small place with no market reads as doing well; every C1 form there is a farm-surplus or well-off line:
+  "{settlement} keeps no market of any kind." beside "{settlement} goes on doing well, and nobody there counts the
+  margin closely."): the chair read it and agrees. The fortune law moved NO-MARKET beside C4 from 189 to 48 pages and
+  SUP-2 beside C1 from 139 to 3. THE TOOTH LIT: 6 of 6 green, no red in any arm; every control seed still holds its
+  case; the registered and watched rows, the seven old wordings and the two pinned tails on 0 of the 900 lit pages.
+  THE FIVE RE-WORDED LINES PRINT LIT EXACTLY AS DARK (CRITICAL v1 on 21 pages against 23; no sufficiency cell
+  co-prints with it lit). WHAT IT COVERS: the state sentences' cross (food, money, order, walls, trade: item 4's 151
+  cells); the laws' own sentences (the seat holder's lines, fortune's merit sentence, the ties and cards of "LIT-13G")
+  are NOT cells of that cross: said to the owner. PROSE-6 WAITS. CLOSE-6 is told: after its merge of cf104777c the
+  tooth's file is expected GREEN lit (the earlier "expected red" is withdrawn).
+  (2) VEIL-44 IS SEATED IN THE PLACE PROSE-6 FREED (N76 (3)'s decision, carried out): `prompts/START-VEIL-44.txt` (the
+  draft filled, 13,086 bytes; the draft file removed): chain B's second seat, seated one unit early for "IMPORT-DOOR"
+  with "MAP-COVERT" as its first red and "THE DOOR-EQUALITY ARM" in its proofs; its checkout `lane/veil-42-2026-11-23`
+  at 8d4a81fef (it carries the brief's addendum); its branch `lane/veil-44-2026-11-23`; its code branch `-door-wip` at
+  the lane's tip (PIN-3's if it is there); `out/v42/meas/U-UNMARKED.md` read from
+  `origin/lane/veil-42-2026-11-23-meas-wip` (85f20955c). WHAT CHAIN B HAS MEASURED SO FAR ON THE DOORS (U-UNMARKED.md
+  as widened at 08:55, READ BY THE CHAIR): a trial on one place at every marker: `get_gallery_map`'s member and
+  `import_gallery_map`'s member (it returns the same members) carry the covert copy at Reveal off on an unmarked
+  share, the default marker and a hand marker; the gallery read, the import and the link on none; `get_unlisted_map`
+  hands no member dossier (the publish-time world snapshot only); its table (e): what the gallery read applies and the
+  map member does not: the member-overrides splice with the covert CASE (the fault); the Reveal-DM base (the member
+  always serves the public projection: less); the full town the covert check reads; the frozen copy's date; the
+  unmarked fallback's weight strip. THE COUNTS ON BOTH STORED SETS ARE STILL OWED BY CHAIN B. IT IS PUSHED WITH THIS
+  ENTRY BEFORE THE SESSION IS CREATED.
+  (3) THE CHAIR'S PUSHES: the thirty-third (17f414e34: N80) ended exit=0 at 10:14:48 UTC (its log; ls-remote equal).
+  THE NEXT HOURLY CHECK: trig_01GB6t9oB58L4GSFwU6TxzoK at 11:09 UTC. TWO CORRECTIONS OF THE CHAIR'S OWN HOURS: N80
+  (2)'s "ASKED AT 10:12" and the "(10:12 UTC" in its message to VEIL-40 were written, not read from the clock (the
+  message went out before the entry's own stamp of 10:11): no hour goes into a message or an entry unless the command
+  that writes it reads `date -u`. The same fault was named to VEIL-40 ("10:16" against 10:12:22) and to VEIL-43
+  ("10:38" against 10:35:24): each owned it.
