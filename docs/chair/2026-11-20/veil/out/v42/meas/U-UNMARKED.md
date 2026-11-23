@@ -1,6 +1,18 @@
 # U — THE PRODUCTION QUESTION: what an UNMARKED share serves at Reveal off (R4I-MEASURE, VEIL-42; the chair's item of 08:45 UTC)
 
 SUMMARY (10 lines)
+1. "MAP-COVERT" (the chair's name; IMPORT-DOOR's cure), TODAY-BORN SET READ (`umtoday`, 140 places, 3 markers x Reveal off/DM):
+   7 places' stored `prominentRelationship` is a covert tie's copy (the 7 of A); 0 places' `pressureSentence` tells one.
+2. `get_gallery_map` member, its page (`fetchGalleryMap`) and `import_gallery_map` member SERVE THAT COPY BYTE-EQUAL on 7 of 7 places,
+   EVERY marker (unmarked, default, hand), Reveal OFF (and DM): 7 of 7 reads in each of the 18 cells.
+3. `get_gallery_dossier` data, its page, `import_gallery_dossier` data and its page: 0 of 7 at Reveal off on every marker (7 of 7 at
+   Reveal DM, by the owner's design); `get_unlisted_dossier`: 0 everywhere; `get_unlisted_map`: hands no member dossier (0 of 140 x 6).
+4. THE PRODUCTION QUESTION ANSWERED for the gallery read: the UNMARKED gallery row carries NO served marker (140 of 140, off and DM),
+   its served `data` carries NO covert copy (0 of 7), and `fetchPublicDossier`'s unserved branch adds none (0 of 7): it can only keep
+   what was sent. For the map doors the answer is the fault: sent, and kept by the page.
+5. CAUSE (read, table (e)): the map member never runs 212 :: `_gallery_apply_member_overrides` (the covert CASE :3086-3094).
+6. MASTER-BORN SET: below when read (`ummaster`).
+
 1. FIRST READING (a trial of two of the 7 places, today-born set, `logs/trial-U-2of7-table.txt`; the full sets below when run):
    the MAP MEMBER (`get_gallery_map` members[].settlement) SERVES THE COVERT TIE'S COPY in `prominentRelationship`, byte-equal to
    the stored copy, on 2 of 2 places whose stored copy is covert, on the UNMARKED share AND on the MARKED one (the default marker):
@@ -47,3 +59,19 @@ choice (`base`) and the frozen copy (`src`, the same bound). WHAT THE MAP MEMBER
 | 5 | the unmarked fallback's weight strip | 212 :: `get_gallery_dossier` :3214 | each `economicState.incomeSources[].weight` dropped where no body; under 212 `_gallery_veil` returns a body for every object `pub`, so the fallback is reached by neither door (PLAUSIBLE, read) |
 Not different: `_gallery_sanitize_public_json` (both, on Reveal off), `_gallery_veil` (both; it runs roster choices, the re-key and
 withhold-always on the member too), the narration choice, the frozen copy and its bound. The twin: the member has none (named).
+
+## THE TODAY-BORN SET (`umtoday`, 11:24-11:35 UTC, `logs/umtoday-table.txt`; 140 places x 3 markers x Reveal off/DM = 840 reads a door)
+Places whose stored copy is covert: `prominentRelationship` 7 (r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62,
+r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137); `pressureSentence` 0.
+Reads (of the 7 covert places' 7 a cell) carrying the stored covert `prominentRelationship`, byte-equal:
+| door | unmarked off | default off | hand off | unmarked DM | default DM | hand DM |
+|---|---|---|---|---|---|---|
+| `get_gallery_dossier` data / gallery page | 0 / 0 | 0 / 0 | 0 / 0 | 7 / 7 | 7 / 7 | 7 / 7 |
+| `import_gallery_dossier` data / import page | 0 / 0 | 0 / 0 | 0 / 0 | 7 / 7 | 7 / 7 | 7 / 7 |
+| `get_gallery_map` member / map page | **7 / 7** | **7 / 7** | **7 / 7** | 7 / 7 | 7 / 7 | 7 / 7 |
+| `import_gallery_map` member | **7** | **7** | **7** | 7 | 7 | 7 |
+| `get_unlisted_dossier` dossier | 0 | 0 | 0 | 0 | 0 | 0 |
+| `get_unlisted_map` (a `members` key at all, of 140) | 0 | 0 | 0 | 0 | 0 | 0 |
+The gallery row's served marker: unmarked 140 of 140 NO served marker (off and DM); default and hand 140 of 140 served marker.
+Example (r3m-city-none-1-107, unmarked, Reveal off, the map member): `prominentRelationship.full` = "Jaguar Claw Tut visits Xiuhcoatl Chel
+after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next." (the stored covert tie's copy).
