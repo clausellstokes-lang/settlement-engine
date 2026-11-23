@@ -1,0 +1,2 @@
+UNLISTED	tests/domain/display/criminalVeilSwitch.test.js	VS1 acceptance on the projection, over twelve births (a)-(e) hold on every birth, plain and DM-revealing
+TOTAL failing 1; files 152; tests 867 passed 865 failed 1
