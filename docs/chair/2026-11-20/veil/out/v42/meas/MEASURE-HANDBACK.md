@@ -45,7 +45,9 @@ value for value, no bijection, at the tip.
   top-level `factions[]` entries that carry none (a NULL comparison in its guard); the twin does not (33 reads).
 - U (the chair's item, 08:45): `U-UNMARKED.md`. FIRST READING (2 of the 7, CONFIRMED there): THE MAP MEMBER SERVES THE COVERT
   TIE'S COPY in `prominentRelationship` (unmarked AND marked shares, Reveal off), and `fetchGalleryMap` keeps it; 211 ::
-  `get_gallery_map` never runs `_gallery_apply_member_overrides` (the covert CASE's one home). Gallery, import, link: 0. Full sets queued.
+  `get_gallery_map` never runs `_gallery_apply_member_overrides` (the covert CASE's one home). Gallery, import, link: 0. WIDENED (08:55: "MAP-COVERT", IMPORT-DOOR's cure): `import_gallery_map` hands the same member
+  (1 place: all three markers, Reveal off); `get_unlisted_map` hands no member; table (e) of what the member lacks: row 1,
+  212 :: `_gallery_apply_member_overrides` (:3078; covert CASE :3086-3094). Both full sets queued (umtoday, ummaster).
 - M-TWIN (the chair's item, 08:45): `um.probe.jsx` (UM_M=1); trial on 2 places: (i) 0, (ii) 0, (iii) 0, unmapped 0. Runs queued.
 - B: `B-WHOLEDOC.md` (not yet read).
 

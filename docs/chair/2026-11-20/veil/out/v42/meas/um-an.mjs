@@ -7,8 +7,8 @@ const sum = (f) => sh.reduce((a, s) => a + f(s), 0);
 L(`documents ${sum((s) => s.docs)}; all done ${sh.every((s) => s.done)}; faults ${sum((s) => s.faults.length)}`); for (const s of sh) for (const f of s.faults.slice(0, 5)) L('  FAULT', f);
 if (sum((s) => s.U.docs)) {
   L(`U: documents read unmarked at Reveal off: ${sum((s) => s.U.docs)}; whose stored prominentRelationship is a covert copy: ${sum((s) => s.U.covertPR)}; whose pressureSentence is: ${sum((s) => s.U.covertPS)}`);
-  const c = {}; for (const s of sh) for (const [k, v] of Object.entries(s.U.carry)) { c[k] ||= { reads: 0, yes: 0 }; c[k].reads += v.reads; c[k].yes += v.yes; }
-  for (const [k, v] of Object.entries(c).sort()) L(`  ${k}: ${v.yes} of ${v.reads}`);
+  const c = {}; for (const s of sh) for (const [k, v] of Object.entries(s.U.carry)) { c[k] ||= { reads: 0, yes: 0, places: [] }; c[k].reads += v.reads; c[k].yes += v.yes; c[k].places.push(...(v.places || [])); }
+  for (const [k, v] of Object.entries(c).sort()) L(`  ${k}: ${v.yes} of ${v.reads} reads${v.places.length ? `; places ${v.places.length}: ${v.places.slice(0, 8).join(', ')}` : ''}`);
   const m = {}; for (const s of sh) for (const [k, v] of Object.entries(s.U.marker || {})) m[k] = (m[k] || 0) + v; L('  ', JSON.stringify(m));
   for (const s of sh) for (const e of s.U.examples.slice(0, 2)) L('  e.g.', JSON.stringify(e));
 }

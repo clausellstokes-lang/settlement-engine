@@ -1,0 +1,107 @@
+documents 1; all done true; faults 0
+U: documents read unmarked at Reveal off: 1; whose stored prominentRelationship is a covert copy: 1; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 0 of 1 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 0 of 1 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 0 of 1 reads
+  get_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 0 of 1 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 0 of 1 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 0 of 1 reads
+  get_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | default | off | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 1 of 1 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 0 of 1 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 1 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 1 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 1 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 1 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 1 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 1 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 0 of 1 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 0 of 1 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 0 of 1 reads
+  import_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 0 of 1 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 0 of 1 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 1 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 0 of 1 reads
+  import_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | default | off | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 1 of 1 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 1 of 1 reads; places 1: r3m-town-wartime-0-29
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 1 of 1 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":1,"get_gallery_dossier marker | default | off | served marker":1,"get_gallery_dossier marker | hand | off | served marker":1,"get_gallery_dossier marker | unmarked | DM | NO served marker":1,"get_gallery_dossier marker | default | DM | served marker":1,"get_gallery_dossier marker | hand | DM | served marker":1}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of"}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of"}

@@ -72,7 +72,7 @@ it('R4I-MEASURE U (unmarked) and M (M\'s counts on the projection)', async () =>
   }
   const out = { src: SRC, set: SET, shard: SHARD, docs: 0, faults: [], U: { docs: 0, covertPR: 0, covertPS: 0, carry: {}, examples: [] },
     M: { docs: 0, reads: 0, own: 0, ownNoName: 0, ownNoCard: 0, ownShared: 0, servedPersons: 0, i: 0, ii: 0, iii: 0, unmapped: 0, byRead: {}, stops: [] } };
-  const carry = (k, yes) => { out.U.carry[k] ||= { reads: 0, yes: 0 }; out.U.carry[k].reads += 1; if (yes) out.U.carry[k].yes += 1; };
+  const carry = (k, yes, seed) => { const c = (out.U.carry[k] ||= { reads: 0, yes: 0, places: [] }); c.reads += 1; if (yes) { c.yes += 1; if (seed && !c.places.includes(seed)) c.places.push(seed); } };
 
   const castPersons = (doc) => {
     const npcs = Array.isArray(doc?.npcs) ? doc.npcs : [];
@@ -102,52 +102,55 @@ it('R4I-MEASURE U (unmarked) and M (M\'s counts on the projection)', async () =>
     let rec; try { rec = d.doc(); } catch (e) { out.faults.push(`${d.seed}: ${String(e?.message || e).slice(0, 160)}`); continue; }
     out.docs += 1;
     if (db) {
+      // WIDENED (the seat's message of 08:55 UTC): three markers (unmarked, the default marker, a HAND marker: the tell probe's
+      // `own`, the owner's hand opening the criminal groupings and the hooks tab), Reveal off and DM; doors: the gallery read and
+      // its page, the import and its page, get_gallery_map's member and its page, import_gallery_map's member, get_unlisted_map,
+      // and the link beside them. Counted by door | marker | Reveal: reads, and places, carrying the stored COVERT copy.
       out.U.docs += 1;
       const probe = withholdCovertCopies({ prominentRelationship: rec.prominentRelationship, pressureSentence: rec.pressureSentence }, rec, false);
       const covPR = isRec(rec.prominentRelationship) && !('prominentRelationship' in probe);
       const covPS = typeof rec.pressureSentence === 'string' && !('pressureSentence' in probe);
       if (covPR) out.U.covertPR += 1; if (covPS) out.U.covertPS += 1;
-      nrow += 1; const id = `abcd4300-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`; const sl = `u${SHARD[0]}x${nrow}`;
-      await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
-        values ($1,$2,$3,'town',$4,true,$5,now(),$6,'unlisted','{}'::jsonb,false,true)`, [id, OWNER, rec.name || 'x', JSON.stringify(rec), sl, `${sl}l`]);
-      const mid = `abcd4301-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`;
-      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign) values ($1, $2, 'map', $3, true, $4, 'map_with_campaign', true)`, [mid, OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `${sl}m`]);
-      const g = (await db.query('select to_jsonb(g) r from public.get_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null;
-      const l = (await db.query('select public.get_unlisted_dossier($1) x', [`${sl}l`])).rows[0]?.x ?? null;
-      await db.query(`select set_config('test.uid', $1, false)`, [READER]);
-      const imp = (await db.query('select to_jsonb(g) r from public.import_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null;
-      await db.query(`select set_config('test.uid', '', false)`);
-      const map = (await db.query('select public.get_gallery_map($1) x', [`${sl}m`])).rows[0]?.x ?? null;
-      await db.query('delete from public.saved_maps where id = $1', [mid]); await db.query('delete from public.settlements where id = $1', [id]);
-      env.rpc = { get_gallery_dossier: g ? [g] : [], import_gallery_dossier: imp ? [imp] : [], get_gallery_map: map };
-      const page = (await gallery.fetchPublicDossier(sl))?.settlement ?? null;
-      const ipage = (await gallery.fetchDossierForImport(sl))?.settlement ?? null;
-      const mpage = recs((await gallery.fetchGalleryMap(`${sl}m`))?.members)[0]?.settlement ?? null;
-      env.rpc = {};
-      const bodies = { 'gallery data': g?.data, 'gallery page (fetchPublicDossier)': page, 'import data': imp?.data, 'import page (fetchDossierForImport)': ipage,
-        'map member': recs(map?.members)[0]?.settlement, 'map page (fetchGalleryMap)': mpage, 'link dossier': l?.dossier };
-      for (const [k, b] of Object.entries(bodies)) {
-        if (!isRec(b)) { out.faults.push(`${d.seed}: ${k}: no body`); continue; }
-        const hasPR = 'prominentRelationship' in b; const hasPS = 'pressureSentence' in b;
-        carry(`${k} | prominentRelationship present (any place)`, hasPR);
-        if (covPR) { carry(`${k} | prominentRelationship present where it is a COVERT copy`, hasPR); if (hasPR && out.U.examples.length < 6) out.U.examples.push({ seed: d.seed, door: k, copy: JSON.stringify(b.prominentRelationship).slice(0, 200), equalToStored: J(b.prominentRelationship) === J(rec.prominentRelationship) }); }
-        if (covPS) carry(`${k} | pressureSentence present where it is a COVERT copy`, hasPS);
+      for (const dm of [false, true]) {
+        let hand = null; try { hand = V.write(V.settings(rec, dm).deltas.own); } catch (e) { out.faults.push(`${d.seed} dm=${dm}: hand marker: ${String(e?.message || e).slice(0, 120)}`); }
+        const markers = { unmarked: {}, default: veil.writeShareVeil({}, []), ...(hand ? { hand } : {}) };
+        for (const [mkName, ov] of Object.entries(markers)) {
+          const tag = `${mkName} | ${dm ? 'DM' : 'off'}`;
+          nrow += 1; const id = `abcd4300-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`; const sl = `u${SHARD[0]}x${nrow}`;
+          await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
+            values ($1,$2,$3,'town',$4,true,$5,now(),$6,'unlisted',$7,$8,true)`, [id, OWNER, rec.name || 'x', JSON.stringify(rec), sl, `${sl}l`, JSON.stringify(ov), dm]);
+          const mid = `abcd4301-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`;
+          await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign, gallery_importable, unlisted_slug, visibility)
+            values ($1, $2, 'map', $3, true, $4, 'map_with_campaign', true, true, $5, 'public')`, [mid, OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `${sl}m`, `${sl}mu`]);
+          const g = (await db.query('select to_jsonb(g) r from public.get_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null;
+          const l = (await db.query('select public.get_unlisted_dossier($1) x', [`${sl}l`])).rows[0]?.x ?? null;
+          const map = (await db.query('select public.get_gallery_map($1) x', [`${sl}m`])).rows[0]?.x ?? null;
+          await db.query(`select set_config('test.uid', $1, false)`, [READER]);
+          const imp = (await db.query('select to_jsonb(g) r from public.import_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null;
+          const imap = (await db.query('select public.import_gallery_map($1) x', [`${sl}m`])).rows[0]?.x ?? null;
+          await db.query(`select set_config('test.uid', '', false)`);
+          await db.query(`update public.saved_maps set visibility = 'unlisted' where id = $1`, [mid]);
+          const umap = (await db.query('select public.get_unlisted_map($1) x', [`${sl}mu`])).rows[0]?.x ?? null;
+          await db.query('delete from public.saved_maps where id = $1', [mid]); await db.query('delete from public.settlements where id = $1', [id]);
+          env.rpc = { get_gallery_dossier: g ? [g] : [], import_gallery_dossier: imp ? [imp] : [], get_gallery_map: map };
+          const page = (await gallery.fetchPublicDossier(sl))?.settlement ?? null;
+          const ipage = (await gallery.fetchDossierForImport(sl))?.settlement ?? null;
+          const mpage = recs((await gallery.fetchGalleryMap(`${sl}m`))?.members)[0]?.settlement ?? null;
+          env.rpc = {};
+          const bodies = { 'get_gallery_dossier data': g?.data, 'gallery page (fetchPublicDossier)': page, 'import_gallery_dossier data': imp?.data,
+            'import page (fetchDossierForImport)': ipage, 'get_gallery_map member': recs(map?.members)[0]?.settlement, 'map page (fetchGalleryMap)': mpage,
+            'import_gallery_map member': recs(imap?.members)[0]?.settlement, 'get_unlisted_dossier dossier': l?.dossier };
+          for (const [k, b] of Object.entries(bodies)) {
+            if (!isRec(b)) { carry(`${k} | ${tag} | NO BODY`, true); continue; }
+            carry(`${k} | ${tag} | prominentRelationship present (any place)`, 'prominentRelationship' in b);
+            if (covPR) carry(`${k} | ${tag} | prominentRelationship = the stored COVERT copy`, J(b.prominentRelationship) === J(rec.prominentRelationship), d.seed);
+            if (covPS) carry(`${k} | ${tag} | pressureSentence = the stored COVERT-telling sentence`, b.pressureSentence === rec.pressureSentence, d.seed);
+            if (covPR && J(b.prominentRelationship) === J(rec.prominentRelationship) && out.U.examples.length < 4) out.U.examples.push({ seed: d.seed, door: k, tag, copy: JSON.stringify(b.prominentRelationship).slice(0, 160) });
+          }
+          carry(`get_unlisted_map | ${tag} | hands a member dossier (a \`members\` key)`, isRec(umap) && 'members' in umap);
+          const mk = `get_gallery_dossier marker | ${tag} | ${veil.isServedVeil(g?.gallery_member_overrides) ? 'served marker' : 'NO served marker'}`; out.U.marker ||= {}; out.U.marker[mk] = (out.U.marker[mk] || 0) + 1;
+        }
       }
-      // beside it, the MARKED share (the default marker, writeShareVeil({}, [])) read by the map door only: does the member carry it there too?
-      {
-        nrow += 1; const id2 = `abcd4302-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`; const sl2 = `u${SHARD[0]}x${nrow}`;
-        await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
-          values ($1,$2,$3,'town',$4,true,$5,now(),$6,'unlisted',$7,false,true)`, [id2, OWNER, rec.name || 'x', JSON.stringify(rec), sl2, `${sl2}l`, JSON.stringify(veil.writeShareVeil({}, []))]);
-        const mid2 = `abcd4303-${String(SHARD[0]).padStart(4, '0')}-0000-0000-${String(nrow).padStart(12, '0')}`;
-        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, share_kind, gallery_share_campaign) values ($1, $2, 'map', $3, true, $4, 'map_with_campaign', true)`, [mid2, OWNER, JSON.stringify({ campaign: { settlementIds: [id2] } }), `${sl2}m`]);
-        const map2 = (await db.query('select public.get_gallery_map($1) x', [`${sl2}m`])).rows[0]?.x ?? null;
-        const g2 = (await db.query('select to_jsonb(g) r from public.get_gallery_dossier($1) g', [sl2])).rows[0]?.r ?? null;
-        await db.query('delete from public.saved_maps where id = $1', [mid2]); await db.query('delete from public.settlements where id = $1', [id2]);
-        const m2 = recs(map2?.members)[0]?.settlement;
-        if (isRec(m2)) { carry('MARKED (default) map member | prominentRelationship present (any place)', 'prominentRelationship' in m2); if (covPR) carry('MARKED (default) map member | prominentRelationship present where it is a COVERT copy', 'prominentRelationship' in m2); if (covPS) carry('MARKED (default) map member | pressureSentence present where it is a COVERT copy', 'pressureSentence' in m2); }
-        if (isRec(g2?.data) && covPR) carry('MARKED (default) gallery data | prominentRelationship present where it is a COVERT copy', 'prominentRelationship' in g2.data);
-      }
-      out.U.marker = out.U.marker || {}; const mk = `gallery served marker: ${veil.isServedVeil(g?.gallery_member_overrides) ? 'served' : 'NONE'}`; out.U.marker[mk] = (out.U.marker[mk] || 0) + 1;
     }
     if (process.env.UM_M === '1') {
       out.M.docs += 1;
