@@ -67,6 +67,13 @@ TO RE-RUN after chain A's tip is merged into the join: NAMES born form must read
 `env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_COMMON_DIR -u GIT_OBJECT_DIRECTORY -u GIT_PREFIX -u GIT_NAMESPACE GATE_MUTEX_MAX_POLLS=360 sh scripts/gate-mutex.sh --run -- sh /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v43/meas/wd.sh /home/user/join43 /var/tmp/v18/out/v43/meas/rerun-born v28tpl born`
 Exit 0 and no `HIT` line in `/var/tmp/v18/out/v43/meas/rerun-born/wd-table.txt` is the bar.
 
+- ADDED BY THE SEAT (the chair's N105, 14:29 UTC): THE RE-RUN ALSO READS THE MASTER-BORN STORED FORM. Every town that exists at the deploy
+  was born by master's engine; this measure read none. The set: the lane's dump at master db832c892 (`out/v33/legacy/dump.sh` on
+  `origin/lane/veil-42-2026-11-23-r4ids-wip`, run in a scratch detached worktree of origin/master), the same 140 seeds if the cost allows,
+  every door, both Reveals; its cost said to the chair first if over thirty minutes of the mutex; the reader's row 24's four tells (DM-read
+  `npcs[].secondaryAffiliation` and `factions[].members[]` naming a hidden house; player-read `relationships[].npc2Role` "Thieves' Guild
+  Master"; `factions[].members[].corruptTies`; a power's figure differing server against twin) EACH CLASSED APART.
+
 ## CONFIRMED vs PLAUSIBLE
 CONFIRMED (executed, both forms):
 - the counts above: 1 hit path; other classes 0; map known fault 0; dm-slot key 0; dmNote at DM only, on the three pairs
