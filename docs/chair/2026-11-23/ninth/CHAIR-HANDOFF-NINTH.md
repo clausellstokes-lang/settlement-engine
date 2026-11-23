@@ -32,9 +32,9 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 06:43 UTC (the helper's read; no figure fell since 05:46, so no seat was summarized in that hour):
-STACK-106 304,457; CLOSE-5 449,037 (426,693 at 05:46: it slowed); PROSE-6 232,551; VEIL-40 241,950; VEIL-41 323,143;
-VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its reading).
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 07:43 UTC (the helper's read; no figure fell since 06:43, so no seat was summarized in that hour):
+STACK-106 304,457 (unchanged: one long turn); CLOSE-5 509,164 (+60,000: told to hand over at the first commit
+boundary after its own count passes 570,000); PROSE-6 300,890; VEIL-40 286,352; VEIL-41 367,447; VEIL-42 331,031.
 - STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`: POINT 106 "DAILY-B"
   (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109 "PRONOUN" (4fa51f422), "DOORS"
   5e63f2603; POINT 110 "PROSE-D" (ab6e2f53f; "DOORS ab13c0e70" at 06:26, READ ON ORIGIN; its tree equals the chair's
@@ -65,11 +65,12 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: A DRAFT WITH FIVE BLANKS, NOT A START MESSAGE). The owner's
   signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
 - PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" is point 110 and "PROSE-D-2 b443be64b" point 112 (N56,
-  N57, N62). E132's item (4), THE WIDER MEASURE, IS PUSHED (`map/DISAGREE-ITEM4.md` at 0f7ba293f, read whole by the
-  chair): FOUR MORE CELL PAIRS DISAGREE, on 38 of 900 pages at least. DECIDED (N64, said to the owner with his veto):
-  UNIT "PROSE-E": cured before the first deploy if ready, NEVER GATING IT. IT OWES "E-LINES <commit>" (the four pairs
-  read whole by variant; the cure proposed for each TRUE variant pair): THE CHAIR READS AND RULES THE LINES; it builds
-  only after that AND after "THE LINE IS <commit>", on `lane/prose-6-2026-11-23-e-wip` cut at the line's new tip.
+  N57, N62). UNIT "PROSE-E" (N64, N70, N71; said to the owner with his veto; NEVER GATING THE DEPLOY): FIVE LINES
+  RE-WORDED IN PLACE, THEIR WORDS RULED BY THE CHAIR (N70 holds them word for word), for the four cell pairs that
+  disagree on 63 of 900 pages at least; its builder works on `lane/prose-6-2026-11-23-e-wip` cut at b443be64b; THE
+  REGISTERS ARE TAKEN LAST, after it merges the line's new tip the chair names. IT OWES: the "FLOOR" measure (the
+  tooth's matcher drops printed cuts under four words: what item 4 and phase 1 missed, read by the draw ledger); for
+  each of the five lines every form the pages print; then "PROSE-E <commit>". THE CHAIR OWES IT "THE LINE IS <commit>".
 - VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
   `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); BOTH
   GATES EQUAL TO THE STANDING FIGURES (06:57). MEASURE "77" ON THE 7 PLACES (07:21): THE RPC's DOCUMENT AGAINST THE
@@ -98,7 +99,11 @@ VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its 
   record the same). "VS1 CAUSE" CAME AND ITS CURE IS RULED (N68): "PIN-3", test-only, one commit on the tip: the tooth
   moves to `safety criminalInstitutions`, with one new assertion that its key is withheld always by no row. IT OWES
   "TIP? PIN-3 <commit>" AT ONCE WHEN PROVED (the chair grants; it pushes `lane/veil-41-2026-11-23-tip`; THE CHAIR
-  NAMES THE NEW TIP TO THE THREE CHAINS), then "TIP? STORED-PROSE <commit>".
+  NAMES THE NEW TIP TO THE THREE CHAINS), then "TIP? STORED-PROSE <commit>". AT 07:42 ITS BUILDER RETURNED: 2707d6829
+  on `lane/veil-41-2026-11-23-c2-wip` (the seat read the diff whole; 212 sha d71abc9e…; the rollback unchanged). RULED
+  N72: the walker's census pin becomes an exact count with its rows named; THE UNREGISTERED TENSION-PARTIES PATH
+  LEAVES THIS UNIT AND IS MEASURED FIRST (four questions; the chair rules the row); one count (unbuilt rows 40 to 23)
+  is to be explained.
 - EVERY VEIL UNIT'S PROOFS NOW ALSO HOLD (told to VEIL-40 and VEIL-41 right after VEIL-42's seating; it is in VEIL-42's start message): `tests/copy`
   WHOLE; and, for any line or string a unit re-words or removes, a grep of `tests/` for the old words (N54, N57).
 - DONE, AND MESSAGED NO MORE: DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT ("DAILY-C 8036cfe71" is point 108); CLOSE-4
@@ -1373,3 +1378,66 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   GREEN; `tests/lint` whole 3 red, listed. It is merging point 112. THE CHAIR'S TWENTY-FOURTH PUSH (576f196a8) ENDED
   exit=0 at 07:11:46 UTC: CONFIRMED from its log and by ls-remote. TWO HOUR LABELS OF N63 AND N64 THAT WERE NOT READ
   FROM THE CLOCK ARE CORRECTED IN THIS COMMIT (each now names the two events it stood between).
+- 2026-11-23 07:44 UTC · N70 · "E-LINES": THE FIVE SENTENCES OF "PROSE-E" RULED WORD FOR WORD. PROSE-6's line of 07:26
+  (`lines/DISAGREE-E-LINES.md` at d4f83698a, 59 lines: READ WHOLE BY THE CHAIR, with the NO-MARKET pool's twelve lines
+  and CRITICAL's three read at b443be64b). Read whole with no cap: 14 TRUE variant pairs on 63 of 900 pages (38 was
+  the lower bound): 50 from GEN-13 `NO-MARKET` v10, 11 from DEF-2 full legal chain v1 and v2, 1 and 1. **Decided:** THE
+  MEANS: re-wording in place for all four (one WORD_CORRECTIONS row each; same vid, same marks; no line added; no draw
+  moves; no cell empties): marks split nothing in two pairs, would move draws in the third, would empty a one-line
+  cell in the fourth. THE FIVE LINES: `NO-MARKET` v10: "There is no market at {settlement} to gather its trade in one
+  place, so a buyer deals with each seller at their own door." (the chair's words for its second clause: the
+  proposal's "changes hands from house to house" echoed v3's ending); full legal chain v1, as proposed: "Offenders
+  brought in at {settlement} are heard and held, and each case is written down, so the accused can expect a hearing,
+  not a beating."; full legal chain v2, the chair's words: "A case that reaches the court at {settlement} gets a
+  hearing, and it is settled there rather than by the watch's temper." (the proposal's first clause ended "takes
+  time", which would print alone where the page cuts); `CHAIN: food trades working` v1, as proposed:
+  "{settlement}'s food trades are working, and what they put by would give it something to fall back on if it were
+  cut off."; `Economic Survival: CRITICAL` v1, as proposed: "{settlement} cannot fund a new response to trouble, and
+  any sustained pressure exhausts what it has almost at once." CRITICAL v2 and v3 beside GARRISONED: watched in the
+  tooth at 0 pages, not re-worded. THE PINS IT NAMES (grep by key, by leaf directory and by old words): `bar8DesksDef`
+  (full legal chain's words), `corpusCureGuards` :72 (CHAIN working v1: what its `gone` guards is owed), T1-13 must
+  pass unchanged. PHASE 2 STARTS AT ONCE on `lane/prose-6-2026-11-23-e-wip` cut at b443be64b; the registers are taken
+  last, after the line's new tip is merged. **Why re-wording:** the fault is in words that claim more than their
+  cell knows. **Reversal:** each line is one WORD_CORRECTIONS row. SAID TO THE OWNER: the five sentences, in full.
+- 2026-11-23 07:44 UTC · N71 · A WRONG PREMISE CAUGHT BY ITS OWN QUESTION; THE MATCHER'S FLOOR IS A BLIND SPOT, TO BE MEASURED.
+  PROSE-6's STOP of 07:40, on the line the chair had asked for (why NO-MARKET v12 never draws): IT DOES DRAW: the
+  kernel takes the eligible variant with the highest hash of the page's seed (`stateProseKernel.js` :536-555), and the
+  general desk's reader cuts it (`generalDeskRead.js :: siteClause`): on the 900 births v12 prints the bare cut
+  "{settlement} has no market." on 46 pages and v11 "{settlement} keeps no market." on 63. WHY PHASE 1 SAW 0: THE
+  TOOTH'S MATCHER DROPS A PRINTED CUT UNDER FOUR LITERAL WORDS (`oppositeSentencePairs.mjs` :97): the same floor hid
+  those pages from item 4. **Decided:** (1) v12 is NOT re-worded (its printed form states the institution fact only);
+  its watched row becomes a pinned-tail row (the tail at 0 pages); (2) THE FLOOR IS MEASURED BEFORE THE UNIT CLOSES
+  ("FLOOR"): by the engine's draw ledger, for every LACK and SUFFICIENCY cell pair of item 4's cross (walls among
+  them: "no walls pair prints on one page" was read through that floor): the pages where both cells drew and a side's
+  printed form fell under the floor, each variant pair's two printed forms read TRUE or NOT; a TRUE one comes to the
+  chair with its words; the floor itself is not changed in this unit; (3) the report gives every form the pages print
+  of each re-worded line. **Why:** the figures put to the owner (38, then 63 of 900) were counted through a matcher
+  that drops short cuts. SAID TO THE OWNER BY NAME THE SAME TURN: the 63 may still be too low; the corrected figure
+  is owed to him.
+- 2026-11-23 07:44 UTC · N72 · CHAIN C's BUILD IS BACK; THE CENSUS PIN; THE TENSION-PARTIES PATH IS MEASURED BEFORE IT IS
+  REGISTERED; THE MARKS OF 07:43. VEIL-41's line of 07:42: its builder's 2707d6829 on
+  `lane/veil-41-2026-11-23-c2-wip` (report 79e94d633), its diff READ WHOLE BY THE SEAT: 212's one statement before
+  `_gallery_veil_withhold_always`'s return with its header item; the twin's before `withholdAlways`'s return; 24 rows
+  on the withhold-always hosts, built, their former inputs kept in scope; `prose.criminal` left with N53's sentence;
+  the dead lines byte-stable; 212 sha d71abc9e…; the rollback unchanged; the local apply 0; the walker 26 to 4 red
+  (chain A's 3 and THE WALKER'S OWN CENSUS PIN, "not vacuous", at least 10 of what is now 4); `tests/lint` whole 26
+  of 3,280 beside the tip's 48 of 3,304 (the walker's 24 per-row tests gone); no arm red for `prose.criminal`. ITS
+  EDIT 4 (a registry row for `history.currentTensions[].factions[]`) WAS A STOP: the path is unregistered at the tip
+  and after; its rule is not plainly its sibling's. **Decided:** (1) the census pin is re-stated as an EXACT count
+  with the rows left on the planned composed hosts named in its comment, red first; (2) THE PATH LEAVES C2-BUILD AND
+  IS MEASURED FIRST ("TENSION-PARTIES"), on every stored document that holds it: what stands there and how many
+  values name a hideable power or house; what each engine serves there on a hiding read at each door and Reveal;
+  which function of 212 and of the twin does it; whether any open stored place shows a tension with one party fewer
+  (N63's question); THE CHAIR RULES THE ROW AND ANY CURE; no registry row before; "TIP? STORED-PROSE" does not wait
+  for it if the path reads the same on the tip and on the built tree; (3) one count is to be explained (unbuilt rows
+  40 to 23 where 24 rows moved). THE MARKS (one haiku helper, its clock 07:43:51): STACK-106 304,457 (unchanged: one
+  long turn); CLOSE-5 509,164 (+60,000; TOLD: it hands over at the first commit boundary after its own count passes
+  570,000); PROSE-6 300,890; VEIL-40 286,352; VEIL-41 367,447; VEIL-42 331,031. NO FIGURE FELL. CLOSE-5 at 07:23: the
+  page census's door is commit 075fbdd89 on the flip branch (one fall, none gained); F-SEAT's builder at work with
+  N66 in its brief; F8 (the fortune header and arm 7) briefed. Its push printed "remote rejected: cannot lock ref"
+  with exit 1 while origin held its local tip: CHECKED BY THE CHAIR ON ORIGIN (three docs commits in a line from
+  54a32447c to 71285bbde, each the seat's; nothing foreign): for the chair's own pushes an exit 1 with that message
+  is judged by ls-remote first, never by a blind retry. VEIL-42 at 06:57: its pool and both gates EQUAL to the
+  standing figures. THE HOURLY CHECK: the task trig_011HB6RMHZ1zbZr1adHa1hBy fired at 07:43; THE NEXT IS
+  trig_01QxH6uiXQgCaVezHiN94SAs at 08:42 UTC. THE CHAIR'S TWENTY-FIFTH PUSH (f151f632b) ENDED exit=0 at 07:26:49 UTC:
+  CONFIRMED from its log and by ls-remote.
