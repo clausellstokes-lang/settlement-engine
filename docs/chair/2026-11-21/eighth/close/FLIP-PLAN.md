@@ -159,3 +159,31 @@ with 1 row and JOIN with 4: Q5).
 - Q8. While waiting, a READ-ONLY TRIAL on a scratch ref (`lane/close-5-2026-11-23-lit-scratch`: the stack's tip once it is
   gated, lit by `close-2/census/light.sh`), running only the 83 anchor files and the files 106 to 109 changed, through the
   mutex: the re-pin values and any surprise known before the word. It touches no line of the flip's branch.
+
+## 5. THE CHAIR'S RULINGS ON THIS PLAN (its message received 2026-11-23 04:08 UTC; recorded 2026-11-23 04:12 UTC, read from `date -u`). THEY GOVERN SECTIONS 1 TO 4 WHERE THEY DIFFER
+"THE PLAN IS TAKEN." Where the recipe and the census differ, THE FINAL CENSUS GOVERNS (six goal-hash tiers; 153 rows in
+83 files; the in-test counts as re-measured).
+- Q1 YES: the 14 dial pins in commit 1; the two "law 1" towns FORCE law 1 in their own configs.
+- Q2 YES: E123's budgets are THE FIRST COMMIT ON THE FLIP BRANCH, before the dials, test only; each NEEDS-READ row read by
+  hand; each budget carries its lit measure in a comment in point 105's manner; no assertion changes; `tests/lint` whole
+  after. THE LIST: `close-5/BUDGETS.md` (14 tests in 13 files; section B names 12 with budgets of their own for the chair).
+  So the commits are: 0 the budgets; 1 the dials and the texts of darkness; the doors; the hand anchors by lane; the twin;
+  the sample town.
+- Q3 YES: the two surprises FORCE THE FORTUNE LAW TO 1 IN THEIR OWN CONFIGS; `seatChainHolder`'s office-word guard READ
+  GREEN and named in the commit. THE DIFF: `close-5/CONFIGS.diff` (against cb598376f: `seatChainHolder :: bear`, file-wide,
+  the file meaning the seat law alone). FOUND WHILE PREPARING IT: `seatHolderLines.test.js` at cb598376f (VACANT's arms
+  (10) and (11)) ALREADY MOCKS `fortuneLaw.js` on its own switch `sw.fortune`, off by default, so U6 (2) is born with
+  fortune dark on the flipped tree: THE SURPRISE IS EXPECTED GONE on the base holding VACANT, with no diff (PLAUSIBLE, to be
+  read by run at the Q8 trial; if it still reds, the config form of Q3 applies to its `born`).
+- Q4 SPLIT: `defenceParts` R13 STAYS RED AND LISTED; `dualHatPoliticalMass`'s ORIGINAL arm FORCES LAW 1 in its own config,
+  its title says so, green beside FORTUNE-C's lit arm (`close-5/CONFIGS.diff`). So FORTUNE's commit leaves ONE row red.
+- Q5 BY FILE, in the JOIN commit; each row's lane and cause in the message.
+- Q6 THE TWO TEXTS TAKEN WITH ONE CHANGE (made in `close-5/WHY-DRAFT.md`): "(the owner's word, "switch it on", at the
+  close)" became "(the first deploy's finish line, which the owner left to the chair on 2026-11-22: both laws landed and
+  lit; E30)". Arm 4's re-pin as proposed, WITH ITS TOOTH: outside the quoted history the text holds no "dark".
+- Q7 THIS SEAT'S, AS ITS OWN COMMIT, on the flipped tree, by 5c; the emitted town's stock narration WHOLE and the diff's
+  summary in `FOR-THE-OWNER.md`; the chair puts it to the owner before the flip lands.
+- Q8 YES, ON THE COMMIT THE CHAIR NAMES (the stack's DOORS commit once 108 and 109 are merged: WAIT for its word): lit by
+  `close-2/census/light.sh`; the 83 anchor files and the files 106 to 109 changed; one heavy run at a time; pushed as
+  `lane/close-5-2026-11-23-lit-scratch`, merged by nobody; a red on neither the census nor the red list goes to the chair
+  before anything is recorded.

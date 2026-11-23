@@ -1,0 +1,36 @@
+diff -ru a/tests/domain/seat/seatChainHolder.test.js b/tests/domain/seat/seatChainHolder.test.js
+--- a/tests/domain/seat/seatChainHolder.test.js	2026-11-23 04:11:41.147763317 +0000
++++ b/tests/domain/seat/seatChainHolder.test.js	2026-11-23 04:11:41.169035251 +0000
+@@ -113,8 +113,11 @@
+ 
+ afterEach(() => { dial.lit = false; seam.nobody = false; });
+ 
+-/** The probe's birth, exactly (`u7probe/probe.mjs`). */
+-const bear = (settType, seed) => generateSettlementPipeline(birthConfig({ settType, culture: 'germanic' }), null, { seed, customContent: {} });
++/**
++ * The probe's birth (`u7probe/probe.mjs`), with THE FORTUNE LAW FORCED TO 1 in its own config: this file means the seat law
++ * alone, and the flip lit fortune beside it (the final census's surprise: arm 8's liveness anchor moved; the chair's Q3).
++ */
++const bear = (settType, seed) => generateSettlementPipeline({ ...birthConfig({ settType, culture: 'germanic' }), _fortuneLawVersion: 1 }, null, { seed, customContent: {} });
+ 
+ /** The DM's road: the seat passed to `target` (`u7probe/probe.mjs`'s event, exactly). */
+ function dmTransfer(s, seed, target) {
+diff -ru a/tests/generators/people/dualHatPoliticalMass.test.js b/tests/generators/people/dualHatPoliticalMass.test.js
+--- a/tests/generators/people/dualHatPoliticalMass.test.js	2026-11-23 04:11:41.151763317 +0000
++++ b/tests/generators/people/dualHatPoliticalMass.test.js	2026-11-23 04:11:41.169209129 +0000
+@@ -55,11 +55,13 @@
+ beforeAll(async () => { await loadGenerationLawPayloads(); });
+ 
+ describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s political mass', () => {
+-  it('a small place keeps the power the fold of the office\'s face into the leader\'s house cut', () => {
++  it('a small place keeps the power the fold of the office\'s face into the leader\'s house cut (the fortune law forced to 1: the dark arm)', () => {
+     const misses = [];
+     for (const [seed, settType, stress, power] of CASES) {
+       const config = stress ? { ...DIALS, settType, selectedStresses: [stress], selectedStressesRandom: false } : { ...DIALS, settType };
+-      const s = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
++      // the fortune law FORCED TO 1 in the arm's own config (the chair's Q4): this arm is the reviewer's eight as they were
++      // found, under law 1; the lit arm below carries the fortune law's own eight
++      const s = generateSettlementPipeline({ ...birthConfig(config), _fortuneLawVersion: 1 }, null, { seed, customContent: {} });
+       const roster = (s.powerStructure?.factions || []).map((f) => f.faction);
+       if (!roster.includes(power)) misses.push(`${seed}: ${power} is not on the page (${roster.join(', ')})`);
+     }
