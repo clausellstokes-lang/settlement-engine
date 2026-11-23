@@ -20,8 +20,8 @@ THE FLIP BRANCH'S COMMITS (CLOSE-5's six, see its section 0), then mine:
 UNIT (2), the census-blind files: DONE by CLOSE-5 (points 106-109 in the Q8 trial; 110-112's five files lit at ec43beb7f, 352/352).
 "PROSE-E cf104777c" SENT by the chair at 10:10 UTC (N80; `origin/lane/prose-6-2026-11-23-e-wip`, 12 files vs 9b0ffaa97): merged
 into the flip by a plain merge at the NEXT COMMIT BOUNDARY (after F-FORTUNE commits, before LIT-13G's builder); a register conflict
-takes the flip side, then its door, own commit; a LIT red of `tests/domain/oppositeSentencePairs.test.js` is EXPECTED (PROSE-6's
-"LIT-DISAGREE" measure, line to come via the chair): name it, go on; ONE line to the chair: commit, conflicts, lit reds by name.
+takes the flip side, then its door, own commit; N83 (10:38): PROSE-6's "LIT-DISAGREE" found the tooth 6/6 GREEN lit, so
+`oppositeSentencePairs` is EXPECTED GREEN after the merge (a red there is classed like any other); ONE line to the chair: commit, conflicts, lit reds by name.
 
 THE BRIEFS: CLOSE-5's under `close-5/briefs/`, read through `close-6/briefs/CLOSE-6-ADDENDUM.md` (branch, logs, report path).
 

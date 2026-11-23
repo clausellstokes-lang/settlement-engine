@@ -195,10 +195,19 @@ index fb43b9966..7cc7a9139 100644
      expect(Math.round(s.economicState.compound.economyOutput)).toBeLessThan(35);
      expect(outputChipBesideWord(Math.round(s.economicState.compound.economyOutput), s.economicState.prosperity)).toBe(false);
 diff --git a/tests/domain/tailDisplayCivic3V1.test.js b/tests/domain/tailDisplayCivic3V1.test.js
-index 369b4d32f..4f81b8074 100644
+index 369b4d32f..fc65f072b 100644
 --- a/tests/domain/tailDisplayCivic3V1.test.js
 +++ b/tests/domain/tailDisplayCivic3V1.test.js
-@@ -61,13 +61,20 @@ const POW4C = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'r
+@@ -58,16 +58,29 @@ const POW4 = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'ri
+ // TAIL-CORPUS-DEF-2 reworded (51217c0e, DECLARED: "the office no longer shields the seat; no slot as a verb's subject")
+ // on the joined line before this guard joined it: the same town, the same vid, computed as the two above.
+ const POW4C = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'riskLabel: Critical. The seat could fall', 1, { seat: S0, settlement: S0, counterpart: c });
++// THE FLIP (CLOSE-6 F-FORTUNE, 2026-11-23): r2r-hamlet-27's lit pair is DS-POW-4 Contested v1, a drawn sentence whose named
++// power LEADS it, so the anchor is the clause BEFORE the sentinel (the slots after the power), computed as the three above.
++const POW4H = /** @param {string} c */ (c) => {
++  const text = variantByVid({ leaf: 'power', blockId: 'DS-POW-4', poolKey: 'riskLabel: Contested', vid: 1, slots: { counterpart: c, faction: S0, settlement: S0 } });
++  return text.slice(0, text.indexOf(S0)).trim();
++};
  // [seed, the sentence that must not print, what prints instead]
  const CURED = [
    ['r2r-city-44', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
@@ -218,7 +227,7 @@ index 369b4d32f..4f81b8074 100644
 -  ['r2r-hamlet-27', 'Military/Guard answers to the Elder Council', 'The Guard answers to the Elder Council'],
 +  // the lit birth's value (THE FLIP, 2026-11-23): r2r-hamlet-27's Guard no longer answers to the hall; its Guard sentence now
 +  // (was 'Military/Guard answers to the Elder Council' / 'The Guard answers to the Elder Council')
-+  ['r2r-hamlet-27', 'Military/Guard could now take the hall from the Elder Council', 'The Guard could now take the hall from the Elder Council'],
++  ['r2r-hamlet-27', POW4H('Military/Guard'), POW4H(powerSentenceName('Military/Guard'))], // the leaf's sentence-start form: the power leads
    ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],
    ['r2r-metropolis-39', 'Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],
  ];
