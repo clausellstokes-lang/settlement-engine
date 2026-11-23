@@ -77,8 +77,11 @@ THIS SEAT runs them after L1 (mutex-order.txt).
 R5D-SSKIP (ruling 123): brief `briefs/R5D-SSKIP-BRIEF.md` f3cdc6aa3; worktree `/home/user/wt/sskip`, branch
 `lane/veil-40-2026-11-23-sskip-wip` cut at aa54a6791 (the code branch with B2); the one writer of `pageRederive.js` now; DISPATCHED
 after the brief's push; its first measure (three checks) before any edit; mutex-order "WAIT" until the seat flips it.
-B2's BATCH (logs/full1) at 12:58: storedS0 and S2 ended (each 3 failed of 4 run: the stored arms B2 named); storedS1 still running
-(97% CPU since 09:30): IT HOLDS THE LOCK; RIVAL waits behind it.
+B2's BATCH (logs/full1): storedS0 and S2 ended 12:51 / 12:48 (each 3 failed of 4 run: the stored arms B2 named). storedS1 STOPPED BY
+THIS SEAT at 13:08 (ruling 125): its subtree TERMed, the batch ended `rc=1 13:08:29Z`, the lock FREE; KEPT: `logs/full1/s1-kept/`
+(m-storedS1.txt 30 lines, job-storedS1.log, stopped-at.txt). WHAT S1 HAD PRINTED: its fidelity line and its differential line for
+stored shard 1/3 (147 places; 190 hiding records) with 28 listed rows: the figures B2 summed in its hand-back; its stored plant and
+publicProse count had printed NOTHING. RIVAL: GO (told 13:08).
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -171,6 +174,8 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     document or the page's re-derived descs wherever the veil runs and the name is not served; Reveal DM on the page still serves the
     name; one line to the chair when the stored arm has run. GIVEN TO SSKIP (after its cure's green): dump both as saved to
     `/var/tmp/v18/t2/stored-v40/today-n96/`, add to the stored name arm. The tensions' half is chain C's (R5-TENSION).
+125. THE CHAIR, 13:03 (N98): B2's storedS1 STOPPED by the seat (tests since changed; what it counted is the seat's to re-run or moot:
+    `publicProse` withheld whole since N49); its log kept; RIVAL GO. DONE 13:08.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -190,3 +195,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 12:44 ruling 122; 12:48 the line on (2) sent.
 - 12:50 ruling 123; 12:59 SSKIP's brief (f3cdc6aa3), worktree, SSKIP dispatched; mutex-order rewritten (SSKIP, T5 WAIT).
 - 12:53 ruling 124 (read 13:03); 13:03 given to SSKIP.
+- 13:08 ruling 125: S1 stopped, the lock free, RIVAL GO; 13:09 PART 42.
