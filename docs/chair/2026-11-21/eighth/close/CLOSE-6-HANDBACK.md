@@ -43,7 +43,12 @@ short-purse charter-only hamlet in 1,000 lit (all 56 Comfortable or Prosperous).
 HAZARD MET 12:06 (mine): a push with NOTHING TO SEND started the whole check; killed; 15 (d) clean. EVERY PUSH NOW GUARDED:
 `[ "$(git rev-parse <br>)" != "$(git ls-remote origin <br> | cut -f1)" ] && git push ...`.
 | 8f882d0f0 | F-FORTUNE-3: bar4 (e2)'s KEEP born under law 1 (r2s-infiltrated-hamlet-0 Tolerated at the end), original form + title restored; comment names the 2,280 | builder: file 9/9 lit, lint the line's three, eslint 0; seat re-run 9/9 lit; PUSHED |
-IN FLIGHT (since 12:37 UTC): the LIT-13G MEASURE builder (brief `close-6/briefs/LIT-13G.md`; read-only on the flip at 8f882d0f0; its own dark worktree `/home/user/wt/line` at 9b0ffaa97; outputs `close-6/lit13g/`, report `close-6/reports/LIT-13G.md`). After it: ONE line to the chair, then F-JOIN while the ruling is pending (nothing built for 13g before the ruling).
+LIT-13G MEASURED (`close-6/reports/LIT-13G.md`, outputs `close-6/lit13g/`): 13g is ALREADY BROKEN DARK: 3 of 900 dark
+(dp-city-42, dp-metropolis-111, -118), 4 lit (+ dp-metropolis-83); only the fortune law moves it; cause: an ORDER fault
+(`factionStanding.js :: annotateFactionStanding` writes the war lines, gated by `seatBoughtOf`; the row's `corrupted` comes later
+at the coherence seam `withHallCapture`/`hallCaptureOf`). SENT to the chair ~12:55; ITS RULING PENDING; NOTHING BUILT FOR IT.
+IN FLIGHT (since 12:58 UTC): the F-JOIN builder (rows-JOIN.tsv; the addendum's rulings 5-8) in `/home/user/wt/flip` at 8f882d0f0;
+report `close-6/reports/F-JOIN.md`. NEXT: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
