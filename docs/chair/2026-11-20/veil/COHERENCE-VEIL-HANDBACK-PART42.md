@@ -48,8 +48,12 @@ THE BRANCHES AND WHAT EACH HOLDS (all `lane/veil-40-2026-11-23-*`, every commit 
   212; THE POOL-v40 SEEDS by `out/v27/tell2/measure/pool.sh <checkout> /var/tmp/v18/t2/pool-v40 v28tpl` (8 shards, about 23 minutes here,
   03:26-03:49; `verify.sh` 45 / 0 differ). Its run order: T5M-HANDBACK.md (q-chain.sh tpl under the mutex; smoke; towns; pool; insurg; an;
   Tell6; the two teeth); the chair's N102 rulings on its paper are ruling 128 here.
-THE LOCK (`/var/tmp/v18/out/v40/mutex-order.txt`, read by every builder): SSKIP GO (its count); then R5D-RIVAL's later steps; T5 off the
-box. No arm runs red and green on the FULL pools any more (N111 (3)): a builder's red and green run on its plant, named cases and a
+THE LOCK AT VEIL-40's STOP (16:03 UTC, the chair's N112): NOTHING RUNS. R5D-RIVAL and R5D-SSKIP were ENDED (TaskStop) with their trees
+clean and every commit on origin (r5rival 61a99a90d, sskip 0544c77ad). SSKIP's count NEVER STARTED: its mutex hold (PID 9430) waited
+since 15:53 on an ORPHANED vitest fork worker of R5D-RIVAL's (PID 9267, parent gone, cwd /home/user/wt/r5rival, started about 15:53:
+not a run this seat ordered); both TERMed; `sskip-count1/` is empty. THE LOCK FILE IS STALE (dead PID 9430): the next
+`gate-mutex.sh --run` reclaims it. SSKIP's count (`out/v40/sskip/count.sh <outdir>`, its four jobs in one hold) is VEIL-48's to run,
+on a slice where N111 (3) asks it. RIVAL's chains, arms, after and cost are VEIL-48's. The order file now says VEIL-40 STOPPED. No arm runs red and green on the FULL pools any more (N111 (3)): a builder's red and green run on its plant, named cases and a
 SLICE (the unit's standing slice, or the gate's 140 with 140 of each stored pool); the full pools are read ONCE, in the unit's proof,
 every arm of the stacked tree in one hold (RIVAL's full-pool green counts as the rival's part if its tree does not move).
 WHAT IS OPEN, IN ORDER (the successor's): (1) SSKIP's count -> the chair; SSKIP's cure, red first on a slice; (2) RIVAL's chains, arms,
@@ -311,3 +315,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 14:38 ruling 130 (chain B's two guard lines, taken at the merge after R4-IDS).
 - 15:48 T5M handed back unrun; 15:48 the chair told: RIVAL's green 2 h+; this seat proposes to hand over at RIVAL's return.
 - 15:52 RIVAL green; 15:53 the lock to SSKIP; 15:55 RIVAL's diff read whole: no fault; section 0 (the hand-over) written.
+- 16:01 the chair's N112; 16:03 R5D-RIVAL and R5D-SSKIP ended, the orphan worker and the queued count TERMed; VEIL-40 STOPPED.
