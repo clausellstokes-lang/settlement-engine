@@ -2,6 +2,55 @@
 
 Seat: VEIL-44, a seat of the NINTH chair (session_01FbPLbdpQrxXktCeSf32d4j; send_message, Claude Code Remote MCP). No pull request, ever. Pushes only to names beginning `lane/veil-44-2026-11-23`. Until the chair's "R4-IDS MERGED": PREPARE AND MEASURE; no line of 212, its rollback, the twin or the registry.
 
+## 0. PAUSED BY THE OWNER'S ORDER (the chair's N116, 16:12 UTC 2026-11-23: "Pause and record the progress to the veil work for handoff. Focus all your remaining effort on the close lane"). Written 16:14 UTC for a seat that has never seen this session.
+THE UNIT: IMPORT-DOOR (the lane's ruling 56: one veil, every door), chain B's second seat. ITS SQL IS NEVER MERGED BEFORE THE CHAIR'S "R4-IDS MERGED".
+NOTHING OF THIS SEAT IS IN THE LANE'S TIP (b58abc48b on `lane/veil-41-2026-11-23-tip`, unless the chair names a newer one). No pull request.
+### BRANCHES (all pushed; origin = local at the pause)
+- `lane/veil-44-2026-11-23` (documents: this file, the briefs, measures, scripts): this commit.
+- `lane/veil-44-2026-11-23-door-wip` db9fddc7d: the tip b58abc48b + MAPCOVERT-RED (merged 6c7bf0b97) + TRAD4-RECUT (merged db9fddc7d). TESTS ONLY; 212 untouched.
+- `lane/veil-44-2026-11-23-mapcovert-wip` 6edc79094 (merged); `lane/veil-44-2026-11-23-trad4-wip` c2afc9878 (merged).
+- `lane/veil-44-2026-11-23-mcsql-wip` (the shared map's NARROW GREEN, 212 + rollback + registry + hashes; brief `briefs/MAPCOVERT-GREEN-SQL-BRIEF.md`):
+  STOPPED AT ITS SAFE POINT on the owner's order, its work committed "WIP, UNPROVED (paused by the owner's order)"; its tip and state in its own
+  hand-back `out/v44/mcsql/MCSQL-HANDBACK.md` on that branch (read it FIRST; nothing of it is proven or merged).
+### PROVEN (each with its receipt)
+1. MAP-COVERT'S RED (the unit's first red): `tests/security/galleryMapCovert.pglite.test.js` 3 failed | 5 passed of 8 (the map member 24 sends, the
+   map import 24 on the hand plant at every marker, Reveal off; chain B's two places 60; controls (c) gallery, (d) link, the tooth green).
+   Builder's report `out/v44/mapcovert/MAPCOVERT-RED-HANDBACK.md` (mapcovert-wip); the seat's re-run 12:49 (`/var/tmp/v18/out/v44/mc-rerun.log`,
+   container-only; recipe `out/v44/mapcovert-rerun.sh`). The stored arm `UM_U=1 UM_ASSERT=map sh out/v44/mapcovert/um.sh ...` on stored-today
+   EXIT 1, 7 of 7 per cell (3 doors x 3 markers); stored-master EXIT 0 (no covert flag: proves nothing). Taken by the chair (N95).
+2. TRAD4-RECUT (unit 0, "an import equals the gallery read"): `tests/security/galleryImportEqualsRead.pglite.test.js` GREEN 5 of 5: 0 of 840 shares
+   differ (140 towns x 3 markers x Reveal off/on); the tooth reds. Report `out/v44/trad4/TRAD4-RECUT-HANDBACK.md` (trad4-wip); the seat's re-run
+   16:08 EXIT 0 (`out/v44/vitest-one.sh`). Taken (N115). `sameModuloIds` is the identity: SWITCH IT TO `personIdBijection.shared.mjs` AT R4-IDS.
+3. (c2) doors-3's own five arm files at 3e1115c81: 51 of 51 (`out/v44/c2/C2-DOORS-ARMS.md`, `out/v44/c2/doors-arms.sh`).
+4. (f) the door census at the tip: `out/v44/census/CENSUS-TIP.md` (`census.mjs`); (c1) and the rulings: the brief's ADDENDUM 2 and 3;
+   MAP-PIPELINE: `out/v44/MAP-PIPELINE.md`. tests/lint whole at 6c7bf0b97: 48 = the base's titles (16:13: the run at db9fddc7d ended or was
+   left; its log `/var/tmp/v18/out/v44/lint-door-db9fddc7d.log`, container-only: RE-RUN it on resumption, `out/v44/lint-whole.sh`).
+### RUNNING AT THE PAUSE
+- The SQL builder (stopped, above). tests/lint whole on db9fddc7d (a read; nothing depends on it).
+### OPEN, IN ORDER, TO "TIP? IMPORT-DOOR"
+1. MAPCOVERT-GREEN-SQL: finish from its hand-back (the narrow restatement of `get_gallery_map` as the LINK's read: the link's splice and
+   `_gallery_veil(..., true)`, at both Reveals; rollback = 211's statement); its proofs (the brief's (a)-(e)); then a test-only builder turns the
+   map doors' Reveal-DM records into assertions (N95 (2): the member and the map import send no covert copy at Reveal DM either).
+2. N115 (ordered 16:10, UNBUILT): (1) A MEASURE in figures: the gallery read's time at the lane's tip against master's own function on the same
+   840 public rows (is the veil's read slower per public row, and by how much; SAY AT ONCE if several times slower: it would hold the deploy);
+   (2) AN ARM, RED FIRST AT THE TIP: a read's work does not grow with the number of public rows, at the gallery read, the link, the import and
+   the map member, shown by the plan's rows or a counter, with the two wall-clock figures beside it; doors-3's one-row read is the cure;
+   (3) its row in "TIP?".
+3. SNAP-MEASURE (N84 (3)): both map reads' world snapshots on both stored sets and the fixtures: a settlement copy, a person, a `publicProse`
+   block, a name-search hit, by path and count; then their red and cure (the brief's units 2, 3).
+4. FROZEN-LISTS (N85): `list_curated_dossiers`, `list_featured_dossiers` print a frozen share's copy's name and tier, red first by a plant.
+5. On "R4-IDS MERGED <commit>": merge that tip into the door -wip (E116's five steps); switch `sameModuloIds`; re-run the census (`census.mjs`);
+   the R4-IDS x `_gallery_doors_chronicle` arm "a shown person stays shown" (N84 (4)); THE BUILD by the two-builder split: doors-3's section taken
+   into 212 (one restatement each of the tile rows, `get_gallery_map`, `get_unlisted_map`; the two import hunks), the door-census walker red
+   first, the tiles, the world snapshots, `import_gallery_map`, the brief's units 5 and 6, E124's four conditions.
+6. THE SEAT'S PROOFS (start message (3)): ONE NEW POOL, every door read (N5); THE DOOR-EQUALITY ARM (each door equal to the gallery read, the map
+   member to the LINK (N84 (1)), modulo the bijection, every ruled difference listed); then "TIP? IMPORT-DOOR <commit>".
+### THE MACHINE (container-only; re-made from a fresh container in about 50 min)
+`out/v44/chain0.sh` through `scripts/gate-mutex.sh --run` (npm ci in `/home/user/wip`, the ledger ref, `out/v28/seated/make-instruments.sh`, the pool
+`pool-v44`, verify, gates): at 11:31 its figures EQUALLED PART 44's (GATE-1 4, LOWER BY RULE 7; GATE-2 20). PG16 `/var/tmp/v18pg`, socket
+`/var/tmp/rv7`; template `v28tpl`. Stored sets `/var/tmp/v18/out/v44/stored-{today,master}` (MAPCOVERT-RED's recipe, from
+`out/v42/meas/RECIPES.md`). Every push GUARDED (HEAD against `git ls-remote`). The seat's record at the chair's read: 338,524 at 12:09.
+
 ## 1. WHERE THIS SEAT STANDS (THE SEAT'S MEMORY: kept current at every push; for a reader who has never seen this session)
 Written 10:49 UTC 2026-11-23.
 ### (1) BRANCHES, WORKTREES, MACHINE
@@ -67,3 +116,4 @@ Written 10:49 UTC 2026-11-23.
 - 12:12 the chair's mark 338,524 (12:09); section 1 (4) re-written for a successor.
 - 13:06 tests/lint whole at 6c7bf0b97: 48, the base's titles; the SQL builder waits for TRAD4 (the chair, 12:55).
 - 16:00 TRAD4 returned; MCSQL dispatched; A SLIP SAID: a line to the chair carried an unread hour (13:3x for 16:00), corrected at once.
+- 16:14 PAUSED by the owner's order (N116): the SQL builder told to stop at its safe point; section 0 written.
