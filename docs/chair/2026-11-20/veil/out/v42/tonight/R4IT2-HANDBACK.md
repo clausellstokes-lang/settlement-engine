@@ -38,6 +38,17 @@ at 015b3c020 (with its ADDENDUM, N59). No message from the seat about the "77" r
   (OWNER-MOVES: no twin in them). RE-RUN: every twin half (twin2, twinServer, ownerTwin) and shareRenderTwice's TONIGHT arm.
 - OWNER-MOVES on the 140: 0 lines moved of 374 people (`OWNER-MOVES.md`).
 
+## HOLD D (11:58-12:57 UTC): C PROVED ON THE POOL (1,808 places; the twin the projection)
+- (a) twin2 729 of 1,808 places differ -> 0; server2 719 -> 0. (b) twin vs served 723 -> 0; served vs the page's read (beside)
+  723 -> 0. (c) nothing-hidden places (1,200): a role line on both: 2 persons a read; RED (moved) 0 to 2 a read before
+  (ownerTwin gallery|off 1, link|off 1, gallery|dm 2, link|dm 0; ownerServer 2, 2, 2, 0) -> 0 on every read after; goal
+  withheld by the read (named, not red): 554 persons in 522 places a read (0 on gallery|dm); other line moved 36 on gallery|dm
+  (named). Named: `C-OWNER-HALF-POOL.md`. All four shards rc=0 both runs. CONFIRMED.
+- OWNER-MOVES on the pool: 2 lines moved of 4,787 people, both cast-voiced levers (t2b-village-none-1906 Dokuz Ongut;
+  t2p-village-none-22 Rain Goddess May): "decide who gets the shelter ..." -> "share out the shelter ...". `OWNER-MOVES.md`.
+  The pool's red-vs-red owner dumps (hold B vs hold D's red): 0 moved (the dump is deterministic).
+- Hold E (tests/lint, tests/copy, typecheck ratchet, domain strict) started 12:57 at 7ea3dfc69.
+
 ## COMMITTED
 1. 550e2e427 docs: `out/v38/r4it/` brought from `lane/veil-42-2026-11-23` (said); the three-halves arm
    `out/v42/tonight/tonight-arm2.probe.jsx` + `.sh` + `-an.mjs` + `-named.mjs`; the hand-back (then a skeleton; this file now).
