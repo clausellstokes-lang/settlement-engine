@@ -21,14 +21,11 @@ DONE, WITH COMMITS:
 - (P) THE STALE PIN (E136 (e)): 2d7ed483f (parent af708f2fd; one test file +6 -3): `galleryVeilHandRows.pglite` "V7-2 THE PRESSURE
   SENTENCE"'s row re-stated to E97 (1), `{ gone: WARDENS }`. Red at af708f2fd 1 of 25; green 25 of 25; `tests/lint` whole 48 of 3,304,
   the tip's own 17 files by name and count. ACCEPTED BY THE CHAIR 01:03: THE LANE'S TIP.
-- (P2) A SECOND RED AT THE TIP (the chair's unit, 01:01): `tests/lib/gallery.test.js` "a share marked with a veil renders through it:
-  the defaults hide, a delta shows" (line 620, `availableServices.criminal` 0 of 1). MEASURED by builder V39-P2 (6f19a6cee,
-  `out/v39/p2/P2-MEASURE.md`; re-run by the seat: green at d6d8644b2, red at 369331d72): first red R3-TELL-5 unit (ii)'s CURE
-  369331d72 (merged 66e43865d): `galleryRosterChoices.js :: applyRosterChoices` rule (e), a criminal services row by positive account;
-  the fixture's 'Black market' row names no listed house. A STALE PIN (rulings 73 (2), 74 (ii)) CONFIRMED as on purpose, PLAUSIBLE as the
-  whole cause; unit (viii) REFUTED. Sent 01:20; AWAITING the chair's ruling; if a stale pin, the restatement (the fixture lists the
-  'Black market' house; one assertion that an unaccounted row leaves) is a second test-only commit on `-tip`, file green and
-  `tests/lint` whole, one "PIN" line naming both.
+- (P2) A SECOND RED AT THE TIP (the chair's unit, 01:01): `tests/lib/gallery.test.js` S2 (line 620). MEASURED (6f19a6cee,
+  `out/v39/p2/P2-MEASURE.md`): first red R3-TELL-5 unit (ii) 369331d72, `applyRosterChoices` rule (e); RULED A STALE PIN (the chair
+  01:21; restated in two halves). WIDENED 02:38/02:43 to THE CLASS: the 34 files outside tests/security naming the veil's doors, run
+  at the tip 03:55-04:03 (`/var/tmp/v18/out/v39/p2/class-tip.log`): 2 red (S2; `criminalVeilSwitch` VS1 "(a)-(e) hold on every
+  birth", `teeth.other.tried` 0); `galleryVeilSignalCopies.pglite` alone 2 red of 5 (04:03-04:18, ~15 min a run). See RUNNING.
 
 - (C1) THE STORED UNIVERSE's GATES AND DIFFERENTIAL, DONE (01:03-02:07 UTC; tree lp at 302976386, template c1_tpl; receipts
   `out/v39/c1/tell2-table.txt`, `lp-table.txt`, `run-window.txt`): on the 1,948 today-born STORED documents (each carries
@@ -40,12 +37,19 @@ DONE, WITH COMMITS:
   differs: t2b-town-wartime-38). Row tells (name/kind/key): power.desc 20/0/0 (chain A's R5-DESC), power.conflicts 3/0/0,
   pressureSentence copy 2/0/0; key-only tells (svc.criminal 596, plotHooks 303, criminalInstitutions 165, ...) as the lane's.
 
-RUNNING:
-- (C2) builder V39-C2M (brief `briefs/V39-C2M-BRIEF.md`, branch `lane/veil-39-2026-11-23-c2m-wip`, worktree /home/user/wt/c2m): the
-  measure of shape (c) (M1 equality, M2 the cure holds, M3 the three recompose rows' substitution, M4 bytes, M5 the pins it moves).
-  Its full runs wait for C1's end.
+- (C2) MEASURED by builder V39-C2M (its report `out/v39/c2m/C2M-MEASURE.md` in /home/user/wt/c2m, branch
+  `lane/veil-39-2026-11-23-c2m-wip`, its commit pending): shape (c) REFUTED (M1 0 of 1,248 nothing-hidden places equal; M2
+  recentConflict still held on 1,790; M5 42 pins red, lint 49). THE PROPOSAL WRITTEN: `out/v39/c2/C2-PROPOSAL.md` (47 lines; lean
+  (b), the composed host built in both engines, applied at read; (a') the interim), sent 05:0x.
 
-C2's STATE: VEIL-33's (a) "composed on the page" is OUT (the chair, 00:38: STYLE-RULINGS-2 B10(a), `publicProse.js`'s header: the
+RUNNING (05:01 UTC):
+- (P2) builder V39-P2 (agent, worktree /home/user/wt/tip, uncommitted edits to `tests/lib/gallery.test.js` and
+  `tests/security/galleryVeilSignalCopies.pglite.test.js`): the signalCopies re-run since 04:49 (the first re-run after its edit was
+  still 2 red). Then ONE test-only commit, the class re-run at it, `tests/lint` whole, `out/v39/p2/P2-CLASS.md` on p2-wip. NOT PUSHED;
+  the seat pushes `-tip` after reading the diff once and re-running red and green, then "PIN-2 <commit>".
+- (C2) V39-C2M's sourcemap builds for M4's chunk (since 04:30), then its commit.
+
+C2's STATE (history): VEIL-33's (a) "composed on the page" is OUT (the chair, 00:38: STYLE-RULINGS-2 B10(a), `publicProse.js`'s header: the
 seed never ships; an absent block prints silent). The proposal (at most 60 lines, `out/v39/c2/C2-PROPOSAL.md`, NOT WRITTEN) costs
 (a') no prose served, (b) block by block alone, (c)+(b) side by side, and answers the chair's (i)-(v) (00:38) and the TABLE OF THE 23
 `prose.*` ROWS on a planned host (00:56; the registry's rows with inputs: `/var/tmp/v18/out/v39/prose-rows.txt`, re-made by the node
@@ -65,7 +69,7 @@ RE-MAKING THIS MACHINE (a fresh container; wall times measured here, 4 cores):
   `tests/lint`.
 - To hold a long chain between its lines: `kill -STOP <the script's sh pid>` (the running child finishes), `kill -CONT` after.
 
-NEXT STEP IN ONE LINE: (P2)'s restatement on `-tip` (builder V39-P2, its lint run), "PIN-2"; C2M's measure; the proposal file; then "HANDS OVER" with this section current.
+NEXT STEP IN ONE LINE: the chair's ruling on C2-PROPOSAL; V39-P2's commit verified and pushed as "PIN-2"; then "HANDS OVER" (by 600,000). C2-BUILD is the successor's.
 
 ## 2. RULINGS SINCE PART 38's 111 (the ninth chair's; each vetoable by the owner)
 112. THE NINTH CHAIR'S SEATING WORD (N1-N6, 2026-11-23): the chair is session_01FbPLbdpQrxXktCeSf32d4j; no pull request ever; this
@@ -84,4 +88,6 @@ NEXT STEP IN ONE LINE: (P2)'s restatement on `-tip` (builder V39-P2, its lint ru
 - 00:13 seated on 302976386. 00:15 the re-make started. 00:15-00:18 the pin's red at af708f2fd. 00:29 first message. 00:3x 212 and the
   registry read whole; the C2 surprise sent. 00:4x cc09b5d56 pushed. 00:44 the pin green; 00:57 lint whole 48;
   01:02 2d7ed483f pushed, PIN sent; remake resumed 00:57. 01:03 PIN accepted, the tip 2d7ed483f; (P2) given. 01:08 V39-C2M
-  seated; 01:13 V39-P2 seated and returned; 01:20 (P2) sent. 01:17 the mark: 449,165; C2-BUILD is the successor's.
+  seated; 01:13 V39-P2 seated and returned; 01:20 (P2) sent. 01:17 the mark: 449,165; C2-BUILD is the successor's. 02:07 C1 done;
+  02:38/02:43 (P2) widened to the class. 03:55-04:03 the class run at the tip. 04:59 the chair's status call (and chain B's fact: the
+  gates' signature is a shape check, no prose); 05:00 answered. 05:01 C2-PROPOSAL written.
