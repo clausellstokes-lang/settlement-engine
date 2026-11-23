@@ -264,3 +264,31 @@ helper, never into the chair's context.
 - 2026-11-23 01:40 UTC · THE CHAIR'S SECOND PUSH (85677ffff) ENDED exit=0 at 01:22 UTC THROUGH THE LANE HOOK (type ratchet 167 of
   167; strict 1113 of 1113; eslint 0 errors, 38 warnings): CONFIRMED from its log. THE CHAIR'S OWN MARK: 744,703 at
   01:21 UTC: the READ THIS FIRST block above is written for what follows.
+- 2026-11-23 02:02 UTC · N25 · "VACANT 4ef6d6c32" TAKEN FOR LANDING (01:55 UTC). `lane/close-4-2026-11-23-vacant-wip`: checked by the
+  chair on origin: it stands on the line's tip 244fa84ef, six commits, six files (four under src/, the seat test, the
+  lighting census). By the seat's own runs: red 10 of 10 on the ten seeds and green 19 of 19; arm (15) red by plants;
+  the dark proof EQUAL (242edc8e…, 900 births); lit 9 of 900 move, the same nine; `tests/lint` whole the line's three;
+  first paint +0 / +17 / -170, the worker +2,039, the engine chunk +214 (NAMED for the owner, signed by nobody). It
+  found and cured in its own gate a `voiceMechanics` red that cure one had caused (two "!" in string literals). IT
+  WAITS FOR A LANDING: first on the stack after point 106; THE LANDING IS STILL PARKED ON THE OWNER'S OWN WORD.
+- 2026-11-23 02:02 UTC · N26 · A NEIGHBOUR OF THE PRONOUN FAULT, RULED INTO "PRONOUN" (found by CLOSE-4): "an introduction he would
+  rather keep to themselves" (a pronoun mention followed by a they-form bound to the same person; new with point 77's
+  second-mention rule). **Decided:** in the templates where a later mention's own clause binds a they-form to that
+  person, THE MENTION KEEPS THE NAME; a hand-classed list held by the walker; NO code rewrites a reflexive.
+  MEASURED BY THE SEAT: 8 later mentions in 7 templates carry a they-form; TWO bind the mention itself
+  (`mutual_leverage.tension[12]`, `mutual_leverage.desc[8]`); six bind someone else and keep the pronoun. **Why:**
+  the sentence then reads as its author wrote it (as before point 77); code cannot know whom "themselves" binds.
+  **Rejected:** agreeing the reflexive by code; a reflexive slot in the templates (the right form, more golden rows
+  moved: for after the first deploy). **Reversal:** two entries of the leaf's closed list. **Open risk, the seat's:**
+  `namesInSentences` CN2's ceiling (a full name twice in a sentence): if the kept names raise it, it STOPS and comes
+  to the chair.
+- 2026-11-23 02:02 UTC · N27 · DAILY-5's D5C-2 PHASE B BUILT (by its measure: 0 filled sentences and 0 families over the bar; no extra
+  line). ITS SURPRISE RULED (b): P16 and P20 of `gathering_places`' `plain` branch were drafted with no need, so the
+  branch was never empty and three pins of the ruling of 18:19 ("a slot with no true line is the EMPTY string") went
+  red on their no-house fixture. **Decided:** both lines gain `["institution: dwellings"]`; the three pins stay and
+  must be green; re-measure the 900 (the slot still prints on 150 of 150 a size; nothing over the bar) or STOP.
+  **Why:** COMMON-RULES 1 (each wording declares the facts it needs); a no-need line in a branch whose condition is
+  an absence is the filler the program removes. **Rejected:** (a) re-pointing the three pins to "the plain branch is
+  never empty". **Reversal:** the two needs.
+- 2026-11-23 02:02 UTC · VEIL-38's POOL (made once, on the -wip with S1 merged): GATE-1 4 of 92, LOWER BY RULE 7, GATE-2 20 of 40,
+  against the rule 0, server sample 0 of 112 differ: NO WORSE than the lane's standing figures (its own run).
