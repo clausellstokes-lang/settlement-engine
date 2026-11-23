@@ -21,6 +21,14 @@ const repair = (r, d, t, keyed) => {
     if (keyed && r.restoredBy) { const ka = r.restoredBy[`${t}\u0001L\u0001${a}`] || []; const kb = r.restoredBy[`${t}\u0001G\u0001${b}`] || []; const both = ka.filter((k) => kb.includes(k)); if (both.length) r.restoredBy[`${t}\u0001C\u0001${a}\u0001${b}`] = both; }
     (r.repaired ||= []).push(`${t}: ${a} => ${b}`);
   }
+  // a lost and a gained BARE FIGURE of one tab (a share tile: "34" | "56") pair as CHANGED, in order
+  const fig = (x) => /^[\d.,%+\-−]+$/.test(x);
+  for (;;) {
+    const i = d.lost.findIndex(fig); const j = d.gained.findIndex(fig); if (i < 0 || j < 0) break;
+    const a = d.lost[i]; const b = d.gained[j]; d.lost.splice(i, 1); d.gained.splice(j, 1); d.changed.push([a, b]);
+    if (keyed && r.restoredBy) { const ka = r.restoredBy[`${t}\u0001L\u0001${a}`] || []; const kb = r.restoredBy[`${t}\u0001G\u0001${b}`] || []; const both = ka.filter((k) => kb.includes(k)); if (both.length) r.restoredBy[`${t}\u0001C\u0001${a}\u0001${b}`] = both; }
+    (r.repaired ||= []).push(`${t}: ${a} => ${b} (figure)`);
+  }
 };
 for (const r of rows) {
   if (r.diff) for (const [t, d] of Object.entries(r.diff)) repair(r, d, t, true);
@@ -70,7 +78,7 @@ for (const r of F.filter((x) => !x.error)) {
 const tot = (cls) => Object.entries(FT).filter(([k]) => k.endsWith(`|${cls}`)).reduce((a, [, n]) => a + n, 0);
 console.log(`\n(F) ${F.length} births, P0 lines ${nLines}, P1 lines ${nP1}, renders ${renders}; hand marker left something hidden on ${hidLeft} births`);
 console.log(`(F) TOTAL lost ${tot('LOST')} / gained ${tot('GAINED')} / changed ${tot('CHANGED')} / order ${tot('ORDER')} / moved ${tot('MOVED')} over ${nLines} P0 lines`);
-console.log(`(F) pairs made on a short label (6 to 11 characters): ${rows.reduce((a, r) => a + (r.repaired?.length || 0), 0)}${rows.flatMap((r) => (r.repaired || []).map((x) => ` | ${r.seed} ${x}`)).slice(0, 3).join('')}`);
+console.log(`(F) pairs made on a short label (6 to 11 characters) or as bare figures: ${rows.reduce((a, r) => a + (r.repaired?.length || 0), 0)}${rows.flatMap((r) => (r.repaired || []).map((x) => ` | ${r.seed} ${x}`)).slice(0, 3).join('')}`);
 console.log(`(F) tabs only on P0 ${J(tabsOnly.P0)} | only on P1 ${J(tabsOnly.P1)}`);
 console.log('(F) BY TAB x CLASS');
 for (const [k, n] of Object.entries(FT).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(48)} ${n}`);
