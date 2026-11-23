@@ -204,6 +204,13 @@ its work done at 12:08). THE JOIN FOUND A FOURTH NEW RED (`traditionDescriptionS
 UNIT 2"): into "REDS-CAUSE" with the three. U ON THE MASTER-BORN SET: 0 OF 140 HOLD A COVERT COPY: GIVEN TO THE OWNER
 FOR HIS DECISION. R4I-SQL-2 IS DISPATCHED (chain B). THE JOIN'S SUCCESSOR HAS A DRAFT (`prompts/DRAFT-START-VEIL-46.txt`).
 THE OWNER IS TOLD that the switch-on's landing will need his one line in the landing seat's session.
+SINCE N93 (N94): CHAIN A's TESTS BUILDER (R5D-PAGE-B2) RETURNED UNFINISHED AT ITS BUDGET, with two questions, RULED:
+"GAP-BASED" IS THE WIDE READING (the rank family and the pair forms; the reader's row 25 amended); AND A SHARED PAGE
+PRINTS NO STANDING THE OWNER'S PAGE LACKS (reader S appended one to 48 density rivals of the stored pool): cured in
+chain A's unit before its "TIP?"; the seat owes one line on how S can know such a row. THREE MORE NEW REDS OF THE JOIN
+ARE CLASSED (the lint walkers: 16 expected, one new: `holderOfSeat.js :: transferTakerOf`, to unit (2)'s sites).
+"F-FORTUNE-3 8f882d0f0" IS ON THE FLIP BRANCH AND LIT-13G's MEASURE IS RUNNING. CHAIN A's SUCCESSOR HAS A DRAFT
+(`prompts/DRAFT-START-VEIL-48.txt`); SO HAVE CHAIN C's (VEIL-45) AND THE JOIN's (VEIL-46); THE DOORS' (VEIL-47) IS OWED.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2601,3 +2608,71 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   and their successors' start messages are drafted; AND THAT THE SWITCH-ON'S LANDING WILL NEED HIS ONE LINE IN THE
   LANDING SEAT'S SESSION, AS LAST TIME (the chair asks him when it is time whether it reuses the seat he allowed or
   opens a fresh one).
+- 2026-11-23 12:47 UTC · N94 · CHAIN A: "GAP-BASED" IS THE WIDE READING; A SHARED PAGE PRINTS NO STANDING THE OWNER'S
+  PAGE LACKS (48 ON THE STORED POOL); THE JOIN'S LINT REDS CLASSED (ONE NEW SITE); STOP 2 ACCOUNTED; "F-FORTUNE-3";
+  CHAIN A's SUCCESSOR HAS A DRAFT.
+  (1) CHAIN A's TESTS BUILDER RETURNED (VEIL-40, queued 12:42:55): R5D-PAGE-B2 came back AT ITS BUDGET (about
+  340,000), UNFINISHED: aa54a6791 on `lane/veil-40-2026-11-23-r5desc-wip`, pushed; nothing in `src/` or `supabase/`
+  changed. DONE: stored pools of 440 today-born and 440 master-born documents; on the full stored pool reader B's
+  differential 4,232 of 4,232 equal; the share class 508 rows on 115 records; the per-read hash table (N67) 0 of 2,992
+  reads differ; typecheck and eslint pass. NOT RE-RUN: the differential's 40 and the plant's 128 tension faults (test
+  faults, fixed in the test); the seat runs the builder's queue of re-runs itself after the whole-document form. TWO
+  QUESTIONS CAME WITH IT.
+  (2) **Decided (N94 (1)): "GAP-BASED" IS THE SEAT'S WIDE READING.** N35 (1) lists a DM-door read only where the two
+  pages differ "in S's gap-based forms alone". THE READING: every form picked by a difference between two served
+  figures against a threshold: the rank family (R1-, R2-, RL-few, with their M- and H- wordings) AND the pair forms
+  (AR, RA, CM, MC, MT, NM, GT, TG, RT, GR, ST); OC-* is not. Under it the slice pins 36 on 9, N35 (1)'s own count;
+  under the rank family alone 8 rows on 2 records of the slice and 60 on 15 of the stored pool would stand as faults,
+  all of one cause (a pair margin crossed by the re-share). **Why:** it is one cause: the never-there page re-shares
+  the figures by largest remainder and moves one by one; a rank gap or a pair margin crossing its threshold is the
+  same event; the DM door serves the stamped row and the raw figures by rule, so the line says nothing the payload has
+  not said. CONDITIONS: the ids are written in the arm BY NAME, each with the two figures and the threshold it reads;
+  the slice's 36 on 9 is RE-RUN (it was counted on paper after a first run under the narrower reading); the full
+  stored pool's count is pinned and said beside it; every other difference stays a fault. THE READER'S ROW 25 IS
+  AMENDED WITH THIS ENTRY.
+  (3) **Decided (N94 (2)): A SHARED PAGE PRINTS NO STANDING THE OWNER'S PAGE LACKS.** The builder's stop: STORED
+  FIDELITY, 48 FAULTS: reader S (`src/domain/veil/pageRederive.js :: rederiveStanding`, on chain A's -wip: R5-DESC IS
+  UNMERGED) appends a standing to a density rival whose stored description carries none: the shared page prints a line
+  the owner's page lacks; it names no hidden power: a fidelity gap, not a leak. READ BY THE CHAIR at aa54a6791 (:222
+  to :338): S runs the engine's own writer over the SERVED roster and appends its tail to EVERY served row with a
+  description. THE RULE: S appends a standing only to a row whose stored description carried one; A FAULT OF THE
+  UNIT'S OWN READER, CURED IN THE UNIT BEFORE ITS "TIP?", by a builder with `src/` scope, red first on the 48 and a
+  plant, the never-there differential re-run. BEFORE ITS BRIEF THE SEAT OWES ONE LINE: by which SERVED fact S can know
+  a row the birth's writer never wrote a standing for. THE CHAIR'S LEAN, if none exists: `contestsNiche` moves from
+  withheld-always to served with its row once the rival's rule holds (N63: a served rival has its host served beside
+  it, so the key tells nothing hidden) and S skips a row that carries it: 212, the twin and the registry row move
+  inside chain A's own unit. NO BIRTH MOVES BY A BYTE. **Why:** the bar lets a shared page say less; a line the
+  owner's page does not print is the page inventing.
+  (4) NOTED FOR THE PARAGRAPH ON WHO GOVERNS (N89 (2)): the same file's `rederiveForPage` already puts back, from the
+  served document alone, the defence scores, the readiness score, the economic gates, the economy's output, the crime
+  types and the recent-conflict sentence: THE LANE'S OWN PATTERN FOR A WITHHELD-ALWAYS KEY THAT A PAGE READS IS A
+  RE-DERIVER THERE. The legitimacy breakdown's cure may therefore be a re-deriver beside them (as `importRederive.js`
+  :206 has for the import), not only "fail closed": weighed when "PAGES" and "REDS-CAUSE" come.
+  (5) THE JOIN (VEIL-43). "REDS", `tests/lint` whole, classed (queued 12:31:45): the lane's tip 48 of 3,304; the join
+  65 of 3,442; all 48 of the tip's are red on the join too; the join's 17 more: the line's own 3; the worklist's 12
+  (fixtureGitIsolation 3, ruinFilterRoster 2, tuningRegister 3, writerReach 3, the registry walker's arm A 1); one by
+  consequence, plausible (`sourceCitationIntegrity` arm 2: six citations past the end of a file the join holds in the
+  line's shorter version); AND ONE NEW: `recentConflictReaders.walker`: `src/domain/seat/holderOfSeat.js ::
+  transferTakerOf` unregistered (point 97). READ BY THE CHAIR ON THE LINE (:197 to :210): it finds a transfer's taker
+  from the relations' edge wordings and reads `powerStructure.recentConflict` ONLY to choose between two or more
+  takers; with that key withheld it falls to the LAST taker: after two transfers a veiled page can name another holder
+  of the seat than the owner's page: in play only. **Decided:** the site goes to unit (2)'s sites with the sixteen;
+  its row says which sentence a veiled read hands it and what the seat's lines print then (the reader's rows 19 and
+  22's reader). THE JOIN'S NEW REDS SO FAR: FIVE FILES. STOP 2's LINE (queued 12:32:01; `LOWER7.md` section (b2) at
+  9483ffce9): UNIT (ii)'s POSITIVE ACCOUNT HOLDS on 106 and 104: "Gambling Halls" and "Red Light District" are each
+  accounted for by a SERVED house of that name (Entertainment); none unaccounted; twin = server: BY N88 (c) THEY STAY,
+  by the code's rule (`galleryRosterChoices.js :: applyRosterChoices`, block (a)). VEIL-44 (12:21): its builder
+  TRAD4-RECUT writes a NEW file (`galleryImportEqualsRead.pglite.test.js`) and never touches the traditions test: that
+  file has one hand, the join's.
+  (6) THE FLIP (CLOSE-6, queued 12:40:47): "F-FORTUNE-3 8f882d0f0" on the flip branch (1 file, +10 -5: ITS CHANGED
+  LINES READ BY THE CHAIR): `bar4HistoryOneTelling` (e2)'s KEEP is born under law 1 in that assertion's own config,
+  anchored on the seat ending Tolerated, its original line and title restored, its comment naming the 2,280 lit births
+  (8 accepted at the history step, none unapproved at the end); the lit arm above untouched; its lit re-run 9 of 9.
+  THE LIT-13G MEASURE'S BUILDER IS DISPATCHED (read-only); then the seat's line, then F-JOIN.
+  (7) THE MARKS' CONSEQUENCE AND THE DRAFTS: VEIL-40 read 377,717 at 12:08 (+55,988 in the hour): it passes 570,000
+  near the end of its stacked proof: told to keep its PART 42's first section current; ITS SUCCESSOR'S DRAFT IS
+  COMMITTED WITH THIS ENTRY (`prompts/DRAFT-START-VEIL-48.txt`: a draft with blanks; the chair's rulings on the unit
+  listed (a) to (f): the rival, T5 with its controls and the two stops, the share class, S's rule, the whole-document
+  form at two doors, the bar and its run). VEIL-44 (12:17): its mark taken; its PART 46 section 1 (4) re-written for a
+  successor (1c57ebdd9). THE CHAIR'S PUSHES: the fortieth (317774598: N93) ended exit=0 at 12:19:05 UTC (its log;
+  ls-remote equal to the local tip).
