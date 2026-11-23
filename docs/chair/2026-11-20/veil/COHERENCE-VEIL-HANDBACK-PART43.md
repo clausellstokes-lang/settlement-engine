@@ -86,10 +86,33 @@ STATE AT 07:48 UTC:
   label and default). Builder V41-PINS on c2-wip, brief 344d04753 (`out/v41/pins/PINS-BRIEF.md`), report `/var/tmp/v18/out/v41/pins/PINS-REPORT.md`.
 - MY CLOCK FAULT (N78): two hours I wrote ("07:47", "09:10") were not read from date -u; corrected to the chair 09:06. Every hour from date -u.
 
-NEXT ACTS, IN ORDER: PIN-3's return -> its re-runs -> "TIP? PIN-3" -> push the tip branch on the grant -> merge the new tip into c2-wip (E116's five
-steps); the pins' builder; then on the merged c2 tree: ppkey whole (N67), `out/v33/stored/prose.sh` all rows 0, the read-stored gates on tip and
-built, 001..211 + 212 + down and the catalogue, tests/lint and tests/copy whole, the N33 set, typecheck, eslint, first paint +0, the cost law's figure;
-"TIP? STORED-PROSE <commit>".
+STATE AT 11:22 UTC (date -u), FOR A SUCCESSOR (the chair drafts `prompts/DRAFT-START-VEIL-45.txt`; I hand over at 570,000 by its read):
+OPEN BRANCHES AND BUILDERS (all in this container; pushed by `/var/tmp/v18/out/v41/autopush.sh`, log `autopush.log`, every 2 min, by name):
+- `lane/veil-41-2026-11-23-pin3-wip` b58abc48b (pushed): PIN-3, BUILT, its builder done; diff read whole by the seat and by the chair. GRANTED IN
+  ADVANCE (N82) on ONE condition: the seat's own re-run of `tests/domain/display/criminalVeilSwitch.test.js` green (queued: `pin3-seat.sh`, log
+  `/var/tmp/v18/out/v41/pin3/seat.log`). THEN: push `lane/veil-41-2026-11-23-tip` AT b58abc48b (a fast-forward of 23bb8b8ae: create a local branch
+  of that name at b58abc48b in a worktree and push it by name) and send "PIN-3 MERGED b58abc48b".
+- `lane/veil-41-2026-11-23-c2-wip` (/home/user/wt/c2): C2-BUILD 2707d6829 + report 79e94d633; builder V41-PINS (brief 344d04753) committing the
+  re-stated pins on top (PINS 3, 6, 7 at 88b5156e3 so far); its report `/var/tmp/v18/out/v41/pins/PINS-REPORT.md` with TABLE A and LINE B.
+- `lane/veil-41-2026-11-23-tension-wip` (/home/user/wt/ten, cut at 79e94d633): builder V41-TEN, R5-TENSION (N85 (2); brief 3b2d62a78): first
+  arm (i)'s measure (the mask word at any path but party lists = STOP; the seat holder's mask LISTED by E94, not a stop); writes no hunk in chain A's
+  tension rule (212 `_gallery_veil_roster_choices`, near the tip's :2409-2413) unless it stops first; plant red; both engines; one row.
+CLOSED: TENSION-PARTIES (a29c38f6a; N85: no row; C1's 18 the lookup's artifact; the link's two differences LISTED, not faults; 1,894 to the owner);
+the readers' check (no blind test; the three out/v33 probes a seventh blind instrument, a miss only adds; 17 of 150 rows suffixed; fix = step 0 of
+LEGACY-TELLS). VS1 CAUSE sent and ruled (PIN-3).
+MUTEX ORDER (N85, 11:19): set BY WORD to builders (an order file read at their run boundaries), NEVER by a signal (my SIGSTOP script was REFUSED
+11:13; the refusal stands).
+
+NEXT ACTS, IN ORDER: (1) PIN-3's green -> the -tip push -> "PIN-3 MERGED"; (2) merge the new tip (b58abc48b) into c2-wip after PINS ends (a plain
+merge in /home/user/wt/c2; E116's five steps if 212 moved: it did not in PIN-3); (3) TEN's return: read its diff once, re-run its plant red/green;
+merge tension-wip into c2-wip; (4) THE WHOLE PROOF on the merged c2 tree, in this order on the mutex: a template `v41_c2` (createdb -T v27x211 +
+the merged 212), `sh docs/chair/2026-11-20/veil/out/v41/c2/ppkey.sh /home/user/wt/c2 /var/tmp/v18/stored/today/docs /var/tmp/v18/out/v41/ppkey-c2
+v41_c2 pc` (N67: 0 carry on every door and the twin; the sha table, count of differing reads), `out/v33/stored/prose.sh` (every row 0), the read-
+stored gates (`out/v33/legacy/stored.sh`) on the tip tree (v41_tip) and on c2 (v41_c2) (standing: GATE-1 4 of 92, LOWER BY RULE 7, GATE-2 20),
+001..211 + 212 + down (`tests/security/galleryVeilCures.pglite.test.js`) and the catalogue, `tests/lint` and `tests/copy` whole, the 55-file set
+(`/var/tmp/v18/out/v41/pins-set.txt`), typecheck, eslint, ONE build with first paint's figures and `VERIFY_DIST=1` (+0 expected), the cost law's
+figure; (5) "TIP? STORED-PROSE <commit>" with: unbuilt rows 40 -> 23; the differing-sha count; the unregistered path's test and count on both trees;
+table A and line B; the fidelity gap (the ring note's vantage).
 
 ## 2. RULINGS IN FORCE (the ninth chair's; continuing PART 41's 118)
 119. THE START MESSAGE (2026-11-23 05:21): seated lean; units (0)-(4); one builder for C2-BUILD; the whole-document "server = twin" form is the chair's
