@@ -3059,15 +3059,12 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence · prosperity: ≤ comfortable · no force: paid]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
-2. `[street · guardPresence · prosperity: ≤ comfortable · no force: paid]` The people who would have to hold {settlement} through something know there is no money to pay them for it.
+1. `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+2. `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through a long defence know there is nothing laid by to pay them for it.
 3. `[unfolding · prosperity: ≤ comfortable · crisis: calm]` {settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.
 4. `[ledger · no guardPresence · prosperity: ≤ comfortable]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.
 5. `[street · no guardPresence · prosperity: ≤ comfortable]` If {settlement} ever had to hire people to defend it, it would have to borrow the money first.
 6. `[ledger · prosperity: ≥ prosperous]` {settlement} is well off, but little of its wealth is set aside for its defence, and a long crisis would soon outrun what is.
-7. `[ledger · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} keeps paid guards, but nothing is laid by to pay them through a long defence.
-8. `[street · guardPresence · force: paid · prosperity: ≤ comfortable]` Those who guard {settlement} draw wages, and they know nothing is laid by to go on paying them through a long defence.
-9. `[threshold · guardPresence · force: paid · prosperity: ≤ comfortable]` {settlement} has paid guards and little to pay them with: a long defence would find the money gone.
 
 **`Economic Survival`: `CRITICAL`** {colour}
 1. `[ledger]` {settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
@@ -7496,7 +7493,7 @@ no compass word, no real-world place, no named analogy.*
 
 **`GARRISONED`**
 1. `[visitor · no crisis: occupied]` {settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
-2. `[ledger · walls · no crisis: occupied · force: paid]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
+2. `[ledger · walls · no crisis: occupied]` {settlement} pays wages for its defense as well as keeping its walls, and the money is found every season.
 
 **`LETTERED`** {colour}
 1. `[visitor]` {settlement} supports trained practitioners of the Art, which few towns its size can afford.

@@ -611,6 +611,9 @@ const WORD_CORRECTIONS = Object.freeze([
   { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
   // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault
   { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: 'f745a2b64d58f148a15563dcdfdf61ca42ec3a4f2817aba09771fea9930fd8cc', to: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', ruling: 'POINT89-CHAIR-2026-11-22-V6' },
+  // CHAIR-2026-11-23-03:45 (DISAGREE, PROSE-6; the chair's GO on the builder's stops): DS-DEF-2 Economic Survival: WEAK v2 said
+  // "no money to pay them" beside GEN-17 GARRISONED v2's "pays wages for its defense"; re-worded in place, on its own marks
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 2, from: 'a757b74778ece2e2f23b5f5b9fae504d37b3b40cdf4b5bc4310bf10c6645b7ba', to: 'f81f0b3a2608bf34fc5f667ba0849b091267f6d048293016d8470ea395b4cceb', ruling: 'CHAIR-2026-11-23-03:45' },
 ]);
 
 async function readNumberingBaseline() {
