@@ -4,7 +4,7 @@
  * variant id; each side is matched on the page (`buildPrintProse(s, {})`) by its leaf texts as templates, the page's
  * clause-cut forms included (GEN-17 GARRISONED v2 prints cut: `map/DISAGREE-PHASE1.md`).
  *   ARM 1: the chair's measure's five seeds (FOOD dz-town-12, dz-city-54, dz-metropolis-2; WAGES dz-town-2, dz-town-36) and
- *          the first N births of every size: no page prints both sides of any row.
+ *          the first N births of every size: no page prints both sides of any row (WAGES: WEAK v1 x GARRISONED v2).
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (ARM 1's births
  *          and a named control seed) each side of each row is found.
  *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", which the page
@@ -14,6 +14,8 @@
  *          (`stateProseKernel.js :: eligibleVariants`, the desks' own entry answers) is not empty, but for the ONE NAMED
  *          exception, keyed by seed and cause: dz-city-101, GEN-17 GARRISONED, crisis `occupied` (`no crisis: occupied`
  *          refuses v1 and v2; empty at 244fa84ef by the same marks). The arm reds too if that exception stops being empty.
+ *   ARM 5 (the chair, 2026-11-23 03:45): DS-DEF-2 Economic Survival: WEAK v2's OLD words (`PINNED_OLD_WORDS`; re-worded in
+ *          place through its WORD_CORRECTIONS row) print on 0 pages of ARM 1's births; its matcher matches its own text.
  * The arm "GEN-17 v2 never prints where the guard's pay reads 'short'" is NOT built: phase 1 (i) counted 8 such pages.
  */
 import { describe, expect, it } from 'vitest';
@@ -30,7 +32,8 @@ import { crisisAnswered } from '../../src/domain/crisis/crisisFacts.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import {
-  OPPOSITE_PAIRS, PINNED_TAILS, matchersOf, oppositePairsOnPage, pageTextsOf, sidePrinted, tailMatchersOf, textsOf,
+  OPPOSITE_PAIRS, PINNED_OLD_WORDS, PINNED_TAILS, matchersOf, oldWordsMatchersOf, oppositePairsOnPage, pageTextsOf, sidePrinted,
+  tailMatchersOf, textsOf,
 } from '../helpers/oppositeSentencePairs.mjs';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -137,4 +140,14 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
     }
     expect(empty).toEqual(EMPTY_EXCEPTIONS.map((e) => `${e.seed}: ${e.cell} (NAMED: crisis ${e.crisisKind}, ${e.cause})`));
   }, 120_000); // its own budget: the births of ARM 1, reused, and dz-city-101
+
+  it('ARM 5: a re-worded line\'s old words print on 0 pages, and the matcher reads them', async () => {
+    const printed = [];
+    for (const pin of PINNED_OLD_WORDS) {
+      expect(sidePrinted(oldWordsMatchersOf(pin), [pin.text.replaceAll(/\{[a-zA-Z]+\}/g, 'Drumburn')]), `${pin.id}: the matcher reads its own text`).toBe(true);
+      for (const seed of SEEDS) if (sidePrinted(oldWordsMatchersOf(pin), await pageOf(seed))) printed.push(`${seed}: ${pin.id}`);
+    }
+    expect(printed).toEqual([]);
+    for (const pin of PINNED_OLD_WORDS) expect(textsOf(pin.side).includes(pin.text), `${pin.id}: the leaf no longer holds the old words`).toBe(false);
+  }, 120_000); // its own budget: the births of ARM 1, reused
 });

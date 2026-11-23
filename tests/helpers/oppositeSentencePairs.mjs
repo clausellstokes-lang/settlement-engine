@@ -27,9 +27,11 @@ export const OPPOSITE_PAIRS = Object.freeze([
   Object.freeze({ id: 'FOOD',
     a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'CHAIN: food trades failing', vids: [1, 2, 3, 4] }),
     b: side({ desk: 'economy', position: 'DS-ECO-9', pool: 'SECURE', vids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }) }),
-  // WAGES: no money to pay the defenders, beside a town that pays wages for its defence.
+  // WAGES: always short of money for its defence, beside a town that pays wages for its defence. v2 is no side: it was
+  // re-worded in place by the chair's ruling of 2026-11-23 03:45 UTC, and its new words beside GARRISONED v2 are no pair;
+  // its OLD words are pinned at 0 pages (`PINNED_OLD_WORDS`).
   Object.freeze({ id: 'WAGES',
-    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1, 2] }),
+    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [1] }),
     b: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
 ]);
 
@@ -41,6 +43,18 @@ export const OPPOSITE_PAIRS = Object.freeze([
  */
 export const PINNED_TAILS = Object.freeze([
   Object.freeze({ id: 'GEN-17 GARRISONED v2 tail', side: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
+]);
+
+/**
+ * THE OLD WORDS PINNED AT 0 PAGES: a variant re-worded in place (its WORD_CORRECTIONS row in
+ * `scripts/generate-dossier-state-prose.mjs`) whose former words must never print again. The leaf no longer holds them,
+ * so they are written here once, keyed by pool and vid, and matched by the same template as every side.
+ * @type {ReadonlyArray<Readonly<{ id: string, side: PairSide, text: string }>>}
+ */
+export const PINNED_OLD_WORDS = Object.freeze([
+  Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v2, the old words (CHAIR-2026-11-23-03:45)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [2] }),
+    text: 'The people who would have to hold {settlement} through something know there is no money to pay them for it.' }),
 ]);
 
 const LEAVES = Object.freeze({ defense: DOSSIER_STATE_PROSE_DEFENSE, economy: DOSSIER_STATE_PROSE_ECONOMY, general: DOSSIER_STATE_PROSE_GENERAL });
@@ -112,6 +126,15 @@ export function tailMatchersOf(s) {
     if (!m) throw new Error(`oppositeSentencePairs: no clause cut in "${t}"`);
     return new RegExp(pattern(t.slice(m.index + 2).trim().replace(/[.!?]$/, '')).source);
   }));
+}
+
+/**
+ * The old words' matcher: the text's template and its clause-cut forms (as a side's, with no pool to collide with).
+ * @param {{ text: string }} pin @returns {ReadonlyArray<RegExp>}
+ */
+export function oldWordsMatchersOf(pin) {
+  const f = formsOf(pin.text);
+  return Object.freeze([f.full, ...f.cuts].map((src) => new RegExp(src)));
 }
 
 /** @param {unknown} printProse `buildPrintProse(s, {})` @returns {string[]} every mount's text */
