@@ -32,7 +32,13 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 13:07 UTC (the helper's read, its clock 13:07:31; NO FIGURE FELL since 12:08): CLOSE-6 308,723; VEIL-40
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 14:08 UTC (the helper's read, its clock 14:08:51 to 14:08:57; NO FIGURE FELL since 13:07; every seat on
+claude-opus-5-5: configured, set and last served): CLOSE-6 340,311 (+31,588 in the hour); VEIL-40 452,195 (it moved: IT
+HANDS OVER BY 570,000 OF THIS READ, AT A STEP'S END: about two hours at its rate: `prompts/DRAFT-START-VEIL-48.txt` is
+filled then); VEIL-41 527,084 (+8,882: its proof runs; its line is 660,000 for this proof alone: N99); VEIL-42 428,272
+(+18,379); VEIL-43 469,051 (+14,432); VEIL-44 393,102 (its record last moved at 13:46: one long turn: stale-low);
+PROSE-6 361,559 (idle since 10:35: it waits and is not one of the six). THE FIGURES OF 13:07 UTC (history; no figure
+fell since 12:08): CLOSE-6 308,723; VEIL-40
 377,717 (unchanged in one long turn: stale; its true count is higher); VEIL-41 518,202 (IT CARRIES ITS RUNNING PROOF TO
 ITS "TIP?" ON THIS SESSION: its hand-over line is lifted to 660,000 by the chair's read for this proof alone: N99);
 VEIL-42 409,893; VEIL-43 454,619 (stale-low: a long turn since 12:41); VEIL-44 390,341 (+51,817 in the hour). THE FIGURES OF 12:08 UTC (history; no figure fell since 11:10): CLOSE-6 292,851; VEIL-40
@@ -222,7 +228,7 @@ CHAIN A's (N96). 13g ("the guild bought the hall" beside "a war of arrests": 3 o
 with "LIT <commit>"). CHAIN A's MUTEX WAS HELD SINCE 09:30 BY A STALE RUN (S1): ORDERED STOPPED (N98). THE SHARED-MAP
 HOLE HAS ITS RED FIRST (the member 24 sends, the map import 24) AND ITS GREEN IS BEING BUILT NARROW (N95). CHAIN A's
 EXTRA STANDING LINE IS CURED ON THE PAGE ALONE: S skips a row whose base is one of the seven rival texts (N95).
-SINCE N99 (N100): THE NEXT HOURLY CHECK IS trig_01EyMBZSjNWVfFfnudoLRSoY AT 14:11 UTC. ALL FOUR SUCCESSORS HAVE A DRAFT
+SINCE N99 (N100): THE HOURLY CHECK SET FOR 14:11 UTC WAS MADE AT 14:08 (N104); THE NEXT IS NAMED UNDER "SINCE N103". ALL FOUR SUCCESSORS HAVE A DRAFT
 START MESSAGE ON THIS LANE (`prompts/DRAFT-START-VEIL-45.txt` chain C, `-46` the join, `-47` the doors, `-48` chain A):
 EACH IS FILLED AND PUSHED BEFORE ITS SESSION IS CREATED, AND A SUCCESSOR IS SEATED ONLY AFTER ITS PREDECESSOR HAS
 STOPPED, AT A STEP'S END, NEVER INSIDE A RUN.
@@ -238,6 +244,14 @@ cure. THE JOIN'S "PAGES" RUNS IN ITS 55-MINUTE FORM (N103); the chips' order it 
 stored read, the owner's own included: not the veil's. CHAIN B's "TONIGHT-2" RETURNED (57e847ce8): the id unit moves
 ONE "tonight" line on the owner's own page in 2 of 1,808 test towns. 13G's RED FIRST IS DONE; its cure goes through
 `rosterText.js`'s two settles (no veto, two conditions).
+SINCE N103 (N104): THE NEXT HOURLY CHECK IS trig_01YGHr43QZ7qTByhhu8Gde3x AT 15:10 UTC (its stored text lists what each
+seat owes). THE JOIN'S NAME SEARCH FOUND, ON THE LANE'S TIP AS IT STANDS, A SHOWN POWER'S STANDING NAMING THE WITHHELD
+THIEVES' GUILD (2 of 95 hiding places, 240 reads, every door alike): KNOWN: CHAIN A's UNMERGED UNIT IS ITS CURE; the
+two seeds (r3m-town-none-0-17, r3m-city-none-1-117) must read 0 by name on chain A's tree and again on the join after
+its merge. THE OWNER ASKED FOR THE OVERALL PROGRESS AND FOR THE QUEUE IN ORDER: answered in fifteen steps (the
+switch-on's five; the veil's six; the finish-line checks, the security review, the last read of 212; his own hands),
+with the chair's guess SAID AS A GUESS: the switch-on ready to land within about half a day, the share veil more than
+a day, likely two. NOTHING WAITS ON HIM NOW; HIS DECISION ON PAGES PUBLISHED BEFORE THE VEIL IS STILL OPEN.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2996,3 +3010,51 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   key order; an ORDER line whose MEANING moves with the order (a first-named party, a rank) is sent to the chair at
   once; nothing is built for it in the join: a worklist display nit (the page states one order). Chain B's
   whole-document form (sorted keys) cannot see it, by design (N90). No GAINED line so far; the owner-only slot 0.
+- 2026-11-23 14:14 UTC · N104 · THE OWNER ASKED FOR THE PROGRESS AND THE QUEUE (ANSWERED); THE JOIN'S NAME SEARCH
+  FOUND THE KNOWN LEAK CLASS ON THE UNFINISHED TIP (CHAIN A's UNIT IS ITS CURE); THE HOURLY CHECK OF 14:08.
+  (1) THE OWNER ASKED TWICE, AND WAS ANSWERED FIRST AND IN FULL, IN PLAIN WORDS. "What's our overall progress?"
+  (answered after the clock read 14:01:22): the Daily Life page and his three orders are on the working line; the
+  switch-on of the two laws is in its last stretch (the bought-hall clash's failing test written and its fix in build;
+  then the joint tests, a sample town for him to read, his signings in one file; its landing needs his one line); the
+  share veil is the long road: five pieces in work, none merged yet (the stored sentences' proof running since 12:58;
+  the ids; the doors; the descriptions, the slowest; the join's five red files); then the finish-line checks, the
+  security review, the last read of the database change, and his own hands. THE CHAIR'S GUESS, SAID AS A GUESS AND NOT
+  A PROMISE: the switch-on ready to land within about half a day; the share veil more than a day, likely two. "What's
+  left in que in order?": fifteen steps in order, the two lines of work side by side; steps 6 to 9 run at once, each
+  in its own seat; the descriptions piece sets the date. NOTHING WAITS ON HIM NOW; his decision on towns published
+  before the veil is still open (the chair's recommendation is what is built; asked again before the deploy).
+  (2) THE JOIN'S NAME SEARCH, A HIT, SENT AT ONCE (VEIL-43's "NAMES", queued 14:05:37; its builder's stop at 14:04;
+  the born form, every door): ONE PATH ONLY over 11,310 hiding reads on 95 places: `powerStructure.factions[].desc`: A
+  SHOWN POWER'S DESCRIPTION NAMES A WITHHELD POWER: r3m-town-none-0-17 (the Church: "...they play the Thieves' Guild
+  and the ...") and r3m-city-none-1-117 (the City watch), the Thieves' Guild withheld; 240 reads, EVERY DOOR ALIKE
+  (the server's gallery, link, import and map member; the twin's gallery and link), every setting, Reveal off and DM.
+  Not the map member's covert fault (0 there). The lane's rulings 32 and 36 (b) name the path "TIER 1 UNTIL R5 CURES
+  IT". THE OTHERS: the owner-only slot key 0 on every read; `powerStructure.factionRelationships[].dmNote` served on
+  Reveal DM only (the server's gallery and import, the twin's gallery: 870 each), absent at Reveal off on all six door
+  and engine pairs, absent from the link and the map member even at DM. **Decided (N104), sent after the clock read
+  14:07:14:** KNOWN, AND CHAIN A's: the lane's tip does not carry R5-DESC; that unit is the cure (the server cuts
+  every standing; the page writes it again from the served roster, so it can name served powers only); NOTHING IS
+  BUILT FOR IT IN THE JOIN. ORDERED OF VEIL-43: the stored form and PAGES go on; the 240 reads are classed "R5-DESC:
+  cured by chain A's merge", by seed, row, door and Reveal, apart from every other class (0 so far); THE BORN FORM IS
+  RE-RUN ON THE JOIN ONCE CHAIN A's TIP IS MERGED INTO IT: 0 at that path, the two seeds by name: the join's own proof
+  line; `dmNote` is taken as the Reveal DM payload by design, the stored form saying the same. SENT TO VEIL-40
+  (priority later, for its PART 42's first section): the two seeds by name read 0 on its tree, both engines, every
+  door its proofs read: owed in the unit's proof, its own or VEIL-48's. **Why no build:** the search read a tree that
+  lacks the unit built for exactly this; a second cure would be a second writer of the same sentence. THE READER'S ROW
+  35 GAINS THE EVIDENCE; VEIL-48's DRAFT (d) GAINS THE TWO SEEDS.
+  (3) "NAMES" COSTED AND STARTED (VEIL-43, queued 13:42:24, crossing N103): about 50 minutes, born and stored, all
+  four doors; its cost sample (10 of the 140, 720 hiding reads): hits 0, the map member 0, the owner-only slot 0;
+  PAGES' builder's WIP pushed (`lane/veil-43-2026-11-23` at 7b39b2cc7).
+  (4) THE HOURLY CHECK, MADE AT 14:08 (three minutes before its reminder; one haiku helper, its clock 14:08:51 to
+  14:08:57, seven get_session calls): CLOSE-6 340,311 (13:07: 308,723); VEIL-40 452,195 (377,717, a stale figure
+  then); VEIL-41 527,084 (518,202); VEIL-42 428,272 (409,893); VEIL-43 469,051 (454,619); VEIL-44 393,102 (390,341;
+  its record last moved at 13:46); PROSE-6 361,559, idle, its bucket "completed", last moved 10:35 (it waits). NO
+  FIGURE FELL; all six seats' status "running", bucket "working"; every one configured, set and last served on
+  claude-opus-5-5. READ AGAINST THE LINES: VEIL-40 passes 570,000 in about two hours at its rate (it hands over at a
+  step's end; the draft is ready); VEIL-41 has 113,000 to its 640,000 and grew 8,882 in the hour; none other is near.
+  (5) THE CHAIR'S PUSHES AND REMINDERS: the forty-fourth push (0ef52668e: N101 to N103, the reader's row 35, VEIL-48's
+  draft) ended exit=0 at 13:49:01 UTC (its log; ls-remote equal to the local tip). The reminder of 14:11
+  (trig_01EyMBZSjNWVfFfnudoLRSoY) was deleted, its work done (the server's clock read 14:11:16 at the next call); THE
+  NEXT IS trig_01YGHr43QZ7qTByhhu8Gde3x AT 15:10:00 UTC, its stored text re-written with the figures of 14:08 and what
+  each seat owes. THE HOURLY WORD TO THE OWNER, after this entry's push: the name search's finding in plain words; the
+  id unit changes the wording of one "tonight" line on his own page in 2 of 1,808 test towns.
