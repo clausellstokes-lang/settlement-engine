@@ -32,16 +32,15 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 05:46 UTC (the helper's read;
-no figure fell since 04:57, so no seat was summarized in that hour): STACK-106 172,763 (STALE: it is in one long
-turn); VEIL-38 526,279 (idle since 05:31: it waits on M's pool run); VEIL-40 240,133; VEIL-41 293,005 (its own
-estimate was 110,000); PROSE-6 201,030; CLOSE-5 426,693 (about 110,000 an hour: 620,000 near 07:30 UTC).
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 06:43 UTC (the helper's read; no figure fell since 05:46, so no seat was summarized in that hour):
+STACK-106 304,457; CLOSE-5 449,037 (426,693 at 05:46: it slowed); PROSE-6 232,551; VEIL-40 241,950; VEIL-41 323,143;
+VEIL-42 300,614 (thirty minutes after its seating: N61 says why this is not its reading).
 - STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`: POINT 106 "DAILY-B"
   (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109 "PRONOUN" (4fa51f422), "DOORS"
   5e63f2603 (THE CHAIN TO THERE READ BY THE CHAIR ON ORIGIN at 05:37; its INTERIM report for 106 to 109 is in N56);
-  POINT 110 "PROSE-D" merged ab6e2f53f at 06:05 (doors a27ea19d7, ab13c0e70; not yet on origin at 06:07). THREE REDS
-  WAIT ON TWO LATE LANES, each to come by "ADD <branch> <commit> POINT <n>" (111 and 112 in the order they arrive):
-  "PROSE-D-2" (PROSE-6: two pins, test-only: N57) and "PRONOUN-2" (CLOSE-5's builder: N54). THEN "DOORS", ONE BUILD AT
+  POINT 110 "PROSE-D" merged ab6e2f53f (doors a27ea19d7, ab13c0e70: "DOORS ab13c0e70" at 06:26, READ ON ORIGIN; the
+  merge's tree equals the chair's own trial merge). POINT 111 "PRONOUN-2" 119f419bf ADDed at 06:42 (N60). ONE LATE
+  LANE STILL TO COME by "ADD <branch> <commit> POINT 112": "PROSE-D-2" (PROSE-6: two pins, test-only: N57). THEN "DOORS", ONE BUILD AT
   THE FINAL TOP, its final message ("CLOSE THE STACK" from the chair ends the wait). THEN THE CHAIR LANDS (E130's
   form; the facts for the rows are in `/home/user/scratch/chair/landing-106-facts.txt`). BEFORE EACH "ADD" THE CHAIR
   READS THE DIFF WHOLE AND TRIAL-MERGES IT in `/home/user/wt/trial` (a detached scratch worktree at 5e63f2603).
@@ -49,9 +48,9 @@ estimate was 110,000); PROSE-6 201,030; CLOSE-5 426,693 (about 110,000 an hour: 
   5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
   `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
   RULED N56: that one raise is dropped and NAMED for the owner; commit 0 is 15 budgets in 14 files; A STANDING RULE:
-  an edit that moves a frozen surface's bytes is dropped from its commit and named for the owner. "PRONOUN-2" FIRST,
-  by a second builder (branch `lane/close-5-2026-11-23-pronoun2-wip` at 95180c283; brief 37072e733): it owes "PRONOUN-2
-  <commit>". It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
+  an edit that moves a frozen surface's bytes is dropped from its commit and named for the owner. "PRONOUN-2 119f419bf"
+  IS BUILT AND IS POINT 111 (N60). THE FLIP'S COMMIT 0 IS f6cbaee69 (15 budgets in 14 files); builder F1 (the dials)
+  is next. It owes one line after each commit. It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
   DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: A DRAFT WITH FIVE BLANKS, NOT A START MESSAGE). The owner's
   signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
 - PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" (`lane/prose-6-2026-11-23-disagree-wip`) IS POINT 110
@@ -1116,3 +1115,60 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   standing rule and N54's `tests/copy` are in it. THE HOURLY CHECK: the task trig_014n46rT8RYWctPfG1VbdSTb fired at
   05:52 and was answered by N55 (done at 05:46); THE NEXT IS trig_01XTH9zojrxWMK8nfYw4ZoC7 at 06:46 UTC. THE CHAIR'S
   TWENTIETH PUSH (c323df96d) ENDED exit=0 at 05:52:54 UTC: CONFIRMED from its log and by ls-remote.
+- 2026-11-23 06:44 UTC · N59 · VEIL-42's FIRST LINES; ITS MEASURE DISPATCHED; A SECOND BUILDER BESIDE IT (ruled at 06:30 UTC by the
+  chair's note). At 06:17, five minutes after its seating: it stands on e76873832; its code branch
+  `lane/veil-42-2026-11-23-r4ids-wip` created at f7f1cfe8c with THE TIP 23bb8b8ae MERGED as 9f9b819f7 (no conflict; two
+  test files); it read what the start message lists, by name. ONE GAP IT FOUND: VEIL-38's machine scripts (its M
+  runner, the SQL proofs, the pool probes, the tip build, the cost law's) lived only in VEIL-38's container and are
+  gone: it rebuilds them from the committed probes AND COMMITS THEM. A LESSON, written into CLOSE-6's draft: EVERY
+  SCRIPT A SEAT RUNS MORE THAN ONCE IS COMMITTED ON ITS DOCUMENTS BRANCH. At 06:28: the instruments re-made on its
+  -wip (check 0, walker 0, acceptance 40 PASS, the R3 gate 0: HIGHER 0, EQUAL 79, LOWER 13 on both engines and reads,
+  equal to PART 36; the two harness reds are the unit's two open faults); the pool building; UNIT (1) DISPATCHED as ONE
+  builder, R4I-MEASURE (brief caba51270), for "77", "GAP" and "WHOLE-DOC": "77" at two levels (the RPC's document
+  against the twin's projection; and M's level through `fetchPublicDossier`, to find where a difference is born);
+  "GAP" must catch the known `npc_peat_cutter` as a positive control and say why R4I-PAGE-4's stored-ids read 0. IT
+  ASKED whether R4I-TONIGHT-2 (brief 559d7b343) may start beside the measure. **Decided:** YES, on 40.5's form: its own
+  worktree and branch; manifests disjoint (the Tonight sheet's two src files and their tests; never 212, the rollback,
+  the registry or `galleryVeilPeople.js`); every heavy run one at a time through the mutex, the seat's included. TWO
+  CONDITIONS: if "77" finds its cause in what that builder edits, it stops; its pins are grepped in `tests/` and
+  `tests/copy` runs whole; a moved golden is NAMED for the owner. **Why:** M is done (0, 0, 0), the manifests do not
+  meet, and chain B has the longest road to its "TIP?". **Reversal:** the builder is stopped at its next commit.
+- 2026-11-23 06:44 UTC · N60 · "DOORS ab13c0e70" READ ON ORIGIN; "PRONOUN-2 119f419bf" READ, TRIAL-MERGED, RUN BY THE CHAIR AND
+  ADDED AS POINT 111; THE FLIP'S COMMIT 0. (1) STACK-106 at 06:26: "DOORS ab13c0e70": `tests/lint` whole 225 files, 3
+  red, the line's; pushed through its hooks (167 of 167; 1113 of 1113; eslint 0 errors). READ BY THE CHAIR ON ORIGIN:
+  the stack's top is ab13c0e70; the first-parent chain beyond 5e63f2603 is ab6e2f53f (parents 5e63f2603 and
+  01ecf1e91), a27ea19d7, ab13c0e70; THE MERGE'S TREE (3b21c617f…) EQUALS THE CHAIR'S OWN TRIAL MERGE with the stack's
+  side taken for the two conflicted registers. (2) CLOSE-5 at 06:41: "PRONOUN-2 119f419bf" on
+  `lane/close-5-2026-11-23-pronoun2-wip` (one commit on 95180c283; 2 files, +18 -8): `OBJECT_STOP_MARK =
+  /^[,.;:!?]$/` read where `OBJECT_FOLLOWERS.has` was read; the Set keeps its 13 words; the walker's `classOf` reads
+  the same regex. Its proofs: E2 red at 95180c283 and green after; THE EQUALITY PROOF: CLOSE-4's measure byte-equal on
+  both trees, and a wider pass over every template of both callers' tables: 628,200 strings, 0 differ (a planted wrong
+  rule moved 3,600: the check has teeth); a tooth in the existing walker test (the six marks object; four non-marks
+  not); the pronoun tests 18 of 18; `tests/copy` 171 of 172 (the list's "E-E" row at its base); `tests/lint` the
+  line's three; the three push gates. WHY PRONOUN'S OWN PROOFS DID NOT SHOW THE RED: CLOSE-4's rule 8 never ran
+  `tests/copy`, and that ratchet scans every src/data file without naming the changed one. READ WHOLE BY THE CHAIR
+  (the diff 95180c283..119f419bf: the regex holds exactly the six one-character marks, has no `g` flag, and stands in
+  the one place the Set was read). THE CHAIR'S TRIAL MERGE on ab13c0e70 (a scratch worktree, aborted): NO CONFLICT,
+  two files, tree 2ec3d392f…; ON THAT TREE THE CHAIR RAN `tests/copy/voiceMechanics.test.js` and
+  `tests/lint/personMentionCase.walker.test.js`: 2 files, 38 of 38 green, exit 0 (06:42 UTC): CONFIRMED, by the
+  chair's own run, that the class (4) red of N54 is cured on the stack's tree. "ADD ... POINT 111" sent at 06:42.
+  (3) THE FLIP'S COMMIT 0 is f6cbaee69 on `lane/close-5-2026-11-23-flip`: 15 budgets in 14 files, FENCE 1's dropped
+  (N56); goldenFreeze 90 of 90; `tests/lint` the line's three; its dark re-run 400 tests, 1 red, listed
+  (`powerEconomyFreshness` A4). Builder F1 (the dials) is building. POINT 112 WILL BE "PROSE-D-2".
+- 2026-11-23 06:44 UTC · N61 · THE MARKS OF 06:43 UTC, AND WHERE A SEAT'S FIRST 300,000 GO (measured). One haiku helper (its clock
+  06:43:13; `get_session`, external_metadata.context_usage.used_tokens; `system` events read for a compact boundary):
+  STACK-106 304,457; CLOSE-5 449,037 (426,693 at 05:46: +22,000 in the hour: it slowed, and 600,000 is no longer near
+  07:30); PROSE-6 232,551; VEIL-40 241,950 (its events were too large for the helper to read: its figure did not
+  fall); VEIL-41 323,143; VEIL-42 300,614, THIRTY MINUTES AFTER ITS SEATING. NO FIGURE FELL: no seat was summarized.
+  THE CHAIR MEASURED THE LEAN LIST: the files VEIL-42's start message lists come to about 300,000 BYTES (the standard
+  36,056; the two common files 23,956; START-VEIL-38 7,584; VEIL-35 9,985; PART 40 34,983; the three briefs 39,992;
+  the registry 79,019; the hand-backs and the twin beside them): UNDER 100,000 TOKENS. SO ABOUT 200,000 OF A NEW
+  SEAT'S FIRST 300,000 ARE NOT ITS READING. PLAUSIBLY (unmeasured in a seat; seen in the chair's own record this
+  hour, twice) the machine re-sends its whole tool list at every reconnect, about 28,000 tokens each time. **Decided:**
+  N55's line "the lean list itself costs that much" is CORRECTED BY THIS MEASURE; THE RULE "past 250,000 before your
+  first builder: you have read too wide" IS WITHDRAWN from later start messages: a seat's figure is no measure of its
+  reading; the mark (700,000 by the chair's read; "HANDS OVER" by 620,000) stands. **Why:** the rule blamed seats
+  for a cost that is the machine's. **Reversal:** a seat that reads outside its list is told so on its own record.
+  THE HOURLY CHECK: done at 06:43, ahead of the task trig_01XTH9zojrxWMK8nfYw4ZoC7 (06:46 UTC); THE NEXT IS NAMED IN
+  THE NEXT ENTRY THAT RE-ARMS IT. THE CHAIR'S TWENTY-SECOND PUSH (7a11491dd) ENDED exit=0 at 06:17:06 UTC: CONFIRMED
+  from its log and by ls-remote.
