@@ -183,6 +183,13 @@ CHAIR IN SOURCE (N89): `governanceAccount.js` reads the legitimacy breakdown and
 always-pass withholds on every veiled read: a shared page can print a WRONG reason for a government's standing, or a
 merit sentence the record does not carry; THE CHAIR'S LEAN IS "THE PAGE FAILS CLOSED ON A VEILED READ" FOR THE FIRST
 DEPLOY; IT RULES ON VEIL-43's COUNTS ("REDS-CAUSE" with one measure on the 900 births, lit and dark).
+SINCE N89 (N90): THE WHOLE-DOCUMENT FORM IS RULED INTO EVERY VEIL UNIT'S PROOFS (chain B's instrument at d1bc333af on
+`lane/veil-42-2026-11-23-meas-wip`; L1 by value on the gate's 140 at the gallery and the link and on both stored sets
+at every door the unit's rule can touch; THE POOL-WIDE RUN ONCE, AT THE BAR): named to chains A and C. SEVEN HOURS OF
+CHAIN B's MUTEX ARE FREED (U and M on the pool, and "WHOLE-DOC" at the tip, dropped): after its stored-set measures
+and "GAP" on the master-born set it goes to its unit. THE OWNER'S DECISION ON PAGES PUBLISHED BEFORE THE VEIL IS PUT
+TO HIM (the chair recommends what is built: the gallery page as today with the covert copy no longer served; the
+party link and the map member under the default veil); NO ANSWER YET; HE IS ASKED AGAIN BEFORE THE DEPLOY.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2405,3 +2412,53 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   PAGES PUBLISHED BEFORE THE VEIL WAITS ON THOSE COUNTS.
   (5) THE CHAIR'S PUSHES: the thirty-sixth (c3aa2c519: N87 and VEIL-45's draft) ended exit=0 at 11:25:27 UTC (its log;
   ls-remote equal to the local tip).
+- 2026-11-23 11:45 UTC · N90 · THE WHOLE-DOCUMENT FORM IS RULED INTO EVERY VEIL UNIT'S PROOFS (THE POOL-WIDE RUN ONCE,
+  AT THE BAR); SEVEN HOURS OF CHAIN B's MUTEX FREED; "MAP-COVERT" 7 OF 7; THE OWNER'S DECISION ON PAGES PUBLISHED
+  BEFORE THE VEIL IS PUT TO HIM.
+  (1) CHAIN B's LINE (VEIL-42, its hour 11:34; queued 11:36:35): "77" ON THE POOL IS DONE (b26549084 on its measure
+  branch): L1 0 OF 43,392 READS (1,808 places), both instruments; L2 384 = 32 places by 12 at Reveal off,
+  `prominentRelationship` (31 places) and `pressureSentence` (2): the covert CASE's two halves, the withhold working
+  at the gallery door; with the 7 and the 140, N69's condition is met and THE STOP OF ITS PROOFS IS LIFTED. "GAP": its
+  control bites (three roster-copy paths); the today-born set 0; the pool's births 0 at the gallery door. Running
+  since 11:24: U and M on the today-born set, then on the master-born set. It had planned next: GAP on the master-born
+  set, U and M on the pool (about three hours), "WHOLE-DOC" at the tip (about four); IT ASKED that GAP on the
+  master-born set run before the pool's U, so that R4I-SQL-2 is briefed sooner. Its own count about 380,000 (the
+  chair's read 368,897 at 11:10).
+  (2) **Decided (N90):** (a) GRANTED: "GAP" on the master-born set runs before anything on the pool; R4I-SQL-2 is
+  briefed the moment it ends. (b) U AND M ON THE POOL ARE DROPPED: the owner's decision is about pages already stored,
+  and the two stored sets are that universe. (c) "WHOLE-DOC" AT THE TIP IS DROPPED AS A MEASURE OF ITS OWN, AND THE
+  WHOLE-DOCUMENT FORM IS RULED NOW INTO EVERY VEIL UNIT'S PROOFS (N48's promise), on the evidence of "77" (L1 0 on the
+  7, the 140 and the pool, its control biting) and the join's 0 of 3,360 at each door on the joined tree: THE
+  INSTRUMENT is the lane's one, chain B's `docs/chair/2026-11-20/veil/out/v42/meas/{meas.probe.jsx, meas-an.mjs,
+  meas.sh}` on `lane/veil-42-2026-11-23-meas-wip` at d1bc333af (the three files unchanged since aa5e3f30f: `git diff
+  --quiet`, by the chair), with `RECIPES.md` beside them: copied, never re-written; its positive control must bite on
+  the unit's own tree before a figure counts. THE FORM AT A UNIT'S "TIP?": L1, the server's served document against
+  the twin's projection, BY VALUE with sorted keys (`MEAS_BIJ=0` until R4-IDS is merged; modulo the bijection after),
+  on the gate's 140 towns at the gallery and the link, and on both stored sets at every door the unit's rule can
+  touch: 0 differing reads, or each difference listed by path with its ruling. THE POOL-WIDE RUN IS MADE ONCE, AT THE
+  BAR, not per unit. The per-read sha tables (N67) stay each proof's receipt. NAMED TO VEIL-40 AND VEIL-41 (VEIL-43
+  uses it already; VEIL-44 builds the door-equality arm on it). **Why (b) and (c):** seven hours of one mutex stood
+  between chain B and its unit, for measures whose answer the unit's own proof gives; a baseline at the tip exists
+  already on the 140 (the joined tree) and on the pool (the unit's tree).
+  (3) U-UNMARKED ON THE TODAY-BORN SET (`out/v42/meas/U-UNMARKED.md` at d1bc333af, 77 lines: READ WHOLE BY THE CHAIR;
+  140 places by 3 markers (unmarked, default, hand) by Reveal off and DM: 840 reads a door): 7 places' stored
+  `prominentRelationship` is a covert tie's copy; 0 places' `pressureSentence` tells one. "MAP-COVERT", THE FULL
+  COUNT: `get_gallery_map`'s member, its page and `import_gallery_map`'s member SERVE THAT COPY BYTE-EQUAL ON 7 OF 7
+  AT EVERY MARKER AT REVEAL OFF. The gallery read, its page, the import and its page: 0 of 7 at Reveal off on every
+  marker (7 of 7 at Reveal DM, by design); the party link: 0 everywhere; `get_unlisted_map` hands no member dossier.
+  THE UNMARKED GALLERY ROW CARRIES NO SERVED MARKER (140 of 140) AND ITS DATA NO COVERT COPY (0 of 7); the page's
+  unserved branch adds none. The master-born set follows.
+  (4) THE OWNER'S DECISION ON PAGES PUBLISHED BEFORE THE VEIL IS PUT TO HIM, in plain words (the fifth chair's ruling
+  of 2026-11-10: what an already-published page shows is his): (A), AS BUILT, THE CHAIR'S RECOMMENDATION: the town's
+  own gallery page shows what it shows today, with the covert tie's copy no longer served; its party link and its
+  place on a shared map take the default veil; nothing more is hidden until its maker opens the share options once;
+  (B) every old page takes the default veil everywhere at once; (C) old pages stay as today everywhere, the link and
+  the map too. The counts given him: 7 of 140; the gallery page and the link 0 of 7; the map 7 of 7 (the hole being
+  fixed). **Why (A):** an old page was published under the old rules and its maker saw what it showed; the two reads
+  that change are the ones players use. NO ANSWER YET; HE IS ASKED AGAIN IN WHAT HE READS BEFORE THE DEPLOY; (A)
+  changes nothing that is built.
+  (5) THE CHAIR'S OWN HOUR FAULT: its two N90 lines to VEIL-40 and VEIL-41 say "my clock: 11:44 UTC": WRITTEN, NOT
+  READ: they were sent between the clock reads 11:42:24 and 11:43:52; its line to VEIL-42 said 11:42 after the read
+  11:41:14. From here the hour in a message is the last `date -u` read, as read. THE CHAIR'S PUSHES: the
+  thirty-seventh (41e8ae6b9: N88, N89, the reader's row 34) ended exit=0 at 11:41:01 UTC (its log; ls-remote equal to
+  the local tip).
