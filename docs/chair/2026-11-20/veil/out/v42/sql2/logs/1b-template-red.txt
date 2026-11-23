@@ -1,0 +1,2 @@
+sql2_redtpl = createdb -T v27x211 + 212 at 392aff978 sha 7a85dec31320dc68
+apply rc=0
