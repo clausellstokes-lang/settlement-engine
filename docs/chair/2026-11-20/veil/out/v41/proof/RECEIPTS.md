@@ -17,3 +17,22 @@ twin: 0 of 46752 reads carry publicProse
 start 2026-11-23T12:58:04Z tree /home/user/wt/c2 at ced3b1de750a65590bb3b861395e2834dab50c18 stored /var/tmp/v18/stored/today/docs tpl v41_c2
 end 2026-11-23T15:33:45Z
 ```
+
+## prose rc=0 15:56:50
+```
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 10650 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+shard 3 rc=0
+shard 0 rc=0
+shard 1 rc=0
+shard 2 rc=0
+done.txt
+prose-shard0.json
+prose-shard0.log
+prose-shard1.json
+prose-shard1.log
+prose-shard2.json
+prose-shard2.log
+prose-shard3.json
+prose-shard3.log
+window.txt
+```
