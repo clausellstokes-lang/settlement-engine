@@ -142,6 +142,26 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
      FOR "TIP?": the cost law's figure beside its ceiling (chain A reads 465.0 against 523.2 ms: thin; this unit adds to the same
      read); the 34 files run whole on the merged tree, every red named. THE SEAT'S RECORD: 384,201 by the chair's read at 02:22 UTC.
 
+40.7 THE CHAIR, 03:06 UTC. THE SEAT'S RECORD 452,578 by the chair's read at 03:01. THIS SEAT CARRIES R4I-PAGE-4's return (its diff
+     read) and M, then says "VEIL-38 HANDS OVER <branch commit> / <-wip commit>" at its first natural stop after M, or at once at a
+     figure over 580,000. Section 1 FINAL. R4I-TONIGHT-2, the order count, the tip build, the cost law and "TIP?" are then the
+     successor's, unless the chair says the figure allows R4I-TONIGHT-2 (asked when M is done).
+     (1) THE FAULT TAKEN AS SAID; the rule (COMMON-RULES 11): one heavy run at a time through the mutex, the seat's probes included.
+     (2) THE TONIGHT ARM, RULED IN THREE HALVES (40.3 (2)'s "equal to the owner's sheet" stood on a wrong premise, the chair's: a
+         player's read withholds each person's own goal and secret BY RULE):
+         (a) TWO READS OF ONE PLACE print the same sheet, line for line: red first at the tip (39/140 twin, 44/140 server), green
+             after; the 140 and the pool; gallery and link; Reveal off and DM.
+         (b) THE SERVED SHEET EQUALS THE TWIN'S (the sheet from the served read = the sheet from the twin's projection of the stored
+             document, modulo the bijection, every cast person, the same doors and settings); an arm that already holds it for the
+             page is named, not built twice.
+         (c) ON THE OWNER'S PAGE, nothing-hidden places: every cast person whose line is a ROLE line on both pages carries the SAME
+             line on the owner's sheet and the shared one; beside it, COUNTED AND NAMED, NOT RED, those whose line differs because the
+             read withholds their goal.
+     (3) THE KEY NEVER READS THE ID. The prepared `castWantKeyOf(name, id)` returns `clean(name) || clean(id)`: THE FALLBACK GOES; a
+         nameless cast person takes ''. M counts nameless cast persons as a THIRD count beside (i) and (ii); any of the three not 0 is
+         a STOP. (The probe already counts "with a card and NO NAME", owner and served.)
+     (4) THE ORDER STANDS: R4I-PAGE-4; then M, run by the seat, one run at a time.
+
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
 - 00:17 chain0 launched on the -wip.
