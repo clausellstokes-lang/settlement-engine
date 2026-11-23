@@ -42,9 +42,10 @@ const CURED = [
   ['r2r-hamlet-0', 'Adequate', 'Strained'],
 ];
 // [seed, the word that still prints]
-// r2r-city-27: the lit birth's value (THE FLIP, 2026-11-23): its composite bands 'adequate' lit, no cap (Approved, not
-// fractured), so the row still keeps its own word (was 'Surplus')
-const KEPT = [['r2r-city-27', 'Adequate'], ['r2r-hamlet-10', 'Adequate'], ['r2s-succession_void-city-0', 'Strained']];
+// RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE-2, 2026-11-23; the chair's ruling): the row's case is a Surplus row with
+// no cap. Lit, r2r-city-27's composite bands 'adequate'; r2r-city-95 is the lowest r2r-city of 200 lit whose Ruling authority
+// bands 'surplus' with no cap (`rulingAuthorityCapOf` null: 95 149). The original word kept (was r2r-city-27)
+const KEPT = [['r2r-city-95', 'Surplus'], ['r2r-hamlet-10', 'Adequate'], ['r2s-succession_void-city-0', 'Strained']];
 const WORD = new Map();
 beforeAll(async () => {
   await loadGenerationLawPayloads();

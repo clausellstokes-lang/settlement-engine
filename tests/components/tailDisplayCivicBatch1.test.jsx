@@ -61,8 +61,11 @@ const ACCOUNT_CURED = [
 ];
 // [seed, the true sibling that must still print]
 const ACCOUNT_KEPT = [
-  // the lit birth's value (THE FLIP, 2026-11-23): was 'Crime keeps Goraka from more than tolerating the Merchant City Council.'
-  ['r2r-city-0', 'Weak defences keep Goraka from more than tolerating the Merchant City Council.'],
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE-2, 2026-11-23; CLOSE-6's ruling: a KEEP is its case's form): the case
+  // is a true crime sibling (a plain safety label keeps "crime"). Lit, r2r-city-0's cause is weak defences, and no r2r-city of
+  // 200 nor census r2s town prints the form; r2r-hamlet-161 is the lowest r2r seed of 200 whose account prints it (161, 196)
+  // (was r2r-city-0, 'Crime keeps Goraka from more than tolerating the Merchant City Council.')
+  ['r2r-hamlet-161', 'Crime keeps Dar-al-serai from more than tolerating the Elder Council.'],
   ['r2r-city-1', 'The Military City Council governs Pengill.'],
   ['r2r-city-11', 'The Merchant oligarchy governs Puripat.'],
 ];

@@ -24,7 +24,7 @@ const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CRISES = ['famine', 'under_siege', 'wartime', 'occupied'];
 const GROUPS = new Set(['BUILT', 'STANDS', 'SUSTAINS', 'GROUND', 'AGAINST', 'LIMIT']);
 
-/** The printed prosperity label at e1b2f9c1f, the tree without this lane's change (measured first). */
+/** The printed prosperity label at e1b2f9c1f, the tree without this lane's change (measured first); since THE FLIP the lit births' labels. */
 // the lit birth's values (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the fortune law moves the label by design; eight of the
 // sixteen moved (was hamlet-0 Poor, village-0 Struggling, town-0 Moderate, town-2 Moderate, city-1 Prosperous,
 // metropolis-0 Wealthy, metropolis-2 Comfortable, wartime-town-0 Comfortable)
