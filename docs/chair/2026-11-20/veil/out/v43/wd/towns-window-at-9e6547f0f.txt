@@ -1,0 +1,2 @@
+start 2026-11-23T09:20:21Z tree /home/user/join43 at 9e6547f0f77f719072ffb1506e6f11c3d23a1ed7 tpl v28tpl set towns  bij=0 c=0 doors=all
+end 2026-11-23T09:51:41Z
