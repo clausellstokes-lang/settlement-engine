@@ -3059,7 +3059,7 @@ supplies the ancestry.
 3. `[threshold]` {settlement} can pay for a crisis of the ordinary length; a few months into a longer one, the money would run out.
 
 **`Economic Survival`: `WEAK`** {colour}
-1. `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.
+1. `[ledger · guardPresence · prosperity: ≤ comfortable]` {settlement} has nothing laid by to pay for a long defence, and whoever is called to make one knows it.
 2. `[street · guardPresence · prosperity: ≤ comfortable]` The people who would have to hold {settlement} through a long defence know there is nothing laid by to pay them for it.
 3. `[unfolding · prosperity: ≤ comfortable · crisis: calm]` {settlement}'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.
 4. `[ledger · no guardPresence · prosperity: ≤ comfortable]` {settlement} pays nobody to defend it, and could not find the wages if it had to hire someone in a hurry.

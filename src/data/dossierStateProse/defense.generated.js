@@ -1698,7 +1698,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "guardPresence",
             "prosperity: ≤ comfortable"
           ],
-          "text": "{settlement} is always short of money for its defence: no money is laid by to pay for a long one, and whoever is called to make one knows it.",
+          "text": "{settlement} has nothing laid by to pay for a long defence, and whoever is called to make one knows it.",
           "slots": [
             "settlement"
           ],

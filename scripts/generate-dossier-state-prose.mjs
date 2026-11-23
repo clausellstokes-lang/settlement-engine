@@ -614,6 +614,9 @@ const WORD_CORRECTIONS = Object.freeze([
   // CHAIR-2026-11-23-03:45 (DISAGREE, PROSE-6; the chair's GO on the builder's stops): DS-DEF-2 Economic Survival: WEAK v2 said
   // "no money to pay them" beside GEN-17 GARRISONED v2's "pays wages for its defense"; re-worded in place, on its own marks
   { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 2, from: 'a757b74778ece2e2f23b5f5b9fae504d37b3b40cdf4b5bc4310bf10c6645b7ba', to: 'f81f0b3a2608bf34fc5f667ba0849b091267f6d048293016d8470ea395b4cceb', ruling: 'CHAIR-2026-11-23-03:45' },
+  // CHAIR-2026-11-23-03:55 (DISAGREE, PROSE-6; the chair's word on the builder's stop at addendum 1 item 4): DS-DEF-2 Economic
+  // Survival: WEAK v1 said "always short of money for its defence" beside GEN-17 GARRISONED v2 (dz-town-2); re-worded in place
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 1, from: 'b782767dfd38e3998769b6c74b43f313fb795f203fe1c2b0170b11183c71170c', to: '99ffc2d6bd7fa5d6f172e071d0e25cd03085c606fe88e1d199fae6faa5da4a8e', ruling: 'CHAIR-2026-11-23-03:55' },
 ]);
 
 async function readNumberingBaseline() {
