@@ -1,0 +1,23 @@
+diff -ru clean/src/generators/density/applyDensityLaw.js inst/src/generators/density/applyDensityLaw.js
+--- clean/src/generators/density/applyDensityLaw.js	2026-11-22 18:18:26.000000000 +0000
++++ inst/src/generators/density/applyDensityLaw.js	2026-11-22 18:23:58.380609710 +0000
+@@ -248,6 +248,7 @@
+     return { powerStructure: input.powerStructure, plan: null };
+   }
+   const plan = planFor(input, { massOverride: input.massOverride ?? null });
++  if (globalThis.__U8C) globalThis.__U8C.push({ folded: globalThis.__U8C_FOLDED, npcs: globalThis.__U8C_NPCS, massOverride: input.massOverride, seated: plan.factions.map((f) => f.key), unfolded: planFor(input, { massOverride: globalThis.__U8C_NPCS }).factions.map((f) => f.key) });
+   return {
+     powerStructure: reeveToRoster(foldKin(resizeSeats(
+       input.powerStructure, plan, input.rng.fork('density-law').fork('niche-mint'),
+diff -ru clean/src/generators/steps/assembleSettlement.js inst/src/generators/steps/assembleSettlement.js
+--- clean/src/generators/steps/assembleSettlement.js	2026-11-22 18:18:26.000000000 +0000
++++ inst/src/generators/steps/assembleSettlement.js	2026-11-22 18:23:58.380267316 +0000
+@@ -310,7 +310,7 @@
+     // so the seat ceiling (R17: a house the mass cannot crew must not exist) is
+     // computed against a fact rather than against a second mass roll. COHERENCE-POWERS-3 (F1): the leader's office
+     // and the leader's house count as two, as they did before the dual hat folded the office's face into the house's.
+-    massOverride: (settlement.npcs || []).length + seatFacesFoldedByDualHat(settlement),
++    massOverride: (globalThis.__U8C ? (globalThis.__U8C_FOLDED = seatFacesFoldedByDualHat(settlement), globalThis.__U8C_NPCS = (settlement.npcs || []).length) : 0, (settlement.npcs || []).length + seatFacesFoldedByDualHat(settlement)),
+     // COHERENCE-POWERS 2B: the fold reads the final houses (applyDensityLaw.js :: foldKin)
+     institutions: settlement.institutions,
+     rng,

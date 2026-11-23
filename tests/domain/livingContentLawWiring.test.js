@@ -107,12 +107,13 @@ import { buildLivingContentRoster } from '../../src/domain/content/livingContent
 // ⭐ THE SECOND LAW AT BIRTH (LANDING-7 lane D, 2026-11-06). Register VII was lit at 3420d01e3
 // (X-46 car 4, the owner's word of 2026-11-04, ODQ §934.104 R6(1)), so `birthConfig` now spreads
 // the DENSITY mint's marker beside this law's — the event the LIT arm's "or the density mint
-// waking up" was written to catch. The four CREATE arms below name that marker by its own mint
+// waking up" was written to catch. The mocked CREATE arms below name that marker by its own mint
 // (`newSettlementDensityLaw()`), so each still asserts that the LIVING-CONTENT law writes exactly
-// its one key and nothing else, and the density half is held to what its own dial mints.
+// its one key and nothing else, and the density half is held to what its own dial mints; the
+// product-path LIT arm keeps this law's own key only since the JOIN (its whole-value pin moved to
+// `generationLawsSavedPlace.test.js` (g)).
 import {
   DENSITY_LAW_CONFIG_KEY,
-  REGISTER_VII_DENSITY_LAW_VERSION,
   newSettlementDensityLaw,
 } from '../../src/domain/density/densityLaw.js';
 
@@ -249,24 +250,24 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
 
   // ── CREATE ─────────────────────────────────────────────────────────────────
   it('⭐ CREATE (LIT, the product path): birthConfig writes the law marker and NOTHING else', () => {
-    // The density mint woke at 3420d01e3 (Register VII lit): it is named here as exactly the
-    // marker its own lit dial mints, so a THIRD key, or a density mint writing a second field,
-    // still reds this arm.
-    expect(newSettlementDensityLaw()).toEqual({ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION });
+    // ⭐ ITS OWN KEY ONLY (CLOSE-1 JOIN, the chair's E61 (5), COMMON-RULES 14 (c)). The whole value of
+    // `birthConfig(null)`, which this arm used to pin, is pinned ONCE, in
+    // `tests/domain/generationLawsSavedPlace.test.js` (g), from every register row's own mint, dark and lit: every
+    // other law's key is that arm's to hold, so the flip of another law's dial moves no pin here.
     const minted = birthConfig({ ...CONFIG });
-    expect(minted).toEqual({
-      ...CONFIG, ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
-    });
-    // EXACTLY ONE KEY MORE than the config and the density marker — the arm that would catch a
-    // mint that started writing a second field.
-    expect(Object.keys(minted).sort())
-      .toEqual([...Object.keys(CONFIG), DENSITY_LAW_CONFIG_KEY, LIVING_CONTENT_LAW_CONFIG_KEY].sort());
-    // Null/undefined tolerance is the boundary's own contract, unchanged by the
-    // second mint being spread beside the first.
-    expect(birthConfig(null))
-      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
-    expect(birthConfig(undefined))
-      .toEqual({ ...newSettlementDensityLaw(), [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+    expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    // EXACTLY ONE KEY OF THIS LAW'S, beyond the config and the other register rows' own keys — the arm that would
+    // catch this mint writing a second field.
+    const otherLaws = Object.values(GENERATION_LAWS)
+      .map((row) => row.configKey)
+      .filter((key) => key !== LIVING_CONTENT_LAW_CONFIG_KEY);
+    expect(Object.keys(minted).filter((key) => !Object.hasOwn(CONFIG, key) && !otherLaws.includes(key)))
+      .toEqual([LIVING_CONTENT_LAW_CONFIG_KEY]);
+    // Null/undefined tolerance is the boundary's own contract.
+    for (const empty of [null, undefined]) {
+      expect(birthConfig(empty)[LIVING_CONTENT_LAW_CONFIG_KEY], `birthConfig(${empty})`)
+        .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    }
   });
 
   it('CREATE (dark, fired deliberately): at the dormant dial birthConfig still writes not one byte', () => {
@@ -599,64 +600,15 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
  * silently. The arms below take a world born BEFORE the flip through the hops a
  * saved world really makes on the lit build and require it to come back as dark
  * as it went in.
+ *
+ * ⭐ THE PERSISTED-WORLD ARM MOVED (CLOSE-1 JOIN, the chair's E101 (1)). "⛔ a
+ * PERSISTED law-1 world survives load, section regen and the clone seam
+ * unstamped" is cut: `tests/domain/generationLawsSavedPlace.test.js` (a) walks the
+ * same hops (and more) for every generation law with every dial lit, and carries
+ * this arm's one check it lacked, that a law-1 world acquires no
+ * `customContentRoster`, proved red first by a planted roster.
  */
 describe('NO MIGRATION — a law-1 world stays law-1 on every path, on the LIT build', () => {
-  it('⛔ a PERSISTED law-1 world survives load, section regen and the clone seam unstamped', async () => {
-    const { createSettlementSlice } = await import('../../src/store/settlementSlice.js');
-    const store = create(immer((...a) => ({
-      ...stubSlice(),
-      ...createSettlementSlice(...a),
-    })));
-
-    // BORN BEFORE THE FLIP: a markerless world, exactly what a saved world from
-    // any day before 2026-09-08 is.
-    const born = generateSettlementPipeline({ ...CONFIG }, null, { seed: 'no-migration-born' });
-    expect(born.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-    expect(born[ROSTER_KEY]).toBeUndefined();
-
-    // LOAD: the JSON round trip a save and a reload are.
-    const loaded = JSON.parse(JSON.stringify(born));
-
-    // …onto a store whose wizard config IS lit, which is the adversarial setting:
-    // if any read path consulted the form config or the dial, the regen below
-    // would stamp the world.
-    store.setState({ settlement: loaded, config: { ...LIT_CONFIG }, phase: 'draft', locks: {} });
-    expect(
-      materializesLivingContent(store.getState().config),
-      'the store config is not lit — this arm would pass on a world nothing threatened',
-    ).toBe(true);
-    expect(
-      NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
-      'the build is not lit — the whole point of this arm is that a LIT build leaves a v1 world alone',
-    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
-
-    const npcsBefore = JSON.stringify(loaded.npcs);
-    await store.getState().regenSection('npcs');
-    const after = store.getState().settlement;
-    // THE POSITIVE CONTROL: the regen really ran, so the three absences below are
-    // absences after a live operation and not after a no-op.
-    expect(
-      JSON.stringify(after.npcs),
-      'regenSection("npcs") did not change the world — this arm would be asserting that an'
-      + ' operation which never ran also failed to stamp a law',
-    ).not.toBe(npcsBefore);
-
-    // UNDO / SNAPSHOT: the clone seam every undo, snapshot and version-history
-    // entry round-trips through.
-    const cloned = deepClone(after);
-
-    for (const [label, world] of [['loaded', loaded], ['regenerated', after], ['cloned', cloned]]) {
-      expect(
-        world.config[LIVING_CONTENT_LAW_CONFIG_KEY],
-        `${label}: a world born under law 1 acquired a law marker on a lit build. There is NO`
-        + ' MIGRATION, deliberately, and no path may stamp a persisted config.',
-      ).toBeUndefined();
-      expect(resolveLivingContentLawVersion(world.config))
-        .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
-      expect(world[ROSTER_KEY], `${label}: a law-1 world acquired a roster`).toBeUndefined();
-    }
-  });
-
   it('⭐ every reader of the roster key treats ABSENT as empty, driven not argued', () => {
     // ⛔ WHY THIS IS AN ARM AND NOT A READING. "There is no migration" means most
     // worlds in the estate will never carry this key, so every reader of it meets
