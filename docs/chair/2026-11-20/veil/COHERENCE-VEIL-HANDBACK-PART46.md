@@ -18,11 +18,17 @@ Written 10:49 UTC 2026-11-23.
 - Chain B's instruments read from origin, no checkout: `lane/veil-42-2026-11-23-meas-wip` at eb0c60920 (U-UNMARKED; `out/v42/meas/meas.sh`, the lane's ONE
   whole-document instrument: extend it, never a second); `lane/veil-doors-3-2026-11-20` at 3e1115c81.
 ### (2) DONE
+- MAPCOVERT-RED RETURNED (tip 6edc79094; report `out/v44/mapcovert/MAPCOVERT-RED-HANDBACK.md` there): `tests/security/galleryMapCovert.pglite.test.js`
+  RED 3 of 8 (map member, map import, both on chain B's two places), controls green; arm `UM_ASSERT=map` on stored-today exit 1 (7 of 7 per
+  cell), stored-master exit 0; tests/lint 48 = base. RE-RUN BY THE SEAT 12:49 (3 failed | 5 passed, the same titles; `out/v44/mapcovert-rerun.sh`).
+  MERGED into the door -wip at 6c7bf0b97 (12:50); tests/lint whole on it queued (`out/v44/lint-whole.sh`). Its STOP: one push started the whole
+  check, killed (exit 143); 15 (d) checked clean.
+- TRAD4-RECUT DISPATCHED 12:49 (branch `lane/veil-44-2026-11-23-trad4-wip` at b58abc48b, worktree `/home/user/wt/trad4`).
 - THE MACHINE RE-MADE (chain0 END 11:31): instruments rc 0 (--check 0, walker 0, accept 40, gate HIGHER 0 / EQUAL 79 / LOWER 13 both engines and Reveals); pool `pool-v44` 4 shards rc 0 (11:24); verify 45, 0 differ; gates rc 1 by design: GATE-1 4 at every gated setting (off and DM), LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10). EQUAL TO PART 44's standing figures.
 - Read-in as the start message orders; first line to the chair 10:47.
 - (c1) WRITTEN: `briefs/IMPORT-DOOR-BRIEF.md` ADDENDUM 2 (the eleven-item list; the owner's paragraph on N75 (4)).
 ### (3) IN FLIGHT
-- MAPCOVERT-RED builder (dispatched ~10:56; told N84 (1) at ~11:08: the member's acceptance is the LINK's read).
+- TRAD4-RECUT builder (dispatched 12:49).
 - (c2): `out/v44/c2/doors-arms.sh /home/user/wt/doors3` through the mutex (re-queued 11:25 with GATE_MUTEX_MAX_POLLS=100000; the first try gave up, exit 3); log `/var/tmp/v18/out/v44/c2-doors3.log`.
 ### (4) NEXT, IN ORDER (written 12:12 UTC; THE CHAIR'S MARK 338,524 at 12:09: from here every measure goes to a builder and returns as counts)
 1. MAPCOVERT-RED returns: read its report (at most 60 lines) and its diff ONCE; re-run its red (the test file at the door -wip tip:
