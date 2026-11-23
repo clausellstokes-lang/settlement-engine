@@ -1,4 +1,4 @@
-# R4I-PAGE-3 — brief (R4-IDS's twin, third builder; VEIL-38, chain B). READ WHOLE: this brief; `briefs/R4I-PAGE-2-BRIEF.md` (its rules, WHERE YOU RUN and LAWS bind you as written, with the names below); `out/v38/r4ip2/R4IP2-HANDBACK.md`, `G-CLASSES.md`, `A-link-anchor.patch`; `tests/security/personIdBijection.shared.mjs`. Every other file is read by grep, or as one test's body when you re-state it. NEVER 212, its rollback, the registry or `registry.json` (beyond a grep).
+# R4I-PAGE-3 — brief (R4-IDS's twin, third builder; VEIL-38, chain B). WINDOW: a context of 1,000,000 tokens; ITS BUDGET about 250,000 (stop there). WALL TIME: about 2.5 hours. READ WHOLE: this brief; `briefs/R4I-PAGE-2-BRIEF.md` (its rules, WHERE YOU RUN and LAWS bind you as written, with the names below); `out/v38/r4ip2/R4IP2-HANDBACK.md`, `G-CLASSES.md`, `A-link-anchor.patch`; `tests/security/personIdBijection.shared.mjs`. Every other file is read by grep, or as one test's body when you re-state it. NEVER 212, its rollback, the registry or `registry.json` (beyond a grep).
 
 Written by VEIL-38 on 2026-11-23. The owner may veto it. It continues R4I-PAGE-2, which stopped at its budget with S1 done (05ec8213b, merged into the -wip). Its measures are O (the Tonight sheet's want line, a STOP before the chair) and S2 (red at the tip: not this unit's). Its G is partial.
 
@@ -56,7 +56,7 @@ As R4I-PAGE-2's brief says. STOP EARLY with what is left at about 250,000 tokens
 
 YOUR LAST MESSAGE: at most 250 words. Give your last commit; G1's re-stated count and the 34 files' red count; G2's table by class; A's tooth figures; each arm's red and green; ST's figures; `tests/lint` whole's count; the build's figures; CONFIRMED vs PLAUSIBLE.
 
-## ADDENDUM (VEIL-38, 01:05 UTC; the chair's ruling 40.3 of 01:01 UTC). WINDOW: about 2.5 hours. It reads nothing more whole.
+## ADDENDUM (VEIL-38, 01:05 UTC; the chair's ruling 40.3 of 01:01 UTC). It reads nothing more whole (the window: the first line).
 - (4) `pgliteHookTimeoutRatchet` is RULED: a test-only cure inside R4-IDS.
   - At `tests/security/galleryVeilIds.pglite.test.js`, the regex R4I-PAGE wrote with `\(` inside the `beforeAll` (about line 205) gets `\x28` in place of `\(`.
   - Put ONE comment on the line above saying why: the ratchet's paren matcher reads `\(` as an open paren.

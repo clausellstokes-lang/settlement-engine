@@ -6,7 +6,7 @@ Branches:
 - `lane/veil-38-2026-11-23`: documents, briefs, measures, this file. Seated on ecfc1f973 (VEIL-35's final state).
 - `lane/veil-38-2026-11-23-r4ids-wip`: the unit's code, created at `origin/lane/veil-35-2026-11-22-r4ids-wip` fd7163ba6.
 
-No pull request, ever (N2). The lane's tip is af708f2fd on `lane/veil-33-2026-11-22` until the chair names a newer one.
+No pull request, ever (N2). THE LANE'S TIP is 2d7ed483f on `lane/veil-39-2026-11-23-tip` (40.4), merged into the -wip at ec082df83.
 
 ## 1. WHERE THIS SEAT STANDS (kept current at every push)
 Written 00:21 UTC on 2026-11-23.
@@ -41,7 +41,7 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
 - R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
 
 ### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
-Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat. They are read whole once, before the first trigger that 40.1 (b) names.
+Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat (40.4's tip move changed neither). They are read whole once, before the first trigger that 40.1 (b) names.
 
 ### (3) NEXT
 1. Read R4I-PAGE-3's diff once and merge it into the -wip.
@@ -88,6 +88,15 @@ Follow PART 36 section (4), with the names: tree `/home/user/wip`, out `/var/tmp
      DONE BY THIS SEAT: (4) and (3) to R4I-PAGE-3 (its brief's ADDENDUM); (2) to a SECOND builder, R4I-TONIGHT
      (`briefs/R4I-TONIGHT-BRIEF.md`; disjoint manifest: the sheet, the judge, `shareRenderTwice` and the want pins; COMMON-EIGHTH
      12 (a): two builders of one deliverable next to its landing line).
+
+40.4 THE CHAIR, 01:03 UTC: "TIP 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip`" (VEIL-39's unit (P): one parent
+     af708f2fd; ONE test file, `galleryVeilHandRows.pglite.test.js` +6 -3, V7-2's "STAYS" row re-stated to E97 (1)). Merged into the -wip
+     at once, before R4I-PAGE-3 edits that file: ec082df83 (no conflict). For this move E116's five steps reduce to that merge, that
+     file's run on the merged tree and `tests/lint` whole at the next whole run; the pool started at 00:58 on b088fcfc5 STANDS (nothing
+     under src/ or supabase/ moves). R4I-PAGE-3 told to merge the -wip into its branch before editing the file.
+40.5 THE CHAIR, 01:04 UTC: TWO BUILDERS AT ONCE ACCEPTED (R4I-TONIGHT beside R4I-PAGE-3; manifests disjoint; heavy runs one at a time
+     through the mutex). A builder's WINDOW is its context in tokens, said in figures in the brief's first line (1,000,000; its budget),
+     beside what it reads whole; wall time is a separate line. Both briefs' first lines corrected.
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
