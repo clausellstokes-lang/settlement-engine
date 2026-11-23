@@ -3058,3 +3058,26 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   NEXT IS trig_01YGHr43QZ7qTByhhu8Gde3x AT 15:10:00 UTC, its stored text re-written with the figures of 14:08 and what
   each seat owes. THE HOURLY WORD TO THE OWNER, after this entry's push: the name search's finding in plain words; the
   id unit changes the wording of one "tonight" line on his own page in 2 of 1,808 test towns.
+- 2026-11-23 14:30 UTC · N105 · THE JOIN'S NAME SEARCH IS COMPLETE (ONE PATH, CHAIN A's; EVERY OTHER CLASS 0); ITS
+  RE-RUN AFTER CHAIN A's MERGE READS THE MASTER-BORN STORED FORM TOO; THE JOIN SUCCESSOR'S DRAFT GAINS FOUR RULINGS.
+  (1) "NAMES" COMPLETE (VEIL-43, queued 14:28:50; `out/v43/meas/V43-MEASURE.md` at b99191d9f on its branch; run 13:41
+  to 14:27 UTC, one hold of its mutex): BOTH FORMS, 16,800 reads each (11,310 hiding reads on 95 places), FOUR DOORS
+  by name (`get_gallery_dossier`, `get_unlisted_dossier`, the import, `get_gallery_map`'s member through a
+  `saved_maps` row; the twin's gallery and link), by the lane's own fold (`buildNameSearch`, imported). HITS: ONE
+  PATH, classed "R5-DESC: cured by chain A's merge" (N104): `powerStructure.factions[].desc`, 240 reads, the two
+  places (r3m-town-none-0-17, r3m-city-none-1-117), every door, both forms, every setting, both Reveals (the map
+  member at its row's DM too: it never reads `gallery_share_dm`). EVERY OTHER CLASS 0; the map member's known covert
+  fault 0; THE OWNER-ONLY SLOT 0; `dmNote` at Reveal DM only, born and stored alike. THE STORED FORM is the lane's
+  round trip (`out/v33/legacy/dump.probe.jsx`, unchanged): all 140 stored documents byte-equal the born ones;
+  MASTER-BORN STORED DOCUMENTS ARE NOT IN THIS MEASURE (the seat's own words). PAGES' split holds its mutex since
+  14:27; "DAILY" is inside PAGES (N91).
+  (2) **Decided (N105), sent after the clock read 14:29:06:** TAKEN. ONE ADDITION TO THE RE-RUN LINE (after chain A's
+  merge; the seat's or its successor's): THE MASTER-BORN STORED FORM IS READ TOO: the lane's dump at master db832c892
+  (a scratch detached worktree of master), the same 140 seeds if the cost allows, every door, both Reveals; its cost
+  said first if over thirty minutes; the reader's row 24's four tells classed apart; nothing is run for it now.
+  **Why:** every town that exists at the deploy was born by master's engine; a name search that reads only today's
+  births proves nothing about the pages the deploy will first serve.
+  (3) COMMITTED WITH THIS ENTRY: `prompts/DRAFT-START-VEIL-46.txt` gains (g) NAMES and its re-run, (h) "13G x S" (the
+  standing writer's new input handed to the page's reader over the served rows), (i) PAGES' split and the ORDER class,
+  (j) the crime-wave rule and the test-side cure of hxd-city-138 if "REDS-CAUSE" confirms the cause. THE CHAIR'S
+  PUSHES: the forty-fifth (244a17c1f: N104) ended exit=0 at 14:17:36 UTC (its log; ls-remote equal to the local tip).
