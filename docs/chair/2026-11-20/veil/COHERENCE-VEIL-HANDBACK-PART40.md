@@ -90,7 +90,7 @@ THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` 
    - the arms and the walkers; `tests/security` whole classed. R4I-PAGE-4's last run, at its tree c7e60ef59 (= the -wip's tests), ENDED at 04:3x UTC: 9 failed | 2,103 passed | 1 skipped of 2,113 (170 files: 3 failed). Its log is a 120-line tail, so 7 of the 9 are named: `criminalSwitchHandReach` 3 (master's stored shape: the GAP, R4I-SQL-2's), `galleryVeilSignalCopies` 2 (the tip's: PIN-2), `shareRenderTwice` 2 (the Tonight sheet: R4I-TONIGHT-2's). THE OTHER 2 ARE UNNAMED: PLAUSIBLY two more of `criminalSwitchHandReach`'s (R4I-PAGE-4 counted 5 reds there). Re-run and class it whole after R4I-SQL-2 and R4I-TONIGHT-2;
    - `tests/lint` whole by name (52 of 3,304 at c7e60ef59 against the tip's 48: `netCurrentExtractorAnchor` 1, the unit's; `writerReach` 3, RE-TAKEN BY NOBODY YET (40.8 (3)): ONE new identity read off its log, "salt on reasons" (the LIT grammar round-trip names it; the two mutants count 1424 against 1423 and 1425 against 1424 because of it), PLAUSIBLY S1's `{ salt }` argument (`criminalVeilSwitch.js :: presentCriminalGroupings` / `galleryVeil.js :: applyVeil`'s `opts`): the file, symbol and field to be confirmed by the walker's own report before the chair rules);
    - typecheck and eslint.
-8. The 34 files: their two reds (S2; VS1's crime-types tooth) are the tip's and leave with VEIL-39's "PIN-2" (40.6 (d)).
+8. MERGE THE TIP 23bb8b8ae (PIN-2, 40.10) into the -wip before the proofs; then the 34 files' one remaining tip red is VS1's tooth (the tip's, chain C's to read).
 9. "TIP? R4-IDS <commit>", with the four VERIFY_DIST reds named as the owner's size signings and the cost law's figure; E116's five steps first if the tip moved.
 
 ### (4) THE SMALLEST LIST OF FILES TO GO ON
@@ -217,6 +217,13 @@ THE TWO COMMITS A SUCCESSOR IS SEATED ON: this branch `lane/veil-38-2026-11-23` 
            different people or different non-criminal bytes share a signature.
        (3) So "twin = server" by the gates is equality of the criminal surface's SHAPE, never of the document; the whole-document form
            is the canonical document modulo the bijection (`personIdBijection.shared.mjs :: canonPeople`, as M's probe reads it).
+
+40.10 THE CHAIR, 05:17 UTC (no act of this seat's): "TIP 23bb8b8ae1155e948bca4308e479fba7adc8639c on lane/veil-39-2026-11-23-tip"
+     ("PIN-2": one parent 2d7ed483f; two test files; S2 and `galleryVeilSignalCopies`' two re-stated by rule (e); read whole by the
+     chair). THE SUCCESSOR MERGES IT INTO THE -wip BEFORE THE UNIT'S PROOFS (test-only: E116's steps reduce as in 40.4). After it the
+     tip's own red in the 34 files is ONE: VS1's tooth (`teeth.other.tried` 0; cause unread; chain C's successor reads it). THE STORED
+     PROSE's CURE is ruled "(a')" for the first deploy (no `publicProse` served on a shared read): the stored arm reads no prose once
+     that cure is in the tip.
 
 ## 3. Log (every hour read from `date -u`)
 - 00:15 seated (not clocked; the first clock read was 00:17).
