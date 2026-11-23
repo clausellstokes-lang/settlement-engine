@@ -1,0 +1,17 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 29044 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+births: 900 (150 a size) in 147s
+COVERAGE: printed slot texts not wholly read back to pool rows: 0
+
+════ THE READER'S FIGURE: the mean number of identical Daily Life sentences two pages share (the public eight) ════
+thorp      pairs 11175  mean shared 0.321  (sentences a page 9.83; commonest: 14 "There is enough to eat, if nobody asks for much more than the day need"; 13 "Frontier habits show here: people go out in company and come back befo"; 13 "Most households eat simply, and they eat enough.")
+hamlet     pairs 11175  mean shared 0.259  (sentences a page 9.97; commonest: 13 "Commoners resent the council's indifference to ordinary complaints."; 13 "There is more than enough to eat, and nobody here goes to bed hungry."; 12 "Meals are plain and filling, and little goes to waste.")
+village    pairs 11175  mean shared 0.320  (sentences a page 9.86; commonest: 14 "There is more than enough to eat, and nobody here goes to bed hungry."; 14 "Most days people stop to talk by the house of worship on their way to "; 14 "People do as the Elder Council says, but few of them think well of it.")
+town       pairs 11175  mean shared 0.270  (sentences a page 9.63; commonest: 14 "There is not much here to stop trouble once it starts, and people know"; 13 "The workshops open their doors early, and work is under way at the ben"; 12 "People gather in the market square at midday to talk, to trade a littl")
+city       pairs 11175  mean shared 0.292  (sentences a page 9.20; commonest: 14 "Outsiders find the place ordinary: quiet, unremarkable, and in no hurr"; 14 "Those who kept guard through the night hand over at first light and go"; 13 "The workshops open their doors early, and work is under way at the ben")
+metropolis pairs 11175  mean shared 0.331  (sentences a page 9.20; commonest: 14 "The settlement reads to outsiders as ordinary. Quiet streets, predicta"; 14 "Carts are already coming in at the gates as it grows light, bringing t"; 14 "Who may sell what, and who gets a say in how the place is run, is argu")
+POOLED WITHIN SIZE (every same-size pair of the six sizes): pairs 67050  mean shared 0.299
+ALL PAIRS OF THE 900 (any two places): pairs 404550  mean shared 0.189
+CROSS-SIZE PAIRS ONLY: pairs 337500  mean shared 0.168
+
+done in 147s
+EXIT 0
