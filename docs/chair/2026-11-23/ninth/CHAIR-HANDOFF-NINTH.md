@@ -199,6 +199,11 @@ hiding towns against each town's house-free twin (NEVER-THERE); it takes "DAILY"
 its counts; A LINE GAINED ON A VEILED PAGE IS SENT TO THE CHAIR AT ONCE. THE FLIP BRANCH HOLDS "F-FORTUNE-2" ec216e759
 AND "PROSE-E" MERGED AS 83baeaf14 (N92); its seat goes on to LIT-13G. A PUSH WITH NOTHING TO SEND STARTS THE WHOLE
 CHECK (two seats met it): every seat now guards each push by comparing its tip with origin's first.
+SINCE N92 (N93): THE NEXT HOURLY CHECK IS trig_01PqDkpYkdTGm1CHzWjwtzMH AT 13:11 UTC (the reminder of 12:12 was deleted,
+its work done at 12:08). THE JOIN FOUND A FOURTH NEW RED (`traditionDescriptionSharedPage.test.js`, its block "TRAD-2
+UNIT 2"): into "REDS-CAUSE" with the three. U ON THE MASTER-BORN SET: 0 OF 140 HOLD A COVERT COPY: GIVEN TO THE OWNER
+FOR HIS DECISION. R4I-SQL-2 IS DISPATCHED (chain B). THE JOIN'S SUCCESSOR HAS A DRAFT (`prompts/DRAFT-START-VEIL-46.txt`).
+THE OWNER IS TOLD that the switch-on's landing will need his one line in the landing seat's session.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2548,3 +2553,51 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   (5) THE CHAIR'S PUSHES: the thirty-eighth (893317748: N90) ended exit=0 at 11:47:56 UTC (its log; ls-remote equal to
   the local tip). OWED TO THE OWNER AT THE NEXT WORD TO HIM: that the switch-on's landing will need his one line in
   the landing seat's session, as last time.
+- 2026-11-23 12:15 UTC · N93 · THE JOIN'S FOURTH NEW RED (THE TRADITIONS TEXT) AND "HOOKS" 11 OF 462; U ON THE
+  MASTER-BORN SET: 0 OF 140; R4I-SQL-2 DISPATCHED; "PROSE-E" MERGED INTO THE FLIP; THE JOIN'S SUCCESSOR HAS A DRAFT;
+  THE READER'S ROW 5 CORRECTED.
+  (1) THE CHECK'S REMINDERS: the hourly check was made at 12:08 to 12:10, before its reminder: the reminder of 12:12
+  (trig_01GLpYCurM5gcmnrfzGvWB8p) was DELETED by the chair, its work done; THE NEXT IS trig_01PqDkpYkdTGm1CHzWjwtzMH
+  AT 13:11:00 UTC. THE CHAIR'S PUSHES: the thirty-ninth (ca7cc6694: N91, N92) ended exit=0 at 12:12:35 UTC (its log;
+  ls-remote equal to the local tip). SENT after the clock read 12:09:13: to VEIL-44 its first mark (338,524 in 87
+  minutes: it read wide: it reads nothing whole that a builder can read; its hand-back's first section kept current
+  for a successor); to VEIL-43 its mark (409,431: reports by totals; its hand-back's first section kept current).
+  DRAFTED AND COMMITTED WITH THIS ENTRY: `prompts/DRAFT-START-VEIL-46.txt` (the join's successor: a draft with eleven
+  blanks; it reads START-VEIL-43.txt whole and PART 45's first section first; the chair's rulings on the join listed:
+  the bar N88, the whole-document form N90, the doors N84, PAGES N91, the paragraph on who governs N87 and N89,
+  GUARD-PIN and VR42-NOTICE).
+  (2) THE JOIN'S FOURTH NEW RED AND "HOOKS" (VEIL-43, queued 12:08:11; the joined tree 9e6547f0f): `tests/security`
+  WHOLE: 602 files, 2,142 tests, 3 red, ALL IN `tests/security/traditionDescriptionSharedPage.test.js` (point 88's
+  file; not on the lane's tip; not on the red list), its block "TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the
+  curate screen can hide hidden, the traditions text stands": its anti-vacuity ("the pool holds every class of
+  address": false), its control (two rows where one is expected) and its third arm ("metropolis: powers" lists
+  differ); cause unread; every other file of `tests/security` green. **Decided:** it goes into "REDS-CAUSE" with the
+  three; the seat says whether the test's universe moved under the lane's registry or a site is unregistered. ONE
+  FILE, TWO HANDS: chain B's doors unit re-cuts the block "TRAD-4 UNIT 8" of the same file (the pin "an import equals
+  the gallery read", from the file's version at 14f16760b; VEIL-44's builder TRAD4-RECUT, tests only: its brief READ
+  BY THE CHAIR at d485c6ae0): each seat touches its own block and tells the chair before moving another line of that
+  file. "HOOKS": the hook-gap measure re-run on 240 births: 11 OF 462 SERVED HOOKS NEED A HOUSE THE READ HIDES (the
+  probe's figure at point 97, unchanged), naming 0, server = twin: unit (ix)'s shape is still the seat's to propose.
+  THE READER'S ROW 5 IS CORRECTED WITH THIS ENTRY (the seat's answer, queued 12:13:16, read by it on the line): FOUR
+  office lines, L8 to L11, are on the line (`src/data/dailyLife/commonerResentments.js`); L12, the fifth, is not
+  built.
+  (3) CHAIN B (VEIL-42, queued 12:10:14 and 12:10:33). R4I-SQL-2 IS DISPATCHED AHEAD OF "GAP" ON THE MASTER-BORN SET,
+  by the seat's judgement: its mutex is held to about 13:10 by TONIGHT-2's two pool arms; its measure's census of the
+  master-born set's STORED side (c08f514d1, a read) finds all 15,002 stored person ids at paths the re-key already
+  covers (master's roster members carry a goal as two strings and no allegiance): the gap is plausibly empty on stored
+  master-born documents and real on the control's master shape; the measure confirms, and a new path reaches the
+  builder before its cure is committed (brief aba6be799; `lane/veil-42-2026-11-23-sql2-wip` at 392aff978). THE CHAIR:
+  NO VETO. U-UNMARKED ON THE MASTER-BORN SET (140 places): 0 PLACES CARRY A COVERT COPY (master writes no `covert`
+  flag): 0 on every door; M-TWIN 0 on both stored sets. GIVEN TO THE OWNER FOR HIS DECISION ON PAGES PUBLISHED BEFORE
+  THE VEIL (0 of 140 older-format towns hold a secret tie); THE FULL COUNT OF "MAP-COVERT" SENT TO VEIL-44 with the
+  file's name (the seven towns are its red's).
+  (4) THE FLIP (CLOSE-6, queued 12:12:42): "PROSE-E MERGED 83baeaf14": cf104777c into the flip at ec216e759, a plain
+  merge, no conflict, 12 files; lit at 83baeaf14: the merge's test files and `tests/copy` whole 302 of 302;
+  `tests/lint` whole 3,374 tests, 3 red, the line's three by name; the lighting census, the observed-shape readers and
+  `proseMoveGrammar` CONTROL 4 green: NO REGISTER OWES A DOOR; its lit re-run of the 20 fortune files 286 of 287 (R13,
+  listed); nothing dropped for the owner. Next: (e2) under law 1, then LIT-13G's builder. Told: its hours run ahead of
+  the server's queue times by one to three minutes: each is read from `date -u` or left out.
+  (5) SAID TO THE OWNER (the hourly word): the state; the master-born count; the fourth red; that two seats fill fast
+  and their successors' start messages are drafted; AND THAT THE SWITCH-ON'S LANDING WILL NEED HIS ONE LINE IN THE
+  LANDING SEAT'S SESSION, AS LAST TIME (the chair asks him when it is time whether it reuses the seat he allowed or
+  opens a fresh one).
