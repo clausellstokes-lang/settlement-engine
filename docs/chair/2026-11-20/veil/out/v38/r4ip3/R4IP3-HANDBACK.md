@@ -64,5 +64,32 @@ criminalSwitchHandReach 12 red | 2 green (class (i), left). Tell3/4/5/8, gallery
 their own (heavy; the security run's counts stand: ServerVeil 11 red, RosterChoices 2 red; Tell3/4/5/8 0 red there).
 shareRenderTwice: not mine (ruling 40.3).
 
+## B — THE BUILD (logs/b-*.txt). No src file changed since b088fcfc5 (git diff --stat src supabase package.json: empty), so
+these are the tree's figures as R4I-PAGE-2 left it (S1 over R4-IDS's twin), CONFIRMED red, NOT this unit's to cure.
+- `npm run build`: exit 0.
+- VERIFY_DIST: 4 red | 62 green of 66. First paint: raw 1,175,552 B against the budget 1,175,492 (+60); gzip 374,013 B against
+  373,999 (+14); the engine chunk 910,255 against < 909,928 (+327). The worker: 2,579,751 B against its ceiling 2,579,708
+  (+43). Every rise is over a budget "a lane never edits": the chair's (R4-IDS's twin: galleryVeilPeople.js / sha256Hex).
+- typecheck: 167 errors, ceiling 167, OK. eslint on every file touched: 0 (logs/g1-eslint.txt, g2-eslint*.txt).
+
+## ST — THE STORED ARM'S PERSON-ID PROBE: WRITTEN AND RUN (st/; commit: ST)
+`stored-ids.probe.jsx` + `stored-ids.sh <tree> <stored dir> <outdir> <template> [prefix]` (stored.sh's shape) + `ids-an.mjs`.
+The stored sets by `dump.sh` with LP_A=0 LP_B=0 LP_TOWNS=1: it reads NO pool file then, so an empty directory served
+(`/var/tmp/r4ip3/emptypool`; pool-v38 not needed). Today-born at this tree (publicProse composed); master-born at a scratch
+detached worktree of db832c892 (`/home/user/wt/r4ip3-master`, its own `npm ci`, never committed to). Read through THIS tree's
+twin and server (v28tpl = v27x211 + 212, the same blob), Reveal off/on x unmarked/marked x two reads x three surfaces
+(twin, gallery, link): 3,360 reads a set.
+| | today-born (140) | master-born (140) |
+|---|---|---|
+| (1) withheld names in ids/keys/slugs, any surface | 0 | 0 |
+| (2) stored person ids served un-re-keyed / of them in stored-only fields | 0 / 0 (stored-only: `publicProse`; RV9_BIRTH=1 found no other key) | 0 / 0 |
+| (3) ids shared by two reads of one surface | 0 | 0 |
+| (3) unresolved references beyond the stored document's own dangling ones | 0 (the stored own: 36,823) | 0 (29,180) |
+| (4) re-keyed on the twin (4 settings): ids / refs / ties | 26,712 / 64,484 / 26,056 | 12,345 / 43,204 / 0 |
+| CONTROL: a bad reference planted (5 a document, DM on) | caught 700/700 | caught 700/700 |
+| CONTROL: a stored id served | caught 140/140 | caught 140/140 |
+PLAUSIBLE: "stored-only" for master-born is `publicProse` alone (no birth of master's to compare keys against); the (3)
+judgment counts unresolved references, not which card each one names.
+
 ## LEFT
 G1's 34-file count (queued on the mutex); G2's 28 (i); the Tell arms alone; ST; L; B.
