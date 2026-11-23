@@ -43,6 +43,14 @@ export const readSalt = () => globalThis.crypto.randomUUID();
 /** The person card lists (galleryVeil.js CARD_KINDS.npc.lists; 211 :: _gallery_veil_cards 'npc'). */
 const PEOPLE_LISTS = Object.freeze([['npcs'], ['powerStructure', 'factions', '*', 'members'], ['factions', '*', 'members']]);
 
+/**
+ * R4I-SQL-2 (VEIL-42; the chair's 40.8 (1): "every reference following"; R4I-MEASURE's C, THE GAP): a person card's
+ * references at fixed paths, WHICHEVER LIST HOLDS THE CARD: npcs[] and a roster copy's member (factions[].members[],
+ * powerStructure.factions[].members[]), whose whole record a DM projection of master's stored shape keeps. ONE list for both
+ * passes (212 :: _gallery_veil_rekey's `card`).
+ */
+const CARD_PATHS = Object.freeze(['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler']);
+
 /** @param {unknown} s @returns {Rec[]} every person card of the document */
 function peopleCards(s) {
   /** @type {Rec[]} */
@@ -112,7 +120,8 @@ function rekeyTieIds(arr, salt) {
 /**
  * R4-IDS (item 3; the chair's VR10): every person's id re-keyed under `salt`, and every reference the served payload
  * holds to a person follows, at fixed paths: the cards' ids (npcs[], both roster copies); a goal's two target ids; an
- * allegiance's handler; the ties' ends (from, to; master's npc1Id, npc2Id) and a tie's own id (re-keyed whole); STOP 1, a
+ * allegiance's handler (CARD_PATHS: a roster copy's member's too, R4I-SQL-2); the ties' ends (from, to; master's npc1Id,
+ * npc2Id) and a tie's own id (re-keyed whole); STOP 1, a
  * card's OWN ties (npcs[].relationships[]: from, to, npc1Id, npc2Id, targetId, npcId, and that tie's own id, whole); the
  * crisis cast's roles and lever holders (both copies, one crisis or a list); the simulation trace's targetId and its
  * effects' target. No stored id and no form (`npc_veiled_`, `npc_power_`, `npc_<house slug>`) survives at these paths.
@@ -124,7 +133,7 @@ export function rekeyPeople(s, salt = readSalt()) {
   if (!isRec(s)) return s;
   const ids = new Set(peopleCards(s).map(c => personIdText(c.id)).filter(v => v !== ''));
   // registry: people.rekey (the cards: each id; a goal's two targets; the handler)
-  rekeyEach(s.npcs, ['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
+  rekeyEach(s.npcs, CARD_PATHS, ids, salt);
   // registry: people.rekey (STOP 1: a card's OWN ties, npcs[].relationships[]: their ends and references, and each tie's own
   // id re-keyed whole)
   if (Array.isArray(s.npcs)) {
@@ -149,9 +158,10 @@ export function rekeyPeople(s, salt = readSalt()) {
   // registry: people.rekey (the simulation trace's targets, and each effect's)
   rekeyEach(s.simulationTrace, ['targetId'], ids, salt);
   if (Array.isArray(s.simulationTrace)) for (const e of s.simulationTrace) if (isRec(e)) rekeyEach(e.downstreamEffects, ['target'], ids, salt);
-  // registry: people.rekey (master's roster copies: a power's member by id, either list)
+  // registry: people.rekey (master's roster copies, either list: a power's member BY THE CARD'S PATHS, its id, a goal's two
+  // targets and the handler; R4I-SQL-2, the GAP)
   for (const list of [s.factions, recAt(s, 'powerStructure')?.factions]) {
-    if (Array.isArray(list)) for (const f of list) if (isRec(f)) rekeyEach(f.members, ['id'], ids, salt);
+    if (Array.isArray(list)) for (const f of list) if (isRec(f)) rekeyEach(f.members, CARD_PATHS, ids, salt);
   }
   return s;
 }

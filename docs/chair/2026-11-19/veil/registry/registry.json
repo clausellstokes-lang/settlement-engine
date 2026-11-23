@@ -370,7 +370,7 @@
     "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
   },
   {
-    "path": "^(npcs\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id|targetId|npcId))|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id)|(stress|stressors)(\\[\\])?\\.cast\\.(roles\\[\\]\\.id|levers\\[\\]\\.holderId)|simulationTrace\\[\\]\\.(targetId|downstreamEffects\\[\\]\\.target)|(powerStructure\\.)?factions\\[\\]\\.members\\[\\]\\.id)$",
+    "path": "^(npcs\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id|targetId|npcId))|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id)|(stress|stressors)(\\[\\])?\\.cast\\.(roles\\[\\]\\.id|levers\\[\\]\\.holderId)|simulationTrace\\[\\]\\.(targetId|downstreamEffects\\[\\]\\.target)|(powerStructure\\.)?factions\\[\\]\\.members\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler))$",
     "rule": "recompose",
     "by": "src/generators/npcGenerator.js :: mergeNPCLists"
   }

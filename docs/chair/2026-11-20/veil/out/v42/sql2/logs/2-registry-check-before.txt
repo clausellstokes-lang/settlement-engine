@@ -1,0 +1,2 @@
+roster-choice registry: registry.json differ from the module; run node scripts/veil/rosterChoiceRegistry.mjs
+check-before rc=1

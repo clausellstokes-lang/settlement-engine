@@ -12,7 +12,8 @@
  * The re-keyed paths are exactly the re-key's (212 :: _gallery_veil_rekey, rule for rule), each value re-keyed only
  * where the re-key re-keys it (a person card's id, or a string spelled `npc_`): the fixed walk visits, in this order,
  *   1. the card ids: npcs[].id, powerStructure.factions[].members[].id, factions[].members[].id;
- *   2. the references: npcs[].goal.intent.short/long.target.id, npcs[].allegiance.handler; relationships[].from/.to/
+ *   2. the references: npcs[].goal.intent.short/long.target.id, npcs[].allegiance.handler, and the same three of each
+ *      roster copy's member (powerStructure.factions[].members[], factions[].members[]: (G)); relationships[].from/.to/
  *      .npc1Id/.npc2Id; stress/stressors (one crisis or a list) .cast.roles[].id, .cast.levers[].holderId;
  *      simulationTrace[].targetId, simulationTrace[].downstreamEffects[].target;
  *   3. kind `tie`: relationships[].id (a tie's own id spells its ends' ids and is re-keyed whole).
@@ -47,6 +48,11 @@
  *       wherever one exists (served or not: the mask could not tell it from the re-key's own); (ii) the mask takes WHOLE
  *       tokens only: no word character before the prefix, 16 hex, then no word character (letters of either case, digits,
  *       `_`), so a stored id served bare, or inside a longer string that is not a fresh token, still reds.
+ * R4I-SQL-2 (VEIL-42; the chair's 40.8 (1); R4I-MEASURE's C, THE GAP), CHANGED in one place more, BY ITS CAUSE (212 ::
+ * _gallery_veil_rekey and galleryVeilPeople.js :: rekeyPeople now re-key a roster copy's member at the card's paths):
+ *   (G) a roster copy's member's goal.intent.short/long.target.id and allegiance.handler are re-keyed sites (phase 'ref'),
+ *       walked right after the same three of npcs[] (powerStructure.factions[] first, then factions[], as the card ids are);
+ *       every tooth stands as it was.
  */
 
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -71,11 +77,15 @@ function sites(doc) {
   for (const n of recs(doc.npcs)) at(n, ['id'], 'npc', 'card');
   for (const f of recs(doc.powerStructure?.factions)) for (const m of recs(f.members)) at(m, ['id'], 'npc', 'card');
   for (const f of recs(doc.factions)) for (const m of recs(f.members)) at(m, ['id'], 'npc', 'card');
-  for (const n of recs(doc.npcs)) {
+  const cardRefs = (n) => {
     at(n, ['goal', 'intent', 'short', 'target', 'id'], 'npc', 'ref');
     at(n, ['goal', 'intent', 'long', 'target', 'id'], 'npc', 'ref');
     at(n, ['allegiance', 'handler'], 'npc', 'ref');
-  }
+  };
+  for (const n of recs(doc.npcs)) cardRefs(n);
+  // (G) a roster copy's member at the card's paths
+  for (const f of recs(doc.powerStructure?.factions)) for (const m of recs(f.members)) cardRefs(m);
+  for (const f of recs(doc.factions)) for (const m of recs(f.members)) cardRefs(m);
   for (const t of recs(doc.relationships)) for (const k of ['from', 'to', 'npc1Id', 'npc2Id']) at(t, [k], 'npc', 'ref');
   // (C) STOP 1: a card's own ties
   for (const n of recs(doc.npcs)) for (const t of recs(n.relationships)) for (const k of ['from', 'to', 'npc1Id', 'npc2Id', 'targetId', 'npcId']) at(t, [k], 'npc', 'ref');

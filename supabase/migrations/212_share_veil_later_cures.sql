@@ -244,6 +244,14 @@
 --       (_gallery_veil_id_text, _rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey, _rekey_served), revoked by name.
 --       Twin: src/domain/display/galleryVeilPeople.js :: readSalt, rekeyPeople (applyVeil, projectShareVeil);
 --       galleryRosterChoices.js :: idText.
+--   (36b) A ROSTER COPY'S REFERENCES FOLLOW TOO (VEIL-42's R4I-SQL-2; the chair's rulings 40.8 (1) and 44.7 (1); R4I-MEASURE's
+--       C, THE GAP; registry: people.rekey): (36) re-keyed a roster copy's member (factions[].members[],
+--       powerStructure.factions[].members[]) by its id alone, and a DM projection of master's stored shape keeps each member's
+--       whole record, so its goal's two target ids and its allegiance's handler were served as stored (criminalSwitchHandReach's
+--       towns: both engines, the gallery read, the import and the page). A member now takes THE SAME FIXED PATHS as a card of
+--       npcs[] (its id, goal.intent.short.target.id, goal.intent.long.target.id, allegiance.handler: one path list, both
+--       passes). No function added, removed or re-signed: _gallery_veil_rekey's body alone; twin galleryVeilPeople.js ::
+--       rekeyPeople, the same list.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -255,6 +263,7 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
+-- R4I-SQL-2 (VEIL-42, (36b)): NOTHING NEW, NOTHING RE-SIGNED: _gallery_veil_rekey's body (one path list for every person card).
 -- R4-IDS (VEIL-35, (36)): NEW, seven more (_gallery_veil_id_text, _rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey,
 -- _rekey_served; all but _id_text VOLATILE); RESTATED VOLATILE (was immutable or stable): _gallery_veil, get_gallery_dossier,
 -- get_unlisted_dossier, import_gallery_dossier. 211's get_gallery_map is NOT restated: it is VOLATILE already.
@@ -2807,6 +2816,11 @@ $$;
 -- (_gallery_veil_cards 'npc': npcs[], factions[].members[], powerStructure.factions[].members[]) whose id is a string or
 -- a number with text (_gallery_veil_id_text). No stored id and no form (npc_veiled_, npc_power_, npc_<house slug>)
 -- survives at these paths. galleryVeilPeople.js :: rekeyPeople, rule for rule.
+-- R4I-SQL-2 (VEIL-42; the chair's 40.8 (1): "every reference following"; R4I-MEASURE's C, THE GAP): a roster copy's member
+-- (factions[].members[], powerStructure.factions[].members[]) is a person card like any of npcs[], and a DM projection of
+-- master's stored shape keeps each member's WHOLE record (its goal, its allegiance), so a member takes THE SAME FIXED PATHS
+-- as a card of npcs[]: ONE path list (`card`), shared by both passes. Before, a member's id alone was re-keyed, and its
+-- goal's two target ids and its allegiance's handler were served as stored on both engines.
 create or replace function public._gallery_veil_rekey(doc jsonb, salt text)
 returns jsonb language plpgsql volatile as $$
 declare
@@ -2814,12 +2828,14 @@ declare
   ids jsonb;
   k text;
   pth text[];
+  -- registry: people.rekey (a person card's references, whichever list holds the card: npcs[] and both roster copies)
+  card text[] := array['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'];
 begin
   if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
   ids := coalesce((select jsonb_object_agg(public._gallery_veil_id_text(c.card -> 'id'), true) from public._gallery_veil_cards(s, 'npc') c
                     where jsonb_typeof(c.card -> 'id') in ('string', 'number') and public._gallery_veil_id_text(c.card -> 'id') <> ''), '{}');
   -- registry: people.rekey (the cards: each id; a goal's two targets; the handler)
-  s := public._gallery_veil_rekey_each(s, '{npcs}', array['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
+  s := public._gallery_veil_rekey_each(s, '{npcs}', card, ids, salt);
   -- registry: people.rekey (STOP 1: a card's OWN ties, npcs[].relationships[]: their ends and references, and each tie's own
   -- id re-keyed whole)
   if jsonb_typeof(s -> 'npcs') = 'array' then
@@ -2855,12 +2871,13 @@ begin
         then public._gallery_veil_rekey_each(e, '{downstreamEffects}', array['target'], ids, salt) else e end order by o), '[]')
       from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
   end if;
-  -- registry: people.rekey (master's roster copies: a power's member by id, either list)
+  -- registry: people.rekey (master's roster copies, either list: a power's member BY THE CARD'S PATHS, its id, a goal's two
+  -- targets and the handler; R4I-SQL-2, the GAP)
   foreach k in array array['factions', 'powerStructure.factions'] loop
     pth := string_to_array(k, '.');
     if jsonb_typeof(s #> pth) = 'array' then
       s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object'
-          then public._gallery_veil_rekey_each(f, '{members}', array['id'], ids, salt) else f end order by o), '[]')
+          then public._gallery_veil_rekey_each(f, '{members}', card, ids, salt) else f end order by o), '[]')
         from jsonb_array_elements(s #> pth) with ordinality x(f, o)));
     end if;
   end loop;
