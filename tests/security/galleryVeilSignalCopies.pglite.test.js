@@ -42,6 +42,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const TOWN_TIMEOUT_MS = 1_800_000;
@@ -87,6 +88,12 @@ const TOWNS = Object.freeze([
   { seed: 'server-veil-town-2', settType: 'town' },
   { seed: 'server-veil-city-2', settType: 'city' },
 ]);
+/** RESTATED (V39-P2, the chair's ruling of 2026-11-23: a stale pin of R3-TELL-5 unit (ii), 369331d72, rulings 73 (2), 74 (ii)):
+ * a criminal services row is served only BY POSITIVE ACCOUNT (its `institution` a house the read lists, or an accounted crime
+ * type's tag). Each born town says one half: 'accounted', every served row is accounted for and STAYS (and shutting the block
+ * removes it); 'unlisted', no born row is accounted for, the open block is served as [] and no row's words arrive in the
+ * served page. (The house-listed face is tests/lib/gallery.test.js's; these births account for their rows by tag.) */
+const SERVICES_ACCOUNT = Object.freeze({ 'server-veil-town-2': 'accounted', 'server-veil-city-2': 'unlisted' });
 const AT = '2026-11-20T00:00:00.000Z';
 /** A word the civility mask rewrites (tests/lib/civility.test.js's own example). */
 const FLAGGED = 'shit';
@@ -241,6 +248,7 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
 
         const faults = [];
         const drawn = {};
+        let openPage = null;
         for (const [label, shut] of [['open', []], ...FAMILY.map((g) => [g, [g]])]) {
           const ov = veil.writeShareVeil({}, FAMILY.map((g) => ({ address: g, hidden: shut.includes(g) })), { mode: 'live', at: AT });
           await H.db.query('update public.settlements set gallery_member_overrides = $2 where id in ($1, $3)', [id, JSON.stringify(ov), civId]);
@@ -252,6 +260,7 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
           const map = await gallery.fetchGalleryMap(`m-${k}`);
           expect(civPage.settlement.name, 'the civility mask rewrote the planted word (the row is live)').not.toContain(FLAGGED);
           const s = page.settlement;
+          if (label === 'open') openPage = page;
           drawn[label] = {
             'the gallery page': await drawPage(page),
             'the party link': await drawPage({ ...link, shareDm: false }),
@@ -302,7 +311,24 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
           const lines = linesAt('the gallery page');
           const derived = derivedAt('the gallery page');
           if (g === 'block:defense.criminalStructure') defenseDerived = derived.length;
-          expect(lines.length, `${g}: shutting it removes something from the gallery page (the row is live)`).toBeGreaterThan(0);
+          if (g === 'block:services.criminal') {
+            // RESTATED (SERVICES_ACCOUNT, above): the two halves of rule (e), by positive account
+            const served = openPage.settlement.availableServices?.criminal;
+            const listedHouses = new Set((openPage.settlement.institutions || []).map((i) => i?.name).filter((v) => typeof v === 'string' && v));
+            const bornRows = (record.availableServices?.criminal || []).filter((x) => x && typeof x === 'object');
+            expect(Array.isArray(served), `${seed}: the open criminal services block is served`).toBe(true);
+            if (SERVICES_ACCOUNT[seed] === 'accounted') {
+              const how = served.map((x) => (listedHouses.has(x.institution) ? 'house' : /^\((?!covert\)).+\)$/.test(String(x.institution)) ? `tag ${x.institution}` : `UNACCOUNTED ${x.institution}`));
+              expect(served.length, `${seed}: an accounted row stays`).toBeGreaterThan(0);
+              expect(how.filter((v) => v.startsWith('UNACCOUNTED')), `${seed}: every served row is accounted (${how.join(', ')})`).toEqual([]);
+              expect(lines.length, `${g}: shutting it removes something from the gallery page (the row is live)`).toBeGreaterThan(0);
+            } else {
+              expect(served, `${seed}: no born row is accounted for: the block is served as []`).toEqual([]);
+              expect(bornRows.length, `${seed}: the town was born with criminal service rows (the half is live)`).toBeGreaterThan(0);
+              const words = [...new Set(bornRows.flatMap((x) => [x.name, x.desc]).filter((v) => typeof v === 'string' && v))];
+              for (const w of words) expectPresentThenAbsent(JSON.stringify(bornRows), JSON.stringify(openPage), w, `${seed}: an unaccounted criminal services row leaves`);
+            }
+          } else expect(lines.length, `${g}: shutting it removes something from the gallery page (the row is live)`).toBeGreaterThan(0);
           if (g === 'block:defense.criminalStructure') expect(derivedAt(`x${PHONE}`).length, 'the derived block is drawn at a phone\'s width too (the arm is live)').toBeGreaterThan(0);
           for (const [surface, set] of Object.entries(drawn[g])) {
             // (A) with G shut, no line of G on any surface

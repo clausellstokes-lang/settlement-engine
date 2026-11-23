@@ -44,6 +44,7 @@ import {
 } from '../../src/lib/gallery.js';
 import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
 import { isVeiled, veilGroupingsOf } from '../../src/domain/display/galleryVeil.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -612,13 +613,34 @@ describe('gallery.js — the gallery veil (X-21, W2-VEIL-A U3)', () => {
   };
 
   it('a share marked with a veil renders through it: the defaults hide, a delta shows', async () => {
-    const dossier = await fetchRow(dossierRow({ $veil: { v: 1, deltas: [{ address: 'block:services.criminal', hidden: false }] } }));
-    // X-21e: the criminal house is hidden whole by default; the church stays.
-    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    // RESTATED (V39-P2, the chair's ruling of 2026-11-23 01:21 UTC: a stale pin): R3-TELL-5 unit (ii) (369331d72; rulings
+    // 73 (2), 74 (ii)) keeps a criminal services row only BY POSITIVE ACCOUNT: its `institution` a house this read lists,
+    // or the tag of an accounted crime type. The old fixture's 'Black market' row named no house at all. Both faces:
+    // (1) THE HOUSE LISTED: 'Black market' is a criminal house the DM's deltas show; its row is accounted for and STAYS.
+    const blackMarket = { id: 'inst_black_market', name: 'Black market', category: 'Criminal', priorityCategory: 'criminal', desc: 'Goods with no questions asked.', tags: ['criminal'] };
+    const listedRow = dossierRow({ $veil: { v: 1, deltas: [
+      { address: 'block:services.criminal', hidden: false },
+      { address: 'card:institution:inst_black_market', hidden: false },
+      { address: 'field:institution:inst_black_market:services', hidden: false },
+    ] } });
+    listedRow.data.institutions.push(blackMarket);
+    const dossier = await fetchRow(listedRow);
+    // X-21e: the thieves' guild is hidden whole by default; the church stays; the shown house is listed.
+    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)', 'Black market']);
     expect(dossier.settlement.institutions[0].desc).toBe('One for each neighbourhood.');
-    // The DM's delta flipped one default eye back to shown.
-    expect(dossier.settlement.availableServices.criminal).toHaveLength(1);
+    // The DM's delta flipped one default eye back to shown, and the row's house is listed.
+    expect(dossier.settlement.availableServices.criminal).toEqual([{ name: 'Contraband goods', desc: 'Restricted goods.', institution: 'Black market' }]);
     expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+
+    // (2) THE HOUSE NOT LISTED: the same services delta, no 'Black market' house on the read. The category is served
+    // (the delta shows it) but empty, and the unaccounted row's words arrive nowhere in the served document.
+    const unlisted = await fetchRow(dossierRow({ $veil: { v: 1, deltas: [{ address: 'block:services.criminal', hidden: false }] } }));
+    expect(unlisted.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(unlisted.settlement.availableServices.criminal).toEqual([]);
+    // Anchored by face (1): the listed read's served document carries each of these words; the unlisted read's carries none.
+    for (const words of ['Contraband goods', 'Restricted goods', 'Black market']) {
+      expectPresentThenAbsent(JSON.stringify(dossier), JSON.stringify(unlisted), words, 'the unaccounted criminal services row leaves');
+    }
   });
 
   it('PIN: the grouping list survives a masked word (W2-VEIL-B)', async () => {
