@@ -7,6 +7,24 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
 
 ## 0. WHERE THE LANE STANDS
 
+### 0.0 FINAL (the chair, 03:45 UTC: "YOUR UNITS ARE DONE")
+- LANDED FOR STACKING: "DAILY-C 8036cfe71" TAKEN FOR LANDING by the chair and ADDed to the stack as POINT 108 (03:46
+  UTC, after point 106 DAILY-B and point 107). The chair's trial merge into the stack reads one conflict, the lighting
+  census (a register: the stack's to re-take by its door). The line under it: 244fa84ef (point 105). DAILY-C holds the
+  owner's three cured: D4C-1 (the visitor's line yields a stated condition; "the mark of {power}"), D5C-2 (the 34 lines;
+  P16 and P20 on dwellings), the registers by their doors, the sitemap by its door (e6834bb78).
+- NAMED FOR THE OWNER, SIGNED BY NOBODY (`owner/DAILY-C.md`): size figures lane / DAILY-B / line: first paint 1,180,816
+  / 1,180,816 / 1,184,741 raw, 376,067 / 376,063 / 376,987 gzip, 315,708 / 315,822 / 316,646 Brotli; the worker
+  2,710,153 / 2,710,153 / 2,709,263; the engine chunk 932,369 on all three. The 35 families at 10 to 15% of a size,
+  listed, not cured. The sitemap's one leaving URL `/compendium/op-requestdailylife`.
+- THE FIVE DOUBLE POSSESSIVES ELSEWHERE (on the chair's list for after the first deploy; cured by nobody now):
+  Relationships x4 "the network's head's": the face `src/data/institutionalCatalog.js` 1476-1477 ('the network\'s
+  head') with `src/data/people/handlerTieLines.js` 84 (`${s.name}'s instructions`) and `src/data/npcData.js` 2100
+  (`${r.name}'s reputation`); NPCs x1 "the lord's steward's office": `src/data/people/goalFamilies.js` 368 ('Get {house}
+  through the season without borrowing.') with `src/generators/people/goals.js` 165 (`"lord's steward": 'office'`).
+- KEPT FROM THE RE-READ (the chair): messages are read BETWEEN THE PIECES of every long wait.
+- NOTHING IS OPEN for the seat. It may be asked one question by the landing; it starts nothing else.
+
 ### 0.1 BRANCHES (read with `git ls-remote origin 'refs/heads/lane/daily-5-*'`)
 - `lane/daily-5-2026-11-23`: the lane. On 72eb5c2bb (DAILY-4's last docs): 635e4acee D4C-1 merged; 41c461008 the
   lighting census by its door; 5621ceeae the observed-shape readers' baseline by its door; 0c75d069f D5C-2 merged and
