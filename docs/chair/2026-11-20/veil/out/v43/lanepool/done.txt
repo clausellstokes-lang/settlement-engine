@@ -1,0 +1,17 @@
+start 09:51:41
+Preparing worktree (detached HEAD 23bb8b8ae)
+HEAD is now at 23bb8b8ae test(veil, VEIL-39 P2): re-state rule (e)'s stale pins (R3-TELL-5 unit (ii), 369331d72; rulings 73 (2), 74 (ii))
+tree 23bb8b8ae1155e948bca4308e479fba7adc8639c
+pool rc=0 10:20:21
+compare rc=0
+pool-shard0 lane b349e2549756f99e join b349e2549756f99e EQUAL
+pool-shard1 lane 5d7b555f930afd78 join 5d7b555f930afd78 EQUAL
+pool-shard2 lane c7e21ac56bdad12c join c7e21ac56bdad12c EQUAL
+pool-shard3 lane e3ce79ae3a017a7e join e3ce79ae3a017a7e EQUAL
+poolb-shard0 lane abe82b9fc142746d join abe82b9fc142746d EQUAL
+poolb-shard1 lane 71c74295348a9154 join 71c74295348a9154 EQUAL
+poolb-shard2 lane 622e8d71d0450055 join 622e8d71d0450055 EQUAL
+poolb-shard3 lane 6d8ac169bc0da1e4 join 6d8ac169bc0da1e4 EQUAL
+lane gates rc=1 10:27:45
+gates table diff rc=1 lines 20
+END 10:27:45
