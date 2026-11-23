@@ -26,8 +26,7 @@ merged into the -wip before the unit's proofs).
 - READ (00:14-00:26): the prompt's list (first line to the chair); 212 at a9b0884e WHOLE (but the generated STANDING_FORMS literal
   between its markers, which the tooling holds byte-equal to `--print`) and the registry WHOLE, once.
 - THE COMPOSED-HOSTS WALKER after R5-DESC: power.desc, power.relation.dmNote, power.label leave R5's planned host (R5D-SQL); the 23
-  `publicProse` composed rows stay red (E97 (5) called the 26 R5-DESC's worklist; this seat reads the 23 prose rows as chain C's under
-  E134 (2): to the chair).
+  `publicProse` composed rows stay red: RULED (105, below): chain C's worklist, red by name, neither cured nor exempted here.
 - (3) the unit's proofs: NOT STARTED.
 NEXT STEP IN ONE LINE: the pool's gates -> one line to the chair; R5D-SQL-2's return -> its diff read whole with 212 and the registry, its
 runner re-run; R5D-PAGE.
@@ -35,6 +34,15 @@ runner re-run; R5D-PAGE.
 ## 2. RULINGS SINCE PART 37 (numbered on from 104; the ninth chair's; each vetoable by the owner)
 - N1-N8 of the ninth chair's word at this seat's seating (the chair; no pull request; the branches; three chains; the reading; this
   file; E134 binds every proof; the owner's standing words).
+105. THE CHAIR, 00:23 UTC: R5D-SQL-2 commits its server = twin probe and runner, the seat re-runs them; R5D-PAGE in TWO builders one
+    after the other (A: items 0-4, 6-8, the one writer of `pageRederive.js`; B: 5, 5b, 5c, tests and instruments only, a STOP if `src/`);
+    NO "TIP?" BEFORE B's STORED ARM HAS RUN (E134 (1)). A refusal by one's own permission check stands (STACK-106's refused merge).
+106. THE CHAIR, 00:56 UTC: unit (0) taken. THE COMPOSED-HOSTS WALKER: R5-DESC's worklist was the three `power.*` rows (`power.desc`,
+    `power.label`, `power.relation.dmNote`), moved by R5D-SQL; THE 23 `prose.*` ROWS ARE CHAIN C's (E134 (2)): not cured, not exempted,
+    red one test a row by name. In the unit: the walker's header re-stated to the fact, any pin R5D-SQL moved re-taken by cause,
+    `tests/lint` whole after (relayed to R5D-PAGE-A 00:58); "TIP? R5-DESC" says `tests/lint` whole as a count AND by family (the lane's
+    standing reds by name, these 23 by id, nothing else). Two builders at once taken (two halves of one deliverable): ONE writer on 212
+    and `galleryWithholdAlways.js` (R5D-SQL-2), ONE on `pageRederive.js` (A); plant (e) red on A's branch until R5D-SQL-2 merges.
 
 ## 3. Log (every hour from `date -u`)
 - 00:20 seated on b5244a6a0; chain0 launched (00:15); read-in; first line to the chair 00:18; R5D-SQL-2's brief and dispatch.
