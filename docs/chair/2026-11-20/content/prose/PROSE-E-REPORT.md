@@ -1,5 +1,5 @@
-# PROSE-E PHASE 2: the builder's report (PROSE-6; brief `briefs/PROSE-E.md` aa36b32a5 with AMENDMENT 1 at 2d544ea83; lines FINAL at 24d8edf83)
-Lane `lane/prose-6-2026-11-23-e-wip`, base b443be64b. Logs are `/home/user/logs/prose-e2-*.log`. Every run went through `gate-mutex.sh --run`.
+# PROSE-E PHASE 2: the builder's report (PROSE-6; brief `briefs/PROSE-E.md` aa36b32a5, AMENDMENT 1 at 2d544ea83, AMENDMENT 2 at 4d18ecbc5; lines FINAL at 24d8edf83)
+Lane `lane/prose-6-2026-11-23-e-wip`, base b443be64b; final tip 212f8f46a, on THE LINE 9b0ffaa97 (merged by the seat as c66c30e4b). Logs: `/home/user/logs/prose-e2-*` (phase 2), `prose-e3-*` (the close). Every run went through `gate-mutex.sh --run`.
 
 ## 0. WHY NO-MARKET v12 "NEVER DRAWS": IT DOES (N71 ruled the stop)
 - The draw is the argmax of `hashKey(seed::block::pool::v<vid>)` over the eligible set (`stateProseKernel.js:536-555`). The general desk passes each page's own seed (`generalStateProse.js:1873, 2159`).
@@ -8,7 +8,7 @@ Lane `lane/prose-6-2026-11-23-e-wip`, base b443be64b. Logs are `/home/user/logs/
 - Phase 1 counted 0 because the matcher drops cuts under four literal words (`oppositeSentencePairs.mjs:97`), and "has no market" has three.
 
 ## COMMITS
-c0514e27e the tooth, alone, red first; 678d8d255 the cure (five WORD_CORRECTIONS rows, `CHAIR-2026-11-23-N70`; source; leaves); 887d1f760 the pins and the FLOOR figure in the tooth's header; this report.
+c0514e27e the tooth, alone, red first; 678d8d255 the cure (five WORD_CORRECTIONS rows, `CHAIR-2026-11-23-N70`; source; leaves); 887d1f760 the pins and the FLOOR figure; 652e45c81 this report; c66c30e4b the seat's merge of THE LINE; 9d59425fe CONTROL 4's uniform pins (N77); 212f8f46a the observed-shape register; this update.
 
 ## (a) THE TOOTH: RED, THEN GREEN
 On b443be64b's leaves only ARM 5 is red: 34 page-pins (`prose-e2-tooth-red.log`).
@@ -47,28 +47,28 @@ Tooth changes beyond the brief:
 
 ## (c) NO CELL LEFT EMPTY: `disagree-phase2.mjs` (c2) on the tip gives WEAK 353 held, 0 empty; GARRISONED 153, 1 (dz-city-101); CHAIN 75, 0. The same as at b443be64b. No mark moved: the leaf diff is five `text` lines.
 ## (d) DARK PROOF (`prose-e2-dark.log`): both trees give sha256 `f2ecb50cc3d3ea579de0d07a67a4cd31498e03fee01c62a9a06dc740c65c05b9` over 900 births: EQUAL. 0 births differ and 0 strings differ, because the records carry none of the dossier's sentences.
-## (e) CONTROL 4, MEASURED (`prose-e2-control4.log`, the test's own helpers)
-- The three figures hold: repeatedOpener 166; share × 800 154; share 0.193 (166 / 861).
-- BUT the uniform-segment figures move: uniformSegments 577 → 578; 0.670 → 0.671 (578 / 861 = 0.67131); × 774 519 → 520. So both CONTROL 4 tests red.
-  - The pool: DS-DEF-2 `Economic Survival: CRITICAL`. v1 was two sentences and is now one, as the chair's words have it, so every variant is one sentence and the pool joins the uniform count.
-  - NOT re-pinned: these are not pins on the old words. FOR THE CHAIR.
+## (e) CONTROL 4, MEASURED (`prose-e2-control4.log`, `prose-e3-control4-merged.log`; the test's own helpers)
+- The three figures hold, at b443be64b and at the merged tip: repeatedOpener 166; share × 800 154; share 0.193 (166 / 861).
+- The uniform-segment figures move by one each (N77, re-pinned in 9d59425fe with the cause prepended): 577 → 578; 0.670 → 0.671 (578 / 861 = 0.67131); × 774 519 → 520. The pool: DS-DEF-2 `Economic Survival: CRITICAL`, whose v1 is now one sentence, so all three variants are one sentence each; 861 pools stand.
+- The SECOND HALF holds that arm E still reds on the R1 leaves (its spread fails name uniformSegments and repeatedOpener), over 861 pools, at × 774 520 and × 800 154. It is green.
 
-## (f) THE WHOLE CHECKS
-- Rule 8 (`prose-e2-rule8.log`): 101 files named; the 71 test files outside `tests/lint`, with `tests/copy`: 1,613 tests, 1 red, voiceMechanics, on RED-AT-LINE.
-- `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`: 2,035 tests, 2 red, both on RED-AT-LINE (voiceMechanics, deadOperationRatchet).
-- `tests/lint` whole: 3,364 tests, 6 red.
-  - On RED-AT-LINE: proseCorpusBytes RAW and GZIP; proseComposed A0b.
-  - NOT on the line, and caused by this cure: proseMoveGrammar CONTROL 4 and its SECOND HALF, see (e); observedShapeReaders' live-estate drift, see the registers.
-- `npm run build` exit 0. `VERIFY_DIST=1 tests/build`: 623 tests, 15 red, all on RED-AT-LINE. Here / the line: first paint raw 1,184,741 / 1,184,741; gzip 376,999 / 376,987; Brotli 316,583 / 316,646; worker 2,709,263 / 2,709,263; engine chunk 932,369 / 932,369.
-## (g) GIT: `core.bare` false; local `user.name` unset; 0 commits by Fixture in the last 3 hours. (Green, so not listed above: the shift register, the lighting census, the wiring census.)
+## (f) THE WHOLE CHECKS AT THE FINAL TIP (every red by name against the 59 rows of RED-AT-LINE.tsv, matched by containment)
+- Rule 8 (`prose-e3-rule8.log`): 104 files named; the 72 test files outside `tests/lint`, with `tests/copy` whole: 87 files, 1,750 tests, 1 red, generationWorkerLazy's worker ceiling, ON the line.
+- `tests/store`, `tests/architecture`, `tests/docs` whole: 1,862 tests, 0 red.
+- `tests/lint` whole at 212f8f46a: 3,374 tests, 3 red, all ON the line and all the owner's: proseCorpusBytes RAW, GZIP; proseComposed A0b. CONTROL 4 and the observed-shape walker: green.
+- `npm run build` exit 0. `VERIFY_DIST=1 tests/build`: 623 tests, 15 red, all ON the line.
+- The five figures, here / the line at 9b0ffaa97: first paint raw 1,180,816 / 1,180,816; gzip 376,045 / 376,065; Brotli 315,736 / 315,768; worker 2,713,402 / 2,713,402; engine chunk 932,583 / 932,583.
+- Reds not on the line: none.
+## (g) GIT: `core.bare` false; local `user.name` unset; 0 commits by Fixture in the last 3 hours.
 
-## THE REGISTERS THAT RED BECAUSE OF THIS CURE (none re-taken)
-- Observed-shape baseline: `observedShapeReaders` "a freshly re-minted baseline has NO drift": input drift [] → [the defense and general leaves].
-- The owner's size rows, NAMED and untouched:
-  - proseCorpusBytes RAW: defense 302,541 → 302,506; general 312,515 → 312,509.
-  - GZIP: defense 40,039 → 40,020; general 39,500 → 39,492.
-  - A0b under-claim: 2,328 → 2,327.
-
+## THE REGISTERS (N77: once, each by its own door)
+- Observed-shape readers' baseline, re-taken in 212f8f46a by `check-observed-shape-readers.mjs --write`, after which its walker passed 47 of 47.
+  - Inputs moved by this unit: the defense and general leaves (302,541 → 302,506 and 312,515 → 312,509 bytes).
+  - Also taken in: `src/data/people/personMention.js` (14,794 → 15,169), which came with THE LINE.
+  - Findings 2,208 and identities 1,551 unchanged.
+- Lighting census: green, not re-taken. bar8DesksDef's row title is a row name, not a test title; the counts did not move.
+- Shift register, wiring census: green.
+- The owner's, named and untouched: proseCorpusBytes RAW defense 302,506, general 312,509; GZIP defense 40,020, general 39,492; A0b under-claim 2,327 (2,328 before).
 ## PINS, BEFORE → AFTER
 - law9 :104: "people expect a hearing, not a beating" → "(?:people|the accused can) expect a hearing, not a beating". Its meaning, calm-law prose, is kept.
 - bar8DesksDef :8, :64, :187: v1 "arrested, heard and held" → "heard and held", the re-wording named; v2's old words named as history. The rows read marks by vid, unchanged.
