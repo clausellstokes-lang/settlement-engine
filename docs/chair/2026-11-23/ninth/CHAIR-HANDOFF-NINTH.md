@@ -41,7 +41,10 @@ turn's end); VEIL-43 0 (its first turn has not ended).
   its tree the gated tip's own); one docs commit holds the seven rows and the gate's sentence. `ci/LINE-NOW.md` is at
   point 112 and the red list at 59 rows. CI ON THIS TIP IS READ BY NAME (N76; run 45135236667): IT FAILS AS EVERY TIP HAS, AND ALL 59 FAILING TESTS ARE THE LIST'S 59 ROWS: nothing new, nothing cured. THE LANDING PLACE IS
   FREE. STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt IS DONE and writes nothing more.
-- CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
+- CLOSE-5 HANDED OVER AT 09:05 UTC (N79: documents 1ec8563c7, the flip branch 9df6731ee; it writes nothing more and is
+  messaged no more). ITS SUCCESSOR IS CLOSE-6 (start message `prompts/START-CLOSE-6.txt`; ITS SESSION ID IS IN THE FIRST
+  ENTRY OF SECTION 5 AFTER N79); what follows in this bullet is CLOSE-5's history, and where it stood is in N79.
+  CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
   5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
   `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
   RULED N56: that one raise is dropped and NAMED for the owner; commit 0 is 15 budgets in 14 files; A STANDING RULE:
@@ -1829,3 +1832,33 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   OWNER "a shared page carries no state sentences" (N49): THE RING NOTE SHOWS THAT IS NOT THE WHOLE TRUTH: SAID TO HIM
   AS A PRECISION THE SAME TURN (the saved sentences leave; some lines are still derived by the page from the served
   facts); the list is owed to him.
+- 2026-11-23 09:11 UTC · N79 · CLOSE-5 HANDED OVER; ITS LAST TWO COMMITS READ WHOLE BY THE CHAIR; CLOSE-6's START
+  MESSAGE FILLED AND PUSHED.
+  "CLOSE-5 HANDS OVER 1ec8563c7 / 9df6731ee" (queued 09:05:21 UTC). CHECKED BY THE CHAIR ON ORIGIN:
+  `lane/close-5-2026-11-23` = 1ec8563c770d76f533a7b84284f834618b38dfba; `lane/close-5-2026-11-23-flip` =
+  9df6731ee18348ae693335d0500e58e6162fb093, its first-parent chain f6cbaee69 (commit 0), 2bc483fc8 (commit 1),
+  075fbdd89 (the page census's door), b98a85bd9 (F-SEAT), ec43beb7f (the line's tip 9b0ffaa97 merged: parents
+  b98a85bd9 and 9b0ffaa97), 9df6731ee (F-SEAT-2). READ WHOLE BY THE CHAIR ON ORIGIN, AS IT HAD PROMISED AT 08:24:
+  F-SEAT's diff (10 test files, +122 -63: each a lit birth's value or a seed re-picked by its premise's own predicate,
+  each with its cause in a comment; `goalSentencesOnceInTown`'s arm (u) born under law 1 in its own config with the
+  fixture unmoved and (p) and (t) held on the lit births too, N66 as ruled; 13g's negative control re-picked to
+  r2r-city-16; no source file) and F-SEAT-2's (2 test files, +11 -6: the two keep anchors re-picked, r2r-town-34 and
+  r2r-village-8, their ORIGINAL lines restored). Its own re-runs lit: 352 of 352 on the fifteen files after the merge;
+  29 of 29 after F-SEAT-2; `tests/lint` whole the line's three. `CLOSE-5-HANDBACK.md` SECTION 0 READ WHOLE BY THE
+  CHAIR (at 1ec8563c7): the six commits each with what proved it; THE COMMITS LEFT IN ORDER: F-FORTUNE (39 rows),
+  F-JOIN (83 rows), F9 commit B (the sample town; its narration whole for the owner), F9 commit A (the lit golden
+  twin), F8, the registers by their doors, `close/FOR-THE-OWNER.md`, then "FLIP <commit>"; LIT-13G written to be
+  re-made by a stranger (the seed, the tie, the two cards' words, the one command, what 13g covers).
+  CLOSE-6's START MESSAGE IS THE DRAFT FILLED (`prompts/START-CLOSE-6.txt`, 11,010 bytes; the draft file is removed):
+  its checkout `lane/close-5-2026-11-23` at 1ec8563c7; its branch `lane/close-6-2026-11-23`; the flip continues on
+  `lane/close-6-2026-11-23-flip`, created at 9df6731ee; its reading adds N57, N65, N66, N75 (5) and N77 (1) to (3);
+  UNIT (1b) "LIT-13G", A MEASURE FIRST (the 900 census births lit and dark; the cause read; the chair rules cured
+  before "FLIP" with 13g made a rule over every birth of the proof set, or listed); UNIT (2): "PROSE-E <commit>" is
+  merged into the flip branch before the prepared signings (one stack lands both); `close/FOR-THE-OWNER.md` also
+  carries THE DEPLOY'S ORDER (the database changes 204 to 212 before the pull request's merge and the deploy, after
+  the security reader's clearance and the top-tier read). IT IS PUSHED WITH THIS ENTRY BEFORE THE SESSION IS CREATED.
+  VEIL-41 at 09:06:41 by its own `date -u`: ITS CLOCK IS NOT FAST: the hours "07:47" and "09:10" were written, not
+  read: corrected by it; one test-only builder dispatched for the pins (brief 344d04753), with table A (every site
+  reading a prose block: nothing or a local line) and line B (the curate screen's label and default for
+  `block:power.criminalUnderside`); PIN-3 and TENSION-PARTIES still wait on its mutex. THE CHAIR'S THIRTY-FIRST PUSH
+  (29460d50a: N77, N78) ENDED exit=0 (its log; ls-remote equal to the local tip before this commit).
