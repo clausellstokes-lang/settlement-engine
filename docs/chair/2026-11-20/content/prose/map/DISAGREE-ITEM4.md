@@ -1,5 +1,5 @@
 4 cell pairs read TRUE: 9 pairs of variants contradict one another outright, and none of them is a walls pair.
-They print on 38 of the 900 pages, and none of those pages is a metropolis: 26 are thorps, hamlets and villages, 11 are cities and 1 is a village.
+They print on 38 of the 900 pages, and none of those pages is a metropolis: 27 are thorps, hamlets and villages, and 11 are cities. This is a LOWER BOUND: in five pairs (rows 1, 5-8), the pages beyond the eight variant pairs read were not read.
 The worst pair is no market × exports established, on 26 pages. dz-thorp-5 prints "Trade at {settlement} goes as far as neighbours can carry it between themselves." beside "A merchant who comes to {settlement} for one thing usually leaves with two or three."
 
 # DISAGREE ITEM (4): pairs of cells where one says LACK and the other SUFFICIENCY, read by variant (PROSE-6's builder, brief + AMENDMENT 1)
