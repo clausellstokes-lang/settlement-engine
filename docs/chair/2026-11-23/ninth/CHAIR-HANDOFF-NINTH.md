@@ -11,6 +11,16 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
 ## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 08:02 UTC; VEIL-43 and the FLOOR measure added 08:20 UTC; brought to the hourly check of 08:42 at 08:44 UTC and to that of 10:08 at 10:11 UTC; it supersedes every block below where they differ)
+THE STATE SINCE 16:12 UTC OF 2026-11-23 (N116), ABOVE ALL THAT FOLLOWS: THE OWNER HAS PAUSED THE SHARE VEIL: "Pause and
+record the progress to the veil work for handoff. Focus all your remaining effort on the close lane". EVERY VEIL SEAT
+IS STOPPED OR STOPPING AT A SAFE POINT (two runs in flight were let finish; nothing was merged). THE VEIL'S HAND-OFF IS
+ONE FILE: `docs/chair/2026-11-23/ninth/VEIL-PAUSED-HANDOFF.md`: READ IT BEFORE ANY VEIL WORK; the paragraphs below this
+one describe the veil AS IT RAN BEFORE THE PAUSE. THE LANE'S TIP IS `lane/veil-41-2026-11-23-tip` AT b58abc48b (N89).
+THE CHAIR'S WHOLE WORK IS NOW THE CLOSE LANE: the flip (CLOSE-6, session_01FbPLbdgc4c1sT8zUVj5fi9, on
+`lane/close-6-2026-11-23-flip`; "13G" done at 3b5a37a23; then F-JOIN's re-pins, F9 with the sample town's two
+narrations put to the owner, F8, the registers, FOR-THE-OWNER.md, "FLIP <commit>"), THEN ITS LANDING ON THE WORKING
+LINE (`lane/join-2026-11-14` at 9b0ffaa97) BY A LANDING SEAT THAT NEEDS THE OWNER'S ONE LINE TYPED IN ITS OWN SESSION.
+THE PULL REQUEST'S MERGE, THE DEPLOY, EVERY MIGRATION AND THE SIGNINGS STAY THE OWNER'S HAND.
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -3363,3 +3373,51 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   update): ITS NEXT FIRING IS 17:10:00 UTC, its stored text re-written (the figures of 16:05; VEIL-48 to be seated;
   VEIL-49 and the owner's seventh seat; what each seat owes). THE OWNER HAS NOT ANSWERED on the seventh seat (asked
   15:52): none is created.
+- 2026-11-23 16:16 UTC · N116 · THE OWNER PAUSES THE SHARE VEIL AND PUTS ALL REMAINING EFFORT ON THE CLOSE LANE: THE
+  FIVE VEIL SEATS ARE TOLD TO STOP AT SAFE POINTS (TWO RUNS IN FLIGHT LET FINISH); `VEIL-PAUSED-HANDOFF.md` IS THE
+  VEIL'S HAND-OFF; THE CHAIR'S OWN FAULT ON THE TIP'S NAME CORRECTED.
+  (1) THE OWNER'S ORDER, typed to the chair at about 16:11 UTC, verbatim: "Pause and record the progress to the veil
+  work for handoff. Focus all your remaining effort on the close lane".
+  (2) DONE AT ONCE (the clock read 16:12:11 before the sends; each delivered): PAUSE ORDERS TO THE FIVE VEIL SEATS:
+  VEIL-48 (seated at 16:09:51, three minutes before: stop where it is; one paragraph in PART 47); VEIL-42 (its SQL
+  builder stops at its next safe point, its work committed as WIP, saying whether N106's two guard lines are written
+  and run); VEIL-44 (its SQL builder stops, WIP committed; TRAD4's merge may be completed if its re-run ended green);
+  VEIL-43 (ONE EXCEPTION: the PAGES run in flight runs to its end, about 16:45; nothing after it starts); VEIL-41 (ONE
+  EXCEPTION: its running proof of "STORED-PROSE" runs to its end, unattended; no "TIP?", nothing merged; its tension
+  builder stops). EACH WRITES A PAUSE BLOCK at the top of its hand-back's first section (every branch with its commit;
+  what is proven, with its receipt's path; what was running and how far; what is open, in order; the machine's
+  recipe), pushes, sends one line "<SEAT> PAUSED <documents commit>" and takes no further turn. **Why the two
+  exceptions:** more than three hours of chain C's proof and two of PAGES were spent; a finished proof and finished
+  tables are the best state to hand off and cost almost nothing more; a run cut now is paid for again in full. SAID TO
+  THE OWNER PLAINLY, with his veto ("stop them now"). THE SEVENTH-SEAT QUESTION OF N111 IS WITHDRAWN; VEIL-49 IS NOT
+  SEATED; no seventh seat was created.
+  (3) THE CLOSE LANE IS NOW THE PROGRAM'S FIRST WORK. Sent to CLOSE-6 (the flip: `lane/close-6-2026-11-23-flip` at
+  1fe19098f; "13G" done): the owner's order; one line owed: what is done and left, with estimates; which left units
+  are independent and could go to a second seat of the close lane on one of the five free places; what it needs from
+  the chair; what the landing seat needs beside "FLIP <commit>". THE CHAIR WRITES THE LANDING SEAT'S START MESSAGE
+  NOW; the landing needs the owner's one line typed in that seat's own session (his line of 02:37 UTC granted
+  STACK-106's merges and nothing else).
+  (4) COMMITTED WITH THIS ENTRY: `docs/chair/2026-11-23/ninth/VEIL-PAUSED-HANDOFF.md`: THE ONE PLACE TO START FOR
+  WHOEVER TAKES THE VEIL UP AGAIN (the order; where the veil stands in plain words; each of the six pieces with its
+  seat, branches and commits, what is proven, what is open in order, its successor's start message and the rulings
+  that bind it; the rulings' index; what is open with the owner; how to resume; what not to do); its "PAUSED" lines
+  are filled in as each seat's line arrives. `docs/chair/2026-11-23/ninth/tools/fill49.py` (the one-command fill of
+  T5's start message, no longer only in the chair's container).
+  (5) THE CHAIR'S OWN FAULT, FOUND AT THE PAUSE AND CORRECTED: THE LANE'S TIP IS `lane/veil-41-2026-11-23-tip` AT
+  b58abc48b ("PIN-3 MERGED", N89), not 23bb8b8ae. The chair wrote 23bb8b8ae as the tip in `prompts/START-VEIL-48.txt`
+  (corrected in the file, with a note) and wrote "at the tip 23bb8b8ae" in its lines and entries N104 to N110 and
+  N115. CHECKED: the two commits differ in ONE test file (`tests/domain/display/criminalVeilSwitch.test.js`, +9 -5):
+  212, the twin, the registry and every file the chair cited are byte-equal at both, so each cited line stands; the
+  name was wrong. The cause: the chair's context had been summarized and its summary carried the older tip; the
+  record's top block was right (N89) and was not re-read. FROM NOW: a tip is named from `git ls-remote`, never from
+  memory.
+  (6) THE DOORS' RETURN BEFORE THE PAUSE (VEIL-44, queued 16:00:13): TRAD4-RECUT green: "the import equals the gallery
+  read" 0 of 840 shares (140 towns, three markers, both Reveals), a tooth that bites; two deviations, no veto; A SPEED
+  FINDING: at the tip a gallery read joins the whole list of public tile rows (3.07 s with 840 public rows against
+  0.22 s with one): READ BY THE CHAIR: the same join stands on master (147 :562), in 211 :1240 and 212 :3014: not new
+  with the veil; ordered (N115): a measure against master's own function, an arm that a read's work does not grow with
+  the number of public rows; both wait in the seat's pause block.
+  (7) VEIL-48's SEATING (N114): "VEIL-40 STOPPED a3bc0dc9d" (queued 16:07:10: the deciding count never started: an
+  orphaned test worker of the rival's held the lock; both ended); VEIL-48 created as session_01FbPLbbhLQxTNjSrMJPCXX2
+  at 16:09:51 UTC (source_revision `lane/veil-40-2026-11-23`, outcome branch `lane/veil-48-2026-11-23`,
+  claude-opus-5-5 at high effort), and paused by (2) before any work.
