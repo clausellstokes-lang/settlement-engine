@@ -19,14 +19,16 @@ READ BY THIS SEAT (00:13-00:31 UTC 2026-11-23): the seating list whole; 212 (sha
 af708f2fd: `tests/security/galleryVeilHandRows.pglite.test.js` 1 failed of 25 ("V7-2 THE PRESSURE SENTENCE...": the row "STAYS: the
 power structure's recentConflict", 8 reads, "the sentence is undefined"; `/var/tmp/v18/out/v39/pin/red-af708f2fd.txt`). THE EDIT (one
 file, test only): the row re-stated to E97 (1), `{ gone: WARDENS }` (the sentence withheld AND its words arrive nowhere, which also
-witnesses `recentConflict` withheld always); the title and the header's "what stays" line say the same. GREEN of that file and
-`tests/lint` whole: RUNNING (queued behind the pool on the mutex). NOT YET COMMITTED OR PUSHED.
+witnesses `recentConflict` withheld always); the title and the header's "what stays" line say the same. DONE: GREEN 25 of 25;
+`tests/lint` whole 48 red of 3,304 (17 files), IDENTICAL by file and count to VEIL-36's list at af708f2fd. COMMITTED 2d7ed483f
+(parent af708f2fd), PUSHED as `lane/veil-39-2026-11-23-tip` 01:02 UTC; "PIN 2d7ed483f" sent. The chair names the new tip.
 
 (C1) STORED-UNIVERSE, TO FINISH. A FRESH CONTAINER: the machine re-made by PART 38 (4) in one background script
 `/var/tmp/v18/out/v39/remake.sh` (log `remake.log`, each step's rc): cluster, pg driver, library, probes, the probe runner's config,
 worktree /home/user/wt/lp (`lane/veil-33-2026-11-22-legacy-wip` detached, = this branch's base), `npm ci`, the acceptance run
 (exit 0, 40 PASS, `/var/tmp/v18/out/v39/accept.txt`), template `c1_tpl` (v27x211 + lp's 212); then THE POOL (none existed here:
-`pool.sh` into `/var/tmp/v18/t2/pool-r5c-1`; part A done 00:32 UTC), then the stored dump (`stored-dump.sh` into
+`pool.sh` into `/var/tmp/v18/t2/pool-r5c-1`; both parts rc=0, 00:41 UTC; remake.sh was held by kill -STOP between its lines
+00:34-00:57 so the pin's runs took the mutex first), then the stored dump (`stored-dump.sh` into
 `/var/tmp/v18/stored/today`), then the read-stored run (`legacy/stored.sh ... /var/tmp/v18/stored/read-today c1_tpl c1`: the gates
 in `tell2-table.txt`, the differential in `lp-table.txt`). The births' figures to set beside: GATE-1 4/92, LOWER BY RULE 7, GATE-2 20.
 
@@ -41,8 +43,7 @@ NOT YET SEATED: one heavy run at a time, C1 first). The proposal file (at most 6
 
 (C3) LEGACY-TELLS and (C4) JOIN-PREP: only on the chair's word (PART 38 (3) items 3 and 4).
 
-NEXT STEP IN ONE LINE: the pin's green and `tests/lint` whole, commit, push `lane/veil-39-2026-11-23-tip`, "PIN <commit>"; C1's run to
-its end, one line; then V39-C2M.
+NEXT STEP IN ONE LINE: C1's dump and read-stored run to their end (from 00:57 UTC), one line to the chair; then V39-C2M.
 
 ## 2. RULINGS SINCE PART 38's 111 (the ninth chair's; each vetoable by the owner)
 112. THE NINTH CHAIR'S SEATING WORD (N1-N6, 2026-11-23): the chair is session_01FbPLbdpQrxXktCeSf32d4j; no pull request ever; this
@@ -51,4 +52,5 @@ its end, one line; then V39-C2M.
 
 ## 3. Log (every hour from `date -u`)
 - 00:13 seated on 302976386. 00:15 the re-make started. 00:15-00:18 the pin's red at af708f2fd. 00:29 first message. 00:3x 212 and the
-  registry read whole; the C2 surprise sent.
+  registry read whole; the C2 surprise sent. 00:4x cc09b5d56 pushed. 00:44 the pin green; 00:57 lint whole 48;
+  01:02 2d7ed483f pushed, PIN sent; remake resumed 00:57.
