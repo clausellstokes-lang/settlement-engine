@@ -1,0 +1,330 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12625 after 878 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/ten
+
+ ❯ tests/security/galleryVeilTensionParties.pglite.test.js (6 tests | 3 failed) 26959ms
+     × (i) where the veil runs and the name is not served: no mask word in a party list, the naming tension not served 11ms
+     × (ii) wherever the veil runs, every served party list is a stored one whole: none shortened, none rewritten 2ms
+     × (iii) Reveal DM serves the tension with the name on the gallery read and the import; the link drops it on both Reveals 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilTensionParties.pglite.test.js > R5-TENSION: a tension naming a hidden power leaves whole where the name is not served, both engines > (i) where the veil runs and the name is not served: no mask word in a party list, the naming tension not served
+AssertionError: expected [ …(104) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "ten-village-infiltrated-20 server page own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link unmarked dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link own dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:000 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:001 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:010 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:011 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:100 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:101 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:110 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link allOpen dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link off dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link unmarked dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link unmarked dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link own dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:000 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:001 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:010 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:011 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:100 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:101 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:110 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link allOpen dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link off dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link unmarked dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++ ]
+
+ ❯ tests/security/galleryVeilTensionParties.pglite.test.js:136:17
+    134|       for (const t of tensOf(r.doc)) if (partiesOf(t).some((v) => p.hi…
+    135|     }
+    136|     expect(bad).toEqual([]);
+       |                 ^
+    137|   }, ARM_TIMEOUT_MS);
+    138|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/security/galleryVeilTensionParties.pglite.test.js > R5-TENSION: a tension naming a hidden power leaves whole where the name is not served, both engines > (ii) wherever the veil runs, every served party list is a stored one whole: none shortened, none rewritten
+AssertionError: expected [ …(104) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "ten-village-infiltrated-20 server page own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page own dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:000 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:001 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:010 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:011 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:100 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:101 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page g:110 dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page allOpen dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server page off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server import off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 twin page off dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link unmarked dm=false [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link own dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:000 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:001 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:010 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:011 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:100 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:101 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link g:110 dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link allOpen dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link off dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-20 server link unmarked dm=true [succession_crisis] [\"Elder Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page own dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:000 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:001 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:010 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:011 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:100 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:101 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page g:110 dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page allOpen dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server page off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server import off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 twin page off dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link unmarked dm=false [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link own dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:000 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:001 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:010 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:011 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:100 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:101 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link g:110 dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link allOpen dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link off dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++   "ten-village-infiltrated-29 server link unmarked dm=true [succession_crisis] [\"Household Council\",\"Popular candidate\",\"an unseen interest\"]",
++ ]
+
+ ❯ tests/security/galleryVeilTensionParties.pglite.test.js:145:17
+    143|       for (const r of p.reads.filter(veilRuns)) for (const t of tensOf…
+    144|     }
+    145|     expect(bad).toEqual([]);
+       |                 ^
+    146|   }, ARM_TIMEOUT_MS);
+    147|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/galleryVeilTensionParties.pglite.test.js > R5-TENSION: a tension naming a hidden power leaves whole where the name is not served, both engines > (iii) Reveal DM serves the tension with the name on the gallery read and the import; the link drops it on both Reveals
+AssertionError: expected [ …(44) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "ten-village-infiltrated-20 server link own dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:000 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:001 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:010 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:011 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:100 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:101 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link g:110 dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link allOpen dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link off dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link unmarked dm=false: the link serves it",
++   "ten-village-infiltrated-20 server link own dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:000 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:001 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:010 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:011 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:100 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:101 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link g:110 dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link allOpen dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link off dm=true: the link serves it",
++   "ten-village-infiltrated-20 server link unmarked dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link own dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:000 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:001 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:010 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:011 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:100 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:101 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link g:110 dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link allOpen dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link off dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link unmarked dm=false: the link serves it",
++   "ten-village-infiltrated-29 server link own dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:000 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:001 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:010 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:011 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:100 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:101 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link g:110 dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link allOpen dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link off dm=true: the link serves it",
++   "ten-village-infiltrated-29 server link unmarked dm=true: the link serves it",
++ ]
+
+ ❯ tests/security/galleryVeilTensionParties.pglite.test.js:158:17
+    156|       }
+    157|     }
+    158|     expect(bad).toEqual([]);
+       |                 ^
+    159|   }, ARM_TIMEOUT_MS);
+    160|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 3 passed (6)
+   Start at  15:57:39
+   Duration  27.26s (transform 4.27s, setup 37ms, import 128ms, tests 26.96s, environment 0ms)
+
+rc=1

@@ -20,6 +20,7 @@ it('mask: the mask word at every served path', async () => {
   const V = await loadVeil(SRC);
   const DIR = process.env.RV9_STORED_DIR; const OUTD = process.env.RV9_OUT_DIR; mkdirSync(OUTD, { recursive: true });
   const LIMIT = Number(process.env.RV9_LIMIT || 0); const SERVER = process.env.RV9_SERVER !== '0';
+  const ONLY = process.env.RV9_SEEDS ? new Set(readFileSync(process.env.RV9_SEEDS, 'utf8').split('\n').filter(Boolean)) : null;
   const index = readdirSync(DIR).filter((f) => /^index-shard\d+\.json$/.test(f)).sort().flatMap((f) => JSON.parse(readFileSync(`${DIR}/${f}`, 'utf8')).index)
     .sort((x, y) => (x.role + x.seed < y.role + y.seed ? -1 : 1));
   let db = null;
@@ -41,6 +42,7 @@ it('mask: the mask word at every served path', async () => {
   let i = 0; let nrow = 0; let docs = 0; let srvDocs = 0;
   for (const m of index) {
     i += 1; if (i % SHARD[1] !== SHARD[0]) continue; if (LIMIT && i > LIMIT * SHARD[1]) break;
+    if (ONLY && !ONLY.has(m.seed)) continue;
     const raw = readFileSync(`${DIR}/${m.seed}.json`, 'utf8'); const doc = JSON.parse(raw); docs += 1;
     const hidNames = objs(doc?.powerStructure?.factions).filter((f) => f.hidden === true && typeof f.faction === 'string' && f.faction.trim() !== '').map((f) => f.faction);
     const storedMask = raw.includes(MASK);
