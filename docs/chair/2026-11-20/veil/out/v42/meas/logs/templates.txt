@@ -1,0 +1,6 @@
+v42tip made 2026-11-23T06:22:19Z: createdb -T v27x211 v42tip; psql -f /home/user/wt/tip/supabase/migrations/212_share_veil_later_cures.sql (rc 0)
+eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01  supabase/migrations/211_server_side_share_veil.sql
+ff20ed89e3e67240d399834876a05d92f63f88a52d8cef41585824ec78e6fdbf  supabase/migrations/212_share_veil_later_cures.sql
+tip HEAD 23bb8b8ae1155e948bca4308e479fba7adc8639c
+v28tpl (seat's) = v27x211 + wip 212:
+7a85dec31320dc6891be976458b285b0f49e463bf0a250e03dbc8636b010b5f3  /home/user/wt/meas/supabase/migrations/212_share_veil_later_cures.sql

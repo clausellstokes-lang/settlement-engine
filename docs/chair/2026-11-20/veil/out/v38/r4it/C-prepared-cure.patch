@@ -1,0 +1,91 @@
+--- a/src/domain/summary/tonightSheet.js
++++ b/src/domain/summary/tonightSheet.js
+@@ -65,7 +65,8 @@
+  * voiced from the crisis cast wants what the ROLE wants, read after "Wants to". An instigator's
+  * want fits an instigator, never the want of the people answering the crisis ("identify the
+  * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
+- * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
++ * line per person, chosen by `castHash` over the person's NAME as the card prints it, the crisis and the role: no draw
++ * (R4I-TONIGHT, the chair's ruling 40.3 (2): `castWantKeyOf`).
+  * ROUND THREE (the chair's ruling): these lines are voiced ONLY for a cast person whose card carries no goal of its own
+  * (`castWantOf`); a person with a goal wants what their card says they want.
+  */
+@@ -150,21 +151,34 @@
+ }
+ 
+ /**
++ * THE WANT'S KEY (R4I-TONIGHT, VEIL-38; the chair's ruling 40.3 (2)): the person's NAME AS THE CARD PRINTS IT (the
++ * sheet's own `clean(npc.name)`), on the owner's page and on every shared read alike, by both callers (the sheet's
++ * `peopleOf` and the judge, coherence/crisisFactFindings.js). The served person id is re-keyed on every non-owner read
++ * (VR10), so a pick keyed on it gave a cast person another want line on each reload; the name is the one identity every
++ * read serves unchanged (measured: out/v38/r4it/M-NAMES.md). A person with no name keeps the id (today's key): never on
++ * the sheet, whose people all carry a name (`peopleOf` keeps no nameless card), so counted 0 there.
++ * @param {unknown} name the card's name @param {unknown} id the cast row's person id @returns {string}
++ */
++export function castWantKeyOf(name, id) {
++  return clean(name) || clean(id);
++}
++
++/**
+  * The want a cast person WITH NO GOAL OF THEIR OWN voices (ROUND THREE, the chair's ruling: one home for what a person
+  * wants is the person's own goal, as the card prints it; the role's line only where the card carries none, and only
+- * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person, the
+- * crisis and the role (no draw); a line the town makes false (`castWantAdmits`) resolves draw-free to the pool's next
++ * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person's key
++ * (`castWantKeyOf`: their name as the card prints it), the crisis and the role (no draw); a line the town makes false (`castWantAdmits`) resolves draw-free to the pool's next
+  * admitted line; '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
+  * (their first-rank power; '' when they hold none). A role with no pool (never voiced today) falls back to `ownWant`.
+- * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
++ * @param {string} role @param {string} personKey the person's key (`castWantKeyOf`) @param {string} crisis @param {string} ownWant @param {string} [house]
+  * @param {{ seatEmpty?: boolean, forceStands?: boolean }} [facts] the town's facts a line is read against (`castWantFactsOf`)
+  * @returns {string}
+  */
+-export function castWantOf(role, personId, crisis, ownWant, house = '', facts = {}) {
++export function castWantOf(role, personKey, crisis, ownWant, house = '', facts = {}) {
+   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
+   if (!pool || pool.length === 0) return ownWant;
+   const noun = /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis';
+-  const start = Math.floor(castHash(personId, crisis, role) * pool.length);
++  const start = Math.floor(castHash(personKey, crisis, role) * pool.length);
+   const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, facts));
+   if (!line) return '';
+   const named = house ? powerNameInProse(house) : '';
+@@ -588,7 +602,7 @@
+         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
+         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
+         if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) {
+-          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, row.id, kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), wantFacts);
++          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, castWantKeyOf(hit.npc.name, row.id), kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), wantFacts);
+           const own = roleWant ? { says: /** @type {'want'} */ ('want'), line: roleWant } : ownLineOf(hit.npc, { withholdSecret: withholdSecret(hit.npc) });
+           add(hit, 'cast', own.line, CRISIS_ROLE_LABEL[role], own.says, { castId: row.id, castKind: kind });
+           filled = true; break;
+--- a/src/domain/coherence/crisisFactFindings.js
++++ b/src/domain/coherence/crisisFactFindings.js
+@@ -33,7 +33,7 @@
+  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
+  */
+ 
+-import { composeTonightSheet, castWantOf, castWantFactsOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
++import { composeTonightSheet, castWantOf, castWantFactsOf, castWantKeyOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+ import { governingFactionOf } from '../rulingPower.js';
+ 
+ /** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
+@@ -208,7 +208,8 @@
+     // want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
+     // a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
+     // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
+-    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
++    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40). The
++    // person is keyed as the sheet keys them (R4I-TONIGHT, ruling 40.3 (2): `castWantKeyOf`, the name as the card prints it).
+     // A secret or a temperament (`says`) is not a want and is not read here.
+     const wantFacts = castWantFactsOf(settlement);
+     for (const p of sheet.people || []) {
+@@ -221,7 +222,7 @@
+         continue;
+       }
+       const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
+-      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, wantFacts);
++      const want = castWantOf(role, castWantKeyOf(p.name, p.castId), str(p.castKind), '', house, wantFacts);
+       if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
+     }
+     // target_runs_plot: a crisis's target voiced with that crisis's own secret.

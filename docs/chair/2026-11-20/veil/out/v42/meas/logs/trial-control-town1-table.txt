@@ -1,0 +1,287 @@
+documents 2; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 48 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 48 / 11
+  L1 gallery | canon: 48 / 11
+  L1 link | aligned: 48 / 0
+  L1 link | canon: 48 / 0
+  L2 gallery | aligned: 48 / 11
+  L2 gallery | canon: 48 / 11
+  L2-vs-L1 server | canon: 96 / 48
+  L2-vs-L1 twin | canon: 96 / 48
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 2
+
+== L1 gallery | aligned: 11 of 48 reads differ
+   by setting: master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1
+   documents (1): v102-town-1|master
+   factions[]#keys: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+== L1 gallery | canon: 11 of 48 reads differ
+   by setting: master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1
+   documents (1): v102-town-1|master
+   factions[]#keys: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+   factions[].power: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0].power
+        server: 34
+        twin:   (absent)
+== L2 gallery | aligned: 11 of 48 reads differ
+   by setting: master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1
+   documents (1): v102-town-1|master
+   factions[]#keys: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+== L2 gallery | canon: 11 of 48 reads differ
+   by setting: master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1
+   documents (1): v102-town-1|master
+   factions[]#keys: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+   factions[].power: reads 11, leaves 33
+      e.g. v102-town-1|master master|dm|default at factions[0].power
+        server: 34
+        twin:   (absent)
+== L2-vs-L1 server | canon: 48 of 96 reads differ
+   by setting: current|dm|allOpen=1 current|dm|default=1 current|dm|g:000=1 current|dm|g:001=1 current|dm|g:010=1 current|dm|g:011=1 current|dm|g:100=1 current|dm|g:101=1 current|dm|g:110=1 current|dm|off=1 current|dm|own=1 current|dm|unmarked=1 current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1 master|dm|unmarked=1 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (0): 
+   defenseProfile#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.internal
+        server: 0.76
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.military
+        server: 0.72
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.disaster
+        server: 36
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.economic
+        server: 54
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.internal
+        server: 26
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.magical
+        server: 36
+        twin:   (absent)
+   defenseProfile.scores.military: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.military
+        server: 60
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.monster
+        server: 24
+        twin:   (absent)
+   economicState.compound#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at economicState.compound.economyOutput
+        server: 9.602082359202358
+        twin:   (absent)
+   powerStructure#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at powerStructure.recentConflict
+        server: "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off."
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 1
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Survival crime"
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at defenseProfile.readiness.score
+        server: 22
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 20
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 48 of 96 reads differ
+   by setting: current|dm|allOpen=1 current|dm|default=1 current|dm|g:000=1 current|dm|g:001=1 current|dm|g:010=1 current|dm|g:011=1 current|dm|g:100=1 current|dm|g:101=1 current|dm|g:110=1 current|dm|off=1 current|dm|own=1 current|dm|unmarked=1 current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=1 master|dm|default=1 master|dm|g:000=1 master|dm|g:001=1 master|dm|g:010=1 master|dm|g:011=1 master|dm|g:100=1 master|dm|g:101=1 master|dm|g:110=1 master|dm|off=1 master|dm|own=1 master|dm|unmarked=1 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (0): 
+   defenseProfile#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.disaster
+        server: 0.69
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.economic
+        server: 0.62
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.internal
+        server: 0.76
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.military
+        server: 0.72
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.economicGates.monster
+        server: 0.79
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.disaster
+        server: 36
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.economic
+        server: 54
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.internal
+        server: 26
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.magical
+        server: 36
+        twin:   (absent)
+   defenseProfile.scores.military: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.military
+        server: 60
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at defenseProfile.scores.monster
+        server: 24
+        twin:   (absent)
+   economicState.compound#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at economicState.compound.economyOutput
+        server: 9.602082359202358
+        twin:   (absent)
+   powerStructure#keys: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 48, leaves 48
+      e.g. v102-town-1|current current|off|default at powerStructure.recentConflict
+        server: "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off."
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 1
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 24, leaves 24
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Survival crime"
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at defenseProfile.readiness.score
+        server: 22
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 4, leaves 4
+      e.g. v102-town-1|current current|off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 20
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=48; gallery | server=48; gallery | twin=48; import | server=48; link | server=48; link | twin=48; map member | server=48
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 2
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  factions[].members[].goal.intent.long.target.id: 10 in 1 documents; e.g. v102-town-1|master [0].factions[0].members[2].goal.intent.long.target.id = npc_dyer
+  factions[].members[].goal.intent.short.target.id: 5 in 1 documents; e.g. v102-town-1|master [0].factions[0].members[3].goal.intent.short.target.id = npc_inn_multiple
+  factions[].members[].allegiance.handler: 1 in 1 documents; e.g. v102-town-1|master [0].factions[0].members[8].allegiance.handler = npc_veiled_2712f5cae8e0f569
+HITS (outside publicProse):
+  gallery page (L2) | server :: factions[].members[].goal.intent.long.target.id: 109 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[2].goal.intent.long.target.id = "npc_dyer"
+  gallery page (L2) | server :: factions[].members[].goal.intent.short.target.id: 49 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[3].goal.intent.short.target.id = "npc_inn_multiple"
+  gallery page (L2) | server :: factions[].members[].allegiance.handler: 2 hits on 2 reads; e.g. v102-town-1|master master|dm|unmarked factions[0].members[8].allegiance.handler = "npc_veiled_2712f5cae8e0f569"
+  gallery | server :: factions[].members[].goal.intent.long.target.id: 109 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[2].goal.intent.long.target.id = "npc_dyer"
+  gallery | server :: factions[].members[].goal.intent.short.target.id: 49 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[3].goal.intent.short.target.id = "npc_inn_multiple"
+  gallery | server :: factions[].members[].allegiance.handler: 2 hits on 2 reads; e.g. v102-town-1|master master|dm|unmarked factions[0].members[8].allegiance.handler = "npc_veiled_2712f5cae8e0f569"
+  gallery | twin :: factions[].members[].goal.intent.long.target.id: 109 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[2].goal.intent.long.target.id = "npc_dyer"
+  gallery | twin :: factions[].members[].goal.intent.short.target.id: 49 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[3].goal.intent.short.target.id = "npc_inn_multiple"
+  gallery | twin :: factions[].members[].allegiance.handler: 2 hits on 2 reads; e.g. v102-town-1|master master|dm|unmarked factions[0].members[8].allegiance.handler = "npc_veiled_2712f5cae8e0f569"
+  import | server :: factions[].members[].goal.intent.long.target.id: 109 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[2].goal.intent.long.target.id = "npc_dyer"
+  import | server :: factions[].members[].goal.intent.short.target.id: 49 hits on 12 reads; e.g. v102-town-1|master master|dm|default factions[0].members[3].goal.intent.short.target.id = "npc_inn_multiple"
+  import | server :: factions[].members[].allegiance.handler: 2 hits on 2 reads; e.g. v102-town-1|master master|dm|unmarked factions[0].members[8].allegiance.handler = "npc_veiled_2712f5cae8e0f569"
+HITS INSIDE publicProse (apart, ruling (a')):
+  none

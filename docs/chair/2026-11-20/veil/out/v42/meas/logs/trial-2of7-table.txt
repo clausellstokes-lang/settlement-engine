@@ -1,0 +1,325 @@
+documents 2; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 48 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 48 / 0
+  L1 gallery | canon: 48 / 0
+  L1 link | aligned: 48 / 0
+  L1 link | canon: 48 / 0
+  L2 gallery | aligned: 48 / 24
+  L2 gallery | canon: 48 / 24
+  L2-vs-L1 server | canon: 96 / 48
+  L2-vs-L1 twin | canon: 96 / 48
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 2
+
+== L2 gallery | aligned: 24 of 48 reads differ
+   by setting: off|allOpen=2 off|default=2 off|g:000=2 off|g:001=2 off|g:010=2 off|g:011=2 off|g:100=2 off|g:101=2 off|g:110=2 off|off=2 off|own=2 off|unmarked=2
+   documents (2): r3m-town-wartime-0-29, r3m-city-none-1-107
+   #keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+== L2 gallery | canon: 24 of 48 reads differ
+   by setting: off|allOpen=2 off|default=2 off|g:000=2 off|g:001=2 off|g:010=2 off|g:011=2 off|g:100=2 off|g:101=2 off|g:110=2 off|off=2 off|own=2 off|unmarked=2
+   documents (2): r3m-town-wartime-0-29, r3m-city-none-1-107
+   #keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship#keys
+        server: (absent)
+        twin:   full,npc1,npc2,phrasing,tension,type
+   prominentRelationship.full: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.full
+        server: (absent)
+        twin:   "Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business."
+   prominentRelationship.npc1: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc1
+        server: (absent)
+        twin:   "Irene Kalojan"
+   prominentRelationship.npc2: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc2
+        server: (absent)
+        twin:   "Elektra Gabalas"
+   prominentRelationship.phrasing: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.phrasing
+        server: (absent)
+        twin:   "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+   prominentRelationship.tension: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.tension
+        server: (absent)
+        twin:   "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+   prominentRelationship.type: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.type
+        server: (absent)
+        twin:   "Silent Partnership"
+== L2-vs-L1 server | canon: 48 of 96 reads differ
+   by setting: dm|allOpen=2 dm|default=2 dm|g:000=2 dm|g:001=2 dm|g:010=2 dm|g:011=2 dm|g:100=2 dm|g:101=2 dm|g:110=2 dm|off=2 dm|own=2 dm|unmarked=2 off|allOpen=2 off|default=2 off|g:000=2 off|g:001=2 off|g:010=2 off|g:011=2 off|g:100=2 off|g:101=2 off|g:110=2 off|off=2 off|own=2 off|unmarked=2
+   documents (0): 
+   defenseProfile#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.disaster
+        server: 0.87
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.economic
+        server: 0.84
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.internal
+        server: 0.9
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.military
+        server: 0.88
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.monster
+        server: 0.91
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.disaster
+        server: 39
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.economic
+        server: 57
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.internal
+        server: 50
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.magical
+        server: 30
+        twin:   (absent)
+   defenseProfile.scores.military: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.military
+        server: 41
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.monster
+        server: 20
+        twin:   (absent)
+   economicState.compound#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at economicState.compound.economyOutput
+        server: 20.71526120973649
+        twin:   (absent)
+   powerStructure#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at powerStructure.recentConflict
+        server: "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown offi…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 26, leaves 26
+      e.g. r3m-town-wartime-0-29 off|unmarked at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 26, leaves 26
+      e.g. r3m-town-wartime-0-29 off|unmarked at defenseProfile.readiness.score
+        server: 37
+        twin:   (absent)
+   activeConditions[]#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at activeConditions[0].severity
+        server: 0.6
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 4
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Survival crime"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 4, leaves 4
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 23
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 48 of 96 reads differ
+   by setting: dm|allOpen=2 dm|default=2 dm|g:000=2 dm|g:001=2 dm|g:010=2 dm|g:011=2 dm|g:100=2 dm|g:101=2 dm|g:110=2 dm|off=2 dm|own=2 dm|unmarked=2 off|allOpen=2 off|default=2 off|g:000=2 off|g:001=2 off|g:010=2 off|g:011=2 off|g:100=2 off|g:101=2 off|g:110=2 off|off=2 off|own=2 off|unmarked=2
+   documents (0): 
+   defenseProfile#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.disaster
+        server: 0.87
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.economic
+        server: 0.84
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.internal
+        server: 0.9
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.military
+        server: 0.88
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.economicGates.monster
+        server: 0.91
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.disaster
+        server: 39
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.economic
+        server: 57
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.internal
+        server: 50
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.magical
+        server: 30
+        twin:   (absent)
+   defenseProfile.scores.military: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.military
+        server: 41
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at defenseProfile.scores.monster
+        server: 20
+        twin:   (absent)
+   economicState.compound#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at economicState.compound.economyOutput
+        server: 20.71526120973649
+        twin:   (absent)
+   powerStructure#keys: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 48, leaves 48
+      e.g. r3m-town-wartime-0-29 off|default at powerStructure.recentConflict
+        server: "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown offi…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 26, leaves 26
+      e.g. r3m-town-wartime-0-29 off|unmarked at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 26, leaves 26
+      e.g. r3m-town-wartime-0-29 off|unmarked at defenseProfile.readiness.score
+        server: 37
+        twin:   (absent)
+   #keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   activeConditions[]#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at activeConditions[0].severity
+        server: 0.6
+        twin:   (absent)
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship#keys
+        server: full,npc1,npc2,phrasing,tension,type
+        twin:   (absent)
+   prominentRelationship.full: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.full
+        server: "Irene Kalojan does what Elektra Gabalas asks, and Elektra Gabalas pays for it in coin that never passes through a counting-house. In company the two of them speak only of ordinary business."
+        twin:   (absent)
+   prominentRelationship.npc1: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc1
+        server: "Irene Kalojan"
+        twin:   (absent)
+   prominentRelationship.npc2: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.npc2
+        server: "Elektra Gabalas"
+        twin:   (absent)
+   prominentRelationship.phrasing: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.phrasing
+        server: "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+        twin:   (absent)
+   prominentRelationship.tension: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.tension
+        server: "Irene Kalojan has started spending Elektra Gabalas's coin where people can see it: a new roof, a new horse. Elektra Gabalas has noticed, and so have the neighbours."
+        twin:   (absent)
+   prominentRelationship.type: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|default at prominentRelationship.type
+        server: "Silent Partnership"
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 24, leaves 24
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 4
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 14, leaves 42
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "Survival crime"
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 4, leaves 4
+      e.g. r3m-town-wartime-0-29 off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 23
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=48; gallery | server=48; gallery | twin=48; import | server=48; link | server=48; link | twin=48; map member | server=48
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 2
+HITS (outside publicProse):
+  none
+HITS INSIDE publicProse (apart, ruling (a')):
+  none
