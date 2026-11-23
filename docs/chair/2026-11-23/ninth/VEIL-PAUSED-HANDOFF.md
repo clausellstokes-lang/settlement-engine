@@ -56,8 +56,19 @@ successor is seated with the start message named below.
 ### 2.1 Chain A, "R5-DESC" (VEIL-40, then VEIL-48)
 - VEIL-40 (session_01FbPLbfZtJ6FDJfq3MCUbon) HANDED OVER AND STOPPED: `lane/veil-40-2026-11-23` at a3bc0dc9d. Its
   packet is `docs/chair/2026-11-20/veil/COHERENCE-VEIL-HANDBACK-PART42.md`, section 1, block 0 ("VEIL-40 HANDS OVER").
-- VEIL-48 (session_01FbPLbbhLQxTNjSrMJPCXX2) was seated at 16:09:51 UTC and paused three minutes later, before any
-  work. PAUSED: awaited. Its start message `prompts/START-VEIL-48.txt` (on this lane) IS THE PACKET FOR A RESUME.
+- VEIL-48 (session_01FbPLbbhLQxTNjSrMJPCXX2) was seated at 16:09:51 UTC; the pause order reached it at 16:29 (its
+  first line and one surprise crossed it). PAUSED AT 9e5697d40 (`lane/veil-48-2026-11-23`; every run stopped at
+  16:30:34 UTC; no builder was ever started). ITS PAUSE BLOCK IS PART 47, SECTION 1, BLOCK 0. Its start message
+  `prompts/START-VEIL-48.txt` (on this lane) IS THE PACKET FOR A RESUME.
+- WHAT VEIL-48 FOUND IN ITS TWENTY MINUTES: (a) the rival and PIN-3 merge into the code branch plainly, with no
+  conflict; those two merges stand ONLY IN ITS CONTAINER and are re-made by two plain merges; (b) THE PRE-PUSH HOOK
+  REFUSES THE MERGED CODE BRANCH: `src/domain/veil/pageRederive.js`: 1 strict typecheck error against a baseline of 0
+  (TS2345 at :283: `annotateFactionStanding` is called with a `seat` argument the callee's signature types as null);
+  the same reads on 0544c77ad; it was not bypassed and not cured. Two cures were named (a JSDoc on `seat` in
+  `factionStanding.js`; a typed annotation at the call). The flip's commit 3b5a37a23 already gives that writer a JSDoc
+  that types `seat`, so the error leaves at the join with the working line; whether it is cured on the lane before then
+  is the next chair's ruling. NOT EXPLAINED: how the earlier pushes of that code passed the same hook. (c) Its
+  instruments' tally on a fresh machine: 79 EQUAL, 13 LOWER.
 - CODE, all on origin, none merged into another: `lane/veil-40-2026-11-23-r5desc-wip` aa54a6791 (the code branch);
   `-r5rival-wip` 61a99a90d (the rival's cure); `-sskip-wip` 0544c77ad (instruments only, nothing in `src/`).
 - PROVEN: THE RIVAL LEAVES WITH ITS HOST (N63): red on the full pools 2,736 of 2,736 hiding rival-reads served beside
@@ -86,10 +97,15 @@ successor is seated with the start message named below.
   the crime signal is false; (v)(3) made joint; `bnAt`), N106, N111.
 
 ### 2.3 Chain B, "R4-IDS" (VEIL-42, session_01FbPLbd4KVbm2owKo72ukoY)
-- PAUSED: awaited. Documents `lane/veil-42-2026-11-23` (07f408087 before the pause); hand-back PART 44.
-- CODE: `-r4ids-wip` ab05aa487 (with "TONIGHT-2" merged, re-run by the seat: red 2 of 5, green 22 of 22);
-  `-tonight-wip` 57e847ce8; `-meas-wip` d71a3ee44 (THE WHOLE-DOCUMENT INSTRUMENT `out/v42/meas/`, used by every unit:
-  N90; and its last measure). The SQL builder's branch is pushed by the pause.
+- PAUSED AT 47f8d31fe (`lane/veil-42-2026-11-23`; its line queued 16:31:38 UTC). ITS PAUSE BLOCK IS PART 44, SECTION 1,
+  BLOCK (0): the branches, what is proven with each receipt, what is open in five items to "TIP? R4-IDS", the machine.
+- CODE: `-r4ids-wip` ab05aa487 (the unit, with the tip and PIN-3 merged and "TONIGHT-2" merged, re-run by the seat: red 2
+  of 5, green 22 of 22); `-tonight-wip` 57e847ce8 (merged); `-meas-wip` d71a3ee44 (THE WHOLE-DOCUMENT INSTRUMENT
+  `out/v42/meas/`, frozen at 5130df7df, used by every unit: N90; `RECIPES.md` beside it); `-sql2-wip` 040a405e0 (THE
+  SQL BUILDER'S UNIT, STOPPED BY THE PAUSE, "WIP, UNPROVED", NOT merged into the -wip: 212 edited in `_gallery_veil_rekey`
+  and, for N106, in the two guard lines of `_gallery_veil_roster_choices`; BY THE BUILDER'S OWN RUNS, not re-run and not
+  read by the seat: the two guards red 352 to 0 on master-born and 33 to 0 on the control, the plant, no today-born read
+  moved (6,720 of 6,720), the lint pin `tests/lint/veilTypeofGuard.walker.test.js` red on both old lines then green).
 - FOUND BY ITS INSTRUMENT ON REAL MASTER-BORN DOCUMENTS (N106; the reader's row 36): a guard of 212 that passes on an
   absent key writes shares the stored list never had (352 of 3,360 reads). THE CURE IS GRANTED TO THIS UNIT: two lines
   (`is distinct from 'number'` at the tip's :2295 and :2326), red first, a plant, a lint pin. Chain A takes the two
@@ -100,9 +116,13 @@ successor is seated with the start message named below.
 - RULINGS THAT BIND IT: N77, N84, N90, N106, N107 (two `tests/copy` reds are the tip's, not its).
 
 ### 2.4 The doors, "IMPORT-DOOR" with "MAP-COVERT" (VEIL-44, session_01FbPLbf229d4Ks1UJSnj8vb)
-- PAUSED: awaited. Documents `lane/veil-44-2026-11-23` (3e7bef6c7 before the pause); hand-back PART 46.
-- CODE: `-door-wip` db9fddc7d; `-mapcovert-wip` 6edc79094 (the red first); `-trad4-wip` c2afc9878; `-mcsql-wip`
-  0dbb9a169 before the pause (the narrow green's builder).
+- PAUSED AT 25cb48fde (`lane/veil-44-2026-11-23`; its line queued 16:22:35 UTC). ITS PAUSE BLOCK IS PART 46, SECTION 0:
+  the branches, what is proven with each receipt, what is open in order to "TIP? IMPORT-DOOR", the machine.
+- CODE: `-door-wip` db9fddc7d (the tip with the shared map's red and "the import equals the read": TESTS ONLY, 212
+  untouched); `-mapcovert-wip` 6edc79094 and `-trad4-wip` c2afc9878 (both merged into it); `-mcsql-wip` d56bc1ab6 (THE
+  NARROW GREEN, STOPPED BY THE PAUSE: 212 and its rollback EDITED AS "WIP, UNPROVED": `get_gallery_map` restated as the
+  link's read; the rollback rehearsed equal; NONE of its proofs ran; its hand-back `out/v44/mcsql/MCSQL-HANDBACK.md` is
+  read first; nothing of it merged).
 - PROVEN: THE SHARED-MAP HOLE HAS ITS RED FIRST (a shared map's member and the map's import serve a covert tie's copy
   at Reveal off: the member 24 sends, the import 24); "the import equals the gallery read" 0 of 840 shares, with a
   tooth; doors-3's arms 51 of 51; the census of 63 definer functions.
