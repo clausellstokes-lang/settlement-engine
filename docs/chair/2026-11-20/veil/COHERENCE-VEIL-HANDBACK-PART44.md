@@ -22,7 +22,7 @@ THE UNIT: R4-IDS. NOTHING OF IT IS MERGED INTO THE LANE'S TIP. THE LANE'S TIP: 2
 
 ### (3) IN FLIGHT
 - R4I-MEASURE: A ("77"), C ("GAP"), B ("WHOLE-DOC"): each result sent to the chair as soon as its file exists.
-- R4I-TONIGHT-2 (unit 3, started early by 44.1). IF A's cause lies in what it edits: tell it to STOP and tell the chair (44.1 (1)).
+- R4I-TONIGHT-2 (unit 3, started early by 44.1): ITS TURN ENDED 06:58 at ~279,000 tokens, before any heavy run got the mutex. Local tip 93f7ae168 (550e2e427 the arm probe and out/v38/r4it; 47980d744 N: netCurrentExtractorAnchor red 1/7 then green 7/7, criminalSwitchSalt 6/6). C APPLIED IN ITS WORKTREE, NOT COMMITTED (tonightSheet.js, crisisFactFindings.js with `castWantKeyOf(name)` and no id; shareRenderTwice; tonightSheetOnce re-pinned by cause); light runs green, PLAUSIBLE. ITS QUEUE `/var/tmp/r4it2/queue1.sh` (nohup, through the mutex, behind R4I-MEASURE): holdA (shareRenderTwice red on a 9f9b819f7 snapshot, the arm red/green on the 140, shareRenderTwice green, the 30 d-files) then holdB (the arm red on the pool); logs `/var/tmp/r4it2/logs/`. NEXT: when the queue ends, RESUME THE BUILDER BY MESSAGE (its context holds the read-in) for the pool green, OWNER-MOVES, C's commit, lint/copy whole, typecheck; its hand-back `out/v42/tonight/R4IT2-HANDBACK.md` names the commands. IF A's cause lies in what it edits: tell it to STOP and tell the chair (44.1 (1)).
 
 ### (4) NEXT, IN ORDER (the start message's units)
 1. Send A, C, B as they land. If A's cause is NOT the gap: to the chair before any cure of it is briefed.
