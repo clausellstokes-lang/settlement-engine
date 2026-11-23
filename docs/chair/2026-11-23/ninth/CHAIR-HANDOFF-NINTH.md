@@ -32,8 +32,12 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 15:07 UTC (the helper's read, its clock 15:07:37 to 15:07:43; NO FIGURE FELL since 14:08; every seat on
-claude-opus-5-5: configured, set and last served): CLOSE-6 358,884 (+18,573 in the hour); VEIL-40 458,250 (one long turn
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 16:05 UTC (the helper's read, its clock 16:05:11 to 16:05:19; NO FIGURE FELL since 15:07; every seat last
+served on claude-opus-5-5): CLOSE-6 358,884 (unchanged: one long turn); VEIL-40 510,085 (HANDED OVER at 16:00: VEIL-48
+takes its place when it has stopped); VEIL-41 544,898 (+16,335: its proof is at the gates on the tip; its line is
+660,000 for this proof alone: N99); VEIL-42 449,024 (unchanged: it waits on its SQL builder); VEIL-43 511,162 (+9,757:
+IT NEARS ITS HAND-OVER: `prompts/DRAFT-START-VEIL-46.txt`); VEIL-44 405,102 (+12,000); PROSE-6 361,559 (idle; it waits
+and is not one of the six). THE FIGURES OF 15:07 UTC (history; no figure fell since 14:08): CLOSE-6 358,884 (+18,573 in the hour); VEIL-40 458,250 (one long turn
 since 14:42: stale-low; IT HANDS OVER BY 570,000 OF THIS READ, AT A STEP'S END: `prompts/DRAFT-START-VEIL-48.txt` is
 filled then); VEIL-41 528,563 (+1,479: its proof runs; its line is 660,000 for this proof alone: N99); VEIL-42 449,024
 (+20,752); VEIL-43 501,405 (+32,354, the fastest: IT NEARS ITS HAND-OVER, after "REDS-CAUSE", at a step's end:
@@ -275,6 +279,12 @@ THE FULL POOLS ANY MORE: a slice; the full pools once per unit, at its proof. VE
 (`prompts/DRAFT-START-VEIL-48.txt`, brought to this). A SEVENTH SEAT, FOR THIS PIECE ONLY, IS ASKED OF THE OWNER (15:52
 UTC): NONE IS CREATED WITHOUT HIS WORD; THE DEFAULT: VEIL-49 takes the first place that frees and the join's successor
 waits for the next.
+SINCE N111 (N112, N113): THE NEXT HOURLY CHECK IS AT 17:10 UTC (the same reminder, re-armed). THE RIVAL IS GREEN ON THE
+FULL POOLS (0 lone of 14,528 rival-reads) AND ITS DIFF WAS READ WHOLE BY VEIL-40 WITHOUT FAULT. VEIL-40 HANDED OVER AT
+16:00 UTC (001715824; PART 42's block 0 is its packet). `prompts/START-VEIL-48.txt` IS FILLED AND ON ORIGIN (d9c300140):
+VEIL-48 IS SEATED AS SOON AS VEIL-40 SAYS "VEIL-40 STOPPED" (source_revision `lane/veil-40-2026-11-23`, outcome branch
+`lane/veil-48-2026-11-23`, the middle tier at high effort). VEIL-49's START NOTE IS FILLED BY ONE COMMAND
+(`/home/user/scratch/chair/tools/fill49.py`; the recipe for T5's machine is in PART 42's block 0) WHEN A PLACE IS FREE.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -3308,3 +3318,48 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   first; the measures come to the chair as counts before any cure; the chair's rulings (a) to (h); its "TIP?" only
   after R5-DESC's tip is named); `prompts/DRAFT-START-VEIL-48.txt` brought to it (T5 is not its unit; (b2) the slice
   rule). VEIL-43's line of 15:27:35 (PAGES' end revised to about 16:45; nothing failing; it runs on) is noted here.
+- 2026-11-23 16:06 UTC · N112 · THE RIVAL IS GREEN ON THE FULL POOLS AND ITS DIFF READ WITHOUT FAULT; VEIL-40 HANDS
+  OVER (001715824); START-VEIL-48.txt IS FILLED AND PUSHED; VEIL-48 IS SEATED ONLY WHEN VEIL-40 HAS STOPPED.
+  (1) THE RIVAL'S GREEN (VEIL-40, queued 15:53:26): its full pools ran in four shards, all rc 0, ending 15:52 UTC: 0
+  lone of 14,528 rival-reads; Q3 0 with one listed class (act T's seat "noble family", 32 reads); the roster's server
+  = twin, 0 misses; never-there base diff 0; open places unchanged. ITS RED, on 9b1fe3c34 (by its word): 2,736 of
+  2,736 hiding rival-reads were served beside the withheld host (the measure had said 2,760), and the plants had 36
+  faults. N111 (2) and (3) TAKEN by the seat.
+  (2) "VEIL-40 HANDS OVER 0017158243089f3b3228694d3c20e05a04c155b7" (queued 15:59:48): THE RIVAL'S DIFF READ WHOLE BY
+  THE SEAT (212's hunk, the twin, the registry and manifest rows, the 433-line arm): NO FAULT: the same rule in both
+  engines, to a fixpoint; a masked host's rival leaves; governing rows never move; the structured copies run where the
+  rule took a row; master's share re-derivation fires only where this function took a row. Its green receipts pushed
+  (61a99a90d). PART 42's block 0 is the hand-over, READ WHOLE BY THE CHAIR: every branch at its pushed tip
+  (`-r5desc-wip` aa54a6791, `-r5rival-wip` 61a99a90d, `-sskip-wip` 0544c77ad, `-t5-wip` b096065e5); the lock's order;
+  THE RECIPE T5's SEAT NEEDS (the instruments about 8 minutes, the pool's seeds about 23 minutes on that box; its own
+  template; merge 61a99a90d); WHAT IS OPEN, IN ORDER: SSKIP's count (started 15:53 under the lock) and its cure on a
+  slice; the rival's chains, arms on slices, after, cost; the merges with PIN-3; the tests builder's owed re-runs on a
+  slice; its third part; the unit's one proof on the stacked tree. Its two builders are live subagents of its session
+  and end with it.
+  (3) DONE BY THE CHAIR: `prompts/START-VEIL-48.txt` FILLED from that block (the code branches and their commits; the
+  rival's red and green; the standing reader's cure not built and its count to be run again unless a commit past
+  0544c77ad is on origin; its hand-back is PART 47; unit (0) re-ordered: the instruments and the pool's seeds first,
+  the base tree's gates when its lock is first free, never ahead of a builder's waiting run); committed d9c300140; THE
+  FIFTIETH PUSH ENDED exit=0 at 16:04:38 UTC (its log; ls-remote equal to the local tip; the file read back from
+  origin, 16,857 bytes). THE FORTY-NINTH (7ade8e856: N111, the drafts) ended exit=0 at 15:58:19 UTC.
+  (4) **Decided (N112), sent after the clock read 16:01:33:** VEIL-48 IS NOT SEATED UNTIL VEIL-40 HAS STOPPED: the
+  chair's read of VEIL-40 at 16:02 showed it running, 510,085 (its own estimate had been 480,000), "handed over to
+  VEIL-48; SSKIP count and R5D-RIVAL runs still going". ITS ONE LAST ACT: SSKIP's count's receipt pushed as WIP if it
+  returns within 20 minutes, else the count ended; the rival's later steps do NOT start on its box (they are
+  VEIL-48's); then one line, "VEIL-40 STOPPED <documents commit>", with the sskip branch's tip. **Why:** the owner's
+  rule is six at a time, and a predecessor whose machine still runs is not stopped; twenty minutes buy the successor
+  the deciding count for nothing; the rival's later steps would hold the successor's seating for an hour or more, and
+  that is not worth their saving.
+- 2026-11-23 16:06 UTC · N113 · THE HOURLY CHECK OF 16:05.
+  (1) ONE HAIKU HELPER (its clock 16:05:11 to 16:05:19, seven get_session calls): CLOSE-6 358,884 (unchanged since
+  15:07: one long turn; its record last moved at 15:33: "OWNER-ITEMS.md pushed; folding into FOR-THE-OWNER.md next");
+  VEIL-40 510,085 (HANDED OVER; one last act owed); VEIL-41 544,898 (15:07: 528,563; "waiting on tip gates": its proof
+  is at the gates on the tip); VEIL-42 449,024 (unchanged; "waiting on R4I-SQL-2 builder; then re-run red/green,
+  TIP?"); VEIL-43 511,162 (501,405; PAGES runs); VEIL-44 405,102 (393,102; "TRAD-4 re-run and MAP-COVERT SQL builder
+  still running"); PROSE-6 361,559, idle (it waits). NO FIGURE FELL; all last served on claude-opus-5-5. READ AGAINST
+  THE LINES: VEIL-41 has 95,000 to its 640,000 and grew 16,335 in the hour; VEIL-43 has 59,000 to 570,000: its
+  hand-over falls at PAGES' end or after "REDS-CAUSE", at a step's end.
+  (2) THE REMINDER trig_01YGHr43QZ7qTByhhu8Gde3x WAS RE-ARMED before it fired (the server's clock read 16:05:50 at the
+  update): ITS NEXT FIRING IS 17:10:00 UTC, its stored text re-written (the figures of 16:05; VEIL-48 to be seated;
+  VEIL-49 and the owner's seventh seat; what each seat owes). THE OWNER HAS NOT ANSWERED on the seventh seat (asked
+  15:52): none is created.
