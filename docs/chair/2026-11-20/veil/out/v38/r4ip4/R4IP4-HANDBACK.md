@@ -36,7 +36,12 @@ Note: the four later green runs saw item (e)'s helper change in the working tree
 ran before it. `tests/security` whole (item R4) runs every one at the last commit.
 eslint on every touched file: 0 errors (logs/g3-eslint.txt).
 
-## (b) RULING 4's register row: pending
+## (b) RULING 4'S REGISTER ROW (the chair's ruling (b)): DONE (commit: B)
+`src/domain/display/galleryVeilPeople.js` added, test-only: "comment; the reader rekeyServed (the served marker re-keyed
+into a new object, no row written)". Read by grep: the file names the column once, line 167, `rekeyServed`'s @param
+(logs/b-column-mentions.txt); `rekeyServed` builds `out = {}` and returns it, writes no row. RED at bb8897599 (RULING 4 the
+one red, logs/g3-green-galleryServerVeil.txt); GREEN: galleryServerVeil 18/18 (logs/b-galleryServerVeil.txt). (A `-t` run of
+RULING 4 alone is invalid: it reads a row the per-town tests insert; kept as `*-filtered-invalid*`.)
 ## (e) THE MASK'S TWO CONDITIONS (the chair's ruling (e)): DONE (commit: E)
 `personIdBijection.shared.mjs` (F): (i) `freshShapedStoredIds(reference)` counts the stored person ids of the fresh shape;
 `storedIdsServed` compares them as whole tokens (never masked) and REDS BY NAME where one exists; (ii) the mask takes whole

@@ -1,0 +1,28 @@
+[gate-tail] start:  03:17:12 up  3:05,  0 user,  load average: 0.91, 1.27, 2.86 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip4
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js (18 tests | 1 failed | 17 skipped) 10498ms
+     × RULING 4: no client path writes a served v2 marker back into a row 25ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > RULING 4: no client path writes a served v2 marker back into a row
+TypeError: Cannot read properties of undefined (reading 'o')
+ ❯ tests/security/galleryServerVeil.pglite.test.js:692:126
+    690|     H.db = db;
+    691|     await gallery.updateGalleryMetadata(id, { memberOverrides: served …
+    692|     const row = (await db.query('select gallery_member_overrides as o …
+       |                                                                                                                              ^
+    693|     expect(row.$veil.v).toBe(1);
+    694|     expect('groupings' in row.$veil).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 17 skipped (18)
+   Start at  03:17:13
+   Duration  10.80s (transform 4.15s, setup 28ms, import 168ms, tests 10.50s, environment 0ms)
+
+[gate-tail] end:  03:17:23 up  3:05,  0 user,  load average: 1.54, 1.40, 2.88

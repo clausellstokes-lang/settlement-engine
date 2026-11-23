@@ -699,6 +699,9 @@ describe('the server-side share veil (211) — execution against the real SQL an
       'src/lib/saves.js': 'reads the owner\'s own row into the library',
       'src/lib/saveAdmission.js': 'checks a loaded row\'s column is an object',
       'src/domain/display/galleryVeil.js': 'comments; the writer writeShareVeil (v 1) and the readers',
+      // R4I-PAGE-4 (the chair's ruling (b), 02:38 UTC): R4-IDS's module names the column in one JSDoc comment alone
+      // (rekeyServed's @param); rekeyServed re-keys the served marker into a NEW object and writes no row
+      'src/domain/display/galleryVeilPeople.js': 'comment; the reader rekeyServed (the served marker re-keyed into a new object, no row written)',
       'src/store/settlementSliceHelpers.js': 'the in-memory patch key list',
       'src/hooks/useGalleryShareControls.js': 'in-memory mirror of the writer\'s result',
       'src/components/ShareToGallery.jsx': 'in-memory mirror of the writer\'s result',
