@@ -143,3 +143,24 @@ and the other default-hidden things withheld), because a map's member was never 
 like the party link's players. So one unmarked town can show more on its gallery page than on a shared map. Today's code (211's member, not yet restated) shows
 the map member about as much as the gallery page shows at Reveal off, but it leaks a secret tie's copy that the gallery page drops (MAP-COVERT), and the cure closes that leak
 in either case.
+
+## ADDENDUM 3 — THE CHAIR'S N84 AND N85 (received 11:05 UTC; written 11:06 UTC 2026-11-23 by VEIL-44)
+N84 (1) THE MAP MEMBER IS THE PARTY LINK'S READ OF THE SAME TOWN (VR23): always the public projection; share-level Reveal DM never applies; an
+   unmarked member takes the default veil. THE DOOR-EQUALITY ARM holds the member, value for value modulo the bijection, to the LINK's
+   served document of the same place and marker (less the served marker), NOT the gallery read's: its first listed difference. Per-person
+   revealDm: the link never reveals a person (its splice's dm_full is the projection; 212 :: get_unlisted_dossier); the member the same;
+   listed where a gallery page reveals the person. THE CURE OF `get_gallery_map` THEREFORE RUNS `_gallery_apply_member_overrides` AS THE
+   LINK DOES (dm_full = the projection with the source's relationships[], prominentRelationship, pressureSentence; share_dm false), then
+   `_gallery_veil(..., true)`.
+N84 (2) NO NEW TWIN for the member: its proof by value is the door-equality arm, server against server (the link has its twin).
+N84 (3) THE WORLD SNAPSHOTS (both map reads, served as stored): MEASURED BEFORE THEIR RED, inside unit (1): on both stored sets and the
+   fixtures, does a snapshot or a section hold a settlement copy, a person, a `publicProse` block, or a string the lane's name search hits:
+   by path and count.
+N84 (4) THE NAMED RISK R4-IDS x `_gallery_doors_chronicle` (after the re-key every person reads as gone; no log target matches a shown id):
+   measured AT THE MERGE of R4-IDS; ITS ARM: a person the served body shows stays shown in the chronicle (an entry naming only shown
+   people is served), red first on the merged tree if the re-key breaks it.
+N84 (5) the map import's paid gate: the chair's, not this unit's.
+N85 (1)-(3) THE FROZEN RULE ON EVERY LIST: `list_curated_dossiers` (011) and `list_featured_dossiers` (168) print a frozen share's COPY's name
+   and tier (both read only `is_public` rows: no unpublished town appears; by reading, 11:05); red first by a plant (publish frozen; rename and
+   re-tier the live town; both lists must print the copy's), after MAP-COVERT and (c2). The other 33 of the census's wider net: each enrolled
+   in the walker with a "no veil needed" row and its reason.

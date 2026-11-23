@@ -21,7 +21,7 @@ Written 10:49 UTC 2026-11-23.
 ### (3) IN FLIGHT
 - chain0 (the machine).
 ### (4) NEXT, IN ORDER (start message unit (1))
-(b) MAP-PIPELINE table; (c) MAP-COVERT RED (a builder, tests only, briefed by a committed file); (d) (c2) the doors' arms at 3e1115c81; (e) unit 0,
+(c) MAP-COVERT RED (in flight); (d) (c2) (queued); (e) TRAD4-RECUT (brief written); SNAP-MEASURE (N84 (3), a brief owed); FROZEN-LISTS (N85, after (c2)); (b) done; (c) MAP-COVERT RED (a builder, tests only, briefed by a committed file); (d) (c2) the doors' arms at 3e1115c81; (e) unit 0,
 the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the build (two builders).
 ### (5) WHAT THIS SEAT HAS READ WHOLE (N36)
 212 at 23bb8b8ae: `_gallery_veil` (:2697-:2750), `_gallery_apply_member_overrides` with header (:2817-:2941), `get_gallery_dossier`,
@@ -29,7 +29,11 @@ the TRAD-4 re-cut; (f) the door census at the tip. Then, on "R4-IDS MERGED", the
 (04704a660^..8af1cb703, 730 lines). 212 and the registry are NOT read whole by this seat.
 
 ## 2. RULINGS (numbered 46.n; the ninth chair's; each vetoable by the owner)
-(none yet)
+46.1 N84 (the chair, 10:54 UTC): the map member is the LINK's read of the same town (always public; unmarked takes the default veil); the
+     door-equality arm holds it to the LINK's document; no new twin; the world snapshots measured before their red (inside unit (1));
+     R4-IDS x the doors' chronicle measured at the merge, arm "a shown person stays shown"; the paid gate is the chair's. (Brief addendum 3.)
+46.2 N85 (the chair, 11:01 UTC): the curated and featured lists fold into the frozen rule, red first by a plant, after MAP-COVERT and (c2);
+     the other 33 enrolled with "no veil needed" rows. By reading: both lists read only is_public rows (no STOP).
 
 ## 3. Log (every hour read from `date -u`)
 - 10:41 seated; 10:43 chain0 started; 10:47 first line; 10:49 (c1) written.
