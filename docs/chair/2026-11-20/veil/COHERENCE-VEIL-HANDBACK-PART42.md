@@ -55,7 +55,9 @@ UNCOMMITTED, runs not reported. B2: stored pools dumped 07:05 (`/var/tmp/v18/t2/
 (`/var/tmp/v18/t2/stored-v40/logs/full1/`) took the mutex 09:30; 7 of 10 jobs failed at vitest start-up (config error), 3 stored jobs
 running. WIP COMMITTED AND PUSHED (ruling 116): RIVAL 9a2f8ef9a, B2 c7a4e9a4e.
 T5 (R3-TELL-5 units (iv), (v), (vi); ruling 117): brief `briefs/R3-TELL-5-IVVVI-BRIEF.md` 947c74b80; worktree `/home/user/wt/t5`,
-branch `lane/veil-40-2026-11-23-t5-wip` cut at 9a2f8ef9a; DISPATCHED after the brief's push. (iv)'s cure waits for this seat's word
+branch `lane/veil-40-2026-11-23-t5-wip` cut at 9a2f8ef9a; DISPATCHED after the brief's push; WIP 58cf00f6c PUSHED (instruments,
+the (v)(1) arm, the (vi) teeth; nothing run). T5 had spent about 508,000 builder tokens before 11:29 (the read-whole law): if it runs
+out, re-staff from its WIP and its brief. (iv)'s cure waits for this seat's word
 (after RIVAL's final is merged into T5's branch); (v)(2)'s cure waits for the chair's clearance against chain C's R5-TENSION.
 THE MUTEX's ORDER is the file `/var/tmp/v18/out/v40/mutex-order.txt` (every builder reads it): RIVAL GO; T5 WAIT; B2 WAIT.
 THE SEAT's GATES (ruling 114's sha table): instrument `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs` (ca72cfd4d, read once:
@@ -107,6 +109,17 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     gates run alone and the three take the next run: NO RUN WAITS FOR THE BUILDER. (v)(2) `currentTensions` vs chain C's
     "R5-TENSION" (N85): name the function each touches; no shared hunk (tension-wip not on origin at 11:1x: the chair told). WIP
     committed and pushed before every wait over ten minutes.
+118. THE CHAIR, 11:19: T5 as set; chain C's R5-TENSION brief `out/v41/ten/TEN-BRIEF.md` 3b2d62a78 on `lane/veil-41-2026-11-23` (its
+    builder chooses between `_gallery_veil_withhold_always` and the tension rule in `_gallery_veil_roster_choices`); the lead: the
+    line's `tests/domain/display/tensionCause.test.js` "(CAUSES-PARITY-2 F) hxd-city-138" red on the join (`lane/join-2026-11-14`
+    9b0ffaa97; joined tree `lane/veil-43-2026-11-23-join-wip` 9e6547f0f): T5 read it from stored births: the crimeWave rule takes the
+    tension; a (v)(2) form sent before that rule would not reach it (detail in T5's STOP line). The chair's read: 321,729 at 11:10.
+119. THE CHAIR, 11:28 (N88, from VEIL-43's LOWER-7 c9882d592): (1) (iv)'s CONTROLS, four relation rows that MUST STAY: 117 [Corrupt
+    City Council, Military/Guard]; 136 [Shadow Senate, Military/Guard], [Shadow Senate, Merchant Guilds], [Noble Houses, Shadow
+    Senate]; (2) (v)(3): 0-14's house-free twin serves both criminal imports: if the sent form would withhold what the twin serves,
+    STOP, the chair rules; (3) THE BAR "R3": GATE-2 read over the towns not listed by rule, the eight read apart by name (VEIL-43
+    builds the analyzer's mode); until named, the gates read as now and the STOP rule stands (worse than 4 of 92 or 20). All relayed
+    to T5.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -119,3 +132,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 10:12 ruling 115; 10:12 the state line to the chair.
 - 10:15 ruling 116; 10:18 both WIP commits pushed; builders told; the chair told.
 - 10:31 the sha instrument pushed (ca72cfd4d). 11:06 ruling 117; 11:13 T5's brief (947c74b80), worktree, T5 dispatched; the chair told.
+- 11:19 ruling 118; T5's WIP pushed (58cf00f6c); 11:28 ruling 119, relayed to T5; 11:29 PART 42 pushed.
