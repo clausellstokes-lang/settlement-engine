@@ -115,7 +115,6 @@ births and 0 moved shares without a withheld power; the four DM samples equal; t
 
 PLAUSIBLE: the 10-and-up print rule for a bare share figure; jsonb key order as the server's chip order; the pairing heuristics
 (labels of 6+ characters) as "the same place"; the 678 + 823 + 1 unsampled lines carrying the key their kind shows.
-
 ## FILES
 `pages.probe.mjs`, `pages.vitest.config.mjs`, `pages.sh`, `pages-cost.sh`, `pages-full.sh`, `pages-extra.sh`; `pages-an.mjs`,
 `vr31-an.mjs`, `PAGES-table.txt`, `vr31-table.txt`. Rows: `/var/tmp/v18/out/v43/pages/{full,extra}`.
