@@ -1,0 +1,42 @@
++ [
++   "Redwick dm=false: 9 differ: present: [\"block:defense.criminalStructure\",\"block:power.criminalUnderside\",\"block:services.criminal\"] vs [\"block:services.criminal\"] | none.show: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:services=shown\"] vs [\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:service | none.flip: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:services=shown\"] vs [\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:service",
++   "Redwick dm=true: 9 differ: present: [\"block:defense.criminalStructure\",\"block:power.criminalUnderside\",\"block:services.criminal\"] vs [\"block:services.criminal\"] | none.show: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:services=shown\"] vs [\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:service | none.flip: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:services=shown\"] vs [\"block:services.criminal=shown\",\"card:institution:inst-den=shown\",\"field:institution:inst-den:description=shown\",\"field:institution:inst-den:service",
++   "Quietford dm=false: 13 differ: present: [\"block:defense.criminalStructure\",\"block:power.criminalUnderside\",\"block:services.criminal\"] vs [] | none.state: \"hidden\" vs \"none\" | none.show: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\"] vs []",
++   "Quietford dm=true: 13 differ: present: [\"block:defense.criminalStructure\",\"block:power.criminalUnderside\",\"block:services.criminal\"] vs [] | none.state: \"hidden\" vs \"none\" | none.show: [\"block:defense.criminalStructure=shown\",\"block:power.criminalUnderside=shown\",\"block:services.criminal=shown\"] vs []",
++ ]
+
+ ❯ tests/security/criminalSwitchSalt.test.js:200:68
+    198|     expect(compared, 'every town read twice').toBe(towns.length * 2);
+    199|     expect(presentSeen, 'anti-vacuity: the reference finds groupings p…
+    200|     expect(faults, `${faults.length} of ${compared} reads differ`).toE…
+       |                                                                    ^
+    201|   });
+    202|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/criminalSwitchSalt.test.js > S1 THE ARM: the switch offers exactly what it offered before the re-key (the reference: rekeyPeople the identity) > anti-vacuity: the reference reads "none" on the town with no criminal part, and the cured tree agrees
+AssertionError: expected 'hidden' to be 'none' // Object.is equality
+
+Expected: "none"
+Received: "hidden"
+
+ ❯ tests/security/criminalSwitchSalt.test.js:209:69
+    207|     expect(ref.present).toEqual([]);
+    208|     expect(ref.none.state).toBe('none');
+    209|     expect(switchOffer(veil, sw, HAND.Quietford, false).none.state).to…
+       |                                                                     ^
+    210|   });
+    211| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 3 passed (6)
+   Start at  00:27:24
+   Duration  12.29s (transform 3.04s, setup 26ms, import 166ms, tests 12.00s, environment 0ms)
+
+[gate-tail] end:  00:27:36 up 15 min,  0 user,  load average: 0.51, 1.01, 0.67
+[gate-tail] full log: /tmp/gate-tail.6509.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

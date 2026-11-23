@@ -68,6 +68,7 @@
  */
 
 import { CARD_KINDS, applyVeil, clampVeilDeltas, defaultVeilFor, isAddressHidden, parseVeilAddress, resolveVeil } from './galleryVeil.js';
+import { readSalt } from './galleryVeilPeople.js';
 
 /** @typedef {import('./galleryVeil.js').VeilDelta} VeilDelta */
 /** @typedef {import('./galleryVeil.js').VeilDefault} VeilDefault */
@@ -122,18 +123,22 @@ export const CRIMINAL_SWITCH_WORDS = Object.freeze({
 /**
  * The family's groupings that remove something from this projection: each is applied alone and
  * the copy compared with the unveiled one (applyVeil, so the criminal income rows the two blocks
- * carry count with them).
+ * carry count with them). R4I-PAGE-2 S1 (the chair's E136 (b)): every copy is projected under ONE
+ * salt (readSalt, drawn once here and passed to each applyVeil call), so two copies differ only
+ * where the grouping removed something, never by the re-key's spelling of a person's id. This is
+ * the owner's own page: no share read passes a salt.
  * @param {unknown} payload  galleryPayloadFor's output, the curate screen's own copy
  * @returns {Set<string>}
  */
 export function presentCriminalGroupings(payload) {
-  const plain = JSON.stringify(applyVeil(payload, []));
+  const salt = readSalt();
+  const plain = JSON.stringify(applyVeil(payload, [], { salt }));
   /** @type {Set<string>} */
   const out = new Set();
   for (const d of defaultVeilFor(payload)) {
     const p = FAMILY.has(d.cls) ? parseVeilAddress(d.address) : null;
     if (!p || (p.type !== 'tab' && p.type !== 'block')) continue;
-    if (JSON.stringify(applyVeil(payload, [d.address])) !== plain) out.add(d.address);
+    if (JSON.stringify(applyVeil(payload, [d.address], { salt })) !== plain) out.add(d.address);
   }
   return out;
 }

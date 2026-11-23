@@ -615,12 +615,15 @@ function dropField(card, kind, field) {
  *
  * @param {unknown} publicSettlement  toPublicSafe's output (never a raw record)
  * @param {Iterable<string>|null|undefined} veil  resolveVeil's output
+ * @param {{ salt?: string }} [opts]  R4I-PAGE-2 S1 (the chair's E136 (b)): the read's salt, passed ONLY by the owner's own
+ *   curate switch (criminalVeilSwitch.js :: presentCriminalGroupings, whose copies must compare under one salt); absent,
+ *   one is drawn for this call, as before. No share read passes one, and the server takes none from a caller.
  * @returns {Rec}
  */
-export function applyVeil(publicSettlement, veil) {
+export function applyVeil(publicSettlement, veil, opts) {
   const s = /** @type {Rec} */ (deepClone(isRec(publicSettlement) ? publicSettlement : {}));
   // R4-IDS (item 1; VR10): ONE salt for this projection call, its whole payload (212 :: _gallery_veil draws one a call)
-  const salt = readSalt();
+  const salt = opts && typeof opts.salt === 'string' ? opts.salt : readSalt();
   // VEIL-19 (item D): the income rows the projection holds before the veil (a row withheld re-derives the shares)
   const econ0 = recAt(s, 'economicState');
   const incomeBefore = econ0 && Array.isArray(econ0.incomeSources) ? econ0.incomeSources.length : null;

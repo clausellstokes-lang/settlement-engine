@@ -1,0 +1,42 @@
++   "vs-village-0 (c)",
++   "vs-village-0 dm (c)",
++   "vs-village-2 (c)",
++   "vs-village-2 dm (c)",
++   "vs-town-0 (c)",
++   "vs-town-0 dm (c)",
++   "vs-town-2 (c)",
++   "vs-town-2 dm (b): person 18 allegiance",
++   "vs-town-2 dm (c)",
++   "vs-city-0 (c)",
++   "vs-city-0 dm (b): person 54 allegiance",
++   "vs-city-0 dm (c)",
++   "vs-city-1 (c)",
++   "vs-city-1 dm (b): person 23 allegiance, person 34 allegiance, person 55 allegiance",
++   "vs-city-1 dm (c)",
++   "vs-metropolis-0 (c)",
++   "vs-metropolis-0 dm (b): person 11 allegiance, person 44 allegiance, person 54 allegiance",
++   "vs-metropolis-0 dm (c)",
++   "vs-metropolis-1 (c)",
++   "vs-metropolis-1 dm (b): person 18 allegiance, person 20 allegiance, person 21 allegiance, person 41 allegiance, person 71 allegiance",
++   "vs-metropolis-1 dm (c)",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:401:22
+    399|       }
+    400|     }
+    401|     expect(failures).toEqual([]);
+       |                      ^
+    402|     expect(tally.copies).toBe(24);
+    403|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 33 passed (35)
+   Start at  00:27:44
+   Duration  8.55s (transform 4.87s, setup 86ms, import 4.38s, tests 7.85s, environment 526ms)
+
+[gate-tail] end:  00:27:53 up 15 min,  0 user,  load average: 0.64, 1.01, 0.67
+[gate-tail] full log: /tmp/gate-tail.6588.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

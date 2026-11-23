@@ -1924,6 +1924,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/criminalSwitchSalt.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
     "tests/lint/veilCopySites.walker.test.js": {
       "kind": "rationale",
       "rationale": "VEIL-VR17 (the sixth chair's ruling VR17, 2026-11-19): the register of every place a non-owner surface copies a page model. The shut grouping's derived block is read on a visitor's page from the evidence IN THE DATA that the grouping is open (src/domain/display/galleryVeil.js :: GROUPING_OPEN_EVIDENCE, read by isVeiled with { publicDossier }), so a copy of the data keeps the signal; what could still break it is a copy that re-fills the removed keys, or a reader with no evidence row. Every copy idiom in the surface modules is a site `path :: symbol :: idiom` registered with a verdict (keeps, before-veil, import-save, own-record, not-page-model); unregistered, stale and moved-count sites red by name; each keeps idiom is EXECUTED on a projected page model (shut stays shut, open stays open, the owner's read unchanged); every isVeiled reader in src must name an address with an evidence row and say its audience. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY EXECUTED IN-PLACE NEGATIVE CONTROLS (VEIL-VR17, 2026-11-20, cp backup and cmp restore in the same shell, never the checkout family): clean => 6 passed; plant 1, an unregistered structuredClone of the page model in src/components/PublicDossierView.jsx :: PublicDossierView => EXACTLY 1 red, the registration arm naming the site; plant 2, src/components/new/tabs/DefenseTab.jsx's isVeiled read without its audience => EXACTLY 1 red, the reader arm naming the line; each restored byte-identical by cmp => 6 passed. A standing sweep plant would mutate a module the gallery and dossier suites share, and the sweep script is not this seat's file."
