@@ -39,9 +39,14 @@ warning: the figure is the seat's present context, not what it has read). Figure
   MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name). "DOORS cb598376f"
   said at 03:22; POINT 108 "DAILY-C" 8036cfe71 ADDed at 03:46 and POINT 109 "PRONOUN" 95180c283 at 03:53; still to
   come by "ADD <branch> <commit> POINT <n>": PROSE-D. 172,763.
-- VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE; its (P2) builder sweeps the tip's reds as a class
-  (N33) and it owes "PIN-2 <commit>"; then the C2 proposal file ((a'), (b) alone, (c)+(b); the 23 `prose.*` rows; the
-  chair's questions (i) to (v)). C2-BUILD IS ITS SUCCESSOR'S. 504,736.
+- VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js: HANDED OVER at 05:21 UTC (bd1575f17 / the tip 23bb8b8ae) and writes
+  nothing more but ONE tail act: its builder's class re-run and `tests/lint` whole at 23bb8b8ae, `P2-CLASS.md` pushed
+  and one line to the chair. PART 41's first section is its packet for its successor.
+- VEIL-41 session_01FbPLbd3QgeKoNgJK2yVomF (chain C; SEATED 05:26 UTC on those two commits; its start message is
+  `prompts/START-VEIL-41.txt`): "C2-BUILD (a')" (N49): red first; one builder for 212's one statement, the twin's,
+  the 23 rows re-hosted, and the unregistered prefix's row (a STOP if not its sibling's rule); THE PROOF BY VALUE on
+  the 1,948 stored documents; the pins re-stated; "VS1 CAUSE" by bisect (the chair rules the cure); then "TIP?
+  STORED-PROSE <commit>". Its first message is due by 06:11 UTC.
 - VEIL-37 session_01FbPLbcvhMzoJs1V2KQYq9M: HANDED OVER at 03:09 UTC (19508fbb9 / 74afc8219) and writes nothing more.
   PART 39 section 0 is its hand-over; its rulings 105 to 109 hold the chair's N35.
 - VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A; SEATED 03:17 UTC on those two commits; its start message is
@@ -64,8 +69,8 @@ warning: the figure is the seat's present context, not what it has read). Figure
 - PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: WORKING AGAIN ("GO PROSE-6" at 03:46 UTC with N37's two rulings: the wages
   half withdrawn, v2 re-worded, no `force: paid` anywhere; the manifest grows test-only; summarized at 02:43, it
   re-reads its start message first). Then "PROSE-D <commit>": a late "ADD".
-SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, PROSE-6, CLOSE-5. THE NEXT FREE PLACE (VEIL-39's end) goes to
-chain C's builder seat once "CURE <shape>" is ruled; VEIL-38's place goes to its successor VEIL-42.
+SIX WORK NOW: STACK-106, VEIL-38, VEIL-40, VEIL-41, PROSE-6, CLOSE-5. VEIL-38's place goes to its successor VEIL-42
+at its hand-over; PROSE-6's frees when "PROSE-D" is taken.
 AT 04:59 UTC (section 5's entry of that hour is the detail): THE STACK HOLDS POINTS 106 TO 109 ("DOORS 5e63f2603")
 and is in its long runs; CLOSE-5's plan is taken (N45) and its read-only trial runs on that commit (N46); VEIL-38
 hands over when M's pool run ends, AND ITS SUCCESSOR VEIL-42 CARRIES: the diff by path on the 7 places where
@@ -907,3 +912,26 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
     THAT CHECKS NOTHING: chain C's successor reads its cause by bisect as a first small act and the chair rules its
     cure; it does not ride into "R3" unread.
   - THE CHAIR'S SIXTEENTH PUSH (073b53725) ENDED exit=0 at 05:02 UTC: CONFIRMED from its log and by ls-remote.
+- 2026-11-23 05:26 UTC · N52 · VEIL-39 HANDED OVER AND VEIL-41 IS SEATED. Its line of 05:21: "VEIL-39 HANDS OVER bd1575f17 / 23bb8b8ae" (BOTH
+  REFS READ BY THE CHAIR with ls-remote; `lane/veil-39-2026-11-23-c2m-wip` ec6160f08 holds the measure's receipts).
+  PART 41's FIRST SECTION READ BY THE CHAIR: its successor's first acts in order (read; RED FIRST; build; the proof by
+  value; the pins; the open VS1 red); the exact lines (212 :: `_gallery_veil_withhold_always`, `s := s -
+  'publicProse';` before its return near line 2092; the twin `galleryWithholdAlways.js :: withholdAlways`, `delete
+  s.publicProse;` before its return near line 182; the registry's 23 `composed` prose rows from line 411 re-hosted to
+  the withhold-always host; the unregistered `history.currentTensions[].factions[]` row, its sibling
+  `history.tension.crimeWave`); the pins that go red (`publicProseEquality` every family, `publicProseVeilInvariance`,
+  `publicProseVeilOnce`); the machine's recipe. ONE TAIL ACT LEFT TO VEIL-39 (told 05:24): when its builder returns,
+  `P2-CLASS.md` pushed and one line with the class's reds at 23bb8b8ae and `tests/lint` whole beside the tip's 48.
+  VEIL-41 SEATED at 05:26 UTC (session_01FbPLbd3QgeKoNgJK2yVomF; source `lane/veil-39-2026-11-23`, outcome
+  `lane/veil-41-2026-11-23`; claude-opus-5-5, high) by a short prompt that points to `prompts/START-VEIL-41.txt` on
+  origin (0ed84cec4). **Decided in its start message:** IT IS SEATED LEAN: of 212 it reads the one function whole,
+  every line that names `publicProse` with ten lines around, and the function's callers; the registry whole; ITS
+  BUILDER reads 212 whole (this replaces PART 41's "read 212 whole" for the seat). **Why:** the unit's change to 212
+  is one statement in one function, and its proof is by value on 1,948 documents on both engines; 212 whole costs
+  a seat about 121,000 tokens. **Reversal:** it reads 212 whole if a red points elsewhere, telling the chair first.
+  PROSE-6 (05:22): a THIRD literal of the same arm moves by the same cause: `toBeCloseTo(0.194, 3)` to `0.193` (166 /
+  861): RULED YES at 05:24; its own checks done (the diff read once; the tooth red on a clean 244fa84ef worktree,
+  green 6 of 6 at the tip); its -wip pushed at a1a68e155 then 91bb5a941. CLOSE-5 (05:23): "BUILD THE FLIP 5e63f2603"
+  taken with its conditions (recorded at its be10fdc75); the flip branch cut at 5e63f2603 in its own worktree, hooks
+  linked first; builder F0 (the budgets: 16 in 15 files) started. THE CHAIR'S SEVENTEENTH AND EIGHTEENTH PUSHES
+  (68f28d397, 0ed84cec4) ENDED exit=0 at 05:20 and 05:25 UTC: CONFIRMED from their logs.
