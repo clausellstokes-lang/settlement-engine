@@ -1,7 +1,7 @@
 # F-FORTUNE: the hand anchors of the fortune lane's files, re-pinned lit (CLOSE-6's builder; not committed)
 
 Written 2026-11-23 (`date -u` 10:4x UTC). Worktree `/home/user/wt/flip`, branch `lane/close-6-2026-11-23-flip`, from its tip
-9df6731ee (both laws lit by 2bc483fc8). COMMIT: `__SHA__` (one commit, 18 test files by explicit pathspec; nothing pushed).
+9df6731ee (both laws lit by 2bc483fc8). COMMIT: f02f969c2 (one commit, 18 test files by explicit pathspec; nothing pushed).
 Logs and probes: `/tmp/claude-0/-home-user-settlement-engine/237fca18-9a05-575d-8f9a-f8032f4bd46d/scratchpad/flip/F-FORTUNE/`
 (`run0.log` before, `run2.log` after, `lint2.log`, `probes/*.probe.test.js` and their `.out`).
 
@@ -130,7 +130,7 @@ r2r-hamlet-17 (Contested) -> hamlet-28 (16 already a key); r2r-thorp-19, -25 (Co
 - Before (run0, the tip 9df6731ee): 20 files, 18 failed / 2 passed; 287 tests, 35 failed / 252 passed.
 - After (run2, the final tree): 20 files, 1 failed / 19 passed; 287 tests, 1 failed / 286 passed. The one red is the listed
   R13 (`defenceParts` "the martial will (R13, R14) > R13 ..."), left red by the brief. No test dropped (287 both runs).
-- `tests/lint` whole (lint2, the final tree): __LINT__
+- `tests/lint` whole (lint2, the final tree): 3,374 tests, 3,371 passed, 3 failed: the line's three (proseComposed A0b; proseCorpusBytes RAW and GZIP). An earlier run (lint.log) had a fourth, `proseDrawnAnchors` (my V1 literals), fixed before the commit.
 - `npx eslint` on the 18 files: exit 0.
 - The lighting register (`sovereigntyLightingContract.walker`) stayed green despite the renamed titles (both lint runs).
 

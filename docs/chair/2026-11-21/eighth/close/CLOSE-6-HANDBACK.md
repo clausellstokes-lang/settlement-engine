@@ -16,6 +16,7 @@ THE FLIP BRANCH'S COMMITS (CLOSE-5's six, see its section 0), then mine:
 | commit | what | proved by |
 |---|---|---|
 | 9df6731ee | (CLOSE-5's last: F-SEAT-2) | CLOSE-5 lit 29/29 |
+| f02f969c2 | F-FORTUNE: 34 rows (PREMISE 17, BORN 16, STORED 1) in 18 files; R13 stays red; GONE 0 | builder: 20 files 35 red -> 1 (R13), `tests/lint` the line's three, eslint 0; seat read the diff: 4 rows PROVE LESS (Batch1 r2r-city-0 KEEP; 3V1 city-37 and hamlet-27; bar4 (e2) KEEP): sent back as F-FORTUNE-2 (same builder, resumed 11:1x); seat's re-run AFTER F-FORTUNE-2 |
 
 UNIT (2), the census-blind files: DONE by CLOSE-5 (points 106-109 in the Q8 trial; 110-112's five files lit at ec43beb7f, 352/352).
 "PROSE-E cf104777c" SENT by the chair at 10:10 UTC (N80; `origin/lane/prose-6-2026-11-23-e-wip`, 12 files vs 9b0ffaa97): merged
@@ -31,7 +32,8 @@ header + arm 7, red first) -> registers by their doors -> `close/FOR-THE-OWNER.m
 BEFORE the PR's merge and the deploy, only after the security reader's clearance and one top-tier read of 212's final text) ->
 "FLIP <commit>".
 
-IN FLIGHT: the F-FORTUNE builder (dispatched 09:23 UTC) in `/home/user/wt/flip`; report to `close-6/reports/F-FORTUNE.md`.
+IN FLIGHT: F-FORTUNE-2 (the same builder, resumed) in `/home/user/wt/flip`; report appended to `close-6/reports/F-FORTUNE.md`.
+THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
 1. No pull request, ever; push only `lane/close-6-2026-11-23*`, by the local branch's own name, `git ls-remote` first, only when
