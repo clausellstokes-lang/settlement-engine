@@ -57,7 +57,7 @@ successor is seated with the start message named below.
 - VEIL-40 (session_01FbPLbfZtJ6FDJfq3MCUbon) HANDED OVER AND STOPPED: `lane/veil-40-2026-11-23` at a3bc0dc9d. Its
   packet is `docs/chair/2026-11-20/veil/COHERENCE-VEIL-HANDBACK-PART42.md`, section 1, block 0 ("VEIL-40 HANDS OVER").
 - VEIL-48 (session_01FbPLbbhLQxTNjSrMJPCXX2) was seated at 16:09:51 UTC; the pause order reached it at 16:29 (its
-  first line and one surprise crossed it). PAUSED AT 9e5697d40 (`lane/veil-48-2026-11-23`; every run stopped at
+  first line and one surprise crossed it). PAUSED AT 2787f454c (`lane/veil-48-2026-11-23`; its second line; every run stopped at
   16:30:34 UTC; no builder was ever started). ITS PAUSE BLOCK IS PART 47, SECTION 1, BLOCK 0. Its start message
   `prompts/START-VEIL-48.txt` (on this lane) IS THE PACKET FOR A RESUME.
 - WHAT VEIL-48 FOUND IN ITS TWENTY MINUTES: (a) the rival and PIN-3 merge into the code branch plainly, with no

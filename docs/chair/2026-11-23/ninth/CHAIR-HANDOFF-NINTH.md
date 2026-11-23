@@ -17,9 +17,18 @@ IS STOPPED OR STOPPING AT A SAFE POINT (two runs in flight were let finish; noth
 ONE FILE: `docs/chair/2026-11-23/ninth/VEIL-PAUSED-HANDOFF.md`: READ IT BEFORE ANY VEIL WORK; the paragraphs below this
 one describe the veil AS IT RAN BEFORE THE PAUSE. THE LANE'S TIP IS `lane/veil-41-2026-11-23-tip` AT b58abc48b (N89).
 THE CHAIR'S WHOLE WORK IS NOW THE CLOSE LANE: the flip (CLOSE-6, session_01FbPLbdgc4c1sT8zUVj5fi9, on
-`lane/close-6-2026-11-23-flip`; "13G" done at 3b5a37a23; then F-JOIN's re-pins, F9 with the sample town's two
-narrations put to the owner, F8, the registers, FOR-THE-OWNER.md, "FLIP <commit>"), THEN ITS LANDING ON THE WORKING
-LINE (`lane/join-2026-11-14` at 9b0ffaa97) BY A LANDING SEAT THAT NEEDS THE OWNER'S ONE LINE TYPED IN ITS OWN SESSION.
+`lane/close-6-2026-11-23-flip`). AT 17:09 UTC (N118, N119): DONE THERE: "13G" 3b5a37a23, its door 1fe19098f, F-JOIN
+21b0d74b5 (77 rows re-pinned, none gone; its three stops ruled in the form of bar4 (e2)); on the f9 branch the twin
+(F9 A) b5746594d. LEFT, in order: F9 B's one commit (the sample town's emit with the home page's paragraph
+`landing.realm.body2` re-written: THE OWNER'S VETO POINT, put to him whole, N118), F8, the f9 branch's merge, the
+mutation manifest's door, the registers, one build, FOR-THE-OWNER.md (migrations 204 TO 210; it says first that the
+working line is not to be released before the veil's hiding is in it: N117), then "FLIP <commit>". THEN ITS LANDING ON
+THE WORKING LINE (`lane/join-2026-11-14` at 9b0ffaa97): THE CHAIR READS THE FLIP'S CHANGED LINES AND SENDS "ADD
+lane/close-6-2026-11-23-flip <commit> POINT 113" TO STACK-106 (session_01FbPLbbPKhMeTbvdP2ZQmPt: idle, 393,328 used,
+the owner's line of 02:37 stands in its session); a fresh seat by `prompts/DRAFT-START-STACK-113.txt` ONLY IF THE OWNER
+SAYS "fresh"; after the landing's report THE CHAIR ALONE MOVES THE WORKING LINE and writes the landing's rows. THE
+NEXT HOURLY CHECK IS trig_01YGHr43QZ7qTByhhu8Gde3x AT 18:10 UTC. STILL AWAITED OF THE VEIL: "VEIL-43 PAUSED" (after
+its PAGES run) AND "VEIL-41 PAUSED" (after its proof, about 18:00 to 19:00): each is written into the hand-off.
 THE PULL REQUEST'S MERGE, THE DEPLOY, EVERY MIGRATION AND THE SIGNINGS STAY THE OWNER'S HAND.
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
@@ -31,7 +40,9 @@ decisions to you" (2026-11-23: the chair decides; NEVER read as a grant of the m
 credential, a signing or a permission setting); SIX CHILDREN WORK AT A TIME; "Can you fix these:"; "Fix all:". He is
 answered first and in full, in very simple words. His last word is the line he typed to STACK-106 at 02:37 UTC (below).
 
-NOTHING IS OPEN WITH HIM NOW. THE OWNER WROTE IN STACK-106's OWN SESSION at 02:37 UTC (read from that session's record
+OPEN WITH HIM AT 17:09 UTC, NONE BLOCKING THE LANE: his veto on the home page's new paragraph (N118); whether the
+landing seat is STACK-106 again or a fresh one (the plan: STACK-106); his decision on pages published before the veil
+(asked again before any release of the veil). THE OWNER WROTE IN STACK-106's OWN SESSION at 02:37 UTC (read from that session's record
 by a helper: a user event from the iOS client, with no cross-session marker): "You may merge the lanes the chair names
 into your branch. Go ahead." IT GRANTS STACK-106's merges, into its own branch, of the lanes the chair names by "ADD",
 AND NOTHING ELSE: no grant to any other seat or to the chair, and never of the pull request's merge, the deploy, a
@@ -42,8 +53,13 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 16:05 UTC (the helper's read, its clock 16:05:11 to 16:05:19; NO FIGURE FELL since 15:07; every seat last
-served on claude-opus-5-5): CLOSE-6 358,884 (unchanged: one long turn); VEIL-40 510,085 (HANDED OVER at 16:00: VEIL-48
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 17:09 UTC (the chair's own three get_session calls, between 17:09:02 and 17:09:21 by its clock; NO FIGURE
+FELL since 16:05; each configured, set and last served on claude-opus-5-5; the account's limit reads "seven_day:
+allowed_warning", no overage): CLOSE-6 390,895 (+32,011; running; IT HANDS OVER BY 570,000 AT A STEP'S END: not near);
+VEIL-43 518,594 (running: it writes its pause block after PAGES); VEIL-41 552,120 (idle since 16:14:41: its proof runs
+unattended and a watcher pushes its receipt); VEIL-48, VEIL-42 AND VEIL-44 ARE PAUSED, VEIL-40 HAS STOPPED, PROSE-6
+WAITS: not read. THE FIGURES OF 16:05 UTC (history; the helper's read, its clock 16:05:11 to 16:05:19; no figure fell
+since 15:07): CLOSE-6 358,884 (unchanged: one long turn); VEIL-40 510,085 (HANDED OVER at 16:00: VEIL-48
 takes its place when it has stopped); VEIL-41 544,898 (+16,335: its proof is at the gates on the tip; its line is
 660,000 for this proof alone: N99); VEIL-42 449,024 (unchanged: it waits on its SQL builder); VEIL-43 511,162 (+9,757:
 IT NEARS ITS HAND-OVER: `prompts/DRAFT-START-VEIL-46.txt`); VEIL-44 405,102 (+12,000); PROSE-6 361,559 (idle; it waits
@@ -3466,3 +3482,114 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   its machine at 16:11:46; it found that three scripts PART 42 names lived only in VEIL-40's `/var/tmp` and that the
   stored pools died with that machine (both noted in the veil's hand-off). THE FIFTY-SECOND PUSH (b09407647: N116, the
   veil's hand-off, `fill49.py`, the tip's name corrected in START-VEIL-48.txt) ended exit=0 at 16:19:04 UTC.
+- 2026-11-23 17:11 UTC · N118 · THE THREE PAUSES CONFIRMED (VEIL-44, VEIL-42, VEIL-48); THE LANDING PLAN (STACK-106
+  AGAIN); THE SAMPLE TOWN: ITS NARRATION UNCHANGED, THE HOME PAGE'S PARAGRAPH RE-WRITTEN (THE SEAT'S DRAFT IS THE
+  WORKING TEXT; THE OWNER'S VETO POINT).
+  (1) THE PAUSES, EACH READ BY THE CHAIR AND WRITTEN INTO `VEIL-PAUSED-HANDOFF.md`: "VEIL-44 PAUSED 25cb48fde" (queued
+  16:22:35; `lane/veil-44-2026-11-23`; PART 46 section 0): its SQL builder stopped at d56bc1ab6 (212 and the rollback
+  edited as WIP, UNPROVED; no proof run); the door -wip at db9fddc7d (TRAD4-RECUT merged there after its own re-run, 5
+  of 5, exit 0); every branch pushed and equal to origin; nothing merged into the tip. "VEIL-42 PAUSED 47f8d31fe"
+  (queued 16:31:38; PART 44 section 1 block (0), read by the chair): -r4ids-wip ab05aa487; -sql2-wip 040a405e0
+  (R4I-SQL-2, WIP, UNPROVED, not merged: `_gallery_veil_rekey` and, for N106, the two guard lines of
+  `_gallery_veil_roster_choices` at f7db7b9a7: by the builder's own runs red 352 to 0 master-born, 33 to 0 the
+  control, no today-born read moved 6,720 of 6,720, the lint pin red then green; NOT re-run and NOT read by the seat);
+  -tonight-wip 57e847ce8; -meas-wip d71a3ee44 (the instrument frozen at 5130df7df). VEIL-48 (seated 16:09:51) DID NOT
+  SEE THE PAUSE ORDER SENT WITH PRIORITY "next" INTO ITS LONG FIRST TURN and worked on; its line "A SURPRISE" (queued
+  16:24:56): its merged code branch (aa54a6791 + the rival 61a99a90d + PIN-3 b58abc48b, both merges plain) WAS REFUSED
+  BY THE PRE-PUSH HOOK: `src/domain/veil/pageRederive.js`: 1 strict error (TS2345 at :283:
+  `annotateFactionStanding(seats, ..., { publicLegitimacy })` against a `seat` parameter typed null); NOT ITS (the
+  same red on 0544c77ad, measured); not bypassed. THE CHAIR, with priority "now": STOP; the pause order again; the
+  surprise RECORDED, NOT CURED (one fact from the chair: the flip's 13G commit 3b5a37a23 gives that writer a JSDoc
+  typing `seat`, so the error leaves at the join with the line; whether to cure it on the lane before is the next
+  chair's ruling). "VEIL-48 PAUSED 9e5697d40", then "VEIL-48 PAUSED 2787f454c" (queued 16:37:33: its block 0 also
+  names what was read and the packet for whoever resumes): every run stopped 16:30:34; no builder ever started; its
+  two merges re-made with trailers (172bf7a1a, 20f718815). NOT EXPLAINED, for whoever resumes: how aa54a6791 and
+  0544c77ad were pushed with that strict error standing (the hook's fast path may check only the files a push
+  changes). A RULE FOR THE CHAIR: an order that must stop a seat is sent with priority "now"; "next" did not reach a
+  seat in a long first turn.
+  (2) THE LANDING PLAN. STACK-106 READ BY THE CHAIR (get_session): idle, completed, 393,328 of 1,000,000, its branch
+  `lane/stack-106-wip-2026-11-23`; the owner's line of 02:37 stands in its session ("the lanes the chair names"); its
+  own prompt provides added points. THE PLAN: at "FLIP <commit>" the chair sends "ADD lane/close-6-2026-11-23-flip
+  <commit> POINT 113" to STACK-106; a fresh seat by `prompts/DRAFT-START-STACK-113.txt` only if the owner says "fresh"
+  (told to him in plain words; he has not answered, so the plan stands). WHY NOT A FRESH SEAT BY DEFAULT: a fresh
+  seat's merge of another session's branch was refused by its own check twice on 2026-11-23 (N9, N13) and needs a line
+  typed by him in that session; STACK-106 holds that line already and has more than half its context free. THE
+  ACCOUNT'S LIMIT reads "seven_day: allowed_warning" on the seats' records: THE CHAIR SPENDS LITTLE (few pushes, short
+  lines, no helper where three reads do).
+  (3) THE SAMPLE TOWN'S TWO NARRATIONS (CLOSE-6, queued 16:32:29; `close-6/reports/F9.md`): THE STOCK NARRATION IS A
+  HAND-WRITTEN CONSTANT (`scripts/generate-landing-fixture.mjs :: STOCK_NARRATION`, copied into the fixture, never
+  derived): OLD and NEW (lit) BYTE-IDENTICAL: "The road made Cnocby by a coin's width, three chances of it against two
+  of nothing, and the mountain stands are being cleared faster than they grow back. The village keeps a smith on four
+  chances in a hundred, more than doubled by the mountain and by what lies near it."; its three receipts did not move.
+  WHAT MOVES, the arrival's opening line: OLD "The first person you meet on the road into Cnocby wants to know your
+  business, and the second already knows it. ..." NEW "Cnocby has no one thing to look at as you come in, only a great
+  many small ones: a mended fence, a painted door, a bench beside a house. ...". PUT TO THE OWNER AT ONCE in plain
+  words (he may object; no answer yet).
+  (4) F9 B's STOP (CLOSE-6, queued 16:55:28, read 16:55:33): the emit is as CLOSE-RECIPE 5c expects
+  (`landingFixture.js` 8,337 to 8,361 lines; freshness both green; 122 of 123 landing tests), but
+  `tests/copy/landingProseGrounding.test.js` "the realm body narrates the advance timeline the fixture carries" turns
+  RED: the home page's copy `src/copy/landing.js :: landing.realm.body2` (:197 on the line, read by the chair) says
+  "by week nine control of the village's water was passing to the Elder Council", and LIT the sample town's twelve
+  weeks no longer hold that capture. THE LIT TIMELINE: week 1 "Cnocby turns to the faith of Vael" ("After a long
+  contest of devotion, Vael has become the patron creed of Cnocby."); week 3 a war footing; week 4 the faiths' split
+  over; week 10 O'Neill shields; week 10 crime; week 12 the routes. ALSO MOVED ON THE SAMPLE TOWN: the temple's
+  why-trace 30 to 24; trust "strained to critical" becomes "adequate to strained"; legitimacy 14 to 33. THE OLD
+  PARAGRAPH: "Then advance time. In Cnocby's first twelve weeks the split between the faiths ended, leaving its
+  sectarian memory behind, and the village went onto a war footing; by week nine control of the village's water was
+  passing to the Elder Council; then Uathach O'Neill set out to shield their people as crime took hold of its streets;
+  and by week twelve its trade routes had broken down, its traders with little to sell. Every one of those is a record
+  the engine wrote, and every one carries its cause." THE SEAT'S DRAFT (the test's spoken weeks [9, 12] become [3,
+  12]): "Then advance time. In its first week Cnocby turned to the faith of Vael, its patron creed after a long
+  contest of devotion; by week three the village had gone onto a war footing, and soon the split between the faiths
+  ended, leaving its sectarian memory behind; then Uathach O'Neill set out to shield their people as crime took hold
+  of its streets; and by week twelve its trade routes had broken down, its traders with little to sell. Every one of
+  those is a record the engine wrote, and every one carries its cause." **Decided (N118), sent after the clock read
+  16:55:** THE SEAT'S DRAFT IS THE WORKING TEXT, word for word; COMMIT B GOES ON (the emit, `body2`, the test's weeks:
+  one commit); IT IS THE OWNER'S VETO POINT: put to him at once, old against new whole, with the three readings that
+  moved; a word of his before "FLIP" is one more small commit, after it an added point; FOR-THE-OWNER.md carries both
+  paragraphs, the lit timeline by week and the three readings. **Why not wait for his word:** the draft keeps his own
+  clauses and changes only what the lit record changes (the smallest true text); a wait would hold the lane he ordered
+  first; his veto costs one line at any time before a release. ALSO IN THAT LINE: F9 A (the twin) b5746594d stands, 3
+  red by name; one more register door is owed after the merge (the mutation manifest: CLOSE-1's own enrolment
+  ba0e1c288, by pick).
+  (5) THE CHAIR'S PUSHES: the fifty-second (b09407647: N116, the hand-off, fill49.py, START-VEIL-48's tip corrected)
+  exit=0 at 16:19:04; the fifty-third (be40b09a8: N117, the hand-off's item 0, the probe) exit=0 at 16:28:24; the
+  fifty-fourth (7785b4394: DRAFT-START-STACK-113.txt; the probe renamed to `covertcopy.probe.js.txt`, since a
+  `*.test.js` under docs/ could be collected by vitest) and the fifty-fifth (5ea47e98f: the hand-off with three seats
+  paused) exit=0, the last at 16:37:32, ls-remote equal to the local tip. THE REMINDER trig_01YGHr43QZ7qTByhhu8Gde3x:
+  its stored text re-written for the paused state (the server's clock read 16:29:21).
+- 2026-11-23 17:11 UTC · N119 · F-JOIN TAKEN (21b0d74b5: 77 ROWS RE-PINNED, NONE GONE); ITS THREE STOPS RULED IN THE
+  FORM OF bar4 (e2), WITH THREE CONDITIONS; THE HOURLY CHECK OF 17:09.
+  (1) CLOSE-6's LINE (queued 17:06:29): "F-JOIN 21b0d74b5" PUSHED on 1fe19098f: 42 test files, no src, every changed
+  code line read by the seat. 77 ROWS: PREMISE 39; BORN ANCHOR 34 and the P31 SEAT row (r2r-town-34 becomes town-30);
+  GUARD 1 (`governingModifierSurfaces` city-56 becomes city-17, the guard whole); STORED PIN 2 (`magicAudience` 54 to
+  63; `magicMeasuresApart` 26 to 29); 67 re-picked by premise, the originals kept; GONE 0. Its builder's lit run: 49
+  files, 45 red to 3 (524 of 527); `tests/lint` whole: the line's three; the lighting census green. NOTHING DROPPED
+  FOR THE OWNER. ITS JUDGEMENTS BY RULING 7 (the next size): `bar5LawBandFloor` to bar0-thorp-calm-rand-185;
+  `bar7Lines` to bar0-town-calm-rand-74 and -131; `bar3PeoplePowers` MG to r2r-city-51; `tailPowers3` G2 to
+  r2r-hamlet-43; `tensionCause` to r2s-recently_betrayed-city-1. A same-seed re-pin it checked: `seatKeeper`'s absence
+  line now reads "a claimant circles" (the plural form stays pinned in `powerTabSupport`). THREE STOPS, "CASES EXTINCT
+  LIT": no birth found with the laws on that holds the case: `bar6CrimeOneReading` C51048 (2,700 births searched);
+  `mintedFaceUnderworld` r2r-metropolis-39 (2,080; only the arm's own rows hold it); `churchNoteReadsFlag` (1,740).
+  Its lean: the form of bar4 (e2).
+  (2) **Decided (N119), sent after the clock read 17:06:** F-JOIN TAKEN. THE THREE STOPS TAKE THE FORM OF bar4 (e2)
+  (N92): the assertion's own birth under law 1 in that assertion's own config, the original assertion and title
+  restored, its comment naming the births searched lit and their count. THREE CONDITIONS: (a) each restored assertion
+  is seen RED once with its guarded line broken (or its first red is cited by commit), so that it is no dead guard;
+  (b) the lit arm beside it stays untouched; (c) FOR-THE-OWNER.md says of each, in one plain sentence, WHAT KIND OF
+  TOWN NO LONGER OCCURS WITH THE LAWS ON, and that towns stored before still show it. **Why:** the code still serves
+  every town stored before the flip, so its guard must keep biting; a case that the lit births no longer produce is a
+  reason to say so to the owner, never a reason to delete a guard. OWED WITH ITS NEXT LINE: the three reds of its own
+  lit re-run of the 49 files, by name.
+  (3) THE HOURLY CHECK, MADE AT 17:09 (one minute before its reminder; the chair's own three get_session calls between
+  17:09:02 and 17:09:21 by its clock; no helper): CLOSE-6 390,895 (16:05: 358,884; +32,011), running, its record last
+  moved 17:06:57; VEIL-43 518,594 (511,162), running, last moved 16:53:21, its summary "veil paused; PAGES run
+  finishing, then pause block and push"; VEIL-41 552,120 (544,898), IDLE since 16:14:41, its summary "receipt watcher
+  push in flight; waiting for END" (its proof of STORED-PROSE runs unattended, as the pause order allows). NO FIGURE
+  FELL; each configured, set and last served on claude-opus-5-5; the limit "seven_day: allowed_warning", no overage.
+  THE PAUSED SEATS (VEIL-48, VEIL-42, VEIL-44), VEIL-40 AND PROSE-6 WERE NOT READ. No notification was queued.
+  "VEIL-43 PAUSED" and "VEIL-41 PAUSED" ARE STILL AWAITED: the hand-off's sections 2.6 and 2.5 are filled when they
+  come; the hand-off's line for VEIL-48 now reads 2787f454c.
+  (4) OPEN WITH THE OWNER (none blocks the lane): his veto on the home page's new paragraph (N118 (4)); whether the
+  landing seat is STACK-106 again or a fresh one (the plan: STACK-106); his decision on pages published before the
+  veil (asked again before any release of the veil).
