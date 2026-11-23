@@ -34,6 +34,11 @@ IF YOU ARE THIS SEAT AFTER A SUMMARY: tell the chair in one line; re-read the st
   (re-made by VEIL-33's `out/v33/legacy/dump.sh <tree> <outdir> <seed index>`, LP 45/30/1, today-born from a tree at aa54a6791 and
   master-born from a detached worktree of db832c892, after the pool seeds exist). THIS SEAT'S OWN SCRIPTS ARE ALSO ONLY HERE:
   `/var/tmp/v18/out/v48/{chain0,chain1,dump-after,queue1,push}.sh`; chain1 = `out/v37/seated/chain1.sh` with v37 -> v48 names.
+- STOOD ON a3bc0dc9d. READ: CLAUDE.md, OPERATING_STANDARD; COMMON-EIGHTH, COMMON-RULES, START-VEIL-40, START-VEIL-37 whole; VEIL-36's
+  bound paragraphs; VEIL-29's security lines; E94 E115 E116 E126 E128 E134 E136; N33 N35 N36 N48 N63 N67 N77 N81 N86 N88 N90 N92 N94
+  N95 N96 N98 N99 N101 N102 N104 N106 N111; READERS-LIST rows 16 18 19 22 25 26 28 30 34; PART 42 section 1 and rulings 110-130; the
+  RIVAL, SSKIP and PAGE-B briefs whole; GATE-MAP and LOWER7 by totals. THE WHOLE PACKET FOR WHOEVER RESUMES: the start message
+  (`docs/chair/2026-11-23/ninth/prompts/START-VEIL-48.txt` on `lane/chair-2026-11-08`) with PART 42's block 0, and this block.
 - THE NEXT STEP ON RESUMPTION, unchanged: the machine (pool seeds, stored dumps), then SSKIP's deciding count (`out/v40/sskip/count.sh`
   on 0544c77ad, both pools) to the chair, then the open list below.
 
