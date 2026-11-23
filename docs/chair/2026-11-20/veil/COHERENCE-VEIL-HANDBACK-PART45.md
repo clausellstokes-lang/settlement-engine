@@ -1,39 +1,48 @@
 # COHERENCE-VEIL — hand-back, PART 45: the forty-third seat (VEIL-43), THE JOIN'S SEAT of the share veil (the ninth chair; "JOIN-PREP", the eighth chair's E119). PART 42 is VEIL-40's, 43 VEIL-41's, 44 VEIL-42's. Start message: `docs/chair/2026-11-23/ninth/prompts/START-VEIL-43.txt` on `lane/chair-2026-11-08` (at 28ef8d10c). A NON-WRITER of the veil lane's tip.
 
-## 1. WHERE THIS SEAT STANDS (THE SEAT'S MEMORY: kept current at every push; for a reader who has never seen this session)
+## 1. WHERE THIS SEAT STANDS (THE SEAT'S MEMORY; written 12:14 UTC for a successor who has never seen this session; read with the start message `docs/chair/2026-11-23/ninth/prompts/START-VEIL-43.txt` on `lane/chair-2026-11-08`)
 
 ### (1) BRANCHES, WORKTREES, MACHINE
-- `lane/veil-43-2026-11-23` (this file, the scripts, measures): seated on abc98362d67ef69cb8fde6818460f6bc14a4e2e6 (VEIL-42's documents at 08:10 UTC). Checkout `/home/user/settlement-engine` (its `node_modules` and `.husky/_` are links to `/home/user/join43`'s; both in `.git/info/exclude`).
-- `lane/veil-43-2026-11-23-join-wip` (THE JOIN): created at the line's tip 9b0ffaa97 (point 112), the veil's tip 23bb8b8ae merged in, the line FIRST parent: MERGE 9e6547f0f77f719072ffb1506e6f11c3d23a1ed7, tree 0f84f5f06 (= the staged tree; lint-staged moved nothing). Worktree `/home/user/join43` (npm ci done, hooks in: core.hooksPath .husky/_).
-- THE MACHINE (this container): PG16 at `/var/tmp/v18pg`, socket `/var/tmp/rv7` (after a reboot: `su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`); out `/var/tmp/v18/out/v43`; pool `/var/tmp/v18/t2/pool-v43`; template `v28tpl` (= `v27x211` + the join tree's 212). The chain: `out/v43/chain0.sh` (this branch), run from /home/user/join43 through `scripts/gate-mutex.sh --run`.
+- `lane/veil-43-2026-11-23`: this file, every script, brief and table (checkout `/home/user/settlement-engine`; its `node_modules` and `.husky/_` are links to `/home/user/join43`'s, in `.git/info/exclude`). THE BUILDER COMMITS ON IT TOO (its files under `out/v43/meas/`, `lower7/`, `pages/`).
+- `lane/veil-43-2026-11-23-join-wip` = THE JOIN: merge 9e6547f0f77f719072ffb1506e6f11c3d23a1ed7 (first parent the line 9b0ffaa97, point 112; second the veil tip 23bb8b8ae), tree 0f84f5f06 (= the chair's own re-made merge). Worktree `/home/user/join43` (npm ci, hooks). The eleven conflicts all at the line's side, nothing re-pinned; the worklist is the probe's `conflicts.md` (`origin/lane/veil-33-2026-11-22-joinprobe-wip` df7447e58).
+- THE LANE'S TIP NOW (the chair, 11:36): b58abc48b on `lane/veil-41-2026-11-23-tip` ("PIN-3", test-only, one commit over 23bb8b8ae: `tests/domain/display/criminalVeilSwitch.test.js`). NOT YET MERGED INTO THE JOIN: the next re-make of the join takes it (N4); only that file re-runs.
+- SCRATCH WORKTREES (detached, never committed into): `/home/user/lanetip` (23bb8b8ae), `/home/user/linetip` (9b0ffaa97, made by chain1-lane).
+- THE MACHINE: PG16 `/var/tmp/v18pg`, socket `/var/tmp/rv7` (after a reboot: `su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`); template `v28tpl` (= `v27x211` + the join's 212, equal to the veil tip's); pools `/var/tmp/v18/t2/pool-v43` (the join) and `pool-v43lane` (the lane tip; EQUAL); out `/var/tmp/v18/out/v43/`. A FRESH CONTAINER: `sh scripts/gate-mutex.sh --run -- sh docs/chair/2026-11-20/veil/out/v43/chain0.sh` from /home/user/join43 (about 50 minutes: instruments, pool, verify, gates).
+- PUSHES ONLY BY `sh docs/chair/2026-11-20/veil/out/v43/push.sh <worktree> <branch> <log>` (ls-remote against the tip, a skip if equal, a kill if the whole check starts: once, 11:19-11:29, a push with nothing to send ran `npm run check`; killed before test:ratchet; config clean; the ref had reached origin by no push of this repository's). One heavy run at a time through `scripts/gate-mutex.sh --run`; a background task dies at two hours: split long chains.
 
-### (2) DONE
-- Unit (0): merge 9e6547f0f (tree 0f84f5f06 = the chair's own re-made merge), the same eleven at the line's side.
-- (1)(b) SITES: 16 unregistered, the probe's own (points 88: 14, 84: 1, 85: 1).
-- (1)(a) GATES, COMPLETE: GATE-1 4/92 every setting both reads, twin = server, LOWER BY RULE 7, GATE-2 20 cells; the lane's pool at 23bb8b8ae EQUAL shard for shard; the lane's gate table identical (`out/v43/lanepool/`); chain B's comparer (aa5e3f30f, `out/v43/wd/`) L1 0/3,360 gallery + 0/3,360 link (`wd/towns-table-at-9e6547f0f.txt`).
-- GATE-MAP (`out/v43/GATE-MAP.md`): GATE-1's four all (v); GATE-2 could not read 0 (the seven fail it everywhere).
-- LOWER-7 (`out/v43/lower7/LOWER7.md`, c9882d592): ten "+ -> 0" rows without a rule, all served by the house-free twin too; at city/metropolis 27/27 governing-criminal places show inst+chains; members 0 of 7; "EIGHT" never in a table.
-- (1)(c) REDS so far: `tests/lint` 65 red (3 listed) at 10:48; named files 8 red: NEW (sent 11:14) `fortuneLawMerits` U5a (S) 19/19, `fortuneLastingSentence` U7b (d) 2/6, `tensionCause` CAUSES-PARITY-2 F hxd-city-138; also publicProseEquality 3 (N49's walkers), troubleHooksShared (E75 (c)), criminalVeilSwitch VS1 (the tip's).
+### (2) DONE, EACH WITH ITS INSTRUMENT AND RECEIPT
+- (1)(a) GATES, COMPLETE (sent 09:22, 10:20, 10:31): `chain0.sh` -> GATE-1 4/92 every setting both reads, twin = server, LOWER BY RULE 7, GATE-2 20 cells (`out/v43/lanepool/tell2-table-join-9e6547f0f.txt`); `chain-lanepool.sh` -> the lane's pool EQUAL 8/8 shards, its gate table identical but for paths and timings (`out/v43/lanepool/`); `chain-wd.sh` (chain B's comparer, aa5e3f30f, copied unchanged under `out/v43/wd/`, run by `wdrun.sh` from a mirror; MEAS_BIJ=0, L1 only) -> 0/3,360 gallery, 0/3,360 link (`wd/towns-table-at-9e6547f0f.txt`).
+- (1)(b) SITES (sent 08:33): the walker's ARM A 16 unregistered, the probe's own (point 88: 14; 84 `goals.js :: refusalRowsOf`; 85 `factionLeaderSecret.js :: GUILD_REWRITTEN_WORDS`).
+- (1)(c) REDS ON THE JOIN (`chain1.sh`, `chain1b.sh`; tables `out/v43/reds/`; classify by `node out/v43/fails.mjs <json> <RED-AT-LINE.tsv>`): `tests/lint` 65 red (3 listed); the 42 files naming the veil's functions 8 red; `tests/security` 3 red. NEW, SENT: `fortuneLawMerits` U5a (S) 19/19 and `fortuneLastingSentence` U7b (d) 2/6 (the governance paragraph reads `publicLegitimacy.breakdown.*` and `history.legacyAnnotations`, withheld always: the chair's lead, 11:35), `tensionCause` CAUSES-PARITY-2 F hxd-city-138, `traditionDescriptionSharedPage` TRAD-2 UNIT 2 x3 (point 88). Known: publicProseEquality 3 (N49), troubleHooksShared (E75 (c)), criminalVeilSwitch VS1 (the tip's; PIN-3 cures it). NOT YET CLASSED: the 65 of tests/lint against the lane tip's own (chain1-lane).
+- (1)(d) HOOKS (12:07): 11/462, naming 0, server = twin (`out/v43/hookgap/hookgap-table-at-9e6547f0f.txt`).
+- GATE-MAP (`out/v43/GATE-MAP.md`) and LOWER-7 (`out/v43/lower7/LOWER7.md`, c9882d592): ruled by N88 (section 2).
+- Row 5 answered (12:13): the line holds four office lines, L8 to L11; L12 is not built.
 
 ### (3) IN FLIGHT
-- `chain1b.sh` (tests/security whole, then the hook gap, on the join; out `/var/tmp/v18/out/v43/c1`), then `chain1-lane.sh` (the lane tip's lint/named/security and the LINE tip's named files, scratch worktrees `/home/user/lanetip`, `/home/user/linetip`; out `/var/tmp/v18/out/v43/c1lane`). Classify: `node out/v43/fails.mjs <json> <RED-AT-LINE.tsv>`.
-- The builder: LOWER7-B (sp.ops account on 106/104, N88 (3) STOP 2), then V43-MEASURE (DAILY, NAMES; every door).
-- PUSHES ONLY BY `out/v43/push.sh <worktree> <branch> <log>` (a push with nothing to send ran the whole check once, 11:19-11:29, killed before test:ratchet; cause unknown).
+- `chain1-lane.sh` (background, behind the mutex): the lane tip's tests/lint, named files, tests/security, and the LINE tip's named files, by name (`/var/tmp/v18/out/v43/c1lane/`). Then class every red of (c): the line's (RED-AT-LINE), the lane's at its tip, the worklist's, or NEW (a NEW one sent at once).
+- THE BUILDER (an Agent subagent of this session): LOWER7-B (STOP 2's line: the served house behind "Gambling Halls" and "Red Light District" on 106/104, DM own; WIP f24636996), then `briefs/V43-PAGES-BRIEF.md`, then `briefs/V43-MEASURE-BRIEF.md`'s NAMES (DAILY withdrawn). If the builder is gone, seat a fresh one on the brief in hand (its WIP commits are on this branch).
 
-### (4) NEXT, IN ORDER (the chair's, 11:35)
-- REDS whole, classed; HOOKS; DAILY; NAMES; then "REDS-CAUSE" (one message: per red the input paths, the rule/unit that withholds them, server vs twin; (S) against (R) for the two fortune reds; (v)(2)'s class for hxd-city-138); then the analyzer's listed-apart mode (N88 (5)). THEN STOP: the chair rules unit (2).
-- UNIT (2) ADDITIONS: GUARD-PIN (N86: `lane/page-12-2026-11-21-guardline-wip` at 3ac002b5e, its diff read first; the pin carried; dark and lit; a doors arm: `npcs[].settlementCondition` served on no door); VR42-NOTICE (N88 (6): one line on the curate screen, words proposed, the chair's to rule). Unit (2)'s order (08:31): what touches neither 212 nor the registry first; the sites' rows and (ix)'s SQL LAST.
+### (4) OPEN, IN ORDER (the chair's order, 11:48)
+1. STOP 2's line (LOWER7-B) to the chair. 2. REDS whole, classed. 3. PAGES (F) then (N) (cost first; over ninety minutes said first). 4. NAMES. 5. REDS-CAUSE, ONE message of at most 250 words: per red the input paths, the rule or unit that withholds each, server vs twin; for the fortune reds (S) serve unchanged vs (R) print the stored result, and the chair's lean (fail closed on a veiled read, the fuller re-derive after the first deploy) costed; hxd-city-138 against chain A's (v)(2) class; the paragraph's counts read from PAGES. 6. The analyzer's listed-apart mode (N88 (5)): a docs tool; the list a committed file (town, rule, family, direction); a tooth. 7. STOP: the chair rules unit (2). UNIT (2) THEN HOLDS: the worklist's eleven and the registers; arm (D); the namesInSentences walker; section 7's instruments; GUARD-PIN (N86); VR42-NOTICE (N88 (6)); the sites' rows and (ix)'s SQL LAST, after the lane's three chains reach the tip.
 
 ### (5) WHAT THIS SEAT HAS READ WHOLE
-- Not 212, not the registry (start message (5)).
+- NOT 212, NOT the registry. The start message's reading list (2) to (4) only.
 
-## 2. RULINGS (the ninth chair's, as they bind this seat; each vetoable by the owner)
-- 45.1 (08:31): unit (2)'s order: neither-212-nor-registry first; sites' rows and (ix)'s SQL last, after the lane's three units reach the tip.
-- 45.2 (08:34): no second whole-document comparer: chain B's runs (aa5e3f30f, copied unchanged), L1 only; L2 differs by design (N69).
-- 45.3 (08:50): DAILY and NAMES read every door, the map member among them; a covert copy there is listed apart (N76).
-- 45.4 (N88, 11:28): GATE-2 reads by-rule non-members apart, BY NAME: the seven by VR42 with E94 (inst/chains/plotHooks/tensions.crime/powers.conflicts "0 -> +"; powers.criminal "+ -> 0"; powers.capture at DM by 82) and 0-14 by 80 (2)/81. The bar R3: GATE-1 0 beside its list; GATE-2 0 over the unlisted; every listed family ruled; an unruled "+ -> 0" row is red. The list is a ratchet by name. STOP 1 (relations to a served power) STAYS; STOP 2 stays if unit (ii)'s positive account holds (one line owed); STOP 3 to chain A's (v)(3).
+## 2. RULINGS (the ninth chair's, as they bind this seat; each vetoable by the owner; the chair's own numbers where it gave them)
+- 08:31: unit (2)'s order: what touches neither 212 nor the registry first; the sites' rows and (ix)'s SQL LAST, after the three chains reach the tip.
+- 08:34: no second whole-document comparer: chain B's (aa5e3f30f), L1 only; L2 differs by design (N69).
+- 08:50: NAMES reads every door, the map member among them; a covert copy there (N76) listed apart.
+- 10:31 (N81, corrected): LOWER-7, measured (`briefs/V43-LOWER7-BRIEF.md`).
+- 11:17 (N86): GUARD-PIN into unit (2).
+- 11:19: REDS-CAUSE, after REDS whole; no cure built before the chair rules.
+- 11:28 (N88): GATE-2 reads by-rule non-members apart by name (the seven by VR42 with E94; 0-14 by 80 (2)/81); R3 = GATE-1 0 beside its list, GATE-2 0 over the unlisted, every listed family ruled, an unruled "+ -> 0" row red; the list a ratchet by name; STOP 1 stays; STOP 2 stays if unit (ii)'s positive account holds (one line owed); STOP 3 to chain A's (v)(3); the listed-apart mode and VR42-NOTICE are this seat's.
+- 11:36: the lane's tip is b58abc48b (PIN-3).
+- 11:48 (N91): PAGES (rendered read-only pages: (F) the banked 720 of `censusPlan('r2', 1)`, (N) the gate's 92) replaces DAILY; its owner-only slot check stays.
+- 12:09: the mark (the chair's read 409,431); a successor drafted; hand over at 570,000 by the chair's read or 620,000 by this seat's, at a commit boundary; builder reports at most 60 lines, by totals.
+- N74, N84 and N89 were not named to this seat by number: read them in `CHAIR-HANDOFF-NINTH.md` on `lane/chair-2026-11-08`.
 
 ## 3. Log (every hour read from `date -u`)
 - 08:28 UTC: seated; read in; merge 9e6547f0f made and committed.
 - 09:21 UTC: gates part one sent; queue and builder running.
 - 11:36 UTC: N86, N88, REDS-CAUSE taken; hand-back current.
+- 12:14 UTC: the hand-back's first section made whole for a successor (the chair, 12:09).
