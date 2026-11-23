@@ -181,3 +181,18 @@ Runs (through the mutex, lit, on the F-FORTUNE-2 tree):
 - The 18 files: 276 tests, 275 passed, 1 failed (the listed R13).
 - `tests/lint` whole: 3,374 tests, 3,371 passed, 3 failed, the line's three (proseComposed A0b; proseCorpusBytes RAW and GZIP).
 - `npx eslint` on the 4 changed files: exit 0.
+
+## F-FORTUNE-3 (the chair's ruling on the e2 STOP; one commit, `__SHA3__`, on 83baeaf14)
+Written 2026-11-23, about 12:15 UTC (`date -u`). Only (e2)'s KEEP assertion in bar4HistoryOneTelling changed. That assertion now
+bears r2s-infiltrated-hamlet-0 under LAW 1: both laws are forced to 1 in its own config (`_seatLawVersion: 1`,
+`_fortuneLawVersion: 1`, the keys `densityCreateBoundary.js :: birthConfig` mints; COMMON-RULES 14 (c)).
+- A probe (`probes/e2law1.probe.test.js`) read the law-1 birth: accepted at the history step (the twin swap's calls
+  [true, false]), Tolerated at the end, and printing the original form ('... openly and widely questioned ...').
+- Restored: /openly and widely questioned/ and the title's "Tolerated at the end". An anchored assertion pins the law-1 label
+  'Tolerated'.
+- The comment names the 2,280 lit births searched (r2r 0..199 and r2s 0..11, all sizes: 8 accepted at the history step, none
+  of them unapproved at the end). Its PLAUSIBLE reading: the fortune law's merits only add to the seat's standing after the
+  history step (FLIP-LIST-B s.1), so a seat that is accepted there ends accepted.
+- The lit STRIDE arm (`['r2s-infiltrated-hamlet-0', ...STRIDE]`) is untouched and runs lit.
+
+Runs (through the mutex): the file lit, 9 passed of 9. `tests/lint` whole: __LINT4__ `npx eslint` on the file: exit 0.
