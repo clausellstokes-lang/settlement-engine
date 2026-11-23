@@ -9,7 +9,9 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
 
 ### 0.1 BRANCHES (read with `git ls-remote origin 'refs/heads/lane/daily-5-*'`)
 - `lane/daily-5-2026-11-23`: the lane. On 72eb5c2bb (DAILY-4's last docs): 635e4acee D4C-1 merged; 41c461008 the
-  lighting census by its door; 5621ceeae the observed-shape readers' baseline by its door; then docs.
+  lighting census by its door; 5621ceeae the observed-shape readers' baseline by its door; 0c75d069f D5C-2 merged and
+  its three registers (83725b1a6, 9632b6add, 0f8bf5b21); 765ab1a9f THE LINE 244fa84ef merged, 5ef67670d its census;
+  then docs (the owner's file and figures). DAILY-C = the lane's tip at this push.
 - `lane/daily-5-2026-11-23-c2-wip` (worktree `/home/user/wt-c2`): D5C-2 phase B's builder (brief
   `briefs/D5C-2-PHASE-B.md`), cut from b6c48e5bb: a0340325c the 34 lines and `tests/domain/dailyLifeNewLines.test.js`;
   535b893a2 `measures/D5C/` (before, after, `reader.d5c.mjs`); phase B2 (the chair's ruling (b)): 3a65cc283 P16 and
@@ -47,9 +49,22 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
    landing, PARKED; DAILY-C goes on the stack after 106). Merged after item 1 and BEFORE rule 8. A trial merge at b6c48e5bb
    (scratch, removed): one conflict, `tests/lint/.lighting-census-baseline.json`; 15 files, none under src. The census at
    the line's side then its door; `HAND_CEILING` the line's 83 plus the pool TABLES D4C adds (none: rows only).
-3. The dark proof (`owner/dark-proof.mjs`, line's tip vs the lane's), rule 8 narrow, one build with the five figures.
-4. The owner's file AFTER on DAILY-B's six seeds (`owner/owner-file.mjs`; BEFORE `owner/after.md`).
-5. "DAILY-C <commit>" with the figures the prompt names.
+   DONE: 765ab1a9f the merge (the line's 14 other files byte-equal to 244fa84ef's); 5ef67670d the lighting census by its
+   door (files 3,783, parked 487, credited 3,296, titles 31,901, suiteTitles 8,867; proof 34 of 34); the observed-shape
+   check green on the merged tree (nothing to re-take).
+3. THE DARK PROOF: EQUAL. 900 births, sha256 a54e0bb8df0390a9d6e5edc799d56a0781c55d12d27e80df17de87871f888acb at the
+   line's tip (`/home/user/wt-line`, 244fa84ef) and the lane's (5ef67670d), every size equal (DAILY-B's sha).
+   RULE 8 NARROW: ONE RUN of 694 files (`tests/lint`, copy, store, architecture, docs whole; 240 that import a changed
+   module or one of its 111 exported symbols, by import clause; the lane's own changed test files; the three walkers):
+   8,857 tests, 6 red, ALL ON `RED-AT-LINE.96.tsv` by containment (proseComposed A0b; proseCorpusBytes RAW, GZIP;
+   colourMarks4h; narrativeQualityCorpus x2): DAILY-B's six. ONE BUILD (exit 0) + `VERIFY_DIST=1 tests/build`: 623
+   tests, 15 red, all on the list. FIGURES lane / DAILY-B / line: first paint 1,180,816 / 1,180,816 / 1,184,741 raw,
+   376,067 / 376,063 / 376,987 gzip, 315,708 / 315,822 / 316,646 Brotli; the worker 2,710,153 / 2,710,153 / 2,709,263;
+   the engine chunk 932,369 all three (the line's as DAILY-4 built it: 103 to 105 bring nothing under src).
+4. THE OWNER'S FILE AFTER: `owner/after-daily-c.md` (BEFORE `owner/after.md`); the figures `owner/DAILY-C.md`; DAILY-B's
+   reader figure `measures/D5C/reader.dailyb.out.txt`. DONE.
+5. "DAILY-C <commit>" to the chair: SENT with this push (DAILY-C goes on the stack after point 106).
+6. NEXT: nothing of the seat's own. The landing is the stack's (after point 106); a successor answers the chair's word.
 
 ## 1. RULINGS IN FORCE (each the chair's)
 1. E133 (1) the outsider line yields; (2) the bar: a filled sentence at 14 of 150 or under, a family at 22 or under, the
