@@ -327,6 +327,33 @@ it(`V43-PAGES (${MODE}) shard ${SHARD.join('/')}`, async () => {
       } catch (e) { writeFileSync(`${OUT}/F-${row.seed}.json`, JSON.stringify({ ...rec0, error: String(e?.stack || e) })); }
     }
     if (db) { await db.end(); const ad = new dbInfo.pg.Client({ host: process.env.PGHOST, user: 'postgres', database: 'postgres' }); await ad.connect(); await ad.query(`drop database if exists ${dbInfo.dbn} with (force)`); await ad.end(); }
+  } else if (MODE === 'V' || MODE === 'D') {
+    // (V) THE CHAIR'S N109, VR31 per birth (no render): the stored roster, P0's (toPublicSafe) and P1's (the handed page)
+    // shares, on all 720. (D) the four named births at Reveal DM: P1's Power tab against the owner's own page's (rendered).
+    const ONLYD = new Set((process.env.PG_ONLY || '').split(',').filter(Boolean));
+    const plan = W.censusPlan(W.BANKED_PREFIX, 1).map((r, i) => ({ ...r, i })).filter((r) => MODE === 'V' || ONLYD.has(r.seed)).filter((_, k) => k % SHARD[1] === SHARD[0]);
+    const roster = (d) => (Array.isArray(d?.powerStructure?.factions) ? d.powerStructure.factions : []).filter(isRec).map((f) => ({ name: String(f.faction ?? f.name ?? ''), power: f.power, hidden: f.hidden === true, gov: f.isGoverning === true }));
+    for (const row of plan) {
+      const rec0 = { seed: row.seed, size: row.size, crisis: row.crisis, i: row.i };
+      try {
+        let town = generateSettlementPipeline(W.configOf(row, DEFAULT_CONFIG, birthConfig), null, { seed: row.seed, customContent: {} });
+        town = withPublicProse(town, composePublicProse(town));
+        const rec = clone(town);
+        if (MODE === 'V') {
+          const P0 = toPublicSafe(clone(rec)); const ov = V.write(allShown(rec, false)); const P1 = pageOf(preOf(V.twin(rec, false, ov)));
+          const P0dm = toPublicSafe(clone(rec), { full: true }); const ovd = V.write(allShown(rec, true)); const P1dm = pageOf(preOf(V.twin(rec, true, ovd)));
+          writeFileSync(`${OUT}/V-${row.seed}.json`, JSON.stringify({ ...rec0, stored: roster(rec), P0: roster(P0), P1: roster(P1), P0dm: roster(P0dm), P1dm: roster(P1dm) }));
+        } else {
+          const ovd = V.write(allShown(rec, true)); const P1dm = pageOf(preOf(V.twin(rec, true, ovd)));
+          const vDm = await renderViews(P1dm, false);
+          mocks.store = W.storeFor(rec, vi.fn);
+          const { container, unmount } = render(React.createElement(OutputContainer, { settlement: rec }));
+          let vOwn; try { vOwn = await W.walkDossier(container, { fireEvent, waitFor, expect }); } finally { unmount(); cleanup(); }
+          const pw = (v) => Object.fromEntries(Object.entries(v).filter(([k]) => /\/Power$/.test(k)));
+          writeFileSync(`${OUT}/D-${row.seed}.json`, JSON.stringify({ ...rec0, dm: pw(vDm), owner: pw(vOwn), diff: diffViews(pw(vOwn), pw(vDm)), stored: roster(rec), P1dm: roster(P1dm) }));
+        }
+      } catch (e) { writeFileSync(`${OUT}/${MODE}-${row.seed}.json`, JSON.stringify({ ...rec0, error: String(e?.stack || e) })); }
+    }
   } else if (MODE === 'N') {
     const hiding = []; for (const b of E.pool(2, [0, 1])) hiding.push(b);
     let k = 0;
