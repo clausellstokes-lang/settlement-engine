@@ -31,9 +31,12 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
    18:19 red on the no-house fixture (`dailyLife.test.js` "prints the EMPTY string when no recognized institutions
    present", "every slot has non-empty text + valid shape"; `dailyLifeGathering.test.js` "a place with no true line
    prints the EMPTY string"); a fourth pins the eligible ids P1-P9 ("the pick is pickVariantMixed..."). On the 900 the
-   slot prints 150/150 at every size before and after. The chair: (a) keep `[]`, re-point the three; or (b) needs, the
-   chair's words. Then merged; `samenessHideable.houseReadings.json` `hand` 447 -> 464 by its door (the walker's own
-   `handHouseReadings`); the lighting census and the observed-shape baseline by their doors; `tests/lint` whole.
+   slot prints 150/150 at every size before and after. RULED (b) by the chair (queued 01:57 UTC): P16 and P20 each need
+   `['institution: dwellings']`, words unchanged; the three 18:19 pins untouched and green; the eligible-ids pin
+   re-pointed by cause; the 900 re-measured (gathering 150/150 every size, nothing over the bar, else STOP to the
+   chair). PHASE B2's builder (brief `briefs/D5C-2-PHASE-B2.md`, f8c93b5ce) RUNNING on the c2-wip branch. Then merged;
+   `samenessHideable.houseReadings.json` `hand` by its door (the walker's own `handHouseReadings`; 447 -> 464 at phase
+   B, plus P16 and P20's dwellings); the lighting census and the observed-shape baseline by their doors; `tests/lint` whole.
 2. THE LINE: the chair (00:47 UTC) "THE LINE IS 244fa84ef6e3f8bf773b64b87d9def7c854d4f0a" (point 105; point 106, DAILY-B's
    landing, PARKED; DAILY-C goes on the stack after 106). Merged after item 1 and BEFORE rule 8. A trial merge at b6c48e5bb
    (scratch, removed): one conflict, `tests/lint/.lighting-census-baseline.json`; 15 files, none under src. The census at
