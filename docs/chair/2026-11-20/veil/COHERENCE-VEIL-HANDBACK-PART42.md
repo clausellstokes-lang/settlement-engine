@@ -8,6 +8,62 @@ on 19508fbb9 (VEIL-37's final). No pull request, ever.
 IF YOU ARE THIS SEAT AFTER A SUMMARY: tell the chair in one line; re-read the start message (above), PART 39 section 0, and this section
 before judging anything.
 
+### 0. VEIL-40 HANDS OVER (at R5D-RIVAL's green, a step's end; the chair's N111 (1)). READ THIS BLOCK FIRST, THEN SECTION 2's RULINGS 110-130.
+WRITTEN 15:55 UTC. Every branch below is ON ORIGIN at the commit named (pushed by `/var/tmp/v18/out/v40/push.sh <worktree> <branch>`,
+which pushes only when origin lacks the local tip: use it, or the same guard, for every push).
+THE BRANCHES AND WHAT EACH HOLDS (all `lane/veil-40-2026-11-23-*`, every commit after a builder's work "WIP, UNPROVED" unless said):
+- `lane/veil-40-2026-11-23` (main checkout): documents, briefs, this file. Briefs: `briefs/R5D-PAGE-B-BRIEF.md` (+ addenda 1, 2),
+  `briefs/R5D-RIVAL-BRIEF.md`, `briefs/R3-TELL-5-IVVVI-BRIEF.md` (+ addendum 1 for T5M), `briefs/R5D-SSKIP-BRIEF.md`. The seat's gate
+  instrument (ruling 114) `out/v40/seated/tell2sha.{probe.jsx,sh}`, `shas-sum.mjs`.
+- `-r5desc-wip` aa54a6791 (worktree `/home/user/wt/r5desc`): THE CODE BRANCH: 74afc8219 (R5D-FORMS, R5D-SQL, R5D-SQL-2, R5D-PAGE-A) +
+  f0a896d73 (B phase 1: the 5b measure) + 9b1fe3c34 (PIN-2 merged) + c7a4e9a4e, aa54a6791 (B2: stored pools' arms, share class to 107
+  (1), case-blind name arms, the two titles, the N67 sha table; RETURNED AT BUDGET, see below). PIN-3 b58abc48b NOT YET MERGED (ruling 120).
+- `-r5rival-wip` 61a99a90d (worktree `/home/user/wt/r5rival`): cut at 9b1fe3c34; 9a2f8ef9a (THE CURE: 212 `_gallery_veil_roster_choices`
+  after power.entry, registry row `power.rival`, header (37); twin `galleryRosterChoices.js :: applyRosterChoices` +
+  `withholdRivalsOfWithheld`, `rivalSeatOf`; the arm `tests/security/galleryVeilRival.pglite.test.js`; manifest row) + 804fa23d2 (the red's
+  receipts; the arm lists act T's governing-seat class: its 9-line change is the only src/tests change after 9a2f8ef9a) + e58ec2f48,
+  61a99a90d (green's receipts). 212 sha256 a4df6dac94980172a30b161034563b490fae126da2a3aae13f0cc574a4c1a4b4; rollback 8cbd7d1c… UNCHANGED.
+  THIS SEAT READ ITS DIFF WHOLE (15:5x-15:55): NO FAULT. Notes for the record: 212 and twin compute the open and stamped seat keys once per
+  pass over both lists, then move both, to a fixpoint; a masked row is neither (its rival leaves); a governing row never moves; the
+  structured copies now run where a house is hidden whole OR the rule took a row (`rv_out` / `rivalOut`), the later house-only rules
+  still gated on `whole`; master's top-level share re-derivation moved out of `if whole`: it fires only where this function took a row
+  (`s` starts as `doc`, the body handed in), as the builder said. Q3 at the `own` setting is COUNTED, asserted only at `shown`.
+  ITS RED (on 9b1fe3c34, full pools, its word, receipts in `out/v40/r5drival/red/`): 2,736 of 2,736 hiding rival-reads served beside the
+  withheld host; plants 36 faults. ITS GREEN (full pools, 4 shards rc 0, 15:52 UTC, `out/v40/r5drival/green/`): 0 lone of 14,528
+  rival-reads; Q3 0 (one listed class: act T's seat "noble family", 32 reads: (5e)'s measure); roster server = twin 0 misses;
+  never-there base diff 0; open places unchanged. NOT YET RUN (its runner `out/v40/r5drival/run.sh <tree> <logdir> chains|arms|after|cost`):
+  chains (E116 (4)), arms (E116 (5): the unit's pglite files and walkers, DEFAULT SLICES only, N111 (3)), after (`tests/lint`, `tests/copy`
+  whole, typecheck, eslint), cost (the cost law). The builder is waiting for "R5D-RIVAL: GO" in the order file; a successor that finds
+  it gone re-staffs from the brief and 61a99a90d.
+- `-sskip-wip` 0544c77ad (worktree `/home/user/wt/sskip`): cut at aa54a6791; R5D-SSKIP (rulings 122, 123, 127, 128): NOTHING IN src/ YET;
+  its first measure: (i), (ii) hold; (iii) holds on nothing-hidden reads; the deciding count on the 508 hiding-read rows (vs the
+  never-there page, N63's closure in it) and the master pool's 694 by four classes are its count.sh, RUNNING NOW under the lock (GO at
+  15:53). Then its cure (the seven-text skip in `pageRederive.js :: rederiveStanding`, by import) red first on a SLICE (N111 (3)).
+  ALSO ITS (ruling 124): t2p-village-infiltrated-261 and -311 dumped as saved and in the stored name arm.
+- `-t5-wip` b096065e5 (worktree `/home/user/wt/t5`): cut at 9a2f8ef9a; T5 (58cf00f6c, b690dadd2) and T5M (dd809dc4b, b096065e5): NOTHING
+  RUN; the hand-backs `out/v40/t5/T5-HANDBACK.md`, `T5M-HANDBACK.md`. BY THE CHAIR's N111 (2) T5 LEAVES THIS BOX: it becomes its own seat.
+  FOR THAT SEAT: its branch should take R5D-RIVAL's 61a99a90d (merge it: only receipts and the arm's 9 lines over its base); THE MACHINE
+  IT NEEDS: `npm ci`; the ledger ref; the cluster and template by `out/v28/seated/make-instruments.sh <checkout> <outdir>` (`PGHOST=/var/tmp/rv7`,
+  template `v27x211` = 001..211; about 8 minutes here, 03:18:50-03:26:39); its own template = `createdb -T v27x211 <name>` + the branch's
+  212; THE POOL-v40 SEEDS by `out/v27/tell2/measure/pool.sh <checkout> /var/tmp/v18/t2/pool-v40 v28tpl` (8 shards, about 23 minutes here,
+  03:26-03:49; `verify.sh` 45 / 0 differ). Its run order: T5M-HANDBACK.md (q-chain.sh tpl under the mutex; smoke; towns; pool; insurg; an;
+  Tell6; the two teeth); the chair's N102 rulings on its paper are ruling 128 here.
+THE LOCK (`/var/tmp/v18/out/v40/mutex-order.txt`, read by every builder): SSKIP GO (its count); then R5D-RIVAL's later steps; T5 off the
+box. No arm runs red and green on the FULL pools any more (N111 (3)): a builder's red and green run on its plant, named cases and a
+SLICE (the unit's standing slice, or the gate's 140 with 140 of each stored pool); the full pools are read ONCE, in the unit's proof,
+every arm of the stacked tree in one hold (RIVAL's full-pool green counts as the rival's part if its tree does not move).
+WHAT IS OPEN, IN ORDER (the successor's): (1) SSKIP's count -> the chair; SSKIP's cure, red first on a slice; (2) RIVAL's chains, arms,
+after, cost; (3) the merges: RIVAL (61a99a90d+) and SSKIP into the code branch, PIN-3 b58abc48b with them (its one file re-run), in a
+worktree of the successor's own; (4) B2's owed re-runs (`/var/tmp/v18/t2/stored-v40/logs/full2/jobs.txt`: the 7 dead jobs and the fixed
+arms: the share class's 36 on 9 RE-RUN under ruling 122, the differential's and the plant's tension fixes) on a slice; (5) B3 (brief
+addendum 2: item 5's walker + legacy arm, 5b's 13-template arm, the never-there closure in A's two files, (5d), (5e)); (6) THE UNIT's
+PROOF ONCE on the stacked tree: a NEW pool and both gates (`/var/tmp/v18/out/v40/rivalgates-run.sh`, re-pointed to the stack; ruling 114's
+sha table), every arm on the full pools in one hold, L1 (ruling 121: chain B's `out/v42/meas/` at d1bc333af, copied; its control first;
+the 140 at gallery and link; both stored sets of the 140 seeds by `dump.sh LP_A=0 LP_B=0 LP_TOWNS=1`), the two seeds of ruling 129 by
+name, the mask documents of 124, `tests/lint` and `tests/copy` whole, the 34-file set (N33), the cost law; then "TIP? R5-DESC" naming
+the doors read (gallery and link), the server = twin comparison made, the L1 count, the cost figure. Ruling 130 at the merge after
+R4-IDS.
+
 THE BRANCHES (pushed by their own names only):
 - `lane/veil-40-2026-11-23` (main checkout `/home/user/settlement-engine`): documents, briefs, this file. ec23449fc = B's brief.
 - `lane/veil-40-2026-11-23-r5desc-wip` (worktree `/home/user/wt/r5desc`): made at 74afc8219 (`origin/lane/veil-37-2026-11-23-r5dpage-wip`:
@@ -254,3 +310,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 14:07 ruling 129 (the two named seeds owed in the proof).
 - 14:38 ruling 130 (chain B's two guard lines, taken at the merge after R4-IDS).
 - 15:48 T5M handed back unrun; 15:48 the chair told: RIVAL's green 2 h+; this seat proposes to hand over at RIVAL's return.
+- 15:52 RIVAL green; 15:53 the lock to SSKIP; 15:55 RIVAL's diff read whole: no fault; section 0 (the hand-over) written.
