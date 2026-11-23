@@ -15,8 +15,8 @@ THE BRANCHES (every one pushed by its own name; no pull request):
 - `lane/veil-37-2026-11-23`: this file, the briefs, `out/v37/seated/` (the seat's pool scripts and gate table). Its tip: the commit
   carrying this section.
 - `lane/veil-37-2026-11-23-r5desc-wip` (worktree `/home/user/wt/r5desc`): eeda6a126 (= `lane/veil-36-2026-11-22-r5desc-wip`: the tip
-  af708f2fd + R5D-FORMS 4583ad3d4 + R5D-SQL 051bae78e) + R5D-SQL-2 IN BUILD (its cure committed ab6ade69a at 01:1x; runner, probe and
-  hand-back to follow). NOT PUSHED until the builder returns and the seat has read it.
+  af708f2fd + R5D-FORMS 4583ad3d4 + R5D-SQL 051bae78e) + R5D-SQL-2 ab6ade69a + a1e395ae2 (returned; read; its runner re-run by the seat in flight).
+  NOT PUSHED until that re-run is green.
 - `lane/veil-37-2026-11-23-r5dpage-wip` (worktree `/home/user/wt/r5dpage`): cut at eeda6a126; R5D-PAGE-A IN BUILD. NOT PUSHED.
 - THE LANE'S TIP: 2d7ed483f on `lane/veil-39-2026-11-23-tip` (the chair, 01:03: VEIL-39's (P), parent af708f2fd, ONE test file,
   `galleryVeilHandRows.pglite` V7-2's "STAYS" row re-stated to E97 (1); verified here: 1 file +6 -3). E116's five steps reduce to: merge
@@ -24,11 +24,25 @@ THE BRANCHES (every one pushed by its own name; no pull request):
   the next whole run, no new pool. NOT YET MERGED. A second test-only commit may follow (`gallery.test.js` "a share marked with a veil").
 
 THE BUILDERS (subagents of this seat; a successor re-staffs from the brief and the -wip if a builder is gone):
-- R5D-SQL-2 (E136 (a), the mask in the name slot): brief `briefs/R5D-SQL-2-BRIEF.md` (fa74c778d); dispatched 00:20 on the -wip. Its
-  hand-back will be `out/v37/r5dsql2/R5DSQL2-HANDBACK.md`, its runner `out/v37/r5dsql2/run.sh`, its probe `r5dsql2.probe.jsx`. STATE:
-  building; UNREAD. ITS ACCEPTANCE (the chair's order 01:16: FIRST, BY THIS SEAT): its diff read once against its brief and 212; its
-  runner re-run, which also re-runs R5D-SQL's own builder-only proofs (the walker 11 of 11; 001..211 + 212 + down = 001..211; the cut =
-  the reference; server = twin; the cost law); then the new tip merged in; push.
+- R5D-SQL-2 (E136 (a), the mask in the name slot): brief `briefs/R5D-SQL-2-BRIEF.md` (fa74c778d); dispatched 00:20; RETURNED 01:4x
+  (481,243 builder tokens). COMMITS on the -wip: ab6ade69a (the cure) and a1e395ae2 (hand-back `out/v37/r5dsql2/R5DSQL2-HANDBACK.md`,
+  runner `run.sh`, probe `r5dsql2.probe.jsx`, `g-cases.mjs`, `cost.mjs`, `out/`). 212 5ad8493af040a6148732d342c6beba67a17c4840f75468816060ad44be3df46c;
+  rollback 8cbd7d1c…, 211 eface6d0…, 210, the registry and `standingForms.ids.json` byte-unchanged; no helper added, removed or
+  re-signed. The literal sha256 2dced4651450f4b0f341d447aeee5d6971317523b46fb384c93aa9c69906676b, 24,079 chars; 16 rows' `re` moved
+  (every row with a name or label slot), the same 117 ids. ITS RUNS (the builder's): --check 0 (and its changed-copy red), registry
+  --check 0, walker 11/11, typecheck 0, eslint 0, 001..211 + 212 + down = 001..211 (480 functions), 0 helpers callable by anon or
+  authenticated, PROOF exit 0, SQL = twin = reference 7,555 / 7,555 (6,009 + 1,546 mask cases), probe 72 towns 288 reads twin = server,
+  0 tails left, 30 mask plants cut in both engines (red at eeda6a126: 60 of 60 served whole), the cost law WITHIN (Reveal-DM 464.3 ms vs
+  2 x 247.4 = 494.8; 463.8 at eeda6a126: this pass did not move it, the margin is thin), no served base holds the mask.
+  READ BY THIS SEAT (01:4x), ONCE: the diff of `standingForms.mjs` and `standingForms.proof.mjs` whole; 212's and the twin's diffs
+  outside the literal rows (212: one header sentence in (36); nothing else in either function); the literal byte-equal in `--print`,
+  212 (quotes undoubled) and the twin (by script); the slot wrapped in its own group (`(?:NAME|an unseen interest)`). NO FAULT.
+  ITS CALL, TAKEN FOR THE LANE, FLAGGED FOR THE JOIN: "the an unseen interest" NOT added: no template of the lane or master puts "the "
+  before a slot; those sightings came from `powerSentenceName`'s `powerNameWithArticle` (NAMES-1, d0549419b), which the WORKING LINE
+  `lane/join-2026-11-14` carries and the lane and master lack (checked). AT THE JOIN the name slot must also take "the <Name>" and
+  "the an unseen interest" (and the line's own standing forms), a migration-added row by the table's "grows" rule: the join's worklist.
+  RE-RUN BY THIS SEAT: its runner `sh out/v37/r5dsql2/run.sh /var/tmp/v18/out/v37/sql2-seat all` (also R5D-SQL's own builder-only
+  proofs), RUNNING at this push.
 - R5D-PAGE-A (items 0-4, 6-8 of `briefs/R5D-PAGE-BRIEF.md` as VEIL-37 corrected it, a48c8b9a1): dispatched 00:27; relayed 00:58 the
   chair's ruling 106 (the composed-hosts walker's header re-stated; the 23 `prose.*` rows stay red by name). STATE: building; UNREAD.
   Plant (e) is red on its branch BY DESIGN until R5D-SQL-2 is merged into it. Hand-back `out/v37/r5dpage-a/R5DPAGE-A-HANDBACK.md`.
@@ -109,3 +123,4 @@ chair's read leaves the room, else it is the successor's first act (said in the 
 - 00:44 pool END; 00:53 gates read; 00:56 (0)'s line to the chair (with the 23 composed prose rows' question).
 - 01:03 the chair: TIP 2d7ed483f on `lane/veil-39-2026-11-23-tip` (to be merged into the -wip when R5D-SQL-2 returns).
 - 01:35 chain1 END: equal to VEIL-36's at the tip (sv 1 of 80 = the stale V7-2; tests/lint whole 48 of 3,304 in the same 17 files).
+- 01:4x R5D-SQL-2 returned; its diff read once, no fault; its runner re-run by the seat launched.
