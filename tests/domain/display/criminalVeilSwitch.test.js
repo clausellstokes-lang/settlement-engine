@@ -348,17 +348,19 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         const missing = missingIn(S);
         if (missing.length) failures.push(`${label} (b): ${missing.slice(0, 5).join(', ')}`); else tally.b += 1;
         // (b)'s teeth, on this copy: the withheld capture served back on the show copy is caught; so is a family value the
-        // registry does not withhold (the crime types) withheld on it.
+        // registry does not withhold always (the criminal institutions, the same safety profile, withheld only where a house
+        // is hidden, so the show copy serves them) withheld on it. The crime types were this tooth's key until unit (viii)
+        // (R3-TELL-8b) made `safety.crimeTypes` a built withhold-always row: no copy serves them now, so they try nothing.
         const sp = S.economicState?.safetyProfile;
         if (raw['safety blackMarketCapture'] !== undefined && isRec(sp)) {
           teeth.capture.tried += 1;
           const planted = JSON.parse(JSON.stringify(S)); planted.economicState.safetyProfile.blackMarketCapture = raw['safety blackMarketCapture'];
           if (missingIn(planted).includes('safety blackMarketCapture')) teeth.capture.caught += 1; else failures.push(`${label} (b) teeth: a served blackMarketCapture passed`);
         }
-        if (servedAs['safety crimeTypes'] !== undefined && isRec(sp)) {
+        if (servedAs['safety criminalInstitutions'] !== undefined && isRec(sp)) {
           teeth.other.tried += 1;
-          const less = JSON.parse(JSON.stringify(S)); delete less.economicState.safetyProfile.crimeTypes;
-          if (missingIn(less).includes('safety crimeTypes')) teeth.other.caught += 1; else failures.push(`${label} (b) teeth: a withheld crimeTypes passed`);
+          const less = JSON.parse(JSON.stringify(S)); delete less.economicState.safetyProfile.criminalInstitutions;
+          if (missingIn(less).includes('safety criminalInstitutions')) teeth.other.caught += 1; else failures.push(`${label} (b) teeth: a withheld criminalInstitutions passed`);
         }
 
         // (c) every other part byte-equal to the copy before the click; the hand deltas survive. The test's own second veil
@@ -407,7 +409,9 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
     expect(tally).toMatchObject({ a: 24, b: 24, c: 24, d: 24, e: 24, g: 24 });
     expect(WITHHELD_ALWAYS.length, 'the registry\'s withhold-always rows must be read, or (b) expects nothing withheld').toBeGreaterThan(0);
     expect(teeth.capture.tried, 'some copy carries the capture, or its teeth prove nothing').toBeGreaterThan(0);
-    expect(teeth.other.tried, 'some copy carries the crime types, or the other teeth prove nothing').toBeGreaterThan(0);
+    expect(teeth.other.tried, 'some copy serves the criminal institutions, or the other tooth proves nothing').toBeGreaterThan(0);
+    // anchored: WITHHELD_ALWAYS is read (its length asserted above) and the other tooth is tried on some copy (the line above)
+    expect(WITHHELD_ALWAYS.filter(re => re.test('economicState.safetyProfile.criminalInstitutions')).map(String), "the other tooth's key is withheld always by the registry: move the tooth to a family value the show copy serves").toEqual([]);
     expect(teeth.capture.caught).toBe(teeth.capture.tried);
     expect(teeth.other.caught).toBe(teeth.other.tried);
     writeTally({ ...tally, teeth });
