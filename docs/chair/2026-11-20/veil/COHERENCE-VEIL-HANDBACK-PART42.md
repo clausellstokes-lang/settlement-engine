@@ -65,7 +65,7 @@ additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/v
 `/var/tmp/v18/out/v40/rg/`), ON RIVAL's branch (or the stack with T5, ruling 117 (c)); shas recorded on every gallery read with a
 server page (hidden-house towns, every setting but g:111, off and DM).
 THE ORDER OF THE SEAT's OWN HEAVY RUNS: after RIVAL's red and green: the new pool + both gates (rivalgates-run.sh; on the stack if
-T5's three are green, ruling 117 (c)); then L1 (ruling 121): control, towns 140 (gallery, link), stored today and master (all doors).
+T5's three are green, ruling 117 (c)); then L1 (ruling 121): control, towns 140, stored today and master (gallery and link only).
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -133,6 +133,8 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     seeds, `dump.sh` with `LP_A=0 LP_B=0 LP_TOWNS=1` at this tree and at master db832c892) at every door the unit's rule touches
     (the rival's rule is in `_gallery_veil`: all four): 0 differing reads, or each listed by path with its ruling. The pool-wide run is
     the bar's. The N67 sha tables stay a receipt. Cost told the chair: about 2 h on the mutex after the pool and gates (PLAUSIBLE).
+    TRIMMED (the chair, 11:49): L1 IS THE INSTRUMENT's TWO DOORS, GALLERY AND LINK, on the 140 and on both stored sets; the import and
+    the map member have no twin (held by chain B's door-equality arm in IMPORT-DOOR): build nothing for them; "TIP?" names the two.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
