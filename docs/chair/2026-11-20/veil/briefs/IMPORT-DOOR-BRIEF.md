@@ -95,3 +95,51 @@ none of those) and the same "TIP?". "Where you work" above is SUPERSEDED: worktr
 
 ## ADDENDUM — "MAP-COVERT", THE FIRST RED (VEIL-42, chain B; the ninth chair's ruling of 08:50 UTC 2026-11-23; written before this brief is dispatched, so no successor can miss it)
 THE FINDING (R4I-MEASURE, `lane/veil-42-2026-11-23-meas-wip` d03b72941, `out/v42/meas/U-UNMARKED.md`; first reading on 2 places, r3m-town-wartime-0-29 and r3m-city-none-1-107; the full counts on both stored sets follow there): the `get_gallery_map` MEMBER SERVES A COVERT TIE'S COPY in `prominentRelationship`, byte-equal to the stored copy, at REVEAL OFF, on an UNMARKED share AND on a marked one (the default marker); `fetchGalleryMap` keeps it for the page. The gallery read, the import and the link served none on the same places. THE CAUSE, BY LINE (CONFIRMED by the chair's read at 23bb8b8ae): 211 :: `get_gallery_map` (:1392 to :1480) builds each member's `settlement` as `coalesce(_gallery_veil(pub.j, s.gallery_member_overrides, false) -> 'body', pub.j)` over `_gallery_sanitize_public_json(src.j)` and NEVER calls `_gallery_apply_member_overrides`, the one home of the covert CASE (212 :2828 to :2942: VEIL-13's ruling (5), `prominentRelationship` whole and `pressureSentence` where it tells a dropped tie). THE PREPARED BASE DOES NOT CURE IT: doors-3 (`lane/veil-doors-3-2026-11-20` 3e1115c81) restates `get_gallery_map` in its 212 at :2351 and builds the member as `_gallery_veil(_gallery_sanitize_public_json(src.j), s.gallery_member_overrides, true) -> 'body'` (:2376, :2400, :2401): the link form, but still NO call of `_gallery_apply_member_overrides`. RULED (ruling 56: one veil, every door): THIS IS IMPORT-DOOR'S FIRST RED: the door-census walker reds on a door that hands a dossier without the whole pipeline; 212 restates `get_gallery_map` (and `import_gallery_map`, `get_unlisted_map` wherever they hand a member's dossier) with the covert CASE; the twin's map path with it; red first on the two places above, then on U-UNMARKED's full counts. Not R4-IDS's; not briefed until R4I-SQL-2 is in build.
+
+## ADDENDUM 2 — "(c1)": THE DOORS' SECTION READ AGAINST THE TIP, AND EVERY LATER RULING THAT CHANGES WHAT A DOOR SERVES (VEIL-44, chain B's second seat; written 10:48 UTC 2026-11-23; nothing of 212 written)
+READ: doors-3's 212 section as ONE diff (`git diff 04704a660^ 8af1cb703 -- supabase/migrations/212_share_veil_later_cures.sql`, 730 lines,
+whole) against the tip 23bb8b8ae (212 `ff20ed89…`): 212 :: `_gallery_veil` (:2704), `_gallery_apply_member_overrides` (:2851) and the three reads
+(:2944, :3066, :3121); 211 :: `get_gallery_map` (:1392). The section's hunks still apply by text (they sit after
+`_gallery_apply_member_overrides` and inside `get_gallery_dossier` / `import_gallery_dossier`); they were written at bedd5a392, before every ruling below.
+THE ONE FACT THAT SORTS THEM: every later cure of the veil lives INSIDE `_gallery_veil` (resolve, apply, `_gallery_veil_roster_choices`,
+`_gallery_veil_withhold_always`; R4-IDS's re-key is one call there), and since VEIL-21 `_gallery_veil` returns a `body` for EVERY object it is
+handed, marked or not. So a door gets every later cure IF AND ONLY IF it serves `_gallery_veil(...) -> 'body'` of its own document, never a
+fallback. What lives OUTSIDE it is per read and must be restated by each door: the sanitiser, `_gallery_apply_member_overrides` (each
+person's revealDm / allowImport splice, the roster splice V5-4, THE COVERT CASE of VEIL-13 (5)), the DM projection, the frozen copy and
+its `copy` flag, the unmarked weight strip.
+THE LIST (each: what it asks of a door; where its rule lives; doors-3's member as written):
+ 1. N76 "MAP-COVERT" (VEIL-13 (5)): `prominentRelationship` whole, `pressureSentence` where it tells a dropped tie. OUTSIDE the veil. doors-3: SKIPPED
+    (`_gallery_veil(_gallery_sanitize_public_json(src.j), ov, true)`, no member overrides). THE FIRST RED.
+ 2. N75 (4) / ruling 57 (b): an unmarked share read as a listing is served exactly (no default veil). doors-3 gives an UNMARKED MAP MEMBER the
+    DEFAULT VEIL (VR23, the link's `true`). A RULED DIFFERENCE (VR23), listed by name in the door-equality arm. The owner's paragraph: below.
+ 3. N49 "(a')": no `publicProse` on any shared read. Inside `_gallery_veil_withhold_always` (VEIL-41's C2-BUILD; NOT at the tip: 212 still
+    trims `publicProse.blocks`). Reaches a member through `body`: doors-3 OK. The world snapshots never pass `_gallery_veil`: MEASURE whether a
+    stored snapshot holds a `publicProse` (or any settlement copy) at all (units 2, 3).
+ 4. N63 "the rival leaves with its host" (ruling 107 (3)): where the withheld set is resolved, both engines. Inside the veil (R5D-RIVAL, not at the
+    tip). doors-3 OK through `body`.
+ 5. E115, E121, E122 (R5-DESC: the standing withheld always, re-derived on the page; a base picked by another power's presence withheld always).
+    Inside `withhold_always` (chain A, not at the tip). doors-3 OK through `body`; THE MAP PAGE (`fetchGalleryMap`) must re-derive what the
+    gallery page re-derives (R5-RECENT's reader B, R5-DESC's): the twin's map path, item 6 of the build.
+ 6. Rulings 99-104 / E92-E98 (R5-RECENT, MERGED at the tip 0d9ec0113): `powerStructure.recentConflict` withheld always, its `pressureSentence` copy
+    where equal. Inside `withhold_always`: a member gets it today (211's member serves `body`) and under doors-3. Same page-reader question as 5.
+ 7. R4-IDS (E116; chain B's first unit): every person id re-keyed per read, one salt, references following. One call in `_gallery_veil`: a member
+    and the import each a fresh read's ids. TWO INTERACTIONS WITH THE DOORS' OWN CODE, TO MEASURE AT THE MERGE: (i)
+    `_gallery_doors_chronicle` finds "gone" people by comparing the projection's ids with the BODY's ids, and "shown" people by the body's
+    `npcs[].id`: once the body's ids are re-keyed every person reads as gone and no log target matches a shown id: the chronicle withholds far
+    more (fails closed; a fidelity loss: count it); (ii) the catalogue arm: `get_gallery_map` (plpgsql, volatile already: it writes
+    `view_count`) and `import_gallery_map` reach the drawer; `get_unlisted_map` and `_gallery_public_tile_rows` do not.
+ 8. E134 / N5: every proof on the document as `saves.js` stores it (both stored sets), every door read by name: the map member, the link map and
+    the map's import included (READERS-LIST row 30 (6)).
+ 9. N48: the whole-document "server = twin" (value for value, modulo the bijection) joins the proofs; THE MAP MEMBER HAS NO TWIN today (U-UNMARKED).
+10. VR40 (doors-3, built), VR41 (a-ii) narrowings (ruled, NOT BUILT: doors-3 s9b), VR43 (no build; the one-row count for the deploy note): carried as
+    doors-3 left them; VR41 and VR44 named in the registry rows they bind ((c2)).
+11. What the member SERVES LESS than the gallery read, with no ruling naming it (to be named, not cured): Reveal DM at share level
+    (`gallery_share_dm`) and per person (`revealDm`): the member is always the public projection (211's 088 design: "the SAME sanitizers as the
+    gallery"); no served marker. The door-equality arm lists these by name once the chair rules them.
+THE OWNER'S PARAGRAPH (N75 (4)): A town shared to the gallery with no veil settings of its own (an "unmarked" share, which is every page
+published before the veil existed) is shown on its own gallery page exactly as it was before the veil, apart from the few things no shared
+page ever sends. The same town placed on a shared campaign map is shown, under the doors' change, with the DEFAULT veil (the criminal houses
+and the other default-hidden things withheld), because a map's member was never published as a page of its own and its readers are treated
+like the party link's players. So one unmarked town can show more on its gallery page than on a shared map. Today's code (211's member, not yet restated) shows
+the map member about as much as the gallery page shows at Reveal off, but it leaks a secret tie's copy that the gallery page drops (MAP-COVERT), and the cure closes that leak
+in either case.
