@@ -101,7 +101,9 @@ const pair = (rule, claim, state, why, opts = {}) => ({
 
 // 9a · THE LAW AND CRIME --------------------------------------------------------------------------------------------
 // calm-times law prose (the controls C8611 C14349 C26333 C28848 C26311 C219464; bar read C42116)
-const CALM_LAW = /\b(people expect a hearing, not a beating|A functioning court and prison mean crimes carry real consequences|The old families keep the peace|A thief is known by name within a day|Thieves here know that the court sits and the cells are real|With a working court, organised crime treads carefully)\b/;
+// PROSE-E (CHAIR-2026-11-23-N70): DS-DEF-2 full legal chain v1 re-worded in place, "people expect a hearing, not a beating" ->
+// "the accused can expect a hearing, not a beating"; the same calm-law claim, so the pin reads both words.
+const CALM_LAW = /\b((?:people|the accused can) expect a hearing, not a beating|A functioning court and prison mean crimes carry real consequences|The old families keep the peace|A thief is known by name within a day|Thieves here know that the court sits and the cells are real|With a working court, organised crime treads carefully)\b/;
 // the line that says crime is kept down / quiet (C143088 C43177)
 const CRIME_KEPT_DOWN = /\b(enforcement keeps it down and keeps it from growing|keeps the streets quiet because trouble brings the law|Crime exists but is well-managed)\b/;
 // the diffuse claims, strong (no organisation at all) and limited

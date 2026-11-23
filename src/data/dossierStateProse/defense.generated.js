@@ -1358,7 +1358,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "prison",
             "law: > collapsed"
           ],
-          "text": "Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+          "text": "Offenders brought in at {settlement} are heard and held, and each case is written down, so the accused can expect a hearing, not a beating.",
           "slots": [
             "settlement"
           ],
@@ -1372,7 +1372,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "prison",
             "law: > collapsed"
           ],
-          "text": "A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.",
+          "text": "A case that reaches the court at {settlement} gets a hearing, and it is settled there rather than by the watch's temper.",
           "slots": [
             "settlement"
           ],
@@ -1767,7 +1767,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: CRITICAL": [
         {
           "angle": "ledger",
-          "text": "{settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.",
+          "text": "{settlement} cannot fund a new response to trouble, and any sustained pressure exhausts what it has almost at once.",
           "slots": [
             "settlement"
           ],
@@ -1888,7 +1888,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no crisis: famine"
           ],
-          "text": "{settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.",
+          "text": "{settlement}'s food trades are working, and what they put by would give it something to fall back on if it were cut off.",
           "slots": [
             "settlement"
           ],
