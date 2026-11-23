@@ -5,12 +5,13 @@ on 2026-11-23; the successor of CLOSE-4. Its law: `docs/chair/2026-11-23/ninth/p
 `docs/chair/2026-11-21/eighth/prompts/CLOSE-3.txt` (reading CLOSE-5 for CLOSE-3), both on `lane/chair-2026-11-08`.
 A successor reads those two, then this section, then `FLIP-PLAN.md`.
 
-## 0. WHERE THE SEAT STANDS (written 2026-11-23 05:09 UTC, read from date -u)
+## 0. WHERE THE SEAT STANDS (written 2026-11-23 05:50 UTC, read from date -u)
 
 | ref | tip | state |
 |---|---|---|
 | `lane/close-5-2026-11-23` (this lane) | this push | docs only: this hand-back; `FLIP-PLAN.md` (its section 5: the chair's rulings); `close-5/`: `ANCHORS-BY-FILE.tsv`, `WHY-DRAFT.md` (taken with the chair's change), `BUDGETS.md` + `BUDGETS.tsv` + `budgets.mjs` (commit 0's list), `CONFIGS.diff` (Q3, Q4) |
-| `lane/close-5-2026-11-23-flip` | not cut | THE FLIP: cut ONLY on the chair's "BUILD THE FLIP <tip>", from that tip |
+| `lane/close-5-2026-11-23-flip` | 5e63f2603 (no commit yet) | THE FLIP, cut at the chair's provisional "BUILD THE FLIP 5e63f2603" in `/home/user/wt/flip` (hooks linked). F0 STOPPED, NO COMMIT: its 16 budget edits sit UNCOMMITTED in the worktree (patch `scratchpad/flip/F0/F0-budgets.patch`); FENCE 1's raise moves the owner's golden-freeze register (`espionage-dormancy-fence`, 279d73c5 -> 012ad636): put to the chair (lean: drop it, 15 budgets in 14 files, the raise to FOR-THE-OWNER). WAITING for its word |
+| `lane/close-5-2026-11-23-pronoun2-wip` | 95180c283 (builder at work) | PRONOUN-2 (the chair's N54, brief `close-5/briefs/PRONOUN-2.md`): the stop marks out of string literals in `personMention.js`; worktree `/home/user/wt/pronoun2`; its builder running since 05:5x |
 | `lane/close-5-2026-11-23-lit-scratch` | b1628d34c | Q8's read-only trial: 5e63f2603 (the stack with 106 to 109) + light.sh; RUN 04:34 to 05:08: NO SURPRISE (`close-5/TRIAL-Q8.md`); merged by nobody. Worktree `/home/user/wt/lit5` (its `.husky/_` linked) |
 
 - STOOD ON: `lane/close-4-2026-11-23` at e5d1ca80a (CLOSE-4's final hand-back). The line: `lane/join-2026-11-14` at 244fa84ef;
