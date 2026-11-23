@@ -23,12 +23,16 @@ Written 10:49 UTC 2026-11-23.
   cell), stored-master exit 0; tests/lint 48 = base. RE-RUN BY THE SEAT 12:49 (3 failed | 5 passed, the same titles; `out/v44/mapcovert-rerun.sh`).
   MERGED into the door -wip at 6c7bf0b97 (12:50); tests/lint whole on it 48 failing titles of 3,304, IDENTICAL to the base's 48 (13:05, `out/v44/lint-whole.sh`); pushed 6c7bf0b97. Its STOP: one push started the whole
   check, killed (exit 143); 15 (d) checked clean.
-- TRAD4-RECUT DISPATCHED 12:49 (branch `lane/veil-44-2026-11-23-trad4-wip` at b58abc48b, worktree `/home/user/wt/trad4`).
+- TRAD4-RECUT RETURNED ~15:58 (tip c2afc9878; report `out/v44/trad4/TRAD4-RECUT-HANDBACK.md` there): `tests/security/galleryImportEqualsRead.pglite.test.js`
+  GREEN: 840 shares (140 x 3 markers x Reveal off/on): (a) import = gallery read 0 differ; (b1) fetch 0; (b2) clone 0 beyond its named rules;
+  (c) not vacuous; the tooth reds; tests/lint 48 = base. `sameModuloIds` is the identity: SWITCH IT TO `personIdBijection.shared.mjs` AT THE
+  R4-IDS MERGE. The seat's re-run queued ~15:58 (`out/v44/vitest-one.sh`, log `/var/tmp/v18/out/v44/trad4-rerun.log`); then merge into the door -wip.
+  FINDING (speed): at the tip `get_gallery_dossier` joins every public tile row per read (3.07 s at 840 rows); doors-3's one-row read cures it.
 - THE MACHINE RE-MADE (chain0 END 11:31): instruments rc 0 (--check 0, walker 0, accept 40, gate HIGHER 0 / EQUAL 79 / LOWER 13 both engines and Reveals); pool `pool-v44` 4 shards rc 0 (11:24); verify 45, 0 differ; gates rc 1 by design: GATE-1 4 at every gated setting (off and DM), LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10). EQUAL TO PART 44's standing figures.
 - Read-in as the start message orders; first line to the chair 10:47.
 - (c1) WRITTEN: `briefs/IMPORT-DOOR-BRIEF.md` ADDENDUM 2 (the eleven-item list; the owner's paragraph on N75 (4)).
 ### (3) IN FLIGHT
-- TRAD4-RECUT builder (dispatched 12:49).
+- MAPCOVERT-GREEN-SQL builder (dispatched ~15:59; brief d0e680f83; branch `lane/veil-44-2026-11-23-mcsql-wip` at 6c7bf0b97, worktree `/home/user/wt/mcsql`). NOT MERGED BEFORE "R4-IDS MERGED".
 - (c2): `out/v44/c2/doors-arms.sh /home/user/wt/doors3` through the mutex (re-queued 11:25 with GATE_MUTEX_MAX_POLLS=100000; the first try gave up, exit 3); log `/var/tmp/v18/out/v44/c2-doors3.log`.
 ### (4) NEXT, IN ORDER (written 12:12 UTC; THE CHAIR'S MARK 338,524 at 12:09: from here every measure goes to a builder and returns as counts)
 1. MAPCOVERT-RED returns: read its report (at most 60 lines) and its diff ONCE; re-run its red (the test file at the door -wip tip:
@@ -62,3 +66,4 @@ Written 10:49 UTC 2026-11-23.
 - 11:31 the machine's figures equal PART 44's (chain0 END 11:31).
 - 12:12 the chair's mark 338,524 (12:09); section 1 (4) re-written for a successor.
 - 13:06 tests/lint whole at 6c7bf0b97: 48, the base's titles; the SQL builder waits for TRAD4 (the chair, 12:55).
+- 16:00 TRAD4 returned; MCSQL dispatched; A SLIP SAID: a line to the chair carried an unread hour (13:3x for 16:00), corrected at once.
