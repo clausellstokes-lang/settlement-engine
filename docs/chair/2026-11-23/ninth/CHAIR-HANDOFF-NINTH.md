@@ -32,7 +32,10 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 11:10 UTC (the helper's read, its clock 11:10:24; NO FIGURE FELL since 10:08): CLOSE-6 258,492; VEIL-40
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 12:08 UTC (the helper's read, its clock 12:08:13; NO FIGURE FELL since 11:10): CLOSE-6 292,851; VEIL-40
+377,717; VEIL-41 473,464 (THE NEAREST: `prompts/DRAFT-START-VEIL-45.txt` is its successor's draft); VEIL-42 394,611;
+VEIL-43 409,431 (THE FASTEST, +72,191 in the hour: ITS SUCCESSOR'S START MESSAGE IS DRAFTED NEXT); VEIL-44 338,524 (87
+minutes after its seating: it read wide and is told so). THE FIGURES OF 11:10 UTC (history; no figure fell since 10:08): CLOSE-6 258,492; VEIL-40
 321,729 (it moved: its long turn ended); VEIL-41 449,951 (THE NEAREST TO ITS MARK: its own estimate 470,000; ITS
 SUCCESSOR VEIL-45's START MESSAGE IS DRAFTED WHEN THE CHAIR'S READ PASSES 520,000); VEIL-42 368,897; VEIL-43 337,240;
 VEIL-44 0 AS RETURNED (a new seat with no figure yet). THE FIGURES OF 10:08 UTC (history; no figure fell since 08:42):
@@ -190,6 +193,12 @@ CHAIN B's MUTEX ARE FREED (U and M on the pool, and "WHOLE-DOC" at the tip, drop
 and "GAP" on the master-born set it goes to its unit. THE OWNER'S DECISION ON PAGES PUBLISHED BEFORE THE VEIL IS PUT
 TO HIM (the chair recommends what is built: the gallery page as today with the covert copy no longer served; the
 party link and the map member under the default veil); NO ANSWER YET; HE IS ASKED AGAIN BEFORE THE DEPLOY.
+SINCE N90 (N91, N92): "PAGES" IS ORDERED OF VEIL-43 (N91): THE WHOLE RENDERED PAGE, by the census's own walk over the
+banked 720 births, the owner's public read against the veiled read with nothing hidden (FIDELITY), and the gate's 92
+hiding towns against each town's house-free twin (NEVER-THERE); it takes "DAILY" into itself and gives "REDS-CAUSE"
+its counts; A LINE GAINED ON A VEILED PAGE IS SENT TO THE CHAIR AT ONCE. THE FLIP BRANCH HOLDS "F-FORTUNE-2" ec216e759
+AND "PROSE-E" MERGED AS 83baeaf14 (N92); its seat goes on to LIT-13G. A PUSH WITH NOTHING TO SEND STARTS THE WHOLE
+CHECK (two seats met it): every seat now guards each push by comparing its tip with origin's first.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2462,3 +2471,80 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   11:41:14. From here the hour in a message is the last `date -u` read, as read. THE CHAIR'S PUSHES: the
   thirty-seventh (41e8ae6b9: N88, N89, the reader's row 34) ended exit=0 at 11:41:01 UTC (its log; ls-remote equal to
   the local tip).
+- 2026-11-23 12:09 UTC · N91 · "PAGES": THE WHOLE RENDERED PAGE IS COMPARED (FIDELITY ON THE BANKED 720; NEVER-THERE
+  ON THE GATE'S 92); IT TAKES "DAILY" INTO ITSELF; THE CENSUS BY FILE.
+  (1) **Decided (N91), sent to VEIL-43 after the clock read 11:48:45:** THE PARAGRAPH'S MEASURE OF N89 (2) IS WIDENED
+  TO THE WHOLE PAGE AND TAKES "DAILY" INTO ITSELF: "PAGES", on the joined tree, by the census's own walk (every tab,
+  the printed text), dark now and lit in its unit (3). (F) FIDELITY, on the census's births: P0 the owner's public
+  read (`toPublicSafe`) against P1 the veiled read with NOTHING hidden (a hand marker, everything shown): every
+  differing line by tab, classed LOST, GAINED (each one sent to the chair at once) or CHANGED, counted by class and by
+  the key whose absence causes it (the always-pass's rows, `publicProse`, the re-key). (N) NEVER-THERE, on the gate's
+  92 hiding towns: P2 the default veil's page against the page of the same town's house-free twin under the same read:
+  every differing line by tab and class; the Daily Life tab's slots and office lines are read there; the owner-only
+  slot check stays. Its order: STOP 2's line; REDS whole; HOOKS; PAGES (F) then (N); NAMES; REDS-CAUSE (it reads PAGES
+  for the paragraph's counts); the listed-apart mode. Its cost said first if over ninety minutes of its mutex.
+  **Why:** the two fortune reds were found only because one lane had written an arm for them; any page code that reads
+  a key the always-pass withholds prints something else on a veiled read, and NO PROOF OF THE LANE HAS COMPARED
+  RENDERED PAGES: the gates read a signature of the served document; the whole-document form compares the server with
+  the twin; START-VEIL-43.txt's own "DAILY", "NAMES" and "SITES" (read again by the chair) are one page's slots, a
+  name search over served strings and the registry walker's arm A. THE BAR IS ABOUT WHAT A PAGE PRINTS.
+  (2) THE CENSUS BY FILE, answered to the seat's question after the clock read 11:50:57, READ BY THE CHAIR ON THE
+  LINE: the walk and the plan are `tests/components/pageCensusWalk.shared.mjs` (`censusPlan`, `configOf`, `storeFor`,
+  `walkDossier`; `BANKED_PREFIX` 'r2'); the renderer `scripts/census/page-census.render.census.jsx`, run only by
+  `scripts/census/page-census.mjs` through its own vitest config; the suite's twelve-birth grid
+  `tests/components/pageCensus.walker.test.jsx`. THE BIRTHS ARE `censusPlan('r2', 1)`: THE BANKED 720 (360 calm, 360
+  under one forced crisis): THE CHAIR'S "900" IN ITS ORDER WAS WRONG FOR THIS (it is the prose lane's lit cross) AND
+  WAS CORRECTED TO THE SEAT. NAMED TO IT: the walk renders the page as the OWNER sees it (not read-only, premium) and
+  its renderer stamps `publicProse`; a shared read is the READ-ONLY view of a SERVED record: the builder's probe is a
+  copy of the renderer (a docs tool; the census's own files untouched) rendering the read-only view the gallery page
+  uses. THE SEAT'S BRIEF (its line queued 11:55:10): `briefs/V43-PAGES-BRIEF.md` at 8f9496eca: its FIRST step is
+  whether `walkDossier` walks the read-only view (if not, the builder stops and says what it takes); the causing key
+  is found by restoring one withheld key at a time ("JOINT" where none alone restores it); a server sample (every 24th
+  birth: its page equal to the twin's); (N) at own, Reveal off and DM; ten births and five towns timed first. OWED IN
+  THE CHAIR'S NEXT LINE TO IT: the reader's row 5 names five office lines L8 to L12 and its brief says L8 to L11:
+  which is on the line, and is L12 read.
+- 2026-11-23 12:09 UTC · N92 · THE HOURLY CHECK OF 12:10; THE FLIP BRANCH HOLDS "F-FORTUNE-2" AND "PROSE-E" MERGED;
+  ONE KEEP IS BORN UNDER LAW 1; A PUSH WITH NOTHING TO SEND STARTS THE WHOLE CHECK (ONE RULE OF HYGIENE).
+  (1) THE HOURLY CHECK (the stored reminder trig_01GLpYCurM5gcmnrfzGvWB8p, set for 12:12 UTC; the marks read by one
+  haiku helper started at 12:08): its clock 12:08:13: CLOSE-6 292,851 (its turn ended at 12:07; +34,359 in the hour);
+  VEIL-40 377,717 (+55,988); VEIL-41 473,464 (+23,513: THE NEAREST TO ITS MARK; its successor's draft is
+  `prompts/DRAFT-START-VEIL-45.txt`); VEIL-42 394,611 (+25,714); VEIL-43 409,431 (+72,191: THE FASTEST: at this pace
+  it passes 520,000 in about an hour and a half: ITS SUCCESSOR'S START MESSAGE IS TO BE DRAFTED NOW); VEIL-44 338,524
+  (ITS FIRST FIGURE, 87 minutes after its seating: IT HAS READ WIDE: told to read no more itself than its builders'
+  reports and to keep its hand-back's first section current for a successor). NO FIGURE FELL; every seat connected,
+  served by claude-opus-5-5; none is past 570,000. THE NEXT HOURLY CHECK IS SET WITH THIS ENTRY (its id in the next
+  entry).
+  (2) THE FLIP (CLOSE-6). "F-FORTUNE-2" ec216e759 is on the flip branch (queued 11:48:24; 4 test files, +24 -17: ITS
+  CHANGED LINES READ BY THE CHAIR): the crime KEEP on r2r-hamlet-161 (no r2r-city of 200 prints the form lit); the
+  hall-as-subject pair restored on r2r-town-7 and the sentence-start "answers to" pair on r2r-hamlet-128 by a computed
+  anchor; 'Surplus' restored on r2r-city-95; `defenceParts`' header line. ITS STOP, RULED AS ITS LEAN:
+  `bar4HistoryOneTelling` (e2)'s KEEP (the old form where true: accepted at the history step, unapproved at the end)
+  is held by no lit birth of 2,280: THAT KEEP IS BORN UNDER LAW 1 (both laws forced to 1 in the assertion's own
+  config, COMMON-RULES 14 (c)), its original line and title restored: it guards the places saved before the switch-on,
+  which stay law 1 and keep the old form; with a one-line comment on why the case is extinct lit and the lit arm above
+  it untouched. "PROSE-E MERGED 83baeaf14" into the flip branch (its line of 12:07: plain, no conflict; pushed); lit:
+  `bar8DesksDef`, `corpusCureGuards`, `oppositeSentencePairs` and `tests/copy` whole 302 of 302 green; `tests/lint`
+  whole running; then LIT-13G.
+  (3) A PUSH WITH NOTHING TO SEND STARTS THE WHOLE CHECK. CLOSE-6 (12:07) pushed its documents branch when origin
+  already held its tip (394746b8d): the hook started the ratchet; the seat killed it (husky code 143), read
+  COMMON-EIGHTH 15 (d) (nothing foreign), and now guards each push. VEIL-43 met the same at 11:30 (N89 (3)).
+  **Decided:** ONE RULE OF HYGIENE, sent to VEIL-40, VEIL-41, VEIL-42 and VEIL-44 after the clock read 12:07:25: a
+  push is made only when `git rev-parse HEAD` differs from `git ls-remote origin <branch> | cut -f1`, in the same
+  command, builders too; if one starts anyway: its whole process tree killed, 15 (d) read, one line to the chair. The
+  chair's own pushes go through `landing/safepush.sh`, each after a commit.
+  (4) THE OTHER SEATS' LINES. VEIL-40 on N90 (queued 11:43:55): taken: the instrument copied from d1bc333af, its
+  control biting on its stacked tree first; L1 on the 140 and on both stored sets of the 140 seeds; its cost about two
+  hours of its mutex after the new pool and gates; B2's stored jobs still held its mutex since 09:30. THE CHAIR'S
+  TRIM: L1 is the instrument's two doors, the gallery and the link; the import and the map member have no twin and are
+  held by the door-equality arm when IMPORT-DOOR lands it. VEIL-41 (11:44): N90 taken; `autopush.sh` pushes only its
+  three wip names, refuses any name not beginning `lane/veil-41-2026-11-23`, never forces, only when the tip differs
+  from origin's, and skips a branch with a merge in progress: TAKEN. VEIL-42 (11:47 and 11:51): the instrument's three
+  files last changed at 5130df7df; its positive control is `sh meas.sh <tree> <out> <tpl> handreach` with MEAS_C=1;
+  its measure queue cut as ruled (umtoday, ummaster, m140); PIN-3 merged into its -wip as 392aff978 and the one test 9
+  of 9 green there; R4I-SQL-2's brief committed (de5d1fe74), dispatched when m140 ends. VEIL-44 (11:49): the tip
+  merged into its door -wip (a fast-forward); "(c2)": doors-3's five arm files at 3e1115c81 run on its machine: 51 of
+  51, exit 0 (`out/v44/c2/C2-DOORS-ARMS.md` at 09071f070); in flight MAPCOVERT-RED; next TRAD4-RECUT, the snapshots'
+  measure, the front-page lists.
+  (5) THE CHAIR'S PUSHES: the thirty-eighth (893317748: N90) ended exit=0 at 11:47:56 UTC (its log; ls-remote equal to
+  the local tip). OWED TO THE OWNER AT THE NEXT WORD TO HIM: that the switch-on's landing will need his one line in
+  the landing seat's session, as last time.
