@@ -51,9 +51,15 @@ FIRST ACTS, IN ORDER:
     composer is unchanged). Any VR46 test outside tests/security that reads a served body's `publicProse`. THE JOIN RE-STATES THE LINE'S
     TWO WALKERS, `publicProseEquality` and `publicProseVeilInvariance`, to "a shared read serves no publicProse; the owner's read prints
     its own", each red first. Then `tests/lint` whole beside 48 of 3,304 (at 23bb8b8ae; C2M counted 49 under (c) only).
- 6. THE OPEN RED AT THE TIP, NOT YOURS UNLESS RULED: `tests/domain/display/criminalVeilSwitch.test.js` "VS1 acceptance on the projection,
-    over twelve births > (a)-(e) hold on every birth, plain and DM-revealing" (line 410, `teeth.other.tried` 0). (P2)'s class names it
-    OTHER, cause unread.
+ 6. THE OPEN RED AT THE TIP, YOUR FIRST SMALL ACT (the chair, 05:17 UTC: a liveness anchor that reads 0 checks nothing; it does not
+    ride into "R3" red and unread). `tests/domain/display/criminalVeilSwitch.test.js` "VS1 acceptance on the projection, over twelve
+    births > (a)-(e) hold on every birth, plain and DM-revealing" (line 410, `teeth.other.tried` 0). READ ITS CAUSE BY BISECT (which
+    lane commit emptied it; what the twelve births no longer hold); the chair rules the cure on that read. WHAT THIS SEAT KNOWS
+    (PLAUSIBLE, read off source at 23bb8b8ae, not bisected): the tooth (lines 356-361) is tried only where `servedAs['safety
+    crimeTypes'] !== undefined`, with `servedAs = familyContent(minusWithheldAlways(pub), defaults)`. Its own comment calls the crime
+    types "a family value the registry does not withhold". Unit (viii) (crimeTypes withheld always, c2625fb1f, into the lane at
+    929739889) made the registry withhold them, so `servedAs` never carries the key and the tooth is never tried. The suspect commit to
+    bisect is 929739889. A cure would choose another family value the registry still does not withhold (the chair rules it).
 
 DONE, WITH COMMITS:
 - (P) THE STALE PIN (E136 (e)): 2d7ed483f (parent af708f2fd; one test file +6 -3): `galleryVeilHandRows.pglite` "V7-2 THE PRESSURE
