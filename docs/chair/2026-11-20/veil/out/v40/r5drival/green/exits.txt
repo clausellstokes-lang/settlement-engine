@@ -1,0 +1,6 @@
+full: tree /home/user/wt/r5rival queued 2026-11-23T13:40:52Z
+shard-A-0-2 rc=0 2026-11-23T14:19:50Z
+shard-A-1-2 rc=0 2026-11-23T14:22:33Z
+shard-C6-0-2 rc=0 2026-11-23T15:52:06Z
+shard-C6-1-2 rc=0 2026-11-23T15:52:06Z
+full rc=0 2026-11-23T15:52:06Z

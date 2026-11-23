@@ -1,0 +1,22 @@
+== measures-A-0-2.txt
+R5DRV plants: faults 0 
+R5DRV pools: {"places":39,"births":141,"rivals":57,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":96,"reads":1536,"rivalReads":2400,"rivalServed":1440,"lone":0,"q3Shown":0,"q3Own":0,"rosterMiss":0,"baseDiff":0}
+R5DRV Q3 forms (setting, form, withheld, in the desc of, text: reads): 
+R5DRV pool faults 0 
+== measures-A-1-2.txt
+R5DRV plants: faults 0 
+R5DRV pools: {"places":39,"births":141,"rivals":59,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":97,"reads":1552,"rivalReads":2496,"rivalServed":1464,"lone":0,"q3Shown":16,"q3Own":16,"rosterMiss":0,"baseDiff":0,"q3Listed":32}
+R5DRV Q3 forms (setting, form, withheld, in the desc of, text: reads): 
+  shown | singular+lower | Noble Families | Royal Authority | noble family: 16
+  own | singular+lower | Noble Families | Royal Authority | noble family: 16
+R5DRV pool faults 0 
+== measures-C6-0-2.txt
+R5DRV plants: faults 0 
+R5DRV pools: {"places":78,"births":480,"rivals":115,"rivalsGoverning":0,"rivalsOwnStamp":0,"records":193,"reads":3088,"rivalReads":4864,"rivalServed":2896,"lone":0,"q3Shown":0,"q3Own":0,"rosterMiss":0,"baseDiff":0}
+R5DRV Q3 forms (setting, form, withheld, in the desc of, text: reads): 
+R5DRV pool faults 0 
+== measures-C6-1-2.txt
+R5DRV plants: faults 0 
+R5DRV pools: {"places":77,"births":480,"rivals":113,"rivalsGoverning":0,"rivalsOwnStamp":1,"records":190,"reads":3040,"rivalReads":4768,"rivalServed":2864,"lone":0,"q3Shown":0,"q3Own":0,"rosterMiss":0,"baseDiff":0}
+R5DRV Q3 forms (setting, form, withheld, in the desc of, text: reads): 
+R5DRV pool faults 0 

@@ -1,0 +1,2 @@
+red2 {"open shown":{"reads":1856,"rivals":2736,"served":2712,"lone":0},"hide shown":{"reads":2752,"rivals":4528,"served":4504,"lone":2736}}
+green1 {"open shown":{"reads":1856,"rivals":2736,"served":2712,"lone":0},"open own":{"reads":1856,"rivals":2736,"served":2536,"lone":0},"hide shown":{"reads":2752,"rivals":4528,"served":1768,"lone":0},"hide own":{"reads":2752,"rivals":4528,"served":1648,"lone":0}}
