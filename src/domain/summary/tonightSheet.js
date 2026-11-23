@@ -65,7 +65,9 @@ export const TONIGHT_COPY = Object.freeze({
  * voiced from the crisis cast wants what the ROLE wants, read after "Wants to". An instigator's
  * want fits an instigator, never the want of the people answering the crisis ("identify the
  * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
- * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
+ * line per person, chosen by `castHash` over the person's NAME as the card prints it, the crisis
+ * and the role: no draw (R4I-TONIGHT, the chair's rulings 40.3 (2), 40.7 (3): `castWantKeyOf`;
+ * never the id).
  * ROUND THREE (the chair's ruling): these lines are voiced ONLY for a cast person whose card carries no goal of its own
  * (`castWantOf`); a person with a goal wants what their card says they want.
  */
@@ -150,21 +152,37 @@ function castWantAdmits(line, house, noun, facts) {
 }
 
 /**
+ * THE WANT'S KEY (R4I-TONIGHT, VEIL-38/VEIL-42; the chair's rulings 40.3 (2) and 40.7 (3)): the person's NAME AS THE CARD
+ * PRINTS IT (the sheet's own `clean(npc.name)`), on the owner's page and on every shared read alike, by both callers (the
+ * sheet's `peopleOf` and the judge, coherence/crisisFactFindings.js). THE KEY NEVER READS THE ID: the served person id is
+ * re-keyed on every non-owner read (VR10), so a pick keyed on it gave a cast person another want line on each reload; the
+ * name is the one identity every read serves unchanged (measured, M, PART 40 section 1 (3) 2: 0 cast persons sharing a
+ * name, crisis and role, and 0 served names unlike the stored, on the 140 and the pool). A person with no name takes ''
+ * (M counted 0 such cast persons on both sets; `peopleOf` keeps no nameless card).
+ * @param {unknown} name the card's name @returns {string}
+ */
+export function castWantKeyOf(name) {
+  return clean(name);
+}
+
+/**
  * The want a cast person WITH NO GOAL OF THEIR OWN voices (ROUND THREE, the chair's ruling: one home for what a person
  * wants is the person's own goal, as the card prints it; the role's line only where the card carries none, and only
- * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person, the
- * crisis and the role (no draw); a line the town makes false (`castWantAdmits`) resolves draw-free to the pool's next
- * admitted line; '' where none is admitted. Filled with the crisis's scarce good and noun and the person's own house
- * (their first-rank power; '' when they hold none). A role with no pool (never voiced today) falls back to `ownWant`.
- * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant @param {string} [house]
+ * where it is true of that person in that crisis): the role's own pool, one line by `castHash` over the person's key
+ * (`castWantKeyOf`: their name as the card prints it, never the id), the crisis and the role (no draw); a line the town
+ * makes false (`castWantAdmits`) resolves draw-free to the pool's next admitted line; '' where none is admitted. Filled
+ * with the crisis's scarce good and noun and the person's own house (their first-rank power; '' when they hold none). A
+ * role with no pool (never voiced today) falls back to `ownWant`.
+ * @param {string} role @param {string} personKey the person's key (`castWantKeyOf`: the name)
+ * @param {string} crisis @param {string} ownWant @param {string} [house]
  * @param {{ seatEmpty?: boolean, forceStands?: boolean }} [facts] the town's facts a line is read against (`castWantFactsOf`)
  * @returns {string}
  */
-export function castWantOf(role, personId, crisis, ownWant, house = '', facts = {}) {
+export function castWantOf(role, personKey, crisis, ownWant, house = '', facts = {}) {
   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
   if (!pool || pool.length === 0) return ownWant;
   const noun = /** @type {Record<string, string>} */ (CRISIS_NOUN)[crisis] || 'crisis';
-  const start = Math.floor(castHash(personId, crisis, role) * pool.length);
+  const start = Math.floor(castHash(personKey, crisis, role) * pool.length);
   const line = pool.map((_, k) => pool[(start + k) % pool.length]).find((l) => castWantAdmits(l, house, noun, facts));
   if (!line) return '';
   const named = house ? powerNameInProse(house) : '';
@@ -264,7 +282,8 @@ const HOOK_COUNT = 3;
  * @property {string} role
  * @property {'seat'|'secret'|'cleric'|'cast'} why
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
- * @property {string=} castId       the cast row's id, for a person drawn from the crisis cast (the want's key)
+ * @property {string=} castId       the cast row's id, for a person drawn from the crisis cast (the judge finds
+ *                                  the card by it; the want's key is the name, never the id: `castWantKeyOf`)
  * @property {string=} castKind     the crisis kind the person was cast in (the want's fill)
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
  * @property {'want'|'secret'|'temperament'} says what `line` is: a want prints after "Wants to"; a
@@ -588,7 +607,7 @@ function peopleOf(source) {
         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
         if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) {
-          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, row.id, kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), wantFacts);
+          const roleWant = hasOwnGoal(hit.npc) ? '' : castWantOf(role, castWantKeyOf(hit.npc.name), kind, '', clean(firstRankMembershipOf(/** @type {never} */ (hit.npc), order)?.power), wantFacts);
           const own = roleWant ? { says: /** @type {'want'} */ ('want'), line: roleWant } : ownLineOf(hit.npc, { withholdSecret: withholdSecret(hit.npc) });
           add(hit, 'cast', own.line, CRISIS_ROLE_LABEL[role], own.says, { castId: row.id, castKind: kind });
           filled = true; break;

@@ -30,7 +30,7 @@ import SessionMode from '../../src/components/session/SessionMode.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
-import { castWantOf, composeTonightSheet, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
+import { castWantKeyOf, castWantOf, composeTonightSheet, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
 import { firstRankMembershipOf, powerOrderOf } from '../../src/domain/people/membership.js';
 import { effectiveCastOf } from '../../src/domain/crisis/crisisCast.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
@@ -63,7 +63,8 @@ const castLinesOf = (s, npc) => {
   return (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).filter(Boolean).flatMap((entry) => {
     const cast = effectiveCastOf(s, entry).cast;
     return (cast?.roles || []).filter((r) => r.kind === 'npc' && r.id === id)
-      .map((r) => castWantOf(r.role, r.id, String(entry.type || ''), '', String(firstRankMembershipOf(npc, powerOrderOf(s))?.power || ''))) // SW-6 (#40): re-keyed by identity — the want now reads the person's house
+      // R4I-TONIGHT-2 (rulings 40.3 (2), 40.7 (3)): RE-PINNED BY CAUSE: the want is keyed on the card's name, never the id
+      .map((r) => castWantOf(r.role, castWantKeyOf(npc.name), String(entry.type || ''), '', String(firstRankMembershipOf(npc, powerOrderOf(s))?.power || ''))) // SW-6 (#40): re-keyed by identity — the want now reads the person's house
       .filter(Boolean);
   });
 };

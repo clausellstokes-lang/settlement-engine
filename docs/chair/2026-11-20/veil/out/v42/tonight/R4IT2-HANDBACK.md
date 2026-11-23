@@ -3,6 +3,24 @@
 Branch `lane/veil-42-2026-11-23-tonight-wip` (local, never pushed), cut at 9f9b819f7. Brief `briefs/R4I-TONIGHT-2-BRIEF.md`
 at 015b3c020 (with its ADDENDUM, N59). No message from the seat about the "77" reached me.
 
+## RESUMED 08:37 UTC (the seat: N69 (4)); STATE AT THE WIP COMMIT (10:2x UTC)
+- HOLD A (07:45-08:00) and HOLD B (08:00-08:34) ran. shareRenderTwice RED FIRST (the patched harness on 9f9b819f7, R2):
+  MAIN 4 rows, every one a non-id row, the Tonight sheet's want line (metropolis-calm-2, gallery and link, desktop and
+  phone: "use this crisis to take the seat ..." | "be the one people turn to ..."); TONIGHT arm 4 rows; 2 of 5 failed. GREEN
+  (G3): 5 of 5. The 30 d-files (G4): 238 of 238, 30 files.
+- N69 (4): the probe's TWIN halves read a raw row with no served marker (M's "77" fault), and so did shareRenderTwice's TONIGHT
+  arm (`env.twinRow`, the unmarked `writeShareVeil({}, [])`): BOTH RE-POINTED in the tree to the twin's projection (gallery
+  `projectShareVeil(galleryPayloadFor(stored, ...))`, link `linkTwin.shared.mjs :: linkTwinOf`); the probe adds the server's
+  served document (L1) beside the page's read of it (L2, `servedPage`, named, not red). THE SERVER HALVES STAND:
+  server2 (a) on the 140: red 58 of 140 places (gallery|off 41) -> green 0 of 140; on the pool red 728 of 1,808 (green: not
+  yet run); (c) ownerServer on the 140: role line on both 0 (red 0), goal withheld 16 a read. THE TWIN HALVES of holds A/B
+  are NOT TRUSTED and are re-run (hold C: srt red/green and the arm on the 140; hold D: the pool red/green).
+- Trials of the re-pointed probe, 8 of the 140: uncured (a) twin2 3 of 8 places, server2 3 of 8, (b) 3 of 8; cured 0, 0, 0.
+- OWNER-MOVES: the 140, 0 lines moved of 374 people (owner-before-140 vs G1's owner dumps); the owner's page voices 0 role
+  lines on the 140 and 3 on the pool (of 837 cast persons), so the pool's count is at most 3 (after: hold D).
+- Hold C then D then E (lint, copy, typecheck) are QUEUED (`/var/tmp/r4it2/holdC.sh`, `queue3.sh`) behind R4I-MEASURE's
+  pool run, which has held the mutex since before 08:43.
+
 ## COMMITTED
 1. 550e2e427 docs: `out/v38/r4it/` brought from `lane/veil-42-2026-11-23` (said); the three-halves arm
    `out/v42/tonight/tonight-arm2.probe.jsx` + `.sh` + `-an.mjs` + `-named.mjs`; the hand-back (then a skeleton; this file now).

@@ -11,13 +11,13 @@ line('places', births.length, '| hidden-house', births.length - nh.length, '| no
 const missing = births.flatMap((b) => tags.filter((t) => b.reads[t]?.twinMissing || b.reads[t]?.serverMissing).map((t) => `${b.seed} ${t}`));
 line('reads that served no dossier', missing.length, missing.slice(0, 5).join('; '));
 if (missing.length) red += 1;
-for (const k of ['twin2', 'server2', 'twinServer']) {
-  const half = k === 'twinServer' ? '(b)' : '(a)';
+for (const k of ['twin2', 'server2', 'twinServer', 'servedPage']) {
+  const half = k === 'twinServer' ? '(b)' : k === 'servedPage' ? '(b, beside)' : '(a)';
   for (const t of tags) {
     const set = births.filter((b) => b.reads[t] && k in b.reads[t]);
     if (!set.length) continue;
     const bad = set.filter((b) => b.reads[t][k] !== null);
-    if (bad.length) red += 1;
+    if (bad.length && k !== 'servedPage') red += 1;
     line(`${half} ${k} ${t}: EQUAL in`, set.length - bad.length, 'of', set.length, '| differ', bad.length);
     for (const b of bad.slice(0, 3)) line('    ', b.seed, JSON.stringify(b.reads[t][k]).slice(0, 360));
   }

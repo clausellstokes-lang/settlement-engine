@@ -1,13 +1,18 @@
 // R4I-TONIGHT-2 item C.4, THE ARM IN THREE HALVES (VEIL-42; the chair's rulings 40.3 (2), 40.7 (2)), built on
 // out/v38/r4it/tonight-arm.probe.jsx. Per place: the DEFAULT veil (writeShareVeil({}, [])); Reveal DM off and on; the
 // GALLERY read (get_gallery_dossier) and the LINK read (get_unlisted_dossier); each read as the page receives it
-// (src/lib/gallery.js :: fetchPublicDossier, its sanitiser and veil seam) by the TWIN (an unserved row: the client's veil
-// seam projects it) twice and, where RV9_SERVER_TPL is given, by the SERVER (the scratch PG16) twice. The Tonight sheet is
+// (src/lib/gallery.js :: fetchPublicDossier, its sanitiser and veil seam) by the SERVER (the scratch PG16) twice, where
+// RV9_SERVER_TPL is given; and THE TWIN twice, as THE TWIN'S PROJECTION of the stored record (the chair's N69 (4)): the
+// gallery `galleryVeil.js :: projectShareVeil(galleryPayloadFor(stored, { shareDm, memberOverrides }), overrides)`, as the
+// server-veil tests call it, and the link `tests/security/linkTwin.shared.mjs :: linkTwinOf(stored, overrides)`. (THE FIRST
+// CUT read a raw stored row with no served marker through fetchPublicDossier, whose pre-211 unserved branch skips
+// `withholdCovertCopies`: M's "77" instrument fault; its twin figures are not trusted.) The Tonight sheet is
 // composed from each served document by the one composer (composeTonightSheet); every person's `castId` (the cast row's
 // served id, re-keyed on every read by design, VR10) is named by THE READ'S PERSON-ID BIJECTION
 // (tests/security/personIdBijection.shared.mjs :: canonPeople over that served document), every other byte kept:
 //   (a) TWO READS PRINT THE SAME SHEET   twin2: twin read 1 == twin read 2; server2: server read 1 == server read 2
-//   (b) THE SERVED SHEET EQUALS THE TWIN'S   twinServer: twin read 1 == server read 1 (same doors, same settings)
+//   (b) THE SERVED SHEET EQUALS THE TWIN'S   twinServer: twin 1 == the server's served document (L1, as served);
+//       servedPage: the server's served document == the same row read by the page (fetchPublicDossier, L2): named beside
 //   (c) ON THE OWNER'S PAGE (the stored record's own sheet), per read (twin 1, server 1), every cast person of the owner's
 //       sheet found on the served one (by name and role label), in one class:
 //         roleBoth      a ROLE line on both (no goal on the owner's card, none on the served card; a want line voiced):
@@ -47,6 +52,7 @@ it('item C.4: the Tonight sheet in three halves (two reads; served = twin; the o
   const { fetchPublicDossier } = await import(`${SRC}/src/lib/gallery.js`);
   const { composeTonightSheet, hasOwnGoal } = await import(`${SRC}/src/domain/summary/tonightSheet.js`);
   const { canonPeople } = await import(`${SRC}/tests/security/personIdBijection.shared.mjs`);
+  const { linkTwinOf } = await import(`${SRC}/tests/security/linkTwin.shared.mjs`);
   const owners = { births: [] };
   const ownerDump = (sheet, seed) => {
     if (!process.env.RV9_OWNER_OUT) return;
@@ -77,10 +83,10 @@ it('item C.4: the Tonight sheet in three halves (two reads; served = twin; the o
     db = new pg.Client({ host: process.env.PGHOST, user: 'postgres', database: dbn }); await db.connect(); await db.query(`select set_config('test.uid', '', false)`);
   }
   const ov = veil.writeShareVeil({}, []);
-  const ROW_ID = 'abcd0000-0000-0000-0000-000000000001';
-  const twin = (surface, rec, dm) => (surface === 'gallery'
-    ? { gallery: { id: ROW_ID, public_slug: 'a1', name: rec.name || 'x', tier: rec.tier || 'town', published_at: null, view_count: 0, gallery_share_dm: dm, gallery_importable: true, data: clone(rec), gallery_member_overrides: clone(ov) }, link: null }
-    : { gallery: null, link: { id: ROW_ID, name: rec.name || 'x', tier: rec.tier || 'town', slug: 'a1l', dossier: clone(rec), author_name: '', gallery_member_overrides: clone(ov), is_owner: false } });
+  /** THE TWIN'S PROJECTION (N69 (4)): each call draws its own salt, as a read does. */
+  const twin = (surface, rec, dm) => clone(surface === 'gallery'
+    ? veil.projectShareVeil(veil.galleryPayloadFor(clone(rec), { shareDm: dm, memberOverrides: clone(ov) }), clone(ov))
+    : linkTwinOf(clone(rec), clone(ov)));
   /** The server's rows for one record and one Reveal setting: two gallery reads and two link reads of one stored row. */
   const serverReads = async (rec, dm) => {
     nrow += 1; const id = `abcd7c${String(SHARD[0]).padStart(2, '0')}-0000-0000-0000-${String(nrow).padStart(12, '0')}`; const sl = `t${SHARD[0]}x${nrow}`;
@@ -136,13 +142,15 @@ it('item C.4: the Tonight sheet in three halves (two reads; served = twin; the o
       const srv = db ? await serverReads(rec, dm) : null;
       for (const surface of ['gallery', 'link']) {
         const tag = `${surface}|${dm ? 'dm' : 'off'}`;
-        const w1doc = await read(twin(surface, rec, dm)); const w2doc = await read(twin(surface, rec, dm));
+        const w1doc = twin(surface, rec, dm); const w2doc = twin(surface, rec, dm);
         const w1 = sheetOf(w1doc); const w2 = sheetOf(w2doc);
         const x = { twinMissing: !w1doc, twin2: firstMove(w1, w2), ownerTwin: ownerHalf(rec, own, w1doc, w1) };
         if (srv) {
           const s1doc = await read(srv[surface][0]); const s2doc = await read(srv[surface][1]);
           const s1 = sheetOf(s1doc); const s2 = sheetOf(s2doc);
-          Object.assign(x, { serverMissing: !s1doc, server2: firstMove(s1, s2), twinServer: firstMove(w1, s1), ownerServer: ownerHalf(rec, own, s1doc, s1) });
+          const l1doc = surface === 'gallery' ? srv.gallery[0].gallery?.data : srv.link[0].link?.dossier;
+          const l1 = sheetOf(l1doc ? clone(l1doc) : null);
+          Object.assign(x, { serverMissing: !s1doc || !l1doc, server2: firstMove(s1, s2), twinServer: firstMove(w1, l1), servedPage: firstMove(l1, s1), ownerServer: ownerHalf(rec, own, s1doc, s1) });
         }
         r.reads[tag] = x;
       }
