@@ -51,9 +51,9 @@ THE CHAIR RULED (N97, 12:58): 13g IS CURED BEFORE "FLIP" as its own commit "13G"
 registers: the card's gate reads what the tie reads (the two `seatBought ? ''` gates of `annotateFactionStanding`'s thieves/military
 branch read the record's bought row at every re-annotation after the coherence seam); lines OMITTED, no new sentence; red first
 over the 900 (3 dark, 4 lit by name; r2r-city-5); a tooth; the per-birth hash: nothing else moves (else STOP); N56.
-IN FLIGHT (since 13:07 UTC): the 13G builder (brief `close-6/briefs/13G.md`) in `/home/user/wt/flip` at 8f882d0f0; report
-`close-6/reports/13G.md`, hashes `close-6/13g/`. F-JOIN's builder is PAUSED (no edits; `close-6/reports/F-JOIN.md` has its partial
-read: `powersReadTheRosterP31` 5 red vs 4 listed, unread): RESUME IT (or a fresh one by the same brief) after 13G, values re-read.
+| 3b5a37a23 | 13G (N97): `factionDynamics.js :: tieReadsBought` (one reading; not hallCapture.js: its tuning register reds on a new importer); `annotateFactionStanding` gate `seatBoughtOf || tieReadsBought(seat.factionRelationships)`, header names the input; `rosterText.js` AFTER carries rows (roster settle), BOTH (legitimacy settle); bar8 arm over the 900 lit+dark, r2r-city-5 in TOWNS, tooth, judge-vs-cure agreement | red first by name (4 lit, 3 dark, r2r-city-5); hash lit 896=/4 moved, dark 897=/3 moved, none else; 19 naming files 10 red = same without cure (F-JOIN rows); fortune 286/287; copy 172/172; lint three + census title |
+| 1fe19098f | DOOR: lighting census (titles 31,924 -> 31,925), refreeze then plain green | the walker |
+IN FLIGHT (since 14:49 UTC): F-JOIN's builder RESUMED on 1fe19098f, its 49 files re-run from the start (report `close-6/reports/F-JOIN.md`).
 NEXT after F-JOIN: F9 B (sample town), F9 A (twin), F8, registers, FOR-THE-OWNER.md, "FLIP".
 THEN: the seat's lit re-run of the 20 files; merge PROSE-E cf104777c (plain); one line to the chair; LIT-13G builder.
 
