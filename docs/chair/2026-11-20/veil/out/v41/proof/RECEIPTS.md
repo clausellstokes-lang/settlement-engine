@@ -79,3 +79,13 @@ TODAY: GATE-1 allOpen (off 4, dm 4); any gated setting (off 4, dm 4); LOWER BY R
 TODAY: GATE-2 L3 any gated setting, non-members (off 10, dm 10); Fisher cells below 0.05: 20
 GATE: 4 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)
 ```
+
+## gates-c2 rc=0 18:19:50
+```
+GATE-2, EVERY FAILING HIDDEN-HOUSE PAGE (for the security reader): town (size) | engine:read:settings | the families separating it from the nearest member key
+THE TOWNS LOWER BY RULE (ruling 62 (5): VR42 keeps a governing row GATE-1 does not find at that size): 7
+TODAY: GATE-1 own (off 4, dm 4); off (off 4, dm 4); mixed (off 4, dm 4)
+TODAY: GATE-1 allOpen (off 4, dm 4); any gated setting (off 4, dm 4); LOWER BY RULE 7
+TODAY: GATE-2 L3 any gated setting, non-members (off 10, dm 10); Fisher cells below 0.05: 20
+GATE: 4 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)
+```
