@@ -727,3 +727,29 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   both reads, LOWER BY RULE 7; GATE-2 20 cells (off 10, dm 10); server = twin 0 of 112: THE LANE'S STANDING FIGURES,
   line for line with VEIL-37's table; typecheck 167 of 167; its builder B is on phase 1 (5b's measure only; brief
   ec23449fc on its branch). THE CHAIR'S THIRTEENTH PUSH (ad9b5f29a) ENDED exit=0 at 03:58 UTC: CONFIRMED.
+- 2026-11-23 04:08 UTC · N45 · THE FLIP'S PLAN READ WHOLE AND TAKEN (CLOSE-5: "PLAN 35f601d03", 04:05 UTC, ten minutes after its
+  seating; `close/FLIP-PLAN.md`, 161 lines, and `close-5/WHY-DRAFT.md` on `lane/close-5-2026-11-23`). ITS COUNT OF THE
+  CENSUS: 153 rows, all (a): 14 dial pins, 8 door rows, 131 hand anchors in three lane commits (SEAT 14, FORTUNE 36,
+  JOIN 78 + 3); the 15 anchors that pin words are re-pinned only on the base that holds points 106, 108 and 109;
+  every new value is READ FROM THE FLIPPED BASE, never copied from the census. WHERE THE RECIPE AND THE CENSUS DIFFER
+  THE FINAL CENSUS GOVERNS. RULED ON ITS EIGHT QUESTIONS:
+  Q1 the 14 dial pins go in commit 1 (a pin of the dial moves with the dial; the two "law 1" towns force law 1 in
+  their own configs). Q2 E123's budgets are THE FIRST COMMIT ON THE FLIP BRANCH, before the dials, test-only (each
+  NEEDS-READ row read by hand; the lit measure in a comment; no assertion changes). Q3 the two surprises
+  (`seatHolderLines` U6 (2), `seatChainHolder` arm 8) FORCE THE FORTUNE LAW TO 1 in their own configs; the
+  office-word guard read green and named. Q4 SPLIT: `defenceParts` R13 stays red and listed (E112); `dualHatPoliticalMass`'s
+  ORIGINAL arm forces law 1 in its own config and stands green beside FORTUNE-C's lit arm (**why:** a test left red
+  for ever guards nothing; **rejected:** leaving it red and listed). Q5 a file in two lanes goes BY FILE into the
+  JOIN commit. Q6 THE TWO LIT `why` TEXTS (`densityCreateBoundary.js :: GENERATION_LAWS.seat.why`, `.fortune.why`)
+  TAKEN WITH ONE CHANGE: NO WORDS ARE PUT IN THE OWNER'S MOUTH: the draft's `(the owner's word, "switch it on", at
+  the close)` becomes `(the first deploy's finish line, which the owner left to the chair on 2026-11-22: both laws
+  landed and lit; E30)` (CHECKED BY THE CHAIR: the eighth handoff holds no such words of his); arm 4 of both wiring
+  files re-pinned as proposed (the title says lit; `/\bDIAL IS LIT\b/` and `/owner/i`), with a tooth: outside the
+  quoted history the text holds no "dark". Q7 THE HOME PAGE'S SAMPLE TOWN IS RE-EMITTED BY THE SEAT, AS ITS OWN
+  COMMIT, on the flipped tree (E55 kept the narration for the owner's eye: the emitted town's stock narration, whole,
+  and the diff's summary go into `FOR-THE-OWNER.md`; THE CHAIR READS IT AND PUTS IT TO THE OWNER BEFORE THE FLIP
+  LANDS; this amends E55's "the `--emit` stays the chair's step" in who runs the script, not in whose eye it is
+  for). Q8 YES: A READ-ONLY TRIAL ON A SCRATCH REF (`lane/close-5-2026-11-23-lit-scratch`, merged by nobody), lit by
+  `close-2/census/light.sh`, the 83 anchor files and the files points 106 to 109 changed, ON THE COMMIT THE CHAIR
+  NAMES: the stack's "DOORS" commit once 108 and 109 are merged into it. OWED BY THE CHAIR: that commit's name to
+  CLOSE-5. Until then it prepares on paper only (the budget list; the configs of Q3 and Q4 as diffs).
