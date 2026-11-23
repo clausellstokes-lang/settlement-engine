@@ -86,7 +86,12 @@ STATE AT 07:48 UTC:
   label and default). Builder V41-PINS on c2-wip, brief 344d04753 (`out/v41/pins/PINS-BRIEF.md`), report `/var/tmp/v18/out/v41/pins/PINS-REPORT.md`.
 - MY CLOCK FAULT (N78): two hours I wrote ("07:47", "09:10") were not read from date -u; corrected to the chair 09:06. Every hour from date -u.
 
-STATE AT 13:00 UTC (date -u), FOR A SUCCESSOR (I hand over at 570,000 by the chair's read, at a commit boundary):
+N99 (13:08 UTC): I CARRY THIS PROOF TO ITS END AND TO "TIP? STORED-PROSE" ON THIS SESSION (hand-over line lifted to 660,000 by the chair's read
+for this proof alone; mark 700,000). Each step's receipt is committed and pushed as it ends by `/var/tmp/v18/out/v41/receipts.sh` into
+`docs/chair/2026-11-20/veil/out/v41/proof/RECEIPTS.md` (log `/var/tmp/v18/out/v41/proof/receipts.log`). VEIL-45 TAKES "LEGACY-TELLS" WITH R5-TENSION
+AFTER MY MERGE: its step 0 fixes the three out/v33 probes' rowOf (try the " (only in A|B)" forms, with a planted tooth); R5-TENSION's builder works
+on `-tension-wip` (party-list half; the desc path is chain A's R5-DESC); arm (i) whole is asserted at the later of the two merges and at the bar.
+STATE AT 13:00 UTC (date -u):
 THE WHOLE PROOF OF "STORED-PROSE" IS RUNNING (N96: started 12:58:03): `docs/chair/2026-11-20/veil/out/v41/proof/proof.sh` on -c2-wip ced3b1de7
 (C2-BUILD 2707d6829 + PINS 115be7619..69c07953e + the PIN-3 merge). Log `/var/tmp/v18/out/v41/proof/proof.log` (one line per step: rc and time);
 outputs under `/var/tmp/v18/out/v41/proof/`. Restart a step alone: `nohup sh proof.sh <step> &` (steps: tpl ppkey prose dumps ctrl t140 st140
