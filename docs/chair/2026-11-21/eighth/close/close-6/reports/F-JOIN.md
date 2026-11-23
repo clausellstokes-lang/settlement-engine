@@ -218,3 +218,41 @@ frozen surface (`tests/fixtures/.golden-freeze-register.json`).
 CONFIRMED: every count and value above, read from the runs and probes named. PLAUSIBLE: that the three extinct cases and the
 five at another size are the two laws' design (read from distributions over the births searched, not bisected), and the note
 on Grudino's missing claimant.
+
+## F-JOIN-2: the three STOPs, ruled by the chair (born under law 1, the bar4 (e2) form)
+COMMIT: 269db6f2b on `lane/close-6-2026-11-23-flip` (parent 21b0d74b5): 3 test files by explicit pathspec, 31 insertions and 11
+deletions. Not pushed. The hook (`eslint --fix`) changed nothing, and the tree is clean after. No src change is committed.
+Each restored assertion's own birth is made with `_seatLawVersion: 1, _fortuneLawVersion: 1` in its own config. The original
+assertion and title are unchanged. A comment names the lit births searched (count, families) and why the case is extinct lit
+(PLAUSIBLE, by reading). Every lit arm beside it is untouched:
+- `bar6CrimeOneReading` (c): only `w31` (bar0-city-wartime-rand-31) is born under law 1. The other controls of (c) stay lit, and
+  with C51048 green they are read again: C203044, C8633 and C43177 all pass.
+- `mintedFaceUnderworld`: only the row r2r-metropolis-39 (a third tuple field `true`, read by `born(seed, lawOne)`). The other three
+  rows stay lit.
+- `churchNoteReadsFlag`: r2r-town-54 under law 1. The file has no lit arm.
+
+No dead guard (condition 1): each restored assertion was seen RED once with its guarded line broken by a temporary one-line src
+edit. The edits were reverted before the commit (`git diff --quiet -- src`, clean); log `run2-planted.log`:
+- `src/generators/narrativeGenerator.js`: `churchControlsEcon` read the situation sentence, not the flag (the file's own red-first
+  fault). Red at churchNoteReadsFlag.test.js:34, the note.
+- `src/domain/display/guardLineUnderTheLaw.js`: the pay-cut twin disabled (`if (false && …payCut)`). Red at
+  bar6CrimeOneReading.test.js:153: "expected 'The garrison and city watch are well …' to contain 'though the pay for keeping order
+  is b…'".
+- `src/generators/people/castPowers.js`: the minted face's `withTownsOwnUnderworld` rewrite skipped. Red at
+  mintedFaceUnderworld.test.js:71, with row [0] ["r2r-metropolis-39","the lord",true] among the four failures.
+
+Runs (gate mutex, lit):
+- the three files: 9 tests, 9 passed (run2-1.log); planted: 3 failed (the three restored assertions), 6 passed.
+- `tests/lint` whole (lint2.log): 3,374 tests, 3,371 passed, 3 failed (the line's three).
+- `npx eslint` on the three files: exit 0.
+
+For the owner, one sentence per test: what kind of town no longer occurs with the laws on (towns stored before still show it):
+- bar6CrimeOneReading C51048: a town whose guards are stored as "well paid" while one of its own armed men says their pay is being
+  cut.
+- mintedFaceUnderworld r2r-metropolis-39: a town with no thieves' guild where a lord created for a noble power was dealt the
+  secret of being a paid informant for the thieves' guild. Apart from the two towns already in that test, none was found.
+- churchNoteReadsFlag: a town whose economy runs through the church (a strong faith that takes the largest share of the income)
+  while a non-church power holds the seat; with the laws on, every such town is governed by its church council.
+
+CONFIRMED: the runs, counts and planted reds above. PLAUSIBLE: the stated reasons the three cases are extinct lit (read, not
+bisected).
