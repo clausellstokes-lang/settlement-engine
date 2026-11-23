@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 08:02 UTC; VEIL-43 and the FLOOR measure added 08:20 UTC; brought to the hourly check of 08:42 at 08:44 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 08:02 UTC; VEIL-43 and the FLOOR measure added 08:20 UTC; brought to the hourly check of 08:42 at 08:44 UTC and to that of 10:08 at 10:11 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -32,18 +32,21 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 08:42 UTC (the helper's read; no figure fell since 07:43, so no seat was summarized in that hour):
-CLOSE-5 543,955 (+35,000: it hands over at its next boundary, after F-SEAT-2 and its re-run); PROSE-6 321,158;
-VEIL-40 286,352 (unchanged: one long turn); VEIL-41 382,255; VEIL-42 331,031 (unchanged: the figure moves at a
-turn's end); VEIL-43 0 (its first turn has not ended).
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 10:08 UTC (the helper's read; no figure fell since 08:42, so no seat was summarized meanwhile):
+CLOSE-6 205,838 (seated 09:14); PROSE-6 347,336 (its turn completed at 10:08; then given "LIT-DISAGREE"); VEIL-40
+286,352 (UNCHANGED AT THREE CHECKS: one long turn; its liveness is in N80); VEIL-41 415,524; VEIL-42 360,272;
+VEIL-43 267,708. THE CHAIR'S OWN WORKER WAS RESTARTED BY THE PLATFORM (no turn between about 09:21 and 10:08 UTC):
+nothing was lost; whoever reads this after another restart: the record on origin and
+`/home/user/scratch/chair/unrecorded.txt` are the state.
 - THE WORKING LINE IS 9b0ffaa9750f65f122e07c5d2b368797569b5055 (`lane/join-2026-11-14`, POINTS 106 TO 112; pushed by the
   chair at 08:00:32 UTC, exit 0: N73). Its join is 4eca0afb6 (parents 244fa84ef and the stack's gated tip 739e4a0c4;
   its tree the gated tip's own); one docs commit holds the seven rows and the gate's sentence. `ci/LINE-NOW.md` is at
   point 112 and the red list at 59 rows. CI ON THIS TIP IS READ BY NAME (N76; run 45135236667): IT FAILS AS EVERY TIP HAS, AND ALL 59 FAILING TESTS ARE THE LIST'S 59 ROWS: nothing new, nothing cured. THE LANDING PLACE IS
   FREE. STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt IS DONE and writes nothing more.
 - CLOSE-5 HANDED OVER AT 09:05 UTC (N79: documents 1ec8563c7, the flip branch 9df6731ee; it writes nothing more and is
-  messaged no more). ITS SUCCESSOR IS CLOSE-6 (start message `prompts/START-CLOSE-6.txt`; ITS SESSION ID IS IN THE FIRST
-  ENTRY OF SECTION 5 AFTER N79); what follows in this bullet is CLOSE-5's history, and where it stood is in N79.
+  messaged no more). ITS SUCCESSOR IS CLOSE-6 session_01FbPLbdgc4c1sT8zUVj5fi9 (seated 09:14 UTC; start message
+  `prompts/START-CLOSE-6.txt`; its first line at 09:18: F-FORTUNE, then LIT-13G's measure, then F-JOIN; "PROSE-E
+  cf104777c" sent to it at 10:1x: merged into the flip branch before its unit (3)); what follows in this bullet is CLOSE-5's history, and where it stood is in N79.
   CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
   5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
   `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
@@ -74,9 +77,11 @@ turn's end); VEIL-43 0 (its first turn has not ended).
   OWNER WAS TOLD. AT 08:53 (N77): PROSE-E IS BUILT AND READ WHOLE BY THE CHAIR (`lane/prose-6-2026-11-23-e-wip` at
   c66c30e4b, the line's tip merged; the five lines word for word the chair's; the tooth red first and green; every
   printed form listed); ITS ONE STOP RULED: `proseMoveGrammar` CONTROL 4's three uniform-segment figures move by one
-  each, test-only. IT OWES: the pin commit, the registers by their doors, rule 8 with `tests/copy` whole, one build,
-  then "PROSE-E <commit>"; THEN IT WAITS: PROSE-E LANDS IN THE FLIP'S STACK (the flip's seat merges that commit into
-  the flip branch before its prepared signings).
+  each, test-only. "PROSE-E cf104777c" CAME AT 10:08 AND IS TAKEN (N80: checked on origin; 12 files against the line;
+  every red on the 59 rows; the owner's three size rows shrink): IT LANDS IN THE FLIP'S STACK (CLOSE-6 merges it).
+  ONE MORE UNIT, A MEASURE, NO CURE: "LIT-DISAGREE" (every count so far was born DARK; the deploy ships LIT): the
+  whole cross on 900 lit births with the floor lifted, the tooth's lit reds by arm, the five lines' lit forms; the
+  chair rules on any TRUE pair; THEN IT WAITS AND ITS PLACE GOES TO VEIL-44.
 - VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
   `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); BOTH
   GATES EQUAL TO THE STANDING FIGURES (06:57). MEASURE "77" ON THE 7 PLACES (07:21): THE RPC's DOCUMENT AGAINST THE
@@ -136,7 +141,8 @@ turn's end); VEIL-43 0 (its first turn has not ended).
   add none). It runs chain B's instrument (L1 only) for the whole-document count; its own builder builds "DAILY" and
   "NAMES" only. RULED: in unit (2), what touches neither 212 nor the registry is built first; the sites' rows and
   (ix)'s SQL last, after the three units now in build have reached the tip.
-SIX WORK NOW: CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42, VEIL-43. THE NEXT FREE PLACE (PROSE-6's, when it has sent
+SIX WORK NOW: CLOSE-6, PROSE-6 (LIT-DISAGREE), VEIL-40, VEIL-41, VEIL-42, VEIL-43. THE NEXT FREE PLACE (PROSE-6's, when it has sent
+its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
 AS ITS FIRST RED (N76; `prompts/DRAFT-START-VEIL-44.txt`, A DRAFT WITH THREE BLANKS: chain B's counts, the checkout's
 commit, the lane's tip), NOT TO A LANDING STACK: "PROSE-E", WHICH NEVER GATES THE DEPLOY, LANDS IN THE SAME STACK AS
@@ -1862,3 +1868,55 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   reading a prose block: nothing or a local line) and line B (the curate screen's label and default for
   `block:power.criminalUnderside`); PIN-3 and TENSION-PARTIES still wait on its mutex. THE CHAIR'S THIRTY-FIRST PUSH
   (29460d50a: N77, N78) ENDED exit=0 (its log; ls-remote equal to the local tip before this commit).
+- 2026-11-23 10:11 UTC · N80 · THE HOURLY CHECK OF 10:08 AFTER THE CHAIR'S WORKER WAS RESTARTED; CLOSE-6 SEATED; THE
+  JOIN MOVES NEITHER GATE; "PROSE-E cf104777c" TAKEN; "LIT-DISAGREE" ORDERED.
+  (1) THE CHAIR'S WORKER WAS RESTARTED BY THE PLATFORM: no turn ran between about 09:21 and 10:08 UTC. The worktrees,
+  the scratch notes and the record survived (origin = local = 1f530b3f9); two notifications waited (the stored hourly
+  check of 09:43 and PROSE-6's line of 10:08). SAID TO THE OWNER.
+  (2) THE MARKS (one haiku helper, its clock 10:08:54): CLOSE-6 205,838; PROSE-6 347,336, its turn COMPLETED; VEIL-40
+  286,352 (unchanged at a third check); VEIL-41 415,524; VEIL-42 360,272; VEIL-43 267,708. All connected; all on the
+  configured model. NO FIGURE FELL. VEIL-40: ALIVE (a second helper read its newest events at 10:10): between 09:50
+  and 10:00:46 it waits in pieces of ten minutes for its turn on its box's mutex ("B2's batch is in its own multi-job
+  sequence; I'll keep waiting."), which `out/v40/r5dpage-b/b2/b2.sh` holds on the stored set `stored-v40`; no line
+  from it since 07:15. ASKED AT 10:12 (priority "next", which joins a running turn): one line on where R5D-RIVAL and
+  B2 stand and what is queued on its mutex; told of VEIL-43, of "MAP-COVERT" and that the gates read the gallery read
+  only (its "TIP?" names the doors its proofs read), and to end a turn at least once an hour.
+  (3) CLOSE-6 IS SEATED: session_01FbPLbdgc4c1sT8zUVj5fi9 (created 2026-11-23T09:14:46Z; source
+  `lane/close-5-2026-11-23`; outcome `lane/close-6-2026-11-23`; claude-opus-5-5 at high effort; tags ninth-chair,
+  pre-deploy, close). The chair's thirty-second push (1f530b3f9: N79 and `START-CLOSE-6.txt`) had ended exit=0 at
+  09:14:30 UTC before the session was created. ITS FIRST LINE (09:18): it stands on 1ec8563c7 and created
+  `lane/close-6-2026-11-23-flip` at 9df6731ee; its order: F-FORTUNE (39 rows; `defenceParts` R13 stays red), then
+  LIT-13G's measure, then F-JOIN; unit (2)'s census-blind files are done by CLOSE-5's hand-back; it commits a short
+  addendum that reads `FLIP-COMMON.md`'s names as its own. Nothing to rule.
+  (4) VEIL-43's "GATES", PART ONE (09:21): ON THE JOINED TREE 9e6547f0f, a new pool: GATE-1 4 of 92 at every gated
+  setting, Reveal off 4 and DM 4, twin 4 / server 4 (raw 11 / 11); controls 0 of 48; LOWER BY RULE 7; GATE-2 20 Fisher
+  cells (off 10, dm 10); the server sample 112 births, signature differing in 0; the four: r3m-city-none-1-113 and
+  r3m-metropolis-infiltrated-0-62 (`safetyDesc`), r3m-town-insurgency-0-14 (`r.imports.criminal`), r3m-town-none-0-23
+  (`f.history.currentTensions`); the R3 gate HIGHER 0, EQUAL 79, LOWER 13. THE LANE'S STANDING FIGURES: THE JOIN MOVES
+  NEITHER GATE, DARK. SAID TO THE OWNER. Part two owed: the births compared record for record with a pool made at the
+  lane's tip; the whole-document count by chain B's comparer on the 140; its builder for "DAILY" and "NAMES" started
+  at 09:15.
+  (5) "PROSE-E cf104777c" (PROSE-6, 10:08). CHECKED BY THE CHAIR ON ORIGIN: `lane/prose-6-2026-11-23-e-wip` =
+  cf104777c; beyond c66c30e4b three commits: 9d59425fe (CONTROL 4's three figures as N77 rules them, the cause
+  prepended: read), 212f8f46a (the observed-shape readers' baseline by its own door; it also takes in the line's
+  `personMention.js`), cf104777c (the report); 12 files against the line's 9b0ffaa97, +228 -60. Its own figures: the
+  14 pairs print in the new words, all NOT; the five old wordings on 0 pages; the watched row and v12's tail at 0; the
+  dark proof EQUAL; the tooth red first and green 6 of 6, re-run by the seat; rule 8 with `tests/copy` whole 87 files,
+  1,750 tests, 1 red; `tests/lint` whole 3,374 tests, 3 red; VERIFY_DIST 15 red: ALL 19 ON THE 59 ROWS; one build:
+  first paint raw 1,180,816 (the line's), gzip 376,045 (the line 376,065), Brotli 315,736 (315,768), the worker and
+  the engine chunk the line's; the owner's three size rows all shrink. **Decided:** it is sent to CLOSE-6: merged into
+  the flip branch by a plain merge at a commit boundary before its unit (3).
+  (6) A GAP THE CHAIR CAUGHT: EVERY MEASURE OF THE DISAGREEING SENTENCES WAS BORN DARK, AND THE FIRST DEPLOY SHIPS
+  LIT. **Decided:** UNIT "LIT-DISAGREE" for PROSE-6, A MEASURE, NO CURE: on a scratch tree
+  (`origin/lane/close-5-2026-11-23-flip` at 9df6731ee with cf104777c merged; a scratch ref is merged into no lane):
+  item 4's whole cross on the 900 births LIT with the floor lifted (every co-printing variant pair read TRUE or NOT by
+  its printed forms; the count of pages with a TRUE pair beside dark's 63 and 0); the tooth lit, every red by arm (a
+  control seed whose premise fails lit: the lowest lit seed that holds the case proposed, not committed; a registered
+  or watched row that co-prints lit: at once, with its two forms); the five lines' printed forms lit. The chair rules
+  on any TRUE pair; the flip's seat re-picks premises on its own branch. **Why:** the two laws move who governs and
+  how rich a place is, which are the facts those desks read; a pair cured on dark pages can stand, or a new one
+  appear, on lit ones. **Blast radius:** a short run on a seat that would otherwise wait; VEIL-44's seating waits for
+  its line (six work at a time). CLOSE-6 told that a lit red of the tooth's file after its merge is expected until
+  that line comes. SAID TO THE OWNER.
+  (7) THE NEXT HOURLY CHECK IS SET WITH THIS ENTRY (its id in the next entry). The stored check of 09:43
+  (trig_01RAKptvggFu2Gfj5cNBwDE8) fired while the worker was down and was done at 10:08.
