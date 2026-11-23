@@ -35,8 +35,12 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
   - A NEW STOP: `pgliteHookTimeoutRatchet` is red by R4I-PAGE's regex `\(` at `galleryVeilIds.pglite.test.js` :205 (green at af708f2fd). A test-only cure (`\x28`) was proposed to the chair.
   - G PARTIAL: the 34 non-security files have 14 red after S1 (13 id pins confirmed by their failing lines, plus S2). `tests/security` whole was still running at the hand-back.
 
+- THE POOL, made ONCE on the -wip at b088fcfc5 (S1 merged; 40.2), 00:58-01:54 UTC: `/var/tmp/v18/t2/pool-v38`, both parts, every shard rc=0; verify 45 re-read, 0 differ.
+  - BOTH GATES (`/var/tmp/v18/out/v38/gates/tell2-table.txt`): GATE-1 4 of 92 at EVERY gated setting (own, g:000..g:110, allOpen, off), Reveal off and DM, twin = server (4 / 4; raw 11 / 11); controls 0 of 48; LOWER BY RULE 7; GATE-2 20 Fisher cells below 0.05 (non-members off 10, dm 10); non-governing criminal rows against the rule 0; part A's server sample 112 births, 0 differ from the twin.
+  - EQUAL TO THE LANE'S STANDING FIGURES (N6): NO WORSE. The tip move 40.4 is test-only, so these stand for ec082df83.
+
 ### (2) IN FLIGHT
-- THE POOL, ONCE, on the -wip at b088fcfc5 (S1 merged), started 00:58 UTC: `/var/tmp/v18/out/v38/pool.sh` (pool, verify, both gates) into `/var/tmp/v18/t2/pool-v38`. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
+- On the pool, at the -wip (`/var/tmp/v18/out/v38/poolprobes.sh`): the switch-offer probe (S1's pool arm), then the order probe (40.2's count of places whose printed order moves, twin only), started 01:55 UTC. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
 - R4I-TONIGHT (subagent; brief `briefs/R4I-TONIGHT-BRIEF.md`), in `/home/user/wt/r4it` on the local `lane/veil-38-2026-11-23-r4tonight-wip` at b088fcfc5: 40.3 (2), measure first.
 - R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
 
