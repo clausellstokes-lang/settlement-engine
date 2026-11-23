@@ -1,0 +1,565 @@
+diff --git a/tests/components/powerSeatRender.test.jsx b/tests/components/powerSeatRender.test.jsx
+index 961315c46..73bc6cd76 100644
+--- a/tests/components/powerSeatRender.test.jsx
++++ b/tests/components/powerSeatRender.test.jsx
+@@ -72,22 +72,29 @@ describe('the governs note names the rival or goes', () => {
+   // leaves thorp 42's Religious Authorities unbuilt (no religious house stands behind them; green at the line f72262c68, red
+   // at 1a32c200a). Re-scanned rulers-thorp-0..59 at the tip: 1 carries the note AND an outranking rival (57: People's
+   // Council 61 over the Elder Council 39).
+-  it('names the outranking rival when one outranks the governing faction (thorp 57: People\'s Council)', () => {
+-    const s = born('thorp', 57);
++  // Re-seated by the premise thorp 57 -> thorp 35 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8, the seat and
++  // fortune laws on), thorp 57's governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped
++  // tip for the premise (the note AND a rival outranking the governing faction on power): 35, 73, 96, 106, 109, 136; 35
++  // is the first (The Independent Bloc 78 over the Elder Council 22).
++  it('names the outranking rival when one outranks the governing faction (thorp 35: The Independent Bloc)', () => {
++    const s = born('thorp', 35);
+     const gov = governingFactionOf(s);
+     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
+-    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === "People's Council");
++    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'The Independent Bloc');
+     expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
+     tab(s);
+     openGoverning(s);
+     const text = document.body.textContent;
+-    expect(text).toContain("Holds the title; the decisions that matter are made by People's Council.");
++    expect(text).toContain('Holds the title; the decisions that matter are made by The Independent Bloc.');
+   });
+ 
+   // The note carried "Governing authority is internally fractured." before #189; that reading now has one home, the
+   // legitimacy panel's banner (and DS-POW-1's fractured line), so the unnamed claim leaves and the note with it.
+-  it('drops the claim when no rival outranks the governing faction (thorp 13); the fracture reading stays in the banner', () => {
+-    const s = born('thorp', 13);
++  // Re-seated by the premise thorp 13 -> thorp 3 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8), thorp 13's
++  // governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped tip for the premise (the note
++  // AND no rival outranking the governing faction): 3 is the first (its Elder Council alone, 100).
++  it('drops the claim when no rival outranks the governing faction (thorp 3); the fracture reading stays in the banner', () => {
++    const s = born('thorp', 3);
+     expect(String(governingFactionOf(s).crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
+     tab(s);
+     openGoverning(s);
+diff --git a/tests/components/tailDisplayCivicBatch1.test.jsx b/tests/components/tailDisplayCivicBatch1.test.jsx
+index 6846345eb..1bd4cdb99 100644
+--- a/tests/components/tailDisplayCivicBatch1.test.jsx
++++ b/tests/components/tailDisplayCivicBatch1.test.jsx
+@@ -53,19 +53,24 @@ const ACCOUNT_CURED = [
+   ['r2s-occupied-metropolis-0', 'Chrissopetra is governed by the Grand Guild Consortium.', 'The Grand Guild Consortium answers to the occupiers of Chrissopetra.'],
+   ['r2r-thorp-24', 'The Household Council governs Sanctaminus.', 'The Household Council answers to the occupiers of Sanctaminus.'],
+   ['r2s-mass_migration-town-0', 'Crime is the reason.', 'Insecurity is the reason.'],
+-  ['r2r-city-3', 'Crime is the reason.', 'Insecurity is the reason.'],
++  // the lit birth's value (THE FLIP, 2026-11-23): r2r-city-3's seat stands Contested lit (Tolerated before), so the slot's
++  // sentence is the Contested one; it names insecurity, not crime (was 'Crime is the reason.' / 'Insecurity is the reason.')
++  ['r2r-city-3', 'Crime has left the City-State Council\'s right to rule contested in Androntopia.', 'Insecurity has left the City-State Council\'s right to rule contested in Androntopia.'],
+   ['r2s-occupied-thorp-1', 'Poverty and crime have cost the Elder Council its standing.', 'Poverty and insecurity have cost the Elder Council its standing.'],
+   ['r2r-thorp-24', 'Poverty and crime are the reason.', 'Poverty and the curfew are the reason.'],
+ ];
+ // [seed, the true sibling that must still print]
+ const ACCOUNT_KEPT = [
+-  ['r2r-city-0', 'Crime keeps Goraka from more than tolerating the Merchant City Council.'],
++  // the lit birth's value (THE FLIP, 2026-11-23): was 'Crime keeps Goraka from more than tolerating the Merchant City Council.'
++  ['r2r-city-0', 'Weak defences keep Goraka from more than tolerating the Merchant City Council.'],
+   ['r2r-city-1', 'The Military City Council governs Pengill.'],
+   ['r2r-city-11', 'The Merchant oligarchy governs Puripat.'],
+ ];
+ // [seed, the Foundations word that must not print, the record's label that prints]
+ const LEGIT_CURED = [
+-  ['r2s-infiltrated-thorp-0', 'Adequate', 'Tolerated'],
++  // the lit birth's value (THE FLIP, 2026-11-23): the record reads 'Approved' lit (was 'Tolerated'); the causal ladder
++  // still bands it 'adequate', so the town still meets the case (the ladder's word is not the record's)
++  ['r2s-infiltrated-thorp-0', 'Adequate', 'Approved'],
+   ['r2r-hamlet-0', 'Collapsed', 'Legitimacy crisis'],
+ ];
+ 
+diff --git a/tests/components/tailDisplayCivicBatch4.test.jsx b/tests/components/tailDisplayCivicBatch4.test.jsx
+index 50fede9ce..c2acf1d58 100644
+--- a/tests/components/tailDisplayCivicBatch4.test.jsx
++++ b/tests/components/tailDisplayCivicBatch4.test.jsx
+@@ -42,7 +42,9 @@ const CURED = [
+   ['r2r-hamlet-0', 'Adequate', 'Strained'],
+ ];
+ // [seed, the word that still prints]
+-const KEPT = [['r2r-city-27', 'Surplus'], ['r2r-hamlet-10', 'Adequate'], ['r2s-succession_void-city-0', 'Strained']];
++// r2r-city-27: the lit birth's value (THE FLIP, 2026-11-23): its composite bands 'adequate' lit, no cap (Approved, not
++// fractured), so the row still keeps its own word (was 'Surplus')
++const KEPT = [['r2r-city-27', 'Adequate'], ['r2r-hamlet-10', 'Adequate'], ['r2s-succession_void-city-0', 'Strained']];
+ const WORD = new Map();
+ beforeAll(async () => {
+   await loadGenerationLawPayloads();
+diff --git a/tests/domain/bar5SafetyLawBand.test.js b/tests/domain/bar5SafetyLawBand.test.js
+index 6f6853342..a93e7dc81 100644
+--- a/tests/domain/bar5SafetyLawBand.test.js
++++ b/tests/domain/bar5SafetyLawBand.test.js
+@@ -111,7 +111,8 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
+       expect(now, `${seed}: the row's band as before, or the quiet place's floor`).toBe(floored ? 'strained' : before);
+     });
+     expectNoSeedFailures(failures);
+-    expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(45);
++    // re-measured lit (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the floor lifts 21 of the 720 lit (45 before the flip)
++    expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(21);
+   }, 900_000);
+ 
+   test('(c) the positive control: C42116, its stored line fires beside its row; the printed line is its twin', () => {
+diff --git a/tests/domain/bar7DesksLines.test.js b/tests/domain/bar7DesksLines.test.js
+index 4007429f4..8fa61ad9e 100644
+--- a/tests/domain/bar7DesksLines.test.js
++++ b/tests/domain/bar7DesksLines.test.js
+@@ -162,8 +162,12 @@ describe('item 3 · the ledger line says money and keeps its words', () => {
+     expect(v1.v.text).toMatch(/money laid by/);
+     expect(v1.v.marks).toEqual(['no crisis: indebted']);
+   });
+-  test('the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-rand-43) still print it', () => {
+-    expectNoSeedFailures(collectSeedFailures([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-43']], ([seed]) => {
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, C27960's town bar0-metropolis-calm-rand-43 reads
++  // Moderate, so the COMFORTABLE rung is not its pool. Re-scanned bar0-metropolis-calm-rand-0..199 lit for the case's own
++  // predicate (DS-ECO-8's pool COMFORTABLE, drawn at the ledger angle, the rung's provenance; no indebted crisis): 3 9 22 24
++  // ...; 3 is the first (was rand-43)
++  test('the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-rand-3) still print it', () => {
++    expectNoSeedFailures(collectSeedFailures([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-3']], ([seed]) => {
+       const s = town(seed);
+       const out = economyStateProse(s, { exportPosture: deriveExportPosture(s) }, { seed: String(s._seed ?? s.id ?? '') });
+       expect(JSON.stringify(out.prosperityRung)).toMatch(/purse closes every year ahead/);
+diff --git a/tests/domain/corpusCureGuards.test.js b/tests/domain/corpusCureGuards.test.js
+index 5be226a2c..fa5f9e4e3 100644
+--- a/tests/domain/corpusCureGuards.test.js
++++ b/tests/domain/corpusCureGuards.test.js
+@@ -72,7 +72,9 @@ const GUARDS = [
+   { seed: 'w5-city-famine-6', pool: 'DS-DEF-2::CHAIN: food trades working', vid: 1, why: 'a famine: "the town would not run short at once if it were cut off" of a town already short of food (W2-WRITE-6 B, Wadikot)' },
+   { seed: 'w5-town-under_siege-6', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 3, why: 'a garrison: "had too few hands ... most of them are learning as they go" beside a standing garrison (LINES-READ, metropolis-under_siege-1; W2-WRITE-7 B, Tihono; re-keyed by TAIL-CLOSE-POOLS-1 from w5-city-under_siege-1, which no longer reads the pool: the births moved; here the pool draws v4 and v3 is refused by its cure `no soldiers` alone)' },
+   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 6, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "nobody in the town has the work of manning them" of defences the occupier holds (LINES-READ, thorp-24; W2-WRITE-7 B, Ulfås)' },
+-  { seed: 'w5-thorp-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 7, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "the only people who would stand on them are the town\'s own" beside the occupiers\' troops (W2-WRITE-7 B, Shangou)' },
++  // RE-KEYED BY THE ROW'S DOOR (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, w5-thorp-occupied-1 no longer reads the pool;
++  // w5-thorp-occupied-4 is the lowest w5-thorp-occupied of 200 lit that reads it (4 8 14 18 ...; was w5-thorp-occupied-1)
++  { seed: 'w5-thorp-occupied-4', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 7, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "the only people who would stand on them are the town\'s own" beside the occupiers\' troops (W2-WRITE-7 B, Shangou)' },
+   { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 4, why: 'a war with no front at the town: "the people defending it now are neighbours who stepped forward" where nobody attacks it (LINES-READ, hamlet-5, thorp-55; W2-WRITE-7 B, Nishidao)' },
+   { seed: 'w5-village-wartime-1', pool: 'DS-DEF-5::NO organized force at all', vid: 5, why: 'a war with no front at the town: "whoever leads the defence now is learning the work as the trouble goes on" (LINES-READ, hamlet-53; the sibling of v4, W2-WRITE-7 B, Nishidao)' },
+   { seed: 'w5-thorp-famine-2', pool: 'DS-DEF-12::CAPACITY: enough', vid: 1, mute: '6cf44c66d, dbe696025 (v1-v3 off a short food record)', why: 'a famine: "the town gets by on its own: enough for an ordinary year" beside a food record in famine (W2-WRITE-8 C, #58\'s pool)' },
+@@ -139,7 +141,10 @@ const GUARDS = [
+   { seed: 'w5-town-occupied-3', pool: 'DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need', vid: 4, why: 'an occupation: "the threat now at hand is testing them in earnest" of works the occupiers already hold (W2-WRITE-11, Hochsteig)' },
+   { seed: 'w5-city-occupied-104', pool: 'DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need', vid: 5, why: 'an occupation: "works manned in earnest ... being held against something real" of a city an army holds (W2-WRITE-11)' },
+   { seed: 'w5-town-famine-4', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'walls: "walk into the centre without being stopped, challenged or counted" of a town behind Town walls and a Citadel (the chair\'s row of 10:40, W2-WRITE-11) (re-keyed by TAIL-CLOSE-POOLS-1 from w5-town-famine-6, which no longer reads the pool: the births moved)' },
+-  { seed: 'w5-hamlet-famine-5', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'walls: the same line in a hamlet behind its palisade or earthworks (W2-WRITE-11)' },
++  // RE-KEYED BY THE ROW'S DOOR (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, w5-hamlet-famine-5 reads readiness WEAK, not
++  // CRITICAL; w5-hamlet-famine-54 is the lowest w5-hamlet-famine of 200 lit that reads the pool, draws a line of it, and stands
++  // behind a palisade (`defenseWallOf`: 54 69 70 72 ...; was w5-hamlet-famine-5)
++  { seed: 'w5-hamlet-famine-54', pool: 'DS-DEF-1::readiness CRITICAL', vid: 3, why: 'walls: the same line in a hamlet behind its palisade or earthworks (W2-WRITE-11)' },
+   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 2, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "fewer people turn out each season to man the city walls and gates, and the city is slow to notice" of walls the occupiers hold (HANDBACK-6, W2-WRITE-11, Markaztappa)' },
+   { seed: 'w5-city-occupied-1', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 1, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "accounts keep its walls in repair but fall short on the watch\'s wages" of a town whose revenue the occupiers take (v2\'s sibling, W2-WRITE-11)' },
+   { seed: 'w5-hamlet-occupied-104', pool: 'DS-DEF-11::WALLED-STRAINED', vid: 5, mute: '440f40cfc, 8c63fd2ed (v1, v2, v5-v7 off an occupation; v3, v4 are the siege lines)', why: 'an occupation: "keeps its works in repair and pays nobody to stand guard there" beside the occupiers\' troops (v2\'s sibling, W2-WRITE-11)' },
+diff --git a/tests/domain/defenseWordsFindings.test.js b/tests/domain/defenseWordsFindings.test.js
+index a78837c0a..bc198778f 100644
+--- a/tests/domain/defenseWordsFindings.test.js
++++ b/tests/domain/defenseWordsFindings.test.js
+@@ -158,8 +158,13 @@ describe('defenseWordsFindings', () => {
+ });
+ 
+ describe('the Defense tab says only what the place has', () => {
+-  it('the charter-hall hamlet no longer prints "garrison pay" beside "No walls or garrison"', () => {
+-    const s = world('defense-hamlet-1');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-hamlet-1 stands Prosperous and its purse
++  // funds the hall in full, so no note is written. The case's own predicate (a charter hall, no walls and no garrison, and
++  // the purse short, keepOfRecord(...).funded under 1) holds on no defense-hamlet of 1,000 lit (56 charter-only hamlets, every
++  // one standing Comfortable or Prosperous) and no thorp of 400 seats a charter hall, so the row takes the next size up that
++  // holds it: defense-village-16 (Moderate), the lowest of 400 (16 204), born here beside the corpus (was defense-hamlet-1)
++  it('the charter-hall village (defense-village-16) no longer prints "garrison pay" beside "No walls or garrison"', () => {
++    const s = born('village', 16);
+     const row = deriveDefenseReadiness(s).find((r) => r.label === 'Invasion & War');
+     // anchored: the next line pins the same note's whole text
+     expect(row.fundingNote).not.toMatch(/garrison pay/);
+@@ -176,8 +181,11 @@ describe('the Defense tab says only what the place has', () => {
+   // so its gate stands at the identity and writes no note. No place of this corpus has a palisade for its one
+   // defence below Comfortable standing; the first of its seed family that does is defense-thorp-20
+   // (Moderate; its roster names it "Palisade"), born here beside the corpus.
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-thorp-20 stands Comfortable, so its gate
++  // stands at the identity. Re-scanned defense-thorp-0..199 lit for the case's own predicate (a palisade its one defence, and
++  // the purse short, keepOfRecord(...).funded under 1): 35 144 154 168; 35 is the first (Moderate; was defense-thorp-20)
+   it('a palisade never pays "garrison pay": the note names the palisade', () => {
+-    const thorp20 = born('thorp', 20);
++    const thorp20 = born('thorp', 35);
+     const row = deriveDefenseReadiness(thorp20).find((r) => r.label === 'Invasion & War');
+     expect(defenseFactsOf(thorp20).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade']);
+     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);
+diff --git a/tests/domain/outlookSaysThePages.test.js b/tests/domain/outlookSaysThePages.test.js
+index fb43b9966..7cc7a9139 100644
+--- a/tests/domain/outlookSaysThePages.test.js
++++ b/tests/domain/outlookSaysThePages.test.js
+@@ -56,7 +56,10 @@ describe('step 5: the Outlook says what the pages say', () => {
+ 
+ describe('step 6: the glance chip and the Economic Survival colour', () => {
+   test('#608: the reader\'s town prints the word alone; a town whose figure agrees keeps the chip', () => {
+-    const s = birth('rww-metropolis-infiltrated-1');
++    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, rww-metropolis-infiltrated-1 reads Poor (output 28).
++    // Re-scanned rww-metropolis-infiltrated-0..199 lit for the case's own predicate (the word Prosperous over an output under
++    // 35: two bands apart): 12 42 71 102 132; 12 is the first (output 33; was rww-metropolis-infiltrated-1)
++    const s = birth('rww-metropolis-infiltrated-12');
+     expect(s.economicState.prosperity).toBe('Prosperous');
+     expect(Math.round(s.economicState.compound.economyOutput)).toBeLessThan(35);
+     expect(outputChipBesideWord(Math.round(s.economicState.compound.economyOutput), s.economicState.prosperity)).toBe(false);
+diff --git a/tests/domain/tailDisplayCivic3V1.test.js b/tests/domain/tailDisplayCivic3V1.test.js
+index 369b4d32f..4f81b8074 100644
+--- a/tests/domain/tailDisplayCivic3V1.test.js
++++ b/tests/domain/tailDisplayCivic3V1.test.js
+@@ -61,13 +61,20 @@ const POW4C = /** @param {string} c */ (c) => clauseAfterSentinel('DS-POW-4', 'r
+ // [seed, the sentence that must not print, what prints instead]
+ const CURED = [
+   ['r2r-city-44', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
+-  ['r2r-hamlet-18', 'The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
+-  ['r2r-city-37', 'The hall is at odds with the Military/Guard.', 'The hall is at odds with the Guard.'],
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2r-hamlet-18 holds its Military/Guard on the roster
++  // and no sentence names it; r2r-hamlet-10 is the lowest r2r-hamlet of the census's 60 whose text names the Guard in a
++  // sentence (10, 27), and it prints the row's own pair (was r2r-hamlet-18)
++  ['r2r-hamlet-10', 'The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
++  // the lit birth's value (THE FLIP, 2026-11-23): r2r-city-37's relation with the Guard moved; its Guard sentence now
++  // (was 'The hall is at odds with the Military/Guard.' / 'The hall is at odds with the Guard.')
++  ['r2r-city-37', 'The Military/Guard takes its orders no longer.', 'The Guard takes its orders no longer.'],
+   ['r2r-village-50', 'The hall is at odds with the Military/Guard and the Religious Authorities.', 'The hall is at odds with the Guard and the Religious Authorities.'],
+   ['r2r-town-27', POW6('Military/Guard'), POW6(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
+   ['r2r-city-37', POW4('Military/Guard'), POW4(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
+   ['r2r-metropolis-50', POW4C('Military/Guard'), POW4C(powerNameWithArticle('Military/Guard'))], // NAMES-1 (CN1): the article
+-  ['r2r-hamlet-27', 'Military/Guard answers to the Elder Council', 'The Guard answers to the Elder Council'],
++  // the lit birth's value (THE FLIP, 2026-11-23): r2r-hamlet-27's Guard no longer answers to the hall; its Guard sentence now
++  // (was 'Military/Guard answers to the Elder Council' / 'The Guard answers to the Elder Council')
++  ['r2r-hamlet-27', 'Military/Guard could now take the hall from the Elder Council', 'The Guard could now take the hall from the Elder Council'],
+   ['r2r-metropolis-8', 'Noble Claimant (Senior Line) and Noble Claimant (Reform Line) contend for it.', 'The Senior Line and the Reform Line contend for it.'],
+   ['r2r-metropolis-39', 'Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],
+ ];
+diff --git a/tests/generators/bar4HistoryOneTelling.test.js b/tests/generators/bar4HistoryOneTelling.test.js
+index b92d7ca62..99580fa4f 100644
+--- a/tests/generators/bar4HistoryOneTelling.test.js
++++ b/tests/generators/bar4HistoryOneTelling.test.js
+@@ -111,7 +111,13 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
+   });
+ 
+   /** The census's towns that printed "widely questioned" beside an approved or endorsed seat at the base (8 of the 720). */
+-  const HELD_AT_BASE = ['r2r-city-12', 'r2r-city-18', 'r2r-city-30', 'r2r-city-39', 'r2r-metropolis-21', 'r2r-metropolis-56', 'r2s-infiltrated-metropolis-0', 'r2s-religious_conversion-city-1'];
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8), r2r-city-12, r2r-metropolis-21,
++  // r2s-infiltrated-metropolis-0 and r2s-religious_conversion-city-1 hold no approved seat. Each is re-picked, lit, by the
++  // case's own predicate (publicLegitimacy.isApproved, and a legitimacy_crisis tension), never by its words: the lowest seed
++  // of its own family of 200 not already listed (r2r-city: 18 30 39 75 196; r2r-metropolis: 56 122; r2s-infiltrated-
++  // metropolis: 33 70 ...). r2s-religious_conversion-city holds the case on 0 of 500 lit (0 approved), so its row takes the
++  // same stress at the next size down that holds it, r2s-religious_conversion-town-62 (the lowest of 100; was city-1).
++  const HELD_AT_BASE = ['r2r-city-75', 'r2r-city-18', 'r2r-city-30', 'r2r-city-39', 'r2r-metropolis-122', 'r2r-metropolis-56', 'r2s-infiltrated-metropolis-33', 'r2s-religious_conversion-town-62'];
+   it('(e) C26792: an accepted seat\'s legitimacy tension says most accept it (red at the base in each of the eight)', () => {
+     const twins = new Set(Object.values(LEGITIMACY_HELD_TWINS));
+     const failures = collectSeedFailures(HELD_AT_BASE, (seed) => {
+@@ -124,7 +130,7 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
+     expectNoSeedFailures(failures, 'C26792: no "widely questioned" beside an accepted seat');
+   }, 300000);
+ 
+-  it('(e2) C26792: the twin prints only beside an accepted seat (r2s-infiltrated-hamlet-0: accepted at the history step, Tolerated at the end)', () => {
++  it('(e2) C26792: the twin prints only beside an accepted seat (r2s-infiltrated-hamlet-0: accepted at the history step, Endorsed at the end)', () => {
+     const twins = new Set(Object.values(LEGITIMACY_HELD_TWINS));
+     const failures = collectSeedFailures(['r2s-infiltrated-hamlet-0', ...STRIDE], (seed) => {
+       const s = born(seed);
+@@ -132,7 +138,10 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
+       expect(twinned.length === 0 || s.powerStructure.publicLegitimacy.isApproved === true).toBe(true);
+     });
+     expectNoSeedFailures(failures, 'C26792: no twin beside a seat the record does not call approved');
+-    expect(born('r2s-infiltrated-hamlet-0').history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/openly and widely questioned/); // KEEP: its own form, true there
++    // the lit birth's value (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): r2s-infiltrated-hamlet-0 is Endorsed at the end lit (Tolerated
++    // before), so its tension takes the twin (was /openly and widely questioned/). No r2s-infiltrated-hamlet of 200 lit is
++    // accepted at the history step and unapproved at the end, so the case cannot be re-picked in its family.
++    expect(born('r2s-infiltrated-hamlet-0').history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/^Most here accept the current authority's right to rule, but some question it openly/); // KEEP: its twin, true there
+   }, 300000);
+ 
+   it('(f) C26792: the history section regeneration derives the same line (the chair\'s condition 3)', () => {
+@@ -167,7 +176,13 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
+   }, 300000);
+ 
+   /** The towns where the rank-1 challenger stood "too far behind" a Contested seat at the base (C14176). */
+-  const CONTESTED_AT_BASE = ['r2r-village-43', 'r2s-religious_conversion-village-0', 'bar0-hamlet-under_siege-rand-101', 'bar0-hamlet-under_siege-rand-108', 'bar0-city-under_siege+famine-rand-110'];
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee: a KEEP-side case that no
++  // longer holds is a premise): lit, the seat of r2s-religious_conversion-village-0 reads Holding, and that of
++  // bar0-city-under_siege+famine-rand-110 reads Holding with its seat's holder apart. Each is re-picked, lit, by the case's own
++  // predicate (power/factionStanding.js's contested rung: the coup reading Contested with the rank-1 power its first
++  // challenger, a governing first power, the top two's gap over 6, the rank-1 power not the seat's holder apart), never by the
++  // line's words: the lowest of its own family of 200 (village-21; rand-5). Was village-0 and rand-110.
++  const CONTESTED_AT_BASE = ['r2r-village-43', 'r2s-religious_conversion-village-21', 'bar0-hamlet-under_siege-rand-101', 'bar0-hamlet-under_siege-rand-108', 'bar0-city-under_siege+famine-rand-5'];
+   it('(h) C14176: the rank-1 power that could take a Contested seat says so (red at the base in each)', () => {
+     const failures = collectSeedFailures(CONTESTED_AT_BASE, (seed) => {
+       const f = born(seed).powerStructure.factions;
+diff --git a/tests/generators/bar7Scenes.test.js b/tests/generators/bar7Scenes.test.js
+index d38521e59..908fef71a 100644
+--- a/tests/generators/bar7Scenes.test.js
++++ b/tests/generators/bar7Scenes.test.js
+@@ -109,8 +109,12 @@ describe('BAR7-SCENES item 2 (8k.market): no busy market under the crises that s
+ 
+ describe('BAR7-SCENES item 3 (9g.margin, the chair\'s PM1): the war\'s requisition row denies no margin the purse holds', () => {
+   const losing = (/** @type {string} */ prosperity) => /** @type {any[]} */ (PRESSURE_SENTENCES.wartime({ name: 'Quirigich', govFaction: 'Merchant Guild Council', warGoesWell: false, prosperity }))[0];
+-  test('C15153 · bar0-city-wartime-rand-43: a Comfortable purse; the row names the requisition and says no "cannot afford" or "running thin"', () => {
+-    const s = town('bar0-city-wartime-rand-43');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8, the fortune law on), rand-43's purse reads
++  // Moderate. Re-scanned bar0-city-wartime-rand-0..199 lit for the case's own predicate (prosperity Comfortable; a losing war by
++  // the crisis summary, stressNarrative.js :: wartimeGoesWell false; the slot drew the losing pool's requisition row, whose two
++  // branches both name the order): 170 179; 170 is the first (was rand-43)
++  test('C15153 · bar0-city-wartime-rand-170: a Comfortable purse; the row names the requisition and says no "cannot afford" or "running thin"', () => {
++    const s = town('bar0-city-wartime-rand-170');
+     expect(String(s.economicState?.prosperity)).toBe('Comfortable');
+     expect(String(s.pressureSentence)).toContain('signed a requisition order last week');
+     for (const denial of ['cannot afford', 'running thin']) expectAbsentWithAnchor(String(s.pressureSentence), denial, 'signed a requisition order last week', 'the war row');
+@@ -202,7 +206,7 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
+ 
+ // a planted state kept apart from the seeds: every named town of this file is born once
+ test('the named towns are born in the bar0- shape', () => {
+-  expectNoSeedFailures(collectSeedFailures(['bar0-village-famine-rand-43', 'bar0-city-wartime-rand-43'], (seed) => {
++  expectNoSeedFailures(collectSeedFailures(['bar0-village-famine-rand-43', 'bar0-city-wartime-rand-170'], (seed) => {
+     if (!town(seed)?.name) throw new Error(`${seed}: not born`);
+   }), 'born');
+ });
+diff --git a/tests/generators/defenceParts.test.js b/tests/generators/defenceParts.test.js
+index 0e877799a..8cac06847 100644
+--- a/tests/generators/defenceParts.test.js
++++ b/tests/generators/defenceParts.test.js
+@@ -25,11 +25,14 @@ const CRISES = ['famine', 'under_siege', 'wartime', 'occupied'];
+ const GROUPS = new Set(['BUILT', 'STANDS', 'SUSTAINS', 'GROUND', 'AGAINST', 'LIMIT']);
+ 
+ /** The printed prosperity label at e1b2f9c1f, the tree without this lane's change (measured first). */
++// the lit birth's values (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the fortune law moves the label by design; eight of the
++// sixteen moved (was hamlet-0 Poor, village-0 Struggling, town-0 Moderate, town-2 Moderate, city-1 Prosperous,
++// metropolis-0 Wealthy, metropolis-2 Comfortable, wartime-town-0 Comfortable)
+ const PRINTED_AT_BASE = Object.freeze({
+-  'v3build-thorp-0': 'Struggling', 'v3build-thorp-1': 'Poor', 'v3build-hamlet-0': 'Poor', 'v3build-hamlet-1': 'Struggling',
+-  'v3build-village-0': 'Struggling', 'v3build-town-0': 'Moderate', 'v3build-town-2': 'Moderate', 'v3build-city-0': 'Struggling',
+-  'v3build-city-1': 'Prosperous', 'v3build-metropolis-0': 'Wealthy', 'v3build-metropolis-2': 'Comfortable',
+-  'v3build-famine-town-0': 'Struggling', 'v3build-under_siege-city-0': 'Struggling', 'v3build-wartime-town-0': 'Comfortable',
++  'v3build-thorp-0': 'Struggling', 'v3build-thorp-1': 'Poor', 'v3build-hamlet-0': 'Comfortable', 'v3build-hamlet-1': 'Struggling',
++  'v3build-village-0': 'Moderate', 'v3build-town-0': 'Poor', 'v3build-town-2': 'Poor', 'v3build-city-0': 'Struggling',
++  'v3build-city-1': 'Moderate', 'v3build-metropolis-0': 'Prosperous', 'v3build-metropolis-2': 'Moderate',
++  'v3build-famine-town-0': 'Struggling', 'v3build-under_siege-city-0': 'Struggling', 'v3build-wartime-town-0': 'Moderate',
+   'v3build-occupied-village-0': 'Poor', 'v3build-occupied-city-0': 'Poor',
+ });
+ 
+@@ -308,8 +311,14 @@ describe('the martial will (R13, R14)', () => {
+ // through its hold. These are the reader's eleven births (REVIEW-UPKEEP-3 willpay.mjs), in the app's own shape, so
+ // the corpus MEETS the branch; each is anchored to it (no walls, no standing body, a hired part).
+ describe('the martial will is not paid on the hired branch either (W3)', () => {
+-  const READER = ['calm-hamlet-9', 'calm-hamlet-14', 'calm-hamlet-28', 'calm-hamlet-33', 'calm-village-1', 'calm-village-5',
+-    'calm-village-38', 'wartime-hamlet-33', 'wartime-village-4', 'wartime-village-30'];
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law lifts the purse), calm-hamlet-9,
++  // calm-hamlet-28, calm-village-1, calm-village-38 and wartime-village-30 are paid in full (keep.bought 1), off the branch.
++  // Each is re-picked, lit, by the branch's own anchors (nothing built or standing, a hired part, keep.bought under 1, no
++  // hold, no crisis on the will), never by the equality asserted: the lowest unlisted seed of its own rv2- family (scanned
++  // 0..199, calm-hamlet to 799): calm-hamlet 14 33 56 260; calm-village 5 132 176; wartime-village 4 62
++  // (was calm-hamlet-9, calm-hamlet-28, calm-village-1, calm-village-38, wartime-village-30)
++  const READER = ['calm-hamlet-14', 'calm-hamlet-33', 'calm-hamlet-56', 'calm-hamlet-260', 'calm-village-5', 'calm-village-132',
++    'calm-village-176', 'wartime-hamlet-33', 'wartime-village-4', 'wartime-village-62'];
+   /** @type {Array<[string, any]>} */
+   const hiredOnly = [];
+   beforeAll(async () => {
+diff --git a/tests/generators/power/standingReadsTheNamedPower.test.js b/tests/generators/power/standingReadsTheNamedPower.test.js
+index d51154a99..680ce1101 100644
+--- a/tests/generators/power/standingReadsTheNamedPower.test.js
++++ b/tests/generators/power/standingReadsTheNamedPower.test.js
+@@ -86,6 +86,13 @@ function born(seed) {
+ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (births)', () => {
+   beforeAll(async () => { await loadGenerationLawPayloads(); });
+   /** seed -> [the line that must NOT print on any power card, the line that prints instead] */
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee): lit, five towns no longer
++  // hold their case. r2r-city-10's craft guild leaves the roster and r2r-city-22's stands Minor (the case: a craft guild born
++  // with the secondary line and standing Suppressed); r2r-hamlet-17, r2r-thorp-19 and r2r-thorp-25 read Contested (the case:
++  // the elders' seat born with its line under a legitimacy crisis). Each is re-picked, lit, by its case's own predicate (the
++  // line handed to `power/claimStanding.js :: settleClaimsToLabel`, the card's final label, the crisis the settle reads),
++  // never by the line that prints: the lowest unlisted seed of its family of 200 (r2r-city 5 56; r2r-hamlet 28; r2r-thorp
++  // 29 54). Was r2r-city-10, r2r-city-22, r2r-hamlet-17, r2r-thorp-19, r2r-thorp-25
+   const TOWNS = /** @type {Record<string, [string | null, string]>} */ ({
+     "r2r-city-11": [
+         "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+@@ -127,11 +134,11 @@ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (birth
+         "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
+         "The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."
+     ],
+-    "r2r-city-10": [
++    "r2r-city-5": [
+         "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+         "The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops."
+     ],
+-    "r2r-city-22": [
++    "r2r-city-56": [
+         "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+         "The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops."
+     ],
+@@ -139,15 +146,15 @@ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (birth
+         "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
+         "The oldest heads of the community still decide things together, but fewer and fewer people accept their word."
+     ],
+-    "r2r-hamlet-17": [
++    "r2r-hamlet-28": [
+         "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
+         "The oldest heads of the community still decide things together, but fewer and fewer people accept their word."
+     ],
+-    "r2r-thorp-19": [
++    "r2r-thorp-29": [
+         "Respected elders guide the community; authority is moral and traditional rather than formal.",
+         "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word."
+     ],
+-    "r2r-thorp-25": [
++    "r2r-thorp-54": [
+         "Respected elders guide the community; authority is moral and traditional rather than formal.",
+         "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word."
+     ],
+diff --git a/tests/generators/prosperityStanding.test.js b/tests/generators/prosperityStanding.test.js
+index 8ede6ed4b..ecee032b0 100644
+--- a/tests/generators/prosperityStanding.test.js
++++ b/tests/generators/prosperityStanding.test.js
+@@ -25,20 +25,24 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
+ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+ 
+ /** seed -> [tier, forced crisis, printed label at e1b2f9c1f, standing label, months at the standing share] */
++// the lit birth's values (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the fortune law moves the labels and the months by design;
++// was hamlet-2 Struggling/Moderate/1.6, village-0 Struggling/Moderate/1.7, town-1 Moderate/Comfortable/6.1, metropolis-1
++// Moderate/Moderate/14.1, under_siege-city-0 Struggling/Wealthy/8.8, wartime-town-0 Comfortable/Wealthy/6.3, occupied-city-0
++// Poor/Prosperous/9 (printed/standing/months)
+ const PINS = Object.freeze({
+   'v3build-thorp-0': ['thorp', null, 'Struggling', 'Struggling', 1.4],
+   'v3build-hamlet-1': ['hamlet', null, 'Struggling', 'Poor', 1.5],
+-  'v3build-hamlet-2': ['hamlet', null, 'Struggling', 'Moderate', 1.6],
+-  'v3build-village-0': ['village', null, 'Struggling', 'Moderate', 1.7],
+-  'v3build-town-1': ['town', null, 'Moderate', 'Comfortable', 6.1],
++  'v3build-hamlet-2': ['hamlet', null, 'Poor', 'Comfortable', 1.7],
++  'v3build-village-0': ['village', null, 'Moderate', 'Prosperous', 1.9],
++  'v3build-town-1': ['town', null, 'Comfortable', 'Prosperous', 6.3],
+   'v3build-city-0': ['city', null, 'Struggling', 'Comfortable', 8.7],
+   'v3build-city-2': ['city', null, 'Wealthy', 'Wealthy', 9],
+-  'v3build-metropolis-1': ['metropolis', null, 'Moderate', 'Moderate', 14.1],
++  'v3build-metropolis-1': ['metropolis', null, 'Poor', 'Poor', 13.2],
+   'v3build-famine-town-0': ['town', 'famine', 'Struggling', 'Moderate', 1.4],
+   'v3build-famine-city-0': ['city', 'famine', 'Struggling', 'Comfortable', 7],
+-  'v3build-under_siege-city-0': ['city', 'under_siege', 'Struggling', 'Wealthy', 8.8],
+-  'v3build-wartime-town-0': ['town', 'wartime', 'Comfortable', 'Wealthy', 6.3],
+-  'v3build-occupied-city-0': ['city', 'occupied', 'Poor', 'Prosperous', 9],
++  'v3build-under_siege-city-0': ['city', 'under_siege', 'Struggling', 'Comfortable', 8.5],
++  'v3build-wartime-town-0': ['town', 'wartime', 'Moderate', 'Prosperous', 6.3],
++  'v3build-occupied-city-0': ['city', 'occupied', 'Poor', 'Comfortable', 8.7],
+ });
+ 
+ /** @param {string} seed */
+diff --git a/tests/generators/tailNarrativeRows.test.js b/tests/generators/tailNarrativeRows.test.js
+index 1cadbced2..d884b6395 100644
+--- a/tests/generators/tailNarrativeRows.test.js
++++ b/tests/generators/tailNarrativeRows.test.js
+@@ -59,7 +59,11 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
+     ['11478', 'r2s-slave_revolt-thorp-1', 'pressure', /timber that made it/, /without destroying what made it worth holding/],
+     ['00708', 'r2s-monster_pressure-village-3', 'pressure', /a mill standing idle/, /\(fields left unworked, a mill kept turning for its buyers\)/],
+     ['01079', 'r2s-wartime-city-1', 'pressure', /is prospering on the right side/, /^Jalalserai is at war and, for now, on the right side of it/],
+-    ['03831', 'r2s-indebted-metropolis-0', 'pressure', /a distinction that has not gone unnoticed/, /took the loans and is now repaying them/],
++    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2s-indebted-metropolis-0's first power is the
++    // Thieves' Guild beside the Arcane Senate governing, so its contrast is true there and no longer the case. Re-scanned
++    // r2s-indebted-metropolis-0..199 lit for the case's own predicate (the slot draws the loans row, and the first power is the
++    // governing one): 4 5 12 27 ...; 4 is the first (was r2s-indebted-metropolis-0)
++    ['03831', 'r2s-indebted-metropolis-4', 'pressure', /a distinction that has not gone unnoticed/, /took the loans and is now repaying them/],
+     ['B17142', 'r2s-famine-town-1', 'pressure', /at least three powers/, /its strongest powers are each watching who holds/],
+     ['B04491', 'r2r-city-37', 'pressure', /nor keep them fed/, /nor find them all work/],
+     ['B01841', 'r2s-politically_fractured-metropolis-2', 'pressure', /all three powers/, /the only person every power here will still speak to/],
+diff --git a/tests/generators/tailTies3Batch1.test.js b/tests/generators/tailTies3Batch1.test.js
+index c87985a00..8343b18ed 100644
+--- a/tests/generators/tailTies3Batch1.test.js
++++ b/tests/generators/tailTies3Batch1.test.js
+@@ -80,18 +80,28 @@ describe('TAIL-TIES-3 batch 1', () => {
+   it('NOT (b): no rival claimant on a contested seat; each row says what the condition holds', () => {
+     // the alternation's literals, one by one (exactly equivalent); the anchor is the contested rows' own words
+     const NOT = ['a rival claims it', 'rivals fight over the seat', 'both sides in the fight for the seat', 'claimant'];
+-    const failures = collectSeedFailures(['r2s-plague_onset-thorp-3', 'r2r-village-48', 'r2r-hamlet-32', 'r2r-town-35'], (seed) => {
++    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee): lit, r2r-village-48
++    // (Approved) and r2r-hamlet-32 (Tolerated) are no longer in the contested condition, so no contested row prints there.
++    // Each is re-picked, lit, by the case's own predicate (the writer's condition, `npcStructure.js :: getPrimaryCondition`,
++    // reads 'contested'), the lowest of its family of 200: r2r-hamlet-4; r2r-village-10, the lowest contested village that
++    // also seats a faith card heading the first religious power (the faith's contested row below; village-1, the lowest
++    // contested, seats none). Was r2r-village-48 and r2r-hamlet-32
++    const failures = collectSeedFailures(['r2s-plague_onset-thorp-3', 'r2r-village-10', 'r2r-hamlet-4', 'r2r-town-35'], (seed) => {
+       const printed = (town(seed).npcs || []).map((/** @type {any} */ n) => `${n.structuralPosition ?? ''} ${n.activeConstraint ?? ''} ${n.goal?.short ?? ''}`).join(' | ');
+       for (const word of NOT) expectAbsentWithAnchor(printed, word, contestedWords(printed), seed); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the contested pools' own words
+     });
+     expectNoSeedFailures(failures, 'no contested seat names a rival claimant');
+-    expect(memberOf('religious__contested__dominant', card('r2r-village-48', 'Santosh Dubey').structuralPosition), 'the faith\'s contested row').toBe(true); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the row is pooled
++    // RE-PICKED BY THE PREMISE (THE FLIP, 2026-11-23): the faith's card of r2r-village-10 (was Santosh Dubey of r2r-village-48)
++    expect(memberOf('religious__contested__dominant', card('r2r-village-10', 'Palnatoke Andersson').structuralPosition), 'the faith\'s contested row').toBe(true); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the row is pooled
+     expect(card('r2r-town-35', 'Roxane Angelos').structuralPosition).toBe("Heads the crew while many doubt the seat's right and those who keep order look elsewhere.");
+   });
+ 
+   it('INSTEAD (b): the contested seat-holder still holds the seat on the card, in the condition\'s words', () => {
+     // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20): the holder's contested row is pooled; every member opens "Holds the seat"
+-    const thecla = card('r2r-thorp-30', 'Thecla Schulz').structuralPosition;
++    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2r-thorp-30 is Tolerated and Prosperous, not in
++    // the contested condition; r2r-thorp-5 is the lowest r2r-thorp of 200 lit in it (the writer's getPrimaryCondition), and
++    // Banbh Ryan its seat-holder's card (was Thecla Schulz of r2r-thorp-30)
++    const thecla = card('r2r-thorp-5', 'Banbh Ryan').structuralPosition;
+     expect(thecla).toMatch(/^Holds the seat\b/);
+     expect(memberOf('government__contested__dominant', thecla), String(thecla)).toBe(true);
+   });
+diff --git a/tests/generators/upkeepHired.test.js b/tests/generators/upkeepHired.test.js
+index 6daba27a7..b2107f0b4 100644
+--- a/tests/generators/upkeepHired.test.js
++++ b/tests/generators/upkeepHired.test.js
+@@ -134,16 +134,23 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
+   beforeAll(async () => { await loadGenerationLawPayloads(); });
+   const FLOORS = { military: 0.6, monster: 0.7, internal: 0.65, economic: 0.45, disaster: 0.55 };
+ 
+-  test('RED-FIRST agree-village-16 (Comfortable, output 16): every gate is the identity', () => {
+-    const s = born('agree-village-16');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law on), agree-village-16 reads
++  // Prosperous. Re-scanned agree-village-0..199 lit for the case's own predicate (the label Comfortable, the output,
++  // compound.economyOutput, under 50: UPKEEP-ECONOMICS-PAGE-97's disagreement): 10 19 35 68 ...; 10 is the first (output 38)
++  test('RED-FIRST agree-village-10 (Comfortable, output 38): every gate is the identity', () => {
++    const s = born('agree-village-10');
+     expect(s.economicState.prosperity).toBe('Comfortable');
+     const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
+     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
+     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(1);
+   });
+ 
+-  test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at the Struggling rung of the ladder', () => {
+-    const s = born('agree-village-5');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-5 reads Poor. The case's own
++  // predicate (the label Struggling, the output 50 or more) holds on no agree-village of 800 lit (21 of 200 Struggling, the
++  // highest output 44), so the row takes the same corpus at the next size down that holds it: agree-hamlet-88, the lowest
++  // agree-hamlet of 200 lit (hamlet 88 94 199; was agree-village-5)
++  test('RED-FIRST agree-hamlet-88 (Struggling, output 60): every gate stands at the Struggling rung of the ladder', () => {
++    const s = born('agree-hamlet-88');
+     expect(s.economicState.prosperity).toBe('Struggling');
+     const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
+     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
+@@ -280,8 +287,11 @@ describe('the guard assessment says what the place can pay for its hired force',
+     expect(today.startsWith(twin), 'anchored: the safety writer printed today\'s lead').toBe(true);
+   });
+ 
+-  test('RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
+-    const s = born('agree-village-40');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-40 reads Comfortable. Re-scanned
++  // agree-village-0..199 lit for the case's own predicate (the label Poor, a charter hall, no garrison, watch or militia):
++  // 28 alone (was agree-village-40)
++  test('RED-FIRST agree-village-28 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
++    const s = born('agree-village-28');
+     expect(s.economicState.prosperity).toBe('Poor');
+     // Re-keyed by identity at COHERENCE-UPKEEP-6 (F7): the charter hall's purse line is now a pair (as far as
+     // the purse runs; the coin for bounties short), so the claim is that a declared charter purse line prints.
+@@ -372,8 +382,11 @@ describe('the charter hall says whether the town can pay its bounties (F7)', ()
+ 
+   // Re-keyed by identity at the chair's ruling 1(b) (the purse lines read the STANDING label): agree-village-40
+   // prints Poor but stands Moderate, so the Poor birth that stands Poor is agree-village-43.
+-  test('agree-village-43 (Poor in ordinary years, a charter hall and no standing guard) prints the short line', () => {
+-    const s = born('agree-village-43');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-43 stands Comfortable. Re-scanned
++  // agree-village-0..199 lit for the case's own predicate (the standing label Poor, a charter hall, no garrison, watch or
++  // militia): 28 102; 28 is the first, printed and standing Poor (was agree-village-43)
++  test('agree-village-28 (Poor in ordinary years, a charter hall and no standing guard) prints the short line', () => {
++    const s = born('agree-village-28');
+     expect(s.economicState.prosperityStanding).toBe('Poor');
+     expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charterLine('prosperity: ≤ poor')?.text);
+   });
+diff --git a/tests/generators/warContractsSecretProsperity.test.js b/tests/generators/warContractsSecretProsperity.test.js
+index 242d275c8..5d522d546 100644
+--- a/tests/generators/warContractsSecretProsperity.test.js
++++ b/tests/generators/warContractsSecretProsperity.test.js
+@@ -43,8 +43,11 @@ describe('the war-contracts secret needs a town the war made rich', () => {
+       expect(holders(s), `${seed}: carries no such secret`).toEqual([]);
+     }), 'a town below comfortable carries no such secret');
+   });
+-  it('r2s-wartime-city-0: a comfortable town keeps it', () => {
+-    const s = born('r2s-wartime-city-0');
++  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law on), r2s-wartime-city-0 reads
++  // Moderate. Re-scanned r2s-wartime-city-0..99 lit for the case's own predicate (the label Comfortable): 6 13 53 59 ...; 6
++  // is the first (was r2s-wartime-city-0)
++  it('r2s-wartime-city-6: a comfortable town keeps it', () => {
++    const s = born('r2s-wartime-city-6');
+     expect(s.economicState.prosperity).toBe('Comfortable');
+     expect(holders(s).length).toBe(1);
+   });
