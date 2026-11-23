@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a27ea19d7899798006ee79fc61d797358a5b11a6",
-  "measuredBy": "STACK-106",
+  "measuredAtSha": "3b5a37a23dec124becd6207c9cc529161f902b5e",
+  "measuredBy": "CLOSE-6",
   "date": "2026-11-23",
-  "note": "point 110 (PROSE-D: the state sentences that disagreed now agree), measured at a27ea19d7 on a clean tree",
+  "note": "13G (the ninth chair N97): one new it in tests/generators/bar8Powers.test.js, the 900-birth 13g arm",
   "files": 3785,
   "parked": 487,
   "credited": 3298,
-  "titles": 31924,
+  "titles": 31925,
   "suiteTitles": 8876
 }
