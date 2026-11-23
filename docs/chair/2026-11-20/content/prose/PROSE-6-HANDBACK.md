@@ -1,6 +1,6 @@
 # PROSE-6 HAND-BACK (kept current at every push)
 
-## WHERE THE LANE STANDS (written 10:41 UTC 2026-11-23; THE LINE IS 9b0ffaa97; PROSE-E cf104777c TAKEN (N80), landing with the flip; LIT-DISAGREE measured; WAITING)
+## WHERE THE LANE STANDS (written 10:28 UTC 2026-11-23; THE LINE IS 9b0ffaa97; PROSE-E cf104777c TAKEN (N80), landing with the flip; LIT-DISAGREE measured; WAITING)
 - SEAT: PROSE-6 of the ninth chair (session_01FbPLbdpQrxXktCeSf32d4j), ONE UNIT: "DISAGREE". PROSE-5's units 2-5 and its -wip branches stay PARKED: untouched.
 - BRANCHES: `lane/prose-6-2026-11-23` (this file; `lines/DISAGREE-LINES.md` as ruled at 03:45 and 03:55; `briefs/DISAGREE.md` + `briefs/DISAGREE-ADDENDUM-1.md`); `lane/prose-6-2026-11-23-disagree-wip`, cut at 244fa84ef, pushed at 01ecf1e91 (report `DISAGREE-REPORT.md`). Worktrees /home/user/wt-disagree and /home/user/wt-disagree-base (244fa84ef + the tooth's two files, uncommitted, for the red run). Builder: Agent a6ac7eee0af5d9d50.
 - BUILT: FOOD: F1-F6 (DS-DEF-2 CHAIN v7-v12), flat v1-v4 gain `food: <= pressured`. WAGES: no `force: paid` anywhere; WEAK v1 and v2 re-worded in place by two WORD_CORRECTIONS rows (CHAIR-2026-11-23-03:45, -03:55); GEN-17 leaf equal to 244fa84ef. The tooth `tests/domain/oppositeSentencePairs.test.js` + `tests/helpers/oppositeSentencePairs.mjs` (FOOD row; old WEAK words and GEN-17 v2's tail pinned at 0; no cell empty but dz-city-101). Test pins re-stated by cause; registers by their doors.
