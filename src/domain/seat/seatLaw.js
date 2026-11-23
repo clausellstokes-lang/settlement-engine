@@ -74,7 +74,7 @@ export const HOLDER_SEAT_LAW_VERSION = SEAT_LAW_VERSIONS[1];
  *  kernel the day that dial was lit): a dial's type is the SPACE of versions, never today's
  *  setting, so the mint's dormant comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_SEAT_LAW_VERSION = DEFAULT_SEAT_LAW_VERSION;
+export const NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION;
 
 /**
  * The seat-law version a value selects. Only an enabled NUMBER that is not the default selects
