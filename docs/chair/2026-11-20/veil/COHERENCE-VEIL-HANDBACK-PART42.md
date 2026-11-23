@@ -66,6 +66,14 @@ additions only); runner `/var/tmp/v18/out/v40/rivalgates-run.sh` (a NEW pool `/v
 server page (hidden-house towns, every setting but g:111, off and DM).
 THE ORDER OF THE SEAT's OWN HEAVY RUNS: after RIVAL's red and green: the new pool + both gates (rivalgates-run.sh; on the stack if
 T5's three are green, ruling 117 (c)); then L1 (ruling 121): control, towns 140, stored today and master (gallery and link only).
+B2 RETURNED AT ITS BUDGET, UNFINISHED (its report 12:41; ~340,000): aa54a6791 on c7a4e9a4e, PUSHED; hand-back
+`out/v40/r5dpage-b/R5DPAGE-B2-HANDBACK.md`. Stored pools 440 + 440 (`/var/tmp/v18/t2/stored-v40/{today,master}`; seed index pool-v40).
+Full stored: reader B 4,232/4,232 equal; share class 508 rows / 115 records; N67 0 of 2,992 differ. ASKED OF THE CHAIR: (1) "gap-based"
+read as every difference-picked form (OC-* alone not), pin 36 on 9 under it (unconfirmed, not re-run); (2) A STOP IN src/: stored
+fidelity 48 faults, reader S gives a density rival a standing its stored desc lacks. Test faults fixed, NOT re-run (the differential's
+40, the plant's 128); the plant's 4 = 107 (3) (RIVAL's). The stored plant + publicProse count jobs still running at 12:42. OWED: B2's
+re-run queue (`/var/tmp/v18/t2/stored-v40/logs/full2/jobs.txt`: the 7 dead jobs + the fixed arms), `tests/lint` + `tests/copy` whole:
+THIS SEAT runs them after L1 (mutex-order.txt).
 UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AND phase 2 (B2, B3) has run.
 
 ## 2. RULINGS SINCE PART 39 (numbered on from 109)
@@ -150,3 +158,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 11:19 ruling 118; T5's WIP pushed (58cf00f6c); 11:28 ruling 119, relayed to T5; 11:29 PART 42 pushed.
 - 11:36 ruling 120 (PIN-3 b58abc48b), fetched; 11:37 PART 42.
 - 11:44 ruling 121 (L1); the cost told; 11:44 PART 42.
+- 12:07 the chair's push-hygiene rule (`/var/tmp/v18/out/v40/push.sh`, guarded); 12:41 B2 returned; 12:43 pushed, the chair told.
