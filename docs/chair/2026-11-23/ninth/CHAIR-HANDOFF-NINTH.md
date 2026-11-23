@@ -222,6 +222,10 @@ CHAIN A's (N96). 13g ("the guild bought the hall" beside "a war of arrests": 3 o
 with "LIT <commit>"). CHAIN A's MUTEX WAS HELD SINCE 09:30 BY A STALE RUN (S1): ORDERED STOPPED (N98). THE SHARED-MAP
 HOLE HAS ITS RED FIRST (the member 24 sends, the map import 24) AND ITS GREEN IS BEING BUILT NARROW (N95). CHAIN A's
 EXTRA STANDING LINE IS CURED ON THE PAGE ALONE: S skips a row whose base is one of the seven rival texts (N95).
+SINCE N99 (N100): THE NEXT HOURLY CHECK IS trig_01EyMBZSjNWVfFfnudoLRSoY AT 14:11 UTC. ALL FOUR SUCCESSORS HAVE A DRAFT
+START MESSAGE ON THIS LANE (`prompts/DRAFT-START-VEIL-45.txt` chain C, `-46` the join, `-47` the doors, `-48` chain A):
+EACH IS FILLED AND PUSHED BEFORE ITS SESSION IS CREATED, AND A SUCCESSOR IS SEATED ONLY AFTER ITS PREDECESSOR HAS
+STOPPED, AT A STEP'S END, NEVER INSIDE A RUN.
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2803,3 +2807,18 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   BEFORE its pool and gates start, never in the middle of them.
   (3) THE CHAIR'S PUSHES: the forty-first (a0dad41d8: N94 and VEIL-48's draft) ended exit=0 at 12:50:18 UTC (its log;
   ls-remote equal to the local tip).
+- 2026-11-23 13:13 UTC · N100 · THE DOORS' SUCCESSOR HAS A DRAFT: ALL FOUR SUCCESSORS' START MESSAGES ARE DRAFTED; THE
+  NEXT HOURLY CHECK.
+  THE CHAIR'S PUSHES: the forty-second (c384888d6: N95 to N99) ended exit=0 at 13:12:27 UTC (its log; ls-remote equal
+  to the local tip). The hourly check was made at 13:07 to 13:10; its reminder of 13:11
+  (trig_01PqDkpYkdTGm1CHzWjwtzMH) was deleted, its work done; THE NEXT IS trig_01EyMBZSjNWVfFfnudoLRSoY AT 14:11:00
+  UTC. COMMITTED WITH THIS ENTRY: `prompts/DRAFT-START-VEIL-47.txt` (the doors' successor: a draft with blanks; it
+  reads START-VEIL-44.txt whole and PART 46's first section first; the chair's rulings on the unit listed (a) to (f):
+  the member is the link's read at both Reveals; the narrow green and the single restatement; the snapshots and the
+  chronicle measured first; the front-page lists; the door-equality arm; the paid gate named to the owner). VEIL-44
+  (its `date -u` 13:10): one builder at a time taken; `tests/lint` whole at its door -wip's merge 6c7bf0b97: 48
+  failing of 3,304, the base's own 48 by title; its own count about 390,000 (the chair's read 390,341); the SQL
+  builder's brief committed (d0e680f83), dispatched when TRAD4-RECUT returns. SAID TO THE OWNER (the hourly word): the
+  state; nothing needed of him; his open decision. SENT at the check: N99 to VEIL-41 (its proof carried to its "TIP?"
+  on this session) and to VEIL-40 (never a hand-over inside a run; its own count and the step it can still end are
+  owed).
