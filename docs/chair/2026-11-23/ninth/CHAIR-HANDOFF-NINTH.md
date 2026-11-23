@@ -32,7 +32,10 @@ VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
 calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
 EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
-warning: the figure is the seat's present context, not what it has read). FIGURES OF 12:08 UTC (the helper's read, its clock 12:08:13; NO FIGURE FELL since 11:10): CLOSE-6 292,851; VEIL-40
+warning: the figure is the seat's present context, not what it has read). FIGURES OF 13:07 UTC (the helper's read, its clock 13:07:31; NO FIGURE FELL since 12:08): CLOSE-6 308,723; VEIL-40
+377,717 (unchanged in one long turn: stale; its true count is higher); VEIL-41 518,202 (IT CARRIES ITS RUNNING PROOF TO
+ITS "TIP?" ON THIS SESSION: its hand-over line is lifted to 660,000 by the chair's read for this proof alone: N99);
+VEIL-42 409,893; VEIL-43 454,619 (stale-low: a long turn since 12:41); VEIL-44 390,341 (+51,817 in the hour). THE FIGURES OF 12:08 UTC (history; no figure fell since 11:10): CLOSE-6 292,851; VEIL-40
 377,717; VEIL-41 473,464 (THE NEAREST: `prompts/DRAFT-START-VEIL-45.txt` is its successor's draft); VEIL-42 394,611;
 VEIL-43 409,431 (THE FASTEST, +72,191 in the hour: ITS SUCCESSOR'S START MESSAGE IS DRAFTED NEXT); VEIL-44 338,524 (87
 minutes after its seating: it read wide and is told so). THE FIGURES OF 11:10 UTC (history; no figure fell since 10:08): CLOSE-6 258,492; VEIL-40
@@ -211,6 +214,14 @@ chain A's unit before its "TIP?"; the seat owes one line on how S can know such 
 ARE CLASSED (the lint walkers: 16 expected, one new: `holderOfSeat.js :: transferTakerOf`, to unit (2)'s sites).
 "F-FORTUNE-3 8f882d0f0" IS ON THE FLIP BRANCH AND LIT-13G's MEASURE IS RUNNING. CHAIN A's SUCCESSOR HAS A DRAFT
 (`prompts/DRAFT-START-VEIL-48.txt`); SO HAVE CHAIN C's (VEIL-45) AND THE JOIN's (VEIL-46); THE DOORS' (VEIL-47) IS OWED.
+SINCE N94 (N95 TO N99): CHAIN C's WHOLE PROOF ("STORED-PROSE" ALONE) RUNS SINCE 12:58:03 UTC IN VEIL-41's OWN CONTAINER,
+FIVE TO SIX HOURS: A HAND-OVER IN THE MIDDLE WOULD LOSE IT (N99 says how far that seat may go). "R5-TENSION" RIDES IN
+CHAIN C's NEXT UNIT ("LEGACY-TELLS"); THE MASK'S OTHER PATH (a third power's standing sentence, two documents) IS
+CHAIN A's (N96). 13g ("the guild bought the hall" beside "a war of arrests": 3 of 900 dark, 4 lit) IS CURED BEFORE
+"FLIP", IN THE FLIP'S STACK (N97): THE JOIN'S SEAT MUST HAND THE VEIL'S PAGE READER THE SAME READING ("13G x S", owed
+with "LIT <commit>"). CHAIN A's MUTEX WAS HELD SINCE 09:30 BY A STALE RUN (S1): ORDERED STOPPED (N98). THE SHARED-MAP
+HOLE HAS ITS RED FIRST (the member 24 sends, the map import 24) AND ITS GREEN IS BEING BUILT NARROW (N95). CHAIN A's
+EXTRA STANDING LINE IS CURED ON THE PAGE ALONE: S skips a row whose base is one of the seven rival texts (N95).
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2675,4 +2686,120 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   listed (a) to (f): the rival, T5 with its controls and the two stops, the share class, S's rule, the whole-document
   form at two doors, the bar and its run). VEIL-44 (12:17): its mark taken; its PART 46 section 1 (4) re-written for a
   successor (1c57ebdd9). THE CHAIR'S PUSHES: the fortieth (317774598: N93) ended exit=0 at 12:19:05 UTC (its log;
+  ls-remote equal to the local tip).
+- 2026-11-23 13:09 UTC · N95 · CHAIN A's EXTRA STANDING LINE IS CURED ON THE PAGE ALONE (S SKIPS THE SEVEN RIVAL
+  TEXTS); THE SHARED-MAP HOLE HAS ITS RED FIRST, AND ITS GREEN IS BUILT NARROW.
+  (1) CHAIN A, THE EXTRA STANDING LINE (VEIL-40, queued 12:48:42, on N94 (3)): A SERVED FACT EXISTS (plausible; its
+  builder confirms first): the 48 are T12 rivals (The Garrison Bloc, The Shield Compact, The Martial Alliance), minted
+  by `resizePoliticalRoster` with `rivalDescOf(host.desc)`, which gives the description a FRESH TEXT, one of the seven
+  `RIVAL_DESC_OF_HOST` rows, written after every standing pass; phase 1 counted 0 natural rows with such a text on
+  4,856 open reads. **Decided (N95):** S SKIPS A ROW WHOSE SERVED BASE EQUALS ONE OF THE SEVEN TEXTS EXACTLY: A
+  PAGE-ONLY CURE: 212, the twin and the registry stay; `contestsNiche` stays withheld. CONDITIONS: the three
+  confirmations are the builder's first measure, before any edit (all 48 are such texts; no such row carries a stored
+  standing on the born and the stored pools; no other row lacks a stored standing that S gives it): one failing is a
+  STOP and the chair's lean of N94 is the cure; S reads the seven texts from their one table by import; a pin: no
+  natural row's base equals one of the seven; the import's save read in the same arm; red first on the 48 and a plant;
+  the never-there differential and the share class's counts re-run after. TAKEN BY THE SEAT (13:03): builder R5D-SSKIP
+  on `lane/veil-40-2026-11-23-sskip-wip` (brief f3cdc6aa3).
+  (2) THE SHARED-MAP HOLE HAS ITS RED FIRST (VEIL-44, queued 12:49:14 and 12:55:17): "MAPCOVERT-RED" at 6edc79094:
+  `tests/security/galleryMapCovert.pglite.test.js`: 3 failed of 8: THE MAP MEMBER 24 SENDS AND THE MAP IMPORT 24 (the
+  hand plant, every marker, Reveal off); chain B's two places born and stored: 60; the controls green (the gallery
+  read, the link, the tooth); the stored today-born arm 7 of 7 in every cell; the seat's own re-run the same three;
+  merged into its door -wip at 6c7bf0b97. Its builder met the push-with-nothing-to-send fault (the third seat today;
+  killed; nothing foreign). **Decided (N95):** the deviation (a copied probe loads one file only under a flag, the tip
+  lacking it): no veto. FOR THE MAP DOORS REVEAL DM IS ASSERTED AFTER THE CURE: by N84 (a) the member is the link's
+  read at both Reveals and the link sends 0 everywhere. THE GREEN MAY BE BUILT NOW ON ITS -WIP, NARROW (the seat's own
+  shape, taken): `get_gallery_map` restated in 212 as 211's statement plus the member's overrides in the LINK's form
+  and `_gallery_veil(..., true)`, at both Reveals; the rollback restores 211's statement; doors-3's helpers and the
+  frozen name and tier join the same single restatement at the doors' merge after R4-IDS; NOTHING MERGED BEFORE
+  "R4-IDS MERGED"; no second whole proof (the pool and the gates run once, on the tree that carries R4-IDS). One
+  builder at a time stands (the SQL builder after TRAD4-RECUT).
+- 2026-11-23 13:09 UTC · N96 · "R5-TENSION" STOPPED AT ITS MEASURE: THE MASK AT TWO PATHS ON TWO DOCUMENTS; CHAIN C's
+  WHOLE PROOF STARTS ("STORED-PROSE" ALONE); THE TENSIONS' HALF RIDES IN "LEGACY-TELLS", THE DESCRIPTION'S HALF IS
+  CHAIN A's.
+  (1) "R5-TENSION" STOPPED AT ITS FIRST MEASURE, AS ORDERED (VEIL-41, queued 12:53:03; `out/v41/ten/TEN-REPORT.md` at
+  b1a07356d on `lane/veil-41-2026-11-23-tension-wip`, 46 lines: READ WHOLE BY THE CHAIR once it reached origin at
+  12:57). On its base 79e94d633, the twin on all 1,948 documents (46,752 reads) and the three server doors on the 86
+  documents with a hidden power (a departure, listed: no mask can be written elsewhere, and the twin finds none): THE
+  MASK WORD STANDS AT TWO PATHS ONLY, 22 marked and 2 unmarked reads a cell, on the same two documents
+  (t2p-village-infiltrated-261 and -311): `history.currentTensions[].factions[]` AND `powerStructure.factions[].desc`.
+  NOT E94's case: the hidden power ("The Independent Bloc") does not govern; the masked string in the description is A
+  THIRD POWER's STANDING SENTENCE ("Religious Authorities": "... they play The Independent Bloc and Elected Reeve
+  against each other when they can.", served with the mask in the name's place). No party list shortened; Reveal DM
+  serves the name on the twin, the page and the import; the link masks on both Reveals; the unmarked share masks at
+  Reveal off on every door (listed).
+  (2) **Decided (N96):** (a) THE SEAT'S ASK IS GRANTED: THE WHOLE PROOF STARTS on the -c2-wip as it stands (ced3b1de7:
+  C2-BUILD, the pins, PIN-3): it is "STORED-PROSE" alone. IT STARTED AT 12:58:03 UTC (`out/v41/proof/proof.sh`: the
+  per-read hashes; `prose.sh`; chain B's instrument with its control, L1 on the 140 at two doors and on both stored
+  sets; the read-stored gates on the tip and on c2; the 55-file set; the rollback and the catalogue; `tests/lint` and
+  `tests/copy` whole; typecheck, eslint, one build). (b) "R5-TENSION" LEAVES THAT UNIT AND RIDES IN CHAIN C's NEXT
+  ONE, "LEGACY-TELLS": one proof for both; its builder goes on meanwhile on the party-list half (plant red first, both
+  engines, one registry row; its runs under five minutes until the proof ends). (c) THE MASK'S SECOND PATH IS CHAIN
+  A's: the standing part is withheld always and written again by S over the served roster (R5-DESC): the two documents
+  were given to VEIL-40 as cases its stored pool's name arm must show clean. ARM (i) IS IN TWO HALVES; THE WHOLE ARM
+  (the mask word in no served document at any path where the veil runs and the name is not served) is asserted at the
+  later of the two merges, and again at the bar. (d) In its "TIP? STORED-PROSE" line: where "table A" and "line B"
+  stand (from its `PINS-REPORT.md`); THE CHAIR READS THE UNIT's DIFF AT THAT LINE. **Why (a) and (b):** the proof
+  costs five to six hours of one mutex and the cure was not built; the next unit's proof carries it at no cost; both
+  halves land before the bar.
+- 2026-11-23 13:09 UTC · N97 · "LIT-13G": 3 OF 900 DARK, 4 LIT; AN ORDER FAULT OF THE PIPELINE; CURED BEFORE "FLIP" IN
+  THE FLIP'S STACK ("13G": THE CARD'S GATE READS WHAT THE TIE READS).
+  (1) "LIT-13G MEASURED" (CLOSE-6, queued 12:55:23; `close-6/reports/LIT-13G.md` at 31e8e6ade on its documents branch,
+  126 lines: READ WHOLE BY THE CHAIR): rule 13g ("where the guild has bought the seat, no card prints a war of
+  arrests") IS ALREADY BROKEN DARK: of the census's 900 births, DARK (9b0ffaa97) 3 (dp-city-42, dp-metropolis-111,
+  dp-metropolis-118); LIT (8f882d0f0) 4 (the same and dp-metropolis-83); the control r2r-city-5 lit only. THE SPLIT IS
+  EXACT PER BIRTH: only the fortune law moves it. THE CAUSE: the cards' war-family lines are written by
+  `factionStanding.js :: annotateFactionStanding` under one gate, `seatBoughtOf` (true only where the governing power
+  is itself criminal), and written again at assembly and under the fortune law by the same gate; the relation row's
+  `corrupted` is written LATER, at the coherence seam (`withHallCapture`, from `hallCaptureOf`: a hidden agent among
+  the ruling three); lit, the size-relative prosperity lowers one town's reading, the allegiance deal's chance rises
+  0.2647 to 0.2872, and the same keyed roll makes rank 1 an agent. AN ORDER FAULT OF THE PIPELINE, PRE-EXISTING; the
+  flip adds one birth in 900. READ BY THE CHAIR ON THE LINE (:209 to :244): under the gate the two lines are OMITTED;
+  no "bought" sentence exists.
+  (2) **Decided (N97):** 13g IS CURED BEFORE "FLIP", IN THE FLIP'S STACK, AS ITS OWN COMMIT ("13G"), AHEAD OF F-JOIN's
+  RE-PINS, F9 AND THE REGISTERS. THE RULE: THE CARD'S GATE READS WHAT THE TIE READS: where the record's own relation
+  row reads bought, no card prints a line of the war-of-arrests family, at every re-annotation after the coherence
+  seam; the power step's first writes stand; the lines are omitted as today: NO NEW SENTENCE. ITS PROOF: red first: an
+  arm over the 900 by the test's own rule: 3 dark and 4 lit BY NAME, then 0 and 0; r2r-city-5 lit; a tooth; NO OTHER
+  BYTE MOVES: a per-birth hash of the 900, dark and lit, before and after (a birth outside the named ones that moves
+  is a STOP); the standing rule on frozen surfaces; `tests/copy` whole; the fortune files re-run after it. **Why
+  before the flip:** it is the owner's own order ("Can you fix these:": two lines of one page that disagree); it is
+  small; the flip is not the long road. TAKEN BY THE SEAT (13:07): its builder dispatched by `close-6/briefs/13G.md`
+  (92f01e6e7), the cure in `factionStanding.js` only, its estimate under three hours; F-JOIN's builder paused with no
+  edit. SAID TO THE OWNER. OWED TO THE JOIN'S SEAT: "13G x S": the veil's page reader S re-runs the same writer over
+  the served roster: after 13G it must be handed the SERVED rows' reading, or a veiled page prints a war line the
+  owner's page omits.
+- 2026-11-23 13:09 UTC · N98 · CHAIN A's MUTEX WAS HELD SINCE 09:30 BY A STALE RUN: ORDERED STOPPED.
+  VEIL-40's lock (its line queued 13:03:09): of its tests builder's three stored jobs two ended (3 failed of 4 each:
+  the stored arms it had named) and THE THIRD, "S1", HAD RUN AT 97% CPU SINCE 09:30, holding the seat's one mutex with
+  the rival's red and green, the new pool and both gates behind it. **Decided (N98):** S1 IS STOPPED BY THE SEAT: a
+  run of its own builder's batch on its own box, started on tests since changed (the differential's and the plant's
+  tension faults were fixed in the test and never re-run); what it still counted is re-run anyway (the stored plant)
+  or moot (the `publicProse` blocks: the key is withheld whole since N49): its result could not be used. Stopped as a
+  plain command of its own, its log kept; then the rival's runs. If stopping it loses something the chair has not
+  named, the seat says so INSTEAD and does not stop it; a refusal by its own permission check stands. **Why:** chain A
+  is the bar's longest road; three and a half hours of its one mutex had gone to a run whose result was obsolete, and
+  the estimates of 10:17 (the rival about 13:00) were already spent.
+- 2026-11-23 13:09 UTC · N99 · THE HOURLY CHECK OF 13:08; HOW FAR VEIL-41 MAY GO TO FINISH ITS PROOF.
+  (1) THE HOURLY CHECK (the reminder trig_01PqDkpYkdTGm1CHzWjwtzMH, set for 13:11 UTC; the marks read by one haiku
+  helper started at 13:07): its clock 13:07:31: CLOSE-6 308,723 (+15,872 in the hour); VEIL-40 377,717 (THE SAME
+  FIGURE AS AT 12:08 though it sent three lines since: one long turn: the figure is stale and its true count is
+  higher); VEIL-41 518,202 (+44,738; its own estimate 535,000); VEIL-42 409,893 (+15,282); VEIL-43 454,619 (+45,188;
+  last moved 12:41: a long turn, so stale-low; its successor's draft is `prompts/DRAFT-START-VEIL-46.txt`); VEIL-44
+  390,341 (+51,817: still fast after its diet of 12:17; ITS SUCCESSOR's DRAFT, `prompts/DRAFT-START-VEIL-47.txt`, IS
+  OWED NOW). NO FIGURE FELL; every seat connected, served by claude-opus-5-5; none is past 570,000. THE NEXT HOURLY
+  CHECK IS SET WITH THIS ENTRY (its id in the next entry).
+  (2) **Decided (N99): VEIL-41 CARRIES ITS PROOF TO ITS END AND TO ITS "TIP? STORED-PROSE" ON THIS SESSION.** The
+  proof runs in its own container for five to six hours; a successor has another box and would have to run it again.
+  FOR THIS PROOF ALONE its hand-over line (570,000 by the chair's read, 620,000 by its own) is lifted to 660,000 BY
+  THE CHAIR'S READ; the mark stays 700,000. ITS DIET: nothing read whole; a log by its tail; its builder's report at
+  most 40 lines; no line to the chair but a stop, a step that reds, the proof's end and the "TIP?"; the chair sends it
+  nothing that can wait. EACH STEP'S RECEIPT IS COMMITTED AND PUSHED AS THE STEP ENDS, so that a finished step is
+  never lost with the container. Its PART 43's first section is made current once, now, for VEIL-45, which takes
+  "LEGACY-TELLS" with R5-TENSION after the merge. If the chair's read passes 640,000 before the proof ends, the chair
+  rules again. **Why:** a hand-over in the middle of the proof costs the whole proof; the last hundred thousand of the
+  window are for exactly this. THE SAME RISK STANDS FOR CHAIN A (its stacked proof has not started and its seat is
+  past 377,717 by a stale figure) AND IS WATCHED: if VEIL-40 cannot reach its "TIP?" before 660,000, it hands over
+  BEFORE its pool and gates start, never in the middle of them.
+  (3) THE CHAIR'S PUSHES: the forty-first (a0dad41d8: N94 and VEIL-48's draft) ended exit=0 at 12:50:18 UTC (its log;
   ls-remote equal to the local tip).
