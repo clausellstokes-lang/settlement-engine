@@ -1,0 +1,146 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 9029 after 29 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+RE-RUN (from /home/user/settlement-engine): sh scripts/gate-mutex.sh --run -- node docs/chair/2026-11-20/content/daily/measures/OFFICE/measure.office.mjs > docs/chair/2026-11-20/content/daily/measures/OFFICE/office.out.txt 2>&1
+  [/home/user/wt-daily3-office] thorp done, 150 births, 10s
+  [/home/user/wt-daily3-office] hamlet done, 300 births, 20s
+  [/home/user/wt-daily3-office] village done, 450 births, 36s
+  [/home/user/wt-daily3-office] town done, 600 births, 72s
+  [/home/user/wt-daily3-office] city done, 750 births, 147s
+  [/home/user/wt-daily3-office] metropolis done, 900 births, 254s
+DARK: /home/user/wt-daily3-office at 1ec3e81d1: 900 births in 254s; seat law on the records: 1
+  [/home/user/wt-daily3-lit] thorp done, 150 births, 8s
+  [/home/user/wt-daily3-lit] hamlet done, 300 births, 17s
+  [/home/user/wt-daily3-lit] village done, 450 births, 32s
+  [/home/user/wt-daily3-lit] town done, 600 births, 62s
+  [/home/user/wt-daily3-lit] city done, 750 births, 135s
+  [/home/user/wt-daily3-lit] metropolis done, 900 births, 237s
+LIT: /home/user/wt-daily3-lit at 5c4419815: 900 births in 237s; seat law on the records: 2
+
+== 1. the five keys' forms in the table (row, bands holding the form, formKindOf) ==
+  elders: row government: Elder Council [small; formKindOf=government]; Free Elder Council [small; formKindOf=government]; Elder Consensus [small; formKindOf=government]; Household Council [small; formKindOf=government]
+  headman: row government: Headman's Authority [small; formKindOf=government]
+  mayor: row government: Town Mayor [town; formKindOf=government]
+  reeve: row government: Elected Reeve [small; formKindOf=government]
+  lord's steward: row noble: Feudal Stewardship [small; formKindOf=noble]
+  table forms (55): Elder Council | Household Council | Free Elder Council | Elder Consensus | Headman's Authority | Elected Reeve | Town Council | Town Mayor | City Council | Grand Council | Democratic assembly | City-State Council | Noble Regency | Feudal Stewardship | Ducal Governorship | Feudal Appointee | Royal Authority | Noble Governorship | Garrison Command | Militia Command | Military Council | Grand Military Council | Military City Council | Merchant oligarchy | Merchant Council | Merchant City Council | Guild Council | Grand Merchant Senate | Grand Merchant Oligarchy | Merchant Guild Council | Grand Guild Consortium | Guild Authority | Grand Guild Council | Ecclesiastical Council | Church Council | Priestly Guidance | Theocratic Council | High Theocratic Council | Circle of Adepts | Arcane Council | Grand Arcane Council | Arcane Senate | Guildmasters' Moot | Guildhall Council | Grand Guild Assembly | Commons Assembly | Workers' Assembly | Grand Commons Assembly | Foreign Stewardship | Foreign Administration | Martial Administration | Occupation Authority | Corrupt Council | Corrupt City Council | Shadow Senate
+  table identical dark/lit: true
+
+== 2. born governing forms by size, DARK (form: count per thorp/hamlet/village/town/city/metropolis) ==
+  City Council: 0/0/0/0/55/0
+  City-State Council: 0/0/0/0/8/7
+  Democratic assembly: 0/0/0/0/8/6
+  Ducal Governorship: 0/0/0/0/0/23
+  Elder Council: 100/79/106/0/0/0
+  Elected Reeve: 0/0/21/0/0/0
+  Feudal Appointee: 0/0/0/14/0/0
+  Feudal Stewardship: 15/19/11/0/0/0
+  Free Elder Council: 0/23/0/0/0/0
+  Grand Council: 0/0/0/0/0/45
+  Grand Guild Consortium: 0/0/0/0/0/28
+  Grand Merchant Oligarchy: 0/0/0/0/0/29
+  Guild Council: 0/0/0/24/0/0
+  Headman's Authority: 0/29/12/0/0/0
+  Household Council: 35/0/0/0/0/0
+  Merchant Guild Council: 0/0/0/0/33/0
+  Merchant oligarchy: 0/0/0/14/23/0
+  Noble Governorship: 0/0/0/0/17/0
+  Royal Authority: 0/0/0/0/6/12
+  Town Council: 0/0/0/42/0/0
+  Town Mayor: 0/0/0/56/0/0
+  no governing row: 0; form not a table key (formKindOf null): 0 
+  form in its row but not in its tier's band: 0 
+  governing row name != powerStructure.government: 0 
+  governing row hidden: 0; veiled (hidden or criminal): 0
+
+== 2. born governing forms by size, LIT (form: count per thorp/hamlet/village/town/city/metropolis) ==
+  City Council: 0/0/0/0/55/0
+  City-State Council: 0/0/0/0/8/7
+  Democratic assembly: 0/0/0/0/8/6
+  Ducal Governorship: 0/0/0/0/0/23
+  Elder Council: 100/79/106/0/0/0
+  Elected Reeve: 0/0/21/0/0/0
+  Feudal Appointee: 0/0/0/14/0/0
+  Feudal Stewardship: 15/19/11/0/0/0
+  Free Elder Council: 0/23/0/0/0/0
+  Grand Council: 0/0/0/0/0/45
+  Grand Guild Consortium: 0/0/0/0/0/28
+  Grand Merchant Oligarchy: 0/0/0/0/0/29
+  Guild Council: 0/0/0/24/0/0
+  Headman's Authority: 0/29/12/0/0/0
+  Household Council: 35/0/0/0/0/0
+  Merchant Guild Council: 0/0/0/0/33/0
+  Merchant oligarchy: 0/0/0/14/23/0
+  Noble Governorship: 0/0/0/0/17/0
+  Royal Authority: 0/0/0/0/6/12
+  Town Council: 0/0/0/42/0/0
+  Town Mayor: 0/0/0/56/0/0
+  no governing row: 0; form not a table key (formKindOf null): 0 
+  form in its row but not in its tier's band: 0 
+  governing row name != powerStructure.government: 0 
+  governing row hidden: 0; veiled (hidden or criminal): 0
+
+== 3. share by size (DARK | LIT), the dark/lit disagreement per seed, the shared-read disagreements ==
+  office: elders
+    DARK 90.0% 68.0% 70.7% 0.0% 0.0% 0.0%
+    LIT  90.0% 68.0% 70.7% 0.0% 0.0% 0.0%
+    dark/lit disagree: 0/900 (of them, with the same born form: 0) e.g. —
+    shared read (toPublicSafe, both sides, 1800): owner true & shared false 0; owner false & shared true 0; full-share disagree 0; publicVeiledRecordOf disagree 0
+  office: headman
+    DARK 0.0% 19.3% 8.0% 0.0% 0.0% 0.0%
+    LIT  0.0% 19.3% 8.0% 0.0% 0.0% 0.0%
+    dark/lit disagree: 0/900 (of them, with the same born form: 0) e.g. —
+    shared read (toPublicSafe, both sides, 1800): owner true & shared false 0; owner false & shared true 0; full-share disagree 0; publicVeiledRecordOf disagree 0
+  office: mayor
+    DARK 0.0% 0.0% 0.0% 37.3% 0.0% 0.0%
+    LIT  0.0% 0.0% 0.0% 37.3% 0.0% 0.0%
+    dark/lit disagree: 0/900 (of them, with the same born form: 0) e.g. —
+    shared read (toPublicSafe, both sides, 1800): owner true & shared false 0; owner false & shared true 0; full-share disagree 0; publicVeiledRecordOf disagree 0
+  office: reeve
+    DARK 0.0% 0.0% 14.0% 0.0% 0.0% 0.0%
+    LIT  0.0% 0.0% 14.0% 0.0% 0.0% 0.0%
+    dark/lit disagree: 0/900 (of them, with the same born form: 0) e.g. —
+    shared read (toPublicSafe, both sides, 1800): owner true & shared false 0; owner false & shared true 0; full-share disagree 0; publicVeiledRecordOf disagree 0
+  office: lord's steward
+    DARK 10.0% 12.7% 7.3% 0.0% 0.0% 0.0%
+    LIT  10.0% 12.7% 7.3% 0.0% 0.0% 0.0%
+    dark/lit disagree: 0/900 (of them, with the same born form: 0) e.g. —
+    shared read (toPublicSafe, both sides, 1800): owner true & shared false 0; owner false & shared true 0; full-share disagree 0; publicVeiledRecordOf disagree 0
+
+  seeds whose born FORM differs dark vs lit: 0/900; by size 0/0/0/0/0/0
+  seeds with the SAME form whose HOLDER (holderOf, owner) differs dark vs lit: 5 e.g. hxd-village-100: Elder Council: null -> Merchant Guilds; hxd-city-38: Democratic assembly: Craft Guilds -> Merchant Guilds; hxd-metropolis-77: Grand Council: Merchant Guilds -> The Guild Alliance
+
+== 4. the shared document: the form, the row ==
+  DARK: governing row absent on the shared doc 0; its name changed (mask/veil) 0; powerStructure.government dropped 0, changed 0
+  LIT: governing row absent on the shared doc 0; its name changed (mask/veil) 0; powerStructure.government dropped 0, changed 0
+
+== 5. the adjacent forms (NOT in the five keys): their share, both sides, for the chair's wording ==
+  Foreign Stewardship: DARK 0/0/0/0/0/0 | LIT 0/0/0/0/0/0
+  Feudal Appointee: DARK 0/0/0/14/0/0 | LIT 0/0/0/14/0/0
+  Town Council: DARK 0/0/0/42/0/0 | LIT 0/0/0/42/0/0
+  Priestly Guidance: DARK 0/0/0/0/0/0 | LIT 0/0/0/0/0/0
+
+== 6. ruler kind (rulerKindOf, the label regex) against the candidate office, DARK+LIT ==
+  elders: elder=686
+  headman: elder=82
+  mayor: mayor=112
+  reeve: mayor=42
+  lord's steward: lord=90
+
+== 7. first paint (vite.config.js :: EAGER_FIRST_PAINT_MODULES, FIRSTPAINT2_LAZY_DOMAIN) ==
+  dark:
+    /src/domain/seat/seatTable.js: eager=true pinned-lazy=false
+    /src/domain/rulingPower.js: eager=true pinned-lazy=false
+    /src/domain/facts/factVocabulary.js: eager=true pinned-lazy=false
+    /src/domain/facts/factsOf.js: eager=false pinned-lazy=true
+    /src/domain/seat/holderOfSeat.js: eager=false pinned-lazy=true
+    /src/data/cultureOfficeTitles.js: eager=false pinned-lazy=false
+    /src/domain/display/stateProse/stateProseKernel.js: eager=true pinned-lazy=false
+  lit:
+    /src/domain/seat/seatTable.js: eager=true pinned-lazy=false
+    /src/domain/rulingPower.js: eager=true pinned-lazy=false
+    /src/domain/facts/factVocabulary.js: eager=true pinned-lazy=false
+    /src/domain/facts/factsOf.js: eager=false pinned-lazy=true
+    /src/domain/seat/holderOfSeat.js: eager=false pinned-lazy=true
+    /src/data/cultureOfficeTitles.js: eager=false pinned-lazy=false
+    /src/domain/display/stateProse/stateProseKernel.js: eager=true pinned-lazy=false
+
+DONE

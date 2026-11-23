@@ -1,0 +1,82 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 4963 after 5 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+RE-RUN: sh scripts/gate-mutex.sh --run -- node docs/chair/2026-11-20/content/daily/measures/B3/L8/measure.l8.mjs > docs/chair/2026-11-20/content/daily/measures/B3/L8/l8.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 152s
+
+════ commoner_resentments (public, no audience)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| BEFORE: top single SENTENCE % of 150 | 17 | 11 | 13 | 8 | 9 | 14 |
+| BEFORE: EMPTY % of 150 (count) | 19 (29) | 9 (13) | 7 (11) | 35 (53) | 34 (51) | 26 (39) |
+| AFTER: top single SENTENCE % of 150 | 10 | 11 | 11 | 8 | 9 | 14 |
+| AFTER: EMPTY % of 150 (count) | 19 (29) | 9 (13) | 7 (11) | 35 (53) | 34 (51) | 26 (39) |
+| legitimacy branch taken (count) | 120 | 137 | 136 | 69 | 23 | 19 |
+| FALSE route: a printed text not its branches' keyed pick of the admitted lines | 0 | 0 | 0 | 0 | 0 | 0 |
+| places whose text moved (before != after) | 107 | 120 | 124 | 25 | 0 | 0 |
+  before top sentence thorp (25/150): "Talk among neighbours turns, sooner or later, to what the Elder Council has got wrong lately."
+  before top sentence hamlet (16/150): "People say the council is slow to listen and quick to decide without them."
+  before top sentence village (20/150): "People do as the Elder Council says, but few of them think well of it."
+  before top sentence town (12/150): "Many feel that those in charge should be doing more to see everyone fed."
+  before top sentence city (13/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+  before top sentence metropolis (21/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+  after top sentence thorp (15/150): "People do as the Elder Council says, but few of them think well of it."
+  after top sentence hamlet (17/150): "People say the council is slow to listen and quick to decide without them."
+  after top sentence village (16/150): "Talk among neighbours turns, sooner or later, to what the Elder Council has got wrong lately."
+  after top sentence town (12/150): "Many feel that those in charge should be doing more to see everyone fed."
+  after top sentence city (13/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+  after top sentence metropolis (21/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+
+════ L8..L12: printed share by size, and FALSE (printed where the office does not hold)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| L8 (office: elders) printed: % of 150 (count) | 4 (6) | 8 (12) | 7 (11) | 0 (0) | 0 (0) | 0 (0) |
+| FALSE L8 printed where office: elders does not hold | 0 | 0 | 0 | 0 | 0 | 0 |
+| L9 (office: headman) printed: % of 150 (count) | 0 (0) | 4 (6) | 1 (2) | 0 (0) | 0 (0) | 0 (0) |
+| FALSE L9 printed where office: headman does not hold | 0 | 0 | 0 | 0 | 0 | 0 |
+| L10 (office: mayor) printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 3 (4) | 0 (0) | 0 (0) |
+| FALSE L10 printed where office: mayor does not hold | 0 | 0 | 0 | 0 | 0 | 0 |
+| L11 (office: reeve) printed: % of 150 (count) | 0 (0) | 0 (0) | 2 (3) | 0 (0) | 0 (0) | 0 (0) |
+| FALSE L11 printed where office: reeve does not hold | 0 | 0 | 0 | 0 | 0 | 0 |
+| L12 (office: lord's steward) printed: % of 150 (count) | 3 (4) | 3 (5) | 1 (1) | 0 (0) | 0 (0) | 0 (0) |
+| FALSE L12 printed where office: lord's steward does not hold | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE L12 printed where no sovereign is given (its second need, the chair's E95) | 0 | 0 | 0 | 0 | 0 | 0 |
+FALSE TOTAL (route + L8..L12): 0
+
+════ the five atoms' share by size (factsOf(record).office), beside measures/OFFICE (DARK, point 97)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| office: elders | 90.0% | 68.0% | 70.7% | 0.0% | 0.0% | 0.0% |
+  OFFICE-M: 90.0% 68.0% 70.7% 0.0% 0.0% 0.0%  | equal: true
+| office: headman | 0.0% | 19.3% | 8.0% | 0.0% | 0.0% | 0.0% |
+  OFFICE-M: 0.0% 19.3% 8.0% 0.0% 0.0% 0.0%  | equal: true
+| office: mayor | 0.0% | 0.0% | 0.0% | 37.3% | 0.0% | 0.0% |
+  OFFICE-M: 0.0% 0.0% 0.0% 37.3% 0.0% 0.0%  | equal: true
+| office: reeve | 0.0% | 0.0% | 14.0% | 0.0% | 0.0% | 0.0% |
+  OFFICE-M: 0.0% 0.0% 14.0% 0.0% 0.0% 0.0%  | equal: true
+| office: lord's steward | 10.0% | 12.7% | 7.3% | 0.0% | 0.0% | 0.0% |
+  OFFICE-M: 10.0% 12.7% 7.3% 0.0% 0.0% 0.0%  | equal: true
+
+════ the coordinator's addition (count only, no cure): L9 printed AND, on the same place, dawn_work W11 or B19, or gathering_places P13
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| L9 with W11 (count) | 0 | 0 | 0 | 0 | 0 | 0 |
+| L9 with B19 (count) | 0 | 0 | 0 | 0 | 0 | 0 |
+| L9 with P13 (count) | 0 | 0 | 0 | 0 | 0 | 0 |
+| L9 with W11 or B19 or P13 (count) | 0 | 0 | 0 | 0 | 0 | 0 |
+
+════ THE WALKERS' STRIKES: where the office holds, the thing the walker reads absent (its own reader), and where the line printed
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| office: headman holds (count) | 0 | 29 | 12 | 0 | 0 | 0 |
+|   of them, house: headman absent by the rule book's reader | 0 | 0 | 0 | 0 | 0 | 0 |
+|   of them, L9 printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| office: reeve holds (count) | 0 | 0 | 21 | 0 | 0 | 0 |
+|   of them, house: reeve absent by the rule book's reader | 0 | 0 | 0 | 0 | 0 | 0 |
+|   of them, L11 printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| office: lord's steward holds (count) | 15 | 19 | 11 | 0 | 0 | 0 |
+|   of them, house: lord's steward absent by the rule book's reader | 15 | 0 | 0 | 0 | 0 | 0 | e.g. hxd-thorp-52
+|   of them, L12 printed | 4 | 0 | 0 | 0 | 0 | 0 | e.g. hxd-thorp-52
+| office: lord's steward holds (count) | 15 | 19 | 11 | 0 | 0 | 0 |
+|   of them, sovereign absent by the rule book's reader | 0 | 0 | 0 | 0 | 0 | 0 |
+|   of them, L12 printed | 0 | 0 | 0 | 0 | 0 | 0 |
+
+done in 152s

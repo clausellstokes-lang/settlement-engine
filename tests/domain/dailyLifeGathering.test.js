@@ -95,7 +95,9 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
   it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.gathering_places::<branch>`', () => {
     const plain = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };
     const eligible = filterDeclared(GATHERING_PLAIN, { facts: factsOf(plain) });
-    expect(eligible.map((l) => l.id)).toEqual(['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9']);
+    // D5C-2 phase B appended P16 to P20 (`lines/D4C/DRAFT-2.md`); by the chair's ruling (b) of 2026-11-23 01:57 UTC each
+    // needs `institution: dwellings` at least, and this thorp holds dwellings, water and fields, so all five are eligible here
+    expect(eligible.map((l) => l.id)).toEqual(['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P16', 'P17', 'P18', 'P19', 'P20']);
     expect(text(plain)).toBe(/** @type {any} */ (pickVariantMixed(eligible, 'Ashby::dailyLife.gathering_places::plain')).text);
     expect(text({ ...plain, name: undefined })).toBe(eligible[0].text);
   });

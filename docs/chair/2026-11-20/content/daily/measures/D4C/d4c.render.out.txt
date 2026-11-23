@@ -1,0 +1,36 @@
+D4C TABLE 3 — THE REST OF THE PAGE: 30 births rendered (d4c-<size>-0..4), every group, sub-tab and disclosure (walkDossier).
+births whose government or a faction name itself holds "'s": 1 (d4c-hamlet-2: Headman's Authority)
+tabs walked a place: 23, 22; ms a place: 1411 1029 1087 1100 1001 1496 1103 960 828 1240 1861 1419 1581 1824 2243 3508 2860 2281 2801 3006 7278 7245 6009 4421 7416 8346 9215 7347 8038 6626
+
+tab | rendered lines (30 places) | (a) DOUBLE power-name possessive | (b) any <power name>'s | (c) X's Y's by shape
+Systems/Power | 3136 | 0 | 26 | 0
+    poss: d4c-thorp-1: "The Elder Council governs Somapat. Its seat is held by Rohini Bhatt, the head shepherd and Elder. Few in Somapat still accept the Elder Council's right to rule. Insecurity and weak defences have cost "
+    poss: d4c-thorp-3: "The Elder Council governs Terrasaltus. Its seat is held by Regulus Aurelius, the boat-headman and Elder. Few in Terrasaltus still accept the Elder Council's right to rule. Insecurity and poverty have "
+World/Daily Life | 497 | 0 | 1 | 0
+    poss: d4c-metropolis-3: "Outsiders notice the Grand Guild Consortium's mark is on every door that matters. Travellers here talk of beasts seen at the edge of the settled land."
+World/Relationships | 3827 | 0 | 0 | 4
+    shape: d4c-city-0: "network's head's" in "Everyone thinks Gobnat Brennan made their own way. In fact Tailte MacBride paid for every step, and Gobnat Brennan takes the network's head's instructions without argument."
+    shape: d4c-metropolis-0: "network's head's" in "Arjun Balan wants Ratnakara Kapur's position, and the house boss wants the network's head's reputation. They are civil in public and unforgiving in private."
+World/NPCs | 8844 | 0 | 0 | 1
+    shape: d4c-hamlet-1: "lord's steward's" in "Wants Get the lord's steward's office through the season without borrowing."
+Summary/Overview | 1109 | 0 | 0 | 0
+Summary/Crisis | 368 | 0 | 0 | 0
+Summary/Foundations | 647 | 0 | 0 | 0
+Summary/Plot Hooks | 2424 | 0 | 0 | 0
+Systems/Institutions | 4624 | 0 | 0 | 0
+Systems/Services | 4916 | 0 | 0 | 0
+Systems/Economics | 2913 | 0 | 0 | 0
+Systems/Resources | 548 | 0 | 0 | 0
+Systems/Defense | 1630 | 0 | 0 | 0
+Systems/Magic | 553 | 0 | 0 | 0
+Systems/Outlook | 151 | 0 | 0 | 0
+World/Traditions | 428 | 0 | 0 | 0
+World/History | 1420 | 0 | 0 | 0
+World/Rumors & News | 60 | 0 | 0 | 0
+World/War | 60 | 0 | 0 | 0
+World/Faith | 90 | 0 | 0 | 0
+Notes/DM Notes | 60 | 0 | 0 | 0
+Notes/AI Notes | 90 | 0 | 0 | 0
+Notes/Chronicle | 30 | 0 | 0 | 0
+
+TOTAL: (a) 0  (b) 27  (c) 5

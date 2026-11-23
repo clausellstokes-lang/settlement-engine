@@ -19,6 +19,10 @@
  * NOT BUILT (a need with no atom, ruling 11; `dailyLifeAtoms.test.js :: NOT_GRANTED`): E0 "the empty stalls in the trade
  * quarter" (`tradeQuarter`); rival N0 "anything bearing the colours of the neighbour" and N1 "trusting anyone who comes
  * from the neighbouring place" (`neighbour`).
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
+ * taken 2026-11-22 21:55 UTC): monster_pressure P10 to P13, appended at the branch's end, its keyed pick unchanged
+ * (`tests/domain/dailyLifeNewLines.test.js`).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} WarningLine */
@@ -66,6 +70,10 @@ export const CHILD_WARNINGS = Object.freeze({
     { id: 'P7', text: 'going down for water alone after dark', needs: ['institution: waterSource'] },
     { id: 'P8', text: 'being outside the walls once the gates are shut', needs: ['walls', 'gate'] },
     { id: 'P9', text: 'wandering beyond the last streets after dark', needs: ['population: ≥ middling', 'tier: ≥ village'] },
+    { id: 'P10', text: 'slipping out of doors once it is dark', needs: [] },
+    { id: 'P11', text: 'answering any call that comes out of the dark', needs: [] },
+    { id: 'P12', text: 'staying out once the evening comes on', needs: [] },
+    { id: 'P13', text: 'leaving a door unbarred at night', needs: [] },
   ]),
 
   plague: frozen([
@@ -129,3 +137,14 @@ export const CHILD_WARNINGS = Object.freeze({
     { id: 'X17', text: 'Children are warned about the usual things: leaning over the water to look in, and straying far from home.', needs: ['institution: waterSource'] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** Every warning is a consequence (what a condition makes the grown-ups tell the children). */
+export const CHILD_WARNINGS_DOES = Object.freeze(Object.fromEntries(Object.keys(CHILD_WARNINGS).map((b) => [b, Object.freeze({ consequence: true })])));

@@ -78,7 +78,7 @@ describe('the narrative re-rolls stay open to every owner (metering, not access)
     const seen = [];
     for (const tier of ['premium', 'free']) {
       setViewer(tier);
-      Object.assign(mocks.state, { aiDailyLife: { morningScene: 'Bells over the square.' }, requestDailyLife: vi.fn() });
+      Object.assign(mocks.state, { aiDailyLife: { morningScene: 'Bells over the square.' } });
       const { container } = render(React.createElement(DailyLifeTab, { settlement: town(), saveId: 's1' }));
       expect(screen.queryByRole('button', { name: /Generate Daily Life/ }), tier).toBeNull();
       seen.push(container.textContent);

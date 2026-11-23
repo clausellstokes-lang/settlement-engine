@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d03fae82d2ea40ce585a9eecf43a30d57e9677db",
-  "measuredBy": "PROSE-6 DISAGREE",
+  "measuredAtSha": "a27ea19d7899798006ee79fc61d797358a5b11a6",
+  "measuredBy": "STACK-106",
   "date": "2026-11-23",
-  "note": "DISAGREE addendum 1 (PROSE-6): the tooth's ARM 5 (the re-worded lines' old words) new in tests/domain/oppositeSentencePairs.test.js, measured at d03fae82d on a clean tree (the untracked node_modules symlink alone excluded for the door's dirty check)",
-  "files": 3776,
-  "parked": 485,
-  "credited": 3291,
-  "titles": 31871,
-  "suiteTitles": 8853
+  "note": "point 110 (PROSE-D: the state sentences that disagreed now agree), measured at a27ea19d7 on a clean tree",
+  "files": 3785,
+  "parked": 487,
+  "credited": 3298,
+  "titles": 31924,
+  "suiteTitles": 8876
 }

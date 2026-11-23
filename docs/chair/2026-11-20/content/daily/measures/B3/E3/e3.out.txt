@@ -1,0 +1,160 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/E3/measure.e3.mjs > docs/chair/2026-11-20/content/daily/measures/B3/E3/e3.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 155s
+
+════ outsider_impressions
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 11 | 7 | 12 | 10 | 11 | 9 |
+| top whole text % of 150 | 1 | 1 | 1 | 1 | 2 | 2 |
+| distinct texts | 149 | 149 | 146 | 147 | 141 | 136 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| EMPTY % of 150 | 0 | 0 | 0 | 0 | 0 | 0 |
+| reach % / min eligible / bar's need: ordinary | 12 / 3 / 1 | 10 / 3 / 1 | 5 / 4 / 1 | 17 / 4 / 2 | 19 / 4 / 2 | 21 / 4 / 2 |
+| reach % / min eligible / bar's need: power | 99 / 8 / 7 | 95 / 8 / 7 | 60 / 8 / 4 | 73 / 8 / 5 | 75 / 8 / 5 | 75 / 8 / 5 |
+| reach % / min eligible / bar's need: power.level | 1 / 4 / 1 | 5 / 4 / 1 | 40 / 4 / 3 | 27 / 4 / 2 | 25 / 4 / 2 | 25 / 4 / 2 |
+| reach % / min eligible / bar's need: services.administrative | 17 / 6 / 2 | 39 / 6 / 3 | 34 / 6 / 3 | 7 / 6 / 1 | 7 / 6 / 1 | 11 / 6 / 1 |
+| reach % / min eligible / bar's need: services.defense | 38 / 6 / 3 | 30 / 6 / 2 | 53 / 6 / 4 | 45 / 9 / 3 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: services.food_production | 7 / 2 / 1 | 7 / 2 / 1 | 1 / 2 / 1 | 11 / 3 / 1 | 23 / 3 / 2 | 13 / 3 / 1 |
+| reach % / min eligible / bar's need: services.healing | 25 / 8 / 2 | 11 / 8 / 1 | 7 / 5 / 1 | 19 / 5 / 2 | 13 / 5 / 1 | 1 / 5 / 1 |
+| reach % / min eligible / bar's need: threat.famine.any | 1 / 1 / 1 | 2 / 1 / 1 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: threat.monster_pressure.frontier | 53 / 6 / 4 | 36 / 6 / 3 | 43 / 6 / 3 | 49 / 7 / 4 | 42 / 7 / 3 | 51 / 7 / 4 |
+| reach % / min eligible / bar's need: threat.monster_pressure.overrun | 12 / 5 / 1 | 23 / 5 / 2 | 15 / 5 / 1 | 17 / 6 / 2 | 24 / 6 / 2 | 17 / 6 / 2 |
+| reach % / min eligible / bar's need: threat.monster_pressure.stressor | 1 / 2 / 1 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: threat.plague.any | 3 / 3 / 1 | 4 / 3 / 1 | 4 / 3 / 1 | 2 / 3 / 1 | 2 / 4 / 1 | 1 / 4 / 1 |
+| reach % / min eligible / bar's need: threat.siege.any | 1 / 3 / 1 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: threat.unrest.void | 3 / 2 / 1 | 3 / 2 / 1 | 3 / 2 / 1 | 1 / 2 / 1 | 0 / — / 0 | 0 / — / 0 |
+  pool branches never taken on the 900: threat.unrest.stressor, threat.economic_collapse.route, threat.economic_collapse.stressor, threat.bandit_raids.any, threat.rival_neighbor.any, threat.arcane_instability.any, services.magical
+| FALSE: a printed text not its branches' keyed picks of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: M1's engine lines ("the wound", "has come to a head", "new shape of things", "obvious unspoken weight", "civic services run short") | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an engine label (civic stability, economic fragility, at risk) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an age (N years ago) or "founding survey" | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hidden or rumoured threat's label printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a veiled power's name printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a crime word (crim|smuggl|corrupt|thie|brib|black market|scandal) printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hideable house cited (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (16/150): "People here keep an eye on the wild country and mention it often."
+  top sentence hamlet (11/150): "Visitors learn early that it pays to stay on good terms with the Elder Council."
+  top sentence village (18/150): "A visitor finds more than one door to knock on before anything is decided here."
+  top sentence town (15/150): "A visitor soon learns that the country beyond is not to be walked carelessly."
+  top sentence city (16/150): "Ask who decides things here, and a visitor hears more than one name."
+  top sentence metropolis (14/150): "No single name comes up first when a visitor asks who holds sway here."
+
+════ unspoken_topics
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 5 | 5 | 6 | 7 | 9 | 9 |
+| top whole text % of 150 | 5 | 5 | 6 | 7 | 9 | 9 |
+| distinct texts | 53 | 53 | 57 | 54 | 53 | 48 |
+| EMPTY (no true line) | 19 | 31 | 11 | 16 | 3 | 7 |
+| EMPTY % of 150 | 13 | 21 | 7 | 11 | 2 | 5 |
+| reach % / min eligible / bar's need: wound.demographic_pressure | 1 / 2 / 1 | 1 / 2 / 1 | 1 / 2 / 1 | 2 / 2 / 1 | 0 / — / 0 | 1 / 2 / 1 |
+| reach % / min eligible / bar's need: wound.disputed_land | 1 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.economic_disparity | 0 / — / 0 | 0 / — / 0 | 1 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.external_threat | 7 / 3 / 1 | 5 / 3 / 1 | 7 / 3 / 1 | 5 / 3 / 1 | 5 / 3 / 1 | 4 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.generational_divide | 3 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 0 / — / 0 |
+| reach % / min eligible / bar's need: wound.great_fire | 3 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 3 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.great_flood | 5 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 5 / 3 / 1 | 2 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.guild_conflict | 0 / — / 0 | 1 / 2 / 1 | 1 / 5 / 1 | 25 / 5 / 2 | 26 / 5 / 2 | 35 / 5 / 3 |
+| reach % / min eligible / bar's need: wound.heresy_trial | 2 / 3 / 1 | 1 / 3 / 1 | 3 / 3 / 1 | 0 / — / 0 | 1 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.infiltration_fear | 1 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 3 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.leadership_vacuum | 3 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 4 / 3 / 1 | 4 / 3 / 1 | 3 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.legitimacy_crisis | 5 / 3 / 1 | 4 / 3 / 1 | 8 / 3 / 1 | 5 / 3 / 1 | 5 / 3 / 1 | 4 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.magical_controversy | 3 / 3 / 1 | 2 / 3 / 1 | 4 / 3 / 1 | 4 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.market_crash | 0 / — / 0 | 0 / — / 0 | 3 / 3 / 1 | 1 / 3 / 1 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: wound.outside_debt | 6 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 5 / 3 / 1 | 10 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.pilgrimage_surge | 2 / 3 / 1 | 0 / — / 0 | 3 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.plague_years | 4 / 3 / 1 | 4 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.popular_uprising | 3 / 3 / 1 | 5 / 3 / 1 | 7 / 3 / 1 | 1 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.population_friction | 2 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.religious_tension | 1 / 3 / 1 | 4 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.resource_scarcity | 17 / 4 / 2 | 17 / 4 / 2 | 13 / 4 / 1 | 10 / 4 / 1 | 7 / 4 / 1 | 7 / 4 / 1 |
+| reach % / min eligible / bar's need: wound.succession_crisis | 8 / 4 / 1 | 5 / 4 / 1 | 8 / 4 / 1 | 4 / 4 / 1 | 3 / 4 / 1 | 9 / 4 / 1 |
+| reach % / min eligible / bar's need: wound.trade_collapse | 2 / 2 / 1 | 5 / 2 / 1 | 4 / 2 / 1 | 1 / 2 / 1 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: wound.trade_dispute | 0 / — / 0 | 0 / — / 0 | 1 / 2 / 1 | 3 / 2 / 1 | 4 / 2 / 1 | 1 / 2 / 1 |
+| reach % / min eligible / bar's need: wound.tyranny | 2 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 1 / 3 / 1 | 4 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: wound.wild_magic | 5 / 2 / 1 | 4 / 2 / 1 | 4 / 2 / 1 | 3 / 2 / 1 | 4 / 2 / 1 | 0 / — / 0 |
+  pool branches never taken on the 900: (none)
+| FALSE: a printed text not its branches' keyed picks of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: M1's engine lines ("the wound", "has come to a head", "new shape of things", "obvious unspoken weight", "civic services run short") | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an engine label (civic stability, economic fragility, at risk) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an age (N years ago) or "founding survey" | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hidden or rumoured threat's label printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a veiled power's name printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a crime word (crim|smuggl|corrupt|thie|brib|black market|scandal) printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hideable house cited (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (7/150): "People do not talk openly about the shortage, least of all with outsiders."
+  top sentence hamlet (8/150): "People do not talk openly about the shortage, least of all with outsiders."
+  top sentence village (9/150): "What is running short here is a sore subject, and visitors are not told much about it."
+  top sentence town (11/150): "Traders here do not discuss the guild quarrel with customers, or with each other in public."
+  top sentence city (13/150): "The quarrel between the guilds and those outside them is not raised where both can hear."
+  top sentence metropolis (14/150): "Who may sell what, and who gets a say in how the place is run, is argued in private, not in public."
+
+════ recent_changes
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 7 | 7 | 7 | 6 | 6 | 6 |
+| top whole text % of 150 | 5 | 3 | 5 | 6 | 5 | 3 |
+| distinct texts | 109 | 122 | 109 | 109 | 109 | 112 |
+| EMPTY (no true line) | 1 | 0 | 2 | 0 | 3 | 1 |
+| EMPTY % of 150 | 1 | 0 | 1 | 0 | 2 | 1 |
+| reach % / min eligible / bar's need: beat | 62 / 8 / 5 | 80 / 8 / 6 | 79 / 8 / 6 | 78 / 8 / 6 | 65 / 8 / 5 | 73 / 8 / 5 |
+| reach % / min eligible / bar's need: calm | 23 / 7 / 2 | 12 / 7 / 1 | 7 / 7 / 1 | 15 / 7 / 1 | 19 / 7 / 2 | 16 / 7 / 2 |
+| reach % / min eligible / bar's need: condition.dominant_npc_removed | 3 / 3 / 1 | 4 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 7 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.faction_challenge | 2 / 3 / 1 | 3 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.famine | 7 / 3 / 1 | 5 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 0 / — / 0 | 0 / — / 0 |
+| reach % / min eligible / bar's need: condition.plague | 3 / 3 / 1 | 5 / 3 / 1 | 5 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.rebellion | 4 / 2 / 1 | 3 / 2 / 1 | 3 / 2 / 1 | 2 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.regional_authority_instability | 3 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 4 / 3 / 1 | 4 / 3 / 1 | 3 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.regional_migration_pressure | 1 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.regional_religious_pressure | 1 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.regional_tax_revenue_disruption | 5 / 3 / 1 | 2 / 3 / 1 | 1 / 3 / 1 | 2 / 3 / 1 | 3 / 3 / 1 | 7 / 3 / 1 |
+| reach % / min eligible / bar's need: condition.vassal_extraction | 2 / 3 / 1 | 3 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 1 / 3 / 1 | 0 / — / 0 |
+| reach % / min eligible / bar's need: condition.war_pressure | 7 / 1 / 1 | 7 / 1 / 1 | 7 / 1 / 1 | 6 / 1 / 1 | 5 / 1 / 1 | 6 / 1 / 1 |
+| reach % / min eligible / bar's need: threat.monster_pressure.overrun.realized | 12 / 5 / 1 | 23 / 5 / 2 | 15 / 5 / 1 | 17 / 5 / 2 | 24 / 5 / 2 | 17 / 5 / 2 |
+| reach % / min eligible / bar's need: threat.plague.any.imminent | 3 / 2 / 1 | 5 / 2 / 1 | 5 / 2 / 1 | 1 / 2 / 1 | 0 / — / 0 | 1 / 3 / 1 |
+| reach % / min eligible / bar's need: threat.unrest.void.imminent | 0 / — / 0 | 1 / 2 / 1 | 1 / 2 / 1 | 0 / — / 0 | 0 / — / 0 | 0 / — / 0 |
+  pool branches never taken on the 900: condition.alliance_burden, condition.government_overthrown, condition.coup_suppressed, condition.stressor_residual, condition.custom_crisis, condition.magical_instability, condition.trade_route_cut, condition.regional_import_shortage, condition.regional_export_market_loss, condition.regional_route_disruption, condition.regional_protection_gap, condition.regional_service_disruption, condition.cold_war_sanctions, condition.regional_conflict_pressure, condition.regional_information_shock, condition.food_anchor_lost, condition.war_exhaustion, condition.war_mobilization, condition.reinforcement_cost, condition.trade_realignment, condition.vassal_trade_coercion, condition.trade_embargo, condition.occupation_burden, condition.war_spoils, condition.reconstruction, condition.boom, condition.flourishing, threat.unrest.void.realized, threat.unrest.stressor.imminent, threat.unrest.stressor.realized, threat.economic_collapse.route.imminent, threat.economic_collapse.route.realized, threat.economic_collapse.stressor.imminent, threat.economic_collapse.stressor.realized, threat.monster_pressure.overrun.imminent, threat.monster_pressure.frontier.imminent, threat.monster_pressure.frontier.realized, threat.monster_pressure.stressor.imminent, threat.monster_pressure.stressor.realized, threat.plague.any.realized, threat.famine.any.imminent, threat.famine.any.realized, threat.siege.any.imminent, threat.siege.any.realized, threat.bandit_raids.any.imminent, threat.bandit_raids.any.realized, threat.rival_neighbor.any.imminent, threat.rival_neighbor.any.realized, threat.arcane_instability.any.imminent, threat.arcane_instability.any.realized
+| FALSE: a printed text not its branches' keyed picks of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: M1's engine lines ("the wound", "has come to a head", "new shape of things", "obvious unspoken weight", "civic services run short") | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an engine label (civic stability, economic fragility, at risk) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: an age (N years ago) or "founding survey" | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hidden or rumoured threat's label printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a veiled power's name printed (ruling 7) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a crime word (crim|smuggl|corrupt|thie|brib|black market|scandal) printed | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a hideable house cited (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE: the word "town" at a place smaller than a town (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (11/150): "War is close enough now to be felt in everyday business and in the mood of the place."
+  top sentence hamlet (11/150): "Beasts have overrun the country around, and nobody travels alone any more."
+  top sentence village (11/150): "War is close enough now to be felt in everyday business and in the mood of the place."
+  top sentence town (9/150): "Life goes on as usual, and nobody can point to anything new."
+  top sentence city (9/150): "Beasts now roam the country around, and people keep close to home."
+  top sentence metropolis (9/150): "War is close enough now to be felt in everyday business and in the mood of the place."
+
+FALSE-LINE TOTAL (the three slots, every FALSE row above): 0
+THINNEST: branches short of the bar's need (min eligible < ceil(reach/15)): 0
+the five tightest (reach >= 5%): recent_changes condition.war_pressure @ thorp (reach 7, min 1, need 1); recent_changes condition.war_pressure @ hamlet (reach 7, min 1, need 1); recent_changes condition.war_pressure @ village (reach 7, min 1, need 1); recent_changes condition.war_pressure @ town (reach 6, min 1, need 1); recent_changes condition.war_pressure @ city (reach 5, min 1, need 1)
+
+── the rulings, counted ──
+| outsider: top power veiled (power part dropped) | 0 | 0 | 0 | 1 | 0 | 0 |
+| outsider: power.level taken | 1 | 8 | 60 | 40 | 37 | 38 |
+| outsider: a real threat said | 111 | 102 | 98 | 104 | 102 | 103 |
+| unspoken: a crime wound fell through | 21 | 33 | 15 | 29 | 73 | 74 |
+| unspoken: fell and found a tension | 2 | 3 | 9 | 13 | 72 | 70 |
+| recent: a crime or corruption beat (not said) | 1 | 2 | 3 | 1 | 1 | 0 |
+| recent: only a rating acute (EMPTY or calm, never said) | 1 | 0 | 2 | 0 | 0 | 0 |
+| recent: beat's event not held by name (the built code fails closed; the ruled name test says it) | 0 | 0 | 0 | 0 | 0 | 0 |
+| recent: the event's kind and EVENT_TYPE_NAMES disagree on crime | 0 | 0 | 0 | 0 | 0 | 0 |
+| recent: calm taken | 35 | 18 | 11 | 22 | 28 | 24 |
+
+── M1's named places ──
+hxd-thorp-0: outsider "A visitor soon learns that little happens here without the Elder Council. People here keep an eye on the wild country and mention it often. Keeping the peace here rests on goodwill more than on any force." | unspoken "People here do not talk about the wild magic, and they do not like being asked." | recent "The mark the Great Fire left on the place has not faded."
+hxd-hamlet-0: outsider "Outsiders notice the Headman's Authority's mark is on every door that matters. Visitors are asked which way they came, and whether they met anything on the way." | unspoken "How the place should answer the danger it has been warned of is argued in private, not before strangers." | recent "The mark the Flood left on the place has not faded. Beasts have overrun the country around, and nobody travels alone any more."
+hxd-hamlet-7: outsider "Ask who decides things here, and the answer is the Guard. People keep close to home here, for the country around is thick with beasts. Keeping the peace here rests on goodwill more than on any force." | unspoken "" | recent "The mark the Arcane Incident left on the place has not faded. A strong party has begun working to change who holds sway here. Beasts have overrun the country around, and nobody travels alone any more."
+hxd-metropolis-0: outsider "No single name comes up first when a visitor asks who holds sway here. Frontier habits show here: people go out in company and come back before dark. Getting anything decided here takes time, for those who decide are few and busy." | unspoken "How the place should answer the danger it has been warned of is argued in private, not before strangers." | recent "People here still talk of the Migration, and of what it changed. War is close enough now to be felt in everyday business and in the mood of the place."
+
+done in 155s

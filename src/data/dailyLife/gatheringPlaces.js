@@ -19,6 +19,12 @@
  *
  * N11 also excludes a siege in force (`excludes: ['crisis: under_siege']`: no boats come in under a siege; the chair's ruling of
  * 2026-11-20 19:41). No line needs a hideable house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
+ *
+ * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
+ * taken 2026-11-22 21:55 UTC): named N29 to N34 (N29 and N30 name `{sacred}`), plain P16 to P20, each appended at its
+ * branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`); P16 and P20 need
+ * `institution: dwellings` (the chair's ruling (b), 2026-11-23 01:57 UTC: a line that needs nothing has no place in a
+ * branch whose own condition is an absence).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} GatheringLine */
@@ -57,6 +63,12 @@ export const GATHERING_NAMED = frozen([
   { id: 'N24', text: 'People meet at {market} and where the water is drawn, and between them most news gets about.', needs: ['market', 'institution: waterSource'] },
   { id: 'N25', text: 'People meet at {market} and out on the common, where there is always someone about.', needs: ['market', 'institution: commonGrazing'] },
   { id: 'N28', text: 'Of an evening people drift from their doors to {inn} to talk the day over.', needs: ['institution: tavern', 'institution: dwellings'] },
+  { id: 'N29', text: 'People pass the time of day by {sacred}, and the talk there is of the work and of one another.', needs: ['sacredHouse'] },
+  { id: 'N30', text: 'News goes round by {sacred} and from door to door, and little stays private for long.', needs: ['sacredHouse', 'institution: dwellings'] },
+  { id: 'N31', text: 'People meet out on the common by day, and at one another\'s doors of an evening.', needs: ['institution: commonGrazing', 'institution: dwellings'] },
+  { id: 'N32', text: 'Where the water is drawn and out on the common, people stop to talk as they pass.', needs: ['institution: waterSource', 'institution: commonGrazing'] },
+  { id: 'N33', text: 'Most of the news is passed on in the fields and where the water is drawn.', needs: ['institution: farmland', 'institution: waterSource', 'tier: ≤ village'] },
+  { id: 'N34', text: 'People talk at one another\'s doors and where the water is drawn, and little news is missed.', needs: ['institution: dwellings', 'institution: waterSource'] },
 ]);
 
 /** The `plain` branch: it holds none of the three. */
@@ -76,4 +88,20 @@ export const GATHERING_PLAIN = frozen([
   { id: 'P13', text: 'Matters of any weight are talked over at the elder\'s door, where people gather of an evening.', needs: ['ruler: elder'] },
   { id: 'P14', text: 'People meet at the communal root cellar, where the stores are kept and the news is passed along.', needs: ['institution: rootCellar'] },
   { id: 'P15', text: 'When the flocks are brought in, people gather to help and to talk.', needs: ['institution: shepherd'] },
+  { id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: ['institution: dwellings'] },
+  { id: 'P17', text: 'News is passed from door to door here, and most of it is known by nightfall.', needs: ['institution: dwellings'] },
+  { id: 'P18', text: 'People meet in the fields and on the paths between the houses, and talk as they go.', needs: ['institution: farmland', 'institution: dwellings', 'tier: ≤ village'] },
+  { id: 'P19', text: 'Most news here is passed on at the doorstep, a few words at a time.', needs: ['institution: dwellings'] },
+  { id: 'P20', text: 'Most of the talk here goes on out of doors, wherever people are at work.', needs: ['institution: dwellings'] },
 ]);
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** Both branches name where people meet (a house, or the well, the common, the doors). */
+export const GATHERING_DOES = Object.freeze({ named: Object.freeze({ names: true }), plain: Object.freeze({ names: true }) });

@@ -58,17 +58,10 @@ import {
 import { appendChronicleEntryAction } from './aiChronicleAppend.js';
 import {
   aiRequestDisposition,
-  DAILY_LIFE_FIELD_LABELS,
   NARRATIVE_FIELD_LABELS,
   resyncCreditBalanceAfterFailure,
   ROTATING_AI_PROGRESS,
 } from './aiRequestLifecycle.js';
-// NOTE: buildSettlementRelationshipMemoryContext (relationshipMemory.js →
-// relationshipEvolution.js, ~117 kB) and buildWorldSnapshot are NOT imported
-// here. They are only needed by buildDailyLifeRelationshipMemory(), inside the
-// async requestDailyLife action, so they are dynamic-imported there to keep the
-// heavy relationship-evolution graph off the first-paint boot path.
-
 // FP-2a first-paint reclaim (−2,448 B closure): lib/ai.js (the AI transport) and
 // narrativeMutations.js are SOLE-imported by this slice and only reached from
 // inside async actions, AFTER each action's synchronous prefix (the guards, credit
@@ -109,42 +102,6 @@ function chronicleWorldFor(state, saveId) {
     campaignWorldState: campaign?.worldState || null,
     savedSettlements: state.savedSettlements || [],
   };
-}
-
-async function buildDailyLifeRelationshipMemory(state, saveId) {
-  try {
-    const campaign = state.getCampaignForSettlement?.(saveId);
-    if (!campaign) return null;
-    // Lazy-load the world-pulse relationship-memory machinery — heavy and only
-    // needed at Daily-Life generation time, never on first paint.
-    const [{ buildWorldSnapshot }, { buildSettlementRelationshipMemoryContext }] = await Promise.all([
-      import('../domain/worldPulse/worldSnapshot.js'),
-      import('../domain/worldPulse/relationshipMemory.js'),
-    ]);
-    const worldState = state.getCampaignWorldState?.(campaign.id) || campaign.worldState;
-    const regionalGraph = state.getCampaignRegionalGraph?.(campaign.id) || campaign.regionalGraph;
-    const snapshot = buildWorldSnapshot({
-      campaign: { ...campaign, worldState, regionalGraph },
-      saves: state.savedSettlements || [],
-      worldState,
-      regionalGraph,
-    });
-    return buildSettlementRelationshipMemoryContext({
-      settlementId: saveId,
-      worldState,
-      regionalGraph,
-      snapshot,
-      savedSettlements: state.savedSettlements || [],
-      // Read the posture/memoryScore the pulse persisted onto each
-      // relationshipState (stamped by refreshRelationshipMemory) instead of
-      // recomputing live; legacy saves without the stamp fall back to the
-      // live derivation inside buildRelationshipPostures.
-      preferPersisted: true,
-    });
-  } catch (error) {
-    console.warn('[daily-life-memory] failed to build relationship context', error);
-    return null;
-  }
 }
 
 /**
@@ -249,10 +206,12 @@ export const createAiSlice = (set, get) => ({
     set(state => { state.aiViolations = null; }),
 
   // RETIRED (R-5b, owner queue #21): `setAiDailyLife`. A redundant setter with no
-  // caller — the daily-life generation path writes `state.aiDailyLife` directly
-  // (both the streamed per-field write and the final assignment below), and the
+  // caller — `state.aiDailyLife` is written by the save hydration and the cosmetic rename below, and the
   // identity-hygiene clears null it. A second public writer onto a field that
   // already has one is how a single-writer invariant rots.
+  // RETIRED (DAILY-3 U4b, the chair's cure B of 2026-11-22): `requestDailyLife`, the paid
+  // daily-life request, with no consumer in src since the Daily Life button went; a saved
+  // account still prints read-only from `aiDailyLife`.
 
   setAiLoading: (loading) =>
     set(state => { state.aiLoading = loading; }),
@@ -570,201 +529,6 @@ export const createAiSlice = (set, get) => ({
         });
         if (disposition === 'commit') {
           track(EVENTS.AI_GENERATION_FAILED, { type: 'narrative', error_kind: errorKindFromError(e) });
-          resyncCreditBalanceAfterFailure(get, myRequestId, capturedSaveId);
-        }
-      }
-    } finally {
-      clearInterval(rotation);
-    }
-  },
-
-  /**
-   * Generate AI daily-life prose for the current settlement.
-   * Streams field-by-field (dawn \u2192 morning \u2192 midday \u2192 evening \u2192 night).
-   *
-   * Regenerate behavior matches narrative: keep old prose visible until
-   * new one lands atomically.
-   */
-  requestDailyLife: async (saveId) => {
-    const { settlement, aiLoading, creditBalance, aiDailyLife } = get();
-    if (!settlement || aiLoading) return;
-
-    // Daily life is gated behind saved settlements for the same reason as narrative.
-    if (!saveId) {
-      set(state => { state.aiError = 'Save this settlement first to generate AI daily life.'; });
-      return;
-    }
-
-    const saveEntry = get().savedSettlements.find(s => s.id === saveId);
-    const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
-    const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-    const modelPreference = get().auth?.modelPreference;
-    // store-3 / FP-2a: the buildDailyLifeRelationshipMemory await (two dynamic imports
-    // + a world-snapshot build, hundreds of ms on the first click) is deferred to
-    // AFTER the sync prefix — the credit check, F18/F19 token/abort stamp, and
-    // set(aiLoading:true) below all run SYNCHRONOUSLY now, so a second click hits the
-    // `if (!settlement || aiLoading) return` guard and cannot double-charge. The build
-    // moves into the try, alongside loadAiLib (the pattern requestNarrative already
-    // follows).
-    const isRegenerate = !!aiDailyLife;
-    const cost = getAiCostForModel('dailyLife', modelPreference);
-    const elevated = get().isElevated();
-    if (!elevated && creditBalance < cost) {
-      set(state => { state.aiError = `Insufficient credits (need ${cost}, have ${state.creditBalance})`; });
-      get().setPurchaseModalOpen(true);
-      track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: 'credits' });
-      return;
-    }
-
-    track(EVENTS.AI_GENERATION_STARTED, {
-      type: 'daily_life',
-      fast_variant: isFastModelPreference(modelPreference),
-      credits_cost: cost,
-      is_regeneration: isRegenerate,
-      canon_phase: canonPhaseOf(saveEntry),
-    });
-    const startedAt = Date.now();
-
-    // F18/F19 — abort controller + monotonic token bound to this save (see
-    // requestNarrative for the full rationale).
-    const capturedSaveId = saveId;
-    const controller = new AbortController();
-    const myRequestId = (get().aiRequestId || 0) + 1;
-    const isCurrentRequest = () =>
-      get().aiRequestId === myRequestId &&
-      String(get().activeSaveId) === String(capturedSaveId);
-
-    set(state => {
-      state.aiRequestId = myRequestId;
-      state.aiAbortController = controller;
-      state.aiRefundNotice = null;
-      state.aiLoading = true;
-      state.aiRegenerating = isRegenerate;
-      state.aiError = null;
-      state.aiProgress = ROTATING_AI_PROGRESS[0];
-      if (!isRegenerate) state.aiDailyLife = null;
-    });
-
-    let rotIdx = 0;
-    let lastFieldMsg = false;
-    const rotation = setInterval(() => {
-      const st = get();
-      if (!st.aiLoading) return;
-      if (lastFieldMsg) return;
-      rotIdx = (rotIdx + 1) % ROTATING_AI_PROGRESS.length;
-      set(state => { state.aiProgress = ROTATING_AI_PROGRESS[rotIdx]; });
-    }, 2500);
-
-    const totalFields = Object.keys(DAILY_LIFE_FIELD_LABELS).length;
-    let fieldsDone = 0;
-
-    try {
-      const [
-        { generateNarrative },
-        { buildChronicleContextFromSave },
-      ] = await Promise.all([
-        loadAiLib(),
-        loadAiChronicleContext(),
-      ]);
-      // Built HERE (post-lock) — see the sync-prefix note above. The loading lock is
-      // already held, so this awaited build cannot admit a second concurrent request.
-      const relationshipMemoryContext = await buildDailyLifeRelationshipMemory(get(), saveId);
-      const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
-        aiGuidance,
-        modelPreference,
-        relationshipMemoryContext,
-        signal: controller.signal,
-        chronicleContext: buildChronicleContextFromSave(
-          saveEntry, settlement, chronicleWorldFor(get(), saveId),
-        ),
-        onRefundFailure(notice) {
-          set(state => { state.aiRefundNotice = notice; });
-        },
-        onField(fieldName, value, error) {
-          if (!isCurrentRequest()) return;
-          if (error) {
-            fieldsDone += 1;
-            lastFieldMsg = true;
-            set(state => {
-              state.aiProgress = `\u26a0 ${fieldName} failed (${fieldsDone}/${totalFields})`;
-            });
-            return;
-          }
-          fieldsDone += 1;
-          lastFieldMsg = true;
-          const label = DAILY_LIFE_FIELD_LABELS[fieldName] || `Writing ${fieldName}`;
-          set(state => {
-            if (!isRegenerate) {
-              state.aiDailyLife = { ...(state.aiDailyLife || {}), [fieldName]: value };
-            }
-            state.aiProgress = `${label}\u2026 (${fieldsDone}/${totalFields})`;
-          });
-        },
-      });
-
-      // F19 — discard a superseded run rather than committing daily life onto
-      // whatever settlement is now on screen; 'release' just frees the lock.
-      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
-      if (disposition === 'abandon') return;
-      if (disposition === 'release') {
-        set(state => {
-          state.aiLoading = false;
-          state.aiRegenerating = false;
-          state.aiProgress = '';
-          state.aiAbortController = null;
-        });
-        return;
-      }
-
-      set(state => {
-        state.aiDailyLife = result;
-        state.aiLoading = false;
-        state.aiRegenerating = false;
-        state.aiProgress = '';
-        state.aiAbortController = null;
-        if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
-      });
-
-      track(EVENTS.AI_GENERATION_COMPLETED, {
-        type: 'daily_life',
-        duration_band: durationBand(Date.now() - startedAt),
-        partial_failure: false,
-        failed_field_count: 0,
-      });
-
-      // Persist daily-life prose to the saved settlement. Mode flips to 'narrated'
-      // if either narrative OR daily life exists.
-      const existingEntry = get().savedSettlements.find(s => s.id === saveId);
-      const aiData = buildAiDataBlob(existingEntry?.aiData, {
-        aiSettlement:         get().aiSettlement,
-        aiDailyLife:          result,
-        narrativeMode:        'narrated',
-        narrativeGeneratedAt: existingEntry?.aiData?.narrativeGeneratedAt || new Date().toISOString(),
-        narrativeSourceFingerprint: get().aiSourceFingerprint || settlementFingerprint(settlement),
-      });
-      get().updateSavedSettlement(saveId, { aiData });
-      if (!(await persistSaveUpdate(saveId, { aiData }))) {
-        set(state => { state.aiError = 'Daily life generated but save failed. It may not persist across sessions.'; });
-      }
-    } catch (e) {
-      // F19 — 'abandon' leaves cleanup to the owner; otherwise release the lock.
-      const disposition = aiRequestDisposition(get, myRequestId, capturedSaveId);
-      if (disposition !== 'abandon') {
-        set(state => {
-          state.aiLoading = false;
-          state.aiRegenerating = false;
-          state.aiProgress = '';
-          state.aiAbortController = null;
-          if (disposition === 'commit') {
-            state.aiError = e.message || 'Daily life generation failed';
-            // F20 — first-time failure progressively wrote partial prose into
-            // aiDailyLife; clear it so the dossier doesn't present a
-            // half-written day as complete. Regenerate leaves prior prose.
-            if (!isRegenerate) state.aiDailyLife = null;
-          }
-        });
-        if (disposition === 'commit') {
-          track(EVENTS.AI_GENERATION_FAILED, { type: 'daily_life', error_kind: errorKindFromError(e) });
           resyncCreditBalanceAfterFailure(get, myRequestId, capturedSaveId);
         }
       }

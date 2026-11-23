@@ -1,0 +1,17 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11245 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+births: 900 (150 a size) in 141s
+COVERAGE: printed slot texts not wholly read back to pool rows: 0
+
+════ THE READER'S FIGURE: the mean number of identical Daily Life sentences two pages share (the public eight) ════
+thorp      pairs 11175  mean shared 0.398  (sentences a page 9.83; commonest: 16 "People here keep an eye on the wild country and mention it often."; 16 "People gather at one another's doors in the evening, and by day where "; 16 "Strangers with business here are sent to the Elder Council sooner or l")
+hamlet     pairs 11175  mean shared 0.308  (sentences a page 9.97; commonest: 17 "People say the council is slow to listen and quick to decide without t"; 13 "Commoners resent the council's indifference to ordinary complaints."; 13 "Order here depends on people keeping it among themselves.")
+village    pairs 11175  mean shared 0.398  (sentences a page 9.86; commonest: 18 "People meet where the water is drawn and again by the house of worship"; 18 "A visitor finds more than one door to knock on before anything is deci"; 17 "Ask who decides things here, and a visitor hears more than one name.")
+town       pairs 11175  mean shared 0.311  (sentences a page 9.63; commonest: 16 "Keeping the peace here rests on goodwill more than on any force."; 16 "Travellers here talk of beasts seen at the edge of the settled land."; 15 "A visitor soon learns that the country beyond is not to be walked care")
+city       pairs 11175  mean shared 0.350  (sentences a page 9.20; commonest: 18 "Children are warned about the road past sundown."; 16 "Ask who decides things here, and a visitor hears more than one name."; 16 "Children are warned about going down for water alone after dark.")
+metropolis pairs 11175  mean shared 0.410  (sentences a page 9.20; commonest: 21 "Nobody likes to see the pot so thin, and everyone has someone to blame"; 20 "Children are warned about going out to look for whatever is heard in t"; 20 "The bakers have their ovens lit before first light, and the first brea")
+POOLED WITHIN SIZE (every same-size pair of the six sizes): pairs 67050  mean shared 0.362
+ALL PAIRS OF THE 900 (any two places): pairs 404550  mean shared 0.219
+CROSS-SIZE PAIRS ONLY: pairs 337500  mean shared 0.190
+
+done in 141s
+EXIT 0
