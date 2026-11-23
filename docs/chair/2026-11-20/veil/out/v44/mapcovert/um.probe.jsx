@@ -35,7 +35,8 @@ it('R4I-MEASURE U (unmarked) and M (M\'s counts on the projection)', async () =>
   const { loadEngine, loadVeil } = await import(`${process.env.MEAS_COMMON}`);
   const E = await loadEngine(SRC); const V = await loadVeil(SRC); const veil = V.veil;
   const { withholdCovertCopies } = await import(`${SRC}/src/domain/display/gallerySecondHomes.js`);
-  const { rekeyId } = await import(`${SRC}/src/domain/display/galleryVeilPeople.js`);
+  // MAPCOVERT-RED (VEIL-44): rekeyId is M's alone (UM_M=1); the lane's tip 23bb8b8ae has no re-key (no galleryVeilPeople.js), so U loads it not
+  const { rekeyId } = process.env.UM_M === '1' ? await import(`${SRC}/src/domain/display/galleryVeilPeople.js`) : { rekeyId: null };
   const { idText } = await import(`${SRC}/src/domain/display/galleryRosterChoices.js`);
   const { effectiveCastOf } = await import(`${SRC}/src/domain/crisis/crisisCast.js`);
   const gallery = await import(`${SRC}/src/lib/gallery.js`);
