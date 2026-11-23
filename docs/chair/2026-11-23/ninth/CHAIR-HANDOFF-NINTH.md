@@ -172,6 +172,17 @@ TOOK N86: builder "T5" on `lane/veil-40-2026-11-23-t5-wip`; IT STOPS BEFORE (v)(
 FUNCTIONS AGAINST R5-TENSION. THE THIRTY-FIFTH PUSH (cf0b27a04) ended exit=0 at 11:16:45 UTC. THE NEXT HOURLY CHECK:
 trig_01GLpYCurM5gcmnrfzGvWB8p at 12:12 UTC. VEIL-45's START MESSAGE IS DRAFTED (`prompts/DRAFT-START-VEIL-45.txt`: A
 DRAFT WITH BLANKS).
+SINCE N87 (N88, N89): THE BAR "R3" IS RE-STATED (N88, on "LOWER-7"; the reader's row 34; SAID TO THE OWNER WITH HIS
+VETO): GATE-1 0 of 92 beside its listed towns; GATE-2 0 RED CELLS OVER THE TOWNS NOT LISTED BY RULE; the eight listed
+towns (the seven by VR42 with E94; r3m-town-insurgency-0-14 by 80 (2) and 81) READ APART, BY NAME, every separating
+family with its rule, a "+ -> 0" row with no rule a red; the list a ratchet; VEIL-43 builds the analyzer's
+listed-apart mode and chain A runs the bar with it WHEN THE CHAIR NAMES IT. THE LANE'S TIP IS NOW
+b58abc48b73f8f832a985b5863c68f87a8d7c7c9 ON `lane/veil-41-2026-11-23-tip` ("PIN-3 MERGED", N89; confirmed on origin;
+NAMED TO VEIL-40, VEIL-42, VEIL-43 AND VEIL-44 at 11:36 UTC). THE JOIN'S TWO FORTUNE REDS HAVE A CAUSE READ BY THE
+CHAIR IN SOURCE (N89): `governanceAccount.js` reads the legitimacy breakdown and the legacy notes, which the lane's
+always-pass withholds on every veiled read: a shared page can print a WRONG reason for a government's standing, or a
+merit sentence the record does not carry; THE CHAIR'S LEAN IS "THE PAGE FAILS CLOSED ON A VEILED READ" FOR THE FIRST
+DEPLOY; IT RULES ON VEIL-43's COUNTS ("REDS-CAUSE" with one measure on the 900 births, lit and dark).
 THE TEXT THAT FOLLOWS, TO THE END OF THIS PARAGRAPH, IS THE PLAN AS IT STOOD BEFORE N83 (history). THE NEXT FREE PLACE (PROSE-6's, when it has sent
 its LIT-DISAGREE line and waits; before N80 this read: when it has sent
 "PROSE-E <commit>" and waits) GOES TO VEIL-44, CHAIN B's SECOND SEAT, FOR THE DOORS UNIT "IMPORT-DOOR" WITH "MAP-COVERT"
@@ -2289,3 +2300,108 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   NOT hidden (category other, power 78); NONE of the six lit thorps with the governs note holds a hidden power: NO
   CASE FOR THE VEIL (told to VEIL-43). Its own count 150,000 against the chair's read 258,492: told that the mark is
   by the chair's read.
+- 2026-11-23 11:38 UTC · N88 · "LOWER-7": THE BAR'S SECOND GATE READS ITS EIGHT LISTED TOWNS APART, BY NAME (THE BAR
+  "R3" RE-STATED; THREE STOPS RULED; A NOTICE FOR THE MAKER); SAID TO THE OWNER WITH HIS VETO.
+  (1) "LOWER-7" (VEIL-43, queued 11:19:33; `out/v43/lower7/LOWER7.md` at c9882d592 on its branch, 87 lines: READ WHOLE
+  BY THE CHAIR). On the joined tree 9e6547f0f (212 equal to the veil tip's), the gate's own run and pool read, never
+  re-made; its probe's 64 town-form signatures equal the gate's; the server's rows equal the twin's in every "+ -> 0"
+  family. PER TOWN, against its nearest member of the open universe: r3m- city-indebted-1-106, city-insurgency-1-104,
+  city-politically_fractured-1-120 and city-under_siege-1-108: `chains.criminal` and `inst.criminal` "0 -> +" only
+  (the town LACKS what the member has; 106 and 104 add `sp.ops` "+ -> 0" at Reveal DM, own: "Gambling Halls", "Red
+  Light District"); city-insurgency-1-114: `powers.criminal` "+ -> 0" (the governing "Corrupt City Council": VR42, 62
+  (5), E94) and at DM own `powers.capture` ("corrupted": ruling 82); city-none-1-117: the same, with
+  `powers.relations` "+ -> 0" ([Corrupt City Council, Military/Guard], subordinate); metropolis-indebted-1-136:
+  "Shadow Senate" governing, with three relations, all subordinate ([Shadow Senate, Military/Guard], [Shadow Senate,
+  Merchant Guilds], [Noble Houses, Shadow Senate]); r3m-town-insurgency-0-14: `imports.criminal` "+ -> 0" on every
+  read ("Opium and exotic narcotics", "Smuggled jade and gems") and `sp.ops` "Gambling Den" at own (80 (2), 81). ITS
+  STOP, RIGHTLY: TEN "+ -> 0" ROWS IN FIVE TOWNS WITH NO RULE FOUND (the four relations; the two `sp.ops` rows on each
+  of 106 and 104; 0-14's two imports), EACH ALSO SERVED ITEM FOR ITEM BY THE TOWN'S HOUSE-FREE TWIN (the twin serves
+  every "+ -> 0" item and more: on 114 and 136 it adds the Thieves' Guild power and its relations). THE CONTROLS: of
+  the gate's 48, one has a governing criminal row (a town) and shows neither criminal institutions nor chains; in the
+  open universe, part A (1,200 with nothing held): 23, ALL OF TOWN SIZE, none showing either; part B (608 with houses
+  shown): 62 (town 35, city 10, metropolis 17); AT CITY AND METROPOLIS SIZE 27 OF 27 SHOW BOTH, AND NO NOTHING-HELD
+  CITY OR METROPOLIS HAS A GOVERNING CRIMINAL ROW: at the seven's sizes "a governing criminal row with no criminal
+  institutions or chains" IS A PAGE NO OPEN PLACE SHOWS: THE ABSENCE TELLS THAT CRIMINAL HOUSES EXIST, never which.
+  Members 0 of 7 against the births with a governing criminal row alone. NO EIGHTH TOWN in any committed table since
+  `out/v28`: "EIGHT" is ruling 82's own word (plausibly it counted 0-14).
+  (2) **Decided (N88):** (a) GATE-2 READS THE TOWNS THAT ARE NON-MEMBERS BY A LISTED RULE APART, BY NAME, AS GATE-1
+  DOES. THE BAR "R3" IS: GATE-1 0 of 92 beside its listed towns; GATE-2 0 red cells over the towns NOT listed; AND THE
+  LIST'S TABLE HOLDS: every separating family of every listed town carries a rule by name; a "+ -> 0" row with no rule
+  is a red. (b) THE LIST: the seven by VR42 with E94 (a criminal government is public; that criminal houses exist can
+  be inferred there; which, and what they do, is what the veil hides): `inst.criminal` and `chains.criminal` "0 -> +"
+  and the other absences of the same hidden houses (`sp.plotHooks`, `tensions.crime`, `powers.conflicts` where the
+  measure shows them); `powers.criminal` "+ -> 0" (the governing row); `powers.capture` at DM (82); and
+  r3m-town-insurgency-0-14 by 80 (2) and 81. (c) THE THREE STOPS: the governing row's relations whose other end is a
+  served power STAY (VR42's closure: ruling 42 takes a relation only where it names or depends on a withheld power or
+  house): four controls for chain A's unit (iv). The `sp.ops` rows on 106 and 104 STAY IF unit (ii)'s positive account
+  holds: one line is owed (the SERVED house that accounts for each, by name; none is a fault of unit (ii) and a STOP).
+  0-14's imports are NOT ruled: chain A's unit (v)(3) measures first, with this fact; if its sent form would withhold
+  what the twin serves, its builder stops and the chair rules. (d) THE LIST IS A RATCHET BY NAME: an unlisted
+  non-member reds the gate; a listed town that becomes a member leaves it; nothing joins without the chair's ruling.
+  (e) VEIL-43 builds the analyzer's listed-apart mode (a docs tool: GATE-2 over the unlisted; the list a committed
+  file with town, rule, family and direction; the table's rule column; a tooth: a planted unlisted non-member reds,
+  and a listed town with an unruled "+ -> 0" row reds), after DAILY and NAMES; chain A runs the bar with it when the
+  chair names it. (f) "VR42-NOTICE", display only, in the join's unit (2): on the maker's curate screen
+  (`CurateMode.jsx`, `criminalVeilSwitch.js`: the place and form of CURATE-NOTICE, built on the lane: READ BY THE
+  CHAIR at 23bb8b8ae), where the town has a GOVERNING criminal power and a criminal house is hidden: one line telling
+  the maker that the government stays on the shared page and a reader may guess that criminal houses exist, not which,
+  nor what they do; the builder proposes the words; THE CHAIR RULES THEM. **Why (a):** GATE-MAP showed that every
+  listed unit could land and the bar still not be met; the seven are non-members by a design two chairs ruled (VR42,
+  E94), GATE-1 already reads them apart, and the reader judges each listed town by name: a bar that cannot be met
+  measures nothing. **Why (f):** a maker who hides those houses should know what the page still tells. SAID TO THE
+  OWNER in plain words, with his veto (he may instead want the veil to hide that such a government is criminal: a
+  bigger change). THE READER'S ROW 34 IS WRITTEN WITH THIS ENTRY. TOLD TO VEIL-40 FOR ITS BUILDER T5: (iv)'s four
+  controls; (v)(3)'s fact; the bar.
+- 2026-11-23 11:38 UTC · N89 · "PIN-3" IS MERGED AND THE NEW TIP NAMED; THE JOIN'S TWO FORTUNE REDS HAVE A CAUSE (THE
+  PARAGRAPH ON WHO GOVERNS READS WHAT THE VEIL ALWAYS WITHHOLDS); A PUSH NO SEAT MADE; THE DOORS SEAT'S MACHINE
+  STANDS.
+  (1) "PIN-3 MERGED b58abc48b" (VEIL-41, its `date -u` 11:30:20): its own re-run of
+  `tests/domain/display/criminalVeilSwitch.test.js` at b58abc48b: 9 of 9 green, the other tooth tried 24 caught 24;
+  `lane/veil-41-2026-11-23-tip` pushed AT b58abc48b, a fast-forward of 23bb8b8ae. CONFIRMED BY THE CHAIR ON ORIGIN at
+  11:36:26 UTC: the branch at b58abc48b73f8f832a985b5863c68f87a8d7c7c9, its one parent 23bb8b8ae, one file (+9 -5),
+  the diff the chair read and ran (N82). THE NEW TIP NAMED TO VEIL-40, VEIL-42, VEIL-43 AND VEIL-44 ("TIP b58abc48b...
+  on `lane/veil-41-2026-11-23-tip`"; by E116 each merges it before its "TIP?" and re-runs that one file; 212's sha256
+  unchanged). VEIL-41 now pushes its branches by a script of its own at each builder commit (`autopush.sh`, every two
+  minutes): ASKED AT THE NEXT CHECK that it pushes only names that begin `lane/veil-41-2026-11-23`, never forces, and
+  skips a branch with a merge in progress.
+  (2) THE JOIN'S TWO FORTUNE REDS, THEIR CAUSE READ BY THE CHAIR IN SOURCE (the veil tip 23bb8b8ae; the line
+  9b0ffaa97), sent to VEIL-43 as LEADS: THE READER IS `src/domain/display/governanceAccount.js`, the paragraph on who
+  governs and how it stands. (a) `legitimacyCausesOf` picks the standing sentence's cause words from
+  `publicLegitimacy.breakdown` (prosperity, safety, defense, food), and THE LANE'S ALWAYS-PASS WITHHOLDS THREE OF THE
+  FOUR ON EVERY VEILED READ (`galleryWithholdAlways.js` :155; the registry row `legitimacy.breakdown`, classed
+  "undrawn"): a shared page prints no cause, or `food` ALONE where the owner's page says crime or poverty: A WRONG
+  REASON, not only a lost one; THE READER PREDATES THE LANE (the lane parted from the line at point 73, 8f3b8bf4b), so
+  this is so on the lane's own tree, and no proof of the lane compared a shared page's sentences with the owner's
+  public page. (b) Since point 98 the same paragraph calls `fortuneMerits.js :: meritsOf` and `weatheredCatastrophe`
+  on the record the page holds; they read `history.legacyAnnotations` (withheld always: :133; row `history.legacy`,
+  "undrawn") and the tensions' types (a tension can leave whole): on a veiled read an UNRESOLVED catastrophe counts as
+  weathered: the page can print a merit sentence the record does not carry, or name another event. The key
+  `legacyAnnotations` is absent on records with no notes, so its absence does not mark a veiled read; a breakdown that
+  is not whole does. Arm (S) of `fortuneLawMerits.test.js` asserts the merits, the score and the BREAKDOWN equal to
+  the owner's; the red message is the breakdown's. ORDERED OF VEIL-43 WITH "REDS-CAUSE": one measure on the census's
+  900 births lit and dark: the paragraph on the owner's public page, on the veiled read with nothing hidden, and under
+  the default veil, compared by class (a cause lost; `food` alone; a merit sentence gained; lost; another event named;
+  the lasting sentence changed); and of arm (S)'s 19 towns how many fail at each of its three lines. THE CHAIR'S LEAN,
+  NOT A RULING: for the first deploy THE PAGE FAILS CLOSED ON A VEILED READ (a breakdown that is not whole names no
+  cause; a merit sentence prints only where the stored `breakdown.merits` carries it, and the weathered sentence only
+  if its event can be named surely); the fuller cure (the page re-derives the terms over the served record, as
+  `importRederive.js` does) after the first deploy; THE OWNER IS TOLD WHAT A SHARED PAGE WILL NOT SAY. **Why this
+  matters:** the bar says a shared page may say less; it must not say what is false.
+  (3) VEIL-43's KILLED PUSH (queued 11:30:17 and 11:34:54): a plain `git push` of its documents branch started the
+  whole check (the ratchet waiting on its own mutex) and was killed by the seat after about ten minutes (COMMON-EIGHTH
+  15 (c)); origin ALREADY held its local tip c9882d592, which the seat had not pushed; its builder ran no push; its
+  remote-tracking reflog never recorded that commit: THE REF REACHED ORIGIN BY A HAND OUTSIDE THE CHECKOUT'S OWN PUSH:
+  CAUSE UNKNOWN; PLAUSIBLE, READ BY THE CHAIR in its own container: the platform manages a session's outcome branch
+  (the stop hook `~/.claude/stop-hook-git-check.sh` speaks of the environment manager's branch flow and itself only
+  checks, never pushes). 15 (d) read by the seat: nothing foreign; nothing lost. Its guard is committed
+  (`out/v43/push.sh`: ls-remote against the branch's tip in the same command, a skip when equal). TOLD: if it happens
+  again, the hour and the commit to the chair at once. ITS ORDER (11:35): STOP 2's line first; REDS whole, HOOKS,
+  DAILY, NAMES; REDS-CAUSE; the listed-apart mode; unit (2) with GUARD-PIN and VR42-NOTICE: taken as set.
+  (4) VEIL-44 (its `date -u` 11:35): its machine is re-made on its door -wip at 23bb8b8ae and its figures equal chain
+  B's: GATE-1 4 at every gated setting, LOWER BY RULE 7; GATE-2 20 Fisher cells; verify 45 re-read, 0 differ (recorded
+  in its PART 46 at 5223f5a77); the doors-3 arms took its mutex; the MAPCOVERT-RED builder still builds, with N84 (a)
+  relayed. VEIL-42 (last moved 10:43): ASKED (later priority, 11:30) for one message: the pool's "77", "WHOLE-DOC",
+  "GAP", the U-UNMARKED counts on both stored sets with "M-TWIN", its two builders, its count: THE OWNER'S DECISION ON
+  PAGES PUBLISHED BEFORE THE VEIL WAITS ON THOSE COUNTS.
+  (5) THE CHAIR'S PUSHES: the thirty-sixth (c3aa2c519: N87 and VEIL-45's draft) ended exit=0 at 11:25:27 UTC (its log;
+  ls-remote equal to the local tip).
