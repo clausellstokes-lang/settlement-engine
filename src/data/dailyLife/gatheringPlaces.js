@@ -22,7 +22,9 @@
  *
  * THE SAMENESS LINES OF D5C-2 (the chair's E133 (2); `lines/D4C/DRAFT-2.md`,
  * taken 2026-11-22 21:55 UTC): named N29 to N34 (N29 and N30 name `{sacred}`), plain P16 to P20, each appended at its
- * branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`).
+ * branch's end, its keyed pick unchanged (`tests/domain/dailyLifeNewLines.test.js`); P16 and P20 need
+ * `institution: dwellings` (the chair's ruling (b), 2026-11-23 01:57 UTC: a line that needs nothing has no place in a
+ * branch whose own condition is an absence).
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} GatheringLine */
@@ -86,11 +88,11 @@ export const GATHERING_PLAIN = frozen([
   { id: 'P13', text: 'Matters of any weight are talked over at the elder\'s door, where people gather of an evening.', needs: ['ruler: elder'] },
   { id: 'P14', text: 'People meet at the communal root cellar, where the stores are kept and the news is passed along.', needs: ['institution: rootCellar'] },
   { id: 'P15', text: 'When the flocks are brought in, people gather to help and to talk.', needs: ['institution: shepherd'] },
-  { id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: [] },
+  { id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: ['institution: dwellings'] },
   { id: 'P17', text: 'News is passed from door to door here, and most of it is known by nightfall.', needs: ['institution: dwellings'] },
   { id: 'P18', text: 'People meet in the fields and on the paths between the houses, and talk as they go.', needs: ['institution: farmland', 'institution: dwellings', 'tier: ≤ village'] },
   { id: 'P19', text: 'Most news here is passed on at the doorstep, a few words at a time.', needs: ['institution: dwellings'] },
-  { id: 'P20', text: 'Most of the talk here goes on out of doors, wherever people are at work.', needs: [] },
+  { id: 'P20', text: 'Most of the talk here goes on out of doors, wherever people are at work.', needs: ['institution: dwellings'] },
 ]);
 
 /**

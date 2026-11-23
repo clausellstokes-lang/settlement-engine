@@ -51,11 +51,11 @@ const NEW_LINES = [
   { slot: 'gathering_places', branch: 'named', id: 'N32', text: 'Where the water is drawn and out on the common, people stop to talk as they pass.', needs: ['institution: waterSource', 'institution: commonGrazing'] },
   { slot: 'gathering_places', branch: 'named', id: 'N33', text: 'Most of the news is passed on in the fields and where the water is drawn.', needs: ['institution: farmland', 'institution: waterSource', 'tier: ≤ village'] },
   { slot: 'gathering_places', branch: 'named', id: 'N34', text: 'People talk at one another\'s doors and where the water is drawn, and little news is missed.', needs: ['institution: dwellings', 'institution: waterSource'] },
-  { slot: 'gathering_places', branch: 'plain', id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: [] },
+  { slot: 'gathering_places', branch: 'plain', id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: ['institution: dwellings'] },
   { slot: 'gathering_places', branch: 'plain', id: 'P17', text: 'News is passed from door to door here, and most of it is known by nightfall.', needs: ['institution: dwellings'] },
   { slot: 'gathering_places', branch: 'plain', id: 'P18', text: 'People meet in the fields and on the paths between the houses, and talk as they go.', needs: ['institution: farmland', 'institution: dwellings', 'tier: ≤ village'] },
   { slot: 'gathering_places', branch: 'plain', id: 'P19', text: 'Most news here is passed on at the doorstep, a few words at a time.', needs: ['institution: dwellings'] },
-  { slot: 'gathering_places', branch: 'plain', id: 'P20', text: 'Most of the talk here goes on out of doors, wherever people are at work.', needs: [] },
+  { slot: 'gathering_places', branch: 'plain', id: 'P20', text: 'Most of the talk here goes on out of doors, wherever people are at work.', needs: ['institution: dwellings'] },
   // DRAFT-2 · child_warnings
   { slot: 'child_warnings', branch: 'monster_pressure', id: 'P10', text: 'slipping out of doors once it is dark', needs: [] },
   { slot: 'child_warnings', branch: 'monster_pressure', id: 'P11', text: 'answering any call that comes out of the dark', needs: [] },
