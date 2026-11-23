@@ -50,3 +50,6 @@ restore loop only on a sample).
 table by tab x class with the causing keys; the paragraph's counts; the server sample; (N)'s table by tab x class; the owner-only slot
 count; CONFIRMED vs PLAUSIBLE. Commit by explicit paths (WIP before any wait over ten minutes). ONE LINE to the seat: "PAGES <commit>:
 (F) lost a / gained b / changed c over n lines, keys ...; (N) differ d lines on e towns; dm-slot present f".
+
+## ADDED (the chair, N110, 15:07 UTC): BEFORE THE LIT RUN OF UNIT (3)
+The dark run's sharding fault (every 4th birth, the restore sample, and every 24th, the server sample, both fell on shard 0, so one shard ran the whole restore loop serially: about two hours of the mutex) IS CURED IN THE INSTRUMENT FIRST: each sample spread over all four shards (for example a sample by `hash(seed) mod k` rather than by row index, or the shard by `row mod 4` and the sample by `floor(row / 4) mod k`). Every piece of a run under the platform's two-hour limit.
