@@ -28,7 +28,7 @@ THE BRIEFS: CLOSE-5's under `close-5/briefs/`, read through `close-6/briefs/CLOS
 
 LEFT, IN ORDER: F-FORTUNE (builder) -> LIT-13G measure (builder; brief to write; ONE line to the chair; NOTHING BUILT before its
 ruling) -> F-JOIN -> PROSE-E merge when sent -> F9 B (sample town, narration whole) -> F9 A (lit twin, no manifest) -> F8 (fortune
-header + arm 7, red first) -> registers by their doors -> `close/FOR-THE-OWNER.md` (with THE DEPLOY'S ORDER: migrations 204-212
+header + arm 7, red first) -> registers by their doors -> `close/FOR-THE-OWNER.md` (with THE DEPLOY'S ORDER: migrations 204-210 (N117)
 BEFORE the PR's merge and the deploy, only after the security reader's clearance and one top-tier read of 212's final text) ->
 "FLIP <commit>".
 
