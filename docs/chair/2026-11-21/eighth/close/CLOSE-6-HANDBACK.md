@@ -18,7 +18,10 @@ THE FLIP BRANCH'S COMMITS (CLOSE-5's six, see its section 0), then mine:
 | 9df6731ee | (CLOSE-5's last: F-SEAT-2) | CLOSE-5 lit 29/29 |
 
 UNIT (2), the census-blind files: DONE by CLOSE-5 (points 106-109 in the Q8 trial; 110-112's five files lit at ec43beb7f, 352/352).
-"PROSE-E": not yet sent by the chair (`origin/lane/prose-6-2026-11-23-e-wip`; it merges BEFORE unit (3)).
+"PROSE-E cf104777c" SENT by the chair at 10:10 UTC (N80; `origin/lane/prose-6-2026-11-23-e-wip`, 12 files vs 9b0ffaa97): merged
+into the flip by a plain merge at the NEXT COMMIT BOUNDARY (after F-FORTUNE commits, before LIT-13G's builder); a register conflict
+takes the flip side, then its door, own commit; a LIT red of `tests/domain/oppositeSentencePairs.test.js` is EXPECTED (PROSE-6's
+"LIT-DISAGREE" measure, line to come via the chair): name it, go on; ONE line to the chair: commit, conflicts, lit reds by name.
 
 THE BRIEFS: CLOSE-5's under `close-5/briefs/`, read through `close-6/briefs/CLOSE-6-ADDENDUM.md` (branch, logs, report path).
 
@@ -28,7 +31,7 @@ header + arm 7, red first) -> registers by their doors -> `close/FOR-THE-OWNER.m
 BEFORE the PR's merge and the deploy, only after the security reader's clearance and one top-tier read of 212's final text) ->
 "FLIP <commit>".
 
-IN FLIGHT: nothing yet.
+IN FLIGHT: the F-FORTUNE builder (dispatched 09:23 UTC) in `/home/user/wt/flip`; report to `close-6/reports/F-FORTUNE.md`.
 
 ## 1. RULINGS IN FORCE (the chair's; numbered)
 1. No pull request, ever; push only `lane/close-6-2026-11-23*`, by the local branch's own name, `git ls-remote` first, only when
