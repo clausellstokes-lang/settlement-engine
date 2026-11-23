@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 05:48 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; its seat lines re-written 06:13 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -36,46 +36,52 @@ warning: the figure is the seat's present context, not what it has read). FIGURE
 no figure fell since 04:57, so no seat was summarized in that hour): STACK-106 172,763 (STALE: it is in one long
 turn); VEIL-38 526,279 (idle since 05:31: it waits on M's pool run); VEIL-40 240,133; VEIL-41 293,005 (its own
 estimate was 110,000); PROSE-6 201,030; CLOSE-5 426,693 (about 110,000 an hour: 620,000 near 07:30 UTC).
-- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`, top 5e63f2603 ("DOORS"
-  at 04:32 UTC): POINT 106 "DAILY-B" (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109
-  "PRONOUN" (4fa51f422); THE CHAIN READ BY THE CHAIR ON ORIGIN at 05:37 (each merge's second parent the commit named;
-  nothing under supabase/ moves). ITS GATE SO FAR: step f 1,590 files, 13,048 tests, 15 red, all listed; f2 ONE NEW
-  RED, CLASS (4), point 109's (N54). IT NOW RUNS the build and `tests/build` at 5e63f2603 and WAITS FOR TWO LATE LANES
-  BY "ADD <branch> <commit> POINT <n>": "PRONOUN-2" (the cure of that red) and "PROSE-D"; then "DOORS", one more build
-  at the final top, its final message ("CLOSE THE STACK" from the chair ends the wait). THEN THE CHAIR LANDS (E130's
-  form; the facts for the rows are in `/home/user/scratch/chair/landing-106-facts.txt`).
+- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: THE LANDING, on `lane/stack-106-wip-2026-11-23`: POINT 106 "DAILY-B"
+  (merge 2f3d614ac), 107 "VACANT" (0fbb255f6), 108 "DAILY-C" (e85971dcc), 109 "PRONOUN" (4fa51f422), "DOORS"
+  5e63f2603 (THE CHAIN TO THERE READ BY THE CHAIR ON ORIGIN at 05:37; its INTERIM report for 106 to 109 is in N56);
+  POINT 110 "PROSE-D" merged ab6e2f53f at 06:05 (doors a27ea19d7, ab13c0e70; not yet on origin at 06:07). THREE REDS
+  WAIT ON TWO LATE LANES, each to come by "ADD <branch> <commit> POINT <n>" (111 and 112 in the order they arrive):
+  "PROSE-D-2" (PROSE-6: two pins, test-only: N57) and "PRONOUN-2" (CLOSE-5's builder: N54). THEN "DOORS", ONE BUILD AT
+  THE FINAL TOP, its final message ("CLOSE THE STACK" from the chair ends the wait). THEN THE CHAIR LANDS (E130's
+  form; the facts for the rows are in `/home/user/scratch/chair/landing-106-facts.txt`). BEFORE EACH "ADD" THE CHAIR
+  READS THE DIFF WHOLE AND TRIAL-MERGES IT in `/home/user/wt/trial` (a detached scratch worktree at 5e63f2603).
 - CLOSE-5 session_01FbPLbczmgBJrps3Eo813m1 (THE FLIP'S SEAT; start message `prompts/START-CLOSE-5.txt`): "BUILD THE FLIP
-  5e63f2603" taken at 05:23 (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip
-  is built on `lane/close-5-2026-11-23-flip`; builder F0 (the budgets) first. BY N54 IT ALSO BUILDS "PRONOUN-2", FIRST,
-  with a second builder (branch `lane/close-5-2026-11-23-pronoun2-wip` at 95180c283) and sends "PRONOUN-2 <commit>".
-  It hands over at a commit boundary by 600,000 on its own count (told after the 05:46 read); successor CLOSE-6. The owner's
+  5e63f2603" taken (PROVISIONAL: it merges the line's tip the chair names before "FLIP <commit>"); the flip is built on
+  `lane/close-5-2026-11-23-flip`. F0 (the budgets) STOPPED RIGHTLY on a file the golden-freeze register freezes whole:
+  RULED N56: that one raise is dropped and NAMED for the owner; commit 0 is 15 budgets in 14 files; A STANDING RULE:
+  an edit that moves a frozen surface's bytes is dropped from its commit and named for the owner. "PRONOUN-2" FIRST,
+  by a second builder (branch `lane/close-5-2026-11-23-pronoun2-wip` at 95180c283; brief 37072e733): it owes "PRONOUN-2
+  <commit>". It hands over at a commit boundary by 600,000 on its own count: SUCCESSOR CLOSE-6, WHOSE START MESSAGE IS
+  DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: A DRAFT WITH FIVE BLANKS, NOT A START MESSAGE). The owner's
   signings (goldens, sizes) are prepared and NAMED by it, signed by nobody.
-- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: finishing "PROSE-D" (N37, N43: the two wage sentences re-worded; no
-  `force: paid` anywhere; three pins of `proseMoveGrammar` CONTROL 4 approved: 167 to 166, 155 to 154, 0.194 to
-  0.193); its -disagree-wip was e9d667441 on origin at 05:32. It owes "PROSE-D <commit>": a late "ADD".
-- VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (chain B, R4-IDS): its -wip f7f1cfe8c, its docs d23bfc749 (PART 40, its
-  section 1 FINAL for the hand-over). M on the 140: three zeros; A SURPRISE: server and twin differ on 77 reads of 7
-  places (N47). IT HANDS OVER WHEN M's POOL RUN ENDS. ITS SUCCESSOR VEIL-42's START MESSAGE IS DRAFTED on this machine
-  (`/home/user/scratch/chair/DRAFT-START-VEIL-42.txt`, and a copy on this lane, `prompts/DRAFT-START-VEIL-42.txt`: A DRAFT WITH FOUR BLANKS, NOT A START MESSAGE: lean; three measures before any cure ("77", "WHOLE-DOC" at the
-  tip's own code, "GAP"); R4I-SQL-2; R4I-TONIGHT-2; the queue; "WRITER-REACH"; the proofs; "TIP? R4-IDS"): at the
-  hand-over the chair fills its four blanks, commits it under `prompts/`, pushes, and seats by a short prompt.
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: "PROSE-D 01ecf1e91" (`lane/prose-6-2026-11-23-disagree-wip`) IS POINT 110
+  (N56). IT OWES "PROSE-D-2 <commit>": ONE test-only commit for the two pins its rule 8 did not run (N57:
+  `bar3CorpusGuards` :83; `composeStateProse` :187), with the stack's 97-file set re-run; THEN E132's item (4), a
+  measure only (one table for the owner). It stays seated until its lane lands.
+- VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; SEATED 06:12 UTC on VEIL-38's hand-over e76873832 /
+  f7f1cfe8c; start message `prompts/START-VEIL-42.txt`): lean; the tip merged first; the machine and the pool; THREE
+  MEASURES BEFORE ANY CURE, each sent to the chair: "77" (the diff by path on the 140's 7 places AND the pool's 352
+  reads where server and twin differ), "WHOLE-DOC" (the same comparison at the tip's own code, value for value: ON IT
+  THE CHAIR RULES THE WHOLE-DOCUMENT FORM INTO EVERY UNIT'S PROOFS), "GAP" (every path where a stored person id stands
+  after the re-key); then R4I-SQL-2, R4I-TONIGHT-2 (M is done: 0, 0, 0), the queue, "WRITER-REACH", the proofs, "TIP?
+  R4-IDS". Its first message is due by 06:57 UTC.
 - VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A, R5-DESC; start message `prompts/START-VEIL-40.txt`): builder A's
-  own runs RE-RUN BY THE SEAT and CONFIRMED (05:40: 58 of 58; `tests/lint` 45 = the lane's 22 + the 23 `prose.*`
-  rows); builder B is on ITEM 5b's MEASURE; "PIN-2" merged at B's phase-1 return. IT OWES "5b MEASURE", ON WHICH THE
-  CHAIR RULES N35 (3) (the template withheld always; or the rival leaves with its host; or the mask takes the case
-  forms; or the base stands); no "TIP? R5-DESC" before.
+  own runs RE-RUN BY THE SEAT and CONFIRMED (05:40); builder B is on ITEM 5b's MEASURE; "PIN-2" merged at B's phase-1
+  return. IT OWES "5b MEASURE", ON WHICH THE CHAIR RULES N35 (3) (the template withheld always; or the rival leaves
+  with its host; or the mask takes the case forms; or the base stands); no "TIP? R5-DESC" before.
 - VEIL-41 session_01FbPLbd3QgeKoNgJK2yVomF (chain C; start message `prompts/START-VEIL-41.txt`): stands on 5971496d4
   and the tip; its machine is being re-made (about 110 minutes from 05:30). RULED N53: `prose.incomeWeight` re-hosted
   with the 23; `prose.criminal` left. IT OWES: RED FIRST; "VS1 CAUSE" with the candidates; one builder for "C2-BUILD
-  (a')"; THE PROOF BY VALUE on the 1,948 stored documents; then "TIP? STORED-PROSE <commit>". Told after the 05:46 read to push
-  PART 43's first section before its turn ends (293,005).
+  (a')"; THE PROOF BY VALUE on the 1,948 stored documents; then "TIP? STORED-PROSE <commit>".
+- EVERY VEIL UNIT'S PROOFS NOW ALSO HOLD (told to VEIL-40 and VEIL-41 right after VEIL-42's seating; it is in VEIL-42's start message): `tests/copy`
+  WHOLE; and, for any line or string a unit re-words or removes, a grep of `tests/` for the old words (N54, N57).
 - DONE, AND MESSAGED NO MORE: DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT ("DAILY-C 8036cfe71" is point 108); CLOSE-4
   session_01FbPLbeRbTG1wNjkEsa8M64 ("VACANT" point 107, "PRONOUN" point 109; hand-back e5d1ca80a); VEIL-37
   session_01FbPLbcvhMzoJs1V2KQYq9M (handed over 03:09; PART 39); VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (handed over
-  05:21; its tail act done at 05:40: `P2-CLASS.md` on `lane/veil-39-2026-11-23` at 8b0a4e325: at the tip 1 red of
-  872, VS1's tooth; `tests/lint` whole 48, the tip's own).
-SIX WORK NOW: STACK-106, VEIL-38, VEIL-40, VEIL-41, PROSE-6, CLOSE-5. VEIL-38's place goes to VEIL-42 at its
-hand-over; PROSE-6's frees when "PROSE-D" is taken; CLOSE-5's goes to CLOSE-6.
+  05:21; tail done 05:40); VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (HANDED OVER 06:07 UTC: e76873832 / f7f1cfe8c;
+  PART 40's first section is its packet; no run left on its box).
+SIX WORK NOW: STACK-106, CLOSE-5, PROSE-6, VEIL-40, VEIL-41, VEIL-42. PROSE-6's place frees when its lane has landed
+and its measure is pushed; CLOSE-5's goes to CLOSE-6.
 THE GATES' "server = twin" IS A SHAPE CHECK ONLY (N48): the whole-document form joins every veil unit's proofs once the
 chair has ruled on VEIL-42's "WHOLE-DOC" measure at the tip's own code. The hourly check is a one-shot scheduled task
 re-armed each time: the last entry of section 5 that names one holds the next.
@@ -87,15 +93,17 @@ file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projec
 CARRY THE WHOLE-DOCUMENT "server = twin" ONCE THE CHAIR HAS RULED ON ITS MEASURE AT THE TIP (N48). THE STORED PROSE'S
 CURE IS RULED "(a')" (N49): no `publicProse` served on a shared read; VEIL-41 builds it. THE TIP PASSES THE PUSH HOOK's TWO TYPE CHECKS (the chair's own run at 05:42 UTC in `/home/user/wt/veiltip`: 167 of 167; 1113 of 1113).
 
-WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: "PRONOUN-2 <commit>" read (its diff whole, its equality proof) and
-ADDed; "PROSE-D <commit>" read and ADDed; the line moved after STACK-106's final message, then "THE LINE IS <commit>"
-to PROSE-6 and CLOSE-5 and CI read by name; VEIL-38's hand-over and VEIL-42's seating; "5b MEASURE" ruled; "VS1
-CAUSE" ruled; VEIL-42's three measures ruled (the whole-document form into every unit); CLOSE-5's hand-over and
-CLOSE-6's seating (its start message is NOT drafted yet); the sample town's narration read and put to the owner
-before the flip lands. PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT: "You may push the working line when the landing's
-checks pass." (02:47 UTC); his veto on (a') (a shared page carries no state sentences in the first deploy: N49);
-whether the five double possessives are cured before the first deploy. Without his line the chair pushes the working
-line by E130, its own check judges, and a refusal stands.
+WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: "PROSE-D-2 <commit>" and "PRONOUN-2 <commit>", each read whole,
+trial-merged and ADDed; the line moved after STACK-106's final message, then "THE LINE IS <commit>" to PROSE-6 and
+CLOSE-5 (or CLOSE-6) and CI read by name; VEIL-42's first message and its three measures ruled (the whole-document
+form into every unit); "5b MEASURE" ruled; "VS1 CAUSE" ruled; CLOSE-5's hand-over and CLOSE-6's seating (fill the
+draft's five blanks from CLOSE-5-HANDBACK.md section 0); the sample town's narration read and put to the owner before
+the flip lands. PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT: "You may push the working line when the landing's checks
+pass." (02:47 UTC); his veto on (a') (a shared page carries no state sentences in the first deploy: N49); whether
+the five double possessives are cured before the first deploy. Without his line the chair pushes the working line by
+E130, its own check judges, and a refusal stands. NAMED FOR HIS SIGNING SO FAR IN THIS STACK, SIGNED BY NOBODY: the
+generation worker's size (+4,131 at 5e63f2603), the engine chunk's (+214), the three listed size reds of the state
+sentences (moved again by "PROSE-D"), and one budget raise in a file the golden-freeze register freezes (N56).
 
 THE CHAIR'S MACHINE AND HABITS: `/home/user/wt/chair` (this lane; hooks installed; `node_modules` is a link to
 `/home/user/wt/line/node_modules`); EVERY PUSH: `sh docs/chair/2026-11-21/eighth/landing/safepush.sh /home/user/wt/chair
@@ -105,7 +113,7 @@ path only. The hourly check is a one-shot scheduled task re-armed each time (the
 SEATED BY A SHORT PROMPT THAT POINTS TO ITS START MESSAGE ON ORIGIN (pushed first), never by a retyped one. The MCP
 tool list is re-sent whole at every reconnect (about 28,000 tokens each): bulky reads go to a haiku helper, never
 into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef (local branch
-`lane/stack-106-wip-2026-11-23-base`, never pushed, holds nothing; `npm ci` done). `/home/user/wt/veiltip` is a detached worktree at the veil's tip 23bb8b8ae (for the chair's own reads and runs). ON THIS MACHINE ONLY: `/home/user/scratch/chair/DRAFT-START-VEIL-42.txt`; `landing-106-facts.txt`; `unrecorded.txt` (what is ruled and not yet in this file: emptied at each record).
+`lane/stack-106-wip-2026-11-23-base`, never pushed, holds nothing; `npm ci` done). `/home/user/wt/veiltip` is a detached worktree at the veil's tip 23bb8b8ae (for the chair's own reads and runs). `/home/user/wt/trial` is a detached worktree at 5e63f2603 for the chair's trial merges (each aborted). ON THIS MACHINE ONLY, in `/home/user/scratch/chair/`: `landing-106-facts.txt`; `unrecorded.txt` (what is ruled and not yet in this file: emptied at each record).
 
 ## 0. THE STATE AT THE TAKEOVER (read from origin at 00:01 UTC on 2026-11-23)
 - ORIGIN IS AS THE PICKUP SAYS: 36 of 36 branches it names are present; the 26 it gives a commit for all match
@@ -1023,3 +1031,88 @@ into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef 
   commits; each merge's second parent the commit the chair named: 4e7fa5667, 4ef6d6c32, 8036cfe71, 95180c283; nothing
   under supabase/ differs from the line; src 27 files, scripts 3, tests 39, public 1). THE CHAIR'S NINETEENTH PUSH
   (da8827a2c) ENDED exit=0 at 05:31:05 UTC: CONFIRMED from its log and by ls-remote.
+- 2026-11-23 06:14 UTC · N56 · "PROSE-D 01ecf1e91" TAKEN AS POINT 110; THE STACK'S INTERIM REPORT FOR 106 TO 109; F0's STOP RULED
+  (ruled between 05:51 and 05:56 UTC). (1) PROSE-6's line of 05:47: "PROSE-D 01ecf1e91" on
+  `lane/prose-6-2026-11-23-disagree-wip` (cut at 244fa84ef; 23 files): on 900 births FOOD 68 to 0 through its registered
+  table of opposite pairs (six lines F1 to F6 on DS-DEF-2 CHAIN; the flat v1 to v4 gain `food: ≤ pressured`); WAGES
+  BOTH 0 (WEAK v1 and v2 re-worded by two WORD_CORRECTIONS rows; no `force: paid`; the GEN-17 leaf equal to the
+  line); its tooth red on a clean 244fa84ef and green 6 of 6; the dark proof EQUAL (900 births, 0 strings differ);
+  the highest share 13.3 per cent (F4, metropolis); one empty cell, dz-city-101, the named exception; `tests/lint`
+  whole 3 red, the line's. MOVED, NAMED, SIGNED BY NOBODY: `proseCorpusBytes` RAW defense 299,885 to 302,541
+  (committed 287,394) and GZIP 39,774 to 40,039 (37,962); `proseComposed` A0b 2,322 to 2,328 (ceiling 2,103); first
+  paint gzip 377,005 against the line's 376,987 and Brotli 316,557 against 316,646, raw, worker and engine equal;
+  CONTROL 4's three pins (a gain); the literal pins by its six lines; registers by their doors. READ BY THE CHAIR: the
+  receipt's and the generated pool's diff WHOLE (the two wage sentences in the ruled words; four marks; six variants,
+  vid 7 to 12; nothing else under src) and the two WORD_CORRECTIONS rows. THE CHAIR'S TRIAL MERGE on 5e63f2603 (a
+  scratch worktree, aborted): three registers meet (the lighting census and the observed-shape readers' baseline
+  conflict; the wiring census merges by itself); no pin meets a file of the stack. "ADD ... POINT 110" sent. PROSE-6
+  stays seated until its lane lands; then E132's item (4), a measure only. (2) STACK-106's "FINAL" of 05:48 crossed
+  N54 and IS TAKEN AS ITS INTERIM REPORT FOR POINTS 106 TO 109: conflicts: the lighting census only (a register; its
+  door after); the two door commits cb598376f and 5e63f2603 with their figures; `tests/lint` whole 225 files, 3 red,
+  listed; the type ratchet 167 of 167, the strict check 1113 of 1113, eslint 0 errors (38 warnings), the build
+  clean, `tests/build` 15 red, all listed; step f 1,590 files, 13,048 tests, 15 red, all listed; f2 ONE red, class (4)
+  (N54). SIZES AT 5e63f2603 AGAINST POINT 105: first paint 1,180,816 / 376,053 / 315,810 (was 1,184,741 / 376,987 /
+  316,646: ALL THREE DOWN); THE GENERATION WORKER 2,713,394, A RISE of about 4,131 (the base figure is the line's
+  recorded one, not re-measured by the seat); THE ENGINE CHUNK 932,583, +214 (point 107's); the PDF render worker
+  3,123,108 and SettlementPDF 194,977 (no base measured). `raised-top.txt` by its lines: the wiring census rose 1;
+  the observed-shape readers rose 8, fell 3; writer-reach rose 11 (with five closure sizes from point 106's own door
+  commits); the lighting census rose 5; HAND_CEILING 77 to 83 (point 106); the hand pools and the house readings
+  rose 1 each. TWO ROWS OF THE RED LIST ARE CURED by point 106 (`deadOperationRatchet`; `voiceMechanics` "E-E"). The
+  whole figures are in `landing-106-facts.txt` on the chair's machine and go into the rows at the landing. (3) CLOSE-5
+  at 05:50: builder F0 STOPPED with no commit: `tests/lint/goldenFreeze.walker.test.js` arm 1 red:
+  `tests/property/espionageDormancyFence.test.js` is frozen WHOLE by `tests/fixtures/.golden-freeze-register.json`, and
+  FENCE 1's budget raise (120_000 to 240_000) moves its sha (279d73c5… to 012ad636…). **Decided:** its lean, all
+  three: THE RAISE IS DROPPED from the flip (commit 0 is 15 budgets in 14 files) and NAMED for the owner in
+  `close/FOR-THE-OWNER.md` with both shas, its measure (62.9 s alone lit; about 116 s on a runner; budget 120 s) and
+  the commands after his signing. A STANDING RULE FOR THE REST OF THE FLIP: any edit that moves a frozen surface's
+  bytes (the golden-freeze register, a golden, a reference snapshot, a tuning signature) is dropped from its commit
+  and named for the owner, said in the line after that commit. **Why:** goldens and signings are the owner's; the
+  test is red lit by its listed hash row in any case. **Reversal:** his signing carries the raise. Its line was
+  headed "06:1x UTC" and reached the chair at 05:50: told.
+- 2026-11-23 06:14 UTC · N57 · POINT 110 MERGED; TWO PINS OF "PROSE-D" RED IN THE GATE; CURED TEST-ONLY IN THE LANE ("PROSE-D-2")
+  (ruled at 06:07 UTC; said to the owner the same turn). STACK-106 at 06:05: "POINT 110 MERGED ab6e2f53f" (conflicts
+  as the chair's trial said; doors: a27ea19d7 the observed-shape readers by --write, rung 46 kept; ab13c0e70 the
+  lighting census: files 3,784 to 3,785, titles 31,918 to 31,924; the wiring census's door dry: nothing would move;
+  writer-reach check 0). ITS RUN (97 files: `tests/copy` whole, every file that names `dossierStateProse`,
+  `defense.generated`, `generate-dossier-state-prose` or `oppositeSentencePairs`, every `*StateProse*` file; 1,792
+  tests): 3 RED: (a) N54's; (b) `tests/domain/bar3CorpusGuards.test.js` :165, "BAR3-CORPUS: a reworded line claims no
+  more than every printing town bears", the row of `DS-DEF-2::Economic Survival: WEAK` v1; (c)
+  `tests/domain/composeStateProse.test.js` :187, `variants` expected 3182 to be 3176. READ BY THE CHAIR: the guard's
+  row :83 (`gone: /nothing put by/`, `now: /no money is laid by to pay for a long one/`) and its arm :156-168;
+  `src/domain/coherence/defenseWordsFindings.js` to :110: its term "no food stored" is `no food reserves | holds no
+  food | keeps no food | no food buffer | nothing put by`: THE RULED SENTENCE'S "nothing laid by to pay for a long
+  defence" IS NOT MATCHED, and its "to pay for" keeps the claim to money. THE CHAIR'S OWN GREP at 5e63f2603: no other
+  test pins the two sentences' old words (`tests/helpers/defenceDeskKinds.js` names "always short of money" in a
+  comment: its detector goes by member, and the line's mark `prosperity: ≤ comfortable` stands); of the six `3176`
+  pins, five were moved by the lane and :187 was missed. A FAULT OF THE CHAIR'S RULING N43: the wage sentence was
+  re-worded without a grep of the tests for its old words; and the lane's rule 8 kept 79 of 97 files and dropped
+  these two (why: asked of PROSE-6). **Decided:** both are the lane's pins, cured by ONE test-only commit on its
+  branch: (b) `now` re-pinned to the ruled sentence's own bounded claim, `gone` as it is, the row's note stamped
+  CHAIR-2026-11-23-03:55; (c) 3176 to 3182 with its cause; red first and green after; the stack's 97-file set,
+  `tests/copy` and `tests/lint` whole re-run by the lane. Then "PROSE-D-2 <commit>" and its own "ADD". THE STACK GOES
+  ON ("DOORS", the push) and takes the two late lanes in the order they arrive (points 111 and 112); the build at
+  the final top after both. **Why not re-word the sentence back:** the old words are what disagreed with "pays wages
+  for its defense" (the owner's order); the guard's hazard (a line that reads as "no food stored") is not met by the
+  new words. **Reversal:** one test-only commit. TWO LESSONS, written into every later start message and sent to the
+  three veil chains: A RE-WORDED OR REMOVED LINE: GREP `tests/` FOR ITS OLD WORDS BEFORE THE COMMIT; A LANE'S RULE 8
+  RUNS EVERY TEST FILE THAT NAMES A SOURCE FILE IT CHANGED, AND `tests/copy` WHOLE.
+- 2026-11-23 06:14 UTC · N58 · VEIL-38 HANDED OVER; VEIL-42 IS SEATED; CLOSE-6's START MESSAGE DRAFTED. VEIL-38's line of 06:07:
+  "VEIL-38 HANDS OVER e76873832 / f7f1cfe8c" (BOTH REFS READ BY THE CHAIR with ls-remote; PART 40's last diff read).
+  M ON THE POOL ended rc 0 at 06:06: 1,808 places (608 with a hidden house), 79,552 reads, 4,608 cast persons on the
+  owner pages, 202,752 cast person-reads served: (i) 0, (ii) 0, (iii) 0, no unmapped served cast id: NO STOP:
+  R4I-TONIGHT-2 may build. THE SAME PROBE: THE SERVER'S WHOLE DOCUMENT DIFFERS FROM THE TWIN'S, modulo the bijection,
+  ON 352 READS OF THE POOL beside the 140's 77 (all at Reveal off, at every setting): N47's stop for "TIP? R4-IDS",
+  its cause unread. No builder of VEIL-38's runs; no run is left on its box; every database it touched was local.
+  VEIL-42's START MESSAGE (`prompts/START-VEIL-42.txt`, 14,420 bytes; the draft of N55 (5) with its blanks filled and
+  two changes: measure "77" takes the pool's 352 reads too; `tests/copy` whole joins the unit's proofs) COMMITTED
+  a45e8d031 AND PUSHED (the chair's twenty-first push: exit=0 at 06:12:05 UTC; origin holds it: CONFIRMED by
+  ls-remote and by reading the file's size on origin). VEIL-42 SEATED at 06:12 UTC: session_01FbPLbd4KVbm2owKo72ukoY
+  (source `lane/veil-38-2026-11-23`, outcome `lane/veil-42-2026-11-23`; claude-opus-5-5, high), by a short prompt
+  that points to the file. Its first message is due by 06:57 UTC. TOLD TO VEIL-40 AND VEIL-41 right after: `tests/copy`
+  whole joins every unit's proofs; a re-worded or removed string is grepped in `tests/` first (N54, N57). CLOSE-6's
+  START MESSAGE IS DRAFTED (`prompts/DRAFT-START-CLOSE-6.txt` on this lane: five blanks: the hand-over's hour, the
+  state, later entries, the two commits), from CLOSE-5's hand-back head and its plan's last-commit section READ BY THE
+  CHAIR at 37072e733: lean; the flip continues on `lane/close-6-2026-11-23-flip` cut at CLOSE-5's flip tip; N56's
+  standing rule and N54's `tests/copy` are in it. THE HOURLY CHECK: the task trig_014n46rT8RYWctPfG1VbdSTb fired at
+  05:52 and was answered by N55 (done at 05:46); THE NEXT IS trig_01XTH9zojrxWMK8nfYw4ZoC7 at 06:46 UTC. THE CHAIR'S
+  TWENTIETH PUSH (c323df96d) ENDED exit=0 at 05:52:54 UTC: CONFIRMED from its log and by ls-remote.
