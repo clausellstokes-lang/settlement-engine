@@ -60,3 +60,20 @@ m140 ended (R4I-MEASURE d71a3ee44): the master-born set's GAP list is EMPTY (0 h
 PATH: the sites stay the control's three, both roster lists, as cured. `_gallery_veil_roster_choices`'s top-level
 `factions[].power` share (the 33 L1 reads named above) is NOT this unit's and is with the chair: that function is NOT touched
 (this diff's code lines are inside `_gallery_veil_rekey` only).
+
+## THE SECOND CURE (ADDENDUM 2, the chair's N106, by grant): two guard lines of `_gallery_veil_roster_choices`
+- THE DIFF: 212 lines 2329 (master's top-level `factions[]`) and 2360 (`powerStructure.factions[]`): `jsonb_typeof(e -> 'power') <> 'number'`
+  -> `is distinct from 'number'`. NO OTHER BYTE of the function; no twin edit; no signature (the rollback does not move). Header (36c)
+  and one line beside R4-IDS's (comments, outside the function).
+- RED (before the two lines; the snapshot `/var/tmp/sql2c1` = `git archive 84f2e2bba`, template `sql2_c1tpl`):
+  (a) control: `logs/3b-ctrl-green-table.txt` (the GAP's green, = this cure's red): L1 gallery 33 of 288 at `factions[].power`;
+      master-born set, gallery door: RUNNING (`logs/n106-red-m.log`);
+  (b) the plant `b-plant.mjs` (`logs/n106-red-b.txt`): RED, the server ADDS `power` [50,50] on BOTH lists where the twin adds none;
+      its control (every power a number) green, [80,20] both engines;
+  (d) the pin `tests/lint/veilTypeofGuard.walker.test.js` against the old 212: RED naming both lines (`logs/n106-red-d.txt`).
+- GREEN so far: (b) GREEN both lists, no `power` added, server = twin; control [80,20] (`logs/n106-grn-b.txt`); (d) 3 of 3
+  (`logs/n106-grn-d.txt`), its inventory ONE line (212 :2397, `jsonb_typeof(r0 -> 'pair') <> 'array'`, unreachable NULL: `r0 @> e`
+  with `e -> 'pair'` a non-empty array); the mutation manifest 10/10 (a rationale entry, `logs/n106-manifest.txt`); eslint 0;
+  item 4 re-run on this 212 (sha fad4b9b9…): 480 = 480, diff empty, one drawer, closure all v, salt 0, smoke green; `--check` 0.
+  (d) cost under thirty minutes.
+- QUEUED: `run-n106.sh grn-m grn-c c`, then tests/security (roster-choice readers + handreach), tests/lint + copy whole, typecheck.

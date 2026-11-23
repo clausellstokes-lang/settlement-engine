@@ -252,6 +252,13 @@
 --       npcs[] (its id, goal.intent.short.target.id, goal.intent.long.target.id, allegiance.handler: one path list, both
 --       passes). No function added, removed or re-signed: _gallery_veil_rekey's body alone; twin galleryVeilPeople.js ::
 --       rekeyPeople, the same list.
+--   (36c) NO SHARE WRITTEN WHERE THE RECORD HAS NONE (VEIL-42's R4I-SQL-2, by the chair's grant N106; R4I-MEASURE's A-77 aside
+--       and C-GAP): _gallery_veil_roster_choices's two share guards (master's top-level factions[], powerStructure.factions[])
+--       asked `jsonb_typeof(e -> 'power') <> 'number'`, NULL on an ABSENT key, so `not exists` let a power with no `power`
+--       through and equal shares were written onto entries that never had one, only where an entry was taken (a tell and a
+--       false figure; the twin, galleryRosterChoices.js, `typeof f.power === 'number'`, wrote none). Both now ask
+--       `is distinct from 'number'`: those two lines and no other byte of the function; no twin change; no signature moves.
+--       Pinned: tests/lint/veilTypeofGuard.walker.test.js (no null-blind jsonb_typeof guard in this file; inventory only shrinks).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -264,6 +271,7 @@
 --       reader and every importer of such a share received both.
 --
 -- R4I-SQL-2 (VEIL-42, (36b)): NOTHING NEW, NOTHING RE-SIGNED: _gallery_veil_rekey's body (one path list for every person card).
+-- R4I-SQL-2 (VEIL-42, (36c), N106): NOTHING NEW, NOTHING RE-SIGNED: two guard lines of _gallery_veil_roster_choices.
 -- R4-IDS (VEIL-35, (36)): NEW, seven more (_gallery_veil_id_text, _rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey,
 -- _rekey_served; all but _id_text VOLATILE); RESTATED VOLATILE (was immutable or stable): _gallery_veil, get_gallery_dossier,
 -- get_unlisted_dossier, import_gallery_dossier. 211's get_gallery_map is NOT restated: it is VOLATILE already.
@@ -2326,7 +2334,7 @@ begin
     -- remainder, as below)
     n1 := (select count(*) from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object');
     if n1 > 0 and n1 < (select count(*) from jsonb_array_elements(doc -> 'factions') e where jsonb_typeof(e) = 'object')
-       and not exists (select 1 from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number') then
+       and not exists (select 1 from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') is distinct from 'number') then
       bas := array(select case when (e ->> 'power')::numeric between 0 and 1e12
                                then case when public._gallery_veil_num_zero((e ->> 'power')::numeric) then 0::float8 else (e ->> 'power')::float8 end else 0::float8 end
                      from jsonb_array_elements(s -> 'factions') with ordinality x(e, o) where jsonb_typeof(e) = 'object' order by o);
@@ -2357,7 +2365,7 @@ begin
   -- (a share set is one where every served power carries a JSON number: a record whose powers carry none, an old one, has
   -- no shares to re-derive, and none is added)
   shares := n1 > 0 and not exists (select 1 from jsonb_array_elements(s #> '{powerStructure,factions}') e
-                                    where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number');
+                                    where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') is distinct from 'number');
   withheld := n1 < n0 or (shares and (select sum((e ->> 'power')::numeric) from jsonb_array_elements(s #> '{powerStructure,factions}') e
                                        where jsonb_typeof(e) = 'object') <> 100);
   if withheld and shares then

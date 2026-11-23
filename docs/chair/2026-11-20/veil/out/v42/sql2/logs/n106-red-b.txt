@@ -1,0 +1,7 @@
+start 2026-11-23T15:01:33Z src /var/tmp/sql2c1 (84f2e2bba (the GAP's cure; before N106's two lines)) 212 70ce3b51a0099a65
+no power (the plant): RED: (1) powerStructure.factions: the server ADDED power [50,50] | (2) powerStructure.factions: server [{"category":"government","faction":"Town Council","isGoverning":true,"power":50},{"category":"economic","faction":"Merchants","power":50}] | twin [{"category":"government","faction":"Town Council","isGoverning":true},{"category":"economic","faction":"Merchants"}] | (1) factions: the server ADDED power [50,50] | (2) factions: server [{"dominantCategory":"government","isGoverning":true,"name":"Town Council","power":50},{"dominantCategory":"economic","name":"Merchants","power":50}] | twin [{"dominantCategory":"government","isGoverning":true,"name":"Town Council"},{"dominantCategory":"economic","name":"Merchants"}]
+  every power a number (the control) powerStructure.factions: served Town Council, Merchants; power server [80,20] twin [80,20]
+  every power a number (the control) factions: served Town Council, Merchants; power server [80,20] twin [80,20]
+every power a number (the control): GREEN
+RED: 1 case(s)
+EXIT rc=1 2026-11-23T15:01:33Z

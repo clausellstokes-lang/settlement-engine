@@ -1,0 +1,38 @@
+the pin against 84f2e2bba's 212 (before the two lines), from the snapshot
+
+ RUN  v4.1.8 /var/tmp/sql2c1
+
+ ❯ tests/lint/veilTypeofGuard.walker.test.js (3 tests | 1 failed) 12ms
+     × every jsonb_typeof(<key lookup>) compared by <> or != is in the inventory, with its reason 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/veilTypeofGuard.walker.test.js > 212 holds no null-blind type guard (N106) > every jsonb_typeof(<key lookup>) compared by <> or != is in the inventory, with its reason
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "jsonb_typeof(e -> 'power') <>   (and not exists (select 1 from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number') then)",
++   "jsonb_typeof(e -> 'power') <>   (where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number');)",
++ ]
+
+ ❯ tests/lint/veilTypeofGuard.walker.test.js:47:21
+     45|   it('every jsonb_typeof(<key lookup>) compared by <> or != is in the …
+     46|     const unknown = found.filter((g) => !Object.prototype.hasOwnProper…
+     47|     expect(unknown).toEqual([]);
+       |                     ^
+     48|   });
+     49|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  15:02:17
+   Duration  167ms (transform 21ms, setup 27ms, import 14ms, tests 12ms, environment 0ms)
+
+EXIT rc=1

@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /home/user/wt/sql
+
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  15:02:34
+   Duration  286ms (transform 92ms, setup 43ms, import 141ms, tests 13ms, environment 0ms)
+
+EXIT rc=0
