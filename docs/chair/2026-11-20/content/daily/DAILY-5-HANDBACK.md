@@ -12,7 +12,9 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
   lighting census by its door; 5621ceeae the observed-shape readers' baseline by its door; then docs.
 - `lane/daily-5-2026-11-23-c2-wip` (worktree `/home/user/wt-c2`): D5C-2 phase B's builder (brief
   `briefs/D5C-2-PHASE-B.md`), cut from b6c48e5bb: a0340325c the 34 lines and `tests/domain/dailyLifeNewLines.test.js`;
-  535b893a2 `measures/D5C/` (before, after, `reader.d5c.mjs`). Not merged: HELD on the chair's ruling (0.3 item 1).
+  535b893a2 `measures/D5C/` (before, after, `reader.d5c.mjs`); phase B2 (the chair's ruling (b)): 3a65cc283 P16 and
+  P20 need dwellings; 8b8714561 `measures/D5C/after2`. MERGED into the lane as 0c75d069f; then 83725b1a6 the house
+  register by its door, 9632b6add the lighting census by its door, 0f8bf5b21 the observed-shape baseline by its door.
 
 ### 0.2 DONE
 - D4C-1 (the owner's flaws one and three; `lane/daily-4-2026-11-22-c1-wip` a2bb723d6): diff read whole once; RE-RUN by
@@ -33,10 +35,14 @@ first event (the ninth chair's prompt; no file). Predecessor: `DAILY-4-HANDBACK.
    prints the EMPTY string"); a fourth pins the eligible ids P1-P9 ("the pick is pickVariantMixed..."). On the 900 the
    slot prints 150/150 at every size before and after. RULED (b) by the chair (queued 01:57 UTC): P16 and P20 each need
    `['institution: dwellings']`, words unchanged; the three 18:19 pins untouched and green; the eligible-ids pin
-   re-pointed by cause; the 900 re-measured (gathering 150/150 every size, nothing over the bar, else STOP to the
-   chair). PHASE B2's builder (brief `briefs/D5C-2-PHASE-B2.md`, f8c93b5ce) RUNNING on the c2-wip branch. Then merged;
-   `samenessHideable.houseReadings.json` `hand` by its door (the walker's own `handHouseReadings`; 447 -> 464 at phase
-   B, plus P16 and P20's dwellings); the lighting census and the observed-shape baseline by their doors; `tests/lint` whole.
+   re-pointed by cause; the 900 re-measured. PHASE B2 (brief `briefs/D5C-2-PHASE-B2.md`): diff read whole (3 files);
+   the four pins red at 535b893a2, green after; the seat's re-run at 8b8714561: 19 files, 205 of 206 (the one red the
+   house register); after2: gathering 150/150 every size, filled over 0, largest family 21, families at 15 to 22: 35,
+   tables 2a to 2e and the reader's figure identical to after (every place of the 900 holds dwellings). MERGED 0c75d069f.
+   The house register `hand` 447 -> 466 (+19 = the new lines' declared houses, 0 removed; the walker 31 of 31); the
+   lighting census 3,781 -> 3,782 files (credited 3,295, titles 31,904, suiteTitles 8,866; proof 34 of 34); the
+   observed-shape baseline provenance only (six pool files' hashes). `tests/lint` whole at 0f8bf5b21: 3 of 3,366 red,
+   the known three, their figures identical to 5621ceeae's (all six in `src/data/dossierStateProse/`). DONE.
 2. THE LINE: the chair (00:47 UTC) "THE LINE IS 244fa84ef6e3f8bf773b64b87d9def7c854d4f0a" (point 105; point 106, DAILY-B's
    landing, PARKED; DAILY-C goes on the stack after 106). Merged after item 1 and BEFORE rule 8. A trial merge at b6c48e5bb
    (scratch, removed): one conflict, `tests/lint/.lighting-census-baseline.json`; 15 files, none under src. The census at
