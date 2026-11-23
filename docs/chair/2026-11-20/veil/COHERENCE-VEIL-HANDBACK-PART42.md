@@ -211,6 +211,11 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     lists among nothing-hidden town births: a handful or more = a member; fewer = STOP); a later statement is LAST over the tensions
     list in both engines, cleared against R5-TENSION first; (v)(1) as 72 (a) (1) after its precondition count, plus `bnAt` by path on
     113 and 62 (a served copy in publicProse = STOP); (vi) as written.
+129. THE CHAIR, 14:07 (N104): OWED IN THE UNIT's PROOF (this seat's or VEIL-48's): the join's name search found on the tip 23bb8b8ae
+    (without R5-DESC) a SHOWN power's standing naming the WITHHELD Thieves' Guild: r3m-town-none-0-17 (the Church: "...they play the
+    Thieves' Guild and the ...") and r3m-city-none-1-117 (the City watch); 240 reads, every door and setting, off and DM. R5-DESC is
+    its cure: THESE TWO SEEDS BY NAME read 0 on the unit's tree, both engines, every door the proofs read (gallery and link), in the
+    name arm; said in the proof's line. (They are gate-pool births: the L1 run's 140, or the name arm, can carry them.)
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -235,3 +240,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 13:16 SSKIP's STOP; 13:20 ruling 127; 13:21 relayed.
 - 13:23 T5 handed back (nothing run); T5 and SSKIP WIPs pushed; 13:25 both told the chair.
 - 13:40 ruling 128; 13:45 relayed to SSKIP; T5M's addendum (9df9a3e41) and dispatch.
+- 14:07 ruling 129 (the two named seeds owed in the proof).
