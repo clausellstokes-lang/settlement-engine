@@ -15,13 +15,16 @@ node_modules linked to /home/user/wip's (`run-1a.sh`, `run-1b.sh`, chained by `r
 ## STATE
 | item | state |
 |---|---|
-| 1 (a) handreach tooth (ii), red | QUEUED on the mutex (from 12:18 UTC), `logs/1a-handreach-red.log` |
-| 1 (b) the measure's C on the control towns, red | QUEUED after (a), `logs/1b-ctrl-red.log` |
-| 2 the cure | APPLIED in the tree (this WIP commit); `--check` 0; the walker 11/11; eslint 0 on the touched files |
-| 3 green | light units green (criminalSwitchSalt and the four non-security readers of the bijection module, 98/98, `logs/3-light-units.txt`); the heavy arms not run |
-| 4 rollback, catalogue, salt, smoke | RUN on the cured 212 (`run-4.sh`, `logs/4-proofs.txt`): all green (below) |
-| 5 E116's steps | header (36b) written; shas below; no test file added (manifest unchanged) |
-| 6 tests/security, tests/lint, tests/copy, typecheck | not run |
+| 1 (a) handreach, red | DONE (13:10-13:12 UTC, `logs/1a-handreach-red.txt`): **5 of 14 red**, the five master-shape towns (village-3, town-1, city-0, metropolis-1 and the hamlet), each "a stored person id is served": `factions[].members[].goal.intent.short/long.target.id` (e.g. `npc_peat_cutter`, `npc_veiled_5064ee784f11c849`) |
+| 1 (b) the measure's C on the control towns, red | DONE (13:12-13:17, `logs/1b-ctrl-red-table.txt`): `...goal.intent.short.target.id` 456 hits / 60 reads, `...long.target.id` 443 / 60, `...allegiance.handler` 35 / 10, each on gallery server, gallery twin, import server and the gallery page; 0 on link (both) and map member: C-GAP.md's table exactly |
+| 2 the cure | DONE (d344b6100); `--check` 1 before, 0 after; the walker 11/11; eslint 0; server = twin byte for byte under one salt on a hand doc (`logs/2-engines-same-salt.txt`) |
+| 3 green | DONE: handreach **14 of 14** (`logs/3a-handreach-green.txt`); the measure's C, **0 hits on every path, every door (gallery, link, import, map member, the page), off and DM, both engines**, publicProse 0, fresh-shaped 0 (`logs/3b-ctrl-green-table.txt`); criminalSwitchSalt and the four non-security readers of the bijection 98/98 (`logs/3-light-units.txt`). L1/L2: the COMPARISONS section of the green table is BYTE-IDENTICAL to the red's (L1 gallery 33 of 288 differ, all at `factions[]#keys` / `factions[].power`, the server's re-derived top-level share the twin does not write: there before the cure, not this unit's, NAMED not chased; L1 link 0; L2 57 as before). So the cure adds no server/twin difference; "L1 0 differ" is NOT met, by that pre-existing path. The master-born set (m140) is the seat's (the addendum): not run here |
+| 4 rollback, catalogue, salt, smoke | DONE (`logs/4-proofs.txt`): below |
+| 5 E116's steps | DONE: header (36b) and the R4-IDS line; shas below (no lane file records 212's sha outside out/v35's own proofs, so they are recorded here); no test file added (the mutation manifest does not move) |
+| 6 tests/security, tests/lint, tests/copy, typecheck | 6a DONE: **10 of 10 files, 196 of 196 tests** (criminalSwitchSalt, factionMemberPublicParity, gallerySanitizer, galleryVeilCures, galleryVeilIds, and the readers of the bijection: galleryRosterChoices, gallerySecondHomes, galleryServerVeil, galleryVeilHandRows, galleryWithholdAlways; `logs/6a-security.txt`; handreach in 3a). 6b, 6c QUEUED (detached, `run-green.sh 6b 6c`), behind the seat's m140 on the mutex from 14:09 UTC |
+
+Note on the stored-side census line of the green table: it still lists the three member paths, because the instrument's census
+marks "a re-key site" by its OWN copied list (not re-written, 44.7 (3)); what is SERVED there is 0 (HITS: none).
 
 ## THE CURE (one function of 212: `_gallery_veil_rekey`'s body; no signature moves, so the rollback does not move)
 - 212 :: `_gallery_veil_rekey`: one path list `card` (`id`, `goal.intent.short.target.id`, `goal.intent.long.target.id`,
