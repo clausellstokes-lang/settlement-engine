@@ -10,7 +10,7 @@ THIS CHAIR IS session_01FbPLbdpQrxXktCeSf32d4j. If this session ends, start here
 `CHAIR-HANDOFF-EIGHTH.md` (section 1; E125 to E136); the two COMMON files it names; then this file WHOLE and the start
 messages in `prompts/` beside it (each seat's whole first message, as sent).
 
-## READ THIS FIRST (re-written 2026-11-23 02:31 UTC; it supersedes every block below where they differ)
+## READ THIS FIRST (re-written 2026-11-23 03:17 UTC; it supersedes every block below where they differ)
 
 WHY THIS BLOCK: THE CHAIR'S CONTEXT WAS SUMMARIZED at about 02:15 UTC (its record had read 744,703 of 1,000,000 at
 01:21). It went on from this block and its summary, and it will be summarized again. EVERYTHING BELOW IS IN FILES ON
@@ -30,50 +30,62 @@ N13's three NEVERs stand: THE CHAIR MAKES NO MERGE FOR A SEAT WHOSE CHECK REFUSE
 VERDICT, AND CHANGES NO PERMISSION SETTING. THE LANDING IS ON: N34 in section 5.
 
 THE SEATS (all claude-opus-5-5 at high effort; message with send_message). A MARK IS READ BY ONE HAIKU HELPER that
-calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens; where that
-reads 0, the newest result event of the seat's record: last iteration: input + cache read + cache creation). Figures
-of 02:22 UTC:
-- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: LANDING. Point 106 "DAILY-B" merged (2f3d614ac, checked on origin by
-  the chair); "ADD ... 4ef6d6c32 POINT 107" (VACANT) sent 02:43 UTC; it goes on through step d and the gate without
-  waiting; more by "ADD" (PRONOUN, PROSE-D, DAILY-C). It owes "DOORS <commit>" and its final message; THEN THE CHAIR
-  MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name). 172,763.
-- VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE (02:12); owes "PIN-2 <commit>" (N23) and the C2
-  proposal file ((a'), (b) alone, (c)+(b); the table of the 23 `prose.*` rows; the chair's questions (i) to (v)).
-  C2-BUILD IS ITS SUCCESSOR'S. 494,348.
-- VEIL-37 session_01FbPLbcvhMzoJs1V2KQYq9M (chain A): R5D-SQL-2 ACCEPTED (N29); the tip merged into its -wip
-  (3ef7fb325); R5D-PAGE-A building. 532,932. When A's builder ends it asks for its figure: under 560,000 it reads A's
-  diff. IT HANDS OVER at the next natural stop, at once past 600,000: "VEIL-37 HANDS OVER <branch commit> / <-wip
-  commit>". ITS SUCCESSOR (VEIL-40) IS SEATED ON THOSE TWO COMMITS with a lean list (PART 39 first; 212 whole only if
-  a red points into it) and carries R5D-PAGE (A's read if unread; B), the proofs and "TIP? R5-DESC".
-- VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (chain B): its pool no worse; builders R4I-PAGE-3 and R4I-TONIGHT running
-  (the Tonight line keyed on the person's name, N19: two STOP counts owed if either is not 0). 384,201.
-- DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: phase B built; the dwellings need added to P16 and P20 (N27) and
-  re-measured; then the line merged at 244fa84ef, rule 8, "DAILY-C <commit>". 153,904 (it read 232,291 at 01:16: IT
-  IS ASKED AT ITS NEXT MESSAGE whether its context was summarized).
-- CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: "VACANT 4ef6d6c32" TAKEN FOR LANDING (N25); building PRONOUN with its
-  neighbour ruled (N26 as amended by N28). 344,073.
-- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: lines final; its builder writes the cure and the proofs. TOLD AT 02:43 UTC
-  TO PARK AT ITS BUILDER'S RETURN (seven would work); "GO PROSE-6" when a place frees (VEIL-39's place goes to chain
-  C's builder first; then CLOSE-4's or DAILY-5's finish). Then "PROSE-D <commit>", a late "ADD". 275,202.
-THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); a second
-test-only commit (PIN-2) is expected there: read its diff whole, then name "TIP <commit> on <branch>" to the three
-chains AND RULE INTO EVERY UNIT'S PROOF BEFORE "TIP?" THE 34 "VR46" FILES outside tests/security that call the veil's
-doors (VEIL-38's list `b-guards-other.txt`): (P2)'s red stood unseen through several merges because no unit ran them.
-EACH CHAIN SAYS THE COST LAW'S FIGURE AT ITS "TIP?" (chain A: 465.0 against 523.2 ms, thin already: N29).
+calls get_session for every seat and returns one line a seat (external_metadata.context_usage.used_tokens), AND READS
+EACH RECORD FOR A `compact_boundary` SINCE THE LAST CHECK (N36: the machine summarizes a seat near 250,000 without
+warning: the figure is the seat's present context, not what it has read). Figures of 03:01 to 03:07 UTC:
+- STACK-106 session_01FbPLbbPKhMeTbvdP2ZQmPt: LANDING. Point 106 "DAILY-B" merged (2f3d614ac) and point 107 "VACANT"
+  (0fbb255f6), both checked or reported; its first `tests/lint` whole: the line's three reds and the lighting census
+  owed to its door. It owes "DOORS <commit>" and its final message; THEN THE CHAIR READS `raised-top.txt` WHOLE AND
+  MOVES THE LINE (E130: safepush; the rows in LANDINGS-SIXTH.md; LINE-NOW.md; CI read by name); late lanes by "ADD
+  <branch> <commit> POINT <n>" (PRONOUN, DAILY-C, PROSE-D). 172,763.
+- VEIL-39 session_01FbPLbdxsc6oxyxnzzxz2js (chain C): C1 DONE; its (P2) builder sweeps the tip's reds as a class
+  (N33) and it owes "PIN-2 <commit>"; then the C2 proposal file ((a'), (b) alone, (c)+(b); the 23 `prose.*` rows; the
+  chair's questions (i) to (v)). C2-BUILD IS ITS SUCCESSOR'S. 504,736.
+- VEIL-37 session_01FbPLbcvhMzoJs1V2KQYq9M: HANDED OVER at 03:09 UTC (19508fbb9 / 74afc8219) and writes nothing more.
+  PART 39 section 0 is its hand-over; its rulings 105 to 109 hold the chair's N35.
+- VEIL-40 session_01FbPLbfZtJ6FDJfq3MCUbon (chain A; SEATED 03:17 UTC on those two commits; its start message is
+  `prompts/START-VEIL-40.txt`): lean read-in; the pool; builder A's own runs re-run; builder B with ITEM 5b AS A
+  MEASURE FIRST: it sends "5b MEASURE" and THE CHAIR RULES N35 (3) ON IT (the template withheld always; or the rival
+  leaves with its host; or the mask takes the case forms; or the base stands); no "TIP? R5-DESC" before. Its first
+  message is due by 04:02 UTC.
+- VEIL-38 session_01FbPLbbkpFrWdSzc7LGbEHg (chain B): R4I-PAGE-4 building (the link twin test-side; the twelfth
+  register row; the id mask's two conditions: N32); then it runs M (the Tonight line's three counts: N38) itself and
+  HANDS OVER at its first natural stop (at once past 580,000): successor VEIL-42, lean, carries R4I-TONIGHT-2 (the
+  prepared cure; the arm in three halves), the order count, the tip build, the cost law, "TIP? R4-IDS". 465,078.
+- DAILY-5 session_01FbPLbeWDWjHcuovRYbxECT: SUMMARIZED BY THE MACHINE at 01:55 UTC (told at 03:10 to re-read its start
+  message before its landing line); phase B built; the dwellings need added (N27); the five other double possessives
+  being named; then the line merged at 244fa84ef, rule 8, "DAILY-C <commit>": a late "ADD". 153,904.
+- CLOSE-4 session_01FbPLbeRbTG1wNjkEsa8M64: building PRONOUN with its neighbour ruled (N26 as amended by N28); then
+  "PRONOUN <commit>": a late "ADD"; then CLOSE-5, the flip's seat, is seated on its final hand-back (N31). 362,506.
+- PROSE-6 session_01FbPLbbLQpVcNyXZEuPLfLS: PARKED at 03:00 UTC AND SUMMARIZED at 02:43. "GO PROSE-6" when a place
+  frees, WITH N37's TWO RULINGS (the wages half withdrawn: v2 re-worded, no `force: paid` anywhere; the manifest grows
+  test-only) and the order to re-read its start message. Then "PROSE-D <commit>": a late "ADD".
+SIX WORK NOW: STACK-106, VEIL-38, VEIL-39, VEIL-40, DAILY-5, CLOSE-4. THE NEXT FREE PLACE (VEIL-39's end) GOES TO
+CHAIN C's BUILDER SEAT if "CURE <shape>" is ruled by then, else to "GO PROSE-6".
+THE VEIL LANE'S TIP: 2d7ed483f96160c5eb0e9cc06745137b857b295f on `lane/veil-39-2026-11-23-tip` (N20); PIN-2 is expected
+there: read its diff whole, then name "TIP <commit> on <branch>" to the three chains. EVERY UNIT'S PROOF BEFORE
+"TIP?" RUNS every test file outside tests/security that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
+`get_gallery_dossier` or `get_unlisted_dossier` (34 files; N33), AND SAYS THE COST LAW'S FIGURE (chain A: 465.0
+against 523.2 ms, thin already: N29).
 
-WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: section 4 below, and: VEIL-37's figure when R5D-PAGE-A's builder ends,
-then VEIL-40's seating; "CURE <shape>" on VEIL-39's proposal (a persisted-shape change is NAMED for the owner), then
-its successor's seating (C2-BUILD); VEIL-38's two STOP counts if either is not 0; "PRONOUN", "DAILY-C" and "PROSE-D"
-read and taken; THE NEXT STACK (N30).
+WHAT THE CHAIR OWES NEXT, IN ORDER OF ARRIVAL: section 4 below, and: "CURE <shape>" on VEIL-39's proposal (a
+persisted-shape change is NAMED for the owner), then its successor's seating; VEIL-38's hand-over and VEIL-42's
+seating; "5b MEASURE" ruled; "PRONOUN" and "DAILY-C" read, taken and ADDed; the line moved after STACK-106's final
+message; CLOSE-5 seated; "GO PROSE-6". PUT TO THE OWNER, OPEN, HIS TO GIVE OR NOT (02:47 UTC): "You may push the
+working line when the landing's checks pass." Without it the chair pushes the line by E130, its own check judges,
+and a refusal stands.
 
 THE CHAIR'S MACHINE AND HABITS: `/home/user/wt/chair` (this lane; hooks installed; `node_modules` is a link to
 `/home/user/wt/line/node_modules`); EVERY PUSH: `sh docs/chair/2026-11-21/eighth/landing/safepush.sh /home/user/wt/chair
-lane/chair-2026-11-08 <log>` (the lane hook runs the type ratchet, the strict check and eslint: about three minutes;
-read `exit=` in the log). Commits by explicit path only. The hourly check is a one-shot scheduled task re-armed each
-time (the next: trig_01RGoVgufnRCYVRgzmKTx4w6 at 03:02 UTC). The seats' start messages are in `prompts/` beside this
-file. The MCP tool list is re-sent whole at every reconnect (about 28,000 tokens each): bulky reads go to a haiku
-helper, never into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef (local branch
-`lane/stack-106-wip-2026-11-23-base`, never pushed, holds nothing; `npm ci` done).
+lane/chair-2026-11-08 <log>` (it returns at once: the lane hook then runs the type ratchet, the strict check and
+eslint: about three minutes; wait for `exit=` in the log; NO COMMIT WHILE A PUSH IS IN FLIGHT). Commits by explicit
+path only. The hourly check is a one-shot scheduled task re-armed each time (the next:
+trig_01DumdxiZPvUidWHoWuGUC6e at 04:02 UTC). The seats' start messages are in `prompts/` beside this file; A SEAT IS
+SEATED BY A SHORT PROMPT THAT POINTS TO ITS START MESSAGE ON ORIGIN (pushed first), never by a retyped one. The MCP
+tool list is re-sent whole at every reconnect (about 28,000 tokens each): bulky reads go to a haiku helper, never
+into the chair's context. `/home/user/wt/line` is a clean worktree at 244fa84ef (local branch
+`lane/stack-106-wip-2026-11-23-base`, never pushed, holds nothing; `npm ci` done). Drafts on this machine only:
+`/home/user/scratch/chair/DRAFT-START-CLOSE-5.txt`.
 
 ## 0. THE STATE AT THE TAKEOVER (read from origin at 00:01 UTC on 2026-11-23)
 - ORIGIN IS AS THE PICKUP SAYS: 36 of 36 branches it names are present; the 26 it gives a commit for all match
@@ -580,3 +592,15 @@ helper, never into the chair's context. `/home/user/wt/line` is a clean worktree
   03:07): IT CARRIES R4I-PAGE-4's RETURN AND M, THEN HANDS OVER at its first natural stop (at once past 580,000 by the
   chair's read); R4I-TONIGHT-2, the order count, the tip build, the cost law and "TIP?" are its successor's (VEIL-42,
   lean, on its two commits) unless the chair tells it its figure allows more.
+- 2026-11-23 03:17 UTC · N39 · VEIL-37 HANDED OVER (its line of 03:09 UTC: `lane/veil-37-2026-11-23` 19508fbb9; the unit's code
+  `lane/veil-37-2026-11-23-r5dpage-wip` 74afc8219, the SQL half 3ef7fb325 merged in: THE THREE REFS READ BY THE CHAIR
+  with ls-remote). It read R5D-PAGE-A's diff whole, once: NO FAULT; two notes for builder B (the share-class listing
+  is looser than ruling 107 (1)'s arm; two "EXPECTED RED" titles are stale); A's own runs are re-run by no seat.
+  PART 39 section 0, READ BY THE CHAIR: its successor's first acts, the smallest file list, where `rivalDescOf`
+  writes (`applyDensityLaw.js :: resizePoliticalRoster`: a rival's desc is chosen by, or copied from, its host's)
+  and which strings the mask reads (`publicSafe.js :: maskHiddenNames`: every string value, by an EXACT, CASE-SENSITIVE
+  split and join: a hidden name in another case or form is not masked). VEIL-40 SEATED at 03:17 UTC
+  (session_01FbPLbfZtJ6FDJfq3MCUbon; source `lane/veil-37-2026-11-23`, outcome `lane/veil-40-2026-11-23`;
+  claude-opus-5-5, high), BY A SHORT PROMPT THAT POINTS TO `prompts/START-VEIL-40.txt` ON ORIGIN (pushed first,
+  98e62deaa: no long prompt is retyped). THE CHAIR'S EIGHTH AND NINTH PUSHES (e290438d2, 98e62deaa) ENDED exit=0 at
+  03:13 and 03:16 UTC: CONFIRMED from their logs. The hourly check is re-armed for 04:02 UTC.
