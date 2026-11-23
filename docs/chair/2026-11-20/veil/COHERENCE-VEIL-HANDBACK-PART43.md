@@ -58,21 +58,37 @@ REGISTRY DOES NOT WITHHOLD AT THE TIP AND THE TWELVE BIRTHS HOLD (each by name, 
 THE CHAIR'S READ OF MY RECORD: 293,005 at 05:46 UTC (my own estimate was ~110,000: mine runs low). FROM HERE: NOTHING MORE IS READ WHOLE unless a red
 points into it; logs by tail; the diff once.
 
-NEXT ACTS, IN ORDER:
-1. When `dump rc=0` is in remake.log: RED FIRST by `sh docs/chair/2026-11-20/veil/out/v41/c2/ppkey.sh /home/user/wt/tip /var/tmp/v18/stored/today/docs
-   /var/tmp/v18/out/v41/ppkey-tip v41_tip pt` THROUGH THE MUTEX (try RV9_LIMIT=5 first for speed); expected: every server and twin read carries the key.
-2. VS1: read `/var/tmp/v18/out/v41/vs1/bisect.log` (tip, 770080aca, 929739889); the candidates' count over the twelve births; "VS1 CAUSE" <=120 words.
-3. The builder's report and diff (read once, whole); re-run its walkers; then on /home/user/wt/c2 with a template v41_c2 (v27x211 + the new 212): ppkey
-   (green: 0 carry, both engines, all doors), `out/v33/stored/prose.sh` every row 0, the read-stored gates (GATE-1 4/92, LOWER 7, GATE-2 20), 001..211 +
-   212 + down, the catalogue, the three prose pins measured then re-stated test-only red first (a builder), tests/lint whole beside 48, the N33 class (34
-   files) once, typecheck, eslint, first paint +0, the cost law's figure.
-4. "TIP? STORED-PROSE <commit>" with the unbuilt-row count before/after.
+STATE AT 07:48 UTC:
+- C2-BUILD BUILT: 2707d6829 (report 79e94d633) on `lane/veil-41-2026-11-23-c2-wip` (/home/user/wt/c2), NOT PUSHED. DIFF READ WHOLE by the seat
+  (212, twin, registry, rulings.json). 212 sha d71abc9e86139cd9ad8d8cd27067642e445b802fca8600a90483a989b7848ac5; rollback unchanged
+  8cbd7d1c7a6d60f609b7473b14b7fe2b2ca8a3b6f3081151c2ae49d82cded5b0; local apply 0. 24 rows re-hosted (17 were unbuilt, 7 already built as 6 diffuse +
+  1 rng); unbuilt 40 -> 23. Composed walker 26 -> 4 red (chain A's 3 + ITS CENSUS PIN, COMPOSED.length >= 10, now 4). tests/lint whole (builder)
+  26 of 3,280 vs the tip's 48 of 3,304 (24 per-row tests gone). Taken by the chair (N72).
+- PIN-3 (N68): builder V41-PIN3 on `lane/veil-41-2026-11-23-pin3-wip` (/home/user/wt/pin3, at 23bb8b8ae), brief a8d1f378f
+  (`out/v41/pin3/PIN3-BRIEF.md`): VS1's other tooth on criminalInstitutions; then "TIP? PIN-3 <commit>" AT ONCE; on the grant push it as
+  `lane/veil-41-2026-11-23-tip`; the C2 branch merges it before its proofs.
+- TENSION-PARTIES (N72 (2)): edit 4 LEFT C2-BUILD; measuring builder V41-TP (brief 3d5dc4977, `out/v41/tp/TP-BRIEF.md`; report
+  `/var/tmp/v18/out/v41/tp/TP-REPORT.md`); Q0-Q4 to the chair in <= 200 words; NO registry row before the chair's ruling. "TIP? STORED-PROSE" does not
+  wait for it, but names the test and count of the unregistered path on both trees.
+- THE PINS' MEASURE: `/var/tmp/v18/out/v41/pins.sh` (55 files: the prose pins, 16 security files naming publicProse, the N33 set), tip then c2;
+  log `pins.log`. Then ONE test-only builder re-states each red by cause, red first; THE CENSUS PIN AS AN EXACT COUNT with the four rows named in its
+  comment (N72 (1)).
+- N67 (the green proof): ppkey ONCE on the built tree, all 1,948, every setting, both Reveals, three doors and the twin, recording per read the
+  server's and the twin's canonical sha256 (`shas-shard*.tsv`, first 13 differing pairs per shard kept in `diffs-shard*.json`; e5b9cb800); the
+  "TIP?" line says how many reads differ (judged by nobody yet: N48). The 200-document server red stands. Read-stored gates once on tip, once built:
+  BOTH NOT YET RUN (the tip run stopped twice to free the mutex for the builders: `gates-tip.sh`).
+
+NEXT ACTS, IN ORDER: PIN-3's return -> its re-runs -> "TIP? PIN-3" -> push the tip branch on the grant -> merge the new tip into c2-wip (E116's five
+steps); the pins' builder; then on the merged c2 tree: ppkey whole (N67), `out/v33/stored/prose.sh` all rows 0, the read-stored gates on tip and
+built, 001..211 + 212 + down and the catalogue, tests/lint and tests/copy whole, the N33 set, typecheck, eslint, first paint +0, the cost law's figure;
+"TIP? STORED-PROSE <commit>".
 
 ## 2. RULINGS IN FORCE (the ninth chair's; continuing PART 41's 118)
 119. THE START MESSAGE (2026-11-23 05:21): seated lean; units (0)-(4); one builder for C2-BUILD; the whole-document "server = twin" form is the chair's
      to send (N48): build nothing for it beyond this key's proof.
 
 ## 3. Log (every hour from `date -u`)
+- 07:16 red first sent; 07:17 VS1 CAUSE; 07:18 N67, N68 (PIN-3 seated 07:2x); 07:3x C2B returned, diff read; 07:43 N72; TP seated 07:47.
 - 05:46 the chair's read 293,005; section 1 brought current and pushed. 05:32 N53 received (05:38 read), relayed.
 - 05:2x seated; 05:28 the machine started; 05:30 first message (the two questions); 05:3x the walker red 26; the brief and probe d3559c7cd; the
   builder dispatched; VS1's bisect queued.
