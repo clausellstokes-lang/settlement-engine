@@ -27,7 +27,9 @@
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no
- *   market." (PROSE-E item 0). The FLOOR measure's figure: <FLOOR FIGURE, OWED BY THE CHAIR>. The floor itself is unchanged.
+ *   market." (PROSE-E item 0). The FLOOR measure's figure: measured over 900 births (map/FLOOR.md, 99a22c3ad): the floor
+ *   hid 2 cell pairs on 111 pages, all GEN-13 NO-MARKET v11/v12's bare cut beside ECO-10 or ECO-1, and none reads as a
+ *   contradiction. The floor itself is unchanged.
  * The arm "GEN-17 v2 never prints where the guard's pay reads 'short'" is NOT built: phase 1 (i) counted 8 such pages.
  */
 import { describe, expect, it } from 'vitest';
