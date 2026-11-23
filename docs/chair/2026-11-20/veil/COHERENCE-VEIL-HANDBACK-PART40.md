@@ -39,10 +39,24 @@ THE UNIT: R4-IDS. Nothing of it is merged into the tip.
   - BOTH GATES (`/var/tmp/v18/out/v38/gates/tell2-table.txt`): GATE-1 4 of 92 at EVERY gated setting (own, g:000..g:110, allOpen, off), Reveal off and DM, twin = server (4 / 4; raw 11 / 11); controls 0 of 48; LOWER BY RULE 7; GATE-2 20 Fisher cells below 0.05 (non-members off 10, dm 10); non-governing criminal rows against the rule 0; part A's server sample 112 births, 0 differ from the twin.
   - EQUAL TO THE LANE'S STANDING FIGURES (N6): NO WORSE. The tip move 40.4 is test-only, so these stand for ec082df83.
 
+- R4I-PAGE-3 RETURNED (stopped at its budget; local `lane/veil-38-2026-11-23-r4ipage3-wip` at 0755698e6; hand-back `out/v38/r4ip3/R4IP3-HANDBACK.md`). Its diff (tests and one helper; NO src change) was READ ONCE by this seat: NO FAULT. The -wip was FAST-FORWARDED to 0755698e6 at 02:2x. CONFIRMED by its logs:
+  - G1: the 13 non-security id pins re-stated modulo the bijection, five teeth each.
+  - The ratchet's `\x28` (40.3 (4)): red at b088fcfc5, then 18/18 green.
+  - galleryVeilHandRows 26/26 (the V7-2 row green after the tip); galleryWithholdAlways 9/9; galleryVeilIds 12/12; criminalSwitchSalt 6/6; rosterChoiceInversion 4/4; walkers 34/34; `--check` 0; typecheck 167.
+  - THE STORED ARM (E134; `out/v38/r4ip3/st/`): 140 today-born and 140 master-born documents, 3,360 reads each. 0 spelling hits; 0 stored person ids served (0 in stored-only fields: `publicProse`); 0 ids shared by two reads; 0 new unresolved references. The planted controls were caught 700/700 (bad references) and 140/140 (a stored id served).
+  - INSTRUMENT CHANGE (E), vetoable: `personIdBijection :: storedIdsServed` masks the re-key's fresh tokens before its substring search (short stored ids gave false reds about one read in eight).
+  - SENT TO THE CHAIR 02:27 FOR RULING:
+    - (a) THE SIZE RISE (VERIFY_DIST 4 red: first paint +60 B raw / +14 B gzip, engine chunk +327 B, worker +43 B; the twin's `galleryVeilPeople.js` + `sha256Hex` and S1's import): the owner's.
+    - (b) galleryServerVeil's RULING 4 file list: a 12th twin file.
+    - (c) the link anchor needs a LINK twin (the anchored form reds 24/36 clean link reads); it is not committed.
+    - (d) VS1's crime-types tooth is red at af708f2fd too (the tip's); galleryVeilSignalCopies' 2 reds are PLAUSIBLY S2's.
+- ON THE POOL (`/var/tmp/v18/out/v38/poolprobes.sh`, at ec082df83): THE SWITCH OFFERS EXACTLY WHAT IT OFFERED BEFORE THE RE-KEY on 3,616 of 3,616 reads (10,848 groupings present). S1's arm, as ruled.
+
 ### (2) IN FLIGHT
 - On the pool, at the -wip (`/var/tmp/v18/out/v38/poolprobes.sh`): the switch-offer probe (S1's pool arm), then the order probe (40.2's count of places whose printed order moves, twin only), started 01:55 UTC. R4I-PAGE's `pool-v35r4` figures were taken under the broken switch and are relied on by nobody (40.2).
 - R4I-TONIGHT (subagent; brief `briefs/R4I-TONIGHT-BRIEF.md`), in `/home/user/wt/r4it` on the local `lane/veil-38-2026-11-23-r4tonight-wip` at b088fcfc5: 40.3 (2), measure first.
-- R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
+- R4I-PAGE-4 (subagent; brief `briefs/R4I-PAGE-4-BRIEF.md`), in `/home/user/wt/r4ip4` on the local `lane/veil-38-2026-11-23-r4ipage4-wip` at 0755698e6: the 27 id pins left, the runs the mutex starved, `tests/security` and `tests/lint` whole.
+- (returned) R4I-PAGE-3 (subagent; brief `briefs/R4I-PAGE-3-BRIEF.md`), in `/home/user/wt/r4ip3` on the local `lane/veil-38-2026-11-23-r4ipage3-wip` at b088fcfc5: G1, G2, A, the arms, ST, L, B.
 
 ### (2b) UNREAD BY THIS SEAT (ruling 40.1 (b))
 Migration 212 and the registry (`src/domain/veil/rosterChoiceRegistry.js`) are NOT read whole by this seat (40.4's tip move changed neither). They are read whole once, before the first trigger that 40.1 (b) names.
