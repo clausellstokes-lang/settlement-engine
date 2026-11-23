@@ -215,6 +215,14 @@
 --       WAY): economicState.safetyProfile.crimeTypes joins (34)'s rows (registry: safety.crimeTypes), and its R3 attribution
 --       rule leaves _gallery_veil_roster_choices; the merchant-army hook's raiser is the engine's stress flag merchantArmy (the
 --       record's flag and the served houses' half), not hasGangInfra. No function added, removed or re-signed.
+--   (36) THE MAP MEMBER IS THE PARTY LINK'S READ (MAPCOVERT-GREEN-SQL, VEIL-44; the chair's N76, N84 (1), N95 (2); VR23):
+--       get_gallery_map (211's, RESTATED here) served each member through its own listing's gallery veil over the
+--       sanitiser and never ran _gallery_apply_member_overrides, so (24)'s covert tie's copy and the sentence that tells it
+--       reached the map member and import_gallery_map. Each member is now get_unlisted_dossier's read of the same town:
+--       the link's splice (its full town the projection with the member's own source's relationships[],
+--       prominentRelationship and pressureSentence, the source being the narration or frozen copy it serves) and the
+--       link's veil (an unmarked member takes the default veil). Share-level Reveal DM never applies to it; no
+--       fallback to an unveiled projection. No function added, removed or re-signed.
 --   (34) WHAT NO NON-OWNER READ SENDS, WHATEVER THE VEIL (VEIL-21, R2; the sixth chair's VR16 rule 1, the seventh chair's VR28,
 --       VR33, VR37; SUB-BRIEF-VR7 point 5): every row of the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js)
 --       hosted in _gallery_veil_withhold_always, each rule naming its row: the fields no non-owner page draws, the crime
@@ -243,19 +251,22 @@
 -- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_json, _name_hits, _name_hit, _named,
 -- _name_tokens, _name_near, _name_floor, _name_taken, _name_sweep). RESTATED, each as 211's statement plus the cure:
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier, get_unlisted_dossier
--- (VEIL-13, ruling (5): its apply's full town) and import_gallery_dossier (their grants restated as 211 states them).
+-- (VEIL-13, ruling (5): its apply's full town), import_gallery_dossier and (MAPCOVERT-GREEN-SQL, VEIL-44; N76, N84, N95,
+-- VR23: the map member is the party link's read) get_gallery_map (their grants restated as 211 states them).
 -- No helper of 211 changes its signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (71 in all). NOT CHANGED: get_gallery_map and every
--- other function. No table, column, constraint, policy or row.
+-- helper is callable by public, anon or authenticated (71 in all). NOT CHANGED: every other function. No table, column,
+-- constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
 -- by src/domain/display/galleryVeil.js :: applyVeil; and (24)'s, gallerySecondHomes.js :: withholdCovertCopies, called by
 -- galleryVeil.js :: galleryPayloadFor. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js,
 -- tests/security/galleryVeilHandRows.pglite.test.js (rows written by hand: (18), (19), (24)) and
--- tests/security/galleryVeilCures.pglite.test.js (V5-3, V5-4, V5-7 and the rollback pins).
+-- tests/security/galleryVeilCures.pglite.test.js (V5-3, V5-4, V5-7 and the rollback pins); (36)'s map member,
+-- tests/security/galleryMapCovert.pglite.test.js.
 --
 -- @rollback: supabase/rollback/212_share_veil_later_cures.down.sql, run FIRST, before 211's own: it recreates the
---   six functions at 211's statements (the file at 333b33973, verbatim) and drops 212's helpers by signature.
+--   six functions, _gallery_veil (VEIL-21) and get_gallery_map (MAPCOVERT-GREEN-SQL) at 211's statements (the file at
+--   333b33973, verbatim) and drops 212's helpers by signature.
 --   No row is written or lost either way. Rehearsed on local chains: 001..211 + 212 + this down file equals
 --   001..211; 203 + 211 + 212 + this down file equals 203 + 211.
 
@@ -3182,6 +3193,143 @@ $$;
 
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
+
+-- [212: RESTATED (211's statement, with the cure)] public.get_gallery_map
+-- get_gallery_map: 211's statement (088's body plus the veil) and ONE change, the member's `settlement` (MAPCOVERT-GREEN-SQL,
+-- VEIL-44; the chair's N76, N84 (1), N95 (2); VR23). 211 served each member as its sanitised projection through its own
+-- listing's gallery veil (Reveal DM off), and never ran _gallery_apply_member_overrides, the one home of VEIL-13 ruling (5)'s
+-- covert CASE: a covert tie's prominentRelationship and the pressureSentence that tells it reached the map member, and
+-- import_gallery_map (072), which returns this payload. RULED: THE MAP MEMBER IS THE PARTY LINK'S READ OF THE SAME TOWN, at
+-- either share-level Reveal: (1) the base as 211 has it, the sanitiser over the member's own source (its narration, then
+-- its frozen copy and the copy's bound); (2) THE LINK'S SPLICE, get_unlisted_dossier's own: the apply's `dm_full` is the
+-- projection with the source's own relationships[], prominentRelationship and pressureSentence (each where the source has
+-- it; the projection alone where the source is not an object), and share-level Reveal DM never applies (false). THE
+-- SOURCE HERE IS src.j, the narration or the frozen copy the member serves, not the live row (get_unlisted_dossier serves
+-- no frozen copy, so its source is the live row's); (3) THE LINK'S VEIL, `link` true: an unmarked member takes the default
+-- veil (VR23), as the link does. No fallback to an unveiled projection: the link's veil returns a body on every read (for
+-- a projection that is not an object, {}: measured on PostgreSQL 16), and were it ever to return none the member is sent
+-- with `settlement` JSON null, its tile fields and chronicle as before; either falls toward withholding, never toward the
+-- unveiled projection. NOTHING ELSE: the chronicle, the member's name and tier, the world, the map state, the IDOR
+-- guard, view_count and the grant are 211's. Pinned by execution: tests/security/galleryMapCovert.pglite.test.js.
+create or replace function public.get_gallery_map(p_slug text)
+returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
+declare
+  row      public.saved_maps;
+  v_camp   jsonb;
+  v_members jsonb;
+begin
+  select * into row from public.saved_maps where public_slug = p_slug and is_public = true;
+  if not found then return null; end if;
+  update public.saved_maps set view_count = view_count + 1 where id = row.id;
+
+  if row.share_kind = 'map_with_campaign' and row.gallery_share_campaign then
+    v_camp := coalesce(row.map_data->'campaign', row.map_data);
+    -- Member dossiers — public-safe via the SAME sanitizers as the settlement
+    -- gallery. settlementIds that aren't cloud rows (local-only) simply drop out.
+    -- 088: also project each member's public_slug so the client can cross-link a
+    -- member to its public gallery dossier (null when that member isn't published).
+    select jsonb_agg(jsonb_build_object(
+      'old_id',      s.id::text,
+      'name',        s.name,
+      'tier',        s.tier,
+      'public_slug', case when s.is_public then s.public_slug else null end,
+      -- 212 (N84 (1), N95 (2)): the party link's read of the same town: the link's splice, then the link's veil
+      'settlement',  vm.v -> 'body',
+      'chronicle',   public._gallery_chronicle_json(s.campaign_state -> 'eventLog')
+    )) into v_members
+    from public.settlements s
+    -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
+    -- copy in snapshot mode (a copy past the bound is refused: the member is left out, never served
+    -- live), then the sanitizer and its own listing's veil
+    cross join lateral (
+      select case
+        when s.gallery_share_narrated
+          and s.ai_data is not null
+          and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+        then s.ai_data -> 'aiSettlement'
+        else s.data
+      end as j
+    ) base
+    cross join lateral (
+      select case when cp.copy is not null then cp.copy else base.j end as j,
+             coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+        from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+                from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
+    ) src
+    cross join lateral (select public._gallery_sanitize_public_json(src.j) as j offset 0) pub
+    -- 212 (N84 (1), N95 (2); VEIL-13 ruling (5)): THE LINK'S SPLICE, as get_unlisted_dossier hands it: the projection,
+    -- and for the covert check alone the source's own relationships[], prominentRelationship and pressureSentence
+    -- (src.j: the very document this member serves, so its frozen copy in snapshot mode, never the live row in the
+    -- copy's place); share-level Reveal DM never applies (false)
+    cross join lateral (
+      select public._gallery_apply_member_overrides(
+        pub.j,
+        case when jsonb_typeof(src.j) = 'object'
+             then pub.j || (select coalesce(jsonb_object_agg(k, src.j -> k), '{}'::jsonb)
+                              from unnest(array['relationships', 'prominentRelationship', 'pressureSentence']) k where src.j ? k)
+             else pub.j end,
+        s.gallery_member_overrides, false, s.gallery_importable, false
+      ) as d
+      offset 0
+    ) proj
+    -- 212 (N84 (1); VR23): THE LINK'S VEIL; an unmarked member takes the default veil (the map's readers are players)
+    cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true) as v offset 0) vm
+    where not src.refused
+      and s.id::text in (
+      select jsonb_array_elements_text(coalesce(v_camp->'settlementIds', '[]'::jsonb))
+    )
+      -- CRITICAL (IDOR guard, 046): the owner may only ever expose their OWN
+      -- settlements. settlementIds is owner-controlled free-form jsonb and this
+      -- fn is SECURITY DEFINER (bypasses settlements RLS), so without this an
+      -- owner could list another user's settlement UUIDs and leak their dossiers.
+      and s.user_id = row.user_id
+      and s.access_state = 'active';
+
+    return jsonb_build_object(
+      'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+      'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+      -- 088: cover image + realm-arc summary projected for the detail header.
+      'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+      'realmArcSummary', row.gallery_realm_arc_summary,
+      -- ALLOWLIST the mapState fields the importer actually consumes (backdrop +
+      -- placements + the sharer's published annotations). layers/viewport (which
+      -- include GM display filters) are deliberately dropped; worldState /
+      -- regionalGraph are siblings under v_camp and NEVER included.
+      'mapState', (
+        select jsonb_strip_nulls(jsonb_build_object(
+          'fmgSnapshot',    ms->'fmgSnapshot',
+          'seed',           ms->'seed',
+          'customBackdrop', ms->'customBackdrop',
+          'placements',     ms->'placements',
+          'labels',         ms->'labels',
+          'markers',        ms->'markers',
+          'forests',        ms->'forests'
+        )) from (select v_camp->'mapState' as ms) x
+      ),
+      -- 088: the shared-world panel is the STORED, pre-sanitized publish-time
+      -- artifact (gallery_world_snapshot / _sections) — projected ONLY on the
+      -- owner's gallery_share_world opt-in, and NEVER a live read of
+      -- v_camp->'worldState' / 'regionalGraph' (those stay un-projected, per 046).
+      'world', case when row.gallery_share_world then jsonb_strip_nulls(jsonb_build_object(
+        'snapshot', row.gallery_world_snapshot,
+        'sections', coalesce(row.gallery_world_sections, '[]'::jsonb)
+      )) else null end,
+      'members', coalesce(v_members, '[]'::jsonb)
+    );
+  end if;
+
+  -- Default / kind='map' = blank-canvas backdrop only (Phase 1). 088: still carry
+  -- the cover image + rich description so a plain map share has a header too.
+  return jsonb_build_object(
+    'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+    'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+    'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+    'realmArcSummary', row.gallery_realm_arc_summary,
+    'backdrop', public._gallery_map_backdrop(row.map_data)
+  );
+end $$;
+
+grant execute on function public.get_gallery_map(text) to anon, authenticated;
 
 -- ── 7. THE HELPERS ARE CALLED ONLY INSIDE THE READS ─────────────────────────────────────────
 do $do$
