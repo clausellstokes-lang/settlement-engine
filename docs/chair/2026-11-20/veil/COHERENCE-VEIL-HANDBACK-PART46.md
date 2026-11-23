@@ -21,7 +21,7 @@ Written 10:49 UTC 2026-11-23.
 - MAPCOVERT-RED RETURNED (tip 6edc79094; report `out/v44/mapcovert/MAPCOVERT-RED-HANDBACK.md` there): `tests/security/galleryMapCovert.pglite.test.js`
   RED 3 of 8 (map member, map import, both on chain B's two places), controls green; arm `UM_ASSERT=map` on stored-today exit 1 (7 of 7 per
   cell), stored-master exit 0; tests/lint 48 = base. RE-RUN BY THE SEAT 12:49 (3 failed | 5 passed, the same titles; `out/v44/mapcovert-rerun.sh`).
-  MERGED into the door -wip at 6c7bf0b97 (12:50); tests/lint whole on it queued (`out/v44/lint-whole.sh`). Its STOP: one push started the whole
+  MERGED into the door -wip at 6c7bf0b97 (12:50); tests/lint whole on it 48 failing titles of 3,304, IDENTICAL to the base's 48 (13:05, `out/v44/lint-whole.sh`); pushed 6c7bf0b97. Its STOP: one push started the whole
   check, killed (exit 143); 15 (d) checked clean.
 - TRAD4-RECUT DISPATCHED 12:49 (branch `lane/veil-44-2026-11-23-trad4-wip` at b58abc48b, worktree `/home/user/wt/trad4`).
 - THE MACHINE RE-MADE (chain0 END 11:31): instruments rc 0 (--check 0, walker 0, accept 40, gate HIGHER 0 / EQUAL 79 / LOWER 13 both engines and Reveals); pool `pool-v44` 4 shards rc 0 (11:24); verify 45, 0 differ; gates rc 1 by design: GATE-1 4 at every gated setting (off and DM), LOWER BY RULE 7; GATE-2 20 Fisher cells (off 10, dm 10). EQUAL TO PART 44's standing figures.
@@ -61,3 +61,4 @@ Written 10:49 UTC 2026-11-23.
 - 11:00 (f) census sent (4c602ddc7); (c2) doors-arms.sh queued behind the pool; TRAD4-RECUT brief written (dispatch after MAPCOVERT-RED returns).
 - 11:31 the machine's figures equal PART 44's (chain0 END 11:31).
 - 12:12 the chair's mark 338,524 (12:09); section 1 (4) re-written for a successor.
+- 13:06 tests/lint whole at 6c7bf0b97: 48, the base's titles; the SQL builder waits for TRAD4 (the chair, 12:55).
