@@ -68,8 +68,12 @@ turn's end); VEIL-43 0 (its first turn has not ended).
   disagree on 63 of 900 pages at least; its builder works on `lane/prose-6-2026-11-23-e-wip` cut at b443be64b; THE
   REGISTERS ARE TAKEN LAST, after it merges the line's tip 9b0ffaa97 ("THE LINE IS" was sent at the landing). "FLOOR"
   CAME AND IS TAKEN (N74): the floor hid 111 pages, NONE a true disagreement: THE COUNT STANDS AT 63 OF 900 AND THE
-  OWNER WAS TOLD. IT OWES: for each of the five lines every form the pages print; then "PROSE-E <commit>" for the next
-  stack (STACK-113).
+  OWNER WAS TOLD. AT 08:53 (N77): PROSE-E IS BUILT AND READ WHOLE BY THE CHAIR (`lane/prose-6-2026-11-23-e-wip` at
+  c66c30e4b, the line's tip merged; the five lines word for word the chair's; the tooth red first and green; every
+  printed form listed); ITS ONE STOP RULED: `proseMoveGrammar` CONTROL 4's three uniform-segment figures move by one
+  each, test-only. IT OWES: the pin commit, the registers by their doors, rule 8 with `tests/copy` whole, one build,
+  then "PROSE-E <commit>"; THEN IT WAITS: PROSE-E LANDS IN THE FLIP'S STACK (the flip's seat merges that commit into
+  the flip branch before its prepared signings).
 - VEIL-42 session_01FbPLbd4KVbm2owKo72ukoY (chain B, R4-IDS; seated 06:12 UTC on e76873832 / f7f1cfe8c; start message
   `prompts/START-VEIL-42.txt`): its -wip `lane/veil-42-2026-11-23-r4ids-wip` holds the tip merged (9f9b819f7); BOTH
   GATES EQUAL TO THE STANDING FIGURES (06:57). MEASURE "77" ON THE 7 PLACES (07:21): THE RPC's DOCUMENT AGAINST THE
@@ -140,7 +144,14 @@ covert tie's copy (`prominentRelationship`) is served on every map member at Rev
 B's first reading: 2 of 2 places; the gallery read, the import and the link 0 of 2; the cause read by the chair). No
 pool proof of the lane ever read the map member. ITS CURE IS IMPORT-DOOR's; chain B's full counts come after its
 pool run (about 10:25 UTC); THE OWNER IS OWED those counts, and with them the old question of what a page published
-before the veil shows.
+before the veil shows. THE LANE'S TWO GATES AND ITS OTHER POOL PROOFS READ THE GALLERY READ ONLY (chain B's line of
+08:57): "THE DOOR-EQUALITY ARM" (N77) joins IMPORT-DOOR's proofs: every other door's served document equals the
+gallery read's by value, each ruled difference listed.
+CHAIN C AT 09:03 (N78): the pins (a') turns red are measured (236 red in 9 files on the built tree, each by its
+cause); THREE RULED BY THE CHAIR (the totality arms follow the key and keep their anchor; the Defence tab's ring note
+is the served record's own, a fidelity gap LISTED; `block:power.criminalUnderside` is inert while no prose is
+served: one line owed on the owner's curate screen); ONE TABLE OWED: every site that reads a prose block and what it
+prints on a served record now (THE OWNER WAS TOLD "silent": the precise list is owed to him).
 THE GATES' "server = twin" IS A SHAPE CHECK ONLY (N48): the whole-document form joins every veil unit's proofs once the
 chair has ruled on VEIL-42's "WHOLE-DOC" measure at the tip's own code. The hourly check is a one-shot scheduled task
 re-armed each time: the last entry of section 5 that names one holds the next.
@@ -1739,3 +1750,82 @@ into the chair's context. `/home/user/wt/line` holds the local branch `lane/join
   THE CHAIR'S TWENTY-NINTH PUSH (bba6580c4: N75) ENDED exit=0 at 08:47:13 UTC (its log; ls-remote equal). THE NEXT
   HOURLY CHECK: trig_01RAKptvggFu2Gfj5cNBwDE8 at 09:43 UTC. A CORRECTION OF N75 (7): its words "(N47's block)" are
   inexact: read "his question of 04:42 and the top block".
+- 2026-11-23 09:06 UTC · N77 · "PROSE-E" BUILT AND READ WHOLE; CONTROL 4's THREE FIGURES MOVE BY ONE; IT LANDS IN THE
+  FLIP'S STACK; "THE DOOR-EQUALITY ARM" FOR EVERY DOOR.
+  (1) "PROSE-E" IS BUILT. PROSE-6's line of 08:53: the tooth c0514e27e (red first), the cure 678d8d255 (five
+  WORD_CORRECTIONS rows), the pins 887d1f760, the report 652e45c81, the line's tip 9b0ffaa97 merged as c66c30e4b on
+  `lane/prose-6-2026-11-23-e-wip`. READ WHOLE BY THE CHAIR ON ORIGIN: the diff 9b0ffaa97..c66c30e4b (10 files, +199
+  -31: `defense.generated.js` four lines and `general.generated.js` one, EACH THE CHAIR'S RULED WORDS OF N70 WORD FOR
+  WORD; the receipt; the tooth: the watched row CRITICAL v2-v3 x GARRISONED v1, NO-MARKET v12's pinned tail, five
+  old-words pins, `oldWordsMatchersOf` skipping a cut the new words also yield, ARM 3 finding a head under the floor
+  by the draw ledger and `siteClause`; `law9`'s CALM_LAW reading both wordings: right, a stored page keeps the old
+  words; `bar8DesksDef` and `corpusCureGuards` notes) and `PROSE-E-REPORT.md` whole (80 lines): on b443be64b's leaves
+  only ARM 5 is red (34 page-pins), 6 of 6 green after; EVERY PRINTED FORM: NO-MARKET v10 is always cut at ", so" (55
+  pages: "There is no market at {settlement} to gather its trade in one place."); the legal chain v1 whole on 97
+  pages, v2 on 88; CHAIN working v1 on 56; CRITICAL v1 on 23 with the tier noun; the 14 variant pairs re-read on their
+  own pages: all NOT; no cell left empty but the one named before (dz-city-101); the dark proof EQUAL over 900 births
+  (the records carry no state sentence); rule 8: 1,613 tests, 1 red, listed; `tests/lint` whole 3,364 tests, 6 red:
+  the three listed size rows and three by this cure (CONTROL 4 and its second half; the observed-shape readers' drift,
+  a register).
+  (2) ITS STOP, RULED: `tests/lint/proseMoveGrammar.walker.test.js` CONTROL 4 pins the corpus's uniform-segment
+  figures exactly; CRITICAL v1 was two sentences and is one in the chair's words, so its pool's three variants are
+  uniform: 577 to 578; the share 0.670 to 0.671 (578 / 861); x 774 519 to 520. **Decided:** the three figures move by
+  exactly one each, TEST ONLY, the cause prepended in the file's own form; the line stays one sentence. **Why:** one
+  sentence has one printed form (whole, on its 23 pages); two would give the desk a second form to print and the tooth
+  a second to read; the control is an exact calibration of an arm known red on the old leaves, moved by its cause at
+  every earlier ruling. **Rejected:** splitting v1 into two sentences to keep the pool's old shape. **Reversal:** one
+  WORD_CORRECTIONS row and three figures. THE OWNER'S SIZE ROWS MOVE AGAIN, NAMED, UNTOUCHED: `proseCorpusBytes` RAW
+  defense 302,541 to 302,506 and general 312,515 to 312,509; GZIP defense 40,039 to 40,020 and general 39,500 to
+  39,492; `proseComposed` A0b 2,328 to 2,327. FLOOR's last question answered: FLOOR.md counts pages where both sides
+  PRINTED (62 and 45), its log pages DRAWN (63 and 46); no pair is missing.
+  (3) WHERE IT LANDS: **Decided:** "PROSE-E <commit>" lands in the SAME STACK as the flip; CLOSE-6 merges that commit
+  into the flip branch before its prepared signings (its draft start message says so); PROSE-6 waits. SAID TO THE
+  OWNER.
+  (4) "THE DOOR-EQUALITY ARM". VEIL-42's line of 08:57 (MAP-COVERT recorded at 34ea483d0: PART 44 section 1 (4b), 44.5
+  and the IMPORT-DOOR brief's addendum): THE LANE'S TWO GATES (`tell2.probe.jsx`) AND M READ THE GALLERY READ ONLY;
+  the stored arm the gallery read and the link; no pool or stored-set proof read the import or the map member
+  (fixed-town security tests only); R4I-MEASURE's comparer is the first instrument to read all four doors on the sets.
+  **Decided:** IMPORT-DOOR's proofs gain THE DOOR-EQUALITY ARM: on the pool and both stored sets, at every setting and
+  both Reveals, each other door's served document (the link, the import, the map member, the link map's member, the
+  map's import) equals the gallery read's for the same place and share state, value for value modulo the read's
+  bijection, EVERY RULED DIFFERENCE LISTED BY NAME AND RULING, nothing else differing; a test on the fixed towns and a
+  probe on the sets. **Why:** the bar's figures are one door's; ruling 56 ("one veil, every door") had a census of
+  doors and no proof by value that the doors agree. WRITTEN INTO `prompts/DRAFT-START-VEIL-44.txt`; the reader's row
+  30 (6) refined. SAID TO THE OWNER in plain words.
+- 2026-11-23 09:06 UTC · N78 · CHAIN C: THE PINS (a') TURNS RED ARE MEASURED; THREE RULED; WHAT A SHARED PAGE STILL
+  PRINTS WITHOUT ITS SAVED SENTENCES IS OWED AS A TABLE.
+  VEIL-41's line queued at 09:03:40 (its own hour, "09:10", is ahead of the server's, as its "07:47" was against
+  07:44: asked for `date -u`'s own output). ONE RUN OF 55 FILES (the prose pins, the 16 security files naming
+  `publicProse`, N33's set): at the tip 2 files, 27 red (VS1 1; the composed walker 26); ON THE BUILT TREE 79e94d633 9
+  files, 236 red, each read from its message as (a')'s: `publicProseEquality` 218 (the shared page prints no owner
+  line); the composed walker 4 (chain A's 3 and the census pin); VS1 1 (PIN-3); `entityIndex` 4 (no prose to index on
+  a shared page); `galleryVeilHandRows` 1; `rosterChoiceInversion` MAIN 1 (KNOWN_NOT_REDERIVABLE's six prose rows now
+  empty: a shrink-only list to shrink); `publicPayloadVeilTotality` 2; `defenseRingNoteProjection` 1;
+  `galleryVeilSignalCopies` 4; `publicProseVeilInvariance`, `VeilOnce`, `publicProse.test` and `publicProseAdoption`
+  green. It re-states the rest by cause, red first, with one test-only builder (`publicProseEquality` IN ITS UNIT: N49
+  had said at the join). ITS STOP UNDER N53 (b), THREE, each test read by the chair at 23bb8b8ae:
+  (1) `tests/security/publicPayloadVeilTotality.test.js` :320 to :357 (a hidden block address drops its shipped rungs:
+  `block:defense.criminalStructure`, `block:power.criminalUnderside`; anchored on `applyVeil(projected, [])` still
+  shipping the lines): **Decided:** THE ARM FOLLOWS THE KEY AND KEEPS ITS ANCHOR: the lines ship on the projection
+  BEFORE the veil (the hits counted there); `applyVeil` with nothing shut and with the address shut both carry no
+  `publicProse` key; the rung-drop's own mechanism stays under test where the twin exposes the step before
+  withhold-always, else its two arms are PARKED BY NAME in a shrink-only list ("returns with (b)"), their count
+  pinned.
+  (2) `tests/components/defenseRingNoteProjection.test.jsx` (VEIL-FIX R3 of 2026-11-10: the organised-ring note's
+  seeded vantage ships under `defense:criminal` as `ringNote`; "the shared tab prints the projected line when present
+  and renders locally, as before, when absent"): **Decided:** NOT A LEAK AND NOT SILENCE: with no `ringNote` the
+  shared tab prints the note the SERVED record renders (`criminalStructureOf(shared).note`, the original vantage: no
+  seed is served); re-stated: the owner's view prints the seeded variant, the served shared tab the served record's
+  own note, and NO note where `block:defense.criminalStructure` is shut (the tooth); the unstamped arm unchanged; THE
+  VANTAGE DIFFERENCE IS LISTED AS A FIDELITY GAP (R3's own defect, back for as long as (a') stands). **Why not
+  silence:** (a') forbids serving STORED prose; a line the page derives from the served record is the page's own.
+  (3) `tests/security/galleryVeilSignalCopies.pglite.test.js`, the liveness arm ("block:power.criminalUnderside:
+  shutting it removes something from the gallery page: 0"): **Decided:** that address IS INERT WHILE NO PROSE IS
+  SERVED: a one-row shrink-only list by name ("returns with (b)"); the arm keeps its tooth on every other address. ONE
+  LINE OWED, nothing built: what the owner's curate screen shows for that address (its label, its default); the chair
+  then rules whether the switch is hidden for the first deploy.
+  ONE TABLE OWED WITH CHAIN C's PROOF, BY READING: every component site that reads a `publicProse` block and what it
+  prints on a served record now: NOTHING, or A LOCAL LINE (which, from which served fields). THE CHAIR HAD TOLD THE
+  OWNER "a shared page carries no state sentences" (N49): THE RING NOTE SHOWS THAT IS NOT THE WHOLE TRUTH: SAID TO HIM
+  AS A PRECISION THE SAME TURN (the saved sentences leave; some lines are still derived by the page from the served
+  facts); the list is owed to him.
