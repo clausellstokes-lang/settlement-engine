@@ -25,3 +25,16 @@ test RED at 2d7ed483f (before your edit), GREEN after; the file whole green; the
 --run --` (retry a give-up, exit 3; the heavy lane is busy until about 02:30 UTC): its count beside the tip's 48 of 3,304 and the
 failing files' names. Commit message: the cause, the ruling, the receipts. Never push; never `--no-verify`. LAST MESSAGE at most 120
 words: the commit, the receipts.
+
+## ADDENDUM 2: THE CLASS (the chair, 2026-11-23 02:38 UTC), BEFORE ANY "PIN-2"
+ONE run AT THE TIP (2d7ed483f, your S2 edit NOT applied: stash nothing, run in the detached scratch /home/user/wt/p2 checked out at
+2d7ed483f) of EVERY test file outside `tests/security` that names `galleryPayloadFor`, `applyVeil`, `projectShareVeil`,
+`get_gallery_dossier` or `get_unlisted_dossier` (`git grep -l -E '<the five>' -- tests ':!tests/security'`; VEIL-38 counted 34), in ONE
+vitest run with `--maxWorkers=2`, through `sh scripts/gate-mutex.sh --run --`, to a log. EVERY red CLASSED BY CAUSE, each by reading
+that test by excerpt (its title and the failing assertion) and, where unsure, one single-test run at d6d8644b2 (before rule (e)) and
+at 369331d72 (rule (e)): (A) RULE (e)'s (369331d72: a criminal services row by positive account): a stale pin, RE-STATED in the SAME
+commit as S2 in the same two halves (the positive account kept: the house listed, the row stays; the house not listed: the block
+served as [] and the row's words arrive nowhere); (B) OTHER: named in your report with file, full title, first two lines of the
+failure: NOT cured, not touched. Then the same file list run again at your commit: its reds by name. Still ONE test-only commit on
+`lane/veil-39-2026-11-23-tip`; then `tests/lint` whole (beside 48). Your report `docs/chair/2026-11-20/veil/out/v39/p2/P2-CLASS.md`
+(at most 40 lines: the list, each red with its class, before and after) committed on `lane/veil-39-2026-11-23-p2-wip`. Never push.
