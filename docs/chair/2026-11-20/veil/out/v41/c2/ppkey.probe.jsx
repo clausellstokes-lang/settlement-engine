@@ -5,8 +5,12 @@
 // import_gallery_dossier as a reader who is not the owner). Counts, per engine and door, the reads whose served response
 // carries a `publicProse` key ANYWHERE (a deep walk of the whole response) and whose document carried one when stored.
 // Writes RV9_OUT_DIR/ppkey-shard<s>.json. Measures only: no line of 212, the twin or the registry.
+// N67 (2): FOR EVERY SERVER READ, the sha256 of the served document's canonical form (keys sorted; the link door's `dossier`, the page's and the
+// import's `data`) and of the twin's projection for the same read, one row each in RV9_OUT_DIR/shas-shard<s>.tsv (document, door, setting, Reveal,
+// server sha, twin sha); the first RV9_KEEP (13) differing pairs of each shard kept WHOLE in diffs-shard<s>.json. Judged by nobody here (N48's form).
 import { it, vi } from 'vitest';
-import { writeFileSync, readFileSync, readdirSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, readdirSync, mkdirSync, appendFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { loadVeil, clone, isRec } from '../../v27/tell/measure/tell-common.mjs';
 vi.mock(`${process.env.RV6_SRC}/src/lib/supabase.js`, () => ({ supabase: { rpc: async () => ({ data: null, error: null }) }, isConfigured: true }));
 const SRC = process.env.RV6_SRC;
@@ -27,6 +31,10 @@ it('ppkey: no publicProse on any shared read', async () => {
     const dbn = `${process.env.RV9_SERVER_DB}_${SHARD[0]}`; await admin.query(`drop database if exists ${dbn} with (force)`); await admin.query(`create database ${dbn} template ${process.env.RV9_SERVER_TPL}`); await admin.end();
     db = new pg.Client({ host: process.env.PGHOST, user: 'postgres', database: dbn }); await db.connect(); await db.query(`select set_config('test.uid', '', false)`);
   }
+  const canon = (v) => JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((k) => [k, x[k]])) : x));
+  const sha = (v) => createHash('sha256').update(canon(v) ?? 'undefined').digest('hex');
+  const TSV = `${OUTD}/shas-shard${SHARD[0]}.tsv`; writeFileSync(TSV, 'document\tdoor\tsetting\treveal\tserver\ttwin\n');
+  const KEEP = Number(process.env.RV9_KEEP || 13); const diffs = []; const same = { equal: 0, differ: 0 };
   const C = {}; const bump = (k, hit) => { C[k] ||= { reads: 0, carry: 0 }; C[k].reads += 1; if (hit) C[k].carry += 1; };
   const ex = {}; const note = (k, s) => { ex[k] ||= []; if (ex[k].length < 5) ex[k].push(s); };
   let i = 0; let docs = 0; let stored = 0; let nrow = 0;
@@ -54,10 +62,14 @@ it('ppkey: no publicProse on any shared read', async () => {
         for (const [door, d] of [['page', page], ['link', link], ['import', imp]]) {
           if (!isRec(d) || d.__error) { bump(`server ${door} NO DOCUMENT`, true); note(`server ${door} NO DOCUMENT`, `${tag} ${String(d?.__error || d).slice(0, 80)}`); continue; }
           const h = has(d); bump(`server ${door}`, h); if (h) note(`server ${door}`, tag);
+          const doc2 = door === 'link' ? d.dossier : d; const a = sha(doc2); const b = sha(tw);
+          appendFileSync(TSV, `${m.seed}\t${door}\t${k}\t${dm ? 'dm' : 'off'}\t${a}\t${b}\n`);
+          if (a === b) same.equal += 1; else { same.differ += 1; if (diffs.length < KEEP) diffs.push({ seed: m.seed, door, setting: k, reveal: dm ? 'dm' : 'off', server: doc2, twin: tw }); }
         }
       }
     }
     if (SERVER) await db.query('delete from public.settlements where id = $1', [id]);
   }
-  writeFileSync(`${OUTD}/ppkey-shard${SHARD[0]}.json`, JSON.stringify({ src: SRC, docs, stored, counts: C, examples: ex }, null, 1));
+  writeFileSync(`${OUTD}/ppkey-shard${SHARD[0]}.json`, JSON.stringify({ src: SRC, docs, stored, counts: C, examples: ex, shas: same }, null, 1));
+  writeFileSync(`${OUTD}/diffs-shard${SHARD[0]}.json`, JSON.stringify(diffs));
 }, 14400000);
