@@ -120,6 +120,10 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
     STOP, the chair rules; (3) THE BAR "R3": GATE-2 read over the towns not listed by rule, the eight read apart by name (VEIL-43
     builds the analyzer's mode); until named, the gates read as now and the STOP rule stands (worse than 4 of 92 or 20). All relayed
     to T5.
+120. THE CHAIR, 11:36: TIP b58abc48b on `lane/veil-41-2026-11-23-tip` ("PIN-3": one test-only commit over 23bb8b8ae,
+    `tests/domain/display/criminalVeilSwitch.test.js` +9 -5; 212 unchanged). E116: merged into the wips before "TIP?"; re-run that one
+    file on the merged tree; nothing else re-run for it. FETCHED; to be merged into the code branch at the next stop where no builder
+    works in it (B2's return), and so reach the stack; the criminalVeilSwitch red of ruling 111 is this pin's.
 
 ## 3. Log (every hour from `date -u`)
 - 03:17 seated on 19508fbb9; 03:18:50 the machine re-make launched; read-in; 03:20 first line to the chair; 03:23 B's brief ec23449fc,
@@ -133,3 +137,4 @@ UNIT (3) THE PROOFS: not started. NO "TIP?" before R5D-RIVAL is in and proved AN
 - 10:15 ruling 116; 10:18 both WIP commits pushed; builders told; the chair told.
 - 10:31 the sha instrument pushed (ca72cfd4d). 11:06 ruling 117; 11:13 T5's brief (947c74b80), worktree, T5 dispatched; the chair told.
 - 11:19 ruling 118; T5's WIP pushed (58cf00f6c); 11:28 ruling 119, relayed to T5; 11:29 PART 42 pushed.
+- 11:36 ruling 120 (PIN-3 b58abc48b), fetched; 11:37 PART 42.
