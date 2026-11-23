@@ -107,6 +107,11 @@ const arrivals = (doc, needle) => leaves(doc).filter(({ text }) => text.includes
 const HAND_OPEN = ['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside', 'tab:plot_hooks'];
 const HAND_AT = { mode: 'live', at: '2026-11-01T00:00:00.000Z' };
 const MARKERS = ['unmarked', 'default', 'hand'];
+/** The printed records (MAPCOVERT-CD, MAPCOVERT-DM): logged, and appended to MAPCOVERT_RECORD_OUT when set (the gate may silence a passing test's log). */
+const record = (lines) => {
+  console.log(lines.join('\n'));
+  if (process.env.MAPCOVERT_RECORD_OUT) writeFileSync(process.env.MAPCOVERT_RECORD_OUT, `${lines.join('\n')}\n`, { flag: 'a' });
+};
 /** Chain B's two places (U-UNMARKED: their stored prominentRelationship is a covert tie's copy), as the tell gate seeds them. */
 const PLACES = [{ seed: 'r3m-town-wartime-0-29', size: 'town', crisis: 'wartime' }, { seed: 'r3m-city-none-1-107', size: 'city', crisis: 'none' }];
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -152,7 +157,8 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
     }
     expect(failed).toEqual([]);
     await db.exec(`insert into auth.users (id) values ('${OWNER}'), ('${READER}') on conflict do nothing;
-      insert into public.profiles (id) values ('${OWNER}'), ('${READER}') on conflict do nothing;`);
+      insert into public.profiles (id) values ('${OWNER}'), ('${READER}') on conflict do nothing;
+      update public.profiles set role = 'developer' where id = '${OWNER}';`); // the owner's shares are many (the free plan's save limit, as the ruling-5 file)
     veil = await import('../../src/domain/display/galleryVeil.js');
     homes = await import('../../src/domain/display/gallerySecondHomes.js');
     // CHAIN B'S PLACES, born as the tell gate births them (tell-common.mjs :: loadEngine's birth, no house dropped) and
@@ -259,7 +265,7 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
       bad.push(...sendsOf(`link | ${m} | off`, r.link, town, cov, PLANT_TAGS, 'Mira Vane'));
       cd.push(...cdDiffer(`plant | ${m} | off`, r));
     }
-    console.log(cd.length ? cd.join('\n') : 'MAPCOVERT-CD plant: (c) and (d) agree on both keys, three markers');
+    record(cd.length ? cd : ['MAPCOVERT-CD plant: (c) and (d) agree on both keys, three markers']);
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
@@ -312,7 +318,7 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
         cd.push(...cdDiffer(`${p.seed} | ${m} | off`, r));
       }
     }
-    console.log(cd.length ? cd.join('\n') : 'MAPCOVERT-CD places: (c) and (d) agree on both keys, three markers');
+    record(cd.length ? cd : ['MAPCOVERT-CD places: (c) and (d) agree on both keys, three markers']);
     expect(bad, `${bad.length} sends`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
@@ -346,7 +352,7 @@ describe('MAP-COVERT: the map member and the map import serve no covert tie\'s c
         }
       }
     }
-    console.log(rows.join('\n'));
+    record(rows);
     expect(missing).toEqual([]);
     expect(rows.length).toBe(36);
   }, ARM_TIMEOUT_MS);
