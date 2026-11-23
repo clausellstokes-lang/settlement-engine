@@ -360,3 +360,51 @@ helper, never into the chair's context. `/home/user/wt/line` is a clean worktree
   branches only; the line moves by the chair's push alone, judged by the chair's own check when it comes.
   THIS AMENDS N13 IN ONE THING, SAID TO THE OWNER: "the chair tried no other way" becomes "one safer attempt by the
   same seat, in a separate worktree, is ordered at stack time". N13's three NEVERs stand.
+- 2026-11-23 02:38 UTC · THE CHAIR'S FIFTH PUSH (d3e845d13) ENDED exit=0 at 02:34 UTC through the lane hook: CONFIRMED from its log.
+- 2026-11-23 02:38 UTC · N31 · THE FLIP'S FINAL CENSUS READ BY THE CHAIR, WHOLE (`close/close-2/census/final/CENSUS-FINAL.md` on
+  `lane/close-2-2026-11-22`; owed before a flip seat). With both laws lit: 43,229 tests, 205 red, 52 on the list, 153
+  NEW, ALL CLASS (a) (born anchors, premises, stored pins, dial pins); NO (d); no timeout; the census is whole. THE
+  ANCHORS THAT PIN WORDS (ties 7, wants 7, Daily Life 1) ARE RE-PINNED AFTER "PRONOUN" AND THE DAILY LIFE LANDING. Two
+  surprises, both (a): `seatHolderLines` U6 (2); `seatChainHolder` arm 8, WHOSE LIVENESS ANCHOR MASKS THE OFFICE-WORD
+  GUARD AFTER IT (read green after the re-pin). Lit sizes: the worker +2,335, for the owner's size signing.
+  **Decided:** THE FLIP'S SEAT IS A FRESH ONE (CLOSE-5), seated on CLOSE-4's final hand-back when CLOSE-4's place
+  frees; it reads in and prepares; it builds only on "BUILD THE FLIP <tip>", after the stack is on the line.
+  **Why:** the flip is the line side's largest unit and ends in the owner's signings: it wants a whole window.
+  **Rejected:** the flip as CLOSE-4's third unit (344,073 at 02:22 before PRONOUN's proofs). **Reversal:** one word
+  to CLOSE-4 instead of a seating.
+- 2026-11-23 02:38 UTC · N32 · VEIL-38's FIVE (its message of 02:27; R4I-PAGE-3 stopped at its budget, its diff read by the seat, no
+  fault; -wip 0755698e6; by its logs: 13 non-security id pins re-stated modulo the bijection; `galleryVeilHandRows`
+  26 of 26; THE STORED ARM on 140 today-born and 140 master-born documents, 3,360 reads each: 0 stored ids served, 0
+  ids shared between two reads, 0 new dangling references, planted controls caught 700 of 700 and 140 of 140; the
+  switch offers exactly what it offered before the re-key on 3,616 of 3,616 reads). RULED:
+  (a) THE SIZE RISE IS NAMED FOR THE OWNER, NOT BOUGHT BACK: A RULED FIRST-PAINT EXCEPTION, +60 raw / +14 gzip, "the
+  criminal switch's one-salt import (R4-IDS, S1)"; the engine chunk +327, the worker +43. **Why:** the cost of a
+  security cure on the owner's own page; the line already carries seven ruled exceptions (231 to 3,818 bytes) for
+  his one sign-off. **Rejected:** a lazy boundary inside the switch, or bytes shaved elsewhere, for 60 bytes. The 4
+  VERIFY_DIST reds go by name into PART 40 and "TIP?"; no baseline re-taken; signed by nobody.
+  (b) `src/domain/display/galleryVeilPeople.js` JOINS THE REGISTER of files that name `gallery_member_overrides`
+  (`galleryServerVeil.pglite.test.js`, "RULING 4": the column has one database writer), test-only, WITH ITS TRUE
+  ROLE read by the seat; a writer into a row there is a STOP. READ BY THE CHAIR: the test's lines 595 to 628.
+  (c) THE LINK ANCHOR STAYS, AND THE LINK TWIN IS DEFINED TEST-SIDE (no src file): the link read's reference is
+  `projectShareVeil(galleryPayloadFor(stored, {shareDm:false, memberOverrides: <the link's marker>}), ...)`, AND ITS
+  DEFINITION CITES ITS LAW (the ruling or 212's lines that say a link read carries no Reveal DM and falls closed to
+  the default veil); no law found is said BEFORE it is built: the chair rules law or finding. 36 of 36 plants red AND
+  36 of 36 clean link reads green on both pools; a clean read that still differs is a STOP. **Why:** the anchored form
+  caught 36 of 36 plants; its 24 false reds came from the wrong reference, not from a leak. **Rejected:** dropping
+  the anchor.
+  (d) THE TIP'S OWN REDS OUTSIDE tests/security ARE NOT R4-IDS's: N33.
+  (e) `personIdBijection :: storedIdsServed`'s MASK (fresh `npc_`/`tie_` + 16 hex tokens masked before the
+  substring search; short stored ids like `npc_2` gave false reds one read in eight) ACCEPTED ON TWO CONDITIONS: (i)
+  it counts on every document the STORED ids that themselves have the fresh shape and REDS BY NAME if one exists
+  (compared as a whole token, never masked); the count said on both pools; (ii) whole tokens only, and two plants
+  stay caught: a short stored id served bare, and one inside a longer string that is not a fresh token. **Why:** a
+  mask inside a leak proof must not be able to hide a leak.
+- 2026-11-23 02:38 UTC · N33 · (P2) WIDENED TO ITS CLASS, BEFORE "PIN-2" (to VEIL-39). VEIL-38 reports more reds at the tip itself: VS1's
+  crime-types tooth (CONFIRMED red at af708f2fd) and two of `galleryVeilSignalCopies` (PLAUSIBLY S2's cause).
+  **Decided:** ONE run AT THE TIP of every test file outside `tests/security` that names `galleryPayloadFor`,
+  `applyVeil`, `projectShareVeil`, `get_gallery_dossier` or `get_unlisted_dossier` (34 files by VEIL-38's count);
+  every red classed by cause: rule (e)'s (a stale pin: re-stated in PIN-2 in S2's two halves) or OTHER (named to the
+  chair, not cured). If the sweep would cost VEIL-39 its C2 proposal, PIN-2 goes with S2 alone and the sweep is its
+  successor's. THE SAME SET, BY THE SAME GREP, IS RUN ON EVERY UNIT'S MERGED TREE BEFORE ITS "TIP?". CORRECTION OF THIS
+  RECORD: VEIL-38's `b-guards-other.txt` (`docs/chair/2026-11-20/veil/out/v35/r4ipage/` on its -wip) is THE OUTPUT OF
+  ONE RUN of those files at fd7163ba6, not a list of them: the set is derived by the grep above.
