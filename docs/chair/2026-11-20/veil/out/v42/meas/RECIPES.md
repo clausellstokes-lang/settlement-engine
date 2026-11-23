@@ -34,14 +34,14 @@ births of the same seeds byte for byte (140 of 140, `t140`'s `MEAS_STORED_CMP`).
 | ctrl | `MEAS_C=1 sh meas.sh /home/user/wt/meas <out>/ctrl v28tpl handreach` | rc 0, 07:06 |
 | dumps | the two dump commands above | rc 0, 07:06 |
 | t140 | `MEAS_C=1 MEAS_STORED_CMP=/var/tmp/v18/out/v42/stored-today sh meas.sh /home/user/wt/meas <out>/t140 v28tpl towns` | rc 0, 07:43 |
-| pool | `MEAS_C=1 MEAS_DOORS=gallery sh meas.sh /home/user/wt/meas <out>/pool v28tpl pool /var/tmp/v18/t2/pool-v42` | running from 08:34 |
-| umtoday | `UM_U=1 UM_M=1 sh um.sh /home/user/wt/meas <out>/umtoday v28tpl stored /var/tmp/v18/out/v42/stored-today` | queued |
-| ummaster | `UM_U=1 UM_M=1 sh um.sh /home/user/wt/meas <out>/ummaster v28tpl stored /var/tmp/v18/out/v42/stored-master` | queued |
-| umpool | `UM_M=1 sh um.sh /home/user/wt/meas <out>/umpool v28tpl pool /var/tmp/v18/t2/pool-v42` | queued |
-| m140 | `MEAS_C=1 sh meas.sh /home/user/wt/meas <out>/m140 v28tpl stored /var/tmp/v18/out/v42/stored-master` | queued (interrupted once, 07:44) |
-| bt140 | `MEAS_BIJ=0 MEAS_DOORS=gallery,link sh meas.sh /home/user/wt/tip <out>/bt140 v42tip towns` | queued |
-| bm140 | `MEAS_BIJ=0 MEAS_DOORS=gallery,link sh meas.sh /home/user/wt/tip <out>/bm140 v42tip stored /var/tmp/v18/out/v42/stored-master` | queued |
-| bpool | `MEAS_BIJ=0 MEAS_DOORS=gallery sh meas.sh /home/user/wt/tip <out>/bpool v42tip pool /var/tmp/v18/t2/pool-v42` | queued |
+| pool | `MEAS_C=1 MEAS_DOORS=gallery sh meas.sh /home/user/wt/meas <out>/pool v28tpl pool /var/tmp/v18/t2/pool-v42` | rc 0, 11:24 |
+| umtoday | `UM_U=1 UM_M=1 sh um.sh /home/user/wt/meas <out>/umtoday v28tpl stored /var/tmp/v18/out/v42/stored-today` | rc 0, 11:34 |
+| ummaster | `UM_U=1 UM_M=1 sh um.sh /home/user/wt/meas <out>/ummaster v28tpl stored /var/tmp/v18/out/v42/stored-master` | rc 0, 11:43 |
+| umpool | `UM_M=1 sh um.sh /home/user/wt/meas <out>/umpool v28tpl pool /var/tmp/v18/t2/pool-v42` | DROPPED (N90) |
+| m140 | `MEAS_C=1 sh meas.sh /home/user/wt/meas <out>/m140 v28tpl stored /var/tmp/v18/out/v42/stored-master` | rc 0, 14:30 (interrupted once at 07:44) |
+| bt140 | `MEAS_BIJ=0 MEAS_DOORS=gallery,link sh meas.sh /home/user/wt/tip <out>/bt140 v42tip towns` | DROPPED (N90) |
+| bm140 | `MEAS_BIJ=0 MEAS_DOORS=gallery,link sh meas.sh /home/user/wt/tip <out>/bm140 v42tip stored /var/tmp/v18/out/v42/stored-master` | DROPPED (N90) |
+| bpool | `MEAS_BIJ=0 MEAS_DOORS=gallery sh meas.sh /home/user/wt/tip <out>/bpool v42tip pool /var/tmp/v18/t2/pool-v42` | DROPPED (N90) |
 `<out>` = `/var/tmp/v18/out/v42/meas`; the queue now running: `sh $V/v42/meas/chain.sh umtoday ummaster umpool m140 bt140 bm140 bpool`
 (started 08:48, waiting on the mutex behind `pool`). Trials (one or two places, outside the mutex): `MEAS_SHARDS=1 MEAS_SEEDS=<seeds>`
 with the same scripts; their tables are in `logs/trial-*.txt`.

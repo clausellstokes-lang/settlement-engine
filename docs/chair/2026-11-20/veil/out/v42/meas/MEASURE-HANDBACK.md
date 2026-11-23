@@ -1,8 +1,10 @@
 # R4I-MEASURE — HAND-BACK (VEIL-42, chain B; brief `docs/chair/2026-11-20/veil/briefs/R4I-MEASURE-BRIEF.md` at caba51270)
 
-STATUS (kept current at every commit): A on the 7 and the 140 READ; C's control and the today-born set READ; the chain runs on
-IN THE SEAT'S ORDER (pool, then m140, bt140, bm140, bpool): m140 was started at 07:43 and INTERRUPTED by this builder at 07:44
-(1.5 minutes in) to put A's pool first; the mutex then passed to the Tonight seat's holdA.sh before the pool. The seat's four asks (N69) answered in A-77.md (marker counts complete at m140). MEASURES ONLY: no line under `src/`, `supabase/` or `tests/` changed; 211 and 212 read, never edited.
+STATUS (kept current at every commit): DONE, by N90's cut (11:44 UTC). A (the 7, the 140, the pool), C (the control, today-born,
+master-born, the pool's births), U (both stored sets), M-TWIN (both stored sets) READ AND WRITTEN. B and the pool's U/M DROPPED by N90.
+The instrument (`meas.probe.jsx`, `meas-an.mjs`, `meas.sh`) frozen as the lane's. MEASURES ONLY: no line under `src/`, `supabase/` or
+`tests/` changed; 211 and 212 read, never edited. The queue's history: `/var/tmp/v18/out/v42/meas/chain.log` (reordered twice by
+the seat; m140 interrupted at 07:44, re-queued, and run 14:09-14:30 after five other holds).
 
 ## WHERE IT RAN
 - Worktree `/home/user/wt/meas`, local branch `lane/veil-42-2026-11-23-meas-wip` cut at 9f9b819f7; `node_modules` a link
@@ -42,7 +44,9 @@ value for value, no bijection, at the tip.
   page) serve stored ids at `factions[].members[].goal.intent.short.target.id` (456 hits / 60 reads),
   `...goal.intent.long.target.id` (443 / 60) and a THIRD path, `factions[].members[].allegiance.handler` (35 / 10, unmarked DM).
   Link and map member: 0. TODAY-BORN SET: 0 on every door and twin (and 0 in publicProse); its documents carry no roster copy.
-  POOL (gallery door only): 0. Master-born: to follow (m140).
+  POOL (gallery door only): 0. MASTER-BORN (m140): 0 on every door and twin; the master-born path list is EMPTY (its stored ids all sit at re-key sites).
+  WHY THE OLD 0 (CONFIRMED): neither set holds a stored id off the re-key's sites; the gap lives only in criminalSwitchHandReach's
+  hybrid shape (`toMasterShape` of today's births). On m140 also: 352 L1 reads, `factions[].power` (the power-share aside).
 - A's aside (control documents only): 212 :: `_gallery_veil_roster_choices` :2318-2337 writes a `power` share onto master-shape
   top-level `factions[]` entries that carry none (a NULL comparison in its guard); the twin does not (33 reads).
 - U (the chair's item, 08:45): `U-UNMARKED.md`. FIRST READING (2 of the 7, CONFIRMED there): THE MAP MEMBER SERVES THE COVERT
@@ -58,5 +62,6 @@ value for value, no bijection, at the tip.
   instrument as it stands; `meas.probe.jsx`, `meas-an.mjs`, `meas.sh` FROZEN as the lane's instrument). bt140, bm140, bpool not run.
 
 ## LEFT (exact commands)
+- Nothing of the brief as cut by N90. Dropped and not run: `sh $V/v42/meas/chain.sh umpool bt140 bm140 bpool` (RECIPES.md).
 - The chain: `sh docs/chair/2026-11-20/veil/out/v42/meas/chain.sh [step ...]` from `/home/user/wt/meas` (steps a7 ctrl
   dumps t140 pool m140 bt140 bm140 bpool, run in the order named; outputs `/var/tmp/v18/out/v42/meas/<step>/table.txt`, log `chain.log`).

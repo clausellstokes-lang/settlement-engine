@@ -1,19 +1,21 @@
 # C — "GAP": every path where a stored person id still stands after the re-key (R4I-MEASURE, VEIL-42)
 
 SUMMARY (15 lines)
-1. INSTRUMENT: `personIdBijection.shared.mjs :: storedIdsServed` as it stands at the -wip ((E) + (F)), on `[body, served marker]` of
-   every door (gallery, link, import as a premium reader, a `get_gallery_map` member, and the gallery page through the client) and on
-   both twins (gallery `projectShareVeil(galleryPayloadFor(...))`, link `linkTwinOf`); Reveal off and DM; 12 settings.
-2. THE POSITIVE CONTROL BITES (run `ctrl`, criminalSwitchHandReach's six towns in both shapes, 288 reads a door): on MASTER'S SHAPE,
-   Reveal DM, the known gap is found, BOTH ENGINES, at three paths:
-   `factions[].members[].goal.intent.short.target.id` 456 hits on 60 reads; `factions[].members[].goal.intent.long.target.id` 443 on 60;
-   AND A THIRD, NOT KNOWN BEFORE: `factions[].members[].allegiance.handler` 35 on 10 (the UNMARKED DM read only; e.g. `npc_veiled_5064ee784f11c849`).
-   Each on: gallery server, gallery twin, import server, the gallery page (L2). NOT on the link (never Reveal DM) nor the map member
-   (`_gallery_sanitize_public_json`: never DM). 0 on the current shape. 0 inside publicProse. 0 fresh-shaped stored ids.
-3. CAUSE (read): 212 :: `_gallery_veil_rekey` (:2810) and its twin `galleryVeilPeople.js :: rekeyPeople` re-key a roster copy's
-   `members[].id` ONLY (the last pass, "master's roster copies"); a DM projection keeps each member's WHOLE record in master's
-   top-level `factions[].members[]` (goal, allegiance), whose references no rule re-keys. The same on both engines, rule for rule.
-4. The sets (today-born, master-born, the pool's births): below, each the moment it is read. THE OLD 0: below, after the master-born set.
+1. THE MANIFEST OF SITES (R4I-SQL-2's), from the POSITIVE CONTROL only (master's shape as criminalSwitchHandReach builds it, Reveal
+   DM, BOTH engines: gallery server and twin, import, the gallery page): `factions[].members[].goal.intent.short.target.id` (456 hits /
+   60 reads), `factions[].members[].goal.intent.long.target.id` (443 / 60), `factions[].members[].allegiance.handler` (35 / 10, the
+   unmarked DM read only). Link and map member: 0 (never Reveal DM). publicProse: 0 on every run.
+2. THE SETS: today-born 140 (3,360 reads a door, 5 doors + 2 twins): 0. MASTER-BORN 140 (`m140`, the same): 0. The pool's births
+   (1,808, gallery door, page and both twins, 43,392 reads): 0. Fresh-shaped stored ids: 0 everywhere.
+3. CAUSE (read): 212 :: `_gallery_veil_rekey` (:2810, its last pass) and `galleryVeilPeople.js :: rekeyPeople` re-key a roster copy's
+   `members[].id` ONLY; a Reveal-DM projection keeps each member's whole record in master's top-level `factions[].members[]`.
+4. WHY THE OLD STORED MEASURE READ 0 (CONFIRMED): its documents hold no stored person id off the re-key's sites. Master-born: 15,002
+   stored-id occurrences, ALL at sites (members' `goal` is `{ short, long }` strings, no `allegiance`: master writes no intent);
+   today-born: 32,608, all at sites (no roster copy at all). The gap lives only in the HYBRID (today's people in master's top-level
+   roster) that criminalSwitchHandReach's `toMasterShape` builds, in neither set. Not the mask, not the doors: this measure, with the
+   import, the map member and the page added, reads 0 on both sets again and bites on the control.
+5. ON THE MASTER-BORN SET, NOT A PERSON ID: the server writes a `power` share onto top-level `factions[]` (352 reads, 32 places, Reveal
+   DM, every marked setting): A-77.md's aside, now on real stored documents.
 
 ## THE CONTROL (`/var/tmp/v18/out/v42/meas/ctrl/table.txt`, copied to `logs/ctrl-table.txt`; run 07:02-07:06 UTC)
 Documents: the six towns of `criminalSwitchHandReach.pglite.test.js` (v102-thorp-0, -hamlet-6, -village-3, -town-1, -city-0,
@@ -55,4 +57,15 @@ The stored side's census lists `stress[].cast.roles[].id` (22 in 5 places, e.g. 
   `simulationTrace[].targetId` 82). 0 OFF-SITE: master's members carry `goal` as `{ short, long }` STRINGS and no `allegiance`
   (`logs/shape-census.txt`), so the gap's three paths hold nothing to serve.
 - TODAY-BORN, 140 documents, 32,608 occurrences: all at sites (no roster copy at all).
-THE SERVED COUNT on the master-born set (`m140`, every door and twin): queued behind the Tonight seat's holdD (the mutex, since 11:58).
+THE SERVED COUNT: next section.
+
+## THE MASTER-BORN SET, SERVED (`m140`, the -wip, v28tpl, 14:09-14:30 UTC; `logs/m140-table.txt`; 140 x Reveal off/DM x 12 = 3,360 reads a door)
+Every door (gallery `data` + marker, link `dossier` + marker, import `data`, the map member, the gallery page) and both twins: 0 STORED
+PERSON IDS SERVED; 0 inside publicProse; 0 fresh-shaped; the stored side's census (off-site paths): none. THE MASTER-BORN PATH LIST IS
+EMPTY. The served marker (A's ask (2)): gallery marked 3,080 served marker, UNMARKED 280 of 280 NO served marker; link 3,360 served
+marker; import and the map member: no marker field on any read (3,360 each).
+ALSO READ ON THIS RUN (A's instrument, L1 gallery, not a person id): 352 of 3,360 reads differ, 32 places, Reveal DM, the 11 MARKED
+settings (none unmarked, none at Reveal off): `factions[]#keys` and `factions[].power` (1,969 leaves), e.g. r3m-city-none-1-107
+dm|default `factions[0]`: server `dominantCategory,members,name,power` (`power` 20) | twin `dominantCategory,members,name`. The cause:
+A-77.md's aside (212 :: `_gallery_veil_roster_choices` :2318-2337, a NULL comparison in its share guard; the twin's guard
+`galleryRosterChoices.js` :147). Link L1: 0. L2 the same 352 (no other path). (A different 352 from M's pool 352.)
