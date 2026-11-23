@@ -1,0 +1,12 @@
+start 2026-11-23T13:17:00Z tree 8c667523bad1205ee669dec6afb5fcf731cc43bc 212 70ce3b51a0099a65 twin 40bb8ab0779a04ce dirty 0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 13542 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/sql
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  13:17:01
+   Duration  146.65s (transform 3.34s, setup 35ms, import 64ms, tests 146.44s, environment 0ms)
+
+EXIT rc=0 2026-11-23T13:19:28Z
