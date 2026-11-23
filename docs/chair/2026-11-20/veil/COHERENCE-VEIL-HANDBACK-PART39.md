@@ -42,8 +42,10 @@ DONE AND ACCEPTED BY THIS SEAT:
   min, B 8.9); verify 45 / 0 differ; GATE-1 4 of 92 at every gated setting, both reads, twin = server, LOWER BY RULE 7, controls 0;
   GATE-2 20 cells below 0.05 (off 10, dm 10); server = twin 0 of 112; typecheck 167/167, eslint 0, walkers + manifest 0, arms
   Tell3+4+5+8 0, --check 0. EQUAL TO PART 35 / 37 (table `out/v37/seated/tell2-table-2bcc53c0a.txt`, differing from VEIL-36's only in
-  wall-clock columns). The rest of chain1 (sv + hand rows + born, harnesses, the R3 gate, acceptance, `tests/lint` whole) to
-  `/var/tmp/v18/out/v37/g/done.txt`: running at this push.
+  wall-clock columns). The rest of chain1 (END 01:35): harnesses 0; the R3 gate 0; acceptance 40 PASS; sv + hand rows + born 1 of 80 failed
+  (`galleryVeilHandRows.pglite` V7-2 THE PRESSURE SENTENCE: the stale pin the new tip 2d7ed483f re-states, E136 (e)); `tests/lint` WHOLE
+  48 failed of 3,304 in 17 files, the same files and counts as `out/v36/seated/lint-whole-fails-af708f2fd.txt` (the lane's 22 + the
+  composed-hosts walker's 26). ALL EQUAL TO VEIL-36's AT THE TIP.
 
 HOW TO RE-MAKE THE MACHINE (a fresh container, ~38 min wall): copy `out/v37/seated/chain0.sh`, `after0.sh`, `chain1.sh` to
 `/var/tmp/v18/out/<seat>/`, rename v37 -> <seat> inside them, `mkdir -p /var/tmp/v18/out/<seat>/g`, then `sh chain0.sh; sh after0.sh` in
@@ -106,3 +108,4 @@ chair's read leaves the room, else it is the successor's first act (said in the 
 - 00:20 seated on b5244a6a0; chain0 launched (00:15); read-in; first line to the chair 00:18; R5D-SQL-2's brief and dispatch.
 - 00:44 pool END; 00:53 gates read; 00:56 (0)'s line to the chair (with the 23 composed prose rows' question).
 - 01:03 the chair: TIP 2d7ed483f on `lane/veil-39-2026-11-23-tip` (to be merged into the -wip when R5D-SQL-2 returns).
+- 01:35 chain1 END: equal to VEIL-36's at the tip (sv 1 of 80 = the stale V7-2; tests/lint whole 48 of 3,304 in the same 17 files).
