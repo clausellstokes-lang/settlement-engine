@@ -26,6 +26,13 @@
  *            surface, width and town.
  *   DRAWN    each row in KNOWN_DRAWN (measured: the registry calls it undrawn, a non-owner page draws it) still moves
  *            a byte alone; R2 re-classes each ((a) or (b)) and strikes it (shrink-only).
+ * R4I-TONIGHT (VEIL-38, the chair's ruling 40.3 (2); class (i) of VR46): VR10 re-keys every person id on every read,
+ * so the person and tie ids a view's HTML carries (`npc_`/`tie_` or `npc-`/`tie-` + 16 hex: a DOM id such as
+ * `dossier-npc-npc-<hex>`) are named by THE READ'S PERSON-ID BIJECTION (personIdBijection.shared.mjs :: canonPeople over
+ * the served document) before two reads are compared: modulo the bijection and nothing else (an id the read's bijection
+ * does not name stays as it is, and reds). THE TONIGHT ARM: the sheet (composeTonightSheet, the one composer) is one
+ * sheet on two reads of one place, twin and server, and under eight read salts; and each cast person the OWNER's own
+ * sheet voices with a role line is voiced on the served sheet with the same line (the want keyed on the name).
  * NOT REACHED HERE (named for R2): the campaign map's member dossier (CampaignWorldView over get_gallery_map); there
  * is no export a non-owner can trigger (VR4 section 2b: no PDF, journal or print on a non-owner page).
  */
@@ -37,6 +44,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { bootChain, storeShare, withhold, graft, BIRTH_DIALS } from './veilChain.shared.mjs';
+import { canonPeople } from './personIdBijection.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 1_800_000;
@@ -95,6 +103,8 @@ const KNOWN_DRAWN = Object.freeze(new Set([]));
 
 /** React's generated ids (useId) differ between mounts; nothing else may. */
 const normalise = (html) => html.replace(/:r[0-9a-z]+:/g, ':id:').replace(/«r[0-9a-z]+»/g, '«id»');
+/** R4I-TONIGHT (class (i)): each served person or tie id in a view named by the read's bijection (`names`: canonPeople's). */
+const byBijection = (html, names) => html.replace(/\b(npc|tie)([-_])([0-9a-f]{16})\b/g, (m, k, _sep, hex) => names.get(`${k}_${hex}`) ?? m);
 const SHEET_VIEW = 'SHEET/Tonight (Table View)';
 
 /** Walk every group, sub-tab and disclosure (tests/components/pageCensusWalk.shared.mjs's walk), keeping each panel's HTML. */
@@ -171,6 +181,10 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
       PublicDossierView: (await import('../../src/components/PublicDossierView.jsx')).default,
       PartyLinkView: (await import('../../src/components/PartyLinkView.jsx')).default,
       TONIGHT_COPY: (await import('../../src/domain/summary/tonightSheet.js')).TONIGHT_COPY,
+      tonight: await import('../../src/domain/summary/tonightSheet.js'),
+      rekeyPeople: (await import('../../src/domain/display/galleryVeilPeople.js')).rekeyPeople,
+      overrides: veil.writeShareVeil({}, []),
+      veil,
       storeFor,
     };
     await loadGenerationLawPayloads();
@@ -204,6 +218,8 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
     const { container } = render(el);
     const views = await walkHtml(container, lib.TONIGHT_COPY);
     env.lastServedName = dossier.settlement.name;
+    const { names } = canonPeople(dossier.settlement);
+    for (const k of Object.keys(views)) views[k] = byBijection(views[k], names);
     cleanup();
     return views;
   }
@@ -256,6 +272,39 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
     }
     if (OUT) { mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, 'render-twice.json'), JSON.stringify({ ...report, moved }, null, 1)); }
     expect(report.towns.every((x) => x.grafted > 0)).toBe(true);
+    expect(moved).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('TONIGHT (R4I-TONIGHT, ruling 40.3 (2)): the sheet is one sheet on two reads (twin and server) and under eight salts, and the owner\'s role lines are the served ones', async () => {
+    /** The sheet as compared: every byte but each person's `castId` (the cast row's served id, re-keyed by design). */
+    const sheetOf = (doc) => { const s = lib.tonight.composeTonightSheet(doc); return JSON.stringify({ ...s, people: s.people.map(({ castId: _c, ...p }) => p) }); };
+    // THE TWIN IS THE TWIN'S PROJECTION (the chair's N69 (4)): projectShareVeil(galleryPayloadFor(stored, ...)), as the
+    // server-veil tests call it; never a raw unmarked row through the page's pre-211 unserved branch (M's "77" fault)
+    const twinDoc = async (t) => clone(lib.veil.projectShareVeil(lib.veil.galleryPayloadFor(clone(t.stored), { shareDm: false, memberOverrides: clone(lib.overrides) }), clone(lib.overrides)));
+    const moved = []; let roleVoiced = 0; let ownerRole = 0;
+    for (const t of towns) {
+      env.mutate = (d) => d;
+      const s1 = (await lib.fetchPublicDossier(t.slug)).settlement; const s2 = (await lib.fetchPublicDossier(t.slug)).settlement;
+      const w1 = await twinDoc(t); const w2 = await twinDoc(t);
+      if (sheetOf(s1) !== sheetOf(s2)) moved.push(`${t.seed}: server, two reads`);
+      if (sheetOf(w1) !== sheetOf(w2)) moved.push(`${t.seed}: twin, two reads`);
+      if (sheetOf(w1) !== sheetOf(s1)) moved.push(`${t.seed}: twin vs server`);
+      // EIGHT SALTS: the served document re-keyed under eight more salts (the read's own re-key, galleryVeilPeople.js)
+      const salted = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((x) => sheetOf(lib.rekeyPeople(clone(s1), `r4it-salt-${x}`)));
+      if (new Set([sheetOf(s1), ...salted]).size !== 1) moved.push(`${t.seed}: eight salts give ${new Set(salted).size} sheets`);
+      const served = lib.tonight.composeTonightSheet(s1);
+      roleVoiced += served.people.filter((p) => p.why === 'cast' && p.says === 'want' && !lib.tonight.hasOwnGoal((s1.npcs || []).find((n) => n?.name === p.name))).length;
+      // THE OWNER'S PAGE: a cast person the owner's sheet voices with a ROLE line is voiced with the same line when served
+      for (const p of lib.tonight.composeTonightSheet(t.stored).people) {
+        if (p.why !== 'cast' || p.says !== 'want' || lib.tonight.hasOwnGoal((t.stored.npcs || []).find((n) => n?.name === p.name))) continue;
+        const q = served.people.find((x) => x.name === p.name && x.castLabel === p.castLabel);
+        if (!q) continue;
+        ownerRole += 1;
+        if (q.line !== p.line) moved.push(`${t.seed}: ${p.name} (${p.castLabel}) owner "${p.line}" served "${q.line}"`);
+      }
+    }
+    // anchored: the arm reads at least one cast person the served sheet voices with a role line (it is not vacuous)
+    expect(roleVoiced, `role-voiced cast persons on the served sheets (the owner's compared: ${ownerRole})`).toBeGreaterThan(0);
     expect(moved).toEqual([]);
   }, ARM_TIMEOUT_MS);
 

@@ -111,7 +111,8 @@ describe('S1 THE SERVER: 212 takes no salt from a caller', () => {
   const name = readdirSync(join(ROOT, 'supabase/migrations')).find((f) => /^212_.*\.sql$/.test(f) && !/rollback/i.test(f));
   const sql = readFileSync(join(ROOT, 'supabase/migrations', name), 'utf8');
   /** Every function definition of 212: { name, params, body }. */
-  const defs = [...sql.matchAll(/create or replace function public\.(\w+)\s*\(([\s\S]*?)\)\s*returns[\s\S]*?\$(\w*)\$([\s\S]*?)\$\3\$/gi)]
+  // R4I-TONIGHT-2 N (ruling 40.8 (3)): anchored at a line start (`^` and the m flag), as netCurrentExtractorAnchor's walker says
+  const defs = [...sql.matchAll(/^create or replace function public\.(\w+)\s*\(([\s\S]*?)\)\s*returns[\s\S]*?\$(\w*)\$([\s\S]*?)\$\3\$/gim)]
     .map((m) => ({ name: m[1], params: m[2], body: m[4] }));
   const SALTY = /salt|nonce|seed|pepper|\bkey\b/i;
   const CARRIERS = ['_gallery_veil_rekey_id', '_gallery_veil_rekey_ref', '_gallery_veil_rekey_at', '_gallery_veil_rekey_each', '_gallery_veil_rekey', '_gallery_veil_rekey_served'];

@@ -33,7 +33,7 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf, castWantFactsOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, castWantFactsOf, castWantKeyOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
 
 /** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
@@ -208,7 +208,9 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
     // want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
     // a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
     // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,
-    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40).
+    // the person, the crisis, the person's house, the seat) and compared by EXACT equality (want_not_role, SW-6 #40). The
+    // person is keyed as the sheet keys them (R4I-TONIGHT, rulings 40.3 (2), 40.7 (3): `castWantKeyOf`, the name as the card
+    // prints it, never the id).
     // A secret or a temperament (`says`) is not a want and is not read here.
     const wantFacts = castWantFactsOf(settlement);
     for (const p of sheet.people || []) {
@@ -221,7 +223,7 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
         continue;
       }
       const house = str(firstRankMembershipOf(npc, powerOrderOf(settlement))?.power);
-      const want = castWantOf(role, str(p.castId), str(p.castKind), '', house, wantFacts);
+      const want = castWantOf(role, castWantKeyOf(p.name), str(p.castKind), '', house, wantFacts);
       if (!want || str(p.line) !== want) out.push({ surface: 'tonight', quote: `${p.name} (${p.castLabel}): ${p.line}`, detail: `want_not_role:${role}` });
     }
     // target_runs_plot: a crisis's target voiced with that crisis's own secret.
