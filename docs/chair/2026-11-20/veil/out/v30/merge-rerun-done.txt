@@ -1,0 +1,2 @@
+start 02:06:11 merged a3eec1e76
+red-t3 rc=1 (expect 1: units 2 and 4b)

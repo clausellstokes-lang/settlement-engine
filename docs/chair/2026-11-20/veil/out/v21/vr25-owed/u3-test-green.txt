@@ -1,0 +1,21 @@
+UNIT 3 GREEN: the cure in place (verbose)
+[gate-tail] start:  03:11:18 up 34 min,  0 user,  load average: 4.46, 2.74, 2.00 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ✓ tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > CORPUS: the share serves each town's stored band, and the corpus holds a Subsistence town 1ms
+ ✓ tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > BAND: the importer's record carries the served band on every town 1ms
+ ✓ tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > DEPENDENT: the legitimacy cause, the readiness score and each condition's severity read the served band 16ms
+ ✓ tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > FALLBACK: where the served document lacks the band, it is re-derived where the served houses decide it, else left out with its cause 30ms
+ ✓ tests/store/galleryImportRederive.test.js > VR25: the importer's save re-derives what the share withholds, from the served document alone > the share withholds the ten before the import runs (the arms read a real absence), and the corpus has towns with and without a hidden house 1ms
+ ✓ tests/store/galleryImportRederive.test.js > VR25: the importer's save re-derives what the share withholds, from the served document alone > 1: the ten arrive on the importer's record, or are left out whole (no default, no blank row) 1ms
+ ✓ tests/store/galleryImportRederive.test.js > VR25: the importer's save re-derives what the share withholds, from the served document alone > 2: the re-derivation reads no withheld path 94ms
+ ✓ tests/store/galleryImportRederive.test.js > VR25: the importer's save re-derives what the share withholds, from the served document alone > 3: on a town with nothing hidden, every field the served document decides equals the value it was born with 1ms
+ ✓ tests/store/galleryImportRederive.test.js > VR25: the importer's save re-derives what the share withholds, from the served document alone > 4: where the veil removed a house, the compound is the engine's reading over the served houses, never the stored figure 1ms
+
+ Test Files  2 passed (2)
+      Tests  9 passed (9)
+   Start at  03:11:19
+   Duration  9.71s (transform 6.62s, setup 51ms, import 166ms, tests 17.87s, environment 0ms)
+
+[gate-tail] end:  03:11:28 up 34 min,  0 user,  load average: 4.58, 2.85, 2.05

@@ -1,0 +1,7 @@
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  00:44:00 up 14 min,  0 user,  load average: 1.38, 1.08, 0.67
+[gate-tail] full log: /tmp/gate-tail.1127.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+rc 0

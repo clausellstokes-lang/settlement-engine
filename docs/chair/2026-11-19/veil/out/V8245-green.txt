@@ -1,0 +1,32 @@
+V8-2, V8-4, V8-5 GREEN (VEIL-18's builder). Each arm in the tree at its commit; the six guard files, the twin's tests, the
+acceptance run and the gates at that commit's bytes (a copy of the tree at the commit, node_modules linked).
+
+V8-2 (212 4b04a3b2acd44c36eb4ca145ded36c40dd096d2bcd79e78e8b2af47befa8e038, down 5b3eb697... unchanged):
+  the arm: 0 sends or losses on 8 reads, server against twin 0 paths (gallery and import against the twin of their share,
+  the link against the veiled share's twin).
+  the six guard files (galleryVeilHandRows, gallerySecondHomes, galleryVeilCures, galleryServerVeil, gallerySanitizer,
+  galleryMapMemberCount; --maxWorkers=2): 6 files, 121 tests passed, exit 0.
+  the twin's tests (tests/domain/display/publicSafe*.test.js, tests/components/publicProseVeil*.test.js,
+  tests/lib/gallery.test.js): 5 files, 120 tests passed, exit 0.
+  the acceptance run (REVIEW-VEIL-7 run-all.sh): exit 1, checks 37 | PASS 35 | FAIL 2 (a07, d06 only), the twin 15 of 15.
+  npm run typecheck:domain:strict exit 0 (1113, ceiling 1113); npm run typecheck:ratchet exit 0 (167, ceiling 167);
+  npx eslint src/domain/display/gallerySecondHomes.js exit 0.
+
+V8-4 (212 2697bb8fb03612e2636acaf6477910f9aa7780f36a8b94660d4337b4e4c936e4, down
+45da09eb5c8ab2e134d613d56afa0cbc700f14a66233f77520e6cd67cf30a1c9: _gallery_veil_name_floor(jsonb, jsonb, text[])):
+  the arm: 0 sends or losses on 8 reads (the hidden house's full name nowhere, the bare name only at the four floors),
+  server against twin 0 paths; V8-2's arm still 0.
+  the six guard files: 6 files, 122 tests passed, exit 0. The twin's tests: 5 files, 120 tests passed, exit 0.
+  the acceptance run: exit 1, checks 37 | PASS 35 | FAIL 2 (a07, d06 only), the twin 15 of 15.
+  typecheck:domain:strict exit 0 (1113, ceiling 1113); typecheck:ratchet exit 0 (167, ceiling 167); eslint exit 0.
+
+V8-5 (212 dae0ae6c344daab243af4136a6932ebd7da8cfceabce6df3d95bddf75e19e247, down
+45da09eb5c8ab2e134d613d56afa0cbc700f14a66233f77520e6cd67cf30a1c9 unchanged):
+  the arm: 0 sends or losses on 6 rows x 8 reads, server against twin 0 paths; V8-2's and V8-4's arms still 0.
+  the six guard files: 6 files, 123 tests passed, exit 0. The twin's tests: 5 files, 120 tests passed, exit 0.
+  the acceptance run: exit 1, checks 37 | PASS 35 | FAIL 2 (a07, d06 only), the twin 15 of 15.
+  typecheck:domain:strict exit 0 (1113, ceiling 1113); typecheck:ratchet exit 0 (167, ceiling 167); eslint exit 0.
+  the reader's own town-g (REVIEW-VEIL-7 hand/run.sh and twin.probe.jsx on a chain of this tree): walls Mill/Old
+  Wheel/Candle makers with no description on every read; Reveal DM's factions[0] {"faction":"Thieves' Guild",...};
+  relationships[] holds no tie of npc.orrin (the veiled share: none; Reveal DM: the Mira-Tam tie alone); server
+  against twin 0 paths on base, veil and dm.

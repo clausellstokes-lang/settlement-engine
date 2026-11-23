@@ -1,0 +1,62 @@
+    },
+  }
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js:920:17
+    918|     expect(v42Shut((await v31Reads(AT210.db, v42Doc(), rows[0][1], { d…
+    919|     const clean = { gallery: false, link: false, import: false, map: f…
+    920|     expect(out).toEqual(Object.fromEntries(rows.map(([tag]) => [tag, c…
+       |                 ^
+    921|   }, ROW_TIMEOUT_MS);
+    922|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+AssertionError: expected [ …(20) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "#0 V4C_TIE_0_1_ hidden, sent by gallery",
++   "#0 V4C_TIE_0_1_ hidden, sent by link",
++   "#0 V4C_TIE_0_1_ hidden, sent by import",
++   "#0 V4C_TIE_0_1_ hidden, sent by map",
++   "#0 V4C_TIE_0_1_ hidden, sent by page",
++   "#0 V4C_TIE_0_2_ hidden, sent by gallery",
++   "#0 V4C_TIE_0_2_ hidden, sent by link",
++   "#0 V4C_TIE_0_2_ hidden, sent by import",
++   "#0 V4C_TIE_0_2_ hidden, sent by map",
++   "#0 V4C_TIE_0_2_ hidden, sent by page",
++   "#1 v4c_link_1_0_ hidden, sent by gallery",
++   "#1 v4c_link_1_0_ hidden, sent by import",
++   "#1 v4c_link_1_0_ hidden, sent by page",
++   "#1 V4C_GOAL_1_1_ hidden, sent by gallery",
++   "#1 V4C_GOAL_1_1_ hidden, sent by import",
++   "#1 V4C_GOAL_1_1_ hidden, sent by page",
++   "#1 v4c_link_1_1_ hidden, sent by gallery",
++   "#1 v4c_link_1_1_ hidden, sent by import",
++   "#1 v4c_link_1_1_ hidden, sent by page",
++   "#1 V4C_TIE_1_1_ hidden, sent by gallery",
++ ]
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js:976:35
+    974|     expect(tally.revealedOne).toBeGreaterThan(10);
+    975|     expect(tally.classes).toBeGreaterThan(5);
+    976|     expect(breaches.slice(0, 20)).toEqual([]);
+       |                                   ^
+    977|   }, ROW_TIMEOUT_MS);
+    978|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 23 skipped (28)
+   Start at  12:00:19
+   Duration  15.33s (transform 3.25s, setup 49ms, import 244ms, tests 14.89s, environment 0ms)
+
+[gate-tail] end:  12:00:35 up 16 min,  0 user,  load average: 2.26, 1.71, 0.84
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/f87af9a7-d5c7-5553-9326-6c79fdba1af5/scratchpad/redfirst/gate-tail.10837.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

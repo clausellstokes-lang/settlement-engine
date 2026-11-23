@@ -1,0 +1,43 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 18912 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+    223|       }
+    224|     }
+    225|     expect(failures).toEqual([]);
+       |                      ^
+    226|     expect(tally.copies).toBe(24);
+    227|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/23]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > criminal faction: members, goals, conflicts and description hidden; name, category and standing stay
+AssertionError: expected { faction: 'Thieves\' Guild', …(3) } to deeply equal { faction: 'Thieves\' Guild', …(4) }
+
+- Expected
++ Received
+
+  {
+    "category": "criminal",
+    "faction": "Thieves' Guild",
+    "power": 5,
+    "powerLabel": "Suppressed",
+-   "rawPower": 4,
+  }
+
+ ❯ tests/domain/display/publicSafe.test.js:697:18
+    695|     expect(rowsOf(bailthwaite(), 'criminal-faction')).toEqual(expect.a…
+    696|     const f = project(bailthwaite()).powerStructure.factions;
+    697|     expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, rawPow…
+       |                  ^
+    698|     expect(f[1].desc).toBe('The trades.');
+    699|     expect(rowsOf(temurpolis(), 'criminal-faction')).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/23]⎯
+
+
+ Test Files  6 failed | 68 passed (74)
+      Tests  23 failed | 1177 passed (1200)
+   Start at  03:35:53
+   Duration  407.29s (transform 13.76s, setup 1.22s, import 50.25s, tests 739.55s, environment 15.57s)
+
+[gate-tail] end:  03:42:41 up  1:05,  0 user,  load average: 4.42, 4.00, 3.02
+[gate-tail] full log: /tmp/gate-tail.18919.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

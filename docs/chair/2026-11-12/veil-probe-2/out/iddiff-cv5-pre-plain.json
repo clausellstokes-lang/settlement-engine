@@ -1,0 +1,39 @@
+{
+ "perKind": 4000,
+ "kinds": {
+  "npc": {
+   "compared": 3881,
+   "unequal": 0
+  },
+  "institution": {
+   "compared": 3842,
+   "unequal": 0
+  },
+  "faction": {
+   "compared": 3985,
+   "unequal": 0
+  },
+  "event": {
+   "compared": 2942,
+   "unequal": 0
+  },
+  "tension": {
+   "compared": 3959,
+   "unequal": 0
+  },
+  "conflict": {
+   "compared": 3969,
+   "unequal": 0
+  },
+  "relationship": {
+   "compared": 3937,
+   "unequal": 0
+  }
+ },
+ "compared": 26515,
+ "unequal": 0,
+ "clientThrows": 570,
+ "legacy": 915,
+ "raised": 0,
+ "examples": []
+}

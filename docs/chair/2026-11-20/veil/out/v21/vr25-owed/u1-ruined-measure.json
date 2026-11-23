@@ -1,0 +1,1364 @@
+{
+ "bootFailed": [],
+ "seeds": [
+  [
+   "thorp",
+   null
+  ],
+  [
+   "hamlet",
+   null
+  ],
+  [
+   "village",
+   null
+  ],
+  [
+   "village",
+   "insurgency"
+  ],
+  [
+   "town",
+   null
+  ],
+  [
+   "town",
+   "famine"
+  ],
+  [
+   "city",
+   "infiltrated"
+  ],
+  [
+   "city",
+   "indebted"
+  ],
+  [
+   "metropolis",
+   null
+  ]
+ ],
+ "fields": [
+  "compound",
+  "safetyProfile.compound",
+  "safetyRatio",
+  "storageMonths",
+  "prosperity",
+  "readiness.score",
+  "conditions.severity",
+  "legitimacy.breakdown",
+  "quarters",
+  "cast"
+ ],
+ "towns": [
+  {
+   "seed": "vr25-owed-thorp-calm-0",
+   "houses": 7,
+   "hiddenTown": 0,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Subsistence farming",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Fishing community",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Access to external mill",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Burial ground",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Household elder",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Dwellings (1-8)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Water source",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-hamlet-calm-1",
+   "houses": 13,
+   "hiddenTown": 0,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Subsistence farming",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Common grazing land",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Wayside inn",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Access to external mill",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Resident smith (part-time)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Carpenter (part-time)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Access to parish church",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Burial ground",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Dwellings (5-25)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Water source",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Citizen militia",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Charcoal burner",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Alehouse",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-village-calm-2",
+   "houses": 12,
+   "hiddenTown": 0,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Farmland",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Common grazing land",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Woodcutter's camp",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Mill",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Maltster",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Carpenter",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Cartographer's workshop",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Parish church",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Graveyard",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Priest (resident)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Dwellings (15-100)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Multiple water sources",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-village-insurgency-3",
+   "houses": 16,
+   "hiddenTown": 0,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Farmland",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Common grazing land",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Peat cutter",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Stable master",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "River ferry",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Mill",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Wayside shrine",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Graveyard",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Priest (resident)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Dwellings (15-100)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Multiple water sources",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Hedge wizard",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Palisade or earthworks",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Citizen militia",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-town-calm-4",
+   "houses": 41,
+   "hiddenTown": 3,
+   "controlMisdraw": [
+    "compound",
+    "safetyProfile.compound",
+    "safetyRatio",
+    "readiness.score"
+   ],
+   "variants": [
+    {
+     "house": "Weekly market",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Annual fair",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Caravaneer's post",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Mills (2-5)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Bowyers & fletchers (guild)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Weavers/Textile workers",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Smelter",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Craft guilds (5-15)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Guild governance",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Town hall",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Adventurers' charter hall",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Smuggling operation",
+     "hideable": true,
+     "served": false,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Charlatan fortune tellers",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    },
+    {
+     "house": "Cooper",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score"
+     ]
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-town-famine-5",
+   "houses": 23,
+   "hiddenTown": 0,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Weekly market",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Market square",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Taverns (5-20)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Carriers' guild",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "River boatyard",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Mills (2-5)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Jeweller",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Butchers (3-8)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Craft guilds (5-15)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Parish churches (2-5)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Housing (75-650 households)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Town hall",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Small prison/stocks",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Salt works",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-city-infiltrated-6",
+   "houses": 47,
+   "hiddenTown": 2,
+   "controlMisdraw": [
+    "compound",
+    "safetyProfile.compound",
+    "safetyRatio",
+    "readiness.score",
+    "quarters"
+   ],
+   "variants": [
+    {
+     "house": "Fish market",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Daily markets",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Inns and taverns (district)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Docks/port facilities",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Warehouse district",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Specialized metalworkers",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Tanner (established)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Cobbler's guild",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Printing house",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Parish churches (10-30)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Housing (500-4000 households)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Multiple courthouses",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Garrison",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Brewery",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "readiness.score",
+      "quarters"
+     ]
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-city-indebted-7",
+   "houses": 42,
+   "hiddenTown": 1,
+   "controlMisdraw": [],
+   "variants": [
+    {
+     "house": "Daily markets",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Inns and taverns (district)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Chroniclers' exchange",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Apothecary district",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Tanner (established)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Tailor's guild",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Ropemaker",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Burial grounds and charnel house",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Housing (500-4000 households)",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Multiple courthouses",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Garrison",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Dungeon delving supply district",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Red light district",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    },
+    {
+     "house": "Public bathhouse",
+     "hideable": false,
+     "served": true,
+     "misdraw": []
+    }
+   ]
+  },
+  {
+   "seed": "vr25-owed-metropolis-calm-8",
+   "houses": 83,
+   "hiddenTown": 2,
+   "controlMisdraw": [
+    "compound",
+    "safetyProfile.compound",
+    "safetyRatio",
+    "quarters"
+   ],
+   "variants": [
+    {
+     "house": "Fish market",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Merchant guilds (50-100+)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Docks/port facilities",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Public bathhouse",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Luxury goods quarter",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Brewery",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Potter",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Smelter",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Cartographer's guild",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Housing (3500+ households)",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Workhouse",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Mercenary quarter",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Dungeon delving supply district",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    },
+    {
+     "house": "Gambling district",
+     "hideable": false,
+     "served": true,
+     "misdraw": [
+      "compound",
+      "safetyProfile.compound",
+      "safetyRatio",
+      "quarters"
+     ]
+    }
+   ]
+  }
+ ],
+ "per": {
+  "compound": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 42,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 42,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 3,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "safetyProfile.compound": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 42,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 42,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 3,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "safetyRatio": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 42,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 42,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 3,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "storageMonths": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 0,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 0,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 0,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "prosperity": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 0,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 0,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 0,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "readiness.score": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 28,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 28,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 2,
+   "refMovedByRuin": 2,
+   "impMovedByRuin": 2,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "conditions.severity": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 0,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 0,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 0,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "legitimacy.breakdown": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 0,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 0,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 0,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "quarters": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 28,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 28,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 2,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  },
+  "cast": {
+   "variants": 116,
+   "kept": 116,
+   "leftOut": 0,
+   "misdraw": 0,
+   "misdrawNoHidden": 0,
+   "misdrawHiddenTown": 0,
+   "misdrawRuinAttributable": 0,
+   "ex": [],
+   "controlMisdraw": 0,
+   "refMovedByRuin": 0,
+   "impMovedByRuin": 0,
+   "movedApart": 0,
+   "movedApartEx": []
+  }
+ },
+ "served": {
+  "ruinedHouseServed": 115,
+  "ruinedHouseVeiled": 1,
+  "ruinedHouseStatusStripped": 0,
+  "ex": []
+ },
+ "context": {
+  "compound": {
+   "liveRosterDiffers": 10,
+   "ex": [
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Access to parish church",
+     "birthDerivers": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":19,\"",
+     "liveRoster": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":9.5,"
+    },
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Citizen militia",
+     "birthDerivers": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":19,\"",
+     "liveRoster": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":21.828000000000003,\"economyOutput\":14.666057399075271,\"religionIn"
+    },
+    {
+     "seed": "vr25-owed-village-insurgency-3",
+     "house": "Wayside shrine",
+     "birthDerivers": "{\"criminalEffective\":59.23967165314402,\"criminalPreStress\":47.39173732251522,\"militaryEffective\":21.09369365953757,\"economyOutput\":36.27710760931122,\"religionIn",
+     "liveRoster": "{\"criminalEffective\":59.23967165314402,\"criminalPreStress\":47.39173732251522,\"militaryEffective\":21.09369365953757,\"economyOutput\":36.27710760931122,\"religionIn"
+    }
+   ]
+  },
+  "safetyProfile.compound": {
+   "liveRosterDiffers": 10,
+   "ex": [
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Access to parish church",
+     "birthDerivers": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":19,\"",
+     "liveRoster": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":9.5,"
+    },
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Citizen militia",
+     "birthDerivers": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":54.57,\"economyOutput\":14.666057399075271,\"religionInfluence\":19,\"",
+     "liveRoster": "{\"criminalEffective\":33.0379930907708,\"criminalPreStress\":33.0379930907708,\"militaryEffective\":21.828000000000003,\"economyOutput\":14.666057399075271,\"religionIn"
+    },
+    {
+     "seed": "vr25-owed-village-insurgency-3",
+     "house": "Wayside shrine",
+     "birthDerivers": "{\"criminalEffective\":59.23967165314402,\"criminalPreStress\":47.39173732251522,\"militaryEffective\":21.09369365953757,\"economyOutput\":36.27710760931122,\"religionIn",
+     "liveRoster": "{\"criminalEffective\":59.23967165314402,\"criminalPreStress\":47.39173732251522,\"militaryEffective\":21.09369365953757,\"economyOutput\":36.27710760931122,\"religionIn"
+    }
+   ]
+  },
+  "safetyRatio": {
+   "liveRosterDiffers": 4,
+   "ex": [
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Citizen militia",
+     "birthDerivers": "1.7",
+     "liveRoster": "0.7"
+    },
+    {
+     "seed": "vr25-owed-village-insurgency-3",
+     "house": "Citizen militia",
+     "birthDerivers": "0.4",
+     "liveRoster": "0.1"
+    },
+    {
+     "seed": "vr25-owed-city-infiltrated-6",
+     "house": "Garrison",
+     "birthDerivers": "0.8",
+     "liveRoster": "0.6"
+    }
+   ]
+  },
+  "storageMonths": {
+   "liveRosterDiffers": 0,
+   "ex": []
+  },
+  "prosperity": {
+   "liveRosterDiffers": 0,
+   "ex": []
+  },
+  "readiness.score": {
+   "liveRosterDiffers": 10,
+   "ex": [
+    {
+     "seed": "vr25-owed-thorp-calm-0",
+     "house": "Household elder",
+     "birthDerivers": "11",
+     "liveRoster": "10"
+    },
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Access to parish church",
+     "birthDerivers": "22",
+     "liveRoster": "20"
+    },
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Citizen militia",
+     "birthDerivers": "22",
+     "liveRoster": "14"
+    }
+   ]
+  },
+  "conditions.severity": {
+   "liveRosterDiffers": 0,
+   "ex": []
+  },
+  "legitimacy.breakdown": {
+   "liveRosterDiffers": 0,
+   "ex": []
+  },
+  "quarters": {
+   "liveRosterDiffers": 13,
+   "ex": [
+    {
+     "seed": "vr25-owed-thorp-calm-0",
+     "house": "Fishing community",
+     "birthDerivers": "[{\"name\":\"Fishing Landing\",\"location\":\"At the water's edge\",\"desc\":\"Nets, drying racks, upturned boats, and the perpetual smell of salt and fish\",\"landmarks\":[\"",
+     "liveRoster": "[]"
+    },
+    {
+     "seed": "vr25-owed-hamlet-calm-1",
+     "house": "Access to parish church",
+     "birthDerivers": "[{\"name\":\"Religious Quarter\",\"location\":\"Eastern district (traditional)\",\"desc\":\"Houses of worship, cloisters, quiet streets with priests and pilgrims\",\"landmar",
+     "liveRoster": "[{\"name\":\"Alehouse & Common\",\"location\":\"Village centre\",\"desc\":\"The alehouse and a scrap of common ground: the social heart of the settlement\",\"landmarks\":[\"Co"
+    },
+    {
+     "seed": "vr25-owed-village-calm-2",
+     "house": "Woodcutter's camp",
+     "birthDerivers": "[{\"name\":\"Religious Quarter\",\"location\":\"Eastern district (traditional)\",\"desc\":\"Houses of worship, cloisters, quiet streets with priests and pilgrims\",\"landmar",
+     "liveRoster": "[{\"name\":\"Religious Quarter\",\"location\":\"Eastern district (traditional)\",\"desc\":\"Houses of worship, cloisters, quiet streets with priests and pilgrims\",\"landmar"
+    }
+   ]
+  },
+  "cast": {
+   "liveRosterDiffers": 0,
+   "ex": []
+  }
+ },
+ "totals": {
+  "towns": 9,
+  "variants": 116,
+  "noHiddenTowns": 5,
+  "noHiddenVariants": 60
+ }
+}

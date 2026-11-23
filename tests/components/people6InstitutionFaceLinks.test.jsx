@@ -201,23 +201,27 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
   const CHURCHED = { ...SETTLEMENT, institutions: [...SETTLEMENT.institutions, { name: 'Parish church', category: 'Religious', desc: 'Stone and a bell.' }], npcs: [...SETTLEMENT.npcs, PASTOR] };
 
   it('the resolvers: the registry form, by gender; nothing for a card with no institution', () => {
-    expect(cardHonorificOf(PASTOR)).toBe('Pastor');
-    expect(faceNameOf(PASTOR)).toBe('Pastor Robert Thomas');
-    expect(cardHonorificOf(ABBESS)).toBe('Mother Abbess'); // the pool's pick for npc_abbey::Abbey, the feminine form
-    // the pick is a pure function of the card's id and its house: stable, and the same on every call
+    // re-recorded VR47 (2026-11-20): the pick is seeded by the name and the title (faceHonorifics.js :: honorificSeedOf), so
+    // Robert Thomas the priest draws "Father" from the pool (the owner's example "Pastor" stays the pool's seedless form)
+    expect(cardHonorificOf(PASTOR)).toBe('Father');
+    expect(faceNameOf(PASTOR)).toBe('Father Robert Thomas');
+    expect(cardHonorificOf(ABBESS)).toBe('Mother Abbess'); // the pool's pick for Hild Wren::the abbot, the feminine form
+    // the pick is a pure function of the name and the title (VR47): stable, the same on every call, and never moved by the
+    // card's id (a shared page re-keys it per read) or its house's key (a withheld field)
     expect(cardHonorificOf({ ...PASTOR })).toBe(cardHonorificOf(PASTOR));
-    expect(cardHonorificOf({ ...PASTOR, id: 'npc_robert' })).toBe('Reverend');
+    expect(cardHonorificOf({ ...PASTOR, id: 'npc_robert' })).toBe(cardHonorificOf(PASTOR));
+    expect(cardHonorificOf({ ...PASTOR, institution: { ...PASTOR.institution, key: 'Chapel' } })).toBe(cardHonorificOf(PASTOR));
     expect(cardHonorificOf(REEVE)).toBe('Reeve');
     expect(faceNameOf(STRANGER)).toBe('Wynn Tallow');
     expect(cardHonorificOf(STRANGER)).toBe('');
   });
 
-  it('the institution card prints "Pastor Robert Thomas" as the door', () => {
+  it('the institution card prints the honorific and the name ("Father Robert Thomas", VR47) as the door', () => {
     act(() => { useStore.setState({ settlement: CHURCHED }); });
     const setActiveTab = vi.fn();
     const { container } = render(<Dossier settlement={CHURCHED} setActiveTab={setActiveTab}><InstitutionsTab settlement={CHURCHED} /></Dossier>);
     const row = within(cardOf(container, 'Stone and a bell.')).getByTestId('institution-face');
-    expect(row.textContent).toBe('Connection: Pastor Robert Thomas'); // re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:")
+    expect(row.textContent).toBe('Connection: Father Robert Thomas'); // re-keyed OWNER-WORDS-DOSSIER item 1 (the row opens on "Connection:"); VR47: was 'Pastor'
     fireEvent.click(within(row).getByRole('button', { name: 'Go to Robert Thomas' }));
     expect(useStore.getState().focusedEntity?.id).toBe(entityIdFor('npc', PASTOR));
   });
@@ -229,7 +233,7 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
     expect(heading.parentElement.textContent.startsWith('Robert Thomas')).toBe(true);
     expectAbsentWithAnchor([...heading.parentElement.children].map((n) => n.textContent), 'the priest', 'Robert Thomas', 'no title beside the name');
     // the role row reads the SAME picked form as the institution card's row
-    expect(getByTestId('npc-role').textContent).toBe('Pastor');
+    expect(getByTestId('npc-role').textContent).toBe('Father'); // VR47: was 'Pastor'
     expect(faceNameOf(PASTOR)).toBe(`${getByTestId('npc-role').textContent} Robert Thomas`);
     // the role row follows the line holding the door
     expect(getByTestId('npc-institution-door').closest('div').nextElementSibling).toBe(getByTestId('npc-role'));
@@ -254,13 +258,13 @@ describe('5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the ins
     expect(cardHonorificOf(v)).toBe('');
     // FIX-PUBLIC-VEIL: an open house's honorific prints on the public card as on the DM's
     const pub = toPublicSafe(CHURCHED).npcs.find((n) => n.name === 'Robert Thomas');
-    expect(faceNameOf(pub)).toBe('Pastor Robert Thomas');
+    expect(faceNameOf(pub)).toBe('Father Robert Thomas'); // VR47: was 'Pastor'
     // a veiled house's face is bare on the public card
     const hidden = { ...CHURCHED, npcs: CHURCHED.npcs.map((n) => (n.id === 'npc_parish-church' ? { ...n, institution: { ...n.institution, veiled: true } } : n)) };
     const pubHidden = toPublicSafe(hidden).npcs.find((n) => n.name === 'Robert Thomas');
     expect(faceNameOf(pubHidden)).toBe('Robert Thomas');
     expect(cardHonorificOf(pubHidden)).toBe('');
     // the unveiled control
-    expect(faceNameOf(CHURCHED.npcs.find((n) => n.id === 'npc_parish-church'))).toBe('Pastor Robert Thomas');
+    expect(faceNameOf(CHURCHED.npcs.find((n) => n.id === 'npc_parish-church'))).toBe('Father Robert Thomas'); // VR47: was 'Pastor'
   });
 });

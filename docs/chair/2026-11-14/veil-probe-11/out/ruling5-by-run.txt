@@ -1,0 +1,68 @@
+ruling (5), by run on a local cluster: hand town town-p (a covert prominent tie) and town-pc (control: the prominent tie open)
+v11p-p211-base-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-base-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-base-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-dm-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-p211-dm-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-p211-dm-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-veil-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-veil-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-p211-veil-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-base-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-base-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-base-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-dm-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-t203-dm-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-t203-dm-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-veil-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-veil-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-t203-veil-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-base-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-base-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-base-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-dm-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-x211-dm-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: true
+v11p-x211-dm-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-veil-gallery.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-veil-import.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11p-x211-veil-link.json prominentRelationship covert text sent: true; covert tie in relationships[]: false
+v11pc-p211-base-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-base-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-base-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-dm-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-p211-dm-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-p211-dm-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-veil-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-veil-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-p211-veil-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-base-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-base-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-base-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-dm-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-t203-dm-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-t203-dm-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-veil-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-veil-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-t203-veil-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-base-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-base-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-base-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-dm-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-x211-dm-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: true
+v11pc-x211-dm-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-veil-gallery.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-veil-import.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+v11pc-x211-veil-link.json prominentRelationship covert text sent: false; covert tie in relationships[]: false
+== the deployed client's page model (master db832c892, deployed.probe.jsx) over t203 (today) and p211 (203 + the frozen 211)
+p211-v11p-p211-base-page.json covert prominent drawn: true
+p211-v11p-p211-dm-page.json covert prominent drawn: true
+p211-v11p-p211-veil-page.json covert prominent drawn: true
+p211-v11pc-p211-base-page.json covert prominent drawn: false
+p211-v11pc-p211-dm-page.json covert prominent drawn: false
+p211-v11pc-p211-veil-page.json covert prominent drawn: false
+t203-v11p-t203-base-page.json covert prominent drawn: true
+t203-v11p-t203-dm-page.json covert prominent drawn: true
+t203-v11p-t203-veil-page.json covert prominent drawn: true
+t203-v11pc-t203-base-page.json covert prominent drawn: false
+t203-v11pc-t203-dm-page.json covert prominent drawn: false
+t203-v11pc-t203-veil-page.json covert prominent drawn: false

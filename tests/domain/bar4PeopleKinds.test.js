@@ -83,7 +83,9 @@ const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
 /** The read's honorific rows: [row, town, the woman, the refused word, her word] */
 const HONORIFICS = /** @type {Array<[string, string, string, string, string]>} */ ([
   ['C2708', 'bar0-city-under_siege+famine-rand-22', 'Khulood al-Misri', 'Landlord', 'Landlady'],
-  ['C18802', 'bar0-hamlet-calm-rand-23', 'Latifa al-Amin', 'Landlord', 'Landlady'],
+  // re-recorded VR47 (2026-11-20: the pick is seeded by the name and the title, faceHonorifics.js :: honorificSeedOf): Latifa
+  // al-Amin draws the pool's unsexed "Host"; she is still no Landlord. C2708 above still reaches the feminine form.
+  ['C18802', 'bar0-hamlet-calm-rand-23', 'Latifa al-Amin', 'Landlord', 'Host'],
 ]);
 /** KEEP: a successor's line that is true (the namer heads a power the named sits in: the place is the head's seat) still prints */
 const KEEP = /** @type {Array<[string, string]>} */ ([

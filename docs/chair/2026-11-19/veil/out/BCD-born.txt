@@ -1,0 +1,68 @@
+B, C, D ON BORN TOWNS (VEIL-19's builder). Two probes, base chain and twin against the tree's (each on a local chain of that
+tree's 001..212; the base is `git archive bedd5a392`):
+  r5-born  docs/chair/2026-11-14/veil-probe-13/measure/r5-born.probe.jsx R5_N=4 (48 births, both shapes, three shares: no veil
+           record, the default veil, the default veil with Reveal DM; gallery, link, import, twin), compared by
+           veil-probe-16/measure/born-cmp.mjs
+  bcd-born measure/bcd-born.probe.jsx R5_N=4 (the same 48 births, both shapes, the default veil and EVERY EYE THE CURATE MODEL
+           OFFERS SHUT, Reveal DM off and on, the four reads), compared by measure/bcd-born-cmp.mjs: what each item moves, and
+           that nothing else moves (the fingerprint outside the trace, the two flag copies, the income rows and the income
+           prose rungs)
+
+B (the trace by positive account, with VR4 ii-12):
+  r5-born: 1152 rows | 1152; rows whose fingerprint differs 102 (every one a Reveal-DM read of a town that hides a house
+           whole: 17 towns x 2 shapes x gallery, import, twin); reads that raise 0 | 0; server against twin 0 | 0
+  bcd-born, each veil (the default veil; every eye shut: the same answer): rows 768; differ 102; differ OUTSIDE the trace 0;
+           server-twin 0 | 0; reads that raise 0; rows that send what the base withheld 0.
+  WHAT B DROPS: on the 17 born towns that hide a house whole (of 48), per Reveal-DM read, summed over the towns: 213 trace
+           entries (178 `institution.<id>` entries no listed house accounts for, in 15 towns, 16 distinct ids: houses the
+           birth weighed and did not keep, foundling_home 22, wizard_s_tower 19, almshouse 18, hireling_hall 16,
+           caravan_masters_exchange 16, alchemist_quarter 14, assay_office 12, printing_house 12, rookery 10, hired_blades 8,
+           black_market_bazaar 8, ...; and the 35 allegiance receipts whose house is hidden whole, with their 35 handler and
+           10 power lines) and 275 effects whose target is an `institution.<kind>` no house is named for (42 distinct:
+           institution.market 16, smith 15, tanner 14, alchemist 12, weaver 12, church 11, ...). Causes left on kept
+           entries: 0 dropped (the 8 unaccounted causes sit in withheld entries). Over the 102 rows: 1278 entries (210
+           allegiance receipts, 270 power and handler lines), 1650 effects. A town that hides no house whole: its trace unmoved.
+
+B2 (V10-6, ruling VR21: no counter taken before a removal):
+  THE COUNTERS B TOUCHES: the trace's `ts` alone (each entry's only number; the engine's sequence 0..n-1, stored dense: the
+           largest born town's 195 entries are ts 0..194). Causes and effects hold no index, step number or count.
+  v106-born (base chain and twin | B2's): reads that hide a house whole 216 | 216; READS WITH A HOLE IN THE SERVED ts 216 | 0
+           (gallery 72 | 0, import 72 | 0, twin 72 | 0); the reader's repro (rv10-gap-town-none-0, default veil, Reveal DM):
+           21 holes | 0; server against twin 0 | 0; reads that raise 0 | 0.
+  r5-born (base | B2): 1152 rows, 102 differ (the same Reveal-DM reads of the 17 towns that hide a house whole as B's);
+           (B | B2): 102 differ (their ts re-derived); 0 raise; server against twin 0.
+
+V10-5 MEASURED FIRST AND NOT BUILT (measure/v105-measure.probe.jsx; out/V105-measure.txt; through the twin of the tree at B,
+  the 48 births, both shapes, the default veil and every eye shut, Reveal DM off and on): the proposed cure withholds every
+  hideable catalogue name (22, cardVeil.js :: isHideableHouse over the catalogue's rows) that no house still listed bears, as a
+  hidden name, on a read that hides a house whole. Of 192 reads, 68 hide a house whole; on 36 of them it would take 186 keys
+  and strings: 156 by "Thieves' guild (powerful)" (its form without the qualifier is the SHOWN criminal power "Thieves' Guild":
+  its name in powerStructure.factions[].faction, people's memberships and goals and their targets, current tensions, the
+  stress cast's stakes, the power relationships' narrative and DM note) and 30 by "Black market" (economicState.situationDesc
+  8, the trace's effects, ...). That is ordinary content, and against the chair's ruling (1) (a shown power keeps its name):
+  per the chair's instruction, STOPPED and reported, not built. The chain half: 0 reads would lose a chain (no born chain
+  names a processing house that no listed house answers).
+
+C (every flag by getInstFlags, R3, VR4 side finding 3):
+  THE COPIES (measure/flag-copies.probe.jsx, the 48 births): every born town stores the engine's 32 flags at
+           economicState.compound.inst and economicState.safetyProfile.compound.inst, and nowhere else;
+           economicState.foodSecurity.foodRecord holds one key of the same spelling (hasGranary), which is the food
+           record's own fact ("a real granary stands", foodGenerator.js), not a copy of the flag: not touched.
+  bcd-born (base | C's tree), each veil (the default veil; every eye shut): rows 768; differ 102 (B's alone); differ OUTSIDE
+           the trace, the flags, the income rows and the prose 0; FLAGS THAT MOVE: 0 (no born read sends a true flag that
+           the houses it still lists do not raise by the engine's getInstFlags over their stored records: 544 reads of the
+           17 towns that hide a house whole, both copies, every flag checked); flags raised 0; server-twin 0 | 0; 0 raise.
+           So on born towns C moves nothing beyond what 212 (15) already lowered: the born hidden houses (smuggling network,
+           underground network, black market, thieves' guild, street gang, ...) raise only the five criminal flags there.
+  r5-born (B2 | C): 1152 rows, 0 differ; (base | C): 102 differ, B's.
+
+D (the income row by its house; the shares re-derived, VR6; `weight` withheld, VR19):
+  bcd-born (base | D's tree), each veil (the default veil; every eye shut: the same answer): reads that withhold an income row
+           128 (the 8 towns with a criminal row; on born towns the default groupings already withheld it, so the house's eye
+           adds no born read); their sums base {75: 16, 82: 16, 83: 32, 84: 32, 86: 16, 89: 16} | D {100: 128}; reads sending
+           `weight` 768 | 0; reads that lose an income prose rung 64 (the new shape's 8 towns x 2 x 4 reads: incomeMix and
+           criminalLine at economy:economics and their @ copies at economy:services, economy:resources, economy:daily_life,
+           counted OUTSIDE by the probe's fingerprint, which strips economy:economics alone: D's own, checked path by path
+           on village/calm/0); rows sent that the base withheld 0; server-twin 0 | 0; 0 raise.
+  r5-born (C | D): 1152 rows, 1152 differ: every read loses `weight` (unconditional, whatever the veil); 0 raise; server against
+           twin 0. v106-born at D: 0 holes in the served ts, server against twin 0.

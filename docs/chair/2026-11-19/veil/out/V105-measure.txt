@@ -1,0 +1,49 @@
+v105-measure: 48 towns; hideable catalogue names 22: ["Local fence","Outlaw shelter","Fence (word of mouth)","Bandit affiliate","Smuggling waypoint","Underground network","Smuggling operation","Street gang","Front businesses","Rookery","Smuggling network","Multiple criminal factions","Thieves' guild chapter","Whisper market","Black market","Contract killer","Kidnapping ring","Human trafficking network","Thieves' guild (powerful)","Underground city","Black market bazaar","Assassins' guild"]
+reads 192; reads that hide a house whole 68
+(1) THE NAMES: reads that would lose a key or string 36; keys and strings 186
+  by path:
+    $.simulationTrace[].targetId: 26
+    $.npcs[].goal.long: 17
+    $.npcs[].goal.short: 17
+    $.powerStructure.factions[].faction: 16
+    $.npcs[].memberships[].power: 15
+    $.npcs[].goal.intent.long.target.id: 14
+    $.history.currentTensions[].factions[]: 12
+    $.stress.cast.stakes[].factionId: 12
+    $.stressors.cast.stakes[].factionId: 12
+    $.npcs[].goal.intent.short.target.id: 11
+    $.simulationTrace[].downstreamEffects[].target: 8
+    $.economicState.situationDesc: 8
+    $.powerStructure.factionRelationships[].pair[]: 6
+    $.powerStructure.factionRelationships[].narrative: 6
+    $.powerStructure.factionRelationships[].dmNote: 6
+  by name:
+    Thieves' guild (powerful): 156
+    Black market: 30
+  e.g.:
+    town/infiltrated/1 default off $.history.currentTensions[0].factions[2] = "Thieves' Guild"
+    town/infiltrated/1 default off $.powerStructure.factions[0].faction = "Thieves' Guild"
+    town/infiltrated/1 default off $.stress.cast.stakes[0].factionId = "Thieves' Guild"
+    town/infiltrated/1 default off $.stressors.cast.stakes[0].factionId = "Thieves' Guild"
+    town/infiltrated/1 default dm $.powerStructure.factions[0].faction = "Thieves' Guild"
+    town/infiltrated/1 default dm $.powerStructure.factionRelationships[0].pair[1] = "Thieves' Guild"
+    town/infiltrated/1 default dm $.powerStructure.factionRelationships[0].narrative = "Thieves' Guild has bought key people in Corrupt Council. Its own crimes go unpunished, and"
+    town/infiltrated/1 default dm $.powerStructure.factionRelationships[0].dmNote = "Ask: which specific officials have arrangements with Thieves' Guild? The answer drives doz"
+    town/infiltrated/1 default dm $.npcs[0].goal.long = "Leave Thieves' Guild stronger than they found it, with Tertulla Vetus still second and con"
+    town/infiltrated/1 default dm $.npcs[0].memberships[0].power = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[3].memberships[0].power = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[4].memberships[0].power = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[5].goal.short = "Gather proof of what passes between Corrupt Council and Thieves' Guild, and keep it somewh"
+    town/infiltrated/1 default dm $.npcs[5].goal.intent.short.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[7].goal.long = "Make the bond between Corrupt Council and Thieves' Guild so deep that neither can afford t"
+    town/infiltrated/1 default dm $.npcs[7].goal.intent.long.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[9].goal.long = "End the arrangement between Corrupt Council and Thieves' Guild on their own terms."
+    town/infiltrated/1 default dm $.npcs[9].goal.intent.long.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[11].goal.long = "Grow rich on the dealings between Corrupt Council and Thieves' Guild, and be out of it bef"
+    town/infiltrated/1 default dm $.npcs[11].goal.intent.long.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[13].goal.short = "Learn exactly what Corrupt Council and Thieves' Guild have agreed in private, and who agre"
+    town/infiltrated/1 default dm $.npcs[13].goal.intent.short.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.npcs[14].goal.short = "Keep the dealings between Corrupt Council and Thieves' Guild out of sight for another seas"
+    town/infiltrated/1 default dm $.npcs[14].goal.intent.short.target.id = "Thieves' Guild"
+    town/infiltrated/1 default dm $.history.currentTensions[0].factions[2] = "Thieves' Guild"
+(2) THE CHAINS: reads with a chain whose processing names no listed house answers 0; chains 0

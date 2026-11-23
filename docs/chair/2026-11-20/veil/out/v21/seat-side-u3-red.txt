@@ -1,0 +1,64 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 16151 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ❯ tests/store/galleryImportServedBand.test.js (4 tests | 2 failed) 5738ms
+     × BAND: the importer's record carries the served band on every town 6ms
+     × DEPENDENT: the legitimacy cause, the readiness score and each condition's severity read the served band 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > BAND: the importer's record carries the served band on every town
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "thorp-famine-2 (Subsistence): served Struggling, imported undefined",
++   "hamlet-plague_onset-3 (Subsistence): served Struggling, imported undefined",
++ ]
+
+ ❯ tests/store/galleryImportServedBand.test.js:113:17
+    111|     const bad = towns.filter((t) => t.saved.economicState?.prosperity …
+    112|       .map((t) => `${t.seed}${t.subsistence ? ' (Subsistence)' : ''}: …
+    113|     expect(bad).toEqual([]);
+       |                 ^
+    114|   });
+    115|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > DEPENDENT: the legitimacy cause, the readiness score and each condition's severity read the served band
+AssertionError: expected [ …(5) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "thorp-famine-2: breakdown.prosperity undefined vs the band's -20",
++   "thorp-famine-2: breakdown.prosperity undefined vs born -20",
++   "hamlet-plague_onset-3: breakdown.prosperity undefined vs the band's -20",
++   "hamlet-plague_onset-3: severity plague 0.76 vs 0.7",
++   "hamlet-plague_onset-3: breakdown.prosperity undefined vs born -20",
++ ]
+
+ ❯ tests/store/galleryImportServedBand.test.js:139:17
+    137|       }
+    138|     }
+    139|     expect(bad).toEqual([]);
+       |                 ^
+    140|   });
+    141|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  03:27:06
+   Duration  5.89s (transform 2.39s, setup 25ms, import 36ms, tests 5.74s, environment 0ms)
+
+exit 1

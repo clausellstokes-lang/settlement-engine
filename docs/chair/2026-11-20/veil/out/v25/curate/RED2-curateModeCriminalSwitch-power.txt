@@ -1,0 +1,62 @@
+       × the predicate: true only for shown or partly with a house the applier removes whole and a criminal power; its house reading is applyVeil's 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > its words are the chair's, two sentences, word for word
+AssertionError: expected 'While a criminal house is hidden, the…' to be 'While a criminal house is hidden, the…' // Object.is equality
+
+Expected: "While a criminal house is hidden, the town's criminal powers stay off the shared page too, so they cannot give the house away. Show the house to show them, or leave it hidden and they stay off."
+Received: "While a criminal house is hidden, the town's criminal powers are kept off the shared page too, so they cannot give the house away; show the house to show them, or leave it hidden and they stay off."
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:184:30
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > does not show where the town has NO criminal power, though a criminal house is hidden and the switch reads partly
+AssertionError: the notice shows on a town with no criminal power: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:191:79
+    189|       fireEvent.click(screen.getByRole('button', { name: 'Show Crimina…
+    190|       expect(group.textContent).toContain(W.partly);
+    191|       expect(has(group), 'the notice shows on a town with no criminal …
+       |                                                                               ^
+    192|       fireEvent.click(button); // Hide all
+    193|       fireEvent.click(button); // Show all
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > the predicate: true only for shown or partly with a house the applier removes whole and a criminal power; its house reading is applyVeil's
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:243:95
+    241|       // the third condition: a criminal power in the screen's own cop…
+    242|       const bare = galleryPayloadFor(noPower);
+    243|       expect(criminalHouseHiddenWhileShown('partly', curateModelFor(ba…
+       |                                                                                               ^
+    244|       expect(criminalHouseHiddenWhileShown('partly', model, null)).toB…
+    245|       expect(criminalHouseHiddenWhileShown('partly', model, { factions…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 13 passed (16)
+   Start at  11:44:46
+   Duration  7.01s (transform 2.24s, setup 57ms, import 3.02s, tests 2.87s, environment 861ms)
+
+[gate-tail] end:  11:44:53 up 32 min,  0 user,  load average: 5.68, 4.30, 3.77
+[gate-tail] full log: /tmp/gate-tail.6217.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

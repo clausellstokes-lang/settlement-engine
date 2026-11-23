@@ -1,0 +1,19 @@
+-- 212_share_veil_later_cures.down.sql — reversal for migration 212 (COHERENCE-VEIL-7).
+--
+-- DATA-SAFE and WHOLE, per supabase/rollback/README.md: 212 wrote no row, column, constraint or
+-- policy, so its reversal is entirely schema: the five functions it restated go back to 211's
+-- statements (the file at 333b33973, sha256 eface6d0...0be01, copied verbatim), then the ten
+-- helpers it created are dropped by signature.
+--
+-- ORDER (last in, first out): run this BEFORE 211's own down file. 211's down file drops only the
+-- forty helpers 211 creates, so run after 212 without this one it would leave 212's ten behind.
+-- The functions go back FIRST because they call the helpers; dropping a helper first would leave
+-- them raising "function does not exist" for the width of the script. CREATE OR REPLACE keeps each
+-- function's grants, which 212 restated unchanged; the two reads' grants are restated here too.
+--
+-- PROVEN BY EXECUTION on local chains (docs/chair/2026-11-13/veil-probe-7/): 001..211 + 212 + this
+-- file equals 001..211, and 203 + 211 + 212 + this file equals 203 + 211, by the lane's rehearsal
+-- comparison (every function's body, arguments, volatility, definer flag, settings, grants, owner):
+-- 0 lines differ. tests/security/galleryVeilCures.pglite.test.js pins it.
+--
+-- NOT reversed, because there is nothing to: no stored row was written by 212.

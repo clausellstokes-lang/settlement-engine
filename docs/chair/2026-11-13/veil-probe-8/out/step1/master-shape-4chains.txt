@@ -1,0 +1,489 @@
+towns 24; markers planted 4447; hidden sentences 8825; shares (every eye shut by hand) 96; rows hidden by hand 23368; reads 2304; births that threw 0; reads that raised or sent no row 0; houses hidden whole 42; chain names of hidden houses 3
+reads: q203p211 gallery 96 · q203p211 import 96 · q203p211 link 96 · q203p211 map 96 · q203p211 mapimport 96 · q203p211 maplink 96 · q203p212 gallery 96 · q203p212 import 96 · q203p212 link 96 · q203p212 map 96 · q203p212 mapimport 96 · q203p212 maplink 96 · q211 gallery 96 · q211 import 96 · q211 link 96 · q211 map 96 · q211 mapimport 96 · q211 maplink 96 · q212 gallery 96 · q212 import 96 · q212 link 96 · q212 map 96 · q212 mapimport 96 · q212 maplink 96
+
+== EVERYTHING HIDDEN BY HAND THAT IS STILL IN A PAYLOAD: 242 rows
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16,"mapimport":16}  towns 8
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Rival organisations. Vh8K73Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34,"mapimport":34}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. Vh8K66Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36,"mapimport":36}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. Vh8K71Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12,"mapimport":12}  towns 6
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Organised bands of hired blades. Major forces, hundreds to thousands strong. Vh8K69Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10,"mapimport":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. Vh8K12Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38,"mapimport":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. Vh8K11Q
+q203p211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. Vh8K35Q
+q203p211 | DM reveal on | marker [exact] relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q203p211 | DM reveal on | marker [exact] relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q203p211 | DM reveal on | marker [exact] relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q203p211 | DM reveal on | marker [exact] relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. Vh8K49Q
+q203p211 | DM reveal on | marker [exact] tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations Vh8K3
+q203p211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Black market"
+q203p211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful)"
+q203p211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":12,"import":12}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful) converts raw inputs into chain output."
+q203p211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "processor.Thieves' guild (powerful)"
+q203p211 | DM reveal on | name [exact] a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q203p211 | DM reveal on | name [exact] a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40,"mapimport":40}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+q203p211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":120,"import":120}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network converts raw inputs into chain output."
+q203p211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":32,"import":32}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "processor.Smuggling network"
+q203p211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":28,"import":28}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Front businesses" in "Front businesses"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black_market"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q203p211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  simulationTrace[].targetId  {"gallery":8,"import":8}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "institution.black_market_bazaar"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "black_market"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in ""Contract killer" was absorbed into "assassins' guild". The larger institution provides equivalent function."
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in "institution.assassins_guild"
+q203p211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].targetId  {"gallery":88,"import":88}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "institution.smuggling_network"
+q203p211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "blackMarket"
+q203p211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p211 | DM reveal on | name [joined] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "blackMarket"
+q203p211 | DM reveal on | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q203p211 | DM reveal on | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q203p211 | DM reveal on | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16,"mapimport":16}  towns 8
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Rival organisations. Vh8K73Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34,"mapimport":34}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. Vh8K66Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36,"mapimport":36}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. Vh8K71Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12,"mapimport":12}  towns 6
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Organised bands of hired blades. Major forces, hundreds to thousands strong. Vh8K69Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10,"mapimport":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. Vh8K12Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38,"mapimport":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. Vh8K11Q
+q203p211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. Vh8K35Q
+q203p211 | no reveal | marker [exact] relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q203p211 | no reveal | marker [exact] relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q203p211 | no reveal | marker [exact] relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q203p211 | no reveal | marker [exact] relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. Vh8K49Q
+q203p211 | no reveal | marker [exact] tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations Vh8K3
+q203p211 | no reveal | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Black market"
+q203p211 | no reveal | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful)"
+q203p211 | no reveal | name [exact] a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q203p211 | no reveal | name [exact] a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40,"mapimport":40}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+q203p211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black_market"
+q203p211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q203p211 | no reveal | name [folded] a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "black_market"
+q203p211 | no reveal | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p211 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p211 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q203p211 | no reveal | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p211 | no reveal | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p211 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p211 | no reveal | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q203p211 | no reveal | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q203p211 | no reveal | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q203p212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q203p212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  simulationTrace[].targetId  {"gallery":8,"import":8}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "institution.black_market_bazaar"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in ""Contract killer" was absorbed into "assassins' guild". The larger institution provides equivalent function."
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in "institution.assassins_guild"
+q203p212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].targetId  {"gallery":88,"import":88}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "institution.smuggling_network"
+q203p212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "blackMarket"
+q203p212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p212 | DM reveal on | name [joined] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "blackMarket"
+q203p212 | DM reveal on | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q203p212 | DM reveal on | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q203p212 | DM reveal on | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q203p212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q203p212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q203p212 | no reveal | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p212 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q203p212 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q203p212 | no reveal | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q203p212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p212 | no reveal | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q203p212 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q203p212 | no reveal | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q203p212 | no reveal | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q203p212 | no reveal | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16,"mapimport":16}  towns 8
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Rival organisations. Vh8K73Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34,"mapimport":34}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. Vh8K66Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36,"mapimport":36}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. Vh8K71Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12,"mapimport":12}  towns 6
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Organised bands of hired blades. Major forces, hundreds to thousands strong. Vh8K69Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10,"mapimport":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. Vh8K12Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38,"mapimport":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. Vh8K11Q
+q211 | DM reveal on | marker [exact] institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. Vh8K35Q
+q211 | DM reveal on | marker [exact] relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q211 | DM reveal on | marker [exact] relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q211 | DM reveal on | marker [exact] relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q211 | DM reveal on | marker [exact] relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. Vh8K49Q
+q211 | DM reveal on | marker [exact] tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations Vh8K3
+q211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Black market"
+q211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful)"
+q211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":12,"import":12}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful) converts raw inputs into chain output."
+q211 | DM reveal on | name [exact] a chain's name for a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "processor.Thieves' guild (powerful)"
+q211 | DM reveal on | name [exact] a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q211 | DM reveal on | name [exact] a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40,"mapimport":40}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+q211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":120,"import":120}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network converts raw inputs into chain output."
+q211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":32,"import":32}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "processor.Smuggling network"
+q211 | DM reveal on | name [exact] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":28,"import":28}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Front businesses" in "Front businesses"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black_market"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q211 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  simulationTrace[].targetId  {"gallery":8,"import":8}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "institution.black_market_bazaar"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "black_market"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in ""Contract killer" was absorbed into "assassins' guild". The larger institution provides equivalent function."
+q211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in "institution.assassins_guild"
+q211 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].targetId  {"gallery":88,"import":88}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "institution.smuggling_network"
+q211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q211 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "blackMarket"
+q211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q211 | DM reveal on | name [joined] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "blackMarket"
+q211 | DM reveal on | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q211 | DM reveal on | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q211 | DM reveal on | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16,"mapimport":16}  towns 8
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Rival organisations. Vh8K73Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34,"mapimport":34}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Full-time keepers of order, numbering about 1% of the city. Vh8K66Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36,"mapimport":36}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars. Vh8K71Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12,"mapimport":12}  towns 6
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: Organised bands of hired blades. Major forces, hundreds to thousands strong. Vh8K69Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10,"mapimport":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. Vh8K12Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38,"mapimport":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. Vh8K11Q
+q211 | no reveal | marker [exact] institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. Vh8K35Q
+q211 | no reveal | marker [exact] relationship.description  ->  prominentRelationship.full  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Nidud Eriksson and Hildigunn Ragnarsson work together because the alternative (working against each other) is worse for both. The alliance holds as lo
+q211 | no reveal | marker [exact] relationship.tension  ->  pressureSentence  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 4
+      e.g. rv5-plant-village-null-0 live gallery: The relationship between Khongorzul Mangghud and Uchakhain Ongut is best understood as pragmatic alliance. Khongorzul Mangghud and Uchakhain Ongut bot
+q211 | no reveal | marker [exact] relationship.tension  ->  prominentRelationship.phrasing  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: The relationship between Nidud Eriksson and Hildigunn Ragnarsson is best understood as pragmatic alliance. A third party is actively working to change
+q211 | no reveal | marker [exact] relationship.tension  ->  prominentRelationship.tension  {"gallery":24,"link":24,"map":24,"import":24,"mapimport":24}  towns 12
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: A third party is actively working to change that calculation. Vh8K49Q
+q211 | no reveal | marker [exact] tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations Vh8K3
+q211 | no reveal | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Black market"
+q211 | no reveal | name [exact] a chain's name for a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":8,"link":8,"map":8,"import":8,"mapimport":8}  towns 3
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Thieves' guild (powerful)" in "Thieves' guild (powerful)"
+q211 | no reveal | name [exact] a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+q211 | no reveal | name [exact] a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40,"mapimport":40}  towns 9
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+q211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black_market"
+q211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q211 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q211 | no reveal | name [folded] a house hidden whole  ->  economicState.activeChains[].chainId  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "black_market"
+q211 | no reveal | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q211 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q211 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q211 | no reveal | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q211 | no reveal | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q211 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q211 | no reveal | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q211 | no reveal | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q211 | no reveal | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q212 | DM reveal on | name [folded] a chain's name for a house hidden whole  ->  simulationTrace[].targetId  {"gallery":8,"import":8}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "institution.black_market_bazaar"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in ""Contract killer" was absorbed into "assassins' guild". The larger institution provides equivalent function."
+q212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":14,"import":14}  towns 3
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Assassins' guild" in "institution.assassins_guild"
+q212 | DM reveal on | name [folded] a house hidden whole  ->  simulationTrace[].targetId  {"gallery":88,"import":88}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "institution.smuggling_network"
+q212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q212 | DM reveal on | name [joined] a chain's name for a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "blackMarket"
+q212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | DM reveal on | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q212 | DM reveal on | name [joined] a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "blackMarket"
+q212 | DM reveal on | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q212 | DM reveal on | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q212 | DM reveal on | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+q212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "An estimated 41% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "black market bazaar"
+q212 | no reveal | name [folded] a chain's name for a house hidden whole  ->  economicState.safetyProfile.safetyDesc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "Siege conditions have transformed the settlement's social character. The garrison maintains order with increasing severi"
+q212 | no reveal | name [folded] a house hidden whole  ->  economicState.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q212 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].desc  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "An estimated 11% of economic activity flows through unofficial channels: guild-organised fencing, extortion, and black m"
+q212 | no reveal | name [folded] a house hidden whole  ->  economicState.incomeSources[].source  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-1 live gallery: "Smuggling network" in "Smuggling Network Revenue"
+q212 | no reveal | name [folded] a house hidden whole  ->  economicState.safetyProfile.compound.inst.names[]  {"gallery":84,"link":84,"map":84,"import":84,"mapimport":84}  towns 11
+      e.g. rv5-plant-metropolis-infiltrated-0 live gallery: "Smuggling network" in "smuggling network"
+q212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | no reveal | name [joined] a chain's name for a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-metropolis-null-0 live gallery: "Black market" in "arcaneBlackMarket"
+q212 | no reveal | name [joined] a house hidden whole  ->  economicState.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.compound.inst.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "hasBlackMarket"
+q212 | no reveal | name [joined] a house hidden whole  ->  economicState.safetyProfile.flags.<key>  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "arcaneBlackMarket"
+q212 | no reveal | text [folded only] event.lastingEffects  ->  history.legacyAnnotations[].annotation  {"gallery":78,"link":78,"map":78,"import":78,"mapimport":78}  towns 21
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: "price_ceilings_on_the_affected_goods_still_enforced_in_lean_" in "The Shortage (16 years ago) created pressure that has not been fully resolved: current economic pressure has structura
+q212 | no reveal | text [folded only] grouping.note  ->  powerStructure.recentConflict  {"gallery":4,"link":4,"map":4,"import":4,"mapimport":4}  towns 2
+      e.g. rv5-plant-village-null-1 live gallery: "settlement_is_under_active_siege" in "The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about poli"
+q212 | no reveal | text [folded only] institution.desc  ->  economicState.tradeDependencies[].detail  {"gallery":2,"link":2,"map":2,"import":2,"mapimport":2}  towns 1
+      e.g. rv5-plant-city-null-0 live gallery: "permanent_teleportation_circle" in "stable ley line for permanent teleportation circle"
+summary exit 0

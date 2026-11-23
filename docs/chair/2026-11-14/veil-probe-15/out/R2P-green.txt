@@ -1,0 +1,53 @@
+VEIL-15 ITEM 2, R2 (THE PROCESSOR MATCH LOWERED AS THE ENGINE LOWERS), GREEN ON THE TREE (1d8ffe08e + this change)
+
+1. WHAT MOVED
+  212 :: _gallery_veil_hidden_name (same signature; the rollback drops it by signature already, so the down file is unchanged):
+    both sides lowered by translate(replace(replace(t, chr(304), 'i' || chr(775)), chr(8490), 'k'), A-Z, a-z) in place of
+    lower(); the needle the first twelve of that. An ASCII needle: the engine's match (R2P-red section 1: every code point of
+    every plane). A NEEDLE HOLDING A CODE POINT OUTSIDE ASCII, which no server form lowers as JavaScript does: WHERE UNSURE,
+    WITHHOLD: a house hidden whole answers it where it is the name or is named outside ASCII; an open house only where it is
+    the name (a stamped open house never). Each part falls toward withholding against the engine's own answer: a house that
+    the engine reads as answering such a needle is named outside ASCII (toLowerCase maps ASCII to ASCII), so it answers here
+    too; an open house that is the name answers in the engine too; the engine's identity set for such a needle is empty (282
+    of 282 catalogue names ASCII), so no stamped house answers it there either. Header entry (25).
+  Twin, gallerySecondHomes.js :: withholdSecondHomes: needleOf (toLowerCase, sliced), answers (unchanged rule), hiddenName
+    restated with the same two branches (`sure`: the needle in ASCII, by NON_ASCII). It moves for the needle outside ASCII
+    only: there no server form can follow toLowerCase (R2P-red section 1: 649 of 3630 such pairs differ under F).
+  212: one file, create-or-replace, after the frozen 211; applied twice on a chain of this tree: exit 0; the down file, then 212
+    again: 40 _gallery_veil* functions after the down (211's), 69 after 212, _gallery_veil_hidden_name gone after the down.
+
+2. THE ARM (VEIL-13 R2, tests/security/galleryVeilHandRows.pglite.test.js): 0 sends, 0 paths at which the server and the twin
+  differ, on both veiled shares, every read. The file 15 of 15.
+
+3. THE RULE IS ONE (measure/r2-rule.probe.mjs, the same 60 towns and 785 processing names as at the base, gallery read on
+  chains of this tree's migrations; the engine's answer withholds 234):
+    ctype C.UTF-8: server and twin differ on 0 (base 1); sent where the engine withholds: server 0, twin 0
+    ctype C:       server and twin differ on 0 (base 28); sent where the engine withholds: server 0 (base 10), twin 0
+  WITHHELD WHERE THE ENGINE'S MATCH ALONE KEEPS (551 names), server and twin alike: ASCII needles 29 -> 29 of 294 (the name
+  search's own sweeps, unmoved); needles outside ASCII 20 -> 213 of 257 (the cost of WHERE UNSURE, on towns written dense
+  with such names; the engine writes none: R2P-red section 1).
+
+4. GUARDS (GATE_MUTEX_TIER=shared, two workers; the six files): 6 files passed, 117 of 117 (116 at the base and the new arm:
+  galleryVeilHandRows 15, gallerySecondHomes 6, galleryVeilCures 32, galleryServerVeil 17, gallerySanitizer 36,
+  galleryMapMemberCount 11; the run's reporter printed two files' lines, the rest by the total). VEIL-13 RULING 5 green; the
+  applier (_gallery_apply_member_overrides) is not touched, so the V13-1 plant on the link has nothing new to prove.
+  THE ACCEPTANCE RUN (run-all.sh): exit 1, 35 of 37, a07 and d06 the only FAIL rows, e06 PASS, the twin 15 of 15; the deep and
+  large rows PASS (x212 36, 411, 1160 ms against x211 27, 357, 1132).
+
+5. BORN (measure/r2-born.probe.jsx; the guard's born towns, gallerySecondHomes.pglite.test.js :: TOWNS, both stored shapes,
+  Reveal DM off and on, 192 rows a side; base: the archive on a chain of its migrations; after: this tree on its own):
+  processing names withheld (of 410 on the 8 records; dependencies 58 more, every one of the 468 in ASCII), base -> after,
+  each of gallery | link | import | twin, Reveal DM off and on alike:
+    the default veil:                          26 -> 26 (16 chains whole -> 16)
+    every other house's whole eye opened:      12 -> 12 (6 -> 6)
+    every house's whole eye shut:              26 -> 26 (16 -> 16)
+  rows that moved: 0 of 192; shares on which the four reads disagree: 0 of 48 before, 0 after. UNMOVED, as expected.
+
+6. GATES: typecheck:domain:strict 1113 (ceiling 1113); typecheck:ratchet 167 (ceiling 167); eslint on the touched src and
+  test files: exit 0. THE LIGHTING WALKER (tests/lint/sovereigntyLightingContract.walker.test.js): 33 of 34, RED by the one
+  title this change adds ("THE CENSUS IS AN ASSERTION": expected 29269 to be 29268); the census is the seat's to re-take.
+
+7. THE BYTES: 211 eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 and its down
+  ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f, untouched; 212 after
+  aafda53f73fe955e7cfb2601e65b43412a97bf896bf88ec32ba3149a28707892, its down 654d62aa6905aae5eea7518af9f54680cfc8192269110aae41d7384a1cac6d3e
+  (unchanged). Scratch databases this item made (v15r2b, v15r2g, v15r2bc, v15r2gc, v15r2ctype): dropped.

@@ -370,6 +370,19 @@ export const ownOfficeForms = (title, pool) => { const kept = pool.filter((h) =>
 const HEAD_OF = /^the head of (.+)$/i;
 
 /**
+ * THE HONORIFIC'S SEED (VR47, the chair's ruling of 2026-11-20 08:01 UTC, vetoable by the owner): the pick is a function
+ * of what every read serves, the person's NAME and the TITLE (gender chooses only the gendered form), on every page, the
+ * owner's included. Never the card's id (a shared page re-keys every person's id per read, VR10, so the drawn form would
+ * move from read to read) and never the institution key (a tie the DM hid would shade the pick: a function of a withheld
+ * field is a leak, however small). The ONE builder of the seed: every caller of honorificOfTitle passes it
+ * (tests/domain/people/honorificSeed.test.js). Display only; no generator path reads the pick.
+ * @param {unknown} name the person's name @param {unknown} title the title the honorific is of @returns {string}
+ */
+export function honorificSeedOf(name, title) {
+  return `${String(name ?? '').trim()}::${String(title ?? '').trim()}`;
+}
+
+/**
  * THE HONORIFIC OF A TITLE: the form `seed` picks from the title's pool (index 0 for no seed), by
  * gender; "the head of X" → "Head of X"; a title the registry does not name (a DM's own, a future
  * row) → the title without its article, capitalised. '' for no title. `place.culture` (the settlement's

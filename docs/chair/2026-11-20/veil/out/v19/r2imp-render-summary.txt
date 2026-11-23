@@ -1,0 +1,166 @@
+### r2imp-thorp-calm-0 views 23 threw null null
+  [Summary/Crisis] -5 +1 
+     A: target: Umar al-Malik · holds the seat, and the right to it is already in dispute
+     A: instigator: no power gains
+     A: wavers: no power could go either way
+     B: : Umar al-Malik ·
+  [Summary/Plot Hooks] -3 +1 
+     A: History
+     A: Insurgency
+     A: In the insurgency, it is aimed at Umar al-Malik of Elder Council, who holds the seat, and the right to it is already in dispute.
+     B: [NO VIEW]
+  [Systems/Power] -3 +1 
+     A: Ribatganj is governed by the Elder Council. Umar al-Malik, the household elder, holds its seat. Poverty and insecurity have cost the Elder Council its
+     A: Crime and the hall
+     A: Ribatganj is too poor to pay the few people who hold office here, and anyone with money to spare could buy their goodwill cheaply.
+     B: Ribatganj is governed by the Elder Council. Umar al-Malik, the household elder, holds its seat. Weak defences have cost the Elder Council its standing
+  [Systems/Defense] -1 +0 
+     A: Ribatganj could not hold off a raid, and its brawls and thefts go unanswered as it is.
+  [World/History] -1 +1 
+     A: People in Ribatganj still remember the succession crisis, and the memory weighs on the quarrels the thorp is having now. The succession crisis left a 
+     B: People in Ribatganj still remember the succession crisis, and the memory weighs on the quarrels the thorp is having now.
+### r2imp-hamlet-infiltrated-1 views 22 threw null null
+  [Summary/Crisis] -4 +0 
+     A: instigator: an outside hand, unnamed
+     A: collaborates: no power gains
+     A: Stakes
+  [Summary/Foundations] -1 +1 
+     A: Defense readinessCritical
+     B: Defense readinessAdequate
+  [Systems/Power] -1 +1 
+     A: Dietmar Weber, the headman, holds the seat of the Headman's Authority. The Headman's Authority governs Grünhausen. The Headman's Authority has the app
+     B: Dietmar Weber, the headman, holds the seat of the Headman's Authority. The Headman's Authority governs Grünhausen. Grünhausen approves of the Headman'
+  [Systems/Defense] -1 +0 
+     A: People at Grünhausen know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+  [World/History] -1 +0 
+     A: Grünhausen is past the economic divide now, and the place that came through is the one that stands; that legacy is years old.
+### r2imp-village-insurgency-2 views 23 threw null null
+  [Summary/Crisis] -6 +2 
+     A: instigator: Goran Davydov · speaks for the power that gains from the crisis, from a house that power backs
+     A: target: Viktoriya Ilyin · holds the seat, and the right to it is already in dispute
+     A: wavers: no power could go either way
+     B: : Goran Davydov ·
+     B: : Viktoriya Ilyin ·
+  [Summary/Foundations] -1 +1 
+     A: Defense readinessCritical
+     B: Defense readinessStrained
+  [Summary/Plot Hooks] -3 +1 
+     A: History
+     A: Insurgency
+     A: In the insurgency, Goran Davydov, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+     B: [NO VIEW]
+  [Systems/Power] -3 +1 
+     A: Zlatodvor is governed by the Elder Council. Viktoriya Ilyin, the miller and Elder, holds its seat. Poverty and insecurity have cost the Elder Council 
+     A: Crime and the hall
+     A: Each season it gets easier to buy an official at Zlatodvor: the village stays poor, the streets stay badly guarded, and nobody in the Elder Council is
+     B: Zlatodvor is governed by the Elder Council. Viktoriya Ilyin, the miller and Elder, holds its seat. Weak defences have cost the Elder Council its stand
+  [Systems/Defense] -1 +0 
+     A: Zlatodvor could not hold off a raid, and its brawls and thefts go unanswered as it is.
+  [World/History] -1 +1 
+     A: People in Zlatodvor still remember the succession crisis, and the memory weighs on the quarrels the village is having now. Nobody in Zlatodvor has fin
+     B: People in Zlatodvor still remember the succession crisis, and the memory weighs on the quarrels the village is having now.
+### r2imp-town-under_siege-3 views 23 threw null null
+  [Summary/Crisis] -6 +2 
+     A: defends: Anastasios Nestongos · leads the military
+     A: would treat: Vasileios Doukas · a merchant, with the seat itself in dispute
+     A: Stakes
+     B: : Anastasios Nestongos ·
+     B: : Vasileios Doukas ·
+  [Summary/Plot Hooks] -2 +1 
+     A: In the siege, Anastasios Nestongos of War Council leads the defence.
+     A: The siege turns on the town granary, run by Melanthi Chortasmenos: if it gives way, Merchant oligarchy loses most, because its own people feel the cri
+     B: The siege turns on the town granary, run by Melanthi Chortasmenos: whoever wins it over decides how the siege goes.
+  [Systems/Economics] -1 +1 
+     A: No one trade earns half of what Megaanthi makes, so a bad year in any one of them would hurt without ruining it. Nobody at Megaanthi names its biggest
+     B: No one trade earns half of what Megaanthi makes, so a bad year in any one of them would hurt without ruining it. Nobody at Megaanthi names its biggest
+  [Systems/Power] -2 +2 
+     A: Megaanthi is governed by the Merchant oligarchy. Vasileios Doukas, the senior guild master and First Magnate, holds its seat. Few in Megaanthi still a
+     A: Officials at Megaanthi are paid little and watched less, and a purse offered in the right doorway would not be turned away. Several houses at Megaanth
+     B: Megaanthi is governed by the Merchant oligarchy. Vasileios Doukas, the senior guild master and First Magnate, holds its seat. Few in Megaanthi still a
+     B: Several houses at Megaanthi keep perfect books, because perfect books are what they are paid to keep.
+  [Systems/Defense] -1 +0 
+     A: Megaanthi has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+  [World/History] -1 +0 
+     A: Nobody in Megaanthi has finished putting right the legacy the religious conflict left, and that legacy is older than all but the oldest alive.
+  [World/Faith] -1 +0 
+     A: Folk in Megaanthi pay for blessings and relics they half suspect are a fraud. The church and the town's thieves share what their faith pays.
+### r2imp-city-calm-4 views 21 threw null null
+  [Systems/Power] -2 +2 
+     A: Ivana Medvedev, the senior guild master and First Councillor, holds the seat of the City-State Council. The City-State Council governs Plavipol. Plavi
+     A: The criminals at Plavipol are losing their grip on the hall: the city is doing well again and it is well guarded.
+     B: Ivana Medvedev, the senior guild master and First Councillor, holds the seat of the City-State Council. The City-State Council governs Plavipol. Plavi
+     B: Nothing at Plavipol is moving the city's view of its rulers: not the harvest, not the watch, not the walls. The City-State Council stands on the bare 
+  [Systems/Defense] -1 +0 
+     A: Plavipol is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+  [World/History] -1 +0 
+     A: Plavipol came through the iron dispute and set itself to rights afterwards; that legacy is older than anyone living.
+### r2imp-metropolis-occupied-5 views 23 threw null null
+  [Summary/Crisis] -9 +1 
+     A: the occupier's local face: Inghean Byrne · leads the occupying power
+     A: profits: Inghean Byrne · the strongest figure in a power that gains
+     A: Stakes
+     B: : Inghean Byrne ·
+  [Summary/Foundations] -1 +1 
+     A: Defense readinessAdequate
+     B: Defense readinessStrained
+  [Summary/Plot Hooks] -2 +1 
+     A: In the occupation, the occupier's orders come through Inghean Byrne of Occupation Authority.
+     A: The occupation turns on the Elder Grove Council, run by Nóinín Gordon: if it gives way, Grand Merchant Oligarchy loses most, because its own people fe
+     B: The occupation turns on the Elder Grove Council, run by Nóinín Gordon: whoever wins it over decides how the occupation goes.
+  [Systems/Power] -2 +2 
+     A: The Grand Merchant Oligarchy answers to the occupiers of Aberheath. Eoghan MacAlister, the exchange master and First Magnate, holds its seat. Poverty 
+     A: Aberheath's officials work under the occupiers' eye now, but they are paid little, and a purse the occupiers never see would still be welcome. Some of
+     B: The Grand Merchant Oligarchy answers to the occupiers of Aberheath. Eoghan MacAlister, the exchange master and First Magnate, holds its seat. Aberheat
+     B: Some of the goods that reach Aberheath pay none of the dues owed on them.
+  [World/History] -1 +0 
+     A: Nobody in Aberheath has finished putting right the legacy the siege left, and that legacy is a generation old.
+### r2imp-thorp-famine-6 views 23 threw null null
+  [Summary/Crisis] -5 +2 
+     A: bears the brunt: Eustathios Chomatenos · the only one named here of a power that loses by the crisis
+     A: holds the lever: Eire Attaleiates · nobody here could, so this one stepped in for the crisis
+     A: takes the fall: Eustathios Chomatenos · holds the seat, and takes the blame while the right to it is in dispute
+     B: : Eustathios Chomatenos ·
+     B: : Eire Attaleiates ·
+  [Summary/Foundations] -2 +2 
+     A: Defense readinessCritical
+     A: Labor capacityCritical
+     B: Labor capacityStrained
+     B: Defense readinessAdequate
+  [Summary/Plot Hooks] -3 +1 
+     A: History
+     A: Famine
+     A: In the famine, Eustathios Chomatenos of Household Council takes the worst of it: the only one named here of a power that loses by the crisis.
+     B: [NO VIEW]
+  [Systems/Power] -3 +1 
+     A: The Household Council governs Filopopolis. Its seat is held by Eustathios Chomatenos, the head shepherd and Household Elder. Poverty and insecurity ha
+     A: Crime and the hall
+     A: Officials at Filopopolis are paid little and watched less, and a purse offered in the right doorway would not be turned away.
+     B: The Household Council governs Filopopolis. Its seat is held by Eustathios Chomatenos, the head shepherd and Household Elder. Hunger and weak defences 
+  [Systems/Defense] -1 +0 
+     A: Filopopolis is all but undefended. Nothing in the thorp would stop a serious attack for long.
+  [World/History] -1 +0 
+     A: Nobody in Filopopolis has finished putting right the legacy the shortage left, and that legacy is a generation old.
+### r2imp-hamlet-slave_revolt-7 views 23 threw null null
+  [Summary/Crisis] -4 +1 
+     A: target: Mei Liu · holds the seat, and the right to it is already in dispute
+     A: instigator: no power gains
+     A: Stakes
+     B: : Mei Liu ·
+  [Summary/Foundations] -1 +1 
+     A: Strength of the powersAdequate
+     B: Strength of the powersStrained
+  [Summary/Plot Hooks] -3 +1 
+     A: History
+     A: Slave Revolt
+     A: In the revolt, it is aimed at Mei Liu of Free Elder Council, who holds the seat, and the right to it is already in dispute.
+     B: [NO VIEW]
+  [Systems/Economics] -1 +1 
+     A: Fenggou lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole hamlet has a bad year. Magic 
+     B: Fenggou lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole hamlet has a bad year.
+  [Systems/Power] -1 +1 
+     A: Mei Liu, the boat-master and Elder, holds the seat of the Free Elder Council. The Free Elder Council governs Fenggou. Insecurity and weak defences hav
+     B: Mei Liu, the boat-master and Elder, holds the seat of the Free Elder Council. The Free Elder Council governs Fenggou. Weak defences have left the Free
+  [Systems/Defense] -1 +0 
+     A: Fenggou has enough for the usual trouble and nothing spare, and a second trouble at the same time would find a gap.
+  [World/History] -1 +0 
+     A: The arcane incident left a legacy of trouble in Fenggou that has never been fully put right, and that legacy is two generations old.

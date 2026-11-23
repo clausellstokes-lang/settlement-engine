@@ -1,0 +1,10 @@
+[gate-tail] start:  03:03:39 up 0 min,  0 user,  load average: 0.51, 0.11, 0.04 · cores: 4
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  03:04:14 up 1 min,  0 user,  load average: 1.12, 0.30, 0.10
+[gate-tail] full log: /tmp/gate-tail.317.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0

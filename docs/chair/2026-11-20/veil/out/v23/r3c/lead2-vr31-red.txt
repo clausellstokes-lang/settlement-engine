@@ -1,0 +1,44 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > VR31 on EVERY read (marked and unmarked, towns with no hidden house too): wherever a power is withheld, whatever withheld it, the served shares sum to 100
+AssertionError: expected [ …(10) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12 openM dm=true gallery factions: [47,14,13,12]",
++   "town-infiltrated-0-12 openM dm=true import factions: [47,14,13,12]",
++   "city-insurgency-1-104 openM dm=true gallery factions: [18,15,13,9,7,5]",
++   "city-insurgency-1-104 openM dm=true import factions: [18,15,13,9,7,5]",
++   "city-politically_fractured-0-40 openM dm=true gallery factions: [22,19,13,12,10,10,6]",
++   "city-politically_fractured-0-40 openM dm=true import factions: [22,19,13,12,10,10,6]",
++   "metropolis-indebted-0-56 openM dm=true gallery factions: [32,10,9,9,9,7,7,6]",
++   "metropolis-indebted-0-56 openM dm=true import factions: [32,10,9,9,9,7,7,6]",
++   "hand-raised openM dm=true gallery factions: [50,20]",
++   "hand-raised openM dm=true import factions: [50,20]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:295:17
+    293|     note('R3 VR31: reads with a power withheld, judged:', judged);
+    294|     expect(judged).toBeGreaterThan(0);
+    295|     expect(bad).toEqual([]);
+       |                 ^
+    296|   });
+    297|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 skipped (16)
+   Start at  08:02:50
+   Duration  258.27s (transform 3.28s, setup 32ms, import 72ms, tests 258.05s, environment 0ms)
+
+[gate-tail] end:  08:07:09 up 37 min,  0 user,  load average: 3.53, 2.48, 1.76
+[gate-tail] full log: /tmp/gate-tail.6808.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1
+restored

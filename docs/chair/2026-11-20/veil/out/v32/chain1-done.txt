@@ -1,0 +1,15 @@
+start 05:57:04 tip 3cca025b8
+typecheck rc=0 [typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+eslint rc=0
+walkers+manifest rc=0
+arms 3+4+5 rc=0
+registry-check rc=0
+tpl rc=0
+verify rc=0 verify: 45 cached births re-read, 0 differ
+gates rc=1 06:04:55
+sv+handrows+born rc=0
+harnesses rc=0
+r3gate rc=0
+acceptance rc=0 40 PASS
+lint-whole rc=1 07:01:06
+END 07:01:06

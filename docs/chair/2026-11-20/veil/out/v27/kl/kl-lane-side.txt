@@ -1,0 +1,154 @@
+SIDE BY SIDE (lane): row | twin | server | DIFF?
+  OFF (a) npcs|person:member|affiliation|city | without 1749/1749 (100.0%) | without 1749/1749 (100.0%)
+  OFF (a) npcs|person:member|affiliation|metropolis | without 2985/2985 (100.0%) | without 2985/2985 (100.0%)
+  OFF (a) npcs|person:member|affiliation|town | without 799/799 (100.0%) | without 799/799 (100.0%)
+  OFF (a) npcs|person:member|affiliation|village | without 132/132 (100.0%) | without 132/132 (100.0%)
+  OFF (a) npcs|person:member|factionAffiliation|city | without 1749/1749 (100.0%) | without 1749/1749 (100.0%)
+  OFF (a) npcs|person:member|factionAffiliation|metropolis | without 2985/2985 (100.0%) | without 2985/2985 (100.0%)
+  OFF (a) npcs|person:member|factionAffiliation|town | without 799/799 (100.0%) | without 799/799 (100.0%)
+  OFF (a) npcs|person:member|factionAffiliation|village | without 132/132 (100.0%) | without 132/132 (100.0%)
+  OFF (a) npcs|person:member|factionId|city | without 1749/1749 (100.0%) | without 1749/1749 (100.0%)
+  OFF (a) npcs|person:member|factionId|metropolis | without 2985/2985 (100.0%) | without 2985/2985 (100.0%)
+  OFF (a) npcs|person:member|factionId|town | without 799/799 (100.0%) | without 799/799 (100.0%)
+  OFF (a) npcs|person:member|factionId|village | without 132/132 (100.0%) | without 132/132 (100.0%)
+  OFF (a) npcs|person:member|faction|city | without 1749/1749 (100.0%) | without 1749/1749 (100.0%)
+  OFF (a) npcs|person:member|faction|metropolis | without 2985/2985 (100.0%) | without 2985/2985 (100.0%)
+  OFF (a) npcs|person:member|faction|town | without 799/799 (100.0%) | without 799/799 (100.0%)
+  OFF (a) npcs|person:member|faction|village | without 132/132 (100.0%) | without 132/132 (100.0%)
+  OFF (a) npcs|person:nomember|affiliation|city | without 336/336 (100.0%) | without 336/336 (100.0%)
+  OFF (a) npcs|person:nomember|affiliation|metropolis | without 183/183 (100.0%) | without 183/183 (100.0%)
+  OFF (a) npcs|person:nomember|affiliation|town | without 127/127 (100.0%) | without 127/127 (100.0%)
+  OFF (a) npcs|person:nomember|affiliation|village | without 34/34 (100.0%) | without 34/34 (100.0%)
+  OFF (a) npcs|person:nomember|factionAffiliation|city | without 336/336 (100.0%) | without 336/336 (100.0%)
+  OFF (a) npcs|person:nomember|factionAffiliation|metropolis | without 183/183 (100.0%) | without 183/183 (100.0%)
+  OFF (a) npcs|person:nomember|factionAffiliation|town | without 127/127 (100.0%) | without 127/127 (100.0%)
+  OFF (a) npcs|person:nomember|factionAffiliation|village | without 34/34 (100.0%) | without 34/34 (100.0%)
+  OFF (a) npcs|person:nomember|factionId|city | without 336/336 (100.0%) | without 336/336 (100.0%)
+  OFF (a) npcs|person:nomember|factionId|metropolis | without 183/183 (100.0%) | without 183/183 (100.0%)
+  OFF (a) npcs|person:nomember|factionId|town | without 127/127 (100.0%) | without 127/127 (100.0%)
+  OFF (a) npcs|person:nomember|factionId|village | without 34/34 (100.0%) | without 34/34 (100.0%)
+  OFF (a) npcs|person:nomember|faction|city | without 336/336 (100.0%) | without 336/336 (100.0%)
+  OFF (a) npcs|person:nomember|faction|metropolis | without 183/183 (100.0%) | without 183/183 (100.0%)
+  OFF (a) npcs|person:nomember|faction|town | without 127/127 (100.0%) | without 127/127 (100.0%)
+  OFF (a) npcs|person:nomember|faction|village | without 34/34 (100.0%) | without 34/34 (100.0%)
+  OFF (a) powerStructure.factions|power:criminal|contestsNiche|city | without 3/3 (100.0%) | without 3/3 (100.0%)
+  OFF (a) powerStructure.factions|power:criminal|contestsNiche|metropolis | without 5/5 (100.0%) | without 5/5 (100.0%)
+  OFF (a) powerStructure.factions|power:criminal|contestsNiche|town | without 3/3 (100.0%) | without 3/3 (100.0%)
+  OFF (a) powerStructure.factions|power:economy|contestsNiche|city | without 54/54 (100.0%) | without 54/54 (100.0%)
+  OFF (a) powerStructure.factions|power:economy|contestsNiche|metropolis | without 68/68 (100.0%) | without 68/68 (100.0%)
+  OFF (a) powerStructure.factions|power:economy|contestsNiche|town | without 35/35 (100.0%) | without 35/35 (100.0%)
+  OFF (a) powerStructure.factions|power:economy|contestsNiche|village | without 2/2 (100.0%) | without 2/2 (100.0%)
+  OFF (a) powerStructure.factions|power:governing|contestsNiche|city | without 40/40 (100.0%) | without 40/40 (100.0%)
+  OFF (a) powerStructure.factions|power:governing|contestsNiche|metropolis | without 40/40 (100.0%) | without 40/40 (100.0%)
+  OFF (a) powerStructure.factions|power:governing|contestsNiche|town | without 40/40 (100.0%) | without 40/40 (100.0%)
+  OFF (a) powerStructure.factions|power:governing|contestsNiche|village | without 20/20 (100.0%) | without 20/20 (100.0%)
+  OFF (a) powerStructure.factions|power:government|contestsNiche|city | without 3/3 (100.0%) | without 3/3 (100.0%)
+  OFF (a) powerStructure.factions|power:government|contestsNiche|town | without 1/1 (100.0%) | without 1/1 (100.0%)
+  OFF (a) powerStructure.factions|power:magic|contestsNiche|city | without 20/20 (100.0%) | without 20/20 (100.0%)
+  OFF (a) powerStructure.factions|power:magic|contestsNiche|metropolis | without 36/36 (100.0%) | without 36/36 (100.0%)
+  OFF (a) powerStructure.factions|power:military|contestsNiche|city | without 48/48 (100.0%) | without 48/48 (100.0%)
+  OFF (a) powerStructure.factions|power:military|contestsNiche|metropolis | without 64/64 (100.0%) | without 64/64 (100.0%)
+  OFF (a) powerStructure.factions|power:military|contestsNiche|town | without 27/27 (100.0%) | without 27/27 (100.0%)
+  OFF (a) powerStructure.factions|power:military|contestsNiche|village | without 8/8 (100.0%) | without 8/8 (100.0%)
+  OFF (a) powerStructure.factions|power:noble|contestsNiche|city | without 17/17 (100.0%) | without 17/17 (100.0%)
+  OFF (a) powerStructure.factions|power:noble|contestsNiche|metropolis | without 40/40 (100.0%) | without 40/40 (100.0%)
+  OFF (a) powerStructure.factions|power:noble|contestsNiche|town | without 7/7 (100.0%) | without 7/7 (100.0%)
+  OFF (a) powerStructure.factions|power:other|contestsNiche|city | without 11/11 (100.0%) | without 11/11 (100.0%)
+  OFF (a) powerStructure.factions|power:other|contestsNiche|metropolis | without 16/16 (100.0%) | without 16/16 (100.0%)
+  OFF (a) powerStructure.factions|power:other|contestsNiche|town | without 10/10 (100.0%) | without 10/10 (100.0%)
+  OFF (a) powerStructure.factions|power:other|contestsNiche|village | without 3/3 (100.0%) | without 3/3 (100.0%)
+  OFF (a) powerStructure.factions|power:religious|contestsNiche|city | without 31/31 (100.0%) | without 31/31 (100.0%)
+  OFF (a) powerStructure.factions|power:religious|contestsNiche|metropolis | without 43/43 (100.0%) | without 43/43 (100.0%)
+  OFF (a) powerStructure.factions|power:religious|contestsNiche|town | without 22/22 (100.0%) | without 22/22 (100.0%)
+  OFF (a) powerStructure.factions|power:religious|contestsNiche|village | without 11/11 (100.0%) | without 11/11 (100.0%)
+  OFF (b) CUT powerStructure.factions|power:economy|contestsNiche|city | 14 in 13 towns | 14 in 13 towns
+  OFF (b) CUT powerStructure.factions|power:economy|contestsNiche|metropolis | 15 in 14 towns | 15 in 14 towns
+  OFF (b) CUT powerStructure.factions|power:magic|contestsNiche|city | 2 in 2 towns | 2 in 2 towns
+  OFF (b) CUT powerStructure.factions|power:magic|contestsNiche|metropolis | 4 in 4 towns | 4 in 4 towns
+  OFF (b) CUT powerStructure.factions|power:military|contestsNiche|city | 12 in 10 towns | 12 in 10 towns
+  OFF (b) CUT powerStructure.factions|power:military|contestsNiche|metropolis | 13 in 13 towns | 13 in 13 towns
+  OFF (b) CUT powerStructure.factions|power:noble|contestsNiche|city | 4 in 4 towns | 4 in 4 towns
+  OFF (b) CUT powerStructure.factions|power:noble|contestsNiche|metropolis | 10 in 10 towns | 10 in 10 towns
+  OFF (b) CUT powerStructure.factions|power:other|contestsNiche|city | 2 in 2 towns | 2 in 2 towns
+  OFF (b) CUT powerStructure.factions|power:other|contestsNiche|metropolis | 1 in 1 towns | 1 in 1 towns
+  OFF (b) CUT powerStructure.factions|power:religious|contestsNiche|city | 11 in 11 towns | 11 in 11 towns
+  OFF (b) CUT powerStructure.factions|power:religious|contestsNiche|metropolis | 9 in 9 towns | 9 in 9 towns
+  OFF (b) pages hidden / with a cut / cuts | 92 / 68 / 97 | 92 / 68 / 97
+  OFF (c) power rows leave / person-keys cut | 97 / 0 | 97 / 0
+  ON (a) npcs|person:member|affiliation|city | without 1882/1882 (100.0%) | without 1882/1882 (100.0%)
+  ON (a) npcs|person:member|affiliation|metropolis | without 2995/2995 (100.0%) | without 2995/2995 (100.0%)
+  ON (a) npcs|person:member|affiliation|town | without 850/850 (100.0%) | without 850/850 (100.0%)
+  ON (a) npcs|person:member|affiliation|village | without 134/134 (100.0%) | without 134/134 (100.0%)
+  ON (a) npcs|person:member|factionAffiliation|city | without 1882/1882 (100.0%) | without 1882/1882 (100.0%)
+  ON (a) npcs|person:member|factionAffiliation|metropolis | without 2995/2995 (100.0%) | without 2995/2995 (100.0%)
+  ON (a) npcs|person:member|factionAffiliation|town | without 850/850 (100.0%) | without 850/850 (100.0%)
+  ON (a) npcs|person:member|factionAffiliation|village | without 134/134 (100.0%) | without 134/134 (100.0%)
+  ON (a) npcs|person:member|factionId|city | without 1882/1882 (100.0%) | without 1882/1882 (100.0%)
+  ON (a) npcs|person:member|factionId|metropolis | without 2995/2995 (100.0%) | without 2995/2995 (100.0%)
+  ON (a) npcs|person:member|factionId|town | without 850/850 (100.0%) | without 850/850 (100.0%)
+  ON (a) npcs|person:member|factionId|village | without 134/134 (100.0%) | without 134/134 (100.0%)
+  ON (a) npcs|person:member|faction|city | without 1882/1882 (100.0%) | without 1882/1882 (100.0%)
+  ON (a) npcs|person:member|faction|metropolis | without 2995/2995 (100.0%) | without 2995/2995 (100.0%)
+  ON (a) npcs|person:member|faction|town | without 850/850 (100.0%) | without 850/850 (100.0%)
+  ON (a) npcs|person:member|faction|village | without 134/134 (100.0%) | without 134/134 (100.0%)
+  ON (a) npcs|person:nomember|affiliation|city | without 203/203 (100.0%) | without 203/203 (100.0%)
+  ON (a) npcs|person:nomember|affiliation|metropolis | without 173/173 (100.0%) | without 173/173 (100.0%)
+  ON (a) npcs|person:nomember|affiliation|town | without 76/76 (100.0%) | without 76/76 (100.0%)
+  ON (a) npcs|person:nomember|affiliation|village | without 32/32 (100.0%) | without 32/32 (100.0%)
+  ON (a) npcs|person:nomember|factionAffiliation|city | without 203/203 (100.0%) | without 203/203 (100.0%)
+  ON (a) npcs|person:nomember|factionAffiliation|metropolis | without 173/173 (100.0%) | without 173/173 (100.0%)
+  ON (a) npcs|person:nomember|factionAffiliation|town | without 76/76 (100.0%) | without 76/76 (100.0%)
+  ON (a) npcs|person:nomember|factionAffiliation|village | without 32/32 (100.0%) | without 32/32 (100.0%)
+  ON (a) npcs|person:nomember|factionId|city | without 203/203 (100.0%) | without 203/203 (100.0%)
+  ON (a) npcs|person:nomember|factionId|metropolis | without 173/173 (100.0%) | without 173/173 (100.0%)
+  ON (a) npcs|person:nomember|factionId|town | without 76/76 (100.0%) | without 76/76 (100.0%)
+  ON (a) npcs|person:nomember|factionId|village | without 32/32 (100.0%) | without 32/32 (100.0%)
+  ON (a) npcs|person:nomember|faction|city | without 203/203 (100.0%) | without 203/203 (100.0%)
+  ON (a) npcs|person:nomember|faction|metropolis | without 173/173 (100.0%) | without 173/173 (100.0%)
+  ON (a) npcs|person:nomember|faction|town | without 76/76 (100.0%) | without 76/76 (100.0%)
+  ON (a) npcs|person:nomember|faction|village | without 32/32 (100.0%) | without 32/32 (100.0%)
+  ON (a) powerStructure.factions|power:criminal|contestsNiche|city | without 3/3 (100.0%) | without 3/3 (100.0%)
+  ON (a) powerStructure.factions|power:criminal|contestsNiche|metropolis | without 5/5 (100.0%) | without 5/5 (100.0%)
+  ON (a) powerStructure.factions|power:criminal|contestsNiche|town | without 3/3 (100.0%) | without 3/3 (100.0%)
+  ON (a) powerStructure.factions|power:economy|contestsNiche|city | without 54/54 (100.0%) | without 54/54 (100.0%)
+  ON (a) powerStructure.factions|power:economy|contestsNiche|metropolis | without 68/68 (100.0%) | without 68/68 (100.0%)
+  ON (a) powerStructure.factions|power:economy|contestsNiche|town | without 35/35 (100.0%) | without 35/35 (100.0%)
+  ON (a) powerStructure.factions|power:economy|contestsNiche|village | without 2/2 (100.0%) | without 2/2 (100.0%)
+  ON (a) powerStructure.factions|power:governing|contestsNiche|city | without 40/40 (100.0%) | without 40/40 (100.0%)
+  ON (a) powerStructure.factions|power:governing|contestsNiche|metropolis | without 40/40 (100.0%) | without 40/40 (100.0%)
+  ON (a) powerStructure.factions|power:governing|contestsNiche|town | without 40/40 (100.0%) | without 40/40 (100.0%)
+  ON (a) powerStructure.factions|power:governing|contestsNiche|village | without 20/20 (100.0%) | without 20/20 (100.0%)
+  ON (a) powerStructure.factions|power:government|contestsNiche|city | without 3/3 (100.0%) | without 3/3 (100.0%)
+  ON (a) powerStructure.factions|power:government|contestsNiche|town | without 1/1 (100.0%) | without 1/1 (100.0%)
+  ON (a) powerStructure.factions|power:magic|contestsNiche|city | without 20/20 (100.0%) | without 20/20 (100.0%)
+  ON (a) powerStructure.factions|power:magic|contestsNiche|metropolis | without 36/36 (100.0%) | without 36/36 (100.0%)
+  ON (a) powerStructure.factions|power:military|contestsNiche|city | without 48/48 (100.0%) | without 48/48 (100.0%)
+  ON (a) powerStructure.factions|power:military|contestsNiche|metropolis | without 64/64 (100.0%) | without 64/64 (100.0%)
+  ON (a) powerStructure.factions|power:military|contestsNiche|town | without 27/27 (100.0%) | without 27/27 (100.0%)
+  ON (a) powerStructure.factions|power:military|contestsNiche|village | without 8/8 (100.0%) | without 8/8 (100.0%)
+  ON (a) powerStructure.factions|power:noble|contestsNiche|city | without 17/17 (100.0%) | without 17/17 (100.0%)
+  ON (a) powerStructure.factions|power:noble|contestsNiche|metropolis | without 40/40 (100.0%) | without 40/40 (100.0%)
+  ON (a) powerStructure.factions|power:noble|contestsNiche|town | without 7/7 (100.0%) | without 7/7 (100.0%)
+  ON (a) powerStructure.factions|power:other|contestsNiche|city | without 17/17 (100.0%) | without 17/17 (100.0%)
+  ON (a) powerStructure.factions|power:other|contestsNiche|metropolis | without 16/16 (100.0%) | without 16/16 (100.0%)
+  ON (a) powerStructure.factions|power:other|contestsNiche|town | without 12/12 (100.0%) | without 12/12 (100.0%)
+  ON (a) powerStructure.factions|power:other|contestsNiche|village | without 5/5 (100.0%) | without 5/5 (100.0%)
+  ON (a) powerStructure.factions|power:religious|contestsNiche|city | without 31/31 (100.0%) | without 31/31 (100.0%)
+  ON (a) powerStructure.factions|power:religious|contestsNiche|metropolis | without 43/43 (100.0%) | without 43/43 (100.0%)
+  ON (a) powerStructure.factions|power:religious|contestsNiche|town | without 22/22 (100.0%) | without 22/22 (100.0%)
+  ON (a) powerStructure.factions|power:religious|contestsNiche|village | without 11/11 (100.0%) | without 11/11 (100.0%)
+  ON (b) CUT powerStructure.factions|power:economy|contestsNiche|city | 14 in 13 towns | 14 in 13 towns
+  ON (b) CUT powerStructure.factions|power:economy|contestsNiche|metropolis | 15 in 14 towns | 15 in 14 towns
+  ON (b) CUT powerStructure.factions|power:magic|contestsNiche|city | 2 in 2 towns | 2 in 2 towns
+  ON (b) CUT powerStructure.factions|power:magic|contestsNiche|metropolis | 4 in 4 towns | 4 in 4 towns
+  ON (b) CUT powerStructure.factions|power:military|contestsNiche|city | 12 in 10 towns | 12 in 10 towns
+  ON (b) CUT powerStructure.factions|power:military|contestsNiche|metropolis | 13 in 13 towns | 13 in 13 towns
+  ON (b) CUT powerStructure.factions|power:noble|contestsNiche|city | 4 in 4 towns | 4 in 4 towns
+  ON (b) CUT powerStructure.factions|power:noble|contestsNiche|metropolis | 10 in 10 towns | 10 in 10 towns
+  ON (b) CUT powerStructure.factions|power:other|contestsNiche|city | 3 in 3 towns | 3 in 3 towns
+  ON (b) CUT powerStructure.factions|power:other|contestsNiche|metropolis | 2 in 2 towns | 2 in 2 towns
+  ON (b) CUT powerStructure.factions|power:religious|contestsNiche|city | 11 in 11 towns | 11 in 11 towns
+  ON (b) CUT powerStructure.factions|power:religious|contestsNiche|metropolis | 9 in 9 towns | 9 in 9 towns
+  ON (b) pages hidden / with a cut / cuts | 92 / 70 / 99 | 92 / 70 / 99
+  ON (c) power rows leave / person-keys cut | 99 / 0 | 99 / 0
+rows 152; rows differing 0

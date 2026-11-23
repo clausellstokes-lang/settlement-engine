@@ -1,0 +1,14 @@
+    170|   // ⭐ THE SIGNING HALF OF THE RITUAL (first exercised 2026-11-06, Reg…
+ ❯ tests/lint/tuningRegister.walker.test.js:223:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  76 skipped (76)
+   Start at  05:19:58
+   Duration  2.11s (transform 79ms, setup 27ms, import 110ms, tests 1.87s, environment 0ms)
+
+[gate-tail] end:  05:20:00 up  2:43,  0 user,  load average: 0.62, 1.43, 3.10
+[gate-tail] full log: /tmp/gate-tail.19381.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

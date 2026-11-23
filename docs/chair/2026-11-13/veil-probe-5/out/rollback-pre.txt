@@ -1,0 +1,7 @@
+NOTICE:  database "rbpre" does not exist, skipping
+catalogue lines: 1366
+down vs 210: 0
+down twice vs 210: 0
+211 again vs 211: 0
+control 210 vs 211: 50
+_gallery_veil left after down: 0

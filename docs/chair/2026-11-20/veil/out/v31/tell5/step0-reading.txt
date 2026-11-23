@@ -1,0 +1,44 @@
+STEP 0 (1) THE SEARCH: births 140 (hidden 92), pages 5600; allegiance keys outside npcs[i].allegiance: 0
+  person copies served (summed over pages): factions[].members[] 0, powerStructure.factions[].members[] 0, object-valued relation ends 0
+STEP 0 (2) THE CRIMINAL SERVICES BY TAG (births serving it on some twin page): controls
+  city|(covert) 1
+  town|(commercial crime) 1
+  town|(covert) 6
+  town|(informal) 1
+  town|(lawless) 1
+  village|(covert) 2
+  hidden-house towns:
+  city|(arcane underground) 11
+  city|(commercial crime) 1
+  city|(smuggling) 22
+  city|(street gang) 1
+  metropolis|(arcane underground) 10
+  metropolis|(commercial crime) 4
+  metropolis|(religious fraud) 5
+  metropolis|(smuggling) 33
+  metropolis|(street gang) 1
+  town|(arcane underground) 2
+  town|(commercial crime) 1
+TOWN r3m-town-infiltrated-0-12 (town, infiltrated) hidden ["Front businesses","Rookery"]; stored svc ["Arcane services (illicit)|(arcane underground)|0","Fencing stolen goods|(covert)|0","Money laundering|Front businesses|1"] ops ["Front Businesses","Gambling Den"] types ["Survival crime","Magical crime"]
+  12 pages [twin:off:own server:off:own twin:off:g:110 server:off:g:110 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0"],"ops":["Gambling Den"],"types":["Survival crime","Magical crime"],"houses":[]}
+  12 pages [twin:off:g:000 server:off:g:000 twin:off:g:001 server:off:g:001 ...]: {"svc":[],"houses":[]}
+  8 pages [twin:off:g:010 server:off:g:010 twin:off:g:011 server:off:g:011 ...]: {"svc":[],"ops":["Gambling Den"],"types":["Survival crime","Magical crime"],"houses":[]}
+  8 pages [twin:off:g:100 server:off:g:100 twin:off:g:101 server:off:g:101 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0"],"houses":[]}
+TOWN r3m-city-under_siege-1-108 (city, under_siege) hidden ["Smuggling network","Multiple criminal factions"]; stored svc ["Contraband delivery|Smuggling network|1","Contraband transport|(smuggling)|0","Customs bypass|Smuggling network|1","Fencing stolen goods|(covert)|0","Illicit goods|Multiple criminal factions|1","Protection rackets|Multiple criminal factions|1"] ops ["Smuggling Network","Rival Gangs"] types ["Survival crime","Smuggling","black market food"]
+  12 pages [twin:off:own server:off:own twin:off:g:110 server:off:g:110 ...]: {"svc":["Contraband transport|(smuggling)|0"],"ops":[],"types":["black market food"],"houses":[]}
+  12 pages [twin:off:g:000 server:off:g:000 twin:off:g:001 server:off:g:001 ...]: {"svc":[],"houses":[]}
+  8 pages [twin:off:g:010 server:off:g:010 twin:off:g:011 server:off:g:011 ...]: {"svc":[],"ops":[],"types":["black market food"],"houses":[]}
+  8 pages [twin:off:g:100 server:off:g:100 twin:off:g:101 server:off:g:101 ...]: {"svc":["Contraband transport|(smuggling)|0"],"houses":[]}
+TOWN r3m-city-none-1-117 (city, none) hidden ["Smuggling network","Front businesses","Whisper market","Black market"]; stored svc ["Arcane services (illicit)|(arcane underground)|0","Contraband delivery|Smuggling network|1","Contraband goods|Black market|1","Contraband transport|(smuggling)|0","Customs bypass|Smuggling network|1","Fencing stolen goods|(covert)|0","Money laundering|Front businesses|1"] ops ["Smuggling Network","Front Businesses","Red Light District","Black Market"] types ["Survival crime","Magical crime","Smuggling"]
+  12 pages [twin:off:own server:off:own twin:off:g:110 server:off:g:110 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0","Contraband transport|(smuggling)|0"],"ops":["Red Light District"],"types":[],"houses":[]}
+  12 pages [twin:off:g:000 server:off:g:000 twin:off:g:001 server:off:g:001 ...]: {"svc":[],"houses":[]}
+  8 pages [twin:off:g:010 server:off:g:010 twin:off:g:011 server:off:g:011 ...]: {"svc":[],"ops":["Red Light District"],"types":[],"houses":[]}
+  8 pages [twin:off:g:100 server:off:g:100 twin:off:g:101 server:off:g:101 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0","Contraband transport|(smuggling)|0"],"houses":[]}
+TOWN r3m-town-insurgency-0-14 (town, insurgency) hidden ["Street gang","Fence (word of mouth)"]; stored svc ["Discreet sale|Fence (word of mouth)|1","Muscle for hire|(street gang)|0","Petty crime|Street gang|1","Protection racket|(street gang)|0"] ops ["Street Gang","Gambling Den"] types ["Street gang activity","political violence","loyalty testing","information trade"]
+  20 pages [twin:off:own server:off:own twin:off:g:010 server:off:g:010 ...]: {"svc":[],"ops":["Gambling Den"],"types":["political violence","loyalty testing","information trade"],"houses":[]}
+  20 pages [twin:off:g:000 server:off:g:000 twin:off:g:001 server:off:g:001 ...]: {"svc":[],"houses":[]}
+TOWN r3m-city-none-0-43 (city, none) hidden ["Smuggling network","Multiple criminal factions","Front businesses","Underground network","Rookery"]; stored svc ["Arcane services (illicit)|(arcane underground)|0","Contraband delivery|Smuggling network|1","Contraband transport|(smuggling)|0","Customs bypass|Smuggling network|1","Discreet passage|Underground network|1","Protection rackets|Multiple criminal factions|1","Untaxed storage|Underground network|1"] ops ["Smuggling Network","Rival Gangs","Front Businesses","Gambling Halls"] types ["Magical crime","Smuggling"]
+  12 pages [twin:off:own server:off:own twin:off:g:110 server:off:g:110 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0","Contraband transport|(smuggling)|0"],"ops":["Gambling Halls"],"types":[],"houses":[]}
+  12 pages [twin:off:g:000 server:off:g:000 twin:off:g:001 server:off:g:001 ...]: {"svc":[],"houses":[]}
+  8 pages [twin:off:g:010 server:off:g:010 twin:off:g:011 server:off:g:011 ...]: {"svc":[],"ops":["Gambling Halls"],"types":[],"houses":[]}
+  8 pages [twin:off:g:100 server:off:g:100 twin:off:g:101 server:off:g:101 ...]: {"svc":["Arcane services (illicit)|(arcane underground)|0","Contraband transport|(smuggling)|0"],"houses":[]}

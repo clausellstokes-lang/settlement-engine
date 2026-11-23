@@ -1,0 +1,11 @@
+VEIL-27 R5 question (measure-only, tip 43d4c309b, worktree /home/user/wt/r5q). Read = shared veil with every hideable house hidden whole
+(open: 4 criminal groupings opened, Reveal DM off and on; default: groupings shut). Fate on the twin = 960 born towns (twin.jsonl, agg.txt);
+server = pglite chain of every migration, gallery/link/import, on a 20-town subset + 6 plants (server2.json, agg2.txt): server == twin everywhere.
+Twin towns with a criminal house hidden whole:
+ DS-ECO-6 minor v4  economy:economics.shadowEconomy.sentence   SERVED AS STORED  25 (server 4)
+ DS-ECO-6 minor v5  economy:economics.shadowEconomy.sentence   SERVED AS STORED  97 (server 7)
+ DS-DEF-3 curfew v2 defense:state.publicOrder.{beside,rung.sentence} SERVED AS STORED 4 (server 2)
+ DS-DEF-3 Safe v3/v8, Unsafe v5: 0 born; PLANTED on r5q-village-none-0 at publicOrder.{beside,rung.sentence}: SERVED AS STORED
+ DS-DEF-4 semi v3/v5/v7, diffuse v2/v4  defense:criminal.structure.sentence WITHHELD 43/2/12/9/11 (server 3/2/3/3/3)
+ DS-DEF-4 semi v4/v6: 0 born; PLANTED: WITHHELD
+ DS-DEF-4 capture none v2: 0 born (capture rung null in every birth); PLANTED at defense:criminal.capture.sentence: WITHHELD

@@ -1,0 +1,21 @@
+== door: 110:  const config = isRec(s.config) ? migrateSettlementConfig(s.config) : null;
+src/generators/economy/prosperity.js:288 magicExists on config :: config.magicExists
+src/generators/economy/prosperity.js:302 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:97 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:258 magicExists on config :: config.magicExists
+src/generators/priorityHelpers.js:223 magicExists on config :: config?.magicExists
+stats {"files":2588,"reads":150696,"resolved":13139,"unresolved":137557} findings 2366
+== door: 110:  const config = isRec(s.config) ? { ...DEFAULT_CONFIG, ...migrateSettlementConfig(s.config) } : null;
+src/generators/economy/prosperity.js:288 magicExists on config :: config.magicExists
+src/generators/economy/prosperity.js:302 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:97 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:258 magicExists on config :: config.magicExists
+src/generators/priorityHelpers.js:223 magicExists on config :: config?.magicExists
+stats {"files":2588,"reads":150696,"resolved":13139,"unresolved":137557} findings 2366
+== door: 110:  const config = isRec(s.config) ? { ...DEFAULT_CONFIG, ...s.config } : null;
+src/generators/economy/prosperity.js:288 magicExists on config :: config.magicExists
+src/generators/economy/prosperity.js:302 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:97 magicExists on config :: config.magicExists
+src/generators/foodGenerator.js:258 magicExists on config :: config.magicExists
+src/generators/priorityHelpers.js:223 magicExists on config :: config?.magicExists
+stats {"files":2588,"reads":150696,"resolved":13139,"unresolved":137557} findings 2366

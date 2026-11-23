@@ -1,0 +1,41 @@
+B, C, D GREEN (VEIL-19's builder). Per commit: the item's arm, the six guard files through scripts/gate-mutex.sh (shared
+tier), the twin's tests (tests/domain/display/publicSafe*.test.js, tests/components/publicProseVeil*.test.js,
+tests/lib/gallery.test.js), the reader's acceptance run on the tree, the gates through scripts/gate-tail.sh. Every test,
+gate and probe run with the GIT_ variables stripped.
+
+B  the arm: 0 sends or losses, server against twin 0 paths (GREEN; 114 at the base). Six guard files 6 of 6, 124 of 124. The
+   twin's tests 5 files, 120 of 120. Acceptance at the tree: exit 1, d06 the only FAIL row, 36 of 37 (a07 PASS), the 15 hand
+   rows all equal. typecheck:domain:strict 1113 / ceiling 1113 (exit 0); typecheck:ratchet 167 / 167 (exit 0); eslint on
+   gallerySecondHomes.js, galleryVeil.js and the arm's file: exit 0.
+
+B2 (V10-6, ruling VR21): the arm 0 holes (GREEN; 3 at the base), server against twin 0 paths; KEEP (a trace that loses nothing
+   keeps its stored ts) holds. Six guard files 6 of 6, 125 of 125; the twin's tests 120 of 120; acceptance at the tree: exit 1, d06 the only FAIL
+   row, 36 of 37, the 15 hand rows equal; typecheck:domain:strict 1113/1113, typecheck:ratchet 167/167, eslint 0 (exit 0 each).
+
+C  the arm: 0 sends or losses (GREEN; 880 at the base): 212's HOUSE_FLAGS literal equals the twin's table; the table's 32 flags
+   are the engine's 32; every catalogue name and every keyword's variants, live, ruined, removed, stopped, custom and with
+   their own tags, one house at a time, the twin's row equals getInstFlags' answer flag by flag (more than 50,000 checks);
+   through the server, both copies, every read, the served flags equal the engine's over the houses each read lists (the
+   dotted capital I read as I in both engines); a flag the table does not hold reads false; a non-boolean stays; a share
+   that hides no house whole is untouched; server against twin 0 paths. Six guard files 6 of 6, 126 of 126; the twin's tests
+   120 of 120. THE ACCEPTANCE RUN at C: exit 0, 37 of 37 (a07 and
+   d06 PASS, d07 PASS), the 15 hand rows equal. typecheck:domain:strict 1113/1113, typecheck:ratchet 167/167, eslint 0.
+
+D  the arm: 0 sends or losses (GREEN; 383 at the base): withheld by its house with both groupings open, by the groupings with
+   the house revealed, restored whole (row, shares, prose) where the house and both groupings are revealed by hand; the
+   shares re-derived to exactly 100 by largest remainder from weight (49/31/20 from 46/28.75/18.4), from the stored
+   percentages where any row lacks a usable weight, ties by order (34/33/33), nothing left []; incomeMix and criminalLine gone
+   at every site with their @ copies, every other rung kept; `weight` withheld on every read, the unmarked share's gallery
+   read, import and twin included; the PDF's normalizeIncomeSources reads the re-derived shares unchanged; server against
+   twin 0 paths (the unmarked share too). Six guard files 6 of 6, 127 of 127; the twin's tests 120 of 120. THE ACCEPTANCE RUN
+   at D (the last commit): exit 0, checks 37, PASS 37 (a07, d06, d07 PASS; every other row as at the base), the 15 hand rows
+   server against twin all equal (the library's hand rows only, not born towns: VR15). typecheck:domain:strict 1113/1113,
+   typecheck:ratchet 167/167, eslint 0 (exit 0 each, through scripts/gate-tail.sh).
+   `weight` READERS (D (4); ruling VR19): no reader of incomeSources[].weight in src/components, src/pdf or src/foundry (the
+   Economics tab, the PDF's normalizeIncomeSources and the journal read `percentage`; treasury.js names the key in a comment
+   only): WITHHELD on every non-owner read. publicProse `incomeWeight` is NOT a figure: it is the economy desk's DS-ECO-12
+   rung, a sentence chosen by compound.religionInfluence / magicInfluence >= 60 ("Faith carries real weight at {settlement}
+   ..."), DRAWN on a shared page (EconomicsTab.jsx:458 through economyDeskRead.js's shipped desk; printProse.js:598); it is
+   neither the rows' weights nor their shares and does not move with the income rows: KEPT as drawn (VR19's either/or does
+   not reach it). Recorded for the registry: its input religionInfluence carries hasChurch, which a hidden clandestine shrine
+   can raise (the compound class, VR4 ii-5).

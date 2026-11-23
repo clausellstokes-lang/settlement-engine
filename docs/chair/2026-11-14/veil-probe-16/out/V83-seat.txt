@@ -1,0 +1,20 @@
+VEIL-16, the seat's own runs at 93216d808 (not the builder's):
+GUARDS (shared tier, two workers; the six files):
+ Test Files  6 passed (6)
+      Tests  119 passed (119)
+THE ACCEPTANCE RUN (run-all.sh):
+FAIL | a07 | V7-5 | a renamed hidden house's birth name (list, trace target, trace cause)
+PASS | a15 | (b) | hasThievesGuild and hasSmuggling false (only hidden houses raised them)
+FAIL | d06 | V7-8 (for a ruling) | hasGuild and hasChurch not true (only hidden houses raise them)
+PASS | e06 | V7-2 | a hidden appearance in the impression, amended
+(all 15 equal)
+== the deep document and the large row (V7-10, V7-6): the frozen 211 alone against 212
+3,000 deep, Reveal DM | x211 | ok | houses listed 1 | exports back 100 | 30 ms | x212 | ok | houses listed 1 | exports back 100 | 38 ms
+PASS | V7-10 | a document 211 serves is served
+200 hidden houses, 5000 strings | x211 | ok | houses listed 1 | exports back 5000 | 354 ms | x212 | ok | houses listed 1 | exports back 5000 | 302 ms
+PASS | V7-6 | within three times 211's cost
+600 hidden houses, 10000 strings | x211 | ok | houses listed 1 | exports back 10000 | 1119 ms | x212 | ok | houses listed 1 | exports back 10000 | 1175 ms
+PASS | V7-6 | within three times 211's cost
+run-all: 22 s; responses in /var/tmp/v16/out/seat/runall; exit 1
+PASS rows: 38; FAIL rows: 2
+THE LIGHTING WALKER: at 93216d808 33 of 34 (titles expected 29269, received 29271); after the census re-take (1f7f75a3f) 34 of 34, exit 0.

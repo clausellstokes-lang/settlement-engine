@@ -1,0 +1,113 @@
+--- get_gallery_dossier (147) before
++++ 211
+@@ -34,3 +34,3 @@
+ security definer
+-set search_path = public
++set search_path = public, pg_temp
+ as $$
+@@ -41,7 +41,3 @@
+     r.tier,
+-    public._gallery_apply_member_overrides(
+-      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j) else public._gallery_sanitize_public_json(base.j) end,
+-      public._gallery_dm_full_json(base.j),
+-      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
+-    ) as data,
++    coalesce(vl.v -> 'body', proj.d) as data,
+     r.published_at,
+@@ -56,3 +52,3 @@
+     s.gallery_importable,
+-    s.gallery_member_overrides,
++    public._gallery_veil_served(s.gallery_member_overrides, vl.v -> 'groupings') as gallery_member_overrides,
+     r.population,
+@@ -81,2 +77,22 @@
+   ) base
++  -- 211: a share in snapshot mode is served its frozen copy, through the same projection
++  cross join lateral (
++    select case
++      when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot'
++        and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
++        and length((s.gallery_member_overrides #> '{$veil,snapshot}')::text) <= 1000000
++      then s.gallery_member_overrides #> '{$veil,snapshot}'
++      else base.j
++    end as j
++  ) src
++  cross join lateral (
++    select public._gallery_apply_member_overrides(
++      case when s.gallery_share_dm then public._gallery_dm_full_json(src.j) else public._gallery_sanitize_public_json(src.j) end,
++      public._gallery_dm_full_json(src.j),
++      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, false
++    ) as d
++    offset 0
++  ) proj
++  -- 211: the share's veil, applied here (NULL for an unmarked listing: served as before)
++  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false) as v offset 0) vl
+   where s.public_slug = dossier_slug
+
+--- get_unlisted_dossier (208 as amended) before
++++ 211
+@@ -13,10 +13,5 @@
+     'gallery_share_dm', false,
+-    -- R8 (the re-review of 2026-11-10): nothing but what HIDES travels. A gallery export in
+-    -- snapshot mode stores its frozen public copy at $veil.snapshot, and with Reveal DM (or a
+-    -- revealDm member) that copy is the DM projection; it never leaves on the link.
+-    'gallery_member_overrides', s.gallery_member_overrides #- '{$veil,snapshot}',
+-    'dossier', public._gallery_apply_member_overrides(
+-      pub.j, pub.j,
+-      s.gallery_member_overrides, false, s.gallery_importable, false
+-    )
++    -- 211: nothing of the share travels but each member's two booleans and the served marker.
++    'gallery_member_overrides', public._gallery_veil_served(s.gallery_member_overrides, vl.v -> 'groupings'),
++    'dossier', vl.v -> 'body'
+   )
+@@ -35,3 +30,12 @@
+   -- its result is both the splice's base and its only source.
+-  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j) pub
++  cross join lateral (select public._gallery_sanitize_public_json(base.j) as j offset 0) pub
++  cross join lateral (
++    select public._gallery_apply_member_overrides(
++      pub.j, pub.j,
++      s.gallery_member_overrides, false, s.gallery_importable, false
++    ) as d
++    offset 0
++  ) proj
++  -- 211: the share's veil; an unmarked share takes the default veil (the link's readers are players)
++  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, true) as v offset 0) vl
+   where s.unlisted_slug = p_slug
+
+--- import_gallery_dossier (131) before
++++ 211
+@@ -16,7 +16,3 @@
+     s.tier,
+-    public._gallery_apply_member_overrides(
+-      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j) else public._gallery_sanitize_public_json(base.j) end,
+-      public._gallery_dm_full_json(base.j),
+-      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
+-    ) as data
++    coalesce(vl.v -> 'body', proj.d) as data
+   from public.settlements s
+@@ -31,2 +27,12 @@
+   ) base
++  cross join lateral (
++    select public._gallery_apply_member_overrides(
++      case when s.gallery_share_dm then public._gallery_dm_full_json(base.j) else public._gallery_sanitize_public_json(base.j) end,
++      public._gallery_dm_full_json(base.j),
++      s.gallery_member_overrides, s.gallery_share_dm, s.gallery_importable, true
++    ) as d
++    offset 0
++  ) proj
++  -- 211: the share's veil (NULL for an unmarked listing: served as before)
++  cross join lateral (select public._gallery_veil(proj.d, s.gallery_member_overrides, false) as v offset 0) vl
+   where s.public_slug = dossier_slug
+
+--- get_gallery_map (088) before
++++ 211
+@@ -22,3 +22,3 @@
+       'public_slug', case when s.is_public then s.public_slug else null end,
+-      'settlement',  public._gallery_sanitize_public_json(s.data),
++      'settlement',  coalesce(public._gallery_veil(pub.j, s.gallery_member_overrides, false) -> 'body', pub.j),
+       'chronicle',   public._gallery_chronicle_json(s.campaign_state -> 'eventLog')
+@@ -26,2 +26,4 @@
+     from public.settlements s
++    -- 211: the member's own listing veil over its sanitized dossier
++    cross join lateral (select public._gallery_sanitize_public_json(s.data) as j offset 0) pub
+     where s.id::text in (

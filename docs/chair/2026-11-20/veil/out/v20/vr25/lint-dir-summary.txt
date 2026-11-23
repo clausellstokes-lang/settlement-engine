@@ -1,0 +1,18 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 19 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  14 failed | 206 passed (220)
+      Tests  19 failed | 3223 passed (3242)
+exit 1
+ FAIL  tests/lint/chainPrintSites.walker.test.js
+ FAIL  tests/lint/deepCloneHotPath.test.js
+ FAIL  tests/lint/domainAnyCastBaseline.test.js
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js
+ FAIL  tests/lint/observedShapeReaders.walker.test.js
+ FAIL  tests/lint/presumedThings.walker.test.js
+ FAIL  tests/lint/proseWiringCensus.walker.test.js
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js
+ FAIL  tests/lint/seedLoopTotality.walker.test.js
+ FAIL  tests/lint/slugifyIdiomBaseline.test.js
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+ FAIL  tests/lint/styleLaw.walker.test.js
+ FAIL  tests/lint/writerReach.walker.test.js

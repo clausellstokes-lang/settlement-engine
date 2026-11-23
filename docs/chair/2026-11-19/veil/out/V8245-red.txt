@@ -1,0 +1,22 @@
+V8-2, V8-4, V8-5 RED FIRST AT THE BASE'S BYTES (VEIL-18's builder). Each new arm of
+tests/security/galleryVeilHandRows.pglite.test.js copied into a copy of /var/tmp/v18/base (git archive 1f501779b, 212
+d1b5da91..., node_modules linked) and run there alone (-t), one engine pglite and the twin of the base's bytes.
+
+V8-2 THE DEFENCE ROW BY IDENTITY: RED, 56 sends (7 on each of the 8 reads: veil and dm x gallery, link, import, twin):
+  walls[0].desc gdesc1 (the reader's row, Mill under Old Wheel/catalogId mill), walls[2].desc gdesc2 (MILL),
+  walls[3].description gdesc3 (' mill '), walls[4].tags/facets/serviceKeys gfn1-3 (the function eye, Brick kiln),
+  walls[5].desc gtwo2 (Watermill: two houses of one identity, one eye shut). The KEEP rows (Fish market, Granary, Brick
+  kiln's description, Upper race) held at the base: 0 losses. (The arm stops at its first expectation: the server/twin
+  paths are asked only once the sends are 0.)
+
+V8-4 THE TOP-LEVEL POWER'S FLOOR: RED, 3 losses (the three Reveal-DM reads that carry master's top-level factions[]:
+  gallery, import, the twin; the public projection drops the list): factions[0] (the reader's row) arrives without its
+  `faction`; the entry naming the shown power by `name` leaves whole (its name taken); the upper-cased entry loses its
+  `faction`. The swept rows (the hidden house's own name, a longer name holding it, an entry flagged hidden) and
+  powerStructure.factions[0] held at the base.
+
+V8-5 A TIE WHOSE END IS GONE: RED, 664 sends or losses over 6 rows x 8 reads: the removed person's ties arrive (from
+  npc.orrin, to npc.orrin, the person's key npc.thieves_guild_fixer_pell, a tie by names alone) with their words
+  (gtie1-gtie6), in both stored shapes; prominentRelationship (the dropped tie's copy, its npc1 swept) and a
+  pressureSentence that holds its words or names its two ends arrive; WHERE UNSURE (a dropped tie with no end names)
+  the copy and the sentence arrive. The KEEP rows' open copy and sentence held at the base.

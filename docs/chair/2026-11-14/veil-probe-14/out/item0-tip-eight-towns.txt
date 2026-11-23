@@ -1,0 +1,19 @@
+2da90b732/p14-server-veil-city-2.json: faults 6, diffs 26, classes 2
+  relationships[id].npc2Role: 16 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the black marketeer" live="<absent>"
+  relationships[id].npc1Role: 10 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's head" live="<absent>"
+2da90b732/p14-server-veil-city-infiltrated-0.json: faults 6, diffs 28, classes 2
+  relationships[id].npc1Role: 10 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's head" live="<absent>"
+  relationships[id].npc2Role: 18 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the gang boss" live="<absent>"
+2da90b732/p14-server-veil-metropolis-3.json: faults 6, diffs 52, classes 2
+  relationships[id].npc2Role: 36 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the black marketeer" live="<absent>"
+  relationships[id].npc1Role: 16 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's head" live="<absent>"
+2da90b732/p14-server-veil-metropolis-7.json: faults 6, diffs 32, classes 2
+  relationships[id].npc1Role: 14 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's head" live="<absent>"
+  relationships[id].npc2Role: 18 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the guildmaster of thieves" live="<absent>"
+2da90b732/p14-server-veil-town-0.json: faults 0, diffs 0, classes 0
+2da90b732/p14-server-veil-town-2.json: faults 6, diffs 16, classes 2
+  relationships[id].npc2Role: 10 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the gang boss" live="<absent>"
+  relationships[id].npc1Role: 6 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's spider" live="<absent>"
+2da90b732/p14-server-veil-village-0.json: faults 0, diffs 0, classes 0
+2da90b732/p14-server-veil-village-3.json: faults 4, diffs 2, classes 1
+  relationships[id].npc1Role: 2 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the bandit contact" live="<absent>"

@@ -1,0 +1,639 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/9598a386-b714-55b7-930f-7c97c14ec75e/scratchpad/mb
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx (7 tests | 2 failed) 885ms
+     × VR34: Show all hands back only eyes the screen draws; a house's People eye is drawn by identity and the hand can shut it 93ms
+     × VR34: where nobody is the house's person, no People eye is drawn and Show all writes none 77ms
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 5 failed) 7486ms
+     × VR34 (b): the screen offers a house's People eye by identity in BOTH stored shapes, and only where someone is its person 11ms
+     × VR34 (a)(c): the switch writes only what the screen offers; a stale family delta no hand can reach is dropped by a flip 5ms
+     × VR34 (b): a power's members carried only on master's top-level list are offered and covered 1ms
+     × without the screen's model the switch covers nothing: it never writes an address it cannot show (withholding) 1ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 2715ms
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js (14 tests | 11 failed) 92532ms
+     × v102-hamlet-6 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3207ms
+     × v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3172ms
+     × v102-village-3 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3260ms
+     × v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 3446ms
+     × v102-town-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 5395ms
+     × v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 6124ms
+     × v102-city-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 11660ms
+     × v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 12965ms
+     × v102-metropolis-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 15677ms
+     × v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves 17490ms
+     × the arms were live: every class of case was met 2ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 18 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > VR34: Show all hands back only eyes the screen draws; a house's People eye is drawn by identity and the hand can shut it
+AssertionError: Show all wrote an eye the screen does not draw: expected [ { …(2) }, { …(2) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "address": "field:institution:inst-den:function",
++     "hidden": false,
++   },
++   {
++     "address": "field:institution:inst-den:people",
++     "hidden": false,
++   },
++ ]
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:124:104
+    122|     const shown = onDone.mock.calls.at(-1)[0];
+    123|     const drawn = drawnAddresses(fence, true);
+    124|     expect(shown.filter(d => !drawn.has(d.address)), 'Show all wrote a…
+       |                                                                                                        ^
+    125|     expect(shown).toContainEqual({ address: 'field:institution:inst-de…
+    126|     // the hand finds that eye in the den's box and shuts it again
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/18]⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > VR34: where nobody is the house's person, no People eye is drawn and Show all writes none
+AssertionError: Show all wrote an eye the screen does not draw: expected [ { …(2) }, { …(2) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "address": "field:institution:inst-den:function",
++     "hidden": false,
++   },
++   {
++     "address": "field:institution:inst-den:people",
++     "hidden": false,
++   },
++ ]
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:140:104
+    138|     const drawn = drawnAddresses(town);
+    139|     expect(drawn.has('field:institution:inst-den:people')).toBe(false);
+    140|     expect(shown.filter(d => !drawn.has(d.address)), 'Show all wrote a…
+       |                                                                                                        ^
+    141|   });
+    142| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-hamlet-6 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-hamlet-6 current dm=false (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers
+v102-hamlet-6 current dm=true (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers
+v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[4].institution: {"key":"Smuggling waypoint","kind":"house","title":"the smuggler","family":"Smuggling wayp | undefined
+v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[4].institution: {"kind":"house","key":"Smuggling waypoint","family":"Smuggling waypoint","title":"the smug | undefined: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-hamlet-6 current dm=false (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers",
++   "v102-hamlet-6 current dm=true (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, gallery: npcs[4].institution: {\"key\":\"Smuggling waypoint\",\"kind\":\"house\",\"title\":\"the smuggler\",\"family\":\"Smuggling wayp | undefined",
++   "v102-hamlet-6 current dm=true (B) Show all vs the hand, the twin: npcs[4].institution: {\"kind\":\"house\",\"key\":\"Smuggling waypoint\",\"family\":\"Smuggling waypoint\",\"title\":\"the smug | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-hamlet-6 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-hamlet-6 master dm=false (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-hamlet-6 master dm=false (A): the switch wrote field:institution:smuggling-waypoint:people, which no screen offers",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-village-3 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-village-3 current dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers
+v102-village-3 current dm=true (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers
+v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[9].institution: {"key":"Fence (word of mouth)","kind":"house","title":"the fence","family":"Fence (word of | undefined
+v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[9].institution: {"kind":"house","key":"Fence (word of mouth)","family":"Fence (word of mouth)","title":"th | undefined: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-village-3 current dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++   "v102-village-3 current dm=true (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++   "v102-village-3 current dm=true (B) Show all vs the hand, gallery: npcs[9].institution: {\"key\":\"Fence (word of mouth)\",\"kind\":\"house\",\"title\":\"the fence\",\"family\":\"Fence (word of | undefined",
++   "v102-village-3 current dm=true (B) Show all vs the hand, the twin: npcs[9].institution: {\"kind\":\"house\",\"key\":\"Fence (word of mouth)\",\"family\":\"Fence (word of mouth)\",\"title\":\"th | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-village-3 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-village-3 master dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-village-3 master dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-town-1 current dm=false (A): the switch wrote field:institution:street-gang:people, which no screen offers
+v102-town-1 current dm=false (A): the switch wrote field:institution:front-businesses:services, which no screen offers
+v102-town-1 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-town-1 current dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers
+v102-town-1 current dm=true (A): the switch wrote field:institution:street-gang:people, which no screen offers
+v102-town-1 current dm=true (A): the switch wrote field:institution:front-businesses:services, which no screen offers
+v102-town-1 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-town-1 current dm=true (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers
+v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[1].institution: {"key":"Street gang","kind":"house","title":"the gang boss","family":"Multiple criminal fa | undefined
+v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[6].institution: {"key":"Front businesses","kind":"house","title":"the front man","family":"Front businesse | undefined
+v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[7].institution: {"key":"Fence (word of mouth)","kind":"house","title":"the fence","family":"Fence (word of | undefined
+v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[1].institution: {"kind":"house","key":"Street gang","family":"Multiple criminal factions","title":"the gan | undefined
+v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[6].institution: {"kind":"house","key":"Front businesses","family":"Front businesses","title":"the front ma | undefined
+v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[7].institution: {"kind":"house","key":"Fence (word of mouth)","family":"Fence (word of mouth)","title":"th | undefined: expected [ …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-town-1 current dm=false (A): the switch wrote field:institution:street-gang:people, which no screen offers",
++   "v102-town-1 current dm=false (A): the switch wrote field:institution:front-businesses:services, which no screen offers",
++   "v102-town-1 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-town-1 current dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++   "v102-town-1 current dm=true (A): the switch wrote field:institution:street-gang:people, which no screen offers",
++   "v102-town-1 current dm=true (A): the switch wrote field:institution:front-businesses:services, which no screen offers",
++   "v102-town-1 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-town-1 current dm=true (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[1].institution: {\"key\":\"Street gang\",\"kind\":\"house\",\"title\":\"the gang boss\",\"family\":\"Multiple criminal fa | undefined",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[6].institution: {\"key\":\"Front businesses\",\"kind\":\"house\",\"title\":\"the front man\",\"family\":\"Front businesse | undefined",
++   "v102-town-1 current dm=true (B) Show all vs the hand, gallery: npcs[7].institution: {\"key\":\"Fence (word of mouth)\",\"kind\":\"house\",\"title\":\"the fence\",\"family\":\"Fence (word of | undefined",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[1].institution: {\"kind\":\"house\",\"key\":\"Street gang\",\"family\":\"Multiple criminal factions\",\"title\":\"the gan | undefined",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[6].institution: {\"kind\":\"house\",\"key\":\"Front businesses\",\"family\":\"Front businesses\",\"title\":\"the front ma | undefined",
++   "v102-town-1 current dm=true (B) Show all vs the hand, the twin: npcs[7].institution: {\"kind\":\"house\",\"key\":\"Fence (word of mouth)\",\"family\":\"Fence (word of mouth)\",\"title\":\"th | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-town-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-town-1 master dm=false (A): the switch wrote field:institution:street-gang:people, which no screen offers
+v102-town-1 master dm=false (A): the switch wrote field:institution:front-businesses:services, which no screen offers
+v102-town-1 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-town-1 master dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers
+v102-town-1 master dm=true (A): the switch wrote field:institution:front-businesses:services, which no screen offers
+v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers
+v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:goals, which no screen offers
+v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:conflicts, which no screen offers
+v102-town-1 master dm=true (B) Show all vs the hand, gallery: factions[1].members: [{"id":"npc_veiled_51a5d658701e3d15","goal":{"long":"See the street gang out of debt for g | undefined
+v102-town-1 master dm=true (B) Show all vs the hand, the twin: factions[1].members: [{"id":"npc_veiled_51a5d658701e3d15","name":"Ibaka Suldus","gender":"female","role":"the g | undefined: expected [ …(10) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-town-1 master dm=false (A): the switch wrote field:institution:street-gang:people, which no screen offers",
++   "v102-town-1 master dm=false (A): the switch wrote field:institution:front-businesses:services, which no screen offers",
++   "v102-town-1 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-town-1 master dm=false (A): the switch wrote field:institution:fence-word-of-mouth:people, which no screen offers",
++   "v102-town-1 master dm=true (A): the switch wrote field:institution:front-businesses:services, which no screen offers",
++   "v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers",
++   "v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:goals, which no screen offers",
++   "v102-town-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:conflicts, which no screen offers",
++   "v102-town-1 master dm=true (B) Show all vs the hand, gallery: factions[1].members: [{\"id\":\"npc_veiled_51a5d658701e3d15\",\"goal\":{\"long\":\"See the street gang out of debt for g | undefined",
++   "v102-town-1 master dm=true (B) Show all vs the hand, the twin: factions[1].members: [{\"id\":\"npc_veiled_51a5d658701e3d15\",\"name\":\"Ibaka Suldus\",\"gender\":\"female\",\"role\":\"the g | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-city-0 current dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-city-0 current dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-city-0 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-city-0 current dm=false (A): the switch wrote field:institution:rookery:people, which no screen offers
+v102-city-0 current dm=true (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-city-0 current dm=true (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-city-0 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-city-0 current dm=true (A): the switch wrote field:institution:rookery:people, which no screen offers
+v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[3].institution: {"key":"Smuggling network","kind":"house","title":"the network's head","family":"Smuggling | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[5].institution: {"key":"Multiple criminal factions","kind":"house","title":"the gang boss","family":"Multi | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[9].institution: {"key":"Front businesses","kind":"house","title":"the front man","family":"Front businesse | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[10].institution: {"key":"Rookery","kind":"house","title":"the rookery boss","family":"Rookery","veiled":tru | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[3].institution: {"kind":"house","key":"Smuggling network","family":"Smuggling waypoint","title":"the netwo | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[5].institution: {"kind":"house","key":"Multiple criminal factions","family":"Multiple criminal factions"," | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[9].institution: {"kind":"house","key":"Front businesses","family":"Front businesses","title":"the front ma | undefined
+v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[10].institution: {"kind":"house","key":"Rookery","family":"Rookery","title":"the rookery boss","veiled":tru | undefined: expected [ …(16) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-city-0 current dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-city-0 current dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-city-0 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-city-0 current dm=false (A): the switch wrote field:institution:rookery:people, which no screen offers",
++   "v102-city-0 current dm=true (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-city-0 current dm=true (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-city-0 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-city-0 current dm=true (A): the switch wrote field:institution:rookery:people, which no screen offers",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[3].institution: {\"key\":\"Smuggling network\",\"kind\":\"house\",\"title\":\"the network's head\",\"family\":\"Smuggling | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[5].institution: {\"key\":\"Multiple criminal factions\",\"kind\":\"house\",\"title\":\"the gang boss\",\"family\":\"Multi | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[9].institution: {\"key\":\"Front businesses\",\"kind\":\"house\",\"title\":\"the front man\",\"family\":\"Front businesse | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, gallery: npcs[10].institution: {\"key\":\"Rookery\",\"kind\":\"house\",\"title\":\"the rookery boss\",\"family\":\"Rookery\",\"veiled\":tru | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[3].institution: {\"kind\":\"house\",\"key\":\"Smuggling network\",\"family\":\"Smuggling waypoint\",\"title\":\"the netwo | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[5].institution: {\"kind\":\"house\",\"key\":\"Multiple criminal factions\",\"family\":\"Multiple criminal factions\",\" | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[9].institution: {\"kind\":\"house\",\"key\":\"Front businesses\",\"family\":\"Front businesses\",\"title\":\"the front ma | undefined",
++   "v102-city-0 current dm=true (B) Show all vs the hand, the twin: npcs[10].institution: {\"kind\":\"house\",\"key\":\"Rookery\",\"family\":\"Rookery\",\"title\":\"the rookery boss\",\"veiled\":tru | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-city-0 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-city-0 master dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-city-0 master dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-city-0 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-city-0 master dm=false (A): the switch wrote field:institution:rookery:people, which no screen offers
+v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:members, which no screen offers
+v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:goals, which no screen offers
+v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:conflicts, which no screen offers
+v102-city-0 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers
+v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[0].members: [{"id":"npc_city_administration","goal":{"long":"End the arrangement between Corrupt City  | undefined
+v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[1].members: [{"id":"npc_veiled_e6a6af3735bf0125","goal":{"long":"See the smuggling network out of debt | undefined
+v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[5].members: [{"id":"npc_veiled_973747efca027abb","goal":{"long":"See more of the world than this place | undefined
+v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[0].members: [{"id":"npc_city_administration","name":"Suresh Dutta","gender":"male","role":"the chief a | undefined
+v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[1].members: [{"id":"npc_veiled_e6a6af3735bf0125","name":"Aditi Dubey","gender":"female","role":"the ne | undefined
+v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[5].members: [{"id":"npc_veiled_973747efca027abb","name":"Lakshmi Iyer","gender":"female","role":"the g | undefined: expected [ …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-city-0 master dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-city-0 master dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-city-0 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-city-0 master dm=false (A): the switch wrote field:institution:rookery:people, which no screen offers",
++   "v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:members, which no screen offers",
++   "v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:goals, which no screen offers",
++   "v102-city-0 master dm=true (A): the switch wrote field:faction:faction.corrupt_city_council:conflicts, which no screen offers",
++   "v102-city-0 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[0].members: [{\"id\":\"npc_city_administration\",\"goal\":{\"long\":\"End the arrangement between Corrupt City  | undefined",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[1].members: [{\"id\":\"npc_veiled_e6a6af3735bf0125\",\"goal\":{\"long\":\"See the smuggling network out of debt | undefined",
++   "v102-city-0 master dm=true (B) Show all vs the hand, gallery: factions[5].members: [{\"id\":\"npc_veiled_973747efca027abb\",\"goal\":{\"long\":\"See more of the world than this place | undefined",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[0].members: [{\"id\":\"npc_city_administration\",\"name\":\"Suresh Dutta\",\"gender\":\"male\",\"role\":\"the chief a | undefined",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[1].members: [{\"id\":\"npc_veiled_e6a6af3735bf0125\",\"name\":\"Aditi Dubey\",\"gender\":\"female\",\"role\":\"the ne | undefined",
++   "v102-city-0 master dm=true (B) Show all vs the hand, the twin: factions[5].members: [{\"id\":\"npc_veiled_973747efca027abb\",\"name\":\"Lakshmi Iyer\",\"gender\":\"female\",\"role\":\"the g | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (current's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-metropolis-1 current dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-metropolis-1 current dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-metropolis-1 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-metropolis-1 current dm=false (A): the switch wrote field:institution:underground-city:people, which no screen offers
+v102-metropolis-1 current dm=true (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-metropolis-1 current dm=true (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-metropolis-1 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-metropolis-1 current dm=true (A): the switch wrote field:institution:underground-city:people, which no screen offers
+v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[3].institution: {"key":"Smuggling network","kind":"house","title":"the network's head","family":"Smuggling | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[6].institution: {"key":"Underground city","kind":"house","title":"the undercity boss","family":"Undergroun | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[11].institution: {"key":"Black market bazaar","kind":"house","title":"the black marketeer","family":"Black  | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[12].institution: {"key":"Underground network","kind":"house","title":"the network's spider","family":"Under | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[3].institution: {"kind":"house","key":"Smuggling network","family":"Smuggling waypoint","title":"the netwo | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[6].institution: {"kind":"house","key":"Underground city","family":"Underground city","title":"the undercit | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[11].institution: {"kind":"house","key":"Black market bazaar","family":"Black market","title":"the black mar | undefined
+v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[12].institution: {"kind":"house","key":"Underground network","family":"Underground network","title":"the ne | undefined: expected [ …(16) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-metropolis-1 current dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-metropolis-1 current dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-metropolis-1 current dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-metropolis-1 current dm=false (A): the switch wrote field:institution:underground-city:people, which no screen offers",
++   "v102-metropolis-1 current dm=true (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-metropolis-1 current dm=true (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-metropolis-1 current dm=true (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-metropolis-1 current dm=true (A): the switch wrote field:institution:underground-city:people, which no screen offers",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[3].institution: {\"key\":\"Smuggling network\",\"kind\":\"house\",\"title\":\"the network's head\",\"family\":\"Smuggling | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[6].institution: {\"key\":\"Underground city\",\"kind\":\"house\",\"title\":\"the undercity boss\",\"family\":\"Undergroun | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[11].institution: {\"key\":\"Black market bazaar\",\"kind\":\"house\",\"title\":\"the black marketeer\",\"family\":\"Black  | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, gallery: npcs[12].institution: {\"key\":\"Underground network\",\"kind\":\"house\",\"title\":\"the network's spider\",\"family\":\"Under | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[3].institution: {\"kind\":\"house\",\"key\":\"Smuggling network\",\"family\":\"Smuggling waypoint\",\"title\":\"the netwo | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[6].institution: {\"kind\":\"house\",\"key\":\"Underground city\",\"family\":\"Underground city\",\"title\":\"the undercit | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[11].institution: {\"kind\":\"house\",\"key\":\"Black market bazaar\",\"family\":\"Black market\",\"title\":\"the black mar | undefined",
++   "v102-metropolis-1 current dm=true (B) Show all vs the hand, the twin: npcs[12].institution: {\"kind\":\"house\",\"key\":\"Underground network\",\"family\":\"Underground network\",\"title\":\"the ne | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > v102-metropolis-1 (master's stored shape), Reveal DM off and on: the switch writes only what the screen offers, and serves what the hand serves
+AssertionError: v102-metropolis-1 master dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers
+v102-metropolis-1 master dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers
+v102-metropolis-1 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers
+v102-metropolis-1 master dm=false (A): the switch wrote field:institution:underground-city:people, which no screen offers
+v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers
+v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:goals, which no screen offers
+v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:conflicts, which no screen offers
+v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.the_hidden_hand:members, which no screen offers
+v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: factions[2].members: [{"id":"npc_veiled_e9d9fe4285c61fea","goal":{"long":"Be remembered as the one who kept the | undefined
+v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: factions[7].members: [{"id":"npc_veiled_54235cc2902e9887","goal":{"long":"Become someone Balam Lahun needs as m | undefined
+v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: factions[2].members: [{"id":"npc_veiled_e9d9fe4285c61fea","name":"Zaachila Ku","gender":"male","role":"the netw | undefined
+v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: factions[7].members: [{"id":"npc_veiled_54235cc2902e9887","name":"Xochitl Itzam","gender":"male","role":"the un | undefined: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "v102-metropolis-1 master dm=false (A): the switch wrote field:institution:smuggling-network:people, which no screen offers",
++   "v102-metropolis-1 master dm=false (A): the switch wrote field:institution:multiple-criminal-factions:people, which no screen offers",
++   "v102-metropolis-1 master dm=false (A): the switch wrote field:institution:front-businesses:people, which no screen offers",
++   "v102-metropolis-1 master dm=false (A): the switch wrote field:institution:underground-city:people, which no screen offers",
++   "v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:members, which no screen offers",
++   "v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:goals, which no screen offers",
++   "v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.thieves_guild:conflicts, which no screen offers",
++   "v102-metropolis-1 master dm=true (A): the switch wrote field:faction:faction.the_hidden_hand:members, which no screen offers",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: factions[2].members: [{\"id\":\"npc_veiled_e9d9fe4285c61fea\",\"goal\":{\"long\":\"Be remembered as the one who kept the | undefined",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, gallery: factions[7].members: [{\"id\":\"npc_veiled_54235cc2902e9887\",\"goal\":{\"long\":\"Become someone Balam Lahun needs as m | undefined",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: factions[2].members: [{\"id\":\"npc_veiled_e9d9fe4285c61fea\",\"name\":\"Zaachila Ku\",\"gender\":\"male\",\"role\":\"the netw | undefined",
++   "v102-metropolis-1 master dm=true (B) Show all vs the hand, the twin: factions[7].members: [{\"id\":\"npc_veiled_54235cc2902e9887\",\"name\":\"Xochitl Itzam\",\"gender\":\"male\",\"role\":\"the un | undefined",
++ ]
+
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:347:56
+    345|           }
+    346|         }
+    347|         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
+       |                                                        ^
+    348|       }, TOWN_TIMEOUT_MS);
+    349|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/18]⎯
+
+ FAIL  tests/security/criminalSwitchHandReach.pglite.test.js > a switch sets only what a hand can see and undo on that record (VR34) > the arms were live: every class of case was met
+AssertionError: master's shape: a power's Members eye drawn from the top-level roster: expected 0 to be greater than 0
+ ❯ tests/security/criminalSwitchHandReach.pglite.test.js:360:106
+    358|     expect(tally.peopleOpen, "(E) a house's people sent with its Peopl…
+    359|     expect(tally.peopleWhole, '(E) a house hidden whole with its Peopl…
+    360|     expect(tally.masterMembers, "master's shape: a power's Members eye…
+       |                                                                                                          ^
+    361|     expect(tally.untouchedEyes, '(F) People and Members eyes read agai…
+    362|     expect(tally.untouchedShown, '(F) some of them open by default (a …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/18]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (b): the screen offers a house's People eye by identity in BOTH stored shapes, and only where someone is its person
+AssertionError: the people car's shape: institution { kind: house, key }: expected undefined to be truthy
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:186:90
+    184|   it('VR34 (b): the screen offers a house\'s People eye by identity in…
+    185|     const peopleEye = (t) => curateModelFor(t, []).sections.flatMap(se…
+    186|     expect(peopleEye(town), 'the people car\'s shape: institution { ki…
+       |                                                                                          ^
+    187|     const master = { ...town, npcs: town.npcs.map(n => ({ ...n, instit…
+    188|     expect(peopleEye(master), "master's stored shape: institution as t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/18]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (a)(c): the switch writes only what the screen offers; a stale family delta no hand can reach is dropped by a flip
+AssertionError: show all wrote an address no hand can reach: expected [ { …(2) }, { …(2) }, { …(2) }, …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "address": "field:institution:inst-den:function",
++     "hidden": false,
++   },
++   {
++     "address": "field:institution:inst-den:services",
++     "hidden": false,
++   },
++   {
++     "address": "field:institution:inst-den:people",
++     "hidden": false,
++   },
++   {
++     "address": "field:faction:faction.red_hand:members",
++     "hidden": false,
++   },
++   {
++     "address": "field:faction:faction.red_hand:conflicts",
++     "hidden": false,
++   },
++   {
++     "address": "field:faction:faction.red_hand:description",
++     "hidden": false,
++   },
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:202:102
+    200|     const shown = setCriminalVeil([], d, false, undefined, m);
+    201|     expect(shown.length).toBeGreaterThan(0);
+    202|     expect(shown.filter(x => !offers.has(x.address)), 'show all wrote …
+       |                                                                                                      ^
+    203|     expect(shown.map(x => x.address)).not.toContain('field:institution…
+    204|     expect(shown.map(x => x.address)).not.toContain(`field:faction:${h…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/18]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (b): a power's members carried only on master's top-level list are offered and covered
+AssertionError: the members eye on the power whose roster sits on the other list: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:221:123
+    219|     const offers = screenOffers(m);
+    220|     const id = CARD_KINDS.faction.idOf(master.powerStructure.factions[…
+    221|     expect(offers.has(`field:faction:${id}:members`), 'the members eye…
+       |                                                                                                                           ^
+    222|     expect(offers.has('class:faction:members'), "the Powers' members s…
+    223|     const d = defaultVeilFor(master);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/18]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > without the screen's model the switch covers nothing: it never writes an address it cannot show (withholding)
+AssertionError: expected [ 'block:services.criminal', …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "block:services.criminal",
++   "block:defense.criminalStructure",
++   "block:power.criminalUnderside",
++   "card:institution:inst-den",
++   "field:institution:inst-den:description",
++   "field:institution:inst-den:function",
++   "field:institution:inst-den:services",
++   "field:institution:inst-den:people",
++   "field:faction:faction.red_hand:members",
++   "field:faction:faction.red_hand:goals",
++   "field:faction:faction.red_hand:conflicts",
++   "field:faction:faction.red_hand:description",
++   "class:npc:corruption",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:246:43
+    244|
+    245|   it('without the screen\'s model the switch covers nothing: it never …
+    246|     expect(criminalPartsOf(defaults, [])).toEqual([]);
+       |                                           ^
+    247|     expect(criminalSwitchStateOf(defaults, [])).toBe('none');
+    248|     expect(flipCriminalVeil([], defaults)).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/18]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ 'vs-thorp-3 (e)', …(27) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "vs-thorp-3 (e)",
++   "vs-thorp-3 (g): field:institution:local-fence:people",
++   "vs-thorp-3 dm (e)",
++   "vs-thorp-3 dm (g): field:institution:local-fence:people",
++   "vs-village-2 (e)",
++   "vs-village-2 (g): field:institution:fence-word-of-mouth:people",
++   "vs-village-2 dm (e)",
++   "vs-village-2 dm (g): field:institution:fence-word-of-mouth:people",
++   "vs-town-2 (e)",
++   "vs-town-2 (g): field:institution:fence-word-of-mouth:services, field:institution:fence-word-of-mouth:people",
++   "vs-town-2 dm (e)",
++   "vs-town-2 dm (g): field:institution:fence-word-of-mouth:services, field:institution:fence-word-of-mouth:people",
++   "vs-city-0 (e)",
++   "vs-city-0 (g): field:institution:smuggling-network:people, field:institution:multiple-criminal-factions:people, field:institution:whisper-market:people, field:institution:black-market:people",
++   "vs-city-0 dm (e)",
++   "vs-city-0 dm (g): field:institution:smuggling-network:people, field:institution:multiple-criminal-factions:people, field:institution:whisper-market:people, field:institution:black-market:people",
++   "vs-city-1 (e)",
++   "vs-city-1 (g): field:institution:smuggling-network:people, field:institution:thieves-guild-chapter:people, field:institution:front-businesses:people, field:institution:whisper-market:people, field:institution:black-market:people",
++   "vs-city-1 dm (e)",
++   "vs-city-1 dm (g): field:institution:smuggling-network:people, field:institution:thieves-guild-chapter:people, field:institution:front-businesses:people, field:institution:whisper-market:people, field:institution:black-market:people",
++   "vs-metropolis-0 (e)",
++   "vs-metropolis-0 (g): field:institution:black-market-bazaar:services, field:institution:front-businesses:services, field:institution:front-businesses:people, field:institution:rookery:people, field:institution:black-market-bazaar:people",
++   "vs-metropolis-0 dm (e)",
++   "vs-metropolis-0 dm (g): field:institution:black-market-bazaar:services, field:institution:front-businesses:services, field:institution:front-businesses:people, field:institution:rookery:people, field:institution:black-market-bazaar:people",
++   "vs-metropolis-1 (e)",
++   "vs-metropolis-1 (g): field:institution:thieves-guild-powerful:people, field:institution:front-businesses:services, field:institution:front-businesses:people, field:institution:underground-network:people, field:institution:underground-city:people",
++   "vs-metropolis-1 dm (e)",
++   "vs-metropolis-1 dm (g): field:institution:thieves-guild-powerful:people, field:institution:front-businesses:services, field:institution:front-businesses:people, field:institution:underground-network:people, field:institution:underground-city:people",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:347:22
+    345|       }
+    346|     }
+    347|     expect(failures).toEqual([]);
+       |                      ^
+    348|     expect(tally.copies).toBe(24);
+    349|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/18]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  18 failed | 12 passed (30)
+   Start at  02:57:01
+   Duration  92.79s (transform 6.77s, setup 107ms, import 4.81s, tests 100.90s, environment 646ms)
+
+exit 1

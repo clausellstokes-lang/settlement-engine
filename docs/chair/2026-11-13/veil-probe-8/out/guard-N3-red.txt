@@ -1,0 +1,88 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/7e9291bd-44ea-54a0-8961-9933d99191c8/scratchpad/wt
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js (3 tests | 2 failed) 175708ms
+     × every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen 101906ms
+     × THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent 46267ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > every string hidden by hand, marked at birth: nothing of it, and no name of a house hidden whole, in any of the four reads, both shapes, DM off and on, live and frozen
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "rv5-plant-city-infiltrated-0 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-metropolis-infiltrated-0 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-city-infiltrated-2 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-city-infiltrated-2 new dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-city-infiltrated-2 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-city-infiltrated-2 new dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "cv6-proc-city-infiltrated-2 new dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++ ]
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:358:32
+    356|     expect(reads).toBe(TOWNS.length * 2 * 4 * 6);
+    357|     expect(pages).toBe(TOWNS.length * 2 * 4);
+    358|     expect([...new Set(sent)]).toEqual([]);
+       |                                ^
+    359|   }, TOWN_TIMEOUT_MS);
+    360|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > THE SAME-STEP CLASS (the limit the marker cannot reach): the composed homes of a tie and a person's impression, written from marked sources, are not sent
+AssertionError: expected [ …(8) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true live import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot gallery: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc1Role",
++   "rv5-plant-city-infiltrated-0 new same-step dm=true snapshot import: a tie's copy of a role its person's entry withholds, at relationships[].npc2Role",
++ ]
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js:397:32
+    395|       }
+    396|     }
+    397|     expect([...new Set(sent)]).toEqual([]);
+       |                                ^
+    398|   }, TOWN_TIMEOUT_MS);
+    399| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  21:58:04
+   Duration  176.10s (transform 4.78s, setup 38ms, import 189ms, tests 175.71s, environment 0ms)
+
+exit 1

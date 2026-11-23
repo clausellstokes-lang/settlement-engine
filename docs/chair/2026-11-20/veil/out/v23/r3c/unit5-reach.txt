@@ -1,0 +1,18 @@
+(a) power rows withheld (lane shape, gallery, Reveal off): 45 on 35 pages; of them the counterfactual (no hideable house at all) seats the same power: 14 rows on 12 pages
+(b) pages serving an organised crime type (kept by attribution) with no criminal power served: 0
+
+r3m-town-infiltrated-0-12: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Front businesses/Criminal, Rookery/Criminal; a criminal one hidden: true)
+r3m-town-infiltrated-0-12: "The Independent Bloc" withheld; the counterfactual seats it too (hidden houses: Front businesses/Criminal, Rookery/Criminal; a criminal one hidden: true)
+r3m-city-insurgency-1-104: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Thieves' guild chapter/Criminal, Front businesses/Criminal, Underground network/Criminal, Whisper market/Criminal, Black market/Criminal, Contract killer/Criminal; a criminal one hidden: true)
+r3m-city-infiltrated-1-112: "The Independent Bloc" withheld; the counterfactual seats it too (hidden houses: Multiple criminal factions/Criminal; a criminal one hidden: true)
+r3m-metropolis-insurgency-1-124: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Thieves' guild (powerful)/Criminal, Front businesses/Criminal, Underground network/Criminal, Underground city/Criminal, Whisper market/Criminal, Assassins' guild/Criminal; a criminal one hidden: true)
+r3m-metropolis-indebted-1-136: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Multiple criminal factions/Criminal, Front businesses/Criminal, Underground network/Criminal, Underground city/Criminal, Whisper market/Criminal, Black market bazaar/Criminal, Assassins' guild/Criminal; a criminal one hidden: true)
+r3m-town-insurgency-0-14: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Street gang/Criminal, Fence (word of mouth)/Criminal; a criminal one hidden: true)
+r3m-metropolis-indebted-0-66: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Multiple criminal factions/Criminal, Front businesses/Criminal, Underground city/Criminal, Whisper market/Criminal, Black market bazaar/Criminal, Assassins' guild/Criminal; a criminal one hidden: true)
+r3m-city-infiltrated-1-102: "The Independent Bloc" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal; a criminal one hidden: true)
+r3m-city-infiltrated-1-102: "The Free Alliance" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal; a criminal one hidden: true)
+r3m-city-insurgency-1-114: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Thieves' guild chapter/Criminal, Front businesses/Criminal, Black market/Criminal, Contract killer/Criminal, Underground network/Criminal; a criminal one hidden: true)
+r3m-town-none-0-23: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling operation/Criminal, Front businesses/Criminal, Rookery/Criminal, Street gang/Criminal; a criminal one hidden: true)
+r3m-metropolis-wartime-0-59: "Thieves' Guild" withheld; the counterfactual seats it too (hidden houses: Smuggling network/Criminal, Multiple criminal factions/Criminal, Front businesses/Criminal, Underground city/Criminal, Whisper market/Criminal, Black market bazaar/Criminal, Assassins' guild/Criminal; a criminal one hidden: true)
+r3m-city-none-1-111: "The Independent Bloc" withheld; the counterfactual seats it too (hidden houses: Black market/Criminal; a criminal one hidden: true)
+

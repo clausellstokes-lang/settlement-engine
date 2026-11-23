@@ -1,0 +1,193 @@
+# R3-CURE-5 unit 3 (ii): THE GATE SHOWN ABLE TO FAIL. A SCRATCH copy (/tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/scr, never committed: src/ and 212 copied from dbff7eeb3's tree) with the re-derivation of safety.criminalInstitutions and the covert-service withholding switched OFF in both engines (the diff below; template r3c5_scrtpl = x211 + that 212). Command: sh measure/gate.sh <scratch> <out> r3c5_scrtpl 2
+--- /home/user/wt/r3c4/src/domain/display/galleryRosterChoices.js	2026-11-20 12:17:54.011670858 +0000
++++ src/domain/display/galleryRosterChoices.js	2026-11-20 12:30:45.707918760 +0000
+@@ -185,7 +185,7 @@
+   // covert rung, covertCrimeHeld), drawn from the criminal climate the houses moved (servicesGenerator.js), which no served
+   // field re-derives: withheld
+   const spOps = es0(s);
+-  if (spOps && Array.isArray(spOps.criminalInstitutions)) {
++  if (false && spOps && Array.isArray(spOps.criminalInstitutions)) { // SCRATCH (R3-CURE-5 unit 3 (ii)): re-derivation OFF
+     /** @type {Map<string, number>} */
+     const left = new Map();
+     for (const h of houses) {
+@@ -199,7 +199,7 @@
+     });
+   }
+   const svc = recAt(s, 'availableServices');
+-  if (svc && Array.isArray(svc.criminal)) svc.criminal = svc.criminal.filter(x => !(isRec(x) && x.institution === COVERT));
++  if (false && svc && Array.isArray(svc.criminal)) svc.criminal = svc.criminal.filter(x => !(isRec(x) && x.institution === COVERT)); // SCRATCH: OFF
+ 
+   // registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the served rows; unreadable: withheld)
+   if (es && 'economicComplexity' in es) {
+--- /home/user/wt/r3c4/supabase/migrations/212_share_veil_later_cures.sql	2026-11-20 11:59:25.367312729 +0000
++++ supabase/migrations/212_share_veil_later_cures.sql	2026-11-20 12:30:45.710217909 +0000
+@@ -2448,7 +2448,7 @@
+   -- (the hidden "Multiple criminal factions" wrote "Rival Gangs", which holds no house's name); (b) a covert criminal service
+   -- (`institution` '(covert)', the key's covert rung), drawn from the criminal climate the houses moved
+   -- (servicesGenerator.js), which no served field re-derives: withheld
+-  if jsonb_typeof(s #> '{economicState,safetyProfile,criminalInstitutions}') = 'array' then
++  if false and jsonb_typeof(s #> '{economicState,safetyProfile,criminalInstitutions}') = 'array' then
+     s := jsonb_set(s, '{economicState,safetyProfile,criminalInstitutions}', coalesce((select jsonb_agg(e order by o) from (
+         select e, o, row_number() over (partition by e order by o) as k
+           from jsonb_array_elements(s #> '{economicState,safetyProfile,criminalInstitutions}') with ordinality x(e, o)) z
+@@ -2457,7 +2457,7 @@
+                    where jsonb_typeof(h) = 'object'
+                      and crimlabels ->> translate(public._gallery_veil_str(h -> 'name'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = (e #>> '{}'))), '[]'));
+   end if;
+-  if jsonb_typeof(s #> '{availableServices,criminal}') = 'array' then
++  if false and jsonb_typeof(s #> '{availableServices,criminal}') = 'array' then
+     s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
+       where not (jsonb_typeof(e) = 'object' and e -> 'institution' = '"(covert)"'::jsonb)), '[]'));
+   end if;
+
+# the HIGHER towns per engine/Reveal:
+{
+ "server/off": [
+  "town-indebted-0-16 diffuse>null",
+  "city-none-0-37 semi-organized>null",
+  "city-wartime-0-49 semi-organized>null",
+  "town-wartime-0-19 diffuse>null",
+  "city-none-0-31 semi-organized>diffuse"
+ ],
+ "twin/off": [
+  "town-indebted-0-16 diffuse>null",
+  "city-none-0-37 semi-organized>null",
+  "city-wartime-0-49 semi-organized>null",
+  "town-wartime-0-19 diffuse>null",
+  "city-none-0-31 semi-organized>diffuse"
+ ],
+ "server/dm": [
+  "town-indebted-0-16 diffuse>null",
+  "city-none-0-37 semi-organized>null",
+  "city-wartime-0-49 semi-organized>null",
+  "town-wartime-0-19 diffuse>null",
+  "city-none-0-31 semi-organized>diffuse"
+ ],
+ "twin/dm": [
+  "town-indebted-0-16 diffuse>null",
+  "city-none-0-37 semi-organized>null",
+  "city-wartime-0-49 semi-organized>null",
+  "town-wartime-0-19 diffuse>null",
+  "city-none-0-31 semi-organized>diffuse"
+ ]
+}
+
+shard 1 rc=0
+shard 0 rc=0
+shard 2 rc=0
+shard 3 rc=0
+births 140; with a hidden house and a counterfactual 92; control 48; threw 0
+tally (engine/Reveal): {"server/off":{"HIGHER":5,"EQUAL":78,"LOWER":9,"magicAbove":0},"twin/off":{"HIGHER":5,"EQUAL":78,"LOWER":9,"magicAbove":0},"server/dm":{"HIGHER":5,"EQUAL":78,"LOWER":9,"magicAbove":0},"twin/dm":{"HIGHER":5,"EQUAL":78,"LOWER":9,"magicAbove":0}}
+
+LOWER towns (9): town | crisis | dial | per read: served < counterfactual, the field whose swap alone closes it
+  r3m-city-under_siege-1-118 | under_siege | 66 | server/off: null < diffuse closes: incomeSources+servicesCriminal ; twin/off: null < diffuse closes: incomeSources+servicesCriminal ; server/dm: null < diffuse closes: incomeSources+servicesCriminal ; twin/dm: null < diffuse closes: incomeSources+servicesCriminal
+  r3m-metropolis-insurgency-1-124 | insurgency | 56 | server/off: semi-organized < organized closes: powers ; twin/off: semi-organized < organized closes: powers ; server/dm: semi-organized < organized closes: powers ; twin/dm: semi-organized < organized closes: powers
+  r3m-metropolis-wartime-0-59 | wartime | 66 | server/off: semi-organized < organized closes: powers ; twin/off: semi-organized < organized closes: powers ; server/dm: semi-organized < organized closes: powers ; twin/dm: semi-organized < organized closes: powers
+  r3m-town-insurgency-1-94 | insurgency | 49 | server/off: null < diffuse closes: incomeSources ; twin/off: null < diffuse closes: incomeSources ; server/dm: null < diffuse closes: incomeSources ; twin/dm: null < diffuse closes: incomeSources
+  r3m-town-none-0-23 | none | 94 | server/off: semi-organized < organized closes: powers ; twin/off: semi-organized < organized closes: powers ; server/dm: semi-organized < organized closes: powers ; twin/dm: semi-organized < organized closes: powers
+  r3m-town-none-1-91 | none | 69 | server/off: null < diffuse closes: servicesCriminal ; twin/off: null < diffuse closes: servicesCriminal ; server/dm: null < diffuse closes: servicesCriminal ; twin/dm: null < diffuse closes: servicesCriminal
+  r3m-town-under_siege-0-18 | under_siege | 10 | server/off: null < diffuse closes: incomeSources ; twin/off: null < diffuse closes: incomeSources ; server/dm: null < diffuse closes: incomeSources ; twin/dm: null < diffuse closes: incomeSources
+  r3m-town-under_siege-1-88 | under_siege | 38 | server/off: null < diffuse closes: incomeSources ; twin/off: null < diffuse closes: incomeSources ; server/dm: null < diffuse closes: incomeSources ; twin/dm: null < diffuse closes: incomeSources
+  r3m-town-under_siege-1-98 | under_siege | 38 | server/off: null < diffuse closes: incomeSources+servicesCriminal ; twin/off: null < diffuse closes: incomeSources+servicesCriminal ; server/dm: null < diffuse closes: incomeSources+servicesCriminal ; twin/dm: null < diffuse closes: incomeSources+servicesCriminal
+
+THE CONTROL BY CRIME-DIAL STRATUM (reported, not gated): served Defense key, hidden-house pool against the control (no hideable house), and the pool's counterfactual
+  server/off low (5-34): organized pool 0/24 (0%) cf 0/24 (0%) control 0/24 (0%) | semi-organized pool 21/24 (88%) cf 20/24 (83%) control 6/24 (25%) | diffuse pool 0/24 (0%) cf 1/24 (4%) control 3/24 (13%) | null pool 3/24 (13%) cf 3/24 (13%) control 15/24 (63%)
+  server/off mid (35-65): organized pool 0/27 (0%) cf 1/27 (4%) control 0/14 (0%) | semi-organized pool 22/27 (81%) cf 19/27 (70%) control 1/14 (7%) | diffuse pool 1/27 (4%) cf 4/27 (15%) control 2/14 (14%) | null pool 4/27 (15%) cf 3/27 (11%) control 11/14 (79%)
+  server/off high (66-95): organized pool 11/41 (27%) cf 13/41 (32%) control 1/10 (10%) | semi-organized pool 22/41 (54%) cf 20/41 (49%) control 0/10 (0%) | diffuse pool 4/41 (10%) cf 5/41 (12%) control 6/10 (60%) | null pool 4/41 (10%) cf 3/41 (7%) control 3/10 (30%)
+  server/dm low (5-34): organized pool 0/24 (0%) cf 0/24 (0%) control 0/24 (0%) | semi-organized pool 21/24 (88%) cf 20/24 (83%) control 6/24 (25%) | diffuse pool 0/24 (0%) cf 1/24 (4%) control 3/24 (13%) | null pool 3/24 (13%) cf 3/24 (13%) control 15/24 (63%)
+  server/dm mid (35-65): organized pool 0/27 (0%) cf 1/27 (4%) control 0/14 (0%) | semi-organized pool 22/27 (81%) cf 19/27 (70%) control 1/14 (7%) | diffuse pool 1/27 (4%) cf 4/27 (15%) control 2/14 (14%) | null pool 4/27 (15%) cf 3/27 (11%) control 11/14 (79%)
+  server/dm high (66-95): organized pool 11/41 (27%) cf 13/41 (32%) control 1/10 (10%) | semi-organized pool 22/41 (54%) cf 20/41 (49%) control 0/10 (0%) | diffuse pool 4/41 (10%) cf 5/41 (12%) control 6/10 (60%) | null pool 4/41 (10%) cf 3/41 (7%) control 3/10 (30%)
+  twin/off low (5-34): organized pool 0/24 (0%) cf 0/24 (0%) control 0/24 (0%) | semi-organized pool 21/24 (88%) cf 20/24 (83%) control 6/24 (25%) | diffuse pool 0/24 (0%) cf 1/24 (4%) control 3/24 (13%) | null pool 3/24 (13%) cf 3/24 (13%) control 15/24 (63%)
+  twin/off mid (35-65): organized pool 0/27 (0%) cf 1/27 (4%) control 0/14 (0%) | semi-organized pool 22/27 (81%) cf 19/27 (70%) control 1/14 (7%) | diffuse pool 1/27 (4%) cf 4/27 (15%) control 2/14 (14%) | null pool 4/27 (15%) cf 3/27 (11%) control 11/14 (79%)
+  twin/off high (66-95): organized pool 11/41 (27%) cf 13/41 (32%) control 1/10 (10%) | semi-organized pool 22/41 (54%) cf 20/41 (49%) control 0/10 (0%) | diffuse pool 4/41 (10%) cf 5/41 (12%) control 6/10 (60%) | null pool 4/41 (10%) cf 3/41 (7%) control 3/10 (30%)
+  twin/dm low (5-34): organized pool 0/24 (0%) cf 0/24 (0%) control 0/24 (0%) | semi-organized pool 21/24 (88%) cf 20/24 (83%) control 6/24 (25%) | diffuse pool 0/24 (0%) cf 1/24 (4%) control 3/24 (13%) | null pool 3/24 (13%) cf 3/24 (13%) control 15/24 (63%)
+  twin/dm mid (35-65): organized pool 0/27 (0%) cf 1/27 (4%) control 0/14 (0%) | semi-organized pool 22/27 (81%) cf 19/27 (70%) control 1/14 (7%) | diffuse pool 1/27 (4%) cf 4/27 (15%) control 2/14 (14%) | null pool 4/27 (15%) cf 3/27 (11%) control 11/14 (79%)
+  twin/dm high (66-95): organized pool 11/41 (27%) cf 13/41 (32%) control 1/10 (10%) | semi-organized pool 22/41 (54%) cf 20/41 (49%) control 0/10 (0%) | diffuse pool 4/41 (10%) cf 5/41 (12%) control 6/10 (60%) | null pool 4/41 (10%) cf 3/41 (7%) control 3/10 (30%)
+
+THE TELL COLUMN (twin; ruling 41 (2)): per town whose key reads LOWER, the served page against the regenerated house-free page under the open read, the default veil and the criminal switch OFF; "equal under" names each setting under which EVERY criminal field is equal (no tell); else the differing fields
+  r3m-town-indebted-0-16 Reveal off: DIFFERS under every setting; fewest under open: covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under default: crimeTypes: served ["debt evasion"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["debt evasion"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+  r3m-town-indebted-0-16 Reveal dm: DIFFERS under every setting; fewest under open: covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under default: crimeTypes: served ["debt evasion"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["debt evasion"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+  r3m-town-under_siege-1-88 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 0 | B 2 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null
+  r3m-town-under_siege-1-88 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 0 | B 2 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null
+  r3m-metropolis-insurgency-1-124 Reveal off: DIFFERS under every setting; fewest under open: crimeTypes: served ["information trade","loyalty testing","political violence"] | B ["Lawlessness","information trade","loyalty testing","political violence"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; defenseKey: served semi-organized | B organized ; covertHeld: served false | B true
+      under default: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served ["Gambling District","Red Light District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 2 | B 0 ; defenseKey: served semi-organized | B organized
+      under criminalSwitchOff: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served ["Gambling District","Red Light District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 2 | B 0 ; defenseKey: served semi-organized | B organized
+  r3m-metropolis-insurgency-1-124 Reveal dm: DIFFERS under every setting; fewest under open: crimeTypes: served ["information trade","loyalty testing","political violence"] | B ["Lawlessness","information trade","loyalty testing","political violence"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; goalsAtCriminalPower: served 0 | B 5 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized ; covertHeld: served false | B true
+      under default: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served ["Gambling District","Red Light District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 2 | B 0 ; goalsAtCriminalPower: served 0 | B 5 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized
+      under criminalSwitchOff: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served ["Gambling District","Red Light District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 2 | B 0 ; goalsAtCriminalPower: served 0 | B 5 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized
+  r3m-city-none-0-37 Reveal off: DIFFERS under every setting; fewest under open: opsLabels: served ["Rival Gangs"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under default: opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under criminalSwitchOff: opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-city-none-0-37 Reveal dm: DIFFERS under every setting; fewest under open: opsLabels: served ["Rival Gangs"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under default: opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under criminalSwitchOff: opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-city-wartime-0-49 Reveal off: DIFFERS under every setting; fewest under open: opsLabels: served ["Rival Gangs"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under default: crimeTypes: served ["conscription fraud","deserter networks"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-city-wartime-0-49 Reveal dm: DIFFERS under every setting; fewest under open: opsLabels: served ["Rival Gangs"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under default: crimeTypes: served ["conscription fraud","deserter networks"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-town-under_siege-0-18 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 2 | B 0 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+  r3m-town-under_siege-0-18 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 2 | B 0 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+  r3m-town-insurgency-1-94 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served [] | B null
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served [] | B null
+  r3m-town-insurgency-1-94 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served [] | B null
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["information trade","loyalty testing","political violence"] | B [] ; opsLabels: served [] | B null
+  r3m-town-under_siege-1-98 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; covertServices: served [] | B ["Fencing stolen goods","Hired muscle"] ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+  r3m-town-under_siege-1-98 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+      under open: incomeRow: served [] | B ["Black Market Revenue"] ; covertServices: served [] | B ["Fencing stolen goods","Hired muscle"] ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["black market food","desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 2 | B 0
+  r3m-city-under_siege-1-118 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 1 | B 0
+      under open: crimeTypes: served ["desperation theft"] | B ["Magical crime","black market food","desperation theft"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; covertServices: served [] | B ["Contraband"] ; criminalServicesCount: served 1 | B 4 ; defenseKey: served null | B diffuse ; magicalCrime: served false | B true ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 1 | B 0
+  r3m-city-under_siege-1-118 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 1 | B 0
+      under open: crimeTypes: served ["desperation theft"] | B ["Magical crime","black market food","desperation theft"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; covertServices: served [] | B ["Contraband"] ; criminalServicesCount: served 1 | B 4 ; defenseKey: served null | B diffuse ; magicalCrime: served false | B true ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served [] | B null ; criminalServicesCount: served 1 | B 0
+  r3m-town-wartime-0-19 Reveal off: DIFFERS under every setting; fewest under open: covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under default: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+  r3m-town-wartime-0-19 Reveal dm: DIFFERS under every setting; fewest under open: covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under default: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served [] | B null ; covertServices: served ["Fencing stolen goods"] | B [] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served diffuse | B null ; covertHeld: served true | B false
+  r3m-town-none-0-23 Reveal off: DIFFERS under every setting; fewest under open: incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; defenseKey: served semi-organized | B organized ; covertHeld: served false | B true
+      under default: crimeTypes: served ["Magical crime"] | B [] ; opsLabels: served ["Gambling Den"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B organized ; magicalCrime: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["Magical crime"] | B [] ; opsLabels: served ["Gambling Den"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B organized ; magicalCrime: served true | B false
+  r3m-town-none-0-23 Reveal dm: DIFFERS under every setting; fewest under open: incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; goalsAtCriminalPower: served 0 | B 7 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized ; covertHeld: served false | B true
+      under default: crimeTypes: served ["Magical crime"] | B [] ; opsLabels: served ["Gambling Den"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 1 | B 0 ; goalsAtCriminalPower: served 0 | B 7 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized ; magicalCrime: served true | B false
+      under criminalSwitchOff: crimeTypes: served ["Magical crime"] | B [] ; opsLabels: served ["Gambling Den"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 1 | B 0 ; goalsAtCriminalPower: served 0 | B 7 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized ; magicalCrime: served true | B false
+  r3m-city-none-0-31 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under open: crimeTypes: served ["desperation theft"] | B ["black market food","desperation theft"] ; opsLabels: served ["Rival Gangs"] | B [] ; incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-city-none-0-31 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+      under open: crimeTypes: served ["desperation theft"] | B ["black market food","desperation theft"] ; opsLabels: served ["Rival Gangs"] | B [] ; incomeRow: served [] | B ["Black Market Revenue"] ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["desperation theft"] | B [] ; opsLabels: served ["Rival Gangs"] | B null ; criminalServicesCount: served 1 | B 0 ; defenseKey: served semi-organized | B null
+  r3m-metropolis-wartime-0-59 Reveal off: DIFFERS under every setting; fewest under default: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served ["Rival Gangs","Gambling District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 0 ; defenseKey: served semi-organized | B organized
+      under open: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B ["Magical crime","conscription fraud","deserter networks","war profiteering"] ; opsLabels: served ["Rival Gangs","Gambling District"] | B ["Gambling District"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 1 ; defenseKey: served semi-organized | B organized ; magicalCrime: served false | B true ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served ["Rival Gangs","Gambling District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 0 ; defenseKey: served semi-organized | B organized
+  r3m-metropolis-wartime-0-59 Reveal dm: DIFFERS under every setting; fewest under default: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served ["Rival Gangs","Gambling District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 0 ; goalsAtCriminalPower: served 0 | B 9 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized
+      under open: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B ["Magical crime","conscription fraud","deserter networks","war profiteering"] ; opsLabels: served ["Rival Gangs","Gambling District"] | B ["Gambling District"] ; incomeRow: served [] | B ["Shadow Economy (untaxed)"] ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 1 ; goalsAtCriminalPower: served 0 | B 9 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized ; magicalCrime: served false | B true ; covertHeld: served false | B true
+      under criminalSwitchOff: crimeTypes: served ["conscription fraud","deserter networks","war profiteering"] | B [] ; opsLabels: served ["Rival Gangs","Gambling District"] | B null ; criminalPowers: served [] | B ["Thieves' Guild"] ; criminalServicesCount: served 7 | B 0 ; goalsAtCriminalPower: served 0 | B 9 ; membershipsOfCriminalPower: served 0 | B 4 ; defenseKey: served semi-organized | B organized
+  r3m-town-none-1-91 Reveal off: DIFFERS under every setting; fewest under default: opsLabels: served [] | B null ; criminalServicesCount: served 3 | B 0
+      under open: covertServices: served [] | B ["Fencing stolen goods","Hired muscle"] ; criminalServicesCount: served 3 | B 2 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: opsLabels: served [] | B null ; criminalServicesCount: served 3 | B 0
+  r3m-town-none-1-91 Reveal dm: DIFFERS under every setting; fewest under default: opsLabels: served [] | B null ; criminalServicesCount: served 3 | B 0
+      under open: covertServices: served [] | B ["Fencing stolen goods","Hired muscle"] ; criminalServicesCount: served 3 | B 2 ; defenseKey: served null | B diffuse ; covertHeld: served false | B true
+      under criminalSwitchOff: opsLabels: served [] | B null ; criminalServicesCount: served 3 | B 0
+tell column: 28 town-reads judged; 28 differ under every setting
+GATE EXIT 1

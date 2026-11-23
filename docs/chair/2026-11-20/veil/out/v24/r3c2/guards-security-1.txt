@@ -1,0 +1,25 @@
+[gate-tail] start:  09:36:44 up 44 min,  0 user,  load average: 0.85, 1.21, 1.79 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c2
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js (18 tests | 1 failed) 676197ms
+     × R3-CURE-2 (the chair's ruling 3): THE GOAL RE-STATEMENT'S TOOTH: goals aimed at a SHOWN power are still compared, and served, byte for byte; the goals that left named a withheld power 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > R3-CURE-2 (the chair's ruling 3): THE GOAL RE-STATEMENT'S TOOTH: goals aimed at a SHOWN power are still compared, and served, byte for byte; the goals that left named a withheld power
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/security/galleryServerVeil.pglite.test.js:412:27
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 80 passed (81)
+   Start at  09:36:45
+   Duration  1837.67s (transform 4.56s, setup 78ms, import 758ms, tests 1836.31s, environment 0ms)
+
+[gate-tail] end:  10:07:23 up  1:14,  0 user,  load average: 1.58, 1.97, 2.04
+[gate-tail] full log: /tmp/gate-tail.20400.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

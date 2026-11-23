@@ -1,0 +1,15 @@
+[gate-tail] start:  05:11:17 up  2:34,  0 user,  load average: 1.38, 2.73, 4.43 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 18448 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r2b
+
+
+ Test Files  3 passed (3)
+      Tests  30 passed (30)
+   Start at  05:11:18
+   Duration  485.03s (transform 10.05s, setup 96ms, import 346ms, tests 655.45s, environment 568ms)
+
+[gate-tail] end:  05:19:23 up  2:42,  0 user,  load average: 1.06, 1.62, 3.24
+[gate-tail] full log: /tmp/gate-tail.18445.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT 0

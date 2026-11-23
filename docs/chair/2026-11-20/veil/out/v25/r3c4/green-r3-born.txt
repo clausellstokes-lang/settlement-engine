@@ -1,0 +1,82 @@
+
+- Expected
++ Received
+
+- []
++ [
++   "city-insurgency-1-104 open dm=true twin: powerStructure.factionRelationships[].pair[]",
++   "city-insurgency-1-104 open dm=true twin: powerStructure.factionRelationships[].pair[]",
++   "city-insurgency-1-104 openM dm=true twin: powerStructure.factionRelationships[].pair[]",
++   "city-insurgency-1-104 openM dm=true twin: powerStructure.factionRelationships[].pair[]",
++   "hand-raised open dm=true gallery: npcs[].memberships[].power",
++   "hand-raised open dm=true import: npcs[].memberships[].power",
++   "hand-raised open dm=true twin: npcs[].memberships[].power",
++   "hand-raised openM dm=true gallery: npcs[].memberships[].power",
++   "hand-raised openM dm=true import: npcs[].memberships[].power",
++   "hand-raised openM dm=true twin: npcs[].memberships[].power",
++   "metropolis-insurgency-1-124 key dm=true twin: powerStructure.factionRelationships[].pair[]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:720:30
+    718|     expect(judged).toBeGreaterThan(0);
+    719|     expect(compared).toBeGreaterThan(0);
+    720|     expect(bad.slice(0, 60)).toEqual([]);
+       |                              ^
+    721|   }, ARM_TIMEOUT_MS);
+    722|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5's named prose
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-forms unmarked dm=false link: powerStructure.factions[1].faction = \"Old Thieves' Guild Watch\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:753:21
+    751|     // criminal house whole, so they were unit 1's (the literal-label …
+    752|     // Where no house is hidden whole and a power is withheld, nothing…
+    753|     expect(outside).toEqual([]);
+       |                     ^
+    754|   });
+    755|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > the twin (projectShareVeil over galleryPayloadFor) sends what the server sends at every R3 path of the gallery read
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "/^powerStructure\\.factionRelationships\\[\\]\\.(pair\\[\\]|type|direction)$/ @ city-insurgency-1-104 open dm=true",
++   "/^powerStructure\\.factionRelationships\\[\\]\\.(pair\\[\\]|type|direction)$/ @ city-insurgency-1-104 openM dm=true",
++   "/^powerStructure\\.factionRelationships\\[\\]\\.(pair\\[\\]|type|direction)$/ @ metropolis-insurgency-1-124 key dm=true",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:799:20
+    797|       if (has(r.docs.gallery) !== has(twin)) differ.push(`defense:crim…
+    798|     }
+    799|     expect(differ).toEqual([]);
+       |                    ^
+    800|   }, ARM_TIMEOUT_MS);
+    801| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 17 passed (22)
+   Start at  11:59:37
+   Duration  613.91s (transform 5.43s, setup 50ms, import 215ms, tests 613.49s, environment 0ms)
+
+[gate-tail] end:  12:09:51 up 57 min,  0 user,  load average: 2.46, 3.05, 3.83
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.13285.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

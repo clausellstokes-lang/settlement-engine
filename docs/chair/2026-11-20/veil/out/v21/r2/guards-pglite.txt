@@ -1,0 +1,44 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 22765 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), veil/client: history.legacyAnnotations.0.yearsAgo is undefined, not 31",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), veil/client: history.legacyAnnotations.1.annotation is undefined, not \"As of the founding survey, the Long Frost (12 years ago) hi",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/gallery: history.legacyAnnotations.0.eventName is undefined, not \"The Salt Levy\"",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/gallery: history.legacyAnnotations.0.yearsAgo is undefined, not 31",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/gallery: history.legacyAnnotations.1.annotation is undefined, not \"As of the founding survey, the Long Frost (12 years ago) hi",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/link: history.legacyAnnotations.0.eventName is undefined, not \"The Salt Levy\"",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/link: history.legacyAnnotations.0.yearsAgo is undefined, not 31",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/link: history.legacyAnnotations.1.annotation is undefined, not \"As of the founding survey, the Long Frost (12 years ago) hi",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/import: history.legacyAnnotations.0.eventName is undefined, not \"The Salt Levy\"",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/import: history.legacyAnnotations.0.yearsAgo is undefined, not 31",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/import: history.legacyAnnotations.1.annotation is undefined, not \"As of the founding survey, the Long Frost (12 years ago) hi",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/client: history.legacyAnnotations.0.eventName is undefined, not \"The Salt Levy\"",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/client: history.legacyAnnotations.0.yearsAgo is undefined, not 31",
++   "the description's eye alone shut: the two names, the gloss and the tension go (the record cannot tell that head from one written by hand), dm/client: history.legacyAnnotations.1.annotation is undefined, not \"As of the founding survey, the Long Frost (12 years ago) hi",
++ ]
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:934:17
+    932|       }
+    933|     }
+    934|     expect(bad).toEqual([]);
+       |                 ^
+    935|     expect(differs).toEqual([]);
+    936|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-2 NO EVENT, NO TIE: an annotation in the older spelling goes by its event's name; one whose event was renamed, by its type and years; one with no event at all, and a copy that names no tie, follow every event's and every tie's eye (closed), and arrive where none is shut
+TypeError: Cannot read properties of undefined (reading 'slice')
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:975:203
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+
+ Test Files  2 failed | 12 passed (14)
+      Tests  12 failed | 192 passed (204)
+   Start at  03:48:52
+   Duration  1360.13s (transform 11.78s, setup 248ms, import 5.50s, tests 2427.18s, environment 1.01s)
+
+[gate-tail] end:  04:11:33 up  1:34,  0 user,  load average: 1.02, 2.18, 3.11
+[gate-tail] full log: /tmp/gate-tail.22772.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+rc=1

@@ -1,0 +1,146 @@
+[
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at210",
+  "cfg": "default",
+  "read": "gallery",
+  "medianMs": 306,
+  "maxMs": 328
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at210",
+  "cfg": "default",
+  "read": "link",
+  "medianMs": 461,
+  "maxMs": 484
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at210",
+  "cfg": "all",
+  "read": "gallery",
+  "medianMs": 314,
+  "maxMs": 322
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at210",
+  "cfg": "all",
+  "read": "link",
+  "medianMs": 473,
+  "maxMs": 492
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at211",
+  "cfg": "default",
+  "read": "gallery",
+  "medianMs": 407,
+  "maxMs": 430
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at211",
+  "cfg": "default",
+  "read": "link",
+  "medianMs": 351,
+  "maxMs": 352
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at211",
+  "cfg": "all",
+  "read": "gallery",
+  "medianMs": 537,
+  "maxMs": 595
+ },
+ {
+  "town": "largest corpus town (server-veil-metropolis-3)",
+  "bytes": 525978,
+  "db": "at211",
+  "cfg": "all",
+  "read": "link",
+  "medianMs": 480,
+  "maxMs": 516
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at210",
+  "cfg": "default",
+  "read": "gallery",
+  "medianMs": 699,
+  "maxMs": 745
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at210",
+  "cfg": "default",
+  "read": "link",
+  "medianMs": 1148,
+  "maxMs": 1252
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at210",
+  "cfg": "all",
+  "read": "gallery",
+  "medianMs": 755,
+  "maxMs": 771
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at210",
+  "cfg": "all",
+  "read": "link",
+  "medianMs": 1172,
+  "maxMs": 1218
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at211",
+  "cfg": "default",
+  "read": "gallery",
+  "medianMs": 939,
+  "maxMs": 979
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at211",
+  "cfg": "default",
+  "read": "link",
+  "medianMs": 835,
+  "maxMs": 889
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at211",
+  "cfg": "all",
+  "read": "gallery",
+  "medianMs": 1229,
+  "maxMs": 1317
+ },
+ {
+  "town": "deploy-check Force all",
+  "bytes": 997890,
+  "db": "at211",
+  "cfg": "all",
+  "read": "link",
+  "medianMs": 1147,
+  "maxMs": 1211
+ }
+]

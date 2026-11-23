@@ -1,0 +1,88 @@
+[gate-tail] start:  15:35:12 up  7:37,  0 user,  load average: 0.75, 0.83, 1.58 · cores: 4
+{"births":480,"withSentence":480,"storedCopy":176,"servedCopy":176}
+{
+ "stored pressureSentence": 157,
+ "served dm=false pressureSentence": 157,
+ "served dm=true pressureSentence": 157,
+ "stored powerStructure.factions[].desc": 21,
+ "served dm=false powerStructure.factions[].desc": 21,
+ "served dm=true powerStructure.factions[].desc": 21,
+ "stored powerStructure.factionRelationships[].narrative": 31,
+ "stored npcs[].goal.short": 109,
+ "stored npcs[].goal.long": 96,
+ "stored simulationTrace[].causes[].reason": 19,
+ "served dm=false powerStructure.factionRelationships[].narrative": 28,
+ "served dm=true powerStructure.factionRelationships[].narrative": 31,
+ "served dm=true npcs[].goal.short": 109,
+ "served dm=true npcs[].goal.long": 96,
+ "served dm=true simulationTrace[].causes[].reason": 19,
+ "stored history.currentTensions[].description": 3,
+ "stored stress.summary": 3,
+ "stored stressors.summary": 3,
+ "served dm=false history.currentTensions[].description": 3,
+ "served dm=false stress.summary": 3,
+ "served dm=false stressors.summary": 3,
+ "served dm=true history.currentTensions[].description": 3,
+ "served dm=true stress.summary": 3,
+ "served dm=true stressors.summary": 3,
+ "stored powerStructure.conflicts[].desc": 14,
+ "stored conflicts[].desc": 14,
+ "served dm=false conflicts[].desc": 14,
+ "served dm=false powerStructure.conflicts[].desc": 14,
+ "served dm=true powerStructure.conflicts[].desc": 14,
+ "served dm=true conflicts[].desc": 14,
+ "stored powerStructure.factions[].faction": 5,
+ "stored powerStructure.governingName": 5,
+ "stored powerStructure.government": 5,
+ "stored powerStructure.factionRelationships[].pair[]": 16,
+ "stored powerStructure.conflicts[].parties[]": 8,
+ "stored npcs[].memberships[].power": 156,
+ "stored npcs[].goal.intent.long.target.id": 22,
+ "stored npcs[].goal.intent.short.target.id": 20,
+ "stored conflicts[].parties[]": 8,
+ "served dm=false conflicts[].parties[]": 8,
+ "served dm=false npcs[].memberships[].power": 155,
+ "served dm=false powerStructure.factions[].faction": 5,
+ "served dm=false powerStructure.governingName": 5,
+ "served dm=false powerStructure.government": 5,
+ "served dm=false powerStructure.factionRelationships[].pair[]": 15,
+ "served dm=false powerStructure.conflicts[].parties[]": 8,
+ "served dm=true powerStructure.factions[].faction": 5,
+ "served dm=true powerStructure.governingName": 5,
+ "served dm=true powerStructure.government": 5,
+ "served dm=true powerStructure.factionRelationships[].pair[]": 16,
+ "served dm=true powerStructure.conflicts[].parties[]": 8,
+ "served dm=true npcs[].memberships[].power": 156,
+ "served dm=true npcs[].goal.intent.long.target.id": 22,
+ "served dm=true npcs[].goal.intent.short.target.id": 20,
+ "served dm=true conflicts[].parties[]": 8,
+ "stored npcs[].secret.stakes": 2,
+ "served dm=true npcs[].secret.stakes": 2,
+ "stored stress.cast.stakes[].factionId": 2,
+ "stored stressors.cast.stakes[].factionId": 2,
+ "served dm=false stress.cast.stakes[].factionId": 2,
+ "served dm=false stressors.cast.stakes[].factionId": 2,
+ "served dm=true stress.cast.stakes[].factionId": 2,
+ "served dm=true stressors.cast.stakes[].factionId": 2,
+ "stored npcs[].secret.what": 1,
+ "stored history.historicalCharacter": 1,
+ "served dm=false history.historicalCharacter": 1,
+ "served dm=true npcs[].secret.what": 1,
+ "served dm=true history.historicalCharacter": 1,
+ "stored history.currentTensions[].factions[]": 1,
+ "served dm=false history.currentTensions[].factions[]": 1,
+ "served dm=true history.currentTensions[].factions[]": 1
+}
+  r5c2-m3-thorp-0: stored at pressureSentence
+  r5c2-m3-thorp-1: stored at pressureSentence
+  r5c2-m3-thorp-5: stored at pressureSentence
+  r5c2-m3-thorp-6: stored at pressureSentence
+  r5c2-m3-thorp-7: stored at pressureSentence
+  r5c2-m3-thorp-9: stored at pressureSentence
+  r5c2-m3-thorp-11: stored at pressureSentence
+  r5c2-m3-thorp-12: stored at pressureSentence
+  r5c2-m3-thorp-15: stored at pressureSentence
+  r5c2-m3-thorp-17: stored at pressureSentence
+  r5c2-m3-thorp-20: stored at pressureSentence
+  r5c2-m3-thorp-21: stored at pressureSentence
+[gate-tail] end:  15:37:31 up  7:40,  0 user,  load average: 2.52, 1.57, 1.76

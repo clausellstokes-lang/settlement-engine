@@ -1868,6 +1868,86 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/playerRecordVeiledFace.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
+    "tests/security/galleryServerVeil.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/gallerySecondHomes.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilCures.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilHandRows.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell3.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell4.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell5.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryVeilTell8.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/lint/crimeTypesReaders.walker.test.js": {
+      "kind": "rationale",
+      "ref": "walker-totality-executed"
+    },
+    "tests/lint/recentConflictReaders.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "EVERY READER OF THE RECENT-CONFLICT SENTENCE, REGISTERED (R5-RECENT's cure, second half; VEIL-33's V33-R5C6, 2026-11-22; the chair's E92 (2), (5), E93, E97 (1); on tests/lint/crimeTypesReaders.walker.test.js's pattern): every code line under src/ naming recentConflict is a site registered with its count and verdict; the ONE reader (pageRederive.js :: rederiveRecentConflict) must call generatePowerStructure, never name pressureSentence, and be wired at rederiveForPage and importRederive.js :: rederiveInPlace (authoritative); both always-hosts must withhold the key and its pressureSentence copy and the registry rows stand. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS EXECUTED: (1) its own controls judge a synthetic source on every ordinary run (declBody to the next declaration; a word in a comment line not counted); (2) the RED-FIRST run before the reader existed red both the census arm (the registered reader site stale) and the door arm (no reader, not wired at either door), recorded in docs/chair/2026-11-20/veil/out/v33/r5recent/R5C6-red.txt. A standing sweep plant would mutate shared src/ modules a concurrent lane may hold."
+    },
+    "tests/security/galleryVeilRecent.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/shareRenderTwice.pglite.test.jsx": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/rosterChoiceInversion.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryWithholdAlways.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryRosterChoices.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/lint/rosterChoicePools.walker.test.js": {
+      "kind": "rationale",
+      "ref": "walker-totality-executed"
+    },
+    "tests/security/galleryVeilSignalCopies.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/criminalSwitchHandReach.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/lint/veilCopySites.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "VEIL-VR17 (the sixth chair's ruling VR17, 2026-11-19): the register of every place a non-owner surface copies a page model. The shut grouping's derived block is read on a visitor's page from the evidence IN THE DATA that the grouping is open (src/domain/display/galleryVeil.js :: GROUPING_OPEN_EVIDENCE, read by isVeiled with { publicDossier }), so a copy of the data keeps the signal; what could still break it is a copy that re-fills the removed keys, or a reader with no evidence row. Every copy idiom in the surface modules is a site `path :: symbol :: idiom` registered with a verdict (keeps, before-veil, import-save, own-record, not-page-model); unregistered, stale and moved-count sites red by name; each keeps idiom is EXECUTED on a projected page model (shut stays shut, open stays open, the owner's read unchanged); every isVeiled reader in src must name an address with an evidence row and say its audience. IT IS A RATIONALE BECAUSE ITS CATCHING POWER WAS PROVEN BY EXECUTED IN-PLACE NEGATIVE CONTROLS (VEIL-VR17, 2026-11-20, cp backup and cmp restore in the same shell, never the checkout family): clean => 6 passed; plant 1, an unregistered structuredClone of the page model in src/components/PublicDossierView.jsx :: PublicDossierView => EXACTLY 1 red, the registration arm naming the site; plant 2, src/components/new/tabs/DefenseTab.jsx's isVeiled read without its audience => EXACTLY 1 red, the reader arm naming the line; each restored byte-identical by cmp => 6 passed. A standing sweep plant would mutate a module the gallery and dossier suites share, and the sweep script is not this seat's file."
+    },
     "tests/security/galleryUnlisted.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -3030,10 +3110,22 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/lint/fixtureGitIsolation.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE FIXTURE-GIT ISOLATION WALKER (COHERENCE-VEIL-4, 2026-11-13; the pre-push whole check, run from a linked worktree, moved a lane branch, made two branches and rewrote the shared config through five suites that ran git in mkdtemp folders under the hook's GIT_DIR). Its catching power is EXECUTED, not claimed, twice on 2026-11-13. (1) The five suites were put back to their pre-cure bytes (git show HEAD:<file>), the cured copies held aside first: R1 red at exactly the five leaking call sites (tuningRegister:1600, implementationPackets:1207 and 1439, implementationSession:49, soakRegister:196) and R2 red at exactly the five files; restored by cp, the diff back to its 30/4 lines. (2) Run under a foreign GIT_DIR with the subject list read by a bare execFileSync: the subject test red with an empty list (R1 and R2 would otherwise have passed over nothing); the list now reads through fixtureGit. The file also executes its own controls every run: each rule fires on the pre-cure shape and passes the cured one, and a throwaway host's config is shown untouched by the stripped environment and written by the raw one."
+    },
     "tests/lint/tuningRegister.walker.test.js": {
       "kind": "rationale",
       "rationale": "The tuning register's walker: an inventory ratchet over the whole tuning estate (210 _TUNING tables plus 14 rostered unsuffixed exports, 1,941 top-level keys, 534 unregistered named constants and 7,003 bare decimals) joined to a declared register carrying role, unit, band and draft/signed state. Its catching power is EXECUTED IN THE TEST BODY, not claimed, and every plant runs in a throwaway temp tree so the file mutates nothing on disk: a planted unregistered PROBE_TUNING table must be named by the totality arm; a planted declared row naming no table must be named by the phantom arm; one planted 0.5 added to relationshipRulesCore.js must move that file's bare-decimal count by exactly one from its independently measured 302; a comment inserted above GROWTH_TUNING must leave its span digest EXACTLY where it was while a moved value must move it; a URL containing a double slash inside a string must not hide the live decimal on the following line; and a decimal inside a registered span must not be counted as bare while the same file with no span registered must count two. The refreeze ritual's seven typed refusals are each driven with a paired positive control, including a DECLARED_GROWTH row whose introducedAt is the estate's UNRESOLVABLE_WELL_FORMED_SHA (refused) beside the same row naming a real commit (admitted), so the attribution arm cannot pass by accepting any 40-hex string. The signing branch is proved by fixture in both directions: a signed digest that moves with no record is refused, a version-2 record naming that exact id is admitted, a version-3 record is refused as non-dense, and a record naming a different id is refused WHOLE rather than applied in part. A standing sweep plant would re-execute those same injected-fixture comparisons while transiently mutating source files this walker deliberately only reads, and the program's shared-tree protocol forbids the git-checkout revert that scripts/mutation-sweep.sh depends on.",
       "kindNote": "rationale rather than a planted sweep mutation: the catching power here is already a plant (six of them, in temp trees, on every ordinary run), and a sweep plant would additionally require a MUTATED_FILES row against src/domain files this walker only reads."
+    },
+    "tests/lint/rosterChoiceRegistry.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ROSTER-CHOICE REGISTRY'S WALKER (VEIL-R1, 2026-11-20; ruling VR7, SUB-BRIEF-VR7 stage R1): binds src/domain/veil/rosterChoiceRegistry.js to 212 and the client twin and to every chooser site. IT IS A RATIONALE BECAUSE EACH ARM'S CATCHING POWER WAS PROVEN BY AN EXECUTED IN-PLACE PLANT, each removed after (the tracked files restored byte-identical, sha256 verified; the record: docs/chair/2026-11-20/veil/r1/R1-walker-redgreen.txt): (A1) a call of isCriminalInstitution from a new src/generators function reds ARM A; (A2) a new /smuggler den/i literal at a new generator site reds ARM A; (B) a second crime-name literal at the registered site src/domain/threatProfile.js :: TYPE_PATTERNS reds ARM B (registered 1, found 2); (C1) a row with no server symbol and (C2) one with no twin symbol each red ARM C; (D1) a row marked built whose host is a planned R2 helper reds ARM D (not a function of 212, not a top-level twin declaration); (D2) a row marked built on an existing host whose body carries no '-- registry: <id>' / '// registry: <id>' reds ARM D; (E) registry.json edited by hand reds ARM E (and scripts/veil/rosterChoiceRegistry.mjs --check exits 1). (F, the chair's rulings of 2026-11-20 00:44 UTC) a page answer planted on every diffuse row reds ARM F (a page answer only on a value withheld on every read; every rng row built; a diffuse row built exactly when its condition is; a copy takes its source's rule). The census also proves itself on every run: a synthetic source with a planted predicate call, a planted crime-name regex and a registerStep site is walked before the live tree is trusted, and zero parse failures over the whole scope are asserted. Promote to kind:mutation once the tree is quiescent."
+    },
+    "tests/lint/rosterChoiceComposedHosts.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE WALKER R5 WANTS FIRST (VEIL-33's V33-R5R, 2026-11-22; the chair's E78 (2), docs/chair/2026-11-20/veil/briefs/R5-RECENT-BRIEF.md): every COMPOSED row of src/domain/veil/rosterChoiceRegistry.js (inputs non-empty, VR12) names a server and a twin host declared in REGISTRY_HOSTS for its own engine, and a row whose host is PLANNED reds, one test per row, named by row id (power.recentConflict first). IT IS A RATIONALE BECAUSE ITS CATCHING POWER IS EXECUTED ON EVERY ORDINARY RUN, in two forms: (1) its own controls in the same file judge synthetic rows (a planted PLANNED server host, a planted PLANNED twin host, both, a missing host, an undeclared host, crossed engines: each reds by name; two existing hosts: none); (2) the live registry REDS IT TODAY BY DESIGN, one red per composed row on R5's planned host (public._gallery_veil_composed / gallerySecondHomes.js :: withholdComposed), its failing list R5's worklist, recorded in docs/chair/2026-11-20/veil/out/v33/r5recent/R5R-HANDBACK.md. A standing sweep plant would duplicate (1) at the cost of transiently mutating the shared registry module each sweep; the registry walker's ARM C (tests/lint/rosterChoiceRegistry.walker.test.js) binds a host declared 'exists' to its existence, so a row cannot leave this list by a false state."
     },
     "tests/data/namingDataCharset.test.js": {
       "kind": "mutation",

@@ -1,0 +1,27 @@
+RULING (2), BORN, COUNTED (veil-probe-12/r2-born.probe.jsx, run once on each tree: the base's archive of 4e4ee0528 on a
+local chain built from its migrations, and this commit's tree on a chain built from its own; the same probe file)
+The guard's born towns (tests/security/gallerySecondHomes.pglite.test.js :: TOWNS: four seeds, born as its configuration
+gives them, without its markers), both stored shapes, Reveal DM off and on; the server's three reads (gallery, party link,
+import) and the client's twin. 232 persons with an impression, 464 in the two shapes; every person in every read.
+impressions withheld, base (by identity) -> after (by clauses), of 464, in each of gallery | link | import | twin:
+  the default veil, Reveal DM off:                       0 -> 0 | 0 -> 0 | 0 -> 0 | 0 -> 0
+  the default veil, Reveal DM on:                        0 -> 0 | 0 -> 0 | 0 -> 0 | 0 -> 0
+  every person's appearance eye shut, Reveal DM off:     464 -> 0 | 464 -> 0 | 464 -> 0 | 464 -> 0
+  every person's appearance eye shut, Reveal DM on:      464 -> 0 | 464 -> 0 | 464 -> 0 | 464 -> 0
+  the appearance itself sent with its eye shut: 0 reads at the base, 0 after; server against twin, people on whom the
+  four reads disagree: 0 at the base, 0 after
+NEWLY ARRIVING with the appearance shut: all 464 (232 persons in two shapes; 3,712 reads), none newly withheld. Each checked
+to share no clause with its own appearance: by an independent reading of the rule (NFKD, the marks gone, lower case, cut
+at . ! ? , ; : and U+2014, 12 code points or more, either direction): 0 of 464 share one; by eye, the closest any impression
+comes to its own appearance (the longest common run of characters, every pair): " someone who " (13) and " forgettable"
+(12), neither a clause of either. (The composer draws the impression whole from the title's or the category's table and
+the appearance from four others: npcGenerator.js :: pickTitle, generateNPCAppearance.) Three of them:
+  rv5-plant-city-infiltrated-0 new Mikhail Pavlov: appearance {"age":"early fifties","build":"average height, unremarkable
+    frame","feature":"a cough they suppress with visible effort","clothes":"foreign-cut clothes from a market they want to
+    be asked about"} | impression "Busy, or presenting as busy. The first impression is of someone who doesn't waste time."
+  rv5-plant-city-infiltrated-0 new Predrag Petrov: appearance {"age":"late twenties","build":"imposingly tall","feature":"a
+    cloak clasped with an unusual brooch","clothes":"a dress uniform kept for funerals, worn thin at the elbows"} |
+    impression "Relaxed and sure of themselves, and not careless with it."
+  rv5-plant-city-infiltrated-0 new Frantisek Krylov: appearance {"age":"late thirties","build":"compact and powerful",
+    "feature":"a habit of standing very still","clothes":"sober broadcloth with buttons worth more than the coat"} |
+    impression "Busy, or presenting as busy. The first impression is of someone who doesn't waste time."

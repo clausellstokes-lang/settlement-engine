@@ -1,0 +1,13 @@
+[gate-tail] start:  10:00:00 up  1:07,  0 user,  load average: 2.63, 2.27, 2.11 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c2
+
+
+ Test Files  3 passed (3)
+      Tests  22 passed (22)
+   Start at  10:00:01
+   Duration  306.57s (transform 10.79s, setup 92ms, import 332ms, tests 305.19s, environment 546ms)
+
+[gate-tail] end:  10:05:08 up  1:12,  0 user,  load average: 2.37, 2.27, 2.13
+[gate-tail] full log: /tmp/gate-tail.21720.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

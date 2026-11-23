@@ -1,0 +1,42 @@
+     × VEIL-11 THE WORDS IN EVERY SCRIPT: a shut source is found in a words-only home whatever the case, the script, the accents, a sharp s or a dotted capital I, by the same fold in both engines; the same sentence arrives where its source is open 1401ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 skipped (10)
++   "Greek, a word-final sigma, veil/gallery: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα πα�
++   "Greek, a word-final sigma, veil/link: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλι
++   "Greek, a word-final sigma, veil/import: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλ
++   "Greek, a word-final sigma, dm/gallery: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλ�
++   "Greek, a word-final sigma, dm/link: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλιο
++   "Greek, a word-final sigma, dm/import: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δυο οικογενειες μοιραζονται ενα παλι
++   "Greek, accented in the copy, veil/gallery: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα π�
++   "Greek, accented in the copy, veil/link: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα παλ
++   "Greek, accented in the copy, veil/import: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα πα
++   "Greek, accented in the copy, veil/client: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα πα
++   "Greek, accented in the copy, dm/gallery: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα πα�
++   "Greek, accented in the copy, dm/link: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα παλι
++   "Greek, accented in the copy, dm/import: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα παλ
++   "Greek, accented in the copy, dm/client: the sentence holding the shut source is sent: \"Στο λιμάνι λένε πως οι δύο οικογένειες μοιράζονται ένα παλ
++   "Turkish, a dotted capital I and the dotless i, veil/gallery: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, veil/link: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, veil/import: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, veil/client: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, dm/gallery: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, dm/link: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, dm/import: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "Turkish, a dotted capital I and the dotless i, dm/client: the sentence holding the shut source is sent: \"Rıhtımda herkes biliyor: iskele kapısı gece açık kaldı.\"",
++   "German, a sharp s, veil/gallery: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, veil/link: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, veil/import: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, veil/client: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, dm/gallery: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, dm/link: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, dm/import: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a sharp s, dm/client: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die große straße wurde gesperrt.\"",
++   "German, a capital sharp s, veil/gallery: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, veil/link: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, veil/import: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, veil/client: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, dm/gallery: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, dm/link: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, dm/import: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",
++   "German, a capital sharp s, dm/client: the sentence holding the shut source is sent: \"Am Kai heißt es nur: die grosse strasse wurde gesperrt.\"",

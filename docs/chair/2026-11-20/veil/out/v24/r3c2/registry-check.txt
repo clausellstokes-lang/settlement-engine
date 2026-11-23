@@ -1,0 +1,1 @@
+roster-choice registry: registry.json and rulings.json are the module's

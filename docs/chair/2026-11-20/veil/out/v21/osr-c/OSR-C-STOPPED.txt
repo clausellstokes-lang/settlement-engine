@@ -1,0 +1,26 @@
+OSR-C — STOPPED AT THE BRIEF'S BOUND: the scanner still reds after the config comes through the canonical door.
+No src commit. src/domain/veil/importRederive.js restored byte-identical (blob 5e835669d, == HEAD's).
+
+RED (CONFIRMED, walker-red.txt, at 95580cdd9): tests/lint/observedShapeReaders.walker.test.js 45 of 47; SHRINK-ONLY
+{violations 4, stale 0}; A1/A7 register {reads 2220, identities 1556, files 448} vs frozen {2214, 1552, 444}.
+
+THE DOOR APPLIED (CONFIRMED, walker-after-door.txt): src/store/configSlice.js :: DEFAULT_CONFIG by the house's
+loaded-config default-merge (src/store/persistMerge.js :: mergePersistedState, `{ ...DEFAULT_CONFIG, ...config }`),
+served values winning:   const config = isRec(s.config) ? { ...DEFAULT_CONFIG, ...s.config } : null;
+Walker after: UNCHANGED, 45 of 47, violations 4, register {2220, 1556, 448}. No figure moved.
+
+ALSO MEASURED (CONFIRMED, doors-detector-probe.txt; the frozen legacy detector run by a scratch harness on a cached
+corpus, scanner untouched): the 5 reads (prosperity.js 288, 302; foodGenerator.js 97, 258; priorityHelpers.js 223)
+stay for each of: src/lib/settlementConfigMigration.js :: migrateSettlementConfig (the saved-config migration's one
+writer, which also writes magicExists); DEFAULT_CONFIG over that migration; DEFAULT_CONFIG over the served config.
+Causation probe: only a config the detector cannot follow at all (an unmodelled call) clears them, i.e. blinding, not
+a cure; not proposed.
+
+WHY (CONFIRMED by reading scripts/lib/legacy-reader-shape-scan.mjs, the baseline's mode): the detector types a value
+by its shape TOKEN, never by its writer. An object literal resolves to the union of its spreads; an imported
+DEFAULT_CONFIG resolves to nothing; `s.config` resolves to the corpus shape `config`; a function's return carries its
+parameter. So every door that carries the served config still hands the derivers the shape `config`, and the corpus's
+`config` never carries magicExists (raw CONFIGS rows). The identity is the corpus's, not the call site's.
+
+WHAT IT NAMES: the governed rung (u2-measure.txt): a corpus-coverage pass observing magicExists on `config` (schema-46),
+or an explained-writer row (DEFAULT_CONFIG / birthConfig). Fidelity and the other gates not run (nothing to hold).

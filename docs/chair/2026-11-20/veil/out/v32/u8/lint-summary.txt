@@ -1,0 +1,19 @@
+      1 tests/lint/chainPrintSites.walker.test.js
+      4 tests/lint/domainAnyCastBaseline.test.js
+      1 tests/lint/factLayers.walker.test.js
+      1 tests/lint/moduleScopeCwdRatchet.test.js
+      1 tests/lint/negativeAssertionAnchor.walker.test.js
+      2 tests/lint/noLegacyFactionReaders.walker.test.js
+      2 tests/lint/observedShapeReaders.walker.test.js
+      1 tests/lint/presumedThings.walker.test.js
+      1 tests/lint/presumptionClasses.walker.test.js
+      1 tests/lint/proseDrawnAnchors.walker.test.js
+      2 tests/lint/proseWiringCensus.walker.test.js
+      1 tests/lint/seedLoopTotality.walker.test.js
+      1 tests/lint/slugifyIdiomBaseline.test.js
+      1 tests/lint/sovereigntyLightingContract.walker.test.js
+      1 tests/lint/styleLaw.walker.test.js
+      1 tests/lint/writerReach.walker.test.js
+   Start at  12:29:12
+   Duration  922.13s (transform 25.36s, setup 3.99s, import 813.08s, tests 923.40s, environment 26ms)
+

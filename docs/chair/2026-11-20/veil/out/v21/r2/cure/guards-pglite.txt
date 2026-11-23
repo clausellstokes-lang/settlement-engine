@@ -1,0 +1,63 @@
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 83197ms
+ ❯ tests/security/galleryWithholdAlways.pglite.test.js (9 tests | 1 failed) 27597ms
+     × VR37 SHARPENED (the chair, 04:50 UTC): the page never draws a readiness score outside its served label's own band; there it draws the label alone 105ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-village-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-town-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: unmarked/live map member lacks what the listing shows: economicState.safetyProfile.blackMarketCapture: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "unmarked/live map member lacks what the listing shows: economicState.safetyProfile.blackMarketCapture",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:374:54
+    372|         }
+    373|       }
+    374|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    375|       expect(control.rows).toBeGreaterThan(0);
+    376|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  tests/security/galleryWithholdAlways.pglite.test.js > R2: the withhold-always rows leave every non-owner read, both Reveal settings, marked and unmarked (through the server) > VR37 SHARPENED (the chair, 04:50 UTC): the page never draws a readiness score outside its served label's own band; there it draws the label alone
+AssertionError: expected 38 to be undefined
+
+- Expected:
+undefined
+
++ Received:
+38
+
+ ❯ tests/security/galleryWithholdAlways.pglite.test.js:241:89
+    239|     const planted = clone(r0.docs.gallery); planted.defenseProfile.rea…
+    240|     expect(own.score < READINESS_BANDS[0].min).toBe(true);
+    241|     expect(rederiveForPage(planted, { unveiled: true }).defenseProfile…
+       |                                                                                         ^
+    242|   });
+    243|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+
+ Test Files  2 failed | 10 passed (12)
+      Tests  9 failed | 158 passed (167)
+   Start at  04:42:59
+   Duration  1677.02s (transform 24.95s, setup 294ms, import 3.40s, tests 3309.72s, environment 2.39s)
+
+[gate-tail] end:  05:10:56 up  2:34,  0 user,  load average: 1.92, 2.92, 4.53
+[gate-tail] full log: /tmp/gate-tail.8953.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

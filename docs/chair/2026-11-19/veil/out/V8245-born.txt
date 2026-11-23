@@ -1,0 +1,24 @@
+V8-2, V8-4, V8-5 BORN (VEIL-18's builder). REVIEW-VEIL-13's born probe (veil-probe-13/measure/r5-born.probe.jsx, R5_N=4:
+six sizes, calm and infiltrated, four each; both stored shapes; three shares: no veil record, the default veil, the default
+veil with Reveal DM; gallery, link, import and the twin) on the base chain b1bornbase (twin from the base's bytes) and on a
+chain of each commit's tree (twin from that tree), compared by veil-probe-16/measure/born-cmp.mjs.
+
+V8-2: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+      reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+V8-4: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+      reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+V8-5: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+      reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+WHAT V8-5 DROPS ON BORN TOWNS (measure/v8245-born.probe.jsx and v8245-born-cmp.mjs: the same 48 births, both stored
+shapes, the default veil and EVERY EYE THE CURATE MODEL OFFERS SHUT, Reveal DM off and on, gallery, link, import and the
+twin; base chain and twin against the tree's):
+  towns 48 | 48; rows 1536 | 1536
+  THE DEFAULT VEIL: rows 768; differ 0; ties withheld 0; prominentRelationship withheld 0; pressureSentence withheld 0;
+    rows that send what the base withheld 0; reads that raise 0 | 0; server-twin rows 0 | 0
+  EVERY EYE SHUT: rows 768; differ 0; ties withheld 0; prominentRelationship withheld 0; pressureSentence withheld 0;
+    rows that send what the base withheld 0; reads that raise 0 | 0; server-twin rows 0 | 0
+  THE NUMBER: 0. No born person's own id or name holds a hidden house's name (every eye shut removes no person: 768
+  pairs, the people and the 20,322 ties sent equal between the two veils), so no born tie loses an end.

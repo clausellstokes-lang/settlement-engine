@@ -1,0 +1,81 @@
+births 140; with a hideable house 92
+(a) power.entry's REACH, Reveal off: of 140 born pages (92 with a house hidden), 9 lose a criminal power's row that no hidden house raised (the counterfactual still holds it): r3m-town-infiltrated-0-12 [Thieves' Guild]; r3m-town-insurgency-0-14 [Thieves' Guild]; r3m-town-none-0-23 [Thieves' Guild]; r3m-metropolis-wartime-0-59 [Thieves' Guild]; r3m-metropolis-indebted-0-66 [Thieves' Guild]; r3m-city-insurgency-1-104 [Thieves' Guild]; r3m-city-insurgency-1-114 [Thieves' Guild]; r3m-metropolis-insurgency-1-124 [Thieves' Guild]; r3m-metropolis-indebted-1-136 [Thieves' Guild]
+(a) power.entry's REACH, Reveal dm: of 140 born pages (92 with a house hidden), 9 lose a criminal power's row that no hidden house raised (the counterfactual still holds it): r3m-town-infiltrated-0-12 [Thieves' Guild]; r3m-town-insurgency-0-14 [Thieves' Guild]; r3m-town-none-0-23 [Thieves' Guild]; r3m-metropolis-wartime-0-59 [Thieves' Guild]; r3m-metropolis-indebted-0-66 [Thieves' Guild]; r3m-city-insurgency-1-104 [Thieves' Guild]; r3m-city-insurgency-1-114 [Thieves' Guild]; r3m-metropolis-insurgency-1-124 [Thieves' Guild]; r3m-metropolis-indebted-1-136 [Thieves' Guild]
+(b) VR42 (a governing criminal power, its row kept): met by 12 of 140 born towns: r3m-town-infiltrated-0-12 [Corrupt Council]; r3m-town-insurgency-0-14 [Corrupt Council]; r3m-town-none-0-21 [Corrupt Council]; r3m-town-infiltrated-1-82 [Corrupt Council]; r3m-town-occupied-1-85 [Corrupt Council]; r3m-city-insurgency-1-104 [Corrupt City Council]; r3m-city-indebted-1-106 [Corrupt City Council]; r3m-city-under_siege-1-108 [Corrupt City Council]; r3m-city-insurgency-1-114 [Corrupt City Council]; r3m-city-none-1-117 [Corrupt City Council]; r3m-city-politically_fractured-1-120 [Corrupt City Council]; r3m-metropolis-indebted-1-136 [Shadow Senate]
+THE RENAMED HOUSE: towns with a criminal house hidden 92; of them with another criminal house to show and rename (one plant each) 76; the renamed shown house served 76; its operations-list line LOST 74 of 76
+  r3m-town-infiltrated-0-12: Front businesses -> "The Quiet Lantern": ops ["Front Businesses","Gambling Den"] -> ["Gambling Den"] LOST
+  r3m-town-insurgency-0-14: Street gang -> "The Quiet Lantern": ops ["Street Gang","Gambling Den"] -> ["Gambling Den"] LOST
+  r3m-town-indebted-0-16: Front businesses -> "The Quiet Lantern": ops ["Front Businesses"] -> [] LOST
+  r3m-town-none-0-17: Street gang -> "The Quiet Lantern": ops ["Street Gang"] -> [] LOST
+  r3m-town-wartime-0-19: Smuggling operation -> "The Quiet Lantern": ops ["Smuggling Operation"] -> [] LOST
+  r3m-town-none-0-21: Street gang -> "The Quiet Lantern": ops ["Street Gang"] -> [] LOST
+  r3m-town-none-0-23: Smuggling operation -> "The Quiet Lantern": ops ["Smuggling Operation","Gambling Den"] -> ["Gambling Den"] LOST
+  r3m-town-wartime-0-29: Street gang -> "The Quiet Lantern": ops ["Street Gang"] -> [] LOST
+  r3m-town-politically_fractured-0-30: Smuggling operation -> "The Quiet Lantern": ops ["Smuggling Operation"] -> [] LOST
+  r3m-city-none-0-31: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network"] -> [] LOST
+  r3m-city-infiltrated-0-32: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-none-0-33: Front businesses -> "The Quiet Lantern": ops ["Front Businesses","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-none-0-37: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network"] -> [] LOST
+  r3m-city-wartime-0-39: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-politically_fractured-0-40: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-infiltrated-0-42: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-none-0-43: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-insurgency-0-44: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-occupied-0-45: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-indebted-0-46: Front businesses -> "The Quiet Lantern": ops ["Front Businesses","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-under_siege-0-48: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-wartime-0-49: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network"] -> [] LOST
+  r3m-metropolis-none-0-51: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-infiltrated-0-52: Thieves' guild (powerful) -> "The Quiet Lantern": ops ["Thieves' Guild (Powerful)","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-0-53: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-occupied-0-55: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-indebted-0-56: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-0-57: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-under_siege-0-58: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-wartime-0-59: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-politically_fractured-0-60: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-0-61: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-infiltrated-0-62: Multiple criminal factions -> "The Quiet Lantern": ops ["Rival Gangs","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-0-63: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-occupied-0-65: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-indebted-0-66: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-0-67: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-under_siege-0-68: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-wartime-0-69: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-politically_fractured-0-70: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-town-none-1-91: Front businesses -> "The Quiet Lantern": ops ["Front Businesses"] -> [] LOST
+  r3m-town-under_siege-1-98: Front businesses -> "The Quiet Lantern": ops ["Front Businesses"] -> [] LOST
+  r3m-city-none-1-101: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-none-1-103: Whisper market -> "The Quiet Lantern": ops ["Gambling Halls"] -> ["Gambling Halls"]
+  r3m-city-insurgency-1-104: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-occupied-1-105: Thieves' guild chapter -> "The Quiet Lantern": ops ["Thieves' Guild Chapter","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-none-1-107: Multiple criminal factions -> "The Quiet Lantern": ops ["Rival Gangs","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-under_siege-1-108: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network"] -> [] LOST
+  r3m-city-wartime-1-109: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-politically_fractured-1-110: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-none-1-113: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-insurgency-1-114: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling Halls","Red Light District"] -> ["Gambling Halls","Red Light District"] LOST
+  r3m-city-indebted-1-116: Thieves' guild chapter -> "The Quiet Lantern": ops ["Thieves' Guild Chapter","Gambling Halls"] -> ["Gambling Halls"] LOST
+  r3m-city-none-1-117: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Red Light District"] -> ["Red Light District"] LOST
+  r3m-city-under_siege-1-118: Whisper market -> "The Quiet Lantern": ops [] -> []
+  r3m-city-wartime-1-119: Thieves' guild chapter -> "The Quiet Lantern": ops ["Thieves' Guild Chapter"] -> [] LOST
+  r3m-city-politically_fractured-1-120: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network"] -> [] LOST
+  r3m-metropolis-none-1-121: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-infiltrated-1-122: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-1-123: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-insurgency-1-124: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-occupied-1-125: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-indebted-1-126: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-none-1-127: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-under_siege-1-128: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-wartime-1-129: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-politically_fractured-1-130: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-none-1-131: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-infiltrated-1-132: Front businesses -> "The Quiet Lantern": ops ["Front Businesses","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-none-1-133: Thieves' guild (powerful) -> "The Quiet Lantern": ops ["Thieves' Guild (Powerful)","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-insurgency-1-134: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST
+  r3m-metropolis-occupied-1-135: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-indebted-1-136: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-none-1-137: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-wartime-1-139: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District"] -> ["Gambling District"] LOST
+  r3m-metropolis-politically_fractured-1-140: Smuggling network -> "The Quiet Lantern": ops ["Smuggling Network","Gambling District","Red Light District"] -> ["Gambling District","Red Light District"] LOST

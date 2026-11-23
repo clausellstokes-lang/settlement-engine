@@ -1,0 +1,2 @@
+NOTICE:  database "t7tpl" does not exist, skipping
+tpl rc=0

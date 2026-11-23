@@ -1,0 +1,115 @@
+=== on a clone of xp_f
+--- 1-read-first.sql on pk_xp_f
+anon||
+authenticated||
+service_role||
+|0 ms
+45|45|||
+40|0
+0|0|0|0
+psql exit 0
+--- 3-check-after.sql on pk_xp_f
+40|0
+55|40|_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_veil_apply(pub jsonb, res jsonb), _gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb), get_gallery_dossier(dossier_slug text), import_gallery_dossier(dossier_slug text)|_gallery_veil_embeds(txt jsonb, pieces text[]), _gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[]), _gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_names(v jsonb, gone jsonb), _gallery_veil_pieces(v jsonb), _gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_second_homes(s jsonb, src jsonb, gone jsonb), _gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb), _gallery_veil_tie_pieces(ties jsonb)|
+get_gallery_map|{"search_path=public, pg_temp"}
+get_gallery_dossier|{"search_path=public, pg_temp"}
+get_unlisted_dossier|{"search_path=public, pg_temp"}
+import_gallery_dossier|{"search_path=public, pg_temp"}
+psql exit 0
+--- 2-apply-212.sql on pk_xp_f
+psql exit 0
+--- 3-check-after.sql on pk_xp_f
+50|0
+55|55|||
+get_gallery_map|{"search_path=public, pg_temp"}
+get_gallery_dossier|{"search_path=public, pg_temp"}
+get_unlisted_dossier|{"search_path=public, pg_temp"}
+import_gallery_dossier|{"search_path=public, pg_temp"}
+psql exit 0
+--- 1-read-first.sql on pk_xp_f
+anon||
+authenticated||
+service_role||
+|0 ms
+45|40|_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_veil_apply(pub jsonb, res jsonb), _gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb), get_gallery_dossier(dossier_slug text), import_gallery_dossier(dossier_slug text)||_gallery_veil_embeds(txt jsonb, pieces text[]), _gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[]), _gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_names(v jsonb, gone jsonb), _gallery_veil_pieces(v jsonb), _gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_second_homes(s jsonb, src jsonb, gone jsonb), _gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb), _gallery_veil_tie_pieces(ties jsonb)
+50|0
+0|0|0|0
+psql exit 0
+--- 4-rollback-ONLY-IF-NEEDED.sql on pk_xp_f
+psql exit 0
+after the rollback, against xp_f: 0 lines differ
+--- 1-read-first.sql on pk_xp_f
+anon||
+authenticated||
+service_role||
+|0 ms
+45|45|||
+40|0
+0|0|0|0
+psql exit 0
+=== on a clone of xf211
+--- 1-read-first.sql on pk_xf211
+anon||
+authenticated||
+service_role||
+|0 ms
+45|45|||
+40|0
+0|0|0|0
+psql exit 0
+--- 3-check-after.sql on pk_xf211
+40|0
+55|40|_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_veil_apply(pub jsonb, res jsonb), _gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb), get_gallery_dossier(dossier_slug text), import_gallery_dossier(dossier_slug text)|_gallery_veil_embeds(txt jsonb, pieces text[]), _gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[]), _gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_names(v jsonb, gone jsonb), _gallery_veil_pieces(v jsonb), _gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_second_homes(s jsonb, src jsonb, gone jsonb), _gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb), _gallery_veil_tie_pieces(ties jsonb)|
+get_gallery_map|{"search_path=public, pg_temp"}
+get_gallery_dossier|{"search_path=public, pg_temp"}
+get_unlisted_dossier|{"search_path=public, pg_temp"}
+import_gallery_dossier|{"search_path=public, pg_temp"}
+psql exit 0
+--- 2-apply-212.sql on pk_xf211
+psql exit 0
+--- 3-check-after.sql on pk_xf211
+50|0
+55|55|||
+get_gallery_map|{"search_path=public, pg_temp"}
+get_gallery_dossier|{"search_path=public, pg_temp"}
+get_unlisted_dossier|{"search_path=public, pg_temp"}
+import_gallery_dossier|{"search_path=public, pg_temp"}
+psql exit 0
+--- 1-read-first.sql on pk_xf211
+anon||
+authenticated||
+service_role||
+|0 ms
+45|40|_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), _gallery_veil_apply(pub jsonb, res jsonb), _gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb), get_gallery_dossier(dossier_slug text), import_gallery_dossier(dossier_slug text)||_gallery_veil_embeds(txt jsonb, pieces text[]), _gallery_veil_hidden_name(x jsonb, gone jsonb, open_names text[]), _gallery_veil_member_revealed(m jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_names(v jsonb, gone jsonb), _gallery_veil_pieces(v jsonb), _gallery_veil_roster_members(factions jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_roster_splice(doc jsonb, overrides jsonb, share_dm boolean, importable boolean, for_import boolean), _gallery_veil_second_homes(s jsonb, src jsonb, gone jsonb), _gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb), _gallery_veil_tie_pieces(ties jsonb)
+50|0
+0|0|0|0
+psql exit 0
+--- 4-rollback-ONLY-IF-NEEDED.sql on pk_xf211
+psql exit 0
+after the rollback, against xf211: 0 lines differ
+--- 1-read-first.sql on pk_xf211
+anon||
+authenticated||
+service_role||
+|0 ms
+45|45|||
+40|0
+0|0|0|0
+psql exit 0
+=== the read-first block on 203 (211 not applied): it must say STOP
+--- 1-read-first.sql on pk_203
+anon||
+authenticated||
+service_role||
+|0 ms
+45|0|_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean), get_gallery_dossier(dossier_slug text), get_gallery_map(p_slug text), get_unlisted_dossier(p_slug text), import_gallery_dossier(dossier_slug text)|_gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean), _gallery_veil_apply(pub jsonb, res jsonb), _gallery_veil_card(kind text, c jsonb, cls jsonb, byid jsonb, excj jsonb, legacy jsonb), _gallery_veil_card_id(kind text, c jsonb), _gallery_veil_cards(s jsonb, kind text), _gallery_veil_clandestine(i jsonb), _gallery_veil_copy_bound(), _gallery_veil_criminal(i jsonb), _gallery_veil_drop_hooks(j jsonb), _gallery_veil_facet(e jsonb, k text), _gallery_veil_grouping(s jsonb, g text), _gallery_veil_groupings(), _gallery_veil_hideable(a text), _gallery_veil_hideable_p(p jsonb, a text), _gallery_veil_house(i jsonb), _gallery_veil_illegal_brokerage(i jsonb), _gallery_veil_inst_id(c jsonb), _gallery_veil_join(j jsonb, sep text), _gallery_veil_jslen(v text), _gallery_veil_jsstr(j jsonb), _gallery_veil_kind_order(), _gallery_veil_kinds(), _gallery_veil_lower(v text), _gallery_veil_map(s jsonb, kind text, mode text, a jsonb), _gallery_veil_map_list(arr jsonb, kind text, mode text, a jsonb), _gallery_veil_npc_house(n jsonb), _gallery_veil_npc_id(c jsonb), _gallery_veil_npc_pass(n jsonb, a jsonb), _gallery_veil_num_inf(x numeric), _gallery_veil_num_zero(x numeric), _gallery_veil_numstr(t text), _gallery_veil_or(a jsonb, b jsonb, c jsonb), _gallery_veil_own_id(c jsonb, prefix text, parts jsonb), _gallery_veil_parse(a text), _gallery_veil_resolve(pub jsonb, overrides jsonb, link boolean, people text[]), _gallery_veil_served(overrides jsonb, groupings jsonb, people jsonb, copy boolean), _gallery_veil_slug(v text), _gallery_veil_snake(v text), _gallery_veil_str(j jsonb), _gallery_veil_truthy(j jsonb)|
+0|0
+0|0|0|0
+psql exit 0
+=== the read-first block cannot write: a write planted inside it is refused
+psql:<scratch>/p7/out-pack/rf-write.sql:126: ERROR:  cannot execute CREATE TABLE in a read-only transaction
+0
+on tm_xp_f_0 (203 + 211, the 48 stored shares of planted shard 0): psql exit, then (2), (3), (4):
+45|45|||
+40|0
+0|0|40|44

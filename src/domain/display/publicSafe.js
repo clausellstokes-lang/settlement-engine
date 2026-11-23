@@ -562,13 +562,11 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // exactly as `dmNotes`, the seed carriers and `latentPantheon` are stripped
     // above, and for the same reason each of those is.
     //
-    // ⚠ THE SERVER TWIN IS NOT LANDED AND IS OWNER-GATED. `_gallery_dm_full_json`
-    // (migrations 121/129) still re-issues both keys server-side, so this is the
-    // CLIENT half only. A new `supabase/migrations/NNN_*.sql` adding them to that
-    // function's delete chain is a migration and belongs on the owner's desk with
-    // the mapEdits precedent (`townMapEditsPublicDrop.test.js` declines the same
-    // half). Landing the client half first costs nothing and reds nothing; it is
-    // strictly better than the gap it replaces.
+    // THE SERVER TWIN (COHERENCE-VEIL-6; the fifth review's V5-3, ruled by the chair on
+    // 2026-11-13): migration 212 strips both from the Reveal-DM projection of the gallery
+    // read and the import, beside `decrees` and `dmLayer` (`_gallery_dm_full_json` itself,
+    // 121/129, is unchanged; the link and the map never carried them: the sanitiser's
+    // allowlist). Pinned by tests/security/galleryVeilCures.pglite.test.js, "V5-3".
     delete clone.customContentRoster;
     delete clone.customContentProvenance;
     // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting
@@ -649,14 +647,32 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     /** @type {Map<string, Record<string, unknown>>} */
     const fullByKey = new Map();
     for (const npc of fullSource) fullByKey.set(galleryMemberKey(npc), npc);
+    /** @type {Set<string>} ids of the people this projection does not reveal and whose card carries no role */
+    const roleless = new Set();
     result.npcs = result.npcs
       .map(npc => {
         const key = galleryMemberKey(npc);
         const ov = overrides[key];
         const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
-        return effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
+        const out = effReveal ? (fullByKey.get(key) || npc) : publicCard(npc);
+        // COHERENCE-VEIL-14: no role is a role with no value, the key absent or holding none. publicNpc writes the key
+        // with no value, and the server judges the SENT card, where such a key is not sent (`n ? 'role'`); null is held.
+        if (!effReveal && typeof out.id === 'string' && out.role === undefined) roleless.add(out.id);
+        return out;
       })
       .filter(npc => npc.name || npc.role);
+    // COHERENCE-VEIL-8 (N3): on a DM-full projection a tie's copy of an end's role follows that person's own card,
+    // as publicVeilPass does on the default one (the `from` end's npc1Role, the `to` end's npc2Role; master's ties
+    // name the ends npc1Id, npc2Id). SQL twin: migration 212 :: _gallery_veil_tie_roles.
+    if (full && roleless.size && Array.isArray(result.relationships)) {
+      result.relationships = result.relationships.map((tie) => {
+        if (!tie || typeof tie !== 'object' || Array.isArray(tie)) return tie;
+        const t = /** @type {Record<string, unknown>} */ ({ ...tie });
+        if (roleless.has(String(t.from ?? t.npc1Id))) delete t.npc1Role;
+        if (roleless.has(String(t.to ?? t.npc2Id))) delete t.npc2Role;
+        return t;
+      });
+    }
   }
 
   // ── THE CIVILITY VEIL (DESIGN_PROFILE_IMAGE.md §9, the VEIL mode) ───────────

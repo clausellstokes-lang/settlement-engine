@@ -1,0 +1,5 @@
+      Tests  4 failed | 86 passed (90)
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2)
+ Test Files  2 failed | 3 passed (5)
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯

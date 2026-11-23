@@ -1,0 +1,34 @@
+RULING (5), RED (VEIL-13): tests/security/galleryVeilHandRows.pglite.test.js, the arm VEIL-13 RULING 5 alone (vitest -t), copied into a
+clean archive and run there; the dump of its lists written by the scratch copy only.
+
+AT 2937f9ac9 (/var/tmp/v13/red-2937), the arm with every plant (the two-spellings plants of the seat's review among them):
+  780 sends or losses; 1 server/twin differences
+    town-p (COVERTMARK); its pressure sentence names no one and stays (ruling (3)) | the copy sent 9, a marker arrives 27
+    the reader's town-g shape: gcov1 to gcov3, the pressure sentence the phrasing | the copy sent 9, the sentence sent 9, a marker arrives 36
+    the ends in another script (Cyrillic, Han) | the copy sent 9, the sentence sent 9, a marker arrives 36
+    the ends of symbols only | the copy sent 9, the sentence sent 9, a marker arrives 36
+    a dotted capital I (U+0130) in both ends | the copy sent 9, the sentence sent 9, a marker arrives 36
+    a sharp s (U+00DF) in both ends | the copy sent 9, the sentence sent 9, a marker arrives 36
+    THE WORDS in one fold: a sentence that names neither end in full holds the tie's tension lower-cased, the dotted I as i, | the copy sent 9, the sentence sent 9, a marker arrives 36
+    THE WORDS, stored: the tie rewritten wholly since; the sentence holds the tension as born, which the copy keeps | the copy sent 9, the sentence sent 9, a marker arrives 36
+    TWO SPELLINGS: an end named with a hidden power's name inside it (Mara of the Night Guild, the Night Guild hidden), the  | the copy sent 9, the sentence sent 9, a marker arrives 36
+    TWO SPELLINGS: only the copy's full and tension (its tie's, as born) name the hidden power; the sentence holds the tensi | the copy sent 9, the sentence sent 9, a marker arrives 36
+    TWO SPELLINGS: the copy is its tie's by its text alone (an end renamed since), and the text names the hidden power | the copy sent 9, the sentence sent 9, a marker arrives 36
+    relationships[] stored as an object, the covert tie inside it | the copy sent 9, the sentence sent 9, a marker arrives 36
+    relationships[] stored as null | the copy sent 9, the sentence sent 9, a marker arrives 36
+    a dropped covert tie whose ends carry no names (its two ids only), though the copy and the sentence tell the open tie | the copy sent 9, the sentence sent 9
+    the pressure sentence names ONE end of the dropped tie | the copy sent 9, a marker arrives 27
+    the pressure sentence names the two ends of an open tie | the copy sent 9, a marker arrives 27
+    a stored array | a marker arrives 6
+    differ: a stored array, base: $ | server [{"name":"Coldharbour","npcs":[{"id":"npc.ivo","name":"Ivo M | twin {}
+
+AT 380a933fd (/var/tmp/v13/red-380a: the cure before the seat's review), the same arm: THE IDENTITY ACROSS TWO SPELLINGS arrives
+  108 sends or losses; 0 server/twin differences
+    TWO SPELLINGS: an end named with a hidden power's name inside it (Mara of the Night Guild, the Night Guild hidden), the  | the copy sent 9, the sentence sent 9, a marker arrives 36
+    TWO SPELLINGS: the copy is its tie's by its text alone (an end renamed since), and the text names the hidden power | the copy sent 9, the sentence sent 9, a marker arrives 36
+  (the projection writes the hidden power's name 'Night Guild' as 'an unseen interest' and 380a933fd compared that copy with the
+  full town's unmasked ties: an end named with the name, or a copy that is its tie's by a text that holds it, matched no tie;
+  the plant whose ends are plain was caught by its ends and type. Both engines sent alike: 0 server/twin differences.)
+
+Every one a SEND (0 losses of a control). The stored array: at the base the unmarked gallery read and the import send the array, its
+covert copy inside; the twin projects {}.

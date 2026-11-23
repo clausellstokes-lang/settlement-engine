@@ -1,0 +1,17 @@
+towns 12; governed strings off the floor 4166; houses hidden whole 23
+(a) institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Kallipolis [c211_0] gallery: fortification
+(a) npc.goals(goal) sent at economicState.activeChains[].chainId  {"gallery":15,"link":15,"map":15,"import":15}  towns 6
+      e.g. Kallipolis [c211_0] gallery: animal_husbandry
+(a) npc.goals(goal) sent at economicState.activeChains[].upstreamChains[]  {"gallery":2,"link":2,"map":2,"import":2}  towns 2
+      e.g. Kallipolis [c211_0] gallery: warehouse_logistics
+(a) npc.ties(institution) sent at economicState.activeChains[].processingInstitutions[]  {"gallery":10,"link":10,"map":10,"import":10}  towns 4
+      e.g. Kallipolis [c211_0] gallery: Merchant guilds (3-8)
+(a) tension.description(description) sent at economicViability.issues[].description  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(a) tension.description(description) sent at economicViability.issues[].message  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(a) tension.description(description) sent at history.currentTensions[].specificIssue  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Kallipolis [c211_0] gallery: Newcomers keep arriving, and every one of them has to be fed from the same fields and stores.
+(c) a sentence of npc.physical(physical) embedded at npcs[].presentation.impression  {"gallery":1,"link":1,"map":1,"import":1}  towns 1
+      e.g. Pratopolis [c211_1] gallery: Unremarkable clothes, a quiet voice and eyes that never stop moving.

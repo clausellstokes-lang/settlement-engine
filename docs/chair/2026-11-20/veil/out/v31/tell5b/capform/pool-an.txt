@@ -1,0 +1,179 @@
+city|partA|#births	148
+city|partA|dm|served=-|ccs=#absent|pw=0|rel=0	148
+city|partA|dm|served=-|ccs=none|pw=0|rel=0	148
+city|partA|off|served=-|ccs=#absent|pw=0|rel=0	148
+city|partA|stored ccs=none pw=0 rel=0 gov=economy	47
+city|partA|stored ccs=none pw=0 rel=0 gov=government	63
+city|partA|stored ccs=none pw=0 rel=0 gov=magic	9
+city|partA|stored ccs=none pw=0 rel=0 gov=military	13
+city|partA|stored ccs=none pw=0 rel=0 gov=religious	16
+city|partB|#births	76
+city|partB|dm|served=HP|ccs=#absent|pw=0|rel=0	22
+city|partB|dm|served=HP|ccs=adversarial|pw=0|rel=1	1
+city|partB|dm|served=HP|ccs=adversarial|pw=0|rel=2	3
+city|partB|dm|served=HP|ccs=capture|pw=1|rel=1	1
+city|partB|dm|served=HP|ccs=corrupted|pw=1|rel=0	2
+city|partB|dm|served=HP|ccs=corrupted|pw=1|rel=1	2
+city|partB|dm|served=HP|ccs=corrupted|pw=1|rel=2	2
+city|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=1	9
+city|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=2	2
+city|partB|dm|served=H|ccs=#absent|pw=0|rel=0	54
+city|partB|dm|served=H|ccs=corrupted|pw=1|rel=0	2
+city|partB|dm|served=H|ccs=equilibrium|pw=1|rel=0	4
+city|partB|dm|served=H|ccs=none|pw=0|rel=0	48
+city|partB|off|served=HP|ccs=#absent|pw=0|rel=0	22
+city|partB|off|served=H|ccs=#absent|pw=0|rel=0	54
+city|partB|stored ccs=adversarial pw=0 rel=1 gov=government	1
+city|partB|stored ccs=adversarial pw=0 rel=2 gov=economy	2
+city|partB|stored ccs=adversarial pw=0 rel=2 gov=magic	1
+city|partB|stored ccs=capture pw=1 rel=1 gov=government	1
+city|partB|stored ccs=corrupted pw=1 rel=0 gov=criminal	2
+city|partB|stored ccs=corrupted pw=1 rel=0 gov=economy	1
+city|partB|stored ccs=corrupted pw=1 rel=0 gov=government	1
+city|partB|stored ccs=corrupted pw=1 rel=1 gov=criminal	1
+city|partB|stored ccs=corrupted pw=1 rel=1 gov=government	1
+city|partB|stored ccs=corrupted pw=1 rel=2 gov=criminal	1
+city|partB|stored ccs=corrupted pw=1 rel=2 gov=government	1
+city|partB|stored ccs=equilibrium pw=1 rel=0 gov=economy	2
+city|partB|stored ccs=equilibrium pw=1 rel=0 gov=government	2
+city|partB|stored ccs=equilibrium pw=1 rel=1 gov=economy	3
+city|partB|stored ccs=equilibrium pw=1 rel=1 gov=government	4
+city|partB|stored ccs=equilibrium pw=1 rel=1 gov=religious	2
+city|partB|stored ccs=equilibrium pw=1 rel=2 gov=economy	2
+city|partB|stored ccs=none pw=0 rel=0 gov=economy	20
+city|partB|stored ccs=none pw=0 rel=0 gov=government	16
+city|partB|stored ccs=none pw=0 rel=0 gov=magic	3
+city|partB|stored ccs=none pw=0 rel=0 gov=military	5
+city|partB|stored ccs=none pw=0 rel=0 gov=religious	4
+metropolis|partA|#births	152
+metropolis|partA|dm|served=-|ccs=#absent|pw=0|rel=0	152
+metropolis|partA|dm|served=-|ccs=none|pw=0|rel=0	152
+metropolis|partA|off|served=-|ccs=#absent|pw=0|rel=0	152
+metropolis|partA|stored ccs=none pw=0 rel=0 gov=economy	38
+metropolis|partA|stored ccs=none pw=0 rel=0 gov=government	76
+metropolis|partA|stored ccs=none pw=0 rel=0 gov=magic	16
+metropolis|partA|stored ccs=none pw=0 rel=0 gov=military	8
+metropolis|partA|stored ccs=none pw=0 rel=0 gov=religious	14
+metropolis|partB|#births	76
+metropolis|partB|dm|served=HP|ccs=#absent|pw=0|rel=0	32
+metropolis|partB|dm|served=HP|ccs=adversarial|pw=0|rel=2	4
+metropolis|partB|dm|served=HP|ccs=capture|pw=1|rel=2	1
+metropolis|partB|dm|served=HP|ccs=corrupted|pw=1|rel=0	1
+metropolis|partB|dm|served=HP|ccs=corrupted|pw=1|rel=1	3
+metropolis|partB|dm|served=HP|ccs=corrupted|pw=1|rel=2	11
+metropolis|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=1	7
+metropolis|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=2	5
+metropolis|partB|dm|served=H|ccs=#absent|pw=0|rel=0	44
+metropolis|partB|dm|served=H|ccs=equilibrium|pw=1|rel=0	4
+metropolis|partB|dm|served=H|ccs=none|pw=0|rel=0	40
+metropolis|partB|off|served=HP|ccs=#absent|pw=0|rel=0	32
+metropolis|partB|off|served=H|ccs=#absent|pw=0|rel=0	44
+metropolis|partB|stored ccs=adversarial pw=0 rel=2 gov=economy	2
+metropolis|partB|stored ccs=adversarial pw=0 rel=2 gov=government	1
+metropolis|partB|stored ccs=adversarial pw=0 rel=2 gov=magic	1
+metropolis|partB|stored ccs=capture pw=1 rel=2 gov=economy	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=0 gov=criminal	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=1 gov=criminal	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=1 gov=government	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=1 gov=religious	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=2 gov=criminal	9
+metropolis|partB|stored ccs=corrupted pw=1 rel=2 gov=economy	1
+metropolis|partB|stored ccs=corrupted pw=1 rel=2 gov=religious	1
+metropolis|partB|stored ccs=equilibrium pw=1 rel=0 gov=economy	2
+metropolis|partB|stored ccs=equilibrium pw=1 rel=0 gov=government	2
+metropolis|partB|stored ccs=equilibrium pw=1 rel=1 gov=economy	2
+metropolis|partB|stored ccs=equilibrium pw=1 rel=1 gov=government	5
+metropolis|partB|stored ccs=equilibrium pw=1 rel=2 gov=economy	2
+metropolis|partB|stored ccs=equilibrium pw=1 rel=2 gov=government	3
+metropolis|partB|stored ccs=none pw=0 rel=0 gov=economy	12
+metropolis|partB|stored ccs=none pw=0 rel=0 gov=government	18
+metropolis|partB|stored ccs=none pw=0 rel=0 gov=magic	1
+metropolis|partB|stored ccs=none pw=0 rel=0 gov=military	1
+metropolis|partB|stored ccs=none pw=0 rel=0 gov=religious	8
+town|partA|#births	152
+town|partA|dm|served=-|ccs=#absent|pw=0|rel=0	138
+town|partA|dm|served=-|ccs=none|pw=0|rel=0	138
+town|partA|dm|served=P|ccs=#absent|pw=0|rel=0	14
+town|partA|dm|served=P|ccs=adversarial|pw=0|rel=1	1
+town|partA|dm|served=P|ccs=corrupted|pw=1|rel=0	8
+town|partA|dm|served=P|ccs=corrupted|pw=1|rel=2	2
+town|partA|dm|served=P|ccs=equilibrium|pw=1|rel=1	2
+town|partA|dm|served=P|ccs=equilibrium|pw=1|rel=2	1
+town|partA|off|served=-|ccs=#absent|pw=0|rel=0	138
+town|partA|off|served=P|ccs=#absent|pw=0|rel=0	14
+town|partA|stored ccs=adversarial pw=0 rel=1 gov=economy	1
+town|partA|stored ccs=corrupted pw=1 rel=0 gov=criminal	8
+town|partA|stored ccs=corrupted pw=1 rel=2 gov=criminal	2
+town|partA|stored ccs=equilibrium pw=1 rel=1 gov=economy	2
+town|partA|stored ccs=equilibrium pw=1 rel=2 gov=economy	1
+town|partA|stored ccs=none pw=0 rel=0 gov=economy	57
+town|partA|stored ccs=none pw=0 rel=0 gov=government	9
+town|partA|stored ccs=none pw=0 rel=0 gov=magic	11
+town|partA|stored ccs=none pw=0 rel=0 gov=military	19
+town|partA|stored ccs=none pw=0 rel=0 gov=noble	12
+town|partA|stored ccs=none pw=0 rel=0 gov=other	13
+town|partA|stored ccs=none pw=0 rel=0 gov=religious	17
+town|partB|#births	76
+town|partB|dm|served=HP|ccs=#absent|pw=0|rel=0	39
+town|partB|dm|served=HP|ccs=adversarial|pw=0|rel=1	2
+town|partB|dm|served=HP|ccs=corrupted|pw=1|rel=0	10
+town|partB|dm|served=HP|ccs=corrupted|pw=1|rel=1	6
+town|partB|dm|served=HP|ccs=corrupted|pw=1|rel=2	8
+town|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=1	8
+town|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=2	5
+town|partB|dm|served=H|ccs=#absent|pw=0|rel=0	37
+town|partB|dm|served=H|ccs=corrupted|pw=1|rel=0	3
+town|partB|dm|served=H|ccs=equilibrium|pw=1|rel=0	2
+town|partB|dm|served=H|ccs=none|pw=0|rel=0	32
+town|partB|off|served=HP|ccs=#absent|pw=0|rel=0	39
+town|partB|off|served=H|ccs=#absent|pw=0|rel=0	37
+town|partB|stored ccs=adversarial pw=0 rel=1 gov=economy	1
+town|partB|stored ccs=adversarial pw=0 rel=1 gov=magic	1
+town|partB|stored ccs=corrupted pw=1 rel=0 gov=criminal	10
+town|partB|stored ccs=corrupted pw=1 rel=0 gov=economy	2
+town|partB|stored ccs=corrupted pw=1 rel=0 gov=noble	1
+town|partB|stored ccs=corrupted pw=1 rel=1 gov=criminal	6
+town|partB|stored ccs=corrupted pw=1 rel=2 gov=criminal	8
+town|partB|stored ccs=equilibrium pw=1 rel=0 gov=economy	1
+town|partB|stored ccs=equilibrium pw=1 rel=0 gov=military	1
+town|partB|stored ccs=equilibrium pw=1 rel=1 gov=economy	5
+town|partB|stored ccs=equilibrium pw=1 rel=1 gov=government	1
+town|partB|stored ccs=equilibrium pw=1 rel=1 gov=magic	1
+town|partB|stored ccs=equilibrium pw=1 rel=1 gov=other	1
+town|partB|stored ccs=equilibrium pw=1 rel=2 gov=economy	3
+town|partB|stored ccs=equilibrium pw=1 rel=2 gov=government	1
+town|partB|stored ccs=equilibrium pw=1 rel=2 gov=noble	1
+town|partB|stored ccs=none pw=0 rel=0 gov=economy	14
+town|partB|stored ccs=none pw=0 rel=0 gov=government	4
+town|partB|stored ccs=none pw=0 rel=0 gov=magic	1
+town|partB|stored ccs=none pw=0 rel=0 gov=military	4
+town|partB|stored ccs=none pw=0 rel=0 gov=noble	4
+town|partB|stored ccs=none pw=0 rel=0 gov=other	1
+town|partB|stored ccs=none pw=0 rel=0 gov=religious	4
+village|partA|#births	148
+village|partA|dm|served=-|ccs=#absent|pw=0|rel=0	145
+village|partA|dm|served=-|ccs=none|pw=0|rel=0	145
+village|partA|dm|served=P|ccs=#absent|pw=0|rel=0	3
+village|partA|dm|served=P|ccs=equilibrium|pw=1|rel=1	3
+village|partA|off|served=-|ccs=#absent|pw=0|rel=0	145
+village|partA|off|served=P|ccs=#absent|pw=0|rel=0	3
+village|partA|stored ccs=equilibrium pw=1 rel=1 gov=government	3
+village|partA|stored ccs=none pw=0 rel=0 gov=government	114
+village|partA|stored ccs=none pw=0 rel=0 gov=other	14
+village|partA|stored ccs=none pw=0 rel=0 gov=religious	17
+village|partB|#births	76
+village|partB|dm|served=HP|ccs=#absent|pw=0|rel=0	1
+village|partB|dm|served=HP|ccs=equilibrium|pw=1|rel=1	1
+village|partB|dm|served=H|ccs=#absent|pw=0|rel=0	75
+village|partB|dm|served=H|ccs=corrupted|pw=1|rel=0	2
+village|partB|dm|served=H|ccs=equilibrium|pw=1|rel=0	5
+village|partB|dm|served=H|ccs=none|pw=0|rel=0	68
+village|partB|off|served=HP|ccs=#absent|pw=0|rel=0	1
+village|partB|off|served=H|ccs=#absent|pw=0|rel=0	75
+village|partB|stored ccs=corrupted pw=1 rel=0 gov=government	2
+village|partB|stored ccs=equilibrium pw=1 rel=0 gov=government	4
+village|partB|stored ccs=equilibrium pw=1 rel=0 gov=religious	1
+village|partB|stored ccs=equilibrium pw=1 rel=1 gov=government	1
+village|partB|stored ccs=none pw=0 rel=0 gov=government	45
+village|partB|stored ccs=none pw=0 rel=0 gov=other	16
+village|partB|stored ccs=none pw=0 rel=0 gov=religious	7

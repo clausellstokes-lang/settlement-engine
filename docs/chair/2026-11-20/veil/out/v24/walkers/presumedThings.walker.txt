@@ -1,0 +1,42 @@
++   "src/domain/display/gallerySecondHomes.js :: house: cobbler's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: tailor's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: alchemist :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild governance :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: merchant oligarchy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: citadel :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: wizard's tower :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: mages' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: scroll scribe :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: hireling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: smuggling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: street gang :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling den :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: warehouse :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild consortium :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: adventurers' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: thieves' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: academy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: clergy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/veil/rosterChoiceRegistry.js :: powersCount :: \"VR37 (b): DRAWN (Systems/Power, PowerStrata.jsx :: chipDirection). Not (a): it is chosen by the capture state and the le\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 42 passed (43)
+   Start at  08:56:43
+   Duration  106.46s (transform 2.29s, setup 32ms, import 40.58s, tests 65.73s, environment 0ms)
+
+[gate-tail] end:  08:58:29 up 5 min,  0 user,  load average: 2.00, 0.90, 0.37
+[gate-tail] full log: /tmp/gate-tail.9185.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,8 @@
+ Test Files  1 passed (1)
+      Tests  76 passed (76)
+   Start at  05:20:18
+   Duration  2.99s (transform 79ms, setup 27ms, import 110ms, tests 2.74s, environment 0ms)
+
+[gate-tail] end:  05:20:21 up  2:43,  0 user,  load average: 0.52, 1.35, 3.04
+[gate-tail] full log: /tmp/gate-tail.19699.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

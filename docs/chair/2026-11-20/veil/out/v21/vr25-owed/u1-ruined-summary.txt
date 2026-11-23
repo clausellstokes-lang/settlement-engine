@@ -1,0 +1,13 @@
+towns 9 (nothing hidden: 5); ruined variants 116 (in towns with nothing hidden: 60); boot failures 0
+served: the ruined house served 115, veiled 1, served with its ruin stripped 0
+field | variants | kept | left out | MIS-DRAW (no-hidden towns / hidden-house towns) | ruin-attributable | control mis-draw (towns) | reference moved by the ruin | import moved by the ruin | MOVED APART (one moved, the other not) | CONTEXT: live roster differs
+compound | 116 | 116 | 0 | 42 (0 / 42) | 0 | 3 | 0 | 0 | 0 | 10
+safetyProfile.compound | 116 | 116 | 0 | 42 (0 / 42) | 0 | 3 | 0 | 0 | 0 | 10
+safetyRatio | 116 | 116 | 0 | 42 (0 / 42) | 0 | 3 | 0 | 0 | 0 | 4
+storageMonths | 116 | 116 | 0 | 0 (0 / 0) | 0 | 0 | 0 | 0 | 0 | 0
+prosperity | 116 | 116 | 0 | 0 (0 / 0) | 0 | 0 | 0 | 0 | 0 | 0
+readiness.score | 116 | 116 | 0 | 28 (0 / 28) | 0 | 2 | 2 | 2 | 0 | 10
+conditions.severity | 116 | 116 | 0 | 0 (0 / 0) | 0 | 0 | 0 | 0 | 0 | 0
+legitimacy.breakdown | 116 | 116 | 0 | 0 (0 / 0) | 0 | 0 | 0 | 0 | 0 | 0
+quarters | 116 | 116 | 0 | 28 (0 / 28) | 0 | 2 | 0 | 0 | 0 | 13
+cast | 116 | 116 | 0 | 0 (0 / 0) | 0 | 0 | 0 | 0 | 0 | 0

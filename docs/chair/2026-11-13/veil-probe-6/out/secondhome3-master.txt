@@ -1,0 +1,9 @@
+towns 96; governed strings off the floor 20312; houses hidden whole 192
+(a) [dm/live] institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":6,"link":6,"map":6,"import":6}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification
+(a) [dm/snapshot] institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":6,"link":6,"map":6,"import":6}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification
+(a) [nodm/live] institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":6,"link":6,"map":6,"import":6}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification
+(a) [nodm/snapshot] institution.function(tags) sent at economicState.activeChains[].chainId  {"gallery":6,"link":6,"map":6,"import":6}  towns 3
+      e.g. Olympvrysi [a203p211_1] gallery: fortification

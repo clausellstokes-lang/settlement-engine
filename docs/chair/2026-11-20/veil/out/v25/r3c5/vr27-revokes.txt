@@ -1,0 +1,11 @@
+# VR27 (R3-CURE-5): 212's two new helpers, on r3c5_tpl (x211 + 212 at dbff7eeb3)
+anon|public._gallery_veil_copy_names(text,jsonb,text[],jsonb)|f
+anon|public._gallery_veil_npc_copies(jsonb)|f
+authenticated|public._gallery_veil_copy_names(text,jsonb,text[],jsonb)|f
+authenticated|public._gallery_veil_npc_copies(jsonb)|f
+_gallery_veil_power_named|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_copy_names|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_npc_copies|{postgres=X/postgres,service_role=X/postgres}
+NOTICE:  database "r3c5_rb" does not exist, skipping
+rollback applied rc=0
+helpers left after the rollback: 0

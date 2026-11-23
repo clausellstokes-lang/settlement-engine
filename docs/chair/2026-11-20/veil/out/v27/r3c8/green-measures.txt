@@ -1,0 +1,24 @@
+R3-CURE-8 metropolis-politically_fractured-0-60: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 metropolis-insurgency-1-124: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 city-infiltrated-0-42: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 metropolis-politically_fractured-0-70: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 metropolis-wartime-1-139: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 town-none-0-21: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 town-insurgency-0-14: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 town-under_siege-0-18: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 town-infiltrated-0-22: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 town-under_siege-1-98: reads compared 25 | rows with no institution key served, by family (server | twin): {} | {} | differing reads: 0 
+R3-CURE-8 the hand plant: reads compared 25 | families ["lodging","food","equipment","magic","information","healing","transport","legal","employment","entertainment","criminal","curiosities"] | rows with no institution key served, by family (server | twin): {"food":50,"legal":50,"magic":50,"healing":50,"lodging":50,"equipment":50,"transport":50,"employment":50,"curiosities":50,"information":50,"entertainment":50} | {"lodging":50,"food":50,"equipment":50,"magic":50,"information":50,"healing":50,"transport":50,"legal":50,"employment":50,"entertainment":50,"curiosities":50} | differing reads: 0 
+R3-CURE-8 unit 5, THE PARITY WALKER: families (from the generator) ["lodging","food","equipment","magic","information","healing","transport","legal","employment","entertainment","criminal","curiosities"] | born families ["criminal","employment","entertainment","equipment","food","healing","information","legal","lodging","magic","transport"] | per family, the row with no key (served by server/twin: reads): 
+  lodging: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  food: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  equipment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  magic: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  information: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  healing: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  transport: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  legal: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  employment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  entertainment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  criminal: {"Keyless":{"-/-":15},"Swept":{"-/-":15}}
+  curiosities: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}} | faults: 0 

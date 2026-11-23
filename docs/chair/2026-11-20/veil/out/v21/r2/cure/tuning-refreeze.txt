@@ -1,0 +1,14 @@
+    217|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+ ❯ tests/lint/tuningRegister.walker.test.js:223:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  76 skipped (76)
+   Start at  05:20:10
+   Duration  1.93s (transform 91ms, setup 31ms, import 118ms, tests 1.68s, environment 0ms)
+
+[gate-tail] end:  05:20:12 up  2:43,  0 user,  load average: 0.53, 1.38, 3.07
+[gate-tail] full log: /tmp/gate-tail.19532.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

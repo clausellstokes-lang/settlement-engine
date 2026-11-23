@@ -1,0 +1,10 @@
+[gate-tail] start:  09:21:17 up 28 min,  0 user,  load average: 7.14, 4.28, 2.47 · cores: 4
+
+/home/user/wt/r3c2/docs/chair/2026-11-20/veil/out/v24/r3c2/measure/keys.probe.jsx
+  0:0  warning  File ignored because no matching configuration was supplied
+
+✖ 1 problem (0 errors, 1 warning)
+
+[gate-tail] end:  09:21:20 up 28 min,  0 user,  load average: 7.37, 4.38, 2.51
+[gate-tail] full log: /tmp/gate-tail.17364.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

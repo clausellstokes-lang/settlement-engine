@@ -1,0 +1,19 @@
+140 towns; 38 with a power withheld on some read; reads judged 1400, with a power withheld 352
+hits of a withheld power's name (case-folded substring, values and keys), by path: hits | towns | reads where seen
+  140 |  12 | STRUCT conflicts[].desc | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+  140 |  12 | STRUCT conflicts[].parties[] | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+    6 |   3 | STRUCT factions[].contestsNiche | M/dm/gallery M/dm/import
+    4 |   2 | STRUCT factions[].desc | M/dm/gallery M/dm/import
+   74 |  31 | STRUCT factions[].faction | M/dm/gallery M/dm/import
+   12 |   6 | STRUCT factions[].name | M/dm/gallery M/dm/import
+   20 |   2 | STRUCT history.currentTensions[].factions[] | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+  468 |  24 | STRUCT npcs[].goal.intent.long.target.id | L/dm/gallery L/dm/import M/dm/gallery M/dm/import
+  496 |  24 | STRUCT npcs[].goal.intent.short.target.id | L/dm/gallery L/dm/import M/dm/gallery M/dm/import
+  632 |  25 | STRUCT npcs[].goal.long | L/dm/gallery L/dm/import M/dm/gallery M/dm/import
+  616 |  25 | STRUCT npcs[].goal.short | L/dm/gallery L/dm/import M/dm/gallery M/dm/import
+  624 |  25 | STRUCT npcs[].memberships[].power | L/dm/gallery L/dm/import M/dm/gallery M/dm/import
+  140 |  12 | STRUCT powerStructure.conflicts[].desc | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+  140 |  12 | STRUCT powerStructure.conflicts[].parties[] | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+   20 |   2 | STRUCT powerStructure.factions[].desc | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link
+   36 |  18 | STRUCT stress.cast.stakes[].factionId | M/dm/gallery M/dm/import
+   36 |  18 | STRUCT stressors.cast.stakes[].factionId | M/dm/gallery M/dm/import

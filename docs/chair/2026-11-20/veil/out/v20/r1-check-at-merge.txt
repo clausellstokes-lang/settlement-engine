@@ -1,0 +1,2 @@
+roster-choice registry: registry.json and rulings.json are the module's
+check exit 0

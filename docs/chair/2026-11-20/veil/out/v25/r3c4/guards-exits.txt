@@ -1,0 +1,3 @@
+guards-twin exit 1
+known-reds exit 1
+batch done: twin known

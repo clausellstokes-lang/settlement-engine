@@ -1,0 +1,8 @@
+== galleryVeilHandRows (whole file)
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+== gallerySecondHomes + galleryVeilCures
+ Test Files  2 passed (2)
+      Tests  37 passed (37)
+== gates
+typecheck:domain:strict exit 0 (1113 errors, ceiling 1113); typecheck:ratchet exit 0 (167, ceiling 167); eslint exit 0 (gallerySecondHomes.js, galleryVeilHandRows.pglite.test.js); each through scripts/gate-tail.sh

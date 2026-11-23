@@ -1,0 +1,35 @@
+THE LANE'S OTHER PINS at 212 = 70810c2a... (V7-2), verdict lines.
+run 1: galleryServerVeil, pgliteHookTimeoutRatchet, galleryMapMemberCount, gallerySanitizer, gallerySanitize, galleryDmFull, galleryUnlisted (tests/security)
+     × server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 20547ms
+     × server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 40898ms
+     × server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 96102ms
+     × server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 110685ms
+     × server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 129549ms
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 95838ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed | 6 passed (7)
+      Tests  6 failed | 112 passed (118)
+exit 1
+galleryServerVeil: the same six arms as at 5abf99906 and 4f7c60cbb (the ruled tie-role cut, carried to item 3 (a)); the distinct paths it prints, all of them:
+page changed: (order or value)
+page changed: relationships[id=tie_npc_craft_guilds_30_80].npc2Role
+page changed: relationships[id=tie_npc_craft_guilds_5_15].npc2Role
+page changed: relationships[id=tie_npc_mills_2_5].npc2Role
+page changed: relationships[id=tie_npc_mint_official].npc2Role
+page changed: relationships[id=tie_npc_multiple_adventurers_guilds].npc2Role
+page changed: relationships[id=tie_npc_multiple_garrisons].npc2Role
+page changed: relationships[id=tie_npc_state_granary_complex].npc2Role
+page changed: relationships[id=tie_npc_veiled_01ad4eb8257920d5].npc1Role
+page changed: relationships[id=tie_npc_veiled_3785dc53d17bd811].npc1Role
+page changed: relationships[id=tie_npc_veiled_917f1b9c627b0afb].npc1Role
+page changed: relationships[id=tie_npc_veiled_9c49b2aacfad98f5].npc1Role
+page changed: relationships[id=tie_npc_veiled_a2a91b247c5d1a69].npc1Role
+page changed: relationships[id=tie_npc_veiled_a9cb651f44c0d0ac].npc1Role
+page changed: relationships[id=tie_npc_veiled_c276af6882015eb0].npc1Role
+page changed: relationships[id=tie_npc_veiled_d4fadee3a87f0383].npc1Role
+page changed: relationships[id=tie_npc_workhouse].npc2Role
+
+run 2: tests/lint/migrationSearchPathPin, tests/lint/migrationGrantPosturePin, tests/domain/display/publicSafeVeil, tests/security/publicPayloadVeilTotality, tests/domain/display/publicSafe, tests/lib/gallery
+ Test Files  6 passed (6)
+      Tests  148 passed (148)
+exit 0

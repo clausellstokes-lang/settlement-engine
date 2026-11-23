@@ -1,0 +1,404 @@
+diff --git a/src/domain/display/galleryRosterChoices.js b/src/domain/display/galleryRosterChoices.js
+index 3bee460fb..51675a5f8 100644
+--- a/src/domain/display/galleryRosterChoices.js
++++ b/src/domain/display/galleryRosterChoices.js
+@@ -89,8 +89,13 @@ const ACCESS_TO = /^access to/i;
+ const NPC_AFFILIATION_KEYS = Object.freeze(['faction', 'factionAffiliation', 'affiliation', 'factionId']);
+ /** The name keys of a power (`faction`, `name`) that are strings. @param {Rec} f @returns {string[]} */
+ const powerNamesOf = (f) => [f.faction, f.name].filter((v) => typeof v === 'string');
+-/** Whether a power is withheld by power.entry (VR42: never the governing row). @param {Rec} f */
+-const entryOut = (f) => f.isGoverning !== true && (asciiLowerOf(f.category) === 'criminal' || /thie/i.test(str(f.faction !== undefined ? f.faction : f.name)));
++/** Whether a power is withheld by power.entry (VR42: never the governing row): by its seat's mark (category 'criminal'); a
++ * thieves' name (factionDynamics.js's isCrim) only where the power carries NO category string (unsure: withheld). R3-CURE-4
++ * (unit 2; the chair's ruling 37 (a)): a power whose category says what it is (the plant's civic "Old Thieves' Guild Watch",
++ * raised by no house) is not taken by the words of its name; measured on the born pool (out/v25/r3c4/unit2-thie-census.json):
++ * 0 of 1,478 born powers read differently, every born "Thieves' Guild" carries category 'criminal'. @param {Rec} f */
++const entryOut = (f) => f.isGoverning !== true && (asciiLowerOf(f.category) === 'criminal'
++  || (typeof f.category !== 'string' && /thie/i.test(str(f.faction !== undefined ? f.faction : f.name))));
+ const BENEATH_THE_WALLS = /smuggling (network|operation)|underground (network|city)/i;
+ const GATES_BENEATH = / The ([^.]+) keeps? the gates, but smugglers have ways in beneath the walls\./;
+ const VERY_SAFE_BENEATH = ' The guard keeps the gates, but smugglers have ways in beneath the walls.';
+@@ -148,8 +153,11 @@ export function applyRosterChoices(s, pub, idOf) {
+   // registry: power.relation.direction (VR37 (b): the word goes with its relation)
+   if (ps && withheld && Array.isArray(ps.factionRelationships)) {
+     const names = new Set(objectsOf(ps.factions).flatMap(f => [f.faction, f.name].filter(v => typeof v === 'string')));
+-    ps.factionRelationships = ps.factionRelationships.filter(r => isRec(r) && Array.isArray(r.pair) && r.pair.length > 0
+-      && r.pair.every(n => typeof n === 'string' && names.has(n)));
++    const unserved = (/** @type {Rec} */ r) => !Array.isArray(r.pair) || r.pair.length === 0 || !r.pair.every(n => typeof n === 'string' && names.has(n));
++    // (R3-CURE-4, unit 1: A HUSK IS A TELL: a relation whose PRE-SWEEP counterpart in `pub` named an unserved power leaves
++    // whole, though the name sweep took that name out of its pair: heldBy, the containment 212 reads as `@>`)
++    const rels0 = objectsOf(recAt(pub, 'powerStructure')?.factionRelationships).filter(unserved);
++    ps.factionRelationships = ps.factionRelationships.filter(r => isRec(r) && !unserved(r) && !rels0.some(r0 => heldBy(r0, r)));
+   }
+   if (!whole) return;
+ 
+@@ -293,14 +301,35 @@ function withholdPowerCopies(s, pub, ps) {
+   /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
+   const named = (v) => (typeof v === 'number' && wIds.has(idText(v))) || (typeof v === 'string' && v !== '' && (wIds.has(v) || (!!search && search.hit(v))));
+   const recNames = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(named);
+-  for (const holder of [ps, s]) {
++  // R3-CURE-4 (unit 1; the chair, 11:12: "a goal naming a withheld power LEAVES WITH IT: the whole goal, every field of it; a
++  // husk is a tell"): each structured copy is judged on what it held BEFORE any pass stripped it. The hidden-house name sweep
++  // (withholdSecondHomes :: sweepHiddenNames, before this pass) takes the withheld power's name out of a goal's sentence and
++  // its target id, a conflict's parties, a tension's factions, a membership's `power`; the copy then names nothing and was
++  // served as a husk. So a served copy also leaves where its counterpart in `pub` (the projection the veil ran on) named a
++  // withheld power: a person's goal by the person's id; any other copy where a naming counterpart in the same place holds it
++  // (heldBy: jsonb containment, 212's `@>`; a remnant is held by what it was cut from)
++  const conflictNames = (/** @type {unknown} */ c) => isRec(c) && Array.isArray(c.parties) && c.parties.some(pn => named(pn) || (isRec(pn) && recNames(pn)));
++  const tensionNames = (/** @type {unknown} */ t) => isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && named(x));
++  const memberNames = (/** @type {unknown} */ m) => isRec(m) && [m.power, m.faction, m.name, m.id].some(named);
++  /** @param {unknown} g */
++  const goalNames = (g) => {
++    if (!isRec(g)) return false;
++    const intent = recAt(g, 'intent') || {};
++    const tid = (/** @type {string} */ k) => (recAt(recAt(intent, k) || {}, 'target') || {}).id;
++    return named(tid('short')) || named(tid('long')) || (!!search && (search.hit(str(g.short)) || search.hit(str(g.long))));
++  };
++  /** @param {unknown} list0 @param {(x: unknown) => boolean} names @param {unknown} e */
++  const husk = (list0, names, e) => isRec(e) && objectsOf(list0).some(z => names(z) && heldBy(z, e));
++  for (const [holder, holder0] of /** @type {Array<[Rec | null, Rec | null]>} */ ([[ps, recAt(pub, 'powerStructure')], [s, pub]])) {
+     if (holder && Array.isArray(holder.conflicts)) {
+-      holder.conflicts = holder.conflicts.filter(c => !(isRec(c) && Array.isArray(c.parties) && c.parties.some(pn => named(pn) || (isRec(pn) && recNames(pn)))));
++      const c0 = holder0 ? holder0.conflicts : null;
++      holder.conflicts = holder.conflicts.filter(c => !(conflictNames(c) || husk(c0, conflictNames, c)));
+     }
+   }
+   const hist0 = recAt(s, 'history');
+   if (hist0 && Array.isArray(hist0.currentTensions)) {
+-    hist0.currentTensions = hist0.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && named(x))));
++    const t0 = recAt(pub, 'history')?.currentTensions;
++    hist0.currentTensions = hist0.currentTensions.filter(t => !(tensionNames(t) || husk(t0, tensionNames, t)));
+   }
+   for (const holder of [ps, s]) {
+     if (holder && Array.isArray(holder.factions)) {
+@@ -312,13 +341,13 @@ function withholdPowerCopies(s, pub, ps) {
+       if (!isRec(n)) return n;
+       const o = { ...n };
+       for (const k of NPC_AFFILIATION_KEYS) if (typeof o[k] === 'string' && named(o[k])) delete o[k];
+-      const g = o.goal;
+-      if (isRec(g)) {
+-        const intent = recAt(g, 'intent') || {};
+-        const tid = (/** @type {string} */ k) => (recAt(recAt(intent, k) || {}, 'target') || {}).id;
+-        if (named(tid('short')) || named(tid('long')) || (!!search && (search.hit(str(g.short)) || search.hit(str(g.long))))) delete o.goal;
++      // the same person before the sweep (by its id, a string): its goal and its memberships as the projection held them
++      const before = typeof o.id === 'string' ? objectsOf(pub.npcs).filter(q => q.id === o.id) : [];
++      if (isRec(o.goal) && (goalNames(o.goal) || before.some(q => goalNames(q.goal)))) delete o.goal;
++      if (Array.isArray(o.memberships)) {
++        const m0 = before.flatMap(q => objectsOf(q.memberships));
++        o.memberships = o.memberships.filter(m => !(memberNames(m) || husk(m0, memberNames, m)));
+       }
+-      if (Array.isArray(o.memberships)) o.memberships = o.memberships.filter(m => !(isRec(m) && [m.power, m.faction, m.name, m.id].some(named)));
+       return o;
+     });
+   }
+@@ -330,6 +359,15 @@ function withholdPowerCopies(s, pub, ps) {
+   }
+ }
+ 
++/** R3-CURE-4: jsonb containment as 212 reads it (its containment operator) below the top level: an object holds every key of `b` with a value
++ * that holds `b`'s; an array holds each element of `b` in some element of its own; a scalar is equal (JSON's own values).
++ * @param {unknown} a @param {unknown} b @returns {boolean} */
++function heldBy(a, b) {
++  if (isRec(a) && isRec(b)) return Object.keys(b).every(k => Object.prototype.hasOwnProperty.call(a, k) && heldBy(a[k], b[k]));
++  if (Array.isArray(a) && Array.isArray(b)) return b.every(y => a.some(x => heldBy(x, y)));
++  return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
++}
++
+ /** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
+ function idText(v) {
+   return typeof v === 'string' ? v : typeof v === 'number' && Number.isFinite(v) ? String(v) : '';
+diff --git a/supabase/migrations/212_share_veil_later_cures.sql b/supabase/migrations/212_share_veil_later_cures.sql
+index 2ba7870c9..adcce0eb8 100644
+--- a/supabase/migrations/212_share_veil_later_cures.sql
++++ b/supabase/migrations/212_share_veil_later_cures.sql
+@@ -2085,6 +2085,38 @@ returns boolean language sql immutable as $$
+                     else false end, false)
+ $$;
+ 
++-- [212: NEW] public._gallery_veil_copy_names
++-- R3-CURE-4 (VEIL-25's builder; the chair, 11:12 UTC): whether a structured copy NAMES a withheld power (the ids `ids`, the
++-- name search's `hits`): a conflict by a party (a string, or an object's faction, name or id); a tension by a string of its
++-- factions; a membership by its power, faction, name or id; a goal by either target id or either sentence. The one test the
++-- copy pass asks of a served copy AND of its counterpart in `pub` (a husk is judged on what it held before the sweep).
++-- Twin: galleryRosterChoices.js :: withholdPowerCopies (conflictNames, tensionNames, memberNames, goalNames).
++create or replace function public._gallery_veil_copy_names(kind text, x jsonb, ids text[], hits jsonb)
++returns boolean language sql immutable as $$
++  select coalesce(jsonb_typeof(x) = 'object' and case kind
++    when 'conflict' then jsonb_typeof(x -> 'parties') = 'array' and exists (select 1 from jsonb_array_elements(x -> 'parties') pn
++      where public._gallery_veil_power_named(pn, ids, hits)
++         or (jsonb_typeof(pn) = 'object' and (public._gallery_veil_power_named(pn -> 'faction', ids, hits) or public._gallery_veil_power_named(pn -> 'name', ids, hits)
++                                              or public._gallery_veil_power_named(pn -> 'id', ids, hits))))
++    when 'tension' then jsonb_typeof(x -> 'factions') = 'array'
++      and exists (select 1 from jsonb_array_elements(x -> 'factions') fn where jsonb_typeof(fn) = 'string' and public._gallery_veil_power_named(fn, ids, hits))
++    when 'member' then public._gallery_veil_power_named(x -> 'power', ids, hits) or public._gallery_veil_power_named(x -> 'faction', ids, hits)
++      or public._gallery_veil_power_named(x -> 'name', ids, hits) or public._gallery_veil_power_named(x -> 'id', ids, hits)
++    when 'goal' then public._gallery_veil_power_named(x #> '{intent,short,target,id}', ids, hits) or public._gallery_veil_power_named(x #> '{intent,long,target,id}', ids, hits)
++      or public._gallery_veil_name_hit(public._gallery_veil_str(x -> 'short'), hits, null, null)
++      or public._gallery_veil_name_hit(public._gallery_veil_str(x -> 'long'), hits, null, null)
++    else true end, false)
++$$;
++
++-- [212: NEW] public._gallery_veil_npc_copies
++-- R3-CURE-4: the strings the copy pass asks of `pub`'s people (each goal's two sentences and two target ids, each
++-- membership), the only part of a person the name search's hits are read for: a person's other prose is not walked.
++create or replace function public._gallery_veil_npc_copies(npcs jsonb)
++returns jsonb language sql immutable as $$
++  select coalesce(jsonb_agg(jsonb_build_array(q -> 'goal', q -> 'memberships')), '[]')
++    from jsonb_array_elements(case when jsonb_typeof(npcs) = 'array' then npcs else '[]' end) q where jsonb_typeof(q) = 'object'
++$$;
++
+ -- [212: NEW] public._gallery_veil_roster_choices
+ -- VEIL-22 (R3; SUB-BRIEF-VR7 point 5; the chairs' VR7, VR11/VR31, VR21, VR29, VR39, VR42 and the power observable, each
+ -- vetoable by the owner): THE DRAWN CONDITIONAL ROWS. `doc` is the veiled body, `pub` the projection the veil ran on. On
+@@ -2192,7 +2224,10 @@ begin
+   if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
+   -- registry: power.entry (VR42: THE GOVERNING POWER'S ROW IS NEVER REMOVED; any other criminal power, by its seat's mark or a
+   -- thieves' name (factionDynamics.js's isCrim), where a house is hidden whole: the criminal power is raised by the crime
+-  -- reading a hidden house moves, rulingStructure.js)
++  -- reading a hidden house moves, rulingStructure.js). R3-CURE-4 (unit 2; the chair's ruling 37 (a)): the thieves' name is
++  -- read only where the power carries NO category string (unsure: withheld); a power whose category says what it is (a
++  -- civic "Old Thieves' Guild Watch", raised by no house) is not taken by the words of its name. Measured on the born pool:
++  -- 0 of 1,478 born powers read differently (every born "Thieves' Guild" carries category 'criminal').
+   served_ids := array(select public._gallery_veil_inst_id(e) from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                        where jsonb_typeof(e) = 'object');
+   gone := array(select public._gallery_veil_case_fold(public._gallery_veil_str(e -> 'name'))
+@@ -2208,12 +2243,12 @@ begin
+     lateral (select e ->> 'faction' as v where jsonb_typeof(e -> 'faction') = 'string' union select e ->> 'name' where jsonb_typeof(e -> 'name') = 'string') w
+     where jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+       and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+-           or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'));
++           or (coalesce(jsonb_typeof(e -> 'category'), 'none') <> 'string' and public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie')));
+   if whole and jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then
+     s := jsonb_set(s, '{powerStructure,factions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{powerStructure,factions}') with ordinality x(e, o)
+       where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                  and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+-                      or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'))), '[]'));
++                      or (coalesce(jsonb_typeof(e -> 'category'), 'none') <> 'string' and public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie')))), '[]'));
+   end if;
+   -- R3-CURE (unit 2): master's stored shape, the top-level factions[] (the powers' twin list, as R4 reads it): the same rule,
+   -- an entry naming a power withheld above leaves too, and one naming a governing power stays (VR42)
+@@ -2222,7 +2257,7 @@ begin
+       where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                  and not (public._gallery_veil_str(e -> 'faction') = any(gov_names) or public._gallery_veil_str(e -> 'name') = any(gov_names))
+                  and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+-                      or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'
++                      or (coalesce(jsonb_typeof(e -> 'category'), 'none') <> 'string' and public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie')
+                       or public._gallery_veil_str(e -> 'faction') = any(ps_out) or public._gallery_veil_str(e -> 'name') = any(ps_out)))), '[]'));
+     -- (VR11/VR31 on this list too: where the rule above took an entry, a share set left is re-derived to 100 by largest
+     -- remainder, as below)
+@@ -2291,7 +2326,13 @@ begin
+     s := jsonb_set(s, '{powerStructure,factionRelationships}', coalesce((select jsonb_agg(e order by o)
+       from jsonb_array_elements(s #> '{powerStructure,factionRelationships}') with ordinality x(e, o)
+      where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'pair') = 'array' and jsonb_array_length(e -> 'pair') > 0
+-       and not exists (select 1 from jsonb_array_elements(e -> 'pair') pn where jsonb_typeof(pn) <> 'string' or not ((pn #>> '{}') = any(names)))), '[]'));
++       and not exists (select 1 from jsonb_array_elements(e -> 'pair') pn where jsonb_typeof(pn) <> 'string' or not ((pn #>> '{}') = any(names)))
++       -- R3-CURE-4 (unit 1: A HUSK IS A TELL): a relation whose PRE-SWEEP counterpart in `pub` named an unserved power leaves
++       -- whole, though the name sweep took that name out of its pair (a remnant is held, `@>`, by what it was cut from)
++       and not exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p #> '{powerStructure,factionRelationships}') = 'array' then p #> '{powerStructure,factionRelationships}' else '[]' end) r0
++                         where jsonb_typeof(r0) = 'object' and r0 @> e
++                           and (jsonb_typeof(r0 -> 'pair') <> 'array' or jsonb_array_length(r0 -> 'pair') = 0
++                                or exists (select 1 from jsonb_array_elements(r0 -> 'pair') pn where jsonb_typeof(pn) <> 'string' or not ((pn #>> '{}') = any(names)))))), '[]'));
+   end if;
+   if not whole then return s; end if;
+ 
+@@ -2320,21 +2361,27 @@ begin
+   if srch is not null or cardinality(wn_ids) > 0 then
+     hits := case when srch is null then '{}'::jsonb
+                  else public._gallery_veil_name_hits(jsonb_build_array(s #> '{powerStructure,conflicts}', s -> 'conflicts', s #> '{history,currentTensions}',
+-                                                                       s #> '{powerStructure,factions}', s -> 'factions', s -> 'npcs', s -> 'simulationTrace'), srch) end;
++                                                                       s #> '{powerStructure,factions}', s -> 'factions', s -> 'npcs', s -> 'simulationTrace',
++                                                                       -- R3-CURE-4 (unit 1): the same copies as `pub` held them, before any pass stripped them
++                                                                       p #> '{powerStructure,conflicts}', p -> 'conflicts', p #> '{history,currentTensions}',
++                                                                       public._gallery_veil_npc_copies(p -> 'npcs')), srch) end;
+     foreach sd in array array['powerStructure', 'top'] loop
+       pth := case when sd = 'top' then array['conflicts'] else array['powerStructure', 'conflicts'] end;
+       if jsonb_typeof(s #> pth) = 'array' then
++        -- R3-CURE-4 (unit 1; the chair, 11:12: "a husk is a tell"): a copy is ALSO judged on what it held before any pass
++        -- stripped it: a served conflict leaves where a conflict of `pub`'s same list that names a withheld power holds it
++        -- (`@>`: a remnant is held by what the sweep cut it from); _gallery_veil_copy_names, the one test for both
+         s := jsonb_set(s, pth, coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> pth) with ordinality x(e, o)
+-          where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'parties') = 'array' and exists (select 1 from jsonb_array_elements(e -> 'parties') pn
+-            where public._gallery_veil_power_named(pn, wn_ids, hits)
+-               or (jsonb_typeof(pn) = 'object' and (public._gallery_veil_power_named(pn -> 'faction', wn_ids, hits) or public._gallery_veil_power_named(pn -> 'name', wn_ids, hits)
+-                                                    or public._gallery_veil_power_named(pn -> 'id', wn_ids, hits)))))), '[]'));
++          where not (public._gallery_veil_copy_names('conflict', e, wn_ids, hits)
++                     or (jsonb_typeof(e) = 'object' and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p #> pth) = 'array' then p #> pth else '[]' end) z
++                                                                 where z @> e and public._gallery_veil_copy_names('conflict', z, wn_ids, hits))))), '[]'));
+       end if;
+     end loop;
+     if jsonb_typeof(s #> '{history,currentTensions}') = 'array' then
+       s := jsonb_set(s, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{history,currentTensions}') with ordinality x(e, o)
+-        where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'factions') = 'array'
+-                   and exists (select 1 from jsonb_array_elements(e -> 'factions') fn where jsonb_typeof(fn) = 'string' and public._gallery_veil_power_named(fn, wn_ids, hits)))), '[]'));
++        where not (public._gallery_veil_copy_names('tension', e, wn_ids, hits)
++                   or (jsonb_typeof(e) = 'object' and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p #> '{history,currentTensions}') = 'array' then p #> '{history,currentTensions}' else '[]' end) z
++                                                               where z @> e and public._gallery_veil_copy_names('tension', z, wn_ids, hits))))), '[]'));
+     end if;
+     foreach sd in array array['powerStructure', 'top'] loop
+       pth := case when sd = 'top' then array['factions'] else array['powerStructure', 'factions'] end;
+@@ -2349,15 +2396,19 @@ begin
+       s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) <> 'object' then n else
+           (n - (select coalesce(array_agg(k), '{}') from unnest(array['faction', 'factionAffiliation', 'affiliation', 'factionId']) k
+                  where jsonb_typeof(n -> k) = 'string' and public._gallery_veil_power_named(n -> k, wn_ids, hits))
+-             - (case when jsonb_typeof(n -> 'goal') = 'object' and (
+-                   public._gallery_veil_power_named(n #> '{goal,intent,short,target,id}', wn_ids, hits) or public._gallery_veil_power_named(n #> '{goal,intent,long,target,id}', wn_ids, hits)
+-                   or public._gallery_veil_name_hit(public._gallery_veil_str(n #> '{goal,short}'), hits, null, null)
+-                   or public._gallery_veil_name_hit(public._gallery_veil_str(n #> '{goal,long}'), hits, null, null))
++             -- (R3-CURE-4, unit 1: the goal leaves WHOLE where it names a withheld power now, or where the same person's goal
++             -- in `pub` (by the person's id, a string) named one before the sweep stripped its sentence and its target id)
++             - (case when jsonb_typeof(n -> 'goal') = 'object' and (public._gallery_veil_copy_names('goal', n -> 'goal', wn_ids, hits)
++                   or (jsonb_typeof(n -> 'id') = 'string' and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq
++                                                                  where jsonb_typeof(pq) = 'object' and pq -> 'id' = n -> 'id' and public._gallery_veil_copy_names('goal', pq -> 'goal', wn_ids, hits))))
+                 then array['goal'] else '{}'::text[] end))
+           || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
+                from jsonb_array_elements(n -> 'memberships') with ordinality y(m, mo)
+-              where not (jsonb_typeof(m) = 'object' and (public._gallery_veil_power_named(m -> 'power', wn_ids, hits) or public._gallery_veil_power_named(m -> 'faction', wn_ids, hits)
+-                                                          or public._gallery_veil_power_named(m -> 'name', wn_ids, hits) or public._gallery_veil_power_named(m -> 'id', wn_ids, hits))))) else '{}'::jsonb end
++              where not (public._gallery_veil_copy_names('member', m, wn_ids, hits)
++                         or (jsonb_typeof(m) = 'object' and jsonb_typeof(n -> 'id') = 'string'
++                             and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq,
++                                                       jsonb_array_elements(case when jsonb_typeof(pq -> 'memberships') = 'array' then pq -> 'memberships' else '[]' end) z
++                                          where jsonb_typeof(pq) = 'object' and pq -> 'id' = n -> 'id' and z @> m and public._gallery_veil_copy_names('member', z, wn_ids, hits)))))) else '{}'::jsonb end
+         end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
+     end if;
+     -- R3-CURE-2 (found by the fold: "faction.thieves_guild" under Reveal DM): a simulation-trace entry a top-level string of
+@@ -2534,6 +2585,9 @@ end $$;
+ revoke execute on function public._gallery_veil_roster_choices(jsonb, jsonb) from public, anon, authenticated;
+ -- R3-CURE-2: and its helper, called only by it
+ revoke execute on function public._gallery_veil_power_named(jsonb, text[], jsonb) from public, anon, authenticated;
++-- R3-CURE-4: and its two helpers, called only by it
++revoke execute on function public._gallery_veil_copy_names(text, jsonb, text[], jsonb) from public, anon, authenticated;
++revoke execute on function public._gallery_veil_npc_copies(jsonb) from public, anon, authenticated;
+ 
+ -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
+ -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
+diff --git a/supabase/rollback/212_share_veil_later_cures.down.sql b/supabase/rollback/212_share_veil_later_cures.down.sql
+index fbf242b79..0f8bf8c2a 100644
+--- a/supabase/rollback/212_share_veil_later_cures.down.sql
++++ b/supabase/rollback/212_share_veil_later_cures.down.sql
+@@ -21,6 +21,7 @@
+ -- helpers (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always), dropped in section 2.
+ -- VEIL-22 (R3): and _gallery_veil_roster_choices, called by the restated _gallery_veil, dropped there too.
+ -- VEIL-24 (R3-CURE-2): and its helper _gallery_veil_power_named, dropped beside it.
++-- VEIL-25 (R3-CURE-4): and its two helpers _gallery_veil_copy_names and _gallery_veil_npc_copies, dropped beside it.
+ --
+ -- NOT reversed, because there is nothing to: no stored row was written by 212.
+ 
+@@ -433,6 +434,8 @@ end $$;
+ -- ── 2. the helpers 212 created, by signature (thirty-one: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad, and _clauses, which VEIL-15 replaced by _runs; VEIL-16 added _name_json and _name_tokens, and _name_near takes a range of tokens) ──
+ drop function if exists public._gallery_veil_roster_choices(jsonb, jsonb);
+ drop function if exists public._gallery_veil_power_named(jsonb, text[], jsonb);
++drop function if exists public._gallery_veil_copy_names(text, jsonb, text[], jsonb);
++drop function if exists public._gallery_veil_npc_copies(jsonb);
+ drop function if exists public._gallery_veil_withhold_always(jsonb);
+ drop function if exists public._gallery_veil_cast(jsonb, text[], text[], text[]);
+ drop function if exists public._gallery_veil_each_minus_at(jsonb, text[], text[]);
+diff --git a/tests/security/galleryRosterChoices.pglite.test.js b/tests/security/galleryRosterChoices.pglite.test.js
+index 409f89ebb..42c53031d 100644
+--- a/tests/security/galleryRosterChoices.pglite.test.js
++++ b/tests/security/galleryRosterChoices.pglite.test.js
+@@ -191,10 +191,62 @@ function searchHits(doc, tokens) {
+   }
+   return out;
+ }
++/** R3-CURE-4 (VEIL-25's builder; the chair, 11:12 UTC: "a husk is a tell"): jsonb containment (`a @> b`) as PostgreSQL reads
++ * it below the top level: an object holds every key of `b` with a value that holds `b`'s; an array holds each element of `b`
++ * in some element of its own; a scalar is equal. `skip` names keys of `b` not read at this level. */
++function holdsJ(a, b, skip = []) {
++  if (isRec(a) && isRec(b)) return Object.keys(b).every((k) => skip.includes(k) || (Object.prototype.hasOwnProperty.call(a, k) && holdsJ(a[k], b[k])));
++  if (Array.isArray(a) && Array.isArray(b)) return b.every((y) => a.some((x) => holdsJ(x, y)));
++  return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
++}
++/** R3-CURE-4 unit 1, THE CLASS (the brief: "the search cannot see a husk because the name is gone, so compare the projection
++ * with the served body by path"): every served OBJECT whose counterpart in the PRE-SWEEP projection `pub` held, in one of its
++ * fields, a withheld power's name (the lane's fold, the served powers' names its open names) or id (a string, a number by its
++ * String()), and which is served with that field removed or blanked. Counterparts: a record by key; a person by `id`; any
++ * other list's element by containment (the served element held by an unused projection element, `ts` and `power` aside: the
++ * trace is renumbered and the shares re-derived). A field whose whole value IS the name or id (or an array holding it) is
++ * STRUCTURED; a sentence naming it is PROSE. Returns { compared, husks: [{ path, kind }] }. */
++function husksOf(pub, doc, withheld, opens) {
++  const nums = new Set(withheld.filter((t) => /^\d+$/.test(t)));
++  const ids = new Set(withheld);
++  const search = buildNameSearch(withheld.filter((t) => !nums.has(t)), opens);
++  const exact = (v) => (typeof v === 'number' && ids.has(String(v))) || (typeof v === 'string' && v !== '' && ids.has(v));
++  const named = (v) => exact(v) || (typeof v === 'string' && v !== '' && !!search && search.hit(v));
++  const out = { compared: 0, husks: [] };
++  const walk = (x, y, p) => {
++    if (isRec(x) && isRec(y)) {
++      out.compared += 1;
++      for (const k of Object.keys(x)) {
++        const v = x[k]; const at = p ? `${p}.${k}` : k;
++        if (typeof v === 'string' || typeof v === 'number') {
++          if (named(v) && !(Object.prototype.hasOwnProperty.call(y, k) && y[k] === v)) out.husks.push({ path: at, kind: exact(v) ? 'structured' : 'prose' });
++        } else if (Array.isArray(v) && v.some((e) => (typeof e === 'string' || typeof e === 'number') && named(e))) {
++          const yl = Array.isArray(y[k]) ? y[k] : null;
++          for (const e of v) if ((typeof e === 'string' || typeof e === 'number') && named(e) && !(yl && yl.includes(e))) out.husks.push({ path: `${at}[]`, kind: exact(e) ? 'structured' : 'prose' });
++        } else if (Object.prototype.hasOwnProperty.call(y, k)) walk(v, y[k], at);
++      }
++    } else if (Array.isArray(x) && Array.isArray(y)) {
++      const used = new Set();
++      for (const e of y) {
++        if (!isRec(e)) continue;
++        const i = typeof e.id === 'string' && /(^|\.)npcs$/.test(p)
++          ? x.findIndex((z, j) => !used.has(j) && isRec(z) && z.id === e.id)
++          : x.findIndex((z, j) => !used.has(j) && isRec(z) && holdsJ(z, e, ['ts', 'power']));
++        if (i < 0) continue;
++        used.add(i);
++        walk(x[i], e, `${p}[]`);
++      }
++    }
++  };
++  walk(pub, doc, '');
++  return out;
++}
+ /** R5's, NAMED (the chair, 07:39 UTC): a withheld power's name inside a composed sentence of a SERVED power's description
+  * (registry power.desc, R5's composed rows) and its top-level copy. Nothing else may hold one. */
+ const R5_PROSE = Object.freeze(['powerStructure.factions[].desc', 'factions[].desc']);
+-const crim = (f) => isRec(f) && (String(f.category || '').toLowerCase() === 'criminal' || /thie/i.test(String(f.faction ?? f.name ?? '')));
++// R3-CURE-4 (unit 2; the chair's ruling 37 (a)): power.entry's own test, as the engines now read it: the category; a thieves'
++// name only where the power carries no category string (the plant's civic "Old Thieves' Guild Watch" is not a criminal power)
++const crim = (f) => isRec(f) && (String(f.category || '').toLowerCase() === 'criminal' || (typeof f.category !== 'string' && /thie/i.test(String(f.faction ?? f.name ?? ''))));
+ const spOf = (d) => d?.economicState?.safetyProfile || {};
+ const R3_PATHS = [/^powerStructure\.factions\[\]\.(faction|power|category|isGoverning)$/, /^powerStructure\.factionRelationships\[\]\.(pair\[\]|type|direction)$/,
+   /^economicState\.economicComplexity$/, /^economicState\.safetyProfile\.(economicDragDesc|guardEffectivenessDesc|safetyDesc)$/,
+@@ -634,6 +686,40 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through
+     expect(bad).toEqual([]);
+   });
+ 
++  // KEY-LEVEL ON A SERVED HOLDER, NOT CURED HERE (STOPPED to the seat, R3C4-HANDBACK.md): R3-CURE's ruled rules take the KEY,
++  // not its holder: a SHOWN power's `contestsNiche` naming a withheld one, and a served person's affiliation key. To take the
++  // holder whole would withhold a shown power or a served person; that is a ruling, not a cure. Listed by path and count.
++  const KEY_LEVEL = /^(powerStructure\.)?factions\[\]\.contestsNiche$|^npcs\[\]\.(faction|factionAffiliation|affiliation|factionId)$/;
++  it('R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power\'s name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5\'s)', () => {
++    const tally = { structured: {}, prose: {} };
++    let compared = 0; let judged = 0;
++    const bad = [];
++    for (const r of reads) {
++      const pub = veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov });
++      const twin = veil.projectShareVeil(clone(pub), r.ov);
++      for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
++        const w = withheldOf(r.stored, d);
++        if (!w.length) continue;
++        judged += 1;
++        const opens = [...(d.powerStructure?.factions || []), ...(d.factions || [])].filter(isRec).flatMap((f) => [f.faction, f.name]).filter((v) => typeof v === 'string' && v);
++        const h = husksOf(pub, d, w, opens);
++        compared += h.compared;
++        for (const x of h.husks) {
++          const key = `${x.path} [${read === 'twin' ? 'twin' : 'server'}]`;
++          tally[x.kind][key] = (tally[x.kind][key] || 0) + 1;
++          if (x.kind === 'structured' && !KEY_LEVEL.test(x.path)) bad.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${read}: ${x.path}`);
++        }
++      }
++    }
++    const lines = (o) => Object.entries(o).sort().map(([k, v]) => `\n  ${k}: ${v}`).join('');
++    note('R3-CURE-4 unit 1, THE HUSK CLASS: documents judged (a power withheld):', judged, '| objects compared:', compared);
++    note('R3-CURE-4 unit 1, STRUCTURED husks (path [engine]: count):', Object.keys(tally.structured).length ? lines(tally.structured) : 'none');
++    note('R3-CURE-4 unit 1, PROSE husks, R5\'s (path [engine]: count):', Object.keys(tally.prose).length ? lines(tally.prose) : 'none');
++    expect(judged).toBeGreaterThan(0);
++    expect(compared).toBeGreaterThan(0);
++    expect(bad.slice(0, 60)).toEqual([]);
++  }, ARM_TIMEOUT_MS);
++
+   it('R3-CURE-2 unit 4 (ii): THE SHARE SUM is compared EXACTLY in both engines: shares whose decimal sum is 100 stay as stored (0.1, 64.1, 35.8), shares whose decimal sum is not are re-derived to 100 (the thirds), every read, the server and the twin alike', () => {
+     const bad = [];
+     for (const r of reads.filter((x) => x.t.seed === 'hand-shares-a' || x.t.seed === 'hand-shares-b')) {

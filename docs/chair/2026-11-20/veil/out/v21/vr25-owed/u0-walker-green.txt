@@ -1,0 +1,24 @@
+UNIT 0 GREEN (gallerySecondHomes.js exempt row deleted, pin 117 kept): 12 of 12
+[gate-tail] start:  03:27:29 up 50 min,  0 user,  load average: 1.44, 1.73, 1.91 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the scanner sees code and only code 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the auditor reds on every failure shape 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the live scan is non-vacuous and reaches BOTH gate spellings 1539ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the manifest holds against the tree in BOTH directions 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every REGISTER member reached the census, and the register is a set 10ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every exemption carries a rationale, and the backlog is exact and shrink-only 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the pending manifest key is the recorded next step, not a red 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan finds roster readers (non-vacuous) 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > ⛔ quarantine honesty: the undispositioned list is EXACT — an un-banked shrink reds too 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant 0ms
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  03:27:30
+   Duration  3.42s (transform 191ms, setup 37ms, import 1.74s, tests 1.56s, environment 0ms)
+
+[gate-tail] end:  03:27:33 up 50 min,  0 user,  load average: 1.57, 1.75, 1.92

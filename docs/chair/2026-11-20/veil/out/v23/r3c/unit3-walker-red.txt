@@ -1,0 +1,62 @@
+
+- Expected
++ Received
+
+  [
++   "Arcane black market",
++   "Background crime",
++   "Commercial crime",
++   "Criminal governance",
++   "Lawlessness",
++   "Magical crime",
++   "Organized guild crime",
++   "Religious fraud",
++   "Smuggling",
+    "State predation",
++   "Street gang activity",
++   "Survival crime",
++   "black market food",
++   "black market passage",
++   "collaboration fraud",
++   "conscription fraud",
++   "contested property",
++   "cultural friction",
++   "debt evasion",
++   "deserter networks",
++   "desperation theft",
++   "displacement crime",
++   "escape networks",
++   "informant networks",
++   "informant pressure",
++   "information trade",
++   "loyalty testing",
++   "plague profiteering",
++   "political violence",
++   "quarantine violation",
++   "religious fraud",
++   "resistance activity",
++   "revolt violence",
++   "underground worship",
++   "war profiteering",
++   "weapons trade",
+  ]
+
+ ❯ tests/lint/rosterChoicePools.walker.test.js:144:70
+    142|     for (const [what, engine, keys] of cases) {
+    143|       const gone = [...engine][0];
+    144|       expect(drift(engine, keys.filter((k) => k !== gone))[0], what).t…
+       |                                                                      ^
+    145|     }
+    146|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  07:48:16
+   Duration  1.18s (transform 747ms, setup 45ms, import 18ms, tests 1.01s, environment 0ms)
+
+[gate-tail] end:  07:48:17 up 19 min,  0 user,  load average: 0.15, 0.61, 0.57
+[gate-tail] full log: /tmp/gate-tail.3595.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

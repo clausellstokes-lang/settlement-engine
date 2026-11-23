@@ -1,0 +1,62 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > shows with the switch reading partly while a criminal house stays hidden (the owner opened the rest)
+AssertionError: the notice is missing: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:162:51
+    160|       fireEvent.click(screen.getByRole('button', { name: "Hide Smuggle…
+    161|       expect(group.textContent).toContain(W.partly);
+    162|       expect(has(group), 'the notice is missing').toBe(true);
+       |                                                   ^
+    163|     });
+    164|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > shows on a fresh share once one criminal eye is opened (partly, both houses hidden by default)
+AssertionError: the notice is missing: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:170:51
+    168|       fireEvent.click(screen.getByRole('button', { name: 'Show Crimina…
+    169|       expect(group.textContent).toContain(W.partly);
+    170|       expect(has(group), 'the notice is missing').toBe(true);
+       |                                                   ^
+    171|     });
+    172|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/components/curateModeCriminalSwitch.test.jsx > Curate for visitors: the criminal switch > the notice: a criminal house hidden while the switch reads shown or partly > the predicate: true only for shown or partly with a house the applier removes whole; its house reading is applyVeil's
+TypeError: criminalHouseHiddenWhileShown is not a function
+ ❯ tests/components/curateModeCriminalSwitch.test.jsx:210:14
+    208|       const drops = applyVeil(payload, resolveVeil(model.defaults, yar…
+    209|       expect(drops).toBe(true);
+    210|       expect(criminalHouseHiddenWhileShown('partly', model)).toBe(true…
+       |              ^
+    211|       expect(criminalHouseHiddenWhileShown('shown', model)).toBe(true);
+    212|       expect(criminalHouseHiddenWhileShown('hidden', model)).toBe(fals…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 11 passed (14)
+   Start at  11:24:39
+   Duration  5.97s (transform 1.36s, setup 98ms, import 1.96s, tests 2.26s, environment 1.52s)
+
+[gate-tail] end:  11:24:45 up 12 min,  0 user,  load average: 4.97, 3.39, 1.67
+[gate-tail] full log: /tmp/gate-tail.2458.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

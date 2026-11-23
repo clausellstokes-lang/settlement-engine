@@ -15,7 +15,9 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
-import { projectShareVeil, clampVeilDeltas, clampShareMode, readShareMode, readShareVeil, writeShareVeil, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
+import { projectServedVeil, isServedVeil, clampVeilDeltas, clampShareMode, readShareMode, readShareVeil, writeShareVeil, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
+import { rederiveForPage } from '../domain/veil/pageRederive.js';
+import { restampServedMemberships } from '../domain/display/galleryWithholdAlways.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -276,6 +278,10 @@ export async function fetchGalleryMap(slug) {
   if (!isConfigured || !slug) return null;
   const { data, error } = await supabase.rpc('get_gallery_map', { p_slug: slug });
   if (error) throw new Error(error.message || 'Could not load that map');
+  // VEIL-21 (R2; VR33, VR37): each member's page re-derives what it draws of a value the server withholds on every read,
+  // from the served document alone (src/domain/veil/pageRederive.js)
+  // (in place: the payload is this read's own)
+  if (data && Array.isArray(data.members)) for (const m of data.members) if (m && typeof m === 'object') rederiveForPage(m.settlement);
   return data || null;
 }
 
@@ -832,14 +838,16 @@ function sanitizeDossier(row, { partyLink = false } = {}) {
   // export (or at the DM's last refresh); a live share, and every share exported before X-24,
   // renders the saved row, which each save and each advance already rewrites. The frozen copy
   // runs through the same projection and the same veil as the row (defence in depth: the copy
-  // is owner-written). ⚠ CLIENT MIRROR: until the owner's migration serves the copy from its
-  // own column, get_gallery_dossier still returns the saved row beside it.
+  // is owner-written). From 211 the server serves the frozen copy, veiled, as `data` and sends
+  // neither the copy nor the live row beside it; the marker keeps the mode and its time.
   // R4 (VEIL-FIX, 2026-11-10): THE VEIL FAILS CLOSED ON THE PARTY LINK. Only the gallery export
   // writes the veil marker, so a town shared by link alone carried none; with no marker the link
   // takes the DEFAULT veil, built by the export's own writer (writeShareVeil with no deltas, which
   // marks the share so the one default set applies). The gallery read keeps an unmarked listed
   // page as it was (the owner rules on the pre-veil pages: the lane's STOP).
-  const veilOverrides = partyLink && !readShareVeil(row.gallery_member_overrides).marked
+  // 211: a served share is already veiled on the server (its marker says so); it takes no default.
+  const served = isServedVeil(row.gallery_member_overrides);
+  const veilOverrides = partyLink && !served && !readShareVeil(row.gallery_member_overrides).marked
     ? writeShareVeil(row.gallery_member_overrides, [])
     : row.gallery_member_overrides;
   const share = readShareMode(overrides);
@@ -859,16 +867,24 @@ function sanitizeDossier(row, { partyLink = false } = {}) {
     // gallery_member_overrides) is projected through the one default set plus those
     // deltas, so a hidden fact is ABSENT from what renders, the Table View included. A
     // share exported before the veil is unmarked and projects exactly as before.
-    // ⚠ CLIENT MIRROR: the server twin (_gallery_apply_veil in get_gallery_dossier) is a
-    // migration and the owner's hand; until it lands the stored payload still carries the
-    // veiled facts, and this projection is what keeps them off the page.
-    settlement:   projectShareVeil(toPublicSafe(source, {
+    // The server twin (migration 211, _gallery_veil in the reads) projects and veils the payload
+    // before it is sent and says so with its marker; the page then re-runs only the groupings.
+    // A served payload is not projected again: the projection reads a face's house to keep its
+    // memberships, and a veiled house tie is already gone, so a second pass would hide more than
+    // the DM chose while the response still carried it.
+    // VEIL-21 (R2; VR33, VR37): the page re-derives what it draws of a value the server withholds on every read (the
+    // defence scores, the readiness score, the economy's output, a condition's severity from its band), from the served
+    // document alone (src/domain/veil/pageRederive.js); a value it cannot decide is not drawn.
+    // R2-CURE (VEIL-21): an unmarked body is re-projected here, and 212 withholds each served membership's stamp, which
+    // the projection's per-entry law reads: the page restamps what the server's own `data` sent (galleryWithholdAlways.js
+    // :: restampServedMemberships), never a frozen copy carried beside it.
+    settlement:   rederiveForPage(projectServedVeil(served ? source : toPublicSafe(source === row.data ? restampServedMemberships(source) : source, {
       full: dmFull,
       memberOverrides: partyLink ? null : overrides,
-    }), veilOverrides),
+    }), veilOverrides), { unveiled: !served && !readShareVeil(veilOverrides).marked }),
     // Which mode the page is in, and when its frozen copy was taken (null for live).
     galleryMode:  share.mode || 'live',
-    snapshotAt:   share.mode === 'snapshot' && share.snapshot ? share.at : null,
+    snapshotAt:   share.mode === 'snapshot' && (share.snapshot || served) ? share.at : null,
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),

@@ -1,0 +1,248 @@
+towns 12  shares 720  reads 5760  hand hides 49254  tokens the reference removed 441294
+raised 0 []
+tokens removed by the reference, per chain:read {"a203p211:gallery":71140,"a203p211:link":42628,"a203p211:map":42128,"a203p211:import":71140,"a211:gallery":69037,"a211:link":38282,"a211:map":37902,"a211:import":69037}
+TOKEN LEAKS 0
+{}
+secondHome {
+  'a203p211:gallery:npc:physical': 133,
+  'a203p211:gallery:npc:personality': 117,
+  'a203p211:link:npc:physical': 145,
+  'a203p211:link:npc:personality': 129,
+  'a203p211:map:npc:physical': 133,
+  'a203p211:map:npc:personality': 117,
+  'a203p211:import:npc:physical': 133,
+  'a203p211:import:npc:personality': 117,
+  'a203p211:gallery:npc:goal': 58,
+  'a203p211:gallery:npc:goals': 116,
+  'a203p211:gallery:npc:location': 54,
+  'a203p211:gallery:npc:factionGoal': 76,
+  'a203p211:gallery:npc:currentLocation': 100,
+  'a203p211:gallery:npc:whereabouts': 48,
+  'a203p211:gallery:npc:relationships': 74,
+  'a203p211:gallery:npc:activeConstraint': 88,
+  'a203p211:gallery:npc:linkedFactionIds': 62,
+  'a203p211:import:npc:goal': 58,
+  'a203p211:import:npc:goals': 116,
+  'a203p211:import:npc:location': 54,
+  'a203p211:import:npc:factionGoal': 76,
+  'a203p211:import:npc:currentLocation': 100,
+  'a203p211:import:npc:whereabouts': 48,
+  'a203p211:import:npc:relationships': 74,
+  'a203p211:import:npc:activeConstraint': 88,
+  'a203p211:import:npc:linkedFactionIds': 62,
+  'a211:gallery:npc:goal': 58,
+  'a211:gallery:npc:goals': 116,
+  'a211:gallery:npc:location': 54,
+  'a211:gallery:npc:physical': 66,
+  'a211:gallery:npc:factionGoal': 76,
+  'a211:gallery:npc:personality': 59,
+  'a211:gallery:npc:currentLocation': 100,
+  'a211:gallery:npc:whereabouts': 48,
+  'a211:gallery:npc:relationships': 74,
+  'a211:gallery:npc:activeConstraint': 88,
+  'a211:gallery:npc:linkedFactionIds': 62,
+  'a211:import:npc:goal': 58,
+  'a211:import:npc:goals': 116,
+  'a211:import:npc:location': 54,
+  'a211:import:npc:physical': 66,
+  'a211:import:npc:factionGoal': 76,
+  'a211:import:npc:personality': 59,
+  'a211:import:npc:currentLocation': 100,
+  'a211:import:npc:whereabouts': 48,
+  'a211:import:npc:relationships': 74,
+  'a211:import:npc:activeConstraint': 88,
+  'a211:import:npc:linkedFactionIds': 62,
+  'a203p211:gallery:npc:corruptTies': 2,
+  'a203p211:gallery:npc:corruptionVector': 6,
+  'a203p211:import:npc:corruptTies': 2,
+  'a203p211:import:npc:corruptionVector': 6,
+  'a211:gallery:npc:corruptTies': 2,
+  'a211:gallery:npc:corruptionVector': 6,
+  'a211:import:npc:corruptTies': 2,
+  'a211:import:npc:corruptionVector': 6,
+  'a203p211:gallery:npc:plotHooks': 6,
+  'a203p211:import:npc:plotHooks': 6,
+  'a211:gallery:npc:plotHooks': 6,
+  'a211:import:npc:plotHooks': 6
+} [
+  {
+    share: 'rv5-m-city-calm-0 salted default/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5mcitycalm0~npc~422~physical~Z',
+    at: [ 'npcs[].physical.rv5' ]
+  },
+  {
+    share: 'rv5-m-city-calm-0 salted default/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5mcitycalm0~npc~421~personality~Z',
+    at: [ 'npcs[].personality.rv5' ]
+  },
+  {
+    share: 'rv5-m-city-calm-0 salted default/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5mcitycalm0~npc~437~physical~Z',
+    at: [ 'npcs[].physical.rv5' ]
+  },
+  {
+    share: 'rv5-m-city-calm-0 salted default/pub/live',
+    read: 'gallery',
+    tok: 'RV5~rv5mcitycalm0~npc~436~personality~Z',
+    at: [ 'npcs[].personality.rv5' ]
+  }
+]
+towns with a hidden power 0 hiddenPowerName {} covertTies {} powers cards hidden 0
+noRow {} postFreeze { 'a203p211:link': 185, 'a211:link': 185 } served {} pageShowMore {}
+a203p211 CHANGED economicState.activeChains[].chainId                  {"gallery":1880,"import":1880,"link":2044,"map":1880}
+a203p211 CHANGED economicState.activeChains[].entrepot                 {"gallery":91,"import":91,"link":99,"map":91}
+a203p211 CHANGED economicState.activeChains[].entrepotNote             {"gallery":455,"import":455,"link":495,"map":455}
+a203p211 CHANGED economicState.activeChains[].exportable               {"gallery":691,"import":691,"link":751,"map":691}
+a203p211 CHANGED economicState.activeChains[].label                    {"gallery":1880,"import":1880,"link":2044,"map":1880}
+a203p211 CHANGED economicState.activeChains[].needColor                {"gallery":1270,"import":1270,"link":1382,"map":1270}
+a203p211 CHANGED economicState.activeChains[].needKey                  {"gallery":1363,"import":1363,"link":1483,"map":1363}
+a203p211 CHANGED economicState.activeChains[].needLabel                {"gallery":1363,"import":1363,"link":1483,"map":1363}
+a203p211 CHANGED economicState.activeChains[].outputs[]                {"gallery":4820,"import":4820,"link":5240,"map":4820}
+a203p211 CHANGED economicState.activeChains[].processingInstitutions[] {"gallery":2337,"import":2337,"link":2541,"map":2337}
+a203p211 CHANGED economicState.activeChains[].resource                 {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceActive           {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceCondition        {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceInputAvailable   {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceInputCondition   {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceInputKey         {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].resourceKey              {"gallery":454,"import":454,"link":494,"map":454}
+a203p211 CHANGED economicState.activeChains[].services[]               {"gallery":1409,"import":1409,"link":1533,"map":1409}
+a203p211 CHANGED economicState.activeChains[].status                   {"gallery":232,"import":232,"link":252,"map":232}
+a203p211 CHANGED economicState.activeChains[].upstreamChains[]         {"gallery":93,"import":93,"link":101,"map":93}
+a203p211 CHANGED simulationTrace[].downstreamEffects[].effect          {"gallery":2,"import":2}
+a203p211 CHANGED simulationTrace[].downstreamEffects[].target          {"gallery":2,"import":2}
+a203p211 EXTRA economicState.activeChains[].entrepot                   {"gallery":138,"import":138,"link":150,"map":138}
+a203p211 EXTRA economicState.activeChains[].outputs[]                  {"gallery":781,"import":781,"link":849,"map":781}
+a203p211 EXTRA economicState.activeChains[].processingInstitutions[]   {"gallery":924,"import":924,"link":1004,"map":924}
+a203p211 EXTRA economicState.activeChains[].services[]                 {"gallery":364,"import":364,"link":396,"map":364}
+a203p211 EXTRA economicState.activeChains[].upstreamChains[]           {"gallery":228,"import":228,"link":248,"map":228}
+a203p211 EXTRA economicState.activeChains[].upstreamMissing            {"gallery":93,"import":93,"link":101,"map":93}
+a203p211 EXTRA economicState.activeChains[].upstreamNote               {"gallery":93,"import":93,"link":101,"map":93}
+a203p211 EXTRA simulationTrace[].downstreamEffects[].reason            {"gallery":2,"import":2}
+a203p211 MISSING decrees                                               {"gallery":30,"import":30}
+a203p211 MISSING defenseProfile.institutions.charter[].desc            {"gallery":124,"import":124,"link":124,"map":124}
+a203p211 MISSING defenseProfile.institutions.charter[].description     {"gallery":57,"import":57,"link":57,"map":57}
+a203p211 MISSING defenseProfile.institutions.charter[].facets          {"gallery":31,"import":31,"link":31,"map":31}
+a203p211 MISSING defenseProfile.institutions.charter[].serviceKeys     {"gallery":21,"import":21,"link":21,"map":21}
+a203p211 MISSING defenseProfile.institutions.charter[].tags            {"gallery":86,"import":86,"link":86,"map":86}
+a203p211 MISSING defenseProfile.institutions.garrison[].desc           {"gallery":143,"import":143,"link":143,"map":143}
+a203p211 MISSING defenseProfile.institutions.garrison[].description    {"gallery":58,"import":58,"link":58,"map":58}
+a203p211 MISSING defenseProfile.institutions.garrison[].facets         {"gallery":79,"import":79,"link":79,"map":79}
+a203p211 MISSING defenseProfile.institutions.garrison[].serviceKeys    {"gallery":55,"import":55,"link":55,"map":55}
+a203p211 MISSING defenseProfile.institutions.garrison[].tags           {"gallery":125,"import":125,"link":125,"map":125}
+a203p211 MISSING defenseProfile.institutions.magicDef[].desc           {"gallery":134,"import":134,"link":134,"map":134}
+a203p211 MISSING defenseProfile.institutions.magicDef[].description    {"gallery":76,"import":76,"link":76,"map":76}
+a203p211 MISSING defenseProfile.institutions.magicDef[].facets         {"gallery":46,"import":46,"link":46,"map":46}
+a203p211 MISSING defenseProfile.institutions.magicDef[].serviceKeys    {"gallery":33,"import":33,"link":33,"map":33}
+a203p211 MISSING defenseProfile.institutions.magicDef[].tags           {"gallery":123,"import":123,"link":123,"map":123}
+a203p211 MISSING defenseProfile.institutions.mercenary[].desc          {"gallery":53,"import":53,"link":53,"map":53}
+a203p211 MISSING defenseProfile.institutions.mercenary[].description   {"gallery":27,"import":27,"link":27,"map":27}
+a203p211 MISSING defenseProfile.institutions.mercenary[].facets        {"gallery":14,"import":14,"link":14,"map":14}
+a203p211 MISSING defenseProfile.institutions.mercenary[].serviceKeys   {"gallery":26,"import":26,"link":26,"map":26}
+a203p211 MISSING defenseProfile.institutions.mercenary[].tags          {"gallery":49,"import":49,"link":49,"map":49}
+a203p211 MISSING defenseProfile.institutions.walls[].desc              {"gallery":176,"import":176,"link":176,"map":176}
+a203p211 MISSING defenseProfile.institutions.walls[].description       {"gallery":82,"import":82,"link":82,"map":82}
+a203p211 MISSING defenseProfile.institutions.walls[].facets            {"gallery":67,"import":67,"link":67,"map":67}
+a203p211 MISSING defenseProfile.institutions.walls[].serviceKeys       {"gallery":92,"import":92,"link":92,"map":92}
+a203p211 MISSING defenseProfile.institutions.walls[].tags              {"gallery":155,"import":155,"link":155,"map":155}
+a203p211 MISSING defenseProfile.institutions.watch[].desc              {"gallery":109,"import":109,"link":109,"map":109}
+a203p211 MISSING defenseProfile.institutions.watch[].description       {"gallery":29,"import":29,"link":29,"map":29}
+a203p211 MISSING defenseProfile.institutions.watch[].facets            {"gallery":56,"import":56,"link":56,"map":56}
+a203p211 MISSING defenseProfile.institutions.watch[].serviceKeys       {"gallery":22,"import":22,"link":22,"map":22}
+a203p211 MISSING defenseProfile.institutions.watch[].tags              {"gallery":90,"import":90,"link":90,"map":90}
+a203p211 MISSING dmLayer                                               {"gallery":30,"import":30}
+a203p211 MISSING economicState.activeChains[]                          {"gallery":404,"import":404,"link":440,"map":404}
+a203p211 MISSING economicState.activeChains[].entrepot                 {"gallery":138,"import":138,"link":150,"map":138}
+a203p211 MISSING economicState.activeChains[].outputs[]                {"gallery":780,"import":780,"link":848,"map":780}
+a203p211 MISSING economicState.activeChains[].processingInstitutions[] {"gallery":748,"import":748,"link":812,"map":748}
+a203p211 MISSING economicState.activeChains[].services[]               {"gallery":319,"import":319,"link":347,"map":319}
+a203p211 MISSING economicState.activeChains[].upstreamChains[]         {"gallery":183,"import":183,"link":199,"map":183}
+a203p211 MISSING economicState.activeChains[].upstreamMissing          {"gallery":48,"import":48,"link":52,"map":48}
+a203p211 MISSING economicState.activeChains[].upstreamNote             {"gallery":48,"import":48,"link":52,"map":48}
+a203p211 MISSING history.siegeNarrative                                {"gallery":8,"import":8,"link":8,"map":8}
+a203p211 MISSING pressureSentence                                      {"gallery":52,"import":52,"link":52,"map":52}
+a203p211 MISSING prominentRelationship.full                            {"gallery":66,"import":66,"link":66,"map":66}
+a203p211 MISSING prominentRelationship.phrasing                        {"gallery":71,"import":71,"link":71,"map":71}
+a203p211 MISSING prominentRelationship.tension                         {"gallery":71,"import":71,"link":71,"map":71}
+a203p211 MISSING simulationTrace[].causes[]                            {"gallery":295,"import":295}
+a203p211 MISSING simulationTrace[].downstreamEffects[]                 {"gallery":132,"import":132}
+a211 CHANGED economicState.activeChains[].chainId                      {"gallery":1880,"import":1880,"link":2044,"map":1880}
+a211 CHANGED economicState.activeChains[].entrepot                     {"gallery":91,"import":91,"link":99,"map":91}
+a211 CHANGED economicState.activeChains[].entrepotNote                 {"gallery":455,"import":455,"link":495,"map":455}
+a211 CHANGED economicState.activeChains[].exportable                   {"gallery":691,"import":691,"link":751,"map":691}
+a211 CHANGED economicState.activeChains[].label                        {"gallery":1880,"import":1880,"link":2044,"map":1880}
+a211 CHANGED economicState.activeChains[].needColor                    {"gallery":1270,"import":1270,"link":1382,"map":1270}
+a211 CHANGED economicState.activeChains[].needKey                      {"gallery":1363,"import":1363,"link":1483,"map":1363}
+a211 CHANGED economicState.activeChains[].needLabel                    {"gallery":1363,"import":1363,"link":1483,"map":1363}
+a211 CHANGED economicState.activeChains[].outputs[]                    {"gallery":4820,"import":4820,"link":5240,"map":4820}
+a211 CHANGED economicState.activeChains[].processingInstitutions[]     {"gallery":2337,"import":2337,"link":2541,"map":2337}
+a211 CHANGED economicState.activeChains[].resource                     {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceActive               {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceCondition            {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceInputAvailable       {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceInputCondition       {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceInputKey             {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].resourceKey                  {"gallery":454,"import":454,"link":494,"map":454}
+a211 CHANGED economicState.activeChains[].services[]                   {"gallery":1409,"import":1409,"link":1533,"map":1409}
+a211 CHANGED economicState.activeChains[].status                       {"gallery":232,"import":232,"link":252,"map":232}
+a211 CHANGED economicState.activeChains[].upstreamChains[]             {"gallery":93,"import":93,"link":101,"map":93}
+a211 CHANGED simulationTrace[].downstreamEffects[].effect              {"gallery":2,"import":2}
+a211 CHANGED simulationTrace[].downstreamEffects[].target              {"gallery":2,"import":2}
+a211 EXTRA economicState.activeChains[].entrepot                       {"gallery":138,"import":138,"link":150,"map":138}
+a211 EXTRA economicState.activeChains[].outputs[]                      {"gallery":781,"import":781,"link":849,"map":781}
+a211 EXTRA economicState.activeChains[].processingInstitutions[]       {"gallery":924,"import":924,"link":1004,"map":924}
+a211 EXTRA economicState.activeChains[].services[]                     {"gallery":364,"import":364,"link":396,"map":364}
+a211 EXTRA economicState.activeChains[].upstreamChains[]               {"gallery":228,"import":228,"link":248,"map":228}
+a211 EXTRA economicState.activeChains[].upstreamMissing                {"gallery":93,"import":93,"link":101,"map":93}
+a211 EXTRA economicState.activeChains[].upstreamNote                   {"gallery":93,"import":93,"link":101,"map":93}
+a211 EXTRA simulationTrace[].downstreamEffects[].reason                {"gallery":2,"import":2}
+a211 MISSING decrees                                                   {"gallery":30,"import":30}
+a211 MISSING defenseProfile.institutions.charter[].desc                {"gallery":124,"import":124,"link":124,"map":124}
+a211 MISSING defenseProfile.institutions.charter[].description         {"gallery":57,"import":57,"link":57,"map":57}
+a211 MISSING defenseProfile.institutions.charter[].facets              {"gallery":31,"import":31,"link":31,"map":31}
+a211 MISSING defenseProfile.institutions.charter[].serviceKeys         {"gallery":21,"import":21,"link":21,"map":21}
+a211 MISSING defenseProfile.institutions.charter[].tags                {"gallery":86,"import":86,"link":86,"map":86}
+a211 MISSING defenseProfile.institutions.garrison[].desc               {"gallery":143,"import":143,"link":143,"map":143}
+a211 MISSING defenseProfile.institutions.garrison[].description        {"gallery":58,"import":58,"link":58,"map":58}
+a211 MISSING defenseProfile.institutions.garrison[].facets             {"gallery":79,"import":79,"link":79,"map":79}
+a211 MISSING defenseProfile.institutions.garrison[].serviceKeys        {"gallery":55,"import":55,"link":55,"map":55}
+a211 MISSING defenseProfile.institutions.garrison[].tags               {"gallery":125,"import":125,"link":125,"map":125}
+a211 MISSING defenseProfile.institutions.magicDef[].desc               {"gallery":134,"import":134,"link":134,"map":134}
+a211 MISSING defenseProfile.institutions.magicDef[].description        {"gallery":76,"import":76,"link":76,"map":76}
+a211 MISSING defenseProfile.institutions.magicDef[].facets             {"gallery":46,"import":46,"link":46,"map":46}
+a211 MISSING defenseProfile.institutions.magicDef[].serviceKeys        {"gallery":33,"import":33,"link":33,"map":33}
+a211 MISSING defenseProfile.institutions.magicDef[].tags               {"gallery":123,"import":123,"link":123,"map":123}
+a211 MISSING defenseProfile.institutions.mercenary[].desc              {"gallery":53,"import":53,"link":53,"map":53}
+a211 MISSING defenseProfile.institutions.mercenary[].description       {"gallery":27,"import":27,"link":27,"map":27}
+a211 MISSING defenseProfile.institutions.mercenary[].facets            {"gallery":14,"import":14,"link":14,"map":14}
+a211 MISSING defenseProfile.institutions.mercenary[].serviceKeys       {"gallery":26,"import":26,"link":26,"map":26}
+a211 MISSING defenseProfile.institutions.mercenary[].tags              {"gallery":49,"import":49,"link":49,"map":49}
+a211 MISSING defenseProfile.institutions.walls[].desc                  {"gallery":176,"import":176,"link":176,"map":176}
+a211 MISSING defenseProfile.institutions.walls[].description           {"gallery":82,"import":82,"link":82,"map":82}
+a211 MISSING defenseProfile.institutions.walls[].facets                {"gallery":67,"import":67,"link":67,"map":67}
+a211 MISSING defenseProfile.institutions.walls[].serviceKeys           {"gallery":92,"import":92,"link":92,"map":92}
+a211 MISSING defenseProfile.institutions.walls[].tags                  {"gallery":155,"import":155,"link":155,"map":155}
+a211 MISSING defenseProfile.institutions.watch[].desc                  {"gallery":109,"import":109,"link":109,"map":109}
+a211 MISSING defenseProfile.institutions.watch[].description           {"gallery":29,"import":29,"link":29,"map":29}
+a211 MISSING defenseProfile.institutions.watch[].facets                {"gallery":56,"import":56,"link":56,"map":56}
+a211 MISSING defenseProfile.institutions.watch[].serviceKeys           {"gallery":22,"import":22,"link":22,"map":22}
+a211 MISSING defenseProfile.institutions.watch[].tags                  {"gallery":90,"import":90,"link":90,"map":90}
+a211 MISSING dmLayer                                                   {"gallery":30,"import":30}
+a211 MISSING economicState.activeChains[]                              {"gallery":404,"import":404,"link":440,"map":404}
+a211 MISSING economicState.activeChains[].entrepot                     {"gallery":138,"import":138,"link":150,"map":138}
+a211 MISSING economicState.activeChains[].outputs[]                    {"gallery":780,"import":780,"link":848,"map":780}
+a211 MISSING economicState.activeChains[].processingInstitutions[]     {"gallery":748,"import":748,"link":812,"map":748}
+a211 MISSING economicState.activeChains[].services[]                   {"gallery":319,"import":319,"link":347,"map":319}
+a211 MISSING economicState.activeChains[].upstreamChains[]             {"gallery":183,"import":183,"link":199,"map":183}
+a211 MISSING economicState.activeChains[].upstreamMissing              {"gallery":48,"import":48,"link":52,"map":48}
+a211 MISSING economicState.activeChains[].upstreamNote                 {"gallery":48,"import":48,"link":52,"map":48}
+a211 MISSING history.siegeNarrative                                    {"gallery":8,"import":8,"link":8,"map":8}
+a211 MISSING pressureSentence                                          {"gallery":52,"import":52,"link":52,"map":52}
+a211 MISSING prominentRelationship.full                                {"gallery":66,"import":66,"link":66,"map":66}
+a211 MISSING prominentRelationship.phrasing                            {"gallery":71,"import":71,"link":71,"map":71}
+a211 MISSING prominentRelationship.tension                             {"gallery":71,"import":71,"link":71,"map":71}
+a211 MISSING simulationTrace[].causes[]                                {"gallery":295,"import":295}
+a211 MISSING simulationTrace[].downstreamEffects[]                     {"gallery":132,"import":132}

@@ -1,0 +1,31 @@
+V8-3 GREEN (VEIL-16), at 212 46389052ea3460a2b0ce8181df0e0c0c7599fe4c63e29af58f55ff06941bce0b, its rollback
+5b3eb697ae2531f83c2586d2c59b5afe414e6647ba65b9a884e9dfd09ddf694f; 211 and its rollback untouched (eface6d0... / ce8474ff...).
+
+THE ARMS, tests/security/galleryVeilHandRows.pglite.test.js -t "V8-3" (pglite), five runs: 5 of 5 exit 0, "Tests 2 passed"
+  THE ANSWERS: every read (gallery, import, link; Reveal DM off and on) equal to the twin, 0 paths; the hits and near
+  misses as planted; the premises over 1,112,063 code points (the made-ready list keeps exactly 2,224,127 quoted runs, as
+  its JSON spelling; lower() in the C collation equals translate's A-Z map); its 12 responses byte for byte the base's,
+  in each of the five runs.
+  THE SCALE, N 1500 and 4N 6000 (median of three, ms):
+    N 1500: 132.6 132.5 134.1 ms; 4N 6000: 558.4 566.5 579.1 ms; medians 132.6 | 566.5; ratio 4.27
+    N 1500: 107.3 114.6 119.8 ms; 4N 6000: 462.4 494.4 500.3 ms; medians 114.6 | 494.4; ratio 4.31
+    N 1500: 108.0 133.3 129.9 ms; 4N 6000: 524.4 532.8 532.3 ms; medians 129.9 | 532.3; ratio 4.10
+    N 1500: 129.6 117.8 117.9 ms; 4N 6000: 502.8 485.6 495.1 ms; medians 117.9 | 495.1; ratio 4.20
+    N 1500: 129.6 124.8 112.9 ms; 4N 6000: 517.1 537.8 528.9 ms; medians 124.8 | 528.9; ratio 4.24
+
+THE GUARDS (GATE_MUTEX_TIER=shared, --maxWorkers=2): exit 0, Test Files 6 passed (6), Tests 119 passed (119):
+  galleryVeilHandRows 17 (15 + the two V8-3 arms), gallerySecondHomes 6, galleryVeilCures 32, galleryServerVeil 17,
+  gallerySanitizer 36, galleryMapMemberCount 11 (the base: 117 of 117). No pin went red.
+
+THE ACCEPTANCE RUN (REVIEW-VEIL-7/run-all.sh on the tree): exit 1, unchanged from the base: checks 37, PASS 35, FAIL 2
+  (a07 V7-5 and d06 V7-8, items B and C); e06 PASS; server against twin "(all 15 equal)"; V7-10 PASS (3,000 deep served);
+  V7-6 PASS on both large rows.
+
+eslint tests/security/galleryVeilHandRows.pglite.test.js (gate-tail): exit 0. No src/ file moves: the twin is unchanged.
+
+212, ONE TRANSACTION A FILE, NATIVE (a fresh chain built from the tree by REVIEW-VEIL-6/native/chain.sh, psql -1):
+  at 212 sha256 46389052ea3460a2…, down 5b3eb697ae2531f8…
+  fresh chain 001..212 from the tree (each file one transaction): helpers 71
+  212 applied a second time (one transaction): exit 0 | helpers 71 | catalogue equal to the fresh chain: yes
+  212's down file: exit 0 | helpers 40 | catalogue equal to a chain stopped at 211: yes
+  212 again after the down file: exit 0 | helpers 71 | catalogue equal to the fresh chain: yes

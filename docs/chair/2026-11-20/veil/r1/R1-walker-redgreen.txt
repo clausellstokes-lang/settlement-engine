@@ -1,0 +1,54 @@
+== green-before: exit 0; Tests  10 passed (10)
+== plant-A1-predicate-call: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARMS A and B: every chooser site in src/generators/** and the composer's reach is registered > ARM A: a site that calls a registered predicate, or holds a crime-name regex, is in REGISTRY_SITES; a registered site still does
+     +   "src/generators/__r1plantA.js :: plantChooser",
+== plant-A2-regex-unregistered-site: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARMS A and B: every chooser site in src/generators/** and the composer's reach is registered > ARM A: a site that calls a registered predicate, or holds a crime-name regex, is in REGISTRY_SITES; a registered site still does
+     +   "src/generators/__r1plantB.js :: PLANT_DEN",
+== plant-B-regex-count-at-registered-site: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARMS A and B: every chooser site in src/generators/** and the composer's reach is registered > ARM B: each site's count of crime-name regex literals is exact (a new literal at a registered site reds)
+     +   "src/domain/threatProfile.js :: TYPE_PATTERNS: registered 1, found 2",
+== plant-C1-no-server: exit 1; Tests  1 failed | 9 passed (10)
+     +   "history.siegeNarrative: no server symbol",
+     +   "npcs.memberships.veiled: no server symbol",
+     +   "npcs.stressNote: no server symbol",
+== plant-C2-no-twin: exit 1; Tests  1 failed | 9 passed (10)
+     +   "defence.readiness.label: no twin symbol",
+     +   "defence.readiness.colours: no twin symbol",
+     +   "defence.scores.disaster: no twin symbol",
+== plant-D1-built-symbol-missing: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARMS C and D: every row is bound to the server and the twin > ARM D: a BUILT row's symbols exist and each rule names its row id
+     +   "spatial.quarters: server public._gallery_veil_withhold_always is not a function of 212",
+     +   "spatial.quarters: twin src/domain/display/gallerySecondHomes.js :: withholdAlways is not a top-level declaration",
+== plant-D2-built-rule-not-naming-id: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARMS C and D: every row is bound to the server and the twin > ARM D: a BUILT row's symbols exist and each rule names its row id
+     +   "income.criminalRow: public._gallery_veil_apply does not name it (-- registry: income.criminalRow)",
+     +   "income.criminalRow: src/domain/display/gallerySecondHomes.js :: withholdCriminalIncome does not name it (// registry: income.criminalRow)",
+== plant-E-export-by-hand: exit 1; Tests  1 failed | 9 passed (10)
+   FAIL: ARM E: the rows and the export > the committed registry.json and rulings.json are exactly what the module writes (--check)
+     +   "registry.json",
+== green-after: exit 0; Tests  10 passed (10)
+src/domain/veil/rosterChoiceRegistry.js: OK
+src/domain/threatProfile.js: OK
+docs/chair/2026-11-19/veil/registry/registry.json: OK
+ls: cannot access 'src/generators/__r1plant*': No such file or directory
+?? docs/chair/2026-11-19/veil/registry/
+?? scripts/veil/
+?? src/domain/veil/
+?? tests/lint/rosterChoiceRegistry.walker.test.js
+--check with rulings.json edited by hand: exit 1
+--check restored: exit 0
+== plant-D1 (after the anchor and root cures): exit exit: 1; Tests  1 failed | 9 passed (10)
+     +   "spatial.quarters: server public._gallery_veil_withhold_always is not a function of 212",
+     +   "spatial.quarters: twin src/domain/display/gallerySecondHomes.js :: withholdAlways is not a top-level declaration",
+== plant-D2 (after the anchor and root cures): exit exit: 1; Tests  1 failed | 9 passed (10)
+     +   "income.criminalRow: public._gallery_veil_apply does not name it (-- registry: income.criminalRow)",
+     +   "income.criminalRow: src/domain/display/gallerySecondHomes.js :: withholdCriminalIncome does not name it (// registry: income.criminalRow)",
+== green (after the anchor and root cures): exit exit: 0; Tests  10 passed (10)
+src/domain/veil/rosterChoiceRegistry.js: OK
+ M src/domain/veil/rosterChoiceRegistry.js
+ M tests/lint/rosterChoiceRegistry.walker.test.js
+== plant-F (rulings sitting, 01:07 UTC): a page answer on every diffuse row: exit: 1; Tests  1 failed | 10 passed (11)
+     +   "defence.readiness.label: a page answer on a row not withheld on every read",
+     +   "defence.readiness.colours: a page answer on a row not withheld on every read",
+== green after the plant: exit: 0; Tests  126 passed (126) (the walker plus five governing lint files)

@@ -1,0 +1,33 @@
+
+ RUN  v4.1.8 /home/user/wt/r3tell8b
+
+ ❯ tests/security/galleryVeilTell8.pglite.test.js (3 tests | 1 failed | 1 skipped) 1546ms
+     × a page whose grouping is open does not read as shut once the key is gone (criminalInstitutions an array, no crimeTypes) 1543ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilTell8.pglite.test.js > R3-TELL-8 (viii): the types' grouping's evidence once the key is withheld always (galleryVeil.js :: GROUPING_OPEN_EVIDENCE) > a page whose grouping is open does not read as shut once the key is gone (criminalInstitutions an array, no crimeTypes)
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/security/galleryVeilTell8.pglite.test.js:232:115
+    230|   it('a page whose grouping is open does not read as shut once the key…
+    231|     const veil = await import('../../src/domain/display/galleryVeil.js…
+    232|     expect(veil.isVeiled(page({ criminalInstitutions: [], safetyLabel:…
+       |                                                                                                                   ^
+    233|     expect(veil.isVeiled(page({ criminalInstitutions: ['Street Gang'] …
+    234|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed | 1 skipped (3)
+   Start at  07:48:21
+   Duration  1.84s (transform 1.19s, setup 32ms, import 131ms, tests 1.55s, environment 0ms)
+

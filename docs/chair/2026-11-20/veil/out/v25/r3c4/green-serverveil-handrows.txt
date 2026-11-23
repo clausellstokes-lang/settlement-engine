@@ -1,0 +1,82 @@
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#5].direction",
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#5].narrative",
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#5].pair[#0]",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].direction",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].narrative",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].pair[#0]",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#5].direction",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#5].narrative",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#5].pair[#0]",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].direction",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].narrative",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#5].pair[#0]",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:435:54
+    433|         }
+    434|       }
+    435|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    436|       expect(control.rows).toBeGreaterThan(0);
+    437|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: default+dm/live gallery page changed: powerStructure.factionRelationships[#3].direction
+default+dm/live gallery page changed: powerStructure.factionRelationships[#3].pair[#0]
+default+dm/live gallery page changed: powerStructure.factionRelationships[#3].type
+default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].direction
+default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].pair[#0]
+default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].type
+all+dm/live gallery page changed: powerStructure.factionRelationships[#3].direction
+all+dm/live gallery page changed: powerStructure.factionRelationships[#3].pair[#0]
+all+dm/live gallery page changed: powerStructure.factionRelationships[#3].type
+all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].direction
+all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].pair[#0]
+all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].type: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#3].direction",
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#3].pair[#0]",
++   "default+dm/live gallery page changed: powerStructure.factionRelationships[#3].type",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].direction",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].pair[#0]",
++   "default+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].type",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#3].direction",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#3].pair[#0]",
++   "all+dm/live gallery page changed: powerStructure.factionRelationships[#3].type",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].direction",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].pair[#0]",
++   "all+dm/snapshot gallery page changed: powerStructure.factionRelationships[#3].type",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:435:54
+    433|         }
+    434|       }
+    435|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    436|       expect(control.rows).toBeGreaterThan(0);
+    437|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 41 passed (43)
+   Start at  11:59:37
+   Duration  917.74s (transform 4.78s, setup 52ms, import 532ms, tests 916.86s, environment 0ms)
+
+[gate-tail] end:  12:14:55 up  1:02,  0 user,  load average: 1.58, 1.98, 3.13
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.13286.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,52 @@
+V8-9 GREEN (the tree on veil17 over ad093c92c; 212 d1b5da91... / down 5b3eb697..., unchanged).
+
+THE ARM, alone on the tree (vitest -t V8-9, pglite): PASSED, 0 faults, 55.1 s:
+  just under the code points (85 x 145): 16200 code points, weight 3353400, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the code points (86 x 145): closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  just under the weight (50 Han names of 40 distinct characters): 2053 code points, weight 4116265, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the weight (51 Han names of 40 distinct characters): closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  just under the cut-outs (16): 8501 code points, weight 1641710, 16 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the cut-outs (17): closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  the reader's 600 x 145: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  the reader's 1,000 x 80: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  the reader's 1,500 x 145: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  600 in Greek, a dotted capital I and a sharp s: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  1,000 in Cyrillic, a dotted capital I and a sharp s: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  2,000 of symbols only: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  one open name of 100,000 characters that holds a hidden one: closed; served 8 of 8, the closed answer 8 of 8, server against twin 0 paths
+  the arm: 55.1 s
+  Just under each bound (3 rows x 8 reads): 24 of 24 responses equal byte for byte to the red run's on the base's bytes.
+
+THE BOUND IS ONE (measure/parity.mjs, the tree chain against the twin, the search as JSON):
+  latin 85x8 (under the size): server p 16200 cp, 0 cut-outs | twin p 16200 cp, 0 cut-outs | EQUAL
+  latin 86x8 (over the size): server CLOSED | twin CLOSED | EQUAL
+  han 50x40 (under the weight): server p 2053 cp, 0 cut-outs | twin p 2053 cp, 0 cut-outs | EQUAL
+  han 51x40 (over the weight): server CLOSED | twin CLOSED | EQUAL
+  16 cut-outs: server p 494 cp, 16 cut-outs | twin p 494 cp, 16 cut-outs | EQUAL
+  17 cut-outs: server CLOSED | twin CLOSED | EQUAL
+  one open name of 100,000 characters holding a hidden one: server CLOSED | twin CLOSED | EQUAL
+  greek, a dotted capital I, a sharp s: server p 551 cp, 0 cut-outs | twin p 551 cp, 0 cut-outs | EQUAL
+  symbols only: server p 7 cp, 0 cut-outs | twin p 7 cp, 0 cut-outs | EQUAL
+
+THE SIX GUARD FILES (gate-mutex shared, maxWorkers 2): 120 of 120 passed (galleryVeilHandRows 18: the base's 17 and V8-9).
+  (A first run with the closed search carrying no pattern reddened gallerySecondHomes 'THE TWO FOLDS ARE ONE': that pin builds
+  one search of every basic-plane character, over 500,000 code points, and compares the pattern string across engines. The
+  closed search now keeps what was built, never compiled; the pin is green untouched.)
+THE TWIN'S TESTS (publicSafe.test.js, publicSafeVeil.test.js, publicProseVeil*.test.js, gallery.test.js): 5 files, 120 of 120.
+
+THE ACCEPTANCE RUN (REVIEW-VEIL-7 run-all.sh on the tree): exit 1; checks 37 | PASS 35 | FAIL 2; FAIL rows a07 and d06 only;
+  e06 PASS; server against twin: (all 15 equal).
+
+THE V13-1 PLANT on the link (veil-probe-11/hand town-p and town-pc with veil-p, REVIEW-VEIL-7 hand/run.sh, base chain v89base
+  against tree chain v89tree, jdiff): 18 of 18 responses 0 paths differ; COVERTMARK in link responses: base 0, tree 0; in 4
+  responses, all Reveal-DM gallery or import (v89p-dm-gallery, v89p-dm-import, v89pc-dm-gallery, v89pc-dm-import).
+
+THE ROLLBACK (a scratch chain 001..212 from the tree): 212 up 71 helpers; down exit 0, 40; up again exit 0, 71; up twice exit 0, 71.
+
+GATES at the tree (scripts/gate-tail.sh): npm run typecheck:domain:strict exit 0; npm run typecheck:ratchet exit 0;
+  npx eslint src/domain/display/gallerySecondHomes.js tests/security/galleryVeilHandRows.pglite.test.js exit 0.
+  tests/lint/tuningRegister.walker.test.js: red as at the base, by the one named constant NAME_WALK_BOUND (2 arms:
+  'src/domain/display/gallerySecondHomes.js: 0 -> 1', 'UNREGISTERED_NAMED_CEILING: 541 -> 542'); NAME_SEARCH_BOUND is a frozen
+  object and adds none. Not touched.
+
+FROZEN: 211 eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01, down ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f.

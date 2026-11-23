@@ -1,0 +1,102 @@
+R3-CURE VR31: reads with a power withheld from the top-level factions[] (master's shape), judged: 14
+R3 VR31: reads with a power withheld, judged: 190
+R3 derived Defense keys, groupings open: hidden towns {"organized":3,"semi-organized":9,"null":4} | control (no hideable house) {"null":4,"semi-organized":2}
+R3 VR42 towns, economicDragDesc: ["town-infiltrated-0-12: withheld (B: drawn)","city-insurgency-1-104: withheld (B: drawn)","hand-governs: withheld (B: none)"]
+R3-CURE VR42 towns (lane shape, open veil): 
+  town-infiltrated-0-12 dm=false: governing "Corrupt Council" (category criminal) served, share 64 (stored 47); its relations served 1 of 2 [Corrupt Council / Military/Guard: subordinate]; powers withheld ["Thieves' Guild","The Independent Bloc"]
+  town-infiltrated-0-12 dm=true: governing "Corrupt Council" (category criminal) served, share 55 (stored 47); its relations served 1 of 2 [Corrupt Council / Military/Guard: subordinate]; powers withheld ["Thieves' Guild"]
+  city-insurgency-1-104 dm=false: governing "Corrupt City Council" (category criminal) served, share 27 (stored 18); its relations served 2 of 3 [Corrupt City Council / Military/Guard: symbiotic; Corrupt City Council / Religious Authorities: dependent]; powers withheld ["Thieves' Guild"]
+  city-insurgency-1-104 dm=true: governing "Corrupt City Council" (category criminal) served, share 27 (stored 18); its relations served 2 of 3 [Corrupt City Council / Military/Guard: symbiotic; Corrupt City Council / Religious Authorities: dependent]; powers withheld ["Thieves' Guild"]
+  hand-governs dm=false: governing "Thieves' Guild" (category criminal) served, share 60 (stored 60); its relations served 1 of 1 [Thieves' Guild / Fishers: rival]; powers withheld []
+  hand-governs dm=true: governing "Thieves' Guild" (category criminal) served, share 60 (stored 60); its relations served 1 of 1 [Thieves' Guild / Fishers: rival]; powers withheld []
+  hand-governs dm=false: rule VR42 (the governing criminal power stays; nothing withheld); served powers [["Thieves' Guild",60,"criminal",true],["Fishers",40,"economic",false]]; relations [{"pair":["Thieves' Guild","Fishers"],"type":"rival","direction":"mutual"}]; crime types []
+  hand-governs dm=true: rule VR42 (the governing criminal power stays; nothing withheld); served powers [["Thieves' Guild",60,"criminal",true],["Fishers",40,"economic",false]]; relations [{"pair":["Thieves' Guild","Fishers"],"type":"rival","direction":"mutual"}]; crime types []
+R3-CURE unit 2, the rule that took each town (lane shape, open veil, Reveal off): 
+  withheld (power.entry): 8 [town-infiltrated-0-12, city-insurgency-1-104, city-politically_fractured-0-40, city-infiltrated-1-112, metropolis-indebted-0-56, hand-raised, hand-fold, hand-forms]
+  no criminal power: 7 [city-infiltrated-0-32, city-none-1-113, metropolis-infiltrated-0-62, metropolis-none-0-61, city-insurgency-0-44, town-indebted-0-16, city-under_siege-0-48]
+  VR42 (the governing criminal power stays; nothing withheld): 1 [hand-governs]
+R3-CURE unit 2, R5's named prose hits (path: count): {}
+R3-CURE unit 2, hits outside the named list: 0 
+R3-CURE-5, the exemption (ruling 37 (a)): strings exempt by a containing SERVED name: 24 {"Old Thieves' Guild Watch":24}
+R3-CURE-2 unit 1, the tooth (reads serving the shown power's goal, compared byte for byte): 4
+R3-CURE-3 ruling A: the three forms judged on 54 people-reads; the Watch goal served byte for byte on 6 reads
+R3-CURE-4 unit 1, THE HUSK CLASS: documents judged (a power withheld): 240 | objects compared: 174125
+R3-CURE-4 unit 1, STRUCTURED husks (path [engine]: count): 
+  factions[].contestsNiche [server]: 2
+  factions[].contestsNiche [twin]: 1
+  npcs[].factionAffiliation [server]: 6
+  npcs[].factionAffiliation [twin]: 2
+  powerStructure.factions[].contestsNiche [server]: 19
+  powerStructure.factions[].contestsNiche [twin]: 5
+R3-CURE-4 unit 1, PROSE husks, R5's (path [engine]: count): 
+  availableServices.criminal[].institution [twin]: 2
+  economicState.compound.inst.names[] [server]: 26
+  economicState.compound.inst.names[] [twin]: 7
+  economicState.safetyProfile.compound.inst.names[] [server]: 26
+  economicState.safetyProfile.compound.inst.names[] [twin]: 7
+  economicState.safetyProfile.criminalInstitutions[] [server]: 26
+  economicState.safetyProfile.criminalInstitutions[] [twin]: 7
+  factions[].contestsNiche [server]: 2
+  factions[].contestsNiche [twin]: 1
+  npcs[].factionAffiliation [server]: 6
+  npcs[].factionAffiliation [twin]: 2
+  powerStructure.factions[].contestsNiche [server]: 19
+  powerStructure.factions[].contestsNiche [twin]: 5
+R3-CURE-2 unit 4 (iii): reads with no house hidden whole and a power withheld, judged: 22 | hits outside R5's list: 0 
+R3-CURE-2 unit 2, the Defense key per town (open veil, gallery): {"server dm=false":{"EQUAL":4,"LOWER":10,"HIGHER":0},"twin dm=false":{"EQUAL":4,"LOWER":10,"HIGHER":0},"server dm=true":{"EQUAL":4,"LOWER":10,"HIGHER":0},"twin dm=true":{"EQUAL":4,"LOWER":10,"HIGHER":0}} 
+  town-indebted-0-16 server dm=false: served null | counterfactual null | EQUAL
+  town-indebted-0-16 twin dm=false: served null | counterfactual null | EQUAL
+  town-indebted-0-16 server dm=true: served null | counterfactual null | EQUAL
+  town-indebted-0-16 twin dm=true: served null | counterfactual null | EQUAL
+  town-under_siege-1-88 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-1-88 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-1-88 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-1-88 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  metropolis-insurgency-1-124 server dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-insurgency-1-124 twin dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-insurgency-1-124 server dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-insurgency-1-124 twin dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  city-none-0-37 server dm=false: served null | counterfactual null | EQUAL
+  city-none-0-37 twin dm=false: served null | counterfactual null | EQUAL
+  city-none-0-37 server dm=true: served null | counterfactual null | EQUAL
+  city-none-0-37 twin dm=true: served null | counterfactual null | EQUAL
+  city-wartime-0-49 server dm=false: served null | counterfactual null | EQUAL
+  city-wartime-0-49 twin dm=false: served null | counterfactual null | EQUAL
+  city-wartime-0-49 server dm=true: served null | counterfactual null | EQUAL
+  city-wartime-0-49 twin dm=true: served null | counterfactual null | EQUAL
+  town-under_siege-0-18 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-0-18 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-0-18 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-0-18 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-insurgency-1-94 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-insurgency-1-94 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-insurgency-1-94 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-insurgency-1-94 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  town-under_siege-1-98 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  town-under_siege-1-98 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  town-under_siege-1-98 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  town-under_siege-1-98 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  city-under_siege-1-118 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  city-under_siege-1-118 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  city-under_siege-1-118 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  city-under_siege-1-118 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources, servicesCriminal
+  town-wartime-0-19 server dm=false: served null | counterfactual null | EQUAL
+  town-wartime-0-19 twin dm=false: served null | counterfactual null | EQUAL
+  town-wartime-0-19 server dm=true: served null | counterfactual null | EQUAL
+  town-wartime-0-19 twin dm=true: served null | counterfactual null | EQUAL
+  town-none-0-23 server dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  town-none-0-23 twin dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  town-none-0-23 server dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  town-none-0-23 twin dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  city-none-0-31 server dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  city-none-0-31 twin dm=false: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  city-none-0-31 server dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  city-none-0-31 twin dm=true: served null | counterfactual diffuse | LOWER | cause: incomeSources
+  metropolis-wartime-0-59 server dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-wartime-0-59 twin dm=false: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-wartime-0-59 server dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  metropolis-wartime-0-59 twin dm=true: served semi-organized | counterfactual organized | LOWER | cause: powers
+  town-none-1-91 server dm=false: served null | counterfactual diffuse | LOWER | cause: servicesCriminal
+  town-none-1-91 twin dm=false: served null | counterfactual diffuse | LOWER | cause: servicesCriminal
+  town-none-1-91 server dm=true: served null | counterfactual diffuse | LOWER | cause: servicesCriminal
+  town-none-1-91 twin dm=true: served null | counterfactual diffuse | LOWER | cause: servicesCriminal

@@ -1,0 +1,13 @@
+[gate-tail] start:  20:58:56 up  1:36,  0 user,  load average: 1.08, 1.10, 2.29 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3tell3
+
+
+ Test Files  2 passed (2)
+      Tests  17 passed (17)
+   Start at  20:58:57
+   Duration  3.59s (transform 1.18s, setup 74ms, import 1.54s, tests 1.71s, environment 0ms)
+
+[gate-tail] end:  20:59:01 up  1:36,  0 user,  load average: 1.07, 1.10, 2.29
+[gate-tail] full log: /tmp/gate-tail.8280.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

@@ -1,0 +1,7 @@
+VR47 targeted set (125 files: every test naming the honorific's readers, the registers' walkers, the PDF golden, the bundle pin) — the 4 failures at the tip BEFORE the cure (not VR47's):
+ FAIL  tests/components/phoneChromeFloor.census.test.js > THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+ Test Files  4 failed | 122 passed (126)
+      Tests  4 failed | 1771 passed | 28 skipped (1803)

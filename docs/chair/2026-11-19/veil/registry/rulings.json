@@ -1,0 +1,42 @@
+{
+  "diffuse": [
+    "^activeConditions\\[\\]\\.severityBand$",
+    "^defenseProfile\\.readiness\\.label$",
+    "^defenseProfile\\.readiness\\.(color|background|border)$",
+    "^economicState\\.foodSecurity\\.foodRecord\\.storageMonths$",
+    "^economicState\\.foodSecurity\\.resilienceScore$",
+    "^economicState\\.incomeSources\\[\\] \\(only in B\\)$",
+    "^economicState\\.prosperity$",
+    "^economicState\\.prosperityStanding$",
+    "^economicState\\.safetyProfile\\.safetyLabel$",
+    "^history\\.founding\\.overcoming$",
+    "^powerStructure\\.factions\\[\\] \\(only in B\\)$",
+    "^powerStructure\\.factionRelationships\\[\\] \\(only in B\\)$",
+    "^powerStructure\\.publicLegitimacy\\.label$",
+    "^powerStructure\\.publicLegitimacy\\.score$",
+    "^powerStructure\\.publicLegitimacy\\.(bg|color)$",
+    "^(powerStructure\\.)?conflicts\\[\\](\\.(intensity|issue))?$",
+    "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.beside$",
+    "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.rung\\.sentence$",
+    "^publicProse\\.blocks\\.defense:threat\\.economic\\.sentence$",
+    "^publicProse\\.blocks\\.defense:wall\\.rationale\\.sentence$",
+    "^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.sentence$",
+    "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.sentence$",
+    "^tile\\.prosperity$",
+    "^tile\\.threat_level$",
+    "^tile\\.government_type$"
+  ],
+  "rng": [
+    "^history\\.currentTensions\\[\\] \\(only in B\\)$",
+    "^history\\.currentTensions\\[\\]\\.description$",
+    "^history\\.currentTensions\\[\\]\\.factions\\[\\] \\(only in [AB]\\)$",
+    "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in B\\)$",
+    "^history\\.eventsTimeline\\[\\]\\.yearsAgo$",
+    "^history\\.historicalCharacter$",
+    "^history\\.historicalEvents\\[\\]\\.description$",
+    "^history\\.historicalEvents\\[\\]\\.lastingEffects\\[\\] \\(only in [AB]\\)$",
+    "^history\\.historicalEvents\\[\\]\\.severity$",
+    "^history\\.historicalEvents\\[\\]\\.yearsAgo$",
+    "^publicProse\\.blocks\\.general:history\\.legacyLines\\[\\] \\(only in B\\)$"
+  ]
+}

@@ -1,0 +1,5 @@
+Langengrund (big0.json, 503,699 chars), no veil record, Reveal DM off, median of 15, chains alternated (measure/cost.mjs), at d0afa93dd:
+x211 link median 223.9 ms len 317567
+x211 gallery median 244.2 ms len 324469
+x212 link median 525.2 ms len 315372
+x212 gallery median 242.0 ms len 324469

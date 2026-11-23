@@ -1,0 +1,37 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 10613 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/v21m
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js (12 tests | 1 failed) 1595ms
+     × exempt honesty: every exempt entry still reads .institutions and is not already compliant 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js: now routes through the ruin filter — delete its exempt row (the win is banked)",
++ ]
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:563:19
+    561|       else if (r.compliant) stale.push(`${rel}: now routes through the…
+    562|     }
+    563|     expect(stale).toEqual([]);
+       |                   ^
+    564|   });
+    565| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 passed (12)
+   Start at  03:05:24
+   Duration  3.48s (transform 162ms, setup 25ms, import 1.75s, tests 1.60s, environment 0ms)
+
+exit 1

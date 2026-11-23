@@ -1,0 +1,3060 @@
+{
+ "failed": [],
+ "towns": [
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "stored": {
+    "powers": [
+     {
+      "faction": "City Council",
+      "category": "government",
+      "isGoverning": true,
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Thieves' Guild",
+      "category": "criminal",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Merchant Guilds",
+      "category": "economy",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Arcane Orders",
+      "category": "magic",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "The Independent Bloc",
+      "category": "other",
+      "hidden": true,
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Military/Guard",
+      "category": "military",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Craft Guilds",
+      "category": "economy",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Noble Families",
+      "category": "noble",
+      "src": "powerStructure"
+     }
+    ],
+    "houses": [
+     "Fish market",
+     "Daily markets",
+     "Multiple market squares",
+     "Major annual fairs",
+     "Merchant guilds (15-40)",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Caravan masters' exchange",
+     "Beast trainers",
+     "River ferry",
+     "River boatyard",
+     "Harbour master's office",
+     "Customs house",
+     "City granaries",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Apothecary district",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanners",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (30-80)",
+     "Alchemist quarter",
+     "Parish churches (10-30)",
+     "Burial grounds and charnel house",
+     "Major hospital",
+     "City administration",
+     "Town crier",
+     "Housing (500-4000 households)",
+     "Aqueduct or water system",
+     "City hall",
+     "Multiple courthouses",
+     "Large prison",
+     "Sewage system",
+     "City walls and gates",
+     "Professional city watch",
+     "Garrison",
+     "Mages' guild",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Multiple adventurers' guilds",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Black market",
+     "Theaters",
+     "Gambling halls",
+     "Brothel (red light district)",
+     "Fighting pits",
+     "Docks/port facilities",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Printing house",
+     "Elder Grove Council",
+     "Citadel",
+     "Veteran's lodge"
+    ],
+    "people": {
+     "npc_mages_guild": {
+      "name": "Kai Zhang",
+      "role": "the guild archmage",
+      "goal": {
+       "short": "Keep Cheng Jung satisfied, so that what is known stays hidden.",
+       "long": "Keep Koharu Kim in debt for as long as it is useful.",
+       "intent": {
+        "short": {
+         "family": "ALLEGIANCE",
+         "kind": "serve_fear",
+         "key": "serve_patron",
+         "target": {
+          "kind": "power",
+          "id": "Thieves' Guild"
+         }
+        },
+        "long": {
+         "family": "TIES",
+         "kind": "creditor",
+         "key": "collect_debt",
+         "target": {
+          "kind": "npc",
+          "id": "npc_butchers_3_8"
+         }
+        }
+       }
+      }
+     },
+     "npc_smelter": {
+      "name": "Jian Wei",
+      "role": "the smelt master",
+      "goal": {
+       "short": "Warn Li He of any trouble before it reaches them.",
+       "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+       "intent": {
+        "short": {
+         "family": "TIES",
+         "kind": "ally",
+         "key": "protect_ally",
+         "target": {
+          "kind": "npc",
+          "id": "npc_customs_house"
+         }
+        },
+        "long": {
+         "family": "RANK",
+         "kind": "enter",
+         "key": "secure_office",
+         "target": {
+          "kind": "power",
+          "id": "Craft Guilds"
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "reads": [
+    {
+     "read": "default+dm/live",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/live",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      },
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/live",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      },
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      },
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      },
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild",
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Black market"
+     ],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "server gallery",
+     "withheld": [],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "twin",
+     "withheld": [],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "The Independent Bloc"
+      }
+     ],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "The Independent Bloc"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "twin",
+     "withheld": [],
+     "served": [
+      "City Council",
+      "Thieves' Guild",
+      "Merchant Guilds",
+      "Arcane Orders",
+      "The Independent Bloc",
+      "Military/Guard",
+      "Craft Guilds",
+      "Noble Families"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_butchers_3_8"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      },
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "npc",
+         "id": "npc_customs_house"
+        },
+        {
+         "kind": "power",
+         "id": "Craft Guilds"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "stored": {
+    "powers": [
+     {
+      "faction": "Shadow Senate",
+      "category": "criminal",
+      "isGoverning": true,
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Religious Authorities",
+      "category": "religious",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Arcane Orders",
+      "category": "magic",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Merchant Guilds",
+      "category": "economy",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Military/Guard",
+      "category": "military",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Thieves' Guild",
+      "category": "criminal",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Noble Houses",
+      "category": "noble",
+      "src": "powerStructure"
+     },
+     {
+      "faction": "Craft Guilds",
+      "category": "economy",
+      "src": "powerStructure"
+     }
+    ],
+    "houses": [
+     "Fish market",
+     "Charcoal burner",
+     "Mine",
+     "Stone quarry",
+     "Furrier's district",
+     "District markets (5-10)",
+     "Multiple market squares",
+     "Major annual fairs",
+     "International trade center",
+     "Merchant guilds (50-100+)",
+     "Banking district",
+     "Pawnbroker",
+     "Inns and taverns (district)",
+     "Coaching inn",
+     "Stable district",
+     "Beast trainers",
+     "Post relay station",
+     "River boatyard",
+     "Toll bridge",
+     "Customs house",
+     "State granary complex",
+     "Warehouse district",
+     "Public bathhouse",
+     "Auction house",
+     "Mint (official)",
+     "Chroniclers' exchange",
+     "Mills (2-5)",
+     "Blacksmiths (3-10)",
+     "Specialized metalworkers",
+     "Luxury goods quarter",
+     "Carpenters (5-15)",
+     "Cooper",
+     "Apothecary district",
+     "Bowyers & fletchers (guild)",
+     "Sawmill (commercial)",
+     "Brewery",
+     "Vintner",
+     "Tanner (established)",
+     "Fuller",
+     "Dyer",
+     "Weavers/Textile workers",
+     "Potter",
+     "Brickmaker",
+     "Cobbler's guild",
+     "Tailor's guild",
+     "Butchers (3-8)",
+     "Bakers (5-15)",
+     "Smelter",
+     "Chandler",
+     "Glassmakers",
+     "Ropemaker",
+     "Midwife",
+     "Woodcarver",
+     "Cartographer's guild",
+     "Craft guilds (100-150+)",
+     "Parish churches (50-100+)",
+     "Cemetery network",
+     "Major monasteries (5-10)",
+     "Great cathedral",
+     "Hospital network",
+     "Mayor and council",
+     "Town crier",
+     "Housing (3500+ households)",
+     "Advanced water infrastructure",
+     "City hall",
+     "Palace/government complex",
+     "Multiple court buildings",
+     "Massive prison",
+     "Workhouse",
+     "Great library",
+     "Massive walls and fortifications",
+     "Professional city watch",
+     "Multiple garrisons",
+     "Citadel",
+     "Mages' district",
+     "Academy of magic",
+     "Enchanter's shop",
+     "Scroll scribe",
+     "Teleportation circle",
+     "Planar embassy",
+     "Multiple adventurers' guilds",
+     "Dungeon delving supply district",
+     "Sage's quarter",
+     "Smuggling network",
+     "Multiple criminal factions",
+     "Front businesses",
+     "Underground network",
+     "Underground city",
+     "Whisper market",
+     "Black market bazaar",
+     "Assassins' guild",
+     "Multiple theaters",
+     "Opera house",
+     "Bardic college",
+     "Gambling district",
+     "Brothel (red light district)",
+     "Gladiatorial school",
+     "Colosseum/arena",
+     "Charlatan fortune tellers",
+     "Planar traders",
+     "Golem workforce",
+     "Undead labor",
+     "Dream parlors (high magic)",
+     "Airship docking (high magic)",
+     "Message network (high magic)",
+     "River ferry",
+     "Veteran's lodge",
+     "Docks/port facilities",
+     "Harbour master's office"
+    ],
+    "people": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "name": "Pradeep Deshpande",
+      "role": "the smelt master",
+      "goal": {
+       "short": "Prove to Parvati Chaudhary that they are worth a bigger cut.",
+       "long": "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb.",
+       "intent": {
+        "short": {
+         "family": "ALLEGIANCE",
+         "kind": "serve_greed",
+         "key": "serve_patron",
+         "target": {
+          "kind": "power",
+          "id": "Thieves' Guild"
+         }
+        },
+        "long": {
+         "family": "RANK",
+         "kind": "climb",
+         "key": "secure_office",
+         "target": {
+          "kind": "npc",
+          "id": "npc_craft_guilds_100_150"
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "reads": [
+    {
+     "read": "default+dm/live",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/live",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/live",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "default+dm/snapshot",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/live",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "server link",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "all+dm/snapshot",
+     "reader": "twin",
+     "withheld": [
+      {
+       "faction": "Thieves' Guild"
+      }
+     ],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [
+      "Smuggling network",
+      "Multiple criminal factions",
+      "Front businesses",
+      "Underground network",
+      "Underground city",
+      "Whisper market",
+      "Black market bazaar",
+      "Assassins' guild"
+     ],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": [
+        false,
+        false
+       ],
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [
+          "Thieves' Guild"
+         ],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "server gallery",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "server link",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/live",
+     "reader": "twin",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "server gallery",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "server link",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": false,
+       "goalByteEqual": false,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "read": "opened+dm/snapshot",
+     "reader": "twin",
+     "withheld": [],
+     "served": [
+      "Shadow Senate",
+      "Religious Authorities",
+      "Arcane Orders",
+      "Merchant Guilds",
+      "Military/Guard",
+      "Thieves' Guild",
+      "Noble Houses",
+      "Craft Guilds"
+     ],
+     "hiddenWhole": [],
+     "people": {
+      "npc_mages_guild": "no stored goal",
+      "npc_smelter": {
+       "present": true,
+       "goalServed": true,
+       "goalByteEqual": true,
+       "baseSubstringTokens": [],
+       "laneSearchHits": null,
+       "targets": [
+        {
+         "kind": "power",
+         "id": "Thieves' Guild"
+        },
+        {
+         "kind": "npc",
+         "id": "npc_craft_guilds_100_150"
+        }
+       ],
+       "targetKeyMatches": [
+        {
+         "withheldIds": [],
+         "servedIds": false
+        },
+        {
+         "withheldIds": [],
+         "servedIds": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+140 towns; 38 with a power withheld on some read; reads judged 1400, with a power withheld 352
+hits of a withheld power's name (case-folded substring, values and keys), by path: hits | towns | reads where seen
+    4 |   2 | STRUCT factions[].desc | M/dm/gallery M/dm/import
+   20 |   2 | STRUCT powerStructure.factions[].desc | L/dm/gallery L/dm/import L/off/gallery L/off/import L/off/link M/dm/gallery M/dm/import M/off/gallery M/off/import M/off/link

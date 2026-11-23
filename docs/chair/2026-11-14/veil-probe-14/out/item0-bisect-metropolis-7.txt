@@ -1,0 +1,58 @@
+bf78b837c: metropolis-7  Tests 1 passed | 15 skipped (16)
+d791a61d8/p14-server-veil-metropolis-7.json: faults 0, diffs 0, classes 0
+4157ea616/p14-server-veil-metropolis-7.json: faults 159, diffs 5600, classes 15
+  economicState.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  economicState.safetyProfile.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  simulationTrace[#].causes[#].effect: 560 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="100% likelihood" live="82% likelihood"
+  simulationTrace[#].causes[#].reason: 612 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="Base chance for this tier/category was 100%." live="Base chance for this tier/category was 82%."
+  simulationTrace[#].targetId: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="institution.smuggling_network" live="institution.rookery"
+  simulationTrace[#].ts: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210=86 live=91
+  simulationTrace[#].causes[#].source: 576 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="exclusiveGroup.criminalPower" live="nearbyResources"
+  simulationTrace[#].downstreamEffects[#].effect: 288 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="eroded" live="reinforced"
+  simulationTrace[#].downstreamEffects[#].target: 316 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="publicOrder" live="<absent>"
+  simulationTrace[#].result: 232 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="selected" live="subsumed"
+  simulationTrace[#].step: 176 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="assembleInstitutions" live="subsumptionPass"
+  simulationTrace[#].downstreamEffects[]: 80 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="[]" live="<absent>"
+98620a262/p14-server-veil-metropolis-7.json: faults 159, diffs 5600, classes 15
+  economicState.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  economicState.safetyProfile.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  simulationTrace[#].causes[#].effect: 560 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="100% likelihood" live="82% likelihood"
+  simulationTrace[#].causes[#].reason: 612 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="Base chance for this tier/category was 100%." live="Base chance for this tier/category was 82%."
+  simulationTrace[#].targetId: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="institution.smuggling_network" live="institution.rookery"
+  simulationTrace[#].ts: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210=86 live=91
+  simulationTrace[#].causes[#].source: 576 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="exclusiveGroup.criminalPower" live="nearbyResources"
+  simulationTrace[#].downstreamEffects[#].effect: 288 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="eroded" live="reinforced"
+  simulationTrace[#].downstreamEffects[#].target: 316 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="publicOrder" live="<absent>"
+  simulationTrace[#].result: 232 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="selected" live="subsumed"
+  simulationTrace[#].step: 176 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="assembleInstitutions" live="subsumptionPass"
+  simulationTrace[#].downstreamEffects[]: 80 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="[]" live="<absent>"
+2d4e62a66/p14-server-veil-metropolis-7.json: faults 159, diffs 5666, classes 16
+  economicState.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  economicState.safetyProfile.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  simulationTrace[#].causes[#].effect: 560 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="100% likelihood" live="82% likelihood"
+  simulationTrace[#].causes[#].reason: 612 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="Base chance for this tier/category was 100%." live="Base chance for this tier/category was 82%."
+  simulationTrace[#].targetId: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="institution.smuggling_network" live="institution.rookery"
+  simulationTrace[#].ts: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210=86 live=91
+  simulationTrace[#].causes[#].source: 576 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="exclusiveGroup.criminalPower" live="nearbyResources"
+  simulationTrace[#].downstreamEffects[#].effect: 288 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="eroded" live="reinforced"
+  simulationTrace[#].downstreamEffects[#].target: 316 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="publicOrder" live="<absent>"
+  simulationTrace[#].result: 232 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="selected" live="subsumed"
+  simulationTrace[#].step: 176 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="assembleInstitutions" live="subsumptionPass"
+  simulationTrace[#].downstreamEffects[]: 80 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="[]" live="<absent>"
+81350423d/p14-server-veil-metropolis-7.json: faults 159, diffs 5698, classes 18
+  economicState.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  economicState.safetyProfile.compound.inst.names[#]: 954 rows over 53 read/shares (e.g. link:unmarked/live, gallery:default/live, link:default/live) :: 210="smuggling network" live="multiple theaters"
+  simulationTrace[#].causes[#].effect: 560 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="100% likelihood" live="82% likelihood"
+  simulationTrace[#].causes[#].reason: 612 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="Base chance for this tier/category was 100%." live="Base chance for this tier/category was 82%."
+  simulationTrace[#].targetId: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="institution.smuggling_network" live="institution.rookery"
+  simulationTrace[#].ts: 332 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210=86 live=91
+  simulationTrace[#].causes[#].source: 576 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="exclusiveGroup.criminalPower" live="nearbyResources"
+  simulationTrace[#].downstreamEffects[#].effect: 288 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="eroded" live="reinforced"
+  simulationTrace[#].downstreamEffects[#].target: 316 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="publicOrder" live="<absent>"
+  simulationTrace[#].result: 232 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="selected" live="subsumed"
+  simulationTrace[#].step: 176 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="assembleInstitutions" live="subsumptionPass"
+  simulationTrace[#].downstreamEffects[]: 80 rows over 4 read/shares (e.g. gallery:default+dm/live, gallery:default+dm/snapshot, gallery:all+dm/live) :: 210="[]" live="<absent>"
+ad85c0a66/p14-server-veil-metropolis-7.json: faults 66, diffs 98, classes 3
+  history.legacyAnnotations[#].annotation: 66 rows over 22 read/shares (e.g. gallery:switches/live, link:switches/live, gallery:switches/snapshot) :: 210="As of the founding survey, the Economic Divide (2 live="<absent>"
+  relationships[id].npc1Role: 14 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the network's head" live="<absent>"
+  relationships[id].npc2Role: 18 rows over 2 read/shares (e.g. gallery:all+dm/live, gallery:all+dm/snapshot) :: 210="the guildmaster of thieves" live="<absent>"

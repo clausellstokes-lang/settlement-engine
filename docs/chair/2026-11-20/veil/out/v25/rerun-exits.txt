@@ -1,0 +1,6 @@
+publicSafe@tip(red expected) 1
+publicSafe+pools@9b 0
+pools@06(red expected) 1
+born+serverVeil@06(red expected) 1
+born+serverVeil@9b 0
+DONE

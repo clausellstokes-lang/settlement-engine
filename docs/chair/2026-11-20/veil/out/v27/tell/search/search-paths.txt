@@ -1,0 +1,295 @@
+pages read 1112; distinct normalized paths tagged 288
+  switch: 216 paths
+  house: 193 paths
+  word: 145 paths
+  key: 50 paths
+
+path | switch | house | word(leaves) | key(leaves) | an example criminal-worded value
+activeConditions[].affectedSystems[] | 0 | 0 | 62 | 0 | "criminal_opportunity"
+activeConditions[].archetype | 0 | 0 | 58 | 0 | "regional_criminal_pressure"
+activeConditions[].description | 0 | 0 | 58 | 0 | "A criminal corridor is transmitting opportunism or instability."
+activeConditions[].id | 0 | 0 | 58 | 0 | "condition.regional_criminal_pressure.nwpp7h"
+activeConditions[].label | 0 | 0 | 58 | 0 | "Regional criminal pressure"
+activeConditions[].triggeredAt.sourceEventTargetId | 0 | 0 | 58 | 0 | "regional_criminal_pressure"
+arrivalScene | 0 | 0 | 28 | 0 | "Andronakra holds a market day that has quietly become a collection day: the stalls pay their pitch fees to a factor bef
+availableServices.criminal | 212 | 36 | 0 | 212
+availableServices.criminal[].desc | 252 | 160 | 384 | 1132 | "Move illicit proceeds through legitimate-looking commercial activity."
+availableServices.criminal[].institution | 252 | 162 | 996 | 1132 | "(covert)"
+availableServices.criminal[].name | 252 | 160 | 724 | 1132 | "Fencing stolen goods"
+availableServices.entertainment[].institution | 0 | 0 | 496 | 0 | "Brothel (red light district)"
+availableServices.equipment[].desc | 0 | 0 | 110 | 0 | "Ore cut underground by the crews and brought out by cart for sorting."
+availableServices.information[].desc | 88 | 88 | 10 | 0 | "Road conditions, bandit reports, toll schedules."
+availableServices.information[].institution | 88 | 88 | 0 | 0
+availableServices.information[].name | 88 | 88 | 0 | 0
+availableServices.legal[].desc | 0 | 0 | 1418 | 0 | "Patrol the streets after dark. Deter crime and respond to incidents."
+availableServices.legal[].name | 0 | 0 | 524 | 0 | "Criminal trials"
+config.priorityCriminal | 0 | 0 | 0 | 464
+conflicts | 12 | 12 | 0 | 0
+conflicts[].desc | 34 | 34 | 78 | 0 | "Corrupt Council and The Guard are in high conflict over who commands when danger comes. The stakes are command."
+conflicts[].intensity | 34 | 34 | 0 | 0
+conflicts[].issue | 34 | 34 | 0 | 0
+conflicts[].parties[] | 34 | 34 | 90 | 0 | "Corrupt Council"
+conflicts[].stakes | 34 | 34 | 0 | 0
+economicState.activeChains[].activatedByResource | 164 | 164 | 0 | 0
+economicState.activeChains[].chainId | 164 | 164 | 280 | 0 | "black_market"
+economicState.activeChains[].entrepot | 164 | 164 | 0 | 0
+economicState.activeChains[].entrepotNote | 164 | 164 | 52 | 0 | "Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.
+economicState.activeChains[].exportable | 164 | 164 | 0 | 0
+economicState.activeChains[].externalMillNote | 164 | 164 | 0 | 0
+economicState.activeChains[].label | 164 | 164 | 280 | 0 | "Black market"
+economicState.activeChains[].needColor | 164 | 164 | 0 | 0
+economicState.activeChains[].needKey | 164 | 164 | 280 | 0 | "criminal_economy"
+economicState.activeChains[].needLabel | 164 | 164 | 280 | 0 | "Criminal Economy"
+economicState.activeChains[].outputs[] | 164 | 164 | 774 | 0 | "Contraband goods"
+economicState.activeChains[].processingInstitutions[] | 164 | 164 | 270 | 0 | "Fence (word of mouth)"
+economicState.activeChains[].resource | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceActive | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceCondition | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceDepleted | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceInputAvailable | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceInputCondition | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceInputKey | 164 | 164 | 0 | 0
+economicState.activeChains[].resourceKey | 164 | 164 | 0 | 0
+economicState.activeChains[].services | 90 | 90 | 0 | 0
+economicState.activeChains[].services[] | 164 | 164 | 280 | 0 | "criminal"
+economicState.activeChains[].status | 164 | 164 | 0 | 0
+economicState.activeChains[].substituteActive | 164 | 164 | 0 | 0
+economicState.activeChains[].upstreamChains | 164 | 164 | 0 | 0
+economicState.activeChains[].upstreamChains[] | 146 | 146 | 0 | 0
+economicState.activeChains[].upstreamMissing[] | 98 | 98 | 0 | 0
+economicState.activeChains[].upstreamNote | 112 | 112 | 0 | 0
+economicState.activeChains[].upstreamWeak[] | 56 | 56 | 0 | 0
+economicState.compound.inst.hasBlackMarket | 82 | 82 | 0 | 464
+economicState.compound.inst.hasCriminalInst | 168 | 168 | 0 | 464
+economicState.compound.inst.hasGangInfra | 88 | 88 | 0 | 0
+economicState.compound.inst.hasSmuggling | 118 | 118 | 0 | 464
+economicState.compound.inst.hasThievesGuild | 52 | 52 | 0 | 464
+economicState.compound.inst.names[] | 184 | 184 | 770 | 0 | "fence (word of mouth)"
+economicState.compound.raw.criminal | 0 | 0 | 0 | 464
+economicState.economicComplexity | 8 | 8 | 0 | 0
+economicState.incomeSources[].desc | 200 | 118 | 200 | 0 | "Untaxed trade, fencing and theft bring money in here, but none of it reaches the treasury."
+economicState.incomeSources[].isCriminal | 200 | 118 | 0 | 200
+economicState.incomeSources[].percentage | 200 | 118 | 0 | 0
+economicState.incomeSources[].priorityNote | 200 | 118 | 0 | 0
+economicState.incomeSources[].source | 200 | 118 | 150 | 0 | "Black Market Revenue"
+economicState.primaryImports[] | 0 | 0 | 8 | 0 | "Smuggled jade and gems"
+economicState.priorities.criminal | 0 | 0 | 0 | 464
+economicState.safetyProfile.compound.inst.hasBlackMarket | 82 | 82 | 0 | 464
+economicState.safetyProfile.compound.inst.hasCriminalInst | 168 | 168 | 0 | 464
+economicState.safetyProfile.compound.inst.hasGangInfra | 88 | 88 | 0 | 0
+economicState.safetyProfile.compound.inst.hasSmuggling | 118 | 118 | 0 | 464
+economicState.safetyProfile.compound.inst.hasThievesGuild | 52 | 52 | 0 | 464
+economicState.safetyProfile.compound.inst.names[] | 184 | 184 | 770 | 0 | "fence (word of mouth)"
+economicState.safetyProfile.compound.raw.criminal | 0 | 0 | 0 | 464
+economicState.safetyProfile.crimeTypes | 116 | 70 | 0 | 116
+economicState.safetyProfile.crimeTypes[].desc | 348 | 152 | 508 | 856 | "Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels."
+economicState.safetyProfile.crimeTypes[].type | 348 | 152 | 372 | 856 | "Survival crime"
+economicState.safetyProfile.criminalInstitutions | 136 | 38 | 0 | 136
+economicState.safetyProfile.criminalInstitutions[] | 328 | 174 | 568 | 944 | "Street Gang"
+economicState.safetyProfile.economicDragDesc | 172 | 172 | 0 | 0
+economicState.safetyProfile.flags.crimeIsGovt | 0 | 0 | 0 | 464
+economicState.safetyProfile.flags.stateCrime | 0 | 0 | 0 | 464
+economicState.safetyProfile.flags.stateCrimeIntensity | 0 | 0 | 0 | 464
+economicState.safetyProfile.guardEffectivenessDesc | 90 | 90 | 404 | 0 | "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right."
+economicState.safetyProfile.plotHooks | 57 | 57 | 0 | 0
+economicState.safetyProfile.plotHooks[] | 60 | 60 | 59 | 0 | "The smugglers have stopped moving their usual goods this week, and nobody can say why."
+economicState.safetyProfile.safetyDesc | 8 | 8 | 120 | 0 | "Crime exists but is well-managed. The watch is present and responsive. Petty theft is the primary risk; organized crime
+history.currentTensions | 2 | 2 | 0 | 0
+history.currentTensions[].description | 86 | 86 | 114 | 0 | "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+history.currentTensions[].factions[] | 86 | 86 | 76 | 0 | "the criminal network"
+history.currentTensions[].lastingEffects[] | 86 | 86 | 0 | 0
+history.currentTensions[].severity[] | 86 | 86 | 0 | 0
+history.currentTensions[].type | 86 | 86 | 114 | 0 | "crime_wave"
+history.founding.initialChallenge | 0 | 0 | 12 | 0 | "bandit activity on all four roads"
+history.historicalEvents[].description | 0 | 0 | 32 | 0 | "Evidence of official corruption has surfaced but powerful figures resist investigation"
+history.historicalEvents[].templateType | 0 | 0 | 50 | 0 | "corruption_scandal"
+institutions[].baseChance | 184 | 184 | 0 | 0
+institutions[].cascadeAdded | 160 | 160 | 0 | 0
+institutions[].cascadeBoost | 160 | 160 | 0 | 0
+institutions[].catalogId | 184 | 184 | 720 | 0 | "smuggling_operation"
+institutions[].category | 184 | 184 | 730 | 0 | "Criminal"
+institutions[].coherenceRepair | 70 | 70 | 0 | 0
+institutions[].desc | 184 | 184 | 1592 | 0 | "Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the vill
+institutions[].exclusiveGroup | 162 | 162 | 392 | 0 | "redLightScale"
+institutions[].exclusiveGroupCoexists | 8 | 8 | 0 | 0
+institutions[].facets.clandestine | 50 | 50 | 0 | 0
+institutions[].facets.subterranean | 82 | 82 | 0 | 0
+institutions[].factionSource | 26 | 26 | 12 | 0 | "Thieves' Guild"
+institutions[].forbiddenResources[] | 50 | 50 | 0 | 0
+institutions[].forbiddenTradeRoutes[] | 52 | 52 | 0 | 0
+institutions[].forcedByIsolation | 6 | 6 | 0 | 0
+institutions[].magicLicense | 98 | 98 | 0 | 0
+institutions[].name | 184 | 184 | 770 | 0 | "Fence (word of mouth)"
+institutions[].nativeTier | 60 | 60 | 0 | 0
+institutions[].priorityCategory | 184 | 184 | 730 | 0 | "criminal"
+institutions[].required | 184 | 184 | 0 | 0
+institutions[].serviceKeys[] | 88 | 88 | 0 | 0
+institutions[].source | 184 | 184 | 0 | 0
+institutions[].tags | 164 | 164 | 0 | 0
+institutions[].tags[] | 184 | 184 | 1056 | 0 | "criminal"
+institutions[].terrainAccess[] | 16 | 16 | 0 | 0
+institutions[].tier | 162 | 162 | 0 | 0
+institutions[].tradeRouteRequired[] | 20 | 20 | 0 | 0
+npcs[].activeConstraint | 0 | 0 | 21 | 0 | "Cannot move against the criminals without cutting off the payments the seat now runs on."
+npcs[].allegiance.covert | 69 | 0 | 0 | 328
+npcs[].allegiance.handler | 69 | 0 | 14 | 328 | "npc_red_light_district"
+npcs[].allegiance.house | 69 | 69 | 214 | 328 | "Fence (word of mouth)"
+npcs[].allegiance.power | 69 | 9 | 188 | 328 | "Thieves' Guild"
+npcs[].allegiance.share | 69 | 0 | 0 | 328
+npcs[].allegiance.vector | 69 | 0 | 0 | 328
+npcs[].allegiance.veiled | 69 | 0 | 0 | 328
+npcs[].allegiance.via | 69 | 0 | 0 | 328
+npcs[].category | 0 | 0 | 1392 | 0 | "criminal"
+npcs[].goal.intent.long.family | 31 | 31 | 0 | 0
+npcs[].goal.intent.long.key | 31 | 31 | 0 | 0
+npcs[].goal.intent.long.kind | 31 | 31 | 81 | 0 | "corrupted"
+npcs[].goal.intent.long.target | 20 | 20 | 0 | 0
+npcs[].goal.intent.long.target.id | 77 | 77 | 416 | 0 | "Thieves' Guild"
+npcs[].goal.intent.long.target.kind | 31 | 31 | 0 | 0
+npcs[].goal.intent.short.family | 31 | 31 | 0 | 0
+npcs[].goal.intent.short.key | 31 | 31 | 0 | 0
+npcs[].goal.intent.short.kind | 31 | 31 | 85 | 0 | "corrupted"
+npcs[].goal.intent.short.target | 17 | 17 | 0 | 0
+npcs[].goal.intent.short.target.id | 76 | 76 | 484 | 0 | "Thieves' Guild"
+npcs[].goal.intent.short.target.kind | 31 | 31 | 0 | 0
+npcs[].goal.long | 79 | 79 | 462 | 0 | "Set the terms between Corrupt Council and Thieves' Guild themselves, and stop taking them from others."
+npcs[].goal.short | 86 | 86 | 539 | 0 | "Find out who else knows about the arrangement between Corrupt Council and Thieves' Guild."
+npcs[].id | 0 | 0 | 278 | 0 | "npc_brothel_red_light_district"
+npcs[].institution.family | 92 | 92 | 546 | 0 | "Fence (word of mouth)"
+npcs[].institution.key | 92 | 92 | 524 | 0 | "Fence (word of mouth)"
+npcs[].institution.kind | 92 | 92 | 0 | 0
+npcs[].institution.title | 92 | 92 | 122 | 0 | "the fence"
+npcs[].institution.veiled | 92 | 92 | 0 | 0
+npcs[].memberships | 31 | 31 | 0 | 0
+npcs[].memberships[].power | 31 | 31 | 677 | 0 | "Corrupt Council"
+npcs[].memberships[].rank | 31 | 31 | 0 | 0
+npcs[].memberships[].share | 31 | 31 | 0 | 0
+npcs[].name | 0 | 0 | 30 | 0 | "Gang Xu"
+npcs[].personality.dominant | 0 | 0 | 332 | 0 | "incorruptible"
+npcs[].personality.flaw | 0 | 0 | 558 | 0 | "corrupt"
+npcs[].role | 14 | 14 | 122 | 0 | "the fence"
+npcs[].settlementCondition | 0 | 0 | 80 | 0 | "corruption"
+npcs[].structuralPosition | 0 | 0 | 74 | 0 | "Holds the seat while criminals pay for favours close to it; some orders that matter are settled elsewhere."
+npcs[].title | 14 | 14 | 122 | 0 | "the fence"
+powerStructure.conflicts | 12 | 12 | 0 | 0
+powerStructure.conflicts[].desc | 34 | 34 | 78 | 0 | "Corrupt Council and The Guard are in high conflict over who commands when danger comes. The stakes are command."
+powerStructure.conflicts[].intensity | 34 | 34 | 0 | 0
+powerStructure.conflicts[].issue | 34 | 34 | 0 | 0
+powerStructure.conflicts[].parties[] | 34 | 34 | 90 | 0 | "Corrupt Council"
+powerStructure.conflicts[].stakes | 34 | 34 | 0 | 0
+powerStructure.criminalCaptureState | 232 | 0 | 27 | 232 | "corrupted"
+powerStructure.factionRelationships | 2 | 2 | 0 | 0
+powerStructure.factionRelationships[].captureState | 40 | 31 | 29 | 68 | "corrupted"
+powerStructure.factionRelationships[].direction | 31 | 31 | 0 | 0
+powerStructure.factionRelationships[].dmNote | 31 | 31 | 28 | 0 | "Ask: which specific officials have arrangements with Thieves' Guild? The answer drives dozens of plot hooks."
+powerStructure.factionRelationships[].narrative | 31 | 31 | 126 | 0 | "The Guard carries out what Corrupt Council decides. The soldiers enforce the law; they do not make it."
+powerStructure.factionRelationships[].pair[] | 31 | 31 | 144 | 0 | "Corrupt Council"
+powerStructure.factionRelationships[].type | 31 | 31 | 29 | 0 | "corrupted"
+powerStructure.factions[].captureState | 40 | 5 | 27 | 40 | "corrupted"
+powerStructure.factions[].category | 62 | 62 | 142 | 0 | "criminal"
+powerStructure.factions[].crisisNote | 10 | 6 | 0 | 0
+powerStructure.factions[].desc | 98 | 62 | 222 | 0 | "Organised criminal network controls the black market and several informal revenue streams; present in council discussio
+powerStructure.factions[].faction | 62 | 62 | 128 | 0 | "Corrupt Council"
+powerStructure.factions[].hidden | 2 | 2 | 0 | 0
+powerStructure.factions[].isGoverning | 47 | 47 | 0 | 0
+powerStructure.factions[].modifier | 10 | 10 | 34 | 0 | "corruption-riddled"
+powerStructure.factions[].modifiers[] | 8 | 8 | 0 | 0
+powerStructure.factions[].name | 43 | 43 | 6 | 0 | "The Underground"
+powerStructure.factions[].power | 62 | 62 | 0 | 0
+powerStructure.factions[].powerLabel | 62 | 62 | 0 | 0
+powerStructure.governingName | 0 | 0 | 42 | 0 | "Corrupt Council"
+powerStructure.government | 0 | 0 | 42 | 0 | "Corrupt Council"
+powerStructure.recentConflict | 0 | 0 | 12 | 0 | "The church is demanding veto power over council appointments. Corrupt Council has not yet refused publicly."
+pressureSentence | 0 | 0 | 22 | 0 | "The streets of Xishan have gone quiet, and everyone is waiting for something to break. Corrupt Council gives orders tha
+prominentRelationship.full | 0 | 0 | 4 | 0 | "Gang Kwon taught Hao Luo everything, including how to get the better of Gang Kwon."
+prominentRelationship.npc1 | 0 | 0 | 4 | 0 | "Gang Kwon"
+prominentRelationship.phrasing | 0 | 0 | 4 | 0 | "A third party has asked Gang Kwon, quietly, whether Hao Luo can be trusted. The answer took too long."
+prominentRelationship.tension | 0 | 0 | 4 | 0 | "A third party has asked Gang Kwon, quietly, whether Hao Luo can be trusted. The answer took too long."
+prominentRelationship.type | 0 | 0 | 2 | 0 | "Corrupt Arrangement"
+publicProse.blocks.defense:criminal.capture | 464 | 184 | 0 | 464
+publicProse.blocks.defense:criminal.ringNote | 388 | 184 | 350 | 388 | "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder
+publicProse.blocks.defense:criminal.structure.detail | 464 | 184 | 0 | 464
+publicProse.blocks.defense:criminal.structure.glance | 464 | 184 | 0 | 464
+publicProse.blocks.defense:criminal.structure.sentence | 464 | 184 | 362 | 464 | "The danger at Drumton comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the s
+publicProse.blocks.defense:posture.posture.beside | 0 | 0 | 32 | 0 | "Lidoporta could deal with a brawl or a thief, but the town could not hold off a raid."
+publicProse.blocks.defense:posture.posture.field | 0 | 0 | 362 | 0 | "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right."
+publicProse.blocks.defense:posture.posture.rung.sentence | 0 | 0 | 32 | 0 | "Lidoporta could deal with a brawl or a thief, but the town could not hold off a raid."
+publicProse.blocks.defense:posture.prize.field | 0 | 0 | 174 | 0 | "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right."
+publicProse.blocks.defense:posture.terrain.field | 0 | 0 | 298 | 0 | "There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right."
+publicProse.blocks.defense:state.firstSurvey.field | 0 | 0 | 120 | 0 | "Crime exists but is well-managed. The watch is present and responsive. Petty theft is the primary risk; organized crime
+publicProse.blocks.defense:state.publicOrder.beside | 0 | 0 | 128 | 0 | "The town's record of crimes at Makrolathra is not short, and the next few seasons will decide whether the law or the cr
+publicProse.blocks.defense:state.publicOrder.field | 0 | 0 | 120 | 0 | "Crime exists but is well-managed. The watch is present and responsive. Petty theft is the primary risk; organized crime
+publicProse.blocks.defense:state.publicOrder.rung.sentence | 0 | 0 | 128 | 0 | "The town's record of crimes at Makrolathra is not short, and the next few seasons will decide whether the law or the cr
+publicProse.blocks.economy:daily_life.criminalLine | 200 | 118 | 0 | 464
+publicProse.blocks.economy:daily_life.incomeMix.@ | 200 | 118 | 0 | 0
+publicProse.blocks.economy:economics.criminalLine | 200 | 118 | 0 | 464
+publicProse.blocks.economy:economics.incomeMix.detail | 200 | 118 | 0 | 0
+publicProse.blocks.economy:economics.incomeMix.glance | 200 | 118 | 0 | 0
+publicProse.blocks.economy:economics.incomeMix.sentence | 200 | 118 | 0 | 0
+publicProse.blocks.economy:resources.criminalLine | 200 | 118 | 0 | 464
+publicProse.blocks.economy:resources.incomeMix.@ | 200 | 118 | 0 | 0
+publicProse.blocks.economy:services.criminalLine | 200 | 118 | 0 | 464
+publicProse.blocks.economy:services.incomeMix.@ | 200 | 118 | 0 | 0
+publicProse.blocks.overview:identity.governs | 0 | 0 | 58 | 0 | "Corrupt Council · Vulnerable (decisions shaped from outside)"
+publicProse.blocks.power:desk.captureReading | 248 | 0 | 0 | 248
+publicProse.blocks.power:desk.captureReading.detail | 216 | 0 | 0 | 216
+publicProse.blocks.power:desk.captureReading.glance | 216 | 0 | 0 | 216
+publicProse.blocks.power:desk.captureReading.sentence | 216 | 0 | 0 | 216
+publicProse.blocks.power:desk.gmAdvisory | 215 | 0 | 0 | 0
+publicProse.blocks.power:desk.gmAdvisory.detail | 17 | 0 | 0 | 0
+publicProse.blocks.power:desk.gmAdvisory.glance | 17 | 0 | 0 | 0
+publicProse.blocks.power:desk.gmAdvisory.sentence | 17 | 0 | 0 | 0
+publicProse.blocks.power:desk.governingTitle.sentence | 0 | 0 | 42 | 0 | "Call the Corrupt Council at Makrolathra by any other title and you will be corrected, politely and at once."
+publicProse.blocks.power:desk.legitimacyBanner.sentence | 0 | 0 | 58 | 0 | "The Corrupt Council is liked well enough at Makrolathra that it can make an unpopular decision and still be obeyed."
+publicProse.blocks.power:desk.legitimacyLens.sentence | 0 | 0 | 76 | 0 | "Makrolathra credits the Corrupt Council with the good years whether or not the Corrupt Council earned them; the prosper
+publicProse.blocks.power:desk.legitimacyReading | 460 | 0 | 0 | 0
+publicProse.blocks.power:desk.legitimacyReading.detail | 4 | 0 | 0 | 0
+publicProse.blocks.power:desk.legitimacyReading.glance | 4 | 0 | 0 | 0
+publicProse.blocks.power:desk.legitimacyReading.sentence | 4 | 0 | 4 | 0 | "Inniscombe has no strong opinion of the Corrupt Council either way."
+publicProse.blocks.power:desk.operationReading | 136 | 0 | 0 | 0
+publicProse.blocks.power:desk.operationReading.detail | 328 | 0 | 0 | 0
+publicProse.blocks.power:desk.operationReading.glance | 328 | 0 | 0 | 0
+publicProse.blocks.power:desk.operationReading.sentence | 328 | 0 | 6 | 0 | "The criminal interest at Unterhain sells safety from itself and calls it something else, steadily, to the same people, 
+publicProse.blocks.power:desk.rulingStructure.glance | 0 | 0 | 46 | 0 | "criminal"
+publicProse.blocks.power:desk.stabilityHeader.glance | 0 | 0 | 18 | 0 | "Unstable (pervasive organized crime)"
+publicProse.blocks.power:desk.stabilityHeader.sentence | 0 | 0 | 36 | 0 | "Every decision about Makrolathra is taken by Corrupt Council, and every answer comes from there."
+publicProse.blocks.power:desk.structureFlag.sentence | 0 | 0 | 10 | 0 | "At Tighshaw the richest merchants and the criminal bosses are often the same people; a deal struck in the guild hall an
+publicProse.blocks.power:desk.successionHold.sentence | 0 | 0 | 38 | 0 | "There are people at Makrolathra who would move on the Corrupt Council and do not, because moving on a ruler the town is
+publicProse.blocks.power:desk.successionRisk.sentence | 0 | 0 | 32 | 0 | "The challenger at Xishan could now take the hall, but the Corrupt Council has not changed hands yet. What happens next 
+publicProse.blocks.power:governance.text | 0 | 0 | 46 | 0 | "Despoina Gabalas, the first councillor, holds the seat of the Corrupt Council. The Corrupt Council governs Makrolathra.
+publicProse.blocks.warFaith:faith.templeFraud.sentence | 0 | 0 | 10 | 0 | "Folk in Ribatpatan pay for blessings and relics they half suspect are a fraud. The church and the metropolis's thieves 
+relationships[].archetypeKey | 0 | 0 | 289 | 0 | "mil_crim_corruption"
+relationships[].covert | 0 | 0 | 0 | 328
+relationships[].description | 0 | 0 | 69 | 0 | "Gang Xu and Shaohua Sun are allies with separate interests. They meet to coordinate and leave by different doors."
+relationships[].from | 0 | 0 | 275 | 0 | "npc_brothel_red_light_district"
+relationships[].id | 0 | 0 | 275 | 0 | "tie_npc_brothel_red_light_district"
+relationships[].npc1Name | 0 | 0 | 29 | 0 | "Gang Xu"
+relationships[].npc1Role | 14 | 14 | 122 | 0 | "the fence"
+relationships[].npc2Name | 0 | 0 | 36 | 0 | "Gang Xu"
+relationships[].npc2Role | 9 | 9 | 221 | 0 | "the fence"
+relationships[].tension | 0 | 0 | 80 | 0 | "Shaohua Sun has asked Gang Xu to back a candidate Gang Xu distrusts. Refusing would cost the alliance its majority."
+relationships[].to | 0 | 0 | 414 | 0 | "npc_brothel_red_light_district"
+relationships[].typeName | 0 | 0 | 68 | 0 | "Corrupt Arrangement"
+simulationTrace[].causes | 5 | 5 | 0 | 0
+simulationTrace[].causes[].effect | 92 | 92 | 0 | 0
+simulationTrace[].causes[].reason | 92 | 92 | 1210 | 0 | "Fence (word of mouth) converts raw inputs into chain output."
+simulationTrace[].causes[].source | 92 | 92 | 756 | 0 | "processor.Fence (word of mouth)"
+simulationTrace[].downstreamEffects | 92 | 92 | 0 | 0
+simulationTrace[].downstreamEffects[].effect | 92 | 92 | 0 | 0
+simulationTrace[].downstreamEffects[].reason | 71 | 71 | 196 | 0 | "The allegiance runs to the town's criminal power."
+simulationTrace[].downstreamEffects[].target | 92 | 92 | 528 | 0 | "blackMarket"
+simulationTrace[].result | 92 | 92 | 0 | 0
+simulationTrace[].step | 92 | 92 | 0 | 0
+simulationTrace[].targetId | 92 | 92 | 872 | 0 | "chain.criminal_economy.black_market"
+simulationTrace[].targetType | 92 | 92 | 0 | 0
+simulationTrace[].ts | 92 | 92 | 0 | 0
+stress.cast.levers[].institution | 2 | 2 | 2 | 0 | "Black market"
+stress.cast.roles[].reason | 0 | 0 | 16 | 0 | "corrupt, with ties to the underworld"
+stress.cast.stakes[].factionId | 48 | 48 | 102 | 0 | "Corrupt Council"
+stress.cast.stakes[].reason | 48 | 48 | 28 | 0 | "crime gains from the disorder"
+stress.cast.stakes[].stake | 48 | 48 | 0 | 0
+stressors.cast.levers[].institution | 2 | 2 | 2 | 0 | "Black market"
+stressors.cast.roles[].reason | 0 | 0 | 16 | 0 | "corrupt, with ties to the underworld"
+stressors.cast.stakes[].factionId | 48 | 48 | 102 | 0 | "Corrupt Council"
+stressors.cast.stakes[].reason | 48 | 48 | 28 | 0 | "crime gains from the disorder"
+stressors.cast.stakes[].stake | 48 | 48 | 0 | 0

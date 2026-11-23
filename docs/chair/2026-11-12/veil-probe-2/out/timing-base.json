@@ -1,0 +1,186 @@
+{
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+ "failed": {
+  "at210": [],
+  "work211": [],
+  "orig211": []
+ },
+ "rows": [
+  {
+   "label": "F4 1000 member keys revealDm:false, one-person town",
+   "bytes": 28993,
+   "at210": {
+    "gallery": {
+     "median": 2,
+     "max": 3
+    },
+    "link": {
+     "median": 3,
+     "max": 3
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 914,
+     "max": 1029
+    },
+    "link": {
+     "median": 909,
+     "max": 933
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 890,
+     "max": 935
+    },
+    "link": {
+     "median": 951,
+     "max": 1010
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 6,
+     "max": 6
+    },
+    "link": {
+     "median": 4,
+     "max": 5
+    }
+   }
+  },
+  {
+   "label": "F4 50000 member keys revealDm:false, one-person town",
+   "bytes": 1538993,
+   "at210": {
+    "gallery": {
+     "median": 3,
+     "max": 6
+    },
+    "link": {
+     "median": 110,
+     "max": 139
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 45575,
+     "max": 46940
+    },
+    "link": {
+     "median": 47601,
+     "max": 50843
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 47561,
+     "max": 48731
+    },
+    "link": {
+     "median": 48310,
+     "max": 49965
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 5,
+     "max": 6
+    },
+    "link": {
+     "median": 4,
+     "max": 6
+    }
+   }
+  },
+  {
+   "label": "F6 Force all, every eye shut",
+   "bytes": 1134296,
+   "at210": {
+    "gallery": {
+     "median": 708,
+     "max": 777
+    },
+    "link": {
+     "median": 1017,
+     "max": 1108
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 1389,
+     "max": 1517
+    },
+    "link": {
+     "median": 1200,
+     "max": 1303
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 1435,
+     "max": 1654
+    },
+    "link": {
+     "median": 1231,
+     "max": 1616
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 651,
+     "max": 680
+    },
+    "link": {
+     "median": 969,
+     "max": 1162
+    }
+   }
+  },
+  {
+   "label": "F6 Force all, default veil",
+   "bytes": 997919,
+   "at210": {
+    "gallery": {
+     "median": 681,
+     "max": 839
+    },
+    "link": {
+     "median": 1111,
+     "max": 1235
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 1179,
+     "max": 1357
+    },
+    "link": {
+     "median": 1017,
+     "max": 1165
+    }
+   },
+   "orig211": {
+    "gallery": {
+     "median": 1165,
+     "max": 1270
+    },
+    "link": {
+     "median": 1088,
+     "max": 1341
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 746,
+     "max": 805
+    },
+    "link": {
+     "median": 986,
+     "max": 1236
+    }
+   }
+  }
+ ]
+}

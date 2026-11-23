@@ -1,0 +1,42 @@
++   "vs-thorp-3 dm (b): safety blackMarketCapture",
++   "vs-hamlet-0 (b): safety blackMarketCapture",
++   "vs-hamlet-0 dm (b): safety blackMarketCapture",
++   "vs-hamlet-1 (b): safety blackMarketCapture",
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture",
++   "vs-city-1 dm (b): safety blackMarketCapture",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:347:22
+    345|       }
+    346|     }
+    347|     expect(failures).toEqual([]);
+       |                      ^
+    348|     expect(tally.copies).toBe(24);
+    349|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 11 passed (12)
+      Tests  1 failed | 176 passed (177)
+   Start at  05:54:07
+   Duration  1396.82s (transform 10.28s, setup 336ms, import 2.64s, tests 2206.90s, environment 1.36s)
+
+[gate-tail] end:  06:17:25 up 24 min,  0 user,  load average: 1.14, 1.91, 1.76
+[gate-tail] full log: /tmp/gate-tail.603.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

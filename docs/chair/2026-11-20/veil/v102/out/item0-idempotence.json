@@ -1,0 +1,75 @@
+{
+ "idem": {
+  "copies": 72,
+  "differ": 0,
+  "ex": []
+ },
+ "c": [
+  {
+   "copy": "vs-city-1",
+   "income": {
+    "pub": "20w,C16w,9w,8w,7w,7w,5w,5w,5w,5w,4w,4w,3w,2w",
+    "before": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "hide": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "show": "20,C16,9,8,7,7,5,5,5,5,4,4,3,2",
+    "maskBefore": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "maskShow": "24,11,9,8,8,6,6,6,6,5,5,4,2"
+   },
+   "hideVsBefore": [],
+   "showVsBefore": [
+    "economicState.incomeSources[0].percentage: 24 -> 26",
+    "economicState.incomeSources[1].percentage: 11 -> 10",
+    "economicState.incomeSources[11].percentage: 4 -> 3"
+   ]
+  },
+  {
+   "copy": "vs-city-1 dm",
+   "income": {
+    "pub": "20w,C16w,9w,8w,7w,7w,5w,5w,5w,5w,4w,4w,3w,2w",
+    "before": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "hide": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "show": "20,C16,9,8,7,7,5,5,5,5,4,4,3,2",
+    "maskBefore": "26,10,9,8,8,6,6,6,6,5,5,3,2",
+    "maskShow": "24,11,9,8,8,6,6,6,6,5,5,4,2"
+   },
+   "hideVsBefore": [],
+   "showVsBefore": [
+    "economicState.incomeSources[0].percentage: 24 -> 26",
+    "economicState.incomeSources[1].percentage: 11 -> 10",
+    "economicState.incomeSources[11].percentage: 4 -> 3"
+   ]
+  },
+  {
+   "copy": "vs-metropolis-1",
+   "income": {
+    "pub": "24w,C21w,15w,12w,10w,5w,4w,4w,3w,2w",
+    "before": "30,19,15,12,7,5,5,4,3",
+    "hide": "30,19,15,12,7,5,5,4,3",
+    "show": "24,C21,15,12,10,5,4,4,3,2",
+    "maskBefore": "30,19,15,12,7,5,5,4,3",
+    "maskShow": "30,19,15,13,6,5,5,4,3"
+   },
+   "hideVsBefore": [],
+   "showVsBefore": [
+    "economicState.incomeSources[3].percentage: 13 -> 12",
+    "economicState.incomeSources[4].percentage: 6 -> 7"
+   ]
+  },
+  {
+   "copy": "vs-metropolis-1 dm",
+   "income": {
+    "pub": "24w,C21w,15w,12w,10w,5w,4w,4w,3w,2w",
+    "before": "30,19,15,12,7,5,5,4,3",
+    "hide": "30,19,15,12,7,5,5,4,3",
+    "show": "24,C21,15,12,10,5,4,4,3,2",
+    "maskBefore": "30,19,15,12,7,5,5,4,3",
+    "maskShow": "30,19,15,13,6,5,5,4,3"
+   },
+   "hideVsBefore": [],
+   "showVsBefore": [
+    "economicState.incomeSources[3].percentage: 13 -> 12",
+    "economicState.incomeSources[4].percentage: 6 -> 7"
+   ]
+  }
+ ]
+}

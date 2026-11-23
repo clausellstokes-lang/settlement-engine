@@ -1,0 +1,3 @@
+the largest born town, gallery off: x211 446.8 | after (x212 at this cure) 745.1 ms (after/x211 1.67)
+the largest born town, gallery dm: x211 217.0 | after (x212 at this cure) 589.3 ms (after/x211 2.72)
+the largest born town, link: x211 310.6 | after (x212 at this cure) 559.7 ms (after/x211 1.80)

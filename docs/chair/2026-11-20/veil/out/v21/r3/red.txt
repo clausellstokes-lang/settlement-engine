@@ -1,0 +1,534 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 21493 after 0 poll(s); 4 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/r3/base
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (11 tests | 7 failed) 154115ms
+     × VR39: no served crime type that no town of the hidden-free pool has; VR29: the key stays an array, absent only where its grouping is shut 11ms
+     × THE POWER OBSERVABLE / VR42: no served criminal power but the governing one, which IS served; the shares sum to 100 where any power is withheld (VR11/VR31); no relation names an unserved power 3ms
+     × VR31 on EVERY read (marked and unmarked, towns with no hidden house too): wherever a power is withheld, whatever withheld it, the served shares sum to 100 2ms
+     × THE POWER OBSERVABLE: the Defense key a visitor derives from the served document is "organized" only by the governing power (VR42) 12ms
+     × (a) economy.complexity is the engine's own ladder over the served rows; the gates tail and the foothold word as the engine writes them for the served houses 5ms
+     × (b) a smuggling hook, a crime-wave tension or event, a rival-power description and the criminal desk leave where no served house or power accounts for them 6ms
+     × safety.economicDragDesc leaves where a hidden house raised it (the criminal-house flag or the organised name it raised); VR42: where only the governing body stands it stays 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > VR39: no served crime type that no town of the hidden-free pool has; VR29: the key stays an array, absent only where its grouping is shut
+AssertionError: expected [ …(84) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-insurgency-1-104 dm=false gallery: \"Smuggling\"",
++   "city-insurgency-1-104 dm=false map: \"Smuggling\"",
++   "city-insurgency-1-104 dm=false link: \"Smuggling\"",
++   "city-insurgency-1-104 dm=false import: \"Smuggling\"",
++   "city-insurgency-1-104 dm=true gallery: \"Smuggling\"",
++   "city-insurgency-1-104 dm=true map: \"Smuggling\"",
++   "city-insurgency-1-104 dm=true import: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=false gallery: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=false map: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=false link: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=false import: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=true gallery: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=true map: \"Smuggling\"",
++   "city-infiltrated-0-32 dm=true import: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=false gallery: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=false map: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=false link: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=false import: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=true gallery: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=true map: \"Smuggling\"",
++   "city-politically_fractured-0-40 dm=true import: \"Smuggling\"",
++   "city-none-1-113 dm=false gallery: \"Smuggling\"",
++   "city-none-1-113 dm=false map: \"Smuggling\"",
++   "city-none-1-113 dm=false link: \"Smuggling\"",
++   "city-none-1-113 dm=false import: \"Smuggling\"",
++   "city-none-1-113 dm=true gallery: \"Smuggling\"",
++   "city-none-1-113 dm=true map: \"Smuggling\"",
++   "city-none-1-113 dm=true import: \"Smuggling\"",
++   "metropolis-infiltrated-0-62 dm=false gallery: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=false map: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=false link: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=false import: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=true gallery: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=true map: \"Street gang activity\"",
++   "metropolis-infiltrated-0-62 dm=true import: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=false gallery: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=false map: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=false link: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=false import: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=true gallery: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=true map: \"Street gang activity\"",
++   "city-infiltrated-1-112 dm=true import: \"Street gang activity\"",
++   "metropolis-none-0-61 dm=false gallery: \"Smuggling\"",
++   "metropolis-none-0-61 dm=false map: \"Smuggling\"",
++   "metropolis-none-0-61 dm=false link: \"Smuggling\"",
++   "metropolis-none-0-61 dm=false import: \"Smuggling\"",
++   "metropolis-none-0-61 dm=true gallery: \"Smuggling\"",
++   "metropolis-none-0-61 dm=true map: \"Smuggling\"",
++   "metropolis-none-0-61 dm=true import: \"Smuggling\"",
++   "city-insurgency-0-44 dm=false gallery: \"Smuggling\"",
++   "city-insurgency-0-44 dm=false map: \"Smuggling\"",
++   "city-insurgency-0-44 dm=false link: \"Smuggling\"",
++   "city-insurgency-0-44 dm=false import: \"Smuggling\"",
++   "city-insurgency-0-44 dm=true gallery: \"Smuggling\"",
++   "city-insurgency-0-44 dm=true map: \"Smuggling\"",
++   "city-insurgency-0-44 dm=true import: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=false gallery: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=false gallery: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=false map: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=false map: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=false link: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=false link: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=false import: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=false import: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=true gallery: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=true gallery: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=true map: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=true map: \"Smuggling\"",
++   "metropolis-indebted-0-56 dm=true import: {\"desc\":\"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and undetectable forgeries.\"}",
++   "metropolis-indebted-0-56 dm=true import: \"Smuggling\"",
++   "city-under_siege-0-48 dm=false gallery: \"Smuggling\"",
++   "city-under_siege-0-48 dm=false gallery: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=false map: \"Smuggling\"",
++   "city-under_siege-0-48 dm=false map: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=false link: \"Smuggling\"",
++   "city-under_siege-0-48 dm=false link: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=false import: \"Smuggling\"",
++   "city-under_siege-0-48 dm=false import: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=true gallery: \"Smuggling\"",
++   "city-under_siege-0-48 dm=true gallery: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=true map: \"Smuggling\"",
++   "city-under_siege-0-48 dm=true map: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++   "city-under_siege-0-48 dm=true import: \"Smuggling\"",
++   "city-under_siege-0-48 dm=true import: {\"desc\":\"Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.\"}",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:170:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > THE POWER OBSERVABLE / VR42: no served criminal power but the governing one, which IS served; the shares sum to 100 where any power is withheld (VR11/VR31); no relation names an unserved power
+AssertionError: expected [ …(38) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12 dm=false gallery: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=false gallery: shares [47,14,14,12]",
++   "town-infiltrated-0-12 dm=false map: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=false map: shares [47,14,14,12]",
++   "town-infiltrated-0-12 dm=false link: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=false link: shares [47,14,14,12]",
++   "town-infiltrated-0-12 dm=false import: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=false import: shares [47,14,14,12]",
++   "town-infiltrated-0-12 dm=true gallery: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=true map: criminal power Thieves' Guild",
++   "town-infiltrated-0-12 dm=true map: shares [47,14,14,12]",
++   "town-infiltrated-0-12 dm=true import: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=false gallery: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=false map: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=false link: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=false import: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=true gallery: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=true map: criminal power Thieves' Guild",
++   "city-insurgency-1-104 dm=true import: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=false gallery: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=false map: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=false link: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=false import: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=true gallery: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=true map: criminal power Thieves' Guild",
++   "city-politically_fractured-0-40 dm=true import: criminal power Thieves' Guild",
++   "city-infiltrated-1-112 dm=false gallery: shares [41,21,14,9,5]",
++   "city-infiltrated-1-112 dm=false map: shares [41,21,14,9,5]",
++   "city-infiltrated-1-112 dm=false link: shares [41,21,14,9,5]",
++   "city-infiltrated-1-112 dm=false import: shares [41,21,14,9,5]",
++   "city-infiltrated-1-112 dm=true map: shares [41,21,14,9,5]",
++   "metropolis-indebted-0-56 dm=false gallery: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=false map: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=false link: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=false import: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=true gallery: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=true map: criminal power Thieves' Guild",
++   "metropolis-indebted-0-56 dm=true import: criminal power Thieves' Guild",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:197:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > VR31 on EVERY read (marked and unmarked, towns with no hidden house too): wherever a power is withheld, whatever withheld it, the served shares sum to 100
+AssertionError: expected [ …(34) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12 open dm=false gallery: [47,14,14,12]",
++   "town-infiltrated-0-12 open dm=false map: [47,14,14,12]",
++   "town-infiltrated-0-12 open dm=false link: [47,14,14,12]",
++   "town-infiltrated-0-12 open dm=false import: [47,14,14,12]",
++   "town-infiltrated-0-12 open dm=true map: [47,14,14,12]",
++   "town-infiltrated-0-12 shown dm=false gallery: [47,14,14,12]",
++   "town-infiltrated-0-12 shown dm=false map: [47,14,14,12]",
++   "town-infiltrated-0-12 shown dm=false link: [47,14,14,12]",
++   "town-infiltrated-0-12 shown dm=false import: [47,14,14,12]",
++   "town-infiltrated-0-12 default dm=false gallery: [47,14,14,12]",
++   "town-infiltrated-0-12 default dm=false map: [47,14,14,12]",
++   "town-infiltrated-0-12 default dm=false link: [47,14,14,12]",
++   "town-infiltrated-0-12 default dm=false import: [47,14,14,12]",
++   "town-infiltrated-0-12 unmarked dm=false gallery: [47,14,14,12]",
++   "town-infiltrated-0-12 unmarked dm=false map: [47,14,14,12]",
++   "town-infiltrated-0-12 unmarked dm=false link: [47,14,14,12]",
++   "town-infiltrated-0-12 unmarked dm=false import: [47,14,14,12]",
++   "city-infiltrated-1-112 open dm=false gallery: [41,21,14,9,5]",
++   "city-infiltrated-1-112 open dm=false map: [41,21,14,9,5]",
++   "city-infiltrated-1-112 open dm=false link: [41,21,14,9,5]",
++   "city-infiltrated-1-112 open dm=false import: [41,21,14,9,5]",
++   "city-infiltrated-1-112 open dm=true map: [41,21,14,9,5]",
++   "city-infiltrated-1-112 shown dm=false gallery: [41,21,14,9,5]",
++   "city-infiltrated-1-112 shown dm=false map: [41,21,14,9,5]",
++   "city-infiltrated-1-112 shown dm=false link: [41,21,14,9,5]",
++   "city-infiltrated-1-112 shown dm=false import: [41,21,14,9,5]",
++   "city-infiltrated-1-112 default dm=false gallery: [41,21,14,9,5]",
++   "city-infiltrated-1-112 default dm=false map: [41,21,14,9,5]",
++   "city-infiltrated-1-112 default dm=false link: [41,21,14,9,5]",
++   "city-infiltrated-1-112 default dm=false import: [41,21,14,9,5]",
++   "city-infiltrated-1-112 unmarked dm=false gallery: [41,21,14,9,5]",
++   "city-infiltrated-1-112 unmarked dm=false map: [41,21,14,9,5]",
++   "city-infiltrated-1-112 unmarked dm=false link: [41,21,14,9,5]",
++   "city-infiltrated-1-112 unmarked dm=false import: [41,21,14,9,5]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:212:17
+    210|     note('R3 VR31: reads with a power withheld, judged:', judged);
+    211|     expect(judged).toBeGreaterThan(0);
+    212|     expect(bad).toEqual([]);
+       |                 ^
+    213|   });
+    214|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > THE POWER OBSERVABLE: the Defense key a visitor derives from the served document is "organized" only by the governing power (VR42)
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-politically_fractured-0-40: organized",
++   "metropolis-indebted-0-56: organized",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:226:17
+    224|     for (const r of reads.filter((x) => x.kind === 'open' && !x.dm && …
+    225|     note('R3 derived Defense keys, groupings open: hidden towns', J(ta…
+    226|     expect(bad).toEqual([]);
+       |                 ^
+    227|   });
+    228|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > (a) economy.complexity is the engine's own ladder over the served rows; the gates tail and the foothold word as the engine writes them for the served houses
+AssertionError: expected [ …(77) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-insurgency-1-104 gallery: gates tail",
++   "city-insurgency-1-104 map: gates tail",
++   "city-insurgency-1-104 link: gates tail",
++   "city-insurgency-1-104 import: gates tail",
++   "city-insurgency-1-104 gallery: gates tail",
++   "city-insurgency-1-104 map: gates tail",
++   "city-insurgency-1-104 import: gates tail",
++   "city-infiltrated-0-32 gallery: gates tail",
++   "city-infiltrated-0-32 map: gates tail",
++   "city-infiltrated-0-32 link: gates tail",
++   "city-infiltrated-0-32 import: gates tail",
++   "city-infiltrated-0-32 gallery: gates tail",
++   "city-infiltrated-0-32 map: gates tail",
++   "city-infiltrated-0-32 import: gates tail",
++   "city-politically_fractured-0-40 gallery: gates tail",
++   "city-politically_fractured-0-40 map: gates tail",
++   "city-politically_fractured-0-40 link: gates tail",
++   "city-politically_fractured-0-40 import: gates tail",
++   "city-politically_fractured-0-40 gallery: gates tail",
++   "city-politically_fractured-0-40 map: gates tail",
++   "city-politically_fractured-0-40 import: gates tail",
++   "city-none-1-113 gallery: gates tail",
++   "city-none-1-113 gallery: Very Safe gates line",
++   "city-none-1-113 map: gates tail",
++   "city-none-1-113 map: Very Safe gates line",
++   "city-none-1-113 link: gates tail",
++   "city-none-1-113 link: Very Safe gates line",
++   "city-none-1-113 import: gates tail",
++   "city-none-1-113 import: Very Safe gates line",
++   "city-none-1-113 gallery: gates tail",
++   "city-none-1-113 gallery: Very Safe gates line",
++   "city-none-1-113 map: gates tail",
++   "city-none-1-113 map: Very Safe gates line",
++   "city-none-1-113 import: gates tail",
++   "city-none-1-113 import: Very Safe gates line",
++   "metropolis-infiltrated-0-62 gallery: gates tail",
++   "metropolis-infiltrated-0-62 gallery: Very Safe gates line",
++   "metropolis-infiltrated-0-62 map: gates tail",
++   "metropolis-infiltrated-0-62 map: Very Safe gates line",
++   "metropolis-infiltrated-0-62 link: gates tail",
++   "metropolis-infiltrated-0-62 link: Very Safe gates line",
++   "metropolis-infiltrated-0-62 import: gates tail",
++   "metropolis-infiltrated-0-62 import: Very Safe gates line",
++   "metropolis-infiltrated-0-62 gallery: gates tail",
++   "metropolis-infiltrated-0-62 gallery: Very Safe gates line",
++   "metropolis-infiltrated-0-62 map: gates tail",
++   "metropolis-infiltrated-0-62 map: Very Safe gates line",
++   "metropolis-infiltrated-0-62 import: gates tail",
++   "metropolis-infiltrated-0-62 import: Very Safe gates line",
++   "city-infiltrated-1-112 gallery: foothold word",
++   "city-infiltrated-1-112 map: foothold word",
++   "city-infiltrated-1-112 link: foothold word",
++   "city-infiltrated-1-112 import: foothold word",
++   "city-infiltrated-1-112 gallery: foothold word",
++   "city-infiltrated-1-112 map: foothold word",
++   "city-infiltrated-1-112 import: foothold word",
++   "metropolis-none-0-61 gallery: gates tail",
++   "metropolis-none-0-61 map: gates tail",
++   "metropolis-none-0-61 link: gates tail",
++   "metropolis-none-0-61 import: gates tail",
++   "metropolis-none-0-61 gallery: gates tail",
++   "metropolis-none-0-61 map: gates tail",
++   "metropolis-none-0-61 import: gates tail",
++   "city-insurgency-0-44 gallery: gates tail",
++   "city-insurgency-0-44 map: gates tail",
++   "city-insurgency-0-44 link: gates tail",
++   "city-insurgency-0-44 import: gates tail",
++   "city-insurgency-0-44 gallery: gates tail",
++   "city-insurgency-0-44 map: gates tail",
++   "city-insurgency-0-44 import: gates tail",
++   "metropolis-indebted-0-56 gallery: gates tail",
++   "metropolis-indebted-0-56 map: gates tail",
++   "metropolis-indebted-0-56 link: gates tail",
++   "metropolis-indebted-0-56 import: gates tail",
++   "metropolis-indebted-0-56 gallery: gates tail",
++   "metropolis-indebted-0-56 map: gates tail",
++   "metropolis-indebted-0-56 import: gates tail",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:246:17
+    244|       if (!org && /limited foothold/.test(String(sp.safetyDesc || ''))…
+    245|     }
+    246|     expect(bad).toEqual([]);
+       |                 ^
+    247|   });
+    248|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > (b) a smuggling hook, a crime-wave tension or event, a rival-power description and the criminal desk leave where no served house or power accounts for them
+AssertionError: expected [ …(142) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-infiltrated-0-12 gallery: defense:criminal",
++   "town-infiltrated-0-12 map: defense:criminal",
++   "town-infiltrated-0-12 link: defense:criminal",
++   "town-infiltrated-0-12 import: defense:criminal",
++   "town-infiltrated-0-12 gallery: defense:criminal",
++   "town-infiltrated-0-12 map: defense:criminal",
++   "town-infiltrated-0-12 import: defense:criminal",
++   "city-insurgency-1-104 gallery: defense:criminal",
++   "city-insurgency-1-104 map: defense:criminal",
++   "city-insurgency-1-104 link: defense:criminal",
++   "city-insurgency-1-104 import: defense:criminal",
++   "city-insurgency-1-104 gallery: hook A smuggler wants one crate moved quietly",
++   "city-insurgency-1-104 gallery: defense:criminal",
++   "city-insurgency-1-104 map: defense:criminal",
++   "city-insurgency-1-104 import: hook A smuggler wants one crate moved quietly",
++   "city-insurgency-1-104 import: defense:criminal",
++   "city-infiltrated-0-32 gallery: defense:criminal",
++   "city-infiltrated-0-32 map: defense:criminal",
++   "city-infiltrated-0-32 link: defense:criminal",
++   "city-infiltrated-0-32 import: defense:criminal",
++   "city-infiltrated-0-32 gallery: hook The smugglers have stopped moving their ",
++   "city-infiltrated-0-32 gallery: defense:criminal",
++   "city-infiltrated-0-32 map: defense:criminal",
++   "city-infiltrated-0-32 import: hook The smugglers have stopped moving their ",
++   "city-infiltrated-0-32 import: defense:criminal",
++   "city-politically_fractured-0-40 gallery: defense:criminal",
++   "city-politically_fractured-0-40 map: defense:criminal",
++   "city-politically_fractured-0-40 link: defense:criminal",
++   "city-politically_fractured-0-40 import: defense:criminal",
++   "city-politically_fractured-0-40 gallery: hook The smugglers have stopped moving their ",
++   "city-politically_fractured-0-40 gallery: defense:criminal",
++   "city-politically_fractured-0-40 map: defense:criminal",
++   "city-politically_fractured-0-40 import: hook The smugglers have stopped moving their ",
++   "city-politically_fractured-0-40 import: defense:criminal",
++   "city-none-1-113 gallery: defense:criminal",
++   "city-none-1-113 map: defense:criminal",
++   "city-none-1-113 link: defense:criminal",
++   "city-none-1-113 import: defense:criminal",
++   "city-none-1-113 gallery: hook A smuggled load went missing on the way ",
++   "city-none-1-113 gallery: defense:criminal",
++   "city-none-1-113 map: defense:criminal",
++   "city-none-1-113 import: hook A smuggled load went missing on the way ",
++   "city-none-1-113 import: defense:criminal",
++   "metropolis-infiltrated-0-62 gallery: defense:criminal",
++   "metropolis-infiltrated-0-62 map: defense:criminal",
++   "metropolis-infiltrated-0-62 link: defense:criminal",
++   "metropolis-infiltrated-0-62 import: defense:criminal",
++   "metropolis-infiltrated-0-62 gallery: defense:criminal",
++   "metropolis-infiltrated-0-62 map: defense:criminal",
++   "metropolis-infiltrated-0-62 import: defense:criminal",
++   "city-infiltrated-1-112 gallery: crime-wave tension",
++   "city-infiltrated-1-112 gallery: defense:criminal",
++   "city-infiltrated-1-112 map: crime-wave tension",
++   "city-infiltrated-1-112 map: defense:criminal",
++   "city-infiltrated-1-112 link: crime-wave tension",
++   "city-infiltrated-1-112 link: defense:criminal",
++   "city-infiltrated-1-112 import: crime-wave tension",
++   "city-infiltrated-1-112 import: defense:criminal",
++   "city-infiltrated-1-112 gallery: crime-wave tension",
++   "city-infiltrated-1-112 gallery: defense:criminal",
++   "city-infiltrated-1-112 map: crime-wave tension",
++   "city-infiltrated-1-112 map: defense:criminal",
++   "city-infiltrated-1-112 import: crime-wave tension",
++   "city-infiltrated-1-112 import: defense:criminal",
++   "metropolis-none-0-61 gallery: crime-wave tension",
++   "metropolis-none-0-61 gallery: defense:criminal",
++   "metropolis-none-0-61 map: crime-wave tension",
++   "metropolis-none-0-61 map: defense:criminal",
++   "metropolis-none-0-61 link: crime-wave tension",
++   "metropolis-none-0-61 link: defense:criminal",
++   "metropolis-none-0-61 import: crime-wave tension",
++   "metropolis-none-0-61 import: defense:criminal",
++   "metropolis-none-0-61 gallery: hook The smugglers have stopped moving their ",
++   "metropolis-none-0-61 gallery: crime-wave tension",
++   "metropolis-none-0-61 gallery: defense:criminal",
++   "metropolis-none-0-61 map: crime-wave tension",
++   "metropolis-none-0-61 map: defense:criminal",
++   "metropolis-none-0-61 import: hook The smugglers have stopped moving their ",
++   "metropolis-none-0-61 import: crime-wave tension",
++   "metropolis-none-0-61 import: defense:criminal",
++   "city-insurgency-0-44 gallery: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 gallery: defense:criminal",
++   "city-insurgency-0-44 map: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 map: defense:criminal",
++   "city-insurgency-0-44 link: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 link: defense:criminal",
++   "city-insurgency-0-44 import: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 import: defense:criminal",
++   "city-insurgency-0-44 gallery: hook A smuggler wants one crate moved quietly",
++   "city-insurgency-0-44 gallery: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 gallery: defense:criminal",
++   "city-insurgency-0-44 map: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 map: defense:criminal",
++   "city-insurgency-0-44 import: hook A smuggler wants one crate moved quietly",
++   "city-insurgency-0-44 import: rival-power desc Merchant oligarchy",
++   "city-insurgency-0-44 import: defense:criminal",
++   "metropolis-indebted-0-56 gallery: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 gallery: defense:criminal",
++   "metropolis-indebted-0-56 map: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 map: defense:criminal",
++   "metropolis-indebted-0-56 link: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 link: defense:criminal",
++   "metropolis-indebted-0-56 import: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 import: defense:criminal",
++   "metropolis-indebted-0-56 gallery: hook A smuggler wants one crate moved quietly",
++   "metropolis-indebted-0-56 gallery: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 gallery: defense:criminal",
++   "metropolis-indebted-0-56 map: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 map: defense:criminal",
++   "metropolis-indebted-0-56 import: hook A smuggler wants one crate moved quietly",
++   "metropolis-indebted-0-56 import: rival-power desc Merchant oligarchy",
++   "metropolis-indebted-0-56 import: defense:criminal",
++   "town-indebted-0-16 gallery: crime-wave tension",
++   "town-indebted-0-16 gallery: defense:criminal",
++   "town-indebted-0-16 map: crime-wave tension",
++   "town-indebted-0-16 map: defense:criminal",
++   "town-indebted-0-16 link: crime-wave tension",
++   "town-indebted-0-16 link: defense:criminal",
++   "town-indebted-0-16 import: crime-wave tension",
++   "town-indebted-0-16 import: defense:criminal",
++   "town-indebted-0-16 gallery: crime-wave tension",
++   "town-indebted-0-16 gallery: defense:criminal",
++   "town-indebted-0-16 map: crime-wave tension",
++   "town-indebted-0-16 map: defense:criminal",
++   "town-indebted-0-16 import: crime-wave tension",
++   "town-indebted-0-16 import: defense:criminal",
++   "city-under_siege-0-48 gallery: crime-wave tension",
++   "city-under_siege-0-48 gallery: defense:criminal",
++   "city-under_siege-0-48 map: crime-wave tension",
++   "city-under_siege-0-48 map: defense:criminal",
++   "city-under_siege-0-48 link: crime-wave tension",
++   "city-under_siege-0-48 link: defense:criminal",
++   "city-under_siege-0-48 import: crime-wave tension",
++   "city-under_siege-0-48 import: defense:criminal",
++   "city-under_siege-0-48 gallery: hook The last smuggled load before the siege ",
++   "city-under_siege-0-48 gallery: crime-wave tension",
++   "city-under_siege-0-48 gallery: defense:criminal",
++   "city-under_siege-0-48 map: crime-wave tension",
++   "city-under_siege-0-48 map: defense:criminal",
++   "city-under_siege-0-48 import: hook The last smuggled load before the siege ",
++   "city-under_siege-0-48 import: crime-wave tension",
++   "city-under_siege-0-48 import: defense:criminal",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:261:17
+    259|       if (d.publicProse?.blocks && 'defense:criminal' in d.publicProse…
+    260|     }
+    261|     expect(bad).toEqual([]);
+       |                 ^
+    262|   });
+    263|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > safety.economicDragDesc leaves where a hidden house raised it (the criminal-house flag or the organised name it raised); VR42: where only the governing body stands it stays
+AssertionError: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-insurgency-1-104: drag served",
++   "city-politically_fractured-0-40: drag served",
++   "city-insurgency-0-44: drag served",
++   "metropolis-indebted-0-56: drag served",
++   "town-indebted-0-16: drag served",
++   "city-under_siege-0-48: drag served",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:276:17
+    274|     }
+    275|     note('R3 VR42 towns, economicDragDesc:', J(vr42));
+    276|     expect(bad).toEqual([]);
+       |                 ^
+    277|   });
+    278|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 4 passed (11)
+   Start at  06:37:06
+   Duration  154.45s (transform 3.59s, setup 44ms, import 148ms, tests 154.11s, environment 0ms)
+

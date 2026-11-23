@@ -1,0 +1,45 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/7e9291bd-44ea-54a0-8961-9933d99191c8/scratchpad/wt
+
+ ❯ tests/security/galleryMapMemberCount.pglite.test.js (11 tests | 11 skipped) 3347ms
+ ❯ tests/security/gallerySanitizer.pglite.test.js (36 tests | 6 skipped) 25745ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite)
+error: function public._gallery_npc_key(jsonb) does not exist
+ ❯ pe.Le node_modules/@electric-sql/pg-protocol/src/parser.ts:423:39
+ ❯ pe.Xe node_modules/@electric-sql/pg-protocol/src/parser.ts:208:8
+ ❯ pe.parse node_modules/@electric-sql/pg-protocol/src/parser.ts:99:38
+ ❯ node_modules/@electric-sql/pglite/src/pglite.ts:684:27
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5922082
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2616592
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649078
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649682
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5570415
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:4097716
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/gallerySanitizer.pglite.test.js > gallery per-member overrides — net-current execution (pglite)
+error: function public._gallery_veil_roster_splice(jsonb, jsonb, boolean, boolean, boolean) does not exist
+ ❯ pe.Le node_modules/@electric-sql/pg-protocol/src/parser.ts:423:39
+ ❯ pe.Xe node_modules/@electric-sql/pg-protocol/src/parser.ts:208:8
+ ❯ pe.parse node_modules/@electric-sql/pg-protocol/src/parser.ts:99:38
+ ❯ node_modules/@electric-sql/pglite/src/pglite.ts:684:27
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5922082
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2616592
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649078
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649682
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5570415
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:4097716
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  30 passed | 17 skipped (47)
+   Start at  23:17:37
+   Duration  26.10s (transform 2.14s, setup 75ms, import 1.23s, tests 29.09s, environment 0ms)
+
+exit 1

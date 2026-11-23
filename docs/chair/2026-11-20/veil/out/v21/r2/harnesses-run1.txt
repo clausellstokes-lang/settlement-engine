@@ -1,0 +1,44 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 17664 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r2
+
+ ❯ tests/security/rosterChoiceInversion.pglite.test.js (4 tests | 1 failed) 22169ms
+     × MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it) 1520ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it)
+AssertionError: expected [ 'economy.prosperity', …(2) ] to deeply equal [ 'economy.prosperity', …(5) ]
+
+- Expected
++ Received
+
+  [
+    "economy.prosperity",
+    "economy.prosperityStanding",
+-   "legitimacy.colours",
+-   "legitimacy.label",
+-   "legitimacy.score",
+    "safety.safetyLabel",
+  ]
+
+ ❯ tests/security/rosterChoiceInversion.pglite.test.js:187:23
+    185|     const inverting = [...where].filter(([, w]) => w.hidden.length && …
+    186|     const notRederivable = [...where].filter(([, w]) => w.open.length)…
+    187|     expect(inverting).toEqual([...KNOWN_INVERTING].sort());
+       |                       ^
+    188|     expect(notRederivable).toEqual([...KNOWN_NOT_REDERIVABLE].sort());
+    189|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 7 passed (8)
+   Start at  03:31:00
+   Duration  138.23s (transform 12.30s, setup 59ms, import 282ms, tests 159.54s, environment 550ms)
+
+[gate-tail] end:  03:33:18 up 56 min,  0 user,  load average: 3.25, 2.29, 2.07
+[gate-tail] full log: /tmp/gate-tail.17672.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+rc=1

@@ -1,0 +1,36 @@
+VEIL-15 ITEM 1, GREEN (the impression by a shared run of twelve; the worktree, base 625e2a8ef + this change)
+Bytes: 211 eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01, down ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f
+  (no diff against 625e2a8ef); 212 9db363fa570cae65e1e1e647525847ff4372ab00569bceba572c653fc4c2283d,
+  down 654d62aa6905aae5eea7518af9f54680cfc8192269110aae41d7384a1cac6d3e.
+
+THE GUARDS (one vitest run of the six files through gate-tail; JSON reporter for the counts), base -> after:
+  galleryVeilHandRows 14 of 14 -> 14 of 14 (V7-2 THE FIVE HOMES re-keyed; VEIL-13 RULING 5 green)
+  gallerySecondHomes 6 of 6 -> 6 of 6;  galleryVeilCures 32 of 32 -> 32 of 32 (the rollback pin and V5-7 among them)
+  galleryServerVeil 17 of 17 -> 17 of 17;  gallerySanitizer 36 of 36 -> 36 of 36;  galleryMapMemberCount 11 of 11 -> 11 of 11
+  116 of 116 -> 116 of 116, exit 0 both
+THE ARM after: the 27 WITHHELD rows (14 kept, 13 new) and Saltmere appended withheld in 8 of 8 reads; the 6 ARRIVING
+  rows, another person's impression, the appearance open and the other words-rules' controls as stored; server against
+  twin 0 paths. THE RUN IS ONE: the windows of 128 texts of the basic plane (605,360 distinct windows) the same set in
+  both engines; 168 pairs (40 plants: 32 withheld, 8 arriving; 128 basic-plane pairs: 69 withheld, 59 arriving), one
+  verdict from the server's arm (_gallery_veil_card), the twin's (withholdImpression) and the literal form in each
+  engine (position() over the server's fold, includes() over the twin's code points).
+THE ARM IS LIVE: a mutant twin reading UTF-16 units (caseFold(v).split('')) in a scratch copy: exit 1, the eleven-astral
+  row withheld by the twin in its 2 reads, 2 paths server against twin.
+THE V13-1 PLANT ON THE LINK: town-p and town-pc (veil-probe-11/hand) through hand/run.sh on a chain of the base's
+  migrations and one of this tree's: 18 of 18 responses (base, veil, Reveal DM x gallery, link, import) 0 paths differ;
+  COVERTMARK in no link response either side (only Reveal DM's gallery and import keep it, as at the base).
+THE ACCEPTANCE RUN (run-all.sh, this tree): exit 1; checks 37, PASS 35, FAIL 2 (a07, d06 only); e06 PASS; server
+  against twin all 15 equal; V7-10 PASS (3,000 deep: x211 31 ms, x212 50 ms); V7-6 PASS twice (200 x 5000: 341 / 353
+  ms; 600 x 10000: 1093 / 1300 ms).
+THE 300 KB COST (measure/run12-cost.mjs, local chains, median of three, ms; shut / open; base's clause arm in brackets):
+  Latin (307,204 code points)  server 794-856 / 19-30 (base 244-4150)  twin 550-587 / 392-400
+  Greek (172,018 code points)  server 1578-1632 / 21-41 (base 4652-6337)  twin 909-929 / 813-853
+  Han (133,880 code points)    server 1308-1342 / 22-53 (base 3700-4938)  twin 213-215 / 109-110
+  every read completed, none raised; no shared run: the impression sent; a shared run: withheld; no bound needed.
+  Linear: the windows of a quarter, a half and the whole Greek fold 45 / 95 / 190 ms. Of a 300 KB Greek string's
+  753 ms, 564 are the existing fold (_gallery_veil_case_fold), which the clause arm paid too.
+THE GATES (gate-tail): typecheck:domain:strict 1113 (ceiling 1113) exit 0; typecheck:ratchet 167 (ceiling 167) exit 0;
+  eslint (gallerySecondHomes.js, galleryVeil.js, galleryVeilHandRows.pglite.test.js) exit 0.
+THE LIGHTING WALKER (tests/lint/sovereigntyLightingContract.walker.test.js): 34 of 34, exit 0. The census not re-taken.
+212 ONE TRANSACTION, IDEMPOTENT: applied a second time on its own chain with psql -1: exit 0; 69 _gallery_veil* helpers;
+  _gallery_veil_clauses absent.

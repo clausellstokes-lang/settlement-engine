@@ -1,0 +1,101 @@
+towns 24
+READER B (all withheld at once):
+   publicProseRecomposed :: differs 24
+   pdfViewModel :: differs 24
+   journalPages :: differs 21
+   normalizeIncomeSources :: differs 24
+   crisisPage :: differs 21
+   tonightSheet :: differs 20
+   dailyLifeContext :: differs 24
+   readCorruptionClimate :: differs 24
+   deriveUndercity :: differs 24
+   densityCandidatePowersFrom :: differs 23
+   townLayoutV2 :: differs 24
+   townMapModelV1 :: differs 24
+   causalViews :: differs 24
+   espionage :: differs 24
+   entityCatalog :: differs 24
+   defenseLedger :: differs 24
+   deriveAllDistricts :: differs 22
+   substrateSignature :: differs 22
+   treatyGrainDraw :: differs 13
+activeConditions[].severity => publicProseRecomposed:6, townLayoutV2:8, townMapModelV1:8, causalViews:17
+activeConditions[].severityBand => (no reader differs)
+defenseProfile.readiness.score => publicProseRecomposed:22, causalViews:24, defenseLedger:24
+economicState.compound.criminalEffective => densityCandidatePowersFrom:10
+economicState.compound.criminalPreStress => (no reader differs)
+economicState.compound.magicInfluence => densityCandidatePowersFrom:10
+economicState.compound.militaryEffective => dailyLifeContext:23, densityCandidatePowersFrom:4, publicProseRecomposed:1
+economicState.compound.religionInfluence => densityCandidatePowersFrom:15
+economicState.foodSecurity.storageMonths => treatyGrainDraw:13
+economicState.foodSecurity.storageNote => (no reader differs)
+economicState.incomeSources[].weight => pdfViewModel:24, normalizeIncomeSources:24
+economicState.safetyProfile.compound.criminalEffective => readCorruptionClimate:24, deriveUndercity:24, espionage:24
+economicState.safetyProfile.compound.criminalPreStress => (no reader differs)
+economicState.safetyProfile.compound.economyOutput => (no reader differs)
+economicState.safetyProfile.compound.magicInfluence => publicProseRecomposed:2
+economicState.safetyProfile.compound.militaryEffective => (no reader differs)
+economicState.safetyProfile.compound.religionInfluence => publicProseRecomposed:9
+economicState.safetyProfile.flags.anyActive => (no reader differs)
+economicState.safetyProfile.flags.arcaneBlackMarket => (no reader differs)
+economicState.safetyProfile.flags.merchantArmy => (no reader differs)
+economicState.safetyProfile.flags.religiousFraud => publicProseRecomposed:2
+economicState.situationDesc => (no reader differs)
+history.eventsTimeline[].anchored => (no reader differs)
+history.eventsTimeline[].year => (no reader differs)
+history.historicalEvents[].anchored => (no reader differs)
+history.legacyAnnotations[] => publicProseRecomposed:23, causalViews:15, entityCatalog:15
+history.legacyAnnotations[].eventName => publicProseRecomposed:23, causalViews:15
+history.legacyAnnotations[].eventType => (no reader differs)
+history.legacyAnnotations[].severity => (no reader differs)
+history.legacyAnnotations[].yearsAgo => publicProseRecomposed:23, causalViews:15, entityCatalog:7
+powerStructure.economyInputFingerprint => (no reader differs)
+powerStructure.factionRelationships[].ratio => (no reader differs)
+powerStructure.factions[].contestsNiche => (no reader differs)
+powerStructure.factions[].rawPower => pdfViewModel:24
+powerStructure.publicLegitimacy.breakdown.prosperity => publicProseRecomposed:16, pdfViewModel:24
+powerStructure.publicLegitimacy.breakdown.safety => publicProseRecomposed:20, pdfViewModel:24
+powerStructure.publicLegitimacy.crimMultiplier => (no reader differs)
+powerStructure.publicLegitimacy.govMultiplier => publicProseRecomposed:24
+powerStructure.publicLegitimacy.isApproved => (no reader differs)
+powerStructure.publicLegitimacy.isContested => (no reader differs)
+powerStructure.publicLegitimacy.isEndorsed => (no reader differs)
+powerStructure.publicLegitimacy.isTolerated => (no reader differs)
+publicProse.blocks.defense:posture.posture.field => (no reader differs)
+publicProse.blocks.defense:posture.prize.field => (no reader differs)
+publicProse.blocks.defense:posture.terrain.field => (no reader differs)
+publicProse.blocks.defense:state.firstSurvey.field => (no reader differs)
+publicProse.blocks.defense:state.publicOrder.field => (no reader differs)
+publicProse.blocks.defense:state.publicOrder.rung.glance => (no reader differs)
+publicProse.blocks.economy:daily_life.incomeWeight => (no reader differs)
+publicProse.blocks.economy:daily_life.shadowEconomy => (no reader differs)
+publicProse.blocks.economy:economics.prosperityHeader.detail[].value => (no reader differs)
+publicProse.blocks.economy:economics.prosperityHeader.glance => (no reader differs)
+publicProse.blocks.economy:economics.prosperityRung.glance => (no reader differs)
+publicProse.blocks.economy:resources.incomeWeight => (no reader differs)
+publicProse.blocks.economy:resources.shadowEconomy => (no reader differs)
+publicProse.blocks.economy:services.incomeWeight => (no reader differs)
+publicProse.blocks.economy:services.shadowEconomy => (no reader differs)
+publicProse.blocks.power:desk.legitimacyBanner.glance => (no reader differs)
+publicProse.blocks.power:desk.legitimacyLens => (no reader differs)
+publicProse.blocks.power:desk.stabilityHeader.glance => (no reader differs)
+publicProse.blocks.power:desk.successionRisk.glance => (no reader differs)
+publicProse.blocks.stressors:overview.conditionSeverity.glance => (no reader differs)
+spatialLayout.quarters[] (only in A) => pdfViewModel:22, deriveAllDistricts:22, townLayoutV2:22, townMapModelV1:22, causalViews:22, substrateSignature:22, entityCatalog:22
+stress.cast.absent[] => (no reader differs)
+stress.cast.roles[].reason => pdfViewModel:18, journalPages:18, tonightSheet:18
+stress.cast.roles[].role => pdfViewModel:18, journalPages:18, tonightSheet:18
+stress.cast.stakes[] => pdfViewModel:10, journalPages:10, tonightSheet:10
+stress.cast.stakes[].factionId => pdfViewModel:10, journalPages:10, tonightSheet:10
+stress.cast.stakes[].reason => pdfViewModel:10, pdfViewModel[NEW NaN/undefined/null]:10, journalPages:10, journalPages[NEW NaN/undefined/null]:10, tonightSheet:10, tonightSheet[NEW NaN/undefined/null]:10
+stress.cast.stakes[].stake => pdfViewModel:10, journalPages:10, tonightSheet:10
+stressors.cast.absent[] => crisisPage:13
+stressors.cast.roles[].reason => journalPages:18, crisisPage:18
+stressors.cast.roles[].role => journalPages:18, crisisPage:18
+stressors.cast.stakes[] => journalPages:21, crisisPage:21
+stressors.cast.stakes[].factionId => journalPages:21, crisisPage:21
+stressors.cast.stakes[].reason => journalPages:21, crisisPage:21
+stressors.cast.stakes[].stake => journalPages:21, journalPages[NEW NaN/undefined/null]:21, crisisPage:21
+economicState.compound.raw => publicProseRecomposed:1
+economicState.safetyProfile.compound => readCorruptionClimate:24, deriveUndercity:24, espionage:24, publicProseRecomposed:11
+economicState.safetyProfile.safetyRatio => pdfViewModel:24, dailyLifeContext:22, readCorruptionClimate:24

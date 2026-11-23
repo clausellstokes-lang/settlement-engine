@@ -1,0 +1,99 @@
+WHAT THE REBUILT NAME SEARCH CHANGES ON BORN TOWNS: the client's twin at 4f7c60cbb (the eighth seat's sweep) against the twin as committed with V7-1, on the eight towns of the routine pin (tests/security/galleryServerVeil.pglite.test.js: the same seeds and dials), each shared three ways (the default veil; every eye shut; every house hidden) with Reveal DM off and on. Run once, by a scratch test that is not committed (it imports the old twin from a git archive of 4f7c60cbb). A path counts when the two projections differ there.
+
+== server-veil-village-3 | default | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-3 | default+dm | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-3 | all | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-3 | all+dm | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-3 | houses | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-3 | houses+dm | paths that differ: 0 | houses listed 11 of 12
+== server-veil-village-0 | default | paths that differ: 0 | houses listed 12 of 12
+== server-veil-village-0 | default+dm | paths that differ: 0 | houses listed 12 of 12
+== server-veil-village-0 | all | paths that differ: 0 | houses listed 12 of 12
+== server-veil-village-0 | all+dm | paths that differ: 0 | houses listed 12 of 12
+== server-veil-village-0 | houses | paths that differ: 0 | houses listed 12 of 12
+== server-veil-village-0 | houses+dm | paths that differ: 0 | houses listed 12 of 12
+== server-veil-town-2 | default | paths that differ: 0 | houses listed 32 of 36
+== server-veil-town-2 | default+dm | paths that differ: 4 | houses listed 32 of 36
+== server-veil-town-2 | all | paths that differ: 0 | houses listed 32 of 36
+== server-veil-town-2 | all+dm | paths that differ: 0 | houses listed 32 of 36
+== server-veil-town-2 | houses | paths that differ: 0 | houses listed 32 of 36
+== server-veil-town-2 | houses+dm | paths that differ: 4 | houses listed 32 of 36
+== server-veil-town-0 | default | paths that differ: 0 | houses listed 45 of 45
+== server-veil-town-0 | default+dm | paths that differ: 0 | houses listed 45 of 45
+== server-veil-town-0 | all | paths that differ: 0 | houses listed 45 of 45
+== server-veil-town-0 | all+dm | paths that differ: 0 | houses listed 45 of 45
+== server-veil-town-0 | houses | paths that differ: 0 | houses listed 45 of 45
+== server-veil-town-0 | houses+dm | paths that differ: 0 | houses listed 45 of 45
+== server-veil-city-2 | default | paths that differ: 0 | houses listed 77 of 82
+== server-veil-city-2 | default+dm | paths that differ: 43 | houses listed 77 of 82
+== server-veil-city-2 | all | paths that differ: 0 | houses listed 77 of 82
+== server-veil-city-2 | all+dm | paths that differ: 6 | houses listed 77 of 82
+== server-veil-city-2 | houses | paths that differ: 0 | houses listed 77 of 82
+== server-veil-city-2 | houses+dm | paths that differ: 43 | houses listed 77 of 82
+== server-veil-city-infiltrated-0 | default | paths that differ: 0 | houses listed 74 of 78
+== server-veil-city-infiltrated-0 | default+dm | paths that differ: 1 | houses listed 74 of 78
+== server-veil-city-infiltrated-0 | all | paths that differ: 0 | houses listed 74 of 78
+== server-veil-city-infiltrated-0 | all+dm | paths that differ: 1 | houses listed 74 of 78
+== server-veil-city-infiltrated-0 | houses | paths that differ: 0 | houses listed 74 of 78
+== server-veil-city-infiltrated-0 | houses+dm | paths that differ: 1 | houses listed 74 of 78
+== server-veil-metropolis-3 | default | paths that differ: 0 | houses listed 101 of 109
+== server-veil-metropolis-3 | default+dm | paths that differ: 2 | houses listed 101 of 109
+== server-veil-metropolis-3 | all | paths that differ: 0 | houses listed 101 of 109
+== server-veil-metropolis-3 | all+dm | paths that differ: 2 | houses listed 101 of 109
+== server-veil-metropolis-3 | houses | paths that differ: 0 | houses listed 101 of 109
+== server-veil-metropolis-3 | houses+dm | paths that differ: 2 | houses listed 101 of 109
+== server-veil-metropolis-7 | default | paths that differ: 5 | houses listed 82 of 89
+== server-veil-metropolis-7 | default+dm | paths that differ: 60 | houses listed 82 of 89
+== server-veil-metropolis-7 | all | paths that differ: 3 | houses listed 82 of 89
+== server-veil-metropolis-7 | all+dm | paths that differ: 9 | houses listed 82 of 89
+== server-veil-metropolis-7 | houses | paths that differ: 5 | houses listed 82 of 89
+== server-veil-metropolis-7 | houses+dm | paths that differ: 60 | houses listed 82 of 89
+
+WHAT DIFFERS, by the value the old twin sent and the new one does not (a count over all 48 projections; digits written N):
+     76 npcs | "Thieves' Guild" | new undefined
+      9 simulationTrace | [{"target":"publicOrder","effect":"eroded"},{"target":"blackMarket","effect":"reinforced"}] | new [{
+      6 powerStructure | ["Thieves' Guild","Military/Guard"] | new ["Military/Guard"]
+      6 powerStructure | ["Thieves' Guild","Merchant Guilds"] | new ["Merchant Guilds"]
+      6 powerStructure | "Military/Guard knows where Thieves' Guild works, and Thieves' Guild knows the patrol rota. Neither 
+      6 powerStructure | "Ask: which specific officials have arrangements with Thieves' Guild? The answer drives dozens of pl
+      4 relationships | "the fence" | new undefined
+      4 powerStructure | "Thieves' Guild and Merchant Guilds are in high conflict over weights and measures used in trade. Th
+      4 npcs | "the fence" | new undefined
+      4 npcs | "End the bad blood between Military/Guard and Thieves' Guild before the next generation inherits it.
+      4 history | ["Military/Guard","Vigilantes","Thieves' Guild"] | new ["Military/Guard","Vigilantes"]
+      4 conflicts | ["Thieves' Guild","Merchant Guilds"] | new ["Merchant Guilds"]
+      3 powerStructure | ["Merchant oligarchy","Thieves' Guild"] | new ["Merchant oligarchy"]
+      3 powerStructure | ["Grand Council","Thieves' Guild"] | new ["Grand Council"]
+      3 powerStructure | "Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it save
+      3 powerStructure | "Grand Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. Th
+      2 npcs | "Win one ally of Thieves' Guild over to the side of Grand Council." | new undefined
+      2 npcs | "Stop Thieves' Guild from taking anything more from Military/Guard this season." | new undefined
+      2 npcs | "Stop Thieves' Guild from taking anything more from Grand Council this season." | new undefined
+      2 npcs | "See Thieves' Guild too weak to threaten Merchant oligarchy again." | new undefined
+      2 npcs | "See Thieves' Guild too weak to threaten Grand Council again." | new undefined
+      2 npcs | "Pass Vinod Verma a favour from Thieves' Guild that they could not have won alone." | new undefined
+      2 npcs | "Outlast Thieves' Guild, and still be standing with Merchant oligarchy when they are gone." | new un
+      2 npcs | "Outlast Thieves' Guild, and still be standing with Grand Council when they are gone." | new undefin
+(the rest: more goals of people that name Thieves' Guild, two a sentence)
+
+THE HOUSES HIDDEN WHOLE AND THE POWERS SENT, on three of them (default veil):
+== server-veil-metropolis-7 dm false
+houses hidden whole: ["Smuggling network","Thieves' guild (powerful)","Front businesses","Underground network","Underground city","Whisper market","Assassins' guild"]
+powers sent: ["Grand Council","Thieves' Guild","Military/Guard","Arcane Orders","Noble Houses","Merchant Guilds"]
+== server-veil-metropolis-7 dm true
+houses hidden whole: ["Smuggling network","Thieves' guild (powerful)","Front businesses","Underground network","Underground city","Whisper market","Assassins' guild"]
+powers sent: ["Grand Council","Thieves' Guild","Military/Guard","Arcane Orders","Noble Houses","Merchant Guilds"]
+== server-veil-city-2 dm false
+houses hidden whole: ["Smuggling network","Thieves' guild chapter","Front businesses","Whisper market","Black market"]
+powers sent: ["Merchant oligarchy","Merchant Guilds","Military/Guard","Religious Authorities","Craft Guilds","Arcane Orders","Noble Families","Thieves' Guild"]
+== server-veil-city-2 dm true
+houses hidden whole: ["Smuggling network","Thieves' guild chapter","Front businesses","Whisper market","Black market"]
+powers sent: ["Merchant oligarchy","Merchant Guilds","Military/Guard","Religious Authorities","Craft Guilds","Arcane Orders","Noble Families","Thieves' Guild"]
+== server-veil-town-2 dm false
+houses hidden whole: ["Fence (word of mouth)","Street gang","Front businesses","Underground network"]
+powers sent: ["Corrupt Council","Military/Guard","Religious Authorities","Merchant Guilds","Thieves' Guild","Landed Gentry","Craft Guilds"]
+== server-veil-town-2 dm true
+houses hidden whole: ["Fence (word of mouth)","Street gang","Front businesses","Underground network"]
+powers sent: ["Corrupt Council","Military/Guard","Religious Authorities","Merchant Guilds","Thieves' Guild","Landed Gentry","Craft Guilds"]
+
+READ: (1) metropolis-7 hides the house "Thieves' guild (powerful)": its name without the bracketed qualifier is "Thieves' guild", which is also the name of the SHOWN power "Thieves' Guild"; the power's own record keeps its name (the floor) and every other string that names it goes (5 on a public read, 60 with Reveal DM). (2) city-2 hides "Thieves' guild chapter": on a Reveal-DM read a chain's processing name only that house answers to is a name of it, and the same strings go (43). (3) town-2 hides "Fence (word of mouth)": the role and title "the fence" go, and two ties' copies of it. (4) the trace's downstream effect whose target is "blackMarket" goes where the house "Black market" is hidden (the camel-cased name; 9 entries). A RULING IS OWED on (1) and (2): whether a shown power's name is taken where it is not the power's own record.

@@ -1,0 +1,15 @@
+R3-TELL-3 unit 2, the drag key on the hiding plant, by state (reads): {"ABSENT":50} | faults 50 | the nothing-hidden control: reads 50 faults 0
+R3-TELL-3 unit 3: reads 100 | faults 0 
+R3-TELL-3 unit 4b (RED ARM), families ["lodging","food","equipment","magic","information","healing","transport","legal","employment","entertainment","criminal","curiosities"] | the swept row per family (engine:state reads): 
+  lodging: {"server:HUSK":25,"twin:HUSK":25}
+  food: {"server:HUSK":25,"twin:HUSK":25}
+  equipment: {"server:HUSK":25,"twin:HUSK":25}
+  magic: {"server:HUSK":25,"twin:HUSK":25}
+  information: {"server:HUSK":25,"twin:HUSK":25}
+  healing: {"server:HUSK":25,"twin:HUSK":25}
+  transport: {"server:HUSK":25,"twin:HUSK":25}
+  legal: {"server:HUSK":25,"twin:HUSK":25}
+  employment: {"server:HUSK":25,"twin:HUSK":25}
+  entertainment: {"server:HUSK":25,"twin:HUSK":25}
+  criminal: {"server:withheld":15,"twin:withheld":15}
+  curiosities: {"server:HUSK":25,"twin:HUSK":25} | husks served 550

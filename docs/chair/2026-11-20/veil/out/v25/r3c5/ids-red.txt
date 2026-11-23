@@ -1,0 +1,93 @@
+
+- []
++ [
++   "hand-ids open dm=true gallery: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true gallery: the number-id person's memberships [{\"role\":\"member\"},{\"role\":\"member\",\"power\":\"Fishers\"}]",
++   "hand-ids open dm=true gallery: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true gallery: the no-id person's memberships [{\"role\":\"fence\"}]",
++   "hand-ids open dm=true import: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true import: the number-id person's memberships [{\"role\":\"member\"},{\"role\":\"member\",\"power\":\"Fishers\"}]",
++   "hand-ids open dm=true import: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true import: the no-id person's memberships [{\"role\":\"fence\"}]",
++   "hand-ids open dm=true twin: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true twin: the number-id person's memberships [{\"role\":\"member\"},{\"power\":\"Fishers\",\"role\":\"member\"}]",
++   "hand-ids open dm=true twin: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids open dm=true twin: the no-id person's memberships [{\"role\":\"fence\"}]",
++   "hand-ids openM dm=true gallery: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true gallery: the number-id person's memberships [{\"role\":\"member\"},{\"role\":\"member\",\"power\":\"Fishers\"}]",
++   "hand-ids openM dm=true gallery: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true gallery: the no-id person's memberships [{\"role\":\"fence\"}]",
++   "hand-ids openM dm=true import: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true import: the number-id person's memberships [{\"role\":\"member\"},{\"role\":\"member\",\"power\":\"Fishers\"}]",
++   "hand-ids openM dm=true import: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true import: the no-id person's memberships [{\"role\":\"fence\"}]",
++   "hand-ids openM dm=true twin: the number-id person's goal served as a husk {\"long\":\"Keep the stall.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true twin: the number-id person's memberships [{\"role\":\"member\"},{\"power\":\"Fishers\",\"role\":\"member\"}]",
++   "hand-ids openM dm=true twin: the no-id person's goal served as a husk {\"long\":\"Save a dowry.\",\"intent\":{\"short\":{\"target\":{\"kind\":\"power\"}}}}",
++   "hand-ids openM dm=true twin: the no-id person's memberships [{\"role\":\"fence\"}]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:772:17
+    770|     note('R3-CURE-5 (14:21): the number-id and no-id people judged on'…
+    771|     expect(judged).toBeGreaterThan(0);
+    772|     expect(bad).toEqual([]);
+       |                 ^
+    773|   });
+    774|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power's name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5's)
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-ids open dm=true gallery: npcs[].memberships[].power",
++   "hand-ids open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "hand-ids open dm=true gallery: npcs[].memberships[].power",
++   "hand-ids open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "hand-ids open dm=true import: npcs[].memberships[].power",
++   "hand-ids open dm=true import: npcs[].goal.intent.short.target.id",
++   "hand-ids open dm=true import: npcs[].memberships[].power",
++   "hand-ids open dm=true import: npcs[].goal.intent.short.target.id",
++   "hand-ids open dm=true twin: npcs[].memberships[].power",
++   "hand-ids open dm=true twin: npcs[].goal.intent.short.target.id",
++   "hand-ids open dm=true twin: npcs[].memberships[].power",
++   "hand-ids open dm=true twin: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true gallery: npcs[].memberships[].power",
++   "hand-ids openM dm=true gallery: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true gallery: npcs[].memberships[].power",
++   "hand-ids openM dm=true gallery: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true import: npcs[].memberships[].power",
++   "hand-ids openM dm=true import: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true import: npcs[].memberships[].power",
++   "hand-ids openM dm=true import: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true twin: npcs[].memberships[].power",
++   "hand-ids openM dm=true twin: npcs[].goal.intent.short.target.id",
++   "hand-ids openM dm=true twin: npcs[].memberships[].power",
++   "hand-ids openM dm=true twin: npcs[].goal.intent.short.target.id",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:806:30
+    804|     expect(judged).toBeGreaterThan(0);
+    805|     expect(compared).toBeGreaterThan(0);
+    806|     expect(bad.slice(0, 60)).toEqual([]);
+       |                              ^
+    807|   }, ARM_TIMEOUT_MS);
+    808|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 21 passed (23)
+   Start at  14:24:26
+   Duration  579.70s (transform 3.63s, setup 36ms, import 153ms, tests 579.37s, environment 0ms)
+
+[gate-tail] end:  14:34:06 up  3:21,  0 user,  load average: 1.00, 1.00, 1.00
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.12863.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

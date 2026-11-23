@@ -1,0 +1,36 @@
+run 2026-11-20T20:29:52Z
+tree /home/user/settlement-engine at bad42ff94daa9b132f73df7a2d2f2841e4896029
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/settlement-engine/src/domain/display/galleryVeil.js
+944dc7e63b9c6cb2e6d5f12c2c7d0f23eab418116aad3ec9a751b34b55a47920  /home/user/settlement-engine/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/settlement-engine/src/domain/display/criminalVeilSwitch.js
+1c15e3acf2d45ab71d59ffa31290de9faf4ce115b20a34c8b4b3250fd8a2ebc7  /home/user/settlement-engine/supabase/migrations/212_share_veil_later_cures.sql
+A start 2026-11-20T20:29:52Z mode pool RV9_TARGET=300 RV9_AUDIT=50
+A end 2026-11-20T20:42:56Z
+B start 2026-11-20T20:42:56Z
+B end 2026-11-20T20:50:15Z
+run 2026-11-20T20:50:31Z
+tree /home/user/settlement-engine at bad42ff94daa9b132f73df7a2d2f2841e4896029
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/settlement-engine/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/settlement-engine/src/domain/display/galleryVeil.js
+944dc7e63b9c6cb2e6d5f12c2c7d0f23eab418116aad3ec9a751b34b55a47920  /home/user/settlement-engine/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/settlement-engine/src/domain/display/criminalVeilSwitch.js
+1c15e3acf2d45ab71d59ffa31290de9faf4ce115b20a34c8b4b3250fd8a2ebc7  /home/user/settlement-engine/supabase/migrations/212_share_veil_later_cures.sql
+run 2026-11-20T21:24:01Z
+tree /home/user/wt/v29t3 at b3b533027dcdeae14c37475087a8e3cbb945c540
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/wt/v29t3/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/wt/v29t3/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/wt/v29t3/src/domain/display/galleryVeil.js
+35e0d8a6ecb369de518a5f2ed0b4e1f170d3450f147e5ccfe36c47c2fcc88765  /home/user/wt/v29t3/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/wt/v29t3/src/domain/display/criminalVeilSwitch.js
+707822e672bc400c8edada1f2aee0b51c51a968728f312f874a9af67903c01ae  /home/user/wt/v29t3/supabase/migrations/212_share_veil_later_cures.sql
+run 2026-11-20T21:25:15Z
+tree /home/user/wt/v29t3 at b3b533027dcdeae14c37475087a8e3cbb945c540
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/wt/v29t3/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/wt/v29t3/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/wt/v29t3/src/domain/display/galleryVeil.js
+35e0d8a6ecb369de518a5f2ed0b4e1f170d3450f147e5ccfe36c47c2fcc88765  /home/user/wt/v29t3/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/wt/v29t3/src/domain/display/criminalVeilSwitch.js
+707822e672bc400c8edada1f2aee0b51c51a968728f312f874a9af67903c01ae  /home/user/wt/v29t3/supabase/migrations/212_share_veil_later_cures.sql

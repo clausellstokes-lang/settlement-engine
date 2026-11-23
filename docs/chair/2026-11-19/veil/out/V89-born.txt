@@ -1,0 +1,14 @@
+V8-9 BORN UNMOVED (VEIL-17's builder).
+
+REVIEW-VEIL-13's born probe (veil-probe-13/measure/r5-born.probe.jsx, R5_N=4: six sizes, calm and infiltrated, four each; both
+stored shapes; three shares; gallery, link, import and the twin) on the base chain v89base (twin from the base's bytes) and on
+the tree chain v89tree (twin from the tree), compared by veil-probe-16/measure/born-cmp.mjs:
+  towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+  reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+THE LARGEST SEARCH ANY BIRTH MAKES, AN UPPER BOUND (measure/births.probe.jsx: the 240 born towns of seed prefix v11-ties,
+Langengrund among them, EVERY house hidden whole; the twin's search, the same string as 212's):
+  births 240: largest pattern 3413 cp, largest L x D 740621; most names 300; longest one needle 555 cp; most cut-outs 2, longest cut-outs in all 1000 cp, L x D 193000; largest town 502604 chars
+  metropolis/calm/0 Albaorum len 498754 houses 104 names 300 p 3413 cp, L x D 740621, longest needle 555 cp, cut-outs <= 0 (0 cp, L x D 0)
+  metropolis/infiltrated/6 Langengrund len 502604 houses 106 names 274 p 3402 cp, L x D 738234, longest needle 555 cp, cut-outs <= 0 (0 cp, L x D 0)
+  Against the bound (16,384 code points, weight 4,194,304, 16 cut-outs): every birth far under (3.7 x, 4.5 x, 8 x with its cut-outs).

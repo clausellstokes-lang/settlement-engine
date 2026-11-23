@@ -1,0 +1,18 @@
+row h=5 hit=10000 cold=0 nl=1 :: x211 | ok | houses listed 1 | rows back 10000 | rows with d 10000 | bytes 509025 | 6960 ms
+row h=5 hit=10000 cold=0 nl=1 :: x212 | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 21238 ms
+row h=5 hit=5000 cold=5000 nl=1 :: x211 | ok | houses listed 1 | rows back 10000 | rows with d 10000 | bytes 412917 | 6304 ms
+row h=5 hit=5000 cold=5000 nl=1 :: x212 | ok | houses listed 1 | rows back 10000 | rows with d 5000 | bytes 179024 | 12497 ms
+row h=200 hit=2000 cold=2000 nl=1 :: x211 | ok | houses listed 1 | rows back 4000 | rows with d 4000 | bytes 166837 | 842 ms
+row h=200 hit=2000 cold=2000 nl=1 :: x212 | ok | houses listed 1 | rows back 4000 | rows with d 2000 | bytes 71024 | 2579 ms
+row h=50 hit=500 cold=500 nl=1 :: x211 | ok | houses listed 1 | rows back 1000 | rows with d 1000 | bytes 40825 | 85 ms
+row h=50 hit=500 cold=500 nl=1 :: x212 | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 282 ms
+row h=600 hit=0 cold=0 nl=8 :: x211 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 183 ms
+row h=600 hit=0 cold=0 nl=8 :: x212 | ERROR invalid memory alloc request size 1940986152 | 235 ms
+row h=1000 hit=0 cold=0 nl=4 :: x211 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 420 ms
+row h=1000 hit=0 cold=0 nl=4 :: x212 | ERROR invalid memory alloc request size 1556529336 | 403 ms
+row h=1500 hit=0 cold=0 nl=8 :: x211 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 549 ms
+row h=1500 hit=0 cold=0 nl=8 :: x212 | ERROR regular expression failed: regular expression is too complex | 827 ms
+row h=300 hit=0 cold=0 nl=8 :: x211 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 99 ms
+row h=300 hit=0 cold=0 nl=8 :: x212 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 144 ms
+row h=1000 hit=0 cold=0 nl=2 :: x211 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 389 ms
+row h=1000 hit=0 cold=0 nl=2 :: x212 | ok | houses listed 1 | rows back 0 | rows with d 0 | bytes 133 | 475 ms

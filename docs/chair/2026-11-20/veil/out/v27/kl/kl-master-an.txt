@@ -1,0 +1,19 @@
+shape master; births 140; side-by-side rows 182, differing 0
+parity totals {"pages":464,"tableServerOnly":0,"tableTwinOnly":0,"anyServerOnly":0,"anyTwinOnly":0,"holderOnlyServer":0,"holderOnlyTwin":0,"valueDiff":0}
+TASK 2: the Defense key recomputed from the served page alone (DefenseTab.jsx path on a JSON copy) against the gate's served key (criminalStructureKeyOf(served page)); per role | engine | Reveal
+  control|server|dm: pages 48; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  control|server|off: pages 48; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  control|twin|dm: pages 48; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  control|twin|off: pages 48; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  counterfactual|server|dm: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  counterfactual|server|off: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  counterfactual|twin|dm: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  counterfactual|twin|off: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  hidden|server|dm: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  hidden|server|off: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  hidden|twin|dm: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+  hidden|twin|off: pages 92; recomputed != served 0 (on the object itself: 0); grouping read veiled on the copy 0
+towns with any page differing: 0
+gate tally from these reads (served key, hidden vs counterfactual): {"server/off":{"HIGHER":0,"EQUAL":79,"LOWER":13},"server/dm":{"HIGHER":0,"EQUAL":79,"LOWER":13},"twin/off":{"HIGHER":0,"EQUAL":79,"LOWER":13},"twin/dm":{"HIGHER":0,"EQUAL":79,"LOWER":13}}
+served key distribution: {"twin/off/control":{"null":29,"diffuse":11,"semi-organized":7,"organized":1},"server/off/control":{"null":29,"diffuse":11,"semi-organized":7,"organized":1},"twin/dm/control":{"null":29,"diffuse":11,"semi-organized":7,"organized":1},"server/dm/control":{"null":29,"diffuse":11,"semi-organized":7,"organized":1},"twin/off/hidden":{"null":19,"organized":11,"semi-organized":62},"server/off/hidden":{"null":19,"organized":11,"semi-organized":62},"twin/dm/hidden":{"null":19,"organized":11,"semi-organized":62},"server/dm/hidden":{"null":19,"organized":11,"semi-organized":62},"twin/off/counterfactual":{"null":9,"organized":14,"diffuse":10,"semi-organized":59},"server/off/counterfactual":{"null":9,"organized":14,"diffuse":10,"semi-organized":59},"twin/dm/counterfactual":{"null":9,"organized":14,"diffuse":10,"semi-organized":59},"server/dm/counterfactual":{"null":9,"organized":14,"diffuse":10,"semi-organized":59}}
+server vs twin key (served/page) disagreements: {}

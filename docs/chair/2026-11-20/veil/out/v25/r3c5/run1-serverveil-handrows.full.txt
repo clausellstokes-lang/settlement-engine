@@ -1,0 +1,11 @@
+[gate-tail] start:  12:21:29 up  1:08,  0 user,  load average: 2.44, 2.00, 2.72 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c4
+
+
+ Test Files  2 passed (2)
+      Tests  43 passed (43)
+   Start at  12:21:30
+   Duration  928.37s (transform 4.60s, setup 50ms, import 596ms, tests 927.50s, environment 0ms)
+
+[gate-tail] end:  12:36:59 up  1:24,  0 user,  load average: 1.04, 2.47, 3.30

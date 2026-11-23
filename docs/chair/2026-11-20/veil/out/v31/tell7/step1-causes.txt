@@ -1,0 +1,43 @@
+R3-TELL-7: THE CAUSES BY THE RECORD (ref.probe.jsx: generateSafetyProfile(served config, served tier, served houses), the own setting)
+Hidden-house towns: 92. The record reference faithful: the engine re-run on the STORED config and ALL stored houses gives the stored crimeTypes and criminalInstitutions on every page (ref.json refStoredAllHouses; plotHooks only with the birth's seed active: the smuggling hook draws by seed)
+
+PER TOWN (each strict-part town and family; what the record owes the page, each entry with its MECHANISM; the gated settings that show it)
+  r3m-city-infiltrated-0-42 (city, infiltrated) | crimeTypes | hidden 6 | owed by the record: Magical crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-infiltrated-1-102 (city, infiltrated) | crimeTypes | hidden 1 | owed by the record: Lawlessness [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-insurgency-1-104 (city, insurgency) | crimeTypes | hidden 7 | owed by the record: Survival crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-insurgency-1-114 (city, insurgency) | crimeTypes | hidden 6 | owed by the record: Survival crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-none-0-31 (city, none) | crimeTypes | hidden 4 | owed by the record: black market food [name-sweep] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-none-1-103 (city, none) | crimeTypes | hidden 3 | owed by the record: black market passage [name-sweep] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-none-1-117 (city, none) | crimeTypes | hidden 4 | owed by the record: Survival crime [threshold-attr]; Magical crime [threshold-attr] | twin lacks-by-page: off 2, dm 2 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-politically_fractured-1-110 (city, politically_fractured) | crimeTypes | hidden 2 | owed by the record: Magical crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-under_siege-0-48 (city, under_siege) | crimeTypes | hidden 6 | owed by the record: Magical crime [threshold-attr]; black market food [name-sweep] | twin lacks-by-page: off 2, dm 2 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-under_siege-1-108 (city, under_siege) | crimeTypes | hidden 2 | owed by the record: Survival crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-under_siege-1-118 (city, under_siege) | crimeTypes | hidden 2 | owed by the record: Magical crime [threshold-attr]; black market food [name-sweep] | twin lacks-by-page: off 2, dm 2 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-city-wartime-1-109 (city, wartime) | crimeTypes | hidden 7 | owed by the record: Magical crime [sibling-suppressed] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-indebted-0-66 (metropolis, indebted) | crimeTypes | hidden 7 | owed by the record: Magical crime [sibling-suppressed] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-indebted-1-136 (metropolis, indebted) | crimeTypes | hidden 8 | owed by the record: Background crime [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-insurgency-1-124 (metropolis, insurgency) | crimeTypes | hidden 7 | owed by the record: Lawlessness [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-none-1-127 (metropolis, none) | crimeTypes | hidden 8 | owed by the record: Magical crime [sibling-suppressed] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-none-1-137 (metropolis, none) | crimeTypes | hidden 7 | owed by the record: desperation theft [settled-away]; black market food [map-attr] | twin lacks-by-page: off 2, dm 2 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-occupied-0-65 (metropolis, occupied) | plotHooks | hidden 7 | owed by the record: The merchant guild's private security force just detained... [hook-map-attr] | twin lacks-by-page: off 0, dm 1 | settings 10: own g:000 g:001 g:010 g:011 g:100 g:101 g:110 allOpen off (dm)
+  r3m-metropolis-under_siege-0-58 (metropolis, under_siege) | crimeTypes | hidden 5 | owed by the record: Magical crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-under_siege-0-68 (metropolis, under_siege) | crimeTypes | hidden 7 | owed by the record: black market food [map-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-under_siege-1-128 (metropolis, under_siege) | crimeTypes | hidden 5 | owed by the record: Magical crime [threshold-attr] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-wartime-0-59 (metropolis, wartime) | crimeTypes | hidden 7 | owed by the record: Magical crime [sibling-suppressed] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-metropolis-wartime-1-139 (metropolis, wartime) | crimeTypes | hidden 5 | owed by the record: Background crime [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-town-insurgency-0-14 (town, insurgency) | crimeTypes | hidden 2 | owed by the record: Background crime [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-town-none-0-17 (town, none) | crimeTypes | hidden 2 | owed by the record: Background crime [fallback] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+  r3m-town-under_siege-0-28 (town, under_siege) | crimeTypes | hidden 1 | owed by the record: desperation theft [settled-away] | twin lacks-by-page: off 1, dm 1 | settings 10: own g:010 g:011 g:110 allOpen (off+dm)
+
+BY MECHANISM (distinct towns; entries)
+  settled-away: 2 town(s) [r3m-town-under_siege-0-28, r3m-metropolis-none-1-137]; entries {"desperation theft":2}
+  threshold-attr: 10 town(s) [r3m-city-under_siege-0-48, r3m-city-insurgency-1-104, r3m-city-under_siege-1-108, r3m-metropolis-under_siege-1-128, r3m-city-none-1-117, r3m-city-infiltrated-0-42, r3m-metropolis-under_siege-0-58, r3m-city-politically_fractured-1-110, r3m-city-insurgency-1-114, r3m-city-under_siege-1-118]; entries {"Magical crime":7,"Survival crime":4}
+  name-sweep: 4 town(s) [r3m-city-under_siege-0-48, r3m-city-under_siege-1-118, r3m-city-none-0-31, r3m-city-none-1-103]; entries {"black market food":3,"black market passage":1}
+  map-attr: 2 town(s) [r3m-metropolis-under_siege-0-68, r3m-metropolis-none-1-137]; entries {"black market food":2}
+  fallback: 6 town(s) [r3m-metropolis-insurgency-1-124, r3m-metropolis-indebted-1-136, r3m-town-none-0-17, r3m-town-insurgency-0-14, r3m-city-infiltrated-1-102, r3m-metropolis-wartime-1-139]; entries {"Lawlessness":2,"Background crime":4}
+  hook-map-attr: 1 town(s) [r3m-metropolis-occupied-0-65]; entries {"The merchant guild's private security force just detained so":1}
+  sibling-suppressed: 4 town(s) [r3m-city-wartime-1-109, r3m-metropolis-indebted-0-66, r3m-metropolis-wartime-0-59, r3m-metropolis-none-1-127]; entries {"Magical crime":4}
+
+DRAW: entries the twin shows that the page lacks and the record does NOT owe: 0
+THE RECORD OWES WHAT THE TWIN LACKS (the twin's draw the other way): 0
+THE CONTROLS (the gate's 48 nothing-hidden births, own, off and DM): pages where the record reference differs from the served list (crimeTypes, ops): 0

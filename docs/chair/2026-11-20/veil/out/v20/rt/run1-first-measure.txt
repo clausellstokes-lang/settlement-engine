@@ -1,0 +1,5 @@
+     × CONTROL: the same document rendered twice is byte-equal (every surface and width of the first town) 25466ms
+     × MAIN (R2's green): every withhold-always row grafted back moves no byte, every surface, width and town; else the rows that do are named 685229ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+      Tests  2 failed | 1 passed (3)
+exit 1

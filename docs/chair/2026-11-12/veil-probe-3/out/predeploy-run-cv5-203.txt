@@ -1,0 +1,88 @@
+== before
+f629bd3a2c95fffe98aae88d9b2f02d6
+b3f83db3876d6cf467e8cb3d8a875492
+27
+== the block (ON_ERROR_STOP, superuser)
+BEGIN
+SET
+    rolname    |     role_settings      |  role_in_db_settings   
+---------------+------------------------+------------------------
+ anon          |                        | {statement_timeout=3s}
+ authenticated | {statement_timeout=8s} | {statement_timeout=8s}
+ service_role  |                        | 
+(3 rows)
+
+ every_role_in_this_db | server_default_at_session_start 
+-----------------------+---------------------------------
+ statement_timeout=60s | 60000 ms
+(1 row)
+
+ frozen_copies | largest_copy_jsonb_chars | over_1000000 | refused_at_211 | snapshot_without_copy 
+---------------+--------------------------+--------------+----------------+-----------------------
+             4 |                 54400024 |            2 |              1 |                     3
+(1 row)
+
+ importable_snapshot_shares 
+----------------------------
+                          6
+(1 row)
+
+ non_boolean_reveal_dm | non_boolean_allow_import | rows_holding_one 
+-----------------------+--------------------------+------------------
+                     4 |                        2 |                2
+(1 row)
+
+ most_withheld_member_keys | rows_over_1000 
+---------------------------+----------------
+                      1500 |              1
+(1 row)
+
+ longest_delta_list | rows_over_2000 
+--------------------+----------------
+               2500 |              1
+(1 row)
+
+  source   | most_houses | most_anonymous_events 
+-----------+-------------+-----------------------
+ copy      |           0 |                   300
+ document  |        1200 |                  1100
+ narration |           0 |                   310
+(3 rows)
+
+  source   | at_or_past_1e130748 | with_numeric_id | with_numeric_name_or_part | past_double 
+-----------+---------------------+-----------------+---------------------------+-------------
+ copy      |                   1 |               1 |                         1 |           1
+ document  |                   1 |               2 |                         2 |           2
+ narration |                   1 |               0 |                         1 |           1
+(3 rows)
+
+ reveal_dm_listings_sending_editor_state 
+-----------------------------------------
+                                       3
+(1 row)
+
+ reveal_dm_shares_sending_editor_state_today 
+---------------------------------------------
+                                           4
+(1 row)
+
+ old_shape_shares_hiding_a_relationship_by_hand | old_shape_relationship_hand_hides 
+------------------------------------------------+-----------------------------------
+                                              2 |                                 3
+(1 row)
+
+ reveal_shares_shutting_goals_over_factiongoal | reveal_shares_shutting_ties_over_linkedfactionids 
+-----------------------------------------------+---------------------------------------------------
+                                             3 |                                                 3
+(1 row)
+
+ROLLBACK
+block exit 0
+== after
+f629bd3a2c95fffe98aae88d9b2f02d6
+b3f83db3876d6cf467e8cb3d8a875492
+27
+== negative control: a write inside a READ ONLY transaction
+BEGIN
+ERROR:  cannot execute UPDATE in a read-only transaction
+control exit 1

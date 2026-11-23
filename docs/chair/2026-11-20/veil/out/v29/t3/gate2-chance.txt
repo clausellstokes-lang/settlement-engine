@@ -1,0 +1,18 @@
+CHANCE (ruling 72 (b)): THE HIDDEN COMPARISON: 34 red of 40 cells (10 settings x 2 reads x 2 engines)
+CHANCE: CONTROLS AGAINST CONTROLS, 2,000 random 24/24 splits, both directions, 40 cells a split: red cells mean 0.00, 95th pct 0, max 0; splits with any red 0 of 2000
+CHANCE: red rate hidden 0.850 against controls-vs-controls mean 0.0000
+CHANCE: CONTROLS FAILING L3 per gated setting (Reveal off / DM, of 48): own 1/1, g:110 1/1, g:101 0/0, g:011 1/1, g:100 0/0, g:010 1/1, g:001 0/0, g:000 0/0, allOpen 1/1, off 0/0
+CHANCE: THE FAILING PAGES BY SEPARATING FAMILY: family | hidden towns (of 92) / pages (twin+server) [directions] | controls (of 48) / pages (twin)
+  r.people.allegiance | 69 / 138 [+->0 138] | 0 / 0
+  r.svc.criminal | 27 / 320 [+->0 320] | 0 / 0
+  r.powers.capture | 21 / 186 [+->0 186] | 0 / 0
+  r.chains.criminal | 6 / 172 [0->+ 172] | 0 / 0
+  r.inst.criminal | 6 / 172 [0->+ 172] | 0 / 0
+  r.sp.ops | 3 / 40 [+->0 40] | 1 / 4
+  r.powers.criminal | 3 / 108 [+->0 108] | 0 / 0
+  r.powers.relations | 2 / 68 [+->0 68] | 0 / 0
+  r.income.criminal | 1 / 4 [0->+ 4] | 0 / 0
+  r.sp.crimeTypes | 1 / 20 [+->0 20] | 0 / 0
+  r.tensions.crime | 1 / 40 [+->0 40] | 0 / 0
+  r.imports.criminal | 1 / 40 [+->0 40] | 0 / 0
+  r.conditions.criminal | 0 / 0 | 1 / 10

@@ -1,0 +1,42 @@
+[gate-tail] start:  08:58:29 up 5 min,  0 user,  load average: 2.00, 0.90, 0.37 · cores: 4
+
+ RUN  v4.1.8 /var/tmp/v18/t-e4cce485f
+
+ ❯ tests/lint/presumptionClasses.walker.test.js (16 tests | 1 failed) 3898ms
+     × no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one) 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js · office:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++   "src/domain/display/gallerySecondHomes.js · size:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++ ]
+
+ ❯ tests/lint/presumptionClasses.walker.test.js:170:19
+    168|     const banked = bankedKeys(register);
+    169|     const fresh = hits.filter((h) => !banked.has(h.key)).map((h) => `$…
+    170|     expect(fresh).toEqual([]);
+       |                   ^
+    171|   });
+    172|   test('no stale row: a cured line leaves the register (the close runs…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  08:58:30
+   Duration  5.44s (transform 2.03s, setup 42ms, import 1.35s, tests 3.90s, environment 0ms)
+
+[gate-tail] end:  08:58:36 up 5 min,  0 user,  load average: 2.00, 0.92, 0.37
+[gate-tail] full log: /tmp/gate-tail.9253.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

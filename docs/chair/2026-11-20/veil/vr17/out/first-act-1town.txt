@@ -1,0 +1,43 @@
+chain: 212 files, last 212_share_veil_later_cures.sql, failed 0
+
+## server-veil-town-2 (town) "Uxmalek": family groupings that remove something here: block:services.criminal, block:defense.criminalStructure, block:power.criminalUnderside
+ALL OPEN: (b) served marker $veil = {"v":2,"mode":"live","groupings":["block:defense.vulnerabilities","block:housekeeping.coherenceNotes","block:housekeeping.decrees","block:housekeeping.firstSurvey","block:housekeeping.receipt","block:housekeeping.structuralIssues","block:rumors.dmTruth","block:war.truthVsBelief","tab:plot_hooks"]}; WeakMap on gallery page: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], link: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], civil: [], map member: [], import: []
+SHUT block:services.criminal: (b) served marker $veil = {"v":2,"mode":"live","groupings":["block:defense.vulnerabilities","block:housekeeping.coherenceNotes","block:housekeeping.decrees","block:housekeeping.firstSurvey","block:housekeeping.receipt","block:housekeeping.structuralIssues","block:rumors.dmTruth","block:services.criminal","block:war.truthVsBelief","tab:plot_hooks"]}; WeakMap on gallery page: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:services.criminal,block:war.truthVsBelief,tab:plot_hooks], link: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:services.criminal,block:war.truthVsBelief,tab:plot_hooks], civil: [], map member: [], import: []
+SHUT block:defense.criminalStructure: (b) served marker $veil = {"v":2,"mode":"live","groupings":["block:defense.criminalStructure","block:defense.vulnerabilities","block:housekeeping.coherenceNotes","block:housekeeping.decrees","block:housekeeping.firstSurvey","block:housekeeping.receipt","block:housekeeping.structuralIssues","block:rumors.dmTruth","block:war.truthVsBelief","tab:plot_hooks"]}; WeakMap on gallery page: [block:defense.criminalStructure,block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], link: [block:defense.criminalStructure,block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], civil: [], map member: [], import: []
+SHUT block:power.criminalUnderside: (b) served marker $veil = {"v":2,"mode":"live","groupings":["block:defense.vulnerabilities","block:housekeeping.coherenceNotes","block:housekeeping.decrees","block:housekeeping.firstSurvey","block:housekeeping.receipt","block:housekeeping.structuralIssues","block:power.criminalUnderside","block:rumors.dmTruth","block:war.truthVsBelief","tab:plot_hooks"]}; WeakMap on gallery page: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:power.criminalUnderside,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], link: [block:defense.vulnerabilities,block:housekeeping.coherenceNotes,block:housekeeping.decrees,block:housekeeping.firstSurvey,block:housekeeping.receipt,block:housekeeping.structuralIssues,block:power.criminalUnderside,block:rumors.dmTruth,block:war.truthVsBelief,tab:plot_hooks], civil: [], map member: [], import: []
+  block:services.criminal: 7 line(s) the served page draws with it open and not shut
+      | Systems/Services :: Criminal services(3)▲
+      | Systems/Services :: False prophecy
+      | Systems/Services :: Readings, visions, and omens from practitioners who know what the client wants to hear.
+      | Systems/Services :: Indulgences and dispensations
+      | Systems/Services :: Formal church forgiveness, delivered by clergy with flexible interpretations of canon.
+      | Systems/Services :: Relics (dubious provenance)
+    CLONE  with it shut draws 0 of them
+    LINK   with it shut draws 0 of them
+    CIVIL  with it shut draws 0 of them
+    MAP    with it shut draws 0 of them
+    IMPORT with it shut draws 0 of them
+  block:defense.criminalStructure: 11 line(s) the served page draws with it open and not shut
+      | Systems/Economics :: CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.
+      | Systems/Defense :: Criminal structure: Organized syndicate
+      | Systems/Defense :: Shopkeepers here pay one ring for protection, and the ring pays any official who will take its money. It stamps out random violence, which would bring the law, and its terms are kno
+      | Systems/Defense :: Active criminal operations
+      | Systems/Defense :: Gambling Den
+      | Systems/Defense :: Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.
+    CLONE  with it shut draws 2 of them: e.g. Systems/Defense :: Criminal structure: Organized syndicate
+    LINK   with it shut draws 0 of them
+    CIVIL  with it shut draws 2 of them: e.g. Systems/Defense :: Criminal structure: Organized syndicate
+    MAP    with it shut draws 2 of them: e.g. Systems/Defense :: Criminal structure: Organized syndicate
+    IMPORT with it shut draws 2 of them: e.g. Systems/Defense :: Criminal structure: Organized syndicate
+  block:power.criminalUnderside: 7 line(s) the served page draws with it open and not shut
+      | Systems/Economics :: CriminalBlack Market Revenue Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.
+      | Systems/Economics :: Shadow Economy: 17% of trade unrecorded▲
+      | Systems/Economics :: Off-book
+      | Systems/Economics :: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.
+      | Systems/Economics :: Goods change hands at Uxmalek without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.
+      | Systems/Power :: Crime and the hall
+    CLONE  with it shut draws 0 of them
+    LINK   with it shut draws 0 of them
+    CIVIL  with it shut draws 0 of them
+    MAP    with it shut draws 0 of them
+    IMPORT with it shut draws 0 of them

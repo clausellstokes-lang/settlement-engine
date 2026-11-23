@@ -1,0 +1,8 @@
+born-green exit 0
+guards-security-2 exit 0
+guards-harnesses exit 0
+batch done: born s2 harn
+guards-security-1 exit 1
+guards-twin exit 1
+known-reds exit 1
+batch done: s1 twin known

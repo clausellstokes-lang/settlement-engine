@@ -1,0 +1,14 @@
+{
+ "towns": 12,
+ "shares": 24,
+ "reads": 72,
+ "switchedOff": 59,
+ "rosterCopiesOfSwitchedOff": 236,
+ "diffs": {
+  "gallery": 24,
+  "import": 24
+ },
+ "unexplained": [],
+ "copyNotEqualCard": 0,
+ "hiddenSentAfter": 40
+}

@@ -1,0 +1,10 @@
+first-paint chunks named by index.html (tip): 8
+content-identity       raw     5362     5362  byte-equal True  equal-hash-normalised True  gz 2573 2573
+data                   raw   154520   154520  byte-equal True  equal-hash-normalised True  gz 45523 45523
+engine-core            raw   308130   308130  byte-equal True  equal-hash-normalised True  gz 99081 99081
+index                  raw     6285    62723  byte-equal False  equal-hash-normalised False  gz 2145 22052
+kernel                 raw     4722     4722  byte-equal True  equal-hash-normalised True  gz 2496 2496
+vendor-icons           raw     3579     3579  byte-equal True  equal-hash-normalised True  gz 1464 1464
+vendor-react           raw   193176   193176  byte-equal True  equal-hash-normalised True  gz 60361 60361
+vendor-state           raw    17046    17046  byte-equal True  equal-hash-normalised True  gz 7107 7107
+ENTRY (the line above matched the wrong "index" file): index-RiApOl3i.js index-C1Bq8rmq.js raw 489017 489017 hash-normalised equal True

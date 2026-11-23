@@ -1,0 +1,216 @@
+{
+ "failed": {
+  "at210": [],
+  "at211": [],
+  "at211b": []
+ },
+ "towns": [
+  {
+   "seed": "cv2-thorp-calm-0",
+   "size": "thorp",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 1,
+   "institutions": 7,
+   "bytes": 49654
+  },
+  {
+   "seed": "cv2-thorp-crisis-0",
+   "size": "thorp",
+   "stress": "plague_onset",
+   "hiddenPowers": [],
+   "npcs": 2,
+   "institutions": 7,
+   "bytes": 61000
+  },
+  {
+   "seed": "cv3-thorp-infiltrated-0",
+   "size": "thorp",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 2,
+   "institutions": 9,
+   "bytes": 67374
+  },
+  {
+   "seed": "cv2-hamlet-calm-0",
+   "size": "hamlet",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 2,
+   "institutions": 9,
+   "bytes": 60790
+  },
+  {
+   "seed": "cv2-hamlet-crisis-0",
+   "size": "hamlet",
+   "stress": "insurgency",
+   "hiddenPowers": [],
+   "npcs": 9,
+   "institutions": 16,
+   "bytes": 95781
+  },
+  {
+   "seed": "cv3-hamlet-infiltrated-0",
+   "size": "hamlet",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 4,
+   "institutions": 9,
+   "bytes": 76138
+  },
+  {
+   "seed": "cv2-village-calm-0",
+   "size": "village",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 12,
+   "institutions": 18,
+   "bytes": 102544
+  },
+  {
+   "seed": "cv2-village-crisis-0",
+   "size": "village",
+   "stress": "famine",
+   "hiddenPowers": [],
+   "npcs": 9,
+   "institutions": 15,
+   "bytes": 97931
+  },
+  {
+   "seed": "cv3-village-infiltrated-0",
+   "size": "village",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 7,
+   "institutions": 12,
+   "bytes": 84977
+  },
+  {
+   "seed": "cv2-town-calm-0",
+   "size": "town",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 15,
+   "institutions": 22,
+   "bytes": 127546
+  },
+  {
+   "seed": "cv2-town-crisis-0",
+   "size": "town",
+   "stress": "occupied",
+   "hiddenPowers": [],
+   "npcs": 22,
+   "institutions": 29,
+   "bytes": 167477
+  },
+  {
+   "seed": "cv3-town-infiltrated-0",
+   "size": "town",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 16,
+   "institutions": 23,
+   "bytes": 131707
+  },
+  {
+   "seed": "cv2-city-calm-0",
+   "size": "city",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 59,
+   "institutions": 67,
+   "bytes": 316874
+  },
+  {
+   "seed": "cv2-city-crisis-0",
+   "size": "city",
+   "stress": "slave_revolt",
+   "hiddenPowers": [],
+   "npcs": 46,
+   "institutions": 52,
+   "bytes": 284085
+  },
+  {
+   "seed": "cv3-city-infiltrated-0",
+   "size": "city",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 44,
+   "institutions": 52,
+   "bytes": 265702
+  },
+  {
+   "seed": "cv2-metropolis-calm-0",
+   "size": "metropolis",
+   "stress": null,
+   "hiddenPowers": [],
+   "npcs": 74,
+   "institutions": 85,
+   "bytes": 391245
+  },
+  {
+   "seed": "cv2-metropolis-crisis-0",
+   "size": "metropolis",
+   "stress": "succession_void",
+   "hiddenPowers": [],
+   "npcs": 87,
+   "institutions": 96,
+   "bytes": 463292
+  },
+  {
+   "seed": "cv3-metropolis-infiltrated-0",
+   "size": "metropolis",
+   "stress": "infiltrated",
+   "hiddenPowers": [
+    "The Independent Bloc"
+   ],
+   "npcs": 75,
+   "institutions": 84,
+   "bytes": 418397
+  }
+ ],
+ "totals": {
+  "rows": 522,
+  "reads": 8136,
+  "offences": {
+   "splice": 0,
+   "editorState": 0,
+   "sameRow": 0,
+   "nameless": 0,
+   "nameless210": 0,
+   "carried": 0,
+   "overrides": 0,
+   "changed": 0,
+   "oldShows": 0,
+   "importMap": 76,
+   "postFreeze": 0
+  }
+ },
+ "examples": {
+  "importMap": [
+   "cv2-thorp-crisis-0 unmarked/live: map lacks npcs[id=npc.military_guard_watch_captain_0].title | map lacks npcs[id=npc.military_guard_watch_captain_0].category",
+   "cv3-thorp-infiltrated-0 unmarked/live: map lacks npcs[id=npc_veiled_19394d5f4f2f3357].role | map lacks npcs[id=npc_veiled_19394d5f4f2f3357].title",
+   "cv2-hamlet-calm-0 unmarked/live: map lacks npcs[id=npc.military_guard_watch_captain_0].title | map lacks npcs[id=npc.military_guard_watch_captain_0].category",
+   "cv3-hamlet-infiltrated-0 unmarked/live: map lacks npcs[id=npc_veiled_12167324840d9f7c].role | map lacks npcs[id=npc_veiled_12167324840d9f7c].title",
+   "cv3-village-infiltrated-0 unmarked/live: map lacks npcs[id=npc_veiled_e99b30c92c4e7078].role | map lacks npcs[id=npc_veiled_e99b30c92c4e7078].title",
+   "cv2-town-calm-0 unmarked/live: map lacks npcs[id=npc_veiled_0ebb1f41cf50d4b2].role | map lacks npcs[id=npc_veiled_0ebb1f41cf50d4b2].title",
+   "cv3-town-infiltrated-0 unmarked/live: map lacks npcs[id=npc_veiled_30f273725dcb70e4].role | map lacks npcs[id=npc_veiled_30f273725dcb70e4].title",
+   "cv2-city-calm-0 unmarked/live: map lacks npcs[id=npc_veiled_3a9ee8c63386c3ed].role | map lacks npcs[id=npc_veiled_3a9ee8c63386c3ed].title",
+   "cv2-city-crisis-0 unmarked/live: map lacks npcs[id=npc_veiled_e205baf372a75755].role | map lacks npcs[id=npc_veiled_e205baf372a75755].title",
+   "cv3-city-infiltrated-0 unmarked/live: map lacks npcs[id=npc_veiled_dd9739f146088fc3].role | map lacks npcs[id=npc_veiled_dd9739f146088fc3].title",
+   "cv2-metropolis-calm-0 unmarked/live: map lacks npcs[id=npc_veiled_019557b3ae8c7870].role | map lacks npcs[id=npc_veiled_019557b3ae8c7870].title",
+   "cv2-metropolis-crisis-0 unmarked/live: map lacks npcs[id=npc_veiled_90e8d3e212c3c172].role | map lacks npcs[id=npc_veiled_90e8d3e212c3c172].title"
+  ]
+ }
+}

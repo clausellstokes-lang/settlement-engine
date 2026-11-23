@@ -1,0 +1,11 @@
+RED FIRST. tests/security/gallerySecondHomes.pglite.test.js, the arm 'THE TWO FOLDS ARE ONE' as re-keyed to the name search's fold, run over 4f7c60cbb's bytes (-t 'THE TWO FOLDS ARE ONE').
+
+ ❯ tests/security/gallerySecondHomes.pglite.test.js (5 tests | 1 failed | 4 skipped) 7567ms
+     × THE TWO FOLDS ARE ONE (VEIL-9; re-keyed by VEIL-10 to the name search): the server's _gallery_veil_name_fold gives the client's nameFold for every character of the basic plane, alone and inside a name, and both engines write the same needle for each; the catalogue identity's fold (_gallery_veil_fold, foldName) is one in b
+
+ FAIL  tests/security/gallerySecondHomes.pglite.test.js > COHERENCE-VEIL-6: a second home of a thing hidden by hand is never sent (V5-1) > THE TWO FOLDS ARE ONE (VEIL-9; re-keyed by VEIL-10 to the name search): the server's _gallery_veil_name_fold gives the client's nameFold for every character of the basic plane, alone and insi
+error: function public._gallery_veil_name_fold(text) does not exist
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 skipped (5)
+   Duration  7.91s (transform 2.94s, setup 36ms, import 122ms, tests 7.57s, environment 0ms)
+exit 1

@@ -1,0 +1,58 @@
+{
+ "kinds": {
+  "npc": {
+   "floor": {
+    "masterOnly": [
+     "factionAffiliation",
+     "secondaryAffiliation"
+    ],
+    "laneOnly": [
+     "memberships"
+    ]
+   },
+   "fields": {
+    "goals": {
+     "masterOnly": [
+      "factionGoal"
+     ],
+     "laneOnly": []
+    },
+    "ties": {
+     "masterOnly": [
+      "linkedFactionIds"
+     ],
+     "laneOnly": []
+    },
+    "corruption": {
+     "masterOnly": [],
+     "laneOnly": [
+      "allegiance"
+     ]
+    }
+   }
+  },
+  "relationship": {
+   "floor": {
+    "masterOnly": [
+     "npc1Id",
+     "npc2Id"
+    ],
+    "laneOnly": [
+     "from",
+     "to"
+    ]
+   },
+   "idOf": {
+    "master": "(card) => ownIdOr(card, 'relationship', card.npc1Id || card.npc1Name, card.npc2Id || card.npc2Name, card.type)",
+    "lane": "(card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type)"
+   }
+  }
+ },
+ "groupings": {},
+ "exportsOnlyMaster": [],
+ "exportsOnlyLane": [
+  "VEILED_PUBLIC_PROSE",
+  "isServedVeil",
+  "projectServedVeil"
+ ]
+}

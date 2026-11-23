@@ -1,0 +1,279 @@
+towns 140; with a hideable house 91; B kept a hideable house 0; threw 0 []
+
+== veil default: paths differing A/B in >= 2 towns 277; IN THE CLASS 138; re-roll 128; between 11
+B 85 | C 0 | economicState.compound.criminalEffective
+      rv9-diff-town-indebted-0-16: A=65.56776470588234 | B=36.06227058823529
+B 85 | C 0 | economicState.compound.criminalPreStress
+      rv9-diff-town-indebted-0-16: A=54.63980392156862 | B=30.051892156862746
+B 85 | C 0 | economicState.compound.economyOutput
+      rv9-diff-town-indebted-0-16: A=31.87641834260289 | B=35.303601278642944
+B 85 | C 0 | economicState.safetyProfile.compound.criminalEffective
+      rv9-diff-town-indebted-0-16: A=65.56776470588234 | B=36.06227058823529
+B 85 | C 0 | economicState.safetyProfile.compound.criminalPreStress
+      rv9-diff-town-indebted-0-16: A=54.63980392156862 | B=30.051892156862746
+B 85 | C 0 | economicState.safetyProfile.compound.economyOutput
+      rv9-diff-town-indebted-0-16: A=31.87641834260289 | B=35.303601278642944
+B 85 | C 2 | economicState.incomeSources[].weight
+      rv9-diff-town-indebted-0-16: A=14.025624070745272 | B=15.533584562602895
+B 82 | C 1 | economicState.safetyProfile.safetyRatio
+      rv9-diff-town-indebted-0-16: A=0.9 | B=1.8
+B 81 | C 2 | history.currentTensions[] (only in A)
+      rv9-diff-town-infiltrated-0-12: A="type=crime_wave" | B=""
+B 77 | C 2 | history.currentTensions[] (only in B)
+      rv9-diff-town-infiltrated-0-12: A="" | B="type=trade_collapse"
+B 78 | C 11 | defenseProfile.scores.internal
+      rv9-diff-town-indebted-0-16: A=35 | B=47
+B 71 | C 6 | spatialLayout.quarters[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="name=Shadows District" | B=""
+B 60 | C 0 | economicState.compound.religionInfluence
+      rv9-diff-town-indebted-0-16: A=26.809860476947538 | B=28.8
+B 60 | C 0 | economicState.safetyProfile.compound.religionInfluence
+      rv9-diff-town-indebted-0-16: A=26.809860476947538 | B=28.8
+B 75 | C 17 | defenseProfile.readiness.score
+      rv9-diff-town-indebted-0-16: A=27 | B=29
+B 70 | C 17 | powerStructure.factions[].power
+      rv9-diff-town-indebted-0-16: A=40 | B=33
+B 54 | C 1 | powerStructure.economyInputFingerprint
+      rv9-diff-town-indebted-0-16: A="power-economy-v1:2e2375b5" | B="power-economy-v1:f9c42a6d"
+B 52 | C 2 | economicState.compound.militaryEffective
+      rv9-diff-town-indebted-0-16: A=59.08668164844292 | B=65.043
+B 52 | C 2 | economicState.safetyProfile.compound.militaryEffective
+      rv9-diff-town-indebted-0-16: A=59.08668164844292 | B=65.043
+B 64 | C 14 | powerStructure.factions[].rawPower
+      rv9-diff-town-indebted-0-16: A=31 | B=34
+B 48 | C 0 | economicState.safetyProfile.economicDragDesc
+      rv9-diff-town-infiltrated-0-12: A="Some goods change hands here without a licence or a duty paid." | B="Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm."
+B 60 | C 12 | powerStructure.factionRelationships[].ratio
+      rv9-diff-city-infiltrated-0-32: A=1.6 | B=1.73
+B 52 | C 6 | powerStructure.publicLegitimacy.score
+      rv9-diff-town-indebted-0-16: A=16 | B=26
+B 52 | C 6 | history.legacyAnnotations[].annotation
+      rv9-diff-city-infiltrated-0-32: A="As of the founding survey, the Economic Divide (73 years ago) set up ways of doing things that have since changed: the merchants lost the place they held then, | B="As of the founding survey, the Religious Conflict (252 years ago) set up ways of doing things that have since changed: the faith h
+B 58 | C 14 | powerStructure.factions[].desc
+      rv9-diff-town-indebted-0-16: A="Town watch; it enforces ordinances, manages disorder, and reports to the council. Close enough now to contest the seat, and they know it. A slow war with the g | B="Town watch; it enforces ordinances, manages disorder, and reports to the council. The gap between them and the governing council is n
+B 51 | C 9 | economicState.compound.magicInfluence
+      rv9-diff-town-indebted-0-16: A=22.170163381512605 | B=23.595
+B 51 | C 9 | economicState.safetyProfile.compound.magicInfluence
+      rv9-diff-town-indebted-0-16: A=22.170163381512605 | B=23.595
+B 48 | C 6 | powerStructure.factions[].powerLabel
+      rv9-diff-town-indebted-0-16: A="Minor" | B="Significant"
+B 42 | C 3 | history.historicalEvents[] (only in B)
+      rv9-diff-city-infiltrated-0-32: A="" | B="name=The Siege"
+B 42 | C 3 | history.eventsTimeline[] (only in B)
+      rv9-diff-city-infiltrated-0-32: A="" | B="name=The Siege"
+B 44 | C 5 | history.legacyAnnotations[].eventName
+      rv9-diff-city-infiltrated-0-32: A="The Economic Divide" | B="The Religious Conflict"
+B 41 | C 3 | history.historicalEvents[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="name=The Great Fire" | B=""
+B 41 | C 3 | history.eventsTimeline[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="name=The Great Fire" | B=""
+B 44 | C 6 | history.legacyAnnotations[].yearsAgo
+      rv9-diff-city-infiltrated-0-32: A=73 | B=252
+B 50 | C 14 | economicState.safetyProfile.guardEffectivenessDesc
+      rv9-diff-town-infiltrated-0-12: A="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patr | B="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operati
+B 40 | C 4 | publicProse.blocks.general:history.legacyLines[] (only in B)
+      rv9-diff-city-infiltrated-0-32: A="" | B="Achillimani still keeps the shape the city took after the religious conflict, and that shape is older than anyone living, though the times have moved on."
+B 35 | C 0 | economicState.safetyProfile.safetyLabel
+      rv9-diff-city-infiltrated-0-32: A="Moderate" | B="Unsafe"
+B 39 | C 4 | publicProse.blocks.general:history.legacyLines[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="Achillimani still keeps the shape the city took after the economic divide, and that shape is older than all but the oldest alive, though the times have moved o | B=""
+B 35 | C 0 | publicProse.blocks.defense:state.publicOrder.rung.glance
+      rv9-diff-city-infiltrated-0-32: A="Moderate" | B="Unsafe"
+B 36 | C 2 | economicState.prosperityStanding
+      rv9-diff-city-indebted-0-36: A="Comfortable" | B="Prosperous"
+B 34 | C 1 | economicState.prosperity
+      rv9-diff-town-indebted-0-16: A="Struggling" | B="Poor"
+B 34 | C 1 | powerStructure.publicLegitimacy.breakdown.prosperity
+      rv9-diff-town-indebted-0-16: A=-20 | B=-10
+B 34 | C 1 | publicProse.blocks.economy:economics.prosperityHeader.glance
+      rv9-diff-town-indebted-0-16: A="Struggling" | B="Poor"
+B 34 | C 1 | publicProse.blocks.economy:economics.prosperityRung.glance
+      rv9-diff-town-indebted-0-16: A="Struggling" | B="Poor"
+B 34 | C 1 | publicProse.blocks.economy:economics.prosperityRung.sentence
+      rv9-diff-town-indebted-0-16: A="Families in Tregarth mend what they have and put off buying anything new." | B="Money is short in Tregarth, and most households spend what they earn as soon as it comes in."
+B 36 | C 3 | history.historicalEvents[].lastingEffects[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="Newcomer and old-family districts remain socially distinct" | B=""
+B 36 | C 3 | history.historicalEvents[].lastingEffects[] (only in B)
+      rv9-diff-city-infiltrated-0-32: A="" | B="A resettlement compact governs where new arrivals may hold property"
+B 39 | C 6 | history.legacyAnnotations[].severity
+      rv9-diff-city-indebted-0-36: A="major" | B="minor"
+B 46 | C 14 | publicProse.blocks.defense:posture.posture.field
+      rv9-diff-town-infiltrated-0-12: A="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patr | B="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operati
+B 37 | C 5 | stress.cast.stakes[].stake
+      rv9-diff-town-indebted-0-16: A="gains" | B="loses"
+B 38 | C 6 | stress.cast.stakes[].reason
+      rv9-diff-town-indebted-0-16: A="crime gains from the disorder" | B="its own people feel the crisis first"
+B 37 | C 5 | stressors.cast.stakes[].stake
+      rv9-diff-town-indebted-0-16: A="gains" | B="loses"
+B 38 | C 6 | stressors.cast.stakes[].reason
+      rv9-diff-town-indebted-0-16: A="crime gains from the disorder" | B="its own people feel the crisis first"
+B 35 | C 3 | economicState.foodSecurity.storageMonths
+      rv9-diff-city-indebted-0-36: A=8.7 | B=9
+B 35 | C 3 | economicState.foodSecurity.storageNote
+      rv9-diff-city-indebted-0-36: A="8.7 months strategic reserve" | B="9 months strategic reserve"
+B 35 | C 3 | economicState.foodSecurity.foodRecord.storageMonths
+      rv9-diff-city-indebted-0-36: A=8.7 | B=9
+B 34 | C 2 | history.historicalEvents[].anchored
+      rv9-diff-city-infiltrated-0-32: A=undefined | B=true
+B 34 | C 2 | history.historicalCharacter
+      rv9-diff-city-infiltrated-0-32: A="Money is discussed openly here in a way that scandalises visitors from more genteel places. The Economic Divide taught everyone that pretending not to care abo | B="Money is discussed openly here in a way that scandalises visitors from more genteel places. The Debt Crisis taught everyone that p
+B 34 | C 2 | history.eventsTimeline[].anchored
+      rv9-diff-city-infiltrated-0-32: A=false | B=true
+B 43 | C 12 | powerStructure.factions[] (only in A)
+      rv9-diff-town-indebted-0-16: A="faction=Thieves' Guild" | B=""
+B 34 | C 3 | defenseProfile.scores.disaster
+      rv9-diff-city-indebted-0-36: A=63 | B=64
+B 33 | C 2 | economicState.foodSecurity.resilienceScore
+      rv9-diff-city-indebted-0-36: A=63 | B=64
+B 34 | C 3 | history.historicalEvents[].yearsAgo
+      rv9-diff-city-infiltrated-0-32: A=317 | B=188
+B 34 | C 3 | history.historicalEvents[].severity
+      rv9-diff-city-infiltrated-0-32: A="minor" | B="major"
+B 34 | C 3 | history.eventsTimeline[].year
+      rv9-diff-city-infiltrated-0-32: A=110 | B=239
+B 34 | C 3 | history.eventsTimeline[].yearsAgo
+      rv9-diff-city-infiltrated-0-32: A=317 | B=188
+B 30 | C 0 | publicProse.blocks.economy:economics.shadowEconomy.sentence
+      rv9-diff-town-indebted-0-16: A="Little of Tregarth's trade goes unrecorded, but what does goes through the same organised hands each time." | B="Some petty theft goes on here, and some trading without a licence. It is a nuisance, nothing more."
+B 35 | C 5 | history.legacyAnnotations[].eventType
+      rv9-diff-city-infiltrated-0-32: A="economic" | B="religious"
+B 42 | C 13 | powerStructure.factions[] (only in B)
+      rv9-diff-town-indebted-0-16: A="" | B="faction=Merchant Guilds"
+B 40 | C 11 | stress.cast.stakes[].factionId
+      rv9-diff-town-indebted-0-16: A="Thieves' Guild" | B="Merchant Guilds"
+B 40 | C 11 | stressors.cast.stakes[].factionId
+      rv9-diff-town-indebted-0-16: A="Thieves' Guild" | B="Merchant Guilds"
+B 33 | C 4 | history.historicalEvents[].description
+      rv9-diff-city-infiltrated-0-32: A="A recently arrived group and the established population fell into sustained, low-level conflict" | B="A newly arrived community and the old population fell into steady friction, rarely violent and never resolved"
+B 26 | C 0 | publicProse.blocks.economy:economics.prosperityHeader.sentence
+      rv9-diff-metropolis-infiltrated-1-132: A="With a little left over each year, Panterema gets by on a broad base of trades, and every year people argue over how to spend it." | B="Hard as Panterema is to reach, it does well all the same on a broad base of trades."
+B 25 | C 0 | powerStructure.publicLegitimacy.breakdown.safety
+      rv9-diff-city-infiltrated-0-32: A=0 | B=-8
+B 24 | C 0 | history.founding.overcoming
+      rv9-diff-town-indebted-0-16: A="through determination and cooperation" | B="at significant cost"
+B 24 | C 0 | publicProse.blocks.economy:economics.shadowEconomy
+      rv9-diff-metropolis-infiltrated-0-52: A={"glance":"","sentence":"The shadow trade at Rasbazaar is small, but it is not casual: somebody organises it.","detail":[]} | B=null
+B 24 | C 0 | publicProse.blocks.economy:services.shadowEconomy
+      rv9-diff-metropolis-infiltrated-0-52: A={"@":"economy:economics"} | B=null
+B 24 | C 0 | publicProse.blocks.economy:resources.shadowEconomy
+      rv9-diff-metropolis-infiltrated-0-52: A={"@":"economy:economics"} | B=null
+B 24 | C 0 | publicProse.blocks.economy:daily_life.shadowEconomy
+      rv9-diff-metropolis-infiltrated-0-52: A={"@":"economy:economics"} | B=null
+B 32 | C 10 | publicProse.blocks.defense:posture.terrain.field
+      rv9-diff-town-infiltrated-0-12: A="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan around patr | B="The town watch maintains standard patrol coverage. Effective against opportunistic crime; less effective against organized operati
+B 24 | C 2 | economicState.safetyProfile.safetyDesc
+      rv9-diff-city-infiltrated-0-32: A="A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. | B="Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and kee
+B 24 | C 2 | publicProse.blocks.defense:state.publicOrder.field
+      rv9-diff-city-infiltrated-0-32: A="A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. | B="Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and kee
+B 24 | C 2 | publicProse.blocks.defense:state.firstSurvey.field
+      rv9-diff-city-infiltrated-0-32: A="A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. | B="Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and kee
+B 22 | C 0 | history.legacyAnnotations[]
+      rv9-diff-city-under_siege-0-48: A=undefined | B={"annotation":"As of the founding survey, the Arcane Incident (53 years ago) left trouble that has never been put right: the mages and the settlement's rulers h
+B 22 | C 1 | activeConditions[].severity
+      rv9-diff-city-infiltrated-0-32: A=0.45 | B=0.35
+B 21 | C 1 | publicProse.blocks.defense:state.publicOrder.beside
+      rv9-diff-city-infiltrated-0-32: A="Visitors to Achillimani are told which few streets to avoid, and the advice turns out to be right." | B="Crime at Achillimani is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught."
+B 21 | C 1 | publicProse.blocks.defense:state.publicOrder.rung.sentence
+      rv9-diff-city-infiltrated-0-32: A="Visitors to Achillimani are told which few streets to avoid, and the advice turns out to be right." | B="Crime at Achillimani is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught."
+B 25 | C 6 | economicState.situationDesc
+      rv9-diff-city-infiltrated-0-32: A="Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides." | B="Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily."
+B 20 | C 1 | powerStructure.publicLegitimacy.label
+      rv9-diff-city-infiltrated-0-32: A="Approved" | B="Tolerated"
+B 20 | C 1 | powerStructure.publicLegitimacy.color
+      rv9-diff-city-infiltrated-0-32: A="#4a7a2a" | B="#a0762a"
+B 20 | C 1 | powerStructure.publicLegitimacy.bg
+      rv9-diff-city-infiltrated-0-32: A="#f4faf0" | B="#faf8ec"
+B 20 | C 1 | powerStructure.publicLegitimacy.govMultiplier
+      rv9-diff-city-infiltrated-0-32: A=1.15 | B=1
+B 20 | C 1 | powerStructure.publicLegitimacy.crimMultiplier
+      rv9-diff-city-infiltrated-0-32: A=0.9 | B=1
+B 20 | C 1 | publicProse.blocks.power:desk.legitimacyBanner.glance
+      rv9-diff-city-infiltrated-0-32: A="Approved" | B="Tolerated"
+B 21 | C 3 | publicProse.blocks.defense:posture.prize.field
+      rv9-diff-city-indebted-0-36: A="The garrison and city watch maintain standard patrol coverage. Effective against opportunistic crime; less effective against organized operations that can plan | B="The garrison and city watch are well paid, well equipped and patrol properly. They come when called, and though some take bribes, it 
+B 21 | C 4 | economicState.safetyProfile.flags.anyActive
+      rv9-diff-city-indebted-0-36: A=true | B=false
+B 19 | C 3 | powerStructure.factionRelationships[] (only in B)
+      rv9-diff-town-indebted-0-16: A="" | B="type=tense"
+B 20 | C 4 | powerStructure.recentConflict
+      rv9-diff-metropolis-infiltrated-0-52: A="The church is demanding veto power over council appointments. City-State Council has not yet refused publicly." | B="The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten."
+B 17 | C 2 | economicState.incomeSources[] (only in B)
+      rv9-diff-town-insurgency-1-84: A="" | B="source=Pilgrim Trade"
+B 15 | C 1 | powerStructure.publicLegitimacy.isTolerated
+      rv9-diff-city-infiltrated-0-32: A=false | B=true
+B 14 | C 1 | powerStructure.stability
+      rv9-diff-city-indebted-0-36: A="Unstable (pervasive organized crime)" | B="Strained — the creditors have a say in every decision"
+B 14 | C 1 | publicProse.blocks.power:desk.stabilityHeader.glance
+      rv9-diff-city-indebted-0-36: A="Unstable (pervasive organized crime)" | B="Strained — the creditors have a say in every decision"
+B 13 | C 1 | stress.cast.absent[]
+      rv9-diff-city-under_siege-0-48: A=undefined | B={"role":"profiteer","reason":"no one is named for it"}
+B 13 | C 1 | stressors.cast.absent[]
+      rv9-diff-city-under_siege-0-48: A=undefined | B={"role":"profiteer","reason":"no one is named for it"}
+B 16 | C 5 | publicProse.blocks.power:desk.structureFlag
+      rv9-diff-city-indebted-0-36: A={"glance":"","sentence":"At Weißgate the richest merchants and the criminal bosses are often the same people; a deal struck in the guild hall and a deal struck  | B=null
+B 11 | C 0 | economicState.safetyProfile.flags.arcaneBlackMarket
+      rv9-diff-city-insurgency-0-44: A=true | B=false
+B 12 | C 1 | publicProse.blocks.economy:economics.incomeMix.sentence
+      rv9-diff-town-insurgency-1-84: A="No one trade earns half of what Ulankhurel makes, so a bad year in any one of them would hurt without ruining it." | B="Ulankhurel is not known for any one trade; it lives on many small ones."
+B 11 | C 2 | stress.cast.stakes[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"factionId":"Creditor's Representative","stake":"split","reason":"it speaks for the creditor the town owes"}
+B 11 | C 2 | stressors.cast.stakes[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"factionId":"Creditor's Representative","stake":"split","reason":"it speaks for the creditor the town owes"}
+B 9 | C 0 | powerStructure.publicLegitimacy.isContested
+      rv9-diff-metropolis-insurgency-0-64: A=true | B=false
+B 10 | C 1 | economicState.economicComplexity
+      rv9-diff-metropolis-politically_fractured-1-140: A="Highly diversified — multiple major revenue streams" | B="Diversified — broad institutional economic base"
+B 10 | C 1 | publicProse.blocks.economy:economics.prosperityHeader.detail[].value
+      rv9-diff-metropolis-politically_fractured-1-140: A="Highly diversified — multiple major revenue streams" | B="Diversified — broad institutional economic base"
+B 12 | C 4 | defenseProfile.scores.economic
+      rv9-diff-city-indebted-0-36: A=71 | B=74
+B 9 | C 1 | powerStructure.publicLegitimacy.isApproved
+      rv9-diff-city-infiltrated-0-32: A=true | B=false
+B 9 | C 1 | stress.cast.roles[].reason
+      rv9-diff-city-insurgency-0-44: A="its power could go either way" | B="speaks for the power that gains from the crisis, from a house that power backs"
+B 9 | C 1 | stressors.cast.roles[].reason
+      rv9-diff-city-insurgency-0-44: A="its power could go either way" | B="speaks for the power that gains from the crisis, from a house that power backs"
+B 8 | C 0 | economicState.safetyProfile.flags.religiousFraud
+      rv9-diff-town-insurgency-1-84: A=true | B=false
+B 8 | C 0 | publicProse.blocks.warFaith:faith.templeFraud
+      rv9-diff-town-insurgency-1-84: A={"glance":"","sentence":"Folk in Ulankhurel pay for blessings and relics they half suspect are a fraud. The church and the town's thieves share what their faith | B=null
+B 9 | C 1 | publicProse.blocks.defense:wall.rationale.sentence
+      rv9-diff-metropolis-none-0-53: A="Longji kept its massive walls and fortifications in repair through the quiet years, and with news of danger on the way, the metropolis is glad it did." | B="Though the present peace asks nothing of its defences, Longji keeps its massive walls and fortifications in repair: mending costs less than
+B 8 | C 0 | publicProse.blocks.power:desk.legitimacyLens
+      rv9-diff-city-none-1-117: A=null | B={"glance":"","sentence":"Huan credits the Corrupt City Council with the good years whether or not the Corrupt City Council earned them; the prosperity is the wh
+B 6 | C 0 | activeConditions[].severityBand
+      rv9-diff-metropolis-under_siege-0-68: A="critical" | B="high"
+B 6 | C 0 | publicProse.blocks.stressors:overview.conditionSeverity.glance
+      rv9-diff-metropolis-under_siege-0-68: A="critical" | B="high"
+B 6 | C 0 | publicProse.blocks.stressors:overview.conditionSeverity.sentence
+      rv9-diff-metropolis-under_siege-0-68: A="The metropolis is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing." | B="This is the first thing anyone in Zlatoichi will tell you about, and most of what is done there now is done around it."
+B 7 | C 1 | publicProse.blocks.economy:economics.incomeWeight
+      rv9-diff-metropolis-under_siege-1-128: A=null | B={"glance":"","sentence":"Faith carries real weight at Flachburg: what the religious houses say is heard in the metropolis's dealings, whatever their own share o
+B 7 | C 1 | publicProse.blocks.economy:services.incomeWeight
+      rv9-diff-metropolis-under_siege-1-128: A=null | B={"@":"economy:economics"}
+B 7 | C 1 | publicProse.blocks.economy:resources.incomeWeight
+      rv9-diff-metropolis-under_siege-1-128: A=null | B={"@":"economy:economics"}
+B 7 | C 1 | publicProse.blocks.economy:daily_life.incomeWeight
+      rv9-diff-metropolis-under_siege-1-128: A=null | B={"@":"economy:economics"}
+B 6 | C 1 | history.currentTensions[].description
+      rv9-diff-city-wartime-1-109: A="News of approaching danger divided the community on how to respond" | B="News of approaching danger divides the community on how to respond"
+B 5 | C 1 | stress.cast.roles[].role
+      rv9-diff-city-insurgency-0-44: A="waverer" | B="instigator"
+B 5 | C 1 | stressors.cast.roles[].role
+      rv9-diff-city-insurgency-0-44: A="waverer" | B="instigator"
+B 6 | C 2 | publicProse.blocks.power:desk.successionRisk.glance
+      rv9-diff-metropolis-politically_fractured-0-60: A="Contested" | B="Critical. The seat could fall"
+B 5 | C 1 | publicProse.blocks.defense:threat.economic.sentence
+      rv9-diff-metropolis-politically_fractured-1-140: A="Huafeng can pay for its own emergencies for a while, but every hard season brings the end of the money closer." | B="The metropolis went into this trouble with money in hand, and so far the money has held."
+B 4 | C 1 | economicState.safetyProfile.flags.merchantArmy
+      rv9-diff-city-insurgency-0-44: A=true | B=false
+B 4 | C 1 | history.currentTensions[].factions[] (only in A)
+      rv9-diff-metropolis-wartime-1-129: A="Hoarders" | B=""
+B 3 | C 0 | powerStructure.publicLegitimacy.isEndorsed
+      rv9-diff-city-none-1-113: A=true | B=false
+B 3 | C 0 | powerStructure.factions[].contestsNiche
+      rv9-diff-city-occupied-0-35: A="Merchant Guilds" | B="Craft Guilds"
+B 2 | C 0 | history.siegeNarrative
+      rv9-diff-town-infiltrated-0-12: A="The Siege is still present in living memory: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands." | B="The Siege is still present in living memory: Whether the trade the settlement lives on is about to fail is the quarrel of the day: 
+B 3 | C 1 | institutions[].desc
+      rv9-diff-city-insurgency-1-104: A="A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases." | B="A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases."

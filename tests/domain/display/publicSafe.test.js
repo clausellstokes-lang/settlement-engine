@@ -7,6 +7,7 @@ import {
   curateModelFor, toggleVeilDelta, CURATE_SECTIONS, readShareMode, clampShareMode, galleryPayloadFor, VEIL_LIMITS, VEIL_MODES,
 } from '../../../src/domain/display/galleryVeil.js';
 import { SEARCH_TAB_ORDER } from '../../../src/domain/dossier/dossierSearch.js';
+import { buildNameSearch } from '../../../src/domain/display/gallerySecondHomes.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -647,6 +648,17 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
 
   const rowsOf = (s, cls) => defaultVeilFor(s).filter(d => d.cls === cls).map(d => d.address);
   const project = (s) => applyVeil(s, resolveVeil(defaultVeilFor(s), []));
+  // R3-CURE-3 (the chair's ruling B of 10:21 UTC): Bailthwaite with NO HOUSE HIDDEN: its two hideable criminal houses (the
+  // thieves' guild chapter, the whisper market) shown by hand; every other default stands. R3's power rule then still serves
+  // the criminal power's row (no hidden house raised it).
+  const NO_HOUSE_HIDDEN = Object.freeze([{ address: 'card:institution:thieves-guild-chapter', hidden: false }, { address: 'card:institution:whisper-market', hidden: false }]);
+  const projectNoHouseHidden = (s) => applyVeil(s, resolveVeil(defaultVeilFor(s), NO_HOUSE_HIDDEN));
+  /** The lane's own search (gallerySecondHomes.js :: buildNameSearch): a withheld name, folded, at the name boundary, as a key or a
+   *  string at any depth, the served powers' names its open names. @param {any} out @param {string[]} names */
+  const named = (out, names) => {
+    const served = [...(out.powerStructure?.factions || []), ...(out.factions || [])].flatMap(f => [f?.faction, f?.name]).filter(v => typeof v === 'string');
+    return buildNameSearch(names, served).holds(out);
+  };
 
   it('criminal institution (X-21e): a town with a thieves\' guild hides the house whole; a town without has no such row', () => {
     expect(rowsOf(bailthwaite(), 'criminal-institution')).toEqual(expect.arrayContaining([
@@ -691,12 +703,29 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
     expect(project(withPost).institutions[0].desc).toBe('A small licensed register office among much larger trades.');
   });
 
+  // R3-CURE-3 (the chair's ruling B of 10:21 UTC), RE-STATED. CAUSE: R3's power rule (VEIL-22, R3-CURE's power.entry; the
+  // chair's ruling of 07:31 "a power a hidden house raised leaves WHOLE"): the default hides the thieves' guild chapter whole,
+  // which raised the Thieves' Guild, so the power's row leaves both lists whole. The old positive is kept where the rule still
+  // serves the row (no house hidden); the new arm proves the row gone, by the lane's search, where the house is hidden.
   it('criminal faction: members, goals, conflicts and description hidden; name, category and standing stay', () => {
     expect(rowsOf(bailthwaite(), 'criminal-faction')).toEqual(expect.arrayContaining(["field:faction:faction.thieves_guild:members"]));
-    const f = project(bailthwaite()).powerStructure.factions;
-    expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, rawPower: 4, powerLabel: 'Suppressed', category: 'criminal' });
+    const f = projectNoHouseHidden(bailthwaite()).powerStructure.factions;
+    // R2 (VEIL-21; VR16, VR14 (iii)): `rawPower` is drawn by no non-owner page and leaves every non-owner read, whatever the veil.
+    // The name, category and standing (powerLabel) byte for byte; the share is R3's VR31 (registry power.share: a served share set
+    // that does not sum to 100 is re-derived by largest remainder): this trimmed fixture's two shares sum to 35, so 5 reads 14.
+    expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 14, powerLabel: 'Suppressed', category: 'criminal' });
+    expect(f[1].power).toBe(86);
     expect(f[1].desc).toBe('The trades.');
     expect(rowsOf(temurpolis(), 'criminal-faction')).toEqual([]);
+  });
+
+  it('criminal faction, R3 (the chair\'s ruling B): a house hidden whole that raised the power: its row leaves whole, proved by the search', () => {
+    const out = project(bailthwaite());
+    expect(out.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(out.powerStructure.factions).toEqual([{ faction: 'Merchant Guilds', power: 100, powerLabel: 'Strong', category: 'economic', desc: 'The trades.' }]);
+    expect(named(out, ["Thieves' Guild", 'faction.thieves_guild'])).toBe(false);
+    // the search's tooth: the same search over the no-house-hidden page finds the row
+    expect(named(projectNoHouseHidden(bailthwaite()), ["Thieves' Guild"])).toBe(true);
   });
 
   it('NPC secrets and corruption flags: class switches where the data carries them (a DM-opened share), none where it does not', () => {
@@ -709,13 +738,27 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
     expect(d.personality).toEqual({ flaw: 'paranoid' });
   });
 
+  // R3-CURE-3 (the chair's ruling B of 10:21 UTC), RE-STATED. CAUSE: R3's power rule (as above): the Thieves' Guild a hidden
+  // house raised leaves whole, and with it every structured copy (R3-CURE: factionRelationships keeps a pair only where both
+  // powers are served). The old positive is kept with no house hidden; the new arm below: the pair leaves, proved by the search.
   it("Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed", () => {
-    const out = project(bailthwaite());
+    const out = projectNoHouseHidden(bailthwaite());
     const sp = out.economicState.safetyProfile;
     expect('criminalInstitutions' in sp || 'crimeTypes' in sp || 'blackMarketCapture' in sp).toBe(false);
     expect(sp.safetyLabel).toBe('Strained');
     expect('criminalCaptureState' in out.powerStructure).toBe(false);
     expect(out.powerStructure.factionRelationships[0]).toEqual({ pair: ["Thieves' Guild", 'Merchant Guilds'], type: 'rivalry' });
+    expect(isVeiled(out, 'block:defense.criminalStructure')).toBe(true);
+    expect(isVeiled(out, 'block:power.criminalUnderside')).toBe(true);
+  });
+
+  it("Defense's criminal architecture, R3 (the chair's ruling B): the house hidden whole: the withheld power's pair leaves whole, proved by the search", () => {
+    const out = project(bailthwaite());
+    const sp = out.economicState.safetyProfile;
+    expect('criminalInstitutions' in sp || 'crimeTypes' in sp || 'blackMarketCapture' in sp).toBe(false);
+    expect('criminalCaptureState' in out.powerStructure).toBe(false);
+    expect(out.powerStructure.factionRelationships).toEqual([]);
+    expect(named(out, ["Thieves' Guild"])).toBe(false);
     expect(isVeiled(out, 'block:defense.criminalStructure')).toBe(true);
     expect(isVeiled(out, 'block:power.criminalUnderside')).toBe(true);
   });
@@ -782,15 +825,32 @@ describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () =>
     ...(s.npcs || []).flatMap(n => [`card:npc:${n.id}`, ...Object.keys(CARD_KINDS.npc.fields).map(f => `field:npc:${n.id}:${f}`)]),
   ].map(address => ({ address, hidden: false }));
 
+  // R3-CURE-3 (the chair's ruling B of 10:21 UTC), RE-STATED. CAUSE: R3's registry row history.tension.crimeWave (VR4 ii-7: the
+  // crime_wave tension is withheld where the SERVED crime signal is false): everyShown flips no house card, so the Fence stays
+  // hidden whole by its default and the served town holds no criminal house. The old positive is kept with the Fence shown (no
+  // house hidden); the new arm: the Fence hidden, the tension leaves whole, proved by the search.
   it('with the door closed, flipping every eye to shown reveals no DM-only field', () => {
     const projected = toPublicSafe(dmRecord());
-    const out = applyVeil(projected, resolveVeil(defaultVeilFor(projected), everyShown(projected)));
+    const out = applyVeil(projected, resolveVeil(defaultVeilFor(projected), [...everyShown(projected), { address: 'card:institution:fence', hidden: false }]));
+    expect(out.institutions.map(i => i.name)).toEqual(['Fence']);
     for (const k of ['plotHooks', 'dmCompass', 'dmNotes']) expect(k in out).toBe(false);
     for (const n of out.npcs) {
       for (const k of ['secret', 'goal', 'plotHooks', 'relationships', 'corrupt']) expect(k in n).toBe(false);
     }
     expect(out.history.currentTensions[0].description).toBe('A surge in crime.');
     expect('plotHooks' in out.history.currentTensions[0]).toBe(false);
+  });
+
+  it('with the door closed, R3 (the chair\'s ruling B): every eye shown but the Fence hidden whole: the crime-wave tension leaves whole, proved by the search', () => {
+    const projected = toPublicSafe(dmRecord());
+    const out = applyVeil(projected, resolveVeil(defaultVeilFor(projected), everyShown(projected)));
+    expect(out.institutions).toEqual([]);
+    for (const k of ['plotHooks', 'dmCompass', 'dmNotes']) expect(k in out).toBe(false);
+    expect(out.history.currentTensions).toEqual([]);
+    expect(buildNameSearch(['A surge in crime.', 'crime_wave'], []).holds(out)).toBe(false);
+    // the search's tooth: it finds the tension on the page that serves it
+    const shown = applyVeil(projected, resolveVeil(defaultVeilFor(projected), [...everyShown(projected), { address: 'card:institution:fence', hidden: false }]));
+    expect(buildNameSearch(['A surge in crime.', 'crime_wave'], []).holds(shown)).toBe(true);
   });
 
   it('a stored share whose deltas un-hide everything still reveals nothing the projection did not carry', () => {

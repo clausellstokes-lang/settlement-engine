@@ -1,0 +1,33 @@
+V8-9 RED AT ad093c92c (the base's bytes: /var/tmp/v17/red-d7abcdc, the joined tip d7abcdc55, 212 46389052... / down 5b3eb697...).
+The new arm (tests/security/galleryVeilHandRows.pglite.test.js, 'V8-9 THE PATTERN'S BOUND') copied into the archive, run alone
+(vitest -t V8-9, in-process pglite on a chain of every migration on disk): FAILED, 90 faults, 85.1 s. Its summary, row by row
+(8 reads a row: gallery, link, import and the twin, Reveal DM off and on; 'served 2 of 8' is the twin alone):
+  just under the code points (85 x 145): 16200 code points, weight 3353400, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the code points (86 x 145): 16385 code points, weight 3391695, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just under the weight (50 Han names of 40 distinct characters): 2053 code points, weight 4116265, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the weight (51 Han names of 40 distinct characters): 2094 code points, weight 4282230, 0 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just under the cut-outs (16): 8501 code points, weight 1641710, 16 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  just over the cut-outs (17): 9002 code points, weight 1738904, 17 cut-outs; served 8 of 8, the closed answer 0 of 8, server against twin 0 paths
+  the reader's 600 x 145: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  the reader's 1,000 x 80: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  the reader's 1,500 x 145: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  600 in Greek, a dotted capital I and a sharp s: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  1,000 in Cyrillic, a dotted capital I and a sharp s: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  2,000 of symbols only: the search raises; served 2 of 8, the closed answer 0 of 8, server against twin 0 paths
+  one open name of 100,000 characters that holds a hidden one: the arm's database raises (ERRORDATA_STACK_SIZE exceeded)
+  the arm: 85.1 s
+  90 faults
+  the twin's bound is undefined
+  (the 100,000-character row raises ERRORDATA_STACK_SIZE: on the base's bytes the cut-out's raise leaves pglite unsteady; it is asked last)
+Faults, 90 in all: the twin's bound undefined (1); just over each bound the server's search not closed (3) and 24 reads that send
+the exact answer where the closed one is owed (24); on the six rows that raise, the server's search raises (6) and is not closed (6),
+36 server reads raise (36) and the twin's 12 reads send the exact answer, not the closed one (12); the 100,000-character row, 2
+(the arm's database raises, ERRORDATA_STACK_SIZE; the summary prints the first 60 faults only, so this row's two are counted by
+difference, not read).
+Just under each bound the base serves the exact answer: those 24 responses are byte for byte the tree's (below, V89-green.txt).
+
+NATIVE (PostgreSQL 16.15, the base chain v89base, the reader's cost8.sql, gallery read as anon, 5 rounds): every round raises
+  h=600 hit=0 cold=0 nl=8 : v89base | ERROR invalid memory alloc request size 1940986152 | 384 ms
+  h=1000 hit=0 cold=0 nl=4 : v89base | ERROR invalid memory alloc request size 1556529336 | 503 ms
+  h=1500 hit=0 cold=0 nl=8 : v89base | ERROR regular expression failed: regular expression is too complex | 1113 ms
+  (x211 serves each: 223, 388, 671 ms medians; V89-cost.txt)

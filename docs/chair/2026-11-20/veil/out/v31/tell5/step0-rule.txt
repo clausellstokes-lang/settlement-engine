@@ -1,0 +1,5 @@
+hidden-house twin pages serving criminal services: 630; after the rule non-empty: 12
+kept by tag: [["(arcane underground)",12]]
+withheld by tag: [["(arcane underground)",378],["(smuggling)",550],["(street gang)",40],["(religious fraud)",150],["(commercial crime)",180]]
+  KEPT r3m-town-infiltrated-0-12:Arcane services (illicit)|(arcane underground)|0
+  KEPT r3m-town-none-0-23:Arcane services (illicit)|(arcane underground)|0

@@ -1,0 +1,26 @@
+wall 2627 ms for 5
+_gallery_sanitize_public_json              calls    69070 total    1002.7 self    1002.7
+_gallery_veil_name_ready                   calls     2130 total     660.6 self     518.4
+_gallery_veil_name_hits                    calls        5 total     478.4 self     197.4
+_gallery_veil_second_homes                 calls        5 total    1239.2 self     147.2
+_gallery_veil_name_prep                    calls     2310 total     142.4 self     142.4
+_gallery_veil_hidden_name                  calls     1205 total     120.4 self     120.4
+_gallery_veil_grouping                     calls       60 total      60.7 self      60.7
+get_unlisted_dossier                       calls        5 total    2614.8 self      44.3
+_gallery_veil_apply                        calls        5 total    1455.2 self      42.0
+_gallery_veil_name_sweep                   calls        5 total     442.8 self      42.0
+_gallery_veil_resolve                      calls        5 total      52.1 self      25.9
+_gallery_veil_fold                         calls     1060 total      21.4 self      21.4
+_gallery_apply_member_overrides            calls        5 total     203.6 self      21.2
+_gallery_veil_name_near                    calls      345 total     390.1 self      20.6
+_gallery_veil_own_id                       calls     1810 total      34.2 self      20.4
+_gallery_veil_card_id                      calls     5000 total      53.8 self      19.7
+_gallery_veil_case_fold                    calls      975 total      17.1 self      17.1
+_gallery_veil_card                         calls      530 total      18.8 self      16.0
+_gallery_veil                              calls        5 total    1524.6 self      14.5
+_gallery_veil_str                          calls     1845 total      14.1 self      14.1
+_gallery_veil_facet                        calls     1565 total      12.8 self      12.8
+_gallery_veil_map                          calls       10 total      46.9 self      12.8
+_gallery_veil_sources                      calls        5 total      64.7 self      12.4
+_gallery_veil_name_hit                     calls      760 total      17.0 self      10.8
+_gallery_veil_cards                        calls       70 total      10.1 self       9.7

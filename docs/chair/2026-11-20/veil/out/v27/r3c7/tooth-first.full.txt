@@ -1,0 +1,42 @@
+[gate-tail] start:  15:21:59 up 25 min,  0 user,  load average: 1.18, 1.68, 1.30 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c7
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (24 tests | 1 failed | 23 skipped) 536736ms
+     × R3-CURE-7 (ruling 53, condition 1: THE TOOTH): a person whose id is `true`, one whose id is `false`, one whose id is the empty string: (a) no stripped goal or membership of the withheld guild survives for any of the three (no husk; a shown membership stays byte for byte); (b) the twin and 212 serve the SAME result for each (byte for byte, by name, presence included); every read, both shapes, Reveal DM off and on 47ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-7 (ruling 53, condition 1: THE TOOTH): a person whose id is `true`, one whose id is `false`, one whose id is the empty string: (a) no stripped goal or membership of the withheld guild survives for any of the three (no husk; a shown membership stays byte for byte); (b) the twin and 212 serve the SAME result for each (byte for byte, by name, presence included); every read, both shapes, Reveal DM off and on
+AssertionError: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-ids open dm=true map: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\"}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"power\":\"Fishers\",\"role\":\"member\"}]}]",
++   "hand-ids open dm=true map: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\"}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"power\":\"Fishers\",\"role\":\"member\"}]}]",
++   "hand-ids open dm=true map: the empty-id person differs from the twin: server [{\"id\":\"\",\"name\":\"Em Blank\",\"role\":\"Carter\"}] | twin [{\"id\":\"\",\"name\":\"Em Blank\",\"role\":\"Carter\",\"memberships\":[]}]",
++   "hand-ids openM dm=true map: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\"}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"power\":\"Fishers\",\"role\":\"member\"}]}]",
++   "hand-ids openM dm=true map: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\"}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"power\":\"Fishers\",\"role\":\"member\"}]}]",
++   "hand-ids openM dm=true map: the empty-id person differs from the twin: server [{\"id\":\"\",\"name\":\"Em Blank\",\"role\":\"Carter\"}] | twin [{\"id\":\"\",\"name\":\"Em Blank\",\"role\":\"Carter\",\"memberships\":[]}]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:822:17
+    820|     expect(judged).toBeGreaterThan(0);
+    821|     expect(compared).toBeGreaterThan(0);
+    822|     expect(bad).toEqual([]);
+       |                 ^
+    823|   });
+    824|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 23 skipped (24)
+   Start at  15:22:00
+   Duration  537.13s (transform 4.51s, setup 52ms, import 174ms, tests 536.74s, environment 0ms)
+
+[gate-tail] end:  15:30:58 up 34 min,  0 user,  load average: 2.66, 2.75, 2.13

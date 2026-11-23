@@ -23,6 +23,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { rederiveForPage } from '../../src/domain/veil/pageRederive.js';
 import { publicProseOf, withPublicProse } from '../../src/domain/display/publicProse.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
@@ -117,9 +118,14 @@ beforeAll(async () => {
   for (const i of TOWNS) {
     const owner = birth(i).settlement;
     const stamped = withPublicProse(owner, composePublicProse(owner));
+    // R2 (VEIL-21; VR19 (c), VR33): the shared page is the page's own read of an unmarked share: the projection and the
+    // page's re-derivation of what the server withholds on every read (src/lib/gallery.js :: sanitizeDossier ->
+    // src/domain/veil/pageRederive.js, `unveiled`: the share carries no veil). R2-CURE (the chair's ruling of 04:27 UTC):
+    // the comparison is with the OWNER'S OWN RECORD, unaltered; the page draws what the owner's page draws, by identity
+    // (R2 had compared it with the owner's record less the black market's capture, which moved the owner's law band)
     towns[i] = {
       owner,
-      shared: projectShareVeil(toPublicSafe(stamped), null),
+      shared: rederiveForPage(projectShareVeil(toPublicSafe(stamped), null), { unveiled: true }),
       unstamped: projectShareVeil(toPublicSafe(owner), null),
     };
   }

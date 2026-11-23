@@ -1,0 +1,105 @@
+V7-2: WHAT THE IDENTITY RULE COSTS THE PAGE (executed; the client's twin, which the guards hold equal to the server; base 1e5832dda against the bytes of this commit)
+Probe: veil-probe-10/measure/second-homes-cost.probe.jsx (twice: the base's two files, then these), compared by second-homes-cost.diff.mjs.
+guard: the four born towns of tests/security/gallerySecondHomes.pglite.test.js :: TOWNS, both stored shapes, the DM reveal off and on (16 projections).
+wide: 240 born towns (six sizes, calm and infiltrated, 20 seeds each), new shape, reveal off.
+default: the default veil. everyEye: every eye of the share panel shut by hand. tieDescOnly: the ties' description switch alone (the default veil besides).
+
+sample | veil | home | carried | sent before | sent after | newly withheld, source OPEN (fault) | newly withheld, source shut (price) | newly withheld, its source not in the projection (orphan, closed) | sent after with its source shut
+guard | default | annotation | 32 | 32 | 32 | 0 | 0 | 0 | 0
+guard | default | impression | 928 | 928 | 928 | 0 | 0 | 0 | 0
+guard | default | pressureSentence | 16 | 16 | 16 | 0 | 0 | 0 | 0
+guard | default | prominent.full | 4 | 4 | 4 | 0 | 0 | 0 | 0
+guard | default | prominent.phrasing | 4 | 4 | 4 | 0 | 0 | 0 | 0
+guard | default | prominent.tension | 4 | 4 | 4 | 0 | 0 | 0 | 0
+guard | default | siegeNarrative | 4 | 4 | 4 | 0 | 0 | 0 | 0
+guard | everyEye | annotation | 32 | 12 | 0 | 0 | 12 | 0 | 0
+guard | everyEye | impression | 928 | 928 | 0 | 0 | 928 | 0 | 0
+guard | everyEye | pressureSentence | 16 | 16 | 16 | 0 | 0 | 0 | 0
+guard | everyEye | prominent.full | 4 | 0 | 0 | 0 | 0 | 0 | 0
+guard | everyEye | prominent.phrasing | 4 | 0 | 0 | 0 | 0 | 0 | 0
+guard | everyEye | prominent.tension | 4 | 0 | 0 | 0 | 0 | 0 | 0
+guard | everyEye | siegeNarrative | 4 | 0 | 0 | 0 | 0 | 0 | 0
+guard | tieDescOnly | annotation | 32 | 32 | 32 | 0 | 0 | 0 | 0
+guard | tieDescOnly | impression | 928 | 928 | 928 | 0 | 0 | 0 | 0
+guard | tieDescOnly | pressureSentence | 16 | 16 | 16 | 0 | 0 | 0 | 0
+guard | tieDescOnly | prominent.full | 4 | 0 | 0 | 0 | 0 | 0 | 0
+guard | tieDescOnly | prominent.phrasing | 4 | 4 | 0 | 4 | 0 | 0 | 0
+guard | tieDescOnly | prominent.tension | 4 | 4 | 4 | 0 | 0 | 0 | 0
+guard | tieDescOnly | siegeNarrative | 4 | 4 | 4 | 0 | 0 | 0 | 0
+wide | default | annotation | 475 | 475 | 475 | 0 | 0 | 0 | 0
+wide | default | impression | 7011 | 7011 | 7011 | 0 | 0 | 0 | 0
+wide | default | pressureSentence | 240 | 240 | 240 | 0 | 0 | 0 | 0
+wide | default | prominent.full | 125 | 125 | 125 | 0 | 0 | 0 | 0
+wide | default | prominent.phrasing | 125 | 125 | 125 | 0 | 0 | 0 | 0
+wide | default | prominent.tension | 125 | 125 | 125 | 0 | 0 | 0 | 0
+wide | default | siegeNarrative | 26 | 26 | 26 | 0 | 0 | 0 | 0
+wide | everyEye | annotation | 475 | 105 | 4 | 0 | 101 | 0 | 0
+wide | everyEye | impression | 7011 | 7010 | 0 | 0 | 7010 | 0 | 0
+wide | everyEye | pressureSentence | 240 | 213 | 208 | 5 | 0 | 0 | 0
+wide | everyEye | prominent.full | 125 | 9 | 0 | 0 | 0 | 9 | 0
+wide | everyEye | prominent.phrasing | 125 | 9 | 0 | 0 | 0 | 9 | 0
+wide | everyEye | prominent.tension | 125 | 9 | 0 | 0 | 0 | 9 | 0
+wide | everyEye | siegeNarrative | 26 | 0 | 0 | 0 | 0 | 0 | 0
+wide | tieDescOnly | annotation | 475 | 475 | 475 | 0 | 0 | 0 | 0
+wide | tieDescOnly | impression | 7011 | 7011 | 7011 | 0 | 0 | 0 | 0
+wide | tieDescOnly | pressureSentence | 240 | 240 | 225 | 5 | 10 | 0 | 17
+wide | tieDescOnly | prominent.full | 125 | 9 | 0 | 0 | 0 | 9 | 0
+wide | tieDescOnly | prominent.phrasing | 125 | 125 | 93 | 23 | 0 | 9 | 0
+wide | tieDescOnly | prominent.tension | 125 | 125 | 125 | 0 | 0 | 0 | 0
+wide | tieDescOnly | siegeNarrative | 26 | 26 | 26 | 0 | 0 | 0 | 0
+
+newly SENT (must be 0): 0
+
+the newly withheld and the still sent with a shut source, by what the composer built the home from:
+12 | guard | everyEye | annotation | PRICE | event by name; holds no lasting effect
+928 | guard | everyEye | impression | PRICE | holds nothing of the appearance
+4 | guard | tieDescOnly | prominent.phrasing | FAULT | built from the names, the gloss, the tension
+101 | wide | everyEye | annotation | PRICE | event by name; holds no lasting effect
+7010 | wide | everyEye | impression | PRICE | holds nothing of the appearance
+5 | wide | everyEye | pressureSentence | FAULT | another line (succession, a small place)
+9 | wide | everyEye | prominent.full | ORPHAN | ORPHAN: its tie is covert, dropped from this projection by the public sanitiser
+9 | wide | everyEye | prominent.phrasing | ORPHAN | ORPHAN: its tie is covert, dropped from this projection by the public sanitiser
+9 | wide | everyEye | prominent.tension | ORPHAN | ORPHAN: its tie is covert, dropped from this projection by the public sanitiser
+5 | wide | tieDescOnly | pressureSentence | FAULT | another line (succession, a small place)
+1 | wide | tieDescOnly | pressureSentence | PRICE | a tie's phrasing (names both ends: false)
+9 | wide | tieDescOnly | pressureSentence | PRICE | a tie's phrasing (names both ends: true)
+17 | wide | tieDescOnly | pressureSentence | SENT AFTER WITH ITS SOURCE'S EYE SHUT | a tie's phrasing (names both ends: true)
+9 | wide | tieDescOnly | prominent.full | ORPHAN | ORPHAN: its tie is covert, dropped from this projection by the public sanitiser
+23 | wide | tieDescOnly | prominent.phrasing | FAULT | built from the names, the gloss, the tension
+9 | wide | tieDescOnly | prominent.phrasing | ORPHAN | ORPHAN: its tie is covert, dropped from this projection by the public sanitiser
+
+WHAT THE HOMES ARE, on the same 240 towns (veil-probe-10/measure/second-homes-facts.probe.jsx; the stored record, before any projection):
+pressureSentence present: 240
+  a tie's phrasing (it holds a tie's tension as born): 27
+    of those, naming both ends of that tie: 26
+    of those, naming one end only: 1
+    of those, in a town under a stress: 0
+  not a tie's, the town under a stress (the stress's line): 169
+    of those, naming BOTH ends of some tie: 0
+  not a tie's, equal to powerStructure.recentConflict: 39
+  not a tie's, no stress, not recentConflict (the succession line, a trade line): 5
+ties: 6972
+  whose tension names both ends: 6814
+  whose tension names one end: 158
+  whose description names both ends: 6972
+  whose description holds an em dash (the rumour template's description tail): 0
+prominentRelationship present: 125
+  matched by one tie of the same two ends and type: 125
+  matched by more than one: 0
+  phrasing IS the tie's tension: 99
+  phrasing is the two names, the gloss, then the tension: 26
+  phrasing holds the description: 0
+history.siegeNarrative present: 26
+  it holds the FIRST tension's description: 26
+  towns with 1 / 2 / 3 tensions: 15 / 9 / 2
+legacy annotations: 475
+  whose entry names exactly one event (eventName = the event's name): 475
+  with no such event: 0
+  holding a lasting effect: 370
+  holding none (their event has no lasting effect): 105
+people with an impression: 7011
+  whose impression holds a string of their own appearance: 1
+
+THE EDITOR (read, src/store/settlementPendingEdits.js :: QUEUE_WIRED_PROSE_PATHS; src/store/settlementRegenAction.js; src/domain/edit/recordRegister.js): the owner edits pressureSentence and
+prominentRelationship.phrasing by hand; no writer recomposes a second home when its source is edited; a history reroll mints siegeNarrative and legacyAnnotations again;
+the record register keys history.legacyAnnotations by [eventName, yearsAgo] and the events by name.

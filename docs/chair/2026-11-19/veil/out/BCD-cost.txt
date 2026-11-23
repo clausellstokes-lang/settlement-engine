@@ -1,0 +1,25 @@
+B, C, D THE COST (VEIL-19's builder), after the last change (D). Local scratch PostgreSQL 16 (unix socket /var/tmp/rv7).
+Chains: x211 = b2c211 (001..211 from the base's bytes, the frozen 211); base = b2base (001..212, `git archive bedd5a392`, 212
+dae0ae6c...); after = b2treed (001..212 from D's tree). Runner: measure/v8245-cost.sh b2c211 b2base b2treed 5 (the brief's two
+cost8 rows and deep-cost's two 300 KB rows; 5 rounds, the chains in turn; medians, ms).
+
+row                                                 x211      base     after  after/x211
+h=5 hit=10000 cold=0 nl=1 (the V8-3 row)            6434      7530      7296       1.13
+h=50 hit=500 cold=500 nl=1 (5 rounds)                 84       195       209       2.49  NOISY: re-run below
+   the same row, 9 rounds                            106       205       198       1.87
+   the same row, 15 rounds                           105       202       203       1.93  (base 1.92)
+depth=10 houses=200 strings=5000 dm=false (300 KB)   347       373       365       1.05
+depth=10 houses=600 strings=10000 dm=false           1290      1352      1355       1.05
+
+THE LARGEST BORN TOWN of the 48 (Albaorum, a metropolis, 499 KB stored; Langengrund's file is not in this container), the
+default veil record, 9 rounds, medians, ms (measure/bcd-big-cost.mjs; the per-stage line: the same with the six chains and the Reveal-DM read alone):
+  gallery read, Reveal DM off      x211 284.5 | base 436.8 | after 448.1   1.58
+  party link                       x211 218.7 | base 376.8 | after 394.8   1.81
+  gallery read, Reveal DM ON       x211 180.9 | base 428.9 | after 456.9   2.53   PAST TWICE, AND SO AT THE BASE (2.37)
+  the Reveal-DM gallery read per stage, 15 rounds: x211 181.9 | base 419.1 | B 431.9 | B2 434.9 | C 435.3 | D 438.8 (2.41x;
+  the base 2.30x): B, B2, C and D together add 19.7 ms (+4.7%), B the most (its trace accounting, +12.8 ms).
+Every read served (0 ERROR; no read fails where 211 serves).
+THE LAW: holds on the brief's rows (the V8-3 row 1.13x; 50/500/500 1.87x to 1.93x on 9 and 15 rounds, 2.49x on the noisy
+5-round run, where the base itself read 2.32x; the 300 KB rows 1.05x). IT DOES NOT HOLD on the Reveal-DM gallery read of the
+largest born town measured here: 2.41x after, 2.30x already at the base (the read the predecessors' Langengrund rows did not
+time: they timed the link and the Reveal-off gallery read). Not caused by B, C or D (+4.7%); reported to the seat.

@@ -1,0 +1,7 @@
+# VR36, the largest born town (R2-CURE, VEIL-21): bcd-big-cost.mjs's method, 9 rounds, medians, anon, local scratch cluster.
+# town: r5-born.probe.jsx's R5_BIG loop at this tree (seeds v11-ties, city and metropolis, calm and infiltrated, 20 each): metropolis/infiltrated/6 Langengrund 502604 bytes; sha256 a060ce8d9fbb8481366fb6efb7a39c668068e6318204d09abfc9bb27f769612e
+# chains: r2b_x211 (copy of x211: 211 frozen), r2b_base (copy of r2_base: 212 sha fec111c2...4acea3, the lane tip before R2), r2b_after (copy of r2_after; its _gallery_veil_withhold_always prosrc md5 5595f237... equals this tree's 212, sha 05b915ab...8f10)
+the largest born town, gallery off: x211 264.8 | base 407.1 | after 438.8 ms (after/x211 1.66)
+the largest born town, gallery dm: x211 158.7 | base 388.1 | after 419.1 ms (after/x211 2.64)
+the largest born town, link: x211 206.0 | base 375.2 | after 399.5 ms (after/x211 1.94)
+# BOUND: the Reveal-DM gallery read after (419.1 ms) <= twice 211's Reveal-OFF read of the same town (2 x 264.8 = 529.6 ms): MET. Every read served (the script throws on a missing row).

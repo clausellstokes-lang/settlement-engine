@@ -1,0 +1,16 @@
+towns 70 threw 0
+stored cards 3361 stored with gender 3361
+gallery dm=false default | served 3361 gender 0 | hon gender-only 119 towns>0 60 max/town 6 | keeper 0 styled 0 | owner!=shared 298 of which gender 119 | pron strings 46 with name 39
+gallery dm=false all | served 3361 gender 0 | hon gender-only 0 towns>0 0 max/town 0 | keeper 0 styled 0 | owner!=shared 3361 of which gender 0 | pron strings 24 with name 17
+gallery dm=true default | served 3361 gender 3361 | hon gender-only 0 towns>0 0 max/town 0 | keeper 0 styled 0 | owner!=shared 176 of which gender 0 | pron strings 54 with name 47
+gallery dm=true all | served 3361 gender 0 | hon gender-only 0 towns>0 0 max/town 0 | keeper 0 styled 0 | owner!=shared 3361 of which gender 0 | pron strings 24 with name 17
+link dm=false default | served 3361 gender 0 | hon gender-only 119 towns>0 60 max/town 6 | keeper 0 styled 0 | owner!=shared 298 of which gender 119 | pron strings 46 with name 39
+link dm=false all | served 3361 gender 0 | hon gender-only 0 towns>0 0 max/town 0 | keeper 0 styled 0 | owner!=shared 3361 of which gender 0 | pron strings 24 with name 17
+link dm=true default | served 3361 gender 0 | hon gender-only 119 towns>0 60 max/town 6 | keeper 0 styled 0 | owner!=shared 298 of which gender 119 | pron strings 46 with name 39
+link dm=true all | served 3361 gender 0 | hon gender-only 0 towns>0 0 max/town 0 | keeper 0 styled 0 | owner!=shared 3361 of which gender 0 | pron strings 24 with name 17
+ ex: v24-gender-village-none-1 gallery dm=false default: "Godi Nanna Ingvarsson" | with stored gender "Gydja" (female)
+ ex: v24-gender-village-none-1 link dm=false default: "Godi Nanna Ingvarsson" | with stored gender "Gydja" (female)
+ ex: v24-gender-village-none-1 link dm=true default: "Godi Nanna Ingvarsson" | with stored gender "Gydja" (female)
+ ex: v24-gender-village-infiltrated-2 gallery dm=false default: "Brewster Panteleimonissa Doukas" | with stored gender "Alewife" (female)
+ ex: v24-gender-village-infiltrated-2 link dm=false default: "Brewster Panteleimonissa Doukas" | with stored gender "Alewife" (female)
+ ex: v24-gender-village-infiltrated-2 link dm=true default: "Brewster Panteleimonissa Doukas" | with stored gender "Alewife" (female)

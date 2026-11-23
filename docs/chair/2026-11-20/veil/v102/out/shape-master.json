@@ -1,0 +1,94 @@
+{
+ "psFactionKeys": [
+  "category",
+  "contestsNiche",
+  "desc",
+  "faction",
+  "isGoverning",
+  "modifier",
+  "name",
+  "power",
+  "powerLabel",
+  "rawPower"
+ ],
+ "topFactionKeys": [
+  "dominantCategory",
+  "members",
+  "name"
+ ],
+ "topFactions": 6,
+ "psFactions": 6,
+ "topMembersType": [
+  "arr3:object",
+  "arr3:object",
+  "arr3:object",
+  "arr3:object",
+  "arr3:object",
+  "arr2:object"
+ ],
+ "psMembersType": [
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined"
+ ],
+ "topSample": [
+  {
+   "name": "Merchant oligarchy",
+   "members": [
+    [
+     "id",
+     "name",
+     "gender",
+     "role",
+     "title",
+     "category",
+     "personality",
+     "physical",
+     "goal",
+     "secret",
+     "plotHooks",
+     "influence",
+     "power",
+     "presentation",
+     "corrupt",
+     "factionAffiliation",
+     "importance",
+     "densityRungRole",
+     "structuralPosition",
+     "activeConstraint",
+     "settlementCondition",
+     "structuralRank"
+    ]
+   ],
+   "dominantCategory": "economy"
+  }
+ ],
+ "npcInstitution": [
+  "\"Craft guilds (30-80)\""
+ ],
+ "relKeys": [
+  "archetypeKey",
+  "description",
+  "flagDriven",
+  "npc1Id",
+  "npc1Name",
+  "npc1Role",
+  "npc2Id",
+  "npc2Name",
+  "npc2Role",
+  "proseVariant",
+  "strength",
+  "tension",
+  "type",
+  "typeName"
+ ],
+ "criminalHouses": [
+  "Smuggling network",
+  "Multiple criminal factions",
+  "Front businesses",
+  "Black market"
+ ]
+}

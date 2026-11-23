@@ -1,0 +1,33 @@
+SENSITIVITY (NOT THE GATE): the tell column with signature parts dropped (T2_DROP); own and off settings, hidden-house towns twin/server, Reveal off | DM; controls; the limit
+
+== DROP f.economicState.safetyProfile.economicDragDesc
+analyzer exit 1
+own | 92 / 92 | 92 / 92 | 13/48 | 21/48
+off | 24 / 24 | 88 / 88 | 3/48 | 4/48
+ANY SETTING: hidden-house towns with a non-member page: Reveal off 92, Reveal DM 92 (twin or server)
+THE LIMIT (ruling 54 (c): the switch-off page is always a member): hidden-house towns whose switch-off page is NOT a member: Reveal off 24 / 24, Reveal DM 88 / 88 (twin / server)
+GATE (all): 92 of 92 hidden-house towns hold a non-member page -> RED (exit 1)
+
+== DROP f.economicState.safetyProfile.economicDragDesc,r.people.roles,r.trace.criminal,r.ties.criminal
+analyzer exit 1
+own | 92 / 92 | 92 / 92 | 11/48 | 13/48
+off | 19 / 19 | 19 / 19 | 3/48 | 3/48
+ANY SETTING: hidden-house towns with a non-member page: Reveal off 92, Reveal DM 92 (twin or server)
+THE LIMIT (ruling 54 (c): the switch-off page is always a member): hidden-house towns whose switch-off page is NOT a member: Reveal off 19 / 19, Reveal DM 19 / 19 (twin / server)
+GATE (all): 92 of 92 hidden-house towns hold a non-member page -> RED (exit 1)
+
+== DROP f.economicState.safetyProfile.economicDragDesc,r.people.roles,r.trace.criminal,r.ties.criminal,r.powers.criminal,x.powerNoHouse,k.powers,r.people.goals,r.people.memberships,r.cast.criminal,r.powers.conflicts,r.powers.relations
+analyzer exit 1
+own | 92 / 92 | 92 / 92 | 10/48 | 13/48
+off | 15 / 15 | 15 / 15 | 2/48 | 2/48
+ANY SETTING: hidden-house towns with a non-member page: Reveal off 92, Reveal DM 92 (twin or server)
+THE LIMIT (ruling 54 (c): the switch-off page is always a member): hidden-house towns whose switch-off page is NOT a member: Reveal off 15 / 15, Reveal DM 15 / 15 (twin / server)
+GATE (all): 92 of 92 hidden-house towns hold a non-member page -> RED (exit 1)
+
+== DROP k
+analyzer exit 1
+own | 92 / 92 | 92 / 92 | 14/48 | 22/48
+off | 89 / 89 | 89 / 89 | 4/48 | 7/48
+ANY SETTING: hidden-house towns with a non-member page: Reveal off 92, Reveal DM 92 (twin or server)
+THE LIMIT (ruling 54 (c): the switch-off page is always a member): hidden-house towns whose switch-off page is NOT a member: Reveal off 89 / 89, Reveal DM 89 / 89 (twin / server)
+GATE (all): 92 of 92 hidden-house towns hold a non-member page -> RED (exit 1)

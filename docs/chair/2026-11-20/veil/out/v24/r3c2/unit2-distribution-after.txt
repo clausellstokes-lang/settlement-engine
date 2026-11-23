@@ -1,0 +1,60 @@
+== server/off: hidden-house pool 92 (92 of the control's tiers village,town,city,metropolis), control 48
+  key organized       pool 11/92 (12%)  control 1/48 (2%)
+  key semi-organized  pool 62/92 (67%)  control 7/48 (15%)
+  key diffuse         pool 0/92 (0%)    control 11/48 (23%)
+  key null            pool 19/92 (21%)  control 29/48 (60%)
+  label Gambling Den           pool 3/92 (3%)    control 3/48 (6%)
+  label Gambling District      pool 38/92 (41%)  control 2/48 (4%)
+  label Gambling Halls         pool 18/92 (20%)  control 2/48 (4%)
+  label Red Light District     pool 32/92 (35%)  control 2/48 (4%)
+  counterfactual keys: organized 14/92 (15%) | semi-organized 59/92 (64%) | diffuse 10/92 (11%) | null 9/92 (10%)
+  label Gambling Den           served 3/92 (3%)    counterfactual 3/92 (3%)    served where the counterfactual has none: 0
+  label Gambling District      served 38/92 (41%)  counterfactual 38/92 (41%)  served where the counterfactual has none: 0
+  label Gambling Halls         served 18/92 (20%)  counterfactual 18/92 (20%)  served where the counterfactual has none: 0
+  label Red Light District     served 32/92 (35%)  counterfactual 32/92 (35%)  served where the counterfactual has none: 0
+  pool towns serving NO operations label: 23/92 (25%); control 41/48 (85%); key null: pool 19/92 (21%)
+== server/dm: hidden-house pool 92 (92 of the control's tiers village,town,city,metropolis), control 48
+  key organized       pool 11/92 (12%)  control 1/48 (2%)
+  key semi-organized  pool 62/92 (67%)  control 7/48 (15%)
+  key diffuse         pool 0/92 (0%)    control 11/48 (23%)
+  key null            pool 19/92 (21%)  control 29/48 (60%)
+  label Gambling Den           pool 3/92 (3%)    control 3/48 (6%)
+  label Gambling District      pool 38/92 (41%)  control 2/48 (4%)
+  label Gambling Halls         pool 18/92 (20%)  control 2/48 (4%)
+  label Red Light District     pool 32/92 (35%)  control 2/48 (4%)
+  counterfactual keys: organized 14/92 (15%) | semi-organized 59/92 (64%) | diffuse 10/92 (11%) | null 9/92 (10%)
+  label Gambling Den           served 3/92 (3%)    counterfactual 3/92 (3%)    served where the counterfactual has none: 0
+  label Gambling District      served 38/92 (41%)  counterfactual 38/92 (41%)  served where the counterfactual has none: 0
+  label Gambling Halls         served 18/92 (20%)  counterfactual 18/92 (20%)  served where the counterfactual has none: 0
+  label Red Light District     served 32/92 (35%)  counterfactual 32/92 (35%)  served where the counterfactual has none: 0
+  pool towns serving NO operations label: 23/92 (25%); control 41/48 (85%); key null: pool 19/92 (21%)
+== twin/off: hidden-house pool 92 (92 of the control's tiers village,town,city,metropolis), control 48
+  key organized       pool 11/92 (12%)  control 1/48 (2%)
+  key semi-organized  pool 62/92 (67%)  control 7/48 (15%)
+  key diffuse         pool 0/92 (0%)    control 11/48 (23%)
+  key null            pool 19/92 (21%)  control 29/48 (60%)
+  label Gambling Den           pool 3/92 (3%)    control 3/48 (6%)
+  label Gambling District      pool 38/92 (41%)  control 2/48 (4%)
+  label Gambling Halls         pool 18/92 (20%)  control 2/48 (4%)
+  label Red Light District     pool 32/92 (35%)  control 2/48 (4%)
+  counterfactual keys: organized 14/92 (15%) | semi-organized 59/92 (64%) | diffuse 10/92 (11%) | null 9/92 (10%)
+  label Gambling Den           served 3/92 (3%)    counterfactual 3/92 (3%)    served where the counterfactual has none: 0
+  label Gambling District      served 38/92 (41%)  counterfactual 38/92 (41%)  served where the counterfactual has none: 0
+  label Gambling Halls         served 18/92 (20%)  counterfactual 18/92 (20%)  served where the counterfactual has none: 0
+  label Red Light District     served 32/92 (35%)  counterfactual 32/92 (35%)  served where the counterfactual has none: 0
+  pool towns serving NO operations label: 23/92 (25%); control 41/48 (85%); key null: pool 19/92 (21%)
+== twin/dm: hidden-house pool 92 (92 of the control's tiers village,town,city,metropolis), control 48
+  key organized       pool 11/92 (12%)  control 1/48 (2%)
+  key semi-organized  pool 62/92 (67%)  control 7/48 (15%)
+  key diffuse         pool 0/92 (0%)    control 11/48 (23%)
+  key null            pool 19/92 (21%)  control 29/48 (60%)
+  label Gambling Den           pool 3/92 (3%)    control 3/48 (6%)
+  label Gambling District      pool 38/92 (41%)  control 2/48 (4%)
+  label Gambling Halls         pool 18/92 (20%)  control 2/48 (4%)
+  label Red Light District     pool 32/92 (35%)  control 2/48 (4%)
+  counterfactual keys: organized 14/92 (15%) | semi-organized 59/92 (64%) | diffuse 10/92 (11%) | null 9/92 (10%)
+  label Gambling Den           served 3/92 (3%)    counterfactual 3/92 (3%)    served where the counterfactual has none: 0
+  label Gambling District      served 38/92 (41%)  counterfactual 38/92 (41%)  served where the counterfactual has none: 0
+  label Gambling Halls         served 18/92 (20%)  counterfactual 18/92 (20%)  served where the counterfactual has none: 0
+  label Red Light District     served 32/92 (35%)  counterfactual 32/92 (35%)  served where the counterfactual has none: 0
+  pool towns serving NO operations label: 23/92 (25%); control 41/48 (85%); key null: pool 19/92 (21%)

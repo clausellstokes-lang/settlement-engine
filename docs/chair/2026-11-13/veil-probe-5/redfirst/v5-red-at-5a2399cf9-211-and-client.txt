@@ -1,0 +1,52 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+AssertionError: expected [ …(20) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hamlet/succession_void old dm=true V5M_1_2_FGOAL hidden, sent by gallery",
++   "hamlet/succession_void old dm=true V5M_1_2_FGOAL hidden, sent by import",
++   "hamlet/succession_void old dm=true V5M_1_2_FGOAL hidden, sent by page",
++   "hamlet/succession_void old dm=true V5M_1_4_FGOAL hidden, sent by gallery",
++   "hamlet/succession_void old dm=true V5M_1_4_FGOAL hidden, sent by import",
++   "hamlet/succession_void old dm=true V5M_1_4_FGOAL hidden, sent by page",
++   "town/calm old dm=true V5M_4_2_FGOAL hidden, sent by gallery",
++   "town/calm old dm=true V5M_4_2_FGOAL hidden, sent by import",
++   "town/calm old dm=true V5M_4_2_FGOAL hidden, sent by page",
++   "town/succession_void old dm=true V5M_5_5_FGOAL hidden, sent by gallery",
++   "town/succession_void old dm=true V5M_5_5_FGOAL hidden, sent by import",
++   "town/succession_void old dm=true V5M_5_5_FGOAL hidden, sent by page",
++   "town/succession_void old dm=true V5M_5_6_FGOAL hidden, sent by gallery",
++   "town/succession_void old dm=true V5M_5_6_FGOAL hidden, sent by import",
++   "town/succession_void old dm=true V5M_5_6_FGOAL hidden, sent by page",
++   "city/calm old dm=false V5M_6_4_FGOAL hidden, sent by gallery",
++   "city/calm old dm=false V5M_6_4_FGOAL hidden, sent by import",
++   "city/calm old dm=false V5M_6_4_FGOAL hidden, sent by page",
++   "city/calm old dm=true V5M_6_0_FGOAL hidden, sent by gallery",
++   "city/calm old dm=true V5M_6_0_FGOAL hidden, sent by import",
++ ]
+
+ ❯ tests/security/galleryVeilCures.pglite.test.js:1113:35
+    1111|     expect(tally.ties).toBeGreaterThan(50);
+    1112|     expect(tally.control210).toBeGreaterThan(50);
+    1113|     expect(breaches.slice(0, 20)).toEqual([]);
+       |                                   ^
+    1114|   }, ROW_TIMEOUT_MS);
+    1115|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 28 skipped (29)
+   Start at  12:26:10
+   Duration  105.22s (transform 3.70s, setup 40ms, import 199ms, tests 104.84s, environment 0ms)
+
+[gate-tail] end:  12:27:55 up 44 min,  0 user,  load average: 2.14, 2.21, 2.17
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/f87af9a7-d5c7-5553-9326-6c79fdba1af5/scratchpad/redfirst/gate-tail.20125.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

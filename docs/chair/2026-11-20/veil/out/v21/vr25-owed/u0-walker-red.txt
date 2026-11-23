@@ -1,0 +1,38 @@
+UNIT 0 RED (the walker at base, untouched): 11 of 12
+[gate-tail] start:  03:10:58 up 34 min,  0 user,  load average: 4.43, 2.61, 1.94 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js (12 tests | 1 failed) 1652ms
+     × exempt honesty: every exempt entry still reads .institutions and is not already compliant 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js: now routes through the ruin filter — delete its exempt row (the win is banked)",
++ ]
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:563:19
+    561|       else if (r.compliant) stale.push(`${rel}: now routes through the…
+    562|     }
+    563|     expect(stale).toEqual([]);
+       |                   ^
+    564|   });
+    565| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 passed (12)
+   Start at  03:10:59
+   Duration  3.82s (transform 213ms, setup 25ms, import 2.03s, tests 1.65s, environment 0ms)
+
+[gate-tail] end:  03:11:03 up 34 min,  0 user,  load average: 4.95, 2.75, 1.99

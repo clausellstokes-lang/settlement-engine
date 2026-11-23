@@ -1,0 +1,13 @@
+R3 VR31: reads with a power withheld, judged: 124
+R3 derived Defense keys, groupings open: hidden towns {"organized":2,"semi-organized":9,"diffuse":1,"null":1} | control (no hideable house) {"null":2,"semi-organized":2}
+R3 VR42 towns, economicDragDesc: ["town-infiltrated-0-12: withheld (B: drawn)","city-insurgency-1-104: withheld (B: drawn)"]
+R3-CURE VR42 towns (lane shape, open veil): 
+  town-infiltrated-0-12 dm=false: governing "Corrupt Council" (category criminal) served, share 64 (stored 47); its relations served 1 of 2 [Corrupt Council / Military/Guard: subordinate]; powers withheld ["Thieves' Guild","The Independent Bloc"]
+  town-infiltrated-0-12 dm=true: governing "Corrupt Council" (category criminal) served, share 55 (stored 47); its relations served 1 of 2 [Corrupt Council / Military/Guard: subordinate]; powers withheld ["Thieves' Guild"]
+  city-insurgency-1-104 dm=false: governing "Corrupt City Council" (category criminal) served, share 27 (stored 18); its relations served 2 of 3 [Corrupt City Council / Military/Guard: symbiotic; Corrupt City Council / Religious Authorities: dependent]; powers withheld ["Thieves' Guild"]
+  city-insurgency-1-104 dm=true: governing "Corrupt City Council" (category criminal) served, share 27 (stored 18); its relations served 3 of 3 [Corrupt City Council / Military/Guard: symbiotic; Corrupt City Council / Religious Authorities: dependent; Corrupt City Council: corrupted]; powers withheld ["Thieves' Guild"]
+R3-CURE unit 2, the rule that took each town (lane shape, open veil, Reveal off): 
+  withheld (power.entry): 6 [town-infiltrated-0-12, city-insurgency-1-104, city-politically_fractured-0-40, city-infiltrated-1-112, metropolis-indebted-0-56, hand-raised]
+  no criminal power: 7 [city-infiltrated-0-32, city-none-1-113, metropolis-infiltrated-0-62, metropolis-none-0-61, city-insurgency-0-44, town-indebted-0-16, city-under_siege-0-48]
+R3-CURE unit 2, R5's named prose hits (path: count): {}
+R3-CURE unit 2, hits outside the named list: 0 

@@ -1,0 +1,56 @@
+-- ════════════════════════════════════════════════════════════════════════════
+-- 212 — the share veil's later cures: the second homes, the custom-content library on a
+--       Reveal-DM share, and a person hidden by the per-person switch in a roster copy
+-- ════════════════════════════════════════════════════════════════════════════
+-- WRITTEN-NOT-DEPLOYED (standing law; applies via `supabase db push` at the deploy step, never
+-- from a lane; the applied-head bump is the owner's, in that same act). Its owner's step ahead of
+-- the release, if the owner takes one, is docs/chair/2026-11-13/veil-212/ (not to be run by anyone
+-- but the owner, and only after a security reader clears it).
+--
+-- RUNS AFTER 211 AS FROZEN. 211 (supabase/migrations/211_server_side_share_veil.sql, sha256
+-- eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01, the file at 333b33973) is the
+-- file the security review cleared to be applied alone (REVIEW-VEIL-211-333b33973, section 7), and
+-- the owner decided on 2026-11-13 to apply it so. A migration that may already be applied never
+-- changes, so the cures the sixth seat (COHERENCE-VEIL-6) wrote into 211's file afterwards were moved
+-- here, unchanged (COHERENCE-VEIL-7): every function below is the lane's 211 at 28f52b1e4, statement
+-- for statement, and 001..211 + 212 leaves the database exactly as the lane's 211 at 28f52b1e4 did
+-- (every function's body, arguments, volatility, settings and grants; rehearsed on local chains).
+-- Nothing here depends on anything outside 001..211 and this file.
+--
+-- THE CHANGE (the numbering is the lane's 211 header's, where these were (9), (10) and (7)'s addendum).
+--   (9) THE SECOND HOMES GO WITH THEIR SOURCE (COHERENCE-VEIL-6; the fifth review's V5-1): a fact the town keeps
+--       a second time, at a path no card list walks, is withheld by the eye that governs its source (section 4b,
+--       _gallery_veil_second_homes and the impression arm of _gallery_veil_card): a tie's description and tension
+--       under prominentRelationship and inside pressureSentence; a current tension's description inside
+--       history.siegeNarrative; a house's description and function in the defence profile's lists, and the whole
+--       entry for a house hidden whole; the name of a house hidden whole in the economy's chains (its own, or the
+--       name the engine's processor match gives it; and the chain that is its own) and in the simulation trace; a
+--       sentence of a person's appearance inside the card's impression.
+--       A composed sentence that embeds a hidden string is withheld whole; a list loses the hidden name only.
+--   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
+--       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
+--       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
+--       person's own public card, on every share, marked or not (_gallery_veil_roster_splice). Nothing else an old
+--       share serves changes.
+--   (7, the custom-content library) THE AUTHOR'S CUSTOM-CONTENT LIBRARY NEVER TRAVELS (COHERENCE-VEIL-6; the fifth
+--       review's V5-3, ruled by the chair on 2026-11-13: what no page shows is not sent): customContentRoster and
+--       customContentProvenance, which the client's full mode drops (publicSafe.js :: toPublicSafe), leave the
+--       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
+--       reader and every importer of such a share received both.
+--
+-- NEW: ten helpers (_gallery_veil_pieces, _embeds, _names, _hidden_name, _sources, _tie_pieces, _second_homes,
+-- _member_revealed, _roster_members, _roster_splice). RESTATED, each as 211's statement plus the cure:
+-- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier and
+-- import_gallery_dossier (their grants restated as 211 states them). No helper of 211 changes its
+-- signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
+-- helper is callable by public, anon or authenticated (50 in all). NOT CHANGED: get_unlisted_dossier,
+-- get_gallery_map and every other function. No table, column, constraint, policy or row.
+--
+-- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9)), called by
+-- src/domain/display/galleryVeil.js :: applyVeil. PINNED BY EXECUTION: tests/security/gallerySecondHomes.pglite.test.js
+-- and tests/security/galleryVeilCures.pglite.test.js (V5-3, V5-4, V5-7 and the rollback pins).
+--
+-- @rollback: supabase/rollback/212_share_veil_later_cures.down.sql, run FIRST, before 211's own: it recreates the
+--   five functions at 211's statements (the file at 333b33973, verbatim) and drops the ten helpers by signature.
+--   No row is written or lost either way. Rehearsed on local chains: 001..211 + 212 + this down file equals
+--   001..211; 203 + 211 + 212 + this down file equals 203 + 211.

@@ -1,0 +1,52 @@
+## DS-ECO-6 / TIER: minor shadow activity (≥3) / v4 towns 25 {"economy:economics.shadowEconomy.sentence":25}
+    open/dm=false/crimHidden {"stored":25}
+    open/dm=true/crimHidden {"stored":25}
+    default/dm=false/crimHidden {"stored":25}
+    shown/dm=false/noCrimHidden {"stored":25}
+## DS-ECO-6 / TIER: minor shadow activity (≥3) / v5 towns 108 {"economy:economics.shadowEconomy.sentence":108}
+    open/dm=false/crimHidden {"stored":97}
+    open/dm=true/crimHidden {"stored":97}
+    default/dm=false/crimHidden {"stored":97}
+    shown/dm=false/noCrimHidden {"stored":108}
+    open/dm=false/noCrimHidden {"stored":11}
+    open/dm=true/noCrimHidden {"stored":11}
+    default/dm=false/noCrimHidden {"stored":11}
+## DS-DEF-3 / Safe / v3 towns 0 {}
+## DS-DEF-3 / Safe / v8 towns 0 {}
+## DS-DEF-3 / Unsafe / v5 towns 0 {}
+## DS-DEF-3 / COMPOUND: occupation curfew / v2 towns 4 {"defense:state.publicOrder.beside":4,"defense:state.publicOrder.rung.sentence":4}
+    open/dm=false/crimHidden {"stored":8}
+    open/dm=true/crimHidden {"stored":8}
+    default/dm=false/crimHidden {"stored":8}
+    shown/dm=false/noCrimHidden {"stored":8}
+## DS-DEF-4 / structure semi-organized / v3 towns 43 {"defense:criminal.structure.sentence":43}
+    open/dm=false/crimHidden {"withheld":43}
+    open/dm=true/crimHidden {"withheld":43}
+    default/dm=false/crimHidden {"withheld":43}
+    shown/dm=false/noCrimHidden {"stored":43}
+## DS-DEF-4 / structure semi-organized / v4 towns 0 {}
+## DS-DEF-4 / structure semi-organized / v5 towns 2 {"defense:criminal.structure.sentence":2}
+    open/dm=false/crimHidden {"withheld":2}
+    open/dm=true/crimHidden {"withheld":2}
+    default/dm=false/crimHidden {"withheld":2}
+    shown/dm=false/noCrimHidden {"stored":2}
+## DS-DEF-4 / structure semi-organized / v6 towns 0 {}
+## DS-DEF-4 / structure semi-organized / v7 towns 19 {"defense:criminal.structure.sentence":19}
+    open/dm=false/noCrimHidden {"stored":7}
+    open/dm=true/noCrimHidden {"stored":7}
+    default/dm=false/noCrimHidden {"withheld":7}
+    shown/dm=false/noCrimHidden {"stored":19}
+    open/dm=false/crimHidden {"withheld":12}
+    open/dm=true/crimHidden {"withheld":12}
+    default/dm=false/crimHidden {"withheld":12}
+## DS-DEF-4 / structure diffuse / v2 towns 9 {"defense:criminal.structure.sentence":9}
+    open/dm=false/crimHidden {"withheld":9}
+    open/dm=true/crimHidden {"withheld":9}
+    default/dm=false/crimHidden {"withheld":9}
+    shown/dm=false/noCrimHidden {"stored":9}
+## DS-DEF-4 / structure diffuse / v4 towns 11 {"defense:criminal.structure.sentence":11}
+    open/dm=false/crimHidden {"withheld":11}
+    open/dm=true/crimHidden {"withheld":11}
+    default/dm=false/crimHidden {"withheld":11}
+    shown/dm=false/noCrimHidden {"stored":11}
+## DS-DEF-4 / capture none / v2 towns 0 {}

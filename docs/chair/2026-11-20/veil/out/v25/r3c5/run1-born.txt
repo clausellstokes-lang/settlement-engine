@@ -1,0 +1,63 @@
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:686:17
+    684|     const bad = [];
+    685|     const rs = cureReads().filter((x) => x.t.seed === 'hand-forms');
+    686|     expect(rs.length).toBe(4);
+       |                 ^
+    687|     const FORMS = { 'npc.fen': 'a possessive', 'npc.gil': 'a plural', …
+    688|     let tooth = 0; let judged = 0;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power's name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5's)
+AssertionError: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-raised open dm=true gallery: npcs[].memberships[].power",
++   "hand-raised open dm=true import: npcs[].memberships[].power",
++   "hand-raised open dm=true twin: npcs[].memberships[].power",
++   "hand-raised openM dm=true gallery: npcs[].memberships[].power",
++   "hand-raised openM dm=true import: npcs[].memberships[].power",
++   "hand-raised openM dm=true twin: npcs[].memberships[].power",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:720:30
+    719|   });
+    720|
+    721|   // KEY-LEVEL ON A SERVED HOLDER, NOT CURED HERE (STOPPED to the seat…
+       |                             ^
+    722|   // not its holder: a SHOWN power's `contestsNiche` naming a withheld…
+    723|   // holder whole would withhold a shown power or a served person; tha…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5's named prose
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-forms unmarked dm=false link: powerStructure.factions[1].faction = \"Old Thieves' Guild Watch\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:753:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 18 passed (22)
+   Start at  12:21:16
+   Duration  614.62s (transform 3.90s, setup 35ms, import 173ms, tests 614.26s, environment 0ms)
+
+[gate-tail] end:  12:31:30 up  1:18,  0 user,  load average: 4.43, 5.24, 4.24
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.32274.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

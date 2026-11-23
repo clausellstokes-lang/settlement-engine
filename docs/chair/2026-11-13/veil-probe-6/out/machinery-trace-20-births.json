@@ -1,0 +1,30 @@
+{
+ "towns": 20,
+ "record": {
+  "economicState.incomeSources[].weight": 114,
+  "powerStructure.publicLegitimacy.breakdown": 20,
+  "powerStructure.publicLegitimacy.govMultiplier": 20,
+  "powerStructure.publicLegitimacy.crimMultiplier": 20
+ },
+ "publicSafe": {
+  "economicState.incomeSources[].weight": 114,
+  "powerStructure.publicLegitimacy.breakdown": 20,
+  "powerStructure.publicLegitimacy.govMultiplier": 20,
+  "powerStructure.publicLegitimacy.crimMultiplier": 20
+ },
+ "exportPlayer": {
+  "settlements[].dossier.economicState.incomeSources[].weight": 114,
+  "settlements[].dossier.powerStructure.publicLegitimacy.breakdown": 20,
+  "settlements[].dossier.powerStructure.publicLegitimacy.govMultiplier": 20,
+  "settlements[].dossier.powerStructure.publicLegitimacy.crimMultiplier": 20
+ },
+ "exportOwner": {
+  "settlements[].dossier.economicState.incomeSources[].weight": 114,
+  "settlements[].dossier.powerStructure.publicLegitimacy.breakdown": 20,
+  "settlements[].dossier.powerStructure.publicLegitimacy.govMultiplier": 20,
+  "settlements[].dossier.powerStructure.publicLegitimacy.crimMultiplier": 20
+ },
+ "docs": [
+  47438
+ ]
+}

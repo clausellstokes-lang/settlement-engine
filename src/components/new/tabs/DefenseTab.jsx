@@ -207,8 +207,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicD
   // THE GALLERY VEIL (X-21c): a visitor's copy whose criminal architecture is veiled keeps the
   // identity facts this block derives from (house names, the faction roster), so the block
   // reads the grouping list beside the copy and says nothing: no classification, no
-  // "no organized crime" line, no faction line. Public order stays.
-  const crimeVeiled = isVeiled(r, 'block:defense.criminalStructure');
+  // "no organized crime" line, no faction line. Public order stays. On a visitor's page the block also stays silent
+  // wherever the page model does not PROVE the grouping open (VEIL-VR17: the list beside the copy does not survive a
+  // copy; the evidence in the data does, galleryVeil.js :: GROUPING_OPEN_EVIDENCE).
+  const crimeVeiled = isVeiled(r, 'block:defense.criminalStructure', { publicDossier });
   // Criminal structure classification (shared with the PDF viewModel, and handed to the desk)
   const csd = criminalStructureOf(r, crimeVeiled);
   const crimStructure = csd?.key || null;

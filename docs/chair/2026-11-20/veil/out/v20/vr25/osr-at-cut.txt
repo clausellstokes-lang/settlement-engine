@@ -1,0 +1,3 @@
+src/domain/display/criminalVeilSwitch.js: read(s) of a key no writer produces, outside the frozen inventory:
+    NEW      fields on institution — 1 read(s); this file has no frozen row for it (ceiling 0)
+  A NEW row means a fresh one landed even if this file's TOTAL did not move: the

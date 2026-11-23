@@ -7,7 +7,7 @@
 import { cardInstitutionOf } from './cardPowers.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
-import { honorificOfTitle } from '../../data/faceHonorifics.js';
+import { honorificOfTitle, honorificSeedOf } from '../../data/faceHonorifics.js';
 import { waterOf } from '../facts/water.js';
 import { resolveSettlementCulture } from '../resolveCulture.js';
 
@@ -35,8 +35,9 @@ export function cardInstitutionDoorOf(card, settlement) {
 
 /**
  * THE CARD'S HONORIFIC (PEOPLE-6 LINKS step 2): its institution's title through the registry
- * (`src/data/faceHonorifics.js`), the pool's form picked by `<card id>::<institution key>` (stable,
- * zero-draw, the same on every surface), by the card's gender; '' for a card with no institution (a DM's
+ * (`src/data/faceHonorifics.js`), the pool's form picked by the card's NAME and the TITLE (VR47: faceHonorifics.js ::
+ * honorificSeedOf; never the id, which a shared page re-keys, nor the institution key; stable, zero-draw, the same on every
+ * surface and every page), by the card's gender; '' for a card with no institution (a DM's
  * person) — and for a card whose institution the veil or the public projection removed, so the
  * honorific goes wherever the house goes and is never resolved from anything else. With the settlement,
  * the pool is the one its COAST admits (MERGE-CAR, the chair's A-11 ruling: a harbour master on a
@@ -52,7 +53,7 @@ export function cardHonorificOf(card, settlement) {
   const place = settlement && typeof settlement === 'object'
     ? { coastal: waterOf(/** @type {import('../facts/terrain.js').TerrainRecord} */ (settlement)).coast, culture: resolveSettlementCulture(/** @type {object} */ (settlement)) }
     : {};
-  return honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${inst.name}`, place);
+  return honorificOfTitle(inst.title, c.gender, honorificSeedOf(c.name, inst.title), place);
 }
 
 /**

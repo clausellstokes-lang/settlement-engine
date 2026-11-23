@@ -1,0 +1,58 @@
+R3-CURE-8 unit 5, THE PARITY WALKER: families (from the generator) ["lodging","food","equipment","magic","information","healing","transport","legal","employment","entertainment","criminal","curiosities"] | born families ["criminal","employment","entertainment","equipment","food","healing","information","legal","lodging","magic","transport"] | per family, the row with no key (served by server/twin: reads): 
+  lodging: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  food: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  equipment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  magic: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  information: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  healing: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  transport: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  legal: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  employment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  entertainment: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}}
+  criminal: {"Keyless":{"-/twin":15},"Swept":{"-/twin":15}}
+  curiosities: {"Keyless":{"server/twin":25},"Swept":{"server/twin":25}} | faults: 45 
+  criminal own dm=false gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=false gallery: the keyless row served by the twin alone
+  criminal own dm=false gallery: the swept row served by the twin alone
+  criminal own dm=false map: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=false map: the keyless row served by the twin alone
+  criminal own dm=false map: the swept row served by the twin alone
+  criminal own dm=false link: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=false link: the keyless row served by the twin alone
+  criminal own dm=false link: the swept row served by the twin alone
+  criminal own dm=false import: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=false import: the keyless row served by the twin alone
+  criminal own dm=false import: the swept row served by the twin alone
+  criminal g:100 dm=false gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:100 dm=false gallery: the keyless row served by the twin alone
+  criminal g:100 dm=false gallery: the swept row served by the twin alone
+  criminal g:101 dm=false gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:101 dm=false gallery: the keyless row served by the twin alone
+  criminal g:101 dm=false gallery: the swept row served by the twin alone
+  criminal g:110 dm=false gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:110 dm=false gallery: the keyless row served by the twin alone
+  criminal g:110 dm=false gallery: the swept row served by the twin alone
+  criminal allOpen dm=false gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal allOpen dm=false gallery: the keyless row served by the twin alone
+  criminal allOpen dm=false gallery: the swept row served by the twin alone
+  criminal own dm=true gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=true gallery: the keyless row served by the twin alone
+  criminal own dm=true gallery: the swept row served by the twin alone
+  criminal own dm=true map: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=true map: the keyless row served by the twin alone
+  criminal own dm=true map: the swept row served by the twin alone
+  criminal own dm=true import: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal own dm=true import: the keyless row served by the twin alone
+  criminal own dm=true import: the swept row served by the twin alone
+  criminal g:100 dm=true gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:100 dm=true gallery: the keyless row served by the twin alone
+  criminal g:100 dm=true gallery: the swept row served by the twin alone
+  criminal g:101 dm=true gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:101 dm=true gallery: the keyless row served by the twin alone
+  criminal g:101 dm=true gallery: the swept row served by the twin alone
+  criminal g:110 dm=true gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal g:110 dm=true gallery: the keyless row served by the twin alone
+  criminal g:110 dm=true gallery: the swept row served by the twin alone
+  criminal allOpen dm=true gallery: server ["Served criminal"] | twin ["Keyless criminal","Swept criminal","Served criminal"]
+  criminal allOpen dm=true gallery: the keyless row served by the twin alone
+  criminal allOpen dm=true gallery: the swept row served by the twin alone

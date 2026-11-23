@@ -1,0 +1,67 @@
+VR47 COUNT (the owner's page, the stored ids; seatKeeperDisplay.js :: shownHonorificOf, the printed honorific):
+58 of 163 born-town cards with an institution print a different honorific under the new seed (name::title) than under the old (id::institution key): the same person, the same office.
+Births and stored records byte-equal across red and green: true. styledTitleOf table sha256 equal: true.
+
+render-twice-town-calm-0: 8 of 34 cards
+render-twice-city-infiltrated-1: 15 of 49 cards
+render-twice-metropolis-calm-2: 35 of 80 cards
+
+town | card id | name | title | old -> new
+  render-twice-town-calm-0 | npc_barracks | Selmeg Ba'arin | the garrison commander | Captain -> Commander
+  render-twice-town-calm-0 | npc_stable_district | Oyun Jirgin | the stable master | Stablemaster -> Master of Horse
+  render-twice-town-calm-0 | npc_inn_multiple | Oghul Ba'arin | the innkeeper | Host -> Landlady
+  render-twice-town-calm-0 | npc_tanner_established | Sükhbaatar Besud | the master tanner | Tanner -> Master Tanner
+  render-twice-town-calm-0 | npc_cobbler_s_guild | Bayasgalan Jadaran | the cobbler | Cobbler -> Master Cobbler
+  render-twice-town-calm-0 | npc_butchers_3_8 | Arslankhan Bukhara | the master butcher | Butcher -> Master Butcher
+  render-twice-town-calm-0 | npc_potter | Oljeitu Önggirad | the potter | Master Potter -> Potter
+  render-twice-town-calm-0 | npc_pawnbroker | Dogshin Qatagin | the pawnbroker | Pawnmaster -> Pawnbroker
+  render-twice-city-infiltrated-1 | npc_professional_city_watch | Xib Tec | the watch commander | Commander of the Watch -> Commander
+  render-twice-city-infiltrated-1 | npc_inns_and_taverns_district | Oc Lahun | the innkeeper | Landlady -> Host
+  render-twice-city-infiltrated-1 | npc_luxury_goods_quarter | Yagul Nah | the luxury merchant | Merchant Prince -> Merchant
+  render-twice-city-infiltrated-1 | npc_salt_works | Akna Ek | the salt master | Saltmaster -> Master of the Saltworks
+  render-twice-city-infiltrated-1 | npc_river_ferry | Thunder Xul | the ferryman | Ferry Keeper -> Ferry-Master
+  render-twice-city-infiltrated-1 | npc_docks_port_facilities | Nezahualcoyotl Cohuoh | the wharfinger | Wharfinger -> Wharfmaster
+  render-twice-city-infiltrated-1 | npc_harbour_master_s_office | Yagul Zaz | the harbour master | Master of the Harbour -> Harbourmaster
+  render-twice-city-infiltrated-1 | npc_theaters | Flint Xib | the theatre manager | Manager -> Theatre Manager
+  render-twice-city-infiltrated-1 | npc_auction_house | Xib Zaz | the auctioneer | Auctioneer -> Master of the Block
+  render-twice-city-infiltrated-1 | npc_weavers_textile_workers | Storm Uc | the master weaver | Master Weaver -> Weaver-master
+  render-twice-city-infiltrated-1 | npc_cooper | Acatl Jalach | the cooper | Master Cooper -> Cooper
+  render-twice-city-infiltrated-1 | npc_sawmill_commercial | Yaocihuatl Itza | the sawyer | Master Sawyer -> Sawyer
+  render-twice-city-infiltrated-1 | npc_brewery | Tao Dzul | the brewer | Master Brewer -> Brewer
+  render-twice-city-infiltrated-1 | npc_tanner_established | Morning Star Itza | the master tanner | Tanner -> Master Tanner
+  render-twice-city-infiltrated-1 | npc_potter | Cipactli Chuc | the potter | Master Potter -> Potter
+  render-twice-metropolis-calm-2 | npc_craft_guilds_100_150 | Randver Grettisson | the senior craft-guild master | Master of the Guild -> Guildmaster
+  render-twice-metropolis-calm-2 | npc_great_library | Kolfinna Ulfheðnarson | the librarian | Librarian -> Keeper of the Books
+  render-twice-metropolis-calm-2 | npc_mine | Hildr Mordsson | the mine captain | Mine-Master -> Captain
+  render-twice-metropolis-calm-2 | npc_mercenary_quarter | Sigyn Finsson | the company captain | Captain -> Company Captain
+  render-twice-metropolis-calm-2 | npc_post_relay_station | Astrid Vargsson | the postmaster | Master of the Post -> Postmaster
+  render-twice-metropolis-calm-2 | npc_toll_bridge | Ulfric Grettisson | the toll-keeper | Toll-Keeper -> Tollman
+  render-twice-metropolis-calm-2 | npc_mint_official | Torvald Yngvarsson | the mint master | Master of the Mint -> Mintmaster
+  render-twice-metropolis-calm-2 | npc_mills_2_5 | Halfdan Mordsson | the miller | Master Miller -> Miller
+  render-twice-metropolis-calm-2 | npc_town_crier | Olof Gormsson | the crier | Crier -> Town Crier
+  render-twice-metropolis-calm-2 | npc_massive_prison | Mimir Magnusson | the prison warden | Warden -> Keeper
+  render-twice-metropolis-calm-2 | npc_bardic_college | Thyra Yngvarsson | the college master | Master -> Master of the College
+  render-twice-metropolis-calm-2 | npc_colosseum_arena | Röðla Ubbason | the arena master | Master of the Games -> Arena Master
+  render-twice-metropolis-calm-2 | npc_luxury_goods_quarter | Ingrid Birkisson | the luxury merchant | Merchant Princess -> Merchant
+  render-twice-metropolis-calm-2 | npc_major_monasteries_5_10 | Asa Illugason | the senior abbot | Lady Abbess -> Abbess
+  render-twice-metropolis-calm-2 | npc_furrier_s_district | Harald Grettisson | the master furrier | Master Furrier -> Furrier
+  render-twice-metropolis-calm-2 | npc_banking_district | Asger Jokullsson | the banker | Banker -> Master of the House
+  render-twice-metropolis-calm-2 | npc_inns_and_taverns_district | Knut Olafsson | the innkeeper | Landlord -> Host
+  render-twice-metropolis-calm-2 | npc_coaching_inn | Tofa Þorkellsson | the coaching-inn keeper | Innkeeper -> Host
+  render-twice-metropolis-calm-2 | npc_stable_district | Domaldr Magnusson | the stable master | Stablemaster -> Master of Horse
+  render-twice-metropolis-calm-2 | npc_vintner | Harald Njálsson | the vintner | Master Vintner -> Vintner
+  render-twice-metropolis-calm-2 | npc_international_trade_center | Snorri Hrolfsson | the exchange master | Master of the Exchange -> Exchange Master
+  render-twice-metropolis-calm-2 | npc_enchanter_s_shop | Unnr Bjornsson | the enchanter | Enchanter -> Master Enchanter
+  render-twice-metropolis-calm-2 | npc_blacksmiths_3_10 | Magnr Ljotsson | the master smith | Smith-master -> Master Smith
+  render-twice-metropolis-calm-2 | npc_apothecary_district | Skuld Cormacsson | the apothecary | Apothecary -> Master Apothecary
+  render-twice-metropolis-calm-2 | npc_sawmill_commercial | Asa Knarrarsson | the sawyer | Master Sawyer -> Sawyer
+  render-twice-metropolis-calm-2 | npc_fuller | Refr Sigurðarson | the fuller | Master Fuller -> Fuller
+  render-twice-metropolis-calm-2 | npc_dyer | Eir Jokullsson | the dyer | Master Dyer -> Dyer
+  render-twice-metropolis-calm-2 | npc_potter | Drifa Finsson | the potter | Master Potter -> Potter
+  render-twice-metropolis-calm-2 | npc_butchers_3_8 | Snorri Finsson | the master butcher | Butcher -> Master Butcher
+  render-twice-metropolis-calm-2 | npc_bakers_5_15 | Njal Bjornsson | the master baker | Baker -> Master Baker
+  render-twice-metropolis-calm-2 | npc_smelter | Vigdis Bodvarsson | the smelt master | Master Smelter -> Smeltmaster
+  render-twice-metropolis-calm-2 | npc_cartographer_s_guild | Brynjar Magnusson | the cartographer | Cartographer -> Mapmaker
+  render-twice-metropolis-calm-2 | npc_academy_of_magic | Jorunn Svensson | the chancellor | Lord Chancellor -> Chancellor
+  render-twice-metropolis-calm-2 | npc_charlatan_fortune_tellers | Pall Amlethsson | the fortune teller | Seer -> Fortune-Teller
+  render-twice-metropolis-calm-2 | npc_scroll_scribe | Birger Nidudsson | the scroll scribe | Scribe -> Master Scribe

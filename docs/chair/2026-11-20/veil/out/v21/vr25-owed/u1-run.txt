@@ -1,0 +1,12 @@
+UNIT 1 run at 50c7263d0 (unit 3's cure in place: the served band kept); probe docs/chair/2026-11-20/veil/measure/vr25-owed/ruined.probe.js
+[gate-tail] start:  03:16:34 up 39 min,  0 user,  load average: 2.76, 2.21, 1.94 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  03:16:35
+   Duration  74.42s (transform 4.88s, setup 0ms, import 111ms, tests 74.19s, environment 0ms)
+
+[gate-tail] end:  03:17:49 up 41 min,  0 user,  load average: 4.01, 2.78, 2.17

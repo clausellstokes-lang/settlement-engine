@@ -1,0 +1,54 @@
+diff --git a/supabase/migrations/212_share_veil_later_cures.sql b/supabase/migrations/212_share_veil_later_cures.sql
+index 77aa343d8..4550d17a8 100644
+--- a/supabase/migrations/212_share_veil_later_cures.sql
++++ b/supabase/migrations/212_share_veil_later_cures.sql
+@@ -2403,7 +2403,7 @@ begin
+                    -- a person with no id, the empty string included, against every person of `pub`, where a naming goal holds it)
+                    or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq
+                                where jsonb_typeof(pq) = 'object' and public._gallery_veil_copy_names('goal', pq -> 'goal', wn_ids, hits)
+-                                 and case when coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') <> '' then coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number', 'boolean') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')
++                                 and case when coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') <> '' then coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')
+                                           else (pq -> 'goal') @> (n -> 'goal') end))
+                 then array['goal'] else '{}'::text[] end))
+           || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
+=== the scratch run (212 drifted at one site, never committed) ===
+[gate-tail] start:  15:53:56 up 57 min,  0 user,  load average: 6.37, 6.71, 5.49 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c7
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (25 tests | 1 failed | 24 skipped) 44ms
+     × 212 writes a person's id as text EXACTLY SIX times, all ONE text (ruling 53: one helper owed; the fold owed in R4-CURE-2 retires this walker) 42ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3-CURE-7 (ruling 53, condition 2): THE WALKER over 212's inline id-as-text expressions > 212 writes a person's id as text EXACTLY SIX times, all ONE text (ruling 53: one helper owed; the fold owed in R4-CURE-2 retires this walker)
+AssertionError: ruling 53 (the chair, 15:10): until the fold owed in R4-CURE-2 retires this walker (one id-as-text helper in 212, the six sites repointed), 212's inline id-as-text expressions are six and ONE text; found 6: ["line 2406 (n): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')","line 2406 (pq): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number') then <x> ->> 'id' end, '')","line 2406 (n): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')","line 2415 (n): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')","line 2415 (pq): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')","line 2415 (n): coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')"]: expected [ …(2) ] to deeply equal [ Array(1) ]
+
+- Expected
++ Received
+
+  [
+    "coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')",
++   "coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number') then <x> ->> 'id' end, '')",
+  ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:972:25
+    970|     note('R3-CURE-7 walker (ruling 53): inline id-as-text expressions …
+    971|     expect(sites.length, said).toBe(6);
+    972|     expect(texts, said).toEqual([ID_TEXT_ONE]);
+       |                         ^
+    973|   });
+    974| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 24 skipped (25)
+   Start at  15:53:57
+   Duration  607ms (transform 223ms, setup 47ms, import 313ms, tests 44ms, environment 0ms)
+
+[gate-tail] end:  15:53:58 up 57 min,  0 user,  load average: 6.37, 6.71, 5.49
+[gate-tail] full log: /tmp/gate-tail.6726.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

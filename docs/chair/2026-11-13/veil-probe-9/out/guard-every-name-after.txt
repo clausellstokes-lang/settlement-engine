@@ -1,0 +1,11 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 346 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/veil9
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  00:30:12
+   Duration  749.40s (transform 2.36s, setup 42ms, import 336ms, tests 748.54s, environment 0ms)
+
+exit 0

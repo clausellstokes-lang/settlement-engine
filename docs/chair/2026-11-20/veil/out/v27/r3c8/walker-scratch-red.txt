@@ -1,0 +1,42 @@
++   "criminal g:110 dm=false gallery: the keyless row served by the twin alone",
++   "criminal g:110 dm=false gallery: the swept row served by the twin alone",
++   "criminal allOpen dm=false gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal allOpen dm=false gallery: the keyless row served by the twin alone",
++   "criminal allOpen dm=false gallery: the swept row served by the twin alone",
++   "criminal own dm=true gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal own dm=true gallery: the keyless row served by the twin alone",
++   "criminal own dm=true gallery: the swept row served by the twin alone",
++   "criminal own dm=true map: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal own dm=true map: the keyless row served by the twin alone",
++   "criminal own dm=true map: the swept row served by the twin alone",
++   "criminal own dm=true import: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal own dm=true import: the keyless row served by the twin alone",
++   "criminal own dm=true import: the swept row served by the twin alone",
++   "criminal g:100 dm=true gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal g:100 dm=true gallery: the keyless row served by the twin alone",
++   "criminal g:100 dm=true gallery: the swept row served by the twin alone",
++   "criminal g:101 dm=true gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal g:101 dm=true gallery: the keyless row served by the twin alone",
++   "criminal g:101 dm=true gallery: the swept row served by the twin alone",
++   "criminal g:110 dm=true gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal g:110 dm=true gallery: the keyless row served by the twin alone",
++   "criminal g:110 dm=true gallery: the swept row served by the twin alone",
++   "criminal allOpen dm=true gallery: server [\"Served criminal\"] | twin [\"Keyless criminal\",\"Swept criminal\",\"Served criminal\"]",
++   "criminal allOpen dm=true gallery: the keyless row served by the twin alone",
++   "criminal allOpen dm=true gallery: the swept row served by the twin alone",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:1173:17
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 36 skipped (37)
+   Start at  18:06:57
+   Duration  16.21s (transform 4.72s, setup 38ms, import 175ms, tests 15.82s, environment 0ms)
+
+[gate-tail] end:  18:07:14 up  3:10,  0 user,  load average: 3.93, 4.49, 5.75
+[gate-tail] full log: /tmp/gate-tail.12981.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

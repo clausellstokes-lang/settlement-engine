@@ -1,0 +1,62 @@
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryRosterChoices.js · plenty:none · Subsistence with minor surplus",
++   "src/domain/display/gallerySecondHomes.js · office:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++   "src/domain/display/gallerySecondHomes.js · size:none · {
++   \"hasMilitaryInst\": {\"kw\": [\"garrison\", \"barracks\", \"guard\", \"watch\", \"citadel\", \"walls\", \"militi",
++ ]
+
+ ❯ tests/lint/presumptionClasses.walker.test.js:170:19
+    168|     const banked = bankedKeys(register);
+    169|     const fresh = hits.filter((h) => !banked.has(h.key)).map((h) => `$…
+    170|     expect(fresh).toEqual([]);
+       |                   ^
+    171|   });
+    172|   test('no stale row: a cured line leaves the register (the close runs…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  4 failed (4)
+      Tests  4 failed | 116 passed (120)
+   Start at  10:10:33
+   Duration  187.38s (transform 6.71s, setup 92ms, import 41.40s, tests 145.39s, environment 0ms)
+
+[gate-tail] end:  10:13:41 up  1:20,  0 user,  load average: 1.48, 1.58, 1.82
+[gate-tail] full log: /tmp/gate-tail.25946.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,42 @@
+ RUN  v4.1.8 /home/user/wt/r3tell4
+
+ ❯ tests/security/galleryVeilTell4.pglite.test.js (1 test | 1 failed) 5562ms
+     × UNIT 1 (people.allegiance): on a read that withholds the house, an allegiance naming a withheld house or a withheld power is served in the open place's form, THE KEY ABSENT (never a husk), both engines, every read and setting, Reveal DM off and on; an allegiance naming only what the read serves is served byte for byte (the tooth) 894ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilTell4.pglite.test.js > R3-TELL-4 (ruling 73 (2)): the joint tell's cure on hand plants, the twin against 212 > UNIT 1 (people.allegiance): on a read that withholds the house, an allegiance naming a withheld house or a withheld power is served in the open place's form, THE KEY ABSENT (never a husk), both engines, every read and setting, Reveal DM off and on; an allegiance naming only what the read serves is served byte for byte (the tooth)
+AssertionError: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "npc-a1 server gallery allOpen dm=true: HUSK {\"via\":\"office\",\"power\":null,\"share\":0.1,\"covert\":true,\"vector\":\"greed\",\"veiled\":true,\"handler\":null}",
++   "npc-a2 server gallery allOpen dm=true: HUSK {\"via\":\"office\",\"power\":\"Dock Syndicate\",\"share\":0.1,\"covert\":true,\"vector\":\"greed\",\"veiled\":true,\"handler\":null}",
++   "npc-a3 server gallery allOpen dm=true: as stored {\"via\":\"office\",\"house\":\"Fish market\",\"power\":\"Dock Syndicate\",\"share\":0.1,\"covert\":true,\"vector\":\"greed\",\"veiled\":true,\"handler\":null}",
++   "npc-a1 twin gallery allOpen dm=true: HUSK {\"power\":null,\"vector\":\"greed\",\"via\":\"office\",\"handler\":null,\"share\":0.1,\"veiled\":true,\"covert\":true}",
++   "npc-a2 twin gallery allOpen dm=true: HUSK {\"power\":\"Dock Syndicate\",\"vector\":\"greed\",\"via\":\"office\",\"handler\":null,\"share\":0.1,\"veiled\":true,\"covert\":true}",
++   "npc-a3 twin gallery allOpen dm=true: as stored {\"power\":\"Dock Syndicate\",\"house\":\"Fish market\",\"vector\":\"greed\",\"via\":\"office\",\"handler\":null,\"share\":0.1,\"veiled\":true,\"covert\":true}",
++ ]
+
+ ❯ tests/security/galleryVeilTell4.pglite.test.js:141:17
+    139|     expect(hiding).toBeGreaterThan(0);
+    140|     expect(tooth).toEqual([]);
+    141|     expect(bad).toEqual([]);
+       |                 ^
+    142|   }, ARM_TIMEOUT_MS);
+    143| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  22:08:54
+   Duration  5.80s (transform 1.00s, setup 34ms, import 78ms, tests 5.56s, environment 0ms)
+
+[gate-tail] end:  22:08:59 up 47 min,  0 user,  load average: 1.12, 1.10, 1.43
+[gate-tail] full log: /tmp/gate-tail.9196.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

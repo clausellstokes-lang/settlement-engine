@@ -1,0 +1,77 @@
+{
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit",
+ "failed": {
+  "at210": [],
+  "work211": []
+ },
+ "rows": [
+  {
+   "label": "F6 Force all, every eye shut",
+   "bytes": 1134296,
+   "at210": {
+    "gallery": {
+     "median": 658,
+     "max": 754
+    },
+    "link": {
+     "median": 1049,
+     "max": 1085
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 952,
+     "max": 1060
+    },
+    "link": {
+     "median": 800,
+     "max": 1002
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 735,
+     "max": 799
+    },
+    "link": {
+     "median": 708,
+     "max": 814
+    }
+   }
+  },
+  {
+   "label": "F6 Force all, default veil",
+   "bytes": 997919,
+   "at210": {
+    "gallery": {
+     "median": 714,
+     "max": 753
+    },
+    "link": {
+     "median": 1005,
+     "max": 1038
+    }
+   },
+   "work211": {
+    "gallery": {
+     "median": 893,
+     "max": 1079
+    },
+    "link": {
+     "median": 682,
+     "max": 811
+    }
+   },
+   "work211unveiled": {
+    "gallery": {
+     "median": 674,
+     "max": 750
+    },
+    "link": {
+     "median": 715,
+     "max": 872
+    }
+   }
+  }
+ ]
+}

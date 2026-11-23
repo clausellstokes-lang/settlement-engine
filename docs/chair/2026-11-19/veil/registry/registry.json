@@ -1,0 +1,372 @@
+[
+  {
+    "path": "^activeConditions\\[\\]\\.severity$",
+    "rule": "withhold",
+    "by": "src/domain/conditionPromotion.js :: promoteStressorsToConditions"
+  },
+  {
+    "path": "^defenseProfile\\.readiness\\.score$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.disaster$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.economic$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.internal$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.magical$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.military$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.scores\\.monster$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^defenseProfile\\.economicGates\\.(disaster|economic|internal|military|monster)$",
+    "rule": "withhold",
+    "by": "src/generators/defenseGenerator.js :: generateDefenseProfile"
+  },
+  {
+    "path": "^economicState\\.compound\\.criminalEffective$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.compound\\.criminalPreStress$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.compound\\.economyOutput$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.compound\\.magicInfluence$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.compound\\.militaryEffective$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.compound\\.religionInfluence$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.criminalEffective$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.criminalPreStress$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.economyOutput$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.magicInfluence$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.militaryEffective$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.compound\\.religionInfluence$",
+    "rule": "withhold",
+    "by": "src/generators/priorityHelpers.js :: getInstFlags"
+  },
+  {
+    "path": "^economicState\\.economicComplexity$",
+    "rule": "recompose",
+    "by": "src/generators/economy/prosperity.js :: deriveEconomicComplexity"
+  },
+  {
+    "path": "^economicState\\.foodSecurity\\.storageMonths$",
+    "rule": "withhold",
+    "by": "src/generators/foodGenerator.js :: generateFoodSecurity"
+  },
+  {
+    "path": "^economicState\\.foodSecurity\\.storageNote$",
+    "rule": "withhold",
+    "by": "src/generators/foodGenerator.js :: generateFoodSecurity"
+  },
+  {
+    "path": "^economicState\\.incomeSources\\[\\]\\.weight$",
+    "rule": "withhold",
+    "by": "src/generators/economy/incomeLineSiblings.js :: shareIncomeRows"
+  },
+  {
+    "path": "^economicState\\.situationDesc$",
+    "rule": "withhold",
+    "by": "src/generators/economy/prosperity.js :: situationDescOf"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.economicDragDesc$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.blackMarketCapture$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.flags\\.anyActive$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.flags\\.arcaneBlackMarket$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.flags\\.merchantArmy$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.flags\\.religiousFraud$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.flags\\.merchantCriminalBlur$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.guardEffectivenessDesc$",
+    "rule": "recompose",
+    "by": "src/generators/safetyLineTruth.js :: gatesSmugglersLine"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.safetyDesc$",
+    "rule": "recompose",
+    "by": "src/generators/safetyLineTruth.js :: footholdWord"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.safetyRatio$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.crimeTypes\\b",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.plotHooks\\b",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^history\\.currentTensions\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
+  },
+  {
+    "path": "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
+  },
+  {
+    "path": "^history\\.eventsTimeline\\[\\]\\.anchored$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: generateHistory"
+  },
+  {
+    "path": "^history\\.eventsTimeline\\[\\]\\.year$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: generateHistory"
+  },
+  {
+    "path": "^history\\.historicalEvents\\[\\]\\.anchored$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: generateHistory"
+  },
+  {
+    "path": "^history\\.legacyAnnotations\\[\\](\\.(annotation|eventName|eventType|severity|yearsAgo))?$",
+    "rule": "withhold",
+    "by": "src/generators/narrative/historyCoherence.js :: deriveLegacyAnnotations"
+  },
+  {
+    "path": "^history\\.siegeNarrative$",
+    "rule": "withhold",
+    "by": "src/generators/narrative/historyCoherence.js :: historySiegeNarrative"
+  },
+  {
+    "path": "^institutions\\[\\]\\.desc$",
+    "rule": "withhold",
+    "by": "src/domain/facts/drawDeclared.js :: drawDeclared"
+  },
+  {
+    "path": "^npcs\\[\\]\\.memberships\\[\\]\\.veiled$",
+    "rule": "withhold",
+    "by": "src/generators/people/castPowers.js :: landMemberships"
+  },
+  {
+    "path": "^npcs\\[\\]\\.stressNote$",
+    "rule": "withhold",
+    "by": "src/generators/narrativeGenerator.js :: genArrivalDetail"
+  },
+  {
+    "path": "^npcs\\[\\]\\.allegiance\\b",
+    "rule": "withhold",
+    "by": "src/domain/people/allegiance.js :: dealAllegiances"
+  },
+  {
+    "path": "^powerStructure\\.economyInputFingerprint$",
+    "rule": "withhold",
+    "by": "src/generators/power/economyReconciliation.js :: fingerprintPowerEconomyInput"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\]\\.contestsNiche$",
+    "rule": "withhold",
+    "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\]\\.power$",
+    "rule": "recompose",
+    "by": "src/generators/factionDynamics.js :: applyLegitimacyMultipliers"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\]\\.rawPower$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: applyLegitimacyMultipliers"
+  },
+  {
+    "path": "^powerStructure\\.factionRelationships\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
+    "path": "^powerStructure\\.factionRelationships\\[\\]\\.ratio$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
+    "path": "^powerStructure\\.factionRelationships\\[\\]\\.direction$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
+    "path": "^powerStructure\\.(factions|factionRelationships)\\[\\]\\.captureState$",
+    "rule": "withhold",
+    "by": "src/domain/people/hallCapture.js :: writeHallCapture"
+  },
+  {
+    "path": "^powerStructure\\.publicLegitimacy\\.breakdown\\.(prosperity|safety|defense)$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"
+  },
+  {
+    "path": "^powerStructure\\.publicLegitimacy\\.crimMultiplier$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"
+  },
+  {
+    "path": "^powerStructure\\.publicLegitimacy\\.govMultiplier$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"
+  },
+  {
+    "path": "^powerStructure\\.publicLegitimacy\\.(isApproved|isContested|isEndorsed|isTolerated|governanceFractured|isLegitimacyCrisis)$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"
+  },
+  {
+    "path": "^powerStructure\\.recentConflict$",
+    "rule": "withhold",
+    "by": "src/generators/power/governanceNarrative.js :: buildGovernanceLabels"
+  },
+  {
+    "path": "^powerStructure\\.stability$",
+    "rule": "recompose",
+    "by": "src/generators/power/governanceNarrative.js :: deriveBaselineStability"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\]\\.legitimacyCrisis$",
+    "rule": "withhold",
+    "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.incomeWeight$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.shadowEconomy$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:criminal\\b",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^spatialLayout\\.quarters\\[\\]",
+    "rule": "withhold",
+    "by": "src/generators/spatialGenerator.js :: generateSpatialLayout"
+  },
+  {
+    "path": "^(stress|stressors)\\.cast\\.absent\\[\\]$",
+    "rule": "withhold",
+    "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  },
+  {
+    "path": "^(stress|stressors)\\.cast\\.roles\\[\\]\\.(reason|role)$",
+    "rule": "withhold",
+    "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  },
+  {
+    "path": "^(stress|stressors)\\.cast\\.stakes\\[\\](\\.(factionId|reason|stake))?$",
+    "rule": "withhold",
+    "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  }
+]

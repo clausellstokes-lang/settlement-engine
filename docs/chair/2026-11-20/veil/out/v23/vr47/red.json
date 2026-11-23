@@ -1,0 +1,4782 @@
+{
+ "tree": "/home/user/wt/vr47",
+ "towns": [
+  {
+   "seed": "render-twice-town-calm-0",
+   "birthSha256": "1ad00d1097c378dedaaf33cac959e739ae9ab4e2fe3f86c6c19676a1def7fc45",
+   "storedSha256": "27f9f46f619979daaf902bfad184d792dd209e7b7777a88c75e57a0d44ce9b2a",
+   "cards": 34,
+   "multiFormCards": 29,
+   "owner": {
+    "rows": {
+     "npc_merchant_guilds_3_8": {
+      "name": "Khutulun Dörbete",
+      "title": "the senior guild master",
+      "shown": "Master of the Guild",
+      "card": "Master of the Guild",
+      "keeper": ""
+     },
+     "npc_barracks": {
+      "name": "Selmeg Ba'arin",
+      "title": "the garrison commander",
+      "shown": "Captain",
+      "card": "Captain",
+      "keeper": ""
+     },
+     "npc_parish_churches_2_5": {
+      "name": "Toghan Taichiud",
+      "title": "the dean",
+      "shown": "Dean",
+      "card": "Dean",
+      "keeper": ""
+     },
+     "npc_power_landed_gentry": {
+      "name": "Berke Khwarezm",
+      "title": "the lord",
+      "shown": "Khan",
+      "card": "Khan",
+      "keeper": ""
+     },
+     "npc_town_granary": {
+      "name": "Zolzaya Ongut",
+      "title": "the granary reeve",
+      "shown": "Granary Reeve",
+      "card": "Granary Reeve",
+      "keeper": ""
+     },
+     "npc_cooper": {
+      "name": "Nomun Olqunu'ud",
+      "title": "the cooper",
+      "shown": "Master Cooper",
+      "card": "Master Cooper",
+      "keeper": ""
+     },
+     "npc_town_watch": {
+      "name": "Regünjid Fergana",
+      "title": "the watch captain",
+      "shown": "Captain",
+      "card": "Captain",
+      "keeper": ""
+     },
+     "npc_stable_district": {
+      "name": "Oyun Jirgin",
+      "title": "the stable master",
+      "shown": "Stablemaster",
+      "card": "Stablemaster",
+      "keeper": ""
+     },
+     "npc_cartographer_s_workshop": {
+      "name": "Enkhtuya Tayichi'ud",
+      "title": "the cartographer",
+      "shown": "Cartographer",
+      "card": "Cartographer",
+      "keeper": ""
+     },
+     "npc_small_hospital": {
+      "name": "Kadan Urgench",
+      "title": "the hospitaller",
+      "shown": "Hospitaller",
+      "card": "Hospitaller",
+      "keeper": ""
+     },
+     "npc_mills_2_5": {
+      "name": "Jebe Naiman",
+      "title": "the miller",
+      "shown": "Master Miller",
+      "card": "Master Miller",
+      "keeper": ""
+     },
+     "npc_warden_s_lodge": {
+      "name": "Zagdaakhüü Naiman",
+      "title": "the warden",
+      "shown": "Warden",
+      "card": "Warden",
+      "keeper": ""
+     },
+     "npc_inn_multiple": {
+      "name": "Oghul Ba'arin",
+      "title": "the innkeeper",
+      "shown": "Host",
+      "card": "Host",
+      "keeper": ""
+     },
+     "npc_coaching_inn": {
+      "name": "Nomun Ongut",
+      "title": "the coaching-inn keeper",
+      "shown": "Innkeeper",
+      "card": "Innkeeper",
+      "keeper": ""
+     },
+     "npc_merchant_warehouses": {
+      "name": "Yesüi Dörbete",
+      "title": "the warehouse factor",
+      "shown": "Factor",
+      "card": "Factor",
+      "keeper": ""
+     },
+     "npc_listening_post": {
+      "name": "Sübetei Ongut",
+      "title": "the watcher",
+      "shown": "Watcher",
+      "card": "Watcher",
+      "keeper": ""
+     },
+     "npc_carpenters_5_15": {
+      "name": "Altankhuyag Bukhara",
+      "title": "the master carpenter",
+      "shown": "Master Wright",
+      "card": "Master Wright",
+      "keeper": ""
+     },
+     "npc_tanner_established": {
+      "name": "Sükhbaatar Besud",
+      "title": "the master tanner",
+      "shown": "Tanner",
+      "card": "Tanner",
+      "keeper": ""
+     },
+     "npc_brickmaker": {
+      "name": "Arghun Qatagin",
+      "title": "the brickmaker",
+      "shown": "Master Brickmaker",
+      "card": "Master Brickmaker",
+      "keeper": ""
+     },
+     "npc_cobbler_s_guild": {
+      "name": "Bayasgalan Jadaran",
+      "title": "the cobbler",
+      "shown": "Cobbler",
+      "card": "Cobbler",
+      "keeper": ""
+     },
+     "npc_butchers_3_8": {
+      "name": "Arslankhan Bukhara",
+      "title": "the master butcher",
+      "shown": "Butcher",
+      "card": "Butcher",
+      "keeper": ""
+     },
+     "npc_town_crier": {
+      "name": "Mönkhtsetseg Fergana",
+      "title": "the crier",
+      "shown": "Crier",
+      "card": "Crier",
+      "keeper": ""
+     },
+     "npc_courthouse": {
+      "name": "Maghan Olqunu'ud",
+      "title": "the magistrate",
+      "shown": "Justice",
+      "card": "Justice",
+      "keeper": ""
+     },
+     "npc_beast_trainers": {
+      "name": "Ughul Bukhara",
+      "title": "the beast master",
+      "shown": "Beastmaster",
+      "card": "Beastmaster",
+      "keeper": ""
+     },
+     "npc_public_bathhouse": {
+      "name": "Sarnai Kereit",
+      "title": "the bath-keeper",
+      "shown": "Bath-Keeper",
+      "card": "Bath-Keeper",
+      "keeper": ""
+     },
+     "npc_potter": {
+      "name": "Oljeitu Önggirad",
+      "title": "the potter",
+      "shown": "Master Potter",
+      "card": "Master Potter",
+      "keeper": ""
+     },
+     "npc_craft_guilds_5_15": {
+      "name": "Otgonbayar Urgench",
+      "title": "the senior craft-guild master",
+      "shown": "Guildmaster",
+      "card": "Guildmaster",
+      "keeper": ""
+     },
+     "npc_fish_market": {
+      "name": "Purevdorj Ongut",
+      "title": "the master fishmonger",
+      "shown": "Master Fishmonger",
+      "card": "Master Fishmonger",
+      "keeper": ""
+     },
+     "npc_pawnbroker": {
+      "name": "Dogshin Qatagin",
+      "title": "the pawnbroker",
+      "shown": "Pawnmaster",
+      "card": "Pawnmaster",
+      "keeper": ""
+     },
+     "npc_taverns_5_20": {
+      "name": "Toragana Önggirad",
+      "title": "the tavern keeper",
+      "shown": "Host",
+      "card": "Host",
+      "keeper": ""
+     },
+     "npc_carriers_guild": {
+      "name": "Hoelun Jalayir",
+      "title": "the carriers' master",
+      "shown": "Carriers' Master",
+      "card": "Carriers' Master",
+      "keeper": ""
+     },
+     "npc_apothecary_established": {
+      "name": "Mongke Urgench",
+      "title": "the apothecary",
+      "shown": "Master Apothecary",
+      "card": "Master Apothecary",
+      "keeper": ""
+     },
+     "npc_wizard_s_tower": {
+      "name": "Qutlugh Arulad",
+      "title": "the wizard",
+      "shown": "Wizard",
+      "card": "Wizard",
+      "keeper": ""
+     },
+     "npc_veiled_0f8c1b588215b7b7": {
+      "name": "Timur Besud",
+      "title": "the gang boss",
+      "shown": "Boss",
+      "card": "Boss",
+      "keeper": ""
+     }
+    },
+    "line": ""
+   },
+   "a": {
+    "owner": {
+     "cards": 34,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_3_8",
+       "name": "Khutulun Dörbete",
+       "title": "the senior guild master",
+       "A": "Warden of the Guild",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_barracks",
+       "name": "Selmeg Ba'arin",
+       "title": "the garrison commander",
+       "A": "Commander",
+       "B": "Captain",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_granary",
+       "name": "Zolzaya Ongut",
+       "title": "the granary reeve",
+       "A": "Granary Reeve",
+       "B": "Granger",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Nomun Olqunu'ud",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_stable_district",
+       "name": "Oyun Jirgin",
+       "title": "the stable master",
+       "A": "Master of Horse",
+       "B": "Stablemaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Jebe Naiman",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carpenters_5_15",
+       "name": "Altankhuyag Bukhara",
+       "title": "the master carpenter",
+       "A": "Master Wright",
+       "B": "Master Carpenter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tanner_established",
+       "name": "Sükhbaatar Besud",
+       "title": "the master tanner",
+       "A": "Master Tanner",
+       "B": "Tanner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_brickmaker",
+       "name": "Arghun Qatagin",
+       "title": "the brickmaker",
+       "A": "Master Brickmaker",
+       "B": "Brickmaker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Arslankhan Bukhara",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_crier",
+       "name": "Mönkhtsetseg Fergana",
+       "title": "the crier",
+       "A": "Crier",
+       "B": "Town Crier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_courthouse",
+       "name": "Maghan Olqunu'ud",
+       "title": "the magistrate",
+       "A": "Justice",
+       "B": "Magistrate",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_public_bathhouse",
+       "name": "Sarnai Kereit",
+       "title": "the bath-keeper",
+       "A": "Bathmaster",
+       "B": "Bath-Keeper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Oljeitu Önggirad",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_5_15",
+       "name": "Otgonbayar Urgench",
+       "title": "the senior craft-guild master",
+       "A": "Master of the Guild",
+       "B": "Guildmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_pawnbroker",
+       "name": "Dogshin Qatagin",
+       "title": "the pawnbroker",
+       "A": "Pawnbroker",
+       "B": "Pawnmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_taverns_5_20",
+       "name": "Toragana Önggirad",
+       "title": "the tavern keeper",
+       "A": "Host",
+       "B": "Taverner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carriers_guild",
+       "name": "Hoelun Jalayir",
+       "title": "the carriers' master",
+       "A": "Master Carrier",
+       "B": "Carriers' Master",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_apothecary_established",
+       "name": "Mongke Urgench",
+       "title": "the apothecary",
+       "A": "Master Apothecary",
+       "B": "Apothecary",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    },
+    "shared": {
+     "cards": 33,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_3_8",
+       "name": "Khutulun Dörbete",
+       "title": "the senior guild master",
+       "A": "Warden of the Guild",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_barracks",
+       "name": "Selmeg Ba'arin",
+       "title": "the garrison commander",
+       "A": "Commander",
+       "B": "Captain",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_granary",
+       "name": "Zolzaya Ongut",
+       "title": "the granary reeve",
+       "A": "Granary Reeve",
+       "B": "Granger",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Nomun Olqunu'ud",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_stable_district",
+       "name": "Oyun Jirgin",
+       "title": "the stable master",
+       "A": "Master of Horse",
+       "B": "Stablemaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Jebe Naiman",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carpenters_5_15",
+       "name": "Altankhuyag Bukhara",
+       "title": "the master carpenter",
+       "A": "Master Wright",
+       "B": "Master Carpenter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tanner_established",
+       "name": "Sükhbaatar Besud",
+       "title": "the master tanner",
+       "A": "Master Tanner",
+       "B": "Tanner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_brickmaker",
+       "name": "Arghun Qatagin",
+       "title": "the brickmaker",
+       "A": "Master Brickmaker",
+       "B": "Brickmaker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Arslankhan Bukhara",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_crier",
+       "name": "Mönkhtsetseg Fergana",
+       "title": "the crier",
+       "A": "Crier",
+       "B": "Town Crier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_courthouse",
+       "name": "Maghan Olqunu'ud",
+       "title": "the magistrate",
+       "A": "Justice",
+       "B": "Magistrate",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_public_bathhouse",
+       "name": "Sarnai Kereit",
+       "title": "the bath-keeper",
+       "A": "Bathmaster",
+       "B": "Bath-Keeper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Oljeitu Önggirad",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_5_15",
+       "name": "Otgonbayar Urgench",
+       "title": "the senior craft-guild master",
+       "A": "Master of the Guild",
+       "B": "Guildmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_pawnbroker",
+       "name": "Dogshin Qatagin",
+       "title": "the pawnbroker",
+       "A": "Pawnbroker",
+       "B": "Pawnmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_taverns_5_20",
+       "name": "Toragana Önggirad",
+       "title": "the tavern keeper",
+       "A": "Host",
+       "B": "Taverner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carriers_guild",
+       "name": "Hoelun Jalayir",
+       "title": "the carriers' master",
+       "A": "Master Carrier",
+       "B": "Carriers' Master",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_apothecary_established",
+       "name": "Mongke Urgench",
+       "title": "the apothecary",
+       "A": "Master Apothecary",
+       "B": "Apothecary",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    }
+   },
+   "b": {
+    "moved": [
+     {
+      "id": "npc_merchant_guilds_3_8",
+      "name": "Khutulun Dörbete",
+      "title": "the senior guild master",
+      "key": "Merchant guilds (3-8)#1",
+      "before": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Guildmaster",
+       "card": "Guildmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_barracks",
+      "name": "Selmeg Ba'arin",
+      "title": "the garrison commander",
+      "key": "Barracks#2",
+      "before": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Commander",
+       "card": "Commander",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_town_granary",
+      "name": "Zolzaya Ongut",
+      "title": "the granary reeve",
+      "key": "Town granary#2",
+      "before": {
+       "shown": "Granary Reeve",
+       "card": "Granary Reeve",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Granger",
+       "card": "Granger",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cooper",
+      "name": "Nomun Olqunu'ud",
+      "title": "the cooper",
+      "key": "Cooper#2",
+      "before": {
+       "shown": "Master Cooper",
+       "card": "Master Cooper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Cooper",
+       "card": "Cooper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_town_watch",
+      "name": "Regünjid Fergana",
+      "title": "the watch captain",
+      "key": "Town watch#2",
+      "before": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Captain of the Watch",
+       "card": "Captain of the Watch",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_stable_district",
+      "name": "Oyun Jirgin",
+      "title": "the stable master",
+      "key": "Stable district#2",
+      "before": {
+       "shown": "Stablemaster",
+       "card": "Stablemaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of Horse",
+       "card": "Master of Horse",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cartographer_s_workshop",
+      "name": "Enkhtuya Tayichi'ud",
+      "title": "the cartographer",
+      "key": "Cartographer's workshop#2",
+      "before": {
+       "shown": "Cartographer",
+       "card": "Cartographer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Mapmaker",
+       "card": "Mapmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_small_hospital",
+      "name": "Kadan Urgench",
+      "title": "the hospitaller",
+      "key": "Small hospital#2",
+      "before": {
+       "shown": "Hospitaller",
+       "card": "Hospitaller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Brother Hospitaller",
+       "card": "Brother Hospitaller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mills_2_5",
+      "name": "Jebe Naiman",
+      "title": "the miller",
+      "key": "Mills (2-5)#2",
+      "before": {
+       "shown": "Master Miller",
+       "card": "Master Miller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Miller",
+       "card": "Miller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_inn_multiple",
+      "name": "Oghul Ba'arin",
+      "title": "the innkeeper",
+      "key": "Inn (multiple)#1",
+      "before": {
+       "shown": "Host",
+       "card": "Host",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Innkeeper",
+       "card": "Innkeeper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_coaching_inn",
+      "name": "Nomun Ongut",
+      "title": "the coaching-inn keeper",
+      "key": "Coaching inn#2",
+      "before": {
+       "shown": "Innkeeper",
+       "card": "Innkeeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Landlady",
+       "card": "Landlady",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_merchant_warehouses",
+      "name": "Yesüi Dörbete",
+      "title": "the warehouse factor",
+      "key": "Merchant warehouses#2",
+      "before": {
+       "shown": "Factor",
+       "card": "Factor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Warehouse Master",
+       "card": "Warehouse Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_carpenters_5_15",
+      "name": "Altankhuyag Bukhara",
+      "title": "the master carpenter",
+      "key": "Carpenters (5-15)#2",
+      "before": {
+       "shown": "Master Wright",
+       "card": "Master Wright",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Carpenter",
+       "card": "Master Carpenter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_tanner_established",
+      "name": "Sükhbaatar Besud",
+      "title": "the master tanner",
+      "key": "Tanner (established)#2",
+      "before": {
+       "shown": "Tanner",
+       "card": "Tanner",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Tanner",
+       "card": "Master Tanner",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_brickmaker",
+      "name": "Arghun Qatagin",
+      "title": "the brickmaker",
+      "key": "Brickmaker#2",
+      "before": {
+       "shown": "Master Brickmaker",
+       "card": "Master Brickmaker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Brickmaker",
+       "card": "Brickmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cobbler_s_guild",
+      "name": "Bayasgalan Jadaran",
+      "title": "the cobbler",
+      "key": "Cobbler's guild#2",
+      "before": {
+       "shown": "Cobbler",
+       "card": "Cobbler",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Cobbler",
+       "card": "Master Cobbler",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_butchers_3_8",
+      "name": "Arslankhan Bukhara",
+      "title": "the master butcher",
+      "key": "Butchers (3-8)#2",
+      "before": {
+       "shown": "Butcher",
+       "card": "Butcher",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Butcher",
+       "card": "Master Butcher",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_town_crier",
+      "name": "Mönkhtsetseg Fergana",
+      "title": "the crier",
+      "key": "Town crier#2",
+      "before": {
+       "shown": "Crier",
+       "card": "Crier",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Town Crier",
+       "card": "Town Crier",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_courthouse",
+      "name": "Maghan Olqunu'ud",
+      "title": "the magistrate",
+      "key": "Courthouse#2",
+      "before": {
+       "shown": "Justice",
+       "card": "Justice",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Magistrate",
+       "card": "Magistrate",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_beast_trainers",
+      "name": "Ughul Bukhara",
+      "title": "the beast master",
+      "key": "Beast trainers#2",
+      "before": {
+       "shown": "Beastmaster",
+       "card": "Beastmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of Beasts",
+       "card": "Master of Beasts",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_public_bathhouse",
+      "name": "Sarnai Kereit",
+      "title": "the bath-keeper",
+      "key": "Public bathhouse#2",
+      "before": {
+       "shown": "Bath-Keeper",
+       "card": "Bath-Keeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Bathmaster",
+       "card": "Bathmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_potter",
+      "name": "Oljeitu Önggirad",
+      "title": "the potter",
+      "key": "Potter#2",
+      "before": {
+       "shown": "Master Potter",
+       "card": "Master Potter",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Potter",
+       "card": "Potter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_craft_guilds_5_15",
+      "name": "Otgonbayar Urgench",
+      "title": "the senior craft-guild master",
+      "key": "Craft guilds (5-15)#2",
+      "before": {
+       "shown": "Guildmaster",
+       "card": "Guildmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_fish_market",
+      "name": "Purevdorj Ongut",
+      "title": "the master fishmonger",
+      "key": "Fish market#2",
+      "before": {
+       "shown": "Master Fishmonger",
+       "card": "Master Fishmonger",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fishmonger",
+       "card": "Fishmonger",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_pawnbroker",
+      "name": "Dogshin Qatagin",
+      "title": "the pawnbroker",
+      "key": "Pawnbroker#2",
+      "before": {
+       "shown": "Pawnmaster",
+       "card": "Pawnmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Pawnbroker",
+       "card": "Pawnbroker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_taverns_5_20",
+      "name": "Toragana Önggirad",
+      "title": "the tavern keeper",
+      "key": "Taverns (5-20)#3",
+      "before": {
+       "shown": "Host",
+       "card": "Host",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Landlady",
+       "card": "Landlady",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_carriers_guild",
+      "name": "Hoelun Jalayir",
+      "title": "the carriers' master",
+      "key": "Carriers' guild#2",
+      "before": {
+       "shown": "Carriers' Master",
+       "card": "Carriers' Master",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Carrier",
+       "card": "Master Carrier",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_apothecary_established",
+      "name": "Mongke Urgench",
+      "title": "the apothecary",
+      "key": "Apothecary (established)#2",
+      "before": {
+       "shown": "Master Apothecary",
+       "card": "Master Apothecary",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Apothecary",
+       "card": "Apothecary",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_wizard_s_tower",
+      "name": "Qutlugh Arulad",
+      "title": "the wizard",
+      "key": "Wizard's tower#2",
+      "before": {
+       "shown": "Wizard",
+       "card": "Wizard",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Magus",
+       "card": "Magus",
+       "keeper": ""
+      }
+     }
+    ],
+    "cardsTried": 34
+   },
+   "ownerVsShared": [
+    {
+     "id": "npc_inn_multiple",
+     "name": "Oghul Ba'arin",
+     "title": "the innkeeper",
+     "owner": "Landlady",
+     "shared": "Landlord"
+    }
+   ]
+  },
+  {
+   "seed": "render-twice-city-infiltrated-1",
+   "birthSha256": "3bd882de58e9ccfafd840ed7ec1fd926bf03c44a25e31fad9f4a1cb2ea06787b",
+   "storedSha256": "0b296bf562ddde61980268a36d2332442183534ba4c0fee2c7f6b76aa7147cff",
+   "cards": 49,
+   "multiFormCards": 43,
+   "owner": {
+    "rows": {
+     "npc_merchant_guilds_15_40": {
+      "name": "Owl Kin",
+      "title": "the senior guild master",
+      "shown": "Warden of the Guild",
+      "card": "Warden of the Guild",
+      "keeper": ""
+     },
+     "npc_parish_churches_10_30": {
+      "name": "Underworld Queen Jalach",
+      "title": "the dean",
+      "shown": "Dean",
+      "card": "Dean",
+      "keeper": ""
+     },
+     "npc_craft_guilds_30_80": {
+      "name": "Huitzil Dzul",
+      "title": "the senior craft-guild master",
+      "shown": "Guildmaster",
+      "card": "Guildmaster",
+      "keeper": ""
+     },
+     "npc_professional_city_watch": {
+      "name": "Xib Tec",
+      "title": "the watch commander",
+      "shown": "Commander of the Watch",
+      "card": "Commander of the Watch",
+      "keeper": ""
+     },
+     "npc_garrison": {
+      "name": "Quetzalxochitl Ucan",
+      "title": "the garrison commander",
+      "shown": "Captain",
+      "card": "Captain",
+      "keeper": ""
+     },
+     "npc_multiple_monasteries": {
+      "name": "Patli Ku",
+      "title": "the senior abbot",
+      "shown": "Lord Abbot",
+      "card": "Lord Abbot",
+      "keeper": ""
+     },
+     "npc_inns_and_taverns_district": {
+      "name": "Oc Lahun",
+      "title": "the innkeeper",
+      "shown": "Landlady",
+      "card": "Landlady",
+      "keeper": ""
+     },
+     "npc_luxury_goods_quarter": {
+      "name": "Yagul Nah",
+      "title": "the luxury merchant",
+      "shown": "Merchant Prince",
+      "card": "Merchant Prince",
+      "keeper": ""
+     },
+     "npc_salt_works": {
+      "name": "Akna Ek",
+      "title": "the salt master",
+      "shown": "Saltmaster",
+      "card": "Saltmaster",
+      "keeper": ""
+     },
+     "npc_multiple_courthouses": {
+      "name": "Cipactli Caan",
+      "title": "the chief magistrate",
+      "shown": "Chief Magistrate",
+      "card": "Chief Magistrate",
+      "keeper": ""
+     },
+     "npc_veiled_2f71c5482af882d1": {
+      "name": "Pixan Koh",
+      "title": "the network's head",
+      "shown": "Spymaster",
+      "card": "Spymaster",
+      "keeper": ""
+     },
+     "npc_midwife": {
+      "name": "Muyal Cohuoh",
+      "title": "the midwife",
+      "shown": "Goodwife",
+      "card": "Goodwife",
+      "keeper": ""
+     },
+     "npc_tailor_s_guild": {
+      "name": "Quetzal Kanil",
+      "title": "the tailor",
+      "shown": "Tailor",
+      "card": "Tailor",
+      "keeper": ""
+     },
+     "npc_alchemist_quarter": {
+      "name": "Huijatoo Zaz",
+      "title": "the alchemist",
+      "shown": "Alchemist",
+      "card": "Alchemist",
+      "keeper": ""
+     },
+     "npc_warehouse_district": {
+      "name": "Luchtan Caan",
+      "title": "the warehouse factor",
+      "shown": "Factor",
+      "card": "Factor",
+      "keeper": ""
+     },
+     "npc_dungeon_delving_supply_district": {
+      "name": "Imix Ox",
+      "title": "the outfitter",
+      "shown": "Outfitter",
+      "card": "Outfitter",
+      "keeper": ""
+     },
+     "npc_bowyers_fletchers_guild": {
+      "name": "Yohualli Tut",
+      "title": "the bowyer",
+      "shown": "Bowyer",
+      "card": "Bowyer",
+      "keeper": ""
+     },
+     "npc_citadel": {
+      "name": "Night Coh",
+      "title": "the castellan",
+      "shown": "Constable",
+      "card": "Constable",
+      "keeper": ""
+     },
+     "npc_multiple_adventurers_guilds": {
+      "name": "Atotoztli Xul",
+      "title": "the senior charter master",
+      "shown": "Chartermaster",
+      "card": "Chartermaster",
+      "keeper": ""
+     },
+     "npc_river_ferry": {
+      "name": "Thunder Xul",
+      "title": "the ferryman",
+      "shown": "Ferry Keeper",
+      "card": "Ferry Keeper",
+      "keeper": ""
+     },
+     "npc_docks_port_facilities": {
+      "name": "Nezahualcoyotl Cohuoh",
+      "title": "the wharfinger",
+      "shown": "Wharfinger",
+      "card": "Wharfinger",
+      "keeper": ""
+     },
+     "npc_harbour_master_s_office": {
+      "name": "Yagul Zaz",
+      "title": "the harbour master",
+      "shown": "Master of the Harbour",
+      "card": "Master of the Harbour",
+      "keeper": ""
+     },
+     "npc_toll_bridge": {
+      "name": "Xolotl Xoc",
+      "title": "the toll-keeper",
+      "shown": "Toll-Keeper",
+      "card": "Toll-Keeper",
+      "keeper": ""
+     },
+     "npc_customs_house": {
+      "name": "Itzpapalotl Zam",
+      "title": "the customs collector",
+      "shown": "Collector",
+      "card": "Collector",
+      "keeper": ""
+     },
+     "npc_city_granaries": {
+      "name": "Winal Uc",
+      "title": "the master of granaries",
+      "shown": "Master of Granaries",
+      "card": "Master of Granaries",
+      "keeper": ""
+     },
+     "npc_mills_2_5": {
+      "name": "Cuauhtli Dzunum",
+      "title": "the miller",
+      "shown": "Master Miller",
+      "card": "Master Miller",
+      "keeper": ""
+     },
+     "npc_theaters": {
+      "name": "Flint Xib",
+      "title": "the theatre manager",
+      "shown": "Manager",
+      "card": "Manager",
+      "keeper": ""
+     },
+     "npc_banking_houses": {
+      "name": "Jaguar May",
+      "title": "the banker",
+      "shown": "Banker",
+      "card": "Banker",
+      "keeper": ""
+     },
+     "npc_shipyard": {
+      "name": "Ixquil Holpop",
+      "title": "the master shipwright",
+      "shown": "Shipwright",
+      "card": "Shipwright",
+      "keeper": ""
+     },
+     "npc_auction_house": {
+      "name": "Xib Zaz",
+      "title": "the auctioneer",
+      "shown": "Auctioneer",
+      "card": "Auctioneer",
+      "keeper": ""
+     },
+     "npc_weavers_textile_workers": {
+      "name": "Storm Uc",
+      "title": "the master weaver",
+      "shown": "Master Weaver",
+      "card": "Master Weaver",
+      "keeper": ""
+     },
+     "npc_veiled_b7e278478824063a": {
+      "name": "Maize Nauat",
+      "title": "the black marketeer",
+      "shown": "Black Marketeer",
+      "card": "Black Marketeer",
+      "keeper": ""
+     },
+     "npc_fighting_pits": {
+      "name": "Muluc Tec",
+      "title": "the pit boss",
+      "shown": "Pit Boss",
+      "card": "Pit Boss",
+      "keeper": ""
+     },
+     "npc_cooper": {
+      "name": "Acatl Jalach",
+      "title": "the cooper",
+      "shown": "Master Cooper",
+      "card": "Master Cooper",
+      "keeper": ""
+     },
+     "npc_sawmill_commercial": {
+      "name": "Yaocihuatl Itza",
+      "title": "the sawyer",
+      "shown": "Master Sawyer",
+      "card": "Master Sawyer",
+      "keeper": ""
+     },
+     "npc_brewery": {
+      "name": "Tao Dzul",
+      "title": "the brewer",
+      "shown": "Master Brewer",
+      "card": "Master Brewer",
+      "keeper": ""
+     },
+     "npc_tanner_established": {
+      "name": "Morning Star Itza",
+      "title": "the master tanner",
+      "shown": "Tanner",
+      "card": "Tanner",
+      "keeper": ""
+     },
+     "npc_potter": {
+      "name": "Cipactli Chuc",
+      "title": "the potter",
+      "shown": "Master Potter",
+      "card": "Master Potter",
+      "keeper": ""
+     },
+     "npc_cobbler_s_guild": {
+      "name": "Chimalli Ku",
+      "title": "the cobbler",
+      "shown": "Cobbler",
+      "card": "Cobbler",
+      "keeper": ""
+     },
+     "npc_butchers_3_8": {
+      "name": "Dzizib Chan",
+      "title": "the master butcher",
+      "shown": "Butcher",
+      "card": "Butcher",
+      "keeper": ""
+     },
+     "npc_bakers_5_15": {
+      "name": "Chimalli Jalach",
+      "title": "the master baker",
+      "shown": "Baker",
+      "card": "Baker",
+      "keeper": ""
+     },
+     "npc_cartographer_s_guild": {
+      "name": "Uijah Bacab",
+      "title": "the cartographer",
+      "shown": "Cartographer",
+      "card": "Cartographer",
+      "keeper": ""
+     },
+     "npc_specialized_metalworkers": {
+      "name": "Mazatl Caan",
+      "title": "the master metalworker",
+      "shown": "Master Metalworker",
+      "card": "Master Metalworker",
+      "keeper": ""
+     },
+     "npc_fuller": {
+      "name": "Teyacapan May",
+      "title": "the fuller",
+      "shown": "Master Fuller",
+      "card": "Master Fuller",
+      "keeper": ""
+     },
+     "npc_dyer": {
+      "name": "Pakal Lahun",
+      "title": "the dyer",
+      "shown": "Master Dyer",
+      "card": "Master Dyer",
+      "keeper": ""
+     },
+     "npc_chandler": {
+      "name": "Sky Woman Balam",
+      "title": "the chandler",
+      "shown": "Master Chandler",
+      "card": "Master Chandler",
+      "keeper": ""
+     },
+     "npc_ropemaker": {
+      "name": "Bolontiku Tec",
+      "title": "the ropemaker",
+      "shown": "Master Roper",
+      "card": "Master Roper",
+      "keeper": ""
+     },
+     "npc_fish_market": {
+      "name": "Yaotl May",
+      "title": "the master fishmonger",
+      "shown": "Master Fishmonger",
+      "card": "Master Fishmonger",
+      "keeper": ""
+     },
+     "npc_charlatan_fortune_tellers": {
+      "name": "Itzel Chel",
+      "title": "the fortune teller",
+      "shown": "Seer",
+      "card": "Seer",
+      "keeper": ""
+     }
+    },
+    "line": ""
+   },
+   "a": {
+    "owner": {
+     "cards": 49,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_15_40",
+       "name": "Owl Kin",
+       "title": "the senior guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_30_80",
+       "name": "Huitzil Dzul",
+       "title": "the senior craft-guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_garrison",
+       "name": "Quetzalxochitl Ucan",
+       "title": "the garrison commander",
+       "A": "Captain",
+       "B": "Commander",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_monasteries",
+       "name": "Patli Ku",
+       "title": "the senior abbot",
+       "A": "Abbot",
+       "B": "Lord Abbot",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_inns_and_taverns_district",
+       "name": "Oc Lahun",
+       "title": "the innkeeper",
+       "A": "Innkeeper",
+       "B": "Host",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_midwife",
+       "name": "Muyal Cohuoh",
+       "title": "the midwife",
+       "A": "Goodwife",
+       "B": "Midwife",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tailor_s_guild",
+       "name": "Quetzal Kanil",
+       "title": "the tailor",
+       "A": "Master Tailor",
+       "B": "Tailor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_alchemist_quarter",
+       "name": "Huijatoo Zaz",
+       "title": "the alchemist",
+       "A": "Alchemist",
+       "B": "Master Alchemist",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_citadel",
+       "name": "Night Coh",
+       "title": "the castellan",
+       "A": "Constable",
+       "B": "Castellan",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_river_ferry",
+       "name": "Thunder Xul",
+       "title": "the ferryman",
+       "A": "Ferry-Master",
+       "B": "Ferry Keeper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_docks_port_facilities",
+       "name": "Nezahualcoyotl Cohuoh",
+       "title": "the wharfinger",
+       "A": "Wharfmaster",
+       "B": "Wharfinger",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_customs_house",
+       "name": "Itzpapalotl Zam",
+       "title": "the customs collector",
+       "A": "Collector of Customs",
+       "B": "Collector",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Cuauhtli Dzunum",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_theaters",
+       "name": "Flint Xib",
+       "title": "the theatre manager",
+       "A": "Theatre Manager",
+       "B": "Manager",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_banking_houses",
+       "name": "Jaguar May",
+       "title": "the banker",
+       "A": "Banker",
+       "B": "Master of the House",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_shipyard",
+       "name": "Ixquil Holpop",
+       "title": "the master shipwright",
+       "A": "Master Shipwright",
+       "B": "Shipwright",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Acatl Jalach",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tanner_established",
+       "name": "Morning Star Itza",
+       "title": "the master tanner",
+       "A": "Master Tanner",
+       "B": "Tanner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Cipactli Chuc",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Dzizib Chan",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_bakers_5_15",
+       "name": "Chimalli Jalach",
+       "title": "the master baker",
+       "A": "Master Baker",
+       "B": "Baker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_dyer",
+       "name": "Pakal Lahun",
+       "title": "the dyer",
+       "A": "Master Dyer",
+       "B": "Dyer",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_charlatan_fortune_tellers",
+       "name": "Itzel Chel",
+       "title": "the fortune teller",
+       "A": "Seer",
+       "B": "Fortune-Teller",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    },
+    "shared": {
+     "cards": 47,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_15_40",
+       "name": "Owl Kin",
+       "title": "the senior guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_30_80",
+       "name": "Huitzil Dzul",
+       "title": "the senior craft-guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_garrison",
+       "name": "Quetzalxochitl Ucan",
+       "title": "the garrison commander",
+       "A": "Captain",
+       "B": "Commander",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_monasteries",
+       "name": "Patli Ku",
+       "title": "the senior abbot",
+       "A": "Abbot",
+       "B": "Lord Abbot",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_inns_and_taverns_district",
+       "name": "Oc Lahun",
+       "title": "the innkeeper",
+       "A": "Innkeeper",
+       "B": "Host",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tailor_s_guild",
+       "name": "Quetzal Kanil",
+       "title": "the tailor",
+       "A": "Master Tailor",
+       "B": "Tailor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_alchemist_quarter",
+       "name": "Huijatoo Zaz",
+       "title": "the alchemist",
+       "A": "Alchemist",
+       "B": "Master Alchemist",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_citadel",
+       "name": "Night Coh",
+       "title": "the castellan",
+       "A": "Constable",
+       "B": "Castellan",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_river_ferry",
+       "name": "Thunder Xul",
+       "title": "the ferryman",
+       "A": "Ferry-Master",
+       "B": "Ferryman",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_docks_port_facilities",
+       "name": "Nezahualcoyotl Cohuoh",
+       "title": "the wharfinger",
+       "A": "Wharfmaster",
+       "B": "Wharfinger",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_customs_house",
+       "name": "Itzpapalotl Zam",
+       "title": "the customs collector",
+       "A": "Collector of Customs",
+       "B": "Collector",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Cuauhtli Dzunum",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_theaters",
+       "name": "Flint Xib",
+       "title": "the theatre manager",
+       "A": "Theatre Manager",
+       "B": "Manager",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_banking_houses",
+       "name": "Jaguar May",
+       "title": "the banker",
+       "A": "Banker",
+       "B": "Master of the House",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_shipyard",
+       "name": "Ixquil Holpop",
+       "title": "the master shipwright",
+       "A": "Master Shipwright",
+       "B": "Shipwright",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Acatl Jalach",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tanner_established",
+       "name": "Morning Star Itza",
+       "title": "the master tanner",
+       "A": "Master Tanner",
+       "B": "Tanner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Cipactli Chuc",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Dzizib Chan",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_bakers_5_15",
+       "name": "Chimalli Jalach",
+       "title": "the master baker",
+       "A": "Master Baker",
+       "B": "Baker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_dyer",
+       "name": "Pakal Lahun",
+       "title": "the dyer",
+       "A": "Master Dyer",
+       "B": "Dyer",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_charlatan_fortune_tellers",
+       "name": "Itzel Chel",
+       "title": "the fortune teller",
+       "A": "Seer",
+       "B": "Fortune-Teller",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    }
+   },
+   "b": {
+    "moved": [
+     {
+      "id": "npc_merchant_guilds_15_40",
+      "name": "Owl Kin",
+      "title": "the senior guild master",
+      "key": "Merchant guilds (15-40)#1",
+      "before": {
+       "shown": "Warden of the Guild",
+       "card": "Warden of the Guild",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_craft_guilds_30_80",
+      "name": "Huitzil Dzul",
+      "title": "the senior craft-guild master",
+      "key": "Craft guilds (30-80)#2",
+      "before": {
+       "shown": "Guildmaster",
+       "card": "Guildmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_professional_city_watch",
+      "name": "Xib Tec",
+      "title": "the watch commander",
+      "key": "Professional city watch#2",
+      "before": {
+       "shown": "Commander of the Watch",
+       "card": "Commander of the Watch",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Commander",
+       "card": "Commander",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_garrison",
+      "name": "Quetzalxochitl Ucan",
+      "title": "the garrison commander",
+      "key": "Garrison#2",
+      "before": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Commander",
+       "card": "Commander",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_monasteries",
+      "name": "Patli Ku",
+      "title": "the senior abbot",
+      "key": "Multiple monasteries#2",
+      "before": {
+       "shown": "Lord Abbot",
+       "card": "Lord Abbot",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Abbot",
+       "card": "Abbot",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_inns_and_taverns_district",
+      "name": "Oc Lahun",
+      "title": "the innkeeper",
+      "key": "Inns and taverns (district)#3",
+      "before": {
+       "shown": "Landlady",
+       "card": "Landlady",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Innkeeper",
+       "card": "Innkeeper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_luxury_goods_quarter",
+      "name": "Yagul Nah",
+      "title": "the luxury merchant",
+      "key": "Luxury goods quarter#2",
+      "before": {
+       "shown": "Merchant Prince",
+       "card": "Merchant Prince",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Merchant",
+       "card": "Merchant",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_salt_works",
+      "name": "Akna Ek",
+      "title": "the salt master",
+      "key": "Salt works#2",
+      "before": {
+       "shown": "Saltmaster",
+       "card": "Saltmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Saltworks",
+       "card": "Master of the Saltworks",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_courthouses",
+      "name": "Cipactli Caan",
+      "title": "the chief magistrate",
+      "key": "Multiple courthouses#2",
+      "before": {
+       "shown": "Chief Magistrate",
+       "card": "Chief Magistrate",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Chief Justice",
+       "card": "Chief Justice",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_midwife",
+      "name": "Muyal Cohuoh",
+      "title": "the midwife",
+      "key": "Midwife#2",
+      "before": {
+       "shown": "Goodwife",
+       "card": "Goodwife",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Midwife",
+       "card": "Midwife",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_tailor_s_guild",
+      "name": "Quetzal Kanil",
+      "title": "the tailor",
+      "key": "Tailor's guild#2",
+      "before": {
+       "shown": "Tailor",
+       "card": "Tailor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Tailor",
+       "card": "Master Tailor",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_alchemist_quarter",
+      "name": "Huijatoo Zaz",
+      "title": "the alchemist",
+      "key": "Alchemist quarter#2",
+      "before": {
+       "shown": "Alchemist",
+       "card": "Alchemist",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Alchemist",
+       "card": "Master Alchemist",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_warehouse_district",
+      "name": "Luchtan Caan",
+      "title": "the warehouse factor",
+      "key": "Warehouse district#2",
+      "before": {
+       "shown": "Factor",
+       "card": "Factor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Warehouse Master",
+       "card": "Warehouse Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_bowyers_fletchers_guild",
+      "name": "Yohualli Tut",
+      "title": "the bowyer",
+      "key": "Bowyers & fletchers (guild)#2",
+      "before": {
+       "shown": "Bowyer",
+       "card": "Bowyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Bowyer",
+       "card": "Master Bowyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_citadel",
+      "name": "Night Coh",
+      "title": "the castellan",
+      "key": "Citadel#2",
+      "before": {
+       "shown": "Constable",
+       "card": "Constable",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Castellan",
+       "card": "Castellan",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_adventurers_guilds",
+      "name": "Atotoztli Xul",
+      "title": "the senior charter master",
+      "key": "Multiple adventurers' guilds#2",
+      "before": {
+       "shown": "Chartermaster",
+       "card": "Chartermaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Charter",
+       "card": "Master of the Charter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_river_ferry",
+      "name": "Thunder Xul",
+      "title": "the ferryman",
+      "key": "River ferry#2",
+      "before": {
+       "shown": "Ferry Keeper",
+       "card": "Ferry Keeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Ferry-Master",
+       "card": "Ferry-Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_docks_port_facilities",
+      "name": "Nezahualcoyotl Cohuoh",
+      "title": "the wharfinger",
+      "key": "Docks/port facilities#2",
+      "before": {
+       "shown": "Wharfinger",
+       "card": "Wharfinger",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Wharfmaster",
+       "card": "Wharfmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_harbour_master_s_office",
+      "name": "Yagul Zaz",
+      "title": "the harbour master",
+      "key": "Harbour master's office#2",
+      "before": {
+       "shown": "Master of the Harbour",
+       "card": "Master of the Harbour",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Harbourmaster",
+       "card": "Harbourmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_toll_bridge",
+      "name": "Xolotl Xoc",
+      "title": "the toll-keeper",
+      "key": "Toll bridge#2",
+      "before": {
+       "shown": "Toll-Keeper",
+       "card": "Toll-Keeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Tollman",
+       "card": "Tollman",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_customs_house",
+      "name": "Itzpapalotl Zam",
+      "title": "the customs collector",
+      "key": "Customs house#3",
+      "before": {
+       "shown": "Collector",
+       "card": "Collector",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Searcher",
+       "card": "Searcher",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_city_granaries",
+      "name": "Winal Uc",
+      "title": "the master of granaries",
+      "key": "City granaries#2",
+      "before": {
+       "shown": "Master of Granaries",
+       "card": "Master of Granaries",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Granger",
+       "card": "Granger",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mills_2_5",
+      "name": "Cuauhtli Dzunum",
+      "title": "the miller",
+      "key": "Mills (2-5)#2",
+      "before": {
+       "shown": "Master Miller",
+       "card": "Master Miller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Miller",
+       "card": "Miller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_theaters",
+      "name": "Flint Xib",
+      "title": "the theatre manager",
+      "key": "Theaters#2",
+      "before": {
+       "shown": "Manager",
+       "card": "Manager",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Theatre Manager",
+       "card": "Theatre Manager",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_banking_houses",
+      "name": "Jaguar May",
+      "title": "the banker",
+      "key": "Banking houses#2",
+      "before": {
+       "shown": "Banker",
+       "card": "Banker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the House",
+       "card": "Master of the House",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_shipyard",
+      "name": "Ixquil Holpop",
+      "title": "the master shipwright",
+      "key": "Shipyard#2",
+      "before": {
+       "shown": "Shipwright",
+       "card": "Shipwright",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Shipwright",
+       "card": "Master Shipwright",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_auction_house",
+      "name": "Xib Zaz",
+      "title": "the auctioneer",
+      "key": "Auction house#2",
+      "before": {
+       "shown": "Auctioneer",
+       "card": "Auctioneer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Block",
+       "card": "Master of the Block",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_weavers_textile_workers",
+      "name": "Storm Uc",
+      "title": "the master weaver",
+      "key": "Weavers/Textile workers#2",
+      "before": {
+       "shown": "Master Weaver",
+       "card": "Master Weaver",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Weaver-master",
+       "card": "Weaver-master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cooper",
+      "name": "Acatl Jalach",
+      "title": "the cooper",
+      "key": "Cooper#2",
+      "before": {
+       "shown": "Master Cooper",
+       "card": "Master Cooper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Cooper",
+       "card": "Cooper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_sawmill_commercial",
+      "name": "Yaocihuatl Itza",
+      "title": "the sawyer",
+      "key": "Sawmill (commercial)#2",
+      "before": {
+       "shown": "Master Sawyer",
+       "card": "Master Sawyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Sawyer",
+       "card": "Sawyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_brewery",
+      "name": "Tao Dzul",
+      "title": "the brewer",
+      "key": "Brewery#2",
+      "before": {
+       "shown": "Master Brewer",
+       "card": "Master Brewer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Brewer",
+       "card": "Brewer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_tanner_established",
+      "name": "Morning Star Itza",
+      "title": "the master tanner",
+      "key": "Tanner (established)#2",
+      "before": {
+       "shown": "Tanner",
+       "card": "Tanner",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Tanner",
+       "card": "Master Tanner",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_potter",
+      "name": "Cipactli Chuc",
+      "title": "the potter",
+      "key": "Potter#2",
+      "before": {
+       "shown": "Master Potter",
+       "card": "Master Potter",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Potter",
+       "card": "Potter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cobbler_s_guild",
+      "name": "Chimalli Ku",
+      "title": "the cobbler",
+      "key": "Cobbler's guild#2",
+      "before": {
+       "shown": "Cobbler",
+       "card": "Cobbler",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Cobbler",
+       "card": "Master Cobbler",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_butchers_3_8",
+      "name": "Dzizib Chan",
+      "title": "the master butcher",
+      "key": "Butchers (3-8)#2",
+      "before": {
+       "shown": "Butcher",
+       "card": "Butcher",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Butcher",
+       "card": "Master Butcher",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_bakers_5_15",
+      "name": "Chimalli Jalach",
+      "title": "the master baker",
+      "key": "Bakers (5-15)#2",
+      "before": {
+       "shown": "Baker",
+       "card": "Baker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Baker",
+       "card": "Master Baker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cartographer_s_guild",
+      "name": "Uijah Bacab",
+      "title": "the cartographer",
+      "key": "Cartographer's guild#2",
+      "before": {
+       "shown": "Cartographer",
+       "card": "Cartographer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Mapmaker",
+       "card": "Mapmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_fuller",
+      "name": "Teyacapan May",
+      "title": "the fuller",
+      "key": "Fuller#2",
+      "before": {
+       "shown": "Master Fuller",
+       "card": "Master Fuller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fuller",
+       "card": "Fuller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_dyer",
+      "name": "Pakal Lahun",
+      "title": "the dyer",
+      "key": "Dyer#2",
+      "before": {
+       "shown": "Master Dyer",
+       "card": "Master Dyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Dyer",
+       "card": "Dyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_chandler",
+      "name": "Sky Woman Balam",
+      "title": "the chandler",
+      "key": "Chandler#2",
+      "before": {
+       "shown": "Master Chandler",
+       "card": "Master Chandler",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Chandler",
+       "card": "Chandler",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_ropemaker",
+      "name": "Bolontiku Tec",
+      "title": "the ropemaker",
+      "key": "Ropemaker#2",
+      "before": {
+       "shown": "Master Roper",
+       "card": "Master Roper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Ropemaker",
+       "card": "Ropemaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_fish_market",
+      "name": "Yaotl May",
+      "title": "the master fishmonger",
+      "key": "Fish market#2",
+      "before": {
+       "shown": "Master Fishmonger",
+       "card": "Master Fishmonger",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fishmonger",
+       "card": "Fishmonger",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_charlatan_fortune_tellers",
+      "name": "Itzel Chel",
+      "title": "the fortune teller",
+      "key": "Charlatan fortune tellers#2",
+      "before": {
+       "shown": "Seer",
+       "card": "Seer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fortune-Teller",
+       "card": "Fortune-Teller",
+       "keeper": ""
+      }
+     }
+    ],
+    "cardsTried": 49
+   },
+   "ownerVsShared": [
+    {
+     "id": "npc_midwife",
+     "name": "Muyal Cohuoh",
+     "title": "the midwife",
+     "owner": "Goodwife",
+     "shared": "Goodman"
+    }
+   ]
+  },
+  {
+   "seed": "render-twice-metropolis-calm-2",
+   "birthSha256": "c134e399ad108153643da6c6edf4facb134d54c398aaa3bc91dafbf187a268c6",
+   "storedSha256": "1360b16e89e505156a05171011834075e8b7f47f993bd79cda6d956d603650d9",
+   "cards": 80,
+   "multiFormCards": 65,
+   "owner": {
+    "rows": {
+     "npc_city_administration": {
+      "name": "Kráka Cormacsson",
+      "title": "the chief administrator",
+      "shown": "Chief Administrator",
+      "card": "Chief Administrator",
+      "keeper": ""
+     },
+     "npc_merchant_guilds_50_100": {
+      "name": "Floki Amlethsson",
+      "title": "the senior guild master",
+      "shown": "Master of the Guild",
+      "card": "Master of the Guild",
+      "keeper": ""
+     },
+     "npc_craft_guilds_100_150": {
+      "name": "Randver Grettisson",
+      "title": "the senior craft-guild master",
+      "shown": "Master of the Guild",
+      "card": "Master of the Guild",
+      "keeper": ""
+     },
+     "npc_parish_churches_50_100": {
+      "name": "Mord Ljotsson",
+      "title": "the dean",
+      "shown": "Dean",
+      "card": "Dean",
+      "keeper": ""
+     },
+     "npc_veiled_38781bff2f05bc4b": {
+      "name": "Skuld Ingvarsson",
+      "title": "the network's head",
+      "shown": "Spymaster",
+      "card": "Spymaster",
+      "keeper": ""
+     },
+     "npc_veiled_26878031df4f9538": {
+      "name": "Kari Egilsson",
+      "title": "the bloc's speaker",
+      "shown": "Speaker",
+      "card": "Speaker",
+      "keeper": ""
+     },
+     "npc_veiled_d182679e4d854b70": {
+      "name": "Eyjolf Magnusson",
+      "title": "the commoners' tribune",
+      "shown": "Tribune",
+      "card": "Tribune",
+      "keeper": ""
+     },
+     "npc_state_granary_complex": {
+      "name": "Walpurga Sigurðarson",
+      "title": "the master of granaries",
+      "shown": "Granger",
+      "card": "Granger",
+      "keeper": ""
+     },
+     "npc_multiple_court_buildings": {
+      "name": "Eyjolf Asgautsson",
+      "title": "the chief magistrate",
+      "shown": "Chief Justice",
+      "card": "Chief Justice",
+      "keeper": ""
+     },
+     "npc_great_cathedral": {
+      "name": "Ulfric Leidolfsson",
+      "title": "the bishop",
+      "shown": "Bishop",
+      "card": "Bishop",
+      "keeper": ""
+     },
+     "npc_great_library": {
+      "name": "Kolfinna Ulfheðnarson",
+      "title": "the librarian",
+      "shown": "Librarian",
+      "card": "Librarian",
+      "keeper": ""
+     },
+     "npc_beast_trainers": {
+      "name": "Dag Ogmundsson",
+      "title": "the beast master",
+      "shown": "Beastmaster",
+      "card": "Beastmaster",
+      "keeper": ""
+     },
+     "npc_weavers_textile_workers": {
+      "name": "Nanna Grettisson",
+      "title": "the master weaver",
+      "shown": "Master Weaver",
+      "card": "Master Weaver",
+      "keeper": ""
+     },
+     "npc_veiled_4677bc85fa3fb8fe": {
+      "name": "Rind Bjarnarson",
+      "title": "the guildmaster of thieves",
+      "shown": "Guildmaster",
+      "card": "Guildmaster",
+      "keeper": ""
+     },
+     "npc_gambling_district": {
+      "name": "Unnr Amlethsson",
+      "title": "the house boss",
+      "shown": "Boss",
+      "card": "Boss",
+      "keeper": ""
+     },
+     "npc_specialized_metalworkers": {
+      "name": "Oddny Eindriðason",
+      "title": "the master metalworker",
+      "shown": "Master Metalworker",
+      "card": "Master Metalworker",
+      "keeper": ""
+     },
+     "npc_chandler": {
+      "name": "Lodmund Kolbeinsson",
+      "title": "the chandler",
+      "shown": "Master Chandler",
+      "card": "Master Chandler",
+      "keeper": ""
+     },
+     "npc_mine": {
+      "name": "Hildr Mordsson",
+      "title": "the mine captain",
+      "shown": "Mine-Master",
+      "card": "Mine-Master",
+      "keeper": ""
+     },
+     "npc_professional_city_watch": {
+      "name": "Kolfinna Njálsson",
+      "title": "the watch commander",
+      "shown": "Commander of the Watch",
+      "card": "Commander of the Watch",
+      "keeper": ""
+     },
+     "npc_multiple_garrisons": {
+      "name": "Ketil Ragnarsson",
+      "title": "the garrison commander",
+      "shown": "Commander",
+      "card": "Commander",
+      "keeper": ""
+     },
+     "npc_mercenary_quarter": {
+      "name": "Sigyn Finsson",
+      "title": "the company captain",
+      "shown": "Captain",
+      "card": "Captain",
+      "keeper": ""
+     },
+     "npc_post_relay_station": {
+      "name": "Astrid Vargsson",
+      "title": "the postmaster",
+      "shown": "Master of the Post",
+      "card": "Master of the Post",
+      "keeper": ""
+     },
+     "npc_toll_bridge": {
+      "name": "Ulfric Grettisson",
+      "title": "the toll-keeper",
+      "shown": "Toll-Keeper",
+      "card": "Toll-Keeper",
+      "keeper": ""
+     },
+     "npc_customs_house": {
+      "name": "Dag Leidolfsson",
+      "title": "the customs collector",
+      "shown": "Collector",
+      "card": "Collector",
+      "keeper": ""
+     },
+     "npc_public_bathhouse": {
+      "name": "Hrolf Kolbeinsson",
+      "title": "the bath-keeper",
+      "shown": "Bath-Keeper",
+      "card": "Bath-Keeper",
+      "keeper": ""
+     },
+     "npc_mint_official": {
+      "name": "Torvald Yngvarsson",
+      "title": "the mint master",
+      "shown": "Master of the Mint",
+      "card": "Master of the Mint",
+      "keeper": ""
+     },
+     "npc_mills_2_5": {
+      "name": "Halfdan Mordsson",
+      "title": "the miller",
+      "shown": "Master Miller",
+      "card": "Master Miller",
+      "keeper": ""
+     },
+     "npc_bowyers_fletchers_guild": {
+      "name": "Dyrfinna Þorsteinsson",
+      "title": "the bowyer",
+      "shown": "Bowyer",
+      "card": "Bowyer",
+      "keeper": ""
+     },
+     "npc_town_crier": {
+      "name": "Olof Gormsson",
+      "title": "the crier",
+      "shown": "Crier",
+      "card": "Crier",
+      "keeper": ""
+     },
+     "npc_massive_prison": {
+      "name": "Mimir Magnusson",
+      "title": "the prison warden",
+      "shown": "Warden",
+      "card": "Warden",
+      "keeper": ""
+     },
+     "npc_multiple_adventurers_guilds": {
+      "name": "Edda Bodvarsson",
+      "title": "the senior charter master",
+      "shown": "Chartermaster",
+      "card": "Chartermaster",
+      "keeper": ""
+     },
+     "npc_sage_s_quarter": {
+      "name": "Idun Gormsson",
+      "title": "the sage",
+      "shown": "Sage",
+      "card": "Sage",
+      "keeper": ""
+     },
+     "npc_multiple_theaters": {
+      "name": "Gorm Ulfheðnarson",
+      "title": "the theatre manager",
+      "shown": "Theatre Manager",
+      "card": "Theatre Manager",
+      "keeper": ""
+     },
+     "npc_opera_house": {
+      "name": "Thordis Ulfheðnarson",
+      "title": "the impresario",
+      "shown": "Impresario",
+      "card": "Impresario",
+      "keeper": ""
+     },
+     "npc_bardic_college": {
+      "name": "Thyra Yngvarsson",
+      "title": "the college master",
+      "shown": "Master",
+      "card": "Master",
+      "keeper": ""
+     },
+     "npc_colosseum_arena": {
+      "name": "Röðla Ubbason",
+      "title": "the arena master",
+      "shown": "Master of the Games",
+      "card": "Master of the Games",
+      "keeper": ""
+     },
+     "npc_luxury_goods_quarter": {
+      "name": "Ingrid Birkisson",
+      "title": "the luxury merchant",
+      "shown": "Merchant Princess",
+      "card": "Merchant Princess",
+      "keeper": ""
+     },
+     "npc_midwife": {
+      "name": "Záleif Bjornsson",
+      "title": "the midwife",
+      "shown": "Goodman",
+      "card": "Goodman",
+      "keeper": ""
+     },
+     "npc_major_monasteries_5_10": {
+      "name": "Asa Illugason",
+      "title": "the senior abbot",
+      "shown": "Lady Abbess",
+      "card": "Lady Abbess",
+      "keeper": ""
+     },
+     "npc_hospital_network": {
+      "name": "Dyrfinna Andersson",
+      "title": "the hospital's master",
+      "shown": "Master",
+      "card": "Master",
+      "keeper": ""
+     },
+     "npc_fish_market": {
+      "name": "Unn Asgersson",
+      "title": "the master fishmonger",
+      "shown": "Master Fishmonger",
+      "card": "Master Fishmonger",
+      "keeper": ""
+     },
+     "npc_furrier_s_district": {
+      "name": "Harald Grettisson",
+      "title": "the master furrier",
+      "shown": "Master Furrier",
+      "card": "Master Furrier",
+      "keeper": ""
+     },
+     "npc_banking_district": {
+      "name": "Asger Jokullsson",
+      "title": "the banker",
+      "shown": "Banker",
+      "card": "Banker",
+      "keeper": ""
+     },
+     "npc_inns_and_taverns_district": {
+      "name": "Knut Olafsson",
+      "title": "the innkeeper",
+      "shown": "Landlord",
+      "card": "Landlord",
+      "keeper": ""
+     },
+     "npc_coaching_inn": {
+      "name": "Tofa Þorkellsson",
+      "title": "the coaching-inn keeper",
+      "shown": "Innkeeper",
+      "card": "Innkeeper",
+      "keeper": ""
+     },
+     "npc_stable_district": {
+      "name": "Domaldr Magnusson",
+      "title": "the stable master",
+      "shown": "Stablemaster",
+      "card": "Stablemaster",
+      "keeper": ""
+     },
+     "npc_warehouse_district": {
+      "name": "Orm Njálsson",
+      "title": "the warehouse factor",
+      "shown": "Factor",
+      "card": "Factor",
+      "keeper": ""
+     },
+     "npc_vintner": {
+      "name": "Harald Njálsson",
+      "title": "the vintner",
+      "shown": "Master Vintner",
+      "card": "Master Vintner",
+      "keeper": ""
+     },
+     "npc_dungeon_delving_supply_district": {
+      "name": "Kjara Dagsson",
+      "title": "the outfitter",
+      "shown": "Outfitter",
+      "card": "Outfitter",
+      "keeper": ""
+     },
+     "npc_veiled_7ecd711ff9105568": {
+      "name": "Kolbeinn Njálsson",
+      "title": "the front man",
+      "shown": "Frontman",
+      "card": "Frontman",
+      "keeper": ""
+     },
+     "npc_veiled_0850862f47387057": {
+      "name": "Inge Drengsson",
+      "title": "the undercity boss",
+      "shown": "Boss",
+      "card": "Boss",
+      "keeper": ""
+     },
+     "npc_veiled_140ddbfa8e6a7010": {
+      "name": "Dag Drengsson",
+      "title": "the whisper broker",
+      "shown": "Broker",
+      "card": "Broker",
+      "keeper": ""
+     },
+     "npc_brothel_red_light_district": {
+      "name": "Rorik Jokullsson",
+      "title": "the madam",
+      "shown": "Master",
+      "card": "Master",
+      "keeper": ""
+     },
+     "npc_gladiatorial_school": {
+      "name": "Sigyn Njálsson",
+      "title": "the lanista",
+      "shown": "Lanista",
+      "card": "Lanista",
+      "keeper": ""
+     },
+     "npc_international_trade_center": {
+      "name": "Snorri Hrolfsson",
+      "title": "the exchange master",
+      "shown": "Master of the Exchange",
+      "card": "Master of the Exchange",
+      "keeper": ""
+     },
+     "npc_enchanter_s_shop": {
+      "name": "Unnr Bjornsson",
+      "title": "the enchanter",
+      "shown": "Enchanter",
+      "card": "Enchanter",
+      "keeper": ""
+     },
+     "npc_blacksmiths_3_10": {
+      "name": "Magnr Ljotsson",
+      "title": "the master smith",
+      "shown": "Smith-master",
+      "card": "Smith-master",
+      "keeper": ""
+     },
+     "npc_carpenters_5_15": {
+      "name": "Freya Gunnarsson",
+      "title": "the master carpenter",
+      "shown": "Master Wright",
+      "card": "Master Wright",
+      "keeper": ""
+     },
+     "npc_cooper": {
+      "name": "Gisli Haraldsson",
+      "title": "the cooper",
+      "shown": "Master Cooper",
+      "card": "Master Cooper",
+      "keeper": ""
+     },
+     "npc_apothecary_district": {
+      "name": "Skuld Cormacsson",
+      "title": "the apothecary",
+      "shown": "Apothecary",
+      "card": "Apothecary",
+      "keeper": ""
+     },
+     "npc_sawmill_commercial": {
+      "name": "Asa Knarrarsson",
+      "title": "the sawyer",
+      "shown": "Master Sawyer",
+      "card": "Master Sawyer",
+      "keeper": ""
+     },
+     "npc_brewery": {
+      "name": "Heidrek Ingvarsson",
+      "title": "the brewer",
+      "shown": "Master Brewer",
+      "card": "Master Brewer",
+      "keeper": ""
+     },
+     "npc_tanners": {
+      "name": "Palnatoke Ubbason",
+      "title": "the tanner",
+      "shown": "Tanner",
+      "card": "Tanner",
+      "keeper": ""
+     },
+     "npc_fuller": {
+      "name": "Refr Sigurðarson",
+      "title": "the fuller",
+      "shown": "Master Fuller",
+      "card": "Master Fuller",
+      "keeper": ""
+     },
+     "npc_dyer": {
+      "name": "Eir Jokullsson",
+      "title": "the dyer",
+      "shown": "Master Dyer",
+      "card": "Master Dyer",
+      "keeper": ""
+     },
+     "npc_potter": {
+      "name": "Drifa Finsson",
+      "title": "the potter",
+      "shown": "Master Potter",
+      "card": "Master Potter",
+      "keeper": ""
+     },
+     "npc_brickmaker": {
+      "name": "Jormundr Bodvarsson",
+      "title": "the brickmaker",
+      "shown": "Master Brickmaker",
+      "card": "Master Brickmaker",
+      "keeper": ""
+     },
+     "npc_cobbler_s_guild": {
+      "name": "Orm Vagnsson",
+      "title": "the cobbler",
+      "shown": "Cobbler",
+      "card": "Cobbler",
+      "keeper": ""
+     },
+     "npc_tailor_s_guild": {
+      "name": "Eilif Birkisson",
+      "title": "the tailor",
+      "shown": "Tailor",
+      "card": "Tailor",
+      "keeper": ""
+     },
+     "npc_butchers_3_8": {
+      "name": "Snorri Finsson",
+      "title": "the master butcher",
+      "shown": "Butcher",
+      "card": "Butcher",
+      "keeper": ""
+     },
+     "npc_bakers_5_15": {
+      "name": "Njal Bjornsson",
+      "title": "the master baker",
+      "shown": "Baker",
+      "card": "Baker",
+      "keeper": ""
+     },
+     "npc_smelter": {
+      "name": "Vigdis Bodvarsson",
+      "title": "the smelt master",
+      "shown": "Master Smelter",
+      "card": "Master Smelter",
+      "keeper": ""
+     },
+     "npc_glassmakers": {
+      "name": "Ljot Þorkellsson",
+      "title": "the glassmaker",
+      "shown": "Master Glazier",
+      "card": "Master Glazier",
+      "keeper": ""
+     },
+     "npc_ropemaker": {
+      "name": "Conan Finsson",
+      "title": "the ropemaker",
+      "shown": "Master Roper",
+      "card": "Master Roper",
+      "keeper": ""
+     },
+     "npc_woodcarver": {
+      "name": "Frigg Amlethsson",
+      "title": "the woodcarver",
+      "shown": "Master Carver",
+      "card": "Master Carver",
+      "keeper": ""
+     },
+     "npc_cartographer_s_guild": {
+      "name": "Brynjar Magnusson",
+      "title": "the cartographer",
+      "shown": "Cartographer",
+      "card": "Cartographer",
+      "keeper": ""
+     },
+     "npc_academy_of_magic": {
+      "name": "Jorunn Svensson",
+      "title": "the chancellor",
+      "shown": "Lord Chancellor",
+      "card": "Lord Chancellor",
+      "keeper": ""
+     },
+     "npc_charlatan_fortune_tellers": {
+      "name": "Pall Amlethsson",
+      "title": "the fortune teller",
+      "shown": "Seer",
+      "card": "Seer",
+      "keeper": ""
+     },
+     "npc_mages_district": {
+      "name": "Magnhild Ingvarsson",
+      "title": "the guild archmage",
+      "shown": "Master of the Guild",
+      "card": "Master of the Guild",
+      "keeper": ""
+     },
+     "npc_scroll_scribe": {
+      "name": "Birger Nidudsson",
+      "title": "the scroll scribe",
+      "shown": "Scribe",
+      "card": "Scribe",
+      "keeper": ""
+     }
+    },
+    "line": ""
+   },
+   "a": {
+    "owner": {
+     "cards": 80,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_50_100",
+       "name": "Floki Amlethsson",
+       "title": "the senior guild master",
+       "A": "Warden of the Guild",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_100_150",
+       "name": "Randver Grettisson",
+       "title": "the senior craft-guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_state_granary_complex",
+       "name": "Walpurga Sigurðarson",
+       "title": "the master of granaries",
+       "A": "Granger",
+       "B": "Master of Granaries",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mine",
+       "name": "Hildr Mordsson",
+       "title": "the mine captain",
+       "A": "Mine Captain",
+       "B": "Mine-Master",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_garrisons",
+       "name": "Ketil Ragnarsson",
+       "title": "the garrison commander",
+       "A": "Captain",
+       "B": "Commander",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_post_relay_station",
+       "name": "Astrid Vargsson",
+       "title": "the postmaster",
+       "A": "Postmaster",
+       "B": "Master of the Post",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_customs_house",
+       "name": "Dag Leidolfsson",
+       "title": "the customs collector",
+       "A": "Collector of Customs",
+       "B": "Collector",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_public_bathhouse",
+       "name": "Hrolf Kolbeinsson",
+       "title": "the bath-keeper",
+       "A": "Bathmaster",
+       "B": "Bath-Keeper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mint_official",
+       "name": "Torvald Yngvarsson",
+       "title": "the mint master",
+       "A": "Master of the Mint",
+       "B": "Mintmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Halfdan Mordsson",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_crier",
+       "name": "Olof Gormsson",
+       "title": "the crier",
+       "A": "Crier",
+       "B": "Town Crier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_theaters",
+       "name": "Gorm Ulfheðnarson",
+       "title": "the theatre manager",
+       "A": "Manager",
+       "B": "Theatre Manager",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_major_monasteries_5_10",
+       "name": "Asa Illugason",
+       "title": "the senior abbot",
+       "A": "Abbess",
+       "B": "Lady Abbess",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_furrier_s_district",
+       "name": "Harald Grettisson",
+       "title": "the master furrier",
+       "A": "Furrier",
+       "B": "Master Furrier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_inns_and_taverns_district",
+       "name": "Knut Olafsson",
+       "title": "the innkeeper",
+       "A": "Innkeeper",
+       "B": "Host",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_stable_district",
+       "name": "Domaldr Magnusson",
+       "title": "the stable master",
+       "A": "Master of Horse",
+       "B": "Stablemaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_vintner",
+       "name": "Harald Njálsson",
+       "title": "the vintner",
+       "A": "Master Vintner",
+       "B": "Vintner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_international_trade_center",
+       "name": "Snorri Hrolfsson",
+       "title": "the exchange master",
+       "A": "Exchange Master",
+       "B": "Master of the Exchange",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_enchanter_s_shop",
+       "name": "Unnr Bjornsson",
+       "title": "the enchanter",
+       "A": "Master Enchanter",
+       "B": "Enchanter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_blacksmiths_3_10",
+       "name": "Magnr Ljotsson",
+       "title": "the master smith",
+       "A": "Smith-master",
+       "B": "Master Smith",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carpenters_5_15",
+       "name": "Freya Gunnarsson",
+       "title": "the master carpenter",
+       "A": "Master Wright",
+       "B": "Master Carpenter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Gisli Haraldsson",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_dyer",
+       "name": "Eir Jokullsson",
+       "title": "the dyer",
+       "A": "Master Dyer",
+       "B": "Dyer",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Drifa Finsson",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_brickmaker",
+       "name": "Jormundr Bodvarsson",
+       "title": "the brickmaker",
+       "A": "Master Brickmaker",
+       "B": "Brickmaker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tailor_s_guild",
+       "name": "Eilif Birkisson",
+       "title": "the tailor",
+       "A": "Master Tailor",
+       "B": "Tailor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Snorri Finsson",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_bakers_5_15",
+       "name": "Njal Bjornsson",
+       "title": "the master baker",
+       "A": "Master Baker",
+       "B": "Baker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_smelter",
+       "name": "Vigdis Bodvarsson",
+       "title": "the smelt master",
+       "A": "Smeltmaster",
+       "B": "Master Smelter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_academy_of_magic",
+       "name": "Jorunn Svensson",
+       "title": "the chancellor",
+       "A": "Chancellor",
+       "B": "Lord Chancellor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_charlatan_fortune_tellers",
+       "name": "Pall Amlethsson",
+       "title": "the fortune teller",
+       "A": "Seer",
+       "B": "Fortune-Teller",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    },
+    "shared": {
+     "cards": 73,
+     "differ": [
+      {
+       "id": "npc_merchant_guilds_50_100",
+       "name": "Floki Amlethsson",
+       "title": "the senior guild master",
+       "A": "Warden of the Guild",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_craft_guilds_100_150",
+       "name": "Randver Grettisson",
+       "title": "the senior craft-guild master",
+       "A": "Guildmaster",
+       "B": "Master of the Guild",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_state_granary_complex",
+       "name": "Walpurga Sigurðarson",
+       "title": "the master of granaries",
+       "A": "Granger",
+       "B": "Master of Granaries",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mine",
+       "name": "Hildr Mordsson",
+       "title": "the mine captain",
+       "A": "Mine Captain",
+       "B": "Mine-Master",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_garrisons",
+       "name": "Ketil Ragnarsson",
+       "title": "the garrison commander",
+       "A": "Captain",
+       "B": "Commander",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_post_relay_station",
+       "name": "Astrid Vargsson",
+       "title": "the postmaster",
+       "A": "Postmaster",
+       "B": "Master of the Post",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_customs_house",
+       "name": "Dag Leidolfsson",
+       "title": "the customs collector",
+       "A": "Collector of Customs",
+       "B": "Collector",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_public_bathhouse",
+       "name": "Hrolf Kolbeinsson",
+       "title": "the bath-keeper",
+       "A": "Bathmaster",
+       "B": "Bath-Keeper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mint_official",
+       "name": "Torvald Yngvarsson",
+       "title": "the mint master",
+       "A": "Master of the Mint",
+       "B": "Mintmaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_mills_2_5",
+       "name": "Halfdan Mordsson",
+       "title": "the miller",
+       "A": "Master Miller",
+       "B": "Miller",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_town_crier",
+       "name": "Olof Gormsson",
+       "title": "the crier",
+       "A": "Crier",
+       "B": "Town Crier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_multiple_theaters",
+       "name": "Gorm Ulfheðnarson",
+       "title": "the theatre manager",
+       "A": "Manager",
+       "B": "Theatre Manager",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_major_monasteries_5_10",
+       "name": "Asa Illugason",
+       "title": "the senior abbot",
+       "A": "Abbot",
+       "B": "Lord Abbot",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_furrier_s_district",
+       "name": "Harald Grettisson",
+       "title": "the master furrier",
+       "A": "Furrier",
+       "B": "Master Furrier",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_inns_and_taverns_district",
+       "name": "Knut Olafsson",
+       "title": "the innkeeper",
+       "A": "Innkeeper",
+       "B": "Host",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_stable_district",
+       "name": "Domaldr Magnusson",
+       "title": "the stable master",
+       "A": "Master of Horse",
+       "B": "Stablemaster",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_vintner",
+       "name": "Harald Njálsson",
+       "title": "the vintner",
+       "A": "Master Vintner",
+       "B": "Vintner",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_international_trade_center",
+       "name": "Snorri Hrolfsson",
+       "title": "the exchange master",
+       "A": "Exchange Master",
+       "B": "Master of the Exchange",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_enchanter_s_shop",
+       "name": "Unnr Bjornsson",
+       "title": "the enchanter",
+       "A": "Master Enchanter",
+       "B": "Enchanter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_blacksmiths_3_10",
+       "name": "Magnr Ljotsson",
+       "title": "the master smith",
+       "A": "Smith-master",
+       "B": "Master Smith",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_carpenters_5_15",
+       "name": "Freya Gunnarsson",
+       "title": "the master carpenter",
+       "A": "Master Wright",
+       "B": "Master Carpenter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_cooper",
+       "name": "Gisli Haraldsson",
+       "title": "the cooper",
+       "A": "Master Cooper",
+       "B": "Cooper",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_dyer",
+       "name": "Eir Jokullsson",
+       "title": "the dyer",
+       "A": "Master Dyer",
+       "B": "Dyer",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_potter",
+       "name": "Drifa Finsson",
+       "title": "the potter",
+       "A": "Master Potter",
+       "B": "Potter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_brickmaker",
+       "name": "Jormundr Bodvarsson",
+       "title": "the brickmaker",
+       "A": "Master Brickmaker",
+       "B": "Brickmaker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_tailor_s_guild",
+       "name": "Eilif Birkisson",
+       "title": "the tailor",
+       "A": "Master Tailor",
+       "B": "Tailor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_butchers_3_8",
+       "name": "Snorri Finsson",
+       "title": "the master butcher",
+       "A": "Master Butcher",
+       "B": "Butcher",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_bakers_5_15",
+       "name": "Njal Bjornsson",
+       "title": "the master baker",
+       "A": "Master Baker",
+       "B": "Baker",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_smelter",
+       "name": "Vigdis Bodvarsson",
+       "title": "the smelt master",
+       "A": "Smeltmaster",
+       "B": "Master Smelter",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_academy_of_magic",
+       "name": "Jorunn Svensson",
+       "title": "the chancellor",
+       "A": "Chancellor",
+       "B": "Lord Chancellor",
+       "keeperA": "",
+       "keeperB": ""
+      },
+      {
+       "id": "npc_charlatan_fortune_tellers",
+       "name": "Pall Amlethsson",
+       "title": "the fortune teller",
+       "A": "Seer",
+       "B": "Fortune-Teller",
+       "keeperA": "",
+       "keeperB": ""
+      }
+     ],
+     "lineA": "",
+     "lineB": "",
+     "lineDiffers": false
+    }
+   },
+   "b": {
+    "moved": [
+     {
+      "id": "npc_city_administration",
+      "name": "Kráka Cormacsson",
+      "title": "the chief administrator",
+      "key": "City administration#2",
+      "before": {
+       "shown": "Chief Administrator",
+       "card": "Chief Administrator",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Administrator",
+       "card": "Administrator",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_merchant_guilds_50_100",
+      "name": "Floki Amlethsson",
+      "title": "the senior guild master",
+      "key": "Merchant guilds (50-100+)#1",
+      "before": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Guildmaster",
+       "card": "Guildmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_craft_guilds_100_150",
+      "name": "Randver Grettisson",
+      "title": "the senior craft-guild master",
+      "key": "Craft guilds (100-150+)#2",
+      "before": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Guildmaster",
+       "card": "Guildmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_state_granary_complex",
+      "name": "Walpurga Sigurðarson",
+      "title": "the master of granaries",
+      "key": "State granary complex#2",
+      "before": {
+       "shown": "Granger",
+       "card": "Granger",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of Granaries",
+       "card": "Master of Granaries",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_court_buildings",
+      "name": "Eyjolf Asgautsson",
+      "title": "the chief magistrate",
+      "key": "Multiple court buildings#2",
+      "before": {
+       "shown": "Chief Justice",
+       "card": "Chief Justice",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Chief Magistrate",
+       "card": "Chief Magistrate",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_great_cathedral",
+      "name": "Ulfric Leidolfsson",
+      "title": "the bishop",
+      "key": "Great cathedral#2",
+      "before": {
+       "shown": "Bishop",
+       "card": "Bishop",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Lord Bishop",
+       "card": "Lord Bishop",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_great_library",
+      "name": "Kolfinna Ulfheðnarson",
+      "title": "the librarian",
+      "key": "Great library#2",
+      "before": {
+       "shown": "Librarian",
+       "card": "Librarian",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Keeper of the Books",
+       "card": "Keeper of the Books",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_beast_trainers",
+      "name": "Dag Ogmundsson",
+      "title": "the beast master",
+      "key": "Beast trainers#2",
+      "before": {
+       "shown": "Beastmaster",
+       "card": "Beastmaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of Beasts",
+       "card": "Master of Beasts",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_weavers_textile_workers",
+      "name": "Nanna Grettisson",
+      "title": "the master weaver",
+      "key": "Weavers/Textile workers#2",
+      "before": {
+       "shown": "Master Weaver",
+       "card": "Master Weaver",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Weaver-master",
+       "card": "Weaver-master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_chandler",
+      "name": "Lodmund Kolbeinsson",
+      "title": "the chandler",
+      "key": "Chandler#2",
+      "before": {
+       "shown": "Master Chandler",
+       "card": "Master Chandler",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Chandler",
+       "card": "Chandler",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mine",
+      "name": "Hildr Mordsson",
+      "title": "the mine captain",
+      "key": "Mine#3",
+      "before": {
+       "shown": "Mine-Master",
+       "card": "Mine-Master",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_professional_city_watch",
+      "name": "Kolfinna Njálsson",
+      "title": "the watch commander",
+      "key": "Professional city watch#2",
+      "before": {
+       "shown": "Commander of the Watch",
+       "card": "Commander of the Watch",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Commander",
+       "card": "Commander",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_garrisons",
+      "name": "Ketil Ragnarsson",
+      "title": "the garrison commander",
+      "key": "Multiple garrisons#2",
+      "before": {
+       "shown": "Commander",
+       "card": "Commander",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mercenary_quarter",
+      "name": "Sigyn Finsson",
+      "title": "the company captain",
+      "key": "Mercenary quarter#2",
+      "before": {
+       "shown": "Captain",
+       "card": "Captain",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Company Captain",
+       "card": "Company Captain",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_post_relay_station",
+      "name": "Astrid Vargsson",
+      "title": "the postmaster",
+      "key": "Post relay station#2",
+      "before": {
+       "shown": "Master of the Post",
+       "card": "Master of the Post",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Postmaster",
+       "card": "Postmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_toll_bridge",
+      "name": "Ulfric Grettisson",
+      "title": "the toll-keeper",
+      "key": "Toll bridge#2",
+      "before": {
+       "shown": "Toll-Keeper",
+       "card": "Toll-Keeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Tollman",
+       "card": "Tollman",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_customs_house",
+      "name": "Dag Leidolfsson",
+      "title": "the customs collector",
+      "key": "Customs house#3",
+      "before": {
+       "shown": "Collector",
+       "card": "Collector",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Searcher",
+       "card": "Searcher",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_public_bathhouse",
+      "name": "Hrolf Kolbeinsson",
+      "title": "the bath-keeper",
+      "key": "Public bathhouse#2",
+      "before": {
+       "shown": "Bath-Keeper",
+       "card": "Bath-Keeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Bathmaster",
+       "card": "Bathmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mint_official",
+      "name": "Torvald Yngvarsson",
+      "title": "the mint master",
+      "key": "Mint (official)#2",
+      "before": {
+       "shown": "Master of the Mint",
+       "card": "Master of the Mint",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Mintmaster",
+       "card": "Mintmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mills_2_5",
+      "name": "Halfdan Mordsson",
+      "title": "the miller",
+      "key": "Mills (2-5)#2",
+      "before": {
+       "shown": "Master Miller",
+       "card": "Master Miller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Miller",
+       "card": "Miller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_bowyers_fletchers_guild",
+      "name": "Dyrfinna Þorsteinsson",
+      "title": "the bowyer",
+      "key": "Bowyers & fletchers (guild)#2",
+      "before": {
+       "shown": "Bowyer",
+       "card": "Bowyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Bowyer",
+       "card": "Master Bowyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_town_crier",
+      "name": "Olof Gormsson",
+      "title": "the crier",
+      "key": "Town crier#2",
+      "before": {
+       "shown": "Crier",
+       "card": "Crier",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Town Crier",
+       "card": "Town Crier",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_massive_prison",
+      "name": "Mimir Magnusson",
+      "title": "the prison warden",
+      "key": "Massive prison#2",
+      "before": {
+       "shown": "Warden",
+       "card": "Warden",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Keeper",
+       "card": "Keeper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_adventurers_guilds",
+      "name": "Edda Bodvarsson",
+      "title": "the senior charter master",
+      "key": "Multiple adventurers' guilds#2",
+      "before": {
+       "shown": "Chartermaster",
+       "card": "Chartermaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Charter",
+       "card": "Master of the Charter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_multiple_theaters",
+      "name": "Gorm Ulfheðnarson",
+      "title": "the theatre manager",
+      "key": "Multiple theaters#2",
+      "before": {
+       "shown": "Theatre Manager",
+       "card": "Theatre Manager",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Manager",
+       "card": "Manager",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_bardic_college",
+      "name": "Thyra Yngvarsson",
+      "title": "the college master",
+      "key": "Bardic college#2",
+      "before": {
+       "shown": "Master",
+       "card": "Master",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the College",
+       "card": "Master of the College",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_colosseum_arena",
+      "name": "Röðla Ubbason",
+      "title": "the arena master",
+      "key": "Colosseum/arena#2",
+      "before": {
+       "shown": "Master of the Games",
+       "card": "Master of the Games",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Arena Master",
+       "card": "Arena Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_luxury_goods_quarter",
+      "name": "Ingrid Birkisson",
+      "title": "the luxury merchant",
+      "key": "Luxury goods quarter#2",
+      "before": {
+       "shown": "Merchant Princess",
+       "card": "Merchant Princess",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Merchant",
+       "card": "Merchant",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_major_monasteries_5_10",
+      "name": "Asa Illugason",
+      "title": "the senior abbot",
+      "key": "Major monasteries (5-10)#2",
+      "before": {
+       "shown": "Lady Abbess",
+       "card": "Lady Abbess",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Abbess",
+       "card": "Abbess",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_hospital_network",
+      "name": "Dyrfinna Andersson",
+      "title": "the hospital's master",
+      "key": "Hospital network#2",
+      "before": {
+       "shown": "Master",
+       "card": "Master",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the Hospital",
+       "card": "Master of the Hospital",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_fish_market",
+      "name": "Unn Asgersson",
+      "title": "the master fishmonger",
+      "key": "Fish market#2",
+      "before": {
+       "shown": "Master Fishmonger",
+       "card": "Master Fishmonger",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fishmonger",
+       "card": "Fishmonger",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_furrier_s_district",
+      "name": "Harald Grettisson",
+      "title": "the master furrier",
+      "key": "Furrier's district#2",
+      "before": {
+       "shown": "Master Furrier",
+       "card": "Master Furrier",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Furrier",
+       "card": "Furrier",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_banking_district",
+      "name": "Asger Jokullsson",
+      "title": "the banker",
+      "key": "Banking district#2",
+      "before": {
+       "shown": "Banker",
+       "card": "Banker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of the House",
+       "card": "Master of the House",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_inns_and_taverns_district",
+      "name": "Knut Olafsson",
+      "title": "the innkeeper",
+      "key": "Inns and taverns (district)#3",
+      "before": {
+       "shown": "Landlord",
+       "card": "Landlord",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Innkeeper",
+       "card": "Innkeeper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_coaching_inn",
+      "name": "Tofa Þorkellsson",
+      "title": "the coaching-inn keeper",
+      "key": "Coaching inn#2",
+      "before": {
+       "shown": "Innkeeper",
+       "card": "Innkeeper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Landlady",
+       "card": "Landlady",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_stable_district",
+      "name": "Domaldr Magnusson",
+      "title": "the stable master",
+      "key": "Stable district#2",
+      "before": {
+       "shown": "Stablemaster",
+       "card": "Stablemaster",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master of Horse",
+       "card": "Master of Horse",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_warehouse_district",
+      "name": "Orm Njálsson",
+      "title": "the warehouse factor",
+      "key": "Warehouse district#2",
+      "before": {
+       "shown": "Factor",
+       "card": "Factor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Warehouse Master",
+       "card": "Warehouse Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_vintner",
+      "name": "Harald Njálsson",
+      "title": "the vintner",
+      "key": "Vintner#2",
+      "before": {
+       "shown": "Master Vintner",
+       "card": "Master Vintner",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Vintner",
+       "card": "Vintner",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_international_trade_center",
+      "name": "Snorri Hrolfsson",
+      "title": "the exchange master",
+      "key": "International trade center#2",
+      "before": {
+       "shown": "Master of the Exchange",
+       "card": "Master of the Exchange",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Exchange Master",
+       "card": "Exchange Master",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_enchanter_s_shop",
+      "name": "Unnr Bjornsson",
+      "title": "the enchanter",
+      "key": "Enchanter's shop#2",
+      "before": {
+       "shown": "Enchanter",
+       "card": "Enchanter",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Enchanter",
+       "card": "Master Enchanter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_blacksmiths_3_10",
+      "name": "Magnr Ljotsson",
+      "title": "the master smith",
+      "key": "Blacksmiths (3-10)#2",
+      "before": {
+       "shown": "Smith-master",
+       "card": "Smith-master",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Smith",
+       "card": "Master Smith",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_carpenters_5_15",
+      "name": "Freya Gunnarsson",
+      "title": "the master carpenter",
+      "key": "Carpenters (5-15)#2",
+      "before": {
+       "shown": "Master Wright",
+       "card": "Master Wright",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Carpenter",
+       "card": "Master Carpenter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cooper",
+      "name": "Gisli Haraldsson",
+      "title": "the cooper",
+      "key": "Cooper#2",
+      "before": {
+       "shown": "Master Cooper",
+       "card": "Master Cooper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Cooper",
+       "card": "Cooper",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_apothecary_district",
+      "name": "Skuld Cormacsson",
+      "title": "the apothecary",
+      "key": "Apothecary district#2",
+      "before": {
+       "shown": "Apothecary",
+       "card": "Apothecary",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Apothecary",
+       "card": "Master Apothecary",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_sawmill_commercial",
+      "name": "Asa Knarrarsson",
+      "title": "the sawyer",
+      "key": "Sawmill (commercial)#2",
+      "before": {
+       "shown": "Master Sawyer",
+       "card": "Master Sawyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Sawyer",
+       "card": "Sawyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_brewery",
+      "name": "Heidrek Ingvarsson",
+      "title": "the brewer",
+      "key": "Brewery#2",
+      "before": {
+       "shown": "Master Brewer",
+       "card": "Master Brewer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Brewer",
+       "card": "Brewer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_fuller",
+      "name": "Refr Sigurðarson",
+      "title": "the fuller",
+      "key": "Fuller#2",
+      "before": {
+       "shown": "Master Fuller",
+       "card": "Master Fuller",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fuller",
+       "card": "Fuller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_dyer",
+      "name": "Eir Jokullsson",
+      "title": "the dyer",
+      "key": "Dyer#2",
+      "before": {
+       "shown": "Master Dyer",
+       "card": "Master Dyer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Dyer",
+       "card": "Dyer",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_potter",
+      "name": "Drifa Finsson",
+      "title": "the potter",
+      "key": "Potter#2",
+      "before": {
+       "shown": "Master Potter",
+       "card": "Master Potter",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Potter",
+       "card": "Potter",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_brickmaker",
+      "name": "Jormundr Bodvarsson",
+      "title": "the brickmaker",
+      "key": "Brickmaker#2",
+      "before": {
+       "shown": "Master Brickmaker",
+       "card": "Master Brickmaker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Brickmaker",
+       "card": "Brickmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cobbler_s_guild",
+      "name": "Orm Vagnsson",
+      "title": "the cobbler",
+      "key": "Cobbler's guild#2",
+      "before": {
+       "shown": "Cobbler",
+       "card": "Cobbler",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Cobbler",
+       "card": "Master Cobbler",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_tailor_s_guild",
+      "name": "Eilif Birkisson",
+      "title": "the tailor",
+      "key": "Tailor's guild#2",
+      "before": {
+       "shown": "Tailor",
+       "card": "Tailor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Tailor",
+       "card": "Master Tailor",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_butchers_3_8",
+      "name": "Snorri Finsson",
+      "title": "the master butcher",
+      "key": "Butchers (3-8)#2",
+      "before": {
+       "shown": "Butcher",
+       "card": "Butcher",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Butcher",
+       "card": "Master Butcher",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_bakers_5_15",
+      "name": "Njal Bjornsson",
+      "title": "the master baker",
+      "key": "Bakers (5-15)#2",
+      "before": {
+       "shown": "Baker",
+       "card": "Baker",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Baker",
+       "card": "Master Baker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_smelter",
+      "name": "Vigdis Bodvarsson",
+      "title": "the smelt master",
+      "key": "Smelter#2",
+      "before": {
+       "shown": "Master Smelter",
+       "card": "Master Smelter",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Smeltmaster",
+       "card": "Smeltmaster",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_glassmakers",
+      "name": "Ljot Þorkellsson",
+      "title": "the glassmaker",
+      "key": "Glassmakers#2",
+      "before": {
+       "shown": "Master Glazier",
+       "card": "Master Glazier",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Glassmaker",
+       "card": "Glassmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_ropemaker",
+      "name": "Conan Finsson",
+      "title": "the ropemaker",
+      "key": "Ropemaker#2",
+      "before": {
+       "shown": "Master Roper",
+       "card": "Master Roper",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Ropemaker",
+       "card": "Ropemaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_woodcarver",
+      "name": "Frigg Amlethsson",
+      "title": "the woodcarver",
+      "key": "Woodcarver#2",
+      "before": {
+       "shown": "Master Carver",
+       "card": "Master Carver",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Woodcarver",
+       "card": "Woodcarver",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_cartographer_s_guild",
+      "name": "Brynjar Magnusson",
+      "title": "the cartographer",
+      "key": "Cartographer's guild#2",
+      "before": {
+       "shown": "Cartographer",
+       "card": "Cartographer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Mapmaker",
+       "card": "Mapmaker",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_academy_of_magic",
+      "name": "Jorunn Svensson",
+      "title": "the chancellor",
+      "key": "Academy of magic#2",
+      "before": {
+       "shown": "Lord Chancellor",
+       "card": "Lord Chancellor",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Chancellor",
+       "card": "Chancellor",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_charlatan_fortune_tellers",
+      "name": "Pall Amlethsson",
+      "title": "the fortune teller",
+      "key": "Charlatan fortune tellers#2",
+      "before": {
+       "shown": "Seer",
+       "card": "Seer",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Fortune-Teller",
+       "card": "Fortune-Teller",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_mages_district",
+      "name": "Magnhild Ingvarsson",
+      "title": "the guild archmage",
+      "key": "Mages' district#2",
+      "before": {
+       "shown": "Master of the Guild",
+       "card": "Master of the Guild",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Archmage",
+       "card": "Archmage",
+       "keeper": ""
+      }
+     },
+     {
+      "id": "npc_scroll_scribe",
+      "name": "Birger Nidudsson",
+      "title": "the scroll scribe",
+      "key": "Scroll scribe#2",
+      "before": {
+       "shown": "Scribe",
+       "card": "Scribe",
+       "keeper": ""
+      },
+      "after": {
+       "shown": "Master Scribe",
+       "card": "Master Scribe",
+       "keeper": ""
+      }
+     }
+    ],
+    "cardsTried": 80
+   },
+   "ownerVsShared": [
+    {
+     "id": "npc_major_monasteries_5_10",
+     "name": "Asa Illugason",
+     "title": "the senior abbot",
+     "owner": "Abbess",
+     "shared": "Abbot"
+    }
+   ]
+  }
+ ],
+ "styledTitleTable": {
+  "rows": 1174,
+  "sha256": "a22d7edf455c5f479db4184c44924ddf5a6c881b4d9de856bce6b2f0b359f0ea"
+ },
+ "summary": [
+  {
+   "seed": "render-twice-town-calm-0",
+   "cards": 34,
+   "multiFormCards": 29,
+   "a_owner_differ": 19,
+   "a_shared_differ": 19,
+   "a_line_differs": false,
+   "b_moved": 29,
+   "ownerVsShared": 1,
+   "birthSha256": "1ad00d1097c378dedaaf33cac959e739ae9ab4e2fe3f86c6c19676a1def7fc45"
+  },
+  {
+   "seed": "render-twice-city-infiltrated-1",
+   "cards": 49,
+   "multiFormCards": 43,
+   "a_owner_differ": 23,
+   "a_shared_differ": 22,
+   "a_line_differs": false,
+   "b_moved": 43,
+   "ownerVsShared": 1,
+   "birthSha256": "3bd882de58e9ccfafd840ed7ec1fd926bf03c44a25e31fad9f4a1cb2ea06787b"
+  },
+  {
+   "seed": "render-twice-metropolis-calm-2",
+   "cards": 80,
+   "multiFormCards": 65,
+   "a_owner_differ": 31,
+   "a_shared_differ": 31,
+   "a_line_differs": false,
+   "b_moved": 63,
+   "ownerVsShared": 1,
+   "birthSha256": "c134e399ad108153643da6c6edf4facb134d54c398aaa3bc91dafbf187a268c6"
+  }
+ ]
+}

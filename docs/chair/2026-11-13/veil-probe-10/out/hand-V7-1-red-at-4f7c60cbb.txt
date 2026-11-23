@@ -1,0 +1,49 @@
+RED FIRST. tests/security/galleryVeilHandRows.pglite.test.js as committed with the name search (six arms), run over 4f7c60cbb's bytes (a `git archive` of that commit: migration 212 at 02e00643..., the twin as committed there). Verdict lines and the first arrivals of each arm; the whole print was 1,038 lines. (After this run one planted name's ideographic space was written as an escape in the guard; nothing else of the file differs from the commit.)
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js (6 tests | 5 failed) 7507ms
+     × V7-1 EVERY SCRIPT: a hidden name in Cyrillic, Greek, Han, Thai, Arabic, symbols, separators only, mixed scripts, with a dotted capital I, a sharp s and the Kelvin sign is sent in no case and no spelling: a sentence, an export, a goal, the derived list 595ms
+     × V7-4, V7-9 THE FORMS: a hidden name as a key, in a join, in an id beside a name, camel-cased, squeezed, without its bracketed qualifier, in the plural; and a house hidden whole that has a label and no name 148ms
+     × V7-7 WHAT IS NOT HIDDEN STAYS: an open house whose name holds a hidden one keeps its name and its strings; a shown power named as a hidden house keeps its name; an open house named as a hidden one (another id) keeps its name; the town keeps its name; of the strings that name no hidden house, none is taken 126ms
+     × V7-10 THE BOUND: a document 3,000 levels deep with a house hidden whole is served wherever the frozen 211 alone serves it; a hidden name below level 64 does not arrive, and what holds no name at any depth comes back whole 3005ms
+     × V7-1 THE TABLES: the separators, the case classes, the fold, the search pattern and the open names cut out are the same in both engines, for names of every script 3ms
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-1 EVERY SCRIPT: a hidden name in Cyrillic, Greek, Han, Thai, Arabic, symbols, separators only, mixed scripts, with a dotted capital I, a sharp s and the Kelvin sign is sent i
+AssertionError: expected [ …(752) ] to deeply equal []
++   "veil/gallery [Cyrillic] as planted: $.economicState.marketTalk[1] = \"Купцы платят дань, которую собирает Братство Ворона каждую весну.\"",
++   "veil/gallery [Cyrillic] as planted: $.economicState.primaryExports[1] = \"Братство Ворона wares\"",
++   "veil/gallery [Cyrillic] in some case or squeezed: value $.economicState.marketTalk[1] = \"Купцы платят дань, которую собирает Братство Ворона каждую весну.\"",
++   "veil/gallery [Cyrillic] in some case or squeezed: value $.economicState.marketTalk[2] = \"Купцы платят дань, которую собирает братство ворона каждую весну.\"",
++   "veil/gallery [Cyrillic] in some case or squeezed: value $.economicState.marketTalk[3] = \"Купцы платят дань, которую собирает БРАТСТВО ВОРОНА каждую весну.\"",
++   "veil/gallery [Cyrillic] in some case or squeezed: value $.economicState.marketTalk[4] = \"Купцы платят дань, которую собирает БратствоВорона каждую весну.\"",
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:267:31
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-4, V7-9 THE FORMS: a hidden name as a key, in a join, in an id beside a name, camel-cased, squeezed, without its bracketed qualifier, in the plural; and a house hidden whole 
+AssertionError: expected [ …(128) ] to deeply equal []
++   "veil/gallery: value $.npcs[0].title = \"Voice of the SmugglersRingOld\"",
++   "veil/gallery: value $.npcs[1].role = \"Runner for the smugglersringold\"",
++   "veil/gallery: KEY $.economicState.tolls.Smugglers' ring (old) = \"Smugglers' ring (old)\"",
++   "veil/gallery: value $.economicState.routes[0].from = \"institution.smugglers_ring_old\"",
++   "veil/gallery: value $.economicState.stalls[0].id = \"smugglers_ring_old.stall\"",
++   "veil/gallery: value $.economicState.situationDesc = \"Honest trade gets by; the Smugglers' Ring takes the rest.\"",
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:310:31
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-7 WHAT IS NOT HIDDEN STAYS: an open house whose name holds a hidden one keeps its name and its strings; a shown power named as a hidden house keeps its name; an open house na
+AssertionError: expected [ …(48) ] to deeply equal []
++   "veil/gallery: institutions[] lists [\"inst-tan:undefined\",\"inst-court-b:undefined\",\"inst-corn:Corn exchange\"]",
++   "veil/gallery: the open house's own description is undefined",
++   "veil/gallery: the shown powers are [{\"desc\":\"A power that is shown.\",\"power\":7},{\"power\":3}]",
++   "veil/gallery: 1 of 11 strings that name no hidden house are taken: [\"Red hand tannery leather\"]",
++   "veil/gallery: the role at the open house is gone",
++   "veil/gallery: the key redHand arrives",
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:364:31
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-10 THE BOUND: a document 3,000 levels deep with a house hidden whole is served wherever the frozen 211 alone serves it; a hidden name below level 64 does not arrive, and what
+AssertionError: expected '3000 deep, Reveal DM on: 211 alone se…' to be '3000 deep, Reveal DM on: 211 alone se…' // Object.is equality
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:404:21
+
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-1 THE TABLES: the separators, the case classes, the fold, the search pattern and the open names cut out are the same in both engines, for names of every script
+error: ERRORDATA_STACK_SIZE exceeded
+ Test Files  1 failed (1)
+      Tests  5 failed | 1 passed (6)
+   Duration  7.81s (transform 383ms, setup 39ms, import 121ms, tests 7.51s, environment 0ms)
+exit 1

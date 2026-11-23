@@ -1,0 +1,5 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected [ '_gallery_veil_jslen(text)' ] to deeply equal []
++   "_gallery_veil_jslen(text)",
+      Tests  1 failed | 29 skipped (30)
+exit 1

@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/7e9291bd-44ea-54a0-8961-9933d99191c8/scratchpad/wt
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  22:57:48
+   Duration  458.33s (transform 4.83s, setup 44ms, import 181ms, tests 457.92s, environment 0ms)
+
+exit 0

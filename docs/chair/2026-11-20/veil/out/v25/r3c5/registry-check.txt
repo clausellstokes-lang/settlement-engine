@@ -1,0 +1,6 @@
+[gate-tail] start:  12:50:04 up  1:37,  0 user,  load average: 0.92, 1.43, 2.57 · cores: 4
+roster-choice registry: registry.json and rulings.json are the module's
+[gate-tail] end:  12:50:04 up  1:37,  0 user,  load average: 0.92, 1.43, 2.57
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.2919.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT 0

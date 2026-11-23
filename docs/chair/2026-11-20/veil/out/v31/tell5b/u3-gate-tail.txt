@@ -1,0 +1,32 @@
+g:000 | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+allOpen | 10 / 10, 1, 5.90e-2 / 5.90e-2 | 10 / 10, 1, 5.90e-2 / 5.90e-2
+off | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED | 9 / 9, 0, 1.98e-2 / 1.98e-2 RED
+GATE-2: 20 cell(s) with p below 0.05: RED
+GATE-2, EVERY FAILING HIDDEN-HOUSE PAGE (for the security reader): town (size) | engine:read:settings | the families separating it from the nearest member key
+own | 92/92 / 16/48 / 5.84e-20 | 92/92 / 26/48 / 1.07e-12
+g:110 | 92/92 / 12/48 / 1.98e-23 | 92/92 / 16/48 / 5.84e-20
+g:101 | 75/92 / 13/48 / 3.28e-10 | 91/92 / 21/48 / 9.26e-15
+g:011 | 92/92 / 16/48 / 5.84e-20 | 92/92 / 24/48 / 5.04e-14
+g:100 | 63/92 / 6/48 / 1.00e-10 | 89/92 / 11/48 / 1.62e-20
+g:010 | 92/92 / 11/48 / 2.29e-24 | 92/92 / 16/48 / 5.84e-20
+g:001 | 72/92 / 13/48 / 4.74e-9 | 90/92 / 18/48 / 8.02e-16
+g:000 | 62/92 / 6/48 / 2.21e-10 | 88/92 / 9/48 / 2.04e-21
+allOpen | 92/92 / 16/48 / 5.84e-20 | 92/92 / 26/48 / 1.07e-12
+off | 62/92 / 6/48 / 2.21e-10 | 88/92 / 9/48 / 2.04e-21
+FISHER (reported, ruling 62 (1): re-read after the cure, no separate stop): p < 0.05 at some gated setting (the separating parts are GATE-1's hidden-house list above, R4's list included)
+NON-GOVERNING criminal rows served where the read serves no criminal house (AGAINST THE RULE): 0
+THE TOWNS LOWER BY RULE (ruling 62 (5): VR42 keeps a governing row GATE-1 does not find at that size): 7
+  LOWER BY RULE r3m-city-indebted-1-106 (city) | 40 reads | x.powerNoHouse="1"
+  LOWER BY RULE r3m-city-insurgency-1-104 (city) | 40 reads | x.powerNoHouse="1" k.powers.modifier="p" k.powers.crisisNote="p"
+  LOWER BY RULE r3m-city-insurgency-1-114 (city) | 40 reads | x.powerNoHouse="1" k.powers.crisisNote="p"
+  LOWER BY RULE r3m-city-none-1-117 (city) | 40 reads | x.powerNoHouse="1"
+  LOWER BY RULE r3m-city-politically_fractured-1-120 (city) | 40 reads | x.powerNoHouse="1"
+  LOWER BY RULE r3m-city-under_siege-1-108 (city) | 40 reads | x.powerNoHouse="1" k.powers.crisisNote="p"
+  LOWER BY RULE r3m-metropolis-indebted-1-136 (metropolis) | 40 reads | x.powerNoHouse="1" k.powers.modifier="p"
+TODAY: GATE-1 own (off 4, dm 4); off (off 4, dm 4); mixed (off 4, dm 4)
+TODAY: GATE-1 allOpen (off 4, dm 4); any gated setting (off 4, dm 4); LOWER BY RULE 7
+TODAY: GATE-2 L3 any gated setting, non-members (off 10, dm 10); Fisher cells below 0.05: 20
+GATE: 4 of 92 hidden-house towns fail GATE-1 on a gated read (twin or server); GATE-2 RED -> RED (exit 1)
+[gate-tail] end:  02:53:58 up  3:40,  0 user,  load average: 4.38, 4.17, 3.81
+[gate-tail] full log: /tmp/gate-tail.16366.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

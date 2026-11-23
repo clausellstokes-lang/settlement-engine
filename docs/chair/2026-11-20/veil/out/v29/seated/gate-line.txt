@@ -1,0 +1,1 @@
+tally (engine/Reveal): {"server/off":{"HIGHER":0,"EQUAL":79,"LOWER":13,"magicAbove":0},"twin/off":{"HIGHER":0,"EQUAL":79,"LOWER":13,"magicAbove":0},"server/dm":{"HIGHER":0,"EQUAL":79,"LOWER":13,"magicAbove":0},"twin/dm":{"HIGHER":0,"EQUAL":79,"LOWER":13,"magicAbove":0}}

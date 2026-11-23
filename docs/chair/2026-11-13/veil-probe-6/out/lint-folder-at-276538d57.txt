@@ -1,0 +1,5 @@
+ledgerCitationIntegrity.test.js 0  [Command failed: git -C /tmp/claude-0/-home-user-settlement-engine/a40f49ce-4e8a-]
+newsHeadlineContract.walker.test.js 0 
+newsVoiceContract.walker.test.js 0 
+proseFamilyContract.walker.test.js 4 A1 reconstructs the exact four-family AO-0 corpus twice from one build | A2 rejects malformed selector axes while retaining nulls and projected | A3 freezes all 58 identities counts bytes digest and movement polariti | A5 closes twelve pulse-history records and pins overlapping headline a
+files 212 tests 3118 passed 3098 failed 4

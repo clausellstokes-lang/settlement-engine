@@ -1,0 +1,32 @@
+V8-3 THE COST TABLE (VEIL-16). Local scratch PostgreSQL 16.15 (unix socket /var/tmp/rv7), JIT on as the cluster stands.
+Chains: x211 = 001..211 (the frozen 211); base = 001..212 at d0afa93dd (built from /var/tmp/v16/red-d0a, 212 aafda53f...);
+after = 001..212 from the tree (212 46389052...: timed before the last edit, which touched comments only). Runner: veil-probe-16/measure/v83-cost.sh x211 x212r x212n <tree> 5.
+ms, medians: cost8.sql and deep-cost.sql 5 rounds, the three chains in turn each round; Langengrund by cost.mjs, 15
+rounds, the chains alternated. THE LAW: no more than twice x211 on the 300 KB rows, the V8-3 row and Langengrund.
+
+row                                                     x211     base     after   base/x211  after/x211
+cost8 V8-3: 5 houses, 10,000 hit rows (THE LAW)         6,167   19,356    7,017     3.14       1.14
+cost8: 5 houses, 5,000 hit + 5,000 cold                 5,813   12,840    6,394     2.21       1.10
+cost8: 200 houses, 2,000 hit + 2,000 cold               1,067    2,739    1,565     2.57       1.47
+cost8: 50 houses, 500 hit + 500 cold                       92      264      174     2.87       1.89
+run-all deep: 3,000 deep, Reveal DM                        29       39       41     1.34       1.41
+run-all large: 200 houses, 5,000 strings (THE LAW)        319      377      371     1.18       1.16
+run-all large: 600 houses, 10,000 strings (THE LAW)     1,187    1,232    1,323     1.04       1.11
+Langengrund link, no veil record (THE LAW)              222.6    459.3    400.2     2.06       1.80
+Langengrund link, the default veil record               231.9    508.8    380.8     2.19       1.64
+Langengrund gallery, the default veil record            277.2    540.5    404.4     1.95       1.46
+Langengrund gallery, no veil record (not veiled)        242.8    261.0    246.4     1.07       1.01
+
+THE TWIN on the V8-3 row (measure/twin8.probe.jsx: galleryPayloadFor then projectShareVeil, Reveal DM off, Node 22):
+  twin8 h=5 hit=10000 cold=0 nl=1 :: twin | houses listed 1 | rows back 10000 | rows with d 0 | bytes 30121 | median 302.4 ms of 336 302 322 264 267
+  (the gallery read on the same row: x211 6,167, after 7,017 ms; the twin's answer: every row loses its string, as the server's)
+
+WHAT REMAINS ABOVE x211 ON THE SMALL cost8 ROWS is the name search's alternation run over the text (_gallery_veil_name_hits,
+by track_functions: 560 ms self of the 200-house row's 1,594 after, 614 at the base; 46 of the 50-house row's 190): the same
+pass as the base's, its cost the number of names times the text (V8-9's habitat, the next item); the walk's own cost there
+(the base's _gallery_veil_name_near, 990 ms on the 200-house row) is gone.
+
+THE READ'S WALK ALONE, natively (_gallery_veil_name_hits + _gallery_veil_name_sweep on the V8-3 shape), ms base | after:
+  250 rows 6.2 + 26.0 | 7.7 + 17.9; 1,000 rows 23.5 + 243.9 | 25.3 + 96.2; 4,000 rows 153.5 + 2,636.4 | 96.6 + 155.1
+  (the frozen 211's whole gallery read on the same shape: 1,000 rows 89 ms, 4,000 rows 972: its sanitiser is itself more
+  than linear on this shape, so the scaling arm times the walk, not the whole read)

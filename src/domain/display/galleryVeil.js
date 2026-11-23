@@ -70,6 +70,9 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
+import { applyRosterChoices } from './galleryRosterChoices.js';
+import { rederiveIncomeShares, renumberTrace, secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdIncomeWeights, withholdSecondHomes } from './gallerySecondHomes.js';
+import { withholdAlways } from './galleryWithholdAlways.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -91,6 +94,8 @@ export const VEIL_OVERRIDE_KEY = '$veil';
  */
 export const VEIL_LIMITS = Object.freeze({
   version: 1, maxDeltas: 2000, addressMax: 300,
+  // The marker a read sends when the server applied the veil (migration 211). Never stored.
+  servedVersion: 2,
   // X-24 (a): the frozen public copy a snapshot share stores. The thousand's largest
   // projection is 304,925 characters (full DM view; 187,792 closed); three times that.
   snapshotMaxChars: 1000000,
@@ -231,7 +236,11 @@ export const CARD_KINDS = Object.freeze({
   relationship: {
     lists: [['relationships']],
     // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
-    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
+    // A tie stored by master's client spells the same two ends `npc1Id`/`npc2Id` (the v1 -> v2 step,
+    // settlementMigrations.js, maps npc1Id -> from and npc2Id -> to, and the veil reads rows as stored):
+    // each end reads `from`, else `npc1Id`, else the name, so an eye master's panel shut on a stored
+    // tie keeps its address (COHERENCE-VEIL-4, V4-1; master's rule db832c892:galleryVeil.js:221).
+    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Id || card.npc1Name, card.to || card.npc2Id || card.npc2Name, card.type),
     floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
@@ -609,6 +618,9 @@ function dropField(card, kind, field) {
  */
 export function applyVeil(publicSettlement, veil) {
   const s = /** @type {Rec} */ (deepClone(isRec(publicSettlement) ? publicSettlement : {}));
+  // VEIL-19 (item D): the income rows the projection holds before the veil (a row withheld re-derives the shares)
+  const econ0 = recAt(s, 'economicState');
+  const incomeBefore = econ0 && Array.isArray(econ0.incomeSources) ? econ0.incomeSources.length : null;
   const entries = [...(veil || [])];
   const hidden = entries.filter(a => isHideable(a));
   /** @type {Set<string>} field addresses a class switch must spare */
@@ -645,10 +657,17 @@ export function applyVeil(publicSettlement, veil) {
   // X-21e: a card-hidden house goes whole only when the data puts it in the class; any
   // other house named by a card address falls back to its depth eyes.
   const instKind = CARD_KINDS.institution;
+  const houseEyes = instKind.fields;
   /** @type {Set<string>} names of houses removed whole */
   const goneHouses = new Set();
   /** @type {Set<string>} ids of houses removed whole */
   const goneIds = new Set();
+  /** @type {Set<string>} the catalogue identities of houses removed whole: the names they were born with (COHERENCE-VEIL-9) */
+  const goneBirths = new Set();
+  /** @type {Set<string>} the label of each house removed whole that has no name: its label is its name (COHERENCE-VEIL-10, V7-9) */
+  const goneLabels = new Set();
+  /** VEIL-19 (item D): a criminal house (isCriminalInstitution) is removed whole */
+  let criminalGone = false;
   if (cardHides.size) {
     for (const inst of cardsOf(s, 'institution')) {
       const id = instKind.idOf(inst);
@@ -656,12 +675,15 @@ export function applyVeil(publicSettlement, veil) {
       if (isHideableHouse(inst)) {
         goneIds.add(id);
         if (str(inst.name)) goneHouses.add(str(inst.name));
+        if (str(inst.catalogId)) goneBirths.add(str(inst.catalogId));
+        if (!str(inst.name) && str(inst.label)) goneLabels.add(str(inst.label));
+        if (isCriminalInstitution(inst)) criminalGone = true;
         continue;
       }
       if (!fields.has('institution')) fields.set('institution', new Map());
       const byId = /** @type {Map<string, Set<string>>} */ (fields.get('institution'));
       if (!byId.has(id)) byId.set(id, new Set());
-      for (const f of Object.keys(instKind.fields)) /** @type {Set<string>} */ (byId.get(id)).add(f);
+      for (const f of Object.keys(houseEyes)) /** @type {Set<string>} */ (byId.get(id)).add(f);
     }
   }
 
@@ -681,6 +703,13 @@ export function applyVeil(publicSettlement, veil) {
     if (name && veiled('people')) peopleOf.add(name);
   }
 
+  // THE SECOND HOMES' SOURCES (COHERENCE-VEIL-6, V5-1), read BEFORE any card is touched: what each
+  // shut eye governs, as its source said it.
+  /** @param {string} kind @param {string} id @param {string} eye @returns {boolean} */
+  const eyeShut = (kind, id, eye) => !!(fields.get(kind)?.get(id)?.has(eye)
+    || (classes.get(kind)?.has(eye) && !exceptions.has(`field:${kind}:${id}:${eye}`)));
+  const sources = secondHomeSources(s, eyeShut, cardsOf, (kind, card) => CARD_KINDS[kind].idOf(card));
+
   // Cards: class switches, then per-card eyes.
   for (const kindName of Object.keys(CARD_KINDS)) {
     const kind = CARD_KINDS[kindName];
@@ -690,10 +719,11 @@ export function applyVeil(publicSettlement, veil) {
     for (const card of cardsOf(s, kindName)) {
       const id = kind.idOf(card);
       const own = byId?.get(id);
-      for (const f of cls || []) {
-        if (!exceptions.has(`field:${kindName}:${id}:${f}`)) dropField(card, kind, f);
-      }
-      for (const f of own || []) dropField(card, kind, f);
+      /** @type {string[]} */
+      const drops = [...[...(cls || [])].filter(f => !exceptions.has(`field:${kindName}:${id}:${f}`)), ...(own || [])];
+      // V5-1 (the impression), by a shared run of twelve since VEIL-15 (the chair's re-ruling): it goes with its person's shut appearance where the two share a run of twelve code points in the one fold
+      if (kindName === 'npc' && drops.includes('physical')) withholdImpression(card);
+      for (const f of drops) dropField(card, kind, f);
     }
   }
 
@@ -710,10 +740,12 @@ export function applyVeil(publicSettlement, veil) {
       if (peopleOf.has(npcHouseOf(npc))) delete npc.institution;
     }
   }
-  // X-21e: a house removed whole takes its card and every membership reference to it.
+  // X-21e: a house removed whole takes its card and every membership reference to it. BY ITS ID ALONE (COHERENCE-VEIL-10;
+  // REVIEW-VEIL-7's V7-3): the set was decided above, before any eye trimmed anything, and is not tested again (the
+  // `function` eye has by now taken the tags, facets and service keys that put a house in the class; an id is floor).
   if (goneHouses.size || goneIds.size) {
     if (Array.isArray(s.institutions)) {
-      s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i)) && isHideableHouse(i)));
+      s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i))));
     }
     for (const npc of cardsOf(s, 'npc')) {
       if (goneHouses.has(npcHouseOf(npc))) delete npc.institution;
@@ -729,11 +761,24 @@ export function applyVeil(publicSettlement, veil) {
     }
   }
 
+  // V5-1: each second home goes with the eye that governs its source.
+  withholdSecondHomes(s, sources, goneHouses, houseEyes, goneBirths, goneLabels, goneIds.size > 0);
+
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
+  withholdCriminalIncome(s, groupings, criminalGone);
+  // VEIL-19 (item D; VR6, VR19): the shares re-derived where a row went; `weight` withheld on every read
+  rederiveIncomeShares(s, incomeBefore);
+  // VEIL-19 (V10-6, ruling VR21): no counter taken before a removal: the trace's `ts`, dense in served order
+  renumberTrace(s);
   // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
+  // VEIL-22 (R3): the drawn conditional rows (212 :: _gallery_veil_roster_choices, before R2's step)
+  applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf);
+  // VEIL-21 (R2; VR16, VR33, VR37): last, what no non-owner read sends whatever the veil (212 :: _gallery_veil runs
+  // _gallery_veil_withhold_always on every body it returns)
+  withholdAlways(s);
 
   markVeiled(s, [...groupings].sort());
   return s;
@@ -801,11 +846,47 @@ export function veilGroupingsOf(settlement) {
 }
 
 /**
- * Is a grouping veiled on this projected settlement? (For renderers of derived blocks.)
- * @param {unknown} settlement @param {string} address @returns {boolean}
+ * THE SHUT GROUPING'S SIGNAL SURVIVES A COPY (VEIL-VR17; the sixth chair's ruling VR17, 2026-11-19, vetoable by the
+ * owner). The list above lives beside the OBJECT, so a copy of the page model loses it: measured at bedd5a392, the
+ * gallery page and the party link whenever the civility mask rewrites one string (gallery.js :: sanitizeDossier ->
+ * publicSafe.js :: veilPublicPayload -> civility.js :: veilDeep rebuilds the object), the campaign map's member
+ * (get_gallery_map sends no list), and any clone. So a grouping whose block a renderer DERIVES from facts the veil
+ * keeps names, here, the evidence IN THE DATA that it is OPEN: the keys its remover deletes and the generator always
+ * writes. Present, the grouping was not shut; absent, it was, or the page cannot show it was not. The evidence is the
+ * served data itself (211's applier and GROUPING_REMOVERS delete the same keys, so the server's document and the
+ * twin's agree), so every copy keeps it BY CONSTRUCTION, no key is added to any payload or record, and a visitor reads
+ * nothing the response did not already hold. Read on a NON-OWNER page only (isVeiled's `publicDossier`): an owner's
+ * own record is drawn as before. A renderer of a derived block reads isVeiled with an address that has a row here
+ * (tests/lint/veilCopySites.walker.test.js).
+ * @type {Readonly<Record<string, (s: Rec) => boolean>>}
  */
-export function isVeiled(settlement, address) {
-  return veilGroupingsOf(settlement).includes(address);
+export const GROUPING_OPEN_EVIDENCE = Object.freeze({
+  // GROUPING_REMOVERS['block:defense.criminalStructure'] deletes the operations list with the crime list (211 deletes the
+  // same pair); generators/safetyProfile.js returns it, an array, on every town (VR29 keeps it one on every read). R3-TELL-8:
+  // the crime list is withheld on every read (212 :: _gallery_veil_withhold_always), so the evidence is the operations list
+  // alone: open exactly where it is an array, on 6,528 of 6,528 measured pages (TELL8 1e); the page's ONE reader re-derives
+  // the crime list only there (pageRederive.js :: rederiveCrimeTypes).
+  'block:defense.criminalStructure': (s) => {
+    const sp = recAt(recAt(s, 'economicState') || {}, 'safetyProfile');
+    return !!sp && Array.isArray(sp.criminalInstitutions);
+  },
+});
+
+/**
+ * Is a grouping veiled on this projected settlement? (For renderers of derived blocks.) On a non-owner page
+ * (`publicDossier`), a grouping with a GROUPING_OPEN_EVIDENCE row is also veiled wherever the page model does not
+ * prove it open, so a copy that lost the list above still withholds (VEIL-VR17). WHERE THE VEIL CANNOT BE SURE, IT
+ * WITHHOLDS.
+ * @param {unknown} settlement @param {string} address
+ * @param {{ publicDossier?: boolean }} [audience]  `publicDossier`: the page a visitor draws (a shared page, the party
+ *   link, the campaign map's member); omitted or false on the owner's own record
+ * @returns {boolean}
+ */
+export function isVeiled(settlement, address, { publicDossier = false } = {}) {
+  if (veilGroupingsOf(settlement).includes(address)) return true;
+  if (!publicDossier) return false;
+  const open = GROUPING_OPEN_EVIDENCE[address];
+  return !!open && !open(isRec(settlement) ? settlement : {});
 }
 
 // ── STORAGE (inside gallery_member_overrides) ───────────────────────────────────────
@@ -890,6 +971,10 @@ export function writeShareVeil(memberOverrides, deltas, mode = {}) {
     at: mode.at !== undefined ? mode.at : prior.at,
     snapshot: mode.snapshot !== undefined ? mode.snapshot : prior.snapshot,
   });
+  // A copy asked for and not kept (past VEIL_LIMITS.snapshotMaxChars) does not keep the word: with
+  // no copy every reader draws the live town, so the stored mode IS live (the second review's R5).
+  // The prior copy was read through the clamp already, so only a copy given here can be dropped.
+  if (mode.snapshot && !next.snapshot) next.mode = 'live';
   out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: rest, ...next };
   return out;
 }
@@ -944,16 +1029,21 @@ export function readShareMode(memberOverrides) {
  * saved row (toPublicSafe with the DM door and the per-member overrides), before the veil.
  * A snapshot freezes exactly this; the reader veils it at view time, so the DM's eyes keep
  * working on a frozen copy and an un-hidden fact comes back without a refresh.
+ * VEIL-13, RULING (5): a tie the public projection drops as covert takes its four strings
+ * with it (gallerySecondHomes.js :: withholdCovertCopies, the identity judged on the raw town
+ * against itself, one spelling; the server's twin is migration 212 ::
+ * _gallery_apply_member_overrides, which every read runs).
  * @param {unknown} settlement  the raw saved settlement
  * @param {{ shareDm?: boolean, memberOverrides?: unknown }} [opts]
  * @returns {Rec}
  */
 export function galleryPayloadFor(settlement, { shareDm = false, memberOverrides = null } = {}) {
-  return /** @type {Rec} */ (toPublicSafe(settlement, {
+  const pub = toPublicSafe(settlement, {
     full: shareDm === true,
     memberOverrides: isRec(memberOverrides)
       ? /** @type {Record<string, { revealDm?: boolean, allowImport?: boolean }>} */ (memberOverrides) : null,
-  }));
+  });
+  return /** @type {Rec} */ (withholdCovertCopies(pub, settlement, shareDm === true));
 }
 
 // ── CURATE (X-21 (e), X-21b): the model the curate screen draws ───────────────────────
@@ -1072,6 +1162,16 @@ export function toggleVeilDelta(deltas, address, defaults) {
  * marks "hidden by default" apart from "hidden by you". `lines` is the hidden-items list
  * (plain lines; a field hidden by its class switch or its card is said once, by the switch
  * or the card) and its length is the counter.
+ *
+ * BY IDENTITY WITH THE APPLIER (the seventh chair's ruling VR34, 2026-11-20, from the security
+ * reader's V10-2; vetoable by the owner): an eye is drawn exactly where applyVeil would remove
+ * something under it, in every stored shape. A card's eyes read EVERY copy of the card the
+ * applier reaches (cardsOf: each list of its kind, by its id; master's stored shape carries a
+ * power's roster on the top-level `factions[]` and none on `powerStructure.factions`), and a
+ * house's People eye reads the house each person belongs to as the applier reads it
+ * (npcHouseOf: the people car's `{ kind: 'house', key }`, else master's string). So every
+ * address the criminal switch writes can be seen and undone by a hand on this screen
+ * (criminalVeilSwitch.js :: offeredAddressesOf).
  * @param {unknown} publicSettlement  galleryPayloadFor's output (before the veil)
  * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
  */
@@ -1089,14 +1189,18 @@ export function curateModelFor(publicSettlement, deltas) {
 
   const services = recAt(s, 'availableServices') || {};
   const offered = new Set(Object.values(services).flatMap(rows => recs(rows).map(r => str(r.institution))).filter(Boolean));
-  const staffed = new Set(recs(s.npcs).map(n => str(n.institution)).filter(Boolean));
-  /** @param {Rec} card @param {string} kind @param {string} field @returns {unknown} */
-  const valueOf = (card, kind, field) => {
-    if (kind === 'institution' && field === 'services') return offered.has(str(card.name)) ? 'Its rows on the Services tab' : undefined;
-    if (kind === 'institution' && field === 'people') return staffed.has(str(card.name)) ? 'Its people on their cards' : undefined;
-    for (const key of CARD_KINDS[kind].fields[field] || []) {
-      const v = card[key];
-      if (v != null && !(Array.isArray(v) && !v.length) && v !== '') return v;
+  // VR34: the house each person belongs to, on every copy of every person, read as the applier reads it.
+  const staffed = new Set(cardsOf(s, 'npc').map(npcHouseOf).filter(Boolean));
+  /** @param {ReadonlyArray<Rec>} copies  every copy of one card, by its id @param {string} kind @param {string} field @returns {unknown} */
+  const valueOf = (copies, kind, field) => {
+    const name = str(copies[0].name);
+    if (kind === 'institution' && field === 'services') return offered.has(name) ? 'Its rows on the Services tab' : undefined;
+    if (kind === 'institution' && field === 'people') return staffed.has(name) ? 'Its people on their cards' : undefined;
+    for (const card of copies) {
+      for (const key of CARD_KINDS[kind].fields[field] || []) {
+        const v = card[key];
+        if (v != null && !(Array.isArray(v) && !v.length) && v !== '') return v;
+      }
     }
     return undefined;
   };
@@ -1111,17 +1215,22 @@ export function curateModelFor(publicSettlement, deltas) {
     const usable = new Set();
     const cards = sec.kinds.flatMap((kind) => {
       const k = CARD_KINDS[kind];
-      /** @type {Set<string>} */
-      const seen = new Set();
-      return listAt(s, k.lists[0]).flatMap((card) => {
-        const id = k.idOf(card);
-        if (!id || seen.has(id)) return [];
-        seen.add(id);
+      // VR34: every copy the applier reaches, grouped by id in reading order (the kind's first list first).
+      /** @type {Map<string, Rec[]>} */
+      const byId = new Map();
+      for (const copy of cardsOf(s, kind)) {
+        const id = k.idOf(copy);
+        if (!id) continue;
+        const group = byId.get(id);
+        if (group) group.push(copy); else byId.set(id, [copy]);
+      }
+      return [...byId].flatMap(([id, copies]) => {
+        const card = copies[0];
         const name = cardName(card, kind) || id;
         const whole = kind === 'institution' && isHideableHouse(card) ? eye(`card:institution:${id}`) : null;
         const eyes = Object.keys(k.fields).flatMap((field) => {
           if (GROUPING_OWNED_FIELDS.has(`${kind}:${field}`)) return [];
-          const v = valueOf(card, kind, field);
+          const v = valueOf(copies, kind, field);
           if (v === undefined) return [];
           usable.add(`class:${kind}:${field}`);
           return [{ ...eye(`field:${kind}:${id}:${field}`), field, label: FIELD_LABELS[field] || field, text: excerptOf(v) }];
@@ -1157,6 +1266,42 @@ export function curateModelFor(publicSettlement, deltas) {
  */
 export function projectShareVeil(publicSettlement, memberOverrides) {
   const { marked, deltas } = readShareVeil(memberOverrides);
-  if (!marked) return publicSettlement;
+  // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read);
+  // VEIL-21 (R2): and for what no non-owner read sends whatever the veil (212 :: _gallery_veil, the unmarked body)
+  // VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
+  if (!marked) {
+    const s = /** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement)));
+    applyRosterChoices(s, publicSettlement, CARD_KINDS.institution.idOf);
+    return withholdAlways(s);
+  }
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
+}
+
+/**
+ * Did the server apply this share's veil (migration 211)? The read then sends the served
+ * marker `{ v: 2, mode, at, groupings }` in place of the stored share: no delta, no copy.
+ * @param {unknown} memberOverrides  the read's gallery_member_overrides
+ * @returns {boolean}
+ */
+export function isServedVeil(memberOverrides) {
+  const stored = isRec(memberOverrides) ? memberOverrides[VEIL_OVERRIDE_KEY] : null;
+  return isRec(stored) && stored.v === VEIL_LIMITS.servedVersion;
+}
+
+/**
+ * The page's projection of a read. A served share (211) is already veiled: only its
+ * groupings run again (removal, so it changes nothing) and are marked for the renderers;
+ * the default rules never run again, so an eye the DM opened stays open. Any other share
+ * is projected here, as before 211.
+ * @param {Rec} publicSettlement  toPublicSafe's output
+ * @param {unknown} memberOverrides  the read's gallery_member_overrides
+ * @returns {Rec}
+ */
+export function projectServedVeil(publicSettlement, memberOverrides) {
+  if (!isServedVeil(memberOverrides)) return projectShareVeil(publicSettlement, memberOverrides);
+  const stored = /** @type {Rec} */ (/** @type {Rec} */ (memberOverrides)[VEIL_OVERRIDE_KEY]);
+  const groupings = Array.isArray(stored.groupings)
+    ? stored.groupings.filter(a => typeof a === 'string' && Object.prototype.hasOwnProperty.call(GROUPING_REMOVERS, a))
+    : [];
+  return applyVeil(publicSettlement, groupings);
 }

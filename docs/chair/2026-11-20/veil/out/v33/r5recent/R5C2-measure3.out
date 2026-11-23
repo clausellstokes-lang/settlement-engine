@@ -1,0 +1,170 @@
+== variant/run A (rc=0 15:22:38)
+thorp births                                         {"baseline":40}
+ALL births                                           {"baseline":240}
+thorp full-record baseline                           {"reproduced":40}
+ALL full-record baseline                             {"reproduced":221,"MISS":19}
+thorp nothing-hidden served dm=false baseline        {"reproduced":38}
+ALL nothing-hidden served dm=false baseline          {"reproduced":132,"MISS":9}
+thorp nothing-hidden served dm=true baseline         {"reproduced":38}
+ALL nothing-hidden served dm=true baseline           {"reproduced":132,"MISS":9}
+hamlet births                                        {"baseline":40}
+hamlet full-record baseline                          {"reproduced":39,"MISS":1}
+hamlet nothing-hidden served dm=false baseline       {"reproduced":37,"MISS":1}
+hamlet nothing-hidden served dm=true baseline        {"reproduced":37,"MISS":1}
+village births                                       {"baseline":40}
+village full-record baseline                         {"MISS":4,"reproduced":36}
+village nothing-hidden served dm=false baseline      {"reproduced":34,"MISS":3}
+village nothing-hidden served dm=true baseline       {"reproduced":34,"MISS":3}
+town births                                          {"baseline":40}
+town full-record baseline                            {"reproduced":36,"MISS":4}
+town nothing-hidden served dm=false baseline         {"reproduced":19,"MISS":3}
+town nothing-hidden served dm=true baseline          {"reproduced":19,"MISS":3}
+city births                                          {"baseline":40}
+city full-record baseline                            {"reproduced":34,"MISS":6}
+city nothing-hidden served dm=false baseline         {"MISS":1,"reproduced":4}
+city nothing-hidden served dm=true baseline          {"MISS":1,"reproduced":4}
+metropolis births                                    {"baseline":40}
+metropolis full-record baseline                      {"reproduced":36,"MISS":4}
+metropolis nothing-hidden served dm=false baseline   {"MISS":1}
+metropolis nothing-hidden served dm=true baseline    {"MISS":1}
+misses:
+   FULL r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   SERVED dm=false r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   SERVED dm=true r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   FULL r5c2-m3-village-0: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   FULL r5c2-m3-village-9: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The strongest armed household has started making decisions on everyone's behalf without asking."
+   SERVED dm=false r5c2-m3-village-9: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The strongest armed household has started making decisions on everyone's behalf without asking."
+   SERVED dm=true r5c2-m3-village-9: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The strongest armed household has started making decisions on everyone's behalf without asking."
+   FULL r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   SERVED dm=false r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   SERVED dm=true r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   FULL r5c2-m3-village-39: stored "A noble family is contesting a merchant's right to operate in their traditional market territory. Elder Council is hearing the case and wis | derived "A dispute over field rotation and grazing rights has divided the village for most of this season."
+   SERVED dm=false r5c2-m3-village-39: stored "A noble family is contesting a merchant's right to operate in their traditional market territory. Elder Council is hearing the case and wis | derived "A dispute over field rotation and grazing rights has divided the village for most of this season."
+   SERVED dm=true r5c2-m3-village-39: stored "A noble family is contesting a merchant's right to operate in their traditional market territory. Elder Council is hearing the case and wis | derived "A dispute over field rotation and grazing rights has divided the village for most of this season."
+   FULL r5c2-m3-town-18: stored "Military Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has bee | derived "Military Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now ac
+   SERVED dm=false r5c2-m3-town-18: stored "Military Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has bee | derived "Military Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now ac
+   SERVED dm=true r5c2-m3-town-18: stored "Military Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has bee | derived "Military Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now ac
+   FULL r5c2-m3-town-26: stored "Corrupt Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been | derived "Corrupt Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now act
+   SERVED dm=false r5c2-m3-town-26: stored "Corrupt Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been | derived "Corrupt Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now act
+   SERVED dm=true r5c2-m3-town-26: stored "Corrupt Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been | derived "Corrupt Council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now act
+   FULL r5c2-m3-town-32: stored "Two rival guilds are contesting control of the main trade route. Neither side will back down and Merchant oligarchy is avoiding the questio | derived "A guild's private soldiers arrested a rival's factor. The watch is refusing to intervene in what they call a 'merchant matter'."
+   FULL r5c2-m3-town-36: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground."
+   SERVED dm=false r5c2-m3-town-36: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground."
+   SERVED dm=true r5c2-m3-town-36: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground."
+   FULL r5c2-m3-city-6: stored "Noble Governorship has been debating market levies for three months. The merchants have argued against every one of them, and nothing has b | derived "Noble Governorship has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now 
+   SERVED dm=false r5c2-m3-city-6: stored "Noble Governorship has been debating market levies for three months. The merchants have argued against every one of them, and nothing has b | derived "Noble Governorship has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now 
+   SERVED dm=true r5c2-m3-city-6: stored "Noble Governorship has been debating market levies for three months. The merchants have argued against every one of them, and nothing has b | derived "Noble Governorship has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now 
+   FULL r5c2-m3-city-7: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "The church is demanding veto power over council appointments. Merchant City Council has not yet refused publicly."
+   FULL r5c2-m3-city-11: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "Two rival guilds are contesting control of the main trade route. Neither side will back down and Military City Council is avoiding the ques
+   FULL r5c2-m3-city-14: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "Two rival guilds are contesting control of the main trade route. Neither side will back down and Arcane Council is avoiding the question."
+   FULL r5c2-m3-city-15: stored "The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have n | derived "The military commanders are pushing for expanded authority over civilian courts, and Merchant Guild Council is losing ground."
+== variant/run B (rc=0 15:23:20)
+thorp births                                         {"baseline":40}
+ALL births                                           {"baseline":240}
+thorp full-record baseline                           {"reproduced":40}
+ALL full-record baseline                             {"reproduced":238,"MISS":2}
+thorp nothing-hidden served dm=false baseline        {"reproduced":38}
+ALL nothing-hidden served dm=false baseline          {"reproduced":140,"MISS":1}
+thorp nothing-hidden served dm=true baseline         {"reproduced":38}
+ALL nothing-hidden served dm=true baseline           {"reproduced":140,"MISS":1}
+hamlet births                                        {"baseline":40}
+hamlet full-record baseline                          {"reproduced":39,"MISS":1}
+hamlet nothing-hidden served dm=false baseline       {"reproduced":37,"MISS":1}
+hamlet nothing-hidden served dm=true baseline        {"reproduced":37,"MISS":1}
+village births                                       {"baseline":40}
+village full-record baseline                         {"reproduced":40}
+village nothing-hidden served dm=false baseline      {"reproduced":37}
+village nothing-hidden served dm=true baseline       {"reproduced":37}
+town births                                          {"baseline":40}
+town full-record baseline                            {"reproduced":39,"MISS":1}
+town nothing-hidden served dm=false baseline         {"reproduced":22}
+town nothing-hidden served dm=true baseline          {"reproduced":22}
+city births                                          {"baseline":40}
+city full-record baseline                            {"reproduced":40}
+city nothing-hidden served dm=false baseline         {"reproduced":5}
+city nothing-hidden served dm=true baseline          {"reproduced":5}
+metropolis births                                    {"baseline":40}
+metropolis full-record baseline                      {"reproduced":40}
+metropolis nothing-hidden served dm=false baseline   {"reproduced":1}
+metropolis nothing-hidden served dm=true baseline    {"reproduced":1}
+misses:
+   FULL r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   SERVED dm=false r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   SERVED dm=true r5c2-m3-hamlet-8: stored "The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watc | derived "Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without 
+   FULL r5c2-m3-town-32: stored "Two rival guilds are contesting control of the main trade route. Neither side will back down and Merchant oligarchy is avoiding the questio | derived "A guild's private soldiers arrested a rival's factor. The watch is refusing to intervene in what they call a 'merchant matter'."
+== variant/run C (rc=0 15:24:33)
+thorp births                                         {"baseline":40}
+ALL births                                           {"baseline":240}
+thorp full-record baseline                           {"reproduced":40}
+ALL full-record baseline                             {"reproduced":234,"MISS":6}
+thorp nothing-hidden served dm=false baseline        {"reproduced":38}
+ALL nothing-hidden served dm=false baseline          {"reproduced":135,"MISS":6}
+thorp nothing-hidden served dm=true baseline         {"reproduced":38}
+ALL nothing-hidden served dm=true baseline           {"reproduced":135,"MISS":6}
+hamlet births                                        {"baseline":40}
+hamlet full-record baseline                          {"reproduced":39,"MISS":1}
+hamlet nothing-hidden served dm=false baseline       {"reproduced":37,"MISS":1}
+hamlet nothing-hidden served dm=true baseline        {"reproduced":37,"MISS":1}
+village births                                       {"baseline":40}
+village full-record baseline                         {"reproduced":35,"MISS":5}
+village nothing-hidden served dm=false baseline      {"reproduced":32,"MISS":5}
+village nothing-hidden served dm=true baseline       {"reproduced":32,"MISS":5}
+town births                                          {"baseline":40}
+town full-record baseline                            {"reproduced":40}
+town nothing-hidden served dm=false baseline         {"reproduced":22}
+town nothing-hidden served dm=true baseline          {"reproduced":22}
+city births                                          {"baseline":40}
+city full-record baseline                            {"reproduced":40}
+city nothing-hidden served dm=false baseline         {"reproduced":5}
+city nothing-hidden served dm=true baseline          {"reproduced":5}
+metropolis births                                    {"baseline":40}
+metropolis full-record baseline                      {"reproduced":40}
+metropolis nothing-hidden served dm=false baseline   {"reproduced":1}
+metropolis nothing-hidden served dm=true baseline    {"reproduced":1}
+misses:
+   FULL r5c2-m3-hamlet-31: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The household that sells the most beyond the settlement has been throwing its weight around in community decisions."
+   SERVED dm=false r5c2-m3-hamlet-31: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The household that sells the most beyond the settlement has been throwing its weight around in community decisions."
+   SERVED dm=true r5c2-m3-hamlet-31: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The household that sells the most beyond the settlement has been throwing its weight around in community decisions."
+   FULL r5c2-m3-village-4: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The strongest armed household is pushing for authority over disputes the community used to settle for itself."
+   SERVED dm=false r5c2-m3-village-4: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The strongest armed household is pushing for authority over disputes the community used to settle for itself."
+   SERVED dm=true r5c2-m3-village-4: stored "The strongest armed household has started making decisions on everyone's behalf without asking." | derived "The strongest armed household is pushing for authority over disputes the community used to settle for itself."
+   FULL r5c2-m3-village-5: stored "A farmstead three miles out was destroyed last night. The farmer and his family are unaccounted for. The militia is not going out to look." | derived "A farmstead a short walk from here was destroyed last night. The family is gone. No one is going to look for them."
+   SERVED dm=false r5c2-m3-village-5: stored "A farmstead three miles out was destroyed last night. The farmer and his family are unaccounted for. The militia is not going out to look." | derived "A farmstead a short walk from here was destroyed last night. The family is gone. No one is going to look for them."
+   SERVED dm=true r5c2-m3-village-5: stored "A farmstead three miles out was destroyed last night. The farmer and his family are unaccounted for. The militia is not going out to look." | derived "A farmstead a short walk from here was destroyed last night. The family is gone. No one is going to look for them."
+   FULL r5c2-m3-village-20: stored "The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. | derived "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge
+   SERVED dm=false r5c2-m3-village-20: stored "The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. | derived "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge
+   SERVED dm=true r5c2-m3-village-20: stored "The trouble is inside the government, not in the streets. Officials drag their feet on orders, and taxes are collected but not handed over. | derived "Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the last assembly. Those in charge
+   FULL r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   SERVED dm=false r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   SERVED dm=true r5c2-m3-village-30: stored "A merchant has bought land the old landholding family once held, and the family has not forgotten." | derived "The miller and the largest farming household are in dispute over prices and access."
+   FULL r5c2-m3-village-34: stored "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off." | derived "Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave."
+   SERVED dm=false r5c2-m3-village-34: stored "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off." | derived "Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave."
+   SERVED dm=true r5c2-m3-village-34: stored "Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off." | derived "Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave."
+== variant/run B2 (rc=0 15:25:55)
+thorp births                                         {"baseline":40}
+ALL births                                           {"baseline":240}
+thorp full-record baseline                           {"reproduced":40}
+ALL full-record baseline                             {"reproduced":240}
+thorp nothing-hidden served dm=false baseline        {"reproduced":40}
+ALL nothing-hidden served dm=false baseline          {"reproduced":146}
+thorp nothing-hidden served dm=true baseline         {"reproduced":40}
+ALL nothing-hidden served dm=true baseline           {"reproduced":146}
+hamlet births                                        {"baseline":40}
+hamlet full-record baseline                          {"reproduced":40}
+hamlet nothing-hidden served dm=false baseline       {"reproduced":36}
+hamlet nothing-hidden served dm=true baseline        {"reproduced":36}
+village births                                       {"baseline":40}
+village full-record baseline                         {"reproduced":40}
+village nothing-hidden served dm=false baseline      {"reproduced":39}
+village nothing-hidden served dm=true baseline       {"reproduced":39}
+town births                                          {"baseline":40}
+town full-record baseline                            {"reproduced":40}
+town nothing-hidden served dm=false baseline         {"reproduced":26}
+town nothing-hidden served dm=true baseline          {"reproduced":26}
+city births                                          {"baseline":40}
+city full-record baseline                            {"reproduced":40}
+city nothing-hidden served dm=false baseline         {"reproduced":5}
+city nothing-hidden served dm=true baseline          {"reproduced":5}
+metropolis births                                    {"baseline":40}
+metropolis full-record baseline                      {"reproduced":40}
+misses:

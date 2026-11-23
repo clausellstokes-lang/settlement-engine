@@ -1,0 +1,38 @@
+POOL no criminal served: city|dm|ccs=#absent	148 births
+POOL no criminal served: city|dm|ccs=none	148 births
+POOL no criminal served: city|off|ccs=#absent	148 births
+POOL no criminal served: metropolis|dm|ccs=#absent	152 births
+POOL no criminal served: metropolis|dm|ccs=none	152 births
+POOL no criminal served: metropolis|off|ccs=#absent	152 births
+POOL no criminal served: town|dm|ccs=#absent	138 births
+POOL no criminal served: town|dm|ccs=none	138 births
+POOL no criminal served: town|off|ccs=#absent	138 births
+POOL no criminal served: village|dm|ccs=#absent	145 births
+POOL no criminal served: village|dm|ccs=none	145 births
+POOL no criminal served: village|off|ccs=#absent	145 births
+HIDDEN TOWNS serving, with no criminal house or power served, a criminalCaptureState no open place shows: 25
+  r3m-city-indebted-0-46 dm:adversarial
+  r3m-city-infiltrated-0-42 dm:equilibrium+seed
+  r3m-city-infiltrated-1-102 dm:equilibrium+seed
+  r3m-city-none-1-107 dm:adversarial
+  r3m-city-politically_fractured-0-40 dm:equilibrium+seed
+  r3m-city-wartime-1-109 dm:adversarial
+  r3m-metropolis-indebted-0-56 dm:corrupted+seed
+  r3m-metropolis-indebted-0-66 dm:equilibrium+seed
+  r3m-metropolis-insurgency-1-124 dm:corrupted+seed
+  r3m-metropolis-insurgency-1-134 dm:equilibrium+seed
+  r3m-metropolis-none-0-53 dm:adversarial
+  r3m-metropolis-none-1-127 dm:equilibrium+seed
+  r3m-metropolis-occupied-0-65 dm:equilibrium+seed
+  r3m-metropolis-occupied-1-135 dm:equilibrium+seed
+  r3m-metropolis-politically_fractured-0-60 dm:equilibrium+seed
+  r3m-metropolis-politically_fractured-1-140 dm:equilibrium+seed
+  r3m-metropolis-under_siege-1-128 dm:corrupted+seed
+  r3m-metropolis-wartime-0-59 dm:adversarial
+  r3m-metropolis-wartime-0-69 dm:equilibrium+seed
+  r3m-metropolis-wartime-1-139 dm:adversarial
+  r3m-town-none-0-17 dm:equilibrium+seed
+  r3m-town-none-0-23 dm:adversarial
+  r3m-town-none-1-91 dm:adversarial
+  r3m-town-under_siege-0-28 dm:corrupted+seed
+  r3m-town-wartime-0-29 dm:adversarial

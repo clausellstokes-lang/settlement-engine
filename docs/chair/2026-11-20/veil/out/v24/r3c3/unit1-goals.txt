@@ -1,0 +1,202 @@
+# R3-CURE-3 unit 1 (the chair's ruling A of 10:21): THE TWO REVEAL-DM GOALS, ATTRIBUTED. Towns built EXACTLY as galleryServerVeil builds them
+# (measure/goals.probe.jsx: its BROWSER dials, cfg, compose, galleryPayloadFor, configsFor, writeShareVeil). Server = pglite, every migration of the tree;
+# twin = projectShareVeil(galleryPayloadFor(record,{shareDm:true,memberOverrides})). base = 06e9e64b3 (goals-base.json), after = b907c75c9 (goals-after.json).
+# The page-level read (the test itself, instrumented copy, b907c75c9): measure/test-dump-after.json.
+
+=== server-veil-city-infiltrated-0
+stored powers: City Council [government, governing] id=(none); Thieves' Guild [criminal] id=(none); Merchant Guilds [economy] id=(none); Arcane Orders [magic] id=(none); The Independent Bloc [other, hidden] id=(none); Military/Guard [military] id=(none); Craft Guilds [economy] id=(none); Noble Families [noble] id=(none)
+npc_mages_guild (Kai Zhang, the guild archmage)
+  short: "Keep Cheng Jung satisfied, so that what is known stays hidden."
+  long:  "Keep Koharu Kim in debt for as long as it is useful."
+  intent.short: family=ALLEGIANCE kind=serve_fear key=serve_patron target={"kind":"power","id":"Thieves' Guild"}
+  intent.long: family=TIES kind=creditor key=collect_debt target={"kind":"npc","id":"npc_butchers_3_8"}
+npc_smelter (Jian Wei, the smelt master)
+  short: "Warn Li He of any trouble before it reaches them."
+  long:  "Reach the top of Craft Guilds by the long road, one earned favour at a time."
+  intent.short: family=TIES kind=ally key=protect_ally target={"kind":"npc","id":"npc_customs_house"}
+  intent.long: family=RANK kind=enter key=secure_office target={"kind":"power","id":"Craft Guilds"}
+-- default+dm/live | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- default+dm/live | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id); The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- default+dm/live | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- default+dm/snapshot | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- default+dm/snapshot | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id); The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- default+dm/snapshot | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/live | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/live | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id); The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/live | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/snapshot | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/snapshot | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id); The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- all+dm/snapshot | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: City Council; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- opened+dm/live | server gallery
+   withheld (name | bare form | id): (none)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Craft Guilds: no (served)
+-- opened+dm/live | server link
+   withheld (name | bare form | id): The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- opened+dm/live | twin
+   withheld (name | bare form | id): (none)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Craft Guilds: no (served)
+-- opened+dm/snapshot | server gallery
+   withheld (name | bare form | id): (none)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Craft Guilds: no (served)
+-- opened+dm/snapshot | server link
+   withheld (name | bare form | id): The Independent Bloc | The Independent Bloc | (no id)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Craft Guilds: no (served)
+-- opened+dm/snapshot | twin
+   withheld (name | bare form | id): (none)
+   served powers: City Council; Thieves' Guild; Merchant Guilds; Arcane Orders; The Independent Bloc; Military/Guard; Craft Guilds; Noble Families
+   npc_mages_guild: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Craft Guilds: no (served)
+
+=== server-veil-metropolis-3
+stored powers: Shadow Senate [criminal, governing] id=(none); Religious Authorities [religious] id=(none); Arcane Orders [magic] id=(none); Merchant Guilds [economy] id=(none); Military/Guard [military] id=(none); Thieves' Guild [criminal] id=(none); Noble Houses [noble] id=(none); Craft Guilds [economy] id=(none)
+npc_mages_guild: not in this town
+npc_smelter (Pradeep Deshpande, the smelt master)
+  short: "Prove to Parvati Chaudhary that they are worth a bigger cut."
+  long:  "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb."
+  intent.short: family=ALLEGIANCE kind=serve_greed key=serve_patron target={"kind":"power","id":"Thieves' Guild"}
+  intent.long: family=RANK kind=climb key=secure_office target={"kind":"npc","id":"npc_craft_guilds_100_150"}
+-- default+dm/live | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- default+dm/live | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- default+dm/live | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- default+dm/snapshot | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- default+dm/snapshot | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- default+dm/snapshot | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/live | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/live | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/live | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/snapshot | server gallery
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/snapshot | server link
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- all+dm/snapshot | twin
+   withheld (name | bare form | id): Thieves' Guild | Thieves' Guild | (no id)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=[false,false] | power target withheld=Thieves' Guild: YES
+-- opened+dm/live | server gallery
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+-- opened+dm/live | server link
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+-- opened+dm/live | twin
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+-- opened+dm/snapshot | server gallery
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+-- opened+dm/snapshot | server link
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=false | after(b907c75c9) goal served=false | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+-- opened+dm/snapshot | twin
+   withheld (name | bare form | id): (none)
+   served powers: Shadow Senate; Religious Authorities; Arcane Orders; Merchant Guilds; Military/Guard; Thieves' Guild; Noble Houses; Craft Guilds
+   npc_smelter: base(06e9e64b3) goal served=true | after(b907c75c9) goal served=true | first cure substring tokens=[] | lane search on sentences=null | power target withheld=Thieves' Guild: no (served)
+
+=== THE PAGE (the test itself, b907c75c9, instrumented copy; control at the end of the two towns): {"readable":76420,"rows":62,"withheld":0,"goals":0,"shownGoals":276}
+server-veil-city-infiltrated-0 default+dm/live: 210 page goal: mages_guild=absent smelter=served | page now: mages_guild=absent smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=21
+server-veil-city-infiltrated-0 default+dm/snapshot: 210 page goal: mages_guild=absent smelter=served | page now: mages_guild=absent smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=21
+server-veil-city-infiltrated-0 all+dm/live: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=0
+server-veil-city-infiltrated-0 all+dm/snapshot: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=0
+server-veil-city-infiltrated-0 opened+dm/live: 210 page goal: mages_guild=served smelter=served | page now: mages_guild=served smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=35
+server-veil-city-infiltrated-0 opened+dm/snapshot: 210 page goal: mages_guild=served smelter=served | page now: mages_guild=served smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=35
+server-veil-metropolis-3 default+dm/live: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=30
+server-veil-metropolis-3 default+dm/snapshot: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=30
+server-veil-metropolis-3 all+dm/live: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=0
+server-veil-metropolis-3 all+dm/snapshot: 210 page goal: mages_guild=absent smelter=absent | page now: mages_guild=absent smelter=absent | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=0
+server-veil-metropolis-3 opened+dm/live: 210 page goal: mages_guild=absent smelter=served | page now: mages_guild=absent smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=52
+server-veil-metropolis-3 opened+dm/snapshot: 210 page goal: mages_guild=absent smelter=served | page now: mages_guild=absent smelter=served | removed by goalsLeaveWithTheirPower g=0 l=0 | shown goals g=52

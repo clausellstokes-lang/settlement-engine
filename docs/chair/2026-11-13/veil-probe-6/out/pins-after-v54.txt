@@ -1,0 +1,13 @@
+components/publicProseVeilInvariance.test.js 5/5
+lib/gallery.test.js 50/50
+lib/importScrub.test.js 19/19
+lib/partyLinkClient.test.js 7/7
+security/allegianceVeil.pglite.test.js 8/8
+security/gallerySecondHomes.pglite.test.js 3/3
+security/galleryServerVeil.pglite.test.js 16/16
+security/galleryVeilCures.pglite.test.js 32/32
+security/livingContentRosterPublicDrop.test.js 7/7
+security/playerRecordVeiledFace.test.js 4/4
+security/publicPayloadVeilTotality.test.js 28/28
+display/publicSafe.test.js 56/56
+TOTAL 235/235

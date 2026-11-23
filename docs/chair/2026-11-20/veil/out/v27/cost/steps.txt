@@ -1,0 +1,7 @@
+start 17:07:55 load 1.05 1.56 2.37
+big exit 0
+timing start load 0.97 1.54 2.36
+bigcost exit 0
+chains exit 0
+v8245 exit 0 17:10:08 load 2.21 1.67 2.30
+DONE

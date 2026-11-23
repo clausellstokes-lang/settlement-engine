@@ -1,0 +1,1 @@
+roles census over v14hand: 9 towns, 54 reads, 20 (person, read) pairs whose own card withholds a stored role or title

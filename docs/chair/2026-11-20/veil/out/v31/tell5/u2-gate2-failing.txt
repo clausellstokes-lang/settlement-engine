@@ -1,0 +1,35 @@
+  r3m-city-indebted-1-106 (city) | 34 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-city-indebted-1-106 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.powers.capture:+->0
+  r3m-city-infiltrated-0-42 (city) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-city-infiltrated-1-102 (city) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-city-insurgency-1-104 (city) | 34 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-city-insurgency-1-104 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.powers.capture:+->0
+  r3m-city-insurgency-1-114 (city) | 30 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.powers.criminal:+->0
+  r3m-city-insurgency-1-114 (city) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0 r.powers.criminal:+->0
+  r3m-city-none-1-117 (city) | 30 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.powers.criminal:+->0 r.powers.relations:+->0
+  r3m-city-none-1-117 (city) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.powers.capture:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+  r3m-city-none-1-117 (city) | 4 pages (twin:dm:g:101 twin:dm:g:001 server:dm:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-city-politically_fractured-0-40 (city) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-city-politically_fractured-1-120 (city) | 40 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-city-under_siege-1-108 (city) | 20 pages (twin:off:own twin:off:g:110 twin:off:g:011 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+ r.sp.crimeTypes:+->0
+  r3m-city-under_siege-1-108 (city) | 20 pages (twin:off:g:101 twin:off:g:100 twin:off:g:001 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-metropolis-indebted-0-56 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-indebted-0-66 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-indebted-1-136 (metropolis) | 30 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.powers.criminal:+->0 r.powers.relations:+->0
+  r3m-metropolis-indebted-1-136 (metropolis) | 6 pages (twin:dm:own twin:dm:g:011 twin:dm:allOpen ...) | r.powers.capture:+->0 r.powers.criminal:+->0 r.powers.relations:+->0
+  r3m-metropolis-indebted-1-136 (metropolis) | 4 pages (twin:dm:g:101 twin:dm:g:001 server:dm:g:101 ...) | r.chains.criminal:0->+ r.inst.criminal:0->+
+  r3m-metropolis-insurgency-1-124 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-insurgency-1-134 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-none-1-127 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-occupied-0-65 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-occupied-1-135 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-politically_fractured-0-60 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-politically_fractured-1-140 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-under_siege-1-128 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-metropolis-wartime-0-69 (metropolis) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-town-infiltrated-0-12 (town) | 20 pages (twin:off:own twin:off:g:110 twin:off:g:011 ...) | r.sp.ops:+->0
+  r3m-town-insurgency-0-14 (town) | 16 pages (twin:off:own twin:off:g:110 twin:off:g:011 ...) | r.imports.criminal:+->0 r.sp.ops:+->0
+  r3m-town-insurgency-0-14 (town) | 24 pages (twin:off:g:101 twin:off:g:100 twin:off:g:001 ...) | r.imports.criminal:+->0
+  r3m-town-none-0-17 (town) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0
+  r3m-town-none-0-21 (town) | 40 pages (twin:off:own twin:off:g:110 twin:off:g:101 ...) | r.tensions.crime:+->0
+  r3m-town-under_siege-0-28 (town) | 10 pages (twin:dm:own twin:dm:g:101 twin:dm:g:011 ...) | r.powers.capture:+->0

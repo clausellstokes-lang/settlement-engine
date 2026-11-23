@@ -1,0 +1,10 @@
+     × server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 28005ms
+     × server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 47007ms
+     × server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 104113ms
+     × server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows 105831ms
+     × server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows 148875ms
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 113472ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed | 3 passed (4)
+      Tests  6 failed | 65 passed (71)
+exit 1

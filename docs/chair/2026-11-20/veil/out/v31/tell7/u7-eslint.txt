@@ -1,0 +1,12 @@
+
+/home/user/wt/r3tell7/docs/chair/2026-11-20/veil/out/v31/tell7/measure/lists.probe.jsx
+  0:0  warning  File ignored because no matching configuration was supplied
+
+/home/user/wt/r3tell7/docs/chair/2026-11-20/veil/out/v31/tell7/measure/ref.probe.jsx
+  0:0  warning  File ignored because no matching configuration was supplied
+
+✖ 2 problems (0 errors, 2 warnings)
+
+[gate-tail] end:  05:08:08 up  5:54,  0 user,  load average: 1.01, 0.57, 1.34
+[gate-tail] full log: /tmp/gate-tail.15707.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

@@ -1,0 +1,169 @@
+{
+ "prose.state.publicOrder.beside": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": [
+   "town-calm-0",
+   "town-calm-0 +DM",
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "town-indebted-4",
+   "town-indebted-4 +DM",
+   "village-calm-6",
+   "village-calm-6 +DM"
+  ]
+ },
+ "prose.state.publicOrder.rung.sentence": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": [
+   "town-calm-0",
+   "town-calm-0 +DM",
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "town-indebted-4",
+   "town-indebted-4 +DM",
+   "village-calm-6",
+   "village-calm-6 +DM"
+  ]
+ },
+ "prose.threat.economic": {
+  "hidden": [
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": [
+   "town-calm-0",
+   "town-calm-0 +DM",
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "town-indebted-4",
+   "town-indebted-4 +DM",
+   "village-calm-6",
+   "village-calm-6 +DM"
+  ]
+ },
+ "prose.prosperity.sentence": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": [
+   "town-calm-0",
+   "town-calm-0 +DM",
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "village-calm-6",
+   "village-calm-6 +DM"
+  ]
+ },
+ "prose.conditionSeverity": {
+  "hidden": [
+   "city-calm-3",
+   "city-calm-3 +DM"
+  ],
+  "open": [
+   "town-calm-0",
+   "town-calm-0 +DM",
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "town-indebted-4",
+   "town-indebted-4 +DM"
+  ]
+ },
+ "prose.wall.rationale": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM"
+  ],
+  "open": [
+   "city-infiltrated-1",
+   "city-infiltrated-1 +DM",
+   "town-indebted-4",
+   "town-indebted-4 +DM",
+   "village-calm-6",
+   "village-calm-6 +DM"
+  ]
+ },
+ "defence.scores.internal": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ },
+ "safety.safetyLabel": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM"
+  ],
+  "open": []
+ },
+ "legitimacy.score": {
+  "hidden": [
+   "metropolis-calm-2",
+   "metropolis-calm-2 +DM",
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ },
+ "legitimacy.label": {
+  "hidden": [
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ },
+ "legitimacy.colours": {
+  "hidden": [
+   "city-calm-3",
+   "city-calm-3 +DM",
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ },
+ "economy.prosperity": {
+  "hidden": [
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ },
+ "economy.prosperityStanding": {
+  "hidden": [
+   "metropolis-insurgency-5",
+   "metropolis-insurgency-5 +DM"
+  ],
+  "open": []
+ }
+}

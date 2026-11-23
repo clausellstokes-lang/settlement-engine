@@ -10,7 +10,7 @@
  */
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { caretakerFormOf, cardOfficeOf } from './cardPowers.js';
-import { honorificOfTitle } from '../../data/faceHonorifics.js';
+import { honorificOfTitle, honorificSeedOf } from '../../data/faceHonorifics.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** The record as the seat's readers read it. @typedef {RulingPowerSettlement & { npcs?: unknown, culturalIdentity?: { key?: string | null } | null }} KeeperSettlement */
@@ -47,8 +47,8 @@ const governmentOf = (settlement) => nameOf(governingFactionOf(/** @type {Ruling
 /**
  * The keeper's honorific in the caretaker's form, as all three places print it: a face whose office is its own (one
  * hat: a monarch, a steward, the eldest) takes its title's honorific (data/faceHonorifics.js, read with the record's
- * own culture) in the caretaker's form; '' for a card that is not the keeper or wears the dual hat (its office is in
- * its power line).
+ * own culture, picked by its name and the title: VR47, honorificSeedOf) in the caretaker's form; '' for a card that is
+ * not the keeper or wears the dual hat (its office is in its power line).
  * @param {unknown} card @param {unknown} settlement @returns {string}
  */
 export function keeperHonorificOf(card, settlement) {
@@ -58,7 +58,7 @@ export function keeperHonorificOf(card, settlement) {
   const inst = c.institution && typeof c.institution === 'object' ? c.institution : null;
   if (!inst?.title) return '';
   const culture = /** @type {KeeperSettlement | null} */ (settlement)?.culturalIdentity?.key ?? null;
-  const honorific = honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${String(inst.key || '')}`, { culture });
+  const honorific = honorificOfTitle(inst.title, c.gender, honorificSeedOf(c.name, inst.title), { culture });
   return caretakerFormOf(honorific, governmentOf(settlement));
 }
 

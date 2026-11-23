@@ -3380,6 +3380,11 @@
         "introducedAt": "b46048140467b9a597b66259d93cfb54507524d0",
         "cause": "GREEN-TIP (2026-11-10, b46048140, the foodGenerator <-> isolationSupport import-cycle cure; the chair's STOP-2 ruling, ODQ \u00a7934.105): RELOCATION, NET ZERO. The four custom-content food constants CUSTOM_PRODUCER_CAPACITY_PER_ITEM 0.15, CUSTOM_PRODUCER_CAPACITY_CAP 0.6, CUSTOM_CONSUMER_NEED_PER_ITEM 0.1 and CUSTOM_CONSUMER_NEED_CAP 0.5 moved byte-for-byte with foodLandOf from src/generators/foodGenerator.js into the new leaf (the moved 168-line block is cmp-identical to the lines removed); foodGenerator loses exactly these four. No tuning figure enters the product."
       },
+      "src/domain/display/gallerySecondHomes.js": {
+        "sites": 1,
+        "introducedAt": "5abf99906358b54e7486b5e4c4536a5bbb479140",
+        "cause": "COHERENCE-VEIL-10 (5abf99906, V7-1, the share veil's name search; migration 212's client twin): the name walk's security bound NAME_WALK_BOUND = 64 (a container at that level is withheld whole where it may hold a hidden name: the closed answer), the same 64 as 212's _gallery_veil_name_sweep; a security bound, not a tuning value, so no _TUNING table may state it. Attributed by VEIL-17 at the join into pull request #75 under THE CHAIR'S RULING VR3 (2026-11-19: the register's proper entry for a named constant is the owner's signature, which this seat cannot state truly). V8-9's bound beside it, NAME_SEARCH_BOUND, is a frozen object and adds no named constant. The name earns its register row when the owner signs."
+      },
       "src/domain/display/shadowEconomyShown.js": {
         "sites": 1,
         "introducedAt": "63c3f2ae73a7ea8af74950580e3b50f20fba5631",

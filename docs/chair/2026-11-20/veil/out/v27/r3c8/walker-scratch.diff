@@ -1,0 +1,13 @@
+diff --git a/src/domain/display/galleryRosterChoices.js b/src/domain/display/galleryRosterChoices.js
+index 3bb064aaf..067376146 100644
+--- a/src/domain/display/galleryRosterChoices.js
++++ b/src/domain/display/galleryRosterChoices.js
+@@ -203,7 +203,7 @@ export function applyRosterChoices(s, pub, idOf) {
+   // out of it): no served house accounts for it. 212 withheld it already, by its own statement of this rule
+   const svc = recAt(s, 'availableServices');
+   if (svc && Array.isArray(svc.criminal)) {
+-    svc.criminal = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
++    svc.criminal = svc.criminal.filter(x => !(isRec(x) && x.institution === COVERT));
+   }
+ 
+   // registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the served rows; unreadable: withheld)

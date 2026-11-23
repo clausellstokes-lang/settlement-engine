@@ -1,0 +1,53 @@
+towns 24; markers planted 7537; shares (every eye shut by hand) 96; rows hidden by hand 34540; reads 384; births that threw 0; reads that raised or sent no row 0; houses hidden whole 42
+planted, by origin: conflict.desc 14 · conflict.plotHooks 14 · conflict.stakes 14 · event.description 133 · event.lastingEffects 104 · event.plotHooks 48 · faction.crisisNote 12 · faction.desc 342 · grouping.criminalCaptureState 24 · grouping.decrees 24 · grouping.desc 114 · grouping.dmLayer 24 · grouping.note 3 · grouping.reason 9 · institution.desc 910 · npc.activeConstraint 43 · npc.allegiance 26 · npc.goal 682 · npc.personality 682 · npc.physical 682 · npc.plotHooks 1357 · npc.secret 796 · relationship.description 679 · relationship.tension 679 · tension.description 43 · tension.lastingEffects 36 · tension.plotHooks 43
+planted, by origin and the step it first existed after: conflict.desc after assembleSettlement 14 · conflict.plotHooks after assembleSettlement 14 · conflict.stakes after assembleSettlement 14 · event.description after generateNarratives 133 · event.lastingEffects after generateNarratives 104 · event.plotHooks after generateNarratives 48 · faction.crisisNote after assembleSettlement 4 · faction.crisisNote after generatePower 4 · faction.crisisNote after powerEconomyReconcilePass 4 · faction.desc after assembleSettlement 90 · faction.desc after generatePower 126 · faction.desc after powerEconomyReconcilePass 126 · grouping.criminalCaptureState after assembleSettlement 24 · grouping.decrees after by the editor 24 · grouping.desc after assembleSettlement 4 · grouping.desc after economyReconcilePass 85 · grouping.desc after generateEconomy 25 · grouping.dmLayer after by the editor 24 · grouping.note after assembleSettlement 3 · grouping.reason after assembleSettlement 9 · institution.desc after assembleInstitutions 859 · institution.desc after cascadePass 36 · institution.desc after coherenceRepairPass 7 · institution.desc after factionCorrelationPass 6 · institution.desc after isolationPass 2 · npc.activeConstraint after assembleSettlement 43 · npc.allegiance after assembleSettlement 26 · npc.goal after assembleSettlement 682 · npc.personality after assembleSettlement 6 · npc.personality after generatePopulation 676 · npc.physical after assembleSettlement 6 · npc.physical after generatePopulation 676 · npc.plotHooks after assembleSettlement 681 · npc.plotHooks after generatePopulation 676 · npc.secret after assembleSettlement 120 · npc.secret after generatePopulation 676 · relationship.description after assembleSettlement 679 · relationship.tension after assembleSettlement 679 · tension.description after generateNarratives 43 · tension.lastingEffects after generateNarratives 36 · tension.plotHooks after generateNarratives 43
+
+== MARKERS STILL IN A PAYLOAD (a hidden string, sent)
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, about one for every hundred people in the city. RV5~institution~63~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+qtip | DM reveal on | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+qtip | DM reveal on | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.charter[].desc  {"gallery":16,"link":16,"map":16,"import":16}  towns 8
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Rival organisations. RV5~institution~72~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.garrison[].desc  {"gallery":34,"link":34,"map":34,"import":34}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Full-time keepers of order, about one for every hundred people in the city. RV5~institution~63~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.magicDef[].desc  {"gallery":36,"link":36,"map":36,"import":36}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Several alchemical workshops, run under a guild. RV5~institution~49~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.mercenary[].desc  {"gallery":12,"link":12,"map":12,"import":12}  towns 6
+      e.g. rv5-plant-city-infiltrated-0 live gallery: Sellsword companies under proper organisation, mustering hundreds to thousands. RV5~institution~66~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.militia[].desc  {"gallery":10,"link":10,"map":10,"import":10}  towns 5
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Able-bodied residents drill and muster against local threats. Part-time service. RV5~institution~12~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.walls[].desc  {"gallery":38,"link":38,"map":38,"import":38}  towns 15
+      e.g. rv5-plant-hamlet-infiltrated-0 live gallery: Basic wooden palisade or earthwork berm. Slows raids and creature incursions. RV5~institution~11~desc~Z
+qtip | no reveal | institution.desc  ->  defenseProfile.institutions.watch[].desc  {"gallery":24,"link":24,"map":24,"import":24}  towns 12
+      e.g. rv5-plant-town-infiltrated-0 live gallery: Watchmen serving part-time. Night patrols and gate duty. RV5~institution~35~desc~Z
+qtip | no reveal | tension.description  ->  history.siegeNarrative  {"gallery":2,"link":2,"map":2,"import":2}  towns 1
+      e.g. rv5-plant-city-infiltrated-0 live gallery: The Plague Years is still present in living memory: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations RV5~t
+
+== A HOUSE HIDDEN WHOLE, ITS NAME STILL IN A PAYLOAD
+qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+qtip | DM reveal on | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].reason  {"gallery":84,"import":84}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network converts raw inputs into chain output."
+qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].causes[].source  {"gallery":32,"import":32}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "processor.Smuggling network"
+qtip | DM reveal on | a house hidden whole  ->  simulationTrace[].downstreamEffects[].target  {"gallery":52,"import":52}  towns 7
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"
+qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].label  {"gallery":4,"link":4,"map":4,"import":4}  towns 2
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Black market" in "Black market"
+qtip | no reveal | a house hidden whole  ->  economicState.activeChains[].processingInstitutions[]  {"gallery":40,"link":40,"map":40,"import":40}  towns 9
+      e.g. rv5-plant-city-infiltrated-0 live gallery: "Smuggling network" in "Smuggling network"

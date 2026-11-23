@@ -1,0 +1,13 @@
+     × the review's class (V5-2): composePublicProse(owner) deep-equals composePublicProse(stripped owner) on 50 infiltrated villages and towns, rv5-r3-village-infiltrated-3 by text 8444ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/components/publicProseVeilInvariance.test.js > (i) the invariance pin: the projection depends on nothing the sanitizer strips > the review's class (V5-2): composePublicProse(owner) deep-equals composePublicProse(stripped owner) on 50 infiltrated villages and towns, rv5-r3-village-infiltrated-3 by text
++   "rv5-r3-village-infiltrated-3 power:desk",
++   "rv5-r3-town-infiltrated-8 power:desk",
++   "rv5-r3-village-infiltrated-9 power:desk",
++   "rv5-r3-town-infiltrated-12 general:overview",
++   "rv5-r3-village-infiltrated-14 power:desk",
++   "rv5-r3-village-infiltrated-23 general:overview",
++   "rv5-r3-village-infiltrated-23 power:desk",
++   "rv5-r3-town-infiltrated-23 general:overview",
+      Tests  1 failed | 4 passed (5)
+exit 1
