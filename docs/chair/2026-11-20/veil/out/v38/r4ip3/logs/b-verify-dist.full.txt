@@ -1,0 +1,79 @@
+[gate-tail] start:  01:36:49 up  1:24,  0 user,  load average: 12.78, 11.22, 10.64 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r4ip3
+
+ ❯ tests/build/generationWorkerLazy.test.js (11 tests | 1 failed) 454ms
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 14ms
+ ❯ tests/build/vendorPdfLazy.test.js (55 tests | 3 failed) 3328ms
+     × the engine chunk still exists (lazy) and remains large 30ms
+     × entry static closure raw bytes stay under the first-paint budget (1175492) 5ms
+     × entry static closure gzip bytes stay under 373999 1847ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/build/generationWorkerLazy.test.js > generation worker — production boundary > the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+AssertionError: generation worker bundle generation.worker-DgqQmyFW.js is 2579751 B; the ceiling is 2579708 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2579751 to be less than or equal to 2579708
+ ❯ tests/build/generationWorkerLazy.test.js:847:7
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large
+AssertionError: expected 910255 to be less than 909928
+ ❯ tests/build/vendorPdfLazy.test.js:1128:18
+    1126|     // follow-ups (68) +74; FAULTS-BIRTH (63) +72; FR25 (67) +64; J-IN…
+    1127|     // FAULTS-TOOLS, FAULTS-DESKS and point 71 +0.
+    1128|     expect(size).toBeLessThan(909_928);
+       |                  ^
+    1129|   });
+    1130|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure raw bytes stay under the first-paint budget (1175492)
+AssertionError: first-paint static closure = 1175552 bytes (budget 1175492):
+       5362  content-identity-BiMB_uYV.js
+     154520  data-D4CZ5VwQ.js
+     308130  engine-core-DbwBmd1t.js
+     489017  index-CElJbuZA.js
+       4722  kernel-BI0fDpJx.js
+       3579  vendor-icons-aOW4IQH8.js
+     193176  vendor-react-DsScxBXT.js
+      17046  vendor-state-DXnjcO3h.js: expected 1175552 to be less than or equal to 1175492
+ ❯ tests/build/vendorPdfLazy.test.js:1330:7
+    1328|       total,
+    1329|       `first-paint static closure = ${total} bytes (budget ${CLOSURE_B…
+    1330|     ).toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES);
+       |       ^
+    1331|   });
+    1332|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure gzip bytes stay under 373999
+AssertionError: first-paint gzip transfer = 374013 B (budget 373999):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   45525  br   37377  data-D4CZ5VwQ.js
+  gzip   99054  br   83456  engine-core-DbwBmd1t.js
+  gzip  155291  br  128756  index-CElJbuZA.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 374013 to be less than or equal to 373999
+ ❯ tests/build/vendorPdfLazy.test.js:1340:9
+    1338|         gzipTotal,
+    1339|         `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_…
+    1340|       ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+       |         ^
+    1341|     },
+    1342|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 62 passed (66)
+   Start at  01:36:51
+   Duration  4.70s (transform 173ms, setup 84ms, import 1.77s, tests 3.78s, environment 0ms)
+
+[gate-tail] end:  01:36:56 up  1:24,  0 user,  load average: 13.04, 11.30, 10.67

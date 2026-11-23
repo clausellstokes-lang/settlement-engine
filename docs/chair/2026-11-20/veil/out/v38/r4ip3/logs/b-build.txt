@@ -1,0 +1,43 @@
+dist/assets/pactProposals-C0M-pDGO.js                              70.39 kB │ gzip:  23.70 kB
+dist/assets/OutputContainer-CxWMMb6f.js                            71.71 kB │ gzip:  23.98 kB
+dist/assets/settlementRumors-DiqDeA1J.js                           78.32 kB │ gzip:  25.85 kB
+dist/assets/WorldMap-C7rFekce.js                                   84.53 kB │ gzip:  29.44 kB
+dist/assets/compendiumData.generated-qq3RONTq.js                   86.21 kB │ gzip:  22.12 kB
+dist/assets/GalleryPage-BR6CYIsB.js                                86.50 kB │ gzip:  24.81 kB
+dist/assets/FloatingAffordances-DDVnbx2j.js                        88.23 kB │ gzip:  23.22 kB
+dist/assets/beliefMap-BCRtwvH5.js                                  92.38 kB │ gzip:  29.40 kB
+dist/assets/GenerateWizard-CqVBDR_4.js                            105.13 kB │ gzip:  31.87 kB
+dist/assets/AdminPanel-jBSJqVxg.js                                106.54 kB │ gzip:  28.57 kB
+dist/assets/realmManifest-BOYf25iu.js                             108.12 kB │ gzip:  35.65 kB
+dist/assets/gallery-C0Cs-0-U.js                                   108.75 kB │ gzip:  42.11 kB
+dist/assets/npcLadderState-BxhEkWnd.js                            126.04 kB │ gzip:  40.32 kB
+dist/assets/AccountPage-7JUwXnmq.js                               127.37 kB │ gzip:  35.91 kB
+dist/assets/data-D4CZ5VwQ.js                                      154.52 kB │ gzip:  45.62 kB
+dist/assets/CompendiumPanel-CBteEbne.js                           156.22 kB │ gzip:  46.94 kB
+dist/assets/index.es-DmuKnQ9A.js                                  158.94 kB │ gzip:  53.09 kB
+dist/assets/realmItemReadModel-D_xvgCUP.js                        179.76 kB │ gzip:  55.49 kB
+dist/assets/vendor-react-DsScxBXT.js                              193.18 kB │ gzip:  60.57 kB
+dist/assets/settlementLifecycleFirstClass-Co_GIbAf.js             193.47 kB │ gzip:  64.72 kB
+dist/assets/SettlementPDF-f64YgTw2.js                             193.85 kB │ gzip:  60.65 kB
+dist/assets/convergence-CRnZBKnO.js                               198.59 kB │ gzip:  68.18 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/SettlementsPanel-BrBRE4Tt.js                          250.57 kB │ gzip:  76.26 kB
+dist/assets/applyWorldPulse-CA0lzbia.js                           263.23 kB │ gzip:  88.65 kB
+dist/assets/coherence-lazy-W2AQnn7E.js                            279.17 kB │ gzip:  94.17 kB
+dist/assets/npcComponents-B-1f7Vjg.js                             289.29 kB │ gzip:  73.25 kB
+dist/assets/engine-core-DbwBmd1t.js                               308.13 kB │ gzip:  99.20 kB
+dist/assets/advanceInterval-BcLFz39D.js                           471.67 kB │ gzip: 156.10 kB
+dist/assets/index-CElJbuZA.js                                     489.02 kB │ gzip: 155.49 kB
+dist/assets/engine-1rheBdpN.js                                    910.26 kB │ gzip: 297.75 kB
+dist/assets/data-lazy-D3SoQkjR.js                               1,819.68 kB │ gzip: 471.87 kB
+dist/assets/vendor-pdf-DDPN_tul.js                              1,852.58 kB │ gzip: 617.07 kB
+✓ built in 2m 3s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 314 static route documents (13 views + 15 gallery hubs + 275 compendium entries + 11 compendium sections) under dist/
+[gate-tail] end:  01:36:49 up  1:24,  0 user,  load average: 12.78, 11.22, 10.64
+[gate-tail] full log: /tmp/gate-tail.2425.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT=0
