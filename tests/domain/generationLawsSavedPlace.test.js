@@ -136,6 +136,16 @@ const LAW_READINGS = Object.freeze({
       prosperityStanding: w.economicState?.prosperityStanding,
     }),
   }),
+  trouble: Object.freeze({
+    reader: ['src/domain/trouble/troubleLaw.js', 'resolveTroubleLawVersion'],
+    // The two bars the law moves, read through the build's own leaf on the world (the crime coin's and the guild
+    // swap's). Not the tensions: `regenSection('history')` mints a fresh random seed, so a tension reading cannot
+    // equal across two walks; the tensions are proved in `trouble/troubleLawSavedTown.test.js` (bounded re-rolls).
+    moves: (G, w) => ({
+      crimeWaveBar: G.readers.trouble.module.crimeWaveBar(configOf(w), w.economicState),
+      guildSwapBar: G.readers.trouble.module.guildSwapBar(configOf(w), w.powerStructure?.factions),
+    }),
+  }),
 });
 
 /** A law's second dial, lit WITH its row (the seat law's contest, SAVED-SEAT's `dial.lit`). */

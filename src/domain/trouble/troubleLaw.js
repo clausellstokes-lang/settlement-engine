@@ -24,8 +24,8 @@
  * less. The number of troubles a place is asked for, the crisis-mapped trouble, the scarcity add,
  * every admission and truth check, the fill's flat pick and the order of the list are untouched.
  *
- * THE IDIOM IS THE FORTUNE LAW'S (`src/domain/fortune/fortuneLaw.js` on the fortune lane, itself the
- * seat and living-content laws'), and its four properties hold here in these words:
+ * THE IDIOM IS THE FORTUNE LAW'S (`src/domain/fortune/fortuneLaw.js`, itself the seat and
+ * living-content laws'), and its four properties hold here in these words:
  *
  *   1. DARK BY DEFAULT, AND THE DEFAULT WRITES NOTHING. A config with no `_troubleLawVersion` is a
  *      law-1 world, and a law-1 world is byte-identical to one generated before this file existed.
@@ -52,8 +52,9 @@
  *
  * ⛔ IT IMPORTS NOTHING. A dependency-free leaf: no cycle can form through it, and nothing rides behind
  * it into whichever chunk its importer lands in. Its importers are the create boundary
- * (`src/domain/density/densityCreateBoundary.js :: birthConfig`) and the history generator; it is
- * pinned to its own lazy `trouble-law` chunk (`vite.config.js`), never first paint.
+ * (`src/domain/density/densityCreateBoundary.js :: birthConfig`), the history generator and the
+ * history regen pass (`generateSettlementPipeline.js :: regenHistoryPipeline`, `withRecordTroubleLaw`);
+ * it is pinned to its own lazy `trouble-law` chunk (`vite.config.js`), never first paint.
  *
  * THE GENERATOR ONLY CALLS (`historyGenerator.js :: buildHistoricalEvent`, its three lines changed in
  * place): (a) `_rng() > crimeWaveBar(config, economicState)`; (b) `_rng() > guildSwapBar(config,
@@ -161,7 +162,8 @@ export function economyPowersOf(factions) {
  * chance on the place's own crime strength. NO DRAW, under either law.
  *
  * @param {unknown} config the birth's config (the law is read from it)
- * @param {any} economicState the economy as `buildHistoricalEvent` receives it
+ * @param {{compound?: {criminalEffective?: unknown}} | null | undefined} economicState the economy as
+ *   `buildHistoricalEvent` receives it (only `compound.criminalEffective` is read)
  * @param {typeof TROUBLE_WEIGHT_TUNING} [table] the table (the tests' seam; the generator never passes it)
  * @returns {number}
  */
@@ -229,6 +231,32 @@ export function resolveTroubleLawVersion(configOrSettlement) {
  *  @param {unknown} configOrSettlement @returns {boolean} */
 export function isWeightedTrouble(configOrSettlement) {
   return resolveTroubleLawVersion(configOrSettlement) === WEIGHTED_TROUBLE_LAW_VERSION;
+}
+
+/**
+ * The config a REGENERATE pass hands down: `config` with the trouble key the RECORD's (the seat law's
+ * `seatLaw.js :: withRecordSeatLaw`, in its form; the chair's ruling of 18:26 UTC on shape 2).
+ *
+ * A regenerate road is handed a config it did not choose (the store's `settlement.config || config` falls
+ * back to the FORM config for a save with neither `config` nor `_config`, and the form holds whatever world
+ * was loaded last). `buildHistoricalEvent` reads the law off that config, so the history pass re-keys it
+ * here: the trouble key becomes the record's own marker, read through the one resolver above, or none (a
+ * record with no marker is law 1). Every other key is the handed config's, untouched. Same reference when
+ * the two already agree, so a regen whose handed config IS the record's config is byte-identical. Never
+ * called at BIRTH: there the born config IS the record's.
+ *
+ * @template {Record<string, unknown>} T
+ * @param {T} config the handed config
+ * @param {unknown} record the settlement being regenerated
+ * @returns {T}
+ */
+export function withRecordTroubleLaw(config, record) {
+  const version = resolveTroubleLawVersion(record);
+  if (resolveTroubleLawVersion(config) === version) return config;
+  const { [TROUBLE_LAW_CONFIG_KEY]: _handed, ...rest } = config;
+  return /** @type {T} */ (version === DEFAULT_TROUBLE_LAW_VERSION
+    ? rest
+    : { ...rest, [TROUBLE_LAW_CONFIG_KEY]: version });
 }
 
 /**

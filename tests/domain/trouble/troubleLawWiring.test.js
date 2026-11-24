@@ -10,8 +10,9 @@
  * moves. The light is the owner's word, never a lane's (the chair's one unit at the close).
  *
  * THE ARMS, in the brief's order (K1.md, MANIFEST item 6):
- *   1. CREATE (dark, the product path) — no `_troubleLawVersion` on a birth, and `birthConfig(null)`
- *      byte-equal to the value `tests/domain/livingContentLawWiring.test.js` pins for it.
+ *   1. CREATE (dark, the product path) — no `_troubleLawVersion` on a birth (its own key only: the
+ *      one pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g), E61 (5),
+ *      which spreads every register row's mint, this law's included).
  *   2. CREATE/CLAMP — an incoming `_troubleLawVersion: 2` (the Library-Load hop, walked) is
  *      clamped away: an imported marker never decides a birth.
  *   3. READ — the closed membership read, from a config, a settlement's `config` and its `_config`;
@@ -47,11 +48,6 @@ import {
   readTroubleLawVersion,
   resolveTroubleLawVersion,
 } from '../../../src/domain/trouble/troubleLaw.js';
-import {
-  LIVING_CONTENT_LAW_CONFIG_KEY,
-  ROSTER_LIVING_CONTENT_LAW_VERSION,
-} from '../../../src/domain/content/livingContentLawVersion.js';
-import { newSettlementDensityLaw } from '../../../src/domain/density/densityLaw.js';
 import { isAllowedConfigKey } from '../../../src/store/configSlice.js';
 // The Library's Load runs a saved `settlement._config` through this before `updateConfig`; the
 // clamp arm walks that hop rather than asserting about it (the fortune clamp arm's shape).
@@ -112,10 +108,9 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
   });
 
   // ── 1. CREATE (dark) ─────────────────────────────────────────────────────────
-  // ⭐ THE ONE TEST THAT PINS WHAT A NEW PLACE IS BORN WITH: it follows `NEW_SETTLEMENT_TROUBLE_LAW_VERSION`, and it is
-  // the one arm the flip of the dial changes (the owner's word; the chair's one unit at the close). Every other arm of
-  // the lane's two files forces its law in its own config.
-  it('1. CREATE (dark): birthConfig carries no _troubleLawVersion, and birthConfig(null) is byte-equal to its pinned value', () => {
+  // ⭐ THE ONE ARM OF THIS FILE THAT MOVES WITH THE DIAL: it follows `NEW_SETTLEMENT_TROUBLE_LAW_VERSION` (the owner's
+  // word; one commit on the flip's list). Every other arm of the lane's files forces its law in its own config.
+  it('1. CREATE (dark): birthConfig carries no _troubleLawVersion — its own key only, on a config, null and undefined', () => {
     expect(
       NEW_SETTLEMENT_TROUBLE_LAW_VERSION,
       'the trouble dial is not at the default. Lighting it is the owner\'s word (the chair\'s one'
@@ -126,17 +121,13 @@ describe('the trouble law (KINDS-1 K1) is WIRED and lands DARK', () => {
     expect(Object.hasOwn(born, TROUBLE_LAW_CONFIG_KEY)).toBe(false);
     expect(born[TROUBLE_LAW_CONFIG_KEY]).toBeUndefined();
     expect(isWeightedTrouble(born)).toBe(false);
-    // The value `livingContentLawWiring.test.js` pins for `birthConfig(null)`, copied from that
-    // arm's own expression: the density mint's marker, then the living-content law's one key.
-    // Compared as BYTES as well, so a key the trouble law added (or a key order it moved) reds here.
-    const pinned = {
-      ...newSettlementDensityLaw(),
-      [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
-    };
-    expect(birthConfig(null)).toEqual(pinned);
-    expect(JSON.stringify(birthConfig(null))).toBe(JSON.stringify(pinned));
-    expect(JSON.stringify(birthConfig(undefined))).toBe(JSON.stringify(pinned));
-    expect(JSON.stringify(born)).toBe(JSON.stringify({ ...CONFIG, ...pinned }));
+    // ⭐ THE WHOLE VALUE OF `birthConfig(null)` IS PINNED ONCE, NOT HERE (CLOSE-1 JOIN, the chair's E61 (5),
+    // COMMON-RULES 14 (c)): `tests/domain/generationLawsSavedPlace.test.js` (g) pins it from every register row's own
+    // mint, dark and lit, this law's included; it is the pin on the flip's list. This arm keeps the trouble law's own
+    // key: absent on every birth while its dial is dark.
+    for (const empty of [null, undefined]) {
+      expect(Object.hasOwn(birthConfig(empty), TROUBLE_LAW_CONFIG_KEY), `birthConfig(${empty})`).toBe(false);
+    }
   });
 
   // ── 2. CREATE/CLAMP ──────────────────────────────────────────────────────────
