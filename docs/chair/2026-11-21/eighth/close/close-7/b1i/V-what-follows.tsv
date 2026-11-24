@@ -1,0 +1,28 @@
+seed	leaves moved	live houses lost	live houses gained	steps (trace: -lost +gained)
+dp-hamlet-136	349	Hunter's lodge		assembleInstitutions:selected:-1+0
+dp-village-67	247	Fish market		cascadePass:cascaded:-1+0
+dp-town-39	2990	Fish market|Hunter's lodge|Vintner|Fuller	Customs house|Ropemaker|Barracks	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-2+3
+dp-town-45	1217	Fish market	Midwife	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-0+1
+dp-town-117	3613	Fish market|Sawmill (commercial)|Coaching inn|Customs house|Tanners|Weavers/Textile workers|Elder Grove Council|Courthouse|Warden's Lodge	Stone quarry|Toll bridge|Tanner (established)|Printing house|Barracks	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-7+5
+dp-town-118	2600	Fish market|Hunter's lodge|Annual fair|Caravaneer's post|Printing house	Coaching inn|Ropemaker|Elder Grove Council|Warden's Lodge	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-4+4
+dp-town-128	1316	Fish market|Carriers' guild	Butchers (3-8)|Warden's Lodge	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-1+2
+dp-town-129	2825	Fish market|Coaching inn|Cooper|Cobbler's guild|Midwife	Brickmaker|Ropemaker|Elder Grove Council|Barracks	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-4+4
+dp-town-147	1844	Fish market|Bowyers & fletchers (guild)|Citadel|Free company hall	Tailor's guild|Courthouse|Barracks|Veteran's lodge	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-2+3 factionCorrelationPass:faction_pulled:-1+1
+dp-city-17	1443	Sawmill (commercial)		assembleInstitutions:selected:-1+0
+dp-city-20	6258	Fish market|Charcoal burner|Sawmill (commercial)|Toll bridge|Elder Grove Council|Sage's quarter	Butchers (3-8)|Citadel	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-3+2
+dp-city-54	4610	Fish market|Sawmill (commercial)|Customs house|Fuller|Brickmaker|Black market|Bardic college	Toll bridge|Cooper|Printing house	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-4+3 coherenceRepairPass:added:-1+0
+dp-city-55	4001	Fish market|Sawmill (commercial)|Customs house|Printing house	Stone quarry|Weavers/Textile workers	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-2+2
+dp-city-65	5881	Fish market|Charcoal burner|Sawmill (commercial)|Customs house	Printing house|Elder Grove Council	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-3+2 cascadePass:subsumed_after_cascade:-2+0
+dp-city-77	2725	Fish market|Coaching inn	Stone quarry	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-1+1
+dp-city-80	1623	Fish market|Beast trainers|Customs house	Toll bridge|Public bathhouse	assembleInstitutions:selected:-1+0 cascadePass:cascaded:-2+2
+dp-city-113	4502	Fish market|Charcoal burner|Sawmill (commercial)|Cooper|Weavers/Textile workers|Veteran's lodge	Dyer|Elder Grove Council	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-3+3 cascadePass:subsumed_after_cascade:-0+1
+dp-city-127	5041	Fish market|Charcoal burner|Sawmill (commercial)	Weavers/Textile workers|Citadel|Sage's quarter	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-1+3 cascadePass:subsumed_after_cascade:-1+0
+dp-city-149	5119	Fish market|Charcoal burner|Beast trainers|Almshouse|Bardic college	Stone quarry|Printing house	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-2+3 coherenceRepairPass:added:-1+0 cascadePass:subsumed_after_cascade:-0+1
+dp-metropolis-19	5591	Fish market|Charcoal burner|Sawmill (commercial)|Almshouse	Stone quarry|Harbour master's office	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-1+1 cascadePass:airship_triggered:-0+1
+dp-metropolis-30	7237	Fish market|Charcoal burner|Sawmill (commercial)|Elder Grove Council		assembleInstitutions:selected:-3+0 cascadePass:cascaded:-1+1 cascadePass:subsumed_after_cascade:-0+1
+dp-metropolis-70	4506	Fish market|Sawmill (commercial)|Bakers (5-15)|Cartographer's guild	Cobbler's guild	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-2+3 cascadePass:subsumed_after_cascade:-0+2
+dp-metropolis-90	4937	Fish market|Charcoal burner|Sawmill (commercial)|Wizard's tower		assembleInstitutions:selected:-3+0 cascadePass:cascaded:-2+2 cascadePass:subsumed_after_cascade:-1+2
+dp-metropolis-93	6123	Fish market|Charcoal burner|Sawmill (commercial)|Alchemist quarter|Wizard's tower|Scroll scribe	Mages' district	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-2+2 cascadePass:subsumed_after_cascade:-1+3
+dp-metropolis-98	5426	Fish market|Charcoal burner|Sawmill (commercial)		assembleInstitutions:selected:-3+0 cascadePass:cascaded:-1+0 cascadePass:subsumed_after_cascade:-1+0
+dp-metropolis-117	6857	Fish market|Charcoal burner|Sawmill (commercial)|Mages' district|Scroll scribe	Alchemist quarter|Wizard's tower|Elder Grove Council|Enchanter's shop	assembleInstitutions:selected:-3+0 cascadePass:cascaded:-3+2 cascadePass:subsumed_after_cascade:-3+0
+dp-metropolis-143	4959	Fish market|Charcoal burner|Great library|Front businesses	Printing house|Veteran's lodge|Enchanter's shop	assembleInstitutions:selected:-2+0 cascadePass:cascaded:-3+4 cascadePass:subsumed_after_cascade:-2+2

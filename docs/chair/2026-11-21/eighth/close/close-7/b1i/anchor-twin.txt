@@ -1,0 +1,6 @@
+soak4 Portaminus desert  moved; lost Fish market|Toll bridge|Tailor's guild|Multiple adventurers' guilds gained Post relay station|Cooper|Fuller|Front businesses|Hireling hall
+soak7 Haifeng desert  moved; lost Hunter's lodge gained 
+soak21 Shangou desert  moved; lost Fish market|Cooper|Potter gained Coaching inn|Public bathhouse|Dyer
+r2s-under_siege-town-1 Fengling desert road moved; lost Fish market|Hunter's lodge|Coaching inn|Cobbler's guild gained Potter
+r2s-famine-city-1 Skaldhammer desert crossroads moved; lost Fish market|Toll bridge|Weavers/Textile workers|Chandler|Smuggling network gained Dyer|Brickmaker|Citadel|Front businesses|Contract killer
+unmoved: soak0(mountain) soak1(plains) soak2(riverside) soak3(riverside) soak5(plains) soak6(riverside) soak8(coastal) soak9(forest) soak10(riverside) soak11(mountain) soak12(mountain) soak13(hills) soak14(riverside) soak15(mountain) soak16(hills) soak17(mountain) soak18(hills) soak19(plains) soak20(riverside) soak22(coastal) soak23(mountain) soak24(coastal) soak25(hills) soak26(riverside) soak27(coastal) soak28(plains) soak29(hills)

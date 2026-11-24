@@ -1,0 +1,25 @@
+rows 525 moved 24
+city|germanic|desert|road|civilized|golden-master-v3
+city|latin|desert|road|civilized|golden-master-v3
+city|celtic|desert|road|civilized|golden-master-v3
+city|arabic|desert|road|civilized|golden-master-v3
+city|norse|desert|road|civilized|golden-master-v3
+city|slavic|desert|road|civilized|golden-master-v3
+city|east_asian|desert|road|civilized|golden-master-v3
+city|mesoamerican|desert|road|civilized|golden-master-v3
+city|south_asian|desert|road|civilized|golden-master-v3
+city|steppe|desert|road|civilized|golden-master-v3
+city|greek|desert|road|civilized|golden-master-v3
+city|mediterranean|desert|road|civilized|golden-master-v3
+metropolis|germanic|desert|road|civilized|golden-master-v3
+metropolis|latin|desert|road|civilized|golden-master-v3
+metropolis|celtic|desert|road|civilized|golden-master-v3
+metropolis|arabic|desert|road|civilized|golden-master-v3
+metropolis|norse|desert|road|civilized|golden-master-v3
+metropolis|slavic|desert|road|civilized|golden-master-v3
+metropolis|east_asian|desert|road|civilized|golden-master-v3
+metropolis|mesoamerican|desert|road|civilized|golden-master-v3
+metropolis|south_asian|desert|road|civilized|golden-master-v3
+metropolis|steppe|desert|road|civilized|golden-master-v3
+metropolis|greek|desert|road|civilized|golden-master-v3
+metropolis|mediterranean|desert|road|civilized|golden-master-v3
