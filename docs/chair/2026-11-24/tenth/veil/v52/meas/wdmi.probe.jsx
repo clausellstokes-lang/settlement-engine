@@ -202,7 +202,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
     let plantText = null;
     if (PLANT && !out.plant.done) {
       const hh = arr(doc.institutions).find((h) => isRec(h) && E.isHideableHouse(h) && typeof h.name === 'string' && h.name);
-      if (hh) { doc = clone(doc); plantText = `${hh.name} Master`; for (const n of arr(doc.npcs)) if (isRec(n)) n.role = plantText; out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; }
+      if (hh) { doc = clone(doc); plantText = `${hh.name} Master`; for (const n of arr(doc.npcs)) if (isRec(n)) n.role = plantText; for (const r of arr(doc.relationships)) if (isRec(r)) { r.npc1Role = plantText; r.npc2Role = plantText; } // VEIL-52 23:1x: the legacy class lives in relationships[].npc1Role/npc2Role too (the first plant, npcs[].role alone, was served nowhere) out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; }
     }
     const hidden = arr(doc.institutions).filter((h) => isRec(h) && E.isHideableHouse(h)).map((h) => h.name);
     const place = { seed: b.seed, size: b.size, hidden: hidden.length, hidingReads: 0 };

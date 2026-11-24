@@ -111,7 +111,7 @@ it(`VEIL-52 snap (${FORM})`, async () => {
   const uid = (a, b) => `abcd52${String(SHARD[0]).padStart(2, '0')}-${String(a).padStart(4, '0')}-0000-0000-${String(b).padStart(12, '0')}`;
 
   const out = { meta: { form: FORM, shard: SHARD, g: G, ticks: TICKS, plant: PLANT, src: SRC, started: new Date(T0).toISOString() }, campaigns: [], reads: 0, noWorld: {},
-    hits: {}, publishPath: {}, worldBytes: [], sectionsOn: {}, plant: { done: false, campaign: null, expect: {}, caught: {} }, pulseErrors: [], personSubstrOnly: {} };
+    hits: {}, publishPath: {}, worldBytes: [], sectionsOn: {}, plant: { done: false, campaign: null, expect: {}, caught: {}, refused: {} }, pulseErrors: [], personSubstrOnly: {}, sectionsRefused: {} };
   const bump = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
   const WRE = new Map(); const wordRe = (n) => { if (!WRE.has(n)) WRE.set(n, new RegExp(`(?<![\\p{L}\\p{N}])${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\p{N}])`, 'u')); return WRE.get(n); };
   const walk = (v, p, strs, keys, objs) => {
@@ -172,6 +172,20 @@ it(`VEIL-52 snap (${FORM})`, async () => {
     await db.query(`insert into public.saved_maps (id, user_id, name, map_data, unlisted_slug, visibility, gallery_importable) values ($1, $2, 'm', $3, $4, 'unlisted', true)`,
       [mid, OWNER, JSON.stringify({ campaign: { settlementIds: ids } }), `${ms}l`]);
     // the person plant needs a withheld person: written after the first read finds one (below), by a second publish
+    // VEIL-52 23:1x (the first plant run: publish_map and 091's trigger REFUSE a snapshot carrying a denied key, e.g. the
+    // section `chronicle` (089's /.*chronicle.*/)): the stored artifact is what the server's own check accepts: each section
+    // alone through _gallery_world_snapshot_is_safe (the net-current definition), the refused ones dropped and recorded; each
+    // plant part kept only if the planted snapshot still passes, else recorded as REFUSED BY THE SERVER (not blind).
+    const safe = async (v) => (await db.query('select public._gallery_world_snapshot_is_safe($1::jsonb) ok', [JSON.stringify(v)])).rows[0].ok;
+    for (const k of SECTIONS) if (k !== 'dashboard' && snapshot[k] != null && !(await safe({ schemaVersion: 1, [k]: snapshot[k] }))) { delete snapshot[k]; bump(out.sectionsRefused, k); }
+    if (snapshot.dashboard != null) {
+      const plain = { ...snapshot.dashboard }; delete plain.plantCopy; plain.realmArcLines = arr(plain.realmArcLines).filter((l) => !(plantHouse && l === `${plantHouse} holds the docks`));
+      if (!(await safe({ schemaVersion: 1, dashboard: plain }))) { delete snapshot.dashboard; bump(out.sectionsRefused, 'dashboard'); }
+      else if (plantHouse) {
+        if (!(await safe({ schemaVersion: 1, dashboard: { ...plain, plantCopy: snapshot.dashboard.plantCopy } }))) { delete snapshot.dashboard.plantCopy; out.plant.refused.copy = true; }
+        if (!(await safe({ schemaVersion: 1, dashboard: snapshot.dashboard }))) { snapshot.dashboard = plain; out.plant.refused.name = true; }
+      }
+    }
     const publish = async (snap) => {
       await db.query(`select set_config('test.uid', $1, false)`, [OWNER]);
       try {
@@ -225,8 +239,10 @@ it(`VEIL-52 snap (${FORM})`, async () => {
         if (PLANT && out.plant.campaign === campaign.id && !plantPerson) {
           plantPerson = [...persons.entries()].find(([, k]) => k === 'person-withheld')?.[0] || null;
           if (plantPerson) {
-            snapshot = clone(snapshot); snapshot.dashboard.realmArcLines = [...snapshot.dashboard.realmArcLines, `${plantPerson} was seen`];
-            slug = await publish(snapshot); out.plant.person = plantPerson; j -= 1; continue; // re-read this setting with the person planted
+            const withP = clone(snapshot); withP.dashboard = isRec(withP.dashboard) ? withP.dashboard : {}; withP.dashboard.realmArcLines = [...arr(withP.dashboard.realmArcLines), `${plantPerson} was seen`];
+            out.plant.person = plantPerson;
+            if (await safe(withP)) { snapshot = withP; slug = await publish(snapshot); j -= 1; continue; } // re-read this setting with the person planted
+            out.plant.refused.person = true;
           }
         }
         const worlds = [['gallery_map', { world: gm?.world, realmArcSummary: gm?.realmArcSummary }], ['import_map', { world: im?.world, realmArcSummary: im?.realmArcSummary }],
