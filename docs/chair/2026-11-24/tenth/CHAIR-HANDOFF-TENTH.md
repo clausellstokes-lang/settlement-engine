@@ -769,3 +769,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   client; unmarked and marked rows; (a) only), ahead of the import pass. THE OWNER IS TOLD THE REFINEMENT at once: two
   sentences of the chair's (A6's row, and "protects new pages only") were wrong as written. THE CHAIR'S LESSON: when it
   reads a probe it reads WHICH CHAIN AND WHICH TREE the run stands on, before the loop.
+- 2026-11-24 23:27 UTC · T57 · UNIT 1's 212 HUNK READ BY THE CHAIR: CLEAR; THE HOURLY MARKS.
+  VEIL-51's "TIP? STORED-PROSE ced3b1de7" (its file `v51/TIP-STORED-PROSE.md` at 1232440c3 on `lane/veil-51-2026-11-24`;
+  the code is VEIL-41's `lane/veil-41-2026-11-23-c2-wip`, ced3b1de7 over the tip b58abc48b, 14 files). THE CHAIR READ THE
+  212 HUNK WHOLE (+36): the header's (36); in `_gallery_veil_withhold_always` 24 registry rows and one statement,
+  `s := s - 'publicProse';`, last before `return s`, behind the function's own object guard; both callers in
+  `_gallery_veil` (the unmarked body and the marked) pass through it; no function added, removed or re-signed; revoked
+  by name; the twin `galleryWithholdAlways.js :: withholdAlways` ends on `delete s.publicProse`. CLEAR. ONE CONDITION
+  BEFORE VEIL-55's GRANT, VEIL-51's: the unit's own lint red (proseDrawnAnchors on `galleryVeilHandRows`' literal
+  anchor) cured on a commit above ced3b1de7. The grant, the diff's one read, the slice re-run and the merge order are
+  VEIL-55's. (The chair's two lines on this were labelled 23:32 UTC and were sent at about 23:26: a label not read from
+  the clock; the rule stands.)
+  MARKS at 23:27: VEIL-55 340,100 (47 minutes old); VEIL-53 426,854; VEIL-52 372,460 as at 22:45 (one turn open since
+  22:46; its container restarted once, its queue relaunched); CLOSE-7 and VEIL-51 not re-read (both far below, both
+  after a compaction). EVERY RECORD STILL READS `allowed_warning`. POINT 115's helper is still in step f (82 test files
+  reported by 23:26; the merge f3b45352eb and the door commit a3721fc83f stand in the line's worktree, unpushed).
