@@ -34,6 +34,11 @@ const eventsOf = (s) => {
   const ev = [...(Array.isArray(h.events) ? h.events : []), ...(Array.isArray(h.historicalEvents) ? h.historicalEvents : [])];
   return ev.map((e) => (isObj(e) ? String(e.name ?? e.title ?? e.event ?? e.description ?? JSON.stringify(e)) : String(e)));
 };
+/** the same events keyed by when they happened (`yearsAgo`) and their kind, a key no rewording moves */
+const eventYearsOf = (s) => {
+  const h = isObj(s?.history) ? s.history : {};
+  return (Array.isArray(h.historicalEvents) ? h.historicalEvents : []).map((e) => (isObj(e) ? `${e.yearsAgo ?? '?'}y ${e.type || ''}` : '?'));
+};
 const holdings = (s) => ({
   houses: names(s?.institutions, 'name'),
   people: names(s?.npcs, 'name'),
@@ -41,6 +46,7 @@ const holdings = (s) => ({
   powers: names(s?.powerStructure?.factions, 'faction'),
   government: String(s?.powerStructure?.governingName ?? s?.powerStructure?.government ?? ''),
   events: eventsOf(s),
+  eventYears: eventYearsOf(s),
 });
 
 test('master births, saved, loaded and re-derived', async () => {
@@ -83,7 +89,7 @@ test('master births, saved, loaded and re-derived', async () => {
     const a = holdings(row.data); const b = after ? holdings(after) : null;
     rows.push({ seed, size, err, neighbour: !!row.data?.neighborRelationship?.name, seedCarried: row.data?._seed ?? null, configCarried: !!row.config,
       houses: b ? diffBag(a.houses, b.houses) : null, people: b ? diffBag(a.people, b.people) : null, roles: b ? diffBag(a.roles, b.roles) : null,
-      powers: b ? diffBag(a.powers, b.powers) : null, government: b ? [a.government, b.government] : null, events: b ? diffBag(a.events, b.events) : null,
+      powers: b ? diffBag(a.powers, b.powers) : null, government: b ? [a.government, b.government] : null, events: b ? diffBag(a.events, b.events) : null, eventYears: b ? diffBag(a.eventYears, b.eventYears) : null,
       counts: { housesBefore: a.houses.length, housesAfter: b?.houses.length ?? null, peopleBefore: a.people.length, peopleAfter: b?.people.length ?? null,
         powersBefore: a.powers.length, powersAfter: b?.powers.length ?? null, eventsBefore: a.events.length, eventsAfter: b?.events.length ?? null } });
   }
