@@ -20,8 +20,10 @@ artefact of the landing machine. **Landing is not a release** (section 0 below).
 - **A second open item for the paused share veil, nothing built (the chair's ruling R24-C1, 2026-11-24):** where a place's
   ruling hall has been bought by the underworld, its government is stored under a name that says so: "Corrupt Council" (a town),
   "Corrupt City Council" (a city), "Shadow Senate" (a metropolis): 39 of 900 places born as a visitor gets them (18 towns, 14
-  cities, 7 metropolises). Before the first deploy the NAME is cured: those forms print as "Town Council", "City Council" and
-  "Senate", and that the hall is bought is said only in the game master's own block. What the copy shared with players still
+  cities, 7 metropolises). Before the first deploy the NAME is cured at birth by new names: a newly made place's bought hall is
+  stored and printed as "Board of Aldermen" (a town), "Council of Syndics" (a city) or "Senate" (a metropolis), new names rather
+  than the clean forms' own, and nothing else in the place moves; that the hall is bought is said only in the game master's own
+  block. Places already saved keep the old names until you rule otherwise (a rename of saved places is listed for you). What the copy shared with players still
   carries that says the hall is bought (the form's description, "The governing body is systematically compromised; offices are
   sold and justice is purchasable.", and any composed sentence built on it) belongs to the paused share veil.
 
@@ -83,6 +85,8 @@ The village is made by the real engine, so it changes with the rules. It was re-
   thorp's 269).
 
 ## 5. The goldens: the stored "this is what the engine makes" records (TWO SIGNINGS, plus one budget)
+**YOU ARE NOT ASKED TO SIGN YET:** the goldens (this section) and the sizes (section 6) are signed ONCE, after the five cures and
+the troubles rule have landed, since each of those moves births or bytes again.
 Only you can re-sign one: the tool refuses unless your signed shift record (a short file under `docs/shift-records/`) exists.
 Each set stays red, by name, until you sign: never a silent pass.
 - **Signing 1, the OLD set (`generator-golden-master`)**, re-signed. It births places the old way, so switching the rules on does
