@@ -1,0 +1,6 @@
+1	Healing @ Priest (resident)
+1	Herbal remedies @ Apothecary (established)
+1	Basic wound care @ Midwife
+1	Birth assistance @ Midwife
+1	Herbal remedies @ Apothecary district
+1	Specialist compounds @ Apothecary district

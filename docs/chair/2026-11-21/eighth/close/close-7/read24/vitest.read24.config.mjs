@@ -1,0 +1,2 @@
+import react from '/home/user/wt/lit/node_modules/@vitejs/plugin-react/dist/index.js';
+export default { root: '/home/user/wt/lit', plugins: [react()], test: { environment: 'node', include: ['/home/user/settlement-engine/docs/chair/2026-11-21/eighth/close/close-7/read24/measure.census.jsx'], testTimeout: 7200000, pool: 'forks', fileParallelism: false, server: { deps: { inline: [/@testing-library\//] } } } };

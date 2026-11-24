@@ -1,0 +1,24 @@
+row	thorp	hamlet	village	town	city	metropolis	all 900
+A1 line (H7)	3	4	2	3	1	0	13
+A1 any no-healer line	31	48	9	12	7	0	107
+A1 resident healing-bucket entry	150	150	150	150	150	150	900
+A1 resident sick-care service	0	0	82	92	145	150	469
+A1 line + resident sick-care	0	0	1	1	1	0	3
+A1 line + resident healing-bucket	3	4	2	3	1	0	13
+A2 rich + short food	0	0	0	0	0	0	0
+B1(i) desert	0	0	0	0	0	0	0
+B1(i) desert + Fish market	0	0	0	0	0	0	0
+B1(i) desert + Sawmill	0	0	0	0	0	0	0
+B1(i) desert + Hunter's lodge	0	0	0	0	0	0	0
+B1(i) desert + any of the three	0	0	0	0	0	0	0
+B1(ii) furrows + grain bought in	0	0	0	0	1	0	1
+B1(ii) furrows	3	4	11	16	21	32	87
+B1(ii) grain bought in	0	0	0	7	4	3	14
+C1 owner page	0	0	0	0	0	0	0
+C1 owner first screen	0	0	0	0	0	0	0
+C1 owner sentence subject	0	0	0	0	0	0	0
+C1 governing form Corrupt Council (record)	0	0	0	0	0	0	0
+C1 player projection: governing name	0	0	0	0	0	0	0
+C1 player projection: publicProse text	0	0	0	0	0	0	0
+C1 player projection: anywhere	0	0	0	0	0	0	0
+D2 guild quarrel	0	2	1	54	76	72	205

@@ -1,0 +1,2 @@
+A1 dp-village-83: sickHouse=false healerCount=0 careCount=5 healingBand=strained ratio=0.95 resident care=Basic wound care@Midwife; Birth assistance@Midwife; Healing@Priest (resident)
+A1 dp-metropolis-114: sickHouse=false healerCount=1 careCount=5 healingBand=strained ratio=0.88 resident care=Basic wound care@Midwife; Birth assistance@Midwife; Herbal remedies@Apothecary district

@@ -1,0 +1,2 @@
+control: 900 births; page head (name, population) differs from the direct record in 0
+

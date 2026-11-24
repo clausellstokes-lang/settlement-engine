@@ -5,7 +5,7 @@ account, unreachable). Its law: `docs/chair/2026-11-24/tenth/prompts/START-CLOSE
 COMMON-EIGHTH 4-15, COMMON-RULES, and START-CLOSE-6's N3, N5, N6, N7, N8 read for CLOSE-7). A successor reads that file, then
 this section.
 
-## 0. WHERE THE LANE STANDS (updated 2026-11-24 15:24 UTC, read from date -u)
+## 0. WHERE THE LANE STANDS (updated 2026-11-24 15:51 UTC)
 STOOD ON: documents `lane/close-7-2026-11-24` cut at fba2e8c2b (CLOSE-6's final hand-back); THE LIT TREE a detached worktree
 `/home/user/wt/lit` at d447ee31e (`origin/lane/close-6-2026-11-23-flip`; node_modules and `.husky/_` linked; read and run,
 never committed). Box: `npm ci` exit 0; ledger ref `review-fixes-2026-07-08` at 235efce1a.
@@ -19,7 +19,11 @@ THE CHAIR 15:23: the owner's word "I leave all judgement to you" / "Fix those fi
 before the first deploy, each cut to the measure, after the chair's ruling. Landing phase 1 clean (merge 67fcf51de); phase 2 (whole
 suite, ~3 h) running: its unlisted reds come to me. UNIT (2) section 6 FILLED from the chair's five figures; section 0's "the line
 carries point 113" waits for the chair's word that it landed; the chair reads the file whole before the owner.
-NEXT: READ-24's report -> one message to the chair.
+READ-24 DONE (builder ended ~15:52 UTC, 308k tokens): report `close-7/reports/READ-24.md`, scripts and seeds `close-7/read24/`
+(texts and records in the scratchpad, 2.1 GB, not kept). The census 900 (birthConfig({settType}): all plains, road, priorities 50)
+CANNOT hold A2, B1(i), C1; the builder also measured a VISITOR 900 (same seeds, plan-lit.json's config per size). Seat spot-check:
+dp-village-103 (census) prints the healer line and Priest (resident); 54 census towns print the guild quarrel. SENT to the chair;
+its RULING PENDING: NOTHING BUILT. NEXT: the ruling; then one builder per cure on the line's tip the chair names.
 
 ## 1. RULINGS IN FORCE
 1. No pull request, ever; push only `lane/close-7-2026-11-24*` by the local branch's own name, `git ls-remote` first, only when
