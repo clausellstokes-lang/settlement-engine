@@ -6,7 +6,7 @@
 // member). Columns a chain lacks are left out (master's chain has every one used here).
 // TIMES each door on the hand marker, Reveal off, rows of each document: the gallery read (get_gallery_dossier), the link
 // (get_unlisted_dossier), the import (import_gallery_dossier, as the reader 22222222-...), the map member (get_gallery_map);
-// three passes over the 140 documents (rows=840) or 60 reads of the one (rows=1); per door: median, p90, mean ms.
+// one pass over the 140 documents (rows=840) or 30 reads of the one (rows=1); per door: median, p90, mean ms.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 const pg = (await import('/var/tmp/v18/pgmod/node_modules/pg/lib/index.js')).default;
 const [DB, DIR, ROWS, OUT] = process.argv.slice(2);
@@ -46,8 +46,8 @@ const DOORS = {
 };
 const t = {}; const empty = {};
 for (const door of Object.keys(DOORS)) t[door] = [];
-const passes = ROWS === '1' ? 60 : 3;
-for (let p = 0; p < passes; p += 1) for (const sl of handSlug) for (const [door, f] of Object.entries(DOORS)) {
+const passes = 1; // one pass: rows=840 is 140 reads a door (three passes outran a 30-minute window on the tip: 22:06, killed)
+for (let p = 0; p < passes; p += 1) for (const sl of (ROWS === '1' ? Array(30).fill(handSlug[0]) : handSlug)) for (const [door, f] of Object.entries(DOORS)) {
   const t0 = process.hrtime.bigint(); const r = await f(sl); const ms = Number(process.hrtime.bigint() - t0) / 1e6;
   t[door].push(ms); if (!r.rows[0]?.d) empty[door] = (empty[door] || 0) + 1;
 }

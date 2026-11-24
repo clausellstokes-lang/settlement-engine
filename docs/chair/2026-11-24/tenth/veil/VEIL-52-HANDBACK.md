@@ -7,10 +7,15 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; current at every push)
 
-STATE (21:35 UTC 2026-11-24): unit (0) sent to VEIL-50 at 21:25. Unit (1), THE THREE MEASURES, being set up. NOTHING built, nothing merged;
-no SQL before VEIL-50's "R4-IDS MERGED <commit>".
+STATE (22:07 UTC 2026-11-24): unit (0) sent 21:25. VEIL-50 read both wd copies whole (21:4x) and asked one change each: made at
+c1b3ecf37. THE TOOL's 30-MINUTE BACKGROUND WINDOW CUT n115 (at 325 of 420 tip rounds), q52b and q52 at 22:06: every run now goes
+through ONE DETACHED RUNNER, `v52/run52.sh` (setsid nohup; log `/var/tmp/v52/log/run52.log`), started 22:06:49: n115 (one pass),
+unit (2)'s a,b,c,tpl,etip,ejoin, the two plants, then wdmi and snap on the three sets. NOTHING merged; no SQL before "R4-IDS MERGED".
 
-BRANCHES: `lane/veil-52-2026-11-24` (documents and run scripts; cut at b58abc48b, the lane's tip "PIN-3 MERGED"). No -wip branch yet.
+BRANCHES: `lane/veil-52-2026-11-24` (documents and run scripts; cut at b58abc48b, the lane's tip "PIN-3 MERGED").
+`lane/veil-52-2026-11-24-mcsql-wip` 75a410f1b (pushed): VEIL-44's door tip db9fddc7d + its MAPCOVERT-GREEN-SQL d56bc1ab6, merged clean;
+212 sha256 c6679978…, rollback 62a7e609… (as MCSQL-HANDBACK records); the rollback's get_gallery_map = 211 :1392-:1492 VERBATIM
+(diffed, CONFIRMED). Worktree `/home/user/wt/mcsql`. Its proofs: `v52/q52b.sh`.
 
 THE MACHINE (this container; scratch, never pushed): PG16 `/var/tmp/v18pg`, socket `/var/tmp/rv7`; `make-instruments.sh` on the tip worktree
 (VEIL-50's recipe; log `/var/tmp/v52/log/m0.log`, exits `/var/tmp/v52/out/seated/exits.txt`): template `v28tpl`. Worktrees (detached):
