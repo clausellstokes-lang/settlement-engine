@@ -44,5 +44,11 @@ explicit paths, and you NEVER push. You apply nothing to any database; every dat
 `grants-1: migration 211 part D (the columns of settlements and saved_maps the server owns) and its column test`, ending with
 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1QhZzoXHC1uiNEomy3`.
 
+## The lighting census (a new test file moves its file count)
+After your commits, on a CLEAN tree (commit first), re-take the census by its own door and commit its baseline alone:
+`LIGHTING_CENSUS_REFREEZE='GRANTS-1-<C or D>' LIGHTING_CENSUS_NOTE='<one new pglite test file>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`
+(it exits non-zero BY DESIGN; then run the walker plainly and see it green). Commit `tests/lint/.lighting-census-baseline.json` alone.
+`tests/security/pgliteHookTimeoutRatchet.test.js` already lists `bootHostedChain`; a new test that boots through it needs nothing there.
+
 ## Your report (at most 200 words)
 The commit hash; red and green by test name and count; every change to the seat's drafts; the `tests/lint` count and its reds by name.

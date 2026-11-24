@@ -86,12 +86,13 @@ const FLOOR_MS = 60_000;
  * A hook whose callback text matches this is standing up (or first-exec-booting)
  * PGlite. The alternation carries the LIVE boot-helper roster (2026-07-27 amendment):
  * makeDb (the common cross-file harness name), makeCreditLedgerDb
- * (creditLedgerHarness.js), and the local baseDb/buildDb/supportDb helpers. Add every
+ * (creditLedgerHarness.js), bootHostedChain (hostedDefaultHarness.js, GRANTS-1), and
+ * the local baseDb/buildDb/supportDb helpers. Add every
  * NEW harness name here when introducing one — the exec-aware rule in unguardedHooks
  * catches the common miss (a hook that also execs directly), but a pure
  * `await newHelper()` with no in-hook exec is invisible until listed.
  */
-const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb|boot)\s*\(/;
+const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb|bootHostedChain|boot)\s*\(/;
 
 /** A hook whose callback touches the db at all — the lazy-boot payment surface. */
 const EXEC_RE = /\.exec\s*\(|\.query\s*\(/;
