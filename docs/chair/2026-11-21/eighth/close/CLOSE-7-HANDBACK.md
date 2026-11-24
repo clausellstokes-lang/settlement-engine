@@ -9,6 +9,33 @@ this section.
 A successor reads START-CLOSE-7 (on `lane/chair-2026-11-08`), then this section, and needs nothing else to act. Context
 summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>": say so to the chair; it seats a successor here.
 
+### 0.0 NOW (22:49 UTC): THE ALLOWANCE WARNING. The chair, 22:48: a stop may come without notice; it resets 2026-12-01 15:00 UTC.
+The chair's standing orders:
+- Push at every result, and never less often than every 45 minutes.
+- Keep this section current at each push.
+- Start no new builder, and no run over 20 minutes, unless its partial results go to a pushed file.
+- FINISH THE UNIT IN HAND FIRST, IN THIS ORDER: A2 with the mirror, to its merge; MASTER-REDERIVE's table to the chair (DONE,
+  sent 22:4x); then the corrections-law leaf.
+
+Merged on `lane/close-7-2026-11-24-cures`: A1 only (bb457f3bf).
+
+Built and not merged:
+- A2: -a2-wip c92a301fa (pushed). Two fixes are in flight by chain one in /home/user/wt/a2.
+- B1(i): -b1i-wip 9d0f85e01 (pushed). It waits on the leaf.
+
+Running: chain one (agent a4c1ad5101be44ef0), A2's two fixes. Its addendum goes at the end of `close-7/reports/A2.md`.
+
+Owed by the chair: whether to merge A2 and list the slot rise, or to give new price-grievance words first; and the owner's
+ruling on MASTER-REDERIVE.
+
+THE NEXT COMMAND, when A2's fixes land:
+`git -C /home/user/wt/a2 log --oneline -3; git -C /home/user/wt/a2 diff c92a301fa..HEAD --stat`
+Then read the diff once and tail both gate logs. Then:
+`cd /home/user/wt/cures && git merge --no-ff lane/close-7-2026-11-24-a2-wip -m "Merge R24-A2 (CLOSE-7): ..."`
+Then the guarded push of -a2-wip and -cures, and the A2 line to the chair. Then the MIRROR unit on chain one (R24d's words, in
+section 0.2), cut at d447ee31e on `-mirror-wip`; or onto the a2 tip, if the mirror needs fareBandOf: it does, so cut it from
+-a2-wip's tip.
+
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
   Read and run, never committed.
