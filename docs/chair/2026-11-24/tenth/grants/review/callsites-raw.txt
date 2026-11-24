@@ -1,0 +1,698 @@
+== HEAD
+HEAD:src/components/AdminPanel.jsx:264:            report_client_error_alert, 167). Both live in ONE Section (rather than
+HEAD:src/components/account/AccountTickets.jsx:9: *     link picker (settlement id). Calls account-actions `create_ticket`.
+HEAD:src/components/account/AccountTickets.jsx:150:        action: 'create_ticket',
+HEAD:src/components/admin/AdminBroadcastPanel.jsx:95:      const data = await callAdmin({ action: 'list_operator_broadcasts' });
+HEAD:src/components/admin/AdminClientErrorsPanel.jsx:5: * fixed migration-167 SECURITY DEFINER reads (report_client_errors +
+HEAD:src/components/admin/AdminClientErrorsPanel.jsx:6: * report_client_error_alert). The privilege gate is server-side in admin-actions;
+HEAD:src/components/admin/AdminUsersPanel.jsx:407:                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+HEAD:src/components/admin/AdminUsersPanel.jsx:415:                  { action: 'add_internal_note', userId: id, note },
+HEAD:src/components/admin/AdminUsersPanel.jsx:434:                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+HEAD:src/components/admin/AdminUsersPanel.jsx:443:                  { action: 'add_internal_note', userId: id, note },
+HEAD:src/components/admin/AdminUsersPanel.jsx:468:                buildBody: (typedTargetId) => ({ action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action', confirm: { typedTargetId } }),
+HEAD:src/components/admin/AdminUsersPanel.jsx:477:                buildBody: (typedTargetId) => ({ action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', confirm: { typedTargetId } }),
+HEAD:src/components/admin/SupportQueuePanel.jsx:10: *   • Claim it (`claim_ticket`), transition status (`set_ticket_status`), post a
+HEAD:src/components/admin/SupportQueuePanel.jsx:11: *     user-visible reply OR an internal note (`post_ticket_reply`), and link an
+HEAD:src/components/admin/SupportQueuePanel.jsx:12: *     FAQ article when answering (`link_ticket_faq`).
+HEAD:src/components/admin/SupportQueuePanel.jsx:32:// wire value for set_ticket_status); only the visible text is prettified.
+HEAD:src/components/admin/SupportQueuePanel.jsx:49:// value for link_ticket_faq); only the visible text is prettified.
+HEAD:src/components/admin/SupportQueuePanel.jsx:136:        if (body.action === 'set_ticket_status' && body.status) local.status = body.status;
+HEAD:src/components/admin/SupportQueuePanel.jsx:137:        if (body.action === 'link_ticket_faq' && body.faq) local.linked_faq = body.faq;
+HEAD:src/components/admin/SupportQueuePanel.jsx:245:              onClick={() => runAction({ action: 'claim_ticket', ticketId: id }, 'Ticket claimed.')}>
+HEAD:src/components/admin/SupportQueuePanel.jsx:251:              {/* No `reason` rides this call: set_ticket_status (migration 055)
+HEAD:src/components/admin/SupportQueuePanel.jsx:257:                  { action: 'set_ticket_status', ticketId: id, status: e.target.value },
+HEAD:src/components/admin/SupportQueuePanel.jsx:269:                  { action: 'post_ticket_reply', ticketId: id, body, visibility: 'user' },
+HEAD:src/components/admin/SupportQueuePanel.jsx:278:                  { action: 'post_ticket_reply', ticketId: id, body, visibility: 'internal' },
+HEAD:src/components/admin/SupportQueuePanel.jsx:287:                  { action: 'link_ticket_faq', ticketId: id, faq: e.target.value },
+HEAD:src/config/entitlementLadder.js:238: * 023_explicit_models_and_plan_retention.sql (handle_premium_downgrade:
+HEAD:src/domain/ops/aiSpendAlarm.js:18: *   Migration 167's `report_client_error_alert()` returns a { threshold,
+HEAD:src/lib/emailTemplates.js:192:  // (never added to ANON_OK_TEMPLATES). Numbers from report_client_error_alert().
+HEAD:src/lib/stripe.js:36://     `grant_surveyor_entitlement`, the money mirror records `surveyor_start`,
+HEAD:src/lib/stripe.js:38://     cancelled subscription hits `revoke_surveyor_entitlement_by_subscription`.
+HEAD:supabase/functions/_shared/accountDeletionCleanup.ts:352:      "mark_account_deletion_auth_revoked",
+HEAD:supabase/functions/_shared/accountDeletionCleanup.ts:395:      "checkpoint_account_deletion_billing_identity",
+HEAD:supabase/functions/_shared/accountDeletionCleanup.ts:792:      "claim_account_deletion_cleanup_jobs",
+HEAD:supabase/functions/_shared/autoReload.ts:16: *   2. claim_auto_reload_attempt(user, unit_amount, 25) — the atomic claim (158):
+HEAD:supabase/functions/_shared/autoReload.ts:179:    const { data, error } = await admin.rpc('claim_auto_reload_payment_intent', {
+HEAD:supabase/functions/_shared/autoReload.ts:242:      'mark_low_balance_notified',
+HEAD:supabase/functions/_shared/autoReload.ts:323:      'claim_auto_reload_attempt',
+HEAD:supabase/functions/_shared/paymentRefundRecovery.ts:6: * record_payment_refund_obligation remains the single lifecycle status writer:
+HEAD:supabase/functions/_shared/paymentRefundRecovery.ts:260:    "record_payment_refund_obligation",
+HEAD:supabase/functions/_shared/rateLimit.ts:118:// (consume_ai_generate_rate_limit, 079) which is deliberately FAIL-OPEN there — a
+HEAD:supabase/functions/_shared/referralEmails.ts:4: * Sent DIRECTLY from the stripe-webhook after grant_referral claims a
+HEAD:supabase/functions/_shared/twoKey.ts:42:  "set_account_disabled", // disable / enable an account
+HEAD:supabase/functions/_shared/twoKey.ts:43:  "set_account_banned", // ban / unban an account
+HEAD:supabase/functions/_shared/twoKey.ts:86: * non-destructive WRITES too, e.g. issue_warning — accurate name, same contract.)
+HEAD:supabase/functions/_shared/twoKey.ts:114:  "issue_warning",
+HEAD:supabase/functions/_shared/twoKey.ts:115:  "add_internal_note",
+HEAD:supabase/functions/_shared/twoKey.ts:125:  "list_operator_broadcasts",
+HEAD:supabase/functions/_shared/twoKey.ts:129:  "claim_ticket",
+HEAD:supabase/functions/_shared/twoKey.ts:130:  "set_ticket_status",
+HEAD:supabase/functions/_shared/twoKey.ts:131:  "post_ticket_reply",
+HEAD:supabase/functions/_shared/twoKey.ts:132:  "link_ticket_faq",
+HEAD:supabase/functions/account-actions/index.ts:67:// Support content is user free text on an authed, MAILER-BACKED path: create_ticket
+HEAD:supabase/functions/account-actions/index.ts:79:// Per-user ceiling on support WRITES (create_ticket + reply_ticket share one bucket,
+HEAD:supabase/functions/account-actions/index.ts:241:    // below); "post_ticket_reply" is the admin-actions name and never reaches this
+HEAD:supabase/functions/account-actions/index.ts:243:    const TICKET_WRITE_ACTIONS = new Set(["create_ticket", "reply_ticket"]);
+HEAD:supabase/functions/account-actions/index.ts:266:      // ── A5: create_ticket — the CALLER files their OWN ticket. The user_id is
+HEAD:supabase/functions/account-actions/index.ts:269:      case "create_ticket": {
+HEAD:supabase/functions/account-actions/index.ts:285:        const { data, error } = await adminClient.rpc("create_ticket", {
+HEAD:supabase/functions/account-actions/index.ts:342:        const { data, error } = await adminClient.rpc("post_ticket_reply", {
+HEAD:supabase/functions/account-actions/index.ts:424:        const { data: claim, error: claimErr } = await adminClient.rpc("claim_dossier_purchase_by_session", {
+HEAD:supabase/functions/account-actions/index.ts:430:          logError("account-actions", callingUser.id, `claim_dossier_purchase_by_session failed: ${claimErr.message}`, { stage: "dossier_claim_rpc" });
+HEAD:supabase/functions/account-actions/index.ts:546:        const { data, error } = await adminClient.rpc("process_account_deletions", {
+HEAD:supabase/functions/account-deletion-worker/index.ts:225:      "process_account_deletions",
+HEAD:supabase/functions/admin-actions/index.ts:11: *   queue/cancel/list_operator_broadcasts — Audited mass-message controls
+HEAD:supabase/functions/admin-actions/index.ts:158:  direct: "create_operator_direct_message",
+HEAD:supabase/functions/admin-actions/index.ts:161:  listBroadcasts: "list_operator_broadcasts",
+HEAD:supabase/functions/admin-actions/index.ts:162:  issueWarning: "issue_warning_with_message",
+HEAD:supabase/functions/admin-actions/index.ts:163:  setBanned: "set_account_banned_with_message",
+HEAD:supabase/functions/admin-actions/index.ts:366:    // row through the SECURITY DEFINER write_audit RPC (the ONLY insert path
+HEAD:supabase/functions/admin-actions/index.ts:379:      const { error: auditErr } = await adminClient.rpc("write_audit", {
+HEAD:supabase/functions/admin-actions/index.ts:515:          "can_email_user",
+HEAD:supabase/functions/admin-actions/index.ts:530:          "get_or_mint_unsubscribe_token",
+HEAD:supabase/functions/admin-actions/index.ts:681:        const { data, error } = await adminClient.rpc("report_client_errors", { p_from: pFrom, p_to: pTo });
+HEAD:supabase/functions/admin-actions/index.ts:683:        const { data: alertData } = await adminClient.rpc("report_client_error_alert");
+HEAD:supabase/functions/admin-actions/index.ts:732:          "list_operational_obligation_attention",
+HEAD:supabase/functions/admin-actions/index.ts:865:        // account ban/disable cases. service_update_profile_metadata re-checks
+HEAD:supabase/functions/admin-actions/index.ts:885:          await adminClient.rpc("service_update_profile_metadata", {
+HEAD:supabase/functions/admin-actions/index.ts:1024:        // account ban/disable cases. The service_set_credits RPC re-checks
+HEAD:supabase/functions/admin-actions/index.ts:1038:          await adminClient.rpc("service_set_credits", {
+HEAD:supabase/functions/admin-actions/index.ts:1125:      case "issue_warning": {
+HEAD:supabase/functions/admin-actions/index.ts:1157:      case "add_internal_note": {
+HEAD:supabase/functions/admin-actions/index.ts:1162:        const { data, error } = await adminClient.rpc("add_internal_note", {
+HEAD:supabase/functions/admin-actions/index.ts:1185:      // ATOMICALLY via service_adjust_credits (migration 103): the RPC locks the
+HEAD:supabase/functions/admin-actions/index.ts:1189:      // and called the ABSOLUTE-set service_set_credits — a concurrent user
+HEAD:supabase/functions/admin-actions/index.ts:1200:          await adminClient.rpc("service_adjust_credits", {
+HEAD:supabase/functions/admin-actions/index.ts:1208:        // service_adjust_credits audits to admin_actions; mirror a row into the
+HEAD:supabase/functions/admin-actions/index.ts:1211:          action: delta > 0 ? "grant_credits" : "refund_credits",
+HEAD:supabase/functions/admin-actions/index.ts:1431:        const { data, error } = await adminClient.rpc("admin_billing_summary", {
+HEAD:supabase/functions/admin-actions/index.ts:1441:      case "set_account_disabled": {
+HEAD:supabase/functions/admin-actions/index.ts:1445:        const { data, error } = await adminClient.rpc("set_account_disabled", {
+HEAD:supabase/functions/admin-actions/index.ts:1463:      case "set_account_banned": {
+HEAD:supabase/functions/admin-actions/index.ts:1509:        const { data, error } = await adminClient.rpc("admin_soft_delete_settlement", {
+HEAD:supabase/functions/admin-actions/index.ts:1521:        const { data, error } = await adminClient.rpc("admin_remove_gallery_item", {
+HEAD:supabase/functions/admin-actions/index.ts:1532:        const { data, error } = await adminClient.rpc("admin_revoke_share_link", {
+HEAD:supabase/functions/admin-actions/index.ts:1546:        const { data, error } = await adminClient.rpc("admin_soft_delete_map", {
+HEAD:supabase/functions/admin-actions/index.ts:1557:        const { data, error } = await adminClient.rpc("admin_remove_gallery_map", {
+HEAD:supabase/functions/admin-actions/index.ts:1572:        const { data, error } = await adminClient.rpc("admin_set_content_banned", {
+HEAD:supabase/functions/admin-actions/index.ts:1581:      // read). The set_gallery_comment_hidden RPC is the sole hidden_* writer; it
+HEAD:supabase/functions/admin-actions/index.ts:1587:        const { error } = await adminClient.rpc("set_gallery_comment_hidden", {
+HEAD:supabase/functions/admin-actions/index.ts:1613:        const { data, error } = await adminClient.rpc("admin_diagnostic_bundle", {
+HEAD:supabase/functions/admin-actions/index.ts:1718:      case "list_operator_broadcasts": {
+HEAD:supabase/functions/admin-actions/index.ts:1757:      case "claim_ticket": {
+HEAD:supabase/functions/admin-actions/index.ts:1761:        const { data, error } = await adminClient.rpc("claim_ticket", {
+HEAD:supabase/functions/admin-actions/index.ts:1770:      case "set_ticket_status": {
+HEAD:supabase/functions/admin-actions/index.ts:1777:        const { data, error } = await adminClient.rpc("set_ticket_status", {
+HEAD:supabase/functions/admin-actions/index.ts:1809:      case "post_ticket_reply": {
+HEAD:supabase/functions/admin-actions/index.ts:1817:        const { data, error } = await adminClient.rpc("post_ticket_reply", {
+HEAD:supabase/functions/admin-actions/index.ts:1839:      case "link_ticket_faq": {
+HEAD:supabase/functions/admin-actions/index.ts:1846:        const { data, error } = await adminClient.rpc("link_ticket_faq", {
+HEAD:supabase/functions/admin-actions/index.ts:1859:        const { error: gErr } = await adminClient.rpc("grant_surveyor_entitlement", {
+HEAD:supabase/functions/admin-actions/index.ts:1875:        const { data: revoked, error: rErr } = await adminClient.rpc("revoke_surveyor_entitlement", {
+HEAD:supabase/functions/ai-analyst/byok.ts:6: * surveyor_byok_get() RPC. It is NEVER logged, never returned to the client, never put
+HEAD:supabase/functions/ai-analyst/byok.ts:28: * the same fact as "no key on file". surveyor_byok_get answers NULL, WITHOUT an error, when
+HEAD:supabase/functions/ai-analyst/byok.ts:126: * @param admin      service-role supabase client (the only role granted surveyor_byok_get)
+HEAD:supabase/functions/ai-analyst/byok.ts:144:    const { data, error } = await admin.rpc('surveyor_byok_get', { p_user: userId, p_provider: provider });
+HEAD:supabase/functions/ai-analyst/byok.ts:147:      if (onLookupError) onLookupError('surveyor_byok_get errored — vault unreadable');
+HEAD:supabase/functions/ai-analyst/byok.ts:188:    if (onLookupError) onLookupError('surveyor_byok_get threw — vault unreadable');
+HEAD:supabase/functions/ai-analyst/creditFlow.ts:37:  /** Per-user/day rate limit (consume_ai_generate_rate_limit); fail-OPEN on error. */
+HEAD:supabase/functions/ai-analyst/creditFlow.ts:43:  /** Refund a captured spend (refund_credits). No-ops when elevated. */
+HEAD:supabase/functions/ai-analyst/index.ts:277:          await supabaseAdmin.rpc('surveyor_byok_set_health', {
+HEAD:supabase/functions/ai-analyst/index.ts:290:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', {
+HEAD:supabase/functions/ai-analyst/index.ts:335:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/ai-analyst/index.ts:395:          const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason });
+HEAD:supabase/functions/ai-analyst/modelResolver.ts:31: * `model_prefs` on the `surveyor_usage_precheck` RPC result, which is DATABASE state. It is
+HEAD:supabase/functions/auth-recovery/index.ts:21: *             pick_recovery_question(email) → { exists, slot, questionId }. The
+HEAD:supabase/functions/auth-recovery/index.ts:29: *             per-account lockout gate (recovery_is_locked, 067; a hard-locked
+HEAD:supabase/functions/auth-recovery/index.ts:31: *             verify_recovery_answer(email, slot, answer). On TRUE, clear the
+HEAD:supabase/functions/auth-recovery/index.ts:45: *     boolean from verify_recovery_answer, never the hash.
+HEAD:supabase/functions/auth-recovery/index.ts:173:// recovery_is_locked / note_recovery_verify_failure) is what bounds lifetime
+HEAD:supabase/functions/auth-recovery/index.ts:223:  const { data, error } = await admin.rpc("recovery_is_locked", { p_email: email });
+HEAD:supabase/functions/auth-recovery/index.ts:225:    console.error("[auth-recovery] recovery_is_locked error:", error.message);
+HEAD:supabase/functions/auth-recovery/index.ts:242:  const { data, error } = await admin.rpc("email_has_active_transfer_lock", { p_email: email });
+HEAD:supabase/functions/auth-recovery/index.ts:244:    console.error("[auth-recovery] email_has_active_transfer_lock error (fail-closed):", error.message);
+HEAD:supabase/functions/auth-recovery/index.ts:320:        const { data, error } = await admin.rpc("pick_recovery_question", { p_email: email });
+HEAD:supabase/functions/auth-recovery/index.ts:322:          console.error("[auth-recovery] pick_recovery_question error:", error.message);
+HEAD:supabase/functions/auth-recovery/index.ts:399:        const { data: ok, error } = await admin.rpc("verify_recovery_answer", {
+HEAD:supabase/functions/auth-recovery/index.ts:405:          console.error("[auth-recovery] verify_recovery_answer error:", error.message);
+HEAD:supabase/functions/auth-recovery/index.ts:420:            const { error: noteErr } = await admin.rpc("note_recovery_verify_failure", {
+HEAD:supabase/functions/auth-recovery/index.ts:424:              console.error("[auth-recovery] note_recovery_verify_failure error:", noteErr.message);
+HEAD:supabase/functions/auth-recovery/index.ts:443:          const { error: clearErr } = await admin.rpc("clear_recovery_lockout_by_email", {
+HEAD:supabase/functions/auth-recovery/index.ts:447:            console.error("[auth-recovery] clear_recovery_lockout_by_email error:", clearErr.message);
+HEAD:supabase/functions/construct-realm/index.ts:234:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+HEAD:supabase/functions/construct-realm/index.ts:240:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_feature: CONSTRUCT_FEATURE });
+HEAD:supabase/functions/construct-realm/index.ts:282:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/construct-realm/index.ts:363:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('construct-realm', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/construct-settlement/index.ts:233:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+HEAD:supabase/functions/construct-settlement/index.ts:239:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_feature: CONSTRUCT_FEATURE });
+HEAD:supabase/functions/construct-settlement/index.ts:281:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/construct-settlement/index.ts:362:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('construct-settlement', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/create-checkout/index.ts:18: * reserve_redemption RPC (guarded atomic seat claim) — the client never
+HEAD:supabase/functions/create-checkout/index.ts:22: * session completes (apply_redemption). A code that fails to reserve
+HEAD:supabase/functions/create-checkout/index.ts:243:// The applies_to/mode gate now lives INSIDE reserve_redemption (migration 112): it
+HEAD:supabase/functions/create-checkout/index.ts:270:    const { data: bound, error: bindErr } = await admin.rpc('bind_redemption_session', {
+HEAD:supabase/functions/create-checkout/index.ts:277:    const { data: reverted, error: revertErr } = await admin.rpc('revert_redemption', {
+HEAD:supabase/functions/create-checkout/index.ts:548:    // reserve_redemption is the authoritative gate (guarded atomic uses_count
+HEAD:supabase/functions/create-checkout/index.ts:562:        // p_mode lets reserve_redemption reject an applies_to/mode mismatch BEFORE it
+HEAD:supabase/functions/create-checkout/index.ts:565:        const { data: reservation, error: reserveErr } = await admin.rpc('reserve_redemption', {
+HEAD:supabase/functions/create-checkout/index.ts:572:            logError('create-checkout', user.id, reserveErr.message, { stage: 'reserve_redemption' });
+HEAD:supabase/functions/create-checkout/index.ts:589:          // credit_amount once the PAID session completes (apply_redemption).
+HEAD:supabase/functions/create-checkout/index.ts:672:      // it: apply_redemption on paid completion, revert_redemption on expiry.
+HEAD:supabase/functions/create-checkout/index.ts:678:      const { data: bound, error: bindErr } = await adminClient().rpc('bind_redemption_session', {
+HEAD:supabase/functions/create-checkout/index.ts:684:          stage: 'bind_redemption_session', redemption_id: redemptionId, session_id: session.id,
+HEAD:supabase/functions/custom-content/index.ts:256:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONTENT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+HEAD:supabase/functions/custom-content/index.ts:263:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONTENT_PROVIDER, p_feature: CONTENT_FEATURE });
+HEAD:supabase/functions/custom-content/index.ts:305:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/custom-content/index.ts:386:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('custom-content', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/founder-transfer/index.ts:13:// SEQUENCING NOTE (JUDGMENT, vetoable): `initiate` opens the case (transfer_case_open)
+HEAD:supabase/functions/founder-transfer/index.ts:143:        await admin.rpc('_log_founder_transfer_event', {
+HEAD:supabase/functions/founder-transfer/index.ts:197:        const { data: opened, error: openErr } = await admin.rpc('transfer_case_open', {
+HEAD:supabase/functions/founder-transfer/index.ts:204:        const { data: ch, error: chErr } = await admin.rpc('issue_transfer_challenge', {
+HEAD:supabase/functions/founder-transfer/index.ts:225:        const { data: v, error: vErr } = await admin.rpc('verify_transfer_challenge', {
+HEAD:supabase/functions/founder-transfer/index.ts:248:        const { data: ch, error: chErr } = await admin.rpc('issue_transfer_challenge', {
+HEAD:supabase/functions/founder-transfer/index.ts:266:        const { data: v, error: vErr } = await admin.rpc('verify_transfer_challenge', {
+HEAD:supabase/functions/founder-transfer/index.ts:273:        const { data: bound, error: bErr } = await admin.rpc('transfer_case_bind_nominee', { p_case: caseId, p_to_user: user.id });
+HEAD:supabase/functions/founder-transfer/index.ts:305:        const { data: marked, error: mErr } = await admin.rpc('transfer_case_mark_awaiting_payment', { p_case: caseId, p_session: session.id });
+HEAD:supabase/functions/founder-transfer/index.ts:342:        const { data: aborted, error: aErr } = await admin.rpc('transfer_case_abort', { p_case: caseId, p_actor: actor, p_reason: 'party_abort' });
+HEAD:supabase/functions/founder-transfer/index.ts:374:        const { data: r, error: rErr } = await admin.rpc('reelect_transfer_payout', { p_case: caseId, p_from: user.id });
+HEAD:supabase/functions/founder-transfer/index.ts:398:        const { data: locked } = await admin.rpc('has_active_transfer_lock', { p_user: user.id });
+HEAD:supabase/functions/founder-transfer/index.ts:415:        const { data: ch, error: chErr } = await admin.rpc('issue_buyback_challenge', { p_user: user.id });
+HEAD:supabase/functions/founder-transfer/index.ts:431:        const { data: v, error: vErr } = await admin.rpc('verify_buyback_challenge', { p_user: user.id, p_code: code });
+HEAD:supabase/functions/founder-transfer/index.ts:436:        const { data: bb, error: bErr } = await admin.rpc('claim_founder_seat_buyback', { p_user: user.id, p_payout_form: payoutForm });
+HEAD:supabase/functions/founder-transfer/index.ts:605:    await admin.rpc('_log_founder_transfer_event', {
+HEAD:supabase/functions/founder-transfer/index.ts:631:      await admin.rpc('transfer_case_finalize', { p_case: c.id });
+HEAD:supabase/functions/founder-transfer/index.ts:644:    await admin.rpc('_log_founder_transfer_event', { p_case: c.id, p_actor: 'system', p_event: 'finalized_edge_leg', p_detail: {} });
+HEAD:supabase/functions/founder-transfer/index.ts:653: *  ex-founder keeps premium via their sub) · restore_premium_settlements for the incoming
+HEAD:supabase/functions/founder-transfer/index.ts:664:    try { await admin.rpc('handle_premium_downgrade', { target_user: c.from_user }); }
+HEAD:supabase/functions/founder-transfer/index.ts:677:  try { await admin.rpc('restore_premium_settlements', { target_user: c.to_user }); }
+HEAD:supabase/functions/founder-transfer/index.ts:703:    try { await admin.rpc('handle_premium_downgrade', { target_user: userId }); }
+HEAD:supabase/functions/founder-transfer/index.ts:765: *  · account_credits → system_grant_credits('seat_payout', keyed by refId) → grant-once.
+HEAD:supabase/functions/founder-transfer/index.ts:776:    const { error } = await admin.rpc('system_grant_credits', {
+HEAD:supabase/functions/founder-transfer/index.ts:802:/** Release due transfer payouts (§6.6). Claims one at a time (claim_due_transfer_payout),
+HEAD:supabase/functions/founder-transfer/index.ts:809:    const { data: claim } = await admin.rpc('claim_due_transfer_payout');
+HEAD:supabase/functions/founder-transfer/index.ts:828: *  at a time (claim_due_buyback_payout), runs the SHARED performPayout (idempotencyKey
+HEAD:supabase/functions/founder-transfer/index.ts:835:    const { data: claim } = await admin.rpc('claim_due_buyback_payout');
+HEAD:supabase/functions/generate-chronicle/index.ts:129: *  the rate limiter, and the service-role-only refund_credits RPC). */
+HEAD:supabase/functions/generate-chronicle/index.ts:141:// FAILURE refunds via the captured spend_id (refund_credits called with that exact
+HEAD:supabase/functions/generate-chronicle/index.ts:177:    // Service-role client for the refund path: refund_credits is granted only to
+HEAD:supabase/functions/generate-chronicle/index.ts:263:        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/generate-chronicle/index.ts:265:        logError('generate-chronicle', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+HEAD:supabase/functions/generate-chronicle/index.ts:303:        const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+HEAD:supabase/functions/generate-narrative/index.ts:932: *  refund_credits RPC). */
+HEAD:supabase/functions/generate-narrative/index.ts:943:// generation FAILURE refunds via the captured spend_id (refund_credits called with
+HEAD:supabase/functions/generate-narrative/index.ts:989:  // server-side claim (claim_free_narrative), tracked on profiles so it is unfarmable
+HEAD:supabase/functions/generate-narrative/index.ts:1002:  // actually spent (spend_credits) or free-claimed (claim_free_narrative). Every
+HEAD:supabase/functions/generate-narrative/index.ts:1127:        const { error } = await supabaseAdmin.rpc('release_free_narrative', { p_user: user.id });
+HEAD:supabase/functions/generate-narrative/index.ts:1258:        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/generate-narrative/index.ts:1261:        logError('generate-narrative', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+HEAD:supabase/functions/generate-narrative/index.ts:1291:        await supabaseAdmin.rpc('claim_ai_request', { p_user: user.id, p_key: confirmedIdempotencyKey });
+HEAD:supabase/functions/generate-narrative/index.ts:1293:        logError('generate-narrative', user.id, `claim_ai_request errored: ${claimErr.message}`, { stage: 'idempotency' });
+HEAD:supabase/functions/generate-narrative/index.ts:1351:        await supabaseAdmin.rpc('claim_free_narrative', { p_user: user.id });
+HEAD:supabase/functions/generate-narrative/index.ts:1355:        logError('generate-narrative', user.id, `claim_free_narrative errored: ${claimErr.message}`, { stage: 'free-claim' });
+HEAD:supabase/functions/generate-narrative/index.ts:1423:      const { error: attachErr } = await supabaseAdmin.rpc('attach_ai_spend_to_claim', {
+HEAD:supabase/functions/generate-narrative/index.ts:1429:        logError('generate-narrative', user.id, `attach_ai_spend_to_claim errored: ${attachErr.message}`, { stage: 'idempotency' });
+HEAD:supabase/functions/generate-narrative/index.ts:1473:          const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+HEAD:supabase/functions/generate-narrative/index.ts:1538:          // refund_credits RPC writes a NEW grant row that references
+HEAD:supabase/functions/generate-narrative/index.ts:1549:            // Refund via the SERVICE-ROLE client: refund_credits is granted only
+HEAD:supabase/functions/generate-narrative/index.ts:1553:            const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+HEAD:supabase/functions/generate-narrative/index.ts:2037:        await makeAdminClient().rpc('release_free_narrative', { p_user: freeNarrativeUserId });
+HEAD:supabase/functions/ingest-events/actorLinks.ts:24: *      telemetry history is filed under A's identity, and purge_analytics_for_user(B)
+HEAD:supabase/functions/interpret-session/index.ts:251:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: INTERPRET_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+HEAD:supabase/functions/interpret-session/index.ts:259:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: INTERPRET_PROVIDER, p_feature: INTERPRET_FEATURE });
+HEAD:supabase/functions/interpret-session/index.ts:301:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/interpret-session/index.ts:384:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('interpret-session', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/interview/index.ts:213:          await supabaseAdmin.rpc('surveyor_byok_set_health', {
+HEAD:supabase/functions/interview/index.ts:226:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', {
+HEAD:supabase/functions/interview/index.ts:267:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/interview/index.ts:311:          const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason });
+HEAD:supabase/functions/operator-message-worker/index.ts:136:  const { data, error } = await admin.rpc("claim_operator_message_recipient", {
+HEAD:supabase/functions/operator-message-worker/index.ts:197:  const { data, error } = await admin.rpc("page_operator_message_recipients", {
+HEAD:supabase/functions/operator-message-worker/index.ts:333:  const { data, error } = await admin.rpc("claim_operator_message_delivery_jobs", {
+HEAD:supabase/functions/parley/index.ts:174:      if (providerKey.byok && health) { try { await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: PARLEY_PROVIDER, p_health: health, p_error_class: cls, p_verified: false }); } catch (e) { logError('parley', user.id, e, { stage: 'health' }); } }
+HEAD:supabase/functions/parley/index.ts:178:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: PARLEY_PROVIDER, p_feature: PARLEY_FEATURE });
+HEAD:supabase/functions/parley/index.ts:211:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/parley/index.ts:254:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('parley', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/pricing-resync-cron/index.ts:22: * 'pricing_resync_last_run' summary and writes one write_audit row (actor null).
+HEAD:supabase/functions/pricing-resync-cron/index.ts:186:    // One audit row (actor null — cron). write_audit is granted to service_role (051).
+HEAD:supabase/functions/pricing-resync-cron/index.ts:188:      await adminClient.rpc("write_audit", {
+HEAD:supabase/functions/retention-warning-cron/index.ts:207:      await adminClient.rpc("write_audit", {
+HEAD:supabase/functions/send-email/index.ts:193:  // report_client_error_alert() (migration 167). Kept in sync with
+HEAD:supabase/functions/stripe-webhook/index.ts:12: *   `system_grant_credits` RPC. The RPC owns the compatibility writes
+HEAD:supabase/functions/stripe-webhook/index.ts:22: *   GRANT level (authoritative) — system_grant_credits' atomic claim (024)
+HEAD:supabase/functions/stripe-webhook/index.ts:75: * Ledger-consistent credit grant through the system_grant_credits RPC.
+HEAD:supabase/functions/stripe-webhook/index.ts:90:  const { error: rpcErr } = await supabase.rpc('system_grant_credits', {
+HEAD:supabase/functions/stripe-webhook/index.ts:109: * the AUTHORITATIVE, race-safe guarantee is in system_grant_credits, which
+HEAD:supabase/functions/stripe-webhook/index.ts:138:  // pass it. The AUTHORITATIVE once-per-account guarantee is system_grant_credits'
+HEAD:supabase/functions/stripe-webhook/index.ts:199:      'resolve_account_deletion_user_by_stripe_billing',
+HEAD:supabase/functions/stripe-webhook/index.ts:506:  // (the webhook pre-check above, system_grant_credits' delivery key, and the
+HEAD:supabase/functions/stripe-webhook/index.ts:531:// here AND re-asserted inside grant_referral, so a regression in either layer
+HEAD:supabase/functions/stripe-webhook/index.ts:535://   * grant_referral is the AUTHORITATIVE claim-once (pending → granted, one
+HEAD:supabase/functions/stripe-webhook/index.ts:544:// grant_referral has claimed, a thrown error would release the EVENT claim,
+HEAD:supabase/functions/stripe-webhook/index.ts:642:    // Stripe-originated grant. grant_referral's claim-once is the authoritative
+HEAD:supabase/functions/stripe-webhook/index.ts:662:    const { error: detailErr } = await supabase.rpc('record_referral_grant_detail', {
+HEAD:supabase/functions/stripe-webhook/index.ts:668:    // The detail row is what clawback_referral hands back for reversal — a
+HEAD:supabase/functions/stripe-webhook/index.ts:671:    if (detailErr) throw new Error(`record_referral_grant_detail failed: ${detailErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:689:  const { error: detailErr } = await supabase.rpc('record_referral_grant_detail', {
+HEAD:supabase/functions/stripe-webhook/index.ts:695:  if (detailErr) throw new Error(`record_referral_grant_detail failed: ${detailErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:701: * qualifying events. Calls grant_referral (claim-once, zero-dollar-gated);
+HEAD:supabase/functions/stripe-webhook/index.ts:704: * THROW SEMANTICS: a grant_referral TRANSPORT failure throws (non-2xx →
+HEAD:supabase/functions/stripe-webhook/index.ts:719:  // Zero-dollar gate, layer 1 (layer 2 lives inside grant_referral).
+HEAD:supabase/functions/stripe-webhook/index.ts:722:  const { data: grant, error: grantErr } = await supabase.rpc('grant_referral', {
+HEAD:supabase/functions/stripe-webhook/index.ts:729:      stage: 'grant_referral', invoice_id: opts.invoiceId,
+HEAD:supabase/functions/stripe-webhook/index.ts:731:    throw new Error(`grant_referral failed: ${grantErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:780:// clawback_referral claims granted → clawed_back ONCE (a redelivery finds
+HEAD:supabase/functions/stripe-webhook/index.ts:786: * Deduct a clawed-back credit reward via service_adjust_credits (103): atomic,
+HEAD:supabase/functions/stripe-webhook/index.ts:790: * service_adjust_credits audits to admin_actions and therefore requires an
+HEAD:supabase/functions/stripe-webhook/index.ts:811:  const { error: adjustErr } = await supabase.rpc('service_adjust_credits', {
+HEAD:supabase/functions/stripe-webhook/index.ts:817:  if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:822: * refunded founder kept lifetime premium (handle_premium_downgrade no-ops on
+HEAD:supabase/functions/stripe-webhook/index.ts:835: * the bonus is reversed (service_adjust_credits clamps at zero if already spent).
+HEAD:supabase/functions/stripe-webhook/index.ts:854:  // path). Ordered FIRST so the subsequent transfer_case_finalize refuses (wrong_state):
+HEAD:supabase/functions/stripe-webhook/index.ts:882:  // idempotent / hand-re-runnable (handle_premium_downgrade is founder-guarded off
+HEAD:supabase/functions/stripe-webhook/index.ts:883:  // the now-false flag; service_adjust_credits is ledger-atomic + zero-clamped).
+HEAD:supabase/functions/stripe-webhook/index.ts:884:  const { error: downgradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: userId });
+HEAD:supabase/functions/stripe-webhook/index.ts:897:  // mirror of claim_next_founder_seat. Post-claim + log-don't-throw like the steps
+HEAD:supabase/functions/stripe-webhook/index.ts:900:  // release). release_founder_seat_on_clawback is itself claim-once (a cleared holder
+HEAD:supabase/functions/stripe-webhook/index.ts:904:    const { error: seatErr } = await supabase.rpc('release_founder_seat_on_clawback', { p_user: userId });
+HEAD:supabase/functions/stripe-webhook/index.ts:915: * clawbackFounderForSession BEFORE the is_founder flip so a subsequent transfer_case_finalize
+HEAD:supabase/functions/stripe-webhook/index.ts:937:    const { data: aborted, error: aErr } = await supabase.rpc('transfer_case_abort', {
+HEAD:supabase/functions/stripe-webhook/index.ts:982:    const { error: aErr } = await supabase.rpc('transfer_case_abort', { p_case: c.id, p_actor: 'chargeback', p_reason: 'dispute_or_refund' });
+HEAD:supabase/functions/stripe-webhook/index.ts:985:    const { error: rErr } = await supabase.rpc('transfer_case_reverse', { p_case: c.id, p_reason: 'dispute_or_refund' });
+HEAD:supabase/functions/stripe-webhook/index.ts:996: * Reverse the 30-credit founder bonus via service_adjust_credits (103) — atomic,
+HEAD:supabase/functions/stripe-webhook/index.ts:1015:  const { error: adjustErr } = await supabase.rpc('service_adjust_credits', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1021:  if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:1081:  const { data: claw, error: clawErr } = await supabase.rpc('clawback_referral', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1086:    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_referral', invoice_id: invoiceId });
+HEAD:supabase/functions/stripe-webhook/index.ts:1087:    throw new Error(`clawback_referral failed: ${clawErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:1188:// create-checkout reserved the seat (reserve_redemption) and stamped the
+HEAD:supabase/functions/stripe-webhook/index.ts:1189:// session id (bind_redemption_session). When the PAID session completes,
+HEAD:supabase/functions/stripe-webhook/index.ts:1190:// apply_redemption flips reserved → applied exactly once — that flip is the
+HEAD:supabase/functions/stripe-webhook/index.ts:1191:// AUTHORITATIVE claim for this money: system_grant_credits takes NO atomic
+HEAD:supabase/functions/stripe-webhook/index.ts:1213:// grant_referral) enforce that; the execution test pins it.
+HEAD:supabase/functions/stripe-webhook/index.ts:1224:  const { data: redemption, error: applyErr } = await supabase.rpc('apply_redemption', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1229:    logError('stripe-webhook', null, applyErr.message, { stage: 'apply_redemption', session_id: sessionId });
+HEAD:supabase/functions/stripe-webhook/index.ts:1230:    throw new Error(`apply_redemption failed: ${applyErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:1403://     → grant_dossier_entitlement mints the durable right (claim-once on
+HEAD:supabase/functions/stripe-webhook/index.ts:1419://     charge.dispute.created) → clawback_dossier_entitlement reverses the durable
+HEAD:supabase/functions/stripe-webhook/index.ts:1433: * session. Validates nothing itself — grant_dossier_entitlement re-checks that
+HEAD:supabase/functions/stripe-webhook/index.ts:1445:    const { data: grant, error: grantErr } = await supabase.rpc('grant_dossier_entitlement', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1453:        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+HEAD:supabase/functions/stripe-webhook/index.ts:1461:      logError('stripe-webhook', userId, `grant_dossier_entitlement declined: ${grant?.reason ?? 'unknown'}`, {
+HEAD:supabase/functions/stripe-webhook/index.ts:1462:        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+HEAD:supabase/functions/stripe-webhook/index.ts:1471:      stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+HEAD:supabase/functions/stripe-webhook/index.ts:1533: * clawback_dossier_entitlement flips the purchase row to 'refunded' UNCONDITIONALLY
+HEAD:supabase/functions/stripe-webhook/index.ts:1544:  const { data: claw, error: clawErr } = await supabase.rpc('clawback_dossier_entitlement', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1548:    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_dossier_entitlement', session_id: sessionId });
+HEAD:supabase/functions/stripe-webhook/index.ts:1549:    throw new Error(`clawback_dossier_entitlement failed: ${clawErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:1558: * reverses the FULL granted amount through the narrow system_clawback_credits
+HEAD:supabase/functions/stripe-webhook/index.ts:1575:  const { data: claw, error: clawErr } = await supabase.rpc('system_clawback_credits', {
+HEAD:supabase/functions/stripe-webhook/index.ts:1581:    throw new Error(`system_clawback_credits failed: ${clawErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:1786: * that is no longer awaiting_payment. transfer_case_mark_paid no-opped (wrong_state), so
+HEAD:supabase/functions/stripe-webhook/index.ts:1862://     per-PI claim via system_grant_credits 'auto_reload' key → exactly once
+HEAD:supabase/functions/stripe-webhook/index.ts:1927:  const { data, error } = await supabase.rpc('claim_auto_reload_payment_intent', {
+HEAD:supabase/functions/stripe-webhook/index.ts:2025:  const { data, error } = await supabase.rpc('record_payment_refund_obligation', {
+HEAD:supabase/functions/stripe-webhook/index.ts:2314:    'requeue_account_deletion_cleanup_for_late_billing',
+HEAD:supabase/functions/stripe-webhook/index.ts:2665:  // AUTHORITATIVE grant: system_grant_credits claims once per PI id (158 delivery
+HEAD:supabase/functions/stripe-webhook/index.ts:2852:        const { data: paid, error: paidErr } = await supabase.rpc('transfer_case_mark_paid', {
+HEAD:supabase/functions/stripe-webhook/index.ts:2855:        if (paidErr) throw new Error(`transfer_case_mark_paid failed: ${paidErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:2902:        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+HEAD:supabase/functions/stripe-webhook/index.ts:2925:        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+HEAD:supabase/functions/stripe-webhook/index.ts:2937:          const { error: seatErr } = await supabase.rpc('claim_next_founder_seat', { p_user: userId! });
+HEAD:supabase/functions/stripe-webhook/index.ts:2969:        //     durable re-download right on it (grant_dossier_entitlement);
+HEAD:supabase/functions/stripe-webhook/index.ts:3011:        const { error: surveyorErr } = await supabase.rpc('grant_surveyor_entitlement', {
+HEAD:supabase/functions/stripe-webhook/index.ts:3060:      const { data: reverted, error: revertErr } = await supabase.rpc('revert_redemption', {
+HEAD:supabase/functions/stripe-webhook/index.ts:3074:      const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', {
+HEAD:supabase/functions/stripe-webhook/index.ts:3090:      // isn't burned by a session nobody paid for. revert_redemption is
+HEAD:supabase/functions/stripe-webhook/index.ts:3096:      const { data: reverted, error: revertErr } = await supabase.rpc('revert_redemption', {
+HEAD:supabase/functions/stripe-webhook/index.ts:3101:        logError('stripe-webhook', null, revertErr.message, { stage: 'revert_redemption', session_id: expired.id });
+HEAD:supabase/functions/stripe-webhook/index.ts:3102:        throw new Error(`revert_redemption failed: ${revertErr.message}`);
+HEAD:supabase/functions/stripe-webhook/index.ts:3111:        const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', { p_session: expired.id });
+HEAD:supabase/functions/stripe-webhook/index.ts:3173:      // cycle') with real money moved. grant_referral re-asserts both gates.
+HEAD:supabase/functions/stripe-webhook/index.ts:3192:    // clawback_referral answers no_granted_referral and the case no-ops.
+HEAD:supabase/functions/stripe-webhook/index.ts:3318:        // JUDGMENT (vetoable): reuse handle_premium_downgrade rather than a new
+HEAD:supabase/functions/stripe-webhook/index.ts:3327:        const { error: pauseDowngradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: updatedProfile.userId });
+HEAD:supabase/functions/stripe-webhook/index.ts:3343:        const { error: resumeRestoreErr } = await supabase.rpc('restore_premium_settlements', { target_user: updatedProfile.userId });
+HEAD:supabase/functions/stripe-webhook/index.ts:3382:        .rpc('revoke_surveyor_entitlement_by_subscription', { p_subscription_id: subscription.id });
+HEAD:supabase/functions/stripe-webhook/index.ts:3406:        // must not re-run handle_premium_downgrade (which would re-stamp the
+HEAD:supabase/functions/stripe-webhook/index.ts:3424:        const { error: downgradeError } = await supabase.rpc('handle_premium_downgrade', {
+HEAD:supabase/functions/surveyor-autonomy/index.ts:228:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: AUTONOMY_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+HEAD:supabase/functions/surveyor-autonomy/index.ts:235:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: AUTONOMY_PROVIDER, p_feature: AUTONOMY_FEATURE });
+HEAD:supabase/functions/surveyor-autonomy/index.ts:277:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/surveyor-autonomy/index.ts:359:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('surveyor-autonomy', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+HEAD:supabase/functions/surveyor-byok/index.ts:9: * persisted on the vault (surveyor_byok_set_health) so the settings surface shows a live
+HEAD:supabase/functions/surveyor-byok/index.ts:27: * decrypts it per request via the service-role surveyor_byok_get RPC and NEVER logs it
+HEAD:supabase/functions/surveyor-byok/index.ts:192:      const { data: rl, error: rlErr } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+HEAD:supabase/functions/surveyor-byok/index.ts:228:      const { error } = await supabaseAdmin.rpc('surveyor_byok_set_health', {
+HEAD:supabase/functions/surveyor-byok/index.ts:317:      const { error: tierErr } = await supabaseAdmin.rpc('surveyor_byok_set_probe_tier', {
+HEAD:supabase/functions/surveyor-byok/probeCore.ts:398: *  surveyor_byok_set_probe_tier accepts. Verdicts only: every value is a bare
+HEAD:supabase/functions/unsubscribe/index.ts:85:  const { data, error } = await client.rpc("unsubscribe_via_token", {
+== origin/master
+origin/master:src/components/AdminPanel.jsx:264:            report_client_error_alert, 167). Both live in ONE Section (rather than
+origin/master:src/components/account/AccountTickets.jsx:9: *     link picker (settlement id). Calls account-actions `create_ticket`.
+origin/master:src/components/account/AccountTickets.jsx:150:        action: 'create_ticket',
+origin/master:src/components/admin/AdminBroadcastPanel.jsx:95:      const data = await callAdmin({ action: 'list_operator_broadcasts' });
+origin/master:src/components/admin/AdminClientErrorsPanel.jsx:5: * fixed migration-167 SECURITY DEFINER reads (report_client_errors +
+origin/master:src/components/admin/AdminClientErrorsPanel.jsx:6: * report_client_error_alert). The privilege gate is server-side in admin-actions;
+origin/master:src/components/admin/AdminUsersPanel.jsx:407:                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+origin/master:src/components/admin/AdminUsersPanel.jsx:415:                  { action: 'add_internal_note', userId: id, note },
+origin/master:src/components/admin/AdminUsersPanel.jsx:434:                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+origin/master:src/components/admin/AdminUsersPanel.jsx:443:                  { action: 'add_internal_note', userId: id, note },
+origin/master:src/components/admin/AdminUsersPanel.jsx:468:                buildBody: (typedTargetId) => ({ action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action', confirm: { typedTargetId } }),
+origin/master:src/components/admin/AdminUsersPanel.jsx:477:                buildBody: (typedTargetId) => ({ action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', confirm: { typedTargetId } }),
+origin/master:src/components/admin/SupportQueuePanel.jsx:10: *   • Claim it (`claim_ticket`), transition status (`set_ticket_status`), post a
+origin/master:src/components/admin/SupportQueuePanel.jsx:11: *     user-visible reply OR an internal note (`post_ticket_reply`), and link an
+origin/master:src/components/admin/SupportQueuePanel.jsx:12: *     FAQ article when answering (`link_ticket_faq`).
+origin/master:src/components/admin/SupportQueuePanel.jsx:32:// wire value for set_ticket_status); only the visible text is prettified.
+origin/master:src/components/admin/SupportQueuePanel.jsx:49:// value for link_ticket_faq); only the visible text is prettified.
+origin/master:src/components/admin/SupportQueuePanel.jsx:136:        if (body.action === 'set_ticket_status' && body.status) local.status = body.status;
+origin/master:src/components/admin/SupportQueuePanel.jsx:137:        if (body.action === 'link_ticket_faq' && body.faq) local.linked_faq = body.faq;
+origin/master:src/components/admin/SupportQueuePanel.jsx:245:              onClick={() => runAction({ action: 'claim_ticket', ticketId: id }, 'Ticket claimed.')}>
+origin/master:src/components/admin/SupportQueuePanel.jsx:251:              {/* No `reason` rides this call: set_ticket_status (migration 055)
+origin/master:src/components/admin/SupportQueuePanel.jsx:257:                  { action: 'set_ticket_status', ticketId: id, status: e.target.value },
+origin/master:src/components/admin/SupportQueuePanel.jsx:269:                  { action: 'post_ticket_reply', ticketId: id, body, visibility: 'user' },
+origin/master:src/components/admin/SupportQueuePanel.jsx:278:                  { action: 'post_ticket_reply', ticketId: id, body, visibility: 'internal' },
+origin/master:src/components/admin/SupportQueuePanel.jsx:287:                  { action: 'link_ticket_faq', ticketId: id, faq: e.target.value },
+origin/master:src/config/entitlementLadder.js:238: * 023_explicit_models_and_plan_retention.sql (handle_premium_downgrade:
+origin/master:src/domain/ops/aiSpendAlarm.js:18: *   Migration 167's `report_client_error_alert()` returns a { threshold,
+origin/master:src/lib/emailTemplates.js:193:  // (never added to ANON_OK_TEMPLATES). Numbers from report_client_error_alert().
+origin/master:src/lib/stripe.js:36://     `grant_surveyor_entitlement`, the money mirror records `surveyor_start`,
+origin/master:src/lib/stripe.js:38://     cancelled subscription hits `revoke_surveyor_entitlement_by_subscription`.
+origin/master:supabase/functions/_shared/accountDeletionCleanup.ts:352:      "mark_account_deletion_auth_revoked",
+origin/master:supabase/functions/_shared/accountDeletionCleanup.ts:395:      "checkpoint_account_deletion_billing_identity",
+origin/master:supabase/functions/_shared/accountDeletionCleanup.ts:792:      "claim_account_deletion_cleanup_jobs",
+origin/master:supabase/functions/_shared/autoReload.ts:16: *   2. claim_auto_reload_attempt(user, unit_amount, 25) — the atomic claim (158):
+origin/master:supabase/functions/_shared/autoReload.ts:179:    const { data, error } = await admin.rpc('claim_auto_reload_payment_intent', {
+origin/master:supabase/functions/_shared/autoReload.ts:242:      'mark_low_balance_notified',
+origin/master:supabase/functions/_shared/autoReload.ts:323:      'claim_auto_reload_attempt',
+origin/master:supabase/functions/_shared/paymentRefundRecovery.ts:6: * record_payment_refund_obligation remains the single lifecycle status writer:
+origin/master:supabase/functions/_shared/paymentRefundRecovery.ts:260:    "record_payment_refund_obligation",
+origin/master:supabase/functions/_shared/rateLimit.ts:118:// (consume_ai_generate_rate_limit, 079) which is deliberately FAIL-OPEN there — a
+origin/master:supabase/functions/_shared/referralEmails.ts:4: * Sent DIRECTLY from the stripe-webhook after grant_referral claims a
+origin/master:supabase/functions/_shared/twoKey.ts:42:  "set_account_disabled", // disable / enable an account
+origin/master:supabase/functions/_shared/twoKey.ts:43:  "set_account_banned", // ban / unban an account
+origin/master:supabase/functions/_shared/twoKey.ts:86: * non-destructive WRITES too, e.g. issue_warning — accurate name, same contract.)
+origin/master:supabase/functions/_shared/twoKey.ts:114:  "issue_warning",
+origin/master:supabase/functions/_shared/twoKey.ts:115:  "add_internal_note",
+origin/master:supabase/functions/_shared/twoKey.ts:125:  "list_operator_broadcasts",
+origin/master:supabase/functions/_shared/twoKey.ts:129:  "claim_ticket",
+origin/master:supabase/functions/_shared/twoKey.ts:130:  "set_ticket_status",
+origin/master:supabase/functions/_shared/twoKey.ts:131:  "post_ticket_reply",
+origin/master:supabase/functions/_shared/twoKey.ts:132:  "link_ticket_faq",
+origin/master:supabase/functions/account-actions/index.ts:67:// Support content is user free text on an authed, MAILER-BACKED path: create_ticket
+origin/master:supabase/functions/account-actions/index.ts:79:// Per-user ceiling on support WRITES (create_ticket + reply_ticket share one bucket,
+origin/master:supabase/functions/account-actions/index.ts:241:    // below); "post_ticket_reply" is the admin-actions name and never reaches this
+origin/master:supabase/functions/account-actions/index.ts:243:    const TICKET_WRITE_ACTIONS = new Set(["create_ticket", "reply_ticket"]);
+origin/master:supabase/functions/account-actions/index.ts:266:      // ── A5: create_ticket — the CALLER files their OWN ticket. The user_id is
+origin/master:supabase/functions/account-actions/index.ts:269:      case "create_ticket": {
+origin/master:supabase/functions/account-actions/index.ts:285:        const { data, error } = await adminClient.rpc("create_ticket", {
+origin/master:supabase/functions/account-actions/index.ts:342:        const { data, error } = await adminClient.rpc("post_ticket_reply", {
+origin/master:supabase/functions/account-actions/index.ts:424:        const { data: claim, error: claimErr } = await adminClient.rpc("claim_dossier_purchase_by_session", {
+origin/master:supabase/functions/account-actions/index.ts:430:          logError("account-actions", callingUser.id, `claim_dossier_purchase_by_session failed: ${claimErr.message}`, { stage: "dossier_claim_rpc" });
+origin/master:supabase/functions/account-actions/index.ts:546:        const { data, error } = await adminClient.rpc("process_account_deletions", {
+origin/master:supabase/functions/account-deletion-worker/index.ts:225:      "process_account_deletions",
+origin/master:supabase/functions/admin-actions/index.ts:11: *   queue/cancel/list_operator_broadcasts — Audited mass-message controls
+origin/master:supabase/functions/admin-actions/index.ts:158:  direct: "create_operator_direct_message",
+origin/master:supabase/functions/admin-actions/index.ts:161:  listBroadcasts: "list_operator_broadcasts",
+origin/master:supabase/functions/admin-actions/index.ts:162:  issueWarning: "issue_warning_with_message",
+origin/master:supabase/functions/admin-actions/index.ts:163:  setBanned: "set_account_banned_with_message",
+origin/master:supabase/functions/admin-actions/index.ts:366:    // row through the SECURITY DEFINER write_audit RPC (the ONLY insert path
+origin/master:supabase/functions/admin-actions/index.ts:379:      const { error: auditErr } = await adminClient.rpc("write_audit", {
+origin/master:supabase/functions/admin-actions/index.ts:515:          "can_email_user",
+origin/master:supabase/functions/admin-actions/index.ts:530:          "get_or_mint_unsubscribe_token",
+origin/master:supabase/functions/admin-actions/index.ts:677:        const { data, error } = await adminClient.rpc("report_client_errors", { p_from: pFrom, p_to: pTo });
+origin/master:supabase/functions/admin-actions/index.ts:679:        const { data: alertData } = await adminClient.rpc("report_client_error_alert");
+origin/master:supabase/functions/admin-actions/index.ts:728:          "list_operational_obligation_attention",
+origin/master:supabase/functions/admin-actions/index.ts:861:        // account ban/disable cases. service_update_profile_metadata re-checks
+origin/master:supabase/functions/admin-actions/index.ts:881:          await adminClient.rpc("service_update_profile_metadata", {
+origin/master:supabase/functions/admin-actions/index.ts:1020:        // account ban/disable cases. The service_set_credits RPC re-checks
+origin/master:supabase/functions/admin-actions/index.ts:1034:          await adminClient.rpc("service_set_credits", {
+origin/master:supabase/functions/admin-actions/index.ts:1121:      case "issue_warning": {
+origin/master:supabase/functions/admin-actions/index.ts:1153:      case "add_internal_note": {
+origin/master:supabase/functions/admin-actions/index.ts:1158:        const { data, error } = await adminClient.rpc("add_internal_note", {
+origin/master:supabase/functions/admin-actions/index.ts:1181:      // ATOMICALLY via service_adjust_credits (migration 103): the RPC locks the
+origin/master:supabase/functions/admin-actions/index.ts:1185:      // and called the ABSOLUTE-set service_set_credits — a concurrent user
+origin/master:supabase/functions/admin-actions/index.ts:1196:          await adminClient.rpc("service_adjust_credits", {
+origin/master:supabase/functions/admin-actions/index.ts:1204:        // service_adjust_credits audits to admin_actions; mirror a row into the
+origin/master:supabase/functions/admin-actions/index.ts:1207:          action: delta > 0 ? "grant_credits" : "refund_credits",
+origin/master:supabase/functions/admin-actions/index.ts:1427:        const { data, error } = await adminClient.rpc("admin_billing_summary", {
+origin/master:supabase/functions/admin-actions/index.ts:1437:      case "set_account_disabled": {
+origin/master:supabase/functions/admin-actions/index.ts:1441:        const { data, error } = await adminClient.rpc("set_account_disabled", {
+origin/master:supabase/functions/admin-actions/index.ts:1459:      case "set_account_banned": {
+origin/master:supabase/functions/admin-actions/index.ts:1505:        const { data, error } = await adminClient.rpc("admin_soft_delete_settlement", {
+origin/master:supabase/functions/admin-actions/index.ts:1517:        const { data, error } = await adminClient.rpc("admin_remove_gallery_item", {
+origin/master:supabase/functions/admin-actions/index.ts:1528:        const { data, error } = await adminClient.rpc("admin_revoke_share_link", {
+origin/master:supabase/functions/admin-actions/index.ts:1542:        const { data, error } = await adminClient.rpc("admin_soft_delete_map", {
+origin/master:supabase/functions/admin-actions/index.ts:1553:        const { data, error } = await adminClient.rpc("admin_remove_gallery_map", {
+origin/master:supabase/functions/admin-actions/index.ts:1568:        const { data, error } = await adminClient.rpc("admin_set_content_banned", {
+origin/master:supabase/functions/admin-actions/index.ts:1577:      // read). The set_gallery_comment_hidden RPC is the sole hidden_* writer; it
+origin/master:supabase/functions/admin-actions/index.ts:1583:        const { error } = await adminClient.rpc("set_gallery_comment_hidden", {
+origin/master:supabase/functions/admin-actions/index.ts:1609:        const { data, error } = await adminClient.rpc("admin_diagnostic_bundle", {
+origin/master:supabase/functions/admin-actions/index.ts:1714:      case "list_operator_broadcasts": {
+origin/master:supabase/functions/admin-actions/index.ts:1753:      case "claim_ticket": {
+origin/master:supabase/functions/admin-actions/index.ts:1757:        const { data, error } = await adminClient.rpc("claim_ticket", {
+origin/master:supabase/functions/admin-actions/index.ts:1766:      case "set_ticket_status": {
+origin/master:supabase/functions/admin-actions/index.ts:1773:        const { data, error } = await adminClient.rpc("set_ticket_status", {
+origin/master:supabase/functions/admin-actions/index.ts:1805:      case "post_ticket_reply": {
+origin/master:supabase/functions/admin-actions/index.ts:1813:        const { data, error } = await adminClient.rpc("post_ticket_reply", {
+origin/master:supabase/functions/admin-actions/index.ts:1835:      case "link_ticket_faq": {
+origin/master:supabase/functions/admin-actions/index.ts:1842:        const { data, error } = await adminClient.rpc("link_ticket_faq", {
+origin/master:supabase/functions/admin-actions/index.ts:1855:        const { error: gErr } = await adminClient.rpc("grant_surveyor_entitlement", {
+origin/master:supabase/functions/admin-actions/index.ts:1871:        const { data: revoked, error: rErr } = await adminClient.rpc("revoke_surveyor_entitlement", {
+origin/master:supabase/functions/ai-analyst/byok.ts:6: * surveyor_byok_get() RPC. It is NEVER logged, never returned to the client, never put
+origin/master:supabase/functions/ai-analyst/byok.ts:28: * the same fact as "no key on file". surveyor_byok_get answers NULL, WITHOUT an error, when
+origin/master:supabase/functions/ai-analyst/byok.ts:126: * @param admin      service-role supabase client (the only role granted surveyor_byok_get)
+origin/master:supabase/functions/ai-analyst/byok.ts:144:    const { data, error } = await admin.rpc('surveyor_byok_get', { p_user: userId, p_provider: provider });
+origin/master:supabase/functions/ai-analyst/byok.ts:147:      if (onLookupError) onLookupError('surveyor_byok_get errored — vault unreadable');
+origin/master:supabase/functions/ai-analyst/byok.ts:188:    if (onLookupError) onLookupError('surveyor_byok_get threw — vault unreadable');
+origin/master:supabase/functions/ai-analyst/creditFlow.ts:37:  /** Per-user/day rate limit (consume_ai_generate_rate_limit); fail-OPEN on error. */
+origin/master:supabase/functions/ai-analyst/creditFlow.ts:43:  /** Refund a captured spend (refund_credits). No-ops when elevated. */
+origin/master:supabase/functions/ai-analyst/index.ts:277:          await supabaseAdmin.rpc('surveyor_byok_set_health', {
+origin/master:supabase/functions/ai-analyst/index.ts:290:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', {
+origin/master:supabase/functions/ai-analyst/index.ts:335:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/ai-analyst/index.ts:395:          const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason });
+origin/master:supabase/functions/ai-analyst/modelResolver.ts:31: * `model_prefs` on the `surveyor_usage_precheck` RPC result, which is DATABASE state. It is
+origin/master:supabase/functions/auth-recovery/index.ts:21: *             pick_recovery_question(email) → { exists, slot, questionId }. The
+origin/master:supabase/functions/auth-recovery/index.ts:29: *             per-account lockout gate (recovery_is_locked, 067; a hard-locked
+origin/master:supabase/functions/auth-recovery/index.ts:31: *             verify_recovery_answer(email, slot, answer). On TRUE, clear the
+origin/master:supabase/functions/auth-recovery/index.ts:45: *     boolean from verify_recovery_answer, never the hash.
+origin/master:supabase/functions/auth-recovery/index.ts:173:// recovery_is_locked / note_recovery_verify_failure) is what bounds lifetime
+origin/master:supabase/functions/auth-recovery/index.ts:223:  const { data, error } = await admin.rpc("recovery_is_locked", { p_email: email });
+origin/master:supabase/functions/auth-recovery/index.ts:225:    console.error("[auth-recovery] recovery_is_locked error:", error.message);
+origin/master:supabase/functions/auth-recovery/index.ts:242:  const { data, error } = await admin.rpc("email_has_active_transfer_lock", { p_email: email });
+origin/master:supabase/functions/auth-recovery/index.ts:244:    console.error("[auth-recovery] email_has_active_transfer_lock error (fail-closed):", error.message);
+origin/master:supabase/functions/auth-recovery/index.ts:320:        const { data, error } = await admin.rpc("pick_recovery_question", { p_email: email });
+origin/master:supabase/functions/auth-recovery/index.ts:322:          console.error("[auth-recovery] pick_recovery_question error:", error.message);
+origin/master:supabase/functions/auth-recovery/index.ts:399:        const { data: ok, error } = await admin.rpc("verify_recovery_answer", {
+origin/master:supabase/functions/auth-recovery/index.ts:405:          console.error("[auth-recovery] verify_recovery_answer error:", error.message);
+origin/master:supabase/functions/auth-recovery/index.ts:420:            const { error: noteErr } = await admin.rpc("note_recovery_verify_failure", {
+origin/master:supabase/functions/auth-recovery/index.ts:424:              console.error("[auth-recovery] note_recovery_verify_failure error:", noteErr.message);
+origin/master:supabase/functions/auth-recovery/index.ts:443:          const { error: clearErr } = await admin.rpc("clear_recovery_lockout_by_email", {
+origin/master:supabase/functions/auth-recovery/index.ts:447:            console.error("[auth-recovery] clear_recovery_lockout_by_email error:", clearErr.message);
+origin/master:supabase/functions/construct-realm/index.ts:234:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+origin/master:supabase/functions/construct-realm/index.ts:240:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_feature: CONSTRUCT_FEATURE });
+origin/master:supabase/functions/construct-realm/index.ts:282:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/construct-realm/index.ts:363:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('construct-realm', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/construct-settlement/index.ts:233:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+origin/master:supabase/functions/construct-settlement/index.ts:239:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONSTRUCT_PROVIDER, p_feature: CONSTRUCT_FEATURE });
+origin/master:supabase/functions/construct-settlement/index.ts:281:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/construct-settlement/index.ts:362:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('construct-settlement', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/create-checkout/index.ts:18: * reserve_redemption RPC (guarded atomic seat claim) — the client never
+origin/master:supabase/functions/create-checkout/index.ts:22: * session completes (apply_redemption). A code that fails to reserve
+origin/master:supabase/functions/create-checkout/index.ts:243:// The applies_to/mode gate now lives INSIDE reserve_redemption (migration 112): it
+origin/master:supabase/functions/create-checkout/index.ts:270:    const { data: bound, error: bindErr } = await admin.rpc('bind_redemption_session', {
+origin/master:supabase/functions/create-checkout/index.ts:277:    const { data: reverted, error: revertErr } = await admin.rpc('revert_redemption', {
+origin/master:supabase/functions/create-checkout/index.ts:548:    // reserve_redemption is the authoritative gate (guarded atomic uses_count
+origin/master:supabase/functions/create-checkout/index.ts:562:        // p_mode lets reserve_redemption reject an applies_to/mode mismatch BEFORE it
+origin/master:supabase/functions/create-checkout/index.ts:565:        const { data: reservation, error: reserveErr } = await admin.rpc('reserve_redemption', {
+origin/master:supabase/functions/create-checkout/index.ts:572:            logError('create-checkout', user.id, reserveErr.message, { stage: 'reserve_redemption' });
+origin/master:supabase/functions/create-checkout/index.ts:589:          // credit_amount once the PAID session completes (apply_redemption).
+origin/master:supabase/functions/create-checkout/index.ts:672:      // it: apply_redemption on paid completion, revert_redemption on expiry.
+origin/master:supabase/functions/create-checkout/index.ts:678:      const { data: bound, error: bindErr } = await adminClient().rpc('bind_redemption_session', {
+origin/master:supabase/functions/create-checkout/index.ts:684:          stage: 'bind_redemption_session', redemption_id: redemptionId, session_id: session.id,
+origin/master:supabase/functions/custom-content/index.ts:256:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: CONTENT_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+origin/master:supabase/functions/custom-content/index.ts:263:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: CONTENT_PROVIDER, p_feature: CONTENT_FEATURE });
+origin/master:supabase/functions/custom-content/index.ts:305:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/custom-content/index.ts:386:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('custom-content', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/founder-transfer/index.ts:13:// SEQUENCING NOTE (JUDGMENT, vetoable): `initiate` opens the case (transfer_case_open)
+origin/master:supabase/functions/founder-transfer/index.ts:143:        await admin.rpc('_log_founder_transfer_event', {
+origin/master:supabase/functions/founder-transfer/index.ts:197:        const { data: opened, error: openErr } = await admin.rpc('transfer_case_open', {
+origin/master:supabase/functions/founder-transfer/index.ts:204:        const { data: ch, error: chErr } = await admin.rpc('issue_transfer_challenge', {
+origin/master:supabase/functions/founder-transfer/index.ts:225:        const { data: v, error: vErr } = await admin.rpc('verify_transfer_challenge', {
+origin/master:supabase/functions/founder-transfer/index.ts:248:        const { data: ch, error: chErr } = await admin.rpc('issue_transfer_challenge', {
+origin/master:supabase/functions/founder-transfer/index.ts:266:        const { data: v, error: vErr } = await admin.rpc('verify_transfer_challenge', {
+origin/master:supabase/functions/founder-transfer/index.ts:273:        const { data: bound, error: bErr } = await admin.rpc('transfer_case_bind_nominee', { p_case: caseId, p_to_user: user.id });
+origin/master:supabase/functions/founder-transfer/index.ts:305:        const { data: marked, error: mErr } = await admin.rpc('transfer_case_mark_awaiting_payment', { p_case: caseId, p_session: session.id });
+origin/master:supabase/functions/founder-transfer/index.ts:342:        const { data: aborted, error: aErr } = await admin.rpc('transfer_case_abort', { p_case: caseId, p_actor: actor, p_reason: 'party_abort' });
+origin/master:supabase/functions/founder-transfer/index.ts:374:        const { data: r, error: rErr } = await admin.rpc('reelect_transfer_payout', { p_case: caseId, p_from: user.id });
+origin/master:supabase/functions/founder-transfer/index.ts:398:        const { data: locked } = await admin.rpc('has_active_transfer_lock', { p_user: user.id });
+origin/master:supabase/functions/founder-transfer/index.ts:415:        const { data: ch, error: chErr } = await admin.rpc('issue_buyback_challenge', { p_user: user.id });
+origin/master:supabase/functions/founder-transfer/index.ts:431:        const { data: v, error: vErr } = await admin.rpc('verify_buyback_challenge', { p_user: user.id, p_code: code });
+origin/master:supabase/functions/founder-transfer/index.ts:436:        const { data: bb, error: bErr } = await admin.rpc('claim_founder_seat_buyback', { p_user: user.id, p_payout_form: payoutForm });
+origin/master:supabase/functions/founder-transfer/index.ts:605:    await admin.rpc('_log_founder_transfer_event', {
+origin/master:supabase/functions/founder-transfer/index.ts:631:      await admin.rpc('transfer_case_finalize', { p_case: c.id });
+origin/master:supabase/functions/founder-transfer/index.ts:644:    await admin.rpc('_log_founder_transfer_event', { p_case: c.id, p_actor: 'system', p_event: 'finalized_edge_leg', p_detail: {} });
+origin/master:supabase/functions/founder-transfer/index.ts:653: *  ex-founder keeps premium via their sub) · restore_premium_settlements for the incoming
+origin/master:supabase/functions/founder-transfer/index.ts:664:    try { await admin.rpc('handle_premium_downgrade', { target_user: c.from_user }); }
+origin/master:supabase/functions/founder-transfer/index.ts:677:  try { await admin.rpc('restore_premium_settlements', { target_user: c.to_user }); }
+origin/master:supabase/functions/founder-transfer/index.ts:703:    try { await admin.rpc('handle_premium_downgrade', { target_user: userId }); }
+origin/master:supabase/functions/founder-transfer/index.ts:765: *  · account_credits → system_grant_credits('seat_payout', keyed by refId) → grant-once.
+origin/master:supabase/functions/founder-transfer/index.ts:776:    const { error } = await admin.rpc('system_grant_credits', {
+origin/master:supabase/functions/founder-transfer/index.ts:802:/** Release due transfer payouts (§6.6). Claims one at a time (claim_due_transfer_payout),
+origin/master:supabase/functions/founder-transfer/index.ts:809:    const { data: claim } = await admin.rpc('claim_due_transfer_payout');
+origin/master:supabase/functions/founder-transfer/index.ts:828: *  at a time (claim_due_buyback_payout), runs the SHARED performPayout (idempotencyKey
+origin/master:supabase/functions/founder-transfer/index.ts:835:    const { data: claim } = await admin.rpc('claim_due_buyback_payout');
+origin/master:supabase/functions/generate-chronicle/index.ts:129: *  the rate limiter, and the service-role-only refund_credits RPC). */
+origin/master:supabase/functions/generate-chronicle/index.ts:141:// FAILURE refunds via the captured spend_id (refund_credits called with that exact
+origin/master:supabase/functions/generate-chronicle/index.ts:177:    // Service-role client for the refund path: refund_credits is granted only to
+origin/master:supabase/functions/generate-chronicle/index.ts:263:        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/generate-chronicle/index.ts:265:        logError('generate-chronicle', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+origin/master:supabase/functions/generate-chronicle/index.ts:303:        const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+origin/master:supabase/functions/generate-narrative/index.ts:932: *  refund_credits RPC). */
+origin/master:supabase/functions/generate-narrative/index.ts:943:// generation FAILURE refunds via the captured spend_id (refund_credits called with
+origin/master:supabase/functions/generate-narrative/index.ts:989:  // server-side claim (claim_free_narrative), tracked on profiles so it is unfarmable
+origin/master:supabase/functions/generate-narrative/index.ts:1002:  // actually spent (spend_credits) or free-claimed (claim_free_narrative). Every
+origin/master:supabase/functions/generate-narrative/index.ts:1127:        const { error } = await supabaseAdmin.rpc('release_free_narrative', { p_user: user.id });
+origin/master:supabase/functions/generate-narrative/index.ts:1258:        await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/generate-narrative/index.ts:1261:        logError('generate-narrative', user.id, `consume_ai_generate_rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
+origin/master:supabase/functions/generate-narrative/index.ts:1291:        await supabaseAdmin.rpc('claim_ai_request', { p_user: user.id, p_key: confirmedIdempotencyKey });
+origin/master:supabase/functions/generate-narrative/index.ts:1293:        logError('generate-narrative', user.id, `claim_ai_request errored: ${claimErr.message}`, { stage: 'idempotency' });
+origin/master:supabase/functions/generate-narrative/index.ts:1351:        await supabaseAdmin.rpc('claim_free_narrative', { p_user: user.id });
+origin/master:supabase/functions/generate-narrative/index.ts:1355:        logError('generate-narrative', user.id, `claim_free_narrative errored: ${claimErr.message}`, { stage: 'free-claim' });
+origin/master:supabase/functions/generate-narrative/index.ts:1423:      const { error: attachErr } = await supabaseAdmin.rpc('attach_ai_spend_to_claim', {
+origin/master:supabase/functions/generate-narrative/index.ts:1429:        logError('generate-narrative', user.id, `attach_ai_spend_to_claim errored: ${attachErr.message}`, { stage: 'idempotency' });
+origin/master:supabase/functions/generate-narrative/index.ts:1473:          const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+origin/master:supabase/functions/generate-narrative/index.ts:1538:          // refund_credits RPC writes a NEW grant row that references
+origin/master:supabase/functions/generate-narrative/index.ts:1549:            // Refund via the SERVICE-ROLE client: refund_credits is granted only
+origin/master:supabase/functions/generate-narrative/index.ts:1553:            const { error: refundErr } = await supabaseAdmin.rpc('refund_credits', {
+origin/master:supabase/functions/generate-narrative/index.ts:2037:        await makeAdminClient().rpc('release_free_narrative', { p_user: freeNarrativeUserId });
+origin/master:supabase/functions/ingest-events/actorLinks.ts:24: *      telemetry history is filed under A's identity, and purge_analytics_for_user(B)
+origin/master:supabase/functions/interpret-session/index.ts:251:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: INTERPRET_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+origin/master:supabase/functions/interpret-session/index.ts:259:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: INTERPRET_PROVIDER, p_feature: INTERPRET_FEATURE });
+origin/master:supabase/functions/interpret-session/index.ts:301:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/interpret-session/index.ts:384:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('interpret-session', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/interview/index.ts:213:          await supabaseAdmin.rpc('surveyor_byok_set_health', {
+origin/master:supabase/functions/interview/index.ts:226:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', {
+origin/master:supabase/functions/interview/index.ts:267:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/interview/index.ts:311:          const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason });
+origin/master:supabase/functions/operator-message-worker/index.ts:136:  const { data, error } = await admin.rpc("claim_operator_message_recipient", {
+origin/master:supabase/functions/operator-message-worker/index.ts:197:  const { data, error } = await admin.rpc("page_operator_message_recipients", {
+origin/master:supabase/functions/operator-message-worker/index.ts:333:  const { data, error } = await admin.rpc("claim_operator_message_delivery_jobs", {
+origin/master:supabase/functions/parley/index.ts:174:      if (providerKey.byok && health) { try { await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: PARLEY_PROVIDER, p_health: health, p_error_class: cls, p_verified: false }); } catch (e) { logError('parley', user.id, e, { stage: 'health' }); } }
+origin/master:supabase/functions/parley/index.ts:178:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: PARLEY_PROVIDER, p_feature: PARLEY_FEATURE });
+origin/master:supabase/functions/parley/index.ts:211:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/parley/index.ts:254:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('parley', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/pricing-resync-cron/index.ts:22: * 'pricing_resync_last_run' summary and writes one write_audit row (actor null).
+origin/master:supabase/functions/pricing-resync-cron/index.ts:186:    // One audit row (actor null — cron). write_audit is granted to service_role (051).
+origin/master:supabase/functions/pricing-resync-cron/index.ts:188:      await adminClient.rpc("write_audit", {
+origin/master:supabase/functions/retention-warning-cron/index.ts:207:      await adminClient.rpc("write_audit", {
+origin/master:supabase/functions/send-email/index.ts:194:  // report_client_error_alert() (migration 167). Kept in sync with
+origin/master:supabase/functions/stripe-webhook/index.ts:12: *   `system_grant_credits` RPC. The RPC owns the compatibility writes
+origin/master:supabase/functions/stripe-webhook/index.ts:22: *   GRANT level (authoritative) — system_grant_credits' atomic claim (024)
+origin/master:supabase/functions/stripe-webhook/index.ts:75: * Ledger-consistent credit grant through the system_grant_credits RPC.
+origin/master:supabase/functions/stripe-webhook/index.ts:90:  const { error: rpcErr } = await supabase.rpc('system_grant_credits', {
+origin/master:supabase/functions/stripe-webhook/index.ts:109: * the AUTHORITATIVE, race-safe guarantee is in system_grant_credits, which
+origin/master:supabase/functions/stripe-webhook/index.ts:138:  // pass it. The AUTHORITATIVE once-per-account guarantee is system_grant_credits'
+origin/master:supabase/functions/stripe-webhook/index.ts:199:      'resolve_account_deletion_user_by_stripe_billing',
+origin/master:supabase/functions/stripe-webhook/index.ts:506:  // (the webhook pre-check above, system_grant_credits' delivery key, and the
+origin/master:supabase/functions/stripe-webhook/index.ts:531:// here AND re-asserted inside grant_referral, so a regression in either layer
+origin/master:supabase/functions/stripe-webhook/index.ts:535://   * grant_referral is the AUTHORITATIVE claim-once (pending → granted, one
+origin/master:supabase/functions/stripe-webhook/index.ts:544:// grant_referral has claimed, a thrown error would release the EVENT claim,
+origin/master:supabase/functions/stripe-webhook/index.ts:642:    // Stripe-originated grant. grant_referral's claim-once is the authoritative
+origin/master:supabase/functions/stripe-webhook/index.ts:662:    const { error: detailErr } = await supabase.rpc('record_referral_grant_detail', {
+origin/master:supabase/functions/stripe-webhook/index.ts:668:    // The detail row is what clawback_referral hands back for reversal — a
+origin/master:supabase/functions/stripe-webhook/index.ts:671:    if (detailErr) throw new Error(`record_referral_grant_detail failed: ${detailErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:689:  const { error: detailErr } = await supabase.rpc('record_referral_grant_detail', {
+origin/master:supabase/functions/stripe-webhook/index.ts:695:  if (detailErr) throw new Error(`record_referral_grant_detail failed: ${detailErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:701: * qualifying events. Calls grant_referral (claim-once, zero-dollar-gated);
+origin/master:supabase/functions/stripe-webhook/index.ts:704: * THROW SEMANTICS: a grant_referral TRANSPORT failure throws (non-2xx →
+origin/master:supabase/functions/stripe-webhook/index.ts:719:  // Zero-dollar gate, layer 1 (layer 2 lives inside grant_referral).
+origin/master:supabase/functions/stripe-webhook/index.ts:722:  const { data: grant, error: grantErr } = await supabase.rpc('grant_referral', {
+origin/master:supabase/functions/stripe-webhook/index.ts:729:      stage: 'grant_referral', invoice_id: opts.invoiceId,
+origin/master:supabase/functions/stripe-webhook/index.ts:731:    throw new Error(`grant_referral failed: ${grantErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:780:// clawback_referral claims granted → clawed_back ONCE (a redelivery finds
+origin/master:supabase/functions/stripe-webhook/index.ts:786: * Deduct a clawed-back credit reward via service_adjust_credits (103): atomic,
+origin/master:supabase/functions/stripe-webhook/index.ts:790: * service_adjust_credits audits to admin_actions and therefore requires an
+origin/master:supabase/functions/stripe-webhook/index.ts:811:  const { error: adjustErr } = await supabase.rpc('service_adjust_credits', {
+origin/master:supabase/functions/stripe-webhook/index.ts:817:  if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:822: * refunded founder kept lifetime premium (handle_premium_downgrade no-ops on
+origin/master:supabase/functions/stripe-webhook/index.ts:835: * the bonus is reversed (service_adjust_credits clamps at zero if already spent).
+origin/master:supabase/functions/stripe-webhook/index.ts:854:  // path). Ordered FIRST so the subsequent transfer_case_finalize refuses (wrong_state):
+origin/master:supabase/functions/stripe-webhook/index.ts:882:  // idempotent / hand-re-runnable (handle_premium_downgrade is founder-guarded off
+origin/master:supabase/functions/stripe-webhook/index.ts:883:  // the now-false flag; service_adjust_credits is ledger-atomic + zero-clamped).
+origin/master:supabase/functions/stripe-webhook/index.ts:884:  const { error: downgradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: userId });
+origin/master:supabase/functions/stripe-webhook/index.ts:897:  // mirror of claim_next_founder_seat. Post-claim + log-don't-throw like the steps
+origin/master:supabase/functions/stripe-webhook/index.ts:900:  // release). release_founder_seat_on_clawback is itself claim-once (a cleared holder
+origin/master:supabase/functions/stripe-webhook/index.ts:904:    const { error: seatErr } = await supabase.rpc('release_founder_seat_on_clawback', { p_user: userId });
+origin/master:supabase/functions/stripe-webhook/index.ts:915: * clawbackFounderForSession BEFORE the is_founder flip so a subsequent transfer_case_finalize
+origin/master:supabase/functions/stripe-webhook/index.ts:937:    const { data: aborted, error: aErr } = await supabase.rpc('transfer_case_abort', {
+origin/master:supabase/functions/stripe-webhook/index.ts:982:    const { error: aErr } = await supabase.rpc('transfer_case_abort', { p_case: c.id, p_actor: 'chargeback', p_reason: 'dispute_or_refund' });
+origin/master:supabase/functions/stripe-webhook/index.ts:985:    const { error: rErr } = await supabase.rpc('transfer_case_reverse', { p_case: c.id, p_reason: 'dispute_or_refund' });
+origin/master:supabase/functions/stripe-webhook/index.ts:996: * Reverse the 30-credit founder bonus via service_adjust_credits (103) — atomic,
+origin/master:supabase/functions/stripe-webhook/index.ts:1015:  const { error: adjustErr } = await supabase.rpc('service_adjust_credits', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1021:  if (adjustErr) throw new Error(`service_adjust_credits failed: ${adjustErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:1081:  const { data: claw, error: clawErr } = await supabase.rpc('clawback_referral', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1086:    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_referral', invoice_id: invoiceId });
+origin/master:supabase/functions/stripe-webhook/index.ts:1087:    throw new Error(`clawback_referral failed: ${clawErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:1188:// create-checkout reserved the seat (reserve_redemption) and stamped the
+origin/master:supabase/functions/stripe-webhook/index.ts:1189:// session id (bind_redemption_session). When the PAID session completes,
+origin/master:supabase/functions/stripe-webhook/index.ts:1190:// apply_redemption flips reserved → applied exactly once — that flip is the
+origin/master:supabase/functions/stripe-webhook/index.ts:1191:// AUTHORITATIVE claim for this money: system_grant_credits takes NO atomic
+origin/master:supabase/functions/stripe-webhook/index.ts:1213:// grant_referral) enforce that; the execution test pins it.
+origin/master:supabase/functions/stripe-webhook/index.ts:1224:  const { data: redemption, error: applyErr } = await supabase.rpc('apply_redemption', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1229:    logError('stripe-webhook', null, applyErr.message, { stage: 'apply_redemption', session_id: sessionId });
+origin/master:supabase/functions/stripe-webhook/index.ts:1230:    throw new Error(`apply_redemption failed: ${applyErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:1403://     → grant_dossier_entitlement mints the durable right (claim-once on
+origin/master:supabase/functions/stripe-webhook/index.ts:1419://     charge.dispute.created) → clawback_dossier_entitlement reverses the durable
+origin/master:supabase/functions/stripe-webhook/index.ts:1433: * session. Validates nothing itself — grant_dossier_entitlement re-checks that
+origin/master:supabase/functions/stripe-webhook/index.ts:1445:    const { data: grant, error: grantErr } = await supabase.rpc('grant_dossier_entitlement', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1453:        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+origin/master:supabase/functions/stripe-webhook/index.ts:1461:      logError('stripe-webhook', userId, `grant_dossier_entitlement declined: ${grant?.reason ?? 'unknown'}`, {
+origin/master:supabase/functions/stripe-webhook/index.ts:1462:        stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+origin/master:supabase/functions/stripe-webhook/index.ts:1471:      stage: 'grant_dossier_entitlement', session_id: sessionId, save_id: saveId,
+origin/master:supabase/functions/stripe-webhook/index.ts:1533: * clawback_dossier_entitlement flips the purchase row to 'refunded' UNCONDITIONALLY
+origin/master:supabase/functions/stripe-webhook/index.ts:1544:  const { data: claw, error: clawErr } = await supabase.rpc('clawback_dossier_entitlement', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1548:    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_dossier_entitlement', session_id: sessionId });
+origin/master:supabase/functions/stripe-webhook/index.ts:1549:    throw new Error(`clawback_dossier_entitlement failed: ${clawErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:1558: * reverses the FULL granted amount through the narrow system_clawback_credits
+origin/master:supabase/functions/stripe-webhook/index.ts:1575:  const { data: claw, error: clawErr } = await supabase.rpc('system_clawback_credits', {
+origin/master:supabase/functions/stripe-webhook/index.ts:1581:    throw new Error(`system_clawback_credits failed: ${clawErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:1786: * that is no longer awaiting_payment. transfer_case_mark_paid no-opped (wrong_state), so
+origin/master:supabase/functions/stripe-webhook/index.ts:1862://     per-PI claim via system_grant_credits 'auto_reload' key → exactly once
+origin/master:supabase/functions/stripe-webhook/index.ts:1927:  const { data, error } = await supabase.rpc('claim_auto_reload_payment_intent', {
+origin/master:supabase/functions/stripe-webhook/index.ts:2025:  const { data, error } = await supabase.rpc('record_payment_refund_obligation', {
+origin/master:supabase/functions/stripe-webhook/index.ts:2314:    'requeue_account_deletion_cleanup_for_late_billing',
+origin/master:supabase/functions/stripe-webhook/index.ts:2665:  // AUTHORITATIVE grant: system_grant_credits claims once per PI id (158 delivery
+origin/master:supabase/functions/stripe-webhook/index.ts:2852:        const { data: paid, error: paidErr } = await supabase.rpc('transfer_case_mark_paid', {
+origin/master:supabase/functions/stripe-webhook/index.ts:2855:        if (paidErr) throw new Error(`transfer_case_mark_paid failed: ${paidErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:2902:        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+origin/master:supabase/functions/stripe-webhook/index.ts:2925:        const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
+origin/master:supabase/functions/stripe-webhook/index.ts:2937:          const { error: seatErr } = await supabase.rpc('claim_next_founder_seat', { p_user: userId! });
+origin/master:supabase/functions/stripe-webhook/index.ts:2969:        //     durable re-download right on it (grant_dossier_entitlement);
+origin/master:supabase/functions/stripe-webhook/index.ts:3011:        const { error: surveyorErr } = await supabase.rpc('grant_surveyor_entitlement', {
+origin/master:supabase/functions/stripe-webhook/index.ts:3060:      const { data: reverted, error: revertErr } = await supabase.rpc('revert_redemption', {
+origin/master:supabase/functions/stripe-webhook/index.ts:3074:      const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', {
+origin/master:supabase/functions/stripe-webhook/index.ts:3090:      // isn't burned by a session nobody paid for. revert_redemption is
+origin/master:supabase/functions/stripe-webhook/index.ts:3096:      const { data: reverted, error: revertErr } = await supabase.rpc('revert_redemption', {
+origin/master:supabase/functions/stripe-webhook/index.ts:3101:        logError('stripe-webhook', null, revertErr.message, { stage: 'revert_redemption', session_id: expired.id });
+origin/master:supabase/functions/stripe-webhook/index.ts:3102:        throw new Error(`revert_redemption failed: ${revertErr.message}`);
+origin/master:supabase/functions/stripe-webhook/index.ts:3111:        const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', { p_session: expired.id });
+origin/master:supabase/functions/stripe-webhook/index.ts:3173:      // cycle') with real money moved. grant_referral re-asserts both gates.
+origin/master:supabase/functions/stripe-webhook/index.ts:3192:    // clawback_referral answers no_granted_referral and the case no-ops.
+origin/master:supabase/functions/stripe-webhook/index.ts:3318:        // JUDGMENT (vetoable): reuse handle_premium_downgrade rather than a new
+origin/master:supabase/functions/stripe-webhook/index.ts:3327:        const { error: pauseDowngradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: updatedProfile.userId });
+origin/master:supabase/functions/stripe-webhook/index.ts:3343:        const { error: resumeRestoreErr } = await supabase.rpc('restore_premium_settlements', { target_user: updatedProfile.userId });
+origin/master:supabase/functions/stripe-webhook/index.ts:3382:        .rpc('revoke_surveyor_entitlement_by_subscription', { p_subscription_id: subscription.id });
+origin/master:supabase/functions/stripe-webhook/index.ts:3406:        // must not re-run handle_premium_downgrade (which would re-stamp the
+origin/master:supabase/functions/stripe-webhook/index.ts:3424:        const { error: downgradeError } = await supabase.rpc('handle_premium_downgrade', {
+origin/master:supabase/functions/surveyor-autonomy/index.ts:228:          await supabaseAdmin.rpc('surveyor_byok_set_health', { p_user: user.id, p_provider: AUTONOMY_PROVIDER, p_health: health, p_error_class: cls, p_verified: false });
+origin/master:supabase/functions/surveyor-autonomy/index.ts:235:      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', { p_user: user.id, p_provider: AUTONOMY_PROVIDER, p_feature: AUTONOMY_FEATURE });
+origin/master:supabase/functions/surveyor-autonomy/index.ts:277:        const { data, error } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/surveyor-autonomy/index.ts:359:        try { const { error } = await supabaseAdmin.rpc('refund_credits', { spend_ledger_row: spendId, refund_reason: reason }); if (error) logError('surveyor-autonomy', user.id, error.message, { stage: 'refund', spend_id: spendId }); }
+origin/master:supabase/functions/surveyor-byok/index.ts:9: * persisted on the vault (surveyor_byok_set_health) so the settings surface shows a live
+origin/master:supabase/functions/surveyor-byok/index.ts:27: * decrypts it per request via the service-role surveyor_byok_get RPC and NEVER logs it
+origin/master:supabase/functions/surveyor-byok/index.ts:192:      const { data: rl, error: rlErr } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
+origin/master:supabase/functions/surveyor-byok/index.ts:228:      const { error } = await supabaseAdmin.rpc('surveyor_byok_set_health', {
+origin/master:supabase/functions/surveyor-byok/index.ts:317:      const { error: tierErr } = await supabaseAdmin.rpc('surveyor_byok_set_probe_tier', {
+origin/master:supabase/functions/surveyor-byok/probeCore.ts:398: *  surveyor_byok_set_probe_tier accepts. Verdicts only: every value is a bare
+origin/master:supabase/functions/unsubscribe/index.ts:85:  const { data, error } = await client.rpc("unsubscribe_via_token", {

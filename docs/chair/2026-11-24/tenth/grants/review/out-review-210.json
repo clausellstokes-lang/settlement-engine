@@ -1,0 +1,2341 @@
+{
+ "out": {
+  "upTo": 210,
+  "nDo": 105,
+  "nDistinct": 105,
+  "block0Same": true,
+  "block2Same": true,
+  "failuresHosted": 13,
+  "failuresVanilla": 13,
+  "missing": [],
+  "intendedForUsers": [],
+  "svcNotExplicitVanilla": [
+   {
+    "sig": "public._surveyor_byok_secret()",
+    "acl": "{postgres=X/postgres}"
+   },
+   {
+    "sig": "public._consume_action_rate_limit(uuid,text,integer)",
+    "acl": "{postgres=X/postgres}"
+   },
+   {
+    "sig": "public.insert_operator_direct_message(uuid,uuid,text,text,text,text,text)",
+    "acl": "{postgres=X/postgres}"
+   },
+   {
+    "sig": "public.issue_warning(uuid,uuid,text,text,boolean)",
+    "acl": "{postgres=X/postgres}"
+   },
+   {
+    "sig": "public.materialize_my_operator_broadcast_receipts(uuid)",
+    "acl": "{postgres=X/postgres}"
+   },
+   {
+    "sig": "public.set_account_banned(uuid,uuid,boolean,text)",
+    "acl": "{postgres=X/postgres}"
+   }
+  ],
+  "notExecByUsersBefore": [
+   "public.can_email_user(uuid,text)",
+   "public.claim_account_deletion_cleanup_jobs(integer,integer)",
+   "public.claim_operator_message_delivery_jobs(integer,integer)",
+   "public.claim_operator_message_recipient(uuid,uuid,uuid)",
+   "public.get_or_mint_unsubscribe_token(uuid)",
+   "public.list_operational_obligation_attention(integer,integer)",
+   "public.list_operator_broadcasts(integer)",
+   "public.page_operator_message_recipients(uuid,uuid,timestamp with time zone,uuid,integer)",
+   "public.pick_recovery_question(text)",
+   "public.recovery_is_locked(text)",
+   "public.resolve_account_deletion_user_by_stripe_billing(text,text)",
+   "public.checkpoint_account_deletion_billing_identity(uuid,uuid,text,text)",
+   "public.claim_auto_reload_attempt(uuid,numeric,integer)",
+   "public.clear_recovery_lockout(uuid)",
+   "public.clear_recovery_lockout_by_email(text)",
+   "public.create_operator_direct_message(uuid,uuid,text,text,text,text)",
+   "public.create_ticket(uuid,text,text,text,text,text,jsonb,jsonb)",
+   "public.grant_surveyor_entitlement(uuid,text,text,text)",
+   "public.insert_operator_direct_message(uuid,uuid,text,text,text,text,text)",
+   "public.issue_warning(uuid,uuid,text,text,boolean)",
+   "public.issue_warning_with_message(uuid,uuid,text,text,text,text)",
+   "public.mark_account_deletion_auth_revoked(uuid,uuid)",
+   "public.materialize_my_operator_broadcast_receipts(uuid)",
+   "public.note_recovery_verify_failure(text)",
+   "public.process_account_deletions(uuid,integer,integer)",
+   "public.record_payment_refund_obligation(text,text,integer,text,text,text,text,text,uuid,uuid,text,timestamp with time zone,timestamp with time zone)",
+   "public.refund_credits(uuid,text)",
+   "public.requeue_account_deletion_cleanup_for_late_billing(uuid,text,text,text)",
+   "public.restore_premium_settlements(uuid)",
+   "public.service_set_credits(uuid,uuid,integer,text)",
+   "public.service_update_profile_metadata(uuid,uuid,jsonb,text)",
+   "public.set_account_banned(uuid,uuid,boolean,text)",
+   "public.set_account_banned_with_message(uuid,uuid,boolean,text,text,text)",
+   "public.system_grant_credits(uuid,integer,text,jsonb,timestamp with time zone)",
+   "public.unsubscribe_via_token(uuid,text)",
+   "public.verify_recovery_answer(text,smallint,text)"
+  ],
+  "invokerInList": [],
+  "dependsOn": [],
+  "exprHits": [],
+  "callers": [
+   {
+    "name": "_seat_holder_last_active",
+    "caller": "sweep_seat_dormancy_nudges()",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_seat_holder_last_active",
+    "caller": "sweep_seat_abandonment()",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_surveyor_byok_secret",
+    "caller": "surveyor_byok_set(text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_surveyor_byok_secret",
+    "caller": "surveyor_byok_get(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "has_active_transfer_lock",
+    "caller": "email_has_active_transfer_lock(text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "has_active_transfer_lock",
+    "caller": "claim_founder_seat_buyback(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_consume_action_rate_limit",
+    "caller": "add_gallery_comment(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_consume_action_rate_limit",
+    "caller": "toggle_gallery_vote(uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_consume_action_rate_limit",
+    "caller": "toggle_gallery_reaction(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_consume_action_rate_limit",
+    "caller": "report_gallery_comment(uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_consume_action_rate_limit",
+    "caller": "report_gallery_map(uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_mark_awaiting_payment(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_open(smallint,uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_bind_nominee(uuid,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_mark_paid(uuid,text,integer)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_regress_awaiting_payment(text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_abort(uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_finalize(uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "transfer_case_reverse(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "expire_stale_transfer_cases()",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "issue_transfer_challenge(uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "verify_transfer_challenge(uuid,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "_log_founder_transfer_event",
+    "caller": "reelect_transfer_payout(uuid,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "insert_operator_direct_message",
+    "caller": "create_operator_direct_message(uuid,uuid,text,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "insert_operator_direct_message",
+    "caller": "issue_warning_with_message(uuid,uuid,text,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "insert_operator_direct_message",
+    "caller": "set_account_banned_with_message(uuid,uuid,boolean,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "issue_warning",
+    "caller": "issue_warning_with_message(uuid,uuid,text,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "list_my_operator_messages(integer,timestamp with time zone,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "get_my_operator_message(uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "mark_operator_message_read(uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "dismiss_operator_message(uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "get_my_operator_unread_count()",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "materialize_my_operator_broadcast_receipts",
+    "caller": "get_my_operator_service_export()",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": true
+   },
+   {
+    "name": "system_grant_credits",
+    "caller": "refund_credits(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_user_full(uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "issue_warning(uuid,uuid,text,text,boolean)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "add_internal_note(uuid,uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "set_account_disabled(uuid,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_soft_delete_settlement(uuid,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_remove_gallery_item(uuid,uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_revoke_share_link(uuid,uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_billing_summary(uuid,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "claim_ticket(uuid,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "set_ticket_status(uuid,uuid,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "link_ticket_faq(uuid,uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_diagnostic_bundle(uuid,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_soft_delete_map(uuid,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_remove_gallery_map(uuid,uuid,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "admin_set_content_banned(uuid,text,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": true,
+    "auth": true
+   },
+   {
+    "name": "write_audit",
+    "caller": "acknowledge_operational_obligation(text,text,uuid,text,boolean)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "complete_account_deletion_cleanup_job(uuid,uuid,text,text,text,text,text[],text[],bigint)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "create_operator_direct_message(uuid,uuid,text,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "issue_warning_with_message(uuid,uuid,text,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "set_account_banned_with_message(uuid,uuid,boolean,text,text,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "set_account_banned(uuid,uuid,boolean,text)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "queue_operator_broadcast(uuid,text,text,text,text,text,integer)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   },
+   {
+    "name": "write_audit",
+    "caller": "cancel_operator_broadcast(uuid,uuid)",
+    "secdef": true,
+    "trigger": false,
+    "anon": false,
+    "auth": false
+   }
+  ],
+  "invokerCallersReachable": [],
+  "changedOutsideList": [],
+  "changedInList": 69,
+  "lostServiceRole": [],
+  "stillExecutableAfter": [],
+  "svcMissingAfter": [
+   "insert_operator_direct_message",
+   "issue_warning",
+   "materialize_my_operator_broadcast_receipts",
+   "set_account_banned"
+  ],
+  "intendedLost": [],
+  "vanillaUserExecCount": {
+   "anon": 68,
+   "auth": 147
+  }
+ },
+ "rows": [
+  {
+   "sig": "public._seat_holder_last_active(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public._surveyor_byok_secret()",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public.admin_billing_summary(uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_diagnostic_bundle(uuid,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.can_email_user(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_account_deletion_cleanup_jobs(integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_operator_message_delivery_jobs(integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_operator_message_recipient(uuid,uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.email_has_active_transfer_lock(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.get_or_mint_unsubscribe_token(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.has_active_transfer_lock(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.list_operational_obligation_attention(integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.list_operator_broadcasts(integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.page_operator_message_recipients(uuid,uuid,timestamp with time zone,uuid,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.pick_recovery_question(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.recovery_is_locked(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.report_client_error_alert()",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.report_client_errors(date,date)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.resolve_account_deletion_user_by_stripe_billing(text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.surveyor_byok_get(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.surveyor_usage_precheck(uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public._consume_action_rate_limit(uuid,text,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public._log_founder_transfer_event(uuid,text,text,jsonb)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.add_internal_note(uuid,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_remove_gallery_item(uuid,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_remove_gallery_map(uuid,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_revoke_share_link(uuid,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_set_content_banned(uuid,text,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_soft_delete_map(uuid,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.admin_soft_delete_settlement(uuid,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.apply_redemption(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.attach_ai_spend_to_claim(uuid,text,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.bind_redemption_session(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.checkpoint_account_deletion_billing_identity(uuid,uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_ai_request(uuid,text,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_auto_reload_attempt(uuid,numeric,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_dossier_purchase_by_session(text,uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_due_buyback_payout()",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_due_transfer_payout()",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_founder_seat_buyback(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_free_narrative(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_next_founder_seat(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.claim_ticket(uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.clawback_dossier_entitlement(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.clawback_referral(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.clear_recovery_lockout(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.clear_recovery_lockout_by_email(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.consume_ai_generate_rate_limit(uuid,integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.create_operator_direct_message(uuid,uuid,text,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.create_ticket(uuid,text,text,text,text,text,jsonb,jsonb)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.grant_dossier_entitlement(uuid,uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.grant_referral(uuid,text,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.grant_surveyor_entitlement(uuid,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.handle_premium_downgrade(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.insert_operator_direct_message(uuid,uuid,text,text,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": false,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public.issue_buyback_challenge(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.issue_transfer_challenge(uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.issue_warning(uuid,uuid,text,text,boolean)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": false,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public.issue_warning_with_message(uuid,uuid,text,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.link_ticket_faq(uuid,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.mark_account_deletion_auth_revoked(uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.mark_low_balance_notified(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.materialize_my_operator_broadcast_receipts(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": false,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public.note_recovery_verify_failure(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.post_ticket_reply(uuid,uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.process_account_deletions(uuid,integer,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.purge_analytics_for_user(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.record_payment_refund_obligation(text,text,integer,text,text,text,text,text,uuid,uuid,text,timestamp with time zone,timestamp with time zone)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.record_referral_grant_detail(uuid,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.reelect_transfer_payout(uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.refund_credits(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.release_founder_seat_on_clawback(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.release_free_narrative(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.requeue_account_deletion_cleanup_for_late_billing(uuid,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.reserve_redemption(text,uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.restore_premium_settlements(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.revert_redemption(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.revoke_surveyor_entitlement(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.revoke_surveyor_entitlement_by_subscription(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.service_adjust_credits(uuid,uuid,integer,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.service_set_credits(uuid,uuid,integer,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.service_update_profile_metadata(uuid,uuid,jsonb,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.set_account_banned(uuid,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": false,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": false
+   }
+  },
+  {
+   "sig": "public.set_account_banned_with_message(uuid,uuid,boolean,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.set_account_disabled(uuid,uuid,boolean,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.set_gallery_comment_hidden(uuid,boolean,text,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.set_ticket_status(uuid,uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.surveyor_byok_set_health(uuid,text,text,text,boolean)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.system_clawback_credits(text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.system_grant_credits(uuid,integer,text,jsonb,timestamp with time zone)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_abort(uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_bind_nominee(uuid,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_finalize(uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_mark_awaiting_payment(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_mark_paid(uuid,text,integer)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_open(smallint,uuid,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_regress_awaiting_payment(text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.transfer_case_reverse(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.unsubscribe_via_token(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.verify_buyback_challenge(uuid,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.verify_recovery_answer(text,smallint,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": false,
+    "auth": false,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.verify_transfer_challenge(uuid,text,text,text)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  },
+  {
+   "sig": "public.write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)",
+   "existsHosted": true,
+   "existsVanilla": true,
+   "hosted": {
+    "anon": true,
+    "auth": true,
+    "svc": true,
+    "secdef": true
+   },
+   "vanillaAcl": "{postgres=X/postgres,service_role=X/postgres}",
+   "vanilla": {
+    "anon": false,
+    "auth": false,
+    "svc": true
+   }
+  }
+ ]
+}
