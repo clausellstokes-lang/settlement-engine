@@ -112,3 +112,25 @@ F8 where a market stands, the food lens is not strained. THE FAULT WAS C 197 AND
   line, each classed SAYS SHORTAGE, SAYS SOURCE or NEITHER, with a lint arm that reds on an unclassed reader.
 - **THE PROOF, C AND V:** the pattern (with Dawn Work and the mirror) to 0; pages changed; the slot's commonest
   sentence's share before and after; whether a born record moves (the goldens then move: the owner's one signing).
+
+## R24d (added 20:40 UTC on 2026-11-24): A CORRECTION OF R24c, AND THE WORDS
+**THE CHAIR'S OWN ERROR, CORRECTED BEFORE A2's COMMIT:** R24c said "printed Deficit reads the strained fare". Too
+blunt: under it the builder moved deficit|critical (C 16, V 9) DOWN to the strained lines, though critical lines beside a
+printed Deficit were coherent. The chair had ruled the mapping without reading the ladder or the pools. It has now
+read both (`src/data/bandLadders.js :: FOOD_SECURITY_CUTS`: pressured over 5, import-dependent over 15, deficit over
+40, famine by the stress; `src/data/dailyLife/foodCulture.js`: the strained, critical and collapsed pools).
+**THE RULE IN ITS RIGHT FORM: THE PRINTED BAND BOUNDS THE FARE; PRODUCTION PLACES IT WITHIN THE BOUND.** A cell inside
+its bound is unchanged; a cell outside moves to the nearest branch inside.
+| the page prints | the fare may read | so these cells move |
+|---|---|---|
+| Secure or Surplus | `surplus` (production surplus) or `adequate` | secure over strained, critical or collapsed production reads `adequate` (C 197, V 168: the fault) |
+| Pressured | `adequate` or `strained` | production surplus reads `adequate` (C 5, V 13); production critical or collapsed reads `strained` (C 1, V 22) |
+| Import-Dependent or Deficit | `strained` or `critical` | production adequate or surplus reads `strained` (C 1); production collapsed reads `critical` (C 1); production critical STAYS |
+| Famine | `critical` or `collapsed` | every production but collapsed reads `critical` (famine over strained C 6, V 20; over adequate or surplus C 4, V 3) |
+The grievance family, the visitor's lens and Dawn Work's food branch read that same band by one derivation.
+**THE WORDS** for the one cell where the page prints Famine and the place's own production is adequate or surplus (the
+lines there that say the source failed), each a NEW line with its declared condition, the old lines kept where the
+source did fail; both on the owner's veto list:
+- fare, in place of C7: "Every fish that comes in is counted, and the shares are measured out house by house."
+- Dawn Work, in place of F6: "Every hand that can be spared is out at first light, and what comes in is counted before it is eaten."
+A2 merges without that cell; the mirror is its own small unit after it, with a pattern at a bar of zero.

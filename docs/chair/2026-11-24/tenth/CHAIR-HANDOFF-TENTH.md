@@ -515,3 +515,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   every reader of the band is listed and classed, with a lint arm that reds on an unclassed one: a fifth reader is
   not left to a reader's luck. **Why the widening:** the owner's word is to fix the findings, and the same fact
   read wrongly in a fourth place and in its mirror is the same finding.
+- 2026-11-24 20:40 UTC · T36 · (a) THE OWNER ASKED FOR THE WHOLE PROGRESS IN DETAIL AND IN BULLETS (20:37 UTC): given: where the
+  line stands against the live site (8,430 commits ahead, 114 landings, about 43,300 tests, 61 known reds), the road
+  so far, today, what is left in order, what waits on him, what could move the date (the first release: late on
+  2026-11-25 or during 2026-11-26, resting on the veil seat's guess). (b) RULING R24d, appended to
+  `read/RULING-R24.md`: THE CHAIR CORRECTS ITS OWN R24c BEFORE A2's COMMIT. "Printed Deficit reads the strained
+  fare" was ruled without reading the ladder or the pools; under it the builder had moved 25 coherent pages
+  (deficit over critical production) down to milder lines. THE RULE NOW: THE PRINTED BAND BOUNDS THE FARE AND
+  PRODUCTION PLACES IT WITHIN THE BOUND; only a cell outside its bound moves, to the nearest branch inside (the
+  table is in the ruling). It also moves pressured over critical production (C 1, V 22) to the strained lines.
+  THE WORDS for famine printed over full fields: two new lines ruled (the fish counted and shared house by house;
+  every hand out at first light and what comes in counted), for the owner's veto list. A2 merges without that one
+  cell; the mirror is a small unit after it. **The lesson, for a next chair:** a mapping between two ladders is
+  ruled with both ladders and the pools' own words open, never from the table's labels alone.
