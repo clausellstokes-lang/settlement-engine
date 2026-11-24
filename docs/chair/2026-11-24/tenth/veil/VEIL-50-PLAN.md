@@ -27,9 +27,13 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 | A8 | the unit's one proof; "TIP? R5-DESC" | C | A0's proof |
 
 ### Chain A's second seat, R3-TELL-5 (iv), (v), (vi) (hand-off 2.2)
+| # | item | class | by |
+|---|---|---|---|
 | A9 | T5's measures and cures (`-t5-wip` b096065e5, nothing run) | T | GATE-1's last 4 of 92 (inference); N86, N88, N102 (2) |
 
 ### Chain B, R4-IDS (hand-off 2.3; PART 44 block (0))
+| # | item | class | by |
+|---|---|---|---|
 | B0 | R4-IDS itself (every person id re-keyed per read; `-r4ids-wip` ab05aa487) | D | LIT ONLY: a hidden power's representative served under an id that spells the power, `npc_power_<slug>`, four places (reader row 17, VEIL-33 14:31); dark pools 0 by record. (b) counts it on the lit trial join |
 | B1 | R4I-SQL-2 (i): `_gallery_veil_rekey`, one path list for npcs[] and both roster copies (the GAP) | D | stored person ids at three roster-copy paths, 456/443/35 hits, on the CONTROL shape only (criminalSwitchHandReach); 0 on today-born, master-born and the pool (C-GAP.md, CONFIRMED there) |
 | B2 | R4I-SQL-2 (ii): N106's two guard lines (`is distinct from 'number'`) | C | 212 writes shares the stored list never had: 352 of 3,360 master-born reads (gallery, Reveal DM, 11 settings), 33 of 288 control (N106, reader row 36) |
@@ -40,6 +44,8 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 | B7 | the "tonight" line's wording on the owner's page, 2 of 1,808 | S | a notice to the owner |
 
 ### The doors, IMPORT-DOOR with MAP-COVERT (hand-off 2.4; PART 46 section 0)
+| # | item | class | by |
+|---|---|---|---|
 | D1 | MAPCOVERT-GREEN-SQL (`-mcsql-wip` d56bc1ab6: `get_gallery_map` as the link's read; WIP, unproved) | D | a covert tie's copy (both names, type, text) at the map member AND the map's import at Reveal off: 7 of 7 today-born places with a covert tie, every marker (U-UNMARKED); master-born 0 (no stored tie flagged); on the LINE 10 of 180 births (N117). (b) re-counts on the tip and the lit join |
 | D2 | the map doors' Reveal-DM records turned into assertions (N95 (2)) | D | D1's proof at the other Reveal |
 | D3 | N115: the read's cost per public row (measure, arm) | S | speed; but a several-times-slower read holds the deploy (N115): its MEASURE belongs in Phase 1 |
@@ -51,6 +57,8 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 | D9 | the map import's paid gate (072) | S | named to the owner |
 
 ### Chain C (hand-off 2.5; PART 43; RECEIPTS at ccc2e5473)
+| # | item | class | by |
+|---|---|---|---|
 | C1 | STORED-PROSE "TIP?" (`-c2-wip` ced3b1de7: no `publicProse` on any shared read) | D | at the tip the stored prose is served at every door (twin 46,752 of 46,752 reads; server page, link, import 4,800 of 4,800 on 200 documents: PART 43); it held a withheld sentence word for word (`power:governance` held the withheld `recentConflict` on 338 of 440 today-born stored, reader row 23); (b) counts the prose rows on the tip. Master-born: master writes no `publicProse` (PLAUSIBLE; (b) reads it) |
 | C2 | its proof's gaps: the four whole-document measures (rc 2, about two seconds each: NOT RUN), set55, cures, lint, copy, types, build (no receipt) | C | C1's proof |
 | C3 | the chair's whole read of C1's diff with table A and line B (N96 (d)) | C | 212 is read before its "TIP?" |
@@ -61,6 +69,8 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 | C8 | LEGACY-TELLS step 0: the three probes' `rowOf` | S | an instrument |
 
 ### The join (hand-off 2.6; PART 45 section 0)
+| # | item | class | by |
+|---|---|---|---|
 | J1 | `tests/copy` whole; N107's two reds (code points in string literals) | C | a gate the join must pass |
 | J2 | REDS-CAUSE (1), (2): `fortuneLawMerits` U5a, `fortuneLastingSentence` U7b: `governanceAccount.js` and `fortuneMerits.js` read keys a shared read withholds always | C | the shared page's sentence is computed from absent data (the chair's lean: fail closed) |
 | J3 | REDS-CAUSE (3): `tensionCause` CAUSES-PARITY-2 F (the crimeWave rule, N102) | C | a test's universe (PLAUSIBLE) |
@@ -76,6 +86,8 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 | J13 | the join itself, re-made on today's line, with the grants fix and the renumbering | C | (c) below |
 
 ### Section 4 (with the owner)
+| # | item | class | by |
+|---|---|---|---|
 | O0 | the working line serves a covert tie's copy on the public projection (N117: 10 of 180 births) | D | cured at three doors by 211 and at the map by D1; (b) counts it on the lit trial join |
 | O1 | pages published before the veil | S | the owner's choice |
 | O2 | old towns' standing sentences (N102) | S | told; his later choice stands |
@@ -152,4 +164,59 @@ If 211's text moves, these three are re-read; nothing else of the veil reads it.
 
 ## (d) THE PROPOSAL
 
-(written last)
+### PHASE 1: every (D) and (C) item and the join, in the order they can merge
+The old order's constraints kept where they are about 212's text: R4-IDS before the doors and before chain A (ruling 130); chain C
+first (built; its proof half run). Seats: the chair's bound is one veil seat beside me now, two when the grants lane hands in. I am
+the lane's owner: I integrate, read every diff once, run every proof's slice and the full pools once, with ONE builder of my own.
+| # | unit (items) | class | who | proof on a slice (N111) | once on the full pools | seat-hours (a guess) |
+|---|---|---|---|---|---|---|
+| 1 | STORED-PROSE (C1-C3), as built (ced3b1de7), proof finished | D | SEAT 1 (chain C's successor), at once | the four whole-document measures on the 140 x both stored sets (rc 2 in its run: never ran), set55, cures, lint, copy, types, build; the chair reads the diff with table A, line B | ppkey on the full stored pool (ALREADY: 0 of 46,752 per door; not re-run unless its tree moves) | 4 |
+| 2 | R4-IDS with R4I-SQL-2 (B0-B3, B6; N106's two lines) | D (lit) + C | ME + my builder, at once | N106 352 -> 0 (master-born 140), its plant, the lint pin; R4I-SQL-2's red/green re-run by me; the whole-document form on the 140 at every door | one new pool, the unit's arms | 6 |
+| 3 | THE DOORS, narrowed: D1, D2, D6, D7, D8; D3's MEASURE; D4's MEASURE first (its cure only if it serves) | D + C | SEAT 2 (when the grants lane hands in), after "R4-IDS MERGED" | um: the map member and the map's import 21 + 21 -> 0 on the tip-born 140 (and the lit-born); the door-equality arm on the 140 | the door-equality arm once | 9 |
+| 4 | R5-DESC, narrowed: A0, A1, A2, A5, A6, A8 (RIVAL: see below) | D + C | SEAT 1 after unit 1, after "R4-IDS MERGED" | wd: `factions[].desc` 240 (tip-born) and 372 (lit) -> 0; SSKIP's count and cure on a slice; B2's re-runs on a slice | every arm once, one hold | 9 |
+| 5 | LEGACY-TELLS' served part: C5, C6; C7 re-measured after unit 2 | D | ME (or seat 1) | wd on the master-born 140 (b) | the master-born pool once | 3 |
+| 6 | THE JOIN (J1-J5, J9's sites and registers, J10, J12, J13; the renumbering; grants x veil; VR26 re-pointed) | C | ME + my builder, from the trial join (b)-(c) | the reds by name (q2's form) | (the bar's proof) | 12 |
+| 7 | PHASE 1's PROOF on the joined tree | | ME | | (b)'s instruments at every door on both pools, full; the whole-document form; gates read (not worse) | 5 |
+PHASE 1: ABOUT 48 SEAT-HOURS, A GUESS (machine time dominates: one heavy run at a time per box); with two seats beside me, about
+20 to 24 wall hours.
+
+THE ONE DEVIATION I RECOMMEND (vetoable): RIVAL (A3, A4; class T) rides unit 4. Its code is built, its diff read whole, its green
+run on the full pools (0 lone of 14,528), and it edits the same function as N106 and R5-DESC (`_gallery_veil_roster_choices`). What
+it still owes (chains, arms on slices, after, cost) is about 2 seat-hours; leaving it to Phase 2 costs another full proof of 213, a
+second chair's read of its text and a second pass of the security reader. If the chair holds Phase 1 to D and C strictly, it waits.
+
+THE FIRST HOURS (one seat beside me): seat 1 on STORED-PROSE's proof (its draft start message from PART 43 and this plan); me on
+R4I-SQL-2 (my builder finishes its lint, copy and typecheck; I read `_gallery_veil_rekey` and `_gallery_veil_roster_choices` whole,
+then the diff, then re-run its red and green); between my heavy runs, REDS-CAUSE on the trial join (the five files' causes, and
+VR26). When the grants lane hands in: seat 2 on the doors, which waits for "R4-IDS MERGED" by reading in and measuring D4 and D3.
+
+### PHASE 1's BAR, WORDED FOR THE CHAIR'S RULING
+On the JOINED tree (the veil's Phase 1 merges and the working line's tip with the grants fix; the veil's migrations 212 and 213):
+1. NO HIDDEN THING IS SERVED: on both stored pools (today-born under both laws lit, and master-born; the 140 seeds each, then the
+   full pools once), at every door (the gallery read, the party link, the import, the map member, the map's import), both Reveals
+   and every gated setting: 0 reads in which (i) a served string or key names a power or house the read withholds, or holds the id
+   of one or of a person it withholds (wd: the lane's own fold); (ii) a covert tie's copy is served at Reveal off (um); (iii) the
+   `publicProse` key is served (ppkey); each hit either 0 or LISTED with a ruling that what it names is not withheld on that read.
+2. 212's guards right on master-born documents: the whole-document form (N90), server against twin, on the master-born pool at
+   every door: 0 differences outside the listed classes; N106's walker green.
+3. EVERY DOOR'S READ EQUAL TO THE PARTY LINK'S BY VALUE (N77, N84), modulo the listed differences of reader row 32.
+4. NOT WORSE: GATE-1 and GATE-2 read on the joined tree, no worse than the same gates on the trial join before Phase 1 (lit:
+   the probe read 6 of 92 and 20 of 40); R3 is NOT required.
+5. The join's reds each cured or ruled by name; `tests/lint`, `tests/copy`, `tests/security` whole; typecheck; one build.
+6. THE CHAIR RULES whether the first release needs, before the owner's hand, a security reader on the Phase 1 rows of the list and
+   the top-tier read of 213's final text (my recommendation: yes, both, scoped to Phase 1's rows).
+
+### PHASE 2, to R3
+A3/A4 (if not carried), A7, A9 (T5's seat), C4 (R5-TENSION), D5 (FROZEN-LISTS), J6 (listed-apart), J9's unit (ix), J11, J10's
+listed difference, the bar's one proof, the reader on the whole list, 213's final read. ABOUT 35 SEAT-HOURS, A GUESS.
+
+### WHAT I WOULD NOT DO
+Re-run a proof whose tree has not moved (RIVAL's full-pool green; chain C's ppkey). Seat T5 or build any (T) item before Phase 1's
+bar. Run GATE-1/GATE-2 at every unit (once, at Phase 1's proof). Re-run PAGES whole before a chair has judged the existing
+`PAGES.md`. Write a new instrument where a lane instrument runs (I added none; the gaps below are named, not filled). Touch grants
+211, or resolve the trial merge with it before it lands. Merge anything into the line but by the join.
+
+### GAPS IN THE MEASURE (named, not filled)
+A withheld PERSON's NAME in another served string: no lane instrument searches it (wd searches withheld persons' IDS). The map's
+IMPORT door for names: wd reads the map member, not `import_gallery_map` (um reads it for covert copies). The world snapshots (D4):
+nothing reads them. Each is a measure for Phase 1's proof, built by copying wd with the chair's leave.
