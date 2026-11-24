@@ -102,7 +102,8 @@ export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix:
 
 // BANG, and with it HOUSE_FLAGS' lookarounds, LEFT_BOUND, RIGHT_BOUND and NAME_SEPQ below: these are pattern characters, not
 // prose; the voice walker (tests/copy/voiceMechanics.test.js) counts a literal's cooked value; hence the code points. Each
-// value equals its former spelling, held by tests/domain/display/patternLiteralsCodePoints.test.js.
+// value equals its former spelling, held by tests/domain/display/patternLiteralsCodePoints.test.js. HOUSE_FLAGS' template stays
+// one literal: each lookaround mark is written '~' (a character found nowhere else in it), turned into BANG before JSON.parse.
 const BANG = String.fromCharCode(0x21);
 
 /**
@@ -125,22 +126,22 @@ export const HOUSE_FLAGS = Object.freeze(Object.fromEntries(Object.entries(JSON.
   "hasGarrison": {"kw": ["garrison", "barracks", "professional guard", "multiple garrison"]},
   "hasMilitia": {"kw": ["citizen militia", "militia", "household levy"]},
   "hasWatch": {"kw": ["town watch", "city watch", "professional city watch", "village watch"]},
-  "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<${BANG}[a-z0-9_])free company(?${BANG}[a-z0-9_])"},
+  "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<~[a-z0-9_])free company(?~[a-z0-9_])"},
   "hasFreeCompany": {"kw": ["free company hall"]},
   "hasCharterHall": {"kw": ["adventurers' charter hall", "adventurers' guild hall", "multiple adventurers'", "adventurers' guild", "hireling hall"]},
   "hasWalls": {"kw": ["walls", "citadel", "gates (if walled)", "inner citadel", "massive walls", "palisade", "earthwork"]},
-  "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<${BANG}[a-z0-9_])gates?(?${BANG}[a-z0-9_])"},
-  "hasPrison": {"live": true, "re": "prison|stocks|(?<${BANG}[a-z0-9_])gaol|(?<${BANG}[a-z0-9_])jail"},
+  "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<~[a-z0-9_])gates?(?~[a-z0-9_])"},
+  "hasPrison": {"live": true, "re": "prison|stocks|(?<~[a-z0-9_])gaol|(?<~[a-z0-9_])jail"},
   "hasCourtSystem": {"live": true, "re": "courthouse|court buildings|democratic assembly|city hall|town hall"},
   "hasMarket": {"live": true, "names": ["annual fair", "auction house", "caravaneer's post", "carriers' guild", "cobbler's guild", "daily markets", "district markets (5-10)", "fish market", "furrier's district", "international trade center", "major annual fairs", "market square", "merchant guilds (15-40)", "merchant guilds (3-8)", "merchant guilds (50-100+)", "multiple market squares", "periodic market", "tailor's guild", "weekly market"]},
   "hasGuild": {"kw": ["guild", "guild consortium", "guild governance"]},
   "hasMerchantGuild": {"kw": ["merchant guild", "merchant oligarchy"]},
   "hasBank": {"kw": ["bank", "money changer", "counting", "stock exchange"]},
   "hasWarehouse": {"kw": ["warehouse"]},
-  "hasPort": {"re": "(?<${BANG}[a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?${BANG}[a-z0-9_])"},
+  "hasPort": {"re": "(?<~[a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?~[a-z0-9_])"},
   "hasNavy": {"kw": ["navy", "major port"]},
   "hasGranary": {"kw": ["granar"]},
-  "hasHospital": {"live": true, "re": "(?<${BANG}[a-z0-9_])hospital|(?<${BANG}[a-z0-9_])healer(?${BANG}[a-z0-9_])|(?<${BANG}[a-z0-9_])infirmar|(?<${BANG}[a-z0-9_])monaster|(?<${BANG}[a-z0-9_])friary(?${BANG}[a-z0-9_])"},
+  "hasHospital": {"live": true, "re": "(?<~[a-z0-9_])hospital|(?<~[a-z0-9_])healer(?~[a-z0-9_])|(?<~[a-z0-9_])infirmar|(?<~[a-z0-9_])monaster|(?<~[a-z0-9_])friary(?~[a-z0-9_])"},
   "hasChurch": {"kw": ["church", "cathedral", "temple", "monastery", "friary", "shrine", "priest", "abbey"]},
   "hasCathedral": {"kw": ["cathedral", "great cathedral"]},
   "hasMonastery": {"kw": ["monastery", "friary", "major monasteries"]},
@@ -153,7 +154,7 @@ export const HOUSE_FLAGS = Object.freeze(Object.fromEntries(Object.entries(JSON.
   "hasBlackMarket": {"kw": ["black market", "black market bazaar"]},
   "hasSmuggling": {"kw": ["smuggling network", "smuggling operation"]},
   "hasGangInfra": {"kw": ["multiple criminal", "street gang"]}
-}`)).map(([k, v]) => [k, Object.freeze(Object.fromEntries(Object.entries(v).map(([a, x]) => [a, Array.isArray(x) ? Object.freeze(x) : x])))])));
+}`.replaceAll('~', BANG))).map(([k, v]) => [k, Object.freeze(Object.fromEntries(Object.entries(v).map(([a, x]) => [a, Array.isArray(x) ? Object.freeze(x) : x])))])));
 /** Each rule's two patterns, compiled once. @type {Map<string, { not: RegExp|null, re: RegExp|null }>} */
 const HOUSE_FLAG_PATTERNS = new Map(Object.entries(HOUSE_FLAGS).map(([k, r]) => [k, { not: r.not ? new RegExp(r.not) : null, re: r.re ? new RegExp(r.re) : null }]));
 /** The statuses the engine's live roster leaves out (institutionRoster.js :: INACTIVE_STATUS). */
