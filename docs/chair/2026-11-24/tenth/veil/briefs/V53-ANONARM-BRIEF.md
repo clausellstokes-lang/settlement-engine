@@ -62,6 +62,14 @@ after commit 2 also `tests/lint` WHOLE (COMMON-EIGHTH 11) with its failing title
 and `rosterChoiceInversion` VR26 x2: name any other).
 NO PUSH, NO NETWORK, no hosted database, never the `supabase` command. A permission refusal: stop that line, report it.
 
+## THE CALL-GRAPH READ (VEIL-50, 21:37 UTC): EVERY PATH A VISITOR'S CALL CAN TAKE TO A NOBODY HELPER BY AN INVOKER
+Before commit 1, by a script over the joined chain's catalog (PGlite: `pg_proc.prosecdef`, `prosrc`; the callees by name in each
+body), list every chain from a function `anon` or `authenticated` may execute (classes ANYONE, USER, KEPT_OPEN) down through
+SECURITY INVOKER functions to any NOBODY (or SERVER) function; for each chain say whether a SECURITY DEFINER stands above the
+closed helper (read in the catalog), and then EXECUTE it in the arm (the door or the invoker called as the role). The table goes
+in the commit message and the report: chain | first definer above the helper or NONE | executed as anon / authenticated:
+returned or raised.
+
 ## YOUR FINAL MESSAGE (at most 200 words)
 The two commit hashes; for each its red (quoted) and green counts; the door/role table (5 doors x 2 roles: returned | refused by
 grant | RAISED); the plant's caught error text; `tests/lint` and `tests/security` whole counts with any red outside the known.
