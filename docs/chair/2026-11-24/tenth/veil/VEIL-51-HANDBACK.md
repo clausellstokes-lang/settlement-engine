@@ -51,7 +51,7 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   (the unit's one lint red) computed or ruled; VEIL-55 merges on the grant, never I.
 - THE CHAIR'S READ OF 212's HUNK (23:32): CLEAR. ONE CONDITION BEFORE THE GRANT, MINE: the HandRows literal anchor cured as
   69c07953e cured its like, on a commit of mine above ced3b1de7, red first, `tests/lint` to 24. THE GRANT IS VEIL-55's.
-  RED (23:36, CONFIRMED): the walker alone rc 1 (`/var/tmp/v51/out/lc/red.log`); regen.log names :1986, the fixture input
+  RED (23:27 by the log's mtime, CONFIRMED): the walker alone rc 1 (`/var/tmp/v51/out/lc/red.log`); regen.log names :1986, the fixture input
   'gmix1 the town depends on one source of income' (DS-ECO-12 vid 2). CURE (uncommitted in /home/user/wt/c2 while it runs):
   the words drawn by `variantByVid` (tests/helpers/drawnProse.js), only the marker searched. RUNNING: `p1.sh lintcure`
   (walker, HandRows whole, eslint, then `tests/lint` whole; logs /var/tmp/v51/out/lc/). Then commit on -c2-wip, push it,

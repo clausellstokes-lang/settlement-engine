@@ -36,7 +36,7 @@ step_build() { cd $C && mx sh -c "npm run build > $O/build.log 2>&1 && VERIFY_DI
 # tipbuild (added 23:22 UTC): the same build and dist pins on the lane's tip b58abc48b (/home/user/wt/tip), to attribute
 #   the c2 tree's size reds: run as `sh p1.sh tipbuild`.
 step_tipbuild() { cd $T && mx sh -c "npm run build > $O/tipbuild.log 2>&1 && VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js > $O/tipdist.log 2>&1"; st tip-build-dist $?; }
-# lintcure (added 23:40 UTC, the chair's condition of 23:32): HandRows' stored income-mix words drawn from their source. RED at
+# lintcure (added 23:31 UTC, the chair's condition of 23:32): HandRows' stored income-mix words drawn from their source. RED at
 #   ced3b1de7: /var/tmp/v51/out/lc/red.log (the walker alone, rc 1; regen.log names :1986). GREEN on the slice, then lint whole.
 step_lintcure() { cd $C && mx sh -c "npx vitest run tests/lint/proseDrawnAnchors.walker.test.js > $O/../lc/green-walker.log 2>&1; echo rc=\$? >> $O/../lc/green-walker.log; npx vitest run tests/security/galleryVeilHandRows.pglite.test.js > $O/../lc/green-handrows.log 2>&1; echo rc=\$? >> $O/../lc/green-handrows.log; npx eslint tests/security/galleryVeilHandRows.pglite.test.js > $O/../lc/eslint.log 2>&1; echo rc=\$? >> $O/../lc/eslint.log; npx vitest run tests/lint > $O/../lc/lint.log 2>&1; echo rc=\$? >> $O/../lc/lint.log"; st lintcure $?; }
 STEPS=${*:-"tpl dumps ctrl t140 st140 sm140 set55 cures lint copy types build"}
