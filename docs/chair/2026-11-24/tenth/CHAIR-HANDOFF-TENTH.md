@@ -551,3 +551,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   the chair says so to the owner in one line and runs it itself in its own session, where his yes stands in the
   conversation: the act is authorised by him; who types it is not what he was asked. A WIDER MOVE OF THAT REGISTER
   THAN THE ONE DEPENDENT HE WAS TOLD OF IS NOT COVERED AND GOES BACK TO HIM.
+- 2026-11-24 21:02 UTC · T39 · RULING R24e ON B1(i) (the desert), appended to `read/RULING-R24.md`. Built as R24b set it: C 0 of
+  900 records move; V 27, exactly the deserts holding a fish market, a sawmill, a charcoal burner or a hunter's lodge
+  with nothing that gives it. THE CASCADE RE-DEALS in 25 of the 27 (the withheld houses' chain boosts go with them):
+  ACCEPTED as what follows; the alternative is a phantom source. OWED BEFORE THE MERGE: the table of the 27, two
+  checks over every gained house, AND WHAT A SAVED DESERT PLACE DOES ON EACH REGENERATION PATH (only the user's own
+  re-roll may change its houses: a cure that re-deals a saved place on an edit or on the world pulse is a STOP).
+  EIGHT NEW TEST REDS on births the cure moves: page tests re-anchored by their own finders to births that are not
+  deserts; three counts re-stated with their cause; no fingerprint and no golden re-recorded (24 golden rows move,
+  all desert: the owner's one signing). `goals` I-13 is a finding of its own (a keying fault of `dealGoals`): a
+  measure first. ALSO ON THE CLOSE LANE: the page-census finding on besieged places (`P3source`) is being measured;
+  then C1. FINDINGS NOW OPEN BEYOND THE FIVE: P3source (three besieged places); goals I-13; both measure-first.

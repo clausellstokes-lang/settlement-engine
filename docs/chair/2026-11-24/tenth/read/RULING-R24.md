@@ -134,3 +134,23 @@ source did fail; both on the owner's veto list:
 - fare, in place of C7: "Every fish that comes in is counted, and the shares are measured out house by house."
 - Dawn Work, in place of F6: "Every hand that can be spared is out at first light, and what comes in is counted before it is eaten."
 A2 merges without that cell; the mirror is its own small unit after it, with a pattern at a bar of zero.
+
+## R24e (added 21:02 UTC on 2026-11-24, on B1(i) as built: c6c244964 and its door commit 9d0f85e01 on `-b1i-wip`)
+AS BUILT, AS R24b SET IT: the desert's `withholds` (fish, timber, game), the seven rows' declared livings, a givers
+table, one function `landWithholdsHouse` asked after each draw (the roll made as today, the withheld house then not
+taken; the cascade and the faction boost ask it after theirs; `getResourceMultiplier` untouched). C: 0 of 900 records
+move. V: 27 move, exactly the deserts holding a withheld house with no giver. The base draw loses Fish market 24,
+Sawmill (commercial) 15, Charcoal burner 12, Hunter's lodge 2, and gains nothing. Pattern B1land 0 on C and V.
+- **(1) THE CASCADE RE-DEALS in 25 of the 27 (about 1 to 9 houses each): ACCEPTED AS WHAT FOLLOWS.** The cascade's
+  candidates are boosted by the houses that stand; the withheld houses' chain boosts go with them. The alternative
+  (keeping a withheld house as a phantom source) is a new fault. The chair's words "no other house's draw shifts" were
+  about the base draw, which holds. OWED BEFORE THE MERGE: the table of the 27 (counts before and after; lost and gained
+  by name); two checks over every gained house, each 0 (none withheld by the land; none naming a puller that does not
+  stand); AND WHAT HAPPENS TO A SAVED DESERT PLACE on the user's own re-roll, on a re-derive after an edit, and on the
+  world pulse: only the first may change its houses; if another re-deals a saved place, STOP.
+- **(2) EIGHT NEW TEST REDS on desert births the cure moves:** a page test is re-anchored BY ITS OWN FINDER to a
+  birth that is not a desert's, the reason beside it; the three counts are re-stated with their cause (24 golden rows,
+  all desert). NO FINGERPRINT AND NO GOLDEN IS RE-RECORDED (the owner's one signing). `goals` I-13 (a keying fault of
+  `dealGoals` that the moved birth exposes) IS ITS OWN FINDING: a measure on C and V first, the cure on the chair's
+  ruling; its red is carried in the landing line as ruled.
+- **(3) THE `B1land` ROW AT ZERO BY HAND:** accepted, as NOHEAL.
