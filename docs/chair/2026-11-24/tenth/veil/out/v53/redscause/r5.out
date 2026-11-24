@@ -1,0 +1,7 @@
+R5 r5-city-0 form="City Council" A="Military/Guard" B="Merchant Guilds"
+R5   owner recentConflict="Power passed to Military/Guard by coup; the government now sits as a city council." taker="Military/Guard" holder="Military/Guard" rule=R1 person="Rionach Fitzgerald"
+R5   shared recentConflict(re-derived)="The City Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet." edgesServed=2 taker="Merchant Guilds" holder="Merchant Guilds" rule=R1 person="Rionach Fitzgerald"
+R5 r5-city-1 form="City Council" A="Merchant Guilds" B="Military/Guard"
+R5   owner recentConflict="Power passed to Merchant Guilds by coup; the government now sits as a city council." taker="Merchant Guilds" holder="Merchant Guilds" rule=R1 person="Sempronia Serranus"
+R5   shared recentConflict(re-derived)="The City Council has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet." edgesServed=2 taker="Military/Guard" holder="Military/Guard" rule=R1 person="Sempronia Serranus"
+IMPORT vr26-city-calm-3 law=2 stored={"prosperity":-10,"safety":-12,"defense":0,"food":0} served={"food":0} importRederived={"food":0,"prosperity":-10,"safety":-12,"defense":10}
