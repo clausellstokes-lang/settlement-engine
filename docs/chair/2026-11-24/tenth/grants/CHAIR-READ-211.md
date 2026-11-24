@@ -61,3 +61,31 @@ The three functions left open by name and the three named for the reader and not
 `account_is_active`, `profile_has_premium_access`): the reader's. Whether `is_public`, `public_slug`, `published_at`,
 `unlisted_slug` and `visibility` should stay the owner's to write directly (part D leaves them out by ruling G1): a
 later ruling, on the lane's hand-back.
+
+## ADDED 18:41 UTC: THE ORDER, AND THE READER'S VERDICT
+**Does it matter whether the owner pastes his files before the deploy's migrations?** NO (CONFIRMED in PGlite, the
+lane's harness, at 72b6e0ae2; `chair-probe/chair-order.mjs`, `out-order-owner-first-vs-tested.txt`). Two orders were
+replayed under the modelled hosted defaults: THE TESTED ORDER (001 to 210, then 211, part B last) and THE OWNER-FIRST
+ORDER (001 to 203, then the owner's files 1, 2, 3 and 4 by hand, so that part B is already in force, THEN 204 to 211
+as the deploy's push would apply them). 405 functions in each; NOT ONE differs in what a visitor, a signed-in user or
+the server may run; four profile columns and two guard triggers in both; no statement of 204 to 211 failed. So no
+function that 204 to 210 create leans on the hosted default grant for a path a page needs.
+
+**The fresh security reader's unit (2)** (REVIEW-GRANTS-1, on 39bfb0831e, by its own catalog queries and greps):
+PART A CLEAR, PART B CLEAR, PART C CLEAR, PART D CLEAR (each CONFIRMED on 203 and on 210). THE OWNER'S FILES "NOT
+CLEAR, FOR VISIBILITY ONLY": files 1 to 4 equal the migration exactly, but nothing read back parts C and D, and part
+B's read is filtered to schema public (a global default grant would be hidden; part B run under another role does
+nothing without a word). Its other findings: part A's header calls `operator_message_class_for_template` "left open"
+though it is closed to both roles before and after (a comment); `scripts/ops/migrationRehearsalCore.mjs` still calls
+211 "grants only" and its expected objects omit the guard function and the two triggers. ALL SENT TO THE LANE as its
+last four items, with a standing check the owner can run after every deploy (every function a visitor or a signed-in
+user can execute that the register does not class as theirs: expect no row).
+
+**Decided by the chair, vetoable:** THE TWO ORACLES THE READER NAMES ARE NOT CLOSED IN 211. `has_role` and
+`profile_has_premium_access` tell anyone who holds an account's id whether that account is staff or premium (the
+second has no caller at all; `account_is_active` must stay, twelve policies use it). **Why not now:** part A is
+generated from the register and cleared; re-classing two functions re-opens the cleared text for a fault that leaks
+one yes or no about an id the visitor must already hold. **Where it goes:** the first unit after the first deploy's
+security work ("G2: close the two oracles to visitors"), named in the owner's page as the residual risk in plain
+words. **What would change it:** a page that shows account ids to visitors (then the oracle names the staff): the
+share veil's measure will say whether one does.

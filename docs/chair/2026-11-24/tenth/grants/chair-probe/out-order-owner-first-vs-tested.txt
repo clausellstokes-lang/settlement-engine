@@ -1,0 +1,4 @@
+tested order: 405 functions; owner-first order: 405 functions; later files replayed: 204_engine_generation_report.sql, 205_drop_retired_faction_public_keys.sql, 206_public_card_veil_bit.sql, 207_public_hall_capture_veil.sql, 208_party_link_independent_idempotent_veiled.sql, 209_surveyor_premium_only.sql, 210_public_prose_text_projection.sql, 211_close_visitor_reach.sql; statement failures in them: 0
+functions whose reach differs between the two orders: 0  (A = a visitor, U = a signed-in user, S = the server)
+tested: profiles columns a signed-in user may update: 4; guard triggers: 2
+owner-first: profiles columns a signed-in user may update: 4; guard triggers: 2

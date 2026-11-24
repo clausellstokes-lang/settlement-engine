@@ -361,3 +361,17 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   resumed, not paused; the line's 211 is the grants fix and the veil's files are 212 and 213): to be re-worded when
   the page is re-made after the cures. (f) THE NEXT LANDING'S START MESSAGE IS DRAFTED: `prompts/drafts/
   START-LAND-114.draft.txt` (point 114, the grants fix alone; it waits for the reader's word).
+- 2026-11-24 18:41 UTC · T26 · THE READER'S VERDICT ON MIGRATION 211 (unit (2), on 39bfb0831e): PARTS A, B, C AND D ARE CLEAR, each
+  CONFIRMED by its own catalog queries on the chains to 203 and to 210; THE OWNER'S FILES "NOT CLEAR, FOR VISIBILITY
+  ONLY" (nothing read back parts C and D; part B's read hid a global default; the rehearsal script's words and
+  expected objects are stale; one header comment is wrong). GRANTS-1 had already pushed the chair's three asks at
+  72b6e0ae2 (the positive control with a planted red; two reads after; the payload rule; 211's statements unchanged,
+  diffed by the chair). ITS LAST FOUR ITEMS ARE SENT (the rehearsal entry; part B's read as one row counting the
+  global default, proved against a real function in four situations; the header comment; a standing check for after
+  every deploy); its mark reads 557,311 and it hands over at 620,000 at the latest. THE CHAIR'S OWN ORDER MEASURE:
+  the owner pasting his files BEFORE the deploy's migrations changes nothing: 405 functions, none differs from the
+  tested order (`grants/chair-probe/chair-order.mjs`). **Decided:** the two oracles the reader names (`has_role`,
+  `profile_has_premium_access`: staff or premium, yes or no, for an account id the visitor already holds) are NOT
+  closed in 211; they are unit "G2" after the first deploy's security work and are said to the owner as the
+  residual risk. **Why:** part A is generated and cleared; the leak is one yes or no. NEXT: "GRANTS <commit>", the
+  reader's re-check of the delta, then the landing (point 114) by `prompts/drafts/START-LAND-114.draft.txt`.
