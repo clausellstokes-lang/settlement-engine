@@ -198,3 +198,35 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `3-check-after.sql`: so that the SQL editor shows each result (F2). SENT TO THE OWNER as four files, with the order
   to run them and what each shows. F1, F3 and F4 go to GRANTS-1 for the full file and the migration.
   NOTHING IS APPLIED BY ANYONE BUT THE OWNER. HIS ANSWER IS AWAITED: what file 1 showed, the count of file 1b.
+- 2026-11-24 15:59 UTC · T16 · CLOSE-7's MEASURE "READ-24" TAKEN (5274979f1, `close-7/reports/READ-24.md`, read whole by the
+  chair) AND RULED (`read/RULING-R24.md`). ITS FIRST FINDING IS THE LARGEST: THE CLOSE'S CENSUS OF 900 IS ALL PLAINS,
+  ALL ROAD, EVERY PRIORITY 50, NEVER WEALTHY: it cannot hold three of the five faults a reader met in ten places. It
+  measured a VISITOR 900 beside it (the same seeds, the visitor's config). COUNTS (census / visitor, of 900): A1 the
+  no-healer line beside resident sick care 3 / 2 (three readings of "a healer": a house by name, a service by
+  category, the capacity's count); A2 a rich line beside a short-food line 0 / 2 (the short lines read the production
+  band while the food ledger reads Secure); B1(i) a desert place with a fish market, sawmill or hunter's lodge 0 / 28
+  OF 52 DESERT PLACES (no terrain gate at the draw; the desert's modifier table names none); B1(ii) the furrows
+  tradition where grain is bought in 1 / 1; C1 "Corrupt Council" 0 / 18 towns (and "Corrupt City Council" 14 cities,
+  "Shadow Senate" 7 metropolises), CARRIED BY THE PLAYER'S PROJECTION 18 of 18; D2 the guild quarrel 36% of towns and
+  51% of cities (34% and 48% on the visitor's). THE SAMENESS DOOR'S REGISTER WAS TAKEN DARK AND HAS NO ROW FOR THE
+  DAILY LIFE PAGE'S VISITOR LINES (lit, their commonest sentence stands in 22, 17 and 15 of 150).
+  **Decided (T16 = RULING R24):** ALL CURED BEFORE THE FIRST DEPLOY, by the owner's word of T7. R24-0 every measure
+  and proof in the lane on BOTH corpora; "READ-25": the page census's whole battery over the visitor 900, a measure.
+  A1 ONE fact (sick care at hand: a sick house, or a resident service flagged on its own catalogue row). A2 a line
+  that says people go short reads the food ledger. B1(i) rows on the terrain's own modifier table, after a short
+  table of every house that lives on what the land gives; NO catalogue gate that would move the census births.
+  B1(ii) the field element weighs nothing where grain is bought in. C1 THE CHAIR'S WORDS: the three forms print as
+  "Town Council", "City Council", "Senate"; that the hall is bought is said in the game master's own block; the
+  player's projection beyond the name IS NAMED FOR THE PAUSED VEIL, not built. D2 is the troubles rule's (below).
+  The cures are cut at the flip's commit d447ee31e (an ancestor of point 113), two builders at once in two chains.
+  **Why cut before the landing ends:** phase 1 is clean and the flip's tree is the tree that lands; three hours are
+  not spent waiting. **What would change it:** a red of the wide gate that touches a cure's files.
+- 2026-11-24 15:59 UTC · T17 · FOUND IN THE EIGHTH CHAIR'S RECORD (PICKUP-NINTH line 122; its E26 to E30, decisions the
+  owner left to it): the veil ships only at "not inferable" (E27); THE TROUBLES LAW NOT IN THIS DEPLOY (E28); a finish
+  line (E30). The troubles law is NOT on the working line (no file under src/ names it): it stands where the seventh
+  chair left it (`lane/kinds-1-2026-11-20`: K0 to K2 merged, K3 on `-k3-wip`). **Decided (T17):** BY THE OWNER'S WORD
+  OF T7 ("Fix those findings as well": the guild quarrel met in every town read is one of them) E28 IS RE-OPENED: a
+  successor of KINDS-1 is seated AFTER POINT 113 HAS LANDED, on the line's new tip, to finish K3 and land the rule
+  DARK; lighting it with its draft table is brought to the owner built and measured, for one yes (a tuning signature
+  is his). E27 (the veil's standard) is the eighth chair's decision; THIS CHAIR'S ADVICE OF T6 would change it; the
+  veil is paused by the owner's own order and stays so until he says.
