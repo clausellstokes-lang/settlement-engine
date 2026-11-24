@@ -26,6 +26,8 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { importsAsPrinted } from '../display/tradeListDisplay.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
+import { landWithholdsHouse } from '../landWithholding.js';
+import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -66,6 +68,7 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P20: ['20 siege words outside a siege', 'SECOND'],
   NEW1: ['NEW-1 the governance label against the Defense verdict', 'SECOND'],
   NEW2: ['NEW-2 magic income, and no practitioner on the rolls', 'CROSS'],
+  B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
 });
 
 /**
@@ -194,7 +197,8 @@ export function pageCensusFindings(settlement, views) {
   };
   const noArcane = D.some((l) => /No arcane practitioners on the rolls/.test(l));
   // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
-  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec)).map((i) => s(obj(i).name).toLowerCase());
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec));
+  const roster = live.map((i) => s(obj(i).name).toLowerCase());
 
   run('P2siege', () => {
     // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
@@ -345,6 +349,19 @@ export function pageCensusFindings(settlement, views) {
   run('NEW2', () => {
     const l = E.find((x) => mag.some((p) => p.re.test(x)));
     return l && noArcane ? [l, 'No arcane practitioners on the rolls'] : null;
+  });
+  run('B1land', () => {
+    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber
+    // and game; a port or river route or a native nearby resource gives them back)
+    const config = obj(rec.config);
+    const land = { terrainType: s(config.terrainType), tradeRoute: s(config.tradeRouteAccess), nearbyResources: nativeSemanticResourceKeys(config) };
+    for (const house of live) {
+      const name = s(obj(house).name);
+      if (!name || !landWithholdsHouse(land, /** @type {Parameters<typeof landWithholdsHouse>[1]} */ (house))) continue;
+      const l = all.find((x) => x.includes(name));
+      if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
+    }
+    return null;
   });
   return out;
 }

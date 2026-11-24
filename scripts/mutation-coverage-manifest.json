@@ -3249,6 +3249,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/desertWithholdsHouses.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
     "tests/generators/densityTrimRelationships.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

@@ -7,6 +7,7 @@ import { institutionalCatalog, institutionRowGuardsPass } from '../data/institut
 import { densityFactor, isDensityExempt, scaleChance } from '../data/institutionBudget.js';
 import { institutionToggleFor } from './institutionToggleReader.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
+import { landWithholdsHouse } from '../domain/landWithholding.js';
 import {
   nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';
@@ -78,6 +79,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
     worldLaw = null,
     population = null,
     density: settlementFactor = null,
+    nearbyResources = null,
   } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
@@ -136,6 +138,9 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   const CATS = CASCADE_GROUPING_ORDER;
 
   const added = [];
+  // B1(i) (RULING-R24, R24b): a house the land withholds is drawn as before and then not taken; it still fills its slot
+  // under the cap and is marked rolled, so every later candidate meets the same draw it met before.
+  let taken = 0;
   // Tier-appropriate cap on total cascade additions
   // Prevents cascade from overwhelming naturally-generated institutions
   const CASCADE_CAPS = {
@@ -202,8 +207,15 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
         // Cap: cascade gives a second chance but can't guarantee appearances
         // Lower cap means cascades supplement rather than dominate generation
         const cascadeChance = Math.min(baseChance * boost, 0.45);
-        if (added.length >= cascadeCap) return; // cap reached
+        if (taken >= cascadeCap) return; // cap reached
         if (_rng() < cascadeChance) {
+          taken++;
+          if (landWithholdsHouse({ terrainType, tradeRoute, nearbyResources }, name)) {
+            existingMKs.add(nameMK);
+            existingNames.add(name);
+            if (data.exclusiveGroup) takenGroups.add(data.exclusiveGroup);
+            return;
+          }
           // Carry the full catalog def (desc/tags/priorityCategory/...) like
           // the assemble path does — downstream passes classify by tags, and
           // the subsistence strip treats untagged institutions as trade.
