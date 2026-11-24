@@ -133,7 +133,8 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
     if (DMRE.test(p)) return 'DM-only';
     return `top:${p.split(/[.[]/)[0]}`;
   };
-  out.PP = { docs: 0, reads: 0, a: {}, b: {}, bd: {}, noBody: {}, examples: { a: {}, b: {}, bd: {} } };
+  const IMPORT = process.env.PP_IMPORT === '1';
+  out.PP = { docs: 0, reads: 0, a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {}, noBody: {}, examples: { a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {} } };
   const tally = (bin, ex, diffs, ctx, seed, tag) => {
     const seen = new Set();
     for (const [p, v, n] of diffs) {
@@ -157,11 +158,16 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
         await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
           values ($1,$2,$3,'town',$4,true,$5,now(),$6,'unlisted',$7,$8,true)`, [id, OWNER, rec.name || 'x', JSON.stringify(rec), sl, `${sl}l`, JSON.stringify(ov), dm]);
         const g = (await db.query('select to_jsonb(g) r from public.get_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null;
+        // PP_IMPORT=1 (the chair's second pass, 22:48): the import door on the same row, as the signed-in reader; I = its data,
+        // Ip = what the client's import path keeps of it (fetchDossierForImport)
+        let imp = null;
+        if (IMPORT) { await db.query(`select set_config('test.uid', $1, false)`, [READER]); imp = (await db.query('select to_jsonb(g) r from public.import_gallery_dossier($1) g', [sl])).rows[0]?.r ?? null; await db.query(`select set_config('test.uid', '', false)`); }
         await db.query('delete from public.settlements where id = $1', [id]);
-        env.rpc = { get_gallery_dossier: g ? [g] : [] };
+        env.rpc = { get_gallery_dossier: g ? [g] : [], ...(IMPORT ? { import_gallery_dossier: imp ? [imp] : [] } : {}) };
         const page = (await gallery.fetchPublicDossier(sl))?.settlement ?? null;
+        const ipage = IMPORT ? (await gallery.fetchDossierForImport(sl))?.settlement ?? null : null;
         env.rpc = {};
-        return { data: g?.data ?? null, page, served: veil.isServedVeil(g?.gallery_member_overrides) };
+        return { data: g?.data ?? null, page, served: veil.isServedVeil(g?.gallery_member_overrides), idata: imp?.data ?? null, ipage };
       };
       const u = await read({}); const v = await read(veil.writeShareVeil({}, []));
       out.PP.reads += 1;
@@ -171,6 +177,10 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
       tally(out.PP.a, out.PP.examples.a, minus(S, P), ctx, d.seed, tag);
       tally(out.PP.b, out.PP.examples.b, minus(P, Vp), ctx, d.seed, tag);
       tally(out.PP.bd, out.PP.examples.bd, minus(P, Vd), ctx, d.seed, tag);
+      if (IMPORT) {
+        if (!isRec(u.idata) || !isRec(u.ipage)) { const k = `${tag}|I${isRec(u.idata)}Ip${isRec(u.ipage)}`; out.PP.noBody[k] = (out.PP.noBody[k] || 0) + 1; }
+        else { const I = multi(u.idata); const Ip = multi(u.ipage); tally(out.PP.ia, out.PP.examples.ia, minus(I, P), ctx, d.seed, tag); tally(out.PP.is, out.PP.examples.is, minus(I, S), ctx, d.seed, tag); tally(out.PP.ip, out.PP.examples.ip, minus(Ip, P), ctx, d.seed, tag); }
+      }
     }
     if (process.env.UM_OUT) writeFileSync(process.env.UM_OUT, JSON.stringify(out));
   }
