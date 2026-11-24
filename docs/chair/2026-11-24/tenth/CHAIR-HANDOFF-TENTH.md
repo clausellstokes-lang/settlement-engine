@@ -137,3 +137,20 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   security reader is seated on "GRANTS <commit>".
   OWED TO THE VEIL'S HAND-OFF (written here; its file is the ninth chair's): WHEN THE VEIL RESUMES, ITS MIGRATIONS
   MOVE UP BY ONE (211 to 212, 212 to 213, and any 213 to 214), because the line's 211 is now the grants fix.
+- 2026-11-24 15:20 UTC · T12 · GRANTS-1's ADDITIONS TAKEN (51b6700cd, queued 15:18:29): the owner's read check and the revoke
+  block GENERATED from its catalog (`measure/out/owner-read-check.sql`: all 247 server-only or owner-only functions by
+  `to_regprocedure`; `measure/out/revoke-block.sql`: 245 lines in three groups: 21 that guard secrets and other users'
+  data, 84 that guard other users' accounts, entitlements and money, 140 the rest; applied twice cleanly in PGlite;
+  two invoker helpers that user paths call are kept out). ITS FINDING ON THE DEFAULT: the schema-level revoke from
+  `anon` and `authenticated` leaves a function with NO statement open through PUBLIC; the global revoke of PUBLIC's
+  default closes every new function. **Decided (T12 = amendments G1a to G1d, sent 15:2x):** (1) FIRST, BEFORE THE
+  MIGRATION, "URGENT" FOR THE OWNER'S HAND: `grants/FOR-THE-OWNER-URGENT.sql`, generated: groups 1 and 2 (105
+  functions), every line guarded against a function production lacks, a read check before and after; a function is in
+  it only if it is in no policy, view, default or constraint, is called by no invoker function a user can execute, and
+  no call site on master or the line reaches it with a user's token. THE SECURITY READER IS SEATED ON THAT FILE FIRST
+  (`prompts/START-REVIEW-GRANTS-1.txt`), then it goes to the owner. **Why first:** 21 functions that hand out secrets
+  or other users' data are not left open for the hours the migration and its tests need; **why not unread:** a revoke
+  on a function an invoker path calls as the user would break a page on the live site. (2) PART B STANDS (the
+  schema-level form): its claim is that the repository's own two lines then close a new function; THE GLOBAL FORM IS
+  REFUSED (it reaches every schema and every later function, extension functions too). (3) `has_role`,
+  `account_is_active` and `profile_has_premium_access` are listed for the reader, not built.
