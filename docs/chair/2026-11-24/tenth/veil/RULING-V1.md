@@ -110,3 +110,24 @@ work, phase 1, each red first.
    an import too; a fifth law lands tonight.
 VEIL-52's self-report is taken: one commit made with a hooks path that skipped the pre-commit hook (its files re-linted by
 hand, 0 errors; every later commit ran the hooks). No further act.
+
+## RULING V4 (added 22:01 UTC on 2026-11-24): J12, THE PAGES ON A READ THAT HIDES NOTHING
+VEIL-53's `out/v53/J12.md` (d0c78bcb8): on shared reads that hide NOTHING the page loses 1,969 lines and changes 1,378 of
+753,863 (the counts are VEIL-43's, on the join before the laws were lit). EVERY ATTRIBUTED LOSS IS AN "ALWAYS-PASS"
+WITHHOLD: a key the veil removes on every non-owner read, which page code reads. Already ruled and listed: stability,
+severity, readiness, VR31's shares. UNRULED UNTIL NOW: safety's black-market capture, ratio and crime types (LOST 800,
+CHANGED 243: "Shadow Economy: N% of trade unrecorded", the band tiles); legitimacy's multipliers and flags (LOST 120);
+`contestsNiche`, `rawPower`, `legitimacyCrisis` (LOST 120); history's legacy and siege narrative (CHANGED 97, LOST 6);
+`recentConflict`'s vignette where the re-derive does not refill (LOST 63); `prominentRelationship`'s "Notable connection"
+(LOST 33, NOT an always-pass row); unattributed 823 LOST and 678 CHANGED on 391 births the restore loop skipped.
+**RULED: the always-pass rows are LISTED for phase 1** (the shared page prints less on every shared read alike, hidden or
+not: it serves nothing and tells nothing); they are NOT served "when nothing is hidden" (the hiding read would then differ
+from the open one); their re-derivation from served data is phase 2, row by row. ON FOUR TERMS:
+1. A LOST line is listed; a CHANGED line is READ: three before-and-after pairs a class. A changed line that states a
+   default as a fact is a WRONG PAGE: class (C), phase 1, cured by failing closed. A shorter true line is listed.
+2. NOTHING BREAKS: no heading over an empty block, no "undefined", no dangling label: walked on the slice.
+3. `prominentRelationship`'s 33: its cause first; a copy dropped that is not covert is (C), phase 1.
+4. EACH LISTED ROW CARRIES ITS REASON (what a reader could work out if the key were served), from the registry's own row;
+   an always-withhold nobody can justify is cut, not listed.
+THE OWNER IS TOLD IN PLAIN WORDS NOW and with the lit join's counts at the proof: a shared page shows a little less than
+the owner's own page (about three lines in a thousand); putting the lines back safely is the second stage.

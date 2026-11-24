@@ -638,3 +638,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   the laws it was born under (a town born under the fortune law imports with a wrong legitimacy cause): THE CURE
   PASSES EVERY GENERATION LAW OF THE RECORD and the saved-place test gains an arm that walks `GENERATION_LAWS`.
   (d) VEIL-52 reported its own fault (one commit that skipped the pre-commit hook; re-linted; no recurrence).
+- 2026-11-24 22:01 UTC · T46 · RULING V4 (appended to `veil/RULING-V1.md`), ON THE PAGES OF A SHARED READ THAT HIDES NOTHING: the
+  shared page loses about three lines in a thousand against the owner's own page (1,969 lost and 1,378 changed of
+  753,863 on the old join), every attributed one because the veil withholds a key on EVERY shared read. THOSE ROWS
+  ARE LISTED FOR PHASE 1, not served "when nothing is hidden" (a new tell); re-derived in phase 2. TERMS: a changed
+  line is read, and one that states a default as a fact is a wrong page, cured in phase 1 by failing closed; nothing
+  breaks; the one class that is not an always-withhold gets its cause first; each listed row carries its reason and
+  an always-withhold nobody can justify is cut. THE OWNER IS TOLD NOW IN PLAIN WORDS (a shared page will show a
+  little less than the owner's own page) and with the lit counts at the proof. THIS NARROWS WHAT A SHARED PAGE
+  SHOWS AGAINST THE LIVE SITE: it is named to him as a product change of the first release, vetoable.
