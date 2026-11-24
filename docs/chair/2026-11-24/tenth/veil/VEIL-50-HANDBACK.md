@@ -57,4 +57,17 @@ STATE (20:2x UTC):
 
 UNIT (1) DONE 21:18 UTC: the plan complete at 12ca6b8d7 (`VEIL-50-PLAN.md`); the message sent 21:18. (b)'s headline: master-born
 towns serve a hidden house's own name on 16 of 140 places (5,502 server path-reads, 8 paths: LEGACY-TELLS is the largest (D)).
-NEXT: WAIT FOR THE CHAIR'S RULING. Nothing built, nothing merged. The trial joins `/home/user/wt/join`, `join2` stay local. My mark: 345,672 by the chair's read at 19:14 UTC; I pass 620,000 inside phase 1: a successor at a unit's end.
+The trial joins `/home/user/wt/join`, `join2` stay local.
+RULING V1 (the chair, 21:20 UTC; `docs/chair/2026-11-24/tenth/veil/RULING-V1.md` on lane/chair-2026-11-08 at 994ad8b64, read whole): the
+plan taken. MINE: UNIT 2 (R4-IDS with R4I-SQL-2) AT ONCE (it gates units 3, 4, 5), the integration of every unit, the join and
+phase 1's proof. VEIL-51 (STORED-PROSE, then R5-DESC with RIVAL on its condition), VEIL-52 (the doors), VEIL-53 (the join's work)
+seated by the chair; VEIL-54 (THE LEGACY NAMES, unit 5) when a place frees (my draft `DRAFT-START-VEIL-54.txt`). The bar: V1-3's
+eight points (every instrument of point 1 with a planted positive; the anon arm; the window).
+
+UNIT 2 (started 21:2x UTC): code `lane/veil-50-2026-11-24-r4ids-wip` (worktree `/home/user/wt/r4ids`) = ab05aa487 + 040a405e0
+merged plain (8430edf5c); 212 fad4b9b9..., rollback b13c5be8... unchanged. READ WHOLE BY ME: `_gallery_veil_roster_choices`,
+`_gallery_veil_rekey`, their caller `_gallery_veil`, and R4I-SQL-2's diff (6 code files): NO FAULT. RUNS: `v50/u2.sh` (tpl lint tc
+red1 grn1 red2 grn2 plant c sec; red trees `/home/user/wt/r4red1` = 392aff978, `/home/user/wt/r4red2` = 84f2e2bba; templates u2r1,
+u2r2, u2g; logs `/var/tmp/v50/out/u2/`). THEN: the unit's proofs (VEIL-42's start message (6)), "TIP? R4-IDS" to the chair (the SQL
+hunk read whole by it), merge into the lane's tip, "R4-IDS MERGED <commit>" to the chair and the seats.
+ My mark: 345,672 by the chair's read at 19:14 UTC; I pass 620,000 inside phase 1: a successor at a unit's end.
