@@ -22,11 +22,25 @@
 - UNITS 4 and 5 DONE: merged 2af21128d (builder `-k5` @ 8f76072f6). DARK PROOF lane bc9fbf495 vs line f03e9a868 by
   record sha256: census 900/900, visitor 900/900 (re-counted by the seat). The measure: `out/k5/measure-*.md`;
   `FOR-THE-OWNER.md` re-written in plain words (486a47165).
-- OWED, RED BY NAME (the chair's ruling 19:44): tuningRegister "dependents moved": its door refused by a permission
-  check ("[Undermining Oversight]"); nobody on the lane runs it; the owner is asked.
-- UNIT 6 IN FLIGHT: COMMON-EIGHTH 14's run (tests/lint, copy, store, architecture, docs whole + 85 files naming the
-  changed files/symbols), then the build + VERIFY_DIST tests/build, then "KINDS <commit>".
-- NEXT: read the run's reds by name against RED-AT-LINE.tsv; build; landing line.
+- OWED, RED BY NAME: `tuningRegister` "the measured tree matches the committed inventory exactly": exactly
+  `troubleLaw.js#LAW_ONE_TROUBLE_BARS` and `#TROUBLE_WEIGHT_TUNING` "dependents moved" (the pipeline's regen pass reads
+  the leaf; no value moved). Its door was refused by a permission check ("[Undermining Oversight]"); THE OWNER SAID YES
+  on 2026-11-24 (~20:54 UTC) to ONE re-take at the landing, by the chair's landing helper, the diff read by the chair
+  first. NOBODY ON THE LANE RUNS IT.
+- UNIT 6 DONE: point 114 (f9531eb3a) merged 1d894273a; lighting census by its door 095c11caf (3789 -> 3792 files);
+  COMMON-EIGHTH 14's run on the merged tree: 534 files / 6,396 tests / 9 red = 8 on the list + the owed row; build:
+  first paint 1,180,874 / 376,078 / 315,935 (line +58 / +21 / +77; +58 raw the ruled KINDS-1 exception), worker
+  2,717,323 (+1,321), engine chunk 932,998 (+152), all named for the owner's size signing; tests/build VERIFY_DIST 69
+  files, 14 red: 13 on the list + landingFixtureForgeRoad (b) LIT, CURED (K6-CURE, merged 83c75beb9, red first, 2/2);
+  tests/lint whole at 83c75beb9: 225 / 3,374 / 4 red = 3 on the list + the owed row.
+- THE LANDING LINE "KINDS 83c75beb9" sent to the chair (21:4x UTC). The lane is DARK; lighting is one commit on the
+  owner's yes (FOR-THE-OWNER.md).
+- FLIP LIST ON PAPER (PLAUSIBLE, read, not run): `troubleLaw.js :: NEW_SETTLEMENT_TROUBLE_LAW_VERSION` to
+  WEIGHTED_TROUBLE_LAW_VERSION; the pins that move with it: troubleLawWiring arm 1 (asserts the dial dark), arm 4 and
+  arm 7 (read "DARK" in the register's why and the leaf's header), GENERATION_LAWS.trouble.why and the leaf's header
+  text; generationLawsSavedPlace (g) follows the tree by itself; the lit golden master and the landing fixture town if
+  the law moves them (re-recorded with the cause, the owner's); TROUBLE_WEIGHT_TUNING's signature (the owner's).
+- NEXT: nothing of the lane's own; waiting on the chair.
 
 # KINDS-2 hand-back (the lane "which troubles a place is born with", re-opened 2026-11-24)
 
