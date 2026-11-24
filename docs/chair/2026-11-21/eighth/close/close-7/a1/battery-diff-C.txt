@@ -1,0 +1,20 @@
+dp-city-140	record same	page MOVED	lost -	gained -
+dp-city-28	record same	page MOVED	lost -	gained -
+dp-city-3	record same	page MOVED	lost -	gained -
+dp-city-36	record same	page MOVED	lost -	gained -
+dp-city-54	record same	page MOVED	lost -	gained -
+dp-city-71	record same	page MOVED	lost -	gained -
+dp-city-91	record same	page MOVED	lost -	gained -
+dp-town-109	record same	page MOVED	lost -	gained -
+dp-town-144	record same	page MOVED	lost -	gained -
+dp-town-24	record same	page MOVED	lost -	gained -
+dp-town-28	record same	page MOVED	lost -	gained -
+dp-town-42	record same	page MOVED	lost -	gained -
+dp-town-71	record same	page MOVED	lost -	gained -
+dp-village-103	record same	page MOVED	lost -	gained -
+dp-village-124	record same	page MOVED	lost -	gained -
+dp-village-136	record same	page MOVED	lost -	gained -
+dp-village-149	record same	page MOVED	lost -	gained -
+dp-village-50	record same	page MOVED	lost -	gained -
+dp-village-98	record same	page MOVED	lost -	gained -
+page-battery --diff: 900 births; record moved 0, page moved 19, rows moved 0
