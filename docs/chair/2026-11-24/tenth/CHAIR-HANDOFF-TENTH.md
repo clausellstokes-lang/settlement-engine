@@ -528,3 +528,8 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   every hand out at first light and what comes in counted), for the owner's veto list. A2 merges without that one
   cell; the mirror is a small unit after it. **The lesson, for a next chair:** a mapping between two ladders is
   ruled with both ladders and the pools' own words open, never from the table's labels alone.
+- 2026-11-24 20:53 UTC · T37 · CI's RUN ON POINT 114 IS READ BY NAME (owed by T32, within the hour): run 45476452716 (number 1292)
+  on f9531eb3a, 20:01:57 to 20:39:48 UTC: FAILURE as on every tip of the pull request; THE FAILING TESTS ARE THE
+  LIST'S 61 ROWS AND NO OTHER (the ratchet 39 of 42,784 in 3,720 files; build and dist 13; the coverage floors 8;
+  the golden master under tr_TR 1); none new, none cured. The grants lane's new suites are green there, and so is
+  `provenanceMap`. The words are in `ci/LINE-NOW.md`. POINT 114 IS WHOLE: landed, pushed, its rows written, CI read.
