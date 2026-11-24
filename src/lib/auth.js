@@ -399,9 +399,9 @@ async function supabaseUpdatePassword(newPassword) {
  * Also mirrors into user_metadata so the JWT-cached read stays consistent
  * across page loads without waiting for the profiles row to be refetched.
  *
- * Falls back to the legacy direct UPDATE if the RPC isn't yet exposed —
- * that path stays valid because the column-locking policy still permits
- * display_name writes, even when the RPC isn't available.
+ * There is no fallback: an RPC error (a civility refusal included) is thrown
+ * to the caller to show. Migration 211 part C grants a signed-in user no
+ * direct UPDATE on display_name (GRANTS-1).
  */
 async function supabaseUpdateDisplayName(displayName) {
   // The only path: the RPC (migration 009; the 195 civility guard). An RPC
