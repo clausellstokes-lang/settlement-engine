@@ -14,7 +14,7 @@ UNITS: (0) first message SENT 14:54 UTC. (1) READ-24: brief `close-7/briefs/READ
 no cure); then ONE message to the chair; NOTHING BUILT before its ruling. (2) `FOR-THE-OWNER.md` section 6 from the landing's
 five figures (the chair sends them), first line the flip's commit, section 0 the line carries point 113 once the chair says so.
 (3) the landing's reds, classed one by one, cures one builder at a time after the chair's ruling. (4) "CLOSE-7 <commit>".
-READ-24's builder DISPATCHED ~15:00 UTC (Agent, background; report \`close-7/reports/READ-24.md\`, outputs \`close-7/read24/\`).
+READ-24's builder DISPATCHED ~15:00 UTC (Agent, background; report `close-7/reports/READ-24.md`, outputs `close-7/read24/`).
 THE CHAIR 15:23: the owner's word "I leave all judgement to you" / "Fix those findings as well": READ-24's findings WILL BE CURED
 before the first deploy, each cut to the measure, after the chair's ruling. Landing phase 1 clean (merge 67fcf51de); phase 2 (whole
 suite, ~3 h) running: its unlisted reds come to me. UNIT (2) section 6 FILLED from the chair's five figures; section 0's "the line
