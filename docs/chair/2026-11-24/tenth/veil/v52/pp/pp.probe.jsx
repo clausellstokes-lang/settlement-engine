@@ -182,6 +182,12 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
           if (!isRec(r.data) || !isRec(r.page)) continue;
           const bin = (out.PP[`a${mkName}`] ||= {}); const ex = (out.PP.examples[`a${mkName}`] ||= {});
           tally(bin, ex, minus(multi(r.data), multi(r.page)), ctx, d.seed, tag);
+          // PP_TODAY=1 PP_IMPORT=1 (the chair, 23:38): today's import of the same row: I (import_gallery_dossier to the premium reader)
+          // and Ip (master's fetchDossierForImport), each MINUS P
+          if (IMPORT) {
+            if (!isRec(r.idata) || !isRec(r.ipage)) { const k = `${mkName}|${tag}|I${isRec(r.idata)}Ip${isRec(r.ipage)}`; out.PP.noBody[k] = (out.PP.noBody[k] || 0) + 1; }
+            else { tally((out.PP[`i${mkName}`] ||= {}), (out.PP.examples[`i${mkName}`] ||= {}), minus(multi(r.idata), multi(r.page)), ctx, d.seed, tag); tally((out.PP[`ip${mkName}`] ||= {}), (out.PP.examples[`ip${mkName}`] ||= {}), minus(multi(r.ipage), multi(r.page)), ctx, d.seed, tag); }
+          }
           // the Reveal-off read's secrets, hooks and DM notes, said first (the chair's order)
           if (!dm) for (const [p, v, n] of minus(multi(r.data), multi(r.page))) { const k = kindOf(p, v, ctx); if (['secrets', 'hooks', 'DM-only'].includes(k)) { const f = (out.PP.offFirst ||= {}); f[`${mkName}|${k}`] = (f[`${mkName}|${k}`] || 0) + n; } }
         }
