@@ -62,8 +62,9 @@
  *   3. `geographyLockedConfig` cannot smuggle the marker across: it overlays
  *      ONLY the geography keys from the previous settlement.
  *   4. The true regeneration path already reads the world's own law —
- *      `regenSection` takes `settlement.config || config`, settlement first, so
- *      a markerless v1 world regenerates as v1.
+ *      `regenSection` takes `settlement.config || settlement._config || config`
+ *      (settlementRegenAction.js), the world's own config first in either stored
+ *      shape, so a markerless v1 world regenerates as v1.
  *
  * ⚠ AND A STALE COMMENT THAT WOULD HAVE MISLED THE NEXT READER, MEASURED:
  * generateSettlementPipeline's docblock says `config._seed` "is how a saved

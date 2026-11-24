@@ -4337,11 +4337,11 @@
     },
     "tests/data/tailHistoryBatch2.test.js": {
       "kind": "rationale",
-      "rationale": "Introduced by TAIL-HISTORY batch 2 (the chair's ruling Y5), commit 7bef72cb. It pins historyGenerator.js :: tensionByMemory for ten tension templates (plague_years, great_fire, great_flood, popular_uprising and the rest): a tension whose own event is not on the town's timeline prints its byMemory.unanchored live quarrel, not its event's aftermath, at the smallest and largest census town of each type, and a tension whose event IS on the timeline keeps its own words. The commit records it red at the base (20 of 20) and green at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
+      "rationale": "Introduced by TAIL-HISTORY batch 2 (the chair's ruling Y5), commit 7bef72cb. It pins src/generators/history/tensionByMemory.js :: tensionByMemory for ten tension templates (plague_years, great_fire, great_flood, popular_uprising and the rest): a tension whose own event is not on the town's timeline prints its byMemory.unanchored live quarrel, not its event's aftermath, at the smallest and largest census town of each type, and a tension whose event IS on the timeline keeps its own words. The commit records it red at the base (20 of 20) and green at the cure; a sweep plant would re-plant the same cure-revert the commit already describes."
     },
     "tests/data/tailHistoryBatch3.test.js": {
       "kind": "rationale",
-      "rationale": "Introduced by TAIL-HISTORY-3 batch 3 (the chair's Y13, Y5 widened), commit 6f7786a7. It pins historyGenerator.js :: tensionByMemory for thirteen more tension types (crime_wave, resource_scarcity, guild_conflict, legitimacy_crisis and the rest): an unanchored tension prints no past of an event the timeline lacks, the scarcity's own lead is kept (r2r-thorp-16: the levy), and an anchored tension keeps its own words. The commit records the guard 26 of 26 red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
+      "rationale": "Introduced by TAIL-HISTORY-3 batch 3 (the chair's Y13, Y5 widened), commit 6f7786a7. It pins src/generators/history/tensionByMemory.js :: tensionByMemory for thirteen more tension types (crime_wave, resource_scarcity, guild_conflict, legitimacy_crisis and the rest): an unanchored tension prints no past of an event the timeline lacks, the scarcity's own lead is kept (r2r-thorp-16: the levy), and an anchored tension keeps its own words. The commit records the guard 26 of 26 red at the base; a sweep plant would re-plant the same cure-revert the commit already describes."
     },
     "tests/data/tailHistoryBatch4.test.js": {
       "kind": "rationale",
