@@ -554,6 +554,16 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // the eager graph, so coherence-lazy gains no edge back. Not measured by a build in this unit (the chair's at the close).
   // @guarded-by tests/domain/dailyLifeOffice.test.js (e) (the eager graph does not hold it; it routes to coherence-lazy).
   '/src/domain/facts/officeForms.js',
+  // R24-A1 (CLOSE-7, 2026-11-24; the chair's RULING-R24 and R24a). THE SAME PREMISE as the two blocks above: facts/sickCare.js
+  // (the one reading of `sick care`) is a new leaf of facts/factsOf.js (pinned here), which is generator-reached, so the
+  // derivation walked it into EAGER first paint, and with it data/institutionServices.js (the flagged rows' names), a table
+  // the BAR4-FIRSTPAINT block keeps out of first paint (tests/architecture/factHomesLazy.test.js (a) reddened on it).
+  // Its importers: facts/factsOf.js and coherence/pageCensusFindings.js, neither in the eager graph. Its imports:
+  // facts/defence.js and institutions/institutionRoster.js (eager), facts/liveInstitutionNames.js (this chunk) and
+  // data/institutionServices.js (data-lazy, which this chunk already reaches through facts/tradeAtWork.js). Not measured by
+  // a build in this unit (the chair's at the close).
+  // @guarded-by tests/architecture/factHomesLazy.test.js (a) and tests/domain/close7SickCare.test.js (e).
+  '/src/domain/facts/sickCare.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
