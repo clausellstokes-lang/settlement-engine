@@ -23,10 +23,19 @@ Built and not merged:
 - A2: -a2-wip c92a301fa (pushed). Two fixes are in flight by chain one in /home/user/wt/a2.
 - B1(i): -b1i-wip 9d0f85e01 (pushed). It waits on the leaf.
 
-Running: chain one (agent a4c1ad5101be44ef0), A2's two fixes. Its addendum goes at the end of `close-7/reports/A2.md`.
+R24h (23:00 UTC, recorded verbatim in `close-7/briefs/R24h.md`):
+- (1) A2 is NOT merged with the rise. The price-only keep is reversed: a page that prints its place as fed has no food grievance.
+  This is a third fix on chain one.
+- (2) MASTER-REDERIVE is read. The cause is the line's re-recorded engine since master (GENERATOR_VERSION 0.9.0 on both). The live
+  path is `applyRosterDecreesAtTick`.
+- (3) The CORRECTIONS LEAF IS WITHDRAWN. B1(i), B1(ii) and C1 are built PLAIN, and R24e's saved-place item is dropped.
+- (4) The LIVE-PATH measure is owed by a FRESH builder, under the brief `close-7/briefs/LIVE-PATH.md`. It reports a table and 100
+  words. It dispatches ONLY after A2 (with the mirror) merges: finish the unit in hand first.
 
-Owed by the chair: whether to merge A2 and list the slot rise, or to give new price-grievance words first; and the owner's
-ruling on MASTER-REDERIVE.
+ORDER: A2 (three fixes, then the mirror) to its merge; LIVE-PATH; B1(i)'s finish (R24e (1a), (1b), (2); plain); B1(ii); C1, with
+R24g's names, plain.
+
+Running: chain one (agent a4c1ad5101be44ef0), on A2's three fixes. Its addendum goes at the end of `close-7/reports/A2.md`.
 
 THE NEXT COMMAND, when A2's fixes land:
 `git -C /home/user/wt/a2 log --oneline -3; git -C /home/user/wt/a2 diff c92a301fa..HEAD --stat`
