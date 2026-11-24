@@ -90,3 +90,29 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `lane/close-7-2026-11-24`); GRANTS-1 session_019yED1QhZzoXHC1uiNEomy3 (source `lane/join-2026-11-14`, branch
   `lane/grants-1-2026-11-24`). Each was given a short first message naming its start file on this lane as its whole
   assignment. THE LANDING HELPER starts when the account's weekly allowance has reset (15:00 UTC).
+- 2026-11-24 15:01 UTC · T9 · THE LANDING HELPER STARTED at about 14:56 UTC (LAND-113: a helper of this session on the
+  middle tier, in the chair's container; `prompts/START-LAND-113.txt`; it writes `PHASE1.md` and `NEW-REDS.md` under the
+  chair's scratch `landing/113/`). Started four minutes before the reset because both seats had just been served.
+  BOTH SEATS' FIRST MESSAGES CAME (queued 14:54:08 and 14:54:16): each read in and stands where its file says.
+  THE CHAIR'S HOURLY CHECK is trig_01PTkUQh3CWcKs7dB9PVorTn at 15:59 UTC.
+- 2026-11-24 15:01 UTC · T10 · GRANTS-1's SURPRISE (queued 14:58:52): THE FIRST HOLE IS FAR WIDER THAN TWO FUNCTIONS.
+  By execution in PGlite under the hosted default (default privileges granting execute on functions to anon,
+  authenticated and service_role before migrations 001 to 210 are replayed; all 210 applied; 13 pg_cron install blocks
+  alone failed): 404 functions in `public`; 187 granted to `service_role` alone; 125 OF THOSE EXECUTABLE BY `anon`; 74
+  server-only or owner-only SECURITY DEFINER functions with no check of the caller. CONFIRMED by it as `anon`:
+  `handle_premium_downgrade(victim)` set the victim's tier to free; `_surveyor_byok_secret()` returned the passphrase of
+  the users' stored AI keys; as `authenticated`, `release_free_narrative(own id)` reset the claim. PLAUSIBLE:
+  `surveyor_byok_get(any user)` returns that user's decrypted key (in PGlite it fails only because `pgp_sym_decrypt`
+  does not resolve on its search path). READ BY THE CHAIR IN THE SQL (139 lines 108 to 125; 191 lines 441 to 469): both
+  BYOK functions are as it says: no check of the caller; revoked from `public` alone.
+  ALL OF IT RESTS ON PRODUCTION CARRYING THE HOSTED DEFAULT GRANTS: ONLY THE OWNER'S READ-ONLY QUERY CAN SAY.
+  **Decided (T10):** (a) THE OWNER WAS TOLD AT ONCE (about 15:00 UTC), in plain words, with: one read-only query over
+  four functions (`_surveyor_byok_secret`, `surveyor_byok_get`, `handle_premium_downgrade`, `release_free_narrative`), a
+  count of `surveyor_byok_keys`, and FOUR REVOKES he may run himself if a row reads true (each function is marked
+  server-only by its own migration; the chair read each grant line; a definer function that calls
+  `_surveyor_byok_secret()` runs as its owner and is not touched by the revoke). **Why at once and before the reader:**
+  a function that hands out a user's stored key is not left open for the hours the full fix needs; four revokes of
+  execute are safe to run twice and are undone by one grant. (b) GRANTS-1 was sent the form of its report (the check
+  and the revoke block GENERATED from its catalog, ordered by what each guards; apart, the functions meant for a
+  signed-in user that trust an id they are handed; whether a default-privileges revoke would hold and what relies on
+  the default today). (c) THE FULL FIX IS READ BY A FRESH SECURITY READER before it reaches the owner or the line.
