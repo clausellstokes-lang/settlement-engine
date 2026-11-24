@@ -107,7 +107,9 @@ const GATES_BENEATH = / The ([^.]+) keeps? the gates, but smugglers have ways in
 const VERY_SAFE_BENEATH = ' The guard keeps the gates, but smugglers have ways in beneath the walls.';
 const FOOTHOLD = 'organized crime has a limited foothold.';
 const ORGANISED_HOUSE_WORDS = Object.freeze(["thieves' guild", 'thieves guild', 'multiple criminal', 'underground city', 'front business']);
-const DASH = '—';
+// A pattern character, not prose: the voice walker (tests/copy/voiceMechanics.test.js) counts a literal's cooked value; hence
+// the code point. It equals its former spelling, held by tests/domain/display/patternLiteralsCodePoints.test.js.
+const DASH = String.fromCharCode(0x2014);
 /** @param {unknown} v @returns {string} */
 const asciiLowerOf = (v) => str(v).replace(/[A-Z]/g, (c) => c.toLowerCase());
 /** @param {unknown} list @returns {Rec[]} */

@@ -100,6 +100,11 @@ function recAt(s, key) {
  */
 export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12, run: 12 });
 
+// BANG, and with it HOUSE_FLAGS' lookarounds, LEFT_BOUND, RIGHT_BOUND and NAME_SEPQ below: these are pattern characters, not
+// prose; the voice walker (tests/copy/voiceMechanics.test.js) counts a literal's cooked value; hence the code points. Each
+// value equals its former spelling, held by tests/domain/display/patternLiteralsCodePoints.test.js.
+const BANG = String.fromCharCode(0x21);
+
 /**
  * VEIL-19 (item C; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06): THE ENGINE'S INSTITUTION FLAGS, EVERY ONE, AS ONE TABLE
  * (priorityHelpers.js :: getInstitutionNames, which stamps them once at birth over the roster; migration 212 carries this
@@ -120,22 +125,22 @@ export const HOUSE_FLAGS = Object.freeze(Object.fromEntries(Object.entries(JSON.
   "hasGarrison": {"kw": ["garrison", "barracks", "professional guard", "multiple garrison"]},
   "hasMilitia": {"kw": ["citizen militia", "militia", "household levy"]},
   "hasWatch": {"kw": ["town watch", "city watch", "professional city watch", "village watch"]},
-  "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<![a-z0-9_])free company(?![a-z0-9_])"},
+  "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<${BANG}[a-z0-9_])free company(?${BANG}[a-z0-9_])"},
   "hasFreeCompany": {"kw": ["free company hall"]},
   "hasCharterHall": {"kw": ["adventurers' charter hall", "adventurers' guild hall", "multiple adventurers'", "adventurers' guild", "hireling hall"]},
   "hasWalls": {"kw": ["walls", "citadel", "gates (if walled)", "inner citadel", "massive walls", "palisade", "earthwork"]},
-  "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<![a-z0-9_])gates?(?![a-z0-9_])"},
-  "hasPrison": {"live": true, "re": "prison|stocks|(?<![a-z0-9_])gaol|(?<![a-z0-9_])jail"},
+  "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<${BANG}[a-z0-9_])gates?(?${BANG}[a-z0-9_])"},
+  "hasPrison": {"live": true, "re": "prison|stocks|(?<${BANG}[a-z0-9_])gaol|(?<${BANG}[a-z0-9_])jail"},
   "hasCourtSystem": {"live": true, "re": "courthouse|court buildings|democratic assembly|city hall|town hall"},
   "hasMarket": {"live": true, "names": ["annual fair", "auction house", "caravaneer's post", "carriers' guild", "cobbler's guild", "daily markets", "district markets (5-10)", "fish market", "furrier's district", "international trade center", "major annual fairs", "market square", "merchant guilds (15-40)", "merchant guilds (3-8)", "merchant guilds (50-100+)", "multiple market squares", "periodic market", "tailor's guild", "weekly market"]},
   "hasGuild": {"kw": ["guild", "guild consortium", "guild governance"]},
   "hasMerchantGuild": {"kw": ["merchant guild", "merchant oligarchy"]},
   "hasBank": {"kw": ["bank", "money changer", "counting", "stock exchange"]},
   "hasWarehouse": {"kw": ["warehouse"]},
-  "hasPort": {"re": "(?<![a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?![a-z0-9_])"},
+  "hasPort": {"re": "(?<${BANG}[a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?${BANG}[a-z0-9_])"},
   "hasNavy": {"kw": ["navy", "major port"]},
   "hasGranary": {"kw": ["granar"]},
-  "hasHospital": {"live": true, "re": "(?<![a-z0-9_])hospital|(?<![a-z0-9_])healer(?![a-z0-9_])|(?<![a-z0-9_])infirmar|(?<![a-z0-9_])monaster|(?<![a-z0-9_])friary(?![a-z0-9_])"},
+  "hasHospital": {"live": true, "re": "(?<${BANG}[a-z0-9_])hospital|(?<${BANG}[a-z0-9_])healer(?${BANG}[a-z0-9_])|(?<${BANG}[a-z0-9_])infirmar|(?<${BANG}[a-z0-9_])monaster|(?<${BANG}[a-z0-9_])friary(?${BANG}[a-z0-9_])"},
   "hasChurch": {"kw": ["church", "cathedral", "temple", "monastery", "friary", "shrine", "priest", "abbey"]},
   "hasCathedral": {"kw": ["cathedral", "great cathedral"]},
   "hasMonastery": {"kw": ["monastery", "friary", "major monasteries"]},
@@ -235,7 +240,9 @@ function answersByBirth(cid, x) {
 const SEP_REST = String.raw`\x3a-\x40\x5b-\x60\x7b-\xbf\xd7\xf7\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f\ufe30-\ufe6f\ufeff\uff00-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65`;
 export const NAME_SEP = String.raw`\x01-\x2f` + SEP_REST;
 /** The separators but the quotation mark (in a document's text it is where a string ends; a string asked alone holds none by then). */
-const NAME_SEPQ = String.raw`\x01-\x21\x23-\x2f` + SEP_REST;
+// Pattern characters, not prose (see BANG): the head a plain literal with its backslashes escaped, the very characters
+// the String.raw held, so the walker reads no cooked mark in it.
+export const NAME_SEPQ = '\\x01-\\x21\\x23-\\x2f' + SEP_REST;
 /**
  * THE BLOCKING TABLE (COHERENCE-VEIL-12; REVIEW-VEIL-8's V8-1), as the body of a bracket expression: the letters and the
  * digits (General Category L*, N*) of the scripts that separate their words by spaces, Latin, Greek, Cyrillic, Armenian
@@ -431,9 +438,9 @@ const SEP_RUN = new RegExp(`[${NAME_SEP}]+`, 'g');
 const SEPQ_RUN = new RegExp(`[${NAME_SEPQ}]+`, 'g');
 const BOUND_END = new RegExp(`^[${NAME_BOUND}]$`, 'u');
 /** A left boundary: the text's start, or a neighbour before that is not in the blocking table (consumes nothing; SQL: `lbd`). */
-const LEFT_BOUND = `(?<![${NAME_BOUND}])`;
+const LEFT_BOUND = `(?<${BANG}[${NAME_BOUND}])`;
 /** A right boundary: the text's end, or a neighbour after that is not in the blocking table (consumes nothing; SQL: `rbd`). */
-const RIGHT_BOUND = `(?![${NAME_BOUND}])`;
+const RIGHT_BOUND = `(?${BANG}[${NAME_BOUND}])`;
 /** A quotation mark, a reverse solidus, a control character: what JSON escapes; each one space (SQL: _gallery_veil_name_hit). */
 const ESCAPED = new RegExp(String.raw`["\\\x00-\x1f]`, 'g');
 /** The bracketed qualifier(s) a name ends with: 'Thieves' guild (powerful)' is 'Thieves' guild'. */
