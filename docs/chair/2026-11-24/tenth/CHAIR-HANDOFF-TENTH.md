@@ -699,3 +699,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   KNOW BEFORE ANY RELEASE, and a marker on three cures is not the whole answer. (4) the besieged places' reliance
   names its source and says it is stopped. THE CLOSE LANE'S HAND-IN MOVES LATER THAN 02:00 UTC; its new hour is asked.
   THE OWNER IS TOLD NOW.
+- 2026-11-24 22:33 UTC · T50 · RULING R24g (appended to `read/RULING-R24.md`): the besieged places' reliance line in one line, naming
+  its source and its stop in the page's own mark; THE TOWN'S NEW GOVERNMENT NAME IS "COUNCIL OF ALDERMEN" (the chair's
+  "Board of Aldermen" would have re-worded the place's own prose through the code's council word tests: found by
+  CLOSE-7's free-name check before any build); the three names are now Council of Aldermen, Council of Syndics, Senate.
+  CLOSE-7's context began with a summary a second time (about 22:25 UTC); it re-read its start message and hand-back
+  and is told to make the hand-back its whole memory; a third summary seats a successor. ITS HAND-IN GUESS IS NOW
+  08:30 UTC ON 2026-11-25. Chain two runs the measure of master-born places re-derived on the line (about 00:15 UTC).

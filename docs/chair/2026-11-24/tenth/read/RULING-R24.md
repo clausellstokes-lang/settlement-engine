@@ -178,3 +178,19 @@ THE SEAT OF IT IS THE RE-DERIVE, NOT THE CURE: every cure that moves what a plac
 4. **P3SOURCE** (three besieged places that state a reliance on magic with no source; the same at point 112; the one
    source is stopped by the siege): the reliance NAMES its source even when the source is stopped and says the stop in the
    page's own mark; the composed line comes to the chair before a build.
+
+## R24g (added 22:33 UTC on 2026-11-24): THE BESIEGED PLACES' LINE; THE TOWN's NAME
+1. **P3SOURCE, the one-line form:** "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to
+   parish church · Stopped by the siege." The source by `magicSourceOf`'s own name; the stop in `crisisStoppedRow.js ::
+   rowMarkText`'s own words. What the page says: no marker. If the pattern reads the last segment as a printed condition,
+   it is taught that the page's own stop mark (read from that table) is not a catalogue condition, and nothing more.
+2. **C1's NAME FOR THE TOWN IS "COUNCIL OF ALDERMEN"** (in place of R24b's "Board of Aldermen": CLOSE-7's check showed that
+   name fails the council word tests, so `claimStanding.js` would re-word the place's prose and `factionArchetype` re-class
+   it: a name that moves more than the name is not the cure). Not "Aldermen's Council" (a possessive inside a name). THE
+   THREE: "Council of Aldermen" (town), "Council of Syndics" (city), "Senate" (metropolis). R24b's proof decides every
+   name-keyed reader: with the names mapped back the 39 V births are byte for byte the old ones; a reader for which that
+   cannot be had is a STOP.
+3. CLOSE-7's context has begun with a summary twice in three hours: its hand-back's first section is made its whole memory
+   and pushed; a third summary before its hand-in seats a successor on that hand-back.
+ITS NEW GUESS FOR "CLOSE-7 <commit>": 08:30 UTC on 2026-11-25 (the measure of master-born places to about 00:15; the
+corrections law's leaf 02:15; B1(i) 03:15; B1(ii) 04:45; C1 06:15; the landing branch 08:30).
