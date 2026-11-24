@@ -89,7 +89,66 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 
 ## (c) THE JOIN
 
-(filled when q2 ends)
+THE TRIAL JOIN (local only, pushed nowhere; `/home/user/wt/join` at cdab6d2fc): the old join 9e6547f0f (line 9b0ffaa97 + the
+tip 23bb8b8ae, its eleven conflicts at the line's side) + the line f03e9a868 (point 113, both laws lit): NO CONFLICT + the tip
+b58abc48b (PIN-3): NO CONFLICT. The line's point 113 touches nothing of the veil but `src/generators/power/factionStanding.js`
+(the JSDoc A2 needs). CONFIRMED.
+
+THE REDS, THEN (9e6547f0f, VEIL-43's `out/v43/reds/`) AND NOW (cdab6d2fc, `q2.sh`, the same commands, classed by the same
+`fails.mjs` against RED-AT-LINE.tsv at point 113), CONFIRMED:
+| run | then | now | difference |
+|---|---|---|---|
+| strict domain typecheck | (not run) | 0 errors | (the R5-DESC code is not on the tip: A2 is read at its own merge) |
+| the five files + PIN-3's | 5 files red | the same 5 files, 7 tests; `criminalVeilSwitch` GREEN | none |
+| `tests/lint` whole | 65 of 3,442 | 65 of 3,442, IDENTICAL title for title | none |
+| the 42 named files (949 tests) | 8 | 7 | VS1 left (PIN-3) |
+| `tests/security` whole (2,142) | 3 (TRAD-2 x3) | 5 | NEW: `rosterChoiceInversion` VR26 FIDELITY (`legitimacy.colours` and two more) and MAIN (its shrink-only list): READER ROW 15 EXACTLY (lit: the harness's re-deriver is the DARK legitimacy; fortune moves the score); class C, the join's (re-point the harness; its owner unit asked of the writer) |
+Their causes are still unfound (REDS-CAUSE never ran). Not run now: `tests/copy` (N107), the hook gap, PAGES.
+
+WHAT THE LIT LAWS CHANGE: the births (who rules and fortune): the gates' 140 are born lit at the join, so GATE-1/GATE-2 must be
+re-read there (the probe's lit second pass: GATE-1 6 of 92, GATE-2 20 of 40: reader row 11, E75, E78) and so must every count of (b)
+(the lit-born column); the lit-only rows become live: 17 (`npc_power_<slug>`), 18 (the contenders), 19 (a hidden holder, in play),
+20 (`seatHolderLines.js`), 37 (13G x S), 15 (VR26, above); the twin's re-derivers that read the dark legitimacy.
+
+THE NUMBERS (the grants fix lands first as `211_close_visitor_reach.sql`): the veil's two migrations become 212 and 213. A trial
+merge of the grants tip fe62c9575 into the trial join (`/home/user/wt/join2`, left unresolved) STOPS ON FIVE CONFLICTS, all of them
+the migration head: `ARCHITECTURE.md` (1 hunk), `docs/CURRENT_STATE.md` (2), `docs/DEPLOY.md` (2), `scripts/ops/migrationRehearsalCore.mjs`
+(3: `MIGRATION_TRAIN_REPO_HEAD`, the wave entries' from/to, the purposes' rollback names), `tests/ops/migrationRehearsal.test.js`
+(8: repoHead, pendingCount 91/90 -> 92, the ranges, the wave list). THE RENAME TOUCHES (census at the tip, `git grep` of the two
+file names and of the numbers in code; 83 files hold the numbers, most as prose):
+- the four files themselves: `supabase/migrations/211_server_side_share_veil.sql` -> 212, `212_share_veil_later_cures.sql` -> 213,
+  and both `supabase/rollback/*.down.sql` (their headers cite each other: 10 and 27 mentions);
+- PATH PINS: `tests/lint/{crimeTypesReaders,recentConflictReaders,rosterChoicePools,rosterChoiceRegistry}.walker.test.js`;
+  `tests/security/galleryRosterChoices.pglite.test.js` (MIGRATION_212_URL); `tests/security/galleryVeilCures.pglite.test.js` (the
+  rollback test expects the down files by name: `['212_share_veil_later_cures.down.sql']`, `['211_server_side_share_veil.down.sql']`;
+  76 mentions);
+- CHAIN BOUNDS, WHICH CHANGE MEANING, NOT ONLY SPELLING: `galleryServerVeil.pglite.test.js` (`buildDb(210)` is "before the veil":
+  it becomes 211, the grants included; `>= 211` "the veil's files" becomes `>= 212`); `galleryVeilHandRows.pglite.test.js`
+  (`<= 211` "through the frozen veil" becomes `<= 212`); `galleryVeilCures.pglite.test.js` (AT210 / AT211 controls and the rollback
+  chain: 001..213 then 213's down = a chain stopped at 212, then 212's down = stopped at 211, the GRANTS' head);
+- REGISTERS by their doors: `tests/lint/.source-citation-baseline.json` (3 citations into the migration files);
+  `tests/lint/.tuning-register.json` (a cause naming "migration 212's client twin");
+- PROSE CITATIONS "212's" / "211 ::" in src comments and the registry (`rosterChoiceRegistry.js` 13, `galleryRosterChoices.js` 20,
+  `gallerySecondHomes.js` 19, `galleryVeil.js` 11, `galleryWithholdAlways.js` 5, `gallery.js` 4, `pageRederive.js` 3): re-cited where
+  a walker reads them, else left as history;
+- the docs counts: `ARCHITECTURE.md`, `docs/CURRENT_STATE.md`, `docs/DEPLOY.md` (the head and the two paragraphs); the 124 files under
+  `docs/chair/` that name the files (270 mentions) are the record: NOT rewritten;
+- `scripts/ops/migrationRehearsalCore.mjs`'s `expectedObjects` and purposes for both waves; `supabase/applied-head.json` is the owner's.
+
+WHAT OF THE VEIL DEPENDS ON GRANTS 211's TEXT (not its number), the chair's question; read in its text, PLAUSIBLE:
+1. Its last statement, `alter default privileges in schema public revoke execute on functions from anon, authenticated`: every
+   function the veil CREATES after it (its `_gallery_veil*` helpers, 45 + 46 create statements) is executable by no visitor. Right
+   for a helper reached only inside a SECURITY DEFINER read; WRONG if any veil helper is called from an INVOKER path a visitor runs
+   (`_gallery_apply_member_overrides` is an invoker, class ANYONE): a read that fails "permission denied". To prove on the joined
+   chain: every veil helper's callers, and the doors run as anon.
+2. Its revokes of `_gallery_chronicle_entry`, `_gallery_chronicle_json`, `_gallery_public_tile_rows`: the doors' build (D7) restates
+   the tile rows: a `create or replace` keeps 211's revoke; a drop-and-create loses it.
+3. `tests/security/functionGrantClasses.js` (GENERATED from the chain): every veil function needs its class row, or
+   `hostedDefaultGrants.pglite.test.js` is red; the veil's explicit grants (`get_gallery_dossier`, `get_unlisted_dossier`,
+   `get_gallery_map` to anon; `import_gallery_dossier` to authenticated) must equal the classes 211 records (ANYONE, ANYONE,
+   ANYONE, USER: read, equal); the KEPT_OPEN row `_gallery_sanitize_public_json(jsonb,text[])` must still be the signature the veil
+   calls.
+If 211's text moves, these three are re-read; nothing else of the veil reads it.
 
 ## (d) THE PROPOSAL
 
