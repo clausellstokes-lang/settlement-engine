@@ -96,12 +96,28 @@ summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>"
 - A1: MERGED onto cures (bb457f3bf; -a1-wip 50f911b49).
   - NOHEAL C 13->0, V 26->0. No record moved. Pages moved C 19 / V 38, plus 18 H4-H6 swaps.
   - The +3 on P3source is not A1's.
-- A2: BUILDING. Chain one (agent a4c1ad5101be44ef0), `/home/user/wt/a2` on -a2-wip, local commits db55f09de and c92a301fa, NOT
-  YET PUSHED.
-  - Still owed: the totality and lint arms, and the proof (FOODSEC->0, pages, slot share, born-record moves by corpus, goldens
-    dropped and named).
-  - On its report: re-read R24-A2/R24a/R24c/R24d, read the diff once, re-run red/green, merge onto cures, push, send the A2 line
-    with the table.
+- A2: BUILT, SENT BACK FOR TWO FIXES (22:45 UTC).
+  - (1) Move the totality arm's scan into tests/lint (R24c: "a lint arm").
+  - (2) FOODSEC's register `_notes` claimed a 720 door run that was not taken: correct it to the truth.
+  - -a2-wip c92a301fa is PUSHED (the cure is db55f09de). Report `close-7/reports/A2.md`.
+  - Table (C, V):
+    - secure|strained 159, 136;
+    - secure|critical 38, 32;
+    - pressured|surplus 5, 13;
+    - pressured|critical 1, 22;
+    - deficit|adequate 1, 0;
+    - deficit|collapsed 1, 0;
+    - famine|strained 6, 20;
+    - deficit|critical 16, 9, unchanged;
+    - famine|adequate and famine|surplus, C 4 V 3, left for the mirror.
+  - Proof: FOODSEC C 197->0, V 168->0; pages moved C 211, V 223; records moved 0/0; 11 tests red first.
+  - RISE SENT TO THE CHAIR, to merge-and-list or to give new words first (ASKED):
+    - the Daily Life grievance slot's top share (F6 in cities, F8 in metropolises);
+    - C: city .13->.23, metro .13->.37;
+    - V: town .10->.13, city .10->.21, metro .10->.32;
+    - there is no door row; the words are the chair's.
+  - On the fixes and the chair's word: re-read R24-A2/R24a/R24c/R24d, read the diff once, re-run red/green, merge onto cures,
+    push, send the A2 line.
 - MIRROR UNIT: QUEUED on chain one after A2 (R24d's words). Cut at d447ee31e on `-mirror-wip`.
 - P3SOURCE LINE (R24g (1)): QUEUED on chain one after the mirror, on `-p3-wip` cut at d447ee31e. Words fixed by R24g.
 - MASTER-REDERIVE (R24f (3)): RUNNING since ~22:31.
