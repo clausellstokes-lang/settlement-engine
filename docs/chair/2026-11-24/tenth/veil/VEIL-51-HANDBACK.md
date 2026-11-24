@@ -14,14 +14,26 @@ database LOCAL (`PGHOST=/var/tmp/rv7`); no `supabase` command; 212 applied to no
 log's exit line, never through a pipe; one heavy run at a time through `scripts/gate-mutex.sh --run`. A predecessor's branch is
 read and merged FROM, never pushed. I write no instrument: the lane's are run UNCHANGED from detached worktrees.
 
-STATE (21:28 UTC):
-- I STAND ON b58abc48b (`lane/veil-41-2026-11-23-tip`, "PIN-3 MERGED"). Line (0) sent to VEIL-50 at 21:25.
-- UNIT 1 STEP (1): `lane/veil-51-2026-11-24-c2-wip` cut at ced3b1de7 (worktree `/home/user/wt/c2`); ced3b1de7 already holds
-  b58abc48b (CONFIRMED), so the merge of the lane's tip is a no-op until VEIL-50 names a newer tip.
-- WHY VEIL-41's FOUR MEASURES DIED IN ~2 s (PLAUSIBLE until step `why` runs): `meas.sh` exits 2 on "A SHARD FAILED"; its eval
-  HARD-SETS `MEAS_BIJ_MOD=<script's checkout>/tests/security/personIdBijection.shared.mjs`, overriding the env proof.sh passed;
-  that file exists only on chain B's measure branch (d71a3ee44), not in VEIL-41's documents checkout. Cure without a new
-  instrument: run chain B's v42/meas/meas.sh UNCHANGED from a detached worktree of d71a3ee44 (byte-equal to the v41 copy).
+STATE (22:42 UTC): THE LANE'S OWNER IS NOW VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R; the chair's line 22:40: VEIL-50 handed over
+at 22:34; never message VEIL-50 again). RULING V5 (22:27): "R3" is the release's bar again; phase 1 is the ORDER of the work.
+Reports to the lane's owner: a FILE, at most 200 words. My context began with a summary at 22:40; VEIL-55 told (22:40).
+- I STAND ON b58abc48b; unit 1's tree is `lane/veil-51-2026-11-24-c2-wip` = ced3b1de7 (holds b58abc48b: CONFIRMED; no merge
+  owed until the lane's owner names a newer tip). 212 sha d71abc9e..., rollback 8cbd7d1c...: EQUAL to VEIL-41's (CONFIRMED,
+  `shas.txt`), so ppkey's 0 of 46,752 per door stands unre-run.
+- UNIT 1 RECEIPTS SO FAR (all CONFIRMED, `/var/tmp/v51/out/p1/`, `p1.log`):
+  - WHY VEIL-41's FOUR MEASURES DIED: its v41 copy of meas.sh, run from its documents checkout, sets MEAS_BIJ_MOD to
+    `<checkout>/tests/security/personIdBijection.shared.mjs`, a file only chain B's d71a3ee44 holds: the probe's import
+    throws "Cannot find module" in under a second, the shard rc 1, meas.sh "A SHARD FAILED" exit 2 (step `why`, rc 2 21:34:11).
+  - tpl rc 0; dumps rc 0 (140 today-born from c2, 140 master-born from db832c892).
+  - ctrl (handreach, MEAS_C=1) rc 0, 21:36: THE CONTROL BITES (stored ids found served on all 288 reads at every door,
+    as they must be with MEAS_BIJ=0); L1 gallery 33 of 288 = `factions[].power` on 3 master-shaped docs at Reveal DM (N106).
+  - t140 (gallery, link) rc 0: L1 0 of 3,360 and 0 of 3,360; L2 84 (`prominentRelationship`, Reveal off, 7 places: N117).
+  - st140 (today-born stored, every door) rc 0: L1 gallery 0 of 3,360, link 0; L2 84 (the same N117 class).
+  - sm140 (master-born stored) rc 0: L1 gallery 352 of 3,360 (32 places, `factions[].power` 1,969 leaves, Reveal DM, the
+    11 marked settings), link 0: EXACTLY N106's count on the tip (the guard at 212's roster block passes on an absent
+    `power`; cure granted to chain B, not in this tree). Nothing else differs; no hit inside publicProse on any run.
+- RUNNING: set55 (22:28-), then cures, lint, copy, types+eslint, build. Then step (3) TABLE A and LINE B; then
+  "TIP? STORED-PROSE ced3b1de7" to VEIL-55 as a file.
 
 TREES (this container; scratch): `/home/user/wt/c2` (my code branch), `/home/user/wt/tip` (b58abc48b), `/home/user/wt/master`
 (db832c892), `/home/user/wt/i42` (d71a3ee44: meas, dump), `/home/user/wt/i41` (ccc2e5473: VEIL-41's proof and v41/meas copy).
@@ -34,7 +46,7 @@ RUNS (scripts on this branch, `docs/chair/2026-11-24/tenth/veil/v51/`): `p1.sh` 
 t140, st140, sm140, set55, cures, lint, copy, types, build); receipts in `/var/tmp/v51/out/p1/p1.log`; `set55.txt` = the
 re-derived 55-file set (VEIL-41's list died with its container; derivation in p1.sh's head).
 
-NEXT: m0 ends -> `p1.sh tpl why` (the cause, red) -> `p1.sh dumps ctrl t140 st140 sm140 set55 cures lint copy types build`.
+NEXT: p1 (background) ends -> read each tail -> the TIP? file -> wait for "R4-IDS MERGED" (unit 2).
 
 ## 2. RULINGS IN FORCE (as read; the record holds each with its reasons)
 RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document form, `MEAS_BIJ=0` until R4-IDS merges), N96 (d)
@@ -42,4 +54,5 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
-- 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started.
+- 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
+- 22:40 context summarized; owner change read (VEIL-55); line to VEIL-55. 22:42 the four measures read.
