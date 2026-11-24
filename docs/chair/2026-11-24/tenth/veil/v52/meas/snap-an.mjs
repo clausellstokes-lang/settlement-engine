@@ -13,6 +13,7 @@ const hits = {}; for (const s of S) for (const [k, v] of Object.entries(s.hits))
 const byKind = {}; for (const h of Object.values(hits)) { const b = (byKind[h.kind] ||= { paths: 0, reads: 0, campaigns: {} }); b.paths += 1; b.reads += h.reads; Object.assign(b.campaigns, h.campaigns); }
 console.log(`HITS BY KIND ${J(Object.fromEntries(Object.entries(byKind).map(([k, b]) => [k, { paths: b.paths, reads: b.reads, campaigns: Object.keys(b.campaigns).length }])))}`);
 for (const v of Object.values(hits).sort((a, b) => b.reads - a.reads)) console.log(`  HIT ${v.pat} [${v.kind}] reads ${v.reads} campaigns ${Object.keys(v.campaigns).length} doors ${J(v.doors)} | ex ${J(v.ex)}`);
+console.log(`PERSON HITS THE OLD SUBSTRING MATCH HAD AND THE WHOLE-WORD MATCH DOES NOT: ${J(merge('personSubstrOnly'))}`);
 const pl = S.map((s) => s.plant).filter((p) => p.done);
 let blind = 0;
 for (const p of pl) { console.log(`PLANT ${p.campaign} house ${J(p.house)} person ${J(p.person)} | expect ${J(p.expect)} | caught ${J(p.caught)}`); for (const [k, n] of Object.entries(p.expect)) if ((p.caught[k] || 0) < n) blind += 1; }

@@ -260,7 +260,9 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           } } // the DAILY block
           // ── NAMES: every served string by the lane's fold; the withheld ids as strings and as keys
           const ids = withheldIds(doc, d, wh);
+          const readHits = []; // VEIL-52: this read's own hits, for the plant's CAUGHT
           const hit = (q, kind, ex) => {
+            readHits.push([q, kind, String(ex)]);
             const pat = norm(q); const h = (out.names[`${pat}|${kind}`] ||= { pat, kind, reads: 0, places: {}, doors: {}, ex: null });
             h.reads += 1; h.places[b.seed] = 1; bump(h.doors, `${tag}|dm=${dm}`); if (!h.ex) h.ex = { seed: b.seed, setting: key, dm, eng, door, text: String(ex).slice(0, 240), wh: wh.slice(0, 6) };
             if ((door === 'map' || door === 'mapimport') && eng === 'server') { // VEIL-52: both map doors, the door in the key
@@ -276,7 +278,7 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           }
           for (const [q, k] of keys) if (ids.has(k)) hit(q, 'id-key', k);
           if (plantText) { // VEIL-52: the plant's tally on this hiding read
-            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = strs.some(([q, s]) => /role$/i.test(q) && s.includes(plantText) && ((wh.includes(s) || (pre && pre.hit(s))) && namesWithheld(s, wh, d)));
+            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = readHits.some(([q, k, x]) => k === 'name' && /role$/i.test(q) && x.includes(plantText)); // the instrument's OWN hit (VEIL-50's change)
             bump(out.plant.reads, `${tag}|dm=${dm}`); if (pres) bump(out.plant.present, `${tag}|dm=${dm}`); if (caught) bump(out.plant.caught, `${tag}|dm=${dm}`); if (pres && !caught && wh.some((w) => plantText.startsWith(w))) bump(out.plant.blind, `${tag}|dm=${dm}`);
           }
         }

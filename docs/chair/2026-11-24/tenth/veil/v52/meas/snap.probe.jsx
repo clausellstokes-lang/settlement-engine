@@ -111,8 +111,9 @@ it(`VEIL-52 snap (${FORM})`, async () => {
   const uid = (a, b) => `abcd52${String(SHARD[0]).padStart(2, '0')}-${String(a).padStart(4, '0')}-0000-0000-${String(b).padStart(12, '0')}`;
 
   const out = { meta: { form: FORM, shard: SHARD, g: G, ticks: TICKS, plant: PLANT, src: SRC, started: new Date(T0).toISOString() }, campaigns: [], reads: 0, noWorld: {},
-    hits: {}, publishPath: {}, worldBytes: [], sectionsOn: {}, plant: { done: false, campaign: null, expect: {}, caught: {} }, pulseErrors: [] };
+    hits: {}, publishPath: {}, worldBytes: [], sectionsOn: {}, plant: { done: false, campaign: null, expect: {}, caught: {} }, pulseErrors: [], personSubstrOnly: {} };
   const bump = (o, k, n = 1) => { o[k] = (o[k] || 0) + n; };
+  const WRE = new Map(); const wordRe = (n) => { if (!WRE.has(n)) WRE.set(n, new RegExp(`(?<![\\p{L}\\p{N}])${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\p{N}])`, 'u')); return WRE.get(n); };
   const walk = (v, p, strs, keys, objs) => {
     if (typeof v === 'string') strs.push([p, v]);
     else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${p}[${i}]`, strs, keys, objs));
@@ -245,7 +246,8 @@ it(`VEIL-52 snap (${FORM})`, async () => {
             if (ids2.has(s)) hit(q, 'id-text', s);
             // a withheld power or house: judged against every member's served document (a name one member serves is open)
             if ((whs.includes(s) || (pre && pre.hit(s))) && namesWithheld(s, whs, openDoc)) hit(q, 'name', s);
-            for (const [pn, kind] of persons) if (s.includes(pn)) hit(q, kind, s);
+            // a person's name as a WHOLE WORD (no letter or digit on either side; VEIL-50's change); the old substring match's extra hits are counted
+            for (const [pn, kind] of persons) { const sub = s.includes(pn); if (!sub) continue; if (wordRe(pn).test(s)) hit(q, kind, s); else bump(out.personSubstrOnly, kind); }
           }
           if (PLANT && out.plant.campaign === campaign.id) { // EXPECT = the plant is served on this read (and withheld); CAUGHT = the instrument's own hit on it
             const t = `${door}|dm=${dm}`;
