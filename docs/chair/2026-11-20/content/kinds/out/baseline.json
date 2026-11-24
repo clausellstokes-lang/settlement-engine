@@ -1,0 +1,2306 @@
+{
+ "metas": [
+  {
+   "tree": "/home/user/kinds-k0",
+   "sha": "a6a60ef3b3f5b567a908809ff7b2d5bf8dabcce2",
+   "force": {},
+   "sizes": [
+    "thorp",
+    "hamlet",
+    "village",
+    "town",
+    "city",
+    "metropolis"
+   ],
+   "perSize": 150,
+   "hook": true,
+   "split": "4 node processes by size (thorp+hamlet+village | town | city | metropolis), rows concatenated",
+   "wallSeconds": 90
+  }
+ ],
+ "second": null,
+ "bySize": {
+  "thorp": {
+   "n": 150,
+   "errors": 0,
+   "calm": 102,
+   "count": [
+    0,
+    146,
+    3,
+    1
+   ],
+   "kindsAny": {
+    "resource_scarcity": 26,
+    "external_threat": 18,
+    "crime_wave": 17,
+    "legitimacy_crisis": 10,
+    "leadership_vacuum": 8,
+    "wild_magic": 8,
+    "corruption_scandal": 7,
+    "great_fire": 6,
+    "magical_controversy": 6,
+    "succession_crisis": 6,
+    "heresy_trial": 5,
+    "infiltration_fear": 5,
+    "outside_debt": 5,
+    "plague_years": 4,
+    "popular_uprising": 4,
+    "religious_tension": 4,
+    "generational_divide": 3,
+    "great_flood": 3,
+    "disputed_land": 2,
+    "population_friction": 2,
+    "trade_collapse": 2,
+    "tyranny": 2,
+    "demographic_pressure": 1,
+    "pilgrimage_surge": 1
+   },
+   "kindsFirst": {
+    "resource_scarcity": 26,
+    "crime_wave": 16,
+    "external_threat": 14,
+    "legitimacy_crisis": 10,
+    "leadership_vacuum": 8,
+    "wild_magic": 8,
+    "corruption_scandal": 7,
+    "succession_crisis": 6,
+    "great_fire": 6,
+    "magical_controversy": 6,
+    "heresy_trial": 5,
+    "infiltration_fear": 5,
+    "outside_debt": 5,
+    "popular_uprising": 4,
+    "religious_tension": 4,
+    "plague_years": 4,
+    "generational_divide": 3,
+    "great_flood": 3,
+    "disputed_land": 2,
+    "trade_collapse": 2,
+    "population_friction": 2,
+    "tyranny": 2,
+    "demographic_pressure": 1,
+    "pilgrimage_surge": 1
+   },
+   "distinct": 24,
+   "topFirst": "resource_scarcity",
+   "topFirstN": 26,
+   "hasCriminal": 21,
+   "nameRule": 21,
+   "hasGuild": 0,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 2,
+       "lo": 2,
+       "hi": 14.983137931034484
+      },
+      {
+       "n": 37,
+       "hit": 7,
+       "lo": 15.120535294117651,
+       "hi": 29.473409482758626
+      },
+      {
+       "n": 38,
+       "hit": 5,
+       "lo": 29.584868154158222,
+       "hi": 44.045891717376605
+      },
+      {
+       "n": 37,
+       "hit": 3,
+       "lo": 44.10733887762,
+       "hi": 84.19754811359027
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 8,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 4,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 3,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 9,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 4,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 0,
+       "hi": 1
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 2,
+       "hi": 14.983137931034484
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 15.120535294117651,
+       "hi": 29.473409482758626
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 29.584868154158222,
+       "hi": 44.045891717376605
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 44.10733887762,
+       "hi": 84.19754811359027
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 1
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 6,
+       "hit": 6,
+       "lo": 8.594845165652467,
+       "hi": 24.784539553752538
+      },
+      {
+       "n": 5,
+       "hit": 4,
+       "lo": 25.802028397565923,
+       "hi": 30.59179655172414
+      },
+      {
+       "n": 5,
+       "hit": 4,
+       "lo": 34.529877155172414,
+       "hi": 44.045891717376605
+      },
+      {
+       "n": 5,
+       "hit": 3,
+       "lo": 44.32318356997972,
+       "hi": 56.27543103448277
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ],
+     "g2": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 2,
+     "p10": 6.321686106712729,
+     "p25": 15.017487271805276,
+     "median": 29.529138818458424,
+     "p75": 43.97209893509128,
+     "p90": 54.08574112195741,
+     "max": 84.19754811359027,
+     "iqr": 28.954611663286006,
+     "mode": 2,
+     "modeShare": 0.6666666666666666
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 0,
+     "p90": 0,
+     "max": 0,
+     "iqr": 0,
+     "mode": 0,
+     "modeShare": 100
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 0,
+     "p90": 0,
+     "max": 1,
+     "iqr": 0,
+     "mode": 0,
+     "modeShare": 92
+    }
+   }
+  },
+  "hamlet": {
+   "n": 150,
+   "errors": 0,
+   "calm": 99,
+   "count": [
+    0,
+    148,
+    2,
+    0
+   ],
+   "kindsAny": {
+    "resource_scarcity": 20,
+    "external_threat": 15,
+    "legitimacy_crisis": 12,
+    "corruption_scandal": 11,
+    "outside_debt": 11,
+    "plague_years": 10,
+    "tyranny": 10,
+    "crime_wave": 8,
+    "succession_crisis": 6,
+    "disputed_land": 5,
+    "great_flood": 5,
+    "popular_uprising": 5,
+    "religious_tension": 5,
+    "infiltration_fear": 4,
+    "magical_controversy": 4,
+    "trade_collapse": 4,
+    "generational_divide": 3,
+    "heresy_trial": 3,
+    "leadership_vacuum": 3,
+    "wild_magic": 3,
+    "great_fire": 2,
+    "population_friction": 2,
+    "occupation_legacy": 1
+   },
+   "kindsFirst": {
+    "resource_scarcity": 20,
+    "external_threat": 13,
+    "legitimacy_crisis": 12,
+    "outside_debt": 11,
+    "corruption_scandal": 11,
+    "tyranny": 10,
+    "plague_years": 10,
+    "crime_wave": 8,
+    "succession_crisis": 6,
+    "disputed_land": 5,
+    "popular_uprising": 5,
+    "religious_tension": 5,
+    "great_flood": 5,
+    "infiltration_fear": 4,
+    "trade_collapse": 4,
+    "magical_controversy": 4,
+    "generational_divide": 3,
+    "leadership_vacuum": 3,
+    "heresy_trial": 3,
+    "wild_magic": 3,
+    "great_fire": 2,
+    "population_friction": 2,
+    "occupation_legacy": 1
+   },
+   "distinct": 23,
+   "topFirst": "resource_scarcity",
+   "topFirstN": 20,
+   "hasCriminal": 10,
+   "nameRule": 10,
+   "hasGuild": 0,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 2.417300202839757,
+       "hi": 14.864224137931034
+      },
+      {
+       "n": 37,
+       "hit": 3,
+       "lo": 14.899135192697768,
+       "hi": 26.18985147058824
+      },
+      {
+       "n": 38,
+       "hit": 1,
+       "lo": 26.690761460446247,
+       "hi": 37.45891163793104
+      },
+      {
+       "n": 37,
+       "hit": 4,
+       "lo": 37.60921568627452,
+       "hi": 88.79941401115622
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 2,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 4,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 4,
+       "lo": 0,
+       "hi": 1
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 2.417300202839757,
+       "hi": 14.864224137931034
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 14.899135192697768,
+       "hi": 26.18985147058824
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 26.690761460446247,
+       "hi": 37.45891163793104
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 37.60921568627452,
+       "hi": 88.79941401115622
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 1
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 3,
+       "hit": 2,
+       "lo": 15.122190669371195,
+       "hi": 21.554338235294118
+      },
+      {
+       "n": 2,
+       "hit": 2,
+       "lo": 23.485474137931043,
+       "hi": 35.66337778904666
+      },
+      {
+       "n": 3,
+       "hit": 3,
+       "lo": 39.90364350912778,
+       "hi": 59.031891480730216
+      },
+      {
+       "n": 2,
+       "hit": 1,
+       "lo": 61.58755192697769,
+       "hi": 65.49341987829614
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ],
+     "g2": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 2.417300202839757,
+     "p10": 7.509038438133874,
+     "p25": 14.872951901622717,
+     "median": 26.440306465517246,
+     "p75": 37.34902693433063,
+     "p90": 50.746535010649076,
+     "max": 88.79941401115622,
+     "iqr": 22.476075032707914,
+     "mode": 2.417300202839757,
+     "modeShare": 0.6666666666666666
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 0,
+     "p90": 0,
+     "max": 0,
+     "iqr": 0,
+     "mode": 0,
+     "modeShare": 100
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 0,
+     "p90": 1,
+     "max": 1,
+     "iqr": 0,
+     "mode": 0,
+     "modeShare": 83.33333333333333
+    }
+   }
+  },
+  "village": {
+   "n": 150,
+   "errors": 0,
+   "calm": 97,
+   "count": [
+    0,
+    66,
+    84,
+    0
+   ],
+   "kindsAny": {
+    "resource_scarcity": 26,
+    "disputed_land": 13,
+    "heresy_trial": 13,
+    "leadership_vacuum": 12,
+    "legitimacy_crisis": 12,
+    "population_friction": 12,
+    "crime_wave": 11,
+    "external_threat": 11,
+    "wild_magic": 11,
+    "magical_controversy": 10,
+    "outside_debt": 10,
+    "succession_crisis": 10,
+    "great_flood": 9,
+    "infiltration_fear": 9,
+    "corruption_scandal": 8,
+    "pilgrimage_surge": 8,
+    "plague_years": 8,
+    "popular_uprising": 5,
+    "trade_dispute": 5,
+    "demographic_pressure": 4,
+    "generational_divide": 4,
+    "occupation_legacy": 4,
+    "religious_tension": 4,
+    "trade_collapse": 4,
+    "tyranny": 4,
+    "great_fire": 3,
+    "economic_disparity": 2,
+    "guild_conflict": 2
+   },
+   "kindsFirst": {
+    "resource_scarcity": 26,
+    "crime_wave": 11,
+    "legitimacy_crisis": 9,
+    "disputed_land": 8,
+    "leadership_vacuum": 8,
+    "succession_crisis": 8,
+    "population_friction": 7,
+    "external_threat": 7,
+    "corruption_scandal": 6,
+    "plague_years": 6,
+    "heresy_trial": 6,
+    "great_flood": 5,
+    "outside_debt": 5,
+    "infiltration_fear": 5,
+    "popular_uprising": 4,
+    "pilgrimage_surge": 4,
+    "magical_controversy": 4,
+    "generational_divide": 4,
+    "occupation_legacy": 3,
+    "wild_magic": 3,
+    "religious_tension": 2,
+    "economic_disparity": 2,
+    "trade_dispute": 2,
+    "guild_conflict": 2,
+    "tyranny": 1,
+    "trade_collapse": 1,
+    "great_fire": 1
+   },
+   "distinct": 28,
+   "topFirst": "resource_scarcity",
+   "topFirstN": 26,
+   "hasCriminal": 12,
+   "nameRule": 11,
+   "hasGuild": 0,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 2.5751379310344835,
+       "hi": 14.305131845841787
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 14.407657758620692,
+       "hi": 26.322674239350917
+      },
+      {
+       "n": 38,
+       "hit": 7,
+       "lo": 26.514027383367136,
+       "hi": 41.18864097363083
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 41.23442782285328,
+       "hi": 74.21480000000001
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 3,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 5,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 3,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 2,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 5,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 3,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 1,
+       "lo": 2,
+       "hi": 2
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 2.5751379310344835,
+       "hi": 14.305131845841787
+      },
+      {
+       "n": 37,
+       "hit": 1,
+       "lo": 14.407657758620692,
+       "hi": 26.322674239350917
+      },
+      {
+       "n": 38,
+       "hit": 1,
+       "lo": 26.514027383367136,
+       "hi": 41.18864097363083
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 41.23442782285328,
+       "hi": 74.21480000000001
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 1,
+       "lo": 0,
+       "hi": 0
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 37,
+       "hit": 0,
+       "lo": 0,
+       "hi": 0
+      },
+      {
+       "n": 38,
+       "hit": 0,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 2,
+       "hi": 2
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 3,
+       "hit": 3,
+       "lo": 25.226428668018933,
+       "hi": 26.996810801217038
+      },
+      {
+       "n": 3,
+       "hit": 3,
+       "lo": 27.793993407707912,
+       "hi": 31.94289553752536
+      },
+      {
+       "n": 3,
+       "hit": 3,
+       "lo": 33.04180502028397,
+       "hi": 39.84385564570656
+      },
+      {
+       "n": 3,
+       "hit": 2,
+       "lo": 44.2162055020284,
+       "hi": 61.4479169117647
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ],
+     "g2": [
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      },
+      {
+       "n": 0,
+       "hit": 0,
+       "lo": null,
+       "hi": null
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 2.5751379310344835,
+     "p10": 7.5130580010141985,
+     "p25": 14.330763324036514,
+     "median": 26.418350811359026,
+     "p75": 40.85244464164977,
+     "p90": 56.12017350912779,
+     "max": 74.21480000000001,
+     "iqr": 26.521681317613254,
+     "mode": 2.5751379310344835,
+     "modeShare": 0.6666666666666666
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 0,
+     "p90": 0,
+     "max": 0,
+     "iqr": 0,
+     "mode": 0,
+     "modeShare": 100
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 0,
+     "p25": 0,
+     "median": 0,
+     "p75": 2,
+     "p90": 2,
+     "max": 2,
+     "iqr": 2,
+     "mode": 0,
+     "modeShare": 64.66666666666667
+    }
+   }
+  },
+  "town": {
+   "n": 150,
+   "errors": 0,
+   "calm": 109,
+   "count": [
+    0,
+    70,
+    80,
+    0
+   ],
+   "kindsAny": {
+    "guild_conflict": 46,
+    "crime_wave": 33,
+    "external_threat": 15,
+    "legitimacy_crisis": 14,
+    "resource_scarcity": 14,
+    "succession_crisis": 10,
+    "corruption_scandal": 9,
+    "religious_tension": 9,
+    "great_flood": 8,
+    "infiltration_fear": 6,
+    "leadership_vacuum": 6,
+    "occupation_legacy": 5,
+    "pilgrimage_surge": 5,
+    "population_friction": 5,
+    "tyranny": 5,
+    "great_fire": 4,
+    "heresy_trial": 4,
+    "outside_debt": 4,
+    "trade_dispute": 4,
+    "disputed_land": 3,
+    "economic_disparity": 3,
+    "popular_uprising": 3,
+    "trade_collapse": 3,
+    "wild_magic": 3,
+    "demographic_pressure": 2,
+    "generational_divide": 2,
+    "market_crash": 2,
+    "plague_years": 2,
+    "magical_controversy": 1
+   },
+   "kindsFirst": {
+    "crime_wave": 32,
+    "guild_conflict": 29,
+    "legitimacy_crisis": 13,
+    "resource_scarcity": 9,
+    "corruption_scandal": 7,
+    "external_threat": 7,
+    "succession_crisis": 7,
+    "great_flood": 6,
+    "leadership_vacuum": 5,
+    "religious_tension": 4,
+    "occupation_legacy": 4,
+    "trade_dispute": 3,
+    "population_friction": 3,
+    "tyranny": 3,
+    "infiltration_fear": 2,
+    "great_fire": 2,
+    "trade_collapse": 2,
+    "pilgrimage_surge": 2,
+    "popular_uprising": 2,
+    "market_crash": 1,
+    "generational_divide": 1,
+    "outside_debt": 1,
+    "plague_years": 1,
+    "disputed_land": 1,
+    "heresy_trial": 1,
+    "wild_magic": 1,
+    "demographic_pressure": 1
+   },
+   "distinct": 29,
+   "topFirst": "crime_wave",
+   "topFirstN": 32,
+   "hasCriminal": 68,
+   "nameRule": 31,
+   "hasGuild": 150,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 2,
+       "lo": 2.955806653144017,
+       "hi": 16.5465168356998
+      },
+      {
+       "n": 37,
+       "hit": 2,
+       "lo": 16.63590564705883,
+       "hi": 37.51729411764706
+      },
+      {
+       "n": 38,
+       "hit": 10,
+       "lo": 37.605576724137926,
+       "hi": 59.02848208248816
+      },
+      {
+       "n": 37,
+       "hit": 19,
+       "lo": 60.49589006085192,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 7,
+       "lo": 1,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 7,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 38,
+       "hit": 11,
+       "lo": 3,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 8,
+       "lo": 4,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 6,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 7,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 6,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 19,
+       "lo": 2.955806653144017,
+       "hi": 16.5465168356998
+      },
+      {
+       "n": 37,
+       "hit": 13,
+       "lo": 16.63590564705883,
+       "hi": 37.51729411764706
+      },
+      {
+       "n": 38,
+       "hit": 6,
+       "lo": 37.605576724137926,
+       "hi": 59.02848208248816
+      },
+      {
+       "n": 37,
+       "hit": 8,
+       "lo": 60.49589006085192,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 13,
+       "lo": 1,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 11,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 38,
+       "hit": 12,
+       "lo": 3,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 10,
+       "lo": 4,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 12,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 7,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 13,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 17,
+       "hit": 7,
+       "lo": 4.413610547667343,
+       "hi": 39.186157538877616
+      },
+      {
+       "n": 17,
+       "hit": 7,
+       "lo": 40.21627789046653,
+       "hi": 59.02848208248816
+      },
+      {
+       "n": 17,
+       "hit": 8,
+       "lo": 60.89530273833673,
+       "hi": 77.7340770791075
+      },
+      {
+       "n": 17,
+       "hit": 11,
+       "lo": 78.07169219066937,
+       "hi": 100
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 38,
+       "hit": 13,
+       "lo": 1,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 11,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 38,
+       "hit": 12,
+       "lo": 3,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 10,
+       "lo": 4,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 12,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 7,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 13,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 2.955806653144017,
+     "p10": 8.942858671399597,
+     "p25": 16.56886403853956,
+     "median": 37.561435420892494,
+     "p75": 58.851416708924944,
+     "p90": 78.59622363083162,
+     "max": 100,
+     "iqr": 42.282552670385385,
+     "mode": 100,
+     "modeShare": 5.333333333333333
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 1,
+     "p10": 1,
+     "p25": 2,
+     "median": 3,
+     "p75": 4,
+     "p90": 5,
+     "max": 7,
+     "iqr": 2,
+     "mode": 3,
+     "modeShare": 24.666666666666668
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 1,
+     "p25": 2,
+     "median": 2,
+     "p75": 3,
+     "p90": 3,
+     "max": 3,
+     "iqr": 1,
+     "mode": 2,
+     "modeShare": 43.333333333333336
+    }
+   }
+  },
+  "city": {
+   "n": 150,
+   "errors": 0,
+   "calm": 110,
+   "count": [
+    0,
+    0,
+    76,
+    74
+   ],
+   "kindsAny": {
+    "guild_conflict": 76,
+    "crime_wave": 73,
+    "resource_scarcity": 18,
+    "external_threat": 14,
+    "outside_debt": 13,
+    "pilgrimage_surge": 13,
+    "wild_magic": 13,
+    "corruption_scandal": 12,
+    "infiltration_fear": 12,
+    "legitimacy_crisis": 12,
+    "popular_uprising": 10,
+    "religious_tension": 9,
+    "succession_crisis": 9,
+    "generational_divide": 8,
+    "great_flood": 8,
+    "tyranny": 8,
+    "heresy_trial": 7,
+    "leadership_vacuum": 7,
+    "population_friction": 7,
+    "magical_controversy": 6,
+    "plague_years": 6,
+    "trade_dispute": 6,
+    "economic_disparity": 5,
+    "great_fire": 5,
+    "occupation_legacy": 5,
+    "market_crash": 4,
+    "trade_collapse": 4,
+    "disputed_land": 3,
+    "demographic_pressure": 1
+   },
+   "kindsFirst": {
+    "crime_wave": 69,
+    "guild_conflict": 18,
+    "resource_scarcity": 11,
+    "corruption_scandal": 6,
+    "legitimacy_crisis": 5,
+    "outside_debt": 5,
+    "popular_uprising": 3,
+    "wild_magic": 3,
+    "external_threat": 3,
+    "pilgrimage_surge": 3,
+    "plague_years": 2,
+    "infiltration_fear": 2,
+    "religious_tension": 2,
+    "leadership_vacuum": 2,
+    "magical_controversy": 2,
+    "heresy_trial": 2,
+    "great_fire": 2,
+    "generational_divide": 2,
+    "market_crash": 1,
+    "great_flood": 1,
+    "trade_collapse": 1,
+    "succession_crisis": 1,
+    "occupation_legacy": 1,
+    "economic_disparity": 1,
+    "tyranny": 1,
+    "population_friction": 1
+   },
+   "distinct": 29,
+   "topFirst": "crime_wave",
+   "topFirstN": 69,
+   "hasCriminal": 128,
+   "nameRule": 78,
+   "hasGuild": 150,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 12,
+       "lo": 3.417777953853956,
+       "hi": 20.669882183908047
+      },
+      {
+       "n": 37,
+       "hit": 21,
+       "lo": 21.191583206558487,
+       "hi": 38.5749290060852
+      },
+      {
+       "n": 38,
+       "hit": 21,
+       "lo": 38.76489249492901,
+       "hi": 71.06753930020284
+      },
+      {
+       "n": 37,
+       "hit": 19,
+       "lo": 72.4917444219067,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 19,
+       "lo": 1,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 18,
+       "lo": 4,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 18,
+       "lo": 5,
+       "hi": 6
+      },
+      {
+       "n": 37,
+       "hit": 18,
+       "lo": 6,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 16,
+       "lo": 3,
+       "hi": 4
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 23,
+       "lo": 3.417777953853956,
+       "hi": 20.669882183908047
+      },
+      {
+       "n": 37,
+       "hit": 19,
+       "lo": 21.191583206558487,
+       "hi": 38.5749290060852
+      },
+      {
+       "n": 38,
+       "hit": 16,
+       "lo": 38.76489249492901,
+       "hi": 71.06753930020284
+      },
+      {
+       "n": 37,
+       "hit": 18,
+       "lo": 72.4917444219067,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 18,
+       "lo": 1,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 4,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 17,
+       "lo": 5,
+       "hi": 6
+      },
+      {
+       "n": 37,
+       "hit": 21,
+       "lo": 6,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 19,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 3,
+       "hi": 4
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 32,
+       "hit": 21,
+       "lo": 5.404113590263691,
+       "hi": 26.672210953346863
+      },
+      {
+       "n": 32,
+       "hit": 18,
+       "lo": 27.67879574036511,
+       "hi": 50.69161460446247
+      },
+      {
+       "n": 32,
+       "hit": 16,
+       "lo": 51.021371196754565,
+       "hi": 76.06972413793102
+      },
+      {
+       "n": 32,
+       "hit": 18,
+       "lo": 76.22799188640973,
+       "hi": 100
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 38,
+       "hit": 18,
+       "lo": 1,
+       "hi": 4
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 4,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 17,
+       "lo": 5,
+       "hi": 6
+      },
+      {
+       "n": 37,
+       "hit": 21,
+       "lo": 6,
+       "hi": 7
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 19,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 3,
+       "hi": 4
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 3.417777953853956,
+     "p10": 8.32810892494929,
+     "p25": 20.80030743957066,
+     "median": 38.6699107505071,
+     "p75": 71.04011428752536,
+     "p90": 91.38918559837728,
+     "max": 100,
+     "iqr": 50.239806847954696,
+     "mode": 100,
+     "modeShare": 5.333333333333333
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 1,
+     "p10": 3,
+     "p25": 4,
+     "median": 5,
+     "p75": 6,
+     "p90": 6,
+     "max": 7,
+     "iqr": 2,
+     "mode": 6,
+     "modeShare": 32
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 1,
+     "p25": 2,
+     "median": 2,
+     "p75": 3,
+     "p90": 3,
+     "max": 4,
+     "iqr": 1,
+     "mode": 2,
+     "modeShare": 47.333333333333336
+    }
+   }
+  },
+  "metropolis": {
+   "n": 150,
+   "errors": 0,
+   "calm": 105,
+   "count": [
+    0,
+    0,
+    74,
+    76
+   ],
+   "kindsAny": {
+    "guild_conflict": 76,
+    "crime_wave": 68,
+    "succession_crisis": 19,
+    "external_threat": 16,
+    "disputed_land": 14,
+    "resource_scarcity": 13,
+    "generational_divide": 12,
+    "religious_tension": 12,
+    "pilgrimage_surge": 11,
+    "economic_disparity": 10,
+    "magical_controversy": 10,
+    "leadership_vacuum": 9,
+    "legitimacy_crisis": 9,
+    "outside_debt": 9,
+    "population_friction": 9,
+    "popular_uprising": 8,
+    "corruption_scandal": 7,
+    "great_flood": 7,
+    "infiltration_fear": 7,
+    "tyranny": 7,
+    "wild_magic": 7,
+    "great_fire": 6,
+    "trade_dispute": 6,
+    "heresy_trial": 5,
+    "market_crash": 5,
+    "plague_years": 4,
+    "trade_collapse": 4,
+    "demographic_pressure": 3,
+    "occupation_legacy": 3
+   },
+   "kindsFirst": {
+    "crime_wave": 63,
+    "guild_conflict": 18,
+    "resource_scarcity": 9,
+    "external_threat": 7,
+    "succession_crisis": 6,
+    "legitimacy_crisis": 6,
+    "leadership_vacuum": 4,
+    "economic_disparity": 3,
+    "population_friction": 3,
+    "trade_dispute": 3,
+    "magical_controversy": 3,
+    "outside_debt": 3,
+    "tyranny": 2,
+    "infiltration_fear": 2,
+    "disputed_land": 2,
+    "great_flood": 2,
+    "generational_divide": 2,
+    "corruption_scandal": 2,
+    "popular_uprising": 2,
+    "heresy_trial": 2,
+    "demographic_pressure": 1,
+    "occupation_legacy": 1,
+    "wild_magic": 1,
+    "great_fire": 1,
+    "religious_tension": 1,
+    "plague_years": 1
+   },
+   "distinct": 29,
+   "topFirst": "crime_wave",
+   "topFirstN": 63,
+   "hasCriminal": 148,
+   "nameRule": 122,
+   "hasGuild": 150,
+   "viability": 150,
+   "byQuarter": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 3.6982147819472613,
+       "hi": 27.837931034482757
+      },
+      {
+       "n": 37,
+       "hit": 22,
+       "lo": 29.625287356321838,
+       "hi": 56.9206845841785
+      },
+      {
+       "n": 38,
+       "hit": 17,
+       "lo": 58.238490196078445,
+       "hi": 82.39008924949289
+      },
+      {
+       "n": 37,
+       "hit": 15,
+       "lo": 82.43756338742394,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 1,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 17,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 14,
+       "lo": 5,
+       "hi": 6
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 21,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 18,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 15,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 14,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    },
+    "guild_conflict": {
+     "crime": [
+      {
+       "n": 38,
+       "hit": 23,
+       "lo": 3.6982147819472613,
+       "hi": 27.837931034482757
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 29.625287356321838,
+       "hi": 56.9206845841785
+      },
+      {
+       "n": 38,
+       "hit": 19,
+       "lo": 58.238490196078445,
+       "hi": 82.39008924949289
+      },
+      {
+       "n": 37,
+       "hit": 17,
+       "lo": 82.43756338742394,
+       "hi": 100
+      }
+     ],
+     "g1": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 1,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 22,
+       "lo": 5,
+       "hi": 6
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 16,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 18,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 28,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    }
+   },
+   "byQuarterGated": {
+    "crime_wave": {
+     "crime": [
+      {
+       "n": 37,
+       "hit": 15,
+       "lo": 3.6982147819472613,
+       "hi": 29.625287356321838
+      },
+      {
+       "n": 37,
+       "hit": 22,
+       "lo": 29.676029073698448,
+       "hi": 58.238490196078445
+      },
+      {
+       "n": 37,
+       "hit": 16,
+       "lo": 59.298689148073024,
+       "hi": 82.39008924949289
+      },
+      {
+       "n": 37,
+       "hit": 15,
+       "lo": 82.43756338742394,
+       "hi": 100
+      }
+     ]
+    },
+    "guild_conflict": {
+     "g1": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 1,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 20,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 38,
+       "hit": 20,
+       "lo": 5,
+       "hi": 5
+      },
+      {
+       "n": 37,
+       "hit": 22,
+       "lo": 5,
+       "hi": 6
+      }
+     ],
+     "g2": [
+      {
+       "n": 38,
+       "hit": 14,
+       "lo": 0,
+       "hi": 2
+      },
+      {
+       "n": 37,
+       "hit": 16,
+       "lo": 2,
+       "hi": 2
+      },
+      {
+       "n": 38,
+       "hit": 18,
+       "lo": 2,
+       "hi": 3
+      },
+      {
+       "n": 37,
+       "hit": 28,
+       "lo": 3,
+       "hi": 3
+      }
+     ]
+    }
+   },
+   "spread": {
+    "crime": {
+     "n": 150,
+     "missing": 0,
+     "min": 3.6982147819472613,
+     "p10": 11.454239486139281,
+     "p25": 28.28477011494253,
+     "median": 57.579587390128474,
+     "p75": 82.30965212981744,
+     "p90": 100,
+     "max": 100,
+     "iqr": 54.024882014874905,
+     "mode": 100,
+     "modeShare": 12
+    },
+    "g1": {
+     "n": 150,
+     "missing": 0,
+     "min": 1,
+     "p10": 4,
+     "p25": 5,
+     "median": 5,
+     "p75": 5,
+     "p90": 6,
+     "max": 6,
+     "iqr": 0,
+     "mode": 5,
+     "modeShare": 71.33333333333333
+    },
+    "g2": {
+     "n": 150,
+     "missing": 0,
+     "min": 0,
+     "p10": 1,
+     "p25": 2,
+     "median": 2,
+     "p75": 3,
+     "p90": 3,
+     "max": 3,
+     "iqr": 1,
+     "mode": 2,
+     "modeShare": 50.666666666666664
+    }
+   }
+  }
+ },
+ "second_bySize": null,
+ "drift": {
+  "crime": {
+   "atVsFinal": 0,
+   "atVsAfterNarratives": 0,
+   "bySize": {},
+   "examples": []
+  },
+  "hasCriminal": {
+   "atVsFinal": 0,
+   "atVsAfterNarratives": 0,
+   "bySize": {},
+   "examples": []
+  },
+  "nameRule": {
+   "atVsFinal": 0,
+   "atVsAfterNarratives": 0,
+   "bySize": {},
+   "examples": []
+  },
+  "g1": {
+   "atVsFinal": 0,
+   "atVsAfterNarratives": 0,
+   "bySize": {},
+   "examples": []
+  },
+  "g2": {
+   "atVsFinal": 323,
+   "atVsAfterNarratives": 0,
+   "bySize": {
+    "thorp": 12,
+    "hamlet": 18,
+    "village": 45,
+    "town": 72,
+    "city": 92,
+    "metropolis": 84
+   },
+   "examples": [
+    "visitor-thorp-1: 1 -> 0",
+    "visitor-thorp-43: 1 -> 0",
+    "visitor-thorp-59: 1 -> 0"
+   ]
+  },
+  "factions": {
+   "atVsFinal": 567,
+   "atVsAfterNarratives": 0,
+   "bySize": {
+    "thorp": 109,
+    "hamlet": 113,
+    "village": 123,
+    "town": 126,
+    "city": 80,
+    "metropolis": 16
+   },
+   "examples": [
+    "visitor-thorp-0: 2 -> 1",
+    "visitor-thorp-1: 3 -> 1",
+    "visitor-thorp-2: 3 -> 1"
+   ]
+  },
+  "institutions": {
+   "atVsFinal": 0,
+   "atVsAfterNarratives": 0,
+   "bySize": {},
+   "examples": []
+  }
+ },
+ "moves": null,
+ "guildVariesMore": {
+  "city": {
+   "g1": {
+    "iqr": 2,
+    "modeShare": 32
+   },
+   "g2": {
+    "iqr": 1,
+    "modeShare": 47.333333333333336
+   },
+   "variesMore": "g1"
+  },
+  "metropolis": {
+   "g1": {
+    "iqr": 0,
+    "modeShare": 71.33333333333333
+   },
+   "g2": {
+    "iqr": 1,
+    "modeShare": 50.666666666666664
+   },
+   "variesMore": "g2"
+  }
+ },
+ "table": null,
+ "tableArith": null,
+ "errors": 0
+}

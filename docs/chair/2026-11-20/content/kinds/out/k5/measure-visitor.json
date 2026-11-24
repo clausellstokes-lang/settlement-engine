@@ -1,0 +1,679 @@
+{
+ "dark": [
+  {
+   "tree": "/home/user/kinds2-k5",
+   "sha": "bc9fbf495e7b4ecc00eb7b4949a8c1d675d43501",
+   "plan": "/home/user/kinds2-k5/docs/chair/2026-11-20/content/kinds/out/k5/plan-visitor.json",
+   "planSha256": "bcc138fc84e7f9b99ac2a8a05ef17b05e7da0fea1854e43ab910491ed4a63258",
+   "force": null,
+   "rows": 900
+  }
+ ],
+ "lit": [
+  {
+   "tree": "/home/user/kinds2-k5",
+   "sha": "bc9fbf495e7b4ecc00eb7b4949a8c1d675d43501",
+   "plan": "/home/user/kinds2-k5/docs/chair/2026-11-20/content/kinds/out/k5/plan-visitor.json",
+   "planSha256": "bcc138fc84e7f9b99ac2a8a05ef17b05e7da0fea1854e43ab910491ed4a63258",
+   "force": {
+    "_troubleLawVersion": 2
+   },
+   "rows": 900
+  }
+ ],
+ "table": {
+  "crimeWave": {
+   "floor": 0.05,
+   "ceiling": 0.5,
+   "readLow": 20,
+   "readHigh": 90
+  },
+  "guildConflict": {
+   "floor": 0.05,
+   "ceiling": 0.25,
+   "readLow": 1,
+   "readHigh": 4
+  },
+  "smallPlaceCrime": {
+   "floor": 0.5,
+   "ceiling": 0.9,
+   "readLow": 15,
+   "readHigh": 60
+  }
+ },
+ "bySize": {
+  "thorp": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     141,
+     9,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "outside_debt": 10,
+     "resource_scarcity": 25,
+     "external_threat": 21,
+     "succession_crisis": 5,
+     "corruption_scandal": 6,
+     "generational_divide": 7,
+     "legitimacy_crisis": 10,
+     "religious_tension": 6,
+     "wild_magic": 4,
+     "leadership_vacuum": 5,
+     "great_flood": 5,
+     "magical_controversy": 7,
+     "tyranny": 6,
+     "great_fire": 6,
+     "popular_uprising": 7,
+     "trade_collapse": 4,
+     "crime_wave": 4,
+     "infiltration_fear": 3,
+     "plague_years": 3,
+     "disputed_land": 3,
+     "population_friction": 3,
+     "pilgrimage_surge": 2,
+     "heresy_trial": 4,
+     "occupation_legacy": 2,
+     "demographic_pressure": 1
+    },
+    "distinct": 25,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 25
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     141,
+     9,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "outside_debt": 10,
+     "resource_scarcity": 26,
+     "external_threat": 21,
+     "succession_crisis": 5,
+     "corruption_scandal": 6,
+     "generational_divide": 7,
+     "legitimacy_crisis": 10,
+     "religious_tension": 6,
+     "wild_magic": 4,
+     "leadership_vacuum": 5,
+     "great_flood": 5,
+     "magical_controversy": 7,
+     "tyranny": 6,
+     "great_fire": 6,
+     "popular_uprising": 7,
+     "trade_collapse": 4,
+     "crime_wave": 3,
+     "infiltration_fear": 3,
+     "plague_years": 3,
+     "disputed_land": 3,
+     "population_friction": 3,
+     "pilgrimage_surge": 2,
+     "heresy_trial": 4,
+     "occupation_legacy": 2,
+     "demographic_pressure": 1
+    },
+    "distinct": 25,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 26
+   },
+   "others": [
+    "resource_scarcity",
+    "external_threat"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 1,
+    "down": 0,
+    "up": 0,
+    "same": 150,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 1
+   }
+  },
+  "hamlet": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     141,
+     9,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "religious_tension": 6,
+     "heresy_trial": 5,
+     "resource_scarcity": 32,
+     "magical_controversy": 8,
+     "tyranny": 4,
+     "crime_wave": 14,
+     "legitimacy_crisis": 16,
+     "external_threat": 14,
+     "wild_magic": 6,
+     "demographic_pressure": 2,
+     "population_friction": 2,
+     "popular_uprising": 4,
+     "great_flood": 3,
+     "great_fire": 6,
+     "outside_debt": 3,
+     "infiltration_fear": 6,
+     "trade_collapse": 2,
+     "leadership_vacuum": 5,
+     "succession_crisis": 6,
+     "corruption_scandal": 8,
+     "generational_divide": 4,
+     "disputed_land": 2,
+     "economic_disparity": 1
+    },
+    "distinct": 23,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 32
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     143,
+     7,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "religious_tension": 7,
+     "heresy_trial": 5,
+     "resource_scarcity": 33,
+     "magical_controversy": 8,
+     "tyranny": 4,
+     "legitimacy_crisis": 16,
+     "external_threat": 14,
+     "wild_magic": 6,
+     "demographic_pressure": 2,
+     "crime_wave": 9,
+     "population_friction": 2,
+     "popular_uprising": 5,
+     "great_flood": 3,
+     "great_fire": 6,
+     "outside_debt": 3,
+     "infiltration_fear": 6,
+     "trade_collapse": 2,
+     "leadership_vacuum": 5,
+     "succession_crisis": 6,
+     "corruption_scandal": 8,
+     "generational_divide": 4,
+     "disputed_land": 2,
+     "economic_disparity": 1
+    },
+    "distinct": 23,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 33
+   },
+   "others": [
+    "resource_scarcity",
+    "legitimacy_crisis"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 5,
+    "down": 2,
+    "up": 0,
+    "same": 148,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 5
+   }
+  },
+  "village": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     67,
+     83,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "religious_tension": 10,
+     "resource_scarcity": 30,
+     "outside_debt": 7,
+     "tyranny": 5,
+     "crime_wave": 4,
+     "external_threat": 18,
+     "succession_crisis": 9,
+     "plague_years": 14,
+     "heresy_trial": 17,
+     "great_flood": 7,
+     "economic_disparity": 2,
+     "leadership_vacuum": 12,
+     "population_friction": 9,
+     "legitimacy_crisis": 12,
+     "popular_uprising": 7,
+     "demographic_pressure": 3,
+     "generational_divide": 9,
+     "corruption_scandal": 5,
+     "magical_controversy": 7,
+     "trade_collapse": 5,
+     "pilgrimage_surge": 7,
+     "occupation_legacy": 4,
+     "great_fire": 13,
+     "trade_dispute": 2,
+     "wild_magic": 3,
+     "disputed_land": 6,
+     "infiltration_fear": 3,
+     "guild_conflict": 3
+    },
+    "distinct": 28,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 26
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     68,
+     82,
+     0
+    ],
+    "none": 0,
+    "kindsAny": {
+     "religious_tension": 10,
+     "resource_scarcity": 30,
+     "outside_debt": 7,
+     "tyranny": 5,
+     "external_threat": 18,
+     "succession_crisis": 9,
+     "plague_years": 14,
+     "heresy_trial": 17,
+     "great_flood": 7,
+     "economic_disparity": 2,
+     "leadership_vacuum": 12,
+     "population_friction": 9,
+     "legitimacy_crisis": 12,
+     "popular_uprising": 7,
+     "demographic_pressure": 3,
+     "generational_divide": 9,
+     "corruption_scandal": 5,
+     "magical_controversy": 7,
+     "trade_collapse": 5,
+     "pilgrimage_surge": 7,
+     "occupation_legacy": 4,
+     "great_fire": 13,
+     "crime_wave": 3,
+     "trade_dispute": 2,
+     "wild_magic": 3,
+     "disputed_land": 6,
+     "infiltration_fear": 3,
+     "guild_conflict": 3
+    },
+    "distinct": 28,
+    "topFirst": "resource_scarcity",
+    "topFirstN": 26
+   },
+   "others": [
+    "resource_scarcity",
+    "external_threat",
+    "heresy_trial"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 1,
+    "down": 1,
+    "up": 0,
+    "same": 149,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 1
+   }
+  },
+  "town": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     75,
+     74,
+     1
+    ],
+    "none": 0,
+    "kindsAny": {
+     "demographic_pressure": 6,
+     "crime_wave": 30,
+     "guild_conflict": 48,
+     "generational_divide": 3,
+     "great_flood": 4,
+     "legitimacy_crisis": 9,
+     "trade_dispute": 9,
+     "infiltration_fear": 2,
+     "succession_crisis": 12,
+     "resource_scarcity": 21,
+     "magical_controversy": 6,
+     "outside_debt": 11,
+     "tyranny": 7,
+     "religious_tension": 3,
+     "popular_uprising": 3,
+     "population_friction": 3,
+     "economic_disparity": 3,
+     "plague_years": 7,
+     "market_crash": 3,
+     "leadership_vacuum": 6,
+     "corruption_scandal": 6,
+     "great_fire": 4,
+     "external_threat": 11,
+     "trade_collapse": 1,
+     "occupation_legacy": 4,
+     "disputed_land": 1,
+     "wild_magic": 1,
+     "pilgrimage_surge": 1,
+     "heresy_trial": 1
+    },
+    "distinct": 29,
+    "topFirst": "guild_conflict",
+    "topFirstN": 30
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     76,
+     73,
+     1
+    ],
+    "none": 0,
+    "kindsAny": {
+     "demographic_pressure": 6,
+     "pilgrimage_surge": 4,
+     "tyranny": 9,
+     "population_friction": 7,
+     "generational_divide": 5,
+     "great_flood": 6,
+     "legitimacy_crisis": 9,
+     "trade_dispute": 12,
+     "crime_wave": 21,
+     "infiltration_fear": 2,
+     "succession_crisis": 13,
+     "resource_scarcity": 22,
+     "magical_controversy": 8,
+     "outside_debt": 13,
+     "religious_tension": 4,
+     "popular_uprising": 3,
+     "economic_disparity": 4,
+     "plague_years": 7,
+     "guild_conflict": 27,
+     "trade_collapse": 2,
+     "market_crash": 3,
+     "leadership_vacuum": 6,
+     "corruption_scandal": 6,
+     "great_fire": 5,
+     "external_threat": 11,
+     "disputed_land": 3,
+     "wild_magic": 2,
+     "occupation_legacy": 3,
+     "heresy_trial": 2
+    },
+    "distinct": 29,
+    "topFirst": "crime_wave",
+    "topFirstN": 19
+   },
+   "others": [
+    "resource_scarcity"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 32,
+    "down": 1,
+    "up": 0,
+    "same": 149,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 32
+   }
+  },
+  "city": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     0,
+     69,
+     81
+    ],
+    "none": 0,
+    "kindsAny": {
+     "crime_wave": 60,
+     "pilgrimage_surge": 10,
+     "outside_debt": 16,
+     "popular_uprising": 12,
+     "generational_divide": 8,
+     "guild_conflict": 72,
+     "plague_years": 3,
+     "corruption_scandal": 12,
+     "great_flood": 5,
+     "heresy_trial": 6,
+     "magical_controversy": 16,
+     "great_fire": 11,
+     "religious_tension": 8,
+     "occupation_legacy": 9,
+     "resource_scarcity": 20,
+     "tyranny": 8,
+     "infiltration_fear": 6,
+     "disputed_land": 9,
+     "external_threat": 16,
+     "demographic_pressure": 5,
+     "market_crash": 8,
+     "succession_crisis": 14,
+     "economic_disparity": 6,
+     "trade_collapse": 11,
+     "population_friction": 3,
+     "trade_dispute": 7,
+     "leadership_vacuum": 6,
+     "legitimacy_crisis": 8,
+     "wild_magic": 6
+    },
+    "distinct": 29,
+    "topFirst": "crime_wave",
+    "topFirstN": 49
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     0,
+     69,
+     81
+    ],
+    "none": 0,
+    "kindsAny": {
+     "crime_wave": 41,
+     "pilgrimage_surge": 13,
+     "outside_debt": 18,
+     "popular_uprising": 14,
+     "generational_divide": 9,
+     "magical_controversy": 17,
+     "plague_years": 7,
+     "corruption_scandal": 12,
+     "great_flood": 5,
+     "heresy_trial": 8,
+     "guild_conflict": 46,
+     "leadership_vacuum": 7,
+     "great_fire": 12,
+     "religious_tension": 8,
+     "occupation_legacy": 10,
+     "resource_scarcity": 24,
+     "tyranny": 11,
+     "infiltration_fear": 10,
+     "external_threat": 17,
+     "disputed_land": 10,
+     "demographic_pressure": 5,
+     "market_crash": 9,
+     "succession_crisis": 18,
+     "legitimacy_crisis": 10,
+     "economic_disparity": 8,
+     "trade_collapse": 10,
+     "population_friction": 5,
+     "trade_dispute": 9,
+     "wild_magic": 8
+    },
+    "distinct": 29,
+    "topFirst": "crime_wave",
+    "topFirstN": 26
+   },
+   "others": [
+    "resource_scarcity",
+    "external_threat",
+    "magical_controversy",
+    "outside_debt",
+    "succession_crisis"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 50,
+    "down": 0,
+    "up": 0,
+    "same": 150,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 50
+   }
+  },
+  "metropolis": {
+   "dark": {
+    "n": 150,
+    "count": [
+     0,
+     0,
+     72,
+     78
+    ],
+    "none": 0,
+    "kindsAny": {
+     "outside_debt": 9,
+     "religious_tension": 8,
+     "crime_wave": 90,
+     "guild_conflict": 71,
+     "resource_scarcity": 12,
+     "pilgrimage_surge": 3,
+     "population_friction": 9,
+     "popular_uprising": 7,
+     "trade_dispute": 11,
+     "corruption_scandal": 15,
+     "leadership_vacuum": 11,
+     "disputed_land": 5,
+     "occupation_legacy": 2,
+     "plague_years": 10,
+     "market_crash": 6,
+     "great_flood": 6,
+     "tyranny": 6,
+     "great_fire": 7,
+     "heresy_trial": 10,
+     "legitimacy_crisis": 17,
+     "external_threat": 11,
+     "infiltration_fear": 5,
+     "trade_collapse": 3,
+     "magical_controversy": 10,
+     "wild_magic": 7,
+     "succession_crisis": 13,
+     "economic_disparity": 6,
+     "generational_divide": 6,
+     "demographic_pressure": 2
+    },
+    "distinct": 29,
+    "topFirst": "crime_wave",
+    "topFirstN": 84
+   },
+   "lit": {
+    "n": 150,
+    "count": [
+     0,
+     0,
+     72,
+     78
+    ],
+    "none": 0,
+    "kindsAny": {
+     "outside_debt": 9,
+     "religious_tension": 11,
+     "guild_conflict": 47,
+     "crime_wave": 46,
+     "resource_scarcity": 14,
+     "pilgrimage_surge": 5,
+     "population_friction": 13,
+     "popular_uprising": 10,
+     "trade_dispute": 16,
+     "corruption_scandal": 17,
+     "tyranny": 7,
+     "leadership_vacuum": 11,
+     "disputed_land": 9,
+     "infiltration_fear": 8,
+     "occupation_legacy": 7,
+     "plague_years": 15,
+     "market_crash": 8,
+     "great_flood": 8,
+     "trade_collapse": 6,
+     "heresy_trial": 13,
+     "legitimacy_crisis": 21,
+     "external_threat": 10,
+     "generational_divide": 8,
+     "magical_controversy": 13,
+     "great_fire": 7,
+     "wild_magic": 9,
+     "succession_crisis": 18,
+     "economic_disparity": 10,
+     "demographic_pressure": 2
+    },
+    "distinct": 29,
+    "topFirst": "crime_wave",
+    "topFirstN": 40
+   },
+   "others": [
+    "legitimacy_crisis",
+    "corruption_scandal",
+    "succession_crisis",
+    "trade_dispute",
+    "plague_years"
+   ],
+   "moved": {
+    "matched": 150,
+    "changedHash": 150,
+    "changedKinds": 71,
+    "down": 0,
+    "up": 0,
+    "same": 150,
+    "upSeeds": [],
+    "otherThanHistory": 150,
+    "otherThanHistory2": 71
+   }
+  }
+ },
+ "calmBreaks": [],
+ "otherThanHistory": {
+  "count": 900,
+  "keys": {
+   "_config": 900,
+   "generationCoherenceReceipt": 160,
+   "economicState": 31,
+   "powerStructure": 6
+  }
+ },
+ "otherThanHistoryAndRawConfigKey": {
+  "count": 160,
+  "keys": {
+   "generationCoherenceReceipt": 160,
+   "economicState": 31,
+   "powerStructure": 6
+  }
+ },
+ "errors": 0
+}

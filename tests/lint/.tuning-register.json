@@ -283,6 +283,14 @@
         "FEW_WEEKS_AS_MONTHS"
       ],
       "note": "STRUCTURAL, indexed not a dial. RUNG2-F13 (57004aee2): the months ‘a few weeks’ reads back as. Named by the chair’s ruling (ii) of 2026-11-07 07:0x UTC, ODQ §934.105 (B): the three bare decimals named in src, DECLARED_GROWTH_CEILING held at 6 (LANDING-R2 seat I)."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/trouble/troubleLaw.js",
+      "exports": [
+        "LAW_ONE_TROUBLE_BARS"
+      ],
+      "note": "LAW ONE'S TWO BARS, today's values MOVED, not changed: the crime coin's 0.5 and the guild swap's 0.7 that historyGenerator.js :: buildHistoricalEvent compared _rng() against, moved byte for byte into the trouble-law leaf by KINDS-1 K1 (6a5132049; historyGenerator.js bare decimals 13 -> 11, this file 0). Indexed here as a table so the move is a relocation the register can see rather than a new bare-decimal population (KINDS-1 K3), DECLARED_GROWTH_CEILING held at 14."
     }
   ],
   "moduleSide": [
@@ -3204,6 +3212,41 @@
       },
       "band": null,
       "note": "FORTUNE-1 U1 (FS5, the chair's rulings of 2026-11-20 10:33 UTC): the fortune law's one table, read only under _fortuneLawVersion 2 and DARK while its dial is at the default. developmentFigure replaces the tier bonus 0,0,0,1,1,2 (the pooled mean of the removed terms, seeds hxe); magicScale replaces the magic tier scale 0,0,0.3,0.6,1.0,1.4 (the town's); depthExpectation is each size's measured median count of trades (hxe); standing.prosperityPoints equal today's PROSPERITY_CONTRIB on purpose (the chair's second column, Prosperous 24, changes here); standing.defenceUsualRange is p10 to p90 of each size's defence band (hxe), four points a band outside it within plus or minus ten; standing.safetyCalmLadder is the calm safety labels lowest first (safetyProfile.js's five base labels, vocabulary the rule reads) and standing.safetyUsualRange is p10 to p90 of each size's band of it (hxe; FORTUNE-3 U5s, the chair's ruling of 15:58 UTC, U5-PROPOSAL section 3), a label outside it worth its own points less the nearest band's.; standing.meritPoints (10 a counted merit, only upward, only at Tolerated or better), standing.weatheredWithinYears (40, a generation) and standing.endorsedMinReasons (2) are the merits of rule (FORTUNE-3 U5a, U5-PROPOSAL section 10, the chair's rulings of 2026-11-20 15:30 to 19:38 UTC), with their vocabulary standing.weatheredSeverity and standing.rulerTroubleKinds (read, not chosen). standing.lastingAgeBySize is the second merit, a place that has lasted (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC): each size's p90 of history.age (nearest rank, ceil(0.9*150) - 1, 150 visitor births a size; BANDS.md, re-measured unchanged in AGES.md), thorp 269, hamlet 108, village 225, town 276, city 441, metropolis 731; DRAFT, for the owner's signing. In plain words: a hamlet's lasting age (108) is below a thorp's (269) because the age table draws a hamlet's age from 30 to 120 years and a thorp's from 15 to 300 (src/data/historyData.js :: AGE_BY_TIER); that is a property of the age's own generator, told to the chair, not cured in this unit. The proposal's sections 10 and 15. Registered DRAFT in the minting commit, signed by none, the owner's to sign."
+    },
+    "src/domain/trouble/troubleLaw.js#TROUBLE_WEIGHT_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "crimeWave.read": "rank",
+        "crimeWave.floor": "probability",
+        "crimeWave.ceiling": "probability",
+        "crimeWave.readLow": "points",
+        "crimeWave.readHigh": "points",
+        "guildConflict.read": "rank",
+        "guildConflict.floor": "probability",
+        "guildConflict.ceiling": "probability",
+        "guildConflict.readLow": "count",
+        "guildConflict.readHigh": "count",
+        "smallPlaceCrime.read": "rank",
+        "smallPlaceCrime.floor": "probability",
+        "smallPlaceCrime.ceiling": "probability",
+        "smallPlaceCrime.readLow": "points",
+        "smallPlaceCrime.readHigh": "points"
+      },
+      "band": null,
+      "note": "KINDS-1 K1 (6a5132049), its crime row re-set by K3 to the chair's choice B50 of 2026-11-20 22:10 UTC: the trouble law's one table, read only under _troubleLawVersion 2 and DARK while its dial (NEW_SETTLEMENT_TROUBLE_LAW_VERSION) is at the default. A row's chance runs from its floor at readLow to its ceiling at readHigh, straight between, flat beyond, the midpoint for an absent read; under law 2 each replaces one of today's fixed numbers in historyGenerator.js :: buildHistoricalEvent. crimeWave: the crime coin's chance (today 0.5) from 0.05 at a crime strength (economicState.compound.criminalEffective) of 20 to 0.50 at 90. guildConflict: the guild swap's chance per fill pick (today 0.3) from 0.05 at 1 economy power on the roster to 0.25 at 4. smallPlaceCrime: a thorp, hamlet or village's crime wave where a fence, smuggler, bandit or outlaw house stands (today always) from 0.50 at a crime strength of 15 to 0.90 at 60. Each read leaf names what its row reads (vocabulary, not chosen). FOR THE OWNER'S SIGNING: docs/chair/2026-11-20/content/kinds/FOR-THE-OWNER.md (the measured table, with the alternatives A and B). Registered DRAFT, signed by none."
+    },
+    "src/domain/trouble/troubleLaw.js#LAW_ONE_TROUBLE_BARS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "crimeWave": "probability",
+        "guildSwap": "probability"
+      },
+      "band": null,
+      "note": "Law one's two bars, today's values, moved from historyGenerator.js :: buildHistoricalEvent by KINDS-1 K1 (6a5132049), not changed: crimeWave 0.5 (a place with a criminal house draws a crime wave first where _rng() > 0.5) and guildSwap 0.7 (a fill pick is swapped for a guild conflict where _rng() > 0.7). The law-1 (dark default) values, byte for byte; registered DRAFT by KINDS-1 K3, signed by none."
     }
   },
   "roles": {

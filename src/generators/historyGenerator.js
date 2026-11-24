@@ -466,7 +466,7 @@ const buildHistoricalEvent = (
         usedTypes.add('succession_crisis');
       }
     }
-    if (hasCriminal && !usedTypes.has('crime_wave') && _rng() > 0.5) {
+    if (hasCriminal && !usedTypes.has('crime_wave') && _rng() > crimeWaveBar(config, economicState)) { // KINDS-1 K1 (a): law 1's 0.5, or law 2's weight (troubleLaw.js), on the same draw
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'crime_wave');
       if (tmpl) {
         selected.push({ ...tmpl });
@@ -490,7 +490,7 @@ const buildHistoricalEvent = (
       const n = (i.name || '').toLowerCase();
       return n.includes('fence') || n.includes('smuggl') || n.includes('bandit') || n.includes('outlaw');
     });
-    if (hasCrimInst) {
+    if (hasCrimInst && (!isWeightedTrouble(config) || _rng() < smallPlaceCrimeChance(economicState?.compound?.criminalEffective))) { // KINDS-1 K1 (c): law 1 always; law 2 its ONE coin, only here
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'crime_wave');
       if (tmpl) {
         selected.push({
@@ -530,7 +530,7 @@ const buildHistoricalEvent = (
   while (selected.length < targetCount && pool.length > 0) {
     let candidate = pick(pool);
     // Bias toward guild conflict if guilds present
-    if (hasGuild && candidate.type !== 'guild_conflict' && _rng() > 0.7) {
+    if (hasGuild && candidate.type !== 'guild_conflict' && _rng() > guildSwapBar(config, factions)) { // KINDS-1 K1 (b): law 1's 0.7, or law 2's weight on the pre-trim roster, on the same draw
       const guildTmpl = pool.find(e => e.type === 'guild_conflict');
       if (guildTmpl) candidate = guildTmpl;
     }
@@ -1089,36 +1089,9 @@ function speakFounding(founding, noun) {
   return out;
 }
 
-// ─── URBAN-FIX D-1: a tension's words follow what the timeline holds of its own event ────────
-// (the chair's urban ruling D, 2026-11-09; URBAN-AUDIT §4). The tension and the timeline are drawn
-// independently from one table, so a tension's "source" is the timeline event of its own template
-// (`templateType`, the reader battery's own identity, readerBattery.js :: tensionMemoryFindings).
-// At the file's end on purpose, beside the SIZE helpers: nothing is inserted above the producer
-// writes the prose wiring census cites by line. Draw-free: no stream moves.
-
-/**
- * A selected tension template with its memory table taken off (the table is the template's, never
- * the record's) and, where the template carries one, the DATED words in place of its own: its own
- * event sits on the timeline older than 80 years, so no living participant is named. URBAN-FIX D-1b:
- * where the timeline holds NO event of its template, the UNANCHORED words, which name no past event.
- * @param {any} tmpl a selected template copy
- * @param {ReadonlyArray<any>} timeline the history's events, built before the tensions
- * @returns {any}
- */
-function tensionByMemory(tmpl, timeline) {
-  const { byMemory, ...tension } = tmpl;
-  if (!byMemory) return tension;
-  const own = (Array.isArray(timeline) ? timeline : []).find((e) => e?.templateType === tension.type);
-  // 80: the page's Ancient boundary (HistoryTab.jsx :: recencyLabel, up to 80 years is "Last century"), the
-  // same line generateEventNarrative draws for the hooks of living memory
-  const words = !own ? byMemory.unanchored : Number(own.yearsAgo) > 80 ? byMemory.dated : null;
-  if (!words) return tension;
-  // TAIL-HISTORY Y13: the memory words replace the TEMPLATE's own description only; a description the selection wrote
-  // for this town (the scarcity's lead and its top issue, the record's own evidence in the present) is kept
-  const { description, ...rest } = words;
-  const ownWords = HISTORICAL_EVENTS_DATA.find((e) => e.type === tension.type)?.description;
-  return { ...tension, ...rest, ...(description && tension.description === ownWords ? { description } : {}) };
-}
+// ─── URBAN-FIX D-1: `tensionByMemory` (a tension's words follow what the timeline holds of its own event) lives in
+// `./history/tensionByMemory.js`, moved verbatim by KINDS-1 K1 to make room under the file's size ceiling (draw-free).
+import { tensionByMemory } from './history/tensionByMemory.js';
 
 // ─── COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): a current tension is not its past event, word for word ──
 // The tension and the timeline are drawn from one table, and an event that draws its template's canonical sentence
@@ -1261,6 +1234,10 @@ import { admittedResourceEvent, resourceEventAdmitted } from './history/resource
 import { sizedLastingEffects } from './history/sizedLastingEffects.js';
 // HOOKS-BUILD: a trouble's hooks from its kind's pool. HOOKS-CURES B: the timeline hook's note re-keying (W2-FIX-DATA-3 item 6) lives in the leaf.
 import { notedSoFar, noteByTemplateRow, troubleHooksOf } from './history/troubleHooksOf.js';
+
+// KINDS-1 K1, THE TROUBLE LAW (a zero-import leaf; DARK, its light the owner's word): at the end of the file so no cited
+// line moves. `buildHistoricalEvent`'s three fixed numbers change in place to these calls; every weight is the leaf's.
+import { crimeWaveBar, guildSwapBar, isWeightedTrouble, smallPlaceCrimeChance } from '../domain/trouble/troubleLaw.js';
 
 // BAR3-PLACES (H3, 2026-11-15): a trade collapse within five years of the town's age (4 of 88 on the census's 720) failed no
 // trade "the settlement was built upon": it takes the founding twin, draw-free (event, year and every draw unmoved).

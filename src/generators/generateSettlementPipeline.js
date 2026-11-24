@@ -50,6 +50,7 @@ import {
 } from '../domain/content/livingContentSeam.js';
 import { createGenerationContext } from './generationContext.js';
 import { withRecordSeatLaw } from '../domain/seat/seatLaw.js'; // UK-LEGACY: a regen pass hands down the RECORD's seat law, never the handed one
+import { withRecordTroubleLaw } from '../domain/trouble/troubleLaw.js'; // K4-JOIN: the history regen hands down the RECORD's trouble law
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
@@ -693,14 +694,15 @@ export function regenNPCsPipeline(settlement, handedConfig, options = {}) {
  * identity to be carried by (historyPreservation.js, deferral A).
  *
  * @param {Object} settlement
- * @param {Object} handedConfig  the config the caller holds; its seat key is replaced by the record's (`seatLaw.js :: withRecordSeatLaw`)
+ * @param {Object} handedConfig  the config the caller holds; its seat and trouble keys are replaced by the record's (`withRecordSeatLaw`, `withRecordTroubleLaw`)
  * @param {{ seed?: string }} [options]
  * @returns {{ history: Object, _regenSeed: string }}
  */
 export function regenHistoryPipeline(settlement, handedConfig, options = {}) {
   // UK-LEGACY (the chair's rule): the seat law is read OFF THE RECORD, never off the config handed (for a save with no
   // `config` the store hands the FORM config, which holds whatever world was loaded last); every other key is the handed one.
-  const config = withRecordSeatLaw(handedConfig, settlement);
+  // K4-JOIN: the trouble law likewise (this is the one regen road that reaches `buildHistoricalEvent`).
+  const config = withRecordTroubleLaw(withRecordSeatLaw(handedConfig, settlement), settlement);
   const seed = options.seed || generateSeed();
   // Save/restore: same re-entrancy contract as regenNPCsPipeline.
   const prevRng = setActiveRng(createPRNG(seed));

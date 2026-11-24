@@ -635,3 +635,79 @@ describe('FORTUNE U5c — the fortune merits leave the first-paint closure for t
     expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*fortune-merits-/.test(html)).toBe(false);
   });
 });
+
+// ── KINDS-1 K1 (2026-11-20): the trouble law is EXCISED AND PINNED to its own lazy chunk ──
+// src/domain/trouble/troubleLaw.js is imported by a generator (historyGenerator) and by the
+// create boundary, so ESD would seed it into EAGER engine-core; no first-paint module reaches it.
+// Exactly the fortune lane's U6 arms: the excision's row and the pinned chunk, read from the
+// config itself (executed manualChunks, the eager derivation) and then from the dist. The last
+// arm is why the pin exists: excised WITHOUT it, Rollup co-locates the law into the big lazy
+// `engine` chunk and the densityCreateBoundary chunk gains a static edge to the whole generator.
+// Written as filters and booleans, never a bare negated matcher (the walker's frozen count).
+describe('KINDS-1 K1 — the trouble law leaves the first-paint closure for its own chunk', () => {
+  const { manualChunks } = viteConfig.build.rollupOptions.output;
+  const ROOT = process.cwd();
+  const LAW = '/src/domain/trouble/troubleLaw.js';
+  const lawPath = join(ROOT, LAW.slice(1));
+  const TROUBLE_LAW_CHUNK_RE = /^trouble-law-[A-Za-z0-9_-]+\.js$/;
+
+  it('the law exists and is a row of ENGINE_SHARED_DOMAIN_EXCISIONS', () => {
+    expect(existsSync(lawPath), `${LAW} is gone — this block now proves nothing`).toBe(true);
+    expect(ENGINE_SHARED_DOMAIN_EXCISIONS.filter(frag => frag === LAW)).toEqual([LAW]);
+  });
+
+  it('manualChunks places the law in its own `trouble-law` chunk (a control generator still routes to the engine)', () => {
+    expect(manualChunks(lawPath)).toBe('trouble-law');
+    expect(manualChunks(join(ROOT, 'src/generators/historyGenerator.js'))).toBe('engine');
+  });
+
+  it('the law is out of vite\'s own eager first-paint derivation', () => {
+    expect(EAGER_FIRST_PAINT_MODULES.size).toBeGreaterThan(100);
+    expect(EAGER_FIRST_PAINT_MODULES.has(lawPath), 'troubleLaw.js is in the first-paint closure').toBe(false);
+  });
+
+  // The emitted graph: the vendorPdfLazy closure walk (static edges only; import() is lazy).
+  const staticDeps = (file) => {
+    const code = readFileSync(join(assetsDir, file), 'utf-8');
+    const specs = new Set();
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    return [...specs];
+  };
+  const entryClosure = () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
+    return seen;
+  };
+
+  it.skipIf(!requireDist)('the dist emits exactly one `trouble-law` chunk, outside the entry closure and unpreloaded', () => {
+    const chunks = readdirSync(assetsDir).filter(f => TROUBLE_LAW_CHUNK_RE.test(f));
+    expect(chunks, 'troubleLaw.js is not in its own chunk').toHaveLength(1);
+    const closure = entryClosure();
+    expect(closure.size, 'the entry closure walked nothing').toBeGreaterThan(3);
+    expect([...closure].filter(f => TROUBLE_LAW_CHUNK_RE.test(f) || /^engine-(?!core-)/.test(f))).toEqual([]);
+    expect(staticDeps(chunks[0]), 'the law chunk imports nothing').toEqual([]);
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(/<link[^>]*rel="modulepreload"[^>]*href="[^"]*trouble-law-/.test(html)).toBe(false);
+  });
+
+  it.skipIf(!requireDist)('the densityCreateBoundary chunk takes no static edge to the engine (excision without the pin)', () => {
+    const boundary = readdirSync(assetsDir).filter(f => /^densityCreateBoundary-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(boundary).toHaveLength(1);
+    expect(staticDeps(boundary[0]).filter(dep => ENGINE_CHUNK_RE.test(dep))).toEqual([]);
+  });
+});
