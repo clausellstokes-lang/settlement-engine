@@ -32,7 +32,12 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   - sm140 (master-born stored) rc 0: L1 gallery 352 of 3,360 (32 places, `factions[].power` 1,969 leaves, Reveal DM, the
     11 marked settings), link 0: EXACTLY N106's count on the tip (the guard at 212's roster block passes on an absent
     `power`; cure granted to chain B, not in this tree). Nothing else differs; no hit inside publicProse on any run.
-- RUNNING: set55 (22:28-), then cures, lint, copy, types+eslint, build. Then step (3) TABLE A and LINE B; then
+  - set55 (the re-derived 55 files) rc 1, 22:57 (1,761 s): 3 failed of 1,152 in 1 file = EXACTLY chain A's 3 composed rows
+    (`rosterChoiceComposedHosts.walker`: power.desc, power.label, power.relation.dmNote; red by design, E78 (2), unit 2's
+    worklist); 54 files green; VS1 green (PIN-3's cure). 1,152 = VEIL-41's count: the re-derived set PLAUSIBLY equals its set.
+- RUNNING: p1 (background task, runner log `/var/tmp/v51/log/p1-run.log`) at cures (22:57-), then lint, copy, types+eslint,
+  build. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
+  docs/chair/2026-11-24/tenth/veil/v51/p1.sh <steps>` after the machine (section 'THE MACHINE') and the trees are rebuilt. Then step (3) TABLE A and LINE B; then
   "TIP? STORED-PROSE ced3b1de7" to VEIL-55 as a file.
 
 TREES (this container; scratch): `/home/user/wt/c2` (my code branch), `/home/user/wt/tip` (b58abc48b), `/home/user/wt/master`
