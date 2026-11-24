@@ -23,9 +23,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { deriveDailyLife, fareBandOfRecord } from '../../src/domain/dailyLife.js';
-import { PRICE_ONLY_FOOD_GRIEVANCES } from '../../src/data/dailyLife/commonerResentments.js';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
-import { deriveAllCapacities } from '../../src/domain/capacityModel.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { defenceOf } from '../../src/domain/facts/defence.js';
@@ -104,16 +102,15 @@ describe('food_culture and commoner_resentments: M1\'s false lines print on no b
 
 /** @param {any} rec @returns {{ food: string, resent: string[] }} the branches the record puts each slot on */
 function branchesOf(rec) {
-  // R24-A2 (CLOSE-7; the chair's R24a and R24d): the fare's branch, the food grievance and its lines read THE FARE BAND (the
-  // production band placed within the bound the page's printed food band sets, `dailyLife.js :: fareBandOfRecord`); the
-  // food grievance still fires where production alone is short, in its price-only lines (F0, F6, F8)
-  const production = deriveAllCapacities(rec).capacities.food_production.band;
+  // R24-A2 (CLOSE-7; the chair's R24d and R24h): the fare's branch and the food grievance read THE FARE BAND (the
+  // production band placed within the bound the page's printed food band sets, `dailyLife.js :: fareBandOfRecord`); a page
+  // that prints its place as fed has no food grievance
   const band = fareBandOfRecord(rec);
   const wanting = deriveAllThreatProfiles(rec).some((t) => t.type === 'famine' || t.type === 'siege');
   const food = band === 'surplus' ? (wanting ? 'surplus.wanting' : 'surplus') : ['adequate', 'strained', 'critical'].includes(band) ? band : 'collapsed';
   const resent = [];
   if (BAD.includes(deriveCausalState(rec).bands.public_legitimacy)) resent.push('legitimacy');
-  if (BAD.includes(band) || BAD.includes(production)) resent.push(BAD.includes(band) ? 'food' : 'food.price');
+  if (BAD.includes(band)) resent.push('food');
   if (factsOf(rec).uprising === true) resent.push('uprising');
   return { food, resent };
 }
@@ -141,10 +138,7 @@ describe('food_culture and commoner_resentments: the route, from the slots\' own
       const say = (/** @type {string} */ t) => fillAgreement(t, { gov }).replace(/\{gov\}/g, powerNameWithArticle(gov));
       /** @param {string} slot @param {Readonly<Record<string, ReadonlyArray<{ text: string }>>>} pools @param {string} branch */
       const expected = (slot, pools, branch) => {
-        // R24-A2: `food.price` is the food grievance's price-only lines, drawn under the food branch's own key
-        const lines = branch === 'food.price' ? pools.food.filter((/** @type {any} */ l) => PRICE_ONLY_FOOD_GRIEVANCES.has(l.id)) : pools[branch];
-        const key = branch === 'food.price' ? 'food' : branch;
-        const pick = pickVariantMixed(filterDeclared(lines, { facts }), `${x.rec.name}::dailyLife.${slot}::${key}`);
+        const pick = pickVariantMixed(filterDeclared(pools[branch], { facts }), `${x.rec.name}::dailyLife.${slot}::${branch}`);
         return pick ? say(pick.text) : '';
       };
       const { food, resent } = branchesOf(x.rec);

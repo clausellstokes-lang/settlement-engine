@@ -27,7 +27,7 @@ import { importsAsPrinted } from '../display/tradeListDisplay.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
 import { FOOD_CULTURE } from '../../data/dailyLife/foodCulture.js'; // R24-A2 (CLOSE-7): the shortage lines of row FOODSEC
-import { COMMONER_RESENTMENTS, PRICE_ONLY_FOOD_GRIEVANCES } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
+import { COMMONER_RESENTMENTS } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
 import { OUTSIDER_IMPRESSIONS } from '../../data/dailyLife/outsiderImpressions.js'; // R24-A2
 import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c)): Dawn Work's food branch
 import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
@@ -179,10 +179,12 @@ const SMALL = new Set(['thorp', 'hamlet', 'village']);
 const printedForm = (t) => SHORT_RE.get(t) ?? SHORT_RE.set(t, toRe(t)).get(t) ?? toRe(t);
 const shortage = () => (shortageLines ??= [
   ...['strained', 'critical', 'collapsed'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)),
-  ...arr(COMMONER_RESENTMENTS.food).map(obj).filter((l) => !PRICE_ONLY_FOOD_GRIEVANCES.has(s(l.id))),
+  ...arr(COMMONER_RESENTMENTS.food).map(obj).filter((l) => !PRICE_LINES.includes(s(l.id))),
   ...arr(OUTSIDER_IMPRESSIONS['services.food_production']).map(obj).filter((l) => ['F1', 'F2'].includes(s(l.id))),
   ...arr(obj(DAWN_WORK).food).map(obj),
 ]);
+/** The food grievances that say food is dear and nobody goes short (CHAIN-1-LISTS (c): NEITHER). */
+const PRICE_LINES = Object.freeze(['F0', 'F6', 'F8']);
 /** The printed food bands that say the place is fed. */
 const FED = new Set(['secure', 'surplus']);
 const F4_TESTS = /** @type {const} */ ([

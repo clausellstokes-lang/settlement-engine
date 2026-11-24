@@ -32,7 +32,7 @@ const READS = /food_production|fareBandOf\(|from\s+['"][^'"]*capacityModel\.js['
  * chooses no such line (it states the band as the band, cites it, compares it, or is an instrument); HOME: it writes it.
  */
 const FOOD_BAND_READERS = Object.freeze({
-  'src/domain/dailyLife.js': [15, 'SAYS SHORTAGE', 'the four line-choosers, each by the FARE BAND (`fareBandOf`, the one reader of the production band here): the fare (`deriveFoodCulture`: SAYS SHORTAGE in strained/critical/collapsed, SAYS SOURCE in A12, S5, S9, A10, A11, else NEITHER), Dawn Work\'s food branch (SAYS SHORTAGE), the food grievance (SAYS SHORTAGE; its price-only F0, F6, F8 NEITHER, kept on the production band where a market stands) and the food visitor lens (SAYS SHORTAGE: F1, F2); the slots\' citations of `capacity.food_production` (NEITHER: references, no line); `fareBandOfRecord`, the same derivation for a reader outside the slots'],
+  'src/domain/dailyLife.js': [14, 'SAYS SHORTAGE', 'the four line-choosers, each by the FARE BAND (`fareBandOf`, the one reader of the production band here): the fare (`deriveFoodCulture`: SAYS SHORTAGE in strained/critical/collapsed, SAYS SOURCE in A12, S5, S9, A10, A11, else NEITHER), Dawn Work\'s food branch (SAYS SHORTAGE), the food grievance (SAYS SHORTAGE; R24h: it fires on the fare band alone, so a page that prints its place fed has none) and the food visitor lens (SAYS SHORTAGE: F1, F2); the slots\' citations of `capacity.food_production` (NEITHER: references, no line); `fareBandOfRecord`, the same derivation for a reader outside the slots'],
   'src/data/dailyLife/outsiderImpressions.js': [2, 'SAYS SHORTAGE', 'the food visitor pool `services.food_production` and its declaration (`food:want`): chosen by dailyLife.js by the fare band'],
   'src/domain/coherence/pageCensusFindings.js': [1, 'NEITHER', 'the battery\'s row FOODSEC reads the visitor pool by its key: an instrument, it prints nothing'],
   'src/domain/capacityModel.js': [4, 'HOME', 'the capacity model writes the production band'],
@@ -71,8 +71,8 @@ describe('the food band readers: every reader of the production band or the fare
       expect(why.length, f).toBeGreaterThan(20);
     }
   });
-  it('in dailyLife.js the production band is read twice: by the fare band, and by the price-only grievance', () => {
+  it('in dailyLife.js the production band is read once, by the fare band (R24h: no reader of its own)', () => {
     const src = readFileSync(join(ROOT, 'src/domain/dailyLife.js'), 'utf8');
-    expect(src.match(/capacities\.food_production\.band/g)?.length).toBe(2);
+    expect(src.match(/capacities\.food_production\.band/g)?.length).toBe(1);
   });
 });

@@ -47,7 +47,7 @@ import { GATHERING_NAMED, GATHERING_PLAIN, GATHERING_DOES } from '../data/dailyL
 import { DAWN_WORK, DAWN_WORK_DOES } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS, CHILD_WARNINGS_DOES } from '../data/dailyLife/childWarnings.js';
 import { COMMONER_RESENTMENTS_DM, COMMONER_RESENTMENTS_DM_DOES } from '../data/dailyLife/commonerResentmentsDm.js';
-import { COMMONER_RESENTMENTS, COMMONER_RESENTMENTS_DOES, PRICE_ONLY_FOOD_GRIEVANCES } from '../data/dailyLife/commonerResentments.js';
+import { COMMONER_RESENTMENTS, COMMONER_RESENTMENTS_DOES } from '../data/dailyLife/commonerResentments.js';
 import { FOOD_CULTURE, FOOD_CULTURE_DOES } from '../data/dailyLife/foodCulture.js';
 import { OUTSIDER_IMPRESSIONS, OUTSIDER_IMPRESSIONS_DOES } from '../data/dailyLife/outsiderImpressions.js';
 import { UNSPOKEN_TOPICS, UNSPOKEN_TOPICS_DOES } from '../data/dailyLife/unspokenTopics.js';
@@ -224,8 +224,8 @@ function snakeCase(s) {
 //   printed Pressured                    `adequate` .. `strained`
 //   printed Import-Dependent or Deficit  `strained` .. `critical`
 //   printed Famine                       `critical` .. `collapsed`
-// ONE DERIVATION (`fareBandOf`), which the fare (`deriveFoodCulture`), the food grievance, the food visitor lens and Dawn
-// Work's food branch all read, never each its own.
+// ONE DERIVATION (`fareBandOf`), which the fare (`deriveFoodCulture`), the food grievance (R24h: it fires on the fare band
+// alone), the food visitor lens and Dawn Work's food branch all read, never each its own.
 // HELD (R24c (a), R24d: the mirror's own unit after A2): a printed Famine over a production band of `adequate` or
 // `surplus` keeps the production band; its lines (the fare's C7, Dawn Work's F6) say the source failed, and the words
 // ruled for that cell are the mirror unit's to build.
@@ -581,18 +581,16 @@ function deriveCommonerResentments(s, ctx) {
   /** @type {Array<keyof typeof COMMONER_RESENTMENTS>} */
   const branches = [];
   if (GRIEVANCE_BANDS.includes(ctx.causal.bands.public_legitimacy)) branches.push('legitimacy');
-  // R24-A2 (R24c): the food grievance fires where the fare band says people go short, or (the price lines alone) where
-  // production does while the page prints the place fed
-  if (GRIEVANCE_BANDS.includes(fareBandOf(s, ctx)) || GRIEVANCE_BANDS.includes(ctx.capacities.capacities.food_production.band)) branches.push('food');
+  // R24-A2 (the chair's R24h, reversing R24a's price-only keep): the food grievance fires only where THE FARE BAND says
+  // people go short. A page that prints its place as fed has NO food grievance: a metropolis fed by trade is the common
+  // case, and a third of them would have printed one sentence about a price no record holds.
+  if (GRIEVANCE_BANDS.includes(fareBandOf(s, ctx))) branches.push('food');
   if (atomHolds('uprising', facts) === true) branches.push('uprising');
 
   const house = houseFinder(s);
   const parts = [];
   for (const branch of branches) {
-    // R24-A2: where the page prints the place fed, the food grievance keeps only the price lines (food bought in is dearer)
-    const pool = branch === 'food' && !GRIEVANCE_BANDS.includes(fareBandOf(s, ctx))
-      ? COMMONER_RESENTMENTS.food.filter((l) => PRICE_ONLY_FOOD_GRIEVANCES.has(l.id)) : COMMONER_RESENTMENTS[branch];
-    const eligible = withGovernment(filterDeclared(pool, { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
+    const eligible = withGovernment(filterDeclared(COMMONER_RESENTMENTS[branch], { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
     const said = sayDeclared(pickNameable(s, eligible, 'commoner_resentments', branch, house, ctx.stated), house, refs);
     if (!said) continue;
     const cited = GRIEVANCE_REFS[branch];
