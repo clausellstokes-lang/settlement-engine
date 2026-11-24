@@ -686,3 +686,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   note; the two trouble tables' `line` fields (107 to 108, 150 to 151: where each sits in its file); and ONE NEW
   DEPENDENT, `src/generators/generateSettlementPipeline.js`, on each of the two; both `spanDigest`s unchanged: NO
   VALUE MOVED; the register file untouched. IT IS WITHIN WHAT THE OWNER WAS TOLD; the two line fields are said to him.
+- 2026-11-24 22:30 UTC · T49 · RULING R24f (appended to `read/RULING-R24.md`), ON CLOSE-7's STOP: THE CHAIR'S OWN CHECK ON THE DESERT
+  CURE (R24e (1)(c): what does a SAVED desert place do?) FOUND THAT `dmLayer.rederive` RE-RUNS THE WHOLE BIRTH BY THE
+  CODE OF THE DAY: a saved place, edited, is re-born; only what the DM's layer holds is pinned. A saved desert town
+  re-derived on the cure lost four houses and gained three. THE SEAT OF IT IS THE RE-DERIVE: every cure that moves what
+  a place holds moves a saved place on its next edit. **RULED:** (1) a cure that changes what a place HOLDS reaches
+  only places born after it; one that changes what the page SAYS may reach a saved place; (2) the desert, the furrows
+  and the three government names ride ONE marker in the laws' form, "THE CORRECTIONS LAW", landed LIT (a sixth row of
+  `GENERATION_LAWS`; KINDS-2's lane is the pattern); (3) A MEASURE FIRST, FOR THE OWNER: master-born places, saved, then
+  re-derived on the line's tip: what each holds before and after. **Why the measure:** the line is 8,430 commits from
+  master; if its un-marked changes already re-deal what a live town holds on its first edit after the release, HE MUST
+  KNOW BEFORE ANY RELEASE, and a marker on three cures is not the whole answer. (4) the besieged places' reliance
+  names its source and says it is stopped. THE CLOSE LANE'S HAND-IN MOVES LATER THAN 02:00 UTC; its new hour is asked.
+  THE OWNER IS TOLD NOW.

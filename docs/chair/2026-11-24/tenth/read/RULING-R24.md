@@ -154,3 +154,27 @@ Sawmill (commercial) 15, Charcoal burner 12, Hunter's lodge 2, and gains nothing
   `dealGoals` that the moved birth exposes) IS ITS OWN FINDING: a measure on C and V first, the cure on the chair's
   ruling; its red is carried in the landing line as ruled.
 - **(3) THE `B1land` ROW AT ZERO BY HAND:** accepted, as NOHEAL.
+
+## R24f (added 22:30 UTC on 2026-11-24): A SAVED PLACE AND A CURE; "THE CORRECTIONS LAW"; AND A MEASURE FOR THE OWNER
+CLOSE-7's STOP under R24e (1)(c), executed (`close-7/b1i/rederive-saved.*`): A RE-DERIVE AFTER AN EDIT RE-DEALS A SAVED
+DESERT PLACE. `dmLayer.rederive` re-runs the whole birth (`run(config′, null, {seed})`) by the code of the day; only what
+the DM's layer holds is pinned. dp-town-39, born at the flip and re-derived on the cure with an empty layer, lost Fish
+market, Hunter's lodge, Vintner and Fuller and gained Customs house, Ropemaker and Barracks; dp-city-20 lost six houses and
+gained two. A section's re-roll touches only people and history (the houses stand); the world pulse never reaches the cure.
+THE SEAT OF IT IS THE RE-DERIVE, NOT THE CURE: every cure that moves what a place holds moves a saved place the same way.
+1. **THE RULE FOR EVERY CURE FROM NOW:** a cure that changes what a place HOLDS (its houses, people, powers, events, its
+   government's name) reaches only places born after it; a saved place keeps what it holds through a re-derive. A cure
+   that changes only what the page SAYS of what the place holds may reach a saved place on its next re-derive.
+2. **"THE CORRECTIONS LAW":** B1(i), B1(ii) if it moves a record, and C1 ride ONE marker in the generation laws' form: a
+   zero-import leaf (`_correctionsVersion`; law 1 as the line stands; law 2 these corrections, each asked by name:
+   `landWithholds`, `fieldNeedsFarmland`, `governmentNames`), a sixth row of `GENERATION_LAWS`, its clamp and mint in
+   `birthConfig`, the saved-place test's row walk. IT LANDS LIT: it is the cure the owner ordered and holds no number of
+   his. A1 and A2 are what the page says: no marker. PROOFS: law 1 forced: C and V byte-equal to the line; lit: each
+   cure's counts; dp-town-39, dp-city-20 and a saved "Corrupt Council" re-derived on the cure: red first, then nothing held
+   moves.
+3. **A MEASURE FIRST, FOR THE OWNER:** 30 places a size born by MASTER's engine, saved, then re-derived on the line's tip
+   with an empty layer: what each holds before and after. If the line already re-deals what live towns hold on their next
+   edit, the corrections law is not the whole answer and the owner decides before any release.
+4. **P3SOURCE** (three besieged places that state a reliance on magic with no source; the same at point 112; the one
+   source is stopped by the siege): the reliance NAMES its source even when the source is stopped and says the stop in the
+   page's own mark; the composed line comes to the chair before a build.
