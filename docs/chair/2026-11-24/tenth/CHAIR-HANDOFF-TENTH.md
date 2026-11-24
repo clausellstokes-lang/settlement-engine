@@ -28,6 +28,8 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"I leave all judgement to you / Fix those findings as well" (2026-11-24, about 14:52 UTC, this account, in answer to the
+chair's status naming the faults of its read of the towns and the two holes in the database's rules: T7 below).
 "Continue the pending work please" (2026-11-24, this account). On the other account, to the ninth chair (verbatim in
 its record): "Pause and record the progress to the veil work for handoff. Focus all your remaining effort on the close
 lane" (2026-11-23); "I defer all decisions to you" (2026-11-23: the chair decides; NEVER a grant of the merge, the
@@ -75,3 +77,16 @@ Filled in as each is seated: see section 5.
 itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 
 ## 5. SINCE THIS FILE WAS WRITTEN (newest last; each hour read from the clock when written)
+- 2026-11-24 14:53 UTC · T7 · THE OWNER'S WORD (verbatim, two lines, in answer to the chair's status of 14:51): "I leave all
+  judgement to you" / "Fix those findings as well". TAKEN AS: (a) the findings that status named are to be FIXED, not
+  listed: the faults of the chair's read of the towns (READ-24: the healer contradiction, the land and what stands on
+  it, the label printed as a name, the repeats) and the two holes in the database's rules (GRANTS-1); (b) MEASURE
+  FIRST, RULE SECOND still holds: each cure is cut to what its measure shows; (c) NOT a grant of what stays his hand:
+  GRANTS-1's fix is built and read, and reaches no database but by him; a cure that needs a new birth rule switched on
+  or a number signed (the troubles rule's draft table, for the guild quarrel met in four of four towns) is brought to
+  him built, with its measure, for one yes.
+- 2026-11-24 14:53 UTC · T8 · SEATED at 14:51:56 and 14:51:58 UTC (create_session; both on the middle tier at high effort,
+  permission mode auto): CLOSE-7 session_019yED1QNMqSLp7ohcZB88VP (source `lane/close-6-2026-11-23`, branch
+  `lane/close-7-2026-11-24`); GRANTS-1 session_019yED1QhZzoXHC1uiNEomy3 (source `lane/join-2026-11-14`, branch
+  `lane/grants-1-2026-11-24`). Each was given a short first message naming its start file on this lane as its whole
+  assignment. THE LANDING HELPER starts when the account's weekly allowance has reset (15:00 UTC).
