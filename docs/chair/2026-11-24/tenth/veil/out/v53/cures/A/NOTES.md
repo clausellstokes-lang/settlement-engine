@@ -1,3 +1,5 @@
 # V53 cures UNIT A: builder notes (partial, written as the work goes)
 - 23:17 UTC: worktree /home/user/cures53 cut at ba7460c33 on lane/veil-53-2026-11-24-cures-wip; node_modules and .husky/_ symlinked from /home/user/join53.
 - Plan: `governanceAccount.js :: legitimacyCausesOf` names no cause on a breakdown that is not whole (any of prosperity, safety, defense, food missing or not a finite number); `governanceAccountOf`'s `onIt` turns only on a whole breakdown. Tests re-stated per the ruling; the "shared" read re-pointed at the read the server sends (the default veil, which runs `withholdAlways`), since plain `toPublicSafe` keeps the terms.
+- 23:40 UTC: reds recorded (/var/tmp/v53/cures/A/red0.log: U5a 19/19, U7b 2/6; red2-restated-old-src.log: restated arm 4 of 6 on OLD src, visitor-thorp-52 widest 'It has lasted'). src edit made (wholeBreakdown in governanceAccount.js); green run next.
+- committed 8067faafb (green 35/35). Next: governing files, tests/lint whole.
