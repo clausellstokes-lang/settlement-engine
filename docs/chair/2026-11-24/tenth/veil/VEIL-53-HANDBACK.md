@@ -24,7 +24,9 @@ THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cur
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
 banked 720, restore loop, views dumped, no server) through the mutex, then `slice-an.mjs rows > slice-table.txt`, ONE line to
-VEIL-55; then its brief and build ((b) fail closed per reader, red first per class; (c) the totality walker). (5) The renumbering
+VEIL-55 (ADDED by VEIL-55 23:26: the ring note's "FIDELITY GAP" of `tests/components/defenseRingNoteProjection.test.jsx`, soak1k-11
+and soak1k-41: the shared Defense tab prints `criminalStructureOf(shared).note`'s original vantage with no publicProse; read its
+pairs under V4 term 1: false of the town = (C), its reader in the walker; else listed); then its brief and build ((b) fail closed per reader, red first per class; (c) the totality walker). (5) The renumbering
 (`briefs/V53-RENUMBER-BRIEF.md`, must clear testRatchet). (6) Items (5) J9/J10, (7) the person-name measure, (8) the window: not
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
