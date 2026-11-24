@@ -82,6 +82,9 @@ const CAUSE_WORDS = Object.freeze({
   food: Object.freeze({ adverse: 'hunger', favourable: 'full stores' }),
 });
 const CAUSE_ORDER = Object.freeze(['prosperity', 'safety', 'defense', 'food']);
+/** The terms the registry row `legitimacy.breakdown` withholds on every veiled read (`galleryWithholdAlways.js ::
+ *  withholdAlways`, `// registry: legitimacy.breakdown`; 212 :: `_gallery_veil_withhold_always`). */
+const BREAKDOWN_WITHHELD_TERMS = Object.freeze(['prosperity', 'safety', 'defense']);
 /** BAR7-LINES (the LOW "Weak defences is the reason", 42 towns of the census's 720): the cause words that are plural nouns. */
 const PLURAL_CAUSE_WORDS = new Set(['weak defences', 'strong defences', 'full stores']);
 
@@ -109,12 +112,13 @@ function adverseSafetyWord(safetyLabel) {
  * ⭐ A WHOLE BREAKDOWN, OR NO CAUSE (the chair's RULING V3, VEIL-53 UNIT A, 2026-11-24: FAIL CLOSED). A veiled read
  * carries the breakdown without its prosperity, safety and defense terms (`galleryWithholdAlways.js :: withholdAlways`,
  * the registry row `legitimacy.breakdown`); the one or two largest causes cannot be ranked from what is left, so a
- * breakdown that lacks any of its four terms grounds no cause clause, and no "It" turn after a bare standing.
+ * breakdown that lacks any of THAT ROW's withheld terms grounds no cause clause, and no "It" turn after a bare standing.
+ * `food` is not withheld, and keeps its old reading: a breakdown without it (an older birth) reads it as 0.
  * @param {unknown} breakdown @returns {boolean}
  */
 function wholeBreakdown(breakdown) {
   const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
-  return CAUSE_ORDER.every((field) => typeof b[field] === 'number' && Number.isFinite(b[field]));
+  return BREAKDOWN_WITHHELD_TERMS.every((field) => typeof b[field] === 'number' && Number.isFinite(b[field]));
 }
 
 /**

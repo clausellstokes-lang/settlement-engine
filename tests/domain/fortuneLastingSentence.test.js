@@ -424,6 +424,25 @@ describe('U7b (d): the equalities (each wording, its time word, three reads), FA
     expect(withClause).toEqual(['visitor-thorp-52', 'visitor-village-8', 'visitor-hamlet-139']);
   });
 
+  it('an owner\'s record whose breakdown lacks only `food` (an older birth: a missing food term reads 0) names the clause it names with `food: 0`', () => {
+    /** @type {string[]} */ const walked = [];
+    const failures = collectSeedFailures(SIX, ({ seed, record }) => {
+      const clause = clauseOf(record);
+      if (!clause) return;
+      walked.push(seed);
+      /** @param {Record<string, unknown>} breakdown @returns {any} */
+      const withBreakdown = (breakdown) => ({ ...record, powerStructure: { ...record.powerStructure, publicLegitimacy: { ...record.powerStructure.publicLegitimacy, breakdown } } });
+      const { food: _food, ...foodless } = record.powerStructure.publicLegitimacy.breakdown;
+      expect('food' in foodless, seed).toBe(false);
+      const zero = paragraphOf(withBreakdown({ ...foodless, food: 0 }));
+      const missing = paragraphOf(withBreakdown(foodless));
+      expect(sentencesOf(zero).filter((s) => s.startsWith(`${clause} `)), `${seed}: ${zero}`).toHaveLength(1);
+      expect(missing, seed).toBe(zero);
+    });
+    expectNoSeedFailures(failures, 'a breakdown without `food` names the clause it names with `food: 0`');
+    expect(walked.length).toBeGreaterThan(0);
+  });
+
   it('a veiled read (the served read, the widest veil) names no cause, and every sentence is whole: LASTING\'s opens on the place', () => {
     expect(POOL).toBeTruthy();
     let veiledReads = 0;
