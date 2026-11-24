@@ -1,13 +1,25 @@
 # GRANTS-1 — hand-back
 
-## WHERE THE LANE STANDS (2026-11-24 17:25 UTC)
+## WHERE THE LANE STANDS (2026-11-24 18:12 UTC)
 
-- Branch `lane/grants-1-2026-11-24` at `dc4bf5775` (pushed): migration `supabase/migrations/211_close_visitor_reach.sql` holds PART A (245 functions; generated), PART C (profiles allowed list) and PART B (last). Tests: `tests/security/hostedDefaultGrants.pglite.test.js` with its register `functionGrantClasses.js` and harness `hostedDefaultHarness.js`; `tests/security/profileColumnGrants.pglite.test.js`; the client change in `src/lib/auth.js :: supabaseUpdateDisplayName`, pinned by `tests/security/profile_escalation.test.js`.
-- MERGED on the lane: A, B, and C (C built by a builder on `lane/grants-1-2026-11-24-c-wip`, tip `bc4247e9d`, local only; cherry-picked).
-- IN FLIGHT: PART D, a builder on `lane/grants-1-2026-11-24-d-wip` from `dc4bf5775`, briefed by `briefs/BRIEF-PART-D.md` (plus the corrections in its prompt: compose with every part in place; mutex retry with GATE_MUTEX_MAX_POLLS=240).
-- WITH THE OWNER: `FOR-THE-OWNER-URGENT.sql` (105 functions; cleared by the reader "CLEAR 0ea91fe18").
-- READY TO FINISH: `measure/owner-files.mjs` generates `FOR-THE-OWNER-GRANTS/` (one file per result, guarded, executed twice on the 203 and 210 chains). The page in plain words is still owed.
-- NEXT, in one line: read D's diff once, merge it, regenerate the owner's files and write their page, then run tests/security and tests/lint whole, then send "GRANTS <commit>".
+- DONE. Branch `lane/grants-1-2026-11-24` (pushed) holds migration `supabase/migrations/211_close_visitor_reach.sql`, parts A, C, D and then B (B last), merged with the line `f03e9a868` (point 113). Nothing was applied anywhere.
+- How each part landed:
+  - A and B: built by the seat.
+  - C: a builder on `lane/grants-1-2026-11-24-c-wip` (tip `bc4247e9d`, local only), cherry-picked, plus one docblock commit by the seat.
+  - D: a builder on `lane/grants-1-2026-11-24-d-wip` (tip `34077ead2`, local only), cherry-picked without its census commit; the census was re-taken once after the line merge.
+- Tests:
+  - `tests/security/hostedDefaultGrants.pglite.test.js` (16; register `functionGrantClasses.js`, 405 functions; harness `hostedDefaultHarness.js`)
+  - `profileColumnGrants.pglite.test.js` (6)
+  - `serverOwnedColumns.pglite.test.js` (12)
+  - `profile_escalation.test.js` (3; the client change in `src/lib/auth.js :: supabaseUpdateDisplayName`)
+  - Each was seen RED before its part and GREEN after; the logs are in `measure/out/part*-red.log` and `part*-green.log`.
+- FINAL RUN on the merged tree, `tests/security` + `tests/lint` whole (`measure/out/final-security-lint.log`): 382 files, 5366 passed, 3 failed, 1 skipped. All 3 reds are RED-AT-LINE rows: proseComposed A0b, and proseCorpusBytes RAW and GZIP.
+- For the owner:
+  - `FOR-THE-OWNER-URGENT.sql`: groups 1 and 2, cleared by the reader, already given to him.
+  - `FOR-THE-OWNER-GRANTS/`: files 0a–5, every revoke guarded, executed twice in PGlite on the 203 and 210 chains: 134 open, then 0; service_role unchanged.
+  - `FOR-THE-OWNER-GRANTS.md`: the page in plain words; files 3 and 4 are shown compatible with master's client, except the display_name fallback after an RPC error.
+- For the reader: `GRANTS-1-APART.md` (ruling §8, G1c, part D's excluded columns).
+- NEXT, in one line: the fresh security reader reads 211's final text; nothing reaches the working line or any database before its word and the owner's hand.
 
 ## Rulings in force
 
