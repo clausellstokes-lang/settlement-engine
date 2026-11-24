@@ -20,7 +20,8 @@
   "ran": [
    "1-part-a-functions.sql",
    "2-part-b-default.sql",
-   "3-part-c-profiles.sql"
+   "3-part-c-profiles.sql",
+   "4-part-d-settlements-maps.sql"
   ]
  },
  "210": {
@@ -44,7 +45,8 @@
   "ran": [
    "1-part-a-functions.sql",
    "2-part-b-default.sql",
-   "3-part-c-profiles.sql"
+   "3-part-c-profiles.sql",
+   "4-part-d-settlements-maps.sql"
   ]
  }
 }
