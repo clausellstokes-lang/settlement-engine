@@ -1,0 +1,50 @@
+{
+ "203": {
+  "before": {
+   "rows": 245,
+   "exists": 244,
+   "anon": 134,
+   "authenticated": 134,
+   "service_role": 207
+  },
+  "after": {
+   "rows": 245,
+   "exists": 244,
+   "anon": 0,
+   "authenticated": 0,
+   "service_role": 207
+  },
+  "defacl": [
+   "postgres: {service_role=X/postgres}"
+  ],
+  "ran": [
+   "1-part-a-functions.sql",
+   "2-part-b-default.sql",
+   "3-part-c-profiles.sql"
+  ]
+ },
+ "210": {
+  "before": {
+   "rows": 245,
+   "exists": 245,
+   "anon": 134,
+   "authenticated": 134,
+   "service_role": 208
+  },
+  "after": {
+   "rows": 245,
+   "exists": 245,
+   "anon": 0,
+   "authenticated": 0,
+   "service_role": 208
+  },
+  "defacl": [
+   "postgres: {service_role=X/postgres}"
+  ],
+  "ran": [
+   "1-part-a-functions.sql",
+   "2-part-b-default.sql",
+   "3-part-c-profiles.sql"
+  ]
+ }
+}
