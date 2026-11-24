@@ -784,3 +784,9 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   22:46; its container restarted once, its queue relaunched); CLOSE-7 and VEIL-51 not re-read (both far below, both
   after a compaction). EVERY RECORD STILL READS `allowed_warning`. POINT 115's helper is still in step f (82 test files
   reported by 23:26; the merge f3b45352eb and the door commit a3721fc83f stand in the line's worktree, unpushed).
+- 2026-11-24 23:39 UTC · T58 · WHAT THE LIVE SITE SENDS TODAY (RULING V10): NO SECRET OR HOOK ON A REVEAL-OFF READ; A MARKED PAGE's HIDDEN HOUSES ARE SENT AND HIDDEN ONLY BY THE BROWSER.
+  VEIL-52's PP-TODAY on master's chain and client: unmarked rows: nothing sent that the page does not show. Rows marked
+  as master's export writes them: a hidden house's name on 91 of 140 places at both Reveals, criminal services on 97; on
+  Reveal-DM reads the hooks and secrets the veil's default covers. The import pass on the tip: 0. The owner is told in
+  plain words. One pass added (today's import of a marked page); then READ-COST's run. The hourly check is re-armed for
+  00:29 UTC (trig_017PbijvZjS4JSF9zHXKR7SK).

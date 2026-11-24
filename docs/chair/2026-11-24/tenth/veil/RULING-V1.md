@@ -250,3 +250,25 @@ db832c892), the same master-born 140, both Reveals, (a) only, on (U) an unmarked
 export writes it. (M) is expected not to be empty: it is the size of what the live site sends today and hides only in
 the browser. (U) says whether master's SQL sanitiser sends anything master's browser projection strips; a secret, a hook
 or a DM note sent on a Reveal-off read there is said first and goes to the owner at once.
+
+## RULING V10 (added 23:39 UTC on 2026-11-24): "PP-TODAY" AND THE IMPORT PASS: WHAT THE LIVE SITE SENDS TODAY, IN FIGURES
+VEIL-52 (`v52/out/PP-TODAY-TABLE.txt`, `v52/out/PP-IMPORT-TABLE.txt` at 87749a56d; CONFIRMED, executed; the first table
+read by the chair): MASTER's chain (001..203) and MASTER's client (db832c892), the master-born 140, both Reveals, 560
+reads, 0 faults, every body present. The kind classifiers alone are the tip's (they read nothing served).
+ (U) UNMARKED, S minus P = 0, every kind, every read: master's SQL sanitiser sends nothing master's browser strips.
+ (M) MARKED AS MASTER's OWN EXPORT WRITES IT (the default set, no deltas): SENT TODAY AND HIDDEN ONLY BY THE BROWSER,
+     leaves / places of 140 / reads:
+     - on Reveal-OFF and Reveal-DM reads alike: a hidden house's name 2,238 / 91 / 182 (`institutions[].name`, the
+       criminal and information services' `institution`, `npcs[].secondaryAffiliation`); the hidden houses' rows 7,310 /
+       91 / 182; criminal services' rows 2,894 / 97 / 194; the safety profile's criminal institutions and crime types
+       2,266 / 140 / 280; capture states 534 / 140 / 280; three diagnostics blocks the page never prints;
+     - on Reveal-DM reads only: hooks 9,277 / 140 / 140; secrets 8,320 / 140 / 140; faction members' cards and corrupt
+       flags 7,828 / 99 / 132; `npcs[].corrupt` and its vectors 1,865 / 98 / 98; `generationCoherenceReceipt` 19,911.
+     NO secret, hook or DM note is sent on any Reveal-OFF read, in (U) or (M).
+ THE IMPORT PASS (the tip's server, unmarked rows, both Reveals): import minus page = 0, import minus served = 0, the
+ client's import minus page = 0: after the release an importer of an unmarked page receives nothing its page does not show.
+**WHAT IT SETTLES:** (M) IS THE SIZE OF WHAT THE RELEASE CURES: on every page exported since the veil reached the live
+site, what the veil hides is hidden by the browser alone today. V8's ruling stands. NOTHING HERE IS A NEW LEAK: it is the
+known reason the server-side veil exists; it now has figures, and the owner is told them.
+**ONE PASS ADDED (VEIL-52, before READ-COST's run):** today's IMPORT of a marked page on master's chain and client: does
+an importer's own copy hold what the maker's veil kept off the page? Its first line is a yes or a no.
