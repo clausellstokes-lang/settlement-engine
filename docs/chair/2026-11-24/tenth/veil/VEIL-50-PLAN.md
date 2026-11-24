@@ -97,7 +97,48 @@ join must pass is red; (T) a tell only; (S) speed, signing, notice, pin, registe
 
 ## (b) THE DIRECT-SERVE MEASURE (on b58abc48b)
 
-(filled when q1 ends)
+THE POOL (N111's slice): the gate's 140 seeds, stored by the lane's own round trip (`out/v33/legacy/dump.sh`, `LP_A=0 LP_B=0
+LP_TOWNS=1`) three ways: TIP-BORN (the tip's engine b58abc48b), MASTER-BORN (origin/master db832c892: every town stored before this
+release), LIT-BORN (the trial join cdab6d2fc: both laws on). The server is the tip's SQL in every column (template v28tpl = 001..211 +
+the tip's 212; the join's 212 is the same bytes). Every gated setting (own, g:000..g:110, allOpen, off), Reveal off and DM.
+16,800 reads a set for NAMES (four server doors + the twin's two); 11,310 (master-born 11,280) of them hide something.
+
+HOW "NAMES IT" IS DECIDED (the lane's judgment, never mine; `wd.probe.jsx` carries it line for line from
+`tests/security/galleryVeilRecent.pglite.test.js` and checks those lines against the tree at start):
+- THE WITHHELD SET of a read = every power row and house of the STORED document whose name the SERVED document no longer holds,
+  with their ids, and the id of every stored person the served document holds by no name.
+- A served STRING NAMES IT if it equals a withheld name or id, or if the lane's fold (`gallerySecondHomes.js :: buildNameSearch`,
+  case- and punctuation-folded) finds a withheld name in it AFTER every served name that contains that name is cut out of the
+  string ("Thieves' Guild Master" names a withheld Thieves' Guild; a served "Merchants' Guild" never counts for a withheld
+  "Guild"). A served KEY equal to a withheld id also counts.
+- A COVERT TIE's COPY is served if a door's `prominentRelationship` (or `pressureSentence`) at Reveal off EQUALS the stored covert
+  copy (VEIL-44's um, `UM_U=1`). At Reveal DM the copy is the DM's by design and is not counted.
+- THE STORED PROSE: the served document carries `publicProse` (ppkey), and a block holds a withheld or rewritten field's value
+  whole or a 40-character cut of it (prose, the twin's reads).
+CONFIRMED, every number below (runs q1, q1b, q3; tables under `/var/tmp/v50/out/`, this container).
+
+| kind | door | TIP-BORN | MASTER-BORN | LIT-BORN |
+|---|---|---|---|---|
+| a hidden power's name in a shown power's desc (`powerStructure.factions[].desc`) | gallery, link, import, map member; off and DM | 20 per door and Reveal (160 server reads), 2 places | 20 per door and Reveal, 1 place | 31 per door and Reveal (248), 3 places |
+| a hidden house's name in a person's ROLE ("Thieves' Guild Master": `relationships[].npc1Role`, `npc2Role`, `npcs[].role`) | every door; off and DM | 0 | 430 per door and Reveal (3,440 server path-reads), 7 places | 0 |
+| a hidden house's name in a person's AFFILIATION, membership role or goal (`npcs[].secondaryAffiliation`, `factions[].members[].secondaryAffiliation`, `.role`, `.goal.short`) | gallery and import, DM only | 0 | 951 + 951 path-reads, 15 places | 0 |
+| a withheld id (power, house, person) as a string or a key | every door | 0 | 0 | 0 |
+| a covert tie's copy at Reveal off | map member / map's import | 21 / 21 (7 places x 3 markers) | 0 (no stored tie is covert) | 13 / 13 (5 places) |
+| a covert tie's copy at Reveal off | gallery, link, import | 0 | 0 | 0 |
+| the stored prose (`publicProse` served) | page, link, import | <PPKEY TIP> | 0 (master stores no `publicProse`: 0 of 140) | <PPKEY JOIN> |
+| the stored prose holding a withheld or rewritten field (twin reads) | | 6 rows: `power.recentConflict` (withheld always) 2,620 reads on 131 places; `power.stability` 2,540; `guardEffectivenessDesc` 900; `pressureSentence` (withheld always) 240; `safetyDesc` 80; `economy.complexity` 80 | 0 | (not run: the same composer) |
+
+"Path-reads": a read in which two paths hit counts twice. In every NAMES cell the twin's count equals the server's (the twin is
+wrong with it, so "server = twin" never caught these). WHAT (b) CHANGES IN (a):
+- C5 IS THE LARGEST (D) CLASS: on master-born towns (every town live today) a hidden house's own name is served on 16 of 140
+  places, at every door and both Reveals for the role strings. The record held "12 of 440" for one of the eight paths.
+- B0, R4-IDS, IS NOT (D) ON THESE POOLS: no withheld id is served on any set; `npc_power_*` ids are on 71 of 140 today-born
+  documents and none spells a power the veil withholds. Its (D) rests on the record's four lit places of another pool (row 17).
+  R4-IDS stays in Phase 1 for N106 (C) and for 212's order.
+- A3, RIVAL, IS (T) AS CLASSED: the only description hits are the Church's and the City watch's rows naming a hidden Thieves'
+  Guild (N104's two places on the tip-born set), not rival rows.
+- C6 (`corruptTies`): no hit on any set: (T) or empty here.
+- O0 (N117) at the joined tree: the covert copy is served at the map doors only (13 + 13 lit reads): D1 cures exactly it.
 
 ## (c) THE JOIN
 
@@ -186,10 +227,10 @@ the lane's owner: I integrate, read every diff once, run every proof's slice and
 | 2 | R4-IDS with R4I-SQL-2 (B0-B3, B6; N106's two lines) | D (lit) + C | ME + my builder, at once | N106 352 -> 0 (master-born 140), its plant, the lint pin; R4I-SQL-2's red/green re-run by me; the whole-document form on the 140 at every door | one new pool, the unit's arms | 6 |
 | 3 | THE DOORS, narrowed: D1, D2, D6, D7, D8; D3's MEASURE; D4's MEASURE first (its cure only if it serves) | D + C | SEAT 2 (when the grants lane hands in), after "R4-IDS MERGED" | um: the map member and the map's import 21 + 21 -> 0 on the tip-born 140 (and the lit-born); the door-equality arm on the 140 | the door-equality arm once | 9 |
 | 4 | R5-DESC, narrowed: A0, A1, A2, A5, A6, A8 (RIVAL: see below) | D + C | SEAT 1 after unit 1, after "R4-IDS MERGED" | wd: `factions[].desc` 240 (tip-born) and 372 (lit) -> 0; SSKIP's count and cure on a slice; B2's re-runs on a slice | every arm once, one hold | 9 |
-| 5 | LEGACY-TELLS' served part: C5, C6; C7 re-measured after unit 2 | D | ME (or seat 1) | wd on the master-born 140 (b) | the master-born pool once | 3 |
+| 5 | LEGACY-TELLS' served part: C5 (8 paths: the role strings at every door, the affiliations, membership roles and goals at the DM read; 212 + twin + registry rows, both stored shapes); C7 re-measured after unit 2; C6 empty here | D (THE LARGEST: 5,502 server path-reads on 16 of 140 master-born places) | ME + my builder, after R4-IDS (both edit 212) | wd on the master-born 140: every path -> 0; a plant per path | the master-born pool once | 7 |
 | 6 | THE JOIN (J1-J5, J9's sites and registers, J10, J12, J13; the renumbering; grants x veil; VR26 re-pointed) | C | ME + my builder, from the trial join (b)-(c) | the reds by name (q2's form) | (the bar's proof) | 12 |
 | 7 | PHASE 1's PROOF on the joined tree | | ME | | (b)'s instruments at every door on both pools, full; the whole-document form; gates read (not worse) | 5 |
-PHASE 1: ABOUT 48 SEAT-HOURS, A GUESS (machine time dominates: one heavy run at a time per box); with two seats beside me, about
+PHASE 1: ABOUT 52 SEAT-HOURS, A GUESS (machine time dominates: one heavy run at a time per box); with two seats beside me, about
 20 to 24 wall hours.
 
 THE ONE DEVIATION I RECOMMEND (vetoable): RIVAL (A3, A4; class T) rides unit 4. Its code is built, its diff read whole, its green
