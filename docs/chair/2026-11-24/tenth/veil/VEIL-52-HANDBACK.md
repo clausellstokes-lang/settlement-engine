@@ -7,10 +7,18 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; current at every push)
 
-STATE (22:07 UTC 2026-11-24): unit (0) sent 21:25. VEIL-50 read both wd copies whole (21:4x) and asked one change each: made at
-c1b3ecf37. THE TOOL's 30-MINUTE BACKGROUND WINDOW CUT n115 (at 325 of 420 tip rounds), q52b and q52 at 22:06: every run now goes
-through ONE DETACHED RUNNER, `v52/run52.sh` (setsid nohup; log `/var/tmp/v52/log/run52.log`), started 22:06:49: n115 (one pass),
-unit (2)'s a,b,c,tpl,etip,ejoin, the two plants, then wdmi and snap on the three sets. NOTHING merged; no SQL before "R4-IDS MERGED".
+STATE (22:53 UTC 2026-11-24). THE LANE'S OWNER IS NOW VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R; VEIL-50 handed over 22:34:
+never message VEIL-50). THE ACCOUNT IS AT ITS WEEKLY WARNING (reset 2026-12-01 15:00 UTC): a stop may come without notice; push at
+every result. THE CONTAINER RESTARTED ~22:40 (processes and PostgreSQL died; files survived): after a restart, start PostgreSQL
+(`su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`) and relaunch the runner.
+DONE, CONFIRMED: (1c) N115 (`v52/out/N115-TABLE.md`; RULED by the chair 22:48: the three doors' ~0.2 s does not hold the release;
+the gallery's 4.7 s is master's own, now the finding READ-COST). Unit (2) proof (a) galleryMapCovert 8 of 8 on 75a410f1b (22:32).
+RUNNING (detached runner `v52/run52.sh`, log `/var/tmp/v52/log/run52.log`, started 22:51:34): PP first (the chair read it and said run
+now), then unit (2)'s c, tpl, etip, ejoin ((b) ran 22:47-22:5x: its output `/var/tmp/v52/out/mcsql/b.txt`), the two plants, wdmi and
+snap on the three sets.
+OWED, IN ORDER: PP's result (<=250 words to the chair and VEIL-55, with the sentence: is anything in (a) what a maker calls hidden or
+bookkeeping the page never prints); PP's SECOND PASS, the import door (I-P, I-S by the same kinds); READ-COST's one run (n115 with the
+gallery's LIST reads, 840 and 1 rows, both chains); the measures (1a), (1b); unit (2)'s remaining proofs. No SQL before "R4-IDS MERGED".
 
 BRANCHES: `lane/veil-52-2026-11-24` (documents and run scripts; cut at b58abc48b, the lane's tip "PIN-3 MERGED").
 `lane/veil-52-2026-11-24-mcsql-wip` 75a410f1b (pushed): VEIL-44's door tip db9fddc7d + its MAPCOVERT-GREEN-SQL d56bc1ab6, merged clean;
