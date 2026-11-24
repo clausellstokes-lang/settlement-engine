@@ -58,6 +58,18 @@ LISTED FOR LATER UNITS: healerCount (priest, midwife); P9 (129 of V) NEXT AFTER 
 dp-town-143 (C) over its banked 0; the plains' 'Mill' row matching Sawmill (x2.34); the desert's trade x1.8 on the withheld rows;
 renaming SAVED places' three forms (the owner's, rename ledger as door). LATER UNIT (hand-back list): the capacity's healerCount not counting
 a healing priest or midwife. D2 not mine; D4 after the cures on the line's new tip.
+UPDATE 22:45 UTC (context began with a summary ~22:2x; told the chair; START-CLOSE-7 and this file re-read). RULINGS since 20:16,
+all verbatim in `close-7/briefs/`: R24c (A2's band law and totality arm), R24d (THE PRINTED BAND BOUNDS THE FARE; the mirror unit's
+two lines C7 K2 / F6 K1, owner's veto list), R24e (B1(i)'s finish), R24f (22:30: THE CORRECTIONS LAW). B1(i) BUILT, NOT MERGED
+(wt/b1i, -b1i-wip 9d0f85e01); its R24e (1)(c) STOPPED: `dmLayer.rederive` re-deals a saved desert place (dp-town-39, dp-city-20).
+R24f: a cure that changes what a place HOLDS reaches only places born after it -> B1(i), B1(ii) (if it moves a record) and C1 ride
+one marker `_correctionsVersion` (zero-import leaf; law 2 asks `landWithholds`, `fieldNeedsFarmland`, `governmentNames` by name;
+sixth GENERATION_LAWS row; clamp+mint in birthConfig; generationLawsSavedPlace arm), PATTERN `lane/kinds-2-2026-11-24` 2382c55d5
+`troubleLaw.js`; LANDS LIT. A1/A2 no marker. P3SOURCE measured (report P3SOURCE.md): not the flip's; R24f (4) wants the mark's words
+and the composed line (SENT 22:45; awaiting the ruling). C1: stopped before any edit (wt/c1 clean at d447ee31e); "Board of Aldermen"
+misread by council word tests -> alternatives "Council of Aldermen" / "Aldermen's Council" SENT 22:45. ORDER FOR CHAIN TWO (R24f):
+MASTER-REDERIVE measure (brief committed 6ba29fd2f; RUNNING since 22:40), then the leaf, B1(i)'s finish, B1(ii), C1. Chain one: A2
+(R24d rework, running) then the mirror unit. Guess for "CLOSE-7 <commit>": 08:30 UTC 2026-11-25 (SENT). wt/p112 removed.
 
 ## 1. RULINGS IN FORCE
 1. No pull request, ever; push only `lane/close-7-2026-11-24*` by the local branch's own name, `git ls-remote` first, only when

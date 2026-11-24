@@ -68,6 +68,8 @@ for (const row of PLAN) {
     const config = row.config ? m.birthConfig(row.config) : m.configOf(row, m.DEFAULT_CONFIG, m.birthConfig);
     let town = m.generateSettlementPipeline(config, null, { seed: row.seed, customContent: {} });
     const recordHash = sha(town);
+    // `--subst=<json>` (a measure only): [[from, to], …] replaced in every string of the born record before the page is composed
+    if (process.env.PAGE_BATTERY_SUBST) { let j = JSON.stringify(town); for (const [f, t] of JSON.parse(process.env.PAGE_BATTERY_SUBST)) j = j.split(f).join(t); town = JSON.parse(j); }
     town = m.withPublicProse(town, m.composePublicProse(town));
     mocks.store = m.storeFor(town, vi.fn);
     const { container } = render(createElement(m.OutputContainer, { settlement: town }));
