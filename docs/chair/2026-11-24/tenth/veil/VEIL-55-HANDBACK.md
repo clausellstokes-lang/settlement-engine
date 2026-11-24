@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 22:45 UTC)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 22:51 UTC; was 22:45 UTC)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -17,6 +17,18 @@ code `lane/veil-55-2026-11-24-r4ids-wip` = 8430edf5c (VEIL-50's r4ids-wip, uncha
 FIRST LINE TO THE CHAIR SENT 22:42 (four points: the machine was lost with VEIL-50's container; leave asked to read
 START-VEIL-42 (6) for "STOP 1 and the catalogue" and "the stored arm"; the quiet-box items kept before "TIP?" unless cut; "one new
 pool" read as chain0's pool.sh). Lines to VEIL-51, 52, 53 sent 22:42 ("the lane's owner is VEIL-55").
+
+THE CHAIR'S WORD OF 22:48 (the account's weekly allowance at its WARNING level; resets 2026-12-01 15:00 UTC; a stop may come
+without notice): push at every result and at least every 45 minutes; partial results of any run over 20 minutes in a pushed file
+(`v55/save.sh loop`, detached, copies the step logs and tables to `v55/out/` and pushes every 30 minutes; log
+`/var/tmp/v55/save.log`); UNIT 2 TO "TIP?" BEFORE ANYTHING ELSE. VEIL-54 NOT SEATED until the allowance is clear: unit 5 unstaffed.
+PP (VEIL-52's owner measure): the chair gave the word; I asked one path fixed (MEAS_COMMON); its result comes to both of us.
+N115 RULED (the doors' ~0.2 s does not hold the release); READ-COST (the gallery door's 4.7 s at 840 rows, master's own tile join)
+is a finding: if a cure is ruled it edits 212's read, a unit of mine.
+
+A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci` in a checkout of
+`lane/veil-55-2026-11-24-r4ids-wip` (= 8430edf5c), worktrees as "TREES AND MACHINE" below, then
+`sh v55/m0.sh` and `sh v55/p1.sh` (paths inside them), each detached; read `v55/out/` on this branch for what had finished.
 
 ### UNIT 2 (R4-IDS with R4I-SQL-2)
 - READ WHOLE BY ME (22:4x): 212 :: `_gallery_veil_roster_choices`, `_gallery_veil_rekey` (with its carriers and
