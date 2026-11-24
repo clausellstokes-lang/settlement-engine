@@ -110,6 +110,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
@@ -1982,8 +1983,11 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       { source: 'Fishing', percentage: 25, weight: 28.75, desc: 'The catch.' },
       { source: 'Crafts', percentage: 16, weight: 18.4, desc: 'Workshops.' },
     ];
+    // the stored income-mix rung's words are DRAWN FROM THEIR SOURCE (DS-ECO-12, one source carries the town, vid 2), never
+    // written here as a literal (proseDrawnAnchors); only its marker `gmix1` is searched on a served read
+    const GMIX = variantByVid({ leaf: 'economy', blockId: 'DS-ECO-12', poolKey: 'INCOME MIX: one source carries the town', vid: 2, slots: { settlement: 'Guildless' } });
     const PROSE = { v: 'pp-1', blocks: {
-      'general:overview': { incomeMix: { text: 'gmix1 the town depends on one source of income' }, kother: { text: 'kother an overview rung' } },
+      'general:overview': { incomeMix: { text: `gmix1 ${GMIX}` }, kother: { text: 'kother an overview rung' } },
       'economy:economics': { incomeMix: { '@': 'general:overview' }, criminalLine: { text: 'gcl1 the guild takes its cut' }, tradeProfile: { text: 'ktrade a trade rung' } },
       'economy:print': { criminalLine: { '@': 'economy:economics' } } } };
     /** largest remainder, the brief's rule, written here on its own */
