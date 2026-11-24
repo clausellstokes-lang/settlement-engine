@@ -226,3 +226,27 @@ owner's list of decisions (he is told and may say otherwise). A maker who shares
 in the share dialog, where he sees it.
 STILL OWED BY VEIL-52: the second pass, THE IMPORT DOOR on the same unmarked rows (I minus P, I minus S); then READ-COST's
 one run (the list reads).
+
+## RULING V9 (added 23:10 UTC on 2026-11-24): V8's WORDS CORRECTED ON VEIL-55's POINT; THE LIVE PAGES ARE TWO GROUPS; "PP-TODAY" ORDERED
+VEIL-55 (23:05 UTC), read only, and RIGHT: PP's server was the TIP's template (v28tpl: 001..211 and the tip's 212), whose
+`_gallery_veil` already runs the roster choices and withhold-always on an UNMARKED body. So PP's (a) = 0 says what an
+unmarked page is sent AFTER THIS RELEASE (the new server against the new browser). IT DOES NOT SAY WHAT THE LIVE SERVER
+SENDS TODAY. The chair missed this on its read of the probe (it read the loop, not which chain the template was) and had
+already told the owner V8's headline; that is refined to him the same hour.
+WHAT THE CHAIR THEN READ ON MASTER (CONFIRMED by read, db832c8926):
+ 1. No migration on master names the veil. `src/lib/gallery.js :: sanitizeDossier` runs
+    `projectShareVeil(toPublicSafe(source, ...), overrides)` IN THE BROWSER ALONE.
+ 2. `src/components/ShareToGallery.jsx:293` writes the veil marker on EVERY gallery export
+    (`writeShareVeil(memberOverrides, deltas, modeRecord(mode))`); `galleryVeil.js` first landed 2026-10-30.
+SO THE LIVE PAGES ARE TWO GROUPS:
+ - MARKED (exported since the veil reached the live site): TODAY the live server sends the public payload and only the
+   browser hides what the maker hid. AFTER THE RELEASE 212 veils them on the server, with no act by the maker. THE
+   RELEASE PROTECTS THESE. (The chair's A6 sentence "the release would protect new pages only" was WRONG.)
+ - UNMARKED (exported before the veil existed, never exported again): no maker ever hid anything on them by the veil.
+   After the release the server sends exactly what the page shows (PP's (a), measured on the tip). TODAY: NOT MEASURED.
+**V8's RULING STANDS FOR THE UNMARKED GROUP** (no default veil laid on them; A6 is no decision of the owner's).
+**"PP-TODAY" IS ORDERED of VEIL-52, ahead of the import pass:** master's chain (001..203) and master's client (the tree at
+db832c892), the same master-born 140, both Reveals, (a) only, on (U) an unmarked row and (M) a row marked as master's own
+export writes it. (M) is expected not to be empty: it is the size of what the live site sends today and hides only in
+the browser. (U) says whether master's SQL sanitiser sends anything master's browser projection strips; a secret, a hook
+or a DM note sent on a Reveal-off read there is said first and goes to the owner at once.

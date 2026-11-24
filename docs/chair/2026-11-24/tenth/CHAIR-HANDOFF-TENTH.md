@@ -761,3 +761,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   stay as they are; no default veil laid on them). The chair had told the owner the opposite of (a) in A6's row and in
   conversation: corrected to him at once, and his file re-sent. Owed by VEIL-52: the import door's pass; READ-COST's run.
   D10 added to `PRERELEASE-LIST.md` (R24i: the re-derivation's guard, the owner's decision, holds the release).
+- 2026-11-24 23:10 UTC · T56 · V8's WORDS CORRECTED (RULING V9): PP MEASURED THE STATE AFTER THE RELEASE, NOT TODAY's; THE LIVE PAGES ARE TWO GROUPS.
+  VEIL-55 caught it (PP's server was the tip's template); the chair confirmed on master by read (no migration there names
+  the veil; the browser alone veils; every gallery export since the veil landed, first commit 2026-10-30, writes the
+  marker). MARKED live pages: the release moves their hiding to the server, no act by the maker. UNMARKED: stay as they
+  are; after the release nothing is sent that the page does not show. "PP-TODAY" ordered of VEIL-52 (master's chain and
+  client; unmarked and marked rows; (a) only), ahead of the import pass. THE OWNER IS TOLD THE REFINEMENT at once: two
+  sentences of the chair's (A6's row, and "protects new pages only") were wrong as written. THE CHAIR'S LESSON: when it
+  reads a probe it reads WHICH CHAIN AND WHICH TREE the run stands on, before the loop.
