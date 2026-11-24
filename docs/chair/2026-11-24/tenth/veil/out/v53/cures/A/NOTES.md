@@ -1,0 +1,3 @@
+# V53 cures UNIT A: builder notes (partial, written as the work goes)
+- 23:17 UTC: worktree /home/user/cures53 cut at ba7460c33 on lane/veil-53-2026-11-24-cures-wip; node_modules and .husky/_ symlinked from /home/user/join53.
+- Plan: `governanceAccount.js :: legitimacyCausesOf` names no cause on a breakdown that is not whole (any of prosperity, safety, defense, food missing or not a finite number); `governanceAccountOf`'s `onIt` turns only on a whole breakdown. Tests re-stated per the ruling; the "shared" read re-pointed at the read the server sends (the default veil, which runs `withholdAlways`), since plain `toPublicSafe` keeps the terms.
