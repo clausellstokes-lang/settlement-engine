@@ -741,3 +741,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   row's tile to serve one page: 69 ms at 1 public row, 4.7 s at 840, local); PP READ BY THE CHAIR AND RUNNING, with an
   import-door pass added. POINT 115's helper is in its last gate step (f); by its files dark equality holds and the
   register's diff is within the owner's yes.
+- 2026-11-24 22:59 UTC · T54 · A SAVED PLACE IS REBUILT BY THE NEW ENGINE ON ONE LIVE ACT: THE OWNER'S DECISION, AND IT HOLDS THE RELEASE.
+  `read/RULING-R24.md` R24i has the whole of it: CLOSE-7's MASTER-REDERIVE (180 of 180 master-born saves move under the
+  line's re-derivation with an empty layer; 12 of 1,804 people keep their name; master's own control 0 of 180); the
+  chair's read (the line's law-1 engine is not master's: the golden was re-recorded at each close round;
+  `GENERATOR_VERSION` '0.9.0' on both; the one live path is `applyRosterDecreesAtTick`, a newcomer by decree at a tick).
+  R24f's corrections leaf is WITHDRAWN. One measure owed by CLOSE-7 (the live path as it runs, pins held). THE OWNER IS
+  ASKED: the chair's lean is "a place is re-derived only by the engine that bore it; else the newcomer is appended". NOT
+  BUILT until he answers.
+  ALSO: R24h: A2's rise (one price grievance on 0.37 of metropolises) cured by reversing R24a: a place the page prints as
+  fed has no food grievance; A2 merges on that and its two fixes. VEIL-55's four questions answered (22:59): VEIL-50's
+  red and green rows stand; leave to read START-VEIL-42 (6); the quiet-box items after the grant; one new pool, both
+  gates. VEIL-51 reported its compaction at 22:49 and what it holds (unit 1; `-c2-wip` ced3b1de7; t140 and st140 L1
+  0 of 3,360; sm140 352 of 3,360 = N106 exactly). PP: VEIL-55 had asked VEIL-52 one fix (pp.sh's MEAS_COMMON path).

@@ -194,3 +194,51 @@ THE SEAT OF IT IS THE RE-DERIVE, NOT THE CURE: every cure that moves what a plac
    and pushed; a third summary before its hand-in seats a successor on that hand-back.
 ITS NEW GUESS FOR "CLOSE-7 <commit>": 08:30 UTC on 2026-11-25 (the measure of master-born places to about 00:15; the
 corrections law's leaf 02:15; B1(i) 03:15; B1(ii) 04:45; C1 06:15; the landing branch 08:30).
+
+## R24h (added 22:59 UTC on 2026-11-24): A2's RISE; R24a's PRICE-ONLY KEEP IS REVERSED ON THE MEASURE
+CLOSE-7's A2 as built (`lane/close-7-2026-11-24-a2-wip` c92a301fa; read by the chair: `src/domain/dailyLife.js ::
+fareBandOf`, the one derivation the fare, Dawn Work's food branch, the food visitor lens and the food grievance read):
+FOODSEC C 197 to 0, V 168 to 0; pages moved C 211, V 223; born records moved 0; goldens none. Its table matches R24d's
+bounds cell by cell. THE RISE IT REPORTED: under R24a a place the page prints as fed, with production strained, kept the
+three price-only food grievances (F0, F6, F8, each gated on a market); the slot's commonest sentence then rose to C city
+0.23 and metropolis 0.37, V city 0.21 and metropolis 0.32 (the bar is 0.15). THE CAUSE IS THE RULING, NOT THE BUILD: a
+metropolis fed by trade is the common case, so "production strained, page Secure" is about four metropolises in ten.
+**RULED:** A PLACE THE PAGE PRINTS AS FED HAS NO FOOD GRIEVANCE. `deriveCommonerResentments` pushes 'food' only where
+`GRIEVANCE_BANDS.includes(fareBandOf(s, ctx))`; `PRICE_ONLY_FOOD_GRIEVANCES` and its filter are removed. WHY: no record
+holds a price; a complaint about one on a third of big cities is drama the place does not hold (the owner's rule: "Don't
+invent drama capitalize on what's already there if it's there"), and it breaks the sameness bar he asked to have cured.
+NO NEW LINES are authored. OWED WITH THE MERGE: the slot's commonest-sentence share by size, C and V, before and after;
+the pages whose resentments slot is empty, before and after; FOODSEC 0. An empty slot that leaves a heading over nothing
+is said, not cured in A2. THE CHAIR'S OWN LESSON, AGAIN: R24a kept a signal without counting where it would print.
+
+## R24i (added 22:59 UTC on 2026-11-24): MASTER-REDERIVE; THE CORRECTIONS LEAF IS WITHDRAWN; THE OWNER'S DECISION
+CLOSE-7's measure (`close-7/reports/MASTER-REDERIVE.md`; CONFIRMED by its runs): 30 places a size born by master's engine
+(db832c892), saved in master's shape, loaded by the line's own path, re-derived on f9531eb3a through `dmLayer.rederive`
+with an EMPTY layer and carried forward: 180 OF 180 MOVE. People keeping their name: 12 of 1,804. Places of 30 that move,
+by houses / people / powers / government name / events: thorp 6/30/5/0/10; hamlet 7/30/14/0/13; village 11/30/9/0/16; town
+13/30/3/1/5; city 16/30/15/6/11; metropolis 12/30/5/0/8. CONTROL: master re-deriving its own saves moves 0 of 180.
+WHAT THE CHAIR READ ITSELF (CONFIRMED by read, on the line at a3721fc83f and master db832c8926):
+ 1. THE CAUSE IS NOT THE LAWS. The line's law-1 engine is not master's engine: `tests/fixtures/generator-golden-master.json`
+    was re-recorded through the signed door at each close round (2026-11-15 to 19; all 525 rows differ from master's);
+    `tests/fixtures/x46-npc-band-dark-digests.json` re-keyed six times. One changed draw re-deals all that follows.
+ 2. `src/domain/settlement.schema.js :: GENERATOR_VERSION` is '0.9.0' on master AND on the line: every record carries
+    `generatorVersion`, and it cannot say which engine bore it.
+ 3. THE LIVE PATH IS ONE, and it is on master too: `src/store/campaignAdvanceSession.js` calls
+    `editSlice.js :: applyRosterDecreesAtTick` (a newcomer added by decree, applied at a campaign tick), which calls
+    `settlementRederiveAction.js :: regenerateWithLayer`, which runs the WHOLE pipeline (`dmLayer.js :: rederive`:
+    `run(config', null, { seed, pins })`) and writes `carryForward(live, derived)`: the derived record wins every key it
+    holds. On master the engine reproduces the place, so the DM sees the newcomer and nothing else. After this release the
+    same act on a place made before it rebuilds the place by the new engine. IN THAT PATH THE LAYER HOLDS THE NEWCOMER'S
+    ROW, so its pins are not empty: INFERRED from `editSlice.js`'s own comment (the roster collection is cloned from the
+    record and held), NOT YET MEASURED: the people would be held and everything around them rebuilt.
+**RULED:** (a) R24f's CORRECTIONS LEAF IS WITHDRAWN: no marker of ours protects a master-born place on a full
+re-derivation, and every live place is master-born. B1(i) stays as built, plain; R24e's "saved-place paths" item is
+dropped; B1(ii) and C1 are built plain. R24f's RULE STANDS AS A RULE (a cure that changes what a place holds reaches only
+places born after it): it is to be kept by ONE guard on the re-derivation, not by a marker a cure. (b) ONE MEASURE OWED
+(CLOSE-7, a fresh builder): the live path as it runs: the same 180, one roster decree each, in
+`applyRosterDecreesAtTick`'s own shape; the same columns plus people who keep their name and people whose house or power
+is gone; control on master. (c) THE CURE IS THE OWNER'S DECISION (a ruled design re-decided: the edit model's design 14,
+"consequence by design"; rule 10, rule 17) AND IS NOT BUILT. THE CHAIR'S LEAN, to be put to him in plain words: the
+engine's version goes up with this release (an existing field, no new stored shape); a place is re-derived only by the
+engine that bore it; for any other place a decree's newcomer is appended and nothing else moves, which is what a DM sees
+today. IN THE CHAIR'S JUDGMENT THIS HOLDS THE RELEASE until he has answered.
