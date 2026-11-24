@@ -57,7 +57,8 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   `/var/tmp/v51/out/lc/`): the walker 6/6; HandRows whole 25/25; eslint 0; `tests/lint` whole 24 of 3,280 in 16 files;
   `tests/copy` whole 2 of 172 (voiceMechanics). "LINT CURED d7764e67a" sent to VEIL-55 and the chair (23:47).
   VEIL-55's order: it merges this branch itself after "R4-IDS MERGED" (212's header item becomes (37)), then re-runs its slice.
-  UNIT 1 IS DONE ON MY SIDE. NOTHING RUNNING.
+  UNIT 1 GRANTED FOR MERGE at d7764e67a by VEIL-55 (23:50, its read: no fault); it merges after "R4-IDS MERGED". NOTHING
+  OWED BY ME FOR UNIT 1. NOTHING RUNNING.
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
   PART 47 s1 block 0 (2787f454c) first; step (1): a worktree on `lane/veil-51-2026-11-24-r5desc-wip` from aa54a6791, plain
   merges of b58abc48b and the named tip. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
