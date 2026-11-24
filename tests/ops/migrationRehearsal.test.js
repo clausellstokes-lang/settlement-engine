@@ -497,7 +497,7 @@ describe('bounded migration rehearsal plan', () => {
       id: 'close-visitor-reach',
       from: 211,
       to: 211,
-      expectedObjects: [{ kind: 'function', name: '_surveyor_byok_secret' }],
+      expectedObjects: [{ kind: 'function', name: '_surveyor_byok_secret' }, { kind: 'function', name: '_guard_server_owned_columns' }],
     });
     const closeReachWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 211);
     expect(closeReachWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
