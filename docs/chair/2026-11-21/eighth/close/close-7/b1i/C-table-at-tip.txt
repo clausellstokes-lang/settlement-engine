@@ -1,0 +1,26 @@
+births rendered 900 of 900; patterns applied 24 (PAGE_CENSUS_ROWS of /home/user/wt/b1i); fewest views in a birth 22; births with a check that threw 0
+row         thorp hamle villa  town  city metro    all  three seeds
+P2siege         0     0     0     0     0     0      0  
+P3source        0     0     0     0     0     0      0  
+P4              0     0     0     0     0     0      0  
+P5false         0     0     0     0     0     0      0  
+P5b             0     0     0     1     0     0      1  dp-town-143
+P6need          0     0     0     0     0     0      0  
+P7a             0     0     0     0     0     0      0  
+P7b             0     0     0     0     0     0      0  
+P8any          19    41     0     0     0     0     60  dp-thorp-3 dp-thorp-14 dp-thorp-43
+P9              0     0     0     0     0     0      0  
+P10             0     0     0     0     0     0      0  
+P11             0     0     0     0     0     0      0  
+F4              0     0     0     0     0     0      0  
+P13             0     0     0     0     0     0      0  
+P14             0     0     1     0     0     0      1  dp-village-33
+P16three        0     7    26   108    73   134    348  dp-hamlet-2 dp-hamlet-42 dp-hamlet-64
+P16powers       0     0     0     0     0     0      0  
+P17             3     0   150   150   150   150    603  dp-thorp-1 dp-thorp-11 dp-thorp-38
+P18             0     0     0   150   128   141    419  dp-town-0 dp-town-1 dp-town-2
+P19             0     0     0     0     0     0      0  
+P20             0     0     0     0     0     0      0  
+NEW1            0     0     0     0     0     0      0  
+NEW2            0     0     0     0     0     0      0  
+B1land          0     0     0     0     0     0      0  

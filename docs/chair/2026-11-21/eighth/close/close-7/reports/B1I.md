@@ -49,8 +49,9 @@ The three tests of the function red because the module is missing. The positive 
 
 The 27 V places that move are **exactly** the 27 desert places that held a withheld house with nothing to give its thing (READ-25's
 table, recomputed: set difference 0). Every other place is byte-identical, the 25 other desert places among them. Every other battery
-row's count by size is equal. (These runs were made before a line-only re-layout of `assembleInstitutions.js`, done for the prose
-numerics ratchet. The same two runs at the committed tip are in the hand-back line below.)
+row's count by size is equal. **Re-run at the committed tip 9d0f85e01** (after a line-only re-layout of `assembleInstitutions.js`
+for the prose numerics ratchet): C record 0, page 0, rows 0; V record 27, page 27, rows 0, the same 27 seeds (CONFIRMED;
+`close-7/b1i/{C,V}-diff-at-tip.txt`, `{C,V}-table-at-tip.txt`).
 
 **THE DRAW IS UNMOVED (CONFIRMED by the record's own trace, `read25/twin-diff.census.jsx` over the 27).** The `assembleInstitutions`
 step selected exactly the same houses on both trees, minus the withheld ones: Fish market 24, Sawmill (commercial) 15, Charcoal burner
