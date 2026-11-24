@@ -19,10 +19,14 @@
 - OWED, RED: `tests/lint/tuningRegister.walker.test.js` "dependents moved" (troubleLaw.js gains the pipeline as a
   dependent; no value moved): the refreeze door was REFUSED by the builder's permission check; the refusal stands and
   is reported to the chair (the chair's hand or ruling).
-- UNITS 4 and 5: brief `briefs/K5-PROOF.md`, builder next, from 6fd1f58cd.
-- K3 step 0's proof (2) (900/900 against `out/law2-B50.jsonl`) is history (the chair, 18:47): unit 4 proves dark
-  equality against the LINE on both corpora; unit 5 measures afresh.
-- NEXT: K5-PROOF's builder; then COMMON-EIGHTH 14's runs and "KINDS <commit>".
+- UNITS 4 and 5 DONE: merged 2af21128d (builder `-k5` @ 8f76072f6). DARK PROOF lane bc9fbf495 vs line f03e9a868 by
+  record sha256: census 900/900, visitor 900/900 (re-counted by the seat). The measure: `out/k5/measure-*.md`;
+  `FOR-THE-OWNER.md` re-written in plain words (486a47165).
+- OWED, RED BY NAME (the chair's ruling 19:44): tuningRegister "dependents moved": its door refused by a permission
+  check ("[Undermining Oversight]"); nobody on the lane runs it; the owner is asked.
+- UNIT 6 IN FLIGHT: COMMON-EIGHTH 14's run (tests/lint, copy, store, architecture, docs whole + 85 files naming the
+  changed files/symbols), then the build + VERIFY_DIST tests/build, then "KINDS <commit>".
+- NEXT: read the run's reds by name against RED-AT-LINE.tsv; build; landing line.
 
 # KINDS-2 hand-back (the lane "which troubles a place is born with", re-opened 2026-11-24)
 
