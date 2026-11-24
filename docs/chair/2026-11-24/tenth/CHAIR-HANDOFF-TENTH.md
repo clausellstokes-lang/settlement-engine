@@ -606,3 +606,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   bangs inside name-matching PATTERNS of two veil files) are cleared by writing those characters by code point, ON
   TERMS: a comment saying why; equality proved by a committed test (as strings; and for the one pattern whose text
   changes, over every code point); the server's fold untouched. NO BASELINE MOVED AND THE WALKER NOT EDITED.
+- 2026-11-24 21:52 UTC · T44 · "KINDS 2382c55d5" (21:50 UTC): THE TROUBLES RULE IS HANDED IN, DARK. The lane holds the line at point
+  114; K3 finished; the law joined to the others in their form and switched off (the fifth row of `GENERATION_LAWS`,
+  its clamp and mint, `withRecordTroubleLaw` curing the legacy shape; one born pin); its page for the owner in plain
+  words. ITS DARK PROOF: by record hash, census 900 of 900 and visitor 900 of 900 against the line. ITS MEASURE, lit
+  only by the instrument (today to the draft table, census and visitor): the guild quarrel in towns 37 to 21 and 32
+  to 18 per cent, cities 52 to 27 and 48 to 31, metropolises 47 to 33 and 47 to 31; the crime wave in cities 46 to
+  22 and 40 to 27, metropolises 56 to 32 and 60 to 31; NO PLACE GAINS A TROUBLE (8 of 1,800 lose one); a calm place
+  stays calm. ITS RUNS: 9 red: the list's 8 and the owed register row. SIZES: first paint +58 raw, +21 gzip, +77
+  Brotli; the worker +1,321; the engine chunk +152: named for the owner's size signing. THE CHAIR READ the law's
+  edges in the diff (the three numbers changed in place to calls that return today's numbers while the dial is
+  dark; no extra draw under law 1) and the lane's page for the owner whole: it is right and plain.
+  THE LANDING OF POINT 115 STARTS (`prompts/START-LAND-115.txt`; the helper LAND-115 in the chair's container; base
+  f9531eb3a): (1) DARK EQUALITY BY AN INSTRUMENT THAT IS NOT THE LANE'S: the repository's golden corpus, 525
+  configurations hashed the old way and through `birthConfig`, at the base and at the merged tree: 1,050 hashes that
+  must be equal; (2) THE TUNING REGISTER'S DOOR, ONCE, BY THE OWNER'S "Then yes", quoted in the helper's message with
+  its bounds; if the helper's own check refuses it, the chair runs that one command itself; THE CHAIR READS THE
+  REGISTER'S DIFF BEFORE THE LINE MOVES; (3) the gate. KINDS-2 IS DONE (its mark read 427,031). AFTER THE LANDING:
+  VEIL-54 is seated, and the rule's numbers go to the owner for his one yes.
