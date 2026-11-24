@@ -319,3 +319,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   change it:** the veil's plan asking for more seats than are free: then the veil goes first (it gates the release)
   and this seat waits at a commit boundary. THE LAW IS NOT LIT BY ANY SEAT OR BY THE CHAIR: its numbers are a draft
   table the owner signs. (d) FIVE CHILDREN: CLOSE-7, GRANTS-1, the reader (waiting), VEIL-50, KINDS-2.
+- 2026-11-24 18:11 UTC · T23 · (a) CI's RUN ON POINT 113 IS READ BY NAME (owed by T20): run 45447505633 (number 1291) on
+  f03e9a868: FAILURE as on every tip of the pull request; THE FAILING TESTS ARE THE LIST'S 61 ROWS AND NO OTHER (the
+  ratchet 39 of 42,740; build and dist 13; the coverage floors 8; the golden master under tr_TR 1); none new, none
+  cured; `provenanceMap` is green in CI, so its red at the landing was the landing machine's (T20 confirmed). The
+  words are in `ci/LINE-NOW.md`. (b) KINDS-2 IS SEATED: session_019yED1SGhZvpnBUMusPH927 (made 18:10 UTC; source
+  `lane/kinds-1-2026-11-20` with 2,000 commits of history, so that its merge of the line finds the common commit).
+  (c) VEIL-50 ANSWERED: chain C is one item with its proof owed; a predecessor's -wip is unread, unproven work; it is
+  told one more veil seat fits beside it until the grants lane hands in, then two. (d) THE HOURLY CHECK IS RE-ARMED.
