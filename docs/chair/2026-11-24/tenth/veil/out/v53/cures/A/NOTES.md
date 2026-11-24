@@ -5,3 +5,5 @@
 - committed 8067faafb (green 35/35). Next: governing files, tests/lint whole.
 - governing: 25 test files (28 incl. 3 JSON registers): 23 pass, 2 red pre-existing at ba7460c33 (publicProseEquality daily_life soak1k-1/7/8, same 3 on the base tree, base-publicProseEquality.log; recentConflictReaders.walker = trial join red (5)). Next tests/lint whole.
 - tests/lint whole running (background), log /var/tmp/v53/cures/A/lint.txt, json lint.json.
+- tests/lint whole: 232 files, 66 failed / 3376 passed; the 66 failing titles equal /var/tmp/v53/grants/lintfails.txt (66, titles matched by prefix since that list truncates); NEW: none (/var/tmp/v53/cures/A/lintfails.txt).
+- DONE: commit 8067faafb on lane/veil-53-2026-11-24-cures-wip (not pushed).
