@@ -1,0 +1,957 @@
+seed	size	terrain	route	house	lives on	source	terrain factor	native nearby resources
+dp-hamlet-1	hamlet	coastal	port	Dairy farmer	pasture	generated	1.95	fishing_grounds,salt_flats,magical_node
+dp-hamlet-1	hamlet	coastal	port	Mine (open cast)	ore	generated	1.50	fishing_grounds,salt_flats,magical_node
+dp-hamlet-4	hamlet	plains	crossroads	Salt works	salt	generated	1.30	hunting_grounds,crossroads_position,iron_deposits
+dp-hamlet-5	hamlet	plains	crossroads	Stone quarry	stone	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits
+dp-hamlet-7	hamlet	coastal	port	Shepherd	pasture	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins
+dp-hamlet-9	hamlet	hills	road	Peat cutter	peat	generated	0.90	foraging_areas,ancient_grove,gemstone_deposits
+dp-hamlet-23	hamlet	coastal	port	Dairy farmer	pasture	generated	1.95	deep_harbour,shipbuilding_timber,magical_node,ancient_ruins
+dp-hamlet-27	hamlet	plains	river	Salt works	salt	generated	1.30	hunting_grounds,hot_springs,coal_deposits,stone_quarry
+dp-hamlet-38	hamlet	desert	road	Peat cutter	peat	generated	1.80	camel_herds,date_palms,grain_fields,ancient_grove,gemstone_deposits
+dp-hamlet-43	hamlet	plains	crossroads	Charcoal burner	timber	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,gemstone_deposits
+dp-hamlet-49	hamlet	hills	road	Peat cutter	peat	generated	0.90	grain_fields,ancient_grove,precious_metals
+dp-hamlet-55	hamlet	riverside	river	Mine (open cast)	ore	generated	1.30	river_mills,grain_fields,hot_springs,coal_deposits
+dp-hamlet-59	hamlet	hills	road	Salt works	salt	generated	0.90	grazing_land,ancient_grove,coal_deposits
+dp-hamlet-65	hamlet	coastal	port	Dairy farmer	pasture	cascade	1.95	fishing_grounds,salt_flats,magical_node
+dp-hamlet-71	hamlet	coastal	port	Shepherd	pasture	generated	1.50	deep_harbour,salt_flats,magical_node
+dp-hamlet-71	hamlet	coastal	port	Dairy farmer	pasture	generated	1.95	deep_harbour,salt_flats,magical_node
+dp-hamlet-82	hamlet	plains	road	Charcoal burner	timber	generated	1.30	grain_fields,ancient_grove,precious_metals
+dp-hamlet-82	hamlet	plains	road	Peat cutter	peat	cascade	1.30	grain_fields,ancient_grove,precious_metals
+dp-hamlet-83	hamlet	plains	crossroads	Peat cutter	peat	generated	1.30	foraging_areas,crossroads_position,iron_deposits
+dp-hamlet-83	hamlet	plains	crossroads	Salt works	salt	generated	1.30	foraging_areas,crossroads_position,iron_deposits
+dp-hamlet-91	hamlet	mountain	road	Peat cutter	peat	generated	0.70	mountain_timber,alpine_pasture,managed_forest,defended_pass,stone_quarry
+dp-hamlet-95	hamlet	coastal	river	Dairy farmer	pasture	cascade	1.95	fishing_grounds,foraging_areas,ancient_grove,coal_deposits
+dp-hamlet-102	hamlet	desert	road	Shepherd	pasture	generated	0.90	date_palms,desert_salt,hunting_grounds,ancient_grove,iron_deposits
+dp-hamlet-102	hamlet	desert	road	Dairy farmer	pasture	generated	0.72	date_palms,desert_salt,hunting_grounds,ancient_grove,iron_deposits
+dp-hamlet-108	hamlet	plains	river	Hunter's lodge	game	generated	1.30	managed_forest,hot_springs,coal_deposits
+dp-hamlet-109	hamlet	coastal	port	Dairy farmer	pasture	generated	1.95	fishing_grounds,shipbuilding_timber,magical_node
+dp-hamlet-110	hamlet	plains	crossroads	Peat cutter	peat	generated	1.30	hunting_grounds,crossroads_position,iron_deposits,grazing_land
+dp-hamlet-110	hamlet	plains	crossroads	Salt works	salt	generated	1.30	hunting_grounds,crossroads_position,iron_deposits,grazing_land
+dp-hamlet-113	hamlet	coastal	port	Dairy farmer	pasture	cascade	1.95	fishing_grounds,salt_flats,magical_node
+dp-hamlet-116	hamlet	desert	road	Dairy farmer	pasture	cascade	0.72	oasis_water,date_palms,salt_flats,ancient_grove,coal_deposits
+dp-hamlet-126	hamlet	plains	river	Charcoal burner	timber	generated	1.30	foraging_areas,ancient_grove,iron_deposits,stone_quarry
+dp-hamlet-134	hamlet	plains	road	Hunter's lodge	game	generated	1.30	foraging_areas,ancient_grove,iron_deposits,managed_forest
+dp-hamlet-136	hamlet	desert	road	Hunter's lodge	game	generated	1.80	desert_salt,date_palms,managed_forest,ancient_grove,coal_deposits
+dp-hamlet-138	hamlet	plains	road	Peat cutter	peat	generated	1.30	grazing_land,ancient_grove,iron_deposits
+dp-hamlet-138	hamlet	plains	road	Salt works	salt	generated	1.30	grazing_land,ancient_grove,iron_deposits
+dp-hamlet-138	hamlet	plains	road	Hunter's lodge	game	generated	1.30	grazing_land,ancient_grove,iron_deposits
+dp-hamlet-138	hamlet	plains	road	Stone quarry	stone	cascade	1.30	grazing_land,ancient_grove,iron_deposits
+dp-hamlet-141	hamlet	coastal	port	Shepherd	pasture	cascade	1.50	deep_harbour,shipbuilding_timber,magical_node
+dp-hamlet-146	hamlet	plains	road	Hunter's lodge	game	generated	1.30	managed_forest,ancient_grove,precious_metals
+dp-village-3	village	hills	isolated	Wildfowler	wildfowl	generated	0.90	foraging_areas,ancient_grove,stone_quarry,iron_deposits,hot_springs
+dp-village-4	village	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-village-8	village	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,coal_deposits
+dp-village-8	village	plains	road	Sawmill	timber	generated	2.34	grain_fields,ancient_grove,coal_deposits
+dp-village-9	village	hills	crossroads	Wildfowler	wildfowl	generated	0.90	grain_fields,crossroads_position,stone_quarry
+dp-village-13	village	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,stone_quarry,grain_fields
+dp-village-15	village	hills	road	Brickmaker	clay	generated	0.90	marshlands,ancient_grove,coal_deposits,grain_fields
+dp-village-17	village	coastal	port	Dairy farmer	pasture	cascade	1.95	fishing_grounds,shipbuilding_timber,ancient_ruins
+dp-village-18	village	plains	road	Sawmill	timber	generated	2.34	marshlands,ancient_grove,precious_metals,coal_deposits,iron_deposits
+dp-village-18	village	plains	road	Charcoal burner	timber	cascade	1.30	marshlands,ancient_grove,precious_metals,coal_deposits,iron_deposits
+dp-village-20	village	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits
+dp-village-22	village	coastal	river	Shepherd	pasture	generated	1.50	fishing_grounds,managed_forest,hot_springs,iron_deposits
+dp-village-28	village	riverside	river	Salt works	salt	generated	1.30	river_mills,hunting_grounds,ancient_grove,coal_deposits
+dp-village-32	village	forest	river	Salt works	salt	cascade	1.00	foraging_areas,ancient_grove,coal_deposits
+dp-village-33	village	riverside	crossroads	Salt works	salt	generated	1.30	river_fish,hunting_grounds,crossroads_position,stone_quarry,grain_fields
+dp-village-34	village	mountain	road	Potter	clay	generated	0.70	mountain_timber,alpine_pasture,foraging_areas,ancient_grove,gemstone_deposits
+dp-village-35	village	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,coal_deposits,foraging_areas,marshlands
+dp-village-39	village	coastal	port	Mine	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins
+dp-village-39	village	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins
+dp-village-40	village	hills	crossroads	Fish market	fish	generated	0.90	foraging_areas,crossroads_position,iron_deposits
+dp-village-48	village	riverside	river	Salt works	salt	generated	1.30	river_fish,grazing_land,ancient_grove,stone_quarry,river_clay
+dp-village-57	village	hills	isolated	Potter	clay	generated	0.90	managed_forest,hot_springs,coal_deposits,ancient_grove
+dp-village-58	village	coastal	port	Shepherd	pasture	cascade	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-village-62	village	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,stone_quarry,hunting_grounds,foraging_areas
+dp-village-62	village	hills	road	Wildfowler	wildfowl	generated	0.90	managed_forest,ancient_grove,stone_quarry,hunting_grounds,foraging_areas
+dp-village-65	village	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,coal_deposits,iron_deposits
+dp-village-67	village	desert	road	Fish market	fish	cascade	1.80	oasis_water,desert_salt,managed_forest,ancient_grove,gemstone_deposits
+dp-village-71	village	riverside	river	Stone quarry	stone	generated	1.30	river_fish,foraging_areas,hot_springs,iron_deposits
+dp-village-72	village	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,coal_deposits
+dp-village-72	village	hills	road	Wildfowler	wildfowl	cascade	0.90	hunting_grounds,ancient_grove,coal_deposits
+dp-village-76	village	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,stone_quarry,managed_forest,coal_deposits
+dp-village-78	village	riverside	river	Mine	ore	generated	1.30	river_fish,grain_fields,hot_springs,coal_deposits
+dp-village-80	village	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,coal_deposits
+dp-village-80	village	plains	crossroads	Hunter's lodge	game	generated	1.30	grazing_land,crossroads_position,coal_deposits
+dp-village-80	village	plains	crossroads	Mine	ore	cascade	1.30	grazing_land,crossroads_position,coal_deposits
+dp-village-82	village	mountain	road	Fish market	fish	generated	0.70	alpine_pasture,hot_springs_mineral,marshlands,defended_pass,gemstone_deposits
+dp-village-85	village	riverside	road	Salt works	salt	generated	1.30	river_fish,grain_fields,ancient_grove,precious_metals,hunting_grounds
+dp-village-89	village	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,iron_deposits,coal_deposits
+dp-village-89	village	hills	road	Fishmonger	fish	cascade	0.90	grazing_land,ancient_grove,iron_deposits,coal_deposits
+dp-village-91	village	plains	crossroads	Sawmill	timber	cascade	2.34	hunting_grounds,crossroads_position,stone_quarry,coal_deposits,grazing_land
+dp-village-93	village	mountain	road	Potter	clay	generated	0.70	alpine_pasture,hot_springs_mineral,managed_forest,defended_pass,stone_quarry
+dp-village-100	village	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,iron_deposits
+dp-village-100	village	plains	crossroads	Sawmill	timber	cascade	2.34	foraging_areas,crossroads_position,iron_deposits
+dp-village-101	village	plains	river	Sawmill	timber	cascade	2.34	marshlands,hot_springs,stone_quarry,ancient_grove
+dp-village-104	village	plains	crossroads	Sawmill	timber	generated	2.34	hunting_grounds,crossroads_position,gemstone_deposits,stone_quarry
+dp-village-107	village	hills	crossroads	Potter	clay	generated	0.90	grain_fields,crossroads_position,coal_deposits
+dp-village-110	village	hills	isolated	Brickmaker	clay	generated	0.90	managed_forest,hot_springs,coal_deposits,ancient_grove
+dp-village-111	village	riverside	road	Salt works	salt	generated	1.30	river_fish,marshlands,ancient_grove,iron_deposits,hunting_grounds
+dp-village-112	village	coastal	port	Dairy farmer	pasture	generated	1.95	fishing_grounds,salt_flats,ancient_ruins
+dp-village-112	village	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins
+dp-village-112	village	coastal	port	Potter	clay	cascade	1.50	fishing_grounds,salt_flats,ancient_ruins
+dp-village-114	village	plains	river	Peat cutter	peat	cascade	1.30	managed_forest,ancient_grove,stone_quarry
+dp-village-114	village	plains	river	Salt works	salt	cascade	1.30	managed_forest,ancient_grove,stone_quarry
+dp-village-116	village	plains	river	Salt works	salt	generated	1.30	grazing_land,ancient_grove,stone_quarry
+dp-village-118	village	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,coal_deposits,grazing_land
+dp-village-118	village	plains	crossroads	Charcoal burner	timber	generated	1.30	foraging_areas,crossroads_position,coal_deposits,grazing_land
+dp-village-120	village	forest	isolated	Potter	clay	generated	1.00	foraging_areas,ancient_grove,coal_deposits,managed_forest,hot_springs
+dp-village-122	village	plains	river	Salt works	salt	generated	1.30	grazing_land,ancient_grove,iron_deposits,marshlands,managed_forest
+dp-village-122	village	plains	river	Hunter's lodge	game	generated	1.30	grazing_land,ancient_grove,iron_deposits,marshlands,managed_forest
+dp-village-124	village	mountain	road	Fishmonger	fish	generated	0.70	alpine_pasture,mountain_timber,foraging_areas,ancient_grove,gemstone_deposits
+dp-village-126	village	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,stone_quarry,gemstone_deposits,coal_deposits
+dp-village-127	village	forest	isolated	Potter	clay	generated	1.00	foraging_areas,hot_springs,precious_metals,hunting_grounds,iron_deposits
+dp-village-131	village	plains	crossroads	Fishmonger	fish	generated	1.30	foraging_areas,crossroads_position,iron_deposits,gemstone_deposits,hunting_grounds
+dp-village-131	village	plains	crossroads	Sawmill	timber	generated	2.34	foraging_areas,crossroads_position,iron_deposits,gemstone_deposits,hunting_grounds
+dp-village-131	village	plains	crossroads	Wildfowler	wildfowl	cascade	1.30	foraging_areas,crossroads_position,iron_deposits,gemstone_deposits,hunting_grounds
+dp-village-133	village	coastal	port	Peat cutter	peat	generated	1.50	deep_harbour,salt_flats,ancient_ruins
+dp-village-135	village	coastal	port	Peat cutter	peat	generated	1.50	deep_harbour,shipbuilding_timber,magical_node
+dp-village-135	village	coastal	port	Shepherd	pasture	cascade	1.50	deep_harbour,shipbuilding_timber,magical_node
+dp-village-138	village	plains	road	Charcoal burner	timber	generated	1.30	grain_fields,ancient_grove,iron_deposits
+dp-village-139	village	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins
+dp-village-143	village	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,precious_metals,ancient_ruins
+dp-town-0	town	riverside	road	Salt works	salt	generated	1.30	river_fish,marshlands,ancient_grove,gemstone_deposits
+dp-town-0	town	riverside	road	Hunter's lodge	game	generated	1.30	river_fish,marshlands,ancient_grove,gemstone_deposits
+dp-town-1	town	forest	road	Brickmaker	clay	generated	1.00	hunting_grounds,ancient_grove,gemstone_deposits,iron_deposits,coal_deposits,managed_forest
+dp-town-1	town	forest	road	Potter	clay	cascade	1.00	hunting_grounds,ancient_grove,gemstone_deposits,iron_deposits,coal_deposits,managed_forest
+dp-town-3	town	mountain	road	Fish market	fish	cascade	0.70	alpine_pasture,hot_springs_mineral,managed_forest,ancient_grove,gemstone_deposits
+dp-town-4	town	forest	road	Fish market	fish	generated	1.00	grain_fields,ancient_grove,iron_deposits,marshlands,stone_quarry
+dp-town-4	town	forest	road	Brickmaker	clay	generated	1.00	grain_fields,ancient_grove,iron_deposits,marshlands,stone_quarry
+dp-town-5	town	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,gemstone_deposits,hunting_grounds,marshlands,iron_deposits
+dp-town-5	town	plains	road	Charcoal burner	timber	generated	1.30	foraging_areas,ancient_grove,gemstone_deposits,hunting_grounds,marshlands,iron_deposits
+dp-town-5	town	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,ancient_grove,gemstone_deposits,hunting_grounds,marshlands,iron_deposits
+dp-town-8	town	plains	road	Fish market	fish	generated	1.30	foraging_areas,managed_forest,gemstone_deposits,coal_deposits,precious_metals,ancient_grove
+dp-town-9	town	hills	road	Fish market	fish	cascade	0.90	foraging_areas,ancient_grove,precious_metals,gemstone_deposits
+dp-town-10	town	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,stone_quarry,foraging_areas,gemstone_deposits,precious_metals
+dp-town-10	town	hills	road	Potter	clay	cascade	0.90	managed_forest,ancient_grove,stone_quarry,foraging_areas,gemstone_deposits,precious_metals
+dp-town-12	town	riverside	river	Stone quarry	stone	generated	1.30	river_fish,river_clay,hot_springs,coal_deposits,managed_forest
+dp-town-12	town	riverside	river	Salt works	salt	cascade	1.30	river_fish,river_clay,hot_springs,coal_deposits,managed_forest
+dp-town-14	town	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-town-14	town	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-town-17	town	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,precious_metals,managed_forest,marshlands,gemstone_deposits
+dp-town-20	town	hills	road	Fish market	fish	cascade	0.90	managed_forest,ancient_grove,iron_deposits,grain_fields
+dp-town-21	town	riverside	river	Salt works	salt	generated	1.30	river_mills,marshlands,ancient_grove,coal_deposits,iron_deposits
+dp-town-22	town	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,coal_deposits,precious_metals
+dp-town-23	town	forest	river	Salt works	salt	generated	1.00	grazing_land,hot_springs,stone_quarry,ancient_grove,coal_deposits
+dp-town-24	town	forest	road	Potter	clay	cascade	1.00	grazing_land,ancient_grove,precious_metals,magical_node,stone_quarry
+dp-town-25	town	riverside	road	Stone quarry	stone	generated	1.30	river_fish,hunting_grounds,ancient_grove,coal_deposits,grazing_land
+dp-town-27	town	riverside	road	Smelter	ore	generated	1.30	river_fish,grazing_land,ancient_grove,coal_deposits
+dp-town-28	town	riverside	river	Salt works	salt	generated	1.30	river_mills,fertile_floodplain,hot_springs,coal_deposits
+dp-town-32	town	mountain	road	Fish market	fish	cascade	0.70	hot_springs_mineral,mountain_timber,hunting_grounds,ancient_grove,gemstone_deposits
+dp-town-33	town	hills	isolated	Brickmaker	clay	generated	0.90	marshlands,hot_springs,coal_deposits,stone_quarry,iron_deposits,ancient_grove
+dp-town-33	town	hills	isolated	Potter	clay	faction_boost	0.90	marshlands,hot_springs,coal_deposits,stone_quarry,iron_deposits,ancient_grove
+dp-town-35	town	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-town-35	town	coastal	port	Smelter	ore	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-town-37	town	hills	crossroads	Fish market	fish	generated	0.90	grazing_land,crossroads_position,gemstone_deposits,iron_deposits
+dp-town-39	town	desert	road	Fish market	fish	generated	1.80	desert_salt,glass_sand,salt_flats,ancient_grove,gemstone_deposits
+dp-town-39	town	desert	road	Hunter's lodge	game	generated	1.80	desert_salt,glass_sand,salt_flats,ancient_grove,gemstone_deposits
+dp-town-39	town	desert	road	Brickmaker	clay	generated	1.80	desert_salt,glass_sand,salt_flats,ancient_grove,gemstone_deposits
+dp-town-39	town	desert	road	Potter	clay	cascade	1.80	desert_salt,glass_sand,salt_flats,ancient_grove,gemstone_deposits
+dp-town-40	town	hills	crossroads	Potter	clay	cascade	0.90	hunting_grounds,crossroads_position,gemstone_deposits,ancient_ruins,grazing_land
+dp-town-40	town	hills	crossroads	Brickmaker	clay	cascade	0.90	hunting_grounds,crossroads_position,gemstone_deposits,ancient_ruins,grazing_land
+dp-town-41	town	plains	river	Salt works	salt	generated	1.30	grain_fields,hot_springs,coal_deposits,grazing_land
+dp-town-44	town	coastal	port	Brickmaker	clay	cascade	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,salt_flats,magical_node
+dp-town-45	town	desert	road	Fish market	fish	generated	1.80	desert_salt,oasis_water,managed_forest,ancient_grove,precious_metals
+dp-town-46	town	plains	road	Sawmill (commercial)	timber	generated	2.34	grain_fields,ancient_grove,iron_deposits,precious_metals,hunting_grounds,stone_quarry
+dp-town-49	town	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,grazing_land,hunting_grounds,ancient_ruins
+dp-town-54	town	hills	road	Brickmaker	clay	cascade	0.90	grain_fields,ancient_grove,gemstone_deposits,foraging_areas,coal_deposits,hunting_grounds
+dp-town-59	town	riverside	crossroads	Hunter's lodge	game	generated	1.30	river_fish,foraging_areas,crossroads_position,iron_deposits
+dp-town-60	town	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,stone_quarry,grain_fields,foraging_areas,gemstone_deposits
+dp-town-61	town	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,gemstone_deposits,grain_fields
+dp-town-61	town	hills	road	Brickmaker	clay	cascade	0.90	hunting_grounds,ancient_grove,gemstone_deposits,grain_fields
+dp-town-63	town	hills	crossroads	Fish market	fish	generated	0.90	grain_fields,crossroads_position,stone_quarry,grazing_land,gemstone_deposits
+dp-town-64	town	forest	road	Brickmaker	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,grazing_land,marshlands
+dp-town-64	town	forest	road	Fish market	fish	cascade	1.00	hunting_grounds,ancient_grove,iron_deposits,grazing_land,marshlands
+dp-town-65	town	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,stone_quarry,grain_fields
+dp-town-66	town	plains	river	Salt works	salt	cascade	1.30	foraging_areas,hot_springs,coal_deposits,marshlands,managed_forest
+dp-town-67	town	riverside	road	Salt works	salt	cascade	1.30	river_fish,managed_forest,ancient_grove,stone_quarry
+dp-town-69	town	coastal	port	Brickmaker	clay	cascade	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds
+dp-town-70	town	plains	road	Fish market	fish	generated	1.30	marshlands,ancient_grove,stone_quarry,coal_deposits,gemstone_deposits
+dp-town-71	town	riverside	river	Salt works	salt	generated	1.30	river_mills,marshlands,ancient_grove,coal_deposits,hot_springs
+dp-town-71	town	riverside	river	Smelter	ore	generated	1.30	river_mills,marshlands,ancient_grove,coal_deposits,hot_springs
+dp-town-73	town	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber
+dp-town-74	town	forest	isolated	Fish market	fish	cascade	1.00	hunting_grounds,hot_springs,precious_metals,ancient_grove,stone_quarry
+dp-town-76	town	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,foraging_areas,ancient_grove,coal_deposits,marshlands
+dp-town-76	town	mountain	road	Brickmaker	clay	cascade	0.70	hot_springs_mineral,mountain_timber,foraging_areas,ancient_grove,coal_deposits,marshlands
+dp-town-79	town	hills	crossroads	Fish market	fish	generated	0.90	grazing_land,crossroads_position,stone_quarry,gemstone_deposits,iron_deposits,hunting_grounds
+dp-town-82	town	forest	road	Fish market	fish	generated	1.00	grazing_land,ancient_grove,stone_quarry,marshlands
+dp-town-86	town	plains	road	Fish market	fish	generated	1.30	grazing_land,ancient_grove,gemstone_deposits,grain_fields,hunting_grounds
+dp-town-90	town	mountain	road	Fish market	fish	cascade	0.70	mountain_timber,alpine_pasture,grain_fields,ancient_grove,stone_quarry,marshlands
+dp-town-90	town	mountain	road	Brickmaker	clay	cascade	0.70	mountain_timber,alpine_pasture,grain_fields,ancient_grove,stone_quarry,marshlands
+dp-town-91	town	plains	river	Charcoal burner	timber	generated	1.30	foraging_areas,hot_springs,stone_quarry,coal_deposits,grain_fields,ancient_grove
+dp-town-91	town	plains	river	Sawmill (commercial)	timber	generated	2.34	foraging_areas,hot_springs,stone_quarry,coal_deposits,grain_fields,ancient_grove
+dp-town-91	town	plains	river	Salt works	salt	cascade	1.30	foraging_areas,hot_springs,stone_quarry,coal_deposits,grain_fields,ancient_grove
+dp-town-94	town	riverside	river	Salt works	salt	cascade	1.30	river_fish,foraging_areas,ancient_grove,stone_quarry
+dp-town-95	town	coastal	port	Potter	clay	cascade	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,salt_flats,fishing_grounds
+dp-town-96	town	riverside	river	Salt works	salt	cascade	1.30	river_fish,foraging_areas,ancient_grove,iron_deposits,coal_deposits
+dp-town-98	town	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,iron_deposits,grazing_land,stone_quarry
+dp-town-98	town	plains	crossroads	Hunter's lodge	game	cascade	1.30	grain_fields,crossroads_position,iron_deposits,grazing_land,stone_quarry
+dp-town-100	town	forest	road	Fish market	fish	generated	1.00	managed_forest,ancient_grove,stone_quarry,coal_deposits
+dp-town-100	town	forest	road	Smelter	ore	generated	1.00	managed_forest,ancient_grove,stone_quarry,coal_deposits
+dp-town-102	town	plains	road	Fish market	fish	generated	1.30	managed_forest,ancient_grove,precious_metals,hunting_grounds,grazing_land,marshlands
+dp-town-103	town	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-town-103	town	coastal	port	Potter	clay	cascade	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-town-106	town	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,foraging_areas,ancient_grove,stone_quarry
+dp-town-108	town	riverside	river	Mine	ore	generated	1.30	river_mills,fertile_floodplain,ancient_grove,coal_deposits,hunting_grounds
+dp-town-108	town	riverside	river	Smelter	ore	generated	1.30	river_mills,fertile_floodplain,ancient_grove,coal_deposits,hunting_grounds
+dp-town-109	town	mountain	road	Brickmaker	clay	cascade	0.70	mountain_timber,hot_springs_mineral,foraging_areas,ancient_grove,precious_metals
+dp-town-110	town	riverside	road	Salt works	salt	generated	1.30	river_fish,marshlands,ancient_grove,gemstone_deposits
+dp-town-111	town	mountain	road	Fish market	fish	cascade	0.70	mountain_timber,alpine_pasture,foraging_areas,ancient_grove,iron_deposits
+dp-town-111	town	mountain	road	Brickmaker	clay	cascade	0.70	mountain_timber,alpine_pasture,foraging_areas,ancient_grove,iron_deposits
+dp-town-112	town	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits
+dp-town-114	town	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,coal_deposits,hunting_grounds
+dp-town-114	town	hills	road	Potter	clay	cascade	0.90	managed_forest,ancient_grove,coal_deposits,hunting_grounds
+dp-town-114	town	hills	road	Brickmaker	clay	cascade	0.90	managed_forest,ancient_grove,coal_deposits,hunting_grounds
+dp-town-115	town	hills	crossroads	Potter	clay	cascade	0.90	foraging_areas,crossroads_position,coal_deposits,stone_quarry
+dp-town-116	town	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,hunting_grounds,iron_deposits
+dp-town-116	town	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,hunting_grounds,iron_deposits
+dp-town-117	town	desert	crossroads	Fish market	fish	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-117	town	desert	crossroads	Mine	ore	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-117	town	desert	crossroads	Sawmill (commercial)	timber	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-117	town	desert	crossroads	Potter	clay	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-117	town	desert	crossroads	Brickmaker	clay	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-117	town	desert	crossroads	Smelter	ore	generated	1.80	glass_sand,oasis_water,grain_fields,crossroads_position,coal_deposits
+dp-town-118	town	desert	crossroads	Fish market	fish	generated	1.80	date_palms,oasis_water,foraging_areas,crossroads_position,iron_deposits
+dp-town-118	town	desert	crossroads	Potter	clay	generated	1.80	date_palms,oasis_water,foraging_areas,crossroads_position,iron_deposits
+dp-town-118	town	desert	crossroads	Hunter's lodge	game	cascade	1.80	date_palms,oasis_water,foraging_areas,crossroads_position,iron_deposits
+dp-town-119	town	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,coal_deposits,grazing_land,hunting_grounds,stone_quarry
+dp-town-119	town	plains	crossroads	Charcoal burner	timber	generated	1.30	foraging_areas,crossroads_position,coal_deposits,grazing_land,hunting_grounds,stone_quarry
+dp-town-120	town	hills	road	Fish market	fish	faction_boost	0.90	managed_forest,gemstone_deposits,iron_deposits,ancient_grove
+dp-town-121	town	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,managed_forest,defended_pass,coal_deposits
+dp-town-121	town	mountain	road	Potter	clay	cascade	0.70	hot_springs_mineral,mountain_timber,managed_forest,defended_pass,coal_deposits
+dp-town-122	town	plains	river	Mine	ore	generated	1.30	foraging_areas,hot_springs,coal_deposits,hunting_grounds,ancient_grove,marshlands
+dp-town-122	town	plains	river	Salt works	salt	generated	1.30	foraging_areas,hot_springs,coal_deposits,hunting_grounds,ancient_grove,marshlands
+dp-town-123	town	hills	road	Fish market	fish	generated	0.90	marshlands,ancient_grove,gemstone_deposits,coal_deposits,stone_quarry,grazing_land
+dp-town-123	town	hills	road	Brickmaker	clay	generated	0.90	marshlands,ancient_grove,gemstone_deposits,coal_deposits,stone_quarry,grazing_land
+dp-town-125	town	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,stone_quarry,gemstone_deposits,iron_deposits,hunting_grounds
+dp-town-125	town	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,stone_quarry,gemstone_deposits,iron_deposits,hunting_grounds
+dp-town-127	town	plains	river	Smelter	ore	generated	1.30	managed_forest,hot_springs,stone_quarry,foraging_areas,hunting_grounds,grazing_land
+dp-town-128	town	desert	crossroads	Fish market	fish	generated	1.80	camel_herds,desert_salt,grazing_land,crossroads_position,stone_quarry
+dp-town-128	town	desert	crossroads	Brickmaker	clay	generated	1.80	camel_herds,desert_salt,grazing_land,crossroads_position,stone_quarry
+dp-town-129	town	desert	crossroads	Fish market	fish	generated	1.80	camel_herds,glass_sand,grain_fields,crossroads_position,gemstone_deposits,foraging_areas
+dp-town-129	town	desert	crossroads	Potter	clay	generated	1.80	camel_herds,glass_sand,grain_fields,crossroads_position,gemstone_deposits,foraging_areas
+dp-town-132	town	riverside	river	Salt works	salt	generated	1.30	river_mills,hunting_grounds,ancient_grove,iron_deposits
+dp-town-133	town	hills	road	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,stone_quarry,precious_metals,coal_deposits
+dp-town-133	town	hills	road	Fish market	fish	cascade	0.90	managed_forest,ancient_grove,stone_quarry,precious_metals,coal_deposits
+dp-town-134	town	forest	road	Potter	clay	cascade	1.00	hunting_grounds,marshlands,precious_metals,ancient_grove
+dp-town-135	town	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,coal_deposits,foraging_areas
+dp-town-140	town	mountain	isolated	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,hunting_grounds,ancient_grove,iron_deposits
+dp-town-142	town	riverside	river	Smelter	ore	generated	1.30	river_mills,foraging_areas,hot_springs,coal_deposits
+dp-town-143	town	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,gemstone_deposits,coal_deposits,hunting_grounds,grain_fields
+dp-town-144	town	riverside	river	Salt works	salt	generated	1.30	river_mills,marshlands,hot_springs,iron_deposits,ancient_grove
+dp-town-146	town	mountain	road	Fish market	fish	cascade	0.70	hot_springs_mineral,mountain_timber,marshlands,defended_pass,iron_deposits,grain_fields
+dp-town-146	town	mountain	road	Potter	clay	cascade	0.70	hot_springs_mineral,mountain_timber,marshlands,defended_pass,iron_deposits,grain_fields
+dp-town-147	town	desert	crossroads	Fish market	fish	generated	1.80	oasis_water,date_palms,grazing_land,crossroads_position,iron_deposits
+dp-town-147	town	desert	crossroads	Potter	clay	generated	1.80	oasis_water,date_palms,grazing_land,crossroads_position,iron_deposits
+dp-town-148	town	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,shipbuilding_timber,deep_harbour
+dp-town-149	town	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,iron_deposits,gemstone_deposits,stone_quarry
+dp-town-149	town	plains	crossroads	Charcoal burner	timber	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,iron_deposits,gemstone_deposits,stone_quarry
+dp-city-0	city	riverside	road	Furrier's district	game	cascade	1.30	river_fish,grain_fields,ancient_grove,precious_metals,foraging_areas,grazing_land
+dp-city-2	city	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,managed_forest,coal_deposits,grazing_land
+dp-city-2	city	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,managed_forest,coal_deposits,grazing_land
+dp-city-2	city	hills	road	Brickmaker	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,managed_forest,coal_deposits,grazing_land
+dp-city-3	city	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,grazing_land,iron_deposits
+dp-city-3	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,grazing_land,iron_deposits
+dp-city-5	city	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,magical_node,shipbuilding_timber
+dp-city-5	city	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,magical_node,shipbuilding_timber
+dp-city-5	city	coastal	port	Brickmaker	clay	cascade	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,magical_node,shipbuilding_timber
+dp-city-6	city	plains	road	Fish market	fish	generated	1.30	hunting_grounds,ancient_grove,iron_deposits,gemstone_deposits,foraging_areas
+dp-city-6	city	plains	road	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,ancient_grove,iron_deposits,gemstone_deposits,foraging_areas
+dp-city-7	city	riverside	crossroads	Smelter	ore	generated	1.30	river_fish,grazing_land,crossroads_position,coal_deposits,grain_fields,hunting_grounds,stone_quarry
+dp-city-8	city	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,shipbuilding_timber,fishing_grounds
+dp-city-8	city	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,shipbuilding_timber,fishing_grounds
+dp-city-9	city	riverside	river	Smelter	ore	cascade	1.30	river_mills,hunting_grounds,hot_springs,stone_quarry,marshlands,river_fish,river_clay
+dp-city-11	city	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,precious_metals,coal_deposits,iron_deposits,stone_quarry,grain_fields
+dp-city-11	city	plains	road	Charcoal burner	timber	generated	1.30	foraging_areas,ancient_grove,precious_metals,coal_deposits,iron_deposits,stone_quarry,grain_fields
+dp-city-11	city	plains	road	Furrier's district	game	generated	1.30	foraging_areas,ancient_grove,precious_metals,coal_deposits,iron_deposits,stone_quarry,grain_fields
+dp-city-11	city	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,ancient_grove,precious_metals,coal_deposits,iron_deposits,stone_quarry,grain_fields
+dp-city-13	city	hills	road	Potter	clay	generated	0.90	foraging_areas,ancient_grove,coal_deposits,managed_forest,grazing_land
+dp-city-14	city	coastal	port	Smelter	ore	cascade	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-15	city	riverside	crossroads	Furrier's district	game	generated	1.30	river_fish,grain_fields,crossroads_position,gemstone_deposits,foraging_areas
+dp-city-16	city	forest	isolated	Fish market	fish	generated	1.00	managed_forest,ancient_grove,gemstone_deposits,foraging_areas,marshlands
+dp-city-16	city	forest	isolated	Potter	clay	generated	1.00	managed_forest,ancient_grove,gemstone_deposits,foraging_areas,marshlands
+dp-city-16	city	forest	isolated	Brickmaker	clay	generated	1.00	managed_forest,ancient_grove,gemstone_deposits,foraging_areas,marshlands
+dp-city-17	city	desert	road	Sawmill (commercial)	timber	generated	1.80	desert_salt,oasis_water,marshlands,ancient_grove,precious_metals,grazing_land,gemstone_deposits
+dp-city-17	city	desert	road	Potter	clay	generated	1.80	desert_salt,oasis_water,marshlands,ancient_grove,precious_metals,grazing_land,gemstone_deposits
+dp-city-17	city	desert	road	Brickmaker	clay	generated	1.80	desert_salt,oasis_water,marshlands,ancient_grove,precious_metals,grazing_land,gemstone_deposits
+dp-city-18	city	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,foraging_areas,defended_pass,stone_quarry
+dp-city-18	city	mountain	road	Potter	clay	cascade	0.70	hot_springs_mineral,mountain_timber,foraging_areas,defended_pass,stone_quarry
+dp-city-19	city	mountain	road	Fish market	fish	generated	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,stone_quarry,gemstone_deposits,grain_fields
+dp-city-19	city	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,stone_quarry,gemstone_deposits,grain_fields
+dp-city-19	city	mountain	road	Furrier's district	game	cascade	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,stone_quarry,gemstone_deposits,grain_fields
+dp-city-20	city	desert	road	Fish market	fish	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Charcoal burner	timber	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Furrier's district	game	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Sawmill (commercial)	timber	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Potter	clay	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Brickmaker	clay	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-20	city	desert	road	Smelter	ore	generated	1.80	camel_herds,oasis_water,grain_fields,ancient_grove,coal_deposits,salt_flats
+dp-city-21	city	forest	road	Fish market	fish	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,gemstone_deposits,stone_quarry,grain_fields
+dp-city-21	city	forest	road	Potter	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,gemstone_deposits,stone_quarry,grain_fields
+dp-city-21	city	forest	road	Brickmaker	clay	cascade	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,gemstone_deposits,stone_quarry,grain_fields
+dp-city-23	city	riverside	crossroads	Stone quarry	stone	generated	1.30	river_fish,grazing_land,crossroads_position,iron_deposits,hunting_grounds,foraging_areas,coal_deposits
+dp-city-23	city	riverside	crossroads	Salt works	salt	cascade	1.30	river_fish,grazing_land,crossroads_position,iron_deposits,hunting_grounds,foraging_areas,coal_deposits
+dp-city-24	city	forest	river	Stone quarry	stone	generated	1.00	managed_forest,hot_springs,coal_deposits,iron_deposits,magical_node
+dp-city-25	city	forest	road	Fish market	fish	generated	1.00	hunting_grounds,ancient_grove,precious_metals,gemstone_deposits,stone_quarry,grazing_land
+dp-city-25	city	forest	road	Potter	clay	generated	1.00	hunting_grounds,ancient_grove,precious_metals,gemstone_deposits,stone_quarry,grazing_land
+dp-city-26	city	forest	road	Fish market	fish	generated	1.00	marshlands,ancient_grove,iron_deposits,foraging_areas,grain_fields,coal_deposits
+dp-city-26	city	forest	road	Potter	clay	generated	1.00	marshlands,ancient_grove,iron_deposits,foraging_areas,grain_fields,coal_deposits
+dp-city-27	city	forest	road	Fish market	fish	generated	1.00	hunting_grounds,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-27	city	forest	road	Potter	clay	generated	1.00	hunting_grounds,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-27	city	forest	road	Brickmaker	clay	cascade	1.00	hunting_grounds,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-28	city	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,stone_quarry,grain_fields,managed_forest,iron_deposits
+dp-city-28	city	hills	road	Brickmaker	clay	cascade	0.90	grazing_land,ancient_grove,stone_quarry,grain_fields,managed_forest,iron_deposits
+dp-city-29	city	plains	road	Fish market	fish	generated	1.30	foraging_areas,grazing_land,coal_deposits,precious_metals,gemstone_deposits,ancient_grove,stone_quarry
+dp-city-29	city	plains	road	Charcoal burner	timber	generated	1.30	foraging_areas,grazing_land,coal_deposits,precious_metals,gemstone_deposits,ancient_grove,stone_quarry
+dp-city-29	city	plains	road	Furrier's district	game	generated	1.30	foraging_areas,grazing_land,coal_deposits,precious_metals,gemstone_deposits,ancient_grove,stone_quarry
+dp-city-29	city	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,grazing_land,coal_deposits,precious_metals,gemstone_deposits,ancient_grove,stone_quarry
+dp-city-30	city	plains	river	Charcoal burner	timber	generated	1.30	marshlands,ancient_grove,coal_deposits,iron_deposits,grain_fields,stone_quarry
+dp-city-30	city	plains	river	Furrier's district	game	generated	1.30	marshlands,ancient_grove,coal_deposits,iron_deposits,grain_fields,stone_quarry
+dp-city-30	city	plains	river	Sawmill (commercial)	timber	generated	2.34	marshlands,ancient_grove,coal_deposits,iron_deposits,grain_fields,stone_quarry
+dp-city-31	city	riverside	road	Salt works	salt	generated	1.30	river_fish,hunting_grounds,ancient_grove,precious_metals,marshlands,stone_quarry
+dp-city-32	city	plains	river	Sawmill (commercial)	timber	generated	2.34	marshlands,hot_springs,coal_deposits,hunting_grounds,grazing_land,foraging_areas,grain_fields
+dp-city-32	city	plains	river	Salt works	salt	cascade	1.30	marshlands,hot_springs,coal_deposits,hunting_grounds,grazing_land,foraging_areas,grain_fields
+dp-city-33	city	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,coal_deposits,magical_node,stone_quarry,managed_forest
+dp-city-33	city	hills	road	Brickmaker	clay	generated	0.90	hunting_grounds,ancient_grove,coal_deposits,magical_node,stone_quarry,managed_forest
+dp-city-34	city	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,hunting_grounds,iron_deposits,foraging_areas
+dp-city-34	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,hunting_grounds,iron_deposits,foraging_areas
+dp-city-37	city	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,stone_quarry,iron_deposits,foraging_areas,coal_deposits
+dp-city-37	city	plains	crossroads	Furrier's district	game	generated	1.30	grain_fields,crossroads_position,stone_quarry,iron_deposits,foraging_areas,coal_deposits
+dp-city-37	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,stone_quarry,iron_deposits,foraging_areas,coal_deposits
+dp-city-39	city	riverside	river	Stone quarry	stone	generated	1.30	river_fish,grain_fields,ancient_grove,iron_deposits,foraging_areas,hunting_grounds,fertile_floodplain
+dp-city-39	city	riverside	river	Salt works	salt	generated	1.30	river_fish,grain_fields,ancient_grove,iron_deposits,foraging_areas,hunting_grounds,fertile_floodplain
+dp-city-42	city	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,stone_quarry,precious_metals,iron_deposits,hunting_grounds
+dp-city-42	city	plains	road	Sawmill (commercial)	timber	generated	2.34	grain_fields,ancient_grove,stone_quarry,precious_metals,iron_deposits,hunting_grounds
+dp-city-43	city	hills	road	Potter	clay	generated	0.90	marshlands,ancient_grove,gemstone_deposits,precious_metals,managed_forest,iron_deposits
+dp-city-43	city	hills	road	Brickmaker	clay	generated	0.90	marshlands,ancient_grove,gemstone_deposits,precious_metals,managed_forest,iron_deposits
+dp-city-45	city	plains	river	Charcoal burner	timber	generated	1.30	grain_fields,ancient_grove,coal_deposits,iron_deposits,grazing_land,marshlands
+dp-city-45	city	plains	river	Stone quarry	stone	generated	1.30	grain_fields,ancient_grove,coal_deposits,iron_deposits,grazing_land,marshlands
+dp-city-45	city	plains	river	Sawmill (commercial)	timber	generated	2.34	grain_fields,ancient_grove,coal_deposits,iron_deposits,grazing_land,marshlands
+dp-city-47	city	mountain	road	Furrier's district	game	generated	0.70	mountain_timber,hot_springs_mineral,marshlands,ancient_grove,stone_quarry,coal_deposits
+dp-city-47	city	mountain	road	Potter	clay	generated	0.70	mountain_timber,hot_springs_mineral,marshlands,ancient_grove,stone_quarry,coal_deposits
+dp-city-47	city	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,hot_springs_mineral,marshlands,ancient_grove,stone_quarry,coal_deposits
+dp-city-48	city	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,stone_quarry,marshlands,grazing_land,precious_metals
+dp-city-49	city	forest	river	Smelter	ore	generated	1.00	grazing_land,ancient_grove,coal_deposits,hot_springs,managed_forest,foraging_areas,hunting_grounds
+dp-city-49	city	forest	river	Salt works	salt	cascade	1.00	grazing_land,ancient_grove,coal_deposits,hot_springs,managed_forest,foraging_areas,hunting_grounds
+dp-city-50	city	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,stone_quarry,precious_metals,iron_deposits
+dp-city-50	city	plains	road	Furrier's district	game	generated	1.30	foraging_areas,ancient_grove,stone_quarry,precious_metals,iron_deposits
+dp-city-51	city	plains	road	Fish market	fish	generated	1.30	marshlands,stone_quarry,precious_metals,iron_deposits,ancient_grove,gemstone_deposits
+dp-city-51	city	plains	road	Furrier's district	game	generated	1.30	marshlands,stone_quarry,precious_metals,iron_deposits,ancient_grove,gemstone_deposits
+dp-city-51	city	plains	road	Sawmill (commercial)	timber	generated	2.34	marshlands,stone_quarry,precious_metals,iron_deposits,ancient_grove,gemstone_deposits
+dp-city-52	city	riverside	river	Smelter	ore	generated	1.30	river_fish,foraging_areas,hot_springs,stone_quarry,ancient_ruins
+dp-city-53	city	plains	river	Smelter	ore	generated	1.30	hunting_grounds,hot_springs,stone_quarry,grazing_land,grain_fields,foraging_areas,managed_forest
+dp-city-54	city	desert	road	Fish market	fish	generated	1.80	oasis_water,date_palms,grazing_land,ancient_grove,iron_deposits
+dp-city-54	city	desert	road	Furrier's district	game	generated	1.80	oasis_water,date_palms,grazing_land,ancient_grove,iron_deposits
+dp-city-54	city	desert	road	Sawmill (commercial)	timber	generated	1.80	oasis_water,date_palms,grazing_land,ancient_grove,iron_deposits
+dp-city-54	city	desert	road	Potter	clay	generated	1.80	oasis_water,date_palms,grazing_land,ancient_grove,iron_deposits
+dp-city-54	city	desert	road	Brickmaker	clay	cascade	1.80	oasis_water,date_palms,grazing_land,ancient_grove,iron_deposits
+dp-city-55	city	desert	road	Fish market	fish	generated	1.80	oasis_water,date_palms,marshlands,ancient_grove,gemstone_deposits
+dp-city-55	city	desert	road	Sawmill (commercial)	timber	generated	1.80	oasis_water,date_palms,marshlands,ancient_grove,gemstone_deposits
+dp-city-55	city	desert	road	Potter	clay	generated	1.80	oasis_water,date_palms,marshlands,ancient_grove,gemstone_deposits
+dp-city-55	city	desert	road	Brickmaker	clay	generated	1.80	oasis_water,date_palms,marshlands,ancient_grove,gemstone_deposits
+dp-city-55	city	desert	road	Furrier's district	game	cascade	1.80	oasis_water,date_palms,marshlands,ancient_grove,gemstone_deposits
+dp-city-57	city	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-57	city	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-57	city	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-58	city	hills	road	Fish market	fish	generated	0.90	foraging_areas,ancient_grove,iron_deposits,managed_forest,stone_quarry,grain_fields,marshlands
+dp-city-58	city	hills	road	Potter	clay	generated	0.90	foraging_areas,ancient_grove,iron_deposits,managed_forest,stone_quarry,grain_fields,marshlands
+dp-city-58	city	hills	road	Brickmaker	clay	generated	0.90	foraging_areas,ancient_grove,iron_deposits,managed_forest,stone_quarry,grain_fields,marshlands
+dp-city-59	city	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,coal_deposits,ancient_ruins,marshlands,gemstone_deposits,hunting_grounds
+dp-city-59	city	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,ancient_ruins,marshlands,gemstone_deposits,hunting_grounds
+dp-city-59	city	hills	road	Brickmaker	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,ancient_ruins,marshlands,gemstone_deposits,hunting_grounds
+dp-city-60	city	riverside	river	Furrier's district	game	generated	1.30	river_mills,fertile_floodplain,ancient_grove,coal_deposits,managed_forest,grazing_land
+dp-city-61	city	forest	road	Fish market	fish	generated	1.00	foraging_areas,ancient_grove,precious_metals,grain_fields,grazing_land
+dp-city-61	city	forest	road	Potter	clay	generated	1.00	foraging_areas,ancient_grove,precious_metals,grain_fields,grazing_land
+dp-city-61	city	forest	road	Brickmaker	clay	cascade	1.00	foraging_areas,ancient_grove,precious_metals,grain_fields,grazing_land
+dp-city-62	city	forest	road	Fish market	fish	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,grain_fields
+dp-city-62	city	forest	road	Potter	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,grain_fields
+dp-city-62	city	forest	road	Brickmaker	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,marshlands,grain_fields
+dp-city-63	city	coastal	port	Mine	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-city-63	city	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-city-63	city	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-city-64	city	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,coal_deposits
+dp-city-64	city	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,coal_deposits
+dp-city-64	city	plains	crossroads	Stone quarry	stone	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,coal_deposits
+dp-city-64	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,coal_deposits
+dp-city-65	city	desert	road	Fish market	fish	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-65	city	desert	road	Charcoal burner	timber	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-65	city	desert	road	Furrier's district	game	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-65	city	desert	road	Sawmill (commercial)	timber	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-65	city	desert	road	Potter	clay	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-65	city	desert	road	Brickmaker	clay	generated	1.80	oasis_water,desert_salt,salt_flats,ancient_grove,stone_quarry,coal_deposits,precious_metals
+dp-city-67	city	riverside	river	Smelter	ore	generated	1.30	river_fish,managed_forest,ancient_grove,stone_quarry,fertile_floodplain
+dp-city-69	city	riverside	river	Smelter	ore	generated	1.30	river_fish,grain_fields,ancient_grove,coal_deposits,grazing_land,river_clay
+dp-city-71	city	mountain	road	Furrier's district	game	generated	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,coal_deposits,grain_fields
+dp-city-71	city	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,coal_deposits,grain_fields
+dp-city-71	city	mountain	road	Potter	clay	cascade	0.70	mountain_timber,alpine_pasture,marshlands,ancient_grove,coal_deposits,grain_fields
+dp-city-73	city	coastal	river	Smelter	ore	generated	1.50	fishing_grounds,grain_fields,hot_springs,stone_quarry,managed_forest,grazing_land,hunting_grounds
+dp-city-75	city	forest	river	Smelter	ore	cascade	1.00	foraging_areas,hot_springs,stone_quarry,grazing_land,coal_deposits,ancient_grove,grain_fields
+dp-city-77	city	desert	road	Fish market	fish	generated	1.80	date_palms,desert_salt,managed_forest,ancient_grove,precious_metals,grazing_land,salt_flats
+dp-city-77	city	desert	road	Furrier's district	game	generated	1.80	date_palms,desert_salt,managed_forest,ancient_grove,precious_metals,grazing_land,salt_flats
+dp-city-77	city	desert	road	Brickmaker	clay	generated	1.80	date_palms,desert_salt,managed_forest,ancient_grove,precious_metals,grazing_land,salt_flats
+dp-city-78	city	plains	river	Stone quarry	stone	generated	1.30	foraging_areas,hot_springs,coal_deposits,managed_forest,hunting_grounds,grazing_land
+dp-city-80	city	desert	crossroads	Fish market	fish	generated	1.80	desert_salt,camel_herds,hunting_grounds,crossroads_position,gemstone_deposits
+dp-city-81	city	hills	road	Fish market	fish	generated	0.90	foraging_areas,ancient_grove,stone_quarry,grain_fields,gemstone_deposits
+dp-city-81	city	hills	road	Potter	clay	generated	0.90	foraging_areas,ancient_grove,stone_quarry,grain_fields,gemstone_deposits
+dp-city-83	city	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,iron_deposits,gemstone_deposits,stone_quarry,coal_deposits,marshlands
+dp-city-83	city	hills	road	Potter	clay	generated	0.90	managed_forest,ancient_grove,iron_deposits,gemstone_deposits,stone_quarry,coal_deposits,marshlands
+dp-city-83	city	hills	road	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,iron_deposits,gemstone_deposits,stone_quarry,coal_deposits,marshlands
+dp-city-84	city	riverside	crossroads	Salt works	salt	cascade	1.30	river_fish,hunting_grounds,crossroads_position,gemstone_deposits,foraging_areas,stone_quarry,iron_deposits
+dp-city-85	city	forest	road	Fish market	fish	generated	1.00	grain_fields,ancient_grove,precious_metals,hunting_grounds,gemstone_deposits
+dp-city-85	city	forest	road	Potter	clay	generated	1.00	grain_fields,ancient_grove,precious_metals,hunting_grounds,gemstone_deposits
+dp-city-86	city	forest	road	Fish market	fish	generated	1.00	grazing_land,ancient_grove,precious_metals,managed_forest,gemstone_deposits,stone_quarry,grain_fields
+dp-city-86	city	forest	road	Potter	clay	generated	1.00	grazing_land,ancient_grove,precious_metals,managed_forest,gemstone_deposits,stone_quarry,grain_fields
+dp-city-86	city	forest	road	Brickmaker	clay	generated	1.00	grazing_land,ancient_grove,precious_metals,managed_forest,gemstone_deposits,stone_quarry,grain_fields
+dp-city-87	city	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,stone_quarry,grazing_land
+dp-city-87	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,iron_deposits,hunting_grounds,stone_quarry,grazing_land
+dp-city-90	city	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,precious_metals,marshlands,foraging_areas,iron_deposits
+dp-city-91	city	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds,shipbuilding_timber
+dp-city-91	city	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds,shipbuilding_timber
+dp-city-92	city	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber,deep_harbour
+dp-city-92	city	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber,deep_harbour
+dp-city-93	city	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,defended_pass,gemstone_deposits,foraging_areas
+dp-city-93	city	mountain	road	Fish market	fish	cascade	0.70	alpine_pasture,mountain_timber,marshlands,defended_pass,gemstone_deposits,foraging_areas
+dp-city-93	city	mountain	road	Furrier's district	game	cascade	0.70	alpine_pasture,mountain_timber,marshlands,defended_pass,gemstone_deposits,foraging_areas
+dp-city-93	city	mountain	road	Potter	clay	cascade	0.70	alpine_pasture,mountain_timber,marshlands,defended_pass,gemstone_deposits,foraging_areas
+dp-city-94	city	hills	road	Fish market	fish	generated	0.90	marshlands,ancient_grove,precious_metals,iron_deposits,stone_quarry,gemstone_deposits
+dp-city-94	city	hills	road	Potter	clay	generated	0.90	marshlands,ancient_grove,precious_metals,iron_deposits,stone_quarry,gemstone_deposits
+dp-city-95	city	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,iron_deposits,grazing_land,stone_quarry,coal_deposits
+dp-city-96	city	plains	road	Fish market	fish	generated	1.30	foraging_areas,stone_quarry,gemstone_deposits,precious_metals,ancient_grove,grazing_land,grain_fields
+dp-city-96	city	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,stone_quarry,gemstone_deposits,precious_metals,ancient_grove,grazing_land,grain_fields
+dp-city-96	city	plains	road	Furrier's district	game	cascade	1.30	foraging_areas,stone_quarry,gemstone_deposits,precious_metals,ancient_grove,grazing_land,grain_fields
+dp-city-97	city	hills	isolated	Fish market	fish	cascade	0.90	marshlands,hot_springs,gemstone_deposits,ancient_grove,managed_forest,iron_deposits,stone_quarry
+dp-city-98	city	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,gemstone_deposits,grain_fields,stone_quarry
+dp-city-98	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,crossroads_position,gemstone_deposits,grain_fields,stone_quarry
+dp-city-99	city	plains	road	Charcoal burner	timber	generated	1.30	marshlands,ancient_grove,stone_quarry,coal_deposits,foraging_areas,precious_metals,hunting_grounds
+dp-city-99	city	plains	road	Fish market	fish	cascade	1.30	marshlands,ancient_grove,stone_quarry,coal_deposits,foraging_areas,precious_metals,hunting_grounds
+dp-city-100	city	hills	road	Fish market	fish	generated	0.90	marshlands,ancient_grove,precious_metals,gemstone_deposits,managed_forest,iron_deposits,stone_quarry
+dp-city-100	city	hills	road	Brickmaker	clay	generated	0.90	marshlands,ancient_grove,precious_metals,gemstone_deposits,managed_forest,iron_deposits,stone_quarry
+dp-city-100	city	hills	road	Potter	clay	cascade	0.90	marshlands,ancient_grove,precious_metals,gemstone_deposits,managed_forest,iron_deposits,stone_quarry
+dp-city-101	city	forest	isolated	Brickmaker	clay	generated	1.00	marshlands,foraging_areas,stone_quarry,ancient_grove,hot_springs,precious_metals
+dp-city-101	city	forest	isolated	Fish market	fish	cascade	1.00	marshlands,foraging_areas,stone_quarry,ancient_grove,hot_springs,precious_metals
+dp-city-102	city	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,foraging_areas
+dp-city-102	city	plains	crossroads	Furrier's district	game	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,foraging_areas
+dp-city-102	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,iron_deposits,foraging_areas
+dp-city-103	city	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,gemstone_deposits,grain_fields,iron_deposits,hunting_grounds,stone_quarry
+dp-city-103	city	hills	road	Potter	clay	generated	0.90	managed_forest,ancient_grove,gemstone_deposits,grain_fields,iron_deposits,hunting_grounds,stone_quarry
+dp-city-103	city	hills	road	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,gemstone_deposits,grain_fields,iron_deposits,hunting_grounds,stone_quarry
+dp-city-104	city	plains	road	Fish market	fish	cascade	1.30	foraging_areas,ancient_grove,gemstone_deposits,marshlands,precious_metals,iron_deposits,hunting_grounds
+dp-city-105	city	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,hunting_grounds,grain_fields
+dp-city-105	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,hunting_grounds,grain_fields
+dp-city-106	city	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,coal_deposits,precious_metals,stone_quarry
+dp-city-106	city	plains	road	Charcoal burner	timber	generated	1.30	grain_fields,ancient_grove,coal_deposits,precious_metals,stone_quarry
+dp-city-106	city	plains	road	Furrier's district	game	generated	1.30	grain_fields,ancient_grove,coal_deposits,precious_metals,stone_quarry
+dp-city-106	city	plains	road	Sawmill (commercial)	timber	generated	2.34	grain_fields,ancient_grove,coal_deposits,precious_metals,stone_quarry
+dp-city-107	city	plains	road	Fish market	fish	generated	1.30	hunting_grounds,ancient_grove,coal_deposits,iron_deposits,foraging_areas,managed_forest,precious_metals
+dp-city-108	city	mountain	road	Fish market	fish	generated	0.70	alpine_pasture,hot_springs_mineral,grazing_land,defended_pass,coal_deposits
+dp-city-108	city	mountain	road	Potter	clay	generated	0.70	alpine_pasture,hot_springs_mineral,grazing_land,defended_pass,coal_deposits
+dp-city-108	city	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,hot_springs_mineral,grazing_land,defended_pass,coal_deposits
+dp-city-109	city	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-city-110	city	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,hunting_grounds,grazing_land
+dp-city-110	city	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,hunting_grounds,grazing_land
+dp-city-111	city	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-111	city	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-111	city	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-112	city	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds,shipbuilding_timber
+dp-city-112	city	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds,shipbuilding_timber
+dp-city-112	city	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,magical_node,fishing_grounds,shipbuilding_timber
+dp-city-113	city	desert	road	Fish market	fish	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-113	city	desert	road	Charcoal burner	timber	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-113	city	desert	road	Furrier's district	game	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-113	city	desert	road	Sawmill (commercial)	timber	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-113	city	desert	road	Potter	clay	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-113	city	desert	road	Brickmaker	clay	generated	1.80	date_palms,glass_sand,grazing_land,ancient_grove,coal_deposits,precious_metals
+dp-city-115	city	riverside	river	Mine	ore	generated	1.30	river_mills,managed_forest,hot_springs,stone_quarry,river_fish,marshlands,coal_deposits
+dp-city-115	city	riverside	river	Furrier's district	game	generated	1.30	river_mills,managed_forest,hot_springs,stone_quarry,river_fish,marshlands,coal_deposits
+dp-city-116	city	mountain	isolated	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,managed_forest,hot_springs,iron_deposits
+dp-city-117	city	riverside	river	Furrier's district	game	generated	1.30	river_mills,managed_forest,ancient_grove,stone_quarry,fertile_floodplain
+dp-city-117	city	riverside	river	Smelter	ore	generated	1.30	river_mills,managed_forest,ancient_grove,stone_quarry,fertile_floodplain
+dp-city-117	city	riverside	river	Salt works	salt	cascade	1.30	river_mills,managed_forest,ancient_grove,stone_quarry,fertile_floodplain
+dp-city-119	city	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,coal_deposits,gemstone_deposits,managed_forest
+dp-city-119	city	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,coal_deposits,gemstone_deposits,managed_forest
+dp-city-119	city	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,coal_deposits,gemstone_deposits,managed_forest
+dp-city-120	city	hills	crossroads	Fish market	fish	generated	0.90	hunting_grounds,crossroads_position,stone_quarry,foraging_areas,grain_fields,grazing_land,iron_deposits
+dp-city-121	city	coastal	river	Smelter	ore	generated	1.50	fishing_grounds,grazing_land,hot_springs,coal_deposits,managed_forest,marshlands
+dp-city-123	city	riverside	road	Smelter	ore	generated	1.30	river_fish,managed_forest,ancient_grove,stone_quarry,hunting_grounds
+dp-city-126	city	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,gemstone_deposits,grazing_land,precious_metals,marshlands,stone_quarry
+dp-city-126	city	hills	road	Potter	clay	generated	0.90	managed_forest,ancient_grove,gemstone_deposits,grazing_land,precious_metals,marshlands,stone_quarry
+dp-city-126	city	hills	road	Brickmaker	clay	cascade	0.90	managed_forest,ancient_grove,gemstone_deposits,grazing_land,precious_metals,marshlands,stone_quarry
+dp-city-127	city	desert	road	Fish market	fish	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Charcoal burner	timber	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Furrier's district	game	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Sawmill (commercial)	timber	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Potter	clay	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Brickmaker	clay	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-127	city	desert	road	Smelter	ore	generated	1.80	date_palms,glass_sand,marshlands,ancient_grove,stone_quarry
+dp-city-128	city	riverside	river	Furrier's district	game	generated	1.30	river_fish,grazing_land,ancient_grove,stone_quarry,marshlands,coal_deposits
+dp-city-128	city	riverside	river	Smelter	ore	generated	1.30	river_fish,grazing_land,ancient_grove,stone_quarry,marshlands,coal_deposits
+dp-city-129	city	plains	road	Fish market	fish	generated	1.30	managed_forest,stone_quarry,coal_deposits,grain_fields,ancient_grove,foraging_areas
+dp-city-129	city	plains	road	Smelter	ore	generated	1.30	managed_forest,stone_quarry,coal_deposits,grain_fields,ancient_grove,foraging_areas
+dp-city-130	city	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,gemstone_deposits,magical_node,hunting_grounds
+dp-city-130	city	plains	road	Charcoal burner	timber	generated	1.30	foraging_areas,ancient_grove,gemstone_deposits,magical_node,hunting_grounds
+dp-city-130	city	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,ancient_grove,gemstone_deposits,magical_node,hunting_grounds
+dp-city-130	city	plains	road	Stone quarry	stone	cascade	1.30	foraging_areas,ancient_grove,gemstone_deposits,magical_node,hunting_grounds
+dp-city-133	city	hills	crossroads	Fish market	fish	generated	0.90	hunting_grounds,crossroads_position,iron_deposits,grazing_land,foraging_areas,gemstone_deposits,coal_deposits
+dp-city-133	city	hills	crossroads	Brickmaker	clay	generated	0.90	hunting_grounds,crossroads_position,iron_deposits,grazing_land,foraging_areas,gemstone_deposits,coal_deposits
+dp-city-133	city	hills	crossroads	Potter	clay	cascade	0.90	hunting_grounds,crossroads_position,iron_deposits,grazing_land,foraging_areas,gemstone_deposits,coal_deposits
+dp-city-135	city	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,gemstone_deposits,hunting_grounds,foraging_areas
+dp-city-135	city	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,gemstone_deposits,hunting_grounds,foraging_areas
+dp-city-135	city	hills	road	Brickmaker	clay	cascade	0.90	grazing_land,ancient_grove,gemstone_deposits,hunting_grounds,foraging_areas
+dp-city-136	city	hills	crossroads	Fish market	fish	generated	0.90	grain_fields,crossroads_position,stone_quarry,hunting_grounds,coal_deposits
+dp-city-136	city	hills	crossroads	Brickmaker	clay	generated	0.90	grain_fields,crossroads_position,stone_quarry,hunting_grounds,coal_deposits
+dp-city-138	city	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-city-138	city	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-city-138	city	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-city-139	city	hills	isolated	Potter	clay	generated	0.90	foraging_areas,hot_springs,gemstone_deposits,hunting_grounds,coal_deposits,marshlands
+dp-city-139	city	hills	isolated	Brickmaker	clay	generated	0.90	foraging_areas,hot_springs,gemstone_deposits,hunting_grounds,coal_deposits,marshlands
+dp-city-140	city	forest	isolated	Potter	clay	generated	1.00	managed_forest,ancient_grove,stone_quarry,gemstone_deposits,foraging_areas,hot_springs,marshlands
+dp-city-140	city	forest	isolated	Brickmaker	clay	generated	1.00	managed_forest,ancient_grove,stone_quarry,gemstone_deposits,foraging_areas,hot_springs,marshlands
+dp-city-141	city	hills	isolated	Fish market	fish	generated	0.90	managed_forest,ancient_grove,iron_deposits,marshlands,foraging_areas,hot_springs,stone_quarry
+dp-city-141	city	hills	isolated	Potter	clay	generated	0.90	managed_forest,ancient_grove,iron_deposits,marshlands,foraging_areas,hot_springs,stone_quarry
+dp-city-141	city	hills	isolated	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,iron_deposits,marshlands,foraging_areas,hot_springs,stone_quarry
+dp-city-142	city	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,iron_deposits,gemstone_deposits,hunting_grounds,ancient_ruins,coal_deposits
+dp-city-142	city	plains	crossroads	Charcoal burner	timber	generated	1.30	foraging_areas,crossroads_position,iron_deposits,gemstone_deposits,hunting_grounds,ancient_ruins,coal_deposits
+dp-city-143	city	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,gemstone_deposits,foraging_areas,grain_fields,hunting_grounds,iron_deposits
+dp-city-143	city	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grazing_land,crossroads_position,gemstone_deposits,foraging_areas,grain_fields,hunting_grounds,iron_deposits
+dp-city-144	city	plains	road	Fish market	fish	generated	1.30	marshlands,ancient_grove,coal_deposits,precious_metals,grazing_land,gemstone_deposits,iron_deposits
+dp-city-144	city	plains	road	Charcoal burner	timber	generated	1.30	marshlands,ancient_grove,coal_deposits,precious_metals,grazing_land,gemstone_deposits,iron_deposits
+dp-city-144	city	plains	road	Furrier's district	game	generated	1.30	marshlands,ancient_grove,coal_deposits,precious_metals,grazing_land,gemstone_deposits,iron_deposits
+dp-city-144	city	plains	road	Sawmill (commercial)	timber	generated	2.34	marshlands,ancient_grove,coal_deposits,precious_metals,grazing_land,gemstone_deposits,iron_deposits
+dp-city-145	city	riverside	river	Smelter	ore	generated	1.30	river_mills,hunting_grounds,hot_springs,stone_quarry,river_fish,grain_fields,ancient_grove
+dp-city-146	city	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-146	city	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-146	city	coastal	port	Smelter	ore	cascade	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-city-147	city	plains	road	Fish market	fish	generated	1.30	grazing_land,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,precious_metals
+dp-city-147	city	plains	road	Charcoal burner	timber	generated	1.30	grazing_land,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,precious_metals
+dp-city-147	city	plains	road	Sawmill (commercial)	timber	generated	2.34	grazing_land,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,precious_metals
+dp-city-147	city	plains	road	Stone quarry	stone	cascade	1.30	grazing_land,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,precious_metals
+dp-city-148	city	forest	road	Potter	clay	generated	1.00	grain_fields,ancient_grove,stone_quarry,gemstone_deposits,foraging_areas,marshlands,grazing_land
+dp-city-148	city	forest	road	Brickmaker	clay	generated	1.00	grain_fields,ancient_grove,stone_quarry,gemstone_deposits,foraging_areas,marshlands,grazing_land
+dp-city-149	city	desert	road	Fish market	fish	generated	1.80	desert_salt,camel_herds,foraging_areas,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-149	city	desert	road	Charcoal burner	timber	generated	1.80	desert_salt,camel_herds,foraging_areas,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-149	city	desert	road	Furrier's district	game	generated	1.80	desert_salt,camel_herds,foraging_areas,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-149	city	desert	road	Potter	clay	generated	1.80	desert_salt,camel_herds,foraging_areas,ancient_grove,precious_metals,marshlands,grazing_land
+dp-city-149	city	desert	road	Brickmaker	clay	generated	1.80	desert_salt,camel_herds,foraging_areas,ancient_grove,precious_metals,marshlands,grazing_land
+dp-metropolis-0	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,magical_node,coal_deposits,grazing_land
+dp-metropolis-0	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,magical_node,coal_deposits,grazing_land
+dp-metropolis-0	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,magical_node,coal_deposits,grazing_land
+dp-metropolis-0	metropolis	plains	crossroads	Stone quarry	stone	cascade	1.30	grain_fields,crossroads_position,gemstone_deposits,magical_node,coal_deposits,grazing_land
+dp-metropolis-0	metropolis	plains	crossroads	Furrier's district	game	cascade	1.30	grain_fields,crossroads_position,gemstone_deposits,magical_node,coal_deposits,grazing_land
+dp-metropolis-1	metropolis	riverside	river	Stone quarry	stone	generated	1.30	river_fish,hunting_grounds,hot_springs,coal_deposits,river_clay,managed_forest,foraging_areas,iron_deposits
+dp-metropolis-3	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,gemstone_deposits,grain_fields,stone_quarry,hunting_grounds,iron_deposits
+dp-metropolis-3	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grazing_land,crossroads_position,gemstone_deposits,grain_fields,stone_quarry,hunting_grounds,iron_deposits
+dp-metropolis-4	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,grazing_land,foraging_areas,hunting_grounds
+dp-metropolis-4	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,grazing_land,foraging_areas,hunting_grounds
+dp-metropolis-4	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,grazing_land,foraging_areas,hunting_grounds
+dp-metropolis-4	metropolis	plains	crossroads	Stone quarry	stone	cascade	1.30	grain_fields,crossroads_position,gemstone_deposits,grazing_land,foraging_areas,hunting_grounds
+dp-metropolis-4	metropolis	plains	crossroads	Docks/port facilities	harbour	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,grazing_land,foraging_areas,hunting_grounds
+dp-metropolis-5	metropolis	plains	river	Charcoal burner	timber	generated	1.30	grazing_land,ancient_grove,coal_deposits,iron_deposits,hunting_grounds,grain_fields
+dp-metropolis-5	metropolis	plains	river	Sawmill (commercial)	timber	generated	2.34	grazing_land,ancient_grove,coal_deposits,iron_deposits,hunting_grounds,grain_fields
+dp-metropolis-5	metropolis	plains	river	Stone quarry	stone	cascade	1.30	grazing_land,ancient_grove,coal_deposits,iron_deposits,hunting_grounds,grain_fields
+dp-metropolis-5	metropolis	plains	river	Salt works	salt	cascade	1.30	grazing_land,ancient_grove,coal_deposits,iron_deposits,hunting_grounds,grain_fields
+dp-metropolis-6	metropolis	plains	river	Furrier's district	game	generated	1.30	grain_fields,ancient_grove,stone_quarry,coal_deposits,iron_deposits,grazing_land,managed_forest,foraging_areas
+dp-metropolis-7	metropolis	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-7	metropolis	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-7	metropolis	hills	road	Brickmaker	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-8	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-8	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-8	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-9	metropolis	riverside	river	Salt works	salt	generated	1.30	river_mills,foraging_areas,hot_springs,stone_quarry,coal_deposits,river_fish,hunting_grounds,grazing_land
+dp-metropolis-9	metropolis	riverside	river	Smelter	ore	generated	1.30	river_mills,foraging_areas,hot_springs,stone_quarry,coal_deposits,river_fish,hunting_grounds,grazing_land
+dp-metropolis-10	metropolis	mountain	road	Fish market	fish	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,coal_deposits,foraging_areas,iron_deposits
+dp-metropolis-10	metropolis	mountain	road	Furrier's district	game	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,coal_deposits,foraging_areas,iron_deposits
+dp-metropolis-10	metropolis	mountain	road	Potter	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,coal_deposits,foraging_areas,iron_deposits
+dp-metropolis-10	metropolis	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,coal_deposits,foraging_areas,iron_deposits
+dp-metropolis-11	metropolis	riverside	river	Stone quarry	stone	cascade	1.30	river_fish,grazing_land,ancient_grove,iron_deposits,hunting_grounds,river_mills,foraging_areas,coal_deposits
+dp-metropolis-12	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-12	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-12	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-13	metropolis	forest	road	Fish market	fish	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,coal_deposits,managed_forest,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-13	metropolis	forest	road	Potter	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,coal_deposits,managed_forest,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-13	metropolis	forest	road	Brickmaker	clay	generated	1.00	hunting_grounds,ancient_grove,iron_deposits,coal_deposits,managed_forest,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-14	metropolis	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,alpine_pasture,marshlands,defended_pass,coal_deposits,ancient_ruins,hunting_grounds,ancient_grove
+dp-metropolis-14	metropolis	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,alpine_pasture,marshlands,defended_pass,coal_deposits,ancient_ruins,hunting_grounds,ancient_grove
+dp-metropolis-15	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-15	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-15	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-16	metropolis	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,precious_metals,marshlands,managed_forest,ancient_ruins,grain_fields
+dp-metropolis-16	metropolis	hills	road	Brickmaker	clay	cascade	0.90	hunting_grounds,ancient_grove,iron_deposits,precious_metals,marshlands,managed_forest,ancient_ruins,grain_fields
+dp-metropolis-17	metropolis	plains	river	Furrier's district	game	generated	1.30	foraging_areas,hot_springs,iron_deposits,grain_fields,ancient_grove,managed_forest,grazing_land,marshlands
+dp-metropolis-18	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats,deep_harbour
+dp-metropolis-18	metropolis	coastal	port	Brickmaker	clay	cascade	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats,deep_harbour
+dp-metropolis-19	metropolis	desert	crossroads	Fish market	fish	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-19	metropolis	desert	crossroads	Charcoal burner	timber	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-19	metropolis	desert	crossroads	Furrier's district	game	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-19	metropolis	desert	crossroads	Sawmill (commercial)	timber	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-19	metropolis	desert	crossroads	Potter	clay	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-19	metropolis	desert	crossroads	Brickmaker	clay	generated	1.80	date_palms,camel_herds,foraging_areas,crossroads_position,gemstone_deposits,iron_deposits
+dp-metropolis-20	metropolis	plains	river	Sawmill (commercial)	timber	generated	2.34	grazing_land,hot_springs,stone_quarry,marshlands,hunting_grounds,iron_deposits,ancient_grove,grain_fields
+dp-metropolis-21	metropolis	forest	road	Fish market	fish	generated	1.00	grazing_land,ancient_grove,gemstone_deposits,iron_deposits,grain_fields,marshlands
+dp-metropolis-21	metropolis	forest	road	Potter	clay	generated	1.00	grazing_land,ancient_grove,gemstone_deposits,iron_deposits,grain_fields,marshlands
+dp-metropolis-21	metropolis	forest	road	Brickmaker	clay	generated	1.00	grazing_land,ancient_grove,gemstone_deposits,iron_deposits,grain_fields,marshlands
+dp-metropolis-21	metropolis	forest	road	Stone quarry	stone	cascade	1.00	grazing_land,ancient_grove,gemstone_deposits,iron_deposits,grain_fields,marshlands
+dp-metropolis-22	metropolis	riverside	crossroads	Stone quarry	stone	generated	1.30	river_fish,grain_fields,crossroads_position,coal_deposits,gemstone_deposits,hunting_grounds,foraging_areas
+dp-metropolis-22	metropolis	riverside	crossroads	Salt works	salt	generated	1.30	river_fish,grain_fields,crossroads_position,coal_deposits,gemstone_deposits,hunting_grounds,foraging_areas
+dp-metropolis-23	metropolis	mountain	road	Fish market	fish	generated	0.70	hot_springs_mineral,alpine_pasture,foraging_areas,ancient_grove,stone_quarry,coal_deposits,grazing_land
+dp-metropolis-23	metropolis	mountain	road	Furrier's district	game	generated	0.70	hot_springs_mineral,alpine_pasture,foraging_areas,ancient_grove,stone_quarry,coal_deposits,grazing_land
+dp-metropolis-23	metropolis	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,alpine_pasture,foraging_areas,ancient_grove,stone_quarry,coal_deposits,grazing_land
+dp-metropolis-23	metropolis	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,alpine_pasture,foraging_areas,ancient_grove,stone_quarry,coal_deposits,grazing_land
+dp-metropolis-24	metropolis	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,stone_quarry,iron_deposits,gemstone_deposits,hunting_grounds
+dp-metropolis-24	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,stone_quarry,iron_deposits,gemstone_deposits,hunting_grounds
+dp-metropolis-24	metropolis	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,stone_quarry,iron_deposits,gemstone_deposits,hunting_grounds
+dp-metropolis-25	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-25	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-26	metropolis	plains	river	Sawmill (commercial)	timber	generated	2.34	marshlands,ancient_grove,iron_deposits,stone_quarry,grazing_land,foraging_areas,hunting_grounds,grain_fields
+dp-metropolis-27	metropolis	forest	road	Fish market	fish	generated	1.00	hunting_grounds,grain_fields,gemstone_deposits,precious_metals,coal_deposits,ancient_grove,grazing_land
+dp-metropolis-27	metropolis	forest	road	Potter	clay	generated	1.00	hunting_grounds,grain_fields,gemstone_deposits,precious_metals,coal_deposits,ancient_grove,grazing_land
+dp-metropolis-27	metropolis	forest	road	Brickmaker	clay	generated	1.00	hunting_grounds,grain_fields,gemstone_deposits,precious_metals,coal_deposits,ancient_grove,grazing_land
+dp-metropolis-28	metropolis	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,stone_quarry,managed_forest
+dp-metropolis-28	metropolis	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,stone_quarry,managed_forest
+dp-metropolis-28	metropolis	hills	road	Brickmaker	clay	generated	0.90	hunting_grounds,ancient_grove,iron_deposits,marshlands,stone_quarry,managed_forest
+dp-metropolis-29	metropolis	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,foraging_areas,marshlands,stone_quarry
+dp-metropolis-29	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,foraging_areas,marshlands,stone_quarry
+dp-metropolis-29	metropolis	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,foraging_areas,marshlands,stone_quarry
+dp-metropolis-29	metropolis	hills	road	Harbour master's office	harbour	generated	1.00	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,foraging_areas,marshlands,stone_quarry
+dp-metropolis-30	metropolis	desert	road	Fish market	fish	generated	1.80	date_palms,oasis_water,foraging_areas,ancient_grove,precious_metals,hunting_grounds,coal_deposits
+dp-metropolis-30	metropolis	desert	road	Charcoal burner	timber	generated	1.80	date_palms,oasis_water,foraging_areas,ancient_grove,precious_metals,hunting_grounds,coal_deposits
+dp-metropolis-30	metropolis	desert	road	Sawmill (commercial)	timber	generated	1.80	date_palms,oasis_water,foraging_areas,ancient_grove,precious_metals,hunting_grounds,coal_deposits
+dp-metropolis-30	metropolis	desert	road	Potter	clay	generated	1.80	date_palms,oasis_water,foraging_areas,ancient_grove,precious_metals,hunting_grounds,coal_deposits
+dp-metropolis-30	metropolis	desert	road	Brickmaker	clay	generated	1.80	date_palms,oasis_water,foraging_areas,ancient_grove,precious_metals,hunting_grounds,coal_deposits
+dp-metropolis-32	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,foraging_areas,iron_deposits,grazing_land,ancient_ruins,hunting_grounds
+dp-metropolis-32	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,foraging_areas,iron_deposits,grazing_land,ancient_ruins,hunting_grounds
+dp-metropolis-32	metropolis	plains	crossroads	Stone quarry	stone	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,foraging_areas,iron_deposits,grazing_land,ancient_ruins,hunting_grounds
+dp-metropolis-32	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,gemstone_deposits,foraging_areas,iron_deposits,grazing_land,ancient_ruins,hunting_grounds
+dp-metropolis-32	metropolis	plains	crossroads	Docks/port facilities	harbour	generated	1.30	grain_fields,crossroads_position,gemstone_deposits,foraging_areas,iron_deposits,grazing_land,ancient_ruins,hunting_grounds
+dp-metropolis-33	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-33	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-33	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,shipbuilding_timber,ancient_ruins,fishing_grounds,salt_flats
+dp-metropolis-34	metropolis	mountain	road	Fish market	fish	generated	0.70	hot_springs_mineral,mountain_timber,hunting_grounds,ancient_grove,gemstone_deposits,grain_fields
+dp-metropolis-34	metropolis	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,hunting_grounds,ancient_grove,gemstone_deposits,grain_fields
+dp-metropolis-36	metropolis	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,gemstone_deposits,stone_quarry,coal_deposits,iron_deposits,grain_fields
+dp-metropolis-36	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,crossroads_position,gemstone_deposits,stone_quarry,coal_deposits,iron_deposits,grain_fields
+dp-metropolis-37	metropolis	riverside	road	Furrier's district	game	generated	1.30	river_fish,marshlands,ancient_grove,coal_deposits,iron_deposits,grain_fields,gemstone_deposits
+dp-metropolis-38	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,gemstone_deposits
+dp-metropolis-38	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grazing_land,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,gemstone_deposits
+dp-metropolis-38	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grazing_land,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,gemstone_deposits
+dp-metropolis-39	metropolis	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,foraging_areas,gemstone_deposits,grazing_land,stone_quarry,grain_fields
+dp-metropolis-39	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,foraging_areas,gemstone_deposits,grazing_land,stone_quarry,grain_fields
+dp-metropolis-39	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,crossroads_position,coal_deposits,foraging_areas,gemstone_deposits,grazing_land,stone_quarry,grain_fields
+dp-metropolis-40	metropolis	forest	road	Fish market	fish	generated	1.00	foraging_areas,ancient_grove,iron_deposits,marshlands,managed_forest,grain_fields,magical_node,precious_metals
+dp-metropolis-40	metropolis	forest	road	Potter	clay	generated	1.00	foraging_areas,ancient_grove,iron_deposits,marshlands,managed_forest,grain_fields,magical_node,precious_metals
+dp-metropolis-40	metropolis	forest	road	Brickmaker	clay	generated	1.00	foraging_areas,ancient_grove,iron_deposits,marshlands,managed_forest,grain_fields,magical_node,precious_metals
+dp-metropolis-41	metropolis	hills	road	Fish market	fish	generated	0.90	marshlands,ancient_grove,iron_deposits,foraging_areas,precious_metals,managed_forest,coal_deposits,grain_fields
+dp-metropolis-41	metropolis	hills	road	Potter	clay	generated	0.90	marshlands,ancient_grove,iron_deposits,foraging_areas,precious_metals,managed_forest,coal_deposits,grain_fields
+dp-metropolis-41	metropolis	hills	road	Brickmaker	clay	generated	0.90	marshlands,ancient_grove,iron_deposits,foraging_areas,precious_metals,managed_forest,coal_deposits,grain_fields
+dp-metropolis-42	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats,deep_harbour
+dp-metropolis-42	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats,deep_harbour
+dp-metropolis-42	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,salt_flats,deep_harbour
+dp-metropolis-43	metropolis	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,precious_metals,iron_deposits,gemstone_deposits,grain_fields,managed_forest,hunting_grounds
+dp-metropolis-43	metropolis	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,precious_metals,iron_deposits,gemstone_deposits,grain_fields,managed_forest,hunting_grounds
+dp-metropolis-43	metropolis	hills	road	Docks/port facilities	harbour	generated	0.90	grazing_land,ancient_grove,precious_metals,iron_deposits,gemstone_deposits,grain_fields,managed_forest,hunting_grounds
+dp-metropolis-43	metropolis	hills	road	Harbour master's office	harbour	generated	1.00	grazing_land,ancient_grove,precious_metals,iron_deposits,gemstone_deposits,grain_fields,managed_forest,hunting_grounds
+dp-metropolis-44	metropolis	riverside	road	Salt works	salt	generated	1.30	river_fish,grain_fields,ancient_grove,gemstone_deposits,hunting_grounds,coal_deposits,marshlands
+dp-metropolis-45	metropolis	plains	road	Fish market	fish	generated	1.30	marshlands,precious_metals,gemstone_deposits,managed_forest,hunting_grounds,stone_quarry,ancient_grove
+dp-metropolis-46	metropolis	riverside	river	Mine	ore	generated	1.30	river_mills,grain_fields,ancient_grove,coal_deposits,managed_forest,hot_springs,river_fish,foraging_areas
+dp-metropolis-46	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_mills,grain_fields,ancient_grove,coal_deposits,managed_forest,hot_springs,river_fish,foraging_areas
+dp-metropolis-46	metropolis	riverside	river	Smelter	ore	generated	1.30	river_mills,grain_fields,ancient_grove,coal_deposits,managed_forest,hot_springs,river_fish,foraging_areas
+dp-metropolis-48	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-48	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-48	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-49	metropolis	hills	crossroads	Fish market	fish	generated	0.90	foraging_areas,crossroads_position,stone_quarry,grazing_land,iron_deposits,grain_fields,hunting_grounds
+dp-metropolis-49	metropolis	hills	crossroads	Potter	clay	generated	0.90	foraging_areas,crossroads_position,stone_quarry,grazing_land,iron_deposits,grain_fields,hunting_grounds
+dp-metropolis-49	metropolis	hills	crossroads	Brickmaker	clay	generated	0.90	foraging_areas,crossroads_position,stone_quarry,grazing_land,iron_deposits,grain_fields,hunting_grounds
+dp-metropolis-49	metropolis	hills	crossroads	Docks/port facilities	harbour	generated	0.90	foraging_areas,crossroads_position,stone_quarry,grazing_land,iron_deposits,grain_fields,hunting_grounds
+dp-metropolis-49	metropolis	hills	crossroads	Harbour master's office	harbour	generated	1.00	foraging_areas,crossroads_position,stone_quarry,grazing_land,iron_deposits,grain_fields,hunting_grounds
+dp-metropolis-50	metropolis	hills	crossroads	Fish market	fish	generated	0.90	grain_fields,crossroads_position,iron_deposits,foraging_areas,coal_deposits,gemstone_deposits
+dp-metropolis-50	metropolis	hills	crossroads	Potter	clay	generated	0.90	grain_fields,crossroads_position,iron_deposits,foraging_areas,coal_deposits,gemstone_deposits
+dp-metropolis-50	metropolis	hills	crossroads	Brickmaker	clay	generated	0.90	grain_fields,crossroads_position,iron_deposits,foraging_areas,coal_deposits,gemstone_deposits
+dp-metropolis-51	metropolis	mountain	road	Fish market	fish	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,precious_metals,managed_forest,coal_deposits
+dp-metropolis-51	metropolis	mountain	road	Furrier's district	game	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,precious_metals,managed_forest,coal_deposits
+dp-metropolis-51	metropolis	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,precious_metals,managed_forest,coal_deposits
+dp-metropolis-51	metropolis	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,precious_metals,managed_forest,coal_deposits
+dp-metropolis-52	metropolis	hills	road	Fish market	fish	generated	0.90	managed_forest,hunting_grounds,precious_metals,ancient_grove,marshlands,iron_deposits,gemstone_deposits
+dp-metropolis-52	metropolis	hills	road	Potter	clay	generated	0.90	managed_forest,hunting_grounds,precious_metals,ancient_grove,marshlands,iron_deposits,gemstone_deposits
+dp-metropolis-52	metropolis	hills	road	Brickmaker	clay	generated	0.90	managed_forest,hunting_grounds,precious_metals,ancient_grove,marshlands,iron_deposits,gemstone_deposits
+dp-metropolis-53	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,stone_quarry,hunting_grounds,iron_deposits,ancient_ruins,foraging_areas
+dp-metropolis-53	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grazing_land,crossroads_position,stone_quarry,hunting_grounds,iron_deposits,ancient_ruins,foraging_areas
+dp-metropolis-53	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grazing_land,crossroads_position,stone_quarry,hunting_grounds,iron_deposits,ancient_ruins,foraging_areas
+dp-metropolis-54	metropolis	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,iron_deposits,foraging_areas,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-54	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	hunting_grounds,crossroads_position,coal_deposits,iron_deposits,foraging_areas,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-54	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,crossroads_position,coal_deposits,iron_deposits,foraging_areas,stone_quarry,gemstone_deposits,grazing_land
+dp-metropolis-55	metropolis	plains	road	Fish market	fish	generated	1.30	hunting_grounds,grain_fields,precious_metals,stone_quarry,iron_deposits,ancient_grove
+dp-metropolis-55	metropolis	plains	road	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,grain_fields,precious_metals,stone_quarry,iron_deposits,ancient_grove
+dp-metropolis-55	metropolis	plains	road	Docks/port facilities	harbour	generated	1.30	hunting_grounds,grain_fields,precious_metals,stone_quarry,iron_deposits,ancient_grove
+dp-metropolis-56	metropolis	riverside	road	Stone quarry	stone	generated	1.30	river_fish,marshlands,hunting_grounds,precious_metals,ancient_grove,iron_deposits,gemstone_deposits,grain_fields
+dp-metropolis-57	metropolis	coastal	port	Mine	ore	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-57	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-57	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-57	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-58	metropolis	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,stone_quarry,foraging_areas,hunting_grounds,managed_forest,precious_metals,grazing_land
+dp-metropolis-58	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,stone_quarry,foraging_areas,hunting_grounds,managed_forest,precious_metals,grazing_land
+dp-metropolis-58	metropolis	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,stone_quarry,foraging_areas,hunting_grounds,managed_forest,precious_metals,grazing_land
+dp-metropolis-59	metropolis	hills	road	Fish market	fish	generated	0.90	managed_forest,ancient_grove,precious_metals,hunting_grounds,foraging_areas,gemstone_deposits
+dp-metropolis-59	metropolis	hills	road	Potter	clay	generated	0.90	managed_forest,ancient_grove,precious_metals,hunting_grounds,foraging_areas,gemstone_deposits
+dp-metropolis-59	metropolis	hills	road	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,precious_metals,hunting_grounds,foraging_areas,gemstone_deposits
+dp-metropolis-60	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,shipbuilding_timber,deep_harbour
+dp-metropolis-60	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,ancient_ruins,shipbuilding_timber,deep_harbour
+dp-metropolis-60	metropolis	coastal	port	Smelter	ore	cascade	1.50	fishing_grounds,salt_flats,ancient_ruins,shipbuilding_timber,deep_harbour
+dp-metropolis-61	metropolis	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,grain_fields
+dp-metropolis-61	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,grain_fields
+dp-metropolis-61	metropolis	plains	crossroads	Stone quarry	stone	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,grain_fields
+dp-metropolis-61	metropolis	plains	crossroads	Furrier's district	game	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,grain_fields
+dp-metropolis-61	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,coal_deposits,grazing_land,grain_fields
+dp-metropolis-62	metropolis	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-62	metropolis	hills	road	Brickmaker	clay	generated	0.90	grazing_land,ancient_grove,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-62	metropolis	hills	road	Docks/port facilities	harbour	generated	0.90	grazing_land,ancient_grove,stone_quarry,coal_deposits,managed_forest,marshlands
+dp-metropolis-63	metropolis	coastal	port	Mine	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-63	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-63	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-63	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-64	metropolis	riverside	river	Smelter	ore	generated	1.30	river_fish,marshlands,hot_springs,stone_quarry,fertile_floodplain,hunting_grounds,river_clay,ancient_grove
+dp-metropolis-65	metropolis	riverside	river	Mine	ore	generated	1.30	river_fish,foraging_areas,ancient_grove,coal_deposits,fertile_floodplain,managed_forest,river_clay
+dp-metropolis-65	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_fish,foraging_areas,ancient_grove,coal_deposits,fertile_floodplain,managed_forest,river_clay
+dp-metropolis-65	metropolis	riverside	river	Smelter	ore	generated	1.30	river_fish,foraging_areas,ancient_grove,coal_deposits,fertile_floodplain,managed_forest,river_clay
+dp-metropolis-66	metropolis	forest	road	Fish market	fish	generated	1.00	managed_forest,ancient_grove,precious_metals,ancient_ruins,grain_fields,coal_deposits
+dp-metropolis-66	metropolis	forest	road	Stone quarry	stone	generated	1.00	managed_forest,ancient_grove,precious_metals,ancient_ruins,grain_fields,coal_deposits
+dp-metropolis-66	metropolis	forest	road	Potter	clay	generated	1.00	managed_forest,ancient_grove,precious_metals,ancient_ruins,grain_fields,coal_deposits
+dp-metropolis-66	metropolis	forest	road	Brickmaker	clay	generated	1.00	managed_forest,ancient_grove,precious_metals,ancient_ruins,grain_fields,coal_deposits
+dp-metropolis-67	metropolis	plains	road	Fish market	fish	generated	1.30	grain_fields,ancient_grove,stone_quarry,ancient_ruins,marshlands,managed_forest,grazing_land,precious_metals
+dp-metropolis-67	metropolis	plains	road	Furrier's district	game	generated	1.30	grain_fields,ancient_grove,stone_quarry,ancient_ruins,marshlands,managed_forest,grazing_land,precious_metals
+dp-metropolis-68	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-68	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-68	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-69	metropolis	hills	road	Potter	clay	generated	0.90	managed_forest,ancient_grove,coal_deposits,foraging_areas,gemstone_deposits,marshlands,grain_fields
+dp-metropolis-69	metropolis	hills	road	Brickmaker	clay	generated	0.90	managed_forest,ancient_grove,coal_deposits,foraging_areas,gemstone_deposits,marshlands,grain_fields
+dp-metropolis-70	metropolis	desert	crossroads	Fish market	fish	generated	1.80	desert_salt,camel_herds,foraging_areas,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,salt_flats
+dp-metropolis-70	metropolis	desert	crossroads	Sawmill (commercial)	timber	generated	1.80	desert_salt,camel_herds,foraging_areas,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,salt_flats
+dp-metropolis-70	metropolis	desert	crossroads	Potter	clay	generated	1.80	desert_salt,camel_herds,foraging_areas,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,salt_flats
+dp-metropolis-70	metropolis	desert	crossroads	Brickmaker	clay	generated	1.80	desert_salt,camel_herds,foraging_areas,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,salt_flats
+dp-metropolis-70	metropolis	desert	crossroads	Smelter	ore	generated	1.80	desert_salt,camel_herds,foraging_areas,crossroads_position,stone_quarry,hunting_grounds,coal_deposits,salt_flats
+dp-metropolis-71	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-71	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-71	metropolis	plains	crossroads	Furrier's district	game	generated	1.30	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-71	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-71	metropolis	plains	crossroads	Docks/port facilities	harbour	generated	1.30	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-71	metropolis	plains	crossroads	Harbour master's office	harbour	generated	1.00	grain_fields,crossroads_position,coal_deposits,grazing_land,stone_quarry,iron_deposits
+dp-metropolis-73	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-73	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-73	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-74	metropolis	plains	road	Fish market	fish	generated	1.30	foraging_areas,coal_deposits,precious_metals,ancient_grove,managed_forest,gemstone_deposits,grain_fields
+dp-metropolis-74	metropolis	plains	road	Stone quarry	stone	generated	1.30	foraging_areas,coal_deposits,precious_metals,ancient_grove,managed_forest,gemstone_deposits,grain_fields
+dp-metropolis-74	metropolis	plains	road	Furrier's district	game	generated	1.30	foraging_areas,coal_deposits,precious_metals,ancient_grove,managed_forest,gemstone_deposits,grain_fields
+dp-metropolis-75	metropolis	hills	road	Fish market	fish	generated	0.90	hunting_grounds,ancient_grove,precious_metals,grazing_land,gemstone_deposits,stone_quarry
+dp-metropolis-75	metropolis	hills	road	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,precious_metals,grazing_land,gemstone_deposits,stone_quarry
+dp-metropolis-75	metropolis	hills	road	Brickmaker	clay	cascade	0.90	hunting_grounds,ancient_grove,precious_metals,grazing_land,gemstone_deposits,stone_quarry
+dp-metropolis-76	metropolis	riverside	crossroads	Furrier's district	game	generated	1.30	river_fish,grain_fields,crossroads_position,stone_quarry,gemstone_deposits,coal_deposits,grazing_land
+dp-metropolis-77	metropolis	forest	river	Mine	ore	generated	1.00	marshlands,hot_springs,stone_quarry,ancient_grove,hunting_grounds,grazing_land
+dp-metropolis-77	metropolis	forest	river	Salt works	salt	generated	1.00	marshlands,hot_springs,stone_quarry,ancient_grove,hunting_grounds,grazing_land
+dp-metropolis-77	metropolis	forest	river	Smelter	ore	generated	1.00	marshlands,hot_springs,stone_quarry,ancient_grove,hunting_grounds,grazing_land
+dp-metropolis-78	metropolis	hills	crossroads	Fish market	fish	generated	0.90	grazing_land,crossroads_position,coal_deposits,grain_fields,gemstone_deposits,foraging_areas,hunting_grounds
+dp-metropolis-78	metropolis	hills	crossroads	Potter	clay	generated	0.90	grazing_land,crossroads_position,coal_deposits,grain_fields,gemstone_deposits,foraging_areas,hunting_grounds
+dp-metropolis-78	metropolis	hills	crossroads	Brickmaker	clay	generated	0.90	grazing_land,crossroads_position,coal_deposits,grain_fields,gemstone_deposits,foraging_areas,hunting_grounds
+dp-metropolis-78	metropolis	hills	crossroads	Harbour master's office	harbour	generated	1.00	grazing_land,crossroads_position,coal_deposits,grain_fields,gemstone_deposits,foraging_areas,hunting_grounds
+dp-metropolis-79	metropolis	riverside	crossroads	Stone quarry	stone	generated	1.30	river_fish,hunting_grounds,crossroads_position,coal_deposits,grain_fields,gemstone_deposits
+dp-metropolis-80	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_mills,grain_fields,hot_springs,iron_deposits,grazing_land,marshlands,foraging_areas
+dp-metropolis-81	metropolis	hills	road	Fish market	fish	generated	0.90	managed_forest,precious_metals,gemstone_deposits,ancient_grove,grazing_land,grain_fields,marshlands
+dp-metropolis-81	metropolis	hills	road	Potter	clay	generated	0.90	managed_forest,precious_metals,gemstone_deposits,ancient_grove,grazing_land,grain_fields,marshlands
+dp-metropolis-81	metropolis	hills	road	Brickmaker	clay	generated	0.90	managed_forest,precious_metals,gemstone_deposits,ancient_grove,grazing_land,grain_fields,marshlands
+dp-metropolis-82	metropolis	riverside	crossroads	Stone quarry	stone	generated	1.30	river_fish,grain_fields,crossroads_position,iron_deposits,gemstone_deposits,foraging_areas
+dp-metropolis-82	metropolis	riverside	crossroads	Furrier's district	game	generated	1.30	river_fish,grain_fields,crossroads_position,iron_deposits,gemstone_deposits,foraging_areas
+dp-metropolis-82	metropolis	riverside	crossroads	Salt works	salt	cascade	1.30	river_fish,grain_fields,crossroads_position,iron_deposits,gemstone_deposits,foraging_areas
+dp-metropolis-83	metropolis	plains	river	Charcoal burner	timber	generated	1.30	marshlands,hot_springs,stone_quarry,foraging_areas,ancient_grove,grain_fields,coal_deposits
+dp-metropolis-83	metropolis	plains	river	Sawmill (commercial)	timber	generated	2.34	marshlands,hot_springs,stone_quarry,foraging_areas,ancient_grove,grain_fields,coal_deposits
+dp-metropolis-83	metropolis	plains	river	Smelter	ore	generated	1.30	marshlands,hot_springs,stone_quarry,foraging_areas,ancient_grove,grain_fields,coal_deposits
+dp-metropolis-84	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-84	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-84	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-85	metropolis	plains	road	Fish market	fish	generated	1.30	grazing_land,foraging_areas,iron_deposits,stone_quarry,precious_metals,coal_deposits,ancient_grove,managed_forest
+dp-metropolis-85	metropolis	plains	road	Furrier's district	game	generated	1.30	grazing_land,foraging_areas,iron_deposits,stone_quarry,precious_metals,coal_deposits,ancient_grove,managed_forest
+dp-metropolis-86	metropolis	forest	river	Salt works	salt	generated	1.00	managed_forest,hot_springs,iron_deposits,foraging_areas,ancient_grove,hunting_grounds,grazing_land,stone_quarry
+dp-metropolis-87	metropolis	mountain	road	Fish market	fish	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,iron_deposits,managed_forest,stone_quarry
+dp-metropolis-87	metropolis	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,iron_deposits,managed_forest,stone_quarry
+dp-metropolis-87	metropolis	mountain	road	Docks/port facilities	harbour	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,iron_deposits,managed_forest,stone_quarry
+dp-metropolis-88	metropolis	plains	crossroads	Fish market	fish	generated	1.30	grazing_land,crossroads_position,iron_deposits,foraging_areas,grain_fields,gemstone_deposits,hunting_grounds
+dp-metropolis-88	metropolis	plains	crossroads	Charcoal burner	timber	generated	1.30	grazing_land,crossroads_position,iron_deposits,foraging_areas,grain_fields,gemstone_deposits,hunting_grounds
+dp-metropolis-88	metropolis	plains	crossroads	Stone quarry	stone	generated	1.30	grazing_land,crossroads_position,iron_deposits,foraging_areas,grain_fields,gemstone_deposits,hunting_grounds
+dp-metropolis-88	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	grazing_land,crossroads_position,iron_deposits,foraging_areas,grain_fields,gemstone_deposits,hunting_grounds
+dp-metropolis-89	metropolis	plains	crossroads	Fish market	fish	generated	1.30	hunting_grounds,crossroads_position,stone_quarry,grazing_land,foraging_areas,gemstone_deposits,grain_fields
+dp-metropolis-89	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,crossroads_position,stone_quarry,grazing_land,foraging_areas,gemstone_deposits,grain_fields
+dp-metropolis-90	metropolis	desert	road	Fish market	fish	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-90	metropolis	desert	road	Charcoal burner	timber	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-90	metropolis	desert	road	Furrier's district	game	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-90	metropolis	desert	road	Sawmill (commercial)	timber	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-90	metropolis	desert	road	Potter	clay	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-90	metropolis	desert	road	Brickmaker	clay	generated	1.80	camel_herds,date_palms,foraging_areas,ancient_grove,stone_quarry,grazing_land,iron_deposits,marshlands
+dp-metropolis-91	metropolis	plains	river	Furrier's district	game	generated	1.30	grain_fields,ancient_grove,iron_deposits,grazing_land,foraging_areas,marshlands,managed_forest
+dp-metropolis-91	metropolis	plains	river	Stone quarry	stone	cascade	1.30	grain_fields,ancient_grove,iron_deposits,grazing_land,foraging_areas,marshlands,managed_forest
+dp-metropolis-92	metropolis	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,hot_springs_mineral,hunting_grounds,ancient_grove,iron_deposits,coal_deposits,gemstone_deposits,defended_pass
+dp-metropolis-92	metropolis	mountain	road	Fish market	fish	cascade	0.70	mountain_timber,hot_springs_mineral,hunting_grounds,ancient_grove,iron_deposits,coal_deposits,gemstone_deposits,defended_pass
+dp-metropolis-92	metropolis	mountain	road	Potter	clay	cascade	0.70	mountain_timber,hot_springs_mineral,hunting_grounds,ancient_grove,iron_deposits,coal_deposits,gemstone_deposits,defended_pass
+dp-metropolis-93	metropolis	desert	road	Fish market	fish	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-93	metropolis	desert	road	Charcoal burner	timber	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-93	metropolis	desert	road	Furrier's district	game	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-93	metropolis	desert	road	Sawmill (commercial)	timber	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-93	metropolis	desert	road	Potter	clay	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-93	metropolis	desert	road	Brickmaker	clay	generated	1.80	desert_salt,camel_herds,salt_flats,ancient_grove,coal_deposits,grain_fields,marshlands,gemstone_deposits
+dp-metropolis-95	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-95	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-95	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,magical_node,salt_flats,deep_harbour
+dp-metropolis-96	metropolis	forest	road	Fish market	fish	generated	1.00	grain_fields,ancient_grove,stone_quarry,hunting_grounds,iron_deposits,foraging_areas,grazing_land
+dp-metropolis-96	metropolis	forest	road	Potter	clay	generated	1.00	grain_fields,ancient_grove,stone_quarry,hunting_grounds,iron_deposits,foraging_areas,grazing_land
+dp-metropolis-96	metropolis	forest	road	Brickmaker	clay	generated	1.00	grain_fields,ancient_grove,stone_quarry,hunting_grounds,iron_deposits,foraging_areas,grazing_land
+dp-metropolis-96	metropolis	forest	road	Docks/port facilities	harbour	generated	1.00	grain_fields,ancient_grove,stone_quarry,hunting_grounds,iron_deposits,foraging_areas,grazing_land
+dp-metropolis-96	metropolis	forest	road	Harbour master's office	harbour	generated	1.00	grain_fields,ancient_grove,stone_quarry,hunting_grounds,iron_deposits,foraging_areas,grazing_land
+dp-metropolis-97	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_fish,grain_fields,ancient_grove,iron_deposits,stone_quarry,river_mills
+dp-metropolis-98	metropolis	desert	crossroads	Fish market	fish	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-98	metropolis	desert	crossroads	Charcoal burner	timber	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-98	metropolis	desert	crossroads	Furrier's district	game	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-98	metropolis	desert	crossroads	Sawmill (commercial)	timber	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-98	metropolis	desert	crossroads	Potter	clay	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-98	metropolis	desert	crossroads	Brickmaker	clay	generated	1.80	camel_herds,oasis_water,grazing_land,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-99	metropolis	coastal	port	Mine	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-99	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-99	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-99	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,ancient_ruins,deep_harbour,shipbuilding_timber
+dp-metropolis-100	metropolis	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,hot_springs_mineral,marshlands,defended_pass,iron_deposits,stone_quarry,precious_metals
+dp-metropolis-100	metropolis	mountain	road	Potter	clay	cascade	0.70	mountain_timber,hot_springs_mineral,marshlands,defended_pass,iron_deposits,stone_quarry,precious_metals
+dp-metropolis-100	metropolis	mountain	road	Docks/port facilities	harbour	generated	0.70	mountain_timber,hot_springs_mineral,marshlands,defended_pass,iron_deposits,stone_quarry,precious_metals
+dp-metropolis-101	metropolis	mountain	road	Fish market	fish	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,iron_deposits,stone_quarry
+dp-metropolis-101	metropolis	mountain	road	Furrier's district	game	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,iron_deposits,stone_quarry
+dp-metropolis-101	metropolis	mountain	road	Potter	clay	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,iron_deposits,stone_quarry
+dp-metropolis-101	metropolis	mountain	road	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,iron_deposits,stone_quarry
+dp-metropolis-101	metropolis	mountain	road	Docks/port facilities	harbour	generated	0.70	hot_springs_mineral,mountain_timber,grain_fields,defended_pass,iron_deposits,stone_quarry
+dp-metropolis-102	metropolis	riverside	crossroads	Stone quarry	stone	generated	1.30	river_fish,hunting_grounds,crossroads_position,gemstone_deposits,grain_fields,iron_deposits
+dp-metropolis-103	metropolis	forest	isolated	Potter	clay	generated	1.00	foraging_areas,ancient_grove,coal_deposits,marshlands,gemstone_deposits,hot_springs
+dp-metropolis-103	metropolis	forest	isolated	Brickmaker	clay	generated	1.00	foraging_areas,ancient_grove,coal_deposits,marshlands,gemstone_deposits,hot_springs
+dp-metropolis-103	metropolis	forest	isolated	Docks/port facilities	harbour	generated	1.00	foraging_areas,ancient_grove,coal_deposits,marshlands,gemstone_deposits,hot_springs
+dp-metropolis-103	metropolis	forest	isolated	Harbour master's office	harbour	generated	1.00	foraging_areas,ancient_grove,coal_deposits,marshlands,gemstone_deposits,hot_springs
+dp-metropolis-104	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-104	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-104	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-105	metropolis	mountain	road	Fish market	fish	generated	0.70	mountain_timber,alpine_pasture,foraging_areas,defended_pass,gemstone_deposits,hunting_grounds,managed_forest,grazing_land
+dp-metropolis-105	metropolis	mountain	road	Potter	clay	generated	0.70	mountain_timber,alpine_pasture,foraging_areas,defended_pass,gemstone_deposits,hunting_grounds,managed_forest,grazing_land
+dp-metropolis-105	metropolis	mountain	road	Brickmaker	clay	cascade	0.70	mountain_timber,alpine_pasture,foraging_areas,defended_pass,gemstone_deposits,hunting_grounds,managed_forest,grazing_land
+dp-metropolis-105	metropolis	mountain	road	Docks/port facilities	harbour	generated	0.70	mountain_timber,alpine_pasture,foraging_areas,defended_pass,gemstone_deposits,hunting_grounds,managed_forest,grazing_land
+dp-metropolis-106	metropolis	hills	road	Fish market	fish	generated	0.90	foraging_areas,ancient_grove,stone_quarry,managed_forest,gemstone_deposits,hunting_grounds,grain_fields
+dp-metropolis-106	metropolis	hills	road	Potter	clay	generated	0.90	foraging_areas,ancient_grove,stone_quarry,managed_forest,gemstone_deposits,hunting_grounds,grain_fields
+dp-metropolis-106	metropolis	hills	road	Brickmaker	clay	generated	0.90	foraging_areas,ancient_grove,stone_quarry,managed_forest,gemstone_deposits,hunting_grounds,grain_fields
+dp-metropolis-108	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-108	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-108	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,shipbuilding_timber,magical_node,salt_flats,fishing_grounds
+dp-metropolis-109	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,stone_quarry,precious_metals
+dp-metropolis-109	metropolis	hills	road	Brickmaker	clay	cascade	0.90	grain_fields,ancient_grove,gemstone_deposits,iron_deposits,stone_quarry,precious_metals
+dp-metropolis-110	metropolis	mountain	road	Fish market	fish	generated	0.70	mountain_timber,alpine_pasture,marshlands,defended_pass,gemstone_deposits,iron_deposits,managed_forest,precious_metals
+dp-metropolis-110	metropolis	mountain	road	Brickmaker	clay	generated	0.70	mountain_timber,alpine_pasture,marshlands,defended_pass,gemstone_deposits,iron_deposits,managed_forest,precious_metals
+dp-metropolis-110	metropolis	mountain	road	Furrier's district	game	cascade	0.70	mountain_timber,alpine_pasture,marshlands,defended_pass,gemstone_deposits,iron_deposits,managed_forest,precious_metals
+dp-metropolis-111	metropolis	mountain	isolated	Potter	clay	generated	0.70	mountain_timber,alpine_pasture,marshlands,hot_springs,stone_quarry,precious_metals
+dp-metropolis-111	metropolis	mountain	isolated	Brickmaker	clay	generated	0.70	mountain_timber,alpine_pasture,marshlands,hot_springs,stone_quarry,precious_metals
+dp-metropolis-111	metropolis	mountain	isolated	Furrier's district	game	cascade	0.70	mountain_timber,alpine_pasture,marshlands,hot_springs,stone_quarry,precious_metals
+dp-metropolis-112	metropolis	hills	isolated	Fish market	fish	generated	0.90	managed_forest,hot_springs,gemstone_deposits,foraging_areas,magical_node,iron_deposits,coal_deposits,ancient_grove
+dp-metropolis-112	metropolis	hills	isolated	Potter	clay	generated	0.90	managed_forest,hot_springs,gemstone_deposits,foraging_areas,magical_node,iron_deposits,coal_deposits,ancient_grove
+dp-metropolis-112	metropolis	hills	isolated	Brickmaker	clay	generated	0.90	managed_forest,hot_springs,gemstone_deposits,foraging_areas,magical_node,iron_deposits,coal_deposits,ancient_grove
+dp-metropolis-112	metropolis	hills	isolated	Docks/port facilities	harbour	generated	0.90	managed_forest,hot_springs,gemstone_deposits,foraging_areas,magical_node,iron_deposits,coal_deposits,ancient_grove
+dp-metropolis-113	metropolis	riverside	river	Stone quarry	stone	generated	1.30	river_fish,grazing_land,hot_springs,iron_deposits,fertile_floodplain,foraging_areas,ancient_grove
+dp-metropolis-113	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_fish,grazing_land,hot_springs,iron_deposits,fertile_floodplain,foraging_areas,ancient_grove
+dp-metropolis-114	metropolis	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,stone_quarry,hunting_grounds,coal_deposits,grazing_land
+dp-metropolis-114	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,stone_quarry,hunting_grounds,coal_deposits,grazing_land
+dp-metropolis-115	metropolis	forest	river	Salt works	salt	generated	1.00	foraging_areas,hot_springs,iron_deposits,stone_quarry,ancient_grove,coal_deposits,marshlands,grain_fields
+dp-metropolis-116	metropolis	mountain	isolated	Fish market	fish	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,gemstone_deposits,hunting_grounds,precious_metals,ancient_ruins
+dp-metropolis-116	metropolis	mountain	isolated	Potter	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,gemstone_deposits,hunting_grounds,precious_metals,ancient_ruins
+dp-metropolis-116	metropolis	mountain	isolated	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,gemstone_deposits,hunting_grounds,precious_metals,ancient_ruins
+dp-metropolis-116	metropolis	mountain	isolated	Docks/port facilities	harbour	generated	0.70	alpine_pasture,mountain_timber,marshlands,ancient_grove,gemstone_deposits,hunting_grounds,precious_metals,ancient_ruins
+dp-metropolis-116	metropolis	mountain	isolated	Harbour master's office	harbour	generated	1.00	alpine_pasture,mountain_timber,marshlands,ancient_grove,gemstone_deposits,hunting_grounds,precious_metals,ancient_ruins
+dp-metropolis-117	metropolis	desert	road	Fish market	fish	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-117	metropolis	desert	road	Charcoal burner	timber	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-117	metropolis	desert	road	Sawmill (commercial)	timber	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-117	metropolis	desert	road	Potter	clay	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-117	metropolis	desert	road	Brickmaker	clay	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-117	metropolis	desert	road	Smelter	ore	generated	1.80	camel_herds,glass_sand,marshlands,ancient_grove,stone_quarry,hunting_grounds,grazing_land
+dp-metropolis-118	metropolis	riverside	road	Furrier's district	game	generated	1.30	river_fish,grain_fields,ancient_grove,coal_deposits,iron_deposits,stone_quarry,managed_forest,marshlands
+dp-metropolis-119	metropolis	riverside	river	Smelter	ore	generated	1.30	river_mills,managed_forest,ancient_grove,coal_deposits,grazing_land,fertile_floodplain,stone_quarry,grain_fields
+dp-metropolis-119	metropolis	riverside	river	Furrier's district	game	cascade	1.30	river_mills,managed_forest,ancient_grove,coal_deposits,grazing_land,fertile_floodplain,stone_quarry,grain_fields
+dp-metropolis-120	metropolis	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,coal_deposits,hunting_grounds,stone_quarry,marshlands,precious_metals
+dp-metropolis-120	metropolis	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,hunting_grounds,stone_quarry,marshlands,precious_metals
+dp-metropolis-120	metropolis	hills	road	Brickmaker	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,hunting_grounds,stone_quarry,marshlands,precious_metals
+dp-metropolis-121	metropolis	mountain	isolated	Furrier's district	game	generated	0.70	hot_springs_mineral,mountain_timber,managed_forest,hot_springs,stone_quarry,iron_deposits
+dp-metropolis-121	metropolis	mountain	isolated	Brickmaker	clay	generated	0.70	hot_springs_mineral,mountain_timber,managed_forest,hot_springs,stone_quarry,iron_deposits
+dp-metropolis-121	metropolis	mountain	isolated	Potter	clay	cascade	0.70	hot_springs_mineral,mountain_timber,managed_forest,hot_springs,stone_quarry,iron_deposits
+dp-metropolis-122	metropolis	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,coal_deposits,magical_node,marshlands,stone_quarry
+dp-metropolis-122	metropolis	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,magical_node,marshlands,stone_quarry
+dp-metropolis-122	metropolis	hills	road	Brickmaker	clay	generated	0.90	grazing_land,ancient_grove,coal_deposits,magical_node,marshlands,stone_quarry
+dp-metropolis-123	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber,ancient_ruins,deep_harbour
+dp-metropolis-123	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber,ancient_ruins,deep_harbour
+dp-metropolis-123	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,shipbuilding_timber,ancient_ruins,deep_harbour
+dp-metropolis-124	metropolis	hills	isolated	Potter	clay	generated	0.90	marshlands,hot_springs,precious_metals,managed_forest,iron_deposits,stone_quarry,foraging_areas
+dp-metropolis-124	metropolis	hills	isolated	Fish market	fish	cascade	0.90	marshlands,hot_springs,precious_metals,managed_forest,iron_deposits,stone_quarry,foraging_areas
+dp-metropolis-124	metropolis	hills	isolated	Docks/port facilities	harbour	generated	0.90	marshlands,hot_springs,precious_metals,managed_forest,iron_deposits,stone_quarry,foraging_areas
+dp-metropolis-124	metropolis	hills	isolated	Harbour master's office	harbour	generated	1.00	marshlands,hot_springs,precious_metals,managed_forest,iron_deposits,stone_quarry,foraging_areas
+dp-metropolis-125	metropolis	riverside	river	Salt works	salt	generated	1.30	river_fish,managed_forest,ancient_grove,iron_deposits,coal_deposits,grazing_land,hot_springs
+dp-metropolis-125	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_fish,managed_forest,ancient_grove,iron_deposits,coal_deposits,grazing_land,hot_springs
+dp-metropolis-125	metropolis	riverside	river	Stone quarry	stone	cascade	1.30	river_fish,managed_forest,ancient_grove,iron_deposits,coal_deposits,grazing_land,hot_springs
+dp-metropolis-126	metropolis	forest	isolated	Potter	clay	generated	1.00	marshlands,hot_springs,stone_quarry,precious_metals,gemstone_deposits,coal_deposits,iron_deposits
+dp-metropolis-126	metropolis	forest	isolated	Brickmaker	clay	generated	1.00	marshlands,hot_springs,stone_quarry,precious_metals,gemstone_deposits,coal_deposits,iron_deposits
+dp-metropolis-126	metropolis	forest	isolated	Docks/port facilities	harbour	generated	1.00	marshlands,hot_springs,stone_quarry,precious_metals,gemstone_deposits,coal_deposits,iron_deposits
+dp-metropolis-127	metropolis	hills	isolated	Potter	clay	generated	0.90	hunting_grounds,ancient_grove,gemstone_deposits,marshlands,foraging_areas,hot_springs,managed_forest
+dp-metropolis-127	metropolis	hills	isolated	Brickmaker	clay	generated	0.90	hunting_grounds,ancient_grove,gemstone_deposits,marshlands,foraging_areas,hot_springs,managed_forest
+dp-metropolis-127	metropolis	hills	isolated	Docks/port facilities	harbour	generated	0.90	hunting_grounds,ancient_grove,gemstone_deposits,marshlands,foraging_areas,hot_springs,managed_forest
+dp-metropolis-127	metropolis	hills	isolated	Harbour master's office	harbour	generated	1.00	hunting_grounds,ancient_grove,gemstone_deposits,marshlands,foraging_areas,hot_springs,managed_forest
+dp-metropolis-128	metropolis	plains	road	Fish market	fish	generated	1.30	foraging_areas,ancient_grove,iron_deposits,coal_deposits,hunting_grounds,marshlands,stone_quarry
+dp-metropolis-128	metropolis	plains	road	Charcoal burner	timber	generated	1.30	foraging_areas,ancient_grove,iron_deposits,coal_deposits,hunting_grounds,marshlands,stone_quarry
+dp-metropolis-128	metropolis	plains	road	Sawmill (commercial)	timber	generated	2.34	foraging_areas,ancient_grove,iron_deposits,coal_deposits,hunting_grounds,marshlands,stone_quarry
+dp-metropolis-129	metropolis	plains	road	Fish market	fish	generated	1.30	grazing_land,precious_metals,stone_quarry,managed_forest,ancient_grove,gemstone_deposits
+dp-metropolis-129	metropolis	plains	road	Furrier's district	game	generated	1.30	grazing_land,precious_metals,stone_quarry,managed_forest,ancient_grove,gemstone_deposits
+dp-metropolis-130	metropolis	mountain	road	Potter	clay	generated	0.70	alpine_pasture,mountain_timber,hunting_grounds,ancient_grove,iron_deposits,gemstone_deposits,defended_pass
+dp-metropolis-130	metropolis	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,hunting_grounds,ancient_grove,iron_deposits,gemstone_deposits,defended_pass
+dp-metropolis-131	metropolis	riverside	river	Salt works	salt	generated	1.30	river_mills,marshlands,ancient_grove,iron_deposits,stone_quarry,magical_node,foraging_areas,grazing_land
+dp-metropolis-131	metropolis	riverside	river	Furrier's district	game	generated	1.30	river_mills,marshlands,ancient_grove,iron_deposits,stone_quarry,magical_node,foraging_areas,grazing_land
+dp-metropolis-132	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-132	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-132	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,shipbuilding_timber,ancient_ruins,deep_harbour,salt_flats
+dp-metropolis-133	metropolis	mountain	road	Fish market	fish	generated	0.70	alpine_pasture,mountain_timber,grain_fields,ancient_grove,stone_quarry,precious_metals
+dp-metropolis-133	metropolis	mountain	road	Furrier's district	game	generated	0.70	alpine_pasture,mountain_timber,grain_fields,ancient_grove,stone_quarry,precious_metals
+dp-metropolis-133	metropolis	mountain	road	Brickmaker	clay	generated	0.70	alpine_pasture,mountain_timber,grain_fields,ancient_grove,stone_quarry,precious_metals
+dp-metropolis-133	metropolis	mountain	road	Potter	clay	cascade	0.70	alpine_pasture,mountain_timber,grain_fields,ancient_grove,stone_quarry,precious_metals
+dp-metropolis-134	metropolis	coastal	river	Smelter	ore	generated	1.50	fishing_grounds,grazing_land,ancient_grove,coal_deposits,grain_fields,marshlands
+dp-metropolis-135	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-135	metropolis	coastal	port	Brickmaker	clay	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-135	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,magical_node,shipbuilding_timber,fishing_grounds
+dp-metropolis-136	metropolis	forest	road	Fish market	fish	generated	1.00	foraging_areas,coal_deposits,gemstone_deposits,managed_forest,grain_fields,iron_deposits,ancient_grove,stone_quarry
+dp-metropolis-136	metropolis	forest	road	Potter	clay	generated	1.00	foraging_areas,coal_deposits,gemstone_deposits,managed_forest,grain_fields,iron_deposits,ancient_grove,stone_quarry
+dp-metropolis-136	metropolis	forest	road	Brickmaker	clay	generated	1.00	foraging_areas,coal_deposits,gemstone_deposits,managed_forest,grain_fields,iron_deposits,ancient_grove,stone_quarry
+dp-metropolis-137	metropolis	plains	river	Charcoal burner	timber	generated	1.30	hunting_grounds,hot_springs,coal_deposits,ancient_grove,foraging_areas,grain_fields,iron_deposits
+dp-metropolis-137	metropolis	plains	river	Sawmill (commercial)	timber	generated	2.34	hunting_grounds,hot_springs,coal_deposits,ancient_grove,foraging_areas,grain_fields,iron_deposits
+dp-metropolis-137	metropolis	plains	river	Stone quarry	stone	cascade	1.30	hunting_grounds,hot_springs,coal_deposits,ancient_grove,foraging_areas,grain_fields,iron_deposits
+dp-metropolis-138	metropolis	hills	road	Potter	clay	generated	0.90	hunting_grounds,iron_deposits,stone_quarry,marshlands,magical_node,ancient_grove
+dp-metropolis-138	metropolis	hills	road	Brickmaker	clay	generated	0.90	hunting_grounds,iron_deposits,stone_quarry,marshlands,magical_node,ancient_grove
+dp-metropolis-138	metropolis	hills	road	Docks/port facilities	harbour	generated	0.90	hunting_grounds,iron_deposits,stone_quarry,marshlands,magical_node,ancient_grove
+dp-metropolis-138	metropolis	hills	road	Harbour master's office	harbour	generated	1.00	hunting_grounds,iron_deposits,stone_quarry,marshlands,magical_node,ancient_grove
+dp-metropolis-139	metropolis	plains	crossroads	Fish market	fish	generated	1.30	foraging_areas,crossroads_position,gemstone_deposits,hunting_grounds,stone_quarry,grain_fields
+dp-metropolis-139	metropolis	plains	crossroads	Sawmill (commercial)	timber	generated	2.34	foraging_areas,crossroads_position,gemstone_deposits,hunting_grounds,stone_quarry,grain_fields
+dp-metropolis-140	metropolis	forest	road	Fish market	fish	generated	1.00	managed_forest,ancient_grove,precious_metals,hunting_grounds,marshlands,iron_deposits,grazing_land
+dp-metropolis-140	metropolis	forest	road	Potter	clay	generated	1.00	managed_forest,ancient_grove,precious_metals,hunting_grounds,marshlands,iron_deposits,grazing_land
+dp-metropolis-140	metropolis	forest	road	Brickmaker	clay	generated	1.00	managed_forest,ancient_grove,precious_metals,hunting_grounds,marshlands,iron_deposits,grazing_land
+dp-metropolis-140	metropolis	forest	road	Stone quarry	stone	cascade	1.00	managed_forest,ancient_grove,precious_metals,hunting_grounds,marshlands,iron_deposits,grazing_land
+dp-metropolis-141	metropolis	riverside	crossroads	Smelter	ore	generated	1.30	river_fish,foraging_areas,crossroads_position,stone_quarry,grazing_land,grain_fields,coal_deposits
+dp-metropolis-141	metropolis	riverside	crossroads	Furrier's district	game	cascade	1.30	river_fish,foraging_areas,crossroads_position,stone_quarry,grazing_land,grain_fields,coal_deposits
+dp-metropolis-142	metropolis	plains	road	Fish market	fish	generated	1.30	managed_forest,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,foraging_areas,precious_metals
+dp-metropolis-142	metropolis	plains	road	Stone quarry	stone	cascade	1.30	managed_forest,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,foraging_areas,precious_metals
+dp-metropolis-143	metropolis	desert	crossroads	Fish market	fish	generated	1.80	camel_herds,glass_sand,salt_flats,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-143	metropolis	desert	crossroads	Charcoal burner	timber	generated	1.80	camel_herds,glass_sand,salt_flats,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-143	metropolis	desert	crossroads	Furrier's district	game	generated	1.80	camel_herds,glass_sand,salt_flats,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-143	metropolis	desert	crossroads	Potter	clay	generated	1.80	camel_herds,glass_sand,salt_flats,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-143	metropolis	desert	crossroads	Brickmaker	clay	generated	1.80	camel_herds,glass_sand,salt_flats,crossroads_position,coal_deposits,gemstone_deposits
+dp-metropolis-144	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,gemstone_deposits,precious_metals,grazing_land,hunting_grounds,foraging_areas,stone_quarry
+dp-metropolis-144	metropolis	hills	road	Fish market	fish	cascade	0.90	grain_fields,ancient_grove,gemstone_deposits,precious_metals,grazing_land,hunting_grounds,foraging_areas,stone_quarry
+dp-metropolis-145	metropolis	coastal	port	Mine	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-metropolis-145	metropolis	coastal	port	Potter	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-metropolis-145	metropolis	coastal	port	Brickmaker	clay	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-metropolis-145	metropolis	coastal	port	Smelter	ore	generated	1.50	fishing_grounds,salt_flats,magical_node,deep_harbour,shipbuilding_timber
+dp-metropolis-147	metropolis	coastal	port	Potter	clay	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-147	metropolis	coastal	port	Smelter	ore	generated	1.50	deep_harbour,salt_flats,ancient_ruins,fishing_grounds,shipbuilding_timber
+dp-metropolis-148	metropolis	hills	road	Fish market	fish	generated	0.90	grain_fields,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,stone_quarry,managed_forest
+dp-metropolis-148	metropolis	hills	road	Potter	clay	generated	0.90	grain_fields,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,stone_quarry,managed_forest
+dp-metropolis-148	metropolis	hills	road	Brickmaker	clay	generated	0.90	grain_fields,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,stone_quarry,managed_forest
+dp-metropolis-148	metropolis	hills	road	Docks/port facilities	harbour	generated	0.90	grain_fields,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,stone_quarry,managed_forest
+dp-metropolis-148	metropolis	hills	road	Harbour master's office	harbour	generated	1.00	grain_fields,ancient_grove,iron_deposits,gemstone_deposits,coal_deposits,stone_quarry,managed_forest
+dp-metropolis-149	metropolis	hills	road	Fish market	fish	generated	0.90	grazing_land,ancient_grove,gemstone_deposits,stone_quarry,coal_deposits,managed_forest,magical_node,foraging_areas
+dp-metropolis-149	metropolis	hills	road	Potter	clay	generated	0.90	grazing_land,ancient_grove,gemstone_deposits,stone_quarry,coal_deposits,managed_forest,magical_node,foraging_areas
+dp-metropolis-149	metropolis	hills	road	Brickmaker	clay	generated	0.90	grazing_land,ancient_grove,gemstone_deposits,stone_quarry,coal_deposits,managed_forest,magical_node,foraging_areas

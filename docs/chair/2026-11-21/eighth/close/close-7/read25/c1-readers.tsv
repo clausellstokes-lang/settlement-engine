@@ -1,0 +1,229 @@
+file	symbol	line	class	note
+src/components/dossier/EngineSections.jsx	PowerSuccessionSection	241	PRINT	succession panel: the incumbent named
+src/components/dossier/EngineSections.jsx	PowerSuccessionSection	296	PRINT	succession history: a prior government printed
+src/components/new/generalDeskRead.js	stresses	264	PRINT	general desk readings: govFaction (fills prose)
+src/components/new/generalDeskRead.js	stresses	286	PRINT	general desk readings: governingName (fills {governing}, generalStateProse:2200)
+src/components/new/tabs/PowerTab.jsx	RulingChainBlock	102	PRINT	Power tab ruling chain: the government word
+src/components/new/npcComponents.jsx	onRevertSecret	306	PRINT	NPC card power line (cardPowerLine with the governing name; also compared to name the seat)
+src/components/ShareToGallery.jsx	suggestedTagsFor	78	PRINT	share: suggested tag
+src/components/map/WarResolveSection.jsx	SettlementCard	119	PRINT	war card: the lead's government
+src/components/map/WarResolveSection.jsx	SettlementCard	121	PRINT	war card: the lead's government printed
+src/generators/npcGenerator.js	npcConfig	1214	KEY	_government → goal draw ruler kind (rulerKindOfLabel)
+src/generators/historyGenerator.js	buildHistoricalEvent	390	BAKED	history event text {govFaction}
+src/generators/historyGenerator.js	secFaction	391	BAKED	history event text (secondary faction; not the governing)
+src/generators/generateSettlementPipeline.js	view	601	KEY	government → drawTies (memberships compare)
+src/generators/narrativeGenerator.js	stresses	135	BAKED	narrative text
+src/generators/narrativeGenerator.js	stresses	477	BAKED	narrative text
+src/generators/narrativeGenerator.js	generateCoherence	1056	KEY	government → ties
+src/generators/npcStructure.js	CONSTRAINT_ROW_GATES	646	KEY	constraint gate on the governing row (category)
+src/generators/power/factionStanding.js	seatBoughtOf	27	KEY	inferFactionCategory(name): criminal by "Corrupt"/"Shadow"
+src/generators/power/factionStanding.js	annotateFactionStanding	188	KEY	seatIsCouncil(name) picks "council vote" for baked standing text
+src/generators/power/factionStanding.js	settleSeatHolderToRecord	411	KEY	the seat form row
+src/generators/power/rosterText.js	standingRosterOf	30	KEY	roster copy (names compared later)
+src/generators/power/governanceNarrative.js	migrationEntry	692	KEY	RELIGIOUS.test(name)
+src/generators/power/governanceNarrative.js	migrationEntry	725	BAKED	governance narrative / baseline conflict text
+src/generators/power/claimStanding.js	settleClaimsToLabel	254	KEY	governing name compared in claim settling
+src/generators/power/economyReconciliation.js	for	329	WRITE	projection rewrites governingName
+src/generators/power/economyReconciliation.js	for	330	WRITE	projection rewrites government
+src/generators/power/conflicts.js	named	178	KEY	conflict party rows by name
+src/generators/power/rulerKin.js	view	88	KEY	the ruler row
+src/generators/power/rulerKin.js	for	99	KEY	housed names
+src/generators/power/rulerKin.js	for	107	KEY	fold by name
+src/generators/steps/assembleSettlement.js	ids	397	KEY	government → ties
+src/generators/people/rareSecrets.js	record	149	BAKED	secret text names the governing power (and compares)
+src/generators/people/rareSecrets.js	record	150	KEY	rulerKindOfLabel(government)
+src/generators/people/ties.js	cast	117	KEY	place.government → ties
+src/generators/people/ties.js	writing	137	KEY	governingName
+src/generators/people/ties.js	writing	138	KEY	ledBy lookup
+src/generators/people/ties.js	writing	139	KEY	memberships m.power === name
+src/generators/people/representatives.js	npcConfig	104	KEY	_government → ruler kind
+src/generators/people/representatives.js	veil	464	KEY	seat card: key and dual-hat lookup
+src/generators/people/representatives.js	veil	466	KEY	dual-hat lookup
+src/generators/people/representatives.js	npcConfig	473	KEY	_government → ruler kind
+src/generators/people/representatives.js	if	536	KEY	seatMintTitleFor(name): the office title from the form
+src/generators/people/representatives.js	if	550	KEY	presence
+src/generators/people/representatives.js	if	551	KEY	seatMintTitleFor(name)
+src/generators/people/representatives.js	if	553	KEY	seat card key: kind power, key = the name
+src/generators/people/castPowers.js	npcConfig	330	KEY	_government → ruler kind
+src/generators/people/goals.js	if	540	KEY	memberships m.power === govPower
+src/data/dossierStateProse/power.generated.js	(module)	699	META	block title text
+src/data/dossierStateProse/power.generated.js	(module)	2158	META	block title text
+src/lib/shareImage.js	settlementToShareSummary	73	PRINT	share image summary: government
+src/lib/shareImage.js	settlementToShareSummary	74	PRINT	share image summary: governingName fallback
+src/lib/shareImage.js	settlementToShareSummary	75	PRINT	share image summary: legacy government.type
+src/lib/gallery.js	readGovernmentType	703	PRINT	gallery card: readGovernmentType
+src/lib/gallery.js	readGovernmentType	704	PRINT	gallery card: governingName fallback
+src/lib/gallery.js	readGovernmentType	705	PRINT	gallery card: legacy government.type
+src/domain/generation/generationForkRegistry.js	GENERATION_TIER2	277	META	fork registry declaration
+src/domain/generation/generationForkRegistry.js	GENERATION_TIER2	278	META	fork registry declaration
+src/domain/facts/rulerKind.js	rulerKindOf	24	KEY	rulerKindOfLabel(government)
+src/domain/facts/seatHeld.js	governingNameOf	26	KEY	governingNameOf (seat-held fact)
+src/domain/facts/seatHeld.js	governingNameOf	28	KEY	government string
+src/domain/facts/seatHeld.js	cards	49	KEY	memberships compare
+src/domain/facts/sovereign.js	sources	77	KEY	sovereign word test over the names
+src/domain/facts/rulingBody.js	rulingBodyOf	42	KEY	rulerKindOfLabel / ruledByBodyOfLabel
+src/domain/facts/seatMembers.js	seatMembersOf	46	KEY	fallback find by name
+src/domain/edit/recordInvariantMeta.js	CHECK_META	74	META	invariant declaration
+src/domain/edit/fieldDeclarations.js	FIELD_DECLARATIONS	122	META	field declaration
+src/domain/edit/recordInvariants.js	governingSeated	292	KEY	invariant: governingName names an isGoverning row
+src/domain/causalState.js	if	679	KEY	profile lookup by name
+src/domain/causalState.js	if	680	KEY	
+src/domain/causalState.js	if	681	KEY	
+src/domain/causalState.js	if	896	KEY	lawful/anarchic pattern test on the label (and prints it in a contributor reason)
+src/domain/causalState.js	if	900	PRINT	contributor reason text
+src/domain/causalState.js	if	904	PRINT	contributor reason text
+src/domain/dossier/realmEntityWeb.js	factions	175	KEY	entity lookup by name key/id
+src/domain/dossier/realmEntityWeb.js	factions	176	KEY	
+src/domain/dossier/realmEntityWeb.js	factions	177	KEY	
+src/domain/dossier/realmEntityWeb.js	factions	178	KEY	factionIdFromName(name)
+src/domain/dossier/powerStrata.js	rulingChainOf	369	PRINT	ruling chain: government carried to the Power tab
+src/domain/institutions/institutionTable.js	for	408	KEY	offices set (a key of the institution table)
+src/domain/timeProgression.js	if	294	KEY	
+src/domain/timeProgression.js	isGoverning	296	KEY	
+src/domain/timeProgression.js	isGoverning	298	KEY	name equality
+src/domain/rulingPower.js	governingFactionOf	189	KEY	fallback find by name
+src/domain/rulingPower.js	first	703	WRITE	transfer writes governingName
+src/domain/worldPulse/warSeatBooks.js	rivalTriumph01	150	KEY	
+src/domain/worldPulse/warSeatBooks.js	for	159	KEY	pair includes name
+src/domain/worldPulse/warPoliticalLoop.js	applyWarDecisionPolitics	114	KEY	
+src/domain/worldPulse/warPoliticalLoop.js	applyWarDecisionPolitics	115	KEY	
+src/domain/worldPulse/warPoliticalLoop.js	context	150	KEY	incident context name (stored)
+src/domain/worldPulse/lineageClaim.js	governingHouseOf	81	PRINT	lineage claim: the governing house named
+src/domain/worldPulse/treasuryNews.js	courtOf	55	PRINT	news line: "<seat> of <town>"
+src/domain/worldPulse/migrationKernel.js	buildCultureVector	170	KEY	factionArchetype(name)
+src/domain/worldPulse/migrationKernel.js	buildCultureVector	171	KEY	culture vector governingName (compared by cultureDistance)
+src/domain/worldPulse/lineageNews.js	governingHouse	53	PRINT	news line: governing house named
+src/domain/worldPulse/dispositionNews.js	truthfulSlots	127	PRINT	news line: {house}
+src/domain/worldPulse/religionLegitimacy.js	tenure	500	KEY	government affinity by label
+src/domain/worldPulse/religionState.js	applyDivineMandate	766	KEY	mandate by label
+src/domain/worldPulse/religionState.js	divineMandateStatus	789	KEY	mandateGovWeight(label)
+src/domain/worldPulse/militaryStrength.js	if	255	KEY	martial/pacific pattern test on the label (and prints it in a contributor reason)
+src/domain/worldPulse/militaryStrength.js	if	257	PRINT	contributor reason text
+src/domain/worldPulse/militaryStrength.js	if	259	PRINT	contributor reason text
+src/domain/worldPulse/religiousContest.js	crisisDisorder01	195	KEY	governmentLawAffinity(label)
+src/domain/worldPulse/religiousContest.js	if	873	KEY	government → deity legitimacy
+src/domain/worldPulse/religiousContest.js	if	945	KEY	conductFitSignal(label)
+src/domain/display/governanceAccount.js	for	272	KEY	excludes the governing row by name set
+src/domain/display/warResolve.js	readLeadership	216	PRINT	war resolve view model: government
+src/domain/display/warStatus.js	for	333	PRINT	war status: occupier named
+src/domain/display/warStatus.js	for	334	PRINT	war status: occupier fallback
+src/domain/display/stateProse/defenseStateProse.js	slots	1141	PRINT	Defense prose slot {seat}
+src/domain/display/stateProse/generalStateProse.js	engagements	2200	PRINT	General prose slot {governing}
+src/domain/display/stateProse/powerStateProse.js	powerStateProse	998	PRINT	Power prose {governing} fill
+src/domain/display/stateProse/powerStateProse.js	powerStateProse	1000	PRINT	Power prose {seat} fill
+src/domain/display/stateProse/powerStateProse.js	line6	1153	KEY	Power prose: excludes the governing name from the advised pair (compare)
+src/domain/summary/settlementQuickGuide.js	governsLine	574	PRINT	quick guide: governs line
+src/domain/summary/settlementQuickGuide.js	governsLine	575	PRINT	quick guide: governs line fallback
+src/domain/summary/settlementQuickGuide.js	governsLine	576	PRINT	quick guide: governs line fallback (faction)
+src/domain/summary/settlementQuickGuide.js	composeAuthorityTruth	957	PRINT	quick guide: authority truth
+src/domain/summary/settlementQuickGuide.js	composeAuthorityTruth	958	PRINT	quick guide: authority truth fallback
+src/domain/summary/settlementQuickGuide.js	composeAuthorityTruth	959	PRINT	quick guide: authority truth fallback (faction)
+src/domain/summary/settlementQuickGuide.js	if	977	META	trace path string
+src/domain/factionRename.js	FACTION_RENAME_SURFACES	327	META	rename ledger declares governingName a KEY
+src/domain/factionRename.js	FACTION_RENAME_SURFACES	328	META	rename ledger declares government a KEY
+src/domain/factionRename.js	if	931	WRITE	rename ledger rewrites the key
+src/domain/factionRename.js	if	932	WRITE	rename ledger rewrites the key
+src/domain/dailyLife.js	withGovernment	518	PRINT	Daily Life lines: {gov} filled with the government
+src/domain/spatial/cultureDistance.js	CULTURE_TUNING	59	META	comment in a tuning table
+src/domain/spatial/cultureDistance.js	cultureDistance	183	KEY	same overlord: name equality
+src/domain/spatial/cultureDistance.js	cultureDistance	184	KEY	
+src/domain/coherence/hookTruth.js	settlementHookFacts	191	KEY	hook facts: ruledByBodyOfLabel(government)
+src/domain/simulationSpine.js	deriveRuledBy	477	PRINT	ruledBy line ("a <form>, currently <governing>"); also compares formal vs governing
+src/domain/simulationSpine.js	deriveRuledBy	479	PRINT	ruledBy line fallback
+src/domain/simulationSpine.js	top	503	PRINT	ruledBy fallback
+src/domain/roles/roleClass.js	seatFactions	120	KEY	set of governing names
+src/domain/capacityModel.js	if	527	META	contributor path string; reads the governing power number, not the name
+src/domain/factionProfile.js	legitimacyFor	259	KEY	legitimacy by exact name
+src/domain/institutionRename.js	NON_CASCADED_SURFACES	247	META	non-cascaded surface declaration
+src/domain/institutionRename.js	NON_CASCADED_SURFACES	249	META	non-cascaded surface declaration
+src/domain/institutionRename.js	NON_CASCADED_SURFACES	264	META	declaration text
+src/domain/hookEscalation.js	if	554	KEY	clock id built from the name (stored key)
+src/domain/people/membership.js	list	96	KEY	power order: governing first, by name
+src/domain/people/cardPowers.js	governingNameOf	43	KEY	governingNameOf (feeds card power lines: PRINT via callers)
+src/domain/people/cardPowers.js	governingNameOf	45	KEY	
+src/pdf/sections/PowerStructure.jsx	PowerStructure	36	PRINT	PDF power section: the governing row
+src/pdf/sections/PowerStructure.jsx	RuleAndSuccession	196	PRINT	PDF: prior government
+src/pdf/sections/Cover.jsx	subtitle	171	PRINT	PDF cover subtitle
+src/pdf/sections/IdentityDailyLife.jsx	idRows	83	PRINT	PDF identity rows
+src/pdf/lib/viewModel.js	npcs	250	PRINT	PDF view model: governingName (NPC slice)
+src/pdf/lib/viewModel.js	identitySlice	310	PRINT	PDF view model: governingName (identity slice)
+src/pdf/lib/viewModel.js	conflicts	557	PRINT	PDF view model: conflicts government
+src/pdf/lib/viewModel.js	conflicts	561	PRINT	PDF view model: conflicts filter (presence only)
+src/pdf/lib/viewModel.js	npcsSlice	721	PRINT	PDF NPC power line
+src/pdf/lib/viewModel.js	if	798	PRINT	PDF NPC power line
+src/foundry/journalPages.js	identityPage	291	PRINT	Foundry export: Governing power
+src/generators/people/representatives.js	(via governingFactionOf)	244	ROW	
+src/generators/people/representatives.js	(via governingFactionOf)	463	KEY	seat card key
+src/generators/people/castPowers.js	(via governingFactionOf)	228	KEY	memberships power key
+src/generators/people/castPowers.js	(via governingFactionOf)	613	KEY	memberships compare
+src/generators/people/castPowers.js	(via governingFactionOf)	705	KEY	memberships compare
+src/domain/facts/seatHeld.js	(via governingFactionOf)	29	KEY	seat-held fact
+src/domain/facts/officialsInPay.js	(via governingFactionOf)	34	KEY	memberships compare
+src/domain/facts/officialsInPay.js	(via governingFactionOf)	58	KEY	memberships compare
+src/domain/facts/officeForms.js	(via governingFactionOf)	54	KEY	the form keys the office family (officeFamilyOfForm)
+src/domain/seat/holderOfSeat.js	(via governingFactionOf)	239	KEY	formKindOf(form), rankIn by name
+src/domain/seat/seatCircumstances.js	(via governingFactionOf)	95	ROW	
+src/domain/seat/seatCircumstances.js	(via governingFactionOf)	149	ROW	
+src/domain/dossier/seatHolder.js	(via governingFactionOf)	112	PRINT	seat holder line names the seat (and keys NPC membership)
+src/domain/dossier/realmEntityWeb.js	(via governingFactionOf)	174	KEY	entity lookup
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	70	KEY	compare
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	147	PRINT	ruler name and seatOf on the ruling chain
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	368	PRINT	ruling chain power.name
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	473	KEY	compare
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	514	KEY	compare
+src/domain/dossier/powerStrata.js	(via governingFactionOf)	550	ROW	
+src/domain/dossier/powerSupport.js	(via governingFactionOf)	167	KEY	compare
+src/domain/dossier/powerSupport.js	(via governingFactionOf)	383	KEY	compare
+src/domain/institutions/institutionTable.js	(via governingFactionOf)	404	KEY	offices set
+src/domain/rulingPowerCoup.js	(via governingFactionOf)	97	ROW	
+src/domain/rulingPower.js	(via governingFactionOf)	507	KEY	transfer: fromGovernment name, target compare
+src/domain/worldPulse/warSeatBooks.js	(via governingFactionOf)	383	ROW	
+src/domain/worldPulse/warSeatBooks.js	(via governingFactionOf)	478	ROW	
+src/domain/worldPulse/warSeatBooks.js	(via governingFactionOf)	629	PRINT	seat books: factionName (named in pulse text)
+src/domain/worldPulse/warSeatBooks.js	(via governingFactionOf)	748	ROW	
+src/domain/worldPulse/warPoliticalLoop.js	(via governingFactionOf)	108	KEY	
+src/domain/worldPulse/warPoliticalLoop.js	(via governingFactionOf)	189	ROW	
+src/domain/worldPulse/envoyNegotiationPictureBuilder.js	(via governingFactionOf)	111	ROW	
+src/domain/worldPulse/warPeaceDecision.js	(via governingFactionOf)	110	KEY	name equality on a transition
+src/domain/worldPulse/oathHolder.js	(via governingFactionOf)	143	ROW	
+src/domain/worldPulse/migrationKernel.js	(via governingFactionOf)	162	KEY	factionArchetype
+src/domain/worldPulse/disposition.js	(via governingFactionOf)	164	ROW	
+src/domain/worldPulse/disposition.js	(via governingFactionOf)	257	KEY	factionArchetype
+src/domain/worldPulse/disposition.js	(via governingFactionOf)	407	ROW	
+src/domain/worldPulse/urbanFabricKernel.js	(via governingFactionOf)	359	ROW	
+src/domain/worldPulse/applyWorldPulse.js	(via governingFactionOf)	976	KEY	transition governingFactionName (stored)
+src/domain/worldPulse/treasury.js	(via governingFactionOf)	726	ROW	
+src/domain/worldPulse/factionCompetition.js	(via governingFactionOf)	795	ROW	
+src/domain/worldPulse/religionLegitimacy.js	(via governingFactionOf)	239	ROW	archetype, id
+src/domain/worldPulse/assizeKernel.js	(via governingFactionOf)	140	ROW	
+src/domain/worldPulse/armyTransitKernel.js	(via governingFactionOf)	190	ROW	
+src/domain/worldPulse/gratitudeBonds.js	(via governingFactionOf)	116	ROW	
+src/domain/worldPulse/stressorGates.js	(via governingFactionOf)	156	ROW	
+src/domain/display/tensionCauseHolds.js	(via governingFactionOf)	51	ROW	category
+src/domain/display/governingModifierWords.js	(via governingFactionOf)	116	KEY	modifierBorneOut(…, name)
+src/domain/traditions/traditionDescription.js	(via governingFactionOf)	393	ROW	
+src/domain/traditions/politics.js	(via governingFactionOf)	145	PRINT	tradition politics label
+src/domain/events/affordanceManifest.js	(via governingFactionOf)	227	ROW	
+src/domain/events/affordanceManifest.js	(via governingFactionOf)	462	ROW	
+src/domain/coherence/crisisFactFindings.js	(via governingFactionOf)	193	KEY	finding compare
+src/domain/coherence/seatHolderFindings.js	(via governingFactionOf)	106	KEY	finding compare
+src/domain/simulationSpine.js	(via governingFactionOf)	478	PRINT	ruledBy
+src/domain/simulationSpine.js	(via governingFactionOf)	502	PRINT	ruledBy
+src/domain/rulingPowerSeat.js	(via governingFactionOf)	323	ROW	
+src/domain/crisis/crisisPage.js	(via governingFactionOf)	247	PRINT	crisis page names the governing power
+src/domain/crisis/crisisCast.js	(via governingFactionOf)	543	ROW	
+src/domain/crisis/crisisCast.js	(via governingFactionOf)	612	ROW	
+src/domain/crisis/crisisCast.js	(via governingFactionOf)	684	ROW	
+src/domain/crisis/crisisCast.js	(via governingFactionOf)	862	ROW	
+src/domain/people/patronage.js	(via governingFactionOf)	106	KEY	ruling three by name
+src/domain/people/patronage.js	(via governingFactionOf)	210	ROW	
+src/domain/people/patronage.js	(via governingFactionOf)	241	ROW	
+src/domain/people/allegiance.js	(via governingFactionOf)	179	KEY	compare
+src/domain/people/allegiance.js	(via governingFactionOf)	203	KEY	compare
+src/domain/people/hallCapture.js	(via governingFactionOf)	94	KEY	memberships compare
+src/domain/people/seatKeeper.js	(via governingFactionOf)	28	ROW	
+src/domain/people/seatKeeper.js	(via governingFactionOf)	39	KEY	memberships compare
+src/domain/people/seatKeeper.js	(via governingFactionOf)	45	PRINT	caretakerFormOf(office, government): the keeper's printed office form
+src/domain/people/seatKeeperDisplay.js	(via governingFactionOf)	16	PRINT	caretakerFormOf: the keeper's printed office form
+src/pdf/lib/viewModel.js	(via governingFactionOf)	221	PRINT	PDF
+src/pdf/lib/viewModel.js	(via governingFactionOf)	288	PRINT	PDF

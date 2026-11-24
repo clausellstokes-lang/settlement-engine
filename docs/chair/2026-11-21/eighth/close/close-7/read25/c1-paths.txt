@@ -1,0 +1,80 @@
+== V
+town Guild Council 30, Church Council 19, Merchant Council 18, Corrupt Council 18, Town Council 16, Military Council 15, Feudal Appointee 10, Town Mayor 9, Merchant oligarchy 9, Arcane Council 6
+city Merchant Guild Council 25, Merchant oligarchy 23, Noble Governorship 19, City Council 16, Corrupt City Council 14, Democratic assembly 10, Military City Council 9, Ecclesiastical Council 8, City-State Council 8, Arcane Council 7, Merchant City Council 7, Royal Authority 4
+metropolis Ducal Governorship 25, Grand Guild Consortium 23, Grand Merchant Oligarchy 17, Arcane Senate 17, Democratic assembly 12, Grand Military Council 12, Royal Authority 10, City-State Council 10, Grand Merchant Senate 8, Shadow Senate 7, High Theocratic Council 6, Grand Council 3
+forms 39 {"Corrupt Council":18,"Corrupt City Council":14,"Shadow Senate":7}
+record paths (33):
+  39	npcs[].goal.long
+  39	npcs[].goal.short
+  39	npcs[].memberships[].power
+  39	powerStructure.factions[].faction
+  39	powerStructure.governingName
+  39	powerStructure.government
+  39	simulationTrace[].causes[].reason
+  38	powerStructure.factionRelationships[].narrative
+  38	powerStructure.factionRelationships[].pair[]
+  38	npcs[].goal.intent.long.target.id
+  37	npcs[].goal.intent.short.target.id
+  31	conflicts[].desc
+  31	conflicts[].parties[]
+  31	powerStructure.conflicts[].desc
+  31	powerStructure.conflicts[].parties[]
+  18	pressureSentence
+  16	powerStructure.factions[].desc
+  13	stress.cast.stakes[].factionId
+  13	stressors.cast.stakes[].factionId
+  7	powerStructure.recentConflict
+  6	npcs[].secret.stakes
+  4	npcs[].allegiance.power
+  4	simulationTrace[].downstreamEffects[].target
+  3	history.currentTensions[].factions[]
+  1	npcs[].institution.title
+  1	npcs[].role
+  1	npcs[].title
+  1	relationships[].npc1Role
+  1	relationships[].npc2Role
+  1	relationships[].tension
+  1	conflicts[].plotHooks[]
+  1	powerStructure.conflicts[].plotHooks[]
+  1	npcs[].secret.what
+projection paths (31):
+  39	powerStructure.factions[].faction
+  39	powerStructure.governingName
+  39	powerStructure.government
+  39	publicProse.blocks.overview:identity.governs
+  39	publicProse.blocks.power:desk.governingTitle.sentence
+  39	publicProse.blocks.power:governance.text
+  38	publicProse.blocks.power:desk.legitimacyBanner.sentence
+  34	powerStructure.factionRelationships[].narrative
+  34	powerStructure.factionRelationships[].pair[]
+  34	publicProse.blocks.power:desk.successionRisk.sentence
+  32	publicProse.blocks.power:desk.successionHold.sentence
+  31	conflicts[].desc
+  31	conflicts[].parties[]
+  31	powerStructure.conflicts[].desc
+  31	powerStructure.conflicts[].parties[]
+  30	publicProse.blocks.power:desk.legitimacyLens.sentence
+  30	publicProse.blocks.power:desk.stabilityHeader.sentence
+  18	pressureSentence
+  16	powerStructure.factions[].desc
+  13	stress.cast.stakes[].factionId
+  13	stressors.cast.stakes[].factionId
+  7	powerStructure.recentConflict
+  4	publicProse.blocks.power:desk.legitimacyReading.sentence
+  3	history.currentTensions[].factions[]
+  1	publicProse.blocks.power:desk.structureFlag.sentence
+  1	npcs[].institution.title
+  1	npcs[].role
+  1	npcs[].title
+  1	relationships[].npc1Role
+  1	relationships[].npc2Role
+  1	relationships[].tension
+births whose projection carries the form: 39
+== C
+town Town Council 49, Town Mayor 47, Guild Council 26, Merchant oligarchy 15, Feudal Appointee 13
+city City Council 47, Merchant oligarchy 35, Merchant Guild Council 31, Noble Governorship 22, Royal Authority 8, Democratic assembly 4, City-State Council 3
+metropolis Grand Council 41, Grand Merchant Oligarchy 29, Grand Guild Consortium 28, Ducal Governorship 24, City-State Council 12, Royal Authority 8, Democratic assembly 8
+forms 0 {}
+record paths (0):
+projection paths (0):
+births whose projection carries the form: 0
