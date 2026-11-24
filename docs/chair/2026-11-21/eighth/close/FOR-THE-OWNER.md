@@ -1,9 +1,11 @@
-# FOR THE OWNER: WHAT THE FLIP ASKS OF YOU (the flip: `lane/close-6-2026-11-23-flip` at d447ee31e; prepared by CLOSE-6, finished by CLOSE-7; 2026-11-24)
+# FOR THE OWNER: WHAT THE FLIP ASKS OF YOU (the flip: `lane/close-6-2026-11-23-flip` at d447ee31e; landed on the working line `lane/join-2026-11-14` as point 113, its tip f03e9a868; prepared by CLOSE-6, finished by CLOSE-7; 2026-11-24)
 
 Written for someone who does not read code. NOTHING HERE IS SIGNED BY ANY SEAT: every item waits for your word. The flip is
 the branch `lane/close-6-2026-11-23-flip`; its last commit is d447ee31e (d447ee31e5b2836736d22778a91ce66721a6d00e), and nobody
-adds to it. It is being landed on the working line as point 113 (the chair's helper; merged at 67fcf51de, the whole suite
-running at the time of writing): THIS LINE WILL SAY THAT THE LINE CARRIES POINT 113 ONLY WHEN THE CHAIR SAYS IT HAS LANDED.
+adds to it. **The working line now carries point 113: both laws are switched on** (merge 67fcf51de; the line's tip
+f03e9a868427e6b656d299c5cce8d33c74758588, pushed 2026-11-24 17:20 UTC). Its first whole run of the test suite with the laws on
+(3,782 files, 43,315 tests) found no failure caused by the flip: every failing test is a known one, your signings below, or an
+artefact of the landing machine. **Landing is not a release** (section 0 below).
 
 ## 0. FIRST: THE DEPLOY'S ORDER, AND WHY THIS LANDING IS NOT A RELEASE
 - You paused the share veil on 2026-11-23 at 16:12 UTC. Landing the flip on the working line is NOT a release. **The working line

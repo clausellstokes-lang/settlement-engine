@@ -5,7 +5,7 @@ account, unreachable). Its law: `docs/chair/2026-11-24/tenth/prompts/START-CLOSE
 COMMON-EIGHTH 4-15, COMMON-RULES, and START-CLOSE-6's N3, N5, N6, N7, N8 read for CLOSE-7). A successor reads that file, then
 this section.
 
-## 0. WHERE THE LANE STANDS (updated 2026-11-24 17:01 UTC)
+## 0. WHERE THE LANE STANDS (updated 2026-11-24 17:21 UTC)
 STOOD ON: documents `lane/close-7-2026-11-24` cut at fba2e8c2b (CLOSE-6's final hand-back); THE LIT TREE a detached worktree
 `/home/user/wt/lit` at d447ee31e (`origin/lane/close-6-2026-11-23-flip`; node_modules and `.husky/_` linked; read and run,
 never committed). Box: `npm ci` exit 0; ledger ref `review-fixes-2026-07-08` at 235efce1a.
@@ -36,6 +36,10 @@ new names "Board of Aldermen", "Council of Syndics", "Senate", exact-name vocabu
 IN FLIGHT: chain one A1 build (/home/user/wt/a1, since 16:22); chain two B1(i) build (/home/user/wt/b1i, since 17:03).
 QUEUED: chain one A2 (wt/a2; send the chair the printed-band x production-band table BEFORE its commit) then B1(ii) (wt/b1ii);
 chain two C1 (wt/c1 on `lane/close-7-2026-11-24-c1-wip`, made 17:02) after B1(i).
+THE LINE IS f03e9a868 (point 113 LANDED, the chair 17:21; merge 67fcf51de = the flip's tree). UNIT (3) HOLDS NOTHING: the wide
+gate's 53 reds are 48 listed + lit twin 3 + R13 + provenanceMap arm 1 (landing machine's short ledger). UNIT (2) DONE: FOR-THE-OWNER
+names d447ee31e and f03e9a868; section 0 says 113 landed, not a release. LANDING LINE PLAN: one branch holding the cures merged, then
+a plain merge of f03e9a868, registers by their doors, COMMON-EIGHTH 14's runs, "CLOSE-7 <commit>".
 LISTED FOR LATER UNITS: healerCount (priest, midwife); P9 (129 of V) NEXT AFTER THE FIVE CURES, cause first; P5b fires on
 dp-town-143 (C) over its banked 0; the plains' 'Mill' row matching Sawmill (x2.34); the desert's trade x1.8 on the withheld rows;
 renaming SAVED places' three forms (the owner's, rename ledger as door). LATER UNIT (hand-back list): the capacity's healerCount not counting
