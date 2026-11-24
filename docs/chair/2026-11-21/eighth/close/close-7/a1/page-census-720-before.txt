@@ -1,0 +1,34 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11098 after 96 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+page-census: rendering 720 dossiers (4 workers) into /tmp/claude-0/-home-user-settlement-engine/264f2cd3-2300-5be6-af7e-6509ebfae300/scratchpad/A1/page-census-720-lit
+row        master integ banked  now  bar
+P2siege         —     —      0    0    0    (new row; 689 at the base)
+P3source        —     —      0    3    0  ROSE  r2s-under_siege-hamlet-2 r2s-under_siege-thorp-1 r2s-under_siege-thorp-2  (new row; 74 at the base)
+P4              0   106      0    0    0  
+P5false         —     —      0    0    0    (new row; 306 at the base)
+P5b             0     2      0    0    0  
+P6need          —     —      0    0    0    (new row; 642 at the base)
+P7a           128   127      0    0    0  
+P7b             0    27      0    0    0  
+P8any           0   220    118  115    0  r2r-hamlet-1 r2r-hamlet-11 r2r-hamlet-13
+P9            148   149    103  103    0  r2r-hamlet-1 r2r-hamlet-12 r2r-hamlet-14
+P10            18    17      0    0    0  
+P11           396   411      0    0    0  
+F4            274   245      0    0    0  
+P13           173   172      0    0    0  
+P14           183   167      2    0    0  
+P16three        0   331    179  172    0  r2r-city-10 r2r-city-14 r2r-city-16
+P16powers       0   291      0    0    0  
+P17           681   680    395  395    0  r2r-city-0 r2r-city-1 r2r-city-10
+P18           337   360    341  341    0  r2r-city-1 r2r-city-10 r2r-city-11
+P19             5     7      7    2    0  r2r-hamlet-34 r2s-succession_void-hamlet-2
+P20           689   689      0    0    0  
+NEW1           10    11      0    0    0  
+NEW2            0     3      6    5    0  r2r-village-2 r2s-indebted-hamlet-0 r2s-indebted-village-0
+P2            568   569    569  RETIRED → P2siege: two true quantities, by the owner's design
+P3any         172   190    190  RETIRED → P3source: it counted the words, not the explanation
+P6            463   296    296  RETIRED → P6need: it read the true half as the fault
+P5a             0   288    288  RETIRED → P5false: it counted every capture-pressure line beside a free hall, the true with the false
+P1a             0    57      0  RETIRED → null: no line of the corpus says "only just" any more (DS-ECO-9 SECURE v3 re-said by W2-WRITE-SIDE-ECO-3, e056fbfb
+P1b            64    64      0  RETIRED → null: no line of the corpus says "a small margin" any more (DS-ECO-9 SECURE v1 re-said by W2-WRITE-SIDE-ECO-3, e056fbfb
+page-census: ROSE on P3source — the register is shrink-only
+exit=1
