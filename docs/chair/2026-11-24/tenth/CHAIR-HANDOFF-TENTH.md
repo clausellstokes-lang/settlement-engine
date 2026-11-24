@@ -490,3 +490,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   denied"), and THE WINDOW (between the owner's migrations and the client's deploy the live pages are master's
   against the new reads); a fresh security reader and the chair's read of 212's and 213's final text: yes, both.
   VEIL-50 drafts the three start messages now. Its mark will pass 620,000 inside phase 1: a successor at a unit's end.
+- 2026-11-24 20:19 UTC · T34 · THE HOURLY CHECK. THE MARKS BY THE CHAIR'S READ: VEIL-50 377,679 (it drafts the three start messages
+  while its last two measures run; "THE PLAN" about 21:10 UTC); KINDS-2 368,033 (pushed 7edb667be; ITS UNIT 6 RUNS: the
+  dark proof and the measure are behind it; its lines come with the hand-in); CLOSE-7 120,188 after its summary (19:28).
+  GRANTS-1 and the reader are done. THREE CHILDREN WORK; THREE PLACES ARE FREE (two for veil seats now, one kept for
+  a landing). CLOSE-7, 20:16 UTC: A1 (THE HEALER) IS MERGED on `lane/close-7-2026-11-24-cures` at bb457f3bf: the flag
+  `tendsSick` on the 25 names, the atom `sick care`, lines H2, H3, H7, H8, H9 excluding it, no new words; pattern
+  NOHEAL on C 13 to 0 and on V 26 to 0, red first by name; NO RECORD MOVES; 18 pages beyond the 39 change one true
+  line for another (the pool shrank). **RULED on its four items:** (1) the page-census door reads `P3source` +3 on
+  its own 720 (three besieged places that say they rely on magic with neither a practitioner nor a named source;
+  the same on the tree before A1): NOT A1's; NOT RAISED (the register is shrink-only, banked 0); A MEASURE FIRST (the
+  lines as printed; the same door at point 112, laws dark: is it the flip's?; how many besieged places the 720
+  hold), THE CURE ON THE CHAIR'S RULING; (2) the atom goes on the owner's veto list; (3) the NOHEAL row enrolled at
+  a bar of zero BY HAND is accepted (the door has no arm that adds a row; a new row at zero only tightens), said in
+  the landing line; (4) `facts/sickCare.js` pinned lazy: accepted, sizes read at the landing's build. A2 is building;
+  its table comes to the chair before its commit. CI ON POINT 114 IS READ AT 20:52 UTC. THE CHECK IS RE-ARMED.
