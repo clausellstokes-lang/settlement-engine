@@ -578,3 +578,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   measured); (6) a fresh security reader and the chair's read of 212's and 213's final text before the owner's
   hand. THE CHAIR'S GUESS: 18 to 24 wall hours from now, then the reader, the read and the landing. The three start
   messages are VEIL-50's drafts, read whole and filled by the chair (`prompts/START-VEIL-51/52/53.txt`).
+- 2026-11-24 21:24 UTC · T41 · THE THREE VEIL SEATS ARE MADE (21:23 UTC), each on `lane/veil-41-2026-11-23-tip` b58abc48b, on the
+  middle tier at high effort, each from its start message at the chair's commit 994ad8b64: VEIL-51
+  session_019yED1Rb66YNz4X5xJLwk3k (`prompts/START-VEIL-51.txt`; branch `lane/veil-51-2026-11-24`); VEIL-52
+  session_019yED1RnXAjn5yFhxpVPufG (`START-VEIL-52.txt`; `lane/veil-52-2026-11-24`); VEIL-53
+  session_019yED1RXpsxm5sWDw7RYQdF (`START-VEIL-53.txt`; `lane/veil-53-2026-11-24`). THEIR LINES GO TO VEIL-50 (the
+  lane's owner, session_019yED1SiNQusY1PJm5kVM1N); a surprise comes to both. VEIL-50 has RULING V1 and the ids; its
+  unit 2 (R4-IDS) runs; it drafts VEIL-54's start message (the legacy names). THE HOURLY CHECK, THE MARKS BY THE
+  CHAIR'S READ: VEIL-50 430,670; KINDS-2 427,031 (it waits on one builder's runs, then merges and hands in); CLOSE-7
+  205,337 after its summary (both builders run). SIX CHILDREN NOW: CLOSE-7, KINDS-2, VEIL-50, VEIL-51, VEIL-52,
+  VEIL-53. THE PLACES ARE FULL: KINDS-2's hand-in frees one, which its landing takes; VEIL-54 is seated when that
+  landing ends. THE CHECK IS RE-ARMED FOR ONE HOUR.
