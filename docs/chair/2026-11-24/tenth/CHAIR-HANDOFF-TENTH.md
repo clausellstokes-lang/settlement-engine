@@ -589,3 +589,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   205,337 after its summary (both builders run). SIX CHILDREN NOW: CLOSE-7, KINDS-2, VEIL-50, VEIL-51, VEIL-52,
   VEIL-53. THE PLACES ARE FULL: KINDS-2's hand-in frees one, which its landing takes; VEIL-54 is seated when that
   landing ends. THE CHECK IS RE-ARMED FOR ONE HOUR.
+- 2026-11-24 21:33 UTC · T42 · VEIL-50 has RULING V1 (taken, whole) and has STARTED UNIT 2: code on
+  `lane/veil-50-2026-11-24-r4ids-wip` at 8430edf5c (the predecessor's ab05aa487 and its R4I-SQL-2 040a405e0, merged
+  plain); it read the two functions and their caller whole and found no fault; its runs go (the owed lint, copy and
+  typecheck; then both cures' red and green; then the unit's proofs). VEIL-54's START MESSAGE IS READY:
+  `prompts/START-VEIL-54.txt` (VEIL-50's draft, read whole by the chair: THE LEGACY NAMES, eight paths with their
+  counts; the cause read in 212's people pass, which strips the keys that name a withheld POWER and nothing that
+  names a withheld HOUSE; ITS STEP (2) PROPOSES THE RULE PATH BY PATH TO THE CHAIR BEFORE ANY BUILD: withheld, never
+  masked, no new served fact; one plant a path). IT IS SEATED WHEN A PLACE IS FREE (the six are full: CLOSE-7,
+  KINDS-2, VEIL-50, 51, 52, 53); the troubles rule's landing takes KINDS-2's place first, and VEIL-54 the place after
+  it: its SQL cannot merge before "R4-IDS MERGED" in any case.
