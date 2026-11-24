@@ -10,13 +10,19 @@
   files, 31925 -> 31943 titles; mutation manifest two citations re-addressed; boundary header item 4. `tests/lint`
   whole 225 files / 3374 tests / 8 red: 3 on the list; domainAnyCastBaseline (4: troubleLaw.js one any) and
   seedLoopTotality (troubleLawWeights two bare seed loops) the lane's own, owed in unit 3 (K4-JOIN items 7, 8).
-- UNIT 3 (the join): builder on `lane/kinds-2-2026-11-24-k4` (worktree `../kinds2-k4`), brief `briefs/K4-JOIN.md`
-  (from e0d343d88). UNITS 4 and 5: brief `briefs/K5-PROOF.md`, not started.
-- KNOWN RED: `troubleLawWiring` "1. CREATE (dark)" (unit 3 re-shapes it: the one pin is the join's (g)); the two lint
-  reds above.
-- K3 step 0's proof (2) (900/900 against `out/law2-B50.jsonl`) is NOT re-runnable at point 113: that corpus was born
-  with the seat and fortune laws dark. The B50 row is read in the diff; its effect is re-measured in unit 5.
-- NEXT: read K4's diff whole, merge, then K5-PROOF's builder.
+- UNIT 3 DONE: K4-JOIN merged 6fd1f58cd (builder `lane/kinds-2-2026-11-24-k4` @ 6daa8990c, read whole):
+  `withRecordTroubleLaw` in `regenHistoryPipeline` (shape 2 cured, red first on troubleLawSavedTown arm 5);
+  `generationLawsSavedPlace` LAW_READINGS.trouble (reader + the two bars), arms (a)-(g) green walking the row ((e) does
+  not red without the cure for its fixture: arm 5 is the red-first); troubleLawWiring arm 1 own key only (the one born
+  pin is the join's (g), on the flip's list); the why says dark, lit by one commit on the owner's yes; domainAnyCast and
+  seedLoopTotality cured red first; historyData.js 28 comment citations re-addressed.
+- OWED, RED: `tests/lint/tuningRegister.walker.test.js` "dependents moved" (troubleLaw.js gains the pipeline as a
+  dependent; no value moved): the refreeze door was REFUSED by the builder's permission check; the refusal stands and
+  is reported to the chair (the chair's hand or ruling).
+- UNITS 4 and 5: brief `briefs/K5-PROOF.md`, builder next, from 6fd1f58cd.
+- K3 step 0's proof (2) (900/900 against `out/law2-B50.jsonl`) is history (the chair, 18:47): unit 4 proves dark
+  equality against the LINE on both corpora; unit 5 measures afresh.
+- NEXT: K5-PROOF's builder; then COMMON-EIGHTH 14's runs and "KINDS <commit>".
 
 # KINDS-2 hand-back (the lane "which troubles a place is born with", re-opened 2026-11-24)
 
