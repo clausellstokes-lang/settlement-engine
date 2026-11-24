@@ -1,0 +1,60 @@
+{
+ "runner": "postgres",
+ "after_schema_level_revoke_anon_authenticated": {
+  "anon": true,
+  "authd": true,
+  "svc": true,
+  "acl": "{=X/postgres,postgres=X/postgres,service_role=X/postgres}"
+ },
+ "after_global_revoke_public_too": {
+  "anon": false,
+  "authd": false,
+  "svc": true,
+  "acl": "{postgres=X/postgres,service_role=X/postgres}"
+ },
+ "named_grant_still_works": {
+  "anon": false,
+  "authd": true,
+  "svc": true,
+  "acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}"
+ },
+ "existing_function_unchanged": {
+  "anon": true,
+  "authd": true,
+  "svc": true,
+  "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}"
+ },
+ "existing_after_create_or_replace": {
+  "anon": true,
+  "authd": true,
+  "svc": true,
+  "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}"
+ },
+ "default_acl": [
+  {
+   "role": "postgres",
+   "schema": "-",
+   "defaclobjtype": "f",
+   "defaclacl": "{postgres=X/postgres}"
+  },
+  {
+   "role": "postgres",
+   "schema": "public",
+   "defaclobjtype": "S",
+   "defaclacl": "{anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}"
+  },
+  {
+   "role": "postgres",
+   "schema": "public",
+   "defaclobjtype": "f",
+   "defaclacl": "{service_role=X/postgres}"
+  },
+  {
+   "role": "postgres",
+   "schema": "public",
+   "defaclobjtype": "r",
+   "defaclacl": "{anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+  }
+ ]
+}
+exit 0
