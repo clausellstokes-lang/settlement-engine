@@ -1,0 +1,77 @@
+# THE CHAIR'S TENTH HANDOFF (2026-11-24; the chair back on the first account)
+
+**Why this file exists.** On 2026-11-24 the owner came back to the FIRST account, into the seventh chair's own session,
+and said (verbatim, in order): "Read the repository now and tell me your holistic thoughts"; then, after the answer,
+"Continue the pending work please". The ninth chair (session_01FbPLbdpQrxXktCeSf32d4j, on the other account) and every
+seat it opened CANNOT BE REACHED from here; origin last moved at 18:17 UTC on 2026-11-23 (CLOSE-6's documents).
+THIS CHAIR IS session_019yED1SUxGVHyjQnoqoFvQ8 (the seventh chair's session, now the tenth chair). If this session
+ends, start here. First written 14:48 UTC on 2026-11-24 (from `date -u`).
+
+**Read in this order.** `docs/OPERATING_STANDARD.md` (master); on this lane the ninth chair's
+`docs/chair/2026-11-23/ninth/CHAIR-HANDOFF-NINTH.md` (ITS "READ THIS FIRST" BLOCK and its entries N116 to N122: the
+state at its stop) and `VEIL-PAUSED-HANDOFF.md` beside it; the two COMMON files (`eighth/prompts/COMMON-EIGHTH.txt`,
+`seventh/prompts/COMMON-RULES.txt`); then this file whole and the start messages in `prompts/` beside it (each seat's
+whole first message, as sent).
+
+## 0. THE STATE AT THE TAKEOVER (read from origin at 14:36 UTC on 2026-11-24)
+- THE WORKING LINE: `lane/join-2026-11-14` at 9b0ffaa9750f65f122e07c5d2b368797569b5055 (points 106 to 112; both laws
+  whole and DARK). master: db832c8926 (2026-11-06), 8,366 commits behind the line. Production's database: migration 203
+  (`supabase/applied-head.json`, 2026-09-20); the line holds 204 to 210, applied nowhere.
+- THE FLIP IS BUILT AND NOT LANDED: `lane/close-6-2026-11-23-flip` at d447ee31e5b2836736d22778a91ce66721a6d00e (the three dials lit; PROSE-E merged;
+  13G; F-FORTUNE, F-JOIN and F-JOIN-2; the lit golden twin prepared; the sample town re-emitted; both doors re-taken
+  after the f9 merge). CLOSE-6 stopped before its build, `FOR-THE-OWNER.md`'s sizes and its line "FLIP <commit>".
+  STACK-106's early whole run ("PREPASS", N120) lived on its own machine and is lost to this account.
+- THE SHARE VEIL IS PAUSED BY THE OWNER (2026-11-23 16:11 UTC, to the ninth chair: "Pause and record the progress to the
+  veil work for handoff. Focus all your remaining effort on the close lane"). NOTHING OF IT IS RE-OPENED BY THIS CHAIR.
+  The ninth chair's N117 stands: THE WORKING LINE IS NOT TO BE RELEASED BEFORE THE VEIL'S HIDING IS IN IT.
+- THE ACCOUNT: the first account's weekly limit read "seven_day: allowed_warning", no overage, resetting at 15:00 UTC
+  on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
+
+## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Continue the pending work please" (2026-11-24, this account). On the other account, to the ninth chair (verbatim in
+its record): "Pause and record the progress to the veil work for handoff. Focus all your remaining effort on the close
+lane" (2026-11-23); "I defer all decisions to you" (2026-11-23: the chair decides; NEVER a grant of the merge, the
+deploy, a migration, a credential, a signing or a permission setting); SIX CHILDREN WORK AT A TIME (2026-11-22). On
+this account, earlier: "I also defer all judgement to you"; "Do all of it predeploy."; "fable only architects. Opus
+for everything else". He is answered first and in full, in very simple words.
+WHAT STAYS HIS HAND: the pull request's merge, the deploy, every migration, every production credential; goldens,
+reference signings, tuning signatures and size rises. A recorded approval is history, never a grant.
+
+## 2. DECISIONS OF THIS CHAIR (each vetoable by the owner)
+- **T1 (14:50 UTC) THE FLIP'S COMMIT IS d447ee31e, BY THE CHAIR'S OWN READ.** CLOSE-6 cannot say "FLIP <commit>". The
+  chair read every line changed after 21b0d74b5 (`git diff 21b0d74b5 d447ee31e`: under src/ and scripts/ four files:
+  `fortuneLaw.js`'s header comment, in N121's words; `landing.js :: body2`, N118's text; `landingFixture.js`, the
+  sample town re-emitted; one row of the mutation manifest; the rest are seven test and register files): none can move
+  a birth. **Why:** the seat's own order of work shows no code commit left after its two doors. **What would change
+  it:** a door found owed at the landing's `tests/lint` (then it is re-taken on the stack, its own commit).
+- **T2 THE LANDING OF POINT 113 RUNS IN THE CHAIR'S OWN CONTAINER, BY A HELPER ON THE MIDDLE TIER**
+  (`prompts/START-LAND-113.txt`; `/home/user/wt/line`, brought to 9b0ffaa97; BRIEF-LANDING-STACK with THE WIDE GATE:
+  the whole suite once, lit, in the close's six parts by its own tools). **Why:** on the other account the seats' own
+  permission checks refused merges of another session's branch until the owner typed a line in the seat's session
+  (N9, N13, N34); STACK-106 cannot be reached; a helper in the chair's container works under the owner's own order to
+  this session, as the landings to point 86 did. **Cost:** the chair's machine is busy about four hours. **Reversal:**
+  nothing is pushed to the working line until the chair has read the report; the helper pushes only the transport ref
+  `lane/stack-113-wip-2026-11-24`.
+- **T3 CLOSE-7 IS SEATED** (`prompts/START-CLOSE-7.txt`): it does not land and does not touch the flip branch; it
+  measures the chair's read ("READ-24", `read/FINDINGS.md`), finishes `FOR-THE-OWNER.md` from the landing's build, and
+  classes and cures the reds the wide gate finds.
+- **T4 GRANTS-1 IS SEATED TO PREPARE, AND APPLY NOTHING** (`prompts/START-GRANTS-1.txt`): two holes found by the
+  repository read and verified by the chair in the SQL text (server-only functions revoked from `public` alone; the
+  profiles self-update rule missing a later column). The owner was told on 2026-11-24 and has not answered on them;
+  the chair prepares the check and the fix because a hole in what is live does not wait for the release. A fresh
+  security reader reads the fix's final text; every application is the owner's hand.
+- **T5 THREE CHILDREN WORK** (the landing helper, CLOSE-7, GRANTS-1): under the owner's six.
+- **T6 THE CHAIR'S ADVICE ON THE VEIL CHANGED ON EVIDENCE, SAID TO THE OWNER ON 2026-11-24:** master's own
+  `src/lib/gallery.js` says the veil is a "CLIENT MIRROR" and that "the stored payload still carries the veiled
+  facts"; so the live site already hides only in the browser, and the first aim should be THE SERVER NOT SENDING WHAT
+  IS HIDDEN, for old pages and new, with the stricter "cannot be worked out from what remains" to follow. HE HAS NOT
+  ANSWERED. The veil stays paused until he does.
+
+## 3. THE SEATS OF THIS CHAIR (all on the middle tier at high effort)
+Filled in as each is seated: see section 5.
+
+## 4. THE REPOSITORY READ OF 2026-11-24
+`REVIEW-2026-11-24.md` beside this file: what was measured, what five readers reported, what the chair verified
+itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
+
+## 5. SINCE THIS FILE WAS WRITTEN (newest last; each hour read from the clock when written)
