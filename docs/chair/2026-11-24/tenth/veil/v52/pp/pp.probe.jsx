@@ -46,12 +46,18 @@ const J = (v) => JSON.stringify(v ?? null, (_k, x) => (isRec(x) ? Object.fromEnt
 const SALT = 'r4it-known-salt-0f0f0f0f';
 
 it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
-  const { loadEngine, loadVeil } = await import(`${process.env.MEAS_COMMON}`);
-  const E = await loadEngine(SRC); const V = await loadVeil(SRC); const veil = V.veil;
-  const { withholdCovertCopies } = await import(`${SRC}/src/domain/display/gallerySecondHomes.js`);
+  // PP_TODAY=1 (the chair, 23:14 UTC): MASTER's client (RV6_SRC = the tree at db832c892) on MASTER's chain; (a) ONLY. Master lacks
+  // cardVeil.js, gallerySecondHomes.js and galleryRosterChoices.js and tell-common's loadEngine (publicProseCompose.js): the two
+  // CLASSIFIERS (isHideableHouse, withholdCovertCopies) come from the tip's tree PP_CLASSIFY_SRC (they name a leaf's kind; they
+  // read nothing served); the veil, the marker writer and the page are master's own (galleryVeil.js, gallery.js).
+  const TODAY = process.env.PP_TODAY === '1'; const CL = process.env.PP_CLASSIFY_SRC || SRC;
+  let E; let veil;
+  if (TODAY) { E = { isHideableHouse: (await import(`${CL}/src/domain/people/cardVeil.js`)).isHideableHouse }; veil = await import(`${SRC}/src/domain/display/galleryVeil.js`); }
+  else { const { loadEngine, loadVeil } = await import(`${process.env.MEAS_COMMON}`); E = await loadEngine(SRC); const V = await loadVeil(SRC); veil = V.veil; }
+  const { withholdCovertCopies } = await import(`${CL}/src/domain/display/gallerySecondHomes.js`);
   // MAPCOVERT-RED (VEIL-44): rekeyId is M's alone (UM_M=1); the lane's tip 23bb8b8ae has no re-key (no galleryVeilPeople.js), so U loads it not
   const { rekeyId } = process.env.UM_M === '1' ? await import(`${SRC}/src/domain/display/galleryVeilPeople.js`) : { rekeyId: null };
-  const { idText } = await import(`${SRC}/src/domain/display/galleryRosterChoices.js`);
+  const { idText } = await import(`${CL}/src/domain/display/galleryRosterChoices.js`); // eslint-disable-line no-unused-vars
   const { effectiveCastOf } = await import(`${SRC}/src/domain/crisis/crisisCast.js`);
   const gallery = await import(`${SRC}/src/lib/gallery.js`);
   const linkHonoured = (overrides) => { if (!isRec(overrides)) return null; const out = {}; for (const [k, v] of Object.entries(overrides)) { if (k === '$veil' || !isRec(v) || v.revealDm !== true) { out[k] = clone(v); continue; } const { revealDm, ...rest } = v; out[k] = rest; } return out; }; // eslint-disable-line no-unused-vars
@@ -134,7 +140,7 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
     return `top:${p.split(/[.[]/)[0]}`;
   };
   const IMPORT = process.env.PP_IMPORT === '1';
-  out.PP = { docs: 0, reads: 0, a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {}, noBody: {}, examples: { a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {} } };
+  out.PP = { today: TODAY, docs: 0, reads: 0, a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {}, noBody: {}, examples: { a: {}, b: {}, bd: {}, ia: {}, is: {}, ip: {} } };
   const tally = (bin, ex, diffs, ctx, seed, tag) => {
     const seen = new Set();
     for (const [p, v, n] of diffs) {
@@ -167,8 +173,20 @@ it('VEIL-52 PP: pages published before the veil (S, P, V)', async () => {
         const page = (await gallery.fetchPublicDossier(sl))?.settlement ?? null;
         const ipage = IMPORT ? (await gallery.fetchDossierForImport(sl))?.settlement ?? null : null;
         env.rpc = {};
-        return { data: g?.data ?? null, page, served: veil.isServedVeil(g?.gallery_member_overrides), idata: imp?.data ?? null, ipage };
+        return { data: g?.data ?? null, page, served: typeof veil.isServedVeil === 'function' ? veil.isServedVeil(g?.gallery_member_overrides) : null, idata: imp?.data ?? null, ipage };
       };
+      if (TODAY) { // (U) unmarked and (M) master's own export marker (ShareToGallery.jsx :: writeShareVeil(memberOverrides, deltas, modeRecord(mode)), no deltas, mode live): (a) S-P only
+        for (const [mkName, ov] of [['U', {}], ['M', veil.writeShareVeil({}, [], { mode: 'live', at: '2026-11-01T00:00:00.000Z', snapshot: null })]]) {
+          const r = await read(ov); out.PP.reads += 1;
+          const mkk = `marker ${mkName} ${isRec(r.data) ? 'body' : 'NO BODY'} | ${tag}`; out.PP.markers ||= {}; out.PP.markers[mkk] = (out.PP.markers[mkk] || 0) + 1;
+          if (!isRec(r.data) || !isRec(r.page)) continue;
+          const bin = (out.PP[`a${mkName}`] ||= {}); const ex = (out.PP.examples[`a${mkName}`] ||= {});
+          tally(bin, ex, minus(multi(r.data), multi(r.page)), ctx, d.seed, tag);
+          // the Reveal-off read's secrets, hooks and DM notes, said first (the chair's order)
+          if (!dm) for (const [p, v, n] of minus(multi(r.data), multi(r.page))) { const k = kindOf(p, v, ctx); if (['secrets', 'hooks', 'DM-only'].includes(k)) { const f = (out.PP.offFirst ||= {}); f[`${mkName}|${k}`] = (f[`${mkName}|${k}`] || 0) + n; } }
+        }
+        continue;
+      }
       const u = await read({}); const v = await read(veil.writeShareVeil({}, []));
       out.PP.reads += 1;
       if (!isRec(u.data) || !isRec(u.page) || !isRec(v.data) || !isRec(v.page)) { out.PP.noBody[`${tag}|S${isRec(u.data)}P${isRec(u.page)}Vd${isRec(v.data)}Vp${isRec(v.page)}`] = (out.PP.noBody[`${tag}|S${isRec(u.data)}P${isRec(u.page)}Vd${isRec(v.data)}Vp${isRec(v.page)}`] || 0) + 1; continue; }

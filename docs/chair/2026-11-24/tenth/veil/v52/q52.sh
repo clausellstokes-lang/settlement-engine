@@ -27,6 +27,7 @@ step_snjoin() { cpm; mx sh $M/snap.sh /home/user/wt/join $O/sn-join v28tpl store
 I44=/home/user/wt/i44/$V
 step_pp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh $I44/v52/pp/pp.sh /home/user/wt/tip $O/pp-master v28tpl stored $O/stored-master > $O/pp-master.txt 2>&1; st pp $?; }
 step_ppimp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c "PP_IMPORT=1 sh $I44/v52/pp/pp.sh /home/user/wt/tip $O/pp-imp v28tpl stored $O/stored-master" > $O/pp-imp.txt 2>&1; st ppimp $?; }
+step_pptoday() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c "PP_TODAY=1 PP_CLASSIFY_SRC=/home/user/wt/tip sh $I44/v52/pp/pp.sh /home/user/wt/master $O/pp-today v52mst stored $O/stored-master" > $O/pp-today.txt 2>&1; st pptoday $?; }
 # (1c) N115: the read's time, the tip's chain against master's own, on the same public rows
 step_n115() { mx sh $HERE/n115.sh > $O/n115.txt 2>&1; st n115 $?; }
 for s in ${*:-dumps miplant snplant mitip mimaster mijoin sntip snmaster snjoin n115}; do step_$s; done
