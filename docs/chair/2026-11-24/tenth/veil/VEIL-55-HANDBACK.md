@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 22:51 UTC; was 22:45 UTC)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 23:27 UTC)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -44,7 +44,24 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   catalogue, the salt, smoke); the form's control on r4red1 (must bite) then the tree; the form on the 140 (gallery, link), the
   today-born and master-born stored sets (every door); the new pool `/var/tmp/v18/t2/pool-v55`, verify, both gates (vs 4 of
   92 and 20 cells); `tests/security` whole; the non-security files naming the veil's entry points.
+- RESULTS (CONFIRMED, this container): m0 every step rc 0 (instruments: check, walker, harnesses, accept, tpl, gate all 0;
+  the 140 stored both ways); u2.sh `c`: 0 of 6,720 today-born reads differ modulo the bijection (control: 6,720 raw differ).
+  `sec` running at 23:26.
+- THE CHAIR, 22:59: VEIL-50's red rows stand (not re-run); START-VEIL-42 (6) read (the stored arm = R4I-PAGE-3's
+  stored-ids.sh, ADDED to p1 as sidt/sidm); the quiet-box items AFTER the grant; the pool as chain0's.
 - LEFT: read m0's and p1's logs; the quiet-box items (unless the chair cuts them); "TIP? R4-IDS <commit>" with the table.
+
+### UNITS FROM THE SEATS
+- UNIT 1 STORED-PROSE: "TIP?" ced3b1de7 from VEIL-51 (23:25; file `v51/TIP-STORED-PROSE.md` on `lane/veil-51-2026-11-24`
+  1232440c3). READ ONCE BY ME (src, 212, tests): NO FAULT; FORWARDED to the chair for its whole read of the 212 hunk (36 lines).
+  Owed: VEIL-51's cure of its one lint red (proseDrawnAnchors, HandRows) on `lane/veil-51-2026-11-24-c2-wip`; MERGE AFTER
+  "R4-IDS MERGED", by me: trial merge onto 8430edf5c conflicts ONLY in 212's header (both wrote item (36)): R4-IDS keeps
+  (36)/(36b)/(36c), STORED-PROSE becomes (37); then its slice re-run on the merged tree. Its "FIDELITY GAP" (the ring note's
+  original vantage on shared reads, soak1k-11/-41) put on VEIL-53's FAIL-CLOSED PAGES slice (V4 term 1).
+- J1 (VEIL-53, `lane/veil-53-2026-11-24-j1-wip` e1b7a8714): READ ONCE: NO FAULT; rides the join (unit 7).
+- UNIT 3 (VEIL-52, `-mcsql-wip` 75a410f1b): um green at the map doors (0 of 7, 0 of 5); proof (b) 11 red = two test pins
+  of 211's member (N84 (a)): a builder granted by me, test-only, on condition the link's page lacks the three paths too.
+  PP (the owner's measure): the chair took it; PP-TODAY (master's chain) is the chair's word to VEIL-52.
 
 ### THE SEATS, THE RULINGS, WHAT IS OWED
 As VEIL-50's hand-back section 1 (VEIL-51, 52, 53; VEIL-54 not seated; V1 to V6; PLAN-2 and VEIL-52's owner measure owed
