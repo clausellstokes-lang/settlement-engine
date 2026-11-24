@@ -340,3 +340,24 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   after for parts C, D and B; (3) written down: a page's payload never names a server column. THEN "GRANTS <commit>",
   the reader's unit (2), the landing of 211 on the line, and the owner's full file in plain words.
   STILL AWAITED FROM THE OWNER: what the urgent file's check before showed and the count of stored keys.
+- 2026-11-24 18:28 UTC · T25 · FIVE SEAT MESSAGES ANSWERED. (a) "GRANTS 39bfb0831e" (sent 18:14 UTC, before the chair's three asks
+  reached it): part D merged, the line's tip merged, `tests/security` and `tests/lint` whole 382 files, 5,366 passed,
+  3 failed (the list's three size rows), the owner's full file in eight parts. 211's TEXT IS BYTE FOR BYTE WHAT THE
+  CHAIR READ. A small commit follows for the three asks (no executable statement of 211 changes). (b) THE READER'S
+  UNIT (2) IS STARTED on 39bfb0831e (its mark 241,209 of 500,000): parts A to D and the owner's files, CLEAR or NOT
+  CLEAR each; four questions put to its own judgement (files 3 and 4 against the site as it is live; part B on the
+  hosted platform; whether the owner can SEE each part took effect; the three left open and the three not built);
+  it is told NOT to read the chair's read before its own verdict is written; its verdict names the last commit.
+  (c) KINDS-2: its merge of the line is 0177b281a (unions, the line's side first; the troubles law the fifth row of
+  `GENERATION_LAWS`). **RULED:** the legacy edge "SHAPE 2" is CURED in the seat law's form (`withRecordTroubleLaw`),
+  not pinned: a saved place with neither `config` nor `_config` reads law 1 whatever the form's config says. **Why:**
+  a saved place keeps the laws it was born under; one with no marker was born under none. This supersedes KINDS-1's
+  ruling 9 and changes `troubleLawSavedTown` arm 5. (d) VEIL-50: a refusal by its own permission check (`git checkout
+  <commit> -- <files>` to copy the lane's instruments onto its branch): IT STANDS; the seat runs each instrument
+  unchanged from a detached worktree of the branch that holds it. Its first notes on 211 for the join: part B changes
+  the grants of every veil helper made after it; 211 closes three `_gallery_*` helpers the doors' build meets; the
+  register `functionGrantClasses.js` must class every veil function. In its plan. (e) THE CLOSE LANE'S PAGE FOR THE
+  OWNER (b10f011df) READ WHOLE BY THE CHAIR: right as written; OUT OF DATE in its section 0 since T21 (the veil is
+  resumed, not paused; the line's 211 is the grants fix and the veil's files are 212 and 213): to be re-worded when
+  the page is re-made after the cures. (f) THE NEXT LANDING'S START MESSAGE IS DRAFTED: `prompts/drafts/
+  START-LAND-114.draft.txt` (point 114, the grants fix alone; it waits for the reader's word).
