@@ -24,15 +24,16 @@
  *   3. NO MIGRATION, DELIBERATELY. A WORLD BORN BEFORE THE LIGHT NEVER CHANGES: it never acquires
  *      this law by upgrade or by any stamp on a read, save, load, regen, undo or import path. Its
  *      law travels in its own persisted `config` (echoed on `_config`), so every replay obeys the
- *      law it was BORN under, and while the dial is dark zero bytes of any born town move.
+ *      law it was BORN under, and while the dial was dark zero bytes of any born town moved.
  *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_FORTUNE_LAW_VERSION` is the only place a new world's
  *      fortune law is chosen, and the mint reads it and nothing else, so lighting it and reverting
  *      it are the same one-line act.
  *
- * ⛔ THE LAW IS DARK, AND LIGHTING IT IS THE OWNER'S WORD, NOT A LANE'S. The build lands DARK (the
- * chair's rulings of 2026-11-20 10:33 UTC): every unit proves its behaviour on its own fixture arm
- * that sets `_fortuneLawVersion: 2` explicitly AFTER `birthConfig`, and the light comes on the
- * owner's word alone. A lit dial would move every born pin of every later unit at once.
+ * ⛔ THE LAW WAS LIT WITH THE SEAT'S LAW, IN ONE COMMIT, NEVER BEFORE IT (the flip, 2026-11-23), AT
+ * THE FIRST DEPLOY'S FINISH LINE, WHICH THE OWNER LEFT TO THE CHAIR ON 2026-11-22 (E30), NEVER A
+ * LANE'S. The build landed dark (the chair's rulings of 2026-11-20 10:33 UTC): every unit proved
+ * its behaviour on its own fixture arm that set `_fortuneLawVersion: 2` explicitly AFTER
+ * `birthConfig`. A lit dial before then would have moved every born pin of every later unit at once.
  *
  * ⛔ THE FORTUNE LAW IS NEVER LIT BEFORE THE SEAT'S LAW (`src/domain/seat/seatLaw.js`, the seat
  * lane): under the old contest code a weaker incumbent in a crisis-born large place amplifies a
@@ -82,7 +83,7 @@ export const SIZE_RELATIVE_FORTUNE_LAW_VERSION = FORTUNE_LAW_VERSIONS[1];
  *  kernel the day that dial was lit): a dial's type is the SPACE of versions, never today's
  *  setting, so the mint's dormant comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
+export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 
 /**
  * ⭐ THE FORTUNE LAW'S ONE TUNING TABLE. EVERY VALUE IS A DRAFT, signed by none (the proposal's

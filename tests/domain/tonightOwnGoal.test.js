@@ -69,7 +69,10 @@ describe('ROUND THREE · the Tonight sheet voices a cast person with the card\'s
     // 0ca0bbe94, the defence rating's rebuild, whose declared moves shift pins: its merge LISTS them) re-cast the town: its
     // instigator is now Publicola Maximus, and Drusilla Pacuvius is off the sheet. He prints his card's own goal in the
     // place of the role's line, as she did (the first test holds every cast person of the town to their own goal).
-    expect(by('rpf-city-succession_void+politically_fractured-13', 'Publicola Maximus')?.line).toMatch(/^do Iulia Laenas a favour /);
+    // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT), RE-KEYED BY IDENTITY again: lit the town re-casts its
+    // instigator as Severus Sabinus (the miller; Publicola Maximus is off the sheet), and the sheet voices his card's own
+    // words (its secret), never the role's line (was: Publicola Maximus, /^do Iulia Laenas a favour /)
+    expect(by('rpf-city-succession_void+politically_fractured-13', 'Severus Sabinus')?.line).toMatch(/^Mixes ground chalk and bean meal into the flour /);
     expect(by('rpf-village-politically_fractured-13', 'Eudoxia Bryennios')?.line).toBe('pay someone back for a wrong done to them.');
   });
 

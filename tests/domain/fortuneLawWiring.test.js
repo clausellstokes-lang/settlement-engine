@@ -1,23 +1,23 @@
 /**
- * fortuneLawWiring.test.js — THE FORTUNE LAW (FS5), WIRED AND DARK (FORTUNE-1, unit U1).
+ * fortuneLawWiring.test.js — THE FORTUNE LAW (FS5), WIRED, LANDED DARK, LIT AT THE FLIP (FORTUNE-1, unit U1).
  *
  * ⭐ WHAT THIS FILE PROVES. A fourth birth law, `_fortuneLawVersion`, rides the create boundary
  * beside the density and living-content laws (and the seat law, on its own lane), shaped exactly
  * like the seat law's U1, so every later unit of the build (U2 fortune, U3 standing) can ask "was
  * this world born under the fortune law?" through ONE reader (`src/domain/fortune/fortuneLaw.js`).
- * It lands DARK: its dial sits at the default, so `birthConfig` mints nothing and no byte of any
- * born world, golden or born fixture moves. The light is the owner's word, never a lane's, and
- * never before the seat's law.
+ * It landed DARK: its dial sat at the default, so `birthConfig` minted nothing and no byte of any
+ * born world, golden or born fixture moved. The light was never a lane's, and never before the
+ * seat's law: it came at the flip of 2026-11-23, in the same commit as the seat's.
  *
  * THE ARMS, in the brief's order:
- *   1. CREATE (dark, the product path) — no `_fortuneLawVersion` on a birth (its own key only:
+ *   1. CREATE (lit, the product path) — `_fortuneLawVersion: 2` on every birth (its own key only:
  *      the one pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g),
  *      E61 (5), which holds the dark proof that birthConfig writes not one byte more than its mints).
- *   2. CREATE/CLAMP — an incoming `_fortuneLawVersion: 2` (the Library-Load hop, walked) is
- *      clamped away: an imported marker never decides a birth.
+ *   2. CREATE/CLAMP (lit) — an incoming `_fortuneLawVersion` (the Library-Load hop, walked) is
+ *      clamped away and the dial's own is minted: an imported marker never decides a birth.
  *   3. READ — the closed membership read, from a config, a settlement's `config` and a
  *      settlement's `_config`; everything that is not an enabled version fails closed to 1.
- *   4. THE REGISTER — `GENERATION_LAWS.fortune` is a WIRED row whose why says the dial is dark.
+ *   4. THE REGISTER — `GENERATION_LAWS.fortune` is a WIRED row whose why says the dial is lit.
  *   5. CREATE (lit, fired deliberately) — through the seat file's own seam (a mocked law module,
  *      the boundary re-imported), the mint reaches `birthConfig` and the clamp does not defeat
  *      it; and the real reader still reads a markerless world as 1 under a lit dial.
@@ -90,7 +90,7 @@ function objectsWithin(value, seen = []) {
 }
 
 describe('the fortune law (FS5) is WIRED and lands DARK', () => {
-  it('the vocabulary: one key, two versions, the dial at the default', () => {
+  it('the vocabulary: one key, two versions, the dial lit', () => {
     expect(FORTUNE_LAW_CONFIG_KEY).toBe('_fortuneLawVersion');
     expect([...FORTUNE_LAW_VERSIONS]).toEqual([1, 2]);
     expect(Object.isFrozen(FORTUNE_LAW_VERSIONS)).toBe(true);
@@ -98,50 +98,58 @@ describe('the fortune law (FS5) is WIRED and lands DARK', () => {
     expect(SIZE_RELATIVE_FORTUNE_LAW_VERSION).toBe(FORTUNE_LAW_VERSIONS[1]);
     expect(DEFAULT_FORTUNE_LAW_VERSION).toBe(1);
     expect(SIZE_RELATIVE_FORTUNE_LAW_VERSION).toBe(2);
+    // the lit dial (the flip, 2026-11-23): this arm pinned the default and a mint of {} until that day
     expect(
       NEW_SETTLEMENT_FORTUNE_LAW_VERSION,
-      'the fortune dial is not at the default. Lighting it is the owner\'s word, never before the'
-      + ' seat\'s law, and moves every born pin at once; revert this arm with it, never before.',
-    ).toBe(DEFAULT_FORTUNE_LAW_VERSION);
-    expect(newSettlementFortuneLaw()).toEqual({});
+      'the fortune dial is not lit. It was lit at the flip (2026-11-23), never before the seat\'s law,'
+      + ' and reverting it is the same one line that moves every born pin at once; revert this arm with it, never before.',
+    ).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
+    expect(newSettlementFortuneLaw()).toEqual({ _fortuneLawVersion: 2 });
   });
 
-  // ── 1. CREATE (dark) ─────────────────────────────────────────────────────────
-  it('1. CREATE (dark): birthConfig carries no _fortuneLawVersion — its own key only, on a config, null and undefined', () => {
+  // ── 1. CREATE (lit) ──────────────────────────────────────────────────────────
+  it('1. CREATE (lit): birthConfig carries _fortuneLawVersion: 2 — its own key only, on a config, null and undefined', () => {
     const born = birthConfig({ ...CONFIG });
-    expect(Object.hasOwn(born, FORTUNE_LAW_CONFIG_KEY)).toBe(false);
-    expect(born[FORTUNE_LAW_CONFIG_KEY]).toBeUndefined();
-    expect(isSizeRelativeFortune(born)).toBe(false);
+    // the lit dial (the flip, 2026-11-23): this arm pinned the marker absent until that day
+    expect(Object.hasOwn(born, FORTUNE_LAW_CONFIG_KEY)).toBe(true);
+    expect(born[FORTUNE_LAW_CONFIG_KEY]).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
+    expect(isSizeRelativeFortune(born)).toBe(true);
     // ⭐ THE WHOLE VALUE OF `birthConfig(null)` IS PINNED ONCE, NOT HERE (CLOSE-1 JOIN, the chair's E61 (5),
     // COMMON-RULES 14 (c)): `tests/domain/generationLawsSavedPlace.test.js` (g) pins it from every register row's own
-    // mint, dark and lit. This arm keeps the fortune law's own key: absent on every birth while its dial is dark.
+    // mint, dark and lit. This arm keeps the fortune law's own key: present on every birth since its dial was lit
+    // (absent while it was dark).
     for (const empty of [null, undefined]) {
-      expect(Object.hasOwn(birthConfig(empty), FORTUNE_LAW_CONFIG_KEY), `birthConfig(${empty})`).toBe(false);
+      expect(birthConfig(empty)[FORTUNE_LAW_CONFIG_KEY], `birthConfig(${empty})`).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
     }
   });
 
-  // ── 2. CREATE/CLAMP ──────────────────────────────────────────────────────────
-  it('2. CREATE (THE CLAMP): an incoming _fortuneLawVersion: 2 is clamped away — an imported marker never decides a birth', () => {
-    // Each hop of the Library-Load path is measured, so this arm cannot go green because the
-    // path stopped existing: the saved config survives the migration with its marker, and the
-    // store's `updateConfig` admits the underscore family by prefix.
-    const hydrated = migrateSettlementConfig({ ...CONFIG, [FORTUNE_LAW_CONFIG_KEY]: 2 });
+  // ── 2. CREATE/CLAMP (lit) ────────────────────────────────────────────────────
+  it('2. CREATE (THE CLAMP, LIT): an incoming _fortuneLawVersion is clamped away and the dial mints 2 — an imported marker never decides a birth', () => {
+    // THE LIT CLAMP (the flip, 2026-11-23): this arm drove an incoming 2 against the dark dial until that day. Lit, the
+    // mint re-adds 2, so the adversarial direction is now an imported LAW-1 world's marker (the living-content file's
+    // lit clamp arm's shape). Each hop of the Library-Load path is measured, so this arm cannot go green because the
+    // path stopped existing: the saved config survives the migration with its marker, and the store's `updateConfig`
+    // admits the underscore family by prefix.
+    const hydrated = migrateSettlementConfig({ ...CONFIG, [FORTUNE_LAW_CONFIG_KEY]: DEFAULT_FORTUNE_LAW_VERSION });
     expect(
       hydrated[FORTUNE_LAW_CONFIG_KEY],
       'migrateSettlementConfig stopped carrying the marker — this arm no longer tests the'
       + ' Library-Load path it was written for',
-    ).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
+    ).toBe(DEFAULT_FORTUNE_LAW_VERSION);
     expect(isAllowedConfigKey(FORTUNE_LAW_CONFIG_KEY)).toBe(true);
-    // THE POSITIVE CONTROL: unclamped, that config really is a fortune-law world.
-    expect(isSizeRelativeFortune(hydrated)).toBe(true);
+    // THE POSITIVE CONTROL: unclamped, that config really is a law-1 world.
+    expect(isSizeRelativeFortune(hydrated)).toBe(false);
+    expect(resolveFortuneLawVersion(hydrated)).toBe(DEFAULT_FORTUNE_LAW_VERSION);
 
     const born = birthConfig(hydrated);
     expect(
-      Object.hasOwn(born, FORTUNE_LAW_CONFIG_KEY),
-      'the marker survived birthConfig — a birth\'s fortune law is no longer the dial\'s law',
-    ).toBe(false);
-    expect(isSizeRelativeFortune(born)).toBe(false);
-    expect(resolveFortuneLawVersion(born)).toBe(DEFAULT_FORTUNE_LAW_VERSION);
+      born[FORTUNE_LAW_CONFIG_KEY],
+      'the incoming marker survived birthConfig — a birth\'s fortune law is no longer the dial\'s law',
+    ).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
+    expect(isSizeRelativeFortune(born)).toBe(true);
+    expect(resolveFortuneLawVersion(born)).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
+    // …and a marker for a version that HAS NOT SHIPPED loses too, the same rule a future v3 would arrive by.
+    expect(birthConfig(migrateSettlementConfig({ ...CONFIG, [FORTUNE_LAW_CONFIG_KEY]: 3 }))[FORTUNE_LAW_CONFIG_KEY]).toBe(SIZE_RELATIVE_FORTUNE_LAW_VERSION);
     // The clamp takes the marker and NOTHING ELSE: every other incoming key is carried, and the
     // lit laws add exactly their own keys.
     expect(born).toEqual(birthConfig(migrateSettlementConfig({ ...CONFIG })));
@@ -181,7 +189,7 @@ describe('the fortune law (FS5) is WIRED and lands DARK', () => {
   });
 
   // ── 4. THE REGISTER ──────────────────────────────────────────────────────────
-  it('4. GENERATION_LAWS.fortune is a WIRED row that says the dial is dark, and why', () => {
+  it('4. GENERATION_LAWS.fortune is a WIRED row that says the dial is lit, and why', () => {
     const row = GENERATION_LAWS.fortune;
     expect(row, 'the create boundary carries no fortune-law row').toBeTruthy();
     expect(row.configKey).toBe('_fortuneLawVersion');
@@ -191,8 +199,16 @@ describe('the fortune law (FS5) is WIRED and lands DARK', () => {
     expect(row.module).toBe(LEAF_REL);
     expect(row.wiring).toBe('WIRED');
     expect(String(row.why).length).toBeGreaterThan(60);
-    expect(row.why).toMatch(/\bdark\b/i);
+    // the lit why (the flip, 2026-11-23): this arm matched /\bdark\b/i until that day
+    expect(row.why).toMatch(/\bDIAL IS LIT\b/);
     expect(row.why).toMatch(/owner/i);
+    // THE TOOTH (the chair's Q6): with the quoted history cut out, the text holds no "dark"
+    const history = /This row read ".*" until that day\./;
+    expect(row.why).toMatch(history);
+    const outside = String(row.why).replace(history, '');
+    expect(outside).toMatch(/\bDIAL IS LIT\b/);
+    // anchored: the quoted history is matched above and the lit sentence survives the cut, so the read is live
+    expect(outside).not.toMatch(/\bdark\b/i);
   });
 
   // ── 5. CREATE (lit, fired deliberately) ──────────────────────────────────────
@@ -254,7 +270,8 @@ describe('the fortune law (FS5) is WIRED and lands DARK', () => {
     expect(header).toMatch(/NEVER LIT BEFORE THE SEAT'S LAW/);
     expect(header).toContain('src/domain/seat/seatLaw.js');
     expect(header).toMatch(/A WORLD BORN BEFORE THE LIGHT NEVER CHANGES/);
-    expect(header).toMatch(/\bDARK\b/);
+    // the lit header (the flip, 2026-11-23): this arm matched /\bDARK\b/ until that day; it pins the order the words now state
+    expect(header).toMatch(/LIT WITH THE SEAT'S LAW, IN ONE COMMIT, NEVER BEFORE IT/);
     // The leaf imports nothing: no cycle can form through it. The liveness anchor first: the
     // text read is the leaf itself (it declares the mint), so an absent import is the leaf's.
     expect(text).toMatch(/^export function newSettlementFortuneLaw\(\)/m);

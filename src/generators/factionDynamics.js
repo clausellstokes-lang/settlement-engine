@@ -911,3 +911,16 @@ export function keepOneDominant(factions) {
   const tie = (ranked[0].power || 0) === (ranked[1].power || 0);
   ranked.forEach((f, i) => { if (i > 0 || tie) f.powerLabel = 'Strong'; });
 }
+
+/**
+ * THE TIE READS BOUGHT (13G, the ninth chair's N97, 2026-11-23): the relation rows say the guild has bought the hall or the
+ * force, as the page prints them: a capture row (one that carries a `captureState`; the coherence seam rebuilds these rows
+ * for the derived hall-capture state, `withCaptureRelations` above, by `govCriminalRelation` / `criminalMilitaryRelation`)
+ * whose type is `corrupted`. Its ONE definition, beside the rows' builders: the standing settles after the seam
+ * (`power/rosterText.js :: settleStandingToRoster`, `settleStandingToLegitimacy`) hand the rows to the standing writer
+ * (`power/factionStanding.js :: annotateFactionStanding`), whose war-of-arrests notes read it. Pure; reads nothing else.
+ * @param {unknown} rows a power structure's `factionRelationships` @returns {boolean}
+ */
+export function tieReadsBought(rows) {
+  return Array.isArray(rows) && rows.some((/** @type {any} */ r) => r?.captureState !== undefined && r?.type === 'corrupted');
+}

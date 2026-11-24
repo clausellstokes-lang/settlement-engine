@@ -115,8 +115,10 @@ describe('BAR8 K-PEOPLE (13b) · a tie that holds someone inside stands where a 
     });
     expectNoSeedFailures(failures, 'a held tie with no prison');
   });
-  it('THE POSITIVE: a town with a prison keeps the held friend (r2r-city-10)', () => {
-    const s = born('r2r-city-10');
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-10 keeps its prison lit but draws no held tie; the lowest r2r-city with a prison and a held
+  // friend is city-19 (19 80 106 121 181 197 of 200)
+  it('THE POSITIVE: a town with a prison keeps the held friend (r2r-city-19)', () => {
+    const s = born('r2r-city-19');
     expect(hasPrison(s)).toBe(true);
     expect(heldLines(s).some((t) => /fed and safe inside/.test(t))).toBe(true);
   });
@@ -144,8 +146,10 @@ describe('BAR8 K-PEOPLE (14b) · no house\'s network is handled only by another 
     const failures = collectSeedFailures(SEEDS, (seed) => { expect(swaps(born(seed)), seed).toEqual([]); });
     expectNoSeedFailures(failures, 'the swap of two houses\' networks');
   });
-  it('THE POSITIVE: a network handled one way by another house\'s face stands (the deal\'s design, r2r-city-10)', () => {
-    const g = networks(born('r2r-city-10'));
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-10 lit hands no house's network to another house's face; the lowest r2r-city that does is
+  // city-0 (0 1 4 11 13 20 of 200)
+  it('THE POSITIVE: a network handled one way by another house\'s face stands (the deal\'s design, r2r-city-0)', () => {
+    const g = networks(born('r2r-city-0'));
     expect([...g].some(([a, hs]) => !hs.has(a) && hs.size > 0)).toBe(true);
   });
 });

@@ -70,10 +70,14 @@ describe('COHERENCE-POWERS-6 item 2: the keeper of a vacant seat heads no conten
     expect(misses).toEqual([]);
   });
 
-  it('the contender keeps its people: the keeper of rvf-succession_void-town-4 stays a member of Landed Gentry and heads it no longer; a lord leads it', () => {
-    const s = born('town', 'rvf-succession_void-town-4');
+  // RE-PICKED BY THE PREMISE (the flip, 2026-11-23, CLOSE-5 F-SEAT): lit, Landed Gentry no longer contests the seat of
+  // rvf-succession_void-town-4 (its keeper heads it, which the rule allows: the arm above passes there); town-63 is the
+  // lowest of its family (of 200, lit) whose keeper is a member of Landed Gentry while Landed Gentry contests the seat (the
+  // premise's own predicate), and its keeper's title is the lit birth's value (was "the lord's appointee", at town-4)
+  it('the contender keeps its people: the keeper of rvf-succession_void-town-63 stays a member of Landed Gentry and heads it no longer; a lord leads it', () => {
+    const s = born('town', 'rvf-succession_void-town-63');
     const keeper = seatKeeperOf(s);
-    expect(keeper?.title).toBe("the lord's appointee");
+    expect(keeper?.title).toBe('the mine captain');
     const held = (keeper?.memberships || []).find((m) => m.power === 'Landed Gentry');
     expect(held, 'the keeper stays a member of the body his house backs').toBeTruthy();
     expect(held?.rank, 'the keeper heads no contender').not.toBe(1);

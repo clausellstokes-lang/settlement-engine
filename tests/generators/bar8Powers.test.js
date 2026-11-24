@@ -22,7 +22,13 @@ const TOWNS = Object.freeze({
   'bar0-metropolis-calm-rand-45': ['13g'], // C21547: Shadow Senate, the guild has bought key people
   'r2r-city-14': ['13g'], // Corrupt City Council
   'r2s-wartime-city-2': ['13g'],
-  'r2r-city-5': ['13g-'], // NEGATIVE: the hall hunts the guild (adversarial): the war of arrests is the tie
+  // 13G (the ninth chair's N97, 2026-11-23, CLOSE-6): r2r-city-5, the old negative, born lit: its relation rows read bought
+  // (a rank-1 agent of the hall, `hallCapture.js :: hallCaptureOf`'s agent rung) while the governing power is no criminal
+  'r2r-city-5': ['13g'],
+  // NEGATIVE: the hall hunts the guild (adversarial): the war of arrests is the tie. RE-PICKED BY THE PREMISE (the flip,
+  // 2026-11-23, CLOSE-5 F-SEAT): r2r-city-5's tie reads bought lit; r2r-city-16 is the lowest r2r-city of 200 lit whose
+  // relation rows hold an adversarial capture and none bought (the premise's own predicate, never the war's words)
+  'r2r-city-16': ['13g-'],
   'bar0-city-wartime-rand-47': ['14a'], // C14226: the War Council's "Crown-appointed emergency body"
   'bar0-city-under_siege+famine-rand-46': ['14a'], // the siege's "Emergency committee"
   'r2s-famine-metropolis-2': ['14a'], // "Organised criminal network controls the black market"
@@ -99,6 +105,46 @@ describe('BAR8-K-POWERS: a power\'s own words are true of that power and of the 
     expect(tieBought(hunted), `${seed}: an adversarial tie`).toBe(false);
     expect(powersOf(hunted).some((f) => WAR_OF_ARRESTS.test(String(f.desc || ''))), `${seed}: the contest of arrests still prints where it is the tie`).toBe(true);
   });
+
+  // 13G (the ninth chair's N97, 2026-11-23, CLOSE-6; the measure `close-6/reports/LIT-13G.md`): THE CARD'S GATE READS WHAT
+  // THE TIE READS, over the census's 900 births (`dp-<size>-<i>`, 150 a size, the product's `birthConfig`): rule (A), every
+  // birth whose own relation rows read bought (`tieBought`) has no card matching WAR_OF_ARRESTS. Born LIT (the product's
+  // birth) and the same arm DARK (both laws forced to 1 in its own config, COMMON-RULES 14 (c)), offenders listed by seed.
+  // THE TOOTH: a real birth's adversarial tie turned bought beside its war card, re-annotated through the real function
+  // (`annotateFactionStanding`, the power step's write, which reads no row), is caught by the same checker.
+  /** @param {string} seed @param {any} town @returns {string[]} rule (A)'s offenders on one birth */
+  const warBesideBought = (seed, town) => (tieBought(town) ? powersOf(town).filter((f) => WAR_OF_ARRESTS.test(String(f.desc || ''))).map((f) => `${seed}: ${f.faction}: ${(String(f.desc).match(WAR_OF_ARRESTS) || [''])[0]}`) : []);
+  it('13g (the 900): where the record\'s own relation row reads bought, no card prints a war of arrests, lit and dark', async () => {
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { annotateFactionStanding } = await import('../../src/generators/power/factionStanding.js');
+    const { tieReadsBought } = await import('../../src/generators/factionDynamics.js'); // the cure's one reading, held against the judge's own `tieBought`
+    // THE TOOTH first (the checker is live): r2r-city-16's adversarial tie, its capture row's type set to bought
+    const [[toothSeed, hunted]] = townsOf('13g-');
+    const planted = structuredClone(hunted);
+    const row = planted.powerStructure.factionRelationships.find((/** @type {any} */ r) => r?.captureState !== undefined);
+    expect(row, `${toothSeed}: premise: a capture row to plant`).toBeTruthy();
+    row.type = 'corrupted';
+    for (const f of planted.powerStructure.factions) f.desc = '';
+    annotateFactionStanding(planted.powerStructure.factions);
+    expect(warBesideBought(toothSeed, planted).length, `${toothSeed}: the planted bought row beside a war card is caught`).toBeGreaterThan(0);
+    /** @type {{ lit: string[], dark: string[], disagree: string[] }} */
+    const offenders = { lit: [], dark: [], disagree: [] };
+    /** @param {string} seed @param {any} town @returns {string[]} the judge (`tieBought`, the test's own) and the cure's predicate disagree */
+    const disagree = (seed, town) => (tieBought(town) === tieReadsBought(town?.powerStructure?.factionRelationships) ? [] : [`${seed}: tieBought ${tieBought(town)}`]);
+    const LAW_1 = { _seatLawVersion: 1, _fortuneLawVersion: 1 }; // DARK: both laws forced to 1 on the config birthConfig returns (it clamps an incoming marker off)
+    for (const settType of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      for (let i = 0; i < 150; i++) {
+        const seed = `dp-${settType}-${i}`;
+        const lit = generateSettlementPipeline(boundary.birthConfig({ settType }), null, { seed, customContent: {} });
+        const dark = generateSettlementPipeline({ ...boundary.birthConfig({ settType }), ...LAW_1 }, null, { seed, customContent: {} });
+        offenders.lit.push(...warBesideBought(seed, lit));
+        offenders.dark.push(...warBesideBought(seed, dark));
+        offenders.disagree.push(...disagree(`${seed} lit`, lit), ...disagree(`${seed} dark`, dark));
+      }
+    }
+    expect(offenders, 'no war of arrests beside a bought tie on any of the 900, lit or dark; the judge and the cure\'s reading agree on every birth').toEqual({ lit: [], dark: [], disagree: [] });
+  }, 510_000); // its own budget, carrying the measured figure (13G, CLOSE-6, 2026-11-23): 276.1 s lit alone at 8f882d0f0 (both corpora, 1,800 births); about 508.0 s on a CI runner (x 1.84, the measured factor), rounded up
 
   it('14a: a minted rival does not print its host\'s one-body description', () => {
     const towns = townsOf('14a');

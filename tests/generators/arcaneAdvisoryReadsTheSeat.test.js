@@ -22,7 +22,10 @@ function born(seed) {
 }
 const ADVISORY = 'Magical practitioners are consulted but not formally empowered.';
 const TWIN = 'Magical practitioners outside the seat hold no office of their own; their influence is advisory and transactional.';
-const ARCANE_SEAT = ['r2r-town-1', 'r2s-under_siege-city-3', 'r2s-occupied-city-3'];
+// RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-occupied-city-3's governing Arcane Council lit keeps its seat under the occupation, and that line takes
+// the practitioners' slot; the lowest r2s-occupied-city governed by an Arcane Council whose roster draws the practitioners'
+// line is city-71 (Arcane Council governs in 3 35 71 100 133 155 of 200; 71 and 155 draw the line)
+const ARCANE_SEAT = ['r2r-town-1', 'r2s-under_siege-city-3', 'r2s-occupied-city-71'];
 const OTHER_SEAT = ['r2r-city-1'];
 /** @type {Record<string, any>} */
 const births = {};

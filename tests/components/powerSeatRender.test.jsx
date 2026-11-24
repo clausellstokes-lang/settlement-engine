@@ -72,22 +72,29 @@ describe('the governs note names the rival or goes', () => {
   // leaves thorp 42's Religious Authorities unbuilt (no religious house stands behind them; green at the line f72262c68, red
   // at 1a32c200a). Re-scanned rulers-thorp-0..59 at the tip: 1 carries the note AND an outranking rival (57: People's
   // Council 61 over the Elder Council 39).
-  it('names the outranking rival when one outranks the governing faction (thorp 57: People\'s Council)', () => {
-    const s = born('thorp', 57);
+  // Re-seated by the premise thorp 57 -> thorp 35 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8, the seat and
+  // fortune laws on), thorp 57's governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped
+  // tip for the premise (the note AND a rival outranking the governing faction on power): 35, 73, 96, 106, 109, 136; 35
+  // is the first (The Independent Bloc 78 over the Elder Council 22).
+  it('names the outranking rival when one outranks the governing faction (thorp 35: The Independent Bloc)', () => {
+    const s = born('thorp', 35);
     const gov = governingFactionOf(s);
     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
-    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === "People's Council");
+    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === 'The Independent Bloc');
     expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain("Holds the title; the decisions that matter are made by People's Council.");
+    expect(text).toContain('Holds the title; the decisions that matter are made by The Independent Bloc.');
   });
 
   // The note carried "Governing authority is internally fractured." before #189; that reading now has one home, the
   // legitimacy panel's banner (and DS-POW-1's fractured line), so the unnamed claim leaves and the note with it.
-  it('drops the claim when no rival outranks the governing faction (thorp 13); the fracture reading stays in the banner', () => {
-    const s = born('thorp', 13);
+  // Re-seated by the premise thorp 13 -> thorp 3 (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8), thorp 13's
+  // governing faction carries no crisis note. Re-scanned rulers-thorp-0..199 at the flipped tip for the premise (the note
+  // AND no rival outranking the governing faction): 3 is the first (its Elder Council alone, 100).
+  it('drops the claim when no rival outranks the governing faction (thorp 3); the fracture reading stays in the banner', () => {
+    const s = born('thorp', 3);
     expect(String(governingFactionOf(s).crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
     tab(s);
     openGoverning(s);

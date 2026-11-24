@@ -239,7 +239,11 @@ describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)',
     }
   });
   describe('the three plain-toPublicSafe faults (PAGE-9 caf3509e7, build/CAUSES-WIRING-PARITY/pairs.2026-11-20.txt)', () => {
-    const WANT = ['r2r-city-19', 'r2s-religious_conversion-city-0', 'r2s-wartime-metropolis-2'];
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-19 and r2s-wartime-metropolis-2 lit carry no payCut on the owner record (the purse lifted);
+    // of the census plan's 720 the lowest r2r-city reborn with payCut and a crime wave is city-57 (alone of 0..59), and no
+    // metropolis of the plan is, so the wartime fault's row takes the plan's other such city, r2s-recently_betrayed-city-1
+    // (A JUDGEMENT, AT ANOTHER SIZE; the plan's r2s and r2r-metropolis births hold two: it and r2s-religious_conversion-city-0)
+    const WANT = ['r2r-city-57', 'r2s-religious_conversion-city-0', 'r2s-recently_betrayed-city-1'];
     /** @type {Array<[string, any]>} */ let faults = [];
     beforeAll(async () => {
       const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');

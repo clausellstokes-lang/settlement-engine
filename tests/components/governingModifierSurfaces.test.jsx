@@ -24,7 +24,10 @@ const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
   selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** seed -> [the stored key, the Power tab's words ('' = silent)] */
 const TOWNS = {
-  'r2r-city-56': ['arcane-advised', 'mage counsel'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (THE GUARD KEPT WHOLE): r2r-city-56's governing row lit stands seventh on the roster, out of the Summary
+  // legend's five; the lowest r2r-city whose ruler stores arcane-advised, whose Power tab prints "mage counsel", and whose
+  // governing row is in the five is city-17 (17 33 39 45 49 77 78 ... of 200; 56 the only one out of the five)
+  'r2r-city-17': ['arcane-advised', 'mage counsel'],
   'r2r-village-36': ['church-guided', 'church guidance'],
   'r2r-metropolis-16': ['military-dominated', 'armed sway'],
   'r2r-hamlet-28': ['mage-advised', ''], // no arcane house: silent on every surface

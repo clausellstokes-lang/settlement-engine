@@ -47,7 +47,7 @@ import { contestKindOf, isVeiledRow, SEAT_CIRCUMSTANCES } from './seatTable.js';
  * space of settings, never today's, so a reader's dark branch stays reachable when the dial moves.
  * @type {boolean}
  */
-export const SEAT_CONTEST_LIT = false;
+export const SEAT_CONTEST_LIT = true;
 
 /**
  * THE FACTOR TABLE (CS5): circumstance -> kind -> factor (a kind absent from a row takes 1), and the ceiling the

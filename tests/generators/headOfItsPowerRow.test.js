@@ -30,11 +30,15 @@ function born(seed) {
 const bestRank = (c) => Math.min(...(c.memberships || []).map((/** @type {any} */ m) => m.rank ?? 99), 99);
 
 describe('COHERENCE-POWERS-8 · the head of its power is not under its leaders', () => {
-  it('rr2s-city-calm-rand-1: the first of Arcane Orders heads the casters; the first of the Thieves\' Guild holds no place "in a crew"', async () => {
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): rr2s-city-calm-rand-1's Malinalxochitl Jalach lit reads no row; of
+  // rr2s-city-calm-rand 0..199 the first of Arcane Orders heads the casters beside a first of the Thieves' Guild with no row in
+  // 33 48 82 88 105, and the lowest that reads the row's own line (among bribe-taking officials) is rand-48 (33 and 105 read
+  // the large-place row)
+  it('rr2s-city-calm-rand-48: the first of Arcane Orders heads the casters; the first of the Thieves\' Guild holds no place "in a crew"', async () => {
     await loadGenerationLawPayloads();
-    const s = born('rr2s-city-calm-rand-1');
-    const mage = s.npcs.find((/** @type {any} */ c) => c.name === 'Malinalxochitl Jalach');
-    const boss = s.npcs.find((/** @type {any} */ c) => c.name === 'Chimalxochitl Chi');
+    const s = born('rr2s-city-calm-rand-48');
+    const mage = s.npcs.find((/** @type {any} */ c) => c.name === 'Tormod Flaherty');
+    const boss = s.npcs.find((/** @type {any} */ c) => c.name === 'Keir Doyle');
     expect(mage.structuralPosition).toBe('Heads the casters among bribe-taking officials, where spells that hide things buy favour and debt.');
     expect(boss.structuralPosition).toBeUndefined(); // the first of a lesser criminal power: no row (the refusal's rule)
   }, 60000);
@@ -42,7 +46,9 @@ describe('COHERENCE-POWERS-8 · the head of its power is not under its leaders',
     await loadGenerationLawPayloads();
     const s = born('rr2s-metropolis-plague_onset-port-1');
     const mage = s.npcs.find((/** @type {any} */ c) => c.name === 'Bebinn MacIntyre');
-    expect(mage.structuralPosition).toBe('Heads the casters while many doubt the seat\'s right, and the seat wants their spells.') // TAIL-TIES-3 (T11): the contested rows claim no rival, re-keyed by identity;
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the seat's state lit is "fails", not contested, so the
+    // head row takes the failing seat's words (was "while many doubt the seat's right, and the seat wants their spells.")
+    expect(mage.structuralPosition).toBe('Heads the casters while the seat fails; if the seat needs their spells, it now owes them.') // TAIL-TIES-3 (T11): the contested rows claim no rival, re-keyed by identity;
   }, 60000);
   it('fresh births: no card ranked first of its power reads an "under" row; a member below the first still may', async () => {
     await loadGenerationLawPayloads();

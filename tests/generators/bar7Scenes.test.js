@@ -109,8 +109,12 @@ describe('BAR7-SCENES item 2 (8k.market): no busy market under the crises that s
 
 describe('BAR7-SCENES item 3 (9g.margin, the chair\'s PM1): the war\'s requisition row denies no margin the purse holds', () => {
   const losing = (/** @type {string} */ prosperity) => /** @type {any[]} */ (PRESSURE_SENTENCES.wartime({ name: 'Quirigich', govFaction: 'Merchant Guild Council', warGoesWell: false, prosperity }))[0];
-  test('C15153 · bar0-city-wartime-rand-43: a Comfortable purse; the row names the requisition and says no "cannot afford" or "running thin"', () => {
-    const s = town('bar0-city-wartime-rand-43');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8, the fortune law on), rand-43's purse reads
+  // Moderate. Re-scanned bar0-city-wartime-rand-0..199 lit for the case's own predicate (prosperity Comfortable; a losing war by
+  // the crisis summary, stressNarrative.js :: wartimeGoesWell false; the slot drew the losing pool's requisition row, whose two
+  // branches both name the order): 170 179; 170 is the first (was rand-43)
+  test('C15153 · bar0-city-wartime-rand-170: a Comfortable purse; the row names the requisition and says no "cannot afford" or "running thin"', () => {
+    const s = town('bar0-city-wartime-rand-170');
     expect(String(s.economicState?.prosperity)).toBe('Comfortable');
     expect(String(s.pressureSentence)).toContain('signed a requisition order last week');
     for (const denial of ['cannot afford', 'running thin']) expectAbsentWithAnchor(String(s.pressureSentence), denial, 'signed a requisition order last week', 'the war row');
@@ -202,7 +206,7 @@ describe('BAR7-SCENES item 5: the arrival pools the seam left', () => {
 
 // a planted state kept apart from the seeds: every named town of this file is born once
 test('the named towns are born in the bar0- shape', () => {
-  expectNoSeedFailures(collectSeedFailures(['bar0-village-famine-rand-43', 'bar0-city-wartime-rand-43'], (seed) => {
+  expectNoSeedFailures(collectSeedFailures(['bar0-village-famine-rand-43', 'bar0-city-wartime-rand-170'], (seed) => {
     if (!town(seed)?.name) throw new Error(`${seed}: not born`);
   }), 'born');
 });

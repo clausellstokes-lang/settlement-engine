@@ -51,7 +51,10 @@ const CURED = [
 const KEPT = [
   ['r2r-city-1', 'Merchant Guilds~Craft Guildsstable'],
   ['r2r-city-0', 'Merchant City Council⇌Military/Guardstable'],
-  ['r2r-metropolis-31', 'Noble Houses↔Royal Authorityescalating'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-metropolis-31's Noble Houses and Royal Authority lit hold only a moderate quarrel, so the pair prints
+  // "declining"; the lowest r2r-metropolis whose conflicts hold the pair at HIGH and print this line is metropolis-173 (the pair
+  // at HIGH in 51 88 173 of 200; 51 and 88 are tense and subordinate rows)
+  ['r2r-metropolis-173', 'Noble Houses↔Royal Authorityescalating'],
   ['r2r-city-10', 'The Highborn Circle↔Merchant Guild Councildeclining'],
 ];
 const LINES = new Map();

@@ -36,14 +36,23 @@ const UND_NEW = 'Underworld effectively controls vice and key officials; the sea
 /** [seed, the power whose card is read, the refused words, the words that print in their place] */
 const PAIRS = [
   ['r2r-town-1', 'Religious Authorities', ARC_OLD, ARC_NEW],
-  ['r2r-city-45', 'Religious Authorities', ARC_OLD, ARC_NEW],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-45's faith lit names no outranking Arcane Council ("in the
+  // shadow of the governing council"); the lowest r2r-city governed by an Arcane Council whose faith's card reads the rival it
+  // read is city-2 (2 32 54 107 111 140 of 200)
+  ['r2r-city-2', 'Religious Authorities', ARC_OLD, ARC_NEW],
   ['r2s-under_siege-city-3', 'Religious Authorities', ARC_OLD, ARC_NEW],
-  ['r2r-city-19', "Thieves' Guild", CRIM_OLD, CRIM_NEW],
-  ['r2r-metropolis-25', "Thieves' Guild", CRIM_OLD, CRIM_NEW],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-19's Thieves' Guild lit is no longer Suppressed, and
+  // r2r-metropolis-25's card draws another description; the lowest r2r-city and r2r-metropolis whose Suppressed Thieves'
+  // Guild draws the shadows line are city-72 (72 183 of 200) and metropolis-78 (78 93 145 192 of 200)
+  ['r2r-city-72', "Thieves' Guild", CRIM_OLD, CRIM_NEW],
+  ['r2r-metropolis-78', "Thieves' Guild", CRIM_OLD, CRIM_NEW],
   ['r2s-under_siege-town-0', "Thieves' Guild", CRIM_OLD, CRIM_NEW],
   ['r2r-town-31', "Thieves' Guild", UND_OLD, UND_NEW],
   ['r2s-under_siege-town-3', "Thieves' Guild", UND_OLD, UND_NEW],
-  ['r2s-religious_conversion-metropolis-0', "Thieves' Guild", UND_OLD, UND_NEW],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-religious_conversion-metropolis-0's seat lit no longer ranks
+  // above the guild's label; the lowest r2s-religious_conversion-metropolis whose Thieves' Guild draws the underworld line
+  // beside a seat ranked above it is metropolis-19 (Strong over Significant: 19 58 128 137 of 200)
+  ['r2s-religious_conversion-metropolis-19', "Thieves' Guild", UND_OLD, UND_NEW],
 ];
 /** KEEP: the true sibling still prints [seed, the power, words that must still print] */
 const KEEP = [
