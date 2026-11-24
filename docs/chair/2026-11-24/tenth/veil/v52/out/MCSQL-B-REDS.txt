@@ -1,0 +1,17 @@
+unit (2) proof (b), q52b.sh b, on lane/veil-52-2026-11-24-mcsql-wip 75a410f1b, 22:47-22:5x UTC 2026-11-24, CONFIRMED (executed): 11 failed | 111 passed (122).
+Cause (1) galleryMapMemberCount x3: error: column s.gallery_importable does not exist (the test's hand-written settlements table).
+Cause (2) galleryServerVeil x8: AssertionError: unmarked/live map member lacks what the listing shows: availableServices.criminal[], coherenceNotes[], economicState.safetyProfile.crimeTypes[] (211's member = listing rule; N84 (a) makes it the link's read).
+
+ FAIL  tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > get_gallery_map does NOT project a member settlement owned by another user (046 IDOR guard)
+ FAIL  tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > get_gallery_map projects the world panel ONLY when gallery_share_world is true
+ FAIL  tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > member_count is at PARITY with the members get_gallery_map projects
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-city-infiltrated-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-town-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-town-2: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-village-0: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-village-3: nothing the page hides is sent; no page changes; 210 is red on the same rows
+ Test Files  2 failed | 3 passed (5)
+      Tests  11 failed | 111 passed (122)
