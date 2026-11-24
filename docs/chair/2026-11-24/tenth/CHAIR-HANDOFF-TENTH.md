@@ -469,3 +469,24 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   new tip read by name (a check is set for 20:50 UTC). "THE LINE IS" goes to CLOSE-7, KINDS-2 and VEIL-50.
   THE MIGRATION IS APPLIED NOWHERE BY THIS: the owner has its statements as ten files to paste (T29), and the later
   push of 204 to 211 is his hand.
+- 2026-11-24 20:09 UTC · T33 · THE VEIL'S DRAFT PLAN READ WHOLE BY THE CHAIR (`lane/veil-50-2026-11-24` at 1adb997086:
+  `docs/chair/2026-11-24/tenth/veil/VEIL-50-PLAN.md`; its (a), (c) and (d); its measure (b) comes about 21:10 UTC).
+  WHAT IT SAYS: (a) every open item classed. SERVED (class D): a shown power's standing names a withheld power in
+  `factions[].desc` (240 reads, 2 of the 140 gate places); the lit-only person ids that spell a hidden power
+  (`npc_power_<slug>`, four places); a covert tie's copy at the map member and the map's import (7 of 7 today-born
+  places with a covert tie; 10 of 180 births on the line); the stored prose at every door at the tip; on master-born
+  documents a hidden house's own name in three keys (12 of 440 on the player read); the world snapshots UNKNOWN (a
+  measure first). (c) the trial join with the line at point 113: NO CONFLICT; the same five red files as before and
+  one new (VR26: the harness re-derives with the dark legitimacy); the renumbering to 212 and 213 touches four files,
+  eight path pins, three chain bounds that change MEANING, two registers; three things of the veil read 211's text.
+  (d) PHASE 1 in seven units, about 48 seat-hours, 20 to 24 wall hours with two seats beside it (A GUESS); its bar in
+  six points; phase 2 about 35 seat-hours. THE CHAIR'S LEANINGS, SENT (the ruling comes on (b)): THREE seats beside
+  the lane owner from the start (the third does the join's own work in parallel: the reds' causes, the pages judged,
+  the renumbering PREPARED AS ONE SCRIPT AND RUN LAST, and "grants x veil"); RIVAL (a tell's cure, built, the same
+  function) rides unit 4 only if its owed arms pass on their first run; the three gaps in the measure (a withheld
+  PERSON's name in any served string; names at the map's import; the world snapshots) join phase 1's proof, by
+  copies of the lane's instrument; THE BAR GAINS: every door run as anon and as authenticated on the joined chain
+  under the hosted default (a helper born closed after 211's part B is a public page answering "permission
+  denied"), and THE WINDOW (between the owner's migrations and the client's deploy the live pages are master's
+  against the new reads); a fresh security reader and the chair's read of 212's and 213's final text: yes, both.
+  VEIL-50 drafts the three start messages now. Its mark will pass 620,000 inside phase 1: a successor at a unit's end.
