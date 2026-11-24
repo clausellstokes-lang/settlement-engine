@@ -11,14 +11,18 @@ STATE (22:53 UTC 2026-11-24). THE LANE'S OWNER IS NOW VEIL-55 (session_019yED1So
 never message VEIL-50). THE ACCOUNT IS AT ITS WEEKLY WARNING (reset 2026-12-01 15:00 UTC): a stop may come without notice; push at
 every result. THE CONTAINER RESTARTED ~22:40 (processes and PostgreSQL died; files survived): after a restart, start PostgreSQL
 (`su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`) and relaunch the runner.
-DONE, CONFIRMED: (1c) N115 (`v52/out/N115-TABLE.md`; RULED by the chair 22:48: the three doors' ~0.2 s does not hold the release;
-the gallery's 4.7 s is master's own, now the finding READ-COST). Unit (2) proof (a) galleryMapCovert 8 of 8 on 75a410f1b (22:32).
-RUNNING (detached runner `v52/run52.sh`, log `/var/tmp/v52/log/run52.log`, started 22:51:34): PP first (the chair read it and said run
-now), then unit (2)'s c, tpl, etip, ejoin ((b) ran 22:47-22:5x: its output `/var/tmp/v52/out/mcsql/b.txt`), the two plants, wdmi and
-snap on the three sets.
-OWED, IN ORDER: PP's result (<=250 words to the chair and VEIL-55, with the sentence: is anything in (a) what a maker calls hidden or
-bookkeeping the page never prints); PP's SECOND PASS, the import door (I-P, I-S by the same kinds); READ-COST's one run (n115 with the
-gallery's LIST reads, 840 and 1 rows, both chains); the measures (1a), (1b); unit (2)'s remaining proofs. No SQL before "R4-IDS MERGED".
+DONE, CONFIRMED (each file under `v52/out/` on this branch): (1c) N115 (`N115-TABLE.md`; RULED 22:48: not holding; READ-COST is
+a finding of its own, ONE RUN OWED: n115 with the gallery's LIST reads, 840 and 1 rows, both chains). PP on the master-born 140
+(`PP-MASTER-TABLE.txt`, sent 23:00 to the chair and VEIL-55): (a) S-P = 0; (b) the default veil would remove hooks 9,277, secrets
+8,320 (DM reads), hidden-house names 3,017 leaves on 91 places. UNIT (2) on `-mcsql-wip` 75a410f1b: (a) galleryMapCovert 8/8;
+(c) registry --check + walker 11/11; (e) um: map member, its page and import_gallery_map's member 0 covert copies at Reveal off,
+today-born 0 of 7, lit-born 0 of 5 (`MCSQL-E-UM-*.txt`); (b) RED 11 of 122, TWO TEST PINS of 211's member, neither a leak
+(`MCSQL-B-REDS.txt`): the brief for their cure is `v52/briefs/MCSQL-TESTS-BRIEF.md` (3c341ea25), WAITING FOR VEIL-55's WORD.
+RUNNING (detached runners, log `/var/tmp/v52/log/run52.log`): PP's import pass (PP_IMPORT=1 -> `/var/tmp/v52/out/pp-imp`); wdmi and
+snap on the three sets; the two plants RE-RUN after their first runs (wdmi's plant reached no served path; snap's first campaign was
+REFUSED by the server: the section `chronicle` is a denied key; both copies changed at cf198cc96, told to VEIL-55 23:19).
+OWED: PP's import result (to the chair and VEIL-55); READ-COST's run; unit (2)'s (d) tests/lint whole; the test-cure builder on word.
+No SQL before "R4-IDS MERGED".
 
 BRANCHES: `lane/veil-52-2026-11-24` (documents and run scripts; cut at b58abc48b, the lane's tip "PIN-3 MERGED").
 `lane/veil-52-2026-11-24-mcsql-wip` 75a410f1b (pushed): VEIL-44's door tip db9fddc7d + its MAPCOVERT-GREEN-SQL d56bc1ab6, merged clean;
