@@ -74,6 +74,7 @@ for (const row of PLAN) {
     const views = await m.walkDossier(container, { fireEvent, waitFor, expect });
     const findings = m.pageCensusFindings(town, views);
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, crisis: row.crisis ?? null,
-      views: Object.keys(views).length, recordHash, pageHash: sha(views), rows: [...new Set(findings.map((f) => f.row))].sort(), findings }));
+      views: Object.keys(views).length, recordHash, pageHash: sha(views), rows: [...new Set(findings.map((f) => f.row))].sort(), findings,
+      ...(process.env.PAGE_BATTERY_VIEWS ? { printed: views } : {}) }));
   }, 300000);
 }
