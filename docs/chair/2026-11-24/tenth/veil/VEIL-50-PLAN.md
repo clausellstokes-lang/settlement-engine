@@ -125,7 +125,7 @@ CONFIRMED, every number below (runs q1, q1b, q3; tables under `/var/tmp/v50/out/
 | a withheld id (power, house, person) as a string or a key | every door | 0 | 0 | 0 |
 | a covert tie's copy at Reveal off | map member / map's import | 21 / 21 (7 places x 3 markers) | 0 (no stored tie is covert) | 13 / 13 (5 places) |
 | a covert tie's copy at Reveal off | gallery, link, import | 0 | 0 | 0 |
-| the stored prose (`publicProse` served) | page, link, import | 3,360 of 3,360 reads at EACH door (page, link, import; twin the same), 140 of 140 places | 0 (master stores no `publicProse`: 0 of 140) | <PPKEY JOIN> |
+| the stored prose (`publicProse` served) | page, link, import | 3,360 of 3,360 reads at EACH door (page, link, import; twin the same), 140 of 140 places | 0 (master stores no `publicProse`: 0 of 140) | 3,360 of 3,360 at each door, 140 of 140 places |
 | the stored prose holding a withheld or rewritten field (twin reads) | | 6 rows: `power.recentConflict` (withheld always) 2,620 reads on 131 places; `power.stability` 2,540; `guardEffectivenessDesc` 900; `pressureSentence` (withheld always) 240; `safetyDesc` 80; `economy.complexity` 80 | 0 | (not run: the same composer) |
 
 "Path-reads": a read in which two paths hit counts twice. In every NAMES cell the twin's count equals the server's (the twin is
