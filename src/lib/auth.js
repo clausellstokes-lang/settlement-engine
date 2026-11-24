@@ -404,26 +404,19 @@ async function supabaseUpdatePassword(newPassword) {
  * display_name writes, even when the RPC isn't available.
  */
 async function supabaseUpdateDisplayName(displayName) {
-  // Primary path: RPC (introduced in migration 009).
+  // The only path: the RPC (migration 009; the 195 civility guard). An RPC
+  // error, a civility refusal included, is thrown to the caller to show; it is
+  // never routed round with a direct table write (GRANTS-1 part C: 211 no
+  // longer grants UPDATE on display_name to a signed-in user).
   const { error: rpcErr } = await supabase.rpc('update_display_name', {
     new_name: displayName,
   });
+  if (rpcErr) throw rpcErr;
 
-  if (rpcErr) {
-    // Either migration 009 hasn't been applied or RPC permission is missing.
-    // Fall back to the legacy direct-table write so we don't break on a
-    // partial server-side rollout.
-    const { error: tableErr } = await supabase
-      .from('profiles')
-      .update({ display_name: displayName })
-      .eq('id', (await supabase.auth.getUser()).data?.user?.id);
-    if (tableErr) throw tableErr;
-  }
-
-  // Mirror into user_metadata regardless of which path won. This keeps
-  // the JWT representation aligned with the profiles row so any code
-  // reading from `user.user_metadata.display_name` sees the new value
-  // without a separate refresh.
+  // Mirror into user_metadata after the RPC success. This keeps the JWT
+  // representation aligned with the profiles row so any code reading from
+  // `user.user_metadata.display_name` sees the new value without a
+  // separate refresh.
   const { error: metaErr } = await supabase.auth.updateUser({
     data: { display_name: displayName },
   });

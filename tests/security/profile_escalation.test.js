@@ -4,10 +4,11 @@
  * Two layers of testing live here:
  *
  *   1. CLIENT-SIDE — pure assertions about how src/lib/auth.js calls
- *      supabase. We stub the supabase client and verify the RPC path is
- *      tried first, the table-update fallback runs only on RPC failure,
- *      and the user_metadata mirror always fires. This catches client
- *      regressions where we accidentally route around the RPC.
+ *      supabase. We stub the supabase client and verify display_name goes
+ *      through the RPC only: an RPC error (a civility refusal included) is
+ *      thrown to the caller and NO direct table write happens, and the
+ *      user_metadata mirror runs only after an RPC success (GRANTS-1 part C).
+ *      This catches client regressions where we route around the RPC.
  *
  *   2. SERVER-SIDE (commented-only) — pgTAP-style SQL assertions that
  *      verify migration 009's policy actually blocks role/tier/credits/
@@ -81,39 +82,36 @@ describe('updateDisplayName client path', () => {
     await auth.updateDisplayName('Ada');
 
     expect(stubs.rpcImpl).toHaveBeenCalledWith('update_display_name', { new_name: 'Ada' });
-    // RPC succeeded → no fallback table update.
+    // RPC succeeded → no direct table write.
     expect(stubs.fromUpdate).not.toHaveBeenCalled();
-    // user_metadata mirror always runs.
+    // user_metadata mirror runs after the RPC success.
     expect(stubs.userMetaUpdate).toHaveBeenCalledWith({ data: { display_name: 'Ada' } });
   });
 
-  it('falls back to direct table UPDATE when the RPC errors', async () => {
-    stubs.rpcImpl.mockResolvedValue({ error: { message: 'function not found' } });
+  it('an RPC refusal is shown and NO table write happens', async () => {
+    const refusal = { message: 'display name refused by the civility guard' };
+    stubs.rpcImpl.mockResolvedValue({ error: refusal });
     stubs.fromUpdateEq.mockResolvedValue({ error: null });
     stubs.userMetaUpdate.mockResolvedValue({ error: null });
 
-    await auth.updateDisplayName('Ada');
+    await expect(auth.updateDisplayName('Ada')).rejects.toBe(refusal);
 
-    expect(stubs.rpcImpl).toHaveBeenCalled();
-    expect(stubs.fromUpdate).toHaveBeenCalledWith({ display_name: 'Ada' });
-    // The fallback row update is scoped to the current user's id.
-    expect(stubs.fromUpdateEq).toHaveBeenCalledWith('id', 'user-abc');
-    expect(stubs.userMetaUpdate).toHaveBeenCalled();
+    expect(stubs.rpcImpl).toHaveBeenCalledWith('update_display_name', { new_name: 'Ada' });
+    // Never routed round the civility guard: no direct profiles write.
+    expect(stubs.fromUpdate).not.toHaveBeenCalled();
+    expect(stubs.fromUpdateEq).not.toHaveBeenCalled();
+    // The user_metadata mirror runs only after an RPC success.
+    expect(stubs.userMetaUpdate).not.toHaveBeenCalled();
   });
 
-  it('still mirrors to user_metadata even when the table fallback fires', async () => {
-    stubs.rpcImpl.mockResolvedValue({ error: { message: 'function not found' } });
+  it('any RPC error (e.g. the function missing) is thrown, never routed round', async () => {
+    const missing = { message: 'function not found' };
+    stubs.rpcImpl.mockResolvedValue({ error: missing });
     stubs.fromUpdateEq.mockResolvedValue({ error: null });
     stubs.userMetaUpdate.mockResolvedValue({ error: null });
 
-    await auth.updateDisplayName('Ada');
-    expect(stubs.userMetaUpdate).toHaveBeenCalledWith({ data: { display_name: 'Ada' } });
-  });
-
-  it('throws when both the RPC and the fallback fail', async () => {
-    stubs.rpcImpl.mockResolvedValue({ error: { message: 'function not found' } });
-    stubs.fromUpdateEq.mockResolvedValue({ error: { message: 'policy violation' } });
-
-    await expect(auth.updateDisplayName('Ada')).rejects.toBeTruthy();
+    await expect(auth.updateDisplayName('Ada')).rejects.toBe(missing);
+    expect(stubs.fromUpdate).not.toHaveBeenCalled();
+    expect(stubs.userMetaUpdate).not.toHaveBeenCalled();
   });
 });
