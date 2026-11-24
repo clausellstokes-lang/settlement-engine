@@ -1,114 +1,86 @@
-# THE TROUBLE LAW'S TABLE — FOR THE OWNER'S SIGNING (lane KINDS-1; DRAFT, signed by none)
+# Which troubles a place is born with — the one yes this asks of you
 
-`src/domain/trouble/troubleLaw.js :: TROUBLE_WEIGHT_TUNING`. The law is DARK (version 1 = today, byte for byte); a saved
-place keeps the law it was born under for ever; lighting it for new places is the owner's word (the chair's one unit at
-the close). Under law 2 today's three fixed numbers in `historyGenerator.js :: buildHistoricalEvent` become weights that
-read how much of the thing the place already holds ("capitalize on what's already there"); no read alone sets a chance to
-0 or 1; the number of troubles a place is asked for, every other add, every admission check and the flat fill are unchanged.
+*Written 2026-11-24 by KINDS-2 for the owner. Measured the same day on the line at point 113, with the seat and fortune
+laws already switched on.*
 
-## THE DRAFT TABLE (the chair's choice, 2026-11-20 22:10 UTC)
-| row | what it weighs | read | chance at/below the low point | at/above the high point | today (law 1) |
-|---|---|---|---|---|---|
-| crimeWave | the crime coin: a place with any criminal house draws a crime wave first | `economicState.compound.criminalEffective` | 0.05 at 20 | 0.50 at 90 | 0.5 flat |
-| guildConflict | the guild swap: each pick of the fill is swapped for a guild conflict | count of powers of the economy category on the roster the history is handed | 0.05 at 1 | 0.25 at 4 | 0.3 flat |
-| smallPlaceCrime | a thorp, hamlet or village with no crisis and a fence, smuggler, bandit or outlaw house | `criminalEffective` | 0.50 at 15 | 0.90 at 60 | always (1) |
-Between the points the chance is a straight line; a missing read takes the midpoint.
+## What is wrong today
 
-The chair chose B50 for the crime row; the owner may prefer A (gentler: 0.10 at 20 to 0.40 at 100, never above today's
-coin) or B (0.05 at 20 to 0.55 at 90, which puts the metropolis's crime wave over a third). All four columns are below.
+When a new town, city or metropolis is made, three fixed numbers decide two of its troubles, and they look only at
+whether a thing EXISTS in the place, never at how much of it there is:
 
-## MEASURED (the visitor's pool: 150 places a size, born as a visitor who touches no setting; law 2 forced in the
-## instrument only; `out/law2-compare.md`, instrument `measure-kinds.mjs`)
-Columns: baseline (today) | A | B | B50 (the chosen row). Quarter rates use quartiles of the read within each size.
+- if the place has any criminal house at all, it is a coin toss whether it is born with a **crime wave**;
+- if it has any guild at all, nearly a third of its other troubles are swapped for a **guild quarrel**;
+- a thorp, hamlet or village with a fence, smuggler, bandit or outlaw house is **always** born with a crime wave.
 
-## guild_conflict / crime_wave share of places (any position)
+So places converge. Half of all cities carry the same guild quarrel, and around half the same crime wave, whether the
+city's underworld is strong or barely there. A big city with almost no organised crime is as likely to have a crime
+wave as one run by its gangs.
 
-| size | baseline | A | B | B50 |
+## What the new rule does
+
+It keeps the same three moments but makes each one a **weight that reads how much of the thing the place really has**
+("capitalize on what's already there"):
+
+- the crime wave becomes **likelier the stronger the place's own crime is**, and unlikely where crime is weak;
+- the guild quarrel becomes **likelier the more trade and craft powers the place holds**;
+- the small place with a thieves' house gets its crime wave **most of the time**, not always.
+
+Nothing is ever certain and nothing is ever ruled out by one fact alone (your rule: a single factor "only shifts the
+weight, never determines it by itself").
+
+## The numbers you would be signing (a draft; nobody has signed them)
+
+| trouble | what it reads | chance where there is little of it | chance where there is a lot | today |
 |---|---|---|---|---|
-| thorp | 0.0 / 11.3 | 0.0 / 9.3 | 0.0 / 9.3 | 0.0 / 8.7 |
-| hamlet | 0.0 / 5.3 | 0.0 / 2.7 | 0.0 / 2.7 | 0.0 / 2.7 |
-| village | 1.3 / 7.3 | 1.3 / 4.0 | 1.3 / 4.0 | 1.3 / 4.0 |
-| town | 30.7 / 22.0 | 16.7 / 12.7 | 16.7 / 14.7 | 16.7 / 14.0 |
-| city | 50.7 / 48.7 | 32.7 / 20.7 | 32.7 / 25.3 | 32.7 / 24.0 |
-| metropolis | 50.7 / 45.3 | 31.3 / 26.7 | 30.7 / 34.0 | 31.3 / 30.0 |
+| crime wave (towns and up) | how strong the place's crime is, on its 0 to 100 scale | 5% at 20 or below | 50% at 90 or above | 50%, flat |
+| guild quarrel (each other trouble picked) | how many trade and craft powers the place has | 5% with 1 | 25% with 4 or more | 30%, flat |
+| crime wave (thorp, hamlet, village with a thieves' house) | how strong the place's crime is | 50% at 15 or below | 90% at 60 or above | always |
 
-## kinds over (**bold**) or near the bar
+Between the low and high points the chance rises in a straight line. No new chance is higher than today's.
 
-| size | baseline | A | B | B50 |
+## Before and after, by size
+
+Two sets of 900 new places (150 of each size), each made twice from the same starting seed: once by today's rule and
+once by the new one. The **standard set** uses the program's plain settings. The **visitor set** uses the settings a
+first-time visitor gets, which vary more (mixed terrain, trade, cultures and priorities). Each cell is today → with
+the new rule.
+
+| size | guild quarrel, standard | guild quarrel, visitor | crime wave, standard | crime wave, visitor |
 |---|---|---|---|---|
-| thorp | — | — | — | — |
-| hamlet | — | — | — | — |
-| village | — | — | — | — |
-| town | guild_conflict 30.7 | — | — | — |
-| city | **guild_conflict 50.7**, **crime_wave 48.7** | guild_conflict 32.7 | guild_conflict 32.7 | guild_conflict 32.7 |
-| metropolis | **guild_conflict 50.7**, **crime_wave 45.3** | guild_conflict 31.3 | **crime_wave 34.0**, guild_conflict 30.7 | guild_conflict 31.3, crime_wave 30.0 |
+| thorp | 0% → 0% | 0% → 0% | 5% → 3% | 3% → 2% |
+| hamlet | 0% → 0% | 0% → 0% | 11% → 7% | 9% → 6% |
+| village | 1% → 1% | 2% → 2% | 5% → 3% | 3% → 2% |
+| town | **37% → 21%** | **32% → 18%** | 19% → 13% | 20% → 14% |
+| city | **52% → 27%** | **48% → 31%** | **46% → 22%** | **40% → 27%** |
+| metropolis | **47% → 33%** | **47% → 31%** | **56% → 32%** | **60% → 31%** |
 
-## commonest FIRST trouble and its share; crime_wave as first
+**The most common first trouble:**
+- **Today:** a city's first trouble is a crime wave in about 4 cities in 10 (standard set 39%, visitor set 33%). For a metropolis it is about half (51% and 56%).
+- **With the new rule:** that drops to about 1 in 6 cities (15% and 17%) and about 1 in 4 metropolises (27% in both sets).
+- **The freed places:** they go to the other 27 kinds of trouble the program already has, such as succession crises, debts to outsiders, trade disputes, plagues and magical controversies. Each of those rises by a few points, and no single kind takes over.
 
-| size | baseline | A | B | B50 |
-|---|---|---|---|---|
-| thorp | resource_scarcity 17.3; crime first 10.7 | resource_scarcity 17.3; crime first 9.3 | resource_scarcity 17.3; crime first 8.7 | resource_scarcity 17.3; crime first 8.7 |
-| hamlet | resource_scarcity 13.3; crime first 5.3 | resource_scarcity 13.3; crime first 2.7 | resource_scarcity 13.3; crime first 2.7 | resource_scarcity 13.3; crime first 2.7 |
-| village | resource_scarcity 17.3; crime first 7.3 | resource_scarcity 17.3; crime first 4.0 | resource_scarcity 17.3; crime first 4.0 | resource_scarcity 17.3; crime first 4.0 |
-| town | crime_wave 21.3; crime first 21.3 | crime_wave 12.0; crime first 12.0 | crime_wave 14.0; crime first 14.0 | crime_wave 13.3; crime first 13.3 |
-| city | crime_wave 46.0 (over); crime first 46.0 | crime_wave 18.7; crime first 18.7 | crime_wave 23.3; crime first 23.3 | crime_wave 22.0; crime first 22.0 |
-| metropolis | crime_wave 42.0 (over); crime first 42.0 | crime_wave 22.7; crime first 22.7 | crime_wave 28.7 (over); crime first 28.7 | crime_wave 25.3 (over); crime first 25.3 |
+**How many places change at all:**
+- **Troubles:**
+  - In the standard set, the troubles change in 3 to 5 small places of each size, 37 towns, 75 cities and 66 metropolises (of 150 each).
+  - In the visitor set: 1 to 5 small places, 32 towns, 50 cities and 71 metropolises.
+- **Other figures:**
+  - In those same places a few figures that read the troubles follow them. A small number of places (31 and 40 per set) see a small change in the economy figures.
+  - A handful (6 and 7 per set) see a change in their power standing.
 
-## crime_wave rate, bottom / top quarter of the crime read
+## What does NOT change
 
-| size | baseline | A | B | B50 |
-|---|---|---|---|---|
-| thorp | 5 / 8 | 5 / 5 | 5 / 8 | 5 / 5 |
-| hamlet | 0 / 11 | 0 / 8 | 0 / 8 | 0 / 8 |
-| village | 0 / 5 | 0 / 5 | 0 / 5 | 0 / 5 |
-| town | 5 / 51 | 3 / 30 | 3 / 38 | 3 / 35 |
-| city | 32 / 51 | 3 / 38 | 3 / 51 | 3 / 49 |
-| metropolis | 37 / 41 | 11 / 32 | 8 / 49 | 8 / 38 |
+- **A calm place stays calm.** No place gains a trouble it did not have. The number of troubles a place is asked for is untouched: in all 1,800 places, not one ended up with more troubles. Eight ended up with one fewer, because a trouble that today is added on top of the asked-for number no longer always fires.
+- **Every other trouble rule is untouched**: the troubles that follow from a crisis, from scarcity, and every check that a trouble fits the place.
+- **Saved places never change.** A place made before the rule is switched on keeps today's rule for ever, through saving, loading, regenerating a section, playing through time, copying and importing. That includes very old saves that kept no settings at all: they are always read under today's rule, whatever page you have open.
+- **The rule is built but OFF.** Places made today are byte for byte what they were before this work. This was checked on all 1,800 places above.
 
-## guild_conflict rate, bottom / top quarter of the economy-power read (g2)
+## The one yes
 
-| size | baseline | A | B | B50 |
-|---|---|---|---|---|
-| thorp | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
-| hamlet | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
-| village | 0 / 5 | 0 / 5 | 0 / 5 | 0 / 5 |
-| town | 37 / 35 | 18 / 19 | 18 / 19 | 18 / 19 |
-| city | 50 / 54 | 24 / 43 | 24 / 43 | 24 / 43 |
-| metropolis | 37 / 76 | 16 / 54 | 13 / 54 | 16 / 54 |
+**Do you sign the three rows of the table above, and switch the rule on for new places?**
 
-## troubles a place 0/1/2/3+ (distinct kinds)
+On your yes, switching it on is one commit. A different set of numbers is a change to that table alone, measured the
+same way before it lands.
 
-| size | baseline | A | B | B50 |
-|---|---|---|---|---|
-| thorp | 0/146/3/1 (24) | 0/146/4/0 (24) | 0/147/2/1 (24) | 0/147/3/0 (24) |
-| hamlet | 0/148/2/0 (23) | 0/148/2/0 (23) | 0/148/2/0 (23) | 0/148/2/0 (23) |
-| village | 0/66/84/0 (28) | 0/68/82/0 (28) | 0/68/82/0 (28) | 0/68/82/0 (28) |
-| town | 0/70/80/0 (29) | 0/72/78/0 (29) | 0/71/79/0 (29) | 0/71/79/0 (29) |
-| city | 0/0/76/74 (29) | 0/0/77/73 (29) | 0/0/77/73 (29) | 0/0/77/73 (29) |
-| metropolis | 0/0/74/76 (29) | 0/0/75/75 (29) | 0/0/74/76 (29) | 0/0/74/76 (29) |
-
-## places whose count moved against the baseline (down / up)
-
-| size | baseline | A | B | B50 |
-|---|---|---|---|---|
-| thorp | — | 1 / 0 | 1 / 0 | 2 / 0 |
-| hamlet | — | 0 / 0 | 0 / 0 | 0 / 0 |
-| village | — | 2 / 0 | 2 / 0 | 2 / 0 |
-| town | — | 2 / 0 | 1 / 0 | 1 / 0 |
-| city | — | 1 / 0 | 1 / 0 | 1 / 0 |
-| metropolis | — | 1 / 0 | 0 / 0 | 0 / 0 |
-
-
-## THE PLACES THAT LOST A TROUBLE (none gained one, in any arm)
-Each lost one because a law-1 add overshot the number of troubles asked for and, under law 2, that add did not fire.
-- A (7): thorp 148 (3→2); village 95, 144 (2→1); town 16, 114 (2→1; 114 is calm); city 60 (3→2); metropolis 51 (3→2).
-- B (6): thorp 2 (2→1); village 95, 144; town 114 (calm); city 60.
-- B50, the chosen row (7): thorp 2 (2→1), 148 (3→2); village 95, 144 (2→1); town 114 (2→1, calm); city 60 (3→2).
-(Seeds are `visitor-<size>-<n>`.)
-
-## ONE KNOWN LEGACY EDGE (the chair's ruling, 22:23 UTC)
-A very old saved place that carries no stored configuration at all (neither `config` nor `_config`) has no record of the
-law it was born under, so when one of its sections is regenerated it follows whatever configuration the form holds, as
-every other setting of such a place already does. In the ordinary case the form carries no marker and the place reads
-today's law; only if a world born under the new law has been loaded into the form first would its troubles re-roll under
-the new law (a place that keeps its `_config` is now read from its own copy and is not affected).
+*Earlier alternatives:* in November 2026 the chair also measured a gentler crime row (10% to 40%) and a stronger one
+(5% to 55%), and chose the middle one shown here. Those figures were taken before the seat and fortune laws were on
+and are kept only as history.
