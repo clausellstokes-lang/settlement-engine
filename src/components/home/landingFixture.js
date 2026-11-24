@@ -76,7 +76,7 @@ export const fixture = {
     "population": 82,
     "tier": "village",
     "eyebrow": "road village · mountain",
-    "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+    "prose": "Cnocby has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
     "pressure": "Étaín Sullivan and Lasair Hayes will both present proposals at the next council session. Only one will be accepted.",
     "hooks": [
       {
@@ -127,34 +127,34 @@ export const fixture = {
         "from": "adequate",
         "to": "surplus",
         "tone": "success",
-        "reason": "Vael (major) gives the priesthood its standing. Religious Authorities carries power 30."
+        "reason": "Vael (major) gives the priesthood its standing. Religious Authorities carries power 24."
       },
       {
         "axis": "Social trust",
-        "from": "strained",
-        "to": "critical",
-        "tone": "danger",
-        "reason": "Public legitimacy 14 colors trust. Criminal pressure erodes communal trust."
+        "from": "adequate",
+        "to": "strained",
+        "tone": "warning",
+        "reason": "Criminal pressure erodes communal trust. Public legitimacy 33 colors trust."
       }
     ],
     "advance": [
       {
-        "week": "Week 4",
+        "week": "Week 1",
         "season": "the spring of year 1",
-        "headline": "The split between the faiths is over",
-        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
+        "headline": "Cnocby turns to the faith of Vael",
+        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
       },
       {
-        "week": "Week 5",
+        "week": "Week 3",
         "season": "the spring of year 1",
         "headline": "Cnocby goes onto a war footing",
         "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
-        "week": "Week 9",
+        "week": "Week 4",
         "season": "the spring of year 1",
-        "headline": "Elder Council captures an institution",
-        "text": "Control of Cnocby's water sources is passing to Elder Council."
+        "headline": "The split between the faiths is over",
+        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
       },
       {
         "week": "Week 10",
@@ -185,8 +185,8 @@ export const fixture = {
       {
         "kind": "stressor",
         "tone": "war",
-        "week": "Week 4",
-        "text": "Skáloy, a town of Korl, has broken its faith pact with Keshigordu."
+        "week": "Week 3",
+        "text": "Cnocby is mustering its levies and doubling its watch."
       },
       {
         "kind": "crime",

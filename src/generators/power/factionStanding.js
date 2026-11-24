@@ -6,7 +6,7 @@
 
 import { powerNameWithArticle, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): a power named in a standing sentence takes its article
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
-import { powerLabelOf, seatHolderApartOf, seatHolderLineOf, seatHolderLinesOf, seatHolderRelationLineOf } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line
+import { powerLabelOf, seatHolderApartOf, seatHolderLineOf, seatHolderLinesOf, seatHolderRelationLineOf, tieReadsBought } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line; 13G (N97): the relation rows read bought, their one definition beside the rows' builders
 import { seatIsCouncil, withoutSeatAccess } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
@@ -91,6 +91,17 @@ export const LADDER = Object.freeze({
   fewMatters: Object.freeze(['They have a say on only a few matters; on everything else they side with whoever will deal with them that week.']),
 });
 
+/**
+ * THE STANDING WRITER. Its inputs: the roster (`factions`, mutated in place), the force's words (`force`), and `seat`, which
+ * may carry the seat's `publicLegitimacy` (the coup reading, C14176), its born `config` (the seat law, SEAT-10 U6) and, NEW
+ * (13G, the ninth chair's N97, 2026-11-23), `factionRelationships`: the relation rows of the record (or of the served page)
+ * the roster stands in. Where those rows read bought (`factionDynamics.js :: tieReadsBought`), the thieves' and
+ * the military's war-of-arrests notes are omitted, as where the governing seat is itself criminal (`seatBoughtOf`). The
+ * settles after the coherence seam hand the record's rows (`rosterText.js`); a page reader over a served roster (the share
+ * veil's) hands the served rows. A caller that passes no rows (the power step's first call, every caller before 13G) gets
+ * today's lines, unchanged: the gate is `seatBoughtOf` alone.
+ * @param {any[]} factions @param {{ body: string }} [force] @param {{ publicLegitimacy?: any, config?: any, factionRelationships?: unknown } | null} [seat]
+ */
 export const annotateFactionStanding = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
@@ -134,7 +145,10 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         hasFeudalSteward = hasFaction('Feudal Stewardship') || hasFaction('Feudal Appointee'),
         hasReligious = hasFaction('Religious Authorities'),
         hasArcane = hasFaction('Arcane Orders'),
-        seatBought = seatBoughtOf(factions); // BAR8-K-POWERS (13g)
+        // 13G (the ninth chair's N97, 2026-11-23): AND where the record's own relation rows read bought (a hall bought through its
+        // people, the agent rung of `hallCapture.js :: hallCaptureOf`; the rows' reading: `factionDynamics.js :: tieReadsBought`), handed by the settles after the coherence seam
+        // (`seat.factionRelationships`: `rosterText.js`); the power step's first call hands none, its writes stand
+        seatBought = seatBoughtOf(factions) || tieReadsBought(seat?.factionRelationships); // BAR8-K-POWERS (13g)
       factions.forEach(function (faction, rank) {
         var power = faction.power,
           factionName = faction.faction,

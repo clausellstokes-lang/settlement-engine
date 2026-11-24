@@ -41,7 +41,11 @@ const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-hamlet-42', "Ai Li has asked Rong Liu for a vote against the head shepherd's own interests."], // the voter is seated; NAMES-1 (CN2): the role
   ['r2r-hamlet-26', 'Anastasia Borisov and Egor Petrov sit on opposite sides of most questions and vote together'], // one power in common
   ['r2r-hamlet-5', 'Panteleimon Akropolites voted against Dionysios Chomatenos on a small matter last week.'], // one power in common
-  ['r2r-town-14', 'Hassan al-Basri took Badr ibn Khaldun in as an apprentice and taught them the trade'], // the pair shares a trade
+  // RE-PICKED BY THE PREMISE (the flip, 2026-11-23, CLOSE-5 F-SEAT, CLOSE-5's ruling: a PREMISE): r2r-town-14's mentor tie
+  // draws its pool's #5 lit, so no trade line stands there; r2r-town-34 is the lowest r2r-town of 200 lit holding the case by
+  // its own predicate (a mentor tie drawn at the trade line's index, #3 `sharedTrade`, on a pair whose trades are known and
+  // shared: `npcData.js :: pairTradeKnown`, `pairSharesTrade`), never the line's words (was r2r-town-14, Hassan al-Basri and Badr ibn Khaldun)
+  ['r2r-town-34', 'Norbert Meyer took Hildegard Goldstein in as an apprentice and taught them the trade'], // the pair shares a trade
 ]);
 
 /** @type {Record<string, string>} */

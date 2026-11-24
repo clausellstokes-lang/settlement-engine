@@ -41,11 +41,13 @@ const NOT = [
   ['r2r-city-19', "arrest record looks good because", "Veteran's lodge", "crew is working, and"],
   ['r2r-city-24', 'keeps certain doors unwatched in return', 'Citadel', "looks the other way when"],
   ['r2r-city-14', 'are never searched on', 'Hired blades', 'are never troubled by anyone who answers to'],
-  ['r2r-city-45', 'needs a prisoner released', 'Garrison', 'needs a blind eye,'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-45's and r2r-city-1's ties lit draw other lines; the lowest r2r-city whose tie draws each reworded
+  // line is city-20 (20 23 26 59 80 87 of 200) and city-35 (35 39 40 42 64 73 of 200), the house the one its military end holds
+  ['r2r-city-20', 'needs a prisoner released', 'Professional city watch', 'needs a blind eye,'],
   ['r2r-city-17', 'commands the patrols and', "Veteran's lodge", "people go, and"],
   ['r2r-city-17', 'awkward questions about how few arrests are made', 'Mercenary quarter', "people never meet any trouble"],
   ['r2r-town-26', 'arrest records against the coin', "Warden's Lodge", 'against what'],
-  ['r2r-city-1', 'is fought in raids, informants, and paperwork', 'Mercenary quarter', 'is fought with informants, threats and favours called in'],
+  ['r2r-city-35', 'is fought in raids, informants, and paperwork', 'Professional city watch', 'is fought with informants, threats and favours called in'],
   ['r2r-city-39', "command reports to", 'Garrison', "Someone among"],
   ['r2r-metropolis-12', 'operation street by street', 'Citadel', "operation out street by street"],
   ['r2r-metropolis-12', 'ordered to stand down against', 'Citadel', 'cannot refuse. Nobody has said why.'],

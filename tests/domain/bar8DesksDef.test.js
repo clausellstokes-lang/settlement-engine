@@ -5,7 +5,8 @@
  *
  *   13f  DS-DEF-4 semi-organized v4 "has no rival, and no crew is contesting the streets" leaves the key whose own note says
  *        "lacks a single controlling authority" (`crime: = organized`); v7 its twin there.
- *   13a  DS-DEF-2 full legal chain v1 "arrested, heard and held" declares the court the Legal row prints (`court sits`), and so
+ *   13a  DS-DEF-2 full legal chain v1 "heard and held" (once "arrested, heard and held"; re-worded in place by
+ *        CHAIR-2026-11-23-N70, same vid and marks) declares the court the Legal row prints (`court sits`), and so
  *        does its sibling v3 "there is a court to hear it" (drawn in v1's place where v1 alone was declared).
  *   14c  DS-POW-5 council v2 "goes to the whole {seat}" declares `seat members`; v6 the twin "goes to the {seat}" (BR15); its
  *        sibling v1 "the whole {seat} must agree" declares the same atom (drawn in v2's place where v2 alone was declared).
@@ -61,7 +62,7 @@ const legalChain = (/** @type {boolean} */ sits) => ({ courtSits: sits, defence:
 /** [rule · line, desk, block, pool, the cured vid, its twin's vid or null, readings where the premise holds, where it fails] */
 const DESK_LINES = /** @type {Array<[string, string, string, string, number, number|null, Record<string, unknown>, Record<string, unknown>]>} */ ([
   ['13f · has no rival', 'defense', 'DS-DEF-4', 'structure semi-organized', 4, 7, crimeKey('organized'), crimeKey('semi-organized')],
-  ['13a · arrested, heard and held', 'defense', 'DS-DEF-2', 'Internal Security: full legal chain (court AND prison)', 1, null, legalChain(true), legalChain(false)],
+  ['13a · heard and held (v1; once "arrested, heard and held", re-worded in place by CHAIR-2026-11-23-N70)', 'defense', 'DS-DEF-2', 'Internal Security: full legal chain (court AND prison)', 1, null, legalChain(true), legalChain(false)],
   ['13a · a court to hear it (its sibling, drawn in v1\'s place at the first tip)', 'defense', 'DS-DEF-2', 'Internal Security: full legal chain (court AND prison)', 3, null, legalChain(true), legalChain(false)],
   ['14c · goes to the whole seat', 'power', 'DS-POW-5', 'council', 2, 6, { seatMembers: true }, { seatMembers: false }],
   ['14c · the whole seat must agree (its sibling, drawn in v2\'s place at the first tip)', 'power', 'DS-POW-5', 'council', 1, null, { seatMembers: true }, { seatMembers: false }],
@@ -185,6 +186,7 @@ describe('BAR8-DESKS-DEF · 14c over born census towns: the seat of one takes th
 // BAR8-DESKS-2 (2026-11-18, the chair's ruling BR32 (4), the reader's M1): the internal row's pool key reads the Legal row's own
 // court (`defence.js :: courtHoldersOf`, the atom `court sits`), not the town-hall NAME test `compound.hasCourtSystem`. The anchors
 // are towns of the 720 born as the census births them: two that drew the full legal chain's "goes somewhere and takes time"
+// (v2's words then; re-worded in place by CHAIR-2026-11-23-N70 to "A case that reaches the court ... gets a hearing")
 // beside "Prison only" (r2r-town-5, r2r-town-15), one that drew "court without detention" beside "Legal Infrastructure · None"
 // (r2r-town-4), and one whose courthouse and prison both stand (r2r-town-0, the full chain, unmoved).
 describe('BAR8-DESKS-2 · 13a: the internal row is keyed by the court the Legal row prints', () => {

@@ -165,6 +165,8 @@ describe('(b) for each audience, the chains the line names are printed by that a
     expect(failures).toEqual([]);
     // The liveness anchor: MAGIC's measure (build/MAGIC/measure.out.txt) lists 18 of the 300 whose line names what
     // the town leans on; the line names them on every audience's page alike (3 x 18).
-    expect(named).toBe(54);
+    // RE-MEASURED 2026-11-23 (THE FLIP, both birth laws lit): 54 -> 63 (3 x 21), read by this test on the lit births; the
+    // failures list above stays empty.
+    expect(named).toBe(63);
   }, 900_000);
 });

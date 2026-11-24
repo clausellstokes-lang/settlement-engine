@@ -141,7 +141,13 @@ describe('BAR6-CRIME: crime and the force that keeps order have one reading', ()
     expect(v27.economicState.safetyProfile.safetyDesc).toMatch(MILITIA_PRESENT);
     expect(deriveSafetyLine(v27)).toContain(MILITIA_TURNS_OUT);
     // C51048 (9a.pay, 10e-pay): "well paid" beside the commander's own pay cut
-    const w31 = town('bar0-city-wartime-rand-31');
+    // BORN UNDER LAW 1 (THE FLIP, CLOSE-6 F-JOIN-2, 2026-11-23; the chair's ruling on the STOP, the bar4 (e2) form): this control's
+    // case, a person under arms saying the pay is cut beside a stored "well paid" guard line, is extinct lit: it holds on none of
+    // 2,700 lit births searched (bar0-city-wartime-rand 0..899, and 0..199 of each other shape of the wide read: thorp-calm,
+    // hamlet-calm, hamlet-under_siege, village-famine, village-calm, town-calm, town-occupied, city-under_siege+famine,
+    // metropolis-calm). PLAUSIBLE, by reading: the fortune law's purse lifts the pay where it was cut, so the pay-cut card and the
+    // well-paid line no longer meet. Under both laws at 1 the city is the one the row was read on. The other controls stay lit.
+    const w31 = generateSettlementPipeline({ ...cfgFor('bar0-city-wartime-rand-31'), _seatLawVersion: 1, _fortuneLawVersion: 1 }, null, { seed: 'bar0-city-wartime-rand-31', customContent: {} });
     expect(orderForceOf(w31).payCut, 'C51048: a person under arms says the pay is cut').toBe(true);
     expect(w31.economicState.safetyProfile.guardEffectivenessDesc).toMatch(WELL_PAID);
     expect(deriveGuardAssessment(w31)).toContain('though the pay for keeping order is being cut');

@@ -113,8 +113,11 @@ function build(lit) {
 
 afterEach(() => { dial.lit = false; seam.nobody = false; });
 
-/** The probe's birth, exactly (`u7probe/probe.mjs`). */
-const bear = (settType, seed) => generateSettlementPipeline(birthConfig({ settType, culture: 'germanic' }), null, { seed, customContent: {} });
+/**
+ * The probe's birth (`u7probe/probe.mjs`), with THE FORTUNE LAW FORCED TO 1 in its own config: this file means the seat law
+ * alone, and the flip lit fortune beside it (the final census's surprise: arm 8's liveness anchor moved; the chair's Q3).
+ */
+const bear = (settType, seed) => generateSettlementPipeline({ ...birthConfig({ settType, culture: 'germanic' }), _fortuneLawVersion: 1 }, null, { seed, customContent: {} });
 
 /** The DM's road: the seat passed to `target` (`u7probe/probe.mjs`'s event, exactly). */
 function dmTransfer(s, seed, target) {

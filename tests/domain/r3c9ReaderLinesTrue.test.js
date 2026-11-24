@@ -93,7 +93,11 @@ const BREWER_TOWNS = ['r2r-town-39', 'r2r-city-1', 'r2r-metropolis-3'];
  * taken by r2s-slave_revolt-town-3 (Zhongba: the Church Council's ONE tie, the Thieves' Guild, competitive at the
  * adversarial rung), the census's town whose only tie with the hall is that rung.
  */
-const HUNTED_TOWNS = ['bar0-metropolis-calm-rand-1', 'r2s-slave_revolt-town-3', 'r2r-city-12', 'r2r-metropolis-10'];
+// RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit); BOTH LANES' ROW (the seat's FLIP-LIST U6, fortune's B1): Shankou (bar0-metropolis-calm-rand-1) and
+// Markaztappa (r2r-city-12) lit hold no tie at the adversarial rung; the lowest bar0-metropolis-calm-rand and r2r-city whose
+// hall hunts an underworld at that rung, its only competitive tie, are rand-4 (Yekekotan; 4 21 23 28 30 31 33 35 of 200) and
+// city-16 (Copantzin; 16 22 23 34 43 55 65 113 of 200)
+const HUNTED_TOWNS = ['bar0-metropolis-calm-rand-4', 'r2s-slave_revolt-town-3', 'r2r-city-16', 'r2r-metropolis-10'];
 const HOLD_ALONE = /make its orders hold alone|can no longer make them hold alone/;
 /** @param {any} s */
 const brewerStands = (s) => (s.institutions || []).some((/** @type {any} */ i) => /^brew/i.test(String(i?.name || '')));

@@ -33,8 +33,11 @@ describe('TAIL-POWERS-3 · batch 1: the account names a power by its prose form;
 
   /** seed -> [the account's sentence that must NOT print, the sentence that prints instead] */
   const ACCOUNT = /** @type {Record<string, [string, string]>} */ ({
-    'r2r-hamlet-10': ['The Military/Guard no longer takes its orders.', 'The Guard no longer takes its orders.'],
-    'r2r-hamlet-18': ['The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-hamlet-10's account lit says the Guard is at odds with the hall, and r2r-hamlet-18's names no
+    // Guard; the lowest r2r-hamlet whose account says the Guard no longer takes its orders is hamlet-128 (alone of 200), and
+    // the lowest that says it is at odds with the hall is hamlet-10 (10 27 of 200), each row's own pair restored
+    'r2r-hamlet-128': ['The Military/Guard no longer takes its orders.', 'The Guard no longer takes its orders.'],
+    'r2r-hamlet-10': ['The Military/Guard is at odds with it.', 'The Guard is at odds with it.'],
     'r2s-politically_fractured-town-3': ['The Third Bloc will back whichever side meets its price.', 'The Neutrals will back whichever side meets their price.'],
   });
   for (const [seed, [was, now]] of Object.entries(ACCOUNT)) {
@@ -48,8 +51,11 @@ describe('TAIL-POWERS-3 · batch 1: the account names a power by its prose form;
   /** seed -> [the stability that must NOT be written, the stability written instead] */
   const STABILITY = /** @type {Record<string, [string, string]>} */ ({
     // G2: a Legitimacy Crisis (thorp and town, the smallest and largest it reaches)
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (A JUDGEMENT, AT ANOTHER SIZE): r2r-town-44 lit is not in a Legitimacy Crisis ("Stable" is true there), and
+    // no r2r-town of 0..399, r2r-village or r2r-city of 0..199, or r2s village, town or city of 0..11 of any crisis writes the
+    // twin lit; the largest it reaches is the hamlet, r2r-hamlet-43 (alone of 0..199)
     'r2r-thorp-23': ['Stable', "Tense (the seat has lost the people's trust)"],
-    'r2r-town-44': ['Stable', "Tense (the seat has lost the people's trust)"],
+    'r2r-hamlet-43': ['Stable', "Tense (the seat has lost the people's trust)"],
     // G3: no religious seat, no religious power of weight
     'r2r-city-18': ['Rigid (militant theocracy)', 'Ordered (strong military presence)'],
     'r2r-metropolis-42': ['Rigid (militant theocracy)', 'Stable'],

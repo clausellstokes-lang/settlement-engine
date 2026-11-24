@@ -95,7 +95,11 @@ describe('BAR3-PLACES: the rows read the town', () => {
     // declared cure withdraws (7a4b48a84, BAR3-DEFECON-HANDBACK `flags.theocraticEconomy`: its tithes row, 12%, is not
     // the income record's largest); r2r-town-54 (a Strong Feudal Appointee beside Strong Religious Authorities) is the
     // one town of the census's 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 -> 1)
-    ['C18651 no power over the seat', 'r2r-town-54', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-town-54's theocratic flag lit falls (its faith at Significant), and
+    // no r2r town of any size (0..199) nor r2s town, city or metropolis (0..11) prints the note lit (its four flagged towns are
+    // governed by a Church Council); the lowest of the file's read families that prints it is bar0-town-calm-rand-103 (a Feudal
+    // Appointee beside the flagged economy; of every bar0 shape's 0..199)
+    ['C18651 no power over the seat', 'bar0-town-calm-rand-103', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
     ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
     ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
@@ -164,7 +168,9 @@ describe('BAR3-PLACES-2: the routed rows read the town', () => {
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): bar0-city-wartime-rand-6 (the read town) lit casts no profiteer; the lowest bar0-city-wartime-rand whose
+    // profiteer slot is empty is rand-3 (3 9 16 19 36 42 of 200)
+    ['C6485 the profiteer under the war (re-picked from the read town)', 'bar0-city-wartime-rand-3', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],

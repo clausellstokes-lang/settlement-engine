@@ -30,6 +30,15 @@ export const OPPOSITE_PAIRS = Object.freeze([
   // WAGES HAS NO ROW (the chair, 2026-11-23 03:55 UTC): DS-DEF-2 Economic Survival: WEAK v1 and v2 were re-worded in place
   // (their WORD_CORRECTIONS rows), so no pair of variant ids is left; their OLD words are pinned at 0 pages
   // (`PINNED_OLD_WORDS`).
+  // PROSE-E (the chair, N70): P1-P4's TRUE pairs were cured by re-wording in place (five WORD_CORRECTIONS rows,
+  // CHAIR-2026-11-23-N70), so none of them is a row; their OLD words are pinned at 0 pages. This row is WATCHED: CRITICAL v1
+  // said "cannot fund a response to anything" beside GARRISONED v1's people under arms (dz-village-7, under siege); v2 ("has
+  // no money to meet trouble") and v3 ("could not pay for a bad month") co-printed with it on 0 of the 900
+  // (map/DISAGREE-E-PHASE1.md) and are not re-worded: they stay at 0 here. (NO-MARKET v12 × ECO-10 `established` is NOT a
+  // row: v12 prints only as the cut "{settlement} has no market.", under the matcher's floor; its tail is `PINNED_TAILS`.)
+  Object.freeze({ id: 'CRITICAL v2-v3 x GARRISONED v1 (watched)',
+    a: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: CRITICAL', vids: [2, 3] }),
+    b: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [1] }) }),
 ]);
 
 /**
@@ -40,6 +49,11 @@ export const OPPOSITE_PAIRS = Object.freeze([
  */
 export const PINNED_TAILS = Object.freeze([
   Object.freeze({ id: 'GEN-17 GARRISONED v2 tail', side: side({ desk: 'general', position: 'DS-GEN-17', pool: 'GARRISONED', vids: [2] }) }),
+  // The chair, N71 (PROSE-E): GEN-13 NO-MARKET v12 draws (46 of the 900 pages, every one beside ECO-10 `POSTURE: established`)
+  // and the site mount prints it cut, "{settlement} has no market." (`generalDeskRead.js :: siteClause`); its tail, "and trades
+  // in a small way: a sack here, a bundle there, carried between neighbours", would read as NO-MARKET v10's old words did
+  // beside `established`, so it is held at 0 pages. Not re-worded: no page prints it.
+  Object.freeze({ id: 'GEN-13 NO-MARKET v12 tail', side: side({ desk: 'general', position: 'DS-GEN-13', pool: 'NO-MARKET', vids: [12] }) }),
 ]);
 
 /**
@@ -55,6 +69,23 @@ export const PINNED_OLD_WORDS = Object.freeze([
   Object.freeze({ id: 'DS-DEF-2 Economic Survival: WEAK v2, the old words (CHAIR-2026-11-23-03:45)',
     side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: WEAK', vids: [2] }),
     text: 'The people who would have to hold {settlement} through something know there is no money to pay them for it.' }),
+  // PROSE-E (the chair, N70; lines `lines/DISAGREE-E-LINES.md`, FINAL at 24d8edf83): five lines re-worded in place, each by
+  // its WORD_CORRECTIONS row (ruling CHAIR-2026-11-23-N70); on the uncured leaves each printed on the measure's seeds.
+  Object.freeze({ id: 'DS-GEN-13 NO-MARKET v10, the old words (CHAIR-2026-11-23-N70)',
+    side: side({ desk: 'general', position: 'DS-GEN-13', pool: 'NO-MARKET', vids: [10] }),
+    text: 'Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.' }),
+  Object.freeze({ id: 'DS-DEF-2 Internal Security: full legal chain v1, the old words (CHAIR-2026-11-23-N70)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Internal Security: full legal chain (court AND prison)', vids: [1] }),
+    text: 'Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.' }),
+  Object.freeze({ id: 'DS-DEF-2 Internal Security: full legal chain v2, the old words (CHAIR-2026-11-23-N70)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Internal Security: full legal chain (court AND prison)', vids: [2] }),
+    text: "A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper." }),
+  Object.freeze({ id: 'DS-DEF-2 CHAIN: food trades working v1, the old words (CHAIR-2026-11-23-N70)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'CHAIN: food trades working', vids: [1] }),
+    text: "{settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off." }),
+  Object.freeze({ id: 'DS-DEF-2 Economic Survival: CRITICAL v1, the old words (CHAIR-2026-11-23-N70)',
+    side: side({ desk: 'defense', position: 'DS-DEF-2', pool: 'Economic Survival: CRITICAL', vids: [1] }),
+    text: "{settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues." }),
 ]);
 
 const LEAVES = Object.freeze({ defense: DOSSIER_STATE_PROSE_DEFENSE, economy: DOSSIER_STATE_PROSE_ECONOMY, general: DOSSIER_STATE_PROSE_GENERAL });
@@ -129,12 +160,18 @@ export function tailMatchersOf(s) {
 }
 
 /**
- * The old words' matcher: the text's template and its clause-cut forms (as a side's, with no pool to collide with).
- * @param {{ text: string }} pin @returns {ReadonlyArray<RegExp>}
+ * The old words' matcher: the text's template and its clause-cut forms, but a cut the variant's NEW words also yield (PROSE-E:
+ * CHAIN working v1 keeps its first clause, "{settlement}'s food trades are working,") — that cut is not the old words. While the
+ * leaf still holds the old text (before the cure), nothing is excluded, so the pin reads the old words whole.
+ * @param {{ text: string, side: PairSide }} pin @returns {ReadonlyArray<RegExp>}
  */
 export function oldWordsMatchersOf(pin) {
   const f = formsOf(pin.text);
-  return Object.freeze([f.full, ...f.cuts].map((src) => new RegExp(src)));
+  const current = textsOf(pin.side);
+  const shared = current.includes(pin.text)
+    ? new Set()
+    : new Set(current.flatMap((t) => formsOf(t).cuts));
+  return Object.freeze([f.full, ...f.cuts.filter((c) => !shared.has(c))].map((src) => new RegExp(src)));
 }
 
 /** @param {unknown} printProse `buildPrintProse(s, {})` @returns {string[]} every mount's text */

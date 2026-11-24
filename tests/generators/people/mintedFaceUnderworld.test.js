@@ -31,13 +31,13 @@ const DIALS = Object.freeze({
   nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true,
   magicExists: true, contentProfile: 'grounded',
 });
-/** The census's seed shapes: r2r-<size>-<i> calm, r2s-<crisis>-<size>-<i> forced. @param {string} seed */
-function born(seed) {
+/** The census's seed shapes: r2r-<size>-<i> calm, r2s-<crisis>-<size>-<i> forced. @param {string} seed @param {boolean} [lawOne] */
+function born(seed, lawOne = false) {
   const calm = seed.match(/^r2r-(\w+)-\d+$/);
   const forced = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
   const cfg = calm ? { ...DEFAULT_CONFIG, ...DIALS, settType: calm[1] }
     : { ...DEFAULT_CONFIG, ...DIALS, settType: forced[2], selectedStresses: [forced[1]], selectedStressesRandom: false };
-  return generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+  return generateSettlementPipeline({ ...birthConfig(cfg), ...(lawOne ? { _seatLawVersion: 1, _fortuneLawVersion: 1 } : {}) }, null, { seed, customContent: {} });
 }
 const GUILD = /thie(?:f|ves)['’]?\s+guild|criminal guild/i;
 /** Whether the town has a thieves' or criminal guild among its powers or houses. @param {any} s */
@@ -69,12 +69,19 @@ describe('COHERENCE-POWERS-7 leftover 1 · the four minted faces of the census\'
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('every minted face of the four towns reads "the local underworld", and no minted face names a guild the town lacks', () => {
     expectNoSeedFailures(collectSeedFailures([
-    ['r2r-metropolis-39', 'the lord'],
-    ['r2s-politically_fractured-city-1', "the bloc's speaker"],
-    ['r2s-indebted-city-0', 'the lord'],
-    ['r2r-metropolis-213', 'the lord'],
-  ], ([seed, title]) => {
-    const s = born(seed);
+    // BORN UNDER LAW 1 (THE FLIP, CLOSE-6 F-JOIN-2, 2026-11-23; the chair's ruling on the STOP, the bar4 (e2) form): r2r-metropolis-39's
+    // case, a minted lord drawing the payroll line in a town with no thieves' or criminal guild, is extinct lit beyond this arm's
+    // own rows: of 2,080 lit births searched (r2r-metropolis 0..699, r2r-city 0..299, r2r-town 0..299, r2s metropolis 0..11 and
+    // r2s city and town 0..19 of every crisis) it holds only at r2r-metropolis-213 and r2s-indebted-city-0, both rows here.
+    // PLAUSIBLE, by reading: the lit roster seats a thieves' guild at r2r-metropolis-39 and re-deals the minted faces' draws, and
+    // the payroll draw on a lord is rare. Under both laws at 1 the metropolis is the one the review read; the other three rows
+    // stay lit.
+    ['r2r-metropolis-39', 'the lord', true],
+    ['r2s-politically_fractured-city-1', "the bloc's speaker", false],
+    ['r2s-indebted-city-0', 'the lord', false],
+    ['r2r-metropolis-213', 'the lord', false],
+  ], ([seed, title, lawOne]) => {
+    const s = born(seed, lawOne);
     expect(hasGuild(s)).toBe(false);
     const faces = minted(s);
     expect(faces.filter((c) => GUILD.test(String(c.secret?.what || ''))).map((c) => `${c.title}: ${c.secret.what}`)).toEqual([]);

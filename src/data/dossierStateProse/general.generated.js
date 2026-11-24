@@ -9821,7 +9821,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no market",
             "no crisis: under_siege"
           ],
-          "text": "Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.",
+          "text": "There is no market at {settlement} to gather its trade in one place, so a buyer deals with each seller at their own door.",
           "slots": [
             "settlement"
           ],

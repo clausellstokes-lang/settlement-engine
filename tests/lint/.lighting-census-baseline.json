@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "78e370a0fe0750cf1ec8170be6960bb9a223cac2",
-  "measuredBy": "GRANTS-1-C",
-  "date": "2026-11-24",
-  "note": "one new pglite test file",
-  "files": 3787,
-  "parked": 487,
-  "credited": 3300,
-  "titles": 31945,
-  "suiteTitles": 8883
+  "measuredAtSha": "a6d2824a4fa47bdee7518a25fefb936263bf7ef0",
+  "measuredBy": "CLOSE-6",
+  "date": "2026-11-23",
+  "note": "the flip: F9 A adds tests/property/generatorGoldenMasterLit.test.js (one file, parked); measured at a6d2824a4 on a clean tree",
+  "files": 3786,
+  "parked": 488,
+  "credited": 3298,
+  "titles": 31925,
+  "suiteTitles": 8876
 }

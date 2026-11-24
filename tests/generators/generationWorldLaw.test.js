@@ -350,7 +350,7 @@ describe('full-pipeline world-law enforcement', () => {
       expectNoFunctionalMagic(settlement);
     });
     expectNoSeedFailures(failures, 'no functional magic leaks in any tier across the deterministic corpus');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.7 s lit in the final census at c1128c8f6; about 16.0 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('remains byte-deterministic after policy filtering', () => {
     const run = () => generateSettlementPipeline(
@@ -387,7 +387,7 @@ describe('full-pipeline world-law enforcement', () => {
           .filter(name => /^(?:major port|navy \(if coastal\)|shipyard)$/i.test(name)),
       ).toEqual([]);
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.9 s lit in the final census at c1128c8f6; about 16.4 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('keeps the audited river port river-specific through the final dossier', () => {
     const settlement = generateSettlementPipeline(

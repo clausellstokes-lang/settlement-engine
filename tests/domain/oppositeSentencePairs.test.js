@@ -3,12 +3,17 @@
  * OPPOSITE. The pairs are the one frozen table `tests/helpers/oppositeSentencePairs.mjs :: OPPOSITE_PAIRS`, keyed by pool and
  * variant id; each side is matched on the page (`buildPrintProse(s, {})`) by its leaf texts as templates, the page's
  * clause-cut forms included (GEN-17 GARRISONED v2 prints cut: `map/DISAGREE-PHASE1.md`).
- *   ARM 1: the chair's measure's five seeds (FOOD dz-town-12, dz-city-54, dz-metropolis-2; WAGES dz-town-2, dz-town-36) and
- *          the first N births of every size: no page prints both sides of any row (WAGES has none: ARM 5 holds it).
+ *   ARM 1: the chair's measure's five seeds (FOOD dz-town-12, dz-city-54, dz-metropolis-2; WAGES dz-town-2, dz-town-36),
+ *          PROSE-E's fourteen (one a TRUE variant pair of `map/DISAGREE-E-PHASE1.md`: P1 dz-thorp-27, -5, -43, -33, -14, -17;
+ *          P2 dz-city-63, -32, -124, -40, -19, -7; P3 dz-city-50; P4 dz-village-7) and the first N births of every size: no page
+ *          prints both sides of any row (WAGES and P1-P4 have none: ARM 5 holds them; CRITICAL v2-v3 x GARRISONED v1 is watched).
  *   ARM 2 (anti-vacuity): each side's matcher matches its own leaf texts, slot-filled; and on real pages (ARM 1's births
- *          and a named control seed) each side of each row is found.
- *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", which the page
- *          cuts) prints on 0 pages of ARM 1's births; its matcher matches its own leaf text, and its variant's head prints.
+ *          and the named control seeds) each side of each row is found.
+ *   ARM 3: each pinned tail (`PINNED_TAILS`: GEN-17 GARRISONED v2's "and the money is found every season", and GEN-13
+ *          NO-MARKET v12's "and trades in a small way: …", the chair's N71; the page cuts both) prints on 0 pages of ARM 1's
+ *          births; its matcher matches its own leaf text, and its variant's head prints: found by the side's matcher, or,
+ *          where the printed head is a cut under the FLOOR (below), drawn by the ledger with the site mount's cut of its text
+ *          (`generalDeskRead.js :: siteClause`) on the page.
  *   ARM 4 (no cell left empty): on ARM 1's births and dz-city-101, wherever the key of DS-DEF-2 `CHAIN: food trades failing`,
  *          DS-DEF-2 `Economic Survival: WEAK` or DS-GEN-17 `GARRISONED` holds (the desks' own key functions), the eligible set
  *          (`stateProseKernel.js :: eligibleVariants`, the desks' own entry answers) is not empty, but for the ONE NAMED
@@ -17,6 +22,14 @@
  *   ARM 5 (the chair, 2026-11-23 03:45 and 03:55): DS-DEF-2 Economic Survival: WEAK v1's and v2's OLD words
  *          (`PINNED_OLD_WORDS`; each re-worded in place through its WORD_CORRECTIONS row) print on 0 pages of ARM 1's births
  *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
+ *          PROSE-E (the chair, N70): five more re-worded in place, their old words pinned the same way (NO-MARKET v10; full
+ *          legal chain v1, v2; CHAIN working v1; CRITICAL v1), red first on b443be64b's leaves.
+ * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
+ *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
+ *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no
+ *   market." (PROSE-E item 0). The FLOOR measure's figure: measured over 900 births (map/FLOOR.md, 99a22c3ad): the floor
+ *   hid 2 cell pairs on 111 pages, all GEN-13 NO-MARKET v11/v12's bare cut beside ECO-10 or ECO-1, and none reads as a
+ *   contradiction. The floor itself is unchanged.
  * The arm "GEN-17 v2 never prints where the guard's pay reads 'short'" is NOT built: phase 1 (i) counted 8 such pages.
  */
 import { describe, expect, it } from 'vitest';
@@ -24,6 +37,8 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
+import { siteClause } from '../../src/components/new/generalDeskRead.js';
 import { eligibleVariants } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { economicRowPoolKey, foodTradesPoolKey } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
@@ -39,24 +54,35 @@ import {
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const N = 6; // births a size: the file's own budget below
-const MEASURE_SEEDS = ['dz-town-12', 'dz-city-54', 'dz-metropolis-2', 'dz-town-2', 'dz-town-36'];
-// ARM 2b's control after the cure: a page that prints FOOD side A where it is true (food below secure; on the 900 at the
-// cure, FOOD side A printed on dz-metropolis-6, 38, 58, 77, 125: map/disagree-phase2.mjs). FOOD side B prints on the first
-// thorps.
-const CONTROL_SEEDS = ['dz-metropolis-6'];
+const MEASURE_SEEDS = ['dz-town-12', 'dz-city-54', 'dz-metropolis-2', 'dz-town-2', 'dz-town-36',
+  // PROSE-E: one seed a TRUE variant pair of map/DISAGREE-E-PHASE1.md (P1 v10 x ECO-10 v5, v6, v4, v3, v1, v9; P2 v3xv2, v2xv2,
+  // v1xv1, v1xv2, v2xv1, v3xv1; P3 v1xv1; P4 v1xv1).
+  'dz-thorp-27', 'dz-thorp-5', 'dz-thorp-43', 'dz-thorp-33', 'dz-thorp-14', 'dz-thorp-17',
+  'dz-city-63', 'dz-city-32', 'dz-city-124', 'dz-city-40', 'dz-city-19', 'dz-city-7', 'dz-city-50', 'dz-village-7'];
+// ARM 2b's controls: a page that prints FOOD side A where it is true (food below secure; on the 900 at the cure, FOOD side A
+// printed on dz-metropolis-6, 38, 58, 77, 125: map/disagree-phase2.mjs); FOOD side B prints on the first thorps. PROSE-E's
+// watched row: CRITICAL v2 prints on dz-thorp-2 (which also draws NO-MARKET v12, ARM 3's head), CRITICAL v3 on dz-thorp-3,
+// GARRISONED v1 on dz-village-7 (the forms probe on b443be64b, /home/user/logs/prose-e2-forms-base.log).
+const CONTROL_SEEDS = ['dz-metropolis-6', 'dz-thorp-2', 'dz-thorp-3', 'dz-village-7'];
 const SEEDS = [...new Set([...MEASURE_SEEDS, ...CONTROL_SEEDS, ...SIZES.flatMap((size) => Array.from({ length: N }, (_, i) => `dz-${size}-${i}`))])];
 
-/** @type {Map<string, { s: any, texts: string[] }>} */
+/** @type {Map<string, { s: any, texts: string[], drawn: Set<string> }>} */
 const BIRTHS = new Map();
 let lawsLoaded = false;
-/** @param {string} seed @returns {Promise<{ s: any, texts: string[] }>} the record and its page's mount texts */
+/**
+ * @param {string} seed
+ * @returns {Promise<{ s: any, texts: string[], drawn: Set<string> }>} the record, its page's mount texts, and the draws the
+ *   kernel's ledger names (`${block}::${pool}::v${vid}`)
+ */
 async function birthOf(seed) {
   if (!lawsLoaded) { await loadGenerationLawPayloads(); lawsLoaded = true; }
   const held = BIRTHS.get(seed);
   if (held) return held;
   const settType = seed.split('-')[1];
   const s = generateSettlementPipeline(birthConfig({ settType }), null, { seed, customContent: {} });
-  const born = { s, texts: pageTextsOf(buildPrintProse(s, {})) };
+  const { result, ledger } = withPresumptionLedger(() => buildPrintProse(s, {}));
+  const drawn = new Set(ledger.filter((e) => typeof e.lineId === 'number').map((e) => `${e.pool}::v${e.lineId}`));
+  const born = { s, texts: pageTextsOf(result), drawn };
   BIRTHS.set(seed, born);
   return born;
 }
@@ -115,9 +141,16 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
       }
       let head = false;
       for (const seed of SEEDS) {
-        const texts = await pageOf(seed);
+        const { s, texts, drawn } = await birthOf(seed);
         if (sidePrinted(tailMatchersOf(pin.side), texts)) printed.push(`${seed}: ${pin.id}`);
         if (sidePrinted(matchersOf(pin.side), texts)) head = true;
+        // Under the FLOOR: the ledger draws the variant and the page holds the site mount's cut of its own text.
+        for (const t of textsOf(pin.side)) {
+          const isDrawn = pin.side.vids.some((vid) => drawn.has(`${pin.side.position}::${pin.side.pool}::v${vid}`));
+          const filled = t.replaceAll('{settlement}', s.name);
+          const cut = siteClause(filled);
+          if (isDrawn && cut !== filled && texts.some((x) => x.includes(cut))) head = true;
+        }
       }
       if (!head) headless.push(pin.id);
     }

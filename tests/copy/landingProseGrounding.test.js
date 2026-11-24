@@ -139,7 +139,10 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): [2, 10] -> [9, 12]. The simulation cure re-times the
     // advance at lf-033 (the Elder Council's capture at week 9, the reforms and the crime at week 12); body2 was
     // re-grounded (an owner veto point).
-    for (const spoken of [9, 12]) {
+    // 2026-11-23 (THE FLIP, CLOSE-6, the ninth chair's N118): [9, 12] -> [3, 12]. The lit timeline at lf-033 (the faith
+    // of Vael at week 1, the war footing at week 3; the Elder Council's capture of the water left the run); body2 was
+    // re-grounded (an owner veto point).
+    for (const spoken of [3, 12]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`
@@ -170,9 +173,11 @@ describe('the landing prose quotes the fixture it is about', () => {
       // 2026-11-15 (TAIL-CLOSE-SWEEP-D item 1, at the doors' tip 73090ee9e): re-grounded with body2 on the close's
       // re-emitted timeline at lf-033; six beats, the priest's "restore order" and the reforms out (the round re-drew
       // the cast), Uathach O'Neill shielding their people and the broken trade routes in.
+      // 2026-11-23 (THE FLIP, CLOSE-6, the ninth chair's N118): re-grounded with body2 on the lit timeline at lf-033; six
+      // beats, the Elder Council's capture of the water out, the conversion to Vael in.
+      ['turned to the faith of vael', 'cnocby turns to the faith of vael'],
       ['the split between the faiths', 'the split between the faiths'],
       ['war footing', 'war footing'],
-      ['control of the village’s water was passing to the elder council', 'water sources is passing to elder council'],
       ['uathach o\'neill set out to shield their people', 'uathach o\'neill shields their people'],
       ['crime took hold', 'crime takes hold'],
       ['its trade routes had broken down', 'trade routes break down'],

@@ -134,5 +134,5 @@ describe('U7 step 1: history.age is served unchanged on every shared read, the w
       ({ seed, record, name, project }) => {
         expect(servedOf(project(structuredClone(record))), `${seed} on ${name}`).toEqual(servedOf(record));
       }), 'every birth on every projection');
-  });
+  }, TIMEOUT); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 9.1 s lit in the final census at c1128c8f6; about 16.7 s on a CI runner (the measured factor), over three quarters of the default 20 s
 });

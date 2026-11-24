@@ -56,7 +56,10 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-thorp-0', '"hall":"Free of the criminals"', '"hall":"The seat is not in criminal hands"'],
   // PP2: under the occupation the relation line is the decider's one home (C28248's town); the Guard's line likewise
   ['bar0-town-occupied-rand-3', 'Holds the title; the decisions that matter are made by Merchant Guilds.', 'The Merchant Council carries out what the Occupation Authority decides.'], // NAMES-1 (CN1): the article
-  ['r2r-hamlet-27', 'Holds the title; the decisions that matter are made by The Guard.', 'The Elder Council keeps the title; the Guard makes the decisions that matter.'], // NAMES-1 (CN1): the article
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-hamlet-27's Guard lit stands "about as strong as" the hall, so no relation line names it the decider;
+  // the lowest r2r-hamlet whose governing note carries the claim and whose relation line names the Guard as the decider is
+  // hamlet-128 (of 200; 143 and 167 print the line with no claim on the note)
+  ['r2r-hamlet-128', 'Holds the title; the decisions that matter are made by The Guard.', 'The Feudal Stewardship keeps the title; the Guard makes the decisions that matter.'], // NAMES-1 (CN1): the article
   // PP9
   ['r2r-hamlet-3', 'Sells ore by the cart; hires workers by the week.', 'Sells ore by the cart, from what the workings still give; hires workers by the week.'],
   ['r2r-hamlet-8', 'Has been sending miners into a gallery they know is unsafe, because the ore there is the richest', 'Has sent miners into a gallery they knew was unsafe, because the ore there was the richest'],
@@ -69,7 +72,9 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
 const KEEP = /** @type {Array<[string, string]>} */ ([
   // BAR3-PEOPLE (P2), 2026-11-15, re-keyed by identity: r2r-village-28 holds a relation row of the pair ("the two do not agree on
   // who decides"), so its note now claims no decider (bar3PeoplePowers.test.js refuses it); the same sibling where NO relation row of the pair stands:
-  ['r2r-thorp-25', "Holds the title; the decisions that matter are made by People's Council."], // no relation row of the pair: the note stays its home
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-thorp-25's governing note lit carries no claim; the lowest r2r-thorp whose note carries it, with the
+  // People's Council the decider and no relation row of the pair, is thorp-264 (alone of 0..799)
+  ['r2r-thorp-264', "Holds the title; the decisions that matter are made by People's Council."], // no relation row of the pair: the note stays its home
   ['r2r-city-41', 'Carters are waiting at the post because two sets of men each claim the right to collect the toll.'], // no siege
   ['r2r-hamlet-3', 'so they get their way through petitions and procedure instead.'], // the Guard, no occupier: the ladder's line stands
 ]);

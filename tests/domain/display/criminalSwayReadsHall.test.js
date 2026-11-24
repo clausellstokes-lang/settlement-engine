@@ -29,8 +29,11 @@ const FALSE_TOWNS = {
   // TAIL-POWERS-B-5, RE-KEYED BY IDENTITY: was "an organized syndicate, the none rung's second line"; a DECLARED MOVE of the
   // defence display (82e8fab6e W2-C-LEAVES-3, 0044e4f84 W2-C-LEAVES-11, which kept this very town as its rival-rings guard:
   // "Multiple criminal factions", no criminal seat) reads its structure semi-organized, so the none rung prints its first line
-  'r2r-city-3': ['none', 'Nobody at the head of the City-State Council'], // NAMES-1 (CN1): the article
-  'r2r-metropolis-52': ['adversarial', "The Thieves' Guild works against"], // the largest size; NAMES-1 (CN1): the article
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): the halls of r2r-city-3 and r2r-metropolis-52 lit stand at equilibrium; the lowest r2r-city with a crime
+  // modifier whose hall stands at none is city-52 (alone of 200), and the lowest r2r-metropolis with a crime modifier whose
+  // hall stands at adversarial is metropolis-120 (120 128 of 200), each row's own rung and first words restored
+  'r2r-city-52': ['none', 'Nobody at the head of the City-State Council'], // NAMES-1 (CN1): the article
+  'r2r-metropolis-120': ['adversarial', "The Thieves' Guild works against"], // the largest size; NAMES-1 (CN1): the article
   'r2r-town-31': ['equilibrium', 'Nobody at the head of the Guild Council'], // NAMES-1 (CN1): the article; the climate alone (TAIL-POWERS-B re-keyed by identity: "... and Guild Council has not set out to stamp ...")
 };
 /** an equilibrium hall with a lesser agent ("The third of Elder Council answers to ..."): the chip is silent, never a hidden tie's tell */
