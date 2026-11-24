@@ -264,3 +264,17 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   Aldermen"; "Corrupt City Council" becomes "Council of Syndics"; "Shadow Senate" becomes "Senate". The new names join
   every vocabulary by exact name; the old stay for saved places, which are not renamed. PROOF: the 39 visitor births
   with the names mapped back equal the old records byte for byte.
+- 2026-11-24 17:20 UTC · T20 · POINT 113 IS ON THE WORKING LINE: THE TWO GENERATION LAWS ARE SWITCHED ON. THE LINE IS f03e9a868427e6b656d299c5cce8d33c74758588
+  (`lane/join-2026-11-14`; pushed by the chair, 17:20:27 UTC on 2026-11-24 by the push log, exit 0). THE HELPER'S REPORT, READ WHOLE BY THE CHAIR (LAND-113; about 139 minutes): the merge
+  67fcf51de of `lane/close-6-2026-11-23-flip` at d447ee31e on 9b0ffaa97, no conflict, no door owed; its root tree is
+  the flip tip's own (085b8ab34: checked by the chair). THE WIDE GATE, ONCE (the first whole run of the suite with the
+  laws on): 3,782 files, 43,315 tests, 53 failed: 48 on the list; 5 not: the lit twin's three rows (the owner's second
+  signing), the expected joiner `defenceParts` R13, and ONE CLASS (4) RED, `tests/scripts/provenanceMap.test.js` arm 1.
+  THE CHAIR'S OWN CHECK OF THAT ONE: the same file on the line's old tip 9b0ffaa97 in the same container fails the same
+  way (the same first mismatch: row §0, committed 158624de5, generated a45f1d050); this container's ledger ref reaches
+  401 commits, back to 2026-09-03, and 158624de5 is not in it: THE MACHINE, NOT THE FLIP. No red is the flip's.
+  The five sizes and raised.py's lines are in T13. DONE BY THE CHAIR: the row and the gate's sentence in
+  `LANDINGS-SIXTH.md` on the line (one docs commit on the merge); the line pushed by its own name (the hook took the
+  fast path); `ci/LINE-NOW.md` at point 113; `ci/RED-AT-LINE.tsv` 59 to 61 rows (two leave, four join).
+  OWED WITHIN THE HOUR: CI's run on the new tip read by name. "THE LINE IS" goes to CLOSE-7 and GRANTS-1.
+  LANDING THIS POINT IS NOT A RELEASE: the merge, the deploy, migrations 204 to 210 and the signings are the owner's.
