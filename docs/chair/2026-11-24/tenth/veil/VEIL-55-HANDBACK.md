@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 23:27 UTC)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 23:59 UTC)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -46,7 +46,9 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   92 and 20 cells); `tests/security` whole; the non-security files naming the veil's entry points.
 - RESULTS (CONFIRMED, this container): m0 every step rc 0 (instruments: check, walker, harnesses, accept, tpl, gate all 0;
   the 140 stored both ways); u2.sh `c`: 0 of 6,720 today-born reads differ modulo the bijection (control: 6,720 raw differ).
-  `sec` running at 23:26.
+  `sec` (the six security files): 117 of 117, rc 0, 23:58. p1 `run4`: 212 on 001..211 rc 0; down = 001..211 (480 functions,
+  dump diff empty); the catalogue: ONE drawer (_gallery_veil), 0 closure members not VOLATILE, the four reads VOLATILE; the salt:
+  6 carriers, 0 executable by anon/authenticated; smoke rc 0. p1 continues (ctrl, form, stored arm, pool, gates, security).
 - THE CHAIR, 22:59: VEIL-50's red rows stand (not re-run); START-VEIL-42 (6) read (the stored arm = R4I-PAGE-3's
   stored-ids.sh, ADDED to p1 as sidt/sidm); the quiet-box items AFTER the grant; the pool as chain0's.
 - LEFT: read m0's and p1's logs; the quiet-box items (unless the chair cuts them); "TIP? R4-IDS <commit>" with the table.
@@ -58,6 +60,10 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   "R4-IDS MERGED", by me: trial merge onto 8430edf5c conflicts ONLY in 212's header (both wrote item (36)): R4-IDS keeps
   (36)/(36b)/(36c), STORED-PROSE becomes (37); then its slice re-run on the merged tree. Its "FIDELITY GAP" (the ring note's
   original vantage on shared reads, soak1k-11/-41) put on VEIL-53's FAIL-CLOSED PAGES slice (V4 term 1).
+- UNIT 1 GRANTED by me at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`: ced3b1de7 + VEIL-51's lint cure, read: NO FAULT);
+  the chair's 212 read CLEAR (23:2x); merge after "R4-IDS MERGED", header (37), slice re-run.
+- V3 CURE A (VEIL-53, `lane/veil-53-2026-11-24-cures-wip` 6b674eb36): READ ONCE: NO FAULT; my stored sets: 0 of 280 records
+  lack a breakdown term (the owner's page moves on none); rides the join. Note for V6's walker: BREAKDOWN_WITHHELD_TERMS = the row.
 - J1 (VEIL-53, `lane/veil-53-2026-11-24-j1-wip` e1b7a8714): READ ONCE: NO FAULT; rides the join (unit 7).
 - UNIT 3 (VEIL-52, `-mcsql-wip` 75a410f1b): um green at the map doors (0 of 7, 0 of 5); proof (b) 11 red = two test pins
   of 211's member (N84 (a)): a builder granted by me, test-only, on condition the link's page lacks the three paths too.
