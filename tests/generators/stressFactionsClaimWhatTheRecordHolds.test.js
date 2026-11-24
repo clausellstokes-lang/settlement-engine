@@ -37,11 +37,15 @@ const PAIRS = [
   ['r2s-wartime-metropolis-0', "Currently functioning smoothly: the war is going well enough that its authority isn't contested.", 'While the war goes well, few people ask what it does.'],
   ['r2s-wartime-metropolis-3', "Currently functioning smoothly: the war is going well enough that its authority isn't contested.", 'While the war goes well, few people ask what it does.'],
   ['r2s-monster_pressure-metropolis-2', 'temporarily powerful because they are useful', 'Outside professionals brought in or passing through; wanted while the monsters are.'],
-  ['r2s-religious_conversion-village-3', 'claiming the legitimate succession', 'One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-religious_conversion-village-3 lit draws no rival-sides line for
+  // its faith; the lowest r2s-religious_conversion-village whose faith draws it is village-7 (7 8 9 15 18 19 of 200)
+  ['r2s-religious_conversion-village-7', 'claiming the legitimate succession', 'One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.'],
   ['r2s-religious_conversion-metropolis-0', 'claiming the legitimate succession', 'One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.'],
   ['r2r-town-10', 'a baker says he was told to raise it', 'Bread went up twice this month, and one of the sellers says they were told to raise it.'],
   ['r2s-recently_betrayed-town-0', 'a baker says he was told to raise it', 'Bread went up twice this month, and one of the sellers says they were told to raise it.'],
-  ['r2r-city-10', 'a baker says he was told to raise it', 'Bread went up twice this month, and one of the sellers says they were told to raise it.'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-city-10 lit draws no bread hook; the lowest r2r-city that draws
+  // it is city-12 (12 23 56 95 100 105 of 200)
+  ['r2r-city-12', 'a baker says he was told to raise it', 'Bread went up twice this month, and one of the sellers says they were told to raise it.'],
 ];
 /** KEEP: a true sibling of a cured line, green before and after [seed, words that must still print] */
 const KEEP = [

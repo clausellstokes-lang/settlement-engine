@@ -68,7 +68,10 @@ describe('COHERENCE-POWERS-3 F7 — the empty seat\'s keeper', () => {
   it('the review\'s Grudino: a vacant crown is kept by its regent, in all three places', () => {
     const s = voidBirth('rvf-succession_void-city-4', 'city');
     // COHERENCE-POWERS-4 (F3): the claimants are persons now, named with the line each presses
-    expect(rulingChainOf(s).absence?.line).toBe('Stands empty; 2 claimants circle: Dubravka Semyonov for Noble Claimant (Senior Line), Galina Grbić for Noble Claimant (Reform Line). Regent Biljana Nikolić keeps the seat meanwhile.');
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): Grudino lit raises one claimant, so the seat row names
+    // one (was "2 claimants circle: Dubravka Semyonov for Noble Claimant (Senior Line), Galina Grbić for Noble Claimant (Reform
+    // Line)."); the vacant crown is still kept by its regent, in all three places
+    expect(rulingChainOf(s).absence?.line).toBe('Stands empty; a claimant circles: Dubravka Semyonov for Noble Claimant (Senior Line). Regent Biljana Nikolić keeps the seat meanwhile.');
     const keeper = seatKeeperOf(s);
     expect(shownHonorificOf(keeper, s)).toBe('Regent');
     expect(connectionOf(keeper, s, false).name).toBe('Regent Biljana Nikolić');

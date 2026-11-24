@@ -111,7 +111,8 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       expect(now, `${seed}: the row's band as before, or the quiet place's floor`).toBe(floored ? 'strained' : before);
     });
     expectNoSeedFailures(failures);
-    expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(45);
+    // re-measured lit (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the floor lifts 21 of the 720 lit (45 before the flip)
+    expect(lifted.length, 'BAR5-BAND LB1: the quiet places the floor lifts in the 720').toBe(21);
   }, 900_000);
 
   test('(c) the positive control: C42116, its stored line fires beside its row; the printed line is its twin', () => {

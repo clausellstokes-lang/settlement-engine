@@ -883,147 +883,287 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     expect(draws, 'and the sweep found the register').toBeGreaterThanOrEqual(4 * 78);
   });
 
-  it('⭐ UNIFORM ON THE THREE-VARIANT CORPUS: chi-square 4.20 on 5,470,000 reads', () => {
-    // §N.2's reference figures are 33.30 / 33.35 / 33.35 per cent, POOLED over the corpus.
-    // MEASURED here at this tip over 547 three-variant pools x 10,000 fixed seeds:
-    // 33.312 / 33.375 / 33.313 per cent, deepest departure from one third 0.0413 pp,
-    // chi-square 4.201 on 2 degrees of freedom.
-    //
-    // ⛔ TWO FLOORS THIS ARM REFUSES TO USE, both of which car 8a's brief asked for and
-    // both of which a PERFECTLY UNIFORM draw fails about as often as it passes.
-    //
-    //   "every pool within 2 SE" — 547 pools is 1,641 share measurements, and the largest
-    //   of 1,641 standard normal deviations is about 3.4 SE by construction. Measured:
-    //   3.43 SE, at economy :: DS-ECO-11 :: TERRAIN: Forest. Passing that floor would mean
-    //   the draw was suspiciously FLAT, which is a different defect, not a healthy one.
-    //
-    //   "the pooled share within 2 SE" — at n = 5,470,000 the 2 SE band is 0.081 pp wide
-    //   and there are three shares in it, so a uniform draw lands outside about one time
-    //   in seven. It did, on the first run of this arm: 33.375 per cent against a band
-    //   ending at 33.374.
-    //
-    // What replaces them is the textbook test the two were reaching for — a chi-square
-    // goodness-of-fit at the pooled grain, held at the 0.001 critical value — plus an
-    // absolute tolerance in percentage points, which is the thing a reader actually cares
-    // about, and a per-pool ceiling loose enough to be a uniform draw's tail and far
-    // tighter than any real bias: a draw favouring low ids reads TENS of SE out.
-    const CHI2_CRITICAL_DF2_P001 = 13.816;
-    const pools = STATE_POOLS.filter((row) => row.pool.length === 3);
-    // Tallied by the pool's own SLOT, not by the id value, so that the seven pools whose
-    // annex rows run 0..2 pool with the 540 whose rows run 1..3 instead of splitting the
-    // three cells into five.
-    const tally = [0, 0, 0];
-    const perPoolSE = Math.sqrt((1 / 3) * (2 / 3) / SEEDS.length) * 100;
-    let maxZ = 0;
-    let maxAt = '';
-    for (const { desk, blockId, poolKey, pool } of pools) {
-      const local = [0, 0, 0];
-      for (const seed of SEEDS) {
-        const at = pool.indexOf(drawVariant(pool, blockId, poolKey, seed));
-        local[at] += 1;
-        tally[at] += 1;
-      }
-      for (let at = 0; at < 3; at += 1) {
-        const z = Math.abs((local[at] / SEEDS.length) * 100 - 100 / 3) / perPoolSE;
-        if (z > maxZ) { maxZ = z; maxAt = `${desk} :: ${blockId} :: ${poolKey} slot ${at}`; }
-      }
+  // ── THE SWEEP BY n (BUILD-1-CURE ADDENDUM 3; the chair's ruling of 2026-11-20 22:17 UTC) ──────────
+  // A pool that grows past three variants must not leave the sweep: the floor counts every pool of
+  // three or more (the chair's ruling of 2026-11-20 21:39 UTC, BUILD-1-CURE (b)), and the two sweeps
+  // below read every such pool, GROUPED BY n, each group against its own three bounds. The bounds are
+  // FUNCTIONS OF n whose value at n = 3 is exactly the constant these rows carried when they swept only
+  // the three-variant class (13.816, 0.15 points, 23-27 %): the old sweep is the n = 3 case of this one,
+  // asserted to the digit below. Nothing is loosened: the same significance (p = 0.001), the same number
+  // of standard deviations, the same relative band.
+  //
+  // ⛔ A GROUP TOO SMALL TO BE TESTED AT THAT SIGNIFICANCE IS NAMED, NEVER SKIPPED SILENTLY. A fixed
+  // bound tests a group at p = 0.001 only when a uniform draw would breach it no more often than that:
+  // the bound must be at least the p = 0.001 normal quantile in the group's own standard errors
+  // (Bonferroni over the n slots for the deepest departure; one share for the append). Below that, a
+  // perfectly uniform draw fails the bound by chance, so asserting it would test the sample size, not the
+  // draw. Those groups are LISTED and asserted as a list; their figures are printed; the chi-square, the
+  // per-pool deviation, the slot reach and the append property still run over every group.
+
+  // The chi-square critical value is computed here, not tabled: the regularised upper incomplete gamma
+  // (series below a + 1, Lentz's continued fraction above) over ln-Gamma (Lanczos, g = 7), inverted by
+  // bisection. No dependency; the standard table's p = 0.001 values are asserted below for every n the
+  // corpus holds.
+  const LANCZOS = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313,
+    -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+  /** @param {number} z @returns {number} */
+  function lnGamma(z) {
+    if (z < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * z)) - lnGamma(1 - z);
+    const w = z - 1;
+    let x = LANCZOS[0];
+    for (let i = 1; i < LANCZOS.length; i += 1) x += LANCZOS[i] / (w + i);
+    const t = w + 7.5;
+    return 0.5 * Math.log(2 * Math.PI) + (w + 0.5) * Math.log(t) - t + Math.log(x);
+  }
+  /** Q(a, x), the regularised upper incomplete gamma. @param {number} a @param {number} x @returns {number} */
+  function upperGammaQ(a, x) {
+    const front = Math.exp(-x + a * Math.log(x) - lnGamma(a));
+    if (x < a + 1) {
+      let term = 1 / a;
+      let sum = term;
+      for (let k = 1; k < 1000 && term > sum * 1e-16; k += 1) { term *= x / (a + k); sum += term; }
+      return 1 - sum * front;
     }
-    const reads = pools.length * SEEDS.length;
-    const expected = reads / 3;
-    const chi2 = tally.reduce((sum, seen) => sum + ((seen - expected) ** 2) / expected, 0);
-    const deepest = Math.max(...tally.map((seen) => Math.abs((seen / reads) * 100 - 100 / 3)));
-    expect(chi2, `the pooled goodness of fit over ${reads} reads`)
-      .toBeLessThan(CHI2_CRITICAL_DF2_P001);
-    expect(deepest, 'the deepest pooled departure from one third, in points').toBeLessThan(0.15);
-    expect(maxZ, `the deepest per-pool deviation, at ${maxAt}`).toBeLessThan(4.5);
-    // Non-vacuity on both axes: the sweep found the corpus, and it reached every slot.
-    expect(pools.length, 'three-variant pools swept').toBeGreaterThanOrEqual(500);
-    expect(tally.filter((seen) => seen === 0), 'an unreachable slot').toEqual([]);
-    // ⭐ AN EXPLICIT PER-TEST BUDGET CARRYING THE MEASURED FIGURE (LT28 car 2, 2026-09-15),
-    // which is the cure `scripts/check-test-ratchet.mjs` names in its own words when a row
-    // expires: "Cut the row's per-run work or give it an explicit per-test budget carrying
-    // the measured figure — never bank one in the census, and never raise the suite-wide
-    // testTimeout (that hides the next one)."
+    let b = x + 1 - a;
+    let c = 1e300;
+    let d = 1 / b;
+    let h = d;
+    for (let i = 1; i < 1000; i += 1) {
+      const an = -i * (i - a);
+      b += 2;
+      d = an * d + b; if (Math.abs(d) < 1e-300) d = 1e-300;
+      c = b + an / c; if (Math.abs(c) < 1e-300) c = 1e-300;
+      d = 1 / d;
+      h *= d * c;
+      if (Math.abs(d * c - 1) < 1e-16) break;
+    }
+    return front * h;
+  }
+  /** The chi-square value exceeded with probability p at df degrees of freedom. @param {number} df @param {number} p */
+  function chi2CriticalAt(df, p) {
+    let lo = 0;
+    let hi = 400;
+    for (let i = 0; i < 200; i += 1) {
+      const mid = (lo + hi) / 2;
+      if (upperGammaQ(df / 2, mid / 2) > p) lo = mid; else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+  const P_001 = 0.001;
+  /** One slot's standard deviation under a uniform draw over n. @param {number} n */
+  const slotSd = (n) => Math.sqrt((1 / n) * (1 - 1 / n));
+  /** BOUND 1: the pooled chi-square at n − 1 degrees of freedom, p = 0.001 (13.816 at n = 3). @param {number} n */
+  const chi2Bound = (n) => chi2CriticalAt(n - 1, P_001);
+  /** BOUND 2: the deepest pooled departure from 1/n, in points, at today's number of SDs (0.15 at n = 3). @param {number} n */
+  const departureBound = (n) => (0.15 * slotSd(n)) / slotSd(3);
+  /** BOUND 3: the append share around 1/(n+1), ± 8 % of itself (23-27 % at n = 3). @param {number} n @returns {[number, number]} */
+  const appendBand = (n) => [(100 / (n + 1)) * (1 - 0.08), (100 / (n + 1)) * (1 + 0.08)];
+  /** The two-sided normal quantile at p, through the same routine (z² is chi-square at 1 df). @param {number} p */
+  const zAt = (p) => Math.sqrt(chi2CriticalAt(1, p));
+  /** Can a group of `pools` pools of n be tested against BOUND 2 at p = 0.001? @param {number} n @param {number} pools */
+  const departureTestable = (n, pools) => departureBound(n) >= (zAt(P_001 / n) * slotSd(n) * 100) / Math.sqrt(pools * SEEDS.length);
+  /** …against BOUND 3, over `reads` append reads? @param {number} n @param {number} reads */
+  const appendTestable = (n, reads) => 0.08 * (100 / (n + 1))
+    >= zAt(P_001) * 100 * Math.sqrt((1 / (n + 1)) * (n / (n + 1)) / reads);
+  /** Every pool of three or more variants, grouped by n (ascending). */
+  const SWEPT = STATE_POOLS.filter((row) => row.pool.length >= 3);
+  /** @type {Map<number, typeof SWEPT>} */
+  const BY_N = new Map();
+  for (const row of SWEPT) BY_N.set(row.pool.length, [...(BY_N.get(row.pool.length) || []), row]);
+  const N_ASC = [...BY_N.keys()].sort((a, b) => a - b);
+  /** @param {{desk: string, blockId: string, poolKey: string}} row */
+  const poolId = (row) => `${row.desk} :: ${row.blockId} :: ${row.poolKey}`;
+
+  it('⭐ THE n = 3 CASE, TO THE DIGIT: the sweep by n carries today\'s three constants at n = 3', () => {
+    expect(chi2Bound(3).toFixed(3), 'BOUND 1 at n = 3').toBe('13.816');
+    expect(departureBound(3), 'BOUND 2 at n = 3').toBe(0.15);
+    expect(appendBand(3).map((b) => b.toFixed(2)), 'BOUND 3 at n = 3').toEqual(['23.00', '27.00']);
+    // The critical value for every n the corpus holds, against the standard table (p = 0.001).
+    expect(Object.fromEntries(N_ASC.map((n) => [n, chi2Bound(n).toFixed(3)])), 'the critical value per n').toEqual({
+      3: '13.816', 4: '16.266', 5: '18.467', 6: '20.515', 7: '22.458', 8: '24.322', 9: '26.124', 10: '27.877',
+      11: '29.588', 12: '31.264', 13: '32.909',
+    });
+  });
+
+  it('⭐ UNIFORM ON EVERY POOL OF THREE OR MORE, BY n: each group at its own bound, p = 0.001', () => {
+    // MEASURED at 6581c349c (BUILD-1-CURE ADDENDUM 3): 781 pools, 7,810,000 reads; per n, chi-square
+    // against its bound: 3: 1.701 / 13.816 · 4: 5.629 / 16.266 · 5: 4.734 / 18.467 · 6: 4.295 / 20.515 ·
+    // 7: 3.782 / 22.458 · 8: 7.401 / 24.322 · 9: 7.046 / 26.124 · 10: 13.587 / 27.877 · 11: 12.270 /
+    // 29.588 · 12: 10.940 / 31.264 · 13: 11.181 / 32.909; the deepest departure against its bound, n = 3
+    // 0.0267 / 0.1500 and n = 4 0.0823 / 0.1378 (the two groups large enough to be tested); the deepest
+    // per-pool deviation 3.603 SE (DS-POW-5 theocracy slot 1, n = 4).
     //
-    // MEASURED, 8 cores: this row costs 7,483 ms ALONE at 1-min load 3.14 (the whole file is
-    // 38 tests in 12.50 s). Inside a full `npm run test:ratchet`, whose own parallelism sits
-    // at load 26-31, the SAME row was killed at 61,996 ms against the suite-wide 20,000 ms —
-    // an 8.3x contention multiple on identical bytes. 120_000 is ~2x that worst observed
-    // cost and 16x the standalone figure, and it is the estate's most-used explicit budget
-    // (112 sites in tests/).
+    // ⛔ TWO FLOORS THIS ARM STILL REFUSES (car 8a): "every pool within 2 SE" (the largest of thousands of
+    // standard normal deviations is past 3 SE by construction) and "the pooled share within 2 SE" (a
+    // uniform draw lands outside about one time in seven). The chi-square at the 0.001 critical value, an
+    // absolute departure in points and a per-pool ceiling that is a uniform draw's tail replace them.
+    /** @type {Array<{n: number, pools: number, reads: number, tally: number[], chi2: number, deepest: number, maxZ: number, maxAt: string, ids: string[], locals: number[][]}>} */
+    const rows = [];
+    /** @type {string[]} */
+    const unreachable = [];
+    for (const n of N_ASC) {
+      const group = BY_N.get(n) || [];
+      const tally = new Array(n).fill(0);
+      const perPoolSE = (slotSd(n) * 100) / Math.sqrt(SEEDS.length);
+      let maxZ = 0;
+      let maxAt = '';
+      /** @type {number[][]} */
+      const locals = [];
+      for (const row of group) {
+        const { blockId, poolKey, pool } = row;
+        const local = new Array(n).fill(0);
+        for (const seed of SEEDS) {
+          const at = pool.indexOf(drawVariant(pool, blockId, poolKey, seed));
+          local[at] += 1;
+          tally[at] += 1;
+        }
+        for (let at = 0; at < n; at += 1) {
+          if (local[at] === 0) unreachable.push(`${poolId(row)} slot ${at}`);
+          const z = Math.abs((local[at] / SEEDS.length) * 100 - 100 / n) / perPoolSE;
+          if (z > maxZ) { maxZ = z; maxAt = `${poolId(row)} slot ${at}`; }
+        }
+        locals.push(local);
+      }
+      const reads = group.length * SEEDS.length;
+      const expected = reads / n;
+      const chi2 = tally.reduce((sum, seen) => sum + ((seen - expected) ** 2) / expected, 0);
+      const deepest = Math.max(...tally.map((seen) => Math.abs((seen / reads) * 100 - 100 / n)));
+      rows.push({ n, pools: group.length, reads, tally, chi2, deepest, maxZ, maxAt, ids: group.map(poolId), locals });
+    }
+    console.log(`\nTHE SWEEP BY n · ${SWEPT.length} pools of three or more\n${rows.map((r) => `  n=${r.n} pools ${r.pools}`
+      + ` · chi-square ${r.chi2.toFixed(3)} / ${chi2Bound(r.n).toFixed(3)}`
+      + ` · deepest ${r.deepest.toFixed(4)} / ${departureBound(r.n).toFixed(4)}${departureTestable(r.n, r.pools) ? '' : ' (too few pools: listed)'}`
+      + ` · max z ${r.maxZ.toFixed(3)}`).join('\n')}\n`);
+    // BOUND 1, every group.
+    expect(rows.filter((r) => !(r.chi2 < chi2Bound(r.n))).map((r) => `n=${r.n}: chi-square ${r.chi2}`),
+      'a group over its chi-square bound').toEqual([]);
+    // BOUND 2, every group large enough to be tested at p = 0.001…
+    expect(rows.filter((r) => departureTestable(r.n, r.pools) && !(r.deepest < departureBound(r.n)))
+      .map((r) => `n=${r.n}: deepest ${r.deepest}`), 'a group over its departure bound').toEqual([]);
+    // …and the groups too small for it, NAMED (measured at 6581c349c; a group that grows into the test leaves this list).
+    // DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC), re-measured after the withdrawal: ONE pool moved, DS-DEF-2 `CHAIN: food trades failing`, n=6 -> n=12 (F1-F6 appended as v7-v12), so n=6 40 -> 39 and n=12 1 -> 2; DS-DEF-2 `Economic Survival: WEAK` stays at n=6 (W1-W3 withdrawn; v1, v2 re-worded in place).
+    expect(rows.filter((r) => !departureTestable(r.n, r.pools)).map((r) => `n=${r.n}: ${r.pools} pools`),
+      'the groups too small to test the departure at p = 0.001').toEqual([
+      'n=5: 43 pools', 'n=6: 39 pools', 'n=7: 35 pools', 'n=8: 8 pools', 'n=9: 7 pools', 'n=10: 6 pools',
+      'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 2 pools',
+    ]);
+    // The per-pool ceiling and the slot reach, every pool of every group.
+    const worst = rows.reduce((a, b) => (b.maxZ > a.maxZ ? b : a));
+    expect(worst.maxZ, `the deepest per-pool deviation, at ${worst.maxAt}`).toBeLessThan(4.5);
+    expect(unreachable, 'an unreachable slot').toEqual([]);
+    // Non-vacuity: the floor over the widened class.
+    expect(SWEPT.length, 'pools of three or more swept').toBeGreaterThanOrEqual(500);
+    // ⭐ GUARD (ii): THE n = 3 GROUP IS THE OLD SWEEP. The same pools as the old `length === 3` filter, and
+    // the old run's own figures and verdicts over the same draws, printed beside the new ones. At
+    // 82164879d the old row measured 486 pools, 4,860,000 reads, tally 1619682/1621300/1619018,
+    // chi-square 1.7008938271604936, deepest 0.02674897119341324, max z 3.4294678887547416 at
+    // economy :: DS-ECO-11 :: TERRAIN: Forest slot 1.
+    const three = rows.find((r) => r.n === 3);
+    expect(three?.ids, 'the n = 3 group is the old sweep\'s pools').toEqual(
+      STATE_POOLS.filter((row) => row.pool.length === 3).map(poolId));
+    const oldSE = Math.sqrt((1 / 3) * (2 / 3) / SEEDS.length) * 100;
+    const oldMaxZ = Math.max(...(three?.locals || []).flatMap((local) => local
+      .map((seen) => Math.abs((seen / SEEDS.length) * 100 - 100 / 3) / oldSE)));
+    console.log(`  n=3 new: chi-square ${three?.chi2} · deepest ${three?.deepest} · max z ${three?.maxZ}`
+      + `\n  n=3 old: chi-square ${three?.chi2} · deepest ${three?.deepest} · max z ${oldMaxZ} (old SE form)\n`);
+    expect(three?.maxZ.toFixed(10), 'the old per-pool SE form reads the same deviation').toBe(oldMaxZ.toFixed(10));
+    expect([
+      (three?.chi2 ?? Infinity) < 13.816, (three?.deepest ?? Infinity) < 0.15, oldMaxZ < 4.5,
+    ], 'the old run\'s three verdicts, its own constants').toEqual([
+      (three?.chi2 ?? Infinity) < chi2Bound(3), (three?.deepest ?? Infinity) < departureBound(3), (three?.maxZ ?? Infinity) < 4.5,
+    ]);
+    // ⭐ AN EXPLICIT PER-TEST BUDGET CARRYING THE MEASURED FIGURE (LT28 car 2, 2026-09-15): the cure
+    // `scripts/check-test-ratchet.mjs` names — never bank a row in the census, never raise the
+    // suite-wide testTimeout. The three-variant row cost 7,483 ms alone at load 3.14 and was killed at
+    // 61,996 ms inside a full ratchet run (an 8.3x contention multiple); 120_000 was set on that. The
+    // widened row is MEASURED in the commit that widened it: 11,968 ms alone (6581c349c's corpus, 7,810,000
+    // reads, through the gate mutex), a tenth of its 120_000; the budget is not raised.
     //
-    // ⛔ THE READ COUNT IS NOT THE THING TO CUT. 5,470,000 reads is what gives the
-    // chi-square its power, and the figure is written into this row's TITLE — which is the
-    // census's identity key (`<file> :: <full test name>`), so trimming the sweep would
-    // silently re-key banked debt as well as weaken the instrument.
+    // ⛔ THE READ COUNT IS NOT THE THING TO CUT: 10,000 seeds per pool is what gives each group's
+    // chi-square its power.
   }, 120_000);
 
-  it('⭐ APPEND-SAFE: a fourth wording moves about a QUARTER, and every mover moves TO it', () => {
-    // THE ROW'S GROUND, and the reason the modulus is measured in the same loop. On the
-    // shipped `% length` draw an appended wording re-rolls about three quarters of a pool's
-    // reads and most movers land on a DIFFERENT OLD wording, which reads to a player as the
-    // sentence they had being rewritten. Under law 6 a mover can only land on the newcomer.
-    // 2,000 of the 10,000 seeds: 547 pools x 2,000 seeds x 4 draws is already 4.4 million
-    // draws, and the property below is exact rather than statistical, so more seeds buy
-    // wall-clock rather than confidence.
+  it('⭐ APPEND-SAFE BY n: a new wording moves about 1/(n+1) of a pool\'s reads, and every mover moves TO it', () => {
+    // THE ROW'S GROUND, and the reason the modulus is measured in the same loop. On the shipped `% length`
+    // draw an appended wording re-rolls about n/(n+1) of a pool's reads and most movers land on a
+    // DIFFERENT OLD wording, which reads to a player as the sentence they had being rewritten. Under law 6
+    // a mover can only land on the newcomer. 2,000 of the 10,000 seeds: the property is exact rather than
+    // statistical, so more seeds buy wall-clock rather than confidence.
+    //
+    // MEASURED at 6581c349c (BUILD-1-CURE ADDENDUM 3), the share moved against its band per n: 3: 24.994 /
+    // 23.000-27.000 · 4: 19.840 / 18.400-21.600 · 5: 16.719 / 15.333-18.000 · 6: 14.294 / 13.143-15.429 ·
+    // 7: 12.423 / 11.500-13.500 · 8: 10.931 / 10.222-12.000; every mover to the new wording, none between
+    // two old ones, in every group.
     const APPEND_SEEDS = SEEDS.slice(0, 2000);
-    const pools = STATE_POOLS.filter((row) => row.pool.length === 3);
-    let stableMoved = 0;
-    let stableToNew = 0;
-    let modulusMoved = 0;
-    let modulusToNew = 0;
-    let reads = 0;
+    /** @type {Array<{n: number, pools: number, reads: number, moved: number, toNew: number, modMoved: number, modToNew: number}>} */
+    const rows = [];
     const betweenOld = [];
-    for (const { desk, blockId, poolKey, pool } of pools) {
-      // A LAWFUL APPEND: the NEXT annex row, which is 4 on the 540 pools numbered 1..3 and
-      // 3 on the seven numbered 0..2. Planting a fixed 4 everywhere would leave a hole in
-      // the seven and measure a corpus the annex idiom forbids.
-      const nextVid = pool[pool.length - 1].vid + 1;
-      const planted = {
-        angle: 'ledger', text: 'the planted fourth wording', slots: [], vid: nextVid,
-      };
-      const grown = [...pool, planted];
-      for (const seed of APPEND_SEEDS) {
-        reads += 1;
-        const wasStable = drawVariant(pool, blockId, poolKey, seed);
-        const nowStable = drawVariant(grown, blockId, poolKey, seed);
-        if (wasStable !== nowStable) {
-          stableMoved += 1;
-          if (nowStable === planted) stableToNew += 1;
-          else betweenOld.push(`${desk} :: ${blockId} :: ${poolKey} :: v${wasStable.vid} -> v${nowStable.vid}`);
-        }
-        const wasMod = modulusDraw(pool, blockId, poolKey, seed);
-        const nowMod = modulusDraw(grown, blockId, poolKey, seed);
-        if (wasMod !== nowMod) {
-          modulusMoved += 1;
-          if (nowMod === planted) modulusToNew += 1;
+    for (const n of N_ASC) {
+      const group = BY_N.get(n) || [];
+      let moved = 0;
+      let toNew = 0;
+      let modMoved = 0;
+      let modToNew = 0;
+      for (const row of group) {
+        const { blockId, poolKey, pool } = row;
+        // A LAWFUL APPEND: the NEXT annex row (the pool's own numbering, 1-led or 0-led).
+        const planted = { angle: 'ledger', text: 'the planted wording', slots: [], vid: pool[pool.length - 1].vid + 1 };
+        const grown = [...pool, planted];
+        for (const seed of APPEND_SEEDS) {
+          const wasStable = drawVariant(pool, blockId, poolKey, seed);
+          const nowStable = drawVariant(grown, blockId, poolKey, seed);
+          if (wasStable !== nowStable) {
+            moved += 1;
+            if (nowStable === planted) toNew += 1;
+            else betweenOld.push(`${poolId(row)} :: v${wasStable.vid} -> v${nowStable.vid}`);
+          }
+          const wasMod = modulusDraw(pool, blockId, poolKey, seed);
+          const nowMod = modulusDraw(grown, blockId, poolKey, seed);
+          if (wasMod !== nowMod) {
+            modMoved += 1;
+            if (nowMod === planted) modToNew += 1;
+          }
         }
       }
+      rows.push({ n, pools: group.length, reads: group.length * APPEND_SEEDS.length, moved, toNew, modMoved, modToNew });
     }
-    // ⛔ THE PROPERTY, not the percentage: NOT ONE read moves between two old wordings.
+    const share = (/** @type {{moved: number, reads: number}} */ r) => (r.moved / r.reads) * 100;
+    console.log(`\nAPPEND BY n\n${rows.map((r) => `  n=${r.n} pools ${r.pools} · moved ${share(r).toFixed(3)} %`
+      + ` / ${appendBand(r.n).map((b) => b.toFixed(3)).join('-')}${appendTestable(r.n, r.reads) ? '' : ' (too few pools: listed)'}`
+      + ` · modulus ${((r.modMoved / r.reads) * 100).toFixed(3)} %, ${((r.modToNew / r.modMoved) * 100).toFixed(3)} % of it to the new`)
+      .join('\n')}\n`);
+    // ⛔ THE PROPERTY, not the percentage: NOT ONE read moves between two old wordings, in any group.
     expect(betweenOld.slice(0, 5), 'a read that moved between two OLD wordings').toEqual([]);
-    expect(stableMoved, 'and every mover moved to the new wording').toBe(stableToNew);
-    const stableShare = (stableMoved / reads) * 100;
-    const modulusShare = (modulusMoved / reads) * 100;
-    const modulusToNewShare = (modulusToNew / modulusMoved) * 100;
-    // About a quarter: 1/(n+1) at n = 3 is 25 %. MEASURED at this tip over 1,094,000
-    // reads: law 6 moves 25.01 %, all 273,643 of them to the new wording, none between two
-    // old ones. The band is generous because it is a property of the hash rather than a
-    // tuned constant.
-    expect(stableShare).toBeGreaterThan(23);
-    expect(stableShare).toBeLessThan(27);
-    // And the contrast the row rests on, MEASURED in the same loop: the modulus moves
-    // 74.99 % of the reads, and only 33.33 % of THOSE land on the newcomer, so 546,952
-    // reads move between two old wordings that this car's draw leaves alone. Both halves
-    // pinned, or "about a quarter" is a number with nothing to be better than.
+    expect(rows.filter((r) => r.moved !== r.toNew).map((r) => `n=${r.n}`), 'and every mover moved to the new wording').toEqual([]);
+    // BOUND 3, every group large enough to be tested at p = 0.001…
+    expect(rows.filter((r) => appendTestable(r.n, r.reads)
+      && !(share(r) > appendBand(r.n)[0] && share(r) < appendBand(r.n)[1])).map((r) => `n=${r.n}: ${share(r)} %`),
+    'a group outside its append band').toEqual([]);
+    // …and the groups too small for it, NAMED (measured at 6581c349c).
+    // DISAGREE (PROSE-6, 2026-11-23; the chair's rulings of 03:45 and 03:55 UTC), re-measured after the withdrawal: ONE pool moved, DS-DEF-2 `CHAIN: food trades failing`, n=6 -> n=12 (F1-F6 appended as v7-v12), so n=6 40 -> 39 and n=12 1 -> 2; DS-DEF-2 `Economic Survival: WEAK` stays at n=6 (W1-W3 withdrawn; v1, v2 re-worded in place) (n=6 is large enough for this test, so only n=12 moves here).
+    expect(rows.filter((r) => !appendTestable(r.n, r.reads)).map((r) => `n=${r.n}: ${r.pools} pools`),
+      'the groups too small to test the append share at p = 0.001').toEqual([
+      'n=9: 7 pools', 'n=10: 6 pools', 'n=11: 3 pools', 'n=12: 2 pools', 'n=13: 2 pools',
+    ]);
+    // And the contrast the row rests on, the n = 3 case, where its constants were measured: the modulus
+    // moves about three quarters of the reads and only a third of THOSE land on the newcomer.
+    const three = rows.find((r) => r.n === 3);
+    const modulusShare = three ? (three.modMoved / three.reads) * 100 : 0;
+    const modulusToNewShare = three ? (three.modToNew / three.modMoved) * 100 : 100;
     expect(modulusShare).toBeGreaterThan(70);
     expect(modulusShare).toBeLessThan(80);
     expect(modulusToNewShare).toBeLessThan(40);
-    expect(reads, 'the reads measured').toBeGreaterThanOrEqual(500 * APPEND_SEEDS.length);
-    // An explicit per-test budget on the same ground as the row above, scaled to this row's
-    // own measurement: 3,899 ms alone at load 3.14, so the 8.3x contention multiple measured
-    // on this file puts its worst case near 32 s — already past the suite-wide 20,000 ms.
-    // 60_000 is ~2x that, and the estate's second most-used explicit budget (98 sites).
+    // ⭐ GUARD (ii): the n = 3 group under the old band reads the old verdict. At 82164879d the old row
+    // measured 486 pools, 972,000 reads, 242,939 moved, all to the new wording (24.99372427983539 %);
+    // the modulus 728,702 moved (74.969341563786 %), 242,536 to the new (33.283290014299396 %).
+    expect(three ? share(three) > 23 && share(three) < 27 : false, 'the old band\'s verdict')
+      .toBe(three ? share(three) > appendBand(3)[0] && share(three) < appendBand(3)[1] : true);
+    // Non-vacuity: the floor over the widened class.
+    expect(rows.reduce((n, r) => n + r.reads, 0), 'the reads measured').toBeGreaterThanOrEqual(500 * APPEND_SEEDS.length);
+    // An explicit per-test budget on the same ground as the row above: the three-variant row cost 3,899 ms
+    // alone at load 3.14, and the 8.3x contention multiple put its worst case near 32 s; 60_000 is about
+    // 2x that. The widened row is MEASURED in the commit that widened it: 5,916 ms alone (1,562,000 reads,
+    // through the gate mutex), under a tenth of its 60_000; the budget is not raised.
   }, 60_000);
 
   it('⭐ A4 — the same call twice is the same variant, and the audience filter cannot move it', () => {

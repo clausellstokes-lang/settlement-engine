@@ -314,7 +314,7 @@ const FORCE_NAME = Object.freeze({
 function fort({
   monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
   hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
-  hasChurch = false, economic = 50, ruined = false, prosperity = undefined, storageMonths = undefined,
+  hasChurch = false, economic = 50, ruined = false, prosperity = undefined, storageMonths = undefined, foodBand = undefined,
 } = {}) {
   const roster = [];
   if (walls) roster.push({ name: FORCE_NAME.walls });
@@ -338,7 +338,13 @@ function fort({
     economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } }, ...(prosperity ? { prosperity } : {}),
       // DEBT-1 (2026-11-17): the food record's months in store, which the economy always writes; BAR6-DEFDESK's CHAIN: food
       // trades failing lines declare `stores` (be35850406), so a fixture that carries none reads that pool unanswered
-      ...(storageMonths !== undefined ? { foodSecurity: { storageMonths } } : {}) },
+      // DISAGREE (PROSE-6, 2026-11-23; the chair's final lines, 18a9791b3): CHAIN: food trades failing's flat lines v1-v4 now
+      // declare `food: ≤ pressured` and its new lines F1-F6 `food: ≥ secure`, so a fixture with stores and no food band reads
+      // that pool unanswered (mute); `foodBand` is the food record's band, which the vocabulary's `food` dimension reads
+      ...(storageMonths !== undefined || foodBand !== undefined ? { foodSecurity: {
+        ...(storageMonths !== undefined ? { storageMonths } : {}),
+        ...(foodBand !== undefined ? { foodRecord: { band: foodBand } } : {}),
+      } } : {}) },
   };
 }
 
@@ -1954,7 +1960,7 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       .toBeGreaterThan(0);
     expect(namedSeen).toBeGreaterThan(0);
     expect(silentByName, 'the name-shape silence stays the exception').toBeLessThan(trueSeen);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 12.9 s lit in the final census at c1128c8f6; about 23.7 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('DS-DEF-9 speaks at exactly ONE position, on `viability`, and has left the dark list', () => {
     const row = sentenceMountForBlock('DS-DEF-9');
@@ -2236,8 +2242,10 @@ describe('DS-DEF-2 · the supply-chain clauses (W2 DEF construction C6, 2026-11-
     expect(supplied.invasion.provenance.poolKey).toBe(bare.invasion.provenance.poolKey);
     // No force to supply: the force clause is not said, the food clause still is.
     // DEBT-1 (2026-11-17): the food record answers `stores` (see fort): the failing clause's lines declare a stores band
-    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true, storageMonths: 6 }), { seed: 'c6' });
-    const unmannedBare = defenseThreatProse(fort({ walls: true, storageMonths: 6 }), { seed: 'c6' });
+    // DISAGREE (PROSE-6, 2026-11-23): and a food band (see fort): 'pressured', so the clause is the flat failing line the
+    // test was written over (v1, v3 or v4: `food: ≤ pressured`, `stores: < 12`), not a new both-truths line
+    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true, storageMonths: 6, foodBand: 'pressured' }), { seed: 'c6' });
+    const unmannedBare = defenseThreatProse(fort({ walls: true, storageMonths: 6, foodBand: 'pressured' }), { seed: 'c6' });
     expect(unmanned.invasion.sentence).toBe(unmannedBare.invasion.sentence);
     expect(unmanned.economic.sentence.length).toBeGreaterThan(unmannedBare.economic.sentence.length);
   });

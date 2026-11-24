@@ -17,6 +17,9 @@
  * archive of d3937c3f8) EXCEPT a holding the deal's pass two placed as a repeat (`receipt.repeat[v]`: rotated by the widened
  * holder set or the walk, standing, 'exhausted', a floor's reserve taken) or the post-pass moved (`receipt[v].refusedBy`,
  * whose walk reads the town); any other mover is named. The rosters are d3937c3f8's (ids and count, per town).
+ * BORN UNDER ITS REFERENCE'S OWN LAW (the chair's N66, ruled (A), 2026-11-23, at the flip; CLOSE-5 F-SEAT): d3937c3f8 has no
+ * seat or fortune law code, so (u) births its towns with BOTH laws forced to 1 in its own config, and the fixture moves by no
+ * byte (its door is not run); (p) and (t) hold on the product's LIT births AND on those law-1 births, so each tier births twice.
  */
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -46,55 +49,74 @@ const textOf = (l) => (typeof l === 'string' ? l : l.line);
 /** Every PERSONALITY reserve line. */
 const PERSONALITY_RESERVE = new Set(Object.values(/** @type {any} */ (GOAL_RESERVE_LINES).PERSONALITY || {}).flatMap((vs) => Object.values(/** @type {any} */ (vs)).flat().map(textOf)));
 
+/**
+ * One size's fifty towns and what (p), (t) and (u) read on them. `law1`: born under d3937c3f8's own law (both laws forced to
+ * 1 in this arm's own config), and only there is (u) read; otherwise the product's lit birth.
+ * @param {string} size @param {boolean} law1
+ */
+function measure(size, law1) {
+  let count = 0; let holdings = 0; let moved = 0;
+  /** @type {string[]} */ const stray = []; /** @type {string[]} */ const drawnReserve = [];
+  /** @type {string[]} */ const unexhausted = []; /** @type {string[]} */ const named = [];
+  for (let i = 0; i < TOWNS; i += 1) {
+    const seed = `hxd-${size}-${i}`;
+    log.lists = [];
+    const cfg = { ...DEFAULT_CONFIG, settType: size };
+    const town = generateSettlementPipeline(law1 ? { ...birthConfig(cfg), _seatLawVersion: 1, _fortuneLawVersion: 1 } : birthConfig(cfg), null, { seed, customContent: {} });
+    /** @type {Map<string, any>} */ const receipts = new Map();
+    for (const list of log.lists) for (const r of list) receipts.set(String(r.id), r); // the post-pass's receipts replace the deal's
+    // (u), on the law-1 births only: the roster is d3937c3f8's; a card whose goals moved is a repeat of pass two or a card the post-pass moved
+    if (law1) {
+      const row = /** @type {any} */ (BORN).towns[seed];
+      const now = townRow(town);
+      if (!row || row.ids !== now.ids || row.n !== now.n) stray.push(`${seed}: the roster is not d3937c3f8's`);
+      else (town.npcs || []).forEach((/** @type {any} */ c, /** @type {number} */ k) => {
+        const was = rowHashes(row, k); const r = receipts.get(String(c.id));
+        for (const v of /** @type {const} */ (['short', 'long'])) {
+          if (vantageHash(c, v) === was[v]) continue;
+          moved += 1;
+          if (!r?.repeat?.[v] && !r?.[v]?.refusedBy) stray.push(`${seed} ${c.id}.${v}: moved from d3937c3f8, no repeat and no refusal on its receipt ("${c.goal?.[v]}")`);
+        }
+      });
+    }
+    // (t) no pass-one wording is a PERSONALITY reserve line
+    for (const r of receipts.values()) for (const v of ['short', 'long']) if (PERSONALITY_RESERVE.has(r?.[v]?.drawn)) drawnReserve.push(`${seed} ${r.id}.${v}: ${r[v].drawn}`);
+    /** @type {Map<string, Array<{ id: string, v: string, rung: string }>>} */ const by = new Map();
+    for (const c of town.npcs || []) for (const v of ['short', 'long']) {
+      const text = c.goal?.[v]; if (!text) continue;
+      holdings += 1;
+      by.set(text, [...(by.get(text) || []), { id: String(c.id), v, rung: receipts.get(String(c.id))?.repeat?.[v] ?? '-' }]);
+    }
+    for (const [text, hs] of by) {
+      if (hs.length < 2) continue;
+      count += hs.length - 1;
+      const line = `${seed} (${town.name}) x${hs.length} "${text}": ${hs.map((h) => `${h.id}.${h.v} rung=${h.rung}`).join(', ')}`;
+      named.push(line);
+      if (!hs.some((h) => h.rung === 'exhausted')) unexhausted.push(line);
+    }
+  }
+  return { count, holdings, moved, stray, drawnReserve, unexhausted, named };
+}
+
 describe("the gate's count: no goal sentence printed twice in one town (p)", () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
 
   for (const size of SIZES) {
     it(`(p) ${size}: every sentence printed twice is held by an 'exhausted' card, and the count is at most ${/** @type {any} */ (CEILING)[size] ?? 0}`, () => {
-      let count = 0; let holdings = 0; let moved = 0;
-      /** @type {string[]} */ const stray = []; /** @type {string[]} */ const drawnReserve = [];
-      /** @type {string[]} */ const unexhausted = []; /** @type {string[]} */ const named = [];
-      for (let i = 0; i < TOWNS; i += 1) {
-        const seed = `hxd-${size}-${i}`;
-        log.lists = [];
-        const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size }), null, { seed, customContent: {} });
-        /** @type {Map<string, any>} */ const receipts = new Map();
-        for (const list of log.lists) for (const r of list) receipts.set(String(r.id), r); // the post-pass's receipts replace the deal's
-        // (u) the roster is d3937c3f8's; a card whose goals moved is a repeat of pass two or a card the post-pass moved
-        const row = /** @type {any} */ (BORN).towns[seed];
-        const now = townRow(town);
-        if (!row || row.ids !== now.ids || row.n !== now.n) stray.push(`${seed}: the roster is not d3937c3f8's`);
-        else (town.npcs || []).forEach((/** @type {any} */ c, /** @type {number} */ k) => {
-          const was = rowHashes(row, k); const r = receipts.get(String(c.id));
-          for (const v of /** @type {const} */ (['short', 'long'])) {
-            if (vantageHash(c, v) === was[v]) continue;
-            moved += 1;
-            if (!r?.repeat?.[v] && !r?.[v]?.refusedBy) stray.push(`${seed} ${c.id}.${v}: moved from d3937c3f8, no repeat and no refusal on its receipt ("${c.goal?.[v]}")`);
-          }
-        });
-        // (t) no pass-one wording is a PERSONALITY reserve line
-        for (const r of receipts.values()) for (const v of ['short', 'long']) if (PERSONALITY_RESERVE.has(r?.[v]?.drawn)) drawnReserve.push(`${seed} ${r.id}.${v}: ${r[v].drawn}`);
-        /** @type {Map<string, Array<{ id: string, v: string, rung: string }>>} */ const by = new Map();
-        for (const c of town.npcs || []) for (const v of ['short', 'long']) {
-          const text = c.goal?.[v]; if (!text) continue;
-          holdings += 1;
-          by.set(text, [...(by.get(text) || []), { id: String(c.id), v, rung: receipts.get(String(c.id))?.repeat?.[v] ?? '-' }]);
+      // (p) and (t) on the product's LIT births, then on the law-1 births (u) makes, where (u) is read
+      for (const law1 of [false, true]) {
+        const { count, holdings, moved, stray, drawnReserve, unexhausted, named } = measure(size, law1);
+        const law = law1 ? 'under law 1, the reference\'s own law' : 'lit';
+        expect(holdings, `anti-vacuity (${law}): the towns print goals`).toBeGreaterThan(TOWNS);
+        expect(unexhausted, `a sentence printed twice with no exhausted holder (${law})`).toEqual([]);
+        expect(count, `identical goal sentences in ${size}, ${law} (${named.join(' | ') || 'none'})`).toBeLessThanOrEqual(/** @type {any} */ (CEILING)[size] ?? 0);
+        if (law1) {
+          expect(stray, `(u) ${size}, ${law}: only repeats and refused cards move (${moved} holdings moved)`).toEqual([]);
+          if (size === 'city' || size === 'metropolis') expect(moved, `(u) ${law}: anti-vacuity: the cure moved repeats here`).toBeGreaterThan(0);
         }
-        for (const [text, hs] of by) {
-          if (hs.length < 2) continue;
-          count += hs.length - 1;
-          const line = `${seed} (${town.name}) x${hs.length} "${text}": ${hs.map((h) => `${h.id}.${h.v} rung=${h.rung}`).join(', ')}`;
-          named.push(line);
-          if (!hs.some((h) => h.rung === 'exhausted')) unexhausted.push(line);
-        }
+        expect(drawnReserve, `(t) a reserve line drawn (${law})`).toEqual([]);
       }
-      expect(holdings, 'anti-vacuity: the towns print goals').toBeGreaterThan(TOWNS);
-      expect(unexhausted, 'a sentence printed twice with no exhausted holder').toEqual([]);
-      expect(count, `identical goal sentences in ${size} (${named.join(' | ') || 'none'})`).toBeLessThanOrEqual(/** @type {any} */ (CEILING)[size] ?? 0);
-      expect(stray, `(u) ${size}: only repeats and refused cards move (${moved} holdings moved)`).toEqual([]);
-      if (size === 'city' || size === 'metropolis') expect(moved, '(u) anti-vacuity: the cure moved repeats here').toBeGreaterThan(0);
-      expect(drawnReserve, '(t) a reserve line drawn').toEqual([]);
-    }, 120_000);
+    }, 240_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): each tier now births twice (lit, and law 1 for (u): the chair's N66); the slowest of the six (metropolis) 52.3 s here on the flipped tree (075fbdd89, --maxWorkers=3; 30.1 s born once); about 96.2 s on a CI runner (the measured factor), past three quarters of its old 120 s; was 120_000 (one budget covers all six)
   }
 });
 

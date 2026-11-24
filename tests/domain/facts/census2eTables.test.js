@@ -15,7 +15,8 @@ import { ARRIVAL_SCENES_CRISIS_SCOPED } from '../../../src/data/narrativeData.js
 import { SPATIAL_QUARTER_CRISIS_SCOPED } from '../../../src/generators/spatialGenerator.js';
 import { CONDITION_ARCHETYPE_CRISIS_SCOPED, CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES } from '../../../src/domain/activeConditions.js';
 import { QUICK_GUIDE_CRISIS_SCOPED, QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
-import { DAILY_LIFE_LOCAL_CRISIS_SCOPED } from '../../../src/components/new/tabs/DailyLifeTab.jsx';
+// DAILY-3 U4b (the chair's word of 2026-11-22): DAILY_LIFE_LOCAL_CRISIS_SCOPED left with buildLocalDailyLifeNarrative, text no
+// page prints since point 95; its arms below left with it.
 
 const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/declarations/${name}.json`, import.meta.url), 'utf8'));
 /** a line the scope can bite: it does not write `crisis: any` (a calm or silent line) */
@@ -46,12 +47,8 @@ describe('unit 1 — the crisis-scoped flags stand only where a calm line is (R-
     expect(QUICK_GUIDE_CRISIS_SCOPED.length).toBe(scopedPools('QUICK_GUIDE_CLAUSES').length);
     for (const k of QUICK_GUIDE_CRISIS_SCOPED) expect(Object.prototype.hasOwnProperty.call(QUICK_GUIDE_SIBLINGS, k)).toBe(true);
   });
-  it('the local Daily Life narrative flags its stress pool only (the no-stress sentence is calm)', () => {
-    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(scopedPools('DAILY_LIFE_TAB'));
-    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(['localNarrative.stress']);
-  });
   it('every flag is frozen (a table, not a mutable switch)', () => {
-    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, DAILY_LIFE_LOCAL_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
+    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
       expect(Object.isFrozen(l)).toBe(true);
     }
   });
@@ -90,28 +87,9 @@ describe('DAILY_LIFE_CONTEXT — DEFENSE_CONTEXT declared at CENSUS-1e\'s wired 
   });
 });
 
-describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through textOf)', () => {
-  const found = declaredLiteralsOf('src/components/new/tabs/DailyLifeTab.jsx');
-  it('the loading messages and the food / order cells declare what the ledger says', () => {
-    const ids = ['LOAD_MSGS[1]', 'LOAD_MSGS[2]', 'localNarrative.food[deficit>20]', 'localNarrative.food[deficit>0]', 'localNarrative.food[surplus>10]', 'localNarrative.food[else]',
-      'localNarrative.order[>=70]', 'localNarrative.order[>=45]', 'localNarrative.order[else]'];
-    for (const id of ids) {
-      const { pool, line } = ledgerLine('DAILY_LIFE_TAB', `DAILY_LIFE_TAB.${id}`);
-      expect([id, found.get(line.text)]).toEqual([id, [expectedDeclaration(pool, line)]]);
-    }
-  });
-  it('paragraph [1] needs guardPresence (the parked guards stop); paragraph [2]\'s settled-authority sentence denies a succession crisis', () => {
-    const p1 = [...found.entries()].find(([k]) => k.startsWith('${food}. Everyone knows their work')); // re-keyed by cause: STYLE-2 SW-4 (A7) reworded the line, its declaration untouched
-    // CENSUS-2g unit 3 (the chair's answer 3): + `priest`, re-keyed by cause.
-    expect(p1?.[1]).toEqual([{ needs: ['guardPresence', 'priest'], excludes: [], crisis: ['any'] }]);
-    expect(found.get('Most residents know whom to petition, and how to do it without drawing notice.')).toEqual([{ needs: [], excludes: ['crisis: succession'], crisis: ['any'] }]);
-  });
-  it('the anchors fallback names nothing the place must hold (R-W)', () => {
-    const src = readFileSync(new URL('../../../src/components/new/tabs/DailyLifeTab.jsx', import.meta.url), 'utf8');
-    expect(src).toContain("listText(institutions, 'the wells, the lanes, and the common ground')");
-    expect(src).not.toContain('the market, shrine, workshop, and watch post'); // anchored: the new fallback is matched in this same source on the line above
-  });
-});
+// DAILY-3 U4b (the chair's word of 2026-11-22): the DAILY_LIFE_TAB describe ("LOAD_MSGS and the local narrative") left with
+// what it pinned: buildLocalDailyLifeNarrative's food / order cells, paragraphs [1] and [2] and the anchors fallback, text no
+// page prints since point 95. The ledger docs/census/declarations/DAILY_LIFE_TAB.json left with them.
 
 import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_CRISIS_SCOPED } from '../../../src/generators/narrativeText.js';
 import { declarationOf } from '../../../src/domain/facts/factVocabulary.js';

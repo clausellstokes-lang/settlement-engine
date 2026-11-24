@@ -6,12 +6,13 @@
 
 import { powerNameWithArticle, powerSentenceName } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1): a power named in a standing sentence takes its article
 import { pluralPowerName } from '../../domain/display/governanceAccount.js';
-import { powerLabelOf } from '../factionDynamics.js';
-import { seatIsCouncil } from './claimStanding.js';
+import { powerLabelOf, seatHolderApartOf, seatHolderLineOf, seatHolderLinesOf, seatHolderRelationLineOf, tieReadsBought } from '../factionDynamics.js'; // SEAT-10 U6 (CS12, W3): the holder apart, and its line; 13G (N97): the relation rows read bought, their one definition beside the rows' builders
+import { seatIsCouncil, withoutSeatAccess } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
 import { inferFactionCategory } from './factionCategories.js';
 import { isCriminalPower } from '../../domain/people/allegiance.js';
+import { seatsByHolder } from '../../domain/seat/seatLaw.js'; // SEAT-10 U6 (E65): the final-record pass reads the record's own law
 
 // BAR8-K-POWERS (rule 13g, the audit's C21547; BRIEF-BAR8 K-POWERS 1): THE GUARD AND THE GUILD'S NOTE READS THEIR TIE. Where
 // the governing seat is itself a criminal power (a purchased council: "Shadow Senate", "Corrupt Council"), the hall-capture
@@ -69,6 +70,38 @@ const merchantAheadSaid = (rival) => arcaneAheadSaid(rival);
 /** The number of level powers, as the standing line says it (TAIL-POWERS-B-4, P31 (4)); past six, "Many". */
 const LEVEL_COUNT_WORDS = Object.freeze(['', '', '', 'Three', 'Four', 'Five', 'Six', 'Many']);
 
+/**
+ * THE STANDING LADDER'S RANK LINES (rank 1, rank 2, the last rank), lifted from `annotateFactionStanding` BYTE-IDENTICAL
+ * (SEAT-10 U6, the chair's E70 (a)): each row is its sentence's fixed parts, a name or a word between each pair. The ladder
+ * writes from them and the final-record pass (`settleSeatHolderToRecord`) reads them (`RANK_STANDINGS`), so the two can
+ * never drift: a reworded line is reworded for both. `level` opens on "Three", which the ladder replaces with its count word ("Three"…"Many"), as before.
+ * @enforced-by tests/generators/seat/seatHolderLines.test.js (the ladder's totality arm)
+ */
+export const LADDER = Object.freeze({
+  gapNarrow: Object.freeze(['The gap between them and ', ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.']),
+  noOneLeads: Object.freeze(['No one clearly leads here; one scandal or one lost ally could change who does.']),
+  contested: Object.freeze([SEAT_CONTESTED_STANDING]),
+  shadow: Object.freeze(['They operate in the shadow of ', ', close enough to matter and too far behind to lead.']),
+  resist: Object.freeze(['They are strong enough to resist those above them, but too far behind to risk an open fight.']),
+  behind: Object.freeze(['Behind ', ' by too much to challenge openly, so they get their way through petitions and procedure instead.']),
+  settled: Object.freeze(['The order is settled for now; they are busy holding on to second place and make no move on first.']),
+  level: Object.freeze(['Three powers stand almost level here, and no one leads; every ', ' has to be bargained for.']),
+  atTable: Object.freeze(['They are always at the table, but cannot set their own terms.']),
+  worthBuying: Object.freeze(['Close enough to the two above that their support is worth buying; they play ', ' and ', ' against each other when they can.']),
+  fewMatters: Object.freeze(['They have a say on only a few matters; on everything else they side with whoever will deal with them that week.']),
+});
+
+/**
+ * THE STANDING WRITER. Its inputs: the roster (`factions`, mutated in place), the force's words (`force`), and `seat`, which
+ * may carry the seat's `publicLegitimacy` (the coup reading, C14176), its born `config` (the seat law, SEAT-10 U6) and, NEW
+ * (13G, the ninth chair's N97, 2026-11-23), `factionRelationships`: the relation rows of the record (or of the served page)
+ * the roster stands in. Where those rows read bought (`factionDynamics.js :: tieReadsBought`), the thieves' and
+ * the military's war-of-arrests notes are omitted, as where the governing seat is itself criminal (`seatBoughtOf`). The
+ * settles after the coherence seam hand the record's rows (`rosterText.js`); a page reader over a served roster (the share
+ * veil's) hands the served rows. A caller that passes no rows (the power step's first call, every caller before 13G) gets
+ * today's lines, unchanged: the gate is `seatBoughtOf` alone.
+ * @param {any[]} factions @param {{ body: string }} [force] @param {{ publicLegitimacy?: any, config?: any, factionRelationships?: unknown } | null} [seat]
+ */
 export const annotateFactionStanding = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
@@ -79,8 +112,14 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           });
         },
         topFactionName = factions[0] ? factions[0].faction : null,
-        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy } })) : null, // BAR4-HISTORY C14176 (FS2)
+        // SEAT-1 U4 (CS3): the partial settlement hands the law its seat carries (`seat.config`), or none, and then the coup's
+        // reader reads the OLD law (fail closed): under the seat law the power that holds the seat is no challenger of it.
+        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy }, ...(seat.config ? { config: seat.config } : {}) })) : null, // BAR4-HISTORY C14176 (FS2)
         contestedBy = seatReading && coupRiskLabel(seatReading) === 'Contested' ? (seatReading.challengers[0]?.name ?? null) : null;
+      // SEAT-10 U6 (CS12, W3): under the seat law, the holder apart from the form says it holds the form's seat, in place of the
+      // rank line that sets it below the seat ("in the shadow of", "The gap between them", "Behind"); absent the born config, none
+      var apart = seat && seat.config ? seatHolderApartOf(factions, seat.config) : null,
+        holderStanding = apart ? seatHolderLineOf('standing', apart) : null;
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
       var topSaid = topFactionName ? powerNameWithArticle(topFactionName) : null;
       factions[1] && factions[1].faction;
@@ -106,7 +145,10 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         hasFeudalSteward = hasFaction('Feudal Stewardship') || hasFaction('Feudal Appointee'),
         hasReligious = hasFaction('Religious Authorities'),
         hasArcane = hasFaction('Arcane Orders'),
-        seatBought = seatBoughtOf(factions); // BAR8-K-POWERS (13g)
+        // 13G (the ninth chair's N97, 2026-11-23): AND where the record's own relation rows read bought (a hall bought through its
+        // people, the agent rung of `hallCapture.js :: hallCaptureOf`; the rows' reading: `factionDynamics.js :: tieReadsBought`), handed by the settles after the coherence seam
+        // (`seat.factionRelationships`: `rosterText.js`); the power step's first call hands none, its writes stand
+        seatBought = seatBoughtOf(factions) || tieReadsBought(seat?.factionRelationships); // BAR8-K-POWERS (13g)
       factions.forEach(function (faction, rank) {
         var power = faction.power,
           factionName = faction.faction,
@@ -119,44 +161,46 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         if (
           (rank === 1 &&
             !faction.isGoverning &&
-            (topTwoGap <= 6
+            (holderStanding && apart && faction === apart.holder
+              ? (standing = holderStanding)
+              : topTwoGap <= 6
               ? (standing = topFactionName
-                  ? 'The gap between them and ' +
+                  ? LADDER.gapNarrow[0] +
                     (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                    ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
-                  : 'No one clearly leads here; one scandal or one lost ally could change who does.')
+                    LADDER.gapNarrow[1]
+                  : LADDER.noOneLeads[0])
               : contestedBy && factionName === contestedBy && factions[0] && factions[0].isGoverning
-                ? (standing = SEAT_CONTESTED_STANDING)
+                ? (standing = LADDER.contested[0])
               : topTwoGap <= 14
                 ? (standing = topFactionName
-                    ? 'They operate in the shadow of ' +
+                    ? LADDER.shadow[0] +
                       (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                      ', close enough to matter and too far behind to lead.' // BAR3-POWERS (C45570): no grudge the pair's relation row may deny ("symbiotic, stable")
-                    : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
+                      LADDER.shadow[1] // BAR3-POWERS (C45570): no grudge the pair's relation row may deny ("symbiotic, stable")
+                    : LADDER.resist[0])
                 : (standing = topFactionName
-                    ? 'Behind ' +
+                    ? LADDER.behind[0] +
                       (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                      ' by too much to challenge openly, so they get their way through petitions and procedure instead.'
-                    : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
+                      LADDER.behind[1]
+                    : LADDER.settled[0])),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5 && levelCount >= 3
-                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
-                  : 'They are always at the table, but cannot set their own terms.')
+                  ? `${LADDER.level[0]}${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'}${LADDER.level[1]}`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
+                  : LADDER.atTable[0])
               : gapAbove <= 10
                 ? (standing =
-                    'Close enough to the two above that their support is worth buying; they play ' +
+                    LADDER.worthBuying[0] +
                     (higherNeighbor ? powerNameWithArticle(higherNeighbor.faction) : 'the second power') +
-                    ' and ' +
+                    LADDER.worthBuying[1] +
                     (factions[0] ? powerNameWithArticle(factions[0].faction) : 'the leading power') +
-                    ' against each other when they can.')
+                    LADDER.worthBuying[2])
                 : (standing =
-                    'They are always at the table, but cannot set their own terms.')),
+                    LADDER.atTable[0])),
           rank === factions.length - 1 &&
             power < 7 &&
             gapAbove >= 5 &&
             (standing =
-              'They have a say on only a few matters; on everything else they side with whoever will deal with them that week.'),
+              LADDER.fewMatters[0]),
           hasMerchant && hasCraftGuild)
         ) {
           if (nameLower.includes('merchant')) {
@@ -332,3 +376,55 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         standing && (faction.desc = faction.desc ? faction.desc + ' ' + standing : standing);
       });
 };
+
+/**
+ * THE RANK LINES the standing ladder above writes (rank 1, rank 2, the last rank), read back on the final record from the
+ * ladder's own table (`LADDER`; the chair's E70 (a)): a holder's row says it holds the seat in place of whichever of them it
+ * carries (E65 (2): W3 at ANY rank). A name or a word sits between each pair of fixed parts, never across a sentence's end.
+ */
+const escapeText = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** `level` opens on the count word the ladder sets in place of "Three", so its pattern opens on a word; every other slot is a name (no full stop in it). */
+export const RANK_STANDINGS = Object.freeze(Object.entries(LADDER).map(([key, parts]) => new RegExp(parts.map(escapeText).join('[^.]+?')
+  .replace(key === 'level' ? /^Three/ : /^$/, '\\b\\w+'))));
+
+/**
+ * THE FINAL-RECORD PASS (SEAT-10 U6, the chair's E65 of 2026-11-22): where the holder is known only on the final record (R2,
+ * the person's first power, cast after the power step), the form<->holder rows take W1 (and W2 on a licensed pair), the
+ * holder's row takes W3 in place of its rank line at any rank (one row a seat; appended where it carries none), and its
+ * "expect council access" clause is cut. The same gate as the power step (`factionDynamics.js :: seatHolderApartOf`, the
+ * record handed): the seat law off the record's own config, the holder apart, not veiled. Under law 1 it returns before it
+ * reads anything else. Keyed picks only (`seatHolderLineOf`): it draws nothing from the stream. Mutates in place, as
+ * `claimStanding.js :: settleArcaneToPractitioners` beside it does; it runs before `withConflictRelations` reads the rows.
+ * A W3 on any other row (a density-law rival's copy of its host) is cut.
+ * WHERE THE SEAT STANDS EMPTY (VACANT, CLOSE-3 unit (1), the chair's E131): the gate's `vacant` (`seatHolderApartOf`, read
+ * off the record) makes the record's own lines the vacant twins (W3v, W1v: `seatHolderLineOf`), and the power step's line
+ * is found in EITHER pool (the step may have drawn the held pool where the final record is vacant, or the reverse): the
+ * cut on the other rows cuts a W3 and a W3v, and the holder's written line of either pool gives way to the record's.
+ * @param {Record<string, any> | null | undefined} record the final settlement record
+ */
+export function settleSeatHolderToRecord(record) {
+  const ps = record?.powerStructure;
+  if (!ps || !Array.isArray(ps.factions) || !seatsByHolder(record)) return;
+  const apart = seatHolderApartOf(ps.factions, record, record);
+  // ONE ROW A SEAT: a W3 the power step wrote on a row that is not the final holder (a density-law rival minted as a copy
+  // of its host carries its host's sentence) is cut, never reworded; no word is authored
+  const form = ps.factions.find((f) => f?.isGoverning);
+  if (form) {
+    for (const f of ps.factions) {
+      if (!f || f === apart?.holder || typeof f.desc !== 'string') continue;
+      for (const line of [...seatHolderLinesOf('standing', { form, holder: f }), ...seatHolderLinesOf('standingVacant', { form, holder: f })]) if (f.desc.includes(line)) f.desc = f.desc.replace(` ${line}`, '').replace(line, '').trim();
+    }
+  }
+  if (!apart) return;
+  const seed = record?._seed; // the record's seed: the stream is spent by now, so the key reads the seed the record carries
+  const relation = seatHolderRelationLineOf(apart, seed);
+  for (const row of Array.isArray(ps.factionRelationships) ? ps.factionRelationships : []) {
+    if (row && Array.isArray(row.pair) && row.pair.includes(apart.form.faction) && row.pair.includes(apart.holder.faction)) row.narrative = relation;
+  }
+  const own = seatHolderLineOf('standing', apart, seed);
+  const desc = withoutSeatAccess(String(apart.holder.desc || ''));
+  // one row a seat: the power step's W3 or W3v (drawn off the step's stream seed) gives way to the record's, else the rank line, else appended
+  const written = [...seatHolderLinesOf('standing', apart), ...seatHolderLinesOf('standingVacant', apart)].find((line) => desc.includes(line));
+  const rankLine = RANK_STANDINGS.find((re) => re.test(desc));
+  apart.holder.desc = written ? desc.replace(written, own) : rankLine ? desc.replace(rankLine, own) : desc ? `${desc} ${own}` : own;
+}

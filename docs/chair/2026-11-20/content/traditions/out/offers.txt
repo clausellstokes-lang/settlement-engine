@@ -1,0 +1,22 @@
+# (1) what the record offers, per element, over the 432-town pool (counts are TOWNS)
+fields read: institutions[].name; history.founding.{age,foundedBy}; history.historicalEvents[].{templateType,name,yearsAgo}; powerStructure.factions[] (+ governingFactionOf); economicState.incomeSources[0..2].source
+
+element        house  history/founding(cause)  power  trade(top-3 income)
+founding           0                      432    432                    0
+first-landing      0                      432    432                   62
+charter            0                      432    432                    0
+hearth             0                        0      0                    0
+harvest          305                        0      0                  216
+river             95                        0      0                   19
+stone              0                        0      0                    0
+the-dead         432                      228    316                    0
+field              0                        0      0                  216
+forge            192                        0      0                   52
+market           234                        0    256                  231
+hunt             147                        0      0                    0
+long-sun           0                        0      0                    0
+tide             145                        0      0                   90
+greening          82                        0      0                    0
+stars            316                        0    316                    0
+
+A blank table row is the table, not the record: hearth, long-sun and greening (bar the grove houses) have no authored house; only founding-kind elements and the dead carry a cause; powers are drawn for the seated, devotional and market kinds only (the engine's own §6 owner table, politics.js :: desiredArchetype), and by act besides (offering/vigil, fair, contest) — the act rows are not in this table.

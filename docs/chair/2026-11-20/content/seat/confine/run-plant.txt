@@ -1,0 +1,14 @@
+$ sh docs/chair/2026-11-20/content/seat/confine/confine-two.sh 6ad3e03d1 268f73378 --plant "src/generators/power/factionStanding.js: is narrow. A single shift: is slim. A single shift"   (plant (b), 2026-11-20; exit 1)
+temporary trees: /tmp/confine-two.mO5EhR
+plant (tip tree only): src/generators/power/factionStanding.js: " is narrow. A single shift" -> " is slim. A single shift"
+base 6ad3e03d1271278092ef6035012759d7becb4487 golden 4472f8a1560a2a962545afce75e142214be9327545b251be070fe39983f6a0d3 525
+base 6ad3e03d1271278092ef6035012759d7becb4487 census 69d83fd632f3f8ce9730d3916f21ddc1f646bd7d4e0154bbcacfe7de63ecd472 720
+base 6ad3e03d1271278092ef6035012759d7becb4487 all 36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89 1245
+tip 268f73378ea74253c4abd0b754619fc9ca1db359 golden e1635ba65c7b1ad2547c494ea8e7283394be1e46f29a839cca0edd60b21153b0 525
+tip 268f73378ea74253c4abd0b754619fc9ca1db359 census fcc14dd3d8d440e0b222b69f40cdb99bf1c543a880505d9abddc5f57cd87c074 720
+tip 268f73378ea74253c4abd0b754619fc9ca1db359 all ccb351cfd5c414cff560cce764ead13ad7c878da0d687ef24c617ad52fd0c5d1 1245
+DIFFER
+
+real	5m15.416s
+user	5m54.953s
+sys	0m8.834s

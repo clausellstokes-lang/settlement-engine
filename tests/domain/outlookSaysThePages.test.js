@@ -56,7 +56,10 @@ describe('step 5: the Outlook says what the pages say', () => {
 
 describe('step 6: the glance chip and the Economic Survival colour', () => {
   test('#608: the reader\'s town prints the word alone; a town whose figure agrees keeps the chip', () => {
-    const s = birth('rww-metropolis-infiltrated-1');
+    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, rww-metropolis-infiltrated-1 reads Poor (output 28).
+    // Re-scanned rww-metropolis-infiltrated-0..199 lit for the case's own predicate (the word Prosperous over an output under
+    // 35: two bands apart): 12 42 71 102 132; 12 is the first (output 33; was rww-metropolis-infiltrated-1)
+    const s = birth('rww-metropolis-infiltrated-12');
     expect(s.economicState.prosperity).toBe('Prosperous');
     expect(Math.round(s.economicState.compound.economyOutput)).toBeLessThan(35);
     expect(outputChipBesideWord(Math.round(s.economicState.compound.economyOutput), s.economicState.prosperity)).toBe(false);

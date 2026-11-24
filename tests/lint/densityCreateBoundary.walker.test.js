@@ -54,6 +54,14 @@ const MINT_SYMBOLS = [
   'birthConfig',
   'newSettlementDensityLaw',
   'newSettlementLivingContentLaw',
+  // ⭐ The seat law's mint (CS10, SEAT-1 U1), added in the act that wired it, for the reason
+  // above: its row lands WIRED, so the starred register arm does not watch it and these three
+  // per-caller arms are what hold where it may be named.
+  'newSettlementSeatLaw',
+  // ⭐ The fortune law's mint (FS5, FORTUNE-1 U1), added in the act that wired it, for the reason
+  // above: its row lands WIRED, so the starred register arm does not watch it and these three
+  // per-caller arms are what hold where it may be named.
+  'newSettlementFortuneLaw',
   // ⭐ The trouble law's mint (lane KINDS-1, unit K1), added in the act that wired it: its row lands
   // WIRED, so the starred register arm does not watch it and these three per-caller arms do.
   'newSettlementTroubleLaw',
@@ -78,6 +86,12 @@ const MINT_HOMES = Object.freeze([
   // DECLARES the mint, which is the one legitimate way to name it outside the
   // boundary and its BIRTH callers.
   'src/domain/content/livingContentLaw.js',
+  // The seat law's own module (CS10, SEAT-1 U1), added with its mint symbol above: it DECLARES
+  // the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/seat/seatLaw.js',
+  // The fortune law's own module (FS5, FORTUNE-1 U1), added with its mint symbol above: it
+  // DECLARES the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/fortune/fortuneLaw.js',
   // The trouble law's own module (lane KINDS-1, unit K1), added with its mint symbol above: it
   // DECLARES the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
   'src/domain/trouble/troubleLaw.js',

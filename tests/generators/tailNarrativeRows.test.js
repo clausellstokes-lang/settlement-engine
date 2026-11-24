@@ -59,7 +59,11 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
     ['11478', 'r2s-slave_revolt-thorp-1', 'pressure', /timber that made it/, /without destroying what made it worth holding/],
     ['00708', 'r2s-monster_pressure-village-3', 'pressure', /a mill standing idle/, /\(fields left unworked, a mill kept turning for its buyers\)/],
     ['01079', 'r2s-wartime-city-1', 'pressure', /is prospering on the right side/, /^Jalalserai is at war and, for now, on the right side of it/],
-    ['03831', 'r2s-indebted-metropolis-0', 'pressure', /a distinction that has not gone unnoticed/, /took the loans and is now repaying them/],
+    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2s-indebted-metropolis-0's first power is the
+    // Thieves' Guild beside the Arcane Senate governing, so its contrast is true there and no longer the case. Re-scanned
+    // r2s-indebted-metropolis-0..199 lit for the case's own predicate (the slot draws the loans row, and the first power is the
+    // governing one): 4 5 12 27 ...; 4 is the first (was r2s-indebted-metropolis-0)
+    ['03831', 'r2s-indebted-metropolis-4', 'pressure', /a distinction that has not gone unnoticed/, /took the loans and is now repaying them/],
     ['B17142', 'r2s-famine-town-1', 'pressure', /at least three powers/, /its strongest powers are each watching who holds/],
     ['B04491', 'r2r-city-37', 'pressure', /nor keep them fed/, /nor find them all work/],
     ['B01841', 'r2s-politically_fractured-metropolis-2', 'pressure', /all three powers/, /the only person every power here will still speak to/],

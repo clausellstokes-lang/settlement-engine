@@ -222,6 +222,12 @@ export function factsOf(record, options = {}) {
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
     get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
+    /** PAGE-7 (CAUSES-DATA addendum 3): the houses a trouble's cause names, each group on the live roster by catalogue identity (`causeHouses.js`) */
+    get causeHouses() { return causeHousesOf(record); },
+    /** PAGE-7 (CAUSES-DATA addendum 4): goods pass through here on their way elsewhere, the economy's stored mark (`entrepot.js`) */
+    get entrepot() { return entrepotOf(record); },
+    /** DAILY-3 B3 L8 (the chair's E82): office key -> the governing row's form is one of the office's forms (`officeForms.js`, a lazy leaf) */
+    get office() { return officesOf(record); },
   });
 }
 
@@ -285,3 +291,6 @@ import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
 import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves
 import { fishBoughtIn } from './fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): at the END, no line above moves
+import { causeHousesOf } from './causeHouses.js'; // PAGE-7 (CAUSES-DATA addendum 3): at the END, no line above moves
+import { entrepotOf } from './entrepot.js'; // PAGE-7 (CAUSES-DATA addendum 4): at the END, no line above moves
+import { officesOf } from './officeForms.js'; // DAILY-3 B3 L8 (the chair's E82): at the END, no line above moves

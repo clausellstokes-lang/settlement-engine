@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionWording, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -583,14 +583,14 @@ const buildHistoricalEvent = (
     .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
       description: apartFromOwnEvent(renderHistoryTemplate(
-        substituteNames(sizedHistoryText(tensionDescription({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; W2-FIX-DATA-5 (#331): its small-place twin
+        substituteNames(sizedHistoryText(tensionWording({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; PAGE-2 T1: or a spare; W2-FIX-DATA-5 (#331): its small-place twin
         placedTensionTokens(tensionTokens, tension.type, timeline), // BAR4-HISTORY T1 (C24951): ONE EVENT, ONE PLACE (historyData.js); COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
       ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), placedTensionTokens(tensionTokens, tension.type, timeline))),
       factions: (tension.factions || []).map(substituteNames),
       // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
       // filtered by the record (a refused row leaves it) and stored as text; a list that declares
       // nothing is copied unchanged.
-      ...(Array.isArray(tension.plotHooks) ? { plotHooks: filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}), ...(Array.isArray(tension.lastingEffects) ? { lastingEffects: sizedLastingEffects(tension.lastingEffects, hookFacts) } : {}), // W2-FIX-DATA-13: the whole list, a district's or a quarter's effect left out below a town
+      ...(Array.isArray(tension.plotHooks) ? { plotHooks: troubleHooksOf(tension.type, hookFacts, config?._seed) ?? filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}), ...(Array.isArray(tension.lastingEffects) ? { lastingEffects: sizedLastingEffects(tension.lastingEffects, hookFacts) } : {}), // W2-FIX-DATA-13: the whole list, a district's or a quarter's effect left out below a town; HOOKS-BUILD: the eight kinds' three from their pool (history/troubleHooksOf.js)
     }))
     .filter(worldLaw.allowsHistoryEvent);
 };
@@ -1211,42 +1211,6 @@ function admittedTimelineTemplate(pool, i, facts) {
   return null;
 }
 
-// ─── W2-FIX-DATA-3 item 6 (2026-11-13; the chair's ruling on the carried red): A TIMELINE HOOK IS NOTED BY ITS OWN ROW ──
-// `drawDeclared` notes a line by its index in the domain it is handed (`drawDeclared.js :: lineIdOf`), and
-// `resolveTimelineHook`'s domain LEADS with the drawn row, so every timeline hook was noted as line 0: the repetition
-// guard read one line where the town printed several. The note this call made is re-keyed to the row's index in its
-// template, the id the tension's own hook list (drawKind A, `filterDeclared` over the whole list) already notes. Only the
-// ledger's note moves: the draw, its argmax key (which reads the domain's index) and the printed text do not.
-// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
-import { activePresumptionLedger } from '../domain/facts/presumptionLedger.js';
-
-/** How many notes the open ledger holds (0 when none is open). @returns {number} */
-function notedSoFar() {
-  return activePresumptionLedger()?.length ?? 0;
-}
-
-/**
- * Re-key the timeline-hook notes made since `from`: a note that names a row by its index in `list` (a row with no
- * own id) is keyed by that row's index in the template instead. Returns `value` unchanged.
- * @template T @param {number} from @param {ReadonlyArray<any>} list the domain the draw was handed
- * @param {any} eventTemplate @param {T} value @returns {T}
- */
-function noteByTemplateRow(from, list, eventTemplate, value) {
-  const ledger = activePresumptionLedger();
-  if (ledger === null) return value;
-  const pool = `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`;
-  const rows = Array.isArray(eventTemplate?.plotHooks) ? eventTemplate.plotHooks : [];
-  for (let k = from; k < ledger.length; k++) {
-    const entry = ledger[k];
-    if (entry?.pool !== pool || typeof entry.lineId !== 'number') continue;
-    const row = list[entry.lineId];
-    if (row === undefined || (row && typeof row === 'object' && 'id' in row)) continue;
-    const at = rows.indexOf(row);
-    if (at >= 0) ledger[k] = { ...entry, lineId: at };
-  }
-  return value;
-}
-
 // ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): A HISTORY TEXT TAKES ITS SMALL-PLACE TWIN ─────────────────────
 // The great fire "spread through barges, warehouses, and wharf infrastructure across entire districts" in a village of
 // 172. A description that presumes a place's districts and quarters declares its size (`historyData.js ::
@@ -1268,6 +1232,8 @@ import { admittedResourceEvent, resourceEventAdmitted } from './history/resource
 
 // W2-FIX-DATA-13 (the chair's 12:11 ruling): a lasting effect that names a district or a quarter is a town's (draw-free).
 import { sizedLastingEffects } from './history/sizedLastingEffects.js';
+// HOOKS-BUILD: a trouble's hooks from its kind's pool. HOOKS-CURES B: the timeline hook's note re-keying (W2-FIX-DATA-3 item 6) lives in the leaf.
+import { notedSoFar, noteByTemplateRow, troubleHooksOf } from './history/troubleHooksOf.js';
 
 // KINDS-1 K1, THE TROUBLE LAW (a zero-import leaf; DARK, its light the owner's word): at the end of the file so no cited
 // line moves. `buildHistoricalEvent`'s three fixed numbers change in place to these calls; every weight is the leaf's.

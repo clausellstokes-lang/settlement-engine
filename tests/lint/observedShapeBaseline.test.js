@@ -48,6 +48,7 @@ import {
   RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
   RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
   RETIRED_FINAL_PASS_BASELINE_SCHEMA,
+  RETIRED_LAST_CLOSE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -95,6 +96,7 @@ import {
   validateSchema43Baseline,
   validateSchema44Baseline,
   validateSchema45Baseline,
+  validateSchema46Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -412,7 +414,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     expect(RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA).toBe(42);
     // ⭐ SCHEMA 44: the close's final pass (OR2's law at f76fe38fd) — one lawful shrink, one row recorded as uncured erosion.
     // ⭐ SCHEMA 45: the last close (the chair's ruling CL26) — eleven new reads admitted by cause; nothing declared, nothing gone.
-    expect(BASELINE_SCHEMA).toBe(45);
+    // ⭐ SCHEMA 46: the fortune merits writer's admission (the chair's ruling of 2026-11-20 22:18 UTC, FORTUNE U5a-CURE item 2, route B) — ONE conditional-generator-branch declaration, `merits on breakdown`; its one row tagged, nothing else moves.
+    expect(BASELINE_SCHEMA).toBe(46);
+    expect(RETIRED_LAST_CLOSE_BASELINE_SCHEMA).toBe(45);
     expect(RETIRED_FINAL_PASS_BASELINE_SCHEMA).toBe(44);
     expect(RETIRED_CLOSE_ROUND_BASELINE_SCHEMA).toBe(43);
     expect(RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA).toBe(41);
@@ -849,6 +853,13 @@ function validSchema44Baseline_fixture() {
   return baseline;
 }
 
+/** The RETIRED schema-45 envelope, pinned to its own LITERAL number (the fortune-merits rung). */
+function validSchema45Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_LAST_CLOSE_BASELINE_SCHEMA;
+  return baseline;
+}
+
 /** The LIVE envelope, whatever number is in force. */
 function validLiveBaseline() {
   const baseline = validSchema7Baseline();
@@ -1219,9 +1230,14 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // ⭐ 44 IS RETIRED at the schema-45 rung (the last close, CL26) and validates its OWN literal.
     const finalPass = validSchema44Baseline_fixture();
     expect(validateSchema44Baseline(finalPass)).toBe(finalPass);
-    expect(validateSchema45Baseline(live)).toBe(live);
     expect(() => validateSchema44Baseline(live)).toThrow(/is not schema 44/);
     expect(() => validateSchema45Baseline(finalPass)).toThrow(/is not schema 45/);
+    // ⭐ 45 IS RETIRED at the schema-46 rung (the fortune merits writer's admission, the chair's ruling of 2026-11-20 22:18 UTC) and validates its OWN literal.
+    const lastClose = validSchema45Baseline_fixture();
+    expect(validateSchema45Baseline(lastClose)).toBe(lastClose);
+    expect(validateSchema46Baseline(live)).toBe(live);
+    expect(() => validateSchema45Baseline(live)).toThrow(/is not schema 45/);
+    expect(() => validateSchema46Baseline(lastClose)).toThrow(/is not schema 46/);
     expect(() => validateSchema30Baseline(live)).toThrow(/is not schema 30/);
     expect(() => validateSchema31Baseline(peopleCast)).toThrow(/is not schema 31/);
     expect(() => validateSchema29Baseline(live)).toThrow(/is not schema 29/);

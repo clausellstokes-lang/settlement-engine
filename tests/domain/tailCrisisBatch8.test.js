@@ -75,7 +75,9 @@ const FALSE = /** @type {Array<[string, string, string, string]>} */ ([
   ["r2s-plague_onset-metropolis-1", "plague_onset", "Quarantine Council", "chargedWithSickness"],
   ["r2s-plague_onset-metropolis-1", "plague_onset", "The Administrative Circle", "chargedWithSickness"],
   ["r2s-plague_onset-metropolis-2", "plague_onset", "Quarantine Council", "chargedWithSickness"],
-  ["r2s-plague_onset-metropolis-3", "plague_onset", "Quarantine Council", "chargedWithSickness"],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-plague_onset-metropolis-3 lit stores no stake for a Quarantine
+  // Council; the lowest r2s-plague_onset-metropolis not above whose Quarantine Council stores the split is metropolis-4
+  ["r2s-plague_onset-metropolis-4", "plague_onset", "Quarantine Council", "chargedWithSickness"],
   ["r2s-occupied-metropolis-1", "occupied", "Noble Houses", "termsWithOccupier"],
   ["r2s-politically_fractured-town-0", "politically_fractured", "The Independent Bloc", "claimsToGovern"],
   ["r2s-politically_fractured-town-3", "politically_fractured", "Third Bloc (Neutrals)", "courted"],
@@ -89,9 +91,14 @@ const FALSE = /** @type {Array<[string, string, string, string]>} */ ([
   ["r2s-slave_revolt-city-1", "slave_revolt", "Merchant Guilds", "revoltCutsLabour"],
   ["r2s-slave_revolt-metropolis-0", "slave_revolt", "Abolitionist Network", "aidsRevolt"],
   ["r2s-slave_revolt-metropolis-0", "slave_revolt", "The Independent Bloc", "leadsRevolt"],
-  ["r2s-slave_revolt-metropolis-2", "slave_revolt", "Religious Authorities", "pressedToJudge"],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-slave_revolt-metropolis-2's church lit gains while the seat
+  // struggles (gainsChurch: the seat is contested); the lowest r2s-slave_revolt-metropolis whose Religious Authorities store the
+  // split is metropolis-69 (69 90 115 155 158 176 of 200)
+  ["r2s-slave_revolt-metropolis-69", "slave_revolt", "Religious Authorities", "pressedToJudge"],
   ["r2s-wartime-village-0", "wartime", "Merchant Guilds", "warCostsIt"],
-  ["r2s-wartime-city-0", "wartime", "Religious Authorities", "warNeedsIt"],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-wartime-city-0's church lit gains while the seat struggles; the
+  // lowest r2s-wartime-city whose Religious Authorities store the split is city-6 (6 12 13 20 36 53 59 68 of 200)
+  ["r2s-wartime-city-6", "wartime", "Religious Authorities", "warNeedsIt"],
   ["r2s-wartime-city-1", "wartime", "Merchant Guilds", "warDivides"],
   ["r2s-mass_migration-hamlet-0", "mass_migration", "Newcomers' Settlement", "speaksForNewcomers"],
   ["r2s-mass_migration-town-1", "mass_migration", "Merchant Guilds", "guildsThreatened"],
@@ -113,8 +120,11 @@ describe('a power the crisis itself raised is never stored as untouched by it', 
   it('KEEPS the slave revolt\'s leadership on its K22 row (r2s-slave_revolt-town-0)', () => {
     expect(stakeOf(birth('r2s-slave_revolt-town-0'), 'slave_revolt', 'Revolt Leadership')?.reason).toBe('it leads the revolt, and rises or falls with it');
   });
-  it('KEEPS a criminal power the crisis\'s merchant sentence was written onto by its name as untouched (r2s-mass_migration-city-2, Thieves\' Guild)', () => {
-    expect(stakeOf(birth('r2s-mass_migration-city-2'), 'mass_migration', "Thieves' Guild")?.reason).toBe('it could side with either camp');
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-mass_migration-city-2's Thieves' Guild lit gains from the disorder (gainsCrime); the lowest
+  // r2s-mass_migration-city whose Thieves' Guild carries the crisis's merchant sentence and stores the split is city-70 (70 228
+  // 385 of 400)
+  it('KEEPS a criminal power the crisis\'s merchant sentence was written onto by its name as untouched (r2s-mass_migration-city-70, Thieves\' Guild)', () => {
+    expect(stakeOf(birth('r2s-mass_migration-city-70'), 'mass_migration', "Thieves' Guild")?.reason).toBe('it could side with either camp');
   });
 
   it('each row names the roster\'s own description, written under the kind it names (stressFactions.js)', () => {
@@ -141,7 +151,9 @@ describe('a power the crisis has not touched prints no stake row', () => {
     ['r2s-under_siege-town-2', 'under_siege', 'Landed Gentry'], ['r2s-under_siege-city-0', 'under_siege', 'Arcane Orders'],
     ['r2s-under_siege-metropolis-0', 'under_siege', 'Noble Houses'], ['r2s-under_siege-metropolis-2', 'under_siege', 'The Highborn Circle'],
     ['r2s-famine-city-0', 'famine', 'The Landed Bloc'], ['r2s-famine-city-1', 'famine', 'Merchant Guilds'],
-    ['r2s-indebted-city-1', 'indebted', 'Military/Guard'], ['r2s-indebted-city-3', 'indebted', 'Military/Guard'],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-indebted-city-3's Military/Guard lit stores no stake; the lowest r2s-indebted-city after -1 whose
+    // Military/Guard stores the untouched split and holds no quarrel of its own is city-7 (city-0's prints its quarrel with the seat)
+    ['r2s-indebted-city-1', 'indebted', 'Military/Guard'], ['r2s-indebted-city-7', 'indebted', 'Military/Guard'],
   ];
   /** @param {string} seed @param {string} kind */
   const rowsOf = async (seed, kind) => {

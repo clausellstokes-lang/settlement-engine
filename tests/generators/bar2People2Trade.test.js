@@ -33,7 +33,9 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
 /** KEEP: [town, a true line that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-village-54', 'Genji Luo and Xin Ma bid for the same contracts and sit at the same tables.'], // the pair shares a trade
-  ['r2r-town-15', 'Every client Juliana Kamytzes wins is one Juliana Gregoraios lost'], // the pair shares a trade
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-town-15's rivalry lit no longer draws the shared-trade line; the lowest r2r-town whose rival pair draws it
+  // is town-95 (95 125 129 144 151 171 of 200)
+  ['r2r-town-95', 'Every client Lei Tang wins is one Yang Dong lost'], // the pair shares a trade
   ['r2r-hamlet-33', 'Chitragupta Acharya and Jyoti Chaudhary trained together and have competed ever since.'], // a shared past: any pair
   ['r2r-hamlet-18', "Daigh O'Connor has hired away Rian Fitzgerald's best assistant."], // the draw is not moved: the same index's tension
   ['r2r-hamlet-23', 'Cassius Severus and Egeria Calvus will both present proposals at the next council session.'], // likewise

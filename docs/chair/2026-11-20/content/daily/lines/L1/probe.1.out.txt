@@ -1,0 +1,140 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/lines/L1/probe.1.mjs > docs/chair/2026-11-20/content/daily/lines/L1/probe.1.out.txt 2>&1
+births: 900 (150 a size, M1's recipe) in 100s
+pool consistency faults: 0
+applied in 103s since start
+
+════ 1. THE BAR — top single text share (% of 150), distinct texts, by size
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| dawn_work: TOP % | 14 | 13 | 13 | 7 | 9 | 9 |
+| dawn_work: DISTINCT | 16 | 25 | 25 | 39 | 26 | 20 |
+| dawn_work: empty text | 0 | 0 | 0 | 0 | 0 | 0 |
+  top thorp (21): "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day."
+  top hamlet (19): "The first hour is spent seeing that nothing was disturbed in the night; only then does the ordinary work begin."
+  top village (20): "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day."
+  top town (10): "Water is fetched at first light in company, never alone, and the day's work starts after."
+  top city (14): "Those who kept guard through the night hand over at first light and go home to sleep."
+  top metropolis (14): "The night's guard comes down off the walls at first light, and the day's guard goes up."
+| gathering_places: TOP % | 11 | 7 | 12 | 8 | 8 | 9 |
+| gathering_places: DISTINCT | 17 | 34 | 25 | 26 | 32 | 24 |
+| gathering_places: empty text | 0 | 0 | 0 | 0 | 0 | 0 |
+  top thorp (16): "People gather at one another's doors in the evening, and by day where the water is drawn."
+  top hamlet (11): "Of an evening people sit out by their doors and talk across to their neighbours."
+  top village (18): "People meet where the water is drawn and again by the house of worship, and most news passes between them."
+  top town (12): "People cross the market square on their way to the houses of worship, and many stop to talk on the way."
+  top city (12): "People gather at the fish market as much to talk as to buy."
+  top metropolis (13): "People stop to talk on the toll bridge and at the fish market, where most comings and goings pass."
+| child_warnings: TOP % | 3 | 3 | 3 | 5 | 12 | 13 |
+| child_warnings: DISTINCT | 85 | 96 | 105 | 99 | 29 | 30 |
+| child_warnings: empty text | 0 | 0 | 0 | 0 | 0 | 0 |
+  top thorp (5): "Children are warned about picking quarrels of their own while their elders have quarrels enough, and about losing anything, however small, that the household paid for."
+  top hamlet (5): "Children are warned about taking sides in arguments that are not theirs, and about losing anything, however small, that the household paid for."
+  top village (4): "Children are warned about picking quarrels of their own while their elders have quarrels enough, and about breaking or spoiling what cannot easily be replaced."
+  top town (8): "Children are warned about wandering into other households while feelings are running high."
+  top city (18): "Children are warned about the road past sundown."
+  top metropolis (20): "Children are warned about going out to look for whatever is heard in the night."
+
+════ 2. BRANCHES — reach (% of 150 taking it) / MIN eligible wordings over the places taking it / needed (ceil(reach/15%)); SHORT marks a miss
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| dawn_work:food | 6/2/1 | 5/2/1 | 1/2/1 | 3/3/1 | 12/3/1 | 19/3/2 |
+| dawn_work:defence | 94/7/7 | 81/7/6 | 81/7/6 | 42/7/3 | 0/— | 0/— |
+| dawn_work:craft | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| dawn_work:merchant_siege | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| dawn_work:merchant | 0/— | 2/4/1 | 3/4/1 | 18/4/2 | 11/6/1 | 1/7/1 |
+| dawn_work:default | 0/— | 13/3/1 | 14/4/1 | 37/8/3 | 77/10/6 | 80/11/6 |
+| gathering_places:named | 19/4/2 | 45/3/3 | 100/8/7 | 100/17/7 | 100/17/7 | 100/19/7 |
+| gathering_places:plain | 81/9/6 | 55/10/4 | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:unrest | 97/7/7 | 95/7/7 | 95/7/7 | 90/9/6 | 7/11/1 | 7/11/1 |
+| child_warnings:economic_collapse | 74/6/5 | 71/6/5 | 62/6/5 | 2/8/1 | 0/— | 0/— |
+| child_warnings:monster_pressure | 23/5/2 | 29/5/2 | 32/5/3 | 67/5/5 | 67/6/5 | 68/6/5 |
+| child_warnings:plague | 1/3/1 | 3/3/1 | 3/3/1 | 3/3/1 | 2/4/1 | 1/4/1 |
+| child_warnings:siege | 0/— | 0/— | 0/— | 0/— | 1/3/1 | 3/3/1 |
+| child_warnings:famine | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:bandit_raids | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:rival_neighbor | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:corruption | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:cult | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:arcane_instability | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:default | 0/— | 0/— | 0/— | 0/— | 0/— | 0/— |
+| child_warnings:none | 0/— | 0/— | 0/— | 1/6/1 | 29/3/2 | 27/5/2 |
+  SHORT cells: 0
+
+════ 3. FALSE LINES by M1's every test on these slots (places of 150 printing the clause while the record test is false; must be 0)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| dawn the granary queue — no granary: hasInstitution granary | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn The walls claim — no walls: defenceOf.walls | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn the watch musters — no guard force: factsOf.guardPresence | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn Smithy fires — no smithy | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn guild-callers — no guild: factsOf.guild | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn Merchant caravans roll — no trade route | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn queue at the warehouses — no warehouse (no home) | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn Bakers light their ovens — no bakery (no home) | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn then the smiths — no smithy | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn the watch changes — no guard force | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn as the gates open — no gate: defenceOf.gate | 0 | 0 | 0 | 0 | 0 | 0 |
+| gather the well\b — no well/water source (M1 nearest) | 0 | 0 | 0 | 0 | 0 | 0 |
+| gather the bridge — no bridge (no home) | 0 | 0 | 0 | 0 | 0 | 0 |
+| gather the open square — no square (no home) | 0 | 0 | 0 | 0 | 0 | 0 |
+| gather (named) — a named house not live or access-only (isLiveInstitution / ACCESS_ONLY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the deep well — no well (M1 nearest) | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the woods at twilight — no timber (M1 nearest) | 0 | 0 | 0 | 0 | 0 | 0 |
+| child linger at the gates — no gate | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the trade quarter — no quarters at all | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the trade quarter — no trade-kind quarter | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the empty stalls — no market: marketOf | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the sick-house — no hospital or healer | 0 | 0 | 0 | 0 | 0 | 0 |
+| child when the bells ring — no sacred house (nearest for a bell) | 0 | 0 | 0 | 0 | 0 | 0 |
+| child the neighbour\b — no neighbour: record.neighborRelationship | 0 | 0 | 0 | 0 | 0 | 0 |
+| child \bofficials\b — no appointed post | 0 | 0 | 0 | 0 | 0 | 0 |
+  M1 FALSE-LINE TOTAL: 0
+
+════ 4. WORD TESTS (this lane's own; places of 150 printing the word in the slot while the test fails)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| child_warnings /\b(?:two|three|four|five|six|seven|eight|nine|ten|dozens?|hundreds?|twice|thrice)\b/ — a count (rule 7) | 0 | 0 | 0 | 0 | 1 | 3 | e.g. hxd-city-88: "Children are warned about going anywhere alone after dark, and about staying close when the bells ring three t"
+  WORD-TEST hits by slot: {"child_warnings":4} (rows not printed are 0 at every size)
+
+════ 5. RULES 4 AND 6, AND THE WORD COUNT
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| a named house is hideable (isHideableHouse) | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn_work: words min-max | 16-22 | 13-22 | 13-22 | 13-22 | 13-21 | 13-21 |
+| gathering_places: words min-max | 12-23 | 12-23 | 13-23 | 13-23 | 13-24 | 13-23 |
+| child_warnings: words min-max | 11-30 | 11-30 | 11-28 | 8-28 | 8-25 | 8-25 |
+  wordings by length (8-30 is rule 8): all whole-sentence wordings 8-30
+
+════ 6. WORDING USE — places printing each wording (sum of the six sizes), and the houses named
+  dawn_work: B0=13 B1=9 B2=23 B3=24 B4=20 B5=40 B6=18 B7=38 B8=13 B9=7 B10=5 B11=21 B12=19 B13=5 B14=8 B15=19 B16=17 B17=32 F0=12 F1=30 F2=4 F4=18 F6=6 M0=5 M1=10 M2=5 M3=12 M4=2 M5=8 M6=10 W0=7 W1=8 W2=13 W3=4 W4=1 W5=46 W6=33 W7=58 W8=49 W9=54 W10=56 W11=34 W12=28 W13=9 W14=47
+  gathering_places: N0=17 N1=49 N2=51 N3=24 N4=36 N5=30 N6=30 N7=26 N8=11 N9=38 N10=21 N11=4 N12=16 N13=13 N14=11 N15=16 N16=32 N17=29 N18=60 N19=29 N20=23 N21=24 N22=28 N23=11 N24=29 N25=4 N26=1 N27=7 N28=26 P1=14 P2=21 P3=13 P4=22 P5=16 P6=19 P7=20 P8=19 P9=19 P10=7 P11=10 P13=20 P14=2 P15=2
+  child_warnings: economic_collapse:E0=2 economic_collapse:E1=51 economic_collapse:E2=45 economic_collapse:E3=56 economic_collapse:E5=45 economic_collapse:E6=46 economic_collapse:E7=44 economic_collapse:E8=24 monster_pressure:P0=61 monster_pressure:P1=22 monster_pressure:P2=19 monster_pressure:P3=17 monster_pressure:P4=54 monster_pressure:P5=71 monster_pressure:P6=12 monster_pressure:P7=78 monster_pressure:P8=48 monster_pressure:P9=47 plague:L1=7 plague:L2=8 plague:L3=4 siege:S0=4 siege:S2=1 unrest:U0=21 unrest:U1=76 unrest:U2=73 unrest:U3=14 unrest:U4=26 unrest:U5=68 unrest:U6=56 unrest:U7=19 unrest:U8=83 unrest:U9=69 unrest:U10=80 X0=4 X1=14 X2=13 X3=8 X4=9 X5=14 X6=16 X7=8
+  houses named (row -> as printed; places): Fish market -> "the fish market" 164; Parish church -> "the house of worship" 113; Inns and taverns (district) -> "the inns and taverns" 106; Mills (2-5) -> "the mills" 93; Parish churches (2-5) -> "the houses of worship" 71; Inn (multiple) -> "the inn" 67; Great cathedral -> "the great cathedral" 63; Weekly market -> "the weekly market" 52; Wayside shrine -> "the wayside shrine" 49; Parish churches (10-30) -> "the houses of worship" 48; Toll bridge -> "the toll bridge" 35; Alehouse -> "the alehouse" 34; Mill -> "the mill" 29; Public bathhouse -> "the public bathhouse" 28; Multiple market squares -> "the market squares" 28; Docks/port facilities -> "the docks" 23; Market square -> "the market square" 22; Wayside inn -> "the wayside inn" 14; Travelers' inn -> "the travelers' inn" 14; Cathedral (10,000+ only) -> "the cathedral" 13; Daily markets -> "the daily markets" 12; Multiple theaters -> "the theaters" 11; Ale house -> "the ale house" 10; Periodic market -> "the periodic market" 8; Common well -> "the common well" 8; Theaters -> "the theaters" 5; Parish churches (50-100+) -> "the houses of worship" 3
+
+════ 7. SAMPLES (first place of each size)
+  hxd-thorp-0 (Rossleigh)
+    dawn [defence] People go out to their work together at dawn, and no one strays far from the houses alone.
+    gather [plain] Where the water is drawn is where people meet and pass on their news.
+    child [unrest,monster_pressure] Children are warned about taking sides in arguments that are not theirs, and about straying out of sight of the houses once the light starts to go.
+  hxd-hamlet-0 (Steinhausen)
+    dawn [merchant] The merchants are up before anyone else, and their business is under way by first light.
+    gather [named] People gather at the periodic market as much to talk as to buy.
+    child [monster_pressure,unrest] Children are warned about going anywhere alone after dark, and about getting mixed up in the grown-ups' quarrels.
+  hxd-village-0 (Dobroki)
+    dawn [defence] Water is fetched at first light in company, never alone, and the day's work starts after.
+    gather [named] People meet on the common and by the house of worship, where most of the talk of the place goes on.
+    child [unrest,economic_collapse] Children are warned about crowds that gather quickly, and about giving anything away without asking first.
+  hxd-town-0 (Petenmul)
+    dawn [default] The night's guard comes down off the walls at first light, and the day's guard goes up.
+    gather [named] People cross the market square on their way to the houses of worship, and many stop to talk on the way.
+    child [monster_pressure,unrest] Children are warned about being outside the walls once the gates are shut, and about crowds that gather quickly.
+  hxd-city-0 (Petenhuitz)
+    dawn [default] The forge is lit early, and its hammering is the first sound of most mornings.
+    gather [named] People meet where the water is drawn and again by the houses of worship, and most news passes between them.
+    child [monster_pressure,unrest] Children are warned about wandering beyond the last streets after dark, and about taking sides in arguments that are not theirs.
+  hxd-metropolis-0 (Shangjin)
+    dawn [food] People are at the fish market before light, waiting to see what food comes in and what it will cost.
+    gather [named] People gather on the steps of the great cathedral, where there is always someone to talk to.
+    child [monster_pressure] Children are warned about the road past sundown.
+
+done in 103s

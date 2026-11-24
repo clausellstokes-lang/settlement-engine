@@ -62,7 +62,10 @@ describe('the revolt\'s own leadership is never untouched by the revolt', () => 
     expectNoSeedFailures(collectSeedFailures(FALSE.slice(4), leadsTheRevolt), 'FALSE rows 5-8: the revolt\'s own leadership stores "it leads the revolt"');
   });
   it('each KEEP seed KEEPS its earlier rule: the leadership outweighs the seat (gains) (every row)', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2s-slave_revolt-hamlet-2', 'r2s-slave_revolt-village-2'], (seed) => {
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-slave_revolt-hamlet-2's leadership lit no longer outweighs
+    // the seat (`outrankingRivalOf` names another power); the lowest r2s-slave_revolt-hamlet whose outranking rival is the
+    // Revolt Leadership is hamlet-10 (10 32 72 138 159 of 200)
+    expectNoSeedFailures(collectSeedFailures(['r2s-slave_revolt-hamlet-10', 'r2s-slave_revolt-village-2'], (seed) => {
       expect(stakeOf(birth(seed), 'Revolt Leadership'), `${seed} KEEPS its earlier rule: the leadership outweighs the seat (gains)`).toEqual({ factionId: 'Revolt Leadership', stake: 'gains', reason: STAKE_REASONS.gainsRival });
     }), 'KEEP rows: the leadership outweighs the seat');
   });

@@ -122,7 +122,7 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     expect(mutated, 'no caller record is mutated: the merge clones on entry and writes only its own value').toEqual([]);
     expect(lost, 'THE WRITE BASE: no top-level key of the record is absent from the result').toEqual([]);
     expect(noisy, 'the identity carries no escalation and moves no reading').toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 9.4 s lit in the final census at c1128c8f6; about 17.2 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('A2 · the group is the unit: a label never sits beside a flag that contradicts it', () => {
     const subjects = rows().filter(({ rec }) => rec.economicState?.foodSecurity?.label !== undefined

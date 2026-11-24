@@ -27,9 +27,14 @@
 import { rulingChainOf } from '../dossier/powerStrata.js';
 import { powerNameWithArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
-import { resolveDeclared } from '../facts/drawDeclared.js';
+import { drawDeclared, resolveDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { textOf } from '../facts/textOf.js';
+import { meritsOf, weatheredCatastrophe } from '../fortune/fortuneMerits.js';
+import { FORTUNE_LAW_TUNING } from '../fortune/fortuneLaw.js';
+import { pickVariantMixed } from '../../kernel/proseHash.js';
+import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../data/fortuneMeritLines.js';
+import { FORTUNE_LASTING_CENTURIES_YEARS, FORTUNE_LASTING_LINES, FORTUNE_LASTING_TIME_WORDS } from '../../data/fortuneLastingLines.js';
 
 /** THE SEAT UNDER AN OCCUPATION (TAIL-POWERS-2, P4): the twins of the seat sentences, by draw (0-2), and of the headless
  *  (3) and unnamed (4) seat; each declared on the vocabulary's crisis atom, so it prints only where the record is occupied. */
@@ -357,8 +362,67 @@ export function governanceAccountOf(settlement, opts = {}) {
   const label = leg && typeof leg === 'object' ? text(leg.label) : '';
   if (label) {
     const safetyLabel = s.economicState?.safetyProfile?.safetyLabel;
-    const standing = standingSentence(label, legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel), place, ruler, pick);
+    const causes = legitimacyCausesOf(/** @type {{ breakdown?: unknown }} */ (leg).breakdown, ADVERSE_BANDS.has(label), safetyLabel);
+    const standing = standingSentence(label, causes, place, ruler, pick);
     if (standing) sentences.push(standing);
+    // THE MERIT'S REASON (FORTUNE U5b; the seventh chair's ruling of 22:26 UTC 2026-11-20, vetoable by the owner): where
+    // the fortune law's merit credits the record (`fortuneMerits.js :: meritsOf`, the predicate the birth used), the
+    // event `weatheredCatastrophe` returns is named directly after the standing, opening on its stored name. The time
+    // words band its `yearsAgo` (the pool's own `FORTUNE_MERIT_RECENT_YEARS`, then the law's `weatheredWithinYears`), never a figure.
+    // The wording is the kernel's mixed keyed pick through the one door, keyed on the place's name and the event's (what
+    // every shared read serves, so the owner's page and a shared one say the same line); no roll.
+    const meritRecord = /** @type {import('../fortune/fortuneMerits.js').MeritRecord} */ (/** @type {unknown} */ (s));
+    const merits = standing ? meritsOf(meritRecord) : [];
+    const weathered = merits.includes('weathered') ? weatheredCatastrophe(meritRecord) : null;
+    const event = weathered ? text(weathered.name) : '';
+    const yearsAgo = weathered && typeof weathered.yearsAgo === 'number' ? weathered.yearsAgo : null;
+    const band = yearsAgo === null ? null
+      : yearsAgo <= FORTUNE_MERIT_RECENT_YEARS ? FORTUNE_MERIT_TIME_WORDS.recent
+        : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
+    let meritPrinted = false;
+    if (event && band) {
+      const identity = `${place}::${event}::${yearsAgo}`;
+      const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
+        draw: (pool) => pickVariantMixed(pool, identity),
+        key: `${identity}::fortuneMerit`,
+        facts,
+        poolId: 'fortuneMeritLines:FORTUNE_MERIT_LINES',
+        surface: 'power',
+        drawKind: 'H',
+      });
+      /** @type {Record<string, string>} */
+      const meritSlots = { event, place, seat: ruler, ...band };
+      if (line) {
+        sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? ''));
+        meritPrinted = true;
+      }
+    }
+    // THE LASTING REASON (FORTUNE U7b; the chair's words E57 and E57 amended, 2026-11-22, vetoable by the owner): where
+    // `meritsOf` credits 'lasting', the place's age is named after the standing and after the first merit's sentence. The
+    // time words band `history.age` by the pool's own `FORTUNE_LASTING_CENTURIES_YEARS`, never a figure. Where LASTING
+    // credits alone, the wording is the kernel's mixed keyed pick among the drawn rows through the one door, keyed on the
+    // place's name and age (both served on every shared read); where both merits credit, the one fixed row, with no draw.
+    // The chair's ruling of 12:28 UTC 2026-11-22 (U7d): the fixed row prints only where the first merit's sentence PRINTED
+    // in this paragraph; where both credit but it did not (an event whose stored name is empty), the drawn rows, as alone.
+    // E57 amended (2): a drawn row opens on "It" where the standing is a bare line that opens on the place.
+    const age = meritRecord.history?.age;
+    if (merits.includes('lasting') && typeof age === 'number') {
+      const both = meritPrinted;
+      const identity = `${place}::${age}`;
+      const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
+        draw: (pool) => pickVariantMixed(pool.filter((l) => l.when === 'alone'), identity),
+        key: `${identity}::fortuneLasting`,
+        facts,
+        poolId: 'fortuneLastingLines:FORTUNE_LASTING_LINES',
+        surface: 'power',
+        drawKind: 'H',
+      }).line;
+      const wording = lasting ? textOf(lasting) : '';
+      const onIt = !both && !causes.length && standing.startsWith(`${place} `);
+      /** @type {Record<string, string>} */
+      const lastingSlots = { place, seat: ruler, ...(age < FORTUNE_LASTING_CENTURIES_YEARS ? FORTUNE_LASTING_TIME_WORDS.generations : FORTUNE_LASTING_TIME_WORDS.centuries) };
+      if (wording) sentences.push((onIt ? wording.replace(/^\{place\}/, 'It') : wording).replace(/\{(\w+)\}/g, (_m, k) => lastingSlots[k] ?? ''));
+    }
   }
 
   // 3 + 4. THE POWERS THAT HAVE BROKEN WITH IT, AND WHAT THAT COSTS THE HALL.

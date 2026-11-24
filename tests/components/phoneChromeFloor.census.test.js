@@ -265,6 +265,9 @@ const CENSUS = (() => {
  * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
+  // RE-MEASURED 2026-11-20 (PAGE-1 OUTPUT, F3b), out of this census's own red run: the Economics header's Output chip
+  // (EconomicsGlance.jsx, its `chromeFontSize` label) leaves with its "n/100": /create 621 -> 620, /settlements 864 -> 863,
+  // /gallery 666 -> 665; `bare` holds. A surface only shrank.
   // ⭐ RE-MEASURED 2026-11-09 (SW-B7b fourth seat; the cause is f913f8b28, the faith desk's public branch): the
   // public prose composer (reached from the save path's lazy edge in the shell) imports the faith desk's one
   // caller, `tabs/WarFaithDesk.jsx`, whose two floored sites (`proseFontSize`, `chromeFontSize`) now count on
@@ -352,7 +355,27 @@ const ROUTE_BASELINE = Object.freeze({
   // magic note's recovery chip -1) -3; R2-CODE-B item 1 (the chain-depth chip) -1 and R2-CODE-B-SIDE items 1-2 (ChainRow's
   // upstream note and imported pill) -2. The four lanes' sites are in four different files; nothing else moves; `bare` unmoved;
   // /compendium 203 is R2-CODE-B-SIDE's and stands. A surface only shrank.
-  '/create':                { roots: 1, files: 162, floored: 621, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-20, PAGE-1 CARD (F4): two floored `chromeFontSize` rows leave the dossier closure, the people card's influence
+  // dots (npcComponents.jsx) and the NPCs tab's influence tally (NPCsTab.jsx), both the stored band misread at birth:
+  // `floored` -2 on /create, /settlements, /gallery, 621 -> 619, 864 -> 862, 666 -> 664; `bare` unmoved; re-measured by this
+  // census. A surface only shrank.
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption ("Magic in the world at large, not the town's own:", one
+  // `chromeFontSize` site) — `floored` +1 on /create, /settlements, /gallery, 621 -> 622, 864 -> 865, 666 -> 667; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD and MAGIC: -2 and +1 composed, 621 -> 620, 864 -> 863, 666 -> 665; re-measured by this
+  // census at the merged tree, never a sum. Then PAGE-4's merge of OUTPUT (-1, its Output chip): 620 -> 619, re-measured.
+  // 2026-11-22, DAILY-PAGE-1 (the owner's order: the Daily Life button goes): DailyLifeTab.jsx loses the offer line's
+  // `proseFontSize`, the error box's and the regenerate overlay's `chromeFontSize` (-3) and gains the engine lines'
+  // `proseFontSize` (+1): `floored` -2 on /create, /settlements, /gallery, 620 -> 618, 863 -> 861, 665 -> 663; `bare`
+  // unmoved; re-measured by this census at the lane's tree.
+  // 2026-11-22, DAILY-4 unit P (the chair's E110: the page prints all its lines): DailyLifeTab.jsx gains the owner-only
+  // mark's muted line (`chromeFontSize`, the "For the DM only." line of WhoRunsThisTownPanel.jsx) (+1); the eight lines
+  // share the one `proseFontSize` site: `floored` +1 on /create, /settlements, /gallery, 618 -> 619, 861 -> 862,
+  // 663 -> 664; `bare` unmoved; re-measured by this census at the builder's tree. THE WORKING LINE moved the same three
+  // rows +1 at points 98 to 102 (618 -> 619, 861 -> 862, 663 -> 664, with no comment of its own); at DAILY-4's merge of
+  // point 102 both are composed and the figures below are RE-MEASURED by this census at the merged tree, never a sum: 619 -> 620,
+  // 862 -> 863, 664 -> 665.
+  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -405,7 +428,11 @@ const ROUTE_BASELINE = Object.freeze({
   // the auto-resolve switch's label and the interval select, one `chromeFontSize` each; 0 bare.
   // 2026-11-13, R3-TABS (ruling b1): DefenseTab.jsx's ForceCard loses its provenance badge (one `chromeFontSize` row) —
   // `floored` -1 on /create, /settlements, /gallery, 623 -> 622, 866 -> 865, 668 -> 667; `bare` unmoved; re-measured by this census.
-  '/settlements':           { roots: 1, files: 206, floored: 864, ruled: 4, bare: 0 },
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 864 -> 865; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 864 -> 863, re-measured by this census at the merged tree.
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 863 -> 862, re-measured by this census at the merged tree.
+  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -439,7 +466,11 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-18, CLOSE-DOORS-1B (the close of 2026-11-18): `floored` +3 on /create, /settlements, /gallery, 618 -> 621, 861 -> 864,
   // 663 -> 666; `bare` unmoved; re-measured by this census at 70e557d5b: one floored site each in npcComponents.jsx (BAR7-CARDS,
   // JOIN-17 point 20), DefenseTab.jsx (BAR6-CRIME, point 3) and ResourcesTab.jsx (BIRTH-3, the sixth chair's point 33).
-  '/gallery':               { roots: 1, files: 151, floored: 666, ruled: 4, bare: 0 },
+  // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 666 -> 667; `bare`
+  // unmoved; re-measured by this census at the build's tip.
+  // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 666 -> 665, re-measured by this census at the merged tree.
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 665 -> 664, re-measured by this census at the merged tree.
+  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

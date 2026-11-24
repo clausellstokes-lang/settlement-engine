@@ -600,6 +600,37 @@ const WORD_CORRECTIONS = Object.freeze([
   // LR6 (2): DS-DEF-3 Unsafe v6 (LAST-VARIETY's line) repeated the safety profile's travellers' advice and the guard line's
   // "There is no watch"; its words corrected in place
   { pool: 'DS-DEF-3 :: Unsafe', vid: 6, from: '2ab8fa180378f08d13e1fa047c7d8df733c1ea70fe18f996ed526428850200ed', to: '87c78172c08ce1e0a54bb926c8ea0cdd9cb1676156ab2783767d0de5ae258e3d', ruling: 'LR6' },
+  { pool: 'DS-POW-2 :: recentConflict present', vid: 1, from: 'b9c7576493170bf4b61ba47e4f30b6485372953aff2b0ed5441021b41f8c329f', to: '5f631039f93489f9a1b9bbddfe2a307bc26decd9f4097240d716e40035ea48b4', ruling: 'CHAIR-2026-11-20-17:38' },
+  // POINT89-CHAIR-2026-11-22 (the chair's rulings on LINES-FOR-THE-CHAIR, point 89's own reds): five of BUILD-1's appended members corrected in
+  // place: DS-GEN-13 NO-MARKET v9 and v12 to the pool's contract; DS-ECO-8 PROSPEROUS v7 no longer presumes halls and
+  // defences; DS-ECO-11 worked-out v4 off the plural-resource fault; DS-ECO-12 land-cannot-give v4 a shortfall, not an absence
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 4, from: '199350795cb8021b65417d8b1d01b242386b3d201063c815687fa243fb6825f7', to: 'db6bf3aa7c38940bdba811c6fb1cf40d0213df93ca7f3fa4679c2ce0c01a112a', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-12 :: CRITICAL IMPORT: the land cannot give it', vid: 4, from: '088efe12e309b545361cd9de64179993f36e07a41c77b1865c89163deae7bf11', to: 'ded9eebe20cde9e321e795c28f2164fbc8b39d35edb621e8853319fed433bb11', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-ECO-8 :: PROSPEROUS', vid: 7, from: '68d8269711c72f99fab0db5311cdcbfdebef5531c3bceca53d09c74aa9687ea0', to: 'a6db5e16c25ce8870a9a1699e8801e2d473be6f487d862e3740dde2204c74397', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 12, from: 'aa699fd8f0ba666bb491464d98ba96f23f8b4d68a80f0e4c0084933a5108b7d6', to: '895382b92022c26a53aaabed4b71ffd26279f589338925cf7e06199fc894dd25', ruling: 'POINT89-CHAIR-2026-11-22' },
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
+  // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: 'f745a2b64d58f148a15563dcdfdf61ca42ec3a4f2817aba09771fea9930fd8cc', to: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', ruling: 'POINT89-CHAIR-2026-11-22-V6' },
+  // CHAIR-2026-11-23-03:45 (DISAGREE, PROSE-6; the chair's GO on the builder's stops): DS-DEF-2 Economic Survival: WEAK v2 said
+  // "no money to pay them" beside GEN-17 GARRISONED v2's "pays wages for its defense"; re-worded in place, on its own marks
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 2, from: 'a757b74778ece2e2f23b5f5b9fae504d37b3b40cdf4b5bc4310bf10c6645b7ba', to: 'f81f0b3a2608bf34fc5f667ba0849b091267f6d048293016d8470ea395b4cceb', ruling: 'CHAIR-2026-11-23-03:45' },
+  // CHAIR-2026-11-23-03:55 (DISAGREE, PROSE-6; the chair's word on the builder's stop at addendum 1 item 4): DS-DEF-2 Economic
+  // Survival: WEAK v1 said "always short of money for its defence" beside GEN-17 GARRISONED v2 (dz-town-2); re-worded in place
+  { pool: 'DS-DEF-2 :: Economic Survival: WEAK', vid: 1, from: 'b782767dfd38e3998769b6c74b43f313fb795f203fe1c2b0170b11183c71170c', to: '99ffc2d6bd7fa5d6f172e071d0e25cd03085c606fe88e1d199fae6faa5da4a8e', ruling: 'CHAIR-2026-11-23-03:55' },
+  // CHAIR-2026-11-23-N70 (PROSE-E, PROSE-6; the lines FINAL at 24d8edf83): GEN-13 NO-MARKET v10, cut by the site mount to
+  // "goes as far as neighbours can carry it", denied trade beyond the neighbours beside ECO-10 `POSTURE: established`;
+  // re-worded in place to the market institution's absence, on its own marks
+  { pool: 'DS-GEN-13 :: NO-MARKET', vid: 10, from: '6ab96482b14b28a785b1d4312217d49e7a889032f42073b271e7b58fb08cf9b4', to: '907d0e57ea8f24942d9816e9ba09d625c5f9d12f59558344409956224283b715', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 Internal Security: full legal chain v1 and v2 said every wrong is reliably dealt with,
+  // beside DS-DEF-3 Unsafe's crime outrunning the watch; re-worded in place to what the court does with the cases that reach it
+  { pool: 'DS-DEF-2 :: Internal Security: full legal chain (court AND prison)', vid: 1, from: '105c6bbe69c29bcfcf3b5a9bc53d499b0ffb3a87707bde88732c7be3d86ff88c', to: '1fbce63b9b973c060b7e4701cdd707ce579235121b2617b8fd2c29cd0346764e', ruling: 'CHAIR-2026-11-23-N70' },
+  { pool: 'DS-DEF-2 :: Internal Security: full legal chain (court AND prison)', vid: 2, from: 'ecc6aeaf24b17c74a5184d53935cdc392f15cf5cde9c6e772458bfd3ba6f0eb3', to: '11896bafb817bbc9425a423ad544850233a40ece1476a66973e146d7fc772468', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 CHAIN: food trades working v1 said the town "would not run short at once" beside
+  // DS-ECO-9 PRESSURED v1's shortfall every season (dz-city-50); re-worded in place
+  { pool: 'DS-DEF-2 :: CHAIN: food trades working', vid: 1, from: '6dc700253ac610253da5a3d683e6c8fd95439f542a6fcb9074dfc49e4bd1e839', to: 'a548e9235f68bc3ad800f5c77ceb4ffa080283322edba627695d7c80576a6cac', ruling: 'CHAIR-2026-11-23-N70' },
+  // CHAIR-2026-11-23-N70: DS-DEF-2 Economic Survival: CRITICAL v1 said the town "cannot fund a response to anything" beside
+  // DS-GEN-17 GARRISONED v1's people under arms (dz-village-7); re-worded in place
+  { pool: 'DS-DEF-2 :: Economic Survival: CRITICAL', vid: 1, from: '241d7d7ffb3cdd7e9da1f23faf6f334094d789268e9da77cc056a7e77df95903', to: '35865f5965dd6be471f4d8172eb644b624b107c252094089643bea7322eaa192', ruling: 'CHAIR-2026-11-23-N70' },
 ]);
 
 async function readNumberingBaseline() {

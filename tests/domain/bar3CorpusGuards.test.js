@@ -80,7 +80,7 @@ const REWORDED = [
   { batch: 1, pool: 'DS-ECO-8::MODERATE', vid: 2, gone: /^Things are fine/, now: /^Money at \{settlement\} is neither comfortable nor tight/, rows: 'C25445: a Dangerous, tense thorp (the rung is the purse\'s, not the town\'s)' },
   { batch: 1, pool: 'DS-ECO-12::INCOME WEIGHT: the practice of magic', vid: 2, gone: /biggest buyers and employers/, now: /^Magic is reckoned with in/, rows: 'C0943\'s class' },
   // BAR3-CORPUS-2 · C6: the money line speaks of money only (the Defense tab's finding law reads "nothing put by" as an empty store)
-  { batch: 2, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 1, gone: /nothing put by/, now: /no money is laid by to pay for a long one/, rows: 'C6: defenseWordsFindings\' term "no food stored"' },
+  { batch: 2, pool: 'DS-DEF-2::Economic Survival: WEAK', vid: 1, gone: /nothing put by/, now: /nothing laid by to pay for a long defence/, rows: 'C6: defenseWordsFindings\' term "no food stored" · re-pinned to v1 as re-worded (DISAGREE, CHAIR-2026-11-23-03:55)' },
   // BAR3-CORPUS-2 · the predecessor's left items: each line claims what its pool's key bears, never a figure another record denies
   { batch: 2, pool: 'DS-DEF-9::magicDependency true, with a NAMED dependent chain', vid: 1, gone: /part of the shortfall is made up/, now: /the trade that makes it now leans on help beyond ordinary work/, rows: 'C23179 C31319: the chain leans on magic, the food record\'s magic share is 0' },
   { batch: 2, pool: 'DS-DEF-9::magicDependency true, with a NAMED dependent chain', vid: 2, gone: /would fall further short than it already does/, now: /would yield less than it does now/, rows: 'C23179\'s class: imports close the gap' },

@@ -42,6 +42,14 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
 import { rollsRegisterVii } from './density/densityLaw.js';
 import { resolveSibling } from './facts/drawDeclared.js';
+import { alternateFormOf, contestKindOf, pairLicense, preferredFormOf } from './seat/seatTable.js';
+// THE SEAT LAW'S ONE READER (SEAT-1 train 1, U1): an import-free leaf, so it carries nothing behind it into first paint.
+// ⛔ NEVER `seat/seatCircumstances.js` or `seat/holderOfSeat.js` from here: both are pinned LAZY
+// (`vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`) and both import this module; a licence's circumstance is HANDED IN.
+import { seatsByHolder } from './seat/seatLaw.js';
+// The old table's name, kept for its readers (the titles lane's test, U2-CURE2): the one table's
+// derived view, re-exported, never declared here.
+export { TRANSFER_FORMS_VIEW as GOVERNMENT_PREFERENCES } from './seat/seatTable.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -135,57 +143,10 @@ export function nameOf(faction) {
 
 // ── Government-type preferences ────────────────────────────────────────────
 // Each authoritative power reshapes the governing body to its preferred
-// government type. Labels reuse the power generator's existing vocabulary
-// wherever one exists (Town Council / Military Council / Theocratic Council /
-// Merchant oligarchy / Royal Authority / ...), tier-banded the same way the
-// generator bands its councils (Town... / City... / Grand...).
-
-const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
-const LARGE_TIERS = new Set(['city', 'metropolis']);
-
-/**
- * @param {string | null | undefined} tier
- * @returns {'small' | 'town' | 'large'}
- */
-function tierBand(tier) {
-  const t = String(tier || '').toLowerCase();
-  if (SMALL_TIERS.has(t)) return 'small';
-  if (LARGE_TIERS.has(t)) return 'large';
-  return 'town';
-}
-
-/** @type {Readonly<Record<string, {small: string, town: string, large: string}>>} */
-export const GOVERNMENT_PREFERENCES = Object.freeze({
-  [A.MILITARY]:   { small: 'Militia Command',        town: 'Military Council',       large: 'Grand Military Council' },
-  [A.RELIGIOUS]:  { small: 'Church Council',         town: 'Theocratic Council',     large: 'High Theocratic Council' },
-  [A.MERCHANT]:   { small: 'Merchant Council',       town: 'Merchant City Council',  large: 'Grand Merchant Senate' },
-  [A.NOBLE]:      { small: 'Feudal Stewardship',     town: 'Ducal Governorship',     large: 'Royal Authority' },
-  [A.ARCANE]:     { small: 'Circle of Adepts',       town: 'Arcane Council',         large: 'Grand Arcane Council' },
-  [A.CRAFT]:      { small: "Guildmasters' Moot",     town: 'Guildhall Council',      large: 'Grand Guild Assembly' },
-  [A.LABOR]:      { small: 'Commons Assembly',       town: "Workers' Assembly",      large: 'Grand Commons Assembly' },
-  [A.CIVIC]:      { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-  [A.GOVERNMENT]: { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-  [A.OUTSIDER]:   { small: 'Foreign Stewardship',    town: 'Foreign Administration', large: 'Foreign Administration' },
-  [A.OCCUPATION]: { small: 'Occupation Authority',   town: 'Occupation Authority',   large: 'Occupation Authority' },
-  // Criminal rule is never reached by the coup path (excluded from the
-  // field), but the DM can install it via CHANGE_RULING_POWER — the labels
-  // come from the generator's corrupt-government vocabulary.
-  [A.CRIMINAL]:   { small: 'Corrupt Council',        town: 'Corrupt City Council',   large: 'Shadow Senate' },
-  [A.OTHER]:      { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-});
-
-// Fallbacks when the preferred label collides with an existing faction name.
-/** @type {Readonly<Record<string, string>>} */
-const ALT_GOVERNMENT_LABELS = Object.freeze({
-  [A.MERCHANT]: 'Merchant oligarchy',
-  [A.NOBLE]:    'Noble Regency',
-  [A.MILITARY]: 'Garrison Command',
-  [A.RELIGIOUS]: 'Ecclesiastical Council',
-  // The conquest occupier's own NAME ('<power> occupation authority') CONTAINS the
-  // preferred label — the containment check below falls here so the crowned seat
-  // never reads like a duplicate of the power behind it.
-  [A.OCCUPATION]: 'Martial Administration',
-});
+// government type. The forms, their size bands and the alternates live in THE ONE
+// TABLE (`seat/seatTable.js :: SEAT_TABLE`, SEAT-1 train 1 U2): the first form of each
+// kind and band there is the label this module's own table held, byte for byte, and
+// this module reads it from there and from nowhere else.
 
 /** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_DESCS = Object.freeze({
@@ -213,8 +174,7 @@ const GOVERNMENT_DESCS = Object.freeze({
  * @returns {string}
  */
 export function governmentLabelFor(archetype, tier) {
-  const prefs = GOVERNMENT_PREFERENCES[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
-  return prefs[tierBand(tier)];
+  return preferredFormOf(archetype, tier);
 }
 
 /**
@@ -454,9 +414,26 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
   const takenBy = (/** @type {string} */ label) => outgoing === label.toLowerCase()
     || names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
   if (!takenBy(preferred)) return preferred;
-  const alt = ALT_GOVERNMENT_LABELS[archetype];
+  const alt = alternateFormOf(archetype);
   if (alt && !takenBy(alt)) return alt;
   return `${preferred} Ascendant`;
+}
+
+/**
+ * ⭐ THE KEPT-FORM RULE (SEAT-1 train 1, U5: CS7; SEAT-4's reading, not vetoed by the chair 13:00Z). Under the seat
+ * law, does the winner take the seat AS IT STANDS? `seat/seatTable.js :: pairLicense` of the winner's kind (its contest
+ * kind, `contestKindOf`) and the current form: `own` or `civic` keep it; `licensed` keeps it only where the licence's
+ * circumstance is among those the caller HANDS IN (a list, or a thunk of one: `seat/seatCircumstances.js ::
+ * seatCircumstancesOf`'s answer); absent, it reads NOT held (fail closed). `fallback` and `none` never keep it.
+ * @param {RulingFaction} winner @param {string} form
+ * @param {ReadonlyArray<string> | (() => ReadonlyArray<string>) | null | undefined} circumstances
+ * @returns {boolean}
+ */
+function keepsForm(winner, form, circumstances) {
+  const { pair, circumstance } = pairLicense(contestKindOf(winner), form);
+  if (pair === 'own' || pair === 'civic') return true;
+  const held = pair === 'licensed' && (typeof circumstances === 'function' ? circumstances() : circumstances);
+  return Array.isArray(held) && held.includes(circumstance);
 }
 
 /**
@@ -494,6 +471,28 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
  *   graph reaches this file). The new government's desc and the cause's stability line resolve
  *   through `resolveSibling(…, RULING_POWER_SIBLINGS, …)`; both sets carry no twin, so a refused
  *   text keeps its words and an unanswered record is unchanged (resolveSibling's rule).
+ * @param {ReadonlyArray<string> | (() => ReadonlyArray<string>) | null} [opts.seatCircumstances] SEAT-1 train 1, U5: the
+ *   circumstances the town's record holds (`seat/seatCircumstances.js :: seatCircumstancesOf`), a list or a thunk of
+ *   one, read only under the seat law and only for a `licensed` pair (`keepsForm`). Absent: a licence reads NOT held.
+ *
+ * ⭐⭐ UNDER THE SEAT LAW (`seat/seatLaw.js :: seatsByHolder`, read off the world's own config; SEAT-1 train 1, U5: CS7).
+ * The winner becomes the seat's HOLDER, which `seat/holderOfSeat.js :: holderOf` reads by R1 off the one edge written
+ * below. Where the table lets the winner's kind hold the current form (`keepsForm`), the FORM IS KEPT: the governing
+ * row keeps its name, its category and its desc, `previousGovernments` gains no row, and no house row is appended under
+ * a demotion (the body was not reshaped, so nothing a demotion preserves was lost, and a second row of the form's name
+ * would be two rows of one name); `recentConflict` says the seat changed hands without a reshaping, naming the taker and
+ * the form. Elsewhere the form becomes the winner's own, exactly today's path. On both paths every edge on the seat whose
+ * narrative is the "power behind" sentence for ANOTHER power is RETIRED to a competitive edge naming both powers (the
+ * old holder lost the seat), so R1 reads one taker. No key is added; no edge is deleted or added beyond today's.
+ * ⭐ U5-STALE (the chair's E77): on the KEPT form, and there alone, the OLD HOUSE's person loses the office HAT. The hat
+ * is the form's rank-1 membership and the office word on the wearer's `role`; the old house's person is a wearer who is
+ * also the first (rank 1) of a third house, neither the form nor the winner (the dual hat of the house that held the
+ * seat). That card loses the hat (the membership goes; the role becomes the card's house title); the winner's first (its
+ * rank-1 card, not ousted) takes it (that membership, and the office word where the old role carried one). So the seat's
+ * candidates (`dossier/seatHolder.js`), the chain, the seat-house face and the card's two hats all read the holder's
+ * person. A winner with no first leaves the hat unworn: the seat then reads unfilled. A wearer who is no other house's
+ * first is the OFFICE's own person (a crown's sovereign, a council's own Mayor) and keeps it, so a crown never passes to
+ * the taker's keeper (CS22 (c)). No other card field moves (power, influence, the prose). Absent or old law: byte-identical.
  * @returns {{ settlement: Object, transfer: Object|null, error: string|null }}
  */
 export function transferRulingPower(settlement, newPowerName, opts = {}) {
@@ -519,8 +518,11 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
 
   const archetype = factionArchetype(winner);
   const fromGovernment = nameOf(governing);
-  const demoted = demotesIncumbent(settlement, cause, opts.demoteIncumbent) && !!fromGovernment;
-  const toGovernment = resolveGovernmentLabel(archetype, settlement.tier, factions, governing, demoted);
+  // The seat law (U5). Old law: `kept` false and `law` false at every read below, so the function is today's.
+  const law = seatsByHolder(settlement);
+  const kept = law && keepsForm(winner, fromGovernment, opts.seatCircumstances);
+  const demoted = !kept && demotesIncumbent(settlement, cause, opts.demoteIncumbent) && !!fromGovernment;
+  const toGovernment = kept ? fromGovernment : resolveGovernmentLabel(archetype, settlement.tier, factions, governing, demoted);
   // A1.12 PART 2 — THE SEAT IS RETYPED, NOT MERELY RENAMED. A DECLARED FUTURE-TICK
   // SHIFT (owner-visible, vetoable), and it is a REPAIR of a reshape that was already
   // three-quarters done: the two lines below already stamp the winner's archetype onto
@@ -543,10 +545,13 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     if (f === governing) {
       return {
         ...f,
-        faction: toGovernment,
-        ...(f.name != null ? { name: toGovernment } : {}),
-        ...(seatCategory ? { category: seatCategory } : {}),
-        desc: resolveSibling(GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER], RULING_POWER_SIBLINGS, { facts: opts.facts ?? null, poolId: 'rulingPower:GOVERNMENT_DESCS', surface: 'power', drawKind: 'T' }), // CENSUS-1f (row 116): the door is `opts.facts`
+        // the kept form (U5): the body keeps its name, category and desc; only its standing below is reset
+        ...(kept ? {} : {
+          faction: toGovernment,
+          ...(f.name != null ? { name: toGovernment } : {}),
+          ...(seatCategory ? { category: seatCategory } : {}),
+          desc: resolveSibling(GOVERNMENT_DESCS[archetype] || GOVERNMENT_DESCS[A.OTHER], RULING_POWER_SIBLINGS, { facts: opts.facts ?? null, poolId: 'rulingPower:GOVERNMENT_DESCS', surface: 'power', drawKind: 'T' }), // CENSUS-1f (row 116): the door is `opts.facts`
+        }),
         isGoverning: true,
         modifiers: [...(f.modifiers || []), cause === 'coup' ? 'seized_power' : cause],
         legitimacyCrisis: false,
@@ -615,6 +620,16 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
       pairedWithWinner = true;
       return { ...next, type: 'symbiotic', direction: 'stable', narrative: symbioticNarrative };
     }
+    // ⭐ THE RETIRED EDGE (U5, the seat law only): an edge on the seat (read on its pair as the transfer found it) whose
+    // narrative is the "power behind" sentence for another power is that power's hold on the seat, now lost. It turns
+    // competitive and says so, naming both powers, so it never answers R1 again (`holderOfSeat.js :: transferTakerOf`).
+    // Its ONE fixed wording is `holderOfSeat.js :: TRANSFER_WORDINGS`' `'retiredEdge'` row, never an `'edge'` one (the chair's
+    // cure (1), 16:43Z): R1 must neither read the loser as a taker nor fall to Addendum 3's "nobody" on it.
+    const other = law && rel.pair.includes(fromGovernment) && rel.pair.find(n => n !== fromGovernment);
+    const said = String(rel.narrative);
+    if (other && other !== winnerName && said.startsWith(`${other} is the power behind the `) && said.endsWith('. The seat answers to them now.')) {
+      return { ...next, type: 'competitive', narrative: `${other} held the ${fromGovernment.toLowerCase()} until ${winnerName} took it.` };
+    }
     return next;
   });
   /** @type {FactionRelationshipEdge[]} */
@@ -662,15 +677,33 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     legitimacyAfter: { score: publicLegitimacy.score, label: publicLegitimacy.label },
   };
 
+  // U5-STALE: the kept form's hat moves off the old house's person to the winner's first (see the header)
+  /** @typedef {{ power?: unknown, rank?: unknown }} HatRow */
+  /** @typedef {{ memberships?: HatRow[], role?: unknown, title?: unknown, ousted?: unknown }} HatCard */
+  const raw = /** @type {{ npcs?: unknown }} */ (settlement).npcs;
+  const cards = kept && Array.isArray(raw) ? /** @type {HatCard[]} */ (raw) : null;
+  /** @param {HatCard} n @param {string} p */
+  const first = (n, p) => (n.memberships || []).some(m => m?.rank === 1 && m.power === p);
+  const heir = cards ? cards.find(n => !!n && first(n, winnerName) && !n.ousted) || null : null;
+  const worn = cards ? cards.filter(n => !!n && n !== heir && first(n, fromGovernment)
+    && (n.memberships || []).some(m => m?.rank === 1 && m.power !== fromGovernment && m.power !== winnerName)) : [];
+  const hat = worn.length ? (worn[0].memberships || []).find(m => m?.rank === 1 && m.power === fromGovernment) : null;
+  const office = worn.length && worn[0].title && worn[0].role !== worn[0].title ? worn[0].role : null;
+  const npcs = cards && hat ? cards.map(n => (worn.includes(n)
+    ? { ...n, ...(n.title ? { role: n.title } : {}), memberships: (n.memberships || []).filter(m => m?.power !== fromGovernment) }
+    : n === heir && !first(n, fromGovernment) ? { ...n, ...(office ? { role: office } : {}), memberships: [...(n.memberships || []), { ...hat }] } : n)) : null;
+
   return {
     settlement: {
       ...settlement,
+      ...(npcs ? { npcs } : {}),
       powerStructure: {
         ...ps,
         factions: rosterFactions,
         governingName: toGovernment,
         government: toGovernment,
-        previousGovernments,
+        // the kept form (U5): nothing was renamed, so no government is "previous" (the record's own rows stay as they were)
+        ...(kept ? {} : { previousGovernments }),
         publicLegitimacy,
         factionRelationships: [...renamedRelationships, ...extraRelationships],
         stability: resolveSibling(STABILITY_BY_CAUSE[cause], RULING_POWER_SIBLINGS, { facts: opts.facts ?? null, poolId: 'rulingPower:STABILITY_BY_CAUSE', surface: 'power', drawKind: 'T' }), // CENSUS-1f (row 116)
@@ -683,7 +716,13 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
         // and this module sits in the first-paint static closure — a named formatter plus
         // its argument object measured 100 bytes over the owner-ratified closure budget
         // on the real dist. The bytes are the constraint here, not the taste.
-        recentConflict: cause === 'coup'
+        // ⭐ THE KEPT FORM'S LINE (U5, the chair's condition 2): the seat changed hands WITHOUT a reshaping, so it names the
+        // taker and the form and never says "reshaped". Each wording is a row of `holderOfSeat.js :: TRANSFER_WORDINGS`.
+        recentConflict: kept
+          ? (cause === 'coup'
+            ? `${winnerName} seized the ${fromGovernment.toLowerCase()} and left the government as it stood.`
+            : `Power passed to ${winnerName} by ${cause}; the ${fromGovernment.toLowerCase()} stands as it was.`)
+          : cause === 'coup'
           ? `${nameOf(winner)} overthrew the ${fromGovernment.toLowerCase()} and reshaped the government as a ${toGovernment.toLowerCase()}.`
           : `Power passed to ${nameOf(winner)} by ${cause}; the government now sits as a ${toGovernment.toLowerCase()}${
             demoted ? `, and the ${fromGovernment.toLowerCase()} keep their place among the powers` : ''}.`,

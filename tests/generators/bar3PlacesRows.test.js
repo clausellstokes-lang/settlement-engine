@@ -24,6 +24,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
+import { troubleHookPool } from '../../src/generators/history/troubleHooksOf.js'; // HOOKS-CURES A: the kind's pool, composed at its call site
 import { ARRIVAL_PEOPLE, ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
 
@@ -94,7 +95,11 @@ describe('BAR3-PLACES: the rows read the town', () => {
     // declared cure withdraws (7a4b48a84, BAR3-DEFECON-HANDBACK `flags.theocraticEconomy`: its tithes row, 12%, is not
     // the income record's largest); r2r-town-54 (a Strong Feudal Appointee beside Strong Religious Authorities) is the
     // one town of the census's 720 that still prints the note (BAR3-DEFECON-2-HANDBACK: 16 -> 1)
-    ['C18651 no power over the seat', 'r2r-town-54', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-town-54's theocratic flag lit falls (its faith at Significant), and
+    // no r2r town of any size (0..199) nor r2s town, city or metropolis (0..11) prints the note lit (its four flagged towns are
+    // governed by a Church Council); the lowest of the file's read families that prints it is bar0-town-calm-rand-103 (a Feudal
+    // Appointee beside the flagged economy; of every bar0 shape's 0..199)
+    ['C18651 no power over the seat', 'bar0-town-calm-rand-103', /holds more practical power than whoever holds the official seat/, /has a say the official seat must reckon with/],
     ['C5938 no grain by a covert route under a siege', 'bar0-city-under_siege+famine-rand-8', /through a covert route/, /before the siege closed the roads, and is selling it at triple the official price after dark/],
     ['C8742 the sovereign city: no crown officer', 'bar0-city-wartime-rand-7', /A crown officer has arrived/, /An army requisition officer has arrived with orders/],
     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
@@ -163,7 +168,9 @@ describe('BAR3-PLACES-2: the routed rows read the town', () => {
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C6485 the profiteer under the war (the read town)', 'bar0-city-wartime-rand-6', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): bar0-city-wartime-rand-6 (the read town) lit casts no profiteer; the lowest bar0-city-wartime-rand whose
+    // profiteer slot is empty is rand-3 (3 9 16 19 36 42 of 200)
+    ['C6485 the profiteer under the war (re-picked from the read town)', 'bar0-city-wartime-rand-3', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 the profiteer under the war (a thorp)', 'r2r-thorp-11', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 the profiteer beside a power the contracts made rich', 'r2s-wartime-metropolis-0', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
     ['C6485 class: the profiteer under a debt', 'r2s-indebted-city-2', /"role":"profiteer","reason":"no power gains"/, /"role":"profiteer","reason":"no one is named for it"/],
@@ -255,13 +262,14 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   const GUILD_HOOKS = 'historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict';
+  const GUILD_POOL = 'troubleHooks:TROUBLE_HOOKS:guild_conflict'; // HOOKS-BUILD (2026-11-20): the live quarrel's hooks are its kind's pool
   /** The birth's own ledger and its self-check's findings on the final record, for the guild war's hooks. @param {string} seed */
   const guildHookCheck = (seed) => {
     /** @type {any[]} */
     const ledger = [];
     const { result } = withPresumptionLedger(() => generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }), ledger);
-    const mine = ledger.filter((e) => e.pool === GUILD_HOOKS);
-    return { text: JSON.stringify(result), noted: mine, findings: presumptionFindings(result, mine) };
+    const mine = ledger.filter((e) => e.pool === GUILD_HOOKS || e.pool === GUILD_POOL);
+    return { record: result, text: JSON.stringify(result), noted: mine, findings: presumptionFindings(result, mine) };
   };
 
   /** [row, seed, must not print, what prints instead] */
@@ -294,10 +302,16 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
     }), 'the true siblings still print');
   });
 
-  it("C13868 KEEP: where two guilds stand the sabotage hook (the live quarrel's copy) still prints, and its guild holds", () => {
-    const { text, noted, findings } = guildHookCheck('r2r-town-0');
-    expect(text, "the live quarrel's copy prints").toMatch(/Someone is sabotaging both sides to destabilize the market for a third party/);
-    expect(noted.some((e) => (e.atoms || []).includes('guild')), 'the hook was drawn through the ledger with its guild').toBe(true);
+  // HOOKS-BUILD (PAGE-7, 2026-11-20): the live quarrel's hook copy went; its three hooks are the kind's pool's, and the
+  // sabotage line stands in that pool with its guild declared. Red at the pool's landing as written before (the copy no
+  // longer prints at r2r-town-0, by the pool's rank); the arm now reads the pool.
+  it("C13868 KEEP: where two guilds stand the live quarrel's hooks are its pool's, drawn through the ledger, the sabotage line declares its guild, and every guild atom holds", () => {
+    const { record, noted, findings } = guildHookCheck('r2r-town-0');
+    const hooks = record.history?.currentTensions?.find((t) => t.type === 'guild_conflict')?.plotHooks || [];
+    expect(hooks.length, "the live quarrel's three hooks").toBe(3);
+    expect(hooks.filter((h) => !(troubleHookPool('guild_conflict') ?? []).some((r) => r.text === h)), 'each a line of the pool').toEqual([]);
+    expect(noted.filter((e) => e.pool === GUILD_POOL).length, 'each drawn through the ledger').toBe(3);
+    expect((troubleHookPool('guild_conflict') ?? []).find((r) => r.text.startsWith('Someone is sabotaging both sides'))?.needs, 'the sabotage line declares its guild').toContain('guild');
     expect(findings.filter((f) => f.atom === 'guild'), 'every guild atom holds on the final record').toEqual([]);
   });
 });

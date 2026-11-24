@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
+import React, { useMemo } from 'react';
+import { FS, swatch, EMPTY_VALUE } from '../../theme.js';
 
 import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import {extractSettlementContext, dailyLifeOfferLine} from '../dailyLifeLogic';
-import { textOf } from '../../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared row gives back its text until its site is wired
+import { extractSettlementContext } from '../dailyLifeLogic';
+import { deriveDailyLife, DAILY_LIFE_EMPTY_SLOT_TEXT, DAILY_LIFE_PAGE_SLOTS } from '../../../domain/dailyLife.js';
 import { useStore } from '../../../store/index.js';
-import { isConfigured } from '../../../lib/supabase.js';
-import Button from '../../primitives/Button.jsx';
-import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 import { economyDeskRead } from '../economyDeskRead.js';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
 import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the food label's one home (ROUND THREE item 2b)
 
-const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
+const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'],
       BORDER = swatch['#E0D0B0'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
+
+/** The dossier's owner-only box, as `tabs/WhoRunsThisTownPanel.jsx :: box` draws it (its stacking rule aside: here it
+ * sits inside the page's box, between its lines). */
+const DM_BOX = Object.freeze({ background: swatch['#FAF8F4'], border: '1px solid #d8c090', borderLeft: '4px solid #4a1a4a', padding: '10px 14px' });
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
@@ -51,27 +51,57 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRequestDailyLife = null, publicDossier = false, playerView = false }) {
-  const [narrative, setNarrative]   = useState(null);
-  const [localLoading, setLocalLoading] = useState(false);
-  const [localError, setLocalError]     = useState(null);
-  const [loadMsg, setLoadMsg]       = useState('');
-  const mobile = useIsMobile();
+/**
+ * DAILY-PAGE-1 (the owner's order of 2026-11-22: "remove the button prompt for Daily life and simply generate it
+ * automatically"): the Daily Life lines the domain derives, in the order the page prints them. DAILY-4 unit P (the
+ * chair's E110): all eight public slots, in the chair's order, which lives in its one home.
+ */
+const ENGINE_SLOTS = DAILY_LIFE_PAGE_SLOTS; // the one home of the order (domain/dailyLife.js), read by the PDF's chapter too
 
-  const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useLiveAiCostResolver();
+/** The public slot the owner-only line follows, and that line's key (`domain/dailyLife.js :: OWNER_ONLY_DAILY_LIFE_SLOT`). */
+const RESENTMENT_SLOT = 'commoner_resentments';
+const OWNER_ONLY_SLOT = 'commoner_resentments_dm';
+
+/** @param {unknown} text @returns {string} a slot's sentence, '' where it is empty or the empty marker */
+const printable = (text) => {
+  const sentence = typeof text === 'string' ? text.trim() : '';
+  return sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT ? sentence : '';
+};
+
+export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = false, playerView = false }) {
+  const mobile = useIsMobile();
   const aiDailyLife = useStore(s => s.aiDailyLife);
-  const storeAiLoading = useStore(s => s.aiLoading);
-  const storeAiRegenerating = useStore(s => s.aiRegenerating);
-  const storeAiError = useStore(s => s.aiError);
-  const storeAiProgress = useStore(s => s.aiProgress);
-  const _creditBalance = useStore(s => s.creditBalance);
+  // THE OWNER'S OWN READ (never `publicDossier`, never `playerView`): the one read that carries the owner-only line.
+  const ownerRead = !publicDossier && !playerView;
+  // The page's slots, derived once from the settlement THIS PAGE IS HANDED (a shared read is handed the shared
+  // document), once per render pass. A slot whose text is empty or "—" prints nothing. On the owner's read alone the
+  // derivation is asked for the owner's audience (`deriveDailyLife(r, { audience: 'owner' })`, the module's one door to
+  // `commoner_resentments_dm`); its line follows the public resentment's place, marked as the owner's.
+  const engineLines = useMemo(() => {
+    /** @type {Array<{ key: string, sentence: string, ownerOnly: boolean }>} */ const out = [];
+    if (!r) return out;
+    const { slots } = deriveDailyLife(r, ownerRead ? { audience: 'owner' } : null);
+    for (const key of ENGINE_SLOTS) {
+      const sentence = printable(slots[key]?.text);
+      if (sentence) out.push({ key, sentence, ownerOnly: false });
+      if (ownerRead && key === RESENTMENT_SLOT) {
+        const ownerLine = printable(slots[OWNER_ONLY_SLOT]?.text);
+        if (ownerLine) out.push({ key: OWNER_ONLY_SLOT, sentence: ownerLine, ownerOnly: true });
+      }
+    }
+    return out;
+  }, [r, ownerRead]);
 
   if (!r) return null;
 
-  // AI-1: Daily-life generation is gated on a saved settlement (same rule
-  // as the narrative layer). Local-dev mock remains ungated.
-  const dailyLifeEnabled = isConfigured ? !!saveId : true;
+  // Each line's type: the narrative's, held to the phone prose floor (one style for every line of the box).
+  const lineStyle = {
+    fontSize: proseFontSize(FS['13.5'], mobile),
+    lineHeight: 1.75,
+    color: INK,
+    margin: 0,
+    fontFamily: `Georgia, 'Times New Roman', serif`,
+  };
 
   // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #848: the tile read "Surplus" beside a record that
   // reads secure): whether the place has food to spare is the food record's band
@@ -82,49 +112,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   // OWN — speaks HERE, and this is the only page-set position where it does.
   const deskProse = economyDeskRead(r, { publicDossier, playerView, publicSite: 'economy:daily_life', tier: r?.tier });
 
-  const loading = isConfigured ? storeAiLoading : localLoading;
-  const regenerating = isConfigured ? storeAiRegenerating : false;
-  const error = isConfigured ? storeAiError : localError;
-
-  // CENSUS-2e unit 2 (ledger DAILY_LIFE_TAB.json, pool LOAD_MSGS; kind R, carried through textOf).
-  const LOAD_MSGS = [
-    'Walking the streets…',
-    { text: 'Listening at the alehouse…', needs: ['institution: tavern'] },
-    { text: 'Watching the market open…', needs: ['market'] },
-    'Asking the locals…',
-    'Reading the mood…',
-  ];
-
-  async function generate() {
-    if (isConfigured) {
-      if (onRequestDailyLife) await onRequestDailyLife();
-      else await requestDailyLife(saveId);
-      return;
-    }
-
-    // Local mode: deterministic offline prose (no credits, no browser API key).
-    setLocalLoading(true);
-    setLocalError(null);
-    setNarrative(null);
-    // Math.random() picks a loading message. The whole function is a
-    // button-click handler — never runs during render — so the purity
-    // rule is over-broad here.
-    // eslint-disable-next-line react-hooks/purity
-    setLoadMsg(textOf(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]));
-
-    try {
-      await new Promise(resolve => setTimeout(resolve, 250));
-      setNarrative(buildLocalDailyLifeNarrative(ctx));
-    } catch (e) {
-      setLocalError(e.message);
-    } finally {
-      setLocalLoading(false);
-    }
-  }
-
-  // Merge store daily life with local narrative
-  const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
-  const hasContent = !!displayNarrative;
+  // A daily-life account already saved on the settlement still prints, read-only (nothing a user paid for disappears).
+  const savedAccount = aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null;
 
   // ROUND THREE item 2b (the cut's #843 #1102 #1297: "Strained" under an active famine, "Tightening" beside "Secure"):
   // the tile prints the food label's ONE home (tonightSheet.js :: foodBandOf), the word the Tonight sheet and the Crisis
@@ -141,23 +130,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     ctx.foodDeficit > 20 ? '#8b1a1a' :
     ctx.foodDeficit > 10 ? '#8a4010' :
     ctx.foodDeficit > 0  ? '#a0762a' : '#1a5a28';
-
-  // Button label logic — first-time generate vs regenerate. Both spend credits;
-  // we name the action plainly so users know.
-  const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return 'Save settlement to enable Daily Life narrative';
-    if (loading) {
-      return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
-    }
-    if (hasContent) {
-      return isConfigured
-        ? `↺ Regenerate Daily Life (${getCost('dailyLife')} credits)`
-        : '↺ Regenerate Daily Life: Narrative refinement';
-    }
-    return isConfigured
-      ? `Generate Daily Life (${getCost('dailyLife')} credits)`
-      : 'Generate Daily Life: Narrative refinement';
-  })();
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
@@ -196,88 +168,55 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           the ladder block may join in its own pool, drawn at the same position under the rung. */}
       <DeskLines mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.foodOnProsperity]} />
 
-      {/* ── ONE LINE AND THE BUTTON (chair ruling D3 + D6, 2026-10-30) ──────────
-          The unsaved hint and the empty state were one pitch told twice; they are one plain
-          line now, shown until there is prose, with the button beneath it once the
-          settlement is saved. */}
-      {/* ⭐ #37 (STYLE-RULINGS §1, W4 PEOPLE 2026-11-07): THE CAPTION LEAVES THE BODY. Where the
-          button stands, the offer line is the BUTTON'S caption (its title, the words a reader
-          meets on the control), never a paragraph of the dossier: it printed as body text in
-          500 of 1,000 towns. Where no button stands (an unsaved settlement), the line is the
-          instruction that says how to get one, and it stays. The heading and the lines stay. */}
-      {!hasContent && !loading && !dailyLifeEnabled && (
-        <p data-testid="daily-life-offer" style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.sm, mobile), color: SECOND, lineHeight: 1.5 }}>
-          {/* CENSUS-2 (R10): names only the market, tavern and watch the place has */}
-          {dailyLifeOfferLine(r, dailyLifeEnabled)}
-        </p>
-      )}
-      {dailyLifeEnabled && (
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onClick={generate}
-          busy={loading}
-          data-testid={!hasContent && !loading ? 'daily-life-offer' : undefined}
-          data-caption={!hasContent && !loading ? dailyLifeOfferLine(r, dailyLifeEnabled) : undefined}
-          title={hasContent
-            ? `Regenerate replaces the current daily-life prose with a fresh narrative pass against the simulator output. Spends ${getCost('dailyLife')} credits.`
-            : `${dailyLifeOfferLine(r, dailyLifeEnabled)} Refine the simulator output into daily-life prose for this settlement. Spends ${getCost('dailyLife')} credits.`}
-          style={{ marginBottom: 16 }}
-        >
-          {buttonLabel}
-        </Button>
-      )}
-
-      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-
-      {/* ── ERROR ─────────────────────────────────────────────────────────── */}
-      {error && (
-        <div style={{
-          background: swatch['#FAF8F4'], border: '1px solid #e8c0c0',
-          padding: '12px 14px', marginBottom: 14,
-          fontSize: chromeFontSize(FS['11.5'], mobile), color: swatch.danger,
+      {/* ── THE PAGE'S OWN LINES (DAILY-PAGE-1, the owner's order of 2026-11-22; DAILY-4 unit P, E110) ──
+          Where the button stood: the eight public slots in the chair's order. No heading and no label
+          (each sentence names its own subject); where every line is empty the box is absent. Each
+          public line is a `p` of the box. THE OWNER-ONLY LINE, on the owner's read alone, stands
+          right after the public resentment's place in the dossier's owner-only mark, the box and the
+          muted line of `tabs/WhoRunsThisTownPanel.jsx` (`data-layer="dm"`, "For the DM only."): a
+          `div`, so the box's `p` lines stay the public lines the PDF chapter prints. */}
+      {engineLines.length > 0 && (
+        <div data-testid="daily-life-engine" style={{
+          background: PARCH,
+          border: `1px solid ${BORDER}`,
+          padding: mobile ? '16px 14px' : '20px 22px',
+          marginBottom: 16,
         }}>
-          <strong>Error:</strong> {error}
+          {engineLines.map((line, i, arr) => {
+            const marginBottom = i < arr.length - 1 ? 16 : 0;
+            return line.ownerOnly ? (
+              <div key={line.key} data-testid="daily-life-owner-only" data-layer="dm" style={{ ...DM_BOX, marginBottom }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 4 }}>For the DM only. Nothing here appears on a player view or a shared page.</div>
+                <div style={lineStyle}>{line.sentence}</div>
+              </div>
+            ) : (
+              <p key={line.key} style={{ ...lineStyle, marginBottom }}>
+                {line.sentence}
+              </p>
+            );
+          })}
         </div>
       )}
 
-      {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
-      {hasContent && (
-        <div style={{ position: 'relative' }}>
-          {/* Regenerate overlay — floating chip so the user sees "a new version is brewing" */}
-          {regenerating && (
-            <div style={{
-              position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
-              zIndex: 20, background: INK, color: CARD,
-              padding: '8px 16px', border: '1px solid #c4803c',
-              fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, fontFamily: sans,
-              display: 'flex', alignItems: 'center', gap: 8,
+      {/* ── THE SAVED ACCOUNT (read-only) ─────────────────────────────────── */}
+      {savedAccount && (
+        <div style={{
+          background: PARCH,
+          border: `1px solid ${BORDER}`,
+          padding: mobile ? '16px 14px' : '20px 22px',
+        }}>
+          {savedAccount.split(/\n\n+/).map((para, i, arr) => (
+            <p key={i} style={{
+              fontSize: FS['13.5'],
+              lineHeight: 1.75,
+              color: INK,
+              margin: 0,
+              marginBottom: i < arr.length - 1 ? 16 : 0,
+              fontFamily: `Georgia, 'Times New Roman', serif`,
             }}>
-              <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
-              {storeAiProgress || 'Regenerating…'}
-            </div>
-          )}
-          <div style={{
-            background: PARCH,
-            border: `1px solid ${BORDER}`,
-            padding: mobile ? '16px 14px' : '20px 22px',
-            opacity: regenerating ? 0.55 : 1,
-            transition: 'opacity 0.2s',
-          }}>
-            {displayNarrative.split(/\n\n+/).map((para, i, arr) => (
-              <p key={i} style={{
-                fontSize: FS['13.5'],
-                lineHeight: 1.75,
-                color: INK,
-                margin: 0,
-                marginBottom: i < arr.length - 1 ? 16 : 0,
-                fontFamily: `Georgia, 'Times New Roman', serif`,
-              }}>
-                {para.trim()}
-              </p>
-            ))}
-          </div>
+              {para.trim()}
+            </p>
+          ))}
         </div>
       )}
 
@@ -293,36 +232,6 @@ function formatDailyLifeResult(result) {
   return parts.join('\n\n');
 }
 
-function humanize(value) {
-  if (!value) return '';
-  return String(value)
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, ch => ch.toUpperCase());
-}
-
-function listText(items, fallback) {
-  const clean = (items || []).filter(Boolean);
-  if (!clean.length) return fallback;
-  if (clean.length === 1) return clean[0];
-  return `${clean.slice(0, -1).join(', ')} and ${clean.at(-1)}`;
-}
-
-/**
- * THE LOCAL NARRATIVE'S CELLS (CENSUS-2e unit 2; ledger docs/census/declarations/DAILY_LIFE_TAB.json,
- * the localNarrative pools). Inline T branches, carried through `textOf` (R-C) until the site is
- * wired: each cell declares what its text presumes. The food, order, stress and paragraph pools are
- * the ledger's `{crisis-scoped}` pools (flagged in DAILY_LIFE_LOCAL_CRISIS_SCOPED; a scoped pool's
- * calm line is silent, its crisis-sayable lines write `crisis: any`). The anchors fallback named a
- * market and a watch post, but it prints only when the place has NO institution in the eight listed
- * categories, so it was true of no place that reaches it: reworded to what it really presumes,
- * nothing (R-W). Paragraph [1]'s guards are the ledger's parked `guards` stop, now `guardPresence`
- * (its priests wait on a faith-presence atom: `priest` reads a senior cleric among the named people).
- * CENSUS-2g unit 3 (the chair's answer 3, block j): the priests declare `priest`, carried until the site
- * is wired; no reword.
- */
-// CENSUS-2f, R-AH: food, order and paragraphs write `crisis: any` on every line; only the stress pool holds a calm line.
-export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.stress']);
-
 /**
  * The context with `hasSurplus`: the food record's band where the record has one, else the context's
  * own percent over its old cut (a record written before the band).
@@ -331,41 +240,6 @@ export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.str
 function withRecordSurplus(ctx, r) {
   const band = r?.economicState?.foodSecurity?.foodRecord?.band;
   return { ...ctx, hasSurplus: typeof band === 'string' && band ? band === 'surplus' : ctx.foodSurplus > 10 };
-}
-
-function buildLocalDailyLifeNarrative(ctx) {
-  const terrain = humanize(ctx.terrain) || 'mixed terrain';
-  const trade = humanize(ctx.tradeRoute) || 'road access';
-  const culture = humanize(ctx.culture) || 'local custom';
-  const food = textOf(ctx.foodDeficit > 20
-    ? { text: 'bread is dear and the poorest households plan every meal carefully', crisis: ['any'] }
-    : ctx.foodDeficit > 0
-      ? { text: 'food is adequate for most families, though prices are watched closely', excludes: ['famine', 'crisis: famine'], crisis: ['any'] }
-      : ctx.hasSurplus
-        ? { text: 'granaries and kitchen gardens give the town a little breathing room', needs: ['institution: granary'], crisis: ['any'] }
-        : { text: 'the food supply is ordinary, practical, and never taken for granted', excludes: ['crisis: hunger'], crisis: ['any'] });
-
-  const order = textOf(ctx.safetyScore >= 70
-    ? { text: 'people move after dusk with confidence', excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] }
-    : ctx.safetyScore >= 45
-      ? { text: 'doors are barred early and strangers are studied before they are welcomed', crisis: ['any'] }
-      : { text: 'ordinary errands carry a careful awareness of who controls the street', crisis: ['any'] });
-
-  // §934.13 — these names land inside a SENTENCE the reader reads, so they take the seam
-  // like any other print. `keyInsts` holds raw catalogue keys (dailyLifeLogic pushes
-  // `i.name`), and nothing downstream matches on them.
-  const institutions = Object.values(ctx.keyInsts || {}).flat().map(institutionDisplayName).filter(Boolean).slice(0, 5);
-  const anchors = listText(institutions, 'the wells, the lanes, and the common ground');
-  const stress = ctx.stressTypes.length
-    ? `Most talk in the street comes back to the same trouble: ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
-    : 'No single trouble hangs over the place just now. People keep to their routines and work around the small ones.';
-
-  return [
-    `Morning starts around ${anchors}. ${terrain} and ${trade} set the pace: carts, tools and news move only as fast as the ground and the roads allow, and ${culture} shapes even the smallest bargain.`,
-    textOf({ text: `${food}. Everyone knows their work without being told. Farmers, haulers, priests, guards, and tradespeople know which shortages they can live with and which will start a quarrel before sundown.`, needs: ['guardPresence', 'priest'], crisis: ['any'] }),
-    `Orders come from ${ctx.govFaction || 'whoever can make them stick this week'}. ${ctx.stability < 45 ? "People weigh every promise, since yesterday's bargain may not hold tomorrow." : textOf({ text: 'Most residents know whom to petition, and how to do it without drawing notice.', excludes: ['crisis: succession'], crisis: ['any'] })} ${order}.`,
-    `${stress} By evening the lamps are lit, families eat together, debts are remembered, and news goes from door to door. People stay because leaving would cost them more.`,
-  ].join('\n\n');
 }
 
 export default React.memo(DailyLifeTab);

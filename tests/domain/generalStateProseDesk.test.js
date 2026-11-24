@@ -1861,7 +1861,7 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     expect(typeof withFlag[0].yearsAgo).toBe('number');
     // …and the desk really keys on it.
     expect(ancientRuinPoolKey(withFlag[0])).toBe('history.ancientRuin present');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 11.6 s lit in the final census at c1128c8f6; about 21.3 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('THE PROVENANCE FOLD IS TOTAL over the ledger\'s own closed four-word vocabulary', () => {
     // `satellitesLedger.js`'s SatelliteRecord typedef is the authority, and it is read from

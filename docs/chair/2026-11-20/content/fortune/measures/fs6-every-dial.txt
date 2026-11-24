@@ -1,0 +1,112 @@
+
+=============== BORN UNDER NO CRISIS ===============
+
+FORTUNE (economicState.prosperity, the printed label): before -> after, share of the size's towns in the arm
+size (n)                Struggling              Poor          Moderate       Comfortable        Prosperous           Wealthy
+thorp (62)                5% -> 5%        48% -> 26%        23% -> 16%        18% -> 27%         6% -> 26%          0% -> 0%
+hamlet (59)               5% -> 3%        47% -> 20%        31% -> 10%         8% -> 24%         7% -> 37%          2% -> 5%
+village (70)             19% -> 0%        37% -> 19%        27% -> 23%         7% -> 23%         6% -> 26%         4% -> 10%
+town (69)                 7% -> 0%        13% -> 22%        17% -> 22%        22% -> 14%        19% -> 22%        22% -> 20%
+city (63)                 0% -> 0%         0% -> 19%        10% -> 25%        22% -> 30%        54% -> 14%        14% -> 11%
+metropolis (73)           0% -> 0%         0% -> 18%         0% -> 21%        37% -> 29%        40% -> 21%        23% -> 12%
+
+STANDING (publicLegitimacy.label): before -> after, share of the size's towns in the arm
+size (n)         Legitimacy Crisis         Contested         Tolerated          Approved          Endorsed
+thorp (62)                6% -> 3%        39% -> 23%        48% -> 47%         5% -> 26%          2% -> 2%
+hamlet (59)               7% -> 2%        31% -> 19%        51% -> 22%         8% -> 49%          3% -> 8%
+village (70)             16% -> 0%        40% -> 14%        29% -> 41%        13% -> 34%         3% -> 10%
+town (69)                 7% -> 1%        10% -> 19%        33% -> 30%        20% -> 26%        29% -> 23%
+city (63)                 0% -> 0%         0% -> 14%         6% -> 48%        41% -> 22%        52% -> 16%
+metropolis (73)           0% -> 0%         0% -> 15%         1% -> 47%        37% -> 25%        62% -> 14%
+
+DEFENCE (defenseProfile.readiness.label): before -> after, share of the size's towns in the arm
+size (n)                Undefended        Vulnerable  Lightly Defended        Defensible     Well-Defended          Fortress
+thorp (62)                0% -> 0%        89% -> 89%        11% -> 11%          0% -> 0%          0% -> 0%          0% -> 0%
+hamlet (59)               2% -> 0%        93% -> 93%          5% -> 7%          0% -> 0%          0% -> 0%          0% -> 0%
+village (70)            14% -> 10%        76% -> 79%        10% -> 10%          0% -> 1%          0% -> 0%          0% -> 0%
+town (69)                 0% -> 0%          9% -> 7%        36% -> 38%        36% -> 38%        19% -> 17%          0% -> 0%
+city (63)                 0% -> 0%          0% -> 0%          0% -> 0%          3% -> 6%        37% -> 48%        60% -> 46%
+metropolis (73)           0% -> 0%          0% -> 0%          0% -> 0%          0% -> 1%        11% -> 25%        89% -> 74%
+
+STABILITY (powerStructure.stability, its first word): before -> after, share of the size's towns in the arm
+size (n)            Enforced Order           Fragile           Ordered            Stable             Tense          Unstable        Vulnerable
+thorp (62)                0% -> 0%          0% -> 0%          0% -> 0%        79% -> 82%        19% -> 16%          0% -> 0%          2% -> 2%
+hamlet (59)               0% -> 0%          0% -> 0%          0% -> 0%        71% -> 73%        20% -> 19%          3% -> 3%          5% -> 5%
+village (70)              0% -> 0%          0% -> 0%          0% -> 0%        63% -> 77%        27% -> 13%          0% -> 0%        10% -> 10%
+town (69)                 0% -> 0%          0% -> 0%        10% -> 10%        52% -> 54%        19% -> 17%        10% -> 10%          9% -> 9%
+city (63)                 0% -> 0%          3% -> 3%        22% -> 22%        57% -> 57%        10% -> 10%          8% -> 8%          0% -> 0%
+metropolis (73)           1% -> 1%          7% -> 7%        23% -> 23%        47% -> 47%        11% -> 11%        11% -> 11%          0% -> 0%
+
+CRIMINAL CAPTURE RUNG (powerStructure.criminalCaptureState): before -> after, share of the size's towns in the arm
+size (n)                      none       adversarial       equilibrium         corrupted
+thorp (62)            100% -> 100%          0% -> 0%          0% -> 0%          0% -> 0%
+hamlet (59)           100% -> 100%          0% -> 0%          0% -> 0%          0% -> 0%
+village (70)          100% -> 100%          0% -> 0%          0% -> 0%          0% -> 0%
+town (69)               71% -> 71%          6% -> 6%          9% -> 9%        14% -> 14%
+city (63)               81% -> 75%        11% -> 11%         5% -> 11%          3% -> 3%
+metropolis (73)         68% -> 60%        16% -> 16%         7% -> 14%         8% -> 10%
+
+WHAT OTHER LANES READ: standing below 45 (the session sheet's weight); the incumbent protected in a contest (rulingPowerCoup.js :: coupContenders().incumbent.gated); the score's mean
+thorp (62)       below 45: 45% -> 26% | protected: 100% -> 100% | score mean 46.6 -> 53.7 | prosperity term -3.4 -> 2.5 | defence term -1.0 -> 0.1 | safety 1.1 -> 1.1 | food -0.1 -> -0.1
+hamlet (59)      below 45: 37% -> 20% | protected: 100% -> 100% | score mean 47.7 -> 59.3 | prosperity term -3.7 -> 5.8 | defence term -2.0 -> 0.1 | safety 3.4 -> 3.4 | food 0.0 -> 0.0
+village (70)     below 45: 56% -> 14% | protected: 100% -> 100% | score mean 44.3 -> 58.7 | prosperity term -5.1 -> 5.8 | defence term -3.2 -> 0.3 | safety 2.7 -> 2.7 | food -0.1 -> -0.1
+town (69)        below 45: 17% -> 20% | protected: 100% -> 99% | score mean 61.3 -> 61.7 | prosperity term 6.2 -> 6.3 | defence term 0.1 -> 0.3 | safety 5.1 -> 5.1 | food -0.1 -> -0.1
+city (63)        below 45: 0% -> 14% | protected: 100% -> 98% | score mean 76.1 -> 59.4 | prosperity term 12.7 -> 4.9 | defence term 8.6 -> -0.3 | safety 4.8 -> 4.8 | food 0.0 -> 0.0
+metropolis (73)  below 45: 0% -> 15% | protected: 100% -> 100% | score mean 76.0 -> 58.8 | prosperity term 13.6 -> 6.1 | defence term 9.7 -> -0.1 | safety 2.8 -> 2.8 | food 0.0 -> 0.0
+
+=============== BORN UNDER A CRISIS ===============
+
+FORTUNE (economicState.prosperity, the printed label): before -> after, share of the size's towns in the arm
+size (n)                Struggling              Poor          Moderate       Comfortable        Prosperous
+thorp (38)              63% -> 53%        18% -> 16%        16% -> 11%         3% -> 21%          0% -> 0%
+hamlet (41)             78% -> 59%        15% -> 17%         5% -> 10%         2% -> 12%          0% -> 2%
+village (30)            63% -> 30%        27% -> 30%         3% -> 13%         7% -> 20%          0% -> 7%
+town (31)               19% -> 29%        23% -> 26%        45% -> 29%         6% -> 10%          6% -> 6%
+city (37)               16% -> 51%        30% -> 14%        24% -> 22%        24% -> 11%          5% -> 3%
+metropolis (27)          7% -> 30%        11% -> 22%        44% -> 22%        22% -> 19%         15% -> 7%
+
+STANDING (publicLegitimacy.label): before -> after, share of the size's towns in the arm
+size (n)         Legitimacy Crisis         Contested         Tolerated          Approved          Endorsed
+thorp (38)              82% -> 61%        16% -> 26%         3% -> 13%          0% -> 0%          0% -> 0%
+hamlet (41)             88% -> 66%        12% -> 22%         0% -> 12%          0% -> 0%          0% -> 0%
+village (30)            87% -> 50%        13% -> 27%         0% -> 23%          0% -> 0%          0% -> 0%
+town (31)               45% -> 48%        35% -> 35%        16% -> 13%          3% -> 3%          0% -> 0%
+city (37)               24% -> 57%        27% -> 30%        41% -> 11%          5% -> 0%          3% -> 3%
+metropolis (27)         15% -> 44%        11% -> 30%        52% -> 22%         19% -> 4%          4% -> 0%
+
+DEFENCE (defenseProfile.readiness.label): before -> after, share of the size's towns in the arm
+size (n)                Undefended        Vulnerable  Lightly Defended        Defensible     Well-Defended          Fortress
+thorp (38)              13% -> 13%        87% -> 87%          0% -> 0%          0% -> 0%          0% -> 0%          0% -> 0%
+hamlet (41)             49% -> 46%        49% -> 51%          2% -> 2%          0% -> 0%          0% -> 0%          0% -> 0%
+village (30)            33% -> 30%        63% -> 63%          3% -> 7%          0% -> 0%          0% -> 0%          0% -> 0%
+town (31)                 0% -> 0%        39% -> 39%        29% -> 29%        29% -> 26%          3% -> 6%          0% -> 0%
+city (37)                 0% -> 0%          0% -> 0%          0% -> 0%        11% -> 19%        41% -> 49%        49% -> 32%
+metropolis (27)           0% -> 0%          0% -> 0%          0% -> 0%          0% -> 0%        19% -> 30%        81% -> 70%
+
+STABILITY (powerStructure.stability, its first word): before -> after, share of the size's towns in the arm
+size (n)                   Anxious          Critical         Desperate         Fractured           Ordered            Shaken          Strained        Suppressed             Tense          Unstable          Volatile        Vulnerable
+thorp (38)              11% -> 11%        11% -> 11%        21% -> 21%          0% -> 0%          0% -> 0%        11% -> 11%        16% -> 16%          5% -> 5%        18% -> 18%          5% -> 5%          3% -> 3%          0% -> 0%
+hamlet (41)               0% -> 0%          5% -> 5%        29% -> 29%          2% -> 2%          0% -> 0%          5% -> 5%        10% -> 10%          0% -> 0%        27% -> 27%        12% -> 12%          5% -> 5%          5% -> 5%
+village (30)              3% -> 3%          3% -> 3%        13% -> 13%        10% -> 10%          0% -> 0%        17% -> 17%        17% -> 17%          3% -> 3%        23% -> 23%          3% -> 3%          3% -> 3%          3% -> 3%
+town (31)                 3% -> 3%          3% -> 3%          0% -> 0%        16% -> 16%          0% -> 0%        10% -> 10%        13% -> 13%          0% -> 0%          6% -> 6%        26% -> 26%        13% -> 13%        10% -> 10%
+city (37)                 8% -> 8%          5% -> 5%          8% -> 8%        11% -> 11%          3% -> 3%          5% -> 5%        22% -> 22%          3% -> 3%        16% -> 16%        11% -> 11%          5% -> 5%          3% -> 3%
+metropolis (27)         11% -> 11%          4% -> 4%          4% -> 4%          7% -> 7%          4% -> 4%        11% -> 11%        19% -> 19%          4% -> 4%        19% -> 19%          7% -> 7%          7% -> 7%          4% -> 4%
+
+CRIMINAL CAPTURE RUNG (powerStructure.criminalCaptureState): before -> after, share of the size's towns in the arm
+size (n)                      none       adversarial       equilibrium         corrupted
+thorp (38)              97% -> 97%          0% -> 0%          0% -> 0%          3% -> 3%
+hamlet (41)           100% -> 100%          0% -> 0%          0% -> 0%          0% -> 0%
+village (30)          100% -> 100%          0% -> 0%          0% -> 0%          0% -> 0%
+town (31)               48% -> 48%          3% -> 0%        26% -> 29%        23% -> 23%
+city (37)               49% -> 49%          8% -> 8%        30% -> 30%        14% -> 14%
+metropolis (27)         44% -> 44%        26% -> 15%        30% -> 37%          0% -> 4%
+
+WHAT OTHER LANES READ: standing below 45 (the session sheet's weight); the incumbent protected in a contest (rulingPowerCoup.js :: coupContenders().incumbent.gated); the score's mean
+thorp (38)       below 45: 97% -> 87% | protected: 100% -> 100% | score mean 17.7 -> 22.7 | prosperity term -14.3 -> -10.4 | defence term -1.3 -> -0.1 | safety -15.3 -> -15.3 | food -1.4 -> -1.4
+hamlet (41)      below 45: 100% -> 88% | protected: 100% -> 100% | score mean 14.2 -> 22.0 | prosperity term -16.9 -> -12.1 | defence term -3.0 -> 0.0 | safety -14.1 -> -14.1 | food -1.8 -> -1.8
+village (30)     below 45: 100% -> 77% | protected: 100% -> 100% | score mean 16.5 -> 28.8 | prosperity term -14.8 -> -6.4 | defence term -3.9 -> 0.1 | safety -13.6 -> -13.6 | food -1.3 -> -1.3
+town (31)        below 45: 81% -> 84% | protected: 74% -> 74% | score mean 30.5 -> 29.5 | prosperity term -4.6 -> -6.6 | defence term -1.9 -> -1.0 | safety -12.4 -> -12.4 | food -0.5 -> -0.5
+city (37)        below 45: 51% -> 86% | protected: 78% -> 54% | score mean 40.4 -> 25.1 | prosperity term -3.5 -> -10.4 | defence term 7.7 -> -0.8 | safety -12.2 -> -12.2 | food -1.6 -> -1.6
+metropolis (27)  below 45: 26% -> 74% | protected: 89% -> 63% | score mean 47.5 -> 31.1 | prosperity term 1.4 -> -5.6 | defence term 9.4 -> 0.0 | safety -12.0 -> -12.0 | food -1.3 -> -1.3
+
+THE CRISIS DRAW: towns whose crisis differs between the runs: 0 of 600 (the share of calm towns is 66% -> 66%)

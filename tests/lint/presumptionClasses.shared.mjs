@@ -81,7 +81,7 @@ export const classesOf = (t) => CLASS_IDS.filter((k) => CLASSES[k].test(t));
 const C = ['crisis', 'famine', 'starving', 'failed', 'danger coming', 'food', 'stores', 'war', 'migration', 'source spent', 'threat', 'hunger', 'succession', 'unrest'];
 const GOODS = ['trade at work', 'institution', 'exports', 'imports', 'market', 'guild', 'iron at hand', 'timber at hand', 'timber reaches the saws', 'fish', 'grain', 'game', 'livestock', 'failed', 'enchanting', 'magic supply', 'docks', 'port', 'navigable', 'own plots', 'source spent'];
 export const CLASS_DIMS = Object.freeze({
-  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate', 'exported'],
+  outside: [...C, 'route', 'imports', 'exports', 'port', 'navigable', 'docks', 'walls', 'gate', 'exported', 'house', 'entrepot', 'route open'], // PAGE-7 (CAUSES-DATA addendum 4: the chair names `house: caravans` and `entrepot`, outside words: caravans, passing trade)
   plenty: [...C, 'prosperity', 'own plots', 'fish', 'grain', 'game', 'livestock', 'food surplus'],
   work: [...C, 'prosperity'],
   animals: [...C, 'institution', 'livestock'],

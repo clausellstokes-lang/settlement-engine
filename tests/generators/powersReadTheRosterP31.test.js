@@ -39,10 +39,16 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-village-43', DIG, POTS],
   // (3) the conflicts hold the merchants and the craft guilds at HIGH
   ['r2r-town-29', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake', 'The Merchant Guilds and the Craft Guilds are at odds over weights and measures used in trade, and fight over who keeps the profit of the trade.'], // NAMES-1 (CN1): the article
-  ['r2r-town-34', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake', 'The Merchant Guilds and the Craft Guilds are at odds over who speaks for the place to outsiders'], // NAMES-1 (CN1): the article
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit); THE SEAT LANE'S ROW (its FLIP-LIST's born fixtures): r2r-town-34's HIGH quarrel lit is the Guild Council's
+  // with the Craft Guilds, not the merchants', so the pair votes together; the lowest r2r-town after town-29 whose conflicts hold
+  // the merchants and the craft guilds at HIGH is town-30 (29 30 40 54 125 168 of 200 print "at odds over")
+  ['r2r-town-30', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake', 'The Merchant Guilds and the Craft Guilds are at odds over control of the market licensing process'], // NAMES-1 (CN1): the article
   // (4) not three level: a Significant power over Minor ones; or five level, said so
   ['r2r-city-7', 'Three powers stand almost level here', 'They are always at the table, but cannot set their own terms.'],
-  ['r2r-metropolis-39', 'Three powers stand almost level here', 'Five powers stand almost level here, and no one leads'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-metropolis-39's roster lit holds three level, all Minor (16, 15,
+  // 12), so its third card's "Three powers" line is true there; no r2r-metropolis of 0..599 and no r2r-city of 0..299 holds five
+  // level lit, and of the r2s metropolises 0..11 of every crisis only r2s-politically_fractured-metropolis-3 does
+  ['r2s-politically_fractured-metropolis-3', 'Three powers stand almost level here', 'Five powers stand almost level here, and no one leads'],
   // (5) a HIGH quarrel between the seat and the faith; an occupation
   ['r2r-metropolis-15', 'Each props up the other. Even so', 'long told people that'],
   ['r2s-occupied-town-2', 'holds the seat and collects the taxes', 'The Guild Council holds the seat; the Religious Authorities tell people'], // NAMES-1 (CN1): the article
@@ -54,16 +60,23 @@ const CARD_ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   // the seat (The Holy Compact, 9 to 14) keeps the margins line, true of it (KEEP)
   ['r2s-politically_fractured-metropolis-1', 'Religious Authorities', CLERGY, CLERGY_TWIN],
   ['r2s-religious_conversion-town-1', 'Religious Authorities', CLERGY, CLERGY_TWIN],
-  ['r2r-village-12', 'Religious Authorities', CLERGY, CLERGY_TWIN],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-village-12's faith lit sits below Significant and behind the seat; the lowest r2r-village whose faith card draws
+  // the margins slot at Significant or above, or level with the seat, is village-15 (Significant, 19 to 81: 15 26 72 151 of 200)
+  ['r2r-village-15', 'Religious Authorities', CLERGY, CLERGY_TWIN],
   ['r2s-wartime-town-3', "Thieves' Guild", WAR_MERCH, 'Shortage and requisition have pushed trade into the black market, where the guild takes its cut.'],
   ['r2s-wartime-city-2', "Thieves' Guild", WAR_MERCH, 'Shortage and requisition have pushed trade into the black market, where the guild takes its cut.'],
 ]);
 /** KEEP: [town, a text that must still print]: a true sibling of each cured line */
 const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-town-9', CLERGY], // a Minor faith far behind the seat (14 to 31)
-  ['r2s-politically_fractured-metropolis-1', CLERGY], // The Holy Compact, 9 to the seat's 14
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-politically_fractured-metropolis-1's religious cards lit draw no margins line; the lowest
+  // r2s-politically_fractured-metropolis whose faith keeps it, far behind the seat, is metropolis-4 (Religious Authorities,
+  // Suppressed, 9 to the seat's 10: 4 18 29 41 44 52 of 200)
+  ['r2s-politically_fractured-metropolis-4', CLERGY], // Religious Authorities, 9 to the seat's 10
   ['r2r-village-0', 'The Merchant Guilds and the Craft Guilds vote together whenever trade is at stake'], // no quarrel on the record // NAMES-1 (CN1): the article
-  ['r2s-succession_void-metropolis-3', 'Three powers stand almost level here'], // 17, 16, 14: three, all Minor
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-succession_void-metropolis-3's roster lit holds no three level; the lowest
+  // r2s-succession_void-metropolis that does is metropolis-21 (17, 14, 14: three, all Minor; 21 26 71 82 114 128 of 200)
+  ['r2s-succession_void-metropolis-21', 'Three powers stand almost level here'], // 17, 14, 14: three, all Minor
   ['r2r-village-7', 'holds the seat and collects the taxes; the Religious Authorities tell people'], // no quarrel, no occupation // NAMES-1 (CN1): the article
   ['r2s-wartime-town-3', WAR_MERCH], // the merchant powers of the same town
 ]);

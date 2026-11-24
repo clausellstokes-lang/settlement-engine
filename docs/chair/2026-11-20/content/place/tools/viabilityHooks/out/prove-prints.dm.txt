@@ -1,0 +1,19 @@
+r2r-town-3: surfaces walked 23; collector's economics hooks 2
+   [Trade Monopoly / high] stored: "One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are arguing over whether to pay, find another supplier, or take the grain."
+      collector says: the stored string, unchanged
+      printed on: Summary/Plot Hooks
+      in the PDF view model's Plot Hooks chapter (pdf/lib/viewModel.js, hooks.all): yes
+   [River Control / high] stored: "A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and the town must choose between talking and fighting."
+      collector says: the stored string, unchanged
+      printed on: Summary/Plot Hooks
+      in the PDF view model's Plot Hooks chapter (pdf/lib/viewModel.js, hooks.all): yes
+r2r-town-5: surfaces walked 23; collector's economics hooks 1
+   [Survival Crisis / critical] stored: "The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin."
+      collector says: the stored string, unchanged
+      printed on: Summary/Plot Hooks
+      in the PDF view model's Plot Hooks chapter (pdf/lib/viewModel.js, hooks.all): yes
+r2r-village-4: surfaces walked 22; collector's economics hooks 1
+   [Strategic Resource / medium] stored: "The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools."
+      collector says: the stored string, unchanged
+      printed on: Summary/Plot Hooks
+      in the PDF view model's Plot Hooks chapter (pdf/lib/viewModel.js, hooks.all): yes

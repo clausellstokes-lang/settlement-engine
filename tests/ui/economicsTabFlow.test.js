@@ -987,7 +987,7 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
  * stress is said once, as its own anchor; the unsaved hint and the empty state are one plain
  * line; the product marketing is gone.
  */
-describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => {
+describe('DAILY LIFE — the four anchors, no offer line, no marketing', () => {
   const STRESSED = () => ({
     ...GROUND,
     config: { ...(GROUND.config || {}), culture: 'germanic', tradeRouteAccess: 'river' },
@@ -1006,21 +1006,18 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
     }
   });
 
-  test('one plain offer line; no pitch, no marketing', () => {
+  // DAILY-PAGE-1 (the owner's order of 2026-11-22): the offer line and its button are gone; the engine's own lines print
+  // instead. What this arm kept is its other half: no offer, no pitch, no marketing, saved or not.
+  test('no offer line; no pitch, no marketing', () => {
     useStore.setState({ campaigns: [] });
-    const { container, getByTestId } = render(e(DailyLifeTab, { settlement: STRESSED(), publicDossier: false }));
-    const text = container.textContent;
-    // #37 (W4 PEOPLE 2026-11-07): where the button stands the offer line is its CAPTION (the
-    // `data-caption` the button carries, and the lead of its title), never a body paragraph;
-    // where no button stands it is the paragraph that says how to get one.
-    const node = getByTestId('daily-life-offer');
-    const offer = node.tagName === 'P' ? node.textContent : node.getAttribute('data-caption');
-    expect(offer).toMatch(/^Ordinary life here in prose|^Save this settlement/);
-    if (node.tagName !== 'P') expectAbsentWithAnchor(text, offer, node.textContent, 'the caption as body text (#37)');
-    expect(container.querySelectorAll('[data-testid="daily-life-offer"]')).toHaveLength(1);
-    // The anchor is what the reader meets in the body: the paragraph, or the button's own label.
-    for (const gone of ['Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
-      expectAbsentWithAnchor(text, gone, node.textContent, 'the D3/D6 marketing');
+    for (const view of [{ publicDossier: false }, { publicDossier: false, saveId: 's1' }]) {
+      const { container } = render(e(DailyLifeTab, { settlement: STRESSED(), ...view }));
+      const text = container.textContent;
+      expect(container.querySelectorAll('[data-testid="daily-life-offer"]')).toHaveLength(0);
+      for (const gone of ['Ordinary life here in prose', 'Save this settlement', 'Generate Daily Life', 'Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
+        expectAbsentWithAnchor(text, gone, 'Active stress', 'the offer and the D3/D6 marketing');
+      }
+      cleanup();
     }
   });
 });
@@ -1033,14 +1030,17 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
 describe('UX consolidation — the Economics page says each fact once', () => {
   const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
 
-  test('T2-1: ONE prosperity home and the Output score ONCE — the Economy and Food tiles are gone', () => {
+  test('T2-1: ONE prosperity home, and no Output score (PAGE-1 OUTPUT, F3b) — the Economy and Food tiles are gone', () => {
     useStore.setState({ campaigns: [] });
-    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55 } } };
+    // PAGE-1 OUTPUT (2026-11-20): the chip's "n/100" left every surface; the figure and its dial print as words
+    // (domain/display/outputInWords.js), once, under the prosperity word.
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55, raw: { economy: 55 } } } };
     const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
     const text = container.textContent;
-    expect(text, 'the header prints the Output chip').toContain('55/100');
-    expect(text.split('55/100').length - 1, 'the Output score is printed once').toBe(1);
-    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: toContain('55/100') above, same render
+    expect(text, 'the header says the output in words').toContain('It gets all its work could yield.');
+    expect(text.split('It gets all its work could yield.').length - 1, 'the words are printed once').toBe(1);
+    expect(text, 'no grade out of 100').not.toContain('55/100'); // anchored: the words above, same render
+    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: the words above, same render
     const exact = (word) => [...container.querySelectorAll('div,span,p')].filter((n) => n.children.length === 0 && n.textContent === word).length;
     expect(exact('Comfortable'), 'the prosperity word is printed once').toBe(1);
     expect(exact('Economy'), 'no Economy tile label').toBe(0);

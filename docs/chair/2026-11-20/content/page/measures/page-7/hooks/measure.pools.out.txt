@@ -1,0 +1,303 @@
+ATOMS 25 needs used, unknown to the vocabulary: none
+KINDS towns 900, tensions 1543, kinds 29: crime_wave 231 · guild_conflict 215 · resource_scarcity 114 · external_threat 79 · succession_crisis 74 · outside_debt 63 · legitimacy_crisis 58 · corruption_scandal 51 · popular_uprising 50 · wild_magic 46 · generational_divide 41 · magical_controversy 41 · great_flood 39 · disputed_land 39 · plague_years 37 · tyranny 36 · great_fire 35 · leadership_vacuum 34 · occupation_legacy 31 · population_friction 30 · infiltration_fear 30 · religious_tension 27 · pilgrimage_surge 25 · economic_disparity 25 · heresy_trial 24 · trade_dispute 22 · trade_collapse 21 · demographic_pressure 14 · market_crash 11
+
+KIND crime_wave: 231 tensions (thorp 13 hamlet 21 village 8 town 31 city 79 metropolis 79)
+LEN crime_wave hooks: 2 a town: 41 · 3 a town: 190
+HOOK crime_wave 231/231 (100.0%) [thorp 13/13 hamlet 21/21 village 8/8 town 31/31 city 79/79 metropolis 79/79] "The crime wave is coordinated. Someone is directing it to create a pretext"
+HOOK crime_wave 231/231 (100.0%) [thorp 13/13 hamlet 21/21 village 8/8 town 31/31 city 79/79 metropolis 79/79] "Those who would take the law into their own hands have picked out a culprit on bad information"
+HOOK crime_wave 190/231 (82.3%) [thorp 0/13 hamlet 0/21 village 1/8 town 31/31 city 79/79 metropolis 79/79] "A guard captain is on the payroll of the criminal network"
+LEN crime_wave effects: 2 a town: 231
+EFFECT crime_wave 231/231 (100.0%) [thorp 13/13 hamlet 21/21 village 8/8 town 31/31 city 79/79 metropolis 79/79] "An expanded watch and a night curfew survive from the crackdown"
+EFFECT crime_wave 231/231 (100.0%) [thorp 13/13 hamlet 21/21 village 8/8 town 31/31 city 79/79 metropolis 79/79] "Vigilante bands never fully disbanded and still operate quietly"
+FACT crime_wave tier>=town 81.8% · watch 82.3% · garrison 71.4% · militia 4.8% · watch|garrison 82.3% · force kept 87.0% · guardPresence 87.0% · paid watch 81.8% · walls 83.5% · court sits 80.1% · prison 59.3% · temple 87.9% · sacredHouse 87.9% · guild 83.1% · market 84.4% · navigable 41.1% · coast 15.2% · river 26.0% · criminal power 5.2% · organised crime 84.4% · rival rings 30.7% · criminal income 81.0% · rival power 31.6% · seat outranked 13.9% · legitimacy crisis 10.0% · famine 0.4% · danger coming 9.5% · any stress 32.9% · own past event 0.0%
+FACT crime_wave gov category: government 66.2% · economy 26.8% · other 4.3% · noble 2.6%
+FACT crime_wave ruler kind: council 61.0% · lord 18.2% · elder 16.5% · mayor 4.3%
+FACT crime_wave law band: strained 85.3% · critical 12.6% · collapsed 2.2%
+FACT crime_wave war state: peace 95.2% · at war 3.5% · front 1.3%
+FACT crime_wave crime key: semi-organized 45.9% · organized 38.5% · diffuse 15.6%
+FACT crime_wave prosperity: prosperous 53.7% · comfortable 22.9% · moderate 10.4% · poor 9.5% · struggling 3.5%
+FACT crime_wave stress: none 67.1% · politically_fractured 4.3% · infiltrated 3.9% · indebted 3.9% · wartime 3.5% · succession_void 3.5% · monster_pressure 3.0% · plague_onset 2.6% · insurgency 2.2% · recently_betrayed 1.7%
+
+KIND guild_conflict: 215 tensions (thorp 0 hamlet 2 village 1 town 49 city 75 metropolis 88)
+LEN guild_conflict hooks: 3 a town: 215
+HOOK guild_conflict 215/215 (100.0%) [thorp 0/0 hamlet 2/2 village 1/1 town 49/49 city 75/75 metropolis 88/88] "A guild master's records have gone missing ahead of an audit"
+HOOK guild_conflict 215/215 (100.0%) [thorp 0/0 hamlet 2/2 village 1/1 town 49/49 city 75/75 metropolis 88/88] "A journeyman denied mastership has proof the exam was rigged"
+HOOK guild_conflict 185/215 (86.0%) [thorp 0/0 hamlet 2/2 village 1/1 town 48/49 city 69/75 metropolis 65/88] "Someone is sabotaging both sides to destabilize the market for a third party"
+HOOK guild_conflict 30/215 (14.0%) [thorp 0/0 hamlet 0/2 village 0/1 town 1/49 city 6/75 metropolis 23/88] "Someone is sabotaging both guilds to destabilize the market for a third party"
+LEN guild_conflict effects: 2 a town: 215
+EFFECT guild_conflict 215/215 (100.0%) [thorp 0/0 hamlet 2/2 village 1/1 town 49/49 city 75/75 metropolis 88/88] "Guild membership rolls now audited by an outside adjudicator"
+EFFECT guild_conflict 215/215 (100.0%) [thorp 0/0 hamlet 2/2 village 1/1 town 49/49 city 75/75 metropolis 88/88] "One guild's charter was revoked and never fully restored"
+FACT guild_conflict tier>=town 98.6% · watch 98.6% · garrison 79.1% · militia 0.5% · watch|garrison 98.6% · force kept 99.1% · guardPresence 99.1% · paid watch 98.6% · walls 91.2% · court sits 93.0% · prison 66.5% · temple 99.1% · sacredHouse 99.1% · guild 99.5% · market 100.0% · navigable 42.3% · coast 11.2% · river 31.2% · criminal power 1.9% · organised crime 81.9% · rival rings 34.4% · criminal income 77.2% · rival power 32.1% · seat outranked 6.0% · legitimacy crisis 1.9% · famine 0.0% · danger coming 5.6% · any stress 15.8% · own past event 14.0%
+FACT guild_conflict gov category: government 52.6% · economy 34.0% · other 12.6% · noble 0.9%
+FACT guild_conflict ruler kind: council 68.8% · lord 17.2% · mayor 12.6% · elder 1.4%
+FACT guild_conflict law band: strained 40.9% · adequate 30.2% · surplus 28.8%
+FACT guild_conflict war state: peace 97.7% · at war 1.9% · front 0.5%
+FACT guild_conflict crime key: semi-organized 43.7% · organized 38.1% · none 12.1% · diffuse 6.0%
+FACT guild_conflict prosperity: prosperous 73.5% · comfortable 15.3% · moderate 7.9% · poor 2.8% · struggling 0.5%
+FACT guild_conflict stress: none 84.2% · infiltrated 3.7% · indebted 2.3% · politically_fractured 1.9% · monster_pressure 1.4% · occupied 1.4% · succession_void 1.4% · religious_conversion 0.9% · insurgency 0.9% · plague_onset 0.5%
+
+KIND resource_scarcity: 114 tensions (thorp 25 hamlet 26 village 21 town 16 city 14 metropolis 12)
+LEN resource_scarcity hooks: 2 a town: 66 · 3 a town: 48
+HOOK resource_scarcity 114/114 (100.0%) [thorp 25/25 hamlet 26/26 village 21/21 town 16/16 city 14/14 metropolis 12/12] "The scarcity was engineered. Someone destroyed the competing supply route"
+HOOK resource_scarcity 114/114 (100.0%) [thorp 25/25 hamlet 26/26 village 21/21 town 16/16 city 14/14 metropolis 12/12] "An alternative source exists but the information is being suppressed"
+HOOK resource_scarcity 48/114 (42.1%) [thorp 0/25 hamlet 1/26 village 5/21 town 16/16 city 14/14 metropolis 12/12] "A store of the scarce goods is being kept off the market on purpose"
+LEN resource_scarcity effects: 2 a town: 114
+EFFECT resource_scarcity 66/114 (57.9%) [thorp 25/25 hamlet 25/26 village 16/21 town 0/16 city 0/14 metropolis 0/12] "In lean seasons the affected goods are still shared out by agreement, not sold to whoever pays most"
+EFFECT resource_scarcity 60/114 (52.6%) [thorp 0/25 hamlet 0/26 village 19/21 town 15/16 city 14/14 metropolis 12/12] "Emergency grain reserves mandated by ordinance since the shortage"
+EFFECT resource_scarcity 48/114 (42.1%) [thorp 0/25 hamlet 1/26 village 5/21 town 16/16 city 14/14 metropolis 12/12] "Price ceilings on the affected goods still enforced in lean seasons"
+EFFECT resource_scarcity 33/114 (28.9%) [thorp 15/25 hamlet 18/26 village 0/21 town 0/16 city 0/14 metropolis 0/12] "Every household has put grain by against lean years since the shortage"
+EFFECT resource_scarcity 21/114 (18.4%) [thorp 10/25 hamlet 8/26 village 2/21 town 1/16 city 0/14 metropolis 0/12] "Grain was put by against lean years after the shortage, and it has not been enough"
+FACT resource_scarcity tier>=town 36.8% · watch 37.7% · garrison 24.6% · militia 17.5% · watch|garrison 37.7% · force kept 55.3% · guardPresence 55.3% · paid watch 36.8% · walls 47.4% · court sits 32.5% · prison 19.3% · temple 61.4% · sacredHouse 61.4% · guild 37.7% · market 42.1% · navigable 44.7% · coast 17.5% · river 27.2% · criminal power 4.4% · organised crime 27.2% · rival rings 11.4% · criminal income 29.8% · rival power 46.5% · seat outranked 36.8% · legitimacy crisis 51.8% · famine 18.4% · danger coming 14.9% · any stress 77.2% · own past event 13.2%
+FACT resource_scarcity gov category: government 79.8% · economy 13.2% · other 6.1% · noble 0.9%
+FACT resource_scarcity ruler kind: elder 52.6% · council 29.8% · lord 11.4% · mayor 6.1%
+FACT resource_scarcity law band: collapsed 37.7% · strained 36.8% · critical 11.4% · adequate 11.4% · surplus 2.6%
+FACT resource_scarcity war state: peace 73.7% · at war 18.4% · front 7.9%
+FACT resource_scarcity crime key: none 64.0% · semi-organized 14.0% · organized 13.2% · diffuse 8.8%
+FACT resource_scarcity prosperity: struggling 43.9% · comfortable 16.7% · poor 16.7% · moderate 12.3% · prosperous 10.5%
+FACT resource_scarcity stress: plague_onset 23.7% · none 22.8% · famine 14.0% · wartime 14.0% · under_siege 7.9% · mass_migration 5.3% · occupied 4.4% · infiltrated 3.5% · insurgency+famine 1.8% · famine+indebted 0.9%
+
+KIND external_threat: 79 tensions (thorp 13 hamlet 11 village 16 town 15 city 11 metropolis 13)
+LEN external_threat hooks: 1 a town: 53 · 3 a town: 26
+HOOK external_threat 79/79 (100.0%) [thorp 13/13 hamlet 11/11 village 16/16 town 15/15 city 11/11 metropolis 13/13] "The threat has an agent already inside the settlement"
+HOOK external_threat 26/79 (32.9%) [thorp 4/13 hamlet 5/11 village 4/16 town 6/15 city 4/11 metropolis 3/13] "The threat is being exaggerated by someone who profits from wartime contracts"
+HOOK external_threat 26/79 (32.9%) [thorp 4/13 hamlet 5/11 village 4/16 town 6/15 city 4/11 metropolis 3/13] "A diplomatic channel exists that the war party is suppressing"
+LEN external_threat effects: 2 a town: 79
+EFFECT external_threat 56/79 (70.9%) [thorp 4/13 hamlet 5/11 village 8/16 town 15/15 city 11/11 metropolis 13/13] "Watch towers and muster drills maintained since the alarm"
+EFFECT external_threat 40/79 (50.6%) [thorp 13/13 hamlet 11/11 village 16/16 town 0/15 city 0/11 metropolis 0/13] "The heads of the families still keep count of who could be called on to fight"
+EFFECT external_threat 23/79 (29.1%) [thorp 9/13 hamlet 6/11 village 8/16 town 0/15 city 0/11 metropolis 0/13] "Every household still knows where to run if the alarm is raised again"
+EFFECT external_threat 15/79 (19.0%) [thorp 0/13 hamlet 0/11 village 0/16 town 15/15 city 0/11 metropolis 0/13] "A standing levy roster kept ready in the town archive"
+EFFECT external_threat 13/79 (16.5%) [thorp 0/13 hamlet 0/11 village 0/16 town 0/15 city 0/11 metropolis 13/13] "A standing levy roster kept ready in the metropolis archive"
+EFFECT external_threat 11/79 (13.9%) [thorp 0/13 hamlet 0/11 village 0/16 town 0/15 city 11/11 metropolis 0/13] "A standing levy roster kept ready in the city archive"
+FACT external_threat tier>=town 49.4% · watch 49.4% · garrison 35.4% · militia 21.5% · watch|garrison 49.4% · force kept 70.9% · guardPresence 70.9% · paid watch 49.4% · walls 58.2% · court sits 45.6% · prison 34.2% · temple 75.9% · sacredHouse 75.9% · guild 55.7% · market 59.5% · navigable 49.4% · coast 22.8% · river 26.6% · criminal power 1.3% · organised crime 36.7% · rival rings 16.5% · criminal income 38.0% · rival power 57.0% · seat outranked 36.7% · legitimacy crisis 29.1% · famine 0.0% · danger coming 100.0% · any stress 60.8% · own past event 44.3%
+FACT external_threat gov category: government 69.6% · economy 21.5% · other 7.6% · noble 1.3%
+FACT external_threat ruler kind: elder 43.0% · council 35.4% · lord 13.9% · mayor 7.6%
+FACT external_threat law band: strained 45.6% · critical 27.8% · adequate 17.7% · surplus 5.1% · collapsed 3.8%
+FACT external_threat war state: peace 67.1% · at war 32.9%
+FACT external_threat crime key: none 55.7% · semi-organized 22.8% · organized 13.9% · diffuse 7.6%
+FACT external_threat prosperity: comfortable 30.4% · moderate 24.1% · poor 17.7% · prosperous 15.2% · struggling 12.7%
+FACT external_threat stress: none 39.2% · wartime 32.9% · monster_pressure 22.8% · insurgency+monster_pressure 1.3% · succession_void 1.3% · recently_betrayed 1.3% · indebted 1.3%
+
+KIND succession_crisis: 74 tensions (thorp 12 hamlet 8 village 15 town 10 city 12 metropolis 17)
+LEN succession_crisis hooks: 1 a town: 68 · 3 a town: 6
+HOOK succession_crisis 74/74 (100.0%) [thorp 12/12 hamlet 8/8 village 15/15 town 10/10 city 12/12 metropolis 17/17] "A would-be heir approaches outsiders to investigate a rival's past"
+HOOK succession_crisis 6/74 (8.1%) [thorp 1/12 hamlet 1/8 village 2/15 town 1/10 city 1/12 metropolis 0/17] "The ailing ruler wants a final errand completed before naming a successor"
+HOOK succession_crisis 6/74 (8.1%) [thorp 1/12 hamlet 1/8 village 2/15 town 1/10 city 1/12 metropolis 0/17] "Someone is poisoning the ruler slowly, and someone in the household knows"
+LEN succession_crisis effects: 2 a town: 74
+EFFECT succession_crisis 74/74 (100.0%) [thorp 12/12 hamlet 8/8 village 15/15 town 10/10 city 12/12 metropolis 17/17] "Rival claimant bloodlines still contest ceremonial precedence"
+EFFECT succession_crisis 74/74 (100.0%) [thorp 12/12 hamlet 8/8 village 15/15 town 10/10 city 12/12 metropolis 17/17] "Succession now governed by a charter drafted in the aftermath"
+FACT succession_crisis tier>=town 52.7% · watch 52.7% · garrison 40.5% · militia 5.4% · watch|garrison 52.7% · force kept 58.1% · guardPresence 58.1% · paid watch 52.7% · walls 50.0% · court sits 51.4% · prison 33.8% · temple 77.0% · sacredHouse 77.0% · guild 56.8% · market 56.8% · navigable 47.3% · coast 14.9% · river 32.4% · criminal power 1.4% · organised crime 44.6% · rival rings 13.5% · criminal income 43.2% · rival power 40.5% · seat outranked 21.6% · legitimacy crisis 8.1% · famine 0.0% · danger coming 1.4% · any stress 47.3% · own past event 41.9%
+FACT succession_crisis gov category: government 73.0% · economy 18.9% · other 8.1%
+FACT succession_crisis ruler kind: council 43.2% · elder 39.2% · lord 9.5% · mayor 8.1%
+FACT succession_crisis law band: strained 48.6% · adequate 20.3% · critical 17.6% · surplus 9.5% · collapsed 4.1%
+FACT succession_crisis war state: peace 98.6% · front 1.4%
+FACT succession_crisis crime key: none 47.3% · semi-organized 23.0% · organized 21.6% · diffuse 8.1%
+FACT succession_crisis prosperity: prosperous 40.5% · poor 23.0% · moderate 21.6% · comfortable 13.5% · struggling 1.4%
+FACT succession_crisis stress: none 52.7% · succession_void 37.8% · infiltrated 2.7% · insurgency 2.7% · politically_fractured 1.4% · indebted 1.4% · under_siege 1.4%
+
+KIND outside_debt: 63 tensions (thorp 9 hamlet 5 village 7 town 9 city 12 metropolis 21)
+LEN outside_debt hooks: 2 a town: 1 · 3 a town: 62
+HOOK outside_debt 63/63 (100.0%) [thorp 9/9 hamlet 5/5 village 7/7 town 9/9 city 12/12 metropolis 21/21] "The original loan documents contain a clause that was never disclosed publicly"
+HOOK outside_debt 63/63 (100.0%) [thorp 9/9 hamlet 5/5 village 7/7 town 9/9 city 12/12 metropolis 21/21] "The debt could be voided, if someone can prove it was obtained through fraud"
+HOOK outside_debt 62/63 (98.4%) [thorp 9/9 hamlet 5/5 village 6/7 town 9/9 city 12/12 metropolis 21/21] "A creditor's agent is in town conducting a quiet assessment before enforcement"
+LEN outside_debt effects: 2 a town: 63
+EFFECT outside_debt 63/63 (100.0%) [thorp 9/9 hamlet 5/5 village 7/7 town 9/9 city 12/12 metropolis 21/21] "Tribute payments to the external creditor continue on a schedule"
+EFFECT outside_debt 63/63 (100.0%) [thorp 9/9 hamlet 5/5 village 7/7 town 9/9 city 12/12 metropolis 21/21] "Municipal borrowing now capped by a charter clause"
+FACT outside_debt tier>=town 66.7% · watch 66.7% · garrison 52.4% · militia 1.6% · watch|garrison 66.7% · force kept 68.3% · guardPresence 68.3% · paid watch 66.7% · walls 69.8% · court sits 66.7% · prison 49.2% · temple 84.1% · sacredHouse 84.1% · guild 66.7% · market 66.7% · navigable 44.4% · coast 15.9% · river 28.6% · criminal power 6.3% · organised crime 55.6% · rival rings 15.9% · criminal income 55.6% · rival power 33.3% · seat outranked 14.3% · legitimacy crisis 12.7% · famine 0.0% · danger coming 4.8% · any stress 55.6% · own past event 20.6%
+FACT outside_debt gov category: government 71.4% · economy 20.6% · other 7.9%
+FACT outside_debt ruler kind: council 54.0% · elder 23.8% · lord 14.3% · mayor 7.9%
+FACT outside_debt law band: strained 47.6% · adequate 20.6% · critical 15.9% · surplus 12.7% · collapsed 3.2%
+FACT outside_debt war state: peace 95.2% · at war 3.2% · front 1.6%
+FACT outside_debt crime key: none 36.5% · organized 33.3% · semi-organized 22.2% · diffuse 7.9%
+FACT outside_debt prosperity: comfortable 36.5% · prosperous 27.0% · poor 15.9% · moderate 14.3% · struggling 6.3%
+FACT outside_debt stress: none 44.4% · indebted 42.9% · occupied+succession_void 1.6% · under_siege 1.6% · mass_migration 1.6% · indebted+infiltrated 1.6% · monster_pressure 1.6% · insurgency 1.6% · succession_void 1.6% · wartime 1.6%
+
+KIND legitimacy_crisis: 58 tensions (thorp 7 hamlet 6 village 15 town 9 city 10 metropolis 11)
+LEN legitimacy_crisis hooks: 3 a town: 58
+HOOK legitimacy_crisis 58/58 (100.0%) [thorp 7/7 hamlet 6/6 village 15/15 town 9/9 city 10/10 metropolis 11/11] "A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost"
+HOOK legitimacy_crisis 58/58 (100.0%) [thorp 7/7 hamlet 6/6 village 15/15 town 9/9 city 10/10 metropolis 11/11] "A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with"
+HOOK legitimacy_crisis 42/58 (72.4%) [thorp 7/7 hamlet 6/6 village 15/15 town 5/9 city 5/10 metropolis 4/11] "Those in power are paying people to speak for them at the gatherings, because no one will do it for free"
+HOOK legitimacy_crisis 16/58 (27.6%) [thorp 0/7 hamlet 0/6 village 0/15 town 4/9 city 5/10 metropolis 7/11] "Those in power are paying people to speak for them at the gatherings, so that their backers sound louder than the doubters"
+LEN legitimacy_crisis effects: 0 a town: 58
+FACT legitimacy_crisis tier>=town 51.7% · watch 51.7% · garrison 39.7% · militia 8.6% · watch|garrison 51.7% · force kept 60.3% · guardPresence 60.3% · paid watch 51.7% · walls 56.9% · court sits 44.8% · prison 31.0% · temple 82.8% · sacredHouse 82.8% · guild 56.9% · market 60.3% · navigable 41.4% · coast 13.8% · river 27.6% · criminal power 12.1% · organised crime 39.7% · rival rings 17.2% · criminal income 39.7% · rival power 46.6% · seat outranked 24.1% · legitimacy crisis 29.3% · famine 0.0% · danger coming 1.7% · any stress 53.4% · own past event 0.0%
+FACT legitimacy_crisis gov category: government 74.1% · economy 13.8% · other 6.9% · noble 5.2%
+FACT legitimacy_crisis ruler kind: elder 41.4% · council 31.0% · lord 20.7% · mayor 6.9%
+FACT legitimacy_crisis law band: strained 46.6% · adequate 17.2% · critical 13.8% · collapsed 13.8% · surplus 8.6%
+FACT legitimacy_crisis war state: peace 100.0%
+FACT legitimacy_crisis crime key: none 51.7% · semi-organized 20.7% · organized 19.0% · diffuse 8.6%
+FACT legitimacy_crisis prosperity: poor 29.3% · comfortable 29.3% · prosperous 20.7% · moderate 12.1% · struggling 8.6%
+FACT legitimacy_crisis stress: none 46.6% · insurgency 32.8% · religious_conversion 15.5% · monster_pressure 1.7% · plague_onset 1.7% · mass_migration 1.7%
+
+KIND corruption_scandal: 51 tensions (thorp 8 hamlet 13 village 8 town 6 city 8 metropolis 8)
+LEN corruption_scandal hooks: 3 a town: 51
+HOOK corruption_scandal 51/51 (100.0%) [thorp 8/8 hamlet 13/13 village 8/8 town 6/6 city 8/8 metropolis 8/8] "The investigator who uncovered the corruption has received a death threat"
+HOOK corruption_scandal 51/51 (100.0%) [thorp 8/8 hamlet 13/13 village 8/8 town 6/6 city 8/8 metropolis 8/8] "A key witness can be found, but won't speak without protection"
+HOOK corruption_scandal 51/51 (100.0%) [thorp 8/8 hamlet 13/13 village 8/8 town 6/6 city 8/8 metropolis 8/8] "The corruption goes higher than anyone yet suspects; those pressing to expose it are being used"
+LEN corruption_scandal effects: 2 a town: 51
+EFFECT corruption_scandal 51/51 (100.0%) [thorp 8/8 hamlet 13/13 village 8/8 town 6/6 city 8/8 metropolis 8/8] "Several old families carry names still quietly disgraced"
+EFFECT corruption_scandal 29/51 (56.9%) [thorp 8/8 hamlet 13/13 village 8/8 town 0/6 city 0/8 metropolis 0/8] "Since then, whoever handles the common purse has had to show the accounts to the heads of the families"
+EFFECT corruption_scandal 22/51 (43.1%) [thorp 0/8 hamlet 0/13 village 0/8 town 6/6 city 8/8 metropolis 8/8] "An oversight office was established to audit officials afterward"
+FACT corruption_scandal tier>=town 43.1% · watch 43.1% · garrison 37.3% · militia 11.8% · watch|garrison 43.1% · force kept 54.9% · guardPresence 54.9% · paid watch 43.1% · walls 51.0% · court sits 43.1% · prison 25.5% · temple 64.7% · sacredHouse 64.7% · guild 47.1% · market 47.1% · navigable 39.2% · coast 2.0% · river 37.3% · criminal power 2.0% · organised crime 41.2% · rival rings 23.5% · criminal income 35.3% · rival power 39.2% · seat outranked 23.5% · legitimacy crisis 19.6% · famine 0.0% · danger coming 2.0% · any stress 43.1% · own past event 2.0%
+FACT corruption_scandal gov category: government 76.5% · economy 17.6% · other 3.9% · noble 2.0%
+FACT corruption_scandal ruler kind: elder 52.9% · council 33.3% · lord 9.8% · mayor 3.9%
+FACT corruption_scandal law band: strained 58.8% · collapsed 13.7% · critical 11.8% · adequate 7.8% · surplus 7.8%
+FACT corruption_scandal war state: peace 96.1% · at war 2.0% · front 2.0%
+FACT corruption_scandal crime key: none 56.9% · semi-organized 33.3% · organized 7.8% · diffuse 2.0%
+FACT corruption_scandal prosperity: poor 29.4% · prosperous 19.6% · comfortable 17.6% · moderate 17.6% · struggling 15.7%
+FACT corruption_scandal stress: none 56.9% · recently_betrayed 39.2% · occupied 2.0% · under_siege 2.0%
+
+HOMES tier>=town = record.tier (factsOf.tier) | watch = defence.js :: defenceOf().watch | garrison = defence.js :: defenceOf().garrison | militia = defence.js :: defenceOf().militia | watch|garrison = defence.js :: defenceOf() | force kept = orderForce.js :: orderForceOf().kept | guardPresence = factsOf.guardPresence (watch|garrison|militia|hired) | paid watch = guardPay.js :: paidWatchOf | walls = defence.js :: defenceOf().walls | court sits = defence.js :: courtHoldersOf | prison = defence.js :: defenceOf().prison | temple = institutions.js :: hasInstitution(record,'temple') | sacredHouse = factsOf.sacredHouse | guild = guild.js :: guildOf | market = market.js :: marketOf | navigable = water.js :: waterOf().navigable | coast = water.js :: waterOf().coast | river = water.js :: waterOf().river | criminal power = powerStructure.factions[].category === 'criminal' | organised crime = criminalStructureKey.js (factsOf.crime in semi-organized|organized) | rival rings = rivalRings.js :: rivalRingsStand | criminal income = criminalIncome.js :: criminalIncomeOf | rival power = rivalPower.js :: rivalPowerOf | seat outranked = seatOutranked.js :: seatOutrankedOf | legitimacy crisis = legitimacyCrisis.js :: legitimacyCrisisOf | famine = famine.js :: famineOf().famine | danger coming = dangerComing.js :: dangerComingOf | any stress = record.stress (crisisKind.js :: crisisOf) | own past event = history.historicalEvents[].templateType === kind | gov category = powerStructure.factions[isGoverning].category | ruler kind = rulerKind.js :: rulerKindOf | law band = lawBand.js :: lawBandOf | war state = warState.js :: warStateOf | crime key = criminalStructureKey.js :: criminalStructureKeyOf | prosperity = prosperityRank.js :: prosperityLabelOf | stress = record.stress[].type
+
+TRI today hooks: all 48.0% (thorp 16.2% hamlet 20.3% village 24.3% town 45.9% city 87.2% metropolis 93.9%)
+TRI today effects: all 43.6% (thorp 13.5% hamlet 14.9% village 14.2% town 41.2% city 84.5% metropolis 93.2%)
+TOP city hooks: 79/150 "The crime wave is coordinated. Someone is directing it to cr" | 79/150 "A guard captain is on the payroll of the criminal network" | 79/150 "Those who would take the law into their own hands have picke" | 75/150 "A guild master's records have gone missing ahead of an audit" | 75/150 "A journeyman denied mastership has proof the exam was rigged"
+TOP city effects: 79/150 "An expanded watch and a night curfew survive from the crackd" | 79/150 "Vigilante bands never fully disbanded and still operate quie" | 75/150 "Guild membership rolls now audited by an outside adjudicator" | 75/150 "One guild's charter was revoked and never fully restored" | 14/150 "Emergency grain reserves mandated by ordinance since the sho"
+TOP metropolis hooks: 88/150 "A guild master's records have gone missing ahead of an audit" | 88/150 "A journeyman denied mastership has proof the exam was rigged" | 79/150 "The crime wave is coordinated. Someone is directing it to cr" | 79/150 "A guard captain is on the payroll of the criminal network" | 79/150 "Those who would take the law into their own hands have picke"
+TOP metropolis effects: 88/150 "Guild membership rolls now audited by an outside adjudicator" | 88/150 "One guild's charter was revoked and never fully restored" | 79/150 "An expanded watch and a night curfew survive from the crackd" | 79/150 "Vigilante bands never fully disbanded and still operate quie" | 21/150 "Tribute payments to the external creditor continue on a sche"
+BAR today (150 a size): thorp top 25/150 16.7% seen 6.1% · hamlet top 26/150 17.3% seen 6.9% · village top 21/150 14.0% seen 6.0% · town top 49/150 32.7% seen 12.4% · city top 79/150 52.7% seen 24.4% · metropolis top 88/150 58.7% seen 27.1%
+BAR today (50 a size): thorp top 6/50 12.0% seen 4.3% · hamlet top 10/50 20.0% seen 6.7% · village top 7/50 14.0% seen 5.2% · town top 15/50 30.0% seen 11.9% · city top 27/50 54.0% seen 22.2% · metropolis top 28/50 56.0% seen 25.5%
+ATOMS 25 atoms used, unknown to the vocabulary: none
+KEY seed-first
+NEW crime_wave: pool 16 (10 need nothing, 3 stored), 3 a place, short 0/231; max line 26.8% of the kind's places, lines printed 16/16
+NEWLINE crime_wave need "none" holds 100.0% prints 22.9% STORED "The crime wave is coordinated. Someone is directing it to create a pretext"
+NEWLINE crime_wave need ["watch","organised crime"] holds 81.8% prints 15.6% STORED "A guard captain is on the payroll of the criminal network"
+NEWLINE crime_wave need "none" holds 100.0% prints 17.7% STORED "Those who would take the law into their own hands have picked out a culprit on bad information"
+NEWLINE crime_wave need "none" holds 100.0% prints 23.8% "A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for"
+NEWLINE crime_wave need "none" holds 100.0% prints 26.8% "A boy who runs errands for half the place has started carrying more coin than any errand pays"
+NEWLINE crime_wave need "none" holds 100.0% prints 22.1% "Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight"
+NEWLINE crime_wave need "none" holds 100.0% prints 19.0% "A traveller robbed on the way in swears the robber knew which bag held the money"
+NEWLINE crime_wave need "market" holds 84.4% prints 21.2% "A stallholder at the market has stopped reporting thefts, and will not say why"
+NEWLINE crime_wave need "watch" holds 82.3% prints 17.3% "A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse"
+NEWLINE crime_wave need "organised crime" holds 84.4% prints 16.5% "A shopkeeper has been told to close by the end of the week, by people who did not give their names"
+NEWLINE crime_wave need "rival rings" holds 30.7% prints 3.5% "Two crews have been seen arguing over the same ground, and a fight between them looks a night away"
+NEWLINE crime_wave need "law: ≤ critical" holds 14.7% prints 3.9% "A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next"
+NEWLINE crime_wave need "none" holds 100.0% prints 19.5% "A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake"
+NEWLINE crime_wave need "none" holds 100.0% prints 21.6% "An old woman's savings have gone from under her floor, and only her family knew where they were kept"
+NEWLINE crime_wave need "none" holds 100.0% prints 26.4% "A pedlar is selling goods cheap that several households swear were taken from them"
+NEWLINE crime_wave need "none" holds 100.0% prints 22.1% "Chalk marks have appeared on several doors overnight, and the households behind them are frightened"
+NEWSIZE crime_wave thorp: 13 tensions, lines printed 11, max line 7/13
+NEWSIZE crime_wave hamlet: 21 tensions, lines printed 13, max line 10/21
+NEWSIZE crime_wave village: 8 tensions, lines printed 12, max line 4/8
+NEWSIZE crime_wave town: 31 tensions, lines printed 15, max line 14/31
+NEWSIZE crime_wave city: 79 tensions, lines printed 15, max line 21/79 [21 21 20 19 19 18 17 16 15 15 13 13 12 12 6]
+NEWSIZE crime_wave metropolis: 79 tensions, lines printed 15, max line 20/79 [20 20 20 19 18 17 17 17 16 16 16 15 14 10 2]
+NEW guild_conflict: pool 16 (6 need nothing, 3 stored), 3 a place, short 0/215; max line 25.1% of the kind's places, lines printed 16/16
+NEWLINE guild_conflict need "guild" holds 99.5% prints 21.4% STORED "A guild master's records have gone missing ahead of an audit"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 12.6% STORED "A journeyman denied mastership has proof the exam was rigged"
+NEWLINE guild_conflict need ["market","guild"] holds 99.5% prints 20.5% STORED "Someone is sabotaging both sides to destabilize the market for a third party"
+NEWLINE guild_conflict need "none" holds 100.0% prints 22.8% "A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it"
+NEWLINE guild_conflict need "none" holds 100.0% prints 17.7% "A craftsman working from home has been told to stop selling, and means to carry on"
+NEWLINE guild_conflict need "none" holds 100.0% prints 17.7% "Both sides of the quarrel over trade are counting heads before the next gathering, and each is a few short"
+NEWLINE guild_conflict need "none" holds 100.0% prints 21.4% "A family that sells to both sides is being pressed to choose, and has asked for a few more days"
+NEWLINE guild_conflict need "market" holds 100.0% prints 18.1% "A stall at the market has been promised to two traders at once, and both will turn up at dawn"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 25.1% "The guild is about to fine a member for buying from an outsider, and the member has threatened to name who else does it"
+NEWLINE guild_conflict need "court sits" holds 93.0% prints 15.8% "A trader turned away from selling is taking the matter to the court, and needs a witness who saw it"
+NEWLINE guild_conflict need "navigable" holds 42.3% prints 8.8% "A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it"
+NEWLINE guild_conflict need "organised crime" holds 81.9% prints 16.3% "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+NEWLINE guild_conflict need "none" holds 100.0% prints 19.5% "An apprentice has run from one side of the quarrel to the other, and taken a master's tools along"
+NEWLINE guild_conflict need "none" holds 100.0% prints 25.1% "A cart of goods from outside has arrived for a trader who is not allowed to sell them, and the carter wants paying"
+NEWLINE guild_conflict need "market" holds 100.0% prints 20.0% "A trader at the market has been selling under the guild price, and a crowd is expected at the stall tomorrow"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 17.2% "A guild master has quietly bought from a trader outside the guild, and someone saw it happen"
+NEWSIZE guild_conflict hamlet: 2 tensions, lines printed 6, max line 1/2
+NEWSIZE guild_conflict village: 1 tensions, lines printed 3, max line 1/1
+NEWSIZE guild_conflict town: 49 tensions, lines printed 16, max line 16/49
+NEWSIZE guild_conflict city: 75 tensions, lines printed 16, max line 20/75 [20 18 18 17 16 16 15 15 14 13 13 13 12 9 9 7]
+NEWSIZE guild_conflict metropolis: 88 tensions, lines printed 16, max line 22/88 [22 21 20 20 20 19 19 19 16 15 15 15 15 12 11 5]
+NEW resource_scarcity: pool 9 (5 need nothing, 3 stored), 3 a place, short 0/114; max line 52.6% of the kind's places, lines printed 9/9
+NEWLINE resource_scarcity need "market" holds 42.1% prints 16.7% STORED "A store of the scarce goods is being kept off the market on purpose"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 52.6% STORED "The scarcity was engineered. Someone destroyed the competing supply route"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 51.8% STORED "An alternative source exists but the information is being suppressed"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 51.8% "A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 48.2% "A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 40.4% "A family that cannot pay the prices asked is selling its last good tools to buy what it needs"
+NEWLINE resource_scarcity need "famine" holds 18.4% prints 7.9% "With the place going hungry, a sack of food has gone missing from a household that had little to spare"
+NEWLINE resource_scarcity need "war: at war" holds 18.4% prints 7.9% "A party sent to take supplies for the war is due tomorrow, and households are hiding what they can"
+NEWLINE resource_scarcity need "navigable" holds 44.7% prints 22.8% "A boat has come in loaded with what is short, and its master is asking twice what anyone here can pay"
+NEWSIZE resource_scarcity thorp: 25 tensions, lines printed 8, max line 16/25
+NEWSIZE resource_scarcity hamlet: 26 tensions, lines printed 8, max line 17/26
+NEWSIZE resource_scarcity village: 21 tensions, lines printed 9, max line 12/21
+NEWSIZE resource_scarcity town: 16 tensions, lines printed 9, max line 10/16
+NEWSIZE resource_scarcity city: 14 tensions, lines printed 7, max line 10/14 [10 7 7 6 5 4 3]
+NEWSIZE resource_scarcity metropolis: 12 tensions, lines printed 7, max line 7/12 [7 7 5 5 5 4 3]
+NEW external_threat: pool 9 (4 need nothing, 3 stored), 3 a place, short 0/79; max line 63.3% of the kind's places, lines printed 9/9
+NEWLINE external_threat need "!war: peace" holds 32.9% prints 13.9% STORED "The threat is being exaggerated by someone who profits from wartime contracts"
+NEWLINE external_threat need "!war: peace" holds 32.9% prints 12.7% STORED "A diplomatic channel exists that the war party is suppressing"
+NEWLINE external_threat need "none" holds 100.0% prints 51.9% STORED "The threat has an agent already inside the settlement"
+NEWLINE external_threat need "none" holds 100.0% prints 49.4% "A rider brings fresh news of the danger tonight, and it does not match what the last one said"
+NEWLINE external_threat need "none" holds 100.0% prints 54.4% "A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic"
+NEWLINE external_threat need "none" holds 100.0% prints 63.3% "A stranger asking about the roads in and out has asked for a bed for the night"
+NEWLINE external_threat need "walls" holds 58.2% prints 21.5% "A stretch of the wall has been found crumbling, and mending it needs more hands than there are"
+NEWLINE external_threat need "guardPresence" holds 70.9% prints 25.3% "Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected"
+NEWLINE external_threat need "crisis: monster_pressure" holds 24.1% prints 7.6% "Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever"
+NEWSIZE external_threat thorp: 13 tensions, lines printed 9, max line 11/13
+NEWSIZE external_threat hamlet: 11 tensions, lines printed 9, max line 7/11
+NEWSIZE external_threat village: 16 tensions, lines printed 9, max line 12/16
+NEWSIZE external_threat town: 15 tensions, lines printed 9, max line 9/15
+NEWSIZE external_threat city: 11 tensions, lines printed 8, max line 8/11 [8 5 5 4 4 3 2 2]
+NEWSIZE external_threat metropolis: 13 tensions, lines printed 7, max line 10/13 [10 9 7 4 4 3 2]
+NEW succession_crisis: pool 9 (4 need nothing, 3 stored), 3 a place, short 0/74; max line 63.5% of the kind's places, lines printed 9/9
+NEWLINE succession_crisis need "ruler: lord" holds 9.5% prints 4.1% STORED "A would-be heir approaches outsiders to investigate a rival's past"
+NEWLINE succession_crisis need ["!ruler: council","!ruler: elder","!crisis: succession_void"] holds 8.1% prints 6.8% STORED "The ailing ruler wants a final errand completed before naming a successor"
+NEWLINE succession_crisis need ["!ruler: council","!ruler: elder","!crisis: succession_void"] holds 8.1% prints 2.7% STORED "Someone is poisoning the ruler slowly, and someone in the household knows"
+NEWLINE succession_crisis need "none" holds 100.0% prints 63.5% "One of the would-be successors is giving a feast tonight, and every guest will be counted"
+NEWLINE succession_crisis need "none" holds 100.0% prints 59.5% "A would-be successor wants a rival's supporters watched, quietly, and is offering coin for it"
+NEWLINE succession_crisis need "none" holds 100.0% prints 60.8% "A letter meant for one would-be successor has reached another, and both now know what it says"
+NEWLINE succession_crisis need "none" holds 100.0% prints 62.2% "A household that has backed no one is visited by each side in turn, and has asked for protection from both"
+NEWLINE succession_crisis need "ruler: council" holds 43.2% prints 21.6% "A council member has not yet said whom they back, and their house was broken into last night"
+NEWLINE succession_crisis need "crisis: succession_void" holds 37.8% prints 18.9% "With the seat empty, the seal used on the place's business has gone missing"
+NEWSIZE succession_crisis thorp: 12 tensions, lines printed 7, max line 9/12
+NEWSIZE succession_crisis hamlet: 8 tensions, lines printed 7, max line 5/8
+NEWSIZE succession_crisis village: 15 tensions, lines printed 7, max line 12/15
+NEWSIZE succession_crisis town: 10 tensions, lines printed 7, max line 8/10
+NEWSIZE succession_crisis city: 12 tensions, lines printed 7, max line 10/12 [10 7 7 6 4 1 1]
+NEWSIZE succession_crisis metropolis: 17 tensions, lines printed 7, max line 10/17 [10 10 9 8 6 6 2]
+NEW outside_debt: pool 9 (5 need nothing, 3 stored), 3 a place, short 0/63; max line 47.6% of the kind's places, lines printed 9/9
+NEWLINE outside_debt need "none" holds 100.0% prints 47.6% STORED "The original loan documents contain a clause that was never disclosed publicly"
+NEWLINE outside_debt need "!crisis: under_siege" holds 98.4% prints 39.7% STORED "A creditor's agent is in town conducting a quiet assessment before enforcement"
+NEWLINE outside_debt need "none" holds 100.0% prints 25.4% STORED "The debt could be voided, if someone can prove it was obtained through fraud"
+NEWLINE outside_debt need "none" holds 100.0% prints 46.0% "The one who kept the accounts of the loans has gone missing a week before the collectors are due"
+NEWLINE outside_debt need "none" holds 100.0% prints 39.7% "A family that would bear the cost is quietly moving its goods out of the place, cart by cart"
+NEWLINE outside_debt need "none" holds 100.0% prints 41.3% "The outside power has sent word of the day it will collect, and wants to know who will meet its people"
+NEWLINE outside_debt need "crisis: indebted" holds 44.4% prints 19.0% "The creditors have taken a household's goods against the debt, and the household wants them back before they leave"
+NEWLINE outside_debt need "prosperity: ≥ prosperous" holds 27.0% prints 15.9% "A wealthy household offers to pay the debt itself, in return for a say in how the place is run"
+NEWLINE outside_debt need "market" holds 66.7% prints 25.4% "A trader at the market is selling off stock cheap before the collectors arrive, and seems to know the day"
+NEWSIZE outside_debt thorp: 9 tensions, lines printed 7, max line 6/9
+NEWSIZE outside_debt hamlet: 5 tensions, lines printed 7, max line 4/5
+NEWSIZE outside_debt village: 7 tensions, lines printed 6, max line 5/7
+NEWSIZE outside_debt town: 9 tensions, lines printed 9, max line 6/9
+NEWSIZE outside_debt city: 12 tensions, lines printed 9, max line 6/12 [6 6 5 4 4 4 3 2 2]
+NEWSIZE outside_debt metropolis: 21 tensions, lines printed 9, max line 9/21 [9 9 8 8 8 7 5 5 4]
+NEW legitimacy_crisis: pool 9 (6 need nothing, 3 stored), 3 a place, short 0/58; max line 48.3% of the kind's places, lines printed 9/9
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 43.1% STORED "A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 44.8% STORED "Those in power are paying people to speak for them at the gatherings, because no one will do it for free"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 37.9% STORED "A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 44.8% "Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 48.3% "A speaker who questions the right to rule is due at a gathering tonight, and those in charge mean to stop the gathering"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 46.6% "One of those who deny the mandate has been offered a post by those in charge, and has not yet answered"
+NEWLINE legitimacy_crisis need "crisis: insurgency" holds 32.8% prints 15.5% "Those risen against the authority have taken a cart of supplies on the road, and the carter is missing"
+NEWLINE legitimacy_crisis need "crisis: religious_conversion" holds 15.5% prints 5.2% "A preacher of the new faith is telling crowds that those in charge rule without blessing"
+NEWLINE legitimacy_crisis need "seat outranked" holds 24.1% prints 13.8% "The power that stands above the governing one has sent an envoy to look into the question, and both sides are courting the envoy"
+NEWSIZE legitimacy_crisis thorp: 7 tensions, lines printed 8, max line 6/7
+NEWSIZE legitimacy_crisis hamlet: 6 tensions, lines printed 8, max line 4/6
+NEWSIZE legitimacy_crisis village: 15 tensions, lines printed 8, max line 10/15
+NEWSIZE legitimacy_crisis town: 9 tensions, lines printed 8, max line 6/9
+NEWSIZE legitimacy_crisis city: 10 tensions, lines printed 8, max line 6/10 [6 5 5 4 4 3 2 1]
+NEWSIZE legitimacy_crisis metropolis: 11 tensions, lines printed 8, max line 7/11 [7 6 6 4 4 4 1 1]
+NEW corruption_scandal: pool 9 (6 need nothing, 3 stored), 3 a place, short 0/51; max line 54.9% of the kind's places, lines printed 9/9
+NEWLINE corruption_scandal need "none" holds 100.0% prints 41.2% STORED "The investigator who uncovered the corruption has received a death threat"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 47.1% STORED "A key witness can be found, but won't speak without protection"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 54.9% STORED "The corruption goes higher than anyone yet suspects; those pressing to expose it are being used"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 35.3% "A copy of the evidence is being passed from hand to hand, and one copy differs from the rest"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 35.3% "An official named in the evidence is selling property in a hurry"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 41.2% "Someone has offered to buy the evidence outright, for more than it seems worth"
+NEWLINE corruption_scandal need "court sits" holds 43.1% prints 5.9% "The hearing on the evidence is set for next week, and the clerk who was to read it out has fallen ill"
+NEWLINE corruption_scandal need "crisis: recently_betrayed" holds 39.2% prints 19.6% "One of those who betrayed the place is named in the evidence, under another name"
+NEWLINE corruption_scandal need "market" holds 47.1% prints 19.6% "A trader who paid dues to the corrupt has kept every receipt, and is deciding whom to give them to"
+NEWSIZE corruption_scandal thorp: 8 tensions, lines printed 5, max line 8/8
+NEWSIZE corruption_scandal hamlet: 13 tensions, lines printed 7, max line 8/13
+NEWSIZE corruption_scandal village: 8 tensions, lines printed 7, max line 6/8
+NEWSIZE corruption_scandal town: 6 tensions, lines printed 9, max line 3/6
+NEWSIZE corruption_scandal city: 8 tensions, lines printed 9, max line 5/8 [5 5 3 3 3 2 1 1 1]
+NEWSIZE corruption_scandal metropolis: 8 tensions, lines printed 8, max line 7/8 [7 4 4 3 2 2 1 1]
+TRI new hooks: all 37.5% (thorp 14.9% hamlet 16.2% village 24.3% town 30.4% city 66.2% metropolis 73.0%)
+BAR new (150 a size): thorp top 16/150 10.7% seen 3.6% · hamlet top 17/150 11.3% seen 3.4% · village top 12/150 8.0% seen 4.4% · town top 16/150 10.7% seen 4.0% · city top 21/150 14.0% seen 6.6% · metropolis top 22/150 14.7% seen 7.0%
+BAR new (50 a size): thorp top 5/50 10.0% seen 2.7% · hamlet top 5/50 10.0% seen 2.9% · village top 7/50 14.0% seen 4.1% · town top 7/50 14.0% seen 4.4% · city top 10/50 20.0% seen 6.1% · metropolis top 9/50 18.0% seen 6.4%

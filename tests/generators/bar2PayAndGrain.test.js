@@ -44,7 +44,10 @@ describe('BAR2-LABELS-2 batch 4: the defenders\' pay reads the military gate (LB
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   test('NOT "irregular pay" where the gate is 1 (the paid-in-full twin prints); KEEP: below 1 it stands', () => {
-    const failures = collectSeedFailures(['r2r-town-28', 'r2r-city-6', 'r2r-metropolis-0'], (seed) => {
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): the gates of r2r-city-6 (0.88) and r2r-metropolis-0 (0.76) lit are below 1 (fortune moves the purse);
+    // the lowest r2r-city and r2r-metropolis whose gate is 1 and whose guard line takes the disciplined branch are city-98
+    // (98 135 167 of 200) and metropolis-134 (alone of 200)
+    const failures = collectSeedFailures(['r2r-town-28', 'r2r-city-98', 'r2r-metropolis-134'], (seed) => {
       const t = town(seed);
       expect(gate(t), `${seed}: the gate`).toBe(1);
       expect(IRREGULAR.test(guard(t)), `${seed}: no irregular pay`).toBe(false);
@@ -68,7 +71,9 @@ describe('BAR2-LABELS-2 batch 4: the defenders\' pay reads the military gate (LB
   }, 240_000);
 
   test('NOT "chronically underfunded" where the gate is 1 (the funded twin prints); KEEP: below 1 it stands', () => {
-    const failures = collectSeedFailures(['r2r-thorp-45', 'r2r-city-47', 'r2r-metropolis-2'], (seed) => {
+    // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-metropolis-2's gate lit is 0.76; the lowest r2r-metropolis whose gate is 1 and whose validator
+    // writes the funding reason is metropolis-12 (12 30 44 93 153 157 of 200)
+    const failures = collectSeedFailures(['r2r-thorp-45', 'r2r-city-47', 'r2r-metropolis-12'], (seed) => {
       const t = town(seed);
       expect(gate(t), `${seed}: the gate`).toBe(1);
       expect(UNDERFUNDED.test(reasons(t)), `${seed}: no underfunding`).toBe(false);

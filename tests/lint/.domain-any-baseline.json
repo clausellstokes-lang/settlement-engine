@@ -1,6 +1,6 @@
 {
-  "total": 2200,
-  "totalAny": 2162,
+  "total": 2199,
+  "totalAny": 2161,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -392,7 +392,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/factionCompetition.js": {
-      "any": 96,
+      "any": 95,
       "suppress": 0
     },
     "src/domain/worldPulse/factionPairLedger.js": {

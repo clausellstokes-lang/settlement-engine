@@ -174,6 +174,9 @@ export const MIGRATION_WORDS = Object.freeze(['influx', 'exodus']);
 export const INSTITUTION_WORDS = Object.freeze([
   'hospital', 'healer', 'monastery', 'mill', 'smith', 'bathhouse', 'docks', 'quarry', 'mine',
   'tavern', 'school', 'temple', 'granary', 'bank',
+  // DAILY-1/DAILY-2 (rulings 8 and 12 of 2026-11-20; vetoable by the owner): the 13 appended rows of `INSTITUTION_KIND_PATTERNS`
+  'waterSource', 'dwellings', 'farmland', 'commonGrazing', 'bridge', 'square', 'bakery', 'warehouse', 'theatre',
+  'fishingLanding', 'rootCellar', 'shepherd', 'craftGuild',
 ]);
 
 /** The terrain classes (`steps/resolveConfig.js`). */
@@ -193,6 +196,21 @@ export const LAW_ORDER_RUNGS = Object.freeze(['collapsed', 'critical', 'strained
 
 /** BAR6-CRIME (BRIEF-BAR6 (d) and B6; vetoable by the owner): the force that keeps order (`orderForce.js :: orderForceOf`). */
 export const ORDER_FORCE_WORDS = Object.freeze(['kept', 'paid', 'volunteers']);
+/**
+ * `house: <key>` → its `causeHouses.js` group (PAGE-12, CAUSES-PARITY-2 H; the chair's leave of 23:39 UTC 2026-11-21): the
+ * one table the `house` dimension's reader reads.
+ * @type {Readonly<Record<string, string>>}
+ */
+const HOUSE_KEY_GROUPS = Object.freeze({
+  thieves_guild: 'thievesGuild',
+  smuggling: 'smuggling',
+  caravans: 'caravans',
+  black_market: 'blackMarket',
+  assassins: 'assassins',
+  underground: 'underground',
+  whisper_market: 'whisperMarket',
+  outlaws: 'outlaws',
+});
 
 /** The prosperity ladder (`prosperityRank.js :: PROSPERITY_LABELS`, below it the generator's own bottom rung `Subsistence`), lower-cased. */
 export const PROSPERITY_WORDS = Object.freeze(['subsistence', 'struggling', 'poor', 'moderate', 'comfortable', 'prosperous', 'wealthy']);
@@ -240,6 +258,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [fishBoughtIn] FAULTS-ROWS (FR12 (3)): `fishBoughtIn.js :: fishBoughtIn`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
+ * @property {Readonly<Record<string, boolean>>} [office] DAILY-3 B3 L8: `officeForms.js :: officesOf`, office key -> holds
  */
 /**
  * @typedef {object} Dimension
@@ -282,6 +301,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   garrison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.garrison) }),
   hospital: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
   healer: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.healer) }),
+  // DAILY-2 B1b (the chair's ruling 12 (2) of 2026-11-20 18:56, "an atom is granted in advance" where its home is an existing
+  // getter; vetoable by the owner, on the veto list as new vocabulary): `sick house` = a hospital or a healer stands (the
+  // defence home's two atoms, one composite: a daily-life line naming the sick-house or a healer needs one or the other).
+  'sick house': dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.hospital === true || f.defence.healer === true) : undefined) }),
   // COHERENCE-AGREE-4 (2026-11-12, the chair's ruling on STOP 3): a court sits, and somewhere holds the guilty —
   // two facts, each the defence home's own atom (`defence.js :: court`, `prison`), so a line naming one
   // and not the other declares both.
@@ -495,6 +518,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // record names no grain (`ownPlots.js`): a line that gives the record's one source as what every table leans on first refuses it.
   'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  // DAILY-2 B1b (the chair's ruling 12 (2) of 2026-11-20 18:56, "an atom is granted in advance" where its home is an existing
+  // getter; vetoable by the owner, on the veto list as new vocabulary): `grain imported` = an import of the stored list names
+  // grain, string imports only (`canonImports` returns the stored strings). A daily-life line about grain brought in needs it.
+  'grain imported': dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports)
+    ? f.imports.some((g) => typeof g === 'string' && /\bgrain\b/i.test(g))
+    : undefined) }),
   // BAR8-DESKS-ECO (J's 11c.needed, 11c.venture, 11c.idle; BRIEF-BAR8 DESKS-ECO item 2, the chair's BR17 (3); vetoable by the
   // owner, on the veto list as new vocabulary), beneath `imports`: `critical import brought in` = the good DS-ECO-12's critical
   // import lens fills `{good}` with (a house needs it and the land lacks it) is one an import of the stored list brings
@@ -518,6 +547,35 @@ export const FACT_DIMENSIONS = Object.freeze({
   // ── keyed presence: one value of a categorical fact ──
   ruler: dim({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
     reader: (f, key) => (f.rulerKind === undefined ? undefined : f.rulerKind === key) }),
+  // DAILY-2 B1b (the chair's ruling 12 (2) of 2026-11-20 18:56, "an atom is granted in advance" where its home is an existing
+  // getter; vetoable by the owner, on the veto list as new vocabulary): `government named` = the record names a
+  // government of some kind (`rulerKindOf` not null). A daily-life line naming the government by its label needs it.
+  'government named': dim({ shape: 'presence', home: 'rulerKind', reader: (f) => (f.rulerKind === undefined ? undefined : f.rulerKind !== null) }),
+  // DAILY-3 B3 L8 (the chair's E72 and E82 of 2026-11-22, on the measure `measures/OFFICE`; vetoable by the owner, new
+  // vocabulary): `office: <key>` = the place is governed by that office's FORM: the governing ROW's name (`rulingPower.js ::
+  // nameOf(governingFactionOf(record))`, the read `seat/holderOfSeat.js :: holderOf` makes) is one of the key's forms, each a
+  // KEY of its row of `seat/seatTable.js :: SEAT_TABLE` (row `government`; row `noble` for the steward), read through
+  // `formKindOf`. Answered by `factsOf(record).office` (the lazy leaf `facts/officeForms.js :: officesOf`, which holds the
+  // map); NEVER `powerStructure.government`, never a name test on a label (ruling 10). FAIL CLOSED: no governing row, or one
+  // stamped `hidden: true` (a shared read drops such a row), and every key is false; dark and lit read the same (the office,
+  // not the holder). FOR THE VEIL'S READER: NOT hideable by an owner. A faction card's floor keeps its name and `isGoverning`;
+  // the one writer of `hidden: true` is the infiltrator in `generators/power/stressFactions.js`.
+  office: dim({ shape: 'presence', home: 'office', keys: [
+    // ATOM office: elders : seat (seatTable.js :: formKindOf) : the place is governed by the elders's form (Elder Council, Free Elder Council, Elder Consensus, Household Council)
+    'elders',
+    // ATOM office: headman : seat (seatTable.js :: formKindOf) : the place is governed by the headman's form (Headman's Authority)
+    'headman',
+    // ATOM office: mayor : seat (seatTable.js :: formKindOf) : the place is governed by the mayor's form (Town Mayor)
+    'mayor',
+    // ATOM office: reeve : seat (seatTable.js :: formKindOf) : the place is governed by the reeve's form (Elected Reeve)
+    'reeve',
+    // ATOM office: lord's steward : seat (seatTable.js :: formKindOf) : the place is governed by the lord's steward's form (Feudal Stewardship)
+    "lord's steward",
+  ],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
+      const o = f.office;
+      return o && typeof o === 'object' && key && Object.hasOwn(o, key) ? bool(o[key]) : undefined;
+    } }),
   // BAR6-HOUSES, THE CHAIR'S RULING SV1 of 2026-11-16 (new vocabulary; vetoable by the owner): the record gives the town a
   // sovereign (a lord, a liege, an overlord, a crown): the government, a power, a house, a person or the founding names one, or a
   // war or an occupation supplies the realm's (`sovereign.js`). A line that names a sovereign declares it, or takes a twin naming none.
@@ -534,6 +592,10 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (f, key) => (typeof f.terrain === 'string' ? f.terrain === key : undefined) }),
   route: dim({ shape: 'presence', home: 'route', keys: ROUTE_WORDS,
     reader: (f, key) => (typeof f.route === 'string' ? f.route === key : undefined) }),
+  // DAILY-2 B1b (the chair's ruling 12 (2) of 2026-11-20 18:56, "an atom is granted in advance" where its home is an existing
+  // getter; vetoable by the owner, on the veto list as new vocabulary): `route open` = the trade-route kind
+  // is a route at all (`tradeRouteOf`: not empty, `isolated` or `none`). A daily-life line naming the road or its traffic needs it.
+  'route open': dim({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? !['', 'isolated', 'none'].includes(f.route) : undefined) }),
   // ── bands: one comparator each ──
   tier: dim({ shape: 'band', home: 'tier', order: TIER_WORDS, reader: (f) => f.tier }),
   population: dim({ shape: 'band', home: 'populationBand', order: POPULATION_WORDS, reader: (f) => f.populationBand }),
@@ -568,6 +630,25 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  // PAGE-7 (CAUSES-DATA addendum 3, item 2: the chair's ruling of 16:30; addendum 4 adds `caravans`; vetoable by the owner,
+  // new vocabulary): `house: thieves_guild`, `house: smuggling` and `house: caravans` = a house of the group stands on the live roster by catalogue identity
+  // (`causeHouses.js :: causeHouseStands`): the troubles' causes that name a thieves' guild or smuggling presume one.
+  // PAGE-12 (CAUSES-PARITY-2 H, the chair's leave of 23:39 UTC 2026-11-21; vetoable by the owner, new vocabulary): five keys
+  // more, each the crime_wave row of the hideable house it names (`black_market`, `assassins`, `underground`,
+  // `whisper_market`, `outlaws`), mapped to its `causeHouses` group by HOUSE_KEY_GROUPS.
+  house: dim({ shape: 'presence', home: 'causeHouses', keys: ['thieves_guild', 'smuggling', 'caravans', 'black_market', 'assassins', 'underground', 'whisper_market', 'outlaws'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
+      const houses = /** @type {Record<string, unknown>} */ (f).causeHouses;
+      const group = key && Object.hasOwn(HOUSE_KEY_GROUPS, key) ? HOUSE_KEY_GROUPS[key] : null;
+      return houses && typeof houses === 'object' && group ? bool(/** @type {Record<string, unknown>} */ (houses)[group]) : undefined;
+    } }),
+  // PAGE-7 (CAUSES-DATA addendum 4: the chair's 17:32; vetoable by the owner, new vocabulary): `house: caravans` (above: a
+  // caravan house on the live roster, `causeHouses.js`) and `entrepot` = goods pass through here on their way elsewhere, the
+  // economy's stored mark (`entrepot.js`): a line that calls the place a waypoint of passing trade presumes it.
+  entrepot: dim({ shape: 'presence', home: 'entrepot', reader: (/** @type {FactsLike} */ f) => bool(/** @type {Record<string, unknown>} */ (f).entrepot) }),
+  'own house': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc', reader: (_f, _key, ctx) => { if (!ctx || !('npc' in ctx)) return undefined; const inst = /** @type {{ institution?: { kind?: unknown, key?: unknown, veiled?: unknown } } | null} */ (ctx.npc)?.institution; return inst?.kind === 'house' && inst.veiled === false && typeof inst.key === 'string' && inst.key.trim() !== ''; } }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 of 2026-11-20 16:41 UTC (vetoable by the owner, new vocabulary): the card handed as `ctx.npc` keeps a house of its own (its `institution`, kind 'house'), stamped public at birth (`veiled: false`: no criminal or clandestine house, `cardVeil.js :: isHideableHouse`); a line naming {house} needs it
+  'export good': dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.some((x) => String(typeof x === 'string' ? x : /** @type {{ name?: unknown } | null} */ (x)?.name ?? '').replace(/\([^)]*\)/g, '').trim() !== '') : undefined) }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 (vetoable by the owner, new vocabulary): the export list (`canonExports`, the list `goodExported.js` reads) names a good; a line naming {export} needs it
+  'import good': dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.some((x) => typeof x === 'string' && x.replace(/\([^)]*\)/g, '').trim() !== '') : undefined) }), // PEOPLE-1 B1, THE CHAIR'S RULING 4 (vetoable by the owner, new vocabulary): the import list (`canonImports`, the list `criticalImportBroughtIn.js` reads) names a good; a line naming {import} needs it
 });
 
 /** The crisis dimension's legal values. */

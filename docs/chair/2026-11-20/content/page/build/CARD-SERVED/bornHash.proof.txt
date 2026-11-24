@@ -1,0 +1,12 @@
+PAGE-4 CARD-SERVED — the hash proof (BUILD.md, the common law: render only, no stored field of a born town moves).
+Script: ../CARD/bornHash.mjs, reused unchanged (sha256 of JSON.stringify of each born document).
+base: 2e29d60ea (lane/page-4-2026-11-20, CARD merged + this brief), extracted read-only into a scratch tree -> bornHash.base.txt
+tip:  this worktree with the CARD-SERVED change                                                             -> bornHash.tip.txt
+hxd300    base 300 documents, tip 300 documents, list digest 61e0cfb1ef2dee06341ba0729c05cc1fd518dbf460ece57b4bece09bbd43acf2 at both
+census720 base 720 documents, tip 720 documents, list digest 877943f2a62be509605188658b3204d1afb0fec7ec9aa2eb6e387e306e1df88d at both
+`cmp bornHash.base.txt bornHash.tip.txt`: identical (1,022 lines each; 0 documents differ). The digests equal CARD's own proof's.
+
+The page side (standingDrift.mjs -> standingDrift.out.txt): over the same 1,020 born documents (30,025 people, 3,811
+first-of memberships), 0 first-of memberships name a power the roster holds with no figure, 0 name a power the roster
+does not hold, and 0 Standing lines differ between the base reader and the tip reader. No born page's row moves, so no
+pinned render or page-census pattern moves; the change reaches only a document that withholds a figure or a power.

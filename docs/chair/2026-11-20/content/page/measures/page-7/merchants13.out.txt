@@ -1,0 +1,15 @@
+hxd-town-59: The place, governed by the Merchant oligarchy, has borrowed heavily from outside, and the lender is moving to collect.   [merchants_rule; governing Merchant oligarchy; economy powers 2]
+hxd-city-6: Once more a heavy debt binds the place to a power from outside that means to collect.   [old_debt; governing Merchant Guild Council; economy powers 4]
+hxd-city-54: The place, governed by the Merchant Guild Council, has borrowed heavily from outside, and the lender is moving to collect.   [merchants_rule; governing Merchant Guild Council; economy powers 3]
+hxd-city-119: The place, governed by the Merchant Guild Council, has borrowed heavily from outside, and the lender is moving to collect.   [merchants_rule; governing Merchant Guild Council; economy powers 2]
+hxd-metropolis-19: What the place owes to a power outside is pressing hard, and the lender is preparing to collect.   [creditors_sit; governing Grand Merchant Oligarchy; economy powers 3]
+hxd-metropolis-28: Once more a heavy debt binds the place to a power from outside that means to collect.   [old_debt; governing Grand Merchant Oligarchy; economy powers 3]
+hxd-metropolis-30: With the Grand Guild Consortium governing, the place owes a heavy debt to an outside power that is preparing to collect.   [merchants_rule; governing Grand Guild Consortium; economy powers 2]
+hxd-metropolis-42: What the place owes to a power outside is pressing hard, and the lender is preparing to collect.   [creditors_sit; governing Grand Guild Consortium; economy powers 5]
+hxd-metropolis-68: With the Grand Merchant Oligarchy governing, the place owes a heavy debt to an outside power that is preparing to collect.   [merchants_rule; governing Grand Merchant Oligarchy; economy powers 3]
+hxd-metropolis-79: Debt sits heavy here, and the outside power the place owes is moving to collect.   [creditors_sit; governing Grand Guild Consortium; economy powers 4]
+hxd-metropolis-80: Once more a heavy debt binds the place to a power from outside that means to collect.   [old_debt; governing Grand Merchant Oligarchy; economy powers 4]
+hxd-metropolis-111: With the Grand Merchant Oligarchy governing, the place owes a heavy debt to an outside power that is preparing to collect.   [merchants_rule; governing Grand Merchant Oligarchy; economy powers 3]
+hxd-metropolis-118: With the Grand Merchant Oligarchy governing, the place owes a heavy debt to an outside power that is preparing to collect.   [merchants_rule; governing Grand Merchant Oligarchy; economy powers 3]
+TOWNS 13 (governed by a power of trade, an outside_debt tension live) · merchants_rule 7 · old_debt 3 · creditors_sit 3
+exit 0

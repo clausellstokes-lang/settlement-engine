@@ -6,7 +6,9 @@
  *     districts; a legacy note that dates an event at an age the timeline does not give it; two events each called the one
  *     that made the town), so the detector cannot go blind.
  * (b) THE READ TOWN (C24951, bar0-metropolis-calm-rand-21): red at the base (8aef8e7d46): its wild-magic tension placed the
- *     surge in the merchants' quarter beside its past event's temple district; now both say the temple district.
+ *     surge in the merchants' quarter beside its past event's temple district; now both say the temple district. Since
+ *     PAGE-2 T1 (2026-11-20) the tension's form is one of the canonical and its spares (historyData.js :: tensionWording),
+ *     so its sentence is computed through that module with the event's own place, never quoted (still red at that base).
  * (c) THE ZERO on the record arms (PLACE, DATE) over the census's towns the detector fired in at the base and a stride of
  *     the 720 (every 24th seed), born as the census bears them (CENSUS-3 seedcfg.mjs). The census itself (corpus + dumps,
  *     the SHAPE arm with the page's lines) is the measure over the whole 720 and the fresh 300 (the hand-back's table).
@@ -24,7 +26,8 @@ import { generateSettlementPipeline, regenHistoryPipeline } from '../../src/gene
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
-import { LEGITIMACY_HELD_TWINS } from '../../src/data/historyData.js';
+import { HISTORICAL_EVENTS_DATA, LEGITIMACY_HELD_TWINS, historyDescVariantsOf, ownEventPlace, tensionWording } from '../../src/data/historyData.js';
+import { renderHistoryTemplate } from '../../src/generators/historyTemplate.js';
 import { shapeYieldingKey } from '../../src/domain/facts/shapingEvent.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { SEAT_CONTESTED_STANDING } from '../../src/generators/power/factionStanding.js';
@@ -80,7 +83,18 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
     const ev = h.historicalEvents.find((/** @type {any} */ e) => e.templateType === 'wild_magic');
     const tn = h.currentTensions.find((/** @type {any} */ t) => t.type === 'wild_magic');
     expect(ev.description).toMatch(/marked the temple district/); // KEEP: the past event's own place
-    expect(tn.description).toBe('An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never fully faded');
+    // the surge placed ONCE, in the temple district, and not its own past event's sentence
+    expect(tn.description).toContain('the temple district');
+    expect(tn.description).not.toContain("the merchants' quarter"); // anchored: the same sentence holds 'the temple district' (line above) and is pinned whole by the toBe below
+    expect(tn.description).not.toBe(ev.description);
+    // PAGE-2 T1: the sentence itself, computed through the module: its form on the town's seed, placed where its event was,
+    // and, where that form is the event's own sentence (as here), the first spare that differs (COHERENCE-PRESUME)
+    const place = ownEventPlace('wild_magic', h.historicalEvents);
+    expect(place).toBe('the temple district');
+    const render = (/** @type {string} */ form) => renderHistoryTemplate(form, { '{quarter}': place });
+    const canonical = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'wild_magic')?.description;
+    const chosen = render(tensionWording({ type: 'wild_magic', description: String(canonical) }, { _seed: 'bar0-metropolis-calm-rand-21' }));
+    expect(tn.description).toBe(chosen === ev.description ? historyDescVariantsOf('wild_magic').map(render).find((t) => t !== ev.description) : chosen);
     expect(oneEventOneTellingInstances(born('bar0-metropolis-calm-rand-21'))).toEqual([]);
   });
 
@@ -97,7 +111,13 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
   });
 
   /** The census's towns that printed "widely questioned" beside an approved or endorsed seat at the base (8 of the 720). */
-  const HELD_AT_BASE = ['r2r-city-12', 'r2r-city-18', 'r2r-city-30', 'r2r-city-39', 'r2r-metropolis-21', 'r2r-metropolis-56', 'r2s-infiltrated-metropolis-0', 'r2s-religious_conversion-city-1'];
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (2bc483fc8), r2r-city-12, r2r-metropolis-21,
+  // r2s-infiltrated-metropolis-0 and r2s-religious_conversion-city-1 hold no approved seat. Each is re-picked, lit, by the
+  // case's own predicate (publicLegitimacy.isApproved, and a legitimacy_crisis tension), never by its words: the lowest seed
+  // of its own family of 200 not already listed (r2r-city: 18 30 39 75 196; r2r-metropolis: 56 122; r2s-infiltrated-
+  // metropolis: 33 70 ...). r2s-religious_conversion-city holds the case on 0 of 500 lit (0 approved), so its row takes the
+  // same stress at the next size down that holds it, r2s-religious_conversion-town-62 (the lowest of 100; was city-1).
+  const HELD_AT_BASE = ['r2r-city-75', 'r2r-city-18', 'r2r-city-30', 'r2r-city-39', 'r2r-metropolis-122', 'r2r-metropolis-56', 'r2s-infiltrated-metropolis-33', 'r2s-religious_conversion-town-62'];
   it('(e) C26792: an accepted seat\'s legitimacy tension says most accept it (red at the base in each of the eight)', () => {
     const twins = new Set(Object.values(LEGITIMACY_HELD_TWINS));
     const failures = collectSeedFailures(HELD_AT_BASE, (seed) => {
@@ -118,7 +138,15 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
       expect(twinned.length === 0 || s.powerStructure.publicLegitimacy.isApproved === true).toBe(true);
     });
     expectNoSeedFailures(failures, 'C26792: no twin beside a seat the record does not call approved');
-    expect(born('r2s-infiltrated-hamlet-0').history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/openly and widely questioned/); // KEEP: its own form, true there
+    // BORN UNDER LAW 1 (THE FLIP, CLOSE-6 F-FORTUNE-3, 2026-11-23; the chair's ruling, COMMON-RULES 14 (c)): this KEEP's case, a seat
+    // accepted at the history step and unapproved at the end, is extinct lit: it holds on none of 2,280 lit births searched (r2r
+    // 0..199 and r2s 0..11, all sizes; 8 accepted at the history step, none of them unapproved at the end). PLAUSIBLE, by reading:
+    // the fortune law's merits only add to the seat's standing after the history step (FLIP-LIST-B s.1: +10, no base score
+    // moves), so a seat read accepted there ends accepted. Under both laws at 1 the hamlet is accepted at the history step and
+    // Tolerated at the end (probed), so its own form, true there, prints. The lit STRIDE arm above is the guard lit.
+    const lawOne = generateSettlementPipeline({ ...cfgFor('r2s-infiltrated-hamlet-0'), _seatLawVersion: 1, _fortuneLawVersion: 1 }, null, { seed: 'r2s-infiltrated-hamlet-0', customContent: {} });
+    expect(lawOne.powerStructure.publicLegitimacy.label, 'anchored: under law 1 the seat ends Tolerated').toBe('Tolerated');
+    expect(lawOne.history.currentTensions.find((/** @type {any} */ t) => t.type === 'legitimacy_crisis').description).toMatch(/openly and widely questioned/); // KEEP: its own form, true there
   }, 300000);
 
   it('(f) C26792: the history section regeneration derives the same line (the chair\'s condition 3)', () => {
@@ -153,7 +181,13 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
   }, 300000);
 
   /** The towns where the rank-1 challenger stood "too far behind" a Contested seat at the base (C14176). */
-  const CONTESTED_AT_BASE = ['r2r-village-43', 'r2s-religious_conversion-village-0', 'bar0-hamlet-under_siege-rand-101', 'bar0-hamlet-under_siege-rand-108', 'bar0-city-under_siege+famine-rand-110'];
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee: a KEEP-side case that no
+  // longer holds is a premise): lit, the seat of r2s-religious_conversion-village-0 reads Holding, and that of
+  // bar0-city-under_siege+famine-rand-110 reads Holding with its seat's holder apart. Each is re-picked, lit, by the case's own
+  // predicate (power/factionStanding.js's contested rung: the coup reading Contested with the rank-1 power its first
+  // challenger, a governing first power, the top two's gap over 6, the rank-1 power not the seat's holder apart), never by the
+  // line's words: the lowest of its own family of 200 (village-21; rand-5). Was village-0 and rand-110.
+  const CONTESTED_AT_BASE = ['r2r-village-43', 'r2s-religious_conversion-village-21', 'bar0-hamlet-under_siege-rand-101', 'bar0-hamlet-under_siege-rand-108', 'bar0-city-under_siege+famine-rand-5'];
   it('(h) C14176: the rank-1 power that could take a Contested seat says so (red at the base in each)', () => {
     const failures = collectSeedFailures(CONTESTED_AT_BASE, (seed) => {
       const f = born(seed).powerStructure.factions;

@@ -58,7 +58,9 @@ const STRONG = 'A strong power in {name} has stopped obeying the government. Its
 const PLAIN = 'Some in {name} have stopped obeying the government. They stall, their taxes go unpaid, and they wait.';
 
 /** A rival of standing at the end: the strong line (the smallest, the largest, a crisis arm). */
-const RIVAL = ['r2r-thorp-25', 'r2s-insurgency-village-1', 'r2s-insurgency-city-2', 'r2r-metropolis-26'];
+// RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-thorp-25 lit holds no rival of standing at the end; the lowest
+// r2r-thorp under an insurgency that holds one at the end is thorp-60 (60 75 of 200)
+const RIVAL = ['r2r-thorp-60','r2s-insurgency-village-1', 'r2s-insurgency-city-2', 'r2r-metropolis-26'];
 /** No rival of standing at the end, though the roster held one when the summary was first rendered (lost in the resize). */
 const LOST_IN_RESIZE = ['r2r-thorp-22', 'r2r-thorp-29', 'r2r-thorp-52', 'r2s-insurgency-thorp-0', 'r2s-insurgency-thorp-1', 'r2s-insurgency-thorp-2', 'r2s-insurgency-hamlet-0', 'r2s-insurgency-hamlet-1', 'r2s-insurgency-hamlet-2', 'r2s-insurgency-hamlet-3'];
 /** No rival of standing at any point. */

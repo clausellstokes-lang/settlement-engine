@@ -1,5 +1,6 @@
 import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
 import { settleArcaneToPractitioners, settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1); TAIL-CONTENT-CLOSE-1
+import { settleSeatHolderToRecord } from './power/factionStanding.js'; // SEAT-10 U6 (E65): the final-record pass
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -48,6 +49,7 @@ import {
   livingContentRosterFor,
 } from '../domain/content/livingContentSeam.js';
 import { createGenerationContext } from './generationContext.js';
+import { withRecordSeatLaw } from '../domain/seat/seatLaw.js'; // UK-LEGACY: a regen pass hands down the RECORD's seat law, never the handed one
 
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
@@ -202,6 +204,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
   keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
   settleClergyToFinalRoster(finalCtx.settlement?.powerStructure?.factions); // TAIL-POWERS-B-4 (P31 (1)): the margins line reads the final roster
   settleArcaneToPractitioners(finalCtx.settlement?.powerStructure?.factions, finalCtx.settlement); // TAIL-CONTENT-CLOSE-1: practitioners named only where one works magic
+  settleSeatHolderToRecord(finalCtx.settlement); // SEAT-10 U6 (E65): the holder known only on the final record (R2) holds the office in its rows; before withConflictRelations reads them
   // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
   if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
   if (typeof options.onComplete === 'function') {
@@ -506,7 +509,7 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
  * the roster this seed has always produced.
  *
  * @param {Object} settlement
- * @param {Object} config
+ * @param {Object} handedConfig  the config the caller holds; its seat key is replaced by the record's (`seatLaw.js :: withRecordSeatLaw`)
  * @param {{ seed?: string, mode?: string, locks?: Record<string, unknown>|null }} [options]
  *   `mode` selects the preservation policy (nudge / rebalance / reforge); it
  *   defaults to 'rebalance', which keeps user canon and locked entities.
@@ -514,7 +517,10 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
  *   names survive on top of whatever the mode already carries. Absent or empty ⇒
  *   the dormant path, byte-identical to a call that never passed it.
  */
-export function regenNPCsPipeline(settlement, config, options = {}) {
+export function regenNPCsPipeline(settlement, handedConfig, options = {}) {
+  // UK-LEGACY (the chair's rule): the seat law is read OFF THE RECORD, never off the config handed (for a save with no
+  // `config` the store hands the FORM config, which holds whatever world was loaded last); every other key is the handed one.
+  const config = withRecordSeatLaw(handedConfig, settlement);
   const seed = options.seed || generateSeed();
   // Save/restore: a regen called from inside an outer seeded run must restore
   // the outer RNG, not clear it to null (setActiveRng returns the prior RNG).
@@ -687,11 +693,14 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
  * identity to be carried by (historyPreservation.js, deferral A).
  *
  * @param {Object} settlement
- * @param {Object} config
+ * @param {Object} handedConfig  the config the caller holds; its seat key is replaced by the record's (`seatLaw.js :: withRecordSeatLaw`)
  * @param {{ seed?: string }} [options]
  * @returns {{ history: Object, _regenSeed: string }}
  */
-export function regenHistoryPipeline(settlement, config, options = {}) {
+export function regenHistoryPipeline(settlement, handedConfig, options = {}) {
+  // UK-LEGACY (the chair's rule): the seat law is read OFF THE RECORD, never off the config handed (for a save with no
+  // `config` the store hands the FORM config, which holds whatever world was loaded last); every other key is the handed one.
+  const config = withRecordSeatLaw(handedConfig, settlement);
   const seed = options.seed || generateSeed();
   // Save/restore: same re-entrancy contract as regenNPCsPipeline.
   const prevRng = setActiveRng(createPRNG(seed));

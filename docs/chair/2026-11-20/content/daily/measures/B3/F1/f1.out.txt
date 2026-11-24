@@ -1,0 +1,92 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B3/F1/measure.f1.mjs > docs/chair/2026-11-20/content/daily/measures/B3/F1/f1.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 143s
+the dm key on the owner's read: 900 of 900; on a no-audience read: 0 of 900
+
+════ food_culture (public, no audience)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 9 | 9 | 9 | 7 | 8 | 9 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| EMPTY % of 150 | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE a printed text not its branch's keyed pick of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE markets close their stalls: no market (M1 row 187) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the wealthier streets: a thorp or hamlet (M1 row 188) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE temple kitchens: no sacred house (M1 row 189) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE caravans that never arrived: no trade route (M1 row 190) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bmarket|\bbought\b: no market, save A12's "bought in" (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bbread\b|\bloaf\b|\bgrain\b: no grain grown and no import of grain (the pool's own needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bstreets\b|better-off: a thorp or hamlet (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (14/150): "There is enough to eat, if nobody asks for much more than the day needs."
+  top sentence hamlet (13/150): "There is more than enough to eat, and nobody here goes to bed hungry."
+  top sentence village (14/150): "There is more than enough to eat, and nobody here goes to bed hungry."
+  top sentence town (11/150): "A pot of stew over the fire is the usual supper, and there is usually enough to go round."
+  top sentence city (12/150): "Food costs more than most people can comfortably pay, so they buy less of it."
+  top sentence metropolis (13/150): "Food is tighter than it should be, and households stretch what they have."
+
+════ commoner_resentments (public, no audience)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 17 | 11 | 13 | 8 | 9 | 14 |
+| EMPTY (no true line) | 29 | 13 | 11 | 53 | 51 | 39 |
+| EMPTY % of 150 | 19 | 9 | 7 | 35 | 34 | 26 |
+| FALSE a printed text not its branch's keyed pick of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE blind eye|smuggl|the law here bends: a crime clause on the public slot (ruling 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE merchants who claim: no market (M1 row 192) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE bread prices: no grain (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's indifference: not a council (M1 row 193) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE of any town: populationBand small (M1 row 195) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the gate fee: no gate (M1 row 196) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE market day: no market (M1 row 197) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the council's favorite: not a council (M1 row 198) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE favorite tavern: no tavern/inn (M1 row 199) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bthe council\b: not a council (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE price of food|\bstalls\b: no market (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (25/150): "Talk among neighbours turns, sooner or later, to what the Elder Council has got wrong lately."
+  top sentence hamlet (16/150): "People say the council is slow to listen and quick to decide without them."
+  top sentence village (20/150): "People do as the Elder Council says, but few of them think well of it."
+  top sentence town (12/150): "Many feel that those in charge should be doing more to see everyone fed."
+  top sentence city (13/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+  top sentence metropolis (21/150): "Nobody likes to see the pot so thin, and everyone has someone to blame for it."
+
+════ commoner_resentments_dm (the owner's read)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single SENTENCE % of 150 | 3 | 3 | 1 | 3 | 8 | 8 |
+| EMPTY (no true line) | 140 | 139 | 147 | 138 | 125 | 125 |
+| EMPTY % of 150 | 93 | 93 | 98 | 92 | 83 | 83 |
+| FALSE a printed text not its branch's keyed pick of the admitted lines (declared needs) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE blind eye: no guard force (M1 row 191, owner-only) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE \bthe watch\b: no watch (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE those who keep order: no guard force (the pool's own need) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE smuggl: no smuggling home (no line may say it) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top sentence thorp (5/150): "People grumble that those who break the rules do better here than those who keep them."
+  top sentence hamlet (5/150): "People grumble that those who break the rules do better here than those who keep them."
+  top sentence village (2/150): "Honest folk say that crime pays better here than work."
+  top sentence town (5/150): "Honest folk say that crime pays better here than work."
+  top sentence city (12/150): "People resent how little is done about wrongdoing that everyone knows of."
+  top sentence metropolis (12/150): "People grumble that those who break the rules do better here than those who keep them."
+
+════ the chair's lines of B3 F1
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| T9 printed: % of 150 (count) | 0 (0) | 1 (1) | 0 (0) | 0 (0) | 0 (0) | 0 (0) |
+| FALSE T9 printed with no grain | 0 | 0 | 0 | 0 | 0 | 0 |
+| C5 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 1 (2) |
+| FALSE C5 printed with no grain | 0 | 0 | 0 | 0 | 0 | 0 |
+| F0 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 1 (1) | 2 (3) | 0 (0) |
+| FALSE F0 printed with no grain | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE F0 printed with no market | 0 | 0 | 0 | 0 | 0 | 0 |
+| A12 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 5 (7) | 2 (3) | 5 (7) |
+| FALSE A12 printed with no import of grain | 0 | 0 | 0 | 0 | 0 | 0 |
+| A4 printed: % of 150 (count) | 9 (13) | 6 (9) | 6 (9) | 6 (9) | 3 (4) | 2 (3) |
+| K70_4 printed: % of 150 (count) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 0 (0) |
+
+FALSE-LINE TOTAL (all three slots and the six lines, every FALSE row above): 0
+
+── M1's named places ──
+hxd-thorp-0: food "The everyday fare is a simple stew and whatever else the day provides." | resent "" | dm ""
+hxd-hamlet-0: food "Food is steady here, if not generous, and every household has enough with little left over." | resent "Many here feel that the Headman's Authority no longer listens to people like them." | dm ""
+hxd-hamlet-7: food "Meals are plain and filling, and little goes to waste." | resent "People bring their complaints to the Free Elder Council and expect little to come of them." | dm ""
+hxd-metropolis-0: food "Rations are tight, and the poor eat watered stew." | resent "Few here would say that the Ducal Governorship speaks for them. Nobody likes to see the pot so thin, and everyone has someone to blame for it." | dm ""
+
+done in 143s

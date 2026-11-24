@@ -1,0 +1,24 @@
+(0) LEADS. kinds in HISTORICAL_EVENTS_DATA: 29; with exactly 3 base sides: 29; with an unanchored form: 24 (of which with own unanchored description 24, own unanchored sides 17); with a dated form: 3; with descriptionByDirection: 1
+HISTORY_DESC_VARIANTS: 29 kinds, sizes 2x29; kinds without: none
+side slots: base 87, of which substituted by substituteNames (historyGenerator.js:568-574) 7; all side lists incl. memory forms 147, substituted 9
+kind shares on the 300 (towns carrying the kind / 300; and share of the 515 tensions): crime_wave 25.7% / 15.0%; guild_conflict 22.0% / 12.8%; resource_scarcity 11.0% / 6.4%; external_threat 8.7% / 5.0%; succession_crisis 8.3% / 4.9%; outside_debt 7.7% / 4.5%; great_flood 6.3% / 3.7%; legitimacy_crisis 6.3% / 3.7%; wild_magic 6.0% / 3.5%; corruption_scandal 6.0% / 3.5%; tyranny 5.3% / 3.1%; magical_controversy 5.0% / 2.9%; generational_divide 4.7% / 2.7%; popular_uprising 4.7% / 2.7%; disputed_land 4.7% / 2.7%; leadership_vacuum 4.3% / 2.5%; great_fire 4.3% / 2.5%; religious_tension 4.0% / 2.3%; plague_years 4.0% / 2.3%; population_friction 3.7% / 2.1%; infiltration_fear 3.7% / 2.1%; occupation_legacy 3.0% / 1.7%; economic_disparity 2.3% / 1.4%; demographic_pressure 2.0% / 1.2%; trade_dispute 2.0% / 1.2%; heresy_trial 1.7% / 1.0%; pilgrimage_surge 1.7% / 1.0%; trade_collapse 1.3% / 0.8%; market_crash 1.3% / 0.8%
+
+(V) step 2's side naming on the 1482 printed sides: renamed from the record 250 (16.9%), DROPPED as a house the town lacks 26 (1.8%): Local enforcement 6, Merchants who benefit from cheap newcomer labour 5, Legal class profiting from ambiguity 5, the merchant class 3, Traders who fear the buyers are going elsewhere 2, the orthodox clergy 1, Displaced traders 1, Guild members 1, Those who would trade outside the guild 1, Non-guild workers 1; tensions left with < 2 sides: 4
+the eight commonest kinds (by tensions): crime_wave, guild_conflict, resource_scarcity, external_threat, succession_crisis, outside_debt, great_flood, legitimacy_crisis
+
+P(at least two of three distinct towns share ... word for word), exact over every triple; a step is the mean of R seeded draws (min-max beside)
+TODAY  tension text:            32.1% | thorp 9.4%, hamlet 9.8%, village 15.6%, town 40.3%, city 82.1%, metropolis 79.7%
+TODAY  side set:                27.1% | thorp 10.7%, hamlet 12.2%, village 20.1%, town 36.2%, city 79.3%, metropolis 73.9%
+TODAY  card (text AND sides):   22.7% | thorp 8.5%, hamlet 5.3%, village 15.4%, town 32.6%, city 77.2%, metropolis 72.0%
+STEP 1 (base + 2 variants, uniform)            text: 15.3% | thorp 4.4%, hamlet 6.4%, village 7.3%, town 17.2%, city 43.7%, metropolis 49.4% (min-max 14.7-15.9%)
+                                               side set: 27.1% | thorp 10.7%, hamlet 12.2%, village 20.1%, town 36.2%, city 79.3%, metropolis 73.9%
+                                               card: 9.8% | thorp 3.4%, hamlet 4.0%, village 6.7%, town 13.0%, city 38.5%, metropolis 35.5%
+STEP 2 (1 + sides named / dropped)             text: 15.3% | thorp 4.4%, hamlet 6.4%, village 7.3%, town 17.2%, city 43.7%, metropolis 49.4% (min-max 14.7-15.9%)
+                                               side set: 17.6% | thorp 9.3%, hamlet 5.8%, village 16.3%, town 20.8%, city 66.4%, metropolis 67.0%
+                                               card: 6.3% | thorp 3.0%, hamlet 2.1%, village 5.6%, town 7.3%, city 30.0%, metropolis 30.7%
+STEP 3 N=3 (2 + 3 new wordings, top 8 kinds)   text: 9.5% | thorp 2.6%, hamlet 4.6%, village 5.6%, town 10.9%, city 26.7%, metropolis 31.1% (min-max 9.0-10.0%)
+                                               side set: 17.6% | thorp 9.3%, hamlet 5.8%, village 16.3%, town 20.8%, city 66.4%, metropolis 67.0%
+                                               card: 4.0% | thorp 1.8%, hamlet 1.7%, village 4.5%, town 4.9%, city 17.4%, metropolis 17.6%
+STEP 3 N=6 (2 + 6 new wordings, top 8 kinds)   text: 7.4% | thorp 2.0%, hamlet 3.8%, village 5.1%, town 8.6%, city 19.6%, metropolis 22.9% (min-max 6.9-7.8%)
+                                               side set: 17.6% | thorp 9.3%, hamlet 5.8%, village 16.3%, town 20.8%, city 66.4%, metropolis 67.0%
+                                               card: 3.1% | thorp 1.5%, hamlet 1.5%, village 4.2%, town 4.0%, city 12.4%, metropolis 12.6%

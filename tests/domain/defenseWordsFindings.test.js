@@ -158,8 +158,13 @@ describe('defenseWordsFindings', () => {
 });
 
 describe('the Defense tab says only what the place has', () => {
-  it('the charter-hall hamlet no longer prints "garrison pay" beside "No walls or garrison"', () => {
-    const s = world('defense-hamlet-1');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-hamlet-1 stands Prosperous and its purse
+  // funds the hall in full, so no note is written. The case's own predicate (a charter hall, no walls and no garrison, and
+  // the purse short, keepOfRecord(...).funded under 1) holds on no defense-hamlet of 1,000 lit (56 charter-only hamlets, every
+  // one standing Comfortable or Prosperous) and no thorp of 400 seats a charter hall, so the row takes the next size up that
+  // holds it: defense-village-16 (Moderate), the lowest of 400 (16 204), born here beside the corpus (was defense-hamlet-1)
+  it('the charter-hall village (defense-village-16) no longer prints "garrison pay" beside "No walls or garrison"', () => {
+    const s = born('village', 16);
     const row = deriveDefenseReadiness(s).find((r) => r.label === 'Invasion & War');
     // anchored: the next line pins the same note's whole text
     expect(row.fundingNote).not.toMatch(/garrison pay/);
@@ -176,8 +181,11 @@ describe('the Defense tab says only what the place has', () => {
   // so its gate stands at the identity and writes no note. No place of this corpus has a palisade for its one
   // defence below Comfortable standing; the first of its seed family that does is defense-thorp-20
   // (Moderate; its roster names it "Palisade"), born here beside the corpus.
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-thorp-20 stands Comfortable, so its gate
+  // stands at the identity. Re-scanned defense-thorp-0..199 lit for the case's own predicate (a palisade its one defence, and
+  // the purse short, keepOfRecord(...).funded under 1): 35 144 154 168; 35 is the first (Moderate; was defense-thorp-20)
   it('a palisade never pays "garrison pay": the note names the palisade', () => {
-    const thorp20 = born('thorp', 20);
+    const thorp20 = born('thorp', 35);
     const row = deriveDefenseReadiness(thorp20).find((r) => r.label === 'Invasion & War');
     expect(defenseFactsOf(thorp20).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade']);
     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);
@@ -220,5 +228,176 @@ describe('the Defense tab says only what the place has', () => {
       .filter((row) => row.found.length > 0)
       .map((row) => `${row.seed}: ${row.found.map((f) => `[${f.term}] ${f.sentence}`).join(' | ')}`);
     expect(offenders).toEqual([]);
+  });
+});
+
+/**
+ * MATCHER (PROSE-2, 2026-11-20; brief docs/chair/2026-11-20/content/prose/briefs/MATCHER.md, the chair's ruling of
+ * 18:19 UTC): a walls, soldier or garrison term is a finding only when the sentence claims THIS PLACE has that defence.
+ *
+ * (a) THE FALSE MATCHES GO QUIET. Every distinct `defense-words` sentence the receipt's battery found at the 97
+ * `needs_review` places with no critical issue among `hxd-<size>-0..49` (GEN11-FIELDS's 300; born as its census births,
+ * no compose; exported per stored field at base b9ab84760). Each row: the term, the facts it was judged against (the
+ * roster stub below rebuilds them, pinned first), the field(s) that held it, the findings it made, the sentence with the
+ * place's own name masked as `#`. 38 rows (26 distinct sentences), 127 findings.
+ *
+ * (b) CONTROLS STAY RED. The claiming sentences already in the battery's own tests, plus this lane's own controls
+ * written close to the excuses. They pass before AND after the rule.
+ */
+describe('MATCHER · a defence term is a finding only as a claim about this place', () => {
+  /** @type {Record<string, Array<{ name: string }>>} one roster row per fact the measured places held */
+  const ROW = { W: [{ name: 'Palisade' }], G: [{ name: 'Garrison' }], M: [{ name: 'Mercenary company' }], H: [{ name: 'Small hospital' }] };
+  /** @param {string} key e.g. '-', 'W', 'GM' @returns {{ institutions: Array<{ name: string }> }} */
+  const stubOf = (key) => ({ institutions: key === '-' ? [] : [...key].flatMap((k) => ROW[k]) });
+  /** @type {Record<string, (f: any) => boolean>} the fact whose absence the term was judged against */
+  const ABSENT = {
+    walls: (f) => !f.hasWalls,
+    soldiers: (f) => !f.hasGarrison && !f.hasMercenary,
+    garrison: (f) => !f.hasGarrison,
+    hospital: (f) => !f.hasHospital,
+  };
+
+  /** @type {ReadonlyArray<[string, string, string, number, string]>} [term, facts, field(s), findings, sentence] */
+  const MEASURED = [
+    ['garrison', 'M', 'availableServices.employment[].desc', 1, 'Hire trained soldiers for military campaigns, garrison duty, and escorts.'],
+    ['garrison', 'M', 'institutions[].desc', 1, 'Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.'],
+    ['hospital', '-', 'institutions[].desc', 1, 'It may keep a hospital or a school.'],
+    ['hospital', 'W', 'institutions[].desc', 1, 'It may keep a hospital or a school.'],
+    ['hospital', 'WGM', 'institutions[].desc', 1, 'It may keep a hospital or a school.'],
+    ['hospital', '-', 'institutions[].desc', 2, 'May operate hospital/school.'],
+    ['hospital', 'GM', 'institutions[].desc', 1, 'May operate hospital/school.'],
+    ['hospital', 'W', 'institutions[].desc', 1, 'May operate hospital/school.'],
+    ['soldiers', '-', 'history.founding.foundedBy', 14, 'a discharged soldier who liked the view and had nowhere better to be'],
+    ['soldiers', 'W', 'history.founding.foundedBy', 3, 'a discharged soldier who liked the view and had nowhere better to be'],
+    ['soldiers', 'W', 'institutions[].desc', 1, "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount."],
+    ['soldiers', 'W', 'institutions[].desc', 1, 'A drinking hall where retired soldiers and mercenaries gather.'],
+    ['soldiers', '-', 'history.founding.reason', 1, 'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield'],
+    ['soldiers', 'W', 'history.founding.reason', 1, 'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield'],
+    ['soldiers', 'W', 'availableServices.equipment[].desc', 3, 'Practical clothing for soldiers and servants.'],
+    ['soldiers', '-', 'npcs[].physical.clothes', 4, "soldier's practical dress with officer's insignia"],
+    ['soldiers', 'W', 'npcs[].physical.clothes', 4, "soldier's practical dress with officer's insignia"],
+    ['soldiers', 'H', 'institutions[].desc', 1, 'Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.'],
+    ['soldiers', 'W', 'institutions[].desc', 3, 'Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.'],
+    ['soldiers', 'W', 'institutions[].desc', 1, 'Where retired soldiers and sellswords do their drinking.'],
+    ['walls', '-', 'institutions[].desc', 1, 'A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty.'],
+    ['walls', 'G', 'institutions[].desc', 1, 'A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for fifty.'],
+    ['walls', '-', 'institutions[].desc', 2, 'A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters for fifty.'],
+    ['walls', 'H', 'institutions[].desc', 1, 'A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters for fifty.'],
+    ['walls', '-', 'institutions[].desc', 11, 'A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn.'],
+    ['walls', '-', 'institutions[].desc', 17, 'A walled plot gated against livestock, kept by the households in turn.'],
+    ['walls', '-', 'institutions[].desc', 1, "A walled waystation offering merchants, their beasts, and their goods a safe night's rest."],
+    ['walls', '-', 'culturalIdentity.architecturalDetail', 4, 'gates, low walls, and planted courtyards divide public from household space'],
+    ['walls', '-', 'arrivalScene', 3, 'Gates, low walls, and planted courtyards divide public from household space.'],
+    ['walls', '-', 'spatialLayout.layout', 9, 'Stone-walled holdings climbing a south-facing hillside'],
+    ['walls', 'GM', 'institutions[].desc', 1, 'Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with families, or raised on within its walls.'],
+    ['walls', '-', 'history.historicalEvents[].lastingEffects[] + history.currentTensions[].lastingEffects[]', 2, "The merchant quarter and the labourers' quarter remain walled apart"],
+    ['walls', 'G', 'history.historicalEvents[].lastingEffects[]', 3, "The merchant quarter and the labourers' quarter remain walled apart"],
+    ['walls', 'H', 'history.historicalEvents[].lastingEffects[] + history.currentTensions[].lastingEffects[]', 3, "The merchant quarter and the labourers' quarter remain walled apart"],
+    ['walls', '-', 'npcs[].presentation.impression', 2, 'The walls are covered with charts weighted down by stones.'],
+    ['walls', '-', 'culturalIdentity.builtForm + culturalNotes', 16, 'Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.'],
+    ['walls', 'G', 'history.legacyAnnotations[].annotation', 3, "What it left behind (the merchant quarter and the labourers' quarter remain walled apart) is still part of the place."],
+    ['walls', 'H', 'history.legacyAnnotations[].annotation', 1, "What it left behind (the merchant quarter and the labourers' quarter remain walled apart) is still part of the place."],
+  ];
+  /**
+   * The measured sentences the rule does NOT excuse (they stay findings): the foundling home's "within its walls" is
+   * the building's own wall only because it stands in the building's own description, a thing the sentence alone does
+   * not say; the same words of the place ("Its walls are kept by the households in turn.") are a claim. The monastery's
+   * hospital lines are a REAL fault where no hospital stands (the chair's ruling of 18:46): cured in the data rows by a
+   * later unit (WORDING-CURE), never excused by the checker.
+   */
+  const UNEXCUSED = new Set([
+    'May operate hospital/school.',
+    'It may keep a hospital or a school.',
+    'Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with families, or raised on within its walls.',
+  ]);
+
+  it('the measured set: 38 rows, 26 distinct sentences, 127 findings; every row\'s facts lack its term', () => {
+    expect(MEASURED).toHaveLength(38);
+    expect(new Set(MEASURED.map((row) => row[4])).size).toBe(26);
+    expect(MEASURED.reduce((n, row) => n + row[3], 0)).toBe(127);
+    const wrong = MEASURED.filter(([term, key]) => {
+      const f = defenseFactsOf(stubOf(key));
+      const held = { W: f.hasWalls, G: f.hasGarrison, M: f.hasMercenary, H: f.hasHospital };
+      const rebuilt = Object.entries(held).filter(([, v]) => v).map(([k]) => k).join('') || '-';
+      return rebuilt !== key || !ABSENT[term](f);
+    });
+    expect(wrong).toEqual([]);
+  });
+
+  // One registered test per half (a loop of `it` would park this file in the sovereignty walker's census); each
+  // failing row is named in the list the assertion prints.
+  it('(a) every measured row the rule excuses is quiet (31 rows, 23 distinct sentences, 119 findings)', () => {
+    const excused = MEASURED.filter((row) => !UNEXCUSED.has(row[4]));
+    expect(excused).toHaveLength(31);
+    expect(new Set(excused.map((row) => row[4])).size).toBe(23);
+    expect(excused.reduce((n, row) => n + row[3], 0)).toBe(119);
+    const stillFound = excused
+      .filter(([, key, , , sentence]) => defenseWordsFindings(stubOf(key), sentence).length > 0)
+      .map(([term, key, field, , sentence]) => `[${term} · ${key} · ${field}] ${sentence}`);
+    expect(stillFound).toEqual([]);
+  });
+
+  it('(a) the measured rows the rule does not excuse stay findings (7 rows, 3 distinct sentences, 8 findings: the foundling home\'s "within its walls", the monastery\'s two hospital lines)', () => {
+    const unexcused = MEASURED.filter((row) => UNEXCUSED.has(row[4]));
+    expect(unexcused).toHaveLength(7);
+    expect(new Set(unexcused.map((row) => row[4])).size).toBe(3);
+    expect(unexcused.reduce((n, row) => n + row[3], 0)).toBe(8);
+    for (const [term, key, , , sentence] of unexcused) {
+      expect(defenseWordsFindings(stubOf(key), sentence).map((f) => f.term)).toEqual([term]);
+    }
+  });
+
+  /**
+   * The claiming sentences already in the battery's own tests that a bare roster must flag: this file's planted
+   * garrison line, and the claims `tests/generators/soakDefenceReach.test.js` keeps red (its CLAIMS list, its
+   * perimeter claims and the reserve line). `tests/generators/defenceTwinLines.test.js` pins its own ten declared
+   * originals as findings on a bare place in its own run; this file's "no food reserves" line is pinned above.
+   */
+  /** @type {ReadonlyArray<[string, string]>} [term, sentence] */
+  const BATTERY_CONTROLS = [
+    ['garrison', 'The garrison drills at dawn. The hall posts bounties.'],
+    ['walls', 'The population that now fills these walls is neither fixed nor familiar.'],
+    ['garrison', 'Manouel Iasites has begun collecting a road toll for the garrison.'],
+    ['walls', 'Stone-walled village on a south-facing slope, paths converging at the market cross'],
+    ['soldiers', 'There are soldiers on Satyawadi\'s streets, but they move in pairs and do not linger.'],
+    ['soldiers', 'Two soldiers at the gate.'],
+    ['garrison', 'The garrison handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.'],
+    ['hospital', 'Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'],
+    ['walls', 'A walled plot by the church, and the walls of the town are thin.'],
+    ['walls', 'Outside the walls, the camps grow by the week.'],
+    ['walls', 'A walled town on the river.'],
+    ['walls', "The town's walls are older than its charter."],
+    ['walls', 'Ashby can put a real body of armed men on its walls.'],
+    ['walls', 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.'],
+  ];
+  /** This lane's own controls, each written to sit beside an excuse and still claim the place's defence. */
+  /** @type {ReadonlyArray<[string, string]>} [term, sentence] */
+  const NEW_CONTROLS = [
+    ['walls', 'Its walls are kept by the households in turn.'],
+    ['soldiers', 'Soldiers stand at the gate.'],
+    ['garrison', 'The garrison drills in the square.'],
+    ['walls', 'The village is walled against raiders.'],
+    ['walls', 'A walled village of stone holdings climbs the hillside.'],
+    ['walls', 'Low walls ring the village.'],
+    ['walls', 'The walls are covered with moss and ivy.'],
+    ['walls', 'The quarters were walled apart once, and the walls of the village still stand.'],
+    ['garrison', 'Garrison duty falls to the young men of the village.'],
+    ['soldiers', 'Retired from the field, the soldiers still stand watch at the gate.'],
+    ['soldiers', 'Soldiers keep order among the merchants and travellers.'],
+    ['soldiers', "The soldiers' barracks stand by the gate."],
+    ['garrison', 'Discharged soldiers and the garrison share the square.'],
+    ['hospital', 'The village keeps a hospital for the sick.'],
+  ];
+  const BARE = { institutions: [] };
+
+  it('(b) the battery\'s own claiming sentences stay findings on a bare roster', () => {
+    const quiet = BATTERY_CONTROLS.filter(([term, sentence]) => !defenseWordsFindings(BARE, sentence).some((f) => f.term === term));
+    expect(quiet).toEqual([]);
+  });
+
+  it('(b) this lane\'s controls (at least six) stay findings on a bare roster', () => {
+    expect(NEW_CONTROLS.length).toBeGreaterThanOrEqual(6);
+    const quiet = NEW_CONTROLS.filter(([term, sentence]) => !defenseWordsFindings(BARE, sentence).some((f) => f.term === term));
+    expect(quiet).toEqual([]);
   });
 });

@@ -131,9 +131,14 @@ describe('aiSlice — prototype pollution / dead code / stale banner', () => {
   //     itself is ported and pinned by the streamed-field-path test above, which
   //     covers the shared setNestedPath chokepoint both paths use.
   // (2) "requestDailyLife is removed from the slice" pinned master's deletion of
-  //     the separate daily-life action. On this lineage requestDailyLife is LIVE
-  //     and wired (OutputContainer, DailyLifeTab, operationRegistry) — the
-  //     assertion contradicts the kept architecture. Dropped with this reason.
+  //     the separate daily-life action. It was dropped while requestDailyLife was
+  //     live here; DAILY-3 U4b (the chair's cure B, 2026-11-22) RETIRED it once the
+  //     Daily Life button went, so the assertion is restored just below.
+
+  test('requestDailyLife is removed from the slice (retired: no consumer since the button went)', () => {
+    const store = makeStore();
+    expect(store.getState().requestDailyLife).toBeUndefined();
+  });
 
   test('requestProgression clears a stale aiPartialFailure banner at start', async () => {
     const store = makeStore();

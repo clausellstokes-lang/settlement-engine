@@ -23,9 +23,19 @@ describe('the daily-life lines read as sentences (C-L4)', () => {
     lines = [born('r2r-village-0', 'village'), born('r2r-thorp-0', 'thorp'), born('r2r-thorp-19', 'thorp')].flatMap(summarizeDailyLife);
   }, 120000);
 
-  it('a plural power takes a bare apostrophe ("Merchant Guilds\' mark")', () => {
-    expect(lines.some((l) => /Merchant Guilds' mark/.test(l))).toBe(true);
-    expect(lines.filter((l) => /(?:ies|[bcdfghjklmnpqrtvwxyz]s)'s mark/.test(l))).toEqual([]);
+  // DAILY-3 B3 E3 (LINES-2 § 3): the possessive line is now one of the power pool's keyed picks, so the three births need
+  // not print it; the meaning is kept on a record whose top power is plural (a nameless record takes the pool's index 0,
+  // the possessive line), and no born line forms the possessive by hand.
+  // D4C-1 (the chair's E133 (3)): the line puts no possessive on the name at all ("the mark of {power}"; a name may hold
+  // one itself, "the Headman's Authority's mark"); the meaning kept: a plural power reads right, and no line forms it by hand.
+  it('a plural power reads right in the mark line ("the mark of the Merchant Guilds"), no possessive formed on it', () => {
+    const planted = summarizeDailyLife({ powerStructure: { factions: [
+      { id: 'faction.merchants', name: 'Merchant Guilds', faction: 'Merchant Guilds', power: 60 },
+      { id: 'faction.council', name: 'Town Council', faction: 'Town Council', power: 30 },
+    ] } });
+    expect(planted.some((l) => /the mark of the Merchant Guilds on every door/.test(l))).toBe(true);
+    expect(planted.filter((l) => /Merchant Guilds'/.test(l))).toEqual([]);
+    expect([...lines, ...planted].filter((l) => /(?:ies|[bcdfghjklmnpqrtvwxyz]s)'s mark/.test(l))).toEqual([]);
   });
   it('no slot repeats its label inside its text', () => {
     expect(lines.filter((l) => /^([^:]+): \1:/.test(l))).toEqual([]);

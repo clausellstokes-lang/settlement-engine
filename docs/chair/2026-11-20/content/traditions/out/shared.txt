@@ -1,0 +1,5 @@
+# CTR5 on the pool (432 towns); served = projectShareVeil(toPublicSafe(record), default veil), the party link's own composition
+owner set == shared-page set: 1 of 432 towns (the seed posture strips _seed; genesis falls back to id)
+shared page as it stands: 1333 descriptions composed for the reader from the served document; names not in the served document: 0
+owner's page in player view (reader audience over the unprojected record): 1353 descriptions; names not in the served document: 0
+the owner's rites composed from the served document: keeper clause dropped 0, person dropped 0 (of 1353)

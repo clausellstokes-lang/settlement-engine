@@ -1,0 +1,22 @@
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  181 |
+  182 |   useEffect(() => {
+> 183 |     void loadList(galleryQuery);
+      |          ^^^^^^^^ Avoid calling setState() directly within an effect
+  184 |     // Cleanup bumps the token, and THAT is what retires an in-flight load on a
+  185 |     // query change or an unmount: a superseded promise finds `gen` behind the
+  186 |     // current one and writes nothing. It replaces the old local `cancelled`  react-hooks/set-state-in-effect
+
+/home/user/settlement-engine/.claude/worktrees/agent-ae39baf5753ae0b54/src/pdf/sections/Cover.jsx
+  18:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 38 problems (0 errors, 38 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+[gate-tail] end:  15:53:12 up  1:23,  0 user,  load average: 3.92, 5.18, 4.90
+[gate-tail] full log: /tmp/gate-tail.32306.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

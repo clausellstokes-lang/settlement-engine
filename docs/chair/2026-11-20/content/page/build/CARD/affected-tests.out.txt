@@ -1,0 +1,83 @@
+    169|     }
+    170|     expect(misses).toEqual([]);
+       |                    ^
+    171|   }, 1_200_000);
+    172| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/domain/defenseStateProseDesk.test.js > DS-DEF-9 — magic dependency, and the slot filled from the right ROLE > REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/domain/defenseStateProseDesk.test.js:1910:5
+    1908|   });
+    1909|
+    1910|   it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed…
+       |     ^
+    1911|     // The false pool is what every default world reads, and the desk …
+    1912|     // finding rather than as a silence.
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/generators/coherenceAgreeCures.test.js > F9: the market readers follow the market home, and no answer moves > the old name lists and the home agree on every roster
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/generators/coherenceAgreeCures.test.js:127:7
+    125| describe('F9: the market readers follow the market home, and no answer…
+    126|   beforeAll(async () => { await loadGenerationLawPayloads(); });
+    127|   test('the old name lists and the home agree on every roster', async …
+       |       ^
+    128|     const { hasMarketInstitution } = await import('../../src/domain/fa…
+    129|     const { nativeSemanticNames } = await import('../../src/domain/con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/generators/coherenceAgreeCures.test.js > STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer moves > the old lists, the home and the printed lines agree on every roster
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/generators/coherenceAgreeCures.test.js:173:7
+    171| describe('STOP 2 (b): Court Fees and Gate Tolls read the home, and no …
+    172|   beforeAll(async () => { await loadGenerationLawPayloads(); });
+    173|   test('the old lists, the home and the printed lines agree on every r…
+       |       ^
+    174|     const { defenseFactsOf } = await import('../../src/domain/defense/…
+    175|     const { nativeSemanticNames } = await import('../../src/domain/con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/generators/coherenceAgreeCures.test.js > item 2: the court and the prison are the defence home's atoms > the home's prison answers what the safety writer's list answers, on every roster
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/generators/coherenceAgreeCures.test.js:229:7
+    227|     expect(atomHolds('prison', { defence: { court: true, prison: false…
+    228|   });
+    229|   test('the home\'s prison answers what the safety writer\'s list answ…
+       |       ^
+    230|     const { defenseFactsOf } = await import('../../src/domain/defense/…
+    231|     const { defenceOf } = await import('../../src/domain/facts/defence…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/pdf/labelLadderParity.test.jsx > the paid document descends the same label ladder as the screen > every status word the screen prints, the print prints IDENTICALLY, on every fixture town
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/pdf/labelLadderParity.test.jsx:414:3
+    412|   });
+    413|
+    414|   test('every status word the screen prints, the print prints IDENTICA…
+       |   ^
+    415|     // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table: a…
+    416|     // each-family credits NO titles to the lighting census, which mad…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  5 failed | 102 passed (107)
+      Tests  8 failed | 1023 passed (1031)
+   Start at  11:59:02
+   Duration  1407.39s (transform 87.27s, setup 14.02s, import 667.45s, tests 3327.56s, environment 139.45s)
+
+[gate-tail] end:  12:22:31 up  1:28,  0 user,  load average: 13.49, 14.44, 13.98
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.21970.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

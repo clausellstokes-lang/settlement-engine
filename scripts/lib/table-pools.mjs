@@ -68,6 +68,20 @@ export const TABLE_POOLS = Object.freeze([
   // CENSUS-5d unit 3: the two left of CENSUS-5c's list that are one export (R-R, read by 5c and re-read here).
   { id: 'warRemembrance.WAR_ENDING_TELLINGS', module: 'src/domain/display/warRemembrance.js', name: 'WAR_ENDING_TELLINGS', drawKind: 'T', rulings: ['colour'], drawSite: 'warRemembrance.js (ending-keyed by the record\'s classifier)' },
   { id: 'deityEffects.DEITY_AXIS_EFFECTS', module: 'src/domain/display/deityEffects.js', name: 'DEITY_AXIS_EFFECTS', drawKind: 'T', rulings: ['colour'], drawSite: 'deityEffects.js (axis-keyed)', lines: (t) => Object.values(t).flatMap((axis) => Object.values(axis).map((e) => e.effect)) },
+  // PLACE-1 (2026-11-20): the safety line's sentence slots (safetyDesc-MEASURE.md §D), one row a pool; each slot drawn whole
+  // by keyed hash (kernel/proseHash.js :: pickVariantMixed) through drawDeclared at the writer, `${seed}::safetyProfile:safetyDesc:<slot>`.
+  { id: 'safetyDescLines.TINY_MODERATE', module: 'src/data/safetyDescLines.js', name: 'TINY_MODERATE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, thorp or hamlet) → safetyDescSlot' },
+  { id: 'safetyDescLines.MIXED_OPENING', module: 'src/data/safetyDescLines.js', name: 'MIXED_OPENING', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up) → safetyDescSlot' },
+  { id: 'safetyDescLines.MIXED_FORCE.garrison', module: 'src/data/safetyDescLines.js', name: 'MIXED_FORCE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a garrison) → safetyDescSlot', lines: (t) => t.garrison },
+  { id: 'safetyDescLines.MIXED_FORCE.watch', module: 'src/data/safetyDescLines.js', name: 'MIXED_FORCE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a watch) → safetyDescSlot', lines: (t) => t.watch },
+  { id: 'safetyDescLines.MIXED_FORCE.militia', module: 'src/data/safetyDescLines.js', name: 'MIXED_FORCE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a militia) → safetyDescSlot', lines: (t) => t.militia },
+  { id: 'safetyDescLines.MIXED_FORCE.none', module: 'src/data/safetyDescLines.js', name: 'MIXED_FORCE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up, no force) → safetyDescSlot', lines: (t) => t.none },
+  { id: 'safetyDescLines.MIXED_CORNERS', module: 'src/data/safetyDescLines.js', name: 'MIXED_CORNERS', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, village and up) → safetyDescSlot' },
+  { id: 'safetyDescLines.MODERATE_WALLS', module: 'src/data/safetyDescLines.js', name: 'MODERATE_WALLS', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Moderate, walls) → safetyDescSlot' },
+  { id: 'safetyDescLines.UNSAFE_OPENING', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_OPENING', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot' },
+  { id: 'safetyDescLines.UNSAFE_GARRISON', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_GARRISON', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot' },
+  { id: 'safetyDescLines.UNSAFE_ADVICE', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_ADVICE', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot' },
+  { id: 'safetyDescLines.UNSAFE_WALLS', module: 'src/data/safetyDescLines.js', name: 'UNSAFE_WALLS', drawKind: 'H', drawSite: 'safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege, walls) → safetyDescSlot' },
 ]);
 
 /**

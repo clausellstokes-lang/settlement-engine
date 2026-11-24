@@ -9,7 +9,8 @@
  *     * food_culture text varies by food_production capacity band.
  *     * child_warnings cites top threats.
  *     * outsider_impressions cites dominant faction.
- *     * commoner_resentments cites high criminal_opportunity.
+ *     * high criminal_opportunity is cited by the OWNER-ONLY commoner_resentments_dm (DAILY-3 B3 E1, ruling 6),
+ *       never by the public commoner_resentments.
  *     * recent_changes cites recent disruption history beat.
  *   - References point to canonical Phase 19 explainable entity ids.
  *   - No mutation of input settlement.
@@ -27,6 +28,10 @@ import {
   supportedDailyLifeSlots,
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS } from '../../src/data/dailyLife/childWarnings.js';
+import { UNSPOKEN_TOPICS } from '../../src/data/dailyLife/unspokenTopics.js';
+import { RECENT_CHANGES } from '../../src/data/dailyLife/recentChanges.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -123,7 +128,10 @@ describe('dawn_work behavior', () => {
       ],
       config: { monsterThreat: 'plagued' },
     });
-    expect(besieged.text.toLowerCase()).toMatch(/(walls|watch musters|rounds)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work, ruling 8): the tone is the defence branch's (a plagued country is a real outside
+    // threat), but this record holds no walls and no watch, so it is told no walls, watch or rounds: the pin re-recorded to
+    // the meaning it guarded, the defence pool taken.
+    expect(DAWN_WORK.defence.map((l) => l.text)).toContain(besieged.text);
   });
 
   it('keys the guild flavor off craft faction power alone', () => {
@@ -138,7 +146,9 @@ describe('dawn_work behavior', () => {
         factions: [{ id: 'faction.artisans', faction: "Artisans' Guild", name: "Artisans' Guild", power: 60 }],
       },
     });
-    expect(guildTown.text.toLowerCase()).toMatch(/(smithy|guild-callers)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work): the craft branch by craft power alone; this record holds no smithy and no guild,
+    // so it is told neither: the pin re-recorded to the meaning it guarded, the craft pool taken.
+    expect(DAWN_WORK.craft.map((l) => l.text)).toContain(guildTown.text);
   });
 
   it('references the canonical food_production + defense lenses, never labor/craft', () => {
@@ -153,10 +163,12 @@ describe('dawn_work behavior', () => {
 
 describe('gathering_places behavior', () => {
   it('cites religious + trade + inn institutions when present', () => {
+    // DAILY-2 B1b C3 (LINES-1 § gathering_places, the chair's rulings 7 and 12): the trade house a line names is a
+    // live market row (`Weekly market`); a market square is the `{square}` of its own lines, not the `{market}`.
     const s = deriveDailyLifeSlot('gathering_places', {
       institutions: [
         { id: 'i1', name: 'Temple of Light' },
-        { id: 'i2', name: 'Market Square' },
+        { id: 'i2', name: 'Weekly market' },
         { id: 'i3', name: 'The Black Hart Inn' },
       ],
     });
@@ -165,9 +177,11 @@ describe('gathering_places behavior', () => {
     expect(s.references.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('falls back gracefully when no recognized institutions present', () => {
+  it('prints the EMPTY string when no recognized institutions present (ruling 3: no true line, no filler)', () => {
+    // DAILY-2 B1b C3: today's fallback "the well, the bridge, the open square" was printed with none of them held; the
+    // chair's ruling 3 (2026-11-20 18:19) makes a slot with no true line EMPTY (the page hides it).
     const s = deriveDailyLifeSlot('gathering_places', { institutions: [] });
-    expect(s.text.length).toBeGreaterThan(0);
+    expect(s.text).toBe('');
   });
 });
 
@@ -176,7 +190,10 @@ describe('child_warnings behavior', () => {
     const s = deriveDailyLifeSlot('child_warnings', {
       config: { monsterThreat: 'plagued' },
     });
-    expect(s.text.toLowerCase()).toMatch(/(sundown|road|monster|woods|night)/);
+    // DAILY-2 B2 D2 (LINES-1 § child_warnings): the plagued country's warning is a line of the monster pool, picked among
+    // those the record holds (this nameless record holds no road, so not "the road past sundown"): the pin re-recorded to the
+    // meaning it guarded, the top threat said by its own kind's warning and cited.
+    expect(CHILD_WARNINGS.monster_pressure.map((l) => `Children are warned about ${l.text}.`)).toContain(s.text);
     expect(s.references.some(r => r.type === 'threat')).toBe(true);
   });
 
@@ -197,14 +214,20 @@ describe('child_warnings behavior', () => {
 });
 
 describe('commoner_resentments behavior', () => {
-  it('cites criminal_opportunity when high', () => {
-    const s = deriveDailyLifeSlot('commoner_resentments', {
+  // DAILY-3 B3 E1 (ruling 6), the pin re-read: high criminal opportunity is still cited, by the owner-only slot it moved
+  // to; the public slot no longer reads it (the meaning kept: the crime is said where it is said, to the owner).
+  it('cites criminal_opportunity when high, in the owner-only slot and not the public one', () => {
+    const record = {
       powerStructure: {
         publicLegitimacy: { score: 60, label: 'Approved' },
         factions: [{ faction: "Thieves' Guild", power: 80 }],
       },
-    });
-    expect(s.references.some(r => r.id === 'var.criminal_opportunity')).toBe(true);
+    };
+    const owner = deriveDailyLife(record, { audience: 'owner' }).slots.commoner_resentments_dm;
+    expect(owner.references.some(r => r.id === 'var.criminal_opportunity')).toBe(true);
+    expect(owner.text).not.toBe('');
+    const s = deriveDailyLifeSlot('commoner_resentments', record);
+    expect(s.references.some(r => r.id === 'var.criminal_opportunity')).toBe(false);
   });
 
   it('cites food_production when strained', () => {
@@ -216,7 +239,10 @@ describe('commoner_resentments behavior', () => {
     expect(s.references.some(r => r.id === 'capacity.food_production')).toBe(true);
   });
 
-  it('falls back to generic complaints when no major pressures', () => {
+  // DAILY-3 B3 E2 (LINES-2 § 2; rulings 3 and 8, the calm rule), the pin re-read: a place under no major pressure was
+  // given "the small grievances of any town" (an invented grievance, false at a small place); the meaning kept, no
+  // pressure in the record, the slot now says no grievance: the EMPTY string, and it cites nothing.
+  it('says no grievance when no major pressures (the calm rule: empty, never an invented one)', () => {
     const s = deriveDailyLifeSlot('commoner_resentments', {
       population: 1000,
       institutions: [
@@ -228,7 +254,8 @@ describe('commoner_resentments behavior', () => {
         factions: [{ faction: 'Town Council', power: 40 }],
       },
     });
-    expect(s.text.toLowerCase()).toMatch(/(gate fee|rain|tavern|small grievances)/);
+    expect(s.text).toBe('');
+    expect(s.references).toEqual([]);
   });
 });
 
@@ -246,44 +273,60 @@ describe('outsider_impressions behavior', () => {
     expect(s.references.some(r => r.type === 'faction')).toBe(true);
   });
 
-  it('cites the top threat when present', () => {
-    const s = deriveDailyLifeSlot('outsider_impressions', {
-      config: { monsterThreat: 'plagued' },
-    });
-    expect(s.references.some(r => r.type === 'threat')).toBe(true);
+  // D4C-1 (the chair's E133 (1)): the top threat is cited ONCE on the page. Here recent_changes states its arrival
+  // ("Beasts have overrun the country around…"), so the outsider line yields its threat part and recent_changes cites it.
+  it('cites the top threat when present, once: the outsider line yields it where recent_changes states it', () => {
+    const rec = { config: { monsterThreat: 'plagued' } };
+    const s = deriveDailyLifeSlot('outsider_impressions', rec);
+    const recent = deriveDailyLifeSlot('recent_changes', rec);
+    const cites = (/** @type {any} */ x) => x.references.some((/** @type {any} */ r) => r.type === 'threat');
+    expect(cites(recent)).toBe(true);
+    expect(cites(s)).toBe(false);
+    expect(s.text).not.toBe('');
   });
 });
 
 describe('unspoken_topics behavior', () => {
-  it('cites unresolved history wound when present', () => {
+  // DAILY-3 B3 E3 (LINES-2 § 4, LINES-2b § 2, ruling 7): the wound is said BY WHAT IT IS (its tension type's pool), never
+  // as "the matter referenced as \"the wound\""; the pin keeps its meaning (the wound, when held, is said and cited).
+  it('cites unresolved history wound when present, and says it by its tension type', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', {
       history: {
-        historicalEvents: [{
-          name: 'The Occupation',
-          severity: 'major',
-          summary: 'A devastating occupation that ended badly.',
-          yearsAgo: 8,
-          legacyAnnotations: [
-            { text: 'Collaborators and resisters still live side by side.', tags: ['unresolved'] },
-          ],
-        }],
+        currentTensions: [{ type: 'religious_tension', description: 'Different faiths compete for influence and converts.' }],
       },
     });
-    if (s.references.some(r => r.type === 'history_beat')) {
-      expect(s.text.toLowerCase()).toMatch(/wound/);
-    }
+    expect(s.references.some(r => r.type === 'history_beat')).toBe(true);
+    expect(s.text).toBe(UNSPOKEN_TOPICS['wound.religious_tension'][0].text);
   });
 
-  it('cites hidden / rumored threats', () => {
+  it('a crime wound falls to the next tension the record holds (ruling 7)', () => {
+    const s = deriveDailyLifeSlot('unspoken_topics', {
+      history: {
+        currentTensions: [
+          { type: 'crime_wave', description: 'Crime is rising faster than those in charge can answer it.' },
+          { type: 'tyranny', description: 'One figure is gathering power to themselves.' },
+        ],
+      },
+    });
+    expect(s.text).toBe(UNSPOKEN_TOPICS['wound.tyranny'][0].text);
+    expect(s.references).toEqual([]);
+  });
+
+  // DAILY-3 B3 E3 (ruling 7): a hidden or rumoured threat is the DM's and said by no shared slot. Re-read from "cites
+  // hidden / rumored threats": it is neither said nor cited.
+  it('says and cites no hidden / rumored threat', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', {
       defenseProfile: { threats: [{ name: 'Hidden cult', visibility: 'hidden', severity: 0.6 }] },
     });
-    expect(s.references.some(r => r.type === 'threat')).toBe(true);
+    expect(s.references.some(r => r.type === 'threat')).toBe(false);
+    expect(s.text).toBe('');
   });
 
-  it('falls back when no unspoken topics', () => {
+  // DAILY-3 B3 E3 (the calm rule, ruling 3): no wound held, nothing said (the EMPTY string), never an invented topic.
+  it('says nothing when no unspoken topics', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', { population: 1000 });
-    expect(s.text.length).toBeGreaterThan(0);
+    expect(s.text).toBe('');
+    expect(s.references).toEqual([]);
   });
 });
 
@@ -299,14 +342,18 @@ describe('recent_changes behavior', () => {
     const s = deriveDailyLifeSlot('recent_changes', {
       defenseProfile: { threats: [{ name: 'Siege', severity: 0.95, type: 'siege' }] },
     });
+    // DAILY-3 B3 E3 (LINES-2 § 5): the realized siege is said from its own pool (no "has come to a head" over a label);
+    // the pin keeps its meaning (a cited threat is the one said). "Under siege" needs a siege in force, so this planted
+    // record (no crisis record) says the pool's other line.
     if (s.references.some(r => r.type === 'threat')) {
-      expect(s.text.toLowerCase()).toMatch(/(siege|head)/);
+      expect(RECENT_CHANGES['threat.siege.any.realized'].map((l) => l.text)).toContain(s.text);
     }
   });
 
+  // DAILY-3 B3 E3 (LINES-2 § 5, ruling 14: the calm index-0 time word dropped): the fallback is the calm pool's line.
   it('falls back when no recent disruptions', () => {
     const s = deriveDailyLifeSlot('recent_changes', { population: 1000 });
-    expect(s.text.toLowerCase()).toMatch(/(usual|no notable|rhythm)/);
+    expect(RECENT_CHANGES.calm.map((l) => l.text)).toContain(s.text);
   });
 });
 
@@ -327,7 +374,11 @@ describe('deriveDailyLife()', () => {
       const s = life.slots[key];
       expect(s.key).toBe(key);
       expect(s.label).toBeTruthy();
-      expect(s.text.length).toBeGreaterThan(0);
+      // DAILY-2 B1b C3 (the chair's ruling 3, 2026-11-20 18:19): a slot with no true line is EMPTY. This record holds no
+      // house at all, so `gathering_places` has nothing true to say; DAILY-3 B3 E3: it holds no wound, so
+      // `unspoken_topics` says nothing (the calm rule); every other slot still speaks.
+      if (key === 'gathering_places' || key === 'unspoken_topics') expect(s.text).toBe('');
+      else expect(s.text.length).toBeGreaterThan(0);
       expect(typeof s.source).toBe('string');
       expect(Array.isArray(s.references)).toBe(true);
     }

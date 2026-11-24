@@ -1,0 +1,584 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/u5/measure-u5.mjs",
+  "standing": "under today's standing",
+  "forced": {
+   "_seatLawVersion": 2
+  },
+  "steps": 3,
+  "n": {
+   "default": 150,
+   "presets": 10
+  },
+  "seconds": 532
+ },
+ "pools": {
+  "default": {
+   "towns": 900,
+   "birthErrors": 0,
+   "old": {
+    "small": {
+     "towns": 450,
+     "noContender": 240,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 210,
+     "cls": {
+      "own": 21,
+      "fallback": 130,
+      "none": 13,
+      "civic": 46
+     },
+     "r1Winner": 210,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    },
+    "town": {
+     "towns": 150,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 150,
+     "cls": {
+      "own": 35,
+      "none": 25,
+      "fallback": 45,
+      "civic": 45
+     },
+     "r1Winner": 150,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    },
+    "large": {
+     "towns": 300,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 300,
+     "cls": {
+      "fallback": 139,
+      "none": 88,
+      "own": 71,
+      "civic": 2
+     },
+     "r1Winner": 300,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    }
+   },
+   "law": {
+    "small": {
+     "towns": 450,
+     "noContender": 269,
+     "errors": 0,
+     "kept": 23,
+     "renamed": 158,
+     "cls": {
+      "own": 14,
+      "fallback": 145,
+      "none": 13,
+      "civic": 9
+     },
+     "r1Winner": 181,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 108,
+     "retiredInList": 108,
+     "retiredReadAsEdge": 0
+    },
+    "town": {
+     "towns": 150,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 11,
+     "renamed": 139,
+     "cls": {
+      "none": 60,
+      "fallback": 79,
+      "civic": 11
+     },
+     "r1Winner": 150,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 300,
+     "retiredInList": 300,
+     "retiredReadAsEdge": 0
+    },
+    "large": {
+     "towns": 300,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 2,
+     "renamed": 298,
+     "cls": {
+      "fallback": 139,
+      "none": 159,
+      "civic": 2
+     },
+     "r1Winner": 300,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 600,
+     "retiredInList": 600,
+     "retiredReadAsEdge": 0
+    }
+   },
+   "crown": {
+    "keptCrowned": 0,
+    "personRule": {},
+    "personKeepsOther": 0,
+    "personMemberOther": 0,
+    "personCrownWord": 0,
+    "noPerson": 0,
+    "towns": [],
+    "guardTowns": [],
+    "guardBareTowns": [],
+    "guardBornTowns": [],
+    "guardIsPerson": 0
+   },
+   "winnerDiffers": 0,
+   "forced": {
+    "errors": 0,
+    "differs": [
+     "seat-measure-town-22"
+    ]
+   }
+  },
+  "presets": {
+   "towns": 960,
+   "birthErrors": 0,
+   "old": {
+    "small": {
+     "towns": 480,
+     "noContender": 293,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 187,
+     "cls": {
+      "own": 27,
+      "none": 30,
+      "civic": 32,
+      "fallback": 98
+     },
+     "r1Winner": 187,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    },
+    "town": {
+     "towns": 160,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 160,
+     "cls": {
+      "own": 97,
+      "none": 61,
+      "civic": 2
+     },
+     "r1Winner": 160,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    },
+    "large": {
+     "towns": 320,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 0,
+     "renamed": 320,
+     "cls": {
+      "own": 143,
+      "none": 117,
+      "civic": 17,
+      "licensed held": 9,
+      "fallback": 27,
+      "licensed not held": 7
+     },
+     "r1Winner": 320,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 0,
+     "retiredInList": 0,
+     "retiredReadAsEdge": 0
+    }
+   },
+   "law": {
+    "small": {
+     "towns": 480,
+     "noContender": 311,
+     "errors": 0,
+     "kept": 41,
+     "renamed": 128,
+     "cls": {
+      "own": 21,
+      "none": 30,
+      "civic": 20,
+      "fallback": 98
+     },
+     "r1Winner": 169,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 90,
+     "retiredInList": 90,
+     "retiredReadAsEdge": 0
+    },
+    "town": {
+     "towns": 160,
+     "noContender": 2,
+     "errors": 0,
+     "kept": 19,
+     "renamed": 139,
+     "cls": {
+      "own": 17,
+      "none": 139,
+      "civic": 2
+     },
+     "r1Winner": 158,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 290,
+     "retiredInList": 290,
+     "retiredReadAsEdge": 0
+    },
+    "large": {
+     "towns": 320,
+     "noContender": 0,
+     "errors": 0,
+     "kept": 28,
+     "renamed": 292,
+     "cls": {
+      "none": 248,
+      "own": 12,
+      "civic": 7,
+      "fallback": 37,
+      "licensed held": 9,
+      "licensed not held": 7
+     },
+     "r1Winner": 320,
+     "r1Other": {},
+     "twoTakers": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByAnswer": [
+      0,
+      0,
+      0
+     ],
+     "unattributedByPredicate": [
+      0,
+      0,
+      0
+     ],
+     "twoTakerTowns": [],
+     "retiredEdges": 640,
+     "retiredInList": 640,
+     "retiredReadAsEdge": 0
+    }
+   },
+   "crown": {
+    "keptCrowned": 5,
+    "personRule": {
+     "crown": 5
+    },
+    "personKeepsOther": 0,
+    "personMemberOther": 5,
+    "personCrownWord": 5,
+    "noPerson": 0,
+    "towns": [
+     {
+      "seed": "seat-measure-city-trade_crossroads-5",
+      "form": "Royal Authority",
+      "winner": "Merchant Guilds",
+      "person": "Gregorios Glabas",
+      "title": "the monarch",
+      "personRule": "crown",
+      "keeps": [],
+      "member": [
+       "Noble Families#null"
+      ]
+     },
+     {
+      "seed": "seat-measure-city-safe_province_capital-7",
+      "form": "Royal Authority",
+      "winner": "Merchant Guilds",
+      "person": "Mikhail Tretyakov",
+      "title": "the monarch",
+      "personRule": "crown",
+      "keeps": [],
+      "member": [
+       "Noble Families#3"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-mage_city-4",
+      "form": "Royal Authority",
+      "winner": "Merchant Guilds",
+      "person": "Sigrid Ljotsson",
+      "title": "the monarch",
+      "personRule": "crown",
+      "keeps": [],
+      "member": [
+       "Noble Houses#null"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-safe_province_capital-8",
+      "form": "Royal Authority",
+      "winner": "Merchant Guilds",
+      "person": "Anna Gabalas",
+      "title": "the monarch",
+      "personRule": "crown",
+      "keeps": [],
+      "member": [
+       "Noble Houses#null"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-safe_province_capital-9",
+      "form": "Royal Authority",
+      "winner": "Merchant Guilds",
+      "person": "Egor Solovyov",
+      "title": "the monarch",
+      "personRule": "crown",
+      "keeps": [],
+      "member": [
+       "Noble Houses#null"
+      ]
+     }
+    ],
+    "guardTowns": [
+     {
+      "seed": "seat-measure-city-trade_crossroads-5",
+      "cards": [
+       "Panteleimon Limniotes (the lord)"
+      ]
+     },
+     {
+      "seed": "seat-measure-city-safe_province_capital-7",
+      "cards": [
+       "Anastasia Vasilyev (the lady)"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-mage_city-4",
+      "cards": [
+       "Dag Sigurðarson (the lord)"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-safe_province_capital-8",
+      "cards": [
+       "Pavlos Argyros (the lord)",
+       "Athanasios Zoe (the lord)"
+      ]
+     },
+     {
+      "seed": "seat-measure-metropolis-safe_province_capital-9",
+      "cards": [
+       "Lyuben Lazić (the lord)",
+       "Petra Zdravković (the lady)"
+      ]
+     }
+    ],
+    "guardBareTowns": [],
+    "guardBornTowns": [
+     "seat-measure-city-trade_crossroads-5",
+     "seat-measure-city-safe_province_capital-7",
+     "seat-measure-metropolis-mage_city-4",
+     "seat-measure-metropolis-safe_province_capital-8",
+     "seat-measure-metropolis-safe_province_capital-9"
+    ],
+    "guardIsPerson": 0
+   },
+   "winnerDiffers": 0,
+   "forced": {
+    "errors": 0,
+    "differs": [
+     "seat-measure-town-lawless_frontier-8",
+     "seat-measure-city-theocracy-6"
+    ]
+   }
+  }
+ }
+}

@@ -71,14 +71,20 @@ describe('the per-section rerolls are the premium owner\'s (law (1))', () => {
 // rewrite no settlement data — they re-tell the record in credit-metered AI prose (metering,
 // not access) — so the free owner holds them as the premium owner does. Pinned as they are.
 describe('the narrative re-rolls stay open to every owner (metering, not access)', () => {
-  test('Daily Life: the free and the premium owner both hold the (re)generate button, no tier read', async () => {
+  // DAILY-PAGE-1 (the owner's order of 2026-11-22): the Daily Life button is gone, its lines print by themselves. What
+  // this arm kept is its parity: no tier read, the free and the premium owner see the same page, and neither a button.
+  test('Daily Life: the free and the premium owner see the same page, and no (re)generate button, no tier read', async () => {
     const { DailyLifeTab } = await import('../../src/components/new/tabs/DailyLifeTab.jsx');
+    const seen = [];
     for (const tier of ['premium', 'free']) {
       setViewer(tier);
-      Object.assign(mocks.state, { aiDailyLife: { morningScene: 'Bells over the square.' }, requestDailyLife: vi.fn() });
-      render(React.createElement(DailyLifeTab, { settlement: town(), saveId: 's1', onRequestDailyLife: () => {} }));
-      expect(screen.getByRole('button', { name: /Generate Daily Life/ }), tier).toBeTruthy();
+      Object.assign(mocks.state, { aiDailyLife: { morningScene: 'Bells over the square.' } });
+      const { container } = render(React.createElement(DailyLifeTab, { settlement: town(), saveId: 's1' }));
+      expect(screen.queryByRole('button', { name: /Generate Daily Life/ }), tier).toBeNull();
+      seen.push(container.textContent);
       cleanup();
     }
+    expect(seen[1]).toBe(seen[0]);
+    expect(seen[0]).toContain('Food'); // anchored: the page rendered (its first anchor fact)
   });
 });

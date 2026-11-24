@@ -78,7 +78,6 @@ const THREADED = Object.freeze({
   'src/components/new/serviceComponents.jsx': "the service row's name",
   'src/components/compendium/CatalogTabs.jsx': "the Compendium's institution catalogue",
   'src/components/new/tabs/EconomicsTab.jsx': 'the "Via:" institution attribution',
-  'src/components/new/tabs/DailyLifeTab.jsx': "the institution anchors in the day's prose",
   'src/components/new/SupplyChainsPanel.jsx': "the chain's processing-institution node",
   'src/components/interior/InteriorView.jsx': "the floor plan's heading and image alt text",
   'src/pdf/lib/viewModelBodySlices.js': "the PDF's institution projection",
@@ -176,7 +175,7 @@ describe('the institution label seam — the roster holds', () => {
       expect(imports.length, `${file} imports the seam`).toBe(1);
       // … AND A USE OF IT. The import alone is not installation: a lane can strip the call
       // and leave the line. Counted OUTSIDE the import, and deliberately NOT as `name(` —
-      // EconomicsTab and DailyLifeTab pass the seam BY REFERENCE to `.map()`, which is a
+      // EconomicsTab passes the seam BY REFERENCE to `.map()` (as DailyLifeTab did), which is a
       // perfectly good installation that a paren-shaped check would have called missing.
       // RE-KEYED (R2-CODE-B round 3, ruling (a), the chair 2026-11-13): `institutionHouseLabel` is the
       // seam's own leaf for a printed house (the display label, less the catalogue's count range,
@@ -193,7 +192,9 @@ describe('the institution label seam — the roster holds', () => {
     // pills left with T1-15 and its last seam call, the Religious Quarter's landmark bullet, left
     // with the Spatial Layout section the owner cut from the summary page. A file with nothing
     // to thread cannot hold a roster row; the cured-surface arm below keeps the WORD off it.
-    expect(Object.keys(THREADED)).toHaveLength(14);
+    // 14 -> 13 (2026-11-22, DAILY-3 U4b): the Daily Life tab prints NO institution name any more. Its one seam call, the
+    // institution anchors in the day's prose, left with buildLocalDailyLifeNarrative (text no page prints since point 95).
+    expect(Object.keys(THREADED)).toHaveLength(13);
   });
 });
 

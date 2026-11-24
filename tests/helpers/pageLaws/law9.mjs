@@ -10,8 +10,14 @@
 // the fact (that round's); `status` is 'apart' for a rule the checkers ruled WEAK or ruled both ways (reported, not
 // counted as standing). Pure; no I/O. Nothing here changes anything.
 import { sentences } from './pageB.mjs';
+import { MIXED_FORCE } from '../../../src/data/safetyDescLines.js';
 
 const LAW = 'L9';
+
+/** A working watch on the page: the safety line's Moderate watch rows (`src/data/safetyDescLines.js :: MIXED_FORCE.watch`, each
+ *  whole, never a copied literal; PLACE-1, 2026-11-20) or the Safe line's "The watch is present and responsive". */
+const WORKING_WATCH = new RegExp(`(${[...MIXED_FORCE.watch.map((r) => r.text.trim()), 'The watch is present and responsive']
+  .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`);
 
 // ---------------------------------------------------------------- reading the page's state words
 const tabLines = (T, tab) => (T.tabs[tab] || []).map((text, i) => ({ tab, i, text }));
@@ -95,7 +101,9 @@ const pair = (rule, claim, state, why, opts = {}) => ({
 
 // 9a · THE LAW AND CRIME --------------------------------------------------------------------------------------------
 // calm-times law prose (the controls C8611 C14349 C26333 C28848 C26311 C219464; bar read C42116)
-const CALM_LAW = /\b(people expect a hearing, not a beating|A functioning court and prison mean crimes carry real consequences|The old families keep the peace|A thief is known by name within a day|Thieves here know that the court sits and the cells are real|With a working court, organised crime treads carefully)\b/;
+// PROSE-E (CHAIR-2026-11-23-N70): DS-DEF-2 full legal chain v1 re-worded in place, "people expect a hearing, not a beating" ->
+// "the accused can expect a hearing, not a beating"; the same calm-law claim, so the pin reads both words.
+const CALM_LAW = /\b((?:people|the accused can) expect a hearing, not a beating|A functioning court and prison mean crimes carry real consequences|The old families keep the peace|A thief is known by name within a day|Thieves here know that the court sits and the cells are real|With a working court, organised crime treads carefully)\b/;
 // the line that says crime is kept down / quiet (C143088 C43177)
 const CRIME_KEPT_DOWN = /\b(enforcement keeps it down and keeps it from growing|keeps the streets quiet because trouble brings the law|Crime exists but is well-managed)\b/;
 // the diffuse claims, strong (no organisation at all) and limited
@@ -154,7 +162,7 @@ export const RULES = [
     run(T) {
       const hits = findAll(T, /\bwatch exists on paper\b/);
       if (!hits.length) return [];
-      const working = find(T, /\b(The watch covers the main paths|The watch is present and responsive)\b/);
+      const working = find(T, WORKING_WATCH); // PLACE-1 (2026-11-20): the Moderate line's watch rows, read by their pool
       const rounds = find(T, /\b(walking the night rounds|walking the lanes after dark)\b/);
       const occupied = T.crises.has('occupied');
       const ag = working || (!occupied ? rounds : null);
