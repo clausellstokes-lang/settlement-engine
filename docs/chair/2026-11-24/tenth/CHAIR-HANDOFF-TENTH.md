@@ -721,3 +721,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   told it is done. VEIL-52's measure for the owner (unmarked listings) comes to the chair too. VEIL-52 and VEIL-53
   are told to draft their successors' start messages at 560,000. THE SIX: CLOSE-7, VEIL-55, VEIL-51, VEIL-52, VEIL-53
   and the landing helper LAND-115; VEIL-54 takes the landing's place when it ends.
+- 2026-11-24 22:50 UTC · T53 · THE ACCOUNT'S WEEKLY ALLOWANCE IS AT ITS WARNING LEVEL; SAVES ORDERED; NOTHING NEW IS SEATED.
+  Read by `get_session` at 22:44 to 22:47 UTC on the chair's record and all five seats': `rate_limit_info` =
+  seven_day, status `allowed_warning` (it read `allowed` earlier today), reset 2026-12-01 15:00 UTC, `isUsingOverage`
+  false. THE PERCENTAGE IS NOT VISIBLE TO THE CHAIR. The week began 2026-11-24 15:00 UTC. WHAT THE CHAIR DID: (1) every
+  seat told (22:48): push now and at every result, never less often than every 45 minutes; the hand-back's first section
+  written so a successor ON ANOTHER ACCOUNT can go on from it alone; no run over 20 minutes without partial results in
+  a pushed file; finish the unit in hand before the next (CLOSE-7: A2 and the mirror, MASTER-REDERIVE's table, then the
+  corrections leaf; VEIL-55: unit 2 to its "TIP?"; VEIL-53: J1 and V3's cures, then the anon arm, then FAIL-CLOSED
+  PAGES' sizing; VEIL-51: unit 1's proof). (2) VEIL-54 IS NOT SEATED (a new seat spends about 300,000 reading in);
+  `prompts/START-VEIL-54.txt` stays ready. (3) THE OWNER IS TOLD in plain words, with the correction that the chair's
+  date guess (2026-11-28 to 30) assumed usage was not the limit and is withdrawn until the percentage is known; he is
+  asked nothing but may say "stop". IF THE CHAIR STOPS WITHOUT NOTICE: this file, `PRERELEASE-LIST.md`, `veil/RULING-V1.md`
+  (V1 to V7), `read/RULING-R24.md` (to R24g), `ci/LINE-NOW.md` and each seat's hand-back are the whole state; the seats'
+  ids are in T52 and T29; a seat that is idle and unanswered goes on by its start file.
+  MARKS at 22:45: CLOSE-7 186,362 (after its compaction); VEIL-55 281,733; VEIL-51 158,329 AFTER A COMPACTION IT DID NOT
+  REPORT (told to say so and re-read); VEIL-52 372,460; VEIL-53 401,733.
+  ALSO THIS HOUR: N115 RULED AND "READ-COST" FOUND (RULING V7: master's own gallery page read computes every public
+  row's tile to serve one page: 69 ms at 1 public row, 4.7 s at 840, local); PP READ BY THE CHAIR AND RUNNING, with an
+  import-door pass added. POINT 115's helper is in its last gate step (f); by its files dark equality holds and the
+  register's diff is within the owner's yes.

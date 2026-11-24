@@ -155,3 +155,49 @@ per class, the owner's own read unchanged and asserted; (c) TOTALITY: a walker o
 every page reader that reads one, each with its fail-closed arm: a reader with no arm reds. Readiness and severity, once
 "ruled and listed", are in it. `prominentRelationship`'s 12 of 720 on the lit trial join are the covert tie's own copy
 (N117), cured by unit 3.
+
+## RULING V7 (added 22:50 UTC on 2026-11-24): N115 RULED; "READ-COST", A FINDING ON MASTER'S OWN READS; PP READ BY THE CHAIR
+VEIL-52's N115 (`v52/out/N115-TABLE.md` at 2eb461929; CONFIRMED, executed; a local cluster; the today-born 140 as public
+rows; median ms; tip chain 001..211 + 212 against master's 001..203):
+
+| door | tip, 1 row | tip, 840 rows | master, 1 row | master, 840 rows | tip / master at 840 |
+|---|---|---|---|---|---|
+| gallery (`get_gallery_dossier`) | 109 | 4,830 | 69 | 4,662 | 1.04 |
+| link (`get_unlisted_dossier`) | 94 | 201 | 41 | 51 | 3.9 |
+| import (`import_gallery_dossier`) | 101 | 218 | 65 | 79 | 2.8 |
+| map member (`get_gallery_map`) | 80 | 177 | 42 | 51 | 3.4 |
+
+**RULED (1): THE VEIL'S OWN COST DOES NOT HOLD THE RELEASE.** About 0.15 s more a read at three doors, flat in the number
+of public rows (the 840-to-1 ratio there mixes document size with row count). No unit. It is re-read once on the joined
+tree at phase 1's proof (a figure in the proof, not a gate).
+
+**RULED (2): "READ-COST" IS A FINDING OF ITS OWN, AND IT IS MASTER'S (live today).** The chair read master's text
+(`supabase/migrations/147_gallery_tile_chain_aliveness_title_reactions.sql`): `get_gallery_dossier` does
+`join public._gallery_public_tile_rows() r on r.id = s.id` and only then `where s.public_slug = dossier_slug`. The helper is
+`security definer` with `set search_path`, so the planner cannot inline it: EVERY public row's tile is computed to serve
+ONE page, and a tile is some 25 path reads of the row's whole `data` document (each a de-toast) plus the vote, comment
+and reaction counts. Measured: 69 ms at one public row, 4,662 ms at 840: about 5.5 ms a public row, on this container's
+local cluster (production's own figure is unknown: nobody in the program has read production). The tip's 212 keeps the
+join (4,830). INFERRED, NOT MEASURED: the gallery's LIST reads call the same helper, so they cost the same per call.
+WHAT IS OWED BEFORE ANY CURE: ONE RUN by VEIL-52 after PP: n115's harness with the gallery's list reads added, 840 rows and
+1, both chains. THEN THE CHAIR RULES A CURE, in two parts as they stand today (a lean, not yet a ruling):
+ (i) the page read takes the ONE row's tile (the helper filtered to the row, or a one-row twin kept equal by a walker):
+     small; it edits the read 212 re-creates, so it is the veil lane's unit and the chair reads its hunk;
+ (ii) the list reads stop reading `data` per row per call (the facets stored at write, or one read of the document a
+     row): a migration with a backfill: sized after the run; the owner's hand applies it like every migration.
+THE OWNER IS ASKED ONE NUMBER, when he next writes: how many gallery pages are public today (it says how near this is).
+
+**PP (the owner's measure, V5's last paragraph) IS READ BY THE CHAIR AND RUNNING.** `v52/pp/pp.probe.jsx` whole (179 lines),
+`pp.sh`, `pp-an.mjs`, at 2eb461929: a copy of VEIL-44's um harness; its loop inserts each stored document as an UNMARKED
+public row (`gallery_member_overrides` `{}`) and as a default-marked row, both Reveals, reads `get_gallery_dossier`, feeds
+the served row to the client's own `fetchPublicDossier`, and counts leaves by folded path as multisets: (a) S minus P
+(served, not shown), (b) P minus Vp (what the default veil would newly take from the page), (b') P minus Vd. A local
+cluster only; no line of src changed. THE CHAIR'S NOTES (none held the run): the tree and template are stated; id paths
+set apart if the tree re-keys; NO BODY is merged by assign, not summed; the MARKERS line is the design's own check
+(S none, V served). ADDED BY THE CHAIR, a second pass: THE IMPORT DOOR on the same unmarked rows (I minus P, I minus S):
+an importer owns and sees the whole of what import serves, so that door is where served-but-not-shown becomes plain.
+A FACT THE CHAIR READ ON THE WAY (`src/lib/gallery.js :: clampMemberOverrides`, `sanitizeDossier`): a pre-veil listing's
+overrides hold only `revealDm` and `allowImport` per member; the server already splices them (092, 093); an unmarked page
+takes NO veil from anyone, server or browser; what the browser adds is its public projection (`toPublicSafe`). So "(b) the
+server removes exactly what the browser hides today" means: the server's projection made equal to `toPublicSafe` on
+unmarked rows. PP's (a) is the size of that gap.

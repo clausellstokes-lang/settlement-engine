@@ -23,6 +23,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | A5 | THE STANDING SENTENCE STORED AS ITS OWN FIELD AT BIRTH (intake 13): the veil then cuts by the document's own field | L, about 12 | B | not started; no visible change by itself: LAST IN ORDER |
 | A6 | PAGES PUBLISHED BEFORE THE VEIL: by the decided design an unmarked listing is served exactly as today (the browser hides; the server still sends) | ? | **D**, Q | THE OWNER'S DECISION, asked again now (three ways; VEIL-50 measures what each costs) |
 | A7 | an owner's stored switch for the empty-section cut (intake 5) | M | **D** | "not built unless he asks": offered, not assumed |
+| A8 | "READ-COST" (found 2026-11-24, RULING V7): master's own gallery page read computes EVERY public row's tile to serve one page (69 ms at 1 public row, 4.7 s at 840, local); the list reads are inferred to cost the same per call | S for the page read (in 212); M to L for the lists (a migration with a backfill) | Q | one run owed (the list reads); then the chair rules the cure; the owner is asked how many pages are public today |
 
 ## B. THE DATABASE'S RULES
 | # | what | size | flags | state |
@@ -85,3 +86,8 @@ the pull request's merge, the deploy.
 ## THE GUESS, SAID AS A GUESS
 Beyond what is in work: about 165 seat-hours. At six seats: four to six days from 2026-11-24. At nine: three to four.
 THE CHAIR'S EARLIER GUESS TO THE OWNER (2026-11-27 or 28, given before this list was read) WAS TOO EARLY.
+
+## ADDED 22:50 UTC ON 2026-11-24: USAGE IS THE LIMIT, NOT SEATS
+The account's weekly allowance read `allowed_warning` under eight hours into its week (hand-off T53). THE GUESS ABOVE
+ASSUMED USAGE WAS NOT THE LIMIT AND IS WITHDRAWN until the owner says the percentage. Until then: nothing new is seated;
+each seat finishes the unit in hand; every result is pushed as it is made.
