@@ -30,7 +30,8 @@
  * and everything else is compared whole.
  *
  * ⚠ RUNNABLE FROM ANY TREE. Every path is relative to this file, the laws are read off the
- * tree's own register, and the lit table carries the seat and fortune keys a lit tree registers.
+ * tree's own register, and the lit table carries the seat, fortune and trouble keys a lit tree
+ * registers.
  *
  * @enforced-by this test
  */
@@ -56,6 +57,7 @@ const LIT_VERSION_OF = Object.freeze({
   _livingContentLawVersion: 2,
   _seatLawVersion: 2,
   _fortuneLawVersion: 2,
+  _troubleLawVersion: 2,
 });
 
 /** The tree's own law register, read from a fresh graph. */
