@@ -27,7 +27,10 @@
  * cannot equal another run's. There the claim is that it re-rolls UNDER LAW 1: the same prior world,
  * config and `_regenSeed` re-rolled on the DARK build gives the same tensions. So that this can fail,
  * the step is repeated until its own seed is one the law moves (law 1 and law 2 re-roll different
- * tensions from it), a bounded control.
+ * tensions from it), a bounded control. The history regen keys its pass to the RECORD's law
+ * (`troubleLaw.js :: withRecordTroubleLaw`), so law 2's re-roll is the place given a config carrying 2,
+ * and THE LEGACY EDGE is cured in both shapes: a save with no `config` (with or without `_config`)
+ * re-rolls under its own law, law 1, whatever the form holds (arm 5).
  *
  * ⚠ `regenSection` HAS NO POWER AND NO ECONOMY BRANCH ("any other value regenerates nothing"); both are
  * driven and pinned as the no-ops they are, beside the two live branches with a positive control.
@@ -312,15 +315,27 @@ let DARK_WALK;
 /** The same place born on the LIT build (marker 2): the converse's fixture and the law-2 reference. */
 let LIT_BORN;
 
-/** The history re-roll of `prior` from `seed` under law 1 (the DARK build, the config markerless). */
-function rerollLaw1(prior, cfg, seed) {
-  const { [KEY]: _marker, ...markerless } = cfg;
-  return tensionsOf(DARK.pipeline.regenHistoryPipeline(structuredClone(prior), markerless, { seed }));
+/** A copy of `prior` with no trouble marker on its config or its `_config` echo (a place that reads law 1). */
+function markerlessPlace(prior) {
+  const copy = structuredClone(prior);
+  for (const echo of ['config', '_config']) {
+    if (copy[echo] && typeof copy[echo] === 'object') delete copy[echo][KEY];
+  }
+  return copy;
 }
 
-/** The history re-roll of `prior` from `seed` under law 2 (the config stamped 2). */
+/** The history re-roll of `prior` from `seed` under law 1 (the DARK build, the place and the config markerless: the
+ *  regen keys the history pass to the RECORD's law, `troubleLaw.js :: withRecordTroubleLaw`). */
+function rerollLaw1(prior, cfg, seed) {
+  const { [KEY]: _marker, ...markerless } = cfg;
+  return tensionsOf(DARK.pipeline.regenHistoryPipeline(markerlessPlace(prior), markerless, { seed }));
+}
+
+/** The history re-roll of `prior` from `seed` under law 2 (the place given a `config` carrying 2, and the config
+ *  handed stamped 2). */
 function rerollLaw2(prior, cfg, seed) {
-  return tensionsOf(LIT.pipeline.regenHistoryPipeline(structuredClone(prior), { ...cfg, [KEY]: 2 }, { seed }));
+  const lit = { ...cfg, [KEY]: 2 };
+  return tensionsOf(LIT.pipeline.regenHistoryPipeline({ ...structuredClone(prior), config: lit }, lit, { seed }));
 }
 
 /** Does the law move a history re-roll of `prior` from `seed`? (the walk's re-roll control) */
@@ -353,6 +368,7 @@ async function legacyRegen(strip, formConfig) {
   else if (rerolled === JSON.stringify(rerollLaw2(prior, cfg, seed))) rerolledUnder = 2;
   return {
     formReads,
+    parts: { prior, cfg, after, seed },
     measured: {
       hasConfig: Object.hasOwn(after, 'config'),
       reads: LIT.law.resolveTroubleLawVersion(after),
@@ -522,21 +538,29 @@ describe('K2: a saved place keeps the trouble law it was born under, on the LIT 
     expect(run.measured).toEqual({ hasConfig: false, reads: 1, readConfigCarries: 'absent', rerolledUnder: 1 });
   }, LONG);
 
-  it('5. THE LEGACY EDGE, shape 2 (PINNED, the known edge): a save with neither config nor _config follows the form\'s config — law 1 under an ordinary form, and AS IT BEHAVES (law 2) under a lit form', async () => {
+  it('5. THE LEGACY EDGE, shape 2 (CURED): a save with neither config nor _config reads law 1, with and without the form\'s marker — its history re-rolled while the form holds a LIT world\'s config re-rolls under law 1', async () => {
     expectBuildsLit();
     const strip = (world) => { delete world.config; delete world._config; };
     // The ordinary case: the form carries no marker (a dark world's config), so the re-roll is law 1.
     const ordinary = await legacyRegen(strip, DARK_BORN._config);
     expect(ordinary.formReads).toBe(1);
     expect(ordinary.measured).toEqual({ hasConfig: false, reads: 1, readConfigCarries: 'absent', rerolledUnder: 1 });
-    // ⚠ THE LIT-FORM CASE, ASSERTED AS IT BEHAVES (the chair's ruling of 22:23 UTC): such a place
-    // keeps no record of its birth, so its section regen follows the form's config, as every other
-    // field already does there; under a lit form it re-rolls its history under law 2 (and still
-    // stamps nothing). The join's one saved-place test over `GENERATION_LAWS` rules this edge for
-    // all the laws at once (the chair carries it); this pin reds when that ruling lands.
+    // THE LIT-FORM CASE, CURED (the chair's ruling of 18:26 UTC, superseding KINDS-1's ruling 9): the config the regen
+    // reads is the form's (it carries 2), but the history pass is re-keyed to the RECORD's law
+    // (`troubleLaw.js :: withRecordTroubleLaw`), and a place with no marker is law 1. It stamps nothing.
     const litForm = await legacyRegen(strip, LIT_BORN._config);
     expect(litForm.formReads).toBe(2);
-    expect(litForm.measured).toEqual({ hasConfig: false, reads: 1, readConfigCarries: 2, rerolledUnder: 2 });
+    expect(litForm.measured).toEqual({ hasConfig: false, reads: 1, readConfigCarries: 2, rerolledUnder: 1 });
+    // Its troubles are the same pass's with the form's marker removed, from the same `_regenSeed`…
+    const { prior, cfg, after, seed } = litForm.parts;
+    expect(seed).toBe(after._regenSeed);
+    const { [KEY]: _formMarker, ...unmarked } = cfg;
+    const withoutFormMarker = LIT.pipeline.regenHistoryPipeline(structuredClone(prior), unmarked, { seed });
+    expect(tensionsOf(after)).toEqual(tensionsOf(withoutFormMarker));
+    // …and THE LIVE NEGATIVE CONTROL: the same pass on the place given a `config` carrying 2 differs.
+    const given2 = { ...structuredClone(prior), config: { ...cfg, [KEY]: 2 } };
+    const underTwo = LIT.pipeline.regenHistoryPipeline(given2, cfg, { seed });
+    expect(tensionsOf(underTwo), 'the law does not move this re-roll: the arm is vacuous').not.toEqual(tensionsOf(after));
   }, LONG);
 
   it('6. THE IMPORT: a gallery file carrying _troubleLawVersion: 2 keeps it through scrubImportedConfig and scrubGalleryImportLivingContent; a markerless file stays markerless', () => {
