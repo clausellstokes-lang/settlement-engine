@@ -19,9 +19,12 @@
  *   (5) THE RUNG IS NEVER READ (the chair's ruling of 19:33 UTC): a born place with a capture rung and the same place
  *       without one, equal in every served band, carry the same merits and the same score; and a place BORN captured
  *       (hxd-metropolis-73, rung `corrupted`, a weathered catastrophe) carries its merit.
- *   (S) EVERY INPUT IS SERVED (the chair's ruling of 19:38 UTC): on every forced birth, the merits recomputed from the
- *       SHARED read (`toPublicSafe`, then the veil with every hideable grouping and every field class of every card
- *       kind hidden) equal the owner's, and so do the score and its terms the shared page carries.
+ *   (S) EVERY INPUT IS SERVED (the chair's ruling of 19:38 UTC), RE-STATED by the chair's RULING V3 (VEIL-53 UNIT A,
+ *       2026-11-24): on every forced birth the merits recomputed from every read (`toPublicSafe`; the read a share is
+ *       served, under its default veil; the veil with every hideable grouping and every field class of every card kind
+ *       hidden) equal the owner's, and so do the score and the merit's points; the breakdown's terms (prosperity, safety,
+ *       defense) are on the owner's read and ABSENT on every veiled read (`galleryWithholdAlways.js :: withholdAlways`,
+ *       the registry row `legitimacy.breakdown`), so a veiled breakdown is not the owner's.
  *   (U7) LASTING, THE SECOND MERIT (FORTUNE-7 U7, the chair's decision E32 of 2026-11-22 04:51 UTC): the law's table
  *       holds one DRAFT lasting age for each size, inside that size's own age range; `meritsOf` credits `lasting` on
  *       every forced birth exactly where `history.age` reaches its size's age through the same gates; two merits are two
@@ -65,7 +68,7 @@ import { CAPTURE_RUNGS } from '../../src/data/people/dmPowerLines.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { legacyConfig } from '../helpers/fortuneLegacyConfig.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
-import { CARD_KINDS, GROUPING_REMOVERS, applyVeil, isHideable } from '../../src/domain/display/galleryVeil.js';
+import { CARD_KINDS, GROUPING_REMOVERS, applyVeil, defaultVeilFor, isHideable, resolveVeil } from '../../src/domain/display/galleryVeil.js';
 
 const STANDING = /** @type {any} */ (FORTUNE_LAW_TUNING.standing);
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
@@ -307,23 +310,36 @@ describe('U5a (5) — the capture rung is never read: one score on the owner\'s 
   });
 });
 
-describe('U5a (S) — every input of the merit is served, unchanged, on every shared read', () => {
+describe('U5a (S) — the merits and the score ride on every read; the breakdown\'s terms on the owner\'s read alone (RULING V3)', () => {
   /** the widest veil the registry admits: every grouping, and every field class of every card kind */
   const WIDEST = [
     ...Object.keys(GROUPING_REMOVERS),
     ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map((field) => `class:${kind}:${field}`)),
   ].filter((address) => isHideable(address));
+  /** the terms no veiled read sends (the chair's RULING V3, UNIT A: the registry row `legitimacy.breakdown`) */
+  const TERMS = ['prosperity', 'safety', 'defense'];
+  /** @param {any} pub @returns {any} the read a share is served: its default veil, no delta */
+  const servedOf = (pub) => applyVeil(pub, resolveVeil(defaultVeilFor(pub), []));
 
   it('the widest veil is wide (anti-vacuity)', () => {
     expect(WIDEST.length).toBeGreaterThan(Object.keys(GROUPING_REMOVERS).length);
   });
 
-  it('the shared read, plain and under the widest veil, recomputes the owner\'s merits; the score and terms ride unchanged', () => {
+  it('every read recomputes the owner\'s merits and carries its score and points; the terms are the owner\'s, absent on every veiled read', () => {
     expectNoSeedFailures(collectSeedFailures(LAW2, ({ seed, town }) => {
-      for (const shared of [toPublicSafe(town), applyVeil(toPublicSafe(town), WIDEST)]) {
-        expect(meritsOf(shared), seed).toEqual(meritsOf(town));
-        expect(shared.powerStructure.publicLegitimacy.score, seed).toBe(town.powerStructure.publicLegitimacy.score);
-        expect(shared.powerStructure.publicLegitimacy.breakdown, seed).toEqual(town.powerStructure.publicLegitimacy.breakdown);
+      const own = town.powerStructure.publicLegitimacy;
+      for (const term of TERMS) expect(typeof own.breakdown[term], `${seed} owner ${term}`).toBe('number');
+      const pub = toPublicSafe(town);
+      for (const [name, read] of /** @type {Array<[string, any]>} */ ([['shared', pub], ['served', servedOf(pub)], ['widest', applyVeil(pub, WIDEST)]])) {
+        expect(meritsOf(read), `${seed} ${name}`).toEqual(meritsOf(town));
+        expect(read.powerStructure.publicLegitimacy.score, `${seed} ${name}`).toBe(own.score);
+        expect(read.powerStructure.publicLegitimacy.breakdown.merits, `${seed} ${name}`).toBe(own.breakdown.merits);
+        if (name === 'shared') {
+          expect(read.powerStructure.publicLegitimacy.breakdown, `${seed} ${name}`).toEqual(own.breakdown);
+          continue;
+        }
+        for (const term of TERMS) expect(term in read.powerStructure.publicLegitimacy.breakdown, `${seed} ${name} ${term}`).toBe(false);
+        expect(read.powerStructure.publicLegitimacy.breakdown, `${seed} ${name}`).not.toEqual(own.breakdown);
       }
     }), 'every town of the arm');
     expect(moved().length).toBeGreaterThan(0);

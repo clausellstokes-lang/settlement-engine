@@ -106,14 +106,27 @@ function adverseSafetyWord(safetyLabel) {
 }
 
 /**
+ * ⭐ A WHOLE BREAKDOWN, OR NO CAUSE (the chair's RULING V3, VEIL-53 UNIT A, 2026-11-24: FAIL CLOSED). A veiled read
+ * carries the breakdown without its prosperity, safety and defense terms (`galleryWithholdAlways.js :: withholdAlways`,
+ * the registry row `legitimacy.breakdown`); the one or two largest causes cannot be ranked from what is left, so a
+ * breakdown that lacks any of its four terms grounds no cause clause, and no "It" turn after a bare standing.
+ * @param {unknown} breakdown @returns {boolean}
+ */
+function wholeBreakdown(breakdown) {
+  const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
+  return CAUSE_ORDER.every((field) => typeof b[field] === 'number' && Number.isFinite(b[field]));
+}
+
+/**
  * The one or two causes the breakdown names for the band's direction, largest first; ties break in
- * the fixed order above, so an unrelated edit cannot reorder them.
+ * the fixed order above, so an unrelated edit cannot reorder them. A breakdown that is not whole names none.
  * @param {unknown} breakdown @param {boolean} adverse
  * @param {unknown} [safetyLabel] the record's safety label (a crisis-named label reads "insecurity" or "the curfew", not "crime")
  * @returns {string[]}
  */
 export function legitimacyCausesOf(breakdown, adverse, safetyLabel = null) {
-  const b = breakdown && typeof breakdown === 'object' ? /** @type {Record<string, unknown>} */ (breakdown) : {};
+  if (!wholeBreakdown(breakdown)) return [];
+  const b = /** @type {Record<string, unknown>} */ (breakdown);
   return CAUSE_ORDER
     .map((field, order) => ({ field, order, value: typeof b[field] === 'number' && Number.isFinite(b[field]) ? /** @type {number} */ (b[field]) : 0 }))
     .filter(({ value }) => (adverse ? value < 0 : value > 0))
@@ -404,7 +417,9 @@ export function governanceAccountOf(settlement, opts = {}) {
     // place's name and age (both served on every shared read); where both merits credit, the one fixed row, with no draw.
     // The chair's ruling of 12:28 UTC 2026-11-22 (U7d): the fixed row prints only where the first merit's sentence PRINTED
     // in this paragraph; where both credit but it did not (an event whose stored name is empty), the drawn rows, as alone.
-    // E57 amended (2): a drawn row opens on "It" where the standing is a bare line that opens on the place.
+    // E57 amended (2): a drawn row opens on "It" where the standing is a bare line that opens on the place. RULING V3
+    // (VEIL-53 UNIT A, FAIL CLOSED): only on a whole breakdown; a veiled read's standing is bare for want of its terms,
+    // and there the row keeps the place's name as its subject.
     const age = meritRecord.history?.age;
     if (merits.includes('lasting') && typeof age === 'number') {
       const both = meritPrinted;
@@ -418,7 +433,7 @@ export function governanceAccountOf(settlement, opts = {}) {
         drawKind: 'H',
       }).line;
       const wording = lasting ? textOf(lasting) : '';
-      const onIt = !both && !causes.length && standing.startsWith(`${place} `);
+      const onIt = !both && !causes.length && wholeBreakdown(/** @type {{ breakdown?: unknown }} */ (leg).breakdown) && standing.startsWith(`${place} `);
       /** @type {Record<string, string>} */
       const lastingSlots = { place, seat: ruler, ...(age < FORTUNE_LASTING_CENTURIES_YEARS ? FORTUNE_LASTING_TIME_WORDS.generations : FORTUNE_LASTING_TIME_WORDS.centuries) };
       if (wording) sentences.push((onIt ? wording.replace(/^\{place\}/, 'It') : wording).replace(/\{(\w+)\}/g, (_m, k) => lastingSlots[k] ?? ''));

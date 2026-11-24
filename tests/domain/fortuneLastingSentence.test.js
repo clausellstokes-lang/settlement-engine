@@ -13,9 +13,12 @@
  *       the drawn rows does; the "It" opening prints only where the sentence before is one that opens on the place;
  *   (c) a law-1 birth, a law-2 birth without the merit and a record with no standing print none of the pool (the two-tree
  *       confinement proves the births themselves untouched);
- *   (d) THE EQUALITIES: each wording with its time word, on each place, is one string on the owner's record, on
- *       `toPublicSafe(record)` and under the widest veil (veil-probe.mjs :: widestOf); all eight (row, time word) pairs
- *       are reached;
+ *   (d) THE EQUALITIES: each wording with its time word, on each place, is one string on the owner's record, on the
+ *       read a share is served (`toPublicSafe` under its default veil) and under the widest veil (veil-probe.mjs ::
+ *       widestOf); all eight (row, time word) pairs are reached. RE-STATED by the chair's RULING V3 (VEIL-53 UNIT A,
+ *       2026-11-24), FAIL CLOSED: a veiled read carries no breakdown terms (`galleryWithholdAlways.js :: withholdAlways`),
+ *       so its paragraph names no cause and every sentence is whole: the sentence opens on the place, never on "It" with
+ *       a lost subject; the owner's record keeps its cause clause;
  *   (e) no sentence is printed twice in one place; each drawn wording is reachable.
  *
  * Every expected sentence is COMPUTED from the pool, its time words, its cut-off and the predicates (`meritsOf`,
@@ -28,7 +31,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { governanceAccountOf, governanceStressTypesOf, powerNameInProse } from '../../src/domain/display/governanceAccount.js';
+import { governanceAccountOf, governanceStressTypesOf, legitimacyCausesOf, powerNameInProse } from '../../src/domain/display/governanceAccount.js';
 import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { meritsOf, weatheredCatastrophe } from '../../src/domain/fortune/fortuneMerits.js';
@@ -37,7 +40,7 @@ import { pickVariantMixed } from '../../src/kernel/proseHash.js';
 import { FORTUNE_MERIT_LINES, FORTUNE_MERIT_RECENT_YEARS, FORTUNE_MERIT_TIME_WORDS } from '../../src/data/fortuneMeritLines.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
-import { CARD_KINDS, GROUPING_REMOVERS, applyVeil } from '../../src/domain/display/galleryVeil.js';
+import { CARD_KINDS, GROUPING_REMOVERS, applyVeil, defaultVeilFor, resolveVeil } from '../../src/domain/display/galleryVeil.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const STANDING = /** @type {any} */ (FORTUNE_LAW_TUNING.standing);
@@ -362,13 +365,35 @@ describe('U7b (c): no merit, no sentence', () => {
   });
 });
 
-describe('U7b (d): the equalities (each wording, its time word, three reads)', () => {
-  it('each wording is one string on the owner\'s record, the shared read and the widest veil; all eight pairs are reached', () => {
+describe('U7b (d): the equalities (each wording, its time word, three reads), FAIL CLOSED on the veiled reads (RULING V3)', () => {
+  /** @param {any} pub @returns {any} the read a share is served: its default veil, no delta */
+  const servedOf = (pub) => applyVeil(pub, resolveVeil(defaultVeilFor(pub), []));
+  /** @param {string} s */
+  const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+  /** @param {string} text @returns {string[]} */
+  const sentencesOf = (text) => text.split(/(?<=\.) /);
+  /** @param {any} record @returns {string[]} every cause word the composer can name for the record, either direction (COMPUTED) */
+  const causeWordsOf = (record) => {
+    const safetyLabel = record.economicState?.safetyProfile?.safetyLabel;
+    const fields = Object.keys(record.powerStructure.publicLegitimacy.breakdown).filter((f) => f !== 'merits');
+    const zero = Object.fromEntries(fields.map((f) => [f, 0]));
+    return [...new Set(fields.flatMap((f) => [1, -1].flatMap((sign) => [true, false]
+      .flatMap((adverse) => legitimacyCausesOf({ ...zero, [f]: sign }, adverse, safetyLabel)))))];
+  };
+  /** @param {any} record @returns {string} the owner's cause clause as it opens its sentence, '' where its breakdown names none */
+  const clauseOf = (record) => {
+    const pl = record.powerStructure.publicLegitimacy;
+    const adverse = !!(pl.isLegitimacyCrisis || pl.isContested || pl.isTolerated);
+    const causes = legitimacyCausesOf(pl.breakdown, adverse, record.economicState?.safetyProfile?.safetyLabel);
+    return causes.length ? capFirst(causes.join(' and ')) : '';
+  };
+
+  it('each wording is one string on the owner\'s record, the served read and the widest veil; all eight pairs are reached', () => {
     expect(POOL).toBeTruthy();
     let equalities = 0;
     const pairs = new Set();
     const failures = collectSeedFailures(SIX, ({ seed, record }) => {
-      const shared = toPublicSafe(record);
+      const shared = servedOf(toPublicSafe(record));
       const veiled = applyVeil(toPublicSafe(record), widestOf(toPublicSafe(record)));
       const lines = POOL.filter((/** @type {any} */ l) => l.when === caseOf(record));
       expect(lines.length, seed).toBeGreaterThan(0);
@@ -380,16 +405,58 @@ describe('U7b (d): the equalities (each wording, its time word, three reads)', (
         equalities += 1;
         pairs.add(`${line.id}:${spanOf(record)}`);
       }
-      // and the paragraph prints the same sentence on all three reads (its key and its standing are served)
-      const said = lines.flatMap((/** @type {any} */ l) => { const s = /** @type {string} */ (fillOf(record, l)); return [s, onIt(s)]; })
-        .filter((/** @type {string} */ s) => paragraphOf(record).includes(s));
-      expect(said, seed).toHaveLength(1);
-      expect(paragraphOf(shared).includes(said[0]), `${seed} shared`).toBe(true);
-      expect(paragraphOf(veiled).includes(said[0]), `${seed} widest`).toBe(true);
     });
     expectNoSeedFailures(failures, 'each wording is one string on the three reads');
     expect(equalities).toBe(14);
     expect([...pairs].sort()).toEqual(POOL.flatMap((/** @type {any} */ l) => Object.keys(TIMES).map((t) => `${l.id}:${t}`)).sort());
+  });
+
+  it('the owner\'s record keeps its cause clause, on every place of the arm whose breakdown names one', () => {
+    /** @type {string[]} */ const withClause = [];
+    const failures = collectSeedFailures(SIX, ({ seed, record }) => {
+      const clause = clauseOf(record);
+      if (!clause) return;
+      withClause.push(seed);
+      const said = sentencesOf(paragraphOf(record)).filter((s) => s.startsWith(`${clause} `));
+      expect(said, `${seed}: ${paragraphOf(record)}`).toHaveLength(1);
+    });
+    expectNoSeedFailures(failures, 'the owner\'s read keeps its cause clause');
+    expect(withClause).toEqual(['visitor-thorp-52', 'visitor-village-8', 'visitor-hamlet-139']);
+  });
+
+  it('a veiled read (the served read, the widest veil) names no cause, and every sentence is whole: LASTING\'s opens on the place', () => {
+    expect(POOL).toBeTruthy();
+    let veiledReads = 0;
+    const failures = collectSeedFailures(SIX, ({ seed, record }) => {
+      const words = causeWordsOf(record);
+      expect(words.length, seed).toBeGreaterThan(0);
+      const lines = POOL.filter((/** @type {any} */ l) => l.when === caseOf(record));
+      // the sentence the paragraph prints, opening on the place: the keyed pick where LASTING credits alone, the fixed row where both
+      const placeForm = caseOf(record) === 'both' ? /** @type {string} */ (fillOf(record, FIXED))
+        : fill(/** @type {any} */ (pickVariantMixed(DRAWN, `${String(record.name).trim()}::${record.history.age}`)).text, slotsOf(record));
+      const pub = toPublicSafe(record);
+      for (const [name, read] of /** @type {Array<[string, any]>} */ ([['widest', applyVeil(pub, widestOf(pub))], ['shared', servedOf(pub)]])) {
+        expect(meritsOf(read), `${seed} ${name}`).toEqual(meritsOf(record));
+        const paragraph = paragraphOf(read);
+        const sentences = sentencesOf(paragraph);
+        // no cause clause: no sentence opens on a cause word
+        for (const word of words) expect(sentences.some((s) => s.startsWith(`${capFirst(word)} `)), `${seed} ${name} ${word}: ${paragraph}`).toBe(false);
+        // LASTING's sentence, once, opening on the place; never its "It" form with the subject lost
+        expect(placeForm.startsWith(`${String(record.name).trim()} `), seed).toBe(true);
+        expect(countOf(paragraph, placeForm), `${seed} ${name}: ${paragraph}`).toBe(1);
+        for (const line of lines) {
+          for (const w of Object.values(TIMES)) {
+            const s = fill(line.text, { ...slotsOf(record), .../** @type {any} */ (w) });
+            expect(paragraph.includes(onIt(s)), `${seed} ${name} ${line.id}: ${paragraph}`).toBe(false);
+          }
+        }
+        // every sentence whole: it opens on a capital and closes on its stop
+        for (const s of sentences) expect(/^[A-Z].*\.$/.test(s), `${seed} ${name}: "${s}"`).toBe(true);
+        veiledReads += 1;
+      }
+    });
+    expectNoSeedFailures(failures, 'a veiled read names no cause, and LASTING\'s sentence opens on the place');
+    expect(veiledReads).toBe(SIX.length * 2);
   });
 });
 
