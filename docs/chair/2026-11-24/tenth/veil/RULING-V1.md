@@ -131,3 +131,27 @@ from the open one); their re-derivation from served data is phase 2, row by row.
    an always-withhold nobody can justify is cut, not listed.
 THE OWNER IS TOLD IN PLAIN WORDS NOW and with the lit join's counts at the proof: a shared page shows a little less than
 the owner's own page (about three lines in a thousand); putting the lines back safely is the second stage.
+
+## RULING V5 (added 22:27 UTC on 2026-11-24): THE OWNER'S "Do everything prerelease" AND THE VEIL
+His words, verbatim, at about 22:19 UTC: "Do everything prerelease". FOR THE VEIL: (1) IT SHIPS AT "NOT INFERABLE" AGAIN
+("R3": GATE-1 0 of 92, GATE-2 0 red): phase 2 is before the release; phase 1 stays the ORDER of the work, not the release's
+gate (V1-4 and V1-5 are changed by this; V1-3's bar is phase 1's milestone). (2) The lines a shared page loses are put back
+before the release, re-derived from what is served (V4's listed rows; the pressure line; a transfer's sentence; the
+governing paragraph's cause and its arrangement key). (3) The stored state sentences on shared pages, "the composed host".
+(4) The standing sentence stored as its own field at birth, LAST (it moves every birth). OWED BY THE LANE'S OWNER after
+"R4-IDS MERGED": `VEIL-50-PLAN-2.md`. AND THE OWNER'S OWN QUESTION, measured for him by VEIL-52: what the server sends
+today on a page published before the veil that the browser then hides; what the default veil would newly remove from such
+a page; what it takes for the server to remove exactly what the browser hides.
+
+## RULING V6 (added 22:27 UTC on 2026-11-24): "FAIL-CLOSED PAGES", A PHASE 1 UNIT
+VEIL-53's `out/v53/j12/J12-V4.md`: under V4's first term, WRONG PAGES ARE REAL AND WIDE on reads that hide nothing: the page
+reads an always-withheld key as absent and prints a default as a fact (one pair a class, PLAUSIBLE until sized: Criminal
+opportunity Elevated to Contained; Defense readiness Critical to Adequate; Labor capacity Adequate to Strained; Law and
+order Adequate to Surplus; the legitimacy band Critical to Contested; magic's legality regulated to restricted; two defence
+sentences turned to their opposites; Daily Life's "The Succession Crisis still shapes…" to "Little has changed of late").
+**RULED:** class (C), phase 1, AHEAD of the put-back: (a) sized first on a slice (three pairs a class), ahead of the anon
+arm on VEIL-53's queue; (b) every page reader of an always-withheld key prints NOTHING where the key is absent, red first
+per class, the owner's own read unchanged and asserted; (c) TOTALITY: a walker over the registry's always-withheld keys and
+every page reader that reads one, each with its fail-closed arm: a reader with no arm reds. Readiness and severity, once
+"ruled and listed", are in it. `prominentRelationship`'s 12 of 720 on the lit trial join are the covert tie's own copy
+(N117), cured by unit 3.

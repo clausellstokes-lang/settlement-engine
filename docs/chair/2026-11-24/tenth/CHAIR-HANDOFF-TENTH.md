@@ -668,3 +668,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   the chair recommends nine for this push); later, one at a time: the contender's word, "the crisis has a body", the
   drafts of his own numbers. **The chair's correction to him:** its guess of 2026-11-27 or 28 was given before the
   parked list was read; the list makes it four to six days at six seats, three to four at nine.
+- 2026-11-24 22:27 UTC · T48 · THE HOURLY CHECK, AND FOUR THINGS. (a) THE MARKS BY THE CHAIR'S READ AT 22:26 UTC: **VEIL-50 594,574**
+  (430,670 an hour before): TOLD AT ONCE to bring unit 2 to a commit boundary, make its hand-back's first section
+  current, draft its successor's start message (`DRAFT-START-VEIL-55.txt`, THE LANE'S OWNER) and say "VEIL-50 HANDS
+  OVER <commit>": the chair seats VEIL-55 in its place. VEIL-51 210,405 (it waits on its re-run of the four measures);
+  VEIL-52 333,168 and VEIL-53 375,728 AFTER ONE HOUR: the veil's record is heavy and both will need successors inside
+  phase 1. (b) RULINGS V5 AND V6 (appended to `veil/RULING-V1.md`): the owner's word for the veil (it ships at "not
+  inferable" again; the lost lines put back before the release; the stored state sentences; the standing field last);
+  and "FAIL-CLOSED PAGES", a new phase 1 unit: on shared reads that hide nothing the page prints a DEFAULT AS A FACT
+  where an always-withheld key is absent ("Defense readiness: Adequate" for Critical): sized first, then every such
+  reader prints nothing, with a walker for totality. (c) VEIL-52 measures, for the owner's own question, what a page
+  published before the veil sends today. (d) LAND-115, AS READ BY THE CHAIR FROM ITS FILES WHILE IT RUNS (not yet its
+  report): DARK EQUALITY HOLDS BY THE REPOSITORY'S OWN GOLDEN CORPUS: `golden-base.tsv` and `golden-merged.tsv` are
+  byte-equal (525 configurations, each hashed the old way and through `birthConfig`: 1,050 hashes). THE TUNING
+  REGISTER'S DOOR RAN ONCE (the helper's own check allowed it) AND THE CHAIR HAS READ ITS DIFF WHOLE (52 lines, kept as
+  `read/point-115-tuning-inventory-diff.txt`): `.tuning-inventory.json` alone: who measured, at which commit and the
+  note; the two trouble tables' `line` fields (107 to 108, 150 to 151: where each sits in its file); and ONE NEW
+  DEPENDENT, `src/generators/generateSettlementPipeline.js`, on each of the two; both `spanDigest`s unchanged: NO
+  VALUE MOVED; the register file untouched. IT IS WITHIN WHAT THE OWNER WAS TOLD; the two line fields are said to him.
