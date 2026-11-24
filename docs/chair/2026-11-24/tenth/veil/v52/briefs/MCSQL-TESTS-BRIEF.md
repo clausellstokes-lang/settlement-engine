@@ -15,19 +15,21 @@ THE TWO REDS (q52b (b), 11 of 122; titles in `docs/chair/2026-11-24/tenth/veil/v
    `public.settlements` table lacks the column the restated member reads. CURE: add `gallery_importable boolean not null default false`
    (072's type and default) to that table with a one-line comment naming 212's restated get_gallery_map. NOTHING ELSE in that file.
 2. `tests/security/galleryServerVeil.pglite.test.js` (8 tests): "<tag> map member lacks what the listing shows" (the arm after
-   `fetchGalleryMap(`map-${n}`)`): it holds the member to the LISTING's page, 211's rule. CURE: that arm holds the member to the PARTY
-   LINK's page of the SAME row and marker: "map member shows what the link hides" and "map member lacks what the link shows", the link's
-   page read the way this file already reads a link (find it in the file; if the file has no link read, read `get_unlisted_dossier`'s
-   `dossier` through the client's own `fetchPublicDossier` on the row's unlisted slug, inserting `unlisted_slug`/`visibility` on the row
-   as the file's own inserts do). Keep "map member carries a role its card withholds". Keep the listing comparisons for the IMPORT as they
-   are. If `MEMBER_CANNOT_PROVE` no longer applies (the member and the link both take the veil), remove it only if the arm is green
-   without it; say which. Update the arm's comment to cite N84 (a) and 212 (36). Do NOT weaken any other assertion of the file.
-
+   `fetchGalleryMap(`map-${n}`)`): it holds the member to the LISTING's page, 211's rule. THE LANE OWNER'S TERMS (VEIL-55, 23:07 UTC):
+   (a) FIRST, A CONDITION TO PROVE: for each of the three paths the reds name (availableServices.criminal[], coherenceNotes[],
+       economicState.safetyProfile.crimeTypes[]), the PARTY LINK's page of the SAME row and marker lacks it too. If the link's page
+       SHOWS a path the member lacks, that is a door inequality: STOP, change nothing more, report it.
+   (b) THE CURE: the arm holds the member EQUAL BY VALUE to the party link's page of the same row and marker, at EVERY marker the arm
+       reads (unmarked AND marked), modulo the person-id bijection only where ids are re-keyed (at this tree they are not: say so if
+       you find otherwise). Not merely "lacks what the link shows". The LISTING comparison for the member is DROPPED (not loosened).
+       The link's page is read the way this file already reads a link (find it); if it has none, `fetchPublicDossier` on the row's
+       unlisted slug (insert `unlisted_slug`/`visibility` as the file's own inserts do). Keep "map member carries a role its card
+       withholds". Keep the IMPORT's listing comparisons as they are. `MEMBER_CANNOT_PROVE` goes if the equal-by-value arm is green
+       without it; say which. The arm's fault label and comment cite N84 (a) and 212 (36). Do NOT weaken any other assertion.
 PROOF (each through the mutex, from `/home/user/settlement-engine`: `GATE_MUTEX_MAX_POLLS=100000 sh scripts/gate-mutex.sh --run -- sh -c
 "cd /home/user/wt/mcsql && sh scripts/gate-tail.sh npx vitest run <files>"`, output to a log file you name, never through a pipe):
 (i) RED FIRST: before your edits, both files red as above (the counts 3 and 8); (ii) GREEN after: both files whole green; (iii) a TOOTH for
-(2): temporarily make the arm compare to the LISTING again (or plant one path the link hides into the member in-test) and show it reds;
-restore; (iv) `tests/lint` WHOLE after your last commit (COMMON-EIGHTH 11): report its failing-file count and titles beside the base
+(2): plant one path the link's page lacks into the member in-test (or alter one value) and show the equal-by-value arm reds; restore; (iv) `tests/lint` WHOLE after your last commit (COMMON-EIGHTH 11): report its failing-file count and titles beside the base
 (fetch the ledger ref first: `git fetch origin review-fixes-2026-07-08 && git branch -f review-fixes-2026-07-08 FETCH_HEAD` in
 `/home/user/settlement-engine`).
 
