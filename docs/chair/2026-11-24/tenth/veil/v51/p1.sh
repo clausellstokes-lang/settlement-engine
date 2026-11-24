@@ -33,6 +33,9 @@ step_lint() { cd $C && mx npx vitest run tests/lint > $O/lint.log 2>&1; st lint 
 step_copy() { cd $C && mx npx vitest run tests/copy > $O/copy.log 2>&1; st copy $?; }
 step_types() { cd $C && mx sh -c "node scripts/check-full-typecheck.mjs > $O/types.log 2>&1; echo types=\$? >> $O/types.log; npx eslint \$(git diff --name-only --diff-filter=d $B HEAD -- src tests | tr '\n' ' ') > $O/eslint.log 2>&1; echo eslint=\$? >> $O/eslint.log"; st types-eslint $?; }
 step_build() { cd $C && mx sh -c "npm run build > $O/build.log 2>&1 && VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js > $O/dist.log 2>&1"; st build-dist $?; }
+# tipbuild (added 23:22 UTC): the same build and dist pins on the lane's tip b58abc48b (/home/user/wt/tip), to attribute
+#   the c2 tree's size reds: run as `sh p1.sh tipbuild`.
+step_tipbuild() { cd $T && mx sh -c "npm run build > $O/tipbuild.log 2>&1 && VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js > $O/tipdist.log 2>&1"; st tip-build-dist $?; }
 STEPS=${*:-"tpl dumps ctrl t140 st140 sm140 set55 cures lint copy types build"}
 echo "start $(date -u +%Y-%m-%dT%H:%M:%SZ) c2 at $(git -C $C rev-parse HEAD) steps: $STEPS" >> $L
 for s in $STEPS; do step_$s; done

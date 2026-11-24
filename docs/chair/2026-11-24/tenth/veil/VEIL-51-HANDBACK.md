@@ -44,7 +44,14 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
 - PUSHES: 888afa0c8 pushed 23:07 rc 0 (hook fast path). A push queued on the gate mutex lost the lock twice to p1's steps
   (16 min); under the chair's 22:48 rule (push at every result, at most every 45 minutes) I stopped it and pushed outside the
   mutex: the lane hook runs typecheck and eslint, no vitest, beside `tests/lint`'s hold.
-- RUNNING: p1 (background task, runner log `/var/tmp/v51/log/p1-run.log`) at copy (23:16-), then types+eslint, build. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
+  - copy 2 of 172 (`voiceMechanics`, V2's); typecheck 167/167 OK; eslint 0 errors; build built, dist 4 red of 66 ALL THE TIP'S
+    (the same bytes on b58abc48b, step `tipbuild`): +0 raw at first paint, engine, worker. git config clean; no Fixture commit.
+- UNIT 1's PROOF IS DONE: `v51/TIP-STORED-PROSE.md` (every receipt, TABLE A, LINE B, the diff) sent to VEIL-55 and the chair
+  as "TIP? STORED-PROSE ced3b1de7" (23:25). NOTHING RUNNING. OWED: the chair's whole read of 212's hunk; the HandRows anchor
+  (the unit's one lint red) computed or ruled; VEIL-55 merges on the grant, never I.
+- NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
+  PART 47 s1 block 0 (2787f454c) first; step (1): a worktree on `lane/veil-51-2026-11-24-r5desc-wip` from aa54a6791, plain
+  merges of b58abc48b and the named tip. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
   docs/chair/2026-11-24/tenth/veil/v51/p1.sh <steps>` after the machine (section 'THE MACHINE') and the trees are rebuilt. Then step (3) TABLE A and LINE B; then
   "TIP? STORED-PROSE ced3b1de7" to VEIL-55 as a file.
 
@@ -59,7 +66,7 @@ RUNS (scripts on this branch, `docs/chair/2026-11-24/tenth/veil/v51/`): `p1.sh` 
 t140, st140, sm140, set55, cures, lint, copy, types, build); receipts in `/var/tmp/v51/out/p1/p1.log`; `set55.txt` = the
 re-derived 55-file set (VEIL-41's list died with its container; derivation in p1.sh's head).
 
-NEXT: p1 (background) ends -> read each tail -> the TIP? file -> wait for "R4-IDS MERGED" (unit 2).
+NEXT: see STATE's last line.
 
 ## 2. RULINGS IN FORCE (as read; the record holds each with its reasons)
 RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document form, `MEAS_BIJ=0` until R4-IDS merges), N96 (d)
@@ -68,4 +75,5 @@ N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) un
 
 ## 3. Log (every hour from `date -u`)
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
+- 22:49 the chair's allowance warning: push at every result. 23:19 p1 ended. 23:21 tipbuild. 23:25 TIP? sent.
 - 22:40 context summarized; owner change read (VEIL-55); line to VEIL-55. 22:42 the four measures read.
