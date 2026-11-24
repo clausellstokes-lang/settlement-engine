@@ -21,6 +21,10 @@
 --           every server-only or no-role function (and _audit_action); service_role is
 --           granted again only where a migration granted it. GENERATED; three are left
 --           open and named.
+--   PART B  (LAST in the file) the migrating role's default in schema public no longer grants
+--           EXECUTE on NEW functions to anon and authenticated, so a new function written with
+--           `revoke ... from public; grant ... to service_role` is closed to both, as in plain
+--           Postgres. A new function with no grant statement stays open through PUBLIC.
 --
 -- Pinned by: tests/security/hostedDefaultGrants.pglite.test.js (the register,
 --   tests/security/functionGrantClasses.js, classes every public function).
@@ -28,5 +32,7 @@
 --   tightening is reversed by hand, eyes open). PART A for one function, if a caller
 --   with a user's token is found broken:
 --     grant execute on function public.<the same signature> to anon, authenticated;
+--   PART B:
+--     alter default privileges in schema public grant execute on functions to anon, authenticated;
 -- ────────────────────────────────────────────────────────────────────────────
 

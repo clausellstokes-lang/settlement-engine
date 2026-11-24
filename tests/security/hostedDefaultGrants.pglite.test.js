@@ -109,3 +109,34 @@ describe('the three executed holes stay closed (CONFIRMED before 211 as anon / a
     expect(await callAs('authenticated', "select public.release_free_narrative('11111111-1111-1111-1111-111111111111')")).toMatch(/permission denied/);
   });
 });
+
+describe('part B: the default for functions created AFTER the chain (ruling G1 §3, amendment G1b)', () => {
+  const priv = async (sig) => (await chain.db.query(`
+    select has_function_privilege('anon', '${sig}'::regprocedure, 'execute') as anon,
+           has_function_privilege('authenticated', '${sig}'::regprocedure, 'execute') as authd,
+           has_function_privilege('service_role', '${sig}'::regprocedure, 'execute') as svc`)).rows[0];
+  it("a function written with the repository's two lines (revoke from public; grant to service_role) is closed to anon and authenticated", async () => {
+    await chain.db.exec(`create function public.zz_part_b_convention() returns int language sql as 'select 1';
+      revoke all on function public.zz_part_b_convention() from public;
+      grant execute on function public.zz_part_b_convention() to service_role;`);
+    try {
+      expect(await priv('public.zz_part_b_convention()')).toEqual({ anon: false, authd: false, svc: true });
+    } finally {
+      await chain.db.exec('drop function public.zz_part_b_convention();');
+    }
+  });
+  it('a function written with NO grant statement stays executable through PUBLIC, as in plain Postgres (intended)', async () => {
+    await chain.db.exec(`create function public.zz_part_b_bare() returns int language sql as 'select 1';`);
+    try {
+      expect(await priv('public.zz_part_b_bare()')).toEqual({ anon: true, authd: true, svc: true });
+    } finally {
+      await chain.db.exec('drop function public.zz_part_b_bare();');
+    }
+  });
+  it("the migrating role's default in schema public grants execute to neither anon nor authenticated", async () => {
+    const rows = (await chain.db.query(`select defaclacl::text as acl from pg_default_acl
+      where defaclrole = current_user::regrole and defaclnamespace = 'public'::regnamespace and defaclobjtype = 'f'`)).rows;
+    expect(rows.length).toBe(1);
+    expect(rows.filter((r) => /(^|[{,])(anon|authenticated)=/.test(r.acl))).toEqual([]);
+  });
+});
