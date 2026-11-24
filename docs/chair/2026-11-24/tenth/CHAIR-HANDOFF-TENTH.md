@@ -116,3 +116,24 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   and the revoke block GENERATED from its catalog, ordered by what each guards; apart, the functions meant for a
   signed-in user that trust an id they are handed; whether a default-privileges revoke would hold and what relies on
   the default today). (c) THE FULL FIX IS READ BY A FRESH SECURITY READER before it reaches the owner or the line.
+- 2026-11-24 15:12 UTC · T11 · GRANTS-1's MEASURE TAKEN (89b9e3b04, `grants/GRANTS-1-MEASURE.md` on its lane, read whole by
+  the chair) AND RULED (`grants/RULING-G1.md` on this lane). ITS FIGURES (PGlite under the hosted default; production
+  unread): 404 functions in `public`; 135 server-only or owner-only ones executable by a visitor; 87 OF THEM SECURITY
+  DEFINER WITH NO REAL CHECK OF THE CALLER (the BYOK passphrase and any user's decrypted key; downgrade any user; any
+  user's free narrative; 16 admin functions that trust the actor id they are handed; every admin report; the rate
+  limits; the AI spend cap); `_audit_action` open to PUBLIC even in plain Postgres. profiles: 15 columns a user can
+  change, six of them the server's. settlements and saved_maps: NO column is protected: CONFIRMED there, an owner
+  cleared a staff ban and a soft delete, published again and featured itself. A new migration owes: the gapless
+  sequence test, the rehearsal wave and its pins, an @rollback note, the document counts.
+  **Decided (T11 = RULING G1):** ONE MIGRATION, NUMBER 211, ON THE LINE (the veil's files move up by one at its join);
+  PART A the 135 and `_audit_action` revoked by exact signature (a function any client call site reaches with a
+  visitor's or user's token is left out and listed: BOTH TREES, the line and master); PART B the default privilege
+  for new functions revoked from `anon` and `authenticated` (not from `public`); PART C profiles by an ALLOWED list of
+  column grants, and the client's route round the civility guard removed; PART D a guard trigger on settlements and
+  saved_maps; a register test for each (a function or a column with no class reds); THE OWNER'S PLAIN FILE generated,
+  its parts C and D only if master's client is shown compatible. **Why 211 and not 213:** a fix of what is live does
+  not wait for a paused lane. **What would change it:** a call site on master that uses a listed function with a
+  user's token (that function leaves the block). **Cost:** the veil renumbers at its join. THE READER: a fresh
+  security reader is seated on "GRANTS <commit>".
+  OWED TO THE VEIL'S HAND-OFF (written here; its file is the ninth chair's): WHEN THE VEIL RESUMES, ITS MIGRATIONS
+  MOVE UP BY ONE (211 to 212, 212 to 213, and any 213 to 214), because the line's 211 is now the grants fix.
