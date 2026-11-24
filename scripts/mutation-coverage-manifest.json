@@ -2387,6 +2387,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/hostedDefaultGrants.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/lint/envoyKindPools.walker.test.js": {
       "kind": "rationale",
       "ref": "narration-kit-exact-census-2026-08-03"

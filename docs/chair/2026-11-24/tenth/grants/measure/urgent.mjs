@@ -16,11 +16,13 @@ const GRANTS = new URL('../', import.meta.url);
 const TREES = { line: 'HEAD', master: 'origin/master' };
 
 // ── the candidates: groups 1 and 2 of the generated revoke block ─────────────
+// PART_A=1: every group (the whole block, ruling G1a) plus _audit_action.
+const ALL = !!process.env.PART_A;
 const cands = []; let grp = 0;
 for (const l of readFileSync(new URL('./revoke-block.sql', OUT), 'utf8').split('\n')) {
   const g = /^-- ── GROUP (\d)/.exec(l); if (g) { grp = Number(g[1]); continue; }
   const m = /^revoke execute on function public\.([a-z_0-9]+)\((.*)\) from anon, authenticated;/.exec(l);
-  if (m && (grp === 1 || grp === 2)) cands.push({ group: grp, name: m[1], sig: `public.${m[1]}(${m[2]})` });
+  if (m && (grp === 1 || grp === 2 || (ALL && grp === 3))) cands.push({ group: grp, name: m[1], sig: `public.${m[1]}(${m[2]})` });
 }
 
 // Negative control (URGENT_CONTROL=1): functions KNOWN to be called with a user's token
@@ -31,6 +33,7 @@ const CONTROLS = process.env.URGENT_CONTROL ? [
   { group: 0, name: 'list_my_tickets', sig: 'public.list_my_tickets()' },
 ] : [];
 cands.push(...CONTROLS);
+if (ALL) cands.push({ group: 4, name: '_audit_action', sig: 'public._audit_action(uuid,uuid,text,jsonb,jsonb,text)' });
 // ── the two catalogs ──────────────────────────────────────────────────────────
 async function catalog(upTo) {
   const { db } = await boot({ hostedDefaults: true, upTo });
@@ -133,6 +136,7 @@ function callSites(c) {
         if (/rpc\(/.test(text)) client = { client: "CALLER'S TOKEN (browser)" };
         else if (new RegExp(`action(:\\s*|\\s*===\\s*)['"]${c.name}['"]`).test(text)) client = { client: 'edge action name (posted to an edge function; src has no dynamic rpc()' };
         else if (/^\s*(\/\/|\*|\/\*)/.test(text) || !new RegExp(`['"\`]${c.name}['"\`]`).test(text)) client = { client: 'comment or prose mention' };
+        else if (!/\brpc\(/.test(show(tree, path))) client = { client: 'not a call: a quoted id in a file with no rpc( (src has no dynamic rpc)' };
         else client = { client: 'mention in src (read by hand)' };
       }
       else if (/\.rpc\(/.test(text) || /rpc\(\s*$/.test(text)) {
@@ -166,7 +170,7 @@ const rows = cands.map((c) => {
   const pass = !L.a.length && !V.a.length && !L.b.length && !V.b.length && !bad.length;
   return { ...c, live: V.present, aLine: L.a, aLive: V.a, bLine: L.b, bLive: V.b, sites, bad, pass };
 });
-if (!CONTROLS.length) writeFileSync(new URL('./urgent-checks.json', OUT), JSON.stringify(rows, null, 1));
+if (!CONTROLS.length) writeFileSync(new URL(ALL ? './parta-checks.json' : './urgent-checks.json', OUT), JSON.stringify(rows, null, 1));
 console.log('dynamic rpc receivers (line):', JSON.stringify(globalDyn('HEAD').dyn.map((d) => d.file + ' ' + d.recv + ' ' + d.client)));
 console.log('dynamic rpc receivers (master):', JSON.stringify(globalDyn('origin/master').dyn.map((d) => d.file + ' ' + d.recv + ' ' + d.client)));
 console.log('candidates', rows.length, 'pass', rows.filter((r) => r.pass).length, 'live', rows.filter((r) => r.live).length);
