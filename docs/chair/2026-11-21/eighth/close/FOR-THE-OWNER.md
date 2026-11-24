@@ -1,7 +1,9 @@
-# FOR THE OWNER: WHAT THE FLIP ASKS OF YOU (CLOSE-6; prepared from CLOSE-1's draft, CLOSE-5's and CLOSE-6's gathered items; 2026-11-23)
+# FOR THE OWNER: WHAT THE FLIP ASKS OF YOU (the flip: `lane/close-6-2026-11-23-flip` at d447ee31e; prepared by CLOSE-6, finished by CLOSE-7; 2026-11-24)
 
 Written for someone who does not read code. NOTHING HERE IS SIGNED BY ANY SEAT: every item waits for your word. The flip is
-the branch `lane/close-6-2026-11-23-flip`; its last commit is named in the chair's message to you.
+the branch `lane/close-6-2026-11-23-flip`; its last commit is d447ee31e (d447ee31e5b2836736d22778a91ce66721a6d00e), and nobody
+adds to it. It is being landed on the working line as point 113 (the chair's helper; merged at 67fcf51de, the whole suite
+running at the time of writing): THIS LINE WILL SAY THAT THE LINE CARRIES POINT 113 ONLY WHEN THE CHAIR SAYS IT HAS LANDED.
 
 ## 0. FIRST: THE DEPLOY'S ORDER, AND WHY THIS LANDING IS NOT A RELEASE
 - You paused the share veil on 2026-11-23 at 16:12 UTC. Landing the flip on the working line is NOT a release. **The working line
@@ -89,7 +91,31 @@ Each set stays red, by name, until you sign: never a silent pass.
   listed fingerprint row until your golden signing.
 
 ## 6. Sizes (how much the app downloads)
-SIZES_SECTION
+The app's download is measured at three places, each with a budget it must stay under. ALL FIVE WERE ALREADY OVER THEIR
+BUDGETS ON THE WORKING LINE BEFORE THE FLIP (point 112); the flip itself moves them by a few hundred to a few thousand bytes.
+Raising a budget is yours alone: no seat has raised one. Measured by the landing's own build (2026-11-24, the flip merged onto
+the line at 67fcf51de):
+
+| what | with the flip | the line before it (point 112) | the flip's change | the budget | over the budget by |
+|---|---|---|---|---|---|
+| first paint, raw | 1,180,816 | 1,180,816 | 0 | 1,175,492 | 5,324 |
+| first paint, gzip | 376,057 | 376,065 | -8 | 373,999 | 2,058 |
+| first paint, Brotli | 315,858 | 315,768 | +90 | 313,994 | 1,864 |
+| the generation worker | 2,716,002 | 2,713,402 | +2,600 | 2,579,708 | 136,294 |
+| the engine chunk | 932,846 | 932,583 | +263 | 909,928 | 22,918 |
+
+- **First paint** is what a visitor downloads before the page shows (gzip and Brotli are the two compressed forms browsers
+  receive). The flip adds nothing to it that matters: raw is unchanged, gzip 8 bytes smaller, Brotli 90 larger.
+- **The generation worker** is the part that makes a place, downloaded when one is made; **the engine chunk** is the engine's
+  shared code. The flip's +2,600 and +263 come from its own changes to the engine,
+  chiefly the two laws' switch-on (read from what the flip changed, not measured change by change).
+- What the line already owed before the flip was added point by point, each named for your size signing in the chair's record
+  (`ci/LINE-NOW.md`: among them who rules' 3,818 and 670 bytes of first paint, fortune's 167, the Daily Life vocabulary 714).
+- **The state sentences' size counts** (three rows that stay red by name in the checks until you sign): the written-prose
+  corpus measures 302,506 bytes raw and 40,020 compressed in its defence part (302,541 and 40,039 on the line before), and one
+  composed sentence family (A0b) measures 2,327 bytes against its ceiling of 2,103 (2,328 before).
+- YOUR CHOICE: sign the rises (each budget re-set to its measure), or ask for bytes to be bought back first. Nothing here
+  blocks landing the flip on the working line; it bears on the release.
 
 ## 7. What the seats re-recorded without you (listed, not to sign)
 About 200 test values pinned to what the old rules produced were re-recorded by their own tools with the reason written beside
