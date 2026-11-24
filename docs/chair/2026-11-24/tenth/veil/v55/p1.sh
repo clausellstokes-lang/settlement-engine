@@ -18,10 +18,15 @@ step_ctrlg() { mx env MEAS_C=1 sh $F $W $O/ctrl-grn v28tpl handreach > $O/ctrl-g
 step_t140() { mx env MEAS_C=1 MEAS_DOORS=gallery,link sh $F $W $O/t140 v28tpl towns > $O/t140.txt 2>&1; st t140 "$? $(tr '\n' ' ' < $O/t140/done.txt)"; }
 step_s140() { mx env MEAS_C=1 sh $F $W $O/s140 v28tpl stored $ST > $O/s140.txt 2>&1; st s140 "$? $(tr '\n' ' ' < $O/s140/done.txt)"; }
 step_m140() { mx env MEAS_C=1 sh $F $W $O/m140 v28tpl stored $SM > $O/m140.txt 2>&1; st m140 "$? $(tr '\n' ' ' < $O/m140/done.txt)"; }
+# THE STORED ARM (START-VEIL-42 (6); R4I-PAGE-3's ST, its probe and the corrected mask, personIdBijection.shared.mjs ::
+# storedIdsServed, as committed in the tree): stored-ids.sh on both stored sets, template v28tpl (v27x211 + the tree's 212)
+SI=$V/v38/r4ip3/stored-ids.sh
+step_sidt() { mx sh $SI $W $ST $O/sid-today v28tpl > $O/sid-today.txt 2>&1; st sid-today "$? $(tr '\n' ' ' < $O/sid-today/done.txt)"; }
+step_sidm() { mx sh $SI $W $SM $O/sid-master v28tpl > $O/sid-master.txt 2>&1; st sid-master "$? $(tr '\n' ' ' < $O/sid-master/done.txt)"; }
 step_pool() { mx sh $MS/pool.sh $W $P v28tpl > $O/pool.txt 2>&1; st pool $?; }
 step_verify() { mx sh $MS/verify.sh $W $O/verify $P 40 > $O/verify.txt 2>&1; st verify "$? $(tail -1 $O/verify.txt)"; }
 step_gates() { mx env TELL_DB=v55m sh $MS/tell2.sh $W $O/gates v28tpl $P > $O/gates.txt 2>&1; st gates $?; }
 step_sec() { (cd $W && mx sh scripts/gate-tail.sh npx vitest run tests/security --maxWorkers=2 --reporter=default --reporter=json --outputFile=$O/security.json > $O/security.txt 2>&1); st security "$? $(tail -4 $O/security.txt | tr '\n' ' ')"; }
 step_named() { (cd $W && git grep -l -E "galleryPayloadFor|applyVeil|projectShareVeil|get_gallery_dossier|get_unlisted_dossier" -- tests ':!tests/security' > $O/named-files.txt && mx sh scripts/gate-tail.sh npx vitest run $(cat $O/named-files.txt) --reporter=default --reporter=json --outputFile=$O/named.json > $O/named.txt 2>&1); st named "$? files=$(wc -l < $O/named-files.txt) $(tail -4 $O/named.txt | tr '\n' ' ')"; }
-for s in ${*:-run4 ctrl ctrlg t140 s140 m140 pool verify gates sec named}; do step_$s; done
+for s in ${*:-run4 ctrl ctrlg t140 s140 m140 sidt sidm pool verify gates sec named}; do step_$s; done
 echo "p1 END $(date -u +%FT%TZ)" >> $L
