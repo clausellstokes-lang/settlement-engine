@@ -44,12 +44,21 @@ const DOORS = {
   import: async (sl) => { await db.query(`select set_config('test.uid', $1, false)`, [READER]); const r = await db.query('select to_jsonb(g.data) d from public.import_gallery_dossier($1) g', [sl]); await db.query(`select set_config('test.uid', '', false)`); return r; },
   map: (sl) => db.query("select public.get_gallery_map($1) #> '{members,0,settlement}' d", [`${sl}m`]),
 };
+// READ-COST (the chair, 22:48): N115_LISTS=1 times the gallery's LIST reads instead, the tile lists the gallery page calls first
+// (gallery.js :: fetchPublicGalleryViaRpc's list_gallery_dossiers with its defaults, fetchFeatured's list_featured_dossiers,
+// fetchCurated's list_curated_dossiers), 20 reads each, the same rows.
+if (process.env.N115_LISTS === '1') {
+  for (const k of Object.keys(DOORS)) delete DOORS[k];
+  DOORS.list_gallery = () => db.query("select count(*)::int d from public.list_gallery_dossiers(0, 24, 'relevant', '', '{}'::jsonb, true)");
+  DOORS.list_featured = () => db.query('select count(*)::int d from public.list_featured_dossiers()');
+  DOORS.list_curated = () => db.query('select count(*)::int d from public.list_curated_dossiers()');
+}
 const t = {}; const empty = {};
 for (const door of Object.keys(DOORS)) t[door] = [];
 const passes = 1; // one pass: rows=840 is 140 reads a door (three passes outran a 30-minute window on the tip: 22:06, killed)
-for (let p = 0; p < passes; p += 1) for (const sl of (ROWS === '1' ? Array(30).fill(handSlug[0]) : handSlug)) for (const [door, f] of Object.entries(DOORS)) {
+for (let p = 0; p < passes; p += 1) for (const sl of (process.env.N115_LISTS === '1' ? Array(20).fill(handSlug[0]) : ROWS === '1' ? Array(30).fill(handSlug[0]) : handSlug)) for (const [door, f] of Object.entries(DOORS)) {
   const t0 = process.hrtime.bigint(); const r = await f(sl); const ms = Number(process.hrtime.bigint() - t0) / 1e6;
-  t[door].push(ms); if (!r.rows[0]?.d) empty[door] = (empty[door] || 0) + 1;
+  t[door].push(ms); if (r.rows[0]?.d == null) empty[door] = (empty[door] || 0) + 1;
 }
 const stat = (a) => { const s = [...a].sort((x, y) => x - y); return { n: s.length, median: +s[s.length >> 1].toFixed(2), p90: +s[Math.floor(s.length * 0.9)].toFixed(2), mean: +(s.reduce((x, y) => x + y, 0) / s.length).toFixed(2) }; };
 const res = { db: DB, rows: ROWS, publicRows: pub, missingColumns: missing, empty, doors: Object.fromEntries(Object.entries(t).map(([k, v]) => [k, stat(v)])) };
