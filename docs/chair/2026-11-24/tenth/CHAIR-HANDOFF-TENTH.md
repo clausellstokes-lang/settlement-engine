@@ -28,6 +28,11 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Do everything prerelease" (2026-11-24, about 22:19 UTC, this account). IT ENDS THE TWO-STAGE RELEASE: nothing is parked
+for after the release any more (the eighth chair's E30 and this chair's T21 are overridden by it; his earlier "Do all of it
+predeploy." stands again). THE LIST IT MAKES: `PRERELEASE-LIST.md` beside this file. IT IS NOT a signing of the troubles
+rule's numbers, not a choice among the questions that are his (pages published before the veil; the contender's word;
+"the crisis has a body"), and not a grant of the merge, the deploy or a migration: each is asked in its own words.
 "Then yes" (2026-11-24, about 20:54 UTC, this account). IT ANSWERS ONE QUESTION AND GRANTS ONE ACT: the chair had
 asked, in plain words, whether the tuning register's list (which code files depend on the tuning numbers) may be
 re-recorded ONCE on the troubles lane, after a permission check refused that command with the reason "Undermining
@@ -647,3 +652,19 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   an always-withhold nobody can justify is cut. THE OWNER IS TOLD NOW IN PLAIN WORDS (a shared page will show a
   little less than the owner's own page) and with the lit counts at the proof. THIS NARROWS WHAT A SHARED PAGE
   SHOWS AGAINST THE LIVE SITE: it is named to him as a product change of the first release, vetoable.
+- 2026-11-24 22:24 UTC · T47 · THE OWNER: "Do everything prerelease" (22:19 UTC, after the chair had told him what a shared page will
+  no longer show and that its return was "second-stage work after the first release"). **Taken as:** every item any
+  chair had set for "after the first deploy" now comes before the release. **What it changes at once:** (1) THE SHARE
+  VEIL SHIPS AT "NOT INFERABLE" AGAIN (the eighth chair's E27; RULING V1's phase 2 is pre-release; phase 1 stays the
+  order of work, not the release's gate); (2) the lines a shared page loses are put back before the release (re-derived
+  from what is served), and the stored state sentences on shared pages ("the composed host"); (3) "G2", the two oracles,
+  before the release; (4) the eighth and ninth chairs' intake (eighteen items) and the nine further deferrals in their
+  hand-offs: all listed, sized and ordered in `PRERELEASE-LIST.md` (five groups, about 165 seat-hours beyond what is in
+  work, A GUESS). **The order:** what is in work finishes; everything that moves a birth lands before the veil's last
+  proof and before anything is signed; the whole suite, CI, the security reader and the chair's read once, at the end.
+  **What it does not decide, and is asked of him:** the troubles rule's three numbers; WHAT A PAGE PUBLISHED BEFORE THE
+  VEIL SHOWS (by the decided design an unmarked listing is served exactly as today: the browser hides, the server
+  still sends: so the release protects no page already published unless he says how); the seat limit (six, his own:
+  the chair recommends nine for this push); later, one at a time: the contender's word, "the crisis has a body", the
+  drafts of his own numbers. **The chair's correction to him:** its guess of 2026-11-27 or 28 was given before the
+  parked list was read; the list makes it four to six days at six seats, three to four at nine.
