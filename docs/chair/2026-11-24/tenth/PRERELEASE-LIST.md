@@ -21,7 +21,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | A3 | THE LINES A SHARED PAGE LOSES, PUT BACK BY RE-DERIVING THEM FROM WHAT IS SERVED: RULING V4's listed rows; the pressure line (absent from about a third of shared pages); a transfer's own sentence; the governing paragraph's cause (the merit terms) and its arrangement key | L, about 25 | Q | not started |
 | A4 | THE STORED STATE SENTENCES ON SHARED PAGES, "the composed host": 23 or 24 `prose.*` rows re-hosted in the veil's SQL (a new function) | L, about 18 | Q | not started |
 | A5 | THE STANDING SENTENCE STORED AS ITS OWN FIELD AT BIRTH (intake 13): the veil then cuts by the document's own field | L, about 12 | B | not started; no visible change by itself: LAST IN ORDER |
-| A6 | PAGES PUBLISHED BEFORE THE VEIL: by the decided design an unmarked listing is served exactly as today (the browser hides; the server still sends) | ? | **D**, Q | THE OWNER'S DECISION, asked again now (three ways; VEIL-50 measures what each costs) |
+| A6 | PAGES PUBLISHED BEFORE THE VEIL | none | | RESOLVED BY MEASURE (RULING V8): the server sends an old page exactly what it shows (0 leaves hidden by the browser); the decided design stands: old pages stay as they are; THE CHAIR'S EARLIER SENTENCE ("the server still sends its hidden parts") WAS WRONG and is corrected to the owner; the import door's pass is still owed |
 | A7 | an owner's stored switch for the empty-section cut (intake 5) | M | **D** | "not built unless he asks": offered, not assumed |
 | A8 | "READ-COST" (found 2026-11-24, RULING V7): master's own gallery page read computes EVERY public row's tile to serve one page (69 ms at 1 public row, 4.7 s at 840, local); the list reads are inferred to cost the same per call | S for the page read (in 212); M to L for the lists (a migration with a backfill) | Q | one run owed (the list reads); then the chair rules the cure; the owner is asked how many pages are public today |
 
@@ -54,6 +54,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | D7 | "the crisis has a body" (intake 12): built whole on `lane/fortune-7-2026-11-22-u8-wip` at 0b7037727; it changes the density design he signed; and the creditor's agent named with no card (35 of 900) | L | B, **D** | his proposal to accept or refuse |
 | D8 | a stewardship's holder titled "the reeve" (intake 6) | S to M | | the seat lane's wording |
 | D9 | the numbers he sets, left as drafts: the seat contest's factors (all 1 today), fortune's numbers, LASTING's ages | his | **D** | his signing or his leave |
+| D10 | A SAVED PLACE IS REBUILT BY THE NEW ENGINE WHEN A DECREE ADDS A NEWCOMER AT A TICK (RULING R24i; 180 of 180 master-born saves move with nothing held): the chair's lean: the version goes up with this release and a place is re-derived only by the engine that bore it; else the newcomer is appended | M | **D**; IT HOLDS THE RELEASE | asked of the owner 2026-11-24; one measure owed (the live path, pins held); not built |
 
 ## E. WORDS AND PAGES
 | # | what | size | flags | state |

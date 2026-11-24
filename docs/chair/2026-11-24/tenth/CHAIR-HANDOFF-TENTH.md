@@ -754,3 +754,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   red and green rows stand; leave to read START-VEIL-42 (6); the quiet-box items after the grant; one new pool, both
   gates. VEIL-51 reported its compaction at 22:49 and what it holds (unit 1; `-c2-wip` ced3b1de7; t140 and st140 L1
   0 of 3,360; sm140 352 of 3,360 = N106 exactly). PP: VEIL-55 had asked VEIL-52 one fix (pp.sh's MEAS_COMMON path).
+- 2026-11-24 23:05 UTC · T55 · PP's RESULT: OLD PAGES HAVE NO SERVED-BUT-HIDDEN GAP; THE CHAIR'S WORDS TO THE OWNER CORRECTED; A6 LEAVES HIS LIST.
+  `veil/RULING-V1.md` V8: on an unmarked listing S minus P is 0 leaves (140 master-born, both Reveals): the browser hides
+  nothing the server sends. What an old page prints that a new page hides by default: an underworld house's name on 91 of
+  140, criminal services on 97, and on Reveal DM pages the hooks and secrets. RULED: the decided design stands (old pages
+  stay as they are; no default veil laid on them). The chair had told the owner the opposite of (a) in A6's row and in
+  conversation: corrected to him at once, and his file re-sent. Owed by VEIL-52: the import door's pass; READ-COST's run.
+  D10 added to `PRERELEASE-LIST.md` (R24i: the re-derivation's guard, the owner's decision, holds the release).

@@ -201,3 +201,28 @@ overrides hold only `revealDm` and `allowImport` per member; the server already 
 takes NO veil from anyone, server or browser; what the browser adds is its public projection (`toPublicSafe`). So "(b) the
 server removes exactly what the browser hides today" means: the server's projection made equal to `toPublicSafe` on
 unmarked rows. PP's (a) is the size of that gap.
+
+## RULING V8 (added 23:05 UTC on 2026-11-24): PP's RESULT; PAGES PUBLISHED BEFORE THE VEIL STAY AS DESIGNED; THE CHAIR'S WORDS TO THE OWNER CORRECTED
+VEIL-52's PP (`v52/out/PP-MASTER-TABLE.txt` at 6da61f771; CONFIRMED, executed; the table read by the chair): client tree
+b58abc48b, server v28tpl (001..211 and the tip's 212, no re-key), the master-born stored 140, both Reveals, 280 reads, 0
+faults. MARKERS as designed (S none, V served, 140 of 140 each Reveal); NO BODY empty.
+ (a) S MINUS P = 0 LEAVES, every kind, every read. ON AN UNMARKED LISTING THE BROWSER HIDES NOTHING THE SERVER SENDS: the
+     server's projection and the browser's unserved branch agree leaf for leaf at the gallery read.
+ (b) P MINUS THE DEFAULT VEIL'S PAGE (what such a page prints today that a newly shared page hides by default), leaves /
+     places of 140 / reads: a hidden house's name 3,017 / 91 / 182 (both Reveals: `institutions[].name`,
+     `availableServices.criminal[].institution`, chains); criminal services' rows 2,894 / 97 / 194; role strings naming
+     the Thieves' Guild 82 / 8 / 16; tensions and conflicts that name the underworld (44 and 13 places); and on Reveal DM
+     reads only: hooks 9,277 / 140, secrets 8,320 / 140, corrupt flags, 18 dmNotes; plus rows the page never prints
+     (`generationCoherenceReceipt`, `simulationTrace`, `economicState` internals).
+**WHAT THIS SETTLES.** THE CHAIR TOLD THE OWNER (PRERELEASE-LIST A6 and in conversation): "the server still sends its
+hidden parts and the browser hides them". THAT WAS WRONG FOR THE GALLERY READ AND IS CORRECTED TO HIM THE SAME HOUR: there
+is no served-but-hidden gap on an old page. The chair's third way ("the server removes exactly what the browser hides
+today") is void: it is already so. WHAT REMAINS is only: an old page keeps printing what it prints today, which includes
+things a newly shared page hides until its maker shows them (an underworld house's name on about two old pages in three;
+the secrets and hooks of a maker who switched Reveal DM on).
+**RULED:** THE DECIDED DESIGN STANDS: an unmarked listing is served and shown exactly as today. The default veil is NOT
+laid on old pages: it would take from a maker's published page what that maker published on purpose. A6 leaves the
+owner's list of decisions (he is told and may say otherwise). A maker who shares again after the release gets the veil,
+in the share dialog, where he sees it.
+STILL OWED BY VEIL-52: the second pass, THE IMPORT DOOR on the same unmarked rows (I minus P, I minus S); then READ-COST's
+one run (the list reads).
