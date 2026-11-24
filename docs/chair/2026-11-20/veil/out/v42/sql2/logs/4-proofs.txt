@@ -1,0 +1,22 @@
+tree 84f2e2bba22c99cdad710686f2dab1857b44fa5a 212 fad4b9b998f80722eef819e96fc7613774c0892b3a745b30ea3460d459bca7fd down b13c5be88c6f91cb4f1300ca4837524c1f41cfaf5124077695a32c867a80f141
+NOTICE:  database "sql2_up" does not exist, skipping
+NOTICE:  database "sql2_smoke" does not exist, skipping
+(a) 212 on 001..211: rc=0
+(b) the down file: rc=0
+(b) functions: v27x211 480 sql2_up 480
+(b) dump lines: 25988 / 25988
+(b) diff exit 0 lines 0 (empty wanted)
+(c) v42sql2 = v27x211 + 212: rc=0
+(c) the closure (all of it): docs/chair/2026-11-20/veil/out/v42/sql2/logs/4-catalogue-212.txt
+(c) drawers among _gallery_veil%: 1 (_gallery_veil(jsonb,jsonb,boolean,boolean)|v)
+(c) closure members not VOLATILE: 0
+(c) the reads: get_gallery_dossier(text)|v;get_gallery_map(text)|v;get_unlisted_dossier(text)|v;import_gallery_dossier(text)|v;
+(c) THE SALT: every function with an argument named salt, and who may execute it (public, anon, authenticated):
+_gallery_veil_rekey_id(text,text,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_rekey_ref(jsonb,jsonb,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_rekey_at(jsonb,text[],jsonb,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_rekey_each(jsonb,text[],text[],jsonb,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_rekey(jsonb,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+_gallery_veil_rekey_served(jsonb,jsonb,text)|v|f|f|{postgres=X/postgres,service_role=X/postgres}
+(c) a salt-taking function anon or authenticated may execute: 0 (0 wanted)
+(d) the smoke reads (R4I-SQL's d-smoke.mjs): rc=0 (docs/chair/2026-11-20/veil/out/v42/sql2/logs/4-smoke.txt)

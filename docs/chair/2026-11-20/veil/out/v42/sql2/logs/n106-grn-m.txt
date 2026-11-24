@@ -1,0 +1,68 @@
+start 2026-11-23T15:13:42Z src /home/user/wt/sql (f7db7b9a721d7c4156d2b7c61517d66623ee650d) 212 fad4b9b998f80722
+v42sql2b rc=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 9707 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+shard 1 rc=0
+shard 3 rc=0
+shard 2 rc=0
+shard 0 rc=0
+documents 140; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 3360 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 3360 / 0
+  L1 gallery | canon: 3360 / 0
+  L2 gallery | aligned: 3360 / 0
+  L2 gallery | canon: 3360 / 0
+  L2-vs-L1 server | canon: 6720 / 3360
+  L2-vs-L1 twin | canon: 6720 / 3360
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 140
+
+== L2-vs-L1 server | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.disaster
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.economic
+        server: 1
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates.monster
+        server: 1
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.disaster
+        server: 76
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.economic
+        server: 89
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.internal
+        server: 78
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.magical
+        server: 56
+        twin:   (absent)
+   defenseProfile.scores.military: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.scores.military
+        server: 100
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 3360, leaves 3360
+EXIT rc=0 2026-11-23T15:24:58Z

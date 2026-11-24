@@ -1,0 +1,68 @@
+start 2026-11-23T15:01:39Z src /var/tmp/sql2c1 (84f2e2bba (the GAP's cure; before N106's two lines)) 212 70ce3b51a0099a65
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 7356 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+fatal: not a git repository (or any of the parent directories): .git
+shard 2 rc=0
+shard 3 rc=0
+shard 1 rc=0
+shard 0 rc=0
+documents 140; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 3360 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 3360 / 352
+  L1 gallery | canon: 3360 / 352
+  L2 gallery | aligned: 3360 / 352
+  L2 gallery | canon: 3360 / 352
+  L2-vs-L1 server | canon: 6720 / 3360
+  L2-vs-L1 twin | canon: 6720 / 3360
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 140
+
+== L1 gallery | aligned: 352 of 3360 reads differ
+   by setting: dm|allOpen=32 dm|default=32 dm|g:000=32 dm|g:001=32 dm|g:010=32 dm|g:011=32 dm|g:100=32 dm|g:101=32 dm|g:110=32 dm|off=32 dm|own=32
+   documents (32): r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-metropolis-indebted-0-56, r3m-metropolis-none-1-127, r3m-metropolis-politically_fractured-0-60, r3m-metropolis-wartime-0-59, r3m-town-infiltrated-0-12, r3m-town-insurgency-0-14, r3m-town-none-0-23, r3m-city-indebted-0-46, r3m-city-infiltrated-0-42, r3m-metropolis-indebted-0-66, r3m-metropolis-none-0-53, r3m-metropolis-occupied-0-65, r3m-town-none-1-91, r3m-town-wartime-0-29, r3m-city-indebted-1-106, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-wartime-1-109
+   factions[]#keys: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+== L1 gallery | canon: 352 of 3360 reads differ
+   by setting: dm|allOpen=32 dm|default=32 dm|g:000=32 dm|g:001=32 dm|g:010=32 dm|g:011=32 dm|g:100=32 dm|g:101=32 dm|g:110=32 dm|off=32 dm|own=32
+   documents (32): r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-metropolis-indebted-0-56, r3m-metropolis-none-1-127, r3m-metropolis-politically_fractured-0-60, r3m-metropolis-wartime-0-59, r3m-town-infiltrated-0-12, r3m-town-insurgency-0-14, r3m-town-none-0-23, r3m-city-indebted-0-46, r3m-city-infiltrated-0-42, r3m-metropolis-indebted-0-66, r3m-metropolis-none-0-53, r3m-metropolis-occupied-0-65, r3m-town-none-1-91, r3m-town-wartime-0-29, r3m-city-indebted-1-106, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-wartime-1-109
+   factions[]#keys: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+   factions[].power: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0].power
+        server: 20
+        twin:   (absent)
+== L2 gallery | aligned: 352 of 3360 reads differ
+   by setting: dm|allOpen=32 dm|default=32 dm|g:000=32 dm|g:001=32 dm|g:010=32 dm|g:011=32 dm|g:100=32 dm|g:101=32 dm|g:110=32 dm|off=32 dm|own=32
+   documents (32): r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-metropolis-indebted-0-56, r3m-metropolis-none-1-127, r3m-metropolis-politically_fractured-0-60, r3m-metropolis-wartime-0-59, r3m-town-infiltrated-0-12, r3m-town-insurgency-0-14, r3m-town-none-0-23, r3m-city-indebted-0-46, r3m-city-infiltrated-0-42, r3m-metropolis-indebted-0-66, r3m-metropolis-none-0-53, r3m-metropolis-occupied-0-65, r3m-town-none-1-91, r3m-town-wartime-0-29, r3m-city-indebted-1-106, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-wartime-1-109
+   factions[]#keys: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+== L2 gallery | canon: 352 of 3360 reads differ
+   by setting: dm|allOpen=32 dm|default=32 dm|g:000=32 dm|g:001=32 dm|g:010=32 dm|g:011=32 dm|g:100=32 dm|g:101=32 dm|g:110=32 dm|off=32 dm|own=32
+   documents (32): r3m-city-none-1-107, r3m-city-politically_fractured-0-40, r3m-metropolis-indebted-0-56, r3m-metropolis-none-1-127, r3m-metropolis-politically_fractured-0-60, r3m-metropolis-wartime-0-59, r3m-town-infiltrated-0-12, r3m-town-insurgency-0-14, r3m-town-none-0-23, r3m-city-indebted-0-46, r3m-city-infiltrated-0-42, r3m-metropolis-indebted-0-66, r3m-metropolis-none-0-53, r3m-metropolis-occupied-0-65, r3m-town-none-1-91, r3m-town-wartime-0-29, r3m-city-indebted-1-106, r3m-city-infiltrated-1-102, r3m-city-insurgency-1-104, r3m-city-wartime-1-109
+   factions[]#keys: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0]#keys
+        server: dominantCategory,members,name,power
+        twin:   dominantCategory,members,name
+   factions[].power: reads 352, leaves 1969
+      e.g. r3m-city-none-1-107 dm|default at factions[0].power
+        server: 20
+        twin:   (absent)
+== L2-vs-L1 server | canon: 3360 of 6720 reads differ
+   by setting: dm|allOpen=140 dm|default=140 dm|g:000=140 dm|g:001=140 dm|g:010=140 dm|g:011=140 dm|g:100=140 dm|g:101=140 dm|g:110=140 dm|off=140 dm|own=140 dm|unmarked=140 off|allOpen=140 off|default=140 off|g:000=140 off|g:001=140 off|g:010=140 off|g:011=140 off|g:100=140 off|g:101=140 off|g:110=140 off|off=140 off|own=140 off|unmarked=140
+   documents (0): 
+   defenseProfile#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 3360, leaves 3360
+      e.g. r3m-city-indebted-0-36 off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,internal,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 3360, leaves 3360
+EXIT rc=0 2026-11-23T15:13:22Z

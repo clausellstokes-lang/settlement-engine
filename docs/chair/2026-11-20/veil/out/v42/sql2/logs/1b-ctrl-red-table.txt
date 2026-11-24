@@ -1,0 +1,380 @@
+documents 12; all shards done: true; faults 0; link twin copy = linkTwin.shared.mjs: 288 same, 0 differ
+
+COMPARISONS (reads compared / reads differing):
+  L1 gallery | aligned: 288 / 33
+  L1 gallery | canon: 288 / 33
+  L1 link | aligned: 288 / 0
+  L1 link | canon: 288 / 0
+  L2 gallery | aligned: 288 / 57
+  L2 gallery | canon: 288 / 57
+  L2-vs-L1 server | canon: 576 / 288
+  L2-vs-L1 twin | canon: 576 / 288
+instrument split (canon and aligned disagree on a read): 0
+documents with two or more persons of one name (npcs[]): 0 of 12
+
+== L1 gallery | aligned: 33 of 288 reads differ
+   by setting: master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3
+   documents (3): v102-city-0|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+== L1 gallery | canon: 33 of 288 reads differ
+   by setting: master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3
+   documents (3): v102-city-0|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   factions[].power: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0].power
+        server: 25
+        twin:   (absent)
+== L2 gallery | aligned: 57 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (5): v102-city-0|master, v102-hamlet-6|current, v102-hamlet-6|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+== L2 gallery | canon: 57 of 288 reads differ
+   by setting: current|off|allOpen=1 current|off|default=1 current|off|g:000=1 current|off|g:001=1 current|off|g:010=1 current|off|g:011=1 current|off|g:100=1 current|off|g:101=1 current|off|g:110=1 current|off|off=1 current|off|own=1 current|off|unmarked=1 master|dm|allOpen=3 master|dm|default=3 master|dm|g:000=3 master|dm|g:001=3 master|dm|g:010=3 master|dm|g:011=3 master|dm|g:100=3 master|dm|g:101=3 master|dm|g:110=3 master|dm|off=3 master|dm|own=3 master|off|allOpen=1 master|off|default=1 master|off|g:000=1 master|off|g:001=1 master|off|g:010=1 master|off|g:011=1 master|off|g:100=1 master|off|g:101=1 master|off|g:110=1 master|off|off=1 master|off|own=1 master|off|unmarked=1
+   documents (5): v102-city-0|master, v102-hamlet-6|current, v102-hamlet-6|master, v102-town-1|master, v102-metropolis-1|master
+   factions[]#keys: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0]#keys
+        server: dominantCategory,name,power
+        twin:   dominantCategory,name
+   factions[].power: reads 33, leaves 143
+      e.g. v102-city-0|master master|dm|default at factions[0].power
+        server: 25
+        twin:   (absent)
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship#keys
+        server: (absent)
+        twin:   full,npc1,npc2,phrasing,tension,type
+   prominentRelationship.full: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.full
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud holds letters Toquchar Qonggirad wrote years ago, in Toquchar Qonggirad's own hand. Toquchar Qonggirad does what Dolgorsüren Taichiud asks so the letters stay locked away."
+   prominentRelationship.npc1: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc1
+        server: (absent)
+        twin:   "Toquchar Qonggirad"
+   prominentRelationship.npc2: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc2
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud"
+   prominentRelationship.phrasing: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.phrasing
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+   prominentRelationship.tension: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.tension
+        server: (absent)
+        twin:   "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+   prominentRelationship.type: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.type
+        server: (absent)
+        twin:   "Held Over Them"
+== L2-vs-L1 server | canon: 288 of 576 reads differ
+   by setting: current|dm|allOpen=6 current|dm|default=6 current|dm|g:000=6 current|dm|g:001=6 current|dm|g:010=6 current|dm|g:011=6 current|dm|g:100=6 current|dm|g:101=6 current|dm|g:110=6 current|dm|off=6 current|dm|own=6 current|dm|unmarked=6 current|off|allOpen=6 current|off|default=6 current|off|g:000=6 current|off|g:001=6 current|off|g:010=6 current|off|g:011=6 current|off|g:100=6 current|off|g:101=6 current|off|g:110=6 current|off|off=6 current|off|own=6 current|off|unmarked=6 master|dm|allOpen=6 master|dm|default=6 master|dm|g:000=6 master|dm|g:001=6 master|dm|g:010=6 master|dm|g:011=6 master|dm|g:100=6 master|dm|g:101=6 master|dm|g:110=6 master|dm|off=6 master|dm|own=6 master|dm|unmarked=6 master|off|allOpen=6 master|off|default=6 master|off|g:000=6 master|off|g:001=6 master|off|g:010=6 master|off|g:011=6 master|off|g:100=6 master|off|g:101=6 master|off|g:110=6 master|off|off=6 master|off|own=6 master|off|unmarked=6
+   documents (0): 
+   defenseProfile#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.disaster
+        server: 0.73
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.economic
+        server: 0.67
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.monster
+        server: 0.82
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.disaster
+        server: 21
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.economic
+        server: 8
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.internal
+        server: 33
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.military
+        server: 22
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.monster
+        server: 24
+        twin:   (absent)
+   economicState.compound#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at economicState.compound.economyOutput
+        server: 23.169080156143174
+        twin:   (absent)
+   powerStructure#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at powerStructure.recentConflict
+        server: "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown offi…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 244, leaves 244
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 244, leaves 244
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.readiness.score
+        server: 22
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 192, leaves 192
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.military
+        server: 0.76
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 144, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 144, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 2
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 144, leaves 144
+      e.g. v102-city-0|current current|off|default at defenseProfile.economicGates.internal
+        server: 0.9
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "war profiteering"
+        twin:   (absent)
+   activeConditions[]#keys: reads 96, leaves 96
+      e.g. v102-thorp-0|current current|off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 96, leaves 96
+      e.g. v102-thorp-0|current current|off|default at activeConditions[0].severity
+        server: 0.85
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 24, leaves 24
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 1
+        twin:   (absent)
+== L2-vs-L1 twin | canon: 288 of 576 reads differ
+   by setting: current|dm|allOpen=6 current|dm|default=6 current|dm|g:000=6 current|dm|g:001=6 current|dm|g:010=6 current|dm|g:011=6 current|dm|g:100=6 current|dm|g:101=6 current|dm|g:110=6 current|dm|off=6 current|dm|own=6 current|dm|unmarked=6 current|off|allOpen=6 current|off|default=6 current|off|g:000=6 current|off|g:001=6 current|off|g:010=6 current|off|g:011=6 current|off|g:100=6 current|off|g:101=6 current|off|g:110=6 current|off|off=6 current|off|own=6 current|off|unmarked=6 master|dm|allOpen=6 master|dm|default=6 master|dm|g:000=6 master|dm|g:001=6 master|dm|g:010=6 master|dm|g:011=6 master|dm|g:100=6 master|dm|g:101=6 master|dm|g:110=6 master|dm|off=6 master|dm|own=6 master|dm|unmarked=6 master|off|allOpen=6 master|off|default=6 master|off|g:000=6 master|off|g:001=6 master|off|g:010=6 master|off|g:011=6 master|off|g:100=6 master|off|g:101=6 master|off|g:110=6 master|off|off=6 master|off|own=6 master|off|unmarked=6
+   documents (0): 
+   defenseProfile#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile#keys
+        server: chainModifiers,economicGates,institutions,magicDependency,readiness,scores,traditions
+        twin:   chainModifiers,institutions,magicDependency,readiness,scores,traditions
+   defenseProfile.economicGates#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates#keys
+        server: disaster,economic,military,monster
+        twin:   (absent)
+   defenseProfile.economicGates.disaster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.disaster
+        server: 0.73
+        twin:   (absent)
+   defenseProfile.economicGates.economic: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.economic
+        server: 0.67
+        twin:   (absent)
+   defenseProfile.economicGates.monster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.monster
+        server: 0.82
+        twin:   (absent)
+   defenseProfile.scores#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores#keys
+        server: disaster,economic,internal,magicDependency,magical,military,monster,traditions
+        twin:   magicDependency,traditions
+   defenseProfile.scores.disaster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.disaster
+        server: 21
+        twin:   (absent)
+   defenseProfile.scores.economic: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.economic
+        server: 8
+        twin:   (absent)
+   defenseProfile.scores.internal: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.internal
+        server: 33
+        twin:   (absent)
+   defenseProfile.scores.magical: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.magical
+        server: 0
+        twin:   (absent)
+   defenseProfile.scores.military: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.military
+        server: 22
+        twin:   (absent)
+   defenseProfile.scores.monster: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.scores.monster
+        server: 24
+        twin:   (absent)
+   economicState.compound#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at economicState.compound#keys
+        server: economyOutput,inst,raw
+        twin:   inst,raw
+   economicState.compound.economyOutput: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at economicState.compound.economyOutput
+        server: 23.169080156143174
+        twin:   (absent)
+   powerStructure#keys: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at powerStructure#keys
+        server: conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,recentConflict,stability
+        twin:   conflicts,factionRelationships,factions,governingName,government,powerProjectionVersion,publicLegitimacy,stability
+   powerStructure.recentConflict: reads 288, leaves 288
+      e.g. v102-thorp-0|current current|off|default at powerStructure.recentConflict
+        server: "Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they need first, and local needs come second. Prices have risen and will rise again. A crown offi…
+        twin:   (absent)
+   defenseProfile.readiness#keys: reads 244, leaves 244
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.readiness#keys
+        server: background,border,color,label,score
+        twin:   background,border,color,label
+   defenseProfile.readiness.score: reads 244, leaves 244
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.readiness.score
+        server: 22
+        twin:   (absent)
+   defenseProfile.economicGates.military: reads 192, leaves 192
+      e.g. v102-thorp-0|current current|off|default at defenseProfile.economicGates.military
+        server: 0.76
+        twin:   (absent)
+   economicState.safetyProfile#keys: reads 144, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile#keys
+        server: blackMarketCapture,compound,crimeTypes,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+        twin:   compound,criminalInstitutions,economicDragDesc,flags,guardEffectivenessDesc,safetyDesc,safetyLabel
+   economicState.safetyProfile.crimeTypes#len: reads 144, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes#len
+        server: 2
+        twin:   (absent)
+   defenseProfile.economicGates.internal: reads 144, leaves 144
+      e.g. v102-city-0|current current|off|default at defenseProfile.economicGates.internal
+        server: 0.9
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[]#keys: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0]#keys
+        server: desc,type
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].desc: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].desc
+        server: "Whatever the army's buyers will take is sold to them dear, and not all of it is as sound as it is said to be."
+        twin:   (absent)
+   economicState.safetyProfile.crimeTypes[].type: reads 104, leaves 144
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.crimeTypes[0].type
+        server: "war profiteering"
+        twin:   (absent)
+   activeConditions[]#keys: reads 96, leaves 96
+      e.g. v102-thorp-0|current current|off|default at activeConditions[0]#keys
+        server: affectedSystems,archetype,causes,description,duration,id,label,severity,severityBand,status,triggeredAt
+        twin:   affectedSystems,archetype,causes,description,duration,id,label,severityBand,status,triggeredAt
+   activeConditions[].severity: reads 96, leaves 96
+      e.g. v102-thorp-0|current current|off|default at activeConditions[0].severity
+        server: 0.85
+        twin:   (absent)
+   economicState.safetyProfile.blackMarketCapture: reads 24, leaves 24
+      e.g. v102-thorp-0|current current|off|unmarked at economicState.safetyProfile.blackMarketCapture
+        server: 1
+        twin:   (absent)
+   #keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at #keys
+        server: activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+        twin:   activeConditions,arrivalScene,availableServices,config,conflicts,defenseProfile,economicState,economicViability,generatorVersion,history,id,institutions,name,neighborRelationship,npcs,population,power…
+   prominentRelationship#keys: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship#keys
+        server: full,npc1,npc2,phrasing,tension,type
+        twin:   (absent)
+   prominentRelationship.full: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.full
+        server: "Dolgorsüren Taichiud holds letters Toquchar Qonggirad wrote years ago, in Toquchar Qonggirad's own hand. Toquchar Qonggirad does what Dolgorsüren Taichiud asks so the letters stay locked away."
+        twin:   (absent)
+   prominentRelationship.npc1: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc1
+        server: "Toquchar Qonggirad"
+        twin:   (absent)
+   prominentRelationship.npc2: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.npc2
+        server: "Dolgorsüren Taichiud"
+        twin:   (absent)
+   prominentRelationship.phrasing: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.phrasing
+        server: "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+        twin:   (absent)
+   prominentRelationship.tension: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.tension
+        server: "Dolgorsüren Taichiud has let Toquchar Qonggirad know that a copy of the letters is held by someone else, in case anything happens to Dolgorsüren Taichiud."
+        twin:   (absent)
+   prominentRelationship.type: reads 24, leaves 24
+      e.g. v102-hamlet-6|current current|off|default at prominentRelationship.type
+        server: "Held Over Them"
+        twin:   (absent)
+
+STORED IDS SERVED (C), reads searched by door | engine: gallery page (L2) | server=288; gallery | server=288; gallery | twin=288; import | server=288; link | server=288; link | twin=288; map member | server=288
+fresh-shaped stored ids (F)(i): 0; documents whose own walk finds stored ids: 12
+SERVED MARKER BY DOOR | setting kind | state (reads): 
+  gallery | marked | served marker: 264
+  gallery | unmarked | NO served marker: 24
+  import | marked | no marker field: 264
+  import | unmarked | no marker field: 24
+  link | marked | served marker: 264
+  link | unmarked | served marker: 24
+  map member | marked | no marker field: 264
+  map member | unmarked | no marker field: 24
+stored document = the dump's (MEAS_STORED_CMP): 0 same, 0 differ, 0 missing
+STORED-SIDE CENSUS (paths of the stored documents holding a stored person id, the re-key's own sites apart):
+  factions[].members[].goal.intent.long.target.id: 50 in 5 documents; e.g. v102-village-3|master [0].factions[0].members[0].goal.intent.long.target.id = npc_peat_cutter
+  factions[].members[].goal.intent.short.target.id: 53 in 5 documents; e.g. v102-village-3|master [0].factions[0].members[1].goal.intent.short.target.id = npc_charcoal_burner
+  factions[].members[].allegiance.handler: 18 in 5 documents; e.g. v102-village-3|master [0].factions[1].members[0].allegiance.handler = npc_veiled_5064ee784f11c849
+HITS (outside publicProse):
+  gallery page (L2) | server :: factions[].members[].goal.intent.short.target.id: 456 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[1].goal.intent.short.target.id = "npc_charcoal_burner"
+  gallery page (L2) | server :: factions[].members[].goal.intent.long.target.id: 443 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[0].goal.intent.long.target.id = "npc_peat_cutter"
+  gallery page (L2) | server :: factions[].members[].allegiance.handler: 35 hits on 10 reads; e.g. v102-village-3|master master|dm|unmarked factions[1].members[0].allegiance.handler = "npc_veiled_5064ee784f11c849"
+  gallery | server :: factions[].members[].goal.intent.short.target.id: 456 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[1].goal.intent.short.target.id = "npc_charcoal_burner"
+  gallery | server :: factions[].members[].goal.intent.long.target.id: 443 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[0].goal.intent.long.target.id = "npc_peat_cutter"
+  gallery | server :: factions[].members[].allegiance.handler: 35 hits on 10 reads; e.g. v102-village-3|master master|dm|unmarked factions[1].members[0].allegiance.handler = "npc_veiled_5064ee784f11c849"
+  gallery | twin :: factions[].members[].goal.intent.short.target.id: 456 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[1].goal.intent.short.target.id = "npc_charcoal_burner"
+  gallery | twin :: factions[].members[].goal.intent.long.target.id: 443 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[0].goal.intent.long.target.id = "npc_peat_cutter"
+  gallery | twin :: factions[].members[].allegiance.handler: 35 hits on 10 reads; e.g. v102-village-3|master master|dm|unmarked factions[1].members[0].allegiance.handler = "npc_veiled_5064ee784f11c849"
+  import | server :: factions[].members[].goal.intent.short.target.id: 456 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[1].goal.intent.short.target.id = "npc_charcoal_burner"
+  import | server :: factions[].members[].goal.intent.long.target.id: 443 hits on 60 reads; e.g. v102-village-3|master master|dm|default factions[0].members[0].goal.intent.long.target.id = "npc_peat_cutter"
+  import | server :: factions[].members[].allegiance.handler: 35 hits on 10 reads; e.g. v102-village-3|master master|dm|unmarked factions[1].members[0].allegiance.handler = "npc_veiled_5064ee784f11c849"
+HITS INSIDE publicProse (apart, ruling (a')):
+  none

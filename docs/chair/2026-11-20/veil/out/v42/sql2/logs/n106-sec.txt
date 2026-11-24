@@ -1,0 +1,11 @@
+start 2026-11-23T15:53:05Z src /home/user/wt/sql (f7db7b9a721d7c4156d2b7c61517d66623ee650d) 212 fad4b9b998f80722
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 15165 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/sql
+
+
+ Test Files  4 passed (4)
+      Tests  97 passed (97)
+   Start at  15:53:06
+   Duration  1828.04s (transform 3.69s, setup 69ms, import 587ms, tests 1827.02s, environment 0ms)
+

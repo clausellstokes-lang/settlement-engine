@@ -1,0 +1,2 @@
+roster-choice registry: written to docs/chair/2026-11-19/veil/registry
+write rc=0

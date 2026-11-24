@@ -1,0 +1,11 @@
+start 2026-11-23T15:02:42Z src /home/user/wt/sql (84f2e2bba22c99cdad710686f2dab1857b44fa5a) 212 fad4b9b998f80722
+NOTICE:  database "v42sql2b" does not exist, skipping
+v42sql2b rc=0
+  no power (the plant) powerStructure.factions: served Town Council, Merchants; power server [null,null] twin [null,null]
+  no power (the plant) factions: served Town Council, Merchants; power server [null,null] twin [null,null]
+no power (the plant): GREEN
+  every power a number (the control) powerStructure.factions: served Town Council, Merchants; power server [80,20] twin [80,20]
+  every power a number (the control) factions: served Town Council, Merchants; power server [80,20] twin [80,20]
+every power a number (the control): GREEN
+GREEN: both cases, both lists
+EXIT rc=0 2026-11-23T15:02:43Z
