@@ -49,6 +49,7 @@ import {
   smallPlaceCrimeChance,
   troubleChance,
 } from '../../../src/domain/trouble/troubleLaw.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const LEAF_SPEC = '../../../src/domain/trouble/troubleLaw.js';
 const RNG_SPEC = '../../../src/kernel/rngContext.js';
@@ -269,23 +270,23 @@ describe('(iii) the draw count under law 2 equals law 1 wherever the same branch
     let law2Crime = 0;
     let law2Guild = 0;
     let markers = 0;
-    for (const size of TOWN_UP) {
-      for (let i = 0; i < SEEDS_A_SIZE; i++) {
-        const seed = `visitor-${size}-${i}`;
-        knobs.calls = { crimeWave: 0, guildConflict: 0, smallPlaceCrime: 0 };
-        const one = born(seed, 1);
-        law1Calls += knobs.calls.crimeWave + knobs.calls.guildConflict + knobs.calls.smallPlaceCrime;
-        knobs.calls = { crimeWave: 0, guildConflict: 0, smallPlaceCrime: 0 };
-        const two = born(seed, 2);
-        law2Crime += knobs.calls.crimeWave;
-        law2Guild += knobs.calls.guildConflict;
-        expect(knobs.calls.smallPlaceCrime, `${seed}: (c) ran at a size of town or above`).toBe(0);
-        if (JSON.stringify(two).includes(`"${TROUBLE_LAW_CONFIG_KEY}":2`)) markers++;
-        const a = unmarked(one);
-        const b = unmarked(two);
-        if (a !== b) differing.push(seed);
-      }
-    }
+    // Every seed runs and every failure is collected (tests/helpers/seedFailures.js): the true count, never a floor.
+    const seeds = TOWN_UP.flatMap((size) => Array.from({ length: SEEDS_A_SIZE }, (_, i) => `visitor-${size}-${i}`));
+    const failures = collectSeedFailures(seeds, (seed) => {
+      knobs.calls = { crimeWave: 0, guildConflict: 0, smallPlaceCrime: 0 };
+      const one = born(seed, 1);
+      law1Calls += knobs.calls.crimeWave + knobs.calls.guildConflict + knobs.calls.smallPlaceCrime;
+      knobs.calls = { crimeWave: 0, guildConflict: 0, smallPlaceCrime: 0 };
+      const two = born(seed, 2);
+      law2Crime += knobs.calls.crimeWave;
+      law2Guild += knobs.calls.guildConflict;
+      expect(knobs.calls.smallPlaceCrime, `${seed}: (c) ran at a size of town or above`).toBe(0);
+      if (JSON.stringify(two).includes(`"${TROUBLE_LAW_CONFIG_KEY}":2`)) markers++;
+      const a = unmarked(one);
+      const b = unmarked(two);
+      if (a !== b) differing.push(seed);
+    });
+    expectNoSeedFailures(failures, '(c) never runs at a size of town or above');
     const births = TOWN_UP.length * SEEDS_A_SIZE;
     // ANTI-VACUITY: law 1 never reads the weights; law 2 reaches both sites in every birth, and its
     // record really carries the marker (so the comparison is of two different laws' births).
@@ -316,7 +317,8 @@ describe('(iii) the draw count under law 2 equals law 1 wherever the same branch
     const C_SITE = `historyGenerator.js:${cLine}`;
 
     const firedSeeds = [];
-    for (const seed of SMALL_CANDIDATES) {
+    // Every candidate runs and every failure is collected (tests/helpers/seedFailures.js): the true count, never a floor.
+    const failures = collectSeedFailures(SMALL_CANDIDATES, (seed) => {
       knobs.small = 0.999999;
       knobs.calls = { crimeWave: 0, guildConflict: 0, smallPlaceCrime: 0 };
       knobs.seq = [];
@@ -333,7 +335,7 @@ describe('(iii) the draw count under law 2 equals law 1 wherever the same branch
       if (calls === 0) {
         // (c) not reached here (the crime coin (a) took the crime wave first): law 2 drew nothing at (c).
         expect(seq2.filter((site) => site === C_SITE), `${seed}: a draw at (c) without its chance`).toEqual([]);
-        continue;
+        return;
       }
       expect(calls, `${seed}: (c)'s chance was read more than once`).toBe(1);
       // The crime wave is kept: law 1's from today's branch, law 2's from its one coin.
@@ -348,7 +350,8 @@ describe('(iii) the draw count under law 2 equals law 1 wherever the same branch
       expect(seq2.filter((site) => site === C_SITE)).toHaveLength(1);
       expect(seq1.filter((site) => site === C_SITE)).toHaveLength(0);
       firedSeeds.push({ seed, at: k, moved: unmarked(one) !== unmarked(two) });
-    }
+    });
+    expectNoSeedFailures(failures, 'a small place whose (c) fires keeps the crime wave, with exactly one extra draw at (c)');
     // At least one candidate reached (c) (else this arm proved nothing). Whether the rest of the record
     // moved is NOT asserted: after the extra draw the stream is law 1's shifted by one, and where law 1
     // spent a draw on a fill pick that a check set aside, the two streams re-align (measured, see the report).
