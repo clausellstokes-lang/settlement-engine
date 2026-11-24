@@ -101,7 +101,7 @@ export const INSTITUTION_SERVICES = {
     "Poor relief": { on: true, p: 0.9, desc: "Charity for destitute" },
     "Record keeping": { on: true, p: 1.0, desc: "Births, deaths, marriages" },
     "Sanctuary": { on: true, p: 0.9, desc: "Legal protection on holy ground" },
-    "Medical care (basic)": { on: true, p: 0.6, desc: "Herbalism, prayer healing" }
+    "Medical care (basic)": { on: true, p: 0.6, desc: "Herbalism, prayer healing", tendsSick: true }
   },
 
   "Mill": {
@@ -133,8 +133,8 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Hospital": {
-    "Medical treatment": { on: true, p: 1.0, desc: "Care for sick and injured" },
-    "Surgery": { on: true, p: 0.6, desc: "Basic surgical procedures" },
+    "Medical treatment": { on: true, p: 1.0, desc: "Care for sick and injured", tendsSick: true },
+    "Surgery": { on: true, p: 0.6, desc: "Basic surgical procedures", tendsSick: true },
     "Quarantine": { on: true, p: 0.8, desc: "Isolate contagious diseases" },
     "Medical training": { on: true, p: 0.5, desc: "Train physicians" }
   }
@@ -434,8 +434,8 @@ export const INSTITUTION_SERVICES = {
   },
     "Midwife": {
     "Birth assistance": { on: true, p: 1.0, desc: "Experienced midwifery. Available day and night." },
-    "Basic wound care": { on: true, p: 0.9, desc: "Clean wounds, set minor fractures, reduce fever." },
-    "Herbal remedies": { on: true, p: 0.8, desc: "Tinctures and poultices for common ailments." },
+    "Basic wound care": { on: true, p: 0.9, desc: "Clean wounds, set minor fractures, reduce fever.", tendsSick: true },
+    "Herbal remedies": { on: true, p: 0.8, desc: "Tinctures and poultices for common ailments.", tendsSick: true },
     "Discreet services": { on: false, p: 0.5, desc: "Treatments she does not discuss publicly." }
   },
           "Cobbler's Guild": {
@@ -503,14 +503,14 @@ export const INSTITUTION_SERVICES = {
   },
     "Grove Shrine": {
     "Nature blessing": { on: true, p: 1.0, desc: "Blessings for crops, livestock, safe journeys." },
-    "Herbal medicines": { on: true, p: 0.8, desc: "Remedies from the grove's plants." },
+    "Herbal medicines": { on: true, p: 0.8, desc: "Remedies from the grove's plants.", tendsSick: true },
     "Weather reading": { on: false, p: 0.6, desc: "Read signs for planting, harvest, and travel." }
   },
   "Druid Circle": {
     "Nature magic services": { on: true, p: 1.0, desc: "Speaking with animals, poison sensed, food purified, passage that leaves no track.", needs: ["magic"] },
     "Seasonal rituals": { on: true, p: 0.9, desc: "Solstice and equinox ceremonies." },
     "Wilderness guidance": { on: true, p: 0.8, desc: "Route guidance through dangerous wilderness." },
-    "Healing (nature)": { on: false, p: 0.6, desc: "Wounds closed and sickness lifted by magic. Slower than divine.", needs: ["magic"] },
+    "Healing (nature)": { on: false, p: 0.6, desc: "Wounds closed and sickness lifted by magic. Slower than divine.", needs: ["magic"], tendsSick: true },
     "Weather forecasting": { on: false, p: 0.7, desc: "Accurate short-term weather prediction." }
   },
   "Warden's Lodge": {
@@ -723,15 +723,15 @@ export const INSTITUTION_SERVICES = {
     "Hiring day": { on: false, p: 0.5, desc: "Seasonal laborers and servants present themselves for hire." }
   },
   "Apothecary (established)": {
-    "Herbal remedies": { on: true,  p: 1.0, desc: "Tinctures, poultices, and dried herbs for common ailments." },
-    "Medicines and compounds": { on: true, p: 0.9, desc: "Prepared medicines for fever, pain, infection, and chronic conditions." },
+    "Herbal remedies": { on: true,  p: 1.0, desc: "Tinctures, poultices, and dried herbs for common ailments.", tendsSick: true },
+    "Medicines and compounds": { on: true, p: 0.9, desc: "Prepared medicines for fever, pain, infection, and chronic conditions.", tendsSick: true },
     "Consultation": { on: false, p: 0.7, desc: "Diagnosis and treatment advice. Not a physician but often the closest thing available." },
     "Poison antidotes": { on: false, p: 0.4, desc: "Prepared antidotes for known poisons. Kept discreetly." }
   },
   "Apothecary district": {
-    "Herbal remedies": { on: true,  p: 1.0, desc: "Wholesale and retail herbs, tinctures, and prepared medicines." },
-    "Specialist compounds": { on: true, p: 0.8, desc: "Rare medications and treatments available through district-wide sourcing." },
-    "Medical consultation": { on: false, p: 0.6, desc: "Multiple qualified apothecaries offering second opinions and specialist advice." }
+    "Herbal remedies": { on: true,  p: 1.0, desc: "Wholesale and retail herbs, tinctures, and prepared medicines.", tendsSick: true },
+    "Specialist compounds": { on: true, p: 0.8, desc: "Rare medications and treatments available through district-wide sourcing.", tendsSick: true },
+    "Medical consultation": { on: false, p: 0.6, desc: "Multiple qualified apothecaries offering second opinions and specialist advice.", tendsSick: true }
   },
   "Aqueduct or water system": {
     "Clean water distribution": { on: true,  p: 1.0, desc: "Reliable clean water delivered throughout the settlement via channels and pipes." },
@@ -1037,9 +1037,9 @@ export const INSTITUTION_SERVICES = {
     "Seasonal workers": { on: false, p: 0.5, desc: "Agricultural and harvest workers available for seasonal contracts." }
   },
   "Hospital network": {
-    "Emergency treatment": { on: true,  p: 1.0, desc: "Rapid response to injuries, accidents, and sudden illness." },
-    "Specialist care": { on: true, p: 0.8, desc: "Referral to physicians with expertise in specific conditions." },
-    "Long-term recovery": { on: false, p: 0.7, desc: "Extended wards for patients requiring prolonged treatment." },
+    "Emergency treatment": { on: true,  p: 1.0, desc: "Rapid response to injuries, accidents, and sudden illness.", tendsSick: true },
+    "Specialist care": { on: true, p: 0.8, desc: "Referral to physicians with expertise in specific conditions.", tendsSick: true },
+    "Long-term recovery": { on: false, p: 0.7, desc: "Extended wards for patients requiring prolonged treatment.", tendsSick: true },
     "Medical training": { on: false, p: 0.4, desc: "Clinical training for apprentice physicians and surgeons." }
   },
     "Inn (multiple)": {
@@ -1092,9 +1092,9 @@ export const INSTITUTION_SERVICES = {
     "Foreign merchants": { on: false, p: 0.6, desc: "International traders bring goods unavailable year-round." }
   },
   "Major hospital": {
-    "Surgical procedures": { on: true,  p: 1.0, desc: "Operations for injuries, tumours, and structural problems. Survival rates variable." },
-    "Specialist physicians": { on: true, p: 0.9, desc: "Physicians specialised in specific conditions, diseases, and treatments." },
-    "Recovery wards": { on: true, p: 0.8, desc: "Long-term wards for patients recovering from illness or surgery." },
+    "Surgical procedures": { on: true,  p: 1.0, desc: "Operations for injuries, tumours, and structural problems. Survival rates variable.", tendsSick: true },
+    "Specialist physicians": { on: true, p: 0.9, desc: "Physicians specialised in specific conditions, diseases, and treatments.", tendsSick: true },
+    "Recovery wards": { on: true, p: 0.8, desc: "Long-term wards for patients recovering from illness or surgery.", tendsSick: true },
     "Medical training": { on: false, p: 0.5, desc: "Clinical education for the next generation of physicians." }
   },
   "Market square": {
@@ -1136,7 +1136,7 @@ export const INSTITUTION_SERVICES = {
     [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims.", excludes: ["crisis: under_siege"] }, // BAR5-MARKS: its siege twin (SERVICE_DESC_SIBLINGS)
     "Hospitality": { on: true, p: 0.8, desc: "Food and shelter for travelers and pilgrims. Often free or by donation." },
     "Copyist services": { on: true, p: 0.7, desc: "Copy manuscripts and documents. Primary source of book production." },
-    "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population." },
+    "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population.", tendsSick: true },
     "Education": { on: false, p: 0.4, desc: "Teach reading, writing, and reckoning. Often the only education available." }
   },
   "Money changers": {
@@ -1229,7 +1229,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Priest (resident)": {
     [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Daily prayers, blessings, and religious counsel." },
-    "Healing": { on: true, p: 0.7, desc: "Divine healing magic for the sick and injured.", needs: ["magic"] },
+    "Healing": { on: true, p: 0.7, desc: "Divine healing magic for the sick and injured.", needs: ["magic"], tendsSick: true },
     "Life ceremonies": { on: true, p: 1.0, desc: "Births, marriages, and funerals." },
     "Spiritual counsel": { on: false, p: 0.6, desc: "Guidance on moral and spiritual matters." }
   },
@@ -1281,8 +1281,8 @@ export const INSTITUTION_SERVICES = {
     "Livestock sales": { on: false, p: 0.5, desc: "Sell sheep and lambs for meat, breeding, and leather." }
   },
   "Small hospital": {
-    "Wound treatment": { on: true,  p: 1.0, desc: "Clean, stitch, and dress wounds. Prevent infection where possible." },
-    "Fever and illness": { on: true, p: 0.8, desc: "Treat common diseases and fevers with the knowledge available." },
+    "Wound treatment": { on: true,  p: 1.0, desc: "Clean, stitch, and dress wounds. Prevent infection where possible.", tendsSick: true },
+    "Fever and illness": { on: true, p: 0.8, desc: "Treat common diseases and fevers with the knowledge available.", tendsSick: true },
     "Midwifery": { on: true, p: 0.9, desc: "Assist with difficult births and postnatal complications." }
   },
   "Smuggling operation": {
@@ -1430,8 +1430,8 @@ export const INSTITUTION_SERVICES = {
     "Custom containers": { on: false, p: 0.4, desc: "Specialty containers: butter churns, water buckets, storage vats." }
   },
   "Apothecary": {
-    "Herbal remedies": { on: true,  p: 1.0, desc: "Dried herbs, tinctures, and simple remedies for common ailments." },
-    "Compound medicines": { on: true, p: 0.8, desc: "Prepared medicines for fever, pain, and infection." },
+    "Herbal remedies": { on: true,  p: 1.0, desc: "Dried herbs, tinctures, and simple remedies for common ailments.", tendsSick: true },
+    "Compound medicines": { on: true, p: 0.8, desc: "Prepared medicines for fever, pain, and infection.", tendsSick: true },
     "Consultation": { on: false, p: 0.6, desc: "Basic diagnosis and treatment advice." }
   },
   "Graveyard": {
@@ -1544,7 +1544,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Monastery": {
     "Pilgrim shelter": { on: true, p: 1.0, desc: "Food and a bed for pilgrims and travelers. Free or by donation." },
-    "Healing herbs": { on: true, p: 0.8, desc: "Herbal remedies from the monastic garden for common ailments." },
+    "Healing herbs": { on: true, p: 0.8, desc: "Herbal remedies from the monastic garden for common ailments.", tendsSick: true },
     "Copyist services": { on: false, p: 0.6, desc: "Monks copy manuscripts and documents. Slow but accurate." },
     "Silent retreat": { on: false, p: 0.4, desc: "Spiritual retreat in the monastery. Silence required." },
     "Alms": { on: true, p: 0.7, desc: "Distribution of food and aid to the poor on feast days." }
@@ -1552,7 +1552,7 @@ export const INSTITUTION_SERVICES = {
   "Major monasteries (5-10)": {
     "Advanced scribing": { on: true, p: 0.9, desc: "High-quality manuscript copying across multiple scriptoria." },
     "Rare texts": { on: false, p: 0.6, desc: "Access to unusual texts and scholarly works held by the monasteries." },
-    "Higher healing": { on: false, p: 0.5, desc: "More advanced divine healing from senior clerics.", needs: ["magic"] },
+    "Higher healing": { on: false, p: 0.5, desc: "More advanced divine healing from senior clerics.", needs: ["magic"], tendsSick: true },
     "Reliquary access": { on: false, p: 0.4, desc: "Access to venerated relics and shrines for pilgrims." }
   },
   "Local fence": {
@@ -1614,9 +1614,9 @@ export const INSTITUTION_SERVICES = {
     "Night watch": { on: true, p: 0.8, desc: "Continuous observation through the night." }
   },
   "Healer (divine, 1st level)": {
-    "Wound closing": { on: true, p: 1.0, desc: "Basic divine healing. Closes cuts, reduces fever, eases pain." },
+    "Wound closing": { on: true, p: 1.0, desc: "Basic divine healing. Closes cuts, reduces fever, eases pain.", tendsSick: true },
     "Purify food and water": { on: true, p: 0.8, desc: "Remove contamination from food and water through divine blessing." },
-    "Remove minor disease": { on: false, p: 0.6, desc: "Treat common illnesses through divine intervention." },
+    "Remove minor disease": { on: false, p: 0.6, desc: "Treat common illnesses through divine intervention.", tendsSick: true },
     "Bless": { on: false, p: 0.5, desc: "Divine blessing for journeys, battles, or important undertakings." }
   },
   "Wizard's tower": {
@@ -1884,3 +1884,14 @@ export const SERVICE_DESC_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Whatever meat can be had, slaughtered and dressed on premises or nearby.", twinOf: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", crisis: Object.freeze(['hunger']) }),
   ]),
 });
+
+// R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24, vetoable by the owner): SICK CARE AT HAND. A row that tends
+// the sick or injured carries `tendsSick: true` (the chair's 25 names on 28 rows: READ-24's thirty less Birth assistance and
+// Midwifery, a birth alone; Quarantine, isolation; Antitoxins and Poison antidotes, goods on a shelf). A drawn service keeps its
+// name and its house, not its row, so the fact `sick care` (`domain/facts/sickCare.js`) reads the NAMES of the flagged rows,
+// derived here from the rows (never a list in a script); every row of a flagged name is flagged
+// (`tests/domain/close7SickCare.test.js`, the lint arm).
+// A Set, not a list: it is a lookup, never a pool of lines.
+/** @type {ReadonlySet<string>} */
+export const TENDS_SICK_SERVICE_NAMES = new Set(Object.values(INSTITUTION_SERVICES).flatMap((menu) => Object.entries(menu)
+  .filter(([, def]) => /** @type {{ tendsSick?: unknown }} */ (def)?.tendsSick === true).map(([name]) => name)));

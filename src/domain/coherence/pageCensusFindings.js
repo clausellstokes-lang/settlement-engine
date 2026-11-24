@@ -26,6 +26,8 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { importsAsPrinted } from '../display/tradeListDisplay.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
+import { OUTSIDER_IMPRESSIONS } from '../../data/dailyLife/outsiderImpressions.js'; // R24-A1 (CLOSE-7): the five lines of row NOHEAL
+import { residentSickCareOf, sickCareOf } from '../facts/sickCare.js'; // R24-A1 (CLOSE-7): the one reading of sick care
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -66,6 +68,9 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P20: ['20 siege words outside a siege', 'SECOND'],
   NEW1: ['NEW-1 the governance label against the Defense verdict', 'SECOND'],
   NEW2: ['NEW-2 magic income, and no practitioner on the rolls', 'CROSS'],
+  // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24): a line that says no healer stands here (H2, H3, H7, H8, H9
+  // of the Daily Life visitor lines) on a page whose record holds sick care at hand (`facts/sickCare.js`)
+  NOHEAL: ['NOHEAL a no-healer line beside resident sick care', 'CROSS'],
 });
 
 /**
@@ -161,6 +166,10 @@ const founderKind = (t) => (PAGE_PHRASES.militaryFounder.test(t) ? 'military'
     : /navigator|merchant|trade|consortium|coalition/.test(t) ? 'merchant' : /family|mill/.test(t) ? 'family'
       : /noble|lord|crown|royal|imperial|decree/.test(t) ? 'noble' : 'other');
 const SMALL = new Set(['thorp', 'hamlet', 'village']);
+/** R24-A1: the visitor lines that say no healer stands here, by their ids in the pool the ruling names (their words are the pool's). */
+const NO_HEALER_IDS = Object.freeze(['H2', 'H3', 'H7', 'H8', 'H9']);
+/** @type {ReadonlyArray<Rec> | null} */ let noHealerLines = null;
+const noHealer = () => (noHealerLines ??= arr(OUTSIDER_IMPRESSIONS['services.healing']).map(obj).filter((l) => NO_HEALER_IDS.includes(s(l.id))));
 const F4_TESTS = /** @type {const} */ ([
   ['ore', 'Local ore feeds the smithy', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
   ['coal', 'Local coal fires the forges, ', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
@@ -345,6 +354,13 @@ export function pageCensusFindings(settlement, views) {
   run('NEW2', () => {
     const l = E.find((x) => mag.some((p) => p.re.test(x)));
     return l && noArcane ? [l, 'No arcane practitioners on the rolls'] : null;
+  });
+  run('NOHEAL', () => {
+    // R24-A1: the page says no one tends the sick, and the record holds sick care at hand (the one reading)
+    const said = all.find((l) => noHealer().some((line) => l.includes(s(line.text))));
+    if (!said || !sickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec))) return null;
+    const care = residentSickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec));
+    return [said, care.length ? care.map((row) => `${row.name} @ ${row.institution}`).join('; ') : 'a sick house by name'];
   });
   return out;
 }

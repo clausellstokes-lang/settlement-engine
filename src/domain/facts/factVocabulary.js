@@ -245,7 +245,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [sickCare] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -305,6 +305,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // getter; vetoable by the owner, on the veto list as new vocabulary): `sick house` = a hospital or a healer stands (the
   // defence home's two atoms, one composite: a daily-life line naming the sick-house or a healer needs one or the other).
   'sick house': dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.hospital === true || f.defence.healer === true) : undefined) }),
+  // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24, vetoable by the owner; on the veto list as new vocabulary, a
+  // fact the record already holds): `sick care` = SICK CARE AT HAND, the one reading: a sick house by name, OR a resident service
+  // (its house on the live roster, never an "Access to" row) whose catalogue row tends the sick (`facts/sickCare.js ::
+  // sickCareOf`). A line that says no healer stands here excludes it.
+  'sick care': dim({ shape: 'presence', home: 'sickCare', reader: (f) => bool(f.sickCare) }),
   // COHERENCE-AGREE-4 (2026-11-12, the chair's ruling on STOP 3): a court sits, and somewhere holds the guilty —
   // two facts, each the defence home's own atom (`defence.js :: court`, `prison`), so a line naming one
   // and not the other declares both.

@@ -110,6 +110,9 @@ export const LEAVES = Object.freeze({
   courtOrGaol: home('courtOrGaol', 2, ['availableServices', 'institutions', 'economicState'], { // FAULTS-DESKS (13d, FR6): `court sits` or the defence home's `prison`
     note: 'it reads the live roster\'s drawn services (layer 2) and a defence-home atom, which bundles the economy as every defence atom does',
   }),
+  sickCare: home('sickCare', 2, ['availableServices', 'institutions', 'economicState'], { // R24-A1 (CLOSE-7): a sick house by name or a resident service that tends the sick (`sickCare.js`)
+    note: 'it reads the live roster\'s drawn services (layer 2) and the defence home\'s `hospital` and `healer`, which bundle the economy as every defence atom does',
+  }),
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
