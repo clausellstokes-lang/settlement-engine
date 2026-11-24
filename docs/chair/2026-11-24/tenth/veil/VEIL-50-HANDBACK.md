@@ -55,5 +55,6 @@ STATE (20:2x UTC):
   and 213 before the owner's hand. The three draft start messages are pushed (`DRAFT-START-VEIL-5{1,2,3}.txt`). Point 114: the
   grants fix landed (line f9531eb3a).
 
-NEXT: fill (b) when wd and ppkey end; ONE message to the chair (<= 400 words, two tables), saying which leaning (b) contradicts;
-WAIT FOR THE RULING. My mark: 345,672 by the chair's read at 19:14 UTC; I pass 620,000 inside phase 1: a successor at a unit's end.
+UNIT (1) DONE 21:18 UTC: the plan complete at 12ca6b8d7 (`VEIL-50-PLAN.md`); the message sent 21:18. (b)'s headline: master-born
+towns serve a hidden house's own name on 16 of 140 places (5,502 server path-reads, 8 paths: LEGACY-TELLS is the largest (D)).
+NEXT: WAIT FOR THE CHAIR'S RULING. Nothing built, nothing merged. The trial joins `/home/user/wt/join`, `join2` stay local. My mark: 345,672 by the chair's read at 19:14 UTC; I pass 620,000 inside phase 1: a successor at a unit's end.
