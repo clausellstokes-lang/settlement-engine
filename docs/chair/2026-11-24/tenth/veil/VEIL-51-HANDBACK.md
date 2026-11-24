@@ -36,11 +36,15 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     (`rosterChoiceComposedHosts.walker`: power.desc, power.label, power.relation.dmNote; red by design, E78 (2), unit 2's
     worklist); 54 files green; VS1 green (PIN-3's cure). 1,152 = VEIL-41's count: the re-derived set PLAUSIBLY equals its set.
   - cures (`galleryVeilCures.pglite` + `migrationRehearsal`: the rollback and the catalogue) rc 0, 23:02: 47 of 47, 2 files.
+  - `tests/lint` whole rc 1, 23:16: 25 failed of 3,280 in 17 files = VEIL-41's count (C2-BUILD's 26 less the census pin).
+    ONE OF THEM IS THE UNIT'S OWN: `proseDrawnAnchors` "no NEW file carries a literal state-prose anchor": received
+    `tests/security/galleryVeilHandRows.pglite.test.js: 1 (frozen none)` (V41-PINS's HandRows D re-statement, 312052808;
+    VEIL-41's 69c07953e cut 2 to 1 and left this one, PINS-REPORT). The other 16 files' reds are the tree's standing ones
+    (chain A's 3 composed rows among them). The tip reads 48 of 3,304 (VEIL-41's record; not re-run by me).
 - PUSHES: 888afa0c8 pushed 23:07 rc 0 (hook fast path). A push queued on the gate mutex lost the lock twice to p1's steps
   (16 min); under the chair's 22:48 rule (push at every result, at most every 45 minutes) I stopped it and pushed outside the
   mutex: the lane hook runs typecheck and eslint, no vitest, beside `tests/lint`'s hold.
-- RUNNING: p1 (background task, runner log `/var/tmp/v51/log/p1-run.log`) at lint (23:02-), then copy, types+eslint,
-  build. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
+- RUNNING: p1 (background task, runner log `/var/tmp/v51/log/p1-run.log`) at copy (23:16-), then types+eslint, build. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
   docs/chair/2026-11-24/tenth/veil/v51/p1.sh <steps>` after the machine (section 'THE MACHINE') and the trees are rebuilt. Then step (3) TABLE A and LINE B; then
   "TIP? STORED-PROSE ced3b1de7" to VEIL-55 as a file.
 
