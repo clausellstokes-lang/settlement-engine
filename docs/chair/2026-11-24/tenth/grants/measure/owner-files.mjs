@@ -7,6 +7,8 @@
 // Run from the repository root after urgent.mjs (PART_A=1) and after part D's partD.sql exists.
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { boot } from './boot.mjs';
+import { OWNER_DEFAULT_READ_SQL, standingCheckSql } from '../../../../../../tests/security/hostedDefaultHarness.js';
+import { FUNCTION_CLASSES } from '../../../../../../tests/security/functionGrantClasses.js';
 
 const OUT = new URL('./out/', import.meta.url);
 const DIR = new URL('../FOR-THE-OWNER-GRANTS/', import.meta.url);
@@ -33,10 +35,12 @@ const readCheck = [
 
 const files = {
   '0a-read-check-before.sql': readCheck,
-  '0b-default-privileges.sql': ['-- READS ONLY. The default privileges for new objects in schema public, per role and object type',
-    "-- (f = functions). After file 2, the migrating role's 'f' row names neither anon nor authenticated.",
-    "select defaclrole::regrole::text as role, defaclobjtype as kind, defaclacl::text as acl",
-    "  from pg_default_acl where defaclnamespace = 'public'::regnamespace order by 1, 2;", ''].join('\n'),
+  '0b-read-part-b-default.sql': ['-- READS ONLY. ONE ROW: the role you are running as, and whether a NEW function that role makes in',
+    "-- schema public with this repository's two lines would still be handed to a visitor and to a signed-in user",
+    "-- (counting the role's row for schema public AND its global row). Before file 2: true, true. After file 2,",
+    '-- run as the SAME role: false, false. If running_as is not the role that runs `supabase db push` (postgres),',
+    '-- file 2 changed nothing for the migrations: say so before going on.',
+    OWNER_DEFAULT_READ_SQL, ''].join('\n'),
   '0c-byok-count.sql': ['-- READS ONLY. How many users have a stored provider key (a number only).',
     'select count(*) as byok_keys from public.surveyor_byok_keys;', ''].join('\n'),
 };
@@ -55,6 +59,11 @@ files['2-part-b-default.sql'] = part('partB.sql');
 if (existsSync(new URL('./211/partC.sql', import.meta.url))) files['3-part-c-profiles.sql'] = part('partC.sql');
 if (existsSync(new URL('./211/partD.sql', import.meta.url))) files['4-part-d-settlements-maps.sql'] = part('partD.sql');
 files['5-read-check-after.sql'] = readCheck;
+files['7-standing-check.sql'] = ['-- READS ONLY. THE STANDING CHECK: run it after this fix and after EVERY later deploy. EXPECT NO ROW.',
+  '-- A row is a function of schema public that a visitor or a signed-in user can execute although the register',
+  '-- (tests/security/functionGrantClasses.js) does not class it as theirs: a new server-only function that part B',
+  '-- did not close, or any later drift. GENERATED from the register; regenerate it when the register changes.',
+  standingCheckSql(FUNCTION_CLASSES), ''].join('\n');
 files['6a-read-after-part-c-profiles.sql'] = ['-- READS ONLY, after file 3. Every column of public.profiles, and whether a signed-in user may UPDATE it.',
   '-- Expected: exactly four true (avatar_url, email_notifications, model_preference, public_identity_opt_in).',
   '-- On the hosted platform a revoke removes only what the revoking role granted: this read is the proof.',
@@ -76,12 +85,13 @@ for (const upTo of [203, 210]) {
   const order = Object.keys(files).filter((n) => /^[1-4]-/.test(n)).sort();
   for (let pass = 0; pass < 2; pass++) for (const n of order) await db.exec(files[n]);
   const after = await tally();
-  const defacl = (await db.query(files['0b-default-privileges.sql'])).rows.filter((r) => r.kind === 'f').map((r) => `${r.role}: ${r.acl}`);
+  const defacl = (await db.query(files['0b-read-part-b-default.sql'])).rows.map((r) => `${r.running_as}: visitor ${r.new_function_handed_to_visitor}, signed-in ${r.new_function_handed_to_signed_in_user}`);
+  const standing = (await db.query(files['7-standing-check.sql'])).rows.map((r) => r.function);
   const cols = (await db.query(files['6a-read-after-part-c-profiles.sql'])).rows;
   const trg = (await db.query(files['6b-read-after-part-d-triggers.sql'])).rows;
   fig[upTo] = { before, after, defacl, ran: order,
     profilesUpdatable: cols.filter((r) => r.signed_in_may_update).map((r) => r.column_name), profilesColumns: cols.length,
-    guardTriggers: trg.map((r) => `${r.on_table} ${r.tgenabled} ${r.function}`) };
+    standingRows: standing, guardTriggers: trg.map((r) => `${r.on_table} ${r.tgenabled} ${r.function}`) };
 }
 writeFileSync(new URL('./owner-files-figures.json', OUT), JSON.stringify(fig, null, 1));
 console.log(JSON.stringify(fig));

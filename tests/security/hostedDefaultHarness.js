@@ -158,3 +158,45 @@ export async function bootHostedChain({ hostedDefaults = true, upTo = Infinity }
 
 /** The only failures the chain may have under this harness: PGlite has no pg_cron. */
 export const ENVIRONMENTAL_FAILURE = /extension "pg_cron" is not available/;
+
+/**
+ * THE OWNER'S READ FOR PART B (one row): for the role running it, would a NEW function that role
+ * makes in schema public, written with this repository's two lines (`revoke ... from public; grant
+ * ... to service_role`), still be handed to a visitor (anon) and to a signed-in user (authenticated)?
+ * It counts BOTH of the role's default-privilege rows that apply to schema public: the row for the
+ * schema and the GLOBAL row (no schema). Before 211 part B the answer on the hosted platform is
+ * (true, true); after it, run as the role that runs the migrations, (false, false).
+ */
+export const OWNER_DEFAULT_READ_SQL = `select current_user as running_as,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = current_user)
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'anon'))
+    as new_function_handed_to_visitor,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = current_user)
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'authenticated'))
+    as new_function_handed_to_signed_in_user;`;
+
+/**
+ * THE STANDING CHECK (read only; EXPECT NO ROW): every function of schema public that a visitor or a
+ * signed-in user can execute and that the register does not class as theirs (USER, ANYONE, or
+ * KEPT_OPEN with its reason). Trigger functions and extension members are left out.
+ * @param {Record<string, string>} classes the register (tests/security/functionGrantClasses.js)
+ */
+export function standingCheckSql(classes) {
+  const theirs = Object.entries(classes).filter(([, c]) => ['USER', 'ANYONE', 'KEPT_OPEN'].includes(c))
+    .map(([k]) => `('${k.replace(/'/g, "''")}')`).sort();
+  return `select regexp_replace(p.oid::regprocedure::text, '^public\\.', '') as function,
+       has_function_privilege('anon', p.oid, 'execute') as visitor_can_execute,
+       has_function_privilege('authenticated', p.oid, 'execute') as signed_in_can_execute
+  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+ where n.nspname = 'public' and p.prorettype <> 'trigger'::regtype
+   and not exists (select 1 from pg_depend d where d.objid = p.oid and d.deptype = 'e')
+   and (has_function_privilege('anon', p.oid, 'execute') or has_function_privilege('authenticated', p.oid, 'execute'))
+   and regexp_replace(p.oid::regprocedure::text, '^public\\.', '') not in (select sig from (values
+    ${theirs.join(',\n    ')}
+  ) as theirs(sig))
+ order by 1;`;
+}

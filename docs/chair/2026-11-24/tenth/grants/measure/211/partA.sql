@@ -7,6 +7,8 @@
 -- LEFT OPEN, by name (a user path needs them):
 --   _gallery_sanitize_public_json(jsonb,text[])  called by the invoker _gallery_apply_member_overrides
 --   _gallery_world_snapshot_is_safe(jsonb)       called by the invoker trigger _saved_maps_world_snapshot_guard
+-- LEFT OUT of this block, by name (not revoked here; its own grants already close it to anon and
+-- authenticated, before and after 211, under the hosted default):
 --   operator_message_class_for_template(text)  named in check operator_messages.operator_messages_template_class_check
 
 -- ── GROUP 1: hands back a secret or another user's data ──

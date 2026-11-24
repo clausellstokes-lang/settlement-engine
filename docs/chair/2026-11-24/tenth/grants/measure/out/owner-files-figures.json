@@ -15,7 +15,7 @@
    "service_role": 207
   },
   "defacl": [
-   "postgres: {service_role=X/postgres}"
+   "postgres: visitor false, signed-in false"
   ],
   "ran": [
    "1-part-a-functions.sql",
@@ -30,6 +30,7 @@
    "public_identity_opt_in"
   ],
   "profilesColumns": 28,
+  "standingRows": [],
   "guardTriggers": [
    "saved_maps O _guard_server_owned_columns",
    "settlements O _guard_server_owned_columns"
@@ -51,7 +52,7 @@
    "service_role": 208
   },
   "defacl": [
-   "postgres: {service_role=X/postgres}"
+   "postgres: visitor false, signed-in false"
   ],
   "ran": [
    "1-part-a-functions.sql",
@@ -66,6 +67,7 @@
    "public_identity_opt_in"
   ],
   "profilesColumns": 28,
+  "standingRows": [],
   "guardTriggers": [
    "saved_maps O _guard_server_owned_columns",
    "settlements O _guard_server_owned_columns"
