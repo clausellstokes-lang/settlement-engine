@@ -1,0 +1,27 @@
+[P] chain: 203 files, last 203_gallery_scanner_client_mirror_totality.sql, 13 statement failures; booted in 3 s
+[P] the owner's file 3-part-c-profiles.sql: ran (2 statements' results)
+[P] the owner's file 4-part-d-settlements-maps.sql: ran (7 statements' results)
+pass  [P: production at 203 + the owner's files 3 and 4] plain insert, settlements (the pages' own columns): want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] plain insert, saved_maps (the pages' own columns): want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] upsert over a viewed and featured settlement: want OK, got OK
+      server columns after the upsert: {"view_count":57,"is_featured":true}
+pass  [P: production at 203 + the owner's files 3 and 4] upsert over a viewed, imported and featured campaign: want OK, got OK
+      server columns after the upsert: {"view_count":12,"import_count":4,"is_featured":true}
+pass  [P: production at 203 + the owner's files 3 and 4] update name, settlements: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] update name, saved_maps: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] update gallery_description, settlements: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] update view_count, settlements: want REFUSED, got REFUSED (settlements.view_count is written by the server alone)
+pass  [P: production at 203 + the owner's files 3 and 4] update is_featured, saved_maps: want REFUSED, got REFUSED (saved_maps.is_featured is written by the server alone)
+pass  [P: production at 203 + the owner's files 3 and 4] insert with view_count 5, settlements: want REFUSED, got REFUSED (settlements.view_count is written by the server alone (a new row carries its default))
+note  [P: production at 203 + the owner's files 3 and 4] an upsert whose payload repeats the current view_count (57): REFUSED (settlements.view_count is written by the server alone (a new row carries its default))
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update avatar_url: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update email_notifications: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update public_identity_opt_in: want OK, got OK
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update display_name directly: want REFUSED, got REFUSED (permission denied for table profiles)
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update tier: want REFUSED, got REFUSED (permission denied for table profiles)
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update free_narrative_claimed_at: want REFUSED, got REFUSED (permission denied for table profiles)
+pass  [P: production at 203 + the owner's files 3 and 4] profiles: update_display_name RPC: want OK, got OK
+note  [P: production at 203 + the owner's files 3 and 4] profiles: delete own row as a user: statement ran, rows 0
+note  [P: production at 203 + the owner's files 3 and 4] profiles: insert a row as a user: REFUSED (new row violates row-level security policy for table "profiles")
+done in 3 s
+exit=0

@@ -327,3 +327,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `lane/kinds-1-2026-11-20` with 2,000 commits of history, so that its merge of the line finds the common commit).
   (c) VEIL-50 ANSWERED: chain C is one item with its proof owed; a predecessor's -wip is unread, unproven work; it is
   told one more veil seat fits beside it until the grants lane hands in, then two. (d) THE HOURLY CHECK IS RE-ARMED.
+- 2026-11-24 18:23 UTC · T24 · THE CHAIR'S OWN READ OF MIGRATION 211 (the grants fix) AT fe62c9575: `grants/CHAIR-READ-211.md`,
+  its scripts and outputs in `grants/chair-probe/`. IT STANDS. EXECUTED BY THE CHAIR IN PGlite WITH THE LANE'S HARNESS
+  (nothing hosted): on the lane's chain AND on the chain as production stands (to 203) plus the owner's files 3 and 4,
+  a signed-in user still saves a town and a campaign, re-saves over a row the server has counted and featured, and is
+  refused every server column; of part A's 245 functions only `_audit_action` leaned on PUBLIC (its 11 callers run as
+  their owner); the browser calls 77 RPC names on master and on the lane, none closed; every edge-function caller of
+  a closed name is a service-role client; all 34 writers of settlements or saved_maps and all 30 of profiles run as
+  their owner; NO TABLE, VIEW OR POLICY of the same class of hole was found. THREE ASKS SENT TO GRANTS-1 BEFORE ITS
+  HAND-IN: (1) the column test had no test that a user CAN still insert (its refusal arm passes just the same when
+  every insert is refused): a positive control on both tables; (2) the owner's files read back only part A: a read
+  after for parts C, D and B; (3) written down: a page's payload never names a server column. THEN "GRANTS <commit>",
+  the reader's unit (2), the landing of 211 on the line, and the owner's full file in plain words.
+  STILL AWAITED FROM THE OWNER: what the urgent file's check before showed and the count of stored keys.

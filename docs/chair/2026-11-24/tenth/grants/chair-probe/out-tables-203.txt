@@ -1,0 +1,59 @@
+chain to 203_gallery_scanner_client_mirror_totality.sql
+
+== TABLES in public with ROW LEVEL SECURITY OFF that anon or authenticated may touch: 0 row(s)
+
+== TABLES in public with RLS ON and NO POLICY at all (closed to both roles; listed to be sure): 48 row(s)
+  account_deletion_cleanup_jobs
+  ai_generate_rate_limits
+  ai_request_claims
+  ai_spend_reservations
+  analytics_daily_rollups
+  analytics_device_links
+  analytics_events
+  analytics_identity_links
+  analytics_retention_cohorts
+  civility_allow
+  civility_terms
+  client_error_events
+  consent_change_records
+  credit_drift_log
+  credit_grant_idempotency
+  dossier_purchases
+  dossier_verify_rate_limits
+  edit_events
+  email_preferences
+  email_rate_limits
+  export_cursors
+  founder_seat_buyback_challenges
+  founder_seat_transfers
+  founder_transfer_cases
+  founder_transfer_challenges
+  founder_transfer_events
+  gallery_views
+  ingest_rate_buckets
+  map_imports
+  operational_obligation_acknowledgements
+  operator_message_delivery_jobs
+  operator_message_receipts
+  operator_messages
+  payment_refund_obligations
+  processed_webhook_events
+  recovery_lockouts
+  recovery_rate_limits
+  redeem_codes
+  reserved_external_names
+  retention_warning_dispatch
+  security_answers
+  settlement_snapshots
+  single_dossier_purchases
+  surveyor_byok_keys
+  token_buckets
+  user_action_rate_limits
+  world_pulse_effects
+  world_sim_metrics
+
+== VIEWS and MATERIALIZED VIEWS in public that anon or authenticated may select, and whether they run as the caller: 0 row(s)
+
+== POLICIES whose check is literally TRUE for a write (insert, update, delete, all) open to anon, authenticated or public: 0 row(s)
+
+== POLICIES whose SELECT is literally TRUE for anon, authenticated or public (every row readable): the tables: 0 row(s)
