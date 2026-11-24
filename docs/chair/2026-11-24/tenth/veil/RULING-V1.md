@@ -87,3 +87,26 @@ PATTERN over every code point from 0 to 0xFFFF, red first by a planted off-by-on
 if the twin's equality with the SQL moves by one read, STOP. **Why:** the walker guards the page's voice; a pattern is not
 prose; and neither a ratchet's baseline nor the walker is changed to make a red go away. NAMED FOR LATER, NOT BUILT: a
 declared class for pattern literals in the walker (the copy lane, after the first release).
+
+## RULING V3 (added 21:55 UTC on 2026-11-24): THE SIX REDS' CAUSES ON THE TRIAL JOIN, AND VEIL-53's SURPRISE
+VEIL-53's `out/v53/redscause/REDSCAUSE.md` (c0aaa9e65 on `lane/veil-53-2026-11-24`), with VEIL-50's leans. All are the join's
+work, phase 1, each red first.
+1. `fortuneLawMerits` U5a and `fortuneLastingSentence` U7b (the always-withheld `legitimacy.breakdown` strips the merit terms;
+   the page then writes "It has lasted" with a lost subject and loses its cause): **FAIL CLOSED.** On a read that lacks the
+   breakdown the governing paragraph writes no clause it cannot ground; what remains is whole and true, or is not written.
+   Serving the terms is NOT phase 1 (a new served fact on a check of 19 towns); it may return in phase 2 with a proof on the
+   gate's 92. The owner's read keeps its clause, asserted.
+2. `tensionCause` F: the test's cure with BOTH halves: the sentence on the owner's read; its ABSENCE on the read whose
+   served document lacks that tension.
+3. TRAD-2 (three arms): the case re-picked by its own finder, never by its answer.
+4. `transferTakerOf`: phase 1: after two transfers the shared page names the holder the owner's page names; the site
+   registered; red first by a two-transfer plant.
+5. VR26 AND THE SURPRISE ARE ONE DEFECT: `src/domain/veil/importRederive.js :: rederiveInPlace` (A PRODUCTION PATH) and the
+   harness's re-deriver read the record without the laws it was born under: an importer's copy of a town born under the
+   fortune law gets a wrong legitimacy cause (vr26-city-calm-3: stored defense 0, re-derived 10). **THE CURE PASSES EVERY
+   GENERATION LAW OF THE RECORD, in the laws' own form, and `tests/domain/generationLawsSavedPlace.test.js` gains an arm for
+   the veil's import re-derive that walks `GENERATION_LAWS` row by row,** so that a law added later reds it if the import
+   forgets it. **Why wider than the fortune law:** the owner's rule is that a place keeps the laws it was born under, through
+   an import too; a fifth law lands tonight.
+VEIL-52's self-report is taken: one commit made with a hooks path that skipped the pre-commit hook (its files re-linted by
+hand, 0 errors; every later commit ran the hooks). No further act.

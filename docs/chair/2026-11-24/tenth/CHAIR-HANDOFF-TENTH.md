@@ -624,3 +624,17 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   its bounds; if the helper's own check refuses it, the chair runs that one command itself; THE CHAIR READS THE
   REGISTER'S DIFF BEFORE THE LINE MOVES; (3) the gate. KINDS-2 IS DONE (its mark read 427,031). AFTER THE LANDING:
   VEIL-54 is seated, and the rule's numbers go to the owner for his one yes.
+- 2026-11-24 21:55 UTC · T45 · (a) LAND-115 IS STARTED (21:53 UTC); KINDS-2 is told it is done. (b) THE TROUBLES RULE'S NUMBERS ARE PUT TO
+  THE OWNER FOR HIS ONE YES (21:55 UTC), with the lane's plain page sent to him as a file: the three rows of the
+  draft table; before and after by size on the visitor set (the guild quarrel in cities 48 to 31 per cent, the
+  crime wave in metropolises 60 to 31); what does not change. THE CHAIR RECOMMENDS YES, AND SAYS WHY NOW: lighting it
+  moves which troubles new places get, so every proof taken after should be taken with it on (the cures' last
+  proofs; the veil's phase 1 proof). IF HE SAYS YES: one commit on the line after point 115 (the dial and
+  `GENERATION_LAWS`'s why; the lane's flip list in its hand-back), by a helper, with its own gate; the lit golden
+  twin moves again (his one signing). NOTHING IS LIT BEFORE HIS WORD. (c) RULING V3 (appended to
+  `veil/RULING-V1.md`): the six reds' causes on the trial join: fail closed for the governing paragraph on a veiled
+  read; two tests cured with both halves kept; the seat-holder reader cured in phase 1; AND A SURPRISE OF VEIL-53's,
+  ruled wider than it was found: the veil's import re-derive (a production path of the lane) reads a record without
+  the laws it was born under (a town born under the fortune law imports with a wrong legitimacy cause): THE CURE
+  PASSES EVERY GENERATION LAW OF THE RECORD and the saved-place test gains an arm that walks `GENERATION_LAWS`.
+  (d) VEIL-52 reported its own fault (one commit that skipped the pre-commit hook; re-linted; no recurrence).
