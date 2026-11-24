@@ -562,3 +562,19 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   all desert: the owner's one signing). `goals` I-13 is a finding of its own (a keying fault of `dealGoals`): a
   measure first. ALSO ON THE CLOSE LANE: the page-census finding on besieged places (`P3source`) is being measured;
   then C1. FINDINGS NOW OPEN BEYOND THE FIVE: P3source (three besieged places); goals I-13; both measure-first.
+- 2026-11-24 21:20 UTC · T40 · RULING V1: THE SHARE VEIL'S PHASE 1 (`veil/RULING-V1.md`), on VEIL-50's finished plan (12ca6b8d7, 21:18
+  UTC; its measure on 140 seeds stored three ways). WHAT THE MEASURE FOUND: with the lane's server-side veil as built,
+  ON THE TOWNS THAT ARE LIVE TODAY (master-born) a hidden house's own name is still served in a person's role on 7 of
+  140 places (every door, both Reveals) and in an affiliation, a membership role or a goal on 15 of 140 (the DM read):
+  THE LARGEST CLASS, and the record had held one of its eight paths at "12 of 440". On today-born towns: the stored
+  prose at every read; a covert tie's copy at the two map doors (7 places; 5 born under both laws); a hidden power's
+  name in a shown power's description (2 or 3 places of 140). No withheld id anywhere. THE TWIN EQUALS THE SERVER IN
+  EVERY CELL, so "server equals twin" proved nothing of hiding. **Decided:** (1) the plan's units stand; (2) THE
+  LEGACY NAMES GO TO A FOURTH SEAT (VEIL-54), not the lane's owner; (3) three seats are made now: VEIL-51 (the stored
+  prose's proof, then the descriptions), VEIL-52 (the doors; three measures first), VEIL-53 (the join's own work in
+  parallel: the reds' causes, grants x veil with the anon arm, the renumbering as one script run last, the pages
+  judged, the person-name measure, the window); (4) RIVAL rides on its condition; (5) THE BAR: the plan's six points
+  and four additions (the three gaps measured; a planted positive for every instrument; the anon arm; the window
+  measured); (6) a fresh security reader and the chair's read of 212's and 213's final text before the owner's
+  hand. THE CHAIR'S GUESS: 18 to 24 wall hours from now, then the reader, the read and the landing. The three start
+  messages are VEIL-50's drafts, read whole and filled by the chair (`prompts/START-VEIL-51/52/53.txt`).
