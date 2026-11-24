@@ -299,3 +299,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   text. (c) THE NUMBERS: the line's 211 is the grants fix; the veil's 211 and 212 become 212 and 213 at its join.
   (d) THE TROUBLES RULE'S SEAT (T17) IS SEATED NEXT. FIVE CHILDREN THEN WORK OR WAIT (CLOSE-7, GRANTS-1, the reader,
   VEIL-50, the troubles seat).
+- 2026-11-24 18:07 UTC · T22 · THE HOURLY CHECK, AND THE TROUBLES RULE'S SEAT. (a) VEIL-50 IS SEATED (session_019yED1SiNQusY1PJm5kVM1N,
+  made 18:02 UTC) and has sent its first message: it stands on b58abc48b; every branch the paused hand-off names is on
+  origin at its named commit but two that moved after it (`lane/veil-41-2026-11-23` ccc2e5473; `-tension-wip` f5378c9c4,
+  "WIP, UNPROVED (paused)"). CHAIN C'S PROOF BY ITS LAST RECEIPTS: the stored prose is in no read (0 of 46,752 at the
+  page, the link, the import and the twin); THE FOUR WHOLE-DOCUMENT MEASURES WERE NEVER RUN (rc 2, empty); set55, the
+  cures, lint, copy, types and build have NO RECEIPT. PART 43 holds no pause block. So chain C is unproven work, as
+  the hand-off said, and its proof is an item of the plan. (b) THE MARKS, BY THE CHAIR'S READ: GRANTS-1 529,662 (part D
+  merged, the line's tip merged, pushed fe62c9575; its last `tests/security` and `tests/lint` whole run is going; it
+  hands in next: under 620,000); CLOSE-7 282,249 (the desert cure's builder is at its twin proof). The reader waits.
+  (c) KINDS-2 IS SEATED NOW (T17, T21 (d)): `prompts/START-KINDS-2.txt`; source `lane/kinds-1-2026-11-20` d16023822;
+  branch `lane/kinds-2-2026-11-24`. ITS UNITS: merge the line's tip (1,341 commits on); finish K3 from the predecessor's
+  -wip (read whole, re-run); JOIN THE LAW TO THE OTHERS IN THEIR FORM, DARK (a row of `GENERATION_LAWS`, its version
+  constants, its clamp and mint in `birthConfig`, an arm of `generationLawsSavedPlace.test.js`); the dark proof on BOTH
+  corpora, 900 of 900 by record hash; the measure for the owner, dark beside the draft table B50, by size; then
+  "KINDS <commit>" for a landing. **Decided:** the seat is made now and not after the veil's plan. **Why:** the
+  plan is an hour or two away and a place among the six would stand empty; the owner's two signings are asked ONCE,
+  after the cures and this rule have landed, so the rule is on the path of the first deploy's paperwork. **What would
+  change it:** the veil's plan asking for more seats than are free: then the veil goes first (it gates the release)
+  and this seat waits at a commit boundary. THE LAW IS NOT LIT BY ANY SEAT OR BY THE CHAIR: its numbers are a draft
+  table the owner signs. (d) FIVE CHILDREN: CLOSE-7, GRANTS-1, the reader (waiting), VEIL-50, KINDS-2.
