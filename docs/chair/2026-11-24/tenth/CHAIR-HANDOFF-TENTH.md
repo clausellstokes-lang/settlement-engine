@@ -180,3 +180,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THE SECURITY READER IS SEATED ON IT: REVIEW-GRANTS-1 session_019yED1RXo9hi99V9ATQWotP (15:34:05 UTC; source
   `lane/grants-1-2026-11-24`, branch `lane/review-grants-1-2026-11-24`; `prompts/START-REVIEW-GRANTS-1.txt`).
   NOTHING GOES TO THE OWNER BEFORE ITS VERDICT. FOUR CHILDREN WORK (the helper, CLOSE-7, GRANTS-1, the reader).
+- 2026-11-24 15:45 UTC · T15 · THE READER'S VERDICT ON THE URGENT FILE: "CLEAR 0ea91fe18" (REVIEW-GRANTS-1, queued 15:43:58;
+  its report `grants/review/REVIEW-GRANTS-1-REPORT.md` on `lane/review-grants-1-2026-11-24`). CONFIRMED BY ITS OWN
+  CATALOG QUERIES on replays to 210 and to 203: the file is reads plus 105 guarded revokes; no policy, view, default,
+  constraint, index or trigger names any of the 105; every caller among 57 body hits is SECURITY DEFINER; after the
+  revokes none of the 105 is executable by `anon` or `authenticated`, nothing outside them changed, the 68 and 147
+  intended grants hold, `service_role` lost nothing; no `rpc(` call under src/ in either tree; 154 literal and 9
+  dynamic edge calls all through a service-role client. NOT BLOCKING: F1 the header says 105 are open today, the
+  replay shows 69 (36 already closed); F2 the SQL editor shows only the last statement's result; F3 the after-check
+  does not read `service_role`; F4 `_audit_action` is in no group (it belongs to the migration).
+  ITS RESIDUAL RISK, in its words for the owner: this closes the 69 open doors to secrets and to other users' accounts
+  and money; it leaves the 140 functions of group 3 open (`reserve_ai_spend` and `release_ai_spend_reservation` can
+  fill or undo the AI spend cap) and the direct table writes (the free narrative's marker; a ban on one's own place).
+  **Done by the chair (T15):** THE CLEARED FILE WAS CUT AT ITS OWN BLOCK MARKERS INTO FOUR FILES, NOT ONE STATEMENT
+  CHANGED (a script proves the four files' statements, joined, equal the cleared file's; kept on this lane under
+  `grants/for-the-owner-urgent/`): `1-check-before.sql`, `1b-count-stored-keys.sql`, `2-close-the-functions.sql`,
+  `3-check-after.sql`: so that the SQL editor shows each result (F2). SENT TO THE OWNER as four files, with the order
+  to run them and what each shows. F1, F3 and F4 go to GRANTS-1 for the full file and the migration.
+  NOTHING IS APPLIED BY ANYONE BUT THE OWNER. HIS ANSWER IS AWAITED: what file 1 showed, the count of file 1b.
