@@ -33,6 +33,8 @@ const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
 const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
+/** A desert place with a fish market and no water: an oasis gives no fish (B1(i), R24b). */
+const DESERT_FISH_MARKET = { config: { terrainType: 'desert', tradeRouteAccess: 'desert_road', nearbyResources: ['oasis_water'] }, institutions: [{ name: 'Fish market', source: 'generated' }] };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
@@ -58,6 +60,8 @@ const PLANTS = {
   P20: { views: { 'Systems/Defense': ['Under siege the outlying fields are lost first.'] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   NEW1: { views: { 'Summary/Overview': ['Brindle', 'Town · Council · underdefended', 'Defense', 'Fortress'] } },
   NEW2: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Economics': [MAGIC] } },
+  // B1(i) (RULING-R24, R24b): a fish market printed in a desert whose route and resources give no fish
+  B1land: { views: { 'World/Institutions': ['Fish market'] }, record: DESERT_FISH_MARKET },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -86,6 +90,11 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(pageCensusFindings({ tier: 'town', ...NEEDS_CLAY }, { 'Systems/Economics': ['Imports', 'Iron'] })).toEqual([]);
     for (const [row, views] of Object.entries(halves)) expect({ row, found: pageCensusFindings({ tier: 'town' }, views) }).toEqual({ row, found: [] });
     expect(pageCensusFindings({ tier: 'town' }, PLANTS.P14.views)).toEqual([]);
+    // B1(i): the same fish market beside fishing grounds, or on a river route, or in the hills, reads nothing
+    const land = (/** @type {Record<string, unknown>} */ config) => ({ tier: 'town', ...DESERT_FISH_MARKET, config: { ...DESERT_FISH_MARKET.config, ...config } });
+    expect(pageCensusFindings(land({ nearbyResources: ['oasis_water', 'fishing_grounds'] }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ tradeRouteAccess: 'river' }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ terrainType: 'hills' }), PLANTS.B1land.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

@@ -24,6 +24,7 @@ import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { getBaseChance } from '../structuralValidator.js';
 import { getTerrainType } from '../terrainHelpers.js';
+import { landWithholdsHouse } from '../../domain/landWithholding.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
@@ -449,6 +450,9 @@ registerStep('assembleInstitutions', {
    * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
    */
   const rollFor = (category, name, inst) => rowRoll(rowEnv, category, name, inst, institutions, densityFor(name));
+  // B1(i) (RULING-R24, R24b): THE LAND WITHHOLDS A HOUSE AFTER ITS DRAW. The roll is made exactly as before (the same draw, the
+  // same chance); a house this land withholds here (domain/landWithholding.js) is then not taken. No other draw shifts.
+  const withheld = (name) => landWithholdsHouse({ terrainType: rowEnv.terrainType, tradeRoute: rowEnv.tradeRoute, nearbyResources: rowEnv.nativeNearbyResources }, name);
 
   // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
   // catalog happened to list first: the first roll that succeeded took it and every later
@@ -578,6 +582,7 @@ registerStep('assembleInstitutions', {
             remaining -= member.roll.p;
             if (remaining < 0) { winner = member; break; }
           }
+          if (withheld(winner.name)) return;
           exclusiveGroups[group] = winner.name;
           institutions.push({ category: winner.category, name: winner.name, ...winner.inst, source: 'generated' });
           recordTrace(ctx, {
@@ -628,7 +633,7 @@ registerStep('assembleInstitutions', {
         if (!roll) return;
         const { baseChance, resourceMult } = roll;
 
-        if (drawRng.chance(baseChance * resourceMult)) {
+        if (drawRng.chance(baseChance * resourceMult) && !withheld(name)) {
           // A coexisting row does NOT take the group over: the holder stays whoever won
           // it first, so a third member of the same group is blocked exactly as it was
           // before this affordance existed.

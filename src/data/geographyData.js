@@ -717,8 +717,24 @@ export const TERRAIN_DATA = {
       "Salt trade",
       "Exotic goods"
     ],
-    strategicValue: "Medium - water sources are strategic, and command any caravan route that comes this way"
+    strategicValue: "Medium - water sources are strategic, and command any caravan route that comes this way",
+    // B1(i) (RULING-R24, R24b): WHAT THIS LAND WITHHOLDS. A house that lives on one of these things (its catalogue
+    // family's `livesOn`) is not taken here unless the place's route or native nearby resources give the thing
+    // (LAND_GIVERS below). Read by one function only: domain/landWithholding.js :: landWithholdsHouse.
+    withholds: ["fish", "timber", "game"]
   }
 };
+
+/**
+ * B1(i) (RULING-R24, R24b): WHAT GIVES EACH THING A LAND CAN WITHHOLD, where the land itself does not: the trade routes
+ * and the native nearby resources (RESOURCE_DATA keys). An oasis gives no fish. Read by one function only:
+ * domain/landWithholding.js :: landWithholdsHouse.
+ * @type {Readonly<Record<string, Readonly<{ routes: ReadonlyArray<string>, resources: ReadonlyArray<string> }>>>}
+ */
+export const LAND_GIVERS = Object.freeze({
+  fish: Object.freeze({ routes: Object.freeze(["port", "river"]), resources: Object.freeze(["fishing_grounds", "river_fish"]) }),
+  timber: Object.freeze({ routes: Object.freeze([]), resources: Object.freeze(["managed_forest", "shipbuilding_timber", "mountain_timber"]) }),
+  game: Object.freeze({ routes: Object.freeze([]), resources: Object.freeze(["hunting_grounds"]) }),
+});
 
 // TERRAIN_PENALTIES computed from STRESS_TYPES — see stressTypes.js
