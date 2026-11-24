@@ -395,3 +395,19 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   31c44a1f36) for its last word. (e) Three staff tools a visitor may still CALL (`admin_list_internal_notes`,
   `admin_support_messages`, `list_ticket_pool`) each refuse a caller who is not staff in their first line
   (`current_user_is_support_or_higher`): read by the chair, not a hole. THE CHECK IS RE-ARMED FOR ONE HOUR.
+- 2026-11-24 19:21 UTC · T28 · "GRANTS 62f1e30de" (19:17 UTC): GRANTS-1 IS DONE. Its four last items are in (the rehearsal's wave says
+  all four parts and expects the guard function; part B's read is one row, proved against a real function in four
+  situations; the header comment is true; the standing check); `hostedDefaultGrants` 23 of 23; its last
+  `tests/security` and `tests/lint` whole: 382 files, 5,377 passed, 3 failed (the list's three size rows). 211's
+  STATEMENTS ARE IDENTICAL TO THE TEXT THE READER CLEARED (39bfb0831e against 62f1e30de5, comments removed: the
+  chair's diff). **Decided:** THE LANDING OF POINT 114 STARTS NOW, before the reader's word on the delta. **Why:**
+  the reader cleared the migration's four parts; the delta is tests, read-only files for the owner and comments;
+  landing on the working line applies nothing and is not a release; the gate takes about ninety minutes.
+  **What would change it:** a defect in the delta: it then lands as a small fix on top. THE OWNER'S FILES ARE NOT
+  SENT TO HIM BEFORE THE READER'S WORD ON THEM. The helper: LAND-114, in the chair's container, on the line's own
+  worktree (`prompts/START-LAND-114.txt`; base f03e9a868; the lane's commit 62f1e30de53ad91c421e49168d9b5b4e899f2dfd).
+  ALSO CONFIRMED BY THE CHAIR on the chain as production stands, nothing run (`grants/chair-probe/
+  chair-displayname.mjs`): a signed-in user writes `display_name` directly, round the rename function's civility
+  guard, and sets `free_narrative_claimed_at` to null; `tier` is refused by policy 087. Part C stops the first two.
+  THE OWNER'S PLAIN PAGE IS DRAFTED (the chair's scratch `owner/security-full/`: ten steps named in paste order,
+  each file byte for byte the lane's at 31c44a1f36, and READ-ME-FIRST.md).
