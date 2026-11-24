@@ -49,6 +49,13 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
 - UNIT 1's PROOF IS DONE: `v51/TIP-STORED-PROSE.md` (every receipt, TABLE A, LINE B, the diff) sent to VEIL-55 and the chair
   as "TIP? STORED-PROSE ced3b1de7" (23:25). NOTHING RUNNING. OWED: the chair's whole read of 212's hunk; the HandRows anchor
   (the unit's one lint red) computed or ruled; VEIL-55 merges on the grant, never I.
+- THE CHAIR'S READ OF 212's HUNK (23:32): CLEAR. ONE CONDITION BEFORE THE GRANT, MINE: the HandRows literal anchor cured as
+  69c07953e cured its like, on a commit of mine above ced3b1de7, red first, `tests/lint` to 24. THE GRANT IS VEIL-55's.
+  RED (23:36, CONFIRMED): the walker alone rc 1 (`/var/tmp/v51/out/lc/red.log`); regen.log names :1986, the fixture input
+  'gmix1 the town depends on one source of income' (DS-ECO-12 vid 2). CURE (uncommitted in /home/user/wt/c2 while it runs):
+  the words drawn by `variantByVid` (tests/helpers/drawnProse.js), only the marker searched. RUNNING: `p1.sh lintcure`
+  (walker, HandRows whole, eslint, then `tests/lint` whole; logs /var/tmp/v51/out/lc/). Then commit on -c2-wip, push it,
+  "LINT CURED <commit>" to VEIL-55 and the chair.
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
   PART 47 s1 block 0 (2787f454c) first; step (1): a worktree on `lane/veil-51-2026-11-24-r5desc-wip` from aa54a6791, plain
   merges of b58abc48b and the named tip. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
