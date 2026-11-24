@@ -428,3 +428,21 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   (`grants/chair-probe/out-owner-ten-steps-walked.txt`). HIS RUN IS HIS HAND AND HIS DECISION; nothing was applied by
   anyone in the program. AWAITED FROM HIM: step 2's number, and any step that shows something else.
   GRANTS-1 AND THE READER ARE DONE (told; no reply asked). The landing helper LAND-114 runs.
+- 2026-11-24 19:45 UTC · T30 · (a) THE READER: "CLEAR 62f1e30de5" (the last commit is two documents on 31c44a1f36; its verdict
+  carries over whole). THE COMMIT THAT LANDS IS THE COMMIT THAT WAS CLEARED. (b) CLOSE-7, 19:28 UTC: ITS CONTEXT NOW
+  BEGINS WITH A SUMMARY (one turn ran from 17:32 to 19:28 UTC; its mark could not be read in it; it reads 120,188
+  after). It re-read its start message and hand-back; pushed `-a1-wip` 50f911b49, a `-b1i-snap` cut, and its own
+  branch 42b5a7132. A1 and B1(i) are at proof; A2, B1(ii) and C1 not started; ITS GUESS FOR "CLOSE-7 <commit>": 01:00
+  UTC ON 2026-11-25. TOLD: before a unit is merged its ruling is re-read in its own words (R24, R24a, R24b); a turn
+  ends at least once an hour; the order stands. **Decided:** no second close seat. **Why:** the share veil is the
+  longer road, so the cures do not hold the release; the free places among the six are kept for the veil's plan.
+  (c) KINDS-2 UNIT 3, bc9fbf495: SHAPE 2 cured in the seat law's form, red first; the saved-place test reads the
+  troubles law by its reader and its two bars; `tests/lint` whole 4 red: the list's 3 and ONE OWED TO ITS DOOR:
+  `tuningRegister` "dependents moved" (`troubleLaw.js` gains `generateSettlementPipeline.js` as a dependent; no value
+  moved). A BUILDER'S OWN PERMISSION CHECK REFUSED THAT DOOR (`TUNING_INVENTORY_REFREEZE=... npx vitest run
+  tests/lint/tuningRegister.walker.test.js`; the reason was not returned). **RULED: THE REFUSAL STANDS FOR THE WHOLE
+  LANE**: no second agent tries the command; the row stays red by name; it blocks nothing (units 4 and 5 do not read
+  the register). **Why:** a permission check's no is the owner's safety net; handing the refused command to another
+  agent is routing round it. THE CHAIR DOES NOT RUN IT EITHER. IT IS PUT TO THE OWNER IN PLAIN WORDS: the door signs
+  nothing and moves no number (its own header names the seat as its runner; the owner's signing is the separate
+  `TUNING_SIGNATURE_RECORD` part). UNTIL HE SAYS YES, A LANDING HELPER IS TOLD NOT TO RUN THAT DOOR FOR THIS LANE.
