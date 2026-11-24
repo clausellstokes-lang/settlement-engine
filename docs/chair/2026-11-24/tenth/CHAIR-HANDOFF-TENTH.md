@@ -505,3 +505,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   a bar of zero BY HAND is accepted (the door has no arm that adds a row; a new row at zero only tightens), said in
   the landing line; (4) `facts/sickCare.js` pinned lazy: accepted, sizes read at the landing's build. A2 is building;
   its table comes to the chair before its commit. CI ON POINT 114 IS READ AT 20:52 UTC. THE CHECK IS RE-ARMED.
+- 2026-11-24 20:26 UTC · T35 · RULING R24c ON A2 (rich and hungry), appended to `read/RULING-R24.md`: CLOSE-7 sent the table of
+  printed band by production band before the commit, as ruled. THE FAULT WAS ONE PAGE IN FIVE (C 197, V 168: a line
+  that says people go short beside a printed Secure). The two cells change as R24a set. THREE THINGS IT NAMED AND
+  DID NOT BUILD, RULED: (c) a FOURTH reader of the same fact, Dawn Work's food branch (C 38, V 32), is taken into
+  A2; (a) the mirror (a plentiful fare beside a printed Deficit or Famine, C 5, V 3) is taken into A2 by ONE RULE
+  FOR EVERY CELL (the lines that say whether people go short read the band the page prints); (b) Pressured beside a
+  plain fare is coherent, a plentiful fare beside it is not (reads `adequate`; the split is owed). AND A TOTALITY ARM:
+  every reader of the band is listed and classed, with a lint arm that reds on an unclassed one: a fifth reader is
+  not left to a reader's luck. **Why the widening:** the owner's word is to fix the findings, and the same fact
+  read wrongly in a fourth place and in its mirror is the same finding.

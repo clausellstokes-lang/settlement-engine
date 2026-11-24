@@ -91,3 +91,24 @@ B1(ii). CHAIN TWO: READ-25 (the measure), then B1(i)'s table, then its build. C1
 its build after my word on (b). ONE LINE to me after each unit; each diff read once by you; `tests/copy` whole after a
 change under src/data or src/domain; `tests/lint` whole after any change to a test file. Then "CLOSE-7 <commit>": one
 branch that holds the cures merged, for one stacked landing.
+
+## R24c (added 20:26 UTC on 2026-11-24, on A2's table, sent by CLOSE-7 before the unit's commit)
+THE TABLE (printed band by production band, on d447ee31e): two cells change under a printed Secure: secure|strained
+(C 159, V 136) and secure|critical (C 38, V 32): the fare reads `adequate`, the grievance family says only F0, F6 and
+F8 where a market stands, the food lens is not strained. THE FAULT WAS C 197 AND V 168: ONE PAGE IN FIVE. Taken.
+- **(c) A FOURTH READER, TAKEN INTO A2:** Dawn Work's food branch ("Dawn work is the search for food…") beside a
+  printed Secure: C 38, V 32, the secure|critical cell; it was on neither classed list. It reads the same one fact;
+  the pattern counts it; red first on one place of each corpus.
+- **(a) THE MIRROR CELLS, TAKEN INTO A2:** a plain or plentiful fare beside a printed Deficit or Famine (C 5, V 3).
+  ONE RULE FOR EVERY CELL: the lines that say whether people go short read the band the page PRINTS: printed Deficit
+  reads the strained fare, printed Famine the critical fare, the grievance family and the lens following; production
+  alone decides only between `adequate` and `surplus` under a printed Secure, and where food comes from. A line that
+  cannot be said of a place whose own fields are full: STOP on that cell, the line and three candidates to the chair.
+  If the mirror needs more than the mapping it is its own small unit after A2.
+- **(b) PRESSURED BESIDE A PLAIN FARE (C 13, V 88): COHERENT** (pressure is not shortage). ONE CELL NOT ACCEPTED
+  UNSEEN: where the fare under a printed Pressured is `surplus`, it reads `adequate`; the split by production band is
+  owed; an empty cell builds nothing.
+- **THE TOTALITY ARM:** the whole list of what in `src` reads the production band or the fare's band to choose a
+  line, each classed SAYS SHORTAGE, SAYS SOURCE or NEITHER, with a lint arm that reds on an unclassed reader.
+- **THE PROOF, C AND V:** the pattern (with Dawn Work and the mirror) to 0; pages changed; the slot's commonest
+  sentence's share before and after; whether a born record moves (the goldens then move: the owner's one signing).
