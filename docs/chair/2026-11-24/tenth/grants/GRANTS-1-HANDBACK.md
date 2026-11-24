@@ -1,6 +1,6 @@
 # GRANTS-1 — hand-back
 
-## WHERE THE LANE STANDS (2026-11-24 18:12 UTC)
+## WHERE THE LANE STANDS (2026-11-24 19:16 UTC)
 
 - DONE. Branch `lane/grants-1-2026-11-24` (pushed) holds migration `supabase/migrations/211_close_visitor_reach.sql`, parts A, C, D and then B (B last), merged with the line `f03e9a868` (point 113). Nothing was applied anywhere.
 - How each part landed:
@@ -13,7 +13,7 @@
   - `serverOwnedColumns.pglite.test.js` (12)
   - `profile_escalation.test.js` (3; the client change in `src/lib/auth.js :: supabaseUpdateDisplayName`)
   - Each was seen RED before its part and GREEN after; the logs are in `measure/out/part*-red.log` and `part*-green.log`.
-- FINAL RUN on the merged tree, `tests/security` + `tests/lint` whole (`measure/out/final-security-lint.log`): 382 files, 5366 passed, 3 failed, 1 skipped. All 3 reds are RED-AT-LINE rows: proseComposed A0b, and proseCorpusBytes RAW and GZIP.
+- FINAL RUN at the tip after the chair's asks and items 1-4, tests/security + tests/lint whole (`measure/out/items-lint-security.log`): 382 files, 5377 passed, 3 failed, 1 skipped; the 3 reds are the RED-AT-LINE rows proseComposed A0b and proseCorpusBytes RAW and GZIP.
 - For the owner:
   - `FOR-THE-OWNER-URGENT.sql`: groups 1 and 2, cleared by the reader, already given to him.
   - `FOR-THE-OWNER-GRANTS/`: files 0a–5, every revoke guarded, executed twice in PGlite on the 203 and 210 chains: 134 open, then 0; service_role unchanged.
