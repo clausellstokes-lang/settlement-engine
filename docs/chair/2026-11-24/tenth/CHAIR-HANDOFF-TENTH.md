@@ -28,6 +28,13 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Then yes" (2026-11-24, about 20:54 UTC, this account). IT ANSWERS ONE QUESTION AND GRANTS ONE ACT: the chair had
+asked, in plain words, whether the tuning register's list (which code files depend on the tuning numbers) may be
+re-recorded ONCE on the troubles lane, after a permission check refused that command with the reason "Undermining
+Oversight", and had recommended yes on terms: run once, at that lane's landing, by the landing helper; the chair reads
+the register's diff before the line moves; it must show the one new dependent of `troubleLaw.js` and nothing else, or the
+landing stops (T30, T31, T38). IT IS NOT A GRANT OF ANY OTHER DOOR, OF ANY SIGNING, OR OF ANYTHING A PERMISSION CHECK
+REFUSES LATER: each such refusal is put to him anew.
 "Continue the share page work" (2026-11-24, about 17:50 UTC, this account: THE PAUSE OF THE SHARE VEIL IS LIFTED: T21 below).
 "I leave all judgement to you / Fix those findings as well" (2026-11-24, about 14:52 UTC, this account, in answer to the
 chair's status naming the faults of its read of the towns and the two holes in the database's rules: T7 below).
@@ -533,3 +540,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   LIST'S 61 ROWS AND NO OTHER (the ratchet 39 of 42,784 in 3,720 files; build and dist 13; the coverage floors 8;
   the golden master under tr_TR 1); none new, none cured. The grants lane's new suites are green there, and so is
   `provenanceMap`. The words are in `ci/LINE-NOW.md`. POINT 114 IS WHOLE: landed, pushed, its rows written, CI read.
+- 2026-11-24 20:56 UTC · T38 · THE OWNER'S YES ON THE REFUSED DOOR. He asked what the two items waiting on him meant (20:5x UTC);
+  the chair explained both in plain words (the ten files and what step 2's number is for; the list that is a tripwire,
+  the one new entry, the safety check that blocked its re-recording, and that nobody works round the block). HIS
+  ANSWER, VERBATIM: "Then yes". TAKEN AS the answer to the one yes-or-no asked (the list); it says nothing of whether
+  he has run the ten files, which stays open and unpressed. RECORDED IN SECTION 1 WITH ITS BOUNDS. KINDS-2 IS TOLD:
+  nothing changes on its lane (the door is still run by nobody there; the row stays red by name); THE DOOR IS RUN
+  ONCE AT ITS LANDING by the landing helper, whose start message quotes the owner's word and its time; THE CHAIR
+  READS THE REGISTER'S DIFF BEFORE THE LINE MOVES. If the helper's own permission check refuses the command again,
+  the chair says so to the owner in one line and runs it itself in its own session, where his yes stands in the
+  conversation: the act is authorised by him; who types it is not what he was asked. A WIDER MOVE OF THAT REGISTER
+  THAN THE ONE DEPENDENT HE WAS TOLD OF IS NOT COVERED AND GOES BACK TO HIM.
