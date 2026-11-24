@@ -23,6 +23,9 @@ step_snplant() { cpm; mx sh -c "SNAP_PLANT=1 WD_SHARDS=1 sh $M/snap.sh /home/use
 step_sntip() { cpm; mx sh $M/snap.sh /home/user/wt/join $O/sn-tip v28tpl stored $O/stored-today > $O/sn-tip.txt 2>&1; st sntip $?; }
 step_snmaster() { cpm; mx sh $M/snap.sh /home/user/wt/join $O/sn-master v28tpl stored $O/stored-master > $O/sn-master.txt 2>&1; st snmaster $?; }
 step_snjoin() { cpm; mx sh $M/snap.sh /home/user/wt/join $O/sn-join v28tpl stored $O/stored-join > $O/sn-join.txt 2>&1; st snjoin $?; }
+# PP (the chair's question for the owner, via VEIL-50 22:2x): pages published before the veil; a copy of um beside um in i44
+I44=/home/user/wt/i44/$V
+step_pp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh $I44/v52/pp/pp.sh /home/user/wt/tip $O/pp-master v28tpl stored $O/stored-master > $O/pp-master.txt 2>&1; st pp $?; }
 # (1c) N115: the read's time, the tip's chain against master's own, on the same public rows
 step_n115() { mx sh $HERE/n115.sh > $O/n115.txt 2>&1; st n115 $?; }
 for s in ${*:-dumps miplant snplant mitip mimaster mijoin sntip snmaster snjoin n115}; do step_$s; done
