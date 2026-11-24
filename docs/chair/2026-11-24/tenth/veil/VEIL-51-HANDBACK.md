@@ -59,6 +59,18 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   VEIL-55's order: it merges this branch itself after "R4-IDS MERGED" (212's header item becomes (37)), then re-runs its slice.
   UNIT 1 GRANTED FOR MERGE at d7764e67a by VEIL-55 (23:50, its read: no fault); it merges after "R4-IDS MERGED". NOTHING
   OWED BY ME FOR UNIT 1. NOTHING RUNNING.
+- UNIT 4 (R5-DESC narrowed), THE PART THAT TOUCHES NO SQL, OPENED BY THE CHAIR (23:49): (1) the measure (a shown power's desc
+  naming a hidden power, both stored pools, a planted positive); (2) a red-first instrument committed red on a -wip of mine
+  above d7764e67a; (3) RIVAL's owed arms once (it rides only if each passes its FIRST run; a red cuts it, undebugged, to phase 2);
+  (4) a cure proposal (at most 200 words: withheld, never masked, no new served fact) to VEIL-55 and the chair. The 212 edit
+  waits for "R4-IDS MERGED"; the chair reads its hunk whole before the grant.
+  SCRIPTS `v51/u4/`: `u4.sh` (plant, wdplant, wdtoday, wdmaster: wd at b126c9813 from /home/user/wt/i43, UNCHANGED; the twin's tree
+  /home/user/wt/u4m = detached d7764e67a + one untracked pure-data file wd imports for its withdrawn DAILY mode; template
+  v51_c2), `plant.mjs` (the data plant: 4 seeds, a shown power's desc names the town's Thieves' Guild), `rival.sh` (VEIL-40's
+  run.sh at 61a99a90d unchanged: chains, arms, after, cost; logs /var/tmp/v51/out/rival/, exits.txt there).
+  RUNNING (both background, serialized by the gate mutex): u4.sh from 23:54 (log /var/tmp/v51/out/u4/u4.log); rival.sh.
+  IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
+  after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
   PART 47 s1 block 0 (2787f454c) first; step (1): a worktree on `lane/veil-51-2026-11-24-r5desc-wip` from aa54a6791, plain
   merges of b58abc48b and the named tip. IF THIS SEAT STOPS: re-run what p1.log lacks with `cd /home/user/settlement-engine && sh
