@@ -274,7 +274,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `210_public_prose_text_projection.sql`** (this
+**Current migration head: `211_close_visitor_reach.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -289,6 +289,12 @@ and 209 applied before it (both on their own lanes until STYLE-2-MERGE). A share
 composed blocks on the gallery and party pages only after its first save once the client that
 stamps `publicProse` has shipped, so one save per shared town is owed. Name it to the owner; it
 is never scripted.
+
+`211_close_visitor_reach.sql` (GRANTS-1, the tenth chair's ruling G1) changes grants only: it
+revokes execute from `public`, `anon` and `authenticated` on every function the migrations meant
+for the server alone, by exact signature (a hosted project grants every new function to the two
+roles by name). No table, column or row changes. Its page for the owner, with a read-only check
+before and after: `docs/chair/2026-11-24/tenth/grants/` on the lane branch.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

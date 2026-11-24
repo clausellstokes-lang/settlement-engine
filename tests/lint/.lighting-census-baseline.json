@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eecc3e01aa59dc3a6b3a4a7fded33bcc6694e89e",
-  "measuredBy": "KINDS-2 K3",
+  "measuredAtSha": "ff879b2e22cc0c5552e7fb968a4db688f3aa4f34",
+  "measuredBy": "GRANTS-1-ITEMS",
   "date": "2026-11-24",
-  "note": "KINDS-2 K3 (K3-FINISH door 3): the trouble lane adds three test files, tests/domain/trouble/troubleLawSavedTown.test.js, troubleLawWeights.test.js and troubleLawWiring.test.js (KINDS-1 K1/K3, merged into lane/kinds-2-2026-11-24); measured at eecc3e01a on a clean tree",
+  "note": "GRANTS-1: the owner-read and standing-check cases in hostedDefaultGrants",
   "files": 3789,
   "parked": 489,
   "credited": 3300,
-  "titles": 31943,
-  "suiteTitles": 8878
+  "titles": 31953,
+  "suiteTitles": 8885
 }

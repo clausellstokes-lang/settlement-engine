@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-affcaa1f68faf6e4f
+
+
+ Test Files  6 passed (6)
+      Tests  66 passed (66)
+   Start at  16:38:48
+   Duration  15.03s (transform 438ms, setup 336ms, import 871ms, tests 41.21s, environment 1ms)
+
+exit 0

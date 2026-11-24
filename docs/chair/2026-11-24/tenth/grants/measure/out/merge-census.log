@@ -1,0 +1,28 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 6885ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 95ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+Error: census REFROZEN at 7c8cb1f1139f71834b5b95d7c0e696733fb6b167 by GRANTS-1-MERGE: files 3786 -> 3789, parked 488 -> 489, credited 3298 -> 3300, titles 31925 -> 31946, suiteTitles 8876 -> 8883. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT green is the proof.
+ ❯ refreezeCensusBaseline tests/lint/sovereigntyLightingContract.walker.test.js:755:9
+    753|     .map((key) => `${key} ${previous[key]} -> ${figures[key]}`)
+    754|     .join(', ');
+    755|   throw new Error(`census REFROZEN at ${next.measuredAtSha} by ${measu…
+       |         ^
+    756|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+    757|     + ' re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT …
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:3088:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 33 passed (34)
+   Start at  17:46:49
+   Duration  7.59s (transform 207ms, setup 56ms, import 518ms, tests 6.88s, environment 0ms)
+
+exit 1

@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 210;
+export const MIGRATION_TRAIN_REPO_HEAD = 211;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -839,6 +839,36 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  // GRANTS-1 (the tenth chair's ruling G1, 2026-11-24): 211 closes what a visitor or a signed-in user can reach.
+  Object.freeze({
+    id: 'close-visitor-reach',
+    from: 211,
+    to: 211,
+    purpose: '211 — close what a visitor or a signed-in user can reach that the migrations meant for the server '
+      + 'alone (GRANTS-1, ruling G1). PART A revokes execute, by exact signature, from public, anon and authenticated '
+      + 'on every server-only or no-role function (and _audit_action), granting service_role again where a migration '
+      + 'granted it. PART C revokes UPDATE on public.profiles from anon and authenticated and grants it to '
+      + 'authenticated on four columns only (avatar_url, email_notifications, model_preference, '
+      + 'public_identity_opt_in). PART D adds a SECURITY INVOKER guard function and two triggers on settlements and '
+      + 'saved_maps that refuse anon and authenticated a change to the columns the server owns. PART B (last) revokes '
+      + 'the migrating role\'s default EXECUTE on new functions in schema public from anon and authenticated. No row '
+      + 'is written or deleted. DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus the applied-head bump).',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'This wave tightens grants; its own @rollback annotation spells the by-hand reversal per function '
+        + '(grant execute ... to anon, authenticated), which is why 211 classifies as documented-manual-reversal '
+        + 'rather than taking the wave policy. Nothing is destroyed on reversal: no row is written or deleted.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_surveyor_byok_secret' }),
+      // The rehearsal's presence query knows tables and functions only (expectedObjectPresenceSql):
+      // part D's two triggers are not expressible here; their function stands for them.
+      Object.freeze({ kind: 'function', name: '_guard_server_owned_columns' }),
     ]),
   }),
 ]);
