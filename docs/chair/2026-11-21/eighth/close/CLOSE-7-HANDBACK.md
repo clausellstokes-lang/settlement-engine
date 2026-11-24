@@ -41,6 +41,19 @@ gate's 53 reds are 48 listed + lit twin 3 + R13 + provenanceMap arm 1 (landing m
 names d447ee31e and f03e9a868; section 0 says 113 landed, not a release. LANDING LINE PLAN: one branch holding the cures merged, then
 a plain merge of THE LINE'S TIP (since 20:01 UTC: f9531eb3a, POINT 114, the grants fix: no birth or page moves; the chair names any later tip; expect one conflict, `tests/lint/.lighting-census-baseline.json`: the line's side, then its door), registers by their doors, COMMON-EIGHTH 14's runs, "CLOSE-7 <commit>".
 THE CHAIR 19:28: (1) before merging a unit, re-read its ruling in its own words (RULING-R24.md on the chair's branch; R24a/R24b as recorded verbatim at ffc3fc7fb and 382627144); a cure drifting from its words is sent back; (2) END A TURN AT LEAST HOURLY (a wait on a builder is a turn's end); (3) ORDER: A1 and B1(i) merged; then A2 and C1 at once; then B1(ii); each unit's line on merge with C and V counts (before, after, what else moved). PUSHED 19:27: -a1-wip 50f911b49, -b1i-snap (mid-gate cut), own branch 42b5a7132. FOR THE PAGE (after the cures): the veil's pause LIFTED 17:58; the line's migrations 204-211, the veil's 212/213; section 0's two veil items become the resumed veil's.
+A1 MERGED 20:16 (bb457f3bf on `lane/close-7-2026-11-24-cures`, cut at d447ee31e); the chair took it 20:12 and RULED THE FOUR:
+(1) P3source +3 on the page-census door's 720 (r2s-under_siege-hamlet-2, r2s-under_siege-thorp-1, r2s-under_siege-thorp-2;
+the same on the before tree): NOT A1's, NOT RAISED (register shrink-only, banked 0). A MEASURE, NO CURE, by a builder when next
+free and BEFORE "CLOSE-7 <commit>": the three places' Magic and Defense lines as printed; the same door at point 112
+(9b0ffaa97, laws dark): 0 or 3 (is it the flip's?); how many besieged places of each size the 720 holds; which line states the
+reliance and what source the record gives. ONE MESSAGE; the chair rules the cure. Until then the landing line names the door
+"ROSE on P3source by 3, measured, the chair's ruling pending"; the door is NOT re-run to bank anything.
+(2) `sick care` goes on FOR-THE-OWNER's veto list: "someone here tends the sick or the injured".
+(3) NOHEAL enrolled at 0 by hand: ACCEPTED; the landing line names it with its label ("NOHEAL a no-healer line beside resident
+sick care"). TOOL'S GAP for the hand-back: the page-census door has no add-a-row arm (not built now).
+(4) sickCare.js lazy pin accepted; the five sizes are read at the landing's build beside the line's (114's = 113's).
+The landing line also says: 18 pages beyond the 39 change one true line for another (H4/H5/H6) because the pool shrank.
+A2 DISPATCHED 20:15 (chain one resumed, wt/a2); its table to the chair BEFORE its commit; C1 when B1(i) merges.
 LISTED FOR LATER UNITS: healerCount (priest, midwife); P9 (129 of V) NEXT AFTER THE FIVE CURES, cause first; P5b fires on
 dp-town-143 (C) over its banked 0; the plains' 'Mill' row matching Sawmill (x2.34); the desert's trade x1.8 on the withheld rows;
 renaming SAVED places' three forms (the owner's, rename ledger as door). LATER UNIT (hand-back list): the capacity's healerCount not counting
