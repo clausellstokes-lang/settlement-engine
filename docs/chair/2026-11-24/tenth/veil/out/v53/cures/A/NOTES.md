@@ -4,3 +4,4 @@
 - 23:40 UTC: reds recorded (/var/tmp/v53/cures/A/red0.log: U5a 19/19, U7b 2/6; red2-restated-old-src.log: restated arm 4 of 6 on OLD src, visitor-thorp-52 widest 'It has lasted'). src edit made (wholeBreakdown in governanceAccount.js); green run next.
 - committed 8067faafb (green 35/35). Next: governing files, tests/lint whole.
 - governing: 25 test files (28 incl. 3 JSON registers): 23 pass, 2 red pre-existing at ba7460c33 (publicProseEquality daily_life soak1k-1/7/8, same 3 on the base tree, base-publicProseEquality.log; recentConflictReaders.walker = trial join red (5)). Next tests/lint whole.
+- tests/lint whole running (background), log /var/tmp/v53/cures/A/lint.txt, json lint.json.
