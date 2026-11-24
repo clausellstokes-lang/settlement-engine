@@ -24,6 +24,7 @@
 --   PART C  public.profiles: UPDATE is revoked from anon and authenticated and granted to
 --           authenticated on an ALLOWED list of columns only (avatar_url, email_notifications,
 --           model_preference, public_identity_opt_in); every other column is the server's.
+--   PART D  settlements, saved_maps: a guard trigger refuses anon and authenticated the columns the server owns.
 --   PART B  (LAST in the file) the migrating role's default in schema public no longer grants
 --           EXECUTE on NEW functions to anon and authenticated, so a new function written with
 --           `revoke ... from public; grant ... to service_role` is closed to both, as in plain
@@ -37,6 +38,10 @@
 --     grant execute on function public.<the same signature> to anon, authenticated;
 --   PART C:
 --     grant update on public.profiles to authenticated;
+--   PART D:
+--     drop trigger if exists trg_guard_server_owned_columns on public.settlements;
+--     drop trigger if exists trg_guard_server_owned_columns on public.saved_maps;
+--     drop function if exists public._guard_server_owned_columns();
 --   PART B:
 --     alter default privileges in schema public grant execute on functions to anon, authenticated;
 -- ────────────────────────────────────────────────────────────────────────────

@@ -13,7 +13,7 @@
  *   KEPT_OPEN server-only by grant, but a user path needs it; the reason is in KEPT_OPEN_REASONS.
  * A NEW function with no row turns tests/security/hostedDefaultGrants.pglite.test.js red:
  * class it here (regenerate, or add the row by hand with the class its grants say).
- * Counts: SERVER 187, NOBODY 58, ANYONE 55, TRIGGER 22, KEPT_OPEN 3, USER 79.
+ * Counts: SERVER 187, NOBODY 58, ANYONE 55, TRIGGER 23, KEPT_OPEN 3, USER 79.
  */
 export const KEPT_OPEN_REASONS = Object.freeze({
   "_gallery_sanitize_public_json(jsonb,text[])": "called by the SECURITY INVOKER _gallery_apply_member_overrides, which a user runs",
@@ -71,6 +71,7 @@ export const FUNCTION_CLASSES = Object.freeze({
   "_gallery_sanitize_public_json(jsonb,text[])": 'KEPT_OPEN',
   "_gallery_world_snapshot_is_safe(jsonb)": 'KEPT_OPEN',
   "_gc_dim_sql(text)": 'NOBODY',
+  "_guard_server_owned_columns()": 'TRIGGER',
   "_import_campaign_members(jsonb)": 'NOBODY',
   "_import_campaign_shape(jsonb)": 'NOBODY',
   "_import_patch_campaign_members(jsonb,uuid,boolean,timestamp with time zone)": 'NOBODY',
