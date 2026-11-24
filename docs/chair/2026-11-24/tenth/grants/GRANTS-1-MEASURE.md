@@ -187,3 +187,30 @@ saved_maps is the same, plus `import_count`. 171 says these columns are written 
    - A test that a signed-in user can change no `profiles` column outside the ALLOWED list.
    - If item 3 is ruled in, the same test on settlements and saved_maps.
    - Each test is seen red before the fix and green after.
+
+## The chair's four additions (2026-11-24 15:14 UTC; every signature is generated from the PGlite catalog)
+
+Scripts and outputs: `measure/` beside this file. `boot.mjs` is the harness; `catalog.mjs` writes `out/functions.json`, `policies.json`, `views.json` and `bodies.json` (the last not committed; it is regenerated in 4 s). `generate.mjs` writes the three files below. `probe-*.mjs` are the executions cited above. Run each from the repository root.
+
+1. **THE READ-ONLY CHECK: `measure/out/owner-read-check.sql`.** Block 1 lists all 247 functions classed SERVER or NOBODY, by regprocedure, through `to_regprocedure` (a function production lacks reads NULL, never an error), with `has_function_privilege` for `anon` and `authenticated`. Block 2 is `select count(*) from public.surveyor_byok_keys`. CONFIRMED to run in PGlite: before the revoke, 135 of 247 are executable by each role.
+2. **THE REVOKE BLOCK: `measure/out/revoke-block.sql`.** It holds 245 lines, one `revoke execute on function <regprocedure> from anon, authenticated;` per function (112 already closed, kept for idempotence). Two are left out because a user path needs them (below).
+   - **GROUP 1 (21)** guards secrets and other users' data: the BYOK passphrase and keys, billing and diagnostics, a user's security question, unsubscribe token and last activity, the email lookups, recovery locks, worker queues that hand back rows, and client-error reports.
+   - **GROUP 2 (84)** guards another user's account, entitlements and money: tier, credits, refunds, bans, warnings, deletions, tickets, recovery lockouts, the free narrative, surveyor and dossier entitlements, referrals and redemptions, founder seats and transfers, the forged-actor admin RPCs, and the audit log.
+   - **GROUP 3 (140)**: reports, rollups, cleanups, rate limits, crons, workers and internal helpers.
+
+   CONFIRMED in PGlite: the block applies twice without error, and afterwards exactly 2 of the 247 stay executable (the two kept below). The only function the block names that production (203) lacks is `report_engine_generations()` (204, already closed); the owner's hand-run copy drops that line.
+3. **APART: meant for users, taking a user or actor id: `measure/out/grants-measure-extra.md` §(3).** The table holds 51 id arguments. Read by hand, the ones with no tie to the caller that matter are:
+   - `has_role(uuid,text[])` (USER, 050): an oracle for "is this id staff?", which feeds the forged `p_actor` RPCs;
+   - `account_is_active(uuid)` (USER, used in RLS policies, so not revocable): reads any user's moderation state;
+   - `profile_has_premium_access(uuid)` (ANYONE): reads any user's premium state;
+   - `_audit_action(…)` (UNSTATED, PUBLIC even in vanilla Postgres): writes an admin-audit row under any actor.
+
+   None of the four has a caller in `src/`. The others the regex flags take settlement or comment ids, or check the caller's own role (`set_featured`/`set_curated`), or pass `p_expected_owner` on to a checking delegate (`apply_custom_content_command`, PLAUSIBLE). Kept out of the block, because a user path needs them: `_gallery_sanitize_public_json(jsonb,text[])` (called by the invoker `_gallery_apply_member_overrides`) and `_gallery_world_snapshot_is_safe(jsonb)` (called by the invoker trigger `_saved_maps_world_snapshot_guard`). Both are invoker helpers with no secret; on the hosted default, anon can call them directly. The ruling may leave them, or grant them to `authenticated` by name.
+4. **DEFAULT PRIVILEGES: `measure/probe-defaults.mjs`, CONFIRMED in PGlite.**
+   - `alter default privileges for role postgres in schema public revoke execute on functions from anon, authenticated` alone does NOT hold. A new function still gets PUBLIC's built-in EXECUTE, so anon can call it.
+   - Adding the GLOBAL `alter default privileges for role postgres revoke execute on functions from public` (no `in schema`) does hold: a new function is executable by `service_role` only, and a named `grant … to authenticated` still works.
+   - Neither touches an EXISTING function, and `create or replace` keeps the old ACL. The by-name block is needed either way.
+   - Browser `rpc(` calls that rely on the hosted default for a SIGNED-IN user: **0**. For a LOGGED-OUT browser, 32 USER functions are reachable only through the default (list in the extras); their pages are presumably signed-in only (PLAUSIBLE).
+   - Browser calls to never-granted functions: 0.
+   - So the hardening would break no page today. A later migration that drops and recreates a browser-called function would need its grant written by name: PLAUSIBLE, and a test should pin it.
+   - That the platform lets `postgres` alter its own defaults is PLAUSIBLE.
