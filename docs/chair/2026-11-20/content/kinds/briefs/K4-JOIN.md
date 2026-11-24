@@ -64,6 +64,21 @@ THE PATTERN YOU FOLLOW, read whole: `src/domain/seat/seatLaw.js` (above all `wit
    A shrink-only ceiling that must RISE is a STOP. A golden or a born figure moved is a STOP (the dark birth does not
    change: nothing here runs at birth).
 
+7. THE LANE'S OWN TWO REDS IN `tests/lint` (measured by unit 2 at caa6b8ef9, not on the line's list), each its own commit:
+   (a) `tests/lint/domainAnyCastBaseline*`: `src/domain/trouble/troubleLaw.js` holds one `any` against an allowance of 0
+   (a new domain file carries none): type it narrowly (e.g. the economy as `{compound?: {criminalEffective?: unknown}}`
+   or `unknown` read through a guard); the allowance is never raised. (b) `tests/lint/seedLoopTotality*` "no NEW bare
+   seed loop…": `tests/domain/trouble/troubleLawWeights.test.js` has two bare seed loops: rewrite them in the form the
+   walker's header sanctions (read its header). Both walkers green after.
+8. `src/data/historyData.js`: 28 COMMENT lines cite `historyGenerator.js :: tensionByMemory`, which K1 moved verbatim to
+   `src/generators/history/tensionByMemory.js`. Re-address each citation to the new home, COMMENT TEXT ONLY (no string,
+   no data, no code: `git diff -w` shows only comment lines), one commit; `tests/copy` WHOLE after.
+
+THE CHAIR'S RULING ON ITEMS 1 AND 4 (18:26 UTC): SHAPE 2 IS CURED, NOT PINNED; it supersedes KINDS-1's ruling 9. Arm 5's
+NEW TITLE says what it pins: a save with neither config nor _config reads law 1, with and without the form's marker. RED
+FIRST: the new arm is written and shown failing BEFORE the cure is written. Arm (e) then holds for the trouble law with
+no exception row.
+
 ## THE SWEEP (at your last commit)
 `tests/lint` WHOLE; `tests/domain/trouble/`; `tests/domain/generationLawsSavedPlace.test.js`;
 `tests/domain/seatLawWiring.test.js`, `tests/domain/fortuneLawWiring.test.js`, `tests/domain/seat/seatLawSavedTown.test.js`,
