@@ -122,14 +122,20 @@ function readSlot(rec, slot, text, house) {
   const name = typeof rec.name === 'string' && rec.name ? rec.name : null;
   /** @type {Part[]} */
   const parts = [];
-  for (const [branch, pool] of Object.entries(POOLS[slot])) {
-    const filled = FILLED(slot, branch);
-    const eligible = filterDeclared(/** @type {any} */ (pool), { facts: /** @type {any} */ (facts), poolId: `dailyLife.${slot}.${branch}`, surface: 'dailyLife' })
-      .filter((/** @type {any} */ l) => [...l.text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).filter((k) => !filled.includes(k)).every((k) => !!house(k)));
-    const pick = /** @type {any} */ (pickVariantMixed(eligible, name ? `${name}::dailyLife.${slot}::${branch}` : null));
-    if (!pick) continue;
-    const m = templateRe(pick.text).exec(text);
-    if (m) parts.push({ slot, branch, id: pick.id, said: m[0], at: m.index, states: statesOf(slot, branch) });
+  for (const [branch, whole] of Object.entries(POOLS[slot])) {
+    // R24-A2 (CLOSE-7; the chair's R24a): where the page prints the place fed, the food grievance draws its price-only
+    // lines (F0, F6, F8) under the food branch's own key; the instrument reads that pick too
+    const pools = slot === 'commoner_resentments' && branch === 'food'
+      ? [whole, /** @type {any} */ (whole).filter((/** @type {any} */ l) => Resent.PRICE_ONLY_FOOD_GRIEVANCES.has(l.id))] : [whole];
+    for (const pool of pools) {
+      const filled = FILLED(slot, branch);
+      const eligible = filterDeclared(/** @type {any} */ (pool), { facts: /** @type {any} */ (facts), poolId: `dailyLife.${slot}.${branch}`, surface: 'dailyLife' })
+        .filter((/** @type {any} */ l) => [...l.text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).filter((k) => !filled.includes(k)).every((k) => !!house(k)));
+      const pick = /** @type {any} */ (pickVariantMixed(eligible, name ? `${name}::dailyLife.${slot}::${branch}` : null));
+      if (!pick) continue;
+      const m = templateRe(pick.text).exec(text);
+      if (m) { parts.push({ slot, branch, id: pick.id, said: m[0], at: m.index, states: statesOf(slot, branch) }); break; }
+    }
   }
   parts.sort((a, b) => a.at - b.at || b.said.length - a.said.length);
   const kept = parts.filter((p, i) => parts.findIndex((q) => q.at === p.at && q.said.length === p.said.length) === i)

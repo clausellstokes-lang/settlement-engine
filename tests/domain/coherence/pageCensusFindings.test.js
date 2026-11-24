@@ -8,6 +8,8 @@ import { PAGE_CENSUS_ROWS, RETIRED_PAGE_CENSUS_ROWS, pageCensusFindings, viewsOf
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { poolMemberTexts } from '../../helpers/drawnProse.js';
 import { CRIME_LINE_DISQUALIFIERS } from '../../../src/domain/display/stateProse/crimeLineDisqualifiers.js';
+import { FOOD_CULTURE } from '../../../src/data/dailyLife/foodCulture.js';
+import { COMMONER_RESENTMENTS } from '../../../src/data/dailyLife/commonerResentments.js';
 
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
@@ -29,6 +31,8 @@ const MAGIC = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the practice of
 const SETTLED = corpusLine('defense', 'DS-DEF-2', 'Beasts & Monsters: settled, defenses beyond the need');
 
 const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
+/** R24-A2 (CLOSE-7): the fare line that says portions are small, the pool's own words (found, not typed). */
+const PORTIONS = FOOD_CULTURE.strained.find((l) => l.id === 'T3').text;
 /** A Food endurance line as the Defense tab prints it (its label, then the leaf's sentence). @param {string} sentence */
 const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
@@ -58,6 +62,8 @@ const PLANTS = {
   P20: { views: { 'Systems/Defense': ['Under siege the outlying fields are lost first.'] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   NEW1: { views: { 'Summary/Overview': ['Brindle', 'Town · Council · underdefended', 'Defense', 'Fortress'] } },
   NEW2: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Economics': [MAGIC] } },
+  // R24-A2 (CLOSE-7): the fare's "Portions are small" beside a Food Security that prints Secure
+  FOODSEC: { views: { 'World/Daily Life': [PORTIONS] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'secure', gapPct: 0, normalImportPct: 20 } } } } },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -74,6 +80,7 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
       P5false: { 'Systems/Power': ['Free of the criminals'] },
       P10: { 'World/Institutions': ['The watch hold the gates at night.'] },
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
+      FOODSEC: PLANTS.FOODSEC.views, // R24-A2: with no food ledger printed, the line contradicts nothing
     };
     // row 5a re-read: the same line is true where an official is in pay; the line that presumes no buyer is true at none
     expect(pageCensusFindings({ tier: 'town', npcs: [OFFICIAL], powerStructure: { criminalCaptureState: 'none' } }, PLANTS.P5false.views)).toEqual([]);
@@ -86,6 +93,13 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(pageCensusFindings({ tier: 'town', ...NEEDS_CLAY }, { 'Systems/Economics': ['Imports', 'Iron'] })).toEqual([]);
     for (const [row, views] of Object.entries(halves)) expect({ row, found: pageCensusFindings({ tier: 'town' }, views) }).toEqual({ row, found: [] });
     expect(pageCensusFindings({ tier: 'town' }, PLANTS.P14.views)).toEqual([]);
+    // R24-A2: a shortage line beside a printed "Pressured" is coherent (R24a (a)); a price-only grievance beside "Secure" is true
+    const fed = (/** @type {string} */ band, /** @type {number} */ gapPct) => ({ tier: 'town', economicState: { foodSecurity: { foodRecord: { band, gapPct, normalImportPct: 20 } } } });
+    expect(pageCensusFindings(fed('secure', 1), PLANTS.FOODSEC.views)).toEqual([]);
+    expect(pageCensusFindings(fed('pressured', 8), PLANTS.FOODSEC.views)).toEqual([]);
+    const price = COMMONER_RESENTMENTS.food.find((l) => l.id === 'F6').text;
+    expect(pageCensusFindings(fed('secure', 0), { 'World/Daily Life': [price] })).toEqual([]);
+    expect(pageCensusFindings(fed('surplus', 0), PLANTS.FOODSEC.views).map((f) => f.row)).toEqual(['FOODSEC']);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

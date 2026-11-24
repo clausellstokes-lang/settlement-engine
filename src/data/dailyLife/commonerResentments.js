@@ -95,6 +95,16 @@ export const COMMONER_RESENTMENTS = Object.freeze({
 });
 
 /**
+ * THE PRICE-ONLY FOOD GRIEVANCES (R24-A2, CLOSE-7; the chair's ruling R24a of 2026-11-24, vetoable by the owner): food #0, #6
+ * and #8 say food costs more (bread prices, the price of food), and nobody is said to go short. Where the page prints a Food
+ * Security that is not short while production reads strained or worse (`domain/dailyLife.js :: fareBandOf`), the food
+ * family keeps the production band's reading in these alone: food bought in is dearer. Each already needs a market.
+ * A Set, not a list: it is a lookup of ids, never a pool of lines.
+ * @type {ReadonlySet<string>}
+ */
+export const PRICE_ONLY_FOOD_GRIEVANCES = new Set(['F0', 'F6', 'F8']);
+
+/**
  * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
  * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
  * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes

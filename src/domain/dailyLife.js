@@ -47,7 +47,7 @@ import { GATHERING_NAMED, GATHERING_PLAIN, GATHERING_DOES } from '../data/dailyL
 import { DAWN_WORK, DAWN_WORK_DOES } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS, CHILD_WARNINGS_DOES } from '../data/dailyLife/childWarnings.js';
 import { COMMONER_RESENTMENTS_DM, COMMONER_RESENTMENTS_DM_DOES } from '../data/dailyLife/commonerResentmentsDm.js';
-import { COMMONER_RESENTMENTS, COMMONER_RESENTMENTS_DOES } from '../data/dailyLife/commonerResentments.js';
+import { COMMONER_RESENTMENTS, COMMONER_RESENTMENTS_DOES, PRICE_ONLY_FOOD_GRIEVANCES } from '../data/dailyLife/commonerResentments.js';
 import { FOOD_CULTURE, FOOD_CULTURE_DOES } from '../data/dailyLife/foodCulture.js';
 import { OUTSIDER_IMPRESSIONS, OUTSIDER_IMPRESSIONS_DOES } from '../data/dailyLife/outsiderImpressions.js';
 import { UNSPOKEN_TOPICS, UNSPOKEN_TOPICS_DOES } from '../data/dailyLife/unspokenTopics.js';
@@ -214,6 +214,57 @@ function snakeCase(s) {
 // `<name>::dailyLife.food_culture::<branch>`; what people eat is said from the food record by each line's declared atoms.
 // No line true: the EMPTY string (ruling 3).
 
+// R24-A2 (CLOSE-7; the chair's RULING-R24 and his rulings R24a, R24c and R24d of 2026-11-24, vetoable by the owner): THE
+// FARE READS THE BAND THE PAGE PRINTS. A line that says people go short read the production band alone (what the place
+// grows against what it eats), so a place that buys what it does not grow, and whose page prints Food Security "Secure",
+// was told its portions are small (197 of the census 900, 168 of the visitor 900). THE ONE FOOD FACT IS THE WORD THE PAGE
+// PRINTS (the `food` atom on `facts/foodBandShown.js`'s printed band). R24d: THE PRINTED BAND BOUNDS THE FARE; PRODUCTION
+// PLACES IT WITHIN THE BOUND. A cell inside its bound is unchanged; a cell outside moves to the nearest branch inside:
+//   printed Secure or Surplus            `surplus` .. `adequate`
+//   printed Pressured                    `adequate` .. `strained`
+//   printed Import-Dependent or Deficit  `strained` .. `critical`
+//   printed Famine                       `critical` .. `collapsed`
+// ONE DERIVATION (`fareBandOf`), which the fare (`deriveFoodCulture`), the food grievance, the food visitor lens and Dawn
+// Work's food branch all read, never each its own.
+// HELD (R24c (a), R24d: the mirror's own unit after A2): a printed Famine over a production band of `adequate` or
+// `surplus` keeps the production band; its lines (the fare's C7, Dawn Work's F6) say the source failed, and the words
+// ruled for that cell are the mirror unit's to build.
+
+/** The fare bands, plentiful to collapsed: the order the bound is read in. */
+const FARE_LADDER = Object.freeze(['surplus', 'adequate', 'strained', 'critical', 'collapsed']);
+/** THE BOUNDS (R24d): the printed band → [the most plentiful, the most short] fare it admits. */
+const FARE_BOUNDS = Object.freeze({
+  surplus: Object.freeze(['surplus', 'adequate']), secure: Object.freeze(['surplus', 'adequate']),
+  pressured: Object.freeze(['adequate', 'strained']),
+  importDependent: Object.freeze(['strained', 'critical']), deficit: Object.freeze(['strained', 'critical']),
+  famine: Object.freeze(['critical', 'collapsed']),
+});
+
+/**
+ * THE FARE BAND (R24-A2, R24d): the production band, placed within the bound the page's printed food band sets.
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {string}
+ */
+function fareBandOf(s, ctx) {
+  const band = ctx.capacities.capacities.food_production.band;
+  const printed = Object.keys(FARE_BOUNDS).find((p) => atomHolds(`food: = ${p}`, factsFor(s)) === true);
+  const at = FARE_LADDER.indexOf(band);
+  if (!printed || at < 0) return band;
+  if (printed === 'famine' && at <= FARE_LADDER.indexOf('adequate')) return band; // the mirror held (R24c (a))
+  const [most, least] = FARE_BOUNDS[/** @type {keyof typeof FARE_BOUNDS} */ (printed)].map((b) => FARE_LADDER.indexOf(b));
+  return FARE_LADDER[Math.min(Math.max(at, most), least)];
+}
+
+/**
+ * THE FARE BAND OF A RECORD (R24-A2): the one derivation, for a reader outside the slots (a test that re-derives a branch).
+ * @param {DailyLifeSettlement} settlement
+ * @returns {string}
+ */
+export function fareBandOfRecord(settlement) {
+  return fareBandOf(settlement, /** @type {DailyLifeContext} */ (/** @type {unknown} */ ({ capacities: deriveAllCapacities(settlement) })));
+}
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
@@ -222,7 +273,7 @@ function snakeCase(s) {
 function deriveFoodCulture(s, ctx) {
   /** @type {SlotReference[]} */
   const refs = [];
-  const band = ctx.capacities.capacities.food_production.band;
+  const band = fareBandOf(s, ctx); // R24-A2: the band the page prints, where it prints the place fed
   const wanting = ctx.threats.some((t) => t.type === 'famine' || t.type === 'siege');
   /** @type {keyof typeof FOOD_CULTURE} */
   const branch = band === 'surplus' ? (wanting ? 'surplus.wanting' : 'surplus')
@@ -265,7 +316,6 @@ const MEDIUM_OR_ABOVE = Object.freeze(['medium', 'high', 'critical']);
 function deriveDawnWork(s, ctx) {
   /** @type {SlotReference[]} */
   const refs = [];
-  const food = ctx.capacities.capacities.food_production;
   const defense = ctx.capacities.capacities.defense;
   const dominantCraftPower = ctx.profiles.find(p => p.archetype === 'craft')?.power || 0;
   const dominantMerchantPower = ctx.profiles.find(p => p.archetype === 'merchant')?.power || 0;
@@ -273,7 +323,7 @@ function deriveDawnWork(s, ctx) {
 
   // BAR5-WORLD (2026-11-16; LAW 5): under a siege no caravan rolls; the merchants' dawn is a count of their stock.
   /** @type {keyof typeof DAWN_WORK} */
-  const branch = WANTING_BANDS.includes(food.band) ? 'food'
+  const branch = WANTING_BANDS.includes(fareBandOf(s, ctx)) ? 'food' // R24-A2 (R24c (c)): the fare band, the band the page prints
     : WANTING_BANDS.includes(defense.band) && outside ? 'defence'
     : dominantCraftPower >= 25 ? 'craft'
     : dominantMerchantPower >= 30 && ctx.threats.some((t) => t.type === 'siege') ? 'merchant_siege'
@@ -531,13 +581,18 @@ function deriveCommonerResentments(s, ctx) {
   /** @type {Array<keyof typeof COMMONER_RESENTMENTS>} */
   const branches = [];
   if (GRIEVANCE_BANDS.includes(ctx.causal.bands.public_legitimacy)) branches.push('legitimacy');
-  if (GRIEVANCE_BANDS.includes(ctx.capacities.capacities.food_production.band)) branches.push('food');
+  // R24-A2 (R24c): the food grievance fires where the fare band says people go short, or (the price lines alone) where
+  // production does while the page prints the place fed
+  if (GRIEVANCE_BANDS.includes(fareBandOf(s, ctx)) || GRIEVANCE_BANDS.includes(ctx.capacities.capacities.food_production.band)) branches.push('food');
   if (atomHolds('uprising', facts) === true) branches.push('uprising');
 
   const house = houseFinder(s);
   const parts = [];
   for (const branch of branches) {
-    const eligible = withGovernment(filterDeclared(COMMONER_RESENTMENTS[branch], { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
+    // R24-A2: where the page prints the place fed, the food grievance keeps only the price lines (food bought in is dearer)
+    const pool = branch === 'food' && !GRIEVANCE_BANDS.includes(fareBandOf(s, ctx))
+      ? COMMONER_RESENTMENTS.food.filter((l) => PRICE_ONLY_FOOD_GRIEVANCES.has(l.id)) : COMMONER_RESENTMENTS[branch];
+    const eligible = withGovernment(filterDeclared(pool, { facts, poolId: `dailyLife.commoner_resentments.${branch}`, surface: 'dailyLife' }), s);
     const said = sayDeclared(pickNameable(s, eligible, 'commoner_resentments', branch, house, ctx.stated), house, refs);
     if (!said) continue;
     const cited = GRIEVANCE_REFS[branch];
@@ -717,7 +772,8 @@ function outsiderParts(s, ctx, stated) {
     break;
   }
 
-  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => STRAINED_BANDS.includes(ctx.capacities.bands[n]));
+  // R24-A2: the food lens is strained as the fare band says (the band the page prints, where it prints the place fed)
+  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => STRAINED_BANDS.includes(n === 'food_production' ? fareBandOf(s, ctx) : ctx.capacities.bands[n]));
   const strained = CAPACITY_NAMES.filter((n) => STRAINED_BANDS.includes(ctx.capacities.bands[n])).length;
   /** @type {Array<{ branch: keyof typeof OUTSIDER_IMPRESSIONS, lens: string|null, lines: ReadonlyArray<{ id: string, text: string }> }>} */
   const options = [];
