@@ -1,0 +1,14 @@
+dp-village-50	H3	sickHouse=false	Healing@Priest (resident)
+dp-village-103	H7	sickHouse=false	Healing@Priest (resident)
+dp-village-124	H2	sickHouse=false	Basic wound care@Midwife; Healing@Priest (resident); Herbal remedies@Midwife
+dp-village-136	H2	sickHouse=false	Basic wound care@Midwife
+dp-town-28	H9	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary (established)
+dp-town-109	H3	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary (established)
+dp-town-144	H7	sickHouse=false	Herbal remedies@Apothecary (established)
+dp-city-3	H7	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-28	H8	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-36	H3	sickHouse=false	Herbal remedies@Apothecary district
+dp-city-71	H9	sickHouse=false	Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-91	H3	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-140	H2	sickHouse=false	Herbal remedies@Apothecary district
+TOTAL 13

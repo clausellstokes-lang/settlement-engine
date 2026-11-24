@@ -1,0 +1,63 @@
+## Healing (1)
+  L1232  Priest (resident)  p=0.7 on=true needs=["magic"]  desc="Divine healing magic for the sick and injured."
+## Healing (nature) (1)
+  L513  Druid Circle  p=0.6 on=false needs=["magic"]  desc="Wounds closed and sickness lifted by magic. Slower than divine."
+## Higher healing (1)
+  L1555  Major monasteries (5-10)  p=0.5 on=false needs=["magic"]  desc="More advanced divine healing from senior clerics."
+## Basic wound care (1)
+  L437  Midwife  p=0.9 on=true needs=[]  desc="Clean wounds, set minor fractures, reduce fever."
+## Medical care (basic) (1)
+  L104  Church/Temple  p=0.6 on=true needs=[]  desc="Herbalism, prayer healing"
+## Medical treatment (1)
+  L136  Hospital  p=1 on=true needs=[]  desc="Care for sick and injured"
+## Medical consultation (1)
+  L734  Apothecary district  p=0.6 on=false needs=[]  desc="Multiple qualified apothecaries offering second opinions and specialist advice."
+## Surgery (1)
+  L137  Hospital  p=0.6 on=true needs=[]  desc="Basic surgical procedures"
+## Surgical procedures (1)
+  L1095  Major hospital  p=1 on=true needs=[]  desc="Operations for injuries, tumours, and structural problems. Survival rates variable."
+## Herbal remedies (4)
+  L438  Midwife  p=0.8 on=true needs=[]  desc="Tinctures and poultices for common ailments."
+  L726  Apothecary (established)  p=1 on=true needs=[]  desc="Tinctures, poultices, and dried herbs for common ailments."
+  L732  Apothecary district  p=1 on=true needs=[]  desc="Wholesale and retail herbs, tinctures, and prepared medicines."
+  L1433  Apothecary  p=1 on=true needs=[]  desc="Dried herbs, tinctures, and simple remedies for common ailments."
+## Healing herbs (1)
+  L1547  Monastery  p=0.8 on=true needs=[]  desc="Herbal remedies from the monastic garden for common ailments."
+## Herbal medicines (1)
+  L506  Grove Shrine  p=0.8 on=true needs=[]  desc="Remedies from the grove's plants."
+## Herbalism and healing (1)
+  L1139  Monastery or friary  p=0.5 on=false needs=[]  desc="Monastic herb gardens and healing knowledge serve the local population."
+## Fever and illness (1)
+  L1285  Small hospital  p=0.8 on=true needs=[]  desc="Treat common diseases and fevers with the knowledge available."
+## Remove minor disease (1)
+  L1619  Healer (divine, 1st level)  p=0.6 on=false needs=[]  desc="Treat common illnesses through divine intervention."
+## Emergency treatment (1)
+  L1040  Hospital network  p=1 on=true needs=[]  desc="Rapid response to injuries, accidents, and sudden illness."
+## Wound closing (1)
+  L1617  Healer (divine, 1st level)  p=1 on=true needs=[]  desc="Basic divine healing. Closes cuts, reduces fever, eases pain."
+## Wound treatment (1)
+  L1284  Small hospital  p=1 on=true needs=[]  desc="Clean, stitch, and dress wounds. Prevent infection where possible."
+## Specialist care (1)
+  L1041  Hospital network  p=0.8 on=true needs=[]  desc="Referral to physicians with expertise in specific conditions."
+## Specialist physicians (1)
+  L1096  Major hospital  p=0.9 on=true needs=[]  desc="Physicians specialised in specific conditions, diseases, and treatments."
+## Recovery wards (1)
+  L1097  Major hospital  p=0.8 on=true needs=[]  desc="Long-term wards for patients recovering from illness or surgery."
+## Long-term recovery (1)
+  L1042  Hospital network  p=0.7 on=false needs=[]  desc="Extended wards for patients requiring prolonged treatment."
+## Quarantine (1)
+  L138  Hospital  p=0.8 on=true needs=[]  desc="Isolate contagious diseases"
+## Antitoxins (1)
+  L1648  Dungeon delving supply district  p=0.5 on=false needs=[]  desc="Prepared antidotes for common dungeon poisons."
+## Poison antidotes (1)
+  L729  Apothecary (established)  p=0.4 on=false needs=[]  desc="Prepared antidotes for known poisons. Kept discreetly."
+## Compound medicines (1)
+  L1434  Apothecary  p=0.8 on=true needs=[]  desc="Prepared medicines for fever, pain, and infection."
+## Medicines and compounds (1)
+  L727  Apothecary (established)  p=0.9 on=true needs=[]  desc="Prepared medicines for fever, pain, infection, and chronic conditions."
+## Specialist compounds (1)
+  L733  Apothecary district  p=0.8 on=true needs=[]  desc="Rare medications and treatments available through district-wide sourcing."
+## Birth assistance (1)
+  L436  Midwife  p=1 on=true needs=[]  desc="Experienced midwifery. Available day and night."
+## Midwifery (1)
+  L1286  Small hospital  p=0.9 on=true needs=[]  desc="Assist with difficult births and postnatal complications."

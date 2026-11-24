@@ -1,0 +1,39 @@
+== READ-24/records.jsonl
+   3 adequate | stored Deficit — Active Famine | shown Deficit — Active Famine
+   1 adequate | stored Import-Dependent | shown Import-Dependent
+   1 adequate | stored Pressured | shown Pressured
+   7 adequate | stored Secure | shown Pressured(shown)
+ 429 adequate | stored Secure | shown Secure
+   1 collapsed | stored Deficit | shown Deficit
+  15 critical | stored Deficit | shown Deficit
+   1 critical | stored Deficit — Active Famine | shown Deficit — Active Famine
+   1 critical | stored Import-Dependent | shown Import-Dependent
+   1 critical | stored Secure | shown Pressured(shown)
+  38 critical | stored Secure | shown Secure
+   4 strained | stored Deficit | shown Deficit
+   6 strained | stored Deficit — Active Famine | shown Deficit — Active Famine
+   1 strained | stored Import-Dependent | shown Import-Dependent
+   3 strained | stored Pressured | shown Pressured
+  11 strained | stored Secure | shown Pressured(shown)
+ 159 strained | stored Secure | shown Secure
+   1 surplus | stored Deficit — Active Famine | shown Deficit — Active Famine
+   5 surplus | stored Secure | shown Pressured(shown)
+ 212 surplus | stored Secure | shown Secure
+== READ-24/records-visitor.jsonl
+   3 adequate | stored Deficit — Active Famine | shown Deficit — Active Famine
+  16 adequate | stored Pressured | shown Pressured
+  59 adequate | stored Secure | shown Pressured(shown)
+ 320 adequate | stored Secure | shown Secure
+   9 critical | stored Deficit | shown Deficit
+  11 critical | stored Deficit — Active Famine | shown Deficit — Active Famine
+  22 critical | stored Secure | shown Pressured(shown)
+  32 critical | stored Secure | shown Secure
+   5 strained | stored Deficit | shown Deficit
+  20 strained | stored Deficit — Active Famine | shown Deficit — Active Famine
+   1 strained | stored Import-Dependent | shown Import-Dependent
+  19 strained | stored Pressured | shown Pressured
+  65 strained | stored Secure | shown Pressured(shown)
+ 136 strained | stored Secure | shown Secure
+   6 surplus | stored Pressured | shown Pressured
+   7 surplus | stored Secure | shown Pressured(shown)
+ 169 surplus | stored Secure | shown Secure

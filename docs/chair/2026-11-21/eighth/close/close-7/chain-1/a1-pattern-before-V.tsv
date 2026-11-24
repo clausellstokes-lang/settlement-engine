@@ -1,0 +1,27 @@
+dp-village-3	H9	sickHouse=false	Herbal remedies@Apothecary
+dp-village-33	H3	sickHouse=false	Healing@Priest (resident)
+dp-village-53	H8	sickHouse=false	Healing@Priest (resident)
+dp-village-59	H9	sickHouse=false	Healing@Priest (resident)
+dp-village-83	H7	sickHouse=false	Basic wound care@Midwife; Healing@Priest (resident)
+dp-village-124	H3	sickHouse=false	Herbal remedies@Midwife
+dp-village-130	H9	sickHouse=false	Healing@Priest (resident)
+dp-town-11	H9	sickHouse=false	Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-town-24	H8	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary (established)
+dp-town-39	H9	sickHouse=false	Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-town-48	H2	sickHouse=false	Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-town-58	H9	sickHouse=false	Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-town-64	H9	sickHouse=false	Herbal remedies@Apothecary (established)
+dp-town-91	H2	sickHouse=false	Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-town-109	H3	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary (established); Medicines and compounds@Apothecary (established)
+dp-city-18	H9	sickHouse=false	Herbal remedies@Apothecary district
+dp-city-21	H2	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-29	H2	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-62	H3	sickHouse=false	Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-70	H3	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-city-89	H2	sickHouse=false	Basic wound care@Midwife
+dp-metropolis-38	H3	sickHouse=false	Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-metropolis-80	H3	sickHouse=false	Herbal remedies@Apothecary district
+dp-metropolis-109	H9	sickHouse=false	Herbal remedies@Apothecary district; Specialist compounds@Apothecary district
+dp-metropolis-114	H7	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district
+dp-metropolis-133	H9	sickHouse=false	Basic wound care@Midwife; Herbal remedies@Apothecary district
+TOTAL 26
