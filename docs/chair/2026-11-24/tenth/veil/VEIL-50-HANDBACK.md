@@ -36,5 +36,24 @@ RUNS (scripts on this branch, `docs/chair/2026-11-24/tenth/veil/v50/`):
   `tests/security` whole on the trial join, classed by VEIL-43's `fails.mjs` against RED-AT-LINE.tsv (point 113). Out
   `/var/tmp/v50/out/q2/`.
 
-NEXT: read q1's tables and q2's lists; write `VEIL-50-PLAN.md` beside this file; one message to the chair (<= 400 words, two
-tables); WAIT FOR THE RULING.
+- `q1b.sh` (q1's corrected steps: wd from the TRIAL JOIN's tree, whose veil source and SQL are byte-equal to the tip's: wd imports
+  the line's Daily Life file; um from VEIL-44's MAP-COVERT copy at 6edc79094, `/home/user/wt/i44`: d71a3ee44's imports an R4-IDS
+  file). `q3.sh`: VEIL-41's ppkey (the stored prose's key at the server's doors), tip-born and lit-born.
+
+STATE (20:2x UTC):
+- (c) DONE, CONFIRMED (q2, 18:14-19:28): the trial join's reds = the old join's, except VS1 gone (PIN-3) and `rosterChoiceInversion`
+  VR26 x2 NEW (reader row 15, lit). Config clean after the whole runs (COMMON-EIGHTH 15 (d)).
+- (b) SO FAR, CONFIRMED: um tip-born: map member and map import serve the covert copy at Reveal off 21 + 21 reads (7 places x 3
+  markers), other doors 0; master-born 0 (no covert tie stored); lit-born 13 + 13 (5 places). wd lit-born: one path,
+  `powerStructure.factions[].desc`, 372 reads, 3 places, every door; ids 0. prose (twin) tip-born: 6 registered rows
+  (`power.recentConflict` withheld always, 131 of 140, 2,620 reads; ...). Master-born documents carry no `publicProse` (0 of 140).
+  `npc_power_*` ids: 71 of 140 today-born documents, none naming a power the veil withholds. WAITING: wd tip-born, wd
+  master-born, ppkey tip and join.
+- THE CHAIR (20:09): the draft plan read whole; leanings: THREE seats beside me (51: STORED-PROSE then R5-DESC; 52: the doors; 53:
+  the join's work in parallel); RIVAL rides unit 4 only if its arms pass first time; the three gaps measured (copies of wd with
+  leave); the bar gains the anon arm and THE WINDOW (master's pages against the new reads); the reader and the chair's read of 212
+  and 213 before the owner's hand. The three draft start messages are pushed (`DRAFT-START-VEIL-5{1,2,3}.txt`). Point 114: the
+  grants fix landed (line f9531eb3a).
+
+NEXT: fill (b) when wd and ppkey end; ONE message to the chair (<= 400 words, two tables), saying which leaning (b) contradicts;
+WAIT FOR THE RULING. My mark: 345,672 by the chair's read at 19:14 UTC; I pass 620,000 inside phase 1: a successor at a unit's end.
