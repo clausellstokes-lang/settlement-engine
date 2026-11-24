@@ -67,10 +67,13 @@ function born(seed) {
 const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-metropolis-31', 'the council knows it', 'and the hall knows it.'],
   ['r2r-hamlet-15', 'fund the council', 'they set prices and fund the hall.'],
-  ['r2r-town-40', 'council access', 'expect access to the hall in return.'],
+  // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): U6 closes the holder's claim at its own sentence, so the
+  // merchants' claim ends at the civic works (was "expect access to the hall in return.")
+  ['r2r-town-40', 'council access', 'Established merchant community; fund civic works.'],
   // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, P31 (4), a declared move): 18/16/15 cross a rung, so the third power takes
-  // the band's own line in place of the level line
-  ['r2s-famine-city-2', 'every council vote', 'They are always at the table, but cannot set their own terms.'],
+  // the band's own line in place of the level line. The lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): the third
+  // power is the seat's holder lit, so it takes U6's holder standing (was "They are always at the table, but cannot set their own terms.")
+  ['r2s-famine-city-2', 'every council vote', 'They are the ones who sit in the Merchant oligarchy, and its word is theirs.'],
   ['r2r-town-0', 'access to the hall', 'expect council access in return.'], // KEEP: a Corrupt Council sits
 ]);
 /** @type {Record<string, any>} */

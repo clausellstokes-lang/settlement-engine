@@ -96,7 +96,9 @@ describe('PAGE-1 MAGIC: where reliance and capability sit apart, the Overview sa
     }
     expect(failures).toEqual([]);
     // The liveness anchor: B measured 26 of the 300 two steps or more apart (f3.out.txt §c); the guard saw them all.
-    expect(apart).toBe(26);
+    // RE-MEASURED 2026-11-23 (THE FLIP, both birth laws lit): 26 -> 29, read by this test on the lit births; the failures
+    // list above stays empty.
+    expect(apart).toBe(29);
     expect(lined).toBe(apart);
   }, 600_000);
 

@@ -24,13 +24,21 @@ function born(seed) {
 const SAID = 'Holds the title; the decisions that matter are made by';
 /** [town, the power the note must not name as deciding] (the pair holds a relation row) */
 const ROWS = /** @type {Array<[string, string]>} */ ([
-  ['r2r-village-1', 'Merchant Guilds'],
-  ['r2r-village-9', 'Religious Authorities'],
-  ['r2r-village-41', 'Religious Authorities'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (A JUDGEMENT, AT ANOTHER SIZE): r2r-village-1's governing note lit carries no claim, and no r2r-village of
+  // 0..799 (nor hamlet, thorp or town of 0..199) holds the Merchant Guilds as the decider beside a relation row of the pair; the
+  // lowest r2r-city that does is city-51 (alone of 0..199; the Arcane Council governs)
+  ['r2r-city-51', 'Merchant Guilds'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): the governing powers of r2r-village-9 and -41 lit carry no claim on their note; the two lowest r2r-villages
+  // whose governing note carries it, with the Religious Authorities the decider and a relation row of the pair, are village-28
+  // and -29 (28 29 34 50 105 150 168 172 of 0..172)
+  ['r2r-village-28', 'Religious Authorities'],
+  ['r2r-village-29', 'Religious Authorities'],
 ]);
 /** KEEP: [town, the deciding power still named] (no relation row of the pair) */
 const KEEP = /** @type {Array<[string, string]>} */ ([
-  ['r2r-thorp-25', "People's Council"],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2r-thorp-25's governing note lit carries no claim; the lowest r2r-thorp whose note carries it, with the
+  // People's Council the decider and no relation row of the pair, is thorp-264 (alone of 0..799)
+  ['r2r-thorp-264', "People's Council"],
   ['r2r-town-5', "People's Council"],
 ]);
 

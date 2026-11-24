@@ -1,0 +1,17 @@
+{
+ "before": {
+  "rows": 247,
+  "exists": 247,
+  "anon": 135,
+  "authenticated": 135,
+  "byok_keys": 0
+ },
+ "after_twice": {
+  "rows": 247,
+  "exists": 247,
+  "anon": 2,
+  "authenticated": 2,
+  "byok_keys": 0
+ },
+ "public_functions_service_role_cannot_execute_after": 47
+}

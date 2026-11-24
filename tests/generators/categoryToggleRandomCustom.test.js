@@ -35,7 +35,7 @@ describe('[generators-pipeline-4] category disables reach generation for random 
     const withToggle = criminalTotal({ _categoryToggles: { 'all::Criminal': false } }, base, 16);
     expect(without).toBeGreaterThan(0);        // the toggle is non-vacuous
     expect(withToggle).toBe(0);                // disable now honoured (was ignored pre-fix)
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.4 s lit in the final census at c1128c8f6; about 15.4 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   test('custom settType: the resolved-tier key suppresses criminal institutions', () => {
     // pop 3000 resolves to town; the wizard would write `town::Criminal`.

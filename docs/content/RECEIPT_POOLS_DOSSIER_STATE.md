@@ -3014,8 +3014,8 @@ supplies the ancestry.
 10. `[ledger · watch · no threat · crisis: any · no mercenary · tier: ≥ village · law: = collapsed]` {settlement} has no wall and no soldiers; its watch does not keep the peace in its own streets, and would be no answer to an army.
 
 **`Internal Security`: full legal chain (court AND prison)**
-1. `[ledger · court · court sits · prison · law: > collapsed]` Offenders at {settlement} are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
-2. `[street · watch · court · prison · law: > collapsed]` A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+1. `[ledger · court · court sits · prison · law: > collapsed]` Offenders brought in at {settlement} are heard and held, and each case is written down, so the accused can expect a hearing, not a beating.
+2. `[street · watch · court · prison · law: > collapsed]` A case that reaches the court at {settlement} gets a hearing, and it is settled there rather than by the watch's temper.
 3. `[visitor · court · court sits · prison · law: > collapsed]` Bring a complaint at {settlement} and there is a court to hear it and a cell for whoever it finds against.
 4. `[visitor · court · prison · law: = collapsed]` {settlement} has a court and a cell, but with the law as it stands, few complaints brought there are ever heard.
 
@@ -3067,7 +3067,7 @@ supplies the ancestry.
 6. `[ledger · prosperity: ≥ prosperous]` {settlement} is well off, but little of its wealth is set aside for its defence, and a long crisis would soon outrun what is.
 
 **`Economic Survival`: `CRITICAL`** {colour}
-1. `[ledger]` {settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
+1. `[ledger]` {settlement} cannot fund a new response to trouble, and any sustained pressure exhausts what it has almost at once.
 2. `[unfolding]` {settlement} has no money to meet trouble, so each misfortune goes unmended and leaves the town weaker for the next.
 3. `[street]` The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
 
@@ -3094,7 +3094,7 @@ in about two towns in five that keep a force.
 4. `[unfolding]` {settlement}'s defenders are a little worse off for the trades behind them, which are not on a sure footing.
 
 **CHAIN: food trades working** {colour}
-1. `[ledger · no crisis: under_siege · no crisis: famine]` {settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.
+1. `[ledger · no crisis: under_siege · no crisis: famine]` {settlement}'s food trades are working, and what they put by would give it something to fall back on if it were cut off.
 2. `[street · no crisis: under_siege]` The food trades at {settlement} are working, which would matter a great deal if the town were ever cut off.
 3. `[unfolding · no crisis: under_siege]` As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.
 4. `[ledger · crisis: under_siege · food: > famine]` {settlement} is cut off now, and what its food trades put by before the siege is helping to keep the town fed.
@@ -7122,7 +7122,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 7. `[ledger · no market · no crisis: under_siege]` {settlement} keeps no market of any kind, so no stall fee or market due is taken there.
 8. `[visitor · no market · no crisis: under_siege]` A visitor with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.
 9. `[counterforce · no market · no crisis: under_siege]` {settlement} keeps no market and no market day; goods change hands whenever one neighbour has something another wants.
-10. `[threshold · no market · no crisis: under_siege]` Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.
+10. `[threshold · no market · no crisis: under_siege]` There is no market at {settlement} to gather its trade in one place, so a buyer deals with each seller at their own door.
 11. `[street · no market · no crisis: under_siege]` {settlement} keeps no market, so nobody here speaks of going to one.
 12. `[unfolding · no market · no crisis: under_siege]` {settlement} has no market, and trades in a small way: a sack here, a bundle there, carried between neighbours.
 

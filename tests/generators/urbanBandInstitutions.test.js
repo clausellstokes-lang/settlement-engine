@@ -109,7 +109,7 @@ describe('G2 — the row guards hold at generation', () => {
     const gated = towns.filter(s => names(s).has('Gates (if walled)'));
     expect(gated.length, 'anti-vacuity').toBeGreaterThan(0);
     for (const s of gated) expect(names(s).has('Town walls'), s.name).toBe(true);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 10.5 s lit in the final census at c1128c8f6; about 19.3 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('no post relay station stands without a coaching inn, and relay stations exist', () => {
     const all = [...settlements('town', 80), ...settlements('city', 120)];

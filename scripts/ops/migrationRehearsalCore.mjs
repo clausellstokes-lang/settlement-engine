@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 212;
+export const MIGRATION_TRAIN_REPO_HEAD = 211;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -841,70 +841,34 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
     ]),
   }),
+  // GRANTS-1 (the tenth chair's ruling G1, 2026-11-24): 211 closes what a visitor or a signed-in user can reach.
   Object.freeze({
-    id: 'server-side-share-veil',
+    id: 'close-visitor-reach',
     from: 211,
     to: 211,
-    purpose: '211 — the server-side share veil (COHERENCE-VEIL, the chair\'s rulings of 2026-11-12): the veil a DM '
-      + 'sets by hand is applied before the response leaves. New helper functions _gallery_veil* (the SQL twin of '
-      + 'galleryVeil.js\'s resolver and applier); four reads restated as their previous bodies plus the veil — '
-      + 'get_gallery_dossier (147; a snapshot share is served its frozen copy through the same projection, and the '
-      + 'live row is not sent), get_unlisted_dossier (208 as amended; the sanitiser runs once), get_gallery_map (088) '
-      + 'and import_gallery_dossier (131). gallery_member_overrides travels as an allowlist: members\' booleans and the '
-      + 'served marker {v: 2, mode, at, groupings}. No table, column, constraint, policy or row. DEPLOYMENT remains '
-      + 'the owner\'s manual act after 204 to 210 (`supabase db push` plus the applied-head bump in that same act).',
+    purpose: '211 — close what a visitor or a signed-in user can reach that the migrations meant for the server '
+      + 'alone (GRANTS-1, ruling G1). PART A revokes execute, by exact signature, from public, anon and authenticated '
+      + 'on every server-only or no-role function (and _audit_action), granting service_role again where a migration '
+      + 'granted it. PART C revokes UPDATE on public.profiles from anon and authenticated and grants it to '
+      + 'authenticated on four columns only (avatar_url, email_notifications, model_preference, '
+      + 'public_identity_opt_in). PART D adds a SECURITY INVOKER guard function and two triggers on settlements and '
+      + 'saved_maps that refuse anon and authenticated a change to the columns the server owns. PART B (last) revokes '
+      + 'the migrating role\'s default EXECUTE on new functions in schema public from anon and authenticated. No row '
+      + 'is written or deleted. DEPLOYMENT remains the owner\'s manual act (`supabase db push` plus the applied-head bump).',
     rollback: Object.freeze({
       mode: 'forward-only',
       reason: [
         FORWARD_ONLY_REASON,
-        'Its reversal is executable: supabase/rollback/211_server_side_share_veil.down.sql, run last in, first '
-        + 'out (undo 211 before 210, 207, 206, 205 and 208\'s set), recreates the four reads at their previous '
-        + 'bodies and drops every _gallery_veil* function; tests/security/galleryVeilCures.pglite.test.js '
-        + 'rehearses it against a chain stopped at 210. Nothing is destroyed on reversal; the new client draws a '
-        + 'v 1 share as before.',
+        'This wave tightens grants; its own @rollback annotation spells the by-hand reversal per function '
+        + '(grant execute ... to anon, authenticated), which is why 211 classifies as documented-manual-reversal '
+        + 'rather than taking the wave policy. Nothing is destroyed on reversal: no row is written or deleted.',
       ].join(' '),
     }),
     expectedObjects: Object.freeze([
-      Object.freeze({ kind: 'function', name: '_gallery_veil' }),
-      Object.freeze({ kind: 'function', name: '_gallery_veil_resolve' }),
-      Object.freeze({ kind: 'function', name: '_gallery_veil_apply' }),
-      Object.freeze({ kind: 'function', name: '_gallery_veil_served' }),
-      Object.freeze({ kind: 'function', name: 'get_gallery_dossier' }),
-      Object.freeze({ kind: 'function', name: 'get_unlisted_dossier' }),
-    ]),
-  }),
-  Object.freeze({
-    id: 'share-veil-later-cures',
-    from: 212,
-    to: 212,
-    purpose: '212 — the share veil\'s later cures (COHERENCE-VEIL-6, moved out of 211 by COHERENCE-VEIL-7): 211 is frozen '
-      + 'at the bytes the security review cleared to be applied alone (333b33973, sha256 eface6d0…0be01), and what the '
-      + 'lane wrote into 211 after it is carried here unchanged, statement for statement: the second homes (a tie\'s '
-      + 'sentences under prominentRelationship and in pressureSentence, a tension in history.siegeNarrative, a house in '
-      + 'the defence lists, a hidden house\'s name in the economy\'s chains and the simulation trace, an appearance in '
-      + 'the impression) go with the eye that governs their source; the custom-content library leaves a Reveal-DM '
-      + 'share\'s gallery read and import; a person switched off is reduced in every power roster copy. Ten new '
-      + '_gallery_veil* helpers; _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, '
-      + 'get_gallery_dossier and import_gallery_dossier restated as 211\'s statements plus the cure. It needs 211 '
-      + 'before it. No table, column, constraint, policy or row. DEPLOYMENT remains the owner\'s manual act after 204 to '
-      + '211 (`supabase db push` plus the applied-head bump in that same act).',
-    rollback: Object.freeze({
-      mode: 'forward-only',
-      reason: [
-        FORWARD_ONLY_REASON,
-        'Its reversal is executable: supabase/rollback/212_share_veil_later_cures.down.sql, run last in, first out '
-        + '(undo 212 before 211), recreates the five functions at 211\'s statements and drops the ten helpers by '
-        + 'signature; tests/security/galleryVeilCures.pglite.test.js rehearses it against a chain stopped at 211. '
-        + 'Nothing is destroyed on reversal; the second copies, the custom-content library and the roster copies are '
-        + 'sent again as at 211.',
-      ].join(' '),
-    }),
-    expectedObjects: Object.freeze([
-      Object.freeze({ kind: 'function', name: '_gallery_veil_second_homes' }),
-      Object.freeze({ kind: 'function', name: '_gallery_veil_roster_splice' }),
-      Object.freeze({ kind: 'function', name: '_gallery_apply_member_overrides' }),
-      Object.freeze({ kind: 'function', name: 'get_gallery_dossier' }),
-      Object.freeze({ kind: 'function', name: 'import_gallery_dossier' }),
+      Object.freeze({ kind: 'function', name: '_surveyor_byok_secret' }),
+      // The rehearsal's presence query knows tables and functions only (expectedObjectPresenceSql):
+      // part D's two triggers are not expressible here; their function stands for them.
+      Object.freeze({ kind: 'function', name: '_guard_server_owned_columns' }),
     ]),
   }),
 ]);

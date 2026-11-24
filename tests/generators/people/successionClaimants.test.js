@@ -92,9 +92,11 @@ function keeperMissesOf(s, key) {
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 describe('COHERENCE-POWERS-4 (F3) — a claimant is the succession crisis\'s own cast', () => {
-  it('the review\'s two towns: each claimant is a minted person, printed by name on the seat row, never the leaderless line', () => {
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): rvf-succession_void-city-4 (Grudino) lit raises one claimant, Noble Claimant (Senior Line); the lowest
+  // rvf-succession_void-city after -6 whose roster holds both lines is -23 (two-claimant cities of 0..59: 6 23 36 39)
+  it('the review\'s city -6 and city -23: each claimant is a minted person, printed by name on the seat row, never the leaderless line', () => {
     const misses = [];
-    for (const key of ['rvf-succession_void-city-4', 'rvf-succession_void-city-6']) {
+    for (const key of ['rvf-succession_void-city-23', 'rvf-succession_void-city-6']) {
       const s = born('city', key);
       const claimants = (s.powerStructure?.factions || []).filter((f) => /claimant/i.test(f.faction || '')).map((f) => f.faction);
       expect(claimants).toEqual(['Noble Claimant (Senior Line)', 'Noble Claimant (Reform Line)']);

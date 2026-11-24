@@ -45,7 +45,10 @@ const OUTSIDE = {
   // "semi-organized") took this town's structure from organized; it stands no criminal power (a smuggling network, an
   // underground network, "Multiple criminal factions"), so the none rung prints its first line, true beside rival rings
   // (POWERS-14), and the case still reads that no line under an infiltration says the hall decides for itself
-  'r2s-infiltrated-metropolis-3': ['Vulnerable (decisions shaped from outside)', 'semi-organized'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): r2s-infiltrated-metropolis-3's hall lit stands at the adversarial
+  // rung; the lowest r2s-infiltrated-metropolis shaped from outside whose hall stands at none, beside rival rings
+  // (semi-organized), is metropolis-6 (6 9 10 13 19 of 200; 15 holds a syndicate)
+  'r2s-infiltrated-metropolis-6': ['Vulnerable (decisions shaped from outside)', 'semi-organized'],
 };
 const GUARD = ['r2r-city-0', 'r2r-town-44']; // calm syndicate towns: the line still clears the three
 

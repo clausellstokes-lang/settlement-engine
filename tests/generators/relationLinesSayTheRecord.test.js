@@ -56,10 +56,16 @@ function born(seed) {
 /** [census town, must NOT print, prints instead] (the town the reader read, or a town of the 720 that printed it at the base) */
 const BIRTHS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-3', "Headman's Authority gives the orders and Military/Guard carries them out", "The Headman's Authority gives the orders and the Guard carries them out"], // NAMES-1 (CN1): the article
-  ['r2r-hamlet-5', "the commander's agreement", 'is now about as strong as'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit; the seat lane's U6 and fortune's figures): r2r-hamlet-5's guard row
+  // lit is the dependent row ("each needs the other to stay strong"); the lowest r2r-hamlet whose guard row stands at
+  // "about as strong" is hamlet-10 (10 27 115 of 200)
+  ['r2r-hamlet-10', "the commander's agreement", 'is now about as strong as'],
   // RE-KEYED BY IDENTITY 2026-11-15 (TAIL-POWERS-B-4, P31 (5), a declared move): under an occupation no taxes are said
   ['r2s-occupied-town-2', 'keeps order and collects the taxes', 'The Guild Council holds the seat; the Religious Authorities tell people'], // NAMES-1 (CN1): the article
-  ['r2r-metropolis-39', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit; the seat lane's U6 and fortune's figures): r2r-metropolis-39's roster
+  // lit holds no Noble Houses; the lowest r2r-metropolis whose Suppressed Noble Houses hold a row with
+  // the seat is metropolis-2 (2 12 14 32 of 200)
+  ['r2r-metropolis-2', 'Noble Houses live under the rule of', 'Noble Houses still have their titles'],
 ]);
 /** @type {Record<string, any>} */
 const births = {};

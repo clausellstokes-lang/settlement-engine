@@ -43,8 +43,11 @@ describe('the war-contracts secret needs a town the war made rich', () => {
       expect(holders(s), `${seed}: carries no such secret`).toEqual([]);
     }), 'a town below comfortable carries no such secret');
   });
-  it('r2s-wartime-city-0: a comfortable town keeps it', () => {
-    const s = born('r2s-wartime-city-0');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law on), r2s-wartime-city-0 reads
+  // Moderate. Re-scanned r2s-wartime-city-0..99 lit for the case's own predicate (the label Comfortable): 6 13 53 59 ...; 6
+  // is the first (was r2s-wartime-city-0)
+  it('r2s-wartime-city-6: a comfortable town keeps it', () => {
+    const s = born('r2s-wartime-city-6');
     expect(s.economicState.prosperity).toBe('Comfortable');
     expect(holders(s).length).toBe(1);
   });

@@ -158,8 +158,13 @@ describe('defenseWordsFindings', () => {
 });
 
 describe('the Defense tab says only what the place has', () => {
-  it('the charter-hall hamlet no longer prints "garrison pay" beside "No walls or garrison"', () => {
-    const s = world('defense-hamlet-1');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-hamlet-1 stands Prosperous and its purse
+  // funds the hall in full, so no note is written. The case's own predicate (a charter hall, no walls and no garrison, and
+  // the purse short, keepOfRecord(...).funded under 1) holds on no defense-hamlet of 1,000 lit (56 charter-only hamlets, every
+  // one standing Comfortable or Prosperous) and no thorp of 400 seats a charter hall, so the row takes the next size up that
+  // holds it: defense-village-16 (Moderate), the lowest of 400 (16 204), born here beside the corpus (was defense-hamlet-1)
+  it('the charter-hall village (defense-village-16) no longer prints "garrison pay" beside "No walls or garrison"', () => {
+    const s = born('village', 16);
     const row = deriveDefenseReadiness(s).find((r) => r.label === 'Invasion & War');
     // anchored: the next line pins the same note's whole text
     expect(row.fundingNote).not.toMatch(/garrison pay/);
@@ -176,8 +181,11 @@ describe('the Defense tab says only what the place has', () => {
   // so its gate stands at the identity and writes no note. No place of this corpus has a palisade for its one
   // defence below Comfortable standing; the first of its seed family that does is defense-thorp-20
   // (Moderate; its roster names it "Palisade"), born here beside the corpus.
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, defense-thorp-20 stands Comfortable, so its gate
+  // stands at the identity. Re-scanned defense-thorp-0..199 lit for the case's own predicate (a palisade its one defence, and
+  // the purse short, keepOfRecord(...).funded under 1): 35 144 154 168; 35 is the first (Moderate; was defense-thorp-20)
   it('a palisade never pays "garrison pay": the note names the palisade', () => {
-    const thorp20 = born('thorp', 20);
+    const thorp20 = born('thorp', 35);
     const row = deriveDefenseReadiness(thorp20).find((r) => r.label === 'Invasion & War');
     expect(defenseFactsOf(thorp20).defenceNames, 'anchored: the palisade is its one defence').toEqual(['Palisade']);
     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the palisade at \d+%$/);

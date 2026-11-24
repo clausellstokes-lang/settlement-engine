@@ -158,14 +158,17 @@ describe('BAR6-POWERS · the chair\'s ruling IT1: the page reads the seat\'s bac
     const town = towns[SEAT_TOWN]; const seat = /** @type {string} */ (seatHouseName(town.institutions));
     const ruler = town.powerStructure.factions.find((/** @type {any} */ f) => f.isGoverning).faction;
     const raw = houseBacksOf(town).get(seat).map((/** @type {any} */ b) => b.faction);
-    expect(raw).toContain('Craft Guilds');
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the seat's house lit backs the ruler and Merchant Guilds,
+    // the ruler's HIGH quarrel (was Craft Guilds); the same town, the same case
+    expect(raw).toContain('Merchant Guilds');
     expect(houseBacksShownOf(town).get(seat).map((b) => b.faction)).toEqual([ruler]);
   });
   it('(KEEP, the chair\'s narrowing of 2026-11-16) a second power the ruler has NO high quarrel with stays on the seat\'s line', () => {
     const town = structuredClone(towns[SEAT_TOWN]); const seat = /** @type {string} */ (seatHouseName(town.institutions));
-    town.powerStructure.conflicts = (town.powerStructure.conflicts || []).filter((/** @type {any} */ c) => !(c.parties || []).includes('Craft Guilds'));
+    // the lit birth's value (THE FLIP, 2026-11-23, both birth laws lit): the high rival is Merchant Guilds (was Craft Guilds)
+    town.powerStructure.conflicts = (town.powerStructure.conflicts || []).filter((/** @type {any} */ c) => !(c.parties || []).includes('Merchant Guilds'));
     expect(houseBacksShownOf(town).get(seat)).toEqual(houseBacksOf(town).get(seat));
-    expect(houseBacksShownOf(town).get(seat).map((b) => b.faction)).toContain('Craft Guilds');
+    expect(houseBacksShownOf(town).get(seat).map((b) => b.faction)).toContain('Merchant Guilds');
   });
   it('(the chair\'s ruling PL1) the power desk is drawn at print only: no generator imports it', () => {
     const importers = execSync("git grep -l -E \"from '[^']*(powerStateProse|dossierStateProse/power\\.generated|powerDeskRead|dossierMounts|printProse)\\.js'\" -- src/generators || true", { encoding: 'utf8' }).trim();

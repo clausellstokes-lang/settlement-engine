@@ -80,18 +80,28 @@ describe('TAIL-TIES-3 batch 1', () => {
   it('NOT (b): no rival claimant on a contested seat; each row says what the condition holds', () => {
     // the alternation's literals, one by one (exactly equivalent); the anchor is the contested rows' own words
     const NOT = ['a rival claims it', 'rivals fight over the seat', 'both sides in the fight for the seat', 'claimant'];
-    const failures = collectSeedFailures(['r2s-plague_onset-thorp-3', 'r2r-village-48', 'r2r-hamlet-32', 'r2r-town-35'], (seed) => {
+    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee): lit, r2r-village-48
+    // (Approved) and r2r-hamlet-32 (Tolerated) are no longer in the contested condition, so no contested row prints there.
+    // Each is re-picked, lit, by the case's own predicate (the writer's condition, `npcStructure.js :: getPrimaryCondition`,
+    // reads 'contested'), the lowest of its family of 200: r2r-hamlet-4; r2r-village-10, the lowest contested village that
+    // also seats a faith card heading the first religious power (the faith's contested row below; village-1, the lowest
+    // contested, seats none). Was r2r-village-48 and r2r-hamlet-32
+    const failures = collectSeedFailures(['r2s-plague_onset-thorp-3', 'r2r-village-10', 'r2r-hamlet-4', 'r2r-town-35'], (seed) => {
       const printed = (town(seed).npcs || []).map((/** @type {any} */ n) => `${n.structuralPosition ?? ''} ${n.activeConstraint ?? ''} ${n.goal?.short ?? ''}`).join(' | ');
       for (const word of NOT) expectAbsentWithAnchor(printed, word, contestedWords(printed), seed); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the contested pools' own words
     });
     expectNoSeedFailures(failures, 'no contested seat names a rival claimant');
-    expect(memberOf('religious__contested__dominant', card('r2r-village-48', 'Santosh Dubey').structuralPosition), 'the faith\'s contested row').toBe(true); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the row is pooled
+    // RE-PICKED BY THE PREMISE (THE FLIP, 2026-11-23): the faith's card of r2r-village-10 (was Santosh Dubey of r2r-village-48)
+    expect(memberOf('religious__contested__dominant', card('r2r-village-10', 'Palnatoke Andersson').structuralPosition), 'the faith\'s contested row').toBe(true); // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the row is pooled
     expect(card('r2r-town-35', 'Roxane Angelos').structuralPosition).toBe("Heads the crew while many doubt the seat's right and those who keep order look elsewhere.");
   });
 
   it('INSTEAD (b): the contested seat-holder still holds the seat on the card, in the condition\'s words', () => {
     // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20): the holder's contested row is pooled; every member opens "Holds the seat"
-    const thecla = card('r2r-thorp-30', 'Thecla Schulz').structuralPosition;
+    // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, r2r-thorp-30 is Tolerated and Prosperous, not in
+    // the contested condition; r2r-thorp-5 is the lowest r2r-thorp of 200 lit in it (the writer's getPrimaryCondition), and
+    // Banbh Ryan its seat-holder's card (was Thecla Schulz of r2r-thorp-30)
+    const thecla = card('r2r-thorp-5', 'Banbh Ryan').structuralPosition;
     expect(thecla).toMatch(/^Holds the seat\b/);
     expect(memberOf('government__contested__dominant', thecla), String(thecla)).toBe(true);
   });

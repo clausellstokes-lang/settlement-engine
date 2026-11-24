@@ -107,8 +107,8 @@ describe('bounded migration rehearsal plan', () => {
     expect(plan.appliedHead).toBe(121);
     // TIER-PARITY-FIX (2026-11-09): written for the MERGED chain — 207 (the allegiance cars) and
     // 208 (the party link) land with their lanes; this lane adds 209 (the Surveyor premium only).
-    expect(plan.repoHead).toBe(212); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's; 211 at COHERENCE-VEIL's; 212 at COHERENCE-VEIL-7's (211 frozen)
-    expect(plan.pendingCount).toBe(91);
+    expect(plan.repoHead).toBe(211); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's; 211 at GRANTS-1's
+    expect(plan.pendingCount).toBe(90);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -140,14 +140,13 @@ describe('bounded migration rehearsal plan', () => {
       [209, 209],
       [210, 210],
       [211, 211],
-      [212, 212],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 91 }, (_, index) => 122 + index),
+      Array.from({ length: 90 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -492,6 +491,17 @@ describe('bounded migration rehearsal plan', () => {
     const publicProseWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 210);
     expect(publicProseWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
     expect(publicProseWave.rollback.note).toMatch(/re-apply 207's body verbatim.*falls silent where the composed blocks stood/i);
+    // ⭐ GRANTS-1 (ruling G1, 2026-11-24): 211 closes visitor reach. Grants (and, by its later parts, column
+    // grants and a guard trigger) only; its own @rollback annotation spells the by-hand reversal.
+    expect(plan.waves.find((wave) => wave.id === 'close-visitor-reach')).toMatchObject({
+      id: 'close-visitor-reach',
+      from: 211,
+      to: 211,
+      expectedObjects: [{ kind: 'function', name: '_surveyor_byok_secret' }, { kind: 'function', name: '_guard_server_owned_columns' }],
+    });
+    const closeReachWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 211);
+    expect(closeReachWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+    expect(closeReachWave.rollback.note).toMatch(/grant execute on function public\.<the same signature> to anon, authenticated/i);
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
     // while 199's whole reversal IS one scripted statement. Both are
@@ -633,7 +643,7 @@ describe('bounded migration rehearsal plan', () => {
       rollbackDirectory: ROLLBACK,
       appliedHead: 200,
     });
-    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 212, pendingCount: 12 });
+    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 211, pendingCount: 11 });
     expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
       ['staff-unlock-surveyor-entitlement', 201, 201],
       ['edit-registry-public-denylist', 202, 202],
@@ -645,8 +655,7 @@ describe('bounded migration rehearsal plan', () => {
       ['party-link-independent-idempotent-veiled', 208, 208],
       ['surveyor-premium-only', 209, 209],
       ['public-prose-text-projection', 210, 210],
-      ['server-side-share-veil', 211, 211],
-      ['share-veil-later-cures', 212, 212],
+      ['close-visitor-reach', 211, 211],
     ]);
     // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
     // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
@@ -696,7 +705,7 @@ describe('bounded migration rehearsal plan', () => {
       migrationDirectory: MIGRATIONS,
       rollbackDirectory: ROLLBACK,
       appliedHead: 150,
-    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, but the ledger says 150/);
+    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, but the ledger says 150/);
   });
 
   it('stages no migration beyond the selected wave boundary', () => {
@@ -706,8 +715,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 212,
-      migrationCount: 212,
+      repoHead: 211,
+      migrationCount: 211,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -829,7 +838,7 @@ describe('clone admission is positive and source-bound', () => {
     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: liveAppliedHead,
-      repoHead: 212,
+      repoHead: 211,
     });
   });
 });

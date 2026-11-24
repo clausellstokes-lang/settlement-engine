@@ -24,12 +24,15 @@ const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const CRISES = ['famine', 'under_siege', 'wartime', 'occupied'];
 const GROUPS = new Set(['BUILT', 'STANDS', 'SUSTAINS', 'GROUND', 'AGAINST', 'LIMIT']);
 
-/** The printed prosperity label at e1b2f9c1f, the tree without this lane's change (measured first). */
+/** The printed prosperity label at e1b2f9c1f, the tree without this lane's change (measured first); since THE FLIP the lit births' labels. */
+// the lit birth's values (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): the fortune law moves the label by design; eight of the
+// sixteen moved (was hamlet-0 Poor, village-0 Struggling, town-0 Moderate, town-2 Moderate, city-1 Prosperous,
+// metropolis-0 Wealthy, metropolis-2 Comfortable, wartime-town-0 Comfortable)
 const PRINTED_AT_BASE = Object.freeze({
-  'v3build-thorp-0': 'Struggling', 'v3build-thorp-1': 'Poor', 'v3build-hamlet-0': 'Poor', 'v3build-hamlet-1': 'Struggling',
-  'v3build-village-0': 'Struggling', 'v3build-town-0': 'Moderate', 'v3build-town-2': 'Moderate', 'v3build-city-0': 'Struggling',
-  'v3build-city-1': 'Prosperous', 'v3build-metropolis-0': 'Wealthy', 'v3build-metropolis-2': 'Comfortable',
-  'v3build-famine-town-0': 'Struggling', 'v3build-under_siege-city-0': 'Struggling', 'v3build-wartime-town-0': 'Comfortable',
+  'v3build-thorp-0': 'Struggling', 'v3build-thorp-1': 'Poor', 'v3build-hamlet-0': 'Comfortable', 'v3build-hamlet-1': 'Struggling',
+  'v3build-village-0': 'Moderate', 'v3build-town-0': 'Poor', 'v3build-town-2': 'Poor', 'v3build-city-0': 'Struggling',
+  'v3build-city-1': 'Moderate', 'v3build-metropolis-0': 'Prosperous', 'v3build-metropolis-2': 'Moderate',
+  'v3build-famine-town-0': 'Struggling', 'v3build-under_siege-city-0': 'Struggling', 'v3build-wartime-town-0': 'Moderate',
   'v3build-occupied-village-0': 'Poor', 'v3build-occupied-city-0': 'Poor',
 });
 
@@ -308,8 +311,14 @@ describe('the martial will (R13, R14)', () => {
 // through its hold. These are the reader's eleven births (REVIEW-UPKEEP-3 willpay.mjs), in the app's own shape, so
 // the corpus MEETS the branch; each is anchored to it (no walls, no standing body, a hired part).
 describe('the martial will is not paid on the hired branch either (W3)', () => {
-  const READER = ['calm-hamlet-9', 'calm-hamlet-14', 'calm-hamlet-28', 'calm-hamlet-33', 'calm-village-1', 'calm-village-5',
-    'calm-village-38', 'wartime-hamlet-33', 'wartime-village-4', 'wartime-village-30'];
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law lifts the purse), calm-hamlet-9,
+  // calm-hamlet-28, calm-village-1, calm-village-38 and wartime-village-30 are paid in full (keep.bought 1), off the branch.
+  // Each is re-picked, lit, by the branch's own anchors (nothing built or standing, a hired part, keep.bought under 1, no
+  // hold, no crisis on the will), never by the equality asserted: the lowest unlisted seed of its own rv2- family (scanned
+  // 0..199, calm-hamlet to 799): calm-hamlet 14 33 56 260; calm-village 5 132 176; wartime-village 4 62
+  // (was calm-hamlet-9, calm-hamlet-28, calm-village-1, calm-village-38, wartime-village-30)
+  const READER = ['calm-hamlet-14', 'calm-hamlet-33', 'calm-hamlet-56', 'calm-hamlet-260', 'calm-village-5', 'calm-village-132',
+    'calm-village-176', 'wartime-hamlet-33', 'wartime-village-4', 'wartime-village-62'];
   /** @type {Array<[string, any]>} */
   const hiredOnly = [];
   beforeAll(async () => {

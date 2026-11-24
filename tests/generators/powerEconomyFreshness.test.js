@@ -348,7 +348,7 @@ describe('bounded final economy -> power reconciliation', () => {
         expect(first.powerIntent).toBeUndefined();
       }
     }
-  });
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.2 s lit in the final census at c1128c8f6; about 15.1 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   test('the freshness assertion fails closed on changed or missing economic input', () => {
     const settlement = generate(

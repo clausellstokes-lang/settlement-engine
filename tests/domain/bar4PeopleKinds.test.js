@@ -62,7 +62,10 @@ const P2_TOWNS = Object.freeze([
 const WARM_COLD_TOWNS = Object.freeze([
   ['r2r-hamlet-15', 'Otgonbayar Ongut|Üljeytü Merkit'],
   ['r2r-village-11', 'Ekaterina Kozlov|Nikoleta Komarov'],
-  ['r2s-infiltrated-town-0', "Dáirine Flaherty|Emmet O'Meara"],
+  // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): the town's ties moved and the base's pair (Dáirine
+  // Flaherty|Emmet O'Meara) holds none lit; the town's one pair of two ties lit is this one, a lifelong teacher's (warm) first
+  // and a formal teacher's second (the first's temper)
+  ['r2s-infiltrated-town-0', "Emmet O'Sullivan|Tailtiu Fitzgerald"],
 ]);
 
 /** The read's rows: [town, the text that must not print (ties, secrets, presentations), what prints in its place] */
@@ -75,7 +78,9 @@ const ROWS = /** @type {Array<[string, string, string, string]>} */ ([
   // a successor drawn only where the place can pass (TI1): the index resolves to another of the pool's own lines
   // BAR4-CLOSE-SWEEP (2026-11-16, the chair's PD1): the pair keeps its drawn index 7 (as before the round) and prints the successor line's TWIN
   // (`mentor_legacy.desc#7`, where the two share no place); at f19c3b28b the gate had re-drawn it to desc#4's twin ("…spent seven years…")
-  ['C41801', 'bar0-town-occupied-rand-22', 'Bing Shimizu named Wei Kimura as successor in front of witnesses.', 'Bing Shimizu once told a full room that Wei Kimura was the best pupil they had taught.'],
+  // the lit birth's value (the flip, 2026-11-23, CLOSE-5 F-SEAT): the town's ties moved, and the pair's mentor tie draws
+  // mentor_legacy #0 lit (was #7's twin, "Bing Shimizu once told a full room that Wei Kimura was the best pupil they had taught.")
+  ['C41801', 'bar0-town-occupied-rand-22', 'Bing Shimizu named Wei Kimura as successor in front of witnesses.', "Bing Shimizu made Wei Kimura's career, and he rarely says so."],
   ['C4412', 'bar0-city-under_siege+famine-rand-22', 'Bought the vineyard by lending its old owner money', 'Came by the business by lending its old owner money'],
   ['C37293', 'bar0-town-calm-rand-22', "Bashir al-Jabbar governs on Imad al-Andalusi's credit.", "Bashir al-Jabbar holds office on Imad al-Andalusi's credit."],
   ['C23720', 'bar0-metropolis-calm-rand-21', 'a good ear on the waterfront.', 'a good ear at the berths.'],

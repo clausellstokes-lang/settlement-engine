@@ -15,13 +15,13 @@
  *   (4) `factionStanding.js :: annotateFactionStanding`'s partial call reads the law its seat hands (the contender set
  *       it computes, read off the real `coupContenders` through a spy; not the prose), and a seat that hands no law
  *       reads the old one (fail closed);
- *   (5) the dial dark: every factor reads 1 and the kind read is today's, so the weights equal the old law's apart
- *       from the holder's exclusion;
+ *   (5) the dial lit (the flip, 2026-11-23; dark until that day): every factor reads 1 and the kind read is the
+ *       contest's, so each weight is its power times its kind's coercion, the old law's arithmetic;
  *   (6) the circumstance reads on hand-built records, each held and not held, and none reads a hidden fact;
  *   (7) a planted lit dial (the seat-law wiring test's seam: `vi.doMock` of the dial's module, the product dial never
  *       touched) shows craft-led lifting a craft guild into the three, and the kind read lighting with it;
  *   (8) the craft variant (RULINGS (9) 4, SEAT-3's dispatch additions): under the law with the dial lit, a craft
- *       contender's plot reads `merchant_cabal`, never `palace_coup`; dark and under the old law, today's read;
+ *       contender's plot reads `merchant_cabal`, never `palace_coup`; under the old law, today's read;
  *   (9) the old law is byte-identical: the same fixture, its law absent, 1, a string or garbage, against the JSON the
  *       base (d61c05637) produced for it, recorded before this unit's code.
  */
@@ -32,7 +32,7 @@ import { fileURLToPath } from 'node:url';
 import { coupContenders, coupRiskLabel, resolveCoupVerdict, COUP_COERCION } from '../../../src/domain/rulingPowerCoup.js';
 import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { factionArchetype } from '../../../src/domain/factionArchetypes.js';
-import { SEAT_CIRCUMSTANCES } from '../../../src/domain/seat/seatTable.js';
+import { SEAT_CIRCUMSTANCES, contestKindOf } from '../../../src/domain/seat/seatTable.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const CIRC_PATH = '../../../src/domain/seat/seatCircumstances.js';
@@ -264,12 +264,13 @@ describe('(4) annotateFactionStanding\'s partial call reads the law its seat han
   });
 });
 
-// ── (5) the dial dark ───────────────────────────────────────────────────────────────────────────────────────
+// ── (5) the dial lit ────────────────────────────────────────────────────────────────────────────────────────
 
-describe('(5) the dial lands dark: every factor 1, the kind read today\'s, the weights the old law\'s', () => {
-  test('the dial is dark and every factor of the registered table reads 1', async () => {
+describe('(5) the dial is lit: every factor 1, the kind read the contest\'s, the weights the old law\'s arithmetic', () => {
+  test('the dial is lit and every factor of the registered table reads 1', async () => {
     const C = await circumstances();
-    expect(C.SEAT_CONTEST_LIT, 'lighting the contest is the owner\'s word, not a lane\'s').toBe(false);
+    // the lit dial (the flip, 2026-11-23): this arm pinned the contest dark until that day
+    expect(C.SEAT_CONTEST_LIT, 'the contest was lit with the seat\'s law at the flip; reverting it is the same one line').toBe(true);
     expect(Object.keys(C.SEAT_CIRCUMSTANCE_TUNING.factors)).toEqual([...SEAT_CIRCUMSTANCES]);
     for (const [circ, row] of Object.entries(C.SEAT_CIRCUMSTANCE_TUNING.factors)) {
       for (const [kind, factor] of Object.entries(row)) expect(factor, `${circ} -> ${kind}`).toBe(1);
@@ -290,23 +291,31 @@ describe('(5) the dial lands dark: every factor 1, the kind read today\'s, the w
     expect(row.note).toContain(`productCeiling ${PROPOSED.productCeiling}`);
   });
 
-  test('under the law, dark: the kind read is today\'s (a hidden power still contends, an economy craft guild reads merchant)', () => {
+  test('under the law, lit: the kind read is the contest\'s (a hidden power reads criminal and leaves, an economy craft guild reads craft)', () => {
     // the holder leaves; a craft guild filed under `economy` and a hidden (non-criminal) arcane circle stand beside it
     const s = merchantCityCouncil({ craftCategory: 'economy', quietPower: 13 });
     const before = coupContenders(withLaw(s, undefined));
     const lawful = coupContenders(withLaw(s, LAW));
-    expect(names(lawful)).toEqual(['Noble Houses', 'Temple of the Dawn', 'Quiet Circle']);
+    // the lit contest (the flip, 2026-11-23): Quiet Circle stood third, read by today's kind, until that day
+    expect(names(lawful)).toEqual(['Noble Houses', 'Temple of the Dawn', 'Craft Guilds']);
     for (const c of lawful.challengers) {
       const row = s.powerStructure.factions.find((f) => f.faction === c.name);
-      expect(c.archetype, c.name).toBe(factionArchetype(row));
+      expect(c.archetype, c.name).toBe(contestKindOf(row));
     }
-    // every weight the law computes is the old law's weight for the same power
+    // every weight the law computes is the old law's arithmetic for the same power under its kind: every factor 1
     const old = new Map();
     for (const f of s.powerStructure.factions.slice(1)) {
       const one = coupContenders(withLaw({ ...s, powerStructure: { ...s.powerStructure, factions: [s.powerStructure.factions[0], f] } }, undefined));
       if (one.challengers[0]) old.set(one.challengers[0].name, one.challengers[0].weight);
     }
-    for (const c of lawful.challengers) expect(c.weight, c.name).toBe(old.get(c.name));
+    for (const c of lawful.challengers) expect(c.weight, c.name).toBe(Math.round(c.power * COUP_COERCION[c.archetype] * 100) / 100);
+    // a power whose kind the contest reads as today's weighs what the old law gave it
+    const todaysKind = lawful.challengers.filter((c) => {
+      const row = s.powerStructure.factions.find((f) => f.faction === c.name);
+      return contestKindOf(row) === factionArchetype(row);
+    });
+    expect(names({ challengers: todaysKind })).toEqual(['Noble Houses', 'Temple of the Dawn']);
+    for (const c of todaysKind) expect(c.weight, c.name).toBe(old.get(c.name));
     expect(before.challengers.map((c) => c.weight)).toEqual(before.challengers.map((c) => old.get(c.name)));
   });
 });
@@ -453,10 +462,11 @@ describe('(8) the craft variant: lit, a craft-led plot is the guild cabal it nar
   const snapshotOf = (s) => ({ byId: new Map([['s1', { settlement: s }]]), regionalGraph: { edges: [] }, worldState: { stressors: [] } });
   const variantOf = (mod, s) => mod.interpretStressorOrigin('coup_detat', 's1', snapshotOf(s), 4).variant;
 
-  test('dark: today\'s read (a craft archetype has no row, so the plot reads palace_coup), with and without the law', async () => {
+  test('lit (the shipped dial): under the law merchant_cabal; without the law today\'s read (palace_coup)', async () => {
     const mod = await import('../../../src/domain/worldPulse/stressorDynamics.js');
     expect(variantOf(mod, withLaw(craftLed(), undefined))).toBe('palace_coup');
-    expect(variantOf(mod, withLaw(craftLed(), LAW))).toBe('palace_coup');
+    // the lit dial (the flip, 2026-11-23): the plot under the law read palace_coup until that day
+    expect(variantOf(mod, withLaw(craftLed(), LAW))).toBe('merchant_cabal');
   });
 
   test('lit under the law: merchant_cabal; lit under the old law: today\'s palace_coup', async () => {

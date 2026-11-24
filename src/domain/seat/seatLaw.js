@@ -29,12 +29,13 @@
  *      seat law is chosen, and the mint reads it and nothing else, so lighting it and reverting
  *      it are the same one-line act.
  *
- * ⛔ THE DIAL IS AT THE DEFAULT, AND LIGHTING IT IS THE OWNER'S WORD, NOT A LANE'S. The train
- * lands DARK (the chair's ruling (a) on CS10, 2026-11-20): every unit proves its behaviour on its
- * own fixture arm that sets `_seatLawVersion: 2` explicitly, and the light (U8) comes last, on
- * the owner's word — the living-content precedent, whose dial was lit on the owner's word of
- * 2026-09-08 (`livingContentLaw.js`'s header). A lit dial here would move every born pin of every
- * later unit at once and convict nobody.
+ * ⛔ THE DIAL WAS AT THE DEFAULT, AND LIGHTING IT WAS NEVER A LANE'S. The train landed DARK (the
+ * chair's ruling (a) on CS10, 2026-11-20): every unit proved its behaviour on its own fixture arm
+ * that sets `_seatLawVersion: 2` explicitly, and the light (U8) came last, on 2026-11-23, at the
+ * first deploy's finish line, which the owner left to the chair on 2026-11-22 (E30) — the
+ * living-content precedent, whose dial was lit on the owner's word of 2026-09-08
+ * (`livingContentLaw.js`'s header). A lit dial before then would have moved every born pin of
+ * every later unit at once and convicted nobody.
  *
  * ⛔ THE VERSION NUMBERS ARE SPELLED ONCE, IN `SEAT_LAW_VERSIONS`, AND THE NAMED VERSIONS ARE READ
  * FROM IT. They are vocabulary, not tuning, and the train's law 6 admits no new top-level named
@@ -74,7 +75,7 @@ export const HOLDER_SEAT_LAW_VERSION = SEAT_LAW_VERSIONS[1];
  *  kernel the day that dial was lit): a dial's type is the SPACE of versions, never today's
  *  setting, so the mint's dormant comparison stays reachable when the dial moves.
  *  @type {number} */
-export const NEW_SETTLEMENT_SEAT_LAW_VERSION = DEFAULT_SEAT_LAW_VERSION;
+export const NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION;
 
 /**
  * The seat-law version a value selects. Only an enabled NUMBER that is not the default selects

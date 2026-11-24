@@ -1,0 +1,12 @@
+import { boot } from './boot.mjs';
+const { db } = await boot({ hostedDefaults: true });
+const UID = '11111111-1111-1111-1111-111111111111';
+const q = async (s, p) => (await db.query(s, p)).rows;
+await db.exec(`insert into auth.users (id, email) values ('${UID}', 'u@probe.test'); update public.profiles set tier='premium' where id='${UID}';`);
+const [{ id }] = await q(`insert into public.settlements (user_id, name, tier, data) values ('${UID}', 'probe', 'village', '{}') returning id`);
+await db.exec(`update public.settlements set moderation_banned_at = now(), moderation_banned_by = '${UID}', moderation_ban_reason = 'staff ban', is_public = false, admin_deleted_at = now() where id = '${id}'`);
+const as = async (sql) => { try { await db.exec(`set request.jwt.claim.role='authenticated'; set test.uid='${UID}'; set role authenticated; ${sql}`); return 'ok'; } catch (e) { return 'ERR ' + e.message.slice(0, 100); } finally { await db.exec('reset role;'); } };
+console.log('publish while banned:', await as(`update public.settlements set is_public = true where id='${id}'`));
+console.log('clear ban:', await as(`update public.settlements set moderation_banned_at = null, moderation_banned_by = null, moderation_ban_reason = null, admin_deleted_at = null where id='${id}'`));
+console.log('publish after clearing:', await as(`update public.settlements set is_public = true, is_featured = true, featured_order = 1, is_curated = true, view_count = 999999 where id='${id}'`));
+console.log(JSON.stringify(await q(`select is_public, moderation_banned_at, admin_deleted_at, is_featured, is_curated, view_count from public.settlements where id='${id}'`)));

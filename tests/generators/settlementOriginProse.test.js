@@ -389,7 +389,7 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
     // holds five, and the whole pool must be reachable through the pipeline.
     expect(bodies.size, `distinct origin bodies over ${CORPUS.length} default-config seeds`).toBe(5);
     for (const b of bodies) expect(ORIGIN_POOLS.road).toContain(b);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 8.7 s lit in the final census at c1128c8f6; about 16.1 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   test('pin:per-settlement-identity — two settlements on the same route+terrain differ', () => {
     const a = originOf(gen(DEFAULT_CFG, 'rr-twin-a'));

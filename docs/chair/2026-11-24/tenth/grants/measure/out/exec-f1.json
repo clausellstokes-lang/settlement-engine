@@ -1,0 +1,54 @@
+{
+ "anon_byok_get": {
+  "ok": false,
+  "err": "function pgp_sym_decrypt(bytea, text) does not exist"
+ },
+ "anon_byok_secret": {
+  "ok": true,
+  "rows": [
+   {
+    "r": "probe-secret"
+   }
+  ]
+ },
+ "anon_downgrade": {
+  "ok": true,
+  "rows": [
+   {
+    "r": {
+     "ok": true,
+     "inactive_count": 0,
+     "retention_expires_at": "2027-02-24T14:58:19.712+00:00",
+     "inactive_campaign_count": 0
+    }
+   }
+  ]
+ },
+ "victim_after_downgrade": [
+  {
+   "tier": "free",
+   "downgraded": true
+  }
+ ],
+ "auth_release_own": {
+  "ok": true,
+  "rows": [
+   {
+    "r": ""
+   }
+  ]
+ },
+ "own_after_release": [
+  {
+   "free_narrative_claimed_at": null
+  }
+ ],
+ "anon_claim_victim": {
+  "ok": true,
+  "rows": [
+   {
+    "r": false
+   }
+  ]
+ }
+}

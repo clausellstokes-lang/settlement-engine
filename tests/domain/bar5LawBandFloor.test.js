@@ -65,8 +65,13 @@ const CENSUS_720 = [
 
 /** The wide read's four rows the strict second check let STAND (2026-11-16), with the model's band. */
 const REAL_ROWS = /** @type {const} */ ([
-  ['bar0-hamlet-calm-rand-33', 'critical'], ['bar0-hamlet-calm-rand-36', 'critical'],
-  ['bar0-thorp-calm-rand-32', 'critical'], ['bar0-hamlet-calm-rand-34', 'collapsed'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit): bar0-hamlet-calm-rand-33's model lit reads strained, so no floor lifts it; the lowest bar0-hamlet-calm-rand
+  // quiet place whose model reads critical is rand-1 (1 8 9 16 17 19 ... of 0..149)
+  ['bar0-hamlet-calm-rand-1', 'critical'], ['bar0-hamlet-calm-rand-36', 'critical'],
+  // RE-PICKED 2026-11-23 (THE FLIP, both birth laws lit) (A JUDGEMENT, AT ANOTHER SIZE): bar0-hamlet-calm-rand-34's model lit reads critical, and no
+  // bar0-hamlet-calm-rand quiet place of 0..799 reads collapsed; the lowest quiet place of the file's other calm family that
+  // does is bar0-thorp-calm-rand-185 (185 188 224 of 0..799)
+  ['bar0-thorp-calm-rand-32', 'critical'], ['bar0-thorp-calm-rand-185', 'collapsed'],
 ]);
 /** THE CONTROLS THAT MUST NOT MOVE (real towns of the census's 720, read at 600b7683a): seed, the model's band, why. */
 const CONTROLS = /** @type {Array<[string, string, string]>} */ ([

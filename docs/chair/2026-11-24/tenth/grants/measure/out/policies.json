@@ -1,0 +1,538 @@
+[
+ {
+  "tablename": "profiles",
+  "policyname": "Users read own profile",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = id)",
+  "with_check": null
+ },
+ {
+  "tablename": "settlements",
+  "policyname": "Users read own settlements",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "credit_transactions",
+  "policyname": "Users read own credits",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "saved_maps",
+  "policyname": "Users read own maps",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Users read own support messages",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Users create support messages",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "(auth.uid() = user_id)"
+ },
+ {
+  "tablename": "custom_content",
+  "policyname": "users read own custom content",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "custom_content",
+  "policyname": "developers read all custom content",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "current_user_is_privileged()",
+  "with_check": null
+ },
+ {
+  "tablename": "credit_ledger",
+  "policyname": "Users read own ledger",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "admin_actions",
+  "policyname": "Privileged users read admin actions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "current_user_is_privileged()",
+  "with_check": null
+ },
+ {
+  "tablename": "credit_auto_reload_attempts",
+  "policyname": "Owner reads own auto-reload attempts",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "current_account_session",
+  "policyname": "Owner reads own current session",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_comment_reports",
+  "policyname": "Users can read their own gallery comment reports",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_comment_reports",
+  "policyname": "Users can report gallery comments",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND (status = 'open'::text) AND ((char_length(TRIM(BOTH FROM reason)) >= 1) AND (char_length(TRIM(BOTH FROM reason)) <= 80)) AND (char_length(body) <= 2000) AND (EXISTS ( SELECT 1\n   FROM (gallery_comments c\n     JOIN settlements s ON ((s.id = c.settlement_id)))\n  WHERE ((c.id = gallery_comment_reports.comment_id) AND (c.deleted_at IS NULL) AND (s.is_public = true)))))"
+ },
+ {
+  "tablename": "gallery_map_reports",
+  "policyname": "Users can read their own gallery map reports",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_map_reports",
+  "policyname": "Users can report public maps",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND (status = 'open'::text) AND ((char_length(TRIM(BOTH FROM reason)) >= 1) AND (char_length(TRIM(BOTH FROM reason)) <= 80)) AND (char_length(body) <= 2000) AND (EXISTS ( SELECT 1\n   FROM saved_maps m\n  WHERE ((m.id = gallery_map_reports.map_id) AND (m.is_public = true)))))"
+ },
+ {
+  "tablename": "settlements",
+  "policyname": "Users delete active own settlements",
+  "cmd": "DELETE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND account_is_active(auth.uid()))",
+  "with_check": null
+ },
+ {
+  "tablename": "saved_maps",
+  "policyname": "Premium users delete active own maps",
+  "cmd": "DELETE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND account_is_active(auth.uid()))",
+  "with_check": null
+ },
+ {
+  "tablename": "application_command_journal",
+  "policyname": "Owners read own application commands",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "custom_content_definitions",
+  "policyname": "Owners read own custom content definitions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "custom_content_revisions",
+  "policyname": "Owners read own custom content revisions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_packs",
+  "policyname": "Owners read own content packs",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "credit_spend_allocations",
+  "policyname": "Users read own spend allocations",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(EXISTS ( SELECT 1\n   FROM credit_ledger spend\n  WHERE ((spend.id = credit_spend_allocations.spend_id) AND (spend.user_id = auth.uid()))))",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_votes",
+  "policyname": "Users can read their own gallery votes",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_votes",
+  "policyname": "Users can remove their own gallery votes",
+  "cmd": "DELETE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_comments",
+  "policyname": "Comment authors can read their own gallery comments",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_reports",
+  "policyname": "Users can read their own gallery reports",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_pack_versions",
+  "policyname": "Owners read own content pack versions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_pack_entry_definitions",
+  "policyname": "Owners read own content pack entry definitions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_pack_version_entries",
+  "policyname": "Owners read own content pack version entries",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_environments",
+  "policyname": "Owners read own content environments",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_environment_revisions",
+  "policyname": "Owners read own content environment revisions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "content_environment_activations",
+  "policyname": "Owners read own content environment activation",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "custom_content_archive_imports",
+  "policyname": "Owners read own custom content archive imports",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = owner_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "profiles",
+  "policyname": "Users update own profile (safe preferences only)",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = id) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = id) AND account_is_active(auth.uid()) AND (NOT (role IS DISTINCT FROM ( SELECT profiles_1.role\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (tier IS DISTINCT FROM ( SELECT profiles_1.tier\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (credits IS DISTINCT FROM ( SELECT profiles_1.credits\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (is_founder IS DISTINCT FROM ( SELECT profiles_1.is_founder\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (stripe_customer_id IS DISTINCT FROM ( SELECT profiles_1.stripe_customer_id\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (stripe_subscription_id IS DISTINCT FROM ( SELECT profiles_1.stripe_subscription_id\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (email IS DISTINCT FROM ( SELECT profiles_1.email\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (banned_at IS DISTINCT FROM ( SELECT profiles_1.banned_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (disabled_at IS DISTINCT FROM ( SELECT profiles_1.disabled_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (deleted_at IS DISTINCT FROM ( SELECT profiles_1.deleted_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (account_number IS DISTINCT FROM ( SELECT profiles_1.account_number\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (external_name IS DISTINCT FROM ( SELECT profiles_1.external_name\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))))"
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Elevated update support message status",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "current_user_is_support_or_higher()",
+  "with_check": "current_user_is_support_or_higher()"
+ },
+ {
+  "tablename": "audit_log",
+  "policyname": "Elevated read audit log",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "current_user_is_support_or_higher()",
+  "with_check": null
+ },
+ {
+  "tablename": "deletion_requests",
+  "policyname": "Users file own deletion request",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "(auth.uid() = user_id)"
+ },
+ {
+  "tablename": "deletion_requests",
+  "policyname": "Users read own deletion request",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) OR current_user_is_support_or_higher())",
+  "with_check": null
+ },
+ {
+  "tablename": "deletion_requests",
+  "policyname": "Elevated update deletion request",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "current_user_is_highest()",
+  "with_check": "current_user_is_highest()"
+ },
+ {
+  "tablename": "warnings",
+  "policyname": "Users read own warnings",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) OR current_user_is_support_or_higher())",
+  "with_check": null
+ },
+ {
+  "tablename": "internal_notes",
+  "policyname": "Elevated read internal notes",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "current_user_is_support_or_higher()",
+  "with_check": null
+ },
+ {
+  "tablename": "support_ticket_events",
+  "policyname": "Read ticket events scoped",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(current_user_is_support_or_higher() OR ((visibility = 'user'::text) AND (EXISTS ( SELECT 1\n   FROM support_messages sm\n  WHERE ((sm.id = support_ticket_events.ticket_id) AND (sm.user_id = auth.uid()))))))",
+  "with_check": null
+ },
+ {
+  "tablename": "system_config",
+  "policyname": "Public reads scoped to safe config keys",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(key = 'support_enabled'::text)",
+  "with_check": null
+ },
+ {
+  "tablename": "settlements",
+  "policyname": "Users insert active own settlements",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "settlements",
+  "policyname": "Users update active own settlements",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "saved_maps",
+  "policyname": "Premium users insert own maps",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND current_user_has_premium_access() AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "saved_maps",
+  "policyname": "Premium users update active own maps",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND current_user_has_premium_access() AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND current_user_has_premium_access() AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "redemptions",
+  "policyname": "Users read own redemptions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_votes",
+  "policyname": "Users can upvote public settlements",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()) AND (EXISTS ( SELECT 1\n   FROM settlements s\n  WHERE ((s.id = gallery_votes.settlement_id) AND (s.is_public = true)))))"
+ },
+ {
+  "tablename": "gallery_comments",
+  "policyname": "Users can comment on public settlements",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()) AND ((char_length(TRIM(BOTH FROM body)) >= 1) AND (char_length(TRIM(BOTH FROM body)) <= 2000)) AND (EXISTS ( SELECT 1\n   FROM settlements s\n  WHERE ((s.id = gallery_comments.settlement_id) AND (s.is_public = true)))))"
+ },
+ {
+  "tablename": "gallery_comments",
+  "policyname": "Users can soft delete their own gallery comments",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "money_events",
+  "policyname": "Owner reads own money events",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "credit_auto_reload_settings",
+  "policyname": "Owner reads own auto-reload settings",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_reports",
+  "policyname": "Users can report public gallery dossiers",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()) AND (status = 'open'::text) AND ((char_length(TRIM(BOTH FROM reason)) >= 1) AND (char_length(TRIM(BOTH FROM reason)) <= 80)) AND (char_length(body) <= 2000) AND (EXISTS ( SELECT 1\n   FROM settlements s\n  WHERE ((s.id = gallery_reports.settlement_id) AND (s.is_public = true)))))"
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Users update own support ticket",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": "((auth.uid() = user_id) AND (NOT (status IS DISTINCT FROM ( SELECT sm.status\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (priority IS DISTINCT FROM ( SELECT sm.priority\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (assignee IS DISTINCT FROM ( SELECT sm.assignee\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (ticket_number IS DISTINCT FROM ( SELECT sm.ticket_number\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (linked_faq IS DISTINCT FROM ( SELECT sm.linked_faq\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (user_id IS DISTINCT FROM ( SELECT sm.user_id\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))))"
+ },
+ {
+  "tablename": "ai_usage_events",
+  "policyname": "Users read own ai usage",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "referrals",
+  "policyname": "Users read referrals they are party to",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "((auth.uid() = referrer_user_id) OR (auth.uid() = referee_user_id))",
+  "with_check": null
+ },
+ {
+  "tablename": "dossier_entitlements",
+  "policyname": "Users read own dossier entitlements",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "founder_seat_buybacks",
+  "policyname": "Owner reads own seat buybacks",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "founder_seats",
+  "policyname": "Holder updates own founder seat",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = holder_user_id)",
+  "with_check": "(auth.uid() = holder_user_id)"
+ },
+ {
+  "tablename": "ai_operation_log",
+  "policyname": "Owner reads own ai operation log",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "surveyor_entitlements",
+  "policyname": "Owner reads own surveyor entitlement",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "surveyor_user_settings",
+  "policyname": "Owner reads own surveyor settings",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_reactions",
+  "policyname": "Users can read their own gallery reactions",
+  "cmd": "SELECT",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ },
+ {
+  "tablename": "gallery_reactions",
+  "policyname": "Users can react to public settlements",
+  "cmd": "INSERT",
+  "roles": "{public}",
+  "qual": null,
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()) AND (EXISTS ( SELECT 1\n   FROM settlements s\n  WHERE ((s.id = gallery_reactions.settlement_id) AND (s.is_public = true)))))"
+ },
+ {
+  "tablename": "gallery_reactions",
+  "policyname": "Users can remove their own gallery reactions",
+  "cmd": "DELETE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": null
+ }
+]

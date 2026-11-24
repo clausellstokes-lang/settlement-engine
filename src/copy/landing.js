@@ -194,7 +194,9 @@ export const landing = {
     // close's re-emitted timeline (the faiths' split over, the war footing, the Elder Council's capture of the water,
     // Uathach O'Neill shielding their people, the crime, the broken routes); the priest's order and the reforms left
     // the run when the round re-drew the cast.
-    body2: 'Then advance time. In Cnocby’s first twelve weeks the split between the faiths ended, leaving its sectarian memory behind, and the village went onto a war footing; by week nine control of the village’s water was passing to the Elder Council; then Uathach O\'Neill set out to shield their people as crime took hold of its streets; and by week twelve its trade routes had broken down, its traders with little to sell. Every one of those is a record the engine wrote, and every one carries its cause.',
+    // 2026-11-23 (THE FLIP, CLOSE-6, the ninth chair's N118; an OWNER VETO POINT): re-grounded on the lit timeline; the
+    // water's capture left the run, the faith of Vael came in.
+    body2: 'Then advance time. In its first week Cnocby turned to the faith of Vael, its patron creed after a long contest of devotion; by week three the village had gone onto a war footing, and soon the split between the faiths ended, leaving its sectarian memory behind; then Uathach O\'Neill set out to shield their people as crime took hold of its streets; and by week twelve its trade routes had broken down, its traders with little to sell. Every one of those is a record the engine wrote, and every one carries its cause.',
     // The chronicle beside the realm map is the REGION's band, not the town's —
     // two cards that now say different things, and a reader needs to be told why.
     regionLine: 'Beside it, the region: what the neighbours did while Cnocby was busy.',

@@ -1422,6 +1422,10 @@
       "kind": "rationale",
       "ref": "golden-byte-pin"
     },
+    "tests/property/generatorGoldenMasterLit.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
     "tests/property/generosityDormancyGolden.test.js": {
       "kind": "rationale",
       "ref": "golden-byte-pin"
@@ -2464,6 +2468,18 @@
       "ref": "pglite-executed"
     },
     "tests/security/engineGenerationReport.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/hostedDefaultGrants.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/profileColumnGrants.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/serverOwnedColumns.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },

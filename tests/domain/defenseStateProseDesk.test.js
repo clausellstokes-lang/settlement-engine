@@ -1960,7 +1960,7 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       .toBeGreaterThan(0);
     expect(namedSeen).toBeGreaterThan(0);
     expect(silentByName, 'the name-shape silence stays the exception').toBeLessThan(trueSeen);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT-3, CLOSE-5, 2026-11-23): 12.9 s lit in the final census at c1128c8f6; about 23.7 s on a CI runner (the measured factor), over three quarters of the default 20 s
 
   it('DS-DEF-9 speaks at exactly ONE position, on `viability`, and has left the dark list', () => {
     const row = sentenceMountForBlock('DS-DEF-9');

@@ -86,6 +86,13 @@ function born(seed) {
 describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (births)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   /** seed -> [the line that must NOT print on any power card, the line that prints instead] */
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23; CLOSE-5's ruling on 9df6731ee): lit, five towns no longer
+  // hold their case. r2r-city-10's craft guild leaves the roster and r2r-city-22's stands Minor (the case: a craft guild born
+  // with the secondary line and standing Suppressed); r2r-hamlet-17, r2r-thorp-19 and r2r-thorp-25 read Contested (the case:
+  // the elders' seat born with its line under a legitimacy crisis). Each is re-picked, lit, by its case's own predicate (the
+  // line handed to `power/claimStanding.js :: settleClaimsToLabel`, the card's final label, the crisis the settle reads),
+  // never by the line that prints: the lowest unlisted seed of its family of 200 (r2r-city 5 56; r2r-hamlet 28; r2r-thorp
+  // 29 54). Was r2r-city-10, r2r-city-22, r2r-hamlet-17, r2r-thorp-19, r2r-thorp-25
   const TOWNS = /** @type {Record<string, [string | null, string]>} */ ({
     "r2r-city-11": [
         "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
@@ -127,11 +134,11 @@ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (birth
         "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
         "The trades regulate their own production and apprenticeships; a reliable secondary presence in civic life."
     ],
-    "r2r-city-10": [
+    "r2r-city-5": [
         "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
         "The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops."
     ],
-    "r2r-city-22": [
+    "r2r-city-56": [
         "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
         "The trades regulate their own production and apprenticeships, but carry little weight beyond the workshops."
     ],
@@ -139,15 +146,15 @@ describe('TAIL-POWERS batch 2 · the towns read: what each prints instead (birth
         "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
         "The oldest heads of the community still decide things together, but fewer and fewer people accept their word."
     ],
-    "r2r-hamlet-17": [
+    "r2r-hamlet-28": [
         "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
         "The oldest heads of the community still decide things together, but fewer and fewer people accept their word."
     ],
-    "r2r-thorp-19": [
+    "r2r-thorp-29": [
         "Respected elders guide the community; authority is moral and traditional rather than formal.",
         "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word."
     ],
-    "r2r-thorp-25": [
+    "r2r-thorp-54": [
         "Respected elders guide the community; authority is moral and traditional rather than formal.",
         "Elders guide the community by custom, not by formal authority, but fewer and fewer people accept their word."
     ],

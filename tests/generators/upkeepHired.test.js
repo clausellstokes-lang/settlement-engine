@@ -134,16 +134,23 @@ describe('the five upkeep gates read the prosperity label, not the output', () =
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   const FLOORS = { military: 0.6, monster: 0.7, internal: 0.65, economic: 0.45, disaster: 0.55 };
 
-  test('RED-FIRST agree-village-16 (Comfortable, output 16): every gate is the identity', () => {
-    const s = born('agree-village-16');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit (the fortune law on), agree-village-16 reads
+  // Prosperous. Re-scanned agree-village-0..199 lit for the case's own predicate (the label Comfortable, the output,
+  // compound.economyOutput, under 50: UPKEEP-ECONOMICS-PAGE-97's disagreement): 10 19 35 68 ...; 10 is the first (output 38)
+  test('RED-FIRST agree-village-10 (Comfortable, output 38): every gate is the identity', () => {
+    const s = born('agree-village-10');
     expect(s.economicState.prosperity).toBe('Comfortable');
     const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
     for (const [gate, value] of Object.entries(gates)) expect(value, gate).toBe(1);
   });
 
-  test('RED-FIRST agree-village-5 (Struggling, output 57): every gate stands at the Struggling rung of the ladder', () => {
-    const s = born('agree-village-5');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-5 reads Poor. The case's own
+  // predicate (the label Struggling, the output 50 or more) holds on no agree-village of 800 lit (21 of 200 Struggling, the
+  // highest output 44), so the row takes the same corpus at the next size down that holds it: agree-hamlet-88, the lowest
+  // agree-hamlet of 200 lit (hamlet 88 94 199; was agree-village-5)
+  test('RED-FIRST agree-hamlet-88 (Struggling, output 60): every gate stands at the Struggling rung of the ladder', () => {
+    const s = born('agree-hamlet-88');
     expect(s.economicState.prosperity).toBe('Struggling');
     const gates = generateDefenseProfile(s, keepOf(s.economicState.prosperity)).economicGates;
     expect(Object.keys(gates).length, 'anchored: the record carries its gates').toBeGreaterThan(2);
@@ -280,8 +287,11 @@ describe('the guard assessment says what the place can pay for its hired force',
     expect(today.startsWith(twin), 'anchored: the safety writer printed today\'s lead').toBe(true);
   });
 
-  test('RED-FIRST agree-village-40 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
-    const s = born('agree-village-40');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-40 reads Comfortable. Re-scanned
+  // agree-village-0..199 lit for the case's own predicate (the label Poor, a charter hall, no garrison, watch or militia):
+  // 28 alone (was agree-village-40)
+  test('RED-FIRST agree-village-28 (Poor, a charter hall and no standing guard): the guard line is the purse-bound charter line', () => {
+    const s = born('agree-village-28');
     expect(s.economicState.prosperity).toBe('Poor');
     // Re-keyed by identity at COHERENCE-UPKEEP-6 (F7): the charter hall's purse line is now a pair (as far as
     // the purse runs; the coin for bounties short), so the claim is that a declared charter purse line prints.
@@ -372,8 +382,11 @@ describe('the charter hall says whether the town can pay its bounties (F7)', () 
 
   // Re-keyed by identity at the chair's ruling 1(b) (the purse lines read the STANDING label): agree-village-40
   // prints Poor but stands Moderate, so the Poor birth that stands Poor is agree-village-43.
-  test('agree-village-43 (Poor in ordinary years, a charter hall and no standing guard) prints the short line', () => {
-    const s = born('agree-village-43');
+  // RE-PICKED BY THE PREMISE (THE FLIP, CLOSE-6 F-FORTUNE, 2026-11-23): lit, agree-village-43 stands Comfortable. Re-scanned
+  // agree-village-0..199 lit for the case's own predicate (the standing label Poor, a charter hall, no garrison, watch or
+  // militia): 28 102; 28 is the first, printed and standing Poor (was agree-village-43)
+  test('agree-village-28 (Poor in ordinary years, a charter hall and no standing guard) prints the short line', () => {
+    const s = born('agree-village-28');
     expect(s.economicState.prosperityStanding).toBe('Poor');
     expect(s.economicState.safetyProfile.guardEffectivenessDesc).toContain(charterLine('prosperity: ≤ poor')?.text);
   });

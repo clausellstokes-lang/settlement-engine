@@ -165,7 +165,8 @@ beforeAll(async () => {
   CUT = lines?.FORTUNE_LASTING_CENTURIES_YEARS ?? null;
   await loadGenerationLawPayloads();
   for (const [seed, size] of PLACES) SIX.push({ seed, record: born(seed, size, 2) });
-  LAW1 = born('visitor-thorp-52', 'thorp', null);
+  // the law-1 town FORCES law 1 in its own config (the flip, 2026-11-23: born markerless it was law 1 only while the dial was dark)
+  LAW1 = born('visitor-thorp-52', 'thorp', 1);
   for (let i = 0; i < 40 && !UNMERITED; i += 1) {
     const t = born(`visitor-town-${i}`, 'town', 2);
     if (!meritsOf(t).length && t.powerStructure?.publicLegitimacy?.label) UNMERITED = t;
@@ -347,7 +348,7 @@ describe('U7b (c): no merit, no sentence', () => {
     }));
   };
 
-  it('a law-1 birth (the dial dark), a law-2 birth without the merit and a record with no standing print none of the pool', () => {
+  it('a law-1 birth (the law forced to 1), a law-2 birth without the merit and a record with no standing print none of the pool', () => {
     expect(POOL).toBeTruthy();
     expect(UNMERITED, 'a law-2 town without a merit among visitor-town-0..39').toBeTruthy();
     const record = SIX[0].record;
