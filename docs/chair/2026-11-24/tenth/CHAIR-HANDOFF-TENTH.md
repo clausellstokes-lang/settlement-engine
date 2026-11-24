@@ -457,3 +457,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   helper, not the chair; the row stays red by name. A NEXT CHAIR READS THIS BEFORE IT WRITES A LANDING MESSAGE FOR
   THE TROUBLES LANE: BRIEF-LANDING-STACK's step d lists the tuning inventory among the doors a helper re-takes;
   for this lane that door is struck from the helper's list unless the owner's yes is on record here.
+- 2026-11-24 20:02 UTC · T32 · POINT 114 IS ON THE WORKING LINE: THE GRANTS FIX. THE LINE IS f9531eb3a74d8be1339b5e7f83d5d832b6814fdd
+  (`lane/join-2026-11-14`; pushed 20:01:47 UTC, a fast-forward of f03e9a868; exit 0). THE HELPER'S REPORT, READ WHOLE
+  (LAND-114; about 36 minutes): the merge 570854bd0 of `lane/grants-1-2026-11-24` at 62f1e30de5, no conflict, no door;
+  its root tree is the lane tip's own (e9ccb38bc: checked by the chair). THE GATE: `tests/lint` whole 3 red (the size
+  rows); the two typechecks and eslint clean; build clean; `tests/build` 13 red, all on the list; step f 539 files,
+  5,501 tests, 1 red, on the list; step f2 66 files, 1 red, the landing machine's `provenanceMap`. NO RED OUTSIDE THE
+  LIST; NO SIZE MOVED; raised.py shows the lighting census baseline alone (the lane's doors). DONE BY THE CHAIR: the
+  row and the gate's sentence in `LANDINGS-SIXTH.md` on the line (one docs commit, f9531eb3a); the line pushed by its
+  own name; `ci/LINE-NOW.md` at point 114; the red list unchanged at 61 rows. OWED WITHIN THE HOUR: CI's run on the
+  new tip read by name (a check is set for 20:50 UTC). "THE LINE IS" goes to CLOSE-7, KINDS-2 and VEIL-50.
+  THE MIGRATION IS APPLIED NOWHERE BY THIS: the owner has its statements as ten files to paste (T29), and the later
+  push of 204 to 211 is his hand.
