@@ -706,3 +706,12 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   CLOSE-7's context began with a summary a second time (about 22:25 UTC); it re-read its start message and hand-back
   and is told to make the hand-back its whole memory; a third summary seats a successor. ITS HAND-IN GUESS IS NOW
   08:30 UTC ON 2026-11-25. Chain two runs the measure of master-born places re-derived on the line (about 00:15 UTC).
+- 2026-11-24 22:36 UTC · T51 · "VEIL-50 HANDS OVER 8d3ffdb2a" (22:34 UTC, at its mark, at a commit boundary): unit 2 (R4-IDS) stands at
+  8430edf5c on `lane/veil-50-2026-11-24-r4ids-wip`: lint, copy, typecheck, both cures' red and green and the plant
+  PROVED; two runs (today-born unmoved; the security files) were still going and are re-run by the successor; NOT
+  merged; no 212 read-out sent. Its hand-back's first section is the lane's memory. VEIL-55, THE LANE'S OWNER, IS
+  SEATED IN ITS PLACE from its draft, read whole by the chair (`prompts/START-VEIL-55.txt`): unit 2 to "R4-IDS
+  MERGED" (the chair reads the 212 hunk whole before the grant); then the second plan (RULING V5) and VEIL-52's
+  measure for the owner; then it integrates each seat's unit, the join and phase 1's proof. The chair added: its
+  checkout, the seats' ids, and A RULE OF FRUGALITY (its builder reads, it judges; a report is a file and 200
+  words; a successor's draft asked of each seat at 560,000).
