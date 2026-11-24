@@ -1,0 +1,17 @@
+cell	before	after	moved	C	V
+deficit|adequate	adequate	strained	MOVED	1	0
+deficit|collapsed	collapsed	critical	MOVED	1	0
+deficit|critical	critical	critical		16	9
+deficit|strained	strained	strained		5	6
+famine|adequate	adequate	adequate (held: the mirror unit)		3	3
+famine|critical	critical	critical		1	11
+famine|strained	strained	critical	MOVED	6	20
+famine|surplus	surplus	surplus (held: the mirror unit)		1	0
+pressured|adequate	adequate	adequate		8	75
+pressured|critical	critical	strained	MOVED	1	22
+pressured|strained	strained	strained		14	84
+pressured|surplus	surplus	adequate	MOVED	5	13
+secure|adequate	adequate	adequate		429	320
+secure|critical	critical	adequate	MOVED	38	32
+secure|strained	strained	adequate	MOVED	159	136
+secure|surplus	surplus	surplus		212	169

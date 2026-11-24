@@ -1,0 +1,48 @@
+[
+ {
+  "seed": "dp-town-39",
+  "savedSeed": "dp-town-39",
+  "terrain": "desert",
+  "err": null,
+  "savedWithheld": [
+   "Fish market",
+   "Hunter's lodge"
+  ],
+  "rederivedWithheld": [],
+  "lost": [
+   "Fish market",
+   "Hunter's lodge",
+   "Vintner",
+   "Fuller"
+  ],
+  "gained": [
+   "Customs house",
+   "Ropemaker",
+   "Barracks"
+  ]
+ },
+ {
+  "seed": "dp-city-20",
+  "savedSeed": "dp-city-20",
+  "terrain": "desert",
+  "err": null,
+  "savedWithheld": [
+   "Fish market",
+   "Charcoal burner",
+   "Sawmill (commercial)"
+  ],
+  "rederivedWithheld": [],
+  "lost": [
+   "Fish market",
+   "Charcoal burner",
+   "Sawmill (commercial)",
+   "Toll bridge",
+   "Elder Grove Council",
+   "Sage's quarter"
+  ],
+  "gained": [
+   "Butchers (3-8)",
+   "Citadel"
+  ]
+ }
+]

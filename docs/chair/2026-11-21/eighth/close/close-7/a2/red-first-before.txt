@@ -1,0 +1,11 @@
+     × V dp-city-83 683ms
+     × C dp-town-27 298ms
+     × C dp-city-12 337ms
+     × C dp-metropolis-3 496ms
+     × V dp-town-13 92ms
+     × C dp-town-36: printed deficit over production collapsed reads the critical fare 173ms
+     × C dp-city-81: printed deficit over production adequate reads the strained fare 502ms
+     × C dp-village-52: printed famine over production strained reads the critical fare 72ms
+     × C dp-village-5: printed pressured over production surplus reads the adequate fare 83ms
+     × C dp-metropolis-32: printed pressured over production critical reads the strained fare 407ms
+     × every reading file is classed, with its exact count of reading lines (a new reader or a new read reds) 1ms

@@ -130,3 +130,24 @@ to these rows. Also open: P9 (CLOSE-7's next unit after the five) and P5b on dp-
 ## Hand-back line
 B1(i) c6c244964 (+ door 9d0f85e01): C 900 unmoved; V 27 desert places move, each by its withheld houses and what follows (the cascade
 re-deals; faces, services, chains, ties, lines); B1land 0 on both; 8 new reds on desert anchors listed for the ruling.
+
+## R24e (1)(c): A SAVED DESERT PLACE. STOPPED HERE, AS R24e ORDERS (no change made in wt/b1i)
+A place saved before the cure, whose record holds a withheld house:
+- **(i) The user's re-roll of a section** (`store/settlementRegenAction.js :: regenSectionAction`): only the `npcs` and
+  `history` sections re-roll. `generateSettlementPipeline.js :: regenNPCsPipeline` reads the saved `settlement.institutions`. No
+  section re-roll re-draws the houses, so the saved houses stand (CONFIRMED by read).
+- **(ii) A re-derive after an edit** (`store/settlementRederiveAction.js` → `domain/edit/dmLayer.js :: rederive`): it re-runs the
+  WHOLE birth, `run(config′, null, { seed: record._seed })`, with pins only for what the DM's layer holds. Every unpinned part,
+  the roster included, is re-born by the current code. **IT RE-DEALS THE SAVED PLACE (CONFIRMED by execution,
+  `close-7/b1i/rederive-saved.census.jsx` → `rederive-saved.json`).** dp-town-39 (desert) was born on lit and saved with Fish
+  market and Hunter's lodge. Re-derived on b1i through `rederive` with an empty layer, it lost Fish market, Hunter's lodge, Vintner
+  and Fuller and gained Customs house, Ropemaker and Barracks. dp-city-20 lost Fish market, Charcoal burner, Sawmill (commercial),
+  Toll bridge, Elder Grove Council and Sage's quarter and gained Butchers (3-8) and Citadel. These are exactly the fresh-birth
+  re-deals (READ-25's twin).
+- **(iii) The world pulse**: no world-pulse module imports `assembleInstitutions`, the cascade, the faction boost,
+  `landWithholdsHouse` or the generation entry. The five that name them do so in comments only. The pulse does not re-deal the
+  place's houses through the cure (CONFIRMED by grep).
+
+**STOP (R24e (1)(c)): (ii) re-deals a saved place.** Note: a re-derive re-births every unpinned part under the code of the day. So
+every cure that moves a birth (A1, A2, B1(ii), this one) moves a re-derived saved place the same way. The seat is `dmLayer.rederive`,
+not this cure. R24e's (a), (b) and (2) are not done; they wait on the chair's word.
