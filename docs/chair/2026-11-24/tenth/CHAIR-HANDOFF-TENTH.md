@@ -28,6 +28,7 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Continue the share page work" (2026-11-24, about 17:50 UTC, this account: THE PAUSE OF THE SHARE VEIL IS LIFTED: T21 below).
 "I leave all judgement to you / Fix those findings as well" (2026-11-24, about 14:52 UTC, this account, in answer to the
 chair's status naming the faults of its read of the towns and the two holes in the database's rules: T7 below).
 "Continue the pending work please" (2026-11-24, this account). On the other account, to the ninth chair (verbatim in
@@ -278,3 +279,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   fast path); `ci/LINE-NOW.md` at point 113; `ci/RED-AT-LINE.tsv` 59 to 61 rows (two leave, four join).
   OWED WITHIN THE HOUR: CI's run on the new tip read by name. "THE LINE IS" goes to CLOSE-7 and GRANTS-1.
   LANDING THIS POINT IS NOT A RELEASE: the merge, the deploy, migrations 204 to 210 and the signings are the owner's.
+- 2026-11-24 17:58 UTC · T21 · THE OWNER LIFTS THE VEIL'S PAUSE. The chair had put the one decision to him (about 17:35 UTC:
+  with the two laws landed the share veil is the only thing left on E30's finish line; three ways: resume aimed first
+  at the simpler standard, "the server stops sending what is hidden", RECOMMENDED; resume at the strict standard; keep
+  it paused). HIS ANSWER, verbatim: "Continue the share page work". TAKEN AS: the pause of 2026-11-23 is lifted; the
+  way is the one the chair recommended, by his word of T7 ("I leave all judgement to you"); he may say otherwise.
+  **Decided (T21):** (a) THE VEIL IS RESUMED WITH ONE SEAT FIRST, ITS LANE OWNER, VEIL-50 (`prompts/START-VEIL-50.txt`;
+  source `lane/veil-41-2026-11-23-tip` b58abc48b; branch `lane/veil-50-2026-11-24`): its first unit is "THE PLAN", a
+  measure and a proposal, nothing built before the chair's ruling: every open item of the paused hand-off classed as
+  (D) a withheld thing's own words, name or id is served, (C) 212 is wrong on some document, (T) a tell only, (S) the
+  rest; the direct-serve count on the tip at every door; what the join needs now that the line is lit at point 113;
+  phase 1 (D, C and the join, with its own bar) and phase 2 (T, to "R3"). (b) THIS CHANGES THE EIGHTH CHAIR'S E27 (the
+  veil ships only at "not inferable"): the first release needs phase 1's bar and the security reader's word; "R3"
+  follows. **Why:** master's own `src/lib/gallery.js` says the live veil is a mirror in the browser; a server that
+  stops sending what is hidden is better than what is live, and the six pieces' tells are the long road (the ninth
+  chair's guess: one to two days with six seats). **Why one seat first and not six:** the ninth chair ran the six
+  chains itself and its record grew past 400,000 bytes; a lane owner holds the lane, and the chair reads what reaches
+  212. **What would change it:** the plan showing that the (D) items cannot be parted from the (T) items in 212's
+  text. (c) THE NUMBERS: the line's 211 is the grants fix; the veil's 211 and 212 become 212 and 213 at its join.
+  (d) THE TROUBLES RULE'S SEAT (T17) IS SEATED NEXT. FIVE CHILDREN THEN WORK OR WAIT (CLOSE-7, GRANTS-1, the reader,
+  VEIL-50, the troubles seat).
