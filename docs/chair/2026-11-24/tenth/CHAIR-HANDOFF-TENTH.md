@@ -230,3 +230,37 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   DARK; lighting it with its draft table is brought to the owner built and measured, for one yes (a tuning signature
   is his). E27 (the veil's standard) is the eighth chair's decision; THIS CHAIR'S ADVICE OF T6 would change it; the
   veil is paused by the owner's own order and stays so until he says.
+- 2026-11-24 17:01 UTC · T18 · THE HOURLY READ OF 16:03 AND WHAT CAME AFTER. MARKS (the chair's get_session at 16:03): CLOSE-7
+  210,480, running; GRANTS-1 468,560 (ITS MARK RAISED FROM 500,000 TO 700,000, hand-over by 620,000 at a part's
+  boundary: the lane proved larger than its start file assumed; parts C and D by builders). The account reads
+  "seven_day: allowed" since the reset. "GRANTS-1 PART A 40de07cde" (queued 16:35): `211_close_visitor_reach.sql`, part
+  A generated (245 functions revoked by exact signature; `service_role` granted again on the 187), its register test
+  red before (5 failed) and green after (13 of 13); `operator_message_class_for_template` left open and named (a CHECK
+  constraint names it); the owed gates green. The next hourly check is trig_01UFh1z4hwitBBE4CzEdrYow at 17:04.
+- 2026-11-24 17:01 UTC · T19 · RULINGS R24a AND R24b (sent to CLOSE-7 as messages, on its two phase-1 reports e8a859701 and
+  dc18bc082, each read whole by the chair).
+  R24a, A1: the flag on 25 services (struck by the chair beside the seat's two: Quarantine, Antitoxins, Poison
+  antidotes); the reader by the set of flagged names with a lint arm; NO NEW WORDS (H4 to H6 are true where care is
+  here and short); the pattern covers all five no-healer lines: 13 of the census and 26 of the visitor 900 before.
+  R24a, A2 IS LARGER THAN FIRST COUNTED: by record a line that says people go short stands beside a printed "Secure" on
+  up to 197 census pages and 168 visitor pages (the lines read the production band; the page's Food Security word
+  reads the ledger after what is bought in). THE CURE: THE ONE FOOD FACT IS THE WORD THE PAGE PRINTS, AND THE BRANCH
+  READS IT: the fare branch, the food grievance family and the food visitor lines; the price-only grievances keep the
+  production band. The seat sends the table of cells before the commit; the slot's commonest-sentence share is said
+  before and after.
+  R24b, READ-25: the page battery over the visitor 900 finds NO NEW KIND of fault; it finds the true size of three
+  banked ones (P9, a critical beasts grade over settled-country text: 129 of the visitor 900, 0 of the census; P19 2;
+  NEW2 6). P9 IS CLOSE-7's NEXT UNIT AFTER THE FIVE CURES. THE BATTERY'S OTHER BANKED ROWS (P17 486, P18 416, P16three
+  237, P8any 134 of the visitor 900) ARE THE PAGE CENSUS'S KNOWN DEBT: E30 put what has not landed into a second
+  deploy; the chair takes them up one at a time ONLY while the first deploy waits on the paused veil, never ahead of it.
+  R24b, B1(i): THE DESERT ALONE (the wider "gives" table is not a fault list: a fish market stands with no recorded
+  water in all 362 census places that hold one, and no reader meets a fault there). Seven rows (Fish market,
+  Fishmonger; Sawmill, Sawmill (commercial), Charcoal burner, Woodcutter's camp; Hunter's lodge), withheld unless the
+  route or the place's resources give the thing; declared as data, read by one function, asked AFTER the roll is made
+  as today, in the draw, the cascade and the faction boost: no other house's draw shifts; the census unmoved.
+  R24b, C1: AT BIRTH, BY NEW NAMES (the seat found 106 lines in 58 files that know a power by its stored name, and 33
+  record paths the name is baked into: a print-time reader cannot reach them, and the clean forms' names would put two
+  powers of one name in one place). THE CHAIR'S WORDS, the owner's to veto: "Corrupt Council" becomes "Board of
+  Aldermen"; "Corrupt City Council" becomes "Council of Syndics"; "Shadow Senate" becomes "Senate". The new names join
+  every vocabulary by exact name; the old stay for saved places, which are not renamed. PROOF: the 39 visitor births
+  with the names mapped back equal the old records byte for byte.
