@@ -120,10 +120,19 @@ summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>"
     push, send the A2 line.
 - MIRROR UNIT: QUEUED on chain one after A2 (R24d's words). Cut at d447ee31e on `-mirror-wip`.
 - P3SOURCE LINE (R24g (1)): QUEUED on chain one after the mirror, on `-p3-wip` cut at d447ee31e. Words fixed by R24g.
-- MASTER-REDERIVE (R24f (3)): RUNNING since ~22:31.
-  - Chain two (agent aabc324aa3b099e72; window 1M, ~654k used at its start).
-  - Brief `close-7/briefs/MASTER-REDERIVE.md` (6ba29fd2f). Report `close-7/reports/MASTER-REDERIVE.md`.
-  - ONE message; forward it to the chair. If the line already re-deals live towns, the owner decides.
+- MASTER-REDERIVE (R24f (3)): DONE. Report `close-7/reports/MASTER-REDERIVE.md`. SENT to the chair at 22:48 UTC.
+  - The line re-deals 180 of 180 places saved on master.
+  - Places moved, of 30 per size (houses / people / powers / government name / events):
+    - thorp 6/30/5/0/10;
+    - hamlet 7/30/14/0/13;
+    - village 11/30/9/0/16;
+    - town 13/30/3/1/5;
+    - city 16/30/15/6/11;
+    - metropolis 12/30/5/0/8.
+  - Control (master re-derived on master): 0 of 180 moved.
+  - Open question (PLAUSIBLE): does birthConfig clamp a saved place to law 1 on this path?
+  - Goes to the OWNER by R24f (3). Chain two is HELD, at about 700k of its window; a FRESH builder does the leaf on the chair's word.
+  - Worktrees `wt/master` and `wt/line` are removed.
 - THE CORRECTIONS LAW LEAF (R24f (2)): NEXT for chain two. Its brief is to be written: `close-7/briefs/CORRECTIONS-LAW.md`.
   - Put it on its own `-law-wip` cut at d447ee31e, merged onto cures FIRST.
   - B1(i), B1(ii) and C1 each merge `-law-wip` into their own -wip before wiring their correction.
