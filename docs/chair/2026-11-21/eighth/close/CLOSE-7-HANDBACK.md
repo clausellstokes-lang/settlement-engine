@@ -39,7 +39,8 @@ chain two C1 (wt/c1 on `lane/close-7-2026-11-24-c1-wip`, made 17:02) after B1(i)
 THE LINE IS f03e9a868 (point 113 LANDED, the chair 17:21; merge 67fcf51de = the flip's tree). UNIT (3) HOLDS NOTHING: the wide
 gate's 53 reds are 48 listed + lit twin 3 + R13 + provenanceMap arm 1 (landing machine's short ledger). UNIT (2) DONE: FOR-THE-OWNER
 names d447ee31e and f03e9a868; section 0 says 113 landed, not a release. LANDING LINE PLAN: one branch holding the cures merged, then
-a plain merge of f03e9a868, registers by their doors, COMMON-EIGHTH 14's runs, "CLOSE-7 <commit>".
+a plain merge of THE LINE'S TIP (since 20:01 UTC: f9531eb3a, POINT 114, the grants fix: no birth or page moves; the chair names any later tip; expect one conflict, `tests/lint/.lighting-census-baseline.json`: the line's side, then its door), registers by their doors, COMMON-EIGHTH 14's runs, "CLOSE-7 <commit>".
+THE CHAIR 19:28: (1) before merging a unit, re-read its ruling in its own words (RULING-R24.md on the chair's branch; R24a/R24b as recorded verbatim at ffc3fc7fb and 382627144); a cure drifting from its words is sent back; (2) END A TURN AT LEAST HOURLY (a wait on a builder is a turn's end); (3) ORDER: A1 and B1(i) merged; then A2 and C1 at once; then B1(ii); each unit's line on merge with C and V counts (before, after, what else moved). PUSHED 19:27: -a1-wip 50f911b49, -b1i-snap (mid-gate cut), own branch 42b5a7132. FOR THE PAGE (after the cures): the veil's pause LIFTED 17:58; the line's migrations 204-211, the veil's 212/213; section 0's two veil items become the resumed veil's.
 LISTED FOR LATER UNITS: healerCount (priest, midwife); P9 (129 of V) NEXT AFTER THE FIVE CURES, cause first; P5b fires on
 dp-town-143 (C) over its banked 0; the plains' 'Mill' row matching Sawmill (x2.34); the desert's trade x1.8 on the withheld rows;
 renaming SAVED places' three forms (the owner's, rename ledger as door). LATER UNIT (hand-back list): the capacity's healerCount not counting
