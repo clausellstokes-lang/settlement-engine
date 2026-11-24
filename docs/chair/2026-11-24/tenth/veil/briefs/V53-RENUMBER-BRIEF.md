@@ -59,7 +59,11 @@ the SCRIPT and its DRY RUN on a scratch copy of the trial join; the trial join i
 In `/var/tmp/v53/renum-dry`: `node renumber.mjs --check`, then the run, then the doors; then, through
 `sh scripts/gate-mutex.sh --run -- ...` (from the dry worktree; never through a pipe; each to a log under `/var/tmp/v53/renum/`):
 `tests/lint` whole; `tests/security` whole (`--maxWorkers=2`); `tests/ops` whole; the four lint walkers and the four security
-files above by name. Compare with the trial join's own reds (`tests/lint` and `tests/security` on ba7460c33: run those two
+files above by name. KNOWN, which the script MUST cure: `tests/lint/testRatchet.test.js` "an OWNER-GATED row leaves the census only against a NAMED
+GRANT" reds at the trial join because `docs/DEPLOY.md` (resolved at the line's side) names 211 while the chain's head on disk is
+`212_share_veil_later_cures.sql`; after the script the head is `213_share_veil_later_cures.sql` and DEPLOY.md must name it
+(`/var/tmp/v53/grants/lintfails.txt` holds the 66 `tests/lint` reds of 639d98124 = the trial join's).
+Compare with the trial join's own reds (`tests/lint` and `tests/security` on ba7460c33: run those two
 there too if no log exists under `/var/tmp/v53/`; the known: `traditionDescriptionSharedPage` TRAD-2 x3, `rosterChoiceInversion`
 VR26 x2, `recentConflictReaders`). EVERY RED THE SCRIPT LEAVES, BY NAME, with its cause; a red the script can cure by one more
 listed edit: add the edit and re-run; a red that needs a ruling: list it.
