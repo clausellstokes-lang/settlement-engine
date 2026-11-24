@@ -599,3 +599,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   masked, no new served fact; one plant a path). IT IS SEATED WHEN A PLACE IS FREE (the six are full: CLOSE-7,
   KINDS-2, VEIL-50, 51, 52, 53); the troubles rule's landing takes KINDS-2's place first, and VEIL-54 the place after
   it: its SQL cannot merge before "R4-IDS MERGED" in any case.
+- 2026-11-24 21:36 UTC · T43 · THE THREE NEW VEIL SEATS' FIRST LINES ARE IN (through VEIL-50): all on b58abc48b, none blocked.
+  VEIL-51 found why the stored prose's four whole-document measures had died in the predecessor's run (the measure
+  fixes a module to its own checkout's root): it runs them from a worktree of the branch that holds them, unchanged.
+  RULING V2 (appended to `veil/RULING-V1.md`): the two `voiceMechanics` reds of the trial join (a dash and eighteen
+  bangs inside name-matching PATTERNS of two veil files) are cleared by writing those characters by code point, ON
+  TERMS: a comment saying why; equality proved by a committed test (as strings; and for the one pattern whose text
+  changes, over every code point); the server's fold untouched. NO BASELINE MOVED AND THE WALKER NOT EDITED.

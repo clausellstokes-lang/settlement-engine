@@ -74,3 +74,16 @@ seat-holder lines. They are phase 2, to "R3", after the first release. No proof 
 ## V1-5. THE GUESS
 Phase 1: about 52 seat-hours by the plan (A GUESS; machine time rules). With four seats beside the owner and the join's work
 in parallel, the chair's own guess is 18 to 24 wall hours from this ruling, then the reader, the chair's read and the landing.
+
+## RULING V2 (added 21:36 UTC on 2026-11-24): J1, THE TWO `voiceMechanics` REDS ON THE TRIAL JOIN
+`tests/copy` whole reads 2 of 172 red on the trial join, both the lane's: `galleryRosterChoices` (one dash) and
+`gallerySecondHomes` (eighteen bangs): characters inside PATTERNS that match names, never printed. The ninth chair's lean
+(N107: spell the code points in the literal) does not clear the walker, which counts a literal's COOKED value.
+**RULED: YES to VEIL-53's proposal** (the characters built by `String.fromCharCode`; `NAME_SEPQ`'s head written with
+escapes; no baseline moved; the walker not edited), ON THREE TERMS: (1) a comment at the constants saying they are pattern
+characters and why the code points; (2) EQUALITY PROVED BY A COMMITTED TEST: the four or five values that stay equal as
+strings are asserted strictly equal to their former values; `NAME_SEPQ`, whose text does change, is proved equal AS A
+PATTERN over every code point from 0 to 0xFFFF, red first by a planted off-by-one; (3) the server's fold is not touched;
+if the twin's equality with the SQL moves by one read, STOP. **Why:** the walker guards the page's voice; a pattern is not
+prose; and neither a ratchet's baseline nor the walker is changed to make a red go away. NAMED FOR LATER, NOT BUILT: a
+declared class for pattern literals in the walker (the copy lane, after the first release).
