@@ -715,3 +715,9 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   measure for the owner; then it integrates each seat's unit, the join and phase 1's proof. The chair added: its
   checkout, the seats' ids, and A RULE OF FRUGALITY (its builder reads, it judges; a report is a file and 200
   words; a successor's draft asked of each seat at 560,000).
+- 2026-11-24 22:40 UTC · T52 · VEIL-55 IS SEATED: session_019yED1SoJ6KH9Wyp2Fera7R (made 22:39 UTC; on
+  `lane/veil-50-2026-11-24-r4ids-wip` 8430edf5c; branch `lane/veil-55-2026-11-24`; `prompts/START-VEIL-55.txt` at the
+  chair's 2e10d9377). VEIL-51, VEIL-52 and VEIL-53 are told that their lines go to it and never to VEIL-50; VEIL-50 is
+  told it is done. VEIL-52's measure for the owner (unmarked listings) comes to the chair too. VEIL-52 and VEIL-53
+  are told to draft their successors' start messages at 560,000. THE SIX: CLOSE-7, VEIL-55, VEIL-51, VEIL-52, VEIL-53
+  and the landing helper LAND-115; VEIL-54 takes the landing's place when it ends.
