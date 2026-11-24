@@ -1,0 +1,63 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js (16 tests | 2 failed) 4205ms
+     × a function written with the repository's two lines (revoke from public; grant to service_role) is closed to anon and authenticated 16ms
+     × the migrating role's default in schema public grants execute to neither anon nor authenticated 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > part B: the default for functions created AFTER the chain (ruling G1 §3, amendment G1b) > a function written with the repository's two lines (revoke from public; grant to service_role) is closed to anon and authenticated
+AssertionError: expected { anon: true, authd: true, svc: true } to deeply equal { Object (anon, authd, ...) }
+
+- Expected
++ Received
+
+  {
+-   "anon": false,
+-   "authd": false,
++   "anon": true,
++   "authd": true,
+    "svc": true,
+  }
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:123:59
+    121|       grant execute on function public.zz_part_b_convention() to servi…
+    122|     try {
+    123|       expect(await priv('public.zz_part_b_convention()')).toEqual({ an…
+       |                                                           ^
+    124|     } finally {
+    125|       await chain.db.exec('drop function public.zz_part_b_convention()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/hostedDefaultGrants.pglite.test.js > part B: the default for functions created AFTER the chain (ruling G1 §3, amendment G1b) > the migrating role's default in schema public grants execute to neither anon nor authenticated
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "acl": "{anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
++   },
++ ]
+
+ ❯ tests/security/hostedDefaultGrants.pglite.test.js:140:77
+    138|       where defaclrole = current_user::regrole and defaclnamespace = '…
+    139|     expect(rows.length).toBe(1);
+    140|     expect(rows.filter((r) => /(^|[{,])(anon|authenticated)=/.test(r.a…
+       |                                                                             ^
+    141|   });
+    142| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  16:35:16
+   Duration  4.44s (transform 55ms, setup 57ms, import 60ms, tests 4.20s, environment 0ms)
+
+exit 1

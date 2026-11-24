@@ -1,0 +1,66 @@
+[
+ {
+  "tablename": "profiles",
+  "policyname": "Users update own profile (safe preferences only)",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = id) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = id) AND account_is_active(auth.uid()) AND (NOT (role IS DISTINCT FROM ( SELECT profiles_1.role\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (tier IS DISTINCT FROM ( SELECT profiles_1.tier\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (credits IS DISTINCT FROM ( SELECT profiles_1.credits\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (is_founder IS DISTINCT FROM ( SELECT profiles_1.is_founder\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (stripe_customer_id IS DISTINCT FROM ( SELECT profiles_1.stripe_customer_id\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (stripe_subscription_id IS DISTINCT FROM ( SELECT profiles_1.stripe_subscription_id\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (email IS DISTINCT FROM ( SELECT profiles_1.email\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (banned_at IS DISTINCT FROM ( SELECT profiles_1.banned_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (disabled_at IS DISTINCT FROM ( SELECT profiles_1.disabled_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (deleted_at IS DISTINCT FROM ( SELECT profiles_1.deleted_at\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (account_number IS DISTINCT FROM ( SELECT profiles_1.account_number\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))) AND (NOT (external_name IS DISTINCT FROM ( SELECT profiles_1.external_name\n   FROM profiles profiles_1\n  WHERE (profiles_1.id = auth.uid())))))"
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Elevated update support message status",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "current_user_is_support_or_higher()",
+  "with_check": "current_user_is_support_or_higher()"
+ },
+ {
+  "tablename": "deletion_requests",
+  "policyname": "Elevated update deletion request",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "current_user_is_highest()",
+  "with_check": "current_user_is_highest()"
+ },
+ {
+  "tablename": "settlements",
+  "policyname": "Users update active own settlements",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "saved_maps",
+  "policyname": "Premium users update active own maps",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND current_user_has_premium_access() AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND (access_state = 'active'::text) AND current_user_has_premium_access() AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "gallery_comments",
+  "policyname": "Users can soft delete their own gallery comments",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "((auth.uid() = user_id) AND account_is_active(auth.uid()))",
+  "with_check": "((auth.uid() = user_id) AND account_is_active(auth.uid()))"
+ },
+ {
+  "tablename": "support_messages",
+  "policyname": "Users update own support ticket",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = user_id)",
+  "with_check": "((auth.uid() = user_id) AND (NOT (status IS DISTINCT FROM ( SELECT sm.status\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (priority IS DISTINCT FROM ( SELECT sm.priority\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (assignee IS DISTINCT FROM ( SELECT sm.assignee\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (ticket_number IS DISTINCT FROM ( SELECT sm.ticket_number\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (linked_faq IS DISTINCT FROM ( SELECT sm.linked_faq\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))) AND (NOT (user_id IS DISTINCT FROM ( SELECT sm.user_id\n   FROM support_messages sm\n  WHERE (sm.id = support_messages.id)))))"
+ },
+ {
+  "tablename": "founder_seats",
+  "policyname": "Holder updates own founder seat",
+  "cmd": "UPDATE",
+  "roles": "{public}",
+  "qual": "(auth.uid() = holder_user_id)",
+  "with_check": "(auth.uid() = holder_user_id)"
+ }
+]

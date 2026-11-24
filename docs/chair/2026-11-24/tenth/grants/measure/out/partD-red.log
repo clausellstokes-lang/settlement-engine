@@ -1,0 +1,117 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-ab001126eee12747f
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js (12 tests | 5 failed) 3532ms
+     × settlements: every SERVER column is refused to its owner 32ms
+     × settlements: a row an owner inserts cannot carry a SERVER value 3ms
+     × saved_maps: every SERVER column is refused to its owner 22ms
+     × saved_maps: a row an owner inserts cannot carry a SERVER value 3ms
+     × the owner can neither clear the ban nor publish 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > an owner cannot change a SERVER column of their own row (211 part D) > settlements: every SERVER column is refused to its owner
+AssertionError: expected [ 'view_count: changed', …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "view_count: changed",
++   "is_curated: changed",
++   "curated_order: changed",
++   "inactive_reason: changed",
++   "inactive_since: changed",
++   "retention_expires_at: changed",
++   "reactivated_free_at: changed",
++   "admin_deleted_at: changed",
++   "is_featured: changed",
++   "featured_order: changed",
++   "moderation_banned_at: changed",
++   "moderation_banned_by: changed",
++   "moderation_ban_reason: changed",
++ ]
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:184:22
+    182|         if (!(r.ok === false && /written by the server alone/.test(r.e…
+    183|       }
+    184|       expect(passed).toEqual([]);
+       |                      ^
+    185|     });
+    186|     it(`${t}: a row an owner inserts cannot carry a SERVER value`, asy…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > an owner cannot change a SERVER column of their own row (211 part D) > settlements: a row an owner inserts cannot carry a SERVER value
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > an owner cannot change a SERVER column of their own row (211 part D) > saved_maps: a row an owner inserts cannot carry a SERVER value
+AssertionError: expected 'inserted' to match /written by the server alone/
+
+- Expected:
+/written by the server alone/
+
++ Received:
+"inserted"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:191:41
+    189|         : `insert into public.saved_maps (user_id, name, is_featured) …
+    190|       const r = await asRole('authenticated', OWNER_ID, sql);
+    191|       expect(r.ok ? 'inserted' : r.err).toMatch(/written by the server…
+       |                                         ^
+    192|     });
+    193|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > an owner cannot change a SERVER column of their own row (211 part D) > saved_maps: every SERVER column is refused to its owner
+AssertionError: expected [ 'inactive_reason: changed', …(10) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "inactive_reason: changed",
++   "inactive_since: changed",
++   "retention_expires_at: changed",
++   "view_count: changed",
++   "import_count: changed",
++   "is_featured: changed",
++   "featured_order: changed",
++   "moderation_banned_at: changed",
++   "moderation_banned_by: changed",
++   "moderation_ban_reason: changed",
++   "admin_deleted_at: changed",
++ ]
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:184:22
+    182|         if (!(r.ok === false && /written by the server alone/.test(r.e…
+    183|       }
+    184|       expect(passed).toEqual([]);
+       |                      ^
+    185|     });
+    186|     it(`${t}: a row an owner inserts cannot carry a SERVER value`, asy…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/security/serverOwnedColumns.pglite.test.js > a banned and soft-deleted settlement cannot be cleared and published by its owner > the owner can neither clear the ban nor publish
+AssertionError: expected 'cleared' to match /written by the server alone/
+
+- Expected:
+/written by the server alone/
+
++ Received:
+"cleared"
+
+ ❯ tests/security/serverOwnedColumns.pglite.test.js:204:46
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 7 passed (12)
+   Start at  17:24:51
+   Duration  3.76s (transform 51ms, setup 62ms, import 48ms, tests 3.53s, environment 0ms)
+
+exit 1
