@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "51c89099da748622e6e0f94d5d8ace62bb84bef5",
-  "measuredBy": "KINDS-2 K3",
+  "measuredAtSha": "f3b45352ebc8224a5794c779f792a2024064a597",
+  "measuredBy": "LAND-115 (by the owner's yes of 2026-11-24)",
   "date": "2026-11-24",
-  "note": "KINDS-2 K3 (K3-FINISH door 1, re-taken at 51c89099d on the line at point 113): the trouble law's two tables enter the inventory: src/domain/trouble/troubleLaw.js#TROUBLE_WEIGHT_TUNING (DRAFT, the crime row B50) and #LAW_ONE_TROUBLE_BARS (law 1's 0.5 / 0.7, MOVED from src/generators/historyGenerator.js :: buildHistoricalEvent by KINDS-1 K1, not changed); historyGenerator.js's bare decimals banked lower, 13 -> 11. DECLARED_GROWTH_CEILING held at 14 (14 attributed rows measured).",
+  "note": "K4-JOIN: regenHistoryPipeline imports withRecordTroubleLaw, so generateSettlementPipeline.js is a new dependent of the trouble leaf (LAW_ONE_TROUBLE_BARS, TROUBLE_WEIGHT_TUNING); no value moves",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2925,7 +2925,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 107,
+      "line": 108,
       "spanDigest": "a694cd2c42b0d82dd9e0a13006a5b26aed8346f8a63d6a97acf5806488095a77",
       "leaves": {
         "crimeWave.read": "criminalEffective",
@@ -2946,6 +2946,7 @@
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
+        "src/generators/generateSettlementPipeline.js",
         "src/generators/historyGenerator.js"
       ],
       "namedDependents": []
@@ -2954,7 +2955,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 150,
+      "line": 151,
       "spanDigest": "50bc4049385f723054642f109269f2a1ea1f731382b6c223acf6d799da429f55",
       "leaves": {
         "crimeWave": 0.5,
@@ -2962,6 +2963,7 @@
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
+        "src/generators/generateSettlementPipeline.js",
         "src/generators/historyGenerator.js"
       ],
       "namedDependents": []
