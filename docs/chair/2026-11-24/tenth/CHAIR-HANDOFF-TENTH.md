@@ -154,3 +154,29 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   schema-level form): its claim is that the repository's own two lines then close a new function; THE GLOBAL FORM IS
   REFUSED (it reaches every schema and every later function, extension functions too). (3) `has_role`,
   `account_is_active` and `profile_has_premium_access` are listed for the reader, not built.
+- 2026-11-24 15:35 UTC · T13 · THE LANDING'S PHASE 1 IS CLEAN (the helper's `PHASE1.md`, written 15:21 UTC): the merge
+  67fcf51de of the flip at d447ee31e on 9b0ffaa97, NO CONFLICT (121 files); no door owed; `tests/lint` whole 225 files,
+  3,374 tests, 3 red, the line's three (the owner's size signings); typecheck ratchet 167 of 167; the strict check
+  1113 of 1113; eslint 0 errors; build exit 0; `tests/build` 69 files, 623 tests, 13 red ALL ON THE LIST (5 the build's
+  budgets, 8 line rows); `landingFixtureFreshness`'s two rows CURED. THE FIVE SIZES (the line at point 112): first
+  paint 1,180,816 raw (+0) / 376,057 gzip (-8) / 315,858 Brotli (+90); the generation worker 2,716,002 (+2,600); the
+  engine chunk 932,846 (+263). raised.py: the observed-shape baseline's scanStats +1 each; the page census register
+  fell 1; the lighting census +1 each; no ceiling, budget or ratchet moved. The transport ref
+  `lane/stack-113-wip-2026-11-24` was pushed by the helper. PHASE 2 (the whole suite, about three hours) runs.
+  The sizes were sent to CLOSE-7 for `FOR-THE-OWNER.md` section 6, with the owner's word of T7.
+- 2026-11-24 15:35 UTC · T14 · "GRANTS-1 URGENT 0ea91fe18" (queued 15:33:41): `grants/FOR-THE-OWNER-URGENT.sql` on its lane: 105
+  functions (groups 1 and 2), each revoke a guarded `do` block, a read check before and after, and the count of stored
+  keys; `FOR-THE-OWNER-URGENT-CHECKS.md` beside it. Its word: in PGlite on the chains to 203 and to 210, 69 functions
+  open before; none after one run and after two; `service_role` keeps every right.
+  READ BY THE CHAIR (the file whole by its shapes; a script over every line): 360 lines; the ONLY statement shapes are
+  the two read checks, the key count, and 105 lines of one form (`do $$ begin if to_regprocedure('<sig>') is not null
+  then revoke execute on function <sig> from public, anon, authenticated; end if; end $$;`); in each, the guard's
+  signature equals the revoke's (0 mismatches); the check lists before and after equal the revoke list. THE CHAIR'S
+  OWN SPOT CHECK of sixteen names that look like a user's (`create_ticket`, `post_ticket_reply`,
+  `unsubscribe_via_token`, `verify_recovery_answer`, the redemption and challenge functions,
+  `materialize_my_operator_broadcast_receipts`, and others): NO `rpc(` call site under src/ on master or on the line;
+  each is called from an edge function on master, or (the `my` one) only inside six SECURITY DEFINER functions of
+  migration 194, which run as their owner.
+  THE SECURITY READER IS SEATED ON IT: REVIEW-GRANTS-1 session_019yED1RXo9hi99V9ATQWotP (15:34:05 UTC; source
+  `lane/grants-1-2026-11-24`, branch `lane/review-grants-1-2026-11-24`; `prompts/START-REVIEW-GRANTS-1.txt`).
+  NOTHING GOES TO THE OWNER BEFORE ITS VERDICT. FOUR CHILDREN WORK (the helper, CLOSE-7, GRANTS-1, the reader).
