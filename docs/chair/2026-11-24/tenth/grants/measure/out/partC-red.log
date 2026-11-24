@@ -1,0 +1,78 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-affcaa1f68faf6e4f
+
+ ❯ tests/security/profileColumnGrants.pglite.test.js (6 tests | 2 failed) 7815ms
+     × no SERVER column can be changed by its owner, and each refusal is a privilege refusal 170ms
+     × the F2 hole: the owner cannot set free_narrative_claimed_at back to null 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/profileColumnGrants.pglite.test.js > a signed-in user changes ONLY the allowed columns of their own row (211 part C) > no SERVER column can be changed by its owner, and each refusal is a privilege refusal
+AssertionError: expected [ …(23) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tier: new row violates row-level security policy for table \"profiles\"",
++   "credits: new row violates row-level security policy for table \"profiles\"",
++   "created_at: null value in column \"created_at\" of relation \"profiles\" violates not-null constraint",
++   "updated_at: changed",
++   "role: new row violates row-level security policy for table \"profiles\"",
++   "display_name: changed",
++   "email: new row violates row-level security policy for table \"profiles\"",
++   "is_founder: new row violates row-level security policy for table \"profiles\"",
++   "stripe_customer_id: new row violates row-level security policy for table \"profiles\"",
++   "premium_downgraded_at: changed",
++   "premium_retention_expires_at: changed",
++   "telemetry_consent: changed",
++   "disabled_at: new row violates row-level security policy for table \"profiles\"",
++   "banned_at: new row violates row-level security policy for table \"profiles\"",
++   "deleted_at: new row violates row-level security policy for table \"profiles\"",
++   "account_number: new row violates row-level security policy for table \"profiles\"",
++   "external_name: new row violates row-level security policy for table \"profiles\"",
++   "first_name: changed",
++   "last_name: changed",
++   "preferred_name: changed",
++   "stripe_subscription_id: new row violates row-level security policy for table \"profiles\"",
++   "free_narrative_claimed_at: changed",
++   "founder_credit_listed: changed",
++ ]
+
+ ❯ tests/security/profileColumnGrants.pglite.test.js:119:21
+    117|       if (!/permission denied/.test(r)) changed.push(`${c.column_name}…
+    118|     }
+    119|     expect(changed).toEqual([]);
+       |                     ^
+    120|   });
+    121|   it('the F2 hole: the owner cannot set free_narrative_claimed_at back…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/profileColumnGrants.pglite.test.js > a signed-in user changes ONLY the allowed columns of their own row (211 part C) > the F2 hole: the owner cannot set free_narrative_claimed_at back to null
+AssertionError: expected 'changed' to match /permission denied/
+
+- Expected:
+/permission denied/
+
++ Received:
+"changed"
+
+ ❯ tests/security/profileColumnGrants.pglite.test.js:122:117
+    120|   });
+    121|   it('the F2 hole: the owner cannot set free_narrative_claimed_at back…
+    122|     expect(await writeAsOwner({ column_name: 'free_narrative_claimed_a…
+       |                                                                                                                     ^
+    123|   });
+    124|   it('the classes are populated (no vacuous pass)', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  16:38:01
+   Duration  8.36s (transform 97ms, setup 98ms, import 82ms, tests 7.82s, environment 0ms)
+
+exit 1

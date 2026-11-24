@@ -21,6 +21,9 @@
 --           every server-only or no-role function (and _audit_action); service_role is
 --           granted again only where a migration granted it. GENERATED; three are left
 --           open and named.
+--   PART C  public.profiles: UPDATE is revoked from anon and authenticated and granted to
+--           authenticated on an ALLOWED list of columns only (avatar_url, email_notifications,
+--           model_preference, public_identity_opt_in); every other column is the server's.
 --   PART B  (LAST in the file) the migrating role's default in schema public no longer grants
 --           EXECUTE on NEW functions to anon and authenticated, so a new function written with
 --           `revoke ... from public; grant ... to service_role` is closed to both, as in plain
@@ -32,6 +35,8 @@
 --   tightening is reversed by hand, eyes open). PART A for one function, if a caller
 --   with a user's token is found broken:
 --     grant execute on function public.<the same signature> to anon, authenticated;
+--   PART C:
+--     grant update on public.profiles to authenticated;
 --   PART B:
 --     alter default privileges in schema public grant execute on functions to anon, authenticated;
 -- ────────────────────────────────────────────────────────────────────────────
@@ -486,6 +491,21 @@ grant execute on function public.write_ai_operation_log(uuid,text,text,text,text
 
 -- ── APART: _audit_action (never granted or revoked before: PUBLIC could call it) ──
 revoke execute on function public._audit_action(uuid,uuid,text,jsonb,jsonb,text) from public, anon, authenticated;
+
+-- ════ PART C: profiles, by an ALLOWED list of column grants (ruling G1 §4) ════
+-- In plain words: a signed-in user may change, on their own profile row, ONLY the columns the site's
+-- own pages write directly: avatar_url, email_notifications, model_preference, public_identity_opt_in.
+-- Every other column (the free narrative claim, the downgrade record, the founder roll flag, consent,
+-- names, display_name, creation time, and every column a later migration adds) is written only by the
+-- server's own functions, which run as their owner and are not affected. display_name is not on the
+-- list: every page writes it through update_display_name (the civility guard), and the page's direct
+-- fallback after an RPC error is removed with this change. Policy 087 is NOT restated: it still pins
+-- its columns and its row scope; this narrows what UPDATE may touch at all.
+-- Safe to run twice. To undo:
+--     grant update on public.profiles to authenticated;
+revoke update on public.profiles from anon, authenticated;
+grant update (avatar_url, email_notifications, model_preference, public_identity_opt_in)
+  on public.profiles to authenticated;
 
 -- ════ PART B: the default for NEW functions (ruling G1 §3, amendment G1b; LAST in this file) ════
 -- In plain words: from here on, a function a later migration creates in schema public is no longer

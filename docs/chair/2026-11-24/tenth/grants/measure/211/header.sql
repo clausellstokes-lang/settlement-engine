@@ -21,6 +21,9 @@
 --           every server-only or no-role function (and _audit_action); service_role is
 --           granted again only where a migration granted it. GENERATED; three are left
 --           open and named.
+--   PART C  public.profiles: UPDATE is revoked from anon and authenticated and granted to
+--           authenticated on an ALLOWED list of columns only (avatar_url, email_notifications,
+--           model_preference, public_identity_opt_in); every other column is the server's.
 --   PART B  (LAST in the file) the migrating role's default in schema public no longer grants
 --           EXECUTE on NEW functions to anon and authenticated, so a new function written with
 --           `revoke ... from public; grant ... to service_role` is closed to both, as in plain
@@ -32,6 +35,8 @@
 --   tightening is reversed by hand, eyes open). PART A for one function, if a caller
 --   with a user's token is found broken:
 --     grant execute on function public.<the same signature> to anon, authenticated;
+--   PART C:
+--     grant update on public.profiles to authenticated;
 --   PART B:
 --     alter default privileges in schema public grant execute on functions to anon, authenticated;
 -- ────────────────────────────────────────────────────────────────────────────
