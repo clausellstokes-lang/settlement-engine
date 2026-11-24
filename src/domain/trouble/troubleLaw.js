@@ -24,8 +24,8 @@
  * less. The number of troubles a place is asked for, the crisis-mapped trouble, the scarcity add,
  * every admission and truth check, the fill's flat pick and the order of the list are untouched.
  *
- * THE IDIOM IS THE FORTUNE LAW'S (`src/domain/fortune/fortuneLaw.js` on the fortune lane, itself the
- * seat and living-content laws'), and its four properties hold here in these words:
+ * THE IDIOM IS THE FORTUNE LAW'S (`src/domain/fortune/fortuneLaw.js`, itself the seat and
+ * living-content laws'), and its four properties hold here in these words:
  *
  *   1. DARK BY DEFAULT, AND THE DEFAULT WRITES NOTHING. A config with no `_troubleLawVersion` is a
  *      law-1 world, and a law-1 world is byte-identical to one generated before this file existed.

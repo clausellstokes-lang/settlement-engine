@@ -610,8 +610,11 @@ export const GENERATION_LAWS = Object.freeze({
       + 'spread by birthConfig beside the others, with its incoming marker clamped off, so every '
       + 'classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS DARK: the mint '
       + 'writes not one config byte, so no born world, golden or born fixture moves, and every proof '
-      + 'of law 2 sets _troubleLawVersion: 2 explicitly after birthConfig; lighting it is the owner\'s '
-      + 'word (the chair\'s one unit at the close). Its module is a zero-import leaf pinned to its own '
-      + 'chunk (trouble-law), so the edge brings nothing behind it and nothing enters first paint.',
+      + 'of law 2 sets _troubleLawVersion: 2 explicitly after birthConfig. LIGHTING IT IS ONE COMMIT '
+      + 'ON THE OWNER\'S YES: the numbers of TROUBLE_WEIGHT_TUNING are a draft table he signs. A saved '
+      + 'place keeps the law it was born under: the history regen re-keys its pass to the record\'s '
+      + 'law (withRecordTroubleLaw), never the form\'s. Its module is a zero-import leaf pinned to its '
+      + 'own chunk (trouble-law), read by the create boundary, the history generator and the '
+      + 'history regen pass, so the edge brings nothing behind it and nothing enters first paint.',
   }),
 });
