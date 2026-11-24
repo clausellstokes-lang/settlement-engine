@@ -7,3 +7,6 @@
 - tests/lint whole running (background), log /var/tmp/v53/cures/A/lint.txt, json lint.json.
 - tests/lint whole: 232 files, 66 failed / 3376 passed; the 66 failing titles equal /var/tmp/v53/grants/lintfails.txt (66, titles matched by prefix since that list truncates); NEW: none (/var/tmp/v53/cures/A/lintfails.txt).
 - DONE: commit 8067faafb on lane/veil-53-2026-11-24-cures-wip (not pushed).
+- 2nd commit (coordinator's amend): food-less arm added to fortuneLastingSentence (d); red run against 8067faafb src next (red3-foodless.log).
+- food-less arm red against 8067faafb (3 of 6, red3-foodless.log); amend green 36/36 (green2.log); committing.
+- amend committed 6b674eb36; tests/lint whole: 66 failed / 3376 passed, the trial join's 66 titles, none new (lintfails2.txt). DONE (not pushed).
