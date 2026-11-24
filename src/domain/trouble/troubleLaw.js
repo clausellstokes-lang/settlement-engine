@@ -162,7 +162,8 @@ export function economyPowersOf(factions) {
  * chance on the place's own crime strength. NO DRAW, under either law.
  *
  * @param {unknown} config the birth's config (the law is read from it)
- * @param {any} economicState the economy as `buildHistoricalEvent` receives it
+ * @param {{compound?: {criminalEffective?: unknown}} | null | undefined} economicState the economy as
+ *   `buildHistoricalEvent` receives it (only `compound.criminalEffective` is read)
  * @param {typeof TROUBLE_WEIGHT_TUNING} [table] the table (the tests' seam; the generator never passes it)
  * @returns {number}
  */
