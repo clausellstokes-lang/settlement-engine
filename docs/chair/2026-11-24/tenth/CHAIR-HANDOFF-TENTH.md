@@ -446,3 +446,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   agent is routing round it. THE CHAIR DOES NOT RUN IT EITHER. IT IS PUT TO THE OWNER IN PLAIN WORDS: the door signs
   nothing and moves no number (its own header names the seat as its runner; the owner's signing is the separate
   `TUNING_SIGNATURE_RECORD` part). UNTIL HE SAYS YES, A LANDING HELPER IS TOLD NOT TO RUN THAT DOOR FOR THIS LANE.
+- 2026-11-24 19:49 UTC · T31 · THE REFUSED DOOR'S OWN WORDS (KINDS-2's K4 builder): the command `TUNING_INVENTORY_REFREEZE='KINDS-2 K4'
+  TUNING_INVENTORY_NOTE='K4-JOIN: regenHistoryPipeline imports withRecordTroubleLaw (a new dependent of the trouble
+  leaf); no value moves' sh scripts/gate-mutex.sh --run -- sh scripts/gate-tail.sh -n 40 npx vitest run
+  tests/lint/tuningRegister.walker.test.js`; the reason, verbatim: "Permission for this action was denied by the
+  Claude Code auto mode classifier. Reason: [Undermining Oversight]." GIVEN TO THE OWNER VERBATIM, with the chair's
+  recommendation (yes) AND ITS TERMS: the door is run once, at that lane's landing, by the landing helper; before the
+  line moves the chair reads the register's diff, which must show `troubleLaw.js` gaining the one dependent and
+  nothing else; else the landing stops. UNTIL THE OWNER SAYS YES IN CHAT, NOBODY RUNS THAT DOOR: not the lane, not a
+  helper, not the chair; the row stays red by name. A NEXT CHAIR READS THIS BEFORE IT WRITES A LANDING MESSAGE FOR
+  THE TROUBLES LANE: BRIEF-LANDING-STACK's step d lists the tuning inventory among the doors a helper re-takes;
+  for this lane that door is struck from the helper's list unless the owner's yes is on record here.
