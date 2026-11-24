@@ -246,3 +246,44 @@ describe("the server's own definer writers still write (one call each)", () => {
     expect(after).toEqual({ access_state: 'active', retention_expires_at: null, reactivated: true });
   });
 });
+
+describe("positive control: the pages' own writes still succeed (an over-refusing guard reds here)", () => {
+  // The downgrade case above leaves the owner on the free tier (3 active saves, no maps): restore premium.
+  beforeAll(async () => {
+    await db.exec(`update public.profiles set tier = 'premium', premium_downgraded_at = null, premium_retention_expires_at = null where id = '${OWNER_ID}'`);
+  });
+  const SETTLEMENT_COLS = "user_id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, campaign_state, version_history";
+  const settlementVals = (name) => `'${OWNER_ID}', '${name}', 'village', '{}', '{}', '{}', 'seed-1', '[]', '{}', null, '[]'`;
+  const MAP_COLS = 'user_id, name, map_seed, map_data, burg_settlement_map, supply_chain_config';
+  const mapVals = (name) => `'${OWNER_ID}', '${name}', 'map-seed-1', '{}', '{}', '[]'`;
+
+  it("settlements: the plain insert of saves.js :: supabaseSave succeeds as the signed-in owner", async () => {
+    const r = await asRole('authenticated', OWNER_ID, `insert into public.settlements (${SETTLEMENT_COLS}) values (${settlementVals('page insert')}) returning id`);
+    expect(r.ok ? r.rows.length : r.err).toBe(1);
+  });
+  it("saved_maps: the plain insert of campaigns.js :: rowForCampaign succeeds as the signed-in owner", async () => {
+    const r = await asRole('authenticated', OWNER_ID, `insert into public.saved_maps (${MAP_COLS}) values (${mapVals('page insert')}) returning id`);
+    expect(r.ok ? r.rows.length : r.err).toBe(1);
+  });
+  it("settlements: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values", async () => {
+    const id = await seedSettlement();
+    await db.exec(`update public.settlements set view_count = 57, is_featured = true, featured_order = 3, is_curated = true where id = '${id}'`);
+    const r = await asRole('authenticated', OWNER_ID, `insert into public.settlements (id, ${SETTLEMENT_COLS}) values ('${id}', ${settlementVals('page upsert')})
+      on conflict (id) do update set name = excluded.name, tier = excluded.tier, data = excluded.data, config = excluded.config,
+        toggles = excluded.toggles, seed = excluded.seed, neighbour_links = excluded.neighbour_links, ai_data = excluded.ai_data,
+        campaign_state = excluded.campaign_state, version_history = excluded.version_history returning name`);
+    expect(r.ok ? r.rows[0].name : r.err).toBe('page upsert');
+    const [row] = (await db.query(`select view_count, is_featured, featured_order, is_curated from public.settlements where id = '${id}'`)).rows;
+    expect(row).toEqual({ view_count: 57, is_featured: true, featured_order: 3, is_curated: true });
+  });
+  it("saved_maps: after the server counts and features a row, the page's upsert (owner columns only) succeeds and leaves the server's values", async () => {
+    const id = (await db.query(`insert into public.saved_maps (user_id, name) values ('${OWNER_ID}', 'counted') returning id`)).rows[0].id;
+    await db.exec(`update public.saved_maps set view_count = 57, import_count = 9, is_featured = true where id = '${id}'`);
+    const r = await asRole('authenticated', OWNER_ID, `insert into public.saved_maps (id, ${MAP_COLS}) values ('${id}', ${mapVals('page upsert')})
+      on conflict (id) do update set user_id = excluded.user_id, name = excluded.name, map_seed = excluded.map_seed, map_data = excluded.map_data,
+        burg_settlement_map = excluded.burg_settlement_map, supply_chain_config = excluded.supply_chain_config returning name`);
+    expect(r.ok ? r.rows[0].name : r.err).toBe('page upsert');
+    const [row] = (await db.query(`select view_count, import_count, is_featured from public.saved_maps where id = '${id}'`)).rows;
+    expect(row).toEqual({ view_count: 57, import_count: 9, is_featured: true });
+  });
+});

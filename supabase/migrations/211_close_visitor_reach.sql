@@ -518,6 +518,8 @@ grant update (avatar_url, email_notifications, model_preference, public_identity
 -- columns are written only by the server's own functions (bans, soft-deletes, curation, view and
 -- import counts, the downgrade retention window), which run as their owner and are not affected, and
 -- by the service-role edge functions. A row a user inserts carries the columns' defaults.
+-- A page's insert or upsert payload must never name a server column, even at its current value: an
+-- upsert repeating view_count is refused. No page does, on origin/master or on this lane (grep, 2026-11-24).
 -- The guard is SECURITY INVOKER: it reads current_user, which is the signed-in user on a direct write
 -- and the function's owner inside a SECURITY DEFINER function.
 -- Columns a page writes directly stay OUT (listed in the hand-back for a ruling): is_public,

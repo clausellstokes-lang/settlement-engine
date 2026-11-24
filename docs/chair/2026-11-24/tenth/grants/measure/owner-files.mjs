@@ -55,6 +55,15 @@ files['2-part-b-default.sql'] = part('partB.sql');
 if (existsSync(new URL('./211/partC.sql', import.meta.url))) files['3-part-c-profiles.sql'] = part('partC.sql');
 if (existsSync(new URL('./211/partD.sql', import.meta.url))) files['4-part-d-settlements-maps.sql'] = part('partD.sql');
 files['5-read-check-after.sql'] = readCheck;
+files['6a-read-after-part-c-profiles.sql'] = ['-- READS ONLY, after file 3. Every column of public.profiles, and whether a signed-in user may UPDATE it.',
+  '-- Expected: exactly four true (avatar_url, email_notifications, model_preference, public_identity_opt_in).',
+  '-- On the hosted platform a revoke removes only what the revoking role granted: this read is the proof.',
+  "select column_name, has_column_privilege('authenticated', 'public.profiles', column_name, 'UPDATE') as signed_in_may_update",
+  "  from information_schema.columns where table_schema = 'public' and table_name = 'profiles' order by ordinal_position;", ''].join('\n');
+files['6b-read-after-part-d-triggers.sql'] = ['-- READS ONLY, after file 4. The two guard triggers: present and enabled (tgenabled O = enabled).',
+  '-- Expected: two rows, settlements and saved_maps, each enabled O, both calling _guard_server_owned_columns.',
+  "select tgrelid::regclass::text as on_table, tgname, tgenabled, tgfoid::regproc::text as function",
+  "  from pg_trigger where tgname = 'trg_guard_server_owned_columns' and not tgisinternal order by 1;", ''].join('\n');
 for (const [n, t] of Object.entries(files)) writeFileSync(new URL(n, DIR), t);
 
 // ── execute everything, twice, on both chains (F1: the figures the page states) ──
@@ -68,7 +77,11 @@ for (const upTo of [203, 210]) {
   for (let pass = 0; pass < 2; pass++) for (const n of order) await db.exec(files[n]);
   const after = await tally();
   const defacl = (await db.query(files['0b-default-privileges.sql'])).rows.filter((r) => r.kind === 'f').map((r) => `${r.role}: ${r.acl}`);
-  fig[upTo] = { before, after, defacl, ran: order };
+  const cols = (await db.query(files['6a-read-after-part-c-profiles.sql'])).rows;
+  const trg = (await db.query(files['6b-read-after-part-d-triggers.sql'])).rows;
+  fig[upTo] = { before, after, defacl, ran: order,
+    profilesUpdatable: cols.filter((r) => r.signed_in_may_update).map((r) => r.column_name), profilesColumns: cols.length,
+    guardTriggers: trg.map((r) => `${r.on_table} ${r.tgenabled} ${r.function}`) };
 }
 writeFileSync(new URL('./owner-files-figures.json', OUT), JSON.stringify(fig, null, 1));
 console.log(JSON.stringify(fig));

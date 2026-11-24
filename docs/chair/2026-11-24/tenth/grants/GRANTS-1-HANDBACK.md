@@ -18,6 +18,7 @@
   - `FOR-THE-OWNER-URGENT.sql`: groups 1 and 2, cleared by the reader, already given to him.
   - `FOR-THE-OWNER-GRANTS/`: files 0a–5, every revoke guarded, executed twice in PGlite on the 203 and 210 chains: 134 open, then 0; service_role unchanged.
   - `FOR-THE-OWNER-GRANTS.md`: the page in plain words; files 3 and 4 are shown compatible with master's client, except the display_name fallback after an RPC error.
+- PART D's standing rule (the chair's ask 3): a page's insert or upsert payload never names a server column of settlements or saved_maps, even at its current value (an upsert repeating view_count is refused). No page does, on origin/master or on this lane.
 - For the reader: `GRANTS-1-APART.md` (ruling §8, G1c, part D's excluded columns).
 - NEXT, in one line: the fresh security reader reads 211's final text; nothing reaches the working line or any database before its word and the owner's hand.
 

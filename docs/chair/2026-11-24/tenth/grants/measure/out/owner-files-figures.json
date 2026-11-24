@@ -22,6 +22,17 @@
    "2-part-b-default.sql",
    "3-part-c-profiles.sql",
    "4-part-d-settlements-maps.sql"
+  ],
+  "profilesUpdatable": [
+   "avatar_url",
+   "email_notifications",
+   "model_preference",
+   "public_identity_opt_in"
+  ],
+  "profilesColumns": 28,
+  "guardTriggers": [
+   "saved_maps O _guard_server_owned_columns",
+   "settlements O _guard_server_owned_columns"
   ]
  },
  "210": {
@@ -47,6 +58,17 @@
    "2-part-b-default.sql",
    "3-part-c-profiles.sql",
    "4-part-d-settlements-maps.sql"
+  ],
+  "profilesUpdatable": [
+   "avatar_url",
+   "email_notifications",
+   "model_preference",
+   "public_identity_opt_in"
+  ],
+  "profilesColumns": 28,
+  "guardTriggers": [
+   "saved_maps O _guard_server_owned_columns",
+   "settlements O _guard_server_owned_columns"
   ]
  }
 }
