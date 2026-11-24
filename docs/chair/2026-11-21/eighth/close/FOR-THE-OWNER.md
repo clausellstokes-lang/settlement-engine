@@ -15,6 +15,13 @@ running at the time of writing): THIS LINE WILL SAY THAT THE LINE CARRIES POINT 
   city and metropolis: about one in eighteen), the page's "prominent relationship" is a SECRET tie (a handler's), and the public
   copy serves it with both names, its type and its text, while the tie itself is dropped from the served list. Production today
   holds none (0 of 140 places born on master). Its cure belongs to the paused share veil.
+- **A second open item for the paused share veil, nothing built (the chair's ruling R24-C1, 2026-11-24):** where a place's
+  ruling hall has been bought by the underworld, its government is stored under a name that says so: "Corrupt Council" (a town),
+  "Corrupt City Council" (a city), "Shadow Senate" (a metropolis): 39 of 900 places born as a visitor gets them (18 towns, 14
+  cities, 7 metropolises). Before the first deploy the NAME is cured: those forms print as "Town Council", "City Council" and
+  "Senate", and that the hall is bought is said only in the game master's own block. What the copy shared with players still
+  carries that says the hall is bought (the form's description, "The governing body is systematically compromised; offices are
+  sold and justice is purchasable.", and any composed sentence built on it) belongs to the paused share veil.
 
 ## 1. Two new rules for how a new place is born are switched on
 - **Who rules.** A place's government, the house holding its seat and the person in it are read apart, so a guild, a temple or an
