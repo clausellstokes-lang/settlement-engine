@@ -1,0 +1,26 @@
+
+===== production as it stands (203), then the ten steps
+  step-01-look-are-new-functions-open.sql: {"running_as":"postgres","new_function_handed_to_visitor":true,"new_function_handed_to_signed_in_user":true}
+  step-02-count-stored-keys.sql: {"byok_keys":0}
+  step-03-close-the-functions.sql: ran, 245 statement(s), last returned 0 rows
+  step-04-close-new-functions-by-default.sql: ran, 1 statement(s), last returned 0 rows
+  step-05-look-again-are-new-functions-open.sql: {"running_as":"postgres","new_function_handed_to_visitor":false,"new_function_handed_to_signed_in_user":false}
+  step-06-protect-profile-fields.sql: ran, 2 statement(s), last returned 0 rows
+  step-07-look-profile-fields.sql: 28 rows; true on: avatar_url, email_notifications, model_preference, public_identity_opt_in
+  step-08-protect-towns-and-campaigns.sql: ran, 7 statement(s), last returned 0 rows
+  step-09-look-the-two-guards.sql: saved_maps:O | settlements:O
+  step-10-the-check-that-matters.sql: 0 rows
+  optional-detail-every-function-after.sql: 245 rows; exist here 244; anon true 0; authenticated true 0; service_role true 207
+
+===== production with the URGENT file already run, then the ten steps
+  step-01-look-are-new-functions-open.sql: {"running_as":"postgres","new_function_handed_to_visitor":true,"new_function_handed_to_signed_in_user":true}
+  step-02-count-stored-keys.sql: {"byok_keys":0}
+  step-03-close-the-functions.sql: ran, 245 statement(s), last returned 0 rows
+  step-04-close-new-functions-by-default.sql: ran, 1 statement(s), last returned 0 rows
+  step-05-look-again-are-new-functions-open.sql: {"running_as":"postgres","new_function_handed_to_visitor":false,"new_function_handed_to_signed_in_user":false}
+  step-06-protect-profile-fields.sql: ran, 2 statement(s), last returned 0 rows
+  step-07-look-profile-fields.sql: 28 rows; true on: avatar_url, email_notifications, model_preference, public_identity_opt_in
+  step-08-protect-towns-and-campaigns.sql: ran, 7 statement(s), last returned 0 rows
+  step-09-look-the-two-guards.sql: saved_maps:O | settlements:O
+  step-10-the-check-that-matters.sql: 0 rows
+  optional-detail-every-function-after.sql: 245 rows; exist here 244; anon true 0; authenticated true 0; service_role true 207

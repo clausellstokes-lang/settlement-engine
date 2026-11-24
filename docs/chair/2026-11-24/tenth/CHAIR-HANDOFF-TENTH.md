@@ -411,3 +411,20 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   guard, and sets `free_narrative_claimed_at` to null; `tier` is refused by policy 087. Part C stops the first two.
   THE OWNER'S PLAIN PAGE IS DRAFTED (the chair's scratch `owner/security-full/`: ten steps named in paste order,
   each file byte for byte the lane's at 31c44a1f36, and READ-ME-FIRST.md).
+- 2026-11-24 19:25 UTC · T29 · THE READER'S LAST WORD: "CLEAR 31c44a1f36, for migration 211 and for the owner's files, with one
+  wording defect" (all CONFIRMED by its own queries: 211 with comments removed is identical to the text it cleared;
+  the new read for part B sees a global default; on the chain to 203 plus files 1 to 4 and on the line: "false,
+  false", exactly four columns, both triggers enabled, the standing check no row; the standing check's allowed list
+  equals the register's 137 rows; each new test arm went red when it planted the breakage). ITS DEFECT W1: the
+  page said "if it still reads true, file 2 ran as another role", but if file 2 AND the read both run as another
+  role the read says "false, false" and looks done. MET IN THE OWNER'S OWN PAGE: `running_as` must read postgres at
+  both looks, else stop, with the reason in a section of its own. CARRIED, NOT DROPPED: the read showing postgres's
+  rows by name and a test arm for the owner's own wrong-role case, to the next unit that re-generates the owner's
+  files (the veil's join). 62f1e30de5 is documents only on 31c44a1f36 (the chair's diff).
+  THE OWNER HAS BEEN SENT THE FULL FIX (19:25 UTC): `grants/for-the-owner-full/` on this branch is what he was sent:
+  READ-ME-FIRST.md (the chair's, in plain words) and twelve files named in paste order (ten steps, two optional
+  details), each byte for byte the lane's at 31c44a1f36. THE CHAIR WALKED THE TEN STEPS IN THEIR WRITTEN ORDER in
+  PGlite on the chain to 203, with and without the urgent file run first: each step shows what the page says
+  (`grants/chair-probe/out-owner-ten-steps-walked.txt`). HIS RUN IS HIS HAND AND HIS DECISION; nothing was applied by
+  anyone in the program. AWAITED FROM HIM: step 2's number, and any step that shows something else.
+  GRANTS-1 AND THE READER ARE DONE (told; no reply asked). The landing helper LAND-114 runs.
