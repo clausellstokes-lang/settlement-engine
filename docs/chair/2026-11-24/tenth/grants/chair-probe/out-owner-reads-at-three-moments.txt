@@ -1,0 +1,18 @@
+
+[203, nothing run] standing check rows: 134; part B read: {"running_as":"postgres","new_function_handed_to_visitor":true,"new_function_handed_to_signed_in_user":true}; file 5 rows: 245, keys grp,sig,exists_here,anon,authenticated,service_role; open among them: 134
+    {"function":"_assert_service_admin_actor(uuid)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_audit_action(uuid,uuid,text,jsonb,jsonb,text)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_buyback_payout_hold_days()","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_consume_action_rate_limit(uuid,text,integer)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_founder_transfer_dial(text,integer)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_gallery_chronicle_entry(jsonb)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_gallery_chronicle_json(jsonb)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_gallery_public_tile_rows()","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_gc_dim_sql(text)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_log_founder_transfer_event(uuid,text,text,jsonb)","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_seat_buyback_cents()","visitor_can_execute":true,"signed_in_can_execute":true}
+    {"function":"_seat_holder_last_active(uuid)","visitor_can_execute":true,"signed_in_can_execute":true}
+
+[203 + the owner's files 1 to 4 (before the deploy)] standing check rows: 0; part B read: {"running_as":"postgres","new_function_handed_to_visitor":false,"new_function_handed_to_signed_in_user":false}; file 5 rows: 245, keys grp,sig,exists_here,anon,authenticated,service_role; open among them: 0
+
+[001 to 211 (after the deploy)] standing check rows: 0; part B read: {"running_as":"postgres","new_function_handed_to_visitor":false,"new_function_handed_to_signed_in_user":false}; file 5 rows: 245, keys grp,sig,exists_here,anon,authenticated,service_role; open among them: 0

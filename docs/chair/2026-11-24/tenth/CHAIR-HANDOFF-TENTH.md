@@ -375,3 +375,23 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   closed in 211; they are unit "G2" after the first deploy's security work and are said to the owner as the
   residual risk. **Why:** part A is generated and cleared; the leak is one yes or no. NEXT: "GRANTS <commit>", the
   reader's re-check of the delta, then the landing (point 114) by `prompts/drafts/START-LAND-114.draft.txt`.
+- 2026-11-24 19:17 UTC · T27 · THE HOURLY CHECK. THE MARKS BY THE CHAIR'S READ: GRANTS-1 580,886 (its last four items pushed at
+  31c44a1f36; its last test run is going; it hands in and is done); CLOSE-7 282,249 AS MEASURED AT ITS LAST TURN'S END
+  (17:32 UTC: it has run ONE turn since; its cost rose from 88 to 121 dollars, so its builders work; its events show
+  A1 at its report and B1(i) at its twin proof and gates); VEIL-50 345,672 (the trial join's `tests/security` run is
+  going; the plan follows); KINDS-2 336,040 after one hour (K3 finished at b51751742: its doors by a builder; five lint
+  reds of the lane's own, cured in unit 3, whose builder runs); the reader 241,209 at its last end.
+  (a) CLOSE-7 IS TOLD (a message that joins its running turn): nothing of its two builders is on origin since 17:27
+  UTC: push each chain as a -wip now, one line of state, end a turn; and its page's section 0 is out of date since
+  the veil's pause was lifted. (b) KINDS-2's two notes taken: its order slip stands as named; its builder met a
+  door's refusal of a dirty tree (the `node_modules` symlink) by a process-scoped git exclude: accepted for the runs
+  made, and the form from now is the plainer one (remove the symlink for the door's run, put it back). (c) THE GRANTS
+  FOLLOW-UP READ BY THE CHAIR: 211's statements identical across all five commits (diffed with comments removed);
+  the owner's files are now eleven (0a, 0b a one-row read for part B, 0c, 1, 2, 3, 4, 5, 6a, 6b, 7 the standing
+  check). THE CHAIR'S OWN RUN OF THE OWNER'S READS AT THREE MOMENTS (`grants/chair-probe/chair-standing.mjs`): on the
+  chain as production stands: the standing check shows 134 rows, part B's read "true, true", file 5 134 open of
+  245; after his files 1 to 4, before the deploy: 0 rows, "false, false", 0 open; after the deploy: the same. SO HE
+  CAN RUN THE CHECKS AT ANY MOMENT AND READ THE SAME ANSWER. (d) THE READER IS SENT THE DELTA (39bfb0831e to
+  31c44a1f36) for its last word. (e) Three staff tools a visitor may still CALL (`admin_list_internal_notes`,
+  `admin_support_messages`, `list_ticket_pool`) each refuse a caller who is not staff in their first line
+  (`current_user_is_support_or_higher`): read by the chair, not a hole. THE CHECK IS RE-ARMED FOR ONE HOUR.
