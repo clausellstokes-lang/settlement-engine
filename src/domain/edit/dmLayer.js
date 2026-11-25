@@ -366,7 +366,9 @@ export function mintDmId(seed, kind, n) {
  *             paths: Record<string, unknown> }} StepRoster
  * @typedef {{ declarationsFor: (cardType: string) => readonly { field: string,
  *             outputKey?: string }[] }} DeclarationSet
- * @typedef {'engine_mismatch'|'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
+ * @typedef {'step_not_pinnable'|'unknown_key'} RederiveUnappliedReason
+ * @typedef {'engine_mismatch'|'unknown_key'} AppendUnappliedReason
+ * @typedef {RederiveUnappliedReason|AppendUnappliedReason} UnappliedReason the row type: the union of the two closed sets
  */
 
 /**
@@ -381,14 +383,8 @@ export function mintDmId(seed, kind, n) {
  */
 
 /**
- * (4) THE CLOSED REFUSAL SET for an override the pin bag will not take. THREE members, frozen,
+ * (4) THE CLOSED REFUSAL SET for an override the pin bag will not take. TWO members, frozen,
  * in codepoint order, EXPORTED so a test asserts it in both directions rather than re-typing it.
- *
- * ⭐ `engine_mismatch` IS GUARD'S (CLOSE-7; the chair's ruling R24j 4): a stored place is re-derived
- * only by the engine that bore it, so on another engine's place the layer's newcomers are APPENDED
- * (`appendMinted`) and the engine is not run. A WORLD-FACT root enters a world only as `config′`, which
- * needs the engine, so on such a place it is said and not done: it comes back with this reason and
- * nothing of it is half-applied.
  *
  * ⛔ THERE IS NO POOL REASON, AND THAT IS A RULING RATHER THAN AN OVERSIGHT (judgment 176). Pool
  * membership is a WRITE-TIME check at the single writer's door, so a value outside its pool is
@@ -397,7 +393,23 @@ export function mintDmId(seed, kind, n) {
  * at this landing, and the refusal belongs to the adapter's next member, never to this one.
  * @type {readonly RederiveUnappliedReason[]}
  */
-export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['engine_mismatch', 'step_not_pinnable', 'unknown_key']);
+export const REDERIVE_UNAPPLIED_REASONS = Object.freeze(['step_not_pinnable', 'unknown_key']);
+
+/**
+ * (4b) THE APPEND PATH'S CLOSED SET (GUARD-2; the chair's ruling R24n (1)): what `appendMinted` can
+ * hand back unapplied. TWO members, frozen, in codepoint order, EXPORTED so a test asserts it in both
+ * directions. It is its OWN set because the pin bag refuses nothing new: `REDERIVE_UNAPPLIED_REASONS`
+ * above stays the pin bag's, byte-identical (the packets EM-R1b and EM-R1c pin that line verbatim).
+ *
+ * ⭐ `engine_mismatch` IS GUARD'S (CLOSE-7; the chair's ruling R24j 4): a stored place is re-derived
+ * only by the engine that bore it, so on another engine's place the layer's newcomers are APPENDED
+ * (`appendMinted`) and the engine is not run. A WORLD-FACT root enters a world only as `config′`, which
+ * needs the engine, so on such a place it is said and not done: it comes back with this reason and
+ * nothing of it is half-applied. `unknown_key` is the same word the pin bag uses: a newcomer whose card
+ * writes no collection the record holds.
+ * @type {readonly AppendUnappliedReason[]}
+ */
+export const APPEND_UNAPPLIED_REASONS = Object.freeze(['engine_mismatch', 'unknown_key']);
 
 /** Codepoint order, the estate's own comparison, spelled locally so this leaf imports nothing. */
 const byCodepoint = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : (a > b ? 1 : 0));
@@ -643,14 +655,14 @@ function resolveNewcomers(minted, consult, declarations) {
  *   caller hands only the newcomers THIS tick minted (U111)
  * @param {unknown} declarations the INJECTED declaration set
  * @returns {{ record: Record<string, unknown>,
- *            unapplied: Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }> }}
+ *            unapplied: Array<{ key: string, value: unknown, reason: AppendUnappliedReason }> }}
  *   `record` is a NEW object; `unapplied` ASCII-ascending on key and deduplicated. THROWS NEVER.
  */
 export function appendMinted(record, layer, declarations) {
   const source = isPlainObject(record) ? /** @type {Record<string, unknown>} */ (record) : {};
   const consult = usableDeclarations(declarations);
   const { roots, minted } = normalizeLayer(layer);
-  /** @type {Array<{ key: string, value: unknown, reason: RederiveUnappliedReason }>} */
+  /** @type {Array<{ key: string, value: unknown, reason: AppendUnappliedReason }>} */
   const unapplied = [];
   for (const key of Object.keys(roots).sort(byCodepoint)) {
     const { row } = rootDeclaration(consult, key);

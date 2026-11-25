@@ -142,8 +142,7 @@ describe('EM-B2a4 — the DM layer, its pin bag and the golden isolation propert
     expect(reasons.every((reason) => REDERIVE_UNAPPLIED_REASONS.includes(reason)),
       'every reported reason is a member of the module\'s own closed set').toBe(true);
     expect([...REDERIVE_UNAPPLIED_REASONS].sort(),
-      'the closed set is exactly three (GUARD R24j 4 added engine_mismatch), so a fourth member reds here')
-      .toEqual(['engine_mismatch', 'step_not_pinnable', 'unknown_key']);
+      'the closed set is exactly two, so a third member reds here').toEqual(['step_not_pinnable', 'unknown_key']);
     const keys = out.unapplied.map((row) => row.key);
     expect(keys, 'unapplied is ASCII-ascending and deduplicated on key')
       .toEqual([...new Set(keys)].sort());
@@ -314,9 +313,9 @@ describe('EM-R1b — the power card stops being refused', () => {
       .toEqual(['powerStructure']);
     // The refusal the base gave is a member of the leaf's OWN closed set, read from the producer,
     // so the emptiness above cannot be green because the vocabulary moved underneath it.
-    expect([...REDERIVE_UNAPPLIED_REASONS].sort(), 'the closed refusal set is exactly three: this '
-      + 'member removes a CAUSE of step_not_pinnable and adds no reason (GUARD R24j 4 added engine_mismatch)')
-      .toEqual(['engine_mismatch', 'step_not_pinnable', 'unknown_key']);
+    expect([...REDERIVE_UNAPPLIED_REASONS].sort(), 'the closed refusal set is exactly two: this '
+      + 'member removes a CAUSE of step_not_pinnable and adds no reason')
+      .toEqual(['step_not_pinnable', 'unknown_key']);
   }, 900_000);
 
   it('A7 — EM-R1b: every bag pinsFrom builds for a declared collection is one the runner accepts', () => {
@@ -419,8 +418,8 @@ describe('EM-R1b — the power card stops being refused', () => {
       + 'below is a claim about an empty list').toBeGreaterThan(0);
     expect([...new Set(repairsRows)], 'the formerly blocking key\'s record path moved: the cure is '
       + 'not the one that was measured').toEqual(['record.generationCoherenceReceipt.repairs']);
-    expect([...REDERIVE_UNAPPLIED_REASONS], 'the closed refusal set is unmoved at three (GUARD R24j 4 added engine_mismatch)')
-      .toEqual(['engine_mismatch', 'step_not_pinnable', 'unknown_key']);
+    expect([...REDERIVE_UNAPPLIED_REASONS], 'the closed refusal set is unmoved at two')
+      .toEqual(['step_not_pinnable', 'unknown_key']);
   }, 900_000);
 });
 
