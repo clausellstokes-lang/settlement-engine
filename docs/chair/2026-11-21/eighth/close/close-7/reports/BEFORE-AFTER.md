@@ -26,3 +26,17 @@ Labels: CONFIRMED = counted by a run in this unit; PLAUSIBLE = read from a repor
 ## Runs
 
 (filled as runs complete)
+- LINE, C, town-metropolis (450 births): exit=0, 710 s. CONFIRMED (23 rows on LINE; no NOHEAL, FOODSEC, FEDFARE, B1land,
+  B1furrow rows there): P5b 1, P16three 315, P17 450, P18 419, every other row 0. Renders in the scratchpad, `runs/line-C-large`.
+
+## Status at the stop (the allowance)
+
+STOPPED by a hand-back order before the measure finished. A detached queue (`scratchpad/queue.sh`) was still running at
+the stop: record hashes (GUARD) and food-of on all three trees, then the eleven remaining battery halves, each through the
+gate mutex to `before-after/logs/` with `exit=`. Nothing below this line is measured yet. The three `ba-*` worktrees are
+still in place (the queue uses them); remove them when it ends.
+
+Method checked on 12 births (CONFIRMED): `--from=<LINE render> --tree=<CURES>` applies the later tree's rows (26) to the
+LINE pages without rewriting them, so NOHEAL, FOODSEC and FEDFARE can be counted on LINE; on those 12, LINE and CURES born
+records differ in `generatorVersion` only ("0.9.0" -> "0.10.0"), 12 of 12. C1 has no battery row; its carriers are to be
+counted as V births whose record moves CURES -> BATCH.
