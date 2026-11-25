@@ -46,7 +46,11 @@
 
 export const SCHEMA_VERSION     = 3; // ALLEGIANCE-CAR1 (2026-11-08): 2 -> 3, the hidden allegiance (settlementMigrations.js :: migrateV2toV3); PEOPLE-5B (2026-11-07, M-7): 1 -> 2, the people car (migrateV1toV2)
 export const SIMULATION_VERSION = 1;
-export const GENERATOR_VERSION  = '0.9.0';
+export const GENERATOR_VERSION  = '0.10.0'; // GUARD (R24j 1, 2026-11-25): 0.9.0 -> 0.10.0, the engine whose births moved since master's release; a stored place is re-derived only by the engine that bore it (editSlice.js :: applyRosterDecreesAtTick)
+// The stamp a record that carries NONE is given on load (R24j 2): the last engine that bore records without
+// a stamp being checked, never the current one, so a load can never make an old place look new-born. The
+// current version is written at BIRTH alone (generators/steps/assembleSettlement.js).
+export const LEGACY_GENERATOR_VERSION = '0.9.0';
 
 // ── Canonical field-name map ────────────────────────────────────────────────
 // When the legacy shape uses multiple names for the same concept, this map

@@ -87,6 +87,9 @@ const EDIT_SLICE_IMPORTS = Object.freeze([
   '../domain/edit/guards.js',
   '../domain/edit/operations.js',
   '../domain/edit/registry.js',
+  // GUARD (CLOSE-7; R24j 3): the re-derivation's guard reads the engine's own version, a pure
+  // constant of the import-free schema file, so it adds no writer, component or generator edge.
+  '../domain/settlement.schema.js',
 ]);
 
 /** Every .js/.jsx under src/, repo-relative with forward slashes. */
@@ -212,7 +215,7 @@ describe('EM-C4a — ONE MUTATION PATH (no second writer of a settlement edit)',
     ).toEqual([]);
   });
 
-  it('A5 — the store leaf imports EXACTLY the six declared modules, so neither the cascade branch nor the registry half adds an unlisted import edge', () => {
+  it('A5 — the store leaf imports EXACTLY the seven declared modules, so neither the cascade branch nor the registry half adds an unlisted import edge', () => {
     const source = readFileSync(join(REPO_ROOT, 'src/store/editSlice.js'), 'utf8');
     const specifiers = [...source.matchAll(/^import[\s\S]*?from '([^']+)';$/gm)].map((hit) => hit[1]).sort();
     // A rename helper, a component or a second cascade would show up HERE first: the

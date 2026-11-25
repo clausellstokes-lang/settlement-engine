@@ -227,7 +227,8 @@ describe('EM-C4a — the store plain-edit half', () => {
       .map((hit) => hit[1]);
     // anchored: both scans are LIVE — the import scan sees the four modules this file
     // really imports, and the assignment scan sees the two layer writes it really makes.
-    expect(imported.length).toBe(6);
+    // GUARD (CLOSE-7; R24j 3) adds the seventh: the engine's own version, from the import-free schema file.
+    expect(imported.length).toBe(7);
     expect(assigned.filter((target) => target === 'state.settlement.dmLayer').length).toBe(2);
     expect(imported.filter((specifier) => /factionRename|RenameHelpers|pendingEdits/.test(specifier))).toEqual([]);
     expect(assigned.filter((target) => /npcs|factions|relationships/.test(target))).toEqual([]);
