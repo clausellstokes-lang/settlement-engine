@@ -16,6 +16,7 @@
  *   node page-battery.mjs --from=<dir> [--plan=<plan.json>|--grid] [--tree=...]   count a run already rendered into <dir>
  *   node page-battery.mjs --diff=<dirBefore>,<dirAfter>      per birth: rows gained or lost, record hash moved, page hash moved
  *   --views (with a render)                                   also write each birth's printed views (`printed`: 'Group/Tab' → lines)
+ *   --strings (with a render; WORDS-1)                        also write every string of the record and of the public projection
  *   --subst=<file.json> (with a render, a measure only)        [[from, to], …] replaced in every string of each born record first
  * Writes `<out>/rows/<seed>.json` (rows, findings, recordHash, pageHash), `<out>/counts.json`, `<out>/table.txt` (per pattern:
  * the count by size, then three seeds) and `<out>/seeds/<row>.txt` (every seed of every pattern), and prints the table.
@@ -81,7 +82,7 @@ export default { root: '${TREE}', plugins: [react()], server: { fs: { allow: ['$
     writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
     return new Promise((done) => {
       const child = spawn('npx', ['vitest', 'run', '--config', join(out, 'vitest.page-battery.config.mjs')], {
-        cwd: TREE, env: { ...process.env, PAGE_BATTERY_OUT: join(out, 'rows'), PAGE_BATTERY_PLAN: part, PAGE_BATTERY_TREE: TREE, ...(process.argv.includes('--views') ? { PAGE_BATTERY_VIEWS: '1' } : {}), ...(arg('subst') ? { PAGE_BATTERY_SUBST: readFileSync(String(arg('subst')), 'utf8') } : {}) }, stdio: ['ignore', 'pipe', 'pipe'],
+        cwd: TREE, env: { ...process.env, PAGE_BATTERY_OUT: join(out, 'rows'), PAGE_BATTERY_PLAN: part, PAGE_BATTERY_TREE: TREE, ...(process.argv.includes('--views') ? { PAGE_BATTERY_VIEWS: '1' } : {}), ...(process.argv.includes('--strings') ? { PAGE_BATTERY_STRINGS: '1' } : {}), ...(arg('subst') ? { PAGE_BATTERY_SUBST: readFileSync(String(arg('subst')), 'utf8') } : {}) }, stdio: ['ignore', 'pipe', 'pipe'],
       });
       /** @type {Buffer[]} */ const log = [];
       child.stdout.on('data', (d) => log.push(d)); child.stderr.on('data', (d) => log.push(d));

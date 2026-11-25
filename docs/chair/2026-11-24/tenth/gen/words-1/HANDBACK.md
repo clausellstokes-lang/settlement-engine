@@ -19,6 +19,21 @@ THE UNITS, IN ORDER:
 3. D6, the contender's word (intake 11; SCOPE-LINE decision 2). THE CHAIR PICKS: three wordings, each with the count of
    pages it changes and one page read whole with it. The word only; no standing, seat or tie changes.
 
+RULINGS IN FORCE (verbatim in `docs/chair/2026-11-24/tenth/gen/RULING-G.md` on lane/chair-2026-11-08):
+- G5 (09:35) E1, by source: (1) role rung holding a possessive before 's: skip that rung, take the next; none left: the "of"
+  form. (2) power name holding a possessive in the five joiners: the "of" form there only; a name without one byte for byte.
+  (3) house fill: the SHORT title derived from the long one's own source by dropping the possessor (no new table, no title
+  hard-coded; D8 may re-word "reeve"); else "the office of the lord's steward". (4) "{settlement}'s {institution}" where the
+  institution holds a possessive: "the {institution} at {settlement}", as a rule. CHECK: the measure's detector over every
+  composed sentence of every birth of C and V, OWNER pages AND the PUBLIC PROJECTION: 0 after; places moved = the table's.
+  Hand-in names any re-worded joiner that writes a power's description or standing tail (for the veil's lane).
+- G5, E8's scope: WIDE: a reflexive bound to ONE person takes that person's stored pronoun (card lines binding the card's
+  own person, and the tie); no gender or "they" keeps "themselves". Counts on both corpora; golden rows named.
+- G7 (09:52) D6: wording 1 ("Could contend" / "Could contest the seat"), EVERY tied card, tied = dependent, symbiotic OR
+  subordinate (C 502, V 452 pages). Shared page does not stop it; touch nothing under gallery*. OWED COUNT: of the cards that
+  keep "Contender"/"Contests the seat", how many hold a recorded conflict with the holder (C and V). The two phrases go on
+  the owner's veto list.
+
 GROUND:
 - Corpora: C = `tools/make-plan.mjs` (dp-<size>-<i>, i 0..149, config {settType}); V = `tools/make-visitor-plan.mjs` over
   `tools/plan-lit.json` (the chair's, copied). Plans in the scratchpad as planC.json / planV.json (regenerable).
@@ -53,8 +68,22 @@ card; the wants RANK.enter and POWER.corrupted carry `{self}` (goalFamilies.js),
 written (`writtenText`); every candidate is held/compared on the old text (`HELD_SELF`), stored texts read back by `heldText`.
 Red first: tests/generators/people/reflexiveSlot.test.js (2 red on base, 14 wrong in 5 births); green with goalFamilies,
 personMention walker and leaf tests (47/47).
-RUNNING (background): twin dumps base/e8 on C and V (`tools/twin-dump.mjs --norm=e8`, logs twin-*.log), then e8-check base/e8
-on C and V (`tools/e8-check.mjs`), then the named tests (27 files), tests/lint whole, tests/copy whole (logs e8-*.log).
+E8 STEP ONE PROVEN ON RECORDS (10:25 UTC): twin (`tools/twin-dump.mjs --norm=e8`): C 390 records moved [0 3 18 77 142 150],
+V 385 [0 2 17 82 135 149], moved BEYOND the reflexive 0 and 0. Every-birth check (`tools/e8-check.mjs`): base C 627 wrong in
+390 places / V 616 in 385; E8 0 / 0. -e8-wip PUSHED at 5214ccd2f.
+E1 BUILT (10:25 UTC): `lane/words-1-2026-11-25-e1-wip` 2a378064a (worktree /home/user/wt/e1), NOT YET PUSHED. Test
+tests/components/doublePossessive.test.jsx; its red runs in /home/user/wt/red (detached base, the test file copied in, never
+committed). Touches: personMention.js (role rung, own regex ROLE_POSSESSIVE), powerSentenceName.js (holdsPossessive, re-exported),
+stateProseKernel.js (ofForms in fillSlots), factionDynamics.js (ruleOf on the line-18 one-liner; ORDAINED_SEAT reads both forms;
+line count unchanged), governanceAccount.js (rightToRule: THE STANDING SENTENCES, name it for the veil's lane), dmPowerLines.js
+(ownNoun), goals.js (houseFill short title). Read in part only: stateProseKernel.js, npcData.js (say so in the hand-ins).
+D6: worktree /home/user/wt/d6 on `-d6-wip` at base + tests/components/contenderBoundWord.test.jsx; its RED RUN IS QUEUED: edit
+nothing in wt/d6 until d6-red.log has its exit line. Plan: powerStrata.js BOUND_TO_RULER_KINDS + `bound` on contender entries,
+`powerBound` on roster rows (ties to the ruler OR its seatOf form); PowerStrata.jsx label/marker/aria; re-state the two pins
+(powerStrata.test.jsx crafted Merchant Guilds dependent -> "Could contest the seat"; powerSeatRender thorp-57 count) by cause.
+QUEUE (background, one at a time through the mutex): E8 named tests (rosterFinalUnderHeldRoster A1 golden red: check base), lint,
+copy; D6 red; E1 red, green. THEN: one scratch tree joining e1+e8+d6; page battery `--views --strings` on base and on it, C and V
+(`tools/page-battery.mjs` now writes record and public-projection strings under --strings); classify every changed string by unit.
 THEN: push -e8-wip; page battery renders of e8 for the before-and-after (pages moved, both zero checks); hand in "UNIT E8".
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.

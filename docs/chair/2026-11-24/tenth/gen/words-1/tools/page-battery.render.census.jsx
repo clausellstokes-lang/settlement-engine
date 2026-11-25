@@ -68,6 +68,7 @@ for (const row of PLAN) {
     const config = row.config ? m.birthConfig(row.config) : m.configOf(row, m.DEFAULT_CONFIG, m.birthConfig);
     let town = m.generateSettlementPipeline(config, null, { seed: row.seed, customContent: {} });
     const recordHash = sha(town);
+    const born = town; const publicOf = process.env.PAGE_BATTERY_STRINGS ? m.composePublicProse(town) : null;
     // `--subst=<json>` (a measure only): [[from, to], …] replaced in every string of the born record before the page is composed
     if (process.env.PAGE_BATTERY_SUBST) { let j = JSON.stringify(town); for (const [f, t] of JSON.parse(process.env.PAGE_BATTERY_SUBST)) j = j.split(f).join(t); town = JSON.parse(j); }
     town = m.withPublicProse(town, m.composePublicProse(town));
@@ -75,8 +76,13 @@ for (const row of PLAN) {
     const { container } = render(createElement(m.OutputContainer, { settlement: town }));
     const views = await m.walkDossier(container, { fireEvent, waitFor, expect });
     const findings = m.pageCensusFindings(town, views);
+    // WORDS-1 (not in CLOSE-7's copy): `PAGE_BATTERY_STRINGS=1` also writes every string of the born record and of the public
+    // projection (`composePublicProse`, read before the record is stamped), by path, for a unit's string-level twin
+    /** @param {unknown} v @param {string} path @param {Record<string, string>} acc @returns {Record<string, string>} */
+    const flat = (v, path, acc) => { if (typeof v === 'string') acc[path] = v; else if (Array.isArray(v)) v.forEach((x, i) => flat(x, `${path}[${i}]`, acc)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) flat(x, `${path}.${k}`, acc); return acc; };
+    const strings = process.env.PAGE_BATTERY_STRINGS ? flat(publicOf, 'public', flat(born, 'record', {})) : null;
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, crisis: row.crisis ?? null,
       views: Object.keys(views).length, recordHash, pageHash: sha(views), rows: [...new Set(findings.map((f) => f.row))].sort(), findings,
-      ...(process.env.PAGE_BATTERY_VIEWS ? { printed: views } : {}) }));
+      ...(process.env.PAGE_BATTERY_VIEWS ? { printed: views } : {}), ...(strings ? { strings } : {}) }));
   }, 300000);
 }
