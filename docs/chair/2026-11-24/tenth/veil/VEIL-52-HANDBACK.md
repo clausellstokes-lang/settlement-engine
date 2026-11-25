@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 04:46 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 04:58 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -82,6 +82,15 @@ absent at every door). A THIRD CONTAINER RESTART at ~04:15 (PostgreSQL restarted
 SNAP-CHRONICLE's cure by `v52/briefs/SNAP-CHRONICLE-BRIEF.md` (791b113e7); its report `docs/chair/2026-11-24/tenth/veil/v52/builder/
 SNAP-CHRONICLE-HANDBACK.md` on the -wip; logs `/var/tmp/v52/builder2/`. THEN the map-door arms. PART (2), 212: ASKED VEIL-55 04:45 for my
 place (unit 4 = (38)); no SQL until its word; the hunk to the chair before VEIL-55's grant.
+
+### UNIT 3 PART (2) BEGUN 04:5x (VEIL-55 04:42: build now on dbd4cd9e5; write the item as (39); the number is set at the lane's merge):
+`lane/veil-52-2026-11-24-dsql-wip` (worktree `/home/user/wt/dsql`, pushed) = dbd4cd9e5 + `-mcsql-wip` 912be7b4e merged as b678d7002 (three
+header conflicts resolved with both sides; the map member's item (36) -> (39), after (37)). UNCOMMITTED in the worktree: the two test
+files' citations (36) -> (39) and THE BIJECTION FOLD in galleryServerVeil's member-vs-link arm (`people(canon(memberRaw))`, as now.lPage)
+with an inline tooth (a card id moved after the fold must make them differ). RUNNING `v52/u3a.sh R G` (log `/var/tmp/v52/log/u3.log`,
+outputs `/var/tmp/v52/u3/`): R = the arm PLAIN (red expected), G = folded + MemberCount + MapCovert + ImportEqualsRead. Then commit the
+fold with R and G quoted; then `u3a.sh L` (tests/lint whole). STILL OWED in unit 3: sameModuloIds -> the bijection (ImportEqualsRead),
+the census re-run, "a shown person stays shown", THE BUILD (D7: doors-3's section into 212), the door-equality arm, the proofs, "TIP?".
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
