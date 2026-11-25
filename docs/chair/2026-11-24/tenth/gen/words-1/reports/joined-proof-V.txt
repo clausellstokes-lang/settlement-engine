@@ -1,0 +1,35 @@
+joined-proof scratchpad/s-base-V → scratchpad/s-join-V: births 900
+  places moved: record hash 416, page hash 556; page-battery rows moved on 0 places
+  E1 detector (gap 1) before: owner pages 145 hits in 126 places; public projection 34 in 19; record strings 96 in 90
+  E1 detector (gap 1) after: owner pages 0 hits in 0 places; public projection 0 in 0; record strings 0 in 0
+  D6: 0 strings, 2675 printed lines; places 452 (page 452)
+    dp-city-0 [page]
+      − ContenderMilitary/GuardMilitaryMinor▼
+      + Could contendMilitary/GuardMilitaryMinor▼
+    dp-city-1 [page]
+      − ContenderMerchant GuildsMerchantMinor▲
+      + Could contendMerchant GuildsMerchantMinor▲
+    dp-city-100 [page]
+      − ContenderMilitary/GuardMilitarySuppressed▲
+      + Could contendMilitary/GuardMilitarySuppressed▲
+  E1: 130 strings, 145 printed lines; places 143 (page 126)
+    dp-city-10 [page]
+      − Oberwiese's Caravan masters' exchange can offer less the longer its supplies stay short, and nobody is putting it right.
+      + The Caravan masters' exchange at Oberwiese can offer less the longer its supplies stay short, and nobody is putting it right.
+    dp-city-103 [page]
+      − Somebody at Megaikon is a little too well informed about the Corrupt City Council's business and a little too easy about money, and nobody has connected the two. A share of what arrives at Megaikon never appears at the g
+      + Somebody at Megaikon is a little too well informed about the Corrupt City Council's business and a little too easy about money, and nobody has connected the two. A share of what arrives at Megaikon never appears at the g
+    dp-city-109 [page]
+      − Someone has bought a member of the Corrupt City Council at Chinggisnuur: news of the Corrupt City Council's business now goes where it should not. Goods reach Chinggisnuur unrecorded: the cargo lists are false, and the d
+      + Someone has bought a member of the Corrupt City Council at Chinggisnuur: news of the Corrupt City Council's business now goes where it should not. Goods reach Chinggisnuur unrecorded: the cargo lists are false, and the d
+  E8: 595 strings, 593 printed lines; places 381 (page 381)
+    dp-city-0 [record]
+      − Dervla Treacy has asked Cairbre Murphy for an introduction the black marketeer would rather keep to themselves.
+      + Dervla Treacy has asked Cairbre Murphy for an introduction he would rather keep to himself.
+    dp-city-1 [record]
+      − Find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+      + Find a patron among those who lead the Merchant Guilds, and make herself useful to them.
+    dp-city-10 [record]
+      − Find a patron among those who lead the Noble Governorship, and make themselves useful to them.
+      + Find a patron among those who lead the Noble Governorship, and make himself useful to them.
+  OTHER (unexplained by any unit): 0

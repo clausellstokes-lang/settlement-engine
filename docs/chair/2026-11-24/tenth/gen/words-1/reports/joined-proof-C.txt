@@ -1,0 +1,35 @@
+joined-proof scratchpad/s-base-C → scratchpad/s-join-C: births 900
+  places moved: record hash 439, page hash 587; page-battery rows moved on 0 places
+  E1 detector (gap 1) before: owner pages 125 hits in 122 places; public projection 52 in 41; record strings 120 in 116
+  E1 detector (gap 1) after: owner pages 0 hits in 0 places; public projection 0 in 0; record strings 0 in 0
+  D6: 0 strings, 3732 printed lines; places 502 (page 502)
+    dp-city-0 [page]
+      − ContenderMilitary/GuardMilitaryMinor▼
+      + Could contendMilitary/GuardMilitaryMinor▼
+    dp-city-1 [page]
+      − ContenderMilitary/GuardMilitaryMinor▼
+      + Could contendMilitary/GuardMilitaryMinor▼
+    dp-city-10 [page]
+      − ContenderReligious AuthoritiesReligiousStrong▼
+      + Could contendReligious AuthoritiesReligiousStrong▼
+  E1: 172 strings, 125 printed lines; places 163 (page 122)
+    dp-city-10 [page]
+      − Uaymtzal's Caravan masters' exchange can offer less the longer its supplies stay short, and nobody is putting it right.
+      + The Caravan masters' exchange at Uaymtzal can offer less the longer its supplies stay short, and nobody is putting it right.
+    dp-city-101 [record]
+      − Wei Lee wants Kang He's position, and the senior charter master wants the network's head's reputation. They are civil in public and unforgiving in private.
+      + Wei Lee wants Kang He's position, and the senior charter master wants Lee's reputation. They are civil in public and unforgiving in private.
+    dp-city-114 [record]
+      − Laberia Moderatus cannot finish what they have started without Tertulla Julianus's help, and the network's head cannot finish theirs without the hospital's master's. Neither lets the other forget it.
+      + Laberia Moderatus cannot finish what they have started without Tertulla Julianus's help, and the network's head cannot finish theirs without Moderatus's. Neither lets the other forget it.
+  E8: 627 strings, 626 printed lines; places 390 (page 390)
+    dp-city-0 [record]
+      − Find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+      + Find a patron among those who lead the Merchant Guilds, and make herself useful to them.
+    dp-city-1 [record]
+      − Find a patron among those who lead the City Council, and make themselves useful to them.
+      + Find a patron among those who lead the City Council, and make herself useful to them.
+    dp-city-10 [record]
+      − Find a patron among those who lead the Merchant Guild Council, and make themselves useful to them.
+      + Find a patron among those who lead the Merchant Guild Council, and make himself useful to them.
+  OTHER (unexplained by any unit): 0

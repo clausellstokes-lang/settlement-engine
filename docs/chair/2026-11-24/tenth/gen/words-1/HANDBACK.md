@@ -137,6 +137,14 @@ STATE AT 15:31 UTC:
   seat's unit and say HANDS OVER at a commit boundary.
 - E1 residue cure 902b7005d PUSHED (from wt/e1). Joined tree rebuilt with it (first joined renders kept as s-join1-*);
   re-render of join C/V, E1 lint, typechecks on e1 and join running (s-join-*.log, e1c-lint.log, tc2-*.log).
+STATE AT 16:22 UTC:
+- UNIT E1 HANDED IN (16:21) at 902b7005d to the chair and CLOSE-7: joined proof (`reports/JOINED-PROOF.md`) owner pages
+  C 125/122 → 0, V 145/126 → 0; public C 52/41 → 0, V 34/19 → 0; record → 0; page places moved 122 / 126 = the table;
+  unexplained 0/0; battery rows 0/0. Lint = base four; typechecks OK on e1 and the joined tree.
+- G21 (15:30): nothing more built on D6; the "Contender" figure named for the owner's veto.
+- The joined tree /home/user/wt/join REMOVED (its commits are in JOINED-PROOF.md).
+- NEXT (G20 (3)): when CLOSE-7 has taken D6, E1, E8: one line to the chair with my context size; under 600,000 build E8b
+  as `lane/words-1-2026-11-25-e8b-wip`, else hand over at a commit boundary with E8b's design (G20 (2)) as the next unit.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
