@@ -38,4 +38,6 @@ dmPowerLines.js theOwn); (3) wants' house fill (`goals.js :: PERSON_HOUSE_PLACE`
 E8 ON C: 0 sentences with he/she beside a they-reflexive (N28 holds). The class left: a they-reflexive bound to ONE gendered
 person: card lines (goal.short "make themselves useful" 419 printed, personality.tell, presentation.impression, secrets) and
 the tie "would rather keep to themselves". Needs a hand-classed bound/other table, like THEY_BOUND.
-NEXT STEP: E1 on V, then the E1 ruling message (one table, a form per source); then E8 from e8-records.
+E1 DONE AS A MEASURE (09:35 UTC): `reports/E1.md` (C 125/122, V 145/126; the four sources, three examples each, the
+proposed forms). THE RULING ASKED of the chair at 09:35 UTC. BUILD NOTHING OF E1 UNTIL IT COMES.
+NEXT STEP: E8 from e8-records (hand-class bound/other by template; red first; the slot; the check over every birth).
