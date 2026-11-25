@@ -1,0 +1,127 @@
+##### tests/data/w2FixData6Rows.test.js :: W2-FIX-DATA-6: the census writers in the data lane's files > CENSUS-2 b: under a siege the coaching inn takes no traveller off the road and sends no relay out (r2s-under_siege-town-1); a calm town keeps both lines (r2r-town-2)
+AssertionError: expected [] to include 'Beds, meals, and stabling, though wit…'
+##### tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiGroundingBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+AssertionError: aiGroundingBundle.meta.json was built from content that is neither committed nor staged.
+This is the DIRTY-BUILD class: the freshness suite agrees with it because
+it reads the same dirty working tree, but no checkout can reproduce the
+artifact. Cure: commit or stage every changed input, re-run
+`npm run build:edge-shared`, and commit the bundle with its inputs.: expected '7c84eee1842dcdfa' to be '75588c2bee4c0f74' // Object.is equality
+##### tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiCharterBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+AssertionError: aiCharterBundle.meta.json was built from content that is neither committed nor staged.
+This is the DIRTY-BUILD class: the freshness suite agrees with it because
+it reads the same dirty working tree, but no checkout can reproduce the
+artifact. Cure: commit or stage every changed input, re-run
+`npm run build:edge-shared`, and commit the bundle with its inputs.: expected '9b225e1687a0584f' to be '1718fb532bd2d00f' // Object.is equality
+##### tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > intentAtlasBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+AssertionError: intentAtlasBundle.meta.json was built from content that is neither committed nor staged.
+This is the DIRTY-BUILD class: the freshness suite agrees with it because
+it reads the same dirty working tree, but no checkout can reproduce the
+artifact. Cure: commit or stage every changed input, re-run
+`npm run build:edge-shared`, and commit the bundle with its inputs.: expected '9988f16fd1912957' to be '69ba037dc75892dc' // Object.is equality
+##### tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiOutputSchemaBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+AssertionError: aiOutputSchemaBundle.meta.json was built from content that is neither committed nor staged.
+This is the DIRTY-BUILD class: the freshness suite agrees with it because
+it reads the same dirty working tree, but no checkout can reproduce the
+artifact. Cure: commit or stage every changed input, re-run
+`npm run build:edge-shared`, and commit the bundle with its inputs.: expected 'f2a4a6a702a2f616' to be 'd795413ff165c35b' // Object.is equality
+##### tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > engineBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+AssertionError: engineBundle.meta.json was built from content that is neither committed nor staged.
+This is the DIRTY-BUILD class: the freshness suite agrees with it because
+it reads the same dirty working tree, but no checkout can reproduce the
+artifact. Cure: commit or stage every changed input, re-run
+`npm run build:edge-shared`, and commit the bundle with its inputs.: expected '7e6cd45ea3f87be7' to be 'cab0dcca92d6ffd0' // Object.is equality
+##### tests/edgeFunctions/intentAtlasBundle.freshness.test.js :: intentAtlas bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+  src/domain/data/intentAtlas.distillate.json
+  src/domain/intentAtlas.js
+Run: npm run build:edge-shared: expected '9988f16fd1912957' to be '69ba037dc75892dc' // Object.is equality
+##### tests/components/dossierPhoneFloorAllViews.test.jsx :: THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+AssertionError: 
+MOBILE_BASELINE mismatch. Each row counts the lines this view gave a reader at 375px, split by the class each was judged as, with the two sub-floor counts that must stay zero.
+A number that FELL means a surface stopped rendering or a fold stopped opening — which "zero violations" cannot see. A number that ROSE means new lines; say so.
+Deliberate? Re-measure, re-record MOBILE_BASELINE in the same car, and name the cause in the commit message.
+: expected { 'Summary/Overview': { …(4) }, …(19) } to deeply equal { 'Summary/Overview': { …(4) }, …(19) }
+##### tests/components/dossierPhoneFloorAllViews.test.jsx :: THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+AssertionError: 
+DESKTOP_BASELINE mismatch. Each number counts lines rendered ABOVE the breakpoint, so a diff means an FS token, a fold or a surface moved on desktop — which proseFontSize/chromeFontSize (identity when mobile===false) must never do.
+Deliberate? Re-measure, re-record DESKTOP_BASELINE in the same car, and name the moved token in the commit message.
+: expected { 'Summary/Overview': { …(2) }, …(19) } to deeply equal { 'Summary/Overview': { …(2) }, …(19) }
+##### tests/components/economicsChainOutputsBorneOut.test.jsx :: a chain card prints only the outputs its houses bear out (item 7) > no court's work where no courthouse stands (#555, rr2s-town-plague_onset-rand-1); the guard town with a courthouse keeps it (rww-town-occupied-1)
+AssertionError: anchored: expected [ 'Stone quarry', …(35) ] to include 'Courthouse'
+##### tests/components/tailDisplayCivicBatch2.test.jsx :: batch 2: a pair's chip does not call a high quarrel stable > the cured chips no longer print, and the pair still does
+AssertionError: expected [ Array(1) ] to deeply equal []
+##### tests/components/traditionsSameWindowChain.test.jsx :: X-50: three traditions in one window print three different calendar lines > soak1k-5255: the window prints once, and each later card names the nearest earlier one
+AssertionError: expected +0 to be 1 // Object.is equality
+##### tests/generators/bar4RecordHouseInput.test.js :: R1: a house the record calls short of its input is short on the page too (one reading, houseInputAtHand) > POSITIVE CONTROL: a short sawmill whose town is still said to sell its "Milled lumber" fires
+AssertionError: expected [] to deeply equal [ 'Sawmill output: Milled lumber' ]
+##### tests/generators/bar4RecordHouseInput.test.js :: R1: a house the record calls short of its input is short on the page too (one reading, houseInputAtHand) > KEEP: the gap line the record now asks for prints, and the mark has its line
+AssertionError: expected [ …(3) ] to include 'No timber reaches the sawmill.'
+##### tests/generators/faultsNeed.test.js :: FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the page's need list > the towns of the sample: the leaf is the page's list, label by label, and the atom reads it through factsOf, the public page and the veil alike
+AssertionError: undefined — 1 of 40 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-town-54 — r2r-town-54: expected [ 'clay' ] to deeply equal [ Array(2) ]: expected [ Array(1) ] to deeply equal []
+##### tests/generators/fishRowOnWater.test.js :: a fishing row on water is a fish source > soak1k-116 and soak1k-152: an inland Fish market is no catch
+AssertionError: soak1k-116 keeps a Fish market: expected false to be true // Object.is equality
+##### tests/generators/gapSaysWhichKind.test.js :: a gap says which kind — READER R1's named births > missing: the TRUE gaps stay written — the potter's and brickmaker's clay, the vintner's grapes, the sawmill's timber
+AssertionError: soak1k-764 Sawmill -> timber: expected [] to deeply equal [ 'missing' ]
+##### tests/generators/hookThemeDraws.test.js :: HK-3 draws — the corpus, through the real pipeline > pin:no-hook-is-lost — the count the DM sees is byte-for-byte what it was
+AssertionError: the corpus NPC-hook total moved — HK-3 must never drop a hook: expected 2145 to be 2147 // Object.is equality
+##### tests/generators/stressFactionsClaimWhatTheRecordHolds.test.js :: TAIL-POWERS-B-3 batch 6b · the stress factions and the bread hook claim what the record holds > KEEP r2s-religious_conversion-town-0: "Losing congregation to the new faith faster than leadership acknowledges publicly." still prints
+AssertionError: expected '{"name":"Donggou","tier":"town","popu…' to contain 'Losing congregation to the new faith …'
+##### tests/generators/tailTies4Batch2.test.js :: TAIL-TIES-4 batch 2: a tie gives its military end no office its house does not hold (T19, decided (B)) > NOT: the line that gave the card an office no longer prints; INSTEAD: the same tie prints the reworded line
+AssertionError: NOT: every old office line is gone and its tie prints the reworded line — 5 of 18 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[9] ["r2r-city-39","command reports to","Garrison","Someone among"] — r2r-city-39: instead, Someone among: expected false to be true // Object.is equality
+[10] ["r2r-metropolis-12","operation street by street","Citadel","operation out street by street"] — r2r-metropolis-12: instead, operation out street by street: expected false to be true // Object.is equality
+[11] ["r2r-metropolis-12","ordered to stand down against","Citadel","cannot refuse. Nobody has said why."] — r2r-metropolis-12: instead, cannot refuse. Nobody has said why.: expected false to be true // Object.is equality
+[14] ["r2s-famine-city-1","colours on the road","Garrison","colours and take"] — r2s-famine-city-1: instead, colours and take: expected false to be true // Object.is equality
+[15] ["r2s-famine-city-1","company was killed protecting","Garrison","people was killed protecting"] — r2s-famine-city-1: instead, people was killed protecting: expected false to be true // Object.is equality: expected [ …(5) ] to deeply equal []
+##### tests/generators/tailTies4Batch2.test.js :: TAIL-TIES-4 batch 2: a tie gives its military end no office its house does not hold (T19, decided (B)) > KEEP: the archetype's unchanged lines still print
+AssertionError: KEEP: every archetype's unchanged line still prints — 1 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[1] ["r2r-metropolis-12","The contract is up for renewal"] — r2r-metropolis-12: The contract is up for renewal: expected false to be true // Object.is equality: expected [ Array(1) ] to deeply equal []
+##### tests/generators/terrainPoolsInlandTexts.test.js :: inland texts on their seeds > soak1k-116: the village Fish market sells salted fish, not the day's catch
+TypeError: Cannot read properties of undefined (reading 'desc')
+##### tests/scripts/implementationPackets.test.js :: IA-1 implementation packet manifest and capsule > discharges a row whose subject an authorized ruling removed, and refuses an uncited retirement
+AssertionError: expected { ok: false, errors: [ …(2) ] } to deeply equal { ok: true, errors: [] }
+##### tests/property/dossierProseManifest.test.js :: the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+AssertionError: the DRIFT corpus by seed, cells and towns: expected { 'golden-master-v3': { …(2) }, …(3) } to deeply equal { 'golden-master-v3': { …(2) }, …(3) }
+##### tests/property/dossierProseManifest.test.js :: the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+AssertionError: rows whose composed prose moved: expected [ …(1050) ] to deeply equal []
+##### tests/property/dossierProseManifest.test.js :: the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+AssertionError: positions the DM sees and the player does not, pinned as lawful: expected 213 to be 214 // Object.is equality
+##### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A3 no merged object mixes a taken leaf with a settled leaf outside a declared consistency group
+AssertionError: the instrument is not idle: expected 328 to be 327 // Object.is equality
+##### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A4 the town keeps its invariants, the layer channel escalates nothing, and the config channel is named
+AssertionError: expected { E7: 29, E8: 9 } to deeply equal { E7: 32, E8: 10 }
+##### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted
+AssertionError: expected { 'E1|E6': 7, 'E2|E6': 7, …(2) } to deeply equal { 'E1|E6': 6, 'E2|E6': 6, …(2) }
+##### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+AssertionError: the edits that DO reach a reading: expected [ 695, 284, 2795 ] to deeply equal [ 695, 275, 2179 ]
+##### tests/property/heraldKnowledgeDeskGolden.test.js :: the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK
+AssertionError: expected '4600b864122b8ab5e153e8de5eb7d6f1e3fdc…' to be 'a4294c066e34f62ba2dbcb8987a1a5c0c19f4…' // Object.is equality
+##### tests/property/statecraftExposureBand.test.js :: STATECRAFT-BAND U1 — the seeded run: the chain at the band > dramatic_campaign fp-read-2, head on, twenty years: scandals inside the measured band and mobilizations at the dark twin
+AssertionError: expected 78 to be less than or equal to 57
+##### tests/domain/bar6ScenesGoods.test.js :: the facts the cure made > B7 (BAR7-SCENES): the kilns hold three in r2s-religious_conversion-metropolis-0; the arms' villages keep two, not one
+TypeError: actual value must be number or bigint, received "undefined"
+##### tests/domain/bar8DesksEco.test.js :: BAR8-DESKS-ECO · 11c: `critical import brought in`, one reading with the page > the towns that printed "must come from elsewhere" false hold the atom false; the town whose good is brought in holds it true
+AssertionError: the anchors of 11c — 1 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[1] ["bar0-town-calm-rand-46","clay",false] — bar0-town-calm-rand-46: the lens's good: expected 'grain' to be 'clay' // Object.is equality: expected [ Array(1) ] to deeply equal []
+##### tests/domain/mergeLadderHeldKeys.test.js :: EM-R8 — the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record > A2 · the escalation census by channel: the layer channel is silent and the config channel EXHAUSTS
+AssertionError: the config channel escalates on both world-fact edits, at the figures measured at this landing: expected [ Array(2) ] to deeply equal [ Array(2) ]
+##### tests/domain/tailCrisisBatch8.test.js :: a power the crisis has not touched prints no stake row > r2s-famine-city-1 (famine): Merchant Guilds prints no row (red at aa78d1ec9: "has no stake yet"); the record keeps its split
+AssertionError: expected [ 'Merchant Guild Council', …(4) ] to not include 'Merchant Guilds'
+##### tests/domain/townCartographyCalibration.test.js :: W2 the frozen measurement is re-measured live > every sampled row reproduces its manifest record exactly
+AssertionError: expected [ …(3) ] to deeply equal []
+##### tests/generators/people/coachingInnUnderCrisis.test.js :: POWERS-14 · the towns read on the page: no coaching inn under a siege or a famine offers what the crisis took > every town of the read prints the line its crisis admits (the false towns cured, the true towns kept)
+AssertionError: every town of the read prints the line its crisis admits — 1 of 10 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2s-under_siege-town-1 — r2s-under_siege-town-1: a coaching-inn keeper stands (under_siege): expected +0 to be 1 // Object.is equality: expected [ Array(1) ] to deeply equal []
+##### tests/generators/people/goalSentencesOnceInTown.test.js :: the gate's count: no goal sentence printed twice in one town (p) > (p) hamlet: every sentence printed twice is held by an 'exhausted' card, and the count is at most 0
+AssertionError: (u) hamlet, under law 1, the reference's own law: only repeats and refused cards move (0 holdings moved): expected [ Array(1) ] to deeply equal []
+##### tests/generators/people/goalSentencesOnceInTown.test.js :: the gate's count: no goal sentence printed twice in one town (p) > (p) village: every sentence printed twice is held by an 'exhausted' card, and the count is at most 0
+AssertionError: (u) village, under law 1, the reference's own law: only repeats and refused cards move (0 holdings moved): expected [ …(4) ] to deeply equal []
+##### tests/generators/people/goalSentencesOnceInTown.test.js :: the gate's count: no goal sentence printed twice in one town (p) > (p) town: every sentence printed twice is held by an 'exhausted' card, and the count is at most 0
+AssertionError: (u) town, under law 1, the reference's own law: only repeats and refused cards move (0 holdings moved): expected [ …(3) ] to deeply equal []
+##### tests/generators/people/goalSentencesOnceInTown.test.js :: the gate's count: no goal sentence printed twice in one town (p) > (p) city: every sentence printed twice is held by an 'exhausted' card, and the count is at most 1
+AssertionError: (u) city, under law 1, the reference's own law: only repeats and refused cards move (110 holdings moved): expected [ …(2) ] to deeply equal []
+##### tests/generators/people/goalSentencesOnceInTown.test.js :: the gate's count: no goal sentence printed twice in one town (p) > (p) metropolis: every sentence printed twice is held by an 'exhausted' card, and the count is at most 2
+AssertionError: (u) metropolis, under law 1, the reference's own law: only repeats and refused cards move (357 holdings moved): expected [ …(6) ] to deeply equal []
+##### tests/generators/people/goals.test.js :: I-13: keyed determinism > removing a card leaves every card whose draw read nothing of it byte-identical
+AssertionError: Portaminus npc_parish_churches_10_30: expected { …(3) } to deeply equal { …(3) }

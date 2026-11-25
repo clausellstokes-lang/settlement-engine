@@ -1,0 +1,36 @@
+docs/content/wiring-census.json: ROSE 1 · fell 0 · appeared 0 · left 0
+    ROSE  /stamp/producerIndexFiles  1456 -> 1459
+scripts/.observed-shape-readers-baseline.json: ROSE 8 · fell 0 · appeared 0 · left 0
+    ROSE  /manifests/executionTree/entries[#]  2654 -> 2659
+    ROSE  /manifests/scanTree/entries[#]  2626 -> 2631
+    ROSE  /manifests/sourceTree/entries[#]  2643 -> 2648
+    ROSE  /scanStats/files  2626 -> 2631
+    ROSE  /scanStats/reads  151954 -> 152108
+    ROSE  /scanStats/resolved  13259 -> 13273
+    ROSE  /scanStats/unresolved  138695 -> 138835
+    ROSE  /sentinel/resolvedReads  13259 -> 13273
+scripts/.writer-reach-baseline.json: ROSE 11 · fell 0 · appeared 0 · left 0
+    ROSE  /closureSizes/campaign-pdf  222 -> 224
+    ROSE  /closureSizes/dossier-pdf  650 -> 652
+    ROSE  /closureSizes/foundry  523 -> 525
+    ROSE  /closureSizes/web-transitive  1099 -> 1101
+    ROSE  /closureSizes/world-book  237 -> 239
+    ROSE  /scanStats/files  1903 -> 1905
+    ROSE  /scanStats/nGrades  1889563 -> 1892119
+    ROSE  /scanStats/propRead  42458 -> 42468
+    ROSE  /scanStats/rGrades  8012 -> 8016
+    ROSE  /scanStats/resolvedReceivers  8914 -> 8918
+    ROSE  /scanStats/sites  44740 -> 44750
+scripts/census/page-census.register.json: ROSE 0 · fell 0 · appeared 3 · left 0
+    appeared  /rows/FEDFARE/banked = 0
+    appeared  /rows/FOODSEC/banked = 0
+    appeared  /rows/NOHEAL/banked = 0
+scripts/mutation-coverage-manifest.json: ROSE 0 · fell 0 · appeared 0 · left 0
+tests/lint/.lighting-census-baseline.json: ROSE 5 · fell 0 · appeared 0 · left 0
+    ROSE  /credited  3302 -> 3304
+    ROSE  /files  3792 -> 3801
+    ROSE  /parked  490 -> 497
+    ROSE  /suiteTitles  8887 -> 8889
+    ROSE  /titles  31971 -> 31980
+tests/lint/samenessHideable.houseReadings.json: ROSE 1 · fell 0 · appeared 0 · left 0
+    ROSE  /hand[#]  466 -> 467

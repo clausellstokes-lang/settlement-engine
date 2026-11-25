@@ -1320,3 +1320,24 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   typechecks and build done by 12:12; the wide gate running. NEXT: its report; then the helper is continued to merge
   GUARD-2 and ANCHORS and gate them by the files they name with `npm run validate:packets`.
   THE MARKS (13:00): WORDS-2 working; every record `allowed_warning`; none rejected. Armed for 14:00.
+- 2026-11-25 14:19 UTC · T103 · LAND-117 REPORTED: POINT 117 IS MERGED LOCALLY AND DOES NOT LAND YET: TYPES RED (the hook refused the push), SIX REDS THAT ARE NOT ANCHORS, FOUR FIGURES, A FIRST PAINT 11 KB LARGER.
+  The helper's lists are copied to `landing/117/` (classified.txt, new-reds-messages.txt, raised-top.txt). ITS TABLE:
+  lint 227 files, 7 red, all (S) (the three size rows and B1(ii)'s four frozen); typecheck ratchet +1 and strict +8
+  (`assembleInstitutions.js:451`, `pageCensusFindings.js:442` twice, `genesis.js:198` twice,
+  `dossierViewModel.js:767`, `factionArchetypes.js:107`, `seatTable.js:240` twice); build and tests/build 13 red (8
+  listed, 5 (S)); the wide gate 3,505 files, 39,554 tests, 74 red: 32 listed, 4 (S), 2 (B), 10 (F) left, 25 (4).
+  THE (4): `statecraftExposureBand` U1 (A CEILING PASSED: 78 against 57); `implementationPackets` IA-1 (cured by
+  GUARD-2); `goals.test` I-13 (keyed determinism); `goalSentencesOnceInTown` (all five tiers); `tailDisplayCivicBatch2`
+  (a cured chip prints again, r2s-occupied-town-3); `tailCrisisBatch8` (Merchant Guilds prints a row,
+  r2s-famine-city-1); 15 seed-anchor losses. THE (F) LEFT: `hookThemeDraws` 2,147 to 2,145; the phone floor's two
+  baselines; `heraldKnowledgeDeskGolden`'s digest; `dossierProseManifest` (the drift corpus's cells; the mixed-pool
+  arm 214 to 213); `editCorpusRatchet` A4 and A5; `mergeLadderHeldKeys` A2; `townCartographyCalibration` W2 (three
+  desert rows). THE HOME PAGE's TOWN: unchanged but for the stamp (Cnocby, 82). SIZES: first paint 1,192,039 raw
+  (+11,165), 379,144 gzip (+3,040), 318,232 Brotli (+2,370); the worker 2,721,496 (+4,173); the engine chunk 934,264
+  (+1,266). raised.py: the writer-reach register's closureSizes ROSE by 2 on five surfaces.
+  THE CHAIR's ERROR, SAID: it stopped CLOSE-7's own COMMON-EIGHTH 14 runs at 11:45 to gain 75 minutes; those runs
+  would have shown most of this at the seat. The landing's gate showed it instead, and the time was not gained.
+  THE DIVISION (RULING-117-1.txt for the helper; a message to CLOSE-7): THE HELPER merges GUARD-2 and ANCHORS and
+  re-picks the twelve stale anchors test-only; CLOSE-7 cures the types, applies R24o, READS THE CAUSE of the six that
+  are not anchors and of the four figures, explains the writer-reach rise and the 11 KB, and says how its own push of
+  97c6bfc7a passed a hook the helper's did not.
