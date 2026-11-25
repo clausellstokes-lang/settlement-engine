@@ -1,0 +1,2 @@
+POOL /var/tmp/v51/out/p1/stored-master: reads 560; nothing-hidden reads 416; differing with the stored row 0 
+rc=0

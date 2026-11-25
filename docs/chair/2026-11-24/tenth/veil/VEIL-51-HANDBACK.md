@@ -383,6 +383,15 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     infiltrated-1-112 hide Noble Families, The Landed Bloc ("Noble families with hereditary land rights ..."); r3m-city-
     infiltrated-0-32 (master) hide Craft Guilds, The Guild Alliance ("Well-organised craft guilds ..."). All at Reveal off.
   r5desc FAST-FORWARDED to 2376572f3 (V27's branch on top of 802578955).
+  UNIT 5 BUILT (LOCAL on r5desc, CONFIRMED by probes; V27 (2): the stored set): U1 TWIN 04711aa1b (`withholdPersonStrings`, the
+    stored set and the projection's mask, every copy by id, before the house gate). U2 SQL and U3 REGISTRY (the three rows,
+    registry.json regenerated) and 212's header (V27's belt under (38); unit 5 as (39), renumbered on unit 3's merge): in the
+    tree, committed when the walkers report. PROBES (`u5/u5twin.mjs`, `/var/tmp/v51/out/u5s/probe*.sql`): seed r3m-town-none-0-23,
+    the seven plants served 3 (Reveal off) / 7 (DM) without the stored row, 0 / 0 with it, IN BOTH ENGINES; V27 (2)'s plant (a
+    hand-hidden Merchant Guilds in a role, Reveal off) served masked without the row, the key omitted with it, IN BOTH ENGINES.
+    LOSES NOTHING (`u5/losesnothing.mjs`, `u5/ln-*.txt`): 0 of 422 today-born and 0 of 416 master-born nothing-hidden reads
+    differ (the twin). 212 apply/down/reapply rc 0 (the rollback drops _gallery_veil_person_named and both new forms).
+    LISTED for phase 2: a tie's description prose names the role in brackets.
   THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
     with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
     U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
@@ -455,6 +464,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 08:0x unit 5 U1 committed (local 04711aa1b); U2/U3 built and probed in both engines; loses nothing 0/838.
 - 07:55 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
 - 07:48 V27 (1) built (local 483d95861; the probes withhold 107 (3) in both engines); (5) and (6) running.
 - 07:31 RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
