@@ -27,3 +27,14 @@ THE TERMS:
 7. FOR THE VEIL's LANE AT ITS RESUMPTION (written in BIRTH-2's hand-in; it touches none of it): the field joins what no
    non-owner read sends (a Reveal-DM read keeps private keys); the cut is "the description's end where it equals the
    field"; the old-record path stays the frozen table (V14, V15, V25, V27 stand for it).
+
+**G2 (09:20 UTC): D4, THE PAGE SORTS THE POWERS: THE CHIP's WORDS, AND TWO STORED LINES CURED.** BIRTH-2's measure at
+0ec96f13d8: stored out of order on C 69 of 900 (cities 29, metropolises 40) and V 121 of 900 (town 1, cities 51,
+metropolises 69), by two causes read in the code: the density law appends rivals after the last sort (`resizeSeats`),
+and the fold adds a folded power's share to the ruler in place with no re-sort (`rulerKin.js :: foldKin`). Readers
+printing wrongly: the first row (sentence, tile) C 0, V 2; the copy text's three C 5, V 14; the bar's five and the
+template narrative's five C 14, V 74. RULED: (1) the holder's row on the bar carries the Power tab's own words, "holds
+power", from the Power tab's own reader and audience; it prints only where the Power tab itself names that holder for
+that reader (proven on the public projection of C and V); (2) the two birth-time readers that are wrong where the first
+row is (the pressure sentence, the NPC secrets: V's dp-town-93 and dp-city-134) take the strongest power through the
+one sorting reader: expected move C 0, V 2 exactly; more is a stop. The stored order itself is not changed.
