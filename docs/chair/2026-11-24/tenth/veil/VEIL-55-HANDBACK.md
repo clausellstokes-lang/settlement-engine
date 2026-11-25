@@ -91,6 +91,10 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   b58abc48b); its hand-named births re-anchored by finder (point 116). TWO RULINGS ASKED OF THE CHAIR (08:19): (1) re-derived
   severity's wrong bands (Labor capacity, readiness's severity half): fail closed, rows lost counted; (2) ONE totality arm over
   rederiveForPage's keys + an unreadable-document plant, instead of 11 arms (my lean; VEIL-53's: an arm each).
+  RULED V29 (08:20, 1263b0920e): grant stands. (1) re-derived severity rows NOT PRINTED on shared pages; owed the rows-lost count
+  (both pools) + one cause line for B4. (2) MY ONE ARM, plus "PRESENT IS NOT RIGHT": on a reveal-everything share each re-derived
+  key EQUALS the owner's stored value, both pools, differences listed by key (bounded one hour). GIVEN TO VEIL-53 08:20 as
+  commits 3+ on -pages-wip; it reports a file + 200 words; I re-slice; then the chair (the arm's table).
 - RULING V28 (the chair 08:09, superseded in part by its 08:10 whole text; with the grant, still waiting the second reader: DO NOT MERGE UNIT 3 YET): (1) Q1 CURED FAIL
   CLOSED (`unread` also where dm_full has pr/ps and no `relationships` key; twin rule for rule; red first at four doors, plain and
   narrated): GIVEN TO VEIL-52 (08:11) as COVERT-UNREAD, a child of 2f849aa53 on `lane/veil-52-2026-11-24-unread-wip`, header (39)
