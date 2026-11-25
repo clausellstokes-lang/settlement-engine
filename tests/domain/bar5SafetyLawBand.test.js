@@ -23,7 +23,9 @@ import { crimeWaveStands, foundationBandShown } from '../../src/domain/display/f
 import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { lawBandOf, quietPlaceKeepsLaw } from '../../src/domain/facts/lawBand.js';
 import { readFileSync } from 'node:fs';
-import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { GUARD_LAW_FRAMES, GUARD_LAW_SIBLINGS, SIEGE_ORDER_FRAME, guardLineUnderTheLaw, safetyLineSaidOnce } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { deriveSafetyLine } from '../../src/domain/display/defenseDisplay.js';
+import { governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { COURT_AND_PRISON, COURT_NO_PRISON, NO_WATCH_SMALL } from '../../src/generators/safetyProfile.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 
@@ -158,6 +160,22 @@ describe('BAR5-SAFETY: a line that says how a wrong is answered reads the law ba
       // the lines that only say what stands are true in every band: they print as drawn, even beside Collapsed
       const collapsed = { history: { currentTensions: [] }, institutions: [{ name: 'Courthouse' }], powerStructure: { publicLegitimacy: { score: 0 } } };
       for (const line of COURT_NO_PRISON(lawRef).slice(0, 2)) expect(guardLineUnderTheLaw(line, collapsed), line).toBe(line);
+    }
+  });
+});
+
+describe('G6 #11 (WORDS-2): "no stable governing authority" is not told a third time on the Defense tab', () => {
+  const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+  test('C dp-city-117, dp-city-124 (a city line) and dp-thorp-101 (the small line): the identity line says it, the Defense line does not', () => {
+    for (const seed of ['dp-city-117', 'dp-city-124', 'dp-thorp-101']) {
+      const s = C(seed);
+      expect(governsLine(s), `${seed}: the identity line says it`).toMatch(/no stable governing authority/i);
+      const stored = deriveSafetyLine(s);
+      expect(stored, `${seed}: the stored line opens with it`).toMatch(/No stable governing authority[.;] /);
+      const owner = safetyLineSaidOnce(stored, s, false);
+      expect(owner, `${seed}: the owner's Defense line`).not.toMatch(/no stable governing authority/i); // anchored: the stored line is proved to hold the words on the line above
+      expect(owner?.length, `${seed}: the rest of the line stays`).toBeGreaterThan(20);
+      expect(safetyLineSaidOnce(stored, s, true), `${seed}: a shared page keeps the line whole`).toBe(stored);
     }
   });
 });
