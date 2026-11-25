@@ -60,6 +60,9 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
   rootCellar: /\broot cellar\b/i,
   shepherd: /\bshepherd/i,
   craftGuild: /\bcraft guilds?\b/i,
+  // WORDS-2 E6 (the tenth chair's leave, RULING G9 (3), with D8 ruled at G10; the atom vetoable by the owner): the steward's own
+  // house, the hamlet's and village's "Lord's steward" (a thorp's officer is the lord's reeve, not this house), for L12
+  lordsSteward: /\blord's steward\b/i,
 });
 
 /** The kinds a line may declare. @type {ReadonlyArray<string>} */
