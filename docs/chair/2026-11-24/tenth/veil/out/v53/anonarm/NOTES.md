@@ -84,3 +84,16 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
 - 79636ade9 (down comment), 8a809f298 (galleryVeilCures rollback block on bootHostedChain: red 4 ACL rows w/o re-grant; 212
   compare green; block still red at 211-down = known two-211s: 134 part-A ACLs + _guard_server_owned_columns), page commit next.
 - owner page docs/chair/2026-11-24/tenth/veil/FOR-THE-OWNER-VEIL-ROLLBACK.md (none existed); its query on hosted 001..211 = expected.
+
+## STATE AT THE OWNER'S PAUSE (08:52 UTC): last commit d2316f101 on lane/veil-53-2026-11-24-grants-wip (not pushed); worktree clean
+- V26 (1)/(4): DONE at 79636ade9 (down-file comment: hosted default privileges, RULING V26, unconditional, purity; SQL unchanged
+  from c2d9cf8a6). Down sha256 7004a1c88d489b96f61a95fcc3e6a9378798e740174a3c8efdaf76a53ca8df10.
+- V26 (2): DONE at 8a809f298. tests/security/galleryVeilCures.pglite.test.js rollback block on bootHostedChain, plain compare
+  removed. RED without the re-grant: "212 down: expected [ …(4) ]" (the two ACL rows each side). GREEN for 212. Block stays red
+  at its 211-down compare: the known two-211s cause (134 part-A ACLs + _guard_server_owned_columns). Other rows keep plain
+  LIVE/AT210/AT211.
+- V26 (3): WRITTEN at d2316f101: docs/chair/2026-11-24/tenth/veil/FOR-THE-OWNER-VEIL-ROLLBACK.md. Its query on hosted 001..211
+  returns the expected ACLs.
+- Wholes at d2316f101: tests/security 7 failed | 2198 passed (the known seven); tests/lint 66 failed (the known 66 exactly;
+  the 3 ledgerCitationIntegrity reds seen earlier are gone).
+- STOPPED. No step after this.

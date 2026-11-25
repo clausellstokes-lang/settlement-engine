@@ -2,59 +2,44 @@
 
 Start message: `docs/chair/2026-11-24/tenth/prompts/START-VEIL-53.txt` on `lane/chair-2026-11-08` (read at 994ad8b64).
 
-## 1. WHERE THE SEAT STANDS (my memory; current at every push; last written 22:52 UTC 2026-11-24)
+## 1. WHERE THE SEAT STANDS: PAUSED (the owner, about 08:50 UTC 2026-11-25: "Pause the share page and focus on town fixes and
+everything that changes new towns wording and the share page's quality work then do the share pages."; the chair 08:52). Written
+09:0x UTC 2026-11-25 for a successor who has never seen this session; it needs this file, the briefs and RULING-V1.md (V1-V29) only.
 
-THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R) since 22:42 UTC (VEIL-50 handed over; never message it). THE CHAIR:
-session_019yED1SUxGVHyjQnoqoFvQ8. The account is at its WEEKLY WARNING (the chair, 22:48): push at every result, at least every
-45 minutes; no run over 20 minutes unless its partial results land in a pushed file.
+THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R). THE CHAIR: session_019yED1SUxGVHyjQnoqoFvQ8. MERGED: nothing (a seat
+merges nothing; every branch below rides the JOIN, unit 7, VEIL-55's). NO BUILDER RUNS. NO RUN IS IN FLIGHT. NO SCHEDULED TASK OF MINE.
+MACHINE: `sh docs/chair/2026-11-24/tenth/veil/out/v53/restore.sh` restores a fresh container (worktrees, deps links, the ledger ref).
 
-MERGED: nothing (a seat merges nothing; VEIL-55 integrates).
-BUILT, NOT MERGED (all pushed unless said):
-- `lane/veil-53-2026-11-24-join-wip` ba7460c33: THE TRIAL JOIN (old join 9e6547f0f + line f9531eb3a, five migration-head conflicts
-  at the line's side; + lane tip b58abc48b). Worktree `/home/user/join53` (`npm ci` done there). NOTHING renumbered.
-- `lane/veil-53-2026-11-24-grants-wip` 639d98124: GRANTS x VEIL commit 1: the 79 `_gallery_veil*` rows, NOBODY (section 7's
-  do-loop revoke). Worktree `/home/user/grants53`. tests/lint whole 66/3,442 = the trial join's (65 of VEIL-43's list + testRatchet:
-  DEPLOY.md's head, cured by the renumbering).
-- `lane/veil-53-2026-11-24-j1-wip` e1b7a8714 (PUSHED; worktree `/home/user/j153`): J1's cure (RULING V2): d7e592b43 + my read's
-  amendment e1b7a8714 (HOUSE_FLAGS one literal; presumedThings back to 57). READ BY VEIL-55: NO FAULT; rides the join (unit 7).
-- `lane/veil-53-2026-11-24-cures-wip` 6b674eb36 (PUSHED; worktree `/home/user/cures53`): V3's cure A = 8067faafb + my read's
-  amendment 6b674eb36 (only the three withheld terms; `food` keeps its old reading). READ BY VEIL-55: NO FAULT (0 of 280 stored
-  records lack a term); rides the join. OWED TO THE V6 WALKER: hold `governanceAccount.js :: BREAKDOWN_WITHHELD_TERMS` equal to the
-  registry row `legitimacy.breakdown`'s withheld terms. Cure B 5d04aaf9a PUSHED (test
-  only, both halves); READ BY VEIL-55: NO FAULT. Cure C b61c1e630 PUSHED (test only),
-  sent to VEIL-55. Cure D STOPPED AT ITS STOP (no
-  commit; CONFIRMED by probe `out/v53/cures/D/d5.probe.test.js`: the served documents of two records differing only in
-  recentConflict are deep-equal, so the shared page cannot name the owner's holder); RULED BY THE CHAIR (V16): fail closed;
-  BUILT 168587f9c PUSHED (all holder readers
-  through `holderOf`; a HOLDER_READERS walker arm; 0 of 720 reach it), ITS OWNER DEPARTURE ACCEPTED BY THE CHAIR (RULING V19 (1));
-  READ BY VEIL-55: NO FAULT; rides the join. V19 (2): a NEW UNIT "THE SEAT'S HOLDER IS STORED" is mine, NOT TO START before VEIL-55's
-  word (placed after phase 1's SQL units in PLAN-2): transferRulingPower stores the holder's id; holderOf reads it first; withheld on
-  shared reads (a registry row; 212's one line read by the chair); red first on the two-transfer plant; 0 born towns carry it. Cure E 90ddc2fe5 PUSHED (the fortune law's
-  resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
-  sent to VEIL-55 with its named departure.
-- The samenessHideable wording: 1ffb2328b PUSHED on -cures-wip (cites only; tests/lint whole 65 = the join's 66 less D's).
-- `lane/veil-53-2026-11-24-pages-wip` 04fa8d60e (PUSHED; worktree `/home/user/pages53`, on 1ffb2328b): FAIL-CLOSED PAGES:
-  004539777 the (C) classes (bands rows not printed; the legacy default, the siege sentence and the ring note print nothing; 3 owner
-  arms; 0 of 720 births lack a gating key, CONFIRMED); 04fa8d60e the totality walker (45 + 6 readers; BREAKDOWN_WITHHELD_TERMS held
-  to its row). Sent to VEIL-55 with TWO QUESTIONS for the chair: severity's re-derived bands (Labor capacity, readiness) are wrong
-  but never absent (lean: (C), fail closed); 11 re-derived readers have no failure arm (lean: each needs one).
-RUNNING: the anon arm builder on RULING V26's addendum (grants-wip).
-THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
-`briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
-grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
-banked 720, restore loop, views dumped, no server) through the mutex, then `slice-an.mjs rows > slice-table.txt`, ONE line to
-VEIL-55 (ADDED by VEIL-55 23:26: the ring note's "FIDELITY GAP" of `tests/components/defenseRingNoteProjection.test.jsx`, soak1k-11
-and soak1k-41: the shared Defense tab prints `criminalStructureOf(shared).note`'s original vantage with no publicProse; read its
-pairs under V4 term 1: false of the town = (C), its reader in the walker; else listed. THE CHAIR 23:27: A CLASS OF ITS OWN on the
-slice (three pairs); if false, (C) phase 1 and THE CURE: the shared tab prints NO ring note where the page cannot decide the
-variant, the owner's read unchanged and asserted; its reader joins the totality walker); then its brief and build ((b) fail closed per reader, red first per class; (c) the totality walker). (5) The renumbering
-(`briefs/V53-RENUMBER-BRIEF.md`, must clear testRatchet). (6) Items (5) J9/J10, (7) the person-name measure, (8) the window: not
-started.
-DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
-classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on the V26 builder's return: `git -C /home/user/grants53 log --oneline -4`, read its diffs once, push grants-wip,
-line to VEIL-55.
-THEN: the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "THE SEAT'S HOLDER IS STORED" only on VEIL-55's word.
+BRANCHES (ALL PUSHED; each built on the trial join unless said):
+- `lane/veil-53-2026-11-24-join-wip` ba7460c33: THE TRIAL JOIN (old join 9e6547f0f + line f9531eb3a, five migration-head conflicts at
+  the line's side; + lane tip b58abc48b). NOT re-made on later lines (VEIL-55: it stays until the join). Nothing renumbered.
+- `lane/veil-53-2026-11-24-j1-wip` e1b7a8714: J1's cure (RULING V2). READ by VEIL-55: no fault.
+- `lane/veil-53-2026-11-24-cures-wip` 1ffb2328b: V3's cures A (6b674eb36), B (5d04aaf9a), C (b61c1e630), E (90ddc2fe5), D (168587f9c,
+  V16 fail closed; its owner departure ACCEPTED, V19), + the samenessHideable wording. ALL READ by VEIL-55: no fault. DONE.
+- `lane/veil-53-2026-11-24-grants-wip` d2316f101: GRANTS x VEIL, ALL DONE: 639d98124 the 79 veil rows (NOBODY); fd5480850 the carried
+  read (part B, postgres's answers by name); cca234bc7 V23 (212 revokes `_gallery_apply_member_overrides` and
+  `_gallery_sanitize_public_json`, register NOBODY); 81738f851 the anon arm both ways (19/19); 73a3f8743 its manifest row; c2d9cf8a6
+  the 212 down file re-grants the HOSTED 001..211 ACLs (dump up+down EMPTY); V26: 79636ade9 terms (1)(4) in the down file's comment
+  (down sha256 now 7004a1c8...df10); 8a809f298 term (2): galleryVeilCures' rollback compare on the hosted harness (its 212 compare
+  green; its 211-down compare still red for the two-211s cause, the renumbering's); d2316f101 term (3): the owner's one read before
+  212, `docs/chair/2026-11-24/tenth/veil/FOR-THE-OWNER-VEIL-ROLLBACK.md` (no identifier, no key). V23's hunk and the down lines are
+  READ TOGETHER BY THE CHAIR AT THE JOIN (with a second reader, the chair's T-rule). Unit (3) READ by VEIL-55 up to 73a3f8743; the
+  rollback commits c2d9cf8a6..d2316f101 NOT YET READ by VEIL-55. USER-class functions anon can execute: 59 of 79 (the chair's).
+- `lane/veil-53-2026-11-24-pages-wip` 04fa8d60e (on 1ffb2328b): FAIL-CLOSED PAGES, GRANTED by VEIL-55: 004539777 the (C) classes
+  (Criminal opportunity, Law & order incl. the gained tile, Defense readiness: rows not printed; the legacy default, the siege
+  sentence, the ring note: nothing); 04fa8d60e the totality walker (45 + 6 readers; BREAKDOWN_WITHHELD_TERMS held to its row).
+  RULING V29 on it: NOT BEGUN (its brief: `briefs/V53-FAILCLOSED-BRIEF.md`'s "ADDENDUM: RULING V29"): (1) the false band (re-derived
+  severity: Labor capacity, readiness's severity half) fail closed, with the rows lost on both stored pools and one cause line;
+  (2) ONE ARM: every re-derived key present at every marker on both pools + an unreadable-document plant + "present is not right"
+  (each re-derived key equals the owner's stored value on a share hiding nothing; a table by key), bounded to an hour.
+
+NEXT, IN ORDER, ON RESUMPTION: (1) RULING V29 on pages-wip (one builder; the brief's addendum); (2) the rollback commits'
+read by VEIL-55; (3) the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`: must also clear testRatchet, migrationSequenceAll and
+galleryVeilCures' 211-down compare); (4) "THE SEAT'S HOLDER IS STORED" (V19 (2)) ONLY on VEIL-55's word, after phase 1's SQL units;
+(5) items (5) J9/J10, (7) the person-name measure, (8) the window: not started. LISTED FOR THE JOIN (VEIL-55): 3 publicProseEquality
+daily_life rows (soak1k-1/7/8) pre-existing; hand-named births re-anchored by their finder at the join (point 116 moved births).
+DONE AND SENT, NOT BUILT: (0); REDS-CAUSE (`out/v53/redscause/`); J1 classed; J12 and V4 (`out/v53/J12.md`, `out/v53/j12/`); the PAGES
+slice sized (`out/v53/pages/SIZING.md`).
 
 ## 2. RULINGS IN FORCE FOR THIS SEAT (all on the chair's branch, appended to `docs/chair/2026-11-24/tenth/veil/RULING-V1.md`)
 - RULING V1 (whole): the phase 1 units and bar. V2: J1's cure (code points, equality by a committed test). V3: the six reds'
@@ -98,3 +83,4 @@ THEN: the renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (
 - 06:4x the slice sized and sent. A PUSH WITH NOTHING TO SEND TOOK THE WHOLE CHECK; KILLED; config clean; reported. Every push now ls-remote-guarded.
 - 06:5x the FAIL-CLOSED PAGES builder dispatched.
 - 08:0x FAIL-CLOSED PAGES pushed (04fa8d60e) with two questions; V26 addendum dispatched.
+- 09:0x PAUSED by the owner (the chair 08:52): V26 finished to d2316f101 and pushed; no builder, no run, no scheduled task.
