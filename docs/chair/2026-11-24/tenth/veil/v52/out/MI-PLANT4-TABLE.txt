@@ -1,0 +1,15 @@
+WDMI plant 4 (hidden POWER in a shown desc, r3m-city-none-1-111, master-born), 03:01 UTC, CONFIRMED
+FORM stored shards 1 places 1 (hidden-house 1, controls 0) | wall per shard ms [33951] | server ms [23167]
+READS 140 | HIDING 140 on 1 places | no document {}
+HIDING BY engine|door|Reveal {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10}
+DAILY (deriveDailyLife(served, null) vs the never-there read, by slot: differ / hiding reads)
+DAILY SIDE (after rederiveForPage): {}
+OFFICE LINES on hiding reads: served {} | never-there {} | differ 0  | L12 in the catalogue: false
+DM SLOT: in deriveDailyLife(served, null).slots 0 | as a key in a served document 0 {}
+OWNER-ISH KEYS in served documents (/audience|owner|^dm|_dm$|dmOnly|dm_only|dmLayer|isDm|gmOnly/i): 1
+  powerStructure.factionRelationships[].dmNote n=30 {"server|gallery|dm=true":10,"server|import|dm=true":10,"twin|gallery|dm=true":10}
+NEVER-THERE records: 0 | still naming a withheld thing in their own strings: 0
+STORED vs BORN: same 0 differ 1 ["r3m-city-none-1-111"] | births with a neighborRelationship name: 0
+NAMES: 0 path patterns
+MAP MEMBER: known fault (prominentRelationship / pressureSentence, Reveal off) {} | OTHER 0
+PLANT "r3m-city-none-1-111" "The The Independent Bloc quietly funds them." | hiding reads {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | present {"server|gallery|dm=true":10,"server|import|dm=true":10,"twin|gallery|dm=true":10} | caught {} | BLIND {}
