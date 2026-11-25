@@ -7,16 +7,19 @@
 - First message to the chair sent ~09:00 UTC.
 - RULINGS (chair branch `docs/chair/2026-11-24/tenth/gen/RULING-G.md`): G1 (09:10) A5 "BESIDE" on seven terms; G2 (09:20)
   D4: the chip "holds power" from derivePowerStrata (same audience), and the two birth-time readers cured (expect C 0, V 2).
-- SURPRISE SENT (09:2x): SummaryTab.jsx is mounted nowhere (no src importer; tests only). Asked: skip the chip? keep the sort?
-  AWAITING the chair. Chip NOT built.
+- G4 (09:39 UTC read): the chip NOT built (G2 (1) withdrawn); SummaryTab's sort DROPPED (dead code); NAME SummaryTab and its
+  rendering tests for a later removal; list which of the nine readers are LIVE with wrong-print counts on C and V.
 - UNIT A5 as of 09:31 UTC: BUILT on `lane/birth-2-2026-11-25-a5-wip` (worktree /home/user/wt/a5) at 9cbf5cf16. Field `dmStanding`.
   Writers set it: annotateFactionStanding, rivalDescOf (''), settleStandingToRoster, settleStandingToLegitimacy,
   settleSeatHolderToRecord (2 writes); rename via rewriteProse + a path row. Red 10/15 at base, green 15/15.
   NAMED, NOT BUILT: `rulingPower.js` transfer (play) replaces a whole desc with no tail; the copied field goes stale, so the
   veil fails closed there. Proof census `probes/a5proof.census.jsx` (12 V births: all clean).
-- UNIT D4 as of 09:31 UTC: `-d4-wip` at 1c1ec43f4 + UNCOMMITTED G2 edit (narrativeGenerator.js: two topFaction reads through the
-  leaf; imports moved to file ends in SummaryTab, aiLayer, narrativeGenerator so no cited line moves). Re-birth of C and V on
-  d4 running (expect records moved C 0, V 2).
+- UNIT D4 as of 09:39 UTC: `-d4-wip` at 66e313f4a (3 commits: 1c1ec43f4 sort; 2cf611af9 G2 narrative readers; 66e313f4a G4:
+  SummaryTab back to base, history readers via the leaf, test now tests/generators/powersStrongestFirstReaders.test.js, red
+  7/11 at base, green 11/11). Live readers: aiLayer extractFullContext; narrativeGenerator genSettSummary/genPressureDetail
+  topFaction; historyGenerator dominantFaction, secFaction, altFaction. Dead: SummaryTab (4 readers), buildPersonaSlice (no
+  caller). Re-birth at 2cf611af9: records moved C 0, V 0 (the two "wrong" lines were never wrong: corrected to the chair).
+  Records at 66e313f4a: read from the page battery's record hashes (pb-d4 vs pb-base).
 - QUEUE (scratchpad queue.sh, progress in queue.progress): d4 summary C/V; a5 proof base/a5 C/V; page battery base/d4/a5 C/V
   (CLOSE-7's page-battery.mjs copied to /home/user/c7tools/read25). THEN OWED for each unit: tests/lint whole, tests/copy
   whole, named tests, a build; push each -wip; hand in to CLOSE-7 and the chair.
