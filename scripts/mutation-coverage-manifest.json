@@ -1972,6 +1972,10 @@
     "tests/security/mapSnapshotImport.contract.test.js": {
       "kind": "uncovered"
     },
+    "tests/security/mapShareChronicle.pglite.test.jsx": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/migration062Authz.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
