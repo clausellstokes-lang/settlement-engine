@@ -445,3 +445,21 @@ seat's file (the frozen form's canon comparison predates the member re-key; the 
 THEN: "R4-IDS MERGED" to the chair and the seats; unit 1 merged above it with its header item renumbered (37) and its
 slice re-run; then the quiet-box items; unit 4's 212 edit (VEIL-51) and unit 3 (VEIL-52) each on that tip, each hunk
 read whole by the chair before its grant.
+
+## RULING V19 (added 02:52 UTC on 2026-11-25): V16's CURE D BUILT; ITS ONE DEPARTURE ACCEPTED; "THE SEAT'S HOLDER IS STORED" MADE A UNIT
+"R4-IDS MERGED 8430edf5ccdb4a27f603a2865d894e6ab722ec61" (VEIL-55, 02:52 UTC): the lane's tip is
+`lane/veil-55-2026-11-24-tip`. Unit 1 merged above it locally (dbd4cd9e5, its header item (37)); its slice running.
+CURE D (VEIL-53, 168587f9c on its `-cures-wip`; read once by VEIL-55: no fault): `holderOfSeat.js :: transferTakersOf`;
+two or more takers the sentence does not single out, and `holderOf` answers NOBODY; every holder reader goes through
+`holderOf` (a walker's register); red first 2 of 5 on two born cities, green 5 of 5; the one-taker control still names
+the taker. THE DEPARTURE FROM V16 (b): an OWNER's record with two takers whose own `recentConflict` no longer decides (a
+later writer replaced it) now reads NOBODY where it read the last edge; reach 0 of 720 at birth (in play only).
+**RULED:** (1) ACCEPTED: a wrong ruler named is worse than none, and "the last edge" is not transfer order
+(`transferRulingPower` rewrites an edge in place). The owner whose sentence names the taker reads as before, asserted.
+(2) THE ROOT IS CURED BEFORE THE RELEASE, as a small unit, "THE SEAT'S HOLDER IS STORED": `transferRulingPower` writes
+the holder's id as a field of the record at each transfer; `holderOf` reads the field first, the sentence second, NOBODY
+last; red first on the two-transfer plant. A record that already holds two takers and no field stays NOBODY until its
+next transfer. ON SHARED READS THE FIELD IS ALWAYS WITHHELD in phase 1 (a registry row with its reason; one line of 212,
+read by the chair), so V16 stands for shared pages; the put-back weighs serving it under R3. A stored shape of records
+in play, not of births: no golden moves. VEIL-55 places it after phase 1's SQL units; the chair's lean: VEIL-53 builds it.
+The owner is told (his own page names no ruler in that rare case until this unit lands).

@@ -56,6 +56,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | D8 | a stewardship's holder titled "the reeve" (intake 6) | S to M | | the seat lane's wording |
 | D9 | the numbers he sets, left as drafts: the seat contest's factors (all 1 today), fortune's numbers, LASTING's ages | his | **D** | his signing or his leave |
 | D10 | THE RE-DERIVATION's GUARD (RULINGS R24i, R24j): a stored place is re-derived only by the engine that bore it; else a decree's newcomer is appended and nothing else moves; the version goes up to '0.10.0'; a birth stamps the engine and a load never does | M, 6 to 8 seat-hours | B; IT HOLDS THE RELEASE | DECIDED YES by the chair on the owner's deferral (2026-11-25); CLOSE-7's unit "GUARD", after the mirror and the live-path measure |
+| D11 | "THE SEAT'S HOLDER IS STORED" (RULING V19): after two or more takeovers in play the record does not say who holds the seat (it is read from one sentence that later events replace); `transferRulingPower` writes the holder as a field at each transfer; `holderOf` reads it first; always withheld on shared reads in phase 1 | S to M | Q (one line of 212) | RULED 2026-11-25; VEIL-55 places it after phase 1's SQL units; until it lands the owner's own page names no ruler in that case |
 
 ## E. WORDS AND PAGES
 | # | what | size | flags | state |
