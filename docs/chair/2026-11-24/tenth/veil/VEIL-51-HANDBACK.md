@@ -319,7 +319,17 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     desc to its base; literal sha256 04838347... (24,112 characters; was 2dced465...). The fixture's re re-derived from its tokens
     (4 forms; a `reDerived` field says so). V25's measure after N2b (`u4/v25measure-n2b.txt`): TODAY 7/754 (4 class (i), 3 class
     (ii)), MASTER 8/765 (all class (i)); leftover 0 on both pools (`u4/leftover-n2b.txt`).
-  NEXT: N3 (the belt's comment renumbered; its reach recorded; 107 (3) waits on the chair's answer); N4's brief and builder; N5.
+  N3 DONE (LOCAL a5e77c820): R5-DESC's "212 (36)" citations -> (38) (comments and strings; R4-IDS's own (36) kept); the belt's
+    MEASURED REACH stated in the twin and 212's (38) (e) (the disproved "none expected" gone); 212's (38) (a): V15's "prints NO
+    standing"; 212 apply/down rc 0; registry check green. THE BELT IS NOT TOTAL: 107 (3)'s class is outside its withheld set
+    (the chair's question, sent to VEIL-55 07:17).
+  ITEM 5 DONE (LOCAL 802578955): registry row power.desc page 're-derive' -> 'not drawn', its scope states V15, THE LOSS (423/743
+    today-born, 591/752 master-born served powers lose the standing line on the shared page) and why; two walkers re-pinned (19
+    passed, 1 skipped). INHERITED REDS, identical at 04cfe6d85 (the merged tree BEFORE N1; worktree /home/user/wt/base):
+    criminalVeilSwitch VS1 (b) vs-city-1 factions 6, 7 desc (the arm expects the whole desc path withheld; the row withholds the
+    tail); galleryImportRederive "2: reads no withheld path" factions[].desc (the narrowed reader's re-cut, KEPT as the deploy
+    window's belt: a client meeting a server without 212 still cuts the tail; N1 removed its govMultiplier half).
+  NEXT: N4's brief and builder (branch lane/veil-51-2026-11-24-n4-wip at 802578955); N5.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -373,6 +383,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
 - 07:2x N2b built (local bcf26ccbd): master's uncut standings cut; census red first 4 -> 0; measure master 12 -> 8.
 - 07:16 N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
 - 07:1x N1 built (local 5b39bd019; TS2345 gone); N2 re-planned (the different-span tie is unreachable by construction; the twin's end anchor forced; pinned), written before its edit.
