@@ -3,6 +3,7 @@
 -- (counting the role's row for schema public AND its global row). Before file 2: true, true. After file 2,
 -- run as the SAME role: false, false. If running_as is not the role that runs `supabase db push` (postgres),
 -- file 2 changed nothing for the migrations: say so before going on.
+-- THE TWO postgres_ COLUMNS ARE THE ONES THAT MATTER: they answer for postgres whoever runs this read (after file 2: false, false).
 select current_user as running_as,
   exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
            where d.defaclrole = (select oid from pg_roles where rolname = current_user)
@@ -13,4 +14,14 @@ select current_user as running_as,
            where d.defaclrole = (select oid from pg_roles where rolname = current_user)
              and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
              and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'authenticated'))
-    as new_function_handed_to_signed_in_user;
+    as new_function_handed_to_signed_in_user,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = 'postgres')
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'anon'))
+    as postgres_new_function_handed_to_visitor,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = 'postgres')
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'authenticated'))
+    as postgres_new_function_handed_to_signed_in_user;

@@ -193,6 +193,23 @@ describe("the owner's read for part B: one row, counting the role's schema row a
     expect(read).toEqual({ visitor: true, signed_in: true, as: 'postgres' });
     expect(truth).toEqual({ visitor: true, signed_in: true });
   });
+  it("THE CARRIED READ: part B run as ANOTHER role, the read run AS THAT ROLE answers no, no for it and carries postgres's answer by name (yes, yes)", async () => {
+    const db = await fresh();
+    await db.exec(`create role other_role nologin; grant usage, create on schema public to other_role;
+      set role other_role; ${PART_B_SQL}; reset role;`);
+    await db.exec('set role other_role;');
+    const [read] = (await db.query(OWNER_DEFAULT_READ_SQL)).rows;
+    await db.exec('reset role;');
+    const { truth } = await readAndTruth(db);
+    expect(read).toEqual({
+      running_as: 'other_role',
+      new_function_handed_to_visitor: false,
+      new_function_handed_to_signed_in_user: false,
+      postgres_new_function_handed_to_visitor: true,
+      postgres_new_function_handed_to_signed_in_user: true,
+    });
+    expect(truth).toEqual({ visitor: true, signed_in: true });
+  });
   it('a GLOBAL default grant (no schema) keeps a new function open after part B, and the read sees it (yes, yes)', async () => {
     const db = await fresh();
     await db.exec(`${PART_B_SQL}; alter default privileges grant execute on functions to anon, authenticated;`);

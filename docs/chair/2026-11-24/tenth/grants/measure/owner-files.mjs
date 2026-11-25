@@ -40,6 +40,7 @@ const files = {
     "-- (counting the role's row for schema public AND its global row). Before file 2: true, true. After file 2,",
     '-- run as the SAME role: false, false. If running_as is not the role that runs `supabase db push` (postgres),',
     '-- file 2 changed nothing for the migrations: say so before going on.',
+    "-- THE TWO postgres_ COLUMNS ARE THE ONES THAT MATTER: they answer for postgres whoever runs this read (after file 2: false, false).",
     OWNER_DEFAULT_READ_SQL, ''].join('\n'),
   '0c-byok-count.sql': ['-- READS ONLY. How many users have a stored provider key (a number only).',
     'select count(*) as byok_keys from public.surveyor_byok_keys;', ''].join('\n'),

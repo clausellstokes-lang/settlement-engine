@@ -177,7 +177,17 @@ export const OWNER_DEFAULT_READ_SQL = `select current_user as running_as,
            where d.defaclrole = (select oid from pg_roles where rolname = current_user)
              and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
              and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'authenticated'))
-    as new_function_handed_to_signed_in_user;`;
+    as new_function_handed_to_signed_in_user,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = 'postgres')
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'anon'))
+    as postgres_new_function_handed_to_visitor,
+  exists (select 1 from pg_default_acl d cross join lateral aclexplode(d.defaclacl) a
+           where d.defaclrole = (select oid from pg_roles where rolname = 'postgres')
+             and d.defaclobjtype = 'f' and d.defaclnamespace in (0, 'public'::regnamespace)
+             and a.privilege_type = 'EXECUTE' and a.grantee = (select oid from pg_roles where rolname = 'authenticated'))
+    as postgres_new_function_handed_to_signed_in_user;`;
 
 /**
  * THE STANDING CHECK (read only; EXPECT NO ROW): every function of schema public that a visitor or a
