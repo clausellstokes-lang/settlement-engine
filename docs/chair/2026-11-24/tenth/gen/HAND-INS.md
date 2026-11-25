@@ -13,7 +13,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | BIRTH-1 | D7 (the crisis names only what the place holds) | lane/birth-1-2026-11-25-d7-wip | 710a49473 (replaces b0cca45be: `church` for `priest`) | handed in | G17, G18, G24, G25 |
 | BIRTH-1 | D8 (the lord's reeve) | lane/birth-1-2026-11-25-d8-wip | cf5d033e5 + ONE register row owed (the owner's leave given, G34) | UNPARKED: hand-in owed | G10, G11, G34 |
 | BIRTH-2 | D4 (the page sorts the powers) | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | handed in | G2, G4 |
-| BIRTH-2 | P9 (the beasts grade on settled land) | lane/birth-2-2026-11-25-p9-wip | f1990cc84 at 16:21 UTC; hand-in owed | built, proofs running | G22 |
+| BIRTH-2 | P9 (the beasts grade on settled land) | lane/birth-2-2026-11-25-p9-wip | 34212dfd2 | handed in (18:24 UTC); records moved C 0, V 0; pages C 2 (render noise: dp-thorp-2, -3: CLOSE-8 says what the noise is), V 175 (all heartland, stored band CRITICAL 151 or WEAK 24); every-birth check V 175 to 0; MERGE: the lighting census: take the line's side and re-take it by its door; the writer-reach rows for `monster`: see G37 | G22, G37 |
 | BIRTH-2 | A5 (the standing sentence its own field) | lane/birth-2-2026-11-25-a5-wip | 6de78192c | PARKED: NOT JOINED (lands with the share page) | G1, G15 |
 | WORDS-1 | E1 (the double possessive as a class) | lane/words-1-2026-11-25-e1-wip | 902b7005d | handed in | G5 |
 | WORDS-1 | E8 step one (the reflexive) | lane/words-1-2026-11-25-e8-wip | 94b7a13d9 | handed in | G5, G20 |
@@ -39,6 +39,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | WORDS-2 | E13a (hamlet Viability: three true lines a state, drawn among the admitted) | lane/words-2-2026-11-25-e13a-wip | 608f70826; hand-in owed | built, proofs running | G32 |
 | WORDS-2 | E13d (the sameness door skips role titles and fixed captions) | lane/words-2-2026-11-25-e13d-wip | not built | ruled (the owner's leave) | G35 |
 | the chair's two re-builds (R24r) | B1(ii) REDESIGNED (the rule asked AFTER the draw; the food record's own predicate, native goods only; a record not stamped by this engine keeps its set; every birth and every base-born record's shown set: 0 moved) and B1(i)b (the Hunter's lodge's successor "Furrier's district" lives on what its lodge lives on) | CLOSE-8 builds | | ruled | R24r 1, R24r 6 |
+| the chair's two measures for P9 (G37) | (i) the writer-reach door: `monster on economicGates` and `monster on scores` lose web-display because the one leaf sits outside the display dirs: if the door can declare a fact leaf as a reader on display's behalf, declare it so the reach stays true; else re-take by `node scripts/check-writer-reach.mjs --write` and send the chair the diff with those rows named. (ii) "P9b": the PDF's four defence score averages still average the STORED monster score: measure what they print in settled country and propose one line; build nothing before the chair rules | CLOSE-8 | | ruled | G37 |
 | the chair's four cures | goals I-13; NEED-ATOM; D7's bytes by SIZE-BACK's method; the writer-reach row for D6 | CLOSE-8 builds | | ruled | R24q 2, R24q 7, G24, G20 |
 
 MERGE NOTES RECEIVED: WORDS-1: E1 and E8 conflict in `goals.js` (imports: take both) and in `goalSentencesOnceInTown`

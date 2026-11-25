@@ -387,3 +387,15 @@ before the pass with reasons). WORDS-1 is given E13b ("How they deal": one sente
 family, up to five identical on a page): where it is drawn and read, how many cards of one pair a town holds, a design
 in which no other draw moves and each pair's present sentence stays its first line, what a birth moves, how many new
 sentences: one message; nothing written before the chair rules on the number.
+
+**G37 (18:24 UTC): P9 RECEIVED (`lane/birth-2-2026-11-25-p9-wip` 34212dfd2); ITS WRITER-REACH ROWS; P9b.** The every-birth
+check (raw threat tier against the printed grade: web Defense, web Overview, PDF): C 0 to 0, V 175 to 0; records moved
+0 / 0; pages C 2 (dp-thorp-2, -3: called render noise by the seat: CLOSE-8 says what it is) and V 175, every one
+heartland with a stored band CRITICAL (151) or WEAK (24); readers through the one leaf: DefenseTab, threatAssessment,
+defenseDisplay, OverviewTab, generalDeskRead, the pdf viewModel's defenseScores. ASKED: `writerReach`'s round trip reds
+because the frozen reach of "monster on economicGates" and "monster on scores" loses web-display (no display file reads
+`.monster` now, only the leaf). RULED: the register must stay TRUE: the page does display it. At the join the leaf is
+declared to the door as a reader on display's behalf if the door has such a form; if it has none the register is
+re-taken by its own script and the diff comes to the chair with those rows named and the gap written down. NAMED BY THE
+SEAT, RULED A MEASURE (P9b): the PDF's four defence averages still average the stored score. BIRTH-2's section 0 is
+final; the seat has stopped (733,556 used at 18:00).
