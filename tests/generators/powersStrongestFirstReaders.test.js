@@ -6,8 +6,8 @@
  *
  *   (a) RED FIRST, BY NAME, on real births of the close's two corpora (C: `birthConfig({ settType })`; V:
  *       `birthConfig({ ...DEFAULT_CONFIG, settType, _randomizePriorities: true })`), measured at 0ec96f13d8
- *       (`docs/chair/2026-11-24/tenth/gen/birth-2/probes/d4order.census.jsx`): C dp-city-5 (its sixth row outweighs its
- *       fourth and fifth); V dp-town-93 and dp-city-134 (the fold left the ruler behind a weaker first row). The template
+ *       (`docs/chair/2026-11-24/tenth/gen/birth-2/probes/d4order.census.jsx`): C dp-city-5 (its last row, 20, outweighs
+ *       its second, third and fourth); V dp-town-93 and dp-city-134 (the fold left the ruler behind a weaker first row). The template
  *       narrative's five powers (`aiLayer.js :: extractFullContext`, live through `OutputContainer.jsx ::
  *       runTemplateNarrative`) are the five strongest. THE ORACLE IS THE RAW RECORD: the stored numbers ranked by the
  *       test's own comparison, never by the leaf.
