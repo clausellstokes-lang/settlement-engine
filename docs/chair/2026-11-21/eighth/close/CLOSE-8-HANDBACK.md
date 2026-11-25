@@ -39,16 +39,32 @@ Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-
   after B1(i); re-pick by the file's own rule (first seed of its series meeting the blocks' predicates), assertions UNCHANGED, a
   RE-KEYED BY IDENTITY comment (cause B1(i), old seed, new seed); landing line: all 50 tests pass, both NOT VACUOUS arms green on
   every SPECS town; no seed in 0..199 is a STOP.
-- JOIN (`lane/close-8-2026-11-25-join`, /home/user/wt/join; PUSHED at c0abbf8d49): 1 D5 172ebff4b0, 2 D4 7e223a7ce3, 3 D3
-  1b6ee56159, doors g1 (lighting 6d4710b864 3802->3804, wiring ee53cd1fb2), 4 D2 4656704cad, 5 D2b cb6c13c69b, 6 D7 6696b1ffe2,
-  7 P9 1776a7ab2e (manifest union 1,211 -> 1,212), doors g2 (lighting 322dfb1e37 3804->3808, wiring c0abbf8d49), 8 E1 512428a78b,
-  9 D6 09f2ee07ba, 10 E8 89f616d8b3 (E1 conflicts by WORDS-1's note). Typechecks 167/1113 after every src merge. `tests/lint` whole:
-  after g1 the line's three; after 9 the three + lighting (doors pending) + writerReach (P9's `monster` rows: my cure G37 (i)).
-  IN FLIGHT: E8 typecheck, 11 E8b, 12 E13b, tests/generators/people + boundCardLinesReaders, doors g3, lint.
+- JOIN (`lane/close-8-2026-11-25-join`, /home/user/wt/join; PUSHED at c0abbf8d49; state at 23:09 UTC): 1 D5 172ebff4b0,
+  2 D4 7e223a7ce3, 3 D3 1b6ee56159, doors g1 (lighting 6d4710b864 3802->3804, wiring ee53cd1fb2), 4 D2 4656704cad, 5 D2b cb6c13c69b,
+  6 D7 6696b1ffe2, 7 P9 1776a7ab2e (manifest union 1,211 -> 1,212), doors g2 (lighting 322dfb1e37 ->3808, wiring c0abbf8d49),
+  8 E1 512428a78b, 9 D6 09f2ee07ba, 10 E8 89f616d8b3 (E1 conflicts by WORDS-1's note), 11 E8b 27f70ed1bb (goals.js imports: both,
+  by the note), 12 E13b d63b369beb, doors g3 (lighting 2bed30e8f4 ->3814, wiring 0ef4d2a11b). GROUP 3 BOUNDARY = 0ef4d2a11b.
+  Typechecks 167/1113 after every src merge. `tests/lint` whole after g3: the line's three + writerReach (P9's `monster` rows, and
+  D6's row behind it: my cures). tests/generators/people + boundCardLinesReaders after g3: 224/225, the one red goals I-13 (on
+  RED-AT-LINE; my cure 3a).
+  GROUP 4 IN FLIGHT: 13 E10, 14 E11, 15 E12, 16 E7, 17 E9 chained, then lint (a slip: lint after 17, not 15; E10-E12 are test-only;
+  from here lint after 20, 23, 26, 29). Next: 18 E4 (conflicts with E9 by WORDS-2's note), G6, G1, G8, G9, G10, G11, G34, E5, E6,
+  E13a; `npm run gen:dossier-prose` after E4/E9/G1/G6 to re-project the .md and economy.generated.js; doors g4; then E3 alone; doors.
+- NEED-ATOM DONE (builder; its REPORT.md write was refused by its permission check: told the chair; the report kept here):
+  `lane/close-8-2026-11-25-need-atom-wip` 031e04e84c, PUSHED, on 09c29806b, two files (needNotBroughtIn.js, faultsNeed.test.js).
+  faultsNeed red 1/11 at the base (r2r-town-54), 11/11 after. The cure: `dealtInHere` also counts a standing, non-custom house with
+  no gap row whose stock is a dealt good (HOUSE_STOCK_COPY {butchers_3_8: livestock}) short where the need list names it and the
+  good is not had (GOOD_HAD_COPY: grounds, production, import words, food sources): `housesShortOf` (iii); copies held equal by the
+  guard; no new module (two more names from supplyStory.js). C/V: leaf vs page 0/0; dropped-as-dealt 0/0 C, 4/4 V; oracle refusals
+  0; records moved 0/0; readers' returns moved 0. Readers (a page prints from each): goals.js :: needUnmet, needUnmetGoods; factsOf
+  :: needNotBroughtIn -> institutionDescVariants.js (fair luxury, silk/spice lines), DS-ECO-8 POOR v1/v6. Gates: 167/1113; copy
+  172/172; lint the line's three. Merges into the join after E3. Measures in `close-8/need-atom/` (`after2-*` final).
+- D7-BYTES: builder started 23:09 UTC on `/home/user/wt/d7-bytes` (`lane/close-8-2026-11-25-d7-bytes-wip`, cut at 0ef4d2a11b).
+- MARK (the chair, 22:45): 351,788 used by its read; hand-over mark raised to 650,000 for 118 on three conditions: frugal reads;
+  every cure and proof run a builder's or a mechanical helper's; this section current at the end of every group.
 - BEFORE battery (line tip, --views) DONE: scratchpad `before-C/`, `before-V/`, 900 each.
-- NEED-ATOM: one builder (Opus) on `/home/user/wt/need-atom` (`lane/close-8-2026-11-25-need-atom-wip`, cut at the line tip); brief
-  `close-8/briefs/NEED-ATOM.md`; report to `close-8/need-atom/REPORT.md`. Briefs written, not started: GOALS-I13 (cut at the join
-  after E13b), D7-BYTES (cut at the join). One builder at a time.
+- Briefs: `close-8/briefs/` NEED-ATOM (done), D7-BYTES (building), GOALS-I13 (next: cut at the join's group-3 boundary or later).
+  One builder at a time.
 - Tools: `close-8/tools/`; scratchpad scripts merge.sh, chain.sh, tc.sh, doors.sh, lint.sh, battery.sh.
 - P9's two C pages (dp-thorp-2, -3) are render noise: a "Patron deity" block on the Power view flips between two hashes on the
   same tree (BIRTH-2's A5 record, section 0 (5)).
