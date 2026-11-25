@@ -144,6 +144,13 @@ SECOND CONTAINER RESTART at about 05:50. The distillate run and the cures-116 li
 - the lint/copy re-run is in the background (logs `scratchpad/cures116-{lint,copy}.log`). The cures' own 9 files passed
   166/166 before the restart.
 
+CURES AT cc7ddec1c (06:12 UTC), with point 116, ALL GATES:
+- the cures' 9 test files 166/166; tests/copy 172/172; tests/lint only the known three.
+- The wiring census (proseWiringCensus 2 red at the merge) was re-taken by its door, `node scripts/wiring-census.mjs`: the stamp
+  alone, producerIndexFiles 1456 -> 1458 (A1's sickCare.js and the mirror's foodProduction.js). --check passes, and the walker is
+  79/79.
+- The tuning registers did not red. -cures is pushing.
+
 THE NEXT COMMAND:
 - on the builder's step-A message, merge -guard-wip onto cures (9b777f3fb), taking the lighting census as the cures' side and
   re-taking it by its door;
