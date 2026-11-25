@@ -1437,3 +1437,4 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THEN: RULING-117-7: merge C1B `--no-ff`, the lighting census by its door, the last short gate, AND THE PUSH.
   BIRTH-2 at 18:00: 733,556 used (cost 56.51); G23 (2) withdrawn; it hands in P9 and stops. BIRTH-1 woken for D8's one
   row. WORDS-2: E13a built 608f70826 (proofs), E13d ordered (G35). WORDS-1: E8b building.
+- 2026-11-25 18:30 UTC · T110 · D8 PARKED AGAIN (G38: two rows, the door refuses a new line, no declaration form): THE CHAIR's G34 COULD NOT BE CARRIED OUT AND WAS NOT FORCED; told the owner. Hand-ins since T109: E8b e75f090b7 (WORDS-1; now on E13b, a measure and a design first, G36); P9 34212dfd2 (BIRTH-2, stopped final; G37: its writer-reach rows and P9b are CLOSE-8's). The line has not moved; C1B's second reader and the helper's 117-6 report are owed.

@@ -399,3 +399,14 @@ declared to the door as a reader on display's behalf if the door has such a form
 re-taken by its own script and the diff comes to the chair with those rows named and the gap written down. NAMED BY THE
 SEAT, RULED A MEASURE (P9b): the PDF's four defence averages still average the stored score. BIRTH-2's section 0 is
 final; the seat has stopped (733,556 used at 18:00).
+
+**G38 (18:30 UTC): D8 IS PARKED AGAIN; G34's ROW IS NOT ADDED.** BIRTH-1 stopped, rightly: `node
+scripts/presumed-things-door.mjs --check` names TWO fresh hits on the one literal "the lord's reeve" (`house: lord's
+reeve`, `house: reeve`), not the one row its hand-back had said; and the door's `--bank` takes only a literal that
+stood at its base revision ("SHRINK-ONLY: no line is ever banked to absorb a NEW line"), so only a hand edit could add
+either. The owner's leave was for ONE row added properly: two by hand is outside it; nothing was written. The door's
+lawful route for a new line (a declaration, as D7 used) is closed too: arm 1 credits `needs`/`excludes` only on an
+object a draw door is handed (`tests/lint/presumedThings.shared.mjs:100-115`) and a catalogue row's face is handed to
+none; and `house: lord's reeve` has no atom (`src/domain/facts/registeredWords.js:510-520`: it waits for a factsOf
+getter). THE FACE STAYS "the reeve" (the base's). The proper cure is its own unit, not in point 118: a factsOf getter
+for the house and the door handed the catalogue's faces. D8 at cf5d033e5; BIRTH-1's section 0 at 849e31687.

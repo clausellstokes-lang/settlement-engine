@@ -11,7 +11,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | BIRTH-1 | D3 (the power step's sentence) | lane/birth-1-2026-11-25-d3-wip | 5262fbee4 | handed in | START-BIRTH-1 |
 | BIRTH-1 | D5 (the defence bound) | lane/birth-1-2026-11-25-d5-wip | 289a70b3a | handed in | START-BIRTH-1 |
 | BIRTH-1 | D7 (the crisis names only what the place holds) | lane/birth-1-2026-11-25-d7-wip | 710a49473 (replaces b0cca45be: `church` for `priest`) | handed in | G17, G18, G24, G25 |
-| BIRTH-1 | D8 (the lord's reeve) | lane/birth-1-2026-11-25-d8-wip | cf5d033e5 + ONE register row owed (the owner's leave given, G34) | UNPARKED: hand-in owed | G10, G11, G34 |
+| BIRTH-1 | D8 (the lord's reeve) | lane/birth-1-2026-11-25-d8-wip | cf5d033e5 | PARKED AGAIN: NOT JOINED (G38: it is TWO rows and the register's door refuses a new line; no declaration form for a catalogue face; the face stays "the reeve") | G10, G11, G34, G38 |
 | BIRTH-2 | D4 (the page sorts the powers) | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | handed in | G2, G4 |
 | BIRTH-2 | P9 (the beasts grade on settled land) | lane/birth-2-2026-11-25-p9-wip | 34212dfd2 | handed in (18:24 UTC); records moved C 0, V 0; pages C 2 (render noise: dp-thorp-2, -3: CLOSE-8 says what the noise is), V 175 (all heartland, stored band CRITICAL 151 or WEAK 24); every-birth check V 175 to 0; MERGE: the lighting census: take the line's side and re-take it by its door; the writer-reach rows for `monster`: see G37 | G22, G37 |
 | BIRTH-2 | A5 (the standing sentence its own field) | lane/birth-2-2026-11-25-a5-wip | 6de78192c | PARKED: NOT JOINED (lands with the share page) | G1, G15 |
