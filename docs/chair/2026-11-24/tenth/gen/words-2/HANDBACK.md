@@ -1,6 +1,6 @@
 # WORDS-2 HAND-BACK (a seat of the tenth chair; branch `lane/words-2-2026-11-25`)
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 10:56 UTC 2026-11-25; kept current at every push)
+## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 12:07 UTC 2026-11-25; kept current at every push)
 A successor reads `docs/chair/2026-11-24/tenth/prompts/START-WORDS-2.txt` and `START-GEN-COMMON.txt` (on
 `lane/chair-2026-11-08`) whole, then this section, and needs nothing else.
 
@@ -38,23 +38,27 @@ G1, G8, G9, G11, for ONE tests/lint, ONE tests/copy, the units' own tests and th
 need a second pass. Base measures: `scratchpad/base-{C,V}` (battery with views), `scratchpad/rec-base-{C,V}` (records).
 | unit | branch, tip | state |
 |---|---|---|
-| E4 | `-e4-wip` 8280ffa61 | built (G3); red ARM 5 confirmed; expected move C 13 / V 41 |
-| E9 clause | `-e9-wip` c410dc6a7 | red 1/1, green; census re-taken |
+| E4 | `-e4-wip` c721d73cb | built (G3); red ARM 5; wiring census and observed-shape baseline re-taken by their doors |
+| E9 clause | `-e9-wip` de7266ca7 | red 1/1, green; lighting census, observed-shape baseline by their doors |
 | E12 | `-e12-wip` 35e87009c | red (4 PDFs differ), green 18/18 |
-| E10 | `-e10-wip` 753f3e337 | red 2/2, green 33/33; tests/lint: the known three only |
-| E11 | `-e11-wip` bea22c6df | red 4/4, green 22/22; census re-taken (31980 to 31984) |
-| E7 (c) | `-e7-wip` a9cb62003 | built; (a) measured: do not build; (b) sameness door not run |
-| G6 #10 | `-g10-wip` 56289aa80 | red, green 8/8 (shared pages unchanged) |
-| G6 #1 | `-g1-wip` dce652144 | red (ARM 7), green |
+| E10 | `-e10-wip` 753f3e337 | red 2/2, green 33/33 |
+| E11 | `-e11-wip` bea22c6df | red 4/4, green 22/22; lighting census re-taken |
+| E7 (c) | `-e7-wip` a9cb62003 | built; (a) measured: do not build; (b) the sameness door `--write` queued last in join3-runs.sh |
+| G6 #10 | `-g10-wip` 56289aa80 | red, green 8/8; every viability note it takes off Defense still prints in Summary/Crisis (C 291 of 291) |
+| G6 #1 | `-g1-wip` 04469eb14 | red, green; STOP to the chair 12:02: presumedThings ARM 1 reads the marks "no office: headman/reeve" as prose; (a) `ruling body` instead, or (b) a walker fix |
 | G6 #8 | `-g8-wip` f56efab9f | red 3/3, green 79/79 |
-| G6 #9 | `-g9-wip` c83c6c969 | red, green 144/144 (leaf wallYield.js at two read sites) |
-| G6 #11 | `-g11-wip` b31c583c5 | red, green 7/7 (page-level; stored line unchanged) |
-| E5 | `-e5-wip` 42022a113 | red 2/2, green 20/20 (re-key to office: elders) |
-| G6 #6+7 | `-g6-wip` def8044f1 | C4 v2 marks `no exports`; red, green 63/63; proofs owed (G9 (5)) |
-| E3 | `-e3-wip` ef6d7c008 | `noGrazingQuarrelOf`; red, green 4/4; births move (stored): golden check owed, never re-recorded |
-| #3+4 | `-g34-wip` 0783a0dee | `ownCrimeUnsafe` caps the law band at strained; red 2/2, green 9/9 |
-| E6 | - | waits for D8 (leave granted, G9 (3)) |
+| G6 #9 | `-g9-wip` (local tip) | re-keyed to the beasts line's authored variant (the defence-reader register); strict types; wiring census |
+| G6 #11 | `-g11-wip` b31c583c5 | red, green 7/7 |
+| E5 | `-e5-wip` 42022a113 | red 2/2, green 20/20 |
+| G6 #6+7 | `-g6-wip` 248230633 | red, green; seed loop folded into the failure helper; proofs owed (G9 (5)) |
+| E3 | `-e3-wip` 646c16169 | rebuilt on the chair's STOP: each grounded quarrel kept, none only where the record holds nothing it names; red 1, green 4/4; the chair's three-state measure: records `rec-e3-*`, `rec-e3none-*` (prototype tree /home/user/wt/e3none, uncommitted) |
+| #3+4 | `-g34-wip` 0783a0dee | red 2/2, green 9/9 |
+| E6 | `-e6-wip` 90ddb9267 | L12 returns (G9 (3), D8 ruled G10): red 4, green 19/19; lighting census re-taken |
 | E9 line | - | SILENCE (G9 (4)) |
+
+Proof joins (scratch, never pushed, hooks on; the chair's line of 11:01: joins are uncommitted from then on, a commit with the
+hooks on allowed): join2 (`/home/user/wt/join2`, 15 units) own tests 555/555, tests/copy 175/175, tests/lint 8 red = the
+known three + five cured on the units above; join3 (`/home/user/wt/join3`, every tip) runs `scratchpad/join3-runs.sh`.
 
 ### 0.3 Owed, once
 On 2026-11-25 I used `--no-verify` on two LOCAL scratch merge commits (forbidden, scratch included): 9d08f46fb ("scratch join:
