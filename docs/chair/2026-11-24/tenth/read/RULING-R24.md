@@ -511,3 +511,16 @@ form. The ten are explained; C1 stays in 117. P1: C 0, V 12 births moved (all go
 162 births, 0 differing; P3: 0; both typechecks green. THE CHAIR READ THE DELTA WHOLE (no fault found, which has
 meant little four times running); a second reader reads the delta while the helper merges and runs the last gate
 (RULING-117-7); the line is pushed only after its report is ruled.
+
+**R24u (19:32 UTC on 2026-11-25): THE SECOND READER ON C1B-2 (b819770332): ONE WORD NOT APPLIED, TWO TESTS THAT DO NOT BITE, ONE RESIDUAL ACCEPTED.**
+Its report: 288 criminal-category hall pairs, tip against old-named twin: 0 differing; of 960 names only "[the] Council
+of Syndics" changes number; no cycle or chunk move. FOUND: (1) a GENERATED power whose own category is criminal and which
+the user renames to exactly "Senate" (or a council's name) reads as the hall (the guild: 20/60 to 74/25; the resolver:
+"City Council" to "City Council Ascendant"): category criminal marks every criminal power, not only the born hall.
+RULED: ACCEPTED AND WRITTEN DOWN, not cured: it is a criminal power by its own category, named as the hall; closing it
+needs a mark stored at birth (a new persisted field, a unit of its own if the owner wants it). (2) `rulingPower.js`'s
+resolver uses the non-strict reader though the pulse calls it: RULED: strict there (C1B-3). (3) the resolver's test
+does not hold `outgoing` (a mutant passes 30 of 30; the oracle is the function under test): literals added, the
+mutant must fail. (4) the user's-own-row test passes because its rows carry no category: real rows (category criminal
+and a mark), the mutant must fail. (5) first-paint bytes: the helper's build measures them. C1B-3 is ONE identifier
+of source and tests: the chair reads it; no further second read is spent on it.
