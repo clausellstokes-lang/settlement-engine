@@ -31,6 +31,13 @@
  * exclude `famine` (the food record's famine: the presumption-classes walker reads plentiful and to spare as the
  * `plenty` class, which the band this pool is keyed by does not answer); collapsed #0 ("temple kitchens") needs `church`
  * beside the sacred house (the presumed-things walker's `temple`: a wayside shrine keeps no temple kitchen).
+ *
+ * THE MIRROR (CLOSE-7; the chair's RULING-R24 R24d of 2026-11-24, the words his; vetoable by the owner, on the veto list):
+ * where the page prints Famine over the place's own production adequate or surplus, the fare reads `critical` (the printed
+ * band bounds it, `domain/dailyLife.js :: fareBandOf`), and there critical #7 (C7, "The catch is too small …") would say
+ * the source failed. C7 now excludes `food production: ≥ adequate` (the vocabulary's atom, read off the capacity profile the
+ * deriver hands, `facts/foodProduction.js`), and K2, the chair's line in its place, needs it, appended after C7: on a place
+ * where C7 was eligible, K2 stands in C7's index of the eligible list, so the keyed pick is unchanged everywhere else.
  */
 
 /** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} FoodLine */
@@ -101,7 +108,8 @@ export const FOOD_CULTURE = Object.freeze({
     { id: 'C4', text: 'Most households eat less than they need, and the children are fed first.', needs: [] },
     { id: 'C5', text: 'The stew is thin and the bread is thinner.', needs: ['grain'] },
     { id: 'C6', text: 'Food is short, and what can be bought costs more than most can pay.', needs: ['market'] },
-    { id: 'C7', text: 'The catch is too small to feed everyone, and fish is shared out carefully.', needs: ['fish'] },
+    { id: 'C7', text: 'The catch is too small to feed everyone, and fish is shared out carefully.', needs: ['fish'], excludes: ['food production: ≥ adequate'] },
+    { id: 'K2', text: 'Every fish that comes in is counted, and the shares are measured out house by house.', needs: ['fish', 'food production: ≥ adequate'] },
   ]),
   collapsed: frozen([
     { id: 'X0', text: 'Hunger is everywhere. People queue at temple kitchens; rumors fly about caravans that never arrived.', needs: ['sacredHouse', 'church', 'route open'] },

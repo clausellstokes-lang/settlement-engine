@@ -26,6 +26,17 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { importsAsPrinted } from '../display/tradeListDisplay.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
+import { OUTSIDER_IMPRESSIONS } from '../../data/dailyLife/outsiderImpressions.js'; // R24-A1 (CLOSE-7): the five lines of row NOHEAL
+import { residentSickCareOf, sickCareOf } from '../facts/sickCare.js'; // R24-A1 (CLOSE-7): the one reading of sick care
+import { FOOD_CULTURE } from '../../data/dailyLife/foodCulture.js'; // R24-A2 (CLOSE-7): the shortage lines of row FOODSEC
+import { COMMONER_RESENTMENTS } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
+import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c)): Dawn Work's food branch
+import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
+import { landWithholdsHouse } from '../landWithholding.js';
+import { nativeSemanticResourceKeys } from '../content/customContentSemanticAuthority.js';
+import { motifGlyph } from '../traditions/genesis.js'; // R24-B1(ii) (CLOSE-7 BATCH): the field element's printed glyph
+import { factsOf } from '../facts/factsOf.js'; // R24-B1(ii): the two atoms the furrows rule reads
+import { atomHolds } from '../facts/factVocabulary.js'; // R24-B1(ii)
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -66,6 +77,24 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   P20: ['20 siege words outside a siege', 'SECOND'],
   NEW1: ['NEW-1 the governance label against the Defense verdict', 'SECOND'],
   NEW2: ['NEW-2 magic income, and no practitioner on the rolls', 'CROSS'],
+  // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24): a line that says no healer stands here (H2, H3, H7, H8, H9
+  // of the Daily Life visitor lines) on a page whose record holds sick care at hand (`facts/sickCare.js`)
+  NOHEAL: ['NOHEAL a no-healer line beside resident sick care', 'CROSS'],
+  // R24-A2 (CLOSE-7; the chair's RULING-R24, R24a and R24c of 2026-11-24): a Daily Life line that says people go short (the
+  // fare's strained, critical and collapsed lines; the food grievances but the price-only three; the food visitor lens's F1
+  // and F2: CHAIN-1-LISTS (c), "your classing stands"; Dawn Work's food branch, R24c (c)) on a page whose Food Security
+  // prints Secure or Surplus (`famineOf().shownBand`)
+  FOODSEC: ['FOODSEC a shortage line on a page whose food ledger reads Secure', 'CROSS'],
+  // CLOSE-7 THE MIRROR (the chair's RULING-R24 R24d of 2026-11-24, "a pattern at a bar of zero"): a Daily Life fare line of a
+  // fed band (the fare's `surplus`, `surplus.wanting` and `adequate` lines: the branches the printed band's bound gives only a
+  // page that prints Pressured or better) on a page whose Food Security prints Deficit or Famine (`famineOf().shownBand`)
+  // (the chair's words are "a line of plenty"; the label says it without the plenty class's word, which the presumption-classes
+  // walker reads in this file's literals and its door never banks)
+  FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
+  B1land: ['B1(i) a house the land withholds standing in the desert with nothing that gives its thing (RULING-R24, R24b)', 'CROSS'],
+  // R24-B1(ii) (CLOSE-7 BATCH; the chair's RULING-R24 R24-B1(ii)): a founding tradition of the fields (its element's glyph on the
+  // Traditions tab) on a page whose record buys its grain in (`grain imported`, the fact A12 reads) and holds no farmland
+  B1furrow: ['B1(ii) a tradition of the fields where the grain is bought in and no farmland stands (RULING-R24 R24-B1(ii))', 'CROSS'],
 });
 
 /**
@@ -161,6 +190,31 @@ const founderKind = (t) => (PAGE_PHRASES.militaryFounder.test(t) ? 'military'
     : /navigator|merchant|trade|consortium|coalition/.test(t) ? 'merchant' : /family|mill/.test(t) ? 'family'
       : /noble|lord|crown|royal|imperial|decree/.test(t) ? 'noble' : 'other');
 const SMALL = new Set(['thorp', 'hamlet', 'village']);
+/** R24-A1: the visitor lines that say no healer stands here, by their ids in the pool the ruling names (their words are the pool's). */
+const NO_HEALER_IDS = Object.freeze(['H2', 'H3', 'H7', 'H8', 'H9']);
+/** @type {ReadonlyArray<Rec> | null} */ let noHealerLines = null;
+const noHealer = () => (noHealerLines ??= arr(OUTSIDER_IMPRESSIONS['services.healing']).map(obj).filter((l) => NO_HEALER_IDS.includes(s(l.id))));
+/** R24-A2: the lines that say people go short, by their pools and ids (the classing of CHAIN-1-LISTS (c), ruled in R24a;
+ * Dawn Work's food branch by R24c (c)); the words are the pools', a slot (`{market}`) read as any name. */
+/** @type {ReadonlyArray<Rec> | null} */ let shortageLines = null;
+/** @type {Map<string, RegExp>} */ const SHORT_RE = new Map();
+/** A line's printed form (its slots read as any name), compiled once. @param {string} t @returns {RegExp} */
+const printedForm = (t) => SHORT_RE.get(t) ?? SHORT_RE.set(t, toRe(t)).get(t) ?? toRe(t);
+const shortage = () => (shortageLines ??= [
+  ...['strained', 'critical', 'collapsed'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)),
+  ...arr(COMMONER_RESENTMENTS.food).map(obj).filter((l) => !PRICE_LINES.includes(s(l.id))),
+  ...arr(OUTSIDER_IMPRESSIONS['services.food_production']).map(obj).filter((l) => ['F1', 'F2'].includes(s(l.id))),
+  ...arr(obj(DAWN_WORK).food).map(obj),
+]);
+/** THE MIRROR (R24d): the fare's lines of a fed band, by their pools (the words are the pools', a slot read as any name). */
+/** @type {ReadonlyArray<Rec> | null} */ let fedFareLines = null;
+const fedFare = () => (fedFareLines ??= ['surplus', 'surplus.wanting', 'adequate'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)));
+/** The printed food bands a line of plenty may not stand beside (R24d). */
+const UNFED = new Set(['deficit', 'famine']);
+/** The food grievances that say food is dear and nobody goes short (CHAIN-1-LISTS (c): NEITHER). */
+const PRICE_LINES = Object.freeze(['F0', 'F6', 'F8']);
+/** The printed food bands that say the place is fed. */
+const FED = new Set(['secure', 'surplus']);
 const F4_TESTS = /** @type {const} */ ([
   ['ore', 'Local ore feeds the smithy', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
   ['coal', 'Local coal fires the forges, ', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
@@ -194,7 +248,8 @@ export function pageCensusFindings(settlement, views) {
   };
   const noArcane = D.some((l) => /No arcane practitioners on the rolls/.test(l));
   // the live roster (a ruin is no working house; a birth carries none, so the census's counter reads the same)
-  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec)).map((i) => s(obj(i).name).toLowerCase());
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (rec));
+  const roster = live.map((i) => s(obj(i).name).toLowerCase());
 
   run('P2siege', () => {
     // the Food endurance line states what a siege does to the stores: outside a siege that is a condition, so a
@@ -345,6 +400,49 @@ export function pageCensusFindings(settlement, views) {
   run('NEW2', () => {
     const l = E.find((x) => mag.some((p) => p.re.test(x)));
     return l && noArcane ? [l, 'No arcane practitioners on the rolls'] : null;
+  });
+  run('NOHEAL', () => {
+    // R24-A1: the page says no one tends the sick, and the record holds sick care at hand (the one reading)
+    const said = all.find((l) => noHealer().some((line) => l.includes(s(line.text))));
+    if (!said || !sickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec))) return null;
+    const care = residentSickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec));
+    return [said, care.length ? care.map((row) => `${row.name} @ ${row.institution}`).join('; ') : 'a sick house by name'];
+  });
+  run('FOODSEC', () => {
+    // R24-A2: the page says people go short, and its own Food Security prints the place fed
+    const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
+    if (!FED.has(printed)) return null;
+    const said = all.find((l) => shortage().some((line) => printedForm(s(line.text)).test(l)));
+    return said ? [said, `Food Security prints ${printed}`] : null;
+  });
+  run('FEDFARE', () => {
+    // THE MIRROR (R24d): the fare says the place is fed, and its own Food Security prints Deficit or Famine
+    const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
+    if (!UNFED.has(printed)) return null;
+    const said = all.find((l) => fedFare().some((line) => printedForm(s(line.text)).test(l)));
+    return said ? [said, `Food Security prints ${printed}`] : null;
+  });
+  run('B1land', () => {
+    // a house printed on the page that the land withholds here (domain/landWithholding.js: the desert withholds fish, timber
+    // and game; a port or river route or a native nearby resource gives them back)
+    const config = obj(rec.config);
+    const land = { terrainType: s(config.terrainType), tradeRoute: s(config.tradeRouteAccess), nearbyResources: nativeSemanticResourceKeys(config) };
+    for (const house of live) {
+      const name = s(obj(house).name);
+      if (!name || !landWithholdsHouse(land, /** @type {Parameters<typeof landWithholdsHouse>[1]} */ (house))) continue;
+      const l = all.find((x) => x.includes(name));
+      if (l) return [l, `${name}: ${land.terrainType}, route ${land.tradeRoute || 'none'}, resources ${land.nearbyResources.join(', ') || 'none'}`];
+    }
+    return null;
+  });
+  run('B1furrow', () => {
+    // R24-B1(ii): the Traditions tab prints a field tradition (its glyph on its own line), and the record buys its grain in
+    // and holds no farmland (`facts/factVocabulary.js :: atomHolds` over `factsOf`, the atoms' own readers)
+    const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (rec));
+    if (atomHolds('grain imported', facts) !== true || atomHolds('institution: farmland', facts) !== false) return null;
+    const glyph = motifGlyph('field');
+    const l = V('World/Traditions').find((x) => x === glyph);
+    return l ? [l, 'a tradition of the fields: grain bought in, no farmland'] : null;
   });
   return out;
 }

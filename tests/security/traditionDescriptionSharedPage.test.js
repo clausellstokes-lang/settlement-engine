@@ -618,7 +618,12 @@ describe('TRAD-3 UNIT 4, THE DEAD\'S CAUSE (the chair\'s item 3): the reader nam
   // renamed by a plant to hold a hideable house's name. "Hidden" is modelled as veil-22 serves it: the house goes whole
   // (this tree's applyVeil, `card:institution:<id>`) and the event entry whose name holds it leaves its list
   // (gallerySecondHomes.js :: sweepHiddenNames on origin/lane/veil-22-2026-11-20: an entry whose own `name` is taken).
-  const SPECS = [['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-0'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+  // RE-ANCHORED (CLOSE-7 BATCH, by cause): after R24-B1(ii) (genesis.js :: elementWeight, a field tradition weighs 0 where the
+  // grain is bought in and no farmland stands) trad-dead-city-arabic-0 (Khanqila) and trad-dead-city-latin-0 (Magnaorum) hold no
+  // rite of the dead. Each moves to the first seed of its own series that meets these blocks' own predicates (a rite of the dead,
+  // a graded event, a hideable house, and the granary CONTROL recalled): arabic-22 Qal'atqala, latin-4 Farovetum. Every
+  // assertion stands word for word.
+  const SPECS = [['city', 'arabic', 'trad-dead-city-arabic-22'], ['city', 'latin', 'trad-dead-city-latin-4'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
   const DEAD = ['great_fire', 'great_flood', 'plague_years', 'external_threat'];
   const graded = (e) => DEAD.includes(e.templateType) && ['major', 'catastrophic'].includes(e.severity);
   const towns = SPECS.map(([tier, culture, seed]) => {
@@ -758,8 +763,9 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
  * reads every power less every field any of its eyes can remove (galleryVeil.js :: CARD_KINDS.faction.fields).
  */
 describe('TRAD-4 UNIT 7 (1): the dead\'s event named by a hidden house\'s bare form, a plural, a possessive, a three-letter name', () => {
+  // RE-ANCHORED (CLOSE-7 BATCH, by cause): the two city seeds as in TRAD-3 UNIT 4 above (R24-B1(ii) left them no rite of the dead)
   const SPECS = [['town', 'germanic', 'trad-f-town-germanic'], ['town', 'greek', 'trad-c-town-greek'],
-    ['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-0'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+    ['city', 'arabic', 'trad-dead-city-arabic-22'], ['city', 'latin', 'trad-dead-city-latin-4'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
   const bareOf = (name) => String(name).replace(/\s*\([^)]*\)\s*$/, '');
   /** The town with its first hideable house renamed and a graded great fire, two years ago, named `eventName`. */
   const plant = (t, houseName, eventName) => {

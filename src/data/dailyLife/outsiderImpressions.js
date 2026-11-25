@@ -157,18 +157,21 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'AI0', text: 'People here are uneasy about magic, and a visitor notices how they speak of it.', needs: ['magic'] },
     { id: 'AI1', text: 'Something is wrong with the magic here, and people would rather a visitor did not ask.', needs: ['magic'] },
   ]),
-  /** the healing lens strained. */
+  /** the healing lens strained. R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24): the five that say no healer
+   * stands here (H2, H3, H7, H8, H9) exclude `sick care` (`facts/sickCare.js`: a sick house by name, or a resident service
+   * whose row tends the sick), not `sick house` alone: "no healer to send for" was printed beside "Healing · Priest
+   * (resident)". Where care is here and short, H4, H5 and H6 stay true; H0 and H1 stay on `sick house` (no new words). */
   'services.healing': frozen([
     { id: 'H0', text: 'Anyone who falls ill here waits a long while to be seen.', needs: ['sick house'] },
     { id: 'H1', text: 'The healers have more sick to see than they can manage.', needs: ['sick house'] },
-    { id: 'H2', text: 'There is no healer here, and the sick are nursed at home.', needs: [], excludes: ['sick house'] },
-    { id: 'H3', text: 'Nobody here heals by trade, and a visitor who falls ill must make do.', needs: [], excludes: ['sick house'] },
+    { id: 'H2', text: 'There is no healer here, and the sick are nursed at home.', needs: [], excludes: ['sick care'] },
+    { id: 'H3', text: 'Nobody here heals by trade, and a visitor who falls ill must make do.', needs: [], excludes: ['sick care'] },
     { id: 'H4', text: 'Care for the sick is short here, and people know better than to fall ill.', needs: [] },
     { id: 'H5', text: 'The sick are not well provided for here, and a visitor notices it.', needs: [] },
     { id: 'H6', text: 'Those who fall ill here cannot count on much care.', needs: [] },
-    { id: 'H7', text: 'Anyone who falls ill here is nursed by family, for there is no healer to send for.', needs: [], excludes: ['sick house'] },
-    { id: 'H8', text: 'A visitor who falls sick here will find no healer to call on.', needs: [], excludes: ['sick house'] },
-    { id: 'H9', text: 'Sickness is something people here deal with at home, as best they can.', needs: [], excludes: ['sick house'] },
+    { id: 'H7', text: 'Anyone who falls ill here is nursed by family, for there is no healer to send for.', needs: [], excludes: ['sick care'] },
+    { id: 'H8', text: 'A visitor who falls sick here will find no healer to call on.', needs: [], excludes: ['sick care'] },
+    { id: 'H9', text: 'Sickness is something people here deal with at home, as best they can.', needs: [], excludes: ['sick care'] },
   ]),
   /** the administrative lens strained. */
   'services.administrative': frozen([

@@ -111,6 +111,7 @@ export const GOVERNMENT_FAMILY = Object.freeze({
   'Circle of Adepts': 'arcane', 'Arcane Council': 'arcane', 'Arcane Senate': 'arcane', 'Grand Arcane Council': 'arcane',
   // criminal: a captured seat
   'Corrupt Council': 'underboss', 'Corrupt City Council': 'underboss', 'Shadow Senate': 'underboss',
+  'Council of Aldermen': 'underboss', 'Council of Syndics': 'underboss', Senate: 'underboss', // R24-C1 (CLOSE-7 BATCH): the birth names, by exact name; the old forms kept for saved places
   'Corrupt Oligarchy': 'underboss', 'Shadowed Council': 'underboss',
 });
 

@@ -31,6 +31,8 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { factsOf } from '../facts/factsOf.js'; // R24-B1(ii) (CLOSE-7 BATCH): the two atoms the furrows rule reads
+import { atomHolds } from '../facts/factVocabulary.js'; // R24-B1(ii)
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -180,7 +182,20 @@ function readIdentity(settlement) {
     chaos: deity ? chaos01(deity) : 0.5,
     hasDeity: !!deity,
     deityRef: (deity && typeof deity._deityRef === 'string') ? deity._deityRef : null,
+    fieldsBoughtIn: fieldsBoughtIn(settlement),
   };
+}
+
+/**
+ * R24-B1(ii), THE FURROWS (CLOSE-7 BATCH; the chair's RULING-R24 R24-B1(ii)): the record buys its grain in (the atom
+ * `grain imported`, the fact Daily Life's A12 "The grain is bought in, not grown here" reads) and holds no farmland (the atom
+ * `institution: farmland`). Read through the atoms' own readers (`atomHolds` over `factsOf`), never a name test here; an
+ * unanswered atom (a partial record) reads FALSE, so the rule only ever takes a weight away where both facts are answered.
+ * @param {unknown} settlement @returns {boolean}
+ */
+export function fieldsBoughtIn(settlement) {
+  const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (settlement));
+  return atomHolds('grain imported', facts) === true && atomHolds('institution: farmland', facts) === false;
 }
 
 /** @typedef {ReturnType<typeof readIdentity>} TraditionIdentity */
@@ -202,6 +217,9 @@ function elementWeight(el, id) {
   // CENSUS-1 wave 0, fact 4, extended by CENSUS-1c unit 6 (the vocabulary rulings §6): as in
   // `foundingElementWeight`, no water-keyed element (first landing, river, tide) without water.
   if (WATER_ELEMENTS.includes(el.id) && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
+  // R24-B1(ii): no tradition blesses fields the place does not have (its grain bought in, no farmland). `field` is no founding
+  // candidate (`foundingFit: false`), so the addition draw is its only door.
+  if (el.id === 'field' && id.fieldsBoughtIn) return 0;
   let w = el.foundingFit ? 0.25 : 1; // origin elements rarely recur as additions
   if (id.terrain && el.terrains.includes(id.terrain)) w += 3;
   if (id.econ && el.econ.includes(id.econ)) w += 2;

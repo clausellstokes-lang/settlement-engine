@@ -194,6 +194,10 @@ export const CRIME_WORDS = Object.freeze(['none', 'diffuse', 'semi-organized', '
  * (`causalState.js :: CAUSAL_BANDS`, reversed; read by `lawBand.js :: lawBandOf`). */
 export const LAW_ORDER_RUNGS = Object.freeze(['collapsed', 'critical', 'strained', 'adequate', 'surplus']);
 
+/** CLOSE-7 THE MIRROR (R24d; vetoable by the owner): the food capacity's band, worst first (`capacityModel.js :: CAPACITY_BANDS`'
+ * five bands, reversed; read by `foodProduction.js :: foodProductionOf`). */
+export const FOOD_PRODUCTION_RUNGS = Object.freeze(['collapsed', 'critical', 'strained', 'adequate', 'surplus']);
+
 /** BAR6-CRIME (BRIEF-BAR6 (d) and B6; vetoable by the owner): the force that keeps order (`orderForce.js :: orderForceOf`). */
 export const ORDER_FORCE_WORDS = Object.freeze(['kept', 'paid', 'volunteers']);
 /**
@@ -245,7 +249,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [sickCare] @property {(capacities: unknown) => string|undefined} [foodProduction] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -305,6 +309,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // getter; vetoable by the owner, on the veto list as new vocabulary): `sick house` = a hospital or a healer stands (the
   // defence home's two atoms, one composite: a daily-life line naming the sick-house or a healer needs one or the other).
   'sick house': dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.hospital === true || f.defence.healer === true) : undefined) }),
+  // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24, vetoable by the owner; on the veto list as new vocabulary, a
+  // fact the record already holds): `sick care` = SICK CARE AT HAND, the one reading: a sick house by name, OR a resident service
+  // (its house on the live roster, never an "Access to" row) whose catalogue row tends the sick (`facts/sickCare.js ::
+  // sickCareOf`). A line that says no healer stands here excludes it.
+  'sick care': dim({ shape: 'presence', home: 'sickCare', reader: (f) => bool(f.sickCare) }),
   // COHERENCE-AGREE-4 (2026-11-12, the chair's ruling on STOP 3): a court sits, and somewhere holds the guilty —
   // two facts, each the defence home's own atom (`defence.js :: court`, `prison`), so a line naming one
   // and not the other declares both.
@@ -611,6 +620,14 @@ export const FACT_DIMENSIONS = Object.freeze({
   // the town grows more than it eats (`growsMoreThanEats.js`, the food record's flag the Economics tab prints). "An ordinary year
   // leaves nothing over" presumes its absence; the printed band does not carry it (such towns print Secure).
   'food surplus': dim({ shape: 'presence', home: 'growsMoreThanEats', reader: (/** @type {FactsLike} */ f) => bool(f.growsMoreThanEats) }),
+  // CLOSE-7 THE MIRROR (the chair's RULING-R24 R24d of 2026-11-24; vetoable by the owner, on the veto list as new vocabulary),
+  // beside `food`: the place's OWN production band, the food capacity as the capacity model writes it (production against need,
+  // imports not counted; `foodProduction.js`), read off the capacity profile handed as the context (`ctx.capacities`: the
+  // model cannot be imported by a fact home, `foodProduction.js` says why). Where the page prints Famine over production
+  // adequate or surplus, a line that says the source failed excludes `food production: ≥ adequate`, and the chair's line in
+  // its place needs it. No profile handed: undefined, so the line is refused (fail-closed).
+  'food production': dim({ shape: 'band', home: 'foodProduction', needsContext: 'capacities', order: FOOD_PRODUCTION_RUNGS,
+    reader: (/** @type {FactsLike} */ f, _key, ctx) => (typeof f.foodProduction === 'function' && ctx && 'capacities' in ctx ? f.foodProduction(ctx.capacities) : undefined) }),
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
   prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
   crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),

@@ -26,6 +26,7 @@ import {
   deriveDailyLife,
   summarizeDailyLife,
   supportedDailyLifeSlots,
+  fareBandOfRecord,
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
@@ -447,6 +448,15 @@ describe('deriveDailyLife() — real generated settlement', () => {
     for (const key of DAILY_LIFE_SLOTS) {
       const s = life.slots[key];
       expect(s, `missing slot ${key}`).toBeTruthy();
+      // R24-A2 (CLOSE-7; the chair's R24a and R24h), the pin re-stated by its cause: this city's production reads strained
+      // while its page prints Food Security "Secure", so the fare band is `adequate` and it holds no food grievance ("Going
+      // short at table …" was the fault); its legitimacy is above strained, so it holds none at all: the calm rule's
+      // EMPTY string (ruling 3), which the tab and the PDF print as nothing.
+      if (key === 'commoner_resentments') {
+        expect(fareBandOfRecord(settlement), 'the page prints this city fed').toBe('adequate');
+        expect(s.text, `${key}: no grievance held`).toBe('');
+        continue;
+      }
       expect(s.text.length, `${key} text empty`).toBeGreaterThan(0);
     }
   });

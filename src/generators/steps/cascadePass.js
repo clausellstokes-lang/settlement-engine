@@ -16,6 +16,7 @@ import { birthFactsOf } from '../../domain/facts/factsOf.js';
 import { recordTrace } from '../../domain/trace.js';
 import {
   nativeSemanticName,
+  nativeSemanticResourceKeys,
 } from '../../domain/content/customContentSemanticAuthority.js';
 
 function instId(name) {
@@ -50,6 +51,8 @@ registerStep('cascadePass', {
     population: typeof population === 'number' ? population : null,
     // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
     density: settlementDensity(ctx),
+    // B1(i) (RULING-R24, R24b): the native nearby resources the draw reads, so the cascade asks the land as the draw does.
+    nearbyResources: nativeSemanticResourceKeys(ctx.effectiveConfig || {}, ctx.nearbyResources),
   });
   if (cascadeAdditions.length > 0) {
     // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.

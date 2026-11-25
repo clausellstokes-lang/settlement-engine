@@ -45,7 +45,7 @@
  */
 
 import { isCanonSave, savePhase } from '../domain/campaign/canon.js';
-import { applyEdit, mintDmId } from '../domain/edit/dmLayer.js';
+import { appendMinted, applyEdit, mintDmId } from '../domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../domain/edit/fieldDeclarations.js';
 import { EMPTY_RULE_SET, evaluateGuards, GUARD_OFFERS } from '../domain/edit/guards.js';
 import { makeOp, OP_CONSEQUENCE_POLICIES, OP_TYPES, validateOp } from '../domain/edit/operations.js';
@@ -53,6 +53,7 @@ import {
   DECREE_AUTHORS, markApplied, recordOverride, reopen, reorder, RESOLUTION_MISSING_KINDS,
   resolveDecree, revertTick, stage, withdraw, WITHDRAWN_REASON_KINDS,
 } from '../domain/edit/registry.js';
+import { GENERATOR_VERSION } from '../domain/settlement.schema.js';
 
 /**
  * The closed transient vocabulary. VALUES, never a boolean. `decree` JOINS HERE (EM-C4b)
@@ -1093,16 +1094,35 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   }
   if (minted.length === 0) return NOTHING_MINTED;
 
+  // ⭐ GUARD (CLOSE-7; the chair's ruling R24j 3): A STORED PLACE IS RE-DERIVED ONLY BY THE ENGINE
+  //    THAT BORE IT. ONE seam, BEFORE EITHER ENGINE PATH (the lane chooses local or remote inside
+  //    `regenerateWithLayer`, and a place of another engine never reaches the lane at all). Such a
+  //    place takes THIS tick's newcomers by APPEND, through the layer's own declared-append rows
+  //    (`dmLayer.js :: appendMinted`, the same people the re-derivation would have appended): the
+  //    engine is NOT run and nothing else on the record moves. MEASURED (CLOSE-7 LIVE-PATH):
+  //    re-deriving master-born places on this engine re-dealt houses in 65 of 180, powers in 51,
+  //    the government in 7 and the history in 63, and left 132 people in powers the place no
+  //    longer held. The layer is written below as today, both homes in the ONE write below as
+  //    today, and the receipt says `rederived: false`. A world-fact root (it enters only as
+  //    `config′`, which needs the engine) comes back `engine_mismatch`, never half-applied.
+  const bornHere = /** @type {{generatorVersion?: unknown}} */ (record).generatorVersion === GENERATOR_VERSION;
+  const appended = bornHere ? null : appendMinted(
+    record,
+    Object.freeze({ .../** @type {object} */ (layer), minted: Object.freeze(mintedNow) }),
+    DECLARATION_CONSULT,
+  );
+
   // ⭐ THE RE-DERIVATION SEAM, CONSULTED, AND THE LANE RUN — ONCE, for every newcomer this tick
   //    minted together. `calls: 1` is a SCOPE: one re-derivation per applied edit, which for a
   //    tick is one per tick.
   const seamIsScoped = REDERIVE_SEAM.kind === 'scoped' && REDERIVE_SEAM.calls === 1;
-  const lane = seamIsScoped
+  const lane = bornHere && seamIsScoped
     ? /** @type {{regenerateWithLayer?: Function}|null} */ (await reachRederiveLane())
     : null;
   // The lane load yielded. The save may have changed underneath, and re-deriving save X's
   // world onto save Y is the data-safety defect step 1 exists to prevent.
-  if (typeof lane?.regenerateWithLayer !== 'function' || !stillOurs()) return NOTHING_MINTED;
+  if (bornHere && typeof lane?.regenerateWithLayer !== 'function') return NOTHING_MINTED;
+  if (!stillOurs()) return NOTHING_MINTED;
   const live = isActive ? get().settlement : record;
   // ⛔ THE RE-DERIVATION IS HANDED THE NEWCOMERS **THIS TICK** MINTED, NEVER THE ONES THE RECORD
   //    ALREADY HOLDS (EM-E8d, U111). MEASURED at 2dba3ffa0 over the REAL advance in local mode:
@@ -1118,7 +1138,7 @@ export async function applyRosterDecreesAtTick(get, set, request) {
   //    bag equal to that layer — so a first newcomer's re-derivation is unmoved.
   const whole = /** @type {{roots: object, worldFacts: object, minted: object, phantoms: object}} */ (layer);
   const layerForRun = Object.freeze({ ...whole, minted: Object.freeze(mintedNow) });
-  const out = await lane.regenerateWithLayer(
+  const out = appended ?? await /** @type {{regenerateWithLayer: Function}} */ (lane).regenerateWithLayer(
     live, storedConfigFor(get(), saveId, live), layerForRun, DECLARATION_CONSULT,
   ).then(null, () => null);
   const derived = isPlainObject(out) ? /** @type {{record?: unknown}} */ (out).record : null;
@@ -1126,7 +1146,8 @@ export async function applyRosterDecreesAtTick(get, set, request) {
 
   // ⛔ ONE WRITE, CARRYING BOTH HOMES. The derived record is a fresh full generation, so every
   //    key the live record holds and it does not is carried forward; the LAYER is this member's
-  //    own write and is never carried from the pre-run record.
+  //    own write and is never carried from the pre-run record. (An APPENDED record already holds
+  //    every key of the stored one, so the carry is a no-op on the guard's path.)
   const next = carryForward(/** @type {object} */ (live), /** @type {object} */ (derived));
   /** @type {Record<string, unknown>} */ (next).dmLayer = layer;
   set((state) => {
@@ -1149,7 +1170,7 @@ export async function applyRosterDecreesAtTick(get, set, request) {
     ok: /** @type {true} */ (true),
     saveId,
     minted,
-    rederived: true,
+    rederived: appended === null,
     unapplied: Array.isArray(reported) ? Object.freeze([...reported]) : NO_ROWS,
   };
 }

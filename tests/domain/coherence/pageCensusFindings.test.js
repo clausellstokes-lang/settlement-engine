@@ -8,6 +8,10 @@ import { PAGE_CENSUS_ROWS, RETIRED_PAGE_CENSUS_ROWS, pageCensusFindings, viewsOf
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { poolMemberTexts } from '../../helpers/drawnProse.js';
 import { CRIME_LINE_DISQUALIFIERS } from '../../../src/domain/display/stateProse/crimeLineDisqualifiers.js';
+import { OUTSIDER_IMPRESSIONS } from '../../../src/data/dailyLife/outsiderImpressions.js';
+import { FOOD_CULTURE } from '../../../src/data/dailyLife/foodCulture.js';
+import { COMMONER_RESENTMENTS } from '../../../src/data/dailyLife/commonerResentments.js';
+import { motifGlyph } from '../../../src/domain/traditions/genesis.js';
 
 /** A corpus line, computed (never typed): the pool's first member with the town's name in its slots. */
 const corpusLine = (leaf, blockId, poolKey) => poolMemberTexts({ leaf, blockId, poolKey, slots: { settlement: 'Brindle', seat: 'hall' } })[0];
@@ -29,10 +33,20 @@ const MAGIC = corpusLine('economy', 'DS-ECO-12', 'INCOME WEIGHT: the practice of
 const SETTLED = corpusLine('defense', 'DS-DEF-2', 'Beasts & Monsters: settled, defenses beyond the need');
 
 const NO_ARCANE = 'Arcane Support None · No arcane practitioners on the rolls';
+/** R24-A1 (CLOSE-7): the visitor line that says no healer stands here, the pool's own words (found, not typed). */
+const NO_HEALER_H7 = OUTSIDER_IMPRESSIONS['services.healing'].find((l) => l.id === 'H7').text;
+/** R24-A2 (CLOSE-7): the fare line that says portions are small, the pool's own words (found, not typed). */
+const PORTIONS = FOOD_CULTURE.strained.find((l) => l.id === 'T3').text;
+/** CLOSE-7 THE MIRROR (R24d): a fare line of a fed band, the pool's own words */
+const ENOUGH = FOOD_CULTURE.adequate.find((l) => l.id === 'A3').text;
 /** A Food endurance line as the Defense tab prints it (its label, then the leaf's sentence). @param {string} sentence */
 const ENDURANCE = (sentence) => `Food endurance: ${sentence}`;
 /** A record whose trade brings iron and whose terrain needs clay that no trade brings (REVIEW-W2A F1). */
 const NEEDS_CLAY = { economicState: { primaryImports: ['Iron'] }, resourceAnalysis: { imports: { critical: ['clay'] } } };
+/** A desert place with a fish market and no water: an oasis gives no fish (B1(i), R24b). */
+/** R24-B1(ii): the field element's printed glyph, read from its producer */
+const FIELD_GLYPH = motifGlyph('field');
+const DESERT_FISH_MARKET = { config: { terrainType: 'desert', tradeRouteAccess: 'desert_road', nearbyResources: ['oasis_water'] }, institutions: [{ name: 'Fish market', source: 'generated' }] };
 /** @type {Record<string, { views: Record<string, string[]>, record?: Record<string, unknown> }>} */
 const PLANTS = {
   P2siege: { views: { 'Systems/Defense': [ENDURANCE('the granary carries the town for about three months at full rations.')] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
@@ -58,6 +72,16 @@ const PLANTS = {
   P20: { views: { 'Systems/Defense': ['Under siege the outlying fields are lost first.'] }, record: { economicState: { foodSecurity: { hasSiege: false } } } },
   NEW1: { views: { 'Summary/Overview': ['Brindle', 'Town · Council · underdefended', 'Defense', 'Fortress'] } },
   NEW2: { views: { 'Systems/Defense': [NO_ARCANE], 'Systems/Economics': [MAGIC] } },
+  // R24-A1 (CLOSE-7): H7, the pool's own words, beside a priest who heals on the live roster
+  NOHEAL: { views: { 'World/Daily Life': [NO_HEALER_H7] }, record: { institutions: [{ name: 'Priest (resident)' }], availableServices: { healing: [{ name: 'Healing', desc: '', institution: 'Priest (resident)' }] } } },
+  // R24-A2 (CLOSE-7): the fare's "Portions are small" beside a Food Security that prints Secure
+  FOODSEC: { views: { 'World/Daily Life': [PORTIONS] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'secure', gapPct: 0, normalImportPct: 20 } } } } },
+  // CLOSE-7 THE MIRROR (R24d): the fare's "they eat enough" beside a Food Security that prints Famine
+  FEDFARE: { views: { 'World/Daily Life': [ENOUGH] }, record: { economicState: { foodSecurity: { foodRecord: { band: 'famine', gapPct: 60, normalImportPct: 20 } } } } },
+  // B1(i) (RULING-R24, R24b): a fish market printed in a desert whose route and resources give no fish
+  B1land: { views: { 'World/Institutions': ['Fish market'] }, record: DESERT_FISH_MARKET },
+  // R24-B1(ii) (CLOSE-7 BATCH): a field tradition's glyph beside grain bought in and no farmland
+  B1furrow: { views: { 'World/Traditions': [FIELD_GLYPH] }, record: { tier: 'city', economicState: { primaryImports: ['Grain'] }, institutions: [{ name: 'Granary' }] } },
 };
 
 describe('the rendered-dossier arm: one planted fault per row', () => {
@@ -74,6 +98,9 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
       P5false: { 'Systems/Power': ['Free of the criminals'] },
       P10: { 'World/Institutions': ['The watch hold the gates at night.'] },
       NEW2: { 'Systems/Economics': PLANTS.NEW2.views['Systems/Economics'] },
+      NOHEAL: PLANTS.NOHEAL.views, // R24-A1: the line with no care at hand is true
+      FOODSEC: PLANTS.FOODSEC.views, // R24-A2: with no food ledger printed, the line contradicts nothing
+      FEDFARE: PLANTS.FEDFARE.views, // the mirror: with no food ledger printed, the line contradicts nothing
     };
     // row 5a re-read: the same line is true where an official is in pay; the line that presumes no buyer is true at none
     expect(pageCensusFindings({ tier: 'town', npcs: [OFFICIAL], powerStructure: { criminalCaptureState: 'none' } }, PLANTS.P5false.views)).toEqual([]);
@@ -86,6 +113,30 @@ describe('the rendered-dossier arm: one planted fault per row', () => {
     expect(pageCensusFindings({ tier: 'town', ...NEEDS_CLAY }, { 'Systems/Economics': ['Imports', 'Iron'] })).toEqual([]);
     for (const [row, views] of Object.entries(halves)) expect({ row, found: pageCensusFindings({ tier: 'town' }, views) }).toEqual({ row, found: [] });
     expect(pageCensusFindings({ tier: 'town' }, PLANTS.P14.views)).toEqual([]);
+    // R24-A1: beside a birth alone, a rite, or care only by "Access to", no one here tends the sick: the line reads nothing
+    for (const [name, institution] of [['Birth assistance', 'Midwife'], ['Religious services', 'Priest (resident)'], ['Herbal remedies', 'Access to apothecary']]) {
+      expect(pageCensusFindings({ tier: 'town', institutions: [{ name: institution }], availableServices: { healing: [{ name, desc: '', institution }] } }, PLANTS.NOHEAL.views), name).toEqual([]);
+    }
+    // R24-A1: a sick house by name, with no service drawn, is care at hand
+    expect(pageCensusFindings({ tier: 'town', institutions: [{ name: 'Small hospital' }] }, PLANTS.NOHEAL.views).map((f) => f.row)).toEqual(['NOHEAL']);
+    // R24-A2: a shortage line beside a printed "Pressured" is coherent (R24a (a)); a price-only grievance beside "Secure" is true
+    const fed = (/** @type {string} */ band, /** @type {number} */ gapPct) => ({ tier: 'town', economicState: { foodSecurity: { foodRecord: { band, gapPct, normalImportPct: 20 } } } });
+    expect(pageCensusFindings(fed('secure', 1), PLANTS.FOODSEC.views)).toEqual([]);
+    expect(pageCensusFindings(fed('pressured', 8), PLANTS.FOODSEC.views)).toEqual([]);
+    const price = COMMONER_RESENTMENTS.food.find((l) => l.id === 'F6').text;
+    expect(pageCensusFindings(fed('secure', 0), { 'World/Daily Life': [price] })).toEqual([]);
+    expect(pageCensusFindings(fed('surplus', 0), PLANTS.FOODSEC.views).map((f) => f.row)).toEqual(['FOODSEC']);
+    // THE MIRROR (R24d): a line of plenty beside a printed Pressured is inside its bound; beside a printed Deficit it reds
+    expect(pageCensusFindings(fed('pressured', 8), PLANTS.FEDFARE.views)).toEqual([]);
+    expect(pageCensusFindings(fed('deficit', 45), PLANTS.FEDFARE.views).map((f) => f.row)).toEqual(['FEDFARE']);
+    // B1(i): the same fish market beside fishing grounds, or on a river route, or in the hills, reads nothing
+    const land = (/** @type {Record<string, unknown>} */ config) => ({ tier: 'town', ...DESERT_FISH_MARKET, config: { ...DESERT_FISH_MARKET.config, ...config } });
+    expect(pageCensusFindings(land({ nearbyResources: ['oasis_water', 'fishing_grounds'] }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ tradeRouteAccess: 'river' }), PLANTS.B1land.views)).toEqual([]);
+    expect(pageCensusFindings(land({ terrainType: 'hills' }), PLANTS.B1land.views)).toEqual([]);
+    // R24-B1(ii): the same field tradition beside farmland, or where no grain is bought in, reads nothing
+    expect(pageCensusFindings({ ...PLANTS.B1furrow.record, institutions: [{ name: 'Subsistence farming' }] }, PLANTS.B1furrow.views)).toEqual([]);
+    expect(pageCensusFindings({ ...PLANTS.B1furrow.record, economicState: { primaryImports: ['Wine'] } }, PLANTS.B1furrow.views)).toEqual([]);
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P20.views)).toEqual([]);
     // row 2: besieged, the indicative is true; outside a siege, the condition reads nothing
     expect(pageCensusFindings({ tier: 'town', economicState: { foodSecurity: { hasSiege: true } } }, PLANTS.P2siege.views)).toEqual([]);

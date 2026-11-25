@@ -20,6 +20,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { deriveDailyLife, deriveDailyLifeSlot, DAILY_LIFE_PAGE_SLOTS } from '../../src/domain/dailyLife.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { deriveAllCapacities } from '../../src/domain/capacityModel.js'; // CLOSE-7 THE MIRROR: the profile the pools' `food production` atom reads
 import { filterDeclared } from '../../src/domain/facts/drawDeclared.js';
 import { INSTITUTION_KIND_PATTERNS, ACCESS_ONLY } from '../../src/domain/facts/institutions.js';
 import { isMarketInstitution } from '../../src/domain/facts/market.js';
@@ -119,12 +120,14 @@ function templateRe(text) {
  */
 function readSlot(rec, slot, text, house) {
   const facts = factsOf(rec);
+  const capacities = deriveAllCapacities(rec);
   const name = typeof rec.name === 'string' && rec.name ? rec.name : null;
   /** @type {Part[]} */
   const parts = [];
   for (const [branch, pool] of Object.entries(POOLS[slot])) {
     const filled = FILLED(slot, branch);
-    const eligible = filterDeclared(/** @type {any} */ (pool), { facts: /** @type {any} */ (facts), poolId: `dailyLife.${slot}.${branch}`, surface: 'dailyLife' })
+    // CLOSE-7 THE MIRROR: the deriver hands the fare and Dawn Work the capacity profile (`food production`), so the instrument does
+    const eligible = filterDeclared(/** @type {any} */ (pool), { facts: /** @type {any} */ (facts), ctx: { capacities }, poolId: `dailyLife.${slot}.${branch}`, surface: 'dailyLife' })
       .filter((/** @type {any} */ l) => [...l.text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).filter((k) => !filled.includes(k)).every((k) => !!house(k)));
     const pick = /** @type {any} */ (pickVariantMixed(eligible, name ? `${name}::dailyLife.${slot}::${branch}` : null));
     if (!pick) continue;

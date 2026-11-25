@@ -100,9 +100,14 @@ function normCategory(value) {
  * @param {Object|string|null|undefined} faction
  * @returns {string} one of FACTION_ARCHETYPES.*
  */
+/** R24-C1 (CLOSE-7 BATCH; R24g (2)): the bought metropolis hall's birth name, criminal BY EXACT NAME as its old form is by its
+ *  word 'shadow' (the town and city birth names read as a council, exactly as their old forms do). */
+const CRIMINAL_BIRTH_NAMES = new Set(['Senate']);
+
 export function factionArchetype(faction) {
   if (!faction) return A.OTHER;
   if (typeof faction === 'string') {
+    if (CRIMINAL_BIRTH_NAMES.has(faction.trim())) return A.CRIMINAL; // R24-C1 (CLOSE-7 BATCH): 'Senate' keeps the Shadow Senate's archetype
     return inferFromText(faction, factionCatalogArcaneTag(faction));
   }
   const f = /** @type {any} */ (faction);

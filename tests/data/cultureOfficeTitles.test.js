@@ -74,8 +74,9 @@ describe('TITLES-1 · the table\'s shape', () => {
 });
 
 describe('TITLES-1 · CT2, every name the engine writes has its family', () => {
-  it('the fifty-eight names, each in one family; no name falls through', () => {
-    expect(Object.keys(GOVERNMENT_FAMILY)).toHaveLength(58);
+  it('the sixty-one names, each in one family; no name falls through', () => {
+    // R24-C1 (CLOSE-7 BATCH): 58 -> 61 by its cause, the bought hall's three birth names added by exact name
+    expect(Object.keys(GOVERNMENT_FAMILY)).toHaveLength(61);
     for (const name of ENGINE_NAMES) expect(officeFamilyOfForm(name), name).not.toBeNull();
     for (const family of Object.values(GOVERNMENT_FAMILY)) expect(OFFICE_FAMILIES).toContain(family);
     expect(officeFamilyOfForm('Town Mayor')).toBe('headman');
@@ -84,11 +85,12 @@ describe('TITLES-1 · CT2, every name the engine writes has its family', () => {
     expect(officeFamilyOfForm('Grand Merchant Senate')).toBe('merchant');
     expect(officeFamilyOfForm("Guildmasters' Moot")).toBe('guild');
     expect(officeFamilyOfForm('Shadow Senate')).toBe('underboss');
+    for (const born of ['Council of Aldermen', 'Council of Syndics', 'Senate']) expect(officeFamilyOfForm(born), born).toBe('underboss');
     expect(officeFamilyOfForm('A DM\'s Own Seat')).toBeNull();
   });
   it('no name maps to the sovereign family: the seat\'s form decides it, never its name', () => {
     expect(Object.values(GOVERNMENT_FAMILY)).toContain('headman');
-    expect(Object.values(GOVERNMENT_FAMILY)).not.toContain('sovereign'); // anchored: the same values hold 'headman' (the line above) and all 58 names (the test above)
+    expect(Object.values(GOVERNMENT_FAMILY)).not.toContain('sovereign'); // anchored: the same values hold 'headman' (the line above) and all 61 names (the test above)
   });
 });
 

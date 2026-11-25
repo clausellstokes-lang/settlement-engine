@@ -98,7 +98,7 @@ describe('the mark\'s promise (kind S1): no row on offer bare while the record s
     ['r2s-under_siege-city-2', 'Pottery and ceramics', 'Curtailed by the siege.'], // the potter's imported clay under a siege
     ['r2s-under_siege-metropolis-0', 'Armed escort', 'Stopped by the siege.'], // C19622: an escort out past the besiegers
     ['r2r-village-8', 'Armed escort', null], // KEEP: the same row in a calm village
-    ['r2s-famine-city-1', 'Street food', 'Scarce in the famine.'], // C6632: pies and roasted meats in a famine
+    ['r2s-famine-city-2', 'Street food', 'Scarce in the famine.'], // C6632: pies and roasted meats in a famine; B1(i) (CLOSE-7 BATCH; R24e (2)): re-anchored by the census family's own order: r2s-famine-city-1 (Skaldhammer) is a desert crossroads city that lost its Fish market and with it its Street food; city-2 (hills) is the family's first non-desert birth with a Street food row
     ['r2s-famine-village-2', 'Drink service', 'Scarce in the famine.'], // ale in a grain famine
     ['r2r-village-6', 'Drink service', null], // KEEP: ale in a calm village
     ['r2s-famine-town-1', 'Grain storage', 'Scarce in the famine.'], // the granary's reserves in a grain famine
