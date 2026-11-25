@@ -29,14 +29,12 @@ Labels: CONFIRMED = counted by a run in this unit; PLAUSIBLE = read from a repor
 - LINE, C, town-metropolis (450 births): exit=0, 710 s. CONFIRMED (23 rows on LINE; no NOHEAL, FOODSEC, FEDFARE, B1land,
   B1furrow rows there): P5b 1, P16three 315, P17 450, P18 419, every other row 0. Renders in the scratchpad, `runs/line-C-large`.
 
-## Status at the stop (the allowance)
+## Method (CONFIRMED on 12 births, then on every corpus)
 
-STOPPED by a hand-back order before the measure finished. A detached queue (`scratchpad/queue.sh`) was still running at
-the stop: record hashes (GUARD) and food-of on all three trees, then the eleven remaining battery halves, each through the
-gate mutex to `before-after/logs/` with `exit=`. Nothing below this line is measured yet. The three `ba-*` worktrees are
-still in place (the queue uses them); remove them when it ends.
+The battery's `--from` only re-counts the rows stored at render time (its `--tree` names the row list), so it cannot
+count a later tree's rows on an earlier tree's pages. A cross-count does: `before-after/bin/xcount.mjs` re-births each
+town on the source tree exactly as the battery's renderer does (birthConfig, pipeline, withPublicProse), checks its
+record hash against the stored one, and reads the stored printed views (`--views`) with ANOTHER tree's
+`pageCensusFindings`. Read with its own tree it must reproduce the stored rows (the self-check). JSX is loaded through
+esbuild (`bin/jsx-hooks.mjs`). Nothing in any tree changes.
 
-Method checked on 12 births (CONFIRMED): `--from=<LINE render> --tree=<CURES>` applies the later tree's rows (26) to the
-LINE pages without rewriting them, so NOHEAL, FOODSEC and FEDFARE can be counted on LINE; on those 12, LINE and CURES born
-records differ in `generatorVersion` only ("0.9.0" -> "0.10.0"), 12 of 12. C1 has no battery row; its carriers are to be
-counted as V births whose record moves CURES -> BATCH.

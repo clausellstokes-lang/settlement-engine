@@ -1,0 +1,64 @@
+dp-hamlet-136	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .simulationTrace
+dp-village-67	-	.institutions .economicState .availableServices .npcs .relationships .arrivalScene .simulationTrace .generationCoherenceReceipt
+dp-town-7	Corrupt Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-town-11	Corrupt Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .pressureSentence
+dp-town-19	Corrupt Council	.powerStructure .npcs .relationships .simulationTrace
+dp-town-36	Corrupt Council	.powerStructure .npcs .conflicts .simulationTrace
+dp-town-39	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-town-41	Corrupt Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .simulationTrace
+dp-town-44	Corrupt Council	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace
+dp-town-45	-	.institutions .economicState .availableServices .npcs .relationships .simulationTrace
+dp-town-47	Corrupt Council	.powerStructure .npcs .relationships .stress .stressors .simulationTrace
+dp-town-57	Corrupt Council	.powerStructure .npcs .relationships .history .stress .stressors .simulationTrace
+dp-town-75	Corrupt Council	.powerStructure .npcs .relationships .conflicts .prominentRelationship .simulationTrace
+dp-town-80	Corrupt Council	.powerStructure .npcs .relationships .stress .stressors .simulationTrace
+dp-town-92	Corrupt Council	.powerStructure .npcs .relationships .conflicts .history .prominentRelationship .simulationTrace
+dp-town-96	Corrupt Council	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace
+dp-town-101	Corrupt Council	.powerStructure .npcs .relationships .prominentRelationship .pressureSentence .simulationTrace
+dp-town-104	Corrupt Council	.powerStructure .npcs .relationships .stress .stressors .prominentRelationship .simulationTrace
+dp-town-106	Corrupt Council	.powerStructure .npcs .relationships .pressureSentence .simulationTrace
+dp-town-115	Corrupt Council	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace .generationCoherenceReceipt
+dp-town-117	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-town-118	-	.institutions .economicState .availableServices .npcs .relationships .resourceAnalysis .economicViability .stress
+dp-town-128	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .defenseProfile
+dp-town-129	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-town-132	Corrupt Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-town-147	Corrupt Council	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-city-17	-	.institutions .economicState .availableServices .npcs .relationships .resourceAnalysis .economicViability .prominentRelationship
+dp-city-20	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .resourceAnalysis
+dp-city-32	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-city-37	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace
+dp-city-53	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .simulationTrace
+dp-city-54	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-city-55	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-city-65	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-city-77	-	.institutions .economicState .availableServices .npcs .relationships .economicViability .simulationTrace .generationCoherenceReceipt
+dp-city-80	-	.institutions .economicState .availableServices .npcs .relationships .economicViability .pressureSentence .simulationTrace
+dp-city-87	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .pressureSentence
+dp-city-91	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-city-92	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .simulationTrace
+dp-city-97	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .history .pressureSentence .simulationTrace
+dp-city-101	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-city-103	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-city-109	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-city-113	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-city-117	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .simulationTrace
+dp-city-120	Corrupt City Council	.powerStructure .npcs .relationships .conflicts .stress .stressors .pressureSentence .simulationTrace
+dp-city-127	Corrupt City Council	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-city-149	Corrupt City Council	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-metropolis-9	Shadow Senate	.powerStructure .npcs .relationships .conflicts .pressureSentence .simulationTrace
+dp-metropolis-19	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-metropolis-30	-	.institutions .economicState .availableServices .npcs .relationships .resourceAnalysis .economicViability .defenseProfile
+dp-metropolis-35	Shadow Senate	.powerStructure .npcs .relationships .conflicts .history .pressureSentence .simulationTrace
+dp-metropolis-36	Shadow Senate	.powerStructure .npcs .relationships .conflicts .simulationTrace
+dp-metropolis-45	Shadow Senate	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace
+dp-metropolis-70	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-metropolis-73	Shadow Senate	.powerStructure .npcs .relationships .conflicts .prominentRelationship .simulationTrace
+dp-metropolis-90	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-metropolis-93	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .conflicts
+dp-metropolis-94	Shadow Senate	.powerStructure .npcs .relationships .conflicts .prominentRelationship .pressureSentence .simulationTrace
+dp-metropolis-98	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+dp-metropolis-115	Shadow Senate	.powerStructure .npcs .relationships .conflicts .stress .stressors .prominentRelationship .simulationTrace
+dp-metropolis-117	-	.institutions .economicState .spatialLayout .availableServices .powerStructure .npcs .relationships .resourceAnalysis
+dp-metropolis-143	-	.institutions .economicState .availableServices .powerStructure .npcs .relationships .conflicts .resourceAnalysis
+TALLY {"non-carrier":24,"carrier":39}
