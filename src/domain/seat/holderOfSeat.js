@@ -34,8 +34,18 @@
  * form it was written under, so it never matches. TWO TAKERS MATCH in one shape only: a later transfer returns the
  * seat to a form it held before (the outgoing name is never reused, so it takes at least three transfers), and the
  * earlier taker's re-keyed edge reads true again. Then the transfer's own `powerStructure.recentConflict` sentence
- * decides (it names the last taker, as the transfer wrote it); where a later writer has replaced that sentence, the
- * last matching edge in the list does. U5 makes the read unambiguous by retiring the old holder's edge at a transfer.
+ * decides (it names the last taker, as the transfer wrote it). U5 makes the read unambiguous by retiring the old
+ * holder's edge at a transfer.
+ * TWO TAKERS THE SENTENCE DOES NOT DECIDE ANSWER NOBODY (the chair's RULING V16, 2026-11-25, route (4), FAIL CLOSED;
+ * VEIL-53 cures UNIT D). The sentence is withheld on every shared read (registry `power.recentConflict`) and the page
+ * re-derives the baseline, which names no transfer, so on the served record two takers cannot be told apart from what
+ * the read serves (the STOP probe: the served documents of an owner's record naming A and of its twin naming B are
+ * deep-equal). The last matching edge in the list is no answer: a transfer rewrites a taker's existing edge in place, so
+ * list order is not the order of transfers. So where two or more takers match and the sentence names none (or more than
+ * one) of them, R1 answers NOBODY for every audience, Addendum 3's shape below, and never falls to R2 or R3: the shared
+ * page names no holder from the transfer, and no stale one. Every reader of the seat's holder reads through `holderOf`
+ * (`tests/lint/recentConflictReaders.walker.test.js`, its register of the seat's holder readers). The owner whose own
+ * sentence names the taker reads exactly as before.
  * THE SENTENCE IS READ, AND THAT IS RULED (the chair 14:44Z, U4-CURE2 Addendum 2: `narrative on factionRelationships`
  * re-recorded with its cause). A structured read (`type`/`direction`) is refuted: a born seat's edge with its military
  * power already reads symbiotic/stable (U4-CURE2-REPORT, Step 0). So both sentences are read through ONE matcher,
@@ -189,12 +199,13 @@ export function transferSentenceSays(line, sentence, taker, form, wordings = TRA
 }
 
 /**
- * R1's read: the name of the last transfer's taker, or null where the record holds no transfer onto the current form.
+ * Every taker whose edge with the seat is the transfer's edge sentence for the current form, in list order (no
+ * duplicates). Reads the edges alone, which every shared read serves.
  * @param {SeatSettlement} settlement @param {string} form the governing row's name
  * @param {ReadonlyArray<Readonly<TransferWording>>} [wordings] the list to read (the frozen list, unless a test hands one)
- * @returns {string | null}
+ * @returns {string[]}
  */
-export function transferTakerOf(settlement, form, wordings = TRANSFER_WORDINGS) {
+export function transferTakersOf(settlement, form, wordings = TRANSFER_WORDINGS) {
   const edges = settlement.powerStructure?.factionRelationships;
   /** @type {string[]} */
   const takers = [];
@@ -204,9 +215,21 @@ export function transferTakerOf(settlement, form, wordings = TRANSFER_WORDINGS) 
     if (typeof taker !== 'string' || !taker || !transferSentenceSays(rel.narrative, 'edge', taker, form, wordings)) continue;
     if (!takers.includes(taker)) takers.push(taker);
   }
+  return takers;
+}
+
+/**
+ * R1's read: the name of the last transfer's taker, or null where the record holds no transfer onto the current form,
+ * or two or more takers the transfer's own sentence does not single out (RULING V16: `holderOf` then answers nobody).
+ * @param {SeatSettlement} settlement @param {string} form the governing row's name
+ * @param {ReadonlyArray<Readonly<TransferWording>>} [wordings] the list to read (the frozen list, unless a test hands one)
+ * @returns {string | null}
+ */
+export function transferTakerOf(settlement, form, wordings = TRANSFER_WORDINGS) {
+  const takers = transferTakersOf(settlement, form, wordings);
   if (takers.length < 2) return takers[0] ?? null;
   const said = takers.filter((t) => transferSentenceSays(settlement.powerStructure?.recentConflict, 'conflict', t, form, wordings));
-  return said.length === 1 ? said[0] : takers[takers.length - 1];
+  return said.length === 1 ? said[0] : null;
 }
 
 /**
@@ -246,16 +269,19 @@ export function holderOf(settlement, options) {
   /** @param {string} name @returns {RulingFaction | null} */
   const rowOf = (name) => factions.find((f) => !!f && f !== governing && nameOf(f) === name) || null;
 
-  // R1's taker, read first: the person reads it too (CS22 (c)).
+  // R1's taker, read first: the person reads it too (CS22 (c)). Two or more takers it cannot single out: `undecided`.
   const takerName = transferTakerOf(settlement, form);
   const taker = takerName ? rowOf(takerName) : null;
+  const undecided = takerName === null ? transferTakersOf(settlement, form) : [];
+  /** The powers whose keeper a crowned seat refuses as its person: the taker, or (fail closed) every undecided one. */
+  const keepers = takerName !== null ? [takerName] : undecided.length > 1 ? undecided : [];
 
   // THE PERSON: the seat's candidates, less the ousted, less (for the reader) a veiled face; on a crowned seat, never
   // its taker's keeper.
-  const crown = takerName !== null && isCrownedForm(form, settlement.tier);
+  const crown = keepers.length > 0 && isCrownedForm(form, settlement.tier);
   const person = seatCandidatesOf(settlement).find((npc) => !(/** @type {{ ousted?: unknown }} */ (npc)).ousted
     && !(reader && cardInstitutionVeilOf(npc) === 'veiled')
-    && !(crown && takerName !== null && rankIn(npc, takerName) === 1)) || null;
+    && !(crown && keepers.some((k) => rankIn(npc, k) === 1))) || null;
   /** @type {PersonRule} */
   const personRule = crown ? 'crown' : 'seat';
 
@@ -270,8 +296,9 @@ export function holderOf(settlement, options) {
   // R1: the taker of the last transfer. A taker with no row is refused to the reader; the owner reads on.
   if (takerName !== null && (taker || reader)) return answer('R1', taker);
 
-  // R1, unattributed (Addendum 3): a transfer the read cannot attribute answers NOBODY, for both audiences; no R2, no R3.
-  if (takerName === null && unattributedTransferOn(settlement, form)) {
+  // R1, unattributed (Addendum 3) or undecided (RULING V16: two or more takers the sentence does not single out, as on
+  // every served record): NOBODY, for both audiences; no R2, no R3.
+  if (takerName === null && (undecided.length > 1 || unattributedTransferOn(settlement, form))) {
     return { rule: 'R1', holder: null, holderName: null, person, kind: officeKind, refused: false, personRule };
   }
 

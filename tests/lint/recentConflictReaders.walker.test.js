@@ -24,6 +24,11 @@
  *   owner-only  the birth, the play-time transfer or the owner's editor: never on a shared document, BY CONSTRUCTION
  *               (the written reason);
  *   not-a-read  the word in a string, a table key or a comment-like line that reads nothing.
+ * THE SEAT'S HOLDER (RULING V16, VEIL-53 cures UNIT D): R1's tie-break (`holderOfSeat.js :: transferTakerOf`) is a site
+ * here. Every reader of the seat's holder goes through ONE function, `holderOfSeat.js :: holderOf`, which answers NOBODY
+ * where two or more takers stand and the sentence singles out none (every shared page): HOLDER_READERS registers each
+ * call of `holderOf` / `transferTakerOf` / `transferTakersOf` under src/, and the leaf's two R1 reads are called by
+ * `holderOf` alone.
  * RED on a site not registered, on a registered site gone (stale), on a count that moved; on THE ONE READER missing, not
  * wired at a door, or re-filling `pressureSentence`; and on THE KEY SHIPPING (an always-host, server or twin, that does not
  * withhold it or its copy; the registry row not `when: 'always'`, `page: 're-derive'`, or its copy row gone).
@@ -56,6 +61,7 @@ const REGISTER = Object.freeze({
   'src/domain/display/guardLineUnderTheLaw.js :: familiesHeldOf': { n: 2, verdict: 'page-copy' },
   'src/domain/display/stateProse/powerStateProse.js :: stabilityLensPoolKey': { n: 3, verdict: 'page-copy' },
   'src/domain/display/stateProse/powerStateProse.js :: powerStateProse': { n: 1, verdict: 'page-copy' },
+  'src/domain/seat/holderOfSeat.js :: transferTakerOf': { n: 1, verdict: 'page-copy', why: 'R1\'s tie-break between two or more takers, read through holderOf alone (the seat\'s holder readers below), on the owner\'s record and on the shared page; on the page the sentence is the re-derived BASELINE, which names no transfer, so two takers single out none and holderOf answers NOBODY (RULING V16, route (4), fail closed; VEIL-53 cures UNIT D): never the last edge, never a stale taker' },
   'src/pdf/lib/viewModel.js :: powerSlice': { n: 2, verdict: 'own-record', why: PDF_WHY },
   'src/generators/power/rulingStructure.js :: generatePowerStructure': { n: 3, verdict: 'owner-only', why: 'THE WRITER\'s caller: the birth, and the engine the ONE reader runs over a served page (its output read by the reader alone)' },
   'src/generators/power/governanceNarrative.js :: buildGovernanceLabels': { n: 7, verdict: 'owner-only', why: 'THE WRITER (the baseline sentence), run at birth and by the ONE reader through generatePowerStructure' },
@@ -72,6 +78,21 @@ const REGISTER = Object.freeze({
   'src/data/proseNorms.generated.js :: DOSSIER_PROSE_NORMS': { n: 1, verdict: 'not-a-read', why: 'a prose norm\'s key string' },
 });
 
+/**
+ * THE SEAT'S HOLDER READERS (RULING V16): every top-level site under src/ whose code calls `holderOf(`, `transferTakerOf(` or
+ * `transferTakersOf(`, with its count and why. The leaf's own R1 reads are called inside `holderOf` alone, so every reader
+ * of the holder, on a shared page or the owner's record, takes `holderOf`'s answer and its fail-closed rule.
+ * @type {Readonly<Record<string, { n: number, why: string }>>}
+ */
+const HOLDER_READERS = Object.freeze({
+  'src/domain/seat/holderOfSeat.js :: transferTakerOf': { n: 1, why: 'R1\'s tie-break asks the edge read (transferTakersOf) for its takers' },
+  'src/domain/seat/holderOfSeat.js :: holderOf': { n: 2, why: 'THE ONE FUNCTION: R1 (transferTakerOf), and the undecided takers (transferTakersOf) it answers NOBODY on' },
+  'src/domain/dossier/powerStrata.js :: rulingHouseApartOf': { n: 1, why: 'the page\'s door to the holder (the strata, the chain, the ruling house), the audience handed through' },
+  'src/domain/rulingPowerCoup.js :: coupContenders': { n: 1, why: 'the contest (the owner\'s audience), run on the owner\'s record and on the shared page: the holder leaves the challengers; on a served two-taker record holderOf answers nobody, so none leaves' },
+  'src/generators/factionDynamics.js :: seatHolderApartOf': { n: 1, why: 'the birth and the final-record pass: the holder\'s lines, on the record being generated' },
+});
+const HOLDER_CALL = /\b(?:holderOf|transferTakerOf|transferTakersOf)\(/g;
+
 /** @param {string} d @returns {string[]} */
 const walk = (d) => readdirSync(d).flatMap((n) => { const p = join(d, n); return statSync(p).isDirectory() ? walk(p) : /\.(m?js|jsx)$/.test(n) ? [p] : []; });
 
@@ -87,6 +108,23 @@ function census() {
       if (m) sym = m[1] || m[2];
       if (/^\s*(\/\/|\*|\/\*)/.test(line)) continue;
       const n = (line.match(WORD) || []).length;
+      if (n) out[`${rel} :: ${sym}`] = (out[`${rel} :: ${sym}`] || 0) + n;
+    }
+  }
+  return out;
+}
+
+/** Every holder-reading call site of src/: { '<path> :: <symbol>': count } (declarations are not calls). */
+function holderCensus() {
+  /** @type {Record<string, number>} */ const out = {};
+  for (const f of walk(join(ROOT, 'src'))) {
+    const rel = relative(ROOT, f).split('\\').join('/');
+    let sym = '(module)';
+    for (const line of readFileSync(f, 'utf8').split('\n')) {
+      const m = DECL_RE.exec(line);
+      if (m) sym = m[1] || m[2];
+      if (/^\s*(\/\/|\*|\/\*)/.test(line)) continue;
+      const n = (line.replace(/\bfunction\s+\w+\(/g, '').match(HOLDER_CALL) || []).length;
       if (n) out[`${rel} :: ${sym}`] = (out[`${rel} :: ${sym}`] || 0) + n;
     }
   }
@@ -132,6 +170,23 @@ describe('R5-RECENT: every reader of the recent-conflict sentence, registered', 
     const moved = Object.entries(REGISTER).filter(([k, r]) => got[k] && got[k] !== r.n).map(([k, r]) => `${k}: count ${got[k]}, registered ${r.n}`);
     const reasonless = Object.entries(REGISTER).filter(([, r]) => ['owner-only', 'own-record', 'veil', 'not-a-read'].includes(r.verdict) && !(r.why && r.why.length > 20)).map(([k]) => `${k}: no written reason`);
     expect({ unregistered, stale, moved, reasonless }).toEqual({ unregistered: [], stale: [], moved: [], reasonless: [] });
+  });
+
+  it('THE SEAT\'S HOLDER (RULING V16): every call of holderOf / transferTakerOf / transferTakersOf is registered; the leaf\'s R1 reads are called by holderOf alone; holderOf answers nobody on undecided takers', () => {
+    const got = holderCensus();
+    const unregistered = Object.entries(got).filter(([k]) => !HOLDER_READERS[k]).map(([k, n]) => `${k} (${n}): not registered`);
+    const stale = Object.keys(HOLDER_READERS).filter((k) => !got[k]).map((k) => `${k}: registered, not found`);
+    const moved = Object.entries(HOLDER_READERS).filter(([k, r]) => got[k] && got[k] !== r.n).map(([k, r]) => `${k}: count ${got[k]}, registered ${r.n}`);
+    const out = [];
+    for (const f of walk(join(ROOT, 'src'))) {
+      const rel = relative(ROOT, f).split('\\').join('/');
+      if (rel !== 'src/domain/seat/holderOfSeat.js' && /\btransferTakers?Of\(/.test(codeOf(readFileSync(f, 'utf8')))) out.push(`${rel} calls the leaf's R1 read (transferTakerOf / transferTakersOf) itself, not holderOf`);
+    }
+    const leaf = read('src/domain/seat/holderOfSeat.js');
+    const holder = codeOf(declBody(leaf, 'holderOf') || '');
+    if (!/takerName === null && \(undecided\.length > 1 \|\|/.test(holder)) out.push('holderOf does not answer NOBODY on two or more undecided takers (RULING V16)');
+    if (!/said\.length === 1 \? said\[0\] : null/.test(codeOf(declBody(leaf, 'transferTakerOf') || ''))) out.push('transferTakerOf falls to an edge where the sentence singles out no taker (RULING V16: null)');
+    expect({ unregistered, stale, moved, out }).toEqual({ unregistered: [], stale: [], moved: [], out: [] });
   });
 
   it('THE ONE READER exists, runs the engine\'s own writer, never re-fills pressureSentence, and is wired at every door: rederiveForPage (the gallery page, the party link, the map\'s member) and the import\'s save (authoritative)', () => {
