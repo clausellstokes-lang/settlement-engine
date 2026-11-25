@@ -60,14 +60,15 @@
  *   THE TOOTH: a scratch copy of one marked share's served `data` with one veiled path restored (from the unmarked share's
  *       read of the same town) reds (a)'s and (b2)'s checks, and the unplanted copy passes them again.
  *
- * THE ID LAW. At this tip person ids are not re-keyed, so the comparison is by raw value, written through ONE comparator,
- * `sameModuloIds(a, b)`, today the identity on the canonical JSON. At the R4-IDS merge the seat switches it, in one line, to
- * tests/security/personIdBijection.shared.mjs (on the R4-IDS branches, not here).
+ * THE ID LAW. Every comparison goes through ONE comparator, `sameModuloIds(a, b)`: since the R4-IDS merge (VEIL-52, unit 3) it
+ * compares modulo each read's person-id bijection (tests/security/personIdBijection.shared.mjs :: canonPeople), the one line the
+ * file reserved for it.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { canonPeople } from './personIdBijection.shared.mjs';
 import { resolve, join } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
@@ -148,10 +149,11 @@ const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 /** JSON with every record's keys sorted (a jsonb round trip reorders keys). */
 const J = (v) => JSON.stringify(v ?? null, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((q) => [q, x[q]])) : x));
 /**
- * THE ID LAW'S ONE COMPARATOR. Today the identity (person ids are not re-keyed at this tip). At the R4-IDS merge the seat
- * switches this one line to tests/security/personIdBijection.shared.mjs.
+ * THE ID LAW'S ONE COMPARATOR. Switched at the R4-IDS merge (VEIL-52, unit 3), in one line as this file prescribes: each read
+ * re-keys every person and tie id under a salt of its own (212 (36), VR10), so the import and the gallery read are compared
+ * MODULO EACH READ'S PERSON-ID BIJECTION AND NOTHING ELSE (personIdBijection.shared.mjs :: canonPeople on both sides).
  */
-const sameModuloIds = (a, b) => J(a) === J(b);
+const sameModuloIds = (a, b) => J(canonPeople(a).doc) === J(canonPeople(b).doc);
 
 /** Every primitive leaf of a document, with its path. */
 function leaves(v, path = '$', acc = []) {
@@ -265,8 +267,11 @@ const REDERIVED_STRINGS = Object.freeze([
   '$.spatialLayout.quarters[].landmarks[]', '$.powerStructure.recentConflict',
 ]);
 /** (b2): the clone against the served `data`, by top-level key, and every string the clone carries stood in the served. */
-function checkClone(where, clone, served, tally) {
-  if (!isRec(clone) || !isRec(served)) return [`${where}: no clone`];
+function checkClone(where, clone0, served0, tally) {
+  if (!isRec(clone0) || !isRec(served0)) return [`${where}: no clone`];
+  // THE ID LAW (the R4-IDS merge): the clone and the document it is held to may come from two reads (THE TOOTH holds the
+  // import's clone to the gallery read), so both are read modulo their own person-id bijection and nothing else
+  const clone = canonPeople(clone0).doc; const served = canonPeople(served0).doc;
   const red = [];
   for (const k of new Set([...Object.keys(clone), ...Object.keys(served)])) {
     if (J(clone[k]) === J(served[k])) continue;
