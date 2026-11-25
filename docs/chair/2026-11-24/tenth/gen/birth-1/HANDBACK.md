@@ -54,16 +54,25 @@
   Governing run at 0ecb6e25c (90 files + tests/lint whole: 317 files, 4,682 tests): 14 red, 12 on RED-AT-LINE; the 2 others were the
   wiring census, re-taken by its door in 5262fbee4 (stamp only, 0 rows; --check 0; walker 79/79). Goldens moved by D3: 0 dark, 0 lit.
   Page battery over the 4: rows moved 0. Tables: `gen/birth-1/d3/`.
-- **D5 — BUILT, COMMITTED** on `lane/birth-1-2026-11-25-d5-wip` (worktree `/home/user/wt/d5`) at 289a70b3a. Cause (fortune-7's
+- **D5 — DONE, PUSHED, HANDED IN** on `lane/birth-1-2026-11-25-d5-wip` (worktree `/home/user/wt/d5`) at 289a70b3a. Cause (fortune-7's
   diagnosis, confirmed): the will's order score sits on its X4 floor; the points-only bound predates X4; no product fault. The R13 arm
   in `tests/generators/defenceParts.test.js` now reads the hold score by score through a new pure reader
   `defenseGenerator.js :: defenceWillHoldOf` (no figure changes: C 0, V 0 records moved). Old arm red at the base (v3build-village-3
   6.9 > 6.8); new arm green (defenceParts 19/19 + defenceDerived walker, 32/32). Every birth of C and V: 0 breaks of R13 score by
   score; X4 binds on C 76, V 75; the old points bound would be red on V dp-village-64, -113 too (`d5/table.txt`). A planted-mutation
   negative control was REFUSED by my permission check (told the chair; not retried). Governing run (25 files naming the defence
-  module + tests/lint whole) IN FLIGHT. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
-- D8: MEASURED, RULING ASKED of the chair (before 11:09 UTC by `date -u`; three candidates, A recommended: the face "the reeve" -> "the lord's reeve"). Count: every Feudal Stewardship thorp, C 12, V 18 (`d8/`). Builds nothing until the ruling.
-  Earlier notes: Read: the thorp catalogue row "Lord's reeve" (face 'the reeve') seats
+  module + tests/lint whole: 252 files, 3,938 tests): 5 red, all on RED-AT-LINE; lighting census unmoved. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
+- **D8 — BUILT (ruling G10, option A), runs IN FLIGHT** on `lane/birth-1-2026-11-25-d8-wip` (worktree `/home/user/wt/d8`): d391b1fbd
+  (the catalogue word: the "Lord's reeve" row's face 'the reeve' -> "the lord's reeve"; a zero-import leaf `data/people/titleReadAs.js`
+  read by `poolMap.js :: poolFor, titleLinesFor` and `faceHonorifics.js :: honorificOfTitle, styledTitleOf`, so the title-keyed tables
+  read the new title as the old; test `tests/domain/stewardshipReeveTitle.test.js`, red 7/7 at the base, 7/7 after), 7ee78b87f
+  (lighting door). Moves C 12, V 18 thorps; every differing leaf the title alone (`tools/leafcheck.mjs`). Without the leaf the card
+  re-dealt its secret, presentation and power (measured, refused). Governing run: 142 files naming the title or the changed
+  modules + tests/lint + tests/copy whole, started after 11:23 UTC. Owed: the goldens it moves; push; hand-in naming the catalogue word.
+- **D2b (ruling G8 (3)) — A STOP SENT, WAITING**: a pressure line equal to the prominent tie's line C 11, V 10 (11 with D2); sharing a
+  sentence with it C 18, V 19 (20). Proposed: cure at the draw by the shared-sentence test (~38 births, over the chair's 22). The
+  owner's Overview already hides the repeat (`OverviewTab.jsx`); the PDF does not.
+  Earlier notes on D8:
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
@@ -71,4 +80,4 @@
   STRESS_POWER_FACES lists each crisis's powers; `power/stressFactions.js :: applyStressEventFactions` pushes them (the density law may not seat them). `tools/measure-d7.mjs` written (crises, roster, every crisis sentence per birth); to run once on C and V, then the per-kind analysis offline.
 
 ### 0.2 Next step
-D8's measure (`tools/measure-d8.mjs`) on C and V, then the ruling asked; D7's measure; D5's re-cut meanwhile.
+Read D8's governing log (`scratchpad/d8/gov.log`) against RED-AT-LINE; D8's goldens; push -d8-wip; hand in. Then D7's measure (`tools/measure-d7.mjs`, one births run, analysis offline). D2b on the chair's word.
