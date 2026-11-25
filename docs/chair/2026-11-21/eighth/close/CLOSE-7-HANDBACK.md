@@ -36,6 +36,11 @@ ANCHORS.
 - KNOWN, WRITTEN DOWN (the chair accepted it, not gated): "B1(ii) also changes the first tradition an advance mints on a stored
   place where the fields are bought in."
 
+ANCHORS bd99fa7b6 (pushed; SENT to the chair):
+- Cured: B7 (8c4614871) and 11c (bd99fa7b6).
+- Not cured: the phone floor x2 (a baseline moved by A2's R24h fca95c197) and soak1k-5255 (B1(ii); no finder).
+- The three figures are untouched and are the chair's: A4 fell, A5 rose, mergeLadder E7 rose and E8 fell.
+
 STILL MINE:
 - BEFORE-AFTER is DONE and was SENT to the chair (c209e1af6; `close-7/reports/BEFORE-AFTER.md`).
   - Every figure is SAME or explained. GUARD differs in the version only. BATCH moves V 63 records.
