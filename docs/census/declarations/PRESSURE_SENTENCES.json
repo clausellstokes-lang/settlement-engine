@@ -374,7 +374,9 @@
         {
           "lineId": "PRESSURE_SENTENCES.indebted[0]",
           "text": "${name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.",
-          "needs": [],
+          "needs": [
+            "crisis body: indebted"
+          ],
           "excludes": [],
           "crisis": [
             "indebted"

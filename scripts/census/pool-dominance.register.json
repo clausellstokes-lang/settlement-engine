@@ -3,8 +3,8 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 978,
-    "printOneLine": 653,
+    "pools": 979,
+    "printOneLine": 654,
     "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
       {
@@ -6019,6 +6019,12 @@
       ],
       "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
       "lines": 13
+    },
+    "ledger:powerSiblings:CRISIS_BODY_SIBLINGS": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }

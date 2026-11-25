@@ -173,3 +173,26 @@ export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
 });
+
+/**
+ * THE CRISIS LINES THAT NAME THE CRISIS'S OWN BODY (BIRTH-1 D7; the tenth chair's rulings G17 (1) and (3), G18 of 2026-11-25).
+ * The power step's sentence (`governanceNarrative.js :: buildStressNarratives`, `governingStressVignettes.js ::
+ * buildReligiousConversionNarrative`) names a local body of the crisis (the creditor's agent; a second priest and congregation),
+ * written before the roster settles. Each such sentence is declared here by its text: the original `needs` the crisis's own power
+ * on the settled roster (`crisis body: <kind>`, `domain/facts/crisisBody.js`), its twin `excludes` it. Resolved sentence by
+ * sentence against the SETTLED record (`assembleSettlement.js`, before the pressure line); no draw.
+ */
+export const CRISIS_BODY_SIBLINGS = Object.freeze({
+  "The creditor's agent has blocked the money for repairs.": Object.freeze([
+    Object.freeze({ text: "The creditor's agent has blocked the money for repairs.", needs: Object.freeze(['crisis body: indebted']) }),
+    Object.freeze({ text: 'Word from the creditor has blocked the money for repairs.', twinOf: "The creditor's agent has blocked the money for repairs.", excludes: Object.freeze(['crisis body: indebted']) }),
+  ]),
+  'In public they talk of prudence; in private they point to a clause in the loan.': Object.freeze([
+    Object.freeze({ text: 'In public they talk of prudence; in private they point to a clause in the loan.', needs: Object.freeze(['crisis body: indebted']) }),
+    Object.freeze({ text: 'In public those in charge talk of prudence; in private they point to a clause in the loan.', twinOf: 'In public they talk of prudence; in private they point to a clause in the loan.', excludes: Object.freeze(['crisis body: indebted']) }),
+  ]),
+  'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.': Object.freeze([
+    Object.freeze({ text: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', needs: Object.freeze(['crisis body: religious_conversion', 'priest']) }), // "two priests" presumes a priest (the registered word `clergy`, declared on the line)
+    Object.freeze({ text: 'The split is now open: the converts keep their own register of births, deaths and marriages.', twinOf: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', excludes: Object.freeze(['crisis body: religious_conversion']) }),
+  ]),
+});
