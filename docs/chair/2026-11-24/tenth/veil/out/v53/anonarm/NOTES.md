@@ -73,3 +73,8 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
   73a3f8743 (manifest row). Not pushed.
 - Rollback: supabase/rollback/212_*.down.sql not touched; its create-or-replace keeps the V23 revokes (the rollback test was
   already red for the two 211s).
+
+## ROLLBACK (coordinator, after VEIL-55's read): c2d9cf8a6
+- Instrument veil-55 catalogue-dump.sql on bootHostedChain(upTo 211, both 211s) vs + 212 + down. RED 4 lines (the two ACLs);
+  GREEN 0 lines. Down sha256 8cbd7d1c... -> 3ca5eac1... Exact order needed revoke-then-grant (plain grants append).
+- galleryVeilCures rollback block (plain chain) moves: 1 ACL hunk -> 2 (null / {postgres=X} expected vs hosted ACLs). Logs /var/tmp/v53/rollback/.
