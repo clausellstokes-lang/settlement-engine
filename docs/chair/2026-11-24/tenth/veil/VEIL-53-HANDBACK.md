@@ -25,10 +25,12 @@ BUILT, NOT MERGED (all pushed unless said):
   sent to VEIL-55. Cure D STOPPED AT ITS STOP (no
   commit; CONFIRMED by probe `out/v53/cures/D/d5.probe.test.js`: the served documents of two records differing only in
   recentConflict are deep-equal, so the shared page cannot name the owner's holder); RULED BY THE CHAIR (V16): fail closed;
-  its builder RESUMED on the brief's "UNIT D, RULED" (notes `out/v53/cures/D/`). Cure E 90ddc2fe5 PUSHED (the fortune law's
+  BUILT 168587f9c PUSHED (all holder readers
+  through `holderOf`; a HOLDER_READERS walker arm; 0 of 720 reach it), WITH A NAMED DEPARTURE FROM V16 (b) PUT TO THE CHAIR via
+  VEIL-55: an owner record whose own sentence does not decide two takers now gets no holder (was: the last edge, itself unreliable). Cure E 90ddc2fe5 PUSHED (the fortune law's
   resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
   sent to VEIL-55 with its named departure.
-RUNNING: cure D's builder only. The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+RUNNING: the samenessHideable wording commit (cure B's builder resumed). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -42,7 +44,7 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on cure D's builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff, then the samenessHideable wording commit, then the anon arm (E's brief amended for point 115's fifth law; a question to VEIL-55 on
+NEXT COMMAND: on the wording commit's return, `git -C /home/user/cures53 log --oneline -3` and read its diff, then the anon arm (`briefs/V53-ANONARM-BRIEF.md` on grants-wip) (E's brief amended for point 115's fifth law; a question to VEIL-55 on
 re-making the trial join on 0559a8405: ANSWERED NO, the trial join stays at ba7460c33 until the join). AFTER E: one small commit on
 -cures-wip re-pointing `tests/lint/samenessHideable.walker`'s stale wording ("served == the house-free twin") to cure B's re-stated
 title, no assertion moved, tests/lint whole after, and say whether the walker reads that title anywhere it checks (VEIL-55, intake).
@@ -73,3 +75,4 @@ title, no assertion moved, tests/lint whole after, and say whether the walker re
 - 00:5x cure C pushed (b61c1e630); cure D dispatched.
 - 01:0x cure D stopped (ruling owed); cure E dispatched.
 - 01:4x the container restarted (cure E survived as 90ddc2fe5); cure E pushed; cure D resumed on V16.
+- 02:3x cure D pushed (168587f9c) with its departure to the chair; the wording commit dispatched.

@@ -1,0 +1,65 @@
+tests/lint/chainPrintSites.walker.test.js :: no file reads a chain's name or source outside the three lists
+tests/lint/domainAnyCastBaseline.test.js :: baseline exactly matches the tree (airtight against any drift mode)
+tests/lint/domainAnyCastBaseline.test.js :: no file exceeds its baseline (new files get 0) — fix the types, do not widen
+tests/lint/domainAnyCastBaseline.test.js :: ⛔ every LIVE declared row is refused against the LIVE register
+tests/lint/domainAnyCastBaseline.test.js :: ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+tests/lint/factLayers.walker.test.js :: READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register
+tests/lint/fixtureGitIsolation.walker.test.js :: R1: no test runs git outside the repository with the inherited repository variables
+tests/lint/fixtureGitIsolation.walker.test.js :: R2: every file that builds a git repository isolates itself from the host repository
+tests/lint/fixtureGitIsolation.walker.test.js :: the walk sees its subjects: the five suites that leaked on 2026-11-13 are repository builders
+tests/lint/moduleScopeCwdRatchet.test.js :: A4 — NO GUARDED DIRECTORY CARRIES MORE MODULE-SCOPE WORKING-DIRECTORY ROOTS THAN BANKED
+tests/lint/negativeAssertionAnchor.walker.test.js :: no NEW un-anchored negative assertion anywhere in the test corpus
+tests/lint/noLegacyFactionReaders.walker.test.js :: every read outside the FPZ list is red; zero at the landing
+tests/lint/noLegacyFactionReaders.walker.test.js :: the scan of src/ equals the named list exactly (shrink-only)
+tests/lint/observedShapeReaders.walker.test.js :: A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+tests/lint/observedShapeReaders.walker.test.js :: SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+tests/lint/presumedThings.walker.test.js :: ⛔ every source literal that names a thing declares it, or has its row
+tests/lint/presumptionClasses.walker.test.js :: no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+tests/lint/proseComposed.walker.test.js :: ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+tests/lint/proseCorpusBytes.test.js :: GZIP sits inside the 1 % band around its committed figure
+tests/lint/proseCorpusBytes.test.js :: RAW is EXACT: above fails, below demands the row be lowered
+tests/lint/proseDrawnAnchors.walker.test.js :: no NEW file carries a literal state-prose anchor, and no frozen row grows
+tests/lint/proseWiringCensus.walker.test.js :: the committed census is byte-identical to a fresh build, and the stamp is live
+tests/lint/proseWiringCensus.walker.test.js :: ⭐ THE DRY READ: both modes, and the one that writes is not among them
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: power.desc: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: power.label: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: power.relation.dmNote: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.conditionSeverity: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.incomeMix: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.legacyLines.a: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.legacyLines.b: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.legitimacyBanner: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.legitimacyLens: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.posture.posture: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.posture.prize: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.posture.terrain: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.prosperity.sentence: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.prosperityHeader.detail: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.shadowEconomy: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.stabilityHeader: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.state.firstSurvey: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.state.publicOrder.beside: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.state.publicOrder.field: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.state.publicOrder.rung.glance: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.state.publicOrder.rung.sentence: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.structureFlag: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.successionRisk: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.templeFraud: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.threat.economic: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceComposedHosts.walker.test.js :: prose.wall.rationale: its server and twin hosts are declared and exist (not PLANNED)
+tests/lint/rosterChoiceRegistry.walker.test.js :: ARM A: a site that calls a registered predicate, or holds a crime-name regex, is in REGISTRY_SITES; a registered site still does
+tests/lint/ruinFilterRoster.walker.test.js :: every `.institutions` reader is COMPLIANT or EXEMPT
+tests/lint/ruinFilterRoster.walker.test.js :: the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+tests/lint/seedLoopTotality.walker.test.js :: no NEW bare seed loop anywhere in the test corpus
+tests/lint/slugifyIdiomBaseline.test.js :: baseline exactly matches the files that still inline a slug builder
+tests/lint/sourceCitationIntegrity.walker.test.js :: ARM 2 — ONLY-SHRINKS: no NEW past-EOF citation in a live document
+tests/lint/sovereigntyLightingContract.walker.test.js :: THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+tests/lint/styleLaw.walker.test.js :: ⛔ no file's count of any struck phrase RISES above its baseline
+tests/lint/testRatchet.test.js :: ⚠ an OWNER-GATED row leaves the census only against a NAMED GRANT
+tests/lint/tuningRegister.walker.test.js :: no file carries more unregistered named constants than the inventory banked
+tests/lint/tuningRegister.walker.test.js :: the measured tree matches the committed inventory exactly
+tests/lint/tuningRegister.walker.test.js :: the six ceilings never rise
+tests/lint/writerReach.walker.test.js :: THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+tests/lint/writerReach.walker.test.js :: THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+tests/lint/writerReach.walker.test.js :: the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+tests/lint/writerReach.walker.test.js :: the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity

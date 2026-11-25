@@ -52,3 +52,15 @@ does (`page-copy` would be false: it reads the BASELINE copy and tie-breaks wron
 - WALKER: `recentConflictReaders.walker.test.js` REGISTER row `holderOfSeat.js :: transferTakerOf` (n 1, page-copy, with
   why) + new arm HOLDER_READERS (5 sites: holderOf, transferTakerOf, rulingHouseApartOf, coupContenders, seatHolderApartOf;
   the leaf's R1 reads called by holderOf alone). GREEN: walker + new test 10/10.
+- COMMITTED 168587f9c (hooks ran, eslint --fix clean). Governing files: 10 naming holderOfSeat.js or its exports + the new
+  one = 11: 256 passed, 1 failed = proseComposed.walker SHRINK-ONLY (2327 > 2103), on the trial join's 66.
+- Next: tests/lint whole (log /var/tmp/v53/cures/D/lint.log), then the banked-720 pool probe (pool/pool.probe.test.js).
+- tests/lint WHOLE (--maxWorkers=1): 25 files | 65 failed | 3378 passed; against the trial join's 66 (prefix match, the list
+  truncates titles): NEW none; GONE one, recentConflictReaders.walker "every site is registered ..." (lintfails-D.txt).
+- POOLS (pool.probe.test.js, pool.out): born, the banked 720 (censusPlan('r2', 1)) at 168587f9c, all 720 under the seat law:
+  two or more takers 0 on the owner's record, 0 on the shared page (no birth carries a transfer edge at all: 0 R1). Stored:
+  no stored pool is reachable locally (no hosted database by law; no fixture under tests/fixtures carries
+  factionRelationships), so the stored count is NOT measured.
+- RESIDUAL named, not cured (outside the manifest): the served edges' own narratives ("<taker> is the power behind ...") print
+  wherever the page prints faction relationships (`PowerStrata.jsx :: groupRelationships`); they are relation prose on both pages,
+  not a holder read.
