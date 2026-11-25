@@ -410,3 +410,16 @@ object a draw door is handed (`tests/lint/presumedThings.shared.mjs:100-115`) an
 none; and `house: lord's reeve` has no atom (`src/domain/facts/registeredWords.js:510-520`: it waits for a factsOf
 getter). THE FACE STAYS "the reeve" (the base's). The proper cure is its own unit, not in point 118: a factsOf getter
 for the house and the door handed the catalogue's faces. D8 at cf5d033e5; BIRTH-1's section 0 at 849e31687.
+
+**G39 (18:37 UTC): E13b RULED BUILT: 70 NEW "HOW THEY DEAL" SENTENCES.** WORDS-1's measure at 0ec96f13d8: the line is drawn
+once and draw-free (`npcGenerator.js:542`, `npcData.js :: dealingLineFor`: the disposition and the first of
+flaw/dominant/modifier that names a family, else the disposition's own line), stored at `presentation.behaviour`, a
+title row may replace it; NO reader matches it by text. Cards holding one: C 5,148 of 27,360, V 4,861 of 26,238; 52
+pairs (4 dispositions by 12 families, and 4 own lines), all met; town-pairs holding 2 / 3 / 4 / 5 cards: C 590 / 96 /
+12 / 2, V 532 / 72 / 9 / 0; towns with any pair doubled C 333, V 336. THE DESIGN (accepted): one town pass beside
+E8b's; within a town the cards of a pair ranked by fnv1a32(seed, "dealing", card id); rank 0 keeps today's line; no
+stream pull; new lines in a new table (generationForkCensus pins `npcData.js:1686` by line). THE NUMBER, by a rule not
+fitted to the proof sets: every pair holds at least two lines (52 new); the 18 pairs seen at three or more cards in a
+town hold three (18 more): 70; the pairs at four and five repeat once (about C 14, V 9 town-pairs). The sentences are
+the owner's to veto, in `e13b/SENTENCES.md`. Cut on top of E8b e75f090b7; moves about C 826 and V 703 strings in 333
+and 336 places and nothing else; a title row's line never re-ranked.
