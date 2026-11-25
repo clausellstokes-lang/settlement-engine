@@ -1,6 +1,6 @@
 # WORDS-2 HAND-BACK (a seat of the tenth chair; branch `lane/words-2-2026-11-25`)
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 12:07 UTC 2026-11-25; kept current at every push)
+## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45 UTC 2026-11-25; kept current at every push)
 A successor reads `docs/chair/2026-11-24/tenth/prompts/START-WORDS-2.txt` and `START-GEN-COMMON.txt` (on
 `lane/chair-2026-11-08`) whole, then this section, and needs nothing else.
 
@@ -8,7 +8,7 @@ BASE: `origin/lane/close-7-2026-11-24-cures` at 0ec96f13d8 (point 116, the troub
 '0.10.0'). Every unit is cut there as `lane/words-2-2026-11-25-<unit>-wip`, built in its own worktree (`/home/user/wt/<unit>`,
 hooks linked: `ln -s /home/user/settlement-engine/.husky/_ <wt>/.husky/_`).
 
-THE CHAIR: session_019yED1SUxGVHyjQnoqoFvQ8. CLOSE-7 (takes every unit's hand-in): session_019yED1QNMqSLp7ohcZB88VP.
+THE CHAIR: session_019yED1SUxGVHyjQnoqoFvQ8 (takes every hand-in since RULING G26, 16:21 UTC: "UNIT <name> <branch> <commit>", the three numbers and a merge note in one line). CLOSE-7 has handed over and is not messaged again; CLOSE-8 is seated for the join once point 117 is on the line and reads THIS section.
 First message to the chair sent 09:00 UTC.
 
 ### 0.1 Tools (this branch, `docs/chair/2026-11-24/tenth/gen/words-2/tools/`; N8)
@@ -20,52 +20,59 @@ First message to the chair sent 09:00 UTC.
 - Measures (mine, each changes nothing): `e2-pairs.mjs` (E2's census over the battery's views), `e4-nomarket.mjs`,
   `e3-pressure.mjs` (records), `e5-elder.mjs` (records + the tree's dailyLife), `e69-facts.mjs` (E6 and E9, records).
 - Base worktree for measures: `/home/user/wt/base` (detached at 0ec96f13d8, node_modules linked).
-- Gate mutex: `GATE_MUTEX_MAX_POLLS=400 sh scripts/gate-mutex.sh --run -- <cmd> > log 2>&1; echo "exit=$?" >> log`.
+- Gate mutex: `GATE_MUTEX_MAX_POLLS=40000 sh scripts/gate-mutex.sh --run -- <cmd> > log 2>&1; echo "exit=$?" >> log`. A
+  background shell has a time limit (30 minutes unless set; at most 2 hours): a run that WAITS on the gate dies with it.
+- Per-unit attribution (mine, measures): `unit-attribute.mjs` (each moved line to its unit, by the unit's own words),
+  `unit-dailylife-trigger.mjs` (Daily Life moves by admission: E5, G8, E6), `unit-examples.mjs` (three examples a unit),
+  `e3-slots.mjs`, `e3-pool-food.mjs`, `e3-grounded.mjs` (its grazing oracle predates G13: read with that in mind).
 
-### 0.2 Units, in order (state)
-Rulings in force: G3 (E4); G6 (E2's census: cure #10, #1, #6+7, #8, #9, #11; #3+4 measure first; #2, #5, #12 ruled out); G9
-(10:2x UTC): (1) #3+4 cure only the town's own crime, by a domain function; (2) E3 a grazing quarrel only where the record
-holds grazing, a calm record stores none, no new pool; (3) E6 leave granted for three rows (INSTITUTION_KIND_PATTERNS
-`lordsSteward`, INSTITUTION_WORDS, HOUSE_FAMILY_KINDS) BUT it waits for D8 (BIRTH-1's stewardship rewording), the atom named
-for the owner's veto; (4) E9's occupied line: SILENCE, written down with seeds C dp-city-23, dp-metropolis-132, V dp-town-32;
-(5) #6+7 the `exports` atom, on two proofs (census pair 0 on both corpora; the pages that lose the line read whole, no empty
-slot). All rulings: `docs/chair/2026-11-24/tenth/gen/RULING-G.md` on the chair's branch.
-Every unit carries its own lighting-census re-take (the door, `LIGHTING_CENSUS_REFREEZE=WORDS-2`, own commit) where its
-test titles moved it; E10, E4, E12, E7, G8 did not move it.
-PROOFS: a LOCAL scratch join `words-2-join-scratch` (/home/user/wt/join; never pushed) = base + E4, E9, E10, E11, E12, E7, G10,
-G1, G8, G9, G11, for ONE tests/lint, ONE tests/copy, the units' own tests and the after-batteries C and V
-(`scratchpad/join-runs.sh`; logs `join-own.log`, `join-copy.log`, `join-lint.log`, `battery-join-<C|V>.log`). E5, G6, E3, G34
-need a second pass. Base measures: `scratchpad/base-{C,V}` (battery with views), `scratchpad/rec-base-{C,V}` (records).
-| unit | branch, tip | state |
-|---|---|---|
-| E4 | `-e4-wip` c721d73cb | built (G3); red ARM 5; wiring census and observed-shape baseline re-taken by their doors |
-| E9 clause | `-e9-wip` de7266ca7 | red 1/1, green; lighting census, observed-shape baseline by their doors |
-| E12 | `-e12-wip` 35e87009c | red (4 PDFs differ), green 18/18 |
-| E10 | `-e10-wip` 753f3e337 | red 2/2, green 33/33 |
-| E11 | `-e11-wip` bea22c6df | red 4/4, green 22/22; lighting census re-taken |
-| E7 (c) | `-e7-wip` a9cb62003 | built; (a) measured: do not build; (b) the sameness door `--write` queued last in join3-runs.sh |
-| G6 #10 | `-g10-wip` 56289aa80 | red, green 8/8; every viability note it takes off Defense still prints in Summary/Crisis (C 291 of 291) |
-| G6 #1 | `-g1-wip` 04469eb14 | red, green; STOP to the chair 12:02: presumedThings ARM 1 reads the marks "no office: headman/reeve" as prose; (a) `ruling body` instead, or (b) a walker fix |
-| G6 #8 | `-g8-wip` f56efab9f | red 3/3, green 79/79 |
-| G6 #9 | `-g9-wip` (local tip) | re-keyed to the beasts line's authored variant (the defence-reader register); strict types; wiring census |
-| G6 #11 | `-g11-wip` b31c583c5 | red, green 7/7 |
-| E5 | `-e5-wip` 42022a113 | red 2/2, green 20/20 |
-| G6 #6+7 | `-g6-wip` 248230633 | red, green; seed loop folded into the failure helper; proofs owed (G9 (5)) |
-| E3 | `-e3-wip` 646c16169 | rebuilt on the chair's STOP: each grounded quarrel kept, none only where the record holds nothing it names; red 1, green 4/4; the chair's three-state measure: records `rec-e3-*`, `rec-e3none-*` (prototype tree /home/user/wt/e3none, uncommitted) |
-| #3+4 | `-g34-wip` 0783a0dee | red 2/2, green 9/9 |
-| E6 | `-e6-wip` 90ddb9267 | L12 returns (G9 (3), D8 ruled G10): red 4, green 19/19; lighting census re-taken |
-| E9 line | - | SILENCE (G9 (4)) |
+### 0.2 Units: every one handed in to the chair except E3 (state at 16:45 UTC)
+Before = base, after = all units joined (`/home/user/wt/join3`); E3 split out by a join without E3's four src files
+(`/home/user/wt/joinx`, uncommitted). Numbers: records moved C/V · pages moved C/V. Both zero checks hold for every unit
+(the display units move 0 records; every moved page traces to a unit, 0 lines unattributed). Typecheck on the joined tree
+(every unit): ratchet "OK (167, ceiling 167)", domain-strict "✓ (1113, ceiling 1113)".
+| unit | branch `lane/words-2-2026-11-25-<u>-wip`, tip | numbers | merge note (files shared) |
+|---|---|---|---|
+| E10 | e10 753f3e337 | 0/0 · 0/0 (test only) | none |
+| E11 | e11 bea22c6df | 0/0 · 0/0 (test only) | lighting census |
+| E12 | e12 35e87009c | 0/0 · 0/0 (test only) | none |
+| E7 | e7 a9cb62003 | 0/0 · 0/0 | none. (c) built; (a) measured, not built; (b) BLOCKED BY ITS OWN DOOR (G26; `e7/E7-REPORT.md`, 14 slots for E13) |
+| E9 clause | e9 de7266ca7 | 0/0 · 0/0 | .md (E4, G1, G6), generator script (E4), opposite-pairs test + helper (E4, G1), lighting + observed-shape |
+| E4 | e4 c721d73cb | 0/0 · 14/56; #13 13→0, 41→0 | .md + economy.generated.js (G6), generator script (E9), opposite pairs (E9, G1), wiring + observed-shape |
+| G6 #10 | g10 56289aa80 | 0/0 · 291/285; #10 27→0, 25→0 | DefenseTab.jsx (G11), lighting |
+| G6 #11 | g11 b31c583c5 | 0/0 · 28/25; #11 28→0, 25→0 | DefenseTab.jsx (G10), bar5SafetyLawBand.test.js (G34), lighting |
+| #3+4 | g34 0783a0dee | 0/0 · 25/13; #3 36→13, 14→3 (crisis-set rungs left, G9 (1)); #4 13→0, 4→0 | bar5SafetyLawBand.test.js (G11), lighting |
+| G6 #9 | g9 584e271aa | 0/0 · 0/42; #9 V 30→0 | wiring, lighting |
+| G6 #1 (G12) | g1 2838b4ebd | 0/0 · 40/21; #1 12→0, 10→0; 7 pages drop the heading (G19 (3)) | .md, opposite pairs, wiring, observed-shape, lighting |
+| G6 #6+7 | g6 248230633 | 0/0 · 8/68; #6+7 1→0, 20→0 | .md + economy.generated.js (E4), wiring, observed-shape, lighting |
+| G6 #8 | g8 f56efab9f | 0/0 · 7/52; #8 2→0, 8→0 | none |
+| E5 | e5 42022a113 | 0/0 · 51/34 | dailyLifeOffice.test.js (E6), lighting |
+| E6 | e6 5544ca54f | 0/0 · 11/6 (L12 prints on 3) | dailyLifeOffice.test.js (E5), lighting; samenessHideable.houseReadings.json +1 listed row |
+| E3 | e3 8a8ba1890 + the native-ground cure (uncommitted at 16:45, proving) | 228/108 · 228/108 | lighting; presumption register (its door, own commit) |
+| E9 line | - | SILENCE (G9 (4)) | - |
+Census files are never merged by hand: after a merge each is re-taken by its own door, in its own commit.
 
-Proof joins (scratch, never pushed, hooks on; the chair's line of 11:01: joins are uncommitted from then on, a commit with the
-hooks on allowed): join2 (`/home/user/wt/join2`, 15 units) own tests 555/555, tests/copy 175/175, tests/lint 8 red = the
-known three + five cured on the units above; join3 (`/home/user/wt/join3`, every tip) runs `scratchpad/join3-runs.sh`.
+E3 (RULED BUILT, G19 (2)): grazing quarrel only where herding leads (`foodSources[0]==='livestock'`), the marsh/shore/water
+twins where the land holds them, else none (G13); the small-place pool's grazing line by the same fact (G16); thin harvest
+and late frost never beside Secure (G13 (3)); the rule reads NATIVE ground keys only (`nativeSemanticResourceKeys`; G19 (1):
+a custom resource named like a native ground leaked into the stored line). The pin tailPowers4Batch1 KEEP r2r-hamlet-8 is
+restated (now the shore's quarrel; the families line kept on r2r-hamlet-22, where herding leads). The fourth column holds
+(highest top share .24). FROZEN SURFACE named for the owner, not re-recorded: dossierProseManifest's DRIFT tally,
+golden-master-v3 cells 72614 → 72566 (E3 alone; every other unit leaves it). The other golden reds stand on the base too.
 
-### 0.3 Owed, once
+### 0.3 Written down (not cured here)
+- G6 #6+7 (G19 (4)): the `exports` fact counts "Transit trade" while the page prints "No significant exports" (V dp-village-104,
+  dp-thorp-26, -137, -145 lose ECO-1's line; the line drawn instead is true). A later reader of that fact should know.
+- C dp-village-104: its seat is "the head shepherd" while its food sources are none (base too).
+
+### 0.4 Owed, once
 On 2026-11-25 I used `--no-verify` on two LOCAL scratch merge commits (forbidden, scratch included): 9d08f46fb ("scratch join:
 e9") and 0067af37b ("scratch join: g1"). Both were thrown away and the join redone with the hooks; `git branch -r --contains`
-is empty for both (no remote branch holds them). Reported to the chair the same hour.
+is empty for both (no remote branch holds them). Reported to the chair the same hour. Hours misstated four times (each
+corrected the same turn); the rule since: read `date -u` in one step, write it in the next.
 
-### 0.4 Next step
-Read the join's logs; second pass (E5, G6, E3, G34) through tests/copy, tests/lint and the batteries; the before/after tables
-(before = base, after = join, the 15 pairs re-run); G6 #6+7 proofs; E3's golden check (name frozen surfaces, re-record none);
-hand in each unit to CLOSE-7 and the chair; E7 (b) the sameness door.
+### 0.5 Next step
+E3: commit the native-ground cure and the presumption register's shrink (its door), push from /home/user/wt/e3, hand in
+(part 3). Then SAFETY-BLANK (G19 (5)): measure the labels printed with no value (C dp-village-57 "Safety"), read the cause;
+a reader cure is built red first; a new word or fact is one message to the chair first. Remove the scratch worktrees
+join2, join3, joinx, e3none once their joined commits are recorded here.
