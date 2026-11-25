@@ -18,6 +18,19 @@ The chair lands it in its own container with the whole suite. Its reds come back
   and 2 of the 4 (c) parts.
 - New reds: their list is in the hand-in line. Five are unclassed: dossierPhoneFloorAllViews x2, traditionsSameWindowChain
   soak1k-5255, bar6ScenesGoods B7, bar8DesksEco 11c.
+LANDING OF POINT 117 RUNNING (the chair's container, on 97c6bfc7a). Since then (12:17 UTC):
+- ANCHORS (the chair, 11:49; brief `close-7/briefs/ANCHORS.md`): -anchors-wip cut at 97c6bfc7a, in /home/user/wt/anchors,
+  test-only.
+  - The five unclassed are cured by their finder, or reported.
+  - The three figures (editCorpusRatchet A4, A5; mergeLadderHeldKeys A2) are reported before anything is touched.
+  - When green: send "ANCHORS <commit>".
+- GUARD-2 (R24n, `close-7/briefs/R24n.md`), BEFORE the anchors: -guard2-wip cut at 97c6bfc7a, in /home/user/wt/guard2.
+  - REDERIVE_UNAPPLIED_REASONS returns byte-identical, and engine_mismatch moves to its own export; validate:packets is green.
+  - The remote answer's stamp is checked.
+  - The append path's tests: two ticks, a non-active save, faction and house newcomers, and the undo (a finding, not a cure).
+  - When done: send "GUARD-2 <commit>".
+  - Builder a45b468ed08040c87 is on GUARD-2 now. ANCHORS is paused at a commit boundary.
+
 STILL MINE:
 - BEFORE-AFTER's last halves (builder a7bcddb98c583b23c; they go into the landing's record).
 - Then the SECOND HAND-IN. Cut a branch at the line's tip AFTER the landing, and merge the seats' units onto it (D2, D3 and D5 so
