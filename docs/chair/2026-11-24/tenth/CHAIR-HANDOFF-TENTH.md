@@ -28,6 +28,16 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"Do these:" (2026-11-25, about 05:22 UTC, this account), written over two of the chair's own lines pasted back: (1) "Lower my
+effort setting from \"max\" to \"high\" for routine coordination. Raise it again when I am reading database changes or
+making design rulings."; (2) "Allow a cheaper model for purely mechanical helpers: the ones that start a test run, wait,
+and sort the failures by name. ... Building and judging would stay on Opus." THE CHAIR'S READING: (1) the chair's record
+read "high" at 05:23 UTC (his setting; no tool lets the chair set its own): routine at high; a read of a database change or a
+design ruling is taken at the top effort, by his `/effort max` when he is here and otherwise by a SECOND, INDEPENDENT
+reader on the top tier at max effort beside the chair's own read (he asked for the raise in these words); (2) "Opus for
+everything else" NOW HAS ONE EXCEPTION AND NO MORE: a helper that ONLY starts a run, waits, and sorts failures by name
+against a written list may run on a cheaper model; anything that edits, reads a diff for correctness, classes a red by
+judgment, or rules stays on Opus (the architect on the top tier).
 "So I need you to both draw a line and decide. What I want you to focus on is everything related to the generation,
 configuration, sharing etc. this bars advance time, the simulator, the map, and custom content. Those are different
 works. But in isolation everyone regarding the code and user experience for the generation without anything else."
@@ -1036,3 +1046,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THE HOURLY MARK (05:19): VEIL-51 520,459 of 1,000,000, record `allowed_warning`, cost 37.41; its record shows the
   seats' compaction threshold: 784,000 of an effective window of 980,000 ("model-default"). ITS CACHE READS: 97.2
   million tokens: re-reading a long memory every turn is about half of a seat's spend.
+- 2026-11-25 05:23 UTC · T78 · THE OWNER'S TWO WORDS ON COST (section 1): THE CHAIR AT HIGH FOR ROUTINE; CHEAPER MECHANICAL HELPERS.
+  THE RULE FOR A MECHANICAL HELPER, AS SENT TO CLOSE-7 AND VEIL-55 (VEIL-55 passes it to its lane): it may run on the
+  small or the lower-middle model at low effort ONLY IF its whole job is to start a named command, wait for its exit,
+  and return the exit code, the totals and the failures sorted by name against a list given to it as a file (by a
+  script where one exists). IT EDITS NOTHING, READS NO DIFF FOR CORRECTNESS, DECIDES NOTHING: a failure not on its list
+  is returned as "NOT ON THE LIST", verbatim, to the seat, which judges. ITS COUNTS MUST RECONCILE (found = listed +
+  not listed; the run's own total quoted); a count that does not reconcile, or a helper that reports a permission
+  refusal, is not worked round: the run is read again by the seat. Builders, measurers, reviewers, security readers
+  and landing helpers that cure anything stay on Opus.
+  THE CHAIR's OWN: wait-only and sort-only helpers of a landing may be cheap; the landing helper that runs the gate and
+  cures stays on Opus. The chair's deep reads (212 and 213 final; a migration; a design ruling of weight) at the top
+  effort as section 1 says.
