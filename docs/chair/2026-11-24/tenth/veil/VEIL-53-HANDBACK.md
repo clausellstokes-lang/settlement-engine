@@ -41,9 +41,20 @@ re-making the trial join on 0559a8405: ANSWERED NO, the trial join stays at ba74
 -cures-wip re-pointing `tests/lint/samenessHideable.walker`'s stale wording ("served == the house-free twin") to cure B's re-stated
 title, no assertion moved, tests/lint whole after, and say whether the walker reads that title anywhere it checks (VEIL-55, intake).
 
-## 2. RULINGS IN FORCE FOR THIS SEAT
-RULING V1 (whole); N81, N87-N91, N103-N110 (PAUSED-HANDOFF 2.6); N107 (the copy reds go to the join; the cure's lean is the
-join seat's to weigh); N108 (13G x S); PAUSED-HANDOFF section 6 word for word.
+## 2. RULINGS IN FORCE FOR THIS SEAT (all on the chair's branch, appended to `docs/chair/2026-11-24/tenth/veil/RULING-V1.md`)
+- RULING V1 (whole): the phase 1 units and bar. V2: J1's cure (code points, equality by a committed test). V3: the six reds'
+  cures A-E (each red first; E = every generation law of the record through the import and the VR26 harness, a walk of
+  `GENERATION_LAWS`). V4: J12 (a LOST line listed, a CHANGED line read; three pairs a class; nothing breaks; every listed row with
+  its reason). V5: the owner's "Do everything prerelease" (phase 2 before the release; R3 again). V6: FAIL-CLOSED PAGES (sized on a
+  slice; every page reader of an always-withheld key prints nothing where the key is absent; the totality walker), with the
+  chair's 23:27 ring-note class. N81, N87-N91, N103-N110 (PAUSED-HANDOFF 2.6); N107; N108; PAUSED-HANDOFF section 6 word for word.
+- THE CHAIR, 22:48: weekly warning: push at every result, at least every 45 minutes; no run over 20 minutes without partial
+  results in a pushed file; the order of the queue in section 1.
+- THE CHAIR, 00:29 (2026-11-25): NO SUCCESSOR AT 620,000. By 560,000 this section and section 1 WHOLE and pushed, kept so at
+  every push; then work on. On a compaction: one line to the chair, re-read START-VEIL-53.txt, this file and its rulings, go on.
+  A judgment (a diff's read, a builder's acceptance) is finished before a compaction is near, or begun after it.
+- VEIL-55 (the lane's owner): J1 and cures A, B read, NO FAULT; each rides the join (unit 7); keep `-j1-wip` at e1b7a8714 and add
+  B..E above 6b674eb36 on `-cures-wip`; the trial join stays at ba7460c33.
 
 ## 3. LOG (every hour read from `date -u`)
 - 21:24 seated on b58abc48b. 21:25:52 line (0). 21:26:53 six reds confirmed. 21:28:28 tests/copy whole. 21:30 J1 classed.
@@ -52,3 +63,4 @@ join seat's to weigh); N108 (13G x S); PAUSED-HANDOFF section 6 word for word.
 - 23:1x J1 cure pushed (e1b7a8714), line to VEIL-55; cure A builder dispatched.
 - 23:4x cure A pushed (6b674eb36), line to VEIL-55; cure B builder dispatched.
 - 00:2x cure B pushed (5d04aaf9a); cure C dispatched. The line is 0559a8405 (point 115, troubles law dark).
+- 00:30 the mark rule changed (no successor at 620k; whole hand-back by 560k).
