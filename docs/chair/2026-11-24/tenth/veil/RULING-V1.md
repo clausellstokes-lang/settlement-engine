@@ -629,3 +629,20 @@ markers are unmarked, default and `mode: 'live'`). RULED:
 THE LESSON RECORDED: two whole reads at high effort passed this hunk; the third, independent and at the top effort,
 found a leak in three doors by asking where the frozen copy comes from. THE SECOND READER STAYS for every database
 change the chair reads while the owner is away.
+**V29 (08:20 UTC): "FAIL-CLOSED PAGES" IS GRANTED BY VEIL-55 (client and tests, no SQL: `lane/veil-53-2026-11-24-pages-wip`
+04fa8d60e); ITS TWO QUESTIONS RULED.** What it does: three classes of line print nothing where an always-withheld key
+is absent (the Foundations' Criminal opportunity, Law and order and Defense readiness rows; Daily Life's calm default
+where the legacy and the siege sentence are withheld; the siege order sentence); the organised-ring note is not printed
+without a shipped note or a seed; a totality walker reads `withholdAlways` at run time and registers every reader.
+(1) A FALSE BAND ON A SHARED PAGE: "Labor capacity" and the severity half of "Defense readiness" re-derive a
+    condition's severity from its served band (VR37), and the slice shows the re-derived bands WRONG (Strained read as
+    Critical). RULED: FAIL CLOSED FOR THIS RELEASE: where a severity is re-derived, the row is not printed on a shared
+    page. Owed with it: the count of rows lost on both pools, and ONE LINE ON THE CAUSE (which input the served document
+    lacks), written for the put-back (B4), which is the better re-derivation's home.
+(2) THE ELEVEN READERS OF RE-DERIVED KEYS: ONE ARM, as VEIL-55 leans, not an arm each: on both pools at every marker,
+    every key `rederiveForPage` puts back is PRESENT on every shared page (0 absent), and a plant (a served document the
+    engine cannot read) shows what those readers print; a reader that prints a band from nothing gets its own guard.
+    AND ONE MORE HALF, from (1) and from V27's lesson: PRESENT IS NOT RIGHT. On a share that hides nothing those keys
+    read (a marker that reveals everything), each re-derived key EQUALS THE OWNER's STORED VALUE, both pools; every
+    difference is listed by key with its count. That comparison would have caught (1). Bounded: an hour; past it, say
+    what was covered.

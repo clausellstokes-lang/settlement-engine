@@ -1163,3 +1163,7 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   its is now a script that compares `ls-remote` first.
   THE MARK (08:10): CLOSE-7 457,883 of 1,000,000, working, cost 460.77 (344.16 at 02:33: about 21 an hour), record
   `allowed_warning`. (07:19: VEIL-53 619,230, cost 93.53.) No record reads rejected.
+- 2026-11-25 08:20 UTC · T91 · V29: FAIL-CLOSED PAGES granted by VEIL-55 (client only); a false band fails closed; one arm for the re-derived keys, with a "present is not right" half.
+  `veil/RULING-V1.md` V29. VEIL-53's `-pages-wip` 04fa8d60e rides the join with `-cures-wip`; three publicProseEquality
+  daily_life rows red on its base predate the unit and are re-read at the join; its seed-named births are re-anchored
+  at the join by their finder (point 116).
