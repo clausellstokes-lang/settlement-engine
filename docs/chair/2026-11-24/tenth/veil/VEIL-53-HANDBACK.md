@@ -63,6 +63,8 @@ renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "
 - THE CHAIR, 00:29 (2026-11-25): NO SUCCESSOR AT 620,000. By 560,000 this section and section 1 WHOLE and pushed, kept so at
   every push; then work on. On a compaction: one line to the chair, re-read START-VEIL-53.txt, this file and its rulings, go on.
   A judgment (a diff's read, a builder's acceptance) is finished before a compaction is near, or begun after it.
+- THE CHAIR'S T78: a cheap model (haiku, or sonnet at low effort) ONLY for purely mechanical helpers (start a command, wait, exit
+  code, totals, failures against a list); nothing touching the veil's SQL, a differential's verdict, a walker or a security read.
 - THE CHAIR'S EFFICIENCY RULES (05:12 UTC 2026-11-25, via VEIL-55): report to VEIL-55 only, at most 200 words; routine news in this
   file; the chair only through VEIL-55; builders reused across consecutive steps; briefs exact; run-and-wait builders at the lowest
   effort; atomic commits, nobody waits for a compaction.
