@@ -122,7 +122,14 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     reader S not built. V14 (1), (2), (5 restated: no standing printed on any non-owner read) stand; (3), (4), (6) fall away. THE PLAN
     RE-CUT: `u4/PLAN-V15.md` (the code branch after "R4-IDS MERGED"; narrow R5D to the cut, fail closed; the totality walker and
     census; the arms; the loss listed under V4; the proof).
-  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell on the today-born 140 (data for the put-back).
+  ITEM 3 NOW (VEIL-55's yes 01:24, 01:25): the builder STANDWALK dispatched 01:33 by `u4/WALKER-BRIEF.md` (aef23210b): the table's
+    totality walker (tip's writer derived, a planted form reds; master's forms by a recorded extraction of db832c892) and the census
+    of every stored tail on both pools; on `lane/veil-51-2026-11-24-walker-wip` cut at aa54a6791 (worktree /home/user/wt/walker),
+    test-only, merged with unit 4. (aa54a6791 does NOT merge plain under DESCARM: the composed census in
+    rosterChoiceComposedHosts.walker: unit 1's exact 4 vs R5D's 23 prose rows; VEIL-55: unit 4's merge resolves it WITH unit 1 on
+    the lane's tip, named in the "TIP?". 212's header on the tip: R4-IDS (36)/(36b)/(36c), STORED-PROSE (37), R5D's item (38).)
+  RIVAL: galleryVeilRival rc 0 01:22 (2 of 2), its FIRST ENDED RUN: PASS. The other arms, after, cost running.
+  RUNNING (background, 2-hour limits): `rival.sh arms after cost` (from 01:07); c4tell (data for the put-back); STANDWALK.
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
