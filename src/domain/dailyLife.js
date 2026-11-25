@@ -63,6 +63,7 @@ import { isHideableHouse, isVeiledPower } from './people/cardVeil.js';
 import { leaderLeadOfRecord } from './facts/leaderLead.js';
 import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
 import { pickVariantMixed } from '../kernel/proseHash.js';
+import { legacyWithheld } from './display/failClosedReads.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -874,7 +875,11 @@ function deriveRecentChanges(s, ctx) {
   }
 
   const anySource = !!beat || fresh.length > 0 || ctx.threats.some((t) => !isRating(t) && isAcute(t));
-  if (!said.length && !anySource) {
+  // FAIL-CLOSED PAGES (VEIL-53, RULING V6 (b)): the beat reads the history's legacy, which every non-owner read withholds
+  // with its siege sentence; where the page holds neither (`display/failClosedReads.js :: legacyWithheld`) "no source" is
+  // not known, so the calm pool's default ("Life goes on as usual, ...") is not said: nothing. The owner's record holds
+  // `siegeNarrative` on every birth, so the calm line prints there as before.
+  if (!said.length && !anySource && !legacyWithheld(s)) {
     const text = say('calm');
     if (text) said.push(text);
   }

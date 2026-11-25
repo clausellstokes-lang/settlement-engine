@@ -97,3 +97,22 @@ export function tradeArrivesOnPage(settlement) {
   } catch { return false; }
 }
 import { crimeWaveStands, lawBandOf } from '../facts/lawBand.js'; // BAR5-SAFETY (ruling LB2): at the END, no line above moves; BAR6-CRIME: the crime wave's one reading
+
+/**
+ * A FOUNDATIONS ROW WHOSE BAND READS AN ABSENT, ALWAYS-WITHHELD KEY IS NOT PRINTED (VEIL-53's FAIL-CLOSED PAGES, the
+ * chair's RULING V6 (b), vetoable by the owner). Three rows band a key every non-owner read withholds: "Criminal
+ * opportunity" and "Law & order" read the black market's capture (`causalState.js :: deriveCriminalOpportunity`,
+ * `deriveLawOrder`; the law row through `facts/lawBand.js`), "Defense readiness" the readiness score
+ * (`deriveDefenseReadiness` through `defenseLedger.js`, which reads 50 where it is absent). Where the page does not hold
+ * the key (`failClosedReads.js`), the row's band is read from nothing, so the row is NOT PRINTED: a label without its band
+ * would be a new shape (an empty pill), and the tab already steps rows aside (`magicRowsGated`). The owner's record
+ * carries both keys, so every row prints there as before. A condition's severity is NOT here: the page re-derives it
+ * from the served band on every read (`pageRederive.js`, VR37), so it is never absent on the page.
+ * @param {unknown} settlement @param {string} key the row's variable @returns {boolean}
+ */
+export function foundationRowWithheld(settlement, key) {
+  if (key === 'criminal_opportunity' || key === 'law_order') return captureWithheld(settlement);
+  if (key === 'defense_readiness') return readinessScoreWithheld(settlement);
+  return false;
+}
+import { captureWithheld, readinessScoreWithheld } from './failClosedReads.js'; // VEIL-53 V6 (b): at the END, no line above moves

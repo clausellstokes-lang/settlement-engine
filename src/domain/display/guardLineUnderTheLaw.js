@@ -175,8 +175,14 @@ export function safetyLineAsPrinted(text, record) {
   // the force's one reading (`orderForce.js`), not a word of the line, decides; a line without the claim is left as it is
   const f = orderForceOf(record);
   if (f.count.militia > 0 && f.count.garrison === 0 && f.count.watch === 0) out = out.replace(MILITIA_PRESENT, MILITIA_TURNS_OUT);
+  // FAIL-CLOSED PAGES (VEIL-53, RULING V6 (b)): the clause reads the law's band, and the band reads the black market's
+  // capture; where the page does not hold the capture (`failClosedReads.js :: captureWithheld`) the band is read from
+  // nothing, so the SENTENCE the clause heads (to its full stop) is not printed and the rest of the line stands. The owner's
+  // record holds the capture: there the clause reads the band as before.
+  if (SIEGE_ORDER_FRAME.frame.test(out) && captureWithheld(record)) {
+    out = out.replace(SIEGE_ORDER_SENTENCE, '');
   // BAR7-ORDER (9a.order, C5430): the siege's order clause reads the band the page prints, as the guard line does
-  if (SIEGE_ORDER_FRAME.frame.test(out) && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) {
+  } else if (SIEGE_ORDER_FRAME.frame.test(out) && atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) === false) {
     out = out.replace(SIEGE_ORDER_FRAME.frame, (_, /** @type {string} */ subject) => SIEGE_ORDER_FRAME.twin(subject));
   }
   return out;
@@ -307,3 +313,8 @@ export function fundingReasonAsPrinted(reason, record) {
   if (f.paid) return reason;
   return (f.kept ? FUNDED_EMBATTLED_VOLUNTEERS : FUNDED_EMBATTLED_NO_FORCE) + String(reason).slice(FUNDED_EMBATTLED_SHOWN.length);
 }
+
+// ─── VEIL-53's FAIL-CLOSED PAGES (RULING V6 (b)): at the END, no line above moves ───
+import { captureWithheld } from './failClosedReads.js';
+/** The siege's order clause as a whole sentence: the frame, its full stop and the space after it. */
+const SIEGE_ORDER_SENTENCE = new RegExp(`${SIEGE_ORDER_FRAME.frame.source}\\.\\s*`);

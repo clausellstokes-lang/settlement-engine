@@ -96,9 +96,14 @@ export function defenseDeskRead(settlement, options = {}) {
  * SW-B5 FRAMES picks the note's vantage by the record's `_seed` (defenseDisplay.js ::
  * withRingVantage), which the shared record does not carry; so the owner's save ships the drawn
  * note with the projection under `defense:criminal` (`ringNote`), and a shared page prints that
- * line when present and renders the classification's own note locally, as before, when absent.
- * The owner's view reads its own classification.
- * @param {any} settlement @param {{note?: unknown}|null|undefined} csd the card's classification
+ * line when present. The owner's view reads its own classification.
+ * THE RING NOTE FAILS CLOSED (VEIL-53's FAIL-CLOSED PAGES, the chair's class of 23:27 under RULING V6, vetoable by the
+ * owner): where nothing is shipped, a shared page renders the classification's own note locally only where the page can
+ * decide the variant. The organised ring's note is one of four vantages picked by the seed (`withRingVantage`); a record
+ * with no seed renders the table's original (index 0), which is not the owner's line where the seed picked another
+ * (soak1k-11, soak1k-41: `tests/components/defenseRingNoteProjection.test.jsx`). So a shared page with no shipped note and
+ * no seed prints NO organised-ring note. Every other structure's note has one wording and renders locally, as before.
+ * @param {any} settlement @param {{key?: unknown, note?: unknown}|null|undefined} csd the card's classification
  *   (`deskHostArgs.js :: criminalStructureOf`)
  * @param {{publicDossier?: boolean}} [options]
  * @returns {string|null}
@@ -106,5 +111,7 @@ export function defenseDeskRead(settlement, options = {}) {
 export function criminalRingNoteRead(settlement, csd, options = {}) {
   const local = typeof csd?.note === 'string' ? csd.note : null;
   const shipped = options.publicDossier ? /** @type {any} */ (publicProseOf(settlement, 'defense:criminal'))?.ringNote : null;
-  return typeof shipped === 'string' && shipped ? shipped : local;
+  if (typeof shipped === 'string' && shipped) return shipped;
+  const seed = /** @type {any} */ (settlement)?._seed;
+  return options.publicDossier && csd?.key === 'organized' && !(typeof seed === 'string' && seed) ? null : local;
 }

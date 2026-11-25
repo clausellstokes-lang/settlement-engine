@@ -25,7 +25,7 @@ import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { foundationBandShown } from '../../../domain/display/foundationBandShown.js';
+import { foundationBandShown, foundationRowWithheld } from '../../../domain/display/foundationBandShown.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
@@ -160,6 +160,9 @@ export default function SubstrateTab({ settlement }) {
     // passes the shared magic gate, so "Magical stability" steps aside where magic does not
     // work instead of grading "Adequate" off a base of 50 that never read the switch.
     return magicRowsGated(settlement, Object.entries(model.variables), ([key]) => key)
+      // FAIL-CLOSED PAGES (VEIL-53, RULING V6 (b)): a row whose band reads an always-withheld key the page does not hold
+      // is not printed (domain/display/foundationBandShown.js :: foundationRowWithheld); the owner's record holds it
+      .filter(([key]) => !foundationRowWithheld(settlement, key))
       .map(([key, v]) => ({
         key,
         label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',

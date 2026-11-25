@@ -45,6 +45,7 @@ import { isolationDeskRead } from '../../src/components/new/viabilityDeskRead.js
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { faithDeskReadings, warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { powerDeskRead, powerDeskReadings, governanceAccountRead } from '../../src/components/new/powerDeskRead.js';
+import { RECENT_CHANGES } from '../../src/data/dailyLife/recentChanges.js';
 
 afterEach(cleanup);
 
@@ -79,10 +80,17 @@ const COMPLETE = ['economics', 'services', 'resources', 'daily_life', 'history',
  * THE VEILED ROWS, per tab: lines the owner's player view prints that the projection strips by
  * law, so the shared page's silence there is the veil, not a gap. The crisis card's "Hook:" rows
  * read `crisisHook` (the `hook` denylist token; §6.3 finding 3, ruled veiled).
+ * VEIL-53's FAIL-CLOSED PAGES (RULING V6 (b); V4, a LOST line listed with its registry row's reason): the Daily Life's
+ * calm line ("Life goes on as usual, ...", `recentChanges.js :: RECENT_CHANGES.calm`) says the record holds no recent
+ * source; every non-owner read withholds the legacy and its siege sentence (registry: history.legacy,
+ * history.siegeNarrative), so the shared page cannot know that and says nothing (dailyLife.js :: deriveRecentChanges,
+ * `display/failClosedReads.js :: legacyWithheld`). Lost on soak1k-11.
  * @type {Record<string, (line: string) => boolean>}
  */
+const CALM_LINES = new Set(RECENT_CHANGES.calm.map((l) => l.text));
 const VEILED = {
   overview: (line) => line.startsWith('Hook: '),
+  daily_life: (line) => CALM_LINES.has(line),
 };
 
 /**
