@@ -78,3 +78,6 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
 - Instrument veil-55 catalogue-dump.sql on bootHostedChain(upTo 211, both 211s) vs + 212 + down. RED 4 lines (the two ACLs);
   GREEN 0 lines. Down sha256 8cbd7d1c... -> 3ca5eac1... Exact order needed revoke-then-grant (plain grants append).
 - galleryVeilCures rollback block (plain chain) moves: 1 ACL hunk -> 2 (null / {postgres=X} expected vs hosted ACLs). Logs /var/tmp/v53/rollback/.
+
+## RULING V26
+- term (1)/(4): c2d9cf8a6 met (1) in SQL; comment amended (why + V26 + purity). Down sha 3ca5eac1... -> 7004a1c8...; hosted diff 0.
