@@ -1,0 +1,3 @@
+dp-thorp-2	record same	page MOVED	lost -	gained -
+dp-thorp-3	record same	page MOVED	lost -	gained -
+page-battery --diff: 900 births; record moved 0, page moved 2, rows moved 0

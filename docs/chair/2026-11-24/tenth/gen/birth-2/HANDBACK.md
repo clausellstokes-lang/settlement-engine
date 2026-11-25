@@ -45,18 +45,18 @@
   mutation manifest row.
 - UNIT D4: HANDED IN at 14:33 UTC: `lane/birth-2-2026-11-25-d4-wip` 57d26a136 on origin, "UNIT D4" sent to CLOSE-7 and the chair
   (section 2). Typecheck in its tree: ratchet OK 167/167; domain-strict OK 1113/1113.
-- UNIT C6 as of 15:40 UTC:
-  (A) P9: measured and RULED (G22). BUILT on `lane/birth-2-2026-11-25-p9-wip` (worktree /home/user/wt/p9) at f1990cc84: the leaf
-      `facts/beastsReadiness.js` (beastsReadinessOf: shownScore, grade; scoresAsShown) read by DefenseTab, threatAssessment,
-      defenseDisplay, OverviewTab, generalDeskRead (DS-GEN-3), pdf viewModel (defenseScores). Walker
-      `tests/lint/beastsGradeOneReader.walker.test.js` red at base, green; plants executed; manifest row. Every-birth check
-      `probes/p9check.mjs`: base C 0, V 175. IN FLIGHT: sameness render of C/V on p9 (for p9check after) and the page battery
-      p9 C/V (scratchpad p9proof.sh). THEN: p9check after (expect 0), pages moved (expect C 0, V ~175, records 0), the four
-      "beyond the need" under CRITICAL/WEAK = 0, lint whole, copy whole, named tests, both typechecks in the p9 tree, the
-      lighting census by its door (two new test files... one new: the walker), push from /home/user/wt/p9, "UNIT P9".
-      NAMED, not built: the defense score AVERAGES (pdf viewModel scoreAvg x3, viewModelBodySlices) still average the stored
-      score (a different statistic; a parity contract ties them).
-  (B) SAMENESS: SENT to the chair (15:40 UTC); lists in `c6/` (over-C.json, over-V.json, check-C.log, sameness-bar.js).
+- UNIT C6 as of 16:58 UTC:
+  (A) P9 RULED G22; BUILT on `lane/birth-2-2026-11-25-p9-wip` (worktree /home/user/wt/p9): f1990cc84 (the cure) + e2b1d24ae (the
+      leaf's import path in defenseDisplay.js and threatAssessment.js; the push's typecheck caught it). ON ORIGIN.
+      PROOFS TAKEN at e2b1d24ae: every-birth check `probes/p9check.mjs` C 0 -> 0, V 175 -> 0 (`c6/p9check-{before,after}-*.json`);
+      page battery vs base (`c6/diff-p9-*.txt`): records moved C 0, V 0; pages C 2 (dp-thorp-2, -3: the known render noise),
+      V 175 (all heartland, stored CRITICAL 151 / WEAK 24: the grade alone); battery rows V 129 lost (P9 only), 0 gained.
+      IN FLIGHT: the gates (scratchpad p9gates.sh: tests/lint + tests/copy + 184 named files; both typechecks). THEN: the
+      lighting census by its door (the walker is one new test file), "UNIT P9" TO THE CHAIR ONLY (CLOSE-7 has handed over;
+      CLOSE-8 reads this section 0).
+  (B) SAVED (G23 (1)): `same/` (README, over-C/V, check tail). G23 (2): the door's own `--check` at the base QUEUED after the
+      gates (scratchpad door.sh -> door-check.log); report five counts, exit code, and whether its rises are WORDS-2's 14.
+  (G23 (3)): nothing built for sameness. After P9 and the door: hand-back made final, and STOP.
 - Worktrees: /home/user/wt/d4 and /home/user/wt/a5 (node_modules and .husky/_ symlinked; excluded in info/exclude).
   Scratch tools: /home/user/c7tools/read25 (CLOSE-7's page battery copied). Runs: scratchpad queue*.sh, logs g-*.log.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
