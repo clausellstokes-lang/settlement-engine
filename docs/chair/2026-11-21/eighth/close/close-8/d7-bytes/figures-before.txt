@@ -1,0 +1,21 @@
+     5362     2610     2244 content-identity-BiMB_uYV.js
+   168098    50317    41326 data-75MGCrb1.js
+   318322   102547    86244 engine-core-Codf1HbM.js
+   485175   154408   128089 index-DHdXoi55.js
+     4960     2571     2320 kernel-DK1UYNki.js
+     3579     1472     1319 vendor-icons-aOW4IQH8.js
+   193176    60454    52076 vendor-react-DsScxBXT.js
+    17046     7106     6420 vendor-state-DXnjcO3h.js
+FIRST PAINT raw 1195718 gzip 381485 brotli 320038
+WORKER generation.worker-Crm7Bus3.js 2737079
+ENGINE engine-Dy6OJTUI.js 936526
+CHUNK coherence-lazy-CgeQ9pJY.js 297395 imports: content-identity,data,data-lazy,engine-core,fortune-law,fortune-merits,kernel,narrative-mutations
+CHUNK engine-core-Codf1HbM.js 318322 imports: content-identity,data,kernel
+CHUNK engine-core-lazy-BRRgBtRA.js 25876 imports: content-identity,custom-schema,data,data-lazy,engine-core,kernel
+CHUNK data-75MGCrb1.js 168098 imports: kernel
+CHUNK data-lazy-D_bS0iOk.js 2021027 imports: data,engine-core,kernel
+CHUNK data-lazy-D_bS0iOk.js 2021027 imports: data,engine-core,kernel
+SENTINEL "It has no one captain: the able-bodied householders" -> advanceInterval.worker-DB2_WdRM.js customContentPreview.worker-vz2Do5Mo.js data-75MGCrb1.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js
+SENTINEL "contestsNiche" -> advanceInterval.worker-DB2_WdRM.js coherence-lazy-CgeQ9pJY.js customContentPreview.worker-vz2Do5Mo.js engine-Dy6OJTUI.js engine-core-Codf1HbM.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js
+SENTINEL "\"Newcomers\\x27 Settlement\",\"Departure Committee\"" -> 
+SENTINEL "stress:[{type:" -> advanceInterval.worker-DB2_WdRM.js customContentPreview.worker-vz2Do5Mo.js engine-core-Codf1HbM.js generation.worker-Crm7Bus3.js pdfRender.worker-Hog5vh-T.js
