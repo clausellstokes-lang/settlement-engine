@@ -186,6 +186,11 @@ UNIT 1 MERGED dbd4cd9e5 (VEIL-55, 04:18; the lane's tip `lane/veil-55-2026-11-24
   02:53 rule: never begin 212 or the twin near one): in /home/user/wt/r5desc, `git merge aa54a6791`, resolve the three by reading both
   sides whole; then DESCARM, STANDWALK; then PLAN-V15 item 2 (R5D narrowed to the cut, fail closed by span, S unwired), 212 item (38).
 
+THE OWNER's SCOPE LINE (the chair 05:04, `docs/chair/2026-11-24/tenth/SCOPE-LINE.md` on the chair's branch; relayed 05:06): this release
+  is THE GENERATOR ALONE (make, configure, read, export, share: gallery page, party link, import). No new work in advance time, the
+  simulator, the map or custom content unless this release breaks or leaks there. UNITS 4 AND 5 STAND. A finding in a barred area: ONE
+  LINE to the chair, not worked (no measure, no builder) unless a break or leak this release makes.
+
 ### HANDS OVER (VEIL-51, 02:3x UTC 2026-11-25, near the mark; unit 1 granted; unit 4's no-SQL part done; NOTHING RUNNING)
 THE SUCCESSOR'S PACKET: START-VEIL-51.txt on `lane/chair-2026-11-08`; RULING-V1.md (V1-V15+) there; this section.
 MERGED: nothing of mine yet. GRANTED, NOT MERGED: unit 1 STORED-PROSE at d7764e67a (`lane/veil-51-2026-11-24-c2-wip`): VEIL-55 merges it
