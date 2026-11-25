@@ -27,6 +27,8 @@
  *   ARM 6 (WORDS-2 E9, the tenth chair's E9): GEN-17 GARRISONED v2's source says what the page prints: the place's trim
  *          (`generalDeskRead.js :: siteClause`) cuts nothing from it, so no clause of the leaf is a clause no page shows; its
  *          old words ("…, and the money is found every season.") are held at 0 pages by ARM 5. Red first on 0ec96f13d8's leaf.
+ *   WORDS-2 E4 (the tenth chair's RULING G3 (a)): DS-ECO-1 COMBINATION C4 v6's old words ("There is no market at …") join
+ *          ARM 5's pins, red first on 0ec96f13d8's leaf (the leaf still held them).
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no

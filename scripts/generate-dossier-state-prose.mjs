@@ -635,6 +635,10 @@ const WORD_CORRECTIONS = Object.freeze([
   // money is found every season" printed on no page (the place's trim, `generalDeskRead.js :: siteClause`, cuts it), so
   // the source now says what the page prints; re-worded in place
   { pool: 'DS-GEN-17 :: GARRISONED', vid: 2, from: 'c79be9f74b113a7a991921a860891bdd50d602a2841edaa578f3deb4007266b2', to: 'cbaf147b509073657dbdc1ebd1c2fc722d5629427656a855901588e5619eb923', ruling: 'TENTH-CHAIR-E9' },
+  // WORDS-2 E4, the tenth chair's RULING G3 (a): DS-ECO-1 COMBINATION C4 v6 said "There is no market at {settlement}" a third
+  // time on its pages (GEN-13 NO-MARKET and the yield line already say it); re-worded in place, its closing clause kept (C4 is
+  // a low rung: `economyStateProse.js :: prosperityHeaderPoolKey`, rank <= LOW_RUNG_TO, Subsistence/Struggling/Poor)
+  { pool: 'DS-ECO-1 :: COMBINATION C4: a low rung on a working approach', vid: 6, from: 'e284cf5f1f6d43f5c199642c081a0f6f4ac6d78bc417b75ed3ffe9879493023e', to: 'e6244f4fc36979daaf0fc289bf29a5a0b3e006fd4150a6d00083c632d669dd35', ruling: 'TENTH-CHAIR-G3' },
 ]);
 
 async function readNumberingBaseline() {
