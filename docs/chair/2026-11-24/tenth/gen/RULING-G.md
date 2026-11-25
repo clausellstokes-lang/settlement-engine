@@ -159,3 +159,34 @@ ASKED ONCE for the leave (one row, reason "family", by the register's own door);
 only; WORDS-2's E6 is unaffected (the steward's title never changed). ALSO (WORDS-1, 10:49): E8's line in the
 shrink-only bank keeps "themselves"; (BIRTH-1) D2b by the shared-sentence test, about 38 births; UNIT D5 received
 (`-d5-wip` 289a70b3a: births moved 0; the R13 arm over every birth 0 of 1,800 breaks).
+
+**G12 (12:03): G6 #1's STOP:** the marks "no office: headman" and "no office: reeve" red `presumedThings` arm 1 (a mark
+string read as a line naming the thing). RULED (a): the three DS-POW-5 lines are marked `ruling body` (what "the whole
+{seat} must agree" presumes); the walker is not changed; it also reaches Town Mayor (C 47, V 9) and Priestly Guidance
+(V 15), which is right. Built: `-g1-wip` c80742a91.
+
+**G13 (12:24 UTC): E3, THE GRAZING QUARREL, FROM THE THREE-STATE TABLE.** WORDS-2's table (top line's share of the size's 150
+births / distinct lines; towns and up identical in all states):
+| corpus, slot, size | today | grounded as built | no fall-through quarrel |
+|---|---|---|---|
+| C power thorp | .68 / 14 | .68 / 14 | .25 / 33 |
+| C power hamlet | .67 / 17 | .67 / 17 | .13 / 42 |
+| C power village | .45 / 23 | .45 / 23 | .26 / 36 |
+| C overview thorp | .61 / 44 | .61 / 44 | .13 / 50 |
+| C overview hamlet | .39 / 76 | .39 / 76 | .09 / 82 |
+| C overview village | .13 / 110 | .13 / 110 | .07 / 109 |
+| V power thorp | .31 / 24 | .21 / 30 | .21 / 39 |
+| V power hamlet | .25 / 29 | .25 / 29 | .17 / 51 |
+| V power village | .30 / 38 | .30 / 38 | .08 / 61 |
+| V overview thorp | .28 / 56 | .17 / 61 | .17 / 60 |
+| V overview hamlet | .11 / 97 | .11 / 97 | .11 / 102 |
+| V overview village | .11 / 113 | .11 / 113 | .04 / 112 |
+"A grazing house on the roster" grounds nothing (all 270 fall-through births of C hold one). With no fall-through
+quarrel the slots spread and no line is crowned; the Overview falls to the subsistence pool (7 lines) for thorps and
+hamlets; 19 C and 17 V villages print no tension line. RULED: (1) a fall-through quarrel is kept only where the record
+holds a fact that DISTINGUISHES the place: water, marsh, shore where the land holds them; grazing only where herding is
+what the place lives by (its leading chain or primary economy), never for a grazing house alone; else no quarrel; no
+new line; (2) the fourth state measured; the bar: no cell's top line above .30; (3) a subsistence-pool line agrees
+with the food band the page prints (the count of thin-harvest or late-frost lines beside Secure: 0, or those lines
+read the printed band); (4) a calm village may print no tension line. THE OWNER MAY VETO: it changes what most calm
+small places are born saying.
