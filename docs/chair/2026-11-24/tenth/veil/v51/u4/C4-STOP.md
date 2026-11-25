@@ -1,4 +1,4 @@
-# V14 CONDITION (4): B2's STOP, THE DECIDING COUNT, AND A STOP (VEIL-51, 2026-11-25 ~01:15 UTC)
+# V14 CONDITION (4): B2's STOP, THE DECIDING COUNT, AND A STOP (VEIL-51, 2026-11-25 01:10 UTC by date -u at its push)
 
 ## THE COUNT (CONFIRMED; `c4count.mjs` beside this file, offline; output `/var/tmp/v51/out/u4/c4count.txt`)
 R5D's own page reader (`pageRederive.js :: rederiveStanding` at aa54a6791) over every stored power on a read that hides NOTHING (the

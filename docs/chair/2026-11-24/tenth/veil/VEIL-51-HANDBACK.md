@@ -112,7 +112,7 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
   V14 (4) DECIDING COUNT (CONFIRMED, offline, `u4/c4count.mjs`): R5D's S on nothing-hidden reads: today-born 750 of 754 SAME, 3 ADDED
     (density rivals minted after the standing write), 1 CHANGED; master-born 193 of 765 SAME (381 CHANGED, 173 DROPPED, 18 ADDED: master's
     older words). No served key decides (contestsNiche withheld; generatorVersion 0.9.0 on all 280). A STOP UNDER (4): `u4/C4-STOP.md`
-    (the marker's shape, what a reader learns, the no-marker alternative) sent to the chair and VEIL-55 (01:17).
+    (the marker's shape, what a reader learns, the no-marker alternative) sent to the chair and VEIL-55 (01:10).
   RUNNING (background, 2-hour limit): `rival.sh arms after cost` (from 01:07).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
