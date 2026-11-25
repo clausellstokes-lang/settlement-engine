@@ -137,3 +137,12 @@ small calm towns will show no quarrel line") WAS WRONG FOR C and is corrected to
 variant (the water quarrel, the shore quarrel) is NOT retired; ONE MEASURE OWED: the top line's share and the count of
 distinct lines in the two slots, by size, on C and V, today, under the grounded rule, and with no fall-through quarrel
 at all; then the chair rules whether a calm place with grazing keeps a grazing quarrel.
+
+**G10 (10:58 UTC): D8, THE REEVE: "THE LORD's REEVE".** BIRTH-1's count at 0ec96f13d: every Feudal Stewardship THORP (C 12,
+V 18) holds the house "Lord's reeve" (face "the reeve"; its own description: "A steward appointed by a distant lord")
+and prints "Isamu Liu, the reeve, holds its seat." beside "the Feudal Stewardship"; hamlets and villages hold "Lord's
+steward" and read right. RULED: candidate A: the face becomes "the lord's reeve"; the seat's name is not changed (a
+rename would re-deal every name-keyed draw: R24m); the card's role moves on those thorps only, no draw. Told to
+WORDS-1 (E1's short title gives "the reeve's office") and to WORDS-2 (E6's L12 no longer waits; the steward's title is
+unchanged). The catalogue word is named for the owner's veto. ALSO: UNIT D3 received (BIRTH-1, `-d3-wip` 5262fbee4);
+E8's line in the shrink-only bank keeps "themselves" (WORDS-1's (b)).
