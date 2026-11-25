@@ -56,3 +56,26 @@ Partial notes to `out/v53/failclosed/NOTES.md` as you go; commit each commit as 
 ## FINAL MESSAGE (at most 200 words)
 The commit hashes; per class: the red quoted and the green; the readers the walker found (count; how many with arms; any cured in
 commit 3); the owner's-read arms; tests/lint whole and the components runs against the known reds.
+
+## ADDENDUM: RULING V29 (the chair, `veil/RULING-V1.md` at 1263b0920e on the chair's branch; relayed by VEIL-55 08:20 UTC 2026-11-25;
+VEIL-55 GRANTED commits 1-2). COMMITS 3 (and 4 if the arm needs it) on pages-wip, RED FIRST:
+(1) THE FALSE BAND, FAIL CLOSED: where a severity is RE-DERIVED on a shared page ("Labor capacity", the severity half of "Defense
+    readiness": `pageRederive.js :: rederiveForPage` puts severity back from its band, VR37), the row is NOT PRINTED on a shared
+    page; the owner's page unchanged (asserted); the walker registers it. RED FIRST on the slice's births (SIZING.md: r2r-hamlet-36
+    "Labor capacity Strained => Critical", r2s-insurgency-town-0, r2s-occupied-town-0). OWED: the COUNT OF ROWS LOST on both stored
+    pools (below), and ONE LINE ON THE CAUSE: which input the served document lacks that the owner's band reads (written for the
+    put-back, B4).
+(2) THE ELEVEN READERS: ONE ARM, BOUNDED TO ONE HOUR OF BUILDER TIME (past it, commit what is covered and report the rest). (a) On
+    both pools at every marker (the default veil, a marker revealing everything, the widest veil), every key `rederiveForPage` puts
+    back is PRESENT on every shared page. (b) A PLANT of a served document the engine cannot read (a re-derive input removed or
+    malformed): any reader that then prints a band from nothing gets its own guard (in this commit), red first. (c) "PRESENT IS NOT
+    RIGHT": on a share that hides NOTHING (the marker revealing everything, the PAGES probe's `allShown`), each re-derived key EQUALS
+    THE OWNER'S STORED VALUE on both pools; list every difference by key with its count (a table in the report file). (c) is a
+    MEASURE (its table), and an arm only where it is 0.
+THE TWO POOLS, YOUR OWN SETS (VEIL-55's are on its machine): TODAY-BORN = the banked 720's slice (every 12th, as `out/v53/pages/`)
+born on this tree and passed through its save (the record as an owner stores it); MASTER-BORN = the same seeds born by origin/master's
+generator (a detached worktree of origin/master at `/home/user/master53`, `npm ci` there or its `node_modules` if compatible: say
+which; never a branch, never a commit there), stored as JSON, then read through THIS tree's shared read. If the master-born pool
+cannot be made within the hour's bound, say so and give (c) on today-born alone.
+REPORT: a FILE `out/v53/failclosed/V29.md` (the table of (2)(c), the count and cause line of (1), red/green) and a final message
+of at most 200 words.
