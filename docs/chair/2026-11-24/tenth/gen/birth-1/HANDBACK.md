@@ -93,9 +93,18 @@
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
-- **D7 — BUILT under G17 + G18 on `lane/birth-1-2026-11-25-d7-wip` (worktree `/home/user/wt/d7`); governing run IN FLIGHT; not yet
-  committed (the commit waits for the run, so lint-staged does not touch the tree under it); then the lighting and wiring doors,
-  push, hand-in.** The build: the atom `crisis body: <kind>` (keys `indebted`, `religious_conversion`; presence) homed in the new leaf
+- **D7 — PUSHED on `lane/birth-1-2026-11-25-d7-wip` at b0cca45be (5d9b3bba1 the unit; fe54f8b89 the lighting door, files
+  3798 -> 3799, parked 494 -> 495; b0cca45be the wiring door, stamp only); the final governing run on the tip IN FLIGHT (14:45 UTC);
+  then the build bytes and the hand-in.** First governing run (on the uncommitted tree): 21 red files; 13 at the base (RED-AT-LINE;
+  colourMarks4h red at the base too, re-run on `/home/user/wt/base`); the other 11 were D7's, cured: tailNarrativeRows /
+  dossierContent (the twin row had shifted the pool's indices: it now stands at the pool's END); heldKeyWriterCensus A3 (a new
+  imported call: the sentence split is inline through the `resolveSibling` the step already imports); factLayers walker (the keyed
+  getter probed with every key, `tests/lint/factLayers.shared.mjs`); wiringCensusDeclared (the new channel in
+  `scripts/lib/table-pools.mjs`); census2d/2e (the PRESSURE_SENTENCES ledger declares indebted[0]; count 28 -> 29); poolDominance (the
+  new pool's row by `--bank-new`, the lane's door: 1 row, no other touched); presumedThings ARM 1 (the walker asked the conversion
+  original to DECLARE its `clergy` thing ON THE LINE, not a row: it now needs `priest` beside the crisis body; MY CALL, vetoable:
+  births moved by it 0, C/V and the goldens re-born identical to the first build); the two census doors. NO shrink-only register
+  gained a row. The build: the atom `crisis body: <kind>` (keys `indebted`, `religious_conversion`; presence) homed in the new leaf
   `src/domain/facts/crisisBody.js` (`crisisBodyOf(record, kind)`: a non-governing power that is the kind's own by
   `people/stressPowerFaces.js :: stressPowerRowOf` read with that crisis alone, or a no-face name (`NO_FACE`); undefined with no powers;
   it imports stressPowerRowOf, so not zero-import, told to the chair); wired `factsOf.js` (getter, keyed), `factLayers.js` (layer 3,
@@ -125,6 +134,6 @@
   sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-D7: read the governing run (`d7/gov-files.txt`, 282 files naming the touched modules, + tests/lint + tests/copy whole) against the
-known reds; commit; the lighting and wiring doors; push `-d7-wip`; hand in to CLOSE-7 and the chair, naming the atom and the new
-sentences for the owner's veto. D8 parked (owner's leave).
+D7: read the final governing run (`d7/gov-files.txt` + tests/lint + tests/copy, on b0cca45be) against the base's reds; the build
+bytes; hand in to CLOSE-7 and the chair, naming the atom `crisis body: <kind>`, the new sentences and the `priest` declaration for
+the owner's veto. D8 parked (owner's leave).
