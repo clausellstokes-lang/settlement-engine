@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eaf34abdecc09f38b65869373e1ef40acc79ad4e",
-  "measuredBy": "CLOSE-7",
+  "measuredAtSha": "52ddb326ecb208d7ef5b0e03a68bc3e4f4ba99db",
+  "measuredBy": "BIRTH-1 D2b",
   "date": "2026-11-25",
-  "note": "GUARD merged onto the cures (A1, A2, the mirror, point 116): the census re-taken at the merge",
-  "files": 3798,
-  "parked": 494,
+  "note": "D2b adds tests/domain/pressureNotTheTieLine.test.js",
+  "files": 3799,
+  "parked": 495,
   "credited": 3304,
   "titles": 31980,
   "suiteTitles": 8889
