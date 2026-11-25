@@ -283,3 +283,34 @@ appended and nothing else moves: what a DM sees on the live site today.
     laws it passes (`withRecord*Law`), so the list is on paper.
  8. NO PERSISTED SHAPE MOVES BUT THE VERSION's VALUE; no copy changes; no page changes.
 SIZE: M (the chair's guess 6 to 8 seat-hours). IT HOLDS THE RELEASE. R24i's (a) stands (no corrections leaf).
+
+## R24k (added 05:42 UTC on 2026-11-25): THE GUARD MERGES AS BUILT; ITS PROOF (c) WAS THE CHAIR's WRONG BAR AND IS RE-STATED
+ASKED by CLOSE-7 (05:41): GUARD is built (`-guard-wip` d6c941c62, cut at e2fd7caa4; `close-7/reports/GUARD.md`; every
+count confirmed by run). Points 1, 2, 3, 4, 6 and 8 hold; (a) red 113 of 180; (b) green 0 of 180 beyond the newcomer,
+who appears once; (d) 0 of 180 move and all 180 take the append path. (c) AS R24j WROTE IT DOES NOT HOLD: line-born
+places still re-derive (180 of 180), and all 180 "move beyond the newcomer": 180 a coherence receipt counting one more
+person; 9 a kept person's empty house field become null; 1 a power seated; 4 conflicts re-dealt.
+**THE ERROR IS THE CHAIR's.** R24j's bar "0 of 180 line-born saves move beyond the newcomer" measured whether a
+re-derivation is inert beyond the person it adds. That is a property of the re-derivation, not of the guard, and master
+does not have it either (the control: 4 of 180, four thorps). What (c) was for is its last clause: "the guard must not
+turn the feature off for new places".
+**RULED:**
+1. GUARD MERGES AS BUILT onto `-cures`.
+2. (c) RE-STATED IN TWO: (c1) THE FEATURE IS ON for a place of this engine: 180 of 180 re-derive (holds). (c2) THE GUARD
+   IS INERT ON ITS OWN ENGINE: the same line-born saves and the same decree, on the guard's tree and on its parent
+   (e2fd7caa4), give the same record with `generatorVersion` set apart: 180 of 180 equal. One row that differs is the
+   guard's fault and stops the merge. Re-taken on births of the 116 tip at the merge, as ruled.
+3. THE FOUR MOVEMENTS ARE A NAMED FINDING, "REDERIVE-DRIFT", AND ARE ADVANCE TIME's (the owner's line, `SCOPE-LINE.md`):
+   live on master today in the same kind, not made by this release: WRITTEN DOWN, NOT WORKED. TWO BOUNDS so the line's
+   exception is honoured: (i) THE NULL: twenty minutes, no more: does any reader of that house field on a page or an
+   export tell '' from null (print "null", throw, sort wrongly)? If one does, that one line is cured in this unit; if
+   none, it is written down. (ii) AT THE RE-TAKE ON THE 116 TIP (the troubles rule lit) the same four counts are
+   reported; if seated powers plus re-dealt conflicts exceed 10 of 180, it comes to the chair before the landing: a
+   re-derivation that re-deals a new place's troubles at every decree would be this release's making.
+4. THE ONE NEW RED, `intentAtlasSoakDistiller` (`src/domain/data/intentAtlas.distillate.json` stores '0.9.0'; the test
+   wants the documented run to reproduce it byte for byte): the file is a derived data file with its own script
+   (`scripts/distill-intent-atlas.mjs`), not one of the owner's two signed references. IT IS RE-MADE BY ITS OWN SCRIPT
+   IN THIS UNIT, ONE COMMIT, AND THE DIFF MUST BE THE VERSION's VALUE AND NOTHING ELSE; any other moved cell stops it
+   and comes to the chair. If the script or a register names a signing door for it, it is not re-made: it is listed
+   for the owner's end signings and CLOSE-7 says which door.
+5. THE CHAIR READS GUARD's WHOLE DIFF AT THE HAND-IN, at the top effort (a stored value and the advance path move).

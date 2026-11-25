@@ -1063,3 +1063,10 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   no withheld power or is withheld whole; the table's totality by walker, census and one bounded pass over the writer's
   history on master; one measure owed with the hunk (descriptions naming ANOTHER power after the cut, both pools).
   Taken at high effort; re-read at the top effort with unit 4's 212 hunk. Sent to VEIL-55 (for VEIL-51) and VEIL-52.
+- 2026-11-25 05:42 UTC · T80 · GUARD IS BUILT; R24k: IT MERGES AS BUILT; PROOF (c) WAS THE CHAIR's WRONG BAR, RE-STATED.
+  `read/RULING-R24.md` R24k. GUARD (`-guard-wip` d6c941c62): red 113 of 180; green 0 of 180 beyond the newcomer; next
+  release simulated 0 of 180; births differ only in the version (0 of 900 on C and V); the page battery 0 rows. (c)
+  re-stated as (c1) the feature is on (180 of 180) and (c2) the guard is inert on its own engine (a differential
+  against its parent, the version set apart). "REDERIVE-DRIFT" written in `SCOPE-LINE.md` as advance time's, with two
+  bounds. `intentAtlasSoakDistiller`'s file re-made by its own script if the diff is the version alone. OWED BY THE
+  CHAIR: GUARD's whole diff read at the hand-in at the top effort.

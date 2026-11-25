@@ -37,6 +37,7 @@ not made by this release is WRITTEN DOWN (the list below) and not worked.
 |---|---|---|
 | "SNAP-CHRONICLE" (A9): a map shared with its campaign is refused whole where the campaign has a chronicle, the editor ticking the chronicle by default | the map | live today; not made by this release; RULING V13 stands as that work's ruling; VEIL-52's cure is PARKED, green on its own test and unproven beyond it, at `lane/veil-52-2026-11-24-doors-wip` c89d3f638 (hand-back `veil/v52/builder/SNAP-CHRONICLE-HANDBACK.md`); ruled 05:27 UTC: it does not ride |
 | the owner's stored switch for the empty-section cut (A7) | (optional) | not built unless he asks |
+| "REDERIVE-DRIFT" (found 05:41 UTC by CLOSE-7's GUARD proofs; R24k): a re-derivation at a decree is not inert beyond the person it adds, on a place of the engine's own version: of 180 line-born saves, 9 a kept person's empty house field become null, 1 a power seated, 4 conflicts re-dealt (master's control: 4 of 180, four thorps) | advance time | live today in the same kind; not made by this release; two bounds kept in R24k (the null's readers; the counts re-taken on the 116 tip, above 10 of 180 comes to the chair) |
 | any fault found in a barred area from now on | its own work | one line to the chair, recorded here, not measured further, not built |
 
 ## DECISIONS MADE WITH THE LINE (each vetoable by the owner; he has deferred them to the chair)
