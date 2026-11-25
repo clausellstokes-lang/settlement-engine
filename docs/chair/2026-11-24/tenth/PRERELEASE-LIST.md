@@ -45,7 +45,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 ## D. HOW A PLACE IS BORN
 | # | what | size | flags | state |
 |---|---|---|---|---|
-| D1 | THE TROUBLES RULE, LIT | S (one commit and its gate) | B, **D** | lands dark as point 115; HIS YES ON ITS THREE NUMBERS IS ASKED |
+| D1 | THE TROUBLES RULE, LIT | S (one commit and its gate) | B, **D** | LANDED DARK AS POINT 115 (0559a8405, 00:09 UTC on 2026-11-25; dark equality 525 of 525 twice by the helper's own instrument); HIS YES ON ITS THREE NUMBERS IS ASKED |
 | D2 | the prominent tie is never a covert one (`genRelNarrative` picks the best tie that is not covert; about one birth in eighteen) | M | B | not started; it cures at the source what the veil hides at the doors |
 | D3 | the power step's sentence written before the coherence repair (intake 2; 1 page in 287) | M | B | not started |
 | D4 | the stored powers not always strongest-first, and nine readers that print as if they were (intake 1): THE PAGE SORTS, and the bar marks the holder | M | | not started |
@@ -70,6 +70,7 @@ owner's golden signing, asked ONCE at the end). **D** = it needs the owner's own
 | E9 | whether an occupied place gets a state line; one source clause the page always cuts | S to M | | not started |
 | E10 | the voice walker cannot tell a pattern from prose (RULING V2) | S | | not started |
 | E11 | the timeout ratchet's paren matcher (a tool's fault) | S | | not started |
+| E12 | `tests/scripts/readerCorpusManifest.test.js` reads red by the calendar: its two renders of one world differ when the run crosses midnight UTC (point 115's gate, 23:59:28 for 58 s): the test should hold the clock | S | | not started |
 
 ## F. THE OWNER'S OWN HAND, AT THE END, ONCE
 The two golden signings and the size budgets (after every **B** above has landed); his vetoes (the three government names,

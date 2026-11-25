@@ -790,3 +790,17 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   Reveal-DM reads the hooks and secrets the veil's default covers. The import pass on the tip: 0. The owner is told in
   plain words. One pass added (today's import of a marked page); then READ-COST's run. The hourly check is re-armed for
   00:29 UTC (trig_017PbijvZjS4JSF9zHXKR7SK).
+- 2026-11-25 00:10 UTC · T59 · POINT 115 IS LANDED AND PUSHED: THE TROUBLES RULE, DARK. THE LINE IS 0559a8405800c05929de584216708b58de2c3ae9.
+  LAND-115's report (no permission refusal): merge f3b45352eb (no conflict; its root tree the lane tip's own), the
+  register commit a3721fc83f (the tuning inventory by its door, ONCE, on the owner's "Then yes"; the commit touches that
+  one file; the diff read by the chair), the row's commit 0559a8405. THE CHAIR VERIFIED: the worktree clean at
+  a3721fc83f, the parents, the tree equality, the stack branch on origin. DARK EQUALITY by the helper's own script: 525
+  configurations, hashed the old way and through `birthConfig`, base against merge, 1,050 hashes byte-equal. THE GATE:
+  lint 3 (the size signings), typechecks and eslint clean, `tests/build` 13 of 628 (all listed), step f 28 of 13,043
+  (all listed), step f2 2 of 831: `provenanceMap` arm 1 (the landing machine) and `readerCorpusManifest`, WHICH THE
+  CHAIR READ AS A CALENDAR ARTIFACT: the step started 23:59:28 UTC and ran 58 s, so its two renders fell on two dates;
+  alone 18 of 18 twice (the chair's own run at 00:05 UTC). Listed as E12. The five sizes rose by the lane's own figures.
+  PUSHED 00:09 UTC on 2026-11-25 (a fast-forward from f9531eb3a; the hook 167 of 167, 1113 of 1113, eslint 0 errors).
+  `ci/LINE-NOW.md` is at point 115. OWED: CI by name within the hour; "THE LINE IS" to the five seats; THE OWNER'S YES
+  ON THE RULE'S THREE NUMBERS (then one commit lights it, by a helper with its own gate). VEIL-54 IS STILL NOT SEATED
+  (the allowance; T53): the freed landing place stays free.
