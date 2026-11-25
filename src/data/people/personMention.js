@@ -86,7 +86,11 @@ export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to the
 
 /** E1: a word of the role is a possessive ("the network's head", "the carriers' master") */
 const ROLE_POSSESSIVE = /[\p{L}\p{N}](?:['’]s|s['’])(?=\s|$)/u;
+/** E1: the words that end a possessed noun phrase (its "of" form takes the words before them) */
+const OF_FORM_STOPS = ['and', 'or', 'but', 'to', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'is', 'are', 'was', 'were', 'has', 'have', 'had', 'will', 'would', 'that', 'which', 'who', 'than', 'as', 'before', 'after', 'since', 'because', 'while', 'when', 'if'].join('|');
 
+/** E1: a possessed noun phrase ends at a mark (a regex literal, so the copy's voice count reads no '!') */
+const OF_FORM_END = /[.,;:!?]/u.source;
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
@@ -221,6 +225,9 @@ export function qualifiedPossessives(text, cards) {
     const name = str(c?.name);
     const m = /^(.+?)\s+\(([^()]+)\)$/.exec(name);
     if (!m) continue;
+    // E1 (WORDS-1, G5): a qualifier that holds a possessive ("(the hospital's master)") would open into two possessives in a
+    // row; its possessive takes the "of" form instead, the bracket kept: "the family of Kathleen Farrell (the hospital's master)"
+    if (ROLE_POSSESSIVE.test(m[2])) out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}['’]s ((?:\\p{Ll}+ )*?\\p{Ll}+)(?=${OF_FORM_END}|\\s+(?:${OF_FORM_STOPS})\\b|$)`, 'gu'), (_w, noun, at, all) => `${at === 0 || /[.!?]\s*$/.test(all.slice(0, at)) ? 'The' : 'the'} ${noun} of ${name}`);
     out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}(['’])s${NOT_BEFORE_LETTER}`, 'gu'), (_w, q) => `${m[1]} ${m[2]}${q}s`);
   }
   return out;

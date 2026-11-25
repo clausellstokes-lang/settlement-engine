@@ -492,7 +492,7 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
  * HIGH twin (withConflictRelations). */
 const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) is right and ordained\. Each props up the other\.$/; // E1 (G5): its 4th part the rule whole, "X's rule" or "the rule of X"
 
-import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
+import { SEAT_HOLDER_LINES, seatOfForm } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
 import { fillAgreement } from '../data/people/powerSentenceName.js';
 import { pickVariantMixed } from '../kernel/proseHash.js';
 import { getActiveRng } from '../kernel/rngContext.js';
@@ -555,7 +555,7 @@ export function seatHolderLinesOf(pool, apart) {
 /** @param {string} line @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string} */
 function seatHolderFill(line, apart) {
   const form = powerNameAfterArticle(apart.form.faction);
-  return opening(fillAgreement(line, { holder: say(apart.holder) })
+  return opening(fillAgreement(holdsPossessive(form) ? seatOfForm(line) : line, { holder: say(apart.holder) }) // E1 (G5): the "of" form for a name that holds a possessive
     .replace(/\{form's\}/g, powerPossessive(form))
     .replace(/\{form\}/g, form)
     .replace(/\{holder\}/g, say(apart.holder)));

@@ -433,19 +433,24 @@ export function resolveDeclaredPosition(declarations, drawn, facts, key, where =
  *   "{a}'s {b}", the fill of {b} holding one          → "the {b} at {a}"   ("The Caravan masters' exchange at Uaymtzal …")
  *   "the {a}'s word" / "{a}'s word", {a} holding one   → "the word of the {a}" / "the word of {a}" ("take the place of the
  *                                                         Headman's Authority", "in the pocket of the Thieves' Guild")
+ *   "the {a}'s" / "{a}'s" standing alone before , . ; : ! ?, {a} holding one → "that of the {a}" / "that of {a}" ("needs
+ *                                                         one name, that of the Headman's Authority, and …")
  * A template whose fills hold no possessive is returned as it is, byte for byte. A form at the sentence's head takes "The".
  * @param {string} text @param {Record<string, unknown> | null | undefined} slots @returns {string}
  */
 function ofForms(text, slots) {
-  if (!text.includes("}'s ")) return text;
+  if (!text.includes("}'s")) return text;
   const holds = (/** @type {string} */ name) => !!slots && isFilled(slots[name]) && holdsPossessive(slots[name]);
+  const head = (/** @type {number} */ at) => at === 0 || /[.!?]\s*$/.test(text.slice(0, at));
+  const alone = text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s(?=[,.;:!?])/g, (whole, the, a, at) => (holds(a) ? (head(at) ? 'That of ' : 'that of ') + (the || '') + '{' + a + '}' : whole));
+  if (alone !== text) return ofForms(alone, slots);
   return text.replace(/(\bthe )?\{([a-zA-Z_][a-zA-Z0-9_]*)\}'s (?:\{([a-zA-Z_][a-zA-Z0-9_]*)\}|([a-z]+))/g, (whole, the, a, b, word, at) => {
     /** @type {string} */ let said;
     const of = (/** @type {string} */ name) => '{' + name + '}';
     if (b && holds(b) && !holds(a)) said = (/^the\s/i.test(String(slots?.[b]).trim()) ? '' : 'the ') + of(b) + ' at ' + (the || '') + of(a);
     else if (holds(a)) said = 'the ' + (b ? of(b) : word) + ' of ' + (the || '') + of(a);
     else return whole;
-    return at === 0 || /[.!?]\s*$/.test(text.slice(0, at)) ? said[0].toUpperCase() + said.slice(1) : said;
+    return head(at) ? said[0].toUpperCase() + said.slice(1) : said;
   });
 }
 
