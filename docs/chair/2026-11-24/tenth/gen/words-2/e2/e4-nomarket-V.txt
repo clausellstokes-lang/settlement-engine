@@ -1,0 +1,19 @@
+== /tmp/claude-0/-home-user-settlement-engine/a69e64e8-cbf3-5730-871a-7434cc51a4e6/scratchpad/base-V/rows: pages 900; a no-market sentence on 407; two or more on 366
+  60  18/20/22/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v11 [Summary/Overview]  (dp-hamlet-107 dp-hamlet-112 dp-hamlet-121)
+  59  19/26/14/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v7 [Summary/Overview]  (dp-hamlet-101 dp-hamlet-113 dp-hamlet-116)
+  55  23/14/18/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v8 [Summary/Overview]  (dp-hamlet-11 dp-hamlet-14 dp-hamlet-144)
+  51  19/19/13/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v10 [Summary/Overview]  (dp-hamlet-10 dp-hamlet-108 dp-hamlet-114)
+  51  17/19/15/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v9 [Summary/Overview]  (dp-hamlet-100 dp-hamlet-124 dp-hamlet-126)
+  45  22/17/6/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v3 [Summary/Overview]  (dp-hamlet-0 dp-hamlet-1 dp-hamlet-102)
+  39  14/11/14/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  ECO-1 C4 v6 [Systems/Economics]  (dp-hamlet-11 dp-hamlet-119 dp-hamlet-16)
+  38  16/12/10/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v12 [Summary/Overview]  (dp-hamlet-104 dp-hamlet-12 dp-hamlet-128)
+   9  3/4/2/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v10 [Summary/Overview]  (dp-hamlet-119 dp-hamlet-62 dp-hamlet-79)
+   6  1/2/3/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v8 [Summary/Overview]  (dp-hamlet-11 dp-hamlet-66 dp-thorp-76)
+   6  3/1/2/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v9 [Summary/Overview]  (dp-hamlet-52 dp-thorp-106 dp-thorp-142)
+   5  2/2/1/0/0/0  ECO efficiency "held back by having no market" [Systems/Economics]  +  GEN-13 NO-MARKET v4-v6 (siege) [Summary/Overview]  (dp-hamlet-103 dp-hamlet-123 dp-thorp-122)
+   5  2/2/1/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v11 [Summary/Overview]  (dp-hamlet-16 dp-hamlet-44 dp-thorp-81)
+   5  1/2/2/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v7 [Summary/Overview]  (dp-hamlet-6 dp-hamlet-78 dp-thorp-133)
+   5  3/0/2/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v3 [Summary/Overview]  (dp-thorp-0 dp-thorp-1 dp-thorp-86)
+   5  2/0/3/0/0/0  ECO-1 C4 v6 [Systems/Economics]  +  GEN-13 NO-MARKET v12 [Summary/Overview]  (dp-thorp-132 dp-thorp-73 dp-village-12)
+  other x6: X X money buys X X stock at full price and sells it back through stalls that pay no market dues.
+  other x1: Xša X money buys X X stock at full price and sells it back through stalls that pay no market dues.
