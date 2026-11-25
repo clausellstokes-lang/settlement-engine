@@ -9,7 +9,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { generateDefenseProfile, defencePartsOf } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile, defencePartsOf, defenceWillHoldOf } from '../../src/generators/defenseGenerator.js';
 import { buildWorldExport } from '../../src/lib/worldExport.js';
 import { neighbourMilitaryFactorOf } from '../../src/generators/priorityHelpers.js';
 import { keepOfRecord } from '../../src/domain/facts/keep.js';
@@ -290,19 +290,36 @@ describe('the martial will (R13, R14)', () => {
     expect(compared, 'anchored: the corpus holds paid-short places with a will').toBeGreaterThan(0);
   });
 
-  test('R13: where something is built or standing, the will counts no more than the armed bodies that carry it', () => {
+  // BIRTH-1 D5 (the tenth chair's PRERELEASE-LIST D5, intake 14): THE BOUND RE-CUT SCORE BY SCORE. The hold is per score
+  // (UPKEEP-MEASURE-2 X1: the will's military to the armed bodies' military, its order to their order) and never below the
+  // will the place has with nothing built or standing (X4). The old bound summed points (will <= armed + 0.1 a part) and
+  // predates X4: lit, v3build-village-3's order score sits ON its floor (23 > the armed bodies' 14.4), so its will (6.86)
+  // read over the points-only bound (6.8) with no rule broken (fortune-7's diagnosis, measures/u8/DIAGNOSIS.md, R13).
+  test('R13: where something is built or standing, the will counts, score by score, no more than the armed bodies that carry it, and never below its own unheld rate (X4)', () => {
     const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'households', 'wardens']);
-    let held = 0;
+    let held = 0; let onFloor = 0;
     for (const [key, s] of Object.entries(births)) {
-      const parts = defencePartsOf(s);
-      const will = parts.find((p) => p.id === 'will');
-      if (!will || will.held === undefined) continue;
+      const { n, willHold, parts: byScore } = defenceWillHoldOf(s);
+      if (!Object.keys(willHold).length) continue;
       held += 1;
-      const armed = parts.filter((p) => ARMED.has(p.id)).reduce((a, p) => a + p.points, 0);
-      expect(will.points, key).toBeLessThanOrEqual(armed + 0.1 * parts.length);
-      expect(will.label).toBe('Martial will');
+      let after = 0;
+      for (const [d, h] of Object.entries(willHold)) {
+        // the armed bodies as the hold read them: never fewer than stand on that score after every rule (the test's own sum)
+        const armedNow = byScore.filter((p) => ARMED.has(p.id)).reduce((a, p) => a + Math.max(0, p.dims[d] || 0), 0);
+        expect(h.armed + 1e-9, `${key} ${d}: the armed bodies the hold read`).toBeGreaterThanOrEqual(armedNow);
+        expect(h.after, `${key} ${d}: R13, score by score`).toBeLessThanOrEqual(Math.max(h.armed, h.floor) + 1e-9);
+        expect(h.after, `${key} ${d}: the hold never raises the will`).toBeLessThanOrEqual(h.before + 1e-9);
+        expect(h.floor, `${key} ${d}: X4's floor never lifts the will above its own`).toBeLessThanOrEqual(h.before + 1e-9);
+        if (h.after > h.armed + 1e-9) onFloor += 1;
+        after += h.after;
+      }
+      const will = defencePartsOf(s).find((p) => p.id === 'will');
+      // the page's will is the held will (nothing after R13 raises it), to its tenths
+      expect(will?.points, key).toBeLessThanOrEqual(after / n + 0.1 + 1e-9);
+      expect(will?.label).toBe('Martial will');
     }
-    expect(held, 'the hold binds somewhere in the corpus').toBeGreaterThan(0);
+    expect(held, 'the hold reaches the corpus').toBeGreaterThan(0);
+    expect(onFloor, 'X4 binds somewhere in the corpus (a score held on its floor, above its armed bodies: what the points-only bound refused)').toBeGreaterThan(0);
   });
 });
 
