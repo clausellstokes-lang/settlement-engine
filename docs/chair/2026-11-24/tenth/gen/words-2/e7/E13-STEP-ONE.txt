@@ -1,0 +1,46 @@
+== hamlet TOP «# feeds itself and pays its own way.» web:Systems/Outlook | ViabilityTab.0.0.1.0.0.1
+   places 150/150 distinct 24 perPlace 1 shareAll 0.48 seen 0.2416
+   paths {}
+   72× # feeds itself and pays its own way.
+   8× # grows less than it eats, and part of the difference arrives by road.
+   7× As things stand, # will not survive.
+== hamlet TOP «The people worth knowing and what each one holds.» web:World/NPCs | NPCsTab.0.0.1.0 > InfoPill.1.0.1
+   places 150/150 distinct 1 perPlace 1 shareAll 1 seen 1
+   paths {}
+   150× The people worth knowing and what each one holds.
+== hamlet TOP «# feeds itself and pays its own way.» pdf:canon_dossier | SettlementPDF.12 > ViabilityAssessment > PageChrome.1.3 > Callout.2.0 > Edi
+   places 150/150 distinct 24 perPlace 1 shareAll 0.48 seen 0.2416
+   paths {}
+   72× # feeds itself and pays its own way.
+   8× # grows less than it eats, and part of the difference arrives by road.
+   7× As things stand, # will not survive.
+== town TOP «the senior craft-guild master» pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1
+   places 147/150 distinct 1 perPlace 1 shareAll 0.98 seen 1
+   paths {"npcs[].institution.title":147,"npcs[].title":147,"npcs[].role":137,"relationships[].npc1Role":137,"relationships[].npc2Role":110}
+   150× the watch captain
+   150× the dean
+   147× the senior craft-guild master
+== town TOP «the senior craft-guild master» pdf:canon_dossier | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1
+   places 147/150 distinct 1 perPlace 1 shareAll 0.98 seen 1
+   paths {"npcs[].institution.title":147,"npcs[].title":147,"npcs[].role":137,"relationships[].npc1Role":137,"relationships[].npc2Role":110}
+   150× the watch captain
+   147× the senior craft-guild master
+   90× the senior guild master
+== city TOP «the senior craft-guild master» pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1
+   places 143/150 distinct 3 perPlace 1.54 shareAll 0.9467 seen 0.8202
+   paths {"npcs[].institution.title":143,"npcs[].title":143,"npcs[].role":133,"relationships[].npc1Role":133,"relationships[].npc2Role":115}
+   150× the garrison commander
+   150× the dean
+   142× the senior craft-guild master
+== city TOP «the senior craft-guild master» pdf:canon_dossier | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1
+   places 143/150 distinct 2 perPlace 1.16 shareAll 0.9467 seen 0.9203
+   paths {"npcs[].institution.title":143,"npcs[].title":143,"npcs[].role":132,"relationships[].npc1Role":132,"relationships[].npc2Role":108}
+   150× the garrison commander
+   142× the senior craft-guild master
+   133× the senior guild master
+== metropolis TOP «the senior charter master» pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.1.* > NPCRow.0.1
+   places 81/150 distinct 1 perPlace 1 shareAll 0.54 seen 1
+   paths {"npcs[].institution.title":81,"npcs[].role":81,"npcs[].title":81,"relationships[].npc1Role":81,"relationships[].npc2Role":53}
+   100× the cobbler
+   100× the chandler
+   99× the fortune teller
