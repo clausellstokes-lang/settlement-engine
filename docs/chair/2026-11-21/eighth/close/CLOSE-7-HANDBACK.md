@@ -187,6 +187,13 @@ BATCH (07:22 UTC):
 - The builder is at about 640k of its 1M window. A fresh builder may be needed for the before-and-after; if so, it runs on its
   own narrow brief.
 
+BATCH, SECOND C1 STOP (07:48 UTC). R24l (`close-7/briefs/R24l.md`) built the alias, but (c) FAILS.
+- C 0/900 moved and V's 861 others unmoved, but 0 of the 39 carriers are byte-equal.
+- Cause: the density law breaks power ties on the name (applyDensityLaw.js:502, densityRoll.js:199, via seatKey). Senate is
+  aliased by string; no clean Senate exists.
+- RULING ASKED. My recommendation: widen to "every name-as-key site", via `powerDrawKey`, with a lint arm.
+- Done: P3source 4fc54fb45; goals I-13 measured (C 136 faults in 122 places; V 172 in 148). C1 is held at de19885d7.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
