@@ -1,0 +1,1 @@
+Q2: 140 towns; unmarked member loses rows on 122, gains rows on 99, unchanged on 18; towns losing per top-level key {"economicState":105,"stress":25,"conflicts":17,"stressors":25,"institutions":92,"powerStructure":34,"availableServices":97,"structuralViolations":8,"history":43,"prominentRelationship":7,"coherenceNotes":12,"structuralSuggestions":19}

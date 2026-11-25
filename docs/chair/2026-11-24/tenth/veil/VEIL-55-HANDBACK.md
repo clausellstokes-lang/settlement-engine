@@ -63,6 +63,15 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   (unit 3 restates it with src.j in scope); its 5-argument _gallery_veil accepted on two terms: every door calls it (a committed
   arm: no door reaches the stored=null wrapper; a plant at all four doors and the twin) and the stored argument is the document
   the door serves from (src.j; base.j at the link); the rollback drops it and section 7's loop revokes it.
+  THE CHAIR 07:52: its whole read of the hunk FINDS NO FAULT; THE GRANT WAITS for a second independent top-tier read: DO NOT MERGE
+  until it writes "GRANTED". Its Q1/Q2/timing ANSWERED ~08:0x (files v55/out/q2/): Q1 NONE (no arm for a source with pr/ps but
+  no relationships key; the narration is a deep clone so it carries relationships[]; 0 of 280 stored docs lack it): a finding,
+  my lean fail closed (`unread` where relationships is absent and a string present, twin matched, red first at four doors). Q2:
+  an unmarked member now takes the default veil: 122 of the stored 140 lose rows, 99 have values re-derived. TIMING (140-member
+  map, local): unmarked 12.5 s -> 50.3 s; marked 45.5 s -> 49.5 s (unit 3 brings unmarked to the marked cost; ~0.35 s a member).
+- SLIP (08:10, reported to the chair): a push ran from the main checkout (a broken && chain skipped its cd and the ls-remote
+  compare); origin already held the tip; the hook ran `npm run check` to `test:ratchet`; `timeout 300` killed it; nothing left
+  running, nothing pushed. CURE: I push ONLY through `v55/push.sh` (cd, ls-remote compare, exit if equal, scan the log).
 - RULINGS V25 (05:26, unit 4: the rule is on what is served; a desc no row matches is served; a different-span tie withheld),
   V26 (06:53, the down file re-grants the hosted ACL by exact signature; the rollback block's compare under the hosted harness;
   the owner's read-only pre-check query on the owner page), V27 (07:19, the withheld set = every stored power the served doc
