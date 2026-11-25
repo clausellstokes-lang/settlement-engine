@@ -26,6 +26,7 @@ import { deriveDailyLife, fareBandOfRecord } from '../../src/domain/dailyLife.js
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { deriveAllCapacities } from '../../src/domain/capacityModel.js'; // CLOSE-7 THE MIRROR: the profile the pools' `food production` atom reads
 import { defenceOf } from '../../src/domain/facts/defence.js';
 import { hasInstitution } from '../../src/domain/facts/institutions.js';
 import { marketOf } from '../../src/domain/facts/market.js';
@@ -134,11 +135,13 @@ describe('food_culture and commoner_resentments: the route, from the slots\' own
     const failures = collectSeedFailures(seeds(), (seed) => {
       const x = at(seed);
       const facts = factsOf(x.rec);
+      const capacities = deriveAllCapacities(x.rec);
       const gov = String(x.rec.powerStructure?.government ?? '');
       const say = (/** @type {string} */ t) => fillAgreement(t, { gov }).replace(/\{gov\}/g, powerNameWithArticle(gov));
       /** @param {string} slot @param {Readonly<Record<string, ReadonlyArray<{ text: string }>>>} pools @param {string} branch */
       const expected = (slot, pools, branch) => {
-        const pick = pickVariantMixed(filterDeclared(pools[branch], { facts }), `${x.rec.name}::dailyLife.${slot}::${branch}`);
+        // CLOSE-7 THE MIRROR: the deriver hands the pools the capacity profile (`food production`, C7 and K2), so the oracle does
+        const pick = pickVariantMixed(filterDeclared(pools[branch], { facts, ctx: { capacities } }), `${x.rec.name}::dailyLife.${slot}::${branch}`);
         return pick ? say(pick.text) : '';
       };
       const { food, resent } = branchesOf(x.rec);

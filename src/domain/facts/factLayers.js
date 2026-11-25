@@ -113,6 +113,9 @@ export const LEAVES = Object.freeze({
   sickCare: home('sickCare', 2, ['availableServices', 'institutions', 'economicState'], { // R24-A1 (CLOSE-7): a sick house by name or a resident service that tends the sick (`sickCare.js`)
     note: 'it reads the live roster\'s drawn services (layer 2) and the defence home\'s `hospital` and `healer`, which bundle the economy as every defence atom does',
   }),
+  foodProduction: home('foodProduction', 5, [], { // CLOSE-7 THE MIRROR (R24d): the food capacity's band, read off the capacity profile a caller hands (`foodProduction.js`)
+    note: 'the getter is the reading function itself and touches no stratum: the capacity model (which reads the finished record, up to the cast and the conditions) is handed as the atom\'s context, because a fact home cannot import it without a cycle; placed at 5, above the record\'s highest stratum, so no pool may declare it below that',
+  }),
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {

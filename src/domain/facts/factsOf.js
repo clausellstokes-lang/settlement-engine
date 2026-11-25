@@ -98,6 +98,8 @@ export function factsOf(record, options = {}) {
     get courtOrGaol() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0 || defenceOf(record).prison; },
     /** R24-A1 (CLOSE-7): sick care at hand, a sick house by name or a resident service whose row tends the sick (`sickCare.js`) */
     get sickCare() { return sickCareOf(/** @type {import('./sickCare.js').SickCareRecord} */ (record)); },
+    /** CLOSE-7 THE MIRROR (R24d): the place's own food production band, read off the capacity profile a caller hands (`foodProduction.js`) */
+    get foodProduction() { return foodProductionOf; },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */
@@ -297,3 +299,4 @@ import { causeHousesOf } from './causeHouses.js'; // PAGE-7 (CAUSES-DATA addendu
 import { entrepotOf } from './entrepot.js'; // PAGE-7 (CAUSES-DATA addendum 4): at the END, no line above moves
 import { officesOf } from './officeForms.js'; // DAILY-3 B3 L8 (the chair's E82): at the END, no line above moves
 import { sickCareOf } from './sickCare.js'; // R24-A1 (CLOSE-7): at the END, no line above moves
+import { foodProductionOf } from './foodProduction.js'; // CLOSE-7 THE MIRROR (R24d): at the END, no line above moves
