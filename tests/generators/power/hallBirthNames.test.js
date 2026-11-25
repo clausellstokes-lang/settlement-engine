@@ -32,7 +32,8 @@ describe('C1: the bought hall is born under a plain name', () => {
       const gov = s.powerStructure.factions.find((f) => f.isGoverning);
       expect([s.powerStructure.governingName, gov.faction, gov.category]).toEqual([name, name, 'criminal']);
       expect(OLD.filter((o) => JSON.stringify(toPublicSafe(withPublicProse(s))).includes(o))).toEqual([]);
-      expect(JSON.stringify(s)).not.toMatch(/Council of Aldermen of Aldermen|Council of Syndics of Syndics/);
+      expect(JSON.stringify(s)).toContain(name);
+      expect(JSON.stringify(s)).not.toMatch(/Council of Aldermen of Aldermen|Council of Syndics of Syndics/); // anchored: the same record holds the hall's name (the line above)
     });
   }
   test('dp-town-57: the recent conflict names the hall once', () => {

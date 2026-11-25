@@ -442,7 +442,7 @@ export function pageCensusFindings(settlement, views) {
     if (atomHolds('grain imported', facts) !== true || atomHolds('institution: farmland', facts) !== false) return null;
     const glyph = motifGlyph('field');
     const l = V('World/Traditions').find((x) => x === glyph);
-    return l ? [l, 'a tradition of the fields: grain imported, no farmland'] : null;
+    return l ? [l, 'a tradition of the fields: grain bought in, no farmland'] : null;
   });
   return out;
 }

@@ -79,6 +79,8 @@ const BIRTH_FORMS = Object.freeze({
   'High Theocratic Council': 'religious', 'Ecclesiastical Council': 'religious', 'Church Council': 'religious',
   'Priestly Guidance': 'religious',
   'Shadow Senate': 'criminal', 'Corrupt City Council': 'criminal', 'Corrupt Council': 'criminal',
+  // R24-C1 (CLOSE-7 BATCH): the bought hall's names at birth, given on drawCouncilOfAKind's return line
+  'Council of Aldermen': 'criminal', 'Council of Syndics': 'criminal', Senate: 'criminal',
   'Arcane Senate': 'arcane', 'Arcane Council': 'arcane',
 });
 
