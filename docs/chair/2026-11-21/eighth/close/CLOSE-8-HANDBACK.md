@@ -27,7 +27,7 @@ manifest's two rows as a union; (c) whether B1(ii) REDESIGNED and B1(i)b ride 11
 The four cures (start file (3)): goals I-13 (R24q 2), NEED-ATOM (R24q 7), D7's bytes (G24), D6's writer-reach row (G20).
 Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-reach rows and (ii) P9b, a proposal only (G37).
 
-### 0.D In flight (21:4x UTC)
+### 0.D In flight (21:33 UTC)
 - RULED (G42, 20:48): the order stands, E13b joined, E3 last; census conflicts take the join's side, each door re-takes ONCE PER
   GROUP and once after E3, never by hand; the mutation manifest D4 x P9 = the union, row counts in the merge commit. POINT 118 = 29
   units + the four cures + P9's writer-reach rows (G37 (i)). AFTER "CLOSE-8 <commit>" (for 119): B1(ii) REDESIGNED, B1(i)b, E13d,
