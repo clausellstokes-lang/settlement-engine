@@ -32,6 +32,7 @@ import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display
 import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
 import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
+import { sharesSentence } from '../../../domain/display/sharedSentence.js'; // BIRTH-1 D2b
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -255,10 +256,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // X-50 (BOILERPLATE ONCE): it also yields when it tells the same pair's story as the
   // phrasing — the two share a sentence word for word under different openings — so the
   // notable connection, which names the bond, keeps the fact's words.
-  const sentenceSet = (text) => new Set(String(text || '').split(/(?<=[.!?])\s+/)
-    .map(x => x.trim().replace(/[.!?]+$/, '')).filter(x => x.split(/\s+/).length >= 4));
-  const phrasingSentences = sentenceSet(r?.prominentRelationship?.phrasing);
-  const pressureShared = [...sentenceSet(r?.pressureSentence)].some(x => phrasingSentences.has(x));
+  // BIRTH-1 D2b: the test lives in one home, which the pressure step's draw also reads (domain/display/sharedSentence.js); this
+  // drop stays for places born before the draw's cure
+  const pressureShared = sharesSentence(r?.pressureSentence, r?.prominentRelationship?.phrasing);
   const pressureLine = r?.pressureSentence && !pressureShared
     && r.pressureSentence !== r?.prominentRelationship?.phrasing
     ? r.pressureSentence : null;

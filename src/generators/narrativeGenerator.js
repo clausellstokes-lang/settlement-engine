@@ -79,7 +79,7 @@ import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // second copy.
 import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c)
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; import { sharesSentence } from '../domain/display/sharedSentence.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c); BIRTH-1 D2b: the one sentence test, the Overview's own (one line, so no cited line moves)
 
 // Keep the established public import path while the implementation lives with
 // the other extracted narrative policies.
@@ -873,7 +873,7 @@ export const generatePressureSentence = settlement => {
 
   // Relationship narrative
   const relNarr = genRelNarrative(settlement);
-  if (relNarr?.phrasing) return relNarr.phrasing;
+  if (relNarr?.phrasing && !sharesSentence(relNarr.phrasing, settlement.prominentRelationship?.phrasing)) return relNarr.phrasing; // BIRTH-1 D2b (the chair's G8 (3)): a line that shares a sentence with the notable connection's passes to the next candidate; the draw is taken either way
 
   // Fallback: generic pressure
   if (detail.recentConflict) return detail.recentConflict;
