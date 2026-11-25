@@ -922,3 +922,15 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   VEIL-53 were restarted once more by their machines and relaunched what was lost. LAND-116: ITS COMMIT IS MADE IN THE
   LINE's WORKTREE (66168c1089, "the troubles rule lit", unpushed, on 0559a8405); its lit measure on both corpora ended
   at 01:25; the gate follows (about three hours). The hourly check is re-armed for 02:32 UTC.
+- 2026-11-25 02:34 UTC · T70 · THE HOURLY CHECK; THE OWNER ASKED FOR AND WAS GIVEN A WHOLE REPORT IN PLAIN WORDS (02:07 UTC).
+  MARKS at 02:33: VEIL-55 546,215; VEIL-52 542,117; CLOSE-7 298,651 (its record's cost 344.16: about 12 an hour now);
+  every record still `allowed_warning`. UNIT 2 (VEIL-55, 02:30): every proof green but `tests/security` whole and the
+  named files, both running; the gates equal the standing figures (GATE-1 4 of 92, GATE-2 20 cells): "TIP? R4-IDS"
+  when they end. UNIT 4 (VEIL-51): RIVAL CUT TO PHASE 2 by V1's rule (its first ended run red one arm,
+  `galleryRosterChoices` 1 of 37); STANDWALK built test-only (826859d82): the table's totality green, master's 41 forms
+  pinned; the stored-tail census: today 743 rows and master 752, uncut 0, wrong 0, 58 and 38 same-span ties. RULED
+  (02:29): THE CUT IS JUDGED BY ITS SPAN: two rows matching the same span are one reading; a desc is withheld whole
+  only when no span matches or two rows match different spans; a different-span tie on either pool reds. The rejected
+  marker's tell, measured: 528 of 1,177 hiding reads on 17 places (it bears V15 out). LAND-116: lint, the typechecks,
+  the build and `tests/build` done by 01:47; THE WIDE GATE running since about 01:48 (70 files reported by 02:33).
+  CLOSE-7 waits on its mirror builder. The hourly check is re-armed for 03:35 UTC.
