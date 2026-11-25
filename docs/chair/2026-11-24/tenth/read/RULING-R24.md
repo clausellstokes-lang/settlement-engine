@@ -495,3 +495,19 @@ Artificers" on advanced and saved places: TAKEN OUT of 117; a hall's number is r
 rule is a later unit. (4) a wrong test path in a comment. THE SECOND READER HAS FOUND REAL FAULTS ON ALL FOUR CHANGES
 IT HAS READ. C1's design (a meaning carried by a display name) is the root; if the differential shows one more
 reader, the chair takes C1 out of 117 whole rather than cure it a fourth time.
+
+**R24t (19:21 UTC on 2026-11-25): C1B-2 BUILT (b819770332 on cfb9427120); ITS DIFFERENTIAL; THE POSSESSIVE IS NOT A READER OF MEANING.**
+(1) a row's own category decides (criminal, or none: read by name; anything else: never the hall); the pulse strict
+(`boughtHallOldNameOfCriminalRow`); (2) `rulingPower.js`'s label resolver reads a hall as its old name; (3) the
+general "X of Y" rule is out, a hall takes its old name's number; (4) the comment's path. THE DIFFERENTIAL: 36 born hall
+places (12 a name) against their old-named twins: the pulse and the event for coup, election, succession, conquest,
+appointment, intervention (182 runs each), conquest by an occupation authority (36), the guild tick (72), the AI
+grounding (36): DIFFERING 0. The public projection: 10 of 36 differ, all Syndics cities, in ONE thing: the new name
+prints "the Council of Syndics' right to rule" where the twin's old name, mapped back, would print "Council of
+Syndics's" (`powerPossessive` forms the possessive from the name's last letters). RULED: NOT A FAULT AND NOT THE
+"one more reader" OF R24s's threshold: no meaning is read off the name; a possessive is formed from a name's
+spelling, as it would be for any new name under any design, and "the Council of Syndics' right" is the correct English
+form. The ten are explained; C1 stays in 117. P1: C 0, V 12 births moved (all governed by the Council of Syndics); P2:
+162 births, 0 differing; P3: 0; both typechecks green. THE CHAIR READ THE DELTA WHOLE (no fault found, which has
+meant little four times running); a second reader reads the delta while the helper merges and runs the last gate
+(RULING-117-7); the line is pushed only after its report is ruled.
