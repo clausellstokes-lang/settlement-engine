@@ -78,3 +78,18 @@ card's own person, and the tie; "make themselves useful" printed 419 times on C)
 line names the wrong power. Both `topFaction` reads go through the sorting reader anyway (`-d4-wip` 2cf611af9): records
 moved C 0, V 0; no golden row. The chair's sentence to the owner ("two stored sentences named the wrong power") was
 wrong and is corrected to him.
+
+**G6 (09:43 UTC): E2, SECTIONS OF ONE PAGE THAT DISAGREE: THE CENSUS's FIFTEEN.** WORDS-2's census
+(`gen/words-2/E2-CENSUS.md` on `lane/words-2-2026-11-25`, 5d959508d): every sentence about the place on C and V, all
+tabs, a lexicon of fifteen claim topics; pairs are opposite claims or one absence said twice; persons, hooks and
+history not read. CURED IN THIS RELEASE, each its own unit: #10 "People no longer trust those in charge..." verbatim on
+Crisis and Defense (C 27, V 25): one home; #1 a single-holder office beside lines that presuppose a body deciding
+together ("the whole Headman's Authority must agree"; C 86, V 46): those lines are not drawn for a single-holder
+office: the words, not the seat; #6+7 "Buyers from outside come" beside "Little that comes past X stops there" (C 1,
+V 20); #8 "Nobody here goes hungry" beside Food Pressured (C 2, V 5): the fare line reads the printed band; #9 two
+no-wall lines on one tab (C 5, V 30); #11 "no stable governing authority" three times (C 28, V 25): Defense drops it.
+HELD FOR ONE LINE: #3+4 "Law and order: Adequate" beside "Safety: Unsafe" (C 49, V 18): only where the unsafety is
+disorder inside the place; an outside threat beside adequate law is two truths; no new bound on a Foundations row.
+RULED OUT, LISTED FOR THE OWNER's EYE: #2 "Stable" beside "Public legitimacy: Contested" (C 7, V 75); #5 "keeps people
+under arms" beside "Defense: Vulnerable" (C 12, V 31); #12 no healer on Defense and in Daily Life (C 22, V 9). NOT
+DISAGREEMENTS: #14, #15. #13 is G3. THE PROOF: the whole census re-run after, all pairs before and after.
