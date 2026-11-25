@@ -309,11 +309,17 @@ export function deriveViability(settlement) {
   }
   return {
     viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
-    summary: `VIABLE: ${pickTrue(pick, [
+    // WORDS-2 E13a (the tenth chair's RULING G32 (1)): each state (marked imports; none) holds at least three true lines, and
+    // the line is drawn AMONG THE ADMITTED by the slot's own keyed draw (`pickAdmitted`), never handed to the next true one:
+    // where a necessity import is marked, lines 2 and 3 refuse and the old pick gave line 1 to nearly every hamlet (.48).
+    summary: `VIABLE: ${pickAdmitted(pick, [
       `${town} feeds itself and pays its own way.`,
       `${town} grows what it eats and makes what it needs, and owes no one for either.`,
       `Nothing ${town} needs to get through the year has to come from outside.`,
-    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
+      `${town} feeds itself and pays its way, and buys in what it cannot make for itself.`,
+      `What ${town} eats it grows, and what it spends it earns; some of what it needs is bought in.`,
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports,
+      !seen.buysFood && seen.paysItsWay && seen.needsImports, !seen.buysFood && seen.paysItsWay && seen.needsImports], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
     rawSummary,
   };
 }
@@ -801,6 +807,17 @@ import { safetyShownOf } from './safetyShown.js';
 // The round-three cut's #228 #253 #326 #379 and the increment's #ww-567 #ww-717 #ww-1541 (the chair's ruling: not
 // "keeps order" where law and order reads critical; not "pays its way" where the town is poor and earns less than it
 // spends; not "grows what it eats" or "feeds itself" where it buys its food or lists critical imports).
+
+/**
+ * The keyed draw AMONG THE ADMITTED (WORDS-2 E13a, RULING G32 (1)): the slot's own draw (`pick`) over the lines whose
+ * truth holds, so each true line is as likely as another; the twin only where none is true.
+ * @param {(pool: readonly string[]) => unknown} pick @param {readonly string[]} pool @param {readonly boolean[]} ok
+ * @param {string} twin @returns {string}
+ */
+function pickAdmitted(pick, pool, ok, twin) {
+  const admitted = pool.filter((_, j) => ok[j]);
+  return admitted.length ? String(pick(admitted)) : twin;
+}
 
 /**
  * The seed's variant where it is true; else the next true one in the pool's order; else the twin ('' keeps the pool's
