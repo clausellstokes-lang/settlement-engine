@@ -83,7 +83,9 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   // CLOSE-7 THE MIRROR (the chair's RULING-R24 R24d of 2026-11-24, "a pattern at a bar of zero"): a Daily Life fare line of a
   // fed band (the fare's `surplus`, `surplus.wanting` and `adequate` lines: the branches the printed band's bound gives only a
   // page that prints Pressured or better) on a page whose Food Security prints Deficit or Famine (`famineOf().shownBand`)
-  PLENTY: ['PLENTY a line of plenty beside a printed Deficit or Famine', 'CROSS'],
+  // (the chair's words are "a line of plenty"; the label says it without the plenty class's word, which the presumption-classes
+  // walker reads in this file's literals and its door never banks)
+  FEDFARE: ['FEDFARE a fare line of a fed band beside a printed Deficit or Famine', 'CROSS'],
 });
 
 /**
@@ -196,8 +198,8 @@ const shortage = () => (shortageLines ??= [
   ...arr(obj(DAWN_WORK).food).map(obj),
 ]);
 /** THE MIRROR (R24d): the fare's lines of a fed band, by their pools (the words are the pools', a slot read as any name). */
-/** @type {ReadonlyArray<Rec> | null} */ let plentyLines = null;
-const plenty = () => (plentyLines ??= ['surplus', 'surplus.wanting', 'adequate'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)));
+/** @type {ReadonlyArray<Rec> | null} */ let fedFareLines = null;
+const fedFare = () => (fedFareLines ??= ['surplus', 'surplus.wanting', 'adequate'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)));
 /** The printed food bands a line of plenty may not stand beside (R24d). */
 const UNFED = new Set(['deficit', 'famine']);
 /** The food grievances that say food is dear and nobody goes short (CHAIN-1-LISTS (c): NEITHER). */
@@ -403,11 +405,11 @@ export function pageCensusFindings(settlement, views) {
     const said = all.find((l) => shortage().some((line) => printedForm(s(line.text)).test(l)));
     return said ? [said, `Food Security prints ${printed}`] : null;
   });
-  run('PLENTY', () => {
+  run('FEDFARE', () => {
     // THE MIRROR (R24d): the fare says the place is fed, and its own Food Security prints Deficit or Famine
     const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
     if (!UNFED.has(printed)) return null;
-    const said = all.find((l) => plenty().some((line) => printedForm(s(line.text)).test(l)));
+    const said = all.find((l) => fedFare().some((line) => printedForm(s(line.text)).test(l)));
     return said ? [said, `Food Security prints ${printed}`] : null;
   });
   return out;
