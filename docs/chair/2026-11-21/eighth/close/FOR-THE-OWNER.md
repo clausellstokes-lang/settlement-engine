@@ -166,8 +166,8 @@ Each is prepared with its written reason. Nothing here has been re-recorded by a
   one seeded realm. Nothing is raised; it is re-measured with the tuning signature at the end.
 
 **To VETO, new words and vocabulary (each can be struck):**
-- the fact  ("someone here tends the sick or the injured");
-- the fact ;
+- the fact `sick care` ("someone here tends the sick or the injured");
+- the fact `food production: ≥ adequate`;
 - the fare line K2: "Every fish that comes in is counted, and the shares are measured out house by house.";
 - the dawn line K1: "Every hand that can be spared is out at first light, and what comes in is counted before it is eaten.";
 - the three government names given at birth: "Council of Aldermen" (town), "Council of Syndics" (city), "Senate" (metropolis);
