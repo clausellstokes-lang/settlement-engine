@@ -14,7 +14,15 @@
   Post-birth editors of desc: the user's edit (`settlementPendingEdits.js` faction ['desc']), the rename
   (`factionRename.js`, rewriteProse on desc), the AI refine (`supabase/functions/generate-narrative/prompts.ts`, writes desc back).
   Probe: `probes/a5bytes.census.jsx` (+ `a5sum.mjs`), run on C and V.
-- UNIT D4 (powers strongest-first; the page sorts; the bar marks the holder): probe `probes/d4order.census.jsx` written,
-  runs after A5's probe. Then red first, then one sorting reader for every print site.
+- UNIT D4 (powers strongest-first; the page sorts; the bar marks the holder), as of 09:20 UTC:
+  - MEASURED (probes/d4order.census.jsx, d4sum.mjs): out of order C 69/900, V 121/900. Causes read: `resizeSeats` appends
+    rivals after the last sort; `rulerKin.js :: foldKin` grows the ruler in place (V dp-town-93, dp-city-134: first row wrong).
+  - BUILT on `lane/birth-2-2026-11-25-d4-wip` (worktree /home/user/wt/d4, node_modules and .husky/_ symlinked) at 1c1ec43f4:
+    `src/domain/display/powersStrongestFirst.js`; SummaryTab (sentence, copy text, tile, bar) and `aiLayer.js ::
+    extractFullContext` read it. Red 8/13 at base, green 13/13. NOT YET PUSHED.
+  - IN FLIGHT: probes/d4summary.census.jsx over every birth of C and V on base and d4 (scratchpad d4/chain.sh).
+  - OWED: tests/lint whole, tests/copy whole, the named tests (56 files name the changed modules), page battery
+    before/after, record hashes equal, build. Then push the -wip and hand in.
+  - ASKED the chair (09:2x UTC): the holder mark's words (proposed: the Power tab's own "holds power" chip). Not built.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
 - Probes run as: vitest config rooted at the checkout, include the probe file (see the probe headers).
