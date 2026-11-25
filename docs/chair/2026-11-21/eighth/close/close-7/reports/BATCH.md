@@ -1,4 +1,4 @@
-# BATCH (CLOSE-7; CHAIR-0512 (4)): B1(i) finish, B1(ii), C1, P3source, goals I-13; one before-and-after. PARTIAL, written as it goes.
+# BATCH (CLOSE-7; CHAIR-0512 (4)): B1(i) finish, B1(ii), C1, P3source, goals I-13; the before-and-after CANCELLED by R24m. DONE to R24m; STOPPED.
 
 - Tree `/home/user/wt/batch`, branch `lane/close-7-2026-11-24-batch-wip`, cut at 0ec96f13d.
 - READ: BATCH.md; RULING-R24 lines 45-79, 138-157, 182-197 and 214-245; B1I.md lines 8-133; C1-ANSWERS.md whole; P3SOURCE.md
@@ -151,8 +151,31 @@
   - CONFIRMED by run: `conflicts.js:39` and `:228`, `applyDensityLaw.js:504` and `densityRoll.js:201` (via `seatKey`).
   - PLAUSIBLE by read: `titularSuccession.js:200`, `densityCadence.js:154` and `:177`, `factionDensityKernel.js:435`, and
     `settlementPolitics.js:769`.
+- **206e6c3ae, the C1 gates:** `cultureOfficeTitles` 58 → 61 and the
+    `seatTable` birth fixture are re-stated by their cause (the three birth names). `hallBirthNames` gets its anchor and its
+    mutation-coverage entry. B1furrow's label says "grain bought in" for "grain imported" (a presumption-classes word,
+    B1(ii)'s).
+- **THE GATES (CONFIRMED by run; red files attributed by re-running them on archives of the cut 0ec96f13d, of 9d8c944a3
+  (the B1(i) merge and doors) and of prec1 6d30700e6):**
+  - `tests/copy` whole: 15/15 green.
+  - The 88 test files that name a changed C1 file: 10 red. Two were C1's and are re-stated (above). The other 8 are red
+    identically at prec1, so they are not C1's.
+  - `tests/lint` whole: 220 of 227 files pass. The 7 red files: the known three (proseComposed A0b, proseCorpusBytes RAW and
+    GZIP), and the four in the B1(ii) row below.
+  - **RED AT THE CUT** (not BATCH's): pipelinePinnedChoosers and pipelinePinnedMode (41 golden rows),
+    generatorGoldenMaster (525), espionageDormancyFence, powerStructure F31 (relationshipArchetypes.js, 1 packed line), and
+    editCorpusRatchet A3.
+  - **B1(i)'s MERGE** (red at 9d8c944a3, green at the cut): editCorpusRatchet A4, A5 and A7 (the honesty figures) and
+    mergeLadderHeldKeys A2.
+  - **B1(ii)'s** (green at 9d8c944a3, red at prec1; the only src change between them is `genesis.js`, besides the census
+    file):
+    - `traditionDescriptionSharedPage`, 5 tests. Its fixture town Khanqila no longer holds a rite of the dead.
+    - Four frozen corpus walkers: newsHeadline and newsVoice (Wizard News introductions 419 → 420), observedShapeReaders,
+      proseFamilyContract (scalarRows 38,197 → 38,297), and writerReach (shapesDigest).
+    - These are left red and named (N6). They are the chair's to rule: the fixture re-anchored by its cause, or the corpus
+      figures re-taken in a window.
 - **Not done:** the before-and-after (R24m gives it to a fresh builder). The 64 pinned test lines that C1-ANSWERS (c)
-  lists were not re-run one by one; the gates run are below.
+  lists were not re-run one by one; the gates above cover the files that name C1's.
 
 ## GOALS I-13: THE CURE I PROPOSE (R24m; NOT BUILT, on the chair's word)
 **The cause (PLAUSIBLE by read; the counts above are CONFIRMED).** `generators/people/goals.js :: dealGoals` keys each card's draw
