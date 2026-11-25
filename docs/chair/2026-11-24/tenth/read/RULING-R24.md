@@ -343,3 +343,22 @@ mapped back; no other place moves. R24g (2) made this a STOP. RULED: THE ALIAS, 
 (e) The old strings live in that table and its test only.
 WHY NOT THE RE-DEAL FOR ALL 39: it would cost users nothing (new places only; saved places are stored), but it gives up
 the one proof that the cure moves the name and nothing else.
+
+## R24m (added 07:49 UTC on 2026-11-25): C1: R24l's ALIAS IS WITHDRAWN; THE 39 RE-DEALS ARE ACCEPTED
+CLOSE-7 (07:47; `close-7/reports/BATCH.md`, last section; confirmed by run): with the alias in conflicts.js's two keys
+and the names in four vocabularies by exact name, C moves 0 of 900, V's 861 others are unmoved, and 0 of V's 39
+carriers are byte-equal: every pipeline step matches until assembly, where the cast holds the same people in another
+order: THE DENSITY LAW BREAKS POWER TIES ON THE POWER's NAME (`applyDensityLaw.js:502`, `densityRoll.js:199` via
+`seatKey`), so the renamed hall sorts differently and seats, ties and conflict pairs follow. No clean "Senate" exists at
+that size. CLOSE-7 recommended widening the draw key to every read of a power's name as a key.
+**RULED: NOT WIDENED.** The measure changed the price: a draw key through every hash, sort and tie-break of a power's
+name, the density law's and the seat's among them, is a cross-cutting change to laws the owner signed, at the end of a
+release, to prove something about 39 test places; the re-deal costs users nothing (new places only; saved places are
+stored and the guard keeps them). THE LINE THAT STAYS FROM R24g (2): a reader that takes MEANING from the name must read
+the new name exactly as it read the old (the four vocabularies, by exact name: done); a reader that uses the name as an
+ARBITRARY KEY may re-deal. THE ALIAS IS REMOVED (no dead table, no pin test). THE PROOF IN PLACE OF R24l (c): C 0 of
+900; V's 861 others unmoved; the 39's per-step hashes equal up to assembly and the cause named by site; the 39 pass the
+batteries of any birth and show no kind of seat outcome or conflict issue that does not occur elsewhere in V; the old
+three strings on no player page; the DM block says the hall is bought, word for word. The 39's golden rows are named for
+the owner's end signing. WRITTEN DOWN, NOT WORKED: a power's display name is a key in several sites; a rename re-deals.
+THE CHAIR TURNED ITS OWN RULING OF 07:24 ON A MEASURE THIRTY MINUTES LATER: that is what the measure is for.

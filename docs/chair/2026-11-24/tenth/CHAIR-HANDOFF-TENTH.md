@@ -1128,3 +1128,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   their own finders, its table 27 V places moved, both zero checks 0; B1(ii) committed; C1 held for this ruling;
   P3source and goals I-13 going on. THE MARK (07:19): VEIL-53 619,230 of 1,000,000, working, cost 93.53, record
   `allowed_warning`. No record reads rejected.
+- 2026-11-25 07:49 UTC · T88 · R24m: C1's ALIAS WITHDRAWN, THE 39 RE-DEALS ACCEPTED; UNIT 3's HUNK READ BY THE CHAIR, THE GRANT WAITS A SECOND READER.
+  `read/RULING-R24.md` R24m (the density law breaks power ties on the power's name; widening the draw key is not
+  bought). CLOSE-7 also: P3source 4fc54fb45; goals I-13 measured (136 faults in 122 places on C; 172 in 148 on V): its
+  cure comes to the chair before any build. UNIT 3 (VEIL-52's 2f849aa53; the hunk at 75b5ca36e, 324 lines): THE CHAIR
+  READ IT WHOLE against `get_unlisted_dossier` and `_gallery_apply_member_overrides`: the member's call is the link's,
+  argument for argument, with src.j for base.j; the rest equals the down file's body; no fallback: NO FAULT FOUND. THE
+  GRANT WAITS for a second, independent top-tier reader at max effort (the owner's word on database changes; he is
+  away). TWO QUESTIONS SENT TO VEIL-55: Q1 a source with a prominentRelationship or pressureSentence but no
+  `relationships` key is read as "no ties dropped" (a narrated share?); Q2 what an unmarked member of an old map loses
+  under the default veil, for the owner.
