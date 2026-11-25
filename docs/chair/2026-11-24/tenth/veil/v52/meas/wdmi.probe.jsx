@@ -209,7 +209,11 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
     if (PLANT && process.env.WD_PLANT_SEED && b.seed === process.env.WD_PLANT_SEED && !out.plant.done) {
       const from = process.env.WD_PLANT_FROM || "Thieves' Guild Master";
       const hh = arr(doc.institutions).find((h) => isRec(h) && E.isHideableHouse(h) && typeof h.name === 'string' && h.name && !from.includes(h.name));
-      if (hh && process.env.WD_PLANT_DESC === '1') { // VEIL-55 (02:49): into a SHOWN power's desc BASE (before any standing tail)
+      // VEIL-55 (02:57): WD_PLANT_POWER=1 names a HIDDEN POWER (a `hidden: true` faction of the town) instead of a house
+      const hp = process.env.WD_PLANT_POWER === '1' ? arr(doc.powerStructure?.factions).find((f) => isRec(f) && f.hidden === true && typeof (f.faction || f.name) === 'string') : null;
+      if (process.env.WD_PLANT_POWER === '1') { if (hp) { const nm = hp.faction || hp.name; const shown = arr(doc.powerStructure?.factions).findIndex((f) => isRec(f) && f.hidden !== true && typeof f.desc === 'string' && f.desc);
+        if (shown >= 0) { doc = clone(doc); plantText = `The ${nm} quietly funds them.`; const f = doc.powerStructure.factions[shown]; f.desc = `${plantText} ${f.desc}`; out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.power = f.faction || f.name; out.plant.hidden = nm; } } }
+      else if (hh && process.env.WD_PLANT_DESC === '1') { // VEIL-55 (02:49): into a SHOWN power's desc BASE (before any standing tail)
         const shown = arr(doc.powerStructure?.factions).findIndex((f) => isRec(f) && f.hidden !== true && typeof f.desc === 'string' && f.desc);
         if (shown >= 0) { doc = clone(doc); plantText = `The ${hh.name} quietly funds them.`; const f = doc.powerStructure.factions[shown]; f.desc = `${plantText} ${f.desc}`; out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.rewritten = 1; out.plant.power = f.faction || f.name; }
       } else if (hh) { doc = clone(doc); plantText = `${hh.name} Master`; let n = 0; for (const r of arr(doc.relationships)) if (isRec(r)) { if (r.npc1Role === from) { r.npc1Role = plantText; n += 1; } if (r.npc2Role === from) { r.npc2Role = plantText; n += 1; } } out.plant.done = true; out.plant.seed = b.seed; out.plant.text = plantText; out.plant.rewritten = n; }
@@ -236,6 +240,13 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           for (const [q, k] of keys) {
             if (k === OWNER_SLOT) { out.dmSlot.asKey += 1; bump(out.dmSlot.keyPaths, norm(q)); }
             if (OWNERISH.test(k)) { const o = (out.ownerish[norm(q)] ||= { n: 0, doors: {} }); o.n += 1; bump(o.doors, `${tag}|dm=${dm}`); }
+          }
+          if (process.env.WD_PERSONS === '1') { // VEIL-55 (02:57), EVERY read: a stored person with no served card; and named in NO served string
+            const cards = new Set([...arr(d.npcs), ...listsOf(d).flatMap((f) => arr(f.members))].filter(isRec).map((n) => n.name));
+            let noCard = 0; let omitted = 0;
+            for (const n of arr(doc.npcs)) if (isRec(n) && typeof n.name === 'string' && n.name) { if (!cards.has(n.name)) { noCard += 1; if (!strs.some(([, x]) => x.includes(n.name))) omitted += 1; } }
+            const P = (out.persons ||= {}); const r = (P[`${tag}|dm=${dm}`] ||= { reads: 0, readsNoCard: 0, readsOmitted: 0, noCard: 0, omitted: 0 });
+            r.reads += 1; r.noCard += noCard; r.omitted += omitted; if (noCard) r.readsNoCard += 1; if (omitted) r.readsOmitted += 1;
           }
           const wh = withheldAllOf(doc, d);
           if (!wh.length) continue;
@@ -292,8 +303,8 @@ it(`V43-MEASURE wd (${FORM})`, async () => {
           }
           for (const [q, k] of keys) if (ids.has(k)) hit(q, 'id-key', k);
           if (plantText) { // VEIL-52: the plant's tally on this hiding read
-            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = readHits.some(([q, k, x]) => k === 'name' && (process.env.WD_PLANT_DESC === '1' ? /desc$/i.test(q) : /role$/i.test(q)) && x.includes(plantText)); // the instrument's OWN hit (VEIL-50's change)
-            bump(out.plant.reads, `${tag}|dm=${dm}`); if (pres) bump(out.plant.present, `${tag}|dm=${dm}`); if (caught) bump(out.plant.caught, `${tag}|dm=${dm}`); if (pres && !caught && wh.some((w) => plantText.startsWith(w))) bump(out.plant.blind, `${tag}|dm=${dm}`);
+            const pres = strs.some(([, s]) => s.includes(plantText)); const caught = readHits.some(([q, k, x]) => k === 'name' && (process.env.WD_PLANT_DESC === '1' || process.env.WD_PLANT_POWER === '1' ? /desc$/i.test(q) : /role$/i.test(q)) && x.includes(plantText)); // the instrument's OWN hit (VEIL-50's change)
+            bump(out.plant.reads, `${tag}|dm=${dm}`); if (pres) bump(out.plant.present, `${tag}|dm=${dm}`); if (caught) bump(out.plant.caught, `${tag}|dm=${dm}`); if (pres && !caught && wh.some((w) => plantText.includes(w))) bump(out.plant.blind, `${tag}|dm=${dm}`);
           }
         }
       }

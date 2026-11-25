@@ -32,6 +32,8 @@ for (const v of Object.values(names).sort((a, b) => b.reads - a.reads)) console.
 const mk = merge('mapKnown'); const mo = S.flatMap((s) => s.mapOther);
 console.log(`MAP MEMBER: known fault (prominentRelationship / pressureSentence, Reveal off) ${J(mk)} | OTHER ${mo.length}`);
 for (const x of mo.slice(0, 20)) console.log(`  MAP OTHER ${J(x)}`);
+const PP = {}; for (const s of S) for (const [k, v] of Object.entries(s.persons || {})) { const r = (PP[k] ||= { reads: 0, readsNoCard: 0, readsOmitted: 0, noCard: 0, omitted: 0 }); for (const x of Object.keys(r)) r[x] += v[x]; }
+if (Object.keys(PP).length) { console.log('PERSONS (every read; a stored person with no served card / named in no served string): engine|door|Reveal reads readsNoCard readsOmitted noCard omitted'); for (const [k, r] of Object.entries(PP)) console.log(`  ${k} ${r.reads} ${r.readsNoCard} ${r.readsOmitted} ${r.noCard} ${r.omitted}`); }
 const pl = S.map((s) => s.plant).filter((p) => p && p.done);
 for (const p of pl) console.log(`PLANT ${J(p.seed)} ${J(p.text)} | hiding reads ${J(p.reads)} | present ${J(p.present)} | caught ${J(p.caught)} | BLIND ${J(p.blind)}`);
 if (!pl.length) console.log('PLANT none (WD_PLANT unset or no hideable house in the shard)');
