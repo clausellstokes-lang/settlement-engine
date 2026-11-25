@@ -332,6 +332,31 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
   N4 DISPATCHED (07:26): one builder, `u4/N4-BRIEF.md`, worktree /home/user/wt/n4 on lane/veil-51-2026-11-24-n4-wip at 802578955
     (test-only; commits locally; I merge it into r5desc). N5's slices RUNNING on r5desc at 802578955 (`u4/n5.sh`; log
     /var/tmp/v51/out/n5/n5.log: DESCARM, galleryWithholdAlways, galleryRosterChoices pglite, domain-strict).
+  RULING V27 (the chair, 07:19, relayed): (1) V25 (2)'s WITHHELD SET = every power of the STORED document the served one does
+    not name, whatever stage dropped it; the door computes it from the STORED ROW; class (i) withheld whole; no new served fact;
+    RIVAL phase 2. (2) The same set for V20 (unit 5), proved by a plant (a hand-hidden power in a role at Reveal off). (3) A door
+    that cannot see the stored row: STOP and tell. (4) Class (ii) listed, ONE ARM: a served base naming the seat's power has that
+    power on the served roster. (5) Class (iii)'s cure accepted; THE CENSUS's ORACLE IS THE WRITER (the tip's on today-born,
+    master's on master-born): the served desc does not contain the writer's tail; LEFTOVER by that oracle 0, both pools.
+    (6) RE-MEASURE after the cures, both pools, every other power hidden: served descs naming a stored power not served: 0; the
+    count the rule withholds, three examples.
+  V27 (3) SENT (07:3x): the three 212 doors (gallery :3654, link :3717, import :3780) hold the stored row (src.j or base.j) before
+    the projection; THE MAP MEMBER is 211's get_gallery_map (:1414), not restated in 212: STOP for the chair's word; the client's
+    served page never holds the stored row (the server's body is final). FOUND: both engines' roster pass returns early unless
+    a HOUSE is hidden whole (212 `if not whole then return s;`, twin `if (!whole) return;`), so a hand-hidden POWER never
+    reaches the belt at all: V27's belt runs OUTSIDE that gate.
+  THE PLAN OF V27 (1), P (before any edit): P1 SQL: `_gallery_veil` gains a 5-argument form (pub, overrides, link, copy, stored
+    jsonb; no default on `stored`, so 211's 3- and 4-argument calls resolve to the old form, now a wrapper passing null);
+    `_gallery_veil_roster_choices` gains a 3-argument form (doc, pub, stored), the 2-argument form a wrapper passing null; the
+    three 212 doors pass the stored row. In roster choices, BEFORE `if not whole`: THE STORED BELT: v27_wn = the names of every
+    power of the stored row's two lists that no served list names; where any, the lane's search over them (the served names
+    open) and the (38) (e) mechanism: a desc naming one whose cut base still names one leaves WHOLE, both lists. A null
+    stored row is today's behaviour. R3's other copies keep their narrower set (the ruling names descs and V20 only: listed).
+    The rollback drops the two new forms. P2 TWIN: `applyRosterChoices(s, pub, idOf, stored)`, the same block before
+    `if (!whole) return;`; `projectShareVeil(pub, ov, { stored })` and `applyVeil`'s opts thread it. P3 ARMS by a builder
+    (after N4): V25's arm 1 on the owner-hidden power at Reveal off now withheld whole; class (ii)'s arm. P4 (5): the census's
+    master oracle = master's writer run from a db832c892 tree (an env-gated measure, STANDWALK_MASTER_TREE). P5 (6): the
+    re-measure, offline through the twin with the stored row, every power hidden in turn, Reveal off and DM, both pools.
   THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
     with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
     U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
@@ -404,6 +429,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:3x RULING V27 read; V27 (3) sent (the map door: STOP); the early 'whole' gate found; plan P written before any edit.
 - 07:27 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
 - 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
 - 07:2x N2b built (local bcf26ccbd): master's uncut standings cut; census red first 4 -> 0; measure master 12 -> 8.
