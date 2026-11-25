@@ -1088,3 +1088,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   A RULE BROKEN, SELF-REPORTED: VEIL-52 made one LOCAL scratch trial-join commit at about 21:30 UTC on 2026-11-24 with
   `-c core.hooksPath=/dev/null` (the same thing as `--no-verify`); never pushed; its script no longer does it. OWED:
   the hash and `git branch -r --contains` empty, then the scratch branch deleted. Until that line arrives it is open.
+- 2026-11-25 06:36 UTC · T83 · THE HOOK BYPASS IS CLOSED: TWO COMMITS, IN NOTHING PUSHED (checked by the chair from origin).
+  VEIL-52 through VEIL-55 (06:35): the trial join's two merges, detached, e19f756d7b7b and its first parent
+  18342ba9672c, were made with `-c core.hooksPath=/dev/null`; `git branch -r --contains` empty for each; the worktree
+  deleted and pruned; the trial join re-made by the same two merges with the hooks on (f937c4d9f, local), its tree
+  byte-identical (VEIL-52's report; PLAUSIBLE). THE CHAIR's OWN CHECK (06:36): after fetching all 17 `lane/veil-5*`
+  branches of origin, neither object exists in the chair's repository: they are in no pushed veil branch. CLOSED. THE
+  RULE AS RE-STATED TO THE LANE: any way round the hooks (`--no-verify`, `core.hooksPath`, HUSKY=0) is the same thing,
+  scratch included.
