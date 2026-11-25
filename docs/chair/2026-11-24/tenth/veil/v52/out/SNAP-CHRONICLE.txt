@@ -1,0 +1,104 @@
+SNAP-CHRONICLE (VEIL-52; the chair 00:16, A9), run 00:35 UTC 2026-11-25, CONFIRMED (executed): the client's own publish path (gallery.js :: shareMap -> publish_map; worldSnapshotPublic.js; opts as MapShareEditor :: buildShareOpts), one campaign of 4 today-born stored documents, 12 ticks (12 chronicle entries). Probe v52/snapchron/snapchron.probe.jsx at 9d04e2b74.
+
+== master
+{
+ "tree": "/home/user/wt/master",
+ "tpl": "v52mst",
+ "cases": [
+  {
+   "name": "every section ticked (the editor default)",
+   "sections": [
+    "worldClock",
+    "chronicle",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "snapshotKeys": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "chronicleEntries": 12,
+   "published": false,
+   "refused": true,
+   "shown": "World snapshot contains a forbidden private key and cannot be shared"
+  },
+  {
+   "name": "chronicle unticked",
+   "sections": [
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "snapshotKeys": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "chronicleEntries": null,
+   "published": true,
+   "refused": false,
+   "shown": null
+  }
+ ]
+}
+== tip
+{
+ "tree": "/home/user/wt/tip",
+ "tpl": "v28tpl",
+ "cases": [
+  {
+   "name": "every section ticked (the editor default)",
+   "sections": [
+    "worldClock",
+    "chronicle",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "snapshotKeys": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "chronicleEntries": 12,
+   "published": false,
+   "refused": true,
+   "shown": "World snapshot contains a forbidden private key and cannot be shared"
+  },
+  {
+   "name": "chronicle unticked",
+   "sections": [
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "snapshotKeys": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "dashboard"
+   ],
+   "chronicleEntries": null,
+   "published": true,
+   "refused": false,
+   "shown": null
+  }
+ ]
+}
