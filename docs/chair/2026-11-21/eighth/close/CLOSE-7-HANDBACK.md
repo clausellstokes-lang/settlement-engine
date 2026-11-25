@@ -155,8 +155,10 @@ GUARD MERGED (06:15 UTC) onto cures as eaf34abde (from -guard-wip 4569e73aa).
 - The lighting census was re-taken at 91c2b233f (3796 -> 3798).
 - STEP A: the distillate was re-made by its own script (4569e73aa; diff = the version alone). The null: no reader cures anything;
   the field goes from absent to null.
-- RULING ASKED: the edge bundle (intentAtlasBundle freshness red; its door `npm run build:edge-shared` writes deployable
-  supabase/functions/_shared bundles, engineBundle among them). My recommendation: list it for the owner, not built.
+- R24k 4a (06:17): BUILD NOTHING. The edge bundle stays stale, under the standing class "bundle freshness"; every bundle is rebuilt
+  ONCE in the end's signing window. OWED IN THE HAND-IN: the exact new red rows by job, file and title. These are the intentAtlas
+  freshness test, plus edgeSharedBundleReproducibility's intentAtlasBundle.meta.json row if it reds. The chair adds them to
+  RED-AT-LINE.tsv; nothing else joins.
 - STEP B is RUNNING (same builder): (c2) merged 91c2b233f vs parent cc7ddec1c, (c1), and the four drift counts (3ii).
 - IF (c2) has ONE differing row: `git -C /home/user/wt/cures revert -m 1 eaf34abde`, then tell the chair.
 
