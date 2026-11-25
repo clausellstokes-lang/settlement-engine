@@ -9,3 +9,4 @@ rosterChoiceRegistry.mjs --check rc=0 2026-11-24T23:55:40Z
 standingForms.mjs --check rc=0 2026-11-24T23:55:41Z
 arm tests/security/galleryVeilRival.pglite.test.js INTERRUPTED by the container's restart ~01:03 (held the lock from 00:53; no result); logs kept in interrupted-0103/
 arm tests/security/galleryVeilRival.pglite.test.js rc=0 2026-11-25T01:22:23Z Tests  2 passed (2)
+arm tests/security/galleryVeilDesc.pglite.test.js rc=0 2026-11-25T01:33:40Z Tests  11 passed (11)
