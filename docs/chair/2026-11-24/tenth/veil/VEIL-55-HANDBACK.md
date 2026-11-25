@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 05:23 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 07:27 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -39,10 +39,30 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 `lane/veil-55-2026-11-24-r4ids-wip` (= 8430edf5c), worktrees as "TREES AND MACHINE" below, then
 `sh v55/m0.sh` and `sh v55/p1.sh` (paths inside them), each detached; read `v55/out/` on this branch for what had finished.
 
-### THE ONE LIST (for a chair or successor on another account; current at 04:18 UTC 2026-11-25, read from date -u)
+### THE ONE LIST (for a chair or successor on another account; current at 07:27 UTC 2026-11-25, read from date -u)
 - MERGED on the lane's tip `lane/veil-55-2026-11-24-tip`: b58abc48b (PIN-3) -> 8430edf5c (UNIT 2, R4-IDS + R4I-SQL-2; granted
   02:46) -> dbd4cd9e5 (UNIT 1, STORED-PROSE d7764e67a; 212 header (37)). 212 sha256 at the tip 826fb94100741822.
 - GRANTED AND UNMERGED: none.
+- UNIT 3 IN INTEGRATION (07:27): "TIP? IMPORT-DOOR 2f849aa53" from VEIL-52 (`lane/veil-52-2026-11-24-dsql-wip`, on dbd4cd9e5;
+  its proofs `v52/out/U3-SLICE-PROOFS.txt`, hunk `v52/out/U3-212-HUNK.diff`). READ WHOLE BY ME (again after a compaction, 07:3x):
+  212 header item (39) + get_gallery_map restated (each member = get_unlisted_dossier's splice over src.j, the frozen copy in
+  snapshot mode, then `_gallery_veil(proj.d, ovr, true)`; no fallback to the unveiled projection; Reveal DM never; grant as
+  211's) and the rollback (211's body verbatim with its grant): NO FAULT. Tests read whole: galleryMapCovert (plant, tooth,
+  chain B's two places, Reveal DM recorded), galleryImportEqualsRead (140 towns x 6 shares: import = gallery read; ~3,000 s
+  ALONE: a cost the full security run carries), ServerVeil (member = the link's page modulo the bijection; its tooth runs only
+  where an `npc#` card exists, not asserted: a note), MemberCount (harness loads the apply). LISTED DIFFERENCE: import_gallery_map
+  now returns the link's read (for_import false), falling toward withholding. FOR UNIT 4's RE-MERGE: get_gallery_map is a
+  FIFTH DOOR: V27 (1)'s withheld set read off the stored row must reach it too (s.data / src.j are in hand there). FOR THE
+  JOIN: VEIL-53's anon arm counts get_gallery_map among the doors that still serve both roles after V23's revoke.
+  MY SLICE: `v55/u3.sh` (galleryMapCovert + galleryServerVeil, red on the tip's 212 in scratch worktree /home/user/wt/u3red,
+  green on /home/user/wt/u3; log /var/tmp/v55/u3.log). NEXT: "TIP? IMPORT-DOOR" to the chair (its whole read of the hunk);
+  on the grant merge onto the tip, (39) renumbered (38).
+- RULINGS V25 (05:26, unit 4: the rule is on what is served; a desc no row matches is served; a different-span tie withheld),
+  V26 (06:53, the down file re-grants the hosted ACL by exact signature; the rollback block's compare under the hosted harness;
+  the owner's read-only pre-check query on the owner page), V27 (07:19, the withheld set = every stored power the served doc
+  does not name, read off the stored row; the census's oracle = the writer; re-measured 0 on both pools; a door that cannot
+  see the stored row STOPS to the chair). All in RULING-V1.md on `lane/chair-2026-11-08`.
+- SLIP (07:3x): the save loop died at a restart (~05:13, last push-rc 1) and this section went unpushed 05:25 to 07:27: restarted.
 - RESTORE THE MACHINE: `sh docs/chair/2026-11-24/tenth/veil/v55/restore.sh` (after a restart ~5 s: PostgreSQL and the save loop;
   fresh container ~12 min: worktrees, make-instruments, stored sets, templates). The container restarted again ~05:13: restored.
 - THE CHAIR'S EFFICIENCY RULES (05:12): seats report to me only (<=200 words); to the chair only a ruling asked, a "TIP?", a merge,
@@ -78,7 +98,7 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
   RE-BORN on the joined tree, no figure from a pool born below 116 carried into the proof; GENERATION_LAWS five lit rows (cure E
   walks the registry: no hand list); a test anchored on a named seed for a crime wave or a guild quarrel re-anchored by its own
   finder, the assertion word for word. Pass this to the seats AT THE JOIN, not now.
-- THE NEXT COMMAND (mine): wait for unit 4's "TIP?" (VEIL-51, after its compaction); (was: the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
+- THE NEXT COMMAND (mine): unit 3's slice, then its "TIP?" to the chair; then units 4+5's "TIP?" (VEIL-51, one, V25/V27); (was: the quiet-box items on dbd4cd9e5 (worktree /home/user/wt/tipm): the order count; `npm run build` then
   the four VERIFY_DIST reds by name; writer-reach's three identities; then read unit 4's "TIP?" (its 212 hunk to the chair first).
 
 ### NOW (04:1x UTC 2026-11-25): R4-IDS MERGED (tip 8430edf5c, pushed 02:52); UNIT 1 MERGED ON THE TIP (dbd4cd9e5)
