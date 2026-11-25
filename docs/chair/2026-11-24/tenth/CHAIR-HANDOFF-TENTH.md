@@ -1247,3 +1247,30 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   THE MARKS: CLOSE-7 at 10:49: 512,600 of 1,000,000, working, cost 486.95 (460.77 at 08:10: about 10 an hour, half
   its earlier rate); its FIRST HAND-IN IS NOT IN YET. BIRTH-1 at 09:54: working. Every record `allowed_warning`; none
   rejected. The hourly check is armed for 12:00.
+- 2026-11-25 11:49 UTC · T98 · "CLOSE-7 97c6bfc7a" RECEIVED; THE LANDING OF POINT 117 IS RUNNING (started 11:47); THE CHAIR's READ OF GUARD; A SECOND READER ON IT.
+  WHY NOW: CLOSE-7 said (11:45) its own COMMON-EIGHTH 14 runs needed 75 more minutes; the landing's gate is the same
+  suite on the merged line: the chair had it hand in at once and stop (c), (e), (f) (2 of 4 parts of (c) had run: 300
+  files). THE HAND-IN (`lane/close-7-2026-11-24-cures` 97c6bfc7a, the line's tip its ancestor; 33 files of `src`, +693
+  -119): A1 bb457f3bf; A2 520ddb6a8; the mirror e2fd7caa4; the line 116 merged 27408d4ec; GUARD eaf34abde (the
+  distillate 4569e73aa); BATCH e9b726cdf (B1(i) f82d9d671, B1(ii) 3388806b4, C1 under R24m with the alias removed
+  b9b5ea268, P3source 4fc54fb45, a test-only re-anchor 17c4e4771); doors re-taken: lighting, wiring, observed-shape,
+  writer-reach, the mutation manifest.
+  ITS KNOWN NEW REDS: bundle freshness 2 (the intentAtlas rows); THE OWNER's SIGNING 4 (B1(ii) re-deals the news year:
+  `newsHeadlineContract`, `newsVoiceContract`, `observedShapeReaders`' executed corpus (wizardNews unique 419 to 420,
+  final 417 to 418, accumulated 2627 to 2636), `proseFamilyContract` A1 (scalarRows 38,197 to 38,297)); figures
+  in-file 3 (`editCorpusRatchet` A4 and A5, `mergeLadderHeldKeys` A2: THE CHAIR ASKED WHICH WAY EACH MOVED BEFORE
+  ANYONE TOUCHES THEM); unclassed 5 (`dossierPhoneFloorAllViews` twice, `traditionsSameWindowChain` soak1k-5255,
+  `bar6ScenesGoods` B7, `bar8DesksEco` 11c: CLOSE-7 reads each cause and cures the stale anchors test-only on
+  `-anchors-wip` while the gate runs: "ANCHORS <commit>"). C1 golden rows 0; about 24 golden files red at GUARD's cut
+  and the same at its tip; nothing re-recorded.
+  THE LANDING: `prompts/START-LAND-117.txt` (a no-ff merge of 97c6bfc7a onto the line, the gate of point 116's form,
+  the classes (1), (S), (B), (F), (4)); scratch `landing/117/`; it pushes only `lane/stack-117-wip-2026-11-25`.
+  THE CHAIR's READ (at high effort): the five GUARD files' diffs whole (`settlement.schema.js`: 0.10.0 and
+  LEGACY_GENERATOR_VERSION; `normalizeSettlement.js`: a stampless record takes the legacy; `assembleSettlement.js`: the
+  birth stamps over it; `editSlice.js :: applyRosterDecreesAtTick`: `bornHere` by strict equality, `appendMinted`
+  before either lane, `rederived: appended === null`; `dmLayer.js`: `appendMinted` never throws, `resolveNewcomers`
+  shared with `pinsFrom`) and C1's eight small files: NO FAULT FOUND; one search made (no reader recognises the bought
+  hall by the words "corrupt" or "shadow" in a name). OPEN QUESTION THE CHAIR COULD NOT CLOSE BY READING AND PUT TO THE
+  SECOND READER: every path that can stamp '0.10.0' onto a record this engine did not bear (a section re-roll, a
+  clone, an import), since `assembleSettlement` stamps on every pipeline run. THE LINE DOES NOT MOVE BEFORE THE SECOND
+  READER's REPORT, the gate, and the rulings on every (4) and (F).
