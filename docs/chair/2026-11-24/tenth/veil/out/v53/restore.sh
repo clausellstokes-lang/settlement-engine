@@ -5,8 +5,10 @@
 set -e
 R=/home/user/settlement-engine; cd $R
 git fetch -q origin lane/veil-53-2026-11-24-join-wip lane/veil-53-2026-11-24-grants-wip lane/veil-53-2026-11-24-j1-wip \
-  lane/veil-53-2026-11-24-cures-wip lane/chair-2026-11-08 review-fixes-2026-07-08
-git branch -f review-fixes-2026-07-08 FETCH_HEAD 2>/dev/null || git branch -f review-fixes-2026-07-08 origin/review-fixes-2026-07-08
+  lane/veil-53-2026-11-24-cures-wip lane/chair-2026-11-08
+# the ledger ref BY ITS OWN NAME (a multi-branch fetch leaves FETCH_HEAD at the FIRST branch: the first version of this
+# script reset the ledger ref to the trial join that way at 05:14 UTC 2026-11-25, and three ledgerCitationIntegrity tests read red)
+git fetch -q origin review-fixes-2026-07-08 && git branch -f review-fixes-2026-07-08 origin/review-fixes-2026-07-08
 wt() { # <dir> <branch>
   [ -d "$1" ] && return 0
   if git show-ref -q --verify refs/heads/$2; then git worktree add -q "$1" "$2"; else git worktree add -q -b "$2" "$1" "origin/$2"; fi

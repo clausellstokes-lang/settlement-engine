@@ -64,3 +64,12 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
   _gallery_veil_str, not its own grant). Next: tests/lint whole, tests/security whole.
 - tests/lint whole after 81738f851: 67 failed = known 66 + mutationCoverageManifest TOTALITY (the new file, enumerated by
   directory). Fixed: 73a3f8743 adds its manifest row (rationale pglite-executed); that test 10 passed. Re-running both wholes.
+- FINAL wholes at 73a3f8743: tests/security (maxWorkers=2, c4-security.log) 7 failed | 2198 passed | 1 skipped (2206): the known
+  seven. tests/lint (maxWorkers=1, c5-lint.log) 69 failed = known 66 + 3 ledgerCitationIntegrity (ONLY-SHRINKS, alias table,
+  numbering): ENVIRONMENTAL. The test reads refs/heads/review-fixes-2026-07-08, and that local ref was reset at
+  2026-11-25 05:14:22 UTC ("branch: Reset to FETCH_HEAD") to ba7460c33 (the trial join), between my two lint runs, by
+  something other than this builder. Left as found.
+- Commits on lane/veil-53-2026-11-24-grants-wip: fd5480850 (carried read), cca234bc7 (V23 close), 81738f851 (arm),
+  73a3f8743 (manifest row). Not pushed.
+- Rollback: supabase/rollback/212_*.down.sql not touched; its create-or-replace keeps the V23 revokes (the rollback test was
+  already red for the two 211s).

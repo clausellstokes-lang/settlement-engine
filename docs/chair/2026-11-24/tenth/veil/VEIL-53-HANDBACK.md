@@ -33,7 +33,7 @@ BUILT, NOT MERGED (all pushed unless said):
   resolver into computePublicLegitimacy; the GENERATION_LAWS walk in the arm with a planted fifth row; seat law NOT forgotten);
   sent to VEIL-55 with its named departure.
 - The samenessHideable wording: 1ffb2328b PUSHED on -cures-wip (cites only; tests/lint whole 65 = the join's 66 less D's).
-RUNNING: the ANON ARM's builder on grants-wip (`briefs/V53-ANONARM-BRIEF.md`; notes `out/v53/anonarm/NOTES.md`). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
+RUNNING: the FAIL-CLOSED PAGES slice in pushed batches (`out/v53/pages/batches.sh`; table `out/v53/pages/slice-table.txt`). The PAGES slice was STOPPED at 22:50 (the chair's order: it comes after the anon arm).
 THE QUEUE, IN ORDER (the chair, 22:48, governs): (1) J1: DONE. (2) V3's five cures A-E, one builder each, stacked on `lane/veil-53-2026-11-24-cures-wip` from ba7460c33 (brief
 `briefs/V53-CURES-V3-BRIEF.md`). (3) The anon arm + carried read + the call-graph read (`briefs/V53-ANONARM-BRIEF.md`) on
 grants-wip. (4) FAIL-CLOSED PAGES (RULING V6): size it first: `out/v53/pages/slice.sh` (PAGES' probe verbatim, every 12th of the
@@ -87,3 +87,4 @@ renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "
 - 02:3x cure D pushed (168587f9c) with its departure to the chair; the wording commit dispatched.
 - 02:52 R4-IDS MERGED (lane tip 8430edf5c, lane/veil-55-2026-11-24-tip). 02:51 the chair's V19 on cure D.
 - 03:0x wording commit pushed (1ffb2328b); the anon arm dispatched.
+- 05:2x the anon arm done (73a3f8743 pushed). MY ERROR: restore.sh reset the local ledger ref to ba7460c33 at 05:14 (FETCH_HEAD after a multi-branch fetch); repaired to 235efce1a, script fixed.
