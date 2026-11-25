@@ -405,8 +405,15 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
     for (const cls of ['grouping', 'switch', 'card:institution', 'field:npc', 'field:institution', 'field:faction', 'field:event', 'field:relationship']) {
       expect(CLASSES, cls).toContain(cls);
     }
+    // (VEIL-53 cure C, RULING V3 (4)) what `added` holds under the lane's curate model: NOTHING. The lane's VR34
+    // (97e51d7f6) builds `staffed` from `npcHouseOf` over every npc copy, so `galleryVeil.js :: curateModelFor` offers
+    // the house car's People eye itself; the hand reading of veil-22 adds no eye this tree's model lacks. The People eye
+    // is found by the test's own finder (`modelAddresses`) in a town of the pool, and it is in the pool every arm hides.
     const added = towns.flatMap((t) => t.v22.filter((a) => !t.here.includes(a)));
-    expect(added.some((a) => a.endsWith(':people'))).toBe(true); // the house car's People eye, which this tree's model omits
+    expect(added, 'veil-22\'s hand-read eyes this tree\'s model lacks').toEqual([]);
+    const staffedTown = towns.find((t) => t.here.some((a) => a.endsWith(':people')));
+    expect(staffedTown, 'a town whose curate model offers a house\'s People eye').toBeTruthy();
+    expect(staffedTown.all.some((a) => a.endsWith(':people'))).toBe(true);
     const stored = towns.find((t) => Array.isArray(t.raw.factions));
     expect(copiesOf(stored.raw, 'npc').length).toBeGreaterThan(copiesOf({ npcs: stored.raw.npcs }, 'npc').length); // roster copies
     const income = towns.find((t) => {
@@ -456,7 +463,15 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
     const t = towns.find((x) => hiddenNamesOf(x.raw, x.pub, applyVeil(x.pub, allHidden(x))).houses.length > 0);
     const hidden = hiddenNamesOf(t.raw, t.pub, applyVeil(t.pub, allHidden(t)));
     const plant = (name) => t.rows.map((r, i) => (i === 0 ? { ...r, text: `${r.text} It is kept by ${name}.` } : r));
-    expect(namedHidden(plant(hidden.houses[0]), hidden)).toEqual([`${t.rows[0].name}: ${hidden.houses[0]}`]);
+    // (VEIL-53 cure C, RULING V3 (4)) the expectation follows the lane's veil: the house hidden whole is named in NO
+    // string of the served document, so it is a removed phrase too and the check counts it twice (as a house, and as a
+    // phrase). The rule that removes its last copy, CONFIRMED by execution (a probe with the step neutralized keeps it):
+    // `gallerySecondHomes.js :: withholdSecondHomes`, the `economicState.activeChains` step (`hiddenName` takes each
+    // processing name only a house hidden whole answers to out of a chain's `processingInstitutions`).
+    expect(hidden.values, 'the hidden house is a removed phrase as well').toContain(hidden.houses[0]);
+    expect(namedHidden(plant(hidden.houses[0]), hidden)).toEqual([
+      `${t.rows[0].name}: ${hidden.houses[0]}`, `${t.rows[0].name}: ${hidden.houses[0]}`,
+    ]);
     expect(namedHidden(plant(hidden.values[0]), hidden).length).toBeGreaterThan(0);
   }, 240000);
 
@@ -467,13 +482,29 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
   }, 240000);
 
   it('THE CHAIR\'S QUESTIONS (a) and (b): with everything hidden, every non-veiled power, the stress readings, every event row and the founding stand', () => {
+    let rescaled = 0;
     for (const t of towns) {
       const veil = allHidden(t);
       // the served document against the projection it was veiled from; the record the rows are drawn over against the owner's
       for (const [doc, before] of [[applyVeil(t.pub, veil), t.pub], [hiddenFrom(t.raw, veil), t.raw]]) {
-        const floor = (f) => [nameOf(f), f.category, f.power, f.isGoverning === true, factionArchetype(f)];
-        const powers = (s) => (s.powerStructure?.factions || []).filter((f) => !isVeiledPower(f)).map(floor);
-        expect(powers(doc), `${t.tier}: powers`).toEqual(powers(before));
+        // (VEIL-53 cure C, RULING V3 (4)) compared by what the ruling keeps: each non-veiled power's name, category, seat
+        // and archetype, in order; the share as the lane serves it (VR31: `galleryRosterChoices.js :: applyRosterChoices`,
+        // registry row `power.share`, re-derives the served shares to 100 by largest remainder wherever a power is
+        // withheld, 06e9e64b3), so the share is not a floor: it sums to 100, it is the owner's where no power was withheld,
+        // and where one was (the case found by its own finder: the open shares short of 100) no power passes one it trailed
+        const floor = (f) => [nameOf(f), f.category, f.isGoverning === true, factionArchetype(f)];
+        const open = (s) => (s.powerStructure?.factions || []).filter((f) => !isVeiledPower(f));
+        expect(open(doc).map(floor), `${t.tier}: powers`).toEqual(open(before).map(floor));
+        const shares = (s) => open(s).map((f) => f.power);
+        const sum = (l) => l.reduce((a, v) => a + v, 0);
+        expect(sum(shares(doc)), `${t.tier}: the served shares`).toBe(100);
+        if (sum(shares(before)) === 100) expect(shares(doc), `${t.tier}: shares, nothing withheld`).toEqual(shares(before));
+        else {
+          rescaled += 1;
+          const [b, d] = [shares(before), shares(doc)];
+          const passed = b.flatMap((x, i) => b.flatMap((y, j) => (x > y && d[i] < d[j] ? [`${i} < ${j}`] : [])));
+          expect(passed, `${t.tier}: a share passed one it trailed`).toEqual([]);
+        }
         expect(nameOf(governingFactionOf(doc)), `${t.tier}: the seat`).toBe(nameOf(governingFactionOf(before)));
         const crisis = (s) => { const c = crisisOf(s); return [c.types, c.kinds, c.families, c.conditionKinds]; };
         expect(crisis(doc), `${t.tier}: crisis`).toEqual(crisis(before));
@@ -483,6 +514,7 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
         expect(doc.history?.founding?.foundedBy, `${t.tier}: founding`).toBe(before.history?.founding?.foundedBy);
       }
     }
+    expect(rescaled, 'a document whose shares the lane re-derived (a veiled power withheld)').toBeGreaterThan(0);
   }, 240000);
 });
 
