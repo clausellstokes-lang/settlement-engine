@@ -107,6 +107,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/data/npcData.js', name: 'NPC_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerData.js', name: 'FACTION_NAME_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerSiblings.js', name: 'BASELINE_CONFLICT_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/powerSiblings.js', name: 'CRISIS_BODY_SIBLINGS', kind: 'siblings' }, // BIRTH-1 D7 (G18)
   { module: 'src/data/powerSiblings.js', name: 'FACTION_DESC_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/stressTypes.js', name: 'STRESS_TYPE_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/stressorSpinePhrases.js', name: 'STRESSOR_SPINE_SIBLINGS', kind: 'siblings' },

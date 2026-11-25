@@ -183,6 +183,8 @@ export const LEAVES = Object.freeze({
   guild: home('guild', 3, ['powerStructure', 'institutions']),
   // TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one, by its own standing
   rivalPower: home('rivalPower', 3, ['powerStructure']),
+  // BIRTH-1 D7 (the tenth chair's ruling G18): a power of the crisis's own on the roster (`crisisBody.js`)
+  crisisBody: home('crisisBody', 3, ['powerStructure'], { call: 'factsCall' }),
   // BAR5-POWERS (the chair's ruling SO1): a power above the seat, by its own standing
   seatOutranked: home('seatOutranked', 3, ['powerStructure']),
   // BAR6-POWERS (6d-members): the seat's members as the page counts them (the cast's memberships), else the government's label

@@ -36,6 +36,7 @@ import { warStateOf } from './warState.js';
 import { hasInstitution, liveInstitutionNames } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { rivalPowerOf } from './rivalPower.js';
+import { crisisBodyOf } from './crisisBody.js'; // BIRTH-1 D7 (G18)
 import { seatOutrankedOf } from './seatOutranked.js';
 import { seatMembersOf } from './seatMembers.js';
 import { ironAtHandOf } from './ironAtHand.js'; // BAR2-PLACES (VW2)
@@ -154,6 +155,8 @@ export function factsOf(record, options = {}) {
     get guild() { return guildOf(record); },
     /** TAIL-CRISIS-2 (the chair's ruling K6): a power not the governing one stands at Significant or above (`rivalPower.js`) */
     get rivalPower() { return rivalPowerOf(record); },
+    /** BIRTH-1 D7 (the tenth chair's ruling G18): a power of the crisis's own stands on the roster, not the governing one (`crisisBody.js`) */
+    get crisisBody() { return (/** @type {string} */ key) => crisisBodyOf(record, key); },
     /** BAR5-POWERS (the chair's ruling SO1): a power not the governing one stands above the seat (`seatOutranked.js`) */
     get seatOutranked() { return seatOutrankedOf(record); },
     /** BAR6-POWERS (6d-members): the governing power holds more than one member, as the page counts them (`seatMembers.js`) */

@@ -114,7 +114,7 @@ export function leafTouches(row, record, modules, stratumOf) {
     else if (getter === 'sharesPlace' || getter === 'loneTie') facts[getter](Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // BAR4-PEOPLE (11:07): a pair of the roster
     // CLOSE-SWEEP S4 item 2 (the chair, 2026-11-18): a key never probed is a read never seen. A keyed home is probed with EVERY
     // key the vocabulary declares for it (`vocabularyKeysOf`, derived), and the pair home with every pair of the roster.
-    else if (getter === 'tradeAtWork' || getter === 'goodExported') for (const key of vocabularyKeysOf(getter)) facts[getter](key);
+    else if (getter === 'tradeAtWork' || getter === 'goodExported' || getter === 'crisisBody') for (const key of vocabularyKeysOf(getter)) facts[getter](key); // BIRTH-1 D7 (G18): `crisis body: <kind>`, every kind it declares
     else if (getter === 'seatHeld') {
       const roster = Array.isArray(record.npcs) ? record.npcs : [];
       for (let i = 0; i < roster.length; i++) for (let j = i + 1; j < roster.length; j++) facts.seatHeld([roster[i], roster[j]]);
