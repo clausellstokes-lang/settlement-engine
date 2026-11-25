@@ -1,0 +1,40 @@
++ Received
+
+- []
++ [
++   "src/domain/display/galleryRosterChoices.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/display/gallerySecondHomes.js: baseline em:0 bang:0 → current em:0 bang:18",
++   "src/domain/display/galleryWithholdAlways.js: baseline em:0 bang:0 → current em:20 bang:0",
++ ]
+
+ ❯ tests/copy/voiceMechanics.test.js:675:46
+    673|       }
+    674|     }
+    675|     expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+       |                                              ^
+    676|   });
+    677|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > total debt never grows past its committed budget
+AssertionError: expected 26 to be less than or equal to 15
+ ❯ tests/copy/voiceMechanics.test.js:690:25
+    688|     );
+    689|     expect(totals.em).toBeLessThanOrEqual(EM_BUDGET);
+    690|     expect(totals.bang).toBeLessThanOrEqual(BANG_BUDGET);
+       |                         ^
+    691|   });
+    692| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 14 passed (15)
+      Tests  2 failed | 170 passed (172)
+   Start at  02:12:55
+   Duration  36.33s (transform 9.87s, setup 252ms, import 24.30s, tests 35.41s, environment 1ms)
+
+[gate-tail] end:  02:13:31 up  1:09,  0 user,  load average: 1.23, 2.03, 2.32
+[gate-tail] full log: /var/tmp/v51/out/rival/tmp/gate-tail.17313.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

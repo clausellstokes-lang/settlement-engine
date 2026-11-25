@@ -1,0 +1,9 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 18355 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+(i) THE COST LAW on v11-ties-metropolis-calm-0 (498754 characters), the default veil record, as anon, 9 rounds (after one warm-up), medians, ms; load 1.22 1.83 2.21
+| read | 211 | 9b1fe3c34 212 | this 212 |
+|---|---|---|---|
+| gallery, Reveal DM off | 269.7 | 470.5 | 509.7 |
+| gallery, Reveal DM | 180.1 | 501.8 | 539.3 |
+| link | 211.0 | 466.2 | 454.1 |
+this 212's Reveal-DM read 539.3 ms against twice 211's Reveal-off read (2 x 269.7 = 539.4): WITHIN
+this 212 against 9b1fe3c34's: 1.08, 1.07, 0.97

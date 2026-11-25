@@ -19,3 +19,10 @@ arm tests/lint/mutationCoverageManifest.test.js rc=0 2026-11-25T02:00:23Z Tests 
 arm tests/lint/rosterChoicePools.walker.test.js rc=0 2026-11-25T02:00:25Z Tests  6 passed (6)
 arm tests/lint/standingReaders.walker.test.js rc=0 2026-11-25T02:00:27Z Tests  5 passed (5)
 standingForms.mjs --check rc=0 2026-11-25T02:00:27Z
+tests/lint whole rc=1 2026-11-25T02:12:54Z Tests  45 failed 
+tests/copy whole rc=1 2026-11-25T02:13:31Z Tests  2 failed 
+check-full-typecheck rc=0 2026-11-25T02:14:02Z [gate-tail] end:  02:14:02 up  1:10,  0 user,  load average: 1.50, 2.00, 2.29 [gate-tail] full log: /var/tmp/v51/out/rival/tmp/gate-tail.17827.log [gate-tail] exit: 0 (the gate's own status, not a pipe's) 
+eslint rc=0 2026-11-25T02:14:04Z
+apply-212-at-9b1fe3c34 rc=0 2026-11-25T02:14:08Z
+largest-metropolis rc=0 2026-11-25T02:14:27Z v11-ties-metropolis-calm-0 498754
+cost-law rc=0 2026-11-25T02:15:05Z this 212's Reveal-DM read 539.3 ms against twice 211's Reveal-off read (2 x 269.7 = 539.4): WITHIN

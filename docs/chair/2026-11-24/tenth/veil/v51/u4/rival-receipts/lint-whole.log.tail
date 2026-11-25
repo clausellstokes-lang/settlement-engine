@@ -1,1 +1,40 @@
-gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11131 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++     "now": 9,
++     "was": 0,
++   },
++ ]
+
+ ❯ tests/lint/styleLaw.walker.test.js:52:7
+     50|       verdict.rises,
+     51|       `the style law: a struck phrase rose (rewrite the line; the reti…
+     52|     ).toEqual([]);
+       |       ^
+     53|   });
+     54|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[44/45]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[45/45]⎯
+
+
+ Test Files  17 failed | 210 passed (227)
+      Tests  45 failed | 3269 passed (3314)
+   Start at  02:00:28
+   Duration  746.00s (transform 22.91s, setup 3.16s, import 643.54s, tests 820.66s, environment 18ms)
+
+[gate-tail] end:  02:12:54 up  1:08,  0 user,  load average: 1.09, 2.11, 2.35
+[gate-tail] full log: /var/tmp/v51/out/rival/tmp/gate-tail.11482.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
