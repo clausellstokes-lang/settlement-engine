@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1d894273ad30e3ac14531016570c1f1118e983e5",
-  "measuredBy": "KINDS-2",
-  "date": "2026-11-24",
-  "note": "KINDS-2 at the merge of point 114 (f9531eb3a): the line census plus the trouble lane three test files (tests/domain/trouble), measured on a clean tree",
-  "files": 3792,
-  "parked": 490,
+  "measuredAtSha": "27408d4ec0c6ec1898eaaa1c060e732ee4abb741",
+  "measuredBy": "CLOSE-7",
+  "date": "2026-11-25",
+  "note": "the line ddca5c789 (point 116) merged onto the cures (A1, A2, the mirror): the census re-taken at the merge",
+  "files": 3796,
+  "parked": 494,
   "credited": 3302,
   "titles": 31971,
   "suiteTitles": 8887
