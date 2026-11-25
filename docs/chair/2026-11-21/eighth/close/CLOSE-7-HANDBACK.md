@@ -63,10 +63,22 @@ CONTAINER RESTART at about 01:20 UTC 2026-11-25. The worktrees all survived.
   with `-mirror-wip` fe948997a.
 - Chain one (a4c1ad5101be44ef0) was RESUMED to finish the mirror.
 
-THE NEXT COMMAND: when the mirror's report lands, run
-`git -C /home/user/wt/mirror log --oneline e7441a93f..HEAD`, read the diff once, merge onto cures, run the gates as for A2 (the
-lighting census by its door if a test file was added), push, and send the mirror line. Then dispatch LIVE-PATH with a fresh
-Agent (brief `close-7/briefs/LIVE-PATH.md`).
+STATE AT 02:35 UTC 2026-11-25:
+- THE MIRROR is MERGED onto cures as e2fd7caa4 (from -mirror-wip 62efe59ee). The line was SENT to the chair.
+  - FEDFARE goes red first on C 4 / V 3, then 0 / 0. Records moved 0. Pages moved C 4 / V 3.
+  - K2 prints on no page; K1 on 2 (C dp-hamlet-117, V dp-hamlet-139).
+  - The row's name departs from the chair's word ("plenty" reds a lint walker): named to the chair for veto.
+  - The veto list gains K2, K1 and the atom `food production: ≥ adequate`.
+- Cures now holds A1, A2 and the mirror. Its tip is e2fd7caa4; the lighting census stands at 3790 files.
+- RUNNING: a FRESH builder doing phase 1, LIVE-PATH, on the line's tip 0559a8405, with master db832c892. Its trees are
+  `/home/user/wt/line` and `/home/user/wt/master`, kept for phase 2. It sends a table and 100 words, then WAITS.
+- Phase 2 is GUARD (`close-7/briefs/GUARD.md`, R24j). It builds in `/home/user/wt/guard` on `-guard-wip`, cut at e2fd7caa4, and
+  starts on my word after I forward LIVE-PATH to the chair.
+- B1(i)'s finish may ride beside GUARD (their files do not meet). But point 116 (troubles LIT) re-births C and V, so B1(i)'s
+  table is re-stated after 116 lands. Prefer to start B1(i)'s finish when the 116 line arrives.
+
+THE NEXT COMMAND: on LIVE-PATH's message, read `close-7/reports/LIVE-PATH.md`, send its table and the 100 words to the chair,
+then SendMessage the builder "start phase 2".
 
 ### 0.1 Ground
 - THE LIT TREE (before every cure): `/home/user/wt/lit`, detached at d447ee31e (the flip; `origin/lane/close-6-2026-11-23-flip`).
