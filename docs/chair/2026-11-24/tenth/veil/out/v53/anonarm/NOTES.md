@@ -46,3 +46,6 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
   'other_role', …(4) }` (missing postgres_new_function_handed_to_*), 1 failed | 23 passed (24). GREEN: 24 passed (24).
   Owner files: only 0b changed; figures JSON byte-identical. Logs /var/tmp/v53/anonarm/c2-*.log.
 - next: tests/lint whole (maxWorkers=1), tests/security whole (maxWorkers=2).
+- tests/lint whole after fd5480850 (maxWorkers=1, /var/tmp/v53/anonarm/c2-lint.log): 66 failed | 3376 passed (3442); the
+  66 titles = /var/tmp/v53/grants/lintfails.txt exactly (diff differs only by that list's truncation). No new red.
+- tests/security whole running (maxWorkers=2, c2-security.log).
