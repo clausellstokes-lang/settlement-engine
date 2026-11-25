@@ -431,3 +431,11 @@ nothing is bought in beside a marked need. THE TWO NEW SENTENCES, FOR THE OWNER'
 its way, and buys in what it cannot make for itself." and "What <town> eats it grows, and what it spends it earns; some
 of what it needs is bought in." The sameness register is not re-taken: `--write` still refuses on the eleven slots
 until E13d. WORDS-2's hand-back section 0 (docs 37734ade0) carries every unit and E13d written whole for the next seat.
+
+**G41 (20:45 UTC): E13b RECEIVED (`lane/words-1-2026-11-25-e13b-wip` 7afbb043b, on E8b e75f090b7).** Behaviour strings moved
+C 812 in 333 places, V 694 in 336 (the measure said 826 and 703: the difference is the residual cards that wrap to the
+first line); the record's hash with `presentation.behaviour` set aside equal on 900 of 900 in both sets; no town
+without a doubled pair moved (0 of 567, 0 of 564); no two cards of a pair share a line while the pool allows; residual
+16 cards on C (12 pairs at four, 2 at five) and 9 on V. Five drafts were re-worded for the style and presumption
+walkers. THE 70 SENTENCES WENT TO THE OWNER FOR HIS VETO (the chair read the first two dispositions' tables: each says
+what its first line says, in the table's voice). WORDS-1 hands over after this.
