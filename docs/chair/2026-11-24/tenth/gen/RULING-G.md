@@ -363,3 +363,8 @@ sentence because it is 25 characters long. (2) and (3): NOTHING BUILT; raising a
 a title loosens a door: THE OWNER'S, named with the chair's recommendation (the door should not count a role title or
 a fixed caption as a drawn sentence). SINCE WHEN: the register was taken once, at 7e93c087b on 2026-11-20, and never
 re-taken; nothing says which of the 1,489 commits since crossed each ceiling.
+
+**G33 (17:57 UTC): TWICE-IN-PANEL RECEIVED.** Written whole in `PRERELEASE-LIST.md` (E13's parts). One real fault of
+wording: "How they deal" is one line per (register, temperament), up to five identical on a page: E13b, its own unit
+after point 118 (it moves a stored string on nearly every birth). The rest are labels and lists printed where they
+belong. E13a is built at 608f70826; its proofs run.

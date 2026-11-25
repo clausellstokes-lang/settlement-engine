@@ -128,3 +128,18 @@ hamlet 39%) is E3's, built. CAUTION ON THE READING: C and V each fix parts of th
 on a fixed part reads near 100% by the set's making; the lane's first step is to split those from true pools of one.
 The door's own check against its register (its own plan) is being run once by BIRTH-2: five counts owed (G23).
 The full lists: `gen/birth-2/same/` on `lane/birth-2-2026-11-25` once committed.
+
+## ADDED 17:57 UTC ON 2026-11-25: E13's PARTS, AS MEASURED (G32, G33)
+E13a (BUILT by WORDS-2, `lane/words-2-2026-11-25-e13a-wip` 608f70826, proofs running): hamlet Viability, a gate that
+fell forward; three true lines a state, drawn among the admitted. FOR THE OWNER (a door loosened is his): the NPCs help
+pill's ceiling (a fixed caption) and ten PDF slots where the door counts a role title as a sentence; the chair
+recommends the door not count either. E13b "HOW THEY DEAL" (NOT BUILT; after point 118): the NPC card's "How they
+deal" line is ONE line per (register, temperament) (`data/npcData.js` about :1480-1500, 12 temperaments a register),
+so every person of one register and temperament on a page prints the same sentence: up to FIVE on one page; the top
+line on C 95 and V 83 pages of 900, the next five on 48 to 70. Its cure is more lines a key, drawn per person and not
+repeated within a town where the pool allows: it moves a stored string on nearly every birth, so it lands alone, with
+its own count of pinned records moved. E13c: the rest of the 97 and 103 slots over the owner's bar on C and V, first
+split from the sets' fixed configuration. WHAT TWICE-IN-PANEL ALSO FOUND AND IS NOT A FAULT: a house's name on each of
+its service rows ("Access to a house of worship", up to 4); one goods list on two Economic Flows rows; a person
+named on two institutions' Connection rows. Pages with any line of six words or more twice in one panel: C 758, V 703
+of 900, by panel NPCs 926 / 847 line-instances, Institutions 598 / 494, Economics 273 / 542, Services 187 / 139.
