@@ -13,10 +13,9 @@
  *   KEPT_OPEN server-only by grant, but a user path needs it; the reason is in KEPT_OPEN_REASONS.
  * A NEW function with no row turns tests/security/hostedDefaultGrants.pglite.test.js red:
  * class it here (regenerate, or add the row by hand with the class its grants say).
- * Counts: SERVER 187, NOBODY 137, ANYONE 55, TRIGGER 23, KEPT_OPEN 3, USER 79.
+ * Counts: SERVER 187, NOBODY 139, ANYONE 54, TRIGGER 23, KEPT_OPEN 2, USER 79.
  */
 export const KEPT_OPEN_REASONS = Object.freeze({
-  "_gallery_sanitize_public_json(jsonb,text[])": "called by the SECURITY INVOKER _gallery_apply_member_overrides, which a user runs",
   "_gallery_world_snapshot_is_safe(jsonb)": "called by the SECURITY INVOKER trigger _saved_maps_world_snapshot_guard, which fires as the writing user",
   "operator_message_class_for_template(text)": "named in check operator_messages.operator_messages_template_class_check"
 });
@@ -61,14 +60,14 @@ export const FUNCTION_CLASSES = Object.freeze({
   "_deity_chart_axes_valid(jsonb)": 'ANYONE',
   "_founder_transfer_cron_should_dispatch(jsonb)": 'SERVER',
   "_founder_transfer_dial(text,integer)": 'SERVER',
-  "_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)": 'ANYONE',
+  "_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)": 'NOBODY',
   "_gallery_chronicle_entry(jsonb)": 'NOBODY',
   "_gallery_chronicle_json(jsonb)": 'NOBODY',
   "_gallery_dm_full_json(jsonb)": 'ANYONE',
   "_gallery_map_backdrop(jsonb)": 'ANYONE',
   "_gallery_npc_key(jsonb)": 'ANYONE',
   "_gallery_public_tile_rows()": 'NOBODY',
-  "_gallery_sanitize_public_json(jsonb,text[])": 'KEPT_OPEN',
+  "_gallery_sanitize_public_json(jsonb,text[])": 'NOBODY',
   "_gallery_veil(jsonb,jsonb,boolean,boolean)": 'NOBODY',
   "_gallery_veil_apply(jsonb,jsonb)": 'NOBODY',
   "_gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)": 'NOBODY',

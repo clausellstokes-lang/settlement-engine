@@ -2938,6 +2938,10 @@ create or replace function public._gallery_apply_member_overrides(
   ) ws;
 $$;
 
+-- RULING V23 (VEIL-53): both are called only inside the SECURITY DEFINER doors (and the closed veil helpers) and by no client
+revoke execute on function public._gallery_apply_member_overrides(jsonb, jsonb, jsonb, boolean, boolean, boolean) from public, anon, authenticated;
+revoke execute on function public._gallery_sanitize_public_json(jsonb, text[]) from public, anon, authenticated;
+
 -- [212: RESTATED (211's statement, with the cure)] public.get_gallery_dossier
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)

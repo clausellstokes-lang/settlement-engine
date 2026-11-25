@@ -62,7 +62,7 @@ describe('the register classes every public function (a function with no row red
   it('every KEPT_OPEN row carries its reason, and only those rows', () => {
     const kept = Object.keys(FUNCTION_CLASSES).filter((k) => FUNCTION_CLASSES[k] === 'KEPT_OPEN').sort();
     expect(kept).toEqual(Object.keys(KEPT_OPEN_REASONS).sort());
-    expect(kept.length).toBe(3);
+    expect(kept.length).toBe(2); // RULING V23: _gallery_sanitize_public_json closed (NOBODY) with _gallery_apply_member_overrides
   });
 });
 

@@ -30,7 +30,10 @@
    "public_identity_opt_in"
   ],
   "profilesColumns": 28,
-  "standingRows": [],
+  "standingRows": [
+   "_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)",
+   "_gallery_sanitize_public_json(jsonb,text[])"
+  ],
   "guardTriggers": [
    "saved_maps O _guard_server_owned_columns",
    "settlements O _guard_server_owned_columns"
@@ -67,7 +70,10 @@
    "public_identity_opt_in"
   ],
   "profilesColumns": 28,
-  "standingRows": [],
+  "standingRows": [
+   "_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)",
+   "_gallery_sanitize_public_json(jsonb,text[])"
+  ],
   "guardTriggers": [
    "saved_maps O _guard_server_owned_columns",
    "settlements O _guard_server_owned_columns"
