@@ -1,0 +1,2 @@
+before: resentments empty 573 {"thorp":90,"hamlet":99,"village":86,"town":98,"city":97,"metropolis":103}; FOODSEC (derived) 0
+after: resentments empty 573 {"thorp":90,"hamlet":99,"village":86,"town":98,"city":97,"metropolis":103}; FOODSEC (derived) 0

@@ -31,3 +31,15 @@ Each moved at the B1(i) merge: red at 9d8c944a3, green at the cut 0ec96f13d (CON
 - **editCorpusRatchet A5** (line 493), non-commuting seat pairs: E1|E6, E2|E6, E6|E1 and E6|E2 each 6 → 7. ROSE.
 - **mergeLadderHeldKeys A2** (line 312), config-channel escalations: E7 terrain to desert 22 → 23 (ROSE); E8 culture to
   norse 5 → 4 (FELL).
+
+## PROBE RESULTS (CONFIRMED by run, landed after the pause; no cure made)
+- **B7:** on r2s-religious_conversion-metropolis-0 the kilns pool is now reached as `lines` (3), not `dominant`. Its houses
+  are unchanged (Potter, Brickmaker, Glassmakers); the trade words moved.
+  - First in the same family whose kilns' dominant pool is reached: **r2s-religious_conversion-metropolis-17**, kilns.dominant
+    3. 1 to 16 reach kilns only as `lines`.
+  - Candidate re-pick: 0 → 17.
+- **11c:** bar0-town-calm-rand-46 is a C1 carrier: "Corrupt Council" before, "Council of Aldermen" after (R24m's accepted
+  re-deal). Its lens good moved from clay (not brought in) to grain (brought in).
+  - First in `bar0-town-calm-rand-N` with clay not brought in: **N = 136**.
+  - Candidate re-pick: 46 → 136.
+- **Not yet diffed:** the phone town's Daily Life cause and soak1k-5255. Both records are saved in `ANCH/out-{pre,tip}/`.

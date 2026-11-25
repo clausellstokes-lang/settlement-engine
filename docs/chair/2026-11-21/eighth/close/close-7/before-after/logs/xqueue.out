@@ -1,0 +1,13 @@
+xcount line-C-by-line rc=0 11:49:17 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"P14":1,"P18":419,"P5b":1}
+xcount line-C-by-cures rc=0 11:52:07 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"FOODSEC":197,"FEDFARE":5,"P14":1,"NOHEAL":13,"P18":419,"P5b":1}
+xcount line-C-by-batch rc=0 11:54:59 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"FOODSEC":197,"FEDFARE":5,"P14":1,"NOHEAL":13,"P18":419,"B1furrow":140,"P5b":1}
+xcount cures-C-by-cures rc=0 11:57:54 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"P14":1,"P18":419,"P5b":1}
+xcount cures-C-by-batch rc=0 12:00:46 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"P14":1,"P18":419,"B1furrow":140,"P5b":1}
+xcount batch-C-by-batch rc=0 12:03:40 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P17":603,"P8any":60,"P16three":348,"P14":1,"P18":419,"P5b":1}
+xcount line-V-by-line rc=0 12:06:35 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"P17":486,"P19":2,"P16three":237,"P14":1,"P18":416}
+xcount line-V-by-cures rc=0 12:09:33 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"FOODSEC":168,"P17":486,"P19":2,"P16three":237,"FEDFARE":3,"NOHEAL":26,"P14":1,"P18":416}
+xcount line-V-by-batch rc=0 12:12:35 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"FOODSEC":168,"P17":486,"P19":2,"P16three":237,"FEDFARE":3,"B1land":26,"NOHEAL":26,"P14":1,"P18":416,"B1furrow":73}
+xcount cures-V-by-cures rc=0 12:15:40 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"P17":486,"P19":2,"P16three":237,"P14":1,"P18":416}
+xcount cures-V-by-batch rc=0 12:18:43 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"P17":486,"P19":2,"P16three":237,"B1land":26,"P14":1,"P18":416,"B1furrow":73}
+xcount batch-V-by-batch rc=0 12:21:39 xcount: 900 births; record-hash mismatches 0; self mismatches 0; rows {"P8any":134,"P9":129,"NEW2":6,"P17":486,"P19":2,"P16three":237,"P14":1,"P18":416}
+XQUEUE-DONE

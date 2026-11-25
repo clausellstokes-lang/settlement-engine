@@ -1,0 +1,24 @@
+record-line-C rc=0 09:50:59
+food-line-C rc=0 09:52:49
+record-line-V rc=0 09:54:37
+food-line-V rc=0 09:56:28
+record-cures-C rc=0 09:58:20
+food-cures-C rc=0 10:00:10
+record-cures-V rc=0 10:01:54
+food-cures-V rc=0 10:03:40
+record-batch-C rc=0 10:05:29
+food-batch-C rc=0 10:07:22
+record-batch-V rc=0 10:09:09
+food-batch-V rc=0 10:10:57
+battery line C small rc=0 10:13:14
+battery cures C large rc=0 10:22:52
+battery cures C small rc=0 10:25:07
+battery batch C large rc=0 10:34:09
+battery batch C small rc=0 10:36:18
+battery line V large rc=0 10:45:00
+battery line V small rc=0 10:47:14
+battery cures V large rc=0 10:55:41
+battery cures V small rc=0 10:58:40
+battery batch V large rc=0 11:07:47
+battery batch V small rc=0 11:10:03
+QUEUE-DONE
