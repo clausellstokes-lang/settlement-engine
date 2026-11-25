@@ -184,6 +184,17 @@ STATE AT 16:22 UTC:
 - The joined tree /home/user/wt/join REMOVED (its commits are in JOINED-PROOF.md).
 - NEXT (G20 (3)): when CLOSE-7 has taken D6, E1, E8: one line to the chair with my context size; under 600,000 build E8b
   as `lane/words-1-2026-11-25-e8b-wip`, else hand over at a commit boundary with E8b's design (G20 (2)) as the next unit.
+STATE AT 17:05 UTC — E8b IN BUILD (worktree /home/user/wt/e8b, branch -e8b-wip on 94b7a13d9, UNCOMMITTED):
+- MEASURE (records, base): the twelve rows, C 1157 strings, V 1126 (tells 899/852, impressions 202/215, crisis secrets 25/28,
+  rare 11/12, siege goal.long 13/8, title secrets 2/5, behaviour 5/6). STOP sites: none (gender set at npcGenerator.js:132,
+  before every draw of these lines; survey by an Explore agent, its claims spot-checked).
+- BUILT: personMention.js BOUND_CARD_LINES (regex literals), `boundReflexives(card)`, `heldCardLine(text)`; ONE pass at
+  narrativeGenerator.js:1068 (goaledNpcs; skipped under a held npcs pin) and generateSettlementPipeline.js:617 (regen,
+  non-keepers); held-form reads in rareSecrets.js :: rareRowOf, goals.js :: secretRefuses, tonightSheet.js (2), and
+  crisisFactFindings.js (1). Plan sent to the chair 16:50 ("build unless you veto").
+- BARRED (one line sent to the chair): worldPulse/successorNpc.js:49-50 copies tell/goal.long onto a genderless successor.
+- Test: tests/generators/people/boundCardLines.test.js (11 C births, all twelve rows met). Gates (e8b-*.log) and renders of
+  wt/e8 vs wt/e8b, C and V (s-e8-*, s-e8b-*), running from 17:00.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.
