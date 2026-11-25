@@ -209,6 +209,11 @@ GOALS I-13 goes out of it, to the second hand-in: send its proposed cure and siz
 THEN THE SECOND HAND-IN: four new seats (BIRTH-1, BIRTH-2, WORDS-1, WORDS-2) build on -cures at 0ec96f13d. Each sends "UNIT <name> <branch>
 <commit>". I merge them onto a branch cut at the line's tip after the first landing, re-take the doors, and run ONE before-and-after
 and ONE gate. Read `prompts/START-GEN-COMMON.txt` on the chair branch once. KEEP SECTION 0 TRUE: the seats read it.
+- GOALS I-13: the chair said YES at 09:02, for the SECOND hand-in. The receipt records every card the draw read; size S; 0 births
+  move.
+  - ONE LINE OWED: every reader of a goal receipt's `refs` outside the measure, and whether more refs change what it does. If one
+    does, it goes to the chair before the merge.
+  - NOT the order-free deal.
 - R24m (07:54): C1 is not widened; the 39 re-deals are accepted; the alias is withdrawn. The builder is removing it and proving.
 
 THE NEXT COMMAND: on BATCH's message:
