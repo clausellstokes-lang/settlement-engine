@@ -67,7 +67,9 @@ STATE AT 02:35 UTC 2026-11-25:
 - THE MIRROR is MERGED onto cures as e2fd7caa4 (from -mirror-wip 62efe59ee). The line was SENT to the chair.
   - FEDFARE goes red first on C 4 / V 3, then 0 / 0. Records moved 0. Pages moved C 4 / V 3.
   - K2 prints on no page; K1 on 2 (C dp-hamlet-117, V dp-hamlet-139).
-  - The row's name departs from the chair's word ("plenty" reds a lint walker): named to the chair for veto.
+  - The row's name departs from the chair's word ("plenty" reds a lint walker). Named to the chair, who ACCEPTED it at 02:35, along
+    with the two lint counts. The hand-in must say each count's cause.
+  - The chair took the mirror line at 02:35.
   - The veto list gains K2, K1 and the atom `food production: ≥ adequate`.
 - Cures now holds A1, A2 and the mirror. Its tip is e2fd7caa4; the lighting census stands at 3790 files.
 - RUNNING: a FRESH builder doing phase 1, LIVE-PATH, on the line's tip 0559a8405, with master db832c892. Its trees are
