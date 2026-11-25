@@ -233,6 +233,15 @@ STATE AT 09:31 UTC (first hand-in in progress):
   - re-make FOR-THE-OWNER and read the sizes from (f)'s build;
   - send "CLOSE-7 <commit>".
 
+UNITS RECEIVED FOR THE SECOND HAND-IN (merge onto a branch cut at the line's tip AFTER the first landing; one before-and-after and one
+gate for the lot):
+- D2: `lane/birth-1-2026-11-25-d2-wip` 4ea69f420, from BIRTH-1 (session_019yED1Sd4gJ4S1mkMpZPcFv), cut at 0ec96f13d.
+  - Touches src/generators/power/settlementNarrative.js only.
+  - Moves C 13 / V 9 (prominentRelationship and pressureSentence).
+  - Frozen surfaces moved, not re-recorded: the dark golden 15/525 and the lit twin 32/525 (lists in gen/birth-1/d2/ on
+    lane/birth-1-2026-11-25).
+  - Owes: a mutation-manifest row for tests/generators.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
