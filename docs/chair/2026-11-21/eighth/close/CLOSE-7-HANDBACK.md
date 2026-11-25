@@ -31,6 +31,11 @@ LANDING OF POINT 117 RUNNING (the chair's container, on 97c6bfc7a). Since then (
   - When done: send "GUARD-2 <commit>".
   - Builder a45b468ed08040c87 is on GUARD-2 now. ANCHORS is paused at a commit boundary.
 
+GUARD-2 94ff40f5c (pushed): TAKEN by the chair at 13:20 with no fault. It merges into point 117 after the landing's gate, with
+ANCHORS.
+- KNOWN, WRITTEN DOWN (the chair accepted it, not gated): "B1(ii) also changes the first tradition an advance mints on a stored
+  place where the fields are bought in."
+
 STILL MINE:
 - BEFORE-AFTER is DONE and was SENT to the chair (c209e1af6; `close-7/reports/BEFORE-AFTER.md`).
   - Every figure is SAME or explained. GUARD differs in the version only. BATCH moves V 63 records.
