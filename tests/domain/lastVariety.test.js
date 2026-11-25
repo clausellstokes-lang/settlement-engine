@@ -82,7 +82,10 @@ const PRINTS = [
   { pool: 'Very Safe', vid: 7, seed: 'r2r-village-8' },
   { pool: 'Safe', vid: 6, seed: 'r2r-town-4' },
   { pool: 'Safe', vid: 7, seed: 'r2r-thorp-28' },
-  { pool: 'Safe', vid: 8, seed: 'bar0-thorp-calm-rand-28' },
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): bar0-thorp-calm-rand-28 lit holds no crime
+  // wave (Safe v8 presumes one); no bar0 calm thorp, hamlet or village 0..149 and no small town of the census prints v8
+  // lit; of the second reader's fresh 5000..5099 (this file's own cfgFor) r2r-village-5004 prints it on all three forms.
+  { pool: 'Safe', vid: 8, seed: 'r2r-village-5004' },
   { pool: 'Moderate', vid: 9, seed: 'bar0-village-calm-rand-46' },
   { pool: 'Moderate', vid: 10, seed: 'bar0-thorp-calm-rand-45' },
   { pool: 'Unsafe', vid: 5, seed: 'bar0-hamlet-calm-rand-29' },

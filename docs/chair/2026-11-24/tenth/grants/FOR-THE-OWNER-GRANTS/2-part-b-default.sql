@@ -1,0 +1,13 @@
+-- ════ PART B: the default for NEW functions (ruling G1 §3, amendment G1b; LAST in this file) ════
+-- In plain words: from here on, a function a later migration creates in schema public is no longer
+-- handed to visitors (anon) and signed-in users (authenticated) BY NAME. This makes the repository's
+-- own convention true on the hosted platform: a new function written with
+--     revoke all on function public.<f>(...) from public;  grant execute ... to service_role;
+-- is then closed to both roles, as it would be in plain Postgres. A function written with NO grant
+-- statement stays as open as plain Postgres leaves it (EXECUTE to PUBLIC): nothing that relies on that
+-- today changes, and every existing function keeps exactly the grants it has.
+-- It changes the default of the role running the migrations (postgres), in schema public only; it is
+-- not the global form (`... revoke execute on functions from public`), which the chair refused.
+-- Safe to run twice. To undo:
+--     alter default privileges in schema public grant execute on functions to anon, authenticated;
+alter default privileges in schema public revoke execute on functions from anon, authenticated;

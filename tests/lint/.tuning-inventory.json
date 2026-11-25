@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "b6492abd34b7da6467cef47b09a1838071e3f621",
-  "measuredBy": "FORTUNE-7",
-  "date": "2026-11-22",
-  "note": "FORTUNE-B at the line point 98 (c110dd85b) merged: FORTUNE_LAW_TUNING gains the DRAFT leaves standing.lastingAgeBySize (six sizes, E32), the lane U7",
+  "measuredAtSha": "f3b45352ebc8224a5794c779f792a2024064a597",
+  "measuredBy": "LAND-115 (by the owner's yes of 2026-11-24)",
+  "date": "2026-11-24",
+  "note": "K4-JOIN: regenHistoryPipeline imports withRecordTroubleLaw, so generateSettlementPipeline.js is a new dependent of the trouble leaf (LAW_ONE_TROUBLE_BARS, TROUBLE_WEIGHT_TUNING); no value moves",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,7 +1464,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 129,
+      "line": 130,
       "spanDigest": "880df847520e76c7de543596b5629b0be561182050c554c92652b9d7944ca5f9",
       "leaves": {
         "developmentFigure": 1,
@@ -2920,6 +2920,53 @@
         "src/domain/townCartography/cartographySynthesis.js",
         "src/domain/townCartography/cartographyWards.js"
       ]
+    },
+    "src/domain/trouble/troubleLaw.js#TROUBLE_WEIGHT_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 108,
+      "spanDigest": "a694cd2c42b0d82dd9e0a13006a5b26aed8346f8a63d6a97acf5806488095a77",
+      "leaves": {
+        "crimeWave.read": "criminalEffective",
+        "crimeWave.floor": 0.05,
+        "crimeWave.ceiling": 0.5,
+        "crimeWave.readLow": 20,
+        "crimeWave.readHigh": 90,
+        "guildConflict.read": "economyPowers",
+        "guildConflict.floor": 0.05,
+        "guildConflict.ceiling": 0.25,
+        "guildConflict.readLow": 1,
+        "guildConflict.readHigh": 4,
+        "smallPlaceCrime.read": "criminalEffective",
+        "smallPlaceCrime.floor": 0.5,
+        "smallPlaceCrime.ceiling": 0.9,
+        "smallPlaceCrime.readLow": 15,
+        "smallPlaceCrime.readHigh": 60
+      },
+      "dependents": [
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/historyGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/trouble/troubleLaw.js#LAW_ONE_TROUBLE_BARS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 2,
+      "line": 151,
+      "spanDigest": "50bc4049385f723054642f109269f2a1ea1f731382b6c223acf6d799da429f55",
+      "leaves": {
+        "crimeWave": 0.5,
+        "guildSwap": 0.7
+      },
+      "dependents": [
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/generateSettlementPipeline.js",
+        "src/generators/historyGenerator.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/undercity/colonization.js#UNDERCITY_TUNING": {
       "exported": true,
@@ -9372,7 +9419,7 @@
     "src/generators/foodLand.js": 7,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
-    "src/generators/historyGenerator.js": 13,
+    "src/generators/historyGenerator.js": 11,
     "src/generators/institutionProbability.js": 38,
     "src/generators/isolationGenerator.js": 1,
     "src/generators/narrative/historyCoherence.js": 4,
@@ -9404,11 +9451,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 282,
-    "keys": 2300,
+    "tables": 284,
+    "keys": 2305,
     "unregisteredNamed": 541,
-    "bareDecimals": 6877,
+    "bareDecimals": 6875,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 187
+    "zeroNamedDependentTables": 189
   }
 }

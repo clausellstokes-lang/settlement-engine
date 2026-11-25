@@ -52,7 +52,9 @@ const WORDS = {
 
 /** [seed, type]: the smallest and the largest census town holding the type's tension with no event of it on the timeline */
 const UNANCHORED = [
-  ['r2r-thorp-16', 'crime_wave'], ['r2r-metropolis-8', 'crime_wave'],
+  // RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-thorp-16 lit holds no crime_wave;
+  // the smallest census town (by size, then population) holding it unanchored, lit, is r2r-thorp-8. The largest is kept.
+  ['r2r-thorp-8', 'crime_wave'], ['r2r-metropolis-8', 'crime_wave'],
   ['r2r-thorp-59', 'resource_scarcity'], ['r2r-metropolis-6', 'resource_scarcity'],
   ['r2r-town-43', 'guild_conflict'], ['r2s-occupied-metropolis-3', 'guild_conflict'],
   ['r2s-insurgency-thorp-2', 'legitimacy_crisis'], ['r2s-slave_revolt-metropolis-2', 'legitimacy_crisis'],
@@ -67,7 +69,9 @@ const UNANCHORED = [
   ['r2r-thorp-12', 'infiltration_fear'], ['r2s-under_siege-city-1', 'infiltration_fear'],
 ];
 /** [seed, type]: a census town holding the type's tension WITH its own event on the timeline */
-const KEEP = [['r2r-thorp-57', 'resource_scarcity'], ['r2r-town-16', 'guild_conflict'], ['r2r-hamlet-23', 'outside_debt'], ['r2r-thorp-16', 'external_threat'], ['r2r-town-30', 'leadership_vacuum'], ['r2r-village-9', 'succession_crisis'], ['r2r-hamlet-1', 'magical_controversy'], ['r2r-thorp-13', 'population_friction'], ['r2r-hamlet-55', 'religious_tension'], ['r2r-thorp-36', 'infiltration_fear']];
+// RE-ANCHORED AT POINT 116 (the trouble law lit, 2026-11-25; LAND-116, the chair's ruling B): r2r-town-16 lit holds no guild_conflict; the
+// smallest census town holding it WITH its own event on the timeline, lit, is r2r-town-28.
+const KEEP = [['r2r-thorp-57', 'resource_scarcity'], ['r2r-town-28', 'guild_conflict'], ['r2r-hamlet-23', 'outside_debt'], ['r2r-thorp-16', 'external_threat'], ['r2r-town-30', 'leadership_vacuum'], ['r2r-village-9', 'succession_crisis'], ['r2r-hamlet-1', 'magical_controversy'], ['r2r-thorp-13', 'population_friction'], ['r2r-hamlet-55', 'religious_tension'], ['r2r-thorp-36', 'infiltration_fear']];
 
 /** @param {any} town @param {string} type */
 const tensionOf = (town, type) => (town.history?.currentTensions || []).find((/** @type {any} */ t) => t.type === type);

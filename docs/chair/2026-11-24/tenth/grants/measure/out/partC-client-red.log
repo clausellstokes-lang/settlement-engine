@@ -1,0 +1,58 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-affcaa1f68faf6e4f
+
+ ❯ tests/security/profile_escalation.test.js (3 tests | 2 failed) 116ms
+     × an RPC refusal is shown and NO table write happens 14ms
+     × any RPC error (e.g. the function missing) is thrown, never routed round 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/profile_escalation.test.js > updateDisplayName client path > an RPC refusal is shown and NO table write happens
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/security/profile_escalation.test.js:97:48
+     95|     stubs.userMetaUpdate.mockResolvedValue({ error: null });
+     96|
+     97|     await expect(auth.updateDisplayName('Ada')).rejects.toBe(refusal);
+       |                                                ^
+     98|
+     99|     expect(stubs.rpcImpl).toHaveBeenCalledWith('update_display_name', …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/profile_escalation.test.js > updateDisplayName client path > any RPC error (e.g. the function missing) is thrown, never routed round
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/security/profile_escalation.test.js:113:48
+    111|     stubs.userMetaUpdate.mockResolvedValue({ error: null });
+    112|
+    113|     await expect(auth.updateDisplayName('Ada')).rejects.toBe(missing);
+       |                                                ^
+    114|     expect(stubs.fromUpdate).not.toHaveBeenCalled();
+    115|     expect(stubs.userMetaUpdate).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  16:37:11
+   Duration  440ms (transform 153ms, setup 78ms, import 26ms, tests 116ms, environment 0ms)
+
+exit 1

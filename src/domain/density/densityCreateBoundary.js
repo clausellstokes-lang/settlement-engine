@@ -62,8 +62,9 @@
  *   3. `geographyLockedConfig` cannot smuggle the marker across: it overlays
  *      ONLY the geography keys from the previous settlement.
  *   4. The true regeneration path already reads the world's own law —
- *      `regenSection` takes `settlement.config || config`, settlement first, so
- *      a markerless v1 world regenerates as v1.
+ *      `regenSection` takes `settlement.config || settlement._config || config`
+ *      (settlementRegenAction.js), the world's own config first in either stored
+ *      shape, so a markerless v1 world regenerates as v1.
  *
  * ⚠ AND A STALE COMMENT THAT WOULD HAVE MISLED THE NEXT READER, MEASURED:
  * generateSettlementPipeline's docblock says `config._seed` "is how a saved
@@ -114,6 +115,11 @@ import { SEAT_LAW_CONFIG_KEY, newSettlementSeatLaw } from '../seat/seatLaw.js';
 // Its dial sits at the default, so the mint is `{}` and a birth's config is byte-identical;
 // lighting it is the owner's word, never before the seat's law.
 import { FORTUNE_LAW_CONFIG_KEY, newSettlementFortuneLaw } from '../fortune/fortuneLaw.js';
+// ⭐ THE TROUBLE LAW (lane KINDS-1, unit K1), WIRED HERE AND NOWHERE ELSE, AND DARK. Its module is a
+// zero-import leaf that declares the key, the dial, the reader and the mint in one file, so this one
+// edge brings all four and nothing behind them. Its dial sits at the default, so the mint is `{}` and a
+// birth's config is byte-identical; lighting it is the owner's word.
+import { TROUBLE_LAW_CONFIG_KEY, newSettlementTroubleLaw } from '../trouble/troubleLaw.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -303,6 +309,11 @@ export const PIPELINE_REACHERS = Object.freeze({
  * destructure, an imported fortune-law world's configuration loaded through the Library and
  * regenerated would have birthed a NEW world under the fortune law on a build whose dial was dark.
  *
+ * ⛔ THE TROUBLE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (KINDS-1 K1). Its dial
+ * sits at the dark default, so its mint is `{}` and deletes nothing: without its own destructure, a
+ * weighted-trouble world's configuration loaded through the Library and regenerated would birth a NEW
+ * world under the weighted law on a build whose dial is dark.
+ *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
  * @returns {C} the same shape, carrying the laws a NEW world is born under
@@ -314,6 +325,7 @@ export function birthConfig(config) {
     [LIVING_CONTENT_LAW_CONFIG_KEY]: _incomingLivingContentLaw,
     [SEAT_LAW_CONFIG_KEY]: _incomingSeatLaw,
     [FORTUNE_LAW_CONFIG_KEY]: _incomingFortuneLaw,
+    [TROUBLE_LAW_CONFIG_KEY]: _incomingTroubleLaw,
     ...carried
   } = /** @type {Record<string, unknown>} */ ({ ...(config || {}) });
   return /** @type {C} */ ({
@@ -322,6 +334,7 @@ export function birthConfig(config) {
     ...newSettlementLivingContentLaw(),
     ...newSettlementSeatLaw(),
     ...newSettlementFortuneLaw(),
+    ...newSettlementTroubleLaw(),
   });
 }
 
@@ -585,5 +598,24 @@ export const GENERATION_LAWS = Object.freeze({
       + 'its own size; a saved place keeps the law it was born under. This row read "THE DIAL IS '
       + 'DARK, and that is the chair\'s ruling of 2026-11-20 10:33 UTC, not an omission" until that '
       + 'day. Its module is a zero-import leaf, so the edge brings nothing behind it.',
+  }),
+  trouble: Object.freeze({
+    mint: 'newSettlementTroubleLaw',
+    module: 'src/domain/trouble/troubleLaw.js',
+    dial: 'NEW_SETTLEMENT_TROUBLE_LAW_VERSION',
+    configKey: '_troubleLawVersion',
+    wiring: 'WIRED',
+    why: 'the trouble law (lane KINDS-1: which troubles a place is born with, the three fixed numbers '
+      + 'of buildHistoricalEvent turned into weights that read how much of the thing the place holds), '
+      + 'spread by birthConfig beside the others, with its incoming marker clamped off, so every '
+      + 'classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS LIT AT POINT 116 ON '
+      + '2026-11-25 BY THE TENTH CHAIR\'S DECISION, THE OWNER HAVING DEFERRED THE QUESTION TO IT; ITS '
+      + 'NUMBERS (TROUBLE_WEIGHT_TUNING) STAY DRAFTS UNTIL THE OWNER\'S TUNING SIGNATURE. So the mint '
+      + 'writes _troubleLawVersion: 2 on every classified BIRTH and a new place\'s crime wave and guild '
+      + 'quarrel are weighed by what it holds. A saved '
+      + 'place keeps the law it was born under: the history regen re-keys its pass to the record\'s '
+      + 'law (withRecordTroubleLaw), never the form\'s. Its module is a zero-import leaf pinned to its '
+      + 'own chunk (trouble-law), read by the create boundary, the history generator and the '
+      + 'history regen pass, so the edge brings nothing behind it and nothing enters first paint.',
   }),
 });

@@ -1,0 +1,8 @@
+functions 404 secdef 325
+SERVER 187 secdef 180 hostedExposed(anon|authd) 125 hostedAnon 125 vanillaExposed 0 exposed&secdef&nocheck 71
+USER 79 secdef 79 hostedExposed(anon|authd) 79 hostedAnon 59 vanillaExposed 79 exposed&secdef&nocheck 5
+ANYONE 38 secdef 37 hostedExposed(anon|authd) 38 hostedAnon 38 vanillaExposed 38 exposed&secdef&nocheck 13
+NOBODY 60 secdef 15 hostedExposed(anon|authd) 10 hostedAnon 10 vanillaExposed 0 exposed&secdef&nocheck 3
+UNSTATED 18 secdef 3 hostedExposed(anon|authd) 18 hostedAnon 18 vanillaExposed 18 exposed&secdef&nocheck 3
+TRIGGER 22 secdef 11 hostedExposed(anon|authd) 13 hostedAnon 13 vanillaExposed 12 exposed&secdef&nocheck 4
+exit 0

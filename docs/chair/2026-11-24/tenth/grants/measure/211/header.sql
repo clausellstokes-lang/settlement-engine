@@ -1,0 +1,48 @@
+-- ────────────────────────────────────────────────────────────────────────────
+-- 211_close_visitor_reach.sql — close what a visitor or a signed-in user can reach that
+-- the migrations meant for the server alone (GRANTS-1; the tenth chair's ruling G1 of
+-- 2026-11-24, on the owner's word "Fix those findings as well").
+--
+-- WHY
+--   A hosted Supabase project grants every NEW function in schema public to the roles
+--   anon and authenticated BY NAME (the platform's default privileges for the migrating
+--   role). `revoke all ... from public`, this repository's convention, leaves those two
+--   grants standing (113's header says so; 135 and 204's amendment fixed one function
+--   each). Replayed in PGlite under that default, 135 of the 247 functions the
+--   migrations grant to service_role alone, or to no role, were executable by any
+--   visitor. 87 of them are SECURITY DEFINER with no check of the caller: a user's stored
+--   provider key and the key passphrase, another user's tier, credits, bans and tickets,
+--   the free narrative, the admin RPCs that trust the actor id they are handed.
+--   The measure, the call-site checks and the scripts that generate PART A:
+--   docs/chair/2026-11-24/tenth/grants/ on lane/grants-1-2026-11-24.
+--
+-- WHAT (each part safe to run twice)
+--   PART A  revoke execute, by exact signature, from public, anon and authenticated on
+--           every server-only or no-role function (and _audit_action); service_role is
+--           granted again only where a migration granted it. GENERATED; three are left
+--           open and named.
+--   PART C  public.profiles: UPDATE is revoked from anon and authenticated and granted to
+--           authenticated on an ALLOWED list of columns only (avatar_url, email_notifications,
+--           model_preference, public_identity_opt_in); every other column is the server's.
+--   PART D  settlements, saved_maps: a guard trigger refuses anon and authenticated the columns the server owns.
+--   PART B  (LAST in the file) the migrating role's default in schema public no longer grants
+--           EXECUTE on NEW functions to anon and authenticated, so a new function written with
+--           `revoke ... from public; grant ... to service_role` is closed to both, as in plain
+--           Postgres. A new function with no grant statement stays open through PUBLIC.
+--
+-- Pinned by: tests/security/hostedDefaultGrants.pglite.test.js (the register,
+--   tests/security/functionGrantClasses.js, classes every public function).
+-- @rollback: a grant tightening, NOT auto-scripted (the rollback runbook: a security
+--   tightening is reversed by hand, eyes open). PART A for one function, if a caller
+--   with a user's token is found broken:
+--     grant execute on function public.<the same signature> to anon, authenticated;
+--   PART C:
+--     grant update on public.profiles to authenticated;
+--   PART D:
+--     drop trigger if exists trg_guard_server_owned_columns on public.settlements;
+--     drop trigger if exists trg_guard_server_owned_columns on public.saved_maps;
+--     drop function if exists public._guard_server_owned_columns();
+--   PART B:
+--     alter default privileges in schema public grant execute on functions to anon, authenticated;
+-- ────────────────────────────────────────────────────────────────────────────
+

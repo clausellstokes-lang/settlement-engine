@@ -1,0 +1,11 @@
+measure-kinds compare -> docs/chair/2026-11-20/content/kinds/out/law2-compare.md
+thorp: baseline g0 c11 1st resource_scarcity 17 | A g0 c9 1st resource_scarcity 17 mv 1/0 | B g0 c9 1st resource_scarcity 17 mv 1/0 | B50 g0 c9 1st resource_scarcity 17 mv 2/0
+hamlet: baseline g0 c5 1st resource_scarcity 13 | A g0 c3 1st resource_scarcity 13 mv 0/0 | B g0 c3 1st resource_scarcity 13 mv 0/0 | B50 g0 c3 1st resource_scarcity 13 mv 0/0
+village: baseline g1 c7 1st resource_scarcity 17 | A g1 c4 1st resource_scarcity 17 mv 2/0 | B g1 c4 1st resource_scarcity 17 mv 2/0 | B50 g1 c4 1st resource_scarcity 17 mv 2/0
+town: baseline g31 c22 1st crime_wave 21 | A g17 c13 1st crime_wave 12 mv 2/0 | B g17 c15 1st crime_wave 14 mv 1/0 | B50 g17 c14 1st crime_wave 13 mv 1/0
+city: baseline g51 c49 1st crime_wave 46 | A g33 c21 1st crime_wave 19 mv 1/0 | B g33 c25 1st crime_wave 23 mv 1/0 | B50 g33 c24 1st crime_wave 22 mv 1/0
+metropolis: baseline g51 c45 1st crime_wave 42 | A g31 c27 1st crime_wave 23 mv 1/0 | B g31 c34 1st crime_wave 29 mv 0/0 | B50 g31 c30 1st crime_wave 25 mv 0/0
+breaks the bar (baseline): city, metropolis
+breaks the bar (A): none
+breaks the bar (B): metropolis
+breaks the bar (B50): metropolis
