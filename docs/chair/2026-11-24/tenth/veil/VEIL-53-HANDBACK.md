@@ -47,10 +47,9 @@ variant, the owner's read unchanged and asserted; its reader joins the totality 
 started.
 DONE AND SENT: (0); (1) REDS-CAUSE (`out/v53/redscause/REDSCAUSE.md`; the import surprise to the chair: RULING V3 (6)); (2) J1
 classed; J12 and J12-V4 (`out/v53/J12.md`, `out/v53/j12/J12-V4.md`: prominentRelationship's 12/720 are the covert tie's own copy).
-NEXT COMMAND: on the anon arm builder's return, `git -C /home/user/cures53 log --oneline -3` and read its diff, then the anon arm (`briefs/V53-ANONARM-BRIEF.md` on grants-wip) (E's brief amended for point 115's fifth law; a question to VEIL-55 on
-re-making the trial join on 0559a8405: ANSWERED NO, the trial join stays at ba7460c33 until the join). AFTER E: one small commit on
--cures-wip re-pointing `tests/lint/samenessHideable.walker`'s stale wording ("served == the house-free twin") to cure B's re-stated
-title, no assertion moved, tests/lint whole after, and say whether the walker reads that title anywhere it checks (VEIL-55, intake).
+NEXT COMMAND: on the anon arm builder's return: `git -C /home/user/grants53 log --oneline -4`, read its two commits' diffs once,
+re-run its red/green, push grants-wip, line to VEIL-55. THEN: FAIL-CLOSED PAGES sizing (section 1's queue item (4)), then the
+renumbering script (`briefs/V53-RENUMBER-BRIEF.md`), then items (5), (7), (8). "THE SEAT'S HOLDER IS STORED" only on VEIL-55's word.
 
 ## 2. RULINGS IN FORCE FOR THIS SEAT (all on the chair's branch, appended to `docs/chair/2026-11-24/tenth/veil/RULING-V1.md`)
 - RULING V1 (whole): the phase 1 units and bar. V2: J1's cure (code points, equality by a committed test). V3: the six reds'
