@@ -67,3 +67,48 @@
   - Also keyed on a name, PLAUSIBLY in play: `relationshipArchetypes.js:273` (people's names, not the power's: no effect
     expected).
 - Items 4 and 5 and the before-and-after are not started.
+
+## ITEM 4, P3source: COMMITTED 4fc54fb45 (CONFIRMED by run)
+- **The cure:** `dossierViewModel.js :: deriveMagicSupplyView` names a stopped sole supplier with the page's own stop:
+  "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship · Stopped by the
+  siege." The helper `stoppedSupplyOf` sits at the file's foot, so no cited line moves.
+- **A CHOICE FOR THE CHAIR TO REVERSE:** R24g (1)'s example quotes `magicSourceOf`'s raw name, "Access to parish church". The
+  line prints it through the display seam, "Access to a house of worship", which is the label its own card prints, the seam
+  REVIEW-W2A F2 rules, and the one P3source checks. Printing the raw name is a one-word change in `stoppedSupplyOf`.
+- **The P3source pattern is not taught anything:** it reads a condition only as a bracket or a house named twice.
+- **RED FIRST:** `bar8Marks2` (6), re-stated by its cause, was red on r2s-under_siege-thorp-1, -thorp-2 and -hamlet-2 and is
+  green after.
+- **Gate:** the 51 files naming `dossierViewModel`, `deriveMagicSupplyView` or `MagicTab`, plus `pageCensusFindings`: green.
+
+## ITEM 5, goals I-13: MEASURE ONLY (CONFIRMED by run; `batch/goals-i13.census.jsx`, the I-13 test's own method on every birth)
+- **C:** 900 births; 218 skipped (an uncanny goal landed). 3,531 cards compared; **136 faults in 122 places** (thorp 12,
+  hamlet 30, village 35, town 35, city 4, metropolis 6).
+- **V:** 900 births; 204 skipped. 3,366 cards compared; **172 faults in 148 places** (thorp 23, hamlet 44, village 52, town
+  18, city 9, metropolis 2).
+- A fault is a card whose receipt read nothing of the removed card, but whose goal changes when that card is removed. For
+  example, C dp-thorp-12's shepherd collective changes when the war council's watch captain is removed. Rows are in
+  `batch/gi-{C,V}.jsonl`. No cure; the chair rules it.
+
+## ITEM 3, C1 under R24l: (c) STOPS (CONFIRMED by run and by read)
+- **Built, and committed as HELD (the commit after 4fc54fb45):**
+  - The alias `conflicts.js :: conflictDrawName` over the frozen `CONFLICT_DRAW_KEY_OF`, read by exactly the two hash keys.
+    Its pin is `tests/generators/power/conflictDrawName.test.js`.
+  - The birth names added by exact name to `mintTitles.js` ("the council's fixer"), `cultureOfficeTitles.js` (underboss),
+    `factionArchetypes.js` ('Senate' → criminal on the string path) and `seatTable.js` (own forms of the criminal kind, never
+    drawn).
+- **(b) SENATE:** no clean form at any size is named a plain "Senate". It appears in src only as a keyword and in C1's own
+  tables, and in 0 of the 900 C births. So it is aliased by string, like the two council names. No other producer makes the
+  three names (grep).
+- **(c) THE PROOF:**
+  - C: 0 of 900 records move (with the alias).
+  - V: the 861 non-carriers do not move, but **0 of 39 carriers are byte-equal** with the names mapped back.
+- **THE READER, found by the pipeline's own `onStep` hook** (each step's patch hashed with the names mapped back): every step
+  agrees but `assembleSettlement`. There the cast is the SAME people in a DIFFERENT ORDER:
+  - `density/applyDensityLaw.js:502` orders the houses `(b.power - a.power) || (a.key < b.key …)`;
+  - `density/densityRoll.js:199 orderedPowers` sorts the same way;
+  - `key` is `domain/density/seatKey.js :: seatKey`, the power's display name.
+  - A power tied with the bought hall now sorts the other side of it, the seats fill in another order, and the ties and the
+    conflict pairs that read the cast follow (PLAUSIBLE for each carrier; the order-only cast is CONFIRMED on dp-city-32 and
+    dp-town-7).
+  - These are sorts, not the two hash keys R24l allows the alias. So byte-equality needs the alias widened to these
+    tie-breaks, or the re-deal accepted. The chair's to rule.

@@ -1,0 +1,900 @@
+{"seed":"dp-thorp-0","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-1","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-2","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-3","size":"thorp","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-thorp-4","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-5","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-6","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-7","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-8","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-9","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-10","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-11","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-12","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc.war_council_watch_captain_0","before":"Keep the accounts of the shepherd collective balanced, and show them to anyone who asks.","after":"Learn the plans of the War Council against the Elder Council before they can act on them."}]}
+{"seed":"dp-thorp-13","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-14","size":"thorp","cards":3,"uncanny":false,"compared":2,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_the_highborn_circle","before":"Answer the next move by the Highborn Circle against the Elder Council, quickly and in public.","after":"Answer the next move by the Highborn Circle against the Elder Council, quickly and in public."}]}
+{"seed":"dp-thorp-15","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-16","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-17","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-18","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-19","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-20","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-21","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-22","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-23","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-24","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-25","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-26","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-27","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-28","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-29","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-30","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-31","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_creditor_s_representative","before":"Be the one others look to when something goes wrong.","after":"Be the one others look to when something goes wrong."}]}
+{"seed":"dp-thorp-32","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-33","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-34","size":"thorp","cards":2,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-thorp-35","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-36","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-37","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-38","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-39","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-40","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-41","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-42","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-43","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-44","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-45","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-46","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-47","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_the_inquiry","before":"Remind The High Priestess, quietly, of what is owed.","after":"Ask The High Priestess for a favour that settles a share of the debt."}]}
+{"seed":"dp-thorp-48","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-49","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-50","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-51","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-52","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-53","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-54","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-55","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-56","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-57","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-58","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-59","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-60","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-61","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_peace_movement","before":"Satisfy the army's requisition order without stripping the settlement to the bone","after":"Satisfy the army's requisition order without stripping the settlement to the bone"}]}
+{"seed":"dp-thorp-62","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-63","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-64","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-65","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-66","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-67","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-68","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-69","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc.religious_authorities_high_priestess_0","before":"Pay every hand at the shepherd collective in full and on time this season.","after":"Pay every hand at the shepherd collective in full and on time this season."}]}
+{"seed":"dp-thorp-70","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-71","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-72","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-73","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-74","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-75","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-76","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-77","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-78","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-79","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-80","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-81","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-82","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-83","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-84","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-85","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-86","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-87","size":"thorp","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-thorp-88","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-89","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-90","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-91","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-92","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-93","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-94","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-95","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-96","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-97","size":"thorp","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc_power_peace_movement","removed":"npc_shepherd_collective","before":"Get out of the work they have been given, and let someone else do it.","after":"Get out of the work they have been given, and let someone else do it."}]}
+{"seed":"dp-thorp-98","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-99","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-100","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-101","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-102","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-103","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-104","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-105","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-106","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-107","size":"thorp","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-thorp-108","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-109","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_veiled_1c07217d46d9be38","before":"Keep the accounts of the shepherd collective balanced, and show them to anyone who asks.","after":"Keep the accounts of the shepherd collective balanced, and show them to anyone who asks."}]}
+{"seed":"dp-thorp-110","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-111","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-112","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-113","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-114","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-115","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-116","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-117","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-118","size":"thorp","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-119","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-120","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-121","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-122","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-123","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-124","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-125","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-126","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_peace_movement","before":"Stand up for someone who cannot stand up for themselves.","after":"Satisfy the army's requisition order without stripping the settlement to the bone"}]}
+{"seed":"dp-thorp-127","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-128","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-129","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-130","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-131","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-132","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_power_occupation_authority","removed":"npc_shepherd_collective","before":"Lure one capable person away from the Elder Council to work for the Occupation Authority.","after":"Lure one capable person away from the Elder Council to work for the Occupation Authority."}]}
+{"seed":"dp-thorp-133","size":"thorp","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_shepherd_collective","removed":"npc_veiled_cf0fcef433e182a5","before":"Get the shepherd collective through the season without borrowing.","after":"Hold out against the Independent Bloc over an informer planted by one power in the other until they give way."}]}
+{"seed":"dp-thorp-134","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-135","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-136","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-137","size":"thorp","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-thorp-138","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-139","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-140","size":"thorp","cards":3,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-thorp-141","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-142","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-143","size":"thorp","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-144","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-145","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-thorp-146","size":"thorp","cards":3,"uncanny":false,"compared":2,"faults":[{"id":"npc_shepherd_collective","removed":"npc_power_peace_movement","before":"Satisfy the army's requisition order without stripping the settlement to the bone","after":"Satisfy the army's requisition order without stripping the settlement to the bone"}]}
+{"seed":"dp-thorp-147","size":"thorp","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-thorp-148","size":"thorp","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-thorp-149","size":"thorp","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-0","size":"hamlet","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-1","size":"hamlet","cards":7,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-2","size":"hamlet","cards":7,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-3","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-4","size":"hamlet","cards":6,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-5","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-6","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-7","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-8","size":"hamlet","cards":8,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-hamlet-9","size":"hamlet","cards":7,"uncanny":false,"compared":3,"faults":[{"id":"npc_power_newcomers_settlement","removed":"npc_peat_cutter","before":"Learn what the Headman's Authority will accept over members leaving one power for the other, and what they will not.","after":"Keep the quarrel with the Headman's Authority over members leaving one power for the other from coming to blows this season."}]}
+{"seed":"dp-hamlet-10","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-11","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-12","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc_dairy_farmer","removed":"npc_wayside_inn","before":"Lure one capable person away from the Occupation Authority to work for the Elder Council.","after":"Make do at the dairy with what can be had, and waste none of it."}]}
+{"seed":"dp-hamlet-13","size":"hamlet","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-14","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_village_headman","removed":"npc.military_guard_watch_captain_0","before":"Find the village headman's office one more source of money.","after":"Find the village headman's office one more source of money."}]}
+{"seed":"dp-hamlet-15","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-16","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-17","size":"hamlet","cards":5,"uncanny":false,"compared":4,"faults":[{"id":"npc_adventurers_charter_hall","removed":"npc_dairy_farmer","before":"Settle one quarrel inside the Military Party before Wojciech Aleksandrov can settle it and take the credit.","after":"Find out whether Wojciech Aleksandrov has been meeting anyone from the Military Party in private."}]}
+{"seed":"dp-hamlet-18","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-19","size":"hamlet","cards":7,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-hamlet-20","size":"hamlet","cards":7,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-21","size":"hamlet","cards":6,"uncanny":false,"compared":3,"faults":[{"id":"npc_lord_s_steward","removed":"npc_stable_yard","before":"Stop the Religious Authorities from taking anything more from the Feudal Stewardship this season.","after":"Stop the Religious Authorities from taking anything more from the Feudal Stewardship this season."}]}
+{"seed":"dp-hamlet-22","size":"hamlet","cards":5,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-23","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_hunter_s_lodge","removed":"npc_power_manor_household","before":"Learn whether Ramesh Basu can still pay what is owed.","after":"Ask Ramesh Basu for a favour that settles a share of the debt."}]}
+{"seed":"dp-hamlet-24","size":"hamlet","cards":6,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-25","size":"hamlet","cards":9,"uncanny":false,"compared":4,"faults":[{"id":"npc.military_guard_watch_captain_0","removed":"npc_pawnbroker","before":"Bring Damir Novikov together with someone who can help them.","after":"Bring Damir Novikov together with someone who can help them."}]}
+{"seed":"dp-hamlet-26","size":"hamlet","cards":7,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-27","size":"hamlet","cards":7,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-28","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-29","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-30","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-31","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[{"id":"npc_hunter_s_lodge","removed":"npc_veiled_39b36c356e4d4f5e","before":"Win over one of Nessa Quinn's friends.","after":"Find the weak spot in what Nessa Quinn is doing, and press on it."}]}
+{"seed":"dp-hamlet-32","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[{"id":"npc_hunter_s_lodge","removed":"npc_shepherd","before":"Get the hunter's lodge through the season without borrowing.","after":"Take on more hands at the hunter's lodge, and keep them busy all season."}]}
+{"seed":"dp-hamlet-33","size":"hamlet","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-34","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-35","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-36","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-37","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-38","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-39","size":"hamlet","cards":4,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-40","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-41","size":"hamlet","cards":6,"uncanny":false,"compared":5,"faults":[{"id":"npc_veiled_a049283556774b8c","removed":"npc_veiled_5948727ebf172122","before":"Keep the quarrel between the Thieves' Guild and the War Council from turning into open trouble this season.","after":"Collect what is owed to the fence's people before the season is out."}]}
+{"seed":"dp-hamlet-42","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-43","size":"hamlet","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-44","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc.military_guard_watch_captain_0","removed":"npc.religious_authorities_high_priestess_0","before":"Find the weak spot in what Xoc Dzul is doing, and press on it.","after":"Find the weak spot in what Xoc Dzul is doing, and press on it."}]}
+{"seed":"dp-hamlet-45","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-46","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-47","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-48","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-49","size":"hamlet","cards":7,"uncanny":false,"compared":4,"faults":[{"id":"npc_shepherd","removed":"npc_dairy_farmer","before":"Ask Khutulun Taichiud for a favour that settles a share of the debt.","after":"Ask Khutulun Taichiud for a favour that settles a share of the debt."}]}
+{"seed":"dp-hamlet-50","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-51","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-52","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-53","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-54","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[{"id":"npc.military_guard_watch_captain_0","removed":"npc_peat_cutter","before":"Do Axayacatl Coh one useful favour this season, unasked.","after":"Warn Axayacatl Coh of any trouble before it reaches them."}]}
+{"seed":"dp-hamlet-55","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[{"id":"npc_peat_cutter","removed":"npc_stone_quarry","before":"Bring one more ally to the Headman's Authority in the quarrel over the right to raise a new levy.","after":"Collect what is owed to the peat cuttings before the season is out."}]}
+{"seed":"dp-hamlet-56","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-57","size":"hamlet","cards":6,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-58","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-59","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_alehouse","removed":"npc_dairy_farmer","before":"Find the alehouse one more source of money.","after":"Give Thomais Botaneiates one task this season that will show whether they can be trusted."}]}
+{"seed":"dp-hamlet-60","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[{"id":"npc_power_the_inquiry","removed":"npc_wayside_inn","before":"Keep Gisli Andersson from using the family name for their own ends.","after":"Keep the family trouble with Gisli Andersson from reaching anyone outside the family."}]}
+{"seed":"dp-hamlet-61","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-62","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-63","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-64","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-65","size":"hamlet","cards":5,"uncanny":false,"compared":4,"faults":[{"id":"npc_maltster","removed":"npc_dairy_farmer","before":"Keep the accounts of the maltster's malt-house balanced, and show them to anyone who asks.","after":"Pay every hand at the maltster's malt-house in full and on time this season."}]}
+{"seed":"dp-hamlet-66","size":"hamlet","cards":6,"uncanny":false,"compared":4,"faults":[{"id":"npc_power_the_independent_bloc","removed":"npc_carpenter_part_time","before":"Do The Veteran Soldier one useful favour this season, unasked.","after":"Make sure The High Priestess keeps paying, even if late."}]}
+{"seed":"dp-hamlet-67","size":"hamlet","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-68","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-69","size":"hamlet","cards":1,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-70","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-71","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[{"id":"npc_dairy_farmer","removed":"npc_salt_works","before":"Win someone's trust this season, and keep a use for it.","after":"Win someone's trust this season, and keep a use for it."}]}
+{"seed":"dp-hamlet-72","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-73","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-74","size":"hamlet","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-75","size":"hamlet","cards":7,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-76","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc_wayside_inn","removed":"npc_alehouse","before":"Take over one of Maryam al-Farabi's duties in the Elder Council this season, and be seen to do it well.","after":"Take over one of Maryam al-Farabi's duties in the Elder Council this season, and be seen to do it well."}]}
+{"seed":"dp-hamlet-77","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-78","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-79","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[{"id":"npc_veiled_bdd2a1f5747a6152","removed":"npc_alehouse","before":"Get the fence's people through the season without borrowing.","after":"Get the fence's people through the season without borrowing."}]}
+{"seed":"dp-hamlet-80","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc_wayside_inn","removed":"npc_alehouse","before":"Win new business for the wayside inn beyond the people who already come.","after":"Collect what is owed to the wayside inn before the season is out."}]}
+{"seed":"dp-hamlet-81","size":"hamlet","cards":4,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-82","size":"hamlet","cards":9,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-83","size":"hamlet","cards":6,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-84","size":"hamlet","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-85","size":"hamlet","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-86","size":"hamlet","cards":6,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-87","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-88","size":"hamlet","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-89","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-90","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-91","size":"hamlet","cards":7,"uncanny":false,"compared":3,"faults":[{"id":"npc.war_council_watch_captain_0","removed":"npc_peat_cutter","before":"Hold out against the Religious Authorities over a broken promise of support until they give way.","after":"Hold out against the Religious Authorities over a broken promise of support until they give way."}]}
+{"seed":"dp-hamlet-92","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-93","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-94","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-95","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-96","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[{"id":"npc_charcoal_burner","removed":"npc_power_manor_household","before":"Get the charcoal kilns excused from one tax or levy this season.","after":"Get the charcoal kilns excused from one tax or levy this season."}]}
+{"seed":"dp-hamlet-97","size":"hamlet","cards":2,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-98","size":"hamlet","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-99","size":"hamlet","cards":9,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-100","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-101","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-102","size":"hamlet","cards":7,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-103","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-104","size":"hamlet","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-105","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-106","size":"hamlet","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-107","size":"hamlet","cards":4,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-108","size":"hamlet","cards":6,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-109","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-110","size":"hamlet","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-111","size":"hamlet","cards":6,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-112","size":"hamlet","cards":6,"uncanny":false,"compared":4,"faults":[{"id":"npc_veiled_74c9d4671a4adbd6","removed":"npc_hunter_s_lodge","before":"Keep Ariun Naiman from calling in what is owed this season.","after":"Find out what Ariun Naiman really wants in return."}]}
+{"seed":"dp-hamlet-113","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-114","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-115","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-116","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-117","size":"hamlet","cards":7,"uncanny":false,"compared":4,"faults":[{"id":"npc_mine_open_cast","removed":"npc_dairy_farmer","before":"Win two more people in the Grain Holders over to their side before Scipio Calvus notices.","after":"Win two more people in the Grain Holders over to their side before Scipio Calvus notices."}]}
+{"seed":"dp-hamlet-118","size":"hamlet","cards":5,"uncanny":false,"compared":4,"faults":[{"id":"npc_dairy_farmer","removed":"npc_shepherd","before":"Stand by Itzel Hau in their next quarrel, whoever it is with.","after":"Beat The Veteran Soldier at something this season, in front of people who matter."},{"id":"npc_alehouse","removed":"npc_shepherd","before":"Get the most out of the work at the alehouse while it runs well, and put the gains by.","after":"Buy a share in the wayside inn before the season is out."}]}
+{"seed":"dp-hamlet-119","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-120","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-121","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-122","size":"hamlet","cards":9,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-hamlet-123","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-124","size":"hamlet","cards":11,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-125","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-126","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-127","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-128","size":"hamlet","cards":7,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-hamlet-129","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-130","size":"hamlet","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-131","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-132","size":"hamlet","cards":8,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-133","size":"hamlet","cards":3,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-134","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[{"id":"npc_dairy_farmer","removed":"npc_hunter_s_lodge","before":"Put their own work in order, down to the last detail.","after":"Put their own work in order, down to the last detail."}]}
+{"seed":"dp-hamlet-135","size":"hamlet","cards":7,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-hamlet-136","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-137","size":"hamlet","cards":9,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-138","size":"hamlet","cards":10,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-139","size":"hamlet","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-140","size":"hamlet","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-hamlet-141","size":"hamlet","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-hamlet-142","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-143","size":"hamlet","cards":4,"uncanny":false,"compared":2,"faults":[{"id":"npc_power_the_inquiry","removed":"npc_wayside_inn","before":"Have the last word in the next argument that matters.","after":"Have the last word in the next argument that matters."}]}
+{"seed":"dp-hamlet-144","size":"hamlet","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-145","size":"hamlet","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-hamlet-146","size":"hamlet","cards":2,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-147","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-hamlet-148","size":"hamlet","cards":3,"uncanny":false,"compared":2,"faults":[{"id":"npc.military_guard_watch_captain_0","removed":"npc.religious_authorities_high_priestess_0","before":"Stand by Lesya Bykov in their next quarrel, whoever it is with.","after":"Do Lesya Bykov one useful favour this season, unasked."}]}
+{"seed":"dp-hamlet-149","size":"hamlet","cards":2,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-village-0","size":"village","cards":10,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-1","size":"village","cards":6,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-2","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-3","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-4","size":"village","cards":21,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-village-5","size":"village","cards":11,"uncanny":false,"compared":7,"faults":[{"id":"npc_charcoal_burner","removed":"npc_carpenter","before":"Learn the secret of someone they envy.","after":"Learn the secret of someone they envy."}]}
+{"seed":"dp-village-6","size":"village","cards":9,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-7","size":"village","cards":5,"uncanny":false,"compared":2,"faults":[{"id":"npc_ale_house","removed":"npc_mill","before":"Get the ale house through the season without borrowing.","after":"Spend an evening with Chakib al-Masri this season and talk over the work as they once did."}]}
+{"seed":"dp-village-8","size":"village","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-9","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-10","size":"village","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-11","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-12","size":"village","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-village-13","size":"village","cards":9,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-14","size":"village","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-village-15","size":"village","cards":10,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-village-16","size":"village","cards":11,"uncanny":false,"compared":7,"faults":[{"id":"npc_adventurers_charter_hall","removed":"npc_bowyer_fletcher","before":"Have those who govern confirm, in writing, who may give orders at the adventurers' charter hall.","after":"Have those who govern confirm, in writing, who may give orders at the adventurers' charter hall."}]}
+{"seed":"dp-village-17","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-18","size":"village","cards":7,"uncanny":false,"compared":5,"faults":[{"id":"npc_sawmill","removed":"npc_blacksmith","before":"Learn one secret this season that someone would pay to keep.","after":"Learn one secret this season that someone would pay to keep."}]}
+{"seed":"dp-village-19","size":"village","cards":11,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-20","size":"village","cards":10,"uncanny":false,"compared":6,"faults":[{"id":"npc_brewer","removed":"npc_stable_master","before":"Keep out of Bohdan Popov's way this season, and get on with their own work in peace.","after":"Learn what Bohdan Popov has been saying about them, and to whom."}]}
+{"seed":"dp-village-21","size":"village","cards":14,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-22","size":"village","cards":8,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-23","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[{"id":"npc_mill","removed":"npc_power_peace_movement","before":"Keep their own affairs private this season, from friend and rival alike.","after":"Keep their own affairs private this season, from friend and rival alike."}]}
+{"seed":"dp-village-24","size":"village","cards":12,"uncanny":false,"compared":7,"faults":[{"id":"npc_power_manor_household","removed":"npc_mill","before":"Make sure Marek Korolev is not left behind by the changes in the work.","after":"Get the better side of every bargain struck this season."},{"id":"npc_maltster","removed":"npc_mill","before":"Look after someone who has no one else to do it.","after":"Look after someone who has no one else to do it."}]}
+{"seed":"dp-village-25","size":"village","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-26","size":"village","cards":8,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-27","size":"village","cards":11,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-28","size":"village","cards":10,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-29","size":"village","cards":8,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-30","size":"village","cards":6,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-31","size":"village","cards":7,"uncanny":false,"compared":3,"faults":[{"id":"npc_parish_church","removed":"npc_midwife","before":"Get the house of worship through the season without borrowing.","after":"Pay Eburius Cato back one part of what is owed before the season ends."}]}
+{"seed":"dp-village-32","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_travelers_inn","removed":"npc_mill","before":"Be the one others look to when something goes wrong.","after":"Decide whether to negotiate terms or hold out for relief"},{"id":"npc.war_council_watch_captain_0","removed":"npc_mill","before":"Identify the person inside the settlement who is communicating with the besiegers","after":"Secure enough food reserves to outlast the blockade"}]}
+{"seed":"dp-village-33","size":"village","cards":10,"uncanny":false,"compared":8,"faults":[{"id":"npc_druid_circle","removed":"npc_mill","before":"Fix a problem Underworld Queen May has left standing in the Religious Authorities, and make sure everyone knows who fixed it.","after":"Be the one Underworld Queen May sends whenever something must be done for the Religious Authorities this season."}]}
+{"seed":"dp-village-34","size":"village","cards":13,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-35","size":"village","cards":14,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-village-36","size":"village","cards":10,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-37","size":"village","cards":13,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-38","size":"village","cards":14,"uncanny":false,"compared":7,"faults":[{"id":"npc_mine","removed":"npc_mill","before":"Call in one part of what Aziz al-Malik owes this season.","after":"Call in one part of what Aziz al-Malik owes this season."}]}
+{"seed":"dp-village-39","size":"village","cards":11,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-40","size":"village","cards":11,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-41","size":"village","cards":7,"uncanny":false,"compared":2,"faults":[{"id":"npc_parish_church","removed":"npc_healer_divine_1st_level","before":"Ask Tuyaa Qatagin for advice on one hard decision this season.","after":"Keep the old lessons between them and Tuyaa Qatagin private."}]}
+{"seed":"dp-village-42","size":"village","cards":10,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-43","size":"village","cards":5,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-44","size":"village","cards":6,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-45","size":"village","cards":4,"uncanny":false,"compared":3,"faults":[{"id":"npc_peat_cutter","removed":"npc_hunter_s_lodge","before":"Grow the work at the peat cuttings by one more pair of hands, then another.","after":"Get the peat cuttings through the season without borrowing."}]}
+{"seed":"dp-village-46","size":"village","cards":14,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-village-47","size":"village","cards":16,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-48","size":"village","cards":11,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-49","size":"village","cards":15,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-50","size":"village","cards":11,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-51","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-52","size":"village","cards":6,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-53","size":"village","cards":14,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-54","size":"village","cards":8,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-55","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-56","size":"village","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-57","size":"village","cards":5,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-village-58","size":"village","cards":16,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-59","size":"village","cards":11,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-60","size":"village","cards":9,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-village-61","size":"village","cards":9,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-62","size":"village","cards":15,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-63","size":"village","cards":12,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-64","size":"village","cards":9,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-65","size":"village","cards":11,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-66","size":"village","cards":12,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-67","size":"village","cards":6,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-68","size":"village","cards":12,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-69","size":"village","cards":10,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-70","size":"village","cards":8,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-71","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[{"id":"npc_hunter_s_lodge","removed":"npc_mill","before":"Put their own work in order, down to the last detail.","after":"Maintain the appearance of legitimate authority while the substance of it is actively contested"}]}
+{"seed":"dp-village-72","size":"village","cards":9,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-73","size":"village","cards":10,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-74","size":"village","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-75","size":"village","cards":9,"uncanny":false,"compared":4,"faults":[{"id":"npc_sawmill","removed":"npc_dairy_farmer","before":"Have those who govern confirm, in writing, who may give orders at the sawmill.","after":"Have those who govern confirm, in writing, who may give orders at the sawmill."}]}
+{"seed":"dp-village-76","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[{"id":"npc_peat_cutter","removed":"npc_cartographer_s_workshop","before":"Speak for the Manor Household in one dispute this season where Ruslan Alexeyev would usually speak.","after":"Speak for the Manor Household in one dispute this season where Ruslan Alexeyev would usually speak."}]}
+{"seed":"dp-village-77","size":"village","cards":8,"uncanny":false,"compared":4,"faults":[{"id":"npc_dairy_farmer","removed":"npc_ale_house","before":"Make sure Cara Murphy is not left behind by the changes in the work.","after":"Make sure Cara Murphy is not left behind by the changes in the work."}]}
+{"seed":"dp-village-78","size":"village","cards":8,"uncanny":false,"compared":5,"faults":[{"id":"npc_blacksmith","removed":"npc_mill","before":"Find the weak spot in what Gefjon Svensson is doing, and press on it.","after":"Keep Gefjon Svensson from getting the thing they want most this season."}]}
+{"seed":"dp-village-79","size":"village","cards":11,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-80","size":"village","cards":9,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-81","size":"village","cards":4,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-82","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[{"id":"npc_carpenter","removed":"npc_veteran_s_lodge","before":"Keep the accounts of the carpenter's workshop balanced, and show them to anyone who asks.","after":"Pay every hand at the carpenter's workshop in full and on time this season."}]}
+{"seed":"dp-village-83","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-84","size":"village","cards":3,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-85","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_mill","removed":"npc_sawmill","before":"Keep the accounts of the mill balanced, and show them to anyone who asks.","after":"Keep the accounts of the mill balanced, and show them to anyone who asks."}]}
+{"seed":"dp-village-86","size":"village","cards":9,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-87","size":"village","cards":3,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-88","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-89","size":"village","cards":13,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-90","size":"village","cards":10,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-91","size":"village","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-92","size":"village","cards":8,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-93","size":"village","cards":6,"uncanny":false,"compared":3,"faults":[{"id":"npc_parish_church","removed":"npc_maltster","before":"Take one thing from a person they resent.","after":"Take one thing from a person they resent."}]}
+{"seed":"dp-village-94","size":"village","cards":11,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-95","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-96","size":"village","cards":5,"uncanny":false,"compared":2,"faults":[{"id":"npc_mill","removed":"npc_power_the_independent_bloc","before":"Keep the old lessons between them and Chimalli Koh private.","after":"Show Chimalli Koh how far they have both come since the lessons ended."}]}
+{"seed":"dp-village-97","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-98","size":"village","cards":6,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-99","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-100","size":"village","cards":14,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-101","size":"village","cards":14,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-102","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-103","size":"village","cards":10,"uncanny":false,"compared":4,"faults":[{"id":"npc_power_manor_household","removed":"npc_wildfowler","before":"Tell the right story to the right person, and watch it spread.","after":"Tell the right story to the right person, and watch it spread."}]}
+{"seed":"dp-village-104","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_parish_church","removed":"npc_hunter_s_lodge","before":"Cut the spending at the house of worship by a tenth this season, and keep the work going.","after":"Stop the Elder Council from taking anything more from the Religious Authorities this season."}]}
+{"seed":"dp-village-105","size":"village","cards":8,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-106","size":"village","cards":12,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-107","size":"village","cards":15,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-108","size":"village","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-village-109","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_mill","removed":"npc_thatcher","before":"Stop the Religious Authorities from taking anything more from the Elder Council this season.","after":"Find the mill one more source of money."},{"id":"npc_maltster","removed":"npc_thatcher","before":"Speak out for what they believe at the next gathering, whoever is listening.","after":"Speak out for what they believe at the next gathering, whoever is listening."}]}
+{"seed":"dp-village-110","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-111","size":"village","cards":10,"uncanny":false,"compared":4,"faults":[{"id":"npc_shepherd","removed":"npc_mill","before":"Collect what is owed to the sheepfold before the season is out.","after":"Collect what is owed to the sheepfold before the season is out."}]}
+{"seed":"dp-village-112","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-113","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-114","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-115","size":"village","cards":7,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-116","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-117","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-118","size":"village","cards":11,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-119","size":"village","cards":7,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-120","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[{"id":"npc_pack_animal_trader","removed":"npc_sawmill","before":"Learn whether Accia Gallus can still pay what is owed.","after":"Ask Accia Gallus for a favour that settles a share of the debt."}]}
+{"seed":"dp-village-121","size":"village","cards":16,"uncanny":false,"compared":4,"faults":[{"id":"npc_druid_circle","removed":"npc_mill","before":"Fix a problem Rumena Popov has left standing in the Religious Authorities, and make sure everyone knows who fixed it.","after":"Fix a problem Rumena Popov has left standing in the Religious Authorities, and make sure everyone knows who fixed it."}]}
+{"seed":"dp-village-122","size":"village","cards":13,"uncanny":false,"compared":7,"faults":[{"id":"npc_cobbler","removed":"npc_pawnbroker","before":"Do Macer Laenas one useful favour this season, unasked.","after":"Bring Macer Laenas together with someone who can help them."}]}
+{"seed":"dp-village-123","size":"village","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-124","size":"village","cards":11,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-village-125","size":"village","cards":9,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-126","size":"village","cards":14,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-village-127","size":"village","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-128","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-129","size":"village","cards":5,"uncanny":false,"compared":3,"faults":[{"id":"npc_travelers_inn","removed":"npc_ale_house","before":"Identify the person inside the settlement who is communicating with the besiegers","after":"Identify the person inside the settlement who is communicating with the besiegers"},{"id":"npc.war_council_watch_captain_0","removed":"npc_ale_house","before":"Decide whether to negotiate terms or hold out for relief","after":"Decide whether to negotiate terms or hold out for relief"}]}
+{"seed":"dp-village-130","size":"village","cards":13,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-131","size":"village","cards":10,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-132","size":"village","cards":4,"uncanny":false,"compared":1,"faults":[]}
+{"seed":"dp-village-133","size":"village","cards":10,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-134","size":"village","cards":3,"uncanny":false,"compared":0,"faults":[]}
+{"seed":"dp-village-135","size":"village","cards":9,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-136","size":"village","cards":14,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-village-137","size":"village","cards":11,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-138","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[]}
+{"seed":"dp-village-139","size":"village","cards":13,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-village-140","size":"village","cards":6,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-141","size":"village","cards":8,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-village-142","size":"village","cards":8,"uncanny":false,"compared":3,"faults":[{"id":"npc_power_manor_household","removed":"npc_travelers_inn","before":"Put someone who slighted them back in their place.","after":"Put someone who slighted them back in their place."}]}
+{"seed":"dp-village-143","size":"village","cards":9,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-village-144","size":"village","cards":9,"uncanny":false,"compared":6,"faults":[{"id":"npc_carpenter","removed":"npc_druid_circle","before":"Find one more way to be paid for work already being done.","after":"Find one more way to be paid for work already being done."}]}
+{"seed":"dp-village-145","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[{"id":"npc_mill","removed":"npc_druid_circle","before":"Collect what is owed to the mill before the season is out.","after":"Stop the Religious Authorities from taking anything more from the Elder Council this season."}]}
+{"seed":"dp-village-146","size":"village","cards":4,"uncanny":false,"compared":2,"faults":[]}
+{"seed":"dp-village-147","size":"village","cards":7,"uncanny":false,"compared":4,"faults":[{"id":"npc_apothecary","removed":"npc_mill","before":"Take one thing from a person they resent.","after":"Take one thing from a person they resent."}]}
+{"seed":"dp-village-148","size":"village","cards":15,"uncanny":false,"compared":4,"faults":[{"id":"npc_adventurers_charter_hall","removed":"npc_bowyer_fletcher","before":"Keep every promise they have made this season, even the hard ones.","after":"Keep every promise they have made this season, even the hard ones."}]}
+{"seed":"dp-village-149","size":"village","cards":11,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-0","size":"town","cards":13,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-1","size":"town","cards":8,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-town-2","size":"town","cards":34,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-3","size":"town","cards":27,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-4","size":"town","cards":27,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-5","size":"town","cards":29,"uncanny":false,"compared":7,"faults":[{"id":"npc_power_landed_gentry","removed":"npc_mills_2_5","before":"Hold out against the Craft Guilds over precedence at public gatherings until they give way.","after":"Hold out against the Craft Guilds over precedence at public gatherings until they give way."}]}
+{"seed":"dp-town-6","size":"town","cards":29,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-7","size":"town","cards":22,"uncanny":false,"compared":3,"faults":[{"id":"npc_craft_guilds_5_15","removed":"npc_jeweller","before":"Keep the quarrel with the Merchant Guilds over who speaks for the place to outsiders from coming to blows this season.","after":"Make sure no new rule from those who govern costs the craft guilds anything this season."}]}
+{"seed":"dp-town-8","size":"town","cards":24,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-9","size":"town","cards":27,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-10","size":"town","cards":32,"uncanny":false,"compared":12,"faults":[{"id":"npc_merchant_guilds_3_8","removed":"npc_town_granary","before":"Answer the next move by the Landed Gentry against the Merchant oligarchy, quickly and in public.","after":"Keep the accounts of the merchant guilds balanced, and show them to anyone who asks."}]}
+{"seed":"dp-town-11","size":"town","cards":13,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-12","size":"town","cards":25,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-13","size":"town","cards":24,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-14","size":"town","cards":23,"uncanny":false,"compared":8,"faults":[{"id":"npc_craft_guilds_5_15","removed":"npc_glassblower","before":"Find the craft guilds one more source of money.","after":"Find the weak spot in what Pompeia Bassus is doing, and press on it."}]}
+{"seed":"dp-town-15","size":"town","cards":34,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-16","size":"town","cards":34,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-17","size":"town","cards":29,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-18","size":"town","cards":30,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-19","size":"town","cards":12,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-20","size":"town","cards":30,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-21","size":"town","cards":27,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-22","size":"town","cards":21,"uncanny":false,"compared":4,"faults":[{"id":"npc_parish_churches_2_5","removed":"npc_bowyers_fletchers_guild","before":"Collect what is owed to the houses of worship before the season is out.","after":"Collect what is owed to the houses of worship before the season is out."}]}
+{"seed":"dp-town-23","size":"town","cards":25,"uncanny":false,"compared":8,"faults":[{"id":"npc_ropemaker","removed":"npc_almshouse","before":"Make sure no new rule from those who govern costs the ropemaker's ropewalk anything this season.","after":"Make sure no new rule from those who govern costs the ropemaker's ropewalk anything this season."}]}
+{"seed":"dp-town-24","size":"town","cards":17,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-town-25","size":"town","cards":36,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-26","size":"town","cards":18,"uncanny":false,"compared":10,"faults":[{"id":"npc_tanner_established","removed":"npc_adventurers_charter_hall","before":"Be the one Torvald Rognvaldsson sends whenever something must be done for the Craft Guilds this season.","after":"Take over one of Torvald Rognvaldsson's duties in the Craft Guilds this season, and be seen to do it well."}]}
+{"seed":"dp-town-27","size":"town","cards":43,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-28","size":"town","cards":36,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-29","size":"town","cards":27,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-30","size":"town","cards":30,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-31","size":"town","cards":32,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-32","size":"town","cards":28,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-33","size":"town","cards":31,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-34","size":"town","cards":24,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-35","size":"town","cards":30,"uncanny":false,"compared":11,"faults":[{"id":"npc_toll_bridge","removed":"npc_public_bathhouse","before":"Pay Penelope Choniates back one part of what is owed before the season ends.","after":"Pay Penelope Choniates back one part of what is owed before the season ends."}]}
+{"seed":"dp-town-36","size":"town","cards":31,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-37","size":"town","cards":24,"uncanny":false,"compared":7,"faults":[{"id":"npc_veiled_4188c1e7a37c04b0","removed":"npc_bakers_5_15","before":"Learn what Hilal al-Yamani has been saying about them, and to whom.","after":"Learn what Hilal al-Yamani has been saying about them, and to whom."}]}
+{"seed":"dp-town-38","size":"town","cards":23,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-39","size":"town","cards":34,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-40","size":"town","cards":22,"uncanny":false,"compared":4,"faults":[]}
+{"seed":"dp-town-41","size":"town","cards":40,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-42","size":"town","cards":27,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-43","size":"town","cards":25,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-44","size":"town","cards":16,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-45","size":"town","cards":28,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-46","size":"town","cards":26,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-47","size":"town","cards":26,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-town-48","size":"town","cards":30,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-49","size":"town","cards":19,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-50","size":"town","cards":19,"uncanny":false,"compared":9,"faults":[{"id":"npc_sawmill_commercial","removed":"npc_coaching_inn","before":"Learn what Udelhild Köhler has been saying about them, and to whom.","after":"Learn what Udelhild Köhler has been saying about them, and to whom."}]}
+{"seed":"dp-town-51","size":"town","cards":23,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-52","size":"town","cards":27,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-53","size":"town","cards":29,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-54","size":"town","cards":26,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-55","size":"town","cards":11,"uncanny":false,"compared":4,"faults":[{"id":"npc_mills_2_5","removed":"npc_town_granary","before":"Find a way to make do with less grain and water power at the mills.","after":"Find a way to make do with less grain and water power at the mills."}]}
+{"seed":"dp-town-56","size":"town","cards":26,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-57","size":"town","cards":24,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-58","size":"town","cards":23,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-59","size":"town","cards":11,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-60","size":"town","cards":35,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-61","size":"town","cards":32,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-town-62","size":"town","cards":24,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-63","size":"town","cards":31,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-town-64","size":"town","cards":34,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-65","size":"town","cards":29,"uncanny":false,"compared":11,"faults":[{"id":"npc_merchant_warehouses","removed":"npc_customs_house","before":"Bring the Merchant Guilds a piece of news before anyone else does.","after":"Find a patron among those who lead the Merchant Guilds, and make themselves useful to them."},{"id":"npc_blacksmiths_3_10","removed":"npc_customs_house","before":"Find out whether Cuauhtemoc Yam has been meeting anyone from the Craft Guilds in private.","after":"Find out whether Cuauhtemoc Yam has been meeting anyone from the Craft Guilds in private."}]}
+{"seed":"dp-town-66","size":"town","cards":28,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-67","size":"town","cards":14,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-68","size":"town","cards":28,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-69","size":"town","cards":25,"uncanny":false,"compared":11,"faults":[{"id":"npc_parish_churches_2_5","removed":"npc_mills_2_5","before":"Stop the Merchant Guilds from taking anything more from the Religious Authorities this season.","after":"Stop the Merchant Guilds from taking anything more from the Religious Authorities this season."},{"id":"npc_power_landed_gentry","removed":"npc_mills_2_5","before":"Be the one others look to when something goes wrong.","after":"Be the one others look to when something goes wrong."}]}
+{"seed":"dp-town-70","size":"town","cards":29,"uncanny":false,"compared":10,"faults":[{"id":"npc_veiled_57e3015fc842899f","removed":"npc_taverns_5_20","before":"Check that Víðr Sigmundsson does the work they are paid for by the street gang, and nothing on the side.","after":"Check that Víðr Sigmundsson does the work they are paid for by the street gang, and nothing on the side."}]}
+{"seed":"dp-town-71","size":"town","cards":34,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-72","size":"town","cards":14,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-73","size":"town","cards":23,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-74","size":"town","cards":14,"uncanny":false,"compared":6,"faults":[{"id":"npc_taverns_5_20","removed":"npc_caravaneer_s_post","before":"Do Ivan Fedorov one useful favour this season, unasked.","after":"Do Ivan Fedorov one useful favour this season, unasked."}]}
+{"seed":"dp-town-75","size":"town","cards":34,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-town-76","size":"town","cards":31,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-77","size":"town","cards":32,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-78","size":"town","cards":28,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-79","size":"town","cards":30,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-80","size":"town","cards":19,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-81","size":"town","cards":25,"uncanny":false,"compared":9,"faults":[{"id":"npc_elder_grove_council","removed":"npc_inn_multiple","before":"Keep Lucia Aquila from getting the thing they want most this season.","after":"Find the weak spot in what Lucia Aquila is doing, and press on it."}]}
+{"seed":"dp-town-82","size":"town","cards":29,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-83","size":"town","cards":29,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-84","size":"town","cards":23,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-85","size":"town","cards":29,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-86","size":"town","cards":21,"uncanny":false,"compared":10,"faults":[{"id":"npc_mills_2_5","removed":"npc_butchers_3_8","before":"Take on more hands at the mills, and keep them busy all season.","after":"Take on more hands at the mills, and keep them busy all season."}]}
+{"seed":"dp-town-87","size":"town","cards":22,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-88","size":"town","cards":24,"uncanny":false,"compared":9,"faults":[{"id":"npc_power_landed_gentry","removed":"npc_mills_2_5","before":"Find out what Quetzal Ucan really wants in return.","after":"Have some fun this season, whatever it costs."}]}
+{"seed":"dp-town-89","size":"town","cards":23,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-90","size":"town","cards":21,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-91","size":"town","cards":30,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-92","size":"town","cards":22,"uncanny":false,"compared":6,"faults":[{"id":"npc_merchant_guilds_3_8","removed":"npc_weavers_textile_workers","before":"Find the merchant guilds one more source of money.","after":"Find the merchant guilds one more source of money."}]}
+{"seed":"dp-town-93","size":"town","cards":21,"uncanny":false,"compared":8,"faults":[{"id":"npc_inn_multiple","removed":"npc_town_granary","before":"Find a way to settle control of the market licensing process that leaves the Guard worse off than the Guild Council.","after":"Get the inn through the season without borrowing."}]}
+{"seed":"dp-town-94","size":"town","cards":24,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-95","size":"town","cards":29,"uncanny":false,"compared":9,"faults":[{"id":"npc_monastery_or_friary","removed":"npc_apothecary_established","before":"Get the proof out of Naomhán Ward's hands.","after":"Get the proof out of Naomhán Ward's hands."}]}
+{"seed":"dp-town-96","size":"town","cards":32,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-97","size":"town","cards":28,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-98","size":"town","cards":27,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-99","size":"town","cards":18,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-100","size":"town","cards":31,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-101","size":"town","cards":12,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-102","size":"town","cards":32,"uncanny":false,"compared":16,"faults":[{"id":"npc_bowyers_fletchers_guild","removed":"npc_brothel","before":"Put a little by at the bowyers & fletchers every week this season, however small the sum.","after":"Put a little by at the bowyers & fletchers every week this season, however small the sum."}]}
+{"seed":"dp-town-103","size":"town","cards":16,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-104","size":"town","cards":11,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-105","size":"town","cards":20,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-106","size":"town","cards":29,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-107","size":"town","cards":34,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-108","size":"town","cards":35,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-109","size":"town","cards":33,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-110","size":"town","cards":36,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-111","size":"town","cards":25,"uncanny":false,"compared":9,"faults":[{"id":"npc_blacksmiths_3_10","removed":"npc_carpenters_5_15","before":"Find out which members of the Craft Guilds are still friendly with the Merchant Guilds, and why.","after":"Keep the accounts of the blacksmiths balanced, and show them to anyone who asks."}]}
+{"seed":"dp-town-112","size":"town","cards":28,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-113","size":"town","cards":15,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-114","size":"town","cards":29,"uncanny":false,"compared":9,"faults":[{"id":"npc_barracks","removed":"npc_customs_house","before":"Collect what is owed to the barracks before the season is out.","after":"Take one piece of business from the Town Mayor and bring it to the Guard."},{"id":"npc_inn_multiple","removed":"npc_customs_house","before":"Ask Lorcan Clifford for advice on one hard decision this season.","after":"Spend an evening with Lorcan Clifford this season and talk over the work as they once did."}]}
+{"seed":"dp-town-115","size":"town","cards":26,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-116","size":"town","cards":25,"uncanny":false,"compared":6,"faults":[{"id":"npc_power_landed_gentry","removed":"npc_mills_2_5","before":"Learn the secret of someone they envy.","after":"Learn the secret of someone they envy."}]}
+{"seed":"dp-town-117","size":"town","cards":30,"uncanny":false,"compared":12,"faults":[{"id":"npc_mine","removed":"npc_town_granary","before":"Learn what the Craft Guilds will accept over control of a key trade route checkpoint, and what they will not.","after":"Learn what the Craft Guilds will accept over control of a key trade route checkpoint, and what they will not."}]}
+{"seed":"dp-town-118","size":"town","cards":30,"uncanny":false,"compared":8,"faults":[{"id":"npc_veiled_450760041a30ebe5","removed":"npc_bowyers_fletchers_guild","before":"Solve a problem this season that has beaten everyone else.","after":"Solve a problem this season that has beaten everyone else."}]}
+{"seed":"dp-town-119","size":"town","cards":34,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-120","size":"town","cards":25,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-121","size":"town","cards":12,"uncanny":false,"compared":8,"faults":[{"id":"npc_taverns_5_20","removed":"npc_town_granary","before":"Pay every hand at the taverns in full and on time this season.","after":"Buy grain at the market in bulk this season, while the price is still fair."},{"id":"npc_brickmaker","removed":"npc_town_granary","before":"Win two more people in the Craft Guilds over to their side before Emiko Sun notices.","after":"Take over one of Emiko Sun's duties in the Craft Guilds this season, and be seen to do it well."}]}
+{"seed":"dp-town-122","size":"town","cards":24,"uncanny":false,"compared":7,"faults":[{"id":"npc_parish_churches_2_5","removed":"npc_tailor_s_guild","before":"Stand by Kari Rognvaldsson in their next quarrel, whoever it is with.","after":"Stand by Kari Rognvaldsson in their next quarrel, whoever it is with."}]}
+{"seed":"dp-town-123","size":"town","cards":33,"uncanny":false,"compared":9,"faults":[{"id":"npc_traveling_performers","removed":"npc_taverns_5_20","before":"Do Kausar ibn Khaldun the next favour quickly, and ask for more coin in return.","after":"Do Kausar ibn Khaldun the next favour quickly, and ask for more coin in return."}]}
+{"seed":"dp-town-124","size":"town","cards":17,"uncanny":false,"compared":8,"faults":[{"id":"npc_craft_guilds_5_15","removed":"npc_beast_trainers","before":"Win someone's trust this season, and keep a use for it.","after":"Win someone's trust this season, and keep a use for it."},{"id":"npc_veiled_2d882521be1c2790","removed":"npc_beast_trainers","before":"Win a title, a seat or an honour, however small.","after":"Win a title, a seat or an honour, however small."}]}
+{"seed":"dp-town-125","size":"town","cards":23,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-126","size":"town","cards":33,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-127","size":"town","cards":33,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-128","size":"town","cards":19,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-129","size":"town","cards":21,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-130","size":"town","cards":18,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-131","size":"town","cards":9,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-132","size":"town","cards":27,"uncanny":false,"compared":5,"faults":[]}
+{"seed":"dp-town-133","size":"town","cards":35,"uncanny":false,"compared":9,"faults":[{"id":"npc_sawmill_commercial","removed":"npc_money_changers","before":"Keep out of Arnold Jung's way this season, and get on with their own work in peace.","after":"Learn what Arnold Jung has been saying about them, and to whom."}]}
+{"seed":"dp-town-134","size":"town","cards":18,"uncanny":false,"compared":8,"faults":[{"id":"npc_parish_churches_2_5","removed":"npc_midwife","before":"Collect what is owed to the houses of worship before the season is out.","after":"Do Lyuben Kozlov a favour big enough to count against what is owed."}]}
+{"seed":"dp-town-135","size":"town","cards":28,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-136","size":"town","cards":24,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-town-137","size":"town","cards":35,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-town-138","size":"town","cards":27,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-139","size":"town","cards":25,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-town-140","size":"town","cards":28,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-141","size":"town","cards":36,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-town-142","size":"town","cards":37,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-town-143","size":"town","cards":32,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-town-144","size":"town","cards":33,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-town-145","size":"town","cards":17,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-town-146","size":"town","cards":32,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-town-147","size":"town","cards":21,"uncanny":false,"compared":9,"faults":[{"id":"npc_craft_guilds_5_15","removed":"npc_tanner_established","before":"Take on more hands at the craft guilds, and keep them busy all season.","after":"Take on more hands at the craft guilds, and keep them busy all season."},{"id":"npc_adventurers_charter_hall","removed":"npc_tanner_established","before":"Take over one of Narae Hayashi's duties in the Town Mayor this season, and be seen to do it well.","after":"Show the rest of the Town Mayor that Narae Hayashi can be wrong, without ever saying so aloud."}]}
+{"seed":"dp-town-148","size":"town","cards":29,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-town-149","size":"town","cards":32,"uncanny":false,"compared":10,"faults":[{"id":"npc_craft_guilds_5_15","removed":"npc_courthouse","before":"Stand by Vénus Farrell in their next quarrel, whoever it is with.","after":"Warn Vénus Farrell of any trouble before it reaches them."}]}
+{"seed":"dp-city-0","size":"city","cards":53,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-1","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-2","size":"city","cards":74,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-3","size":"city","cards":38,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-4","size":"city","cards":74,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-5","size":"city","cards":33,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-6","size":"city","cards":55,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-7","size":"city","cards":73,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-8","size":"city","cards":69,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-9","size":"city","cards":62,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-10","size":"city","cards":81,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-11","size":"city","cards":76,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-12","size":"city","cards":58,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-13","size":"city","cards":71,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-14","size":"city","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-15","size":"city","cards":68,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-16","size":"city","cards":45,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-city-17","size":"city","cards":32,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-18","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-19","size":"city","cards":56,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-20","size":"city","cards":61,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-21","size":"city","cards":76,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-city-22","size":"city","cards":60,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-23","size":"city","cards":64,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-24","size":"city","cards":78,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-25","size":"city","cards":62,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-city-26","size":"city","cards":73,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-27","size":"city","cards":31,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-28","size":"city","cards":59,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-city-29","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-30","size":"city","cards":73,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-31","size":"city","cards":55,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-32","size":"city","cards":61,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-33","size":"city","cards":67,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-34","size":"city","cards":64,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-35","size":"city","cards":69,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-36","size":"city","cards":62,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-37","size":"city","cards":56,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-38","size":"city","cards":72,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-39","size":"city","cards":66,"uncanny":false,"compared":19,"faults":[]}
+{"seed":"dp-city-40","size":"city","cards":77,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-41","size":"city","cards":69,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-42","size":"city","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-43","size":"city","cards":35,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-44","size":"city","cards":59,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-45","size":"city","cards":74,"uncanny":false,"compared":17,"faults":[]}
+{"seed":"dp-city-46","size":"city","cards":56,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-47","size":"city","cards":64,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-48","size":"city","cards":61,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-49","size":"city","cards":58,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-50","size":"city","cards":68,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-51","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-52","size":"city","cards":35,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-53","size":"city","cards":59,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-54","size":"city","cards":51,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-55","size":"city","cards":51,"uncanny":false,"compared":10,"faults":[{"id":"npc_veiled_1a8b755124c4ba27","removed":"npc_banking_houses","before":"Get the black market through the season without borrowing.","after":"Get the black market through the season without borrowing."}]}
+{"seed":"dp-city-56","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-57","size":"city","cards":51,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-58","size":"city","cards":57,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-59","size":"city","cards":52,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-60","size":"city","cards":50,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-61","size":"city","cards":73,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-62","size":"city","cards":73,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-63","size":"city","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-64","size":"city","cards":76,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-65","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-66","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-67","size":"city","cards":70,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-68","size":"city","cards":54,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-69","size":"city","cards":54,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-70","size":"city","cards":74,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-city-71","size":"city","cards":50,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-72","size":"city","cards":59,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-73","size":"city","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-74","size":"city","cards":62,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-75","size":"city","cards":71,"uncanny":false,"compared":14,"faults":[{"id":"npc_specialized_metalworkers","removed":"npc_public_bathhouse","before":"Get out of the work they have been given, and let someone else do it.","after":"Get out of the work they have been given, and let someone else do it."}]}
+{"seed":"dp-city-76","size":"city","cards":31,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-77","size":"city","cards":60,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-78","size":"city","cards":68,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-79","size":"city","cards":64,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-80","size":"city","cards":35,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-81","size":"city","cards":73,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-82","size":"city","cards":70,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-83","size":"city","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-84","size":"city","cards":77,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-85","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-86","size":"city","cards":57,"uncanny":false,"compared":11,"faults":[{"id":"npc_merchant_guilds_15_40","removed":"npc_multiple_courthouses","before":"Keep the old lessons between them and Jovianus Calvus private.","after":"Make sure Strabo Cato is not left behind by the changes in the work."}]}
+{"seed":"dp-city-87","size":"city","cards":43,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-88","size":"city","cards":55,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-89","size":"city","cards":65,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-90","size":"city","cards":38,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-91","size":"city","cards":66,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-92","size":"city","cards":44,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-93","size":"city","cards":77,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-94","size":"city","cards":74,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-95","size":"city","cards":50,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-96","size":"city","cards":67,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-97","size":"city","cards":58,"uncanny":false,"compared":18,"faults":[]}
+{"seed":"dp-city-98","size":"city","cards":59,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-city-99","size":"city","cards":61,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-100","size":"city","cards":68,"uncanny":false,"compared":6,"faults":[]}
+{"seed":"dp-city-101","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-102","size":"city","cards":71,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-103","size":"city","cards":56,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-104","size":"city","cards":50,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-city-105","size":"city","cards":27,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-106","size":"city","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-107","size":"city","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-108","size":"city","cards":35,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-city-109","size":"city","cards":69,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-110","size":"city","cards":42,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-111","size":"city","cards":27,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-112","size":"city","cards":38,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-113","size":"city","cards":76,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-114","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-115","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-116","size":"city","cards":37,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-117","size":"city","cards":74,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-city-118","size":"city","cards":83,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-119","size":"city","cards":69,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-120","size":"city","cards":72,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-121","size":"city","cards":51,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-122","size":"city","cards":63,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-123","size":"city","cards":56,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-124","size":"city","cards":70,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-125","size":"city","cards":67,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-126","size":"city","cards":73,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-127","size":"city","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-128","size":"city","cards":64,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-129","size":"city","cards":50,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-130","size":"city","cards":60,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-131","size":"city","cards":34,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-132","size":"city","cards":65,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-133","size":"city","cards":80,"uncanny":false,"compared":14,"faults":[{"id":"npc_midwife","removed":"npc_banking_houses","before":"Get far enough away that the Thieves' Guild cannot follow.","after":"Get far enough away that the Thieves' Guild cannot follow."}]}
+{"seed":"dp-city-134","size":"city","cards":48,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-135","size":"city","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-136","size":"city","cards":69,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-city-137","size":"city","cards":62,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-138","size":"city","cards":30,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-139","size":"city","cards":73,"uncanny":false,"compared":8,"faults":[]}
+{"seed":"dp-city-140","size":"city","cards":36,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-141","size":"city","cards":76,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-142","size":"city","cards":47,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-city-143","size":"city","cards":39,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-144","size":"city","cards":59,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-145","size":"city","cards":63,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-146","size":"city","cards":76,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-city-147","size":"city","cards":55,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-148","size":"city","cards":46,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-city-149","size":"city","cards":64,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-0","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-1","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-2","size":"metropolis","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-3","size":"metropolis","cards":91,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-4","size":"metropolis","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-5","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-6","size":"metropolis","cards":91,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-metropolis-7","size":"metropolis","cards":92,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-8","size":"metropolis","cards":88,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-metropolis-9","size":"metropolis","cards":85,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-10","size":"metropolis","cards":81,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-11","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-12","size":"metropolis","cards":81,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-13","size":"metropolis","cards":85,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-14","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-15","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-16","size":"metropolis","cards":81,"uncanny":false,"compared":16,"faults":[{"id":"npc_academy_of_magic","removed":"npc_beast_trainers","before":"Win two more people in the Arcane Orders over to their side before Dietrich Wenzel notices.","after":"Win two more people in the Arcane Orders over to their side before Dietrich Wenzel notices."}]}
+{"seed":"dp-metropolis-17","size":"metropolis","cards":90,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-18","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-19","size":"metropolis","cards":79,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-metropolis-20","size":"metropolis","cards":87,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-metropolis-21","size":"metropolis","cards":76,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-22","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-23","size":"metropolis","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-24","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-25","size":"metropolis","cards":88,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-metropolis-26","size":"metropolis","cards":86,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-27","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-28","size":"metropolis","cards":70,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-29","size":"metropolis","cards":64,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-30","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-31","size":"metropolis","cards":91,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-32","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-33","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-34","size":"metropolis","cards":85,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-35","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-36","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-37","size":"metropolis","cards":89,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-metropolis-38","size":"metropolis","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-39","size":"metropolis","cards":77,"uncanny":false,"compared":17,"faults":[]}
+{"seed":"dp-metropolis-40","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-41","size":"metropolis","cards":81,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-42","size":"metropolis","cards":84,"uncanny":false,"compared":9,"faults":[]}
+{"seed":"dp-metropolis-43","size":"metropolis","cards":89,"uncanny":false,"compared":10,"faults":[{"id":"npc_charlatan_fortune_tellers","removed":"npc_warehouse_district","before":"Finish the work they have been given, properly and on time.","after":"Finish the work they have been given, properly and on time."}]}
+{"seed":"dp-metropolis-44","size":"metropolis","cards":88,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-45","size":"metropolis","cards":85,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-metropolis-46","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-47","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-48","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-49","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-50","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-51","size":"metropolis","cards":79,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-52","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-53","size":"metropolis","cards":86,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-54","size":"metropolis","cards":88,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-metropolis-55","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-56","size":"metropolis","cards":83,"uncanny":false,"compared":12,"faults":[{"id":"npc_craft_guilds_100_150","removed":"npc_citadel","before":"Have those who govern confirm, in writing, who may give orders at the craft guilds.","after":"Find a way to settle a broken promise of support that leaves the Grand Merchant Oligarchy worse off than the Craft Guilds."},{"id":"npc_veiled_0c0b11fa805425f5","removed":"npc_citadel","before":"Cut the spending at the smuggling network by a tenth this season, and keep the work going.","after":"Cut the spending at the smuggling network by a tenth this season, and keep the work going."}]}
+{"seed":"dp-metropolis-57","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-58","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-59","size":"metropolis","cards":86,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-60","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-61","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-62","size":"metropolis","cards":71,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-63","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-64","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-65","size":"metropolis","cards":80,"uncanny":false,"compared":19,"faults":[]}
+{"seed":"dp-metropolis-66","size":"metropolis","cards":81,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-metropolis-67","size":"metropolis","cards":84,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-68","size":"metropolis","cards":76,"uncanny":false,"compared":18,"faults":[{"id":"npc_multiple_garrisons","removed":"npc_multiple_adventurers_guilds","before":"Make sure no new rule from those who govern costs the garrisons anything this season.","after":"Make sure no new rule from those who govern costs the garrisons anything this season."},{"id":"npc_great_cathedral","removed":"npc_multiple_adventurers_guilds","before":"Keep the old lessons between them and Acamapichtli Tzuc private.","after":"Make sure Acamapichtli Tzuc is not left behind by the changes in the work."},{"id":"npc_furrier_s_district","removed":"npc_multiple_adventurers_guilds","before":"Find out which members of the Merchant Guilds are still friendly with the Craft Guilds, and why.","after":"Find one matter this season on which the Merchant Guilds and the Craft Guilds want the same thing."}]}
+{"seed":"dp-metropolis-69","size":"metropolis","cards":86,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-metropolis-70","size":"metropolis","cards":88,"uncanny":false,"compared":15,"faults":[]}
+{"seed":"dp-metropolis-71","size":"metropolis","cards":86,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-72","size":"metropolis","cards":88,"uncanny":false,"compared":10,"faults":[]}
+{"seed":"dp-metropolis-73","size":"metropolis","cards":73,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-74","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-75","size":"metropolis","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-76","size":"metropolis","cards":75,"uncanny":false,"compared":18,"faults":[]}
+{"seed":"dp-metropolis-77","size":"metropolis","cards":84,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-78","size":"metropolis","cards":87,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-79","size":"metropolis","cards":81,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-80","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-81","size":"metropolis","cards":81,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-82","size":"metropolis","cards":82,"uncanny":false,"compared":12,"faults":[{"id":"npc_veiled_e661e8fb3a2327e9","removed":"npc_great_cathedral","before":"Stand by Denis Saveliev in their next quarrel, whoever it is with.","after":"Stand by Denis Saveliev in their next quarrel, whoever it is with."}]}
+{"seed":"dp-metropolis-83","size":"metropolis","cards":88,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-84","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-85","size":"metropolis","cards":89,"uncanny":false,"compared":16,"faults":[]}
+{"seed":"dp-metropolis-86","size":"metropolis","cards":79,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-87","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-88","size":"metropolis","cards":84,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-89","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-90","size":"metropolis","cards":70,"uncanny":false,"compared":17,"faults":[]}
+{"seed":"dp-metropolis-91","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-92","size":"metropolis","cards":79,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-93","size":"metropolis","cards":84,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-94","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-95","size":"metropolis","cards":91,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-96","size":"metropolis","cards":74,"uncanny":false,"compared":17,"faults":[]}
+{"seed":"dp-metropolis-97","size":"metropolis","cards":88,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-98","size":"metropolis","cards":87,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-99","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-100","size":"metropolis","cards":89,"uncanny":false,"compared":7,"faults":[]}
+{"seed":"dp-metropolis-101","size":"metropolis","cards":86,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-102","size":"metropolis","cards":85,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-103","size":"metropolis","cards":89,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-104","size":"metropolis","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-105","size":"metropolis","cards":87,"uncanny":false,"compared":17,"faults":[]}
+{"seed":"dp-metropolis-106","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-107","size":"metropolis","cards":84,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-108","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-109","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-110","size":"metropolis","cards":80,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-111","size":"metropolis","cards":89,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-112","size":"metropolis","cards":81,"uncanny":false,"compared":14,"faults":[]}
+{"seed":"dp-metropolis-113","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-114","size":"metropolis","cards":90,"uncanny":false,"compared":11,"faults":[]}
+{"seed":"dp-metropolis-115","size":"metropolis","cards":79,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-116","size":"metropolis","cards":83,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-117","size":"metropolis","cards":77,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-118","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-119","size":"metropolis","cards":82,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-120","size":"metropolis","cards":76,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-121","size":"metropolis","cards":83,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-122","size":"metropolis","cards":85,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-123","size":"metropolis","cards":79,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-124","size":"metropolis","cards":75,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-125","size":"metropolis","cards":82,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-126","size":"metropolis","cards":86,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-127","size":"metropolis","cards":90,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-128","size":"metropolis","cards":79,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-129","size":"metropolis","cards":77,"uncanny":false,"compared":16,"faults":[{"id":"npc_enchanter_s_shop","removed":"npc_colosseum_arena","before":"Keep the accounts of the enchanter's shop balanced, and show them to anyone who asks.","after":"Keep the accounts of the enchanter's shop balanced, and show them to anyone who asks."}]}
+{"seed":"dp-metropolis-130","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-131","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-132","size":"metropolis","cards":76,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-133","size":"metropolis","cards":77,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-134","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-135","size":"metropolis","cards":74,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-136","size":"metropolis","cards":75,"uncanny":false,"compared":13,"faults":[]}
+{"seed":"dp-metropolis-137","size":"metropolis","cards":85,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-138","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-139","size":"metropolis","cards":80,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-140","size":"metropolis","cards":84,"uncanny":false,"compared":12,"faults":[]}
+{"seed":"dp-metropolis-141","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-142","size":"metropolis","cards":78,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-143","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-144","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-145","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-146","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-147","size":"metropolis","cards":77,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-148","size":"metropolis","cards":88,"uncanny":true,"compared":0,"faults":[]}
+{"seed":"dp-metropolis-149","size":"metropolis","cards":83,"uncanny":true,"compared":0,"faults":[]}
