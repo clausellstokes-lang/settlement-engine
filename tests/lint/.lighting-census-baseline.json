@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a413c61560047a6eba9e7c3f1e95f3acfbed96dc",
-  "measuredBy": "CLOSE-7 GUARD-2",
+  "measuredAtSha": "be61181a3bd107aaebcd95a6ea20b11df4369580",
+  "measuredBy": "LAND-117",
   "date": "2026-11-25",
-  "note": "GUARD-2 adds G7-G12 to tests/store/rederiveGuard.test.js",
-  "files": 3801,
-  "parked": 497,
+  "note": "ruling 117-6 (R24r item 1): B1(ii) reverted at point 117 (be61181a3b); tests/domain/traditions/fieldsBoughtIn.test.js deleted",
+  "files": 3800,
+  "parked": 496,
   "credited": 3304,
   "titles": 31986,
   "suiteTitles": 8890
