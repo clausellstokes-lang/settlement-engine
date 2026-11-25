@@ -84,6 +84,19 @@ export const FOLLOWER_BY_BEFORE = Object.freeze({
  */
 export const NO_PRONOUN_TAILS = Object.freeze(new Set(['would rather keep to themselves', 'cannot finish theirs']));
 
+/**
+ * THE REFLEXIVE SLOT (E8, WORDS-1; the tenth chair's PRERELEASE-LIST row E8, the ninth chair's N26 "a reflexive slot in the
+ * templates (the right form)"): a composed line whose reflexive binds ONE person writes it through this slot, filled from
+ * that person's own `gender`: "himself", "herself"; a card with no gender (an older stored town's card) keeps the they-form
+ * the line wrote before. The template names WHOM it binds (the slot is handed that card); no code rewrites a reflexive.
+ * @enforced-by tests/generators/people/reflexiveSlot.test.js
+ * @param {MentionCard | null | undefined} card @returns {'himself' | 'herself' | 'themselves'}
+ */
+export function reflexiveOf(card) {
+  const g = str(card?.gender);
+  return g === 'female' ? 'herself' : g === 'male' ? 'himself' : 'themselves';
+}
+
 /** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
 const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
 const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
