@@ -544,3 +544,26 @@ and unproven beyond it; parked and pushed at `lane/veil-52-2026-11-24-doors-wip`
 hand-back `veil/v52/builder/SNAP-CHRONICLE-HANDBACK.md`). It is the map's work by the owner's line (`SCOPE-LINE.md`), a
 fault live today and not made by this release; riding would owe four runs and a read. IT STAYS PARKED FOR THE MAP WORK,
 which finds it whole.
+**V26 (06:53 UTC): V23's ROLLBACK RESTORES WHAT PRODUCTION HELD, AND ITS PROOF READS A HOSTED CATALOGUE.** ASKED by VEIL-55
+(06:52): VEIL-53 built the re-grant in the down file (c2d9cf8a6; the access lists read off a hosted-default 001..211:
+`_gallery_apply_member_overrides` {public, postgres, anon, authenticated, service_role}; `_gallery_sanitize_public_json`
+{postgres, anon, authenticated, service_role}; the dump diff 4 lines red to EMPTY, 445 rows, under the hosted harness).
+But `galleryVeilCures`' rollback block compares PLAIN-Postgres catalogues, where 211 leaves different access lists on
+the two (the platform's default privileges are not there), and no fixed SQL restores both. RULED: (a), VEIL-53's and
+VEIL-55's lean, on four terms:
+1. THE DOWN FILE GRANTS BY EXACT SIGNATURE what the hosted 001..211 held, with a comment that says so and why (the
+   platform's default privileges gave them; 212 took them away; a rollback gives them back). No conditional SQL, no
+   read of `pg_default_acl` in a rollback.
+2. THE ROLLBACK BLOCK's WHOLE COMPARE RUNS UNDER THE HOSTED HARNESS (one catalogue, the one production has), not the
+   two functions alone. The plain compare of that block is retired, not kept with an exception.
+3. THE HARNESS IS A MODEL: nobody in the program has read production's access lists. So THE END's LIST GAINS ONE
+   READ-ONLY QUERY FOR THE OWNER's HAND, run before 212 is applied: the access lists of these two functions on the
+   live database, with the expected answer written beside it; if it differs, the down file's grants are corrected
+   before anything is applied. VEIL-53 writes the query and its expected output into the lane's owner page.
+4. SAFE TO RESTORE: both are pure functions of their arguments (the first SECURITY INVOKER), and 211's bodies return
+   with the rollback; re-opening them returns the posture of today, no worse.
+WHAT WOULD CHANGE IT: a rehearsal of the down file on a database without the platform's defaults: there is none; the
+local rehearsal uses the hosted harness. TAKEN AT HIGH EFFORT; RE-READ WITH THE HUNK AND THE DOWN LINES AT THE JOIN, at
+the top effort.
+ALSO RECORDED (VEIL-55, item 1): a push of VEIL-53's with nothing to send ran the whole check from the hook and was
+killed (COMMON-EIGHTH 15 (c)); 15 (d) read clean; every push of that seat now checks `ls-remote` first.

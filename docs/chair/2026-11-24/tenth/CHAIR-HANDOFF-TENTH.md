@@ -1111,3 +1111,8 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   other five are rows today (four bundles; `dmLayerGoldenIsolation` A7: checked by the chair in the list). NOTHING
   RE-RECORDED. NEXT AT CLOSE-7: the one batch (B1(i)'s finish, B1(ii), C1, P3source, goals I-13), the same builder, cut
   at 0ec96f13d. OWED BY THE CHAIR AT THE HAND-IN: GUARD's whole diff at the top effort.
+- 2026-11-25 06:53 UTC · T85 · V26: V23's ROLLBACK RESTORES THE HOSTED ACCESS LISTS; ITS PROOF RUNS UNDER THE HOSTED HARNESS.
+  `veil/RULING-V1.md` V26: the down file re-grants by exact signature (VEIL-53's c2d9cf8a6); the rollback block's whole
+  compare moves to the hosted harness; ONE READ-ONLY QUERY IS ADDED TO THE END's LIST FOR THE OWNER (the two functions'
+  access lists on the live database, before 212 is applied), written by VEIL-53 with its expected answer. Sent to
+  VEIL-55. The end's two additions are in `PRERELEASE-LIST.md`.
