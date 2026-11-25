@@ -916,3 +916,9 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   marker's allowlist and the groupings carry no person id; the two null-blind guards are right; nothing calls the three
   reads in a way VOLATILE breaks. One thing owed in VEIL-55's "TIP? R4-IDS": the committed test that keeps "no stored
   person id at any path" standing. The grant is then one word on its table.
+- 2026-11-25 01:32 UTC · T69 · THE HOURLY CHECK. MARKS at 01:31: VEIL-52 528,331; VEIL-55 518,969; VEIL-53 499,683 (CLOSE-7 and VEIL-51 not re-read: both far
+  below). Every record still reads `allowed_warning`; the owner's own figure was 32 per cent at 01:15. The records' costs
+  (the meter of T66): VEIL-53 52.06, VEIL-52 36.71, VEIL-55 21.11: each veil seat about 6 to 9 an hour. VEIL-52 and
+  VEIL-53 were restarted once more by their machines and relaunched what was lost. LAND-116: ITS COMMIT IS MADE IN THE
+  LINE's WORKTREE (66168c1089, "the troubles rule lit", unpushed, on 0559a8405); its lit measure on both corpora ended
+  at 01:25; the gate follows (about three hours). The hourly check is re-armed for 02:32 UTC.
