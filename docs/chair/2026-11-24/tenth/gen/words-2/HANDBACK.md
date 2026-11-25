@@ -1,6 +1,6 @@
 # WORDS-2 HAND-BACK (a seat of the tenth chair; branch `lane/words-2-2026-11-25`)
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45 UTC 2026-11-25; kept current at every push)
+## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45, updated 16:55 UTC 2026-11-25; kept current at every push)
 A successor reads `docs/chair/2026-11-24/tenth/prompts/START-WORDS-2.txt` and `START-GEN-COMMON.txt` (on
 `lane/chair-2026-11-08`) whole, then this section, and needs nothing else.
 
@@ -26,7 +26,7 @@ First message to the chair sent 09:00 UTC.
   `unit-dailylife-trigger.mjs` (Daily Life moves by admission: E5, G8, E6), `unit-examples.mjs` (three examples a unit),
   `e3-slots.mjs`, `e3-pool-food.mjs`, `e3-grounded.mjs` (its grazing oracle predates G13: read with that in mind).
 
-### 0.2 Units: every one handed in to the chair except E3 (state at 16:45 UTC)
+### 0.2 Units: EVERY ONE HANDED IN TO THE CHAIR (16:44 and 16:54 UTC; state at 16:55 UTC)
 Before = base, after = all units joined (`/home/user/wt/join3`); E3 split out by a join without E3's four src files
 (`/home/user/wt/joinx`, uncommitted). Numbers: records moved C/V · pages moved C/V. Both zero checks hold for every unit
 (the display units move 0 records; every moved page traces to a unit, 0 lines unattributed). Typecheck on the joined tree
@@ -48,11 +48,11 @@ Before = base, after = all units joined (`/home/user/wt/join3`); E3 split out by
 | G6 #8 | g8 f56efab9f | 0/0 · 7/52; #8 2→0, 8→0 | none |
 | E5 | e5 42022a113 | 0/0 · 51/34 | dailyLifeOffice.test.js (E6), lighting |
 | E6 | e6 5544ca54f | 0/0 · 11/6 (L12 prints on 3) | dailyLifeOffice.test.js (E5), lighting; samenessHideable.houseReadings.json +1 listed row |
-| E3 | e3 8a8ba1890 + the native-ground cure (uncommitted at 16:45, proving) | 228/108 · 228/108 | lighting; presumption register (its door, own commit) |
+| E3 | e3 900ef6fb0 (cure 07bf32933, register shrink 900ef6fb0) | 228/108 · 228/108; tests 195/195 | lighting; presumption register (shrunk by its door) |
 | E9 line | - | SILENCE (G9 (4)) | - |
 Census files are never merged by hand: after a merge each is re-taken by its own door, in its own commit.
 
-E3 (RULED BUILT, G19 (2)): grazing quarrel only where herding leads (`foodSources[0]==='livestock'`), the marsh/shore/water
+E3 (RULED BUILT, G19 (2); the four columns whole: `e3/slots-four-states.tsv`): grazing quarrel only where herding leads (`foodSources[0]==='livestock'`), the marsh/shore/water
 twins where the land holds them, else none (G13); the small-place pool's grazing line by the same fact (G16); thin harvest
 and late frost never beside Secure (G13 (3)); the rule reads NATIVE ground keys only (`nativeSemanticResourceKeys`; G19 (1):
 a custom resource named like a native ground leaked into the stored line). The pin tailPowers4Batch1 KEEP r2r-hamlet-8 is
@@ -71,8 +71,14 @@ e9") and 0067af37b ("scratch join: g1"). Both were thrown away and the join redo
 is empty for both (no remote branch holds them). Reported to the chair the same hour. Hours misstated four times (each
 corrected the same turn); the rule since: read `date -u` in one step, write it in the next.
 
-### 0.5 Next step
-E3: commit the native-ground cure and the presumption register's shrink (its door), push from /home/user/wt/e3, hand in
-(part 3). Then SAFETY-BLANK (G19 (5)): measure the labels printed with no value (C dp-village-57 "Safety"), read the cause;
-a reader cure is built red first; a new word or fact is one message to the chair first. Remove the scratch worktrees
-join2, join3, joinx, e3none once their joined commits are recorded here.
+### 0.5 The scratch joins (local, hooks on, never pushed; `git branch -r --contains` empty for each; worktrees removed)
+- `words-2-join-scratch` 8e2ad212a: base + E4, E9, E10, E11, E12, E7, G10, G1 (first), G8, G9, G11.
+- `words-2-join2-scratch` 046476c2d: + E11, E9, G10, G1, G9, G11, E5, G6, E3, G34 (re-merged tips) and its census commit.
+- `words-2-join3-scratch` e51ef9007: + every tip to E3 8a8ba1890 and E6 26508fa81, census commits; proofs ran with E3's cure
+  and E6's row applied uncommitted. joinx = e51ef9007 with E3's four src files at the base (uncommitted): E3's split.
+- e3none: 646c16169 plus the uncommitted no-fall-through prototype (the chair's third state).
+Logs and batteries: the session scratchpad (`base-*`, `join3-*`, `joinx-*`, `rec-*`), not kept.
+
+### 0.6 Next step
+SAFETY-BLANK (G19 (5)): measure the labels printed with no value (C dp-village-57 "Safety"; any other label of that block),
+read the cause; a reader cure is built red first; a new word or fact is one message to the chair first.
