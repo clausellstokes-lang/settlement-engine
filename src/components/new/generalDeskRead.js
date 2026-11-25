@@ -243,7 +243,7 @@ export function generalDeskLines(settlement, options = {}) {
   const prose = publicDossier ? GENERAL_STATE_PROSE_SILENT : generalStateProse(
     r,
     {
-      scores: scoresAsShown(r, dp.scores), // P9 (G22): DS-GEN-3's band key reads the beasts grade against the need
+      scores: scoresAsShown(r, dp.scores), // P9 (G22): the DS-GEN-3 band key reads the beasts grade against the need
       prosperity: eco.prosperity,
       safetyLabel: eco.safetyProfile?.safetyLabel,
       viable: via.viable,
@@ -414,4 +414,4 @@ export function generalDeskLines(settlement, options = {}) {
     }),
   });
 }
-import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the file's end, so no cited line moves
+import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves

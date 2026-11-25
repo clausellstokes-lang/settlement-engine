@@ -625,4 +625,4 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 }
 
 export default React.memo(OverviewTab);
-import { scoresAsShown } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the file's end, so no cited line moves
+import { scoresAsShown } from '../../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves

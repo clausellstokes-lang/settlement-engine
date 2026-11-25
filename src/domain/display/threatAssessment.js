@@ -402,4 +402,4 @@ export function buildThreatAssessment(r) {
 
   return result;
 }
-import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the file's end, so no cited line moves
+import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves

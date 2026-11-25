@@ -471,7 +471,7 @@ export function deriveDefenseReadiness(settlement) {
   const gates = r.defenseProfile?.economicGates || {};
   /** @type {Record<string, number>} */
   const scoreFor = {
-    'Beasts & Monsters': beastsReadinessOf(r).shownScore, // P9 (G22): read against the need
+    'Beasts & Monsters': beastsReadinessOf(r).shownScore, /* P9 (G22): read against the need */
     'Invasion & War': scores.military || 0,
     'Internal Security': scores.internal || 0,
     'Economic Survival': scores.economic || 0,
@@ -995,4 +995,4 @@ function diffuseUnderCoordinatedWave(row, settlement) {
   const note = diffuseNoteAsPrinted(row.note, settlement);
   return note === row.note ? row : Object.freeze({ ...row, note });
 }
-import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the file's end, so no cited line moves
+import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves
