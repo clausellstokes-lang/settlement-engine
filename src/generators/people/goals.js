@@ -38,7 +38,7 @@ import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { fillAgreement, holdsPossessive, powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
-import { secondMentions } from '../../data/people/personMention.js';
+import { reflexiveOf, secondMentions } from '../../data/people/personMention.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -58,9 +58,10 @@ import { rareRowOf } from './rareSecrets.js'; // AMENDMENT 3 (item 8): the rare 
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
 /**
- * @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean, wording: string, call?: number, floor?: boolean, exhausted?: boolean }} Candidate
+ * @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean, wording: string, call?: number, floor?: boolean, exhausted?: boolean, selfText?: (self: string) => string | null }} Candidate
  * `wording`: the line's WORDING with the town's names masked (GR1, `wordingOf`); `call`: the `cellCandidates` call that built it (its rotation group);
  * `floor`: a floor's line (`personalityFloor`); `exhausted`: that floor found its cell and its reserve all printed (GOALS-3 (d)).
+ * `selfText` (E8): a line with the `{self}` slot, its text with the slot filled by the given form (`writtenText`).
  */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
@@ -243,6 +244,20 @@ const noteDrawn = (c) => { for (const n of c?.notes || []) notePresumption(/** @
 
 /** The slots a template names. @param {string} line @returns {string[]} */
 const slotsIn = (line) => [...String(line).matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
+
+/**
+ * THE REFLEXIVE SLOT (E8, WORDS-1; `data/people/personMention.js :: reflexiveOf`). A want's `{self}` binds the card that holds
+ * it. THE DRAW IS NOT MOVED: every candidate is built, held, compared, rotated and refused on the text the line wrote before
+ * the slot (`{self}` as "themselves", `HELD_SELF`), so every card's draw, rung and rotation is as it was; the card's own form
+ * is written only where the deal writes the want to the card (`writtenText`). A want the town already holds in its WRITTEN
+ * form (a keeper's, or another card's in the post-pass) is read back in the held form (`heldText`): no goal table writes
+ * "himself" or "herself" but through this slot, so the read is exact.
+ */
+const HELD_SELF = 'themselves';
+/** a written want in the form the draw holds and compares @param {unknown} t @returns {string} */
+const heldText = (t) => String(t ?? '').replace(/\b(?:him|her)self\b/g, HELD_SELF);
+/** the want as written to the card that holds it: the slot filled with the card's own form @param {Candidate | null} c @param {Rec} card @returns {string | null} */
+const writtenText = (c, card) => (c ? (c.selfText ? c.selfText(reflexiveOf(card)) : c.text) : null);
 
 /** A refused cluster (GOALS-1 item 6). @param {unknown} cluster */
 const refusedCluster = (cluster) => GOAL_SECRET_REFUSED_CLUSTERS.includes(str(cluster));
@@ -455,7 +470,7 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   // card (the keyed intent) keep the record's names, so every reader that matches a power by name still finds it.
   // NAMES-1 (the seventh chair's ruling CN1 of 2026-11-20): WITH ITS ARTICLE ("the Elder Council", "the Guard"), "The" where
   // the slot opens the line (the line's first letter is raised below); the slot contract never writes "the {power}".
-  const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
+  const said = Object.fromEntries(Object.entries({ ...slots, self: HELD_SELF }).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
   const people = personCardsOf(slots, ctx);
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
   /**
@@ -471,16 +486,18 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
       if (!kept.length) continue;
       const drawn = kept[0];
       // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
-      const filled = fillLine(fillAgreement(templateOf(drawn), slots), said);
-      if (!filled) continue;
+      const agreed = fillAgreement(templateOf(drawn), slots);
       // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
-      const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
+      const sayWith = (/** @type {string} */ self) => { const f = fillLine(agreed, { ...said, self }); return f && secondMentions(f[0].toUpperCase() + f.slice(1), people); };
+      const text = sayWith(HELD_SELF);
+      if (!text) continue;
       if (held.has(text)) { if (counted) ctx.refusals.n += 1; continue; }
       const used = Object.fromEntries(slotsIn(templateOf(drawn)).map((k) => [k, slots[k]]));
       const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(drawn)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
       // GOALS-1 (the chair's check of 10:48 UTC): a gentle line on a harsh tie is refused, marked (never dropped), draw-free
       const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(drawn)])[extra.tie.type]).includes(extra.tie.strength);
-      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(drawn, slots), call });
+      // E8: `{self}` takes the held form in the wording, as the line wrote it before the slot
+      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(drawn, { ...slots, self: HELD_SELF }), call, ...(slotsIn(templateOf(drawn)).includes('self') ? { selfText: sayWith } : {}) });
     }
     return out;
   };
@@ -790,7 +807,7 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
   const ctx = goalContextOf(settlement, cards, relationships);
   const family = rng.fork(GOALS_FORK_LABEL);
   const heldShort = new Set(); const heldLong = new Set();
-  for (const c of cards) if (keep.has(String(c?.id))) { if (c?.goal?.short) heldShort.add(String(c.goal.short).trim()); if (c?.goal?.long) heldLong.add(String(c.goal.long).trim()); }
+  for (const c of cards) if (keep.has(String(c?.id))) { if (c?.goal?.short) heldShort.add(heldText(c.goal.short).trim()); if (c?.goal?.long) heldLong.add(heldText(c.goal.long).trim()); }
   const U = GOAL_FAMILY_TUNING.uncanny;
   const pUncanny = ctx.magic ? (/** @type {Rec} */ (U.perCard)[ctx.tier] ?? 0) : 0;
   let uncannyDealt = 0;
@@ -877,7 +894,7 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
   const holdingOf = (/** @type {Rec} */ card, /** @type {Candidate | null} */ cand, /** @type {string} */ text) => ({ card, names: namesOf(cand), text });
   const hold = (/** @type {string} */ key, /** @type {Rec} */ card, /** @type {Candidate | null} */ cand, /** @type {string} */ text) => { add(holders, key, holdingOf(card, cand, text)); print(text, 1); };
   /** @type {Set<string>} */ const prior = new Set();
-  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c, null, key); } }
+  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = heldText(t).trim(); prior.add(key); hold(key, c, null, key); } }
   /** @type {Array<{ d: Dealt, v: Vantage, h: Holding }>} */ const repeats = [];
   for (const d of dealt) if (d) for (const v of VANTAGES) {
     const c = d[v]; if (!c) continue;
@@ -941,7 +958,7 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
       receipt[v] = c && { family: c.family, kind: c.kind, slots: c.slots, wording: c.wording, drawn: d.drawn[v], ...(d.rotated[v] ? { rotated: d.rotated[v] } : {}) };
     }
     /** @type {Rec} */
-    const next = { ...card, goal: { short: short?.text ?? null, long: long?.text ?? null, intent: { short: short ? intentOf(short) : null, long: long ? intentOf(long) : null } } };
+    const next = { ...card, goal: { short: writtenText(short, card), long: writtenText(long, card), intent: { short: short ? intentOf(short) : null, long: long ? intentOf(long) : null } } }; // E8: the slot written
     if (short?.family === 'CRISIS' && short.crisisNote) next.stressNote = short.crisisNote;
     else if ('stressNote' in next && short?.family !== 'CRISIS') delete next.stressNote;
     return next;
@@ -1011,7 +1028,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
     const named = hit.name ? [...ctx.byId.values()].find((x) => personName(x) === hit.name) : null;
     /** @type {string | null} */ let note = null;
     for (const v of hit.vs) {
-      const held = new Set(out.filter((x, k) => k !== i && x?.goal?.[v]).map((x) => String(x.goal[v]).trim()));
+      const held = new Set(out.filter((x, k) => k !== i && x?.goal?.[v]).map((x) => heldText(x.goal[v]).trim())); // E8: in the held form
       // the town's holdings by wording (every card's both vantages, this holding left out), with the name values each filled
       /** @type {Map<string, Array<{ card: Rec, names: string }>>} */ const holders = new Map();
       /** GOALS-3 (b): every text the town prints, this holding left out @type {Set<string>} */ const printed = new Set();
@@ -1020,9 +1037,9 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
           const t = k === i ? goal[w] : x?.goal?.[w];
           if (!t || (k === i && w === v)) continue;
           const rv = rec(rec(receipts[receiptAt.get(String(x.id)) ?? -1])[w]);
-          const key = typeof rv.wording === 'string' ? rv.wording : String(t).trim();
+          const key = typeof rv.wording === 'string' ? rv.wording : heldText(t).trim();
           const h = { card: k === i ? card : rec(x), names: rv.slots ? namesOf(/** @type {any} */ ({ slots: rv.slots })) : '' };
-          printed.add(String(t));
+          printed.add(heldText(t));
           const list = holders.get(key); if (list) list.push(h); else holders.set(key, [h]);
         }
       });
@@ -1030,7 +1047,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
       const other = str(intentAt(goal.intent, v === 'short' ? 'long' : 'short').family);
       const by = familyCandidates(card, out, ctx, v, held, { pursuit: v === 'long' ? lawLongPursuit(card, out, ctx) : null });
       const own = (by.PERSONALITY || []).map(refuse);
-      const picked = own.find((c) => c.text === goal[v]) || own.find((c) => c.kind === old.kind) || null;
+      const picked = own.find((c) => c.text === heldText(goal[v])) || own.find((c) => c.kind === old.kind) || null;
       const at = picked ? own.indexOf(picked) : -1;
       const families = DRAWN_FAMILIES.filter((f) => f !== 'PERSONALITY' && f !== other && by[f]?.length);
       let walk = [...withReserve(own.map((_, k) => own[(at + 1 + k) % own.length])), ...families.flatMap((f) => withReserve(by[f].map(refuse)))].filter((c) => !c.refused);
@@ -1052,7 +1069,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
       const took = walk.find((c) => count(c) === 0) || walk.find((c) => once(c, true)) || walk.find((c) => once(c, false)) || fallback;
       if (!took) continue;
       noteDrawn(took);
-      goal[v] = took.text;
+      goal[v] = writtenText(took, card); // E8: the slot written
       goal.intent[v] = intentOf(took);
       if (v === 'short' && took.family === 'CRISIS' && took.crisisNote) note = took.crisisNote; // as the deal writes it
       const k = receiptAt.get(id);

@@ -3,7 +3,7 @@
 
 import { pickVariant } from '../kernel/proseHash.js';
 import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
-import { secondMentions } from './people/personMention.js';
+import { reflexiveOf, secondMentions } from './people/personMention.js';
 import { sharesPower } from '../domain/facts/sharedPower.js';
 import { pairSharesPlaceOf } from '../domain/facts/pairPlace.js'; // BAR4-CLOSE-SWEEP (the chair's PD1, PD1b): `shared place`'s one reader, for the successor line's twin
 
@@ -2235,7 +2235,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} needs something this season that lies just past what ${r.name} has always refused.`, colour: true },
       { line: (r, s) =>
-        `${r.name} has asked ${s.name} for an introduction ${s.name} would rather keep to themselves.`, colour: true },
+        `${r.name} has asked ${s.name} for an introduction ${s.name} would rather keep to ${reflexiveOf(s)}.`, colour: true }, // E8 (WORDS-1): the reflexive slot binds the asked card
     ]),
     type: 'political',
   },
