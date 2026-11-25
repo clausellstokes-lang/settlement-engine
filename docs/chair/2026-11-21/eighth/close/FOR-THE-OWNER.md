@@ -140,3 +140,47 @@ the mutation manifest).
 Added: `tests/generators/defenceParts.test.js` "R13: where something is built or standing, the will counts no more than the armed
 bodies that carry it" (lit; the defence lane re-cuts its bound after the first deploy); the lit twin's three rows (until signing 2).
 Leaving: `tests/build/landingFixtureFreshness.test.js`'s two rows (the sample village re-made). Staying: FENCE 1 (its row 30).
+
+## 9. CLOSE-7's first hand-in (point 117): what is yours to sign or veto (prepared 15:56 UTC 2026-11-25; SIGNED BY NOBODY)
+Each is prepared with its written reason. Nothing here has been re-recorded by a seat.
+
+**To SIGN, frozen figures moved by a cure:**
+- **heraldKnowledgeDeskGolden:** a new digest, items 473 -> 466. Reason: B1(i) (the desert withholds fish, timber and game). A
+  desert place loses houses that lived on what the land does not give, so the herald knows seven fewer items.
+- **dossierProseManifest:** golden-master-v3's mixed-pool arm, DM-only cells 214 -> 213. Reason: B1(i), as above; one cell's
+  house is no longer born.
+- **townCartographyCalibration W2:** three desert rows lose institutions. Reason: B1(i), as above. The test's re-record arm asks
+  for this written reason.
+- **The four frozen corpus figures** (B1(ii) re-deals the news year):
+  - newsHeadlineContract;
+  - newsVoiceContract;
+  - observedShapeReaders' executed corpus (wizardNews unique 419 -> 420, final 417 -> 418, accumulated 2627 -> 2636);
+  - proseFamilyContract A1 (scalarRows 38,197 -> 38,297).
+- **The goldens a birth-moving cure moves** (the engine golden master, the lit twin, pinned-mode rows): listed at the landing.
+  - GUARD raises GENERATOR_VERSION 0.9.0 -> 0.10.0. Every new record carries it, and the release arm wants its '0.10.0' row
+    added by the signing step.
+  - C1 moves 39 visitor births (the conflict draws keyed on the hall's name; R24m); B1(i) moves 27 desert births.
+- **Bundle freshness:** intentAtlasBundle (freshness and reproducibility) joins aiCharter, aiGrounding, aiOutputSchema and
+  engineBundle. Every edge bundle is rebuilt ONCE, in the signing window; their deploy is yours.
+- **statecraftExposureBand** (the simulator's scandal ceiling, 78 against 57 in the seeded twenty-year run): B1(i) re-deals the
+  one seeded realm. Nothing is raised; it is re-measured with the tuning signature at the end.
+
+**To VETO, new words and vocabulary (each can be struck):**
+- the fact  ("someone here tends the sick or the injured");
+- the fact ;
+- the fare line K2: "Every fish that comes in is counted, and the shares are measured out house by house.";
+- the dawn line K1: "Every hand that can be spared is out at first light, and what comes in is counted before it is eaten.";
+- the three government names given at birth: "Council of Aldermen" (town), "Council of Syndics" (city), "Senate" (metropolis);
+- the besieged reliance line: "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to parish
+  church · Stopped by the siege."
+
+**Sizes:**
+- First paint: +11,165 raw at the hand-in. SIZE-BACK buys back 10,154 (landWithholding.js and foodProduction.js made lazy).
+- A2's and D2b's small rises: taken by the chair, for your size signing.
+- The five figures are read at the landing's build.
+
+**Known, written down (not cured in this release):**
+- REDERIVE-DRIFT: a re-derivation on its own engine adds a receipt count and can null a house field, seat a power, or re-deal a
+  conflict.
+- A power's display name is a key in 9 sites; a rename re-deals.
+- B1(ii) also changes the first tradition an advance mints on a stored place where the fields are bought in.
