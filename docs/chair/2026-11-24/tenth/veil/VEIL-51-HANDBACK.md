@@ -106,7 +106,14 @@ Reports to the lane's owner: a FILE, at most 200 words. My context began with a 
     a withheld power; GATE-1 and GATE-2 not worse. (6) first-paint and shared-page sizes before and after, for the owner's
     signing; the writer lazy if it can be. VEIL-55's terms add: the fidelity differences read under V4 term 1. The 212 edit
     after "R4-IDS MERGED"; the chair reads its hunk whole before VEIL-55's grant. RIVAL rides only on a first-run pass.
-  RUNNING (background, 2-hour limit): `rival.sh arms after cost` (its first arm, galleryVeilRival, from 00:53).
+  CONTAINER RESTART ~01:03: files, trees, branches survived; PG16 restarted 01:05 (`su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl
+    -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`); RIVAL's first arm KILLED WITH NO RESULT (logs `rival/interrupted-0103/`;
+    its measures had printed "plants: faults 0"); relaunched 01:07 (told VEIL-55 and the chair).
+  V14 (4) DECIDING COUNT (CONFIRMED, offline, `u4/c4count.mjs`): R5D's S on nothing-hidden reads: today-born 750 of 754 SAME, 3 ADDED
+    (density rivals minted after the standing write), 1 CHANGED; master-born 193 of 765 SAME (381 CHANGED, 173 DROPPED, 18 ADDED: master's
+    older words). No served key decides (contestsNiche withheld; generatorVersion 0.9.0 on all 280). A STOP UNDER (4): `u4/C4-STOP.md`
+    (the marker's shape, what a reader learns, the no-marker alternative) sent to the chair and VEIL-55 (01:17).
+  RUNNING (background, 2-hour limit): `rival.sh arms after cost` (from 01:07).
   IF THIS SEAT STOPS: re-run what u4.log lacks (`sh docs/chair/2026-11-24/tenth/veil/v51/u4/u4.sh <steps>`; `sh .../rival.sh`)
   after the trees above are re-made (`git worktree add --detach` at the commits named; node_modules linked).
 - NEXT: wait for "R4-IDS MERGED <commit>" from VEIL-55, then unit 2 (R5-DESC), reading PART 42 s1 block 0 (a3bc0dc9d) and
