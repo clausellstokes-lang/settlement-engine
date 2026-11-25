@@ -408,3 +408,15 @@ r2s-famine-metropolis-0: 8c4614871); `bar8DesksEco` 11c (bar0-town-calm-rand-46,
    E7 22 to 23, E8 5 to 4: all moved at B1(i)'s merge: re-stated with a dated comment naming the rows that left or
    joined; every invariant of those arms green by run; A5's new non-commuting town diffed leaf by leaf (trace-only, or
    the world field named and written down for advance time).
+
+**R24p (15:32 UTC on 2026-11-25): ANCHORS-2 02b34ea1c RECEIVED.** `lane/close-7-2026-11-24-anchors-wip`, test-only, TYPES
+8e2441054 merged into it (the pre-push hook refused it first on 97c6bfc7a's own type regression). (1) both phone-floor
+baselines re-recorded, "World/Daily Life" alone, 9 to 8 (R24h fca95c197 named). (3) `mergeLadderHeldKeys` A2 E7 22 to
+23, E8 5 to 4; `editCorpusRatchet` A4 {32,10} to {29,9}, A5 6 to 7; two A4 lines that read A2's census re-stated
+with them ({23,4}, steps {92,16}); A3 and A7 red as at the cut. A5's new non-commuting pair (a desert city) is
+TRACE-ONLY: one trace leaf ("59" against "60 npcs"), every world field identical: accepted. (2) `traditionsSameWindowChain`:
+the first soak seed with three traditions in one window is soak1k-5441, already the file's second test, a TWO-week
+window; no one-week case in seeds 0 to 5999. RULED: the 5255 case leaves as a birth; the singular wording stays under
+test by one direct call of the function that words the window if it can be called alone; else the case is retired
+(the stem asserted in the 5441 test) and "the one-week wording has no test and no birth in soak 0 to 5999" is written
+in the seat's hand-back. "ANCHORS-3 <commit>" owed.
