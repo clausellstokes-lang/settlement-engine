@@ -24,11 +24,12 @@
  *          (on 244fa84ef's leaf dz-town-2 printed v1's, dz-town-36 v2's); each matcher matches its own text.
  *          PROSE-E (the chair, N70): five more re-worded in place, their old words pinned the same way (NO-MARKET v10; full
  *          legal chain v1, v2; CHAIN working v1; CRITICAL v1), red first on b443be64b's leaves.
- *   ARM 7 (WORDS-2, the tenth chair's RULING G6 #1, IN THE WORDS, NOT THE SEAT): a single-holder office (`office: headman`,
- *          `office: reeve`; the steward is `ruler: lord`, already refused) draws none of DS-POW-5 `council` v1, v2, v4, the lines
- *          that presuppose a body deciding together ("the whole {seat} must agree"); a council-held birth still draws them.
- *          Its seeds: dp-hamlet-1, -101, -102 (E2's census, `docs/chair/2026-11-24/tenth/gen/words-2/E2-CENSUS.md` #1), red
- *          first on 0ec96f13d8's leaf. Nothing of who sits or holds is read differently.
+ *   ARM 7 (WORDS-2, the tenth chair's RULINGS G6 #1 and G12, IN THE WORDS, NOT THE SEAT): DS-POW-5 `council` v1, v2, v4, the
+ *          lines that presuppose a body deciding together ("the whole {seat} must agree"), declare `ruling body`; so a single
+ *          holder draws none of them: a headman or a reeve (`office:`), a Town Mayor, a Priestly Guidance (the governing row's
+ *          form, read here apart from the mark); the steward is `ruler: lord`, already refused. A council-held birth still
+ *          draws them. Its seeds: dp-hamlet-1, -101, -102 (E2's census, `docs/chair/2026-11-24/tenth/gen/words-2/E2-CENSUS.md`
+ *          #1), red first on 0ec96f13d8's leaf. Nothing of who sits or holds is read differently.
  * THE FLOOR (the chair, N71): the matcher does not match a clause cut of fewer than four literal words
  *   (`tests/helpers/oppositeSentencePairs.mjs :: formsOf`, `literalWords >= 4`), so a line the page prints only as such a cut
  *   is invisible to every arm that reads by matcher: NO-MARKET v12 draws on 46 of the 900 and prints as "{settlement} has no
@@ -48,6 +49,7 @@ import { eligibleVariants } from '../../src/domain/display/stateProse/stateProse
 import { economicRowPoolKey, foodTradesPoolKey } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { factsAnswered } from '../../src/domain/facts/factsAnswered.js';
 import { wallsAnswered } from '../../src/domain/defense/defenseFacts.js';
 import { crisisAnswered } from '../../src/domain/crisis/crisisFacts.js';
@@ -191,15 +193,16 @@ describe('DISAGREE: no page prints both sides of an opposite pair', () => {
     for (const pin of PINNED_OLD_WORDS) expect(textsOf(pin.side).includes(pin.text), `${pin.id}: the leaf no longer holds the old words`).toBe(false);
   }, 120_000); // its own budget: the births of ARM 1, reused
 
-  it('ARM 7: a single-holder office draws no line of a body deciding together; a council still does (G6 #1)', async () => {
+  it('ARM 7: a single holder draws no line of a body deciding together; a council still does (G6 #1, G12)', async () => {
     const BODY = ['DS-POW-5::council::v1', 'DS-POW-5::council::v2', 'DS-POW-5::council::v4'];
     const SINGLE_SEEDS = ['dp-hamlet-1', 'dp-hamlet-101', 'dp-hamlet-102'];
     const wrong = []; let singles = 0; let councilDraws = 0;
     for (const seed of [...SINGLE_SEEDS, ...SEEDS]) {
       const { s, drawn } = await birthOf(seed);
       const office = factsOf(s).office || {};
+      const form = String(nameOf(governingFactionOf(s)) || '').replace(/ Ascendant$/, '');
       const body = BODY.filter((k) => drawn.has(k));
-      if (office.headman || office.reeve) { singles += 1; if (body.length) wrong.push(`${seed}: ${body.join(', ')}`); }
+      if (office.headman || office.reeve || form === 'Town Mayor' || form === 'Priestly Guidance') { singles += 1; if (body.length) wrong.push(`${seed} (${form}): ${body.join(', ')}`); }
       else councilDraws += body.length;
     }
     expect(singles).toBeGreaterThanOrEqual(SINGLE_SEEDS.length);
