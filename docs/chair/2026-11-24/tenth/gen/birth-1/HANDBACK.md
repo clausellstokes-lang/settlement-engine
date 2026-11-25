@@ -62,7 +62,7 @@
   score; X4 binds on C 76, V 75; the old points bound would be red on V dp-village-64, -113 too (`d5/table.txt`). A planted-mutation
   negative control was REFUSED by my permission check (told the chair; not retried). Governing run (25 files naming the defence
   module + tests/lint whole) IN FLIGHT. Its RED-AT-LINE row (defenceParts R13) leaves the list when it lands (the chair's).
-- D8: MEASURED, RULING ASKED of the chair (~11:15 UTC; three candidates, A recommended: the face "the reeve" -> "the lord's reeve"). Count: every Feudal Stewardship thorp, C 12, V 18 (`d8/`). Builds nothing until the ruling.
+- D8: MEASURED, RULING ASKED of the chair (before 11:09 UTC by `date -u`; three candidates, A recommended: the face "the reeve" -> "the lord's reeve"). Count: every Feudal Stewardship thorp, C 12, V 18 (`d8/`). Builds nothing until the ruling.
   Earlier notes: Read: the thorp catalogue row "Lord's reeve" (face 'the reeve') seats
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
