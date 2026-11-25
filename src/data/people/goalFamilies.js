@@ -78,7 +78,7 @@ export const GOAL_FAMILIES = Object.freeze(['RANK', 'POWER', 'INSTITUTION', 'SUP
 /** Each family's allowed slot set (design §6.1, less the struck slots; SUPPLY gains {house}). */
 export const GOAL_SLOTS = Object.freeze({
   RANK: Object.freeze(['power', 'above', 'below', 'self']),
-  POWER: Object.freeze(['power', 'rival', 'issue', 'self']),
+  POWER: Object.freeze(['power', 'rival', 'issue']),
   INSTITUTION: Object.freeze(['house', 'otherHouse']),
   SUPPLY: Object.freeze(['resource', 'import', 'house']),
   TIES: Object.freeze(['other']),
@@ -105,7 +105,7 @@ export const GOAL_SLOTS_STRUCK = Object.freeze({
 /** The slots each sub-kind may use (a subset of its family's `GOAL_SLOTS`): what car 4 must fill. */
 export const GOAL_SUBKIND_SLOTS = Object.freeze({
   RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power', 'self'] }),
-  POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival', 'self'], conflict: ['power', 'rival', 'issue'] }),
+  POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival'], conflict: ['power', 'rival', 'issue'] }),
   INSTITUTION: Object.freeze({ solvency: ['house'], rebuilding: ['house'], charter: ['house'], takeover: ['house', 'otherHouse'] }),
   SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'], want: ['resource', 'house'] }),
   TIES: Object.freeze({ rival_enemy: ['other'], debtor: ['other'], creditor: ['other'], ally: ['other'], family: ['other'], mentor_student: ['other'] }),
@@ -335,7 +335,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Make sure no one can trace the arrangement between {power} and {rival} back to them.',
       ]),
       long: cell([
-        'Set the terms between {power} and {rival} {self}, and stop taking them from others.',
+        'Set the terms between {power} and {rival} themselves, and stop taking them from others.',
         'End the arrangement between {power} and {rival} on their own terms.',
         'Be the one who holds the arrangement between {power} and {rival} together, and so be needed by both.',
         'Grow rich on the dealings between {power} and {rival}, and be out of it before anyone looks closely.',

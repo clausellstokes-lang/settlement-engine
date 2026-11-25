@@ -4,7 +4,7 @@
  * person's own form ("himself", "herself"), never the they-form: "… an introduction he would rather keep to himself",
  * "Find a patron among those who lead the Guild, and make herself useful to them." Measured on the cures tip 0ec96f13d
  * (`docs/chair/2026-11-24/tenth/gen/words-1/tools/e8-records.mjs`, `e8-classes.mjs`, the hand-classed table): the tie
- * printed "themselves" for a gendered end on 157 places of C and 158 of V; the two want lines on 470 cards of C, 458 of V.
+ * printed "themselves" for a gendered end on 157 places of C and 158 of V; the want line on 466 cards of C, 433 of V.
  * THE ORACLE is the raw record: the bound card's own `gender`, the card found by the name the line prints (the tie's
  * second end) or the card that holds the want; the lines are found by their own words (the hand-classed table), never by
  * the slot's code. A card with no gender keeps the they-form (an older stored town's card).
@@ -17,9 +17,10 @@ import { STRESS_ECONOMIC_EFFECTS } from '../../../src/data/npcData.js';
 /** @type {Readonly<Record<string, string>>} */
 const OWN = Object.freeze({ male: 'himself', female: 'herself' });
 /** the bound want lines, by their words (the reflexive captured) */
+// (POWER.corrupted.long "Set the terms … themselves" keeps its they-form: its text is a banked red line of the shrink-only
+// `tests/lint/samenessHideable.existingReds.json`, which no door re-takes; named in WORDS-1's E8 hand-in)
 const BOUND_WANTS = [
   /^Find a patron among those who lead .+, and make (\w+) useful to them\.$/,
-  /^Set the terms between .+ and .+ (\w+), and stop taking them from others\.$/,
 ];
 /** the bound tie line (mutual_leverage.tension[12]): the second card asked, its reflexive captured */
 const BOUND_TIE = /^(.+?) has asked (.+?) for an introduction (.+?) would rather keep to (\w+)\.$/;
