@@ -1,0 +1,3 @@
+UNREAD 1ffa9be19 src/generators/powerGenerator.js: Error: no final append `X.desc = X.desc ? X.desc + ' ' + S : S` inside a function
+UNREAD 6f25bc02f src/generators/powerGenerator.js: Error: no final append `X.desc = X.desc ? X.desc + ' ' + S : S` inside a function
+versions 17 | unread 2 | forms derived 615 | forms NOT held by the table 0

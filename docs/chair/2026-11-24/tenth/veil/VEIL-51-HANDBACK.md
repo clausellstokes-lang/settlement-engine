@@ -239,6 +239,15 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     N5 PROOF ON SLICES: DESCARM green; galleryVeilDesc, galleryWithholdAlways, galleryRosterChoices pglite; the walkers
       (standingFormsTotality with the census, rosterChoiceComposedHosts, standingReaders); domain-strict; then V21's tooth
       (`q52.sh miplant5`: absent at every door, the map's two among them).
+  RULING V25 (05:27, relayed): WAY A + THE INVARIANT: a desc no row matches IS SERVED; a different-span tie withheld whole (reds); on
+    EVERY served desc after the cut, no name of a power the read withholds (212's own search and fold), else withheld whole (= R5D's
+    belt, generalized to every served desc: confirm in N3); totality three ways; ONE MEASURE with the hunk (both pools: descs that after
+    the cut name ANOTHER power of the place, three examples; not near 0 = a finding before the merge); STANDING ARMS: an unknown-form
+    tail naming a hidden power withheld whole at every non-owner door; the same tail naming none served; a no-tail desc byte-equal.
+  V25 (3) DONE (CONFIRMED, `u4/history.mjs`, `u4/history.txt`): the clone was SHALLOW (boundary 2026-08-15): unshallowed (git fetch,
+    05:4x; 7,122 commits); every file whose history held the standing text ("Close enough to the two above"): factionStanding.js 4
+    versions, powerGenerator.js 13; 15 read, 615 forms derived, EVERY ONE A ROW (0 not held); 2 versions unread (no standing append in
+    them). The table marks legacy rows by the "M-" id and each row's `origins` (the commits that derived it).
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.

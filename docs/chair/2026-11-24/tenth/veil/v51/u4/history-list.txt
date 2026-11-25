@@ -1,0 +1,17 @@
+0055100d6 src/generators/powerGenerator.js
+06819b93e src/generators/powerGenerator.js
+113c1a6c6 src/generators/powerGenerator.js
+1fd128e3a src/generators/powerGenerator.js
+1ffa9be19 src/generators/power/factionStanding.js
+1ffa9be19 src/generators/powerGenerator.js
+255970010 src/generators/power/factionStanding.js
+62c5e8d67 src/generators/powerGenerator.js
+6ee69e87d src/generators/powerGenerator.js
+6f25bc02f src/generators/powerGenerator.js
+75e60fc94 src/generators/power/factionStanding.js
+9ee117999 src/generators/powerGenerator.js
+b76848c90 src/generators/powerGenerator.js
+e3f6029b2 src/generators/power/factionStanding.js
+e608542bd src/generators/powerGenerator.js
+ed46fa4d1 src/generators/powerGenerator.js
+f677dacde src/generators/powerGenerator.js
