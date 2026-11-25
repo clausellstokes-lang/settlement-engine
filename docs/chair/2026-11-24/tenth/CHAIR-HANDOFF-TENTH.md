@@ -1366,3 +1366,13 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   highest .24: E3 ruled built; G12's seven headings leave with their only line; a blank "Safety" on the base, C
   dp-village-57, made a unit SAFETY-BLANK). UNIT D4 received (BIRTH-2, `-d4-wip` 57d26a136: records 0 and 0; both
   typechecks green in its tree); BIRTH-2 given "C6" (P9, a measure first; the sameness door's run with the laws on).
+- 2026-11-25 15:15 UTC · T106 · LAND-117 UNDER 117-2 AND 117-3; THE LINE HAS NOT MOVED (ddca5c7894 = point 116).
+  The helper (agent a8bcd6b57f4ff5bc6) under RULING-117-2: `bar4RecordHouseInput` restated green (92b60dcf05 on the
+  landing's tree, `/home/user/wt/line`, local `lane/stack-117-wip-2026-11-25`, NOT PUSHED); it STOPPED, rightly, on
+  `gapSaysWhichKind` and `tailTies4Batch2`'s famine pair (a test that asserts the birth's own row cannot be fed a
+  copy of that row). RULING-117-3 (a79a9941eb, sent): both RE-PICKED BY A WIDER SEARCH OF BIRTHS or a stop with what
+  was seen; then merge `origin/lane/close-7-2026-11-24-types-wip` 8e2441054, both typechecks FIRST, validate:packets,
+  changed files, lint; still no push. STILL OWED BY CLOSE-7 before the gate: "ANCHORS-2 <commit>" (R24o),
+  "SIZE-BACK <commit>", and its READS of seven non-anchor reds and four figures (the chair rules each).
+  G18 and G19 are now written in `gen/RULING-G.md`. Marks at 15:00: BIRTH-1 53.16 (278,356 after a compaction).
+  The children's board at 15:15 UTC: CLOSE-7 and WORDS-1 running; BIRTH-1, BIRTH-2, WORDS-2 idle after a turn.

@@ -227,3 +227,15 @@ so that "since" answers to something in it; (3) "the converts keep their own reg
 marriages", everything after it the original's own remainder; (4) "claimant" does not count (the void's own premise).
 The check: no crisis line names a local body the place does not hold: 0 on C and V. The new sentences are named for
 the owner's veto.
+
+**G18 (written into this file at 15:15 UTC; ruled about 13:15 UTC): D7's VOCABULARY ROW AND THE TWIN.** BIRTH-1 has leave
+for ONE vocabulary row `crisis body: <kind>` (the kinds of local body a crisis line may name, each tied to the fact
+that says the place holds it); the debt pressure line's twin sentence is approved as G17 (2) words it: "{place} owes
+more than it can repay; the creditor's letters began last month, and every civic decision since has been made with
+one eye on what the creditor might accept as partial satisfaction." Expected move about C 20, V 14; a stop at 30.
+
+**G19 (written into this file at 15:15 UTC; ruled about 14:45 UTC): E3 BUILT; THE HEADINGS; SAFETY-BLANK.** WORDS-2's
+E3: the custom-content leak (a quarrel keyed on a ground name a custom pack can supply) is cured by NATIVE ground
+keys alone; THE FOURTH COLUMN HOLDS (highest share .24): E3 is ruled built. The seven "The shape of authority"
+headings G12 left with one line each leave WITH that line (a heading over nothing is not printed). A blank "Safety"
+section on the base (C dp-village-57) is its own unit, SAFETY-BLANK, WORDS-2's, a measure first.
