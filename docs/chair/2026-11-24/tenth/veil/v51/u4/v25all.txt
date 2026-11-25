@@ -1,0 +1,57 @@
+today r3m-city-infiltrated-1-112.json The Landed Bloc niche=Noble Families names ["Noble Families"]
+   BASE: Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.
+   CUT?: false
+today r3m-city-none-0-37.json The Trade Compact niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: false
+today r3m-city-none-1-101.json Noble Families niche= names ["Royal Authority"]
+   BASE: Hereditary landowners behind the Royal Authority; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.
+   CUT?: true
+today r3m-city-none-1-101.json The Landed Bloc niche=Noble Families names ["Royal Authority"]
+   BASE: Hereditary landowners behind the Royal Authority; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.
+   CUT?: false
+today r3m-metropolis-none-0-57.json The Guild Alliance niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: false
+today r3m-metropolis-occupied-0-65.json The Commercial Circle niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: false
+today r3m-town-politically_fractured-0-20.json Landed Gentry niche= names ["Feudal Appointee"]
+   BASE: Hereditary landowners behind the Feudal Appointee; military levies, land rents, and judicial rights all flow through noble title. Their word is law within their demesne.
+   CUT?: true
+master r3m-city-infiltrated-0-32.json The Guild Alliance niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.
+   CUT?: true
+master r3m-city-none-0-37.json The Trade Compact niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: true
+master r3m-city-none-0-43.json Military/Guard niche= names ["Merchant City Council","Merchant Guilds (dominant)"]
+   BASE: Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Merchant City Council against each other when they can.
+   CUT?: true
+master r3m-city-none-1-111.json Craft Guilds niche= names ["Merchant City Council","Merchant Guilds (dominant)"]
+   BASE: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Merchant City Council against each other when they can.
+   CUT?: true
+master r3m-city-none-1-113.json The Merchant Bloc niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.
+   CUT?: true
+master r3m-metropolis-none-0-57.json The Guild Alliance niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: true
+master r3m-metropolis-none-0-61.json Military/Guard niche= names ["Grand Guild Consortium","Merchant Guilds (dominant)"]
+   BASE: Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Grand Guild Consortium against each other when they can.
+   CUT?: true
+master r3m-metropolis-none-0-61.json The Order of the Watch niche=Military/Guard names ["Grand Guild Consortium","Merchant Guilds (dominant)"]
+   BASE: Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Grand Guild Consortium against each other when they can.
+   CUT?: true
+master r3m-metropolis-none-0-63.json The Guild Alliance niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.
+   CUT?: true
+master r3m-metropolis-occupied-0-55.json The Merchant Bloc niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: true
+master r3m-metropolis-occupied-0-65.json The Commercial Circle niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.
+   CUT?: true
+master r3m-metropolis-wartime-0-59.json The Merchant Bloc niche=Craft Guilds names ["Craft Guilds"]
+   BASE: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life. Trade disruption and requisition are hurting the bottom line. The faction is lobbying for compensation and receiving promises.
+   CUT?: true

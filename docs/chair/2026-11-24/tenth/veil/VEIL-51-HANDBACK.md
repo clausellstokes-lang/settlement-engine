@@ -286,6 +286,33 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     read a match only as a tail; (b) the walker STANDWALK arm 1 pins the construction: every row ends in `$`, has no top-level `|`,
     and cannot open on a space, so the tie rule's different-span class cannot arise, and its census keeps 0 on both pools;
     (c) the twin's power.desc comment is re-cut to V15 ("the page re-derives the standing" goes). 212 itself is not edited for N2.
+  N2 BUILT (LOCAL 9c03baa71, CONFIRMED): the twin's end forced; STANDWALK arm 5 pins the construction, red first on HEAD's twin;
+    walker 4/4 (census skipped); --check green.
+  V25's ONE MEASURE (CONFIRMED, `u4/v25measure.mjs` -> `u4/v25measure.txt`, every case in `u4/v25all.txt`; offline, the code
+    tree's cut, the lane's fold): descs whose CUT BASE names ANOTHER power of the place: TODAY-BORN 7 of 754 (6 places), MASTER-BORN
+    12 of 765 (11 places). NOT NEAR 0: A FINDING FOR VEIL-55 BEFORE THE MERGE. The classes:
+    (i) A DENSITY RIVAL'S BASE NAMING ITS OWN HOST (today 4, master 8): the rival is minted with a copy of its host's base, and
+      that base names the host by its kind word ("Craft guilds regulating production ..." on The Trade Compact, which contests
+      Craft Guilds). This is 107 (3)'s class. WHY R5D's BELT MISSES IT (probe `u4/belt107.mjs`, CONFIRMED): on a hand hide at
+      Reveal off, the projection (galleryPayloadFor) DROPS the hidden row from `pub`. The namer's withheld set (pub's powers no
+      served list names) therefore never holds "Craft Guilds", and the projection's mask (an exact-case split) leaves the
+      lower-case "Craft guilds" standing. By 212's OWN search, V25 (2) holds; by the stored roster's fold (the arm's), it reds.
+      THE CHAIR'S QUESTION: which withheld set does V25 (2) mean? If the stored roster's, the cure needs the hidden names at
+      the veil, which the projection has erased (RIVAL's class, cut to phase 2).
+    (ii) A NOBLE BASE NAMING THE SEAT (today 3): "Hereditary landowners behind the Royal Authority; ...": the governing power,
+      which no read withholds on these places; only a tell where the seat is hidden.
+    (iii) A STANDING LEFT UNCUT (master 4 descs, 3 places; `u4/leftover.mjs` -> `u4/leftover.txt`): "Close enough to the two
+      above that their support is worth buying; they play Merchant Guilds (dominant) and Merchant City Council against each other
+      when they can." IS SERVED ON EVERY NON-OWNER READ: A STANDING PRINTED ON A SHARED READ, against V15. CAUSE: the table's
+      LABEL_RE takes a bracketed qualifier only when it opens on a capital (`[(][A-Z]...`), and master's labels carry
+      "(dominant)" (10 master-born names). STANDWALK's master census was blind to it: it judged by the same patterns.
+  N2b PLANNED BEFORE ITS EDIT (a 212 edit, generated): (a) `scripts/veil/standingForms.mjs`: the bracket's words may open in lower
+    case (`[(]${W}(?: ${W}){0,5}[)]`, where W takes a lower-case head), and SAMPLE_LABELS gains 'Merchant Guilds (dominant)'
+    (a real master label) so --check exercises it; (b) `--write` regenerates the table (origin/master is still db832c892, the same
+    inputs: only the label rows' re and the header move); (c) 212's STANDING_FORMS block and the twin's literal are replaced by
+    `--print`'s output, never by hand; (d) STANDWALK arm 3's master class gains LEFTOVER (a row's literal opening of 14 or more
+    characters found anywhere in the cut base counts as UNCUT), red first on the old table (4) and 0 after; (e) the measure is
+    re-run; 212 applies and rolls back on a local template.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -339,6 +366,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:5x N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
 - 07:3x N1 built (local 5b39bd019; TS2345 gone); N2 re-planned (the different-span tie is unreachable by construction; the twin's end anchor forced; pinned), written before its edit.
 - 07:1x DESCARM and STANDWALK merged (local); N1 re-planned (S narrowed to the cut, the import's drop kept), written before the edit.
 - 07:02 mproof ended: M proved but for two inherited reds (107 (3), 4 reads; TS2345); both recorded at PROOF OF M RESULT.

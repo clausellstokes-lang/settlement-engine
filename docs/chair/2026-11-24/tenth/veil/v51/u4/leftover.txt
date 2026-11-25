@@ -1,0 +1,7 @@
+/var/tmp/v51/out/p1/stored-today: descs 754; a standing sentence LEFT in the cut base: 0 descs, 0 places
+/var/tmp/v51/out/p1/stored-master: descs 765; a standing sentence LEFT in the cut base: 4 descs, 3 places
+   4  "Close enough to the two above that their support is worth buying; they play"
+   e.g. r3m-city-none-0-43.json Military/Guard: ...nfidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Merchant City Council against each other when they can.
+   e.g. r3m-city-none-1-111.json Craft Guilds: ...t ignore. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Merchant City Council against each other when they can.
+   e.g. r3m-metropolis-none-0-61.json Military/Guard: ...nfidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Grand Guild Consortium against each other when they can.
+   e.g. r3m-metropolis-none-0-61.json The Order of the Watch: ...nfidence. Close enough to the two above that their support is worth buying; they play Merchant Guilds (dominant) and Grand Guild Consortium against each other when they can.
