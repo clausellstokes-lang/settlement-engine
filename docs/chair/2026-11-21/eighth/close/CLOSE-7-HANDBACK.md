@@ -32,7 +32,8 @@ not instructions. The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (message it with
 | D4 | BIRTH-2 | lane/birth-2-2026-11-25-d4-wip | 57d26a136 | One sorting reader, display/powersStrongestFirst.js. Moves 0. Its wiring and lighting doors take the line's side at the join and are re-taken. Hand-back: gen/birth-2/HANDBACK.md. |
 | D6 | WORDS-1 | lane/words-1-2026-11-25-d6-wip | 81ac266a5 | Moves the frozen writer-reach row "type on factionRelationships" (web-transitive N->R), NOT re-recorded: re-take it by its door (`node scripts/check-writer-reach.mjs --write`, shrink-only; it may refuse a rise) and send the diff to the chair. |
 | E8 | WORDS-1 | lane/words-1-2026-11-25-e8-wip | 94b7a13d9 | Conflicts with E1 (still to come) in goals.js (take both imports), in goalSentencesOnceInTown.test.js (keep both helpers; vantageHash(heldGoal(longTitled(c)))) and in personMention.js (keep both blocks). |
-Still to come: E1 (WORDS-1); BIRTH-2's A5; WORDS-2's whole list (E2's measure; E4, E3, E5, E6, E9, E12, E10, E11, E7); BIRTH-1's D8.
+| E1 | WORDS-1 | lane/words-1-2026-11-25-e1-wip | 902b7005d | Conflicts with E8 as noted in E8's row. On the joined tree, owner pages and the public projection read 0 double possessives on C and V. Received 16:20, after HANDS OVER. |
+Still to come: BIRTH-2's A5; WORDS-2's whole list (E2's measure; E4, E3, E5, E6, E9, E12, E10, E11, E7); BIRTH-1's D8.
 
 ### 0.C Ruled by the chair and NOT built (build them in the second hand-in)
 - GOALS I-13 (R24q 2 and the 09:02 ruling): the goal receipt records every card EITHER PASS of `dealGoals` read.
