@@ -258,6 +258,19 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     is the namer's (pub's powers no served list names), the arm's is the stored roster's. Why it misses is read by a probe before
     N3 is written; under V25 (2) the 107 (3) class must be withheld whole (it is the invariant's own case), so its arm turns from
     "the chair's, named" into a fault the build must green.
+  DESCARM AND STANDWALK MERGED (LOCAL, 07:1x): e8cfe56a0 (DESCARM 0ff0773c7; one conflict, the manifest, resolved as the UNION of
+    R5D's three rows and DESCARM's one; JSON parses), 04cfe6d85 (STANDWALK 7010a0004, plain).
+  N1 RE-PLANNED BEFORE ITS EDIT (07:1x; a judgment, so written first): the reading found reader S does TWO things: it writes the
+    standing (the writer over the served roster) AND, on the import's save (`authoritative`), drops the desc of every row the read
+    hides. The walker `tests/lint/standingReaders.walker.test.js` pins S's writer calls, its census counts and its wiring at both doors.
+    Both callers serve only VEILED documents (`gallery.js` :284 and :881 for the page; `importRederive.js` :104 on `served`), so the
+    owner's read is untouched either way. N1 AS BUILT: `rederiveStanding` NARROWED TO THE CUT ALONE, keeping its name, export and
+    both call sites: the authoritative drop kept as is; each served row's desc becomes `standingBase(desc)` (a no-op on a desc
+    the veil already cut; a desc no row matches passes whole, as WAY A has it); the writer's calls (standingRosterOf,
+    annotateFactionStanding, standingForceOf, servedRosterOf) and their imports go. WHY NOT DELETE THE CALLS (the first plan): deleting
+    them loses the import's drop of a hidden row's desc, a belt the plan never meant to remove. The walker is re-pinned to the
+    narrowed reader (its writer-call arm inverted: the reader must NOT call the writer; the census counts measured), and the TS2345 is
+    read again afterwards.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -311,6 +324,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:1x DESCARM and STANDWALK merged (local); N1 re-planned (S narrowed to the cut, the import's drop kept), written before the edit.
 - 07:02 mproof ended: M proved but for two inherited reds (107 (3), 4 reads; TS2345); both recorded at PROOF OF M RESULT.
 - 21:24 seated, read in. 21:25 line (0) to VEIL-50. 21:26 make-instruments started (rc 0 21:34). 21:33 p1 started.
 - 02:32 the tie rule in the walker; HANDS OVER.
