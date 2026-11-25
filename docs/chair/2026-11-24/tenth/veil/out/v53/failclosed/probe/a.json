@@ -1,0 +1,1148 @@
+[
+ {
+  "seed": "r2r-city-24",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    81,
+    81
+   ],
+   "rlabel": [
+    "Fortress",
+    "Fortress"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(55) => adequate(50)",
+   "defense_readiness": "surplus(75) => surplus(75)",
+   "law_order": "adequate(63) => adequate(67)",
+   "labor_capacity": "adequate(60) => adequate(60)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:5"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:19",
+     "defenseProfile:6"
+    ],
+    [
+     "defenseProfile.readiness.score:19",
+     "defenseProfile:6"
+    ]
+   ],
+   "lab": [
+    [
+     "population:10"
+    ],
+    [
+     "population:10"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-city-36",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    78,
+    78
+   ],
+   "rlabel": [
+    "Fortress",
+    "Fortress"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(51) => adequate(50)",
+   "defense_readiness": "adequate(73) => adequate(73)",
+   "law_order": "surplus(76) => surplus(77)",
+   "labor_capacity": "adequate(60) => adequate(60)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:1"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:17",
+     "defenseProfile:6"
+    ],
+    [
+     "defenseProfile.readiness.score:17",
+     "defenseProfile:6"
+    ]
+   ],
+   "lab": [
+    [
+     "population:10"
+    ],
+    [
+     "population:10"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-hamlet-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    11,
+    11
+   ],
+   "rlabel": [
+    "Undefended",
+    "Undefended"
+   ],
+   "sev": [
+    [
+     "war_pressure:0.78:critical"
+    ],
+    [
+     "war_pressure:0.85:critical"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(52) => adequate(50)",
+   "defense_readiness": "critical(18) => critical(17)",
+   "law_order": "collapsed(13) => collapsed(14)",
+   "labor_capacity": "critical(29) => critical(28)"
+  },
+  "dl": [
+   "recent_changes: The Schism still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place. => War is close enough now to be felt in everyday business and in the mood of the place."
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:2"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-23",
+     "condition.war_pressure.gb9cma:-9"
+    ],
+    [
+     "defenseProfile.readiness.score:-23",
+     "condition.war_pressure.gb9cma:-10"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5",
+     "condition.war_pressure.gb9cma:-16"
+    ],
+    [
+     "population:-5",
+     "condition.war_pressure.gb9cma:-17"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-thorp-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    28,
+    null
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "adequate(50) => adequate(50)",
+   "defense_readiness": "strained(37) => adequate(50)",
+   "law_order": "strained(43) => strained(43)",
+   "labor_capacity": "strained(45) => strained(45)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:0"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-13"
+    ],
+    [
+     "defenseProfile.readiness.score:0"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5"
+    ],
+    [
+     "population:-5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-thorp-48",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    25,
+    null
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "adequate(50) => adequate(50)",
+   "defense_readiness": "strained(35) => adequate(50)",
+   "law_order": "strained(24) => strained(24)",
+   "labor_capacity": "strained(45) => strained(45)"
+  },
+  "dl": [
+   "recent_changes: The Religious Conflict still shapes how people here go about things. => Little has changed of late, and nobody is asking for it to."
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:0"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-15"
+    ],
+    [
+     "defenseProfile.readiness.score:0"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5"
+    ],
+    [
+     "population:-5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-indebted-thorp-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    24,
+    null
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [
+     "regional_tax_revenue_disruption:0.49:medium"
+    ],
+    [
+     "regional_tax_revenue_disruption:0.35:medium"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "adequate(50) => adequate(50)",
+   "defense_readiness": "strained(34) => adequate(50)",
+   "law_order": "critical(23) => critical(23)",
+   "labor_capacity": "strained(45) => strained(45)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:0"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-16"
+    ],
+    [
+     "defenseProfile.readiness.score:0"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5"
+    ],
+    [
+     "population:-5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-insurgency-town-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    54,
+    54
+   ],
+   "rlabel": [
+    "Defensible",
+    "Defensible"
+   ],
+   "sev": [
+    [
+     "rebellion:0.71:high"
+    ],
+    [
+     "rebellion:0.6:high"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(56) => adequate(50)",
+   "defense_readiness": "strained(49) => adequate(51)",
+   "law_order": "strained(42) => strained(46)",
+   "labor_capacity": "adequate(55) => adequate(55)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:6"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:2",
+     "defenseProfile:6",
+     "condition.rebellion.w9r0pc:-9"
+    ],
+    [
+     "defenseProfile.readiness.score:2",
+     "defenseProfile:6",
+     "condition.rebellion.w9r0pc:-7"
+    ]
+   ],
+   "lab": [
+    [
+     "population:5"
+    ],
+    [
+     "population:5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-occupied-town-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    18,
+    18
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [
+     "vassal_extraction:0.71:high"
+    ],
+    [
+     "vassal_extraction:0.6:high"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(55) => adequate(50)",
+   "defense_readiness": "critical(28) => strained(30)",
+   "law_order": "strained(31) => strained(35)",
+   "labor_capacity": "adequate(55) => adequate(55)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:5"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-19",
+     "defenseProfile:6",
+     "condition.vassal_extraction.541zgy:-9"
+    ],
+    [
+     "defenseProfile.readiness.score:-19",
+     "defenseProfile:6",
+     "condition.vassal_extraction.541zgy:-7"
+    ]
+   ],
+   "lab": [
+    [
+     "population:5"
+    ],
+    [
+     "population:5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-slave_revolt-thorp-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    29,
+    null
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [
+     "rebellion:0.63:high"
+    ],
+    [
+     "rebellion:0.6:high"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(51) => adequate(50)",
+   "defense_readiness": "critical(29) => strained(43)",
+   "law_order": "strained(30) => strained(31)",
+   "labor_capacity": "strained(45) => strained(45)"
+  },
+  "dl": [
+   "recent_changes: The Pilgrimage still shapes how people here go about things. Open talk of resistance has started, and people are choosing sides. => Open talk of resistance has started, and people are choosing sides."
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:1"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-13",
+     "condition.rebellion.w9r0pc:-8"
+    ],
+    [
+     "defenseProfile.readiness.score:0",
+     "condition.rebellion.w9r0pc:-7"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5"
+    ],
+    [
+     "population:-5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-town-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    12,
+    12
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(68) => strained(60)",
+   "defense_readiness": "strained(33) => strained(33)",
+   "law_order": "critical(28) => strained(34)",
+   "labor_capacity": "adequate(55) => adequate(55)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:8",
+     "faction.corrupt_council:10"
+    ],
+    [
+     "faction.corrupt_council:10"
+    ]
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-23",
+     "defenseProfile:6"
+    ],
+    [
+     "defenseProfile.readiness.score:-23",
+     "defenseProfile:6"
+    ]
+   ],
+   "lab": [
+    [
+     "population:5"
+    ],
+    [
+     "population:5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-infiltrated-thorp-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    16,
+    16
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [
+     "regional_criminal_pressure:0.37:medium"
+    ],
+    [
+     "regional_criminal_pressure:0.35:medium"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(59) => strained(55)",
+   "defense_readiness": "strained(30) => strained(30)",
+   "law_order": "critical(28) => strained(30)",
+   "labor_capacity": "strained(45) => strained(45)"
+  },
+  "dl": [
+   "recent_changes: The Trade Collapse is still remembered here, and not lightly. => "
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:3",
+     "condition.regional_criminal_pressure.nwpp7h:6"
+    ],
+    [
+     "condition.regional_criminal_pressure.nwpp7h:5"
+    ]
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-20"
+    ],
+    [
+     "defenseProfile.readiness.score:-20"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5"
+    ],
+    [
+     "population:-5"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-wartime-town-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    36,
+    36
+   ],
+   "rlabel": [
+    "Lightly Defended",
+    "Lightly Defended"
+   ],
+   "sev": [
+    [
+     "war_pressure:0.78:critical"
+    ],
+    [
+     "war_pressure:0.85:critical"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(56) => adequate(50)",
+   "defense_readiness": "strained(39) => strained(38)",
+   "law_order": "strained(46) => adequate(50)",
+   "labor_capacity": "strained(39) => strained(38)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:6"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-8",
+     "defenseProfile:6",
+     "condition.war_pressure.gb9cma:-9"
+    ],
+    [
+     "defenseProfile.readiness.score:-8",
+     "defenseProfile:6",
+     "condition.war_pressure.gb9cma:-10"
+    ]
+   ],
+   "lab": [
+    [
+     "population:5",
+     "condition.war_pressure.gb9cma:-16"
+    ],
+    [
+     "population:5",
+     "condition.war_pressure.gb9cma:-17"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-hamlet-36",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    18,
+    18
+   ],
+   "rlabel": [
+    "Vulnerable",
+    "Vulnerable"
+   ],
+   "sev": [
+    [
+     "war_pressure:0.76:critical"
+    ],
+    [
+     "war_pressure:0.85:critical"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "adequate(50) => adequate(50)",
+   "defense_readiness": "critical(22) => critical(21)",
+   "law_order": "critical(27) => critical(27)",
+   "labor_capacity": "strained(30) => critical(28)"
+  },
+  "dl": [
+   "recent_changes: The Pilgrimage still shapes how people here go about things. War is close enough now to be felt in everyday business and in the mood of the place. => War is close enough now to be felt in everyday business and in the mood of the place."
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:0"
+    ],
+    []
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-19",
+     "condition.war_pressure.gb9cma:-9"
+    ],
+    [
+     "defenseProfile.readiness.score:-19",
+     "condition.war_pressure.gb9cma:-10"
+    ]
+   ],
+   "lab": [
+    [
+     "population:-5",
+     "condition.war_pressure.gb9cma:-15"
+    ],
+    [
+     "population:-5",
+     "condition.war_pressure.gb9cma:-17"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2r-city-12",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    73,
+    73
+   ],
+   "rlabel": [
+    "Well-Defended",
+    "Well-Defended"
+   ],
+   "sev": [
+    [],
+    []
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(58) => strained(48)",
+   "defense_readiness": "adequate(70) => adequate(70)",
+   "law_order": "strained(46) => strained(54)",
+   "labor_capacity": "adequate(60) => adequate(60)"
+  },
+  "dl": [
+   "recent_changes: Ask how things came to be as they are here, and the Guild War soon comes up. => Life goes on as usual, and nobody can point to anything new."
+  ],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:10",
+     "faction.thieves_guild:-2"
+    ],
+    [
+     "faction.thieves_guild:-2"
+    ]
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:14",
+     "defenseProfile:6"
+    ],
+    [
+     "defenseProfile.readiness.score:14",
+     "defenseProfile:6"
+    ]
+   ],
+   "lab": [
+    [
+     "population:10"
+    ],
+    [
+     "population:10"
+    ]
+   ]
+  }
+ },
+ {
+  "seed": "r2s-under_siege-town-0",
+  "keys": {
+   "cap": [
+    true,
+    false
+   ],
+   "ratio": [
+    true,
+    false
+   ],
+   "crimeTypes": [
+    true,
+    true
+   ],
+   "rscore": [
+    27,
+    27
+   ],
+   "rlabel": [
+    "Lightly Defended",
+    "Lightly Defended"
+   ],
+   "sev": [
+    [
+     "war_pressure:0.64:high"
+    ],
+    [
+     "war_pressure:0.6:high"
+    ]
+   ],
+   "legacy": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "seed": [
+    false,
+    false
+   ]
+  },
+  "bands": {
+   "criminal_opportunity": "strained(58) => adequate(46)",
+   "defense_readiness": "critical(28) => critical(29)",
+   "law_order": "collapsed(10) => critical(19)",
+   "labor_capacity": "strained(42) => strained(43)"
+  },
+  "dl": [],
+  "contrib": {
+   "co": [
+    [
+     "safetyProfile.blackMarketCapture:12",
+     "faction.thieves_guild:-4"
+    ],
+    [
+     "faction.thieves_guild:-4"
+    ]
+   ],
+   "dr": [
+    [
+     "defenseProfile.readiness.score:-14",
+     "condition.war_pressure.gb9cma:-8"
+    ],
+    [
+     "defenseProfile.readiness.score:-14",
+     "condition.war_pressure.gb9cma:-7"
+    ]
+   ],
+   "lab": [
+    [
+     "population:5",
+     "condition.war_pressure.gb9cma:-13"
+    ],
+    [
+     "population:5",
+     "condition.war_pressure.gb9cma:-12"
+    ]
+   ]
+  }
+ }
+]
