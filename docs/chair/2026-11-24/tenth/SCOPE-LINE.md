@@ -73,3 +73,9 @@ its sharing.
 Applying anything to the live database (the ten security files now; the migrations at the end), the pull request's
 merge, the deploy, credentials, permission settings, the final signings (announced and confirmed in the chat of that
 hour), and anything a permission check refuses.
+
+**CORRECTED 16:40 UTC ON 2026-11-25 (R24r).** The line above that accepts B1(ii)'s effect at `traditions/genesis.js:222` is
+WITHDRAWN: the second reader showed the rule re-deals the Traditions tab of towns and larger at view time, saved places
+included; B1(ii) is taken out of point 117 and redesigned for 118. ADDED TO THE WRITTEN-DOWN LIST: the conversion
+crisis's variant is keyed on the length of the governing hall's name (`stressFactions.js:364`,
+`governingStressVignettes.js:84`): a third name-keyed carrier of C1's accepted re-deals.

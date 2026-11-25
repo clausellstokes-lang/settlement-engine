@@ -21,6 +21,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | WORDS-1 | E8b (the reflexive on card lines) | not built | | RULED, design in G20 (2) | G20 |
 | WORDS-2 | about fifteen units (E2's cured pairs as -g1, -g6, -g8, -g9, -g10, -g11, -g34; E3; E4 8280ffa61; E5; E6; E7; E9; E10; E11; E12) | lane/words-2-2026-11-25-<unit>-wip | hand-ins owed | built, proofs running | G3, G6, G9, G12, G13, G16, G19, G26 |
 | WORDS-2 | SAFETY-BLANK | not built | | a measure first | G19 |
+| the chair's two re-builds (R24r) | B1(ii) REDESIGNED (the rule asked AFTER the draw; the food record's own predicate, native goods only; a record not stamped by this engine keeps its set; every birth and every base-born record's shown set: 0 moved) and B1(i)b (the Hunter's lodge's successor "Furrier's district" lives on what its lodge lives on) | CLOSE-8 builds | | ruled | R24r 1, R24r 6 |
 | the chair's four cures | goals I-13; NEED-ATOM; D7's bytes by SIZE-BACK's method; the writer-reach row for D6 | CLOSE-8 builds | | ruled | R24q 2, R24q 7, G24, G20 |
 
 MERGE NOTES RECEIVED: WORDS-1: E1 and E8 conflict in `goals.js` (imports: take both) and in `goalSentencesOnceInTown`
