@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 05:06 UTC 2026-11-25)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 05:14 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -43,6 +43,11 @@ A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci`
 - MERGED on the lane's tip `lane/veil-55-2026-11-24-tip`: b58abc48b (PIN-3) -> 8430edf5c (UNIT 2, R4-IDS + R4I-SQL-2; granted
   02:46) -> dbd4cd9e5 (UNIT 1, STORED-PROSE d7764e67a; 212 header (37)). 212 sha256 at the tip 826fb94100741822.
 - GRANTED AND UNMERGED: none.
+- RESTORE THE MACHINE: `sh docs/chair/2026-11-24/tenth/veil/v55/restore.sh` (after a restart ~5 s: PostgreSQL and the save loop;
+  fresh container ~12 min: worktrees, make-instruments, stored sets, templates). The container restarted again ~05:13: restored.
+- THE CHAIR'S EFFICIENCY RULES (05:12): seats report to me only (<=200 words); to the chair only a ruling asked, a "TIP?", a merge,
+  a break/leak; UNITS 4+5 MAY RIDE TOGETHER (one "TIP?", both hunks); THE FULL POOL PROOF ONCE after units 3, 4, 5 are on the tip;
+  builders reused, briefs exact; nobody waits for a compaction. Relayed to the three seats.
 - THE OWNER'S SCOPE LINE (the chair 05:04, SCOPE-LINE.md): THIS RELEASE IS THE GENERATOR ALONE (make, configure, read, export,
   share). PLAN-2 stands; unit 3 stays as HIDING ONLY at the two map doors; SNAP-CHRONICLE's cure OUT (parked); V19 stays; a barred-
   area finding is ONE LINE to the chair, not worked; at the end a real-browser walk of the journey on the joined tree (the chair's).
