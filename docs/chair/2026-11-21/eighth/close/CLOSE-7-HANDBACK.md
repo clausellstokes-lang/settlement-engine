@@ -9,6 +9,20 @@ this section.
 A successor reads START-CLOSE-7 (on `lane/chair-2026-11-08`), then this section, and needs nothing else to act. Context
 summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>": say so to the chair; it seats a successor here.
 
+### 0.00 THE FIRST HAND-IN IS SENT: "CLOSE-7 97c6bfc7a" (11:46 UTC 2026-11-25)
+The chair lands it in its own container with the whole suite. Its reds come back to me by file and title, for classing.
+- What the line holds:
+  - merges: A1 bb457f3bf; A2 520ddb6a8; the mirror e2fd7caa4; line 116 27408d4ec; GUARD eaf34abde; BATCH e9b726cdf;
+  - inside BATCH: B1(i) f82d9d671, B1(ii) 3388806b4, C1 under R24m, P3source 4fc54fb45.
+- COMMON-EIGHTH 14 (c), (e) and (f) were STOPPED on the chair's word: the landing runs the whole suite. tests/lint whole finished,
+  and 2 of the 4 (c) parts.
+- New reds: their list is in the hand-in line. Five are unclassed: dossierPhoneFloorAllViews x2, traditionsSameWindowChain
+  soak1k-5255, bar6ScenesGoods B7, bar8DesksEco 11c.
+STILL MINE:
+- BEFORE-AFTER's last halves (builder a7bcddb98c583b23c; they go into the landing's record).
+- Then the SECOND HAND-IN. Cut a branch at the line's tip AFTER the landing, and merge the seats' units onto it (D2, D3 and D5 so
+  far, all from BIRTH-1), with goals I-13.
+
 ### 0.0 NOW (22:49 UTC): THE ALLOWANCE WARNING. The chair, 22:48: a stop may come without notice; it resets 2026-12-01 15:00 UTC.
 The chair's standing orders:
 - Push at every result, and never less often than every 45 minutes.
