@@ -1038,7 +1038,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'thorp', reason: 'Only a handful of households can all sit at one table.' },
     },
     {
-      shared: { name: "Lord's reeve", face: 'the reeve' },
+      shared: { name: "Lord's reeve", face: "the lord's reeve" },
       at: {
         thorp: { baseChance: 0.3, exclusiveGroup: 'government', desc: 'A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented.', tags: ['civic', 'legal'], priorityCategory: 'government' },
       },

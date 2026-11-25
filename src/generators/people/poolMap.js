@@ -37,6 +37,7 @@
 import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY } from '../../data/npcData.js';
 import { TITLE_LINE_DECLARATIONS, TITLE_LINE_TWINS, TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js';
 import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
+import { titleKeyOf } from '../../data/people/titleReadAs.js';
 
 /** The seven categories the pools are keyed by. */
 export const POOL_CATEGORIES = Object.freeze(['government', 'military', 'religious', 'economy', 'criminal', 'magic', 'other']);
@@ -296,7 +297,7 @@ export function roleHasGoalPool(role) {
  * @returns {PoolRow & { fallback: boolean, via: 'title' | 'shelf' | 'generic' }}
  */
 export function poolFor(title, shelf) {
-  const byTitle = title ? POOL_BY_TITLE[title] : undefined;
+  const byTitle = title ? POOL_BY_TITLE[titleKeyOf(title)] : undefined; // BIRTH-1 D8: a title read as another (data/people/titleReadAs.js)
   const byShelf = shelf ? POOL_BY_SHELF[shelf] : undefined;
   const row = byTitle || byShelf || ANY_HOUSE;
   const via = byTitle ? 'title' : byShelf ? 'shelf' : 'generic';
@@ -369,7 +370,7 @@ export function hookPoolFor(title, shelf, options = {}) {
  * @returns {{ secrets: ReadonlyArray<Readonly<{ secret: string, stakes: string }>>, presentations: ReadonlyArray<Readonly<{ impression: string, disposition: string, behaviour: string }>> } | null}
  */
 export function titleLinesFor(title) {
-  const key = typeof title === 'string' ? title : '';
+  const key = typeof title === 'string' ? titleKeyOf(title) : ''; // BIRTH-1 D8: a title read as another (data/people/titleReadAs.js)
   if (!key || !Object.prototype.hasOwnProperty.call(TITLE_SECRETS, key)) return null;
   return { secrets: TITLE_SECRETS[key], presentations: TITLE_PRESENTATIONS[key] || [] };
 }
