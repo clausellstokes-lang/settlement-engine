@@ -28,6 +28,10 @@ whole first message, as sent).
   on 2026-11-24. The chair's own context read 433,030 of 1,000,000 at 14:36.
 
 ## 1. THE OWNER'S WORDS THAT GOVERN, newest first
+"The weekly allowance: carry on, narrowed. We are at 32%" (2026-11-25, about 01:15 UTC, this account). THE ONE NUMBER THE
+CHAIR COULD NOT SEE: 32 per cent of the week used, about ten hours into it (the week began 2026-11-24 15:00 UTC; it
+resets 2026-12-01 15:00 UTC). "Narrowed" is the chair's own word for what he confirms: five seats, no new lane, every
+result saved as it is made (T53, T65).
 "To these and all future questions I defer decisions to you:" (2026-11-25, shortly before 01:08 UTC, this account), written
 over the chair's own list of six, which he quoted whole: (1) old towns rebuilt on a decree: build the guard, yes or no;
 (2) the weekly allowance: carry on narrowed, or stop; (3) the troubles rule's three numbers: yes, or changes; (4) imports
@@ -883,3 +887,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   "lit by the chair's decision, the owner having deferred the question; the numbers stay drafts"; nothing signed; the
   tuning inventory must not move: its door is not run). (4) NO INTERIM for the import door (V12). (5) READ-COST stays in
   its planned place (V11). (6) THE TEN FILES REMAIN HIS HAND; he is advised to run them as soon as he can.
+- 2026-11-25 01:14 UTC · T66 · THE OWNER GIVES THE NUMBER: 32 PER CENT OF THE WEEK USED AT ABOUT 01:15 UTC; THE CHAIR'S INFERENCE CORRECTED; A METER.
+  THE CHAIR HAD TOLD HIM (T53) that the warning status probably meant most of the week's allowance was gone: WRONG: it is
+  about a third; the status `allowed_warning` evidently comes on early (its rule is unknown to the chair). CORRECTED TO HIM.
+  A METER, so a later reading gives a slope (API-priced cost as the records give it, NOT the allowance's own unit): at
+  01:13 UTC the chair's session read 825.42 in all (788.93 at 22:47: about 15 an hour); the seats at 00:29: CLOSE-7
+  320.39 (about 33 an hour), VEIL-53 45.45, VEIL-52 27.98, VEIL-55 14.75, VEIL-51 14.51; the finished seats' figures
+  were not read. THE CHAIR'S GUESS, SAID AS A GUESS: about 95 to 100 an hour at five seats and a landing; 32 per cent
+  is then some 720 to 800, so the remaining 68 per cent lasts roughly 17 to 22 more hours: THIS ACCOUNT STOPS SOMEWHERE
+  BETWEEN 18:00 AND 23:00 UTC ON 2026-11-25 IF THE PACE HOLDS. WHAT IS LEFT ON THE LIST NEEDS ABOUT TWICE THAT: on this
+  account alone the release falls after the reset (about 2026-12-02 or 03); with another account taking the hand-off
+  when this one stops, about 2026-11-27 to 29. THE ORDER OF SPENDING: the share veil's phase 1 (the long pole), the
+  troubles rule's lighting (running), the guard (R24j), then the birth-moving items, then wording. THE CHAIR CUTS ITS OWN
+  COST: fewer turns, fuller messages, no reply to a seat's line that needs no ruling. THE CHAIR's OWN CONTEXT read
+  522,649 at 01:13 (it was compacted at about 22:41): its next compaction is two hours off at this rate; this file is
+  its memory.

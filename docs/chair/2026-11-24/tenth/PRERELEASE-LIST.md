@@ -94,3 +94,10 @@ THE CHAIR'S EARLIER GUESS TO THE OWNER (2026-11-27 or 28, given before this list
 The account's weekly allowance read `allowed_warning` under eight hours into its week (hand-off T53). THE GUESS ABOVE
 ASSUMED USAGE WAS NOT THE LIMIT AND IS WITHDRAWN until the owner says the percentage. Until then: nothing new is seated;
 each seat finishes the unit in hand; every result is pushed as it is made.
+
+## ADDED 01:14 UTC ON 2026-11-25: THE OWNER's NUMBER, AND THE GUESS REMADE
+"We are at 32%" (about 01:15 UTC, ten hours into the week). The chair's guess, said as a guess: the remaining 68 per cent
+lasts roughly 17 to 22 more hours at five seats and a landing; what is left on this list needs about twice that. ON THIS
+ACCOUNT ALONE the release falls after the reset of 2026-12-01 15:00 UTC (about 2026-12-02 or 03). WITH ANOTHER ACCOUNT
+TAKING THE HAND-OFF WHEN THIS ONE STOPS: about 2026-11-27 to 29. Neither counts the owner's own hands at the end.
+
