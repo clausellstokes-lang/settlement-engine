@@ -17,7 +17,7 @@ console.log(`SECTIONS REFUSED BY THE SERVER'S OWN CHECK (campaigns) ${J(merge('s
 console.log(`PERSON HITS THE OLD SUBSTRING MATCH HAD AND THE WHOLE-WORD MATCH DOES NOT: ${J(merge('personSubstrOnly'))}`);
 const pl = S.map((s) => s.plant).filter((p) => p.done);
 let blind = 0;
-for (const p of pl) { console.log(`PLANT ${p.campaign} house ${J(p.house)} person ${J(p.person)} | expect ${J(p.expect)} | caught ${J(p.caught)} | REFUSED BY THE SERVER ${J(p.refused || {})}`); for (const [k, n] of Object.entries(p.expect)) if ((p.caught[k] || 0) < n) blind += 1; }
+for (const p of pl) { console.log(`PLANT ${p.campaign} house ${J(p.house)} person ${J(p.person)} shut ${J(p.shut || null)} | expect ${J(p.expect)} | caught ${J(p.caught)} | REFUSED BY THE SERVER ${J(p.refused || {})}`); for (const [k, n] of Object.entries(p.expect)) if ((p.caught[k] || 0) < n) blind += 1; }
 if (S[0]?.meta.plant && !pl.length) console.log('PLANT NOT PLACED (no hideable house in the shard)');
 console.log(`PLANT BLIND CELLS ${blind}`);
 process.exit(blind ? 4 : 0);

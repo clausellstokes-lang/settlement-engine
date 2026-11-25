@@ -33,6 +33,8 @@ step_pptodayimp() { mkdir -p $I44/v52/pp && cp $HERE/pp/* $I44/v52/pp/; mx sh -c
 step_miplant2() { cpm; mx sh -c "WD_PLANT=1 WD_PLANT_SEED=r3m-metropolis-none-1-127 WD_SEEDS=r3m-metropolis-none-1-127 WD_SHARDS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-plant2 v28tpl stored $O/stored-master" > $O/mi-plant2.txt 2>&1; st miplant2 $?; }
 step_snplant2() { cpm; mx sh -c "SNAP_PLANT=1 WD_SHARDS=1 sh $M/snap.sh /home/user/wt/join $O/sn-plant2 v28tpl stored $O/stored-master" > $O/sn-plant2.txt 2>&1; st snplant2 $?; }
 step_snapchron() { for spec in master:v52mst tip:v28tpl; do t=${spec%%:*}; tpl=${spec#*:}; mx sh -c "cd /home/user/wt/$t && $E PGHOST=/var/tmp/rv7 RV6_SRC=/home/user/wt/$t RV9_PROBE=$HERE/snapchron/snapchron.probe.jsx SC_TPL=$tpl SC_TAG=$t SC_DIR=$O/stored-today SC_OUT=$O/snapchron-$t.json npx vitest run --config /var/tmp/v18/rv9/vitest.config.mjs" > $O/snapchron-$t.log 2>&1; st snapchron-$t $?; done; }
+step_miplant3() { cpm; mx sh -c "WD_PLANT=1 WD_PLANT_DESC=1 WD_PLANT_SEED=r3m-metropolis-none-1-127 WD_SEEDS=r3m-metropolis-none-1-127 WD_SHARDS=1 sh $M/wdmi.sh /home/user/wt/join $O/mi-plant3 v28tpl stored $O/stored-master" > $O/mi-plant3.txt 2>&1; st miplant3 $?; }
+step_snplant3() { cpm; mx sh -c "SNAP_PLANT=1 SNAP_PLANT_PERSON=1 SNAP_MAXC=3 WD_SHARDS=1 sh $M/snap.sh /home/user/wt/join $O/sn-plant3 v28tpl stored $O/stored-master" > $O/sn-plant3.txt 2>&1; st snplant3 $?; }
 # (1c) N115: the read's time, the tip's chain against master's own, on the same public rows
 step_n115() { mx sh $HERE/n115.sh > $O/n115.txt 2>&1; st n115 $?; }
 for s in ${*:-dumps miplant snplant mitip mimaster mijoin sntip snmaster snjoin n115}; do step_$s; done

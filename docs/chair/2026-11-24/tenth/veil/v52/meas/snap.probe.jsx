@@ -127,7 +127,7 @@ it(`VEIL-52 snap (${FORM})`, async () => {
   // the shard's documents, in pool order
   const stored = process.env.RV9_STORED_DIR;
   const docs = E.pool(Number(process.env.RV9_N || 2), SHARD).map((b) => ({ seed: b.seed, doc: JSON.parse(readFileSync(`${stored}/${b.seed}.json`, 'utf8')) }));
-  for (let c0 = 0, ci = 0; c0 < docs.length; c0 += G, ci += 1) {
+  for (let c0 = 0, ci = 0; c0 < docs.length && ci < Number(process.env.SNAP_MAXC || 1e9); c0 += G, ci += 1) {
     const group = docs.slice(c0, c0 + G);
     const ids = group.map((_, k) => uid(ci, k + 1));
     const saves = group.map((m, k) => ({ id: ids[k], name: m.doc.name, phase: 'canon', settlement: clone(m.doc), campaignState: { phase: 'canon', eventLog: [], locks: {} } }));
@@ -202,6 +202,11 @@ it(`VEIL-52 snap (${FORM})`, async () => {
     };
     let slug = await publish(snapshot);
     await db.query(`update public.saved_maps set unlisted_slug = $2, visibility = 'unlisted' where id = $1`, [mid, `${ms}l`]);
+    let shutKey = null; let shutName = null;
+    if (process.env.SNAP_PLANT_PERSON === '1' && !out.plant.shutDone) {
+      const n = arr(saves[0].settlement.npcs).find((x) => isRec(x) && typeof x.name === 'string' && x.name.length >= 3);
+      if (n) { shutKey = V.veil.CARD_KINDS.npc.idOf(n); shutName = n.name; out.plant.shutDone = true; out.plant.shut = { campaign: campaign.id, name: shutName, key: shutKey }; }
+    }
     const camp = { id: campaign.id, seeds: group.map((m) => m.seed), ticks, pulseMs: Date.now() - p0, hidden: 0, reads: 0, worldBytes: JSON.stringify(snapshot).length };
     out.worldBytes.push(camp.worldBytes);
     camp.hidden = saves.filter((s) => arr(s.settlement.institutions).some((h) => isRec(h) && E.isHideableHouse(h))).length;
@@ -211,7 +216,13 @@ it(`VEIL-52 snap (${FORM})`, async () => {
       const nj = Math.max(...keysOf.map((k) => k.length));
       for (let j = 0; j < nj; j += 1) {
         const keyAt = saves.map((s, m) => keysOf[m][j % keysOf[m].length]);
-        for (const [m, s] of saves.entries()) await db.query('update public.settlements set gallery_member_overrides = $2, gallery_share_dm = $3 where id = $1', [s.id, JSON.stringify(V.write(V.settings(s.settlement, dm).deltas[keyAt[m]])), dm]);
+        // VEIL-55 (02:49): SNAP_PLANT_PERSON=1 shuts ONE person of the first campaign's first member by the member's own per-person
+        // switch (a `card:npc:<galleryMemberKey>` hide, which writeShareVeil folds into that member's revealDm:false)
+        for (const [m, s] of saves.entries()) {
+          let deltas = V.settings(s.settlement, dm).deltas[keyAt[m]];
+          if (shutKey && m === 0) deltas = [...(Array.isArray(deltas) ? deltas : []), { address: `card:npc:${shutKey}`, hidden: true }];
+          await db.query('update public.settlements set gallery_member_overrides = $2, gallery_share_dm = $3 where id = $1', [s.id, JSON.stringify(V.write(deltas)), dm]);
+        }
         const gm = (await db.query('select public.get_gallery_map($1) d', [slug])).rows[0]?.d;
         await db.query(`select set_config('test.uid', $1, false)`, [READER]);
         const im = (await db.query('select public.import_gallery_map($1) d', [slug])).rows[0]?.d;
@@ -238,7 +249,7 @@ it(`VEIL-52 snap (${FORM})`, async () => {
         // the plant's person: the first withheld person of the first read, published once into the chronicle-style line
         // VEIL-55 (00:16): the person plant goes on the FIRST campaign, any campaign, where a read withholds a person
         if (PLANT && !out.plant.personDone && !plantPerson) {
-          plantPerson = [...persons.entries()].find(([, k]) => k === 'person-withheld')?.[0] || null;
+          plantPerson = (shutName && persons.get(shutName) === 'person-withheld') ? shutName : (process.env.SNAP_PLANT_PERSON === '1' ? null : [...persons.entries()].find(([, k]) => k === 'person-withheld')?.[0] || null);
           if (plantPerson) {
             const withP = clone(snapshot); withP.dashboard = isRec(withP.dashboard) ? withP.dashboard : {}; withP.dashboard.realmArcLines = [...arr(withP.dashboard.realmArcLines), `${plantPerson} was seen`];
             out.plant.person = plantPerson; out.plant.personDone = true; out.plant.personCampaign = campaign.id;
