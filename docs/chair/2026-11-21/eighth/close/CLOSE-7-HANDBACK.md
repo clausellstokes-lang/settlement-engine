@@ -17,6 +17,11 @@ summaries so far: TWO (the second ~22:2x UTC). A THIRD before "CLOSE-7 <commit>"
   - (2) ANCHORS-2 (R24o; builder a45b468ed08040c87, /home/user/wt/anchors).
   - (3) the six causes and (4) the four figures, READS only (builder acf2f8a555891c8a8).
   - (5) the first-paint +11,165 and writer-reach closureSizes +2 explanations (builder T, after TYPES).
+- (1) TYPES DONE: 8e2441054, pushed from its own worktree with the hook green. SENT.
+- (5) explained:
+  - first paint is B1(i)'s eager landWithholding.js pulling geographyData.js, plus the mirror's foodProduction.js unpinned. The
+    buy-back (vite lazy list, about 10.6 KB) is OFFERED, not built;
+  - writer-reach +2 is sickCare.js and foodProduction.js through factsOf.js.
 - The four seats' units WAIT for this.
 
 ### 0.00 THE FIRST HAND-IN IS SENT: "CLOSE-7 97c6bfc7a" (11:46 UTC 2026-11-25)
