@@ -1458,3 +1458,14 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   RULING-117-7 (merge, lighting census by its door, last gate, PUSH).
   Seats: BIRTH-1 final (D8 parked again, G38); BIRTH-2 final (P9 34212dfd2); WORDS-1 building E13b (70 sentences, G39);
   WORDS-2 hands over after E13a's hand-in (E13d written in its hand-back 0.8 for the next seat).
+- 2026-11-25 20:40 UTC · T112 · **POINT 117 IS ON THE LINE: THE LINE IS 09c29806b85a0a636c1e539922d57edede7b0ba9** (pushed 20:40 UTC, a fast-forward of ddca5c7894; the hook clean).
+  The landing is its parent 23d02f09f7 (`lane/stack-117-wip-2026-11-25` on origin); the tip is the row and "THE GATE OF
+  POINT 117" in LANDINGS-SIXTH.md. C1B took three passes (cfb9427120, b819770332, 5b3fc362a6) and two second reads
+  (R24s, R24t, R24u): the differential 0 differing; one residual accepted and written in the leaf. `ci/RED-AT-LINE.tsv`:
+  68 rows (seven joined). `ci/LINE-NOW.md` brought to point 117. `prompts/START-CLOSE-8.txt` filled.
+  OWED NOW: (1) CI's run on 09c29806b READ BY NAME (copy `ci/ci-read-116.py`; the whole suite and `tests/build` whole
+  have not run since the wide gate at f2a837b3b9: a red outside the 68 is ruled by its cause, never listed blind);
+  (2) CLOSE-8 seated for point 118 (Opus, high effort; the one table `gen/HAND-INS.md`); (3) the second reader started
+  on point 118's source when its hand-in arrives; (4) the owner told.
+  THE HELPER LAND-117 (agent a8bcd6b57f4ff5bc6) AND THE BUILDER C1B (agent af6a50ea622cbd98c) HAVE FINISHED; the
+  builder's tree /home/user/wt/c1b may be removed (its branch is merged).
