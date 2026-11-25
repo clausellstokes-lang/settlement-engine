@@ -29,9 +29,11 @@
  *          birth's; counted and listed) the longest form-boundary suffix of it the desc ends in;
  *        master-born: the master writer is out of reach at run time; its recorded templates (arm 2's fixture) judge: every
  *          cut segment must be one recorded template whole, and no base may still end in one.
- *      Classes per pool: CUT EXACTLY, NO TAIL, UNCUT (a tail the cut misses), AMBIGUOUS (two rows match at one start), WRONG
+ *      Classes per pool: CUT EXACTLY, NO TAIL, UNCUT (a tail the cut misses), DIFFERENT-SPAN TIE (two rows match DIFFERENT
+ *      spans at one start: two bases possible, the desc withheld whole; the chair's V14 (1) ruling, 02:29: a tie over ONE span is
+ *      one reading, counted apart as `same-span ties`), WRONG
  *      (the cut removes text the writer did not write). The counts are appended to STANDWALK_MEASURES (when set); UNCUT,
- *      AMBIGUOUS and WRONG must be 0, every case listed when not (the arm is never tuned to the pools).
+ *      DIFFERENT-SPAN TIE and WRONG must be 0, every case listed when not (the arm is never tuned to the pools).
  */
 import { describe, it, expect } from 'vitest';
 import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
@@ -92,6 +94,19 @@ function sampleErrors(table) {
   return errors;
 }
 
+/**
+ * THE TIE RULE (the chair's V14 (1) ruling of 2026-11-25 02:29 UTC; VEIL-55's terms): the cut is judged by its SPAN, not its rows.
+ * Rows matching at a step's chosen start are ONE reading when every one matches THE SAME SPAN (the served base is the same whichever
+ * row is taken: a same-span tie); two rows matching DIFFERENT spans there would leave two possible bases: such a desc is WITHHELD
+ * WHOLE, and the census reds on it. @param {{ id: string, m: RegExpExecArray }[]} tied hits at one start
+ * @returns {'one' | 'same-span tie' | 'different-span tie'}
+ */
+function tieOf(tied) {
+  if (tied.length < 2) return 'one';
+  const spans = new Set(tied.map((h) => `${h.m.index + h.m[0].length - h.m[1].length}:${h.m.index + h.m[0].length}`));
+  return spans.size === 1 ? 'same-span tie' : 'different-span tie';
+}
+
 /** @param {string} hay @param {string} needle @returns {number} */
 const occurrences = (hay, needle) => hay.split(needle).length - 1;
 
@@ -142,7 +157,17 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
     expect(missing, CHECK_MESSAGE).toEqual([]);
   });
 
-  it.skipIf(!POOLS)('3. THE CENSUS OF STORED TAILS (a measure: runs only under STANDWALK_POOLS=<today>:<master>; skipped in the gate\'s default run): UNCUT, AMBIGUOUS and WRONG are 0 in both pools', async () => {
+  it('4. THE TIE RULE (V14 (1), ruled 02:29): rows tied over ONE span are one reading; tied over DIFFERENT spans the desc is withheld whole (a planted pair of rows reds)', () => {
+    const desc = 'The base sentence. They play the Fishers and the Senate against each other.';
+    const hitsOf = (/** @type {RegExp[]} */ res) => res.map((re, i) => ({ id: `p${i}`, m: re.exec(desc) })).filter((h) => h.m);
+    // the same span, two rows: one reading
+    expect(tieOf(hitsOf([/(?:^| )(They play [A-Za-z ]+ against each other\.)$/, /(?:^| )(They play the [A-Za-z]+ and the [A-Za-z]+ against each other\.)$/]))).toBe('same-span tie');
+    // the planted pair: one row stops before the end, so its span differs: withheld whole
+    expect(tieOf(hitsOf([/(?:^| )(They play [A-Za-z ]+ against each other\.)$/, /(?:^| )(They play the Fishers)/]))).toBe('different-span tie');
+    expect(tieOf(hitsOf([/(?:^| )(They play [A-Za-z ]+ against each other\.)$/]))).toBe('one');
+  });
+
+  it.skipIf(!POOLS)('3. THE CENSUS OF STORED TAILS (a measure: runs only under STANDWALK_POOLS=<today>:<master>; skipped in the gate\'s default run): UNCUT, DIFFERENT-SPAN TIE and WRONG are 0 in both pools (same-span ties counted apart: one reading)', async () => {
     const [todayDir, masterDir] = POOLS.split(':');
     expect(todayDir && masterDir, 'STANDWALK_POOLS=<today-born pool>:<master-born pool>').toBeTruthy();
     const { servedRosterOf } = await import('../../src/domain/veil/pageRederive.js');
@@ -166,7 +191,7 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
         const tied = hits.filter((h) => h.m.index === at);
         const ids = tied.map((h) => h.id).sort();
         const m = tied[0].m;
-        steps.unshift({ ids, text: rest.slice(at + m[0].length - m[1].length) });
+        steps.unshift({ ids, tie: tieOf(tied), text: rest.slice(at + m[0].length - m[1].length) });
         rest = rest.slice(0, at);
       }
       const cut = cutDesc(desc, compiled);
@@ -182,7 +207,7 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
       return '';
     };
     const filesOf = (/** @type {string} */ dir) => readdirSync(dir).filter((f) => /^r3m-.*\.json$/.test(f)).sort();
-    const CLASSES = ['CUT EXACTLY', 'NO TAIL', 'UNCUT', 'AMBIGUOUS', 'WRONG'];
+    const CLASSES = ['CUT EXACTLY', 'NO TAIL', 'UNCUT', 'DIFFERENT-SPAN TIE', 'WRONG'];
     const fresh = () => ({ counts: Object.fromEntries(CLASSES.map((k) => [k, 0])), cases: [], docs: 0, rows: 0, extra: {} });
     const bump = (/** @type {any} */ o, /** @type {string} */ k) => { o.extra[k] = (o.extra[k] || 0) + 1; };
     /** Rows the read hides (stamped `hidden` or masked): their desc is dropped on every read, never cut; counted apart. */
@@ -215,9 +240,10 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
         const stored = storedTailOf(f.desc, tail);
         if (stored !== tail) bump(today, 'DRIFT');
         const { cut, steps } = stepsOf(f.desc);
+        if (steps.some((st) => st.tie === 'same-span tie')) bump(today, 'same-span ties');
         const got = cut ? cut.standing : '';
         const k = got === stored
-          ? (steps.some((s) => s.ids.length > 1) ? 'AMBIGUOUS' : stored ? 'CUT EXACTLY' : 'NO TAIL')
+          ? (steps.some((s) => s.tie === 'different-span tie') ? 'DIFFERENT-SPAN TIE' : stored ? 'CUT EXACTLY' : 'NO TAIL')
           : stored.endsWith(got) && (got === '' || stored === got || stored.endsWith(` ${got}`)) ? 'UNCUT' : 'WRONG';
         if (cut === null) bump(today, 'cut null');
         today.counts[k] += 1;
@@ -238,10 +264,11 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
         if (typeof f.desc !== 'string') continue;
         master.rows += 1;
         const { cut, steps } = stepsOf(f.desc);
+        if (steps.some((st) => st.tie === 'same-span tie')) bump(master, 'same-span ties');
         const base = cut ? cut.base : f.desc;
         const left = masterTail.find((m) => m.re.test(base));
         const foreign = steps.filter((s) => !masterWhole.some((m) => m.re.test(s.text)));
-        const k = foreign.length ? 'WRONG' : left ? 'UNCUT' : steps.some((s) => s.ids.length > 1) ? 'AMBIGUOUS' : cut ? 'CUT EXACTLY' : 'NO TAIL';
+        const k = foreign.length ? 'WRONG' : left ? 'UNCUT' : steps.some((s) => s.tie === 'different-span tie') ? 'DIFFERENT-SPAN TIE' : cut ? 'CUT EXACTLY' : 'NO TAIL';
         if (cut === null) bump(master, 'cut null');
         master.counts[k] += 1;
         if (!['CUT EXACTLY', 'NO TAIL'].includes(k)) {
@@ -259,7 +286,7 @@ describe('standing forms: the table is total over the writers (V14 (2)) and the 
     }
     expect(mirrorErrors, 'the census\'s steps agree with cutDesc').toEqual([]);
     expect(today.docs > 0 && master.docs > 0, 'both pools hold r3m-*.json documents').toBe(true);
-    const findings = (/** @type {any} */ o) => o.cases.filter((c) => ['UNCUT', 'AMBIGUOUS', 'WRONG', 'UNREAD'].includes(c.class));
+    const findings = (/** @type {any} */ o) => o.cases.filter((c) => ['UNCUT', 'DIFFERENT-SPAN TIE', 'WRONG', 'UNREAD'].includes(c.class));
     expect(findings(today), `today-born: ${line('today', todayDir, today)}`).toEqual([]);
     expect(findings(master), `master-born: ${line('master', masterDir, master)}`).toEqual([]);
   }, 600000);
