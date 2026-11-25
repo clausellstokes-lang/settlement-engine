@@ -478,3 +478,20 @@ THE CHAIR READ THE CODE BEHIND EACH BEFORE RULING. RULED:
    lives on what its lodge lives on; red first; the every-birth census arm).
 THE PRACTICE: the second reader has now found real faults on all three changes it was given. It reads EVERY source
 change before a landing, and from point 118 it is started when the hand-in arrives, not after the gate.
+
+**R24s (18:40 UTC on 2026-11-25): THE SECOND READER ON C1B (cfb9427120) FOUND FOUR MORE; "C1B-2" ORDERED.** Its report:
+`landing/117/SECOND-READER-C1B.txt`. THE CHAIR HAD READ THE DIFF AND FOUND NO FAULT. (1) A generated power the DM
+RENAMED "Senate" (the rename door stamps nothing) reads as the hall: the guild floors and caps it (20/60 to 74/25),
+advance time changing for a user-named power, saved towns included. THE CHAIR MEASURED: every born hall row carries
+`category: 'criminal'` (20 of 20 on 42 births): RULED: a row's own category is the truth: the hall's reading applies
+to a row only where its category is criminal (strict in the pulse); a row with no category is read as a bare string.
+(2) `rulingPower.js :: takenBy` matches a civic form by substring ("corrupt city council" holds "city council";
+"council of syndics" does not): a new city's hall becomes "City Council" where an old-named one becomes "City Council
+Ascendant" on election, succession, appointment: C1's fault, missed by a sweep that searched two words: RULED: read
+through the one home; AND THE SWEEP IS REPLACED BY A DIFFERENTIAL: born hall places against their old-named twins over
+every cause of the pulse and of mutateWorld that touches the governing power, the guild tick, the public projection and
+the AI grounding: 0 differing. (3) The general "X of Y" number rule moves "Circle of Adepts" and "The Guild of
+Artificers" on advanced and saved places: TAKEN OUT of 117; a hall's number is read as its old name's; the general
+rule is a later unit. (4) a wrong test path in a comment. THE SECOND READER HAS FOUND REAL FAULTS ON ALL FOUR CHANGES
+IT HAS READ. C1's design (a meaning carried by a display name) is the root; if the differential shows one more
+reader, the chair takes C1 out of 117 whole rather than cure it a fourth time.
