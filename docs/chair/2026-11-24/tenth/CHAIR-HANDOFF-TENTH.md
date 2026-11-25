@@ -1216,3 +1216,16 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
 - 2026-11-25 09:11 UTC · T95 · G1: A5's SHAPE RULED ("BESIDE", the field private by its name). THE NEW SEATS' RULINGS LIVE IN `gen/RULING-G.md`.
   OWED TO THE VEIL's LANE AT ITS RESUMPTION (also in G1's term 7): the new field joins what no non-owner read sends;
   unit 4's cut for a place born after this lands is by the field.
+- 2026-11-25 09:39 UTC · T96 · ALL FOUR VEIL SEATS ARE PAUSED; THE FOUR NEW SEATS' FIRST HOUR: G2 TO G5.
+  VEIL-55 (09:39): the seats' lines are in `veil/v55/PAUSE-2026-11-25.md` section 6 at 914162d52 on
+  `lane/veil-55-2026-11-24`. VEIL-51: documents ba3ce1e96; ITS CODE 8697f4eff IS LOCAL ONLY (the refused push: the
+  owner told at 09:05; nothing since). VEIL-52: a8555917e, the rework's branch 08a9dd8fb, its measure table unread by
+  VEIL-55. VEIL-53: 0fdb1ed84, `-grants-wip` d2316f101 (V26 done, unread by VEIL-55), V29 not begun.
+  `gen/RULING-G.md`: G2 (D4: 69 of 900 on C and 121 on V stored out of order; the page sorts), G4 (the Summary tab is
+  mounted nowhere: the chip not built, the dead file named), G3 (E4: 389 of 900 pages on C say "no market" twice; the
+  yield clause stays, C4 v6 re-worded), G5 (E1 by four sources: 125 hits on C, 145 on V; E8's wider scope). BIRTH-2:
+  A5 built (`-a5-wip` 9cbf5cf16; red 10 of 15, green 15 of 15), its proofs over C and V queued. WORDS-2: E11
+  (57538749c) and E10 (753f3e337) built, E12 written. CLOSE-7: its first hand-in awaited.
+  THE CHAIR's CORRECTIONS TO THE OWNER THIS HOUR: D4's counts were of a component no user sees; D4's two stored lines
+  were wrong on no birth; one more message label ahead of the clock (09:36 for 09:35): TIME LABELS ARE NOW LEFT OFF
+  MESSAGES TO SEATS unless read in the call before.

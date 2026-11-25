@@ -74,3 +74,7 @@ projection's: 0. A re-worded joiner that writes a power's description or its sta
 lane. E8's SCOPE: a reflexive bound to one person takes that person's own stored pronoun (card lines binding the
 card's own person, and the tie; "make themselves useful" printed 419 times on C); no stated gender, or "they", keeps
 "themselves".
+**G2 (2), AS BUILT (BIRTH-2, 09:35):** its "V 2" was an upper bound, not a count: read on the two births, neither stored
+line names the wrong power. Both `topFaction` reads go through the sorting reader anyway (`-d4-wip` 2cf611af9): records
+moved C 0, V 0; no golden row. The chair's sentence to the owner ("two stored sentences named the wrong power") was
+wrong and is corrected to him.
