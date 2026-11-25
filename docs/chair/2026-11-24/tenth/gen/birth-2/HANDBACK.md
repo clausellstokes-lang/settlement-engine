@@ -43,15 +43,11 @@
   `npm run build:edge-shared` at the landing, not by me; the lighting census (one test file more): re-taken by its door at
   the landing. Cured by cause on the branch: factionRename totality, seatHolderLines pass-off, the seed-loop walker, the
   mutation manifest row.
-- UNIT D4 as of 09:39 UTC: `-d4-wip` at 66e313f4a (3 commits: 1c1ec43f4 sort; 2cf611af9 G2 narrative readers; 66e313f4a G4:
-  SummaryTab back to base, history readers via the leaf, test now tests/generators/powersStrongestFirstReaders.test.js, red
-  7/11 at base, green 11/11). Live readers: aiLayer extractFullContext; narrativeGenerator genSettSummary/genPressureDetail
-  topFaction; historyGenerator dominantFaction, secFaction, altFaction. Dead: SummaryTab (4 readers), buildPersonaSlice (no
-  caller). Re-birth at 2cf611af9: records moved C 0, V 0 (the two "wrong" lines were never wrong: corrected to the chair).
-  Records at 66e313f4a: read from the page battery's record hashes (pb-d4 vs pb-base).
-- QUEUE (scratchpad queue.sh, progress in queue.progress): d4 summary C/V; a5 proof base/a5 C/V; page battery base/d4/a5 C/V
-  (CLOSE-7's page-battery.mjs copied to /home/user/c7tools/read25). THEN OWED for each unit: tests/lint whole, tests/copy
-  whole, named tests, a build; push each -wip; hand in to CLOSE-7 and the chair.
+- UNIT D4: HANDED IN at 14:33 UTC: `lane/birth-2-2026-11-25-d4-wip` 57d26a136 on origin, "UNIT D4" sent to CLOSE-7 and the chair
+  (section 2). Typecheck in its tree: ratchet OK 167/167; domain-strict OK 1113/1113.
+- NEXT: FREE; asked the chair for a unit (14:33 UTC).
+- Worktrees: /home/user/wt/d4 and /home/user/wt/a5 (node_modules and .husky/_ symlinked; excluded in info/exclude).
+  Scratch tools: /home/user/c7tools/read25 (CLOSE-7's page battery copied). Runs: scratchpad queue*.sh, logs g-*.log.
 - Corpora: C = `close-7/read24/make-plan.mjs`, V = `make-visitor-plan.mjs` over the chair's `read/plan-lit.json`.
 - Probes run as: vitest config rooted at the checkout, include the probe file (see the probe headers).
 
