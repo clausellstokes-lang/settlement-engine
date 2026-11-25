@@ -342,8 +342,12 @@ describe('the facts the cure made', () => {
   // furnace beside short clay kilns refused every twin; it holds three. The arms' dominant pool of r2r-village-18 and
   // r2s-insurgency-village-2 admitted ONE: the racks' new twin makes it two, the most a twin can give a village there (the
   // tier bands of W2-FIX-DATA-4 keep the blades and the war's carts to a town; a third line would be drawn and move the draw)
-  it('B7 (BAR7-SCENES): the kilns hold three in r2s-religious_conversion-metropolis-0; the arms\' villages keep two, not one', () => {
-    expect(admittedByPool(BORN.get('r2s-religious_conversion-metropolis-0'))['kilns.dominant']).toBeGreaterThanOrEqual(3);
+  // RE-ANCHORED (CLOSE-7 ANCHORS, by cause): after the BATCH merge (e9b726cdf) r2s-religious_conversion-metropolis-0 reaches its kilns
+  // only as `lines` (its houses unchanged, its trade words moved), and so do -1 to -3, so the dominant pool is not reached in this
+  // crisis's metropolises of the 720. Re-picked by this file's own census (SEEDS): the first r2s metropolis whose kilns' dominant
+  // pool is reached, r2s-famine-metropolis-0 (a judgement: the same arm and size, another crisis). The assertion is word for word.
+  it('B7 (BAR7-SCENES): the kilns hold three in r2s-famine-metropolis-0; the arms\' villages keep two, not one', () => {
+    expect(admittedByPool(BORN.get('r2s-famine-metropolis-0'))['kilns.dominant']).toBeGreaterThanOrEqual(3);
     expectNoSeedFailures(collectSeedFailures(['r2r-village-18', 'r2s-insurgency-village-2'], (seed) => {
       const n = admittedByPool(BORN.get(seed))['arms.dominant'];
       if (!(n >= 2)) throw new Error(`${seed}: arms.dominant admits ${n} (17f760584: 1)`);
