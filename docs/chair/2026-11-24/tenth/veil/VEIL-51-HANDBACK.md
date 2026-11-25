@@ -329,7 +329,28 @@ THE PLAN OF UNIT 4's MERGE M (written 05:1x, BEFORE any resolution; worktree /ho
     criminalVeilSwitch VS1 (b) vs-city-1 factions 6, 7 desc (the arm expects the whole desc path withheld; the row withholds the
     tail); galleryImportRederive "2: reads no withheld path" factions[].desc (the narrowed reader's re-cut, KEPT as the deploy
     window's belt: a client meeting a server without 212 still cuts the tail; N1 removed its govMultiplier half).
-  NEXT: N4's brief and builder (branch lane/veil-51-2026-11-24-n4-wip at 802578955); N5.
+  N4 DISPATCHED (07:26): one builder, `u4/N4-BRIEF.md`, worktree /home/user/wt/n4 on lane/veil-51-2026-11-24-n4-wip at 802578955
+    (test-only; commits locally; I merge it into r5desc). N5's slices RUNNING on r5desc at 802578955 (`u4/n5.sh`; log
+    /var/tmp/v51/out/n5/n5.log: DESCARM, galleryWithholdAlways, galleryRosterChoices pglite, domain-strict).
+  THE PLAN OF UNIT 5, U (V20; written before any edit; built on lane/veil-51-2026-11-24-r5desc-wip after unit 4's last commit, riding
+    with it by the efficiency rule; red first on a slice; its 212 hunk goes to the chair with unit 4's in ONE "TIP?"):
+    U1 THE TWIN, host `galleryRosterChoices.js :: withholdPowerCopies` (R3's people pass; the namer `withheldPowerNamer` = the lane's
+      fold, the only matcher, V20 (a)): a PERSON NAMES where any of its strings names a withheld power: `npcs[].role`,
+      `npcs[].secondaryAffiliation`, `factions[].members[].role`, `.secondaryAffiliation`, `.goal.short` (the person by its id as
+      text, idText). Each named string leaves, KEY OMITTED, in EVERY copy of that person: the person's role leaves from
+      `npcs[]`, `members[]` and the ties' `npc1Role`/`npc2Role` (by `from`/`npc1Id`, `to`/`npc2Id`); secondaryAffiliation from
+      both lists; goal.short (the goal withheld whole if no other field remains). A read that hides nothing has no namer (null):
+      it loses nothing by construction.
+    U2 212 :: _gallery_veil_roster_choices, the same rule, rule for rule (the existing `named` predicate
+      `_gallery_veil_power_named`; ties by the same ends as `_gallery_veil_tie_roles`). Header item (39), its reason.
+    U3 REGISTRY rows: people.role (with its copies: npcs, members, ties), people.secondaryAffiliation, people.goal.short, each with
+      its reason (V20 (f)); host R3's people pass, both engines, built.
+    U4 ARMS (a new pglite file, test-only, by a builder's brief): one plant a path (`u5/plant5.mjs`'s seven), red first at the tip;
+      every door, both Reveals, the import among them (V20 (e)); "loses nothing": 0 leaves differ on every nothing-hidden read, both
+      pools, both engines (V20 (c)); the tell COUNTED for phase 2: cards left without a role on hiding reads, by door and Reveal
+      (V20 (d)); RIVAL's bare form listed for phase 2 (V20 (a)).
+    U5 PROOF: wd (NAMES) on the seven paths -> 0 on both pools and the plants (`u5/u5.sh`); the slices; then the joint TIP.
+  NEXT: N4's hand-back, merged; N5 read; the 107 (3) answer; then U.
   PROOF OF M: the three files' slices (galleryWithholdAlways.pglite, rosterChoiceComposedHosts.walker, galleryRosterChoices.pglite and
     galleryVeilDesc.pglite) and the strict typecheck, each through the mutex. Then DESCARM and STANDWALK merged (plain), then PLAN-V15
     item 2 by its own written plan.
@@ -383,6 +404,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 07:28 N4 dispatched; N5 slices running; unit 5's plan U written before any edit.
 - 07:25 N3 (a5e77c820) and item 5 (802578955) local; two inherited reds read against 04cfe6d85.
 - 07:2x N2b built (local bcf26ccbd): master's uncut standings cut; census red first 4 -> 0; measure master 12 -> 8.
 - 07:16 N2 built (local 9c03baa71). V25's measure: 7/754 today, 12/765 master, NOT near 0: three classes; (iii) an uncut master standing (LABEL_RE's capital-only qualifier). N2b planned before its 212 edit. VEIL-55 told.
