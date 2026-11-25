@@ -1,0 +1,4 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 194 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+fresh	src/data/institutionalCatalog.js	house: lord's reeve	5d927968d7506232	"the lord's reeve"
+fresh	src/data/institutionalCatalog.js	house: reeve	5d927968d7506232	"the lord's reeve"
+fresh 2 · stale 0 · first-register stale 0 · banked 4616 · strips fresh 0 stale 0 banked 108
