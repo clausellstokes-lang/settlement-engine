@@ -5,13 +5,14 @@ session_019yED1SUxGVHyjQnoqoFvQ8; CLOSE-7 is session_019yED1QNMqSLp7ohcZB88VP. A
 
 ## 0. WHERE THE SEAT STANDS: THE WHOLE MEMORY (written 09:02 UTC 2026-11-25)
 
-### FOR THE JOIN (CLOSE-8), current at 16:26 UTC 2026-11-25 — read this block first; the log below is history
+### FOR THE JOIN (CLOSE-8), FINAL at 20:42 UTC 2026-11-25 — read this block first; the log below is history. THE SEAT HANDS OVER.
 
-FOUR UNITS HANDED IN AND ACCEPTED BY THE CHAIR (merge E8 before E8b), cut at the base `origin/lane/close-7-2026-11-24-cures` 0ec96f13d8:
+FIVE UNITS HANDED IN TO THE CHAIR. MERGE ORDER: E1, D6, E8, E8b, E13b (E8b is cut on E8, E13b on E8b; E1 and D6 on the base) `origin/lane/close-7-2026-11-24-cures` 0ec96f13d8:
 | unit | branch | commit | what |
 |---|---|---|---|
 | E1 the double possessive (G5) | `lane/words-1-2026-11-25-e1-wip` | 902b7005d | owner pages C 125/122 → 0, V 145/126 → 0; public projection C 52/41, V 34/19 → 0 |
 | E8 the reflexive slot, STEP ONE | `lane/words-1-2026-11-25-e8-wip` | 94b7a13d9 | the tie and the RANK.enter want: C 627 strings in 390 places, V 595 in 381; 0 disagreeing |
+| E13b how they deal (G39), ON TOP OF E8b | `lane/words-1-2026-11-25-e13b-wip` | 7afbb043b (code 6f7398f6b; the wiring census's stamp by its own script) | 70 new sentences FOR THE OWNER'S VETO (`e13b/SENTENCES.md`); moved C 812 in 333 places, V 694 in 336; record hash with behaviour set aside equal 900/900; residual repeats C 16, V 9 |
 | E8b the bound card lines (G20, G28-G30), ON TOP OF E8 | `lane/words-1-2026-11-25-e8b-wip` | e75f090b7 | twelve card-line rows: C 1157 strings in 501 places, V 1126 in 500; round trip 0; successor byte-equal |
 | D6 the contender's word (G7, G20, G21) | `lane/words-1-2026-11-25-d6-wip` | 81ac266a5 | "Could contend" / "Could contest the seat" on bound cards: C 502, V 452 pages |
 
@@ -26,12 +27,18 @@ MERGE NOTE: E1 and D6 merge cleanly; E8 meets E1 in three files:
   `vantageHash(heldGoal(longTitled(c)), v)`.
 - `src/data/people/personMention.js`: keep both blocks (E1's ROLE_POSSESSIVE / OF_FORM_STOPS, E8's `reflexiveOf`).
 
+MERGE NOTES beyond the E1/E8 three: E8b and E13b each change narrativeGenerator.js line 34 (the import line) and line 1068 (goaledNpcs),
+and generateSettlementPipeline.js line 58 (import) and line 617 (goaledRoster); taken in order on their own branches they apply cleanly
+(E13b's diff is read against E8b's tip). E8b adds heldCardLine to goals.js's personMention import (E1 adds holdsPossessive to the line
+above it). E13b's second commit moves ONLY docs/content/wiring-census.json's stamp (producerIndexFiles 1458 → 1459), by
+`node scripts/wiring-census.mjs`; after the join, re-run that script once, in its own commit, if the joined tree's stamp differs.
+
 NAMED FOR THE OWNER (nothing re-recorded):
 - Goldens and censuses moved, all on RED-AT-LINE: rosterFinalUnderHeldRoster A1, generationForkCensus A1 (E8); powerEconomyFreshness
   A4, dossierProseManifest DRIFT, generatorGoldenMaster, espionageDormancyFence (E1).
 - The frozen writer-reach row (D6): `scripts/.writer-reach-baseline.json` "type on factionRelationships" web-transitive N→R.
 - E8's held line: POWER.corrupted "Set the terms … themselves", a banked samenessHideable red, keeps its they-form (option (b)).
-- For the owner's veto: "Could contend", "Could contest the seat"; the cards still reading "Contender": C 503, V 671 (C 388, V 501
+- For the owner's veto: E13b's 70 sentences (`e13b/SENTENCES.md`); "Could contend", "Could contest the seat"; the cards still reading "Contender": C 503, V 671 (C 388, V 501
   with no recorded conflict with the holder).
 - For the veil's lane: these re-worded joiners write a power's description or standing: governanceAccount's four standing sentences,
   seatHolderLines standing/standingVacant, and factionDynamics's ordained narrative.
@@ -222,6 +229,9 @@ STATE AT 18:49 UTC: CHAIR G39 (18:37): E13b RULED: 70 new sentences (every pair 
   src/generators/people/dealingLinesOfTown.js (the town pass), wired at narrativeGenerator.js:1068 and pipeline.js:617 (no line
   moves), tests/generators/people/dealingLines.test.js, manifest rationale. e13b/SENTENCES.md holds the 70 for the owner.
   Residual (pool exhausted) expected C 16, V 9 cards. Gates (e13b-*.log) and proof (s-e13b-*, twinb-*) running.
+STATE AT 20:42 UTC: UNIT E13b 7afbb043b HANDED IN to the chair (C 812 / 333, V 694 / 336; behaviour-aside hash 900/900 equal; other
+  strings 0; residual C 16, V 9; gates: lint = base four, typechecks OK). The chair's mark (19:01): E13b is the last unit; the seat
+  HANDS OVER at this commit. Proof files: reports/e13b-proof-C.txt, -V.txt; reports/e8b-*; reports/JOINED-PROOF.md.
 NOT IN STEP ONE (E8b): the card lines (tells 899/852, impressions, secrets, goal.long npcGenerator); their draws dedupe by text
 in registries (castPowers hookRegistry.tells, CarriedSecrets), so a draw-time fill would move draws: a design is owed.
 npcData.js was read in its changed region only (pairProse, the tie table), not whole: said in the hand-in.

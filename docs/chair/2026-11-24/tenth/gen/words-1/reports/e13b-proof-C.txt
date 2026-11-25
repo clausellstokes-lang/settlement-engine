@@ -1,0 +1,5 @@
+twin --cmp: births 900; records moved RAW 333 [0 0 1 62 123 147]; moved BEYOND the declared change 0
+three moved: dp-village-20 dp-town-5 dp-town-7
+e13b-proof: births 900; behaviour strings moved 812 in 333 places; moved wrongly 0; OTHER strings moved 0
+  two cards of one pair sharing a line while the pool allowed: 0; residual (pool exhausted): 4 cards on a pool of 3: 12, 5 cards on a pool of 3: 2 — 16 cards repeat a line
+  towns with no doubled pair: 567; of them with any string moved: 0
