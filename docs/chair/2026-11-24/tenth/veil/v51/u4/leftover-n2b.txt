@@ -1,0 +1,2 @@
+/var/tmp/v51/out/p1/stored-today: descs 754; a standing sentence LEFT in the cut base: 0 descs, 0 places
+/var/tmp/v51/out/p1/stored-master: descs 765; a standing sentence LEFT in the cut base: 0 descs, 0 places
