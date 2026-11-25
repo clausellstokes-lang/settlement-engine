@@ -80,13 +80,16 @@ afterEach(cleanup);
 describe('a chain card prints only the outputs its houses bear out (item 7)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  test('no court\'s work where no courthouse stands (#555, rr2s-town-plague_onset-rand-1); the guard town with a courthouse keeps it (rww-town-occupied-1)', () => {
+  // RE-PICKED (point 117, ruling 117-1, 2026-11-25): the guard rww-town-occupied-1 is a desert town, and under the close's
+  // B1(i) its birth no longer seats a Courthouse; the lowest rww-town-occupied that seats one, its law chain printing the three
+  // court outputs, is rww-town-occupied-0. The assertions are unchanged.
+  test('no court\'s work where no courthouse stands (#555, rr2s-town-plague_onset-rand-1); the guard town with a courthouse keeps it (rww-town-occupied-0)', () => {
     const town = birthApp('rr2s-town-plague_onset-rand-1');
     expect(chainOf(town, 'law_governance')?.outputs, 'anchored: the record\'s outputs').toEqual(expect.arrayContaining(COURT_OUTPUTS));
     expect(liveInstitutionNames(town).some((n) => /courthouse|court building/i.test(n)), 'anchored: no courthouse').toBe(false);
     const t = tabText(town);
     for (const o of COURT_OUTPUTS) expectAbsentWithAnchor(t, o, 'Outputs', 'a court\'s work without a courthouse');
-    const guard = birthApp('rww-town-occupied-1');
+    const guard = birthApp('rww-town-occupied-0');
     expect(liveInstitutionNames(guard), 'anchored').toContain('Courthouse');
     const g = tabText(guard);
     for (const o of COURT_OUTPUTS) expect(g, o).toContain(o);
