@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 05:22 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 05:40 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -104,6 +104,13 @@ c89d3f638 (pushed; cut at dbd4cd9e5): e22528cfe red test, 2841a39e5 the client c
 hand-back. GREEN: the cure's own test 3/3 (red 2/3 before), the walker 4/4 (`/var/tmp/v52/builder2/`). NOT RUN: tests/copy, tests/lint
 whole, typecheck, the existing tests naming the changed files, the walker's tooth. Brief: `v52/briefs/SNAP-CHRONICLE-BRIEF.md`
 (791b113e7). Told to the chair 05:30 (green on its own test, unproven beyond): the chair rules whether it rides.
+
+### 05:40: SNAP-CHRONICLE RULED OUT (the chair 05:27: does not ride; branch and hand-back stay for the map work). UNIT 3 on `-dsql-wip`
+2f849aa53 (pushed): galleryImportEqualsRead modulo the bijection (red 2 then 1 of 5 on re-keyed ids; green 5/5, `/var/tmp/v52/u3/I.log`).
+RUNNING: `u3a.sh L` (tests/lint whole) and `u3b.sh` (the SLICE PROOFS: templates v52tip = 211 + dbd4cd9e5's 212, v52dsql = 211 + the
+-wip's 212; um red on v52tip, green on v52dsql, today-born and lit-born; V21's tail plant on v52dsql). PostgreSQL was down since an
+unnoticed restart ~04:38 (only pglite runs ran since): restarted 05:37. NEXT: the 212 hunk with these slice proofs to VEIL-55 ("TIP?"),
+the hunk for the chair's whole read; then READ-COST (V11).
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
