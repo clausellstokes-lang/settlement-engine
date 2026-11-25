@@ -6,6 +6,87 @@ seated; read whole 21:24 UTC), under RULING V1 (`docs/chair/2026-11-24/tenth/vei
 BEGINS WITH A SUMMARY: tell VEIL-50 in one line, re-read that file and this section before judging anything. Every hour here is
 read from `date -u`. CONFIRMED = executed by me in this container; PLAUSIBLE = read, not executed.
 
+## 0. PAUSED (the owner, through the chair, 08:52 UTC 2026-11-25: "Pause the share page ..."): THE WHOLE STATE
+
+THE CODE IS LOCAL ONLY. `git push -q origin lane/veil-51-2026-11-24-r5desc-wip` was REFUSED by my permission check
+("Destructive or Unwanted Actions"). Per the refusal rule, nothing was tried in its place. VEIL-55 and the chair were told
+(08:5x). Every code commit below lives ONLY in this container's worktrees. The documents branch holds the record.
+
+THE CODE BRANCH `lane/veil-51-2026-11-24-r5desc-wip`, worktree /home/user/wt/r5desc, tip 8697f4eff, on dbd4cd9e5 (the lane's tip,
+R4-IDS + STORED-PROSE). In order, every commit DONE and proved by its own red and green:
+- 56727861a, 2944a4db5, 89e7d2d2c: merge M (R5-DESC aa54a6791). Proof: 3 slices; two inherited reds read.
+- e8cfe56a0: DESCARM merged. 04cfe6d85: STANDWALK merged.
+- 5b39bd019, N1: reader S narrowed to the cut; the import's drop of a hidden row's desc kept; R5D's TS2345 cured.
+- 9c03baa71, N2: the different-span tie unreachable by construction; the twin's end forced; pinned. VETOABLE.
+- bcf26ccbd, N2b, THE PATTERN'S CURE: LABEL_RE's lower-case bracket; table, 212 and twin literal regenerated (sha256
+  04838347...); census LEFTOVER red first 4 -> 0.
+- a5e77c820, N3: citations (36) -> (38); the belt's measured reach stated.
+- 802578955, item 5: power.desc 'not drawn'; the loss listed.
+- 483d95861, V27 (1): the stored belt, both engines, before the house gate; 5-argument _gallery_veil; 3-argument roster
+  choices; the 212 doors pass the stored row.
+- 2376572f3: term (a)'s doors walker, red by design on 211's get_gallery_map until unit 3.
+- 04711aa1b, UNIT 5 U1: the twin's person rule.
+- 91605fd9c, V27 (5): THE WRITER-ORACLE CENSUS. Red first on the pre-N2b table (master 3); now 0 of 754 today, 0 of 765 master.
+- 8697f4eff: UNIT 5 U2 (212's person rule) + U3 (three registry rows) + TERM (b) CORRECTED (the stored argument is
+  [live row, served source]; _gallery_veil_stored_docs).
+PROOFS:
+- N5 on 802578955: DESCARM 2/2 GREEN; galleryWithholdAlways 9/9; galleryRosterChoices 39/39; domain-strict rc 0.
+- Walkers on 8697f4eff: 13 passed, 1 red by design (the map door).
+- 212 apply/down/reapply rc 0 at every step.
+THE HISTORY PASS (V25 (3)): DONE. 615 forms, every one a row (u4/history.txt).
+THE STORED-ROSTER SET AT THE DOORS:
+- DONE at the three 212 doors (gallery and import [base.j, src.j], link base.j) and in the twin by opts.stored.
+- THE MAP DOOR is NOT BEGUN. It waits on unit 3 (VEIL-52, NOT GRANTED by V28), which restates get_gallery_map in 212; then
+  pass jsonb_build_array(base.j, src.j) there.
+- The twin on a snapshot read cannot hold the live row: LISTED, the server is the floor.
+THE RE-MEASURE (V27 (6)): DONE. 0 served descs naming a stored power not served, both pools, every power hidden in turn (4
+today and 8 master withheld; u4/v27m-*.txt).
+HELPER BRANCHES (LOCAL, not merged into r5desc):
+- `lane/veil-51-2026-11-24-n4-wip` 50e0bd13b (/home/user/wt/n4, on 802578955; N4's builder, WIP).
+  - galleryVeilDesc's re-cut arms: all green (TEETH, both FIDELITY, DIFFERENTIAL, SHARE CLASS 0, MASK, STORED DIFFERENTIAL,
+    THE ARM).
+  - V25 arms 2 and 3: green. V25 ARM 1: RED on 60 reads, all the OWNER-hidden power at Reveal off, both engines, every
+    door: "... quarrel with the an unseen interest is older than the walls." served.
+  - TWO CAUSES. (a) Its tree predates V27. (b) A GAP V27 LEAVES: the projection masks the exact-case name BEFORE the veil,
+    and V27's desc belt searches the stored NAMES only. So a masked desc base is not seen even with the stored row. Unit 5's
+    person rule already treats the mask as naming.
+  - THE CURE TO PROPOSE ON RESUMPTION: the desc belt also treats the mask in a cut base as naming (both engines), and the
+    test's twinOf passes the stored row.
+  - Its whole-file run was LEFT RUNNING at the pause (not killed; log /var/tmp/v51/out/n4/whole.log): rc unknown, expected 1.
+- `lane/veil-51-2026-11-24-arms-wip` 54b4fced3 (/home/user/wt/arms, on 8697f4eff; the ARMS builder, `u4/ARMS-BRIEF.md`; WIP,
+  stopped at the pause):
+  - A, B, C1-C4 and E are WRITTEN BUT NOT RUN (no red-first or green yet). C1's seven paths run only under ARMS_POOLS; without
+    it, only the four npc and tie paths run.
+  - D: catalogue rows added inside galleryVeilCures.pglite's rollback test: the four new forms exist and none is executable
+    by public, anon or authenticated; after 212's down, all four are gone and the 4-argument _gallery_veil remains. Plus the
+    manifest row. Not run.
+  - eslint 0 errors.
+  - Its no-pools run was LEFT QUEUED on the mutex at the pause (not killed; /var/tmp/v51/out/arms/run1-nopools.log). The
+    pools run and the cures run were never started.
+- `lane/veil-51-2026-11-24-v27-wip`: merged into r5desc (fast-forward plus the cherry-picked oracle); nothing left on it.
+UNIT 4 BY THE PLAN:
+- DONE: merges, N1, N2, N2b, N3, item 5, V27 (1), (5), (6), term (a)'s walker, the corrected term (b).
+- HALF-DONE: N4 (above: arm 1); the arms brief (per-door plants, the snapshot plant, class (ii)'s arm, the run-4 catalogue).
+- NOT BEGUN: wd (NAMES) on both pools and the plants; the full-pool proof (once, after units 3, 4, 5 are on the tip);
+  V21's tooth (q52.sh miplant5); the TIP.
+UNIT 5 BY THE PLAN:
+- DONE: U1 twin, U2 SQL, U3 registry; the seven plants and V27 (2)'s plant probed in both engines; loses nothing 0 of 838
+  (the twin).
+- HALF-DONE: U4 arms (in the arms brief).
+- NOT BEGUN: U5 proof (wd on the seven paths, the slices).
+NEXT IN ORDER ON RESUMPTION:
+1. Preserve the code: a push grant for lane/veil-51-2026-11-24-r5desc-wip, or another hand.
+2. Merge n4-wip and arms-wip into r5desc.
+3. The mask cure for the desc belt (propose first).
+4. Unit 3's merge and the map door.
+5. The arms green.
+6. wd on both pools.
+7. The full-pool proof.
+8. One joint TIP with both 212 hunks: units 4 and 5 as (38) and (39), renumbered after unit 3. LISTED in it: the map door's
+   red until unit 3; the twin's snapshot gap; N2's vetoable choice; R3's other copies keeping pub's set; a tie's description
+   prose naming a role; two inherited reds (criminalVeilSwitch VS1 (b), galleryImportRederive 2).
+SCHEDULED CHECKS OF MY OWN: none exist (I created none).
+
 ## 1. WHERE THE SEAT STANDS (my memory; current at every push)
 
 THE LAW: no pull request ever; push only `lane/veil-51-2026-11-24` (documents) and `lane/veil-51-2026-11-24-<unit>-wip` (code),
@@ -480,6 +561,7 @@ RULING V1 (the tenth chair, 21:20 UTC 2026-11-24) whole. N90 (the whole-document
 N99. ppkey on the full pool is NOT re-run (0 of 46,752 per door at ced3b1de7) unless the tree's 212 or twin moves.
 
 ## 3. Log (every hour from `date -u`)
+- 08:53 PAUSED by the owner's word (the chair, 08:52); helpers stopped at their boundaries; the code push refused (told); section 0 written.
 - 08:38 V28 and the corrected term (b) built; V27 (5) oracle green, red first; unit 5 U2/U3 committed (local 8697f4eff).
 - 08:02 unit 5 U1 committed (local 04711aa1b); U2/U3 built and probed in both engines; loses nothing 0/838.
 - 07:55 N5 green; V27 (6): 0 faults with the stored row on both pools; term (a)'s walker (red by design on 211's map door); r5desc at 2376572f3.
