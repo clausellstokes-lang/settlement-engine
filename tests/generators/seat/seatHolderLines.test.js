@@ -314,7 +314,7 @@ describe('U6 (6): THE FINAL-RECORD PASS (E65): the holder known only on the fina
     const on = born('village', 'u6p-village-3');
     const moved = diffPaths(JSON.parse(JSON.stringify(off)), JSON.parse(JSON.stringify(on)));
     expect(moved.length, 'the pass moved the record').toBeGreaterThan(0);
-    expect(moved.filter((p) => !/^powerStructure\.(factionRelationships\.\d+\.narrative|factions\.\d+\.desc)$/.test(p)), 'nothing else moved').toEqual([]);
+    expect(moved.filter((p) => !/^powerStructure\.(factionRelationships\.\d+\.narrative|factions\.\d+\.(desc|dmStanding))$/.test(p)), 'nothing else moved').toEqual([]); // A5 (BIRTH-2, G1): the standing field moves with the description it ends
   });
 });
 

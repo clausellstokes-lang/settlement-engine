@@ -94,21 +94,19 @@ describe('A5 (c): a load neither adds nor drops the field', () => {
 
 describe('A5 (d): the rename applies to the field as to the description', () => {
   it('a power named in another power\'s standing is renamed in both, and the description still ends with its field', () => {
-    for (const [seed, corpus] of CASES) {
-      const s = structuredClone(births[`${corpus} ${seed}`]);
-      const powers = s.powerStructure.factions;
-      const named = powers.find((/** @type {any} */ f) => powers.some((/** @type {any} */ g) => g !== f && g.dmStanding.includes(f.faction)));
-      if (!named) continue;
-      const oldName = named.faction;
-      const holder = powers.find((/** @type {any} */ g) => g !== named && g.dmStanding.includes(oldName));
-      const { changed, touched } = applyFactionRenameToSettlement(s, oldName, 'The Lantern House');
-      expect(changed).toBe(true);
-      expect(touched).toContain('powerStructure.factions[].dmStanding');
-      expect(holder.dmStanding.includes(oldName)).toBe(false);
-      expect(holder.dmStanding.includes('Lantern House')).toBe(true);
-      expect(String(holder.desc).endsWith(holder.dmStanding)).toBe(true);
-      return;
-    }
-    throw new Error('no case names one power in another power\'s standing');
+    /** the first case whose roster names one power in another power's standing @param {any} s */
+    const namedIn = (s) => s.powerStructure.factions.find((/** @type {any} */ f) => s.powerStructure.factions.some((/** @type {any} */ g) => g !== f && g.dmStanding.includes(f.faction)));
+    const hit = CASES.find(([seed, corpus]) => namedIn(births[`${corpus} ${seed}`]));
+    expect(hit, 'a case names one power in another power\'s standing').toBeTruthy();
+    const [seed, corpus] = /** @type {readonly string[]} */ (hit);
+    const s = structuredClone(births[`${corpus} ${seed}`]);
+    const oldName = namedIn(s).faction;
+    const holder = s.powerStructure.factions.find((/** @type {any} */ g) => g.faction !== oldName && g.dmStanding.includes(oldName));
+    const { changed, touched } = applyFactionRenameToSettlement(s, oldName, 'The Lantern House');
+    expect(changed).toBe(true);
+    expect(touched).toContain('powerStructure.factions[].dmStanding');
+    expect(holder.dmStanding.includes(oldName)).toBe(false);
+    expect(holder.dmStanding.includes('Lantern House')).toBe(true);
+    expect(String(holder.desc).endsWith(holder.dmStanding)).toBe(true);
   });
 });

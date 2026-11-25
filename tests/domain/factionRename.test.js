@@ -321,7 +321,7 @@ describe('faction rename — the declared surface set', () => {
       pressureSentence: `The ${OLD} has the quays by the throat and everyone knows it.`,
       powerStructure: {
         // The second record is a doubled-niche rival naming the niche it contests (RUNG1B-F7).
-        factions: [{ faction: OLD, name: OLD, desc: `The ${OLD} keeps the quays.`, isGoverning: true }, { faction: 'Quay Wardens', contestsNiche: OLD }],
+        factions: [{ faction: OLD, name: OLD, desc: `The ${OLD} keeps the quays.`, isGoverning: true }, { faction: 'Quay Wardens', contestsNiche: OLD, desc: `The wardens answer to the ${OLD}.`, dmStanding: `The wardens answer to the ${OLD}.` }], // A5 (BIRTH-2, G1): the standing field is a declared surface; a rival's standing names the power
         governingName: OLD,
         government: OLD,
         recentConflict: `The ${OLD} broke the grain cartel.`,
