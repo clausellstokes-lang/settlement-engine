@@ -22,7 +22,7 @@
  * walls, gate, militia → their atoms; guard → `guardPresence`; guild → `guild`; fishSource, gameSource, livestockSource →
  * `fish`, `game`, `livestock`; route → `route open`; timber → `timber at hand`; water → `institution: waterSource`;
  * farming → `institution: farmland`; dwellings → `institution: dwellings`; common → `institution: commonGrazing`;
- * landing → `institution: fishingLanding`; elder → `ruler: elder`; small → `tier: ≤ village` (LINES-1b, from the tier).
+ * landing → `institution: fishingLanding`; elder → `office: elders` (WORDS-2 E5: the governing row's elders form; `ruler: elder` also held at a Headman's Authority); small → `tier: ≤ village` (LINES-1b, from the tier).
  *
  * DAILY-2's cures of 2026-11-20 (stricter needs, wordings unchanged; the presumed-things and presumption-classes walkers):
  * W0 and B0 say "the watch", so they also declare `watch`; B26 says the boats go out, so it excludes a siege in force
@@ -80,7 +80,7 @@ export const DAWN_WORK = Object.freeze({
     { id: 'W8', text: 'People go out to their work together at dawn, and no one strays far from the houses alone.', needs: ['institution: dwellings'] },
     { id: 'W9', text: 'The first hour is spent seeing that nothing was disturbed in the night; only then does the ordinary work begin.', needs: [] },
     { id: 'W10', text: 'Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.', needs: ['institution: dwellings'] },
-    { id: 'W11', text: 'The elder is asked at first light whether all is well before anyone goes out to work.', needs: ['ruler: elder'] },
+    { id: 'W11', text: 'The elder is asked at first light whether all is well before anyone goes out to work.', needs: ['office: elders'] }, // WORDS-2 E5 (intake 3): the elders' own form, never a headman's
     { id: 'W13', text: 'The beasts are let out at first light and kept close to the houses through the day.', needs: ['livestock'] },
     { id: 'W14', text: 'Doors are opened late and with care, and the day\'s work starts a little after first light.', needs: ['institution: dwellings'] },
     { id: 'W15', text: 'Before the day\'s work begins, someone looks out over the country around to see that nothing is stirring.', needs: [] },
@@ -131,7 +131,7 @@ export const DAWN_WORK = Object.freeze({
     { id: 'B16', text: 'The fires under {bathhouse} are lit before dawn, so the water is hot when the first bathers come.', needs: ['institution: bathhouse'] },
     { id: 'B17', text: 'The night\'s guard comes down off the walls at first light, and the day\'s guard goes up.', needs: ['walls', 'guardPresence'] },
     { id: 'B18', text: 'The first light goes to walking the fields to see how they stand, and then the day\'s work begins.', needs: ['institution: farmland', 'tier: ≤ village'] },
-    { id: 'B19', text: 'People stop at the elder\'s door at first light, and the day\'s work is talked over there.', needs: ['ruler: elder'] },
+    { id: 'B19', text: 'People stop at the elder\'s door at first light, and the day\'s work is talked over there.', needs: ['office: elders'] }, // WORDS-2 E5 (intake 3): the elders' own form, never a headman's
     { id: 'B20', text: 'The beasts are let out at first light, and the day\'s other work begins after.', needs: ['livestock', 'tier: ≤ village'] },
     { id: 'B21', text: 'The households are up at first light, and the day\'s work starts close to home.', needs: ['institution: dwellings', 'tier: ≤ village'] },
     { id: 'B22', text: 'Fires are lit and the households fed before anyone goes out to the day\'s work.', needs: ['institution: dwellings', 'tier: ≤ village'] },

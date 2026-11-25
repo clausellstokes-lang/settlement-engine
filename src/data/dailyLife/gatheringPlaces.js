@@ -15,7 +15,7 @@
  * market → `market`; square → `market` + `institution: square`; inn → `institution: tavern`; mill, bathhouse, bridge →
  * their kinds; theater → `institution: theatre`; docks → `docks`; water / well → `institution: waterSource`; common →
  * `institution: commonGrazing`; farming → `institution: farmland`; dwellings, landing (`fishingLanding`), rootCellar,
- * shepherd → their kinds; elder → `ruler: elder`; small → `tier: ≤ village` (LINES-1b, from the tier).
+ * shepherd → their kinds; elder → `office: elders` (WORDS-2 E5: the governing row's elders form; `ruler: elder` also held at a Headman's Authority); small → `tier: ≤ village` (LINES-1b, from the tier).
  *
  * N11 also excludes a siege in force (`excludes: ['crisis: under_siege']`: no boats come in under a siege; the chair's ruling of
  * 2026-11-20 19:41). No line needs a hideable house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
@@ -85,7 +85,7 @@ export const GATHERING_PLAIN = frozen([
   { id: 'P9', text: 'People see most of one another where the water is drawn, and the talk there is of the work and of each other.', needs: ['institution: waterSource'] },
   { id: 'P10', text: 'When the boats are drawn up, people gather at the landing to sort the catch and talk.', needs: ['institution: fishingLanding'] },
   { id: 'P11', text: 'People meet on the common, where the beasts graze and there is always someone about.', needs: ['institution: commonGrazing'] },
-  { id: 'P13', text: 'Matters of any weight are talked over at the elder\'s door, where people gather of an evening.', needs: ['ruler: elder'] },
+  { id: 'P13', text: 'Matters of any weight are talked over at the elder\'s door, where people gather of an evening.', needs: ['office: elders'] }, // WORDS-2 E5 (intake 3): the elders' own form, never a headman's
   { id: 'P14', text: 'People meet at the communal root cellar, where the stores are kept and the news is passed along.', needs: ['institution: rootCellar'] },
   { id: 'P15', text: 'When the flocks are brought in, people gather to help and to talk.', needs: ['institution: shepherd'] },
   { id: 'P16', text: 'People talk wherever the day\'s work brings them together, and the news goes round with them.', needs: ['institution: dwellings'] },
