@@ -947,3 +947,22 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   mark rule (it had not been told T61's): told to stay, its hand-back whole at 3589462c9; it takes UNIT 5's measure
   (the legacy names; the brief is START-VEIL-54's unit steps) while "R4-IDS MERGED" was awaited, then unit 4's code
   first. So every unit of phase 1 has a seat and VEIL-54 is not needed.
+- 2026-11-25 03:33 UTC · T72 · LAND-116 REPORTED; THE LINE DOES NOT MOVE YET: TWELVE STALE TEST ANCHORS ARE CURED FIRST (the chair's ruling, `landing/RULING-116-1.txt`).
+  THE REPORT (the helper's tip c9ead3038 on 0559a8405, pushed as `lane/stack-116-wip-2026-11-25`; no permission
+  refusal): PROOF 1: the old-way column of the golden corpus equal 525 of 525 (a saved place does not move); the
+  `birthConfig` column moves on all 525 (every birth's config now carries `_troubleLawVersion: 2`). PROOF 2: the lane's
+  own measure re-run, lit against a forced-dark run: guild quarrel town 32.0 to 18.0, city 48.0 to 30.7, metropolis
+  47.3 to 31.3; crime wave 20.0 to 14.0, 40.0 to 27.3, 60.0 to 30.7: within 0.3 points of the table the owner was
+  shown; no place's trouble count rises. PROOF 3: 45 of 45. The three pins re-worded, red against point 115's source.
+  The home page's town did not move. `troubleLaw.js` keeps its 273 lines and the tables their lines: raised.py finds no
+  register and no ceiling moved (the tuning inventory untouched). SIZES: first paint raw unchanged, gzip +26, Brotli
+  -73; the worker and the engine chunk unchanged. THE GATE: lint 3 (the size signings); the typechecks and eslint
+  clean; `tests/build` 13 of 628, all listed; THE WIDE GATE 3,498 files, 39,446 tests, 49 failed: 36 on the list,
+  `provenanceMap` arm 1 (the machine), NINE STORED ANCHORS (named seeds that lost a crime wave or a guild quarrel:
+  tailHistoryBatch2 and 3, bar3LabelWords, tailDisplayCivicBatch4, bar3Defecon2Lines, lastVariety twice, tensionCause)
+  and THREE PINS OF `livingContentLawWiring` that hand-list the other laws' mints. THE CHAIR RULED: no new row joins the
+  red list for a stale anchor: the helper, continued, makes the three pins read `GENERATION_LAWS` (as that file's first
+  arm does) and re-anchors the nine by each test's own finder (never a forced law 1; a count re-stated only by its
+  cause; a test that cannot be re-anchored without changing its claim stays red and is the chair's), test-only, two
+  commits, then `tests/lint` and `tests/domain` whole; the chair reads that diff before the line moves. ALSO: V20
+  (unit 5's rule accepted, 02:53) written into `veil/RULING-V1.md`.

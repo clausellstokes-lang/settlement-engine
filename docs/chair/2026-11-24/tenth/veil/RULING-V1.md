@@ -463,3 +463,16 @@ next transfer. ON SHARED READS THE FIELD IS ALWAYS WITHHELD in phase 1 (a regist
 read by the chair), so V16 stands for shared pages; the put-back weighs serving it under R3. A stored shape of records
 in play, not of births: no golden moves. VEIL-55 places it after phase 1's SQL units; the chair's lean: VEIL-53 builds it.
 The owner is told (his own page names no ruler in that rare case until this unit lands).
+
+## RULING V20 (added 03:33 UTC on 2026-11-25; ruled 02:53): UNIT 5 (THE LEGACY NAMES): THE RULE ACCEPTED
+VEIL-51 (`v51/u5/PROPOSAL-U5.md` at 9aea3a6a7): THE MEASURE, CONFIRMED: on the master-born 140 the whole-document form
+equals the brief's table on all eight rows; the today-born 0 on the seven; one plant a path, all seven bite. THE RULE:
+where a person's string names a power or house THE READ WITHHOLDS (the lane's own fold; a match inside a served name
+exempt), that string is WITHHELD, the key omitted, never replaced, in every copy of the person: `npcs[].role`, the
+ties' `npc1Role` and `npc2Role`, `members[].role`, both `secondaryAffiliation` paths, `members[].goal.short` (the goal
+whole if nothing remains); the person, the name and the other fields stay; a read that hides nothing loses nothing.
+**ACCEPTED, ON SIX TERMS:** (a) the fold as it stands, no new matcher, the twin rule for rule; a form it does not know
+is phase 2's; (b) the plants kept as committed arms, red first; (c) "loses nothing" asserted: 0 leaves differing on
+every read that hides nothing, both pools, both engines; (d) THE TELL COUNTED for phase 2 (cards left without a role on
+hiding reads); (e) every door and both Reveals; (f) registry rows with their reasons. ORDER: unit 4's 212 edit first
+on the lane's tip; unit 5's SQL after unit 4 has merged; the chair reads each hunk before its grant.
