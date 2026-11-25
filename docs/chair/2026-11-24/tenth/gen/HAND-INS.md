@@ -18,7 +18,7 @@ where CLOSE-8 reads them. A unit's ruling is in `RULING-G.md` (G numbers) or `..
 | WORDS-1 | E1 (the double possessive as a class) | lane/words-1-2026-11-25-e1-wip | 902b7005d | handed in | G5 |
 | WORDS-1 | E8 step one (the reflexive) | lane/words-1-2026-11-25-e8-wip | 94b7a13d9 | handed in | G5, G20 |
 | WORDS-1 | D6 (the contender's word) | lane/words-1-2026-11-25-d6-wip | 81ac266a5 | handed in | G7, G20, G21 |
-| WORDS-1 | E8b (the reflexive on card lines) | not built | | RULED, design in G20 (2) | G20 |
+| WORDS-1 | E8b (the reflexive on card lines; ON TOP OF E8: merge E8 first) | lane/words-1-2026-11-25-e8b-wip | e75f090b7 | handed in (18:24 UTC); C 1,157 strings in 501 places, V 1,126 in 500; round trip 0/0; one edit in worldPulse/successorNpc.js (the held form copied, G30); a walker tests/lint/boundCardLinesReaders.walker.test.js | G20, G29, G30 |
 | WORDS-2 | E10 | lane/words-2-2026-11-25-e10-wip | 753f3e337 | handed in (16:55 UTC); test only; shares no file | G9 |
 | WORDS-2 | E11 | lane/words-2-2026-11-25-e11-wip | bea22c6df | handed in (16:55 UTC); test only; lighting census | G9 |
 | WORDS-2 | E12 | lane/words-2-2026-11-25-e12-wip | 35e87009c | handed in (16:55 UTC); test only; shares no file | G9 |

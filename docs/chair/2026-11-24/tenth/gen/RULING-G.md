@@ -378,3 +378,12 @@ E13d (WORDS-2): the skip list is DERIVED by import from the titles' own homes an
 by length, never a slot skipped whole; a test that no drawn pool's line is in it; the door's reading before and after
 (only the eleven slots change; one still over its ceiling is a finding); the register re-taken only by `--write` and
 only if it passes.
+
+**G36 (18:24 UTC): E8b RECEIVED (e75f090b7, on `e8-wip` 94b7a13d9); E13b A MEASURE AND A DESIGN FIRST.** E8b: card strings
+moved C 1,157 in 501 places, V 1,126 in 500 (the measure); round trip `heldCardLine(after)` against before 0 / 0;
+nothing moved beyond the reflexive; owner-page places 43 / 51; `successorNpc.js` copies the held form and six
+successors on made records are equal on both trees; a walker with a planted control (4 readers through the helper, 3
+before the pass with reasons). WORDS-1 is given E13b ("How they deal": one sentence per disposition and trait
+family, up to five identical on a page): where it is drawn and read, how many cards of one pair a town holds, a design
+in which no other draw moves and each pair's present sentence stays its first line, what a birth moves, how many new
+sentences: one message; nothing written before the chair rules on the number.
