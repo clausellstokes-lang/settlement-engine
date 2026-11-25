@@ -17,3 +17,15 @@
   take none and read no law. So the one law-blind call is computePublicLegitimacy (4th arg).
 - Arm written (generationLawsSavedPlace.test.js, new describe at end): walks GENERATION_LAWS at run time; planted 5th row
   via vi.doMock of the boundary + a planted reading in generateDefenseProfile; catch = marker forgotten -> monster drift.
+- RED (uncured b61c1e630): arm 2 failed / 9 passed (logs /var/tmp/v53/cures/E/red-arm.log): every row but "fortune: born
+  without it" drifts at powerStructure.publicLegitimacy.breakdown.defense. VR26: FIDELITY "expected [ 'legitimacy.colours', …(2) ]
+  to deeply equal []", MAIN "expected [ 'economy.prosperity', …(2) ] to deeply equal [ 'economy.prosperity', …(5) ]" (red-vr26.log).
+- CURE: importRederive.js :: rederiveInPlace step 7 hands computePublicLegitimacy its 4th arg resolveFortuneLawVersion(r);
+  the harness revisit the same. GREEN: arm file 11/11; VR26 4/4.
+- JUDGMENT: the cure does NOT import GENERATION_LAWS: the import hands every config-taking callee the record's own config
+  whole (every row's marker rides it, no law listed); a re-key from GENERATION_LAWS would be the identity (config IS the
+  record's first bag; `_config` is not served). The one positional law parameter is read by its own law's resolver. The
+  run-time walk of the rows lives in the arm (no law named, no count), proved by the planted fifth row.
+- SEAT: CONFIRMED by the arm: rows "seat: born under it" / "born without it" keep the record (green after cure; pre-cure red
+  only through the fortune defence term). Probe e2: stamping the seat marker dark moves no import output on these towns.
+- committed 90ddc2fe5
