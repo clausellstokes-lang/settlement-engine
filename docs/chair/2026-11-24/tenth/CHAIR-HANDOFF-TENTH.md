@@ -1028,3 +1028,11 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   helper's model and effort are set per call; a cheaper model for mechanical helpers stays unused without his word
   ("Opus for everything else").
   OWED, UNCHANGED: CI on point 116 by name (05:30); the hourly check (05:38).
+- 2026-11-25 05:19 UTC · T77 · CI ON POINT 116 READ BY NAME: 61 FOUND, 61 ON THE LIST, NONE NEW. THE TROUBLES RULE IS LIT AND WHOLE.
+  Run 45547896630 (number 1294) on ddca5c789: the ratchet 39, build and dist 13, coverage floors 8, tr_TR 1; no listed
+  row green; `readerCorpusManifest` and `provenanceMap` in no failing log. It is the whole suite's run after the two
+  test-only commits, so T74's open sentence ("THE WHOLE SUITE WAS NOT RE-RUN") is closed. `ci/LINE-NOW.md` carries the
+  sentence; the reader and its table are in `tenth/ci/`. The check armed for 05:30 was deleted (the read was done).
+  THE HOURLY MARK (05:19): VEIL-51 520,459 of 1,000,000, record `allowed_warning`, cost 37.41; its record shows the
+  seats' compaction threshold: 784,000 of an effective window of 980,000 ("model-default"). ITS CACHE READS: 97.2
+  million tokens: re-reading a long memory every turn is about half of a seat's spend.
