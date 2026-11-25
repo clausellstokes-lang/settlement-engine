@@ -250,6 +250,11 @@ gate for the lot):
   - Moves C 0 / V 4 (recentConflict). Goldens moved: 0.
   - Its lighting and wiring census commits collide with D2's: re-take each once by its door at the merge.
 
+- D5: `lane/birth-1-2026-11-25-d5-wip` 289a70b3a, from BIRTH-1. One commit.
+  - defenceParts R13 is re-cut score by score through a new pure reader `defenseGenerator.js :: defenceWillHoldOf`.
+  - Births moved: C 0 / V 0. RED-AT-LINE's row "defenceParts R13" leaves the list.
+  - Its negative control was not run (the seat's permission check refused it); the chair accepted the live anchor in its place.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
