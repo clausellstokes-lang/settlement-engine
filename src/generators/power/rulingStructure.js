@@ -685,7 +685,7 @@ export const generatePowerStructure = (
     factions,
     config,
     stressFlags,
-    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources }) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes
+    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources, terrain: config?.terrainType, route: config?.tradeRouteAccess }) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes
     neighbourRelationship,
     instNames,
     priorities,

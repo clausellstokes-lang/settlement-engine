@@ -75,25 +75,52 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
   }, 240_000);
 });
 
-// WORDS-2 E3, the tenth chair's RULING G9 (2) (the owner's "Don't invent drama capitalize on what's already there if it's
-// there"): the cascade's last fall-through keeps the grazing quarrel only where the record holds grazing (a grazing house on
-// the live roster, the running pastoral chain, or a grass, pasture, meadow, steppe, grazing or herds ground nearby:
-// `powerSiblings.js :: noGrazingQuarrelOf`); a calm place without it stores no quarrel. Red first by name on 0ec96f13d8: V
-// dp-thorp-10, -104, -105 stored the quarrel with none of the three. The control keeps it: C dp-hamlet-0 (a grazing house).
-describe('E3 · the grazing quarrel only where the place grazes; a calm place stores none', () => {
+// WORDS-2 E3, the tenth chair's RULING G9 (2) and its STOP (the owner's "Don't invent drama capitalize on what's already there
+// if it's there"): the cascade's last fall-through keeps each quarrel only where the record holds what it names
+// (`powerSiblings.js :: noGrazingQuarrelOf`): the grazing quarrel where it holds grazing; BAR8-K-POWERS's marsh, shore or water
+// twin, word for word, where it holds that; a calm place holding none stores none. The oracle here is the test's own reading
+// of the record, not the leaf. Red first by name on 0ec96f13d8: V dp-thorp-10, -104, -105, -110, -113 stored the grazing
+// quarrel with no grazing in the record. Controls that keep their grounded quarrel: V dp-thorp-17 (the shore), dp-thorp-111
+// (water), C dp-hamlet-0 (a grazing house).
+describe('E3 · each fall-through quarrel only where the record holds what it names', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   const V = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1], _randomizePriorities: true }), null, { seed, customContent: {} });
   const C = (/** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ settType: seed.split('-')[1] }), null, { seed, customContent: {} });
-  const QUARREL = /grazing rights and water access|^A dispute over (?:rights on|water access)/;
-  it('V dp-thorp-10, -104, -105: no grazing in the record, and no quarrel stored', () => {
-    for (const seed of ['dp-thorp-10', 'dp-thorp-104', 'dp-thorp-105']) {
+  /** @param {string} line */
+  const kindOf = (line) => (/grazing rights and water access/.test(line) ? 'grazing'
+    : /^A dispute over rights on the marsh/.test(line) ? 'marsh'
+      : /^A dispute over rights on the shore/.test(line) ? 'shore'
+        : /^A dispute over water access/.test(line) ? 'water' : '');
+  /** What the record holds, read by this test's own words. @param {any} s */
+  const holds = (s) => {
+    const grounds = (s?.config?.nearbyResources || []).map(String);
+    const names = (s?.institutions || []).map((/** @type {any} */ i) => String(i?.name || ''));
+    return {
+      grazing: s?.economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true
+        || names.some((n) => /grazing|pasture|herd|shepherd|livestock|cattle|sheep|goat|ranch|dairy|stockyard|horse|stable|drover/i.test(n))
+        || grounds.some((g) => /grass|pasture|meadow|steppe|grazing|herds?\b/i.test(g)),
+      marsh: grounds.some((g) => /marsh/i.test(g)),
+      shore: grounds.some((g) => /harbour|coast|shore|beach/i.test(g)),
+      water: grounds.some((g) => /marsh|harbour|coast|shore|beach|fish|river|oasis|spring|floodplain|lake/i.test(g))
+        || ['riverside', 'coastal'].includes(s?.config?.terrainType) || ['river', 'port'].includes(s?.config?.tradeRouteAccess),
+    };
+  };
+  it('V dp-thorp-10, -104, -105, -110, -113: no grazing in the record, no grazing quarrel; any quarrel names what it holds', () => {
+    /** @type {Record<string, string>} */
+    const got = {};
+    for (const seed of ['dp-thorp-10', 'dp-thorp-104', 'dp-thorp-105', 'dp-thorp-110', 'dp-thorp-113']) {
       const s = V(seed);
-      expect(s.powerStructure?.governingFaction ?? s.powerStructure?.government, `${seed}: a seat stands`).toBeTruthy();
-      expect(QUARREL.test(String(s.powerStructure?.recentConflict ?? '')), `${seed}: ${s.powerStructure?.recentConflict}`).toBe(false);
+      const k = kindOf(String(s.powerStructure?.recentConflict ?? ''));
+      const h = /** @type {Record<string, boolean>} */ (holds(s));
+      expect(h.grazing, `${seed}: the record holds no grazing`).toBe(false);
+      if (k) expect(h[k], `${seed}: "${k}" quarrel, held ${JSON.stringify(h)}`).toBe(true);
+      got[seed] = k;
     }
-  }, 120_000);
-  it('the control: C dp-hamlet-0 holds a grazing house and keeps the quarrel', () => {
-    const s = C('dp-hamlet-0');
-    expect(String(s.powerStructure?.recentConflict ?? '')).toMatch(/grazing rights and water access/);
-  }, 120_000);
+    expect(got).toEqual({ 'dp-thorp-10': '', 'dp-thorp-104': 'water', 'dp-thorp-105': '', 'dp-thorp-110': 'marsh', 'dp-thorp-113': 'marsh' });
+  }, 180_000);
+  it('the controls keep their grounded quarrel: V dp-thorp-17 the shore, dp-thorp-111 water, C dp-hamlet-0 grazing', () => {
+    expect(kindOf(String(V('dp-thorp-17').powerStructure?.recentConflict ?? ''))).toBe('shore');
+    expect(kindOf(String(V('dp-thorp-111').powerStructure?.recentConflict ?? ''))).toBe('water');
+    expect(kindOf(String(C('dp-hamlet-0').powerStructure?.recentConflict ?? ''))).toBe('grazing');
+  }, 180_000);
 });

@@ -71,21 +71,35 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
 const GRAZING_HOUSE = /grazing|pasture|herd|shepherd|livestock|cattle|sheep|goat|ranch|dairy|stockyard|horse|stable|drover/i;
 /** A ground near the place that is itself grazing: grass, pasture, meadow, steppe, grazing land or herds (WORDS-2 E3: the page law law15K.mjs's grazing land, less "plain"; never a field, a farm or a forest). */
 const GRAZING_GROUND = /grass|pasture|meadow|steppe|grazing|herds?\b/i;
+/** The grounds a quarrel can be over, in order, and how the line names each (BAR8-K-POWERS's, unchanged). @type {ReadonlyArray<readonly [RegExp, string]>} */
+const QUARREL_GROUNDS = Object.freeze([
+  [/marsh/i, 'the marsh'], [/harbour|coast|shore|beach/i, 'the shore'],
+]);
+/** A ground near the place that is water: a marsh, a harbour or shore, fishing, a river's fish, mills or clay, an oasis, springs, a floodplain or a lake. */
+const WATER_GROUND = /marsh|harbour|coast|shore|beach|fish|river|oasis|spring|floodplain|lake/i;
 
 /**
- * WORDS-2 E3, the tenth chair's RULING G9 (2) (the owner's rule: "Don't invent drama capitalize on what's already there if
- * it's there"): THE CASCADE'S LAST FALL-THROUGH (`governanceNarrative.js :: deriveBaselineConflict`) KEEPS THE GRAZING QUARREL
- * ONLY WHERE THE PLACE'S OWN RECORD HOLDS GRAZING: a grazing house on its roster, its running pastoral chain, or a grass, pasture,
- * grazing or herds ground near it. A calm place with none of them stores NO quarrel. (It replaced BAR8-K-POWERS's twin of the
- * quarrel over the place's other ground, the marsh, the shore or its water: a quarrel the record did not hold.)
+ * WORDS-2 E3, the tenth chair's RULING G9 (2) and its STOP of 2026-11-25 (the owner's rule: "Don't invent drama capitalize on
+ * what's already there if it's there"): THE CASCADE'S LAST FALL-THROUGH (`governanceNarrative.js :: deriveBaselineConflict`)
+ * KEEPS EACH QUARREL ONLY WHERE THE PLACE'S OWN RECORD HOLDS WHAT IT NAMES. The grazing quarrel (the stock line, `null` here)
+ * where the record holds grazing: a grazing house on its roster, its running pastoral chain, or a grass, pasture, meadow,
+ * steppe, grazing or herds ground near it. Else BAR8-K-POWERS's twin, word for word, where the record holds its subject: the
+ * marsh or the shore (a ground near it), else water (a water ground near it, a riverside or coastal terrain, a river or port
+ * road). A calm place holding none of them stores NO quarrel (the empty string).
  * Pure: a reading of the arguments, no draw.
- * @param {{ institutionNames?: ReadonlyArray<string>, pastoral?: boolean, grounds?: ReadonlyArray<unknown> }} place
- * @returns {string | null} null where the place grazes (the stock line stands); the empty string where it does not (no quarrel)
+ * @param {{ institutionNames?: ReadonlyArray<string>, pastoral?: boolean, grounds?: ReadonlyArray<unknown>,
+ *   terrain?: unknown, route?: unknown }} place
+ * @returns {string | null} null where the place grazes (the stock line stands); the twin where it holds the marsh, the shore
+ *   or water; the empty string where it holds none (no quarrel)
  */
-export function noGrazingQuarrelOf({ institutionNames = [], pastoral = false, grounds = [] }) {
+export function noGrazingQuarrelOf({ institutionNames = [], pastoral = false, grounds = [], terrain = null, route = null }) {
   const names = (Array.isArray(institutionNames) ? institutionNames : []).map((n) => String(n || ''));
   const own = (Array.isArray(grounds) ? grounds : []).map((g) => String(g || ''));
-  return pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => GRAZING_GROUND.test(g)) ? null : '';
+  if (pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => GRAZING_GROUND.test(g))) return null;
+  const ground = QUARREL_GROUNDS.find(([re]) => own.some((g) => re.test(g)));
+  if (ground) return `A dispute over rights on ${ground[1]} and access to water has run for two seasons, and those on each side of it no longer speak to one another.`;
+  const water = own.some((g) => WATER_GROUND.test(g)) || terrain === 'riverside' || terrain === 'coastal' || route === 'river' || route === 'port';
+  return water ? 'A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.' : '';
 }
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
 // modifier's set (`MILITARY_MODIFIER_SIBLINGS`: garrison-backed / arms-backed) dissolved. Garrison
