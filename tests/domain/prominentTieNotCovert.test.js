@@ -1,5 +1,5 @@
 /**
- * tests/generators/prominentTieNotCovert.test.js — BIRTH-1, unit D2 (the tenth chair's PRERELEASE-LIST D2; START-BIRTH-1 (1)):
+ * tests/domain/prominentTieNotCovert.test.js — BIRTH-1, unit D2 (the tenth chair's PRERELEASE-LIST D2; START-BIRTH-1 (1)):
  * THE PROMINENT TIE IS NEVER A COVERT ONE.
  *
  * A card with a hidden allegiance spends its one tie on its handler, and that tie is `covert: true` (people/ties.js :: drawTies);
