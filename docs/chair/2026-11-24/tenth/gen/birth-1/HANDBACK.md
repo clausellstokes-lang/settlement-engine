@@ -93,7 +93,7 @@
   'Feudal Stewardship' (`rulingStructure.js` governanceLabelMap `"lord's reeve"`); its own desc says "A steward appointed by a distant
   lord". Hamlets up hold "Lord's steward" (face 'the steward'). The seat line is `governanceAccount.js :: governanceAccountOf` (role
   from `rulingChainOf`).
-- **D7 — MEASURED, RULING ASKED (the words), nothing built.** `tools/measure-d7.mjs` (crises, roster, every crisis line; "own power"
+- **D7 — RULED G17 (12:56 UTC): (1) and (3) yes as worded, (2) yes on a term (the whole sentence sent), (4) claimant left. A VOCABULARY ROW ASKED (`crisis body: <kind>`, COMMON-RULES 6) before building; nothing built.** Earlier record: `tools/measure-d7.mjs` (crises, roster, every crisis line; "own power"
   by the tree's `stressPowerRowOf` + fortune-7's no-face list) and `tools/analyse-d7.mjs`; tables `d7/analysis-{C,V}.txt`. Almost every
   crisis line tells an event, the seat, or an outsider. Lines naming a LOCAL body the place may lack (printed, no body): indebted power
   sentence "The creditor's agent has blocked the money…" C 24 (19), V 27 (13); indebted pressure "the creditor's representative arrived
@@ -101,10 +101,10 @@
   claimant is buying support" C 6 (2), V 6 (2) (borderline). Proposed twins sent to the chair; the insurgency's "A strong power" is gated
   by K6 (true), left. If ruled: each twin declared by the place's own powers at its print site (power sentence:
   `governanceNarrative.js :: buildStressNarratives`; conversion: `governingStressVignettes.js`; pressure: `narrativeText.js`), no draw.
-- **D2b — HANDED TO THE CHAIR, A BYTE RULING ASKED**, pushed at 4822a2175 (+ wiring door). First paint raw +210 (1,181,337 -> 1,181,547),
+- **D2b — HANDED IN to CLOSE-7 (the chair took the byte rise; CLOSE-7 to re-run the check on the joined tree, WORDS-2's E3)**. Earlier record:, pushed at 4822a2175 (+ wiring door). First paint raw +210 (1,181,337 -> 1,181,547),
   gzip +70, Brotli -28; worker +256; all budgets over at the base already. Governing run (166 files + tests/lint + tests/copy): 16 red,
   13 known; the wiring census cured by its door; dossierPhoneFloorAllViews red the same at the base (Daily Life prose 9 -> 8). NOT yet
   sent to CLOSE-7 (waits for the byte word).
 
 ### 0.2 Next step
-Wait for the chair: D2b's byte word (then 'UNIT D2b' to CLOSE-7), D7's words (then build D7's twins, red first, check over every birth). D8 parked (owner's leave).
+Wait for the chair's word on D7's vocabulary row; then build D7 on `lane/birth-1-2026-11-25-d7-wip` (cut at the base): the fact leaf, the three declared twins, the late resolution in assembly before the pressure line, red first, the check over every birth (no crisis line names a local body the place does not hold: 0 on C and V). D8 parked (owner's leave).
