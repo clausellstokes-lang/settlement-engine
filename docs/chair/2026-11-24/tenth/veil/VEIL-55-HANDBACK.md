@@ -5,7 +5,7 @@ THE CHAIR is the tenth chair, session_019yED1SUxGVHyjQnoqoFvQ8. MY START MESSAGE
 session_019yED1SoJ6KH9Wyp2Fera7R. IF YOUR CONTEXT BEGINS WITH A SUMMARY: tell the chair in one line, re-read that file and this
 section before judging anything. Every hour here is read from `date -u`.
 
-## 1. WHERE THE LANE STANDS (my memory; current at this push, 23:59 UTC)
+## 1. WHERE THE LANE STANDS (my memory; current at this push, 00:30 UTC 2026-11-25)
 
 THE LAW: as VEIL-50's hand-back section 1 "THE LAW" (no pull request; push only `lane/veil-55-2026-11-24*` by the local branch's
 own name, ls-remote first; never --no-verify, force, master; every database local, PGHOST=/var/tmp/rv7; no `supabase` command).
@@ -25,6 +25,15 @@ without notice): push at every result and at least every 45 minutes; partial res
 PP (VEIL-52's owner measure): the chair gave the word; I asked one path fixed (MEAS_COMMON); its result comes to both of us.
 N115 RULED (the doors' ~0.2 s does not hold the release); READ-COST (the gallery door's 4.7 s at 840 rows, master's own tile join)
 is a finding: if a cure is ruled it edits 212's read, a unit of mine.
+
+THE MARK RULE (the chair, 00:29 UTC 2026-11-25): NO SUCCESSOR AT 620,000. This section is WHOLE by 560,000 and at every push;
+I WORK ON; on a compaction (near 784,000) I tell the chair in one line, re-read START-VEIL-55, this section and its rulings, and
+go on. No judgment ("TIP?", a merge, a hunk's read) is carried across a compaction. My mark at 00:29: 454,448.
+THE LINE (the chair, 00:10): 0559a8405 (point 115, the troubles rule DARK; GENERATION_LAWS has a fifth row; nothing re-run).
+UNIT 2's FORM CONTROL (p1 ctrl, frozen meas at d71a3ee44, MEAS_C=1, handreach, 12 docs): red tree r4red1 = the GAP 456/443/35
+hits at every door, L1 gallery aligned 33 (N106); the tree = 0 hits, L1 aligned 0 of 288 (gallery and link); L2 24 = the covert
+copy (unit 3's); the canon form's 60 at the members' goal target ids is the instrument's (it predates the member re-key; the
+aligned form is 0): named in the "TIP?".
 
 A SUCCESSOR ON ANOTHER ACCOUNT, THE NEXT COMMAND: in a fresh container, `npm ci` in a checkout of
 `lane/veil-55-2026-11-24-r4ids-wip` (= 8430edf5c), worktrees as "TREES AND MACHINE" below, then
