@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eaf34abdecc09f38b65869373e1ef40acc79ad4e",
-  "measuredBy": "CLOSE-7",
+  "measuredAtSha": "bb77735cbbe0e4d0771ea23870a1f219a407af10",
+  "measuredBy": "BIRTH-1 D3",
   "date": "2026-11-25",
-  "note": "GUARD merged onto the cures (A1, A2, the mirror, point 116): the census re-taken at the merge",
-  "files": 3798,
-  "parked": 494,
+  "note": "D3 adds tests/domain/powerSentenceSettledRoster.test.js",
+  "files": 3799,
+  "parked": 495,
   "credited": 3304,
   "titles": 31980,
   "suiteTitles": 8889
