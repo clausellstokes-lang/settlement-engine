@@ -5,6 +5,43 @@ session_019yED1SUxGVHyjQnoqoFvQ8; CLOSE-7 is session_019yED1QNMqSLp7ohcZB88VP. A
 
 ## 0. WHERE THE SEAT STANDS: THE WHOLE MEMORY (written 09:02 UTC 2026-11-25)
 
+### FOR THE JOIN (CLOSE-8), current at 16:26 UTC 2026-11-25 — read this block first; the log below is history
+
+THREE UNITS HANDED IN AND ACCEPTED BY THE CHAIR, each cut at the base `origin/lane/close-7-2026-11-24-cures` 0ec96f13d8:
+| unit | branch | commit | what |
+|---|---|---|---|
+| E1 the double possessive (G5) | `lane/words-1-2026-11-25-e1-wip` | 902b7005d | owner pages C 125/122 → 0, V 145/126 → 0; public projection C 52/41, V 34/19 → 0 |
+| E8 the reflexive slot, STEP ONE | `lane/words-1-2026-11-25-e8-wip` | 94b7a13d9 | the tie and the RANK.enter want: C 627 strings in 390 places, V 595 in 381; 0 disagreeing |
+| D6 the contender's word (G7, G20, G21) | `lane/words-1-2026-11-25-d6-wip` | 81ac266a5 | "Could contend" / "Could contest the seat" on bound cards: C 502, V 452 pages |
+
+The joined proof (`reports/JOINED-PROOF.md`): no battery row moved and 0 changes unexplained by a unit on C and V. Both typechecks
+are at their ceilings (167 and 1113) in each unit's own worktree and on the joined tree. Every unit's lint fails only the base's
+four (proseComposed, proseCorpusBytes x2, sovereigntyLightingContract); D6 adds writerReach (below).
+
+MERGE NOTE: E1 and D6 merge cleanly; E8 meets E1 in three files:
+- `src/generators/people/goals.js`: the imports; take both: `import { fillAgreement, holdsPossessive, powerNameWithArticle } ...` and
+  `import { reflexiveOf, secondMentions } ...`.
+- `tests/generators/people/goalSentencesOnceInTown.test.js`: keep both helpers (`longTitled`, `heldGoal`); the check reads
+  `vantageHash(heldGoal(longTitled(c)), v)`.
+- `src/data/people/personMention.js`: keep both blocks (E1's ROLE_POSSESSIVE / OF_FORM_STOPS, E8's `reflexiveOf`).
+
+NAMED FOR THE OWNER (nothing re-recorded):
+- Goldens and censuses moved, all on RED-AT-LINE: rosterFinalUnderHeldRoster A1, generationForkCensus A1 (E8); powerEconomyFreshness
+  A4, dossierProseManifest DRIFT, generatorGoldenMaster, espionageDormancyFence (E1).
+- The frozen writer-reach row (D6): `scripts/.writer-reach-baseline.json` "type on factionRelationships" web-transitive N→R.
+- E8's held line: POWER.corrupted "Set the terms … themselves", a banked samenessHideable red, keeps its they-form (option (b)).
+- For the owner's veto: "Could contend", "Could contest the seat"; the cards still reading "Contender": C 503, V 671 (C 388, V 501
+  with no recorded conflict with the holder).
+- For the veil's lane: these re-worded joiners write a power's description or standing: governanceAccount's four standing sentences,
+  seatHolderLines standing/standingVacant, and factionDynamics's ordained narrative.
+
+NOT BUILT — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
+RELEASE. The design was ruled by the chair in G20 (2):
+- The draw and its dedupe run on the line's text exactly as today: no draw moves, no dedupe key changes.
+- The reflexive is resolved AFTER the draw, where the line is bound to its person.
+- The proof is E8's: every moved string differs in the reflexive alone, 0 disagreeing against the raw-record oracle, 0 unexplained.
+- A site where the text is stored before its person is known is a STOP: report the site, build nothing there.
+
 BASE: `origin/lane/close-7-2026-11-24-cures` at 0ec96f13d8 (point 116 lit, the guard merged, engine '0.10.0').
 MY BRANCH: `lane/words-1-2026-11-25` (this file, tools, reports). Units go up as `lane/words-1-2026-11-25-<unit>-wip`, cut at
 the base. No other name is pushed. No pull request, ever.
