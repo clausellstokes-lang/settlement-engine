@@ -814,3 +814,20 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   and the rollback green; the form, the stored arm, the pool and the gates running. "THE LINE IS 0559a8405" sent to
   CLOSE-7 and VEIL-55 (for the veil's seats) at 00:10. The CI read for point 115 is armed for 00:57 UTC
   (trig_01N3D3U6mgtBAQvhMbzMpEny); the hourly check for 00:29 (trig_017PbijvZjS4JSF9zHXKR7SK).
+- 2026-11-25 00:30 UTC · T61 · THE HOURLY CHECK; A2 MERGED ON THE CURES BRANCH; THE MARK RULE CHANGED FOR THE VEIL's SEATS.
+  MARKS at 00:29: VEIL-52 486,823; VEIL-53 469,406; VEIL-55 454,448 (114,000 in its last hour, the machine doing the
+  work: told to end its turn while the pool and gates run); VEIL-51 301,194 and CLOSE-7 268,180 (both after a
+  compaction). EVERY RECORD STILL READS `allowed_warning`. THE MARK RULE, CHANGED BY THE CHAIR (told to VEIL-55 for the
+  veil's seats): NO SUCCESSOR SEAT AT 620,000: a new seat loses the machine (VEIL-55 is re-making VEIL-50's for hours),
+  and CLOSE-7 and VEIL-51 were compacted in place and went on correctly from their hand-backs. A seat's hand-back is
+  whole and pushed by 560,000 and kept so at every push; it works on; when compacted (near 784,000) it says so in one
+  line, re-reads its start file, its hand-back and the rulings named there, and goes on; a judgment (a "TIP?", a merge,
+  a hunk's read) is finished before a compaction is near or begun after it. A seat may still ask to hand over. VEIL-52
+  finishes its three small runs, makes its hand-back whole, and begins unit 3 after its compaction.
+  CLOSE-7 (00:23): A2 MERGED on `lane/close-7-2026-11-24-cures` at 520ddb6a8 under R24d and R24h (the lighting census by
+  its door at e7441a93f): FOODSEC C 197 to 0, V 168 to 0; born records 0; goldens none; the grievance slot's top share
+  under the bar at every size; empty resentment slots C 438 to 575, V 322 to 424 (nothing printed, no heading left); the
+  totality arm is `tests/lint/foodBandReaders.walker.test.js`. The mirror is building on `-mirror-wip`; the live-path
+  measure (R24i (b), its brief `close-7/briefs/LIVE-PATH.md`) follows the mirror's merge. The owner is told A2's result
+  and the side effect, as his to veto. THE HOURLY CHECK is re-armed for 01:31 UTC (trig_01AKcbBg7Lzrg9vtzZ4oZuQb); the
+  CI read for point 115 fires at 00:57 (trig_01N3D3U6mgtBAQvhMbzMpEny).
