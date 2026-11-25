@@ -309,7 +309,11 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(Object.entries(byEdit).sort(), 'the config channel escalates on both world-fact edits, at the figures measured at this landing')
       // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: E7 18 -> 21, E8 3 held.
       // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): measured by this file's census at the golden's tree 8c11f73ea: E7 21 -> 22, E8 3 -> 5 (the round's re-drawn casts and economy fields).
-      .toEqual([['E7 terrain to desert', 22], ['E8 culture to norse', 5]]);
+      // 2026-11-25, CLOSE-7 ANCHORS-2 (the chair's ruling R24o (3); re-keyed BY IDENTITY with its cause, measured by this census
+      // on git-archive trees at the cut 0ec96f13d and at 9d8c944a3, B1(i)'s merge with its doors): E7 22 -> 23, E8 5 -> 4.
+      // JOINED E7: town|germanic|plains|crossroads|civilized|golden-master-v3. LEFT E8: metropolis|germanic|desert|road|civilized|
+      // golden-master-v3. Every escalation still EXHAUSTS and the layer channel is still silent (this arm green at the tip).
+      .toEqual([['E7 terrain to desert', 23], ['E8 culture to norse', 4]]);
     // 2026-10-31, the GS-2 merge (lane G2, ODQ §934.101) then chair ruling X-29 (cure lane T13), each measured:
     // GS-2 re-dealt the world-fact re-derivations, E7 30 -> 31 and E8 10 -> 9, and its derived conflicts put TWO
     // power-card trials on the layer channel, exhausting on V-EVIDENCE-CONFLICT; the X-29 restatement of the receipt's

@@ -723,7 +723,10 @@ const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED 2026-11-22 (DAILY-4 unit P, the chair's E110: the page prints all eight public slots): measured/sub14
   // 4 -> 9, the five new lines (outsider impressions, food culture, commoner resentments, unspoken topics, recent changes)
   // at the same FS 13.5; no token moved.
-  "World/Daily Life":    { measured: 9, sub14: 9 },
+  // RE-MEASURED 2026-11-25 (CLOSE-7 ANCHORS-2, the chair's ruling R24o (1)): measured/sub14 9 -> 8. The cause is R24h (A2's
+  // fca95c197, "no food grievance where the page prints the place fed"; green at its parent, red at it, by run): one line, a
+  // false food grievance on this fed city (the commoner-resentments slot), is no longer printed. No token moved; no other view moved.
+  "World/Daily Life":    { measured: 8, sub14: 8 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 5, sub14: 5 },
@@ -907,7 +910,9 @@ const MOBILE_BASELINE = Object.freeze({
   // sub12 0: every new line clears the floor).
   // RE-MEASURED 2026-11-22 (DAILY-4 unit P, E110): prose 4 -> 9, the five new public lines at proseFontSize (sub14 0,
   // sub12 0; the fixture's owner read carries no owner-only line, so its mark adds no chrome row).
-  "World/Daily Life":    { prose: 9, chrome: 0, sub14: 0, sub12: 0 },
+  // RE-MEASURED 2026-11-25 (CLOSE-7 ANCHORS-2, R24o (1)): prose 9 -> 8. The cause is R24h (fca95c197): the false food grievance
+  // leaves the commoner-resentments slot; sub14 0 and sub12 0 hold; no other view moved.
+  "World/Daily Life":    { prose: 8, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },
