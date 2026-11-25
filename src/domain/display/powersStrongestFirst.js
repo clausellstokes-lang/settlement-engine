@@ -11,7 +11,7 @@
  *
  * A copy, strongest first; equal powers keep the roster's own order (a stable sort, as the PDF's view model sorts:
  * `pdf/lib/viewModel.js`). A power with no number counts as 0. Never mutates its input.
- * @template {{ power?: unknown }} F
+ * @template {Record<string, any>} F a power row (an untyped roster reads as a record, so a caller keeps its `faction`)
  * @param {ReadonlyArray<F> | null | undefined} factions
  * @returns {F[]}
  */
