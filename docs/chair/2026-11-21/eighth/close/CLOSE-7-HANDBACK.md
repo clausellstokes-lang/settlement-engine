@@ -194,6 +194,23 @@ BATCH, SECOND C1 STOP (07:48 UTC). R24l (`close-7/briefs/R24l.md`) built the ali
 - RULING ASKED. My recommendation: widen to "every name-as-key site", via `powerDrawKey`, with a lint arm.
 - Done: P3source 4fc54fb45; goals I-13 measured (C 136 faults in 122 places; V 172 in 148). C1 is held at de19885d7.
 
+THE CHAIR, 08:55 (`close-7/briefs/CHAIR-0855.md`): THE FIRST HAND-IN NOW. "CLOSE-7 <commit>" holds:
+- the units: A1, A2, the mirror, GUARD, B1(i), B1(ii), P3source, and C1 under R24m;
+- the one before-and-after (brief `close-7/briefs/BEFORE-AFTER.md`, a fresh builder, after BATCH merges);
+- the COMMON-EIGHTH 14 runs:
+  - (a) tests/lint whole;
+  - (b) the units' own tests;
+  - (c) tests naming changed files;
+  - (d) the components and pdf files named, plus the walkers;
+  - (e) tests/copy, store, architecture and docs whole;
+  - (f) ONE build with the five figures, and `VERIFY_DIST=1 tests/build`;
+- the new red rows by job, file and title.
+GOALS I-13 goes out of it, to the second hand-in: send its proposed cure and size to the chair.
+THEN THE SECOND HAND-IN: four new seats (BIRTH-1, BIRTH-2, WORDS-1, WORDS-2) build on -cures at 0ec96f13d. Each sends "UNIT <name> <branch>
+<commit>". I merge them onto a branch cut at the line's tip after the first landing, re-take the doors, and run ONE before-and-after
+and ONE gate. Read `prompts/START-GEN-COMMON.txt` on the chair branch once. KEEP SECTION 0 TRUE: the seats read it.
+- R24m (07:54): C1 is not widened; the 39 re-deals are accepted; the alias is withdrawn. The builder is removing it and proving.
+
 THE NEXT COMMAND: on BATCH's message:
 - read `close-7/reports/BATCH.md` and the diff once (`git -C /home/user/wt/batch diff --stat 0ec96f13d..HEAD`);
 - re-read the ruling's lines 45-79, 138-157 and 182-197;
