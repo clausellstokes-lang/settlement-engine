@@ -23,8 +23,11 @@ describe('a fishing row on water is a fish source', () => {
     const fishmonger = s.institutions.find((/** @type {any} */ x) => x.name === 'Fishmonger');
     expect(foodWordsFindings(s, fishmonger.desc)).toEqual([]);
   });
-  it('soak1k-116 and soak1k-152: an inland Fish market is no catch', () => {
-    for (const i of [116, 152]) {
+  // RE-PICKED (point 117, ruling 117-1, 2026-11-25): soak1k-116 is a desert village, and under the close's B1(i) (the desert
+  // withholds fish) its birth no longer seats a Fish market; the next soak seed that is an inland village with a Fish market
+  // is soak1k-230. The assertions are unchanged.
+  it('soak1k-152 and soak1k-230: an inland Fish market is no catch', () => {
+    for (const i of [152, 230]) {
       const { settlement: s, config } = birth(i);
       expect(waterAccessKind(config.terrainType, config.tradeRouteAccess), `soak1k-${i} is inland`).toBe('none');
       expect(s.institutions.some((/** @type {any} */ x) => x.name === 'Fish market'), `soak1k-${i} keeps a Fish market`).toBe(true);
