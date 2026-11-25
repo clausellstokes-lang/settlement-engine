@@ -35,7 +35,9 @@ NAMED FOR THE OWNER (nothing re-recorded):
 - For the veil's lane: these re-worded joiners write a power's description or standing: governanceAccount's four standing sentences,
   seatHolderLines standing/standingVacant, and factionDynamics's ordained narrative.
 
-NOT BUILT — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
+E8b (G28): cut ON TOP OF `-e8-wip` 94b7a13d9 as `lane/words-1-2026-11-25-e8b-wip` (re-uses `reflexiveOf`). E8 is merged BEFORE
+E8b; E8b's diff is read against 94b7a13d9. IN BUILD by WORDS-1 from 16:30 UTC (measure first).
+NOT BUILT YET — E8b, the card lines (tells, impressions, secrets, goal.long; C 1786 bound strings at the measure), WANTED BEFORE THE
 RELEASE. The design was ruled by the chair in G20 (2):
 - The draw and its dedupe run on the line's text exactly as today: no draw moves, no dedupe key changes.
 - The reflexive is resolved AFTER the draw, where the line is bound to its person.
