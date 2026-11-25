@@ -28,6 +28,10 @@ import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { CRIME_LINE_DISQUALIFIERS, CRIME_LINE_FACTS, crimeLineFactsOf } from '../display/stateProse/crimeLineDisqualifiers.js';
 import { OUTSIDER_IMPRESSIONS } from '../../data/dailyLife/outsiderImpressions.js'; // R24-A1 (CLOSE-7): the five lines of row NOHEAL
 import { residentSickCareOf, sickCareOf } from '../facts/sickCare.js'; // R24-A1 (CLOSE-7): the one reading of sick care
+import { FOOD_CULTURE } from '../../data/dailyLife/foodCulture.js'; // R24-A2 (CLOSE-7): the shortage lines of row FOODSEC
+import { COMMONER_RESENTMENTS } from '../../data/dailyLife/commonerResentments.js'; // R24-A2
+import { DAWN_WORK } from '../../data/dailyLife/dawnWork.js'; // R24-A2 (R24c (c)): Dawn Work's food branch
+import { famineOf } from '../facts/famine.js'; // R24-A2: the food band the page prints (`shownBand`)
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {Readonly<Record<string, ReadonlyArray<string>>>} Views */
@@ -71,6 +75,11 @@ export const PAGE_CENSUS_ROWS = Object.freeze({
   // R24-A1 (CLOSE-7; the chair's RULING-R24 and R24a of 2026-11-24): a line that says no healer stands here (H2, H3, H7, H8, H9
   // of the Daily Life visitor lines) on a page whose record holds sick care at hand (`facts/sickCare.js`)
   NOHEAL: ['NOHEAL a no-healer line beside resident sick care', 'CROSS'],
+  // R24-A2 (CLOSE-7; the chair's RULING-R24, R24a and R24c of 2026-11-24): a Daily Life line that says people go short (the
+  // fare's strained, critical and collapsed lines; the food grievances but the price-only three; the food visitor lens's F1
+  // and F2: CHAIN-1-LISTS (c), "your classing stands"; Dawn Work's food branch, R24c (c)) on a page whose Food Security
+  // prints Secure or Surplus (`famineOf().shownBand`)
+  FOODSEC: ['FOODSEC a shortage line on a page whose food ledger reads Secure', 'CROSS'],
 });
 
 /**
@@ -170,6 +179,22 @@ const SMALL = new Set(['thorp', 'hamlet', 'village']);
 const NO_HEALER_IDS = Object.freeze(['H2', 'H3', 'H7', 'H8', 'H9']);
 /** @type {ReadonlyArray<Rec> | null} */ let noHealerLines = null;
 const noHealer = () => (noHealerLines ??= arr(OUTSIDER_IMPRESSIONS['services.healing']).map(obj).filter((l) => NO_HEALER_IDS.includes(s(l.id))));
+/** R24-A2: the lines that say people go short, by their pools and ids (the classing of CHAIN-1-LISTS (c), ruled in R24a;
+ * Dawn Work's food branch by R24c (c)); the words are the pools', a slot (`{market}`) read as any name. */
+/** @type {ReadonlyArray<Rec> | null} */ let shortageLines = null;
+/** @type {Map<string, RegExp>} */ const SHORT_RE = new Map();
+/** A line's printed form (its slots read as any name), compiled once. @param {string} t @returns {RegExp} */
+const printedForm = (t) => SHORT_RE.get(t) ?? SHORT_RE.set(t, toRe(t)).get(t) ?? toRe(t);
+const shortage = () => (shortageLines ??= [
+  ...['strained', 'critical', 'collapsed'].flatMap((b) => arr(obj(FOOD_CULTURE)[b]).map(obj)),
+  ...arr(COMMONER_RESENTMENTS.food).map(obj).filter((l) => !PRICE_LINES.includes(s(l.id))),
+  ...arr(OUTSIDER_IMPRESSIONS['services.food_production']).map(obj).filter((l) => ['F1', 'F2'].includes(s(l.id))),
+  ...arr(obj(DAWN_WORK).food).map(obj),
+]);
+/** The food grievances that say food is dear and nobody goes short (CHAIN-1-LISTS (c): NEITHER). */
+const PRICE_LINES = Object.freeze(['F0', 'F6', 'F8']);
+/** The printed food bands that say the place is fed. */
+const FED = new Set(['secure', 'surplus']);
 const F4_TESTS = /** @type {const} */ ([
   ['ore', 'Local ore feeds the smithy', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
   ['coal', 'Local coal fires the forges, ', /smith|forge|foundr|smelt|metal|armou?r|weapon/],
@@ -361,6 +386,13 @@ export function pageCensusFindings(settlement, views) {
     if (!said || !sickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec))) return null;
     const care = residentSickCareOf(/** @type {import('../facts/sickCare.js').SickCareRecord} */ (rec));
     return [said, care.length ? care.map((row) => `${row.name} @ ${row.institution}`).join('; ') : 'a sick house by name'];
+  });
+  run('FOODSEC', () => {
+    // R24-A2: the page says people go short, and its own Food Security prints the place fed
+    const printed = s(famineOf(/** @type {Parameters<typeof famineOf>[0]} */ (rec)).shownBand);
+    if (!FED.has(printed)) return null;
+    const said = all.find((l) => shortage().some((line) => printedForm(s(line.text)).test(l)));
+    return said ? [said, `Food Security prints ${printed}`] : null;
   });
   return out;
 }

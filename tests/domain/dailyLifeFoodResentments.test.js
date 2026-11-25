@@ -22,9 +22,8 @@
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
-import { deriveDailyLife } from '../../src/domain/dailyLife.js';
+import { deriveDailyLife, fareBandOfRecord } from '../../src/domain/dailyLife.js';
 import { deriveAllThreatProfiles } from '../../src/domain/threatProfile.js';
-import { deriveAllCapacities } from '../../src/domain/capacityModel.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { defenceOf } from '../../src/domain/facts/defence.js';
@@ -103,7 +102,10 @@ describe('food_culture and commoner_resentments: M1\'s false lines print on no b
 
 /** @param {any} rec @returns {{ food: string, resent: string[] }} the branches the record puts each slot on */
 function branchesOf(rec) {
-  const band = deriveAllCapacities(rec).capacities.food_production.band;
+  // R24-A2 (CLOSE-7; the chair's R24d and R24h): the fare's branch and the food grievance read THE FARE BAND (the
+  // production band placed within the bound the page's printed food band sets, `dailyLife.js :: fareBandOfRecord`); a page
+  // that prints its place as fed has no food grievance
+  const band = fareBandOfRecord(rec);
   const wanting = deriveAllThreatProfiles(rec).some((t) => t.type === 'famine' || t.type === 'siege');
   const food = band === 'surplus' ? (wanting ? 'surplus.wanting' : 'surplus') : ['adequate', 'strained', 'critical'].includes(band) ? band : 'collapsed';
   const resent = [];
