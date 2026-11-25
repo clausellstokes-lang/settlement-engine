@@ -1,0 +1,16 @@
+printed band	production band	fare branch after	grievance (food family) after	visitor food lens after	line-V	cures-V
+deficit	critical	critical (unchanged)	fires, whole family (unchanged)	strained (unchanged)	9	9
+deficit	strained	strained (unchanged)	fires, whole family (unchanged)	strained (unchanged)	6	6
+famine	adequate	adequate (unchanged)	does not fire (unchanged)	not strained (unchanged)	3	3
+famine	critical	critical (unchanged)	fires, whole family (unchanged)	strained (unchanged)	11	11
+famine	strained	strained (unchanged)	fires, whole family (unchanged)	strained (unchanged)	20	20
+pressured	adequate	adequate (unchanged)	does not fire (unchanged)	not strained (unchanged)	75	75
+pressured	critical	critical (unchanged)	fires, whole family (unchanged)	strained (unchanged)	22	22
+pressured	strained	strained (unchanged)	fires, whole family (unchanged)	strained (unchanged)	84	84
+pressured	surplus	surplus (unchanged)	does not fire (unchanged)	not strained (unchanged)	13	13
+secure	adequate	adequate (unchanged)	does not fire (unchanged)	not strained (unchanged)	320	320
+secure	critical	adequate (was critical)	price only (F0, F6, F8 where a market stands)	not strained (no food visitor line)	32	32
+secure	strained	adequate (was strained)	price only (F0, F6, F8 where a market stands)	not strained (no food visitor line)	136	136
+secure	surplus	surplus (unchanged)	does not fire (unchanged)	not strained (unchanged)	169	169
+# line-V.jsonl: a shortage line beside a printed Secure/Surplus: 168 {"thorp":1,"hamlet":3,"village":2,"town":30,"city":57,"metropolis":75}
+# cures-V.jsonl: a shortage line beside a printed Secure/Surplus: 0 {}
