@@ -27,6 +27,15 @@ GROUND:
   (and V), through `scripts/gate-mutex.sh --run`, about 15-18 min each on 4 workers.
 - `/home/user/wt/base` is a detached worktree at 0ec96f13d (node_modules linked): read and run, never committed.
 
-IN FLIGHT: the base renders of C and V with views (scratchpad base-C/, base-V/), started about 09:01 UTC.
-NEXT STEP: from the printed views, count every sentence with two possessives in a row, attribute each to its template or
-joiner by reading the code, and send the E1 ruling message.
+IN FLIGHT (09:21 UTC): the V render (scratchpad base-V/); then, queued, e8-records and d6-measure on C and V (logs
+e8rec-*.log, d6-*.log) through the mutex.
+E1 ON C (gap 0, 900 births): 125 hits in 122 places; four sources: (1) the later-mention ROLE rung before "'s"
+(`personMention.js :: oneSentence`) on titles holding a possessive ("the network's head", poolMap.js / mintTitles.js): 59;
+(2) power names holding a possessive ("Headman's Authority", "Thieves' Guild") in possessive joiners: 47 (power.generated.js
+"{seat}'s place", "in {faction}'s pocket"; factionDynamics.js ordained narrative; governanceAccount.js :: possessive;
+dmPowerLines.js theOwn); (3) wants' house fill (`goals.js :: PERSON_HOUSE_PLACE`, "the lord's steward's office"): 20;
+(4) "{settlement}'s {institution}" on "Caravan masters' exchange" (economy.generated.js), at gap 1: 2.
+E8 ON C: 0 sentences with he/she beside a they-reflexive (N28 holds). The class left: a they-reflexive bound to ONE gendered
+person: card lines (goal.short "make themselves useful" 419 printed, personality.tell, presentation.impression, secrets) and
+the tie "would rather keep to themselves". Needs a hand-classed bound/other table, like THEY_BOUND.
+NEXT STEP: E1 on V, then the E1 ruling message (one table, a form per source); then E8 from e8-records.
