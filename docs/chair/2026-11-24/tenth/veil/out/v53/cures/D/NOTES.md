@@ -29,3 +29,10 @@ owner/chair decision, none mine):
    page names" as written.
 The walker row for `holderOfSeat.js :: transferTakerOf (1)` is NOT added either: no honest verdict exists until the cure
 does (`page-copy` would be false: it reads the BASELINE copy and tie-breaks wrong).
+
+## RULING V16 (route (4), FAIL CLOSED): build notes, partial
+- Tip 90ddc2fe5. Readers of the seat's holder in src (grep holderOf / transferTakerOf / holderOfSeat / seatOf / holderName):
+  `holderOfSeat.js :: holderOf` (the one function; the only caller of `transferTakerOf`); `powerStrata.js :: rulingHouseApartOf`
+  (the page's door, audience passed; its four callers read its answer); `factionDynamics.js :: seatHolderApartOf` (owner, birth
+  and the final-record pass); `rulingPowerCoup.js` (owner, play-time engine). Crisis `levers[].holderName` is an institution's
+  holder, another fact.
