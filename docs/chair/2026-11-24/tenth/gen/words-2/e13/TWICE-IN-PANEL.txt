@@ -1,0 +1,24 @@
+== twice-C: 758 of 900 pages hold a line of six words or more printed twice or more in one panel
+  by panel: {"World/NPCs":926,"Systems/Institutions":598,"Systems/Economics":273,"Systems/Services":187,"Systems/Power":40,"Systems/Resources":36,"Summary/Crisis":16,"Summary/Overview":9,"World/Relationships":3}
+  180 pages (up to 4x) Systems/Services :: Access to a house of worship  [dp-hamlet-1 dp-hamlet-10 dp-hamlet-101]
+  175 pages (up to 2x) Systems/Economics :: Quality tools and weaponsAdvanced weapons and armorMaster-crafted weapons  [dp-city-1 dp-city-10 dp-city-100]
+  95 pages (up to 5x) World/NPCs :: How they deal Pleasant until crossed; then the warmth goes at once and does not come back.  [dp-city-100 dp-city-107 dp-city-109]
+  70 pages (up to 4x) World/NPCs :: How they deal Treats every question as a possible threat, and remembers who asked it.  [dp-city-100 dp-city-102 dp-city-117]
+  69 pages (up to 5x) World/NPCs :: How they deal Gracious in the way of someone doing you a kindness, and expects to be thanked for it.  [dp-city-103 dp-city-106 dp-city-11]
+  67 pages (up to 4x) World/NPCs :: How they deal Promises help easily, and is hard to find when the time comes to give it.  [dp-city-100 dp-city-112 dp-city-113]
+  56 pages (up to 4x) World/NPCs :: How they deal Keeps out of trouble by keeping away from you, and sends you to someone else when they can.  [dp-city-0 dp-city-115 dp-city-132]
+  54 pages (up to 2x) Systems/Institutions :: Connection: Elder {person}, the head shepherd  [dp-hamlet-103 dp-hamlet-60 dp-thorp-1]
+  48 pages (up to 3x) World/NPCs :: How they deal Keeps you at a distance, and makes you prove you are worth their time.  [dp-city-10 dp-city-104 dp-city-107]
+  47 pages (up to 2x) Systems/Institutions :: Connection: First {person}, the senior guild master  [dp-city-100 dp-city-103 dp-city-105]
+== twice-V: 703 of 900 pages hold a line of six words or more printed twice or more in one panel
+  by panel: {"World/NPCs":847,"Systems/Economics":542,"Systems/Institutions":494,"Systems/Services":139,"Systems/Resources":43,"Summary/Crisis":34,"Systems/Power":28,"Summary/Overview":10,"World/Relationships":6,"Systems/Outlook":1}
+  145 pages (up to 2x) Systems/Economics :: Quality tools and weaponsAdvanced weapons and armorMaster-crafted weapons  [dp-city-10 dp-city-100 dp-city-102]
+  135 pages (up to 4x) Systems/Services :: Access to a house of worship  [dp-hamlet-1 dp-hamlet-100 dp-hamlet-101]
+  87 pages (up to 3x) Systems/Economics :: Luxury clothing, fine jewellery and decorative goods here depend on luxury materials brought in.  [dp-city-1 dp-city-10 dp-city-109]
+  83 pages (up to 4x) World/NPCs :: How they deal Pleasant until crossed; then the warmth goes at once and does not come back.  [dp-city-100 dp-city-105 dp-city-107]
+  75 pages (up to 9x) Systems/Economics :: Contributes to Entrepôt Trade - {N}% of income  [dp-city-102 dp-city-105 dp-city-120]
+  69 pages (up to 4x) World/NPCs :: How they deal Treats every question as a possible threat, and remembers who asked it.  [dp-city-100 dp-city-102 dp-city-137]
+  61 pages (up to 4x) World/NPCs :: How they deal Promises help easily, and is hard to find when the time comes to give it.  [dp-city-100 dp-city-112 dp-city-113]
+  59 pages (up to 4x) World/NPCs :: How they deal Gracious in the way of someone doing you a kindness, and expects to be thanked for it.  [dp-city-0 dp-city-103 dp-city-106]
+  49 pages (up to 4x) World/NPCs :: How they deal Keeps you at a distance, and makes you prove you are worth their time.  [dp-city-104 dp-city-108 dp-city-11]
+  40 pages (up to 3x) World/NPCs :: How they deal Keeps out of trouble by keeping away from you, and sends you to someone else when they can.  [dp-city-0 dp-city-117 dp-city-132]
