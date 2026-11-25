@@ -238,9 +238,10 @@ const CHART_CENSUS = Object.freeze([
     // `threatScores` reaches both. Declared in full: an edit to that map is exactly the
     // event that should force this pair to be re-read. Re-read 2026-11-04 (lane RUNG1B-F9
     // unit 1): Disasters & Famine's term is now one call, `disasterReadinessScore(r)`, so its
-    // fields arrive as `r`; the bar and the badge still read the one `sc`.
+    // fields arrive as `r`; the bar and the badge still read the one `sc`. Re-read 2026-11-25 (BIRTH-2, P9, RULING G22): Beasts &
+    // Monsters' term is the leaf's `beastsReadinessOf(r).shownScore` (read against the need), so it arrives as `shownScore` and `r`.
     verdict: 'one-source',
-    sharedOn: ['economic', 'internal', 'label', 'military', 'monster', 'r'],
+    sharedOn: ['economic', 'internal', 'label', 'military', 'r', 'shownScore'],
   },
   {
     id: 'defense-capability-row',

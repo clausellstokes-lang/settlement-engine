@@ -407,7 +407,7 @@ function overviewSlice(active, ai, useAi) {
     },
     economyOutput:      ec?.compound?.economyOutput ?? null,
     economicComplexity: complexityLabelShown(ec) || null,
-    defenseScores:      dp?.scores || {},
+    defenseScores:      scoresAsShown(s, dp?.scores) || {}, // P9 (G22): the beasts score read against the need
     defenseScoreAvg:    avgScore(dp?.scores),
     defenseReadiness:   dp?.readiness || null,
     safetyRatio:        sp?.safetyRatio,
@@ -1019,3 +1019,4 @@ function firstSentence(s) {
 }
 
 export default buildViewModel;
+import { scoresAsShown } from '../../domain/facts/beastsReadiness.js'; // P9 (RULING G22): the scores as printed (the beasts grade read against the need); at the end of the file, so no cited line moves

@@ -223,7 +223,7 @@ export function buildThreatAssessment(r) {
   // F3 (UPKEEP-8, the chair's ruling (b)): each sentence is printed only under the bands its own words are true of.
   // A branch offers its sentence and, where its contradicted cell held fifteen rows or more, ONE twin that says what
   // the place holds and what its country asks; a row with no true sentence prints its band alone.
-  const monBand = scoreBand(scores.monster || 0);
+  const monBand = beastsReadinessOf(r).grade; // P9 (G22): read against the need
   const milBand = scoreBand(scores.military || 0);
   const wallWord = palisade ? 'a palisade' : 'walls';
   /** @type {Array<[string, ReadonlyArray<string>]>} */
@@ -402,3 +402,4 @@ export function buildThreatAssessment(r) {
 
   return result;
 }
+import { beastsReadinessOf } from '../facts/beastsReadiness.js'; // P9 (RULING G22): the beasts grade read against the need; at the end of the file, so no cited line moves

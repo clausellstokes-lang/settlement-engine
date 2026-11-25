@@ -43,7 +43,7 @@ const FALSE_UNDER = [
 
 describe('the seventh seat\'s cells: the contradicted sentence does not print, and what prints is true', () => {
   const ROWS = [
-    ['rv2-calm-thorp-3', 'Beasts & Monsters', 'Quiet country and no organised defence', 'Quiet country, and nothing organised is kept against it.'], // 233 rows: Critical
+    ['rv2-calm-thorp-3', 'Beasts & Monsters', 'nothing organised is kept against it', 'Quiet country and no organised defence, which is all the country asks.'], // 233 rows: Critical, read against the need since P9 (RULING G22): Adequate, so the reassurance is the true line
     ['rv2-calm-thorp-1', 'Beasts & Monsters', 'citizen militia provide a viable but demanding', 'An embattled region, and only a palisade and a citizen militia to hold it.'], // 96: Critical
     ['rv2-calm-town-0', 'Invasion & War', 'no organized military force', 'Walls, and a watch to keep them.'], // 86 + 54: a watch stands
     ['rv2-calm-town-7', 'Beasts & Monsters', 'nobody organised to meet it', 'Active frontier, with walls and a watch to meet what comes.'], // 44 + 16: a watch stands
