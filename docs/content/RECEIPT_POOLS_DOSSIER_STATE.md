@@ -2478,10 +2478,10 @@ and never an assertion that the feared thing is happening.
 6. `[visitor · no crisis: succession · crisis: occupied]` At {settlement} the {seat} still answers quickly, but under the occupation it carries out what the occupiers decide.
 
 **`council`** {colour}
-1. `[ledger · no ruler: lord · seat members]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
-2. `[street · no ruler: lord · seat members]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
+1. `[ledger · no ruler: lord · ruling body · seat members]` Decisions at {settlement} are slow because the whole {seat} must agree, and once made they are rarely undone.
+2. `[street · no ruler: lord · ruling body · seat members]` At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
 3. `[unfolding · no crisis: succession]` The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
-4. `[counterforce · no ruler: lord · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
+4. `[counterforce · no ruler: lord · ruling body · seat members]` The {seat} at {settlement} has left obvious decisions untaken because its members cannot agree on them.
 5. `[counterforce · no ruler: lord · no seat members]` The {seat} at {settlement} has left obvious decisions untaken, and nobody there can make it take them.
 6. `[street · no ruler: lord · no seat members]` At {settlement} the town's business goes to the {seat}, and everybody has learned how long the answer takes.
 
