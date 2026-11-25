@@ -71,6 +71,19 @@ export function crimeWaveCoordinated(record) {
 }
 
 /**
+ * THE PLACE'S OWN CRIME MAKES IT UNSAFE (WORDS-2, the tenth chair's RULING G9 (1); E2's census #3+4: "Law & order: Adequate"
+ * beside "Safety: Unsafe", C 23 and V 11 pages): the stored safety label is a plain rung below Moderate, "Unsafe" or
+ * "Dangerous", with no crisis condition after it (the safety profile writes "<strain> — <condition>" where a crisis set the
+ * rung, and the plain word where crime against the defence did). There the law's band is capped as under a crime wave: at
+ * most `strained`, the row's own next word down. A crisis-set rung (a succession, a plague, a fracture) is not the law's.
+ * @param {unknown} record @returns {boolean}
+ */
+export function ownCrimeUnsafe(record) {
+  const label = /** @type {{ economicState?: { safetyProfile?: { safetyLabel?: unknown } } } | null} */ (record)?.economicState?.safetyProfile?.safetyLabel;
+  return typeof label === 'string' && /^(?:Unsafe|Dangerous)$/.test(label.trim());
+}
+
+/**
  * The band the page prints for the law, lower-cased, or undefined where the model gives none.
  * @param {unknown} record the settlement
  * @returns {'collapsed'|'critical'|'strained'|'adequate'|'surplus'|undefined}
@@ -80,7 +93,7 @@ export function lawBandOf(record) {
   const band = bandForVariable(/** @type {never} */ (record), 'law_order');
   const at = LAW_ORDER_RUNGS.indexOf(String(band));
   if (at < 0) return undefined;
-  const capped = crimeWave(record) ? Math.min(at, LAW_ORDER_RUNGS.indexOf(CRIME_WAVE_CAP))
+  const capped = crimeWave(record) || ownCrimeUnsafe(record) ? Math.min(at, LAW_ORDER_RUNGS.indexOf(CRIME_WAVE_CAP)) // WORDS-2 G9 (1): the place's own crime
     : quietPlaceKeepsLaw(record) ? Math.max(at, LAW_ORDER_RUNGS.indexOf(QUIET_PLACE_FLOOR)) : at;
   return /** @type {'collapsed'|'critical'|'strained'|'adequate'|'surplus'} */ (LAW_ORDER_RUNGS[capped]);
 }
