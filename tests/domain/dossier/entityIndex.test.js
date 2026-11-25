@@ -620,35 +620,52 @@ describe('dossierSearch indexes the shipped prose on the player-view enumeration
   const { toPublicSafe } = await import('../../../src/domain/display/publicSafe.js');
   const { applyVeil } = await import('../../../src/domain/display/galleryVeil.js');
   await ensureLaws();
+  /** The owner's record stamped by the save path's composer (the owner's read). */
+  const stampedOf = (owner) => withPublicProse(owner, composePublicProse(owner));
   /** The shared page's record, as gallery.js builds it: the stamped record projected and veiled. */
-  const sharedOf = (owner, veil = []) => applyVeil(toPublicSafe(withPublicProse(owner, composePublicProse(owner))), veil);
+  const sharedOf = (owner, veil = []) => applyVeil(toPublicSafe(stampedOf(owner)), veil);
+  // VEIL-41 C2-BUILD (a') (2707d6829, N49): a shared read serves NO publicProse (galleryWithholdAlways.js ::
+  // withholdAlways drops the key on every non-owner read), so the shared page ships no prose to index. The arms below are
+  // RE-STATED to that truth: the index's mechanism is anchored on the owner's read (the stamped record, player view),
+  // where the carried block is found verbatim; the shared page, unveiled or veiled, carries no key and finds no prose.
   const sentenceOf = (desk, key) => (desk && desk[key] && typeof desk[key].sentence === 'string' ? desk[key].sentence : null);
 
   // soak1k-9 re-keyed by identity to the nearest birth that still shows the claim (TAIL-CLOSE-DISPLAY-1): soak1k-9 is a
   // watch-only town (its one force a "Town watch"), and by the DECLARED MOVE 2b7f6199 (R3-TABS-4 F2/F7: a watch is not
   // the townspeople in arms, nor a force that holds a perimeter) such a town draws no Invasion line and no held-perimeter
   // beasts line; soak1k-10 (a city with a watch, a garrison and a mercenary quarter) prints both
-  it.each([0, 4, 10])('soak1k-%i: a defense lens line the shared page prints is FOUND there, under Defense, as a prose object', (i) => {
-    const shared = sharedOf(birth(i).settlement);
-    const line = sentenceOf(publicProseOf(shared, 'defense:threat'), 'beasts')
-      || sentenceOf(publicProseOf(shared, 'defense:threat'), 'invasion');
+  it.each([0, 4, 10])('soak1k-%i: a defense lens line the owner\'s player view carries is FOUND on the owner\'s read, under Defense, as a prose object; the shared page ships no prose to index (VEIL-41 (a\'))', (i) => {
+    const owner = birth(i).settlement;
+    const stamped = stampedOf(owner);
+    const line = sentenceOf(publicProseOf(stamped, 'defense:threat'), 'beasts')
+      || sentenceOf(publicProseOf(stamped, 'defense:threat'), 'invasion');
     expect(line).toBeTruthy();
-    const { groups } = searchDossier(shared, line, { publicDossier: true, playerView: true });
+    const { groups } = searchDossier(stamped, line, { playerView: true });
     const hit = groups.find((g) => g.tab === 'defense')?.objects.find((o) => o.type === 'prose');
     expect(hit?.meta.site).toBe('defense:threat');
     // NO NEW WORDS: the object's text is the carried block's strings, verbatim.
     expect(hit.text).toContain(line);
+    const shared = sharedOf(owner);
+    // anchored: the owner's read above finds the line as a prose object, so the shared page's empty list is the key's absence
+    expect(Object.prototype.hasOwnProperty.call(shared, 'publicProse')).toBe(false);
+    expect(searchDossier(shared, line, { publicDossier: true, playerView: true }).groups
+      .flatMap((g) => g.objects).filter((o) => o.type === 'prose')).toEqual([]);
   });
 
-  it('THE VEIL FIRST: a hidden block\'s shipped words return no hit on the shared page', () => {
+  it('THE VEIL FIRST: a hidden block\'s shipped words return no hit on the shared page (VEIL-41 (a\'): nor an open one\'s)', () => {
     const owner = birth(0).settlement;
-    const line = sentenceOf(publicProseOf(sharedOf(owner), 'defense:criminal'), 'structure');
-    // anchored: unveiled, the same page finds the line
+    const stamped = stampedOf(owner);
+    const line = sentenceOf(publicProseOf(stamped, 'defense:criminal'), 'structure');
+    // anchored: on the owner's read (the stamped record, player view) the search finds the line as a prose object
     expect(line).toBeTruthy();
-    expect(searchDossier(sharedOf(owner), line, { publicDossier: true, playerView: true }).total).toBeGreaterThan(0);
-    const veiled = sharedOf(owner, ['block:defense.criminalStructure']);
-    expect(searchDossier(veiled, line, { publicDossier: true, playerView: true }).groups
-      .flatMap((g) => g.objects).filter((o) => o.type === 'prose')).toEqual([]);
+    expect(searchDossier(stamped, line, { playerView: true }).groups
+      .flatMap((g) => g.objects).filter((o) => o.type === 'prose').map((o) => o.meta.site)).toEqual(['defense:criminal']);
+    // the shared page, the block open or shut, carries no publicProse key and returns no hit for the line
+    for (const veil of [[], ['block:defense.criminalStructure']]) {
+      const shared = sharedOf(owner, veil);
+      expect(Object.prototype.hasOwnProperty.call(shared, 'publicProse'), veil.join(',') || 'unveiled').toBe(false);
+      expect(searchDossier(shared, line, { publicDossier: true, playerView: true }).total, veil.join(',') || 'unveiled').toBe(0);
+    }
   });
 
   it('a GUARD (green at the parent too): the DM view indexes no prose family, its own families stay as indexed today', () => {

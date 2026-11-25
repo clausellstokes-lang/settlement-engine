@@ -259,6 +259,14 @@
 --       false figure; the twin, galleryRosterChoices.js, `typeof f.power === 'number'`, wrote none). Both now ask
 --       `is distinct from 'number'`: those two lines and no other byte of the function; no twin change; no signature moves.
 --       Pinned: tests/lint/veilTypeofGuard.walker.test.js (no null-blind jsonb_typeof guard in this file; inventory only shrinks).
+--   (37) NO PUBLIC PROSE ON ANY SHARED READ (VEIL-41, C2-BUILD (a'); the ninth chair's N49 of 2026-11-23): the key
+--       publicProse leaves WHOLE, last, on every body _gallery_veil_withhold_always is handed (so every non-owner read, both
+--       stored shapes, Reveal DM off and on), and the 23 composed prose rows of the registry move to (34)'s host with it,
+--       and prose.incomeWeight beside them (N53 (a)) (registry: prose.*); prose.criminal's rule is shadowed, not removed
+--       (N53 (b)). The stored record is untouched, and the owner's own page prints it as today. The rules that trim inside
+--       it ((33) (3), the prose minus_at lines of (34), prose.criminal's in _gallery_veil_roster_choices) stand, dead and
+--       byte-stable, for the after-deploy unit (b). galleryWithholdAlways.js :: withholdAlways, rule for rule.
+--       No function added, removed or re-signed.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -2131,6 +2139,34 @@ begin
       end if;
     end loop;
   end if;
+  -- registry: prose.posture.posture
+  -- registry: prose.posture.prize
+  -- registry: prose.posture.terrain
+  -- registry: prose.state.firstSurvey
+  -- registry: prose.state.publicOrder.field
+  -- registry: prose.state.publicOrder.beside
+  -- registry: prose.state.publicOrder.rung.sentence
+  -- registry: prose.state.publicOrder.rung.glance
+  -- registry: prose.threat.economic
+  -- registry: prose.wall.rationale
+  -- registry: prose.incomeWeight (N53 (a): re-hosted with the 23)
+  -- registry: prose.shadowEconomy
+  -- registry: prose.incomeMix
+  -- registry: prose.prosperityHeader.detail
+  -- registry: prose.prosperity.sentence
+  -- registry: prose.legacyLines.a
+  -- registry: prose.legacyLines.b
+  -- registry: prose.legitimacyBanner
+  -- registry: prose.legitimacyLens
+  -- registry: prose.stabilityHeader
+  -- registry: prose.structureFlag
+  -- registry: prose.successionRisk
+  -- registry: prose.conditionSeverity
+  -- registry: prose.templeFraud
+  -- (N49 (a'), the ninth chair, 2026-11-23: NO publicProse IS SERVED ON ANY SHARED READ. The key leaves WHOLE, last, on
+  -- every body, both stored shapes, every door, Reveal DM off and on; the stored record keeps it, and the owner's own page
+  -- prints it as today. The rules above that trim inside it stand, dead and byte-stable, for the after-deploy unit (b))
+  s := s - 'publicProse';
   return s;
 end $$;
 

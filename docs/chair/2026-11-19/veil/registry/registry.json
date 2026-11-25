@@ -325,7 +325,67 @@
     "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
   },
   {
+    "path": "^publicProse\\.blocks\\.defense:posture\\.posture\\.field$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:posture\\.prize\\.field$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:posture\\.terrain\\.field$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:state\\.firstSurvey\\.field$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.field$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.beside$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.rung\\.sentence$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:state\\.publicOrder\\.rung\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:threat\\.economic\\.sentence$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:wall\\.rationale\\.sentence$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.incomeWeight$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
     "path": "^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.incomeWeight$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.shadowEconomy(\\.sentence)?$",
     "rule": "withhold",
     "by": "src/components/new/publicProseCompose.js :: composePublicProse"
   },
@@ -335,12 +395,72 @@
     "by": "src/components/new/publicProseCompose.js :: composePublicProse"
   },
   {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.(incomeMix(\\.sentence)?|criminalLine)$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.prosperityHeader\\.detail\\[\\]\\.value$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.sentence$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
     "path": "^publicProse\\.blocks\\.economy:economics\\.prosperity(Header|Rung)\\.glance$",
     "rule": "withhold",
     "by": "src/components/new/publicProseCompose.js :: composePublicProse"
   },
   {
+    "path": "^publicProse\\.blocks\\.general:history\\.legacyLines\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.general:history\\.legacyLines\\[\\] \\(only in B\\)$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.power:desk\\.legitimacyBanner\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.power:desk\\.legitimacyLens$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.power:desk\\.stabilityHeader\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.power:desk\\.structureFlag$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.power:desk\\.successionRisk\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.sentence$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
     "path": "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.warFaith:faith\\.templeFraud$",
     "rule": "withhold",
     "by": "src/components/new/publicProseCompose.js :: composePublicProse"
   },

@@ -61,8 +61,11 @@ const KNOWN_INVERTING = Object.freeze(new Set(['economy.prosperity', 'economy.pr
 /** Measured at this tip: composed rows whose re-composition over the served document differs EVEN WHERE NOTHING IS
  * HIDDEN: the composer reads what the projection does not serve, so a visitor cannot re-derive them (VR26's first
  * branch), and the harness cannot judge them by re-composition. R5 (VR12) classes each by its inputs. Shrink-only. */
-const KNOWN_NOT_REDERIVABLE = Object.freeze(new Set(['prose.conditionSeverity', 'prose.prosperity.sentence', 'prose.state.publicOrder.beside',
-  'prose.state.publicOrder.rung.sentence', 'prose.threat.economic', 'prose.wall.rationale']));
+// VEIL-41 C2-BUILD (a') (2707d6829, N49): SHRUNK BY SIX, to none. The six prose rows (prose.conditionSeverity,
+// prose.prosperity.sentence, prose.state.publicOrder.beside, prose.state.publicOrder.rung.sentence, prose.threat.economic,
+// prose.wall.rationale) left the composed form for R2's always-host: no shared read serves publicProse, so none is a
+// diffuse row sent as stored and none is judged here. The list stays shrink-only.
+const KNOWN_NOT_REDERIVABLE = Object.freeze(new Set([]));
 
 /** Every leaf (or whole value at an array path) whose differ-normalised path the regex matches, keyed by its indexed path. */
 function valuesAt(doc, re) {

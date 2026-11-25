@@ -83,6 +83,14 @@ const BROWSER = Object.freeze({ tradeRouteAccess: 'random_trade', culture: 'rand
   nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' });
 /** The criminal family's groupings (criminalVeilSwitch.js :: CRIMINAL_VEIL_CLASSES' three grouping classes). */
 const FAMILY = Object.freeze(['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside']);
+/**
+ * INERT WHILE NO PROSE IS SERVED (VEIL-41 C2-BUILD (a'), 2707d6829, the chair's N49, N78 (3)): a shared read serves no
+ * publicProse (galleryWithholdAlways.js :: withholdAlways), and what block:power.criminalUnderside removed from the
+ * gallery page was the power desk's shipped rungs (galleryVeil.js :: VEILED_PUBLIC_PROSE), so shutting it removes
+ * nothing there now. SHRINK-ONLY, one row by name: returns with (b). The liveness arm asserts the row INERT (it reds the
+ * day the row is live again, and the row then leaves this list), and keeps its tooth on every other address.
+ */
+const INERT_WHILE_NO_PROSE = Object.freeze(['block:power.criminalUnderside']);
 /** Born towns on which every family grouping removes something (presentCriminalGroupings, asserted below). */
 const TOWNS = Object.freeze([
   { seed: 'server-veil-town-2', settType: 'town' },
@@ -328,6 +336,10 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
               const words = [...new Set(bornRows.flatMap((x) => [x.name, x.desc]).filter((v) => typeof v === 'string' && v))];
               for (const w of words) expectPresentThenAbsent(JSON.stringify(bornRows), JSON.stringify(openPage), w, `${seed}: an unaccounted criminal services row leaves`);
             }
+          } else if (INERT_WHILE_NO_PROSE.includes(g)) {
+            // VEIL-41 (a'): inert while no prose is served (the list above, returns with (b))
+            expect(INERT_WHILE_NO_PROSE).toEqual(['block:power.criminalUnderside']);
+            expect(lines, `${g}: inert while no prose is served, shutting it removes nothing from the gallery page`).toEqual([]);
           } else expect(lines.length, `${g}: shutting it removes something from the gallery page (the row is live)`).toBeGreaterThan(0);
           if (g === 'block:defense.criminalStructure') expect(derivedAt(`x${PHONE}`).length, 'the derived block is drawn at a phone\'s width too (the arm is live)').toBeGreaterThan(0);
           for (const [surface, set] of Object.entries(drawn[g])) {

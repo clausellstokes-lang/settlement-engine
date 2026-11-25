@@ -111,6 +111,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { canonPeople, notBijective, readsDiffer, unkeyPeople } from './personIdBijection.shared.mjs';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
@@ -2004,8 +2005,11 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       { source: 'Fishing', percentage: 25, weight: 28.75, desc: 'The catch.' },
       { source: 'Crafts', percentage: 16, weight: 18.4, desc: 'Workshops.' },
     ];
+    // the stored income-mix rung's words are DRAWN FROM THEIR SOURCE (DS-ECO-12, one source carries the town, vid 2), never
+    // written here as a literal (proseDrawnAnchors); only its marker `gmix1` is searched on a served read
+    const GMIX = variantByVid({ leaf: 'economy', blockId: 'DS-ECO-12', poolKey: 'INCOME MIX: one source carries the town', vid: 2, slots: { settlement: 'Guildless' } });
     const PROSE = { v: 'pp-1', blocks: {
-      'general:overview': { incomeMix: { text: 'gmix1 the town depends on one source of income' }, kother: { text: 'kother an overview rung' } },
+      'general:overview': { incomeMix: { text: `gmix1 ${GMIX}` }, kother: { text: 'kother an overview rung' } },
       'economy:economics': { incomeMix: { '@': 'general:overview' }, criminalLine: { text: 'gcl1 the guild takes its cut' }, tradeProfile: { text: 'ktrade a trade rung' } },
       'economy:print': { criminalLine: { '@': 'economy:economics' } } } };
     /** largest remainder, the brief's rule, written here on its own */
@@ -2050,15 +2054,17 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
         if (rows.length && sum !== 100) bad.push(`${what}, ${tag}: the shares sum to ${sum}`);
         const pdf = normalizeIncomeSources(rows);
         if (JSON.stringify(pdf.map(x => x.percentage)) !== JSON.stringify(rows.filter(x => x.percentage > 0).map(x => x.percentage))) bad.push(`${what}, ${tag}: the PDF reads ${JSON.stringify(pdf.map(x => x.percentage))}`);
-        const blocks = doc.publicProse?.blocks || {};
-        const rungs = Object.values(blocks).flatMap(b => Object.keys(b || {}));
-        if (proseGoes) {
-          for (const n of ['gmix1', 'gcl1']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
-          if (rungs.includes('incomeMix') || rungs.includes('criminalLine')) bad.push(`${what}, ${tag}: an income prose rung is sent: ${JSON.stringify(blocks).slice(0, 200)}`);
-        } else if (!(blocks['general:overview']?.incomeMix?.text === 'gmix1 the town depends on one source of income' && blocks['economy:economics']?.criminalLine?.text === 'gcl1 the guild takes its cut')) bad.push(`${what}, ${tag}: the income prose is ${JSON.stringify(blocks).slice(0, 200)}`);
-        if (!rungs.includes('kother') || !rungs.includes('tradeProfile')) bad.push(`${what}, ${tag}: another rung went: ${JSON.stringify(blocks).slice(0, 200)}`);
+        // VEIL-41 C2-BUILD (a') (2707d6829, N49): THE PROSE RUNGS LEAVE WITH THE KEY ON EVERY DOOR. No served read carries
+        // publicProse (212 :: _gallery_veil_withhold_always, galleryWithholdAlways.js :: withholdAlways), so a rung's absence
+        // here is expected: the income rungs (incomeMix, criminalLine and their @ copies) AND the other rungs (kother,
+        // tradeProfile) on every row, the KEEP row too. The anchor is the stored town, which carries all four (counted below).
+        if (isRec(doc) && 'publicProse' in doc) bad.push(`${what}, ${tag}: publicProse is sent: ${JSON.stringify(doc.publicProse).slice(0, 200)}`);
+        for (const n of ['gmix1', 'gcl1', 'kother', 'ktrade']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: a prose rung arrives: ${a}`));
       }
     }
+    // the anchor: every row's stored town carries the four rungs the doors drop, so their absence on a served read is removal
+    const storedRungs = ROWS.map(([, t]) => Object.values(t.publicProse?.blocks || {}).flatMap(b => Object.keys(b || {})));
+    expect(storedRungs.filter(rs => ['incomeMix', 'criminalLine', 'kother', 'tradeProfile'].every(k => rs.includes(k))).length).toBe(ROWS.length);
     expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);

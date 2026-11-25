@@ -29,6 +29,11 @@
  * list, ORDERED[0] is the first composed row in the registry's own order (`history.founding.overcoming`); the pin
  * holds that `power.recentConflict` is NOT among the composed rows, so the walk cannot silently re-admit it. The 26
  * composed rows still on R5's planned host are R5-DESC's worklist (the chair's E97 (5)), red by design.
+ *
+ * ── VEIL-41 C2-BUILD (a') (2707d6829, N49) ──────────────────────────────
+ * No publicProse on any shared read: the 24 prose rows left the composed form for R2's always-host. The census is now an
+ * EXACT count of 4 composed rows by id (COMPOSED_IDS); the three still on the planned host are power.desc, power.label
+ * and power.relation.dmNote, red by design until chain A builds their host.
  */
 import { describe, expect, test } from 'vitest';
 import { REGISTRY_HOSTS, REGISTRY_ROWS } from '../../src/domain/veil/rosterChoiceRegistry.js';
@@ -37,6 +42,12 @@ import { REGISTRY_HOSTS, REGISTRY_ROWS } from '../../src/domain/veil/rosterChoic
 const LEFT = 'power.recentConflict';
 /** E97 (5), the census pin re-taken: the first composed row in the registry's own order once LEFT is gone from the list. */
 const FIRST = 'history.founding.overcoming';
+
+/**
+ * VEIL-41 C2-BUILD (a') (2707d6829): the registry's composed rows, EXACTLY, in its own order: FIRST, then the three left on
+ * R5's planned composed host (chain A's worklist). A row joining or leaving the composed form reds the census by id.
+ */
+const COMPOSED_IDS = Object.freeze([FIRST, 'power.desc', 'power.label', 'power.relation.dmNote']);
 
 /** A composed row (VR12): its `inputs` non-empty. */
 const isComposed = (r) => Array.isArray(r.inputs) && r.inputs.length > 0;
@@ -91,7 +102,12 @@ describe('the judgment proves itself on synthetic rows (its own controls)', () =
   });
 
   test('the census is not vacuous: the registry holds composed rows, walked in its own order from the first; power.recentConflict is not among them (E97 (5): the pin re-taken, the row having left the composed form)', () => {
-    expect(COMPOSED.length).toBeGreaterThanOrEqual(10);
+    // VEIL-41 C2-BUILD (a') (2707d6829, N49): the 24 prose rows LEFT the composed form for the always-host (no publicProse on
+    // any shared read), so the census is an EXACT count, not a floor: 4 composed rows, by id. history.founding.overcoming
+    // (FIRST) sits on hosts that exist; the three rows LEFT ON THE PLANNED COMPOSED HOST (public._gallery_veil_composed /
+    // gallerySecondHomes.js :: withholdComposed) are power.desc, power.label and power.relation.dmNote, chain A's worklist.
+    expect(COMPOSED.length).toBe(COMPOSED_IDS.length);
+    expect(COMPOSED.map((r) => r.id)).toEqual(COMPOSED_IDS);
     expect(ORDERED[0]?.id).toBe(FIRST);
     // anchored: ORDERED is asserted non-empty and equal to the registry's composed list on the lines beside it, so the absence is of a member, not of the list
     expect(ORDERED.map((r) => r.id)).not.toContain(LEFT);

@@ -337,25 +337,47 @@ describe('the veil drops a shipped rung whose block address is hidden (SW-B7b it
       return [d.legitimacyReading, d.captureReading, d.operationReading, d.gmAdvisory];
     }],
   ];
+  // VEIL-41 C2-BUILD (a') (2707d6829, the chair's N49, N78 (1)): THE ARM FOLLOWS THE KEY AND KEEPS ITS ANCHOR. No shared
+  // read serves publicProse (galleryVeil.js :: applyVeil ends with galleryWithholdAlways.js :: withholdAlways, which
+  // drops the key), so on the twelve the covered lines are counted on the projection BEFORE the veil
+  // (toPublicSafe(withPublicProse(...)), hits > 0 THERE), and applyVeil(projected, []) and applyVeil(projected, [address])
+  // both carry NO publicProse key.
   for (const [address, site, covered] of COVERED) {
-    test(`${address} hides ${site}'s rungs on the twelve, and nothing else`, () => {
+    test(`${address}: ${site}'s lines ship on the projection before the veil on the twelve; the served read, the block open or shut, carries no publicProse key`, () => {
       let hits = 0;
       for (const i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) {
         const owner = birth(i).settlement;
         const projected = toPublicSafe(withPublicProse(owner, composePublicProse(owner)));
-        const lines = sentences(covered(applyVeil(projected, [])));
+        const lines = sentences(covered(projected));
         if (!lines.length) continue;
         hits += 1;
-        const veiled = applyVeil(projected, [address]);
-        const text = JSON.stringify(veiled.publicProse);
-        // anchored: the unveiled projection of this same town ships these lines (above), and the
-        // veiled one still carries the other sites (the general desk's overview group)
-        expect(text).toContain('general:overview');
-        for (const line of lines) expect(text.includes(line), `${address}: ${line.slice(0, 40)}`).toBe(false);
+        for (const [tag, read] of [['open', applyVeil(projected, [])], ['shut', applyVeil(projected, [address])]]) {
+          // anchored: the projection before the veil carries the key and ships these lines (counted above)
+          expect(Object.keys(projected)).toContain('publicProse');
+          expect(Object.prototype.hasOwnProperty.call(read, 'publicProse'), `${address}, soak1k-${i}, ${tag}`).toBe(false);
+          const text = JSON.stringify(read);
+          for (const line of lines) expect(text.includes(line), `${address}, soak1k-${i}, ${tag}: ${line.slice(0, 40)}`).toBe(false);
+        }
       }
-      expect(hits, `${site} ships on none of the twelve, so this arm would be vacuous`).toBeGreaterThan(0);
+      expect(hits, `${site} ships on none of the twelve before the veil, so this arm would be vacuous`).toBeGreaterThan(0);
     });
   }
+
+  // THE RUNG-DROP'S OWN MECHANISM (address to site rungs, galleryVeil.js :: dropVeiledPublicProse) is PARKED BY NAME: the
+  // twin exposes no step before withhold-always (dropVeiledPublicProse is not exported, and applyVeil always ends with
+  // withholdAlways), so no served read can show a rung dropped by its address. The two mechanism arms ("<address> hides
+  // <site>'s rungs on the twelve, and nothing else") return with (b). SHRINK-ONLY: the count is pinned, and the map each
+  // parked arm reads (VEILED_PUBLIC_PROSE) still holds its address and site.
+  const PARKED_RUNG_DROP = Object.freeze([
+    'block:defense.criminalStructure hides defense:criminal\'s rungs on the twelve, and nothing else',
+    'block:power.criminalUnderside hides power:desk\'s rungs on the twelve, and nothing else',
+  ]);
+  test('THE PARKED MECHANISM ARMS (returns with (b)): exactly two, by name, each on a COVERED address whose map row stands', async () => {
+    const { VEILED_PUBLIC_PROSE } = await import('../../src/domain/display/galleryVeil.js');
+    expect(PARKED_RUNG_DROP).toHaveLength(2);
+    expect(PARKED_RUNG_DROP).toEqual(COVERED.map(([address, site]) => `${address} hides ${site}'s rungs on the twelve, and nothing else`));
+    for (const [address, site] of COVERED) expect(Object.keys(VEILED_PUBLIC_PROSE[address] || {}), address).toEqual([site]);
+  });
 });
 
 /** The member is absent from a text whose anchor is present. */
