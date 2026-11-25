@@ -27,23 +27,31 @@ manifest's two rows as a union; (c) whether B1(ii) REDESIGNED and B1(i)b ride 11
 The four cures (start file (3)): goals I-13 (R24q 2), NEED-ATOM (R24q 7), D7's bytes (G24), D6's writer-reach row (G20).
 Also, by HAND-INS: B1(ii) REDESIGNED (R24r 1), B1(i)b (R24r 6), P9's (i) writer-reach rows and (ii) P9b, a proposal only (G37).
 
-### 0.D In flight (21:33 UTC)
+### 0.D In flight (22:10 UTC)
 - RULED (G42, 20:48): the order stands, E13b joined, E3 last; census conflicts take the join's side, each door re-takes ONCE PER
   GROUP and once after E3, never by hand; the mutation manifest D4 x P9 = the union, row counts in the merge commit. POINT 118 = 29
-  units + the four cures + P9's writer-reach rows (G37 (i)). AFTER "CLOSE-8 <commit>" (for 119): B1(ii) REDESIGNED, B1(i)b, E13d,
-  P9b. Proof (4) is against the LINE's tip (both trees re-born); each unit's every-birth check reported "0 as its seat reported" or
-  its number and why; the landing line gives `git diff 09c29806b <commit> -- src scripts vite.config.js` and its size.
-- JOIN (`lane/close-8-2026-11-25-join`, /home/user/wt/join, NOT YET PUSHED): 1 D5 172ebff4b0, 2 D4 7e223a7ce3, 3 D3 1b6ee56159
-  (typechecks 167/1113 after each); group-1 doors: lighting 6d4710b864 (3802 -> 3804), wiring ee53cd1fb2, observed-shape unchanged;
-  `tests/lint` whole after group 1: the line's three (proseComposed, proseCorpusBytes x2). Group 2 (D2, D2b, D7) chained by
-  scratchpad `chain.sh` (merge, typechecks, stop on failure), then lint; P9 next (the manifest union), then group-2 doors.
-- BEFORE battery (line tip, --views) DONE: C and V 900 each in the scratchpad `before-C/`, `before-V/` (71 metropolises re-rendered
-  after a worker died, rows folded in, recounted).
-- NEED-ATOM: one builder (Opus) on `/home/user/wt/need-atom`, branch `lane/close-8-2026-11-25-need-atom-wip` cut at the line tip;
-  brief `close-8/briefs/NEED-ATOM.md`; its report lands in `close-8/need-atom/REPORT.md`.
-- Tools: `close-8/tools/` (CLOSE-7's battery and plan makers; BIRTH-1's births harness and checks).
+  units + the four cures + P9's writer-reach rows (G37 (i)) + ANCHORS-5 (R24v, below). AFTER "CLOSE-8 <commit>" (for 119): B1(ii)
+  REDESIGNED, B1(i)b, E13d, P9b. Proof (4) is against the LINE's tip (both trees re-born); each unit's every-birth check reported
+  "0 as its seat reported" or its number and why; the landing line gives `git diff 09c29806b <commit> -- src scripts vite.config.js`
+  and its size.
+- R24v (21:44): "ANCHORS-5", TEST-ONLY, FIRST AMONG THE CURES, AFTER E3: `tests/security/traditionDescriptionSharedPage.test.js`,
+  blocks "TRAD-3 UNIT 4, THE DEAD'S CAUSE" and "TRAD-4 UNIT 7 (1)": the anchor `trad-dead-city-arabic-22` holds no rite of the dead
+  after B1(i); re-pick by the file's own rule (first seed of its series meeting the blocks' predicates), assertions UNCHANGED, a
+  RE-KEYED BY IDENTITY comment (cause B1(i), old seed, new seed); landing line: all 50 tests pass, both NOT VACUOUS arms green on
+  every SPECS town; no seed in 0..199 is a STOP.
+- JOIN (`lane/close-8-2026-11-25-join`, /home/user/wt/join; PUSHED at c0abbf8d49): 1 D5 172ebff4b0, 2 D4 7e223a7ce3, 3 D3
+  1b6ee56159, doors g1 (lighting 6d4710b864 3802->3804, wiring ee53cd1fb2), 4 D2 4656704cad, 5 D2b cb6c13c69b, 6 D7 6696b1ffe2,
+  7 P9 1776a7ab2e (manifest union 1,211 -> 1,212), doors g2 (lighting 322dfb1e37 3804->3808, wiring c0abbf8d49), 8 E1 512428a78b,
+  9 D6 09f2ee07ba, 10 E8 89f616d8b3 (E1 conflicts by WORDS-1's note). Typechecks 167/1113 after every src merge. `tests/lint` whole:
+  after g1 the line's three; after 9 the three + lighting (doors pending) + writerReach (P9's `monster` rows: my cure G37 (i)).
+  IN FLIGHT: E8 typecheck, 11 E8b, 12 E13b, tests/generators/people + boundCardLinesReaders, doors g3, lint.
+- BEFORE battery (line tip, --views) DONE: scratchpad `before-C/`, `before-V/`, 900 each.
+- NEED-ATOM: one builder (Opus) on `/home/user/wt/need-atom` (`lane/close-8-2026-11-25-need-atom-wip`, cut at the line tip); brief
+  `close-8/briefs/NEED-ATOM.md`; report to `close-8/need-atom/REPORT.md`. Briefs written, not started: GOALS-I13 (cut at the join
+  after E13b), D7-BYTES (cut at the join). One builder at a time.
+- Tools: `close-8/tools/`; scratchpad scripts merge.sh, chain.sh, tc.sh, doors.sh, lint.sh, battery.sh.
 - P9's two C pages (dp-thorp-2, -3) are render noise: a "Patron deity" block on the Power view flips between two hashes on the
   same tree (BIRTH-2's A5 record, section 0 (5)).
 
 ### 0.E Next step
-Group 2's chain result; P9 merge; group-2 doors; then WORDS-1's group (E1 with its three conflicts by WORDS-1's note).
+Group 3's result; then WORDS-2's group (E10 ... E13a), E3 alone, ANCHORS-5, the cures, proof (4).
