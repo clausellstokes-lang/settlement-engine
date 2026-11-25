@@ -10,7 +10,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
-import { BOUGHT_HALL_NAMES, boughtHallOldName, boughtHallOldNameOfRow, isUserAuthoredPower } from '../../src/data/boughtHallNames.js';
+import { BOUGHT_HALL_NAMES, boughtHallOldName, boughtHallOldNameOfCriminalRow, boughtHallOldNameOfRow, isUserAuthoredPower } from '../../src/data/boughtHallNames.js';
 import { factionArchetype } from '../../src/domain/factionArchetypes.js';
 import { inferFactionCategory } from '../../src/generators/power/factionCategories.js';
 import { formKindOf, pairLicense } from '../../src/domain/seat/seatTable.js';
@@ -28,6 +28,11 @@ describe('the one home', () => {
     expect([boughtHallOldNameOfRow({ faction: 'Senate', name: 'X' }), boughtHallOldNameOfRow({ name: 'Council of Syndics' }), boughtHallOldNameOfRow({ faction: 'X', name: 'Senate' })])
       .toEqual(['Shadow Senate', 'Corrupt City Council', null]);
     expect(boughtHallOldNameOfRow({ faction: 'Senate', createdByEventId: 'e' })).toBe(null);
+    // RULING C1B-2 (1): a row's own category is the truth; the pulse's reading is strict
+    expect([boughtHallOldNameOfRow({ faction: 'Senate', category: 'government' }), boughtHallOldNameOfRow({ faction: 'Senate', category: ' Criminal ' }), boughtHallOldNameOfRow({ faction: 'Senate', category: '' })])
+      .toEqual([null, 'Shadow Senate', 'Shadow Senate']);
+    expect([boughtHallOldNameOfCriminalRow({ faction: 'Senate' }), boughtHallOldNameOfCriminalRow({ faction: 'Senate', category: 'criminal' }), boughtHallOldNameOfCriminalRow(null)])
+      .toEqual([null, 'Shadow Senate', null]);
     expect([isUserAuthoredPower({ createdByEventId: 'e' }), isUserAuthoredPower({ _authored: true }), isUserAuthoredPower({}), isUserAuthoredPower(null)]).toEqual([true, false, false, false]);
   });
   test('the three readers and the guild import it; their private sets are gone', () => {

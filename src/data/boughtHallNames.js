@@ -18,7 +18,7 @@
  * custom-content row (`content/settlementContentProvenance.js :: customObject`'s marks). A DM's EDIT of a generated hall's text
  * (`_authored`, `_userEdits`) is not authorship: the hall is still the one the birth bought. A bare string carries no mark and
  * is read by its exact name.
- * @enforced-by tests/data/boughtHallNames.test.js
+ * @enforced-by tests/domain/boughtHallNames.test.js
  * @enforced-by tests/domain/boughtHallReaders.test.js
  */
 
@@ -48,10 +48,27 @@ export function isUserAuthoredPower(row) {
     || text(r.customDefinitionId) || text(r.definitionId);
 }
 
-/** The old name a power ROW's birth name replaces: its name in `rulingPower.nameOf`'s precedence (`.faction`, then `.name`),
- *  never for a row the record marks as the user's own; else null. @param {unknown} row @returns {string | null} */
+/** A row's own stored category, trimmed and lower-cased; '' when it carries none. @param {unknown} row @returns {string} */
+const categoryOf = (row) => {
+  const c = /** @type {{ category?: unknown }} */ (row).category;
+  return typeof c === 'string' ? c.trim().toLowerCase() : '';
+};
+
+/** The old name a power ROW's birth name replaces (RULING C1B-2 (1): A ROW'S OWN CATEGORY IS THE TRUTH): its name in
+ *  `rulingPower.nameOf`'s precedence (`.faction`, then `.name`), for a row whose own category is criminal (every born hall
+ *  carries `category: 'criminal'`) or that carries no category at all (read by its name, as a bare string is); never for a
+ *  row whose own category says anything else (a generated power the DM renamed "Senate" keeps its own kind), nor for a row
+ *  the record marks as the user's own; else null. @param {unknown} row @returns {string | null} */
 export function boughtHallOldNameOfRow(row) {
   if (!row || typeof row !== 'object' || isUserAuthoredPower(row)) return null;
+  const cat = categoryOf(row);
+  if (cat !== '' && cat !== 'criminal') return null;
   const r = /** @type {{ faction?: unknown, name?: unknown }} */ (row);
   return boughtHallOldName(String(r.faction || r.name || ''));
+}
+
+/** The same, STRICT (the world pulse, RULING C1B-2 (1)): only a row whose own category is criminal.
+ *  @param {unknown} row @returns {string | null} */
+export function boughtHallOldNameOfCriminalRow(row) {
+  return row && typeof row === 'object' && categoryOf(row) === 'criminal' ? boughtHallOldNameOfRow(row) : null;
 }

@@ -34,6 +34,7 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
+import { boughtHallOldNameOfRow } from '../data/boughtHallNames.js';
 // ⚠ THE DENSITY LAW'S OWN GATE, NOT A SECOND DIAL. `rollsRegisterVii` reads the version
 // a world was BORN under, so a save, a load, a same-seed regen and an undo all replay the
 // law the world was born under (densityLaw.js property 3). It costs this module nothing at
@@ -408,9 +409,13 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
   // noble house that took a 'Royal Authority' metropolis came out as 'Royal Authority'
   // (tests/domain/warSeatBooksFactionAddress.test.js PIN-3). It now falls to the alternate,
   // the same path the surviving-incumbent guard above already takes.
+  // C1B (RULING C1B-2 (2)): a bought hall's birth name is read AS ITS OLD NAME READ, through the one home and by the row's own
+  // category (`boughtHallOldNameOfRow`), so a new city's "Council of Syndics" holds the civic form "City Council" as an old
+  // "Corrupt City Council" does, and the seat passes to "City Council Ascendant" exactly as it did.
+  const heldName = (/** @type {RulingFaction} */ f) => boughtHallOldNameOfRow(f) ?? nameOf(f);
   const names = factions.filter(f => f !== governing || incumbentSurvives)
-    .map(f => nameOf(f).toLowerCase()).filter(Boolean);
-  const outgoing = governing ? nameOf(governing).toLowerCase() : '';
+    .map(f => heldName(f).toLowerCase()).filter(Boolean);
+  const outgoing = governing ? heldName(governing).toLowerCase() : '';
   const takenBy = (/** @type {string} */ label) => outgoing === label.toLowerCase()
     || names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
   if (!takenBy(preferred)) return preferred;
