@@ -1,0 +1,21 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 443 after 89 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+sameness-census: rendering 900 places (4 workers) into /tmp/same-door-hf8LHn/hxd
+sameness-census: rendered in 17.2 min
+sameness-census: rendering 900 places (4 workers) into /tmp/same-door-hf8LHn/confirm
+sameness-census: rendered in 16.4 min
+refused: hamlet web:Systems/Outlook | ViabilityTab.0.0.1.0.0.1: shareAll 0.48 > ceiling 0.29 (5.1 SE over 150 places); hxu: shareAll 0.51 > ceiling 0.29 (6.0 SE over 150 places) (a write never raises a ceiling)
+refused: hamlet web:World/NPCs | NPCsTab.0.0.1.0 > InfoPill.1.0.1: shareAll 1.00 > ceiling 0.7 (8.0 SE over 150 places); hxu: shareAll 1.00 > ceiling 0.7 (8.0 SE over 150 places) (a write never raises a ceiling)
+refused: hamlet pdf:canon_dossier | SettlementPDF.12 > ViabilityAssessment > PageChrome.1.3 > Callout.2.0 > EditableProse: shareAll 0.48 > ceiling 0.29 (5.1 SE over 150 places); hxu: shareAll 0.51 > ceiling 0.29 (6.0 SE over 150 places) (a write never raises a ceiling)
+refused: hamlet pdf:draft_brief | SettlementPDF.12 > ViabilityAssessment > PageChrome.1.3 > Callout.2.0 > EditableProse: shareAll 0.48 > ceiling 0.29 (5.1 SE over 150 places); hxu: shareAll 0.51 > ceiling 0.29 (6.0 SE over 150 places) (a write never raises a ceiling)
+refused: town pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1: shareAll 0.98 > ceiling 0.6 (9.5 SE over 150 places); hxu: shareAll 0.97 > ceiling 0.6 (9.2 SE over 150 places) (a write never raises a ceiling)
+refused: town pdf:canon_dossier | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1: shareAll 0.98 > ceiling 0.08 (40.6 SE over 150 places); hxu: shareAll 0.97 > ceiling 0.08 (40.0 SE over 150 places) (a write never raises a ceiling)
+refused: town pdf:draft_brief | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1: shareAll 0.98 > ceiling 0.6 (9.5 SE over 150 places); hxu: shareAll 0.97 > ceiling 0.6 (9.2 SE over 150 places) (a write never raises a ceiling)
+refused: town pdf:draft_brief | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1: shareAll 0.98 > ceiling 0.08 (40.6 SE over 150 places); hxu: shareAll 0.97 > ceiling 0.08 (40.0 SE over 150 places) (a write never raises a ceiling)
+refused: city pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1: shareAll 0.95 > ceiling 0.58 (9.1 SE over 150 places); hxu: shareAll 0.93 > ceiling 0.58 (8.8 SE over 150 places) (a write never raises a ceiling)
+refused: city pdf:canon_dossier | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1: shareAll 0.95 > ceiling 0.09 (36.7 SE over 150 places); hxu: shareAll 0.93 > ceiling 0.09 (36.1 SE over 150 places) (a write never raises a ceiling)
+refused: city pdf:draft_brief | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.0.* > NPCRow.0.1: shareAll 0.95 > ceiling 0.58 (9.1 SE over 150 places); hxu: shareAll 0.93 > ceiling 0.58 (8.8 SE over 150 places) (a write never raises a ceiling)
+refused: city pdf:draft_brief | SettlementPDF.14 > NotableNPCs > PageChrome.1.3.1.* > FullCard.0.0.1: shareAll 0.95 > ceiling 0.09 (36.7 SE over 150 places); hxu: shareAll 0.93 > ceiling 0.09 (36.1 SE over 150 places) (a write never raises a ceiling)
+refused: metropolis pdf:canon_dossier | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.1.* > NPCRow.0.1: seen 1.00 > ceiling 0.55 (8.1 SE over 81 places); hxu: seen 1.00 > ceiling 0.55 (7.2 SE over 64 places) (a write never raises a ceiling)
+refused: metropolis pdf:draft_brief | SettlementPDF.13 > NPCQuickRef > PageChrome.1.4.1.* > NPCRow.0.1: seen 1.00 > ceiling 0.55 (8.1 SE over 81 places); hxu: seen 1.00 > ceiling 0.55 (7.2 SE over 64 places) (a write never raises a ceiling)
+sameness-census --write: NOTHING WRITTEN
+exit=1
