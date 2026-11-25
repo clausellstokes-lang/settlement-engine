@@ -298,3 +298,13 @@ eager chunk. RULED: no second home for the names; SIZE-BACK's method (the lazy-d
 is tried on it by CLOSE-7 at the second hand-in; the rest is named for the owner's size signing. Every BIRTH-1 unit
 (d2, d2b, d3, d5, d7, d8) is green on both typechecks in its own worktree. FOR THE OWNER'S VETO: the atom, the four
 sentences of G17/G18, the `priest` declaration.
+
+**G25 (15:59 UTC): D7's ONE WORD; BIRTH-1 FINAL.** The pool-dominance row (`ledger:powerSiblings:CRISIS_BODY_SIBLINGS`, top1
+1 over 93 notes in 51 towns, a pool of kind T with no draw) is that door's own listing by `--bank-new`: accepted, named
+for the owner. THE SEAT'S FINDING: seven conversion places of the quarrel corpus hold the body and a church but no senior
+cleric (quarrel-village-59, -129, -147, -284, -327; quarrel-town-15, -288): the `priest` declaration refuses the
+original there and the twin is refused too, so the line prints as at the base, noted "kept". RULED: declare `church`
+in place of `priest` (a place with the body and a church may be told of its two priests); one commit on the d7 branch,
+replacing b0cca45be at the hand-in; C, V and goldens moved 0. BIRTH-1's hand-back is final at bb9350cdc on
+`lane/birth-1-2026-11-25`: D2 4ea69f420, D3 5262fbee4, D5 289a70b3a, D2b 4822a2175, D7 (to be replaced), D8 cf5d033e5
+PARKED owing one widened-register row ("family") on the owner's leave.
