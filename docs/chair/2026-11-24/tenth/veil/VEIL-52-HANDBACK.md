@@ -7,7 +7,7 @@ before judging anything. Every hour here is read from `date -u`. No pull request
 
 ## 1. WHERE THE SEAT STANDS (my memory; WHOLE at every push; written so a successor on another account can go on from it alone)
 
-AS OF 08:22 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
+AS OF 08:45 UTC 2026-11-25. A SECOND CONTAINER RESTART ~01:14 (PostgreSQL restarted; lost steps relaunched 01:15:47: snmaster, snjoin, miplant2, snplant2; the builder resumed by message). DONE BY THEN: mimaster (rc=3, MAP OTHER rows), mijoin (rc=3), sntip (rc=0); the builder's commit f1da68754 on the -wip (the two test files); its tests/lint whole was cut and is being re-run. THE LANE'S OWNER: VEIL-55 (session_019yED1SoJ6KH9Wyp2Fera7R); never message VEIL-50. THE CHAIR:
 session_019yED1SUxGVHyjQnoqoFvQ8. THE LINE: 0559a8405 (point 115, the troubles rule DARK; no birth or page moves; merge nothing of it
 before the join). MARK RULE (00:29): no successor at 620,000; this section whole by 560,000, then work on; at a compaction say so to
 the chair in one line, re-read the start file, this section and the rulings, go on; finish a judgment before a compaction, never carry
@@ -132,6 +132,22 @@ generic words, no project name or identifier; (b) get_gallery_map's per-member c
 figures: unmarked 12.5 s -> 50.3 s, marked 45.5 -> 49.5 s; its script `v55/out/q2/tmap.mjs` on lane/veil-55-2026-11-24); (c) a count-only
 query for the owner: public maps sharing their campaign and their member counts (max, median). Then propose the cure with its size; a
 raised timeout alone is not a cure. A FIFTH CONTAINER RESTART ~08:10 (PostgreSQL restarted 08:12).
+
+### 08:4x: UNIT 3 NOT GRANTED (RULING V28 at the chair's 647f2a0c7b, READ WHOLE): THE SECOND READER's FINDING F1: in SNAPSHOT mode
+the source is the frozen copy, which master's client stores as `galleryPayloadFor` = toPublicSafe (no covert tie), so `dropped` is
+empty and the covert copy and its sentence PASS at the map member, the gallery read and the import. My 08:2x COVERT-UNREAD brief is
+WITHDRAWN (folds into the rework); its builder stopped: `lane/veil-52-2026-11-24-unread-wip` 662a9c207 (pushed: SQL + twin + new test
+galleryCovertUnread; red on 2f849aa53 at five doors + twin, plain and narrated; green 7/7; control passes; rollback EQUAL 480; the
+pin files and tests/lint NOT run). THE REWORK on `lane/veil-52-2026-11-24-door2-wip` (cut at 2f849aa53; worktree /home/user/wt/door2):
+(A) MEASURE FIRST (V28 (2)): a BUILDER on `v52/briefs/FROZEN-COVERT-MEASURE-BRIEF.md` (3d0d569b2; logs /var/tmp/v52/builder4/; its table
+`docs/chair/2026-11-24/tenth/veil/v52/frozen/FROZEN-COVERT-TABLE.md` on the -wip): every covert town of both pools frozen by master's and
+the tip's client, read at three doors on v52tip and v52dsql, by an ORACLE not the rule; then rule (a)+(b)+(c)+(d) offline: leaks left,
+clean strings withheld by part. STOP after (A): FILE + 200 words to VEIL-55; THE CHAIR RULES. (B) after the ruling: the rule at every
+door + twin; no-relationships fails closed; the pin gains snapshot (master- and tip-made), narrated, marked members vs the link; the
+stale 212 comments (~2981-2985, 3010-3012, 3532-3534); doors-3's `_gallery_doors_chronicle` (lane/veil-doors-3-2026-11-20 3e1115c81)
+and the member's FROZEN name and tier join the restatement, the chronicle after the re-key measured first (N84 (d)). Red first.
+(C) MAP-COST after, plus V28 (8): get_gallery_map's first statement is the view-count UPDATE, so the row lock is held through the
+read: measure concurrent readers. MAP-COST (b) per-step run: /var/tmp/v52/out/mapcost-b.{txt,json} (v52mc = v52dsql + 140x2 rows).
 
 ### OWED, IN ORDER
 1. (done.) 2. (1a) snap and (1b) wdmi tables on the three sets, to VEIL-55 (<=200 words each). 3. The two plants.
