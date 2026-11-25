@@ -192,7 +192,7 @@ export const CRISIS_BODY_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'In public those in charge talk of prudence; in private they point to a clause in the loan.', twinOf: 'In public they talk of prudence; in private they point to a clause in the loan.', excludes: Object.freeze(['crisis body: indebted']) }),
   ]),
   'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.': Object.freeze([
-    Object.freeze({ text: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', needs: Object.freeze(['crisis body: religious_conversion', 'priest']) }), // "two priests" presumes a priest (the registered word `clergy`, declared on the line)
+    Object.freeze({ text: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', needs: Object.freeze(['crisis body: religious_conversion', 'church']) }), // "two priests" presumes the clergy (the registered word `clergy`, declared on the line): a church (the tenth chair's G25)
     Object.freeze({ text: 'The split is now open: the converts keep their own register of births, deaths and marriages.', twinOf: 'The split is now open: two priests, two congregations, two registers of births, deaths and marriages.', excludes: Object.freeze(['crisis body: religious_conversion']) }),
   ]),
 });
