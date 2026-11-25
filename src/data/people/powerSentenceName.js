@@ -1,6 +1,6 @@
 /**
  * data/people/powerSentenceName.js — a power's name as it sits inside a sentence, and its possessive: THE ONE READER
- * (POWERS-16), a pure leaf (no imports), moved verbatim, body and all, from `domain/display/powerSentenceName.js`
+ * (POWERS-16), a pure leaf (its one import the data layer's `boughtHallNames.js`, a leaf), moved verbatim, body and all, from `domain/display/powerSentenceName.js`
  * (TAIL-TIES-6, the chair's ruling (T23) of 2026-11-15, vetoable by the owner). That path re-exports every name, so no
  * caller moves and the header there keeps the reader's whole account (the label is not a name; the possessive rule).
  *
@@ -11,6 +11,8 @@
  * the lawful direction. The prose forms are a table (PROSE_FORMS), which is what this layer holds.
  * @enforced-by tests/domain/powerSentenceName.test.js
  */
+
+import { boughtHallOldName } from '../boughtHallNames.js';
 
 /**
  * Every power name the estate writes with a slash or a bracket, and its prose form (the record's label is untouched).
@@ -86,7 +88,10 @@ export function withPowerSentenceNames(text) {
  */
 export function pluralPowerName(name) {
   const raw = typeof name === 'string' ? name.trim() : '';
-  const words = (raw ? powerSentenceName(raw) : '').split(/[\s/]+/).filter(Boolean);
+  // C1B (point 117; RULING C1B-2 (3)): a bought hall's birth name takes its OLD name's number ("The Council of Syndics is",
+  // as "The Corrupt City Council is"), through the one home; an article before it is read past. No other name moves.
+  const hall = boughtHallOldName(raw.replace(/^the\s+/i, ''));
+  const words = (raw ? powerSentenceName(hall ?? raw) : '').split(/[\s/]+/).filter(Boolean);
   const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
   return /[^s']s$/i.test(head);
 }
