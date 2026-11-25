@@ -1,6 +1,6 @@
 # WORDS-2 HAND-BACK (a seat of the tenth chair; branch `lane/words-2-2026-11-25`)
 
-## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45, updated 18:05 UTC 2026-11-25; kept current at every push)
+## 0. WHERE THE LANE STANDS: THE WHOLE MEMORY (written 16:45, updated 18:23 UTC 2026-11-25; kept current at every push)
 A successor reads `docs/chair/2026-11-24/tenth/prompts/START-WORDS-2.txt` and `START-GEN-COMMON.txt` (on
 `lane/chair-2026-11-08`) whole, then this section, and needs nothing else.
 
@@ -91,11 +91,12 @@ Prosperity word above it. The page census walk keeps each line once per panel (`
   titles) are the owner's (the chair's recommendation: the door should not count a role title or a fixed caption).
 - TWICE-IN-PANEL (G31 (1)): sent 17:56; `e13/TWICE-IN-PANEL.txt`; the counting walk `tools/pageCensusWalk.counting.mjs`
   (faithful: page hashes equal the shared walk's 900/900 on C and V), the renderer takes it by `PAGE_BATTERY_WALK`.
-- E13a (G32 (1)), BUILT, NOT YET HANDED IN: `lane/words-2-2026-11-25-e13a-wip` 608f70826 (pushed from /home/user/wt/e13a;
+- E13a (G32 (1)), BUILT, NOT YET HANDED IN: `lane/words-2-2026-11-25-e13a-wip` e0fd74c58 (608f70826 + the lighting census by its door) (pushed from /home/user/wt/e13a;
   typecheck 167/167, 1113/1113). `dossierViewModel.js`: the self-sufficient verdict draws among the admitted (`pickAdmitted`),
   two new lines (named in the commit for the owner's veto). Test `tests/domain/viabilitySelfSufficientDraw.test.js`: red on
   the base (THE DRAW .90; the new lines' arm), green 49/49 with outlookSaysThePages and dossierViewModel.
-  PROOFS RUNNING (scratchpad `q5.sh`): tests/copy, tests/lint, the door's births `--measure` (`same-e13a`), batteries C, V
+  tests/copy 172/172; tests/lint 4 red = the known three + the lighting census, re-taken (e0fd74c58), walker 34/34.
+  PROOFS RUNNING (scratchpad `q5.sh`): the door's births `--measure` (`same-e13a`), batteries C, V
   (`e13a-C`, `e13a-V`). OWED for the hand-in: the three slots' hamlet top share at or under .29 and thorp, village not raised
   (read with `tools/e13-slots.mjs` against `same-hxd`, the base); on C and V: records moved 0 (recordHash vs `base-*`), pages
   moved explained by this unit alone (`before-after.mjs`), 0 pages where a self-sufficient line denies the record (the test's
@@ -103,5 +104,18 @@ Prosperity word above it. The page census walk keeps each line once per panel (`
   it passes (it will not while the 11 stand: say so). Then the hand-in line to the chair with its merge note (it shares
   dossierViewModel.js with no other WORDS-2 unit).
 
-### 0.8 Next step
-E13a's proofs and hand-in (0.7). The base worktree `/home/user/wt/base` stays clean at 0ec96f13d8 for measures.
+### 0.8 E13d (RULING G35, 18:23 UTC; NOT STARTED): THE DOOR DOES NOT COUNT A ROLE TITLE OR A FIXED CAPTION
+The owner deferred it to the chair ("I defer this to you"); the chair decided YES. Unit `lane/words-2-2026-11-25-e13d-wip`,
+after E13a. THE RULE, BY SOURCE, NEVER BY LENGTH OR BY SLOT: `scripts/sameness-census.mjs` skips a line only where its text IS
+a role title from the title tables' own homes (`src/data/faceHonorifics.js`, `src/data/institutionalCatalog.js`'s titles/faces)
+or IS a fixed section caption from `sectionHelp.js`; the skip list DERIVED by import, not typed; a slot is never skipped whole.
+PROOF: (a) a test: every skipped string comes from those homes; no line of any drawn pool the door knows is in the skip list;
+(b) the door's reading before and after on its own births (`--measure --seed-prefix=hxd --n=150`; the base render is
+`same-hxd`): only the eleven slots' figures change, each showing its next sentence: say each new top line and share; (c) one
+of the eleven still over its ceiling with titles and captions set aside is a finding: report, do not re-take; (d) with E13a
+and E13d merged in a scratch join (no commit), the door's `--write`: say whether it passes; the register is re-taken ONLY by
+`--write`, own commit, only if it passes. The door's documentation gains one paragraph: what is skipped and why, the owner's
+leave quoted with G35. Hand in E13a and E13d TO THE CHAIR ONLY, each with its numbers and merge note.
+
+### 0.9 Next step
+E13a's proofs and hand-in (0.7), then E13d (0.8). The base worktree `/home/user/wt/base` stays clean at 0ec96f13d8.
