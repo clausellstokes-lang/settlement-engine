@@ -31,7 +31,7 @@ FINAL (15:55 UTC, 2026-11-25, by `date -u`; the chair's G24: the seat STOPS unle
 | D3 | `lane/birth-1-2026-11-25-d3-wip` | 5262fbee4 | handed in |
 | D5 | `lane/birth-1-2026-11-25-d5-wip` | 289a70b3a | handed in |
 | D2b | `lane/birth-1-2026-11-25-d2b-wip` | 4822a2175 | handed in (the chair took the bytes) |
-| D7 | `lane/birth-1-2026-11-25-d7-wip` | b0cca45be | handed in (G24; SIZE-BACK by CLOSE-7) |
+| D7 | `lane/birth-1-2026-11-25-d7-wip` | 710a49473 | handed in (G24; SIZE-BACK asked of the join); 710a49473 replaces b0cca45be by G25: the conversion sentence declares `church`, not `priest` (C/V moved 0, goldens 0/0; the 7 quarrel places now admitted; 2 others, a High Priestess and no church, now kept: quarrel-thorp-43, quarrel-hamlet-139, the same print); line to the chair only (CLOSE-7 handed over; CLOSE-8 reads this section) |
 | D8 | `lane/birth-1-2026-11-25-d8-wip` | cf5d033e5 | PARKED (G11): owes ONE row of `tests/lint/presumedThings.widened.register.json`, by its door, reason "family", on the owner's leave; then tests/lint and the governing files, and the hand-in naming the catalogue word |
 
 - **D2 — DONE, PUSHED** on `lane/birth-1-2026-11-25-d2-wip` at 4ea69f420: d590c4bd2 (cure + test), e6fe5b586 (lighting census door:
