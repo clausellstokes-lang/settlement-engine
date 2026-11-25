@@ -1305,3 +1305,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   `gen/RULING-G.md` G14 and G15. FOR THE VEIL's RESUMPTION, FIRST IN ITS ORDER: A5 (`lane/birth-2-2026-11-25-a5-wip`,
   BIRTH-2's hand-back) lands in one landing with unit 4's cut by the field, before the pools are re-born. BIRTH-2 goes
   on with D4 and then asks the chair for a unit.
+- 2026-11-25 13:20 UTC · T102 · "GUARD-2 94ff40f5c" RECEIVED AND READ BY THE CHAIR (as R24n ruled; no fault found); G16 TO G18; THE LANDING's WIDE GATE STILL RUNS.
+  GUARD-2 (`lane/close-7-2026-11-24-guard2-wip`: a413c6156 the unit, 94ff40f5c the lighting census by its door;
+  `close-7/reports/GUARD2.md`): `REDERIVE_UNAPPLIED_REASONS` byte-identical again; `APPEND_UNAPPLIED_REASONS =
+  ['engine_mismatch', 'unknown_key']` its own export; `npm run validate:packets` RED AT THE CUT (the second reader's
+  fault, confirmed by run) AND NOW "valid: 257 packets (0 READY)"; a lane answer stamped with another version takes the
+  append path (red first by a double); the append path's tests (two ticks, a non-active save, a faction and a house
+  newcomer, the undo: after it no newcomer, the decree pending, the stamp 0.9.0: no finding); tests/store 170 of 170.
+  The chair read both `src` files' diffs whole: 34 and 13 lines, exactly what was ruled: no second reader spent on it.
+  `traditions/genesis.js:222`: accepted, written in `SCOPE-LINE.md`.
+  `gen/RULING-G.md`: G16 (the pool's grazing line by the same fact; it is unreachable in practice now), G17 (D7's four
+  lines), G18 (leave for one vocabulary row `crisis body: <kind>`; the debt pressure line's twin sentence approved).
+  THE LANDING (LAND-117): merge c3cf5f65da; the home page's town re-taken by its own door f2a837b3b9; lint,
+  typechecks and build done by 12:12; the wide gate running. NEXT: its report; then the helper is continued to merge
+  GUARD-2 and ANCHORS and gate them by the files they name with `npm run validate:packets`.
+  THE MARKS (13:00): WORDS-2 working; every record `allowed_warning`; none rejected. Armed for 14:00.
