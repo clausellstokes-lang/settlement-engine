@@ -134,3 +134,98 @@
     `tests/lint/generatorVersionRelease.test.js`. Answered by its door: a rationale entry in
     `scripts/mutation-coverage-manifest.json` (the arm's red on the cut, executed, and its in-body mutants). The re-run is
     queued.
+- **`tests/property` whole on 89b8d8434 vs the cut (CONFIRMED by run, `GUARD/property-{guard,cut}.log`):** both trees give
+  96 files with 9 failed and 701 passed, the SAME 9 titles with the same counts. So the version adds no new red there. Those
+  goldens are already red at the cut: 525/525 rows in two of them, and a lit manifest that does not exist.
+- **The manifest entry COMMITTED: d6c941c62.** `mutationCoverageManifest` and the release arm together are 13/13 green.
+
+---
+
+# THE HAND-IN (CLOSE-7; R24j). THE GUARD IS BUILT. Proof (c) STOPS alone, as CLOSE-7 ruled.
+
+**Commits on `lane/close-7-2026-11-24-guard-wip`, above the cut e2fd7caa4, not pushed:**
+
+| commit | what |
+|---|---|
+| 807f86e5a | R24j 1, 2 and 6: the version goes up, a load stamps LEGACY, and the release arm |
+| 0a40b581d | R24j 3 and 4: the seam, `appendMinted`, and `engine_mismatch` |
+| d8d7525dd | the lighting census, refrozen by its door |
+| 89b8d8434 | the birth stamp in its key's own place |
+| d6c941c62 | the release arm's mutation-coverage entry |
+
+## The eight points
+1. **The version.** `GENERATOR_VERSION` moves '0.9.0' → '0.10.0'. Every new record's `generatorVersion` moves, and so does
+   everything that hashes the whole record.
+2. **A birth stamps the engine; a load never does.**
+   - `LEGACY_GENERATOR_VERSION` is '0.9.0'.
+   - `normalizeSettlement` gives a stampless record LEGACY, and the nullish minimal shape LEGACY too.
+   - `assembleSettlement.js` (line 508) overwrites the stamp with the current version, in the key's own place.
+   - **The callers, walked.** Each now writes the record's own stamp, or LEGACY where there is none, and never the current
+     version:
+     - `store/galleryImportSettlement.js` (the gallery import);
+     - `store/galleryImportMap.js` (the map import);
+     - `utils/generateSettlementPDF.js` (`normalizeSettlement` for reading only; nothing stored);
+     - `foundry/generateFoundryModule.js` (the same);
+     - `lib/saves.js :: migrateSettlementShape` (the save loader, cloud and local);
+     - `lib/accountImport.js` (account-file import).
+   - The only current stamp is a birth's: `assembleSettlement.js`, which every new place, re-derivation and remote birth
+     passes through.
+3. **The seam.**
+   - `editSlice.js :: applyRosterDecreesAtTick` checks `record.generatorVersion === GENERATOR_VERSION` before the lane. Where it
+     does not match: `dmLayer.js :: appendMinted` runs over the layer holding THIS tick's rows, the engine is never reached,
+     both paths share the ONE `dmLayer` write and the ONE `set` to both homes, and the receipt is `rederived: false`.
+   - **G3 proves it:** laneCalls 0, every saved person byte-equal, the newcomer once and last as
+     `{ id, name, role }`, and the rest of the record byte-equal.
+4. **`engine_mismatch`.** It is added to `RederiveUnappliedReason` and the frozen list, now three; the three pins are re-stated.
+   A world-fact root on another engine's place comes back `engine_mismatch`, with the config untouched (G5). **Count on the 180
+   master-born saves: 0 hold a world-fact root**; none holds a layer at all.
+5. **The proofs** (all CONFIRMED by run):
+   - **(a) RED:** on the cut, 113/180 places move by name.
+   - **(b) GREEN:** 0/180 master-born saves move beyond the newcomer, and the newcomer is once in 180/180. The U111 fault
+     stays red-first in `newcomerOnce.test.js`, which is green.
+   - **(d) The next release:** 0/180 move beyond the newcomer and 180/180 take the append path.
+   - **(c) STOPS:** 180/180 line-born places still re-derive, but 180/180 move beyond the newcomer.
+     - In all 180, the coherence receipt's count of the people (N → N+1).
+     - In 13, also: a held person's `institution: null` (9); a power seated (1, dp-thorp-13); conflicts re-dealt (4).
+     - The same class showed in master's own control in phase 1. **Not fixed in GUARD.**
+6. **The lint arm.** `tests/lint/generatorVersionRelease.test.js` holds the released row (0.9.0 and master's manifest digest
+   e7e8a6ff…). It was red on the cut and is green after.
+7. **The other re-runs, untouched.** `regenSectionAction` 'npcs' runs `regenNPCsPipeline`, and 'history' runs
+   `regenHistoryPipeline`. Both pass `withRecordSeatLaw`, the only `withRecord*Law` in src.
+8. **No other persisted shape moves.**
+   - Births on C and on V: 0/900 differ with `generatorVersion` set apart, and 0/900 differ in key order.
+   - The page battery: C rows 0 and V rows 0. Pages: V 0; C 2, both battery first-worker births, which re-render 0/4 moved.
+   - No copy changed, and no page changed.
+
+## THE GOLDEN LIST FOR THE OWNER'S SIGNING (N6: none re-recorded; each left red)
+- **NEW red because of the version's value (green at the cut): ONE.**
+  - `tests/domain/intentAtlasSoakDistiller.test.js` › "the documented default run reproduces the committed distillate byte
+    for byte".
+  - Cause: the committed `src/domain/data/intentAtlas.distillate.json` carries `"generatorVersion": "0.9.0"`.
+- **ALREADY RED AT THE CUT, with the same counts on both trees.** These are the cures' births, not this unit's. Each hashes
+  whole records, so their re-recording must follow the version:
+  - `tests/property/generatorGoldenMaster.test.js` (525/525);
+  - `generatorGoldenMasterLit.test.js` ×3 (no lit manifest);
+  - `dmLayerGoldenIsolation` A7 (525);
+  - `espionageDormancyFence` (the driven golden);
+  - `dossierProseManifest` DRIFT (1,050);
+  - `editCorpusRatchet` A3 and A7;
+  - `tests/build/engineBundleReplay.test.js` ×3 (525, 360, 3);
+  - `engineServiceStoreParity` ×4;
+  - `generationForkCensus` A1;
+  - `institutionBudgetPromise` (60);
+  - `nameHeldThroughAssembly` A1, `pipelinePinnedChoosers` A1, `pipelinePinnedMode` A1, A2 and A5, `powerEconomyFreshness` A4
+    and `rosterFinalUnderHeldRoster` A1 (41 rows each);
+  - `editWorldFactResources` A2 and A6;
+  - `worldFactRederive` A7;
+  - `tests/ui/safetyReaderBytes.test.jsx` (3,011).
+
+## Gates (at 89b8d8434 and after, CONFIRMED by run; logs under the scratchpad `GUARD/`)
+- **Own tests:** `rederiveGuard` 6/6 and the release arm 3/3.
+- **Named tests:**
+  - 110 files for step 1 and 62 for step 2. Every red is listed above, or appears on the cut too.
+  - After the last code change: 129/129 green over the eight core files.
+- **`tests/lint` whole:** the known three only, after d6c941c62. `mutationCoverageManifest` was re-run green (13/13); the full
+  lint was not re-run after that one manifest line.
+- **`tests/copy` whole:** 172/172 green.
+- **No push.** No golden was edited and nothing was dropped. No permission check refused an action.
