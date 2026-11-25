@@ -1096,3 +1096,18 @@ itself and what it dropped. `read/FINDINGS.md`: the sixteen lit places.
   branches of origin, neither object exists in the chair's repository: they are in no pushed veil branch. CLOSED. THE
   RULE AS RE-STATED TO THE LANE: any way round the hooks (`--no-verify`, `core.hooksPath`, HUSKY=0) is the same thing,
   scratch included.
+- 2026-11-25 06:45 UTC · T84 · GUARD's PROOFS UNDER R24k ARE WHOLE ON THE 116-MERGED TREE; `-cures` TIP 0ec96f13d.
+  CLOSE-7 (06:44; `close-7/reports/GUARD.md`; every count confirmed by run), 180 saves born on the 116-merged tree, one
+  decree each: (c2) 180 of 180 equal with the version set apart, against cc7ddec1c (the same tree without GUARD); (c1)
+  180 of 180 re-derive; the drift with the troubles rule lit: receipt +1 in 180, the null in 9, a power seated in 1,
+  conflicts re-dealt in 4 (5, within the bound of 10); THE NULL: no page or export reader tells absent from null:
+  nothing cured. (a) 113 of 180 red; (b) 0 of 180; (d) 0 of 180; births 0 of 900 on C and V but the version.
+  DOORS RE-TAKEN AT THE MERGES: the lighting census (3796 to 3798, 91c2b233f); the observed-shape register, shrink-only,
+  its one moved input the re-made distillate (0ec96f13d; walker 47 of 47); the wiring census's stamp at the 116 merge.
+  GATES: tests/copy 172 of 172; tests/lint the known three; GUARD's and the edge tests 7 red of 138: TWO NEW ROWS FOR
+  `RED-AT-LINE.tsv` AT ITS LANDING, class "bundle freshness": `tests/edgeFunctions/intentAtlasBundle.freshness.test.js`
+  ("the current source tree matches the recorded hash") and `tests/edgeFunctions/edgeSharedBundleReproducibility.test.js`
+  ("intentAtlasBundle.meta.json ... the recorded sourceHash equals the builder hash"): THE LIST GOES 61 TO 63; the
+  other five are rows today (four bundles; `dmLayerGoldenIsolation` A7: checked by the chair in the list). NOTHING
+  RE-RECORDED. NEXT AT CLOSE-7: the one batch (B1(i)'s finish, B1(ii), C1, P3source, goals I-13), the same builder, cut
+  at 0ec96f13d. OWED BY THE CHAIR AT THE HAND-IN: GUARD's whole diff at the top effort.
