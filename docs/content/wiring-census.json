@@ -35622,10 +35622,9 @@
       "declares": [],
       "lineDeclares": {
         "no crisis: succession": 1,
-        "no office: headman": 3,
-        "no office: reeve": 3,
         "no ruler: lord": 5,
         "no seat members": 2,
+        "ruling body": 3,
         "seat members": 3
       },
       "undeclared": 0,
