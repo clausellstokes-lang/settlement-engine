@@ -104,3 +104,12 @@ subordinate (pages changed: C 502, V 452): a power the page shows as bound to th
 present tense. A component's word; no record, standing, tie or order moves. OWED AS A COUNT: of the cards that keep
 "Contests the seat", how many hold a recorded conflict with the holder. THE OWNER's VETO LIST AT THE END GAINS the two
 phrases.
+
+**G8 (10:05 UTC): UNIT D2 HANDED IN (BIRTH-1, `lane/birth-1-2026-11-25-d2-wip` 4ea69f420): THE PROMINENT TIE IS NEVER A COVERT
+ONE.** Its numbers: a covert prominent tie C 8 to 0, V 7 to 0; a pressure sentence naming both ends of a covert tie C 5
+to 0, V 3 to 0; births moved C 13 of 900, V 9 of 900, in those two fields alone (every other field's hash equal; the
+page battery 0 rows). Goldens moved, named, not re-recorded: dark 15 of 525, lit 32 of 525. "ONE BIRTH IN EIGHTEEN"
+(the list's row D2, and the chair's word to the owner) WAS THE LIT GOLDEN CORPUS (32 of 525); on C and V it is under
+one in a hundred. RULED: (1) the seat's own call stands: the pick also skips an OPEN tie between the two people a
+covert tie joins (the veil's rule from the source's side); (2) "D2b" is added: a pressure sentence equal word for word
+to the prominent tie's line (C 11, V 10 at the base) is cured at the draw; about 22 births expected.
