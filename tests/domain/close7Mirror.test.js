@@ -9,7 +9,7 @@
  * `food production: ≥ adequate` (`facts/foodProduction.js`, read off the capacity profile the deriver hands), and C7 and F6
  * exclude it, so they STAY where the source did fail.
  *
- *   (a) RED FIRST, BY NAME: the cell's seven places print a fare line of a fed band beside "Famine" (the battery row PLENTY
+ *   (a) RED FIRST, BY NAME: the cell's seven places print a fare line of a fed band beside "Famine" (the battery row FEDFARE
  *       reads it off the place's own Daily Life); after, each reads the critical fare and the row reads nothing.
  *   (b) THE WORDS AND THEIR CONDITIONS: K2 and K1 verbatim, each appended after the line it stands in for, with that
  *       line's needs and the atom; C7 and F6 exclude the atom; the atom is fail-closed without a profile.
@@ -61,14 +61,14 @@ beforeAll(async () => { await loadGenerationLawPayloads(); }, 120000);
 
 describe('(a) red first, by name: no fare line of a fed band beside a printed Famine', () => {
   for (const [corpus, seed, production] of CELL) {
-    it(`${corpus} ${seed}: Famine over production ${production} reads the critical fare, and the row PLENTY reads nothing`, () => {
+    it(`${corpus} ${seed}: Famine over production ${production} reads the critical fare, and the row FEDFARE reads nothing`, () => {
       const s = birth(seed, corpus);
       const capacities = deriveAllCapacities(s);
       expect(atomHolds('food: = famine', factsOf(s)), seed).toBe(true);
       expect(capacities.capacities.food_production.band, seed).toBe(production);
       const fare = String(slotsOf(s).food_culture?.text || '');
       expect({ seed, branch: fareBranchOf(fare) }).toEqual({ seed, branch: 'critical' });
-      expect(pageCensusFindings(s, { 'World/Daily Life': [fare] }).filter((f) => f.row === 'PLENTY')).toEqual([]);
+      expect(pageCensusFindings(s, { 'World/Daily Life': [fare] }).filter((f) => f.row === 'FEDFARE')).toEqual([]);
       expect(atomHolds(ATOM, factsOf(s), { capacities }), seed).toBe(true);
     }, 120000);
   }
