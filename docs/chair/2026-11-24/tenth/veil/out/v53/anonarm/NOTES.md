@@ -49,3 +49,18 @@ criminal house hidden by `$veil` delta `card:institution:h`, its unlisted share,
 - tests/lint whole after fd5480850 (maxWorkers=1, /var/tmp/v53/anonarm/c2-lint.log): 66 failed | 3376 passed (3442); the
   66 titles = /var/tmp/v53/grants/lintfails.txt exactly (diff differs only by that list's truncation). No new red.
 - tests/security whole running (maxWorkers=2, c2-security.log).
+- tests/security whole after fd5480850 (maxWorkers=2, c2-security.log): 7 failed | 2179 passed | 1 skipped (2187): exactly the
+  known seven (TRAD-2 x3, VR26 x2, migrationSequenceAll gapless, galleryVeilCures rollback). No worker lost.
+
+## RULING V23 (coordinator, 04:20 UTC): close _gallery_apply_member_overrides in 212; commit 3 (SQL + register), commit 4 (the arm both ways)
+- sanitize callers (callers.mjs/log): DEFINER get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier, get_gallery_map;
+  INVOKER _gallery_veil_roster_members (NOBODY), _gallery_apply_member_overrides (now closed); no trigger/policy/view/check/default;
+  src comments only. VERDICT: closed too (revoke in 212; veil does not restate it, last body 210).
+- USER-class count: 79 USER rows; anon can execute 59 (has_function_privilege('anon', oid, 'execute') on the joined chain).
+- cca234bc7 committed (commit 3). RED 4 failed | 20 passed; GREEN 24 passed. Owner files moved: 7-standing-check.sql (two rows
+  leave the values list), owner-files-figures.json (standingRows on 203/210 now list the two: part-A file lacks them).
+- next: commit 4, the arm both ways (tests/security/veilDoorsHostedRoles.pglite.test.js).
+- 81738f851 committed (commit 4, the arm both ways): GREEN 19 passed (19). RED = probe.log on fd5480850 (direct call raised on
+  _gallery_veil_str, not its own grant). Next: tests/lint whole, tests/security whole.
+- tests/lint whole after 81738f851: 67 failed = known 66 + mutationCoverageManifest TOTALITY (the new file, enumerated by
+  directory). Fixed: 73a3f8743 adds its manifest row (rationale pglite-executed); that test 10 passed. Re-running both wholes.
