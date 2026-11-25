@@ -1,0 +1,546 @@
+UNIT 3 SLICE PROOFS (VEIL-52, u3b.sh), 05:37-06:26 UTC 2026-11-25, CONFIRMED (executed). Templates: v52tip = v27x211 + 212 at the lane's tip dbd4cd9e5; v52dsql = v27x211 + 212 at -dsql-wip 2f849aa53. um = VEIL-44's MAP-COVERT (6edc79094) UM_U=1 UM_ASSERT=map, tree /home/user/wt/dsql.
+
+== um-today-tip
+documents 140; all done true; faults 0
+U: documents read unmarked at Reveal off: 140; whose stored prominentRelationship is a covert copy: 7; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 133 of 140 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 140 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 133 of 140 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":140,"get_gallery_dossier marker | default | off | served marker":140,"get_gallery_dossier marker | hand | off | served marker":140,"get_gallery_dossier marker | unmarked | DM | NO served marker":140,"get_gallery_dossier marker | default | DM | served marker":140,"get_gallery_dossier marker | hand | DM | served marker":140}
+  e.g. {"seed":"r3m-city-none-1-107","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-none-1-107","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-infiltrated-0-42","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Bing Xiao has put money into Wen Gao's affairs for years and takes a share of everything Wen Gao earns. No contract exists, and neither of them wants o"}
+  e.g. {"seed":"r3m-city-infiltrated-0-42","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Bing Xiao has put money into Wen Gao's affairs for years and takes a share of everything Wen Gao earns. No contract exists, and neither of them wants o"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything Qarabek Suldus earns. No contract exists, and neithe"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything Qarabek Suldus earns. No contract exists, and neithe"}
+UM_ASSERT=map: documents read unmarked 140; stored covert copies 7; stored covert-telling sentences 0
+  ASSERT get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+UM_ASSERT=map: 63 map reads at Reveal off carry a covert copy or a covert-telling sentence; RED: exit 1
+
+== um-today-dsql
+documents 140; all done true; faults 0
+U: documents read unmarked at Reveal off: 140; whose stored prominentRelationship is a covert copy: 7; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 133 of 140 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | default | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 140 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 133 of 140 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 7 of 7 reads; places 7: r3m-city-none-1-107, r3m-city-infiltrated-0-42, r3m-metropolis-infiltrated-0-62, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | default | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 133 of 140 reads
+  import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 133 of 140 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 133 of 140 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":140,"get_gallery_dossier marker | default | off | served marker":140,"get_gallery_dossier marker | hand | off | served marker":140,"get_gallery_dossier marker | unmarked | DM | NO served marker":140,"get_gallery_dossier marker | default | DM | served marker":140,"get_gallery_dossier marker | hand | DM | served marker":140}
+  e.g. {"seed":"r3m-city-none-1-107","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-none-1-107","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-infiltrated-0-42","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Bing Xiao has put money into Wen Gao's affairs for years and takes a share of everything Wen Gao earns. No contract exists, and neither of them wants o"}
+  e.g. {"seed":"r3m-city-infiltrated-0-42","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Bing Xiao has put money into Wen Gao's affairs for years and takes a share of everything Wen Gao earns. No contract exists, and neither of them wants o"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything Qarabek Suldus earns. No contract exists, and neithe"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything Qarabek Suldus earns. No contract exists, and neithe"}
+UM_ASSERT=map: documents read unmarked 140; stored covert copies 7; stored covert-telling sentences 0
+  ASSERT get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT get_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT get_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT get_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT map page (fetchGalleryMap) | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT import_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT import_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 7 reads
+  ASSERT import_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+UM_ASSERT=map: 0 map reads at Reveal off carry a covert copy or a covert-telling sentence; GREEN: exit 0
+
+== um-join-tip
+documents 140; all done true; faults 0
+U: documents read unmarked at Reveal off: 140; whose stored prominentRelationship is a covert copy: 5; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 135 of 140 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 140 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 135 of 140 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | default | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 140 of 140 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":140,"get_gallery_dossier marker | default | off | served marker":140,"get_gallery_dossier marker | hand | off | served marker":140,"get_gallery_dossier marker | unmarked | DM | NO served marker":140,"get_gallery_dossier marker | default | DM | served marker":140,"get_gallery_dossier marker | hand | DM | served marker":140}
+  e.g. {"seed":"r3m-city-none-1-107","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-none-1-107","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and the fence pays for it in coin that never passes through a counting-house. In company the two of them "}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and the fence pays for it in coin that never passes through a counting-house. In company the two of them "}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"get_gallery_map member","tag":"unmarked | off","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything the golem-master earns. No contract exists, and neit"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"map page (fetchGalleryMap)","tag":"unmarked | off","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything the golem-master earns. No contract exists, and neit"}
+UM_ASSERT=map: documents read unmarked 140; stored covert copies 5; stored covert-telling sentences 0
+  ASSERT get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT get_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT map page (fetchGalleryMap) | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  ASSERT import_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+UM_ASSERT=map: 39 map reads at Reveal off carry a covert copy or a covert-telling sentence; RED: exit 1
+
+== um-join-dsql
+documents 140; all done true; faults 0
+U: documents read unmarked at Reveal off: 140; whose stored prominentRelationship is a covert copy: 5; whose pressureSentence is: 0
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | default | off | prominentRelationship present (any place): 135 of 140 reads
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  gallery page (fetchPublicDossier) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  gallery page (fetchPublicDossier) | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | default | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  get_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | default | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | default | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | hand | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | unmarked | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_gallery_map member | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | default | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | default | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | hand | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | unmarked | DM | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  get_unlisted_dossier dossier | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  get_unlisted_map | default | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | default | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | hand | off | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | DM | hands a member dossier (a `members` key): 0 of 140 reads
+  get_unlisted_map | unmarked | off | hands a member dossier (a `members` key): 0 of 140 reads
+  import page (fetchDossierForImport) | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | default | off | prominentRelationship present (any place): 135 of 140 reads
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import page (fetchDossierForImport) | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import page (fetchDossierForImport) | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | default | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | default | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | default | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | hand | DM | prominentRelationship = the stored COVERT copy: 4 of 5 reads; places 4: r3m-city-none-1-107, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | hand | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_dossier data | unmarked | DM | prominentRelationship = the stored COVERT copy: 5 of 5 reads; places 5: r3m-city-none-1-107, r3m-town-wartime-0-29, r3m-city-infiltrated-1-102, r3m-city-under_siege-1-118, r3m-metropolis-none-1-137
+  import_gallery_dossier data | unmarked | DM | prominentRelationship present (any place): 140 of 140 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_dossier data | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | default | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | default | DM | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | default | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | hand | DM | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | unmarked | DM | prominentRelationship present (any place): 135 of 140 reads
+  import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  import_gallery_map member | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | default | DM | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | default | off | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | hand | DM | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | hand | off | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | unmarked | DM | prominentRelationship present (any place): 135 of 140 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  map page (fetchGalleryMap) | unmarked | off | prominentRelationship present (any place): 135 of 140 reads
+   {"get_gallery_dossier marker | unmarked | off | NO served marker":140,"get_gallery_dossier marker | default | off | served marker":140,"get_gallery_dossier marker | hand | off | served marker":140,"get_gallery_dossier marker | unmarked | DM | NO served marker":140,"get_gallery_dossier marker | default | DM | served marker":140,"get_gallery_dossier marker | hand | DM | served marker":140}
+  e.g. {"seed":"r3m-city-none-1-107","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-city-none-1-107","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Jaguar Claw Tut visits Xiuhcoatl Chel after dark, by the back way, twice a season. They talk about what Xiuhcoatl Chel wants done next.\",\"npc1\":\"Jaguar"}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and the fence pays for it in coin that never passes through a counting-house. In company the two of them "}
+  e.g. {"seed":"r3m-town-wartime-0-29","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Irene Kalojan does what Elektra Gabalas asks, and the fence pays for it in coin that never passes through a counting-house. In company the two of them "}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-infiltrated-1-102","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Once a month Shanti Verma and Akash Desai meet in a back room to split what the month brought in. In the street they pass each other without a nod.\",\"n"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"get_gallery_dossier data","tag":"unmarked | DM","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything the golem-master earns. No contract exists, and neit"}
+  e.g. {"seed":"r3m-city-under_siege-1-118","door":"gallery page (fetchPublicDossier)","tag":"unmarked | DM","copy":"{\"full\":\"Abaqa Kazakh has put money into Qarabek Suldus's affairs for years and takes a share of everything the golem-master earns. No contract exists, and neit"}
+UM_ASSERT=map: documents read unmarked 140; stored covert copies 5; stored covert-telling sentences 0
+  ASSERT get_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT get_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT get_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT get_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT get_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT map page (fetchGalleryMap) | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT map page (fetchGalleryMap) | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT map page (fetchGalleryMap) | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | unmarked | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT import_gallery_map member | unmarked | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | default | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT import_gallery_map member | default | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+  ASSERT import_gallery_map member | hand | off | prominentRelationship = the stored COVERT copy: 0 of 5 reads
+  ASSERT import_gallery_map member | hand | off | pressureSentence = the stored COVERT-telling sentence: 0 of 0 reads
+UM_ASSERT=map: 0 map reads at Reveal off carry a covert copy or a covert-telling sentence; GREEN: exit 0
+
+== V21 tail plant on v52dsql (wdmi WD_PLANT_TAIL=1, r3m-city-indebted-0-46)
+PLANT "r3m-city-indebted-0-46" "They play Thieves' Guild and Merchant Guilds against each other when they can." | hiding reads {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | present {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | caught {"server|gallery|dm=false":10,"server|link|dm=false":10,"server|import|dm=false":10,"server|map|dm=false":10,"server|mapimport|dm=false":10,"twin|gallery|dm=false":10,"twin|link|dm=false":10,"server|gallery|dm=true":10,"server|link|dm=true":10,"server|import|dm=true":10,"server|map|dm=true":10,"server|mapimport|dm=true":10,"twin|gallery|dm=true":10,"twin|link|dm=true":10} | BLIND {}
+
+== ROLLBACK REHEARSAL: v27x211 + the -wip's 212 + its down file = v27x211: every public function's identity, md5(definition), volatility, definer, ACL: EQUAL (480 functions)
